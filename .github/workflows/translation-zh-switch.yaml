@@ -19,14 +19,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Download translator repo
         with:
           repository: "pingcap/docs-toolkit"
           ref: "main"
           path: "docs-toolkit"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout from branch and create target branch
         with:
           ref: "${{ github.event.inputs.from }}"
@@ -93,7 +93,7 @@ jobs:
           git push origin "${{ github.event.inputs.to }}"
           cd ..
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         name: Setup node
         with:
           node-version: 20
@@ -137,7 +137,7 @@ jobs:
         run: echo "::set-output name=id::$(date +%s)"
 
       - name: Create PR
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           path: "docs"
           token: ${{ github.token }}

@@ -46,7 +46,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint. The `pytidb` client **automatically** enables TLS for TiDB Cloud Starter instances.
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/) is required when using a public endpoint. The `pytidb` client **automatically** enables TLS for TiDB Cloud Starter instances.
 
 </div>
 <div label="TiDB Self-Managed">
@@ -99,7 +99,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-starter-clusters/) is required when using a public endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
+> For TiDB Cloud Starter, [TLS connection to the database](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/) is required when using a public endpoint, so you need to set `ssl_verify_cert=true&ssl_verify_identity=true` in the connection string.
 
 </div>
 <div label="TiDB Self-Managed">

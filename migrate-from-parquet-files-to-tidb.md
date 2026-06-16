@@ -1,24 +1,24 @@
 ---
 title: Migrate Data from Parquet Files to TiDB
-summary: Learn how to migrate data from parquet files to TiDB.
+summary: Learn how to migrate data from Parquet files to TiDB.
 ---
 
 # Migrate Data from Parquet Files to TiDB
 
-This document describes how to generate parquet files from Apache Hive and how to migrate data from parquet files to TiDB using TiDB Lightning.
+This document describes how to generate Parquet files from Apache Hive and how to migrate data from Parquet files to TiDB using TiDB Lightning.
 
-If you export parquet files from Amazon Aurora, refer to [Migrate data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
+If you export Parquet files from Amazon Aurora, refer to [Migrate data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
 
 ## Prerequisites
 
 - [Install TiDB Lightning using TiUP](/migration-tools.md).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
-## Step 1. Prepare the parquet files
+## Step 1. Prepare the Parquet files
 
-This section describes how to export parquet files from Hive that can be read by TiDB Lightning.
+This section describes how to export Parquet files from Hive so that TiDB Lightning can read them.
 
-Each table in Hive can be exported to parquet files by annotating `STORED AS PARQUET LOCATION '/path/in/hdfs'`. Therefore, if you need to export a table named `test`, perform the following steps:
+You can export each table in Hive to Parquet files by specifying `STORED AS PARQUET LOCATION '/path/in/hdfs'`. Therefore, if you need to export a table named `test`, perform the following steps:
 
 1. Run the following SQL statement in Hive:
 
@@ -29,25 +29,25 @@ Each table in Hive can be exported to parquet files by annotating `STORED AS PAR
 
     After executing the preceding statement, the table data is successfully exported to the HDFS system.
 
-2. Export the parquet files to the local file system using the `hdfs dfs -get` command:
+2. Export the Parquet files to the local file system using the `hdfs dfs -get` command:
 
     ```shell
     hdfs dfs -get /path/in/hdfs /path/in/local
     ```
 
-    After the export is complete, if you need to delete the exported parquet files in HDFS, you can directly delete the temporary table (`temp`):
+    After the export is complete, if you need to delete the exported Parquet files in HDFS, you can directly delete the temporary table (`temp`):
 
     ```sql
     DROP TABLE temp;
     ```
 
-3. The parquet files exported from Hive might not have the `.parquet` suffix and cannot be correctly identified by TiDB Lightning. Therefore, before importing the files, you need to rename the exported files and add the `.parquet` suffix to change the full filename to a format that TiDB Lightning recognizes, for example, `${db_name}. ${table_name}.parquet`. For more information about file types and patterns, see [TiDB Lightning Data Sources](/tidb-lightning/tidb-lightning-data-source.md). You can also match data files by setting correct [customized expressions](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files).
+3. The Parquet files exported from Hive might not have the `.parquet` suffix, so TiDB Lightning cannot correctly identify them. Before importing the files, you need to rename them and add the `.parquet` suffix to change the full filename to a format that TiDB Lightning recognizes, for example, `${db_name}.${table_name}.parquet`. For more information about file types and patterns, see [TiDB Lightning Data Sources](/tidb-lightning/tidb-lightning-data-source.md). You can also match data files by setting the correct [customized expressions](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files).
 
-4. Put all the parquet files in a unified directory, for example, `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning will recursively search for all `.parquet` files in this directory and its subdirectories.
+4. Put all the Parquet files in a unified directory, for example, `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for all `.parquet` files in this directory and its subdirectories.
 
 ## Step 2. Create the target table schema
 
-Before importing data from parquet files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+Before importing data from Parquet files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
 
 * **Method 1**: create the target table schema using TiDB Lightning.
 
@@ -82,11 +82,11 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 
 [tidb]
 # The target cluster.
-host = ${host}            # e.g.: 172.16.32.1
-port = ${port}            # e.g.: 4000
+host = "${host}"            # e.g.: 172.16.32.1
+port = "${port}"            # e.g.: 4000
 user = "${user_name}"     # e.g.: "root"
 password = "${password}"  # e.g.: "rootroot"
-status-port = ${status-port} # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+status-port = "${status-port}" # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 

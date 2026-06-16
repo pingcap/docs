@@ -41,13 +41,13 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout docs target branch
         with:
           ref: ${{ env.CN_CLOUD_BRANCH }}
           path: docs
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout docs source branch
         with:
           repository: ${{ env.SOURCE_REPO }}
@@ -56,7 +56,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout ai-pr-translator
         with:
           repository: ${{ env.AI_TRANSLATOR_REPO }}
@@ -64,7 +64,7 @@ jobs:
           path: ai-pr-translator
           persist-credentials: false
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         name: Setup Python
         with:
           python-version: "3.9"
@@ -143,6 +143,7 @@ jobs:
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
           SOURCE_FILES_TRANSLATION_MODE: ${{ inputs.source_files_translation_mode || 'incremental' }}
+          IGNORE_RESOURCE_CARD_SECTION: "Yes"
           SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
           TARGET_REF: ${{ env.CN_CLOUD_BRANCH }}
           PREFER_LOCAL_TARGET_FOR_READ: "true"
@@ -202,7 +203,7 @@ jobs:
 
       - name: Create PR
         if: steps.changes.outputs.has_changes == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           path: docs
           token: ${{ github.token }}

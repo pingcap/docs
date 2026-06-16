@@ -22,6 +22,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data types, functions, and operators
 
+<StickyHeaderTable>
+
 | Data types, functions, and operators | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y |
@@ -46,7 +48,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Character sets and collations](/character-set-and-collation.md) [^1] | Y | Y | Y | Y | Y | Y | Y |
 | [User-level lock](/functions-and-operators/locking-functions.md) | Y | Y | Y | Y | Y | Y | N |
 
+</StickyHeaderTable>
+
 ## Indexing and constraints
+
+<StickyHeaderTable>
 
 | Indexing and constraints | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -69,7 +75,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Global indexes](/global-indexes.md) | Y |  N | N  | N | N | N | N |
 | [Vector indexes](/ai/reference/vector-search-index.md) | E | N | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## SQL statements
+
+<StickyHeaderTable>
 
 | SQL statements [^3] | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -94,7 +104,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | E | E | E | E | E | E | E |
 | [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | Y | Y | Y | Y | E | N | N |
 
+</StickyHeaderTable>
+
 ## Advanced SQL features
+
+<StickyHeaderTable>
 
 | Advanced SQL features | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -119,7 +133,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E |
 | [Runtime Filter](/runtime-filter.md) | Y | Y | Y | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Data definition language (DDL)
+
+<StickyHeaderTable>
 
 | Data definition language (DDL) | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -142,7 +160,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [TiDB Accelerated Table Creation](/accelerated-table-creation.md) | Y | E | N | N | N | N | N |
 | [Configure BDR role to replicate DDL statements in BDR mode](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) | Y | E | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Transactions
+
+<StickyHeaderTable>
 
 | Transactions | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -156,7 +178,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Automatically terminating long-running idle transactions](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) | Y | Y | N | N | N | N | N |
 | [Bulk DML execution mode (`tidb_dml_type = "bulk"`)](/system-variables.md#tidb_dml_type-new-in-v800) | E |  E | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Partitioning
+
+<StickyHeaderTable>
 
 | Partitioning | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -176,7 +202,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | Y | Y | N | N | N | N |
 | [Global indexes](/global-indexes.md) | Y | N | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Statistics
+
+<StickyHeaderTable>
 
 | Statistics | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|---|---|---|---|---|---|---|
@@ -193,7 +223,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | Y | E | N | N | N |
 | [Show the progress of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | Y | Y | N | N | N | N |
 
+</StickyHeaderTable>
+
 ## Security
+
+<StickyHeaderTable>
 
 | Security | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -212,7 +246,11 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y | Y | Y | Y | Y | Y | Y |
 | [Redacted Log Files](/log-redaction.md) | Y | Y | Y | Y | Y | Y | Y |
 
+</StickyHeaderTable>
+
 ## Data import and export
+
+<StickyHeaderTable>
 
 | Data import and export | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|---|---|---|---|---|---|---|
@@ -222,14 +260,18 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y |
-| [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) [^6] | Removed | Y | Y | Y | Y | Y | Y |
+| [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) [^6] | Removed | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y |
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | Y | Y | E | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | Y | Y | N | N |
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md) | Y | Y | Y | Y | N | N | N |
 | [DM](/dm/dm-overview.md) supports migrating MySQL 8.0 | Y | Y | E | E | E | E | N |
 
+</StickyHeaderTable>
+
 ## Management, observability, and tools
+
+<StickyHeaderTable>
 
 | Management, observability, and tools | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -272,6 +314,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [TiProxy](/tiproxy/tiproxy-overview.md) | Y | Y | N | N | N | N | N |
 | [Schema cache](/schema-cache.md) | Y | N | N | N | N | N | N |
 
+</StickyHeaderTable>
+
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
 [^2]: Starting from v6.5.0, the expression indexes created on the functions listed by the [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520) system variable have been tested and can be used in production environments, and more functions will be supported in the future releases. For functions not listed by this variable, the corresponding expression indexes are not recommended for use in production environments. See [expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) for details.
@@ -282,4 +326,4 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 [^5]: Starting from [TiDB v7.0.0](/releases/release-7.0.0.md), the new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental features. Starting from [v7.6.0](/releases/release-7.6.0.md), TiDB processes `LOAD DATA` in transactions in the same way as MySQL. The `LOAD DATA` statement in a transaction no longer automatically commits the current transaction or starts a new transaction. Moreover, you can explicitly commit or roll back the `LOAD DATA` statement in a transaction. Additionally, the `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
 
-[^6]: Starting from v7.5.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated. Starting from v8.4.0, TiDB Binlog is removed. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+[^6]: Starting from v7.5.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated. Starting from v8.4.0, TiDB Binlog is removed. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.

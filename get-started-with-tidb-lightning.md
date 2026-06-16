@@ -14,7 +14,7 @@ This document provides a quick guide on getting started with TiDB Lightning by i
 
 ## Step 1: Prepare full backup data
 
-First, you can use [dumpling](/dumpling-overview.md) to export data from MySQL.
+First, use [Dumpling](/dumpling-overview.md) to export data from MySQL.
 
 1. Run `tiup --version` to check if TiUP is already installed. If TiUP is installed, skip this step. If TiUP is not installed, run the following command:
 
@@ -114,3 +114,9 @@ If any error occurs, refer to [TiDB Lightning FAQs](/tidb-lightning/tidb-lightni
 This tutorial briefly introduces what TiDB Lightning is and how to quickly deploy a TiDB Lightning cluster to import full backup data to the TiDB cluster.
 
 For detailed features and usage about TiDB Lightning, refer to [TiDB Lightning Overview](/tidb-lightning/tidb-lightning-overview.md).
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 6: Importing Data into TiDB Using TiDB Lightning" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff5" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch07_en.png" duration="60 mins" />
+</RelatedResources>
