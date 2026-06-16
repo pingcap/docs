@@ -6,11 +6,11 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 # ベクトル検索をLangChainと統合する {#integrate-vector-search-with-langchain}
 
-このチュートリアルでは、[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[LangChain](https://python.langchain.com/)する方法を説明します。
+このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)[LangChain](https://python.langchain.com/)する方法を説明します。
 
 > **注記：**
 >
-> -   ベクター検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> -   ベクトル検索機能はベータ版です。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDBセルフマネージド](/overview.md)[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)で利用できます。TiDB Self-ManagedおよびTiDB Cloud Dedicatedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **ヒント**
@@ -166,9 +166,9 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitter.split_documents(documents)
 ```
 
-### ステップ5．ドキュメントベクターを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
+### ステップ5．ドキュメントベクトルを埋め込んで保存する {#step-5-embed-and-store-document-vectors}
 
-TiDB ベクター ストアは、ベクター間の類似性を測定するために、コサイン距離 ( `cosine` ) とユークリッド距離 ( `l2` ) の両方をサポートしています。デフォルトの戦略はコサイン距離です。
+TiDB ベクトル ストアは、ベクトル間の類似性を測定するために、コサイン距離 ( `cosine` ) とユークリッド距離 ( `l2` ) の両方をサポートしています。デフォルトの戦略はコサイン距離です。
 
 以下のコードは、ベクトル検索に最適化されたTiDBに`embedded_documents`という名前のテーブルを作成します。
 
@@ -297,7 +297,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 
 ### 回収犬として使用する {#use-as-a-retriever}
 
-LangChainでは、 [レトリバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリのドキュメントを取得するインターフェースであり、ベクターストアよりも多くの機能を提供します。以下のコードは、TiDBベクターストアをレトリバーとして使用する方法を示しています。
+LangChainでは、 [レトリバー](https://python.langchain.com/v0.2/docs/concepts/#retrievers)は非構造化クエリのドキュメントを取得するインターフェースであり、ベクトルストアよりも多くの機能を提供します。以下のコードは、TiDBベクトルストアをレトリバーとして使用する方法を示しています。
 
 ```python
 retriever = vector_store.as_retriever(
@@ -323,9 +323,9 @@ for doc in docs_retrieved:
     And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
     --------------------------------------------------------------------------------
 
-### ベクターストアを削除する {#remove-the-vector-store}
+### ベクトルストアを削除する {#remove-the-vector-store}
 
-既存のTiDBベクターストアを削除するには、 `drop_vectorstore()`メソッドを使用します。
+既存のTiDBベクトルストアを削除するには、 `drop_vectorstore()`メソッドを使用します。
 
 ```python
 vector_store.drop_vectorstore()
@@ -337,7 +337,7 @@ vector_store.drop_vectorstore()
 
 ### サポートされているメタデータタイプ {#supported-metadata-types}
 
-TiDBベクターストア内の各ドキュメントには、JSONオブジェクト内のキーと値のペアとして構造化されたメタデータを関連付けることができます。キーは常に文字列であり、値は以下のいずれかの型になります。
+TiDBベクトルストア内の各ドキュメントには、JSONオブジェクト内のキーと値のペアとして構造化されたメタデータを関連付けることができます。キーは常に文字列であり、値は以下のいずれかの型になります。
 
 -   弦
 -   数値：整数または浮動小数点
