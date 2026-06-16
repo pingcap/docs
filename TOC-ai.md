@@ -71,8 +71,8 @@
     -   [アマゾンの岩盤](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
 -   MCP サーバー
     -   [概要](/ai/integrations/tidb-mcp-server.md)
-    -   [Claude・コード](/ai/integrations/tidb-mcp-claude-code.md)
-    -   [Claude・デスクトップ](/ai/integrations/tidb-mcp-claude-desktop.md)
+    -   [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
+    -   [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
     -   [カーソル](/ai/integrations/tidb-mcp-cursor.md)
     -   [VSコード](/ai/integrations/tidb-mcp-vscode.md)
     -   [ウィンドサーフィン](/ai/integrations/tidb-mcp-windsurf.md)
