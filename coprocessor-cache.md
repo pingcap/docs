@@ -75,7 +75,7 @@ In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem unde
 
 <CustomContent platform="tidb">
 
-### View the Grafana monitoring panel
+### View the Grafana panel
 
 In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem under the `tidb` namespace. This panel monitors the number of hits, misses, and cache discards of the Coprocessor Cache in the entire cluster.
 
