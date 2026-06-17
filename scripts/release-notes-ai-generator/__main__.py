@@ -3,13 +3,21 @@
 
 """Generate TiDB improvements and bug fixes for release notes according to PRs and issues in a specified excel file.
 
-Typical usage (run from the scripts/ directory):
+Two-phase workflow (run from the scripts/ directory):
 
-    python3 -m release-notes-ai-generator \
+    # Phase 1: Process Excel, call AI, write results to Excel
+    python3 -m release-notes-ai-generator generate \
         --version 8.5.7 \
         --excel /path/to/release-note-excel.xlsx \
-        --releases-dir releases
+        --releases-dir releases \
         --ai-provider azure
+
+    # Phase 2: Export Markdown from the processed Excel
+    python3 -m release-notes-ai-generator export-markdown \
+        --version 8.5.7 \
+        --excel /path/to/release-note-excel_processed.xlsx \
+        --releases-dir releases \
+        --release-date "August 14, 2025"
 
 For detailed usage and options, see release-notes-generator-readme.md in this directory.
 """

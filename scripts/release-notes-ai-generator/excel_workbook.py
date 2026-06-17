@@ -76,8 +76,16 @@ def get_header(sheet: Any) -> dict[str, int]:
     return header
 
 
-def clear_output_columns(sheet: Any, header: dict[str, int], clear_ai: bool = True) -> None:
-    for row_number in range(2, sheet.max_row + 1):
+def clear_output_columns(
+    sheet: Any,
+    header: dict[str, int],
+    clear_ai: bool = True,
+    start_row: int | None = None,
+    end_row: int | None = None,
+) -> None:
+    effective_start = start_row if start_row is not None else 2
+    effective_end = end_row if end_row is not None else sheet.max_row
+    for row_number in range(effective_start, effective_end + 1):
         if clear_ai:
             sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value = None
         sheet.cell(row=row_number, column=header["published_release_notes"]).value = None
@@ -348,13 +356,17 @@ def move_not_needed_rows_to_sheet(
     workbook: Any,
     sheet: Any,
     header: dict[str, int],
+    start_row: int | None = None,
+    end_row: int | None = None,
 ) -> int:
     """Move rows where AI determined no release note is needed to a separate sheet."""
     ai_col = header["release_notes_written_by_ai"]
     target_sheet_name = "release_note_not_needed"
 
+    effective_start = start_row if start_row is not None else 2
+    effective_end = end_row if end_row is not None else sheet.max_row
     rows_to_move: list[int] = []
-    for row_number in range(2, sheet.max_row + 1):
+    for row_number in range(effective_start, effective_end + 1):
         ai_value = str_value(sheet.cell(row=row_number, column=ai_col).value)
         if ai_value.startswith(NOT_NEEDED_PREFIX):
             rows_to_move.append(row_number)
@@ -737,11 +749,15 @@ def generate_notes_for_sheet(
     ai_workers: int = 1,
     github_workers: int = 1,
     checkpoint_callback: Callable[[int, int], None] | None = None,
+    start_row: int | None = None,
+    end_row: int | None = None,
 ) -> list[MarkdownEntry]:
     entries_by_row: dict[int, list[MarkdownEntry]] = {}
+    effective_start = start_row if start_row is not None else 2
+    effective_end = end_row if end_row is not None else sheet.max_row
     row_inputs = [
         build_row_input(sheet, header, row_number)
-        for row_number in range(2, sheet.max_row + 1)
+        for row_number in range(effective_start, effective_end + 1)
     ]
     rows_to_generate: list[RowInput] = []
 
@@ -807,9 +823,16 @@ def generate_notes_for_sheet(
     return entries
 
 
-def generate_notes_without_ai(sheet: Any, header: dict[str, int]) -> list[MarkdownEntry]:
+def generate_notes_without_ai(
+    sheet: Any,
+    header: dict[str, int],
+    start_row: int | None = None,
+    end_row: int | None = None,
+) -> list[MarkdownEntry]:
     entries: list[MarkdownEntry] = []
-    for row_number in range(2, sheet.max_row + 1):
+    effective_start = start_row if start_row is not None else 2
+    effective_end = end_row if end_row is not None else sheet.max_row
+    for row_number in range(effective_start, effective_end + 1):
         row_input = build_row_input(sheet, header, row_number)
         dup_text = str_value(sheet.cell(row=row_number, column=header["published_release_notes"]).value)
         if dup_text:
@@ -842,6 +865,67 @@ def generate_notes_without_ai(sheet: Any, header: dict[str, int]) -> list[Markdo
         f"AI generation is OFF; generated Markdown from formated_release_note for {len(entries)} note(s)",
         flush=True,
     )
+    return entries
+
+
+def collect_markdown_entries_from_sheet(
+    sheet: Any,
+    header: dict[str, int],
+) -> list[MarkdownEntry]:
+    """Collect MarkdownEntry items from a processed Excel sheet (Phase 2).
+
+    Reads published_release_notes (dup) and release_notes_written_by_ai columns
+    to build the full entry list without calling AI. Falls back to
+    formated_release_note when the AI column is empty (e.g. when AI generation
+    was OFF in Phase 1).
+    """
+    entries: list[MarkdownEntry] = []
+    has_published_col = "published_release_notes" in header
+    for row_number in range(2, sheet.max_row + 1):
+        row_input = build_row_input(sheet, header, row_number)
+
+        if has_published_col:
+            dup_text = str_value(
+                sheet.cell(row=row_number, column=header["published_release_notes"]).value
+            )
+            if dup_text:
+                entries.extend(dup_entries_for_row(row_input, dup_text))
+                continue
+
+        ai_note = str_value(
+            sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value
+        )
+        if ai_note and not ai_note.startswith("AI_GENERATION_FAILED:"):
+            if is_not_needed_note(ai_note):
+                continue
+            note_type = classify_note_type_from_text(ai_note, row_input.issue_type)
+            entries.append(
+                MarkdownEntry(
+                    note_type or "improvement",
+                    row_input.component,
+                    ai_note,
+                    row_input.raw_component,
+                )
+            )
+            continue
+
+        formatted_notes = split_lines(row_input.formatted_release_note)
+        if not formatted_notes:
+            continue
+        note_type = classify_note_type_from_text(
+            row_input.formatted_release_note, row_input.issue_type,
+        )
+        for note in formatted_notes:
+            entries.append(
+                MarkdownEntry(
+                    note_type or "improvement",
+                    row_input.component,
+                    note,
+                    row_input.raw_component,
+                )
+            )
+
+    print(f"Collected {len(entries)} Markdown entry/entries from processed Excel", flush=True)
     return entries
 
 

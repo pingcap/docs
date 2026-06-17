@@ -1,8 +1,13 @@
 # Release notes generator
 
-`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in a Excel workbook.
+`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in an Excel workbook.
 
-The generator keeps the source workbook unchanged, writes all processing results to a processed workbook, and renders the generated entries to a Markdown release note file.
+The generator uses a two-phase workflow:
+
+1. **`generate`** (Phase 1): Processes the source Excel workbook — runs preprocessing, calls AI to generate release notes, and writes results back to Excel. Supports row-range arguments (`--start-row` / `--end-row`) for resuming after interruptions.
+2. **`export-markdown`** (Phase 2): Reads the processed Excel and exports a Markdown release note file. Does not call AI or modify the Excel.
+
+The source workbook is never overwritten. All processing results are written to a processed workbook (`<original-name>_processed.xlsx`).
 
 ## What it does
 
@@ -60,57 +65,125 @@ The generator does not create a complete formal release note. It does not genera
 
 ## Typical usage examples
 
-Use Codex to generate release notes:
+The generator uses two subcommands that run independently:
+
+- `generate` (Phase 1): processes the Excel workbook, calls AI, writes results back to Excel.
+- `export-markdown` (Phase 2): reads the processed Excel and outputs a Markdown file.
+
+### Phase 1: Generate release notes into Excel
+
+Use Azure OpenAI:
 
 ```bash
 cd scripts
-python3 -m release-notes-ai-generator \
-    --version 8.5.7 \
-    --excel /path/to/release-note-excel.xlsx \
-    --releases-dir releases
-```
-
-Use Azure OpenAI to generate release notes:
-
-```bash
-cd scripts
-python3 -m release-notes-ai-generator \
+python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel.xlsx \
     --releases-dir releases \
     --ai-provider azure
 ```
 
+Use Codex CLI:
+
+```bash
+cd scripts
+python3 -m release-notes-ai-generator generate \
+    --version 8.5.7 \
+    --excel /path/to/release-note-excel.xlsx \
+    --releases-dir releases
+```
+
+### Phase 1: Resume from interruption
+
+If the first run is interrupted (e.g. API quota exhausted), resume from where it left off using `--start-row`:
+
+```bash
+cd scripts
+python3 -m release-notes-ai-generator generate \
+    --version 8.5.7 \
+    --excel /path/to/release-note-excel_processed.xlsx \
+    --releases-dir releases \
+    --ai-provider azure \
+    --start-row 51
+```
+
+You can also limit to a specific range with `--end-row`:
+
+```bash
+python3 -m release-notes-ai-generator generate \
+    --version 8.5.7 \
+    --excel /path/to/release-note-excel_processed.xlsx \
+    --releases-dir releases \
+    --ai-provider azure \
+    --start-row 51 --end-row 100
+```
+
+When `--start-row` or `--end-row` is specified, preprocessing steps (sort, merge, scope filter, same-series move) are skipped because they were completed in the first run.
+
+### Phase 2: Export Markdown from processed Excel
+
+After Phase 1 is fully complete, export the Markdown:
+
+```bash
+cd scripts
+python3 -m release-notes-ai-generator export-markdown \
+    --version 8.5.7 \
+    --excel /path/to/release-note-excel_processed.xlsx \
+    --releases-dir releases \
+    --release-date "August 14, 2025"
+```
+
 ## Option descriptions
 
-| Option | Required | Default value | Usage example | Description |
-| --- | --- | --- | --- | --- |
-| `--version <tidb-version>` | Yes | None | `--version 8.5.7` | Target TiDB version. This value is used for scope filtering, existing release-note lookup, generated Markdown front matter, and the default output file name. |
-| `--excel <workbook-path>` | Yes | None | `--excel /path/to/release-note-excel.xlsx` | Path to the source release note Excel file. The source workbook is not overwritten. The processed workbook is written to `<original-name>_processed.xlsx`. |
-| `--releases-dir <releases-dir>` | Yes | None | `--releases-dir releases` | Path to the existing English release notes directory. The script scans this directory for historical release notes and writes the generated Markdown under this directory unless `--output-release-file` is specified. |
-| `--sheet <sheet-name>` | No | `pr_for_release_note` | `--sheet pr_for_release_note` | Workbook sheet to process. |
-| `--ai-provider <provider>` | No | `codex` | `--ai-provider azure` | AI provider to use. `codex` runs the Codex CLI as a subprocess. `azure` calls Azure OpenAI via the OpenAI Python SDK (requires `AZURE_OPENAI_KEY` and `AZURE_OPENAI_BASE_URL` or `OPENAI_BASE_URL` environment variables). |
-| `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | `--ai-command "codex --ask-for-approval never exec --sandbox read-only --ephemeral"` | Command used to invoke the AI generator (only used with `--ai-provider codex`). The prompt is passed through standard input. When the command is `codex exec`, the script also passes `--output-schema` and `--output-last-message`. |
-| `--ai-model <model>` | No | `gpt-5.4` | `--ai-model gpt-5.4` | Model name. Passed to `codex exec` with `-m`, or used as the model parameter for Azure OpenAI. |
-| `--involve-ai-generation <ON-or-OFF>` | No | `ON` | `--involve-ai-generation OFF` | Whether to generate non-duplicate release notes with AI. Use `ON` to invoke AI, or `OFF` to use the source `formated_release_note` values. |
-| `--output-release-file <markdown-file>` | No | Conditional | `--output-release-file /path/to/release-8.5.7.md` | Write the generated Markdown to a custom path. By default, the output under `--releases-dir` is `release-<version>-updated-by-ai.md` if `release-<version>.md` already exists, otherwise `release-<version>.md`. |
-| `--ai-timeout <seconds>` | No | `600` | `--ai-timeout 600` | Timeout in seconds for each AI command invocation. |
-| `--ai-workers <count>` | No | `3` | `--ai-workers 3` | Number of concurrent AI command invocations. |
-| `--github-workers <count>` | No | `8` | `--github-workers 8` | Number of concurrent GitHub API prefetch workers. |
-| `--author-workers <count>` | No | `3` | `--author-workers 3` | Number of concurrent workers used to resolve bot-authored cherry-pick PR authors. |
-| `--checkpoint-interval <count>` | No | `1` | `--checkpoint-interval 1` | Save the processed workbook after every N completed AI rows. Use `0` to disable checkpoint saves. |
-| `--force-regenerate` | No | Disabled | `--force-regenerate` | Clear existing AI-generated notes in the processed workbook and generate all non-duplicate rows again. |
-| `--release-date <release-date>` | No | `TBD` | `--release-date "August 14, 2025"` | Release date text for the generated Markdown header. |
-| `--skip-scope-preprocess` | No | Disabled | `--skip-scope-preprocess` | Skip moving not-in-scope PR rows to the `PRs_not_in_scope` sheet. |
-| `--scope-base-branch-start-date <YYYY-MM-DD>` | No | Estimated from release history | `--scope-base-branch-start-date 2025-01-01` | Override the estimated release-m.n branch start date for x.y.0 scope preprocessing. The value must use the `YYYY-MM-DD` format. |
+### `generate` subcommand options
+
+| Option | Required | Default value | Description |
+| --- | --- | --- | --- |
+| `--version <tidb-version>` | Yes | None | Target TiDB version. Used for scope filtering, existing release-note lookup, and the default output file name. |
+| `--excel <workbook-path>` | Yes | None | Path to the source release note Excel file. The source workbook is not overwritten. The processed workbook is written to `<original-name>_processed.xlsx` (or the path specified by `--output-excel`). |
+| `--releases-dir <releases-dir>` | Yes | None | Path to the existing English release notes directory. Used for historical release note scanning and scope filtering. |
+| `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to process. |
+| `--ai-provider <provider>` | No | `codex` | AI provider to use. `codex` runs the Codex CLI as a subprocess. `azure` calls Azure OpenAI via the OpenAI Python SDK. |
+| `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | Command used to invoke the AI generator (only used with `--ai-provider codex`). |
+| `--ai-model <model>` | No | `gpt-5.4` | Model name. Passed to `codex exec` with `-m`, or used as the model parameter for Azure OpenAI. |
+| `--involve-ai-generation <ON\|OFF>` | No | `ON` | Whether to generate non-duplicate release notes with AI. Use `OFF` to skip AI generation and only run preprocessing. |
+| `--ai-timeout <seconds>` | No | `600` | Timeout in seconds for each AI command invocation. |
+| `--ai-workers <count>` | No | `3` | Number of concurrent AI command invocations. |
+| `--github-workers <count>` | No | `8` | Number of concurrent GitHub API prefetch workers. |
+| `--author-workers <count>` | No | `3` | Number of concurrent workers used to resolve bot-authored cherry-pick PR authors. |
+| `--checkpoint-interval <count>` | No | `1` | Save the processed workbook after every N completed AI rows. Use `0` to disable. |
+| `--force-regenerate` | No | Disabled | Clear existing AI-generated notes and regenerate all non-duplicate rows. |
+| `--skip-scope-preprocess` | No | Disabled | Skip moving not-in-scope PR rows to the `PRs_not_in_scope` sheet. |
+| `--scope-base-branch-start-date <YYYY-MM-DD>` | No | Estimated from release history | Override the estimated release-m.n branch start date for x.y.0 scope preprocessing. |
+| `--start-row <row>` | No | First data row | Excel row number to start processing from (1-indexed, row 1 is the header). When specified, preprocessing steps are skipped. Use this to resume after an interruption. |
+| `--end-row <row>` | No | Last row | Excel row number to stop processing at (inclusive, 1-indexed). |
+| `--output-excel <path>` | No | `<original-name>_processed.xlsx` | Path for the processed Excel output. |
+
+### `export-markdown` subcommand options
+
+| Option | Required | Default value | Description |
+| --- | --- | --- | --- |
+| `--version <tidb-version>` | Yes | None | Target TiDB version. Used for the Markdown front matter and default output file name. |
+| `--excel <workbook-path>` | Yes | None | Path to the processed Excel workbook (output of the `generate` phase). |
+| `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to read entries from. |
+| `--releases-dir <releases-dir>` | Yes | None | Path to the existing English release notes directory (used to determine the default output path). |
+| `--output-release-file <path>` | No | Conditional | Output Markdown file. Defaults to `release-<version>-updated-by-ai.md` if `release-<version>.md` already exists, otherwise `release-<version>.md`. |
+| `--release-date <date>` | No | `TBD` | Release date text for the generated Markdown header. |
 
 ## Generated files
 
-- The source Excel file passed to `--excel` is not overwritten.
-- The processed Excel file is written to `<original-name>_processed.xlsx` next to the source workbook.
+**Phase 1 (`generate`):**
+
+- The source Excel file passed to `--excel` is not overwritten (unless `--output-excel` points to the same file, which is useful for resume scenarios).
+- The processed Excel file is written to `<original-name>_processed.xlsx` next to the source workbook, or to the path specified by `--output-excel`.
+- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook.
+
+**Phase 2 (`export-markdown`):**
+
 - The generated Markdown file is written to `--output-release-file` when that option is specified.
 - If `--output-release-file` is omitted and `release-<version>.md` already exists under `--releases-dir`, the generated Markdown file is written to `release-<version>-updated-by-ai.md`.
 - If `--output-release-file` is omitted and `release-<version>.md` does not exist under `--releases-dir`, the generated Markdown file is written to `release-<version>.md`.
+- The Excel workbook is not modified during this phase.
 
 ## Reference: processing rules
 
