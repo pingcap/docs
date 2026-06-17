@@ -109,7 +109,7 @@ TiDBは、ビジネスの成長に合わせて拡張できます。
 
 ### Percolatorが分散ロックを使用し、クラッシュクライアントがロックを保持している場合、ロックは解放されないのでしょうか？ {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
-詳細については、中国語の[パーコレーターとTiDBトランザクションアルゴリズム](https://pingkai.cn/tidbcommunity/blog/f537be2c)を参照してください。
+詳細については、中国語の[PercolatorとTiDBトランザクションアルゴリズム](https://pingkai.cn/tidbcommunity/blog/f537be2c)を参照してください。
 
 ### TiDBはなぜThriftではなくgRPCを使用しているのですか？Googleが使用しているからでしょうか？ {#why-does-tidb-use-grpc-instead-of-thrift-is-it-because-google-uses-it}
 

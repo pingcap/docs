@@ -581,7 +581,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
         -   **バックエンドサーバープロトコル**: `TCP`を選択
         -   **バックエンドサーバー**: 作成したサーバーグループをクリックし、バックエンドサーバー`broker-node3:39092`を追加します。
 
-2.  [ナショナルリーグ](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロード バランサーを作成します。
+2.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワーク ロード バランサーを作成します。
 
     -   **ネットワークタイプ**: `Internal-facing`を選択
     -   **VPC** : `Kafka VPC`

@@ -99,7 +99,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 サポートレベル:**フル**
 
-アプリケーションの異なる依存関係間の複雑な関係を手動で管理する手間を省くため、 [Gradle](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。なお、TiDB 方言は Hibernate `6.0.0.Beta2`以降でのみサポートされています。
+アプリケーションの異なる依存関係間の複雑な関係を手動で管理する手間を省くため、 [Gradle](https://gradle.org/install)または[Maven](https://maven.apache.org/install.html)を使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。なお、TiDB 方言は Hibernate `6.0.0.Beta2`以降でのみサポートされています。
 
 Maven を使用している場合は、 `<dependencies></dependencies>`に以下を追加します。
 
@@ -139,7 +139,7 @@ implementation 'mysql:mysql-connector-java:8.0.33'
 
 サポートレベル:**フル**
 
-アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [Gradle](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。
+アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [Gradle](https://gradle.org/install)または[Maven](https://maven.apache.org/install.html)使用して、間接的な依存関係も含め、アプリケーションのすべての依存関係を取得できます。
 
 Maven を使用している場合は、 `<dependencies></dependencies>`に以下を追加します。
 

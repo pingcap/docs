@@ -24,9 +24,9 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 -   [Cloudflare Workersアカウント](https://dash.cloudflare.com/login)。
 -   [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 
-## ステップ1：ラングラーをセットアップする {#step-1-set-up-wrangler}
+## ステップ1：Wranglerをセットアップする {#step-1-set-up-wrangler}
 
-[ラングラー](https://developers.cloudflare.com/workers/wrangler/)Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/)Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
 
 1.  Wranglerをインストールする：
 
