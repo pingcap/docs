@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import dataclasses
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -45,6 +46,9 @@ from .utils import (
 GRAY_FILL = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
 NOT_NEEDED_PREFIX = "Release note is not needed:"
 SAME_SERIES_REASON_HEADER = "reason"
+# Global cap on the combined changed-file diff (files_summary) across all PRs of a
+# single row, to bound the AI input size when a row references multiple PRs.
+MAX_ROW_FILES_SUMMARY_CHARS = 40000
 
 
 def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
@@ -1091,6 +1095,7 @@ def build_row_context_from_cache(row_input: RowInput, github_cache: GitHubDataCa
         pulls.append(pull)
         if pull.author:
             pr_authors.append(pull.author)
+    pulls = cap_pull_file_summaries(pulls, MAX_ROW_FILES_SUMMARY_CHARS)
     return RowContext(
         row_number=row_input.row_number,
         component=row_input.component,
@@ -1104,6 +1109,33 @@ def build_row_context_from_cache(row_input: RowInput, github_cache: GitHubDataCa
         issues=issues,
         pulls=pulls,
     )
+
+
+def cap_pull_file_summaries(pulls: list[Any], budget: int) -> list[Any]:
+    """Truncate the combined files_summary across a row's PRs to ``budget`` chars.
+
+    PullInfo objects come from the shared GitHub cache and may be referenced by
+    multiple rows, so truncation returns copies (via dataclasses.replace) instead
+    of mutating the cached objects in place.
+    """
+    capped: list[Any] = []
+    remaining = budget
+    for pull in pulls:
+        summary = pull.files_summary or ""
+        if len(summary) <= remaining:
+            capped.append(pull)
+            remaining -= len(summary)
+            continue
+        if remaining <= 0:
+            truncated = "...[changed-file information omitted to limit input size]"
+        else:
+            truncated = (
+                summary[:remaining]
+                + "\n...[changed-file information truncated to limit input size]"
+            )
+        capped.append(dataclasses.replace(pull, files_summary=truncated))
+        remaining = 0
+    return capped
 
 
 def apply_generation_result(

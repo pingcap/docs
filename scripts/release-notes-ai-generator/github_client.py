@@ -142,9 +142,9 @@ class GitHubClient:
         owner: str,
         repo: str,
         number: str,
-        max_files: int = 80,
+        max_files: int = 40,
         max_patch_chars: int = 1200,
-        max_total_chars: int = 60000,
+        max_total_chars: int = 20000,
     ) -> str:
         lines: list[str] = []
         page = 1
