@@ -28,6 +28,7 @@ env:
   SOURCE_BRANCH: release-8.5
   TERMS_BRANCH: master
   JA_BRANCH: i18n-ja-release-8.5
+  TOC_FILES: TOC.md,TOC-ai.md,TOC-api.md,TOC-best-practices.md,TOC-develop.md,TOC-tidb-releases.md,TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
   AI_TRANSLATOR_REF: main
@@ -87,20 +88,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ai-pr-translator/scripts/requirements.txt
 
-      - name: Discover TOC files
-        id: toc_discovery
-        shell: bash
-        working-directory: docs-source
-        run: |
-          set -euo pipefail
-          toc_files=$(ls TOC*.md 2>/dev/null | paste -sd ',' -)
-          if [ -z "${toc_files}" ]; then
-            echo "No TOC files found in source branch" >&2
-            exit 1
-          fi
-          echo "toc_files=${toc_files}" >> "${GITHUB_OUTPUT}"
-          echo "Discovered TOC files: ${toc_files}"
-
       - name: Resolve commit range
         id: commits
         shell: bash
@@ -143,7 +130,7 @@ jobs:
           BASE_REF: ${{ steps.commits.outputs.base_ref }}
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
-          TOC_FILES: ${{ steps.toc_discovery.outputs.toc_files }}
+          TOC_FILES: ${{ env.TOC_FILES }}
           INDEX_FILES: ${{ env.INDEX_FILES }}
         run: |
           set -euo pipefail
@@ -168,7 +155,7 @@ jobs:
           SOURCE_FILES_TRANSLATION_MODE: ${{ inputs.source_files_translation_mode || 'incremental' }}
           SOURCE_LANGUAGE: English
           TARGET_LANGUAGE: Japanese
-          TOC_FILES: ${{ steps.toc_discovery.outputs.toc_files }}
+          TOC_FILES: ${{ env.TOC_FILES }}
           IGNORE_RESOURCE_CARD_SECTION: "Yes"
           SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
           TARGET_REF: ${{ env.JA_BRANCH }}
@@ -255,7 +242,7 @@ jobs:
 
             - Source repo: `${{ env.SOURCE_REPO }}`
             - Source branch: `${{ env.SOURCE_BRANCH }}`
-            - TOCs: `${{ steps.toc_discovery.outputs.toc_files }}`
+            - TOCs: `${{ env.TOC_FILES }}`
             - Source files: `${{ steps.source_files.outputs.files }}`
             - Sync outcome: `${{ steps.sync.outcome }}`
 
