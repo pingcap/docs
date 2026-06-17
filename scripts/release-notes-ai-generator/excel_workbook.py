@@ -43,6 +43,7 @@ from .utils import (
 
 
 GRAY_FILL = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
+NOT_NEEDED_PREFIX = "Release note is not needed:"
 SAME_SERIES_REASON_HEADER = "reason"
 
 
@@ -341,6 +342,59 @@ def move_rows_with_issues_already_in_same_series(
             flush=True,
         )
     return len(rows_to_move)
+
+
+def move_not_needed_rows_to_sheet(
+    workbook: Any,
+    sheet: Any,
+    header: dict[str, int],
+) -> int:
+    """Move rows where AI determined no release note is needed to a separate sheet."""
+    ai_col = header["release_notes_written_by_ai"]
+    target_sheet_name = "release_note_not_needed"
+
+    rows_to_move: list[int] = []
+    for row_number in range(2, sheet.max_row + 1):
+        ai_value = str_value(sheet.cell(row=row_number, column=ai_col).value)
+        if ai_value.startswith(NOT_NEEDED_PREFIX):
+            rows_to_move.append(row_number)
+
+    if not rows_to_move:
+        return 0
+
+    if target_sheet_name in workbook.sheetnames:
+        target = workbook[target_sheet_name]
+        if not str_value(target.cell(row=1, column=1).value):
+            copy_header_row(sheet, target)
+    else:
+        target = workbook.create_sheet(target_sheet_name)
+        copy_header_row(sheet, target)
+
+    for row_number in rows_to_move:
+        target_row = target.max_row + 1
+        for column in range(1, sheet.max_column + 1):
+            copy_cell(
+                sheet.cell(row=row_number, column=column),
+                target.cell(row=target_row, column=column),
+            )
+
+    for row_number in reversed(rows_to_move):
+        sheet.delete_rows(row_number, 1)
+
+    print(
+        f"Moved {len(rows_to_move)} row(s) to sheet '{target_sheet_name}' "
+        "(release note not needed)",
+        flush=True,
+    )
+    return len(rows_to_move)
+
+
+def copy_header_row(source_sheet: Any, target_sheet: Any) -> None:
+    for column in range(1, source_sheet.max_column + 1):
+        copy_cell(
+            source_sheet.cell(row=1, column=column),
+            target_sheet.cell(row=1, column=column),
+        )
 
 
 def same_series_release_files_by_issue_url(
@@ -708,6 +762,9 @@ def generate_notes_for_sheet(
 
         existing_note = str_value(ai_cell.value)
         if is_reusable_ai_note(existing_note):
+            if is_not_needed_note(existing_note):
+                print(f"Row {row_number}: skipped existing not-needed verdict", flush=True)
+                continue
             note_type = classify_note_type_from_text(existing_note, row_input.issue_type)
             entries_by_row[row_number] = [
                 MarkdownEntry(
@@ -829,6 +886,10 @@ def build_row_input(sheet: Any, header: dict[str, int], row_number: int) -> RowI
 
 def is_reusable_ai_note(note: str) -> bool:
     return bool(note) and not note.startswith("AI_GENERATION_FAILED:")
+
+
+def is_not_needed_note(note: str) -> bool:
+    return note.startswith(NOT_NEEDED_PREFIX)
 
 
 def prefetch_github_data(row_inputs: list[RowInput], github: Any, github_workers: int) -> GitHubDataCache:
@@ -955,6 +1016,14 @@ def apply_generation_result(
         print(
             f"Row {result.row_number}: AI generation failed: empty AI generation result",
             file=sys.stderr,
+            flush=True,
+        )
+        return
+
+    if result.note_type == "not_needed":
+        ai_cell.value = result.note
+        print(
+            f"Row {result.row_number}: {result.note}",
             flush=True,
         )
         return

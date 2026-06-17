@@ -156,7 +156,7 @@ def ai_output_schema() -> dict[str, Any]:
         "additionalProperties": False,
         "required": ["type", "release_note", "needs_review", "reason"],
         "properties": {
-            "type": {"type": "string", "enum": ["improvement", "bug_fix"]},
+            "type": {"type": "string", "enum": ["improvement", "bug_fix", "not_needed"]},
             "release_note": {"type": "string"},
             "needs_review": {"type": "boolean"},
             "reason": {"type": "string"},
@@ -311,25 +311,32 @@ def validate_ai_response(
     needs_review = data.get("needs_review")
     reason = data.get("reason")
 
-    if note_type not in {"improvement", "bug_fix"}:
-        errors.append('type must be "improvement" or "bug_fix"')
-    if not isinstance(release_note, str) or not release_note.startswith("- "):
-        errors.append('release_note must be a string that starts with "- "')
-    if isinstance(release_note, str) and release_note.rstrip().endswith("."):
-        errors.append("release_note must not end with a period")
+    if note_type not in {"improvement", "bug_fix", "not_needed"}:
+        errors.append('type must be "improvement", "bug_fix", or "not_needed"')
     if not isinstance(needs_review, bool):
         errors.append("needs_review must be a boolean")
     if not isinstance(reason, str):
         errors.append("reason must be a string")
 
-    if isinstance(release_note, str):
-        for link in expected_links:
-            if link and link not in release_note:
-                errors.append(f"release_note is missing expected link: {link}")
-        for contributor in contributors:
-            expected = f"@[{contributor}](https://github.com/{contributor})"
-            if contributor and expected not in release_note:
-                errors.append(f"release_note is missing contributor: {contributor}")
+    if note_type == "not_needed":
+        if not isinstance(release_note, str) or not release_note.startswith("Release note is not needed:"):
+            errors.append(
+                'when type is "not_needed", release_note must start with '
+                '"Release note is not needed:"'
+            )
+    else:
+        if not isinstance(release_note, str) or not release_note.startswith("- "):
+            errors.append('release_note must be a string that starts with "- "')
+        if isinstance(release_note, str) and release_note.rstrip().endswith("."):
+            errors.append("release_note must not end with a period")
+        if isinstance(release_note, str):
+            for link in expected_links:
+                if link and link not in release_note:
+                    errors.append(f"release_note is missing expected link: {link}")
+            for contributor in contributors:
+                expected = f"@[{contributor}](https://github.com/{contributor})"
+                if contributor and expected not in release_note:
+                    errors.append(f"release_note is missing contributor: {contributor}")
 
     if errors:
         return None, errors
