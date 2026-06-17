@@ -141,7 +141,7 @@ class AzureOpenAIClient(AIClient):
             "input": [{"role": "user", "content": prompt}],
             "max_output_tokens": self.MAX_OUTPUT_TOKENS,
         }
-        print(prompt)
+        #print(prompt)
         if not self._is_reasoning_model():
             kwargs["temperature"] = self.TEMPERATURE
         response = self.client.responses.create(**kwargs)
