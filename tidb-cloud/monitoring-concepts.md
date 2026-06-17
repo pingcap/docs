@@ -9,7 +9,7 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 ## 組み込みの指標 {#built-in-metrics}
 
-組み込みメトリクスとは<CustomContent plan="dedicated">クラスタ</CustomContent>TiDB Cloudが収集し、<CustomContent plan="starter,essential,premium">実例</CustomContent>レベルの**メトリクス**ページに表示する一連の標準メトリクスを指します。これらのメトリクスを使用することで、パフォーマンスの問題を容易に特定し、現在のデータベース展開が要件を満たしているかどうかを判断できます。
+組み込みメトリクスとは、TiDB Cloud が収集し、<CustomContent plan="starter,essential,premium">インスタンス</CustomContent><CustomContent plan="dedicated">クラスター</CustomContent> レベルで **Metrics** ページに表示する標準メトリクス一式を指します。これらのメトリクスを使用することで、パフォーマンス上の問題を容易に特定し、現在のデータベースデプロイメントが要件を満たしているかどうかを判断できます。
 
 <CustomContent plan="starter,essential,dedicated">
 
