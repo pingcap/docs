@@ -283,7 +283,7 @@ import pandas as pd
 ```
 
 ```python
-engine = create_engine(f"lake://cloudapp:<your-password>@<your-host>:443/default?secure=true")
+engine = create_engine(f"databend://cloudapp:<your-password>@<your-host>:443/default?secure=true")
 connection = engine.connect()
 ```
 
