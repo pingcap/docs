@@ -46,7 +46,7 @@ Github: https://github.com/tidbcloud/lakesql
 
 --------------------------------------------------------------------------------
 
->>> Downloading LakeSQL via https://repo.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
+>>> Downloading LakeSQL archive via https://lakesql-bin.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
 >>> Unpacking archive to /Users/eric/.lakesql ... ✓
 >>> Adding LakeSQL path to /Users/eric/.zprofile ✓
 >>> Adding LakeSQL path to /Users/eric/.profile ✓

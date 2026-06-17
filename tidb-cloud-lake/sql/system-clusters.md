@@ -11,7 +11,7 @@ Contains information about cluster nodes.
 >
 > You can disable access to `clusters` table using the configuration option `disable_system_table_load`.
 >
-> For instance, users of DatabendCloud will not be able to see this table.
+> For instance, {{{ .lake }}} users will not be able to see this table.
 
 ```sql
 SELECT * FROM system.clusters;

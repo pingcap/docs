@@ -24,7 +24,7 @@ SELECT SUBSTRING('abc123', REGEXP_INSTR('abc123', '\d+'));
 
 ```sql
 SELECT REGEXP_SUBSTR('abc123', '(\w+)(\d+)', 1, 1, 'e', 1);
--- Error: Databend does not support the 'e' parameter or capture group extraction.
+-- Error: {{{ .lake }}} does not support the 'e' parameter or capture group extraction.
 
 -- Alternative Solution: Use string functions like SUBSTRING and LOCATE to manually extract the desired substring, or preprocess the data with external tools (e.g., Python) to extract capture groups before querying.
 SELECT SUBSTRING(

@@ -27,5 +27,5 @@ Select the location of your files to find the recommended loading method:
 |-------------|-----------------|-------------|---------------|
 | **Staged Data Files** | **COPY INTO** | Fast, efficient loading from internal/external stages or user stage | [Loading from Stage](/tidb-cloud-lake/guides/load-from-stage.md) |
 | **Cloud Storage** | **COPY INTO** | Load from Amazon S3, Google Cloud Storage, Microsoft Azure | [Loading from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md) |
-| **Local Files** | [**LakeSQL**](https://github.com/tidbcloud/lakesql) | Databend's native CLI tool for local file loading | [Loading from Local File](/tidb-cloud-lake/guides/load-from-local-file.md) |
+| **Local Files** | [**LakeSQL**](https://github.com/tidbcloud/lakesql) | {{{ .lake }}}'s native CLI tool for local file loading | [Loading from Local File](/tidb-cloud-lake/guides/load-from-local-file.md) |
 | **Remote Files** | **COPY INTO** | Load data from remote HTTP/HTTPS locations | [Loading from Remote File](/tidb-cloud-lake/guides/load-from-remote-file.md) |

@@ -126,7 +126,7 @@ SHOW GRANTS FOR ROLE writer;
 | CREATEUSER        | Creates a user.                                                                                                   |
 | DROPROLE          | Drops a role.                                                                                                     |
 | SUPER             | Kills a query. Sets or unsets a setting. Operates a stage, catalog or share. Calls a function. COPY INTO a stage. |
-| USAGE             | Connects to a databend query only.                                                                                |
+| USAGE             | Connects to {{{ .lake }}} query only.                                                                             |
 | CREATE            | Creates a UDF.                                                                                                    |
 | DROP              | Drops a UDF.                                                                                                      |
 | ALTER             | Alters a UDF. Alters a SQL user.                                                                                  |

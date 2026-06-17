@@ -26,14 +26,14 @@ tokio = { version = "1", features = ["full"] }
 - ✅ **Async/Await Support**: Built for modern Rust async programming
 - ✅ **Type Safety**: Strong type mapping with Rust's type system
 - ✅ **Connection Pooling**: Efficient connection management
-- ✅ **Stage Operations**: Upload/download data to/from Databend stages
+- ✅ **Stage Operations**: Upload/download data to/from {{{ .lake }}} stages
 - ✅ **Streaming Results**: Process large result sets efficiently
 
 ## Data Type Mappings
 
 ### Basic Types
 
-| Databend  | Rust                  | Notes                    |
+| {{{ .lake }}} | Rust                  | Notes                    |
 | --------- | --------------------- | ------------------------ |
 | BOOLEAN   | bool                  |                          |
 | TINYINT   | i8, u8                |                          |
@@ -48,14 +48,14 @@ tokio = { version = "1", features = ["full"] }
 
 ### Date/Time Types
 
-| Databend  | Rust                  | Notes                    |
+| {{{ .lake }}} | Rust                  | Notes                    |
 | --------- | --------------------- | ------------------------ |
 | DATE      | chrono::NaiveDate     | Requires chrono crate    |
 | TIMESTAMP | chrono::NaiveDateTime | Requires chrono crate    |
 
 ### Complex Types
 
-| Databend    | Rust            | Notes                    |
+| {{{ .lake }}} | Rust            | Notes                    |
 | ----------- | --------------- | ------------------------ |
 | ARRAY[T]    | `Vec<T>`        | Nested arrays supported  |
 | TUPLE[T, U] | (T, U)          | Multiple element tuples  |

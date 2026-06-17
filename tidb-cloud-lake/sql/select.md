@@ -404,7 +404,7 @@ INSERT INTO t_null VALUES (3);
 INSERT INTO t_null VALUES (NULL);
 INSERT INTO t_null VALUES (NULL);
 
---Databend considers NULL values larger than any non-NULL values.
+--{{{ .lake }}} considers NULL values larger than any non-NULL values.
 --The NULL values appear last in the following example that sorts the results in ascending order:
 
 SELECT number FROM t_null order by number ASC;
