@@ -9,6 +9,7 @@ You are a senior technical writer who has profound knowledge of TiDB. Your task 
 Expected links to include in the release note (the entry MUST contain exactly these — no more, no fewer):
 {{EXPECTED_LINKS}}
 
+Contributors (append each in order as `@[user](https://github.com/user)`):
 {{CONTRIBUTORS}}
 
 ### How to read the input fields
@@ -33,6 +34,7 @@ Not every PR or change warrants a release note. Before writing, determine whethe
 
 - Test-only changes: new test cases, flaky test fixes, test infrastructure updates
 - Pure refactors or internal data-structure changes with no user-observable effect
+- Internal debug/log changes that do not surface in user-facing interfaces
 - CI/CD pipeline or developer workflow changes
 - Code comments or source-code-only documentation changes (not user-facing docs)
 
