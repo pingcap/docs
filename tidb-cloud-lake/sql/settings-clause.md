@@ -117,3 +117,4 @@ This example allows the COPY INTO operation to utilize up to 100 threads for par
 
 ```sql
 SETTINGS (max_threads = 100) COPY INTO ...
+```
