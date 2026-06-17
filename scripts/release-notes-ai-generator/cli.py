@@ -280,7 +280,7 @@ def run_generate(args: argparse.Namespace) -> int:
         header = prepare_sheet_columns(sheet)
         if args.force_regenerate:
             clear_output_columns(
-                sheet, header, clear_ai=True,
+                sheet, header, clear_ai=True, clear_published=False,
                 start_row=start_row, end_row=end_row,
             )
     else:
@@ -341,7 +341,7 @@ def run_generate(args: argparse.Namespace) -> int:
     )
     save_workbook_safely(workbook, processed_excel_path)
 
-    print(f"Phase 1 (generate) completed.", flush=True)
+    print("Phase 1 (generate) completed.", flush=True)
     print(f"  Input Excel: {excel_path}", flush=True)
     print(f"  Processed Excel: {processed_excel_path}", flush=True)
     print(
@@ -377,7 +377,7 @@ def run_export_markdown(args: argparse.Namespace) -> int:
 
     write_release_file(output_file, args.version, args.release_date, markdown_entries)
 
-    print(f"Phase 2 (export-markdown) completed.", flush=True)
+    print("Phase 2 (export-markdown) completed.", flush=True)
     print(f"  Input Excel: {excel_path}", flush=True)
     print(f"  Generated release note file: {output_file}", flush=True)
     return 0

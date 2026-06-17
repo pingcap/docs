@@ -61,6 +61,12 @@ def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
         sheet.cell(row=1, column=formatted_col + 1, value="release_notes_written_by_ai")
         header = get_header(sheet)
 
+    if "ai_note_type" not in header:
+        ai_col_index = header["release_notes_written_by_ai"]
+        sheet.insert_cols(ai_col_index + 1)
+        sheet.cell(row=1, column=ai_col_index + 1, value="ai_note_type")
+        header = get_header(sheet)
+
     if "published_release_notes" not in header:
         last_col = sheet.max_column
         sheet.cell(row=1, column=last_col + 1, value="published_release_notes")
@@ -80,6 +86,7 @@ def clear_output_columns(
     sheet: Any,
     header: dict[str, int],
     clear_ai: bool = True,
+    clear_published: bool = True,
     start_row: int | None = None,
     end_row: int | None = None,
 ) -> None:
@@ -88,7 +95,10 @@ def clear_output_columns(
     for row_number in range(effective_start, effective_end + 1):
         if clear_ai:
             sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value = None
-        sheet.cell(row=row_number, column=header["published_release_notes"]).value = None
+            if "ai_note_type" in header:
+                sheet.cell(row=row_number, column=header["ai_note_type"]).value = None
+        if clear_published:
+            sheet.cell(row=row_number, column=header["published_release_notes"]).value = None
 
 
 def sort_sheet_rows_by_component(sheet: Any) -> None:
@@ -231,7 +241,7 @@ def should_skip_release_file(file_path: Path, target_version: tuple[int, int, in
         return True
     file_version = release_file_semver_tuple(file_path)
     if not file_version:
-        return False
+        return True
     return file_version >= target_version
 
 
@@ -781,7 +791,14 @@ def generate_notes_for_sheet(
             if is_not_needed_note(existing_note):
                 print(f"Row {row_number}: skipped existing not-needed verdict", flush=True)
                 continue
-            note_type = classify_note_type_from_text(existing_note, row_input.issue_type)
+            persisted_type = str_value(
+                sheet.cell(row=row_number, column=header["ai_note_type"]).value
+            ) if "ai_note_type" in header else ""
+            note_type = (
+                persisted_type
+                if persisted_type in {"improvement", "bug_fix"}
+                else classify_note_type_from_text(existing_note, row_input.issue_type)
+            )
             entries_by_row[row_number] = [
                 MarkdownEntry(
                     note_type or "improvement",
@@ -898,7 +915,16 @@ def collect_markdown_entries_from_sheet(
         if ai_note and not ai_note.startswith("AI_GENERATION_FAILED:"):
             if is_not_needed_note(ai_note):
                 continue
-            note_type = classify_note_type_from_text(ai_note, row_input.issue_type)
+            persisted_type = ""
+            if "ai_note_type" in header:
+                persisted_type = str_value(
+                    sheet.cell(row=row_number, column=header["ai_note_type"]).value
+                )
+            note_type = (
+                persisted_type
+                if persisted_type in {"improvement", "bug_fix"}
+                else classify_note_type_from_text(ai_note, row_input.issue_type)
+            )
             entries.append(
                 MarkdownEntry(
                     note_type or "improvement",
@@ -1104,8 +1130,11 @@ def apply_generation_result(
         )
         return
 
+    type_cell = sheet.cell(row=result.row_number, column=header["ai_note_type"])
+
     if result.note_type == "not_needed":
         ai_cell.value = result.note
+        type_cell.value = "not_needed"
         print(
             f"Row {result.row_number}: {result.note}",
             flush=True,
@@ -1113,6 +1142,7 @@ def apply_generation_result(
         return
 
     ai_cell.value = result.note
+    type_cell.value = result.note_type
     entries_by_row[result.row_number] = [
         MarkdownEntry(result.note_type, result.component, result.note, result.raw_component)
     ]

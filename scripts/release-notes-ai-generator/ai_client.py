@@ -112,6 +112,7 @@ class AzureOpenAIClient(AIClient):
     DEFAULT_MODEL = "gpt-5.4"
     MAX_OUTPUT_TOKENS = 16384
     TEMPERATURE = 0.1
+    REASONING_MODEL_PREFIXES = ("o1", "o3", "o4", "gpt-5")
 
     def __init__(self, model: str | None, timeout: int):
         from openai import OpenAI
@@ -134,13 +135,19 @@ class AzureOpenAIClient(AIClient):
         self.client = OpenAI(api_key=key, base_url=base_url, timeout=timeout)
         self.model = model or self.DEFAULT_MODEL
 
+    def _is_reasoning_model(self) -> bool:
+        model_lower = self.model.lower()
+        return any(model_lower.startswith(p) for p in self.REASONING_MODEL_PREFIXES)
+
     def _run(self, prompt: str) -> str:
-        response = self.client.responses.create(
-            model=self.model,
-            input=[{"role": "user", "content": prompt}],
-            temperature=self.TEMPERATURE,
-            max_output_tokens=self.MAX_OUTPUT_TOKENS,
-        )
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "input": [{"role": "user", "content": prompt}],
+            "max_output_tokens": self.MAX_OUTPUT_TOKENS,
+        }
+        if not self._is_reasoning_model():
+            kwargs["temperature"] = self.TEMPERATURE
+        response = self.client.responses.create(**kwargs)
         return response.output_text.strip()
 
 
@@ -261,7 +268,7 @@ def load_reference_file(path: Path) -> str:
     except FileNotFoundError as exc:
         raise FileNotFoundError(
             f"Cannot find release-note reference file: {path}. "
-            "Make sure the repo-local write-review-translate-release-notes skill is present."
+            "Make sure .ai/skills/write-review-translate-release-notes/references/ exists."
         ) from exc
 
 

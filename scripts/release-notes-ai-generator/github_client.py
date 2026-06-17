@@ -149,7 +149,7 @@ class GitHubClient:
         lines: list[str] = []
         page = 1
         total_chars = 0
-        while len(lines) < max_files:
+        while len(lines) < max_files and total_chars < max_total_chars:
             files = self.get_api_json(
                 f"/repos/{owner}/{repo}/pulls/{number}/files",
                 params={"per_page": 100, "page": page},
