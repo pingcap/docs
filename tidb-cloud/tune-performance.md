@@ -1,158 +1,142 @@
 ---
-title: Analyze and Tune Performance
-summary: TiDB Cloudでパフォーマンスを分析および調整する方法を学びます。
+title: パフォーマンスの分析とチューニング
+summary: TiDB Cloud でパフォーマンスを分析およびチューニングする方法を学びます。
 aliases: ['/ja/tidbcloud/index-insight']
 ---
 
-# パフォーマンスの分析と調整 {#analyze-and-tune-performance}
+# パフォーマンスの分析とチューニング
 
 <CustomContent plan="starter,essential,dedicated">
 
-TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](#slow-query) 、 [ステートメント分析](#statement-analysis) 、 [キービジュアライザー](#key-visualizer)を提供します。
+TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#slow-query)、[Statement Analysis](#statement-analysis)、および [Key Visualizer](#key-visualizer) を提供しています。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-TiDB Cloud は、パフォーマンスを分析するために[遅いクエリ](#slow-query)と[SQL文](#sql-statement)を提供します。
+TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#slow-query) と [SQL Statement](#sql-statement) を提供しています。
 
 </CustomContent>
 
--   スロークエリを使用すると、TiDB内のすべてのスロークエリを検索して表示できます。<CustomContent plan="starter,essential,dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>実行プラン、SQL 実行情報、その他の詳細を表示して、各低速クエリのボトルネックを調査します。
+- Slow Query では、<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> 内のすべての低速クエリを検索して表示できます。また、実行計画、SQL 実行情報、その他の詳細を確認することで、各低速クエリのボトルネックを調査できます。
 
--   <CustomContent plan="starter,essential,dedicated">ステートメント分析</CustomContent><CustomContent plan="premium">SQL文</CustomContent>ページ上の SQL 実行を直接観察し、システム テーブルをクエリせずにパフォーマンスの問題を簡単に見つけることができます。
+- <CustomContent plan="starter,essential,dedicated">Statement Analysis</CustomContent><CustomContent plan="premium">SQL Statement</CustomContent> を使用すると、システムテーブルをクエリしなくても、ページ上で SQL の実行状況を直接確認し、パフォーマンスの問題を簡単に特定できます。
 
 <CustomContent plan="starter,essential,dedicated">
 
--   Key Visualizer は、TiDB のデータ アクセス パターンとデータ ホットスポットを観察するのに役立ちます。
+- Key Visualizer は、TiDB のデータアクセスパターンとデータホットスポットの観察に役立ちます。
 
-> **注記：**
+> **Note:**
 >
-> 現在、 **Key Visualizer**はTiDB Cloud Dedicated クラスターでのみ使用できます。
+> 現在、**Key Visualizer** は TiDB Cloud Dedicated クラスタでのみ利用できます。
 
 </CustomContent>
 
-## 診断ページを確認する {#view-the-diagnosis-page}
+## Diagnosis ページを表示する {#view-the-diagnosis-page}
+
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> の名前をクリックして、その概要ページに移動します。
+
+    > **Tip:**
+    >
+    > 複数の組織に所属している場合は、まず左上のコンボボックスを使用して対象の組織に切り替えてください。
+
+2. 左側のナビゲーションペインで、**Monitoring** > **Diagnosis** をクリックします。
+
+## Slow Query {#slow-query}
+
+デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリと見なされます。
+
+<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> で低速クエリを表示するには、次の手順を実行します。
 
 <CustomContent plan="starter,essential,dedicated">
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
+1. [**Diagnosis** ページに移動します](#view-the-diagnosis-page)。
 
-    > **ヒント：**
-    >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+2. **Slow Query** タブをクリックします。
 
-2.  左側のナビゲーション ペインで、 **[監視]** &gt; **[診断]**をクリックします。
+3. リスト内の任意の低速クエリをクリックして、その詳細な実行情報を表示します。
+
+4. （任意）対象の時間範囲、関連するデータベース、および SQL キーワードに基づいて低速クエリをフィルタリングできます。表示する低速クエリの数を制限することもできます。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-1.  組織の[**TiDBインスタンス**](https://tidbcloud.com/tidbs)ページで、ターゲットインスタンスの名前をクリックして、概要ページに移動します。
+1. {{{ .premium }}} instance の概要ページに移動し、左側のナビゲーションペインで **Monitoring** > **Slow Query** をクリックします。
 
-    > **ヒント：**
-    >
-    > 左上隅のコンボ ボックスを使用して、組織とインスタンスを切り替えることができます。
+2. リストから低速クエリを選択して、その詳細な実行情報を表示します。
 
-2.  左側のナビゲーション ペインで、 **[監視]**をクリックします。
+3. （任意）対象の時間範囲と SQL キーワードに基づいて低速クエリをフィルタリングできます。表示する低速クエリの数を制限することもできます。
 
 </CustomContent>
 
-## 遅いクエリ {#slow-query}
-
-デフォルトでは、300 ミリ秒以上かかる SQL クエリは遅いクエリと見なされます。
-
-TiDBで遅いクエリを表示するには<CustomContent plan="starter,essential,dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>、次の手順を実行します。
-
-<CustomContent plan="starter,essential,dedicated">
-
-1.  クラスターの[**診断**](#view-the-diagnosis-page)ページに移動します。
-
-2.  **[スロー クエリ]**タブをクリックします。
-
-3.  リスト内の遅いクエリをクリックすると、詳細な実行情報が表示されます。
-
-4.  （オプション）対象期間、関連データベース、SQLキーワードに基づいてスロークエリをフィルタリングできます。また、表示するスロークエリの数を制限することもできます。
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1.  TiDB インスタンスの概要ページに移動し、左側のナビゲーション ペインで**[モニタリング]** &gt; **[スロー クエリ]**をクリックします。
-
-2.  詳細な実行情報を表示するには、リストから遅いクエリを選択します。
-
-3.  （オプション）対象期間とSQLキーワードに基づいてスロークエリをフィルタリングできます。また、表示するスロークエリの数を制限することもできます。
-
-</CustomContent>
-
-結果は表形式で表示され、さまざまな列で結果を並べ替えることができます。
+結果は表形式で表示され、異なる列で並べ替えることができます。
 
 <CustomContent plan="starter,essential">
 
-> **注記：**
+> **Note:**
 >
-> トラフィックの可視性を向上させるため、 TiDB Cloud StarterとTiDB Cloud Essentialでは、AWS PrivateLink経由の接続における実際のクライアントIPアドレスを詳細な実行情報に表示するようになりました。現在、この機能はベータ版であり、AWSリージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
+> トラフィックの可視性を向上させるため、{{{ .starter }}} と {{{ .essential }}} では、詳細な実行情報において AWS PrivateLink 経由の接続に対する実際のクライアント IP アドレスが表示されるようになりました。現在、この機能はベータ版であり、AWS リージョン `Frankfurt (eu-central-1)` でのみ利用できます。
 
 </CustomContent>
 <CustomContent plan="starter,essential,dedicated">
 
-詳細については[TiDBダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
+詳細については、[TiDB Dashboard の Slow Queries](https://docs.pingcap.com/tidb/stable/dashboard-slow-query) を参照してください。
 
 </CustomContent>
 
 <CustomContent plan="starter,essential,dedicated">
 
-## ステートメント分析 {#statement-analysis}
+## Statement Analysis {#statement-analysis}
 
-ステートメント分析を使用するには、次の手順を実行します。
+Statement Analysis を使用するには、次の手順を実行します。
 
-1.  クラスターの[**診断**](#view-the-diagnosis-page)ページに移動します。
+1. [**Diagnosis** ページに移動します](#view-the-diagnosis-page)。
 
-2.  **「SQL ステートメント」**タブをクリックします。
+2. **SQL Statement** タブをクリックします。
 
-3.  時間間隔ボックスで分析対象となる期間を選択します。すると、その期間におけるすべてのデータベースのSQL文の実行統計を取得できます。
+3. 時間間隔ボックスで分析対象の期間を選択します。すると、その期間におけるすべてのデータベースの SQL 文の実行統計を取得できます。
 
-4.  (オプション) 特定のデータベースのみを対象とする場合は、次のボックスで対応するスキーマを選択して、結果をフィルタリングできます。
+4. （任意）特定のデータベースのみに関心がある場合は、次のボックスで対応する schema(s) を選択して結果をフィルタリングできます。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-## SQL文 {#sql-statement}
+## SQL Statement {#sql-statement}
 
-**SQL ステートメント**ページを使用するには、次の手順を実行します。
+**SQL Statement** ページを使用するには、次の手順を実行します。
 
-1.  TiDB インスタンスの概要ページに移動し、左側のナビゲーション ペインで**[監視]** &gt; **[SQL ステートメント]**をクリックします。
+1. {{{ .premium }}} instance の概要ページに移動し、左側のナビゲーションペインで **Monitoring** > **SQL Statement** をクリックします。
 
-2.  リスト内の SQL ステートメントをクリックすると、詳細な実行情報が表示されます。
+2. リスト内の SQL 文をクリックして、その詳細な実行情報を表示します。
 
-3.  時間間隔ボックスで、分析する期間を選択します。すると、その期間における全データベースのSQL文の実行統計を取得できます。
+3. 時間間隔ボックスで分析対象の期間を選択します。すると、その期間におけるすべてのデータベースにまたがる SQL 文の実行統計を取得できます。
 
-4.  (オプション) 特定のデータベースのみを対象とする場合は、次のボックスで対応するスキーマを選択して、結果をフィルタリングできます。
+4. （任意）特定のデータベースのみに関心がある場合は、次のボックスで対応する schema(s) を選択して結果をフィルタリングできます。
 
 </CustomContent>
 
-結果は表形式で表示され、さまざまな列で結果を並べ替えることができます。
+結果は表形式で表示され、異なる列で並べ替えることができます。
 
 <CustomContent plan="starter,essential,dedicated">
 
-詳細については[TiDBダッシュボードのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)参照してください。
+詳細については、[TiDB Dashboard の Statement Execution Details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details) を参照してください。
 
-## キービジュアライザー {#key-visualizer}
+## Key Visualizer {#key-visualizer}
 
-> **注記：**
+> **Note:**
 >
-> Key Visualizer は[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ使用できます。
+> Key Visualizer は [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスタでのみ利用できます。
 
-主要な分析を表示するには、次の手順を実行します。
+キー分析を表示するには、次の手順を実行します。
 
-1.  クラスターの[**診断**](#view-the-diagnosis-page)ページに移動します。
+1. {{{ .dedicated }}} cluster の [**Diagnosis**](#view-the-diagnosis-page) ページに移動します。
 
-2.  **[キー ビジュアライザー]**タブをクリックします。
+2. **Key Visualizer** タブをクリックします。
 
-**Key Visualizer**ページでは、アクセストラフィックの経時的な変化を示す大きなヒートマップが表示されます。ヒートマップの各軸の平均値（平均値）は、下部と右側に表示されます。左側には、テーブル名、インデックス名、その他の関連情報が表示されます。
+**Key Visualizer** ページでは、大きなヒートマップにより、アクセス トラフィックが時間の経過とともにどのように変化するかを確認できます。ヒートマップの各軸に沿った平均値は、下部と右側に表示されます。左側には、テーブル名、インデックス名、およびその他の関連情報が表示されます。
 
-詳細については[キービジュアライザー](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer)参照してください。
+詳細については、[Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer) を参照してください。
 
 </CustomContent>

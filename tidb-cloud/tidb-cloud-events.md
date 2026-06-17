@@ -1,58 +1,68 @@
 ---
-title: TiDB Cloud Cluster Events
-summary: イベント ページを使用してTiDB Cloudクラスターのイベントを表示する方法を学習します。
+title: Events
+summary: Events ページを使用して TiDB Cloud リソースのイベントを表示する方法を学びます。
 ---
 
-# TiDB Cloudクラスタイベント {#tidb-cloud-cluster-events}
+# Events
 
-TiDB Cloudは、クラスタレベルで過去のイベントを記録します。*イベントは、* TiDB Cloudクラスタにおける変化を示します。記録されたイベントは、 **「イベント」**ページで確認できます。イベントの種類、ステータス、メッセージ、トリガー時刻、トリガーユーザーなどの情報が表示されます。
+<CustomContent plan="starter,essential">
 
-このドキュメントでは**、[イベント]**ページを使用してTiDB Cloudクラスターのイベントを表示する方法について説明し、サポートされているイベント タイプを一覧表示します。
+{{{ .starter }}} および Essential インスタンスでは、TiDB Cloud はインスタンスレベルで履歴イベントを記録します。*event* は、{{{ .starter }}} または Essential インスタンスに発生した変更を示します。記録されたイベントは **Events** ページで確認でき、イベントタイプ、ステータス、メッセージ、トリガー時刻、トリガーしたユーザーが表示されます。
 
-## イベントページを確認する {#view-the-events-page}
+</CustomContent>
 
-**イベント**ページでイベントを表示するには、次の手順を実行します。
+<CustomContent plan="dedicated">
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、ターゲット クラスターの名前をクリックして、概要ページに移動します。
+TiDB Cloud Dedicated クラスターでは、TiDB Cloud はクラスターレベルで履歴イベントを記録します。*event* は、TiDB Cloud Dedicated クラスターに発生した変更を示します。記録されたイベントは **Events** ページで確認でき、イベントタイプ、ステータス、メッセージ、トリガー時刻、トリガーしたユーザーが表示されます。
 
-    > **ヒント：**
+</CustomContent>
+
+このドキュメントでは、**Events** ページを使用して履歴イベントを表示する方法を説明し、サポートされているイベントタイプを一覧で示します。
+
+## Events ページを表示する {#view-the-events-page}
+
+**Events** ページでイベントを表示するには、次の手順を実行します。
+
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter,essential">{{{ .starter }}} または Essential インスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent> の名前をクリックして、その概要ページに移動します。
+
+    > **Tip:**
     >
-    > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、まず左上隅のコンボボックスを使用して対象の組織に切り替えてください。
 
-2.  左側のナビゲーション ペインで、 **[監視]** &gt; **[イベント]**をクリックします。
+2. 左側のナビゲーションペインで、**Monitoring** > **Events** をクリックします。
 
-## 記録されたイベント {#logged-events}
+## 記録されるイベント {#logged-events}
 
-TiDB Cloud は、次の種類のクラスター イベントをログに記録します。
+TiDB Cloud は、次の種類のクラスターイベントを記録します。
 
-| イベントの種類      | 説明                                                           |
-| :----------- | :----------------------------------------------------------- |
-| クラスターの作成     | クラスターを作成する                                                   |
-| 一時停止クラスター    | クラスターを一時停止する                                                 |
-| 履歴書クラスター     | クラスターを再開する                                                   |
-| クラスタサイズの変更   | クラスターサイズを変更する                                                |
-| バックアップクラスター  | クラスターをバックアップする                                               |
-| エクスポートバックアップ | バックアップをエクスポートする                                              |
-| クラスタからの復元    | クラスターを復元する                                                   |
-| 変更フィードを作成    | チェンジフィードを作成する                                                |
-| 一時停止変更フィード   | チェンジフィードを一時停止する                                              |
-| 履歴書変更フィード    | チェンジフィードを再開する                                                |
-| 変更フィードを削除    | 変更フィードを削除する                                                  |
-| 編集変更フィード     | 変更フィードを編集する                                                  |
-| スケールチェンジフィード | チェンジフィードの仕様をスケールする                                           |
-| 失敗した変更フィード   | チェンジフィードの失敗                                                  |
-| インポートデータ     | クラスターにデータをインポートする                                            |
-| 支出制限の更新      | TiDB Cloud Starter クラスターの支出制限を更新する                           |
-| リソース制限       | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのリソース制限を更新する |
+| Event Type| Description |
+|:--- |:--- |
+| CreateCluster |  クラスターを作成する |  
+| PauseCluster |   クラスターを一時停止する |  
+| ResumeCluster |   クラスターを再開する | 
+| ModifyClusterSize |   クラスターサイズを変更する | 
+| BackupCluster |   クラスターをバックアップする |  
+| ExportBackup |   バックアップをエクスポートする |
+| RestoreFromCluster |   クラスターを復元する |  
+| CreateChangefeed |   changefeed を作成する |  
+| PauseChangefeed |   changefeed を一時停止する | 
+| ResumeChangefeed |   changefeed を再開する | 
+| DeleteChangefeed |   changefeed を削除する |  
+| EditChangefeed |  changefeed を編集する |  
+| ScaleChangefeed |   changefeed の仕様をスケールする |  
+| FailedChangefeed |   changefeed の障害 |  
+| ImportData |   クラスターにデータをインポートする |  
+| UpdateSpendingLimit |   {{{ .starter }}} インスタンスの支出上限を更新する |  
+| ResourceLimitation |   {{{ .starter }}} または {{{ .essential }}} インスタンスのリソース制限を更新する |  
 
 各イベントについて、次の情報が記録されます。
 
--   イベントの種類
--   状態
--   メッセージ
--   時間
--   きっかけ
+- Event Type
+- Status
+- Message
+- Time
+- Triggered By
 
 ## イベント保持ポリシー {#event-retention-policy}
 
-イベントデータは 7 日間保存されます。
+イベントデータは 7 日間保持されます。
