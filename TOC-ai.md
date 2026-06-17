@@ -54,7 +54,7 @@
     -   [オープンAI](/ai/integrations/vector-search-auto-embedding-openai.md)
     -   [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
     -   [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
-    -   [コヒア](/ai/integrations/vector-search-auto-embedding-cohere.md)
+    -   [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
     -   [Google ジェミニ](/ai/integrations/vector-search-auto-embedding-gemini.md)
     -   [抱きしめる顔](/ai/integrations/vector-search-auto-embedding-huggingface.md)
     -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
