@@ -148,7 +148,7 @@ df.plot.bar(x='date', y='count')
 
 You can now see a bar chart on the notebook.
 
-## Tutorial-3: Integrating {{{ .lake }}} with Jupyter Notebook with the Python Driver
+## Tutorial-3: Integrating {{{ .lake }}} with Jupyter Notebook using the Python driver
 
 In this tutorial, you will first deploy a {{{ .lake }}} instance and Jupyter Notebook, and then run queries in a notebook through the [{{{ .lake }}} Python driver](https://pypi.org/project/tidbcloudlake-driver/) library, as well as write and visualize data within the notebook.
 
