@@ -60,7 +60,7 @@
     -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
     -   [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
-    -   [ランチェーン](/ai/integrations/vector-search-integrate-with-langchain.md)
+    -   [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
     -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   ORMライブラリ
     -   [SQLアルケミー](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
