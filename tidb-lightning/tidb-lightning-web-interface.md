@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-web-interface/','/docs/dev/re
 
 > **Warning:**
 >
-> Starting from v8.5.7, the TiDB Lightning Web Interface is removed.
+> Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface.
 
 To import data with TiDB Lightning, run `tidb-lightning` from the command line.
 

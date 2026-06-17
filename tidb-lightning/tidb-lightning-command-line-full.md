@@ -36,7 +36,7 @@ You can configure the following parameters using `tidb-lightning`:
 | `--ca <file>` | CA certificate path for TLS connection | `security.ca-path` |
 | `--cert <file>` | Certificate path for TLS connection | `security.cert-path` |
 | `--key <file>` | Private key path for TLS connection | `security.key-path` |
-| `--server-mode` | Start TiDB Lightning in server mode, waiting for import tasks submitted through the HTTP API instead of starting immediately | `lightning.server-mode` |
+| `--server-mode` | Start TiDB Lightning in server mode. In this mode, TiDB Lightning waits for you to submit import tasks through the HTTP API instead of starting the import immediately. | `lightning.server-mode` |
 
 If you specify both a command line parameter and the corresponding setting in the configuration file, the command line parameter takes precedence. For example, running `tiup tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
 
