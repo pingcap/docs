@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 このチュートリアルを完了するには、以下が必要です。
 
 -   **Java Development Kit (JDK) 17**以降が必要です。業務要件や個人のニーズに応じて、 [OpenJDK](https://openjdk.org/)または[Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
--   [メイブン](https://maven.apache.org/install.html)**3.8**以上。
+-   [Maven](https://maven.apache.org/install.html)**3.8**以上。
 -   [Git](https://git-scm.com/downloads) 。
 -   TiDBクラスタ。
 

@@ -18,7 +18,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
 
 -   [JDK](https://openjdk.org/install/) 11以降
 
--   [メイブン](https://maven.apache.org/install.html)3.8以上
+-   [Maven](https://maven.apache.org/install.html)3.8以上
 
 -   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
 
@@ -35,7 +35,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
         -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクタを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
         -   `IAMFullAccess` : SAM CLI はコネクタ用に`ConnectorFunctionRole`を作成する必要があります。
 
--   [セールスフォース](https://developer.salesforce.com)アカウント。
+-   [Salesforce](https://developer.salesforce.com)アカウント。
 
 ## ステップ1. TiDBコネクタを登録する {#step-1-register-a-tidb-connector}
 

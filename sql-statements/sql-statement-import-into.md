@@ -186,7 +186,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 | :--------------- | :------------ |
 | `.gz` 、 `.gzip`  | gzip圧縮形式      |
 | `.zstd` 、 `.zst` | ZStd圧縮フォーマット  |
-| `.snappy`        | スナッピー圧縮フォーマット |
+| `.snappy`        | Snappy圧縮フォーマット |
 
 > **注記：**
 >

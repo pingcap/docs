@@ -27,7 +27,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 | PD      | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 3       |
 | TiDB    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
 | TiKV    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
-| システムベンチ | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
+| Sysbench | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
 
 ### ソフトウェア {#software}
 
@@ -38,7 +38,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 | PD      | バージョン8.0.0  |
 | TiDB    | バージョン8.0.0  |
 | TiKV    | バージョン8.0.0  |
-| システムベンチ | 1.0.17      |
+| Sysbench | 1.0.17      |
 
 ### コンフィグレーション {#configuration}
 

@@ -6,9 +6,9 @@ aliases: ['/ja/tidb/stable/dev-guide-playground-gitpod/','/ja/tidbcloud/dev-guid
 
 <!-- markdownlint-disable MD029 -->
 
-# ギットポッド {#gitpod}
+# GitPod {#gitpod}
 
-[ギットポッド](https://www.gitpod.io/)使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
+[GitPod](https://www.gitpod.io/)使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
 
 Gitpodは、コードを直接記述する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
 
