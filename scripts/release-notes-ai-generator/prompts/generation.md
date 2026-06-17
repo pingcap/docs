@@ -154,7 +154,7 @@ Bug fix example:
 When `type` is `"not_needed"`, set `release_note` to the following format:
 
 ```
-Release note is not needed: <short reason>
+Release note is not needed for this change. Reason: <short reason>
 ```
 
 Examples of `"not_needed"` reasons: `test-only change`, `internal refactor, no user-visible effect`, `flaky test fix`, `added internal debug logging`.
