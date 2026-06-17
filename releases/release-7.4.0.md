@@ -285,7 +285,7 @@ TiDB バージョン: 7.4.0
 
 ## 廃止および削除された機能 {#deprecated-and-removed-features}
 
--   [マイダンパー](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview)バージョン7.5.0で廃止され、その機能の大部分は[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
+-   [mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview)バージョン7.5.0で廃止され、その機能の大部分は[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
 -   TiKVインポーターはバージョン7.5.0で廃止されます。代替として[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用することを強くお勧めします。
 -   TiCDCの`enable-old-value`のパラメータは削除されます[＃9667](https://github.com/pingcap/tiflow/issues/9667) @ [3AceShowHand](https://github.com/3AceShowHand)
 

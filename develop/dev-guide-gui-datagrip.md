@@ -23,7 +23,7 @@ DataGripは2つの方法で使用できます。
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)、または非コミュニティ エディションの[ジェットブレインズ](https://www.jetbrains.com/)IDE。
+-   [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)、または非コミュニティ エディションの[JetBrains](https://www.jetbrains.com/)IDE。
 -   TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
@@ -208,6 +208,6 @@ DataGripは2つの方法で使用できます。
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

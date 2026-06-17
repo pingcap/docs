@@ -58,7 +58,7 @@ TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バー
 -   マスターキー。マスターキーはユーザーによって提供され、TiKVが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiKVの外部で行われます。
 -   データキー。データキーはTiKVによって生成され、実際にデータの暗号化に使用されるキーです。
 
-同じマスターキーを複数のTiKVインスタンスで共有できます。本番でマスターキーを提供する場合は、KMS経由が推奨されます。現在、TiKVは[AWS](https://docs.aws.amazon.com/kms/index.html) 、 [Googleクラウド](https://cloud.google.com/security/products/security-key-management?hl=en) 、 [アズール](https://learn.microsoft.com/en-us/azure/key-vault/)でKMS暗号化をサポートしています。KMS暗号化を有効にするには、KMS経由でカスタマーマスターキー（CMK）を作成し、設定ファイルを使用してTiKVにCMKキーIDを提供する必要があります。TiKVがKMS CMKにアクセスできない場合、起動または再起動に失敗します。
+同じマスターキーを複数のTiKVインスタンスで共有できます。本番でマスターキーを提供する場合は、KMS経由が推奨されます。現在、TiKVは[AWS](https://docs.aws.amazon.com/kms/index.html) 、 [Googleクラウド](https://cloud.google.com/security/products/security-key-management?hl=en) 、 [Azure](https://learn.microsoft.com/en-us/azure/key-vault/)でKMS暗号化をサポートしています。KMS暗号化を有効にするには、KMS経由でカスタマーマスターキー（CMK）を作成し、設定ファイルを使用してTiKVにCMKキーIDを提供する必要があります。TiKVがKMS CMKにアクセスできない場合、起動または再起動に失敗します。
 
 あるいは、カスタムキーを使用したい場合は、ファイル経由でマスターキーを提供することもできます。ファイルには、16進文字列としてエンコードされた256ビット（32バイト）のキーが含まれ、改行文字（つまり`\n` ）で終了し、他に何も含まれていない必要があります。ただし、キーをディスクに保存するとキーが漏洩するため、キーファイルはRAMの`tempfs`に保存するのに適しています。
 

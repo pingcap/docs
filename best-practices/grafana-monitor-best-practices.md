@@ -10,7 +10,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[プロメテウス](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。2 [グラファナ](https://grafana.com/) 、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
+[Prometheus](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。2 [Grafana](https://grafana.com/) 、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 
@@ -61,7 +61,7 @@ curl http://__tidb_ip__:10080/metrics |grep tidb_executor_statement_total
 
 ![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
 
-Prometheusは多くのクエリ式と関数をサポートしています。詳細については[プロメテウス公式サイト](https://prometheus.io/docs/prometheus/latest/querying)を参照してください。
+Prometheusは多くのクエリ式と関数をサポートしています。詳細については[Prometheus公式サイト](https://prometheus.io/docs/prometheus/latest/querying)を参照してください。
 
 ## Grafanaのヒント {#grafana-tips}
 

@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-cohere/']
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は、次の[調和する](https://cohere.com/)埋め込みモデルをネイティブに提供します。 API キーは必要ありません。
+TiDB Cloud は、次の[Cohere](https://cohere.com/)埋め込みモデルをネイティブに提供します。 API キーは必要ありません。
 
 **Cohere Embed v3 モデル**
 

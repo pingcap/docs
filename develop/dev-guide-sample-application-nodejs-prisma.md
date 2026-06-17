@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-prisma/','/ja/tid
 
 # Prismaを使用してTiDBに接続する {#connect-to-tidb-with-prisma}
 
-TiDB は MySQL 互換データベースであり、[プリズマ](https://github.com/prisma/prisma)Node.js 用の人気のあるオープンソース ORM フレームワークです。
+TiDB は MySQL 互換データベースであり、[Prisma](https://github.com/prisma/prisma)Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
 このチュートリアルでは、TiDBとPrismaを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -227,7 +227,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 ### ステップ4．データベーススキーマを初期化する {#step-4-initialize-the-database-schema}
 
-次のコマンドを実行して[プリズマ・マイグレート](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義されたデータ モデルでデータベースを初期化します。
+次のコマンドを実行して[Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)を呼び出し、 `prisma/prisma.schema`で定義されたデータ モデルでデータベースを初期化します。
 
 ```shell
 npx prisma migrate dev
@@ -395,7 +395,7 @@ await prisma.player.delete({
     >
     > **外部キーは、小規模から中規模のデータ量を扱う場合に適しています。**大規模なデータ量で外部キーを使用すると、深刻なパフォーマンス問題が発生したり、システムに予期せぬ影響を及ぼしたりする可能性があります。外部キーを使用する場合は、事前に徹底的な検証を行い、慎重に使用してください。
 
--   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)Prisma クライアント側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
+-   [Prisma Relation Mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)Prisma クライアント側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 
@@ -405,6 +405,6 @@ await prisma.player.delete({
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

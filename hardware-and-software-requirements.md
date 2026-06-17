@@ -172,7 +172,7 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 |        監視       |   12020  | NgMonitoringサービス用の通信ポート                          |
 |    ノードエクスポーター   |   9100   | 各TiDBクラスタノードのシステム情報を報告するための通信ポート                 |
 | ブラックボックスエクスポーター |   9115   | TiDBクラスタ内のポートを監視するために使用されるBlackbox_exporter通信ポート |
-|      グラファナ      |   3000   | 外部Web監視サービスおよびクライアント（ブラウザ）アクセス用のポート              |
+|      Grafana      |   3000   | 外部Web監視サービスおよびクライアント（ブラウザ）アクセス用のポート              |
 |    アラートマネージャー   |   9093   | アラートWebサービスのポート                                  |
 |    アラートマネージャー   |   9094   | アラート通信ポート                                        |
 
@@ -184,7 +184,7 @@ TiDBはXFSおよびExt4ファイルシステムをサポートしています。
 
 ## ウェブブラウザの要件 {#web-browser-requirements}
 
-TiDBは、データベースメトリクスの可視化に[グラファナ](https://grafana.com/)利用しています。JavaScriptが有効になっている最新バージョンのMicrosoft Edge、Safari、Chrome、またはFirefoxがあれば十分です。
+TiDBは、データベースメトリクスの可視化に[Grafana](https://grafana.com/)利用しています。JavaScriptが有効になっている最新バージョンのMicrosoft Edge、Safari、Chrome、またはFirefoxがあれば十分です。
 
 ## TiFlashの分離型storageおよびコンピューティングアーキテクチャに必要なハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
 

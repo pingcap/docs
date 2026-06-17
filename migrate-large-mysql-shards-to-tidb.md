@@ -358,7 +358,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴や内部運用指標は、Grafanaまたはログを通じて確認できます。
 
--   グラファナ経由
+-   Grafana経由
 
     TiUPを使用してDMクラスタをデプロイする際に、Prometheus、Alertmanager、およびGrafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを表示できます。具体的には、デプロイ時に指定したIPアドレスとポートをGrafanaに入力し、DMダッシュボードを選択してください。
 

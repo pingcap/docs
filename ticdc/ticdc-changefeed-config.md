@@ -554,7 +554,7 @@ token="xxxx"
 
 #### <code>compression-type</code> {#code-compression-type-code}
 
--   パルサーデータ圧縮方式。
+-   Pulsarデータ圧縮方式。
 -   デフォルト値： `""` 。これは圧縮が使用されないことを意味します。
 -   値のオプション: `"lz4"` 、 `"zlib"` 、 `"zstd"`
 

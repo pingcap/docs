@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-hibernate/','/ja/ti
 
 # Hibernateを使用してTiDBに接続する {#connect-to-tidb-with-hibernate}
 
-TiDBはMySQL互換データベースであり、[ハイバネイト](https://hibernate.org/orm/)人気のオープンソースJava ORMです。TiDBはMySQLとの互換性が非常に高いため、長期的な互換性を確保するには、Hibernateの方言として`org.hibernate.dialect.MySQLDialect`使用することをお勧めします。あるいは、 [Hibernateコミュニティ方言](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects)にはTiDB専用の方言（ `org.hibernate.community.dialect.TiDBDialect` ）も用意されていますが、PingCAPではメンテナンスされていません。 `MySQLDialect`を使用して互換性の問題が発生した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
+TiDBはMySQL互換データベースであり、[Hibernate](https://hibernate.org/orm/)人気のオープンソースJava ORMです。TiDBはMySQLとの互換性が非常に高いため、長期的な互換性を確保するには、Hibernateの方言として`org.hibernate.dialect.MySQLDialect`使用することをお勧めします。あるいは、 [Hibernateコミュニティ方言](https://github.com/hibernate/hibernate-orm/tree/main/hibernate-community-dialects)にはTiDB専用の方言（ `org.hibernate.community.dialect.TiDBDialect` ）も用意されていますが、PingCAPではメンテナンスされていません。 `MySQLDialect`を使用して互換性の問題が発生した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
 
 このチュートリアルでは、TiDBとHibernateを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -336,6 +336,6 @@ SET GLOBAL tidb_enable_check_constraint=ON;
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

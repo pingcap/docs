@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-django','/ja/tidb/stable/dev-guid
 
 # DjangoでTiDBに接続する {#connect-to-tidb-with-django}
 
-TiDBはMySQL互換のデータベースであり、[ジャンゴ](https://www.djangoproject.com)強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
+TiDBはMySQL互換のデータベースであり、[Django](https://www.djangoproject.com)強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
 
 このチュートリアルでは、TiDBとDjangoを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -365,6 +365,6 @@ Player.objects.filter(coins=100).delete()
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -52,7 +52,7 @@ ls `tiup --binary tiproxy`ctl
 
 #### ソースコードからコンパイルする {#compile-from-source-code}
 
-コンパイル環境要件: [行く](https://golang.org/) 1.21以降
+コンパイル環境要件: [Go](https://golang.org/) 1.21以降
 
 コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`生成します。
 

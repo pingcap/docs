@@ -167,15 +167,15 @@
     -   [Changefeedの課金](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
     -   [予算管理](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
-    -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
-    -   [クラウドフレア](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+    -   [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+    -   [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
     -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
     -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
     -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-    -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-    -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+    -   [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+    -   [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
 ## 参照 {#reference}
 

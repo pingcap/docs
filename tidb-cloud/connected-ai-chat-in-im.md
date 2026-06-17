@@ -9,7 +9,7 @@ PingCAPを搭載したインスタントメッセージ（IM）のAIチャット
 
 ## 制限 {#limitation}
 
-現在、 [スラック](https://slack.com/)と[ラーク](https://www.larksuite.com/)のチケットサポート機能はリクエストに応じてご利用いただけます。この機能をお試しになりたい場合は、 TiDB Cloudサポート（電話<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
+現在、 [Slack](https://slack.com/)と[Lark](https://www.larksuite.com/)のチケットサポート機能はリクエストに応じてご利用いただけます。この機能をお試しになりたい場合は、 TiDB Cloudサポート（電話<a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
 
 ## 例 {#example}
 

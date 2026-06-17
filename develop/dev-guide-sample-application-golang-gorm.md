@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-golang-gorm/','/ja/tidb/
 
 # GORMを使用してTiDBに接続する {#connect-to-tidb-with-gorm}
 
-TiDB は MySQL 互換データベースであり、[ゴーム](https://gorm.io/index.html)Golang用の人気のあるオープンソース ORM フレームワークです。 GORM は`AUTO_RANDOM`や[TiDBをデフォルトのデータベースオプションとしてサポート](https://gorm.io/docs/connecting_to_the_database.html#TiDB)データベースオプションとしてサポートなどの TiDB 機能に対応しています。
+TiDB は MySQL 互換データベースであり、[GORM](https://gorm.io/index.html)Golang用の人気のあるオープンソース ORM フレームワークです。 GORM は`AUTO_RANDOM`や[TiDBをデフォルトのデータベースオプションとしてサポート](https://gorm.io/docs/connecting_to_the_database.html#TiDB)データベースオプションとしてサポートなどの TiDB 機能に対応しています。
 
 このチュートリアルでは、TiDBとGORMを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -22,7 +22,7 @@ TiDB は MySQL 互換データベースであり、[ゴーム](https://gorm.io/i
 
 このチュートリアルを完了するには、以下が必要です。
 
--   [行く](https://go.dev/)**1.20**以上。
+-   [Go](https://go.dev/)**1.20**以上。
 -   [Git](https://git-scm.com/downloads) 。
 -   TiDBクラスタ。
 
@@ -279,6 +279,6 @@ db.Delete(&Player{ID: "id"})
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

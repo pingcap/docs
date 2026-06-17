@@ -249,7 +249,7 @@ TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定し
     mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
     ```
 
-    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。3 [マイクリ](https://www.mycli.net/)デフォルトでこのプラグインをサポートし、有効化します。5 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
+    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。3 [mycli](https://www.mycli.net/)デフォルトでこのプラグインをサポートし、有効化します。5 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
 
     ```Shell
     mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin

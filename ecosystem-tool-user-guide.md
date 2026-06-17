@@ -74,7 +74,7 @@ Dumplingの基本は次のとおりです。
 
 > **注記：**
 >
-> PingCAPは以前、TiDBに特化した機能強化を加えたバージョン[mydumperプロジェクト](https://github.com/maxbube/mydumper)のフォークを保守していました。バージョン7.5.0以降、バージョン[マイダンパー](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview/)は非推奨となり、その機能の大部分はバージョン[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
+> PingCAPは以前、TiDBに特化した機能強化を加えたバージョン[mydumperプロジェクト](https://github.com/maxbube/mydumper)のフォークを保守していました。バージョン7.5.0以降、バージョン[mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview/)は非推奨となり、その機能の大部分はバージョン[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
 
 ### 完全なデータインポート - TiDB Lightning {#full-data-import-tidb-lightning}
 

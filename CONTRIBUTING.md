@@ -197,4 +197,4 @@ TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `Custo
 
 ## 接触 {#contact}
 
-ディスカッションには[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。
+ディスカッションには[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。

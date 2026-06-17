@@ -190,7 +190,7 @@
     -   [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
     -   [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
     -   [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-    -   [パルサーシンクへ](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
+    -   [Pulsarシンクへ](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
     -   [TiDB Cloud Sinkへ](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
     -   [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
     -   参照
@@ -233,19 +233,19 @@
     -   [データ移行の料金請求](/tidb-cloud/tidb-cloud-billing-dm.md)
     -   [予算管理](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
-    -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+    -   [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
     -   [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
     -   [AWS Lambda](/tidb-cloud/integrate-tidbcloud-with-aws-lambda.md)
-    -   [クラウドフレア](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
-    -   [データドッグ](/tidb-cloud/monitor-datadog-integration.md)
+    -   [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+    -   [Datadog](/tidb-cloud/monitor-datadog-integration.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
     -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
     -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
-    -   [ニューレリック](/tidb-cloud/monitor-new-relic-integration.md)
-    -   [プロメテウスとグラファナ](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+    -   [New Relic](/tidb-cloud/monitor-new-relic-integration.md)
+    -   [PrometheusとGrafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
     -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-    -   テラフォーム
+    -   Terraform
         -   [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを取得する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
         -   [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)
@@ -258,8 +258,8 @@
         -   [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
         -   [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
         -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
-    -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-    -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+    -   [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+    -   [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
 ## 参照 {#reference}
 

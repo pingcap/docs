@@ -15,7 +15,7 @@ JavaアプリケーションでTiDBデータベースと連携する一般的な
 -   ネットワーク プロトコル: クライアントは、標準の[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
 -   JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC（Javaデータベース接続）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装するJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには[MySQL Connector/J](https://github.com/mysql/mysql-connector-j)や[MariaDB Connector/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)などがあります。
 -   データベース接続プール：アプリケーションは通常、接続要求のたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBCData [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
--   データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[ハイバネイト](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
+-   データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
 -   アプリケーションの実装: アプリケーション ロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
@@ -42,7 +42,7 @@ JDBC APIの使用方法については、 [JDBC公式チュートリアル](http
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP (オンライン トランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL ステートメントは、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)代わりに[準備された声明](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、準備されたステートメントを再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行プランを繰り返し解析して生成するオーバーヘッドが回避されます。
+OLTP (オンライン トランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL ステートメントは、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)代わりに[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行プランを繰り返し解析して生成するオーバーヘッドが回避されます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
@@ -404,4 +404,4 @@ Javaアプリケーションでフレーム グラフを取得するのは面倒
 
 ## お困りですか？ {#need-help}
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。
+[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。

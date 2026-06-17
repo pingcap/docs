@@ -4,7 +4,7 @@ summary: TiDB CloudでGoogle Geminiの埋め込みモデルを使用する方法
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 ---
 
-# ジェミニ埋め込み {#gemini-embeddings}
+# Gemini埋め込み {#gemini-embeddings}
 
 このドキュメントでは、 TiDB Cloudで Gemini 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、およびテキストクエリによるセマンティック検索を実行する方法について説明します。
 
@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 
 Gemini APIキー（BYOK）をお持ちの場合は、 `gemini/`プレフィックスを使用してすべてのGeminiモデルをご利用いただけます。例：
 
-**ジェミニ埋め込み-001**
+**Gemini埋め込み-001**
 
 -   名前: `gemini/gemini-embedding-001`
 -   寸法：128～3072（デフォルト：3072）
@@ -247,7 +247,7 @@ embedding: list[float] = EmbeddingFunction(
 
 ## オプション {#options}
 
-すべての[ジェミニオプション](https://ai.google.dev/gemini-api/docs/embeddings)`additional_json_options`関数の`EMBED_TEXT()`パラメータを介してサポートされます。
+すべての[Geminiオプション](https://ai.google.dev/gemini-api/docs/embeddings)`additional_json_options`関数の`EMBED_TEXT()`パラメータを介してサポートされます。
 
 **例：タスクの種類を指定して品質を向上させる**
 

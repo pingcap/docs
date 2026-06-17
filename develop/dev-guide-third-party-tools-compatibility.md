@@ -164,7 +164,7 @@ TiDB では、次の方法でもこれを修正します。
 
 ## Sequelizeとの互換性 {#compatibility-with-sequelize}
 
-このセクションで説明する互換性情報は[シークエライズ v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1)に基づいています。
+このセクションで説明する互換性情報は[Sequelize v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1)に基づいています。
 
 テスト結果によると、TiDBはSequelizeのほとんどの機能をサポートしています（ [`MySQL`方言として使用する](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql) ）。
 
@@ -218,6 +218,6 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

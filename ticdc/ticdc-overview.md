@@ -23,7 +23,7 @@ TiCDCには、以下の主要な機能があります。
 -   秒単位のRPOと分単位のRTOで、TiDBクラスタ間で増分データを複製します。
 -   TiDBクラスタ間の双方向レプリケーションにより、TiCDCを使用してマルチアクティブTiDBソリューションを構築できます。
 -   TiDBクラスタからMySQLデータベースまたはその他のMySQL互換データベースへ、低レイテンシーで増分データを複製します。
--   TiDB クラスターから Kafka クラスターへの増分データのレプリケーション。推奨されるデータ形式には、 [Canal-JSON](/ticdc/ticdc-canal-json.md) 、[アヴロ](/ticdc/ticdc-avro-protocol.md)、[デベジウム](/ticdc/ticdc-debezium.md)が含まれます。
+-   TiDB クラスターから Kafka クラスターへの増分データのレプリケーション。推奨されるデータ形式には、 [Canal-JSON](/ticdc/ticdc-canal-json.md) 、[Avro](/ticdc/ticdc-avro-protocol.md)、[デベジウム](/ticdc/ticdc-debezium.md)が含まれます。
 -   TiDBクラスタからAmazon S3、GCS、Azure Blob Storage、NFSなどのstorageサービスへ増分データを複製する。
 -   データベース、テーブル、DML、DDLをフィルタリングする機能を備えたテーブルの複製。
 -   単一障害点のない高可用性を実現し、TiCDCノードの動的な追加と削除をサポートします。

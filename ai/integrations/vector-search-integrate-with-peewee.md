@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-peewee/','/ja/tidb/dev/v
 
 # TiDBベクトル検索をpeeweeと統合する {#integrate-tidb-vector-search-with-peewee}
 
-このチュートリアルでは[ピーウィー](https://docs.peewee-orm.com/)を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、エンベディングを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは[Peewee](https://docs.peewee-orm.com/)を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、エンベディングを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **注記：**
 >

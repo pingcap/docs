@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 # TiDB Cloud Serverless Driver Prisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
 
-[プリズマ](https://www.prisma.io/docs)開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md)で HTTPS 経由で[Prismaクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
+[Prisma](https://www.prisma.io/docs)開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md)で HTTPS 経由で[Prismaクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
 
 -   サーバーレス環境におけるPrisma Clientのパフォーマンス向上
 -   エッジ環境でPrisma Clientを使用できる機能
@@ -131,7 +131,7 @@ const prisma = new PrismaClient({ adapter });
 
     > **注記：**
     >
-    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma クライアントの使用のみをサポートします。 [プリズマ・マイグレート](https://www.prisma.io/docs/concepts/components/prisma-migrate)およびプリズマ・イントロ[プリズマ・イントロスペクション](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
+    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma クライアントの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
 
 3.  `dotenv`ファイルから環境変数を読み込むには、 `.env` } をインストールしてください。
 

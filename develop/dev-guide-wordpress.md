@@ -106,4 +106,4 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 
 ## お困りですか？ {#need-help}
 
-[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](https://tidb.support.pingcap.com/)。
+[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](https://tidb.support.pingcap.com/)。

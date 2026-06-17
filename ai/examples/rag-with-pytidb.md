@@ -94,4 +94,4 @@ streamlit run main.py
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/rag)
+-   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/rag)

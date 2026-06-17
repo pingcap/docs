@@ -149,7 +149,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 ## 非推奨機能 {#deprecated-features}
 
--   [マイダンパー](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview)はバージョン7.5.0で非推奨となり、その機能のほとんどは[Dumpling](/dumpling-overview.md)に置き換えられました。Mydumperの代わりにDumplingを使用することを強くお勧めします。
+-   [mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview)はバージョン7.5.0で非推奨となり、その機能のほとんどは[Dumpling](/dumpling-overview.md)に置き換えられました。Mydumperの代わりにDumplingを使用することを強くお勧めします。
 
 -   TiKV インポーターは v7.5.0 で非推奨になりました。代わりに[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用することを強くお勧めします。
 

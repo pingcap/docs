@@ -244,7 +244,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)、[ベクトルインデックス](/ai/reference/vector-search-index.md)、および[ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)。
     -   [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)、 [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)、 [Jina AI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)とのエコシステム統合。
-    -   Python のプログラミング言語サポート: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) 、 [ピーウィー](/ai/integrations/vector-search-integrate-with-peewee.md)、および[Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md) 。
+    -   Python のプログラミング言語サポート: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) 、 [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)、および[Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md) 。
     -   サンプルアプリケーションとチュートリアル： [Python](/ai/quickstart-via-python.md)または[SQL](/ai/quickstart-via-sql.md)を使用してドキュメントのセマンティック検索を実行します。
 
     詳細については、[ベクトル検索（ベータ版）の概要](/ai/concepts/vector-search-overview.md)を参照してください。
