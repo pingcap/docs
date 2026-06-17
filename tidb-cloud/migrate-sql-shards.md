@@ -110,7 +110,7 @@ CSVファイルの名前は以下のようにしてください。
 
 詳細な手順については、 [データをAmazon S3クラウドstorageにエクスポートする](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)参照してください。
 
-### ステップ3. スキーマを作成します<customcontent plan="starter">TiDB Cloud Starterインスタンス</customcontent><customcontent plan="essential">TiDB Cloud Essentialインスタンス</customcontent><customcontent plan="premium">TiDB Cloud Premiumインスタンス</customcontent><customcontent plan="dedicated">TiDB Cloud Dedicatedクラスター</customcontent> {#step-3-create-schemas-in-customcontent-plan-starter-tidb-cloud-starter-instance-customcontent-customcontent-plan-essential-tidb-cloud-essential-instance-customcontent-customcontent-plan-premium-tidb-cloud-premium-instance-customcontent-customcontent-plan-dedicated-tidb-cloud-dedicated-cluster-customcontent}
+### ステップ3. スキーマを作成します<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent> {#step-3-create-schemas-in-customcontent-plan-starter-tidb-cloud-starter-instance-customcontent-customcontent-plan-essential-tidb-cloud-essential-instance-customcontent-customcontent-plan-premium-tidb-cloud-premium-instance-customcontent-customcontent-plan-dedicated-tidb-cloud-dedicated-cluster-customcontent}
 
 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>でスキーマを次のように作成します。
 
