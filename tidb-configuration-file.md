@@ -820,6 +820,11 @@ Configuration items related to opentracing.reporter.
 + Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
 + Default value: `true`
 
+### `resolve-lock-lite-threshold` <span class="version-mark">New in v5.3.0</span>
+
+- Controls how TiDB resolves locks based on the number of keys involved in one prewrite request for one Region. If the number of keys is smaller than this threshold, TiDB resolves only the lock on the affected key to avoid scanning the whole Region. Otherwise, TiDB scans the Region to resolve related locks.
+- Default value: `512` for v9.0.0 and later versions. In versions earlier than v9.0.0, the default value is `16`.
+
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
