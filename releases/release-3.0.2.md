@@ -135,7 +135,7 @@ TiDB Lightning
 -   TiDBダッシュボード[＃854](https://github.com/pingcap/tidb-ansible/pull/854)の各監視項目の説明を追加します
 -   TiDB サマリーダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[＃855](https://github.com/pingcap/tidb-ansible/pull/855)
 -   TiKVダッシュボード[＃857](https://github.com/pingcap/tidb-ansible/pull/857)のアロケータ統計監視項目を更新します。
--   ノードエクスポーターの警告式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)の単位エラーを修正しました
+-   Node Exporterの警告式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)の単位エラーを修正しました
 -   TiSpark jarパッケージをv2.1.2にアップグレードする[＃862](https://github.com/pingcap/tidb-ansible/pull/862)
 -   Ansible タスク機能[＃867](https://github.com/pingcap/tidb-ansible/pull/867)の説明を更新
 -   TiDBダッシュボード[＃874](https://github.com/pingcap/tidb-ansible/pull/874)のローカルリーダーリクエスト監視項目の表現を更新します。

@@ -170,11 +170,11 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 |      TiCDC      |   8300   | TiCDC通信ポート                                       |
 |        監視       |   9090   | Prometheusサービス用の通信ポート                            |
 |        監視       |   12020  | NgMonitoringサービス用の通信ポート                          |
-|    ノードエクスポーター   |   9100   | 各TiDBクラスタノードのシステム情報を報告するための通信ポート                 |
-| ブラックボックスエクスポーター |   9115   | TiDBクラスタ内のポートを監視するために使用されるBlackbox_exporter通信ポート |
+|    Node Exporter   |   9100   | 各TiDBクラスタノードのシステム情報を報告するための通信ポート                 |
+| Blackbox Exporter |   9115   | TiDBクラスタ内のポートを監視するために使用されるBlackbox_exporter通信ポート |
 |      Grafana      |   3000   | 外部Web監視サービスおよびクライアント（ブラウザ）アクセス用のポート              |
-|    アラートマネージャー   |   9093   | アラートWebサービスのポート                                  |
-|    アラートマネージャー   |   9094   | アラート通信ポート                                        |
+|    Alertmanager   |   9093   | アラートWebサービスのポート                                  |
+|    Alertmanager   |   9094   | アラート通信ポート                                        |
 
 ## 保管要件 {#storage-requirements}
 

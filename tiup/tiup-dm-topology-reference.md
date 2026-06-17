@@ -19,7 +19,7 @@ TiUPを使用した DM クラスターのデプロイメントのトポロジ構
 -   [ワーカーサーバー](#worker_servers) : DMワーカーインスタンスの設定。この設定では、DMコンポーネントのワーカーサービスがデプロイされるマシンを指定します。
 -   [監視サーバー](#monitoring_servers) : Prometheusインスタンスがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaインスタンスがデプロイされるマシンを指定します。
--   [アラートマネージャーサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerインスタンスがデプロイされるマシンを指定します。
+-   [Alertmanagerサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerインスタンスがデプロイされるマシンを指定します。
 
 ### <code>global</code> {#code-global-code}
 
