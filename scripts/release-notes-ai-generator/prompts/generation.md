@@ -56,6 +56,9 @@ The rules below define the wording, opening verbs, and single-entry style.
 - Do not end the entry with a period.
 - Do not expose internal function names unless they are user-visible behavior. Rewrite into observable behavior (e.g. `Fix nil pointer panic in getRegionFromTS` → `Fix the potential panic that occurs when fetching region information during a Stale Read`).
 - SQL functions: backtick ALL CAPS with parentheses (`` `DATE()` ``). SQL keywords: backtick ALL CAPS (`` `HAVING` ``).
+- Normalize product names to their official capitalization: TiDB, TiKV, TiCDC, TiFlash, PD, BR, DM, TiDB Lightning, Dumpling, TiUP. Never use lowercase variants like `ticdc` or `tikv` in the release note text except they are part of variable/parameter names or code comments.
+- Use ONLY the Contributors list provided above for `@[user](url)` attribution. Ignore `author` fields inside `pull_requests[]` — they may be bot accounts (e.g. `ti-chi-bot`) from cherry-pick workflows.
+- End the entry with exactly the links from the Expected links list. Render each as `[#<number>](<full-url>)` where `<number>` is the issue or PR number extracted from the URL path. Do not invent, drop, or reorder links.
 - Use the Improvements style when the type is `improvement`, and the Bug fixes style when the type is `bug_fix`.
 - Output exactly one entry — never section headers, component groups, or more than one bullet.
 - If available context is insufficient, still draft the best note and set `needs_review` to true.
@@ -64,8 +67,6 @@ The rules below define the wording, opening verbs, and single-entry style.
 
 Lead with an action verb. State the user benefit explicitly. Explain why the change matters in terms of performance, stability, or capability. For example, instead of "Not use the stale read request's `start_ts` to update `max_ts`," write "Avoid excessive commit request retrying by not using the Stale Read request's `start_ts` to update `max_ts`."
 
-| Verb | When to use |
-|------|-------------|
 | Verb | When to use |
 |------|-------------|
 | `Support` | New capability: ```Support casting the `STRING` type to the `DOUBLE` type``` |
@@ -136,6 +137,18 @@ When `type` is `"improvement"` or `"bug_fix"`, `release_note` is one Markdown bu
 
 ```
 - <description> <expected links as [#N](url)> <contributors as @[user](url)>
+```
+
+Improvement example:
+
+```
+- Support adding multiple indexes concurrently in the ingest mode [#52596](https://github.com/pingcap/tidb/issues/52596) @[lance6716](https://github.com/lance6716)
+```
+
+Bug fix example:
+
+```
+- Fix the issue that TiCDC might panic when the initialization of the Pulsar producer fails [#4937](https://github.com/pingcap/ticdc/issues/4937) @[wk989898](https://github.com/wk989898)
 ```
 
 When `type` is `"not_needed"`, set `release_note` to the following format:
