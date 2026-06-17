@@ -753,8 +753,8 @@ You can pause a cluster when its state is `ACTIVE` or resume a cluster when its 
     tidbcloud_dedicated_cluster.example_cluster: Modifying...
     tidbcloud_dedicated_cluster.example_cluster: Still modifying... [10s elapsed]
 
-   Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
-   ```
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 3. Use the `terraform state show tidbcloud_dedicated_cluster.${resource-name}` command to check the state:
 
@@ -1190,7 +1190,7 @@ To delete a TiDB Cloud Dedicated cluster, you can delete the configuration of th
     tidbcloud_dedicated_cluster.example_cluster: Destruction complete after 3s
 
     Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
-  ```
+```
 
 Now, if you run the `terraform show` command, it will show no managed resources because the resource has been cleared:
 

@@ -676,7 +676,7 @@ The steps to check and configure these parameters are as follows:
 
     ```bash
     cpupower frequency-info --policy
-      ```
+    ```
 
     ```
     analyzing CPU 0:
