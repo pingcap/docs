@@ -5,22 +5,6 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-IMPROVEMENTS_REFERENCE = (
-    REPO_ROOT
-    / ".ai"
-    / "skills"
-    / "write-review-translate-release-notes"
-    / "references"
-    / "improvements.md"
-)
-BUG_FIXES_REFERENCE = (
-    REPO_ROOT
-    / ".ai"
-    / "skills"
-    / "write-review-translate-release-notes"
-    / "references"
-    / "bug-fixes.md"
-)
 GENERATION_PROMPT_TEMPLATE = (
     REPO_ROOT / "scripts" / "release-notes-ai-generator" / "prompts" / "generation.md"
 )

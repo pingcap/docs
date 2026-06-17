@@ -4,7 +4,6 @@ import dataclasses
 from functools import lru_cache
 import json
 import os
-import re
 import shlex
 import shutil
 import subprocess
@@ -13,11 +12,7 @@ import textwrap
 from pathlib import Path
 from typing import Any
 
-from .constants import (
-    BUG_FIXES_REFERENCE,
-    GENERATION_PROMPT_TEMPLATE,
-    IMPROVEMENTS_REFERENCE,
-)
+from .constants import GENERATION_PROMPT_TEMPLATE
 from .models import GeneratedNote, RowContext
 
 
@@ -146,6 +141,7 @@ class AzureOpenAIClient(AIClient):
             "input": [{"role": "user", "content": prompt}],
             "max_output_tokens": self.MAX_OUTPUT_TOKENS,
         }
+        print(prompt)
         if not self._is_reasoning_model():
             kwargs["temperature"] = self.TEMPERATURE
         response = self.client.responses.create(**kwargs)
@@ -194,8 +190,6 @@ def build_generation_prompt(
     contributors: list[str],
 ) -> str:
     prompt_template = load_prompt_template(GENERATION_PROMPT_TEMPLATE)
-    improvements_reference = load_english_reference_file(IMPROVEMENTS_REFERENCE)
-    bug_fixes_reference = load_english_reference_file(BUG_FIXES_REFERENCE)
     context = {
         "row_number": row_context.row_number,
         "component": row_context.component,
@@ -215,8 +209,6 @@ def build_generation_prompt(
             "EXPECTED_LINKS": json.dumps(expected_links, ensure_ascii=False, indent=2),
             "CONTRIBUTORS": json.dumps(contributors, ensure_ascii=False, indent=2),
             "ROW_CONTEXT": json.dumps(context, ensure_ascii=False, indent=2),
-            "IMPROVEMENTS_REFERENCE": improvements_reference,
-            "BUG_FIXES_REFERENCE": bug_fixes_reference,
         },
     )
 
@@ -261,65 +253,6 @@ def strip_prompt_template_heading(template: str) -> str:
         if lines and not lines[0].strip():
             lines = lines[1:]
     return "\n".join(lines)
-
-
-@lru_cache(maxsize=None)
-def load_reference_file(path: Path) -> str:
-    try:
-        return path.read_text(encoding="utf-8")
-    except FileNotFoundError as exc:
-        raise FileNotFoundError(
-            f"Cannot find release-note reference file: {path}. "
-            "Make sure .ai/skills/write-review-translate-release-notes/references/ exists."
-        ) from exc
-
-
-@lru_cache(maxsize=None)
-def load_english_reference_file(path: Path) -> str:
-    """Load a shared reference file and drop its Chinese-only sections.
-
-    The reference files are shared with the write-review-translate-release-notes
-    skill and document both English and Chinese styles. This script only generates
-    English release notes, so the Chinese sections are stripped before they are
-    injected into the AI prompt to reduce input size. The source files are left
-    unchanged.
-    """
-    return strip_non_english_sections(load_reference_file(path))
-
-
-HEADING_RE = re.compile(r"^(#{1,6})\s+(.*\S)\s*$")
-CHINESE_LIST_ITEM_RE = re.compile(r"^\s*[-*+]\s+Chinese\b", re.IGNORECASE)
-
-
-def strip_non_english_sections(markdown: str) -> str:
-    """Remove any heading whose title mentions "Chinese" and its nested content.
-
-    A section is dropped from its heading line up to (but excluding) the next
-    heading of the same or higher level, which also removes nested subsections
-    such as the Chinese opening-verbs table. Table-of-contents list items that
-    start with "Chinese" are also dropped so the contents no longer point to
-    removed sections.
-    """
-    result: list[str] = []
-    skip_level: int | None = None
-    for line in markdown.splitlines():
-        match = HEADING_RE.match(line)
-        if match:
-            level = len(match.group(1))
-            if skip_level is not None and level > skip_level:
-                continue  # still inside the skipped section
-            skip_level = None  # a sibling or ancestor heading ends the skip
-            if "chinese" in match.group(2).lower():
-                skip_level = level
-                continue
-            result.append(line)
-            continue
-        if skip_level is not None:
-            continue
-        if CHINESE_LIST_ITEM_RE.match(line):
-            continue
-        result.append(line)
-    return re.sub(r"\n{3,}", "\n\n", "\n".join(result)).strip() + "\n"
 
 
 def extract_json_object(output: str) -> dict[str, Any]:
