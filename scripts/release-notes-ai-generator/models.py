@@ -60,6 +60,7 @@ class RowContext:
     formatted_release_note: str
     issues: list[IssueInfo]
     pulls: list[PullInfo]
+    fetch_failed_urls: list[str] = dataclasses.field(default_factory=list)
 
 
 @dataclasses.dataclass
@@ -79,6 +80,9 @@ class RowInput:
 class GitHubDataCache:
     issues: dict[str, IssueInfo]
     pulls: dict[str, PullInfo]
+    # URLs whose GitHub data could not be fetched during prefetch, so the AI
+    # generates without their issue/PR body and diff.
+    failed_urls: set[str] = dataclasses.field(default_factory=set)
 
 
 @dataclasses.dataclass

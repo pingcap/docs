@@ -204,8 +204,10 @@ def add_export_markdown_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--output-release-file",
         help=(
-            "Output Markdown file. Defaults to release-{version}-updated-by-ai.md "
-            "if release-{version}.md already exists, otherwise release-{version}.md."
+            "Output Markdown file. Defaults to release-{version}-updated-by-ai.md. "
+            "The default never writes the canonical release-{version}.md, because "
+            "the generator only produces Improvements and Bug fixes, not a complete "
+            "release note."
         ),
     )
     parser.add_argument(
@@ -269,6 +271,14 @@ def run_generate(args: argparse.Namespace) -> int:
     if args.sheet not in workbook.sheetnames:
         raise ValueError(f"Cannot find sheet {args.sheet!r} in {args.excel}")
     sheet = workbook[args.sheet]
+
+    if end_row is not None and end_row > sheet.max_row:
+        print(
+            f"--end-row {end_row} exceeds the last row ({sheet.max_row}); "
+            f"clamping to {sheet.max_row} to avoid materializing blank rows",
+            flush=True,
+        )
+        end_row = sheet.max_row
 
     if row_range_specified:
         print(
@@ -336,9 +346,18 @@ def run_generate(args: argparse.Namespace) -> int:
             sheet, header, start_row=start_row, end_row=end_row,
         )
 
-    move_not_needed_rows_to_sheet(
-        workbook, sheet, header, start_row=start_row, end_row=end_row,
-    )
+    if row_range_specified:
+        # Moving (deleting) not-needed rows would shift the row numbers of later
+        # rows, breaking the stable-row-number contract that segmented resume
+        # relies on. Leave them in place; they are still excluded from Markdown
+        # because their AI note starts with the not-needed prefix.
+        print(
+            "Row range specified: keeping not-needed rows in place to preserve "
+            "row numbers for resume (they are still excluded from Markdown)",
+            flush=True,
+        )
+    else:
+        move_not_needed_rows_to_sheet(workbook, sheet, header)
     save_workbook_safely(workbook, processed_excel_path)
 
     print("Phase 1 (generate) completed.", flush=True)
@@ -396,10 +415,12 @@ def parse_on_off(value: str) -> str:
 
 
 def default_output_release_file(releases_dir: Path, version: str) -> Path:
-    release_file = releases_dir / f"release-{version}.md"
-    if release_file.is_file():
-        return releases_dir / f"release-{version}-updated-by-ai.md"
-    return release_file
+    # Always write to the "-updated-by-ai" name, never the canonical
+    # release-<version>.md. The generator only produces Improvements and Bug
+    # fixes, not a complete formal release note, so the default output must not
+    # be mistaken for the official file. This name is also skipped by the
+    # historical-note scanner, so a re-run never treats the draft as published.
+    return releases_dir / f"release-{version}-updated-by-ai.md"
 
 
 def default_processed_excel_path(excel_path: Path) -> Path:

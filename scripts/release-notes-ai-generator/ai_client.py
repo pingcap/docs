@@ -207,6 +207,7 @@ def build_generation_prompt(
         "contributors": contributors,
         "issues": [dataclasses.asdict(issue) for issue in row_context.issues],
         "pull_requests": [dataclasses.asdict(pull) for pull in row_context.pulls],
+        "fetch_failed_urls": row_context.fetch_failed_urls,
     }
     return render_prompt_template(
         prompt_template,

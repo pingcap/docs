@@ -939,6 +939,13 @@ def collect_markdown_entries_from_sheet(
             )
             continue
 
+        # A failed AI row must not fall back to formated_release_note: that text
+        # is an unvalidated draft or placeholder. Skip it so failed rows are not
+        # rendered to Markdown. The fallback below is only for rows with no AI
+        # note at all (e.g. --involve-ai-generation OFF).
+        if ai_note.startswith("AI_GENERATION_FAILED:"):
+            continue
+
         formatted_notes = split_lines(row_input.formatted_release_note)
         if not formatted_notes:
             continue
@@ -1011,6 +1018,7 @@ def prefetch_github_data(row_inputs: list[RowInput], github: Any, github_workers
     pr_urls = unique_ordered(url for row_input in row_inputs for url in row_input.pr_urls)
     issues = {}
     pulls = {}
+    failed_urls: set[str] = set()
 
     if not issue_urls and not pr_urls:
         return GitHubDataCache(issues=issues, pulls=pulls)
@@ -1038,12 +1046,13 @@ def prefetch_github_data(row_inputs: list[RowInput], github: Any, github_workers
                 data = future.result()
             except Exception as exc:  # noqa: BLE001
                 print(f"Failed to prefetch GitHub {item_type} {url}: {exc}", file=sys.stderr, flush=True)
+                failed_urls.add(url)
                 continue
             if item_type == "issue":
                 issues[url] = data
             else:
                 pulls[url] = data
-    return GitHubDataCache(issues=issues, pulls=pulls)
+    return GitHubDataCache(issues=issues, pulls=pulls, failed_urls=failed_urls)
 
 
 def generate_note_for_row(
@@ -1096,6 +1105,11 @@ def build_row_context_from_cache(row_input: RowInput, github_cache: GitHubDataCa
         if pull.author:
             pr_authors.append(pull.author)
     pulls = cap_pull_file_summaries(pulls, MAX_ROW_FILES_SUMMARY_CHARS)
+    fetch_failed_urls = [
+        url
+        for url in (*row_input.issue_urls, *row_input.pr_urls)
+        if url in github_cache.failed_urls
+    ]
     return RowContext(
         row_number=row_input.row_number,
         component=row_input.component,
@@ -1108,6 +1122,7 @@ def build_row_context_from_cache(row_input: RowInput, github_cache: GitHubDataCa
         formatted_release_note=row_input.formatted_release_note,
         issues=issues,
         pulls=pulls,
+        fetch_failed_urls=fetch_failed_urls,
     )
 
 

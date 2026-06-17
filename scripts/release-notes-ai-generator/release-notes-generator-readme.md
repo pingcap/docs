@@ -79,7 +79,7 @@ cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel.xlsx \
-    --releases-dir releases \
+    --releases-dir ../releases \
     --ai-provider azure
 ```
 
@@ -90,7 +90,7 @@ cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel.xlsx \
-    --releases-dir releases
+    --releases-dir ../releases
 ```
 
 ### Phase 1: Resume from interruption
@@ -102,7 +102,7 @@ cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir releases \
+    --releases-dir ../releases \
     --ai-provider azure \
     --start-row 51
 ```
@@ -113,7 +113,7 @@ You can also limit to a specific range with `--end-row`:
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir releases \
+    --releases-dir ../releases \
     --ai-provider azure \
     --start-row 51 --end-row 100
 ```
@@ -129,7 +129,7 @@ cd scripts
 python3 -m release-notes-ai-generator export-markdown \
     --version 8.5.7 \
     --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir releases \
+    --releases-dir ../releases \
     --release-date "August 14, 2025"
 ```
 
@@ -167,7 +167,7 @@ python3 -m release-notes-ai-generator export-markdown \
 | `--excel <workbook-path>` | Yes | None | Path to the processed Excel workbook (output of the `generate` phase). |
 | `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to read entries from. |
 | `--releases-dir <releases-dir>` | Yes | None | Path to the existing English release notes directory (used to determine the default output path). |
-| `--output-release-file <path>` | No | Conditional | Output Markdown file. Defaults to `release-<version>-updated-by-ai.md` if `release-<version>.md` already exists, otherwise `release-<version>.md`. |
+| `--output-release-file <path>` | No | `release-<version>-updated-by-ai.md` | Output Markdown file. The default never writes the canonical `release-<version>.md`, because the generator produces only `Improvements` and `Bug fixes`, not a complete release note. |
 | `--release-date <date>` | No | `TBD` | Release date text for the generated Markdown header. |
 
 ## Generated files
@@ -176,13 +176,12 @@ python3 -m release-notes-ai-generator export-markdown \
 
 - The source Excel file passed to `--excel` is not overwritten (unless `--output-excel` points to the same file, which is useful for resume scenarios).
 - The processed Excel file is written to `<original-name>_processed.xlsx` next to the source workbook, or to the path specified by `--output-excel`.
-- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook.
+- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook. This move is skipped when `--start-row` or `--end-row` is used, so that deleting rows does not shift the row numbers a later segment relies on; such rows stay in the main sheet but are still excluded from Markdown.
 
 **Phase 2 (`export-markdown`):**
 
 - The generated Markdown file is written to `--output-release-file` when that option is specified.
-- If `--output-release-file` is omitted and `release-<version>.md` already exists under `--releases-dir`, the generated Markdown file is written to `release-<version>-updated-by-ai.md`.
-- If `--output-release-file` is omitted and `release-<version>.md` does not exist under `--releases-dir`, the generated Markdown file is written to `release-<version>.md`.
+- If `--output-release-file` is omitted, the generated Markdown file is written to `release-<version>-updated-by-ai.md` under `--releases-dir`. The default never overwrites the canonical `release-<version>.md`, because the generated file is an incomplete draft (only `Improvements` and `Bug fixes`).
 - The Excel workbook is not modified during this phase.
 
 ## Reference: processing rules
@@ -278,7 +277,7 @@ This separation is intentional. If the same issue appears again in the same majo
 For target version `8.5.7`, the same-series quarantine sheet is named:
 
 ```text
-issue_already_in_earlier_v8.5.x
+issue_already_in_earlier_v8.5
 ```
 
 A row is moved to this sheet when all of the following are true:

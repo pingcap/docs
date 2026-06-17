@@ -74,6 +74,11 @@ About `formatted_release_note_from_excel`:
 - This field can also contain a draft release note written by the code PR author. In that case, use the draft as an important reference for the final release note, but verify and refine it against the PR code changes first and the issue description second.
 - Do not copy the draft blindly. Preserve its useful user-facing intent, correct unclear or inaccurate wording, and still follow all release-note style rules above.
 
+About `fetch_failed_urls`:
+
+- This field lists issue or PR links whose GitHub data (title, body, labels, and changed files) could not be fetched, so the context for those links is missing.
+- When it is non-empty, rely on the Excel fields (`pr_title_from_excel`, `formatted_release_note_from_excel`, `issue_type_from_excel`) to draft the note, and set `needs_review` to true.
+
 Improvements reference:
 {{IMPROVEMENTS_REFERENCE}}
 
