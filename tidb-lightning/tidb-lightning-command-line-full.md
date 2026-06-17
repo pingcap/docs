@@ -22,7 +22,7 @@ You can configure the following parameters using `tidb-lightning`:
 | `-f <rule>` | [Table filter rules](/table-filter.md). Can be specified multiple times. | `mydumper.filter` |
 | `--backend <backend>` | Select an import mode. `local` refers to [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md); `tidb` refers to [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). | `tikv-importer.backend` |
 | `--log-file <file>` | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
-| `--status-addr <ip:port>` | Listening address of the TiDB Lightning server | `lightning.status-port` |
+| `--status-addr <ip:port>` | Listening address of the TiDB Lightning HTTP server | `lightning.status-addr` |
 | `--pd-urls <host1:port1,host2:port2,...,hostn:portn>` | PD endpoint address. Starting from v7.6.0, TiDB supports setting multiple PD addresses. | `tidb.pd-addr` |
 | `--tidb-host <host>` | TiDB server host | `tidb.host` |
 | `--tidb-port <port>` | TiDB server port (default = 4000) | `tidb.port` |
@@ -36,7 +36,7 @@ You can configure the following parameters using `tidb-lightning`:
 | `--ca <file>` | CA certificate path for TLS connection | `security.ca-path` |
 | `--cert <file>` | Certificate path for TLS connection | `security.cert-path` |
 | `--key <file>` | Private key path for TLS connection | `security.key-path` |
-| `--server-mode` | Start TiDB Lightning in server mode | `lightning.server-mode` |
+| `--server-mode` | Start TiDB Lightning in server mode, waiting for import tasks submitted through the HTTP API instead of starting immediately | `lightning.server-mode` |
 
 If you specify both a command line parameter and the corresponding setting in the configuration file, the command line parameter takes precedence. For example, running `tiup tidb-lightning -L debug --config cfg.toml` would always set the log level to "debug" regardless of the content of `cfg.toml`.
 
