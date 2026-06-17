@@ -47,7 +47,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 * 在 v4.0.6 之前的版本中，如果你在使用 TiDB Lightning 导入数据前就创建了 TiFlash 副本，数据导入会失败。你必须先向表中导入数据，再为该表创建 TiFlash 副本。
 
-* 如果 TiDB 和 TiDB Lightning 都是 v4.0.6 或更高版本，无论表是否有 TiFlash 副本，你都可以使用 TiDB Lightning 向该表导入数据。需要注意的是，这可能会导致 TiDB Lightning 导入过程变慢，具体取决于 lightning 主机的网卡带宽、TiFlash 节点的 CPU 和磁盘负载，以及 TiFlash 副本的数量。
+* 如果 TiDB 和 TiDB Lightning 都是 v4.0.6 或更高版本，无论表是否有 TiFlash 副本，你都可以使用 TiDB Lightning 向该表导入数据。需要注意的是，这可能会导致 TiDB Lightning 过程变慢，具体取决于 TiDB Lightning 主机的网卡带宽、TiFlash 节点的 CPU 和磁盘负载，以及 TiFlash 副本的数量。
 
 * 建议不要复制超过 1,000 张表，否则会降低 PD 的调度性能。该限制将在后续版本中移除。
 

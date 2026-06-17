@@ -8,6 +8,19 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 6 月 16 日
+
+**常规变更**
+
+- 为 [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md) 添加域名验证。
+
+    在以下场景中，**Allowed Email Domains** 字段为必填。为提高安全性，你必须先验证域名，然后才能在此字段中输入：
+
+    - 为 OIDC 或 SAML 身份验证方法启用自动预配
+    - 为 SAML 身份验证方法启用 SCIM 预配
+
+  更多信息，参见 [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml)。
+
 ## 2026 年 6 月 9 日
 
 **常规变更**
@@ -22,6 +35,8 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
         - `Frankfurt (eu-central-1)`
         - `Singapore (ap-southeast-1)`
 
+<CustomContent language="en,zh">
+
 **高可用性变更**
 
 - **TiDB Cloud Essential**
@@ -31,6 +46,8 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
         如果你需要区域高可用和跨可用区故障转移，建议选择 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)。
 
         此变更不影响 2026 年 6 月 9 日之前创建的 TiDB Cloud Essential 实例。
+        
+</CustomContent>
 
 **API 变更**
 

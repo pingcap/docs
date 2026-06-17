@@ -253,7 +253,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td rowspan="1" style="background-color: white;">高可用性</td>
     <td>跨可用区故障切换</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;"><CustomContent language="en,zh">❌</CustomContent><CustomContent language="ja">✅</CustomContent></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>

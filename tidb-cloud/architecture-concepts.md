@@ -50,11 +50,31 @@ Starter 方案非常适合刚开始使用 TiDB Cloud 的用户。它为开发者
 
 对于负载持续增长、需要实时扩展的应用，Essential 方案提供灵活性和性能，助力你的业务增长，具备以下特性：
 
+<CustomContent language="en,zh">
+
 - **增强功能**：包含 Starter 方案的全部功能，并具备处理更大、更复杂负载的能力，以及高级安全特性。
 - **自动扩展**：自动调整存储和计算资源，高效应对不断变化的负载需求。
 - **可预测的定价**：根据存储和计算资源的 Request Capacity Units (RCUs) 计费，提供透明、按用量计费的定价模式，随需扩展，按实际使用付费，无隐藏费用。
 
 TiDB Cloud Essential 提供 Zonal High Availability，将所有组件部署在同一可用区内，以降低网络延时。更多信息，参见 [TiDB Cloud 的高可用性](/tidb-cloud/serverless-high-availability.md)。
+
+</CustomContent>
+
+<CustomContent language="ja">
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **High availability**: built-in fault tolerance and redundancy ensure your applications remain available and resilient, even during infrastructure failures.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+{{{ .essential }}} offers two types of high availability to address varying operational requirements.
+
+- Zonal High Availability: places all components within the same availability zone, which results in lower network latency.
+- Regional High Availability: distributes nodes across multiple availability zones, providing maximum infrastructure isolation and redundancy.
+
+For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+
+</CustomContent>
 
 ## {{{ .premium }}}
 
