@@ -150,7 +150,7 @@ A DSN (Data Source Name) is a simple yet powerful way to configure and manage yo
 #### DSN Format and Parameters
 
 ```bash title='DSN Format'
-databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=value1]
+lake[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=value1]
 ```
 
 | Common DSN Parameters | Description                          |
