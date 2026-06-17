@@ -4,7 +4,7 @@ summary: TiDB Cloudの2026年のリリースノートについてご確認くだ
 aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 ---
 
-# TiDB Cloud 2026年のリリースノート {#tidb-cloud-release-notes-in-2026}
+# TiDB Cloud 2026年のリリースノート <!--Corresponding EN commit: 0ed8bfd06dfd8bab2c9628b84f8b9b96a529277f-->
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
