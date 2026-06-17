@@ -39,7 +39,7 @@ The SETTINGS clause can be used with the following SQL statements:
 This example demonstrates how the SETTINGS clause can be used to adjust the timezone parameter in a SELECT query, impacting the displayed result of `now()`:
 
 ```sql
--- When no timezone is set, Databend defaults to UTC, so now() returns the current UTC timestamp
+-- When no timezone is set, {{{ .lake }}} defaults to UTC, so now() returns the current UTC timestamp
 SELECT timezone(), now();
 
 ┌─────────────────────────────────────────┐
@@ -117,3 +117,4 @@ This example allows the COPY INTO operation to utilize up to 100 threads for par
 
 ```sql
 SETTINGS (max_threads = 100) COPY INTO ...
+```

@@ -46,7 +46,7 @@ Github: https://github.com/tidbcloud/lakesql
 
 --------------------------------------------------------------------------------
 
->>> Downloading LakeSQL via https://repo.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
+>>> Downloading LakeSQL archive via https://lakesql-bin.tidbcloud.com/lakesql/v0.22.2/lakesql-aarch64-apple-darwin.tar.gz ✓
 >>> Unpacking archive to /Users/eric/.lakesql ... ✓
 >>> Adding LakeSQL path to /Users/eric/.zprofile ✓
 >>> Adding LakeSQL path to /Users/eric/.profile ✓
@@ -150,7 +150,7 @@ A DSN (Data Source Name) is a simple yet powerful way to configure and manage yo
 #### DSN Format and Parameters
 
 ```bash title='DSN Format'
-databend[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=value1]
+lake[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=value1]
 ```
 
 | Common DSN Parameters | Description                          |

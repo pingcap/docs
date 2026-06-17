@@ -11,7 +11,7 @@ Contains information about {{{ .lake }}} server configs.
 >
 > You can disable access to `configs` table using the configuration option `disable_system_table_load`.
 >
-> For instance, users of DatabendCloud will not be able to see this table.
+> For instance, {{{ .lake }}} users will not be able to see this table.
 
 ```sql
 mysql> SELECT * FROM system.configs;

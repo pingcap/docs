@@ -32,7 +32,7 @@ A snapshot is a JSON file that does not save the table's data but indicate the s
 
 A segment is a JSON file that organizes the storage blocks (at least 1, at most 1,000) where the data is stored. If you run [FUSE_SEGMENT](/tidb-cloud-lake/sql/fuse-segment.md) against a snapshot with the snapshot ID, you can find which segments are referenced by the snapshot.
 
-Databends saves actual table data in parquet files and considers each parquet file as a block. If you run [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md) against a snapshot with the snapshot ID, you can find which blocks are referenced by the snapshot.
+{{{ .lake }}} saves actual table data in Parquet files and considers each Parquet file as a block. If you run [FUSE_BLOCK](/tidb-cloud-lake/sql/fuse-block.md) against a snapshot with the snapshot ID, you can find which blocks are referenced by the snapshot.
 
 {{{ .lake }}} creates a unique ID for each database and table for storing the snapshot, segment, and block files and saves them to your object storage in the path `<bucket_name>/<tenant_id>/<db_id>/<table_id>/`. Each snapshot, segment, and block file is named with a UUID (32-character lowercase hexadecimal string).
 

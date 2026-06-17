@@ -63,14 +63,14 @@ CREATE STAGE my_s3_stage
 
 The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in {{{ .lake }}} with an existing table in {{{ .lake }}}, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
 
-```sql title='Databend Cloud:'
+```sql title='In {{{ .lake }}}:'
 ATTACH TABLE employees_backup
     's3://databend-toronto/1/216/'
     CONNECTION = (CONNECTION_NAME = 'toronto');
 
 ```
 
-```sql title='Databend Cloud:'
+```sql title='In {{{ .lake }}}:'
 ATTACH TABLE population_readonly
     's3://databend-toronto/1/556/'
     CONNECTION = (CONNECTION_NAME = 'toronto')
