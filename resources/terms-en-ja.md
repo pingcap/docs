@@ -110,7 +110,6 @@
 | Stability | 安定性 | Do not translate to 「安定」. |
 | Stale Read | ステイル読み取り | Do not translate to 「古い読み取り」. |
 | Starter | Starter | TiDB Cloud tier name, keep in English. |
-| storage | storage | When used as a configuration section heading, keep in English. Do not translate to 「保管所」. |
 | TEXT | TEXT | SQL data type, keep in English. |
 | TiCDC Canal | TiCDC Canal | Feature name, keep in English. Do not translate to 「TiCDC運河」. |
 | TiCDC Changefeed | TiCDC Changefeed | Keep space between TiCDC and Changefeed. |
