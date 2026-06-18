@@ -70,8 +70,10 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
 ## What's next
 
-After your {{{ .starter }}} or Essential instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your instance.
+- After your {{{ .starter }}} or Essential instance is created, follow the instructions in [Connect to TiDB Cloud via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your instance.
 
-> **Note:**
->
-> If you do not set a password, you cannot connect to the {{{ .starter }}} or Essential instance.
+    > **Note:**
+    >
+    > If you do not set a password, you cannot connect to the {{{ .starter }}} or Essential instance.
+
+- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md).

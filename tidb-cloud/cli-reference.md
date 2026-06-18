@@ -1,5 +1,5 @@
 ---
-title: TiDB Cloud CLI Reference
+title: TiDB Cloud CLI Reference (Beta)
 summary: Provides an overview of TiDB Cloud CLI.
 ---
 
