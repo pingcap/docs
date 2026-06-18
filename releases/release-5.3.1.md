@@ -127,7 +127,7 @@ TiDB バージョン: 5.3.1
         -   ロードタスクを停止するとタスク[＃3771](https://github.com/pingcap/tiflow/issues/3771)が予期せず転送されるバグを修正
         -   ローダー[＃3252](https://github.com/pingcap/tiflow/issues/3252)のコマンド`query-status`で間違った進行状況が返される問題を修正しました
         -   クラスター内に異なるバージョンの TiCDC ノードがある場合に HTTP API が動作しない問題を修正[＃3483](https://github.com/pingcap/tiflow/issues/3483)
-        -   S3storageがTiCDC Redo Log [＃3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合に TiCDC が異常終了する問題を修正しました
+        -   S3ストレージがTiCDC Redo Log [＃3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合に TiCDC が異常終了する問題を修正しました
         -   デフォルト値を複製できない問題を修正[＃3793](https://github.com/pingcap/tiflow/issues/3793)
         -   `batch-replace-enable`無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)照会するときにのみ同期メトリックが更新される問題を修正しました
@@ -162,4 +162,4 @@ TiDB バージョン: 5.3.1
         -   一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
         -   storageURL プレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合にTiDB Lightning がエラーを返すバグを修正しました[＃32742](https://github.com/pingcap/tidb/issues/32742)
         -   --log-file=&quot;-&quot; を設定しても stdout [＃29876](https://github.com/pingcap/tidb/issues/29876)にログが出力されない問題を修正しました
-        -   S3storageパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃30709](https://github.com/pingcap/tidb/issues/30709)

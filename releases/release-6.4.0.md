@@ -37,7 +37,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   SQL ステートメントを使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮するサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
 
-    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQLステートメントを手動で実行してTiFlash内の物理データを即座に圧縮することで、storage容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
+    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQLステートメントを手動で実行してTiFlash内の物理データを即座に圧縮することで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
 
     SQL ステートメント`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できます。
 
@@ -147,7 +147,7 @@ TiDBバージョン: 6.4.0-DMR
 
     バージョン6.1.0より前のTiKVは、クライアントから渡された生データのみを保存するため、基本的なキーバリューの読み書き機能しか提供していませんでした。さらに、異なるコーディング方式とスコープのないデータ範囲のため、TiDB、トランザクションKV、およびRawKVを同じTiKVクラスタで同時に使用することはできません。そのため、複数のクラスタが必要となり、マシンコストと導入コストが増加します。
 
-    TiKV API V2は、新しいRawKVstorageフォーマットとアクセスインターフェースを提供し、以下の利点をもたらします。
+    TiKV API V2は、新しいRawKVストレージフォーマットとアクセスインターフェースを提供し、以下の利点をもたらします。
 
     -   MVCCにデータを保存する際に、記録されたデータの変更タイムスタンプを付加します。このタイムスタンプに基づいて変更データキャプチャ（CDC）が実装されます。この機能は実験的であり、詳細は[TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)に記載されています。
     -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。

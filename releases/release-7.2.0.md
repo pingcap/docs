@@ -210,7 +210,7 @@ TiDB バージョン: 7.2.0
 
     -   TiCDC
 
-        -   オブジェクトstorageサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
         -   Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンドにレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加
 

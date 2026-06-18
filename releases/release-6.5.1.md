@@ -71,7 +71,7 @@ TiDB バージョン: 6.5.1
     -   TiCDC
 
         -   プルベースのシンクを有効にしてシステムスループットを最適化します[＃8232](https://github.com/pingcap/tiflow/issues/8232) @ [Rustin170506](https://github.com/Rustin170506)
-        -   GCS 互換または Azure 互換のオブジェクトstorage[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
+        -   GCS 互換または Azure 互換のオブジェクトストレージ[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
         -   シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装します[＃5928](https://github.com/pingcap/tiflow/issues/5928) @ [amyangfei](https://github.com/amyangfei) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
@@ -167,7 +167,7 @@ TiDB バージョン: 6.5.1
     -   TiCDC
 
         -   TiKV または TiCDC ノード[＃8174](https://github.com/pingcap/tiflow/issues/8174) @ [hicqu](https://github.com/hicqu)スケールインまたはスケールアウトなどの特別なシナリオで、changefeed がスタックする可能性がある問題を修正しました。
-        -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [CharlesCheung96](https://github.com/CharlesCheung96)のstorageパスで事前チェックが実行されない問題を修正
+        -   REDOログ[＃6335](https://github.com/pingcap/tiflow/issues/6335) @ [CharlesCheung96](https://github.com/CharlesCheung96)のストレージパスで事前チェックが実行されない問題を修正
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [CharlesCheung96](https://github.com/CharlesCheung96)に対して、REDO ログが許容できる期間が不十分である問題を修正しました
         -   `transaction-atomicity`と`protocol`構成ファイル[＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [CharlesCheung96](https://github.com/CharlesCheung96)経由で更新できない問題を修正
         -   TiCDC が過度に多数のテーブル[＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [overvenus](https://github.com/overvenus)を複製するとチェックポイントが進めなくなる問題を修正しました

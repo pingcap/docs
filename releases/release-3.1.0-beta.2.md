@@ -27,8 +27,8 @@ TiDB Ansible バージョン: 3.1.0-beta.2
 -   TiDB
     -   列属性に`AutoRandom`キーワードを追加することで、TiDB が主キーにランダムな整数を自動的に割り当てるようになり、主キー`AUTO_INCREMENT`によって発生する書き込みホットスポットを回避します[＃14555](https://github.com/pingcap/tidb/pull/14555)
     -   DDL ステートメント[＃14537](https://github.com/pingcap/tidb/pull/14537)による列ストアのレプリカの作成または削除のサポート
-    -   オプティマイザが異なるstorageエンジンを独立して選択できる機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
-    -   SQLヒントが異なるstorageエンジンをサポートする機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
+    -   オプティマイザが異なるストレージエンジンを独立して選択できる機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
+    -   SQLヒントが異なるストレージエンジンをサポートする機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
     -   `tidb_replica_read`システム変数[＃13464](https://github.com/pingcap/tidb/pull/13464)を使用してフォロワーからのデータの読み取りをサポート
 -   TiKV
     -   Raftstore

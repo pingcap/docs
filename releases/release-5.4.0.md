@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.4 Release Notes
-summary: TiDB 5.4 では、GBK 文字セット、インデックス マージ、古いデータの読み取り、統計構成の永続化、および TiKV のログstorageエンジンとしてのRaft Engine の使用がサポートされます。また、バックアップの影響が改善され、Azure Blobstorageがサポートされ、 TiFlashと MPP エンジンが強化されます。互換性の変更には、新しいシステム変数と構成ファイル パラメーターが含まれます。その他の改善点には、SQL、セキュリティ、パフォーマンス、安定性、高可用性、データ移行、診断効率、およびデプロイメントが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、 BR、TiCDC、DM、 TiDB Lightning、および TiDB Binlogの問題に対処します。
+summary: TiDB 5.4 では、GBK 文字セット、インデックス マージ、古いデータの読み取り、統計構成の永続化、および TiKV のログストレージエンジンとしてのRaft Engine の使用がサポートされます。また、バックアップの影響が改善され、Azure Blobストレージがサポートされ、 TiFlashと MPP エンジンが強化されます。互換性の変更には、新しいシステム変数と構成ファイル パラメーターが含まれます。その他の改善点には、SQL、セキュリティ、パフォーマンス、安定性、高可用性、データ移行、診断効率、およびデプロイメントが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、 BR、TiCDC、DM、 TiDB Lightning、および TiDB Binlogの問題に対処します。
 ---
 
 # TiDB 5.4 リリースノート {#tidb-5-4-release-notes}
@@ -15,9 +15,9 @@ TiDB バージョン: 5.4.0
 -   インデックスマージを使用してデータにアクセスすることをサポートします。これは、複数の列のインデックスのフィルタリング結果をマージします。
 -   セッション変数を使用して古いデータを読み取ることをサポートする
 -   統計情報を収集するための設定を永続化する機能をサポートする
--   TiKVのログstorageエンジンとしてRaft Engineを使用することをサポートする（実験的）
+-   TiKVのログストレージエンジンとしてRaft Engineを使用することをサポートする（実験的）
 -   バックアップがクラスタに与える影響を最適化する
--   バックアップstorageとしてAzure Blobstorageの使用をサポートします。
+-   バックアップストレージとしてAzure Blobストレージの使用をサポートします。
 -   TiFlashおよびMPPエンジンの安定性と性能を継続的に向上させる
 -   TiDB Lightningに、既存のテーブルへのデータインポートを許可するかどうかを決定するスイッチを追加します。
 -   継続的プロファイリング機能の最適化（実験的）
@@ -52,7 +52,7 @@ TiDB バージョン: 5.4.0
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加された | DTFile のバージョンを指定します。デフォルト値は`2`で、このバージョンではハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムがサポートされます。                                                                                                                                                                     |
 | TiFlash        | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 修正済み     | デフォルト値は`10`に変更されます。                                                                                                                                                                                                                                                                                                   |
 | TiFlash        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 修正済み     | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                 |
-| TiFlash        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftデータをstorageにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
+| TiFlash        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftデータをストレージにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
 | TiFlash        | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftを処理するスレッドの許容数。これはRaftstoreスレッドプールのサイズです。デフォルト値は`4`です。                                                                                                                                                                                                                                                             |
 | TiDBデータ移行（DM）  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新しく追加された | `CREATE` SQL ステートメントのデフォルトの照合照合順序を同期するモード。値のオプションは「loose」（デフォルト）と「strict」です。                                                                                                                                                                                                                                          |
 | TiCDC          | `max-message-bytes`                                                                                             | 修正済み     | Kafkaシンクの`max-message-bytes`のデフォルト値を`104857601`に変更します（10MB）。                                                                                                                                                                                                                                                          |
@@ -105,7 +105,7 @@ TiDB バージョン: 5.4.0
 
 ### パフォーマンス {#performance}
 
--   **カラム型storageエンジンTiFlashおよび演算エンジンMPPの安定性とパフォーマンスの向上を継続する。**
+-   **カラム型ストレージエンジンTiFlashおよび演算エンジンMPPの安定性とパフォーマンスの向上を継続する。**
 
     -   MPPエンジンへの関数委譲をさらに強化する：
 
@@ -114,7 +114,7 @@ TiDB バージョン: 5.4.0
 
     -   リソース利用率を向上させるための弾性スレッドプール機能を導入（実験的）
 
-    -   TiKVからデータを複製する際に、行ベースのstorage形式から列ベースのstorage形式へのデータ変換の効率を向上させ、データ複製の全体的なパフォーマンスを50%向上させました。
+    -   TiKVからデータを複製する際に、行ベースのストレージ形式から列ベースのストレージ形式へのデータ変換の効率を向上させ、データ複製の全体的なパフォーマンスを50%向上させました。
 
     -   一部の設定項目のデフォルト値を調整することで、 TiFlashのパフォーマンスと安定性を向上させることができます。HTAPハイブリッドロード環境では、単一テーブルに対する単純なクエリのパフォーマンスが最大20%向上します。
 
@@ -159,7 +159,7 @@ TiDB バージョン: 5.4.0
 
 -   **Raft Engineのサポート（実験的）**
 
-    TiKVのログstorageエンジンとして[Raft Engine](https://github.com/tikv/raft-engine)使用をサポートします。RocksDBと比較して、 Raft EngineはTiKVのI/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、特定の負荷条件下ではフォアグラウンドスループットを約5%向上させ、テールレイテンシーを20%削減します。さらに、 Raft Engineはログリサイクルの効率を向上させ、極端な条件下でのログ蓄積の問題を解決します。
+    TiKVのログストレージエンジンとして[Raft Engine](https://github.com/tikv/raft-engine)使用をサポートします。RocksDBと比較して、 Raft EngineはTiKVのI/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、特定の負荷条件下ではフォアグラウンドスループットを約5%向上させ、テールレイテンシーを20%削減します。さらに、 Raft Engineはログリサイクルの効率を向上させ、極端な条件下でのログ蓄積の問題を解決します。
 
     Raft Engine はまだ実験的機能であり、デフォルトでは無効になっています。v5.4.0 のRaft Engineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスターをアップグレードする前に、すべての TiKV ノードでRaft Engine が無効になっていることを確認する必要があります。Raft Raft Engine はv5.4.0 以降のバージョンでのみ使用することをお勧めします。
 
@@ -201,9 +201,9 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/br/br-auto-tune.md)
 
--   **バックアップのターゲットstorageとしてAzure Blob Storageをサポートする**
+-   **バックアップのターゲットストレージとしてAzure Blob Storageをサポートする**
 
-    Backup &amp; Restore (BR) は、リモートバックアップstorageとして Azure Blob Storage をサポートしています。Azure クラウドに TiDB をデプロイしている場合、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
+    Backup &amp; Restore (BR) は、リモートバックアップストレージとして Azure Blob Storage をサポートしています。Azure クラウドに TiDB をデプロイしている場合、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
 
     [ユーザー向けドキュメント](/br/backup-and-restore-storages.md)
 
@@ -235,7 +235,7 @@ TiDB バージョン: 5.4.0
 
     -   リレーログの状態を`source`にバインドします。 `source`どの DM-worker に移行されても、有効または無効の元の状態を維持します。
 
-    -   リレーログのstorageパスをDM-workerの設定ファイルに移動します。
+    -   リレーログのストレージパスをDM-workerの設定ファイルに移動します。
 
     [ユーザー向けドキュメント](/dm/relay-log.md)
 
@@ -394,7 +394,7 @@ TiDB バージョン: 5.4.0
     -   バックアップと復元 (BR)
 
         -   リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
-        -   `'/'`バックアップstorageとして使用している場合、エンドポイントで`minio`指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
+        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
         -   システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
 
     -   TiCDC

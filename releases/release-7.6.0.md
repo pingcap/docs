@@ -261,7 +261,7 @@ TiDB バージョン: 7.6.0
 | TiDB Lightning | [`block-size`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                                    | 新しく追加された | 物理インポートモード（ `backend='local'` ）でローカルファイルをソートするためのI/Oブロックサイズを制御します。デフォルト値は`16KiB`です。ディスクIOPSがボトルネックになっている場合は、この値を増やすことでパフォーマンスを向上させることができます。                                                                               |
 | BR             | [`--granularity`](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)                                                                 | 新しく追加された | `--granularity="coarse-grained"`を指定することで、粗粒度リージョン散布アルゴリズム（実験的）を使用します。これにより、大規模なリージョンシナリオにおける復元速度が向上します。                                                                                                                   |
 | TiCDC          | [`compression`](/ticdc/ticdc-changefeed-config.md)                                                                                                     | 新しく追加された | リドゥログファイルの圧縮動作を制御します。                                                                                                                                                                                                     |
-| TiCDC          | [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md)                                                                                       | 新しく追加された | オブジェクトstorageにデータを複製する際に、履歴データの自動クリーンアップを設定します。                                                                                                                                                                           |
+| TiCDC          | [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md)                                                                                       | 新しく追加された | オブジェクトストレージにデータを複製する際に、履歴データの自動クリーンアップを設定します。                                                                                                                                                                           |
 
 ### システムテーブル {#system-tables}
 
@@ -328,7 +328,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     -   TiCDC
 
-        -   TiCDCによるオブジェクトstorageへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   TiCDCによるオブジェクトストレージへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の[3エースショーハンド](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
 
     -   TiDBデータ移行（DM）
@@ -449,7 +449,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `RECOVER TABLE`および`FLASHBACK TABLE`TiFlash`CREATE TABLE` `DROP TABLE`を介して一部の TiFlash レプリカデータを復元できない問題 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ColumnRef in (Literal, Func...)`のようなフィルタリング条件を指定してクエリを実行すると、クエリ結果が正しくなくなる問題を修正 [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   DDL の同時実行中にTiFlash で競合が発生した場合のTiFlashpanic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   TiFlash が非集約storageおよびコンピューティングアーキテクチャの下でオブジェクトstorageデータの GC 所有者を選択できない場合がある問題を修正 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlash が非集約ストレージおよびコンピューティングアーキテクチャの下でオブジェクトストレージデータの GC 所有者を選択できない場合がある問題を修正 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `lowerUTF8`および`upperUTF8`関数で、大文字と小文字が異なるバイトを占有することを許可しない問題を修正 [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
     -   TiFlashが`ENUM`の値が0の場合に`ENUM`を正しく処理しない問題を修正 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
     -   `INET_NTOA()`式の互換性の問題を修正 [#8211](https://github.com/pingcap/tiflash/issues/8211) @[solotzg](https://github.com/solotzg)
@@ -462,7 +462,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     -   バックアップと復元 (BR)
 
-        -   BRが外部storageファイルに対して不正なURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
+        -   BRが外部ストレージファイルに対して不正なURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         -   ログバックアップタスクは開始できるものの、タスク初期化中にPDへの接続に失敗すると正しく動作しない問題を修正 [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         -   ログバックアップタスクが起動後にメモリリークを起こして正常に実行されない可能性がある問題を修正 [#16070](https://github.com/tikv/tikv/issues/16070) @[YuJuncen](https://github.com/YuJuncen)
         -   PITR処理中にシステムテーブル`mysql.gc_delete_range`にデータを挿入するとエラー [#49346](https://github.com/pingcap/tidb/issues/49346)が返される問題を修正しました。@[Leavrth](https://github.com/Leavrth)
@@ -472,7 +472,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   TiCDC
 
         -   `WHERE`句が、特定のシナリオで`DELETE`ステートメントを複製する際に主キーを条件として使用しない問題を修正しました [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
-        -   TiCDCサーバーがオブジェクトstorageサービスへのデータ複製時にpanic可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
+        -   TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanic可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         -   `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンド
         -   TiCDCが特定の特殊なシナリオで誤ってTiKVとの接続を閉じる問題を修正 [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
         -   TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanic可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)

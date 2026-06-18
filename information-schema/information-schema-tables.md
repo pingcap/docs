@@ -101,7 +101,7 @@ SHOW TABLES
 -   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
 -   `TABLE_NAME` : テーブルの名前。
 -   `TABLE_TYPE` : テーブルのタイプ。
--   `ENGINE` :storageエンジンの種類。現在の値は`InnoDB`です。
+-   `ENGINE` :ストレージエンジンの種類。現在の値は`InnoDB`です。
 -   `VERSION` : バージョン。デフォルトの値は`10`です。
 -   `ROW_FORMAT` : 行形式。現在の値は`Compact`です。
 -   `TABLE_ROWS` : 統計におけるテーブル内の行数。

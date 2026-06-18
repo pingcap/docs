@@ -124,7 +124,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
     -   状況によっては、クラスター化インデックスを持つテーブルの列を削除した後にTiFlash がクラッシュする問題を修正[＃5154](https://github.com/pingcap/tiflash/issues/5154) @ [hongyunyan](https://github.com/hongyunyan)
     -   `format`関数が`Data truncated`エラー[＃4891](https://github.com/pingcap/tiflash/issues/4891) @ [xzhangxian1008](https://github.com/xzhangxian1008)を返す可能性がある問題を修正しました
-    -   一部の古いデータがstorageに残り、削除できない問題を修正[＃5659](https://github.com/pingcap/tiflash/issues/5659) @ [lidezhu](https://github.com/lidezhu)
+    -   一部の古いデータがストレージに残り、削除できない問題を修正[＃5659](https://github.com/pingcap/tiflash/issues/5659) @ [lidezhu](https://github.com/lidezhu)
     -   一部のエッジケースで不要な CPU 使用率を修正[＃5409](https://github.com/pingcap/tiflash/issues/5409) @ [breezewish](https://github.com/breezewish)
     -   IPv6 [＃5247](https://github.com/pingcap/tiflash/issues/5247) @ [solotzg](https://github.com/solotzg)を使用するクラスターでTiFlash が動作できないバグを修正しました
     -   並列集約[#5356](https://github.com/pingcap/tiflash/issues/5356) @ [gengliqi](https://github.com/gengliqi)エラーによりTiFlashがクラッシュする可能性があるバグを修正

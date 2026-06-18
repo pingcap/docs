@@ -69,7 +69,7 @@ TiDB Ansible バージョン: 3.0.5
 
 ## PD {#pd}
 
--   リージョン[＃1782](https://github.com/pingcap/pd/pull/1782)が占有するstorageの精度を向上
+-   リージョン[＃1782](https://github.com/pingcap/pd/pull/1782)が占有するストレージの精度を向上
 -   `--help`コマンド[＃1763](https://github.com/pingcap/pd/pull/1763)の出力を改善する
 -   TLS を有効にした後に HTTP リクエストがリダイレクトに失敗する問題を修正[＃1777](https://github.com/pingcap/pd/pull/1777)
 -   pd-ctlが`store shows limit`コマンド[＃1808](https://github.com/pingcap/pd/pull/1808)使用する際に発生するpanic問題を修正

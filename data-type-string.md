@@ -55,12 +55,12 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 <CustomContent platform="tidb">
 
-`MEDIUMTEXT`型は[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大storageサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
+`MEDIUMTEXT`型は[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大ストレージサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-`MEDIUMTEXT`型は[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大storageサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
+`MEDIUMTEXT`型は[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大ストレージサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
 
 </CustomContent>
 
@@ -72,12 +72,12 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 <CustomContent platform="tidb">
 
-`LONGTEXT`型は[`TEXT`タイプ](#text-type)型と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
+`LONGTEXT`型は[`TEXT`タイプ](#text-type)型と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大ストレージサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-`LONGTEXT`型は[`TEXT`タイプ](#text-type)型と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
+`LONGTEXT`型は[`TEXT`タイプ](#text-type)型と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大ストレージサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
 
 </CustomContent>
 
@@ -121,12 +121,12 @@ TINYBLOB
 
 <CustomContent platform="tidb">
 
-`MEDIUMBLOB`型は[`BLOB`型](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大storageサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
+`MEDIUMBLOB`型は[`BLOB`型](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大ストレージサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-`MEDIUMBLOB`型は[`BLOB`型](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大storageサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
+`MEDIUMBLOB`型は[`BLOB`型](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が16,777,215である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDBの1行の最大ストレージサイズはデフォルトで6MiBですが、設定を変更することで120MiBまで増やすことができます。
 
 </CustomContent>
 
@@ -138,12 +138,12 @@ MEDIUMBLOB
 
 <CustomContent platform="tidb">
 
-`LONGBLOB`型は[`BLOB`型](#blob-type)型と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
+`LONGBLOB`型は[`BLOB`型](#blob-type)型と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大ストレージサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-`LONGBLOB`型は[`BLOB`型](#blob-type)型と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
+`LONGBLOB`型は[`BLOB`型](#blob-type)型と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 である点です。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)の制限により、TiDB の単一行の最大ストレージサイズはデフォルトで 6 MiB となり、設定を変更することで 120 MiB まで増やすことができます。
 
 </CustomContent>
 

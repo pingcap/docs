@@ -59,7 +59,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 > **注記：**
 >
-> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのstorage使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
+> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのストレージ使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
 
 ### 2. 新しいクラスターに全データを移行する {#2-migrate-full-data-to-the-new-cluster}
 

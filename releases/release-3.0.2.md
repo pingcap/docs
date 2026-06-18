@@ -100,10 +100,10 @@ TiDB Ansible バージョン: 3.0.2
 -   TiKV パニック後にpanic情報がログファイルに書き込まれないバグを修正[＃5198](https://github.com/tikv/tikv/pull/5198)
 -   悲観的トランザクション[＃5203](https://github.com/tikv/tikv/pull/5203)で挿入操作が誤って実行される可能性があるバグを修正しました
 -   手動介入を必要としない一部のログの出力レベルをINFO [＃5193](https://github.com/tikv/tikv/pull/5193)に下げます。
--   storageエンジンサイズ[＃5200](https://github.com/tikv/tikv/pull/5200)監視精度を向上
+-   ストレージエンジンサイズ[＃5200](https://github.com/tikv/tikv/pull/5200)監視精度を向上
 -   tikv-ctl [＃5195](https://github.com/tikv/tikv/pull/5195)のリージョンサイズの精度を向上
 -   悲観的ロックのデッドロック検出器のパフォーマンスを向上させる[＃5192](https://github.com/tikv/tikv/pull/5192)
--   Titanstorageエンジン[＃5197](https://github.com/tikv/tikv/pull/5197)のGCのパフォーマンスを向上
+-   Titanストレージエンジン[＃5197](https://github.com/tikv/tikv/pull/5197)のGCのパフォーマンスを向上
 
 ## PD {#pd}
 

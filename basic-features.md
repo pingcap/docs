@@ -56,7 +56,7 @@ summary: TiDBの機能概要について学びましょう。
 | インデックスと制約                                                                                   | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)[^2]              |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [カラム型storage（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [カラム型ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [FastScanを使用してOLAPシナリオにおけるクエリを高速化する](/tiflash/use-fastscan.md)                              |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |

@@ -53,8 +53,8 @@ DESC TIKV_STORE_STATUS;
 -   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
 -   `LABEL` : ストアのラベルセット。
 -   `VERSION` : ストアのバージョン番号。
--   `CAPACITY` : ストアのstorage容量。
--   `AVAILABLE` : ストアの残りのstorage容量。
+-   `CAPACITY` : ストアのストレージ容量。
+-   `AVAILABLE` : ストアの残りのストレージ容量。
 -   `LEADER_COUNT` : ストアのリーダーの数。
 -   `LEADER_WEIGHT` : ストアのリーダーウェイト。
 -   `LEADER_SCORE` : ストアのリーダースコア。

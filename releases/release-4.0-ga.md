@@ -98,8 +98,8 @@ TiDB バージョン: 4.0.0
     -   順序が乱れた`ReadIndex`パケット[＃7930](https://github.com/tikv/tikv/pull/7930)によるシステムパニックを修正
     -   読み取り要求コールバック関数が呼び出されないために予期しないエラーが返される問題を修正[＃7921](https://github.com/tikv/tikv/pull/7921)
     -   TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
-    -   storage暗号化[＃7898](https://github.com/tikv/tikv/pull/7898)処理ロジックが正しくないため、 `master key`回転できない問題を修正しました
-    -   storage暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
+    -   ストレージ暗号化[＃7898](https://github.com/tikv/tikv/pull/7898)処理ロジックが正しくないため、 `master key`回転できない問題を修正しました
+    -   ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
 
 -   PD
 
@@ -109,7 +109,7 @@ TiDB バージョン: 4.0.0
 -   ツール
 
     -   バックアップと復元 (BR)
-        -   BRがクラウドstorage[＃298](https://github.com/pingcap/br/pull/298)からデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正
+        -   BRがクラウドストレージ[＃298](https://github.com/pingcap/br/pull/298)からデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正
     -   TiCDC
         -   データ競合によるシステムパニックを修正[＃565](https://github.com/pingcap/tiflow/pull/565) [＃566](https://github.com/pingcap/tiflow/pull/566)
         -   誤った処理ロジックによるリソースリークやシステムブロックを修正する[＃574](https://github.com/pingcap/tiflow/pull/574) [＃586](https://github.com/pingcap/tiflow/pull/586)

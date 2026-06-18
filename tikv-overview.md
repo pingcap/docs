@@ -1,11 +1,11 @@
 ---
 title: TiKV Overview
-summary: TiKVstorageエンジンの概要。
+summary: TiKVストレージエンジンの概要。
 ---
 
 # TiKVの概要 {#tikv-overview}
 
-TiKVは、 ACID準拠のトランザクションAPIを提供する分散型トランザクションキーバリューデータベースです。RocksDBに保存される[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)とコンセンサスステートの実装により、TiKVは複数のレプリカ間のデータ一貫性と高可用性を保証します。TiDB分散データベースのstorageレイヤーとして、TiKVは読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。また、TiDBクラスターの統計データも保存します。
+TiKVは、 ACID準拠のトランザクションAPIを提供する分散型トランザクションキーバリューデータベースです。RocksDBに保存される[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)とコンセンサスステートの実装により、TiKVは複数のレプリカ間のデータ一貫性と高可用性を保証します。TiDB分散データベースのストレージレイヤーとして、TiKVは読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。また、TiDBクラスターの統計データも保存します。
 
 ## アーキテクチャの概要 {#architecture-overview}
 

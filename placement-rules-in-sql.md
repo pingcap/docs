@@ -447,7 +447,7 @@ PLACEMENT POLICY=app_list
 
 この例では、制約は`[+app=order]`のようなリスト形式で指定されています。また、 `{+app=order: 3}`のような辞書形式で指定することもできます。
 
-例のステートメントを実行すると、TiDB は`app_order`データを`app`ラベルの TiKV ノードに`order`として配置し、 `app_list`データを`app`ラベルの TiKV ノードに`list_collection`として配置し、storage内の物理的なデータ分離を実現します。
+例のステートメントを実行すると、TiDB は`app_order`データを`app`ラベルの TiKV ノードに`order`として配置し、 `app_list`データを`app`ラベルの TiKV ノードに`list_collection`として配置し、ストレージ内の物理的なデータ分離を実現します。
 
 ## 互換性 {#compatibility}
 

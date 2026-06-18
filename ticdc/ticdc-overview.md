@@ -24,7 +24,7 @@ TiCDCには、以下の主要な機能があります。
 -   TiDBクラスタ間の双方向レプリケーションにより、TiCDCを使用してマルチアクティブTiDBソリューションを構築できます。
 -   TiDBクラスタからMySQLデータベースまたはその他のMySQL互換データベースへ、低レイテンシーで増分データを複製します。
 -   TiDB クラスターから Kafka クラスターへの増分データのレプリケーション。推奨されるデータ形式には、 [Canal-JSON](/ticdc/ticdc-canal-json.md) 、[Avro](/ticdc/ticdc-avro-protocol.md)、[Debezium](/ticdc/ticdc-debezium.md)が含まれます。
--   TiDBクラスタからAmazon S3、GCS、Azure Blob Storage、NFSなどのstorageサービスへ増分データを複製する。
+-   TiDBクラスタからAmazon S3、GCS、Azure Blob Storage、NFSなどのストレージサービスへ増分データを複製する。
 -   データベース、テーブル、DML、DDLをフィルタリングする機能を備えたテーブルの複製。
 -   単一障害点のない高可用性を実現し、TiCDCノードの動的な追加と削除をサポートします。
 -   [オープンAPI](/ticdc/ticdc-open-api-v2.md)を介したクラスタ管理。タスクの状態照会、タスク構成の動的な変更、タスクの作成または削除などが含まれます。
@@ -74,7 +74,7 @@ TiCDCのアーキテクチャを次の図に示す。
 
 実装では、TiCDC の[新しいアーキテクチャ](/ticdc/ticdc-architecture.md)と[古典アーキテクチャ](/ticdc/ticdc-classic-architecture.md)両方が、同じ増分データ レプリケーション モデルに基づいて構築されます。クラシックアーキテクチャと比較して、新しいアーキテクチャはタスク スケジューリングとレプリケーション メカニズムをリファクタリングして最適化し、リソース コストを削減しながら、リアルタイム データ レプリケーションのパフォーマンス、スケーラビリティ、安定性を大幅に向上させます。
 
-アーキテクチャ図に示すように、TiCDCはTiDB、MySQL、Kafka、およびstorageサービスへのデータ複製をサポートしています。
+アーキテクチャ図に示すように、TiCDCはTiDB、MySQL、Kafka、およびストレージサービスへのデータ複製をサポートしています。
 
 ## 有効なインデックス {#valid-index}
 
@@ -96,7 +96,7 @@ TiCDCのアーキテクチャを次の図に示す。
 
 -   TiCDC によって複製される各テーブルには、少なくとも 1 つの[有効なインデックス](#valid-index)があります。
 
--   TiCDC をディザスタリカバリに使用する際に最終的な整合性を確保するには、 [リドゥログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を設定し、上流で災害が発生した場合でも、リドゥログが書き込まれるstorageシステムが正常に読み取れるようにする必要があります。
+-   TiCDC をディザスタリカバリに使用する際に最終的な整合性を確保するには、 [リドゥログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を設定し、上流で災害が発生した場合でも、リドゥログが書き込まれるストレージシステムが正常に読み取れるようにする必要があります。
 
 ## データ処理変更の実装 {#implementation-of-processing-data-changes}
 

@@ -28,7 +28,7 @@ TiDB バージョン: 6.1.4
     -   TiCDC
 
         -   SQL文がバッチ[＃7653](https://github.com/pingcap/tiflow/issues/7653) @ [asddongmen](https://github.com/asddongmen)で生成される際のスループットを向上させるために、DMLバッチ操作モードを追加します。
-        -   GCS または Azure 互換のオブジェクトstorage[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
+        -   GCS または Azure 互換のオブジェクトストレージ[＃7987](https://github.com/pingcap/tiflow/issues/7987) @ [CharlesCheung96](https://github.com/CharlesCheung96)への REDO ログの保存をサポート
 
     -   TiDB Lightning
 

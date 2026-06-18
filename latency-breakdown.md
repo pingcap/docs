@@ -138,7 +138,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKVはstorageエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
+TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
 
 ### バッチポイント取得 {#batch-point-get}
 
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
 
 クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
-v6.1.0 以降、TiKV はデフォルトのログstorageエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
+v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
 
 ### KV DB {#kv-db}
 

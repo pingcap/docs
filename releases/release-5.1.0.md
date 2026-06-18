@@ -231,7 +231,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   バックアップと復元 (BR)
 
         -   `mysql`スキーマにおけるシステムテーブルのバックアップと復元をサポートする[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
-        -   仮想ホストアドレス指定モードに基づくS3互換storageをサポートする [#10243](https://github.com/tikv/tikv/pull/10243)
+        -   仮想ホストアドレス指定モードに基づくS3互換ストレージをサポートする [#10243](https://github.com/tikv/tikv/pull/10243)
         -   バックアップメタデータのフォーマットを最適化してメモリ使用量を削減する [#1171](https://github.com/pingcap/br/pull/1171)
 
     -   TiCDC

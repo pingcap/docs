@@ -21,9 +21,9 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## サーバ {#server}
 
--   ストア サイズ: 各TiFlashインスタンスで使用されるstorageサイズ。
--   使用可能なサイズ: 各TiFlashインスタンスで使用可能なstorageサイズ。
--   容量サイズ: 各TiFlashインスタンスのstorage容量。
+-   ストア サイズ: 各TiFlashインスタンスで使用されるストレージサイズ。
+-   使用可能なサイズ: 各TiFlashインスタンスで使用可能なストレージサイズ。
+-   容量サイズ: 各TiFlashインスタンスのストレージ容量。
 -   稼働時間: 前回の再起動以降のTiFlashの実行時間。
 -   メモリ: TiFlashインスタンスごとのメモリ使用量。
 -   CPU 使用率: TiFlashインスタンスごとの CPU 使用率。
@@ -33,7 +33,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 > **注記：**
 >
-> ストア サイズ、FSync OPS、ファイル オープン OPS、および開かれたファイル数は、現在、 TiFlashstorageレイヤーの監視情報のみをカバーしており、 TiFlash-Proxy ではカバーしていません。
+> ストア サイズ、FSync OPS、ファイル オープン OPS、および開かれたファイル数は、現在、 TiFlashストレージレイヤーの監視情報のみをカバーしており、 TiFlash-Proxy ではカバーしていません。
 
 ## コプロセッサー {#coprocessor}
 
@@ -68,10 +68,10 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## ストレージ {#storage}
 
--   書き込みコマンド OPS: すべてのTiFlashインスタンスのstorageレイヤーで 1 秒あたりに受信される書き込み要求の数。
+-   書き込みコマンド OPS: すべてのTiFlashインスタンスのストレージレイヤーで 1 秒あたりに受信される書き込み要求の数。
 -   書き込み増幅: 各TiFlashインスタンスの書き込み増幅 (実際のディスク書き込みバイト数を論理データの書き込みバイト数で割った値)。1 `total`この開始以降の書き込み増幅で、 `5min`過去 5 分間の書き込み増幅です。
--   読み取りタスク OPS: TiFlashインスタンスごとのstorageレイヤーでの 1 秒あたりの読み取りタスクの数。
--   粗セット フィルタ レート: ストレージstorageの粗セットレイヤーによってフィルタされた、過去 1 分間に各TiFlashインスタンスによって読み取られたパケット数の割合。
+-   読み取りタスク OPS: TiFlashインスタンスごとのストレージレイヤーでの 1 秒あたりの読み取りタスクの数。
+-   粗セット フィルタ レート: ストレージストレージの粗セットレイヤーによってフィルタされた、過去 1 分間に各TiFlashインスタンスによって読み取られたパケット数の割合。
 -   内部タスク OPS: すべてのTiFlashインスタンスが 1 秒あたりに内部データ ソート タスクを実行する回数。
 -   内部タスクの所要時間: すべてのTiFlashインスタンスが内部データ ソート タスクに費やした時間。
 -   ページ GC タスク OPM: すべてのTiFlashインスタンスが 1 分間に Delta データ ソート タスクを実行する回数。
@@ -83,7 +83,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 > **注記：**
 >
-> これらのメトリックは、 TiFlashstorageレイヤーの監視情報のみをカバーし、 TiFlash-Proxy の監視情報はカバーしません。
+> これらのメトリックは、 TiFlashストレージレイヤーの監視情報のみをカバーし、 TiFlash-Proxy の監視情報はカバーしません。
 
 ## ストレージ書き込み停止 {#storage-write-stall}
 

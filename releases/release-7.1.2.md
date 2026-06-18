@@ -178,7 +178,7 @@ TiDB バージョン: 7.1.2
     -   TiCDC
 
         -   異常な状態のレプリケーションタスクが上流のGC [＃9543](https://github.com/pingcap/tiflow/issues/9543) @ [CharlesCheung96](https://github.com/CharlesCheung96)をブロックする問題を修正しました
-        -   オブジェクトstorageにデータを複製するとデータの不整合が発生する可能性がある問題を修正[＃9592](https://github.com/pingcap/tiflow/issues/9592) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージにデータを複製するとデータの不整合が発生する可能性がある問題を修正[＃9592](https://github.com/pingcap/tiflow/issues/9592) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `redo-resolved-ts`有効にすると、changefeed が失敗する可能性がある問題を修正[＃9769](https://github.com/pingcap/tiflow/issues/9769) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   間違ったメモリ情報を取得すると、一部のオペレーティングシステムで OOM 問題が発生する可能性がある問題を修正[＃9762](https://github.com/pingcap/tiflow/issues/9762) @ [sdojjy](https://github.com/sdojjy)
         -   `scale-out`が有効になっている場合のノード間の書き込みキーの不均等な配布の問題を修正[＃9665](https://github.com/pingcap/tiflow/issues/9665) @ [sdojjy](https://github.com/sdojjy)

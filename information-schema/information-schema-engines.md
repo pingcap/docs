@@ -5,7 +5,7 @@ summary: ENGINES` information_schema テーブルについて学習します。
 
 # エンジン {#engines}
 
-`ENGINES`テーブルはstorageエンジンに関する情報を提供します。互換性のため、TiDB は常に InnoDB のみをサポートするエンジンとして記述します。また、 `ENGINES`テーブルの他の列の値も固定値です。
+`ENGINES`テーブルはストレージエンジンに関する情報を提供します。互換性のため、TiDB は常に InnoDB のみをサポートするエンジンとして記述します。また、 `ENGINES`テーブルの他の列の値も固定値です。
 
 ```sql
 USE information_schema;
@@ -39,12 +39,12 @@ SELECT * FROM engines;
 
 `ENGINES`表の列の説明は次のとおりです。
 
--   `ENGINES` :storageエンジンの名前。
--   `SUPPORT` :サーバーがstorageエンジンに対して持つサポートレベル。TiDBでは、この値は常に`DEFAULT`です。
--   `COMMENT` :storageエンジンに関する簡単なコメント。
--   `TRANSACTIONS` :storageエンジンがトランザクションをサポートするかどうか。
--   `XA` :storageエンジンが XA トランザクションをサポートするかどうか。
--   `SAVEPOINTS` :storageエンジンが`savepoints`サポートするかどうか。
+-   `ENGINES` :ストレージエンジンの名前。
+-   `SUPPORT` :サーバーがストレージエンジンに対して持つサポートレベル。TiDBでは、この値は常に`DEFAULT`です。
+-   `COMMENT` :ストレージエンジンに関する簡単なコメント。
+-   `TRANSACTIONS` :ストレージエンジンがトランザクションをサポートするかどうか。
+-   `XA` :ストレージエンジンが XA トランザクションをサポートするかどうか。
+-   `SAVEPOINTS` :ストレージエンジンが`savepoints`サポートするかどうか。
 
 ## 参照 {#see-also}
 

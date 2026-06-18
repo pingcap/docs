@@ -267,7 +267,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `flush_interval`      | `UINT64`型。REDOログファイルをフラッシュする間隔。（オプション）                                                  |
 | `level`               | `STRING`型。複製されたデータの一貫性レベル。（オプション）                                                       |
 | `max_log_size`        | `UINT64`型。REDOログの最大値。（オプション）                                                            |
-| `storage`             | `STRING`型。storageの宛先アドレス。（オプション）                                                        |
+| `storage`             | `STRING`型。ストレージの宛先アドレス。（オプション）                                                        |
 | `use_file_backend`    | `BOOL`タイプ。REDOログをローカルファイルに保存するかどうかを指定します。（オプション）                                        |
 | `encoding_worker_num` | `INT`型。REDOモジュール内のエンコードおよびデコードワーカーの数。（オプション）                                            |
 | `flush_worker_num`    | `INT`型。REDOモジュール内のフラッシュワーカーの数。（オプション）                                                   |
@@ -314,7 +314,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`ターミネータとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
 | `only_output_updated_columns` | `BOOLEAN`型。2 または`canal-json`プロトコル`open-protocol`使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
-| `cloud_storage_config`        | storageシンクの構成。(オプション)                                                                                                        |
+| `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
 | `open`                        | オープンプロトコルの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |
 
@@ -354,9 +354,9 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名                    | 説明                                                                                                                                              |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `worker_count`            | `INT`型。下流のクラウドストレージへのデータstorageの同時実行性が変更されます。                                                                                                   |
-| `flush_interval`          | `STRING`型。下流のクラウドstorageへのデータ保存間隔が変更されます。                                                                                                       |
-| `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドstorageに保存されます。                                                                                |
+| `worker_count`            | `INT`型。下流のクラウドストレージへのデータストレージの同時実行性が変更されます。                                                                                                   |
+| `flush_interval`          | `STRING`型。下流のクラウドストレージへのデータ保存間隔が変更されます。                                                                                                       |
+| `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
 | `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。2 `date-separator` `day`に設定されている場合にのみ有効になります。                                                                              |
 | `file_cleanup_cron_spec`  | `STRING`型。crontab 設定と互換性のある、スケジュールされたクリーンアップタスクの実行サイクル。形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
 | `flush_concurrency`       | `INT`型。単一ファイルのアップロードの同時実行性。                                                                                                                     |

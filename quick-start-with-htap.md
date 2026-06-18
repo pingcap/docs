@@ -13,10 +13,10 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのstoragestorageに関する基本的な知識が必要です。
+TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのストレージに関する基本的な知識が必要です。
 
--   HTAPのストレージエンジン：HTAPでは、行ベースstorageエンジンと列指向storageエンジンが共存します。どちらのstorageエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースstorageエンジンはOLTPパフォーマンスを最適化し、列指向storageエンジンはOLAPパフォーマンスを最適化します。
--   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向storage拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
+-   HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
+-   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。
 -   HTAP のデータ分離: HTAP リソース分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンに展開できます。
 -   MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能かつ高スループットのSQLアルゴリズムを提供します。MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
@@ -93,9 +93,9 @@ tiup playground
 
     これは商用発注システムのデータベースです。テーブル`test.nation`は国に関する情報、テーブル`test.region`は地域に関する情報、テーブル`test.part`は部品に関する情報、テーブル`test.supplier`はサプライヤーに関する情報、テーブル`test.partsupp`はサプライヤーの部品に関する情報、テーブル`test.customer`は顧客に関する情報、テーブル`test.customer`は注文に関する情報、テーブル`test.lineitem`はオンライン商品に関する情報を示しています。
 
-### ステップ3. 行ベースのstorageエンジンでデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
+### ステップ3. 行ベースのストレージエンジンでデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
 
-行ベースのstorageエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
+行ベースのストレージエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
 
 ```sql
 USE test;
@@ -128,7 +128,7 @@ limit 10;
 
 これは配送優先度クエリで、指定日までに発送されていない、最も収益の高い注文の優先度と潜在収益を取得します。潜在収益は`l_extendedprice * (1-l_discount)`の合計として定義されます。注文は収益の降順でリストされます。この例では、このクエリは潜在収益が上位10件の未発送注文をリストします。
 
-### ステップ4. テストデータを列指向storageエンジンに複製する {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
+### ステップ4. テストデータを列指向ストレージエンジンに複製する {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
 
 TiFlashを導入した後、TiKV はデータをすぐにTiFlashに複製しません。複製するテーブルを指定するには、TiDB の MySQL クライアントで以下の DDL 文を実行する必要があります。その後、TiDB は指定されたレプリカをTiFlashに作成します。
 

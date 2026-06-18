@@ -156,7 +156,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 3.  **DB監査ログの**ページで、 **[有効にする]**をクリックします。
 
-4.  監査ログのstorage場所を選択し、必要な情報を入力します。次に、 **「接続をテスト」をクリックし、「次へ」**または**「次へ」を**クリックします。利用可能なstorage場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
+4.  監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **「接続をテスト」をクリックし、「次へ」**または**「次へ」を**クリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
 
 5.  **データベース監査ログ設定**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **[保存]**をクリックします。
 
@@ -164,7 +164,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 <div label="CLI">
 
-Amazon S3storageを例にとってみましょう。監査ログを有効にして監査ログをAmazon S3に保存するには、次のコマンドを実行します。
+Amazon S3ストレージを例にとってみましょう。監査ログを有効にして監査ログをAmazon S3に保存するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>

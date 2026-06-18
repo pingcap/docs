@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW ENGINES の使用法の概要。
 
 # エンジンを表示 {#show-engines}
 
-このステートメントは、サポートされているすべてのstorageエンジンを一覧表示するために使用されます。この構文は、MySQLとの互換性のためにのみ含まれています。
+このステートメントは、サポートされているすべてのストレージエンジンを一覧表示するために使用されます。この構文は、MySQLとの互換性のためにのみ含まれています。
 
 ## 概要 {#synopsis}
 
@@ -32,4 +32,4 @@ mysql> SHOW ENGINES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   このステートメントは、サポートされているエンジンとして常にInnoDBのみを返します。TiDBは内部的に、storageエンジンとして通常[TiKV](/tikv-overview.md)使用します。
+-   このステートメントは、サポートされているエンジンとして常にInnoDBのみを返します。TiDBは内部的に、ストレージエンジンとして通常[TiKV](/tikv-overview.md)使用します。

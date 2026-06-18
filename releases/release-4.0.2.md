@@ -111,8 +111,8 @@ TiDB バージョン: 4.0.2
     -   `IndexMergeJoin`実行者が時々スタックする問題を修正[＃18091](https://github.com/pingcap/tidb/pull/18091)
     -   メモリクォータ不足とクエリキャンセルがトリガーされたときに`IndexMergeJoin`のエグゼキュータがハングする問題を修正[＃17654](https://github.com/pingcap/tidb/pull/17654)
     -   `Insert`と`Replace`エグゼキュータ[＃18062](https://github.com/pingcap/tidb/pull/18062)の過剰なカウントメモリ使用量を修正
-    -   `DROP DATABASE`と`DROP TABLE`同じデータベース[＃17901](https://github.com/pingcap/tidb/pull/17901)で同時に実行するとTiFlashstorageへのデータレプリケーションが停止する問題を修正
-    -   TiDBとオブジェクトstorageサービス[＃17844](https://github.com/pingcap/tidb/pull/17844)の`BACKUP` `RESTORE`障害を修正
+    -   `DROP DATABASE`と`DROP TABLE`同じデータベース[＃17901](https://github.com/pingcap/tidb/pull/17901)で同時に実行するとTiFlashストレージへのデータレプリケーションが停止する問題を修正
+    -   TiDBとオブジェクトストレージサービス[＃17844](https://github.com/pingcap/tidb/pull/17844)の`BACKUP` `RESTORE`障害を修正
     -   アクセスが拒否されたときに権限チェックに失敗したという誤ったエラーメッセージを修正しました[＃17724](https://github.com/pingcap/tidb/pull/17724)
     -   `DELETE`文から`UPDATE`されたクエリフィードバックを破棄する[＃17843](https://github.com/pingcap/tidb/pull/17843)
     -   `AUTO_RANDOM`プロパティ[＃17828](https://github.com/pingcap/tidb/pull/17828)のないテーブルでは`AUTO_RANDOM_BASE`変更を禁止します

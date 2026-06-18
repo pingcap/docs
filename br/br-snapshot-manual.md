@@ -144,7 +144,7 @@ tiup br restore full \
 
 ## バックアップデータを暗号化する {#encrypt-the-backup-data}
 
-BRはバックアップ側でのバックアップデータの暗号化と[Amazon S3にバックアップする際のstorage側](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption)サポートしています。必要に応じていずれかの暗号化方式を選択できます。
+BRはバックアップ側でのバックアップデータの暗号化と[Amazon S3にバックアップする際のストレージ側](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption)サポートしています。必要に応じていずれかの暗号化方式を選択できます。
 
 TiDB v5.3.0 以降では、次のパラメータを設定することでバックアップ データを暗号化できます。
 

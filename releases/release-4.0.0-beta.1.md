@@ -51,7 +51,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     -   `json_objectagg`集計関数[＃11154](https://github.com/pingcap/tidb/pull/11154)追加する
     -   監査ログに拒否された接続試行を記録することをサポート[＃14594](https://github.com/pingcap/tidb/pull/14594)
     -   1つのサーバーへの接続数を制御するために、 `max-server-connections`構成項目（デフォルトでは`4096` ）を追加します[＃14409](https://github.com/pingcap/tidb/pull/14409)
-    -   サーバーレベル[＃14440](https://github.com/pingcap/tidb/pull/14440)で複数のstorageエンジンを指定して分離読み取りをサポート
+    -   サーバーレベル[＃14440](https://github.com/pingcap/tidb/pull/14440)で複数のストレージエンジンを指定して分離読み取りをサポート
     -   `Apply`オペレータと`Sort`オペレータのコストモデルを最適化して安定性を向上させる[＃13550](https://github.com/pingcap/tidb/pull/13550) [＃14708](https://github.com/pingcap/tidb/pull/14708)
 
 -   TiKV

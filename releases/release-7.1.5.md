@@ -110,7 +110,7 @@ TiDB バージョン: 7.1.5
         -   変更フィードを再開するときに`snapshot lost caused by GC`時間内に報告されず、変更フィードの`checkpoint-ts` TiDB [＃10463](https://github.com/pingcap/tiflow/issues/10463) @ [sdojjy](https://github.com/sdojjy)の GC セーフポイントよりも小さい問題を修正しました。
         -   テーブルレプリケーションタスク[＃10613](https://github.com/pingcap/tiflow/issues/10613) @ [CharlesCheung96](https://github.com/CharlesCheung96)をスケジュールするときに TiCDC がパニックになる問題を修正しました
         -   DDL文が頻繁に実行されるシナリオで、間違ったBarrierTSが原因でデータが間違ったCSVファイルに書き込まれる問題を修正[＃10668](https://github.com/pingcap/tiflow/issues/10668) @ [lidezhu](https://github.com/lidezhu)
-        -   オブジェクトstorageシンクに一時的な障害が発生した場合に、結果整合性が有効になっている変更フィードが失敗する可能性がある問題を修正しました[＃10710](https://github.com/pingcap/tiflow/issues/10710) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージシンクに一時的な障害が発生した場合に、結果整合性が有効になっている変更フィードが失敗する可能性がある問題を修正しました[＃10710](https://github.com/pingcap/tiflow/issues/10710) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `open-protocol`の古い値部分が、実際のタイプ[＃10803](https://github.com/pingcap/tiflow/issues/10803) @ [3AceShowHand](https://github.com/3AceShowHand)ではなく、タイプ`STRING`に応じて誤ってデフォルト値を出力する問題を修正しました。
 
     -   TiDB Lightning

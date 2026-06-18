@@ -29,7 +29,7 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
 
 ## <code>JSON_STORAGE_FREE()</code> {#code-json-storage-free-code}
 
-`JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるstorage容量を返します。
+`JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるストレージ容量を返します。
 
 > **注記：**
 >

@@ -36,7 +36,7 @@ TiDB バージョン: 7.1.1
 
     -   TiCDC
 
-        -   TiCDC がオブジェクトstorageサービス[＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製する際のバイナリ フィールドのエンコード形式を最適化します。
+        -   TiCDC がオブジェクトストレージサービス[＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製する際のバイナリ フィールドのエンコード形式を最適化します。
         -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [Rustin170506](https://github.com/Rustin170506)へのレプリケーションのシナリオでOAUTHBEARER認証をサポート
 
     -   TiDB Lightning
@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.1
 
 -   TiFlash
 
-    -   分散storageおよびコンピューティングアーキテクチャモードで、 TiFlashコンピューティングノードが不正確なCPUコア情報[＃7436](https://github.com/pingcap/tiflash/issues/7436) @ [guo-shaoge](https://github.com/guo-shaoge)を取得する問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャモードで、 TiFlashコンピューティングノードが不正確なCPUコア情報[＃7436](https://github.com/pingcap/tiflash/issues/7436) @ [guo-shaoge](https://github.com/guo-shaoge)を取得する問題を修正しました。
     -   オンラインアンセーフリカバリ[＃7671](https://github.com/pingcap/tiflash/issues/7671) @ [hongyunyan](https://github.com/hongyunyan)を使用した後、 TiFlashの再起動に時間がかかりすぎる問題を修正しました
 
 -   ツール
@@ -120,14 +120,14 @@ TiDB バージョン: 7.1.1
     -   TiCDC
 
         -   PD例外によりレプリケーションタスクが停止する可能性がある問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃9054](https://github.com/pingcap/tiflow/issues/9054) @ [asddongmen](https://github.com/asddongmen) @ [fubinzh](https://github.com/fubinzh)
-        -   オブジェクトstorageサービス[＃8894](https://github.com/pingcap/tiflow/issues/8894) @ [CharlesCheung96](https://github.com/CharlesCheung96)へのレプリケーション時に過剰なメモリ消費が発生する問題を修正
+        -   オブジェクトストレージサービス[＃8894](https://github.com/pingcap/tiflow/issues/8894) @ [CharlesCheung96](https://github.com/CharlesCheung96)へのレプリケーション時に過剰なメモリ消費が発生する問題を修正
         -   再実行ログが有効で、下流に例外[＃9172](https://github.com/pingcap/tiflow/issues/9172) @ [CharlesCheung96](https://github.com/CharlesCheung96)がある場合にレプリケーションタスクが停止する可能性がある問題を修正しました。
         -   下流で障害が発生した場合に TiCDC が再試行を続け、再試行時間が長くなりすぎる問題を修正しました[＃9272](https://github.com/pingcap/tiflow/issues/9272) @ [asddongmen](https://github.com/asddongmen)
         -   Kafka [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [Rustin170506](https://github.com/Rustin170506)にデータを複製する際に下流のメタデータを頻繁に読み取ることによって下流に過度の負荷がかかる問題を修正しました
         -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度のワークロードが発生する問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [Rustin170506](https://github.com/Rustin170506)
         -   一部の特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [hicqu](https://github.com/hicqu)
         -   AvroまたはCSVプロトコルが使用されている場合、 `UPDATE`操作で古い値を出力できない問題を修正しました[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3AceShowHand](https://github.com/3AceShowHand)
-        -   storageサービスにデータを複製するときに、下流のDDLステートメントに対応するJSONファイルにテーブルフィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [CharlesCheung96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
+        -   ストレージサービスにデータを複製するときに、下流のDDLステートメントに対応するJSONファイルにテーブルフィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [CharlesCheung96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
         -   TiDB または MySQL [＃9180](https://github.com/pingcap/tiflow/issues/9180) @ [asddongmen](https://github.com/asddongmen)にデータを複製するときに、下流の双方向レプリケーション関連の変数を頻繁に設定することによって発生する下流ログが多すぎる問題を修正しました。
         -   Kafka メッセージのサイズが大きすぎるためにレプリケーションエラーが発生した場合に、メッセージ本文がログ[＃9031](https://github.com/pingcap/tiflow/issues/9031) @ [darraes](https://github.com/darraes)に記録される問題を修正しました。
         -   ネットワーク分離やPDオーナーノードの再起動などのPD障害時にTiCDCが停止する問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @ [asddongmen](https://github.com/asddongmen)

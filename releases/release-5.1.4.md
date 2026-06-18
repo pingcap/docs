@@ -175,4 +175,4 @@ TiDB バージョン: 5.1.4
 
     -   TiDB Lightning
 
-        -   S3storageパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃28031](https://github.com/pingcap/tidb/issues/28031) [＃30709](https://github.com/pingcap/tidb/issues/30709)

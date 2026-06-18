@@ -25,7 +25,7 @@ ticloud serverless audit-log config update
 ticloud serverless audit-log config update -c <cluster-id> --unredacted
 ```
 
-非対話型モードで Amazon S3storageを使用してデータベース監査ログを有効にします。
+非対話型モードで Amazon S3ストレージを使用してデータベース監査ログを有効にします。
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-uri> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key>
@@ -49,7 +49,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --------------------------- | ------------------------------------------------------------------------------------------------------------ | --- | ------------------------------------ |
 | --azblob.sas-token 文字列      | Azure Blob Storage の SAS トークン。                                                                               | いいえ | 非対話型モードでのみ動作します。                     |
 | --azblob.uri 文字列            | `azure://<account>.blob.core.windows.net/<container>/<path>`形式の Azure Blob Storage URI。                      | いいえ | 非対話型モードでのみ動作します。                     |
-| --cloud-storage              | クラウドstorage`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
+| --cloud-storage              | クラウドストレージ`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | -c, --cluster-id 文字列        | 更新するクラスターの ID。                                                                                               | はい  | 非対話型モードでのみ動作します。                     |
 | --enabled                        | データベース監査ログを有効または無効にします。                                                                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | --gcs.サービスアカウントキー文字列        | Google Cloud Storage の Base64 でエンコードされたサービス アカウント キー。                                                        | いいえ | 非対話型モードでのみ動作します。                     |

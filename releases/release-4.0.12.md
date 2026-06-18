@@ -20,7 +20,7 @@ TiDB バージョン: 4.0.12
 -   TiDB
 
     -   `batch cop`モード[＃23164](https://github.com/pingcap/tidb/pull/23164)の`EXPLAIN`文の出力情報を絞り込む
-    -   `EXPLAIN`文[＃23020](https://github.com/pingcap/tidb/pull/23020)の出力に、storageレイヤーにプッシュできない式の警告情報を追加します。
+    -   `EXPLAIN`文[＃23020](https://github.com/pingcap/tidb/pull/23020)の出力に、ストレージレイヤーにプッシュできない式の警告情報を追加します。
     -   DDLパッケージコードの一部を`Execute` `ExecRestricted`安全なAPIに移行する（2） [＃22935](https://github.com/pingcap/tidb/pull/22935)
     -   DDLパッケージコードの一部を`Execute` `ExecRestricted`安全なAPIに移行する（1） [＃22929](https://github.com/pingcap/tidb/pull/22929)
     -   `optimization-time`と`wait-TS-time`スローログ[＃22918](https://github.com/pingcap/tidb/pull/22918)に加える
@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.12
         -   テーブル数が多い場合のバックアップパフォーマンスの向上[＃745](https://github.com/pingcap/br/pull/745)
         -   サービスセーフポイントチェックが失敗した場合はエラーを報告する[＃826](https://github.com/pingcap/br/pull/826)
         -   `backupmeta` [＃803](https://github.com/pingcap/br/pull/803)の`cluster_version`と`br_version`情報を加算します
-        -   バックアップ[＃851](https://github.com/pingcap/br/pull/851)の成功率を上げるために、外部storageエラーの再試行を追加します。
+        -   バックアップ[＃851](https://github.com/pingcap/br/pull/851)の成功率を上げるために、外部ストレージエラーの再試行を追加します。
         -   バックアップ中のメモリ使用量を削減する[＃886](https://github.com/pingcap/br/pull/886)
 
     -   TiDB Lightning
@@ -70,7 +70,7 @@ TiDB バージョン: 4.0.12
         -   TiDB Lightningが`cancel`エラー[＃867](https://github.com/pingcap/br/pull/867)に遭遇したら、すぐに失敗しましょう
         -   メモリ使用量とパフォーマンスのバランスをとるために、 `tikv-importer.engine-mem-cache-size`と`tikv-importer.local-writer-mem-cache-size`構成項目を追加します[＃866](https://github.com/pingcap/br/pull/866)
         -   インポート速度を上げるために、TiDB Lightningのローカルバックエンドで`batch split region`並列実行します[＃868](https://github.com/pingcap/br/pull/868)
-        -   TiDB Lightningを使用してS3storageからデータをインポートする場合、 TiDB Lightningは`s3:ListBucket`権限[＃919](https://github.com/pingcap/br/pull/919)必要としなくなりました。
+        -   TiDB Lightningを使用してS3ストレージからデータをインポートする場合、 TiDB Lightningは`s3:ListBucket`権限[＃919](https://github.com/pingcap/br/pull/919)必要としなくなりました。
         -   チェックポイントから再開する場合、 TiDB Lightningは元のエンジン[＃924](https://github.com/pingcap/br/pull/924)を使用し続けます。
 
 ## バグ修正 {#bug-fixes}
@@ -127,7 +127,7 @@ TiDB バージョン: 4.0.12
 
     -   バックアップと復元 (BR)
 
-        -   ターゲットパスがバケット名[＃733](https://github.com/pingcap/br/pull/733)の場合、S3storageの`WalkDir` `nil`返すバグを修正しました
+        -   ターゲットパスがバケット名[＃733](https://github.com/pingcap/br/pull/733)の場合、S3ストレージの`WalkDir` `nil`返すバグを修正しました
         -   `status`ポートがTLS [＃839](https://github.com/pingcap/br/pull/839)で提供されないバグを修正
 
     -   TiDB Lightning

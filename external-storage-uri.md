@@ -1,11 +1,11 @@
 ---
 title: URI Formats of External Storage Services
-summary: Amazon S3、GCS、Azure Blob Storage などの外部storageサービスのstorageURI 形式について説明します。
+summary: Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
 ---
 
 ## 外部ストレージサービスのURI形式 {#uri-formats-of-external-storage-services}
 
-このドキュメントでは、Amazon S3、GCS、Azure Blob Storage などの外部storageサービスの URI 形式について説明します。
+このドキュメントでは、Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスの URI 形式について説明します。
 
 URI の基本的な形式は次のとおりです。
 
@@ -128,10 +128,10 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
 -   `host` : `container name`
 -   `parameters` :
 
-    -   `account-name` :storageのアカウント名を指定します。
+    -   `account-name` :ストレージのアカウント名を指定します。
     -   `account-key` : アクセス キーを指定します。
     -   `sas-token` : 共有アクセス署名 (SAS) トークンを指定します。
-    -   `access-tier` : アップロードされたオブジェクトのアクセス層を指定します（例： `Hot` 、 `Cool` 、 `Archive` ）。既定値は、storageアカウントのデフォルトのアクセス層です。
+    -   `access-tier` : アップロードされたオブジェクトのアクセス層を指定します（例： `Hot` 、 `Cool` 、 `Archive` ）。既定値は、ストレージアカウントのデフォルトのアクセス層です。
     -   `encryption-scope` : サーバー側の暗号化に[暗号化範囲](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)指定します。
     -   `encryption-key` : AES256 暗号化アルゴリズムを使用するサーバー側暗号化の場合は[暗号化キー](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)指定します。
 

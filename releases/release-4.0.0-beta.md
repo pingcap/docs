@@ -91,9 +91,9 @@ TiDB Ansible バージョン: 4.0.0-beta
 
 ## PD {#pd}
 
--   storageノードの負荷情報に応じてホットスポットのスケジュールを最適化することをサポート
+-   ストレージノードの負荷情報に応じてホットスポットのスケジュールを最適化することをサポート
     -   [＃1870](https://github.com/pingcap/pd/pull/1870) [＃1982](https://github.com/pingcap/pd/pull/1982) [＃1998](https://github.com/pingcap/pd/pull/1998) [＃1843](https://github.com/pingcap/pd/pull/1843) [＃1750](https://github.com/pingcap/pd/pull/1750)
--   さまざまなスケジュールルールを組み合わせて、任意のデータ範囲のレプリカ数、storageの場所、storageホストの種類、およびロールを制御できる配置ルール機能を追加します。
+-   さまざまなスケジュールルールを組み合わせて、任意のデータ範囲のレプリカ数、ストレージの場所、ストレージホストの種類、およびロールを制御できる配置ルール機能を追加します。
     -   [＃2051](https://github.com/pingcap/pd/pull/2051) [＃1999](https://github.com/pingcap/pd/pull/1999) [＃2042](https://github.com/pingcap/pd/pull/2042) [＃1917](https://github.com/pingcap/pd/pull/1917) [＃1904](https://github.com/pingcap/pd/pull/1904)
     -   [＃1897](https://github.com/pingcap/pd/pull/1897) [＃1894](https://github.com/pingcap/pd/pull/1894) [＃1865](https://github.com/pingcap/pd/pull/1865) [＃1855](https://github.com/pingcap/pd/pull/1855) [＃1834](https://github.com/pingcap/pd/pull/1834)
 -   プラグインの使用によるサポート（実験的） [＃1799](https://github.com/pingcap/pd/pull/1799)

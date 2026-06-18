@@ -175,7 +175,7 @@ TiDBバージョン: 6.5.12
 
         -   ログが適切に感度調整されない問題を修正[＃59086](https://github.com/pingcap/tidb/issues/59086) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   エンコードフェーズでのキャッシュ不足によりパフォーマンスが低下する問題を修正[＃56705](https://github.com/pingcap/tidb/issues/56705) @ [OliverS929](https://github.com/OliverS929)
-        -   高同時実行シナリオでクラウドstorageからデータをインポートするときにパフォーマンスが低下する問題を修正[＃57413](https://github.com/pingcap/tidb/issues/57413) @ [xuanyu66](https://github.com/xuanyu66)
+        -   高同時実行シナリオでクラウドストレージからデータをインポートするときにパフォーマンスが低下する問題を修正[＃57413](https://github.com/pingcap/tidb/issues/57413) @ [xuanyu66](https://github.com/xuanyu66)
         -   メタデータ更新中に`Lock wait timeout`エラーが発生した場合にTiDB Lightning が自動的に再試行しない問題を修正しました[＃53042](https://github.com/pingcap/tidb/issues/53042) @ [guoshouyan](https://github.com/guoshouyan)
         -   TiDB LightningがTiKV [＃56114](https://github.com/pingcap/tidb/issues/56114) @ [fishiu](https://github.com/fishiu)から送信されたサイズ超過のメッセージを受信できない問題を修正しました
         -   TiDB Lightning [＃58085](https://github.com/pingcap/tidb/issues/58085) @ [lance6716](https://github.com/lance6716)を使用してデータをインポートするときにエラーレポートの出力が切り捨てられる問題を修正しました

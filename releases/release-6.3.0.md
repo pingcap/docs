@@ -215,7 +215,7 @@ TiDBバージョン: 6.3.0-DMR
 | [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630)                                       | 新しく追加された | テーブルに主キーが必要であるという要件を強制するかどうかを制御します。この変数を有効にすると、主キーのないテーブルを作成または変更しようとするとエラーが発生します。                                                                                                                                                   |
 | [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)             | 新しく追加された | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合、TiDBサーバーが読み取り要求を TiDBサーバーと同じリージョンのレプリカに送信することを優先するしきい値を制御します。                                                                  |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) | 新しく追加された | TiDB が悲観的トランザクションで[固有の制約](/constraints.md#pessimistic-transactions)いつチェックするかを制御します。                                                                                                                                                  |
-| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新しく追加された | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)有効になっている場合にのみ有効になります。インデックス作成時のバックフィル処理中にローカルstorageを使用する際の制限を設定します。                                                                      |
+| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新しく追加された | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)有効になっている場合にのみ有効になります。インデックス作成時のバックフィル処理中にローカルストレージを使用する際の制限を設定します。                                                                      |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                                 | 新しく追加された | インデックス作成時のバックフィル速度を向上させるために、 `ADD INDEX`および`CREATE INDEX` DDL 操作の高速化を有効にするかどうかを制御します。                                                                                                                                                |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                         | 新しく追加された | `flashback cluster`の同時実行を制御します。この変数で制御される機能は、TiDB v6.3.0 では完全には動作しません。デフォルト値を変更しないでください。                                                                                                                                             |
 | [`tidb_enable_exchange_partition`](/system-variables.md#tidb_enable_exchange_partition)                                     | 非推奨      | [`exchange partitions with tables`](/partitioned-table.md#partition-management)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。つまり、 `exchange partitions with tables`がデフォルトで有効になっています。                                                              |
@@ -241,7 +241,7 @@ TiDBバージョン: 6.3.0-DMR
 
 | コンフィグレーションファイル | コンフィグレーション                                                                                            | 種類を変更する  | 説明                                                                                                                                                                                                               |
 | -------------- | ----------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
+| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
 | TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログ ファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログ ファイルは再利用のために予約されます。これにより、書き込みワークロードのロング テールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
@@ -249,7 +249,7 @@ TiDBバージョン: 6.3.0-DMR
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 修正済み     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 修正済み     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
 | PD             | [診断を有効にする](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                           |
-| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨      | バージョン6.3.0以降、この設定項目は非推奨となりました。デフォルトでは、スレッドプールがstorageエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                    |
+| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨      | バージョン6.3.0以降、この設定項目は非推奨となりました。デフォルトでは、スレッドプールがストレージエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                    |
 | DM             | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新しく追加された | 自動セーフモードの継続時間を指定します。                                                                                                                                                                                             |
 | TiCDC          | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新しく追加された | Syncpoint機能を有効にするかどうかを指定します。                                                                                                                                                                                     |
 | TiCDC          | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)        | 新しく追加された | Syncpointがアップストリームとダウンストリームのスナップショットを同期させる間隔を指定します。                                                                                                                                                              |
@@ -258,7 +258,7 @@ TiDBバージョン: 6.3.0-DMR
 
 ### その他 {#others}
 
--   ログバックアップは、バックアップstorageとしてGCSとAzure Blob Storageをサポートしています。
+-   ログバックアップは、バックアップストレージとしてGCSとAzure Blob Storageをサポートしています。
 -   ログバックアップは`exchange partition` DDLと互換性を持つようになりました。
 -   以前[ファストスキャン](/tiflash/use-fastscan.md)を有効にするために使用されていた SQL ステートメント`ALTER TABLE ...SET TiFLASH MODE ...`非推奨となり、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、FastScan を有効または無効にするには、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を設定する必要があります。以前のバージョンから v6.3.0 にアップグレードすると、データの一貫性を保つために、すべてのセッションで FastScan 機能はデフォルトで有効になりません。
 -   TiFlashをLinux AMD64アーキテクチャにデプロイするには、CPUがAVX2命令セットをサポートしている必要があります。 `grep avx2 /proc/cpuinfo`に出力があることを確認してください。TiFlashをLinux ARM64アーキテクチャにデプロイするには、CPUがARMv8命令セットアーキテクチャをサポートしている必要があります。 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`に出力があることを確認してください。命令セット拡張機能を使用することで、TiFlashのベクトル化エンジンはより優れたパフォーマンスを発揮できます。
@@ -328,7 +328,7 @@ TiDBバージョン: 6.3.0-DMR
 
     -   TiDB Lightning
 
-        -   S3外部storageURLのクエリパラメータを追加し、指定されたロールを引き受けることで別のアカウントのS3データにアクセスできるようにする [#36891](https://github.com/pingcap/tidb/issues/36891) @[dsdashun](https://github.com/dsdashun)
+        -   S3外部ストレージURLのクエリパラメータを追加し、指定されたロールを引き受けることで別のアカウントのS3データにアクセスできるようにする [#36891](https://github.com/pingcap/tidb/issues/36891) @[dsdashun](https://github.com/dsdashun)
 
 ## バグ修正 {#bug-fixes}
 
@@ -391,7 +391,7 @@ TiDBバージョン: 6.3.0-DMR
     -   ウィンドウ関数がクエリのキャンセル時にTiFlashをクラッシュさせる可能性がある問題を修正 [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
     -   `CAST(value AS DATETIME)`への誤ったデータ入力が原因でTiFlashシステムの CPU 使用率が高くなる問題を修正しました [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `CAST(Real/Decimal AS time)`の結果が MySQL と一致しない問題を修正します [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
-    -   storage内の一部の古いデータが削除できない問題を修正 [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ストレージ内の一部の古いデータが削除できない問題を修正 [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ページ GC がテーブルの作成をブロックする可能性がある問題を修正 [#5697](https://github.com/pingcap/tiflash/issues/5697) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `NULL`値を含む列でプライマリ インデックスを作成した後に発生するpanicを修正 [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -402,7 +402,7 @@ TiDBバージョン: 6.3.0-DMR
         -   チェックポイントの情報が古くなる可能性がある問題を修正 [#36423](https://github.com/pingcap/tidb/issues/36423) @[YuJuncen](https://github.com/YuJuncen)
         -   復元中に同時実行数の設定が大きすぎるため、リージョンのバランスが取れていない問題を修正 [#37549](https://github.com/pingcap/tidb/issues/37549) @[3pointer](https://github.com/3pointer)
         -   クラスター内に TiCDC が存在する場合にログバックアップチェックポイント TS が停止する可能性がある問題を修正します [#37822](https://github.com/pingcap/tidb/issues/37822) @[YuJuncen](https://github.com/YuJuncen)
-        -   外部storageの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)
+        -   外部ストレージの認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)
 
     -   TiCDC
 
