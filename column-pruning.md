@@ -19,12 +19,6 @@ In this query, only column a and column b are used, and column c and column d ar
 
 Therefore, when TiDB performs a top-down scanning during the logic optimization phase, redundant columns are pruned to reduce waste of resources. This scanning process is called "Column Pruning", corresponding to the `columnPruner` rule.
 
-<CustomContent platform="tidb-cloud" plan="dedicated">
-
-If you want to disable this rule, refer to [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
-
-</CustomContent>
-
 <CustomContent platform="tidb">
 
 If you want to disable this rule, refer to [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
