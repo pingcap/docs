@@ -10,7 +10,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-web-interface/','/docs/dev/re
 >
 > Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface.
 
-To import data with TiDB Lightning, run `tidb-lightning` from the command line.
+To import data with TiDB Lightning, use the TiDB Lightning command-line tools: `tidb-lightning` for import tasks and `tidb-lightning-ctl` for checkpoint and troubleshooting operations.
 
 - For a basic procedure, see [Get Started with TiDB Lightning](/get-started-with-tidb-lightning.md).
 - For command-line options, see [TiDB Lightning Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md).
