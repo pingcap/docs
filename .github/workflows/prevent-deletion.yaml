@@ -17,6 +17,7 @@ jobs:
       - name: Checkout base
         uses: actions/checkout@v6
         with:
+          ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 0
       - name: Fetch head
         env:

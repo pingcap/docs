@@ -26,6 +26,9 @@ Use `resources/terms.md` when terminology is uncertain or not covered by the qui
 - `.ai/skills/writing-doc-summaries/`: write or update the `summary` front matter field in a document following the repo's 115-145 character SEO-friendly sentence rules
 - `.ai/skills/write-review-translate-release-notes/`: write, review, revise, and translate TiDB release note entries for the Compatibility changes, Improvements, and Bug fixes sections in English and Chinese
 - `.ai/skills/write-update-tidb-docs/`: write new TiDB documentation or update existing documentation based on code PRs, issues, design docs, product specs, or feature descriptions; includes separate reference files for creating new docs (`ref-create-new-doc.md`) and updating existing docs (`ref-update-existing-doc.md`)
+- `.ai/skills/write-review-translate-release-notes/`: write, review, revise, and translate TiDB release note entries for the Feature details/Features, Compatibility changes, Improvements, and Bug fixes sections in English and Chinese
+- `.ai/skills/docs-pr-metadata-guard/`: guard PR template structure when creating or editing pull requests, such as version checkboxes, required sections, HTML comments, related-link fields, and cherry-pick conventions
+- `.ai/skills/docs-issue-metadata-guard/`: guard issue template structure when creating or editing issues, such as template selection, required fields, scope boundaries, and label hygiene
 
 The related resources skill includes bundled scripts under `.ai/skills/add-related-resources/scripts/` for:
 

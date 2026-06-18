@@ -43,6 +43,8 @@ Use the workflow-specific skills in `.ai/skills/` when they match the task:
 - `review-doc-pr`: review Markdown diffs, doc PRs, wording, structure, factual accuracy, and possible cross-file impact
 - `create-or-update-zh-translation-pr`: create or update an EN -> ZH translation PR that maps an English docs change or incremental source update to `pingcap/docs-cn`, using the bundled scripts in `.ai/skills/create-or-update-zh-translation-pr/scripts/` when applicable
 - `write-update-tidb-docs`: write new TiDB documentation or update existing documentation based on code PRs from `pingcap/tidb` or other TiDB ecosystem repositories, issues, design docs, or feature descriptions
+- `docs-pr-metadata-guard`: guard PR template structure when creating or editing pull requests — version checkboxes, required sections, HTML comments, related-link fields, and cherry-pick conventions
+- `docs-issue-metadata-guard`: guard issue template structure when creating or editing issues — template selection, required fields, scope boundaries, and label hygiene
 
 If no existing skill matches the task, follow this file plus the shared guidance and keep the change narrowly scoped.
 

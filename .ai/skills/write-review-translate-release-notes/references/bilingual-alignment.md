@@ -14,7 +14,7 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 ### Must-be-identical items (no translation needed)
 
 - Issue/PR numbers and URLs: `[#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN)`
-- Contributor handles and URLs: `@[contributor](https://github.com/contributor)`
+- PR author handles and URLs: `@[pr_author](https://github.com/pr_author)` (the author of the PR that resolves the issue, not the issue author)
 - Inline code spans: `` `variable_name` ``, `` `COMMAND` ``, `` `--flag` ``
 - Component names in section headers: `TiDB`, `TiKV`, `PD`, `TiFlash`, `BR`, `TiCDC`, `TiDB Lightning`
 - Version numbers: `v7.5.0`, `v8.1.0`
@@ -55,18 +55,19 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 
 ### Reviewing an existing entry
 
-1. Identify the section (Compatibility changes, Improvements, or Bug fixes) and load the corresponding reference file
+1. Identify the section (Feature details/Features, Compatibility changes, Improvements, or Bug fixes) and load the corresponding reference file
 2. Check the opening pattern against section rules
-3. Verify trailing punctuation (no `.` in English; no `。` in Chinese)
+3. Verify trailing punctuation: single-line entries (improvements, bug fixes) must not end with `.` / `。`; feature body paragraphs use normal sentence punctuation
 4. Verify inline code spans for all technical terms: variables, configs, SQL keywords/functions, error messages
-5. Verify the issue link and contributor link at the end of the line
-6. For Chinese entries: verify `修复` as the opening verb for bug fixes, or an approved opening verb for improvements
+5. Verify the issue link and PR author link at the end of the title line
+6. For Chinese entries: verify `修复` as the opening verb for bug fixes, an approved opening verb for improvements, or the correct verb mapping for feature title lines (see [feature-description.md](feature-description.md))
 
 ### Writing a new entry from a PR or issue description
 
 1. Read the PR title and description. For bug fixes, prioritize the linked GitHub Issue (user-facing symptoms) over the PR diff (code changes)
 2. Identify the component (TiDB, TiKV, PD, TiFlash, BR, TiCDC, TiDB Lightning)
 3. Draft the English entry:
+   - Feature description: `* [Feature title] (maturity tag) [#NNNNN](...) @[contributor](...)` followed by before-after body paragraphs — for structure and examples, see [feature-description.md](feature-description.md)
    - Bug fix: `Fix the issue that [concise repro condition and observed symptom] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)`
    - Improvement: `[Action verb] [what was improved, added, or supported] [#NNNNN](https://github.com/pingcap/tidb/issues/NNNNN) @[contributor](https://github.com/contributor)` — for approved opening verbs and usage guidance, see [improvements.md](improvements.md)
 4. Draft the Chinese entry with the matching pattern
@@ -75,8 +76,10 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 
 ## English to Chinese translation
 
-1. Identify if the entry is a bug fix or improvement
+1. Identify if the entry is a feature description, bug fix, or improvement
 2. Map the opening verb/phrase:
+   - Feature title: `Support X` → `支持 [X]`; `Introduce X` → `引入 [X]`; `Add X` → `新增 [X]` — for full mapping, see [feature-description.md](feature-description.md)
+   - Feature body: `Before vX.Y.Z, ...` → `在 vX.Y.Z 之前，……`; `Starting from vX.Y.Z, ...` → `从 vX.Y.Z 开始，……`
    - `Fix the issue that X` → `修复 [X 的中文表述] 的问题`
    - `Fix the issue that X might Y` → `修复 [X] 可能 [Y] 的问题`
    - `Fix the issue of X that occurs when Y` → `修复 [Y] 时 [X] 的问题`
@@ -84,11 +87,13 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 3. Keep all inline code unchanged
 4. Keep all issue links and contributor links unchanged
 5. Update doc anchor suffixes: `-new-in-vXYZ` → `-从-vXYZ-版本开始引入`
-6. Do not add a trailing period
+6. For single-line entries (improvements, bug fixes): do not add a trailing period. For feature body paragraphs: use normal sentence punctuation
 
 ## Chinese to English translation
 
 1. Identify the pattern:
+   - Feature title: `支持 [X]` → `Support [X]`; `引入 [X]` → `Introduce [X]`; `新增 [X]` → `Add [X]` — for full mapping, see [feature-description.md](feature-description.md)
+   - Feature body: `在 vX.Y.Z 之前，……` → `Before vX.Y.Z, ...`; `从 vX.Y.Z 开始，……` → `Starting from vX.Y.Z, ...`
    - `修复 [X] 的问题` → `Fix the issue that [X in English]`
    - `修复 [X] 可能 [Y] 的问题` → `Fix the issue that [X in English] might [Y in English]`
    - `修复 [X] 导致 [Y] 的问题` → `Fix the issue that [X] causes [Y]`
@@ -96,4 +101,4 @@ Use this file for checking English/Chinese alignment of a paired release note fi
 2. Keep all inline code unchanged
 3. Keep all issue links and contributor links unchanged
 4. Update doc anchor suffixes: `-从-vXYZ-版本开始引入` → `-new-in-vXYZ`
-5. Do not add a trailing period
+5. For single-line entries (improvements, bug fixes): do not add a trailing period. For feature body paragraphs: use normal sentence punctuation

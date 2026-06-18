@@ -123,6 +123,8 @@ SHOW STATUS LIKE "Ssl%";
 6 rows in set (0.0062 sec)
 ```
 
+If the `Ssl_cipher` value is not empty, the connection is encrypted.
+
 For the official MySQL client, you can also use the `STATUS` or `\s` statement to view the connection status:
 
 ```
