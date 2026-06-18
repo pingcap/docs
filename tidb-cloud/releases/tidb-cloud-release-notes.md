@@ -14,12 +14,12 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 - 为 [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md) 添加域名验证。
 
-    在以下场景中，**Allowed Email Domains** 字段为必填。为提高安全性，你必须先验证域名，然后才能在此字段中输入：
+    在以下场景中，**Allowed Email Domains** 字段为必填。为提高安全性，你必须先验证域名，然后才能在此字段中输入域名：
 
     - 为 OIDC 或 SAML 身份验证方法启用自动预配
     - 为 SAML 身份验证方法启用 SCIM 预配
 
-  更多信息，参见 [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml)。
+  更多信息，参见 [为 OIDC 和 SAML 添加并验证域名](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml)。
 
 ## 2026 年 6 月 9 日
 
