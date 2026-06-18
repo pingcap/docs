@@ -13,7 +13,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのstorageストレージに関する基本的な知識が必要です。
+TiDB HTAP を使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) 用の列ベースのストレージに関する基本的な知識が必要です。
 
 -   HTAPのストレージエンジン：HTAPでは、行ベースストレージエンジンと列指向ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を維持できます。行ベースストレージエンジンはOLTPパフォーマンスを最適化し、列指向ストレージエンジンはOLAPパフォーマンスを最適化します。
 -   HTAP のデータ一貫性: 分散型トランザクション キー値データベースである TiKV は、 ACID準拠のトランザクション インターフェイスを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により複数のレプリカ間のデータ一貫性と高可用性を保証します。TiKV の列指向ストレージ拡張機能であるTiFlash は、 Raft Learnerコンセンサス アルゴリズムに従って TiKV からデータをリアルタイムで複製し、TiKV とTiFlash間でデータの強力な一貫性を保証します。

@@ -1,6 +1,6 @@
 ---
 title: URI Formats of External Storage Services
-summary: Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのstorageURI 形式について説明します。
+summary: Amazon S3、GCS、Azure Blob Storage などの外部ストレージサービスのストレージURI 形式について説明します。
 ---
 
 ## 外部ストレージサービスのURI形式 {#uri-formats-of-external-storage-services}
