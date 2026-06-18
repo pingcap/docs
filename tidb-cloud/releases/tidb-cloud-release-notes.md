@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 - [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md) にドメイン検証を追加しました。
 
-    次のシナリオでは、**Allowed Email Domains** フィールドが必須です。Security を向上させるため、このフィールドに入力する前にドメインを検証する必要があります。
+    次のシナリオでは、**Allowed Email Domains** フィールドが必須です。セキュリティを向上させるため、このフィールドに入力する前にドメインを検証する必要があります。
 
     - OIDC または SAML 認証方式の自動プロビジョニングを有効にする場合
     - SAML 認証方式の SCIM プロビジョニングを有効にする場合
