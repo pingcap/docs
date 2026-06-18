@@ -47,7 +47,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートに失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
--   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、 TiDB Lightning のプロセスは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスク負荷、およびTiFlashレプリカの数に応じて遅くなる可能性があります。
+-   TiDB とTiDB Lightning の両方が v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。ただし、 TiDB Lightning のプロセスは、TiDB Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスク負荷、およびTiFlashレプリカの数に応じて遅くなる可能性があります。
 
 -   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製することは推奨されません。この制限は、今後のバージョンで削除される予定です。
 
