@@ -3,7 +3,7 @@ title: Best Practices for TiDB Security Configuration
 summary: 潜在的なセキュリティ リスクを軽減するために、TiDB セキュリティ構成のベスト プラクティスを学習します。
 ---
 
-# TiDBSecurityコンフィグレーションのベストプラクティス {#best-practices-for-tidb-security-configuration}
+# TiDBセキュリティ設定のベストプラクティス {#best-practices-for-tidb-security-configuration}
 
 TiDBのセキュリティは、データの整合性と機密性を保護するために不可欠です。このドキュメントでは、導入時にTiDBクラスタを安全に構成するためのガイドラインを示します。これらのベストプラクティスに従うことで、潜在的なセキュリティリスクを効果的に軽減し、データ侵害を防ぎ、TiDBデータベースシステムの継続的かつ安定した信頼性の高い運用を確保できます。
 

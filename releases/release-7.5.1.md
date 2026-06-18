@@ -13,7 +13,7 @@ TiDB バージョン: 7.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
--   Security強化モード（SEM）で設定[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.5/system-variables#require_secure_transport-new-in-v610) ～ `ON`を禁止し、ユーザー[＃47665](https://github.com/pingcap/tidb/issues/47665) @ [tiancaiamao](https://github.com/tiancaiamao)の潜在的な接続問題を防ぎます。
+-   セキュリティ強化モード（SEM）で設定[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.5/system-variables#require_secure_transport-new-in-v610) ～ `ON`を禁止し、ユーザー[＃47665](https://github.com/pingcap/tidb/issues/47665) @ [tiancaiamao](https://github.com/tiancaiamao)の潜在的な接続問題を防ぎます。
 -   ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level` `"debug"`から`"info"` [＃8641](https://github.com/pingcap/tiflash/issues/8641) @ [JaySon-Huang](https://github.com/JaySon-Huang)に変更します。
 -   TiKV構成項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#num-threads-new-in-v658-and-v751)を導入して、 `enable-compaction-filter`が`false` [＃16101](https://github.com/tikv/tikv/issues/16101) @ [tonyxuqqi](https://github.com/tonyxuqqi)の場合のGCスレッド数を設定します。
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。

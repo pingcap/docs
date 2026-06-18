@@ -38,13 +38,13 @@ mysql> SHOW GRANTS FOR 'root';
 
 <CustomContent platform="tidb">
 
--   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`オプションのうちいくつかは TiDB ではまだサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細は[Securityの互換性](/security-compatibility-with-mysql.md)参照してください。
+-   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`オプションのうちいくつかは TiDB ではまだサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細は[セキュリティの互換性](/security-compatibility-with-mysql.md)参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`オプションのうちいくつかは TiDB ではまだサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細は[Securityの互換性](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/)参照してください。
+-   `SHOW CREATE USER`の出力は MySQL と一致するように設計されていますが、 `CREATE`オプションのうちいくつかは TiDB ではまだサポートされていません。まだサポートされていないオプションは解析されますが無視されます。詳細は[セキュリティの互換性](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql/)参照してください。
 
 </CustomContent>
 

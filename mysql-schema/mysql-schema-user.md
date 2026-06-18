@@ -77,7 +77,7 @@ DESC mysql.user;
 
     `_priv`または`_Priv`で終わるフィールドは、ユーザーアカウントに付与される権限を定義します。例えば、 `Select_priv`ユーザーがグローバル権限`Select`を持つことを意味します。詳細については、 [TiDB操作に必要な権限](/privilege-management.md#privileges-required-for-tidb-operations)参照してください。
 
--   Security：
+-   セキュリティ：
     -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
     -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
     -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](/password-management.md#password-reuse-policy)に使用されます。
@@ -97,7 +97,7 @@ DESC mysql.user;
 
     `_priv`または`_Priv`で終わるフィールドは、ユーザーアカウントに付与される権限を定義します。例えば、 `Select_priv`ユーザーがグローバル権限`Select`を持つことを意味します。詳細については、 [TiDB操作に必要な権限](https://docs.pingcap.com/tidb/stable/privilege-management#privileges-required-for-tidb-operations)参照してください。
 
--   Security：
+-   セキュリティ：
     -   `authentication_string`と`plugin` ： `authentication_string`にはユーザーアカウントの認証情報が保存されます。認証情報は、 `plugin`フィールドで指定された認証プラグインに基づいて解釈されます。
     -   `Account_locked` : ユーザー アカウントがロックされているかどうかを示します。
     -   `Password_reuse_history`と`Password_reuse_time` : [パスワード再利用ポリシー](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy)に使用されます。
