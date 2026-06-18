@@ -5,7 +5,7 @@ summary: Datadogとの連携により、TiDBクラスタを監視する方法を
 
 # TiDB CloudとDatadogを統合する {#integrate-tidb-cloud-with-datadog}
 
-TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[データドッグ](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
+TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[Datadog](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
 
 ## Datadog統合バージョン {#datadog-integration-version}
 
@@ -83,7 +83,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 >
 > Datadog にTiDB Cloud統合をすでにインストールしている場合は、このセクションの次の手順をスキップできます。 [**TiDB Cloudダイナミックトラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードは、Datadog [**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
 
-1.  [データドッグ](https://app.datadoghq.com)にログインします。
+1.  [Datadog](https://app.datadoghq.com)にログインします。
 2.  Datadog の[**TiDB Cloud統合**ページ](https://app.datadoghq.com/account/settings#integrations/tidb-cloud)に移動します。
 3.  **「コンフィグレーション」**タブで、 **「統合のインストール」を**クリックします。
 

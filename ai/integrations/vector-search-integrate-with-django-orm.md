@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 # TiDBベクトル検索をDjango ORMと統合する {#integrate-tidb-vector-search-with-django-orm}
 
-このチュートリアルでは[ジャンゴ](https://www.djangoproject.com/)ORM を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、エンベディングを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは[Django](https://www.djangoproject.com/)ORM を使用して[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、エンベディングを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **注記：**
 >

@@ -32,7 +32,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
-1.  [行く](https://golang.org/) Go モジュールが使用されるため、1.23 以降が必要です。
+1.  [Go](https://golang.org/) Go モジュールが使用されるため、1.23 以降が必要です。
 2.  [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用して`bin/pd-ctl`コンパイルして生成します。
 
 ## 使用法 {#usage}

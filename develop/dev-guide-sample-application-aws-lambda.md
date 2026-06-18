@@ -385,8 +385,8 @@ console.log(rsh.affectedRows);
 ## 役立つメモ {#useful-notes}
 
 -   [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
--   SQL インジェクションを回避するには、 [準備された声明](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
--   複雑な SQL ステートメントがあまり含まれないシナリオでは、[シークエライズ](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[プリズマ](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
+-   SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
+-   複雑な SQL ステートメントがあまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
 -   アプリケーション用の RESTful API を構築するには、 [AWS LambdaをAPI Gatewayで使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)お勧めします。
 -   TiDB Cloud Starterと AWS Lambda を使用した高性能アプリケーションの設計については、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
@@ -400,6 +400,6 @@ console.log(rsh.affectedRows);
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

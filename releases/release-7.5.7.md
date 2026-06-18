@@ -162,6 +162,6 @@ TiDB バージョン: 7.5.7
         -   クラウドstorageから TiDB [＃60224](https://github.com/pingcap/tidb/issues/60224) @ [joechenrh](https://github.com/joechenrh)に Parquet ファイルをインポートするときに、 TiDB Lightning が数時間停止する可能性がある問題を修正しました。
         -   TiKVへのRPCリクエストが[＃61326](https://github.com/pingcap/tidb/issues/61326) @ [OliverS929](https://github.com/OliverS929)でタイムアウトするとTiDB Lightningが`context deadline exceeded`エラーを返す問題を修正しました
 
-    -   NGモニタリング
+    -   NG Monitoring
 
         -   時系列データのカーディナリティが高い場合に TSDB がメモリを大量に消費する問題を修正し、TSDB [＃295](https://github.com/pingcap/ng-monitoring/issues/295) @ [mornyx](https://github.com/mornyx)のメモリ構成オプションを提供します。

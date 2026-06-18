@@ -44,7 +44,7 @@ TiFlashの分散型storageおよびコンピューティングアーキテクチ
 
     既存のバケットを使用することもできますが、TiDBクラスターごとに専用のキープレフィックスを予約する必要があります。S3バケットの詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html)ご覧ください。
 
-    [ミニオ](https://min.io/)などの他の S3 互換オブジェクトstorageを使用することもできます。
+    [MinIO](https://min.io/)などの他の S3 互換オブジェクトstorageを使用することもできます。
 
     TiFlash はデータにアクセスするために以下の S3 API を使用する必要があります。TiDB クラスター内のTiFlashノードにこれらの API に対する必要な権限が付与されていることを確認してください。
 

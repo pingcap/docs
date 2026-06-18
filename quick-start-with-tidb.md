@@ -120,7 +120,7 @@ summary: TiUPプレイグラウンドを使ってTiDBセルフマネージドを
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    -   プロメテウス: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
+    -   Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
 
     -   [TiDBダッシュボード](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
 
@@ -232,7 +232,7 @@ summary: TiUPプレイグラウンドを使ってTiDBセルフマネージドを
             mysql --host 127.0.0.1 --port 4000 -u root
             ```
 
-    -   プロメテウス: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
+    -   Prometheus: [http://127.0.0.1:9090](http://127.0.0.1:9090) 。
 
     -   [TiDBダッシュボード](/dashboard/dashboard-intro.md): [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard) 。デフォルトのユーザー名は`root`で、パスワードは空です。
 

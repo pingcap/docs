@@ -318,7 +318,7 @@ TiDBバージョン: 6.3.0-DMR
         -   MySQL シンクでエラー [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)ヴィーナスが発生した場合の DML ステートメントのロギング`start ts`のサポート
         -   `api/v1/health` API を強化して、TiCDC クラスターのより正確な正常性状態を返します [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
         -   MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
-        -   非推奨のパルサーシンク [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)を削除します
+        -   非推奨のPulsarシンク [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)を削除します
         -   変更フィードに関係のない DDL ステートメントを破棄することで、レプリケーションのパフォーマンスを向上させます [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
     -   TiDBデータ移行（DM）

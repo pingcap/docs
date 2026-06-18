@@ -151,7 +151,7 @@ TiDBバージョン：8.5.2
         -   TiDB Lightningが大量のデータをインポートする際に、SSTファイルをTiKVクラスターに書き込んだり取り込んだりする際にメモリ不足（OOM）になる可能性がある問題を修正しました。 [#59947](https://github.com/pingcap/tidb/issues/59947) @[OliverS929](https://github.com/OliverS929)
         -   テーブル作成時の最大QPSが低いことと`information_schema.tables`へのアクセスが遅いことが原因で、数百万のテーブルが存在するシナリオでTiDB Lightningがスキーマジョブのディスパッチが遅くなる問題を修正しました [#58141](https://github.com/pingcap/tidb/issues/58141) @[D3Hunter](https://github.com/D3Hunter)
 
-    -   NGモニタリング
+    -   NG Monitoring
 
         -   DocDBが高負荷時にメモリを過剰に消費する問題を修正し、DocDBのオプションのバックエンドとしてSQLiteを使用する [#267](https://github.com/pingcap/ng-monitoring/issues/267) @[mornyx](https://github.com/mornyx)
         -   時系列データのカーディナリティが高い場合にTSDBがメモリを過剰に消費する問題を修正し、TSDBのメモリ設定オプションを提供します [#295](https://github.com/pingcap/ng-monitoring/issues/295) @[mornyx](https://github.com/mornyx)

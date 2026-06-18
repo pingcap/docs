@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-peewee/','/ja/tid
 
 # peeweeを使用してTiDBに接続します。 {#connect-to-tidb-with-peewee}
 
-TiDBはMySQL互換のデータベースであり、PythonはPythonで人気の[ピーウィー](https://docs.peewee-orm.com/)リレーショナルマッパー（ORM）です。
+TiDBはMySQL互換のデータベースであり、PythonはPythonで人気の[Peewee](https://docs.peewee-orm.com/)リレーショナルマッパー（ORM）です。
 
 このチュートリアルでは、TiDBとpeeweeを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 #### PyMySQLを使う理由とは？ {#why-use-pymysql}
 
-peeweeは、複数のデータベースを扱うORMライブラリです。データベースの高レベルな抽象化を提供することで、開発者がよりオブジェクト指向的な方法でSQL文を記述できるように支援します。ただし、peeweeにはデータベースドライバは含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython製のMySQLクライアントライブラリです。詳細については、 [ピーウィー公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
+peeweeは、複数のデータベースを扱うORMライブラリです。データベースの高レベルな抽象化を提供することで、開発者がよりオブジェクト指向的な方法でSQL文を記述できるように支援します。ただし、peeweeにはデータベースドライバは含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython製のMySQLクライアントライブラリです。詳細については、 [Peewee公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
 
 ### ステップ3：接続情報の設定 {#step-3-configure-connection-information}
 
@@ -335,12 +335,12 @@ Player.delete().where(Player.coins == 100).execute()
 
 ## 次のステップ {#next-steps}
 
--   ピーウィーの使い方の詳細については、ピーウィー[ピーウィーのドキュメント](https://docs.peewee-orm.com/)ご覧ください。
+-   Peeweeの使い方の詳細については、[Peeweeのドキュメント](https://docs.peewee-orm.com/)をご覧ください。
 -   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

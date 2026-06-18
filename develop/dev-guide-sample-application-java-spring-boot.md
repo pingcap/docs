@@ -6,9 +6,9 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 
 # Spring Bootを使用してTiDBに接続する {#connect-to-tidb-with-spring-boot}
 
-[春](https://spring.io/)は MySQL 互換データベースであり、 Java用の人気のあるオープンソース コンテナ フレームワークです。このドキュメントでは Spring の使用方法として[スプリングブーツ](https://spring.io/projects/spring-boot)を使用します。
+[Spring](https://spring.io/)は Java用の人気のあるオープンソースコンテナフレームワークです。TiDBはMySQL互換データベースで、このドキュメントでは Spring の使用方法として[Spring Boot](https://spring.io/projects/spring-boot)を使用します。
 
-このチュートリアルでは、TiDBを[Spring Data JPA](https://spring.io/projects/spring-data-jpa)およびJPAプロバイダとしての[ハイバネイト](https://hibernate.org/orm/)と組み合わせて使用​​し、以下のタスクを実行する方法を学びます。
+このチュートリアルでは、TiDBを[Spring Data JPA](https://spring.io/projects/spring-data-jpa)およびJPAプロバイダとしての[Hibernate](https://hibernate.org/orm/)と組み合わせて使用​​し、以下のタスクを実行する方法を学びます。
 
 -   環境をセットアップしてください。
 -   HibernateとSpring Data JPAを使用してTiDBに接続します。
@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 このチュートリアルを完了するには、以下が必要です。
 
 -   **Java Development Kit (JDK) 17**以降が必要です。業務要件や個人のニーズに応じて、 [OpenJDK](https://openjdk.org/)または[Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
--   [メイブン](https://maven.apache.org/install.html)**3.8**以上。
+-   [Maven](https://maven.apache.org/install.html)**3.8**以上。
 -   [Git](https://git-scm.com/downloads) 。
 -   TiDBクラスタ。
 
@@ -307,6 +307,6 @@ playerRepository.deleteById(id);
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

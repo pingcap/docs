@@ -27,7 +27,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 -   [Python 3.11以降](https://www.python.org/downloads/)インストールされています
 
--   [ピップ](https://pypi.org/project/pip/)がインストールされました
+-   [pip](https://pypi.org/project/pip/)がインストールされました
 
 -   [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
 

@@ -19,7 +19,7 @@ TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで
 | pd-{バージョン}-linux-{アーキテクチャ}.tar.gz                |                |
 | ctl-{バージョン}-linux-{アーキテクチャ}.tar.gz               |                |
 | grafana-{バージョン}-linux-{アーキテクチャ}.tar.gz           |                |
-| アラートマネージャー-{バージョン}-linux-{アーキテクチャ}.tar.gz        |                |
+| Alertmanager-{バージョン}-linux-{アーキテクチャ}.tar.gz        |                |
 | blackbox_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz |                |
 | prometheus-{バージョン}-linux-{アーキテクチャ}.tar.gz        |                |
 | node_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz     |                |
@@ -63,7 +63,7 @@ TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで
 | Reparo                                              |                |
 | サーバー-{バージョン}-linux-{アーキテクチャ}.tar.gz              | バージョン6.2.0の新機能 |
 | grafana-{バージョン}-linux-{アーキテクチャ}.tar.gz           | バージョン6.2.0の新機能 |
-| アラートマネージャー-{バージョン}-linux-{アーキテクチャ}.tar.gz        | バージョン6.2.0の新機能 |
+| Alertmanager-{バージョン}-linux-{アーキテクチャ}.tar.gz        | バージョン6.2.0の新機能 |
 | prometheus-{バージョン}-linux-{アーキテクチャ}.tar.gz        | バージョン6.2.0の新機能 |
 | blackbox_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz | バージョン6.2.0の新機能 |
 | node_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz     | バージョン6.2.0の新機能 |

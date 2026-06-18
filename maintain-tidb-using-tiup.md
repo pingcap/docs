@@ -163,7 +163,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 TiDB クラスター内のコンポーネントは次の順序で停止されます (監視コンポーネントも停止されます)。
 
-**アラートマネージャー &gt; Grafana &gt; Prometheus &gt; TiCDC &gt; TiFlash &gt; TiDB &gt; TiKV &gt; PD**
+**Alertmanager &gt; Grafana &gt; Prometheus &gt; TiCDC &gt; TiFlash &gt; TiDB &gt; TiKV &gt; PD**
 
 クラスターを停止するには、次のコマンドを実行します。
 

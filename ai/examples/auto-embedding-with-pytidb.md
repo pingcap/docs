@@ -84,4 +84,4 @@ id: 3, text: LlamaIndex is a Python library for building AI-powered applications
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)
+-   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)

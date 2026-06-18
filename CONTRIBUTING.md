@@ -25,7 +25,7 @@
 -   [コードコメントスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
 -   図表スタイル: [Figma クイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    図のスタイルを統一するために、図の描画やデザインには[フィグマ](https://www.figma.com/)使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
+    図のスタイルを統一するために、図の描画やデザインには[Figma](https://www.figma.com/)使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
 
 ### ドキュメントテンプレートを選択する {#pick-a-doc-template}
 
@@ -49,7 +49,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 ### チェリーピックラベルを使用する {#use-cherry-pick-labels}
 
-あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[チチボット](https://github.com/ti-chi-bot)導入します。
+あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[ti-chi-bot](https://github.com/ti-chi-bot)導入します。
 
 -   変更が特定のドキュメントバージョンにのみ適用される場合は、そのドキュメントバージョンのブランチに基づいてPRを作成してください。チェリーピックラベルを追加する必要はありません。
 
@@ -197,4 +197,4 @@ TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `Custo
 
 ## 接触 {#contact}
 
-ディスカッションには[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。
+ディスカッションには[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。

@@ -60,7 +60,7 @@ summary: TiDBの機能概要について学びましょう。
 | [FastScanを使用してOLAPシナリオにおけるクエリを高速化する](/tiflash/use-fastscan.md)                              |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
 | [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [タイタンレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
+| [Titanレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [バケットを使用してスキャンの同時実行性を向上させる](/tune-region-performance.md#use-bucket-to-increase-concurrency) |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
 | [見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |

@@ -194,7 +194,7 @@ tiup dumpling -f 'employees.*' -f '*.WorkOrder'
 
     /^db\d{2,}$/./^tbl\d{2,}$/
 
-これらの正規表現は[囲碁方言](https://pkg.go.dev/regexp/syntax?tab=doc)を使用します。識別子に正規表現に一致する部分文字列が含まれている場合、パターンは一致します。例えば、 `/b/`は`db01`一致します。
+これらの正規表現は[Go](https://pkg.go.dev/regexp/syntax?tab=doc)の正規表現構文を使用します。識別子に正規表現に一致する部分文字列が含まれている場合、パターンは一致します。例えば、 `/b/`は`db01`一致します。
 
 > **注記：**
 >

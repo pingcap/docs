@@ -5,7 +5,7 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 # Terraform 統合の概要 {#terraform-integration-overview}
 
-[テラフォーム](https://www.terraform.io/)は、人間が読める構成ファイルでクラウド リソースと自己ホスト リソースの両方を定義でき、バージョン管理、再利用、共有できるコード ツールとしてのインフラストラクチャです。
+[Terraform](https://www.terraform.io/)は、人間が読める構成ファイルでクラウド リソースと自己ホスト リソースの両方を定義でき、バージョン管理、再利用、共有できるコード ツールとしてのインフラストラクチャです。
 
 [TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) 、Terraform を使用してクラスター、バックアップ、リストアなどのTiDB Cloudリソースを管理できるようにするプラグインです。
 

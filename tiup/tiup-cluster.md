@@ -65,7 +65,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 > **注記：**
 >
-> TiUPクラスターコンポーネントがデプロイメントとスケーリングに使用するトポロジ ファイルは[ヤムル](https://yaml.org/spec/1.2/spec.html)構文を使用して記述されるため、インデントが正しいことを確認してください。
+> TiUPクラスターコンポーネントがデプロイメントとスケーリングに使用するトポロジ ファイルは[YAML](https://yaml.org/spec/1.2/spec.html)構文を使用して記述されるため、インデントが正しいことを確認してください。
 
 ```yaml
 ---

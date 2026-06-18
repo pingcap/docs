@@ -35,7 +35,7 @@ BRは基本的なバックアップと復元機能のみを提供し、バック
 
 TiDB クラスターを独自に構築したデータ センターに導入する場合は、次のプラクティスが推奨されます。
 
--   バックアップstorageシステムとして[ミニオ](https://docs.min.io/docs/minio-quickstart-guide.html)構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+-   バックアップstorageシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
 -   ネットワーク ファイル システム (NFS、NAS など) ディスクを br コマンドライン ツールとすべての TiKV インスタンスにマウントし、POSIX ファイル システム インターフェイスを使用して、バックアップ データを対応する NFS ディレクトリに書き込みます。
 
 > **注記：**

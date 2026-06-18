@@ -92,7 +92,7 @@
             -   [TiCDC Avroプロトコル](/ticdc/ticdc-avro-protocol.md)
             -   [TiCDC Canal- JSONプロトコル](/ticdc/ticdc-canal-json.md)
             -   [TiCDC CSVプロトコル](/ticdc/ticdc-csv.md)
-            -   [TiCDCデベジウムプロトコル](/ticdc/ticdc-debezium.md)
+            -   [TiCDCDebeziumプロトコル](/ticdc/ticdc-debezium.md)
             -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
             -   [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)
         -   [TiCDCオープンAPI v2](/ticdc/ticdc-open-api-v2.md)
@@ -577,8 +577,8 @@
     -   ストレージエンジン - TiKV
         -   [TiKVの概要](/tikv-overview.md)
         -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
-        -   [タイタンの概要](/storage-engine/titan-overview.md)
-        -   [タイタンコンフィグレーション](/storage-engine/titan-configuration.md)
+        -   [Titanの概要](/storage-engine/titan-overview.md)
+        -   [Titan Configuration](/storage-engine/titan-configuration.md)
         -   [分割されたRaftKV](/partitioned-raft-kv.md)
     -   ストレージエンジン - TiFlash
         -   [概要](/tiflash/tiflash-overview.md)

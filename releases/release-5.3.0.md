@@ -83,7 +83,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 -   DMコードは[TiCDCコードリポジトリのフォルダ「dm」](https://github.com/pingcap/tiflow/tree/release-5.3/dm)に移行されました。DMのバージョン番号はTiDBに準じます。v2.0.xの次に新しいDMバージョンはv5.3.0となり、v2.0.xからv5.3.0へのアップグレードはリスクなしで行えます。
 
--   Prometheusのデフォルトのデプロイバージョンは、v2.8.1から2021年5月にリリースされる[バージョン2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1)にアップグレードされました。このバージョンでは、より多くの機能が提供され、セキュリティ問題が修正されています。Prometheus v2.8.1と比較して、v2.27.1ではアラートの時刻表示がUnixタイムスタンプからUTCに変更されました。詳細は[プロメテウスコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
+-   Prometheusのデフォルトのデプロイバージョンは、v2.8.1から2021年5月にリリースされる[バージョン2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1)にアップグレードされました。このバージョンでは、より多くの機能が提供され、セキュリティ問題が修正されています。Prometheus v2.8.1と比較して、v2.27.1ではアラートの時刻表示がUnixタイムスタンプからUTCに変更されました。詳細は[Prometheusコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
 
 ## 新機能 {#new-features}
 

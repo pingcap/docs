@@ -5,7 +5,7 @@ summary: Airbyte TiDBコネクタの使い方を学びましょう。
 
 # TiDB CloudとAirbyteを統合する {#integrate-tidb-cloud-with-airbyte}
 
-[エアバイト](https://airbyte.com/)データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、エアバイトをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
+[Airbyte](https://airbyte.com/)データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、Airbyteをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
 
 ## Airbyteをデプロイ {#deploy-airbyte}
 

@@ -147,7 +147,7 @@ Query OK, 1 row affected (0.00 sec)
 
 インデックス推奨機能には、以下の制限事項があります。
 
--   現在、[準備された声明](/develop/dev-guide-prepared-statement.md)ステートメントはサポートされていません。 `RECOMMEND INDEX RUN`ステートメントは`Prepare`および`Execute`プロトコルを介して実行されるクエリに対してインデックスを推奨することはできません。
+-   現在、[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)ステートメントはサポートされていません。 `RECOMMEND INDEX RUN`ステートメントは`Prepare`および`Execute`プロトコルを介して実行されるクエリに対してインデックスを推奨することはできません。
 -   現時点では、インデックスの削除に関する推奨事項は提供されていません。
 -   現在、インデックスアドバイザーのユーザーインターフェース（UI）はまだ提供されていません。
 

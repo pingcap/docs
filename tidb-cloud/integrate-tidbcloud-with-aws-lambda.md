@@ -42,7 +42,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
--   [郵便配達人](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例では cURL を使用します。 Windows ユーザーには Postman をお勧めします。
+-   [Postman](https://www.postman.com/)や[カール](https://curl.se/)などのAPIテストツール。このドキュメントのほとんどの例では cURL を使用します。 Windows ユーザーには Postman をお勧めします。
 
 -   プロジェクトの[最新リリースのアセット](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)ローカル マシンにダウンロードします。これには、 `cloudformation_template.yml`および`cloudformation_template.json`ファイルが含まれます。
 

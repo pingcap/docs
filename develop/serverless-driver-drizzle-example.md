@@ -156,7 +156,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
+-   エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
 -   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
@@ -269,5 +269,5 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ## 次は？ {#what-s-next}
 
--   [霧雨](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しくはこちらをご覧ください。
+-   [Drizzle](https://orm.drizzle.team/docs/overview)と[drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)について詳しくはこちらをご覧ください。
 -   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学びましょう。

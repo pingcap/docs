@@ -5,7 +5,7 @@ summary: Zoom経由でアラート通知を受け取ることで、TiDBクラス
 
 # Zoom経由で登録する {#subscribe-via-zoom}
 
-TiDB Cloud は、Zoom、[スラック](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[フラッシュデューティ](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)を介してアラート通知を購読する簡単な方法を提供します。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
+TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)を介してアラート通知を購読する簡単な方法を提供します。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
 
 > **注記：**
 >

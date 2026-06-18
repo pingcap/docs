@@ -179,14 +179,14 @@
     -   [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
     -   [予算管理](/tidb-cloud/tidb-cloud-budget.md)
 -   統合
-    -   [エアバイト](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
-    -   [クラウドフレア](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+    -   [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
+    -   [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
     -   [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
     -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
     -   [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
     -   [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
     -   [ProxySQL](/develop/dev-guide-proxysql-integration.md)
-    -   テラフォーム
+    -   Terraform
         -   [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
         -   [TiDB Cloud Terraform プロバイダーを取得する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
         -   [`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource-manage-essential.md)
@@ -195,8 +195,8 @@
         -   [`tidbcloud_sql_user`リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
         -   [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
         -   [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
-    -   [ヴェルセル](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
-    -   [ザピアー](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
+    -   [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+    -   [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
 ## 参照 {#reference}
 

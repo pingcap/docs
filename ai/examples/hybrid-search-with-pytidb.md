@@ -118,4 +118,4 @@ python example.py
 
 ## 関連リソース {#related-resources}
 
--   **ソースコード**： [GitHubでビュー](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)
+-   **ソースコード**： [GitHubで見る](https://github.com/pingcap/pytidb/tree/main/examples/hybrid_search)

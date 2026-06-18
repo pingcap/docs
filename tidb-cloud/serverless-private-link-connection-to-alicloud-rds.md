@@ -59,7 +59,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
     RDS エンドポイントに ping を実行して IP アドレスを取得できます。
 
-3.  [ナショナルリーグ](https://slb.console.alibabacloud.com/nlb)に進み、ネットワークロードバランサーを作成します。以下の情報を入力してください。
+3.  [NLB](https://slb.console.alibabacloud.com/nlb)に進み、ネットワークロードバランサーを作成します。以下の情報を入力してください。
 
     -   **ネットワークタイプ**: `Internal-facing`を選択
     -   **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を選択します。

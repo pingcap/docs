@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 # TiDB Cloud Serverless Driver Kysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}
 
-[キセリー](https://kysely.dev/docs/intro)、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
+[Kysely](https://kysely.dev/docs/intro)、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
 
 -   サーバーレス環境におけるパフォーマンスの向上。
 -   Kyselyをエッジ環境で使用できる機能。
@@ -155,7 +155,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 このチュートリアルを完了するには、以下のものが必要です。
 
--   エッジ環境を提供する[ヴェルセル](https://vercel.com/docs)アカウント。
+-   エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
 -   [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
 -   TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
@@ -274,5 +274,5 @@ TiDB Cloud Starterインスタンスの概要ページで、右上隅の**「接
 
 ## 次は？ {#what-s-next}
 
--   [キセリー](https://kysely.dev/docs/intro)と[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)についてもっと詳しく知りたい方はこちらをご覧ください。
+-   [Kysely](https://kysely.dev/docs/intro)と[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)についてもっと詳しく知りたい方はこちらをご覧ください。
 -   [TiDB CloudとVercelを統合する](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)方法を学ぶ

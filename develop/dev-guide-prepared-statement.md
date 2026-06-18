@@ -1,10 +1,10 @@
 ---
-title: Prepared Statements
+title: プリペアドステートメント
 summary: TiDB 準備済みステートメントの使用方法について学習します。
 aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-guide-prepared-statement/']
 ---
 
-# 準備された声明 {#prepared-statements}
+# プリペアドステートメント {#prepared-statements}
 
 A [プリペアドステートメント](/sql-statements/sql-statement-prepare.md) 、パラメータのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメータを分離します。これにより、SQL文の以下の側面を改善できます。
 
@@ -214,6 +214,6 @@ Javaの完全な例については、以下を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)

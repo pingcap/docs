@@ -3,9 +3,9 @@ title: TiCDC Debezium Protocol
 summary: TiCDC Debezium プロトコルの概念とその使用方法を学びます。
 ---
 
-# TiCDC デベジウムプロトコル {#ticdc-debezium-protocol}
+# TiCDC Debeziumプロトコル {#ticdc-debezium-protocol}
 
-TiCDC [デベジウム](https://debezium.io/) 、データベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はそれぞれ「イベント」と呼ばれるメッセージに変換され、Kafka に送信されます。v8.0.0以降、TiCDCはDebeziumスタイルの出力形式を使用してTiDBの変更をKafkaに送信することをサポートするため、これまでDebeziumのMySQL統合を使用していたユーザーにとって、MySQLデータベースからの移行が簡素化されます。
+TiCDC [Debezium](https://debezium.io/) 、データベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はそれぞれ「イベント」と呼ばれるメッセージに変換され、Kafka に送信されます。v8.0.0以降、TiCDCはDebeziumスタイルの出力形式を使用してTiDBの変更をKafkaに送信することをサポートするため、これまでDebeziumのMySQL統合を使用していたユーザーにとって、MySQLデータベースからの移行が簡素化されます。
 
 ## Debeziumメッセージ形式を使用する {#use-the-debezium-message-format}
 

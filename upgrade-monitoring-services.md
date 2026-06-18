@@ -16,9 +16,9 @@ TiDB クラスターをデプロイすると、 TiUP はクラスターの監視
 > -   このドキュメントのアップグレード手順は、 TiUPバージョン 1.9.0 以降に適用されます。そのため、アップグレード前にTiUP のバージョンをご確認ください。
 > -   TiUPを使用して TiDB クラスターをアップグレードすると、 TiUP は監視サービスをデフォルトバージョンに再デプロイします。TiDB のアップグレード後、監視サービスのアップグレードを再度実行する必要があります。
 
-## プロメテウスのアップグレード {#upgrade-prometheus}
+## Prometheusのアップグレード {#upgrade-prometheus}
 
-TiDBとの互換性を高めるため、TiDBインストールパッケージに含まれるPrometheusインストールパッケージの使用をお勧めします。TiDBインストールパッケージに含まれるPrometheusのバージョンは固定です。より新しいバージョンのPrometheusをご利用になる場合は、各バージョンの新機能については[プロメテウス リリースノート](https://github.com/prometheus/prometheus/releases)を参照し、本番環境に適したバージョンをお選びください。推奨バージョンについては、PingCAPの技術スタッフにご相談ください。
+TiDBとの互換性を高めるため、TiDBインストールパッケージに含まれるPrometheusインストールパッケージの使用をお勧めします。TiDBインストールパッケージに含まれるPrometheusのバージョンは固定です。より新しいバージョンのPrometheusをご利用になる場合は、各バージョンの新機能については[Prometheus リリースノート](https://github.com/prometheus/prometheus/releases)を参照し、本番環境に適したバージョンをお選びください。推奨バージョンについては、PingCAPの技術スタッフにご相談ください。
 
 次のアップグレード手順では、Prometheus Web サイトから必要なバージョンの Prometheus インストール パッケージをダウンロードし、それを使用してTiUPが使用できる Prometheus パッケージを作成する必要があります。
 

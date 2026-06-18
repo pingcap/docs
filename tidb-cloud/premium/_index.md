@@ -109,13 +109,13 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 <LearningPath label="Integrations" icon="cloud4">
 
-[エアバイト](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte/?plan=premium)
+[Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte/?plan=premium)
 
-[ザピアー](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier/?plan=premium)
+[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier/?plan=premium)
 
-[ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel/?plan=premium)
+[Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel/?plan=premium)
 
-[テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview/?plan=premium)
+[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview/?plan=premium)
 
 </LearningPath>
 

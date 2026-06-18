@@ -55,17 +55,17 @@
     -   [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
     -   [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
     -   [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
-    -   [Google ジェミニ](/ai/integrations/vector-search-auto-embedding-gemini.md)
-    -   [抱きしめる顔](/ai/integrations/vector-search-auto-embedding-huggingface.md)
+    -   [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md)
+    -   [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md)
     -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
     -   [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 -   AIフレームワーク
     -   [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
     -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   ORMライブラリ
-    -   [SQLアルケミー](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+    -   [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
     -   [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
-    -   [ピーウィー](/ai/integrations/vector-search-integrate-with-peewee.md)
+    -   [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)
 -   クラウドサービス
     -   [Jina AI埋め込み](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
     -   [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)

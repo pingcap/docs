@@ -11,7 +11,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 > **警告：**
 >
 > -   MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしているわけではありません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
-> -   [データグリップ](/develop/dev-guide-gui-datagrip.md)、 [DBeaver](/develop/dev-guide-gui-dbeaver.md) 、 [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md)など、TiDB を正式にサポートする他の GUI ツールを使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
+> -   [DataGrip](/develop/dev-guide-gui-datagrip.md)、 [DBeaver](/develop/dev-guide-gui-dbeaver.md) 、 [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md)など、TiDB を正式にサポートする他の GUI ツールを使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
 このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学ぶことができます。
 
@@ -197,6 +197,6 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 ## お困りですか？ {#need-help}
 
--   [不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [スラック](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
