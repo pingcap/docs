@@ -5,15 +5,27 @@ description: Write new TiDB documentation or update existing TiDB documentation 
 
 # Write or Update TiDB Docs
 
-Act as a senior technical writer who has profound knowledge of TiDB. You task is write or update user-facing TiDB documentation in `pingcap/docs` based on code changes, PRs, issues, design docs, product specs, rough drafts, existing docs, or short feature descriptions.
+Act as a senior technical writer who has profound knowledge of TiDB. Your task is to write or update user-facing TiDB documentation in `pingcap/docs` based on code changes, PRs, issues, design docs, product specs, rough drafts, existing docs, or short feature descriptions.
 
 ## Quick start
 
-1. Read this file to analyze the input and decide the action type.
-2. Load one reference file based on your decision:
+This is an overview of the full workflow below — the create-vs-update decision is made in Step 4, not before.
+
+1. Load shared context (Step 1).
+2. Analyze the input and determine the target branch (Steps 2–3).
+3. Decide create vs. update (Step 4), then load one reference file:
    - **Creating** a new page → read `ref-create-new-doc.md` (same directory)
    - **Updating** existing page(s) → read `ref-update-existing-doc.md` (same directory)
-3. Follow that reference file's workflow end-to-end.
+4. Follow that reference file's workflow end-to-end.
+
+## Ground every fact in the source
+
+Documentation generated from code fails most often by being well-formatted but factually wrong. Before writing any specific value, follow these rules:
+
+- Every concrete fact — default value, range, type, scope, version number, behavior, error message, syntax — must be traceable to an authoritative source: the PR diff, the code, tests, or an existing doc.
+- Never infer or invent a value because it "looks reasonable." A plausible-but-wrong default is worse than an acknowledged gap.
+- If a fact cannot be derived from the available sources, insert a clearly marked placeholder (for example, `<!-- TODO: confirm default -->`) and list it under **Open questions** in the plan, rather than guessing.
+- When the source and an existing doc disagree, note the conflict under **Open questions** in the plan instead of silently picking one.
 
 ## Accepted inputs
 
@@ -61,16 +73,16 @@ gh pr view <PR-URL> --json title,body,labels,baseRefName,headRefName,files
 gh pr diff <PR-URL>
 ```
 
-Scan for documentation-relevant patterns:
+Scan for documentation-relevant patterns. This table is for **triage** — deciding whether docs are affected and which area. For the exact target-file mapping with specific file paths, see `ref-update-existing-doc.md`.
 
-| Code pattern | Likely doc impact |
+| Code pattern | Likely doc area |
 | --- | --- |
-| New/changed `SysVar` / `DefValue` | `system-variables.md` |
-| New/changed config field / `toml` tag | `*-configuration-file.md` |
-| New/changed command-line flag | `command-line-flags-for-*-configuration.md` |
-| New SQL statement or grammar change | `sql-statements/sql-statement-*.md` |
-| New built-in function | `functions-and-operators/` |
-| New `INFORMATION_SCHEMA` table | `information-schema/` |
+| New/changed `SysVar` / `DefValue` | System variables |
+| New/changed config field / `toml` tag | Configuration files |
+| New/changed command-line flag | Command-line flags |
+| New SQL statement or grammar change | SQL statements |
+| New built-in function | Functions and operators |
+| New `INFORMATION_SCHEMA` table | Information schema |
 | New feature flag or experimental gate | Feature doc (new or existing) |
 | Changed default or compatibility | Relevant docs + possibly release notes |
 
@@ -90,17 +102,27 @@ Extract:
 Extract key user-facing facts. Ask focused questions only for facts that cannot
 be derived from code, tests, or existing docs.
 
-## Step 3: Determine the target branch
+## Step 3: Determine the target branch and version
+
+### Target branch
 
 | Source context | Docs target branch |
 | --- | --- |
-| New development (default) | `master` |
-| Version-specific behavior | `release-X.Y` + `master` |
-| Cross-version change | `master` + `needs-cherry-pick-release-X.Y` labels |
+| New development (default) | `master` only |
+| Version-specific behavior across maintained versions | `master` + `needs-cherry-pick-release-X.Y` labels |
 | `/tidb-cloud/` content | `release-8.5` |
 | `/ai/` content | `release-8.5` |
 
-When in doubt, target `master`.
+Follow the repository's cherry-pick model (see `.ai/shared/repo-conventions.md`): default to a single PR on the latest applicable branch (usually `master`) and rely on cherry-pick labels for other maintained versions, rather than opening parallel PRs per branch. When in doubt, target `master`.
+
+### Version number for "Starting from vX.Y" notes
+
+Many entries need a precise version (for example, "This variable was introduced in vX.Y"). Determine it from the source — do not guess:
+
+- Code PR: derive from the PR milestone, the target release branch, or the next unreleased version on `master`.
+- Spec/issue/design doc: use the stated target version.
+
+If the version cannot be determined from the source, mark it with a placeholder and list it under **Open questions** instead of inventing a number.
 
 ## Step 4: Decide — create new page or update existing
 
@@ -130,6 +152,14 @@ These apply to both creating and updating:
 - Do not silently broaden scope from a targeted fix into cross-file rewrites.
 - Preserve code samples, commands, SQL, config names, API fields, JSON, EBNF,
   and UI strings unless the task requires changing them or they are clearly wrong.
+
+## Where this skill stops
+
+This skill produces **local edits + validation + a completion report**. It does not create branches, commit, push, or open a PR on its own.
+
+- After editing and validating, report the changed files and follow-ups, then stop.
+- Create a branch, commit, or open a PR only when the user explicitly asks, or hand off to the workflow the user prefers.
+- Chinese translation, release notes, and PR creation are separate steps — flag them as follow-ups (see **Coordinating with other skills**) rather than doing them inline.
 
 ## Coordinating with other skills
 

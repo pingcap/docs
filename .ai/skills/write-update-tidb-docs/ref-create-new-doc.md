@@ -6,6 +6,8 @@ needed.
 
 ## Confirm the decision to create
 
+This is a final sanity re-check of the create-vs-update decision already made in `SKILL.md` Step 4 (the authoritative decision point) — not a second, independent decision. If any criterion below fails, switch to `ref-update-existing-doc.md`.
+
 A new page is justified when all of these are true:
 
 - The content does not fit cleanly as a section of an existing page.
@@ -108,14 +110,16 @@ Every navigable page needs a TOC entry.
 
 ```yaml
 ---
-title: <same as H1, title case, ≤59 characters>
-summary: <115–145 characters, verb-led, SEO-friendly>
+title: <same as H1, title case>
+summary: <verb-led, SEO-friendly sentence>
 ---
 ```
 
-- `title` must match the H1 exactly.
+- `title` must match the H1 exactly, in title case, and stay within ~59 characters.
 - `summary` must not start with `>`, `*`, `#`, `-`, or `[`.
 - `summary` tells readers what they will learn or accomplish.
+- For exact `summary` length rules and verb guidance, follow the `writing-doc-summaries` skill (target 115–145 characters, 45-character absolute minimum).
+- SQL statement reference pages use a fixed template defined in the `writing-doc-summaries` skill that falls below 115 characters — that is expected.
 - Add `aliases` only if replacing an older page URL.
 
 ## 5. Draft the document
@@ -247,7 +251,7 @@ When the doc is expected to exceed ~800 words or has unclear scope:
 
 Also check:
 
-- [ ] Front matter: title matches H1, summary is 115–145 chars
+- [ ] Front matter: title matches H1; summary follows `writing-doc-summaries` length rules (115–145 chars target, ≥45 chars)
 - [ ] TOC: correct file, correct level, correct indentation
 - [ ] Heading levels: no skipped levels, exactly one H1
 - [ ] File name: lowercase, hyphen-separated, `.md` extension

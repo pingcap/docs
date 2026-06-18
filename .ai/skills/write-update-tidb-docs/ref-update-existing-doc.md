@@ -8,6 +8,8 @@ that existing pages need updating.
 
 ### From code patterns
 
+This is the authoritative code-pattern → target-file mapping. It expands the triage table in `SKILL.md` with exact file paths.
+
 | Code pattern | Primary target |
 | --- | --- |
 | New/changed `SysVar` / `DefValue` | `system-variables.md` |
