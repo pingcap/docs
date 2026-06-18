@@ -13,7 +13,7 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
 ## ステップ1：フルバックアップデータを準備する {#step-1-prepare-full-backup-data}
 
-まず、[Dumpling](/dumpling-overview.md)を使用してMySQLからデータをエクスポートできます。
+まず、[Dumpling](/dumpling-overview.md)を使用してMySQLからデータをエクスポートします。
 
 1.  TiUPが既にインストールされているかどうかを確認するには、 `tiup --version`を実行してください。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、次のコマンドを実行してください。
 

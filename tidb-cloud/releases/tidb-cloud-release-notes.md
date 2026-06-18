@@ -4,9 +4,22 @@ summary: TiDB Cloudの2026年のリリースノートについてご確認くだ
 aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 ---
 
-# TiDB Cloud 2026年のリリースノート <!--Corresponding EN commit: 0ed8bfd06dfd8bab2c9628b84f8b9b96a529277f-->
+# TiDB Cloud 2026年のリリースノート
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
+
+## 2026年6月16日
+
+**一般的な変更**
+
+- [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md) にドメイン検証を追加しました。
+
+    次のシナリオでは、**Allowed Email Domains** フィールドが必須です。Security を向上させるため、このフィールドに入力する前にドメインを検証する必要があります。
+
+    - OIDC または SAML 認証方式の自動プロビジョニングを有効にする場合
+    - SAML 認証方式の SCIM プロビジョニングを有効にする場合
+
+  詳細については、[OIDC と SAML のドメインの追加と検証](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml) を参照してください。
 
 ## 2026年6月9日 {#june-9-2026}
 

@@ -3,7 +3,7 @@ title: Architecture
 summary: TiDB Cloudのアーキテクチャ概念について学びましょう。
 ---
 
-# アーキテクチャ {#architecture} <!--Corresponding EN commit: 0ed8bfd06dfd8bab2c9628b84f8b9b96a529277f-->
+# アーキテクチャ {#architecture}
 
 <CustomContent language="en,zh">
 

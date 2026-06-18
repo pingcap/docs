@@ -59,7 +59,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
     -   TiDB データ移行 (DM)
 
-        -   ユーザーはライトニングローダー[＃5505](https://github.com/pingcap/tiflow/issues/5505)と[ブチュイトデゴウ](https://github.com/buchuitoudegou)同時実行数を手動で設定できます。
+        -   ユーザーはTiDB Lightningローダー[＃5505](https://github.com/pingcap/tiflow/issues/5505)と[ブチュイトデゴウ](https://github.com/buchuitoudegou)同時実行数を手動で設定できます。
 
     -   TiCDC
 
