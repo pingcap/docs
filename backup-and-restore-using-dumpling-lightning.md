@@ -37,7 +37,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 **ディスク容量**：
 
-外部storageとしては、Amazon S3、Google Cloud Storage (GCS)、またはAzure Blob Storageの利用をお勧めします。これらのクラウドstorageを利用すれば、ディスク容量の制限を受けることなく、バックアップファイルを迅速に保存できます。
+外部ストレージとしては、Amazon S3、Google Cloud Storage (GCS)、またはAzure Blob Storageの利用をお勧めします。これらのクラウドストレージを利用すれば、ディスク容量の制限を受けることなく、バックアップファイルを迅速に保存できます。
 
 バックアップタスクのデータをローカルディスクに保存する必要がある場合は、以下の制限事項に注意してください。
 
@@ -131,7 +131,7 @@ LIMIT
 
 2.  `tidb-lightning`を実行してインポートを開始します。コマンドラインでプログラムを直接起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例:
 
-    S3 からデータをインポートする場合は、S3storageパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡してください。また、 `~/.aws/credentials`から認証情報を読み取ることもできます。
+    S3 からデータをインポートする場合は、S3ストレージパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡してください。また、 `~/.aws/credentials`から認証情報を読み取ることもできます。
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}

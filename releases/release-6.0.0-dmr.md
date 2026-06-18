@@ -112,7 +112,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   クエリプッシュダウンの改善
 
-    TiDBは、コンピューティングとstorageを分離するネイティブアーキテクチャを採用しており、演算子のプッシュダウンによる無効なデータのフィルタリングをサポートしています。これにより、TiDBとTiKV間のデータ転送が大幅に削減され、クエリ効率が向上します。v6.0.0では、TiDBはより多くの式と`BIT`データ型をTiKVにプッシュダウンできるようになり、式とデータ型の計算におけるクエリ効率が向上しています。
+    TiDBは、コンピューティングとストレージを分離するネイティブアーキテクチャを採用しており、演算子のプッシュダウンによる無効なデータのフィルタリングをサポートしています。これにより、TiDBとTiKV間のデータ転送が大幅に削減され、クエリ効率が向上します。v6.0.0では、TiDBはより多くの式と`BIT`データ型をTiKVにプッシュダウンできるようになり、式とデータ型の計算におけるクエリ効率が向上しています。
 
     [ユーザードキュメント](/functions-and-operators/expressions-pushed-down.md) [＃30738](https://github.com/pingcap/tidb/issues/30738)
 
@@ -205,9 +205,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     [ユーザードキュメント](/dm/dm-manage-schema.md)
 
--   Amazon S3への完全なデータstorageをサポート
+-   Amazon S3への完全なデータストレージをサポート
 
-    DMが全データ移行タスクまたは完全データ移行タスクを実行する場合、上流からの全データを保存するために十分なハードディスク容量が必要です。EBSと比較して、Amazon S3はほぼ無制限のstorageを低コストで提供します。DMはAmazon S3をダンプディレクトリとして設定できるようになりました。つまり、全データ移行タスクまたは完全データ移行タスクを実行する際に、S3に全データを保存できます。
+    DMが全データ移行タスクまたは完全データ移行タスクを実行する場合、上流からの全データを保存するために十分なハードディスク容量が必要です。EBSと比較して、Amazon S3はほぼ無制限のストレージを低コストで提供します。DMはAmazon S3をダンプディレクトリとして設定できるようになりました。つまり、全データ移行タスクまたは完全データ移行タスクを実行する際に、S3に全データを保存できます。
 
     [ユーザードキュメント](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
@@ -382,7 +382,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   TiFlash
 
-    -   TiFlashファイルの論理分割を禁止し (デフォルト値の`profiles.default.dt_enable_logical_split`を`false`に調整します。詳細については[ユーザードキュメント](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)を参照してください)、 TiFlash列storageのスペース使用効率を改善して、 TiFlashに同期されたテーブルのスペース占有が TiKV のテーブルのスペース占有と同等になるようにします。
+    -   TiFlashファイルの論理分割を禁止し (デフォルト値の`profiles.default.dt_enable_logical_split`を`false`に調整します。詳細については[ユーザードキュメント](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)を参照してください)、 TiFlash列ストレージのスペース使用効率を改善して、 TiFlashに同期されたテーブルのスペース占有が TiKV のテーブルのスペース占有と同等になるようにします。
     -   以前のクラスタ管理モジュールをTiDBに統合することで、 TiFlashのクラスタ管理とレプリカレプリケーションのメカニズムを最適化し、小さなテーブルのレプリカ作成を高速化します[＃29924](https://github.com/pingcap/tidb/issues/29924)
 
 -   ツール

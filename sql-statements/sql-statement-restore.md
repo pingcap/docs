@@ -24,7 +24,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 `BACKUP`と`RESTORE`のタスクは、一度に 1 つしか実行できません。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、以前のすべてのタスクが完了するまで待機します。
 
-`RESTORE` 「tikv」storageエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
+`RESTORE` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
 
 ## あらすじ {#synopsis}
 

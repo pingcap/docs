@@ -38,7 +38,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 
 上記コマンドでエクスポートされたスキーマのURI（例：「s3://my-bucket/schema-backup」）を記録しておいてください。これは後でスキーマファイルをインポートする際に使用します。
 
-Amazon S3 にアクセスするには、この Amazon S3storageパスへのアクセス権を持つアカウントのシークレット アクセス キーとアクセス キーを環境変数としてDumplingまたはTiDB Lightningノードに渡します。Dumpling とTiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、そのDumplingまたはTiDB Lightningノード上のすべてのタスクでシークレット アクセス キーとアクセス キーを再度指定する必要がなくなります。
+Amazon S3 にアクセスするには、この Amazon S3ストレージパスへのアクセス権を持つアカウントのシークレット アクセス キーとアクセス キーを環境変数としてDumplingまたはTiDB Lightningノードに渡します。Dumpling とTiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。この方法により、そのDumplingまたはTiDB Lightningノード上のすべてのタスクでシークレット アクセス キーとアクセス キーを再度指定する必要がなくなります。
 
 #### 1.2 スキーマファイル用のTiDB Lightning設定ファイルを作成する {#1-2-create-the-tidb-lightning-configuration-file-for-the-schema-file}
 

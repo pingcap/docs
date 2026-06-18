@@ -17,7 +17,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 
 -   [重要な要素](#key-factors)
 -   [ソースファイルの準備](#prepare-source-files)
--   [storageスペースの見積もり](#estimate-storage-space)
+-   [ストレージスペースの見積もり](#estimate-storage-space)
 -   [設定パラメータを変更する](#change-configuration-parameters)
 -   [「チェックサム不一致」エラーを解決する](#resolve-the-checksum-mismatch-error)
 -   [チェックポイントを有効にする](#enable-checkpoint)
@@ -79,14 +79,14 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 -   ファイル生成中に各ファイルのサイズが 96 MiB 未満になるように制御します。
 -   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)有効にします。
 
-## storageスペースの見積もり {#estimate-storage-space}
+## ストレージスペースの見積もり {#estimate-storage-space}
 
-データのインポートに必要なstorage容量を見積もるには、次の 2 つの方法のいずれかを使用できます。
+データのインポートに必要なストレージ容量を見積もるには、次の 2 つの方法のいずれかを使用できます。
 
 -   総データサイズを**A** 、総インデックスサイズを**B** 、レプリケーション係数を**3** 、圧縮率を**α** （通常は約2.5）と仮定すると、全体の占有領域は**(A+B)*3/α**で計算できます。この方法は主に、データのインポートを実行せずにクラスタトポロジを計画する際に、概算を行うために使用されます。
 -   データの10%のみをインポートし、実際に使用されている容量に10を掛けることで、そのデータバッチの最終的な容量使用量を推定します。この方法は、特に大量のデータをインポートする場合に、より正確です。
 
-なお、圧縮やスナップショットのレプリケーションなどのバックグラウンド タスクもstorage領域の一部を消費するため、20% のstorage領域を予約することをお勧めします。
+なお、圧縮やスナップショットのレプリケーションなどのバックグラウンド タスクもストレージ領域の一部を消費するため、20% のストレージ領域を予約することをお勧めします。
 
 ## 設定パラメータを変更する {#change-configuration-parameters}
 

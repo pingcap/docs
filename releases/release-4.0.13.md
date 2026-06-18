@@ -114,7 +114,7 @@ TiDB バージョン: 4.0.13
     -   `delta-merge-tasks`の数がPrometheusに報告されない問題を修正
     -   `Segment Split`中に発生するTiFlashpanic問題を修正
     -   Grafanaの`Region write Duration (write blocks)`パネルが間違った場所に表示される問題を修正しました
-    -   storageエンジンがデータの削除に失敗する潜在的な問題を修正
+    -   ストレージエンジンがデータの削除に失敗する潜在的な問題を修正
     -   `TIME`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました
     -   `bitwise`演算子の動作がTiDBと異なるバグを修正
     -   `STRING`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました

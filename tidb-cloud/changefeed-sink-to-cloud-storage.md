@@ -5,11 +5,11 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 # クラウドストレージへのシンク {#sink-to-cloud-storage}
 
-このドキュメントでは、TiDB Cloudからクラウドstorageへデータをストリーミングするためのチェンジフィードの作成方法について説明します。現在、Amazon S3、Google Cloud Storage（GCS）、およびAzure Blob Storageがサポートされています。
+このドキュメントでは、TiDB Cloudからクラウドストレージへデータをストリーミングするためのチェンジフィードの作成方法について説明します。現在、Amazon S3、Google Cloud Storage（GCS）、およびAzure Blob Storageがサポートされています。
 
 > **注記：**
 >
-> -   データをクラウドstorageにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
+> -   データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 > -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 > -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はベータ版です。詳細については、 [変更フィード（ベータ版）](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
@@ -129,8 +129,8 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 1.  [Azureポータル](https://portal.azure.com/)で、変更フィード データを保存するコンテナーを作成します。
 
-    1.  左側のナビゲーションペインで**「ストレージアカウント」**をクリックし、storageアカウントを選択します。
-    2.  storageアカウントのナビゲーションメニューで、 **[データstorage]** &gt; **[コンテナー]**を選択し、 **[+コンテナー]**をクリックします。
+    1.  左側のナビゲーションペインで**「ストレージアカウント」**をクリックし、ストレージアカウントを選択します。
+    2.  ストレージアカウントのナビゲーションメニューで、 **[データストレージ]** &gt; **[コンテナー]**を選択し、 **[+コンテナー]**をクリックします。
     3.  新しいコンテナの名前を入力し、匿名アクセスレベルを設定します（推奨レベルは**プライベート**です）。次に、 **[作成]**をクリックします。
 
 2.  対象コンテナのURLを取得します。
@@ -141,7 +141,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
 3.  SASトークンを生成します。
 
-    1.  storageアカウントのナビゲーション メニューで、 **[Security+ ネットワーク]** &gt; **[共有アクセス 署名]**を選択します。
+    1.  ストレージアカウントのナビゲーション メニューで、 **[Security+ ネットワーク]** &gt; **[共有アクセス 署名]**を選択します。
 
     2.  **「許可されたサービス」**セクションで、 **「Blob」**を選択します。
 
@@ -236,7 +236,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 
     > **注記：**
     >
-    > これら2つのパラメータは、各データベーステーブルごとにクラウドstorageに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドstorageAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
+    > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
 6.  **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
 

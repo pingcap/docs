@@ -38,7 +38,7 @@ TiDB バージョン: 6.5.10
 
     -   TiCDC
 
-        -   ダウンストリームがメッセージキュー（MQ）またはクラウドstorageの場合に生のイベントを直接出力することをサポートします[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   ダウンストリームがメッセージキュー（MQ）またはクラウドストレージの場合に生のイベントを直接出力することをサポートします[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログを使用してデータリカバリ中のメモリの安定性を向上させ、OOM [＃10900](https://github.com/pingcap/tiflow/issues/10900) @ [CharlesCheung96](https://github.com/CharlesCheung96)の確率を低減します。
         -   トランザクション競合シナリオにおけるデータレプリケーションの安定性が大幅に向上し、パフォーマンスが最大10倍向上します[＃10896](https://github.com/pingcap/tiflow/issues/10896) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 

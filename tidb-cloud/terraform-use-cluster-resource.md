@@ -258,7 +258,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 -   `region`は`cloud_provider`の領域です。
 -   `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
 -   `node_size`はノードのサイズです。
--   `storage_size_gib_range` 、ノードに設定できる最小および最大のstorageサイズを示します。
+-   `storage_size_gib_range` 、ノードに設定できる最小および最大のストレージサイズを示します。
 
 ## クラスターリソースを使用してクラスターを作成する {#create-a-cluster-using-the-cluster-resource}
 

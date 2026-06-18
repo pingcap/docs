@@ -18,7 +18,7 @@ TiDBバージョン: 6.2.0-DMR
 -   TiDB ダッシュボードは[視覚的な実行計画](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans)をサポートしており、実行計画をより直感的に表示できます。
 -   パフォーマンス分析とチューニングをより効率的に行うために、TiDB ダッシュボードに[監視ページ](/dashboard/dashboard-monitoring.md)を追加します。
 -   TiDB の[ロックビュー](/information-schema/information-schema-data-lock-waits.md)機能は、楽観的トランザクションの待機情報の表示をサポートし、ロック競合の迅速な特定を容易にします。
--   TiFlash は[storageフォーマットの新しいバージョン](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)をサポートし、安定性とパフォーマンスを強化します。
+-   TiFlash は[ストレージフォーマットの新しいバージョン](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)をサポートし、安定性とパフォーマンスを強化します。
 -   [きめ細かいシャッフル機能](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)ウィンドウ関数を複数のスレッドで並列実行できます。
 -   新しい並行DDLフレームワーク：DDLステートメントのブロックが減り、実行効率が向上します。
 -   TiKV は[CPU使用率を自動的に調整する](/tikv-configuration-file.md#background-quota-limiter)をサポートしており、安定した効率的なデータベース運用を保証します。
@@ -36,9 +36,9 @@ TiDBバージョン: 6.2.0-DMR
 
 -   物理データ圧縮機能はGAです
 
-    TiFlashのバックエンドは、特定の条件に基づいて物理データを自動的に圧縮し、不要なデータの蓄積を減らし、データstorage構造を最適化します。
+    TiFlashのバックエンドは、特定の条件に基づいて物理データを自動的に圧縮し、不要なデータの蓄積を減らし、データストレージ構造を最適化します。
 
-    TiFlashテーブルには、データ圧縮が自動的にトリガーされる前に、一定量の不要なデータが含まれていることがよくあります。この機能を使用すると、適切なタイミングを選択してSQLステートメントを手動で実行し、 TiFlash内の物理データを即座に圧縮できるため、storage容量の使用量を削減し、クエリのパフォーマンスを向上させることができます。この機能はTiDB v6.1では実験的でしたが、TiDB v6.2.0で一般提供（GA）となりました。
+    TiFlashテーブルには、データ圧縮が自動的にトリガーされる前に、一定量の不要なデータが含まれていることがよくあります。この機能を使用すると、適切なタイミングを選択してSQLステートメントを手動で実行し、 TiFlash内の物理データを即座に圧縮できるため、ストレージ容量の使用量を削減し、クエリのパフォーマンスを向上させることができます。この機能はTiDB v6.1では実験的でしたが、TiDB v6.2.0で一般提供（GA）となりました。
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
 
@@ -116,11 +116,11 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620) [#4631](https://github.com/pingcap/tiflash/issues/4631) @[guo-shaoge](https://github.com/guo-shaoge)
 
--   TiFlashは、より新しいバージョンのstorageフォーマットをサポートしています。
+-   TiFlashは、より新しいバージョンのストレージフォーマットをサポートしています。
 
-    新しいstorageフォーマットは、高並列処理や高負荷なワークロード環境において、ガベージコレクション（GC）によって引き起こされるCPU使用率の上昇を緩和します。これにより、バックグラウンドタスクのI/Oトラフィックが大幅に削減され、高並列処理や高負荷なワークロード環境下での安定性が向上します。同時に、ディスク容量の増大やディスクの無駄遣いも大幅に削減できます。
+    新しいストレージフォーマットは、高並列処理や高負荷なワークロード環境において、ガベージコレクション（GC）によって引き起こされるCPU使用率の上昇を緩和します。これにより、バックグラウンドタスクのI/Oトラフィックが大幅に削減され、高並列処理や高負荷なワークロード環境下での安定性が向上します。同時に、ディスク容量の増大やディスクの無駄遣いも大幅に削減できます。
 
-    TiDB v6.2.0では、データはデフォルトで新しいstorage形式で保存されます。TiFlashを以前のバージョンからv6.2.0にアップグレードする場合、以前のTiFlashバージョンでは新しいstorage形式を認識できないため、 TiFlash上​​でインプレースダウングレードを実行することはできませんのでご注意ください。
+    TiDB v6.2.0では、データはデフォルトで新しいストレージ形式で保存されます。TiFlashを以前のバージョンからv6.2.0にアップグレードする場合、以前のTiFlashバージョンでは新しいストレージ形式を認識できないため、 TiFlash上​​でインプレースダウングレードを実行することはできませんのでご注意ください。
 
     TiFlash のアップグレードの詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
 
@@ -210,7 +210,7 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiDB Lightningのディスククォータ設定をサポート（実験的）
 
-    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なstorage容量がない場合でも、インポートタスクを正常に完了できます。
+    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なストレージ容量がない場合でも、インポートタスクを正常に完了できます。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
@@ -278,19 +278,19 @@ TiDBバージョン: 6.2.0-DMR
 | TiKV           | rocksdb.enable-pipelined-commit                                                                                           | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
 | TiKV           | gc-merge-rewrite                                                                                                          | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
 | TiKV           | [ログバックアップを有効にする](/tikv-configuration-file.md#enable-new-in-v620)                                                          | 新しく追加された | この設定は、TiKV 上でログバックアップを有効にするかどうかを制御します。                                                              |
-| TiKV           | [ログバックアップ.ファイルサイズ制限](/tikv-configuration-file.md#file-size-limit-new-in-v620)                                             | 新しく追加された | この設定では、ログバックアップデータのサイズ制限を指定します。この制限に達すると、データは自動的に外部storageに書き込まれます。                                 |
+| TiKV           | [ログバックアップ.ファイルサイズ制限](/tikv-configuration-file.md#file-size-limit-new-in-v620)                                             | 新しく追加された | この設定では、ログバックアップデータのサイズ制限を指定します。この制限に達すると、データは自動的に外部ストレージに書き込まれます。                                 |
 | TiKV           | [ログバックアップ.初期スキャン保留中のメモリ割り当て](/tikv-configuration-file.md#initial-scan-pending-memory-quota-new-in-v620)                   | 新しく追加された | この設定では、増分スキャンデータを保存するために使用されるキャッシュのクォータを指定します。                                                      |
-| TiKV           | [log-backup.max-flush-interval](/tikv-configuration-file.md#max-flush-interval-new-in-v620)                               | 新しく追加された | この設定では、ログバックアップにおいてバックアップデータを外部storageに書き込む最大間隔を指定します。                                              |
+| TiKV           | [log-backup.max-flush-interval](/tikv-configuration-file.md#max-flush-interval-new-in-v620)                               | 新しく追加された | この設定では、ログバックアップにおいてバックアップデータを外部ストレージに書き込む最大間隔を指定します。                                              |
 | TiKV           | [ログバックアップの初期スキャンレート制限](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620)                                   | 新しく追加された | この設定では、ログバックアップにおける増分データスキャンのスループットのレート制限を指定します。                                                    |
 | TiKV           | [log-backup.num-threads](/tikv-configuration-file.md#num-threads-new-in-v620)                                             | 新しく追加された | この設定では、ログバックアップで使用されるスレッド数を指定します。                                                                   |
-| TiKV           | [log-backup.temp-path](/tikv-configuration-file.md#temp-path-new-in-v620)                                                 | 新しく追加された | この設定では、ログファイルが外部storageに書き込まれる前に一時的に保存されるパスを指定します。                                                  |
+| TiKV           | [log-backup.temp-path](/tikv-configuration-file.md#temp-path-new-in-v620)                                                 | 新しく追加された | この設定では、ログファイルが外部ストレージに書き込まれる前に一時的に保存されるパスを指定します。                                                  |
 | TiKV           | [rocksdb.defaultcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620)                                | 新しく追加された | SSTファイルのフォーマットバージョン。                                                                                |
 | TiKV           | [rocksdb.writecf.format-version](/tikv-configuration-file.md#format-version-new-in-v620)                                  | 新しく追加された | SSTファイルのフォーマットバージョン。                                                                                |
 | TiKV           | [rocksdb.lockcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620)                                   | 新しく追加された | SSTファイルのフォーマットバージョン。                                                                                |
 | PD             | レプリケーションモード.dr-auto-sync.wait-async-timeout                                                                               | 削除済み     | この設定は有効にならず、削除されます。                                                                                 |
 | PD             | レプリケーションモード.dr-auto-sync.wait-sync-timeout                                                                                | 削除済み     | この設定は有効にならず、削除されます。                                                                                 |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 修正済み     | `format_version`のデフォルト値が`4`に変更されます。これは v6.2.0 以降のバージョンのデフォルト形式であり、書き込み増幅とバックグラウンド タスクのリソース消費を削減します。 |
-| TiFlash        | [profiles.default.dt_enable_read_thread](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                | 新しく追加された | この設定は、storageエンジンからの読み取り要求を処理するためにスレッド プールを使用するかどうかを制御します。デフォルト値は`false`です。                         |
+| TiFlash        | [profiles.default.dt_enable_read_thread](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                | 新しく追加された | この設定は、ストレージエンジンからの読み取り要求を処理するためにスレッド プールを使用するかどうかを制御します。デフォルト値は`false`です。                         |
 | TiFlash        | [profiles.default.dt_page_gc_threshold](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                 | 新しく追加された | この設定では、PageStorageデータファイル内の有効データの最小比率を指定します。                                                        |
 | TiCDC          | [--overwrite-checkpoint-ts](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                  | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
 | TiCDC          | [--確認しない](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                                    | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
@@ -298,7 +298,7 @@ TiDBバージョン: 6.2.0-DMR
 | DM             | [労働者数](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                     | 新しく追加された | この設定はバリデーターパラメータであり、バックグラウンドで実行される検証ワーカーの数を指定します。デフォルト値は`4`です。                                      |
 | DM             | [行エラー遅延](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデーターパラメータです。指定された時間内に検証が行われなかった場合、その行はエラー行としてマークされます。デフォルト値は30mで、これは30分を意味します。               |
 | TiDB Lightning | [tikv-importer.store-write-bwlimit](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                  | 新しく追加された | この設定は、TiDB Lightning が各 TiKV ストアにデータを書き込む際の書き込み帯域幅を決定します。デフォルト値は`0`で、帯域幅に制限がないことを示します。              |
-| TiDB Lightning | [tikv-importer.disk-quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) | 新しく追加された | この構成により、TiDB Lightningが使用するstorage容量が制限されます。                                                        |
+| TiDB Lightning | [tikv-importer.disk-quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) | 新しく追加された | この構成により、TiDB Lightningが使用するストレージ容量が制限されます。                                                        |
 
 ### その他 {#others}
 

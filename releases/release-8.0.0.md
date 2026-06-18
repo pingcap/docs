@@ -47,7 +47,7 @@ TiDB バージョン: 8.0.0
 
     TiDB v8.0.0以降、スナップショット復元速度の高速化が一般提供（GA）となり、デフォルトで有効になっています。BRは、粗粒度リージョン分散アルゴリズムの採用、データベースとテーブルのバッチ作成、SSTファイルダウンロードと取り込み操作間の相互影響の低減、テーブル統計情報の復元の高速化など、さまざまな最適化を実装することで、スナップショット復元速度を大幅に向上させています。実際のケースでのテスト結果によると、単一のTiKVノードのデータ復元速度は1.2 GiB/sで安定し、100 TiBのデータを1時間以内に復元できます。
 
-    これは、高負荷環境でもBRが各 TiKVノードのリソースを最大限に活用し、データベースの復元時間を大幅に短縮し、データベースの可用性と信頼性を向上させ、データ損失やシステム障害によるダウンタイムやビジネス損失を削減できることを意味します。復元速度の向上は、多数のゴルーチンの並列実行によるものであり、特にテーブルやリージョンが多い場合は、メモリ消費量が大幅に増加する可能性があることに注意してください。BRを実行するには、メモリ容量の大きいマシンを使用することをお勧めします。マシンのメモリ容量が限られている場合は、よりきめ細かいリージョン分散アルゴリズムを使用することをお勧めします。また、粗い粒度のリージョン分散アルゴリズムは外部storageの帯域幅を大量に消費する可能性があるため、外部帯域幅不足による他のアプリケーションへの影響を避ける必要があります。
+    これは、高負荷環境でもBRが各 TiKVノードのリソースを最大限に活用し、データベースの復元時間を大幅に短縮し、データベースの可用性と信頼性を向上させ、データ損失やシステム障害によるダウンタイムやビジネス損失を削減できることを意味します。復元速度の向上は、多数のゴルーチンの並列実行によるものであり、特にテーブルやリージョンが多い場合は、メモリ消費量が大幅に増加する可能性があることに注意してください。BRを実行するには、メモリ容量の大きいマシンを使用することをお勧めします。マシンのメモリ容量が限られている場合は、よりきめ細かいリージョン分散アルゴリズムを使用することをお勧めします。また、粗い粒度のリージョン分散アルゴリズムは外部ストレージの帯域幅を大量に消費する可能性があるため、外部帯域幅不足による他のアプリケーションへの影響を避ける必要があります。
 
     詳細については、 [ドキュメント](/br/br-snapshot-guide.md#restore-cluster-snapshots)を参照してください。
 
@@ -240,9 +240,9 @@ TiDB バージョン: 8.0.0
 
 -   グローバルソートが一般提供開始（GA）となり、 `IMPORT INTO`のパフォーマンスと安定性が大幅に向上しました [#45719](https://github.com/pingcap/tidb/issues/45719) @[lance6716](https://github.com/lance6716)
 
-    バージョン7.4.0より前では、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を使用して`IMPORT INTO`タスクを実行すると、ローカルstorage容量が限られているため、TiDBはデータの一部をローカルでソートしてからTiKVにインポートしていました。このため、TiKVにインポートされたデータにかなりの重複が生じ、インポート中にTiKVが追加の圧縮操作を実行する必要が生じ、TiKVのパフォーマンスと安定性に影響が出ていました。
+    バージョン7.4.0より前では、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を使用して`IMPORT INTO`タスクを実行すると、ローカルストレージ容量が限られているため、TiDBはデータの一部をローカルでソートしてからTiKVにインポートしていました。このため、TiKVにインポートされたデータにかなりの重複が生じ、インポート中にTiKVが追加の圧縮操作を実行する必要が生じ、TiKVのパフォーマンスと安定性に影響が出ていました。
 
-    v7.4.0 で導入された実験的機能であるグローバル ソートを使用すると、TiDB はインポートするデータを TiKV にインポートする前に、グローバル ソートのために一時的に外部storage(Amazon S3 など) に保存できます。これにより、インポート中の TiKV 圧縮操作が不要になります。v8.0.0 では、グローバル ソートが GA になります。この機能により、TiKV のリソース消費が削減され、 `IMPORT INTO`のパフォーマンスと安定性が大幅に向上します。グローバル ソートを有効にすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。
+    v7.4.0 で導入された実験的機能であるグローバル ソートを使用すると、TiDB はインポートするデータを TiKV にインポートする前に、グローバル ソートのために一時的に外部ストレージ(Amazon S3 など) に保存できます。これにより、インポート中の TiKV 圧縮操作が不要になります。v8.0.0 では、グローバル ソートが GA になります。この機能により、TiKV のリソース消費が削減され、 `IMPORT INTO`のパフォーマンスと安定性が大幅に向上します。グローバル ソートを有効にすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。
 
     詳細については、[ドキュメント](/tidb-global-sort.md)を参照してください。
 
@@ -352,7 +352,7 @@ TiDB バージョン: 8.0.0
     -   構成や操作が不適切な場合のクラスタTSOの堅牢性を向上させるため、TSOの検証と検出機能を強化する [#16545](https://github.com/tikv/tikv/issues/16545) @[cfzjywxk](https://github.com/cfzjywxk)
     -   未コミットトランザクションの処理パフォーマンスを向上させるため、悲観的ロックのクリーンアップロジックを最適化する [#16158](https://github.com/tikv/tikv/issues/16158) @[cfzjywxk](https://github.com/cfzjywxk)
     -   TiKV の統一ヘルス制御を導入し、異常な単一の TiKV ノードがクラスタ アクセス パフォーマンスに与える影響を軽減します。この最適化は、 [`tikv-client.enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)を`false`に設定することで無効にできます。 [#16297](https://github.com/tikv/tikv/issues/16297) [#1104](https://github.com/tikv/client-go/issues/1104) [#1167](https://github.com/tikv/client-go/issues/1167) @[MyonKeminta](https://github.com/MyonKeminta)@[zyguan](https://github.com/zyguan)@[crazycs520](https://github.com/crazycs520)
-    -   PDクライアントはメタデータstorageインターフェースを使用して、以前のグローバル構成インターフェースを置き換えます [#14484](https://github.com/tikv/tikv/issues/14484) @[HuSharp](https://github.com/HuSharp)
+    -   PDクライアントはメタデータストレージインターフェースを使用して、以前のグローバル構成インターフェースを置き換えます [#14484](https://github.com/tikv/tikv/issues/14484) @[HuSharp](https://github.com/HuSharp)
     -   cf stats の書き込みによるデータ読み込み動作の判定により、スキャン性能を向上させる [#16245](https://github.com/tikv/tikv/issues/16245) @[Connor1996](https://github.com/Connor1996)
     -   Raft設定変更プロセス中にノードが削除され、投票者が降格された最新のハートビートをチェックして、この動作によってリージョンにアクセスできなくなることがないようにしてください [#15799](https://github.com/tikv/tikv/issues/15799) @[tonyxuqqi](https://github.com/tonyxuqqi)
     -   パイプラインDML用のFlushおよびBufferBatchGetインターフェースを追加 [#16291](https://github.com/tikv/tikv/issues/16291) @[ekexium](https://github.com/ekexium)
@@ -503,8 +503,8 @@ TiDB バージョン: 8.0.0
     -   TiFlashレプリカを削除して再追加するとTiFlashでデータ破損が発生する可能性がある問題を修正 [#8695](https://github.com/pingcap/tiflash/issues/8695) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ポイントインタイムリカバリ(PITR) の実行後、または`FLASHBACK CLUSTER TO`の実行後にTiFlashレプリカ データが誤って削除され、データ異常が発生する可能性がある問題を修正 [#8777](https://github.com/pingcap/tiflash/issues/8777) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   Null 許容カラムを null 許容カラム以外に変更する`ALTER TABLE ... MODIFY COLUMN ... NOT NULL`の実行後にTiFlash がパニックになる問題を修正 [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散storageとコンピューティングアーキテクチャにおいて、ネットワーク分離後にクエリが永久にブロックされる可能性がある問題を修正 [#8806](https://github.com/pingcap/tiflash/issues/8806) @[JinheLin](https://github.com/JinheLin)
-    -   分散storageとコンピューティングアーキテクチャにおいて、 TiFlash がシャットダウン中にpanic可能性がある問題を修正 [#8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージとコンピューティングアーキテクチャにおいて、ネットワーク分離後にクエリが永久にブロックされる可能性がある問題を修正 [#8806](https://github.com/pingcap/tiflash/issues/8806) @[JinheLin](https://github.com/JinheLin)
+    -   分散ストレージとコンピューティングアーキテクチャにおいて、 TiFlash がシャットダウン中にpanic可能性がある問題を修正 [#8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   リモート読み取り時にデータ競合によりTiFlashがクラッシュする可能性がある問題を修正 [#8685](https://github.com/pingcap/tiflash/issues/8685) @[solotzg](https://github.com/solotzg)
     -   `CAST(AS JSON)`関数が JSON オブジェクト キーの重複を削除しない問題を修正 [#8712](https://github.com/pingcap/tiflash/issues/8712) @[SeaRise](https://github.com/SeaRise)
     -   `ENUM`列がチャンクエンコード中にTiFlashを引き起こす可能性がある問題を修正しました [#8674](https://github.com/pingcap/tiflash/issues/8674) @[yibin87](https://github.com/yibin87)
@@ -524,7 +524,7 @@ TiDB バージョン: 8.0.0
 
     -   TiCDC
 
-        -   storageシンク使用時にstorageサービスによって生成されるファイルシーケンス番号が正しくインクリメントされない可能性がある問題を修正しました [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   ストレージシンク使用時にストレージサービスによって生成されるファイルシーケンス番号が正しくインクリメントされない可能性がある問題を修正しました [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   TiCDCが複数のチェンジフィードを同時に作成する際に`ErrChangeFeedAlreadyExists`エラーを返す問題を修正 [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   `add table partition`で`ignore-event`イベントをフィルタリングした後、TiCDC が関連パーティションの他のタイプの DML 変更を下流にレプリケートしない問題を修正します。 [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   アップストリームテーブルで`TRUNCATE PARTITION`が実行された後、changefeed がエラーを報告する問題を修正します [#10522](https://github.com/pingcap/tiflow/issues/10522) @[sdojjy](https://github.com/sdojjy)

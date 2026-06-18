@@ -200,10 +200,10 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 #### <code>protocol</code> {#code-protocol-code}
 
 -   メッセージのエンコードに使用されるプロトコル形式を指定します。
--   この設定項目は、ダウンストリームがKafka、Pulsar、またはstorageサービスの場合にのみ有効になります。
+-   この設定項目は、ダウンストリームがKafka、Pulsar、またはストレージサービスの場合にのみ有効になります。
 -   ダウンストリームがKafkaの場合、プロトコルはcanal-json、avro、debezium、open-protocol、またはsimpleのいずれかになります。
 -   ダウンストリームがPulsarの場合、プロトコルはcanal-jsonのみとなります。
--   ダウンストリームがstorageサービスの場合、プロトコルはcanal-jsonまたはcsvのみとなります。
+-   ダウンストリームがストレージサービスの場合、プロトコルはcanal-jsonまたはcsvのみとなります。
 
 <!-- Example: `"canal-json"` -->
 
@@ -249,21 +249,21 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### <code>terminator</code> {#code-terminator-code}
 
--   この構成項目は、データをstorageシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
+-   この構成項目は、データをストレージシンクにレプリケートする場合にのみ使用され、MQまたはMySQLシンクにデータをレプリケートする場合は無視できます。
 -   2つのデータ変更イベントを区切るために使用される行終端文字を指定します。
 -   デフォルト値: `""` 、つまり`\r\n`が使用されます。
 
 #### <code>date-separator</code> {#code-date-separator-code}
 
 -   ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
--   この設定項目は、ダウンストリームがstorageサービスである場合にのみ有効になります。
+-   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値: `day` 、ファイルを日付ごとに分割することを意味します。
 -   値のオプション: `none` 、 `year` 、 `month` 、 `day`
 
 #### <code>enable-partition-separator</code> {#code-enable-partition-separator-code}
 
 -   パーティションを区切り文字として使用するかどうかを制御します。
--   この設定項目は、ダウンストリームがstorageサービスである場合にのみ有効になります。
+-   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値： `true` 。これは、テーブル内のパーティションが別々のディレクトリに保存されることを意味します。
 -   この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
 
@@ -275,7 +275,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### sink.csv は<span class="version-mark">v6.5.0 で追加されました。</span> {#sink-csv-span-class-version-mark-new-in-v6-5-0-span}
 
-バージョン6.5.0以降、TiCDCはデータ変更をCSV形式でstorageサービスに保存することをサポートしています。データをMQまたはMySQLシンクにレプリケートする場合は、以下の設定は無視してください。
+バージョン6.5.0以降、TiCDCはデータ変更をCSV形式でストレージサービスに保存することをサポートしています。データをMQまたはMySQLシンクにレプリケートする場合は、以下の設定は無視してください。
 
 ##### <code>delimiter</code> {#code-delimiter-code}
 
@@ -592,17 +592,17 @@ token="xxxx"
 
 #### <code>worker-count</code> {#code-worker-count-code}
 
--   ダウンストリームのクラウドstorageの同時実行性が変更されます。
+-   ダウンストリームのクラウドストレージの同時実行性が変更されます。
 -   デフォルト値: `16`
 
 #### <code>flush-interval</code> {#code-flush-interval-code}
 
--   下流のクラウドstorageにデータを保存する間隔が変更されます。
+-   下流のクラウドストレージにデータを保存する間隔が変更されます。
 -   デフォルト値: `"2s"`
 
 #### <code>file-size</code> {#code-file-size-code}
 
--   このファイルのバイト数`file-size`を超えると、データ変更ファイルがクラウドstorageに保存されます。
+-   このファイルのバイト数`file-size`を超えると、データ変更ファイルがクラウドストレージに保存されます。
 -   デフォルト値： `67108864` 、つまり64MiB
 
 #### <code>file-expiration-days</code> {#code-file-expiration-days-code}

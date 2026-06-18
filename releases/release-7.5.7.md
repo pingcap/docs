@@ -150,7 +150,7 @@ TiDB バージョン: 7.5.7
 
     -   TiCDC
 
-        -   外部storageをダウンストリーム[＃9162](https://github.com/pingcap/tiflow/issues/9162) @ [asddongmen](https://github.com/asddongmen)として使用すると、チェンジフィードが停止する可能性がある問題を修正しました。
+        -   外部ストレージをダウンストリーム[＃9162](https://github.com/pingcap/tiflow/issues/9162) @ [asddongmen](https://github.com/asddongmen)として使用すると、チェンジフィードが停止する可能性がある問題を修正しました。
         -   レプリケーショントラフィックが下流の Kafka [＃12110](https://github.com/pingcap/tiflow/issues/12110) @ [3AceShowHand](https://github.com/3AceShowHand)のトラフィックしきい値を超えた後に、変更フィードがスタックする可能性がある問題を修正しました。
         -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが[＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [hongyunyan](https://github.com/hongyunyan)で停止する可能性がある問題を修正しました。
         -   仮想列を含むテーブルでイベントフィルタ式を評価するとpanicが発生する可能性がある問題を修正[＃12206](https://github.com/pingcap/tiflow/issues/12206) @ [lidezhu](https://github.com/lidezhu)
@@ -159,7 +159,7 @@ TiDB バージョン: 7.5.7
 
     -   TiDB Lightning
 
-        -   クラウドstorageから TiDB [＃60224](https://github.com/pingcap/tidb/issues/60224) @ [joechenrh](https://github.com/joechenrh)に Parquet ファイルをインポートするときに、 TiDB Lightning が数時間停止する可能性がある問題を修正しました。
+        -   クラウドストレージから TiDB [＃60224](https://github.com/pingcap/tidb/issues/60224) @ [joechenrh](https://github.com/joechenrh)に Parquet ファイルをインポートするときに、 TiDB Lightning が数時間停止する可能性がある問題を修正しました。
         -   TiKVへのRPCリクエストが[＃61326](https://github.com/pingcap/tidb/issues/61326) @ [OliverS929](https://github.com/OliverS929)でタイムアウトするとTiDB Lightningが`context deadline exceeded`エラーを返す問題を修正しました
 
     -   NG Monitoring

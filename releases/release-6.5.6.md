@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.6
     -   [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @ [CharlesCheung96](https://github.com/CharlesCheung96)
     -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [sdojjy](https://github.com/sdojjy)
     -   [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md) : 内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を設定できます[＃9875](https://github.com/pingcap/tiflow/issues/9875) @ [asddongmen](https://github.com/asddongmen)
-    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトstorage[＃10109](https://github.com/pingcap/tiflow/issues/10109)にデータを複製するときに履歴データの自動クリーンアップを設定できます[チャールズ・チュン96](https://github.com/CharlesCheung96)
+    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージ[＃10109](https://github.com/pingcap/tiflow/issues/10109)にデータを複製するときに履歴データの自動クリーンアップを設定できます[チャールズ・チュン96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
 
@@ -146,7 +146,7 @@ TiDB バージョン: 6.5.6
         -   1分以内にPITRを複数回実行するとデータ損失が発生する可能性がある問題を修正[＃15483](https://github.com/tikv/tikv/issues/15483) @ [YuJuncen](https://github.com/YuJuncen)
         -   BR SQL コマンドと CLI のデフォルト値が異なるため、OOM の問題が発生する可能性がある問題を修正しました[＃48000](https://github.com/pingcap/tidb/issues/48000) @ [YuJuncen](https://github.com/YuJuncen)
         -   PD所有者が[＃47533](https://github.com/pingcap/tidb/issues/47533)から[ユジュンセン](https://github.com/YuJuncen)転送されたときにログバックアップがpanic可能性がある問題を修正しました
-        -   BRが外部storageファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
+        -   BRが外部ストレージファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
 
     -   TiCDC
 
@@ -157,8 +157,8 @@ TiDB バージョン: 6.5.6
         -   レプリケーションタスクのワークロードが TiCDC ノード[＃9839](https://github.com/pingcap/tiflow/issues/9839) @ [3AceShowHand](https://github.com/3AceShowHand)間で均等に分散されない問題を修正しました
         -   REDOログが有効な場合にDDL文の複製間隔が長すぎる問題を修正[＃9960](https://github.com/pingcap/tiflow/issues/9960) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   ターゲットテーブルが削除され、その後アップストリーム[＃10079](https://github.com/pingcap/tiflow/issues/10079) @ [asddongmen](https://github.com/asddongmen)で再作成された場合、変更フィードが双方向レプリケーションモードで DML イベントをレプリケートできない問題を修正しました。
-        -   オブジェクトstorageサービスにデータを複製する際に、NFSファイルが多すぎるためにレプリケーションの遅延が長くなる問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) @ [CharlesCheung96](https://github.com/CharlesCheung96)
-        -   オブジェクトstorageサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
+        -   オブジェクトストレージサービスにデータを複製する際に、NFSファイルが多すぎるためにレプリケーションの遅延が長くなる問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
         -   PD のスケールアップおよびスケールダウン中に TiCDC が無効な古いアドレスにアクセスする問題を修正[＃9584](https://github.com/pingcap/tiflow/issues/9584) @ [fubinzh](https://github.com/fubinzh) @ [asddongmen](https://github.com/asddongmen)
         -   間違ったメモリ情報を取得すると、一部のオペレーティングシステムで OOM 問題が発生する可能性がある問題を修正[＃9762](https://github.com/pingcap/tiflow/issues/9762) @ [sdojjy](https://github.com/sdojjy)
 

@@ -30,16 +30,16 @@ TiDB バージョン: 8.1.2
     -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が[＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)で一貫して動作することを保証します。
     -   RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョン[＃17269](https://github.com/tikv/tikv/issues/17269) @ [AndreMouche](https://github.com/AndreMouche)を処理するときにディスク領域の再利用を高速化します。
     -   `import.num-threads`構成項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @ [RidRisR](https://github.com/RidRisR)
-    -   Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部storage(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity [＃12371](https://github.com/tikv/tikv/issues/12371) @ [akoshchiy](https://github.com/akoshchiy)などの AWS 機能との互換性が向上します。
+    -   Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部ストレージ(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity [＃12371](https://github.com/tikv/tikv/issues/12371) @ [akoshchiy](https://github.com/akoshchiy)などの AWS 機能との互換性が向上します。
 
 -   TiFlash
 
     -   クラスター化インデックス[＃9529](https://github.com/pingcap/tiflash/issues/9529) @ [JaySon-Huang](https://github.com/JaySon-Huang)を持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。
     -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
-    -   分散storageとコンピューティング要求を処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのような要求を処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[＃9334](https://github.com/pingcap/tiflash/issues/9334) @ [JinheLin](https://github.com/JinheLin)
+    -   分散ストレージとコンピューティング要求を処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのような要求を処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[＃9334](https://github.com/pingcap/tiflash/issues/9334) @ [JinheLin](https://github.com/JinheLin)
     -   JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセル要求にタイムリーに応答できるようにします[＃9430](https://github.com/pingcap/tiflash/issues/9430) @ [windtalker](https://github.com/windtalker)
     -   `LENGTH()`と`ASCII()`関数[＃9344](https://github.com/pingcap/tiflash/issues/9344) @ [xzhangxian1008](https://github.com/xzhangxian1008)の実行効率を最適化
-    -   分散storageおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 [＃9695](https://github.com/pingcap/tiflash/issues/9695) @ [JinheLin](https://github.com/JinheLin)からファイルをダウンロードする際の例外を処理します。
+    -   分散ストレージおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 [＃9695](https://github.com/pingcap/tiflash/issues/9695) @ [JinheLin](https://github.com/JinheLin)からファイルをダウンロードする際の例外を処理します。
 
 -   ツール
 
@@ -130,11 +130,11 @@ TiDB バージョン: 8.1.2
     -   テーブルに無効な文字[＃9461](https://github.com/pingcap/tiflash/issues/9461) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブル スキーマを解析できない問題を修正しました。
     -   TiFlashでサポートされていない一部の JSON関数がTiFlash [＃9444](https://github.com/pingcap/tiflash/issues/9444) @ [windtalker](https://github.com/windtalker)にプッシュダウンされる問題を修正しました
     -   特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[＃9301](https://github.com/pingcap/tiflash/issues/9301) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   分散storageおよびコンピューティングアーキテクチャ[＃9298](https://github.com/pingcap/tiflash/issues/9298) @ [JinheLin](https://github.com/JinheLin)で、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャ[＃9298](https://github.com/pingcap/tiflash/issues/9298) @ [JinheLin](https://github.com/JinheLin)で、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。
     -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラー[＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [gengliqi](https://github.com/gengliqi)が発生する問題を修正しました
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[＃8754](https://github.com/pingcap/tiflash/issues/8754) @ [solotzg](https://github.com/solotzg)
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   分散storageおよびコンピューティングアーキテクチャ[＃9665](https://github.com/pingcap/tiflash/issues/9665) @ [zimulala](https://github.com/zimulala)で新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました
+    -   分散ストレージおよびコンピューティングアーキテクチャ[＃9665](https://github.com/pingcap/tiflash/issues/9665) @ [zimulala](https://github.com/zimulala)で新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました
 
 -   ツール
 
@@ -142,7 +142,7 @@ TiDB バージョン: 8.1.2
 
         -   ログに暗号化された情報[＃57585](https://github.com/pingcap/tidb/issues/57585) @ [kennytm](https://github.com/kennytm)が出力される問題を修正
         -   AWS EBS に基づくスナップショットバックアップが準備フェーズで失敗し、バックアップが[＃52049](https://github.com/pingcap/tidb/issues/52049) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました。
-        -   バックアップと復元のチェックポイントパスが一部の外部storageと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [Leavrth](https://github.com/Leavrth)
+        -   バックアップと復元のチェックポイントパスが一部の外部ストレージと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [Leavrth](https://github.com/Leavrth)
         -   `k8s.io/api`ライブラリバージョン[＃57790](https://github.com/pingcap/tidb/issues/57790) @ [BornChanger](https://github.com/BornChanger)にアップグレードして潜在的なセキュリティ脆弱性を修正します
         -   クラスター内に多数のテーブルがあるが、実際のデータサイズが小さい場合に PITR タスクが`Information schema is out of date`エラーを返す可能性がある問題を修正しました[＃57743](https://github.com/pingcap/tidb/issues/57743) @ [Tristan1900](https://github.com/Tristan1900)
 

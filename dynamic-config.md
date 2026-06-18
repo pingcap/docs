@@ -308,10 +308,10 @@ Query OK, 0 rows affected (0.01 sec)
 | `replication.enable-placement-rules`                 | 配置ルールを有効にする                                                |
 | `replication.strictly-match-label`                   | ラベルチェックを有効にする                                              |
 | `replication.isolation-level`                        | TiKVクラスタの最小トポロジカル分離レベル                                     |
-| `pd-server.use-region-storage`                       | 独立したリージョンstorageを有効にする                                     |
+| `pd-server.use-region-storage`                       | 独立したリージョンストレージを有効にする                                     |
 | `pd-server.max-gap-reset-ts`                         | タイムスタンプをリセットする最大間隔を設定します（BR）                               |
 | `pd-server.key-type`                                 | クラスタキータイプを設定します                                            |
-| `pd-server.metric-storage`                           | クラスターメトリックのstorageアドレスを設定します                               |
+| `pd-server.metric-storage`                           | クラスターメトリックのストレージアドレスを設定します                               |
 | `pd-server.dashboard-address`                        | ダッシュボードのアドレスを設定します                                         |
 | `pd-server.flow-round-by-digit`                      | リージョンフロー情報の丸めの最小桁数を指定します                                   |
 | `pd-server.min-resolved-ts-persistence-interval`     | 最小解決タイムスタンプがPDに永続的に保持される間隔を決定します。                          |

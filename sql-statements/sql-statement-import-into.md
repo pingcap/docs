@@ -26,8 +26,8 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 -   `IMPORT INTO`トランザクションまたはロールバックをサポートしていません。明示的なトランザクション ( `IMPORT INTO` / { `BEGIN`内) で`END`を実行するとエラーが返されます。
 -   `IMPORT INTO` [バックアップと復元](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)、 [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) 、 [インデックス追加処理の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)、 TiDB Lightning を使用したデータ インポート、TiCDC を使用したデータ レプリケーション、または[特定時点復旧（PITR）](https://docs.pingcap.com/tidb/stable/br-log-architecture)などの機能との同時作業をサポートしていません。互換性の詳細については、 [TiDB Lightningと`IMPORT INTO`のTiCDCおよびログバックアップとの互換性](https://docs.pingcap.com/tidb/stable/tidb-lightning-compatibility-and-scenarios)参照してください。
 -   データインポート処理中は、対象テーブルに対してDDLまたはDML操作を実行したり、対象データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を実行したりしないでください。これらの操作は、インポートの失敗やデータの不整合を引き起こす可能性があります。また、インポート処理中に読み取り操作を実行することも推奨さ**れません**。読み取られるデータに不整合が生じる可能性があるためです。読み取りおよび書き込み操作は、インポートが完了した後にのみ実行してください。
--   インポート プロセスはシステム リソースを大幅に消費します。 TiDB セルフマネージドの場合、パフォーマンスを向上させるために、少なくとも 32 コアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。 TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの TiDB 自己管理用の高性能storageメディアを構成することをお勧めします。詳細については、 [物理輸入モードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)を参照してください。
--   TiDB Self-Managedの場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)は少なくとも90 GiBの空き容量が必要です。インポートするデータ量と同等以上のstorage容量を割り当てることをお勧めします。
+-   インポート プロセスはシステム リソースを大幅に消費します。 TiDB セルフマネージドの場合、パフォーマンスを向上させるために、少なくとも 32 コアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。 TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの TiDB 自己管理用の高性能ストレージメディアを構成することをお勧めします。詳細については、 [物理輸入モードの制限](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions)を参照してください。
+-   TiDB Self-Managedの場合、TiDB [一時ディレクトリ](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630)は少なくとも90 GiBの空き容量が必要です。インポートするデータ量と同等以上のストレージ容量を割り当てることをお勧めします。
 -   1つのインポートジョブは、1つのターゲットテーブルへのデータインポートのみをサポートします。
 -   `IMPORT INTO` TiDB クラスタのアップグレード時にはサポートされません。
 -   インポートするデータに、主キーまたはNULL以外の一意インデックスの競合が発生するレコードが含まれていないことを確認してください。競合が発生すると、インポート処理が失敗する可能性があります。
@@ -62,7 +62,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 ## 必要な権限 {#required-privileges}
 
-`IMPORT INTO`を実行するには、対象テーブルに対する`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限。TiDB ローカルstorageにファイルをインポートするには、 `FILE`権限も必要です。
+`IMPORT INTO`を実行するには、対象テーブルに対する`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限。TiDB ローカルストレージにファイルをインポートするには、 `FILE`権限も必要です。
 
 ## あらすじ {#synopsis}
 
@@ -111,7 +111,7 @@ OptionItem ::=
 
 ### ファイルの場所 {#filelocation}
 
-これはデータファイルのstorage場所を指定するもので、Amazon S3またはGCSのURIパス、あるいはTiDBのローカルファイルパスを指定できます。
+これはデータファイルのストレージの場所を指定するもので、Amazon S3またはGCSのURIパス、あるいはTiDBのローカルファイルパスを指定できます。
 
 -   Amazon S3 または GCS URI パス: URI 設定の詳細については、[外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
@@ -156,7 +156,7 @@ OptionItem ::=
 | `MAX_WRITE_SPEED='<string>'`        | すべてのファイル形式                | TiKVノードへの書き込み速度を制御します。デフォルトでは速度制限はありません。たとえば、このオプションを`1MiB`と指定すると、書き込み速度を1 MiB/sに制限できます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | `CHECKSUM_TABLE='<string>'`         | すべてのファイル形式                | インポート後にターゲット テーブルに対してチェックサム チェックを実行してインポートの整合性を検証するかどうかを設定します。サポートされている値は、 `"required"` (デフォルト)、 `"optional"` 、および`"off"`です。 `"required"`インポート後にチェックサム チェックを実行することを意味します。チェックサム チェックが失敗した場合、TiDB はエラーを返し、インポートは終了します。 `"optional"`インポート後にチェックサム チェックを実行することを意味します。エラーが発生した場合、TiDB は警告を返し、エラーを無視します。 `"off"`インポート後にチェックサム チェックを実行しないことを意味します。                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `DETACHED`                          | すべてのファイル形式                | `IMPORT INTO`非同期で実行するかどうかを制御します。このオプションを有効にすると、 `IMPORT INTO`の実行によりインポートジョブの情報 ( `Job_ID`など) がすぐに返され、ジョブはバックエンドで非同期に実行されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `CLOUD_STORAGE_URI`                 | すべてのファイル形式                | [グローバルソート](/tidb-global-sort.md)用のエンコードされた KV データが保存されるターゲット アドレスを指定します。 `CLOUD_STORAGE_URI`が指定されていない場合、 `IMPORT INTO`システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)の値に基づいてグローバル ソートを使用するかどうかを決定します。このシステム変数でターゲットstorageアドレスが指定されている場合、 `IMPORT INTO`このアドレスをグローバル ソートに使用します。 `CLOUD_STORAGE_URI`に空でない値が指定されている場合、 `IMPORT INTO`その値をターゲットstorageアドレスとして使用します。 `CLOUD_STORAGE_URI`に空の値が指定されている場合、ローカル ソートが適用されます。現在、ターゲットstorageアドレスは S3 のみをサポートしています。URI 構成の詳細については、 [Amazon S3 URI形式](/external-storage-uri.md#amazon-s3-uri-format)参照してください。この機能を使用する場合、すべての TiDB ノードは、対象の S3 バケットに対する読み取りおよび書き込みアクセス権を持っている必要があり、少なくとも次の権限が必要です: `s3:ListBucket` 、 `s3:GetObject` 、 {{B- `s3:DeleteObject` 、 `s3:PutObject` 、 `s3: AbortMultipartUpload` 。 |
+| `CLOUD_STORAGE_URI`                 | すべてのファイル形式                | [グローバルソート](/tidb-global-sort.md)用のエンコードされた KV データが保存されるターゲット アドレスを指定します。 `CLOUD_STORAGE_URI`が指定されていない場合、 `IMPORT INTO`システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)の値に基づいてグローバル ソートを使用するかどうかを決定します。このシステム変数でターゲットストレージアドレスが指定されている場合、 `IMPORT INTO`このアドレスをグローバル ソートに使用します。 `CLOUD_STORAGE_URI`に空でない値が指定されている場合、 `IMPORT INTO`その値をターゲットストレージアドレスとして使用します。 `CLOUD_STORAGE_URI`に空の値が指定されている場合、ローカル ソートが適用されます。現在、ターゲットストレージアドレスは S3 のみをサポートしています。URI 構成の詳細については、 [Amazon S3 URI形式](/external-storage-uri.md#amazon-s3-uri-format)参照してください。この機能を使用する場合、すべての TiDB ノードは、対象の S3 バケットに対する読み取りおよび書き込みアクセス権を持っている必要があり、少なくとも次の権限が必要です: `s3:ListBucket` 、 `s3:GetObject` 、 {{B- `s3:DeleteObject` 、 `s3:PutObject` 、 `s3: AbortMultipartUpload` 。 |
 | `DISABLE_PRECHECK`                  | `SELECT`のすべてのファイル形式とクエリ結果 | このオプションを設定すると、CDCやPITRタスクの有無など、重要度の低い項目の事前チェックが無効になります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 <CustomContent platform="tidb-cloud" plan="premium">
@@ -169,7 +169,7 @@ OptionItem ::=
 
 ## <code>IMPORT INTO ... FROM FILE</code>方法 {#code-import-into-from-file-code-usage}
 
-TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルstorageに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
+TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルストレージに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
 
 -   Amazon S3 または GCS に保存されているデータ ファイルの場合、 `IMPORT INTO ... FROM FILE` [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)での実行をサポートしています。
 
@@ -207,7 +207,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
     -   `IMPORT INTO` 、データファイルの走査順序に基づいてサブジョブを分割します。通常は、ファイル名で辞書順にソートされます。
 -   対象テーブルに多数のインデックスが存在する場合、またはインデックス列の値がデータファイル内に分散している場合、各サブジョブのエンコードによって生成されるインデックスKVも重複します。
 
-[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合、 `CLOUD_STORAGE_URI` `IMPORT INTO`を指定するか、システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を使用してエンコードされた KV データのターゲットstorageアドレスを指定することで、[グローバルソート](/tidb-global-sort.md)を有効にできます。現在、グローバル ソートはstorageアドレスとして Amazon S3 の使用をサポートしています。グローバル ソートが有効になっている場合、 `IMPORT INTO`はエンコードされた KV データをクラウドstorageに書き込み、クラウドstorageでグローバル ソートを実行し、グローバルにソートされたインデックスとテーブル データを TiKV に並列にインポートします。これにより、KV の重複によって発生する問題が防止され、インポートの安定性とパフォーマンスが向上します。
+[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合、 `CLOUD_STORAGE_URI` `IMPORT INTO`を指定するか、システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を使用してエンコードされた KV データのターゲットストレージアドレスを指定することで、[グローバルソート](/tidb-global-sort.md)を有効にできます。現在、グローバル ソートはストレージアドレスとして Amazon S3 の使用をサポートしています。グローバル ソートが有効になっている場合、 `IMPORT INTO`はエンコードされた KV データをクラウドストレージに書き込み、クラウドストレージでグローバル ソートを実行し、グローバルにソートされたインデックスとテーブル データを TiKV に並列にインポートします。これにより、KV の重複によって発生する問題が防止され、インポートの安定性とパフォーマンスが向上します。
 
 グローバルソートは大量のメモリリソースを消費します。データインポートの前に、 [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)および[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)変数を設定することをお勧めします。これにより、Go言語のガベージコレクションが頻繁にトリガーされることを防ぎ、インポート効率への影響を軽減できます。
 
@@ -219,7 +219,7 @@ SET GLOBAL tidb_server_memory_limit='75%';
 > **注記：**
 >
 > -   ソースデータファイル内のキーバリュー範囲の重複が少ない場合、グローバルソートを有効にするとインポートのパフォーマンスが低下する可能性があります。これは、グローバルソートを有効にすると、TiDB はグローバルソート操作とそれに続くインポートに進む前に、すべてのサブジョブにおけるローカルソートの完了を待つ必要があるためです。
-> -   Global Sortを使用したインポート処理が完了すると、Global Sort用にクラウドstorageに保存されたファイルは、バックグラウンドスレッドで非同期的にクリーンアップされます。
+> -   Global Sortを使用したインポート処理が完了すると、Global Sort用にクラウドストレージに保存されたファイルは、バックグラウンドスレッドで非同期的にクリーンアップされます。
 
 ### 出力 {#output}
 

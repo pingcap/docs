@@ -34,10 +34,10 @@ PartitionNameList ::=
 
 ## パラメータの説明 {#parameter-description}
 
-`DISTRIBUTE TABLE`ステートメントを使用してテーブル内のリージョンを再分配する場合、バランスの取れた分配のために、storageエンジン ( TiFlashや TiKV など) とさまざまなRaftロール (Leader、Learner、投票者など) を指定できます。
+`DISTRIBUTE TABLE`ステートメントを使用してテーブル内のリージョンを再分配する場合、バランスの取れた分配のために、ストレージエンジン ( TiFlashや TiKV など) とさまざまなRaftロール (Leader、Learner、投票者など) を指定できます。
 
 -   `RULE` : バランス調整とスケジュールを行うRaftロールのリージョンを指定します。オプションの値は`"leader-scatter"` 、 `"peer-scatter"` 、および`"learner-scatter"` 。
--   `ENGINE` :storageエンジンを指定します。オプションの値は`"tikv"`と`"tiflash"` 。
+-   `ENGINE` :ストレージエンジンを指定します。オプションの値は`"tikv"`と`"tiflash"` 。
 -   `TIMEOUT` : 散布操作のタイムアウト制限を指定します。PD がこの時間内に散布を完了しない場合、散布タスクは自動的に終了します。このパラメーターが指定されていない場合、デフォルト値は`"30m"`です。
 
 ## 例 {#examples}

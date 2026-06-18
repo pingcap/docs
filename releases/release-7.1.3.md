@@ -18,7 +18,7 @@ TiDB バージョン: 7.1.3
     -   [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL ステートメントを解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v7.1/ticdc-ddl#sql-mode)設定できます[＃9876](https://github.com/pingcap/tiflow/issues/9876) @ [asddongmen](https://github.com/asddongmen)
     -   [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[＃10048](https://github.com/pingcap/tiflow/issues/10048) @ [CharlesCheung96](https://github.com/CharlesCheung96)
     -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [sdojjy](https://github.com/sdojjy)
-    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトstorage[＃10109](https://github.com/pingcap/tiflow/issues/10109)にデータを複製するときに履歴データの自動クリーンアップを設定できます[チャールズ・チュン96](https://github.com/CharlesCheung96)
+    -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージ[＃10109](https://github.com/pingcap/tiflow/issues/10109)にデータを複製するときに履歴データの自動クリーンアップを設定できます[チャールズ・チュン96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
 
@@ -43,7 +43,7 @@ TiDB バージョン: 7.1.3
         -   TiCDCノードがTiDB [＃9935](https://github.com/pingcap/tiflow/issues/9935) @ [3AceShowHand](https://github.com/3AceShowHand)にデータを複製する際のメモリ消費を最適化します
         -   いくつかのアラームルールを最適化[＃9266](https://github.com/pingcap/tiflow/issues/9266) @ [asddongmen](https://github.com/asddongmen)
         -   S3へのデータの並列書き込みやlz4圧縮アルゴリズムの採用など、REDOログのパフォーマンスを最適化します[＃10176](https://github.com/pingcap/tiflow/issues/10176) [＃10226](https://github.com/pingcap/tiflow/issues/10226) @ [sdojjy](https://github.com/sdojjy)
-        -   並列度[＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)を増やすことで、TiCDC がオブジェクトstorageにデータを複製する際のパフォーマンスが向上します。
+        -   並列度[＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)を増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。
         -   TiCDC 増分スキャンによる上流 TiKV [＃11390](https://github.com/tikv/tikv/issues/11390) @ [hicqu](https://github.com/hicqu)への影響を軽減
         -   `sink-uri`構成[＃10106](https://github.com/pingcap/tiflow/issues/10106) @ [3AceShowHand](https://github.com/3AceShowHand)で`content-compatible=true`設定することにより、 TiCDC Canal-JSON コンテンツ フォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。
 
@@ -134,19 +134,19 @@ TiDB バージョン: 7.1.3
 
         -   BR SQL コマンドと CLI のデフォルト値が異なるため、OOM の問題が発生する可能性がある問題を修正しました[＃48000](https://github.com/pingcap/tidb/issues/48000) @ [YuJuncen](https://github.com/YuJuncen)
         -   大規模なワイドテーブル[＃15714](https://github.com/tikv/tikv/issues/15714) @ [YuJuncen](https://github.com/YuJuncen)をバックアップするときに、一部のシナリオでログバックアップが停止する可能性がある問題を修正しました。
-        -   BRが外部storageファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
+        -   BRが外部ストレージファイル[＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)に対して誤ったURIを生成する問題を修正
         -   EC2 メタデータ接続のリセット後の再試行により、バックアップとリストアのパフォーマンスが低下する問題を修正[＃47650](https://github.com/pingcap/tidb/issues/47650) @ [Leavrth](https://github.com/Leavrth)
         -   タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[＃16056](https://github.com/tikv/tikv/issues/16056) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
 
         -   特定のシナリオで`DELETE`ステートメントを複製するときに、 `WHERE`句が主キーを条件として使用しない問題を修正しました[＃9812](https://github.com/pingcap/tiflow/issues/9812) @ [asddongmen](https://github.com/asddongmen)
-        -   オブジェクトstorageにデータを複製する際に、特定の特殊なシナリオでレプリケーションタスクが停止する問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) [＃10044](https://github.com/pingcap/tiflow/issues/10044) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージにデータを複製する際に、特定の特殊なシナリオでレプリケーションタスクが停止する問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) [＃10044](https://github.com/pingcap/tiflow/issues/10044) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   同期ポイントとREDOログ[＃10091](https://github.com/pingcap/tiflow/issues/10091) @ [CharlesCheung96](https://github.com/CharlesCheung96)を有効にした後、特定のシナリオでレプリケーションタスクが停止する問題を修正しました。
         -   特定の特殊なシナリオで TiCDC が TiKV との接続を誤って閉じる問題を修正[＃10239](https://github.com/pingcap/tiflow/issues/10239) @ [hicqu](https://github.com/hicqu)
         -   ターゲットテーブルが削除され、その後アップストリーム[＃10079](https://github.com/pingcap/tiflow/issues/10079) @ [asddongmen](https://github.com/asddongmen)で再作成された場合、変更フィードが双方向レプリケーションモードで DML イベントをレプリケートできない問題を修正しました。
         -   オブジェクトストアシンク[＃10041](https://github.com/pingcap/tiflow/issues/10041) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製するときに NFS ディレクトリにアクセスすることによって発生するパフォーマンスの問題を修正しました
-        -   オブジェクトstorageサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
+        -   オブジェクトストレージサービス[＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)にデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました
         -   REDOログが有効な場合にDDL文の複製間隔が長すぎる問題を修正[＃9960](https://github.com/pingcap/tiflow/issues/9960) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログが有効な場合にNFS障害によりオーナーノードが停止する問題を修正[＃9886](https://github.com/pingcap/tiflow/issues/9886) @ [3AceShowHand](https://github.com/3AceShowHand)
 

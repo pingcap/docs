@@ -74,7 +74,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 1.  プロジェクトを訪問: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
 2.  右上の**フォーク**ボタンをクリックし、完了するまで待ちます。
 
-### ステップ2: フォークしたリポジトリをローカルstorageにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
+### ステップ2: フォークしたリポジトリをローカルストレージにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
 
     cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
     git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID

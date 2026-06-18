@@ -101,7 +101,7 @@ CREATE TABLE `bookshop`.`books` (
 
 > **注記：**
 >
-> TiDBにおける**プライマリキー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なstorageエンジン）における定義とは異なります。
+> TiDBにおける**プライマリキー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）における定義とは異なります。
 >
 > -   **InnoDB**では、**プライマリキー**は一意であり、nullではなく、**インデックスはクラスタ化されています**。
 >
@@ -234,7 +234,7 @@ CREATE TABLE `bookshop`.`users` (
 
 このシナリオでは、OLTPとOLAPの両方のシナリオをサポートする**HTAP（ハイブリッド・トランザクション・アンド・アナリティカル・プロセッシング）**データベースであるTiDBが、理想的なワンストップデータベースソリューションとなります。
 
-TiDBでは、オンライン・トランザクション処理（OLTP）には行ベースのstorageエンジンである[TiKV](/tikv-overview.md)、オンライン分析処理（OLAP）には列指向storageエンジンである[TiFlash](/tiflash/tiflash-overview.md)を使用できます。設定後、 TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからリアルタイムでデータを複製し、TiKVとTiFlash間のデータの一貫性を厳密に確保します。
+TiDBでは、オンライン・トランザクション処理（OLTP）には行ベースのストレージエンジンである[TiKV](/tikv-overview.md)、オンライン分析処理（OLAP）には列指向ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)を使用できます。設定後、 TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからリアルタイムでデータを複製し、TiKVとTiFlash間のデータの一貫性を厳密に確保します。
 
 ### 列ベースのデータを複製する {#replicate-column-based-data}
 
@@ -366,7 +366,7 @@ SHOW TABLES IN `bookshop`;
 
 -   一方、クラスター化インデックスを持つテーブルには、次のような問題が発生する可能性があります。
     -   近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)てください。
-    -   主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのstorage容量を消費します。
+    -   主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのストレージ容量を消費します。
 
 -   [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key` } を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 

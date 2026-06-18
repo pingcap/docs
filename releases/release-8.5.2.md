@@ -43,7 +43,7 @@ TiDBバージョン：8.5.2
     -   同じ名前のビューを2つ作成してもエラーが報告されない問題を修正 [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     -   TiFlashの Join における等価条件の両側のデータ型が異なると、誤った結果が生じる可能性がある問題を修正しました [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
     -   ハッシュパーティションテーブルで`is null`条件を含むクエリがpanicを引き起こす問題を修正 [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
-    -   分散storageおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスタで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlash Compute ノードに追加される可能性がある問題を修正しました [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスタで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlash Compute ノードに追加される可能性がある問題を修正しました [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   統計ファイルにnull値が含まれている場合、統計の手動読み込みに失敗することがある問題を修正 [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正 [#59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     -   交換パーティションでの誤った判断により実行が失敗する問題を修正 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
@@ -63,7 +63,7 @@ TiDBバージョン：8.5.2
     -   インデックス作成中にPDLeaderの強制終了エラーを注入するとデータ不整合が発生する可能性がある問題を修正 [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
     -   TiDBが約650万個のテーブルを作成した後にメモリ不足（OOM）になる問題を修正 [#58368](https://github.com/pingcap/tidb/issues/58368) @[lance6716](https://github.com/lance6716)
     -   グローバルソート機能を有効にして大量のデータをインポートする際に、一意キーの追加が失敗する可能性がある問題を修正しました [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    -   TiDBがS3外部storageへのアクセスに失敗した後に判読不能なエラーメッセージを返す問題を修正 [#59326](https://github.com/pingcap/tidb/issues/59326) @[lance6716](https://github.com/lance6716)
+    -   TiDBがS3外部ストレージへのアクセスに失敗した後に判読不能なエラーメッセージを返す問題を修正 [#59326](https://github.com/pingcap/tidb/issues/59326) @[lance6716](https://github.com/lance6716)
     -   `information_schema.tables`をクエリすると、 `table_schema`と`table_name`の値が一致しない問題を修正 [#60593](https://github.com/pingcap/tidb/issues/60593) @[tangenta](https://github.com/tangenta)
     -   内部SQLコミットが失敗した場合にDDL通知機能が誤った通知を送信する可能性がある問題を修正しました [#59055](https://github.com/pingcap/tidb/issues/59055) @[lance6716](https://github.com/lance6716)
     -   `ADD INDEX` DDL 操作で、リージョンサイズが 256 MiB であるにもかかわらず、グローバルソート機能が有効になっている場合に SST ファイルが 96 MiB ずつ分割される問題を修正します。 [#59962](https://github.com/pingcap/tidb/issues/59962) @[D3Hunter](https://github.com/D3Hunter)
@@ -102,7 +102,7 @@ TiDBバージョン：8.5.2
 
     -   ソート中にデータが流出してTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
     -   TiFlashが`Exception: Block schema mismatch`を含むSQL文を実行する際に`GROUP BY ... WITH ROLLUP`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
-    -   分散storageとコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピアを追加するターゲット ノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティング ノードがリージョンピアを追加するターゲット ノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   特定の状況でTiFlash が予期せず終了した場合に、エラー スタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   大量のデータをインポートした後にTiFlash が高いメモリ使用量を維持する可能性がある問題を修正 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     -   `profiles.default.init_thread_count_scale`が`0`に設定されている場合、 TiFlash の起動がブロックされる場合がある問題を修正 [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -112,8 +112,8 @@ TiDBバージョン：8.5.2
     -   16 MiB を超えるデータを 1 行挿入するとTiFlash が再起動に失敗することがある問題を修正 [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ベクトル インデックスを持つテーブルに新しいデータが挿入された後、 TiFlash が一部のディスク データを正しくクリーンアップできず、ディスク容量が異常に消費される問題を修正 [#9946](https://github.com/pingcap/tiflash/issues/9946) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashが同じテーブルに複数のベクトルインデックスを作成した後、以前に作成されたベクトルインデックスを予期せず削除し、パフォーマンスの低下を引き起こす可能性がある問題を修正しました [#9971](https://github.com/pingcap/tiflash/issues/9971) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   TiFlashが分散storageおよびコンピューティングアーキテクチャでベクトルインデックスを使用してベクトル検索クエリを高速化できない可能性がある問題を修正 [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   TiFlash が分散storageおよびコンピューティングアーキテクチャで大量の`tag=EnumParseOverflowContainer`ログを出力する可能性がある問題を修正 [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlashが分散ストレージおよびコンピューティングアーキテクチャでベクトルインデックスを使用してベクトル検索クエリを高速化できない可能性がある問題を修正 [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   TiFlash が分散ストレージおよびコンピューティングアーキテクチャで大量の`tag=EnumParseOverflowContainer`ログを出力する可能性がある問題を修正 [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `SELECT ... AS OF TIMESTAMP`クエリの実行時にTiFlash が期待どおりにLearnerの読み取りをスキップしない問題を修正 [#10046](https://github.com/pingcap/tiflash/issues/10046) @[CalvinNeo](https://github.com/CalvinNeo)
     -   リージョンのキー範囲が不規則なスナップショットを処理するとTiFlash がpanicになる問題を修正 [#10147](https://github.com/pingcap/tiflash/issues/10147) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -143,11 +143,11 @@ TiDBバージョン：8.5.2
 
     -   TiDB Lightning
 
-        -   高同時実行シナリオでクラウドstorageからデータをインポートする際にパフォーマンスが低下する問題を修正 [#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
+        -   高同時実行シナリオでクラウドストレージからデータをインポートする際にパフォーマンスが低下する問題を修正 [#57413](https://github.com/pingcap/tidb/issues/57413) @[xuanyu66](https://github.com/xuanyu66)
         -   TiDB Lightningを使用してデータをインポートする際に、エラーレポートの出力が切り詰められる問題を修正しました [#58085](https://github.com/pingcap/tidb/issues/58085) @[lance6716](https://github.com/lance6716)
         -   ログが適切に匿名化されていない問題を修正 [#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
         -   外部アカウントを使用してGCSstorage操作を実行する際に、認証が`context canceled`エラーで失敗する問題を修正しました [#60155](https://github.com/pingcap/tidb/issues/60155) @[lance6716](https://github.com/lance6716)
-        -   TiDB LightningがクラウドstorageからParquetファイルをTiDBにインポートする際に数時間停止する問題を修正します [#60224](https://github.com/pingcap/tidb/issues/60224) @[joechenrh](https://github.com/joechenrh)
+        -   TiDB LightningがクラウドストレージからParquetファイルをTiDBにインポートする際に数時間停止する問題を修正します [#60224](https://github.com/pingcap/tidb/issues/60224) @[joechenrh](https://github.com/joechenrh)
         -   TiDB Lightningが大量のデータをインポートする際に、SSTファイルをTiKVクラスターに書き込んだり取り込んだりする際にメモリ不足（OOM）になる可能性がある問題を修正しました。 [#59947](https://github.com/pingcap/tidb/issues/59947) @[OliverS929](https://github.com/OliverS929)
         -   テーブル作成時の最大QPSが低いことと`information_schema.tables`へのアクセスが遅いことが原因で、数百万のテーブルが存在するシナリオでTiDB Lightningがスキーマジョブのディスパッチが遅くなる問題を修正しました [#58141](https://github.com/pingcap/tidb/issues/58141) @[D3Hunter](https://github.com/D3Hunter)
 

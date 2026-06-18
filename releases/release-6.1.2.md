@@ -94,4 +94,4 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   バックアップと復元 (BR)
 
         -   復元中に同時実行が大きすぎる設定になっているため、リージョンのバランスが取れていない問題を修正しました[＃37549](https://github.com/pingcap/tidb/issues/37549) @ [3pointer](https://github.com/3pointer)
-        -   外部storage[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました
+        -   外部ストレージ[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました

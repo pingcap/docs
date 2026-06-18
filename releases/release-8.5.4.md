@@ -184,8 +184,8 @@ TiDBバージョン：8.5.4
 
     -   クエリ対象の列に多数の`NULL`値が含まれている場合にクエリが失敗する可能性がある問題を修正 [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   TiFlashがRU消費量の統計情報を水増しして生成する問題を修正 [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
-    -   分離されたstorageとコンピューティングアーキテクチャの下で低速クエリが存在する場合にTiFlash でOOM が発生する可能性がある問題を修正 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散storageおよびコンピューティングアーキテクチャ下でTiFlashと S3 の間でネットワーク分割が発生した場合、 TiFlash が無期限に再試行する可能性がある問題を修正 [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分離されたストレージとコンピューティングアーキテクチャの下で低速クエリが存在する場合にTiFlash でOOM が発生する可能性がある問題を修正 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分散ストレージおよびコンピューティングアーキテクチャ下でTiFlashと S3 の間でネットワーク分割が発生した場合、 TiFlash が無期限に再試行する可能性がある問題を修正 [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `FLOOR()`関数と`CEIL()`関数のパラメータ`DECIMAL`型の場合、誤った結果を返すことがある問題を修正 [#10365](https://github.com/pingcap/tiflash/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 -   ツール
@@ -196,7 +196,7 @@ TiDBバージョン：8.5.4
         -   Azure Blob Storageへのデータバックアップ時にフラッシュ操作が時々遅くなる問題を修正 [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         -   ファイル削除が失敗した場合に`log truncate`が発生する可能性がある問題を修正 [#63358](https://github.com/pingcap/tidb/issues/63358) @[YuJuncen](https://github.com/YuJuncen)
         -   バックアップ中に`--checksum`を`false`に設定すると、リストア後に`count`テーブルの`mysql.stats_meta`列が`0`になる可能性がある問題を修正 [#60978](https://github.com/pingcap/tidb/issues/60978) @[Leavrth](https://github.com/Leavrth)
-        -   S3互換storageサービスの帯域幅制限が有効になっている場合に、 BRがこれらのサービスからデータを復元できない可能性を低減する [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
+        -   S3互換ストレージサービスの帯域幅制限が有効になっている場合に、 BRがこれらのサービスからデータを復元できない可能性を低減する [#18846](https://github.com/tikv/tikv/issues/18846) @[kennytm](https://github.com/kennytm)
         -   `log backup observer`リージョン上の観測を失う可能性があり、ログバックアップの進行が進まなくなる問題を修正しました [#18243](https://github.com/tikv/tikv/issues/18243) @[Leavrth](https://github.com/Leavrth)
         -   バックアップされたテーブルに特定の特殊スキーマが含まれている場合に`restore point`作成が失敗する問題を修正します [#63663](https://github.com/pingcap/tidb/issues/63663) @[RidRisR](https://github.com/RidRisR)
 

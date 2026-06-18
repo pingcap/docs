@@ -40,7 +40,7 @@ TiDB バージョン: 6.5.3
 
         -   TiCDC が DDL を処理する方法を最適化し、DDL が他の無関係な DML イベントの使用をブロックしないようにし、メモリ使用量を削減します[＃8106](https://github.com/pingcap/tiflow/issues/8106) @ [asddongmen](https://github.com/asddongmen)
         -   デコーダーインターフェースを最適化し、新しいメソッド`AddKeyValue` [＃8861](https://github.com/pingcap/tiflow/issues/8861) @ [3AceShowHand](https://github.com/3AceShowHand)を追加します
-        -   オブジェクトstorageにデータを複製するシナリオでDDLイベントが発生した場合にディレクトリ構造を最適化する[＃8890](https://github.com/pingcap/tiflow/issues/8890) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   オブジェクトストレージにデータを複製するシナリオでDDLイベントが発生した場合にディレクトリ構造を最適化する[＃8890](https://github.com/pingcap/tiflow/issues/8890) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[＃8892](https://github.com/pingcap/tiflow/issues/8892) @ [Rustin170506](https://github.com/Rustin170506)
         -   Kafka [＃8865](https://github.com/pingcap/tiflow/issues/8865) @ [Rustin170506](https://github.com/Rustin170506)にデータを複製する際の検証に OAuth プロトコルの使用をサポート
         -   AvroまたはCSVプロトコルを使用してデータレプリケーション中にTiCDCが`UPDATE`ステートメントを処理する方法を最適化し、 `UPDATE` `DELETE`と`INSERT`ステートメントに分割して、 `DELETE`ステートメント[＃9086](https://github.com/pingcap/tiflow/issues/9086) @ [3AceShowHand](https://github.com/3AceShowHand)から古い値を取得できるようにします。
@@ -120,12 +120,12 @@ TiDB バージョン: 6.5.3
         -   TiCDC タイムゾーン設定[＃8798](https://github.com/pingcap/tiflow/issues/8798) @ [Rustin170506](https://github.com/Rustin170506)の問題を修正
         -   上流の TiKV ノードの 1 つが[＃8858](https://github.com/pingcap/tiflow/issues/8858) @ [hicqu](https://github.com/hicqu)でクラッシュするとチェックポイントの遅延が増加する問題を修正しました
         -   下流のMySQLにデータを複製するときに、上流のTiDB [＃8040](https://github.com/pingcap/tiflow/issues/8040) @ [asddongmen](https://github.com/asddongmen)で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーションエラーが発生する問題を修正しました。
-        -   オブジェクトstorageにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流の[＃8914](https://github.com/pingcap/tiflow/issues/8914) @ [CharlesCheung96](https://github.com/CharlesCheung96)に正しく複製されない問題を修正しました。
+        -   オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流の[＃8914](https://github.com/pingcap/tiflow/issues/8914) @ [CharlesCheung96](https://github.com/CharlesCheung96)に正しく複製されない問題を修正しました。
         -   一部の特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [hicqu](https://github.com/hicqu)
         -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度のワークロードを引き起こす問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [Rustin170506](https://github.com/Rustin170506)
         -   Kafka メッセージのサイズが大きすぎるためにレプリケーションエラーが発生した場合に、メッセージ本文がログ[＃9031](https://github.com/pingcap/tiflow/issues/9031) @ [darraes](https://github.com/darraes)に記録される問題を修正しました。
         -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[＃9023](https://github.com/pingcap/tiflow/issues/9023) @ [asddongmen](https://github.com/asddongmen)
-        -   storageサービスにデータを複製するときに、下流のDDLステートメントに対応するJSONファイルにテーブルフィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [CharlesCheung96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
+        -   ストレージサービスにデータを複製するときに、下流のDDLステートメントに対応するJSONファイルにテーブルフィールド[＃9066](https://github.com/pingcap/tiflow/issues/9066) @ [CharlesCheung96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正しました。
 
     -   TiDB Lightning
 

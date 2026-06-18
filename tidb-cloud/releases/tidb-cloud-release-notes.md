@@ -154,7 +154,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
 
-        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとstorageのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
+        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
 
         詳細については、 [プレビュー版から本番環境へ：Microsoft Azure 上のTiDB Cloud Dedicatedが一般提供開始](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)参照してください。
 
@@ -254,7 +254,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   **TiDB Cloud Dedicated**
 
-    -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタにおけるクラウドstorageデータのインポートエクスペリエンスを向上させます。
+    -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタにおけるクラウドストレージデータのインポートエクスペリエンスを向上させます。
 
         インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**クラウドストレージからのデータインポートの**エントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らすことができます。
 
@@ -320,9 +320,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         詳細については、 [クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md)参照してください。
 
-    -   TiKVおよびTiFlashのstorage使用量計算を改善します。
+    -   TiKVおよびTiFlashのストレージ使用量計算を改善します。
 
-        メトリクスおよびアラートシステムにおけるTiKVおよびTiFlashstorage使用量の計算に、WALファイルと一時ファイルが組み込まれるようになり、より正確な容量および使用状況の監視が可能になりました。
+        メトリクスおよびアラートシステムにおけるTiKVおよびTiFlashストレージ使用量の計算に、WALファイルと一時ファイルが組み込まれるようになり、より正確な容量および使用状況の監視が可能になりました。
 
         詳細については、 [TiDB Cloud の組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
@@ -346,7 +346,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   Azure Blob Storageからのデータインポートにおけるプライベートリンク接続をサポートします。
 
-        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているstorageアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
+        Azure Blob Storage から[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにデータをインポートする際、接続方法としてプライベートリンクを選択し、パブリックインターネットではなく Azure プライベートエンドポイント経由で接続できるようになりました。この機能により、パブリックアクセスが制限されているストレージアカウントでも、安全でネットワーク分離されたデータインポートが可能になります。
 
         詳細については、[クラウドストレージからサンプルデータ（SQLファイル）をインポートする](/tidb-cloud/import-sample-data.md)[クラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)[クラウドストレージからApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)参照してください。
 

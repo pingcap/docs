@@ -73,7 +73,7 @@ TiDB バージョン: 6.1.0
 
 -   Use Raft Engine as the default log storage engine
 
-    v6.1.0以降、TiDBはログのデフォルトstorageエンジンとしてRaft Engineを使用しています。RocksDBと比較して、 Raft EngineはTiKV I/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、フォアグラウンドスループットを約5%向上させ、特定の負荷下ではテールレイテンシーを20%削減します。
+    v6.1.0以降、TiDBはログのデフォルトストレージエンジンとしてRaft Engineを使用しています。RocksDBと比較して、 Raft EngineはTiKV I/O書き込みトラフィックを最大40%、CPU使用率を10%削減し、フォアグラウンドスループットを約5%向上させ、特定の負荷下ではテールレイテンシーを20%削減します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [＃95](https://github.com/tikv/raft-engine/issues/95)
 
@@ -105,7 +105,7 @@ TiDB バージョン: 6.1.0
 
 -   SST 破損からの自動回復
 
-    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けたピアのスケジュールを設定し、他のレプリカを使用してそのデータの復旧を試みます。パラメータ`background-error-recovery-window`を使用して、復旧の最大許容時間を設定できます。復旧操作が指定時間内に完了しない場合、TiKVはpanicになります。この機能は、復旧可能な破損storageを自動的に検出して復旧するため、クラスターの安定性が向上します。
+    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けたピアのスケジュールを設定し、他のレプリカを使用してそのデータの復旧を試みます。パラメータ`background-error-recovery-window`を使用して、復旧の最大許容時間を設定できます。復旧操作が指定時間内に完了しない場合、TiKVはpanicになります。この機能は、復旧可能な破損ストレージを自動的に検出して復旧するため、クラスターの安定性が向上します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
 
@@ -117,7 +117,7 @@ TiDB バージョン: 6.1.0
 
 -   TiDBは最大GC待機時間の設定をサポートしています
 
-    TiDB のトランザクションは、マルチバージョン同時実行制御 (MVCC) メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが格納されます。古いデータはガベージコレクション (GC) タスクによって定期的にクリーンアップされ、storageスペースの再利用を促進してクラスターのパフォーマンスと安定性を向上させます。GC は、デフォルトでは 10 分ごとにトリガーされます。長時間実行トランザクションが対応する履歴データにアクセスできるようにするため、実行中のトランザクションがある場合は GC タスクが遅延されます。GC タスクが無期限に遅延されないように、TiDB は GC タスクの最大遅延時間を制御するシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)導入しています。最大遅延時間を超えると、GC は強制的に実行されます。変数のデフォルト値は 24 時間です。この機能により、GC の待機時間と長時間実行トランザクションの関係を制御でき、クラスターの安定性が向上します。
+    TiDB のトランザクションは、マルチバージョン同時実行制御 (MVCC) メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが格納されます。古いデータはガベージコレクション (GC) タスクによって定期的にクリーンアップされ、ストレージスペースの再利用を促進してクラスターのパフォーマンスと安定性を向上させます。GC は、デフォルトでは 10 分ごとにトリガーされます。長時間実行トランザクションが対応する履歴データにアクセスできるようにするため、実行中のトランザクションがある場合は GC タスクが遅延されます。GC タスクが無期限に遅延されないように、TiDB は GC タスクの最大遅延時間を制御するシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)導入しています。最大遅延時間を超えると、GC は強制的に実行されます。変数のデフォルト値は 24 時間です。この機能により、GC の待機時間と長時間実行トランザクションの関係を制御でき、クラスターの安定性が向上します。
 
     [ユーザードキュメント](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
@@ -172,14 +172,14 @@ TiDB バージョン: 6.1.0
 
     v6.1.0 より前では、TiKV が Raw Key Valuestorageとして使用される場合、TiKV はクライアントから渡された生データのみを保存するため、基本的な Key Value の読み取りおよび書き込み機能のみを提供します。
 
-    TiKV API V2 は、次のような新しい Raw Key Valuestorage形式とアクセス インターフェイスを提供します。
+    TiKV API V2 は、次のような新しい Raw Key Valueストレージ形式とアクセス インターフェイスを提供します。
 
     -   データはMVCCに保存され、データの変更タイムスタンプが記録されます。この機能は、変更データキャプチャ（CDC）と増分バックアップ・リストアの実装の基盤となります。
     -   データはさまざまな使用法に応じてスコープ設定され、単一の TiDB クラスター、トランザクション KV、RawKV アプリケーションの共存をサポートします。
 
     <Warning>
 
-    基盤となるstorage形式に大幅な変更が加えられたため、API V2 を有効にすると、TiKV クラスターを v6.1.0 より前のバージョンにロールバックできなくなります。TiKV をダウングレードすると、データが破損する可能性があります。
+    基盤となるストレージ形式に大幅な変更が加えられたため、API V2 を有効にすると、TiKV クラスターを v6.1.0 より前のバージョンにロールバックできなくなります。TiKV をダウングレードすると、データが破損する可能性があります。
 
     </Warning>
 
@@ -277,7 +277,7 @@ TiDB バージョン: 6.1.0
 | TiKV           | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610)                                                                                                     | 新しく追加された | スナップショット ファイルのサイズがこの値を超えると、スナップショット ファイルは複数のファイルに分割されます。                                                                                      |
 | TiKV           | [`raft-engine.memory-limit`](/tikv-configuration-file.md#memory-limit)                                                                                                                                 | 新しく追加された | Raft Engineのメモリ使用量の制限を指定します。                                                                                                                  |
 | TiKV           | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                 | 新しく追加された | The maximum recovery time is allowed after RocksDB detects a recoverable background error.                                                    |
-| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー値ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェース バージョン。                                                                              |
+| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー値ストアとして機能するときに TiKV によって使用されるストレージ形式とインターフェース バージョン。                                                                              |
 | PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待機時間を制御します。                                                                                                                  |
 | TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                             | 新しく追加された | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか。                                                                                                  |
 | TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細については[`kafka`でシンクURIを設定する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)参照してください。      |

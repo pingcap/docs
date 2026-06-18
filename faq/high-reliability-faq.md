@@ -9,7 +9,7 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 ## TiDB はデータ暗号化をサポートしていますか? {#does-tidb-support-data-encryption}
 
-はい。ネットワークトラフィック内のデータを暗号化するには、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)有効にします。storageエンジン内のデータを暗号化するには、 [透過的なデータ暗号化（TDE）](/encryption-at-rest.md)有効にします。
+はい。ネットワークトラフィック内のデータを暗号化するには、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)有効にします。ストレージエンジン内のデータを暗号化するには、 [透過的なデータ暗号化（TDE）](/encryption-at-rest.md)有効にします。
 
 ## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャン ツールに必要な特定のバージョンに変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 

@@ -69,7 +69,7 @@ pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning 
 
 インポートを開始するには、 `tidb-lightning`を実行してください。コマンドラインでプログラムを起動すると、 `SIGHUP`シグナルによってプログラムが終了する場合があります。この場合は、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。
 
-S3からデータをインポートする場合は、アカウントの`SecretKey`と`AccessKey`を環境変数として渡す必要があります。このアカウントには、S3バックエンドstorageへのアクセス権限が付与されています。
+S3からデータをインポートする場合は、アカウントの`SecretKey`と`AccessKey`を環境変数として渡す必要があります。このアカウントには、S3バックエンドストレージへのアクセス権限が付与されています。
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}

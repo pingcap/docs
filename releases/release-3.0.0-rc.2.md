@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   `tidb_low_resolution_tso`変数を追加して、バッチで取得されるTSOの数を制御し、TSOを取得するトランザクションの回数を減らし、データの一貫性がそれほど厳密に要求されないシナリオに適応します[＃10428](https://github.com/pingcap/tidb/pull/10428)
 
 -   DDL
-    -   TiDB [＃10272](https://github.com/pingcap/tidb/pull/10272)の旧バージョンのstorage内の文字セット名の大文字の問題を修正しました
+    -   TiDB [＃10272](https://github.com/pingcap/tidb/pull/10272)の旧バージョンのストレージ内の文字セット名の大文字の問題を修正しました
     -   テーブル作成時にテーブルリージョンを事前割り当てして、 [＃10221](https://github.com/pingcap/tidb/pull/10221)作成後の書き込みホットスポットを回避するテーブルパーティションのサポート`preSplit`
     -   TiDBがPDのバージョン情報を誤って更新する場合がある問題を修正[＃10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`文[＃10393](https://github.com/pingcap/tidb/pull/10393)を使用して文字セットと照合順序を変更することをサポートします
@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 ## PD {#pd}
 
--   リージョンメタデータを保存するために、デフォルトでリージョンstorageを有効にします[＃1524](https://github.com/pingcap/pd/pull/1524)
+-   リージョンメタデータを保存するために、デフォルトでリージョンストレージを有効にします[＃1524](https://github.com/pingcap/pd/pull/1524)
 -   ホットリージョンのスケジューリングが別のスケジューラによって優先される問題を修正[＃1522](https://github.com/pingcap/pd/pull/1522)
 -   リーダーの優先順位が有効にならない問題を修正[＃1533](https://github.com/pingcap/pd/pull/1533)
 -   `ScanRegions` [＃1535](https://github.com/pingcap/pd/pull/1535)の gRPC インターフェースを追加する

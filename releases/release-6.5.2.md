@@ -17,7 +17,7 @@ TiDB バージョン: 6.5.2
 
     TiCDC クラスターを v6.5.2 またはそれ以降の v6.5.x バージョンにアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整し、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
--   パーティションテーブルをstorageサービスにレプリケーションする際にデータ損失が発生する可能性がある問題を修正するため、TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)構成項目のデフォルト値が`false`から`true`に変更されました。これは、テーブル内のパーティションがデフォルトで別々のディレクトリに保存されることを意味します。データ損失の問題を回避するため、この値は`true`のままにしておくことをお勧めします[＃8724](https://github.com/pingcap/tiflow/issues/8724) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+-   パーティションテーブルをストレージサービスにレプリケーションする際にデータ損失が発生する可能性がある問題を修正するため、TiCDC [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)構成項目のデフォルト値が`false`から`true`に変更されました。これは、テーブル内のパーティションがデフォルトで別々のディレクトリに保存されることを意味します。データ損失の問題を回避するため、この値は`true`のままにしておくことをお勧めします[＃8724](https://github.com/pingcap/tiflow/issues/8724) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## 改善点 {#improvements}
 
@@ -94,10 +94,10 @@ TiDB バージョン: 6.5.2
 
     -   TiCDC
 
-        -   TiCDCがオブジェクトstorage[＃8581](https://github.com/pingcap/tiflow/issues/8581) @ [CharlesCheung96](https://github.com/CharlesCheung96) @ [Rustin170506](https://github.com/Rustin170506)にデータを複製するときにパーティションセパレーターが機能しない問題を修正しました
-        -   TiCDC がオブジェクトstorage[＃8256](https://github.com/pingcap/tiflow/issues/8256) @ [zhaoxinyu](https://github.com/zhaoxinyu)にデータを複製するときにテーブル スケジューリングによってデータ損失が発生する可能性がある問題を修正しました。
+        -   TiCDCがオブジェクトストレージ[＃8581](https://github.com/pingcap/tiflow/issues/8581) @ [CharlesCheung96](https://github.com/CharlesCheung96) @ [Rustin170506](https://github.com/Rustin170506)にデータを複製するときにパーティションセパレーターが機能しない問題を修正しました
+        -   TiCDC がオブジェクトストレージ[＃8256](https://github.com/pingcap/tiflow/issues/8256) @ [zhaoxinyu](https://github.com/zhaoxinyu)にデータを複製するときにテーブル スケジューリングによってデータ損失が発生する可能性がある問題を修正しました。
         -   非再入可能DDL文[＃8662](https://github.com/pingcap/tiflow/issues/8662) @ [hicqu](https://github.com/hicqu)によりレプリケーションが停止する問題を修正
-        -   TiCDC がオブジェクトstorage[＃8666](https://github.com/pingcap/tiflow/issues/8666) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製するときに、TiCDC スケーリングによってデータ損失が発生する可能性がある問題を修正しました。
+        -   TiCDC がオブジェクトストレージ[＃8666](https://github.com/pingcap/tiflow/issues/8666) @ [CharlesCheung96](https://github.com/CharlesCheung96)にデータを複製するときに、TiCDC スケーリングによってデータ損失が発生する可能性がある問題を修正しました。
         -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [amyangfei](https://github.com/amyangfei)で制御されない問題を修正
         -   Redo ログ[＃8591](https://github.com/pingcap/tiflow/issues/8591) @ [CharlesCheung96](https://github.com/CharlesCheung96)の適用中に特別なケースでデータ損失が発生する可能性がある問題を修正しました
         -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [amyangfei](https://github.com/amyangfei)で制御されない問題を修正

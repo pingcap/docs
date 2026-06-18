@@ -96,7 +96,7 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
 1.  `tidb-lightning`を実行します。
 
-    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightning を実行する前に、S3 バックエンドstorageへのアクセス権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
+    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightning を実行する前に、S3 バックエンドストレージへのアクセス権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
 
         ```shell
         export AWS_ACCESS_KEY_ID=${access_key}

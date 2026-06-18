@@ -80,7 +80,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>quota-backend-bytes</code> {#code-quota-backend-bytes-code}
 
--   メタ情報データベースのstorageサイズはデフォルトで8GiBです
+-   メタ情報データベースのストレージサイズはデフォルトで8GiBです
 -   デフォルト値: `8589934592`
 
 ### <code>auto-compaction-mod</code> {#code-auto-compaction-mod-code}

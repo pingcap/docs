@@ -50,7 +50,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 TiDB Lightning は以下をサポートします:
 
 -   [Dumpling](/dumpling-overview.md) 、CSV ファイル、および[Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、Snowflake によってエクスポートされたファイルをインポートします。
--   ローカルディスクまたは Amazon S3storageからデータを読み取ります。
+-   ローカルディスクまたは Amazon S3ストレージからデータを読み取ります。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
 

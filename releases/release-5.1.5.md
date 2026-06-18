@@ -86,7 +86,7 @@ TiDBバージョン：5.1.5
     -   並列集計のエラーによりTiFlashがクラッシュする可能性があるバグを修正しました [#5356](https://github.com/pingcap/tiflash/issues/5356)
     -   `JOIN`を含むクエリでエラーが発生した場合にハングアップする可能性がある問題を修正しました [#4195](https://github.com/pingcap/tiflash/issues/4195)
     -   関数`OR`が誤った結果を返す問題を修正しました [#5849](https://github.com/pingcap/tiflash/issues/5849)
-    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   無効なストレージディレクトリ構成が予期しない動作を引き起こすバグを修正 [#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   多数のINSERTおよびDELETE操作後に発生する可能性のあるデータ不整合を修正する [#4956](https://github.com/pingcap/tiflash/issues/4956)
     -   リージョン範囲に一致しないデータがTiFlashノード上に残ってしまうバグを修正しました [#4414](https://github.com/pingcap/tiflash/issues/4414)
     -   読み取り負荷の高い環境で列を追加した後に発生する可能性のあるクエリエラーを修正する [#3967](https://github.com/pingcap/tiflash/issues/3967)

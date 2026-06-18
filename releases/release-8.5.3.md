@@ -127,8 +127,8 @@ TiDBバージョン：8.5.3
 
     -   バックアップと復元 (BR)
 
-        -   ブレークポイントリカバリ中にstorageノードの空き容量が不必要に再チェックされる問題を修正 [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
-        -   HTTP/2 GOAWAY エラーが発生した際に、外部storageからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
+        -   ブレークポイントリカバリ中にストレージノードの空き容量が不必要に再チェックされる問題を修正 [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
+        -   HTTP/2 GOAWAY エラーが発生した際に、外部ストレージからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)
         -   インポートモードの切り替えにより復元中に発生する`keepalive watchdog timedout`エラーを修正 [#18541](https://github.com/tikv/tikv/issues/18541) @[Leavrth](https://github.com/Leavrth)
         -   大量のデータを転送する際に、ログバックアップのAzure Blob Storageへのアップロードが遅くなる問題を修正しました [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)
         -   `-f`でテーブルをフィルタリングする際に、 BRが対応するテーブルがクラスタ内に存在するかどうかをチェックしない問題を修正 [#61592](https://github.com/pingcap/tidb/issues/61592) @[RidRisR](https://github.com/RidRisR)

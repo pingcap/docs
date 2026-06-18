@@ -32,7 +32,7 @@ TiDB バージョン: 7.5.5
 
     -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
     -   クラスター化インデックス[＃9529](https://github.com/pingcap/tiflash/issues/9529) @ [JaySon-Huang](https://github.com/JaySon-Huang)を持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。
-    -   分散storageおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 [＃9695](https://github.com/pingcap/tiflash/issues/9695) @ [JinheLin](https://github.com/JinheLin)からファイルをダウンロードする際の例外を処理します。
+    -   分散ストレージおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 [＃9695](https://github.com/pingcap/tiflash/issues/9695) @ [JinheLin](https://github.com/JinheLin)からファイルをダウンロードする際の例外を処理します。
 
 -   ツール
 
@@ -58,7 +58,7 @@ TiDB バージョン: 7.5.5
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間[＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。
     -   `IMPORT INTO`ステートメント[＃56476](https://github.com/pingcap/tidb/issues/56476) @ [D3Hunter](https://github.com/D3Hunter)を使用してデータをインポートした後、 `AUTO_INCREMENT`フィールドが正しく設定されない問題を修正しました。
     -   2人のDDL所有者が同時に存在する可能性がある問題を修正[＃54689](https://github.com/pingcap/tidb/issues/54689) @ [joccau](https://github.com/joccau)
-    -   storageエンジン[＃56402](https://github.com/pingcap/tidb/issues/56402) @ [YangKeao](https://github.com/YangKeao)としてTiKVが選択されていない場合にTTLが失敗する可能性がある問題を修正
+    -   ストレージエンジン[＃56402](https://github.com/pingcap/tidb/issues/56402) @ [YangKeao](https://github.com/YangKeao)としてTiKVが選択されていない場合にTTLが失敗する可能性がある問題を修正
     -   `ADD INDEX` [＃56930](https://github.com/pingcap/tidb/issues/56930) @ [fzzf678](https://github.com/fzzf678)を実行するときに TiDB がインデックスの長さ制限をチェックしない問題を修正しました
     -   TTLタスクをキャンセルした際に、対応するSQLが強制終了されない問題を修正[＃56511](https://github.com/pingcap/tidb/issues/56511) @ [lcwangchao](https://github.com/lcwangchao)
     -   エイリアス[＃56726](https://github.com/pingcap/tidb/issues/56726) @ [hawkingrei](https://github.com/hawkingrei)を持つマルチテーブル`DELETE`ステートメントに対して実行プラン バインディングを作成できない問題を修正しました。
@@ -126,7 +126,7 @@ TiDB バージョン: 7.5.5
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   2番目のパラメータが負の[＃9604](https://github.com/pingcap/tiflash/issues/9604) @ [guo-shaoge](https://github.com/guo-shaoge)の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました
     -   テーブルに無効な文字[＃9461](https://github.com/pingcap/tiflash/issues/9461) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブル スキーマを解析できない問題を修正しました。
-    -   分散storageおよびコンピューティングアーキテクチャ[＃9665](https://github.com/pingcap/tiflash/issues/9665) @ [zimulala](https://github.com/zimulala)で新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました
+    -   分散ストレージおよびコンピューティングアーキテクチャ[＃9665](https://github.com/pingcap/tiflash/issues/9665) @ [zimulala](https://github.com/zimulala)で新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました
 
 -   ツール
 
@@ -158,7 +158,7 @@ TiDB バージョン: 7.5.5
         -   TiDB LightningがTiKV [＃56114](https://github.com/pingcap/tidb/issues/56114) @ [fishiu](https://github.com/fishiu)から送信されたサイズ超過のメッセージを受信できない問題を修正しました
         -   物理インポートモード[＃56814](https://github.com/pingcap/tidb/issues/56814) @ [D3Hunter](https://github.com/D3Hunter)を使用してデータをインポートした後に`AUTO_INCREMENT`値が高すぎる値に設定される問題を修正しました
         -   メタデータ更新中に`Lock wait timeout`エラーが発生した場合にTiDB Lightning が自動的に再試行しない問題を修正しました[＃53042](https://github.com/pingcap/tidb/issues/53042) @ [guoshouyan](https://github.com/guoshouyan)
-        -   高同時実行シナリオでクラウドstorageからデータをインポートするときにパフォーマンスが低下する問題を修正[＃57413](https://github.com/pingcap/tidb/issues/57413) @ [xuanyu66](https://github.com/xuanyu66)
+        -   高同時実行シナリオでクラウドストレージからデータをインポートするときにパフォーマンスが低下する問題を修正[＃57413](https://github.com/pingcap/tidb/issues/57413) @ [xuanyu66](https://github.com/xuanyu66)
         -   多数の Parquet ファイル[＃56104](https://github.com/pingcap/tidb/issues/56104) @ [zeminzhou](https://github.com/zeminzhou)をインポートする際の準備フェーズでTiDB Lightning が長時間停止する可能性がある問題を修正しました
         -   TiDB Lightning [＃58085](https://github.com/pingcap/tidb/issues/58085) @ [lance6716](https://github.com/lance6716)を使用してデータをインポートするときにエラーレポートの出力が切り捨てられる問題を修正しました
 

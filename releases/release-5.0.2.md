@@ -31,7 +31,7 @@ TiDB バージョン: 5.0.2
 
 -   TiKV
 
-    -   BRは、仮想ホストアドレス指定モード[＃10243](https://github.com/tikv/tikv/pull/10243)を使用してS3互換storageをサポートするようになりました。
+    -   BRは、仮想ホストアドレス指定モード[＃10243](https://github.com/tikv/tikv/pull/10243)を使用してS3互換ストレージをサポートするようになりました。
     -   TiCDCのスキャン速度[＃10151](https://github.com/tikv/tikv/pull/10151)バックプレッシャーをサポート
     -   TiCDCの初期スキャン[＃10133](https://github.com/tikv/tikv/pull/10133)のメモリ使用量を削減
     -   悲観的トランザクション[＃10089](https://github.com/tikv/tikv/pull/10089)におけるTiCDCの古い値機能のキャッシュヒット率を改善

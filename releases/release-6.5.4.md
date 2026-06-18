@@ -54,7 +54,7 @@ TiDB バージョン: 6.5.4
     -   バックアップと復元 (BR)
 
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することで接続の再利用のサポートを強化します
-        -   PD または外部 S3storageへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
+        -   PD または外部 S3ストレージへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
         -   新しい復元パラメータ`WaitTiflashReady`を追加します。このパラメータを有効にすると、 TiFlashレプリカが正常に複製された後に復元操作が完了します[＃43828](https://github.com/pingcap/tidb/issues/43828) [＃46302](https://github.com/pingcap/tidb/issues/46302) @ [3pointer](https://github.com/3pointer)
 
     -   TiCDC

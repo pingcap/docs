@@ -56,7 +56,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   TiCDC
 
         -   シンプルプロトコルを使用したチェンジフィードが[＃11315](https://github.com/pingcap/tiflow/issues/11315) @ [asddongmen](https://github.com/asddongmen)で開始されたときに、すべてのテーブルの BOOTSTRAP メッセージをダウンストリームに一度に送信することをサポートします。
-        -   ダウンストリームがメッセージキュー（MQ）またはクラウドstorageの場合、生のイベントを直接出力することをサポート[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   ダウンストリームがメッセージキュー（MQ）またはクラウドストレージの場合、生のイベントを直接出力することをサポート[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
 
@@ -164,7 +164,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   BRまたはTiDB Lightning [＃9118](https://github.com/pingcap/tiflash/issues/9118) @ [JinheLin](https://github.com/JinheLin)経由でデータをインポートした後、FastScanモードで多数の重複行が読み取られる可能性がある問題を修正しました。
     -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散storageおよびコンピューティングアーキテクチャで、DDL操作[＃9084](https://github.com/pingcap/tiflash/issues/9084) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。
+    -   分散ストレージおよびコンピューティングアーキテクチャで、DDL操作[＃9084](https://github.com/pingcap/tiflash/issues/9084) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。
     -   データベース[＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)にまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`実行した後にTiFlash がpanic可能性がある問題を修正しました。
     -   空のパーティション[＃9024](https://github.com/pingcap/tiflash/issues/9024) @ [JinheLin](https://github.com/JinheLin)を含むパーティション テーブルでクエリを実行するときに発生するクエリ タイムアウトの問題を修正しました。
     -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [JinheLin](https://github.com/JinheLin)
