@@ -103,7 +103,6 @@
 | Scattering | Scattering | Technical term, keep in English. |
 | Secondary Cluster | セカンダリクラスター |  |
 | Secure | セキュリティ |  |
-| Security | Security | When used as a configuration section heading, keep in English. Do not translate to 「安全」. |
 | Sequence | シーケンス |  |
 | server | サーバー | Use long vowel mark. |
 | single point of failure | 単一障害点 |  |
