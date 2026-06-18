@@ -12,13 +12,13 @@ aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 
 ## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
-TiKVのstorageエンジンである[ロックスDB](https://rocksdb.org/) 、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
+TiKVのstorageエンジンである[RocksDB](https://rocksdb.org/) 、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
 
 ディスクスループットの制限によるボトルネックを軽減するには、パフォーマンスを[Titanを有効にする](#enable-titan)向上させることができます。平均行サイズが 512 バイト未満の場合は、Titan は適用できません。この場合、パフォーマンスを[すべての圧縮レベルを上げる](#increase-all-the-compression-levels)向上させることができます。
 
 ### Titanを有効にする {#enable-titan}
 
-[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[ロックスDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
+[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
 
 平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size` `"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan による圧縮 I/O フローの削減を有効にすることができます。
 

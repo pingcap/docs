@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 
 # Spring Bootを使用してTiDBに接続する {#connect-to-tidb-with-spring-boot}
 
-[春](https://spring.io/)は MySQL 互換データベースであり、 Java用の人気のあるオープンソース コンテナ フレームワークです。このドキュメントでは Spring の使用方法として[Spring Boot](https://spring.io/projects/spring-boot)を使用します。
+[Spring](https://spring.io/)は Java用の人気のあるオープンソースコンテナフレームワークです。TiDBはMySQL互換データベースで、このドキュメントでは Spring の使用方法として[Spring Boot](https://spring.io/projects/spring-boot)を使用します。
 
 このチュートリアルでは、TiDBを[Spring Data JPA](https://spring.io/projects/spring-data-jpa)およびJPAプロバイダとしての[Hibernate](https://hibernate.org/orm/)と組み合わせて使用​​し、以下のタスクを実行する方法を学びます。
 

@@ -309,7 +309,7 @@ TiProxyでは、クライアントが使用するコネクタが[認証プラグ
 | JavaScript | mysqljs/mysql     | 2.15.0           |
 | JavaScript | node-mysql2       | 1.0.0-rc-6       |
 | PHP        | mysqlnd           | 5.4              |
-| Python     | MySQLコネクタ/Python  | 1.0.7            |
+| Python     | MySQL Connector/Python  | 1.0.7            |
 | Python     | PyMySQL           | 0.7              |
 
 一部のコネクタは共通ライブラリを呼び出してデータベースに接続しますが、これらのコネクタは表には記載されていません。必要なライブラリのバージョンについては、上記の表を参照してください。たとえば、MySQL/Rubyはlibmysqlclientを使用してデータベースに接続するため、MySQL/Rubyで使用されるlibmysqlclientのバージョンは5.5.7以降である必要があります。

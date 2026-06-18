@@ -130,7 +130,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[ザピエール](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
+[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
 
 [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 

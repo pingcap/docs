@@ -5,7 +5,7 @@ summary: Titanstorageエンジンの概要を学習します。
 
 # Titanの概要 {#titan-overview}
 
-[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15)は、キーと値の分離を実現する高性能な[ロックスDB](https://github.com/facebook/rocksdb)プラグインです。Titanは、大きな値が使用される際のRocksDBでの書き込み増幅を軽減できます。
+[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15)は、キーと値の分離を実現する高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインです。Titanは、大きな値が使用される際のRocksDBでの書き込み増幅を軽減できます。
 
 キーと値のペアの値のサイズが大きい場合（1KBまたは512Bを超える場合）、Titanは書き込み、更新、ポイント読み取りのシナリオにおいてRocksDBよりも優れたパフォーマンスを発揮します。ただし、Titanはstorage容量と範囲クエリのパフォーマンスを犠牲にすることで、より高い書き込みパフォーマンスを実現しています。SSDの価格が下がり続けるにつれて、このトレードオフはますます重要になるでしょう。
 
