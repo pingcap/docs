@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.6
 
 ## 互換性の変更 {#compatibility-changes}
 
--   セキュリティ強化モード（SEM）で設定[`require_secure_transport`](https://docs.pingcap.com/tidb/v6.5/system-variables#require_secure_transport-new-in-v610) ～ `ON`を禁止し、ユーザー[＃47665](https://github.com/pingcap/tidb/issues/47665) @ [tiancaiamao](https://github.com/tiancaiamao)の潜在的な接続問題を防ぎます。
+-   セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v6.5/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザー[＃47665](https://github.com/pingcap/tidb/issues/47665) @ [tiancaiamao](https://github.com/tiancaiamao)の潜在的な接続問題を防ぎます。
 -   オプティマイザがテーブル[＃46695](https://github.com/pingcap/tidb/issues/46695) @ [coderplay](https://github.com/coderplay)に対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入します。
 -   さらなるテストの結果、 TiCDC Changefeed構成項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 構成ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[＃10047](https://github.com/pingcap/tiflow/issues/10047) @ [sdojjy](https://github.com/sdojjy)
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。
