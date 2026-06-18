@@ -60,7 +60,9 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 - 当某认证方式未启用自动加入时，只有被 `Organization Owner` 或 `Project Owner` 邀请的用户才能通过自定义 URL 登录。
 - 当某认证方式启用自动加入时，任何使用该认证方式的用户都可以通过自定义 URL 登录。登录后，他们会被自动分配为组织内的默认 `Organization Viewer` 角色。
 
-出于安全考虑，如果你选择启用自动加入，建议在[配置认证方式详情](#step-2-配置认证方式)时限制允许认证的邮箱域名。
+对于 OIDC 和 SAML 认证方式，如果你启用 **Auto-provision Accounts**，则必须在[配置认证方式详情](#step-2-配置认证方式)时配置 **Allowed Email Domains**。对于 SAML，如果你启用 **SCIM Provisioning Accounts**，也同样需要这样做。在你可以在 **Allowed Email Domains** 中使用某个域名之前，需要先在 **Domains** 区域中添加并验证该域名。
+
+对于其他认证方式，如果你选择启用自动加入，建议限制允许认证的邮箱域名。
 
 ### 通知成员关于云组织 SSO 迁移计划
 
@@ -116,6 +118,25 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 
 4. 点击 **Save**。
 
+### 为 OIDC 和 SAML 添加并验证域名
+
+如果你想为 OIDC 或 SAML 启用 **Auto-provision Accounts**，或者为 SAML 启用 **SCIM Provisioning Accounts**，请添加并验证你的组织成员用于登录的邮箱域名。在这些情况下，**Allowed Email Domains** 为必填项，并且只能使用状态为 **Verified** 的域名。
+
+如果 **Auto-provision Accounts** 和 **SCIM Provisioning Accounts** 均被禁用，则 **Allowed Email Domains** 为可选项。如果你在该字段中输入了任何域名，这些域名仍然必须先在 **Domains** 区域中完成验证。
+
+要添加并验证域名，请执行以下步骤：
+
+1. 在左侧导航栏中，点击 **Organization Settings** > **Authentication**。
+2. 在 **Authentication** 页面中，点击 **Domains** 区域中的 **Add Domain**。
+3. 输入你想要允许的域名，例如 `example.com`，然后点击 **Add domain and next**。
+4. 在验证对话框中，复制 TXT 记录的 **Host** 和 **Value**。
+5. 在你的 DNS 提供商中，使用复制的 **Host** 和 **Value** 添加一条 TXT 记录。
+6. 等待 DNS 传播，返回 TiDB Cloud，然后点击 **Verify**。
+
+    DNS 更改可能需要几分钟才能生效。如果验证失败，请等待几分钟后重试。
+
+7. 确认域名状态变为 **Verified**。
+
 ### 配置 OIDC 认证方式
 
 如果你有使用 OIDC 身份协议的身份提供商，可以为 TiDB Cloud 登录启用 OIDC 认证方式。
@@ -128,7 +149,7 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
     - Client ID
     - Client secret
 
-2. 在 **Organization Settings** 页面，点击 **Authentication** 标签页，在 **Authentication Methods** 区域找到 OIDC 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 OIDC 方式详情。
+2. 在 TiDB Cloud 控制台的 **Authentication** 页面，在 **Authentication Methods** 区域找到 OIDC 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 OIDC 方式详情。
 3. 在认证方式详情中，你可以配置以下内容：
 
     - **Name**
@@ -141,15 +162,17 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 
     - [**Auto-provision Accounts**](#决定是否启用自动加入auto-provision)
 
-        默认禁用。你可以根据需要启用。出于安全考虑，如果你选择启用自动加入，建议限制允许认证的邮箱域名。
+        默认禁用。你可以根据需要启用。
 
     - **Allowed Email Domains**
 
-        配置该字段后，只有指定邮箱域名的用户才能通过自定义 URL 使用该认证方式登录 TiDB Cloud。填写域名时需去除 `@` 符号，并用英文逗号分隔。例如：`company1.com,company2.com`。
+        如果你为 OIDC 启用了 **Auto-provision Accounts**，则该字段为必填项。仅输入你已在 **Domains** 区域中验证过的域名。只有使用这些邮箱域名的用户才能通过自定义 URL 登录 TiDB Cloud，并被自动加入到你的组织中。填写时需去除 `@` 符号，并用英文逗号分隔多个域名。例如：`company1.com,company2.com`。
+
+        如果 **Auto-provision Accounts** 被禁用，则该字段为可选项。如果你输入了任何域名，这些域名仍然必须先在 **Domains** 区域中完成验证。
 
         > **注意：**
         >
-        > 如果你已配置邮箱域名，在保存设置前，请确保添加了你当前用于登录的邮箱域名，以避免被 TiDB Cloud 锁定无法登录。
+        > 在保存设置前，请确保包含你当前用于登录的、已验证的邮箱域名，以避免被锁定而无法访问 TiDB Cloud。
 
 4. 点击 **Save**。
 
@@ -168,7 +191,7 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
     - Sign on URL
     - Signing Certificate
 
-2. 在 **Organization Settings** 页面，点击左侧导航栏的 **Authentication** 标签页，在 **Authentication Methods** 区域找到 SAML 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 SAML 方式详情。
+2. 在 TiDB Cloud 控制台的 **Authentication** 页面，在 **Authentication Methods** 区域找到 SAML 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 SAML 方式详情。
 3. 在认证方式详情中，你可以配置以下内容：
 
     - **Name**
@@ -185,19 +208,23 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 
     - [**Auto-provision Accounts**](#决定是否启用自动加入auto-provision)
 
-        默认禁用。你可以根据需要启用。出于安全考虑，如果你选择启用自动加入，建议限制允许认证的邮箱域名。
+        默认禁用。你可以根据需要启用。
 
     - **Allowed Email Domains**
 
-        配置该字段后，只有指定邮箱域名的用户才能通过自定义 URL 使用该认证方式登录 TiDB Cloud。填写域名时需去除 `@` 符号，并用英文逗号分隔。例如：`company1.com,company2.com`。
+        如果你为 SAML 启用了 **Auto-provision Accounts** 或 **SCIM Provisioning Accounts**，则该字段为必填项。仅输入你已在 **Domains** 区域中验证过的域名。只有使用这些邮箱域名的用户才能通过自定义 URL 登录 TiDB Cloud，并被加入到你的组织中。填写时需去除 `@` 符号，并用英文逗号分隔多个域名。例如：`company1.com,company2.com`。
+
+        如果 **Auto-provision Accounts** 和 **SCIM Provisioning Accounts** 均被禁用，则该字段为可选项。如果你输入了任何域名，这些域名仍然必须先在 **Domains** 区域中完成验证。
 
         > **注意：**
         >
-        > 如果你已配置邮箱域名，在保存设置前，请确保添加了你当前用于登录的邮箱域名，以避免被 TiDB Cloud 锁定无法登录。
+        > 在保存设置前，请确保包含你当前用于登录的、已验证的邮箱域名，以避免被锁定而无法访问 TiDB Cloud。
 
     - **SCIM Provisioning Accounts**
 
         默认禁用。如果你希望通过身份提供商集中自动化管理 TiDB Cloud 组织用户和用户组的创建、删除和身份管理，可以启用该选项。详细配置步骤见 [配置 SCIM 自动化管理](#配置-scim-自动化管理)。
+
+        在启用 **SCIM Provisioning Accounts** 之前，请先为要加入的用户添加并验证邮箱域名，并在 **Allowed Email Domains** 字段中进行配置。
 
 4. 点击 **Save**。
 
