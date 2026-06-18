@@ -139,7 +139,7 @@ sorted-kv-dir = "${path}"
 data-source-dir = "${s3_path}"  # eg: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
-# The expression that parses the parquet file.
+# The expression that parses the Parquet file.
 pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'
