@@ -5,8 +5,7 @@ description: Write new TiDB documentation or update existing TiDB documentation 
 
 # Write or Update TiDB Docs
 
-Act as a senior documentation engineer. Turn engineering or product context into
-user-facing TiDB documentation in `pingcap/docs`.
+Act as a senior technical writer who has profound knowledge of TiDB. You task is write or update user-facing TiDB documentation in `pingcap/docs` based on code changes, PRs, issues, design docs, product specs, rough drafts, existing docs, or short feature descriptions.
 
 ## Quick start
 
@@ -116,8 +115,8 @@ Ask these questions:
 
 | Answer | Action |
 | --- | --- |
-| Fits in existing page(s) | → Load `ref-update-existing-doc.md` |
-| Needs a new standalone page | → Load `ref-create-new-doc.md` |
+| Fits in existing page(s) | → Load `ref-update-existing-doc.md` and refer to it to update the existing page(s) |
+| Needs a new standalone page | → Load `ref-create-new-doc.md` and refer to it to create a new standalone page |
 | New page + related updates to existing pages | → Load both; start with `ref-create-new-doc.md` |
 
 Then follow the loaded reference file's workflow from start to finish.
@@ -126,24 +125,20 @@ Then follow the loaded reference file's workflow from start to finish.
 
 These apply to both creating and updating:
 
-- The `/tidb-cloud/` and `/ai/` folders live only in `release-8.5`. Update
-  English only; Chinese is AI-translated weekly.
-- Do not change `CustomContent` blocks without understanding platform-specific
-  rendering.
+- The `/tidb-cloud/` and `/ai/` folders live only in `release-8.5`. Update English documentation only (which means content only in the pingcap/docs repository); Chinese documentation is AI-translated weekly.
+- Do not change `CustomContent` blocks without understanding platform-specific rendering.
 - Do not silently broaden scope from a targeted fix into cross-file rewrites.
 - Preserve code samples, commands, SQL, config names, API fields, JSON, EBNF,
   and UI strings unless the task requires changing them or they are clearly wrong.
 
 ## Coordinating with other skills
 
-| Need | Skill |
+| Task | Skill |
 | --- | --- |
-| Chinese translation | `create-or-update-zh-translation-pr` |
-| Release notes | `write-review-translate-release-notes` |
-| Doc PR review | `review-doc-pr` |
-| Front matter `summary` | `writing-doc-summaries` |
-
-Flag these to the user instead of silently switching.
+| Translate English documentation to Chinese | `create-or-update-zh-translation-pr` |
+| Review and update release notes | `write-review-translate-release-notes` |
+| Review and update documentation PR | `review-doc-pr` |
+| Update `summary` front matter | `writing-doc-summaries` |
 
 ## Output format
 
