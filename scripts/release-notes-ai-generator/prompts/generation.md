@@ -52,7 +52,7 @@ The rules below define the wording, opening verbs, and single-entry style.
 
 ### General rules
 
-- Write from the user's perspective, in English.
+- Write from the user’s perspective, clearly and concisely, in English.
 - Do not end the entry with a period.
 - Do not expose internal function names unless they are user-visible behavior. Rewrite into observable behavior (e.g. `Fix nil pointer panic in getRegionFromTS` → `Fix the potential panic that occurs when fetching region information during a Stale Read`).
 - SQL functions: backtick ALL CAPS with parentheses (`` `DATE()` ``). SQL keywords: backtick ALL CAPS (`` `HAVING` ``).
