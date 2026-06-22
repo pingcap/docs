@@ -127,13 +127,13 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   `BIT`の集計関数が`ALL`パラメータをサポートするようにする
 
-    -   `SHOW PRIVILEGES`声明を支持する
+    -   `SHOW PRIVILEGES`ステートメントを支持する
 
     -   `LOAD DATA`文の`CHARACTER SET`構文をサポートする
 
     -   `CREATE USER`文の`IDENTIFIED WITH`構文をサポートする
 
-    -   `LOAD DATA IGNORE LINES`声明を支持する
+    -   `LOAD DATA IGNORE LINES`ステートメントを支持する
 
     -   `Show ProcessList`文はより正確な情報を返す
 

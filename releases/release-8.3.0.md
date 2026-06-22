@@ -231,7 +231,7 @@ TiDBバージョン：8.3.0
 
 -   TiDB
 
-    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`声明 [#54162](https://github.com/pingcap/tidb/issues/54162)を支持します[dveeden](https://github.com/dveeden)
+    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`ステートメント [#54162](https://github.com/pingcap/tidb/issues/54162)を支持します[dveeden](https://github.com/dveeden)
     -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     -   インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     -   `mysql.analyze_jobs`システムテーブル [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)に分析済みインデックスを表示します。

@@ -94,7 +94,7 @@ SHOW PLACEMENT LABELS;
     CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
     ```
 
-    この声明では、
+    このステートメントでは、
 
     -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードに`us-east-1`としてRaftリーダーを配置することを意味します。
     -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region` - `us-east-1`として、 `region`ラベルのノードに`us-west-1`として Raft Followers を配置することを意味します。

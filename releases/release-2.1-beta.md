@@ -32,7 +32,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
 -   互換性
     -   より多くのMySQL構文をサポート
     -   `bit`集計関数が`ALL`パラメータをサポートするようにする
-    -   `SHOW PRIVILEGES`声明を支持する
+    -   `SHOW PRIVILEGES`ステートメントを支持する
 -   DML
     -   `INSERT INTO SELECT`文目のメモリ使用量を減らす
     -   `PlanCache`のパフォーマンス問題を修正

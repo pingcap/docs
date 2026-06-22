@@ -14,11 +14,11 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 -   [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 -   [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
-## DDL関連の声明 {#ddl-related-statement}
+## DDL関連のステートメント {#ddl-related-statement}
 
 <CustomContent platform="tidb-cloud">
 
-| 声明                                                                                      | 説明                             |
+| ステートメント                                                                                      | 説明                             |
 | --------------------------------------------------------------------------------------- | ------------------------------ |
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中のDDLジョブをキャンセルします。         |
 | [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)              | 現在実行中のDDLジョブを一時停止します。          |
@@ -31,7 +31,7 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 
 <CustomContent platform="tidb">
 
-| 声明                                                                                      | 説明                             |
+| ステートメント                                                                                      | 説明                             |
 | --------------------------------------------------------------------------------------- | ------------------------------ |
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中のDDLジョブをキャンセルします。         |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行とインデックスのCRC64を計算します。 |
@@ -54,7 +54,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 上記のステートメントは、ロジック最適化ルールのブロックリストを再読み込みするために使用されます。
 
-## <code>ADMIN PLUGINS</code>関連の声明 {#code-admin-plugins-code-related-statement}
+## <code>ADMIN PLUGINS</code>関連のステートメント {#code-admin-plugins-code-related-statement}
 
 > **注記：**
 >
@@ -98,7 +98,7 @@ ADMIN RELOAD BINDINGS;
 
 上記のステートメントは、SQLプランのバインディング情報を再読み込みするために使用されます。
 
-## <code>ADMIN REPAIR</code>声明 {#code-admin-repair-code-statement}
+## <code>ADMIN REPAIR</code>ステートメント {#code-admin-repair-code-statement}
 
 <CustomContent platform="tidb-cloud">
 
