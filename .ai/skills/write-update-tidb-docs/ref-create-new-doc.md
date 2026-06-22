@@ -1,23 +1,18 @@
 # Create New TiDB Documentation
 
-Self-contained workflow for creating a new documentation page in `pingcap/docs`.
-Follow these steps sequentially after SKILL.md has determined that a new page is
-needed.
+Self-contained workflow for creating a new documentation page in `pingcap/docs`. Follow these steps sequentially if the [write-update-tidb-docs](/.ai/skills/write-update-tidb-docs/SKILL.md) skill has determined that a new page is needed.
 
 ## Confirm the decision to create
 
-This is a final sanity re-check of the create-vs-update decision already made in `SKILL.md` Step 4 (the authoritative decision point) — not a second, independent decision. If any criterion below fails, switch to `ref-update-existing-doc.md`.
+This is a final sanity re-check of the create-vs-update decision already made in the Step 4 (the authoritative decision point) of the [write-update-tidb-docs](/.ai/skills/write-update-tidb-docs/SKILL.md) skill — not a second, independent decision. If any criterion below fails, switch to `ref-update-existing-doc.md`.
 
 A new page is justified when all of these are true:
 
 - The content does not fit cleanly as a section of an existing page.
 - There is enough substance for ≥3 meaningful sections.
-- The content has standalone discoverability value (users might search for it
-  directly).
+- The content has standalone discoverability value (users might search for it directly).
 
-Typical triggers: new feature with its own scenarios/config/limitations, new SQL
-statement, new `INFORMATION_SCHEMA` table, new integration/tool, new
-troubleshooting workflow.
+Typical triggers: new feature with its own scenarios/config/limitations, new SQL statement, new `INFORMATION_SCHEMA` table, new integration/tool, new troubleshooting workflow.
 
 Do **not** create a new page if:
 
@@ -35,12 +30,9 @@ Do **not** create a new page if:
 | Reference | "What are the params/syntax/options?" | `resources/doc-templates/template-reference.md` |
 | Troubleshooting | "Something is wrong, how to fix?" | `resources/doc-templates/template-troubleshooting.md` |
 
-Read the selected template before drafting. Use it as a structural skeleton; skip
-sections that do not apply.
+Read the selected template before drafting. Use it as a structural skeleton; skip sections that do not apply.
 
-For features combining concept + usage + reference (common in TiDB), use the
-**new feature** template. Split into multiple pages only when content naturally
-exceeds ~1500 words per concern.
+For features combining concept + usage + reference (common in TiDB), use the **new feature** template. Split into multiple pages only when content naturally exceeds ~1500 words per concern.
 
 ## 2. Choose file path and name
 
@@ -91,8 +83,7 @@ Every navigable page needs a TOC entry.
 ### Where in the TOC?
 
 1. Find the relevant section: `rg -n "<keyword>" TOC.md`
-2. Look at neighbors — TOC groups by component, then by complexity (overview →
-   getting started → usage → reference → troubleshooting).
+2. Look at neighbors — TOC groups by component, then by complexity (overview → getting started → usage → reference → troubleshooting).
 3. Place the entry adjacent to similar items at the correct nesting level.
 
 **Format** (2-space indent per level):
@@ -225,10 +216,8 @@ When the doc is expected to exceed ~800 words or has unclear scope:
 
 1. Propose 3–5 core sections. Get confirmation.
 2. Start with the highest-value or most-uncertain section.
-3. Draft section by section. Ask questions only when facts cannot be derived
-   from available sources.
-4. After drafting, run a reader test: predict 5–10 questions a real user would
-   ask. Verify the doc answers them.
+3. Draft section by section. Ask questions only when facts cannot be derived from available sources.
+4. After drafting, run a reader test: predict 5–10 questions a real user would ask. Verify the doc answers them.
 5. Ask: can anything be removed without losing value?
 
 ## 6. Handle associated updates
@@ -255,8 +244,7 @@ Also check:
 - [ ] TOC: correct file, correct level, correct indentation
 - [ ] Heading levels: no skipped levels, exactly one H1
 - [ ] File name: lowercase, hyphen-separated, `.md` extension
-- [ ] A user finding this via search can complete their task without hidden
-      context
+- [ ] A user finding this via search can complete their task without hidden context
 
 ## Common mistakes
 

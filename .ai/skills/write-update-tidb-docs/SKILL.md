@@ -45,12 +45,9 @@ Multiple inputs can be combined. More context = fewer questions needed.
 
 - Inspect first, confirm when uncertain, then edit.
 - Prefer updating existing docs over creating new pages.
-- Not every code change needs a doc update. Documentation must justify its
-  maintenance cost.
-- English in `pingcap/docs` is the primary output. For Chinese docs, finish
-  English first, then use the `create-or-update-zh-translation-pr` skill.
-- If the user asks about local changes without naming files, start with
-  `git status -u` or `git show --name-status`.
+- Not every code change needs a doc update. Documentation must justify its maintenance cost.
+- English in `pingcap/docs` is the primary output. For Chinese docs, finish English first, then use the `create-or-update-zh-translation-pr` skill.
+- If the user asks about local changes without naming files, start with `git status -u` or `git show --name-status`.
 
 ## Step 1: Load shared context
 
@@ -99,8 +96,7 @@ Extract:
 
 ### From rough notes or verbal description
 
-Extract key user-facing facts. Ask focused questions only for facts that cannot
-be derived from code, tests, or existing docs.
+Extract key user-facing facts. Ask focused questions only for facts that cannot be derived from code, tests, or existing docs.
 
 ## Step 3: Determine the target branch and version
 
@@ -129,10 +125,8 @@ If the version cannot be determined from the source, mark it with a placeholder 
 Ask these questions:
 
 1. Does this change have a natural home in an existing page?
-2. Would adding it to an existing page make that page too long or dilute its
-   focus?
-3. Does it introduce a distinct user task or feature that needs standalone
-   discoverability?
+2. Would adding it to an existing page make that page too long or dilute its focus?
+3. Does it introduce a distinct user task or feature that needs standalone discoverability?
 4. Is there enough substance for a standalone page (≥3 meaningful sections)?
 
 | Answer | Action |
@@ -150,8 +144,7 @@ These apply to both creating and updating:
 - The `/tidb-cloud/` and `/ai/` folders live only in `release-8.5`. Update English documentation only (which means content only in the pingcap/docs repository); Chinese documentation is AI-translated weekly.
 - Do not change `CustomContent` blocks without understanding platform-specific rendering.
 - Do not silently broaden scope from a targeted fix into cross-file rewrites.
-- Preserve code samples, commands, SQL, config names, API fields, JSON, EBNF,
-  and UI strings unless the task requires changing them or they are clearly wrong.
+- Preserve code samples, commands, SQL, config names, API fields, JSON, EBNF, and UI strings unless the task requires changing them or they are clearly wrong.
 
 ## Where this skill stops
 
