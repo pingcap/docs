@@ -123,7 +123,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - Remove useless gRPC connections in TiFlash to reduce repeated invalid connection logs after TiKV nodes are scaled in [#9806](https://github.com/pingcap/tiflash/issues/9806) @[gengliqi](https://github.com/gengliqi) <!-- component: compute -->
     - Support partial ordered index optimization for `TOPN` queries on prefix indexes to improve the performance of `ORDER BY ... LIMIT/OFFSET` queries when `tidb_opt_partial_ordered_index_for_topn` is set to `COST` [#66338](https://github.com/pingcap/tidb/issues/66338) @[xzhangxian1008](https://github.com/xzhangxian1008) @[winoros](https://github.com/winoros) <!-- component: execution -->
     - Optimize the performance of high-cardinality `GROUP BY` queries that use Stream Aggregate by reducing CPU overhead in memory tracking [#68475](https://github.com/pingcap/tidb/issues/68475) @[guo-shaoge](https://github.com/guo-shaoge) <!-- component: execution -->
     - Mitigate coprocessor request bursts for `IndexLookUp` queries on highly partitioned tables with local indexes to improve query stability and reduce performance spikes [#67545](https://github.com/pingcap/tidb/issues/67545) @[gengliqi](https://github.com/gengliqi) <!-- component: execution -->
@@ -180,6 +179,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
     - Improve PD transaction duration metrics to better reflect production latency distributions and improve observability in dashboards and alerts [#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies) <!-- component: pd -->
     - Add PD maintenance endpoints and `pd-ctl` commands to serialize TiKV maintenance tasks and prevent Raft quorum loss by ensuring that only one maintenance task is active at a time [#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30) <!-- component: pd -->
+
++ TiFlash
+
+    - Remove useless gRPC connections in TiFlash to reduce repeated invalid connection logs after TiKV nodes are scaled in [#9806](https://github.com/pingcap/tiflash/issues/9806) @[gengliqi](https://github.com/gengliqi) <!-- component: compute -->
 
 + Tools
 
