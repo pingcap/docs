@@ -5,10 +5,6 @@ summary: Lists the tasks that are visible to the current role.
 
 # SHOW TASKS
 
-> **Note:**
->
-> Introduced or updated in v1.2.900.
-
 Lists the tasks that are visible to the current role.
 
 **NOTICE:** This command works out of the box only in {{{ .lake }}}. For self-hosted deployments, configure Cloud Control to query tasks.

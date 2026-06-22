@@ -5,10 +5,6 @@ summary: Creates a new masking policy in {{{ .lake }}}.
 
 # CREATE MASKING POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Creates a new masking policy in {{{ .lake }}}.
 
 ## Syntax

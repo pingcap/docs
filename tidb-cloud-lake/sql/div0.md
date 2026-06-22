@@ -5,10 +5,6 @@ summary: Returns the quotient by dividing the first number by the second one. Re
 
 # DIV0
 
-> **Note:**
->
-> Introduced or updated in v1.2.345.
-
 Returns the quotient by dividing the first number by the second one. Returns 0 if the second number is 0.
 
 See also:

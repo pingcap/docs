@@ -5,10 +5,6 @@ summary: Contains information about copy history.
 
 # system.copy_history
 
-> **Note:**
->
-> Introduced or updated in v1.2.823.
-
 Contains information about copy history.
 
 ## Syntax

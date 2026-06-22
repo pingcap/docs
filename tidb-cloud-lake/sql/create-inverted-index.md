@@ -5,10 +5,6 @@ summary: Creates a new inverted index in {{{ .lake }}}.
 
 # CREATE INVERTED INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.405.
-
 Creates a new inverted index in {{{ .lake }}}.
 
 Inverted indexes are typically used on `STRING` and `VARIANT` columns. For querying, prefer the [`QUERY()`](/tidb-cloud-lake/sql/query.md) function because it supports field-aware expressions, boolean operators, and nested paths. You can use [`score()`](/tidb-cloud-lake/sql/score.md) together with `QUERY()` to return relevance scores and rank matched rows.

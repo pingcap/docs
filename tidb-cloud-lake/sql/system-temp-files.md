@@ -5,10 +5,6 @@ summary: Contains information about temporary files created by {{{ .lake }}}, su
 
 # system.temp_files
 
-> **Note:**
->
-> Introduced or updated in v1.2.348.
-
 Contains information about temporary files created by {{{ .lake }}}, such as spill files. To remove the temporary files, use the [VACUUM TEMPORARY FILES](/tidb-cloud-lake/sql/vacuum-temporary-files.md) command.
 
 ```sql

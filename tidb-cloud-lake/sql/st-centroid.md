@@ -5,10 +5,6 @@ summary: Returns the centroid of a GEOMETRY object.
 
 # ST_CENTROID
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the centroid of a GEOMETRY object.
 
 This function only supports GEOMETRY values.

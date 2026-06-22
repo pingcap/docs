@@ -5,10 +5,6 @@ summary: Contains information about user-defined functions and external function
 
 # system.user_functions
 
-> **Note:**
->
-> Introduced or updated in v1.2.315.
-
 Contains information about user-defined functions and external functions in the system.
 
 See also: [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md).

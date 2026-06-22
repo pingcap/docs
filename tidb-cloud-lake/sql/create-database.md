@@ -5,10 +5,6 @@ summary: Create a database.
 
 # CREATE DATABASE
 
-> **Note:**
->
-> Introduced or updated in v1.2.866.
-
 Create a database.
 
 ## Syntax

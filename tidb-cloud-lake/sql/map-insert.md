@@ -5,10 +5,6 @@ summary: Returns a new MAP consisting of the input MAP with a new key-value pair
 
 # MAP_INSERT
 
-> **Note:**
->
-> Introduced or updated in v1.2.654.
-
 Returns a new MAP consisting of the input MAP with a new key-value pair inserted (an existing key updated with a new value).
 
 ## Syntax

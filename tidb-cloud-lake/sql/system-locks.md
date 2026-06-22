@@ -5,10 +5,6 @@ summary: Contains information about the locks in the system.
 
 # system.locks
 
-> **Note:**
->
-> Introduced or updated in v1.2.262.
-
 Contains information about the locks in the system.
 
 See also: [SHOW LOCKS](/tidb-cloud-lake/sql/show-locks.md)

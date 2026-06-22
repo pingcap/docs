@@ -5,10 +5,6 @@ summary: "{{{ .lake }}}'s Date and Time data type supports standardization and c
 
 # Date & Time
 
-> **Note:**
->
-> Introduced or updated in v1.2.834.
-
 ## Overview
 
 | Name         | Aliases                   | Storage Size | Resolution  | Min Value                  | Max Value                      | Format                                                                         |

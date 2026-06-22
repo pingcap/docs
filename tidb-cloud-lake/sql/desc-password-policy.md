@@ -5,10 +5,6 @@ summary: Displays detailed information about a specific password policy in {{{ .
 
 # DESC PASSWORD POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.283.
-
 Displays detailed information about a specific password policy in {{{ .lake }}}. For detailed descriptions of the password policy attributes, see [Password Policy Attributes](/tidb-cloud-lake/sql/create-password-policy.md#password-policy-attributes).
 
 ## Syntax

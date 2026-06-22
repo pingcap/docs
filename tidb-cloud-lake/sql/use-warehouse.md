@@ -5,10 +5,6 @@ summary: Binds the current session to a specific warehouse. Subsequent queries i
 
 # USE WAREHOUSE
 
-> **Note:**
->
-> Introduced or updated in v1.2.687.
-
 Binds the current session to a specific warehouse. Subsequent queries in the session will use this warehouse for execution.
 
 ## Syntax

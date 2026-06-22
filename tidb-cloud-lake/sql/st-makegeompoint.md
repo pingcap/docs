@@ -5,10 +5,6 @@ summary: Constructs a GEOMETRY object that represents a Point with the specified
 
 # ST_MAKEGEOMPOINT
 
-> **Note:**
->
-> Introduced or updated in v1.2.347.
-
 Constructs a GEOMETRY object that represents a Point with the specified longitude and latitude.
 
 ## Syntax

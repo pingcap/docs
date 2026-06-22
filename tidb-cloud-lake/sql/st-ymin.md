@@ -5,10 +5,6 @@ summary: Returns the minimum latitude (Y coordinate) of all points contained in 
 
 # ST_YMIN
 
-> **Note:**
->
-> Introduced or updated in v1.2.512.
-
 Returns the minimum latitude (Y coordinate) of all points contained in the specified GEOMETRY or GEOGRAPHY object.
 
 ## Syntax

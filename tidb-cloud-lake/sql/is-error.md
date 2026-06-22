@@ -5,10 +5,6 @@ summary: Returns a Boolean value indicating whether an expression is an error va
 
 # IS_ERROR
 
-> **Note:**
->
-> Introduced or updated in v1.2.379.
-
 Returns a Boolean value indicating whether an expression is an error value.
 
 See also: [IS_NOT_ERROR](/tidb-cloud-lake/sql/is-not-error.md)

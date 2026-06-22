@@ -5,10 +5,6 @@ summary: Splits a string using a regular expression pattern and returns each seg
 
 # REGEXP_SPLIT_TO_TABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.754.
-
 Splits a string using a regular expression pattern and returns each segment as a table.
 
 ## Syntax

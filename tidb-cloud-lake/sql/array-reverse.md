@@ -5,10 +5,6 @@ summary: Reverses the order of elements in an array.
 
 # ARRAY_REVERSE
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Reverses the order of elements in an array.
 
 ## Syntax

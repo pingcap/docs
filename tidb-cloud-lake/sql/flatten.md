@@ -5,10 +5,6 @@ summary: Transforms nested JSON or array data into a tabular format, where each 
 
 # FLATTEN
 
-> **Note:**
->
-> Introduced or updated in v1.2.213.
-
 Transforms nested JSON or array data into a tabular format, where each element or field is represented as a separate row.
 
 ## Syntax

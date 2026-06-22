@@ -5,10 +5,6 @@ summary: The age() function calculates the difference between two timestamps or 
 
 # AGE
 
-> **Note:**
->
-> Introduced or updated in v1.2.756.
-
 The age() function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.
 
 ## Syntax

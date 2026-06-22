@@ -5,10 +5,6 @@ summary: Returns the minimum value from a set of values. If any value in the set
 
 # LEAST
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 Returns the minimum value from a set of values. If any value in the set is `NULL`, the function returns `NULL`.
 
 See also: [LEAST_IGNORE_NULLS](/tidb-cloud-lake/sql/least-ignore-nulls.md)

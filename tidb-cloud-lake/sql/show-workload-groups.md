@@ -5,10 +5,6 @@ summary: Returns a list of all existing workload groups along with their quotas.
 
 # SHOW WORKLOAD GROUPS
 
-> **Note:**
->
-> Introduced or updated in v1.2.743.
-
 Returns a list of all existing workload groups along with their quotas.
 
 ## Syntax

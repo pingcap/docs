@@ -5,10 +5,6 @@ summary: Displays detailed information about a specific stored procedure.
 
 # DESC PROCEDURE
 
-> **Note:**
->
-> Introduced or updated in v1.2.690.
-
 Displays detailed information about a specific stored procedure.
 
 ## Syntax

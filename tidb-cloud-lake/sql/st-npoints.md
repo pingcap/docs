@@ -5,10 +5,6 @@ summary: Returns the number of points in a GEOMETRY or GEOGRAPHY object.
 
 # ST_NPOINTS
 
-> **Note:**
->
-> Introduced or updated in v1.2.566.
-
 Returns the number of points in a GEOMETRY or GEOGRAPHY object.
 
 ## Syntax

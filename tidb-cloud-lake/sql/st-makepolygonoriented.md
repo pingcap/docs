@@ -5,10 +5,6 @@ summary: Creates a Polygon from a LineString input, preserving the vertex order 
 
 # ST_MAKEPOLYGONORIENTED
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Creates a Polygon from a LineString input, preserving the vertex order as given. Unlike [ST_MAKEPOLYGON](/tidb-cloud-lake/sql/st-makepolygon.md), this function does not reorder vertices to enforce a specific winding direction.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Inserts one or more rows into a table.
 
 # INSERT
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 Inserts one or more rows into a table.
 
 > **Tip:**

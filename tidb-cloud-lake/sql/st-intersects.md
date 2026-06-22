@@ -5,10 +5,6 @@ summary: Returns TRUE if two GEOMETRY objects share any portion of space.
 
 # ST_INTERSECTS
 
-> **Note:**
->
-> Introduced or updated in v1.2.564.
-
 Returns TRUE if two GEOMETRY objects share any portion of space.
 
 ## Syntax

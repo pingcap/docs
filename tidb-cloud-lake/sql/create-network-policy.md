@@ -5,10 +5,6 @@ summary: Creates a new network policy in {{{ .lake }}}.
 
 # CREATE NETWORK POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.341.
-
 Creates a new network policy in {{{ .lake }}}.
 
 ## Syntax

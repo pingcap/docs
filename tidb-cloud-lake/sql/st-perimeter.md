@@ -5,10 +5,6 @@ summary: Returns the perimeter of polygon(s) in a GEOMETRY object, measured in t
 
 # ST_PERIMETER
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns the perimeter of polygon(s) in a GEOMETRY object, measured in the units of the coordinate system.
 
 ## Syntax

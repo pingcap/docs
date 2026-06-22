@@ -5,10 +5,6 @@ summary: Creates a new warehouse for compute resources.
 
 # CREATE WAREHOUSE
 
-> **Note:**
->
-> Introduced or updated in v1.2.687.
-
 Creates a new warehouse for compute resources.
 
 ## Syntax

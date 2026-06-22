@@ -5,10 +5,6 @@ summary: Converts an expression to a date with time.
 
 # TO_TIMESTAMP
 
-> **Note:**
->
-> Introduced or updated in v1.2.664.
-
 Converts an expression to a date with time.
 
 See also: [TO_DATE](/tidb-cloud-lake/sql/to-date.md)

@@ -5,10 +5,6 @@ summary: Applies a transformation to each key in a JSON object using a lambda ex
 
 # MAP_TRANSFORM_KEYS
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Applies a transformation to each key in a JSON object using a [lambda expression](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 
 ## Syntax

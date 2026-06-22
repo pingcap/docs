@@ -5,10 +5,6 @@ summary: Creating tables is one of the most complicated operations for many data
 
 # CREATE TABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.821.
-
 Creating tables is one of the most complicated operations for many databases because you might need to:
 
 - Manually specify the engine
@@ -115,10 +111,6 @@ By default, **all columns are nullable(NULL)** in {{{ .lake }}}. If you need a c
     - Users must adhere to their granted permissions for sequence utilization, including operations such as [NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements)
 
 ## Auto-Increment Columns
-
-> **Note:**
->
-> Introduced or updated in v1.2.821.
 
 `AUTOINCREMENT` or `IDENTITY` can be used to create auto-incrementing columns that automatically generate sequential numeric values. This is particularly useful for creating unique identifiers.
 

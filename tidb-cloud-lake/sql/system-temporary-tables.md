@@ -5,10 +5,6 @@ summary: Provides information about all existing temporary tables in the current
 
 # system.temporary_tables
 
-> **Note:**
->
-> Introduced or updated in v1.2.666.
-
 Provides information about all existing temporary tables in the current session.
 
 ```sql title='Examples:'

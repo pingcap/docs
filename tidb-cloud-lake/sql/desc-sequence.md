@@ -5,10 +5,6 @@ summary: Describes the properties of a sequence.
 
 # DESC SEQUENCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.742.
-
 Describes the properties of a sequence.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Defines a stored procedure that executes SQL operations and returns a r
 
 # CREATE PROCEDURE
 
-> **Note:**
->
-> Introduced or updated in v1.2.816.
-
 Defines a stored procedure that executes SQL operations and returns a result.
 
 ## Syntax

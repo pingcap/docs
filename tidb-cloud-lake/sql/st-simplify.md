@@ -5,10 +5,6 @@ summary: Returns a simplified version of a GEOMETRY object by removing vertices 
 
 # ST_SIMPLIFY
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns a simplified version of a GEOMETRY object by removing vertices where the distance to the resulting edge is within the specified tolerance. Uses the Ramer-Douglas-Peucker algorithm.
 
 ## Syntax

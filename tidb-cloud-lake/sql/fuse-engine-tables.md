@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} uses the Fuse Engine as its default storage engine, prov
 
 # Fuse Engine Tables
 
-> **Note:**
->
-> Introduced or updated in v1.2.892.
-
 ## Overview
 
 {{{ .lake }}} uses the Fuse Engine as its default storage engine, providing a Git-like data management system with:

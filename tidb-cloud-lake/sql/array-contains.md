@@ -5,10 +5,6 @@ summary: Returns true if the array contains the specified element.
 
 # ARRAY_CONTAINS
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Returns true if the array contains the specified element.
 
 ## Syntax

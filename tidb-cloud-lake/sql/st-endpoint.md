@@ -5,10 +5,6 @@ summary: Returns the last Point in a LineString.
 
 # ST_ENDPOINT
 
-> **Note:**
->
-> Introduced or updated in v1.2.458.
-
 Returns the last Point in a LineString.
 
 ## Syntax

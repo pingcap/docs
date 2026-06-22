@@ -5,10 +5,6 @@ summary: The CREATE TASK statement is used to define a new task that executes a 
 
 # CREATE TASK
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 The CREATE TASK statement is used to define a new task that executes a specified SQL statement on a scheduled basis or dag based task graph.
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

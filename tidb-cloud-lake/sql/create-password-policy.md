@@ -5,10 +5,6 @@ summary: Creates a new password policy in {{{ .lake }}}.
 
 # CREATE PASSWORD POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.339.
-
 Creates a new password policy in {{{ .lake }}}.
 
 ## Syntax

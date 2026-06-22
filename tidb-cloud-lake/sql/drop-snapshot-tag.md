@@ -5,10 +5,6 @@ summary: Drops a named snapshot tag from a FUSE table, allowing the referenced s
 
 # DROP SNAPSHOT TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.891.
-
 Drops a named snapshot tag from a FUSE table. Once dropped, the referenced snapshot becomes eligible for garbage collection if no other tags or retention policies protect it.
 
 > **Note:**

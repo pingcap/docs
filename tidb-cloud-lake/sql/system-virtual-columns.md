@@ -5,10 +5,6 @@ summary: Contains information about the created virtual columns in the system.
 
 # system.virtual_columns
 
-> **Note:**
->
-> Introduced or updated in v1.2.832.
-
 Contains information about the created virtual columns in the system.
 
 See also: [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md)

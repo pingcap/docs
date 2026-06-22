@@ -5,10 +5,6 @@ summary: Prepends an element to the beginning of an array.
 
 # ARRAY_PREPEND
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Prepends an element to the beginning of an array.
 
 ## Syntax

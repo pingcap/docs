@@ -5,10 +5,6 @@ summary: Calculates the storage size of historical data (for Time Travel) for ta
 
 # FUSE_TIME_TRAVEL_SIZE
 
-> **Note:**
->
-> Introduced or updated in v1.2.684.
-
 Calculates the storage size of historical data (for Time Travel) for tables.
 
 ## Syntax

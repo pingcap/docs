@@ -5,10 +5,6 @@ summary: The add_months() function adds a specified number of months to a given 
 
 # ADD_MONTHS
 
-> **Note:**
->
-> Introduced or updated in v1.2.760.
-
 The add_months() function adds a specified number of months to a given date or timestamp.
 
 If the input date is month-end or exceeds the resulting month’s days, the result is adjusted to the last day of the new month. Otherwise, the original day is preserved.

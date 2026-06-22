@@ -5,10 +5,6 @@ summary: Displays statistical information about tables and their columns. Statis
 
 # SHOW STATISTICS
 
-> **Note:**
->
-> Introduced or updated in v1.2.802.
-
 Displays statistical information about tables and their columns. Statistics help the query optimizer make better decisions about query execution plans by providing information about data distribution, row counts, and distinct values.
 
 {{{ .lake }}} automatically generates statistics during data insertion. You can use this command to inspect the statistics and compare them with actual data to identify any discrepancies that might affect query performance.

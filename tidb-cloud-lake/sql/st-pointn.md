@@ -5,10 +5,6 @@ summary: Returns a Point at a specified index in a LineString.
 
 # ST_POINTN
 
-> **Note:**
->
-> Introduced or updated in v1.2.458.
-
 Returns a Point at a specified index in a LineString.
 
 ## Syntax

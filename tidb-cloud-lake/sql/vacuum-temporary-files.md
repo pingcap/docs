@@ -5,10 +5,6 @@ summary: Removes temporary files created by {{{ .lake }}}, such as spill files.
 
 # VACUUM TEMPORARY FILES
 
-> **Note:**
->
-> Introduced or updated in v1.2.348.
-
 Removes temporary files created by {{{ .lake }}}, such as spill files.
 
 See also: [system.temp_files](/tidb-cloud-lake/sql/system-temp-files.md)

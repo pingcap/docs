@@ -5,10 +5,6 @@ summary: Converts a GEOMETRY object into a String representation. The display fo
 
 # TO_STRING
 
-> **Note:**
->
-> Introduced or updated in v1.2.330.
-
 Converts a GEOMETRY object into a String representation. The display format of the output data is controlled by the `geometry_output_format` setting, which contains the following types:
 
 | Parameter         | Description                                                         |

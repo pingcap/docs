@@ -5,10 +5,6 @@ summary: Returns TRUE if the first GEOMETRY object is completely within the seco
 
 # ST_WITHIN
 
-> **Note:**
->
-> Introduced or updated in v1.2.564.
-
 Returns TRUE if the first GEOMETRY object is completely within the second GEOMETRY object.
 
 ## Syntax

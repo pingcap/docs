@@ -5,10 +5,6 @@ summary: Stores the system settings of the current session.
 
 # system.settings
 
-> **Note:**
->
-> Introduced or updated in v1.2.745.
-
 Stores the system settings of the current session.
 
 ```sql

@@ -5,10 +5,6 @@ summary: Returns the number of unique elements in the array.
 
 # ARRAY_UNIQUE
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Returns the number of unique elements in the array.
 
 ## Syntax

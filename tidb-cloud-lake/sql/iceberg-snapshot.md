@@ -5,10 +5,6 @@ summary: Returns metadata about snapshots of an Iceberg table, including informa
 
 # ICEBERG_SNAPSHOT
 
-> **Note:**
->
-> Introduced or updated in v1.2.709.
-
 Returns metadata about snapshots of an Iceberg table, including information about data changes, operations, and summary statistics.
 
 ## Syntax

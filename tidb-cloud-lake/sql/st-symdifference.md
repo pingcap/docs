@@ -5,10 +5,6 @@ summary: Returns the non-overlapping parts of two GEOMETRY objects.
 
 # ST_SYMDIFFERENCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the parts of two GEOMETRY objects that do not overlap.
 
 This function only supports GEOMETRY values.

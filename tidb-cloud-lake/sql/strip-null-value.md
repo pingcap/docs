@@ -5,10 +5,6 @@ summary: Converts a JSON null value to a SQL NULL value. All other variant value
 
 # STRIP_NULL_VALUE
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Converts a JSON null value to a SQL NULL value. All other variant values are passed unchanged.
 
 ## Syntax

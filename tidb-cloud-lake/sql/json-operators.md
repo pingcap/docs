@@ -5,10 +5,6 @@ summary: This page describes JSON Operators in TiDB Cloud Lake.
 
 # JSON Operators
 
-> **Note:**
->
-> Introduced or updated in v1.2.644.
-
 | Operator    | Description                                                                                                                          | Example                                                                                                                                                                                   | Result                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | `->`        | Retrieves a JSON array or object using an index or key, returning a JSON object.                                                     | - **Using a key**:<br/>`SELECT '{"Databend": "Cloud Native Warehouse"}'::JSON -> 'Databend'`<br/>- **Using an index**:<br/>`SELECT '["Databend", "Cloud Native Warehouse"]'::JSON -> 1`   | `"Cloud Native Warehouse"` |

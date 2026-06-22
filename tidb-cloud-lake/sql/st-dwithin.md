@@ -5,10 +5,6 @@ summary: Returns TRUE if two GEOMETRY objects are within the specified Euclidean
 
 # ST_DWITHIN
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns TRUE if two GEOMETRY objects are within the specified Euclidean distance.
 
 This function only supports GEOMETRY values.

@@ -5,10 +5,6 @@ summary: Updates rows in a table with new values, optionally using values from o
 
 # UPDATE
 
-> **Note:**
->
-> Introduced or updated in v1.2.705.
-
 Updates rows in a table with new values, optionally using values from other tables.
 
 > **Tip:**

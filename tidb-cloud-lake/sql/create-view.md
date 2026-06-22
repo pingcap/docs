@@ -5,10 +5,6 @@ summary: Creates a new view based on a query; the Logical View does not store an
 
 # CREATE VIEW
 
-> **Note:**
->
-> Introduced or updated in v1.2.339.
-
 Creates a new view based on a query; the Logical View does not store any physical data, when we access a logical view, it will convert the sql into the subquery format to finish it.
 
 For example, if you create a Logical View like:

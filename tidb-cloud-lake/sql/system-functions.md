@@ -5,10 +5,6 @@ summary: Contains information about the supported built-in scalar and aggregate.
 
 # system.functions
 
-> **Note:**
->
-> Introduced or updated in v1.2.315.
-
 Contains information about the supported built-in scalar and aggregate.
 
 See also: [SHOW FUNCTIONS](/tidb-cloud-lake/sql/show-functions.md).

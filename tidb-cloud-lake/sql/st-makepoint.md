@@ -5,10 +5,6 @@ summary: Constructs a GEOGRAPHY object that represents a Point with the specifie
 
 # ST_MAKEPOINT
 
-> **Note:**
->
-> Introduced or updated in v1.2.347.
-
 Constructs a GEOGRAPHY object that represents a Point with the specified longitude and latitude.
 
 ## Syntax

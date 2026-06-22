@@ -5,10 +5,6 @@ summary: Returns a list of view names within the specified database, or within t
 
 # SHOW VIEWS
 
-> **Note:**
->
-> Introduced or updated in v1.2.415.
-
 Returns a list of view names within the specified database, or within the current database if no database name is provided.
 
 ## Syntax

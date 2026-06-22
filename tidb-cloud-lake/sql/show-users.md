@@ -5,10 +5,6 @@ summary: Lists all SQL users in the system. If you're using {{{ .lake }}}, this 
 
 # SHOW USERS
 
-> **Note:**
->
-> Introduced or updated in v1.2.644.
-
 Lists all SQL users in the system. If you're using {{{ .lake }}}, this command also shows the user accounts (email addresses) within your organization that are used to log in to {{{ .lake }}}.
 
 ## Syntax

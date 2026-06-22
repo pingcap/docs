@@ -5,10 +5,6 @@ summary: Parses a WKT(well-known-text) or EWKT(extended well-known-text) input a
 
 # ST_GEOMETRYFROMWKT
 
-> **Note:**
->
-> Introduced or updated in v1.2.347.
-
 Parses a [WKT(well-known-text)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) or [EWKT(extended well-known-text)](https://postgis.net/docs/ST_GeomFromEWKT.html) input and returns a value of type GEOMETRY.
 
 ## Syntax

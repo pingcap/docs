@@ -5,10 +5,6 @@ summary: Converts a specified number of years into an Interval type.
 
 # TO_YEARS
 
-> **Note:**
->
-> Introduced or updated in v1.2.677.
-
 Converts a specified number of years into an Interval type.
 
 - Accepts positive integers, zero, and negative integers as input.

@@ -5,10 +5,6 @@ summary: Displays all session variables and their details, such as names, values
 
 # SHOW VARIABLES
 
-> **Note:**
->
-> Introduced or updated in v1.2.634.
-
 Displays all session variables and their details, such as names, values, and types.
 
 See also: [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md)

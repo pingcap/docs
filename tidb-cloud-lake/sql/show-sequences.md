@@ -5,10 +5,6 @@ summary: Returns a list of the created sequences.
 
 # SHOW SEQUENCES
 
-> **Note:**
->
-> Introduced or updated in v1.2.742.
-
 Returns a list of the created sequences.
 
 ## Syntax

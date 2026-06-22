@@ -5,10 +5,6 @@ summary: Modifies a user account, including.
 
 # ALTER USER
 
-> **Note:**
->
-> Introduced or updated in v1.2.566.
-
 Modifies a user account, including:
 
 - Changing the user's password and authentication type.

@@ -5,10 +5,6 @@ summary: Formats JSON data, making it more readable and presentable. It automati
 
 # JSON_PRETTY
 
-> **Note:**
->
-> Introduced or updated in v1.2.77.
-
 Formats JSON data, making it more readable and presentable. It automatically adds indentation, line breaks, and other formatting to the JSON data for better visual representation.
 
 ## Syntax

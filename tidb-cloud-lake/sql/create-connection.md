@@ -5,10 +5,6 @@ summary: Creates a connection to external storage.
 
 # CREATE CONNECTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.780.
-
 Creates a connection to external storage.
 
 > **Warning:**

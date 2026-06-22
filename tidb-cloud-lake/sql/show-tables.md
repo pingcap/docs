@@ -5,10 +5,6 @@ summary: Lists the tables in the current or a specified database.
 
 # SHOW TABLES
 
-> **Note:**
->
-> Introduced or updated in v1.2.415.
-
 Lists the tables in the current or a specified database.
 
 > **Note:**

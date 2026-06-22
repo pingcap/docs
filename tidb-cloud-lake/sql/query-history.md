@@ -5,10 +5,6 @@ summary: Retrieves query execution logs for analysis and monitoring purposes.
 
 # QUERY_HISTORY
 
-> **Note:**
->
-> Introduced or updated in v1.2.687.
-
 Retrieves query execution logs for analysis and monitoring purposes.
 
 ## Syntax

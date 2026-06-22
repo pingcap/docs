@@ -5,10 +5,6 @@ summary: The ALTER TASK statement is used to modify an existing task.
 
 # ALTER TASK
 
-> **Note:**
->
-> Introduced or updated in v1.2.371.
-
 The ALTER TASK statement is used to modify an existing task.
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

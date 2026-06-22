@@ -5,10 +5,6 @@ summary: Deletes an existing stored procedure.
 
 # DROP PROCEDURE
 
-> **Note:**
->
-> Introduced or updated in v1.2.637.
-
 Deletes an existing stored procedure.
 
 ## Syntax

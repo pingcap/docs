@@ -5,10 +5,6 @@ summary: Adds a specified time interval to a DATE or TIMESTAMP value.
 
 # DATE_ADD
 
-> **Note:**
->
-> Introduced or updated in v1.2.641.
-
 Adds a specified time interval to a DATE or TIMESTAMP value.
 
 ## Syntax

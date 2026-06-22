@@ -5,10 +5,6 @@ summary: Filters rows with a Lucene-style query against columns that have an inv
 
 # QUERY
 
-> **Note:**
->
-> Introduced or updated in v1.2.830.
-
 `QUERY` filters rows by matching a Lucene-style query expression against columns that have an inverted index. Use dot notation to navigate nested fields inside `VARIANT` columns. The function is valid only in a `WHERE` clause.
 
 > **Note:**

@@ -5,10 +5,6 @@ summary: Inserts or updates a key-value pair in a JSON object.
 
 # OBJECT_INSERT
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Inserts or updates a key-value pair in a JSON object.
 
 ## Aliases

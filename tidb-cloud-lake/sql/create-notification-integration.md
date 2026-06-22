@@ -5,10 +5,6 @@ summary: Creates a named notification integration that can be used to send notif
 
 # CREATE NOTIFICATION INTEGRATION
 
-> **Note:**
->
-> Introduced or updated in v1.2.371.
-
 Creates a named notification integration that can be used to send notifications to external messaging services.
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

@@ -5,10 +5,6 @@ summary: Changes the name of a database, or sets default storage options for a d
 
 # ALTER DATABASE
 
-> **Note:**
->
-> Introduced or updated in v1.2.866.
-
 Changes the name of a database, or sets default storage options for a database.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: The payload body for task error notification.
 
 # TASK ERROR NOTIFICATION PAYLOAD
 
-> **Note:**
->
-> Introduced or updated in v1.2.371.
-
 The payload body for task error notification.
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

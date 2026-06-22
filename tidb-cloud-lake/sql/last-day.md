@@ -5,10 +5,6 @@ summary: Returns the last day of the specified interval (week, month, quarter, o
 
 # LAST_DAY
 
-> **Note:**
->
-> Introduced or updated in v1.2.655.
-
 Returns the last day of the specified interval (week, month, quarter, or year) based on the provided date or timestamp.
 
 ## Syntax

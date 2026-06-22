@@ -5,10 +5,6 @@ summary: Splits a string using a specified delimiter and returns the resulting p
 
 # SPLIT
 
-> **Note:**
->
-> Introduced or updated in v1.2.164.
-
 Splits a string using a specified delimiter and returns the resulting parts as an array.
 
 See also: [SPLIT_PART](/tidb-cloud-lake/sql/split-part.md)

@@ -5,10 +5,6 @@ summary: Returns the azimuth in radians of the line segment from one Point to an
 
 # ST_AZIMUTH
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns the azimuth in radians of the line segment from one Point to another, measured clockwise from the positive Y-axis (north). Returns NULL if the two points are identical.
 
 ## Syntax

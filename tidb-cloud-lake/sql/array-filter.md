@@ -5,10 +5,6 @@ summary: Filters elements from a JSON array based on a specified Lambda expressi
 
 # ARRAY_FILTER
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Filters elements from a JSON array based on a specified Lambda expression, returning only the elements that satisfy the condition. For more information about Lambda expression, see [Lambda Expressions](/tidb-cloud-lake/sql/stored-procedure-scripting.md#lambda-expressions).
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Splits a string using a regular expression pattern and returns the segm
 
 # REGEXP_SPLIT_TO_ARRAY
 
-> **Note:**
->
-> Introduced or updated in v1.2.756.
-
 Splits a string using a regular expression pattern and returns the segments as an array.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Removes the first occurrence of an element from an array.
 
 # ARRAY_REMOVE_FIRST
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Removes the first occurrence of an element from an array.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Calculates the sum of a set of values.
 
 # SUM
 
-> **Note:**
->
-> Introduced or updated in v1.2.697.
-
 Calculates the sum of a set of values.
 
 - NULL values are ignored.

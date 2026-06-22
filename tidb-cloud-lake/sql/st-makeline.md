@@ -5,10 +5,6 @@ summary: Constructs a GEOMETRY or GEOGRAPHY object that represents a line connec
 
 # ST_MAKELINE
 
-> **Note:**
->
-> Introduced or updated in v1.2.391.
-
 Constructs a GEOMETRY or GEOGRAPHY object that represents a line connecting the points in the input two GEOMETRY or GEOGRAPHY objects.
 
 ## Syntax

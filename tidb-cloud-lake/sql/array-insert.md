@@ -5,10 +5,6 @@ summary: Inserts a value into a JSON array at the specified index and returns th
 
 # ARRAY_INSERT
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Inserts a value into a JSON array at the specified index and returns the updated JSON array.
 
 ## Aliases

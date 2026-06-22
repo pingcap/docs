@@ -5,10 +5,6 @@ summary: Drops an external function.
 
 # DROP FUNCTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.116.
-
 Drops an external function.
 
 ## Syntax

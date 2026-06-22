@@ -5,10 +5,6 @@ summary: Returns the value that appears most frequently in a group of values.
 
 # MODE
 
-> **Note:**
->
-> Introduced or updated in v1.2.647.
-
 Returns the value that appears most frequently in a group of values.
 
 ## Syntax

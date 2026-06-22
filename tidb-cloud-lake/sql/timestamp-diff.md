@@ -5,10 +5,6 @@ summary: Calculates the difference between two timestamps and returns the result
 
 # TIMESTAMP_DIFF
 
-> **Note:**
->
-> Introduced or updated in v1.2.690.
-
 Calculates the difference between two timestamps and returns the result as an INTERVAL.
 
 ## Syntax

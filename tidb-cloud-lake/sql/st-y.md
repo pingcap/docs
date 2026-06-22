@@ -5,10 +5,6 @@ summary: Returns the latitude (Y coordinate) of a Point represented by a GEOMETR
 
 # ST_Y
 
-> **Note:**
->
-> Introduced or updated in v1.2.458.
-
 Returns the latitude (Y coordinate) of a Point represented by a GEOMETRY or GEOGRAPHY object.
 
 ## Syntax

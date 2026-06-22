@@ -5,10 +5,6 @@ summary: Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a tab
 
 # CREATE TABLE FUNCTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.799.
-
 Creates a tabular SQL UDF (UDTF) that encapsulates SQL queries as a table function. Table functions are written in SQL; no external languages are involved.
 
 ## Supported Languages

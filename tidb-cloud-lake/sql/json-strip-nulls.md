@@ -5,10 +5,6 @@ summary: Removes all properties with null values from a JSON object.
 
 # JSON_STRIP_NULLS
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Removes all properties with null values from a JSON object.
 
 ## Syntax

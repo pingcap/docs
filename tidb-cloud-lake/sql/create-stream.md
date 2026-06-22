@@ -5,10 +5,6 @@ summary: Creates a stream.
 
 # CREATE STREAM
 
-> **Note:**
->
-> Introduced or updated in v1.2.391.
-
 Creates a stream.
 
 ## Syntax

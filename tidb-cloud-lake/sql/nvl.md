@@ -5,10 +5,6 @@ summary: If <expr1> is NULL, returns <expr2>, otherwise returns <expr1>.
 
 # NVL
 
-> **Note:**
->
-> Introduced or updated in v1.2.312.
-
 If `<expr1>` is NULL, returns `<expr2>`, otherwise returns `<expr1>`.
 
 ## Syntax

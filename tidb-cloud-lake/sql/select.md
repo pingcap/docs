@@ -5,10 +5,6 @@ summary: Retrieves data from a table.
 
 # SELECT
 
-> **Note:**
->
-> Introduced or updated in v1.2.690.
-
 Retrieves data from a table.
 
 ## Syntax

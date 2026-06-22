@@ -5,10 +5,6 @@ summary: Returns the dimensionality (number of elements) of a vector.
 
 # VECTOR_DIMS
 
-> **Note:**
->
-> Introduced or updated in v1.2.780.
-
 Returns the dimensionality (number of elements) of a vector.
 
 ## Syntax

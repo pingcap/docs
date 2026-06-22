@@ -5,10 +5,6 @@ summary: Creates an Ngram index on a column for a table.
 
 # CREATE NGRAM INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.726.
-
 Creates an Ngram index on a column for a table.
 
 ## Syntax
