@@ -23,7 +23,7 @@ We conducted four specific benchmarks to evaluate {{{ .lake }}} versus Snowflake
 
 Conducted on a `Small-Size` warehouse (16vCPU, AWS us-east-2) using data from the same S3 bucket.
 
-## Performance and cost comparison
+## Performance and Cost Comparison
 
 - **TPC-H SF100 Data**: {{{ .lake }}} offers a **67% cost reduction** over Snowflake.
 - **ClickBench Hits Data**: {{{ .lake }}} achieves a **91% cost reduction**.
