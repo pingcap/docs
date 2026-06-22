@@ -12,7 +12,7 @@ The Data Integration feature in {{{ .lake }}} provides a visual, no-code interfa
 | Concept | Description |
 |---------|-------------|
 | [Data Sources](/tidb-cloud-lake/guides/data-sources.md) | Reusable connection settings or credentials used to access external systems or send notifications, such as AWS Access Key / Secret Key, MySQL hostname / username / password, SQS (S3) queue URL, Kafka broker addresses, or a FeiShu bot webhook. |
-| [Integration Tasks](/tidb-cloud-lake/guides/integration-tasks.md) | Executable tasks that define where data comes from, where it is written or how results are saved, which runtime parameters are used, and how the task is started and monitored. |
+| [Integration Tasks](/tidb-cloud-lake/guides/integration-tasks.md) | Executable tasks that define where data comes from, where the task writes data or how it saves results, which runtime parameters it uses, and how you start and monitor the task. |
 
 Data sources do not move data by themselves. They only store the information required to access external systems. Integration tasks are the units that actually perform imports, snapshots, continuous synchronization, or message consumption.
 

@@ -70,9 +70,9 @@ If no previewable messages are available, the page displays **No sample data ava
 
 ### Step 3: Result Viewing
 
-In the **Result Viewing** step, select the **Warehouse** used to run the Kafka Consumer task.
+In the **Result Viewing** step, select the **Warehouse** to run the Kafka Consumer task.
 
-After the task starts, Kafka messages are read and saved to internal object storage (tenant Stage). The page provides SQL examples. You can use `LIST @kafka_consumer/<task_name>/` to view generated objects and use stage queries to read message content.
+After the task starts, it reads Kafka messages and saves them to internal object storage (tenant Stage). The page provides SQL examples. You can use `LIST @kafka_consumer/<task_name>/` to view generated objects and use stage queries to read message content.
 
 ```sql
 -- List stage objects:
@@ -90,15 +90,15 @@ Click **Create** to create the task.
 
 ## Task Behavior
 
-A Kafka Consumer task is a continuously running task. After it starts, it consumes messages from the specified topics and saves the messages in batches as object files in internal object storage until it is manually stopped.
+A Kafka Consumer task runs continuously. After it starts, it consumes messages from the specified topics and saves them in batches as object files in internal object storage until you stop it manually.
 
 | Scenario | Behavior |
 |----------|----------|
 | New messages exist in the topics | Reads messages and writes them to the tenant Stage |
-| Max Batch Bytes is reached | Writes the current batch to object storage |
-| Max Batch Wait Interval is reached | Writes the current batch to object storage even if the batch size limit has not been reached |
-| Write succeeds | Saves the consumption progress for later continuation |
-| Task is stopped manually | Stops consuming and keeps the saved message objects |
+| The batch size reaches **Max Batch Bytes** | Writes the current batch to object storage |
+| The wait time reaches **Max Batch Wait Interval** | Writes the current batch to object storage even if the batch does not reach the size limit |
+| The write operation succeeds | Saves the consumption progress for later continuation |
+| You stop the task manually | Stops consuming and keeps the saved message objects |
 
 ## Query Saved Messages
 

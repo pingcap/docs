@@ -5,7 +5,7 @@ summary: Create a "Kafka - Credentials" data source to store Kafka connection in
 
 # Kafka - Credentials (Beta)
 
-This page describes how to create a `Kafka - Credentials` data source. This data source stores the broker addresses, authentication method, and connection credentials required to access a Kafka cluster, and can be reused by Kafka Consumer integration tasks.
+This page describes how to create a `Kafka - Credentials` data source. This data source stores the broker addresses, authentication method, and connection credentials required to access a Kafka cluster. You can reuse these settings across multiple Kafka Consumer integration tasks.
 
 `Kafka - Credentials` only stores Kafka connection information. It does not consume messages by itself. The actual process of reading Kafka topic messages and writing them to internal object storage is performed by a [Kafka Consumer Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-kafka.md).
 

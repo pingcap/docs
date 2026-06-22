@@ -143,7 +143,7 @@ COPY INTO pollution_measurement FROM 'https://repo.tidbcloud.com/AirPolutionSeou
 
     > **Tip:**
     >
-    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse). For explanations about the parameters, refer to <https://mindsdb.github.io/engine/#db-create>.
+    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. You can obtain the parameter values from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse). For explanations about the parameters, refer to <https://mindsdb.github.io/engine/#db-create>.
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
