@@ -6,8 +6,8 @@ concurrency:
 
 on:
   schedule:
-    # Runs JA translation at 20:00 every Wednesday (Beijing time, UTC+8)
-    - cron: "0 12 * * 3"
+    # Runs JA translation at 21:30 every Wednesday (Beijing time, UTC+8)
+    - cron: "30 13 * * 3"
   workflow_dispatch:
     inputs:
       file_names:
