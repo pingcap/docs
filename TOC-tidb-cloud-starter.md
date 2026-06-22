@@ -119,7 +119,7 @@
 -   データの移行またはインポート
     -   [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
     -   TiDB Cloudへのデータ移行
-        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDB Self-ManagedからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
         -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloudにデータをインポートする

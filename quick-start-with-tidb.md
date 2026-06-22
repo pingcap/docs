@@ -1,9 +1,9 @@
 ---
 title: Quick Start with TiDB Self-Managed
-summary: TiUPプレイグラウンドを使ってTiDBセルフマネージドを素早く使い始める方法を学び、TiDBがあなたにとって最適な選択肢かどうかを確認しましょう。
+summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める方法を学び、TiDBがあなたにとって最適な選択肢かどうかを確認しましょう。
 ---
 
-# TiDBセルフマネージドのクイックスタート {#quick-start-with-tidb-self-managed}
+# TiDB Self-Managedのクイックスタート {#quick-start-with-tidb-self-managed}
 
 このガイドでは、TiDB Self-Managed を最も迅速に使い始める方法を説明します。非本番環境では、以下のいずれかの方法で TiDB データベースをデプロイできます。
 
@@ -69,7 +69,7 @@ summary: TiUPプレイグラウンドを使ってTiDBセルフマネージドを
 
     > **注記：**
     >
-    > -   以下の方法で運用されるプレイグラウンドの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
+    > -   以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
     > -   データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します。](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)参照してください。
     >
     >     ```shell
@@ -183,7 +183,7 @@ summary: TiUPプレイグラウンドを使ってTiDBセルフマネージドを
 
     > **注記：**
     >
-    > -   以下の方法で運用されるプレイグラウンドの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
+    > -   以下の方法で運用されるPlaygroundの場合、デプロイとテストが完了すると、 TiUPは自動的にクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
     > -   データをストレージに保持する場合は、クラスターの起動時に`--tag`フラグを追加します。詳細については、 [TiDBクラスタの起動時に、データを保存するタグを指定します。](/tiup/tiup-playground.md#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data)参照してください。
     >
     >     ```shell

@@ -29,7 +29,7 @@ DataGripは2つの方法で使用できます。
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -180,9 +180,9 @@ DataGripは2つの方法で使用できます。
 
 3.  以下の接続パラメータを設定してください。
 
-    -   **ホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号。
-    -   **ユーザー**：TiDBセルフマネージドクラスタに接続するために使用するユーザー名。
+    -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
+    -   **ポート**：TiDB Self-Managedクラスタのポート番号。
+    -   **ユーザー**：TiDB Self-Managedクラスタに接続するために使用するユーザー名。
     -   **パスワード**：ユーザー名のパスワード。
 
     例えば、以下のような例があります。
@@ -191,7 +191,7 @@ DataGripは2つの方法で使用できます。
 
     **「不足しているドライバファイルをダウンロードしてください」**という警告が表示された場合は、 **「ダウンロード」**をクリックしてドライバファイルを入手してください。
 
-4.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+4.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
     ![Test the connection to a TiDB Self-Managed cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 

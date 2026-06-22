@@ -56,7 +56,7 @@ CREATE TABLE `uuid_demo_2` (
 
 Key Visualizer の詳細については、次のドキュメントを参照してください。
 
--   TiDBセルフマネージドの場合は[キービジュアライザー](/dashboard/dashboard-key-visualizer.md)
+-   TiDB Self-Managedの場合は[キービジュアライザー](/dashboard/dashboard-key-visualizer.md)
 -   TiDB Cloudの場合は[キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
 
 ## MySQLの互換性 {#mysql-compatibility}

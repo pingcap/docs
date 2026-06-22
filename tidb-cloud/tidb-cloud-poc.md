@@ -13,7 +13,7 @@ TiDB Cloud がお客様のビジネスニーズに最適かどうかを判断す
 
 PoCにご興味をお持ちでしたら、開始前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>までお気軽にお問い合わせください。サポートチームがテストプランの作成をお手伝いし、PoCの手順をスムーズに進めてまいります。
 
-あるいは、 [TiDB Cloudスターターを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB Cloud Starter には[特別な利用規約](/tidb-cloud/serverless-limitations.md)含まれています。
+あるいは、 [TiDB Cloud Starterを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB Cloud Starter には[特別な利用規約](/tidb-cloud/serverless-limitations.md)含まれています。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -96,7 +96,7 @@ PoC 用の[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedic
 
 次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudで互換性テストや予備分析用の[TiDB Cloudスターター クラスター](/tidb-cloud/select-cluster-tier.md#starter)作成することをお勧めします。
+PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudで互換性テストや予備分析用の[TiDB Cloud Starter クラスター](/tidb-cloud/select-cluster-tier.md#starter)作成することをお勧めします。
 
 TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQLと互換性がある、またはMySQLと互換性を持たせることができる場合は、データをTiDBに直接インポートできます。
 

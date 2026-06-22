@@ -9,11 +9,11 @@ TiDB Cloud、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/t
 
 > **注記：**
 >
-> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
+> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
 
 ## 前提条件 {#prerequisites}
 
--   Slack経由での購読機能は、**エンタープライズ**または**プレミアム**サポートプランに加入している組織のみが利用できます。
+-   Slack経由での購読機能は、**エンタープライズ**または**Premium**サポートプランに加入している組織のみが利用できます。
 
 <CustomContent plan="essential,dedicated">
 

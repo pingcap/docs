@@ -3,7 +3,7 @@ title: What is TiDB Self-Managed
 summary: TiDBの主な機能と使用例について学びましょう。
 ---
 
-# TiDBセルフマネージドとは何ですか？ {#what-is-tidb-self-managed}
+# TiDB Self-Managedとは何ですか？ {#what-is-tidb-self-managed}
 
 <!-- Localization note for TiDB:
 

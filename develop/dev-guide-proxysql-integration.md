@@ -578,7 +578,7 @@ systemctl start docker
 
      </SimpleTab>
 
-6.  TiDBセルフマネージドクラスタに接続した後、次のSQLステートメントを使用して接続を検証できます。
+6.  TiDB Self-Managedクラスタに接続した後、次のSQLステートメントを使用して接続を検証できます。
 
     ```sql
     SELECT VERSION();

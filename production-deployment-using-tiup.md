@@ -5,7 +5,7 @@ summary: TiUPを使用してTiDBクラスタを簡単にデプロイする方法
 
 # TiUPを使用してTiDBクラスタをデプロイ {#deploy-a-tidb-cluster-using-tiup}
 
-このガイドでは、本番環境で[TiUP](https://github.com/pingcap/tiup)を使用してTiDBセルフマネージドクラスタをデプロイする方法について説明します。
+このガイドでは、本番環境で[TiUP](https://github.com/pingcap/tiup)を使用してTiDB Self-Managedクラスタをデプロイする方法について説明します。
 
 TiUPは、TiDB v4.0で導入されたクラスタ運用・保守ツールです。TiUP [TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)は、TiDBクラスタを管理するためのGolangベースのコンポーネントです。TiUPクラスタを使用することで、 TiUPクラスタのデプロイ、起動、停止、削除、スケーリング、アップグレード、およびTiDBクラスタパラメータの管理といった、日常的なデータベース操作を容易に実行できます。
 

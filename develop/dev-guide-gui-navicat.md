@@ -25,7 +25,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -158,14 +158,14 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 2.  「**新規接続（TiDB）」**ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号を入力してください。
+    -   **ホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
     -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
     -   **パスワード**：TiDBに接続するために使用するパスワードを入力してください。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-premium-connection-config-self-hosted-general.png)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
 4.  接続テストが成功すると、 **「接続成功」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を完了してください。
 

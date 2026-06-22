@@ -30,10 +30,10 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql-overview/','/ja/tidbcloud/dev-
 ### 参照 {#see-also}
 
 -   [TiDB Cloudの SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
--   [TiDBセルフマネージドのSQL性能チューニング](/sql-tuning-overview.md)
+-   [TiDB Self-ManagedのSQL性能チューニング](/sql-tuning-overview.md)
 
 ## ヘルプが必要ですか? {#need-help}
 
 -   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -30,7 +30,7 @@ TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで
 | insight-{バージョン}-linux-{アーキテクチャ}.tar.gz           |                |
 | diag-{バージョン}-linux-{アーキテクチャ}.tar.gz              | バージョン6.0.0の新機能 |
 | influxdb-{バージョン}-linux-{アーキテクチャ}.tar.gz          |                |
-| プレイグラウンド-{バージョン}-linux-{アーキテクチャ}.tar.gz          |                |
+| Playground-{バージョン}-linux-{アーキテクチャ}.tar.gz          |                |
 | tiproxy-{バージョン}-linux-{アーキテクチャ}.tar.gz           | バージョン7.6.0の新機能 |
 
 > **注記：**

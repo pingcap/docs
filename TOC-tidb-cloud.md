@@ -150,7 +150,7 @@
         -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
         -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
         -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
-        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDB Self-ManagedからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [AWS DMSを使用してMySQL互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
         -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloud Dedicatedへのデータインポート

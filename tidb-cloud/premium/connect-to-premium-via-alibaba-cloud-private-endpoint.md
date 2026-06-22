@@ -18,7 +18,7 @@ summary: Alibaba Cloud上のプライベートエンドポイントを介してT
 
 ## Alibaba Cloudでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-alibaba-cloud}
 
-プライベートエンドポイント経由でプレミアムインスタンスに接続するには、以下の手順を実行してください。
+プライベートエンドポイント経由でPremiumインスタンスに接続するには、以下の手順を実行してください。
 
 ### ステップ1. TiDB Cloud Premiumインスタンスを選択します。 {#step-1-choose-a-tidb-cloud-premium-instance}
 

@@ -29,7 +29,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -158,10 +158,10 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 2.  **「新しい接続の設定**」ダイアログで、以下の接続パラメータを設定します。
 
     -   **接続名**：この接続に分かりやすい名前を付けてください。
-    -   **ホスト名**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名を入力してください。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号を入力してください。
+    -   **ホスト名**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
     -   **ユーザー名**：TiDBに接続するために使用するユーザー名を入力してください。
-    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、TiDBセルフマネージドクラスタへの接続に使用するパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
+    -   **パスワード**： **[キーチェーンに保存...]**をクリックし、TiDB Self-Managedクラスタへの接続に使用するパスワードを入力して、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Self-Managed in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
@@ -169,7 +169,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: configure connection settings for TiDB Self-Managed](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
 4.  接続テストが成功すると、 **「MySQL接続が正常に確立されました」という**メッセージが表示されます。 **「OK」**をクリックして接続設定を保存してください。
 

@@ -2,8 +2,8 @@
 
 <!-- markdownlint-disable MD041 -->
 
--   TiDBセルフマネージドについて
-    -   [TiDBセルフマネージドとは何ですか？](/overview.md)
+-   TiDB Self-Managedについて
+    -   [TiDB Self-Managedとは何ですか？](/overview.md)
     -   [TiDB 8.5 リリースノート](/releases/release-8.5.0.md)
     -   [特徴](/basic-features.md)
     -   [MySQLとの互換性](/mysql-compatibility.md)

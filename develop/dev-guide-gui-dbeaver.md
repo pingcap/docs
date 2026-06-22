@@ -24,7 +24,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
 さらに、 **Windows**上の DBeaver からTiDB Cloud StarterまたはTiDB Cloud Essential のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
 
@@ -176,16 +176,16 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 2.  以下の接続パラメータを設定してください。
 
-    -   **サーバーホスト**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名。
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号。
-    -   **ユーザー名**：TiDBセルフマネージドクラスタに接続するために使用するユーザー名。
+    -   **サーバーホスト**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名。
+    -   **ポート**：TiDB Self-Managedクラスタのポート番号。
+    -   **ユーザー名**：TiDB Self-Managedクラスタに接続するために使用するユーザー名。
     -   **パスワード**：ユーザー名のパスワード。
 
     例えば、以下のような例があります。
 
     ![Configure connection settings for TiDB Self-Managed](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
     **「ドライバファイルのダウンロード」**ダイアログが表示されたら、 **「ダウンロード」**をクリックしてドライバファイルを入手してください。
 

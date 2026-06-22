@@ -10,11 +10,11 @@ category: quick start
 
 このチュートリアルでは、 TiDB Cloudを使い始めるための簡単な方法を説明します。
 
-さらに、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
+さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
 
 ## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter) TiDB Cloudを使い始めるのに最適な方法です。TiDB Cloud Starter クラスターを作成するには、以下の手順に従ってください。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) TiDB Cloudを使い始めるのに最適な方法です。TiDB Cloud Starter クラスターを作成するには、以下の手順に従ってください。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてサインアップしてください。
 
@@ -30,7 +30,7 @@ category: quick start
     -   独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
 
         1.  **[クラスタの作成]を**クリックします。
-        2.  **「クラスタの作成」**ページでは、デフォルトで**「スターター」**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **「作成」を**クリックします。TiDB Cloud Starterクラスターは約30秒で作成されます。
+        2.  **「クラスタの作成」**ページでは、デフォルトで**「Starter」**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **「作成」を**クリックします。TiDB Cloud Starterクラスターは約30秒で作成されます。
 
         <CustomContent language="en,zh">
 

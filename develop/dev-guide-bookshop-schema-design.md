@@ -14,12 +14,12 @@ Bookshopは、さまざまなジャンルの本を購入したり、読んだ本
 
 Bookshopアプリケーションのテーブル構造とデータをインポートするには、以下のインポート方法のいずれかを選択してください。
 
--   [TiDB セルフマネージド: `tiup demo`経由](#tidb-self-managed-via-tiup-demo)。
+-   [TiDB Self-Managed: `tiup demo`経由](#tidb-self-managed-via-tiup-demo)。
 -   [TiDB Cloud：インポート機能経由](#tidb-cloud-via-the-import-feature)。
 
-### TiDB セルフマネージド: <code>tiup demo</code>経由 {#tidb-self-managed-via-code-tiup-demo-code}
+### TiDB Self-Managed: <code>tiup demo</code>経由 {#tidb-self-managed-via-code-tiup-demo-code}
 
-[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してTiDBセルフマネージドクラスタをデプロイしている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーション用のサンプルデータをすばやく生成してインポートできます。
+[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してTiDB Self-Managedクラスタをデプロイしている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーション用のサンプルデータをすばやく生成してインポートできます。
 
 ```shell
 tiup demo bookshop prepare

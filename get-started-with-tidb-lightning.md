@@ -44,7 +44,7 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
 データインポートを開始する前に、インポート用のTiDBクラスタをデプロイする必要があります。既にTiDBクラスタをお持ちの場合は、この手順をスキップできます。
 
-TiDB クラスターのデプロイ手順については、 [TiDBセルフマネージドのクイックスタート](/quick-start-with-tidb.md)を参照してください。
+TiDB クラスターのデプロイ手順については、 [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)を参照してください。
 
 ## ステップ3： TiDB Lightningをインストールする {#step-3-install-tidb-lightning}
 

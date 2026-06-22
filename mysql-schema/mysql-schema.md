@@ -69,7 +69,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 > **注記：**
 >
-> GCワーカーシステムテーブルは、TiDBセルフマネージドでのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+> GCワーカーシステムテーブルは、TiDB Self-Managedでのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
 -   `gc_delete_range` : 削除する KV 範囲
 -   `gc_delete_range_done` : 削除された KV 範囲
