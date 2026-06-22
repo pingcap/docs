@@ -19,7 +19,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 -   TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
     -   [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-    -   [TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+    -   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
 

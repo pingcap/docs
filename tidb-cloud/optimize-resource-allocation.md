@@ -3,9 +3,9 @@ title: Optimize Resource Allocation for TiDB Cloud Dedicated
 summary: TiDB Cloud Dedicated クラスターのリソース割り当てを最適化する方法について説明します。
 ---
 
-# TiDB Cloud専用リソース割り当ての最適化 {#optimize-resource-allocation-for-tidb-cloud-dedicated}
+# TiDB Cloud Dedicatedリソース割り当ての最適化 {#optimize-resource-allocation-for-tidb-cloud-dedicated}
 
-ハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターは、それぞれ異なるサービス品質（QoS）要件を持つ複数のビジネスアプリケーションをサポートできます。場合によっては、許容可能なレイテンシーレベルを維持するために、優先度の高いアプリケーションにさらに多くのリソースを割り当てる必要がある場合があります。
+ハイブリッドトランザクションおよび分析処理（HTAP）データベースである[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターは、それぞれ異なるサービス品質（QoS）要件を持つ複数のビジネスアプリケーションをサポートできます。場合によっては、許容可能なレイテンシーレベルを維持するために、優先度の高いアプリケーションにさらに多くのリソースを割り当てる必要がある場合があります。
 
 TiDB Cloud Dedicatedは、 [リソース管理](/tidb-resource-control-ru-groups.md)と[TiDBノードグループ](/tidb-cloud/tidb-node-group-overview.md)機能を含むリソース最適化機能を提供します。これらの機能は、複数のビジネスシナリオにおいてリソースを効率的に割り当てるのに役立ちます。
 

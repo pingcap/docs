@@ -48,8 +48,8 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 
 | 環境               | メールの長さ | ユーザー名の形式                                                                             |
 | ---------------- | ------ | ------------------------------------------------------------------------------------ |
-| TiDB Cloud専用     | 32文字以下 | 完全なメールアドレス                                                                           |
-| TiDB Cloud専用     | 32文字   | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
+| TiDB Cloud Dedicated     | 32文字以下 | 完全なメールアドレス                                                                           |
+| TiDB Cloud Dedicated     | 32文字   | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
 | TiDB Cloudサーバーレス | 15文字以下 | `serverless_unique_prefix + "." + email`                                             |
 | TiDB Cloudサーバーレス | 15文字   | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
@@ -57,8 +57,8 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 
 | 環境               | 電子メールアドレス                             | SQLプロキシアカウントのユーザー名                   |
 | ---------------- | ------------------------------------- | ------------------------------------ |
-| TiDB Cloud専用     | `user@pingcap.com`                    | `user@pingcap.com`                   |
-| TiDB Cloud専用     | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9`   |
+| TiDB Cloud Dedicated     | `user@pingcap.com`                    | `user@pingcap.com`                   |
+| TiDB Cloud Dedicated     | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9`   |
 | TiDB Cloudサーバーレス | `u1@pingcap.com`                      | `{user_name_prefix}.u1@pingcap.com`  |
 | TiDB Cloudサーバーレス | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9` |
 

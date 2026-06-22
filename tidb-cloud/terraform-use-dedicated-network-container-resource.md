@@ -5,7 +5,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
 # <code>tidbcloud_dedicated_network_container</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-network-container-code-resource}
 
-このドキュメントでは、 `tidbcloud_dedicated_network_container`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ネットワーク コンテナーを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_dedicated_network_container`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ネットワーク コンテナーを管理する方法について説明します。
 
 ネットワークコンテナは、特定のプロジェクトとリージョンのCIDRブロック（IPアドレス範囲）を定義および管理できる論理ネットワークリソースです。このCIDRブロックは、 TiDB Cloud Dedicatedクラスター用のVPCを作成するために使用され、そのリージョンでVPCピアリングを設定する前に必要です。
 
@@ -13,7 +13,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
 `tidbcloud_dedicated_network_container`リソースの機能は次のとおりです。
 
--   TiDB Cloud専用ネットワーク コンテナーを作成します。
+-   TiDB Cloud Dedicatedネットワーク コンテナーを作成します。
 -   TiDB Cloud Dedicated ネットワーク コンテナーをインポートします。
 -   TiDB Cloud Dedicated ネットワーク コンテナーを削除します。
 
@@ -25,9 +25,9 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
-## TiDB Cloud専用ネットワークコンテナを作成する {#create-a-tidb-cloud-dedicated-network-container}
+## TiDB Cloud Dedicatedネットワークコンテナを作成する {#create-a-tidb-cloud-dedicated-network-container}
 
-`tidbcloud_dedicated_network_container`リソースを使用して、 TiDB Cloud専用ネットワーク コンテナーを作成できます。
+`tidbcloud_dedicated_network_container`リソースを使用して、 TiDB Cloud Dedicatedネットワーク コンテナーを作成できます。
 
 次の例は、TiDB Cloud Dedicated ネットワーク コンテナを作成する方法を示しています。
 
@@ -134,7 +134,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
     }
     ```
 
-## TiDB Cloud専用ネットワークコンテナをインポートする {#import-a-tidb-cloud-dedicated-network-container}
+## TiDB Cloud Dedicatedネットワークコンテナをインポートする {#import-a-tidb-cloud-dedicated-network-container}
 
 Terraform によって管理されていないTiDB Cloud Dedicated ネットワーク コンテナの場合は、インポートすることで Terraform の管理下に置くことができます。
 

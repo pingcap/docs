@@ -188,7 +188,7 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 ### TiKVノードストレージタイプ {#tikv-node-storage-types}
 
-TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVストレージタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVストレージタイプを提供します。
 
 -   [基本的なストレージ](#basic-storage)
 -   [標準ストレージ](#standard-storage)
@@ -258,7 +258,7 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 
 ### TiFlashノードストレージタイプ {#tiflash-node-storage-types}
 
-TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashストレージタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashストレージタイプを提供します。
 
 -   [基本的なストレージ](#basic-storage-1)
 -   [プラスstorage](#plus-storage)
