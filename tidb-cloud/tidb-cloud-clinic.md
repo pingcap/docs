@@ -15,7 +15,7 @@ TiDB Cloud Clinic は、 TiDB Cloud上で高度な監視および診断機能を
 
 ## 前提条件 {#prerequisites}
 
-TiDB Cloud Clinic は、**エンタープライズ**または**Premium**サポート プランに加入している組織のみが利用できます。
+TiDB Cloud Clinic は、**Enterprise**または**Premium**サポート プランに加入している組織のみが利用できます。
 
 ## クラスタページを確認する {#view-the-cluster-page}
 

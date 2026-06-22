@@ -338,7 +338,7 @@ TiDBバージョン: 6.3.0-DMR
     -   システム変数`tidb_enable_noop_variable`が`WARN`に設定できてしまう問題を修正しました [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
     -   式インデックスが定義されている場合、 `ORDINAL_POSITION`テーブルの`INFORMATION_SCHEMA.COLUMNS`列が正しくない可能性がある問題を修正します。 [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
     -   TiDB がタイムスタンプが`MAXINT32`より大きい場合にエラーを報告しない問題を修正 [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
-    -   エンタープライズプラグイン使用時にTiDBサーバーが起動できない問題を修正 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
+    -   Enterpriseプラグイン使用時にTiDBサーバーが起動できない問題を修正 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
     -   `SHOW CREATE PLACEMENT POLICY`の誤った出力を修正 [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
     -   一時テーブルでの予期しない`EXCHANGE PARTITION`動作を修正 [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`のクエリで誤った結果が返される問題を修正しました @[zimulala](https://github.com/zimulala)

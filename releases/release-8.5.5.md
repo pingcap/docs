@@ -149,7 +149,7 @@ TiDBバージョン：8.5.5
 
     この機能により、 BRとTiKVに組み込まれたBRワーカーは、Azureインスタンスメタデータサービス（IMDS）から直接アクセストークンを取得できるため、認証情報の漏洩リスクが軽減され、Azure上のSelf-Managedおよびクラウドデプロイメントの両方で認証情報のローテーション管理が簡素化されます。
 
-    この機能は、Azure Kubernetes Service (AKS) またはその他の Azure 環境で実行されている TiDB クラスターに適用されます。特に、バックアップおよび復元操作に対して厳格なセキュリティ制御が求められるエンタープライズ環境において有効です。
+    この機能は、Azure Kubernetes Service (AKS) またはその他の Azure 環境で実行されている TiDB クラスターに適用されます。特に、バックアップおよび復元操作に対して厳格なセキュリティ制御が求められるEnterprise環境において有効です。
 
     詳細については、 [ドキュメント](/br/backup-and-restore-storages.md#authentication)を参照してください。
 

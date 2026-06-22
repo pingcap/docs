@@ -13,7 +13,7 @@ TiDB Cloud、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/t
 
 ## 前提条件 {#prerequisites}
 
--   Slack経由での購読機能は、**エンタープライズ**または**Premium**サポートプランに加入している組織のみが利用できます。
+-   Slack経由での購読機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
 
 <CustomContent plan="essential,dedicated">
 

@@ -34,7 +34,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 2.  Confluent Cloud を登録し、Confluent クラスターを作成します。
 
-    ベーシッククラスタを作成し、インターネット経由でアクセスできるようにします。詳細は[Confluent Cloud のクイックスタート](https://docs.confluent.io/cloud/current/get-started/index.html)参照してください。
+    Basicクラスタを作成し、インターネット経由でアクセスできるようにします。詳細は[Confluent Cloud のクイックスタート](https://docs.confluent.io/cloud/current/get-started/index.html)参照してください。
 
 ### ステップ2. アクセスキーペアを作成する {#step-2-create-an-access-key-pair}
 

@@ -167,7 +167,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
 
-        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
+        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、Enterpriseグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
 
         詳細については、 [プレビュー版から本番環境へ：Microsoft Azure 上のTiDB Cloud Dedicatedが一般提供開始](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)参照してください。
 
@@ -179,7 +179,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)は、現在AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリックプレビュー中です。
 
-        [TiDB X](/tidb-cloud/tidb-x-architecture.md)カーネルを搭載したTiDB Cloud Premiumは、ハイパースケール、妥協のないパフォーマンス、そしてクラウドネイティブな消費モデルによるコスト効率を必要とする、ミッションクリティカルなエンタープライズワークロード向けに特別に設計されています。
+        [TiDB X](/tidb-cloud/tidb-x-architecture.md)カーネルを搭載したTiDB Cloud Premiumは、ハイパースケール、妥協のないパフォーマンス、そしてクラウドネイティブな消費モデルによるコスト効率を必要とする、ミッションクリティカルなEnterpriseワークロード向けに特別に設計されています。
 
         TiDB Cloud Premium は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の間のギャップを埋めるものです。
 
@@ -408,7 +408,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
         [TiDB Cloudコンソール](https://tidbcloud.com)のデータ移行機能を使用すると、MySQL 互換データベースから[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターへデータをシームレスに移行できます。
 
         -   サポートされているソースデータベースには、セルフホスト型MySQL、Amazon RDS、Alibaba Cloud RDS、PolarDBなど、さまざまなMySQL互換システムが含まれます。
-        -   データ移行にサポートされている接続方法には、使いやすさとエンタープライズグレードのセキュリティの両方を確保するために、パブリック接続とPrivateLinkが含まれます。
+        -   データ移行にサポートされている接続方法には、使いやすさとEnterpriseグレードのセキュリティの両方を確保するために、パブリック接続とPrivateLinkが含まれます。
 
             -   **パブリック接続**：安全で暗号化されたチャネルを使用して、インターネット経由でソースデータベースに迅速に接続します。
             -   **PrivateLink** ：ソースVPCとTiDB Cloud間の安全でプライベートな接続を確立し、パブリックインターネットをバイパスすることで、最大限のデータプライバシーとネットワークレイテンシーの低減を実現します。
@@ -429,9 +429,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](https://tidbcloud.com/)すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
-    -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。ベーシックプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
+    -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
     -   **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**「サポートオプション」**と**「サポートチケット」**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
-    -   **明確なコミュニティ サポート アクセス**:**サポート プラン**オプション内では、Slack と Discord がベーシック プラン ユーザーの主要なテクニカル サポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)、および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)。
+    -   **明確なコミュニティ サポート アクセス**:**サポート プラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカル サポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)、および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)。
     -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
 
     詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。

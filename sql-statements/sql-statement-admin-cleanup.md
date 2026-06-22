@@ -62,7 +62,7 @@ Query OK, 0 rows affected (0.01 sec)
 > -   行データとインデックスデータの両方が失われている可能性があります。一貫性を回復するには、 `ADMIN CLEANUP INDEX`と[`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)ステートメントを一緒に使用してください。
 > -   `ADMIN CLEANUP INDEX`ステートメントは常に単一スレッドで実行されます。テーブルデータが大きい場合は、インデックスを再構築してインデックスデータを回復することをお勧めします。
 > -   `ADMIN CLEANUP INDEX`文を実行すると、対応するテーブルまたはインデックスはロックされず、TiDB は他のセッションによるテーブルレコードの同時変更を許可します。ただし、この場合、 `ADMIN CLEANUP INDEX`ではすべてのテーブルレコードを正しく処理できない可能性があります。したがって、 `ADMIN CLEANUP INDEX`を実行する際は、テーブルデータの同時変更を避けてください。
-> -   TiDB のエンタープライズ エディションを使用する場合は、 [リクエストを送信する](/support.md)サポート エンジニアに問い合わせて支援を受けることができます。
+> -   TiDB のEnterprise エディションを使用する場合は、 [リクエストを送信する](/support.md)サポート エンジニアに問い合わせて支援を受けることができます。
 >
 > `ADMIN CLEANUP INDEX`文はアトミックではありません。実行中に文が中断された場合は、成功するまで再度実行することをお勧めします。
 
@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.01 sec)
 > -   行データとインデックスデータの両方が失われている可能性があります。一貫性を回復するには、 `ADMIN CLEANUP INDEX`と[`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)ステートメントを一緒に使用してください。
 > -   `ADMIN CLEANUP INDEX`ステートメントは常に単一スレッドで実行されます。テーブルデータが大きい場合は、インデックスを再構築してインデックスデータを回復することをお勧めします。
 > -   `ADMIN CLEANUP INDEX`文を実行すると、対応するテーブルまたはインデックスはロックされず、TiDB は他のセッションによるテーブルレコードの同時変更を許可します。ただし、この場合、 `ADMIN CLEANUP INDEX`ではすべてのテーブルレコードを正しく処理できない可能性があります。したがって、 `ADMIN CLEANUP INDEX`を実行する際は、テーブルデータの同時変更を避けてください。
-> -   TiDB のエンタープライズ エディションを使用する場合は、 [リクエストを送信する](https://tidb.support.pingcap.com/)サポート エンジニアに問い合わせて支援を受けることができます。
+> -   TiDB のEnterprise エディションを使用する場合は、 [リクエストを送信する](https://tidb.support.pingcap.com/)サポート エンジニアに問い合わせて支援を受けることができます。
 >
 > `ADMIN CLEANUP INDEX`文はアトミックではありません。実行中に文が中断された場合は、成功するまで再度実行することをお勧めします。
 

@@ -13,7 +13,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 ## 前提条件 {#prerequisites}
 
--   Zoom経由での登録機能は、**エンタープライズ**または**Premium**サポートプランに加入している組織のみが利用できます。
+-   Zoom経由での登録機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
 
 -   Zoomで受信Webhookチャットボットを追加および設定するには、Zoomアカウントの管理者権限が必要です。
 

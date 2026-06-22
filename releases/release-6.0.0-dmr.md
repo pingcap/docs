@@ -28,7 +28,7 @@ TiDB バージョン: 6.0.0-DMR
 -   TiKV ノードの再起動後のリーダー バランシングを高速化し、再起動後のビジネス回復の速度を向上させます。
 -   統計の自動更新のキャンセルをサポートします。これにより、リソースの競合が軽減され、SQL パフォーマンスへの影響が制限されます。
 -   TiDB クラスターの自動診断サービスであるPingCAPクリニックを提供します (テクニカル プレビュー版)。
--   エンタープライズ レベルのデータベース管理プラットフォームである TiDB Enterprise Manager を提供します。
+-   Enterprise レベルのデータベース管理プラットフォームである TiDB Enterprise Manager を提供します。
 
 また、TiDBのHTAPソリューションの中核コンポーネントであるTiFlash <sup>™は</sup>、本リリースで正式にオープンソース化されました。詳細は[TiFlashリポジトリ](https://github.com/pingcap/tiflash)ご覧ください。
 
@@ -265,13 +265,13 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     [ユーザードキュメント](/clinic/clinic-introduction.md)
 
--   エンタープライズレベルのデータベース管理プラットフォーム、TiDB Enterprise Manager
+-   Enterpriseレベルのデータベース管理プラットフォーム、TiDB Enterprise Manager
 
-    TiDB Enterprise Manager (TiEM) は、TiDB データベースに基づくエンタープライズ レベルのデータベース管理プラットフォームであり、ユーザーがセルフホスト環境またはパブリック クラウド環境で TiDB クラスターを管理できるようにすることを目的としています。
+    TiDB Enterprise Manager (TiEM) は、TiDB データベースに基づくEnterprise レベルのデータベース管理プラットフォームであり、ユーザーがセルフホスト環境またはパブリック クラウド環境で TiDB クラスターを管理できるようにすることを目的としています。
 
     TiEMは、TiDBクラスタのライフサイクル全体を視覚的に管理するだけでなく、パラメータ管理、バージョンアップ、クラスタクローン、アクティブ/スタンバイクラスタ切り替え、データのインポート/エクスポート、データレプリケーション、データのバックアップ/リストアといったワンストップサービスも提供します。TiEMは、TiDBにおけるDevOpsの効率を向上させ、企業のDevOpsコストを削減します。
 
-    現在、TiEMは[TiDBエンタープライズ](https://www.pingcap.com/tidb-enterprise/)エディションのみで提供されています。TiEMを入手するには、 [TiDBエンタープライズ](https://www.pingcap.com/tidb-enterprise/)ページからお問い合わせください。
+    現在、TiEMは[TiDBEnterprise](https://www.pingcap.com/tidb-enterprise/)エディションのみで提供されています。TiEMを入手するには、 [TiDBEnterprise](https://www.pingcap.com/tidb-enterprise/)ページからお問い合わせください。
 
 -   監視コンポーネントの構成のカスタマイズをサポート
 
