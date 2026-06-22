@@ -1,4 +1,4 @@
-# Release notes generator
+# Readme: Release Notes AI Generator
 
 `python3 -m release-notes-ai-generator` (run from the `scripts/` directory) generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in an Excel workbook.
 
@@ -78,8 +78,8 @@ Use Azure OpenAI:
 cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
-    --excel /path/to/release-note-excel.xlsx \
-    --releases-dir ../releases \
+    --excel </path/to/release-note-excel.xlsx> \
+    --releases-dir </path/to/releases-folder> \
     --ai-provider azure
 ```
 
@@ -90,7 +90,7 @@ cd scripts
 python3 -m release-notes-ai-generator generate \
     --version 8.5.7 \
     --excel /path/to/release-note-excel.xlsx \
-    --releases-dir ../releases
+    --releases-dir </path/to/releases-folder>
 ```
 
 ### Phase 1: Resume from interruption
@@ -127,10 +127,10 @@ After Phase 1 is fully complete, export the Markdown:
 ```bash
 cd scripts
 python3 -m release-notes-ai-generator export-markdown \
-    --version 8.5.7 \
-    --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir ../releases \
-    --release-date "August 14, 2025"
+    --version <tidb-version, for example 8.5.7> \
+    --excel </path/to/release-note-excel_processed.xlsx> \
+    --releases-dir </path/to/releases-folder> \
+    --release-date "<release date>"
 ```
 
 ## Option descriptions

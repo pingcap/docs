@@ -40,7 +40,7 @@ Not every PR or change warrants a release note. Before writing, determine whethe
 
 ### Borderline cases
 
-If a PR is mostly internal but the outcome is user-visible, write a release note that describes the outcome and omit the implementation details. If the only user-facing effect is indirect or speculative, lean toward returning a "not_needed" verdict.
+If a PR is mostly internal but the outcome is user-visible, write a release note that describes the outcome and omit the implementation details. If the only user-facing effect is indirect or speculative, lean toward returning a verdict that starts with "Release note is not needed:".
 
 ### Whether improvement or bug fix
 
@@ -151,10 +151,10 @@ Bug fix example:
 - Fix the issue that TiCDC might panic when the initialization of the Pulsar producer fails [#4937](https://github.com/pingcap/ticdc/issues/4937) @[wk989898](https://github.com/wk989898)
 ```
 
-When `type` is `"not_needed"`, set `release_note` to the following format:
+When `type` is `"not_needed"`, `release_note` must start with "Release note is not needed:":
 
 ```
 Release note is not needed for this change. Reason: <short reason>
 ```
 
-Examples of `"not_needed"` reasons: `test-only change`, `internal refactor, no user-visible effect`, `flaky test fix`, `added internal debug logging`.
+Example types of `"not_needed"` reasons: `test-only change`, `internal refactor, no user-visible effect`, `flaky test fix`, `added internal debug logging`.
