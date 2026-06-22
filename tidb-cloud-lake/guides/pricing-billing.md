@@ -5,11 +5,11 @@ summary: Understand the pricing model and billing details for TiDB Cloud Lake.
 
 # Pricing & Billing
 
-Your costs on {{{ .lake }}} consist of the following components: warehouse, storage, cloud service, and service hosting fees. This page contains information about the pricing of each component and how the billing works.
+Your costs on {{{ .lake }}} consist of the following components: warehouses, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
 
 ## {{{ .lake }}} Pricing
 
-This section provides pricing information on warehouse, storage, cloud service, and service hosting.
+This section provides pricing information on warehouse, storage, and cloud service.
 
 ### Warehouse Pricing
 
@@ -43,24 +43,12 @@ Your data in {{{ .lake }}} is physically stored in Amazon S3. Storage costs in {
 
 ### Cloud Service Pricing
 
-The cloud service fee currently includes fees for the API requests. Each time you run a SQL query with {{{ .lake }}}, a REST API request is sent to the `lake-query` through the {{{ .lake }}} HTTP handler. In the Personal Edition, you are billed $1 for every 10,000 API requests, while in the Business Edition, the cost is $2 for every 10,000 API requests.
+The cloud service fee currently includes fees for the API requests. Each time you run a SQL query with {{{ .lake }}}, a REST API request is sent to the `databend-query` through the {{{ .lake }}} HTTP handler. In the Personal Edition, you are billed $1 for every 10,000 API requests, while in the Business Edition, the cost is $2 for every 10,000 API requests.
 
 | Edition          | Cost per 10,000 API Requests |
 | ---------------- | ---------------------------- |
 | Personal Edition | $1.00                        |
 | Business Edition | $2.00                        |
-
-### Service Hosting Pricing
-
-Service hosting fees apply to the Data Integration service. Unlike a warehouse, a Data Integration service typically runs continuously (24/7) until you stop it. Billing follows the same model as warehouses: it is calculated on a **per-second basis** according to the actual running time, and the price depends on the service size and the {{{ .lake }}} edition you use.
-
-Service sizes are derived from the Warehouse XSmall. The monthly cost shown below is an estimate based on continuous 24/7 operation (720 hours per month, assuming one month is calculated as 30 days) and is provided for reference only.
-
-| Size    | Hourly Cost (Personal) | Hourly Cost (Business) | Monthly Cost (Personal, 24/7) | Monthly Cost (Business, 24/7) |
-| ------- | ---------------------- | ---------------------- | ----------------------------- | ----------------------------- |
-| 4XSmall | $0.125                 | $0.1875                | $90                           | $135                          |
-| 3XSmall | $0.25                  | $0.375                 | $180                          | $270                          |
-| 2XSmall | $0.50                  | $0.75                  | $360                          | $540                          |
 
 ## Example-1
 
