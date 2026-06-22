@@ -7,7 +7,7 @@ summary: TiDB Cloudクラスターを拡張する方法を学びます。
 
 > **注記：**
 >
-> -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターは手動でスケーリングできません。
+> -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、アプリケーションのワークロードの変化に応じて自動的にスケーリングされます。ただし、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターは手動でスケーリングできません。
 > -   クラスターが**MODIFYING**ステータスにある場合、そのクラスターに対して新しいスケーリング操作を実行することはできません。
 
 TiDB クラスターは次の次元で拡張できます。
