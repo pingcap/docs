@@ -24,7 +24,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ。](/production-deployment-using-tiup.md)
 
 さらに、 **Windows**上の DBeaver からTiDB Cloud StarterまたはTiDB Cloud Essential のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
 

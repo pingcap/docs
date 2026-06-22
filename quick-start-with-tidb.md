@@ -257,7 +257,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 </div>
 </SimpleTab>
 
-## 単一のマシン上で本番本番への展開をシミュレーションする {#simulate-production-deployment-on-a-single-machine}
+## 単一のマシン上で本番への展開をシミュレーションする {#simulate-production-deployment-on-a-single-machine}
 
 このセクションでは、完全なトポロジーを持つ最小のTiDBクラスタをセットアップし、単一のLinuxサーバー上で本番へのデプロイ手順をシミュレートする方法について説明します。
 
