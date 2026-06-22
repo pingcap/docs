@@ -9,7 +9,7 @@ TiDB Data Migration (DM) は、主要な Linux オペレーティングシステ
 
 | Linux OS              |  バージョン  |
 | :-------------------- | :-----: |
-| レッドハットEnterpriseリナックス   |  7.3以降  |
+| Red Hat Enterprise Linux   |  7.3以降  |
 | セントOS                 |  7.3以降  |
 | Oracle Enterprise Linux |  7.3以降  |
 | Ubuntu LTS            | 16.04以降 |

@@ -237,7 +237,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
 #### SCIMプロビジョニングを構成する {#configure-scim-provisioning}
 
-[クロスドメイン ID 管理システム (SCIM)](https://www.rfc-editor.org/rfc/rfc7644)は、アイデンティティドメインとITシステム間のユーザーID情報の交換を自動化するopen standardです。SCIMプロビジョニングを設定することで、アイデンティティプロバイダーのユーザーグループをTiDB Cloudに自動的に同期し、 TiDB Cloudでこれらのグループのロールを一元管理できるようになります。
+[クロスドメイン ID 管理システム (SCIM)](https://www.rfc-editor.org/rfc/rfc7644)は、アイデンティティドメインとITシステム間のユーザーID情報の交換を自動化するオープンスタンダードです。SCIMプロビジョニングを設定することで、アイデンティティプロバイダーのユーザーグループをTiDB Cloudに自動的に同期し、 TiDB Cloudでこれらのグループのロールを一元管理できるようになります。
 
 > **注記：**
 >
