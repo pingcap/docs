@@ -69,8 +69,8 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 -   DDL
     -   DDLタスクの再試行回数を制限するために、 `ddl_error_count_limit`グローバル変数（デフォルトでは「512」）を追加します（この回数が制限を超えると、DDLタスクはキャンセルされます） [＃9295](https://github.com/pingcap/tidb/pull/9295)
     -   ALTER ALGORITHM `INPLACE` / `INSTANT` [＃8811](https://github.com/pingcap/tidb/pull/8811)をサポート
-    -   `SHOW CREATE VIEW`ステートメント[＃9309](https://github.com/pingcap/tidb/pull/9309)支持する
-    -   `SHOW CREATE USER`ステートメント[＃9240](https://github.com/pingcap/tidb/pull/9240)支持する
+    -   `SHOW CREATE VIEW`ステートメント[＃9309](https://github.com/pingcap/tidb/pull/9309)サポートする
+    -   `SHOW CREATE USER`ステートメント[＃9240](https://github.com/pingcap/tidb/pull/9240)サポートする
 
 ## PD {#pd}
 

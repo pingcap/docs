@@ -214,10 +214,10 @@ with get_connection(autocommit=True) as connection:
 Pythonでの完全な例については、以下を参照してください。
 
 -   [PyMySQLを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-pymysql.md)
--   [mysqlclientを使用してTiDBに接続します。](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
+-   [mysqlclientを使用してTiDBに接続します](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
 -   [MySQL Connector/Pythonを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)
 -   [SQLAlchemyを使用してTiDBに接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
--   [peeweeを使用してTiDBに接続します。](/develop/dev-guide-sample-application-python-peewee.md)
+-   [peeweeを使用してTiDBに接続します](/develop/dev-guide-sample-application-python-peewee.md)
 
 </div>
 

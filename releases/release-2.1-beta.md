@@ -12,7 +12,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
 -   SQLオプティマイザー
     -   実行パフォーマンスを向上させるために、選択範囲`Index Join`を最適化します。
     -   相関サブクエリを最適化し、 `Filter`プッシュダウンし、インデックス範囲を拡張して、一部のクエリの効率を桁違いに向上させます。
-    -   `UPDATE`と`DELETE`ステートメントの`Index Hint`と`Join Hint`を支持する
+    -   `UPDATE`と`DELETE`ステートメントの`Index Hint`と`Join Hint`をサポートする
     -   利用可能なインデックスが存在しない場合にヒント`TIDM_SMJ`検証する
     -   `ABS` `CEIL` `IS TRUE` `FLOOR`ダウン`IS FALSE`関数
     -   特に定数の折り畳み処理で`IF`と`IFNULL`関数を処理する
@@ -32,7 +32,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
 -   互換性
     -   より多くのMySQL構文をサポート
     -   `bit`集計関数が`ALL`パラメータをサポートするようにする
-    -   `SHOW PRIVILEGES`ステートメントを支持する
+    -   `SHOW PRIVILEGES`ステートメントをサポートする
 -   DML
     -   `INSERT INTO SELECT`文目のメモリ使用量を減らす
     -   `PlanCache`のパフォーマンス問題を修正

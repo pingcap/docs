@@ -20,7 +20,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 この記事の手順を試す前に、以下のものを準備する必要があります。
 
 -   [TiDB Cloudアカウント](https://tidbcloud.com/signup)。
--   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します。](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
+-   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)参照してください。
 -   [Cloudflare Workersアカウント](https://dash.cloudflare.com/login)。
 -   [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 

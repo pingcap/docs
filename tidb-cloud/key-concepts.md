@@ -9,7 +9,7 @@ summary: TiDB Cloudの主要な概念について学びましょう。
 
 ## アーキテクチャ {#architecture}
 
-TiDB Cloudは、コンピューティングをストレージから分離するクラウドネイティブの分散アーキテクチャ上に構築されており、柔軟なスケーリングと高可用性を実現します。 [TiDB Cloudアーキテクチャの詳細についてはこちらをご覧ください。](/tidb-cloud/architecture-concepts.md)
+TiDB Cloudは、コンピューティングをストレージから分離するクラウドネイティブの分散アーキテクチャ上に構築されており、柔軟なスケーリングと高可用性を実現します。 [TiDB Cloudアーキテクチャの詳細についてはこちらをご覧ください](/tidb-cloud/architecture-concepts.md)
 
 ## データベーススキーマ {#database-schema}
 
@@ -21,7 +21,7 @@ TiDB は完全な分散トランザクションを提供します。モデルは
 
 ## SQL {#sql}
 
-TiDB は、MySQL プロトコル、およびMySQL 5.7および MySQL 8.0 の共通機能および構文と高い互換性があります。 [TiDB Cloudの SQL について詳しくはこちらをご覧ください。](/tidb-cloud/sql-concepts.md)
+TiDB は、MySQL プロトコル、およびMySQL 5.7および MySQL 8.0 の共通機能および構文と高い互換性があります。 [TiDB Cloudの SQL について詳しくはこちらをご覧ください](/tidb-cloud/sql-concepts.md)
 
 ## AI機能 {#ai-features}
 

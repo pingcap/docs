@@ -27,7 +27,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 -   [Dumplingに必要なソースデータベース権限を付与する](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 
--   [TiDB Lightningに必要なターゲットデータベース権限を付与します。](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+-   [TiDB Lightningに必要なターゲットデータベース権限を付与します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
 
 ## リソース要件 {#resource-requirements}
 

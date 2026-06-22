@@ -76,7 +76,7 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、
 
     </CustomContent>
 
-2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください。](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
+2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
 
     > **注記：**
     >

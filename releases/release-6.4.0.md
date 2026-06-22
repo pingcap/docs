@@ -113,7 +113,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   ディスク障害やI/Oスタックなどの極端な状況における障害リカバリを加速する [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    Enterpriseユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスタの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスタリカバリ時間を約50%短縮できます。
+    エンタープライズユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスタの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスタリカバリ時間を約50%短縮できます。
 
 -   TiDBのメモリ使用量に関するグローバル制御 [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12)
 
@@ -238,7 +238,7 @@ TiDBバージョン: 6.4.0-DMR
 
     上流から TiDB へシャーディングされたスキーマとテーブルをマージする際、ターゲット テーブルに複数のフィールド (拡張列) を手動で追加し、DM タスクの設定時にその値を指定できます。たとえば、拡張列に上流のシャーディングされたスキーマとテーブルの名前を指定すると、DM によって下流に書き込まれるデータにはスキーマ名とテーブル名が含まれます。下流のデータが通常と異なる場合、この機能を使用して、スキーマ名やテーブル名など、ターゲット テーブル内のデータ ソース情報をすばやく特定できます。
 
-    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます。](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
+    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
 
 -   DMは、必須チェック項目の一部をオプションに変更することで、事前チェックメカニズムを最適化します [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu)
 
@@ -326,7 +326,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### その他 {#others}
 
--   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します。](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステム テーブルを復元しない場合、このエラーは報告されません。
+-   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステム テーブルを復元しない場合、このエラーは報告されません。
 -   名前が「 [Dumplingのエクスポートファイルの形式](/dumpling-overview.md#format-of-exported-files)一致するものの、末尾が非圧縮形式（例`test-schema-create.sql.origin`および`test.table-schema.sql.origin` ）で終わるファイルについては、 TiDB Lightning の処理方法が変更されました。v6.4.0 より前は、インポート対象ファイルにこのようなファイルが含まれている場合、TiDB Lightning はこれらのファイルのインポートをスキップしていました。v6.4.0 以降では、 TiDB Lightning TiDB Lightning はこれらのファイルがサポートされていない圧縮形式を使用しているとみなすため、インポート処理は失敗します。
 -   バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 

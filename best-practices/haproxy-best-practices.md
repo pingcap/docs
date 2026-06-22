@@ -53,7 +53,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 | Linuxディストリビューション      | バージョン         |
 | :-------------------- | :------------ |
 | Red Hat Enterprise Linux   | 7または8         |
-| セントOS                 | 7または8         |
+| CentOS                 | 7または8         |
 | Oracle Enterprise Linux | 7または8         |
 | Ubuntu LTS            | 18.04以降のバージョン |
 

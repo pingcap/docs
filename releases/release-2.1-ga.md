@@ -93,17 +93,17 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     <!---->
 
-    -   [分析の比率を制御するための`auto_analyze_ratio`システム変数を追加します。](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
+    -   [分析の比率を制御するための`auto_analyze_ratio`システム変数を追加します](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
 
-    -   [トランザクションの自動再試行回数を制御するために、 `tidb_retry_limit`システム変数を追加します。](/system-variables.md#tidb_retry_limit)
+    -   [トランザクションの自動再試行回数を制御するために、 `tidb_retry_limit`システム変数を追加します](/system-variables.md#tidb_retry_limit)
 
-    -   [トランザクションが自動的に再試行されるかどうかを制御するには、 `tidb_disable_txn_auto_retry`システム変数を追加します。](/system-variables.md#tidb_disable_txn_auto_retry)
+    -   [トランザクションが自動的に再試行されるかどうかを制御するには、 `tidb_disable_txn_auto_retry`システム変数を追加します](/system-variables.md#tidb_disable_txn_auto_retry)
 
     -   [`admin show slow`ステートメントを使用して遅いクエリを取得できるようにサポートします](/identify-slow-queries.md#admin-show-slow-command)
 
-    -   [`tidb_slow_log_threshold`環境変数を追加して、スローログのしきい値を自動的に設定します。](/system-variables.md#tidb_slow_log_threshold)
+    -   [`tidb_slow_log_threshold`環境変数を追加して、スローログのしきい値を自動的に設定します](/system-variables.md#tidb_slow_log_threshold)
 
-    -   [`tidb_query_log_max_len`環境変数を追加して、ログ内で切り捨てられるSQL文の長さを動的に設定します。](/system-variables.md#tidb_query_log_max_len)
+    -   [`tidb_query_log_max_len`環境変数を追加して、ログ内で切り捨てられるSQL文の長さを動的に設定します](/system-variables.md#tidb_query_log_max_len)
 
 -   DDL
 
@@ -119,7 +119,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します
 
-    -   [`ddl/owner/resign` HTTP インターフェースを使用して DDL 所有者を解放し、新しい DDL 所有者の選出を開始できるようにサポートします。](https://github.com/pingcap/tidb/blob/release-2.1/docs/tidb_http_api.md)
+    -   [`ddl/owner/resign` HTTP インターフェースを使用して DDL 所有者を解放し、新しい DDL 所有者の選出を開始できるようにサポートします](https://github.com/pingcap/tidb/blob/release-2.1/docs/tidb_http_api.md)
 
 -   互換性
 
@@ -127,13 +127,13 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   `BIT`の集計関数が`ALL`パラメータをサポートするようにする
 
-    -   `SHOW PRIVILEGES`ステートメントを支持する
+    -   `SHOW PRIVILEGES`ステートメントをサポートする
 
     -   `LOAD DATA`文の`CHARACTER SET`構文をサポートする
 
     -   `CREATE USER`文の`IDENTIFIED WITH`構文をサポートする
 
-    -   `LOAD DATA IGNORE LINES`ステートメントを支持する
+    -   `LOAD DATA IGNORE LINES`ステートメントをサポートする
 
     -   `Show ProcessList`文はより正確な情報を返す
 
@@ -228,7 +228,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   連続したロールバックレコードを折り畳んで読み取りパフォーマンスを確保します
 
-    -   [`UnsafeDestroyRange` APIを追加して、テーブル/インデックスの削除のためのスペースの収集をサポートします。](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` APIを追加して、テーブル/インデックスの削除のためのスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
 
     -   GCモジュールを分離して書き込みへの影響を軽減する
 
@@ -238,9 +238,9 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   RocksDBの停止を回避するためにスナップショット書き込みプロセスを改善しました
 
-    -   [読み取り要求を処理するための`LocalReader`スレッドを追加し、読み取り要求の遅延を削減します。](https://github.com/tikv/rfcs/pull/17)
+    -   [読み取り要求を処理するための`LocalReader`スレッドを追加し、読み取り要求の遅延を削減します](https://github.com/tikv/rfcs/pull/17)
 
-    -   [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`サポートします。](https://github.com/tikv/rfcs/pull/6)
+    -   [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`サポートします](https://github.com/tikv/rfcs/pull/6)
 
     -   I/Oオーバーヘッドを削減するために統計に従って`Region Split`サポートします
 

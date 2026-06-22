@@ -51,7 +51,7 @@ db = TiDBClient.connect(
 </div>
 <div label="TiDB Self-Managed">
 
-[TiDB Self-Managedのクイックスタート](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)スタートに従って、テスト用にTiDBクラスターをデプロイします。
+[TiDB Self-Managedのクイックスタート](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb/#deploy-a-local-test-cluster)に従って、テスト用にTiDBクラスターをデプロイします。
 
 サンプルコード：
 

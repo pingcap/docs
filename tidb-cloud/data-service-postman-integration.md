@@ -92,4 +92,4 @@ Postman の使用法の詳細については、 [Postmanのドキュメント](h
 
 Postmanに新しい変更を反映させるには、 再度[輸入プロセスに従う](#step-1-import-your-data-app-to-postman)必要があります。Postmanワークスペースではコレクション名が一意であるため、最新のデータアプリを使用して以前にインポートしたものを置き換えるか、最新のデータアプリを新しいコレクションとしてインポートすることができます。
 
-また、Data App を再インポートした後、Postman で[新しくインポートしたアプリのAPIキーを設定します。](#step-2-configure-your-data-app-api-key-in-postman)
+また、Data App を再インポートした後、Postman で[新しくインポートしたアプリのAPIキーを設定します](#step-2-configure-your-data-app-api-key-in-postman)

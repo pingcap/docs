@@ -124,7 +124,7 @@ systemctl start docker
 
 #### ステップ1. TiDB Cloud Starterインスタンスを作成する {#step-1-create-a-tidb-cloud-starter-instance}
 
-1.  [無料のTiDB Cloud Starterインスタンスを作成します。](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance) TiDB Cloud Starterインスタンスに設定した root パスワードを覚えておいてください。
+1.  [無料のTiDB Cloud Starterインスタンスを作成します](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance) TiDB Cloud Starterインスタンスに設定した root パスワードを覚えておいてください。
 2.  後で使用するために、 TiDB Cloud Starterインスタンスのホスト名、ポート番号、およびユーザー名を取得してください。
 
     1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。

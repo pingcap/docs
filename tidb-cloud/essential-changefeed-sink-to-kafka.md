@@ -46,7 +46,7 @@ TiDB Cloud Essentialは現在、セルフホスト型Kafka、Confluent Cloud Ded
 
 Kafkaのデプロイメントとクラウドプロバイダーに基づいてプライベートリンク接続を設定するには、以下のガイドを参照してください。
 
--   [プライベートリンク接続を介してAWS上のConfluent Cloudに接続します。](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+-   [プライベートリンク接続を介してAWS上のConfluent Cloudに接続します](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
 -   [プライベートリンク接続を介してAWSセルフホスト型Kafkaに接続します](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 -   [プライベートリンク接続を介してAlibaba Cloudセルフホスト型Kafkaに接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
 -   [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)

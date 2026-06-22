@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 2.1.11
 -   `unix_timestamp()-unix_timestamp(now())` [＃10491](https://github.com/pingcap/tidb/pull/10491)の計算エラーを修正
 -   MySQL 8.0 [＃10501](https://github.com/pingcap/tidb/pull/10501)との`period_diff`互換性の問題を修正
 -   例外を回避するために統計を収集するときに`Virtual Column`スキップする[＃10628](https://github.com/pingcap/tidb/pull/10628)
--   `SHOW OPEN TABLES`ステートメント[＃10374](https://github.com/pingcap/tidb/pull/10374)支持する
+-   `SHOW OPEN TABLES`ステートメント[＃10374](https://github.com/pingcap/tidb/pull/10374)サポートする
 -   場合によっては goroutine リークが発生する可能性がある問題を修正[＃10656](https://github.com/pingcap/tidb/pull/10656)
 -   `tidb_snapshot`変数を設定すると、場合によっては時間形式[＃10637](https://github.com/pingcap/tidb/pull/10637)の解析が正しく行われない可能性がある問題を修正しました。
 

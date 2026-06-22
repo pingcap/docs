@@ -254,7 +254,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
 
--   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
+-   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
     -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
     -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。

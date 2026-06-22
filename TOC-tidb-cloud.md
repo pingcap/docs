@@ -133,7 +133,7 @@
     -   リソース割り当ての最適化
         -   [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
         -   リソースマネージャー
-            -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)
+            -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)
             -   [暴走クエリの管理](/tidb-resource-control-runaway-queries.md)
             -   [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)
         -   TiDBノードグループ

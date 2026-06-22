@@ -85,7 +85,7 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取るように
     -   クラスターレベルでのPrometheus統合については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
     -   従来のプロジェクトレベルでのPrometheus統合（ベータ版）については、 [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)GrafanaダッシュボードJSONファイルをダウンロードしてください。
 
-2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください。](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
+2.  メトリクスを視覚化するには、 [このJSONをGrafana GUIにインポートしてください](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)
 
     > **注記：**
     >
