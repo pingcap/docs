@@ -1214,9 +1214,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `3`
 - Range: `[1, 2147483647]`
-- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at 1. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at `1`. Starting from v8.5.7, the default value changes from `1` to `3`; upgraded clusters keep the persisted global variable value. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
 
 ### tidb_auto_analyze_end_time
 
@@ -1277,9 +1277,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- This variable is used to set the concurrency of executing the automatic update of statistics. Starting from v8.5.7, the default value changes from `1` to `2`; upgraded clusters keep the persisted global variable value.
 
 ### tidb_backoff_lock_fast
 
@@ -6344,8 +6344,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
-- Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Default value: `4`
+- Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. Starting from v8.5.7, the default value changes from `1` to `4`; upgraded clusters keep the persisted global variable value. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
