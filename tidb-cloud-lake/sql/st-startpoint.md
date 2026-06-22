@@ -5,10 +5,6 @@ summary: Returns the first Point in a LineString.
 
 # ST_STARTPOINT
 
-> **Note:**
->
-> Introduced or updated in v1.2.458.
-
 Returns the first Point in a LineString.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Returns the maximum value from a set of values, ignoring any NULL value
 
 # LEAST_IGNORE_NULLS
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 Returns the maximum value from a set of values, ignoring any NULL values.
 
 See also: [LEAST](/tidb-cloud-lake/sql/least.md)

@@ -5,10 +5,6 @@ summary: INTERVAL represents a duration that can be written in natural-language 
 
 # Interval
 
-> **Note:**
->
-> Introduced or updated in v1.2.677.
-
 ## Overview
 
 `INTERVAL` represents a duration that can be written in natural-language text (`'1 year 2 months'`, `'3 days ago'`) or as an integer number of microseconds. {{{ .lake }}} supports units from millennia down to microseconds and allows arithmetic on intervals, dates, and timestamps.

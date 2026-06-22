@@ -5,10 +5,6 @@ summary: Returns the geohash string for a GEOMETRY or GEOGRAPHY value and suppor
 
 # ST_GEOHASH
 
-> **Note:**
->
-> Introduced or updated in v1.2.436.
-
 Return the [geohash](https://en.wikipedia.org/wiki/Geohash) for a GEOMETRY or GEOGRAPHY object. A geohash is a short base32 string that identifies a geodesic rectangle containing a location in the world. The optional precision argument specifies the `precision` of the returned geohash. For example, passing 5 for `precision returns a shorter geohash (5 characters long) that is less precise.
 
 ## Syntax

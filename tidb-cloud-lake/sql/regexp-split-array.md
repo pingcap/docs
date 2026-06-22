@@ -5,10 +5,6 @@ summary: Splits a string using a regular expression pattern and returns the segm
 
 # REGEXP_SPLIT_TO_ARRAY
 
-> **Note:**
->
-> Introduced or updated in v1.2.756.
-
 Splits a string using a regular expression pattern and returns the segments as an array.
 
 ## Syntax
@@ -24,6 +20,7 @@ REGEXP_SPLIT_TO_ARRAY(string, pattern [, flags text])
 | `flags text` | A string of flags to modify the regular expression's behavior. |
 
 **Supported `flags` Parameter:**
+
 Provides flexible regular expression configuration options, controlling matching behavior by combining the following characters:
 
 * `i` (case-insensitive): Pattern matching ignores case.

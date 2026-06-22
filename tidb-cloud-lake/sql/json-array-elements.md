@@ -5,10 +5,6 @@ summary: Extracts the elements from a JSON array, returning them as individual r
 
 # JSON_ARRAY_ELEMENTS
 
-> **Note:**
->
-> Introduced or updated in v1.2.152.
-
 Extracts the elements from a JSON array, returning them as individual rows in the result set. JSON_ARRAY_ELEMENTS does not recursively expand nested arrays; it treats them as single elements.
 
 ## Syntax

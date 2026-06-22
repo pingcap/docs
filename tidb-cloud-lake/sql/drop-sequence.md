@@ -5,10 +5,6 @@ summary: Deletes an existing sequence from {{{ .lake }}}.
 
 # DROP SEQUENCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.426.
-
 Deletes an existing sequence from {{{ .lake }}}.
 
 ## Syntax

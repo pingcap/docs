@@ -5,10 +5,6 @@ summary: Login successful example sql SELECT * FROM system_history.login_history
 
 # system_history.login_history
 
-> **Note:**
->
-> Introduced or updated in v1.2.764.
-
 **Authentication security audit** - Comprehensive logging of all user login attempts (successful and failed). Critical for:
 
 - **Security Monitoring**: Detect brute force attacks and unauthorized access attempts

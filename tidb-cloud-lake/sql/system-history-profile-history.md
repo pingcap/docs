@@ -5,10 +5,6 @@ summary: The profiles field can be used to extract specific information. For exa
 
 # system_history.profile_history
 
-> **Note:**
->
-> Introduced or updated in v1.2.764.
-
 **Query performance deep-dive analytics** - Detailed execution profiles and statistics for every SQL query. Essential for:
 
 - **Performance Optimization**: Identify bottlenecks and optimize slow queries

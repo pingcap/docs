@@ -5,10 +5,6 @@ summary: Converts key-value pairs into a JSON object. For each row in the input,
 
 # JSON_OBJECT_AGG
 
-> **Note:**
->
-> Introduced or updated in v1.2.611.
-
 Converts key-value pairs into a JSON object. For each row in the input, it generates a key-value pair where the key is derived from the `<key_expression>` and the value is derived from the `<value_expression>`. These key-value pairs are then combined into a single JSON object.
 
 See also: [JSON_ARRAY_AGG](/tidb-cloud-lake/sql/json-array-agg.md)

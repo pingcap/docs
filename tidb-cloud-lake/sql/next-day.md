@@ -5,10 +5,6 @@ summary: Returns the date of the upcoming specified day of the week after the gi
 
 # NEXT_DAY
 
-> **Note:**
->
-> Introduced or updated in v1.2.655.
-
 Returns the date of the upcoming specified day of the week after the given date or timestamp.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} stores data in strongly typed columns. This page summari
 
 # Data Types
 
-> **Note:**
->
-> Introduced or updated in v1.2.100.
-
 {{{ .lake }}} stores data in strongly typed columns. This page summarizes the supported data types, how automatic/explicit conversions work, and what happens with NULL or default values.
 
 ## Foundational Types

@@ -5,10 +5,6 @@ summary: Returns the snapshot tags of a table. For more information about snapsh
 
 # FUSE_TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.894.
-
 Returns the snapshot tags of a table. For more information about snapshot tags, see [Snapshot Tags](/tidb-cloud-lake/sql/table-versioning.md#snapshot-tags).
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Returns the part of the first GEOMETRY object that is not covered by th
 
 # ST_DIFFERENCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the part of the first GEOMETRY object that is not covered by the second GEOMETRY object.
 
 This function only supports GEOMETRY values.

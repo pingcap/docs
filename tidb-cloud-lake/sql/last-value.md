@@ -5,10 +5,6 @@ summary: Returns the last value in the window frame.
 
 # LAST_VALUE
 
-> **Note:**
->
-> Introduced or updated in v1.2.697.
-
 Returns the last value in the window frame.
 
 See also:

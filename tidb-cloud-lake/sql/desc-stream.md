@@ -5,10 +5,6 @@ summary: Describes the details of a specific stream.
 
 # DESC STREAM
 
-> **Note:**
->
-> Introduced or updated in v1.2.223.
-
 Describes the details of a specific stream.
 
 ## Syntax

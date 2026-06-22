@@ -5,10 +5,6 @@ summary: Return the dimension for a geometry object. The dimension of a GEOMETRY
 
 # ST_DIMENSION
 
-> **Note:**
->
-> Introduced or updated in v1.2.442.
-
 Return the dimension for a geometry object. The dimension of a GEOMETRY or GEOGRAPHY object is:
 
 | Geospatial Object Type       | Dimension  |

@@ -5,10 +5,6 @@ summary: Removes all occurrences of any character present in the specified trim 
 
 # LTRIM
 
-> **Note:**
->
-> Introduced or updated in v1.2.694.
-
 Removes all occurrences of any character present in the specified trim string from the left side of the string.
 
 See also:

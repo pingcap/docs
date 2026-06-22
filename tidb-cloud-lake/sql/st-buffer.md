@@ -5,10 +5,6 @@ summary: Returns a GEOMETRY representing all points whose distance from the inpu
 
 # ST_BUFFER
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns a GEOMETRY representing all points whose distance from the input geometry is less than or equal to the specified distance. The result is a MultiPolygon or NULL.
 
 ## Syntax

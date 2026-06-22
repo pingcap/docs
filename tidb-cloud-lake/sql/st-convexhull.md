@@ -5,10 +5,6 @@ summary: Returns the convex hull of a GEOMETRY object.
 
 # ST_CONVEXHULL
 
-> **Note:**
->
-> Introduced or updated in v1.2.564.
-
 Returns the convex hull of a GEOMETRY object.
 
 ## Syntax

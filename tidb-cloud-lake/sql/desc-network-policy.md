@@ -5,10 +5,6 @@ summary: Displays detailed information about a specific network policy in {{{ .l
 
 # DESC NETWORK POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.26.
-
 Displays detailed information about a specific network policy in {{{ .lake }}}. It provides information about the allowed and blocked IP address lists associated with the policy and the comment, if any, that describes the purpose or function of the policy.
 
 ## Syntax

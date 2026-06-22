@@ -5,10 +5,6 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a GeoJSON representation.
 
 # ST_ASGEOJSON
 
-> **Note:**
->
-> Introduced or updated in v1.2.427.
-
 Converts a GEOMETRY or GEOGRAPHY object into a [GeoJSON](https://geojson.org/) representation.
 
 ## Syntax
@@ -60,4 +56,5 @@ SELECT
 │                pipeline_geojson                │
 ├────────────────────────────────────────────────┤
 │ {"coordinates":[-122.35,37.55],"type":"Point"} │
-╰────────────────────────────────────────────────╯```
+╰────────────────────────────────────────────────╯
+```

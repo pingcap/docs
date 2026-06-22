@@ -5,10 +5,6 @@ summary: Retrieves the designated portion of a date, timestamp, or interval.
 
 # EXTRACT
 
-> **Note:**
->
-> Introduced or updated in v1.2.723.
-
 Retrieves the designated portion of a date, timestamp, or interval.
 
 See also: [DATE_PART](/tidb-cloud-lake/sql/date-part.md)

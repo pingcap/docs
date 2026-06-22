@@ -5,10 +5,6 @@ summary: Limits the maximum number of rows returned by a query.
 
 # TOP
 
-> **Note:**
->
-> Introduced or updated in v1.2.435.
-
 Limits the maximum number of rows returned by a query.
 
 See also: [Limit Clause](/tidb-cloud-lake/sql/select.md#limit-clause)

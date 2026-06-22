@@ -5,10 +5,6 @@ summary: Removes a tag. A tag cannot be dropped if it is still referenced by any
 
 # DROP TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.863.
-
 Removes a tag. A tag cannot be dropped if it is still referenced by any object — you must first unset the tag from all objects or drop those objects.
 
 See also: [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md), [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md).

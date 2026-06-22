@@ -5,10 +5,6 @@ summary: Converts a specified number of seconds into an Interval type.
 
 # TO_SECONDS
 
-> **Note:**
->
-> Introduced or updated in v1.2.677.
-
 Converts a specified number of seconds into an Interval type.
 
 - Accepts positive integers, zero, and negative integers as input.

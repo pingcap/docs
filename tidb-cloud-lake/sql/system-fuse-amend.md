@@ -5,10 +5,6 @@ summary: Recovers table data from S3-compatible object storage.
 
 # SYSTEM$FUSE_AMEND
 
-> **Note:**
->
-> Introduced or updated in v1.2.609.
-
 Recovers table data from S3-compatible object storage.
 
 ## Syntax

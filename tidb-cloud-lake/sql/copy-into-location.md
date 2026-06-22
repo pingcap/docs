@@ -5,10 +5,6 @@ summary: COPY INTO allows you to unload data from a table or query into one or m
 
 # `COPY INTO <location>`
 
-> **Note:**
->
-> Introduced or updated in v1.2.881.
-
 COPY INTO allows you to unload data from a table or query into one or more files in one of the following locations:
 
 - User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) to learn about stages in {{{ .lake }}}.

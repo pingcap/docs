@@ -5,10 +5,6 @@ summary: Lists tag definitions in the current tenant.
 
 # SHOW TAGS
 
-> **Note:**
->
-> Introduced or updated in v1.2.863.
-
 Lists tag definitions in the current tenant. You can also query tag definitions through the `system.tags` table.
 
 See also: [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md), [DROP TAG](/tidb-cloud-lake/sql/drop-tag.md).

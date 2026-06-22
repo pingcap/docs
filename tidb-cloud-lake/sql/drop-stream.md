@@ -5,10 +5,6 @@ summary: Deletes an existing stream.
 
 # DROP STREAM
 
-> **Note:**
->
-> Introduced or updated in v1.2.223.
-
 Deletes an existing stream.
 
 ## Syntax

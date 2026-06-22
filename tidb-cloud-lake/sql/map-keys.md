@@ -5,10 +5,6 @@ summary: Returns the keys in a map.
 
 # MAP_KEYS
 
-> **Note:**
->
-> Introduced or updated in v1.2.429.
-
 Returns the keys in a map.
 
 ## Syntax

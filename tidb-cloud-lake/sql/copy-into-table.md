@@ -5,10 +5,6 @@ summary: COPY INTO allows you to load data from files located in one of the foll
 
 # `COPY INTO <table>`
 
-> **Note:**
->
-> Introduced or updated in v1.2.704.
-
 COPY INTO allows you to load data from files located in one of the following locations:
 
 - User / Internal / External stages: See [What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) to learn about stages in {{{ .lake }}}.

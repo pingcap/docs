@@ -5,10 +5,6 @@ summary: Removes all occurrences of an element from an array.
 
 # ARRAY_REMOVE
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Removes all occurrences of an element from an array.
 
 ## Syntax

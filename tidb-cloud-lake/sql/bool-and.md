@@ -5,10 +5,6 @@ summary: Returns true if all input values are true, otherwise false.
 
 # bool_and
 
-> **Note:**
->
-> Introduced or updated in v1.2.756.
-
 Returns true if all input values are true, otherwise false.
 
 - NULL values are ignored.

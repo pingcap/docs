@@ -5,10 +5,6 @@ summary: Lists the dropped tables in the current or a specified database.
 
 # SHOW DROP TABLES
 
-> **Note:**
->
-> Introduced or updated in v1.2.203.
-
 Lists the dropped tables in the current or a specified database.
 
 See also: [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)

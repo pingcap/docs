@@ -5,10 +5,6 @@ summary: Creates a new tag with optional allowed values and comment.
 
 # CREATE TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.863.
-
 Creates a new tag. Tags are tenant-level metadata objects that can be assigned to database objects for governance and classification.
 
 See also: [DROP TAG](/tidb-cloud-lake/sql/drop-tag.md), [SHOW TAGS](/tidb-cloud-lake/sql/show-tags.md), [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md).

@@ -5,10 +5,6 @@ summary: Returns a GEOMETRY object for the point that represents center of a geo
 
 # ST_GEOMPOINTFROMGEOHASH
 
-> **Note:**
->
-> Introduced or updated in v1.2.413.
-
 Returns a GEOMETRY object for the point that represents center of a [geohash](https://en.wikipedia.org/wiki/Geohash).
 
 ## Syntax

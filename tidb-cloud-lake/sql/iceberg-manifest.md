@@ -5,10 +5,6 @@ summary: Returns metadata about manifest files of an Iceberg table, including fi
 
 # ICEBERG_MANIFEST
 
-> **Note:**
->
-> Introduced or updated in v1.2.709.
-
 Returns metadata about manifest files of an Iceberg table, including file paths, partitioning details, and snapshot associations.
 
 ## Syntax

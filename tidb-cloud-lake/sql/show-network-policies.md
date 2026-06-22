@@ -5,10 +5,6 @@ summary: Displays a list of all existing network policies in {{{ .lake }}}. It p
 
 # SHOW NETWORK POLICIES
 
-> **Note:**
->
-> Introduced or updated in v1.2.26.
-
 Displays a list of all existing network policies in {{{ .lake }}}. It provides information about the available network policies, including their names and whether they have any allowed or blocked IP address lists configured.
 
 ## Syntax

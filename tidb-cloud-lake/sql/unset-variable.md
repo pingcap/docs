@@ -5,10 +5,6 @@ summary: Removes one or more variables from the current session.
 
 # UNSET VARIABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.609.
-
 Removes one or more variables from the current session.
 
 ## Syntax

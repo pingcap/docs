@@ -5,10 +5,6 @@ summary: Generates a data distribution histogram using an "equal height" bucketi
 
 # HISTOGRAM
 
-> **Note:**
->
-> Introduced or updated in v1.2.377.
-
 Generates a data distribution histogram using an "equal height" bucketing strategy.
 
 ## Syntax

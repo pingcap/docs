@@ -5,10 +5,6 @@ summary: Returns the minimum distance between two objects. For GEOMETRY inputs, 
 
 # ST_DISTANCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.555.
-
 Returns the minimum distance between two objects. For GEOMETRY inputs, the function uses [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance). For GEOGRAPHY inputs, the function uses [haversine distance](https://en.wikipedia.org/wiki/Haversine_formula).
 
 ## Syntax

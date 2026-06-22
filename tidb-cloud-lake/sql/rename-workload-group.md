@@ -5,10 +5,6 @@ summary: Renames an existing workload group to a new name.
 
 # RENAME WORKLOAD GROUP
 
-> **Note:**
->
-> Introduced or updated in v1.2.743.
-
 Renames an existing workload group to a new name.
 
 ## Syntax

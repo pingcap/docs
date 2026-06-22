@@ -5,10 +5,6 @@ summary: The SETTINGS clause configures specific settings that influence the exe
 
 # SETTINGS Clause
 
-> **Note:**
->
-> Introduced or updated in v1.2.652.
-
 The SETTINGS clause configures specific settings that influence the execution behavior of the SQL statement it precedes. To view the available settings in {{{ .lake }}} and their values, use [SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md).
 
 See also: [SET](/tidb-cloud-lake/sql/set.md)

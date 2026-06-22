@@ -5,10 +5,6 @@ summary: Returns TRUE if two GEOMETRY objects do not intersect.
 
 # ST_DISJOINT
 
-> **Note:**
->
-> Introduced or updated in v1.2.564.
-
 Returns TRUE if two GEOMETRY objects do not intersect.
 
 ## Syntax

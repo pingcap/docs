@@ -5,10 +5,6 @@ summary: Checks if the input JSON value is a string.
 
 # IS_STRING
 
-> **Note:**
->
-> Introduced or updated in v1.2.368.
-
 Checks if the input JSON value is a string.
 
 ## Syntax

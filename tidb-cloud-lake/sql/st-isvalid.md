@@ -5,10 +5,6 @@ summary: Returns TRUE if the GEOMETRY object is geometrically valid as defined b
 
 # ST_ISVALID
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns TRUE if the GEOMETRY object is geometrically valid as defined by the OGC specification.
 
 ## Syntax

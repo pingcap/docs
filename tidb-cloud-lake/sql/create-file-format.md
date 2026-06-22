@@ -5,10 +5,6 @@ summary: Create a named file format.
 
 # CREATE FILE FORMAT
 
-> **Note:**
->
-> Introduced or updated in v1.2.339.
-
 Create a named file format.
 
 ## Syntax

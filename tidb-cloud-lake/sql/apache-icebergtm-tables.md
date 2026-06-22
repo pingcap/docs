@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} supports the integration of an Apache Iceberg™ catalog
 
 # Apache Iceberg™ Tables
 
-> **Note:**
->
-> Introduced or updated in v1.2.725.
-
 {{{ .lake }}} supports the integration of an [Apache Iceberg™](https://iceberg.apache.org/) catalog, enhancing its compatibility and versatility for data management and analytics. This extends {{{ .lake }}}'s capabilities by seamlessly incorporating the powerful metadata and storage management capabilities of Apache Iceberg™ into the platform.
 
 ## Quick Start with Iceberg

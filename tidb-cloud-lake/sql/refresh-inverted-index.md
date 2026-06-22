@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} automatically refreshes inverted indexes in SYNC mode wh
 
 # REFRESH INVERTED INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.405.
-
 {{{ .lake }}} automatically refreshes inverted indexes in `SYNC` mode whenever new data is written. Use `REFRESH INVERTED INDEX` primarily to backfill rows that existed before the index was declared.
 
 ## Syntax

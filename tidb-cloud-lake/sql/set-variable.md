@@ -5,10 +5,6 @@ summary: Sets the value of one or more SQL variables within a session. The value
 
 # SET VARIABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.609.
-
 Sets the value of one or more SQL variables within a session. The values can be simple constants, expressions, query results, or database objects. Variables persist for the duration of your session and can be used in subsequent queries.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Returns the shared part of two GEOMETRY objects.
 
 # ST_INTERSECTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the shared part of two GEOMETRY objects.
 
 This function only supports GEOMETRY values.

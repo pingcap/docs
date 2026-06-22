@@ -5,10 +5,6 @@ summary: Connection parameters are key-value pairs you supply when creating reus
 
 # Connection Parameters
 
-> **Note:**
->
-> Introduced or updated in v1.2.294.
-
 Connection parameters are key-value pairs you supply when creating reusable connections with `CREATE CONNECTION`. After a connection is created, reference it from stages, COPY commands, and other SQL features by using `CONNECTION = (CONNECTION_NAME = '<connection-name>')`. For full syntax and usage, see [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md).
 
 For storage-specific connection details, see the tables below.
@@ -118,9 +114,7 @@ The following table lists connection parameters for accessing Google Cloud Stora
 |----------------|-------------|-------------------------------------------------------|
 | credential     | Yes         | Google Cloud Storage credential for authentication.   |
 
-To get the `credential`, you could follow the topic [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete#creating)
-from the Google documentation to create and download a service account key file. After downloading the service account key file, you could
-convert it into a base64 string via the following command:
+To get the `credential`, you could follow the topic [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete#creating) from the Google documentation to create and download a service account key file. After downloading the service account key file, you could convert it into a base64 string via the following command:
 
 ```
 base64 -i -o ~/Desktop/base64-encoded-key.txt

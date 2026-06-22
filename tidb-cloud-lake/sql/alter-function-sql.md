@@ -5,10 +5,6 @@ summary: Alters an external function.
 
 # ALTER FUNCTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.116.
-
 Alters an external function.
 
 ## Syntax

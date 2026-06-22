@@ -5,10 +5,6 @@ summary: Converts values into a JSON array while skipping NULLs.
 
 # JSON_ARRAY_AGG
 
-> **Note:**
->
-> Introduced or updated in v1.2.595.
-
 Converts values into a JSON array while skipping NULLs.
 
 See also: [JSON_OBJECT_AGG](/tidb-cloud-lake/sql/json-object-agg.md)

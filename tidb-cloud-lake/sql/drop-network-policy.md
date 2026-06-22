@@ -5,10 +5,6 @@ summary: Deletes an existing network policy from {{{ .lake }}}. When you drop a 
 
 # DROP NETWORK POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.26.
-
 Deletes an existing network policy from {{{ .lake }}}. When you drop a network policy, it is removed from {{{ .lake }}}, and its associated rules for allowed and blocked IP address lists are no longer in effect. Please note that, before dropping a network policy, ensure that this policy is not associated with any users.
 
 ## Syntax

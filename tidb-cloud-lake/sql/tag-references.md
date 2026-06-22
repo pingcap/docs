@@ -5,10 +5,6 @@ summary: Returns all tags assigned to a specified database object.
 
 # TAG_REFERENCES
 
-> **Note:**
->
-> Introduced or updated in v1.2.866.
-
 Returns all tags assigned to a specified database object. Use this function to audit tag assignments for governance and compliance.
 
 See also: [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md).

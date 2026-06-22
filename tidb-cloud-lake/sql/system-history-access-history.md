@@ -5,10 +5,6 @@ summary: The fields base_objects_accessed, objects_modified, and object_modified
 
 # system_history.access_history
 
-> **Note:**
->
-> Introduced or updated in v1.2.764.
-
 **Data lineage and access control audit** - Tracks all database objects (tables, columns, stages) accessed or modified by queries. Essential for:
 
 - **Data Lineage**: Understand data flow and dependencies across your database

@@ -5,10 +5,6 @@ summary: Lists the currently supported built-in scalar and aggregate functions.
 
 # SHOW FUNCTIONS
 
-> **Note:**
->
-> Introduced or updated in v1.2.315.
-
 Lists the currently supported built-in scalar and aggregate functions.
 
 See also: [system.functions](/tidb-cloud-lake/sql/system-functions.md)

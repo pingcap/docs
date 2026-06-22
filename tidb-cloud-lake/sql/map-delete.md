@@ -5,10 +5,6 @@ summary: Returns an existing MAP with one or more keys removed.
 
 # MAP_DELETE
 
-> **Note:**
->
-> Introduced or updated in v1.2.547.
-
 Returns an existing MAP with one or more keys removed.
 
 ## Syntax

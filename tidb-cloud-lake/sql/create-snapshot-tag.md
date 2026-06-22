@@ -5,10 +5,6 @@ summary: Creates a named snapshot tag on a FUSE table, allowing you to bookmark 
 
 # CREATE SNAPSHOT TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.891.
-
 Creates a named snapshot tag on a FUSE table. A snapshot tag bookmarks a specific point-in-time state of the table, allowing you to query that state later with the [AT](/tidb-cloud-lake/sql/at.md) clause.
 
 > **Note:**

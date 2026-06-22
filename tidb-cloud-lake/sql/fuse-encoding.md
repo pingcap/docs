@@ -5,10 +5,6 @@ summary: Returns the encoding types applied to a specific column within a table.
 
 # FUSE_ENCODING
 
-> **Note:**
->
-> Introduced or updated in v1.2.162.
-
 Returns the encoding types applied to a specific column within a table. It helps you understand how data is compressed and stored in a native format within the table.
 
 ## Syntax

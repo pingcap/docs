@@ -5,10 +5,6 @@ summary: Returns the index of the first occurrence of an element in an array.
 
 # ARRAY_INDEXOF
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Returns the index of the first occurrence of an element in an array.
 
 ## Syntax

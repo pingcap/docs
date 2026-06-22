@@ -5,10 +5,6 @@ summary: Converts a value to String data type, or converts a Date value to a spe
 
 # TO_STRING
 
-> **Note:**
->
-> Introduced or updated in v1.2.745.
-
 Converts a value to String data type, or converts a Date value to a specific string format. To customize the format of date and time in {{{ .lake }}}, you can utilize specifiers. These specifiers allow you to define the desired format for date and time values. For a comprehensive list of supported specifiers, see [Formatting Date and Time](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time).
 
 ## Syntax
@@ -140,3 +136,4 @@ SELECT
 │ 12/25/2022                        │ 12/25/2022                        │
 
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```

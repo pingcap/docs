@@ -5,10 +5,6 @@ summary: Encodes a GEOMETRY or GEOGRAPHY object into a Hilbert curve index.
 
 # ST_HILBERT
 
-> **Note:**
->
-> Introduced or updated in v1.2.885.
-
 Encodes a GEOMETRY or GEOGRAPHY object into a Hilbert curve index. The function uses the center of the geometry's bounding box as the point to encode. When bounds are provided, the point is normalized into the specified bounding box before encoding.
 
 ## Syntax

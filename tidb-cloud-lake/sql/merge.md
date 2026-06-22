@@ -5,10 +5,6 @@ summary: Performs INSERT, UPDATE, or DELETE operations on rows within a target t
 
 # MERGE
 
-> **Note:**
->
-> Introduced or updated in v1.2.241.
-
 Performs **INSERT**, **UPDATE**, or **DELETE** operations on rows within a target table, all in accordance with conditions and matching criteria specified within the statement, using data from a specified source.
 
 The data source, which can be a subquery, is linked to the target data via a JOIN expression. This expression assesses whether each row in the source can find a match in the target table and then determines which type of clause (MATCHED or NOT MATCHED) it should move to in the next execution step.

@@ -5,10 +5,6 @@ summary: Returns TRUE if no point in the second GEOMETRY object lies outside the
 
 # ST_COVERS
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns TRUE if no point in the second GEOMETRY object lies outside the first GEOMETRY object.
 
 See also: [ST_COVEREDBY](/tidb-cloud-lake/sql/st-coveredby.md)

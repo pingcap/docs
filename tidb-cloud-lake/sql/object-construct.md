@@ -5,10 +5,6 @@ summary: Creates a JSON object with keys and values.
 
 # OBJECT_CONSTRUCT
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Creates a JSON object with keys and values.
 
 - The arguments are zero or more key-value pairs(where keys are strings, and values are of any type).

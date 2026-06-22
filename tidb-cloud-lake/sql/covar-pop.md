@@ -5,10 +5,6 @@ summary: Returns the population covariance of a set of number pairs.
 
 # COVAR_POP
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 Returns the population covariance of a set of number pairs.
 
 ## Syntax

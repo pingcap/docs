@@ -5,10 +5,6 @@ summary: Converts an expression to a date, including.
 
 # TO_DATE
 
-> **Note:**
->
-> Introduced or updated in v1.1.39.
-
 Converts an expression to a date, including:
 
 - **Converting a timestamp-format string to a date**: Extracts a date from the given string.

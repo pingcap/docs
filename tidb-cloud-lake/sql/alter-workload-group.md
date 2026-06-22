@@ -5,10 +5,6 @@ summary: Update a workload group with specified quota settings.
 
 # ALTER WORKLOAD GROUP
 
-> **Note:**
->
-> Introduced or updated in v1.2.743.
-
 Update a workload group with specified quota settings.
 
 ## Syntax

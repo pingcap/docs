@@ -5,10 +5,6 @@ summary: Displays detailed information about a specific masking policy in {{{ .l
 
 # DESC MASKING POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Displays detailed information about a specific masking policy in {{{ .lake }}}.
 
 ## Syntax

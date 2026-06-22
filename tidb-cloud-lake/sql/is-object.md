@@ -5,10 +5,6 @@ summary: Checks if the input value is a JSON object.
 
 # IS_OBJECT
 
-> **Note:**
->
-> Introduced or updated in v1.2.368.
-
 Checks if the input value is a JSON object.
 
 ## Syntax

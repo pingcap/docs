@@ -5,10 +5,6 @@ summary: Note This table contains raw log data that feeds into other specialized
 
 # system_history.log_history
 
-> **Note:**
->
-> Introduced or updated in v1.2.764.
-
 **System operations audit trail** - Raw log repository from all {{{ .lake }}} nodes and components. Foundation for operational intelligence:
 
 - **System Monitoring**: Track system health, performance, and resource usage

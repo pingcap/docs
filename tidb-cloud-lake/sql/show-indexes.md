@@ -5,10 +5,6 @@ summary: Shows the created indexes. Equivalent to SELECT * FROM system.indexes.
 
 # SHOW INDEXES
 
-> **Note:**
->
-> Introduced or updated in v1.2.190.
-
 Shows the created indexes. Equivalent to `SELECT * FROM system.indexes`.
 
 See also: [system.indexes](/tidb-cloud-lake/sql/system-indexes.md)

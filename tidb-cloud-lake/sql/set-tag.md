@@ -5,10 +5,6 @@ summary: Assigns or removes tags on database objects.
 
 # SET TAG and UNSET TAG
 
-> **Note:**
->
-> Introduced or updated in v1.2.866.
-
 Assigns or removes tags on database objects. Tags must be created with [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) before they can be assigned.
 
 See also: [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md), [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md).

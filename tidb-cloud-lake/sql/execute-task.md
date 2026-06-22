@@ -5,10 +5,6 @@ summary: The EXECUTE TASK statement is used to execute an existing task manually
 
 # EXECUTE TASK
 
-> **Note:**
->
-> Introduced or updated in v1.2.371.
-
 The EXECUTE TASK statement is used to execute an existing task manually
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

@@ -5,10 +5,6 @@ summary: Returns the combined GEOMETRY made from two input GEOMETRY objects.
 
 # ST_UNION
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the combined GEOMETRY made from two input GEOMETRY objects.
 
 This function only supports GEOMETRY values.

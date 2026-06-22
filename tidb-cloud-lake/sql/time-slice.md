@@ -5,10 +5,6 @@ summary: TIME_SLICE is a scalar function used to map a single date/timestamp val
 
 # TIME_SLICE
 
-> **Note:**
->
-> Introduced or updated in v1.2.799.
-
 TIME_SLICE is a scalar function used to map a single date/timestamp value to a fixed calendar interval (slice or bucket).
 
 It returns the boundary (starting or ending point) of the calendar interval containing the time point, and is often used to group, aggregate and report time series data by custom calendar periods, such as summarizing by a 2-week, 3-month or 15-minute window.

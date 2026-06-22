@@ -5,10 +5,6 @@ summary: Returns true if at least one input value is true, otherwise false.
 
 # bool_or
 
-> **Note:**
->
-> Introduced or updated in v1.2.756.
-
 Returns true if at least one input value is true, otherwise false
 
 - NULL values are ignored.

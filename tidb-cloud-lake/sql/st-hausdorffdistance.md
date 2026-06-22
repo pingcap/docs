@@ -5,10 +5,6 @@ summary: Returns the discrete Hausdorff distance between two GEOMETRY objects. T
 
 # ST_HAUSDORFFDISTANCE
 
-> **Note:**
->
-> Introduced or updated in v1.2.911.
-
 Returns the discrete Hausdorff distance between two GEOMETRY objects. This measures how far apart two geometries are by finding the greatest distance from any vertex in one object to the nearest vertex in the other.
 
 ## Syntax

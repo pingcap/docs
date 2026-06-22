@@ -5,10 +5,6 @@ summary: Converts a GEOMETRY object from one spatial reference system (SRS) to a
 
 # ST_TRANSFORM
 
-> **Note:**
->
-> Introduced or updated in v1.2.606.
-
 Converts a GEOMETRY object from one [spatial reference system (SRS)](https://en.wikipedia.org/wiki/Spatial_reference_system) to another. If you just need to change the SRID without changing the coordinates (e.g. if the SRID was incorrect), use [ST_SETSRID](/tidb-cloud-lake/sql/st-setsrid.md) instead.
 
 ## Syntax

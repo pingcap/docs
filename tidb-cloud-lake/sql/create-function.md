@@ -5,10 +5,6 @@ summary: Creates an external function that calls a remote handler over Flight (t
 
 # CREATE FUNCTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.339.
-
 Creates an external function that calls a remote handler over Flight (typically Python or other services).
 
 ## Supported Languages

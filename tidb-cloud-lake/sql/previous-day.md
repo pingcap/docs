@@ -5,10 +5,6 @@ summary: Returns the date of the most recent specified day of the week before th
 
 # PREVIOUS_DAY
 
-> **Note:**
->
-> Introduced or updated in v1.2.655.
-
 Returns the date of the most recent specified day of the week before the given date or timestamp.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Executes a stored procedure by calling its name, optionally passing arg
 
 # CALL PROCEDURE
 
-> **Note:**
->
-> Introduced or updated in v1.2.637.
-
 Executes a stored procedure by calling its name, optionally passing arguments if the procedure requires them.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} automatically refreshes NGRAM indexes when data is inges
 
 # REFRESH NGRAM INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.726.
-
 {{{ .lake }}} automatically refreshes NGRAM indexes when data is ingested. Use `REFRESH NGRAM INDEX` when you need to backfill data that existed before the index was defined.
 
 ## Syntax

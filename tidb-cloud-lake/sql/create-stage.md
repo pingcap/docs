@@ -5,10 +5,6 @@ summary: Creates an internal or external stage.
 
 # CREATE STAGE
 
-> **Note:**
->
-> Introduced or updated in v1.2.339.
-
 Creates an internal or external stage.
 
 ## Syntax

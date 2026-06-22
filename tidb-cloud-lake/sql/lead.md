@@ -5,10 +5,6 @@ summary: Returns the value from a subsequent row in the result set.
 
 # LEAD
 
-> **Note:**
->
-> Introduced or updated in v1.2.45.
-
 Returns the value from a subsequent row in the result set.
 
 See also: [LAG](/tidb-cloud-lake/sql/lag.md)

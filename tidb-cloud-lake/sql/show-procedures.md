@@ -5,10 +5,6 @@ summary: Returns a list of all stored procedures in the system.
 
 # SHOW PROCEDURES
 
-> **Note:**
->
-> Introduced or updated in v1.2.637.
-
 Returns a list of all stored procedures in the system.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Deletes a table.
 
 # DROP TABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.155.
-
 Deletes a table.
 
 **See also:**

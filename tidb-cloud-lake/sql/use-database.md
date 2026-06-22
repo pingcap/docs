@@ -5,10 +5,6 @@ summary: Selects a database for the current session. This statement allows you t
 
 # USE DATABASE
 
-> **Note:**
->
-> Introduced or updated in v1.2.721.
-
 Selects a database for the current session. This statement allows you to specify and switch to a different database. Once you set the current database using this command, it remains the same until the end of the session unless you choose to change it.
 
 ## Syntax

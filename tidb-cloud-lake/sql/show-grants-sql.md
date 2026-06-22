@@ -5,10 +5,6 @@ summary: Lists privileges granted to roles, role assignments for users, or privi
 
 # SHOW_GRANTS
 
-> **Note:**
->
-> Introduced or updated in v1.2.704.
-
 Lists privileges granted to roles, role assignments for users, or privileges on a specific object.
 
 See also: [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md)

@@ -5,10 +5,6 @@ summary: Creates a scalar user-defined function (Scalar UDF). The same CREATE FU
 
 # CREATE SCALAR FUNCTION
 
-> **Note:**
->
-> Introduced or updated in SQL v1.2.799; Python/JavaScript v1.2.339.
-
 Creates a scalar user-defined function (Scalar UDF). The same `CREATE FUNCTION` statement supports two implementation styles:
 
 - **SQL expression**: Logic expressed purely in SQL; no external runtime is required.

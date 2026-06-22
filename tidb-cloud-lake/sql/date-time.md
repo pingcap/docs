@@ -5,10 +5,6 @@ summary: "{{{ .lake }}}'s Date and Time data type supports standardization and c
 
 # Date & Time
 
-> **Note:**
->
-> Introduced or updated in v1.2.834.
-
 ## Overview
 
 | Name         | Aliases                   | Storage Size | Resolution  | Min Value                  | Max Value                      | Format                                                                         |
@@ -330,25 +326,26 @@ It is possible to override the default padding behavior of numeric specifiers %?
 - %S: It accounts for leap seconds, so 60 is possible.
 
 - %f, %.f, %.3f, %.6f, %.9f, %3f, %6f, %9f:
-  The default %f is right-aligned and always zero-padded to 9 digits for the compatibility with glibc and others, so it always counts the number of nanoseconds since the last whole second. E.g. 7ms after the last second will print 007000000, and parsing 7000000 will yield the same.
 
-  The variant %.f is left-aligned and print 0, 3, 6 or 9 fractional digits according to the precision. E.g. 70ms after the last second under %.f will print .070 (note: not .07), and parsing .07, .070000 etc. will yield the same. Note that they can print or read nothing if the fractional part is zero or the next character is not ..
+    The default %f is right-aligned and always zero-padded to 9 digits for the compatibility with glibc and others, so it always counts the number of nanoseconds since the last whole second. E.g. 7ms after the last second will print 007000000, and parsing 7000000 will yield the same.
 
-  The variant %.3f, %.6f and %.9f are left-aligned and print 3, 6 or 9 fractional digits according to the number preceding f. E.g. 70ms after the last second under %.3f will print .070 (note: not .07), and parsing .07, .070000 etc. will yield the same. Note that they can read nothing if the fractional part is zero or the next character is not . however will print with the specified length.
+    The variant %.f is left-aligned and print 0, 3, 6 or 9 fractional digits according to the precision. E.g. 70ms after the last second under %.f will print .070 (note: not .07), and parsing .07, .070000 etc. will yield the same. Note that they can print or read nothing if the fractional part is zero or the next character is not ..
 
-  The variant %3f, %6f and %9f are left-aligned and print 3, 6 or 9 fractional digits according to the number preceding f, but without the leading dot. E.g. 70ms after the last second under %3f will print 070 (note: not 07), and parsing 07, 070000 etc. will yield the same. Note that they can read nothing if the fractional part is zero.
+    The variant %.3f, %.6f and %.9f are left-aligned and print 3, 6 or 9 fractional digits according to the number preceding f. E.g. 70ms after the last second under %.3f will print .070 (note: not .07), and parsing .07, .070000 etc. will yield the same. Note that they can read nothing if the fractional part is zero or the next character is not . however will print with the specified length.
+
+    The variant %3f, %6f and %9f are left-aligned and print 3, 6 or 9 fractional digits according to the number preceding f, but without the leading dot. E.g. 70ms after the last second under %3f will print 070 (note: not 07), and parsing 07, 070000 etc. will yield the same. Note that they can read nothing if the fractional part is zero.
 
 - %Z: Offset will not be populated from the parsed data, nor will it be validated. Timezone is completely ignored. Similar to the glibc strptime treatment of this format code.
 
-  It is not possible to reliably convert from an abbreviation to an offset, for example CDT can mean either Central Daylight Time (North America) or China Daylight Time.
+    It is not possible to reliably convert from an abbreviation to an offset, for example CDT can mean either Central Daylight Time (North America) or China Daylight Time.
 
 - %+: Same as %Y-%m-%dT%H:%M:%S%.f%:z, i.e. 0, 3, 6 or 9 fractional digits for seconds and colons in the time zone offset.
 
-  This format also supports having a Z or UTC in place of %:z. They are equivalent to +00:00.
+    This format also supports having a Z or UTC in place of %:z. They are equivalent to +00:00.
 
-  Note that all T, Z, and UTC are parsed case-insensitively.
+    Note that all T, Z, and UTC are parsed case-insensitively.
 
-  The typical strftime implementations have different (and locale-dependent) formats for this specifier. While Chrono's format for %+ is far more stable, it is best to avoid this specifier if you want to control the exact output.
+    The typical strftime implementations have different (and locale-dependent) formats for this specifier. While Chrono's format for %+ is far more stable, it is best to avoid this specifier if you want to control the exact output.
 
 - %s: This is not padded and can be negative. For the purpose of Chrono, it only accounts for non-leap seconds so it slightly differs from ISO C strftime behavior.
 

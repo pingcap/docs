@@ -5,10 +5,6 @@ summary: The DROP NOTIFICATION INTEGRATION statement is used to delete an existi
 
 # DROP NOTIFICATION INTEGRATION
 
-> **Note:**
->
-> Introduced or updated in v1.2.371.
-
 The DROP NOTIFICATION INTEGRATION statement is used to delete an existing notification.
 
 **NOTICE:** this functionality works out of the box only in {{{ .lake }}}.

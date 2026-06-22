@@ -5,10 +5,6 @@ summary: Builds a Vector index for existing data that was inserted before the in
 
 # REFRESH VECTOR INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.777.
-
 Builds a Vector index for existing data that was inserted before the index was created.
 
 ## Syntax

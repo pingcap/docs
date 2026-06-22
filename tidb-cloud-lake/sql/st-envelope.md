@@ -5,10 +5,6 @@ summary: Returns the minimum bounding rectangle of a GEOMETRY object as a polygo
 
 # ST_ENVELOPE
 
-> **Note:**
->
-> Introduced or updated in v1.2.895.
-
 Returns the minimum bounding rectangle of a GEOMETRY object as a polygon.
 
 This function only supports GEOMETRY values.

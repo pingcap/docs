@@ -5,10 +5,6 @@ summary: Returns the name of the catalog currently in use for the session.
 
 # CURRENT_CATALOG
 
-> **Note:**
->
-> Introduced or updated in v1.2.668.
-
 Returns the name of the catalog currently in use for the session.
 
 ## Syntax

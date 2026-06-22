@@ -5,10 +5,6 @@ summary: Alters a user-defined function. Supports all function types Scalar SQL,
 
 # ALTER FUNCTION
 
-> **Note:**
->
-> Introduced or updated in v1.2.116.
-
 Alters a user-defined function. Supports all function types: Scalar SQL, Tabular SQL, and Embedded functions.
 
 ## Syntax

@@ -5,10 +5,6 @@ summary: Returns the quotient by dividing the first number by the second one. Re
 
 # DIVNULL
 
-> **Note:**
->
-> Introduced or updated in v1.2.345.
-
 Returns the quotient by dividing the first number by the second one. Returns NULL if the second number is 0 or NULL.
 
 See also:

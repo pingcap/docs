@@ -5,10 +5,6 @@ summary: Parses an input and returns a value of type GEOMETRY.
 
 # TO_GEOMETRY
 
-> **Note:**
->
-> Introduced or updated in v1.2.431.
-
 Parses an input and returns a value of type GEOMETRY.
 
 `TRY_TO_GEOMETRY` returns a NULL value if an error occurs during parsing.

@@ -5,10 +5,6 @@ summary: Specifies various stream configuration options using hints to control h
 
 # WITH Stream Hints
 
-> **Note:**
->
-> Introduced or updated in v1.2.670.
-
 Specifies various stream configuration options using hints to control how the stream is processed.
 
 See also: [WITH CONSUME](/tidb-cloud-lake/sql/with-consume.md)

@@ -5,10 +5,6 @@ summary: Drops an existing NGRAM index from a table.
 
 # DROP NGRAM INDEX
 
-> **Note:**
->
-> Introduced or updated in v1.2.726.
-
 Drops an existing NGRAM index from a table.
 
 ## Syntax

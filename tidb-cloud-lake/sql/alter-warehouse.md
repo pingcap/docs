@@ -5,10 +5,6 @@ summary: Suspends, resumes, or modifies settings of an existing warehouse.
 
 # ALTER WAREHOUSE
 
-> **Note:**
->
-> Introduced or updated in v1.2.687.
-
 Suspends, resumes, or modifies settings of an existing warehouse.
 
 ## Syntax

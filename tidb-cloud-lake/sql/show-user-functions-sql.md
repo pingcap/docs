@@ -5,10 +5,6 @@ summary: Lists the existing user-defined functions and external functions in the
 
 # SHOW USER FUNCTIONS
 
-> **Note:**
->
-> Introduced or updated in v1.2.315.
-
 Lists the existing user-defined functions and external functions in the system. Equivalent to `SELECT name, is_aggregate, description, arguments, language FROM system.user_functions ...`.
 
 See also: [system.user_functions](/tidb-cloud-lake/sql/system-user-functions.md)

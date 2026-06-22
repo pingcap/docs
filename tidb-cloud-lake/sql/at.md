@@ -5,10 +5,6 @@ summary: The AT clause enables you to retrieve previous versions of your data by
 
 # AT
 
-> **Note:**
->
-> Introduced or updated in v1.2.410.
-
 The AT clause enables you to retrieve previous versions of your data by specifying a snapshot ID, timestamp, stream name, or a time interval.
 
 {{{ .lake }}} automatically creates snapshots when data updates occur, so a snapshot can be considered as a view of your data at a time point in the past. You can access a snapshot by the snapshot ID or the timestamp at which the snapshot was created. For how to obtain the snapshot ID and timestamp, see [Obtaining Snapshot ID and Timestamp](#obtaining-snapshot-id-and-timestamp).

@@ -5,10 +5,6 @@ summary: Retrieves the next value from a sequence.
 
 # NEXTVAL
 
-> **Note:**
->
-> Introduced or updated in v1.2.784.
-
 Retrieves the next value from a sequence.
 
 ## Syntax

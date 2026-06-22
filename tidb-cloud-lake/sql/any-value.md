@@ -5,10 +5,6 @@ summary: Aggregate function.
 
 # ANY_VALUE
 
-> **Note:**
->
-> Introduced or updated in v1.2.815.
-
 Aggregate function.
 
 The `ANY_VALUE()` function returns an arbitrary non-NULL value from the input expression. It's used in `GROUP BY` queries when you need to select a column that isn't grouped or aggregated.

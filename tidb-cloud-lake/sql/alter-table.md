@@ -5,10 +5,6 @@ summary: Use ALTER TABLE to modify the structure and properties of an existing t
 
 # ALTER TABLE
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Use `ALTER TABLE` to modify the structure and properties of an existing table, including its columns, comment, storage options, external connection, or even swapping metadata with another table. The subsections below cover each supported capability.
 
 ## Column Operations {#column-operations}

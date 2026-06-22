@@ -5,10 +5,6 @@ summary: The VALUES clause creates an inline table by explicitly defining rows o
 
 # VALUES
 
-> **Note:**
->
-> Introduced or updated in v1.2.65.
-
 The VALUES clause creates an inline table by explicitly defining rows of data. This temporary table can be used directly or within other SQL statements.
 
 ## Syntax

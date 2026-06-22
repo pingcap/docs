@@ -5,10 +5,6 @@ summary: Grants privileges, roles, and ownership for a specific database object.
 
 # GRANT
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Grants privileges, roles, and ownership for a specific database object. This includes:
 
 - Granting privileges to roles.

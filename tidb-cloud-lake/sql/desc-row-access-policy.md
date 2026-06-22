@@ -5,10 +5,6 @@ summary: "Displays detailed information about a specific row access policy in {{
 
 # DESC ROW ACCESS POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Displays detailed information about a specific row access policy in {{{ .lake }}}.
 
 ## Syntax

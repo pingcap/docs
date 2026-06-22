@@ -5,8 +5,4 @@ summary: Alias for COVAR_POP.
 
 # VAR_POP
 
-> **Note:**
->
-> Introduced or updated in v1.2.738.
-
 Alias for [COVAR_POP](/tidb-cloud-lake/sql/covar-pop.md).

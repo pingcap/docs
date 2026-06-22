@@ -5,10 +5,6 @@ summary: Lists all databases along with their deletion timestamps if they have b
 
 # SHOW DROP DATABASES
 
-> **Note:**
->
-> Introduced or updated in v1.2.658.
-
 Lists all databases along with their deletion timestamps if they have been dropped, allowing users to review deleted databases and their details.
 
 - Dropped databases can only be retrieved if they are within the data retention period.

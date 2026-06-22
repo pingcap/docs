@@ -5,10 +5,6 @@ summary: Deletes specified keys from a JSON object and returns the modified obje
 
 # OBJECT_DELETE
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Deletes specified keys from a JSON object and returns the modified object. If a specified key doesn't exist in the object, it is ignored.
 
 ## Aliases

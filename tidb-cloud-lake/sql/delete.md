@@ -5,10 +5,6 @@ summary: Removes one or more rows from a table.
 
 # DELETE
 
-> **Note:**
->
-> Introduced or updated in v1.2.174.
-
 Removes one or more rows from a table.
 
 > **Tip:**

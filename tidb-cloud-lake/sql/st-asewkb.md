@@ -5,10 +5,6 @@ summary: Converts a GEOMETRY or GEOGRAPHY object into a EWKB(extended well-known
 
 # ST_ASEWKB
 
-> **Note:**
->
-> Introduced or updated in v1.2.436.
-
 Converts a GEOMETRY or GEOGRAPHY object into a [EWKB(extended well-known-binary)](https://postgis.net/docs/ST_GeomFromEWKB.html) format representation.
 
 ## Syntax

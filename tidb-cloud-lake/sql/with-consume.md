@@ -5,10 +5,6 @@ summary: Consumes data from a stream within a SELECT query.
 
 # WITH CONSUME
 
-> **Note:**
->
-> Introduced or updated in v1.2.469.
-
 Consumes data from a stream within a SELECT query.
 
 See also: [WITH Stream Hints](/tidb-cloud-lake/sql/stream-hints.md)

@@ -5,10 +5,6 @@ summary: Retrieves a table of comprehensive metadata from a staged Parquet file,
 
 # INSPECT_PARQUET
 
-> **Note:**
->
-> Introduced or updated in v1.2.180.
-
 Retrieves a table of comprehensive metadata from a staged Parquet file, including the following columns:
 
 | Column                           | Description                                                    |

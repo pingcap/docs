@@ -5,10 +5,6 @@ summary: Returns the value at the specified position (N) within the window frame
 
 # NTH_VALUE
 
-> **Note:**
->
-> Introduced or updated in v1.2.697.
-
 Returns the value at the specified position (N) within the window frame.
 
 See also:

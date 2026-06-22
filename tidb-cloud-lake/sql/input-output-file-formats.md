@@ -5,10 +5,6 @@ summary: "{{{ .lake }}} accepts a variety of file formats both as a source and a
 
 # Input & Output File Formats
 
-> **Note:**
->
-> Introduced or updated in v1.2.713.
-
 {{{ .lake }}} accepts a variety of file formats both as a source and as a target for data loading or unloading. This page explains the supported file formats and their available options.
 
 ## Syntax

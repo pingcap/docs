@@ -5,10 +5,6 @@ summary: Checks if there is any overlap between two JSON arrays and returns true
 
 # ARRAY_OVERLAP
 
-> **Note:**
->
-> Introduced or updated in v1.2.762.
-
 Checks if there is any overlap between two JSON arrays and returns `true` if there are common elements; otherwise, it returns `false`.
 
 ## Aliases

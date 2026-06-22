@@ -5,10 +5,6 @@ summary: "Deletes an existing row access policy from {{{ .lake }}}. Before dropp
 
 # DROP ROW ACCESS POLICY
 
-> **Note:**
->
-> Introduced or updated in v1.2.845.
-
 Deletes an existing row access policy from {{{ .lake }}}. Before dropping a policy, detach it from all tables that reference it.
 
 ## Syntax
