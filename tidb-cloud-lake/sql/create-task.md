@@ -52,7 +52,8 @@ Wrap multiple SQL statements in a `BEGIN ... END;` block so the task executes th
 - A schedule cannot be specified for child tasks in a DAG.
 - After creating a task, you must execute ALTER TASK … RESUME before the task will run based on the parameters specified in the task definition.
 - When Condition only support a subset of `<boolean_expression>`
-  The following are supported in a task WHEN clause:
+
+    The following are supported in a task WHEN clause:
 
     - [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) is supported for evaluation in the SQL expression. This function indicates whether a specified stream contains change tracking data. You can use this function to evaluate whether the specified stream contains change data before starting the current run. If the result is FALSE, then the task does not run.
     - Boolean operators such as AND, OR, NOT, and others.

@@ -20,6 +20,7 @@ REGEXP_SPLIT_TO_TABLE(string, pattern [, flags text])
 | `flags text` | A string of flags to modify the regular expression's behavior. |
 
 **Supported `flags` Parameter:**
+
 Provides flexible regular expression configuration options, controlling matching behavior by combining the following characters:
 
 * `i` (case-insensitive): Pattern matching ignores case.

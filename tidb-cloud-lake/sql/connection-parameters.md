@@ -114,9 +114,7 @@ The following table lists connection parameters for accessing Google Cloud Stora
 |----------------|-------------|-------------------------------------------------------|
 | credential     | Yes         | Google Cloud Storage credential for authentication.   |
 
-To get the `credential`, you could follow the topic [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete#creating)
-from the Google documentation to create and download a service account key file. After downloading the service account key file, you could
-convert it into a base64 string via the following command:
+To get the `credential`, you could follow the topic [Create a service account key](https://cloud.google.com/iam/docs/keys-create-delete#creating) from the Google documentation to create and download a service account key file. After downloading the service account key file, you could convert it into a base64 string via the following command:
 
 ```
 base64 -i -o ~/Desktop/base64-encoded-key.txt
