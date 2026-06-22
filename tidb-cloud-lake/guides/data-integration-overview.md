@@ -16,9 +16,13 @@ The Data Integration feature in {{{ .lake }}} provides a visual, no-code interfa
 
 Data sources do not move data by themselves. They only store the information required to access external systems. Integration tasks are the units that actually perform imports, snapshots, and continuous synchronization.
 
+<!-- Will add back this note after the service hosting pricing is finalized and published.
+
 > **Note:**
 >
 > Running Data Integration tasks incurs service hosting fees. {{{ .lake }}} bills these fees per second based on the actual running time of the service. For details, see [Service Hosting Pricing](/tidb-cloud-lake/guides/pricing-billing.md#service-hosting-pricing).
+
+-->
 
 Not every data source corresponds to an ingestion task. For example, `FeiShuBot` is used for notifications rather than loading source data into {{{ .lake }}}.
 
