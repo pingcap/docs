@@ -172,6 +172,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD
 
+    - Support batching PD region-routing lookups and serving them from PD followers to reduce routing latency and avoid overloading the PD leader at scale or after failovers [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato)
     - Disable split scatter by default in PD to avoid unexpected scheduling after region splits; you can still enable it by setting `schedule.split-scatter-schedule-limit` to a positive value [#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024) <!-- component: pd -->
     - Optimize unsafe recovery empty-region plan generation to improve performance and reduce timeout risk in large clusters with many regions and gaps [#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996) <!-- component: pd -->
     - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
