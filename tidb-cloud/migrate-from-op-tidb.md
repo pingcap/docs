@@ -79,9 +79,9 @@ tiup update --self && tiup update dumpling
 
 アップストリームの TiDB Self-Managed クラスターからダウンストリームのTiDB Cloudリソースに増分データをレプリケートするには、 [TiCDCをデプロイする](https://docs.pingcap.com/tidb/dev/deploy-ticdc)必要があります。
 
-1.  アップストリーム TiDB 自己管理クラスターの現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、上流の TiDB 自己管理クラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
+1.  アップストリーム TiDB Self-Managedクラスターの現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、上流の TiDB Self-Managedクラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
 
-2.  TiCDCコンポーネントをアップストリームの TiDB 自己管理クラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
+2.  TiCDCコンポーネントをアップストリームの TiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
