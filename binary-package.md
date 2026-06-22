@@ -25,7 +25,7 @@ TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで
 | node_exporter-{バージョン}-linux-{アーキテクチャ}.tar.gz     |                |
 | tiup-linux-{arch}.tar.gz                         |                |
 | tiup-{バージョン}-linux-{アーキテクチャ}.tar.gz              |                |
-| ローカルインストール.sh                                    |                |
+| local-install.sh                                    |                |
 | cluster-{バージョン}-linux-{アーキテクチャ}.tar.gz           |                |
 | insight-{バージョン}-linux-{アーキテクチャ}.tar.gz           |                |
 | diag-{バージョン}-linux-{アーキテクチャ}.tar.gz              | バージョン6.0.0の新機能 |
