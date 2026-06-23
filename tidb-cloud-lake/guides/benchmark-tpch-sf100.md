@@ -35,7 +35,7 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 
 ![TPC-H SF100 data loading benchmark](/media/tidb-cloud-lake/tpch-sf100-data-loading-benchmark.png)
 
-| Table            | Snowflake (695s, Cost $0.77) | {{{ .lake }}} (446s, Cost $0.25) | Rows        |
+| Table            | Snowflake (695s, Cost $0.77) | {{{ .lake }}} (446s, Cost $0.40) | Rows        |
 | ---------------- | --------------------------- | -------------------------------- | ----------- |
 | customer         | 18.137                      | 13.436                           | 15,000,000  |
 | lineitem         | 477.740                     | 305.812                          | 600,037,902 |
@@ -46,14 +46,14 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 | region           | 0.743                       | 0.725                            | 5           |
 | supplier         | 3.000                       | 3.687                            | 10,000,000  |
 | **Total Time**   | **695s**                    | **446s**                         |             |
-| **Total Cost**   | **$0.77**                   | **$0.25**                        |             |
+| **Total Cost**   | **$0.77**                   | **$0.40**                        |             |
 | **Storage Size** | **20.8GB**                  | **24.5GB**                       |             |
 
 ### Query Benchmark: Cold Run
 
 ![TPC-H SF100 Cold Run Benchmark](/media/tidb-cloud-lake/tpch-sf100-cold-run-benchmark.png)
 
-| Query          | Snowflake (Total 207s, Cost $0.23) | {{{ .lake }}} (Total 166s, Cost $0.09) |
+| Query          | Snowflake (Total 207s, Cost $0.23) | {{{ .lake }}} (Total 166s, Cost $0.15) |
 | -------------- | --------------------------------- | -------------------------------------- |
 | TPC-H 1        | 11.703                            | 8.036                                  |
 | TPC-H 2        | 4.524                             | 3.786                                  |
@@ -78,13 +78,13 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 | TPC-H 21       | 16.439                            | 12.270                                 |
 | TPC-H 22       | 3.744                             | 1.926                                  |
 | **Total Time** | **207s**                          | **166s**                               |
-| **Total Cost** | **$0.23**                         | **$0.09**                              |
+| **Total Cost** | **$0.23**                         | **$0.15**                              |
 
 ### Query Benchmark: Hot Run
 
 ![TPC-H SF100 Hot Run Benchmark](/media/tidb-cloud-lake/tpch-sf100-hot-run-benchmark.png)
 
-| Query          | Snowflake (Total 138s, Cost $0.15) | {{{ .lake }}} (Total 124s, Cost $0.07) |
+| Query          | Snowflake (Total 138s, Cost $0.15) | {{{ .lake }}} (Total 124s, Cost $0.11) |
 | -------------- | ---------------------------------- | --------------------------------------- |
 | TPC-H 1        | 8.934                              | 7.568                                   |
 | TPC-H 2        | 3.018                              | 3.125                                   |
@@ -109,7 +109,7 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 | TPC-H 21       | 10.287                             | 9.806                                   |
 | TPC-H 22       | 1.573                              | 1.122                                   |
 | **Total Time** | **138s**                           | **124s**                                |
-| **Total Cost** | **$0.15**                          | **$0.07**                               |
+| **Total Cost** | **$0.15**                          | **$0.11**                               |
 
 ## Reproduce the Benchmark
 
@@ -122,7 +122,7 @@ The benchmark tests both Snowflake and {{{ .lake }}} under similar conditions:
 | Parameter      | Snowflake                                                | {{{ .lake }}}                            |
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
 | Warehouse Size | Small                                                    | Small                                     |
-| Price          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$2/hour](https://www.pingcap.com/pricing) |
+| Price          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$3.2/hour](https://www.pingcap.com/pricing) |
 | AWS Region     | us-east-2                                                | us-east-2                                 |
 | Storage        | AWS S3                                                   | AWS S3                                    |
 
