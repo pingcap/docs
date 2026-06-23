@@ -136,7 +136,6 @@
 - Ingest & Stream Data
   - [Ingest JSON Logs with Vector (Cloud)](/tidb-cloud-lake/tutorials/ingest-json-logs-with-vector-cloud.md)
 - Migrate Data
-  - [Migrate MySQL with Addax (Batch)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-addax.md)
   - [Migrate from Snowflake](/tidb-cloud-lake/tutorials/migrate-from-snowflake.md)
 
 ## Reference
