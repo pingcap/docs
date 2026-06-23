@@ -275,11 +275,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 
 2. Click **Restore**. The setting window displays.
 
-3. In **Restore Mode**, choose **Restore From Region**, indicating the region of backup stores.
-
-    > **Note**
-    >
-    > - The default value of the **Restore From Region** is the same as the backup cluster.
+3. The backup source is automatically determined by your cluster's region and cannot be changed.
 
 4. In **Restore Mode**, choose to restore data of any point in time or a selected backup to a new cluster.
 
@@ -303,7 +299,12 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     </div>
     </SimpleTab>
 
-5. In **Restore to Region**, select the same region as the **Primary Region** configured in the **Backup Setting**.
+5. In **Cloud Provider & Region**, select the target region for the new cluster.
+
+    > **Note**
+    >
+    > - By default, the new cluster is restored to the same region as the source cluster.
+    > - If **Dual Region Backup** is enabled in **Backup Setting**, you can also choose to restore the new cluster to the **Secondary Region** configured for dual region backup.
 
 6. In the **Restore** window, you can also make the following changes if necessary:
 
