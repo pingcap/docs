@@ -77,7 +77,7 @@ Every navigable page needs a TOC entry.
 | API docs | `TOC-api.md` |
 | TiDB release notes | `TOC-tidb-releases.md` |
 | TiDB Cloud general | `TOC-tidb-cloud.md` |
-| TiDB Cloud tier-specific | `TOC-tidb-cloud-starter.md` / `essential` / `premium` |
+| TiDB Cloud tier-specific | `TOC-tidb-cloud-starter.md` / `TOC-tidb-cloud-essential.md` / `TOC-tidb-cloud-premium.md` |
 | TiDB Cloud release notes | `TOC-tidb-cloud-releases.md` |
 
 ### Where in the TOC?
@@ -225,7 +225,7 @@ When the doc is expected to exceed ~800 words or has unclear scope:
 | Check | Action when needed |
 | --- | --- |
 | TOC entry | Always required |
-| Overview page | Add brief mention or link (e.g., `sql-statement-overview.md`) |
+| Overview page | Add brief mention or link (e.g., `sql-statements/sql-statement-overview.md`) |
 | Related docs | Add "See also" links where users benefit |
 | Release notes | Flag for the release notes skill |
 | System variable page | Cross-link if the feature has variables |

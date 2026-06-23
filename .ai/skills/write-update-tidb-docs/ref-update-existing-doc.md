@@ -53,7 +53,7 @@ A single code change often ripples into multiple pages.
 
 | Category | Examples |
 | --- | --- |
-| Overview pages | `sql-statement-overview.md`, `functions-and-operators-overview.md` |
+| Overview pages | `sql-statements/sql-statement-overview.md`, `functions-and-operators/functions-and-operators-overview.md` |
 | Feature lists | `basic-features.md` |
 | Compatibility | `mysql-compatibility.md`, feature compat tables |
 | Limitations | `tidb-limitations.md`, feature-specific limitations |
