@@ -359,7 +359,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
             TiCDC 構成項目`enable_table_across_nodes`を`true`に設定することで、この機能を有効にできます。 `region_threshold`を使用すると、テーブルのリージョン数がこのしきい値を超えた場合に、TiCDC が対応するテーブルのデータ変更を複数の TiCDC ノードに分散するように指定できます。
 
-        -   リドゥアプラにおけるトランザクション分割をサポートし、スループットを向上させ、ディザスタリカバリシナリオにおけるRTOを短縮する [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   リドゥアプライヤーにおけるトランザクション分割をサポートし、スループットを向上させ、ディザスタリカバリシナリオにおけるRTOを短縮する [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
         -   テーブルのスケジューリングを改善して、単一のテーブルをさまざまな TiCDC ノード間でより均等に分割します [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
