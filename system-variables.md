@@ -6490,7 +6490,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
-- Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. Starting from v8.5.7, the default value changes from `1` to `4`; upgraded clusters keep the persisted global variable value. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Starting from v8.5.7, the default value changes from `1` to `4`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
