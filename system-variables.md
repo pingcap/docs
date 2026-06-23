@@ -1327,7 +1327,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics. Starting from v8.5.7, the default value changes from `1` to `2`; upgraded clusters keep the persisted global variable value.
+- This variable is used to set the concurrency of executing the automatic update of statistics. 
+- Starting from v8.5.7, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
 
