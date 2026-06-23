@@ -29,6 +29,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [Documentation](link).
 
+* Support CPU-aware Hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382-->
+
+    In earlier versions, the Hot Region scheduler balances read hotspots mainly by query and byte dimensions. In some workloads, TiKV CPU usage can still be uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
+
+    Starting from v8.5.7, TiKV reports per-Region read CPU usage in PD heartbeats, and PD can use CPU usage as the first priority for Hot Region read scheduling. For clusters whose TiKV version supports CPU reporting, the default `read-priorities` of `balance-hot-region-scheduler` is `cpu,byte`; otherwise, PD falls back to `query,byte`. This helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
+
+    This feature also adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in hot store statistics and the `min-hot-cpu-rate` and `cpu-rate-rank-step-ratio` scheduler configuration items.
+
+    For more information, see [Documentation](link).
+
 ### Reliability
 
 * Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
@@ -165,7 +175,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Add dynamic resource group isolation to protect sustained workloads from traffic spikes by deprioritizing requests from groups that exceed their historical RU baselines and optionally delaying or rejecting over-baseline requests under high CPU load, with new `resource-control` configuration options that are disabled by default [#19607](https://github.com/tikv/tikv/issues/19607) @[mittalrishabh](https://github.com/mittalrishabh) <!-- component: raft -->
     - Mark PITR-restored `Put` and `Delete` write CF records with the physical import transaction source during apply log processing so TiCDC can ignore PITR-imported data [#19669](https://github.com/tikv/tikv/issues/19669) @[YuJuncen](https://github.com/YuJuncen) <!-- component: tikv -->
     - Add automatic fail-fast exit for TiKV nodes that detect disk I/O hangs to speed up recovery from unresponsive stores [#19626](https://github.com/tikv/tikv/issues/19626) @[hbisheng](https://github.com/hbisheng) <!-- component: tikv -->
-    - Improve hot read CPU observability by reporting per-region CPU usage in PD heartbeats [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!-- component: tikv -->
     - Improve TiKV stability and security by upgrading vulnerable third-party dependencies for TiKV 8.5 and aligning the required compatibility fixes with upstream [#19713](https://github.com/tikv/tikv/issues/19713) @[LykxSassinator](https://github.com/LykxSassinator) <!-- component: tikv -->
     - Support rank-based limit processing in TiKV to return more accurate results for queries that use truncate key expressions [#19388](https://github.com/tikv/tikv/issues/19388) @[xzhangxian1008](https://github.com/xzhangxian1008) <!-- component: tikv -->
     - Improve load-based Region splitting in TiKV by relaxing the default split thresholds and adding observability for split-key selection and CPU fallback decisions, helping operators handle hot Regions more effectively [#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024) <!-- component: tikv -->
@@ -176,7 +185,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Disable split scatter by default in PD to avoid unexpected scheduling after region splits; you can still enable it by setting `schedule.split-scatter-schedule-limit` to a positive value [#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024) <!-- component: pd -->
     - Optimize unsafe recovery empty-region plan generation to improve performance and reduce timeout risk in large clusters with many regions and gaps [#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996) <!-- component: pd -->
     - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
-    - Support using CPU usage in PD hot Region scheduling and hotspot statistics to improve read load balancing across TiKV stores [#5718](https://github.com/tikv/pd/issues/5718) @[lhy1024](https://github.com/lhy1024) <!-- component: pd -->
     - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
     - Improve PD transaction duration metrics to better reflect production latency distributions and improve observability in dashboards and alerts [#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies) <!-- component: pd -->
     - Add PD maintenance endpoints and `pd-ctl` commands to serialize TiKV maintenance tasks and prevent Raft quorum loss by ensuring that only one maintenance task is active at a time [#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30) <!-- component: pd -->
