@@ -1264,7 +1264,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `3`
 - Range: `[1, 2147483647]`
-- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at `1`. Starting from v8.5.7, the default value changes from `1` to `3`; upgraded clusters keep the persisted global variable value. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- Before v8.4.0, this concurrency is fixed at `1`. 
+- Starting from v8.5.7, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_auto_analyze_end_time
 
