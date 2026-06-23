@@ -232,7 +232,7 @@ Document.objects.create(content="fish", embedding=[1, 2, 4])
 Document.objects.create(content="tree", embedding=[1, 0, 0])
 ```
 
-### 近隣住民の文書を検索 {#search-the-nearest-neighbor-documents}
+### 最近傍の文書を検索 {#search-the-nearest-neighbor-documents}
 
 TiDB Vectorは以下の距離関数をサポートしています。
 
