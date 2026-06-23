@@ -24,62 +24,62 @@ TRIM(<string>)
 
 ## Examples
 
-This example removes all occurrences of the specified characters from both the beginning and end of the string 'xxxdatabendxxx':
+This example removes all occurrences of the specified characters from both the beginning and end of the string 'xxxdatalakexxx':
 
 ```sql
-SELECT TRIM(BOTH 'xxx' FROM 'xxxdatabendxxx'), TRIM(BOTH 'xx' FROM 'xxxdatabendxxx'), TRIM(BOTH 'x' FROM 'xxxdatabendxxx');
+SELECT TRIM(BOTH 'xxx' FROM 'xxxdatalakexxx'), TRIM(BOTH 'xx' FROM 'xxxdatalakexxx'), TRIM(BOTH 'x' FROM 'xxxdatalakexxx');
 
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ TRIM(BOTH 'xxx' FROM 'xxxdatabendxxx') │ TRIM(BOTH 'xx' FROM 'xxxdatabendxxx') │ TRIM(BOTH 'x' FROM 'xxxdatabendxxx') │
+│ TRIM(BOTH 'xxx' FROM 'xxxdatalakexxx') │ TRIM(BOTH 'xx' FROM 'xxxdatalakexxx') │ TRIM(BOTH 'x' FROM 'xxxdatalakexxx') │
 ├────────────────────────────────────────┼───────────────────────────────────────┼──────────────────────────────────────┤
-│ databend                               │ xdatabendx                            │ databend                             │
+│ datalake                               │ xdatalakex                            │ datalake                             │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-This example removes all occurrences of the specified characters from the beginning of the input string 'xxxdatabend':
+This example removes all occurrences of the specified characters from the beginning of the input string 'xxxdatalake':
 
 ```sql
-SELECT TRIM(LEADING 'xxx' FROM 'xxxdatabend'), TRIM(LEADING 'xx' FROM 'xxxdatabend'), TRIM(LEADING 'x' FROM 'xxxdatabend');
+SELECT TRIM(LEADING 'xxx' FROM 'xxxdatalake'), TRIM(LEADING 'xx' FROM 'xxxdatalake'), TRIM(LEADING 'x' FROM 'xxxdatalake');
 
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ TRIM(LEADING 'xxx' FROM 'xxxdatabend') │ TRIM(LEADING 'xx' FROM 'xxxdatabend') │ TRIM(LEADING 'x' FROM 'xxxdatabend') │
+│ TRIM(LEADING 'xxx' FROM 'xxxdatalake') │ TRIM(LEADING 'xx' FROM 'xxxdatalake') │ TRIM(LEADING 'x' FROM 'xxxdatalake') │
 ├────────────────────────────────────────┼───────────────────────────────────────┼──────────────────────────────────────┤
-│ databend                               │ xdatabend                             │ databend                             │
+│ datalake                               │ xdatalake                             │ datalake                             │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-This example removes all occurrences of the specified characters from the end of the input string 'databendxxx':
+This example removes all occurrences of the specified characters from the end of the input string 'datalakexxx':
 
 ```sql
-SELECT TRIM(TRAILING 'xxx' FROM 'databendxxx' ), TRIM(TRAILING 'xx' FROM 'databendxxx' ), TRIM(TRAILING 'x' FROM 'databendxxx' );
+SELECT TRIM(TRAILING 'xxx' FROM 'datalakexxx' ), TRIM(TRAILING 'xx' FROM 'datalakexxx' ), TRIM(TRAILING 'x' FROM 'datalakexxx' );
 
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ TRIM(TRAILING 'xxx' FROM 'databendxxx') │ TRIM(TRAILING 'xx' FROM 'databendxxx') │ TRIM(TRAILING 'x' FROM 'databendxxx') │
+│ TRIM(TRAILING 'xxx' FROM 'datalakexxx') │ TRIM(TRAILING 'xx' FROM 'datalakexxx') │ TRIM(TRAILING 'x' FROM 'datalakexxx') │
 ├─────────────────────────────────────────┼────────────────────────────────────────┼───────────────────────────────────────┤
-│ databend                                │ databendx                              │ databend                              │
+│ datalake                                │ datalakex                              │ datalake                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 This example treats each character in the trim string individually and removes any matching characters from both the beginning and the end of the input string:
 
 ```sql
-SELECT TRIM('xxxdatabendxxx', 'xyz'), TRIM('xxxdatabendxxx', 'xy'), TRIM('xxxdatabendxxx', 'x');
+SELECT TRIM('xxxdatalakexxx', 'xyz'), TRIM('xxxdatalakexxx', 'xy'), TRIM('xxxdatalakexxx', 'x');
 
 ┌────────────────────────────────────────────────────────────────────────────────────────────┐
-│ trim('xxxdatabendxxx', 'xyz') │ trim('xxxdatabendxxx', 'xy') │ trim('xxxdatabendxxx', 'x') │
+│ trim('xxxdatalakexxx', 'xyz') │ trim('xxxdatalakexxx', 'xy') │ trim('xxxdatalakexxx', 'x') │
 ├───────────────────────────────┼──────────────────────────────┼─────────────────────────────┤
-│ databend                      │ databend                     │ databend                    │
+│ datalake                      │ datalake                     │ datalake                    │
 └────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 This example removes the leading and/or trailing spaces:
 
 ```sql
-SELECT TRIM('   databend   '), TRIM('   databend'), TRIM('databend   ');
+SELECT TRIM('   datalake   '), TRIM('   datalake'), TRIM('datalake   ');
 
 ┌────────────────────────────────────────────────────────────────────┐
-│ TRIM('   databend   ') │ TRIM('   databend') │ TRIM('databend   ') │
+│ TRIM('   datalake   ') │ TRIM('   datalake') │ TRIM('datalake   ') │
 ├────────────────────────┼─────────────────────┼─────────────────────┤
-│ databend               │ databend            │ databend            │
+│ datalake               │ datalake            │ datalake            │
 └────────────────────────────────────────────────────────────────────┘
 ```

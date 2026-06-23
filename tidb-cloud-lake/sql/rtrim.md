@@ -21,11 +21,11 @@ RTRIM(<string>, <trim_string>)
 ## Examples
 
 ```sql
-SELECT RTRIM('databendxx', 'x'), RTRIM('databendxx', 'xy');
+SELECT RTRIM('datalakexx', 'x'), RTRIM('datalakexx', 'xy');
 
 ┌──────────────────────────────────────────────────────┐
-│ rtrim('databendxx', 'x') │ rtrim('databendxx', 'xy') │
+│ rtrim('datalakexx', 'x') │ rtrim('datalakexx', 'xy') │
 ├──────────────────────────┼───────────────────────────┤
-│ databend                 │ databend                  │
+│ datalake                 │ datalake                  │
 └──────────────────────────────────────────────────────┘
 ```

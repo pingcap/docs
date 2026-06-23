@@ -21,11 +21,11 @@ TRIM_LEADING(<string>, <trim_string>)
 ## Examples
 
 ```sql
-SELECT TRIM_LEADING('xxdatabend', 'xxx'), TRIM_LEADING('xxdatabend', 'xx'), TRIM_LEADING('xxdatabend', 'x');
+SELECT TRIM_LEADING('xxdatalake', 'xxx'), TRIM_LEADING('xxdatalake', 'xx'), TRIM_LEADING('xxdatalake', 'x');
 
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ trim_leading('xxdatabend', 'xxx') │ trim_leading('xxdatabend', 'xx') │ trim_leading('xxdatabend', 'x') │
+│ trim_leading('xxdatalake', 'xxx') │ trim_leading('xxdatalake', 'xx') │ trim_leading('xxdatalake', 'x') │
 ├───────────────────────────────────┼──────────────────────────────────┼─────────────────────────────────┤
-│ xxdatabend                        │ databend                         │ databend                        │
+│ xxdatalake                        │ datalake                         │ datalake                        │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```

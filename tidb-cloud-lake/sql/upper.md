@@ -24,11 +24,11 @@ VARCHAR
 ## Examples
 
 ```sql
-SELECT UPPER('Hello, Databend!'), UCASE('Hello, Databend!');
+SELECT UPPER('Hello, Datalake!'), UCASE('Hello, Datalake!');
 
 ┌───────────────────────────────────────────────────────┐
-│ upper('hello, databend!') │ ucase('hello, databend!') │
+│ upper('hello, datalake!') │ ucase('hello, datalake!') │
 ├───────────────────────────┼───────────────────────────┤
-│ HELLO, DATABEND!          │ HELLO, DATABEND!          │
+│ HELLO, DATALAKE!          │ HELLO, DATALAKE!          │
 └───────────────────────────────────────────────────────┘
 ```

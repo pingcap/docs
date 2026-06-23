@@ -12,32 +12,32 @@ SQL identifiers are names used for different elements within {{{ .lake }}}, such
 Unquoted identifiers begin with a letter (A-Z, a-z) or underscore (“_”) and may consist of letters, underscores, numbers (0-9), or dollar signs (“$”).
 
 ```text title='Examples:'
-mydatabend
-MyDatabend1
-My$databend
-_my_databend
+mydatalake
+MyDatalake1
+My$datalake
+_my_datalake
 ```
 
 Double-quoted identifiers can include a wide range of characters, such as numbers (0-9), special characters (like period (.), single quote ('), exclamation mark (!), at symbol (@), number sign (#), dollar sign ($), percent sign (%), caret (^), and ampersand (&)), extended ASCII and non-ASCII characters, as well as blank spaces.
 
 ```text title='Examples:'
-"MyDatabend"
-"my.databend"
-"my databend"
-"My 'Databend'"
-"1_databend"
-"$Databend"
+"MyDatalake"
+"my.datalake"
+"my datalake"
+"My 'Datalake'"
+"1_datalake"
+"$Datalake"
 ```
 
 Note that using double backticks (``) or double quotes (") is equivalent:
 
 ```text title='Examples:'
-`MyDatabend`
-`my.databend`
-`my databend`
-`My 'Databend'`
-`1_databend`
-`$Databend`
+`MyDatalake`
+`my.datalake`
+`my datalake`
+`My 'Datalake'`
+`1_datalake`
+`$Datalake`
 ```
 
 ## Identifier Casing Rules
@@ -55,24 +55,24 @@ Note that using double backticks (``) or double quotes (") is equivalent:
 This example demonstrates how {{{ .lake }}} treats the casing of identifiers when creating and listing databases:
 
 ```sql
--- Create a database named "databend"
-CREATE DATABASE databend;
+-- Create a database named "datalake"
+CREATE DATABASE datalake;
 
--- Attempt to create a database named "Databend"
-CREATE DATABASE Databend;
+-- Attempt to create a database named "Datalake"
+CREATE DATABASE Datalake;
 
->> SQL Error [1105] [HY000]: DatabaseAlreadyExists. Code: 2301, Text = Database 'databend' already exists.
+>> SQL Error [1105] [HY000]: DatabaseAlreadyExists. Code: 2301, Text = Database 'datalake' already exists.
 
--- Create a database named "Databend"
-CREATE DATABASE "Databend";
+-- Create a database named "Datalake"
+CREATE DATABASE "Datalake";
 
 -- List all databases
 SHOW DATABASES;
 
 databases_in_default|
 --------------------+
-Databend            |
-databend            |
+Datalake            |
+datalake            |
 default             |
 information_schema  |
 system              |
@@ -81,27 +81,27 @@ system              |
 This example demonstrates how {{{ .lake }}} handles identifier casing for table and column names, highlighting its case-sensitivity by default and the use of double quotes to differentiate between identifiers with varying casing:
 
 ```sql
--- Create a table named "databend"
-CREATE TABLE databend (a INT);
-DESC databend;
+-- Create a table named "datalake"
+CREATE TABLE datalake (a INT);
+DESC datalake;
 
 Field|Type|Null|Default|Extra|
 -----+----+----+-------+-----+
 a    |INT |YES |NULL   |     |
 
--- Attempt to create a table named "Databend"
-CREATE TABLE Databend (a INT);
+-- Attempt to create a table named "Datalake"
+CREATE TABLE Datalake (a INT);
 
->> SQL Error [1105] [HY000]: TableAlreadyExists. Code: 2302, Text = Table 'databend' already exists.
+>> SQL Error [1105] [HY000]: TableAlreadyExists. Code: 2302, Text = Table 'datalake' already exists.
 
 -- Attempt to create a table with one column named "a" and the other one named "A"
-CREATE TABLE "Databend" (a INT, A INT);
+CREATE TABLE "Datalake" (a INT, A INT);
 
 >> SQL Error [1105] [HY000]: BadArguments. Code: 1006, Text = Duplicated column name: a.
 
 -- Double quote the column names
-CREATE TABLE "Databend" ("a" INT, "A" INT);
-DESC "Databend";
+CREATE TABLE "Datalake" ("a" INT, "A" INT);
+DESC "Datalake";
 
 Field|Type|Null|Default|Extra|
 -----+----+----+-------+-----+
@@ -116,19 +116,19 @@ In {{{ .lake }}}, when managing string items like text and dates, it is essentia
 ```sql
 INSERT INTO weather VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27');
 
-SELECT 'Databend';
+SELECT 'Datalake';
 
-'databend'|
+'datalake'|
 ----------+
-Databend  |
+Datalake  |
 
-SELECT "Databend";
+SELECT "Datalake";
 
 >> SQL Error [1105] [HY000]: SemanticError. Code: 1065, Text = error:
   --> SQL:1:73
   |
-1 | /* ApplicationName=DBeaver 23.2.0 - SQLEditor <Script-12.sql> */ SELECT "Databend"
-  |                                                                         ^^^^^^^^^^ column Databend doesn't exist, do you mean 'Databend'?
+1 | /* ApplicationName=DBeaver 23.2.0 - SQLEditor <Script-12.sql> */ SELECT "Datalake"
+  |                                                                         ^^^^^^^^^^ column Datalake doesn't exist, do you mean 'Datalake'?
 ```
 
 By default, {{{ .lake }}} SQL dialect is `PostgreSQL`:

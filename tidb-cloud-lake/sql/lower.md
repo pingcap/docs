@@ -24,11 +24,11 @@ VARCHAR
 ## Examples
 
 ```sql
-SELECT LOWER('Hello, Databend!'), LCASE('Hello, Databend!');
+SELECT LOWER('Hello, DataLake!'), LCASE('Hello, DataLake!');
 
 ┌───────────────────────────────────────────────────────┐
-│ lower('hello, databend!') │ lcase('hello, databend!') │
+│ lower('hello, datalake!') │ lcase('hello, datalake!') │
 ├───────────────────────────┼───────────────────────────┤
-│ hello, databend!          │ hello, databend!          │
+│ hello, datalake!          │ hello, datalake!          │
 └───────────────────────────────────────────────────────┘
 ```

@@ -24,25 +24,25 @@ Array of strings. SPLIT returns NULL when either the input string or the delimit
 ```sql
 -- Use a space as the delimiter
 -- SPLIT returns an array with two parts.
-SELECT SPLIT('Databend Cloud', ' ');
+SELECT SPLIT('Datalake Cloud', ' ');
 
-split('databend cloud', ' ')|
+split('datalake cloud', ' ')|
 ----------------------------+
-['Databend','Cloud']        |
+['Datalake','Cloud']        |
 
 -- Use an empty string as the delimiter or a delimiter that does not exist in the input string
 -- SPLIT returns an array containing the entire input string as a single part.
-SELECT SPLIT('Databend Cloud', '');
+SELECT SPLIT('Datalake Cloud', '');
 
-split('databend cloud', '')|
+split('datalake cloud', '')|
 ---------------------------+
-['Databend Cloud']         |
+['Datalake Cloud']         |
 
-SELECT SPLIT('Databend Cloud', ',');
+SELECT SPLIT('Datalake Cloud', ',');
 
-split('databend cloud', ',')|
+split('datalake cloud', ',')|
 ----------------------------+
-['Databend Cloud']          |
+['Datalake Cloud']          |
 
 -- Use ' ' (tab) as the delimiter
 -- SPLIT returns an array with timestamp, log level, and message.
