@@ -40,7 +40,7 @@ This document takes the `tidb` user as an example.
         EOF
         ```
 
-        Because TiDB services in no-sudo mode are managed by the per-user `systemd` instance (`user@<UID>.service`), the limits in `/etc/security/limits.conf` are applied when `user@<UID>.service` starts. If you change `/etc/security/limits.conf` after `user@<UID>.service` is already running, restart `user@<UID>.service` or reboot the target machine before you deploy or restart TiDB services. Otherwise, the new limits might not take effect for the TiDB services.
+        In no-sudo mode, TiDB services are managed by each user's own `systemd` instance (`user@<UID>.service`). The settings in `/etc/security/limits.conf` might be applied through PAM when `user@<UID>.service` starts, but the effective file descriptor limit still depends on the resource limits obtained by that user `systemd` instance itself. On some systems, even after you configure `/etc/security/limits.conf`, the `Max open files` value of `user@<UID>.service` might still be lower than what TiDB requires.
 
 2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
@@ -53,13 +53,11 @@ This document takes the `tidb` user as an example.
         source ~/.bashrc.d/systemd
         ```
 
-    2. Use the `root` user to start the user service. If `user@${uid}.service` is already running after you update `/etc/security/limits.conf`, run `systemctl restart user@${uid}.service` to apply the new limits.
+    2. Use the `root` user to start the user service.
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
         $ systemctl start user@${uid}.service
-        # If user@${uid}.service is already running after you update /etc/security/limits.conf, run:
-        $ systemctl restart user@${uid}.service
         $ systemctl status user@${uid}.service
         user@1000.service - User Manager for UID 1000
         Loaded: loaded (/usr/lib/systemd/system/user@.service; static; vendor preset>
@@ -78,7 +76,37 @@ This document takes the `tidb` user as an example.
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-    3. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
+        If you update `/etc/security/limits.conf` after `user@${uid}.service` is already running, restart `user@${uid}.service` before you deploy or restart TiDB services so that the user `systemd` instance reloads the updated resource limits. Restarting `user@${uid}.service` stops all user services managed by that user. If the cluster is already running, stop it gracefully first or perform this operation during a maintenance window.
+
+        ```shell
+        $ uid=$(id -u tidb) # Get the ID of the tidb user
+        $ systemctl restart user@${uid}.service
+        ```
+
+    3. Check the effective `Max open files` value of the running `user@${uid}.service`.
+
+        ```shell
+        $ uid=$(id -u tidb)
+        $ pid=$(systemctl show "user@${uid}.service" --property MainPID --value)
+        $ grep "Max open files" "/proc/${pid}/limits"
+        ```
+
+        If the `Max open files` value is still lower than what TiDB requires, configure a system-level drop-in for `user@${uid}.service`, then restart the service and check the effective value again.
+
+    4. Use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
+
+        ```shell
+        $ uid=$(id -u tidb)
+        $ install -d -m 0755 "/etc/systemd/system/user@${uid}.service.d"
+        $ cat <<'EOF' > "/etc/systemd/system/user@${uid}.service.d/limit-nofile.conf"
+        [Service]
+        LimitNOFILE=1000000
+        EOF
+        $ systemctl daemon-reload
+        $ systemctl restart user@${uid}.service
+        ```
+
+    5. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
 
 3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
 
