@@ -89,12 +89,20 @@ def check_manual_break(filename):
 
             lineNum += 1
 
-            # Count the number of '---' to skip metadata.
-            if metadata < 2 :
-                if re.match(r'(\s|\t)*(-){3}', line):
-                    metadata += 1
+            # Check only website documents with YAML front matter. Requiring
+            # the opening delimiter on the first line prevents a later fenced
+            # example containing '---' from being mistaken for metadata.
+            if lineNum == 1:
+                if not re.fullmatch(r'\ufeff?---\s*', line):
+                    return mark
+                metadata = 1
                 continue
-            else:
+            if metadata == 1:
+                if re.fullmatch(r'---\s*', line):
+                    metadata = 2
+                continue
+
+            if metadata == 2:
                 # Skip tables and notes.
                 if re.match(r'(\s|\t)*(\||>)\s*\w*',line):
                     continue
