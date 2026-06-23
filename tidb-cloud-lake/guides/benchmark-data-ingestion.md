@@ -83,7 +83,7 @@ You can reproduce the benchmark by following the steps below.
 
 ### Benchmark Environment
 
-Both Snowflake and {{{ .lake }}} was tested under similar conditions:
+The benchmark tests both Snowflake and {{{ .lake }}} under similar conditions:
 
 | Parameter      | Snowflake                                                | {{{ .lake }}}                            |
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
@@ -98,7 +98,7 @@ Both Snowflake and {{{ .lake }}} was tested under similar conditions:
 
 ### Prerequisites
 
-- Have a [Snowflake account](https://singup.snowflake.com)
+- Have a [Snowflake account](https://signup.snowflake.com)
 - Create a [{{{ .lake }}} account](https://tidbcloud.com/)
 
 ### Data Ingestion Benchmark
@@ -118,12 +118,12 @@ The data ingestion benchmark can be reproduced using the following steps:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
     - Create the necessary tables as per the TPC-H schema. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
-    - Utilize a similar method to Snowflake for loading data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
+    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
 
 </details>
 
 <details>
-  <summary> ClickBench Hits Data Loading</summary>
+  <summary>ClickBench Hits Data Loading</summary>
 
 1. **Snowflake Data Load**:
 
@@ -135,7 +135,7 @@ The data ingestion benchmark can be reproduced using the following steps:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
     - Create the necessary tables as per the `hits` schema. [SQL Script](https://gist.github.com/BohuTANG/ab45d251c533dcf0b1ccd3ea1263b8a0#file-hits-databend-schema).
-    - Utilize a similar method to Snowflake for loading data from AWS S3. [SQL Script](https://gist.github.com/BohuTANG/ab45d251c533dcf0b1ccd3ea1263b8a0?permalink_comment_id=4991767#gistcomment-4991767).
+    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://gist.github.com/BohuTANG/ab45d251c533dcf0b1ccd3ea1263b8a0?permalink_comment_id=4991767#gistcomment-4991767).
 
 </details>
 

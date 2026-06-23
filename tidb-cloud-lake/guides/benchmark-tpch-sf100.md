@@ -9,7 +9,7 @@ summary: This guide presents a performance and cost comparison between {{{ .lake
 
 ### TPC-H
 
-The TPC-H benchmark is a standard for evaluating decision support systems, focusing on complex queries and data maintenance. In this analysis, we compare {{{ .lake }}} with Snowflake using the TPC-H SF100(SF1 = 6 Million Rows) dataset, encompassing 100GB of data and approximately 600 million rows across 22 queries.
+The TPC-H benchmark is a standard for evaluating decision support systems, focusing on complex queries and data maintenance. This analysis compares {{{ .lake }}} with Snowflake using the TPC-H SF100 (SF1 = 6 million rows) dataset, encompassing 100GB of data and approximately 600 million rows across 22 queries.
 
 > **Note:**
 >
@@ -20,12 +20,12 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 - **[Snowflake](https://www.snowflake.com)**: Snowflake is renowned for its advanced features such as separating storage and compute, scalable computing on demand, data sharing, and cloning capabilities.
 
 - **[{{{ .lake }}}](https://www.tidbcloud.com)**: {{{ .lake }}} offers [similar functionalities](https://github.com/databendlabs/databend/issues/13059) to Snowflake, being a cloud-native data warehouse that also separates storage from computing and provides scalable computing as needed.
-  It is developed from the open-source [{{{ .lake }}} project](https://github.com/tidbcloud/lakesql), positioning itself as a modern, cost-effective alternative to Snowflake, especially for large-scale analytics.
+  It builds on the open-source [{{{ .lake }}} project](https://github.com/tidbcloud/lakesql) and positions itself as a modern, cost-effective alternative to Snowflake, especially for large-scale analytics.
 
 ## Performance and Cost Comparison
 
 - **Data Loading Costs**: {{{ .lake }}} achieves a **67% cost reduction** in data loading compared to Snowflake.
-- **Query Execution Costs**: {{{ .lake }}} approximately **60% less expensive** for query execution than Snowflake.
+- **Query Execution Costs**: {{{ .lake }}} is approximately **60% less expensive** for query execution than Snowflake.
 
 :::info[Note]
 
@@ -37,7 +37,7 @@ And remember, **don't just take our word for it — you're encouraged to run and
 
 ![TPC-H SF100 data loading benchmark](/media/tidb-cloud-lake/tpch-sf100-data-loading-benchmark.png)
 
-| Table            | Snowflake(695s, Cost $0.77) | {{{ .lake }}}(446s, Cost $0.25) | Rows        |
+| Table            | Snowflake (695s, Cost $0.77) | {{{ .lake }}} (446s, Cost $0.25) | Rows        |
 | ---------------- | --------------------------- | -------------------------------- | ----------- |
 | customer         | 18.137                      | 13.436                           | 15,000,000  |
 | lineitem         | 477.740                     | 305.812                          | 600,037,902 |
