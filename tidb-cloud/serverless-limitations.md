@@ -68,7 +68,7 @@ TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルト
 
 組織内の最初の 5 つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
 
--   行ベースのstorage: 5 GiB
+-   行ベースのストレージ: 5 GiB
 -   列指向ストレージ: 5 GiB
 -   [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 月間5000万RU
 
