@@ -386,9 +386,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
 - LASTVAL
+- LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
-- LATERAL (R)
 - LEAVE (R)
 - LEFT (R)
 - LESS
