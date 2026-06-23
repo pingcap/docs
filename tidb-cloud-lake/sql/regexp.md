@@ -20,10 +20,10 @@ Returns `true` if the string `<expr>` matches the regular expression specified b
 ## Examples
 
 ```sql
-SELECT 'databend' REGEXP 'd*', 'databend' RLIKE 'd*';
+SELECT 'datalake' REGEXP 'd*', 'datalake' RLIKE 'd*';
 
 ┌────────────────────────────────────────────────────┐
-│ ('databend' regexp 'd*') │ ('databend' rlike 'd*') │
+│ ('datalake' regexp 'd*') │ ('datalake' rlike 'd*') │
 ├──────────────────────────┼─────────────────────────┤
 │ true                     │ true                    │
 └────────────────────────────────────────────────────┘

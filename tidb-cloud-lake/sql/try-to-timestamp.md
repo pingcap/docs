@@ -44,10 +44,10 @@ SELECT TRY_TO_TIMESTAMP('2024-06-12 10:21:39', '%Y-%m-%d %H:%M:%S'), TRY_TO_DATE
 │ 2024-06-12 10:21:39                                          │ 2024-06-12 10:21:39                                         │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-SELECT TRY_TO_TIMESTAMP('databend'), TRY_TO_DATETIME('databend');
+SELECT TRY_TO_TIMESTAMP('datalake'), TRY_TO_DATETIME('datalake');
 
 ┌────────────────────────────────────────────────────────────┐
-│ try_to_timestamp('databend') │ try_to_datetime('databend') │
+│ try_to_timestamp('datalake') │ try_to_datetime('datalake') │
 ├──────────────────────────────┼─────────────────────────────┤
 │ NULL                         │ NULL                        │
 └────────────────────────────────────────────────────────────┘

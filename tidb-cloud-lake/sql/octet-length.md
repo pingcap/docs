@@ -16,9 +16,9 @@ OCTET_LENGTH(<str>)
 ## Examples
 
 ```sql
-SELECT OCTET_LENGTH('databend');
+SELECT OCTET_LENGTH('datalake');
 +--------------------------+
-| OCTET_LENGTH('databend') |
+| OCTET_LENGTH('datalake') |
 +--------------------------+
 |                        8 |
 +--------------------------+

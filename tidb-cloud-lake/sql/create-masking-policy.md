@@ -58,7 +58,7 @@ CREATE ROLE 'MANAGERS';
 GRANT ALL ON *.* TO ROLE 'MANAGERS';
 
 -- Create a user and grant the role to the user
-CREATE USER manager_user IDENTIFIED BY 'databend';
+CREATE USER manager_user IDENTIFIED BY 'datalake';
 GRANT ROLE 'MANAGERS' TO 'manager_user';
 
 -- Create a masking policy that expects an extra column

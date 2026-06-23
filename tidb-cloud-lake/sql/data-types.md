@@ -38,7 +38,7 @@ summary: "{{{ .lake }}} stores data in strongly typed columns. This page summari
 | [ARRAY](/tidb-cloud-lake/sql/array.md)     | `[1, 2, 3]`                            | Ordered list of values with the same inner type. |
 | [TUPLE](/tidb-cloud-lake/sql/tuple.md)     | `('2023-02-14','Valentine's Day')`     | Fixed-length ordered list with declared element types. |
 | [MAP](/tidb-cloud-lake/sql/map.md)         | `{'a': 1, 'b': 2}`                     | Key-value collection (internally tuples of key and value types). |
-| [VARIANT](/tidb-cloud-lake/sql/variant.md) | `[1, {"name":"databend"}]`             | JSON-like container that can mix primitives, arrays, and objects. |
+| [VARIANT](/tidb-cloud-lake/sql/variant.md) | `[1, {"name":"datalake"}]`             | JSON-like container that can mix primitives, arrays, and objects. |
 | [BITMAP](/tidb-cloud-lake/sql/bitmap.md)   | `<bitmap binary>`                      | Compressed bitmap optimized for membership and set operations. |
 
 ## Domain-Specific Types

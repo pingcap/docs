@@ -41,7 +41,7 @@ Name         |Allowed Ip List          |Blocked Ip List|Comment    |
 sample_policy|192.168.1.0/24           |192.168.1.99   |Sample     |
 
 -- Create a user
-CREATE USER sample_user IDENTIFIED BY 'databend';
+CREATE USER sample_user IDENTIFIED BY 'datalake';
 
 -- Associate the network policy with the user
 ALTER USER sample_user WITH SET NETWORK POLICY='sample_policy';

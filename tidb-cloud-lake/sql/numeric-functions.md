@@ -70,4 +70,4 @@ This page provides a comprehensive overview of Numeric functions in {{{ .lake }}
 | [FACTORIAL](/tidb-cloud-lake/sql/factorial.md) | Returns the factorial of x | `FACTORIAL(5)` → `120` |
 | [RAND](/tidb-cloud-lake/sql/rand.md) | Returns a random number between 0 and 1 | `RAND()` → `0.123...` (random) |
 | [RANDN](/tidb-cloud-lake/sql/rand-n.md) | Returns a random number from standard normal distribution | `RANDN()` → `-0.123...` (random) |
-| [CRC32](/tidb-cloud-lake/sql/crc.md) | Returns the CRC32 checksum of a string | `CRC32('Databend')` → `3899655467` |
+| [CRC32](/tidb-cloud-lake/sql/crc.md) | Returns the CRC32 checksum of a string | `CRC32('datalake')` → `2878859588` |

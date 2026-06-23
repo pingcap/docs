@@ -21,7 +21,7 @@ CREATE TABLE binary_samples (
 
 INSERT INTO binary_samples VALUES
   (1, UNHEX('68656c6c6f')),             -- "hello"
-  (2, FROM_BASE64('ZGF0YWJlbmQ='));     -- "databend"
+  (2, FROM_BASE64('ZGF0YWxha2U='));     -- "datalake"
 ```
 
 ```sql
@@ -40,7 +40,7 @@ Result:
 │ id │ hex_value    │ byte_len │
 ├────┼──────────────┼──────────┤
 │  1 │ 68656c6c6f   │        5 │
-│  2 │ 6461746162656e64 │     8 │
+│  2 │ 646174616c616b65 │     8 │
 └────┴──────────────┴──────────┘
 ```
 
@@ -63,7 +63,7 @@ Result:
 │ id │ text_value  │
 ├────┼─────────────┤
 │  1 │ hello       │
-│  2 │ databend    │
+│  2 │ datalake    │
 └────┴─────────────┘
 ```
 

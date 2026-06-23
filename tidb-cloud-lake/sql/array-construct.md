@@ -26,11 +26,11 @@ JSON array.
 ### Example 1: Creating JSON Array with Constant Values or Expressions
 
 ```sql
-SELECT ARRAY_CONSTRUCT('Databend', 3.14, NOW(), TRUE, NULL);
+SELECT ARRAY_CONSTRUCT('Datalake', 3.14, NOW(), TRUE, NULL);
 
-array_construct('databend', 3.14, now(), true, null)         |
+array_construct('datalake', 3.14, now(), true, null)         |
 --------------------------------------------------------+
-["Databend",3.14,"2023-09-06 07:23:55.399070",true,null]|
+["Datalake",3.14,"2023-09-06 07:23:55.399070",true,null]|
 
 SELECT ARRAY_CONSTRUCT('fruits', ARRAY_CONSTRUCT('apple', 'banana', 'orange'), OBJECT_CONSTRUCT('price', 1.2, 'quantity', 3));
 

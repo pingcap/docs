@@ -26,16 +26,16 @@ A `VARCHAR` data type value Or `NULL` data type.
 ## Examples
 
 ```sql
-SELECT CONCAT('data', 'bend');
+SELECT CONCAT('data', 'lake');
 +------------------------+
-| concat('data', 'bend') |
+| concat('data', 'lake') |
 +------------------------+
-| databend               |
+| datalake               |
 +------------------------+
 
-SELECT CONCAT('data', NULL, 'bend');
+SELECT CONCAT('data', NULL, 'lake');
 +------------------------------+
-| CONCAT('data', NULL, 'bend') |
+| CONCAT('data', NULL, 'lake') |
 +------------------------------+
 |                         NULL |
 +------------------------------+

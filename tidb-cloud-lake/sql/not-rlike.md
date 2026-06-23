@@ -16,9 +16,9 @@ Returns 1 if the string expr doesn't match the regular expression specified by t
 ## Examples
 
 ```sql
-SELECT 'databend' not rlike 'd*';
+SELECT 'datalake' not rlike 'd*';
 +-----------------------------+
-| ('databend' not rlike 'd*') |
+| ('datalake' not rlike 'd*') |
 +-----------------------------+
 |                           0 |
 +-----------------------------+

@@ -97,28 +97,28 @@ COPY /*+ set_var(max_threads=6) */ INTO mytable FROM @mystage/ pattern='.*[.]par
 
 ```sql
 CREATE TABLE t1(a Int, b bool);
-INSERT /*+ SET_VAR(deduplicate_label='databend') */ INTO t1 (a, b) VALUES(1, false);
+INSERT /*+ SET_VAR(deduplicate_label='datalake') */ INTO t1 (a, b) VALUES(1, false);
 SELECT * FROM t1;
 
 a|b|
 -+-+
 1|0|
 
-UPDATE /*+ SET_VAR(deduplicate_label='databend') */ t1 SET a = 20 WHERE b = false;
+UPDATE /*+ SET_VAR(deduplicate_label='datalake') */ t1 SET a = 20 WHERE b = false;
 SELECT * FROM t1;
 
 a|b|
 -+-+
 1|0|
 
-REPLACE /*+ SET_VAR(deduplicate_label='databend') */ INTO t1 on(a,b) VALUES(40, false);
+REPLACE /*+ SET_VAR(deduplicate_label='datalake') */ INTO t1 on(a,b) VALUES(40, false);
 SELECT * FROM t1;
 
 a|b|
 -+-+
 1|0|
 
-MERGE /*+ SET_VAR(deduplicate_label='databend') */ INTO t1 using t2 on t1.a = t2.a when matched then update *;
+MERGE /*+ SET_VAR(deduplicate_label='datalake') */ INTO t1 using t2 on t1.a = t2.a when matched then update *;
 SELECT * FROM t1;
 
 a|b|

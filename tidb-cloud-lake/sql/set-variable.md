@@ -29,15 +29,15 @@ Variables can be accessed using the dollar sign syntax: `$variable_name`
 ### Setting a Single Variable
 
 ```sql
--- Sets variable a to the string 'databend'
-SET VARIABLE a = 'databend';
+-- Sets variable a to the string 'datalake'
+SET VARIABLE a = 'datalake';
 
 -- Access the variable
 SELECT $a;
 ┌─────────┐
 │ $a      │
 ├─────────┤
-│ databend│
+│ datalake│
 └─────────┘
 ```
 
