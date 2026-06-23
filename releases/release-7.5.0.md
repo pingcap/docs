@@ -78,7 +78,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 -   `IMPORT INTO` SQL ステートメントのサポート (GA) [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)
 
-    バージョン7.5.0では、 `IMPORT INTO` SQLステートメントが一般提供（GA）されます。このステートメントは、 TiDB Lightningの[物理輸入モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合し、CSV、SQL、PARQUETなどの形式のデータをTiDBの空のテーブルにすばやくインポートできるようにします。このインポート方法により、 TiDB Lightningの個別のデプロイと管理が不要になり、データインポートの複雑さが軽減され、インポート効率が大幅に向上します。
+    バージョン7.5.0では、 `IMPORT INTO` SQLステートメントが一般提供（GA）されます。このステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)機能を統合し、CSV、SQL、PARQUETなどの形式のデータをTiDBの空のテーブルにすばやくインポートできるようにします。このインポート方法により、 TiDB Lightningの個別のデプロイと管理が不要になり、データインポートの複雑さが軽減され、インポート効率が大幅に向上します。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 

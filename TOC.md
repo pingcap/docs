@@ -527,7 +527,7 @@
             -   [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)
             -   [カスタマイズされたファイル](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
             -   [Amazon S3からデータをインポートする](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)
-        -   物理輸入モード
+        -   物理インポートモード
             -   [要件と制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md)
             -   [物理インポートモードを使用する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
         -   論理インポートモード

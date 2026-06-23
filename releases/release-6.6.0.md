@@ -560,7 +560,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   競合解決ロジック ( `duplicate-resolution` ) がチェックサムの不一致を引き起こす可能性がある問題を修正 [#40657](https://github.com/pingcap/tidb/issues/40657) @[sleepymole](https://github.com/sleepymole)
         -   データ ファイルに閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正 [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
         -   エラーレポート内のファイルオフセットがファイルサイズを超える問題を修正 [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        -   PDClient の新しいバージョンで並行インポートが失敗する可能性がある問題を修正 [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
+        -   PDClient の新しいバージョンで並列インポートが失敗する可能性がある問題を修正 [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
         -   TiDB Lightningの事前チェックで、以前のインポート失敗によって残されたダーティデータを見つけられない問題を修正 [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
 
 ## 寄稿者 {#contributors}
