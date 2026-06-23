@@ -69,7 +69,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 > **注記：**
 >
 > -   各書き込み操作は最終的にすべてのレプリカに複製されます（デフォルトでは、TiKVには3つのレプリカがあります）。各複製操作は、それぞれ異なる書き込み操作として扱われます。
-> -   上記の表には、TiDBセルフマネージドクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
+> -   上記の表には、TiDB Self-ManagedクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
 > -   現在、 TiFlashのリソース制御では、SQL CPUのみが考慮されます。SQL CPUとは、クエリおよび読み取りリクエストのペイロードに対するパイプラインタスクの実行によって消費されるCPU時間です。
 
 ## リソース制御のためのパラメータ {#parameters-for-resource-control}
@@ -88,7 +88,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 <CustomContent platform="tidb-cloud">
 
 -   TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。
--   TiFlash: TiDB セルフマネージドの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`構成項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
+-   TiFlash: TiDB Self-Managedの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`構成項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
 
 </CustomContent>
 

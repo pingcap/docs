@@ -3,7 +3,7 @@ title: High Availability in TiDB Cloud Dedicated
 summary: TiDB Cloud Dedicated は、マルチ AZ デプロイメントによる高可用性をサポートします。
 ---
 
-# TiDB Cloud専用における高可用性 {#high-availability-in-tidb-cloud-dedicated}
+# TiDB Cloud Dedicatedにおける高可用性 {#high-availability-in-tidb-cloud-dedicated}
 
 TiDBはRaftコンセンサスアルゴリズムを使用し、 Raftグループ内のストレージ全体にデータの高可用性と安全なレプリケーションを実現します。データはストレージノード間で冗長コピーされ、異なるアベイラビリティゾーンに配置されるため、マシンやデータセンターの障害から保護されます。自動フェイルオーバー機能により、TiDBはサービスの常時稼働を保証します。
 

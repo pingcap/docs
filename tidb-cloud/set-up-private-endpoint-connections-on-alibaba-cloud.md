@@ -9,7 +9,7 @@ summary: Alibaba Cloudのプライベートエンドポイントを介して、T
 
 > **ヒント：**
 >
-> AWS PrivateLink 経由でTiDB Cloud StarterまたはEssentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloudに接続します。](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> AWS PrivateLink 経由でTiDB Cloud StarterまたはEssentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloudに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 ## 制限 {#restrictions}
 
@@ -20,10 +20,10 @@ summary: Alibaba Cloudのプライベートエンドポイントを介して、T
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにプライベートエンドポイント経由で接続するには、以下の手順に従ってください。
 
-1.  [TiDB Cloud StarterまたはEssentialインスタンスを選択してください。](#step-1-choose-a-tidb-instance)
+1.  [TiDB Cloud StarterまたはEssentialインスタンスを選択してください](#step-1-choose-a-tidb-instance)
 2.  [Alibaba Cloud上にプライベートエンドポイントを作成する](#step-2-create-a-private-endpoint-on-alibaba-cloud)
 3.  [TiDB Cloudでプライベートエンドポイントを認証する（オプション）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
-4.  [プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。](#step-4-connect-to-your-instance-using-the-private-endpoint)
+4.  [プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します](#step-4-connect-to-your-instance-using-the-private-endpoint)
 
 ### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance} {#step-1-choose-a-tidb-instance}
 

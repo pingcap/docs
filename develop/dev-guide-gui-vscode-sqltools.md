@@ -29,7 +29,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
 -   (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
--   [ローカルテスト用のTiDBセルフマネージドクラスタをデプロイ。](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番本番のTiDBセルフマネージドクラスタをデプロイ。](/production-deployment-using-tiup.md)
+-   [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
 
@@ -116,7 +116,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
     -   公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     -   まだパスワードを設定していない場合は、ダイアログの**「ルートパスワードを設定」**をクリックしてください。
     -   サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **「CA証明書」**をクリックしてダウンロードしてください。
-    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    -   **パブリック**接続タイプに加えて、 TiDB Cloud Premium は**プライベート エンドポイント**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
 
@@ -197,13 +197,13 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     -   **接続方法**：**サーバーとポート**を選択してください。
 
-    -   **サーバーアドレス**：TiDBセルフマネージドクラスタのIPアドレスまたはドメイン名を入力してください。
+    -   **サーバーアドレス**：TiDB Self-ManagedクラスタのIPアドレスまたはドメイン名を入力してください。
 
-    -   **ポート**：TiDBセルフマネージドクラスタのポート番号を入力してください。
+    -   **ポート**：TiDB Self-Managedクラスタのポート番号を入力してください。
 
     -   **データベース**：接続したいデータベースを入力してください。
 
-    -   **ユーザー名**：TiDBセルフマネージドクラスタに接続するために使用するユーザー名を入力してください。
+    -   **ユーザー名**：TiDB Self-Managedクラスタに接続するために使用するユーザー名を入力してください。
 
     -   **パスワードモード**：
 
@@ -217,9 +217,9 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     ![VS Code SQLTools: configure connection settings for TiDB Self-Managed](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3.  **「接続テスト」**をクリックして、TiDBセルフマネージドクラスタへの接続を検証してください。
+3.  **「接続テスト」**をクリックして、TiDB Self-Managedクラスタへの接続を検証してください。
 
-    パスワードが空欄でない場合は、ポップアップウィンドウで**「許可」**をクリックし、TiDBセルフマネージドクラスタのパスワードを入力してください。
+    パスワードが空欄でない場合は、ポップアップウィンドウで**「許可」**をクリックし、TiDB Self-Managedクラスタのパスワードを入力してください。
 
     ![VS Code SQLTools: enter password to connect to TiDB Self-Managed](/media/develop/vsc-sqltools-password.jpg)
 

@@ -68,7 +68,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [Amazon RDS for Oracleから](https://docs.pingcap.com/tidbcloud/migrate-from-oracle-using-aws-dms)
 
-[TiDBセルフマネージドから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
+[TiDB Self-Managedから](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
 
 [CSVファイルから](https://docs.pingcap.com/tidbcloud/import-csv-files)
 

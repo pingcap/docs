@@ -5,7 +5,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 # <code>tidbcloud_dedicated_cluster</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-cluster-code-resource}
 
-このドキュメントでは、 `tidbcloud_dedicated_cluster`リソースを使用して[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_dedicated_cluster`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理する方法について説明します。
 
 また、 `tidbcloud_projects`データ ソースで必要な情報を取得し、 `tidbcloud_dedicated_node_group`リソースを使用してTiDB Cloud Dedicated クラスターの TiDB ノード グループを管理する方法も学習します。
 
@@ -117,7 +117,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## TiDB Cloud専用クラスターを作成する {#create-a-tidb-cloud-dedicated-cluster}
+## TiDB Cloud Dedicatedクラスターを作成する {#create-a-tidb-cloud-dedicated-cluster}
 
 > **注記：**
 >

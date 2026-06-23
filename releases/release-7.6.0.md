@@ -356,7 +356,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `tidb_server_memory_limit` [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)による長期メモリ負荷が原因で TiDB の CPU 使用率が高くなる問題を修正しました。
     -   `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正 [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
     -   メモリ制限を超えると、CTE を含むクエリが予期せずスタックする問題を修正 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
-    -   TiDBサーバーが監査ログ用のエンタープライズプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
+    -   TiDBサーバーが監査ログ用のEnterpriseプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     -   特定のシナリオでオプティマイザーがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     -   `UPDATE`または`DELETE`ステートメントに`WITH RECURSIVE` CTE が含まれている場合、誤った結果が生じる可能性がある問題を修正しました [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
     -   IndexHashJoin演算子を含むクエリがメモリ使用量`tidb_mem_quota_query`超えると停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)

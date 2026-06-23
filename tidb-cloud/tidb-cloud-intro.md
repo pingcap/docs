@@ -102,7 +102,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     </CustomContent>
 
--   TiDB Cloudプレミアム
+-   TiDB Cloud Premium
 
     TiDB Cloud Premiumは、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
 

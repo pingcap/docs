@@ -209,7 +209,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb">
 
-この問題を解決するため、TiDB v6.6.0では、デフォルトでは無効になっている[声明要約の持続性](#persist-statements-summary)機能を試験的に導入しました。この機能を有効にすると、履歴データはメモリに保存されず、直接ディスクに書き込まれます。これにより、TiDBサーバーが再起動しても履歴データは保持されます。
+この問題を解決するため、TiDB v6.6.0では、デフォルトでは無効になっている[ステートメント要約の持続性](#persist-statements-summary)機能を試験的に導入しました。この機能を有効にすると、履歴データはメモリに保存されず、直接ディスクに書き込まれます。これにより、TiDBサーバーが再起動しても履歴データは保持されます。
 
 </CustomContent>
 

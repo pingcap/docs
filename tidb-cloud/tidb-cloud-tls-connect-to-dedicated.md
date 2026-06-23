@@ -4,7 +4,7 @@ summary: TiDB Cloud Dedicated に TLS 接続を導入します。
 aliases: ['/ja/tidbcloud/tidb-cloud-tls-connect-to-dedicated-tier']
 ---
 
-# TiDB Cloud専用へのTLS接続 {#tls-connections-to-tidb-cloud-dedicated}
+# TiDB Cloud DedicatedへのTLS接続 {#tls-connections-to-tidb-cloud-dedicated}
 
 TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの接続における基本的なセキュリティ対策の一つです。クライアント、アプリケーション、開発ツールからTiDB Cloud Dedicated クラスタへの複数の TLS 接続を設定することで、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated は TLS 1.2 および TLS 1.3 のみをサポートし、TLS 1.0 および TLS 1.1 はサポートしていません。
 
@@ -12,13 +12,13 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由してTiDB Cloudにログインし、次に[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md)経由してログインします。
+-   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)経由してログインします。
 
 -   安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
     これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、 TiDB Cloud Dedicatedクラスターの行にある**「...」**をクリックし、 **「パスワード設定」**を選択します。パスワード設定で「パスワードの**自動生成」**をクリックすると、数字、大文字、小文字、特殊文字を含む16文字のルートパスワードが自動的に生成されます。
 
-## TiDB Cloud専用クラスタへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-dedicated-cluster}
+## TiDB Cloud Dedicatedクラスタへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-dedicated-cluster}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を取得し、次のようにTiDB Cloud Dedicated クラスターに接続できます。
 

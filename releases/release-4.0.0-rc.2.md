@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   一般ログ[＃16946](https://github.com/pingcap/tidb/pull/16946)に`forUpdateTS`および`Read Consistency`分離レベル情報を出力することをサポート
     -   TiKVリージョン[＃16925](https://github.com/pingcap/tidb/pull/16925)でのロック解決の重複リクエストの折りたたみをサポート
     -   `SET CONFIG`ステートメントを使用して PD/TiKV ノード[＃16853](https://github.com/pingcap/tidb/pull/16853)の構成を変更することをサポートします
-    -   `CREATE TABLE`の文の`auto_random`オプションを支持する[＃16813](https://github.com/pingcap/tidb/pull/16813)
+    -   `CREATE TABLE`の文の`auto_random`オプションをサポートする[＃16813](https://github.com/pingcap/tidb/pull/16813)
     -   TiKV がリクエストをより適切にスケジュールして処理できるように、DistSQL リクエストに TaskID を割り当てます[＃17155](https://github.com/pingcap/tidb/pull/17155)
     -   MySQLクライアント[＃17187](https://github.com/pingcap/tidb/pull/17187)にログインした後、TiDBサーバーのバージョン情報を表示する機能をサポート
     -   `GROUP_CONCAT`関数[＃16990](https://github.com/pingcap/tidb/pull/16990)の`ORDER BY`節をサポートする

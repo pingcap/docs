@@ -110,7 +110,7 @@ from:
 
 ## ステップ3：v1.0.xクラスタを停止します {#step-3-stop-the-v1-0-x-cluster}
 
-元の v1.0.x クラスターが DM-Ansible によってデプロイされている場合は、 [DM-Ansibleを使用してv1.0.xクラスタを停止します。](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster) 。
+元の v1.0.x クラスターが DM-Ansible によってデプロイされている場合は、 [DM-Ansibleを使用してv1.0.xクラスタを停止します](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster) 。
 
 元のv1.0.xクラスタがバイナリでデプロイされている場合は、DM-workerプロセスとDM-masterプロセスを直接停止できます。
 

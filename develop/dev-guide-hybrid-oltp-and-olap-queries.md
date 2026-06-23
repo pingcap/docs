@@ -240,7 +240,7 @@ TiDBがTiFlashをどのように使用するかの詳細については、 [TiDB
 ## 続きを読む {#read-more}
 
 -   [TiDB Cloudの HTAP クイックスタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)
--   [TiDBセルフマネージド向けHTAPクイックスタート](/quick-start-with-htap.md)と[TiDBセルフマネージドのHTAPを探索する](/explore-htap.md)
+-   [TiDB Self-Managed向けHTAPクイックスタート](/quick-start-with-htap.md)と[TiDB Self-ManagedのHTAPを探索する](/explore-htap.md)
 -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
 -   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
 
@@ -248,4 +248,4 @@ TiDBがTiFlashをどのように使用するかの詳細については、 [TiDB
 
 -   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
--   [TiDBセルフマネージドのサポートチケットを送信する](/support.md)
+-   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

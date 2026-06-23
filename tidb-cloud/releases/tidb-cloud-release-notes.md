@@ -254,7 +254,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 -   TiDB Cloud StarterおよびEssentialインスタンスの`project_id`値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`値をハードコーディングしないでください。
 
--   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します。](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
+-   `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
 
     -   アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
     -   [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
@@ -429,9 +429,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](https://tidbcloud.com/)すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
-    -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。ベーシックプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
+    -   **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**サポートプラン**パネルに、有料プランのユーザーは**サポートポータル**に誘導されます。
     -   **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**「サポートオプション」**と**「サポートチケット」**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
-    -   **明確なコミュニティ サポート アクセス**:**サポート プラン**オプション内では、Slack と Discord がベーシック プラン ユーザーの主要なテクニカル サポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)、および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)。
+    -   **明確なコミュニティ サポート アクセス**:**サポート プラン**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカル サポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)、および[コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)。
     -   **アクション指向のサポートプランUI** ：**サポートプラン**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
 
     詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。

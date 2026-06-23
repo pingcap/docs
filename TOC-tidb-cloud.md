@@ -133,7 +133,7 @@
     -   リソース割り当ての最適化
         -   [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
         -   リソースマネージャー
-            -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)
+            -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)
             -   [暴走クエリの管理](/tidb-resource-control-runaway-queries.md)
             -   [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)
         -   TiDBノードグループ
@@ -150,7 +150,7 @@
         -   [データ移行を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
         -   [データ移行を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
         -   [大規模データセットのMySQLシャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
-        -   [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
+        -   [TiDB Self-ManagedからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)
         -   [AWS DMSを使用してMySQL互換データベースから移行する](/tidb-cloud/migrate-from-mysql-using-aws-dms.md)
         -   [AWS DMSを使用してAmazon RDS for Oracleから移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
     -   TiDB Cloud Dedicatedへのデータインポート

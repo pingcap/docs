@@ -98,4 +98,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }
 ```
 
-レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`呼び出すことでジョブのステータスを確認できます。詳細については、エンド[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します。](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)参照してください。
+レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`呼び出すことでジョブのステータスを確認できます。詳細については、エンド[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)参照してください。

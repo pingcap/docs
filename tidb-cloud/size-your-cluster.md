@@ -40,7 +40,7 @@ TiDB のノード数、vCPU、RAM を構成できます。
 > -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
 > -   TiFlashは利用できません。
 >
-> **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
+> **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
 ### TiDBノード数 {#tidb-node-count}
 
@@ -106,7 +106,7 @@ TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 > -   4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > -   TiFlashは利用できません。
 >
-> **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloudエッセンシャル](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
+> **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
 
 ### TiKVノード数 {#tikv-node-count}
 
@@ -188,30 +188,30 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 ### TiKVノードストレージタイプ {#tikv-node-storage-types}
 
-TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVストレージタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次の TiKVストレージタイプを提供します。
 
--   [基本的なストレージ](#basic-storage)
--   [標準ストレージ](#standard-storage)
--   [パフォーマンスとプラスストレージ](#performance-and-plus-storage)
+-   [Basicストレージ](#basic-storage)
+-   [Standardストレージ](#standard-storage)
+-   [Performance+Plusストレージ](#performance-and-plus-storage)
 
-#### 基本的なstorage {#basic-storage}
+#### Basicストレージ {#basic-storage}
 
-ベーシックストレージは、スタンダードストレージよりもパフォーマンスが低い汎用ストレージタイプです。
+Basicストレージは、Standardストレージよりもパフォーマンスが低い汎用ストレージタイプです。
 
-ベーシックストレージタイプは、AWS でホストされている次のクラスターに自動的に適用されます。
+Basicストレージタイプは、AWS でホストされている次のクラスターに自動的に適用されます。
 
 -   2025 年 4 月 1 日より前に作成された既存のクラスター。
 -   v7.5.5、v8.1.2、または v8.5.0 より前のバージョンの TiDB で作成された新しいクラスター。
 
-#### 標準storage {#standard-storage}
+#### Standardストレージ {#standard-storage}
 
-スタンダードストレージは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。ベーシックstorageと比較して、 Raftログ用に十分なディスクリソースを確保することで、より優れたパフォーマンスを提供します。これにより、 Raft I/OがデータディスクI/Oに与える影響が軽減され、TiKVの読み取りおよび書き込みパフォーマンスが向上します。
+Standardストレージは、パフォーマンスとコスト効率のバランスが取れており、ほとんどのワークロードに最適です。Basicストレージと比較して、 Raftログ用に十分なディスクリソースを確保することで、より優れたパフォーマンスを提供します。これにより、 Raft I/OがデータディスクI/Oに与える影響が軽減され、TiKVの読み取りおよび書き込みパフォーマンスが向上します。
 
-標準ストレージタイプは、AWS でホストされ、TiDB バージョン v7.5.5、v8.1.2、v8.5.0 以降で作成された新しいクラスターに自動的に適用されます。
+Standardストレージタイプは、AWS でホストされ、TiDB バージョン v7.5.5、v8.1.2、v8.5.0 以降で作成された新しいクラスターに自動的に適用されます。
 
-#### パフォーマンスとプラスstorage {#performance-and-plus-storage}
+#### PerformanceストレージとPlusストレージ {#performance-and-plus-storage}
 
-パフォーマンスストレージとプラスストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。パフォーマンスストレージまたはプラスストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVストレージタイプを申請」と入力して、 **「送信」**をクリックします。
+PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット**」をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、「**説明」**フィールドに「TiKVストレージタイプを申請」と入力して、 **「送信」**をクリックします。
 
 ## サイズTiFlash {#size-tiflash}
 
@@ -258,15 +258,15 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 
 ### TiFlashノードストレージタイプ {#tiflash-node-storage-types}
 
-TiDB Cloud は、AWS でホストされる[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashストレージタイプを提供します。
+TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して次のTiFlashストレージタイプを提供します。
 
--   [基本的なストレージ](#basic-storage-1)
--   [プラスstorage](#plus-storage)
+-   [Basicストレージ](#basic-storage-1)
+-   [Plusストレージ](#plus-storage)
 
-#### 基本的なstorage {#basic-storage}
+#### Basicストレージ {#basic-storage}
 
-ベーシックストレージは、パフォーマンスとコスト効率のバランスが取れているため、ほとんどのワークロードに最適です。
+Basicストレージは、パフォーマンスとコスト効率のバランスが取れているため、ほとんどのワークロードに最適です。
 
-#### プラスstorage {#plus-storage}
+#### Plusストレージ {#plus-storage}
 
 Plusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、このストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。リクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートチケット」**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **「説明」**フィールドに「 TiFlashストレージタイプを申請」と入力して、 **「送信」を**クリックしてください。

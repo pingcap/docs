@@ -51,7 +51,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
     -   `region-concurrency` : TiDB Lightning のメイン論理処理の同時実行性。
     -   `send-kv-pairs` : 1 回のリクエストでTiDB Lightningから TiKV に送信されるキーと値のペアの数。
     -   `disk-quota` : 物理インポート モードを使用するときに、 TiDB Lightning のローカル一時ファイルによって使用されるディスク クォータ。
-    -   `GOMEMLIMIT` : TiDB LightningはGo言語で実装されています[`GOMEMLIMIT`適切に設定します。](#change-configuration-parameters)
+    -   `GOMEMLIMIT` : TiDB LightningはGo言語で実装されています[`GOMEMLIMIT`適切に設定します](#change-configuration-parameters)
 
 -   データ検証
 

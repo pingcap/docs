@@ -195,7 +195,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiCDCは、地理的に分散した複数のデータソースからデータを複製できるデプロイメントトポロジーをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
-    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます。](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
+    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
 -   TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) [asddongmen](https://github.com/asddongmen)
 
@@ -338,7 +338,7 @@ TiDBバージョン: 6.3.0-DMR
     -   システム変数`tidb_enable_noop_variable`が`WARN`に設定できてしまう問題を修正しました [#36647](https://github.com/pingcap/tidb/issues/36647) @[lcwangchao](https://github.com/lcwangchao)
     -   式インデックスが定義されている場合、 `ORDINAL_POSITION`テーブルの`INFORMATION_SCHEMA.COLUMNS`列が正しくない可能性がある問題を修正します。 [#31200](https://github.com/pingcap/tidb/issues/31200) @[bb7133](https://github.com/bb7133)
     -   TiDB がタイムスタンプが`MAXINT32`より大きい場合にエラーを報告しない問題を修正 [#31585](https://github.com/pingcap/tidb/issues/31585) @[bb7133](https://github.com/bb7133)
-    -   エンタープライズプラグイン使用時にTiDBサーバーが起動できない問題を修正 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
+    -   Enterpriseプラグイン使用時にTiDBサーバーが起動できない問題を修正 [#37319](https://github.com/pingcap/tidb/issues/37319) @[xhebox](https://github.com/xhebox)
     -   `SHOW CREATE PLACEMENT POLICY`の誤った出力を修正 [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
     -   一時テーブルでの予期しない`EXCHANGE PARTITION`動作を修正 [#37201](https://github.com/pingcap/tidb/issues/37201) @[lcwangchao](https://github.com/lcwangchao)
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`のクエリで誤った結果が返される問題を修正しました @[zimulala](https://github.com/zimulala)

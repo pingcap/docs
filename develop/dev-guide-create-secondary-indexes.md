@@ -138,7 +138,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 SQLパフォーマンスチューニングの詳細については、以下のドキュメントを参照してください。
 
 -   [TiDB CloudのSQLチューニング概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
--   [TiDBセルフマネージドのSQLチューニング概要](/sql-tuning-overview.md)
+-   [TiDB Self-ManagedのSQLチューニング概要](/sql-tuning-overview.md)
 
 > **注記：**
 >

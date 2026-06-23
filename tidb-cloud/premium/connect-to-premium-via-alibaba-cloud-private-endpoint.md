@@ -9,7 +9,7 @@ summary: Alibaba Cloud上のプライベートエンドポイントを介してT
 
 > **ヒント：**
 >
-> AWS PrivateLink 経由でTiDB Cloud Premium インスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します。](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+> AWS PrivateLink 経由でTiDB Cloud Premium インスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 ## 制限 {#restrictions}
 
@@ -18,7 +18,7 @@ summary: Alibaba Cloud上のプライベートエンドポイントを介してT
 
 ## Alibaba Cloudでプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-alibaba-cloud}
 
-プライベートエンドポイント経由でプレミアムインスタンスに接続するには、以下の手順を実行してください。
+プライベートエンドポイント経由でPremiumインスタンスに接続するには、以下の手順を実行してください。
 
 ### ステップ1. TiDB Cloud Premiumインスタンスを選択します。 {#step-1-choose-a-tidb-cloud-premium-instance}
 

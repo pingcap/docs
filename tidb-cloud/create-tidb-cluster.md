@@ -9,7 +9,7 @@ summary: TiDB Cloud Dedicatedクラスターの作成方法を学びましょう
 
 > **ヒント：**
 >
-> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します。](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
+> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
 ## 始める前に {#before-you-begin}
 

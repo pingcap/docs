@@ -238,7 +238,7 @@ TiDBバージョン: 6.4.0-DMR
 
     上流から TiDB へシャーディングされたスキーマとテーブルをマージする際、ターゲット テーブルに複数のフィールド (拡張列) を手動で追加し、DM タスクの設定時にその値を指定できます。たとえば、拡張列に上流のシャーディングされたスキーマとテーブルの名前を指定すると、DM によって下流に書き込まれるデータにはスキーマ名とテーブル名が含まれます。下流のデータが通常と異なる場合、この機能を使用して、スキーマ名やテーブル名など、ターゲット テーブル内のデータ ソース情報をすばやく特定できます。
 
-    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます。](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
+    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
 
 -   DMは、必須チェック項目の一部をオプションに変更することで、事前チェックメカニズムを最適化します [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu)
 
@@ -326,7 +326,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### その他 {#others}
 
--   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します。](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステム テーブルを復元しない場合、このエラーは報告されません。
+-   v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2 つの新しい列が追加されています。以前の TiDB バージョンのバックアップ データから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステム テーブルを復元しない場合、このエラーは報告されません。
 -   名前が「 [Dumplingのエクスポートファイルの形式](/dumpling-overview.md#format-of-exported-files)一致するものの、末尾が非圧縮形式（例`test-schema-create.sql.origin`および`test.table-schema.sql.origin` ）で終わるファイルについては、 TiDB Lightning の処理方法が変更されました。v6.4.0 より前は、インポート対象ファイルにこのようなファイルが含まれている場合、TiDB Lightning はこれらのファイルのインポートをスキップしていました。v6.4.0 以降では、 TiDB Lightning TiDB Lightning はこれらのファイルがサポートされていない圧縮形式を使用しているとみなすため、インポート処理は失敗します。
 -   バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 

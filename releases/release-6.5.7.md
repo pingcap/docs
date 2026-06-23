@@ -45,7 +45,7 @@ TiDB バージョン: 6.5.7
 -   TiDB
 
     -   短時間に多数の`CREATE TABLE`文が実行されると、TiDB が同時に新しい統計メタデータを作成しない可能性があり、後続のクエリ推定で正確な行数情報を取得できない問題を修正しました[＃36004](https://github.com/pingcap/tidb/issues/36004) [＃38189](https://github.com/pingcap/tidb/issues/38189) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    -   監査ログ用のエンタープライズプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[＃49273](https://github.com/pingcap/tidb/issues/49273) @ [lcwangchao](https://github.com/lcwangchao)
+    -   監査ログ用のEnterpriseプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[＃49273](https://github.com/pingcap/tidb/issues/49273) @ [lcwangchao](https://github.com/lcwangchao)
     -   `ErrLoadDataInvalidURI`の誤ったエラーメッセージを修正 (無効な S3 URI エラー) [＃48164](https://github.com/pingcap/tidb/issues/48164) @ [lance6716](https://github.com/lance6716)
     -   `tidb_server_memory_limit` [＃48741](https://github.com/pingcap/tidb/issues/48741) @ [XuHuaiyu](https://github.com/XuHuaiyu)による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正
     -   共通テーブル式 (CTE) を含むクエリがメモリ制限を超えたときに予期せず停止する問題を修正[＃49096](https://github.com/pingcap/tidb/issues/49096) @ [AilinKid](https://github.com/AilinKid)

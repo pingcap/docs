@@ -5,7 +5,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
 # <code>tidbcloud_serverless_cluster</code>リソースを使用する {#use-the-code-tidbcloud-serverless-cluster-code-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloudスターター](/tidb-cloud/select-cluster-tier.md#starter)クラスターを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターを管理する方法について説明します。
 
 また、 `tidbcloud_projects`データ ソースを使用して必要な情報を取得する方法も学習します。
 

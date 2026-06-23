@@ -3,7 +3,7 @@ title: "TiDB Cloud Premium Database Audit Logging"
 summary: TiDB Cloud Premiumでインスタンスを監査する方法を学びましょう。
 ---
 
-# TiDB Cloudプレミアムデータベース監査ログ {#tidb-cloud-premium-database-audit-logging}
+# TiDB Cloud Premiumデータベース監査ログ {#tidb-cloud-premium-database-audit-logging}
 
 TiDB Cloudは、実行されたSQLステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 

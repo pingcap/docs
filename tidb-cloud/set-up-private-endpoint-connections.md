@@ -3,15 +3,15 @@ title: Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink
 summary: AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# AWS PrivateLink 経由でTiDB Cloud専用クラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
+# AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
 
 このドキュメントでは、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
 > **ヒント：**
 >
 > -   AWS PrivateLink 経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)参照してください。
-> -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
-> -   Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud専用クラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
+> -   Azure のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)参照してください。
+> -   Google Cloud のプライベート エンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
 
 TiDB Cloudは、 AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのように機能します。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 

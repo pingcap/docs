@@ -461,7 +461,7 @@ SHOW binding_cache status;
 
 ## ステートメントサマリーテーブルを利用して、バインドする必要があるクエリを取得します。 {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
 
-[声明の要約](/statement-summary-tables.md) 、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行すると、条件付き`plan_digest` 、そして[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)取得できます。
+[ステートメントの要約](/statement-summary-tables.md) 、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行すると、条件付き`plan_digest` 、そして[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)取得できます。
 
 以下の例では、過去2週間に10回以上実行され、SQLバインディングのない複数の実行プランを持つ`SELECT`ステートメントをクエリします。クエリを実行時間でソートし、上位100件のクエリを最も高速なプランにバインドします。
 
@@ -630,7 +630,7 @@ SHOW GLOBAL BINDINGS;
 
 > **注記：**
 >
-> 自動バインディング作成機能は[声明の概要](/statement-summary-tables.md)に依存しているため、自動バインディングを使用する前にステートメント サマリーを有効にしてください。
+> 自動バインディング作成機能は[ステートメントの概要](/statement-summary-tables.md)に依存しているため、自動バインディングを使用する前にステートメント サマリーを有効にしてください。
 
 自動バインディング作成を有効にすると、ステートメントサマリー内の過去のSQL文が`bind-info-lease`回（デフォルト値は`3s` ）ごとに走査され、2回以上出現するSQL文に対してバインディングが自動的に作成されます。これらのSQL文に対して、TiDBはステートメントサマリーに記録された実行プランを自動的にバインドします。
 

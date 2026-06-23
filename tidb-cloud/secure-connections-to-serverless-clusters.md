@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 > **注記：**
 >
-> TiDB Cloud Dedicated クラスターへの TLS 接続を確立する方法については、 [TiDB Cloud専用へのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)参照してください。
+> TiDB Cloud Dedicated クラスターへの TLS 接続を確立する方法については、 [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)参照してください。
 
 ## 前提条件 {#prerequisites}
 

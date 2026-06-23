@@ -12,7 +12,7 @@ TiDB Lightningは、CSVファイルやタブ区切り値（TSV）などの他の
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Lightningをインストールする](/migration-tools.md)。
--   [TiDB Lightningに必要なターゲットデータベース権限を取得します。](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+-   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 

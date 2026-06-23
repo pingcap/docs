@@ -12,7 +12,7 @@ Amazon AuroraからParquetファイルをエクスポートする場合は、 [A
 ## 前提条件 {#prerequisites}
 
 -   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)。
--   [TiDB Lightningに必要なターゲットデータベース権限を取得します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+-   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## ステップ1. Parquetファイルを用意する {#step-1-prepare-the-parquet-files}
 

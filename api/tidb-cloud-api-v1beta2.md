@@ -5,7 +5,7 @@ summary: TiDB Cloudのv1beta2 APIについて学びましょう。
 
 # TiDB Cloud API v1beta2 の概要 {#tidb-cloud-api-v1beta2-overview}
 
-TiDB Cloud API v1beta2は、 [TiDB Cloudプレミアム](/tidb-cloud/select-cluster-tier.md#premium)インスタンスおよび関連リソースをプログラムから管理できるRESTful APIです。
+TiDB Cloud API v1beta2は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンスおよび関連リソースをプログラムから管理できるRESTful APIです。
 
 現在、 TiDB Cloud Premium のリソースを管理するには、以下の v1beta2 API を使用できます。
 

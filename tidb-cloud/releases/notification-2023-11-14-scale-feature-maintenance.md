@@ -3,7 +3,7 @@ title: 2023-11-14 TiDB Cloud Dedicated Scale Feature Maintenance Notification
 summary: 2023 年 11 月 14 日のTiDB Cloud Dedicated Scale 機能メンテナンスの詳細 (メンテナンス ウィンドウや影響など) について説明します。
 ---
 
-# [2023-11-14] TiDB Cloud専用スケール機能メンテナンスのお知らせ {#2023-11-14-tidb-cloud-dedicated-scale-feature-maintenance-notification}
+# [2023-11-14] TiDB Cloud Dedicatedスケール機能メンテナンスのお知らせ {#2023-11-14-tidb-cloud-dedicated-scale-feature-maintenance-notification}
 
 この通知では、2023 年 11 月 14 日のTiDB Cloud Dedicated の[スケール機能](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#scale-your-tidb-cluster)メンテナンスについて知っておく必要のある詳細について説明します。
 

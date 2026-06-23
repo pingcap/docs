@@ -5,13 +5,13 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
 # <code>tidbcloud_dedicated_vpc_peering</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-vpc-peering-code-resource}
 
-このドキュメントでは、 `tidbcloud_dedicated_vpc_peering`リソースとの[TiDB Cloud専用](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC ピアリングを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_dedicated_vpc_peering`リソースとの[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC ピアリングを管理する方法について説明します。
 
 `tidbcloud_dedicated_vpc_peering`リソースの機能は次のとおりです。
 
--   TiDB Cloud専用 VPC ピアリングを作成します。
--   TiDB Cloud専用 VPC ピアリングをインポートします。
--   TiDB Cloud専用 VPC ピアリングを削除します。
+-   TiDB Cloud Dedicated VPC ピアリングを作成します。
+-   TiDB Cloud Dedicated VPC ピアリングをインポートします。
+-   TiDB Cloud Dedicated VPC ピアリングを削除します。
 
 > **注記：**
 >
@@ -21,7 +21,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 
-## TiDB Cloud専用VPCピアリングを作成する {#create-a-tidb-cloud-dedicated-vpc-peering}
+## TiDB Cloud DedicatedVPCピアリングを作成する {#create-a-tidb-cloud-dedicated-vpc-peering}
 
 `tidbcloud_dedicated_vpc_peering`リソースを使用して、 TiDB Cloud Dedicated VPC ピアリングを作成できます。
 
@@ -142,7 +142,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
     }
     ```
 
-## TiDB Cloud専用 VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
+## TiDB Cloud Dedicated VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
 
 Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートすることで Terraform の管理下に置くことができます。
 

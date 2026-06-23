@@ -150,7 +150,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 >
 > TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)確認してください。
 >
-> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud専用であることを意味します。
+> -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud Dedicatedであることを意味します。
 > -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まっていない場合は、この TiDB ドキュメントがTiDB Cloudによって再利用されることを意味します。
 
 TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `CustomContent`タグが含まれている場合があります。これらの`CustomContent`タグは、TiDB またはTiDB Cloudの専用コンテンツを示すために使用されます。

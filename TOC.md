@@ -2,8 +2,8 @@
 
 <!-- markdownlint-disable MD041 -->
 
--   TiDBセルフマネージドについて
-    -   [TiDBセルフマネージドとは何ですか？](/overview.md)
+-   TiDB Self-Managedについて
+    -   [TiDB Self-Managedとは何ですか？](/overview.md)
     -   [TiDB 8.5 リリースノート](/releases/release-8.5.0.md)
     -   [特徴](/basic-features.md)
     -   [MySQLとの互換性](/mysql-compatibility.md)
@@ -154,7 +154,7 @@
         -   [マルチレプリカクラスタDR](/dr-multi-replica.md)
         -   [BRベースのDR](/dr-backup-restore.md)
     -   リソースマネージャー
-        -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します。](/tidb-resource-control-ru-groups.md)
+        -   [リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)
         -   [暴走クエリの管理](/tidb-resource-control-runaway-queries.md)
         -   [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)
     -   [タイムゾーンを設定する](/configure-time-zone.md)

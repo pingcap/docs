@@ -27,9 +27,9 @@ MySQL互換データベースからデータを移行する場合、完全デー
 
     アプリケーションでデータストレージにMySQLシャードを使用している場合は、これらのシャードを1つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットの MySQL シャードをTiDB Cloudに移行および統合する](/tidb-cloud/migrate-sql-shards.md)ご覧ください。
 
--   TiDBセルフマネージドからの移行
+-   TiDB Self-Managedからの移行
 
-    DumplingとTiCDCを介して、TiDBセルフマネージドクラスターからTiDB Cloud （AWS）にデータを移行できます。詳細については、 [TiDBセルフマネージドからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)ご覧ください。
+    DumplingとTiCDCを介して、TiDB Self-ManagedクラスターからTiDB Cloud （AWS）にデータを移行できます。詳細については、 [TiDB Self-ManagedからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)ご覧ください。
 
 ## ファイルからTiDB Cloudにデータをインポートする {#import-data-from-files-to-tidb-cloud}
 

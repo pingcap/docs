@@ -159,7 +159,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 > **注記：**
 >
-> このセクションはTiDBセルフマネージドにのみ適用されます。現在、 TiDB CloudはTTLメトリクスを提供していません。
+> このセクションはTiDB Self-Managedにのみ適用されます。現在、 TiDB CloudはTTLメトリクスを提供していません。
 
 </CustomContent>
 

@@ -35,7 +35,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
     -   エンドポイントサービスの管理
     -   EC2 ノードに接続して Kafka ノードを構成する
 
-2.  持っていない場合は[TiDB Cloud専用クラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+2.  持っていない場合は[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 3.  TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 

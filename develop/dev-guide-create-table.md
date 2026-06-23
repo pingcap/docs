@@ -113,7 +113,7 @@ CREATE TABLE `bookshop`.`books` (
 
 テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、 `SHARD_ROW_ID_BITS`を使用してもホットスポットを回避することはできません。ホットスポットを回避する必要があり、かつ連続的かつ増分的な主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)を使用して行 ID の連続性を排除できます。
 
-TiDB セルフマネージドでホットスポットの問題を処理する方法の詳細については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)。
+TiDB Self-Managedでホットスポットの問題を処理する方法の詳細については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 [主キーの選択に関するガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従って、次の例は、 `AUTO_RANDOM`の主キーが`users`テーブルでどのように定義されるかを示しています。
 

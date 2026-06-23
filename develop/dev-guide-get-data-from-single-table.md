@@ -20,14 +20,14 @@ aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidb/dev/
 <div label="TiDB Cloud" value="tidb-cloud">
 
 1.  [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
 3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1.  [TiDBセルフマネージドクラスタをデプロイ](/production-deployment-using-tiup.md)。
-2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします。](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
+1.  [TiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)。
+2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
 3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
 </div>

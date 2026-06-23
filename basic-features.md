@@ -157,7 +157,7 @@ summary: TiDBの機能概要について学びましょう。
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  N  |  N  |
 | [一時停止](/sql-statements/sql-statement-admin-pause-ddl.md)/ [再開する](/sql-statements/sql-statement-admin-resume-ddl.md)DDL   |  Y  |  Y  |  Y  |  N  |   N   |  N  |  N  |
 | [TiDB高速テーブル作成](/accelerated-table-creation.md)                                                                           |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
-| [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします。](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
+| [BDRロールを構成して、BDRモードでDDLステートメントを複製するようにします](/sql-statements/sql-statement-admin-bdr-role.md#admin-setshowunset-bdr-role) |  Y  |  E  |  N  |  N  |   N   |  N  |  N  |
 
 </StickyHeaderTable>
 
@@ -217,7 +217,7 @@ summary: TiDBの機能概要について学びましょう。
 | [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                        | Y                | Y                | Y                | Y                | Y                | Y                | E                |
 | [`PREDICATE COLUMNS`の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns)        | Y                | E                | E                | E                | E                | E                | E                |
 | [統計情報を収集するためのメモリ割り当て量を制御する](/statistics.md#the-memory-quota-for-collecting-statistics)    | E                | E                | E                | E                | E                | E                | N                |
-| [約10000行のデータをランダムにサンプリングして、統計情報を素早く構築します。](/system-variables.md#tidb_enable_fast_analyze) | 非推奨              | 非推奨              | 非推奨              | E                | E                | E                | E                |
+| [約10000行のデータをランダムにサンプリングして、統計情報を素早く構築します](/system-variables.md#tidb_enable_fast_analyze) | 非推奨              | 非推奨              | 非推奨              | E                | E                | E                | E                |
 | [ロック統計](/statistics.md#lock-statistics)                                                   | Y                | Y                | Y                | E                | E                | N                | N                |
 | [軽量統計初期化](/statistics.md#load-statistics)                                                 | Y                | Y                | Y                | E                | N                | N                | N                |
 | [統計情報の収集状況を表示する](/sql-statements/sql-statement-show-analyze-status.md)                    | Y                | Y                | Y                | N                | N                | N                | N                |
@@ -262,7 +262,7 @@ summary: TiDBの機能概要について学びましょう。
 | [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) [^6]                  | 削除済み | Y   | Y   | Y   | Y   | Y   | Y   |
 | [変更データキャプチャ（CDC）](/ticdc/ticdc-overview.md)                                                          | Y    | Y   | Y   | Y   | Y   | Y   | Y   |
 | [TiCDCを介してAmazon S3、GCS、Azure Blob Storage、NFSにデータをストリーミングする](/ticdc/ticdc-sink-to-cloud-storage.md) | Y    | Y   | Y   | Y   | E   | N   | N   |
-| [TiCDCは、2つのTiDBクラスタ間での双方向レプリケーションをサポートしています。](/ticdc/ticdc-bidirectional-replication.md)             | Y    | Y   | Y   | Y   | Y   | N   | N   |
+| [TiCDCは、2つのTiDBクラスタ間での双方向レプリケーションをサポートしています](/ticdc/ticdc-bidirectional-replication.md)             | Y    | Y   | Y   | Y   | Y   | N   | N   |
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)                                                      | Y    | Y   | Y   | Y   | N   | N   | N   |
 | [DM](/dm/dm-overview.md) MySQL 8.0の移行をサポートしています                                                      | Y    | Y   | E   | E   | E   | E   | N   |
 

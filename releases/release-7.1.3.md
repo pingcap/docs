@@ -66,7 +66,7 @@ TiDB バージョン: 7.1.3
     -   `GenJSONTableFromStats`大量のメモリを消費すると強制終了できない問題を修正[＃47779](https://github.com/pingcap/tidb/issues/47779) @ [hawkingrei](https://github.com/hawkingrei)
     -   述語が共通テーブル式[＃47881](https://github.com/pingcap/tidb/issues/47881) @ [winoros](https://github.com/winoros)にプッシュダウンされたときに結果が不正確になる可能性がある問題を修正しました
     -   `AUTO_ID_CACHE=1` [＃46444](https://github.com/pingcap/tidb/issues/46444) @ [tiancaiamao](https://github.com/tiancaiamao)に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました
-    -   監査ログ用のエンタープライズプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[＃49273](https://github.com/pingcap/tidb/issues/49273) @ [lcwangchao](https://github.com/lcwangchao)
+    -   監査ログ用のEnterpriseプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[＃49273](https://github.com/pingcap/tidb/issues/49273) @ [lcwangchao](https://github.com/lcwangchao)
     -   正常なシャットダウン中に TiDBサーバーがpanic可能性がある問題を修正[＃36793](https://github.com/pingcap/tidb/issues/36793) @ [bb7133](https://github.com/bb7133)
     -   テーブルが[＃48869](https://github.com/pingcap/tidb/issues/48869) @ [tiancaiamao](https://github.com/tiancaiamao)と多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。
     -   `ErrLoadDataInvalidURI`の誤ったエラーメッセージを修正 (無効な S3 URI エラー) [＃48164](https://github.com/pingcap/tidb/issues/48164) @ [lance6716](https://github.com/lance6716)

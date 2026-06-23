@@ -170,7 +170,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **「プライベートエンドポイント接続の作成」**ページのレイアウトを改良します。
 
-    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
+    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
@@ -178,7 +178,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) AWS上でのロードバランシングに関する課金体系の変更。
 
-    2024 年 8 月 1 日以降、 TiDB Cloud Dedicated の請求書には、AWS [AWSの料金改定は2024年2月1日から適用されます。](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)各パブリック IPv4 アドレスの料金は 1 時間あたり 0.005 ドルで、これは AWS でホストされるTiDB Cloud Dedicatedクラスターごとに月額約 10 ドルになります。
+    2024 年 8 月 1 日以降、 TiDB Cloud Dedicated の請求書には、AWS [AWSの料金改定は2024年2月1日から適用されます](https://aws.amazon.com/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/)各パブリック IPv4 アドレスの料金は 1 時間あたり 0.005 ドルで、これは AWS でホストされるTiDB Cloud Dedicatedクラスターごとに月額約 10 ドルになります。
 
     この料金は、お客様の既存の**TiDB Cloud Dedicated - Data Transfer - Load Balancing**サービスの下に表示されます。 [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)。
 
