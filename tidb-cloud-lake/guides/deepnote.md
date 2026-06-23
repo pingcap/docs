@@ -7,7 +7,7 @@ summary: Deepnote allows you to easily work on your data science projects, toget
 
 [Deepnote](https://deepnote.com) allows you to easily work on your data science projects, together in real-time and in one place with your friends and colleagues; helping you turn your ideas and analyses into products faster. Deepnote is built for the browser so you can use it across any platform (Windows, Mac, Linux or Chromebook). No downloads required, with updates shipped to you daily. All changes are instantly saved.
 
-Both {{{ .lake }}} and {{{ .lake }}} support integration with Deepnote, requiring a secure connection. When integrating with {{{ .lake }}}, please note that the default port is `8124`.
+You can connect Deepnote to {{{ .lake }}} by using Deepnote's ClickHouse-compatible integration with a secure connection.
 
 ## Tutorial: Integrating with Deepnote
 
