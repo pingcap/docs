@@ -3,7 +3,7 @@ title: Security Compatibility with MySQL
 summary: TiDB と MySQL のセキュリティ互換性について学習します。
 ---
 
-# MySQLとのSecurity互換性 {#security-compatibility-with-mysql}
+# MySQLとのセキュリティ互換性 {#security-compatibility-with-mysql}
 
 TiDBはMySQL 5.7と同様のセキュリティ機能をサポートし、MySQL 8.0の一部のセキュリティ機能もサポートしています。TiDBのセキュリティ機能は、実装においてMySQLとは異なります。
 

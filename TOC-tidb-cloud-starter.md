@@ -27,7 +27,7 @@
     -   [高可用性](/tidb-cloud/serverless-high-availability.md)
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
-    -   [Security](/tidb-cloud/security-concepts.md)
+    -   [セキュリティ](/tidb-cloud/security-concepts.md)
 
 ## ガイド {#guides}
 
@@ -155,8 +155,8 @@
     -   [Next.jsでOpenAPI仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)
     -   [データアプリコンフィグレーションファイル](/tidb-cloud/data-service-app-config-files.md)
     -   [応答とステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
--   Security
-    -   [Security概要](/tidb-cloud/security-overview.md)
+-   セキュリティ
+    -   [セキュリティ概要](/tidb-cloud/security-overview.md)
     -   IDアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
