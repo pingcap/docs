@@ -76,7 +76,7 @@ This document takes the `tidb` user as an example.
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-        If you update `/etc/security/limits.conf` after `user@${uid}.service` is already running, restart `user@${uid}.service` before you deploy or restart TiDB services so that the user `systemd` instance reloads the updated resource limits. Restarting `user@${uid}.service` stops all user services managed by that user. If the cluster is already running, stop it gracefully first or perform this operation during a maintenance window.
+        If you update `/etc/security/limits.conf` after `user@${uid}.service` is already running, restart `user@${uid}.service` before you deploy or restart TiDB services so that the user `systemd` instance reloads the updated resource limits. Restarting `user@${uid}.service` stops all systemd user services managed by that user. If the cluster is already running, stop it gracefully first or perform this operation during a maintenance window.
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
@@ -91,9 +91,9 @@ This document takes the `tidb` user as an example.
         $ grep "Max open files" "/proc/${pid}/limits"
         ```
 
-        If the `Max open files` value is still lower than what TiDB requires, configure a system-level drop-in for `user@${uid}.service`, then restart the service and check the effective value again.
+        If the `Hard Limit` value in the previous output is lower than `1000000`, continue to the next step and use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
 
-    4. Use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
+    4. If the `Hard Limit` value in the previous output is lower than `1000000`, use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
 
         ```shell
         $ uid=$(id -u tidb)
@@ -106,7 +106,9 @@ This document takes the `tidb` user as an example.
         $ systemctl restart user@${uid}.service
         ```
 
-    5. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
+        After you configure the drop-in and restart the service, repeat Step 3 to confirm that the effective `Max open files` value now meets the requirement.
+
+    5. Use the `tidb` user to execute `systemctl --user`. If no errors occur, it indicates that the `systemd` user service mode for the `tidb` user has started successfully.
 
 3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
 
