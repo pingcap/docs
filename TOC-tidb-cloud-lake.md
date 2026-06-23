@@ -52,14 +52,8 @@
     - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
     - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
   - Visualization
-    - [Grafana](/tidb-cloud-lake/guides/grafana.md)
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
-    - [Superset](/tidb-cloud-lake/guides/superset.md)
-    - [Metabase](/tidb-cloud-lake/guides/metabase.md)
     - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
-    - [Jupyter Notebook](/tidb-cloud-lake/guides/jupyter-notebook.md)
-    - [MindsDB](/tidb-cloud-lake/guides/mindsdb.md)
-    - [Redash](/tidb-cloud-lake/guides/redash.md)
 - Data Loading
   - Work with Stages
     - [Stage Overview](/tidb-cloud-lake/guides/stage-overview.md)
@@ -70,16 +64,6 @@
     - [Load from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [Load from Local File](/tidb-cloud-lake/guides/load-from-local-file.md)
     - [Load from Remote File](/tidb-cloud-lake/guides/load-from-remote-file.md)
-  - Load with Platforms
-    - [Load with Addax](/tidb-cloud-lake/guides/load-with-addax.md)
-    - [Load with Airbyte](/tidb-cloud-lake/guides/load-with-airbyte.md)
-    - [Load with DataX](/tidb-cloud-lake/guides/load-with-datax.md)
-    - [Load with dbt](/tidb-cloud-lake/guides/load-with-dbt.md)
-    - [Load with Debezium](/tidb-cloud-lake/guides/load-with-debezium.md)
-    - [Load with Flink CDC](/tidb-cloud-lake/guides/load-with-flink-cdc.md)
-    - [Load with Kafka](/tidb-cloud-lake/guides/load-with-kafka.md)
-    - [Load with Tapdata](/tidb-cloud-lake/guides/load-with-tapdata.md)
-    - [Load with Vector](/tidb-cloud-lake/guides/load-with-vector.md)
   - Load Semi-structured Formats
     - [Overview](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
     - [Load Parquet](/tidb-cloud-lake/guides/load-parquet.md)
@@ -109,9 +93,6 @@
   - [Unload TSV File](/tidb-cloud-lake/guides/unload-tsv-file.md)
   - [Unload NDJSON File](/tidb-cloud-lake/guides/unload-ndjson-file.md)
   - [Unload Lance Dataset](/tidb-cloud-lake/guides/unload-lance-dataset.md)
-- AI and ML Integration
-  - [Overview](/tidb-cloud-lake/guides/ai-ml-integration.md)
-  - [External AI Functions](/tidb-cloud-lake/guides/external-ai-functions.md)
 - Multimodal Data Analytics
   - [Overview](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
   - [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md)
@@ -146,7 +127,6 @@
 - Data Management
   - [Overview](/tidb-cloud-lake/guides/data-management.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
-  - [Data Recovery](/tidb-cloud-lake/guides/data-recovery.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
 - [Troubleshooting](/tidb-cloud-lake/guides/troubleshooting.md)
@@ -154,26 +134,12 @@
 ## Tutorials
 
 - Ingest & Stream Data
-  - [Access MySQL & Redis via Dictionaries](/tidb-cloud-lake/tutorials/access-mysql-redis-via-dictionaries.md)
   - [Ingest JSON Logs with Vector (Cloud)](/tidb-cloud-lake/tutorials/ingest-json-logs-with-vector-cloud.md)
-  - [Ingest Kafka with Bend Ingest](/tidb-cloud-lake/tutorials/ingest-kafka-with-bend-ingest.md)
-  - [Ingest Kafka with Kafka Connect](/tidb-cloud-lake/tutorials/ingest-kafka-with-kafka-connect.md)
   - [Inspect Metadata](/tidb-cloud-lake/tutorials/inspect-metadata.md)
 - Migrate Data
   - [Overview](/tidb-cloud-lake/tutorials/data-migration-overview.md)
   - [Migrate MySQL with Addax (Batch)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-addax.md)
-  - [Migrate MySQL with DataX (Batch)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-datax.md)
-  - [Migrate MySQL with bend-archiver (Batch)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-bend-archiver.md)
-  - [Migrate MySQL with Debezium (CDC)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-debezium.md)
-  - [Migrate MySQL with Flink CDC](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-flink-cdc.md)
-  - [Migrate MySQL with Kafka Connect (CDC)](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-kafka-connect.md)
   - [Migrate from Snowflake](/tidb-cloud-lake/tutorials/migrate-from-snowflake.md)
-- Operate & Recover
-  - [Backup & Restore with BendSave](/tidb-cloud-lake/tutorials/backup-restore-with-bendsave.md)
-- Cloud Operations
-  - [AWS Billing](/tidb-cloud-lake/tutorials/aws-billing.md)
-  - [Dashboard Tour](/tidb-cloud-lake/tutorials/dashboard-tour.md)
-  - [Data Sharing via ATTACH TABLE](/tidb-cloud-lake/tutorials/data-sharing-via-attach-table.md)
 
 ## Reference
 
@@ -206,7 +172,6 @@
     - Table Engines
       - [Overview](/tidb-cloud-lake/sql/table-engines.md)
       - [Fuse Engine Tables](/tidb-cloud-lake/sql/fuse-engine-tables.md)
-      - [Apache Iceberg™ Tables](/tidb-cloud-lake/sql/apache-icebergtm-tables.md)
       - [Apache Hive Tables](/tidb-cloud-lake/sql/apache-hive-tables.md)
       - [Delta Lake Engine](/tidb-cloud-lake/sql/delta-lake-engine.md)
     - System Tables
@@ -410,7 +375,6 @@
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
       - External Function
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
-        - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
         - [External Function](/tidb-cloud-lake/sql/external-function.md)
       - Masking Policy
