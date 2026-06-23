@@ -47,7 +47,7 @@ CMEK 対応プロジェクトを作成するには、次の手順に従います
 
 この手順は、TiDB Cloud APIを使用して[CMEK 対応プロジェクトを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject)エンドポイント経由で完了できます。3フィールド`aws_cmek_enabled` `true`に設定されていることを確認してください。
 
-現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
+現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)をご覧ください。
 
 </div>
 </SimpleTab>
@@ -132,7 +132,7 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 
 2.  TiDB Cloud API の[AWS CMEK を構成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)のエンドポイントを呼び出します。
 
-    現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
+    現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)をご覧ください。
 
 </div>
 </SimpleTab>
