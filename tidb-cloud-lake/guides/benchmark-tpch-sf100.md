@@ -29,7 +29,7 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 
 :::info[Note]
 
-For this benchmark, no special tuning was applied. Both Snowflake and {{{ .lake }}} were used with their default settings.
+This benchmark uses default settings for both Snowflake and {{{ .lake }}} without any special tuning.
 And remember, **don't just take our word for it — you're encouraged to run and verify these results yourself.**
 :::
 
@@ -55,7 +55,7 @@ And remember, **don't just take our word for it — you're encouraged to run and
 
 ![TPC-H SF100 Cold Run Benchmark](/media/tidb-cloud-lake/tpch-sf100-cold-run-benchmark.png)
 
-| Query          | Snowflake(Total 207s, Cost $0.23) | {{{ .lake }}}(Total 166s, Cost $0.09) |
+| Query          | Snowflake (Total 207s, Cost $0.23) | {{{ .lake }}} (Total 166s, Cost $0.09) |
 | -------------- | --------------------------------- | -------------------------------------- |
 | TPC-H 1        | 11.703                            | 8.036                                  |
 | TPC-H 2        | 4.524                             | 3.786                                  |
@@ -119,7 +119,7 @@ You can reproduce the benchmark by following the steps below.
 
 ### Benchmark Environment
 
-Both Snowflake and {{{ .lake }}} was tested under similar conditions:
+The benchmark tests both Snowflake and {{{ .lake }}} under similar conditions:
 
 | Parameter      | Snowflake                                                | {{{ .lake }}}                            |
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
@@ -132,7 +132,7 @@ Both Snowflake and {{{ .lake }}} was tested under similar conditions:
 
 ### Benchmark Methodology
 
-We conducted both Cold and Hot runs for query execution:
+The benchmark includes both Cold and Hot runs for query execution:
 
 1. **Cold Run**: The data warehouse was suspended and resumed before executing the queries.
 2. **Hot Run**: The data warehouse is not suspended, local disk cache is used.

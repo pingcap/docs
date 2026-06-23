@@ -30,9 +30,9 @@ TPC-H Scale Factor 1000 (SF1000) represents approximately 1TB of generated data.
 
 | Warehouse Size | Total Time | Speedup vs. Small | Speedup vs. Previous Size |
 |---|---:|---:|---:|
-| Small | 1173.32 s | 1.00x | — |
-| Medium | 537.93 s | 2.18x | 2.18x |
-| Large | 285.96 s | 4.10x | 1.88x |
+| Small | 1173.32s | 1.00x | — |
+| Medium | 537.93s | 2.18x | 2.18x |
+| Large | 285.96s | 4.10x | 1.88x |
 
 ![TPC-H SF1000 Warehouse Size Benchmark](/media/tidb-cloud-lake/tpch-sf1000-warehouse-size-benchmark.png)
 
