@@ -88,10 +88,8 @@ This document takes the `tidb` user as an example.
         ```shell
         $ uid=$(id -u tidb)
         $ pid=$(systemctl show "user@${uid}.service" --property MainPID --value)
-        $ grep "Max open files" "/proc/${pid}/limits"
+        $ grep -E '^(Limit|Max open files)' "/proc/${pid}/limits"
         ```
-
-        If the `Hard Limit` value in the previous output is lower than `1000000`, continue to the next step and use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
 
     4. If the `Hard Limit` value in the previous output is lower than `1000000`, use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
 
