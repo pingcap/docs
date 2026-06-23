@@ -157,7 +157,7 @@ To switch an existing table to a new connection, use [`ALTER TABLE ... CONNECTIO
 
 ### Using Access Keys
 
-This example creates a connection to Amazon S3 named 'toronto' and establishes an external stage named 'my_s3_stage' linked to the 's3://databend-toronto' URL, using the 'toronto' connection. For more practical examples about connection, see [Usage Examples](/tidb-cloud-lake/sql/connection.md#usage-examples).
+This example creates a connection to Amazon S3 named 'toronto' and establishes an external stage named 'my_s3_stage' linked to the 's3://lake-toronto' URL, using the 'toronto' connection. For more practical examples about connection, see [Usage Examples](/tidb-cloud-lake/sql/connection.md#usage-examples).
 
 ```sql
 CREATE CONNECTION toronto
@@ -166,7 +166,7 @@ CREATE CONNECTION toronto
     SECRET_ACCESS_KEY = '<your-secret-access-key>';
 
 CREATE STAGE my_s3_stage
-    URL = 's3://databend-toronto'
+    URL = 's3://lake-toronto'
     CONNECTION = (CONNECTION_NAME = 'toronto');
 ```
 
@@ -175,16 +175,16 @@ CREATE STAGE my_s3_stage
 This example creates a connection to Amazon S3 using an IAM role and then creates a stage that uses this connection. This approach is more secure as it doesn't require storing access keys in {{{ .lake }}}.
 
 ```sql
-CREATE CONNECTION databend_test
+CREATE CONNECTION lake_test
     STORAGE_TYPE = 's3'
-    ROLE_ARN = 'arn:aws:iam::987654321987:role/databend-test';
+    ROLE_ARN = 'arn:aws:iam::987654321987:role/lake-test';
 
-CREATE STAGE databend_test
+CREATE STAGE lake_test
     URL = 's3://test-bucket-123'
-    CONNECTION = (CONNECTION_NAME = 'databend_test');
+    CONNECTION = (CONNECTION_NAME = 'lake_test');
 
 -- You can now query data from your S3 bucket
-SELECT * FROM @databend_test/test.parquet LIMIT 1;
+SELECT * FROM @lake_test/test.parquet LIMIT 1;
 ```
 
 > **Note:**

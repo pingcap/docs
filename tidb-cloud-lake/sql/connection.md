@@ -45,13 +45,13 @@ The following example creates an external stage using the previously defined con
 
 ```sql
 CREATE STAGE my_s3_stage
-    URL = 's3://databend-toronto'
+    URL = 's3://lake-toronto'
     CONNECTION = (CONNECTION_NAME = 'toronto');
 
 -- Equivalent to the following statement without using a connection:
 
 CREATE STAGE my_s3_stage
-    URL = 's3://databend-toronto'
+    URL = 's3://lake-toronto'
     CONNECTION = (
         ACCESS_KEY_ID = '<your-access-key-id>',
         SECRET_ACCESS_KEY = '<your-secret-access-key>'
@@ -61,18 +61,18 @@ CREATE STAGE my_s3_stage
 
 #### Example 2: Attaching Table with Connection
 
-The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in {{{ .lake }}} with an existing table in {{{ .lake }}}, where data is stored within an Amazon S3 bucket named "databend-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
+The [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) page offers [Examples](/tidb-cloud-lake/sql/attach-table.md#examples) demonstrating how to connect a new table in {{{ .lake }}} with an existing table in {{{ .lake }}}, where data is stored within an Amazon S3 bucket named "lake-toronto". In each example, Step 3 can be streamlined using the previously defined connection named 'toronto':
 
 ```sql title='In {{{ .lake }}}:'
 ATTACH TABLE employees_backup
-    's3://databend-toronto/1/216/'
+    's3://lake-toronto/1/216/'
     CONNECTION = (CONNECTION_NAME = 'toronto');
 
 ```
 
 ```sql title='In {{{ .lake }}}:'
 ATTACH TABLE population_readonly
-    's3://databend-toronto/1/556/'
+    's3://lake-toronto/1/556/'
     CONNECTION = (CONNECTION_NAME = 'toronto')
     READ_ONLY;
 
@@ -88,7 +88,7 @@ CREATE TABLE BOOKS (
     title VARCHAR,
     genre VARCHAR DEFAULT 'General'
 )
-'s3://databend-toronto'
+'s3://lake-toronto'
 CONNECTION = (CONNECTION_NAME = 'toronto');
 
 ```

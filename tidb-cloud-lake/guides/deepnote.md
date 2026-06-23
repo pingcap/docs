@@ -29,7 +29,7 @@ Make sure you can log in to your {{{ .lake }}} account and obtain the connection
 
     | Parameter        | Description                        |
     | ---------------- | ---------------------------------- |
-    | Integration name | For example, `Databend`            |
+    | Integration name | For example, `TiDB Cloud Lake`     |
     | Host name        | Obtain from connection information |
     | Port             | `443`                              |
     | Username         | `cloudapp`                         |

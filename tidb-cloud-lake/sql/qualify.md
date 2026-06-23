@@ -86,7 +86,7 @@ QUALIFY row_num = 1;
 │               4 │ Sara             │ Williams         │ Sales            │           77000 │       1 │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
--- Databend allows the direct use of window functions in the QUALIFY clause without requiring them to be explicitly named in the SELECT list.
+-- {{{ .lake }}} allows the direct use of window functions in the QUALIFY clause without requiring them to be explicitly named in the SELECT list.
 
 SELECT
     employee_id,

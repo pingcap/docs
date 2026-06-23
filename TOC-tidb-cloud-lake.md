@@ -176,7 +176,6 @@
       - [system.caches](/tidb-cloud-lake/sql/system-caches.md)
       - [system.clusters](/tidb-cloud-lake/sql/system-clusters.md)
       - [system.columns](/tidb-cloud-lake/sql/system-columns.md)
-      - [system.configs](/tidb-cloud-lake/sql/system-configs.md)
       - [system.contributors](/tidb-cloud-lake/sql/system-contributors.md)
       - [system.copy_history](/tidb-cloud-lake/sql/system-copy-history.md)
       - [system.credits](/tidb-cloud-lake/sql/system-credits.md)
@@ -200,7 +199,6 @@
       - [system.views](/tidb-cloud-lake/sql/system-views.md)
       - [system.virtual_columns](/tidb-cloud-lake/sql/system-virtual-columns.md)
     - System History Tables
-      - [Overview](/tidb-cloud-lake/sql/system-history-tables.md)
       - [system_history.access_history](/tidb-cloud-lake/sql/system-history-access-history.md)
       - [system_history.log_history](/tidb-cloud-lake/sql/system-history-log-history.md)
       - [system_history.login_history](/tidb-cloud-lake/sql/system-history-login-history.md)

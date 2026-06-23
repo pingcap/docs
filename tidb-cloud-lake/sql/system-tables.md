@@ -41,7 +41,6 @@ System tables are organized in the `system` schema and can be queried using stan
 | [system.table_functions](/tidb-cloud-lake/sql/system-table-functions.md) | Lists all available table functions. |
 | [system.user_functions](/tidb-cloud-lake/sql/system-user-functions.md) | Contains information about user-defined functions. |
 | [system.settings](/tidb-cloud-lake/sql/system-settings.md) | Contains information about system settings. |
-| [system.configs](/tidb-cloud-lake/sql/system-configs.md) | Contains configuration information for the {{{ .lake }}} deployment. |
 
 ### System Information
 

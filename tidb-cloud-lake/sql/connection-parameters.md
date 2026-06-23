@@ -51,7 +51,7 @@ CREATE CONNECTION my_minio_conn
   SECRET_ACCESS_KEY = 'CHANGEME123';
 
 CREATE STAGE my_minio_stage
-  URL = 's3://databend'
+  URL = 's3://lake'
   CONNECTION = (CONNECTION_NAME = 'my_minio_conn');
 ```
 

@@ -24,7 +24,7 @@ This tutorial uses a CSV file as an example to demonstrate how to import data in
 
 ### Before You Begin
 
-Download and save the sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv) to a local folder. The file contains two records:
+Download and save the sample file [books.csv](https://lakesql-bin.tidbcloud.com/datasets/books.csv) to a local folder. The file contains two records:
 
 ```text title='books.csv'
 Transaction Processing,Jim Gray,1992

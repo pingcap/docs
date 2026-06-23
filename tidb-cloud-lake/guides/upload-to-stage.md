@@ -18,7 +18,7 @@ If you're using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) to m
 
 ## Uploading with Presigned URL
 
-The following examples demonstrate how to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with presigned URLs.
+The following examples demonstrate how to upload a sample file ([books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet)) to the user stage, an internal stage, and an external stage with presigned URLs.
 
 <SimpleTab groupId="presign">
 
@@ -36,12 +36,12 @@ Result:
 ├────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ method │ PUT                                                                                                                │
 │ headers│ {"host":"s3.us-east-2.amazonaws.com"}                                                                              │
-│ url    │ https://s3.us-east-2.amazonaws.com/databend-toronto/stage/user/root/books.parquet?X-Amz-Algorithm...               │
+│ url    │ https://s3.us-east-2.amazonaws.com/lake-toronto/stage/user/root/books.parquet?X-Amz-Algorithm...               │
 └────────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ```shell
-curl -X PUT -T books.parquet "https://s3.us-east-2.amazonaws.com/databend-toronto/stage/user/root/books.parquet?X-Amz-Algorithm=... ...
+curl -X PUT -T books.parquet "https://s3.us-east-2.amazonaws.com/lake-toronto/stage/user/root/books.parquet?X-Amz-Algorithm=... ...
 ```
 
 Check the staged file:
@@ -80,12 +80,12 @@ Result:
 ├─────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ method  │ PUT                                                                                                                                                                                                                                                                                                                                                                                                                                 │
 │ headers │ {"host":"s3.us-east-2.amazonaws.com"}                                                                                                                                                                                                                                                                                                                                                                                               │
-│ url     │ https://s3.us-east-2.amazonaws.com/databend-toronto/stage/internal/my_internal_stage/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASTQNLUZWP2UY2HSN%2F20230628%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230628T022951Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9cfcdf3b3554280211f88629d60358c6d6e6a5e49cd83146f1daea7dfe37f5c1 │
+│ url     │ https://s3.us-east-2.amazonaws.com/lake-toronto/stage/internal/my_internal_stage/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<access-key-id>%2F20230628%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230628T022951Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9cfcdf3b3554280211f88629d60358c6d6e6a5e49cd83146f1daea7dfe37f5c1 │
 └─────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ```shell
-curl -X PUT -T books.parquet "https://s3.us-east-2.amazonaws.com/databend-toronto/stage/internal/my_internal_stage/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASTQNLUZWP2UY2HSN%2F20230628%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230628T022951Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9cfcdf3b3554280211f88629d60358c6d6e6a5e49cd83146f1daea7dfe37f5c1"
+curl -X PUT -T books.parquet "https://s3.us-east-2.amazonaws.com/lake-toronto/stage/internal/my_internal_stage/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<access-key-id>%2F20230628%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20230628T022951Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9cfcdf3b3554280211f88629d60358c6d6e6a5e49cd83146f1daea7dfe37f5c1"
 ```
 
 Check the staged file:
@@ -110,7 +110,7 @@ Result:
 
 ```sql
 CREATE STAGE my_external_stage
-URL = 's3://databend'
+URL = 's3://lake'
 CONNECTION = (
     ENDPOINT_URL = 'http://127.0.0.1:9000',
     ACCESS_KEY_ID = 'ROOTUSER',
@@ -130,12 +130,12 @@ Result:
 ├─────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
 │ method  │ PUT                                                                                                                                                                                                                                                                                                                               │
 │ headers │ {"host":"127.0.0.1:9000"}                                                                                                                                                                                                                                                                                                         │
-│ url     │ http://127.0.0.1:9000/databend/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ROOTUSER%2F20230628%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230628T040959Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=<signature...>                                                │
+│ url     │ http://127.0.0.1:9000/lake/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ROOTUSER%2F20230628%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230628T040959Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=<signature...>                                                    │
 └─────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ```shell
-curl -X PUT -T books.parquet "http://127.0.0.1:9000/databend/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ROOTUSER%2F20230628%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230628T040959Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=<signature...>"
+curl -X PUT -T books.parquet "http://127.0.0.1:9000/lake/books.parquet?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ROOTUSER%2F20230628%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230628T040959Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=<signature...>"
 ```
 
 Check the staged file:
@@ -159,7 +159,7 @@ Result:
 
 ### Uploading with PUT Command
 
-The following examples demonstrate how to use LakeSQL to upload a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) to the user stage, an internal stage, and an external stage with the PUT command.
+The following examples demonstrate how to use LakeSQL to upload a sample file ([books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet)) to the user stage, an internal stage, and an external stage with the PUT command.
 
 <SimpleTab groupId="PUT">
 
@@ -239,7 +239,7 @@ Result:
 
 ```
 CREATE STAGE my_external_stage
-    URL = 's3://databend'
+    URL = 's3://lake'
     CONNECTION = (
         ENDPOINT_URL = 'http://127.0.0.1:9000',
         ACCESS_KEY_ID = 'ROOTUSER',
@@ -302,7 +302,7 @@ Result:
 
 ### Downloading with GET Command
 
-The following examples demonstrate how to use LakeSQL to download a sample file ([books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet)) from the user stage, an internal stage, and an external stage with the GET command.
+The following examples demonstrate how to use LakeSQL to download a sample file ([books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet)) from the user stage, an internal stage, and an external stage with the GET command.
 
 <SimpleTab groupId="GET">
 

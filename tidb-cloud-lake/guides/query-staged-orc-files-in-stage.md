@@ -27,7 +27,7 @@ Create an external stage with your Amazon S3 bucket where your iris dataset file
 
 ```sql
 CREATE STAGE orc_query_stage
-    URL = 's3://databend-doc'
+    URL = 's3://lake-doc'
     CONNECTION = (
         ACCESS_KEY_ID = '<your-key-id>',
         SECRET_ACCESS_KEY = '<your-secret-key>'

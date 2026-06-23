@@ -18,14 +18,14 @@ Before you start, ensure you have the following prerequisites in place:
 
 ## Step 1: Launch {{{ .lake }}} in Docker
 
-1. Start a {{{ .lake }}} container on your local machine. The command below launches a {{{ .lake }}} container with S3 as the storage backend, using the `databend-doc` bucket, along with the specified S3 endpoint and authentication credentials.
+1. Start a {{{ .lake }}} container on your local machine. The command below launches a {{{ .lake }}} container with S3 as the storage backend, using the `lake-doc` bucket, along with the specified S3 endpoint and authentication credentials.
 
     ```bash
     docker run \
         -p 8000:8000 \
         -e QUERY_STORAGE_TYPE=s3 \
         -e AWS_S3_ENDPOINT="https://s3.us-east-2.amazonaws.com" \
-        -e AWS_S3_BUCKET=databend-doc\
+        -e AWS_S3_BUCKET=lake-doc\
         -e AWS_ACCESS_KEY_ID=<your-aws-access-key-id> \
         -e AWS_SECRET_ACCESS_KEY=<your-aws-secrect-access-key> \
         datafuselabs/databend:v1.2.699-nightly
@@ -46,7 +46,7 @@ Before you start, ensure you have the following prerequisites in place:
       ('Vancouver', 'British Columbia', 631486);
     ```
 
-3. Run the following statement to retrieve the table's location in S3. As indicated in the result below, the S3 URI for the table is `s3://databend-doc/1/16/` for this tutorial.
+3. Run the following statement to retrieve the table's location in S3. As indicated in the result below, the S3 URI for the table is `s3://lake-doc/1/16/` for this tutorial.
 
 ```sql
 SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'population');
@@ -67,13 +67,13 @@ SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'population');
 
 ```sql
 -- Create an attached table with all columns from the source
-ATTACH TABLE population_all_columns 's3://databend-doc/1/16/' CONNECTION = (
+ATTACH TABLE population_all_columns 's3://lake-doc/1/16/' CONNECTION = (
   ACCESS_KEY_ID = '<your_aws_key_id>',
   SECRET_ACCESS_KEY = '<your_aws_secret_key>'
 );
 
 -- Create an attached table with selected columns (city & population) from the source
-ATTACH TABLE population_only (city, population) 's3://databend-doc/1/16/' CONNECTION = (
+ATTACH TABLE population_only (city, population) 's3://lake-doc/1/16/' CONNECTION = (
   ACCESS_KEY_ID = '<your_aws_key_id>',
   SECRET_ACCESS_KEY = '<your_aws_secret_key>'
 );

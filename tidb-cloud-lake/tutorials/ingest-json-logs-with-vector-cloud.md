@@ -20,12 +20,12 @@ Before you start, ensure you have the following prerequisites in place:
 
 ## Step 1: Create a Target Folder in S3 Bucket
 
-To store the logs collected by Vector, create a folder named logs in your S3 bucket. In this tutorial, we use `s3://databend-doc/logs/` as the target location.
+To store the logs collected by Vector, create a folder named logs in your S3 bucket. In this tutorial, we use `s3://lake-doc/logs/` as the target location.
 
-This command creates an empty folder named `logs` in the `databend-doc` bucket:
+This command creates an empty folder named `logs` in the `lake-doc` bucket:
 
 ```bash
-aws s3api put-object --bucket databend-doc --key logs/
+aws s3api put-object --bucket lake-doc --key logs/
 ```
 
 ## Step 2: Create a Local Log File
@@ -64,7 +64,7 @@ Add the following JSON lines to the file to represent sample log events:
         type: aws_s3
         inputs:
           - "extract_message"
-        bucket: databend-doc
+        bucket: lake-doc
         region: us-east-2
         key_prefix: "logs/"
         content_type: "text/plain"
@@ -90,7 +90,7 @@ Add the following JSON lines to the file to represent sample log events:
 3. Wait for a moment, then check if any logs have been synced to the `logs` folder on S3:
 
 ```bash
-aws s3 ls s3://databend-doc/logs/
+aws s3 ls s3://lake-doc/logs/
 ```
 
 If the log file has been successfully synced to S3, you should see output similar to this:
@@ -103,7 +103,7 @@ If the log file has been successfully synced to S3, you should see output simila
 You can now download the synced log file from your bucket:
 
 ```bash
-aws s3 cp s3://databend-doc/logs/1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log.gz ~/Documents/
+aws s3 cp s3://lake-doc/logs/1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log.gz ~/Documents/
 ```
 
 Compared to the original log, the synced log is in NDJSON format, with each record wrapped in an outer `log` field:
@@ -118,7 +118,7 @@ Compared to the original log, the synced log is in NDJSON format, with each reco
 1. Open a worksheet, and create an external stage that links to the `logs` folder in your bucket:
 
     ```sql
-    CREATE STAGE mylog 's3://databend-doc/logs/' CONNECTION=(
+    CREATE STAGE mylog 's3://lake-doc/logs/' CONNECTION=(
         ACCESS_KEY_ID = '<your-access-key-id>',
         SECRET_ACCESS_KEY = '<your-secret-access-key>'
     );

@@ -15,7 +15,7 @@ The following tutorials offer a detailed, step-by-step guide to help you effecti
 
 Before you start, make sure you have completed the following tasks:
 
-- Download and save the sample file [books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet) to a local folder. The file contains two records:
+- Download and save the sample file [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) to a local folder. The file contains two records:
 
 ```text
 Transaction Processing,Jim Gray,1992
@@ -167,7 +167,7 @@ Follow this tutorial to upload the sample file to an external stage and load dat
 
     ```sql
     CREATE STAGE my_external_stage
-        URL = 's3://databend'
+        URL = 's3://lake'
         CONNECTION = (
             ENDPOINT_URL = 'http://127.0.0.1:9000',
             ACCESS_KEY_ID = 'ROOTUSER',

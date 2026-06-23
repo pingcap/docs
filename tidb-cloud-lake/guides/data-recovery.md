@@ -93,7 +93,7 @@ databend-bendsave backup \
 
 | Parameter | Description                                                             |
 |-----------|-------------------------------------------------------------------------|
-| from      | Path to the  `lake-query.toml` configuration file.                  |
+| from      | Path to the  `databend-query.toml` configuration file.                  |
 | to        | Backup destination, e.g.,`s3://backup?endpoint=http://127.0.0.1:9900&access_key_id=xxx&secret_access_key=xxx`.<br/>- It is recommended to use environment variables such as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` to provide credentials.|
 
 To restore the metadata to a {{{ .lake }}} cluster:
@@ -109,7 +109,7 @@ databend-bendsave restore \
 | Parameter | Description                                                           |
 |-----------|-----------------------------------------------------------------------|
 | from      | Backup source path.                                                   |
-| to-query  | Path to the restored `lake-query.toml` configuration file.        |
+| to-query  | Path to the restored `databend-query.toml` configuration file.        |
 | to-meta   | Path to the restored `databend-meta.toml` configuration file.         |
 | confirm   | Required flag to confirm restoration and avoid accidental overwrites. |
 
@@ -121,13 +121,13 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
 
 # Backup
 ./databend-bendsave backup \
-  --from ../configs/lake-query.toml \
+  --from ../configs/databend-query.toml \
   --to 's3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1'
 
 # Restore
 ./databend-bendsave restore \
   --from "s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1" \
-  --to-query ../configs/lake-query.toml \
+  --to-query ../configs/databend-query.toml \
   --to-meta ../configs/databend-meta.toml \
   --confirm
 ```
