@@ -40,6 +40,8 @@ This document takes the `tidb` user as an example.
         EOF
         ```
 
+        Because TiDB services in no-sudo mode are managed by the per-user `systemd` instance (`user@<UID>.service`), the limits in `/etc/security/limits.conf` are applied when `user@<UID>.service` starts. If you change `/etc/security/limits.conf` after `user@<UID>.service` is already running, restart `user@<UID>.service` or reboot the target machine before you deploy or restart TiDB services. Otherwise, the new limits might not take effect for the TiDB services.
+
 2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
@@ -51,11 +53,13 @@ This document takes the `tidb` user as an example.
         source ~/.bashrc.d/systemd
         ```
 
-    2. Use the `root` user to start the user service.
+    2. Use the `root` user to start the user service. If `user@${uid}.service` is already running after you update `/etc/security/limits.conf`, run `systemctl restart user@${uid}.service` to apply the new limits.
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user
         $ systemctl start user@${uid}.service
+        # If user@${uid}.service is already running after you update /etc/security/limits.conf, run:
+        $ systemctl restart user@${uid}.service
         $ systemctl status user@${uid}.service
         user@1000.service - User Manager for UID 1000
         Loaded: loaded (/usr/lib/systemd/system/user@.service; static; vendor preset>
