@@ -49,7 +49,7 @@ ls <component-dir>/
 **Naming rules:**
 
 - Lowercase, hyphen-separated: `feature-name.md`
-- Concise and stable — avoid version numbers or overly specific wording
+- Concise and stable: avoid version numbers or overly specific wording
 - Follow existing patterns in the same area
 
 **Placement rules:**
@@ -83,7 +83,7 @@ Every navigable page needs a TOC entry.
 ### Where in the TOC?
 
 1. Find the relevant section: `rg -n "<keyword>" TOC.md`
-2. Look at neighbors — TOC groups by component, then by complexity (overview → getting started → usage → reference → troubleshooting).
+2. Look at neighbors (TOC groups by component), then by complexity (overview → getting started → usage → reference → troubleshooting).
 3. Place the entry adjacent to similar items at the correct nesting level.
 
 **Format** (2-space indent per level):
@@ -95,7 +95,7 @@ Every navigable page needs a TOC entry.
     - [Sub Page](/path/to/sub.md)
 ```
 
-**TOC title**: title case, concise (3–7 words), match the doc H1 when feasible.
+**TOC title**: title case, concise (3 to 7 words), match the doc H1 when feasible.
 
 ## 4. Write front matter
 
@@ -109,7 +109,7 @@ summary: <verb-led, SEO-friendly sentence>
 - `title` must match the H1 exactly, in title case, and stay within ~59 characters.
 - `summary` must not start with `>`, `*`, `#`, `-`, or `[`.
 - `summary` tells readers what they will learn or accomplish.
-- For exact `summary` length rules and verb guidance, follow the `writing-doc-summaries` skill (target 115–145 characters, 45-character absolute minimum).
+- For exact `summary` length rules and verb guidance, follow the `writing-doc-summaries` skill (target 115 to 145 characters, 45-character absolute minimum).
 - SQL statement reference pages use a fixed template defined in the `writing-doc-summaries` skill that falls below 115 characters — that is expected.
 - Add `aliases` only if replacing an older page URL.
 
@@ -117,7 +117,7 @@ summary: <verb-led, SEO-friendly sentence>
 
 ### Writing principles
 
-- Start with what users care about — not internal background.
+- Start with what users care about, not the internal background.
 - Put conditions before instructions.
 - Define jargon on first use.
 - Include realistic, runnable examples.
@@ -214,10 +214,10 @@ summary: <verb-led, SEO-friendly sentence>
 
 When the doc is expected to exceed ~800 words or has unclear scope:
 
-1. Propose 3–5 core sections. Get confirmation.
+1. Propose 3 to 5 core sections. Get confirmation.
 2. Start with the highest-value or most-uncertain section.
 3. Draft section by section. Ask questions only when facts cannot be derived from available sources.
-4. After drafting, run a reader test: predict 5–10 questions a real user would ask. Verify the doc answers them.
+4. After drafting, run a reader test: predict 5 to 10 questions a real user would ask. Verify the doc answers them.
 5. Ask: can anything be removed without losing value?
 
 ## 6. Handle associated updates
