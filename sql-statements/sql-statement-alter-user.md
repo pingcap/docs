@@ -182,7 +182,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 <CustomContent platform="tidb">
 
 -   [TiDB ユーザーアカウント管理](/user-account-management.md)
--   [MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)
+-   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 

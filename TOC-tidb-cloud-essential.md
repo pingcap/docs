@@ -25,7 +25,7 @@
     -   [高可用性](/tidb-cloud/serverless-high-availability.md)
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
-    -   [Security](/tidb-cloud/security-concepts.md)
+    -   [セキュリティ](/tidb-cloud/security-concepts.md)
 
 ## ガイド {#guides}
 
@@ -145,8 +145,8 @@
     -   [変更フィードの概要](/tidb-cloud/essential-changefeed-overview.md)
     -   [MySQLへのシンク](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
     -   [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
--   Security
-    -   [Security概要](/tidb-cloud/security-overview.md)
+-   セキュリティ
+    -   [セキュリティ概要](/tidb-cloud/security-overview.md)
     -   IDアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)

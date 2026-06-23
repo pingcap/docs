@@ -27,7 +27,7 @@
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [データストリーミング](/tidb-cloud/data-streaming-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
-    -   [Security](/tidb-cloud/security-concepts.md)
+    -   [セキュリティ](/tidb-cloud/security-concepts.md)
 
 ## ガイド {#guides}
 
@@ -198,8 +198,8 @@
         -   [Azureでセルフホスト型Kafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
         -   [Google Cloud でセルフホスト型の Kafka プライベートサービスコネクトを設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
         -   [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)
--   Security
-    -   [Security概要](/tidb-cloud/security-overview.md)
+-   セキュリティ
+    -   [セキュリティ概要](/tidb-cloud/security-overview.md)
     -   IDアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)

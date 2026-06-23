@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-gui
 
 A [プリペアドステートメント](/sql-statements/sql-statement-prepare.md) 、パラメータのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメータを分離します。これにより、SQL文の以下の側面を改善できます。
 
--   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
+-   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
 -   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントを使用するのがベストプラクティスです。

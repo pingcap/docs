@@ -165,7 +165,7 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 <CustomContent platform="tidb">
 
--   [MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)
+-   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
 -   [権限管理](/privilege-management.md)
 
 </CustomContent>

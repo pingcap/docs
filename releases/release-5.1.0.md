@@ -32,7 +32,7 @@ TiDB バージョン: 5.1.0
 | [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加された | 共通テーブル式における最大再帰深度を制御します。                                                                                                      |
 | [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加された | TiDBサーバーへの初期接続を制御します。                                                                                                         |
 | [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新しく追加された | TiDBが統計情報を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                          |
-| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加された | 接続先のTiDBサーバーでSecurity拡張モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動しないと変更できません。                                            |
+| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加された | 接続先のTiDBサーバーでセキュリティ強化モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動しないと変更できません。                                            |
 | [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加された | オプティマイザのコスト見積もりを無視し、クエリ実行に強制的に MPP モードを使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                                     |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加された | パーティションテーブルの動的プルーニングモードを有効にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`であり、これはパーティションテーブルの動的プルーニングモードがデフォルトで無効になっていることを意味します。 |
 
@@ -40,7 +40,7 @@ TiDB バージョン: 5.1.0
 
 | コンフィグレーションファイル | コンフィグレーションアイテム                                                                                           | 種類を変更する  | 説明                                                                                                                                                                           |
 | :------------- | :------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB設定ファイル     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加された | Security拡張モード（SEM）を有効にするかどうかを制御します。この設定項目のデフォルト値は`false`で、これはSEMが無効になっていることを意味します。                                                                                           |
+| TiDB設定ファイル     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加された | セキュリティ強化モード（SEM）を有効にするかどうかを制御します。この設定項目のデフォルト値は`false`で、これはSEMが無効になっていることを意味します。                                                                                           |
 | TiDB設定ファイル     | `performance.committer-concurrency`                                                                      | 修正済み     | 単一トランザクションのコミットフェーズにおけるコミット操作に関連するリクエストの同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                               |
 | TiDB設定ファイル     | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)                                   | 新しく追加された | TCPレイヤーで TCP_NODELAY を有効にするかどうかを決定します。デフォルト値は`true`で、これは TCP_NODELAY が有効になっていることを意味します。                                                                                      |
 | TiDB設定ファイル     | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)                                     | 新しく追加された | TiDB がインスタンス レベルでオプティマイザのコスト見積もりを無視し、MPP モードを強制するかどうかを制御します。デフォルト値は`false`です。この設定項目は、システム変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の初期値を制御します。 |
@@ -91,9 +91,9 @@ TiDB バージョン: 5.1.0
 
     プラグインを使用して新しい権限を追加することもできます。サポートされているすべての権限を確認するには、 `SHOW PRIVILEGES`ステートメントを実行します。[ユーザー向けドキュメント](/privilege-management.md)
 
--   Security強化モード（SEM）用の新しい設定項目を追加します。これにより、TiDB管理者の権限をより細かく分割できます。
+-   セキュリティ強化モード（SEM）用の新しい設定項目を追加します。これにより、TiDB管理者の権限をより細かく分割できます。
 
-    Security強化モードはデフォルトでは無効になっています。これを有効にするには、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_enhanced_security)を参照してください。
+    セキュリティ強化モードはデフォルトでは無効になっています。これを有効にするには、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_enhanced_security)を参照してください。
 
 -   列タイプのオンライン変更機能を強化します。 `ALTER TABLE`ステートメントを使用した列タイプのオンライン変更をサポートします。これには以下が含まれますが、これらに限定されません。
 

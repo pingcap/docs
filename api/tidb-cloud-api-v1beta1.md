@@ -3,7 +3,7 @@ title: TiDB Cloud API v1beta1 Overview
 summary: TiDB Cloudの v1beta1 API について学習します。
 ---
 
-# TiDB CloudAPI v1beta1 の概要 {#tidb-cloud-api-v1beta1-overview}
+# TiDB Cloud API v1beta1 の概要 {#tidb-cloud-api-v1beta1-overview}
 
 TiDB Cloud API v1beta1 は、 TiDB Cloud内の管理オブジェクトをプログラム的に管理するためのアクセスを提供する RESTful API です。この API を使用すると、クラスタレベルのリソース（クラスタやブランチなど）や組織レベルまたはプロジェクトレベルのリソース（課金、データサービス、 IAMなど）を自動的かつ効率的に管理できます。
 

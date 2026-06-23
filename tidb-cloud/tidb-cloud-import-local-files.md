@@ -108,7 +108,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 ### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 
-ファイルが250MiBより大きい場合は、 [TiDB CloudCLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)参照してください。
+ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
 
 あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`なります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
 

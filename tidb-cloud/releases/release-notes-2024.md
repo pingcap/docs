@@ -152,7 +152,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     -   TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**接続**ダイアログのインターフェースを改訂します。
     -   クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**ネットワーク設定**ページを導入しました。
-    -   **Security設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
+    -   **セキュリティ設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
 
     詳細については、 [TiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
 
@@ -346,7 +346,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **CLIの変更**
 
--   新しい[TiDB CloudAPI](https://docs.pingcap.com/api/tidb-cloud-api-overview)をベースに構築された[TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)をご紹介します。この新しい CLI には、以下の新機能が搭載されています。
+-   新しい[TiDB Cloud API](https://docs.pingcap.com/api/tidb-cloud-api-overview)をベースに構築された[TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)をご紹介します。この新しい CLI には、以下の新機能が搭載されています。
 
     -   [TiDB Cloud Serverlessクラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
     -   [ローカルストレージからTiDB Cloudサーバーレスクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
@@ -453,7 +453,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   企業認証プロセスを効率化するために、 [組織SSO](https://tidbcloud.com/org-settings/authentication)をサポートします。
 
-    この機能を使用すると、 [Securityアサーションマークアップ言語（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)または[OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/)を使用して、 TiDB Cloud を任意のアイデンティティ プロバイダー (IdP) とシームレスに統合できます。
+    この機能を使用すると、 [Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)または[OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/)を使用して、 TiDB Cloud を任意のアイデンティティ プロバイダー (IdP) とシームレスに統合できます。
 
     詳細については、 [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)を参照してください。
 

@@ -105,8 +105,8 @@
     -   [よくある質問](/ticdc/ticdc-faq.md)
     -   [用語集](/ticdc/ticdc-glossary.md)
 -   管理
-    -   Security
-        -   [TiDBSecurityコンフィグレーションのベストプラクティス](/best-practices-for-security-configuration.md)
+    -   セキュリティ
+        -   [TiDBセキュリティ設定のベストプラクティス](/best-practices-for-security-configuration.md)
         -   [TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)
         -   [TiDBコンポーネント間でTLSを有効にする](/enable-tls-between-components.md)
         -   [自己署名証明書を生成する](/generate-self-signed-certificates.md)
@@ -626,7 +626,7 @@
         -   [TiCDC](/ticdc/monitor-ticdc.md)
         -   [リソース制御](/grafana-resource-control-dashboard.md)
     -   権限
-        -   [MySQLとのSecurity互換性](/security-compatibility-with-mysql.md)
+        -   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
         -   [権限管理](/privilege-management.md)
         -   [列レベルの権限管理](/column-privilege-management.md)
         -   [ユーザーアカウント管理](/user-account-management.md)

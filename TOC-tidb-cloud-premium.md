@@ -24,7 +24,7 @@
     -   [高可用性](/tidb-cloud/serverless-high-availability.md)
     -   [監視](/tidb-cloud/monitoring-concepts.md)
     -   [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
-    -   [Security](/tidb-cloud/security-concepts.md)
+    -   [セキュリティ](/tidb-cloud/security-concepts.md)
 
 ## ガイド {#guides}
 
@@ -138,8 +138,8 @@
     -   参照
         -   [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
         -   [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
--   Security
-    -   [Security概要](/tidb-cloud/security-overview.md)
+-   セキュリティ
+    -   [セキュリティ概要](/tidb-cloud/security-overview.md)
     -   IDアクセス制御
         -   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
         -   [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)

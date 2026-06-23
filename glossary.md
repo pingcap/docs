@@ -337,9 +337,9 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 -   `hot-region-scheduler` ：ホットリージョンの分布のバランスをとる
 -   `evict-leader-{store-id}` ：ノードのすべてのリーダーを追い出す（ローリングアップグレードによく使用される）
 
-### Security強化モード（SEM） {#security-enhanced-mode-sem}
+### セキュリティ強化モード（SEM） {#security-enhanced-mode-sem}
 
-Security強化モード（SEM）は、TiDB管理者の権限をより細かく制御するために使用されます。1 [セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)のシステムに触発されたSEMは、 `SUPER`権限を持つユーザーの機能を制限し、代わりに`RESTRICTED`つのきめ細かい権限を必要とします。これらの権限は、特定の管理アクションを制御するために明示的に付与される必要があります。
+セキュリティ強化モード（SEM）は、TiDB管理者の権限をより細かく制御するために使用されます。1 [セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)のシステムに触発されたSEMは、 `SUPER`権限を持つユーザーの機能を制限し、代わりに`RESTRICTED`つのきめ細かい権限を必要とします。これらの権限は、特定の管理アクションを制御するために明示的に付与される必要があります。
 
 詳細については、 [システム変数に関するドキュメント - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)参照してください。
 

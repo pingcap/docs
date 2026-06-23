@@ -73,7 +73,7 @@ TiDB Cloudには、3種類のプロジェクトがあります。
 
 -   **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
 -   **TiDB X プロジェクト**: このプロジェクト タイプは、TiDB X インスタンス ( TiDB Cloud Starter、 Essential、Premium インスタンスを含む) でのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**私のTiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
--   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB CloudAPI 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
+-   **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
 
 以下の表は、これらのプロジェクトタイプ間の違いを示しています。
 

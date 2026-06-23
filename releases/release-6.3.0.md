@@ -348,7 +348,7 @@ TiDBバージョン: 6.3.0-DMR
     -   `FLASHBACK TABLE`が正しく動作しない問題を修正 [#37386](https://github.com/pingcap/tidb/issues/37386) @[tiancaiamao](https://github.com/tiancaiamao)
     -   標準的な MySQL プロトコルで`prepared`ステートメントフラグを処理できない問題を修正 [#36731](https://github.com/pingcap/tidb/issues/36731) @[dveeden](https://github.com/dveeden)
     -   一部の極端なケースで起動時に表示される可能性のある、TiDB ステータスの誤りに関する問題を修正しました [#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
-    -   `INFORMATION_SCHEMA.VARIABLES_INFO`がセキュリティ拡張モード (SEM) に準拠していない問題を修正します [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    -   `INFORMATION_SCHEMA.VARIABLES_INFO`がセキュリティ強化モード (SEM) に準拠していない問題を修正します [#37586](https://github.com/pingcap/tidb/issues/37586) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `UNION`を含むクエリで文字列から文字列へのキャストが失敗する問題を修正 [#31678](https://github.com/pingcap/tidb/issues/31678) @[cbcwestwolf](https://github.com/cbcwestwolf)
     -   TiFlashのパーティションテーブルで動的モードを有効にした際に発生する誤った結果を修正 [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
     -   TiDBにおけるバイナリ文字列とJSON間のキャストおよび比較がMySQLと互換性がない問題を修正[#31918](https://github.com/pingcap/tidb/issues/31918) [#25053](https://github.com/pingcap/tidb/issues/25053) @[YangKeao](https://github.com/YangKeao)
