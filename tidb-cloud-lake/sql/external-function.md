@@ -11,7 +11,6 @@ This page provides a comprehensive overview of External Function operations in {
 
 | Command | Description |
 |---------|-------------|
-| [CREATE EXTERNAL FUNCTION](/tidb-cloud-lake/sql/create-function.md) | Creates a new external function |
 | [ALTER EXTERNAL FUNCTION](/tidb-cloud-lake/sql/alter-function.md) | Modifies an existing external function |
 | [DROP EXTERNAL FUNCTION](/tidb-cloud-lake/sql/drop-function.md) | Removes an external function |
 

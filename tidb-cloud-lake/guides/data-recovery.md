@@ -131,7 +131,3 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
   --to-meta ../configs/databend-meta.toml \
   --confirm
 ```
-
-### Tutorials
-
-- [Backing Up and Restoring Data with BendSave](/tidb-cloud-lake/tutorials/backup-restore-with-bendsave.md)

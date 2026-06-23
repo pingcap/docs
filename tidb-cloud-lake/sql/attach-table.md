@@ -131,7 +131,3 @@ ATTACH TABLE finance_view (order_id, amount, profit, order_date)
 's3://your-bucket/1/23351/'
 CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
-
-## Learn More
-
-- [Linking Tables with ATTACH TABLE](/tidb-cloud-lake/tutorials/data-sharing-via-attach-table.md)

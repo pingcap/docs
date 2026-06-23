@@ -57,7 +57,3 @@ When sharing a dashboard, you can choose one of the following permission levels 
 - **Edit**: Modify the dashboard, including changing queries and how the dashboard reflects the results.
 
 To view the dashboards shared with you by others, click **Dashboards** in the sidebar, then click the **Shared with Me** tab on the right.
-
-## Tutorials
-
-- [Dashboarding COVID-19 Data](/tidb-cloud-lake/tutorials/dashboard-tour.md)

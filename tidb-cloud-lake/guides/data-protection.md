@@ -15,7 +15,9 @@ summary: TiDB Cloud Lake's Continuous Data Protection (CDP) offers easy-to-use f
 - [Access Control](/tidb-cloud-lake/guides/access-control.md)
     - Decide who can see or use different parts of {{{ .lake }}}. Keeps things organized and secure.
 
+<!--
 - [Time Travel & Fail-safe](/tidb-cloud-lake/guides/data-recovery.md)
     - Get back old or lost data.
     - Time Travel lets you look at and bring back past data.
     - Fail-safe is for big emergencies, used by {{{ .lake }}} to recover data when there's a serious problem.
+-->
