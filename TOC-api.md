@@ -4,7 +4,7 @@
 
 # 目次 {#table-of-contents}
 
-## TIDBクラウド {#tidb-cloud}
+## TiDB Cloud {#tidb-cloud}
 
 -   [APIの概要](/api/tidb-cloud-api-overview.md)
 -   [API v1beta2](/api/tidb-cloud-api-v1beta2.md)
