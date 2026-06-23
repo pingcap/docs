@@ -2261,7 +2261,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 -   新しいマスター キーをローテーションするときに古いマスター キーを指定します。構成形式は`master-key`と同じです。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)参照してください。
 
-## 輸入 {#import}
+## インポート {#import}
 
 TiDB LightningのインポートおよびBR復元に関連するコンフィグレーション項目。
 

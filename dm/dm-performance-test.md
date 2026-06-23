@@ -34,11 +34,11 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### 完全輸入ベンチマークケース {#full-import-benchmark-case}
+### 完全インポートベンチマークケース {#full-import-benchmark-case}
 
 #### テストデータを生成する {#generate-test-data}
 
-`sysbench`使用してアップストリームにテストテーブルを作成し、フルインポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
+`sysbench`使用してアップストリームにテストテーブルを作成し、完全インポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=50000000 prepare
@@ -103,7 +103,7 @@ DM-worker のログを確認してください。1 `all data files have been fin
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。1を`source-id` `source-1`設定します（ [完全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)参照してください。
+1.  アップストリームMySQLのソースを作成します。1を`source-id` `source-1`設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)参照してください。
 
 2.  DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
 
