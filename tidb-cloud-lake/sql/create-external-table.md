@@ -64,7 +64,6 @@ The external location S3 bucket must have the following permissions granted thro
 - `s3:DeleteObject`: Allows deleting objects from the bucket.
 - `s3:AbortMultipartUpload`: Allows aborting multipart uploads.
 - `s3:DeleteObjectVersion`: Allows deleting a specific version of an object.
-:::
 
 ## Examples
 
