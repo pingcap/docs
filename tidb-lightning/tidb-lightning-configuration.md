@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-configuration/','/docs/dev/re
 
 This document provides samples for global configuration and task configuration, and describes the usage of command-line parameters. You can find a sample configuration file in [`lightning/tidb-lightning.toml`](https://github.com/pingcap/tidb/blob/master/lightning/tidb-lightning.toml).
 
-TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when the [server mode](/tidb-lightning/tidb-lightning-web-interface.md) is enabled. When server mode is disabled (the default), TiDB Lightning will only execute one task, and the same configuration file is used for both global and task configurations.
+TiDB Lightning has two configuration classes: "global" and "task", and they have compatible structures. Their distinction arises only when server mode is enabled. When server mode is disabled (the default), TiDB Lightning executes only one task and uses the same configuration file for both global and task configurations.
 
 ## TiDB Lightning (Global)
 
@@ -16,7 +16,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 
 #### `status-addr`
 
-- The HTTP port for displaying the task progress on the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode).
+- The HTTP port for pulling Prometheus metrics, exposing debug data, and submitting import tasks in server mode.
 - Setting it to `0` disables the port.
 
 <!-- Example: `:8289` -->
@@ -27,7 +27,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 - Default value: `false`
 - Value options:
     - `false`: an import task starts immediately after you execute the command.
-    - `true`: after you execute the command, TiDB Lightning waits until you submit an import task in the web interface. For more information, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
+    - `true`: after you execute the command, TiDB Lightning waits until you submit an import task through its HTTP API.
 
 #### `level`
 

@@ -542,7 +542,6 @@
       - [Configuration File](/tidb-lightning/tidb-lightning-configuration.md)
       - [Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md)
       - [Monitoring](/tidb-lightning/monitor-tidb-lightning.md)
-      - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - [Dumpling](/dumpling-overview.md)
