@@ -108,7 +108,7 @@ TiDBバージョン：5.2.4
     -   遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#11526](https://github.com/tikv/tikv/issues/11526)
     -   TiKVの動作停止後に解決済みTSのレイテンシーが増加する問題を修正 [#11351](https://github.com/tikv/tikv/issues/11351)
     -   極端な状況下でリージョンマージ、ConfChange、スナップショットが同時に発生した際に発生するpanic問題を修正します [#11475](https://github.com/tikv/tikv/issues/11475)
-    -   tikv-ctlが正しい地域関連情報を返せないバグを修正 [#11393](https://github.com/tikv/tikv/issues/11393)
+    -   tikv-ctlが正しいリージョン関連情報を返せないバグを修正 [#11393](https://github.com/tikv/tikv/issues/11393)
     -   小数除算の結果がゼロの場合に負の符号が発生する問題を修正 [#29586](https://github.com/pingcap/tidb/issues/29586)
     -   悲観的トランザクションモードでプリライト要求を再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
     -   統計スレッドのデータ監視によって引き起こされるメモリリークを修正 [#11195](https://github.com/tikv/tikv/issues/11195)
