@@ -81,7 +81,7 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、
 
 5.  右側のペインでクラスター サイズを確認し、 **[確認]**をクリックします。
 
-TiDB Cloud APIを使用して、 [TiDB Cloud Dedicated クラスターを変更する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイント経由でTiDB、TiKV、またはTiFlashノードのvCPUとRAMを変更することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)ご覧ください。
+TiDB Cloud APIを使用して、 [TiDB Cloud Dedicated クラスターを変更する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイント経由でTiDB、TiKV、またはTiFlashノードのvCPUとRAMを変更することもできます。現在、 TiDB Cloud APIはまだベータ版です。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)をご覧ください。
 
 ## ストレージの変更 {#change-storage}
 
