@@ -24,7 +24,7 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 
 ## Performance and Cost Comparison
 
-- **Data Loading Costs**: {{{ .lake }}} achieves a **67% cost reduction** in data loading compared to Snowflake.
+- **Data Loading Costs**: {{{ .lake }}} achieves a **48% cost reduction** in data loading compared to Snowflake.
 - **Query Execution Costs**: {{{ .lake }}} is approximately **60% less expensive** for query execution than Snowflake.
 
 :::info[Note]

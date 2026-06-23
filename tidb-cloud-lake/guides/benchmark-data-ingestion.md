@@ -25,8 +25,8 @@ Conducted on a `Small-Size` warehouse (16vCPU, AWS us-east-2) using data from th
 
 ## Performance and Cost Comparison
 
-- **TPC-H SF100 Data**: {{{ .lake }}} offers a **67% cost reduction** over Snowflake.
-- **ClickBench Hits Data**: {{{ .lake }}} achieves a **91% cost reduction**.
+- **TPC-H SF100 Data**: {{{ .lake }}} offers a **48% cost reduction** over Snowflake.
+- **ClickBench Hits Data**: {{{ .lake }}} achieves a **84% cost reduction**.
 - **1-Second Freshness**: {{{ .lake }}} loads **400 times** more data than Snowflake.
 - **5-Second Freshness**: {{{ .lake }}} loads over **27 times** more data.
 
@@ -39,7 +39,7 @@ Conducted on a `Small-Size` warehouse (16vCPU, AWS us-east-2) using data from th
 | Metric         | Snowflake | {{{ .lake }}} | Description               |
 | -------------- | --------- | -------------- | ------------------------- |
 | **Total Time** | 695s      | 446s           | Time to load the dataset. |
-| **Total Cost** | $0.77     | $0.25          | Cost of data loading.     |
+| **Total Cost** | $0.77     | $0.40          | Cost of data loading.     |
 
 - Data Volume: 100GB
 - Rows: Approx. 600 million
@@ -49,7 +49,7 @@ Conducted on a `Small-Size` warehouse (16vCPU, AWS us-east-2) using data from th
 | Metric         | Snowflake | {{{ .lake }}} | Description               |
 | -------------- | --------- | -------------- | ------------------------- |
 | **Total Time** | 51m 17s   | 9m 58s         | Time to load the dataset. |
-| **Total Cost** | $3.42     | $0.30          | Cost of data loading.     |
+| **Total Cost** | $3.42     | $0.53          | Cost of data loading.     |
 
 - Data Volume: 76GB
 - Rows: Approx. 100 million
@@ -89,7 +89,7 @@ The benchmark tests both Snowflake and {{{ .lake }}} under similar conditions:
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
 | Warehouse Size | Small                                                    | Small                                     |
 | vCPU           | 16                                                       | 16                                        |
-| Price          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$2/hour](https://www.pingcap.com/pricing/) |
+| Price          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$3.2/hour](https://www.pingcap.com/pricing/) |
 | AWS Region     | us-east-2                                                | us-east-2                                 |
 | Storage        | AWS S3                                                   | AWS S3                                    |
 
