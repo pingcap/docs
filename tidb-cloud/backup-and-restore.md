@@ -302,7 +302,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     > **Note**
     >
     > - By default, the new cluster is restored to the same region as the source cluster.
-    > - If **Dual Region Backup** is enabled in **Backup Setting**, you can also choose to restore the new cluster to the **Secondary Region** configured for dual region backup.
+    > - If [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) is enabled in **Backup Setting**, you can also choose to restore the new cluster to the **Secondary Region** configured for dual region backup.
 
 5. In the **Restore** window, you can also make the following changes if necessary:
 
