@@ -13,7 +13,7 @@ ticloud config create [flags]
 
 > **注記：**
 >
-> ユーザー プロファイルを作成する前に、 [TiDB CloudAPIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)行う必要があります。
+> ユーザー プロファイルを作成する前に、 [TiDB Cloud APIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)行う必要があります。
 
 ## 例 {#examples}
 

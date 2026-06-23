@@ -239,7 +239,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 <SimpleTab>
 <div label="Create Serverless Cluster">
 
--   **TiDB CloudAPI の認証情報**: TiDB CloudAPI キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+-   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **プロジェクト**： TiDB Cloudプロジェクト名。
 -   **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
 -   **クラスタ**： TiDB Cloud Starterインスタンスの名前を入力してください。
@@ -249,7 +249,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 </div>
 <div label="Execute SQL">
 
--   **TiDB CloudAPI の認証情報**: TiDB CloudAPI キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+-   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **プロジェクト**： TiDB Cloudプロジェクト名。
 -   **操作**: このノードの操作。サポートされているすべての操作については、[サポート対象のオペレーション](#supported-operations)を参照してください。
 -   **クラスタ**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
@@ -261,7 +261,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 </div>
 <div label="Delete">
 
--   **TiDB CloudAPI の認証情報**: TiDB CloudAPI キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+-   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **プロジェクト**： TiDB Cloudプロジェクト名。
 -   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
 -   **クラスタ**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
@@ -274,7 +274,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 </div>
 <div label="Insert">
 
--   **TiDB CloudAPI の認証情報**: TiDB CloudAPI キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+-   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **プロジェクト**： TiDB Cloudプロジェクト名。
 -   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
 -   **クラスタ**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
@@ -287,7 +287,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 </div>
 <div label="Update">
 
--   **TiDB CloudAPI の認証情報**: TiDB CloudAPI キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
+-   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 APIキーの作成方法については、 [TiDB Cloud APIキーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **プロジェクト**： TiDB Cloudプロジェクト名。
 -   **操作**: このノードの操作。サポートされているすべての操作については、[支援活動](#supported-operations)を参照してください。
 -   **クラスタ**： TiDB Cloud Starterインスタンスの名前。既存のインスタンスを1つ選択してください。
