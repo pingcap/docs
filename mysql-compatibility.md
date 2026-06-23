@@ -67,6 +67,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
 + `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
 + Lateral derived tables (TiDB supports parsing the syntax but does not support executing it) [#40328](https://github.com/pingcap/tidb/issues/40328). For syntax details, see [LATERAL derived tables](/lateral-derived-tables.md).
++ JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
 
 ## Differences from MySQL
 
