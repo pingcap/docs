@@ -167,6 +167,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     - Support viewing session connection attributes on the Slow Query page in TiDB Dashboard, including an optional list column and a dedicated detail tab, while remaining compatible with earlier TiDB versions that do not provide this field [#1899](https://github.com/pingcap/tidb-dashboard/issues/1899) @[yibin87](https://github.com/yibin87) <!-- component: tidb-dashboard -->
     - Improve transactional timestamp validation by enforcing exact max-ts checks for non-TiDB requests, reducing the risk that external components use future timestamps incorrectly [#68799](https://github.com/pingcap/tidb/issues/68799) @[ekexium](https://github.com/ekexium) <!-- component: transaction -->
     - Optimize auto-commit optimistic transactions by skipping lock resolution on the first execution, reducing latency in high-contention scenarios [#58675](https://github.com/pingcap/tidb/issues/58675) @[ekexium](https://github.com/ekexium) <!-- component: transaction -->
+    - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (Although it is listed under the PD component label, in fact it only involves changes on the TiDB side )-->
+    - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (this is only a change on the TiDB side,) -->
 
 + TiKV
 
@@ -181,11 +183,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + PD
 
-    - Support batching PD region-routing lookups and serving them from PD followers to reduce routing latency and avoid overloading the PD leader at scale or after failovers [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato)
     - Disable split scatter by default in PD to avoid unexpected scheduling after region splits; you can still enable it by setting `schedule.split-scatter-schedule-limit` to a positive value [#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024) <!-- component: pd -->
     - Optimize unsafe recovery empty-region plan generation to improve performance and reduce timeout risk in large clusters with many regions and gaps [#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996) <!-- component: pd -->
-    - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
-    - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) @[JmPotato](https://github.com/JmPotato) <!-- component: pd -->
     - Improve PD transaction duration metrics to better reflect production latency distributions and improve observability in dashboards and alerts [#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies) <!-- component: pd -->
     - Add PD maintenance endpoints and `pd-ctl` commands to serialize TiKV maintenance tasks and prevent Raft quorum loss by ensuring that only one maintenance task is active at a time [#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30) <!-- component: pd -->
 
