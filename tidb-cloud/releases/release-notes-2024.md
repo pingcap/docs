@@ -346,7 +346,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **CLIの変更**
 
--   新しい[TiDB CloudAPI](https://docs.pingcap.com/api/tidb-cloud-api-overview)をベースに構築された[TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)をご紹介します。この新しい CLI には、以下の新機能が搭載されています。
+-   新しい[TiDB Cloud API](https://docs.pingcap.com/api/tidb-cloud-api-overview)をベースに構築された[TiDB Cloud CLI 1.0.0-beta.1](https://github.com/tidbcloud/tidbcloud-cli)をご紹介します。この新しい CLI には、以下の新機能が搭載されています。
 
     -   [TiDB Cloud Serverlessクラスターからデータをエクスポートする](/tidb-cloud/serverless-export.md)
     -   [ローカルストレージからTiDB Cloudサーバーレスクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)

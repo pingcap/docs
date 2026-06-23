@@ -9,7 +9,7 @@ summary: TiDB Cloud Terraform Provider を取得する方法を学びます。
 
 ## 前提条件 {#prerequisites}
 
-[TiDB CloudTerraform プロバイダーの概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)の要件が満たされていることを確認してください。
+[TiDB Cloud Terraform プロバイダーの概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)の要件が満たされていることを確認してください。
 
 ## ステップ1. Terraformをインストールする {#step-1-install-terraform}
 

@@ -12,7 +12,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 > **注記：**
 >
-> データサービスで使用されるデータAPIキーは、 [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。データAPIキーはTiDB内のデータにアクセスするために使用されますが、 TiDB Cloud APIキーはプロジェクト、クラスタ、バックアップ、リストア、インポートなどのリソースを管理するために使用されます。
+> データサービスで使用されるデータAPIキーは、 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。データAPIキーはTiDB内のデータにアクセスするために使用されますが、 TiDB Cloud APIキーはプロジェクト、クラスタ、バックアップ、リストア、インポートなどのリソースを管理するために使用されます。
 
 ## APIキーの概要 {#api-key-overview}
 
