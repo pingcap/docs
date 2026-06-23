@@ -402,7 +402,7 @@ ALTER DATABASE tpch REFRESH CACHE; -- Refresh metadata cache for the tpch databa
 ALTER TABLE tpch.lineitem REFRESH CACHE; -- Refresh metadata cache for the lineitem table
 ```
 
-If you prefer not to use the metadata cache, you can disable it entirely by configuring the `iceberg_table_meta_count` setting to `0` in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file:
+If you prefer not to use the metadata cache, you can disable it entirely by configuring the `iceberg_table_meta_count` setting to `0` in the [lake-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/lake-query.toml) configuration file:
 
 ```toml
 ...

@@ -56,7 +56,7 @@ GRANT ROLE audit_team TO USER compliance_officer;
 
 #### Minimal Configuration
 
-To enable system history tables, you must configure all 5 tables in your `databend-query.toml`:
+To enable system history tables, you must configure all 5 tables in your `lake-query.toml`:
 
 ```toml
 [log.history]

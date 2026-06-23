@@ -1,11 +1,11 @@
 ---
 title: VERSION
-summary: Returns the current version of DatabendQuery.
+summary: Returns the current version of LakeQuery.
 ---
 
 # VERSION
 
-Returns the current version of DatabendQuery.
+Returns the current version of LakeQuery.
 
 ## Syntax
 
@@ -21,6 +21,6 @@ SELECT VERSION();
 ┌───────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                           version()                                           │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
-│ DatabendQuery v1.2.252-nightly-193ed56304(rust-1.75.0-nightly-2023-12-12T22:07:25.371440000Z) │
+│ LakeQuery v1.2.252-nightly-193ed56304(rust-1.75.0-nightly-2023-12-12T22:07:25.371440000Z) │
 └───────────────────────────────────────────────────────────────────────────────────────────────┘
 ```

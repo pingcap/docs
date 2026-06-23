@@ -43,7 +43,6 @@
   - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
   - SQL Clients
     - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
-    - [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md)
   - Drivers
     - [Overview](/tidb-cloud-lake/guides/driver-overview.md)
     - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)

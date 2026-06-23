@@ -7,14 +7,14 @@ summary: "{{{ .lake }}} provides comprehensive Support Services for our {{{ .lak
 
 {{{ .lake }}} provides comprehensive Support Services for our {{{ .lake }}} users and customers. Our objective is to deliver exceptional support that reflects the {{{ .lake }}} product's core values – high performance, ease of use, and fast, high-quality results.
 
-For detailed information about support service levels across different editions, see [Support Service Levels](#support-service-levels). For more information, contact our [sales team](https://www.databend.com/contact-us/).
+For detailed information about support service levels across different editions, see [Support Service Levels](#support-service-levels). For more information, contact our [sales team](https://www.pingcap.com/contact-us/).
 
 ## Getting Support
 
 You can access support through multiple channels:
 
 - **Cloud Console**: Log in to the {{{ .lake }}} console and select **Support → Create New Ticket** from the menu options to open a new support case and view the status of your submitted cases.
-- **Status Page**: Subscribe to our [status page](https://status.databend.com) to get notified quickly about any incidents affecting our platform.
+- **Status Page**: Subscribe to our [status page](https://status.tidbcloud.com/) to get notified quickly about any incidents affecting our platform.
 - **Documentation**: Browse our comprehensive [documentation](https://docs.tidb.io/tidbcloudlake/) for guides, tutorials, and reference materials.
 
 ## Support Service Levels
@@ -38,8 +38,7 @@ You can access support through multiple channels:
 >
 > Please note that only Business and Dedicated customers have a Service Level Agreement (SLA) on Support Incidents. If you are using the Personal edition – while we will try to answer your question as soon as possible, we'd encourage you to also explore our Community resources:
 >
-> - [{{{ .lake }}} Community Slack Channel](https://link.databend.com/join-slack)
-> - [GitHub Discussions](https://github.com/databendlabs/databend/discussions)
+> - [{{{ .lake }}} Community Slack Channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=tidbcloud)
 
 ## Enterprise Support
 
@@ -50,4 +49,4 @@ For customers with mission-critical deployments, our Dedicated edition offers en
 - Proactive monitoring and issue resolution
 - Regular health checks and optimization recommendations
 
-Contact our [sales team](https://www.databend.com/contact-us/) to learn more about our enterprise support offerings.
+Contact our [sales team](https://www.pingcap.com/contact-us/) to learn more about our enterprise support offerings.

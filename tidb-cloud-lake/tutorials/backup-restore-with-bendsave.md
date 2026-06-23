@@ -27,10 +27,10 @@ databend-v1.2.725-nightly-x86_64-unknown-linux-gnu/
 │   ├── databend-bendsave  # The BendSave binary used in this tutorial
 │   ├── databend-meta
 │   ├── databend-metactl
-│   └── databend-query
+│   └── lake-query
 ├── configs
 │   ├── databend-meta.toml
-│   └── databend-query.toml
+│   └── lake-query.toml
 └── ...
 ```
 
@@ -69,10 +69,10 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
     tar -xzvf databend-dbg-v1.2.725-nightly-x86_64-unknown-linux-gnu.tar.gz
     ```
 
-2. Configure the **databend-query.toml** configuration file in the **configs** folder.
+2. Configure the **lake-query.toml** configuration file in the **configs** folder.
 
     ```bash
-    vi configs/databend-query.toml
+    vi configs/lake-query.toml
     ```
 
     The following shows the key configuration required for this tutorial:
@@ -104,7 +104,7 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
     ```
 
     ```bash
-    ./databend-query -c ../configs/databend-query.toml > query.log 2>&1 &
+    ./lake-query -c ../configs/lake-query.toml > query.log 2>&1 &
     ```
 
     After launching the services, verify they are running by checking their health endpoints. A successful response should return HTTP status 200 OK.
@@ -157,10 +157,10 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://databend/ --recursive
     export AWS_SECRET_ACCESS_KEY=minioadmin
 
     ./databend-bendsave backup \
-      --from ../configs/databend-query.toml \
+      --from ../configs/lake-query.toml \
       --to 's3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1'
     <jemalloc>: Number of CPUs detected is not deterministic. Per-CPU arena disabled.
-    Backing up from ../configs/databend-query.toml to s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1
+    Backing up from ../configs/lake-query.toml to s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1
     ```
 
 2. After the backup completes, you can verify that the files were written to the backupbucket by listing its contents:
@@ -200,11 +200,11 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
     ```bash
     ./databend-bendsave restore \
       --from "s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1" \
-      --to-query ../configs/databend-query.toml \
+      --to-query ../configs/lake-query.toml \
       --to-meta ../configs/databend-meta.toml \
       --confirm
     <jemalloc>: Number of CPUs detected is not deterministic. Per-CPU arena disabled.
-    Restoring from s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1 to query ../configs/databend-query.toml and meta ../configs/databend-meta.toml with confirmation
+    Restoring from s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1 to query ../configs/lake-query.toml and meta ../configs/databend-meta.toml with confirmation
     ```
 
 4. After the restore completes, you can verify that the files were written back to the **databend** bucket by listing its contents:
