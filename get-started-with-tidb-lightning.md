@@ -1,10 +1,5 @@
 ---
-<<<<<<< HEAD
-title: Quick Start for TiDB Lightning
-=======
 title: Get Started with TiDB Lightning
-aliases: ['/docs/dev/get-started-with-tidb-lightning/','/docs/dev/how-to/get-started/tidb-lightning/']
->>>>>>> ed7b4e0a40 (master: remove TiDB Lightning web interface (#23095))
 summary: TiDB Lightning is a tool for importing MySQL data into a TiDB cluster. It is recommended for test and trial purposes only, not for production or development environments. The process involves preparing full backup data, deploying the TiDB cluster, installing TiDB Lightning, starting TiDB Lightning, and checking data integrity. For detailed features and usage, refer to the TiDB Lightning Overview.
 ---
 
