@@ -1,11 +1,11 @@
 ---
 title: TiCDC Table Routing
-summary: Learn how to configure TiCDC table routing to rewrite downstream schema and table names, detect conflicts, rewrite DDL, and troubleshoot issues.
+summary: Learn how to configure table routing in TiCDC new architecture to rewrite downstream schema and table names, detect conflicts, and handle DDL.
 ---
 
 # TiCDC Table Routing
 
-TiCDC table routing lets you map an upstream table to a specified downstream schema name or table name through changefeed configuration.
+TiCDC table routing lets you map an upstream table to a specified downstream schema name or table name through changefeed configuration. This feature applies only to [TiCDC new architecture](/ticdc/ticdc-architecture.md) and is not supported in [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md).
 
 Table routing only changes the schema and table names that TiCDC outputs to the downstream. It does not change row data, column names, table structures, table filter rules, topic dispatch rules, partition dispatch rules, or column selector rules.
 
@@ -24,6 +24,8 @@ Table routing is suitable for the following scenarios:
 > Table routing does not support splitting one upstream table into multiple downstream tables or transforming row data.
 
 ## Configure table routing
+
+Before you configure table routing, enable TiCDC new architecture. For more information, see [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1).
 
 The following example routes `sales.orders` to `archive.sales_orders`:
 
@@ -186,7 +188,7 @@ If a DDL statement contains table references and those table references match ta
 
 For schema-level DDL statements such as `CREATE DATABASE`, `DROP DATABASE`, and `ALTER DATABASE ... CHARACTER SET/COLLATE`, if the schema name matches table routing rules, TiCDC rewrites the schema name. **If the same upstream schema matches multiple table routing rules but these rules resolve to different target schema names, TiCDC cannot determine one unique target schema for the schema-level DDL, and the changefeed reports a table routing error.**
 
-When you create or update a changefeed, TiCDC checks target table conflicts based on tables in the current replication scope. Whether a schema-level DDL can be routed to one unique target schema is checked when TiCDC replicates the corresponding DDL.
+When you create or update a changefeed, TiCDC checks target table conflicts based on tables in the current replication scope. During changefeed runtime, TiCDC updates the conflict detection state when it replicates DDL statements such as `CREATE TABLE`, `RENAME TABLE`, `DROP TABLE`, and `DROP DATABASE`. Whether a schema-level DDL can be routed to one unique target schema is checked when TiCDC replicates the corresponding DDL.
 
 ## Route conflict detection
 
@@ -212,6 +214,10 @@ target-table = "{table}"
 
 If both `sales.orders` and `crm.orders` are in the replication scope, both tables are routed to `archive.orders`. TiCDC rejects the changefeed create or update operation and returns the `CDC:ErrTableRouteConflict` error.
 
+During changefeed runtime, if a DDL statement such as `CREATE TABLE` or `RENAME TABLE` causes two active upstream tables to route to the same target table, the changefeed fails and returns the `CDC:ErrTableRouteConflict` error.
+
+After an upstream table is dropped or renamed, TiCDC releases the target table occupied by the old source table name. A new source table name can then use the same target table, as long as no two active upstream tables are routed to that target table at the same time.
+
 > **Warning:**
 >
 > Route conflict detection is scoped to a single changefeed. If multiple changefeeds write to the same downstream system, make sure that their table routing rules do not write to the same target objects.
@@ -223,6 +229,7 @@ If both `sales.orders` and `crm.orders` are in the replication scope, both table
 | Changefeed creation fails with the `CDC:ErrInvalidTableRoutingRule` error. | `target-schema` or `target-table` contains an invalid placeholder or invalid braces. | Use only literal text, `{schema}`, and `{table}`. |
 | The MQ topic name still uses the upstream schema and table names. | Table routing does not change topic or partition dispatching. | If you need to change topic names, configure `topic` separately in `sink.dispatchers`. |
 | A DDL statement fails with the `CDC:ErrTableRoutingFailed` error. | The DDL statement cannot be safely rewritten for table routing, or schema-level routing is ambiguous. | Adjust the routing rules. |
+| A running changefeed fails with the `CDC:ErrTableRouteConflict` error. | After a table is created or renamed, two different upstream tables are routed to the same downstream table. | Adjust the table routing rules or upstream DDL, and make sure each target table in a single changefeed maps to only one active upstream table. |
 
 ## Related documents
 
