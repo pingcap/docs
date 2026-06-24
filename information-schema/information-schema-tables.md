@@ -110,7 +110,7 @@ SHOW TABLES
 -   `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0` 、データ長に上限がないことを意味します。
 -   `INDEX_LENGTH` : インデックスの長さ`INDEX_LENGTH` = `TABLE_ROWS` * インデックスタプル内の列の長さの合計。TiKVのレプリカは考慮されません。
 -   `DATA_FREE` : データフラグメント。現在の値は`0`です。
--   `AUTO_INCREMENT` : AUTO_INCREMENT主キーの現在のステップ。
+-   `AUTO_INCREMENT` : 現在のAUTO_INCREMENT主キーの値。
 -   `CREATE_TIME` : テーブルが作成された時刻。
 -   `UPDATE_TIME` : テーブルが更新される時刻。
 -   `CHECK_TIME` : テーブルがチェックされる時刻。
