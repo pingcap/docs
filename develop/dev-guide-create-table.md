@@ -101,11 +101,11 @@ CREATE TABLE `bookshop`.`books` (
 
 > **注記：**
 >
-> TiDBにおける**プライマリキー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）における定義とは異なります。
+> TiDBにおける**主キー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）における定義とは異なります。
 >
-> -   **InnoDB**では、**プライマリキー**は一意であり、nullではなく、**インデックスはクラスタ化されています**。
+> -   **InnoDB**では、**主キー**は一意であり、nullではなく、**インデックスはクラスタ化されています**。
 >
-> -   TiDBでは、**プライマリキー**は一意であり、NULLであってはなりません。ただし、プライマリキーが**クラスタ化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**プライマリキーが****クラスタ化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（化を参照[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)。
+> -   TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスタ化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キーが****クラスタ化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（化を参照[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)。
 
 **主キー**は`CREATE TABLE`ステートメントで定義されます。[主キー制約](/constraints.md#primary-key)制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
@@ -140,7 +140,7 @@ TiDB は v5.0 以降、[クラスター化インデックス](/clustered-indexes
 -   `CLUSTERED` : テーブルの主キーはクラスタ化インデックスです。クラスタ化インデックスを持つテーブルでは、行データのキーはユーザーが指定した主キーデータで構成されます。したがって、クラスタ化インデックスを持つテーブルでは、行を格納するために必要なキーと値のペアは1つだけです。それは次のとおりです。
     -   主キーデータ（キー） - 行データ（値）
 
-[プライマリキーを選択](#select-primary-key)で説明されているように、**クラスター化インデックス**は TiDB でキーワード`CLUSTERED`および`NONCLUSTERED`を使用して制御されます。
+[主キーを選択](#select-primary-key)で説明されているように、**クラスター化インデックス**は TiDB でキーワード`CLUSTERED`および`NONCLUSTERED`を使用して制御されます。
 
 > **注記：**
 >
