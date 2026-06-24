@@ -70,8 +70,10 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 ## 次は？ {#what-s-next}
 
-TiDB Cloud StarterまたはEssentialインスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)インスタンスのパスワードを作成します。
+- TiDB Cloud StarterまたはEssentialインスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)インスタンスのパスワードを作成します。
 
-> **注記：**
->
-> パスワードを設定しないと、 TiDB Cloud StarterまたはEssentialインスタンスに接続できません。
+    > **Note:**
+    >
+    > パスワードを設定しないと、 TiDB Cloud StarterまたはEssentialインスタンスに接続できません。
+
+- TiDB Cloud CLI を使用してインスタンスを管理するには、[TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md) を参照してください。
