@@ -65,7 +65,7 @@ summary: TiDBの機能概要について学びましょう。
 | [見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`CHECK`制約](/constraints.md#check)                                                          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
-| [一意のインデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [一意インデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [整数型の`PRIMARY KEY`に対するクラスター化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合キーまたは非整数キーに対するクラスター化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |

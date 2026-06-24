@@ -133,7 +133,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 
 ## 一意キー {#unique-key}
 
-一意制約とは、一意のインデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
+一意制約とは、一意インデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
 
 ### 楽観的トランザクション {#optimistic-transactions}
 
@@ -212,7 +212,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
 ### 悲観的トランザクション {#pessimistic-transactions}
 
-悲観的トランザクションでは、一意のインデックスの挿入または更新を必要とする SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
+悲観的トランザクションでは、一意インデックスの挿入または更新を必要とする SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
 
 ```sql
 DROP TABLE IF EXISTS users;
