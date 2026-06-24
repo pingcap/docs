@@ -189,7 +189,7 @@ TiDB バージョン: 4.0.6
 
     -   Dumpling
 
-        -   バイナリタイプの`NULL`値が正しく処理されない問題を修正しました[＃137](https://github.com/pingcap/dumpling/pull/137)
+        -   バイナリ型の`NULL`値が正しく処理されない問題を修正しました[＃137](https://github.com/pingcap/dumpling/pull/137)
 
     -   TiDB Lightning
 
