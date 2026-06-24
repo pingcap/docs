@@ -38,8 +38,8 @@ TiDB Ansible バージョン: 2.1.17
     -   `SELECT` / `EXPLAIN`文[＃11892](https://github.com/pingcap/tidb/pull/11892)を実行するときに一部の文字列が`INT`型に変換されることで発生する MySQL の非互換性の問題を修正するために`ConvertStrToIntStrict`関数を追加します
     -   `EXPLAIN ... FOR CONNECTION`使用されているときに`stmtCtx`の設定が間違っているために`Explain`結果が正しくない可能性がある問題を修正しました[＃11978](https://github.com/pingcap/tidb/pull/11978)
     -   `unaryMinus`関数によって返される結果が MySQL と互換性がない問題を修正しました。これは、整数結果が[＃11990](https://github.com/pingcap/tidb/pull/11990)オーバーフローしたときに非小数点結果になるためです。
-    -   `LOAD DATA`文の実行時にカウント順序が原因で`last_insert_id()`間違っている可能性がある問題を修正しました[＃11994](https://github.com/pingcap/tidb/pull/11994)
-    -   ユーザーが自動インクリメント列データを明示的・暗黙的に混合して書き込む場合に`last_insert_id()`間違っている可能性がある問題を修正[＃12001](https://github.com/pingcap/tidb/pull/12001)
+    -   `LOAD DATA`文の実行時にカウント順序が原因で`last_insert_id()`が間違っている可能性がある問題を修正しました[＃11994](https://github.com/pingcap/tidb/pull/11994)
+    -   ユーザーが自動インクリメント列データを明示的・暗黙的に混合して書き込む場合に`last_insert_id()`が間違っている可能性がある問題を修正[＃12001](https://github.com/pingcap/tidb/pull/12001)
     -   関数`JSON_UNQUOTE`引用符の過剰使用に関するバグを修正しました。二重引用符で囲まれた値 ( `"` ) のみ引用符で囲まないようにします。例えば、「 `SELECT JSON_UNQUOTE("\\\\")` 」の結果は「 `\\` 」（変更なし）になります[＃12096](https://github.com/pingcap/tidb/pull/12096)
 -   サーバ
     -   TiDBトランザクション[＃11878](https://github.com/pingcap/tidb/pull/11878)再試行する際、最後の再試行時刻から最初の実行時刻までの変更`start ts`スロークエリログに記録される
