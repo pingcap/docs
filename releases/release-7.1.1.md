@@ -135,7 +135,7 @@ TiDB バージョン: 7.1.1
 
     -   TiDB データ移行 (DM)
 
-        -   移行対象のテーブル内のユニークインデックスに空の列が含まれている場合にDMマスターが異常終了する問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
+        -   移行対象のテーブル内の一意インデックスに空の列が含まれている場合にDMマスターが異常終了する問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 
