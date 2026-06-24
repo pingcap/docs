@@ -20,7 +20,8 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 - **[Snowflake](https://www.snowflake.com)**: Snowflake is renowned for its advanced features such as separating storage and compute, scalable computing on demand, data sharing, and cloning capabilities.
 
 - **[{{{ .lake }}}](https://www.tidbcloud.com)**: {{{ .lake }}} offers [similar functionalities](https://github.com/databendlabs/databend/issues/13059) to Snowflake, being a cloud-native data warehouse that also separates storage from computing and provides scalable computing as needed.
-  It builds on the open-source [{{{ .lake }}} project](https://github.com/tidbcloud/lakesql) and positions itself as a modern, cost-effective alternative to Snowflake, especially for large-scale analytics.
+
+    It builds on the open-source [{{{ .lake }}} project](https://github.com/tidbcloud/lakesql) and positions itself as a modern, cost-effective alternative to Snowflake, especially for large-scale analytics.
 
 ## Performance and Cost Comparison
 
