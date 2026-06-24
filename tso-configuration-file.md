@@ -44,7 +44,7 @@ The TSO node is used for providing the `tso` microservice for PD. This document 
 
 ### `lease`
 
-- The timeout of the TSO Primary Key lease. After the timeout, the system re-elects a Primary.
+- The timeout of the TSO service's primary lease. After the timeout, the system re-elects a primary.
 - Default value: `3`
 - Unit: seconds
 
