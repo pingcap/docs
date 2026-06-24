@@ -11,7 +11,7 @@ Both {{{ .lake }}} and {{{ .lake }}} can integrate with MindsDB as a data source
 
 ## Tutorial-1: Integrating {{{ .lake }}} with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart-tutorial>.
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://mindsdb.github.io/engine/#quickstart>.
 
 ### Step 1. Load Dataset into {{{ .lake }}}
 
@@ -39,7 +39,7 @@ COPY INTO pollution_measurement FROM 'https://datasets.databend.org/AirPolutionS
 1. Copy and paste the following SQL statements to the MindsDB Cloud Editor, and click **Run**:
 
     ```sql
-    CREATE DATABASE databend_datasource
+    CREATE DATABASE lake_datasource
     WITH engine='databend',
     parameters={
         "protocol": "https",
@@ -53,12 +53,12 @@ COPY INTO pollution_measurement FROM 'https://datasets.databend.org/AirPolutionS
 
     > **Tip:**
     >
-    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. For explanations about the parameters, refer to <https://docs.mindsdb.com/integrations/data-integrations/tidb>.
+    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. For explanations about the parameters, refer to <https://mindsdb.github.io/engine/#db-create>.
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
     ```sql
-    SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
+    SELECT * FROM lake_datasource.pollution_measurement LIMIT 10;
     ```
 
 ### Step 3. Create a Predictor
@@ -67,7 +67,7 @@ In the MindsDB Cloud Editor, run the following SQL statements to create a predic
 
 ```sql
 CREATE PREDICTOR airq_predictor
-FROM databend_datasource (SELECT * FROM pollution_measurement LIMIT 50)
+FROM lake_datasource (SELECT * FROM pollution_measurement LIMIT 50)
 PREDICT so2;
 ```
 
@@ -100,7 +100,7 @@ WHERE (NO2 = 0.005)
 
 ## Tutorial-2: Integrating {{{ .lake }}} with MindsDB
 
-Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://docs.mindsdb.com/quickstart-tutorial>.
+Before you start, install a local MindsDB or sign up an account for MindsDB Cloud. This tutorial uses MindsDB Cloud. For more information about how to install a local MindsDB, refer to <https://mindsdb.github.io/engine/#quickstart>.
 
 ### Step 1. Load Dataset into {{{ .lake }}}
 
@@ -129,8 +129,8 @@ COPY INTO pollution_measurement FROM 'https://repo.tidbcloud.com/AirPolutionSeou
 1. Copy and paste the following SQL statements to the MindsDB Cloud Editor, and click **Run**:
 
     ```sql
-    CREATE DATABASE databend_datasource
-    WITH engine='databend',
+    CREATE DATABASE lake_datasource
+    WITH engine='lake',
     parameters={
         "protocol": "https",
         "user": "cloudapp",
@@ -143,12 +143,12 @@ COPY INTO pollution_measurement FROM 'https://repo.tidbcloud.com/AirPolutionSeou
 
     > **Tip:**
     >
-    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. The parameter values can be obtained from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse). For explanations about the parameters, refer to <https://docs.mindsdb.com/integrations/data-integrations/tidb>.
+    > The SQL statements above connect the database `default` in {{{ .lake }}} to your MindsDB Cloud account. You can obtain the parameter values from the connection information of your warehouse. For more information, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse). For explanations about the parameters, refer to <https://mindsdb.github.io/engine/#db-create>.
 
 2. In the MindsDB Cloud Editor, run the following SQL statements to verify the integration:
 
     ```sql
-    SELECT * FROM databend_datasource.pollution_measurement LIMIT 10;
+    SELECT * FROM lake_datasource.pollution_measurement LIMIT 10;
     ```
 
 ### Step 3. Create a Predictor
@@ -157,7 +157,7 @@ In the MindsDB Cloud Editor, run the following SQL statements to create a predic
 
 ```sql
 CREATE PREDICTOR airq_predictor
-FROM databend_datasource (SELECT * FROM pollution_measurement LIMIT 50)
+FROM lake_datasource (SELECT * FROM pollution_measurement LIMIT 50)
 PREDICT so2;
 ```
 
