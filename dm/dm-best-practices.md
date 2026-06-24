@@ -41,7 +41,7 @@ DM は次のシナリオで使用できます。
 
 TiDBの`AUTO_INCREMENT`はMySQLの`AUTO_INCREMENT`と互換性があります。ただし、分散データベースであるTiDBは、通常複数のコンピューティングノード（クライアント側のエントリ）を備えています。アプリケーションデータの書き込み時には、ワークロードが均等に分散されます。そのため、テーブルに`AUTO_INCREMENT`列がある場合、その列のAUTO_INCREMENT IDが不連続になる可能性があります。詳細については、 [AUTO_INCREMENT](/auto-increment.md#implementation-principles)参照してください。
 
-ビジネスで自動増分 ID に大きく依存している場合は、 [MySQL互換の`AUTO_INCREMENT`モード](/auto-increment.md#mysql-compatibility-mode)または[`SEQUENCE`関数](/sql-statements/sql-statement-create-sequence.md#sequence-function)使用を検討してください。
+ビジネスでAUTO_INCREMENT ID に大きく依存している場合は、 [MySQL互換の`AUTO_INCREMENT`モード](/auto-increment.md#mysql-compatibility-mode)または[`SEQUENCE`関数](/sql-statements/sql-statement-create-sequence.md#sequence-function)使用を検討してください。
 
 #### クラスター化インデックスの使用 {#usage-of-clustered-indexes}
 

@@ -111,7 +111,7 @@ TiDB バージョン: 7.5.2
     -   サブクエリの`HAVING`句に相関列[＃51107](https://github.com/pingcap/tidb/issues/51107) @ [hawkingrei](https://github.com/hawkingrei)が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブル[＃50810](https://github.com/pingcap/tidb/issues/50810) @ [Defined2014](https://github.com/Defined2014)が返される可能性がある問題を修正しました。
     -   統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @ [Rustin170506](https://github.com/Rustin170506)
-    -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)の場合に自動増分列の値が減少する可能性がある問題を修正しました。
+    -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。
     -   共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @ [qw4990](https://github.com/qw4990)
     -   TiDBダッシュボードのモニタリングページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)における接続数（接続数）の計算と表示が誤っていた問題を修正しました。
     -   外部キー[＃51838](https://github.com/pingcap/tidb/issues/51838) @ [YangKeao](https://github.com/YangKeao)を持つテーブルを復元するときに DDL 操作が停止する問題を修正しました

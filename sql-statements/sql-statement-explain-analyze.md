@@ -126,7 +126,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
     prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
 
--   `prepare` : 式、デフォルト値、自動増分値の計算など、書き込みの準備にかかる時間。
+-   `prepare` : 式、デフォルト値、AUTO_INCREMENT値の計算など、書き込みの準備にかかる時間。
 -   `check_insert` ：この情報は通常、 `insert ignore`文目と`insert on duplicate`文目で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
     -   `total_time` : ステップ`check_insert`に費やされた合計時間。
     -   `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。

@@ -190,7 +190,7 @@ TiDB バージョン: 6.5.4
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
         -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
         -   一部のPDノードが[＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)で失敗した場合にデータのインポートが失敗する問題を修正しました
-        -   自動増分列を持つテーブルが`AUTO_ID_CACHE=1`設定すると、ID アロケータのベース値が正しくなくなる[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)という問題を修正しました
+        -   AUTO_INCREMENT列を持つテーブルが`AUTO_ID_CACHE=1`設定すると、ID アロケータのベース値が正しくなくなる[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)という問題を修正しました
 
     -   Dumpling
 

@@ -163,11 +163,11 @@ SHOW WARNINGS;
 
 TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に値を割り当てます。これらの値は、セッションレベルのシステム変数[`auto_increment_increment`](/system-variables.md#auto_increment_increment)と[`auto_increment_offset`](/system-variables.md#auto_increment_offset)によって制御されます。暗黙的に割り当てられた値のAUTO_INCREMENTビット（ID）は、式`(ID - auto_increment_offset) % auto_increment_increment == 0`に従います。
 
-## 自動増分IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
+## AUTO_INCREMENTIDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
 複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列目に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列目と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
-衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットと自動増分部分で構成されています。TiDBはこの自動増分部分に内部カウンタを使用します。自動増分部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)参照してください。
+衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンタを使用します。AUTO_INCREMENT部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)参照してください。
 
 TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理する際に内部カウンターを自動的に調整し、将来の衝突を防ぐため、この問題は発生しません。一方、複数のTiDBノードがある場合、各ノードは独自のIDキャッシュを保持しており、明示的な挿入後に衝突を防ぐには、このキャッシュをクリアする必要があります。これらの未割り当てのキャッシュIDをクリアして衝突の可能性を回避するには、次の2つの方法があります。
 

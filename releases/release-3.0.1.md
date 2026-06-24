@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.1 Release Notes
-summary: "TiDB 3.0.1 リリースノート 2019年7月16日。TiDBバージョン3.0.1。MAX_EXECUTION_TIME機能のサポートを追加。自動増分IDの増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL文を追加。Prepare Plan CacheでWindow Functionsがキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV: BLOBファイルサイズの統計を追加。コアダンプの問題を修正。PD: enable-grpc-gateway構成オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール: TiDB Binlog - Pump GC戦略を最適化。TiDB Lightning - インポートエラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。"
+summary: "TiDB 3.0.1 リリースノート 2019年7月16日。TiDBバージョン3.0.1。MAX_EXECUTION_TIME機能のサポートを追加。AUTO_INCREMENTIDの増分ギャップの自動調整をサポート。ADMIN PLUGINS ENABLE/DISABLE SQL文を追加。Prepare Plan CacheでWindow Functionsがキャッシュされるのを禁止。さまざまなバグと問題を修正。TiKV: BLOBファイルサイズの統計を追加。コアダンプの問題を修正。PD: enable-grpc-gateway構成オプションを追加。ホットリージョンスケジューリング戦略を最適化。ツール: TiDB Binlog - Pump GC戦略を最適化。TiDB Lightning - インポートエラーを修正。TiDB Ansible - 事前チェック機能を追加、監視情報を更新。"
 ---
 
 # TiDB 3.0.1 リリースノート {#tidb-3-0-1-release-notes}
@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 3.0.1
 
 -   `MAX_EXECUTION_TIME`機能[＃11026](https://github.com/pingcap/tidb/pull/11026)のサポートを追加
 -   リージョン[＃11166](https://github.com/pingcap/tidb/pull/11166)を分割する際のバックオフ時間を制御するために、 `tidb_wait_split_region_finish_backoff`セッション変数を追加します。
--   負荷に応じて自動増分IDで割り当てられた増分ギャップを自動的に調整することをサポートし、増分ギャップの自動調整範囲は1000〜2000000です[＃11006](https://github.com/pingcap/tidb/pull/11006)
+-   負荷に応じてAUTO_INCREMENTIDで割り当てられた増分ギャップを自動的に調整することをサポートし、増分ギャップの自動調整範囲は1000〜2000000です[＃11006](https://github.com/pingcap/tidb/pull/11006)
 -   プラグイン`ADMIN PLUGINS DISABLE` `ADMIN PLUGINS ENABLE`ステートメントを追加する[＃11157](https://github.com/pingcap/tidb/pull/11157)
 -   監査プラグイン[＃11013](https://github.com/pingcap/tidb/pull/11013)にセッション接続情報を追加する
 -   リージョン分割期間中のデフォルトの動作を変更し、PD がスケジュール[＃11166](https://github.com/pingcap/tidb/pull/11166)を完了するまで待機します。

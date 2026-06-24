@@ -76,7 +76,7 @@ TiDB バージョン: 5.4.3
 
     -   TiDB Lightning
 
-        -   `BIGINT`型の自動増分列が範囲外になる可能性がある問題を修正[＃27937](https://github.com/pingcap/tidb/issues/27937)
+        -   `BIGINT`型のAUTO_INCREMENT列が範囲外になる可能性がある問題を修正[＃27937](https://github.com/pingcap/tidb/issues/27937)
         -   重複排除により極端な場合にTiDB Lightning がpanicを起こす可能性がある問題を修正[＃34163](https://github.com/pingcap/tidb/issues/34163)
         -   TiDB Lightning がParquet ファイル内のスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしない問題を修正しました[＃36980](https://github.com/pingcap/tidb/issues/36980)
         -   TiDBがIPv6ホスト[＃35880](https://github.com/pingcap/tidb/issues/35880)を使用しているときにTiDB LightningがTiDBに接続できない問題を修正しました

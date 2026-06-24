@@ -317,7 +317,7 @@ SHOW CREATE TABLE t;
 1 row in set (0.00 sec)
 ```
 
-この時点で TiDB を再起動すると、自動増分 ID キャッシュは失われ、新しい挿入操作では、以前にキャッシュされた範囲を超えた高い値から始まる ID が割り当てられます。
+この時点で TiDB を再起動すると、AUTO_INCREMENT ID キャッシュは失われ、新しい挿入操作では、以前にキャッシュされた範囲を超えた高い値から始まる ID が割り当てられます。
 
 ```sql
 INSERT INTO t VALUES();
@@ -337,20 +337,20 @@ SELECT * FROM t;
 
 さらに、バッチ`INSERT`ステートメント内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュ サイズを増やし、ステートメントがデータを適切に挿入できるようにします。
 
-### 自動増分IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
+### AUTO_INCREMENTIDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
-場合によっては、データの一貫性を確保するために、自動増分IDキャッシュをクリアする必要がある場合があります。例：
+場合によっては、データの一貫性を確保するために、AUTO_INCREMENTIDキャッシュをクリアする必要がある場合があります。例：
 
 <CustomContent platform="tidb">
 
 -   [データ移行（DM）](/dm/dm-overview.md)使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流の TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
--   TiDB Lightningはデータのインポートを完了すると、自動増分IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタの自動増分IDキャッシュを手動でクリアする必要があります。
+-   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENTIDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENTIDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 -   [データ移行](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)機能を使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流 TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
--   TiDB Lightningはデータのインポートを完了すると、自動増分IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタの自動増分IDキャッシュを手動でクリアする必要があります。
+-   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENTIDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENTIDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 
@@ -404,7 +404,7 @@ SELECT * FROM t;
 3 rows in set (0.01 sec)
 ```
 
-### 自動増分ステップサイズとオフセット {#auto-increment-step-size-and-offset}
+### AUTO_INCREMENTステップサイズとオフセット {#auto-increment-step-size-and-offset}
 
 v3.0.9 および v4.0.0-rc.1 以降では、MySQL の動作と同様に、AUTO_INCREMENT列に暗黙的に割り当てられる値は、 `@@auto_increment_increment`および`@@auto_increment_offset`セッション変数によって制御されます。
 

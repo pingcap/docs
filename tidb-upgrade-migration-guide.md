@@ -241,7 +241,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     tiup ctl:${cluster_version} cdc changefeed pause --server http://${cdc_host}:${cdc_port} -c <changefeedid>
     ```
 
-5.  新しいクラスター内の TiDB ノードを再起動して、自動増分 ID キャッシュをクリアします。
+5.  新しいクラスター内の TiDB ノードを再起動して、AUTO_INCREMENT ID キャッシュをクリアします。
 
 6.  次の方法を使用して、新しいクラスターの動作ステータスを確認します。
 
