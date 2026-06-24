@@ -111,14 +111,14 @@ The data ingestion benchmark can be reproduced using the following steps:
 1. **Snowflake Data Load**:
 
     - Log into your [Snowflake account](https://app.snowflake.com/).
-    - Create tables corresponding to the TPC-H schema. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/snowflake/setup.sql).
-    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/snowflake/setup.sql).
+    - Create tables corresponding to the TPC-H schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql).
+    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql).
 
 2. **{{{ .lake }}} Data Load**:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
-    - Create the necessary tables as per the TPC-H schema. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
-    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
+    - Create the necessary tables as per the TPC-H schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql).
+    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql).
 
 </details>
 
@@ -128,14 +128,14 @@ The data ingestion benchmark can be reproduced using the following steps:
 1. **Snowflake Data Load**:
 
     - Log into your [Snowflake account](https://app.snowflake.com/).
-    - Create tables corresponding to the `hits` schema. [SQL Script](https://gist.github.com/BohuTANG/2a23e5f829a8d180f7388c530526ab21?permalink_comment_id=4991762#file-hits-snowflake-schema).
-    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://gist.github.com/BohuTANG/2a23e5f829a8d180f7388c530526ab21?permalink_comment_id=4991762#gistcomment-4991762).
+    - Create tables corresponding to the `hits` schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/schema.sql).
+    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/copy.sql).
 
 2. **{{{ .lake }}} Data Load**:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
-    - Create the necessary tables as per the `hits` schema. [SQL Script](https://gist.github.com/BohuTANG/ab45d251c533dcf0b1ccd3ea1263b8a0#file-hits-databend-schema).
-    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://gist.github.com/BohuTANG/ab45d251c533dcf0b1ccd3ea1263b8a0?permalink_comment_id=4991767#gistcomment-4991767).
+    - Create the necessary tables as per the `hits` schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/schema.sql).
+    - Use a method similar to Snowflake for loading data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/copy.sql).
 
 </details>
 

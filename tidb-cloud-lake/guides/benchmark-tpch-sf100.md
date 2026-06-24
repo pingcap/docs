@@ -145,23 +145,23 @@ The benchmark includes both Cold and Hot runs for query execution:
 1. **Snowflake Data Load**:
 
     - Log into your [Snowflake account](https://app.snowflake.com/).
-    - Create tables corresponding to the TPC-H schema. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/snowflake/setup.sql).
-    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/snowflake/setup.sql).
+    - Create tables corresponding to the TPC-H schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql).
+    - Use the `COPY INTO` command to load the data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql).
 
 2. **{{{ .lake }}} Data Load**:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
-    - Create the necessary tables as per the TPC-H schema. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
-    - Utilize a similar method to Snowflake for loading data from AWS S3. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/setup.sql).
+    - Create the necessary tables as per the TPC-H schema. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql).
+    - Utilize a similar method to Snowflake for loading data from AWS S3. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql).
 
 ### TPC-H Queries
 
 1. **Snowflake Queries**:
 
     - Log into your [Snowflake account](https://app.snowflake.com/).
-    - Run the TPC-H queries. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/snowflake/queries.sql).
+    - Run the TPC-H queries. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/queries.sql).
 
 2. **{{{ .lake }}} Queries**:
 
     - Sign in to your [{{{ .lake }}} account](https://tidbcloud.com).
-    - Run the TPC-H queries. [SQL Script](https://github.com/databendlabs/benchmarks/blob/main/tpch-100/databend/queries.sql).
+    - Run the TPC-H queries. [SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/queries.sql).
