@@ -8,7 +8,7 @@ aliases: ['/ja/docs/dev/best-practices/pd-scheduling-best-practices/','/ja/docs/
 
 このドキュメントでは、PDスケジューリングの原則と戦略を、一般的なシナリオを通して詳細に解説し、アプリケーション開発の効率化を図ります。このドキュメントは、TiDB、TiKV、PDの基本的な知識と、以下のコアコンセプトを理解していることを前提としています。
 
--   [リーダー/フォロワー/学習者](/glossary.md#leaderfollowerlearner)
+-   [リーダー/フォロワー/ラーナー](/glossary.md#leaderfollowerlearner)
 -   [オペレーター](/glossary.md#operator)
 -   [演算子ステップ](/glossary.md#operator-step)
 -   [保留中/ダウン](/glossary.md#pendingdown)
