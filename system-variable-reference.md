@@ -552,7 +552,7 @@ Referenced in:
 
 - [ALTER USER](/sql-statements/sql-statement-alter-user.md)
 - [CREATE USER](/sql-statements/sql-statement-create-user.md)
-- [System Variables](/system-variables.md#max_user_connections-new-in-v900)
+- [System Variables](/system-variables.md#max_user_connections-new-in-v857-and-v900)
 - [`mysql.user`](/mysql-schema/mysql-schema-user.md)
 
 ### mpp_exchange_compression_mode
