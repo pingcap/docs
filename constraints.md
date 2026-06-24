@@ -131,7 +131,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 -   列（例： `ALTER TABLE t ADD COLUMN a CHECK(a > 0)` ）の追加時に`CHECK`制約を追加することはサポートされていません。この場合、列のみが正常に追加され、TiDBは`CHECK`制約を無視し、エラーを報告しません。
 -   `ALTER TABLE t CHANGE a b int CHECK(b > 0)`使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
 
-## ユニークキー {#unique-key}
+## 一意キー {#unique-key}
 
 一意制約とは、一意のインデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
 

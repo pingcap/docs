@@ -153,7 +153,7 @@ TiDB バージョン: 4.0.9
     -   `varchar`または`char`の長さ制約を超える末尾のスペースを含む文字列を挿入できないバグを修正しました[＃21282](https://github.com/pingcap/tidb/pull/21282)
     -   `int`と`year`と[＃21283](https://github.com/pingcap/tidb/pull/21283)比較するときに、整数が`[1, 69]`から`[2001, 2069]`または`[70, 99]`から`[1970, 1999]`に変換されないバグを修正しました。
     -   `Double`型フィールド[＃21272](https://github.com/pingcap/tidb/pull/21272)を計算するときに`sum()`関数の結果がオーバーフローすることによって引き起こされるpanicを修正しました
-    -   `DELETE`ユニークキー[＃20705](https://github.com/pingcap/tidb/pull/20705)にロックを追加できないバグを修正
+    -   `DELETE`一意キー[＃20705](https://github.com/pingcap/tidb/pull/20705)にロックを追加できないバグを修正
     -   スナップショットの読み取りがロックキャッシュ[＃21539](https://github.com/pingcap/tidb/pull/21539)にヒットするバグを修正
     -   長時間トランザクションで大量のデータを読み込んだ後に発生する可能性のあるメモリリークの問題を修正[＃21129](https://github.com/pingcap/tidb/pull/21129)
     -   サブクエリでテーブルエイリアスを省略すると構文エラーが返される問題を修正しました[＃20367](https://github.com/pingcap/tidb/pull/20367)

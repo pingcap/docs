@@ -160,7 +160,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ## 列制約を追加する {#add-column-constraints}
 
-[主キー制約](#select-primary-key)に加えて、TiDB は[NULL不可](/constraints.md#not-null)制約、[ユニークキー](/constraints.md#unique-key)制約、および`DEFAULT`などの他の**列制約**もサポートします。完全な制約については、 [TiDBの制約](/constraints.md)ドキュメントを参照してください。
+[主キー制約](#select-primary-key)に加えて、TiDB は[NULL不可](/constraints.md#not-null)制約、[一意キー](/constraints.md#unique-key)制約、および`DEFAULT`などの他の**列制約**もサポートします。完全な制約については、 [TiDBの制約](/constraints.md)ドキュメントを参照してください。
 
 ### デフォルト値を設定する {#set-default-value}
 
