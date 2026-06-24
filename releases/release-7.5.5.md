@@ -91,7 +91,7 @@ TiDB バージョン: 7.5.5
     -   `tidb_gogc_tuner_max_value`と`tidb_gogc_tuner_min_value`を設定するときに最大値がnullの場合、誤った警告メッセージが表示される問題を修正しました[＃57889](https://github.com/pingcap/tidb/issues/57889) @ [hawkingrei](https://github.com/hawkingrei)
     -   TiDBの内部コルーチン[＃57798](https://github.com/pingcap/tidb/issues/57798) [＃56053](https://github.com/pingcap/tidb/issues/56053) @ [fishiu](https://github.com/fishiu) @ [tiancaiamao](https://github.com/tiancaiamao)で発生する可能性のあるデータ競合問題を修正しました
     -   潜在的なセキュリティリスクを防ぐためのアップデート`golang-jwt`と`jwt` [＃57135](https://github.com/pingcap/tidb/issues/57135) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `ALTER TABLE`文[＃57510](https://github.com/pingcap/tidb/issues/57510) @ [mjonss](https://github.com/mjonss)を使用して、クラスタ化インデックスを持つテーブルをパーティションテーブルに変換するときに、同時書き込みによってデータが重複する可能性がある問題を修正しました。
+    -   `ALTER TABLE`文[＃57510](https://github.com/pingcap/tidb/issues/57510) @ [mjonss](https://github.com/mjonss)を使用して、クラスター化インデックスを持つテーブルをパーティションテーブルに変換するときに、同時書き込みによってデータが重複する可能性がある問題を修正しました。
 
 -   TiKV
 
