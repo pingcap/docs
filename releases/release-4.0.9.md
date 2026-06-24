@@ -111,7 +111,7 @@ TiDB バージョン: 4.0.9
     -   TiDB Lightning
 
         -   デフォルトですべてのシステムスキーマを除外する[＃459](https://github.com/pingcap/tidb-lightning/pull/459)
-        -   ローカルバックエンドまたはインポーターバックエンド[＃457](https://github.com/pingcap/tidb-lightning/pull/457)の自動ランダム主キーのデフォルト値の設定をサポート
+        -   ローカルバックエンドまたはインポーターバックエンド[＃457](https://github.com/pingcap/tidb-lightning/pull/457)のAUTO_RANDOM主キーのデフォルト値の設定をサポート
         -   範囲プロパティを使用して、Local-backend [＃422](https://github.com/pingcap/tidb-lightning/pull/422)で範囲分割をより正確にします。
         -   `tikv-importer.region-split-size` `mydumper.batch-size`人間が[＃471](https://github.com/pingcap/tidb-lightning/pull/471)形式（「2.5 GiB」など） `mydumper.read-block-size`サポートする`mydumper.max-region-size`
 
