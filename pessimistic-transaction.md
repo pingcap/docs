@@ -81,7 +81,7 @@ Pessimistic transactions in TiDB behave similarly to those in MySQL. See the min
 
     > **Note:**
     >
-    > This behavior applies only to the `REPEATABLE READ` isolation level. Under the `READ COMMITTED` isolation level, `Point Get` and `Batch Point Get` operators do not lock non-existent keys.
+    > This behavior applies only to the [Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) isolation level. Under the `READ COMMITTED` isolation level, `Point Get` and `Batch Point Get` operators do not lock non-existent keys.
 
 - TiDB supports the `FOR UPDATE OF TABLES` syntax. For a statement that joins multiple tables, TiDB only applies pessimistic locks on the rows that are associated with the tables in `OF TABLES`.
 
