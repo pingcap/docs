@@ -547,7 +547,7 @@ Usage:
 }
 ```
 
-Starting from v8.5.7, `hot read` and `hot history` include `flow_cpu`, and `hot store` includes `cpu-read-rate`. These fields show read CPU usage for CPU-aware read hotspot scheduling.
+Starting from v8.5.7, the `hot read` and `hot history` commands include `flow_cpu`, and the `hot store` command includes `cpu-read-rate`. These fields show the read CPU usage for CPU-aware read hotspot scheduling.
 
 ### `label [store <name> <value>]`
 
@@ -1076,7 +1076,7 @@ Usage:
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
-- `min-hot-cpu-rate` means the smallest CPU usage of read requests to be counted, which is usually 10.
+- `min-hot-cpu-rate` specifies the minimum CPU usage of read requests to count, which is usually 10.
 
     ```bash
     scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
@@ -1094,7 +1094,7 @@ Usage:
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
-- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, `cpu-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, query, CPU, and count. The rank-step-ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, `cpu-rate-rank-step-ratio`, and `count-rank-step-ratio` represent the step ranks of byte, key, query, CPU, and count, respectively. The rank-step-ratio decides the step when calculating the rank. PD uses `great-dec-ratio` and `minor-dec-ratio` to determine the `dec` rank. Usually, you do not need to modify these items.
 
     ```bash
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -1116,7 +1116,7 @@ Usage:
     >
     > If a cluster component is earlier than v5.2, the configuration of the `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility.
     >
-    > Starting from v8.5.7, TiKV reports read CPU usage for hot Region scheduling. For clusters that support read CPU reporting, the default `read-priorities` value is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the `query` dimension is also unsupported. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
+    > Starting from v8.5.7, TiKV reports read CPU usage for hot Region scheduling. For clusters that support read CPU reporting, the default `read-priorities` value is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
     scheduler config balance-hot-region-scheduler set read-priorities cpu,byte
