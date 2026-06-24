@@ -15,7 +15,7 @@ You can also load local files into tables programmatically using JDBC or Python 
 
 There are two methods to load data from local files:
 
-1. **Stage**: Upload the local file to an internal stage, then copy data from the staged file into the table. File upload occurs either through databend-query or using a presigned URL, depending on the `presigned_url_disabled` connection option (default: `false`).
+1. **Stage**: Upload the local file to an internal stage, then copy data from the staged file into the table. File upload occurs either through lake-query or using a presigned URL, depending on the `presigned_url_disabled` connection option (default: `false`).
 2. **Streaming**: Load the file directly into the table during upload. Use this method when the file is too large to store as a single object in your object storage.
 
 ## Tutorial 1 - Load from a Local File
@@ -24,7 +24,7 @@ This tutorial uses a CSV file as an example to demonstrate how to import data in
 
 ### Before You Begin
 
-Download and save the sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv) to a local folder. The file contains two records:
+Download and save the sample file [books.csv](https://lakesql-bin.tidbcloud.com/datasets/books.csv) to a local folder. The file contains two records:
 
 ```text title='books.csv'
 Transaction Processing,Jim Gray,1992

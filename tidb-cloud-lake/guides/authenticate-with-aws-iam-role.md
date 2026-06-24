@@ -48,7 +48,7 @@ After {{{ .lake }}} support shares the trusted principal information for your or
    }
    ```
 
-   Click `Next`, and input the policy name: `databend-test`, and click `Create policy`
+   Click `Next`, and input the policy name: `lake-test`, and click `Create policy`
 
 3. Goto AWS Console:
 
@@ -80,20 +80,20 @@ After {{{ .lake }}} support shares the trusted principal information for your or
    }
    ```
 
-   Click `Next`, and select the previously created policy: `databend-test`
+   Click `Next`, and select the previously created policy: `lake-test`
 
-   Click `Next`, and input the role name: `databend-test`
+   Click `Next`, and input the role name: `lake-test`
 
-   Click `View Role`, and record the role ARN: `arn:aws:iam::987654321987:role/databend-test`
+   Click `View Role`, and record the role ARN: `arn:aws:iam::987654321987:role/lake-test`
 
 4. Run the following SQL statement in {{{ .lake }}} cloud worksheet or `LakeSQL`:
 
    ```sql
-   CREATE CONNECTION databend_test STORAGE_TYPE = 's3' ROLE_ARN = 'arn:aws:iam::987654321987:role/databend-test' EXTERNAL_ID = 'my-external-id-123';
+   CREATE CONNECTION lake_test STORAGE_TYPE = 's3' ROLE_ARN = 'arn:aws:iam::987654321987:role/lake-test' EXTERNAL_ID = 'my-external-id-123';
 
-   CREATE STAGE databend_test URL = 's3://test-bucket-123' CONNECTION = (CONNECTION_NAME = 'databend_test');
+   CREATE STAGE lake_test URL = 's3://test-bucket-123' CONNECTION = (CONNECTION_NAME = 'lake_test');
 
-   SELECT * FROM @databend_test/test.parquet LIMIT 1;
+   SELECT * FROM @lake_test/test.parquet LIMIT 1;
    ```
 
 > **Note:**

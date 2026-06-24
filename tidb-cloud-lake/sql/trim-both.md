@@ -18,11 +18,11 @@ TRIM_BOTH(<string>, <trim_string>)
 ## Examples
 
 ```sql
-SELECT TRIM_BOTH('xxdatabendxx', 'xxx'), TRIM_BOTH('xxdatabendxx', 'xx'), TRIM_BOTH('xxdatabendxx', 'x');
+SELECT TRIM_BOTH('xxdatalakexx', 'xxx'), TRIM_BOTH('xxdatalakexx', 'xx'), TRIM_BOTH('xxdatalakexx', 'x');
 
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ trim_both('xxdatabendxx', 'xxx') │ trim_both('xxdatabendxx', 'xx') │ trim_both('xxdatabendxx', 'x') │
+│ trim_both('xxdatalakexx', 'xxx') │ trim_both('xxdatalakexx', 'xx') │ trim_both('xxdatalakexx', 'x') │
 ├──────────────────────────────────┼─────────────────────────────────┼────────────────────────────────┤
-│ xxdatabendxx                     │ databend                        │ databend                       │
+│ xxdatalakexx                     │ datalake                        │ datalake                       │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```

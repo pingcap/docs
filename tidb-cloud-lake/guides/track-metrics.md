@@ -35,7 +35,7 @@ CREATE USER metrics IDENTIFIED BY 'metrics_password';
 
     ```yaml title='prometheus.yml'
     scrape_configs:
-      - job_name: databend-cloud
+      - job_name: tidbcloud-lake
         scheme: https
         metrics_path: /metrics
         basic_auth:
@@ -71,7 +71,7 @@ CREATE USER metrics IDENTIFIED BY 'metrics_password';
       prom/prometheus
     ```
 
-3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `databend-cloud` target is listed with a status of `UP`.
+3. Open Prometheus in your browser at `http://localhost:9090`, navigate to **Status** > **Target health**, and confirm that the `tidbcloud-lake` target is listed with a status of `UP`.
 
     You're all set! You can now query your tenant metrics directly from Prometheus. For example, try querying `databend_cloud_warehouse_status`.
 

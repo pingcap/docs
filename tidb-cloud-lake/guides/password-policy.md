@@ -9,7 +9,7 @@ Password policies define how strong a {{{ .lake }}} password must be (length, ch
 
 ## How It Works
 
-- SQL users start with no password policy. Assign one either when creating the user (`CREATE USER ... WITH SET PASSWORD POLICY`) or later via [ALTER USER](/tidb-cloud-lake/sql/alter-user.md). Policies do **not** apply to admin accounts declared in [`databend-query.toml`](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml).
+- SQL users start with no password policy. Assign one either when creating the user (`CREATE USER ... WITH SET PASSWORD POLICY`) or later via [ALTER USER](/tidb-cloud-lake/sql/alter-user.md).
 - Whenever a managed user sets or changes a password, {{{ .lake }}} validates the complexity rules (length and character mix) and, for password changes, enforces minimum age and password history.
 - On login, {{{ .lake }}} also tracks failed attempts and lockouts based on `PASSWORD_MAX_RETRIES`/`PASSWORD_LOCKOUT_TIME_MINS`, and it flags expired passwords after `PASSWORD_MAX_AGE_DAYS`. Expired users can log in only to change their password.
 

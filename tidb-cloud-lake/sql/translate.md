@@ -22,27 +22,27 @@ TRANSLATE('<inputString>', '<charactersToReplace>', '<replacementCharacters>')
 ## Examples
 
 ```sql
--- Replace 'd' with '$' in 'databend'
-SELECT TRANSLATE('databend', 'd', '$');
+-- Replace 'd' with '$' in 'datalake'
+SELECT TRANSLATE('datalake', 'd', '$');
 
 ---
-$ataben$
+$atalake
 
--- Replace 'd' with 'D' in 'databend'
-SELECT TRANSLATE('databend', 'd', 'D');
-
----
-DatabenD
-
--- Replace 'd' with 'D' and 'e' with 'E' in 'databend'
-SELECT TRANSLATE('databend', 'de', 'DE');
+-- Replace 'd' with 'D' in 'datalake'
+SELECT TRANSLATE('datalake', 'd', 'D');
 
 ---
-DatabEnD
+Datalake
 
--- Remove 'd' from 'databend'
-SELECT TRANSLATE('databend', 'd', '');
+-- Replace 'd' with 'D' and 'e' with 'E' in 'datalake'
+SELECT TRANSLATE('datalake', 'de', 'DE');
 
 ---
-ataben
+DatalakE
+
+-- Remove 'd' from 'datalake'
+SELECT TRANSLATE('datalake', 'd', '');
+
+---
+atalake
 ```

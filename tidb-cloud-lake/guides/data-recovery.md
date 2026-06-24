@@ -75,7 +75,7 @@ To download:
 
 1. Go to the latest [{{{ .lake }}} Releases](https://github.com/databendlabs/databend/releases).
 
-2. Select the release that matches your currently running `databend-query` version.
+2. Select the release that matches your currently running `lake-query` version.
 
 3. Download and extract the release package.
 
@@ -131,7 +131,3 @@ export AWS_SECRET_ACCESS_KEY=minioadmin
   --to-meta ../configs/databend-meta.toml \
   --confirm
 ```
-
-### Tutorials
-
-- [Backing Up and Restoring Data with BendSave](/tidb-cloud-lake/tutorials/backup-restore-with-bendsave.md)

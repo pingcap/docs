@@ -24,7 +24,7 @@ SELECT 'true' WHERE 5 BETWEEN 0 AND 5;
 │ true   │
 └────────┘
 
-SELECT 'true' WHERE 'data' BETWEEN 'data' AND 'databendcloud';
+SELECT 'true' WHERE 'data' BETWEEN 'data' AND 'datalakecloud';
 
 ┌────────┐
 │ 'true' │

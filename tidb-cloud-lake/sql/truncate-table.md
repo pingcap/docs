@@ -21,7 +21,7 @@ TRUNCATE TABLE [ <database_name>. ]table_name
 root@localhost> CREATE TABLE test_truncate(a BIGINT UNSIGNED, b VARCHAR);
 Processed in (0.027 sec)
 
-root@localhost> INSERT INTO test_truncate(a,b) VALUES(1234, 'databend');
+root@localhost> INSERT INTO test_truncate(a,b) VALUES(1234, 'datalake');
 1 rows affected in (0.060 sec)
 
 root@localhost> SELECT * FROM test_truncate;
@@ -35,7 +35,7 @@ FROM
 │    a   │     b    │
 │ UInt64 │  String  │
 ├────────┼──────────┤
-│   1234 │ databend │
+│   1234 │ datalake │
 └───────────────────┘
 1 row in 0.019 sec. Processed 1 rows, 1B (53.26 rows/s, 17.06 KiB/s)
 

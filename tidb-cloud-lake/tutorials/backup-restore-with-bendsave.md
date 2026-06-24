@@ -27,7 +27,7 @@ databend-v1.2.725-nightly-x86_64-unknown-linux-gnu/
 │   ├── databend-bendsave  # The BendSave binary used in this tutorial
 │   ├── databend-meta
 │   ├── databend-metactl
-│   └── databend-query
+│   └── lake-query
 ├── configs
 │   ├── databend-meta.toml
 │   └── databend-query.toml
@@ -49,14 +49,14 @@ databend-v1.2.725-nightly-x86_64-unknown-linux-gnu/
         --console-address :9001
     ```
 
-2. Set your MinIO credentials as environment variables, then use the AWS CLI to create two buckets: one for storing backups (**backupbucket**) and another for {{{ .lake }}} data (**databend**):
+2. Set your MinIO credentials as environment variables, then use the AWS CLI to create two buckets: one for storing backups (**backupbucket**) and another for {{{ .lake }}} data (**lake**):
 
 ```bash
 export AWS_ACCESS_KEY_ID=minioadmin
 export AWS_SECRET_ACCESS_KEY=minioadmin
 
 aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://backupbucket
-aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
+aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://lake
 ```
 
 ## Step 2: Set up {{{ .lake }}}
@@ -90,7 +90,7 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
     ...
     # To use an Amazon S3-like storage service, uncomment this block and set your values.
     [storage.s3]
-    bucket = "databend"
+    bucket = "lake"
     endpoint_url = "http://127.0.0.1:9000"
     access_key_id = "minioadmin"
     secret_access_key = "minioadmin"
@@ -104,7 +104,7 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
     ```
 
     ```bash
-    ./databend-query -c ../configs/databend-query.toml > query.log 2>&1 &
+    ./lake-query -c ../configs/databend-query.toml > query.log 2>&1 &
     ```
 
     After launching the services, verify they are running by checking their health endpoints. A successful response should return HTTP status 200 OK.
@@ -138,7 +138,7 @@ aws --endpoint-url http://127.0.0.1:9000/ s3 mb s3://databend
 5. Back on your Linux machine, verify that the table data has been stored in your {{{ .lake }}} bucket:
 
 ```bash
-aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://databend/ --recursive
+aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://lake/ --recursive
 ```
 
 ```bash
@@ -179,10 +179,10 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
 
 ## Step 4: Restore with BendSave
 
-1. Remove all the file in the **databend** bucket:
+1. Remove all the file in the **lake** bucket:
 
     ```bash
-    aws --endpoint-url http://127.0.0.1:9000 s3 rm s3://databend/ --recursive
+    aws --endpoint-url http://127.0.0.1:9000 s3 rm s3://lake/ --recursive
     ```
 
 2. After the removal, you can verify using LakeSQL that querying the table in {{{ .lake }}} fails:
@@ -192,10 +192,10 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
     ```
 
     ```bash
-    error: APIError: QueryFailed: [3001]NotFound (persistent) at read, context: { uri: http://127.0.0.1:9000/databend/1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk, response: Parts { status: 404, version: HTTP/1.1, headers: {"accept-ranges": "bytes", "content-length": "423", "content-type": "application/xml", "server": "MinIO", "strict-transport-security": "max-age=31536000; includeSubDomains", "vary": "Origin", "vary": "Accept-Encoding", "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8", "x-amz-request-id": "18342C51C209C7E9", "x-content-type-options": "nosniff", "x-ratelimit-limit": "144", "x-ratelimit-remaining": "144", "x-xss-protection": "1; mode=block", "date": "Mon, 07 Apr 2025 23:14:45 GMT"} }, service: s3, path: 1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk, range: 0- } => S3Error { code: "NoSuchKey", message: "The specified key does not exist.", resource: "/databend/1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk", request_id: "18342C51C209C7E9" }
+    error: APIError: QueryFailed: [3001]NotFound (persistent) at read, context: { uri: http://127.0.0.1:9000/lake/1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk, response: Parts { status: 404, version: HTTP/1.1, headers: {"accept-ranges": "bytes", "content-length": "423", "content-type": "application/xml", "server": "MinIO", "strict-transport-security": "max-age=31536000; includeSubDomains", "vary": "Origin", "vary": "Accept-Encoding", "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8", "x-amz-request-id": "18342C51C209C7E9", "x-content-type-options": "nosniff", "x-ratelimit-limit": "144", "x-ratelimit-remaining": "144", "x-xss-protection": "1; mode=block", "date": "Mon, 07 Apr 2025 23:14:45 GMT"} }, service: s3, path: 1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk, range: 0- } => S3Error { code: "NoSuchKey", message: "The specified key does not exist.", resource: "/lake/1/169/_ss/h019610dcc72474adb32ef43698db2a09_v4.mpk", request_id: "18342C51C209C7E9" }
     ```
 
-3. Run the following command to restore your {{{ .lake }}} data to the **databend** bucket in MinIO:
+3. Run the following command to restore your {{{ .lake }}} data to the **lake** bucket in MinIO:
 
     ```bash
     ./databend-bendsave restore \
@@ -207,10 +207,10 @@ aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://backupbucket/ --recursive
     Restoring from s3://backupbucket?endpoint=http://127.0.0.1:9000/&region=us-east-1 to query ../configs/databend-query.toml and meta ../configs/databend-meta.toml with confirmation
     ```
 
-4. After the restore completes, you can verify that the files were written back to the **databend** bucket by listing its contents:
+4. After the restore completes, you can verify that the files were written back to the **lake** bucket by listing its contents:
 
     ```bash
-    aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://databend/ --recursive
+    aws --endpoint-url http://127.0.0.1:9000 s3 ls s3://lake/ --recursive
     ```
 
     ```bash

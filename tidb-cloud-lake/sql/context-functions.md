@@ -26,4 +26,4 @@ This page provides reference information for the context-related functions in {{
 
 | Function | Description | Example |
 |----------|-------------|--------|
-| [VERSION](/tidb-cloud-lake/sql/version.md) | Returns the current version of {{{ .lake }}} | `VERSION()` → `'DatabendQuery v1.2.252-nightly-193ed56304'` |
+| [VERSION](/tidb-cloud-lake/sql/version.md) | Returns the current version of {{{ .lake }}} | `VERSION()` → `'LakeQuery v1.2.252-nightly-193ed56304'` |

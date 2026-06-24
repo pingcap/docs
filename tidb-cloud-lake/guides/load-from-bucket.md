@@ -17,7 +17,7 @@ This tutorial uses Amazon S3 bucket as an example and offers a detailed, step-by
 
 Before you start, make sure you have completed the following tasks:
 
-1. Download and save the sample file [books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet) to a local folder. The file contains two records:
+1. Download and save the sample file [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) to a local folder. The file contains two records:
 
     ```text title='books.parquet'
     Transaction Processing,Jim Gray,1992
@@ -29,7 +29,7 @@ Before you start, make sure you have completed the following tasks:
 - Creating a bucket: <https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html>
 - Uploading objects: <https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html>
 
-For this tutorial, a bucket named **databend-toronto** was created in the region **US East (Ohio)** (ID: us-east-2).
+For this tutorial, a bucket named **lake-toronto** was created in the region **US East (Ohio)** (ID: us-east-2).
 
 ### Step 1. Create Target Table
 
@@ -51,7 +51,7 @@ CREATE TABLE books
 
     ```sql
     COPY INTO books
-    FROM 's3://databend-toronto/'
+    FROM 's3://lake-toronto/'
     CONNECTION = (
         ACCESS_KEY_ID = '<your-access-key-id>',
         SECRET_ACCESS_KEY = '<your-secret-access-key>'

@@ -48,7 +48,7 @@ INSERT INTO
 VALUES
   (
     1,
-    '{"id":1,"name":"databend","tags":["powerful","fast"],"pricings":[{"type":"Standard","price":"Pay as you go"},{"type":"Enterprise","price":"Custom"}]}'
+    '{"id":1,"name":"datalake","tags":["powerful","fast"],"pricings":[{"type":"Standard","price":"Pay as you go"},{"type":"Enterprise","price":"Custom"}]}'
   ),
   (
     2,

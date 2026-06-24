@@ -30,7 +30,6 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 | Tool | Type | Best For |
 |------|------|----------|
 | [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) | CLI | Developers, Scripting, Automation |
-| [DBeaver](/tidb-cloud-lake/guides/connect-using-dbeaver.md) | GUI | Data Analysis, Visual Query Building |
 
 ## Drivers
 
@@ -46,11 +45,5 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 | Tool | Type |
 |------|------|
-| [Grafana](/tidb-cloud-lake/guides/grafana.md) | Monitoring & Dashboards |
 | [Tableau](/tidb-cloud-lake/guides/tableau.md) | Business Intelligence |
-| [Superset](/tidb-cloud-lake/guides/superset.md) | Data Exploration |
-| [Metabase](/tidb-cloud-lake/guides/metabase.md) | Self-Service BI |
-| [Jupyter](/tidb-cloud-lake/guides/jupyter-notebook.md) | Data Science Notebooks |
 | [Deepnote](/tidb-cloud-lake/guides/deepnote.md) | Collaborative Notebooks |
-| [MindsDB](/tidb-cloud-lake/guides/mindsdb.md) | ML Platform |
-| [Redash](/tidb-cloud-lake/guides/redash.md) | SQL-Based Dashboards |

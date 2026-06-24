@@ -31,7 +31,7 @@ INSERT INTO
 VALUES
   (
     1,
-    '{"id":1,"name":"databend"}'
+    '{"id":1,"name":"datalake"}'
   ),
   (
     2,

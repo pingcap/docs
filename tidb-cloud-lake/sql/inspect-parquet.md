@@ -25,7 +25,7 @@ INSPECT_PARQUET('@<path-to-file>')
 
 ## Examples
 
-This example retrieves the metadata from a staged sample Parquet file named [books.parquet](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.parquet). The file contains two records:
+This example retrieves the metadata from a staged sample Parquet file named [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet). The file contains two records:
 
 ```text title='books.parquet'
 Transaction Processing,Jim Gray,1992

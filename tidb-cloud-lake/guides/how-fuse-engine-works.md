@@ -61,7 +61,7 @@ At this point, the table exists but contains no data:
 ### Step 2: Insert first data
 
 ```sql
-INSERT INTO git VALUES('cloud.txt', '2022/05/06, Databend, Cloud');
+INSERT INTO git VALUES('cloud.txt', '2022/05/06, Datalake, Cloud');
 ```
 
 After the first insert, Fuse Engine creates the initial snapshot, segment, and block:
@@ -91,7 +91,7 @@ After the first insert, Fuse Engine creates the initial snapshot, segment, and b
 ### Step 3: Insert more data
 
 ```sql
-INSERT INTO git VALUES('warehouse.txt', '2022/05/07, Databend, Warehouse');
+INSERT INTO git VALUES('warehouse.txt', '2022/05/07, Datalake, Warehouse');
 ```
 
 When we insert more data, Fuse Engine creates a new snapshot that references both the original segment and a new segment:

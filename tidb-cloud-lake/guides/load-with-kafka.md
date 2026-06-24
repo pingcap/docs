@@ -30,8 +30,3 @@ To download databend-kafka-connect and learn more about the plugin, visit the [G
 - Provides configurable batch processing settings for size and interval, ensuring efficient and scalable data ingestion.
 
 To download bend-ingest-kafka and learn more about the tool, visit the [GitHub repository](https://github.com/databendcloud/bend-ingest-kafka) and refer to the README for detailed instructions.
-
-## Tutorials
-
-- [Loading from Kafka with bend-ingest-kafka](/tidb-cloud-lake/tutorials/ingest-kafka-with-bend-ingest.md)
-- [Loading from Kafka with databend-kafka-connect](/tidb-cloud-lake/tutorials/ingest-kafka-with-kafka-connect.md)

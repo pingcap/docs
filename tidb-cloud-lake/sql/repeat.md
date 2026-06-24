@@ -23,23 +23,23 @@ REPEAT(<str>, <count>)
 ## Examples
 
 ```sql
-SELECT REPEAT('databend', 3);
+SELECT REPEAT('datalake', 3);
 +--------------------------+
-| REPEAT('databend', 3)    |
+| REPEAT('datalake', 3)    |
 +--------------------------+
-| databenddatabenddatabend |
+| datalakedatalakedatalake |
 +--------------------------+
 
-SELECT REPEAT('databend', 0);
+SELECT REPEAT('datalake', 0);
 +-----------------------+
-| REPEAT('databend', 0) |
+| REPEAT('datalake', 0) |
 +-----------------------+
 |                       |
 +-----------------------+
 
-SELECT REPEAT('databend', NULL);
+SELECT REPEAT('datalake', NULL);
 +--------------------------+
-| REPEAT('databend', NULL) |
+| REPEAT('datalake', NULL) |
 +--------------------------+
 |                     NULL |
 +--------------------------+

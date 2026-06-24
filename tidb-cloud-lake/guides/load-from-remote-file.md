@@ -31,7 +31,7 @@ FROM 'https://your-remote-location/data_file_[001-003].csv' ...
 
 ## Tutorial - Load from a Remote File
 
-This tutorial demonstrates how to import data into {{{ .lake }}} from a remote CSV file. The sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv) contains two records:
+This tutorial demonstrates how to import data into {{{ .lake }}} from a remote CSV file. The sample file [books.csv](https://lakesql-bin.tidbcloud.com/datasets/books.csv) contains two records:
 
 ```text title='books.csv'
 Transaction Processing,Jim Gray,1992
@@ -53,7 +53,7 @@ CREATE TABLE books
 
 ```sql
 COPY INTO books
-FROM 'https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv'
+FROM 'https://lakesql-bin.tidbcloud.com/datasets/books.csv'
 FILE_FORMAT = (
     TYPE = 'CSV',
     FIELD_DELIMITER = ',',

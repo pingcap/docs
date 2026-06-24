@@ -18,13 +18,13 @@ Fail-Safe refers to mechanisms aimed at recovering lost or accidentally deleted 
 
 Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/tidb-cloud-lake/sql/system-fuse-amend.md) function to recover a table's data from S3:
 
-1. Enable versioning for the bucket `databend-doc`.
+1. Enable versioning for the bucket `lake-doc`.
 
-2. Create an external table, storing the table data in the `fail-safe` folder in the `databend-doc` bucket.
+2. Create an external table, storing the table data in the `fail-safe` folder in the `lake-doc` bucket.
 
     ```sql
     CREATE TABLE t(a INT)
-    's3://databend-doc/fail-safe/'
+    's3://lake-doc/fail-safe/'
     CONNECTION = (access_key_id ='<your-access-key-id>' secret_access_key ='<your-secret-accesskey>');
 
     -- Insert sample data
@@ -40,7 +40,7 @@ Below is a step-by-step example of using the [SYSTEM$FUSE_AMEND](/tidb-cloud-lak
     ```sql
     SELECT * FROM t;
 
-    error: APIError: ResponseError with 3001: NotFound (persistent) at read, context: { uri: https://s3.us-east-2.amazonaws.com/databend-doc/fail-safe/1/1502/_b/3f84d636dc6c40508720d1cde20d4f3b_v2.parquet, response: Parts { status: 404, version: HTTP/1.1, headers: {"x-amz-request-id": "FYSJNZX1X16T91HN", "x-amz-id-2": "EI+NQjyRlSk8jlU64EASKodjvOkzuAlhZ1CYo0nIenzOH6DP7t6mMWh7raj4mUiOxW18NQesxmA=", "x-amz-delete-marker": "true", "x-amz-version-id": "ngecunzFP0pir0ysXlbR_eJafaTPl1oh", "content-type": "application/xml", "transfer-encoding": "chunked", "date": "Mon, 09 Sep 2024 02:01:57 GMT", "server": "AmazonS3"} }, service: s3, path: 1/1502/_b/3f84d636dc6c40508720d1cde20d4f3b_v2.parquet, range: 4-47 } => S3Error { code: "NoSuchKey", message: "The specified key does not exist.", resource: "", request_id: "FYSJNZX1X16T91HN" }
+    error: APIError: ResponseError with 3001: NotFound (persistent) at read, context: { uri: https://s3.us-east-2.amazonaws.com/lake-doc/fail-safe/1/1502/_b/3f84d636dc6c40508720d1cde20d4f3b_v2.parquet, response: Parts { status: 404, version: HTTP/1.1, headers: {"x-amz-request-id": "FYSJNZX1X16T91HN", "x-amz-id-2": "EI+NQjyRlSk8jlU64EASKodjvOkzuAlhZ1CYo0nIenzOH6DP7t6mMWh7raj4mUiOxW18NQesxmA=", "x-amz-delete-marker": "true", "x-amz-version-id": "ngecunzFP0pir0ysXlbR_eJafaTPl1oh", "content-type": "application/xml", "transfer-encoding": "chunked", "date": "Mon, 09 Sep 2024 02:01:57 GMT", "server": "AmazonS3"} }, service: s3, path: 1/1502/_b/3f84d636dc6c40508720d1cde20d4f3b_v2.parquet, range: 4-47 } => S3Error { code: "NoSuchKey", message: "The specified key does not exist.", resource: "", request_id: "FYSJNZX1X16T91HN" }
     ```
 
 5. Recover the table data using system$fuse_amend:

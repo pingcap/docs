@@ -21,11 +21,11 @@ LTRIM(<string>, <trim_string>)
 ## Examples
 
 ```sql
-SELECT LTRIM('xxdatabend', 'xx'), LTRIM('xxdatabend', 'xy');
+SELECT LTRIM('xxdatalake', 'xx'), LTRIM('xxdatalake', 'xy');
 
 ┌───────────────────────────────────────────────────────┐
-│ ltrim('xxdatabend', 'xx') │ ltrim('xxdatabend', 'xy') │
+│ ltrim('xxdatalake', 'xx') │ ltrim('xxdatalake', 'xy') │
 ├───────────────────────────┼───────────────────────────┤
-│ databend                  │ databend                  │
+│ datalake                  │ datalake                  │
 └───────────────────────────────────────────────────────┘
 ```

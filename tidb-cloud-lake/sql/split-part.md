@@ -30,25 +30,25 @@ String. SPLIT_PART returns NULL when either the input string, the delimiter, or 
 ```sql
 -- Use a space as the delimiter
 -- SPLIT_PART returns a specific part.
-SELECT SPLIT_PART('Databend Cloud', ' ', 1);
+SELECT SPLIT_PART('Datalake Cloud', ' ', 1);
 
-split_part('databend cloud', ' ', 1)|
+split_part('datalake cloud', ' ', 1)|
 ------------------------------------+
-Databend                            |
+Datalake                            |
 
 -- Use an empty string as the delimiter or a delimiter that does not exist in the input string
 -- SPLIT_PART returns the entire input string.
-SELECT SPLIT_PART('Databend Cloud', '', 1);
+SELECT SPLIT_PART('Datalake Cloud', '', 1);
 
-split_part('databend cloud', '', 1)|
+split_part('datalake cloud', '', 1)|
 -----------------------------------+
-Databend Cloud                     |
+Datalake Cloud                     |
 
-SELECT SPLIT_PART('Databend Cloud', ',', 1);
+SELECT SPLIT_PART('Datalake Cloud', ',', 1);
 
-split_part('databend cloud', ',', 1)|
+split_part('datalake cloud', ',', 1)|
 ------------------------------------+
-Databend Cloud                      |
+Datalake Cloud                      |
 
 -- Use '    ' (tab) as the delimiter
 -- SPLIT_PART returns individual fields.

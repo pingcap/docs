@@ -43,10 +43,10 @@ json_typeof(parse_json('true'))|
 -------------------------------+
 boolean                        |
 
-SELECT JSON_TYPEOF(PARSE_JSON('"Databend"'));
+SELECT JSON_TYPEOF(PARSE_JSON('"Datalake"'));
 
 --
-json_typeof(parse_json('"databend"'))|
+json_typeof(parse_json('"datalake"'))|
 -------------------------------------+
 string                               |
 

@@ -42,11 +42,11 @@ After modifying the configuration, restart PostgreSQL for the changes to take ef
 Create a PostgreSQL user with the necessary permissions for data replication:
 
 ```sql
-CREATE USER databend_cdc WITH PASSWORD 'your_password' REPLICATION;
-GRANT CONNECT ON DATABASE your_database TO databend_cdc;
-GRANT USAGE ON SCHEMA public TO databend_cdc;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO databend_cdc;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO databend_cdc;
+CREATE USER lake_cdc WITH PASSWORD 'your_password' REPLICATION;
+GRANT CONNECT ON DATABASE your_database TO lake_cdc;
+GRANT USAGE ON SCHEMA public TO lake_cdc;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO lake_cdc;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lake_cdc;
 ```
 
 ### Create Publication and Replication Slot (Required for CDC)
@@ -63,7 +63,7 @@ CREATE PUBLICATION bend_cdc_pub FOR ALL TABLES;
 SELECT * FROM pg_create_logical_replication_slot('bend_cdc_slot', 'pgoutput');
 
 -- Grant the dedicated user permission to use the replication slot
-ALTER ROLE databend_cdc WITH REPLICATION;
+ALTER ROLE lake_cdc WITH REPLICATION;
 ```
 
 > **Note:**

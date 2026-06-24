@@ -43,8 +43,8 @@ After modifying the configuration, restart MySQL for the changes to take effect.
 Create a MySQL user with the necessary permissions for data replication:
 
 ```sql
-CREATE USER 'databend_cdc'@'%' IDENTIFIED BY 'your_password';
-GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'databend_cdc'@'%';
+CREATE USER 'lake_cdc'@'%' IDENTIFIED BY 'your_password';
+GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'lake_cdc'@'%';
 FLUSH PRIVILEGES;
 ```
 

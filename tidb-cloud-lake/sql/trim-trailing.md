@@ -21,11 +21,11 @@ TRIM_TRAILING(<string>, <trim_string>)
 ## Examples
 
 ```sql
-SELECT TRIM_TRAILING('databendxx', 'xxx'), TRIM_TRAILING('databendxx', 'xx'), TRIM_TRAILING('databendxx', 'x');
+SELECT TRIM_TRAILING('datalakexx', 'xxx'), TRIM_TRAILING('datalakexx', 'xx'), TRIM_TRAILING('datalakexx', 'x');
 
 ┌───────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ trim_trailing('databendxx', 'xxx') │ trim_trailing('databendxx', 'xx') │ trim_trailing('databendxx', 'x') │
+│ trim_trailing('datalakexx', 'xxx') │ trim_trailing('datalakexx', 'xx') │ trim_trailing('datalakexx', 'x') │
 ├────────────────────────────────────┼───────────────────────────────────┼──────────────────────────────────┤
-│ databendxx                         │ databend                          │ databend                         │
+│ datalakexx                         │ datalake                          │ datalake                         │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```

@@ -36,34 +36,34 @@ Returns a code of type VARCHAR or a NULL value.
 ## Examples
 
 ```sql
-SELECT SOUNDEX('Databend');
+SELECT SOUNDEX('Datalake');
 
 ---
-D153
+D42
 
 -- All non-alphabetic characters in the string are ignored.
-SELECT SOUNDEX('Databend!');;
+SELECT SOUNDEX('Datalake!');;
 
 ---
-D153
+D42
 
 -- All international alphabetic characters outside the A-Z range are ignored unless they're the first letter.
-SELECT SOUNDEX('Databend，你好');
+SELECT SOUNDEX('Datalake，你好');
 
 ---
-D153
+D42
 
-SELECT SOUNDEX('你好，Databend');
+SELECT SOUNDEX('你好，Datalake');
 
 ---
-你3153
+你342
 
 -- SUBSTR the result to get a standard Soundex code.
-SELECT SOUNDEX('Databend Cloud'),SUBSTR(SOUNDEX('Databend Cloud'),1,4);
+SELECT SOUNDEX('Datalake Cloud'),SUBSTR(SOUNDEX('Datalake Cloud'),1,4);
 
-soundex('databend cloud')|substring(soundex('databend cloud') from 1 for 4)|
+soundex('datalake cloud')|substring(soundex('datalake cloud') from 1 for 4)|
 -------------------------+-------------------------------------------------+
-D153243                  |D153                                             |
+D42243                   |D422                                             |
 
 SELECT SOUNDEX(NULL);
 +-------------------------------------+

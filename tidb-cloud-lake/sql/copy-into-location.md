@@ -295,8 +295,8 @@ LIST @my_internal_stage;
 This example unloads data into a bucket on MinIO:
 
 ```sql
--- Unload data from the table to a bucket named 'databend' on MinIO using the PARQUET file format
-COPY INTO 's3://databend'
+-- Unload data from the table to a bucket named 'lake' on MinIO using the PARQUET file format
+COPY INTO 's3://lake'
     CONNECTION = (
     ENDPOINT_URL = 'http://localhost:9000/',
     ACCESS_KEY_ID = 'ROOTUSER',

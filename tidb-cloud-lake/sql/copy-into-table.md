@@ -460,7 +460,7 @@ This example loads data from three remote CSV files and skips a file in case of 
 
 ```sql
 COPY INTO mytable
-    FROM 'https://ci.databend.org/dataset/stateful/ontime_200{6,7,8}_200.csv'
+    FROM 'https://lakesql-bin.tidbcloud.com/datasets/ontime_200{6,7,8}_200.csv'
     FILE_FORMAT = (type = CSV)
     ON_ERROR = continue;
 ```
@@ -571,7 +571,7 @@ When specifying the pattern for staged files in paths with multiple folders, rem
 
 ### Example 5: Loading to Table with Extra Columns
 
-This section demonstrates data loading into a table with extra columns, using the sample file [books.csv](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv):
+This section demonstrates data loading into a table with extra columns, using the sample file [books.csv](https://lakesql-bin.tidbcloud.com/datasets/books.csv):
 
 ```text title='books.csv'
 Transaction Processing,Jim Gray,1992
@@ -591,7 +591,7 @@ CREATE TABLE books
 );
 
 COPY INTO books
-    FROM 'https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv'
+    FROM 'https://lakesql-bin.tidbcloud.com/datasets/books.csv'
     FILE_FORMAT = (TYPE = CSV);
 ```
 
@@ -607,7 +607,7 @@ CREATE TABLE books_with_language
 );
 
 COPY INTO books_with_language (title, author, date)
-    FROM 'https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv'
+    FROM 'https://lakesql-bin.tidbcloud.com/datasets/books.csv'
     FILE_FORMAT = (TYPE = CSV);
 ```
 
@@ -624,7 +624,7 @@ CREATE TABLE books_with_extra_columns
 );
 
 COPY INTO books_with_extra_columns
-    FROM 'https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/data/books.csv'
+    FROM 'https://lakesql-bin.tidbcloud.com/datasets/books.csv'
     FILE_FORMAT = (TYPE = CSV, ERROR_ON_COLUMN_COUNT_MISMATCH = false);
 ```
 

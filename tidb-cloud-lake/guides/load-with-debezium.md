@@ -91,7 +91,3 @@ Before you start, make sure Docker and Docker Compose are installed on your syst
 ```bash
 docker-compose up -d
 ```
-
-## Tutorials
-
-- [Migrating from MySQL with Debezium](/tidb-cloud-lake/tutorials/migrate-from-mysql-with-debezium.md)

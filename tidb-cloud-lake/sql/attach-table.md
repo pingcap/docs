@@ -1,11 +1,11 @@
 ---
 title: ATTACH TABLE
-summary: ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private {{{ .lake }}} deployment to {{{ .lake }}}.
+summary: ATTACH TABLE creates a read-only link to existing table data without copying it.
 ---
 
 # ATTACH TABLE
 
-ATTACH TABLE creates a read-only link to existing table data without copying it. This command is ideal for data sharing across environments, especially when migrating from a private {{{ .lake }}} deployment to [{{{ .lake }}}](https://www.databend.com).
+ATTACH TABLE creates a read-only link to existing table data without copying it.
 
 ## Key Features
 
@@ -32,7 +32,7 @@ CONNECTION = ( CONNECTION_NAME = '<connection_name>' )
 
 - **`<source_table_data_URI>`**: Path to the source table data in object storage
     - Format: `s3://<bucket-name>/<database_ID>/<table_ID>/`
-    - Example: `s3://databend-toronto/1/23351/`
+    - Example: `s3://lake-toronto/1/23351/`
 
 - **`CONNECTION_NAME`**: References a connection created with [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 
@@ -93,7 +93,7 @@ CREATE CONNECTION my_s3_connection
     SECRET_ACCESS_KEY = '<your_aws_secret_key>';
 
 -- Step 2: Attach a table with all columns
-ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
+ATTACH TABLE population_all_columns 's3://lake-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
 
@@ -101,7 +101,7 @@ ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
 
 ```sql
 -- Attach only specific columns for data security
-ATTACH TABLE population_selected (city, population) 's3://databend-doc/1/16/'
+ATTACH TABLE population_selected (city, population) 's3://lake-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
 
@@ -111,10 +111,10 @@ ATTACH TABLE population_selected (city, population) 's3://databend-doc/1/16/'
 -- Create a connection using IAM role (more secure than access keys)
 CREATE CONNECTION s3_role_connection
     STORAGE_TYPE = 's3'
-    ROLE_ARN = 'arn:aws:iam::123456789012:role/databend-role';
+    ROLE_ARN = 'arn:aws:iam::123456789012:role/lake-role';
 
 -- Attach table using the IAM role connection
-ATTACH TABLE population_all_columns 's3://databend-doc/1/16/'
+ATTACH TABLE population_all_columns 's3://lake-doc/1/16/'
     CONNECTION = (CONNECTION_NAME = 's3_role_connection');
 ```
 
@@ -131,7 +131,3 @@ ATTACH TABLE finance_view (order_id, amount, profit, order_date)
 's3://your-bucket/1/23351/'
 CONNECTION = (CONNECTION_NAME = 'my_s3_connection');
 ```
-
-## Learn More
-
-- [Linking Tables with ATTACH TABLE](/tidb-cloud-lake/tutorials/data-sharing-via-attach-table.md)

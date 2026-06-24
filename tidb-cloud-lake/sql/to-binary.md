@@ -20,12 +20,12 @@ TO_BINARY( <expr> )
 This example converts a string to binary:
 
 ```sql
-SELECT TO_BINARY('Databend');
+SELECT TO_BINARY('datalake');
 
 ┌───────────────────────┐
-│ to_binary('Databend') │
+│ to_binary('datalake') │
 ├───────────────────────┤
-│ 4461746162656E64      │
+│ 646174616C616B65      │
 └───────────────────────┘
 ```
 

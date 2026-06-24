@@ -16,11 +16,11 @@ CRC32( '<x>' )
 ## Examples
 
 ```sql
-SELECT CRC32('databend');
+SELECT CRC32('datalake');
 
 ┌───────────────────┐
-│ crc32('databend') │
+│ crc32('datalake') │
 ├───────────────────┤
-│        1177678456 │
+│        2878859588 │
 └───────────────────┘
 ```

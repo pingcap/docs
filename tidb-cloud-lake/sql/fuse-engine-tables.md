@@ -119,7 +119,7 @@ Below are the available Fuse Engine options, grouped by their purpose:
 ### `data_retention_period_in_hours`
 
 - **Syntax:** `data_retention_period_in_hours = <n>`
-- **Description:** Specifies the number of hours to retain table data. The minimum value is 1 hour. The maximum value is defined by the `data_retention_time_in_days_max` setting in the [databend-query.toml](https://github.com/databendlabs/databend/blob/main/scripts/distribution/configs/databend-query.toml) configuration file, or defaults to 2,160 hours (90 days x 24 hours) if not specified.
+- **Description:** Specifies the number of hours to retain table data. The minimum value is 1 hour. The maximum value is determined by the {{{ .lake }}} service configuration, or defaults to 2,160 hours (90 days x 24 hours) if not specified.
 
 ### `enable_auto_vacuum`
 
