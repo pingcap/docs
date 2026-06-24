@@ -242,7 +242,7 @@ PDの評価メカニズムでは、異なるストアのリーダー数とリー
 
 現在、ノードのオンライン化はバランスリージョンメカニズムを通じてスケジュールされています。トラブルシューティングについては[リーダー/リージョンが均等に分布していない](#leaders-regions-are-not-evenly-distributed)を参照してください。
 
-### ホットリージョンは均等に分布していない {#hot-regions-are-not-evenly-distributed}
+### ホットリージョンが均等に分布していない {#hot-regions-are-not-evenly-distributed}
 
 ホット リージョンのスケジュールの問題は、通常、次のカテゴリに分類されます。
 
