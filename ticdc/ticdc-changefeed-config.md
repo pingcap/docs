@@ -473,7 +473,7 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`
 
 ### sink.kafka-config.glue-schema-registry-config {#sink-kafka-config-glue-schema-registry-config}
@@ -585,7 +585,7 @@ token="xxxx"
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`
 
 ### sink.cloud-storage-config {#sink-cloud-storage-config}
@@ -624,5 +624,5 @@ token="xxxx"
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`

@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.0.5
 
 -   ストレージ
     -   悲観的トランザクションの新機能を追加: トランザクションクリーンアップインターフェースは、TTLが期限切れのロックのクリーンアップのみをサポートします[＃5589](https://github.com/tikv/tikv/pull/5589)
-    -   トランザクションのロールバックでプライマリキーが折りたたまれる問題を修正[＃5646](https://github.com/tikv/tikv/pull/5646) , [＃5671](https://github.com/tikv/tikv/pull/5671)
+    -   トランザクションのロールバックで主キーが折りたたまれる問題を修正[＃5646](https://github.com/tikv/tikv/pull/5646) , [＃5671](https://github.com/tikv/tikv/pull/5671)
     -   悲観的ロック下でポイントクエリが以前のバージョンのデータを返す可能性がある問題を修正[＃5634](https://github.com/tikv/tikv/pull/5634)
 -   Raftstore
     -   Raftstoreのメッセージフラッシュ操作を減らしてパフォーマンスを向上させ、CPU 使用率を削減します[＃5617](https://github.com/tikv/tikv/pull/5617)
