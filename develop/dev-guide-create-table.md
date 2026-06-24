@@ -105,7 +105,7 @@ CREATE TABLE `bookshop`.`books` (
 >
 > -   **InnoDB**では、**主キー**は一意であり、nullではなく、**インデックスはクラスター化されています**。
 >
-> -   TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスター化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キーが****クラスター化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（化を参照[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)。
+> -   TiDBでは、**主キー**は一意であり、NULLであってはなりません。ただし、主キーが**クラスター化インデックス**であることは保証されていません。代わりに、別のキーワードセット`CLUSTERED` / `NONCLUSTERED`によって、**主キーが****クラスター化インデックス**であるかどうかが制御されます。キーワードが指定されていない場合は、システム変数`@@global.tidb_enable_clustered_index`によって制御されます（[クラスター化インデックス](https://docs.pingcap.com/tidb/stable/clustered-indexes)に記載のとおり）。
 
 **主キー**は`CREATE TABLE`ステートメントで定義されます。[主キー制約](/constraints.md#primary-key)制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
