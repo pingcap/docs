@@ -88,6 +88,7 @@ The following is the description of PD Dashboard metrics items:
 - Total read bytes on hot peer Regions: The total read bytes of peers that have become read hotspots on each TiKV instance
 - Store read rate bytes: The total read bytes of each TiKV instance
 - Store read rate keys: The total read keys of each TiKV instance
+- Store read cpu: The read CPU usage of each TiKV instance, which PD uses for CPU-aware read hotspot scheduling starting from v8.5.7
 - Hot cache read entry number: The number of peers that are in the read hotspot statistics module on each TiKV instance
 
 ![PD Dashboard - Hot read metrics](/media/pd-dashboard-hotread-v4.png)
