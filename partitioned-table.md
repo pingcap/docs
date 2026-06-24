@@ -1354,7 +1354,7 @@ SELECT store_id, COUNT(department_id) AS c
 -   パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
 -   [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)ヒントは、パーティション化されたテーブルとその関連インデックスには機能しません。パーティション化されたテーブルのインデックスは順番に読み取ることができないためです。
 
-### パーティショニングキー、主キー、ユニークキー {#partitioning-keys-primary-keys-and-unique-keys}
+### パーティショニングキー、主キー、一意キー {#partitioning-keys-primary-keys-and-unique-keys}
 
 このセクションでは、パーティショニングキーと主キーおよび一意キーの関係について説明します。この関係を規定するルールは次のとおりです。主キーは定義上一意キーでもあるため、主キーを含むパーティションテーブル上のすべての一意キーは、テーブルのパーティショニング式内のすべての列を使用する必要があります。
 
