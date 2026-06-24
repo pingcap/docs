@@ -277,7 +277,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | データブロックキャッシュヒット      | tikv_block_data_cache_hit           | 0.80      | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
 | TiKV | リーダースコアバランス          | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリーダースコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                      |
 | TiKV | リージョンスコアバランス            | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                     |
-| TiKV | ストア利用可能残高             | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが想定されています。                                                 |
+| TiKV | ストア利用可能バランス             | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが想定されています。                                                 |
 | TiKV | リージョン数                  | pd_scheduler_store_status           | 20000未満   | 各 TiKV インスタンスのリージョン数を確認します。1 つのインスタンスあたりのリージョン数は 20,000 未満と想定されています。                                               |
 | PD   | リージョンの健康                | pd_region_health                    | 100未満     | クラスター内でスケジュール処理中のリージョンの数を検出します。想定される数は合計で100未満です。                                                                |
 
