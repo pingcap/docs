@@ -58,7 +58,7 @@ TiDB バージョン: 4.0.5
 
 -   PD
 
-    -   特別なエンジン（ TiFlashなど）を備えた店舗での散乱領域のサポート[＃2706](https://github.com/tikv/pd/pull/2706)
+    -   特別なエンジン（ TiFlashなど）を備えたストアでの散乱領域のサポート[＃2706](https://github.com/tikv/pd/pull/2706)
     -   特定のキー範囲[＃2687](https://github.com/tikv/pd/pull/2687)のリージョンスケジュールを優先するリージョンHTTP API をサポートします。
     -   リージョン分散[＃2684](https://github.com/tikv/pd/pull/2684)後のリーダー分布の改善
     -   TSOリクエスト[＃2678](https://github.com/tikv/pd/pull/2678)テストとログを追加する

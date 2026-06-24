@@ -48,7 +48,7 @@ DESC TIKV_STORE_STATUS;
 `TIKV_STORE_STATUS`テーブルの列の説明は以下のとおりです。
 
 -   `STORE_ID` : ストアのID。
--   `ADDRESS` : 店舗の住所。
+-   `ADDRESS` : ストアの住所。
 -   `STORE_STATE` : ストア状態の識別子。これは`STORE_STATE_NAME`に対応します。
 -   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
 -   `LABEL` : ストアのラベルセット。

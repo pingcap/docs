@@ -61,7 +61,7 @@ DESC tidb_hot_regions_history;
 -   INDEX_NAME: ホットリージョンが存在するインデックスの名前。
 -   INDEX_ID: ホットリージョンが存在するインデックスのID。
 -   REGION_ID: ホットリージョンのID。
--   STORE_ID: ホットリージョンが存在する店舗のID。
+-   STORE_ID: ホットリージョンが存在するストアのID。
 -   PEER_ID: ホットリージョンに対応するピアのID。
 -   IS_LEARNER: PEERが学習者であるかどうか。
 -   IS_LEADER: PEERがLEADERであるかどうか。
@@ -77,7 +77,7 @@ DESC tidb_hot_regions_history;
 
 ## 一般的なユーザーシナリオ {#common-user-scenarios}
 
--   特定の期間内のホットな地域を検索します。 `update_time`実際の時間に置き換えてください。
+-   特定の期間内のホットリージョンを検索します。 `update_time`実際の時間に置き換えてください。
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00';

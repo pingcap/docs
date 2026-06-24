@@ -64,7 +64,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 -   リーダーの優先順位が有効にならない問題を修正[＃1533](https://github.com/pingcap/pd/pull/1533)
 -   `ScanRegions` [＃1535](https://github.com/pingcap/pd/pull/1535)の gRPC インターフェースを追加する
 -   プッシュ演算子をアクティブにする[＃1536](https://github.com/pingcap/pd/pull/1536)
--   各店舗ごとにオペレーターの速度を個別に制御するための店舗制限機構を追加[＃1474](https://github.com/pingcap/pd/pull/1474)
+-   各ストアごとにオペレーターの速度を個別に制御するためのストア制限機構を追加[＃1474](https://github.com/pingcap/pd/pull/1474)
 -   不一致の`Config`ステータス[＃1476](https://github.com/pingcap/pd/pull/1476)の問題を修正
 
 ## TiKV {#tikv}

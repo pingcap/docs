@@ -184,7 +184,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
         -   [`jq`を呼び出してJSON出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
 
-        -   [指定された店舗のリージョン情報を確認する](/pd-control.md#region-store-store_id)
+        -   [指定されたストアのリージョン情報を確認する](/pd-control.md#region-store-store_id)
 
         -   [バージョン別にソートされた上位Nリージョンリストを確認する](/pd-control.md#region-topconfver-limit)
 

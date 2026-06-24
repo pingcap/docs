@@ -128,7 +128,7 @@ TiDB バージョン: 4.0.3
     -   スケジューラを削除するとデッドロックが発生する可能性がある問題を修正[＃2637](https://github.com/pingcap/pd/pull/2637)
     -   `balance-leader-scheduler`が有効になっているときに配置ルールが考慮されないバグを修正[＃2636](https://github.com/pingcap/pd/pull/2636)
     -   サービス`safepoint`が正しく設定されない場合があり、 BRとDumplingが失敗する可能性がある問題を修正[＃2635](https://github.com/pingcap/pd/pull/2635)
-    -   `hot region scheduler`の対象店舗が誤って選択されている問題を修正[＃2627](https://github.com/pingcap/pd/pull/2627)
+    -   `hot region scheduler`の対象ストアが誤って選択されている問題を修正[＃2627](https://github.com/pingcap/pd/pull/2627)
     -   PDリーダーが切り替えられたときにTSOリクエストに時間がかかりすぎる可能性がある問題を修正[＃2622](https://github.com/pingcap/pd/pull/2622)
     -   リーダー変更後の古いスケジューラの問題を修正[＃2608](https://github.com/pingcap/pd/pull/2608)
     -   配置ルールが有効になっているときに、リージョンのレプリカを最適な場所に調整できないことがある問題を修正しました[＃2605](https://github.com/pingcap/pd/pull/2605)

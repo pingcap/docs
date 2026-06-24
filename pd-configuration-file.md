@@ -74,7 +74,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### <code>lease</code> {#code-lease-code}
 
--   PDLeaderキーリースのタイムアウト。タイムアウト後、システムはLeaderを再選出します。
+-   PDリーダーキーリースのタイムアウト。タイムアウト後、システムはリーダーを再選出します。
 -   デフォルト値: v8.5.2 以降では、デフォルト値は`5`です。v8.5.2 より前では、デフォルト値は`3`です。
 -   単位: 秒
 
@@ -344,7 +344,7 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
 
--   同時に実行されるLeaderスケジュールタスクの数
+-   同時に実行されるリーダースケジュールタスクの数
 -   デフォルト値: `4`
 
 ### <code>region-schedule-limit</code> {#code-region-schedule-limit-code}
@@ -419,11 +419,11 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>store-limit-version</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-store-limit-version-code-span-class-version-mark-new-in-v7-1-0-span}
 
--   店舗制限の計算式のバージョンを制御します
+-   ストア制限の計算式のバージョンを制御します
 -   デフォルト値: `v1`
 -   値のオプション:
     -   `v1` : v1 モードでは、 `store limit`を手動で変更して、単一の TiKV のスケジュール速度を制限できます。
-    -   `v2` : v2モードでは、PDがTiKVスナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [店舗制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+    -   `v2` : v2モードでは、PDがTiKVスナップショットの機能に基づいて動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
 ### <code>enable-joint-consensus</code> <span class="version-mark">5.0の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -496,12 +496,12 @@ pd-server関連のコンフィグレーション項目
 
 ### <code>key</code> （非推奨） {#code-key-code-deprecated}
 
--   Leaderを拒否した店舗のラベルキー
+-   リーダーを拒否したストアのラベルキー
 -   デフォルト値: `""`
 
 ### <code>value</code> （非推奨） {#code-value-code-deprecated}
 
--   Leaderを拒否した店舗のラベル値
+-   リーダーを拒否したストアのラベル値
 -   デフォルト値: `""`
 
 ## <code>dashboard</code> {#code-dashboard-code}

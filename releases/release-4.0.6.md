@@ -18,7 +18,7 @@ TiDB バージョン: 4.0.6
 -   TiDBダッシュボード
 
     -   クエリエディタと実行UIの追加（実験的） [＃713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
-    -   店舗ロケーショントポロジ可視化[＃719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)サポート
+    -   ストアロケーショントポロジ可視化[＃719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)サポート
     -   クラスタ構成UIの追加（実験的） [＃733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
     -   現在のセッション[＃741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)共有をサポート
     -   SQLステートメントリスト[＃746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)で実行プランの数を表示する機能をサポート
@@ -158,7 +158,7 @@ TiDB バージョン: 4.0.6
 -   PD
 
     -   ブートストラップ[＃2922](https://github.com/pingcap/pd/pull/2922)中に異なるクラスタが相互に通信するのを防ぐために、 `initial-cluster-token`構成を追加します。
-    -   モードが`auto` [＃2826](https://github.com/pingcap/pd/pull/2826)ときの店舗制限レートの単位を修正
+    -   モードが`auto` [＃2826](https://github.com/pingcap/pd/pull/2826)ときのストア制限レートの単位を修正
     -   一部のスケジューラがエラーを解決せずに構成を保持する問題を修正[＃2818](https://github.com/tikv/pd/pull/2818)
     -   スケジューラ[＃2871](https://github.com/tikv/pd/pull/2871) [＃2874](https://github.com/tikv/pd/pull/2874)空のHTTPレスポンスを修正
 

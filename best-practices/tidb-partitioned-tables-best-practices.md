@@ -348,7 +348,7 @@ ALTER TABLE A DROP PARTITION A_2024363;
 
 ## ホットスポットの問題を軽減する {#mitigate-hotspot-issues}
 
-TiDB では、読み取りまたは書き込みトラフィックが[地域](/tidb-storage.md#region)に不均等に分散されている場合にホットスポットが発生します。ホットスポットは、次のような場合によく発生します。
+TiDB では、読み取りまたは書き込みトラフィックが[リージョン](/tidb-storage.md#region)に不均等に分散されている場合にホットスポットが発生します。ホットスポットは、次のような場合によく発生します。
 
 -   単調に増加する主キー ( `AUTO_INCREMENT`主キーと`AUTO_ID_CACHE=1`など)。
 -   デフォルト値が`CURRENT_TIMESTAMP`である datetime 列のセカンダリ インデックス。

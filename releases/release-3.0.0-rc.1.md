@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 -   `MergeRegion`オペレータ[＃1495](https://github.com/pingcap/pd/pull/1495)の短すぎるタイムアウト問題を修正
 -   ホットリージョンのスケジュールに高い優先度を与えるサポート[＃1492](https://github.com/pingcap/pd/pull/1492)
 -   PDサーバー側[＃1502](https://github.com/pingcap/pd/pull/1502)でTSOリクエストの処理時間を記録するためのメトリックを追加します
--   対応する店舗IDと住所を店舗[＃1506](https://github.com/pingcap/pd/pull/1506)に関連する指標に追加します。
+-   対応するストアIDと住所をストア[＃1506](https://github.com/pingcap/pd/pull/1506)に関連する指標に追加します。
 -   `GetOperator`サービス[＃1477](https://github.com/pingcap/pd/pull/1477)サポートする
 -   ストアが見つからないため、ハートビートストリームでエラーを送信できない問題を修正しました[＃1521](https://github.com/pingcap/pd/pull/1521)
 
