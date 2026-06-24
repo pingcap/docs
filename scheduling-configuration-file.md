@@ -44,7 +44,7 @@ The Scheduling node is used for providing the `scheduling` microservice for PD. 
 
 ### `lease`
 
-- The timeout of the Scheduling Primary Key lease. After the timeout, the system re-elects a Primary.
+- The timeout of the scheduling service's primary lease. After the timeout, the system re-elects a primary.
 - Default value: `3`
 - Unit: seconds
 
