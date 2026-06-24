@@ -152,7 +152,7 @@ You can configure the credentials used to access GCS in the following ways:
     - BR reads the file `~/.config/gcloud/application_default_credentials.json`.
     - When BR runs in GCE or GAE, it uses the credentials obtained from the metadata server.
 
-If you want TiKV to use GCS WIF or ADC, you need to enable the `gcp_v2` external storage backend. Starting from v8.5.7, TiKV enables the `gcp_v2` external storage backend by default. You can configure `gcp_v2` in the following ways:
+If you want TiKV to use GCS WIF or ADC, you need to enable the `gcp_v2` external storage backend. **Starting from v8.5.7, TiKV enables the `gcp_v2` external storage backend by default.** You can configure `gcp_v2` in the following ways:
 
 - full backup and restore: set `[backup].gcp-v2-enable` to `true` in [TiKV Configuration File Descriptions](/tikv-configuration-file.md)
 - log backup: set `[log-backup].gcp-v2-enable` to `true` in [TiKV Configuration File Descriptions](/tikv-configuration-file.md)
