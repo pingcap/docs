@@ -125,7 +125,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 ##### <code>ignore-event</code> {#code-ignore-event-code}
 
 -   `ignore-event = ["insert"]`は`INSERT`イベントを無視します。
--   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスタ化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
+-   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
 
 ##### <code>ignore-sql</code> {#code-ignore-sql-code}
 
@@ -473,7 +473,7 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`
 
 ### sink.kafka-config.glue-schema-registry-config {#sink-kafka-config-glue-schema-registry-config}
@@ -585,7 +585,7 @@ token="xxxx"
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`
 
 ### sink.cloud-storage-config {#sink-cloud-storage-config}
@@ -624,5 +624,5 @@ token="xxxx"
 
 #### <code>output-raw-change-event</code> {#code-output-raw-change-event-code}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [プライマリキーまたはユニークキーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
 -   デフォルト値: `false`

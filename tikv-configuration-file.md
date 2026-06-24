@@ -925,7 +925,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>pd-store-heartbeat-tick-interval</code> {#code-pd-store-heartbeat-tick-interval-code}
 
--   店舗からPDへのハートビートがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   ストアからPDへのハートビートがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 

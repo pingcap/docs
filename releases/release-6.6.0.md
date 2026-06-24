@@ -489,10 +489,10 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   取り込みモードで一意インデックスを作成すると、データがインデックスと矛盾する可能性がある問題を修正します [#40464](https://github.com/pingcap/tidb/issues/40464) @[tangenta](https://github.com/tangenta)
     -   同じテーブルを同時に切り捨てる際に、一部の切り捨て操作がMDLによってブロックされない問題を修正しました [#40484](https://github.com/pingcap/tidb/issues/40484) @[wjhuang2016](https://github.com/wjhuang2016)
     -   `SHOW PRIVILEGES`ステートメントが不完全な特権リストを返す問題を修正 [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    -   一意のインデックスを追加するときに TiDB がパニックになる問題を修正 [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
+    -   一意インデックスを追加するときに TiDB がパニックになる問題を修正 [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
     -   `ADMIN RECOVER`ステートメントを実行するとインデックスデータが破損する可能性がある問題を修正しました [#40430](https://github.com/pingcap/tidb/issues/40430) @[xiongjiwei](https://github.com/xiongjiwei)
     -   クエリ対象のテーブルに式インデックスに`CAST`式が含まれている場合にクエリが失敗する可能性がある問題を修正しました [#40130](https://github.com/pingcap/tidb/issues/40130) @[xiongjiwei](https://github.com/xiongjiwei)
-    -   ユニークインデックスが場合によっては重複データを生成する可能性がある問題を修正 [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
+    -   一意インデックスが場合によっては重複データを生成する可能性がある問題を修正 [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
     -   `Prepare`または`Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     -   インデックス追加時にデータ競合が発生する可能性がある問題を修正 [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     -   仮想列 [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)キッドによって引き起こされる`can't find proper physical plan`の問題を修正します

@@ -16,7 +16,7 @@ TiDB バージョン: 7.5.2
 -   RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-v715-and-v752)追加します。これは、Write Ahead Log (WAL) [＃16549](https://github.com/tikv/tikv/issues/16549) @ [v01dstar](https://github.com/v01dstar)の破損の可能性を調査するのに役立ちます。
 -   TiDB Lightning `strict-format`または`SPLIT_FILE`使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @ [lance6716](https://github.com/lance6716)
 -   TiCDCオープンプロトコルの`sink.open.output-old-value`設定項目を追加して、更新前の値を下流[＃10916](https://github.com/pingcap/tiflow/issues/10916) @ [sdojjy](https://github.com/sdojjy)に出力するかどうかを制御します。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意のインデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.5.2以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`目のイベントを`DELETE` `INSERT`と13件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があるため、ダウンストリームデータの不整合が発生する問題に対処しています。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) [＃10918](https://github.com/pingcap/tiflow/issues/10918)してください[リデジュ](https://github.com/lidezhu)
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.5.2以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`目のイベントを`DELETE` `INSERT`と13件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があるため、ダウンストリームデータの不整合が発生する問題に対処しています。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) [＃10918](https://github.com/pingcap/tiflow/issues/10918)してください[リデジュ](https://github.com/lidezhu)
 
 ## 改善点 {#improvements}
 
@@ -77,7 +77,7 @@ TiDB バージョン: 7.5.2
 
 -   TiDB
 
-    -   一意のインデックス[＃52914](https://github.com/pingcap/tidb/issues/52914) @ [wjhuang2016](https://github.com/wjhuang2016)を追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。
+    -   一意インデックス[＃52914](https://github.com/pingcap/tidb/issues/52914) @ [wjhuang2016](https://github.com/wjhuang2016)を追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。
     -   パーティションテーブル[＃52080](https://github.com/pingcap/tidb/issues/52080) @ [tangenta](https://github.com/tangenta)に複数のスキーマ変更を含むインデックスを追加することで発生するデータインデックスの不整合の問題を修正しました。
     -   複数値インデックス[＃51162](https://github.com/pingcap/tidb/issues/51162) @ [ywqzzy](https://github.com/ywqzzy)を追加することによって発生するデータ インデックスの不整合の問題を修正しました
     -   ネットワークの問題によりDDL操作が停止する問題を修正[＃47060](https://github.com/pingcap/tidb/issues/47060) @ [wjhuang2016](https://github.com/wjhuang2016)
@@ -104,7 +104,7 @@ TiDB バージョン: 7.5.2
     -   `ALL`関数に含まれるサブクエリが誤った結果を引き起こす可能性がある問題を修正[＃52755](https://github.com/pingcap/tidb/issues/52755) @ [hawkingrei](https://github.com/hawkingrei)
     -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [Rustin170506](https://github.com/Rustin170506)として使用できない問題を修正
     -   スライスの浅いコピーを使用せずに列プルーニングを行うと、TiDB がpanic可能性がある問題を修正しました[＃52768](https://github.com/pingcap/tidb/issues/52768) @ [winoros](https://github.com/winoros)
-    -   ユニークインデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   初期化が完了する前に TiDBサーバーが正常とマークされる問題を修正[＃51596](https://github.com/pingcap/tidb/issues/51596) @ [shenqidebaozi](https://github.com/shenqidebaozi)
     -   `IFNULL`関数によって返される型が MySQL [＃51765](https://github.com/pingcap/tidb/issues/51765) @ [YangKeao](https://github.com/YangKeao)と一致しない問題を修正しました
     -   テーブルにクラスター化インデックス[＃51372](https://github.com/pingcap/tidb/issues/51372) @ [guo-shaoge](https://github.com/guo-shaoge)がある場合に並列`Apply`で誤った結果が生成される可能性がある問題を修正しました。
@@ -127,7 +127,7 @@ TiDB バージョン: 7.5.2
     -   照合の新しいフレームワークが無効になっているときに、異なる照合を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
     -   TiDBが式[＃43527](https://github.com/pingcap/tidb/issues/43527) @ [Rustin170506](https://github.com/Rustin170506)内のシステム変数の型を正しく変換できない問題を修正
-    -   `INSERT IGNORE`実行すると、一意のインデックスとデータ[＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)の間に不整合が発生する可能性がある問題を修正しました。
+    -   `INSERT IGNORE`実行すると、一意インデックスとデータ[＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)の間に不整合が発生する可能性がある問題を修正しました。
     -   OOMエラー発生後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @ [Rustin170506](https://github.com/Rustin170506)
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが[＃52601](https://github.com/pingcap/tidb/issues/52601) @ [hawkingrei](https://github.com/hawkingrei)制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。
     -   複数のレベルの`max_execute_time`設定が互いに干渉する問題を修正[＃50914](https://github.com/pingcap/tidb/issues/50914) @ [jiyfhust](https://github.com/jiyfhust)
@@ -243,7 +243,7 @@ TiDB バージョン: 7.5.2
     -   TiDB データ移行 (DM)
 
         -   `go-mysql` [＃11041](https://github.com/pingcap/tiflow/issues/11041) @ [D3Hunter](https://github.com/D3Hunter)にアップグレードして接続ブロックの問題を修正しました
-        -   アップストリーム主キーがバイナリタイプ[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
+        -   アップストリーム主キーがバイナリ型[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
 
     -   TiDB Lightning
 

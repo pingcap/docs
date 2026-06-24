@@ -62,7 +62,7 @@ TiDBバージョン: 6.5.12
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間[＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。
     -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが[ランス6716](https://github.com/lance6716)で[＃58184](https://github.com/pingcap/tidb/issues/58184)低下する問題を修正
     -   `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` [＃55965](https://github.com/pingcap/tidb/issues/55965) @ [tiancaiamao](https://github.com/tiancaiamao)と互換性がない問題を修正
-    -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [hawkingrei](https://github.com/hawkingrei)でユニークインデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
+    -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [hawkingrei](https://github.com/hawkingrei)で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
     -   `IndexLookUp`演算子のメモリの一部が[＃56440](https://github.com/pingcap/tidb/issues/56440) @ [wshwsh12](https://github.com/wshwsh12)で追跡されない問題を修正
     -   TiDBの内部コルーチン[＃57798](https://github.com/pingcap/tidb/issues/57798) [＃56053](https://github.com/pingcap/tidb/issues/56053) @ [fishiu](https://github.com/fishiu) @ [tiancaiamao](https://github.com/tiancaiamao)で発生する可能性のあるデータ競合問題を修正しました
     -   クエリに利用可能なインデックスマージ実行プラン[＃56217](https://github.com/pingcap/tidb/issues/56217) @ [AilinKid](https://github.com/AilinKid)がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました
@@ -70,7 +70,7 @@ TiDBバージョン: 6.5.12
     -   異常終了時に`INDEX_HASH_JOIN`アップする可能性がある問題を修正[＃54055](https://github.com/pingcap/tidb/issues/54055) @ [wshwsh12](https://github.com/wshwsh12)
     -   2人のDDL所有者が同時に存在する可能性がある問題を修正[＃54689](https://github.com/pingcap/tidb/issues/54689) @ [joccau](https://github.com/joccau)
     -   `information_schema.cluster_slow_query`テーブルをクエリするときに、時間フィルターが追加されていない場合、最新のスローログファイルのみがクエリされる問題を修正しました[＃56100](https://github.com/pingcap/tidb/issues/56100) @ [crazycs520](https://github.com/crazycs520)
-    -   ユニークインデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
+    -   一意インデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
     -   特定の型変換エラー[＃41730](https://github.com/pingcap/tidb/issues/41730) @ [hawkingrei](https://github.com/hawkingrei)でエラーメッセージが正しく表示されない問題を修正
     -   `VIEW`で定義されたCTEが誤ってインライン化される問題を修正[＃56582](https://github.com/pingcap/tidb/issues/56582) @ [elsa0520](https://github.com/elsa0520)
     -   `UPDATE`文が`ENUM`型[＃56832](https://github.com/pingcap/tidb/issues/56832) @ [xhebox](https://github.com/xhebox)の値を誤って更新する問題を修正しました

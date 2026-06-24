@@ -53,7 +53,7 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-## 分割前の地域 {#pre-split-region}
+## 分割前のリージョン {#pre-split-region}
 
 コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。5の詳細については、 `PRE_SPLIT_REGIONS` [`CREATE TABLE`文](/sql-statements/sql-statement-create-table.md)参照してください。
 

@@ -80,7 +80,7 @@ tiup dmctl check-task ./task.yaml
         -   カラムの順序
         -   カラムタイプ
         -   主キー
-        -   一意のインデックス
+        -   一意インデックス
 
     -   楽観的モードでは、すべてのシャードテーブルのスキーマが[楽観的相性](https://github.com/pingcap/tiflow/blob/release-8.5/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types)を満たしているかどうかを確認します。
 

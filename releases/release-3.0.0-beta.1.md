@@ -76,10 +76,10 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
 -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
 -   シミュレーター
-    -   異なる店舗で異なるハートビート間隔をサポート[＃1418](https://github.com/pingcap/pd/pull/1418)
+    -   異なるストアで異なるハートビート間隔をサポート[＃1418](https://github.com/pingcap/pd/pull/1418)
     -   データのインポートに関するケースを追加[＃1263](https://github.com/pingcap/pd/pull/1263)
 -   ホットスポットのスケジュールを設定可能にする[＃1412](https://github.com/pingcap/pd/pull/1412)
--   以前の店舗ID [＃1429](https://github.com/pingcap/pd/pull/1429)を置き換えるために、ディメンション監視項目として店舗住所を追加します。
+-   以前のストアID [＃1429](https://github.com/pingcap/pd/pull/1429)を置き換えるために、ディメンション監視項目としてストアアドレスを追加します。
 -   `GetStores`オーバーヘッドを最適化して、リージョン検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)高速化します。
 -   トゥームストーンストア[＃1472](https://github.com/pingcap/pd/pull/1472)を削除するためのインターフェースを追加する
 

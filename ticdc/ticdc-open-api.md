@@ -111,13 +111,13 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
-| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーション タスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意のインデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマのフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
+| パラメータ名 | 説明 | | :------------------------ | :---------------------- ------------------------------- | | `changefeed_id` | `STRING` type。レプリケーション タスクの ID。(オプション) | | `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) | | `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) | | **`sink_uri`** | `STRING` type。レプリケーション タスクのダウンストリーム アドレス。(**必須**) | | `force_replicate` | `BOOLEAN` type。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) | | `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) | | `filter_rules` | `STRING` type 配列。テーブル スキーマのフィルタリングのルール。(オプション) | | `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) | | `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) | | `sink_config` | シンクの構成パラメータ。(オプション) |
 
 `changefeed_id` `target_ts`意味と形式は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。 `sink_uri` `start_ts`パラメータの詳細については、こちらのドキュメントを参照してください`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
 上記の表のその他のパラメータについては、次のようにさらに詳しく説明します。
 
-`force_replicate` : このパラメータのデフォルトは`false`です。4 `true`指定すると、TiCDC は一意のインデックスを持たないテーブルを強制的に複製しようとします。
+`force_replicate` : このパラメータのデフォルトは`false`です。4 `true`指定すると、TiCDC は一意インデックスを持たないテーブルを強制的に複製しようとします。
 
 `ignore_ineligible_table` : このパラメータのデフォルトは`false`です。4 `true`指定すると、TiCDC は複製できないテーブルを無視します。
 

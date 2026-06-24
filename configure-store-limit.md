@@ -3,7 +3,7 @@ title: Store Limit
 summary: ストア制限の機能について学びます。
 ---
 
-# 店舗制限 {#store-limit}
+# ストア制限 {#store-limit}
 
 ストア制限はPDの機能です。様々なシナリオにおいてパフォーマンスを向上させるために、スケジューリング速度をより細かく制御できるように設計されています。
 
@@ -15,11 +15,11 @@ PDはオペレータ単位でスケジューリングを実行します。オペ
 
 上記の例では、 `replace-down-replica`演算子には次の特定の演算が含まれています。
 
-1.  ID `20` ～ `store 3`の学習者ピアを追加します。
-2.  ID `20` on `store 3`の学習者ピアを投票者に昇格します。
+1.  ID `20` ～ `store 3`のラーナーピアを追加します。
+2.  ID `20` on `store 3`のラーナーピアを投票者に昇格します。
 3.  `store 2`のピアを削除します。
 
-ストア制限は、ストアIDとトークンバケットのマッピングをメモリ内に保持することで、ストアレベルの速度制限を実現します。ここでの異なる操作は、それぞれ異なるトークンバケットに対応しています。現在、ストア制限は、学習者/ピアの追加とピアの削除という2つの操作の速度制限のみをサポートしています。つまり、各ストアには2種類のトークンバケットがあります。
+ストア制限は、ストアIDとトークンバケットのマッピングをメモリ内に保持することで、ストアレベルの速度制限を実現します。ここでの異なる操作は、それぞれ異なるトークンバケットに対応しています。現在、ストア制限は、ラーナー/ピアの追加とピアの削除という2つの操作の速度制限のみをサポートしています。つまり、各ストアには2種類のトークンバケットがあります。
 
 オペレータが生成されるたびに、そのオペレータはトークンバケットにその操作に必要なトークンが十分にあるかどうかを確認します。十分なトークンがある場合、オペレータはスケジューリングキューに追加され、対応するトークンがトークンバケットから取得されます。十分なトークンがない場合、オペレータは破棄されます。トークンバケットは一定の速度でトークンを補充するため、速度制限はこのように達成されます。
 
@@ -41,7 +41,7 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit add-peer                // Shows the 
 tiup ctl:v<CLUSTER_VERSION> pd store limit remove-peer             // Shows the speed limit of deleting peers in all stores.
 ```
 
-### 全店舗の制限を設定する {#set-limit-for-all-stores}
+### 全ストアの制限を設定する {#set-limit-for-all-stores}
 
 すべてのストアの速度制限を設定するには、次のコマンドを実行します。
 
@@ -58,7 +58,7 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tikv 5 remove-peer    // A
 tiup ctl:v<CLUSTER_VERSION> pd store limit all engine tiflash 5 remove-peer // All TiFlash stores can at most remove 5 peers per minute.
 ```
 
-### 単一店舗の制限を設定する {#set-limit-for-a-single-store}
+### 単一ストアの制限を設定する {#set-limit-for-a-single-store}
 
 単一のストアに対して速度制限を設定するには、次のコマンドを実行します。
 
@@ -68,7 +68,7 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5 add-peer            // store 1 ca
 tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
 ```
 
-### 店舗制限の原則 v2 {#principles-of-store-limit-v2}
+### ストア制限の原則 v2 {#principles-of-store-limit-v2}
 
 [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) `v2`に設定すると、ストア制限 v2 が有効になります。v2 モードでは、オペレーターの制限は TiKV スナップショットの性能に基づいて動的に調整されます。TiKV の保留中のタスクが少なくなると、PD はスケジュールするタスクを増やします。そうでない場合は、PD はノードのスケジュールするタスクを減らします。したがって、スケジュール処理を高速化するために手動で`store limit`設定する必要はありません。
 

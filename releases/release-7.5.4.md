@@ -68,7 +68,7 @@ TiDB バージョン: 7.5.4
     -   `StreamAggExec`分の`groupOffset`空の場合に TiDB が[＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)でpanicを起こす可能性がある問題を修正しました
     -   copタスク構築中にTiDBクエリをキャンセルできない問題を修正[＃55957](https://github.com/pingcap/tidb/issues/55957) @ [yibin87](https://github.com/yibin87)
     -   整数型[＃55837](https://github.com/pingcap/tidb/issues/55837) @ [windtalker](https://github.com/windtalker)の列に小さい表示幅が指定された場合、 `out of range`エラーが発生する可能性がある問題を修正しました。
-    -   ユニークインデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
+    -   一意インデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
     -   `IMPORT INTO`文[＃55970](https://github.com/pingcap/tidb/issues/55970) @ [D3Hunter](https://github.com/D3Hunter)を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました
     -   インデックス追加[＃55808](https://github.com/pingcap/tidb/issues/55808) @ [lance6716](https://github.com/lance6716)中の再試行によって発生するデータ インデックスの不整合の問題を修正しました
 

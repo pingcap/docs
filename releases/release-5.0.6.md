@@ -166,4 +166,4 @@ TiDB バージョン: 5.0.6
 
     -   Dumpling
 
-        -   複合主キーまたはユニークキー[＃29386](https://github.com/pingcap/tidb/issues/29386)を持つテーブルをダンプするときにDumplingが非常に遅くなるバグを修正しました
+        -   複合主キーまたは一意キー[＃29386](https://github.com/pingcap/tidb/issues/29386)を持つテーブルをダンプするときにDumplingが非常に遅くなるバグを修正しました

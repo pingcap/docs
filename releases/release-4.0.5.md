@@ -58,7 +58,7 @@ TiDB バージョン: 4.0.5
 
 -   PD
 
-    -   特別なエンジン（ TiFlashなど）を備えた店舗での散乱領域のサポート[＃2706](https://github.com/tikv/pd/pull/2706)
+    -   特別なエンジン（ TiFlashなど）を備えたストアでのリージョン再配置のサポート[＃2706](https://github.com/tikv/pd/pull/2706)
     -   特定のキー範囲[＃2687](https://github.com/tikv/pd/pull/2687)のリージョンスケジュールを優先するリージョンHTTP API をサポートします。
     -   リージョン分散[＃2684](https://github.com/tikv/pd/pull/2684)後のリーダー分布の改善
     -   TSOリクエスト[＃2678](https://github.com/tikv/pd/pull/2678)テストとログを追加する
@@ -167,7 +167,7 @@ TiDB バージョン: 4.0.5
     -   TiCDC
 
         -   失敗した`changefeed`削除できない問題を修正[＃782](https://github.com/pingcap/tiflow/pull/782)
-        -   ハンドルインデックス[＃787](https://github.com/pingcap/tiflow/pull/787)として1つの一意のインデックスを選択して無効なイベント`delete`修正します
+        -   ハンドルインデックス[＃787](https://github.com/pingcap/tiflow/pull/787)として1つの一意インデックスを選択して無効なイベント`delete`修正します
         -   GCセーフポイントが停止した`changefeed` [＃797](https://github.com/pingcap/tiflow/pull/797)のチェックポイントを超えて転送されるバグを修正
         -   ネットワークI/O待機によりタスクの終了がブロックされるバグを修正[＃825](https://github.com/pingcap/tiflow/pull/825)
         -   不要なデータが誤って下流に複製される可能性があるバグを修正[＃743](https://github.com/pingcap/tiflow/issues/743)

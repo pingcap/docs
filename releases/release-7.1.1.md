@@ -17,7 +17,7 @@ TiDB バージョン: 7.1.1
 
 ### 行動の変化 {#behavior-changes}
 
--   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意のインデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
 ## 改善点 {#improvements}
 
@@ -135,7 +135,7 @@ TiDB バージョン: 7.1.1
 
     -   TiDB データ移行 (DM)
 
-        -   移行対象のテーブル内のユニークインデックスに空の列が含まれている場合にDMマスターが異常終了する問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
+        -   移行対象のテーブル内の一意インデックスに空の列が含まれている場合にDMマスターが異常終了する問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 

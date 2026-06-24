@@ -42,7 +42,7 @@ TiDB バージョン: 5.0.1
     -   列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[＃24063](https://github.com/pingcap/tidb/pull/24063)
     -   スキャンに仮想列[＃24058](https://github.com/pingcap/tidb/pull/24058)が含まれている場合、MPP プランの生成を禁止します。
     -   プランキャッシュ[＃24043](https://github.com/pingcap/tidb/pull/24043)の`PointGet`と`TableDual`の誤った再利用を修正
-    -   オプティマイザがクラスタ化インデックス[＃24042](https://github.com/pingcap/tidb/pull/24042) `IndexMerge`プランを構築するときに発生するエラーを修正します
+    -   オプティマイザがクラスター化インデックス[＃24042](https://github.com/pingcap/tidb/pull/24042) `IndexMerge`プランを構築するときに発生するエラーを修正します
     -   BIT型エラーの型推論を修正[＃24027](https://github.com/pingcap/tidb/pull/24027)
     -   `PointGet`演算子が存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[＃23685](https://github.com/pingcap/tidb/pull/23685)
     -   エラー[＃24080](https://github.com/pingcap/tidb/pull/24080)によりロールバック時にDDL操作が失敗する可能性がある問題を修正

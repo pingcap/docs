@@ -115,7 +115,7 @@ CREATE INDEX person_id ON person (id);
 ALTER TABLE person ADD INDEX person_id (id);
 ```
 
-値が一意である列に対して一意のインデックスを作成するには、 `CREATE UNIQUE INDEX`ステートメントを使用します。
+値が一意である列に対して一意インデックスを作成するには、 `CREATE UNIQUE INDEX`ステートメントを使用します。
 
 ```sql
 CREATE UNIQUE INDEX person_unique_id ON person (id);

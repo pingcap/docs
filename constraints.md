@@ -40,7 +40,7 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
     Query OK, 1 row affected (0.03 sec)
 
 -   最初の`INSERT`文は、 `AUTO_INCREMENT`列目に`NULL`割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
--   2 番目の`INSERT`ステートメントは、 `age`列目が`NOT NULL`として定義されているため失敗します。
+-   2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
 -   3番目の`INSERT`文は、 `last_login`列目が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
 
 ## チェック {#check}
@@ -131,9 +131,9 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 -   列（例： `ALTER TABLE t ADD COLUMN a CHECK(a > 0)` ）の追加時に`CHECK`制約を追加することはサポートされていません。この場合、列のみが正常に追加され、TiDBは`CHECK`制約を無視し、エラーを報告しません。
 -   `ALTER TABLE t CHANGE a b int CHECK(b > 0)`使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
 
-## ユニークキー {#unique-key}
+## 一意キー {#unique-key}
 
-一意制約とは、一意のインデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
+一意制約とは、一意インデックスと主キー列内のすべての非 NULL 値が一意であることを意味します。
 
 ### 楽観的トランザクション {#optimistic-transactions}
 
@@ -212,7 +212,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
 ### 悲観的トランザクション {#pessimistic-transactions}
 
-悲観的トランザクションでは、一意のインデックスの挿入または更新を必要とする SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
+悲観的トランザクションでは、一意インデックスの挿入または更新を必要とする SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -304,7 +304,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     >
     > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`ステートメントの実行時にTiDBはユニークインデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`ステートメントでエラーが報告されます。
+    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`ステートメントの実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`ステートメントでエラーが報告されます。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;

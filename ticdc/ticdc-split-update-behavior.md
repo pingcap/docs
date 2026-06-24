@@ -76,9 +76,9 @@ UPDATE t SET a = 3 WHERE a = 2;
 
 ### 単一の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-a-single-code-update-code-change}
 
-v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意のインデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [＃9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
+v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意インデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [＃9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
 
-この変更は主に、CSVおよびAVROプロトコル使用時にTiCDCがデフォルトで新しい値のみを出力し、古い値は出力しないという問題に対処します。この問題により、主キーまたは非NULLの一意のインデックス値が変更された場合、コンシューマーは新しい値しか受信できず、変更前の値を処理する（例えば、古い値を削除する）ことができなくなります。次のSQLを例に挙げましょう。
+この変更は主に、CSVおよびAVROプロトコル使用時にTiCDCがデフォルトで新しい値のみを出力し、古い値は出力しないという問題に対処します。この問題により、主キーまたは非NULLの一意インデックス値が変更された場合、コンシューマーは新しい値しか受信できず、変更前の値を処理する（例えば、古い値を削除する）ことができなくなります。次のSQLを例に挙げましょう。
 
 ```sql
 CREATE TABLE t (a INT PRIMARY KEY, b INT);
@@ -90,7 +90,7 @@ UPDATE t SET a = 2 WHERE a = 1;
 
 ### 複数の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-multiple-code-update-code-changes}
 
-v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意のインデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [＃9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
+v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [＃9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
 
 この変更は主に、Kafkaシンクまたはその他のシンクからリレーショナルデータベースへのデータ変更の書き込み時、あるいは同様の操作を実行する際にコンシューマーが遭遇する可能性のある、主キーまたは一意キーの競合に関する潜在的な問題に対処します。この問題は、TiCDCが受信した`UPDATE`イベントの順序が誤っている可能性があることに起因します。
 
@@ -116,7 +116,7 @@ COMMIT;
 
 v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 
--   `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意のインデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
+-   `output-raw-change-event = false`設定すると、主キーまたは null 以外の一意インデックス値が`UPDATE`イベントで変更された場合、TiCDC はイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`イベントの前の`DELETE`イベントのシーケンスに従うようにします。
 -   `output-raw-change-event = true`設定すると、TiCDCは`UPDATE`イベントを分割せず、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](/ticdc/ticdc-split-update-behavior.md#split-primary-or-unique-key-update-events-for-non-mysql-sinks)で説明した問題への対処はコンシューマー側で行います。そうしないと、データの不整合が発生するリスクがあります。テーブルの主キーがクラスター化インデックスである場合、主キーへの更新はTiDB内で依然として`DELETE`つと`INSERT`イベントに分割されますが、この動作は`output-raw-change-event`パラメータの影響を受けません。
 
 > **注記**

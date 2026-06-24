@@ -126,7 +126,7 @@ show warnings;
 | `raftstore.split-region-check-tick-interval`              | リージョン分割が必要かどうかを確認する時間間隔                                                                                                                    |
 | `raftstore.region-split-check-diff`                       | リージョン分割前にリージョンデータが超過できる最大値                                                                                                                 |
 | `raftstore.pd-heartbeat-tick-interval`                    | PDへのリージョンのハートビートがトリガーされる時間間隔                                                                                                               |
-| `raftstore.pd-store-heartbeat-tick-interval`              | 店舗のPDへのハートビートがトリガーされる時間間隔                                                                                                                  |
+| `raftstore.pd-store-heartbeat-tick-interval`              | ストアのPDへのハートビートがトリガーされる時間間隔                                                                                                                  |
 | `raftstore.snap-mgr-gc-tick-interval`                     | 期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔                                                                                                        |
 | `raftstore.snap-gc-timeout`                               | スナップショットファイルが保存される最長時間                                                                                                                     |
 | `raftstore.lock-cf-compact-interval`                      | TiKVがロックカラムファミリーの手動圧縮をトリガーする時間間隔                                                                                                           |
@@ -229,7 +229,7 @@ show warnings;
 | `split.byte-threshold`                                    | リージョンで`load-base-split`実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
 | `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
 | `split.split-balance-score`                               | `load-base-split`というパラメータは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
-| `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後の地域間訪問数が少なくなります。                                                                                 |
+| `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
 | `cdc.min-ts-interval`                                     | 解決されたTSが転送される時間間隔                                                                                                                          |
 | `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値のエントリが占有するメモリの上限                                                                                                                  |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占有するメモリの上限                                                                                                                  |
@@ -275,15 +275,15 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.max-pending-peer-count`                    | 単一ストア内の保留中のピアの最大数を決定します                                    |
 | `schedule.max-store-down-time`                       | PDが切断されたストアを回復できないと判断するまでのダウンタイム                           |
 | `schedule.max-store-preparing-time`                  | ストアがオンラインになるまでの最大待ち時間を制御します                                |
-| `schedule.leader-schedule-policy`                    | Leaderのスケジュールポリシーを決定する                                     |
-| `schedule.leader-schedule-limit`                     | 同時に実行されるLeaderスケジュールタスクの数                                  |
+| `schedule.leader-schedule-policy`                    | リーダーのスケジュールポリシーを決定する                                     |
+| `schedule.leader-schedule-limit`                     | 同時に実行されるリーダースケジュールタスクの数                                  |
 | `schedule.region-schedule-limit`                     | 同時に実行されるリージョンスケジュールタスクの数                                   |
 | `schedule.replica-schedule-limit`                    | 同時に実行されるレプリカスケジュールタスクの数                                    |
 | `schedule.merge-schedule-limit`                      | 同時に実行される`Region Merge`スケジュールタスクの数                          |
 | `schedule.hot-region-schedule-limit`                 | 同時に実行されるホットリージョンスケジューリングタスクの数                              |
 | `schedule.hot-region-cache-hits-threshold`           | リージョンがホットスポットとみなされる閾値を決定します                                |
-| `schedule.high-space-ratio`                          | 店舗の収容能力が十分である閾値比率                                          |
-| `schedule.low-space-ratio`                           | 店舗の収容能力が不足する閾値比率                                           |
+| `schedule.high-space-ratio`                          | ストアの収容能力が十分である閾値比率                                          |
+| `schedule.low-space-ratio`                           | ストアの収容能力が不足する閾値比率                                           |
 | `schedule.tolerant-size-ratio`                       | `balance`バッファサイズを制御します                                     |
 | `schedule.enable-remove-down-replica`                | `DownReplica`自動的に削除する機能を有効にするかどうかを決定します                    |
 | `schedule.enable-replace-offline-replica`            | `OfflineReplica`を移行する機能を有効にするかどうかを決定します                    |
@@ -301,7 +301,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.hot-regions-write-interval`                | PDがホットリージョン情報を保存する時間間隔                                     |
 | `schedule.hot-regions-reserved-days`                 | ホットリージョン情報が保持される日数を指定します                                   |
 | `schedule.max-movable-hot-peer-size`                 | ホットリージョンスケジュールにスケジュールできる最大リージョンサイズを制御します。                  |
-| `schedule.store-limit-version`                       | [店舗制限](/configure-store-limit.md)のバージョンを制御します              |
+| `schedule.store-limit-version`                       | [ストア制限](/configure-store-limit.md)のバージョンを制御します              |
 | `schedule.patrol-region-worker-count`                | リージョンのヘルス状態を検査するときにチェッカーによって作成される同時オペレータの数を制御します           |
 | `replication.max-replicas`                           | レプリカの最大数を設定します                                             |
 | `replication.location-labels`                        | TiKVクラスタのトポロジ情報                                            |
@@ -372,7 +372,7 @@ select @@tidb_slow_log_threshold;
 | `instance.tidb_force_priority`                          | `tidb_force_priority`                        | この TiDB インスタンスから送信されるステートメントの優先順位を指定します                                               |
 | `instance.max_connections`                              | `max_connections`                            | この TiDB インスタンスに許可される同時接続の最大数を指定します                                                    |
 | `instance.tidb_enable_ddl`                              | `tidb_enable_ddl`                            | この TiDB インスタンスが DDL 所有者になれるかどうかを制御します                                                 |
-| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | ユニークインデックスのユニーク制約チェックを、このインデックスが次にロックを必要とするときまで延期するか、トランザクションがコミットされるときまで延期するかを制御します。 |
+| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | 一意インデックスのユニーク制約チェックを、このインデックスが次にロックを必要とするときまで延期するか、トランザクションがコミットされるときまで延期するかを制御します。 |
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 

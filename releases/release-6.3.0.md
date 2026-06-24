@@ -357,7 +357,7 @@ TiDBバージョン: 6.3.0-DMR
     -   JSON集計関数で単精度浮動小数点数が使用できない問題を修正 [#37287](https://github.com/pingcap/tidb/issues/37287) @[YangKeao](https://github.com/YangKeao)
     -   `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正 [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `castRealAsTime`式の結果が MySQL と一致しない問題を修正します [#37462](https://github.com/pingcap/tidb/issues/37462) @[mengxin9014](https://github.com/mengxin9014)
-    -   悲観的DML 操作が非一意のインデックス キーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
+    -   悲観的DML 操作が非一意インデックス キーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     -   `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
     -   DML実行エンジンを使用した`EXPLAIN ANALYZE`ステートメントがトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     -   UPDATE文が場合によっては誤って投影を削除し、 `Can't find column`エラー [#37568](https://github.com/pingcap/tidb/issues/37568)が発生する問題を修正しました。@[AilinKid](https://github.com/AilinKid)

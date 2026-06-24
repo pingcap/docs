@@ -404,7 +404,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   極端なケースで、悲観的トランザクションの最初のステートメントが再試行されるときに、このトランザクションのロックを解決するとトランザクションの正確性に影響する可能性がある問題を修正しました[＃42937](https://github.com/pingcap/tidb/issues/42937) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   GC がロック[＃43243](https://github.com/pingcap/tidb/issues/43243) @ [MyonKeminta](https://github.com/MyonKeminta)を解決するときに、まれに悲観的トランザクションの残余悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。
     -   `LOCK`から`PUT`への最適化により、特定のクエリ[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)で重複データが返される問題を修正しました。
-    -   データが変更された場合、ユニークインデックスのロック動作がデータが変更されていない場合のロック動作と一致しない問題を修正しました[＃36438](https://github.com/pingcap/tidb/issues/36438) @ [zyguan](https://github.com/zyguan)
+    -   データが変更された場合、一意インデックスのロック動作がデータが変更されていない場合のロック動作と一致しない問題を修正しました[＃36438](https://github.com/pingcap/tidb/issues/36438) @ [zyguan](https://github.com/zyguan)
 
 -   TiKV
 

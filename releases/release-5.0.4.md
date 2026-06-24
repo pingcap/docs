@@ -31,7 +31,7 @@ TiDB バージョン: 5.0.4
         -   `SQL_MODE` 「NO_ZERO_IN_DATE」の場合に無効なデフォルト日付を使用してもエラーが報告されない問題を修正しました[＃26766](https://github.com/pingcap/tidb/issues/26766)
         -   プレフィックスインデックス[＃26029](https://github.com/pingcap/tidb/issues/26029)のクエリ範囲に関するバグを修正
         -   `LOAD DATA`文が非 UTF8 データを異常にインポートする可能性がある問題を修正[＃25979](https://github.com/pingcap/tidb/issues/25979)
-        -   `insert ignore on duplicate update`セカンダリインデックスにプライマリキーと同じ列がある場合に間違ったデータが挿入される可能性がある問題を修正[＃25809](https://github.com/pingcap/tidb/issues/25809)
+        -   `insert ignore on duplicate update`セカンダリインデックスに主キーと同じ列がある場合に間違ったデータが挿入される可能性がある問題を修正[＃25809](https://github.com/pingcap/tidb/issues/25809)
         -   パーティションテーブルにクラスター化インデックスがある場合に間違ったデータが挿入される可能性が`insert ignore duplicate update`問題を修正しました[＃25846](https://github.com/pingcap/tidb/issues/25846)
         -   ポイント取得またはバッチポイント取得[＃24562](https://github.com/pingcap/tidb/issues/24562)でキーが`ENUM`型の場合にクエリ結果が間違っている可能性がある問題を修正しました
         -   `BIT`型の値を[＃23479](https://github.com/pingcap/tidb/issues/23479)割ったときに発生する誤った結果を修正しました

@@ -95,7 +95,7 @@ TiDB バージョン: 5.1.4
     -   設定`resource-metering.enabled`が動作しないバグを修正[＃11235](https://github.com/tikv/tikv/issues/11235)
     -   `resolved_ts` [＃10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
     -   書き込みフローが低い場合に「GC が動作できません」という誤った警告が報告される問題を修正[＃9910](https://github.com/tikv/tikv/issues/9910)
-    -   tikv-ctlが正しい地域関連情報を返すことができないバグを修正[＃11393](https://github.com/tikv/tikv/issues/11393)
+    -   tikv-ctlが正しいリージョン関連情報を返すことができないバグを修正[＃11393](https://github.com/tikv/tikv/issues/11393)
     -   TiKVノードがダウンすると解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正しました
     -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正しました[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正しました[＃11440](https://github.com/tikv/tikv/issues/11440)

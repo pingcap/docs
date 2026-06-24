@@ -96,8 +96,8 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 ### 行動の変化 {#behavior-changes}
 
 -   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
--   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型自動増分ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)サポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意のインデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)参照してください。
+-   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型自動増分ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)をサポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意インデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -218,7 +218,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブル[＃50810](https://github.com/pingcap/tidb/issues/50810) @ [Defined2014](https://github.com/Defined2014)が返される可能性がある問題を修正しました。
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
     -   `IFNULL`関数によって返される型が MySQL [＃51765](https://github.com/pingcap/tidb/issues/51765) @ [YangKeao](https://github.com/YangKeao)と一致しない問題を修正しました
-    -   ユニークインデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
 
 -   TiKV
 

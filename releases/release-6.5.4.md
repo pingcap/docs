@@ -18,7 +18,7 @@ TiDB バージョン: 6.5.4
 
 ### 行動の変化 {#behavior-changes}
 
--   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたはNULL以外の一意のインデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
+-   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 
 ## 改善点 {#improvements}
 

@@ -252,7 +252,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
 | `enable_sync_point`       | `BOOLEAN`型。2 `sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
 | `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
-| `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意のインデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
+| `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
 | `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
 | `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |

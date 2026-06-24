@@ -61,7 +61,7 @@ TiDB バージョン: 5.1.0
 
 -   アップグレード前に、TiDB構成の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンでpanicが発生しました」というエラーが発生しますが、このエラーはアップグレード自体には影響しません。
 -   TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.13.7からgo1.16.4にアップグレードしてください。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
--   TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスタ化インデックスを持つテーブルを作成しないようにしてください。
+-   TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 -   TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
 -   バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
 -   TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` } を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
@@ -294,13 +294,13 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   SSTファイルをバッチ処理で取り込んだ後に、多数のリージョンが空になる問題を修正しました [#964](https://github.com/pingcap/br/issues/964)
     -   ファイル辞書ファイルが破損した後にTiKVが起動できないバグを修正しました [#9886](https://github.com/tikv/tikv/issues/9886)
     -   古い値の読み取りによって発生する TiCDC の OOM 問題を修正[#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
-    -   照合順序が`latin1_bin`の場合に、クラスタ化された主キー列のセカンダリ インデックスに空の値が含まれる問題を修正します [#24548](https://github.com/pingcap/tidb/issues/24548)
+    -   照合順序が`latin1_bin`の場合に、クラスター化された主キー列のセカンダリ インデックスに空の値が含まれる問題を修正します [#24548](https://github.com/pingcap/tidb/issues/24548)
     -   TiKVがpanic発生時にコアダンプファイルを生成できるようにする`abort-on-panic`設定を追加します。ユーザーはコアダンプを有効にするために環境を正しく構成する必要があります [#10216](https://github.com/tikv/tikv/pull/10216)
     -   TiKVがビジー状態でない場合に発生する`point get`クエリのパフォーマンス低下問題を修正 [#10046](https://github.com/tikv/tikv/issues/10046)
 
 -   PD
 
-    -   店舗数が多い場合にPDLeaderの再選が遅くなる問題を修正しました [#3697](https://github.com/tikv/pd/issues/3697)
+    -   ストア数が多い場合にPDリーダーの再選が遅くなる問題を修正しました [#3697](https://github.com/tikv/pd/issues/3697)
 
     -   存在しないストアから退去リーダースケジューラを削除する際に発生するpanic問題を修正 [#3660](https://github.com/tikv/pd/issues/3660)
 

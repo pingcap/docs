@@ -65,12 +65,12 @@ summary: TiDBの機能概要について学びましょう。
 | [見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`CHECK`制約](/constraints.md#check)                                                          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
-| [一意のインデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [整数型の`PRIMARY KEY`に対するクラスタ化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [複合キーまたは非整数キーに対するクラスタ化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [一意インデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [整数型の`PRIMARY KEY`に対するクラスター化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [複合キーまたは非整数キーに対するクラスター化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [外部キー](/foreign-key.md)                                                                     |  Y  |  E  |  E  |  E  |  N  |  N  |  N  |
-| [TiFlashの遅延実現](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
+| [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                           |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [ベクトルインデックス](/ai/reference/vector-search-index.md)                                          |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 
@@ -145,7 +145,7 @@ summary: TiDBの機能概要について学びましょう。
 | [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [自動インクリメント](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
-| [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [AUTO_RANDOM](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [TTL（Time to Live：生きる時間）](/time-to-live.md)                                                                              |  Y  |  Y  |  Y  |  Y  |   E   |  N  |  N  |
 | [DDLアルゴリズムのアサーション](/sql-statements/sql-statement-alter-table.md)                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | マルチスキーマの変更：列の追加                                                                                                          |  Y  |  Y  |  Y  |  Y  |   Y   |  E  |  E  |

@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   ヒストグラム[＃10573](https://github.com/pingcap/tidb/pull/10573)の`dump`相関`load`サポート
 
 -   実行エンジン
-    -   `batchChecker` [＃10370](https://github.com/pingcap/tidb/pull/10370)で重複行をフェッチするときに、一意のインデックスを持つ仮想列を適切に処理します。
+    -   `batchChecker` [＃10370](https://github.com/pingcap/tidb/pull/10370)で重複行をフェッチするときに、一意インデックスを持つ仮想列を適切に処理します。
     -   `CHAR`列[＃10124](https://github.com/pingcap/tidb/pull/10124)スキャン範囲計算の問題を修正
     -   `PointGet`負の数を誤って処理する問題を修正[＃10113](https://github.com/pingcap/tidb/pull/10113)
     -   同じ名前の関数を`Window`マージして実行効率を向上させる[＃9866](https://github.com/pingcap/tidb/pull/9866)
@@ -64,7 +64,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 -   リーダーの優先順位が有効にならない問題を修正[＃1533](https://github.com/pingcap/pd/pull/1533)
 -   `ScanRegions` [＃1535](https://github.com/pingcap/pd/pull/1535)の gRPC インターフェースを追加する
 -   プッシュ演算子をアクティブにする[＃1536](https://github.com/pingcap/pd/pull/1536)
--   各店舗ごとにオペレーターの速度を個別に制御するための店舗制限機構を追加[＃1474](https://github.com/pingcap/pd/pull/1474)
+-   各ストアごとにオペレーターの速度を個別に制御するためのストア制限機構を追加[＃1474](https://github.com/pingcap/pd/pull/1474)
 -   不一致の`Config`ステータス[＃1476](https://github.com/pingcap/pd/pull/1476)の問題を修正
 
 ## TiKV {#tikv}

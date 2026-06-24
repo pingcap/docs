@@ -14,7 +14,7 @@ TiDB バージョン: 7.1.6
 ## 互換性の変更 {#compatibility-changes}
 
 -   [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-7.1/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を 2048 に設定して、過剰な履歴タスク[＃55711](https://github.com/pingcap/tidb/issues/55711) @ [joccau](https://github.com/joccau)による OOM の問題を防止します。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意のインデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.1.6以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`件目のイベントを`DELETE`目と`INSERT`件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、その結果、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があることで発生するダウンストリームデータの不整合の問題を解決します。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.1/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) [＃10918](https://github.com/pingcap/tiflow/issues/10918)してください[リデジュ](https://github.com/lidezhu)
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.1.6以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`件目のイベントを`DELETE`目と`INSERT`件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、その結果、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があることで発生するダウンストリームデータの不整合の問題を解決します。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.1/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) [＃10918](https://github.com/pingcap/tiflow/issues/10918)してください[リデジュ](https://github.com/lidezhu)
 -   TiDB Lightning `strict-format`を使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @ [lance6716](https://github.com/lance6716)
 -   TiKV構成項目[`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)のスコープを変更します。
 
@@ -73,7 +73,7 @@ TiDB バージョン: 7.1.6
 
 -   TiDB
 
-    -   一意のインデックス[＃52914](https://github.com/pingcap/tidb/issues/52914) @ [wjhuang2016](https://github.com/wjhuang2016)を追加するときに同時 DML 操作によって発生するデータ インデックスの不一致の問題を修正しました。
+    -   一意インデックス[＃52914](https://github.com/pingcap/tidb/issues/52914) @ [wjhuang2016](https://github.com/wjhuang2016)を追加するときに同時 DML 操作によって発生するデータ インデックスの不一致の問題を修正しました。
     -   `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[＃50235](https://github.com/pingcap/tidb/issues/50235) @ [qw4990](https://github.com/qw4990)
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)
     -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックス[＃54897](https://github.com/pingcap/tidb/issues/54897) @ [tangenta](https://github.com/tangenta)の不整合が発生する可能性がある問題を修正しました。
@@ -97,7 +97,7 @@ TiDB バージョン: 7.1.6
     -   TiDBが接続を閉じるときにログにエラーを報告する場合がある問題を修正[＃53689](https://github.com/pingcap/tidb/issues/53689) @ [jackysp](https://github.com/jackysp)
     -   場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される可能性がある問題を修正[＃53779](https://github.com/pingcap/tidb/issues/53779) @ [tangenta](https://github.com/tangenta)
     -   ビュー定義[＃54343](https://github.com/pingcap/tidb/issues/54343) @ [lance6716](https://github.com/lance6716)でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。
-    -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [hawkingrei](https://github.com/hawkingrei)でユニークインデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
+    -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [hawkingrei](https://github.com/hawkingrei)で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
     -   クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`機能しない問題を修正[＃42093](https://github.com/pingcap/tidb/issues/42093) @ [qw4990](https://github.com/qw4990)
     -   オプティマイザーヒント[＃53767](https://github.com/pingcap/tidb/issues/53767) @ [hawkingrei](https://github.com/hawkingrei)使用時に誤った警告情報が表示される問題を修正しました
     -   同期負荷QPSモニタリングメトリックが正しくない問題を修正[＃53558](https://github.com/pingcap/tidb/issues/53558) @ [hawkingrei](https://github.com/hawkingrei)
@@ -138,7 +138,7 @@ TiDB バージョン: 7.1.6
     -   TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log [＃52657](https://github.com/pingcap/tidb/issues/52657) @ [hawkingrei](https://github.com/hawkingrei)を出力問題を修正しました。
     -   最初の引数が`month`で、2番目の引数が負の[＃54908](https://github.com/pingcap/tidb/issues/54908) @ [xzhangxian1008](https://github.com/xzhangxian1008)場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。
     -   `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが[＃52601](https://github.com/pingcap/tidb/issues/52601) @ [hawkingrei](https://github.com/hawkingrei)の制限を超えると、TiDB がクラッシュする可能性がある問題を修正しました。
-    -   ユニークインデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
+    -   一意インデックス[＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)を追加するときに`duplicate entry`発生する可能性がある問題を修正
     -   情報スキーマキャッシュミス[＃53428](https://github.com/pingcap/tidb/issues/53428) @ [crazycs520](https://github.com/crazycs520)により、古い読み取りのクエリレイテンシーが増加する問題を修正しました。
     -   GlobalStatsの`Distinct_count`情報が正しくない可能性がある問題を修正しました[＃53752](https://github.com/pingcap/tidb/issues/53752) @ [hawkingrei](https://github.com/hawkingrei)
     -   `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[＃53726](https://github.com/pingcap/tidb/issues/53726) @ [hawkingrei](https://github.com/hawkingrei)

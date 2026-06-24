@@ -91,7 +91,7 @@ TiDBバージョン：5.2.4
     -   スロークエリログが正常にログを出力できず、メモリを過剰に消費する可能性がある問題を修正しました [#32656](https://github.com/pingcap/tidb/issues/32656)
     -   NATURAL JOINの結果に予期しない列が含まれる可能性がある問題を修正しました [#29481](https://github.com/pingcap/tidb/issues/29481)
     -   `ORDER BY`と`LIMIT`を 1 つのステートメントで一緒に使用すると、プレフィックス列インデックスを使用してデータをクエリする場合に誤った結果が出力される可能性がある問題を修正しました [#29711](https://github.com/pingcap/tidb/issues/29711)
-    -   楽観的トランザクションの再試行時に、DOUBLE型の自動インクリメント列が変更される可能性がある問題を修正しました [#29892](https://github.com/pingcap/tidb/issues/29892)
+    -   楽観的トランザクションの再試行時に、DOUBLE型のAUTO_INCREMENT列が変更される可能性がある問題を修正しました [#29892](https://github.com/pingcap/tidb/issues/29892)
     -   STR_TO_DATE関数がマイクロ秒部分の先頭のゼロを正しく処理できない問題を修正しました [#30078](https://github.com/pingcap/tidb/issues/30078)
     -   TiFlashがまだ空の範囲のテーブル読み取りをサポートしていないにもかかわらず、TiDBが空の範囲のテーブルをスキャンする際に誤った結果を取得する問題を修正します。 [#33083](https://github.com/pingcap/tidb/issues/33083)
 
@@ -108,7 +108,7 @@ TiDBバージョン：5.2.4
     -   遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#11526](https://github.com/tikv/tikv/issues/11526)
     -   TiKVの動作停止後に解決済みTSのレイテンシーが増加する問題を修正 [#11351](https://github.com/tikv/tikv/issues/11351)
     -   極端な状況下でリージョンマージ、ConfChange、スナップショットが同時に発生した際に発生するpanic問題を修正します [#11475](https://github.com/tikv/tikv/issues/11475)
-    -   tikv-ctlが正しい地域関連情報を返せないバグを修正 [#11393](https://github.com/tikv/tikv/issues/11393)
+    -   tikv-ctlが正しいリージョン関連情報を返せないバグを修正 [#11393](https://github.com/tikv/tikv/issues/11393)
     -   小数除算の結果がゼロの場合に負の符号が発生する問題を修正 [#29586](https://github.com/pingcap/tidb/issues/29586)
     -   悲観的トランザクションモードでプリライト要求を再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
     -   統計スレッドのデータ監視によって引き起こされるメモリリークを修正 [#11195](https://github.com/tikv/tikv/issues/11195)

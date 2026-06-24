@@ -87,7 +87,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/derive-topn-from-window.md)を参照してください。
 
--   Fast Online DDL によるユニークインデックス作成のサポート [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta)
+-   Fast Online DDL による一意インデックス作成のサポート [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta)
 
     TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリ インデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
 
@@ -233,9 +233,9 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
--   TiDBは、自動インクリメント列がインデックスでなければならないという制約を削除します [#40580](https://github.com/pingcap/tidb/issues/40580) @[tiancaiamao](https://github.com/tiancaiamao)
+-   TiDBは、AUTO_INCREMENT列にインデックスが必要であるという制約を削除します [#40580](https://github.com/pingcap/tidb/issues/40580) @[tiancaiamao](https://github.com/tiancaiamao)
 
-    バージョン 7.0.0 より前は、TiDB の動作は MySQL と一貫しており、自動インクリメント列はインデックスまたはインデックスプレフィックスである必要がありました。バージョン 7.0.0 以降、TiDB は自動インクリメント列がインデックスまたはインデックスプレフィックスである必要があるという制約を撤廃しました。これにより、テーブルの主キーをより柔軟に定義し、自動インクリメント列を使用してソートやページネーションをより簡単に実装できるようになりました。また、自動インクリメント列によって引き起こされる書き込みホットスポットの問題も回避され、クラスタ化インデックスを持つテーブルを使用することでクエリのパフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
+    バージョン 7.0.0 より前は、TiDB の動作は MySQL と一貫しており、AUTO_INCREMENT列にはインデックスまたはインデックスプレフィックスが必要でした。バージョン 7.0.0 以降、TiDB はAUTO_INCREMENT列にインデックスまたはインデックスプレフィックスが必要であるという制約を撤廃しました。これにより、テーブルの主キーをより柔軟に定義し、AUTO_INCREMENT列を使用してソートやページネーションをより簡単に実装できるようになりました。また、AUTO_INCREMENT列によって引き起こされる書き込みホットスポットの問題も回避され、クラスター化インデックスを持つテーブルを使用することでクエリのパフォーマンスが向上します。新しいリリースでは、次の構文を使用してテーブルを作成できます。
 
     ```sql
     CREATE TABLE test1 (
@@ -389,7 +389,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   アップグレード後に一部のシステム変数のデフォルト値が変更されない問題を修正 [#41423](https://github.com/pingcap/tidb/issues/41423) @[crazycs520](https://github.com/crazycs520)
     -   インデックス追加に関連するコプロセッサー要求タイプが不明として表示される問題を修正 [#41400](https://github.com/pingcap/tidb/issues/41400) @[tangenta](https://github.com/tangenta)
     -   インデックスを追加する際に「PessimisticLockNotFound」が返される問題を修正 [#41515](https://github.com/pingcap/tidb/issues/41515) @[tangenta](https://github.com/tangenta)
-    -   一意のインデックスを追加する際に誤って`found duplicate key`を返す問題を修正 [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
+    -   一意インデックスを追加する際に誤って`found duplicate key`を返す問題を修正 [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
     -   インデックス追加時のpanic問題を修正 [#41880](https://github.com/pingcap/tidb/issues/41880) @[tangenta](https://github.com/tangenta)
     -   TiFlashが実行中に生成された列に対してエラーを報告する問題を修正 [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     -   TiDBが時間型の場合に統計情報を正しく取得できない可能性がある問題を修正しました [#41938](https://github.com/pingcap/tidb/issues/41938) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)

@@ -449,12 +449,12 @@ TiDB バージョン: 8.0.0
     -   `tidb_gogc_tuner_threshold`変数が変更された後、 `tidb_server_memory_limit`システム変数が適切に調整されない問題を修正 [#48180](https://github.com/pingcap/tidb/issues/48180) @[hawkingrei](https://github.com/hawkingrei)
     -   クエリに JOIN 操作が含まれる場合に`index out of range`エラーが発生する可能性がある問題を修正 [#42588](https://github.com/pingcap/tidb/issues/42588) @[AilinKid](https://github.com/AilinKid)
     -   列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正します[#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
-    -   TiFlash の遅延実体化処理で関連する列が処理されると、間違った結果が返される場合がある問題を修正[#49241](https://github.com/pingcap/tidb/issues/49241) [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   TiFlash の遅延マテリアライゼーション処理で関連する列が処理されると、間違った結果が返される場合がある問題を修正[#49241](https://github.com/pingcap/tidb/issues/49241) [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `LIKE()`関数がバイナリ照合順序入力を処理する際に誤った結果を返す可能性がある問題を修正しました [#50393](https://github.com/pingcap/tidb/issues/50393) @[yibin87](https://github.com/yibin87)
     -   `JSON_LENGTH()`関数が、2 番目のパラメータが`NULL`の場合に誤った結果を返す問題を修正しました [#50931](https://github.com/pingcap/tidb/issues/50931) @[SeaRise](https://github.com/SeaRise)
     -   `CAST(AS DATETIME)`が特定の状況下で時間精度を失う可能性がある問題を修正 [#49555](https://github.com/pingcap/tidb/issues/49555) @[SeaRise](https://github.com/SeaRise)
     -   テーブルにクラスター化インデックスがある場合、並列処理`Apply`が誤った結果を生成する可能性がある問題を修正 [#51372](https://github.com/pingcap/tidb/issues/51372) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   プライマリキーのタイプが`ALTER TABLE ... COMPACT TIFLASH REPLICA` `VARCHAR`が正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
+    -   `ALTER TABLE ... COMPACT TIFLASH REPLICA`が主キーの型が`VARCHAR`の場合に正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
     -   `NULL`ステートメントを使用してパーティション テーブルを交換する際に`DEFAULT NULL`属性の`EXCHANGE PARTITION`値のチェックが正しく行われない問題を修正しました。 [#47167](https://github.com/pingcap/tidb/issues/47167) @[jiyfhust](https://github.com/jiyfhust)
     -   パーティションテーブルの定義が、UTF8以外の文字セットを使用した場合に誤った動作を引き起こす可能性がある問題を修正しました [#49251](https://github.com/pingcap/tidb/issues/49251) @[YangKeao](https://github.com/YangKeao)
     -   一部のシステム変数について、 `INFORMATION_SCHEMA.VARIABLES_INFO`テーブルに誤ったデフォルト値が表示される問題を修正しました [#49461](https://github.com/pingcap/tidb/issues/49461) @[jiyfhust](https://github.com/jiyfhust)
@@ -539,7 +539,7 @@ TiDB バージョン: 8.0.0
 
     -   TiDBデータ移行（DM）
 
-        -   アップストリームのプライマリキーがバイナリタイプの場合にデータが失われる問題を修正 [#10672](https://github.com/pingcap/tiflow/issues/10672) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   アップストリームの主キーがバイナリ型の場合にデータが失われる問題を修正 [#10672](https://github.com/pingcap/tiflow/issues/10672) @[GMHDBJD](https://github.com/GMHDBJD)
 
     -   TiDB Lightning
 

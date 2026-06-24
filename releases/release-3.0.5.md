@@ -43,7 +43,7 @@ TiDB Ansible バージョン: 3.0.5
     -   一部のKVサービスへの接続が遅いため、TiDBの応答速度が比較的遅くなる問題を修正しました[＃12814](https://github.com/pingcap/tidb/pull/12814)
 -   DDL
     -   `Create Table`操作で Set 列[＃12267](https://github.com/pingcap/tidb/pull/12267) Int 型のデフォルト値が正しく設定されない問題を修正しました。
-    -   `Create Table`文[＃12463](https://github.com/pingcap/tidb/pull/12463)で一意のインデックスを作成するときに複数の`unique`をサポートする
+    -   `Create Table`文[＃12463](https://github.com/pingcap/tidb/pull/12463)で一意インデックスを作成するときに複数の`unique`をサポートする
     -   `Alter Table` [＃12489](https://github.com/pingcap/tidb/pull/12489)を使用してビット型の列を追加するときに、既存の行にこの列のデフォルト値を設定するとエラーが発生する可能性がある問題を修正しました。
     -   範囲パーティションテーブルで日付または日時型の列をパーティションキーとして使用している場合にパーティションを追加できない問題を修正[＃12815](https://github.com/pingcap/tidb/pull/12815)
     -   日付または日時型の列をパーティション キーとして持つ範囲パーティションテーブルの場合、テーブルの作成時またはパーティションの追加時に、パーティション タイプとパーティション キー タイプの一貫性をチェックする機能をサポート[＃12792](https://github.com/pingcap/tidb/pull/12792)
@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.0.5
 
 -   ストレージ
     -   悲観的トランザクションの新機能を追加: トランザクションクリーンアップインターフェースは、TTLが期限切れのロックのクリーンアップのみをサポートします[＃5589](https://github.com/tikv/tikv/pull/5589)
-    -   トランザクションのロールバックでプライマリキーが折りたたまれる問題を修正[＃5646](https://github.com/tikv/tikv/pull/5646) , [＃5671](https://github.com/tikv/tikv/pull/5671)
+    -   トランザクションのロールバックで主キーが折りたたまれる問題を修正[＃5646](https://github.com/tikv/tikv/pull/5646) , [＃5671](https://github.com/tikv/tikv/pull/5671)
     -   悲観的ロック下でポイントクエリが以前のバージョンのデータを返す可能性がある問題を修正[＃5634](https://github.com/tikv/tikv/pull/5634)
 -   Raftstore
     -   Raftstoreのメッセージフラッシュ操作を減らしてパフォーマンスを向上させ、CPU 使用率を削減します[＃5617](https://github.com/tikv/tikv/pull/5617)
