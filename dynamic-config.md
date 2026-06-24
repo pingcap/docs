@@ -372,7 +372,7 @@ select @@tidb_slow_log_threshold;
 | `instance.tidb_force_priority`                          | `tidb_force_priority`                        | この TiDB インスタンスから送信されるステートメントの優先順位を指定します                                               |
 | `instance.max_connections`                              | `max_connections`                            | この TiDB インスタンスに許可される同時接続の最大数を指定します                                                    |
 | `instance.tidb_enable_ddl`                              | `tidb_enable_ddl`                            | この TiDB インスタンスが DDL 所有者になれるかどうかを制御します                                                 |
-| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | ユニークインデックスのユニーク制約チェックを、このインデックスが次にロックを必要とするときまで延期するか、トランザクションがコミットされるときまで延期するかを制御します。 |
+| `pessimistic-txn.constraint-check-in-place-pessimistic` | `tidb_constraint_check_in_place_pessimistic` | 一意インデックスのユニーク制約チェックを、このインデックスが次にロックを必要とするときまで延期するか、トランザクションがコミットされるときまで延期するかを制御します。 |
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 

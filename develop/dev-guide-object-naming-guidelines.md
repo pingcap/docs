@@ -42,7 +42,7 @@ aliases: ['/ja/tidb/stable/dev-guide-object-naming-guidelines/','/ja/tidbcloud/d
 ## インデックスの命名規則 {#index-naming-convention}
 
 -   主キーインデックス: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
--   ユニークインデックス: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
+-   一意インデックス: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
 -   共通インデックス: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
 -   複数の単語を含むカラム名: 意味のある略語を使用してください
 

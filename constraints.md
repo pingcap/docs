@@ -304,7 +304,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     >
     > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
-    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`ステートメントの実行時にTiDBはユニークインデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`ステートメントでエラーが報告されます。
+    次の例のように、 `INSERT`のステートメントの実行時にTiDBはロックをスキップします。その後、 `DELETE`ステートメントの実行時にTiDBは一意インデックスをロックし、ユニーク制約をチェックします。そのため、 `DELETE`ステートメントでエラーが報告されます。
 
     ```sql
     SET tidb_constraint_check_in_place_pessimistic = OFF;

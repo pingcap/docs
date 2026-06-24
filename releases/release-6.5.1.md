@@ -88,7 +88,7 @@ TiDB バージョン: 6.5.1
     -   TiDB がキー範囲[＃40158](https://github.com/pingcap/tidb/issues/40158) @ [tiancaiamao](https://github.com/tiancaiamao)を構築するときに`NULL`値を不適切に処理するため、予期しないデータが読み取られる問題を修正しました。
     -   メモリの再利用により、システム変数の値が誤って変更される可能性がある問題を修正[＃40979](https://github.com/pingcap/tidb/issues/40979) @ [lcwangchao](https://github.com/lcwangchao)
     -   テーブルの主キーに`ENUM`列[＃40456](https://github.com/pingcap/tidb/issues/40456) @ [lcwangchao](https://github.com/lcwangchao)が含まれている場合にTTLタスクが失敗する問題を修正しました
-    -   ユニークインデックス[＃40592](https://github.com/pingcap/tidb/issues/40592) @ [tangenta](https://github.com/tangenta)を追加するときに TiDB がパニックを起こす問題を修正しました
+    -   一意インデックス[＃40592](https://github.com/pingcap/tidb/issues/40592) @ [tangenta](https://github.com/tangenta)を追加するときに TiDB がパニックを起こす問題を修正しました
     -   同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックされない問題を修正[＃40484](https://github.com/pingcap/tidb/issues/40484) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   動的トリミングモード[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [Yisaer](https://github.com/Yisaer)でパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [zyguan](https://github.com/zyguan)のためにエラーが返される可能性がある問題を修正しました。
@@ -119,7 +119,7 @@ TiDB バージョン: 6.5.1
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [Dousir9](https://github.com/Dousir9)にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。
     -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) [＃40464](https://github.com/pingcap/tidb/issues/40464) [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [tangenta](https://github.com/tangenta)を追加するときにデータの不整合が発生する問題を修正しました
     -   インデックス[＃41515](https://github.com/pingcap/tidb/issues/41515) @ [tangenta](https://github.com/tangenta)を追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました
-    -   ユニークインデックス[＃41630](https://github.com/pingcap/tidb/issues/41630) @ [tangenta](https://github.com/tangenta)を追加するときに誤って報告される重複キーエラーの問題を修正しました
+    -   一意インデックス[＃41630](https://github.com/pingcap/tidb/issues/41630) @ [tangenta](https://github.com/tangenta)を追加するときに誤って報告される重複キーエラーの問題を修正しました
     -   TiDB [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [solotzg](https://github.com/solotzg)で`paging`使用するとパフォーマンスが低下する問題を修正
 
 -   TiKV
