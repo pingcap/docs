@@ -70,7 +70,7 @@ summary: TiDBの機能概要について学びましょう。
 | [複合キーまたは非整数キーに対するクラスター化インデックス](/clustered-indexes.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)              |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [外部キー](/foreign-key.md)                                                                     |  Y  |  E  |  E  |  E  |  N  |  N  |  N  |
-| [TiFlashの遅延実現](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
+| [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  Y  |  Y  |  Y  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                           |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [ベクトルインデックス](/ai/reference/vector-search-index.md)                                          |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 
