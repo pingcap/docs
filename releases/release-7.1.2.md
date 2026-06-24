@@ -103,7 +103,7 @@ TiDB バージョン: 7.1.2
     -   MPP実行プランで集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @ [AilinKid](https://github.com/AilinKid)
     -   `AUTO_ID_CACHE=1` [＃46454](https://github.com/pingcap/tidb/issues/46454) @ [tiancaiamao](https://github.com/tiancaiamao)に設定されている場合に、panic後に TiDB がゆっくりと回復する問題を修正しました。
     -   ソート演算子がスピルプロセス中に TiDB をクラッシュさせる可能性がある問題を修正[＃47538](https://github.com/pingcap/tidb/issues/47538) @ [windtalker](https://github.com/windtalker)
-    -   BRを使用して`AUTO_ID_CACHE=1` [＃46093](https://github.com/pingcap/tidb/issues/46093) @ [tiancaiamao](https://github.com/tiancaiamao)の非クラスタ化インデックステーブルを復元するときに重複する主キーの問題を修正しました。
+    -   BRを使用して`AUTO_ID_CACHE=1` [＃46093](https://github.com/pingcap/tidb/issues/46093) @ [tiancaiamao](https://github.com/tiancaiamao)の非クラスター化インデックステーブルを復元するときに重複する主キーの問題を修正しました。
     -   静的プルーニングモードでパーティションテーブルをクエリし、実行プランに`IndexLookUp` [＃45757](https://github.com/pingcap/tidb/issues/45757) @ [Defined2014](https://github.com/Defined2014)が含まれている場合にクエリがエラーを報告する可能性がある問題を修正しました。
     -   パーティションテーブルと配置ポリシー[＃45791](https://github.com/pingcap/tidb/issues/45791) @ [mjonss](https://github.com/mjonss)テーブル間でパーティションを交換した後に、パーティションテーブルへのデータの挿入が失敗する可能性がある問題を修正しました。
     -   タイムゾーン情報が正しくない時間フィールドをエンコードする問題を修正[＃46033](https://github.com/pingcap/tidb/issues/46033) @ [tangenta](https://github.com/tangenta)

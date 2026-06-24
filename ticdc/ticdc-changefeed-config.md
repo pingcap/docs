@@ -125,7 +125,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 ##### <code>ignore-event</code> {#code-ignore-event-code}
 
 -   `ignore-event = ["insert"]`は`INSERT`イベントを無視します。
--   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスタ化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
+-   `ignore-event = ["drop table", "delete"]`は`DROP TABLE` DDL イベントと`DELETE` DML イベントを無視します。 TiDB でクラスター化インデックス列の値が更新されると、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割することに注意してください。 TiCDC はこれらのイベントを`UPDATE`イベントとして識別できないため、これらのイベントを正しくフィルタリングできません。
 
 ##### <code>ignore-sql</code> {#code-ignore-sql-code}
 

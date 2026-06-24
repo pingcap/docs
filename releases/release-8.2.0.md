@@ -262,7 +262,7 @@ TiDB バージョン: 8.2.0
     -   述語における`Longlong`型のオーバーフロー問題を修正 [#45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     -   Window関数内に関連サブクエリがある場合にpanicする可能性がある問題を修正しました [#42734](https://github.com/pingcap/tidb/issues/42734) @[Rustin170506](https://github.com/Rustin170506)
     -   TopN演算子が正しくプッシュダウンされない可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
-    -   クラスタ化インデックスを述語として使用する場合に`SELECT INTO OUTFILE`が機能しない問題を修正 [#42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
+    -   クラスター化インデックスを述語として使用する場合に`SELECT INTO OUTFILE`が機能しない問題を修正 [#42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     -   情報スキーマキャッシュのミスによって古い読み取りのクエリレイテンシーが増加する問題を修正します [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     -   `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が生じる問題を修正しました [#50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
     -   TiDBを再起動した後に、主キー列統計のヒストグラムとTopNが読み込まれない問題を修正しました [#37548](https://github.com/pingcap/tidb/issues/37548) @[hawkingrei](https://github.com/hawkingrei)
