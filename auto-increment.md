@@ -337,20 +337,20 @@ SELECT * FROM t;
 
 さらに、バッチ`INSERT`ステートメント内の連続 ID の長さが`AUTO_ID_CACHE`を超えると、TiDB はそれに応じてキャッシュ サイズを増やし、ステートメントがデータを適切に挿入できるようにします。
 
-### AUTO_INCREMENTIDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
+### AUTO_INCREMENT IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
-場合によっては、データの一貫性を確保するために、AUTO_INCREMENTIDキャッシュをクリアする必要がある場合があります。例：
+場合によっては、データの一貫性を確保するために、AUTO_INCREMENT IDキャッシュをクリアする必要がある場合があります。例：
 
 <CustomContent platform="tidb">
 
 -   [データ移行（DM）](/dm/dm-overview.md)使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流の TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
--   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENTIDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENTIDキャッシュを手動でクリアする必要があります。
+-   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 -   [データ移行](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)機能を使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流 TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
--   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENTIDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENTIDキャッシュを手動でクリアする必要があります。
+-   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
 

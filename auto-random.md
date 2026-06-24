@@ -163,7 +163,7 @@ SHOW WARNINGS;
 
 TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に値を割り当てます。これらの値は、セッションレベルのシステム変数[`auto_increment_increment`](/system-variables.md#auto_increment_increment)と[`auto_increment_offset`](/system-variables.md#auto_increment_offset)によって制御されます。暗黙的に割り当てられた値のAUTO_INCREMENTビット（ID）は、式`(ID - auto_increment_offset) % auto_increment_increment == 0`に従います。
 
-## AUTO_INCREMENTIDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
+## AUTO_INCREMENT IDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
 複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
