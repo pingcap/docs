@@ -134,8 +134,8 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.23 or later |
-|   Rust    |   nightly-2023-12-28 or later  |
+|   Golang  |  1.25 or later |
+|   Rust    |   nightly-2026-01-30 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
 
