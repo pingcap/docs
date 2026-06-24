@@ -66,7 +66,7 @@ aliases: ['/ja/docs/dev/best-practices/pd-scheduling-best-practices/','/ja/docs/
 `balance-leader`と`balance-region`は同様のスケジュール プロセスを共有します。
 
 1.  リソースの可用性に応じてストアを評価します。
-2.  `balance-leader`または`balance-region` 、高スコアのストアから低スコアのストアへ、リーダーまたは同僚を継続的に異動させます。
+2.  `balance-leader`または`balance-region` 、高スコアのストアから低スコアのストアへ、リーダーまたはピアを継続的に異動させます。
 
 しかし、評価方法は異なります。1 `balance-leader`ストア内のリーダーに対応するすべてのリージョンサイズの合計を使用しますが、 `balance-region`の方法は比較的複雑です。各ノードの具体的なストレージ容量に応じて、 `balance-region`の評価方法は以下のようになります。
 
