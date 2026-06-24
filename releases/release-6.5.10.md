@@ -47,7 +47,7 @@ TiDB バージョン: 6.5.10
 -   TiDB
 
     -   統計の初期化中にメタデータをクエリすると、OOM [＃52219](https://github.com/pingcap/tidb/issues/52219) @ [hawkingrei](https://github.com/hawkingrei)が発生する可能性がある問題を修正しました。
-    -   `AUTO_ID_CACHE=1`自動インクリメント列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正な自動インクリメント ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
+    -   `AUTO_ID_CACHE=1`AUTO_INCREMENT列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
     -   `RESTORE`ステートメントを使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラー[＃52680](https://github.com/pingcap/tidb/issues/52680) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました
     -   `STATE`のフィールドのうち`size`番目が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   外部キー[＃53652](https://github.com/pingcap/tidb/issues/53652) @ [hawkingrei](https://github.com/hawkingrei)を持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。

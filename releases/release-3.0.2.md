@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `CONVERT_TZ`関数のパラメータが無効な場合に`NULL`が誤って返される問題を修正しました[＃11359](https://github.com/pingcap/tidb/pull/11359)
     -   このクエリのメモリ使用量を表示するには、 `EXPLAIN ANALYZE`で返された結果に`MEMORY`列を追加します[＃11418](https://github.com/pingcap/tidb/pull/11418)
     -   `EXPLAIN` [＃11429](https://github.com/pingcap/tidb/pull/11429)の結果に`CARTESIAN` Joinを加える
-    -   float型とdouble型の自動インクリメント列の不正なデータを修正[＃11385](https://github.com/pingcap/tidb/pull/11385)
+    -   float型とdouble型のAUTO_INCREMENT列の不正なデータを修正[＃11385](https://github.com/pingcap/tidb/pull/11385)
     -   疑似統計がダンプされるときにいくつかの`nil`情報によって引き起こされるpanicの問題を修正しました[＃11460](https://github.com/pingcap/tidb/pull/11460)
     -   定数畳み込み最適化[＃11441](https://github.com/pingcap/tidb/pull/11441)によって発生した`SELECT … CASE WHEN … ELSE NULL ...`の誤ったクエリ結果を修正
     -   `floatStrToIntStr` `+999.9999e2` [＃11473](https://github.com/pingcap/tidb/pull/11473)などの入力を正しく解析しない問題を修正
@@ -79,7 +79,7 @@ TiDB Ansible バージョン: 3.0.2
     -   JSON ファイルの解析時に発生する 2 つの問題を修正しました。
         -   `int64`は`ConvertJSONToFloat`の`uint64`の中間解析結果として使用され、精度オーバーフローエラー[＃11433](https://github.com/pingcap/tidb/pull/11433)が発生します。
         -   `int64`は`ConvertJSONToInt`の`uint64`の中間解析結果として使用され、精度オーバーフローエラー[＃11551](https://github.com/pingcap/tidb/pull/11551)が発生します。
-    -   自動インクリメント列のインデックスの削除を禁止して、自動インクリメント列が誤った結果を取得する可能性を回避する[＃11399](https://github.com/pingcap/tidb/pull/11399)
+    -   AUTO_INCREMENT列のインデックスの削除を禁止して、AUTO_INCREMENT列が誤った結果を取得する可能性を回避する[＃11399](https://github.com/pingcap/tidb/pull/11399)
     -   次の問題を修正しました[＃11492](https://github.com/pingcap/tidb/pull/11492) :
         -   照合順序を明示的に指定し、文字セットを指定していない場合、列の文字セットと照合順序が一致しません。
         -   `ALTER TABLE … MODIFY COLUMN`で指定された文字セットと照合順序の間に矛盾がある場合、エラーは正しく報告されません。

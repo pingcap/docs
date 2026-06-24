@@ -43,7 +43,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [＃38293](https://github.com/pingcap/tidb/issues/38293) @ [CbcWestwolf](https://github.com/CbcWestwolf)
     -   結合したテーブルの再配置 [＃38736](https://github.com/pingcap/tidb/issues/38736) @ [winoros](https://github.com/winoros)によって誤ってプッシュダウンされた条件が破棄されたときに発生する間違ったクエリ結果の問題を修正しました。
     -   `get_lock()`で取得したロックが10分以上保持できない問題を修正[＃38706](https://github.com/pingcap/tidb/issues/38706) @ [tangenta](https://github.com/tangenta)
-    -   自動インクリメント列がチェック制約[＃38894](https://github.com/pingcap/tidb/issues/38894) @ [YangKeao](https://github.com/YangKeao)で使用できない問題を修正しました
+    -   AUTO_INCREMENT列がチェック制約[＃38894](https://github.com/pingcap/tidb/issues/38894) @ [YangKeao](https://github.com/YangKeao)で使用できない問題を修正しました
     -   gPRCログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
     -   テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[#37168](https://github.com/pingcap/tidb/issues/37168) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [＃38541](https://github.com/pingcap/tidb/issues/38541) @ [lance6716](https://github.com/lance6716)

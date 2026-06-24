@@ -66,7 +66,7 @@ TiDBバージョン: 4.0.16
     -   `Decimal`を`String`に変換するときに長さ情報が間違っている問題を修正しました[＃29417](https://github.com/pingcap/tidb/issues/29417)
     -   `NATURAL JOIN`複数のテーブルを結合するために使用したときにクエリ結果に余分な列が残る問題を修正[＃29481](https://github.com/pingcap/tidb/issues/29481)
     -   `IndexScan`プレフィックス インデックス[＃29711](https://github.com/pingcap/tidb/issues/29711)を使用している場合に、 `TopN`が誤って`indexPlan`にプッシュダウンされる問題を修正しました。
-    -   `DOUBLE`種類の自動インクリメント列でトランザクションを再試行するとデータ破損が発生する問題を修正[＃29892](https://github.com/pingcap/tidb/issues/29892)
+    -   `DOUBLE`種類のAUTO_INCREMENT列でトランザクションを再試行するとデータ破損が発生する問題を修正[＃29892](https://github.com/pingcap/tidb/issues/29892)
 
 -   TiKV
 

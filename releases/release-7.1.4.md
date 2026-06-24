@@ -69,7 +69,7 @@ TiDBバージョン: 7.1.4
     -   TiDB が`group by` [＃38756](https://github.com/pingcap/tidb/issues/38756) @ [Rustin170506](https://github.com/Rustin170506)の定数値を誤って削除することによる間違ったクエリ結果の問題を修正しました
     -   `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[＃49566](https://github.com/pingcap/tidb/issues/49566) [＃50850](https://github.com/pingcap/tidb/issues/50850) [＃50855](https://github.com/pingcap/tidb/issues/50855) @ [jiyfhust](https://github.com/jiyfhust)
     -   複数レベルのネストされた`UNION`クエリの`LIMIT`無効になる可能性がある問題を修正しました[＃49874](https://github.com/pingcap/tidb/issues/49874) @ [Defined2014](https://github.com/Defined2014)
-    -   `AUTO_ID_CACHE=1` [＃50519](https://github.com/pingcap/tidb/issues/50519) @ [tiancaiamao](https://github.com/tiancaiamao)の自動インクリメント列を使用すると同時競合により自動インクリメント ID 割り当てでエラーが報告される問題を修正しました。
+    -   `AUTO_ID_CACHE=1` [＃50519](https://github.com/pingcap/tidb/issues/50519) @ [tiancaiamao](https://github.com/tiancaiamao)のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。
     -   クエリで`NATURAL JOIN` [＃32044](https://github.com/pingcap/tidb/issues/32044) @ [AilinKid](https://github.com/AilinKid)が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します
     -   クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行プランに`IndexMerge` [＃49605](https://github.com/pingcap/tidb/issues/49605) @ [AilinKid](https://github.com/AilinKid)が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。
     -   `STREAM_AGG()` CI [＃49902](https://github.com/pingcap/tidb/issues/49902) @ [wshwsh12](https://github.com/wshwsh12)を誤って処理したためにクエリ結果が正しくない問題を修正しました
