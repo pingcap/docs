@@ -139,6 +139,10 @@ Create a user whose password is manually expired:
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 ```
 
+```
+Query OK, 1 row affected (0.02 sec)
+```
+
 Create a user with a maximum connection limit of 3:
 
 ```sql
@@ -155,11 +159,7 @@ SELECT User, Host, max_user_connections FROM mysql.user WHERE User='newuser10';
 1 row in set (0.01 sec)
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
-
-Create a user that uses the resource group `rg1`.
+Create a user that uses the resource group `rg1`:
 
 ```sql
 CREATE USER 'newuser11'@'%' RESOURCE GROUP rg1;
