@@ -2857,7 +2857,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
-### `tidb_enable_strict_not_null_check` <span class="version-mark">New in v9.0.0</span>
+### `tidb_enable_strict_not_null_check` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
