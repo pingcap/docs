@@ -454,7 +454,7 @@ TiDB バージョン: 8.0.0
     -   `JSON_LENGTH()`関数が、2 番目のパラメータが`NULL`の場合に誤った結果を返す問題を修正しました [#50931](https://github.com/pingcap/tidb/issues/50931) @[SeaRise](https://github.com/SeaRise)
     -   `CAST(AS DATETIME)`が特定の状況下で時間精度を失う可能性がある問題を修正 [#49555](https://github.com/pingcap/tidb/issues/49555) @[SeaRise](https://github.com/SeaRise)
     -   テーブルにクラスター化インデックスがある場合、並列処理`Apply`が誤った結果を生成する可能性がある問題を修正 [#51372](https://github.com/pingcap/tidb/issues/51372) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   主キーのタイプが`ALTER TABLE ... COMPACT TIFLASH REPLICA` `VARCHAR`が正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
+    -   `ALTER TABLE ... COMPACT TIFLASH REPLICA`が主キーの型が`VARCHAR`の場合に正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
     -   `NULL`ステートメントを使用してパーティション テーブルを交換する際に`DEFAULT NULL`属性の`EXCHANGE PARTITION`値のチェックが正しく行われない問題を修正しました。 [#47167](https://github.com/pingcap/tidb/issues/47167) @[jiyfhust](https://github.com/jiyfhust)
     -   パーティションテーブルの定義が、UTF8以外の文字セットを使用した場合に誤った動作を引き起こす可能性がある問題を修正しました [#49251](https://github.com/pingcap/tidb/issues/49251) @[YangKeao](https://github.com/YangKeao)
     -   一部のシステム変数について、 `INFORMATION_SCHEMA.VARIABLES_INFO`テーブルに誤ったデフォルト値が表示される問題を修正しました [#49461](https://github.com/pingcap/tidb/issues/49461) @[jiyfhust](https://github.com/jiyfhust)
