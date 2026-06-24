@@ -119,7 +119,7 @@ TiDB バージョン: 4.0.14
     -   リージョン分散操作中に発生する可能性のあるPDpanic問題を修正しました[＃3761](https://github.com/pingcap/pd/pull/3761)
     -   一部の演算子の優先順位が正しく設定されていない問題を修正[＃3703](https://github.com/pingcap/pd/pull/3703)
     -   存在しないストア[＃3660](https://github.com/tikv/pd/issues/3660)から`evict-leader`スケジューラを削除するときに発生する可能性のある PDpanicの問題を修正しました。
-    -   ストア数が多い場合にPDLeaderの再選出が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
+    -   ストア数が多い場合にPDリーダーの再選出が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
 -   TiDBダッシュボード
 

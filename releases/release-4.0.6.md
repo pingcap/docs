@@ -185,7 +185,7 @@ TiDB バージョン: 4.0.6
     -   バックアップと復元 (BR)
 
         -   チェックサム[＃479](https://github.com/pingcap/br/pull/479)中に発生する可能性のあるpanicを修正
-        -   PDLeader[＃496](https://github.com/pingcap/br/pull/496)の変更後に発生する可能性のあるpanicを修正
+        -   PDリーダー[＃496](https://github.com/pingcap/br/pull/496)の変更後に発生する可能性のあるpanicを修正
 
     -   Dumpling
 
