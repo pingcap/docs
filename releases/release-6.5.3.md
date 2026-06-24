@@ -69,7 +69,7 @@ TiDB バージョン: 6.5.3
     -   BR [＃43725](https://github.com/pingcap/tidb/issues/43725) @ [tangenta](https://github.com/tangenta)を使用してテーブルをインポートした後に DDL ジョブ履歴が失われる問題を修正しました
     -   `JSON_OBJECT`場合によってはエラーが報告される可能性がある問題を修正[＃39806](https://github.com/pingcap/tidb/issues/39806) @ [YangKeao](https://github.com/YangKeao)
     -   IPv6環境[＃43286](https://github.com/pingcap/tidb/issues/43286) @ [Defined2014](https://github.com/Defined2014)でクラスターが一部のシステムビューを照会できない問題を修正
-    -   PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列目のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [tiancaiamao](https://github.com/tiancaiamao)
+    -   PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   配置ルールのリサイクル中に TiDB が PD に重複したリクエストを送信し、PD ログ[＃33069](https://github.com/pingcap/tidb/issues/33069) @ [tiancaiamao](https://github.com/tiancaiamao)に多数の`full config reset`エントリが発生する問題を修正しました。
     -   `SHOW PRIVILEGES`文が不完全な権限リスト[＃40591](https://github.com/pingcap/tidb/issues/40591) @ [CbcWestwolf](https://github.com/CbcWestwolf)を返す問題を修正しました
     -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @ [CbcWestwolf](https://github.com/CbcWestwolf)

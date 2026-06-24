@@ -142,5 +142,5 @@ TiDB バージョン: 5.0.3
 
         -   一部の特殊データにおけるTiDB Lightningpanic問題を修正[＃1213](https://github.com/pingcap/br/issues/1213)
         -   TiDB Lightningがインポートした大きなCSVファイルを分割する際に報告されるEOFエラーを修正しました[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列目を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1186](https://github.com/pingcap/br/pull/1186)
+        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1186](https://github.com/pingcap/br/pull/1186)
         -   TiDBがParquetファイル[＃1277](https://github.com/pingcap/br/pull/1277)内の`DECIMAL`種類のデータを解析できない問題を修正

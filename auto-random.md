@@ -21,7 +21,7 @@ TiDB で同時書き込みの多いワークロードを処理する方法の詳
 
 `AUTO_RANDOM`は、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値は**ランダム**かつ**一意**です。
 
-`AUTO_RANDOM`列目のテーブルを作成するには、以下のステートメントを使用します。3列目`AUTO_RANDOM`主キーに含まれている必要があり、 `AUTO_RANDOM`列目は主キーの最初の列です。
+`AUTO_RANDOM`列のテーブルを作成するには、以下のステートメントを使用します。3列目`AUTO_RANDOM`主キーに含まれている必要があり、 `AUTO_RANDOM`列は主キーの最初の列です。
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
@@ -42,7 +42,7 @@ CREATE TABLE t (a BIGINT  /*T![auto_rand] AUTO_RANDOM(5, 54) */, b VARCHAR(255),
 
 `INSERT`ステートメントを実行すると、次のようになります。
 
--   `AUTO_RANDOM`列目の値を明示的に指定すると、そのままテーブルに挿入されます。
+-   `AUTO_RANDOM`列の値を明示的に指定すると、そのままテーブルに挿入されます。
 -   `AUTO_RANDOM`列の値を明示的に指定しない場合は、TiDB によってランダムな値が生成され、テーブルに挿入されます。
 
 ```sql
@@ -165,7 +165,7 @@ TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に
 
 ## AUTO_INCREMENTIDキャッシュをクリアする {#clear-the-auto-increment-id-cache}
 
-複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列目に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列目と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
+複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
 衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンタを使用します。AUTO_INCREMENT部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)参照してください。
 

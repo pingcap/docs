@@ -11,7 +11,7 @@ summary: TiDB 2.0.2は2018年5月21日にリリースされ、システムの安
 
 -   小数点以下の除算式を押し下げる問題を修正
 -   Support using the `USE INDEX` syntax in the `Delete` statement
--   `Auto-Increment`列目では`shard_row_id_bits`機能の使用を禁止する
+-   `Auto-Increment`列では`shard_row_id_bits`機能の使用を禁止する
 -   Binlog書き込みのタイムアウト機構を追加する
 
 ## PD {#pd}
