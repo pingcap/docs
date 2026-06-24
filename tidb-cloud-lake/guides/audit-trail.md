@@ -108,4 +108,6 @@ query_duration_ms: 94
 client_address: 127.0.0.1
 ```
 
+<!--
 For detailed information about each audit table and their specific fields, see the [System History Tables](/tidb-cloud-lake/sql/system-history-tables.md) reference documentation.
+-->
