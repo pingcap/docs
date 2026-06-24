@@ -474,7 +474,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   TiDBがキー範囲を構築する際に`NULL`値を適切に処理しないために予期しないデータが読み込まれる問題を修正しました [#40158](https://github.com/pingcap/tidb/issues/40158) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `MODIFY COLUMN`ステートメントが列のデフォルト値も変更する場合に、無効な値がテーブルに書き込まれる問題を修正します [#40164](https://github.com/pingcap/tidb/issues/40164) @[wjhuang2016](https://github.com/wjhuang2016)
     -   テーブル内にリージョンが多数存在する場合に、リージョンキャッシュが無効になるためインデックス追加操作が非効率になる問題を修正しました [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)
-    -   AUTO_INCREMENTIDの割り当て時に発生したデータ競合を修正 [#40584](https://github.com/pingcap/tidb/issues/40584) @[Dousir9](https://github.com/Dousir9)
+    -   AUTO_INCREMENT IDの割り当て時に発生したデータ競合を修正 [#40584](https://github.com/pingcap/tidb/issues/40584) @[Dousir9](https://github.com/Dousir9)
     -   JSON の not 演算子の実装が MySQL の実装と互換性がない問題を修正しました [#40683](https://github.com/pingcap/tidb/issues/40683) @[YangKeao](https://github.com/YangKeao)
     -   同時ビューがDDL操作をブロックする可能性がある問題を修正 [#40352](https://github.com/pingcap/tidb/issues/40352) @[zeminzhou](https://github.com/zeminzhou)
     -   パーティションテーブルの列を変更するDDLステートメントを同時に実行することによって発生するデータの不整合を修正 [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)@[mjonss](https://github.com/mjonss)

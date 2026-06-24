@@ -464,7 +464,7 @@ TiDB バージョン: 8.0.0
     -   ハッシュパーティションテーブルをクエリすると誤った結果が生成される可能性がある問題を修正 [#50427](https://github.com/pingcap/tidb/issues/50427) @[Defined2014](https://github.com/Defined2014)
     -   opentracing が正しく動作しない問題を修正 [#50508](https://github.com/pingcap/tidb/issues/50508) @[Defined2014](https://github.com/Defined2014)
     -   `ALTER INSTANCE RELOAD TLS`がエラーを報告した際にエラーメッセージが不完全になる問題を修正しました [#50699](https://github.com/pingcap/tidb/issues/50699) @[dveeden](https://github.com/dveeden)
-    -   `AUTO_INCREMENT`属性がAUTO_INCREMENTIDを割り当てる際に不要なトランザクション競合を引き起こし、IDが連続しなくなる問題を修正しました [#50819](https://github.com/pingcap/tidb/issues/50819) @[tiancaiamao](https://github.com/tiancaiamao)
+    -   `AUTO_INCREMENT`属性がAUTO_INCREMENT IDを割り当てる際に不要なトランザクション競合を引き起こし、IDが連続しなくなる問題を修正しました [#50819](https://github.com/pingcap/tidb/issues/50819) @[tiancaiamao](https://github.com/tiancaiamao)
     -   TiDBログにおける一部のエラーのスタック情報が不完全な問題を修正 [#50849](https://github.com/pingcap/tidb/issues/50849) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `LIMIT`句の数値が大きすぎる場合に、一部のクエリでメモリ使用量が過剰になる問題を修正しました [#51188](https://github.com/pingcap/tidb/issues/51188) @[Defined2014](https://github.com/Defined2014)
     -   TTL機能によって、場合によってはデータ範囲の分割が正しく行われずデータホットスポットが発生する問題を修正しました [#51527](https://github.com/pingcap/tidb/issues/51527) @[lcwangchao](https://github.com/lcwangchao)
