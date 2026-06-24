@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   ヒストグラム[＃10573](https://github.com/pingcap/tidb/pull/10573)の`dump`相関`load`サポート
 
 -   実行エンジン
-    -   `batchChecker` [＃10370](https://github.com/pingcap/tidb/pull/10370)で重複行をフェッチするときに、一意のインデックスを持つ仮想列を適切に処理します。
+    -   `batchChecker` [＃10370](https://github.com/pingcap/tidb/pull/10370)で重複行をフェッチするときに、一意インデックスを持つ仮想列を適切に処理します。
     -   `CHAR`列[＃10124](https://github.com/pingcap/tidb/pull/10124)スキャン範囲計算の問題を修正
     -   `PointGet`負の数を誤って処理する問題を修正[＃10113](https://github.com/pingcap/tidb/pull/10113)
     -   同じ名前の関数を`Window`マージして実行効率を向上させる[＃9866](https://github.com/pingcap/tidb/pull/9866)

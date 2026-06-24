@@ -389,7 +389,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   アップグレード後に一部のシステム変数のデフォルト値が変更されない問題を修正 [#41423](https://github.com/pingcap/tidb/issues/41423) @[crazycs520](https://github.com/crazycs520)
     -   インデックス追加に関連するコプロセッサー要求タイプが不明として表示される問題を修正 [#41400](https://github.com/pingcap/tidb/issues/41400) @[tangenta](https://github.com/tangenta)
     -   インデックスを追加する際に「PessimisticLockNotFound」が返される問題を修正 [#41515](https://github.com/pingcap/tidb/issues/41515) @[tangenta](https://github.com/tangenta)
-    -   一意のインデックスを追加する際に誤って`found duplicate key`を返す問題を修正 [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
+    -   一意インデックスを追加する際に誤って`found duplicate key`を返す問題を修正 [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
     -   インデックス追加時のpanic問題を修正 [#41880](https://github.com/pingcap/tidb/issues/41880) @[tangenta](https://github.com/tangenta)
     -   TiFlashが実行中に生成された列に対してエラーを報告する問題を修正 [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     -   TiDBが時間型の場合に統計情報を正しく取得できない可能性がある問題を修正しました [#41938](https://github.com/pingcap/tidb/issues/41938) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)

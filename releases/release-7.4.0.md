@@ -247,7 +247,7 @@ TiDB バージョン: 7.4.0
 
 -   MySQL 8.0 との互換性を向上させるために[`information_schema.CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)テーブルが追加されました。
 
--   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたは非NULLの一意のインデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
+-   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたは非NULLの一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 
 ### システム変数 {#system-variables}
 

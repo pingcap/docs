@@ -116,7 +116,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックス[＃54897](https://github.com/pingcap/tidb/issues/54897) @ [tangenta](https://github.com/tangenta)の不整合が発生する可能性がある問題を修正しました。
     -   TiDB Lightning物理インポートモードの初期化中にエラーが発生し、リソースリークが発生する可能性がある問題を修正[＃53659](https://github.com/pingcap/tidb/issues/53659) @ [D3Hunter](https://github.com/D3Hunter)
     -   ビュー定義[＃54343](https://github.com/pingcap/tidb/issues/54343) @ [lance6716](https://github.com/lance6716)でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。
-    -   インデックスアクセラレーションを使用して一意のインデックスを追加すると、所有者が[＃49233](https://github.com/pingcap/tidb/issues/49233) @ [lance6716](https://github.com/lance6716)に切り替えられたときに`Duplicate entry`エラーが発生する可能性がある問題を修正しました。
+    -   インデックスアクセラレーションを使用して一意インデックスを追加すると、所有者が[＃49233](https://github.com/pingcap/tidb/issues/49233) @ [lance6716](https://github.com/lance6716)に切り替えられたときに`Duplicate entry`エラーが発生する可能性がある問題を修正しました。
     -   `global.tidb_cloud_storage_uri` [＃54096](https://github.com/pingcap/tidb/issues/54096) @ [lance6716](https://github.com/lance6716)を設定するときに不明瞭なエラーメッセージが表示される問題を修正しました
     -   同期負荷QPSモニタリングメトリックが正しくない問題を修正[＃53558](https://github.com/pingcap/tidb/issues/53558) @ [hawkingrei](https://github.com/hawkingrei)
     -   初期統計を同時に[＃53607](https://github.com/pingcap/tidb/issues/53607) @ [hawkingrei](https://github.com/hawkingrei)でロードするときに一部の統計情報が失われる可能性がある問題を修正しました

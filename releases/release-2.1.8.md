@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.8
     -   [＃9963](https://github.com/pingcap/tidb/pull/9963)
     -   [＃9966](https://github.com/pingcap/tidb/pull/9966)
 -   互換性を向上させるために、 `STR_TO_DATE`機能の`%H`フォーマットをサポートする[＃9964](https://github.com/pingcap/tidb/pull/9964)
--   `GROUP_CONCAT`関数が一意のインデックス[＃9969](https://github.com/pingcap/tidb/pull/9969)でグループ化されたときに結果が間違っている問題を修正しました
+-   `GROUP_CONCAT`関数が一意インデックス[＃9969](https://github.com/pingcap/tidb/pull/9969)でグループ化されたときに結果が間違っている問題を修正しました
 -   オプティマイザヒントに一致しないテーブル名が含まれている場合に警告を返す[＃9970](https://github.com/pingcap/tidb/pull/9970)
 -   ログ形式を統一し、分析ツールを使用してログを収集しやすくする統合ログ形式
 -   NULL値が多すぎると統計推定が不正確になる問題を修正[＃9979](https://github.com/pingcap/tidb/pull/9979)
