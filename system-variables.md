@@ -4407,7 +4407,7 @@ mysql> desc select count(distinct a) from test.t;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   タイプ: ブール値
 -   デフォルト値: `ON`
--   この変数は、 [TiFlashの遅延実現](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御するために使用されます。 TiFlash の遅延実体化は[高速スキャンモード](/tiflash/use-fastscan.md)では有効にならないことに注意してください。
+-   この変数は、 [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御するために使用されます。 TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効にならないことに注意してください。
 -   この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件 ( { `SELECT`句) を含む`WHERE`ステートメントを処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレータにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
 
 ### tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">v7.2.0で追加</span> {#tidb-opt-enable-mpp-shared-cte-execution-span-class-version-mark-new-in-v7-2-0-span}
