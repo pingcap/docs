@@ -103,7 +103,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### 拡張統計のエクスポートとインポート {#export-and-import-extended-statistics}
 
-拡張統計のエクスポート／インポート方法は、基本統計のエクスポート／インポート方法と同じです。詳細は[統計入門 - 輸入と輸出の統計](/statistics.md#export-and-import-statistics)ご覧ください。
+拡張統計のエクスポート／インポート方法は、基本統計のエクスポート／インポート方法と同じです。詳細は[統計入門 - インポートとエクスポートの統計](/statistics.md#export-and-import-statistics)ご覧ください。
 
 ## 相関型拡張統計の使用例 {#usage-examples-for-correlation-type-extended-statistics}
 
