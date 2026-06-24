@@ -145,7 +145,7 @@ summary: TiDBの機能概要について学びましょう。
 | [ビュー](/views.md)                                                                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [シーケンス](/sql-statements/sql-statement-create-sequence.md)                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [AUTO_INCREMENT](/auto-increment.md)                                                                                          |  Y  |  Y  |  Y  |  Y  | Y[^4] |  Y  |  Y  |
-| [自動ランダム](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
+| [AUTO_RANDOM](/auto-random.md)                                                                                                |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | [TTL（Time to Live：生きる時間）](/time-to-live.md)                                                                              |  Y  |  Y  |  Y  |  Y  |   E   |  N  |  N  |
 | [DDLアルゴリズムのアサーション](/sql-statements/sql-statement-alter-table.md)                                                         |  Y  |  Y  |  Y  |  Y  |   Y   |  Y  |  Y  |
 | マルチスキーマの変更：列の追加                                                                                                          |  Y  |  Y  |  Y  |  Y  |   Y   |  E  |  E  |

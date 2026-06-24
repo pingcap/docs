@@ -154,7 +154,7 @@ SELECT LAST_INSERT_ID();
 
 上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`使用すると、ホットスポットを適切に分散できます。
 
-詳細については[自動ランダム](/auto-random.md)参照してください。
+詳細については[AUTO_RANDOM](/auto-random.md)参照してください。
 
 ## 小さなテーブルホットスポットの最適化 {#optimization-of-small-table-hotspots}
 
