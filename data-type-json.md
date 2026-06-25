@@ -45,7 +45,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 | STRING         | `"foobar"`                     |
 | TIME           | `"09:10:00.000000"`            |
 | UNSIGNED INTEGER | `9223372036854776000`        |
- b898ccc5dd (i18n(ja): fix remaining type names across 6 additional files)
+
 
 ## 制限 {#restrictions}
 

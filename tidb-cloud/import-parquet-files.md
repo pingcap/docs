@@ -314,7 +314,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 | BYTE_ARRAY          | STRING             | ENUM<br/>DATE<br/>DECIMAL<br/>GEOMETRY<br/>GEOMETRYCOLLECTION<br/>JSON<br/>LONGTEXT<br/>MEDIUMTEXT<br/>MULTIPOINT<br/>MULTIPOLYGON<br/>NUMERIC<br/>POINT<br/>POLYGON<br/>SET<br/>TEXT<br/>TIME<br/>TINYTEXT<br/>VARCHAR |
 | SMALLINT          | N/A          | INT32                                                                                                                                                             |
 | SMALLINT UNSIGNED | N/A          | INT32                                                                                                                                                             |
-| TINYINT        | 該当なし          | INT32                                                                                                                                                             |
+| TINYINT        | N/A          | INT32                                                                                                                                                             |
 | TINYINT UNSIGNED   | N/A          | INT32                                                                                                                                                             |
 
 ## トラブルシューティング {#troubleshooting}

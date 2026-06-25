@@ -55,14 +55,13 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 
 キーのフィールドには、主キーまたは一意インデックス列のみが含まれます。各フィールドの説明は以下のとおりです。
 
-| 分野                | タイプ     | 説明                                                                                                                                                        |
+| フィールド名                | 型     | 説明                                                                                                                                                        |
 | :---------------- | :------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `payload`         | JSON    | The information about primary key or unique index columns. The key and value in each field represent the column name and its current value, respectively. |
-| `schema.fields`   | JSON    | ペイロード内の各フィールドの型情報（変更前後の行データのスキーマ情報を含む）。                                                                                                                   |
+| `payload`         | JSON    | 主キーまたは一意インデックス列に関する情報。各フィールドのキーと値は、それぞれ列名とその現在の値を表します。 |
+| `schema.fields`   | JSON    | payload内の各フィールドの型情報（変更前後の行データのスキーマ情報を含む）。                                                                                                                   |
 | `schema.name`     | String  | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Key"` 。                                                                                            |
-| `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.                                                                        |
+| `schema.optional` | Boolean | フィールドがオプションかどうかを示します。`true`の場合、フィールドはオプションです。                                                                        |
 | `schema.type`     | string       | フィールドのデータ型。                                                                                                                                               |
- b898ccc5dd (i18n(ja): fix remaining type names across 6 additional files)
 
 #### 値の形式 {#value-format}
 
@@ -149,22 +148,21 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 }
 ```
 
-The key fields of the preceding JSON data are explained as follows:
+前述のJSONデータの主要なフィールドの説明は以下のとおりです。
 
-| 分野                   | タイプ    | 説明                                                                                                                               |
+| フィールド名                   | 型    | 説明                                                                                                                               |
 | :------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------- |
-| ペイロード.op             | String | 変更イベントのタイプ。1 `"c"` `INSERT`イベント、 `"u"` `UPDATE`イベント、 `"d"` `DELETE`イベントを示します。                                                    |
-| ペイロード.ts_ms          | number     | TiCDC がこのメッセージを生成したときのタイムスタンプ (ミリ秒単位)。                                                                                           |
-| ペイロード.before         | JSON   | ステートメントの変更イベント前のデータ値。イベントが`"c"`場合、フィールド`before`の値は`null`なります。                                                                    |
-| ペイロード後               | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.                |
-| ペイロード.ソース.コミット_ts    | number     | TiCDC がこのメッセージを生成するときの`CommitTs`識別子。                                                                                             |
-| ペイロード.ソース.db         | string      | イベントが発生したデータベースの名前。                                                                                                              |
+| payload.op             | String | 変更イベントのタイプ。1 `"c"` `INSERT`イベント、 `"u"` `UPDATE`イベント、 `"d"` `DELETE`イベントを示します。                                                    |
+| payload.ts_ms          | number     | TiCDC がこのメッセージを生成したときのタイムスタンプ (ミリ秒単位)。                                                                                           |
+| payload.before         | JSON   | ステートメントの変更イベント前のデータ値。イベントが`"c"`場合、フィールド`before`の値は`null`なります。                                                                    |
+| payload.after               | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.                |
+| payload.source.commit_ts    | number     | TiCDC がこのメッセージを生成するときの`CommitTs`識別子。                                                                                             |
+| payload.source.db         | string      | イベントが発生したデータベースの名前。                                                                                                              |
 | payload.source.table | string      | イベントが発生するテーブルの名前。                                                                                                                |
-| schema.fields        | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change. |
-| スキーマ名                | string      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"` 。                                                              |
-| スキーマ.オプション           | boolean   | フィールドがオプションかどうかを示します。 `true`の場合、フィールドはオプションです。                                                                                   |
-| スキーマタイプ              | string      | フィールドのデータ型。                                                                                                                      |
- b898ccc5dd (i18n(ja): fix remaining type names across 6 additional files)
+| schema.fields        | JSON   | ペイロード内の各フィールドの型情報。変更前後の行データのスキーマ情報を含みます。 |
+| schema.name              | string      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"` 。                                                              |
+| schema.optional          | boolean   | フィールドがオプションかどうかを示します。 `true`の場合、フィールドはオプションです。                                                                                   |
+| schema.type              | string      | フィールドのデータ型。                                                                                                                      |
 
 ### Data type mapping {#data-type-mapping}
 
