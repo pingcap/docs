@@ -29,22 +29,23 @@ SELECT id FROM city WHERE population >= 100;
 
 JSONドキュメント内の値には型があります。これは[`JSON_TYPE` ()](/functions-and-operators/json-functions/json-functions-return.md#json_type)の出力で確認できます。
 
-| 型               | 例                              |
-| ---------------- | ------------------------------ |
-| ARRAY            | `[]`                           |
-| BIT              |                                |
-| BLOB             | `0x616263`                     |
-| BOOLEAN          | `true`                         |
-| DATE             | `"2025-06-14"`                 |
-| DATETIME         | `"2025-06-14 09:05:10.000000"` |
-| DOUBLE           | `1.14`                         |
-| INTEGER          | `5`                            |
-| NULL             | `null`                         |
-| OBJECT           | `{}`                           |
-| OPAQUE           |                                |
-| STRING           | `"foobar"`                     |
-| TIME             | `"09:10:00.000000"`            |
-| UNSIGNED INTEGER | `9223372036854776000`          |
+| 型             | 例                              |
+| -------------- | ------------------------------ |
+| ARRAY          | `[]`                           |
+| BIT            |                                |
+| BLOB           | `0x616263`                     |
+| BOOLEAN        | `true`                         |
+| DATE           | `"2025-06-14"`                 |
+| DATETIME       | `"2025-06-14 09:05:10.000000"` |
+| DOUBLE         | `1.14`                         |
+| INTEGER        | `5`                            |
+| NULL           | `null`                         |
+| OBJECT         | `{}`                           |
+| OPAQUE         |                                |
+| STRING         | `"foobar"`                     |
+| TIME           | `"09:10:00.000000"`            |
+| UNSIGNED INTEGER | `9223372036854776000`        |
+ b898ccc5dd (i18n(ja): fix remaining type names across 6 additional files)
 
 ## 制限 {#restrictions}
 
