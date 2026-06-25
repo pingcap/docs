@@ -75,10 +75,8 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 
 <CustomContent platform="tidb">
 
-<CustomContent platform="tidb">
-
 ### 查看 Grafana 面板 {#view-the-grafana-panel}
 
-在 Grafana 中，你可以在 `tidb` 命名空间下的 `distsql` 子系统中看到 **copr-cache** 面板。该面板监控整个集群中 Coprocessor Cache 的命中次数、未命中次数和缓存丢弃情况。
+在 Grafana 中，你可以在 `tidb` 命名空间下的 `distsql` 子系统中看到 **copr-cache** 面板。该面板用于监控整个集群中 Coprocessor Cache 的命中次数、未命中次数以及缓存丢弃次数。
 
 </CustomContent>
