@@ -114,7 +114,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ## Compatibility changes
 
 ### Behavior changes
-
+TiKV
+    - TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
 ### MySQL compatibility
 
 ### System variables
@@ -129,7 +130,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|  |  |  |  |
+| TiKV | `storage.max-ts.action-on-invalid-update` | Newly added | Controls TiKV behavior when it confirms an invalid `max_ts` update. Valid values are `error`, `log`, and `panic`. The default value is `error`, which rejects the invalid update without panicking TiKV. |
 |  |  |  |  |
 |  |  |  |  |
 
