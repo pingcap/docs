@@ -3949,6 +3949,14 @@ Referenced in:
 - [TiDB Configuration File](/tidb-configuration-file.md)
 - [TiDB 6.6.0 Release Notes](/releases/release-6.6.0.md)
 
+### tidb_stmt_summary_group_by_user
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md#tidb_stmt_summary_group_by_user-new-in-v857)
+
 ### tidb_stmt_summary_history_size
 
 Referenced in:
@@ -3991,6 +3999,14 @@ Referenced in:
 - [TiDB 5.1.1 Release Notes](/releases/release-5.1.1.md)
 - [TiDB 5.0.4 Release Notes](/releases/release-5.0.4.md)
 - [TiDB 4.0.14 Release Notes](/releases/release-4.0.14.md)
+
+### tidb_stmt_summary_persist_evicted
+
+Referenced in:
+
+- [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
+- [Statement Summary Tables](/statement-summary-tables.md)
+- [System Variables](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857)
 
 ### tidb_stmt_summary_refresh_interval
 
