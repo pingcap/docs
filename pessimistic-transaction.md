@@ -73,7 +73,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 -   `Point Get`および`Batch Point Get`演算子がデータを読み取らない場合でも、指定された主キーまたは一意キーをロックし、他のトランザクションが同じ主キーまたは一意キーをロックしたりデータを書き込んだりすることをブロックします。
 
-    > **Note:**
+    > **注記：**
     >
     > この動作は、[Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) 分離レベルにのみ適用されます。[Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level) 分離レベルでは、`Point Get`および`Batch Point Get`演算子は存在しないキーをロックしません。
 
