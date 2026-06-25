@@ -3069,6 +3069,12 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_opt_hash_join_cost_factor-new-in-v853-and-v900)
 - [TiDB 8.5.3 Release Notes](/releases/release-8.5.3.md)
 
+### tidb_opt_index_join_build_v2
+
+Documents that refer to this variable:
+
+- [System Variables](/system-variables.md#tidb_opt_index_join_build_v2-introduced-in-v900)
+
 ### tidb_opt_index_join_cost_factor
 
 Referenced in:
