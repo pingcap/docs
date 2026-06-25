@@ -157,8 +157,7 @@ TiDB バージョン: 8.0.0
     デフォルトでは、オプティマイザは[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択しません。このメカニズムは通常、インデックスを削除するかどうかを評価するために使用されます。インデックスを削除した場合のパフォーマンスへの影響が不明な場合は、インデックスを一時的に非表示に設定し、必要に応じてすぐに表示に戻すことができます。
 
 
-    バージョン8.0.0以降では、セッションレベルのシステム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) `ON`に設定することで、現在のセッションで不可視インデックスを認識させることができます。この機能を使用すると、新しいインデックスを作成し、最初にインデックスを可視化してから、現在のセッションのシステム変数を変更してテストすることで、他のセッションに影響を与えることなくパフォーマンスをテストできます。この改善により、SQLチューニングの安全性が向上し、本番データベースの安定性も向上します。
-
+    バージョン8.0.0以降では、セッションレベルのシステム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) `ON`に設定することで、現在のセッションで非表示インデックスを認識させることができます。この機能を使用すると、新しいインデックスを作成し、最初にインデックスを可視化してから、現在のセッションのシステム変数を変更してテストすることで、他のセッションに影響を与えることなくパフォーマンスをテストできます。この改善により、SQLチューニングの安全性が向上し、本番データベースの安定性も向上します。
     詳細については、 [ドキュメント](/sql-statements/sql-statement-create-index.md#invisible-index)を参照してください。
 
 -   一般ログの別ファイルへの書き込みをサポート [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014)
@@ -285,8 +284,8 @@ TiDB バージョン: 8.0.0
 | [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)     | 新しく追加された | TiDB [キャッシュタイムスタンプ](/system-variables.md#tidb_low_resolution_tso)スタンプを更新する間隔を制御します。                                                                                                                                        |
 | [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL ステートメントに`ORDER BY`および`ORDER BY` } 句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL ステートメント`LIMIT`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
 
-| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザーが現在のセッションでクエリ最適化のために[目に見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザーはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
-
+| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザーが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザーはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
+>>>>>>> cfd8887581 (fixup! replace remaining 目に見えない→不可視 in link text)
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}

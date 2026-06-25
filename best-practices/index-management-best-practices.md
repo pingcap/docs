@@ -231,7 +231,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 ### 不可視インデックスとは何ですか? {#what-are-invisible-indexes}
 
-不可視インデックスはデータベースに残りますが、TiDBオプティマイザによって無視されます。1 [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)使用してインデックスを非表示にすることで、インデックスを永久に削除することなく、本当に不要かどうかをテストできます。
+不可視インデックスはデータベースに残りますが、TiDBオプティマイザによって無視されます。[`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)を使用してインデックスを非表示にすることで、インデックスを永久に削除することなく、本当に不要かどうかをテストできます。
 
 不可視インデックスの主な利点は次のとおりです。
 
