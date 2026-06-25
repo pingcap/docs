@@ -7,7 +7,7 @@ summary: Learn about TiDB Cloud release notes, kernel versioning, and maintenanc
 
 [TiDB Cloud](https://www.pingcap.com/tidb/cloud/) is a fully managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud.
 
-TiDB Cloud offers two types of releases: **cloud platform releases** and **database kernel releases**. They follow independent release cycles and are documented separately.
+TiDB Cloud offers two types of releases: [cloud platform releases](#cloud-platform-release-notes) and [database kernel releases](#database-kernel-release-notes). They follow independent release cycles and are documented separately.
 
 ## Cloud platform release notes
 
