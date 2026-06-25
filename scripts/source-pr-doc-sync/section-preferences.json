@@ -1,0 +1,10 @@
+{
+  "path_to_preferred_sections": {
+    "ticdc/": ["Permissions", "Prerequisites", "Create Changefeed", "Configure", "Reference"],
+    "br/": ["Use", "Usage", "Reference", "Examples"],
+    "tiup/": ["Overview", "Usage", "Examples", "Reference"],
+    "tidb-lightning/": ["Prerequisites", "Configuration", "Usage", "Best Practices"],
+    "sql-statements/": ["Syntax", "Examples", "Reference"]
+  },
+  "default_preferred_sections": ["Prerequisites", "Overview", "Usage", "Reference"]
+}

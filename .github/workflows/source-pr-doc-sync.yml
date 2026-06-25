@@ -1,0 +1,192 @@
+name: Source PR Docs Sync (docs-cn)
+
+on:
+  schedule:
+    # 01:00 every Monday in Asia/Shanghai (UTC+8) => 17:00 every Sunday UTC
+    - cron: "0 17 * * 0"
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: "Optional: run for one source repo only (e.g. pingcap/tidb)"
+        required: false
+        type: string
+        default: ""
+      source_pr_number:
+        description: "Optional: run for one source PR only"
+        required: false
+        type: string
+        default: ""
+      max_candidates_per_run:
+        description: "Max per-source docs-cn PRs created in one run"
+        required: false
+        type: string
+        default: "50"
+  repository_dispatch:
+    types: [docs-sync-source-pr]
+
+jobs:
+  scan:
+    if: github.repository == 'pingcap/docs'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      needs_update: ${{ steps.scan.outputs.needs_update }}
+      candidates_count: ${{ steps.scan.outputs.candidates_count }}
+      candidates_matrix: ${{ steps.scan.outputs.candidates_matrix }}
+      json_path: ${{ steps.scan.outputs.json_path }}
+      report_path: ${{ steps.scan.outputs.report_path }}
+      window_start_date: ${{ steps.scan.outputs.window_start_date }}
+      window_end_date: ${{ steps.scan.outputs.window_end_date }}
+    env:
+      SOURCE_ORG: pingcap
+      EXCLUDED_REPOS: pingcap/docs,pingcap/docs-cn
+      EXTRA_REPOS: tikv/tikv,tikv/pd
+      OUTPUT_DIR: tmp/tidb-doc-check
+      DOCS_CN_BASE_BRANCH: master
+      TARGET_BRANCH_MAP: '{"master":"master","release-8.5":"release-8.5","release-8.1":"release-8.1","release-7.5":"release-7.5","release-7.1":"release-7.1","release-6.5":"release-6.5","release-6.1":"release-6.1","release-5.4":"release-5.4"}'
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Collect source PR doc candidates
+        id: scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.DOCS_CN_BOT_TOKEN || github.token }}
+          SOURCE_ORG: ${{ env.SOURCE_ORG }}
+          EXCLUDED_REPOS: ${{ env.EXCLUDED_REPOS }}
+          EXTRA_REPOS: ${{ env.EXTRA_REPOS }}
+          OUTPUT_DIR: ${{ env.OUTPUT_DIR }}
+          DOCS_CN_BASE_BRANCH: ${{ env.DOCS_CN_BASE_BRANCH }}
+          TARGET_BRANCH_MAP: ${{ env.TARGET_BRANCH_MAP }}
+          MAX_CANDIDATES_PER_RUN: ${{ github.event.inputs.max_candidates_per_run || github.event.client_payload.max_candidates_per_run || '50' }}
+          FORCE_SOURCE_REPO: ${{ github.event.inputs.source_repo || github.event.client_payload.source_repo || '' }}
+          FORCE_SOURCE_PR_NUMBER: ${{ github.event.inputs.source_pr_number || github.event.client_payload.source_pr_number || '' }}
+        run: |
+          set -euo pipefail
+          python scripts/source-pr-doc-sync/collect_source_pr_doc_candidates.py
+
+      - name: Print summary
+        run: |
+          echo "needs_update=${{ steps.scan.outputs.needs_update }}"
+          echo "candidates_count=${{ steps.scan.outputs.candidates_count }}"
+
+      - name: Upload scan artifacts
+        if: steps.scan.outputs.needs_update == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-pr-doc-candidates
+          path: |
+            ${{ steps.scan.outputs.json_path }}
+            ${{ steps.scan.outputs.report_path }}
+
+  create-pr-per-source:
+    if: needs.scan.outputs.needs_update == 'true'
+    needs: scan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.scan.outputs.candidates_matrix) }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download scan artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: source-pr-doc-candidates
+          path: tmp/tidb-doc-check
+
+      - name: Checkout docs-cn repo target branch
+        uses: actions/checkout@v4
+        with:
+          repository: pingcap/docs-cn
+          token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
+          ref: ${{ matrix.target_branch }}
+          path: docs-cn
+          persist-credentials: false
+
+      - name: Apply docs-cn updates for one source PR
+        run: |
+          set -euo pipefail
+          python scripts/source-pr-doc-sync/apply_source_pr_docs_cn_updates.py \
+            --report-json "$(ls tmp/tidb-doc-check/*.json | head -1)" \
+            --docs-cn-dir "docs-cn" \
+            --source-repo "${{ matrix.repo }}" \
+            --source-pr-number "${{ matrix.number }}"
+
+      - name: Build branch metadata
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          safe_repo="$(echo "${{ matrix.repo }}" | tr '/' '-')"
+          echo "safe_repo=${safe_repo}" >> "$GITHUB_OUTPUT"
+          echo "branch=source-pr/doc-sync/${safe_repo}-pr-${{ matrix.number }}-${{ needs.scan.outputs.window_end_date }}" >> "$GITHUB_OUTPUT"
+
+      - name: Check if docs-cn changes exist
+        id: changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd docs-cn
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create docs-cn PR for one source PR
+        if: steps.changed.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          path: docs-cn
+          token: ${{ secrets.DOCS_CN_BOT_TOKEN }}
+          branch: ${{ steps.meta.outputs.branch }}
+          base: ${{ matrix.target_branch }}
+          commit-message: "docs: sync from ${{ matrix.repo }}#${{ matrix.number }}"
+          title: "docs: sync from ${{ matrix.repo }}#${{ matrix.number }}"
+          body: |
+            ### What is changed, added or deleted? (Required)
+
+            Sync docs-cn updates for one source code PR.
+
+            - Source PR: ${{ matrix.url }}
+            - Source repo: `${{ matrix.repo }}`
+            - Source PR number: `${{ matrix.number }}`
+            - Source base branch: `${{ matrix.source_base_branch }}`
+            - Target docs-cn branch: `${{ matrix.target_branch }}`
+            - Scheduled window (Asia/Shanghai): `${{ needs.scan.outputs.window_start_date }} 00:00` to `${{ needs.scan.outputs.window_end_date }} 00:00`
+
+            ### Which TiDB version(s) do your changes apply to? (Required)
+
+            - [x] ${{ matrix.target_branch }}
+
+            ### What is the related PR or file link(s)?
+
+            - This PR is translated from: ${{ matrix.url }}
+
+            ### Do your changes match any of the following descriptions?
+
+            - [ ] Delete files
+            - [ ] Change aliases
+            - [ ] Need modification after applied to another branch
+            - [ ] Might cause conflicts after applied to another branch
+          delete-branch: true
+
+      - name: Print no-change reason
+        if: steps.changed.outputs.has_changes != 'true'
+        run: echo "No docs-cn file changes detected for ${{ matrix.repo }}#${{ matrix.number }}, skipping PR creation."
