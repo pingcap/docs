@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-dr
 
 > **注記：**
 >
-> サーバーレスドライバーはベータ版であり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能です。
+> TiDB Cloud Serverless Driverはベータ版であり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能です。
 
 ## TiDB Cloud Serverless Driver （ベータ版）を使用する理由 {#why-use-tidb-cloud-serverless-driver-beta}
 
@@ -20,7 +20,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-dr
 >
 > SQL や ORM ではなく RESTful API を使用したプログラミングを好む場合は、 [データサービス（ベータ版）](https://docs.pingcap.com/tidbcloud/data-service-overview/)を使用できます。
 
-## サーバーレスドライバーをインストールします {#install-the-serverless-driver}
+## TiDB Cloud Serverless Driverをインストールします {#install-the-serverless-driver}
 
 npmを使ってドライバーをインストールできます。
 
@@ -28,9 +28,9 @@ npmを使ってドライバーをインストールできます。
 npm install @tidbcloud/serverless
 ```
 
-## サーバーレスドライバーを使用する {#use-the-serverless-driver}
+## TiDB Cloud Serverless Driverを使用する {#use-the-serverless-driver}
 
-サーバーレスドライバーを使用すると、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータを照会したり、対話型トランザクションを実行したりできます。
+TiDB Cloud Serverless Driverを使用すると、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータを照会したり、対話型トランザクションを実行したりできます。
 
 ### クエリ {#query}
 
@@ -45,7 +45,7 @@ const results = await conn.execute('select * from test where id = ?',[1])
 
 ### トランザクション（実験的） {#transaction-experimental}
 
-サーバーレスドライバーを使用して対話型トランザクションを実行することもできます。例：
+TiDB Cloud Serverless Driverを使用して対話型トランザクションを実行することもできます。例：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -65,7 +65,7 @@ try {
 
 ## エッジの例 {#edge-examples}
 
-エッジ環境でサーバーレスドライバーを使用する例をいくつかご紹介します。より詳しい例については、こちらの[ライブデモ](https://github.com/tidbcloud/car-sales-insight)もご覧ください。
+エッジ環境でTiDB Cloud Serverless Driverを使用する例をいくつかご紹介します。より詳しい例については、こちらの[ライブデモ](https://github.com/tidbcloud/car-sales-insight)もご覧ください。
 
 <SimpleTab>
 
@@ -148,7 +148,7 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## サーバーレスドライバーを設定する {#configure-the-serverless-driver}
+## TiDB Cloud Serverless Driverを設定する {#configure-the-serverless-driver}
 
 TiDB Cloud Serverless Driverは、接続レベルとSQLレベルの両方で設定できます。
 
@@ -331,19 +331,19 @@ TiDB Cloud Serverless Driverは、以下のORMと統合されています。
 
 ## 価格設定 {#pricing}
 
-サーバーレスドライバー自体は無料ですが、ドライバーを使用してデータにアクセスすると[要求単位（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
+TiDB Cloud Serverless Driver自体は無料ですが、ドライバーを使用してデータにアクセスすると[要求単位（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
 
 -   TiDB Cloud Starterインスタンスの料金は、 [TiDB Cloud Starter の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
 -   TiDB Cloud Essentialインスタンスの場合、価格は[TiDB Cloud Essential の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
 
 ## 制限事項 {#limitations}
 
-現在、サーバーレスドライバーの使用には以下の制限があります。
+現在、TiDB Cloud Serverless Driverの使用には以下の制限があります。
 
 -   1回のクエリで最大10,000行まで取得できます。
 -   一度に実行できるSQL文は1つだけです。1つのクエリで複数のSQL文を実行することは、現時点ではサポートされていません。
 -   [プライベートエンドポイント](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections-serverless.md)との接続にはまだ対応していません。
--   サーバーは、クロスオリジンリソース共有（CORS）を介して、許可されていないブラウザからのリクエストをブロックし、認証情報を保護します。そのため、サーバーレスドライバーはバックエンドサービスからのみ使用できます。
+-   サーバーは、クロスオリジンリソース共有（CORS）を介して、許可されていないブラウザからのリクエストをブロックし、認証情報を保護します。そのため、TiDB Cloud Serverless Driverはバックエンドサービスからのみ使用できます。
 
 ## 次は？ {#what-s-next}
 

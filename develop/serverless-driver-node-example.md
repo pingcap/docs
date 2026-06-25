@@ -36,9 +36,9 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
         npm install @tidbcloud/serverless
 
-## ステップ2. サーバーレスドライバーを使用する {#step-2-use-the-serverless-driver}
+## ステップ2. TiDB Cloud Serverless Driverを使用する {#step-2-use-the-serverless-driver}
 
-サーバーレスドライバーは、CommonJSモジュールとESモジュールの両方をサポートしています。以下の手順では、ESモジュールの使用例を示します。
+TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの両方をサポートしています。以下の手順では、ESモジュールの使用例を示します。
 
 1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**「接続」**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 

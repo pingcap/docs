@@ -93,7 +93,7 @@ const prisma = new PrismaClient({ adapter });
         mkdir prisma-example
         cd prisma-example
 
-2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`サーバーレスドライバー、および Prisma CLI をインストールします。
+2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`TiDB Cloud Serverless Driver、および Prisma CLI をインストールします。
 
     以下のコマンドはパッケージマネージャーとしてnpmを使用します。 `npm install @tidbcloud/serverless`を実行すると、プロジェクトディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
