@@ -52,7 +52,7 @@ TiDB バージョン: 6.5.9
     -   サブクエリの`HAVING`句に相関列[＃51107](https://github.com/pingcap/tidb/issues/51107) @ [hawkingrei](https://github.com/hawkingrei)が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。
     -   共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @ [qw4990](https://github.com/qw4990)
     -   SQL 文に`JOIN`が含まれ、文内の`SELECT`リストに定数[＃50358](https://github.com/pingcap/tidb/issues/50358) @ [yibin87](https://github.com/yibin87)のみが含まれる場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。
-    -   自動増分 ID [＃50819](https://github.com/pingcap/tidb/issues/50819) @ [tiancaiamao](https://github.com/tiancaiamao)を割り当てるときに、 `AUTO_INCREMENT`属性によって不要なトランザクション競合が発生し、ID が連続しなくなる問題を修正しました。
+    -   AUTO_INCREMENT ID [＃50819](https://github.com/pingcap/tidb/issues/50819) @ [tiancaiamao](https://github.com/tiancaiamao)を割り当てるときに、 `AUTO_INCREMENT`属性によって不要なトランザクション競合が発生し、ID が連続しなくなる問題を修正しました。
     -   Grafana の監視メトリック`tidb_statistics_auto_analyze_total`整数[＃51051](https://github.com/pingcap/tidb/issues/51051) @ [hawkingrei](https://github.com/hawkingrei)として表示されない問題を修正しました
     -   パーティションテーブル[＃48713](https://github.com/pingcap/tidb/issues/48713) @ [hawkingrei](https://github.com/hawkingrei)のグローバル統計の同時マージ中にエラーが返される可能性がある問題を修正しました。
     -   列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正[＃50043](https://github.com/pingcap/tidb/issues/50043) [＃51324](https://github.com/pingcap/tidb/issues/51324) @ [crazycs520](https://github.com/crazycs520)

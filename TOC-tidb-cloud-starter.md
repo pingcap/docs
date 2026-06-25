@@ -207,8 +207,8 @@
     -   [TiDBでSQLを探求しよう](/basic-sql-operations.md)
     -   SQL言語の構造と構文
         -   属性
-            -   [自動インクリメント](/auto-increment.md)
-            -   [自動乱数](/auto-random.md)
+            -   [AUTO_INCREMENT](/auto-increment.md)
+            -   [AUTO_RANDOM](/auto-random.md)
             -   [_tidb_rowid](/tidb-rowid.md)
             -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
         -   [文字通りの値](/literal-values.md)

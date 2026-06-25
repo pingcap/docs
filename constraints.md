@@ -39,8 +39,8 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 
     Query OK, 1 row affected (0.03 sec)
 
--   最初の`INSERT`文は、 `AUTO_INCREMENT`列目に`NULL`割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
--   2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
+-   最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
+-   2 番目の`INSERT`ステートメントは、 `age`列目が`NOT NULL`として定義されているため失敗します。
 -   3番目の`INSERT`文は、 `last_login`列目が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
 
 ## チェック {#check}

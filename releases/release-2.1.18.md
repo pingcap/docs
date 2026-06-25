@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 2.1.18
     -   監視レコード[＃12329](https://github.com/pingcap/tidb/pull/12329)に、ステートメント`PREPARE`の`sql_type`による期間が表示されない問題を修正しました。
     -   `from_unixtime`関数が null [＃12572](https://github.com/pingcap/tidb/pull/12572)を処理するときに発生panic問題を修正
     -   `YEAR`型として無効な値が挿入されると、結果が`0000` [＃12744](https://github.com/pingcap/tidb/pull/12744)ではなく`NULL`なるという互換性の問題を修正しました。
-    -   `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLの自動インクリメントロックのデフォルトモード（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[＃12619](https://github.com/pingcap/tidb/pull/12619)
+    -   `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLのAUTO_INCREMENTロックのデフォルトモード（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[＃12619](https://github.com/pingcap/tidb/pull/12619)
     -   `HashAgg` `Apply` [＃12769](https://github.com/pingcap/tidb/pull/12769)の子ノードとして機能するときにクエリがハングする問題を修正しました
     -   型変換[＃12813](https://github.com/pingcap/tidb/pull/12813)に関して、 `AND`と`OR`論理式が誤った結果を返す問題を修正しました。
 -   サーバ

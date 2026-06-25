@@ -86,9 +86,9 @@ tiup dmctl check-task ./task.yaml
 
     -   `start-task`コマンドによって移行タスクが正常に開始された場合、このタスクの事前チェックでは整合性チェックがスキップされます。
 
--   シャーディングされたテーブルで主キーを自動インクリメントする
+-   シャーディングされたテーブルで主キーをAUTO_INCREMENTする
 
-    -   シャードテーブルに自動インクリメント主キーがある場合、事前チェックにより警告が返されます。自動インクリメント主キーに競合がある場合の解決策については、 [自動インクリメント主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)参照してください。
+    -   シャードテーブルにAUTO_INCREMENT主キーがある場合、事前チェックにより警告が返されます。AUTO_INCREMENT主キーに競合がある場合の解決策については、 [AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)参照してください。
 
 #### 物理インポートの確認項目 {#check-items-for-physical-import}
 
@@ -164,7 +164,7 @@ tiup dmctl check-task ./task.yaml
 | `binlog_enable`             | アップストリームデータベースでbinlogが有効になっているかどうかを確認します。                       |
 | `table_schema`              | 上流のMySQLテーブルにおけるテーブルスキーマの互換性を確認します。                             |
 | `schema_of_shard_tables`    | アップストリームのMySQLマルチインスタンスシャードにおけるテーブルスキーマの一貫性をチェックします。            |
-| `auto_increment_ID`         | 上流のMySQLマルチインスタンスシャードにおいて、自動インクリメント主キーの競合が発生していないかを確認します。       |
+| `auto_increment_ID`         | 上流のMySQLマルチインスタンスシャードにおいて、AUTO_INCREMENT主キーの競合が発生していないかを確認します。       |
 | `online_ddl`                | アップストリームが[オンラインDDL](/dm/feature-online-ddl.md)のプロセス中かどうかを確認します。 |
 | `empty_region`              | 物理インポート先のダウンストリームデータベースにおける空のリージョンの数をチェックします。                   |
 | `region_distribution`       | 物理インポートのために、下流データベースにおけるリージョンの分布を確認します。                         |

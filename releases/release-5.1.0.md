@@ -331,7 +331,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
         -   KVデータ生成時に発生するTiDB Lightningpanicの問題を修正 [#1127](https://github.com/pingcap/br/pull/1127)
         -   データインポート中にキーの合計サイズがラフトエントリの制限を超えたためにバッチ分割リージョンが失敗するバグを修正しました [#969](https://github.com/pingcap/br/issues/969)
         -   CSVファイルをインポートする際に、ファイルの最終行に改行文字（ `\r\n` ）が含まれていない場合にエラーが発生する問題を修正しました [#1133](https://github.com/pingcap/br/issues/1133)
-        -   インポートするテーブルにdouble型の自動インクリメント列が含まれている場合、auto_incrementの値が異常になる問題を修正しました [#1178](https://github.com/pingcap/br/pull/1178)
+        -   インポートするテーブルにdouble型のAUTO_INCREMENT列が含まれている場合、auto_incrementの値が異常になる問題を修正しました [#1178](https://github.com/pingcap/br/pull/1178)
 
     -   バックアップと復元 (BR)
         -   一部のTiKVノードの障害によって発生するバックアップ中断の問題を修正しました [#980](https://github.com/pingcap/br/issues/980)

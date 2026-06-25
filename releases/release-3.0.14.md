@@ -68,7 +68,7 @@ TiDB バージョン: 3.0.14
 -   TiDB
 
     -   SQLモードが`ALLOW_INVALID_DATES` [＃16170](https://github.com/pingcap/tidb/pull/16170)ときに`WEEKEND`関数がMySQLと互換性がない問題を修正しました
-    -   インデックス列に自動インクリメント主キー[＃16008](https://github.com/pingcap/tidb/pull/16008)が含まれている場合に`DROP INDEX`文の実行が失敗する問題を修正しました
+    -   インデックス列にAUTO_INCREMENT主キー[＃16008](https://github.com/pingcap/tidb/pull/16008)が含まれている場合に`DROP INDEX`文の実行が失敗する問題を修正しました
     -   ステートメントサマリー[＃15231](https://github.com/pingcap/tidb/pull/15231)の`TABLE_NAMES`列目の値が誤っている問題を修正しました
     -   プランキャッシュが有効な場合に一部の式で誤った結果が発生する問題を修正[＃16184](https://github.com/pingcap/tidb/pull/16184)
     -   `not` / `istrue` / `isfalse`関数の結果が正しくない問題を修正しました[＃15916](https://github.com/pingcap/tidb/pull/15916)

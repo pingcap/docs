@@ -185,7 +185,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 -   ユーザー権限： `mysql.user`テーブルを比較します。
 -   コンフィグレーション設定: 構成項目とシステム変数が一貫していることを確認します。
--   自動インクリメント列: 新しいクラスター内の自動インクリメント ID キャッシュをクリアします。
+-   AUTO_INCREMENT列: 新しいクラスター内のAUTO_INCREMENT ID キャッシュをクリアします。
 -   統計: 統計を手動で収集するか、新しいクラスターで自動収集を有効にします。
 
 さらに、新しいクラスターをスケールアウトして、予想されるワークロードを処理し、アラート サブスクリプション、スケジュールされた統計収集スクリプト、データ バックアップ スクリプトなどの運用タスクを移行することもできます。
@@ -241,7 +241,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     tiup ctl:${cluster_version} cdc changefeed pause --server http://${cdc_host}:${cdc_port} -c <changefeedid>
     ```
 
-5.  新しいクラスター内の TiDB ノードを再起動して、自動増分 ID キャッシュをクリアします。
+5.  新しいクラスター内の TiDB ノードを再起動して、AUTO_INCREMENT ID キャッシュをクリアします。
 
 6.  次の方法を使用して、新しいクラスターの動作ステータスを確認します。
 

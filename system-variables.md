@@ -248,7 +248,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   デフォルト値: `OFF`
 -   LDAP簡易認証の場合、この変数はプラグインによるLDAPサーバーへの接続をStartTLSで保護するかどうかを制御します。
 
-### 自動インクリメントインクリメント {#auto-increment-increment}
+### AUTO_INCREMENTインクリメント {#auto-increment-increment}
 
 -   範囲: セッション | グローバル
 -   クラスターに保持される: はい
@@ -258,7 +258,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   範囲: `[1, 65535]`
 -   列に割り当てられる`AUTO_INCREMENT`値のステップサイズと、 `AUTO_RANDOM` I​​D の割り当てルールを制御します。これは、 [`auto_increment_offset`](#auto_increment_offset)と組み合わせて使用​​されることがよくあります。
 
-### 自動インクリメントオフセット {#auto-increment-offset}
+### AUTO_INCREMENTオフセット {#auto-increment-offset}
 
 -   範囲: セッション | グローバル
 -   クラスターに保持される: はい

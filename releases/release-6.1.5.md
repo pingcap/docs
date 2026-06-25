@@ -25,7 +25,7 @@ TiDB バージョン: 6.1.5
 
 -   TiDB
 
-    -   `AUTO_RANDOM`列目をクラスター化複合インデックス[＃38572](https://github.com/pingcap/tidb/issues/38572) @ [tangenta](https://github.com/tangenta)の最初の列としてサポートします
+    -   `AUTO_RANDOM`列をクラスター化複合インデックス[＃38572](https://github.com/pingcap/tidb/issues/38572) @ [tangenta](https://github.com/tangenta)の最初の列としてサポートします
 
 ## バグ修正 {#bug-fixes}
 

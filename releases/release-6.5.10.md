@@ -47,7 +47,7 @@ TiDB バージョン: 6.5.10
 -   TiDB
 
     -   統計の初期化中にメタデータをクエリすると、OOM [＃52219](https://github.com/pingcap/tidb/issues/52219) @ [hawkingrei](https://github.com/hawkingrei)が発生する可能性がある問題を修正しました。
-    -   `AUTO_ID_CACHE=1`自動インクリメント列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正な自動インクリメント ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
+    -   `AUTO_ID_CACHE=1`AUTO_INCREMENT列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
     -   `RESTORE`ステートメントを使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラー[＃52680](https://github.com/pingcap/tidb/issues/52680) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました
     -   `STATE`のフィールドのうち`size`番目が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   外部キー[＃53652](https://github.com/pingcap/tidb/issues/53652) @ [hawkingrei](https://github.com/hawkingrei)を持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。
@@ -78,7 +78,7 @@ TiDB バージョン: 6.5.10
     -   列の不安定な一意のIDにより、 `UPDATE`文がエラー[＃53236](https://github.com/pingcap/tidb/issues/53236) @ [winoros](https://github.com/winoros)を返す可能性がある問題を修正しました。
     -   TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[＃46602](https://github.com/pingcap/tidb/issues/46602) @ [zyguan](https://github.com/zyguan)
     -   `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[＃50235](https://github.com/pingcap/tidb/issues/50235) @ [qw4990](https://github.com/qw4990)
-    -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)の場合に自動増分列の値が減少する可能性がある問題を修正しました。
+    -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。
     -   BIGINT 以外の符号なし整数が文字列/小数点[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [LittleFall](https://github.com/LittleFall)と比較されたときに誤った結果を生成する可能性がある問題を修正しました
     -   `FLOAT`型から`UNSIGNED`型へのデータ変換で誤った結果が返される問題を修正[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `VAR_SAMP()`ウィンドウ関数[＃52933](https://github.com/pingcap/tidb/issues/52933) @ [Rustin170506](https://github.com/Rustin170506)として使用できない問題を修正
@@ -137,7 +137,7 @@ TiDB バージョン: 6.5.10
         -   PDLeaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
         -   TiDB Lightning Grafanaダッシュボード[＃43357](https://github.com/pingcap/tidb/issues/43357) @ [lichunzhu](https://github.com/lichunzhu)でデータが欠落する問題を修正
         -   TiDB Lightningがサーバーモード[＃36374](https://github.com/pingcap/tidb/issues/36374) @ [kennytm](https://github.com/kennytm)でログに機密情報を出力する可能性がある問題を修正しました
-        -   TiDB Lightning [＃52654](https://github.com/pingcap/tidb/issues/52654) @ [D3Hunter](https://github.com/D3Hunter)を使用して`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE=1`両方が設定されたテーブルをインポートした後、TiDB が自動増分 ID を生成できず、エラー`Failed to read auto-increment value from storage engine`を報告する問題を修正しました。
+        -   TiDB Lightning [＃52654](https://github.com/pingcap/tidb/issues/52654) @ [D3Hunter](https://github.com/D3Hunter)を使用して`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE=1`両方が設定されたテーブルをインポートした後、TiDB がAUTO_INCREMENT ID を生成できず、エラー`Failed to read auto-increment value from storage engine`を報告する問題を修正しました。
 
     -   Dumpling
 

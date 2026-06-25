@@ -116,7 +116,7 @@ TiDB バージョン: 4.0.2
     -   アクセスが拒否されたときに権限チェックに失敗したという誤ったエラーメッセージを修正しました[＃17724](https://github.com/pingcap/tidb/pull/17724)
     -   `DELETE`文から`UPDATE`されたクエリフィードバックを破棄する[＃17843](https://github.com/pingcap/tidb/pull/17843)
     -   `AUTO_RANDOM`プロパティ[＃17828](https://github.com/pingcap/tidb/pull/17828)のないテーブルでは`AUTO_RANDOM_BASE`変更を禁止します
-    -   テーブルを`ALTER TABLE ... RENAME` [＃18243](https://github.com/pingcap/tidb/pull/18243)でデータベース間で移動したときに`AUTO_RANDOM`列目が間違った結果に割り当てられる問題を修正
+    -   テーブルを`ALTER TABLE ... RENAME` [＃18243](https://github.com/pingcap/tidb/pull/18243)でデータベース間で移動したときに`AUTO_RANDOM`列が間違った結果が割り当てられる問題を修正
     -   `tidb` [＃17719](https://github.com/pingcap/tidb/pull/17719)なしで`tidb_isolation_read_engines`の値を設定すると、一部のシステムテーブルにアクセスできない問題を修正しました。
     -   大きな整数と浮動小数点値に対する JSON 比較の不正確な結果を修正[＃17717](https://github.com/pingcap/tidb/pull/17717)
     -   `COUNT()`関数[＃17704](https://github.com/pingcap/tidb/pull/17704)結果の小数点以下のプロパティが正しくない問題を修正しました

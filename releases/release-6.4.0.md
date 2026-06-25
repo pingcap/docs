@@ -179,7 +179,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   高性能かつグローバルに単調な`AUTO_INCREMENT` (実験的) をサポート [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 
-    TiDB v6.4.0 では`AUTO_INCREMENT` MySQL 互換モードが導入されました。このモードでは、すべての TiDB インスタンスで ID が単調増加することを保証する、集中型の自動インクリメント ID 割り当てサービスが導入されます。この機能により、自動インクリメント ID によるクエリ結果のソートが容易になります。MySQL 互換モードを使用するには、テーブルを作成する際に`AUTO_ID_CACHE`を`1`に設定する必要があります。以下に例を示します。
+    TiDB v6.4.0 では`AUTO_INCREMENT` MySQL 互換モードが導入されました。このモードでは、すべての TiDB インスタンスで ID が単調増加することを保証する、集中型のAUTO_INCREMENT ID 割り当てサービスが導入されます。この機能により、AUTO_INCREMENT ID によるクエリ結果のソートが容易になります。MySQL 互換モードを使用するには、テーブルを作成する際に`AUTO_ID_CACHE`を`1`に設定する必要があります。以下に例を示します。
 
     ```sql
     CREATE TABLE t (a INT AUTO_INCREMENT PRIMARY KEY) AUTO_ID_CACHE = 1;

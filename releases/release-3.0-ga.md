@@ -111,7 +111,7 @@ TiDB Ansible バージョン: 3.0.0
 -   互換性
     -   `ALLOW_INVALID_DATES` SQLモードをサポート
     -   MySQL 320ハンドシェイクプロトコルをサポート
-    -   符号なし BIGINT 列を自動インクリメント列として表示することをサポート
+    -   符号なし BIGINT 列をAUTO_INCREMENT列として表示することをサポート
     -   `SHOW CREATE DATABASE IF NOT EXISTS`構文をサポートする
     -   CSVファイルのフォールトトレランス`load data`最適化
     -   フィルタリング条件にユーザー変数が含まれている場合、述語プッシュダウン操作を中止して、ユーザー変数を使用してウィンドウ関数をシミュレートするMySQLの動作との互換性を向上させます。

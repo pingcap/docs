@@ -158,6 +158,6 @@ TiDB バージョン: 5.3.2
 
     -   TiDB Lightning
 
-        -   `auto_increment`列目[＃27937](https://github.com/pingcap/tidb/issues/27937)列目のデータ範囲外が原因で発生するローカルバックエンドのインポート失敗の問題を修正しました。
+        -   `auto_increment`列[＃27937](https://github.com/pingcap/tidb/issues/27937)のデータ範囲外が原因で発生するローカルバックエンドのインポート失敗の問題を修正しました。
         -   事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[＃34213](https://github.com/pingcap/tidb/issues/34213)
         -   チェックサムエラー「GCの有効期間がトランザクション期間より短い」を修正[＃32733](https://github.com/pingcap/tidb/issues/32733)

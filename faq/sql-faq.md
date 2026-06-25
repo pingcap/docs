@@ -142,9 +142,9 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 楽観的トランザクション モードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
 
-## TiDB で、後から挿入されたデータの自動インクリメント ID が、前に挿入されたデータの自動インクリメント ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
+## TiDB で、後から挿入されたデータのAUTO_INCREMENT ID が、前に挿入されたデータのAUTO_INCREMENT ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
-TiDBの自動インクリメントID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータの自動インクリメントIDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [自動増分ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)参照してください。
+TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)参照してください。
 
 ## TiDB の<code>sql_mode</code>変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
@@ -472,7 +472,7 @@ ADMIN SHOW DDL;
 ホットスポットが発生するシナリオについては、 [一般的な鍋料理](/troubleshoot-hot-spot-issues.md#common-hotspots)を参照してください。以下の TiDB 機能は、ホットスポットの問題を解決するために設計されています。
 
 -   [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)属性。この属性を設定すると、行IDが複数のリージョンに分散して書き込まれるため、書き込みホットスポットの問題を軽減できます。
--   [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、自動インクリメント主キーによってもたらされるホットスポットを解決するのに役立ちます。
+-   [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、AUTO_INCREMENT主キーによってもたらされるホットスポットを解決するのに役立ちます。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md) 、小さなテーブル上の読み取りホットスポットの場合。
 -   [ロードベーススプリット](/configure-load-base-split.md) 、小さなテーブルの完全なテーブルスキャンなど、リージョン間の不均衡なアクセスによって発生するホットスポットの場合。
 -   [キャッシュされたテーブル](/cached-tables.md) 、頻繁にアクセスされるが、めったに更新されない小さなホットスポット テーブル用。

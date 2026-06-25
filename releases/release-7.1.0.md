@@ -386,7 +386,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   生成された列を持つテーブルにチェックを追加し、これらの列でサポートされていない DDL 操作のエラーを報告します[＃38988](https://github.com/pingcap/tidb/issues/38988) [＃24321](https://github.com/pingcap/tidb/issues/24321) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   特定の型変換エラー[＃41730](https://github.com/pingcap/tidb/issues/41730) @ [hawkingrei](https://github.com/hawkingrei)でエラーメッセージが正しく表示されない問題を修正
     -   TiDBノードが正常にシャットダウンした後、このノードでトリガーされたDDLタスクがキャンセルされる問題を修正しました[＃43854](https://github.com/pingcap/tidb/issues/43854) @ [zimulala](https://github.com/zimulala)
-    -   PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列目のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [tiancaiamao](https://github.com/tiancaiamao)
+    -   PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   DDL実行中に`GC lifetime is shorter than transaction duration`エラーを報告する問題を修正[＃40074](https://github.com/pingcap/tidb/issues/40074) @ [tangenta](https://github.com/tangenta)
     -   メタデータロックが予期せずDDL実行をブロックする問題を修正[＃43755](https://github.com/pingcap/tidb/issues/43755) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   IPv6環境[＃43286](https://github.com/pingcap/tidb/issues/43286) @ [Defined2014](https://github.com/Defined2014)でクラスターが一部のシステムビューを照会できない問題を修正

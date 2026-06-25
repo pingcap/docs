@@ -83,7 +83,7 @@ TiDB バージョン: 7.1.6
     -   再帰CTEクエリが無効なポインタ[＃54449](https://github.com/pingcap/tidb/issues/54449) @ [hawkingrei](https://github.com/hawkingrei)を生成する可能性がある問題を修正しました
     -   空の投影により TiDB がpanic[＃49109](https://github.com/pingcap/tidb/issues/49109) @ [winoros](https://github.com/winoros)を引き起こす問題を修正しました
     -   データ変更操作[＃53951](https://github.com/pingcap/tidb/issues/53951) @ [qw4990](https://github.com/qw4990)を含むトランザクションで仮想列を持つテーブルをクエリすると、TiDB が誤ったクエリ結果を返す可能性がある問題を修正しました
-    -   `AUTO_ID_CACHE=1`自動インクリメント列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正な自動インクリメント ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
+    -   `AUTO_ID_CACHE=1`AUTO_INCREMENT列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当て[＃52622](https://github.com/pingcap/tidb/issues/52622) @ [tiancaiamao](https://github.com/tiancaiamao)が発生する可能性がある問題を修正しました。
     -   `ALL`関数に含まれるサブクエリが誤った結果を引き起こす可能性がある問題を修正[＃52755](https://github.com/pingcap/tidb/issues/52755) @ [hawkingrei](https://github.com/hawkingrei)
     -   SQLクエリのフィルタ条件に仮想列が含まれており、実行条件に`UnionScan` [＃54870](https://github.com/pingcap/tidb/issues/54870) @ [qw4990](https://github.com/qw4990)が含まれている場合に述語を適切にプッシュダウンできない問題を修正しました。
     -   `UPDATE`リスト内のサブクエリによって TiDB がpanicを起こす可能性がある問題を修正[＃52687](https://github.com/pingcap/tidb/issues/52687) @ [winoros](https://github.com/winoros)

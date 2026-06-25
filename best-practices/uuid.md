@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/uuid/','/ja/tidbcloud/uuid/']
 
 # UUIDを主キーとして使用するベストプラクティス {#best-practices-for-using-uuids-as-primary-keys}
 
-UUID（Universally Unique Identifiers）は、分散データベースにおける主キーとして、自動増分整数の代替として広く利用されています。このドキュメントでは、TiDBでUUIDを使用するメリットを概説し、UUIDを効率的に保存およびインデックス化するためのベストプラクティスを紹介します。
+UUID（Universally Unique Identifiers）は、分散データベースにおける主キーとして、AUTO_INCREMENT整数の代替として広く利用されています。このドキュメントでは、TiDBでUUIDを使用するメリットを概説し、UUIDを効率的に保存およびインデックス化するためのベストプラクティスを紹介します。
 
 ## UUIDの概要 {#overview-of-uuids}
 

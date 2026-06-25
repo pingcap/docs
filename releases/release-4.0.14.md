@@ -149,7 +149,7 @@ TiDB バージョン: 4.0.14
 
         -   TiDB LightningがParquetファイル[＃1276](https://github.com/pingcap/br/pull/1276)の`DECIMAL`型データを解析できない問題を修正
         -   TiDB Lightningがインポートした大きなCSVファイルを分割する際に報告されるEOFエラーを修正しました[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列目を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1185](https://github.com/pingcap/br/pull/1185)
+        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1185](https://github.com/pingcap/br/pull/1185)
         -   4 GBを超えるKVデータを生成する際に発生するTiDB Lightningpanicの問題を修正[＃1128](https://github.com/pingcap/br/pull/1128)
 
     -   Dumpling
