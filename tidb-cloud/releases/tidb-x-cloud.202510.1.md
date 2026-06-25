@@ -7,16 +7,18 @@ summary: Learn about the features for the TiDB-X-CLOUD.202510.1 kernel.
 
 Release date: April 28, 2026
 
+Applicable TiDB Cloud plan: {{{ .premium }}}
+
 TiDB X kernel version: `TiDB-X-CLOUD.202510.1`
 
-{{{ .premium }}} is in public preview starting from April 28, 2026, using the `TiDB-X-CLOUD.202510.1` kernel.
+{{{ .premium }}} is available in public preview starting April 28, 2026, using the `TiDB-X-CLOUD.202510.1` kernel.
 
 In `TiDB-X-CLOUD.202510.1`:
 
 - `202510` indicates that the baseline code branch of this kernel version was created in October 2025, which is different from the release date.
 - `1` indicates that it is the first patch release built from the `TiDB-X-CLOUD.202510` baseline branch.
 
-The `TiDB-X-CLOUD.202510.1` kernel is based on the TiDB v8.5.0 kernel, which means it supports most of the features and improvements of the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel.
+The `TiDB-X-CLOUD.202510.1` kernel is based on the [TiDB v8.5.0](/releases/release-8.5.0.md) kernel and includes most of the features and improvements introduced in TiDB v8.5.0.
 
 In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel, the `TiDB-X-CLOUD.202510.1` kernel introduces the following features:
 
@@ -61,7 +63,7 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
 * Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 
-    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, starting from v8.5.5, TiDB adds storage engine identifier fields to statement summary tables and slow query logs.
+    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, TiDB now adds storage engine identifier fields to statement summary tables and slow query logs.
 
     New fields in [statement summary tables](/statement-summary-tables.md):
 
