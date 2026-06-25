@@ -18,7 +18,6 @@
 - Administration
   - [AI-Powered Features](/tidb-cloud-lake/guides/ai-powered-features.md)
   - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
-  - [Track Metrics with Prometheus](/tidb-cloud-lake/guides/track-metrics.md)
   - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
 - Security
   - [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)

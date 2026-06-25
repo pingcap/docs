@@ -43,22 +43,3 @@ the `message` field of another log entry might appear as follows:
 ```
 message: [HTTP-QUERY] Preparing to plan SQL query
 ```
-
-## Examples
-
-```sql
-SELECT * FROM system_history.log_history LIMIT 1;
-
-*************************** 1. row ***************************
-   timestamp: 2025-06-03 01:29:49.335455
-        path: databend_common_meta_client::channel_manager: channel_manager.rs:86
-      target: databend_common_meta_client::channel_manager
-   log_level: INFO
-  cluster_id: test_cluster
-     node_id: CkdmtwYXLRMhJIvVzl6i11
-warehouse_id: NULL
-    query_id: NULL
-     message: MetaChannelManager done building RealClient to 127.0.0.1:9191, start handshake
-      fields: {}
-batch_number: 41
-```
