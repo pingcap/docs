@@ -99,6 +99,11 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 
 上記の例では、日次分析結果をマテリアライズして日次結果テーブルに保存し、それに基づいて月次データ分析を高速化することで、データ分析の効率を向上させています。
 
+## 実行プロセス {#execution-process}
+
+* `INSERT INTO SELECT`ステートメントの実行中、TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDB サーバーに返し、次にその結果をターゲットテーブル (TiFlash レプリカを持つことができる) に書き込みます。
+* `INSERT INTO SELECT`ステートメントの実行により、ACID プロパティが保証されます。
+
 ## 制限 {#restrictions}
 
 <CustomContent platform="tidb">
