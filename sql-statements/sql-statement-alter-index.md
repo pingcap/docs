@@ -104,7 +104,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB の非表示インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
+-   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
 -   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
 
 ## 参照 {#see-also}

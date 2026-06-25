@@ -215,7 +215,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 重要だが頻度の低いクエリにインデックスが表示される場合は、まずインデックスを保持するか非表示にすることをお勧めします。
 
-[非表示インデックス](#safely-test-index-removal-using-invisible-indexes)使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
+[不可視インデックス](#safely-test-index-removal-using-invisible-indexes)使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
 
 ### <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-code-schema-unused-indexes-code-view}
 
@@ -233,7 +233,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 非表示のインデックスはデータベースに残りますが、TiDBオプティマイザによって無視されます。1 [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)使用してインデックスを非表示にすることで、インデックスを永久に削除することなく、本当に不要かどうかをテストできます。
 
-非表示インデックスの主な利点は次のとおりです。
+不可視インデックスの主な利点は次のとおりです。
 
 -   **安全なインデックステスト**：クエリはインデックスを使用しなくなりますが、関連するオプティマイザ統計は引き続き維持されます。必要に応じていつでも簡単に復元できます。
 -   **インデックスストレージの中断はゼロ**: インデックスはそのまま残るため、コストのかかる再作成は不要です。
@@ -252,7 +252,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 -   パフォーマンスに変化がない場合、インデックスは不要である可能性が高いため、安全に削除できます。
 -   クエリのレイテンシーが増加すると、インデックスが依然として必要になる可能性があります。
 
-### 非表示インデックスを効果的に使用する {#use-invisible-indexes-effectively}
+### 不可視インデックスを効果的に使用する {#use-invisible-indexes-effectively}
 
 -   **オフピーク時にテストする**: 制御された環境でパフォーマンスへの影響を監視します。
 -   **クエリ監視ツールを使用する**: インデックスを非表示にする前と後のクエリ実行プランを分析します。

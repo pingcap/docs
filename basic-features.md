@@ -62,7 +62,7 @@ summary: TiDBの機能概要について学びましょう。
 | [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Titanレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [バケットを使用してスキャンの同時実行性を向上させる](/tune-region-performance.md#use-bucket-to-increase-concurrency) |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
-| [非表示インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [複合主キー](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`CHECK`制約](/constraints.md#check)                                                          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [一意インデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |

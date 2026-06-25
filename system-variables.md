@@ -5128,7 +5128,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
--   この変数は、オプティマイザが[非表示インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。非表示のインデックスは DML ステートメントによって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために非表示のインデックスを選択できます。
+-   この変数は、オプティマイザが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。非表示のインデックスは DML ステートメントによって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために非表示のインデックスを選択できます。
 
 ### tidb_opt_write_row_id {#tidb-opt-write-row-id}
 
