@@ -11,7 +11,7 @@ TiDB Cloud offers two types of releases: **cloud platform releases** and **datab
 
 ## Cloud platform release notes
 
-Cloud platform releases cover the TiDB Cloud console, APIs, and control plane, including new plan features, UI changes, integrations, and operational improvements that apply across all TiDB Cloud plans.
+Cloud platform releases cover the TiDB Cloud console, APIs, and control plane, including new plan features, UI changes, integrations, and operational improvements across all TiDB Cloud plans.
 
 - [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md)
 
@@ -19,12 +19,12 @@ Cloud platform releases cover the TiDB Cloud console, APIs, and control plane, i
 
 The database kernel is the core engine that processes your SQL queries and manages your data. Depending on your TiDB Cloud plan, your resources run on different kernels, each with its own release cadence and release notes.
 
-| Plan | Kernel | Release notes |
-|------|--------|---------------|
-| TiDB Cloud Starter, Essential, and Premium | TiDB X kernel (`TiDB-X-CLOUD.YYYYMM.x`) | TiDB X kernel release notes (see the navigation pane on the left) |
-| TiDB Cloud Dedicated | Standard TiDB kernel (`vX.Y.Z`) | [TiDB Self-Managed release notes](/releases/release-notes.md) |
+| Plan |  Kernel release notes |
+|------|----------------------|
+| TiDB Cloud Starter, Essential, and Dedicated | [TiDB Self-Managed release notes](/releases/release-notes.md) |
+| TiDB Cloud Premium | TiDB X kernel release notes (see the navigation pane on the left) |
 
-For more information about the versioning schemes of these kernels, see [TiDB Cloud Kernel Versioning](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md).
+For more information about the kernel versioning scheme for TiDB Cloud Premium, see [Kernel Versioning for TiDB Cloud Premium](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md).
 
 ## Maintenance notifications
 
