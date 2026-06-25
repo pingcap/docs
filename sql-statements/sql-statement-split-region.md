@@ -15,7 +15,7 @@ TiDBで新しいテーブルを作成するたびに、デフォルトで1つの
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SplitRegionStmt ::=
@@ -387,7 +387,7 @@ CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REG
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [テーブルリージョンを表示する](/sql-statements/sql-statement-show-table-regions.md)
 -   セッション変数: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、 [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 、 [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。
