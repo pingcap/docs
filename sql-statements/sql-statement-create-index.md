@@ -420,6 +420,7 @@ CREATE INDEX idx_pending_status ON users (created_at) WHERE status = 'pending';
 
 Then the following queries can use the partial index:
 
+```sql
 mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' AND name = 'John';
 +-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
 | id                            | estRows | task      | access object                             | operator info                                         |
@@ -466,7 +467,7 @@ mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
 
 If the query predicates do not match the partial index definition, TiDB does not select the index, even with a hint:
 
-```
+```sql
 mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |
