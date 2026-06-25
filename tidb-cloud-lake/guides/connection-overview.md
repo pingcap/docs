@@ -5,7 +5,7 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 # Connect to TiDB Cloud Lake
 
-{{{ .lake }}} supports multiple connection methods to suit different use cases. All options below work with both **{{{ .lake }}}** and **self-hosted {{{ .lake }}}**.
+{{{ .lake }}} supports multiple connection methods to suit different use cases.
 
 ## Quick Selection
 
