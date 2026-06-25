@@ -147,6 +147,7 @@ The supported options are described as follows:
 
 | Option name | Supported data sources and formats | Description |
 |:---|:---|:---|
+| `GROUP_KEY='<string>'` | All file formats | Specifies an optional group key for the job. The group key does not affect the import process itself. It enables you to monitor import jobs with the same group key collectively using [`SHOW IMPORT GROUPS`](/sql-statements/sql-statement-show-import-group.md). The group key can contain only alphanumeric characters, underscores (`_`), and hyphens (`-`), up to 256 characters. If no group key is specified, the job does not belong to any group and does not appear in `SHOW IMPORT GROUPS` results. |
 | `CHARACTER_SET='<string>'` | CSV | Specifies the character set of the data file. The default character set is `utf8mb4`. The supported character sets include `binary`, `utf8`, `utf8mb4`, `gb18030`, `gbk`, `latin1`, and `ascii`. |
 | `FIELDS_TERMINATED_BY='<string>'` | CSV | Specifies the field separator. The default separator is `,`. |
 | `FIELDS_ENCLOSED_BY='<char>'` | CSV | Specifies the field delimiter. The default delimiter is `"`. |
@@ -255,7 +256,9 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 ### View and manage import jobs
 
-For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+
+You can also use [`SHOW IMPORT GROUP(s)`](/sql-statements/sql-statement-show-import-group.md) to view the overall progress of jobs in the same group.
 
 After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
@@ -271,6 +274,14 @@ IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
+```
+
+#### Assign a group key to the import job
+
+To monitor related import jobs collectively using [`SHOW IMPORT GROUPS`](/sql-statements/sql-statement-show-import-group.md), assign them the same group key with the `GROUP_KEY` option:
+
+```sql
+IMPORT INTO t FROM '/path/to/file.csv' WITH GROUP_KEY='user_group';
 ```
 
 #### Skip importing a specific field in your data file
@@ -378,4 +389,5 @@ This statement is a TiDB extension to MySQL syntax.
 * [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
 * [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
 * [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+* [`SHOW IMPORT GROUP`](/sql-statements/sql-statement-show-import-group.md)
 * [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md)
