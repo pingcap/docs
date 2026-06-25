@@ -17,7 +17,7 @@ We conducted four specific benchmarks to evaluate {{{ .lake }}} versus Snowflake
 ## Platforms
 
 - **[Snowflake](https://snowflake.com)**: A well-known cloud data platform emphasizing scalable compute, data sharing.
-- **[{{{ .lake }}}](https://tidbcloud.com)**: A cloud-native data warehouse built on the open-source {{{ .lake }}} project, focusing on scalability and cost-efficiency.
+- **[{{{ .lake }}}](https://tidbcloud.com)**: A cloud-native data warehouse focusing on scalability and cost-efficiency.
 
 ## Benchmark Conditions
 
@@ -92,7 +92,6 @@ The benchmark tests both Snowflake and {{{ .lake }}} under similar conditions:
 | Parameter      | Snowflake                                                | {{{ .lake }}}                            |
 | -------------- | -------------------------------------------------------- | ----------------------------------------- |
 | Warehouse Size | Small                                                    | Small                                     |
-| vCPU           | 16                                                       | 16                                        |
 | Price          | [$4/hour](https://www.snowflake.com/en/pricing-options/) | [$3.2/hour](https://www.pingcap.com/pricing/) |
 | AWS Region     | us-east-2                                                | us-east-2                                 |
 | Storage        | AWS S3                                                   | AWS S3                                    |
