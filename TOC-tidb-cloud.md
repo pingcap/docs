@@ -490,7 +490,7 @@
     -   [一時テーブル](/temporary-tables.md)
     -   [キャッシュされたテーブル](/cached-tables.md)
     -   [外部キー制約](/foreign-key.md)
-    -   文字セットと照合
+    -   文字セットと照合順序
         -   [概要](/character-set-and-collation.md)
         -   [GBK](/character-set-gbk.md)
     -   履歴データを読む

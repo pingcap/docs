@@ -28,8 +28,8 @@ summary: TiDBの機能概要について学びましょう。
 | [数値型](/data-type-numeric.md)                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [日付と時刻の種類](/data-type-date-and-time.md)                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列型](/data-type-string.md)                                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [JSONタイプ](/data-type-json.md)                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
-| [ベクトルタイプ](/ai/reference/vector-search-data-types.md)                           |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [JSON型](/data-type-json.md)                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |  E  |
+| [ベクトル型](/ai/reference/vector-search-data-types.md)                           |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [制御フロー関数](/functions-and-operators/control-flow-functions.md)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字列関数](/functions-and-operators/string-functions.md)                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [数値関数と数値演算子](/functions-and-operators/numeric-functions-and-operators.md)      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -44,7 +44,7 @@ summary: TiDBの機能概要について学びましょう。
 | [ウィンドウ関数](/functions-and-operators/window-functions.md)                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [その他の関数](/functions-and-operators/miscellaneous-functions.md)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [オペレーター](/functions-and-operators/operators.md)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [文字セットと照合](/character-set-and-collation.md)[^1]                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [文字セットと照合順序](/character-set-and-collation.md)[^1]                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ユーザーレベルのロック](/functions-and-operators/locking-functions.md)                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 
 </StickyHeaderTable>
@@ -62,8 +62,8 @@ summary: TiDBの機能概要について学びましょう。
 | [Titanプラグイン](/storage-engine/titan-overview.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [Titanレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental)               |  E  |  E  |  E  |  E  |  E  |  E  |  E  |
 | [バケットを使用してスキャンの同時実行性を向上させる](/tune-region-performance.md#use-bucket-to-increase-concurrency) |  E  |  E  |  E  |  E  |  E  |  E  |  N  |
-| [見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [非表示インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [複合主キー](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`CHECK`制約](/constraints.md#check)                                                          |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [一意インデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [整数型の`PRIMARY KEY`に対するクラスター化インデックス](/clustered-indexes.md)                                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |

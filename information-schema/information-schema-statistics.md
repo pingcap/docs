@@ -56,7 +56,7 @@ DESC statistics;
 -   `INDEX_TYPE` : インデックスのタイプ。
 -   `COMMENT` : インデックスに関連するその他の情報。
 -   `INDEX_COMMENT` : インデックスの作成時にインデックスに指定されたコメント属性を持つコメント。
--   `IS_VISIBLE` : このインデックスが表示されるかどうか。2 [目に見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)参照してください。
+-   `IS_VISIBLE` : このインデックスが表示されるかどうか。2 [非表示インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)参照してください。
 -   `Expression`非式部分のインデックスキーの場合、この値は`NULL`です。式部分のインデックスキーの場合、この値は式そのものです[表現インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 次の文は同等です。
