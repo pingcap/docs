@@ -14,13 +14,12 @@ Choose your preferred approach:
 | Package | Best For | Installation |
 |---------|----------|-------------|
 | **tidbcloudlake-driver** | Direct database operations, async/await | `pip install tidbcloudlake-driver` |
-| **databend-sqlalchemy** | ORM integration, existing SQLAlchemy apps | `pip install databend-sqlalchemy` |
 
 **Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
 
 ---
 
-## tidbcloudlake-driver (Recommended)
+## tidbcloudlake-driver
 
 ### Features
 
@@ -105,23 +104,6 @@ async def main():
 
 asyncio.run(main())
 ```
-
----
-
-## databend-sqlalchemy
-
-For SQLAlchemy ORM integration:
-
-```python
-from sqlalchemy import create_engine, text
-
-engine = create_engine('<your-dsn>')
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT 1"))
-    print(result.fetchall())
-```
-
----
 
 ## Data Type Mappings
 
