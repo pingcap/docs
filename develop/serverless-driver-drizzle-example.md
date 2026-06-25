@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 # TiDB Cloud Serverless Driver Drizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[Drizzle ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`以降、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートしており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md).
+[Drizzle ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`以降、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートしており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)に対応しています。
 
 このチュートリアルでは、Node.js環境およびエッジ環境でDrizzleとTiDB Cloud Serverless Driverを使用する方法について説明します。
 

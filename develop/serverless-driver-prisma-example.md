@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 # TiDB Cloud Serverless Driver Prisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
 
-[Prisma](https://www.prisma.io/docs)開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)で HTTPS 経由で[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
+[Prisma](https://www.prisma.io/docs)は、開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)で HTTPS 経由で[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)を使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
 
 -   サーバーレス環境におけるPrisma Clientのパフォーマンス向上
 -   エッジ環境でPrisma Clientを使用できる機能
