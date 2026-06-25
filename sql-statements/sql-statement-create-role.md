@@ -3,7 +3,7 @@ title: CREATE ROLE | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE ROLE の使用法の概要。
 ---
 
-# ロールを作成 {#create-role}
+# CREATE ROLE {#create-role}
 
 このステートメントは、ロールベースのアクセス制御の一部としてユーザーに割り当てることができる新しいロールを作成します。
 

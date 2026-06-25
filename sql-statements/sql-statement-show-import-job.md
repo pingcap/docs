@@ -3,7 +3,7 @@ title: SHOW IMPORT
 summary: TiDB での SHOW IMPORT の使用法の概要。
 ---
 
-# インポートを表示 {#show-import}
+# SHOW IMPORT {#show-import}
 
 `SHOW IMPORT`ステートメントは、TiDB で作成された IMPORT ジョブを表示するために使用されます。このステートメントは、現在のユーザーが作成したジョブのみを表示できます。
 

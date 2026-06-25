@@ -3,7 +3,7 @@ title: DROP SEQUENCE
 summary: TiDB データベースの DROP SEQUENCE の使用法の概要。
 ---
 
-# ドロップシーケンス {#drop-sequence}
+# DROP SEQUENCE {#drop-sequence}
 
 `DROP SEQUENCE`のステートメントは、TiDB 内のシーケンス オブジェクトを削除します。
 
@@ -42,6 +42,6 @@ DROP SEQUENCE seq, seq2;
 
 ## 参照 {#see-also}
 
--   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
--   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
--   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
+-   [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
+-   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)

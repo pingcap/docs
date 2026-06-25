@@ -3,7 +3,7 @@ title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW [GLOBAL|SESSION] VARIABLES の使用法の概要。
 ---
 
-# [グローバル|セッション]変数を表示 {#show-global-session-variables}
+# SHOW [GLOBAL|SESSION] VARIABLES {#show-global-session-variables}
 
 この文は、スコープ`GLOBAL`または`SESSION`の変数のリストを表示します。スコープが指定されていない場合は、デフォルトのスコープ`SESSION`が適用されます。
 

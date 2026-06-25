@@ -3,7 +3,7 @@ title: ALTER INSTANCE
 summary: TiDBにおけるALTER INSTANCE`の使用方法の概要を学びましょう。
 ---
 
-# インスタンスの変更 {#alter-instance}
+# ALTER INSTANCE {#alter-instance}
 
 `ALTER INSTANCE`ステートメントは、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
 
@@ -51,7 +51,7 @@ ALTER INSTANCE RELOAD TLS;
 
 `ALTER INSTANCE RELOAD TLS`ステートメントは、元の構成パスからの再読み込みのみをサポートします。TiDB の起動時に読み込みパスを動的に変更したり、TLS 暗号化接続機能を動的に有効化したりすることはサポートしていません。この機能は、TiDB を再起動するとデフォルトで無効になります。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 <CustomContent platform="tidb">
 

@@ -3,7 +3,7 @@ title: DROP ROLE | TiDB SQL Statement Reference
 summary: TiDB データベースの DROP ROLE の使用法の概要。
 ---
 
-# 役割を放棄する {#drop-role}
+# DROP ROLE {#drop-role}
 
 このステートメントは、以前に`CREATE ROLE`で作成されたロールを削除します。
 

@@ -3,15 +3,15 @@ title: SHOW PLACEMENT LABELS
 summary: TiDBにおけるSHOW PLACEMENT LABELSの使用方法。
 ---
 
-# 配置ラベルを表示する {#show-placement-labels}
+# SHOW PLACEMENT LABELS {#show-placement-labels}
 
-`SHOW PLACEMENT LABELS`配置ルールで使用可能なラベルと値を要約するために使用されます。
+`SHOW PLACEMENT LABELS`は配置ルールで使用可能なラベルと値を要約するために使用されます。
 
 > **注記：**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -36,8 +36,8 @@ SHOW PLACEMENT LABELS;
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

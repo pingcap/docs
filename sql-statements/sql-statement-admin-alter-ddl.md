@@ -3,7 +3,7 @@ title: ADMIN ALTER DDL JOBS
 summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法の概要。
 ---
 
-# 管理者によるDDLジョブの変更 {#admin-alter-ddl-jobs}
+# ADMIN ALTER DDL JOBS {#admin-alter-ddl-jobs}
 
 > **注記：**
 >
@@ -74,7 +74,7 @@ ADMIN SHOW DDL JOBS 1;
     +--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
     1 row in set (0.01 sec)
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminAlterDDLStmt ::=
@@ -91,7 +91,7 @@ AlterJobOption ::=
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)

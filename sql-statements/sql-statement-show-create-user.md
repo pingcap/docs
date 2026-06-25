@@ -3,7 +3,7 @@ title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW CREATE USER の使用法の概要。
 ---
 
-# 表示 ユーザーの作成 {#show-create-user}
+# SHOW CREATE USER {#show-create-user}
 
 このステートメントは、 `CREATE USER`構文を使用してユーザーを再作成する方法を示しています。
 
@@ -50,6 +50,6 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## 参照 {#see-also}
 
--   [ユーザーの作成](/sql-statements/sql-statement-create-user.md)
--   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
--   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
+-   [CREATE USER](/sql-statements/sql-statement-create-user.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [DROP USER](/sql-statements/sql-statement-drop-user.md)

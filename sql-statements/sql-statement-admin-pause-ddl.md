@@ -3,9 +3,9 @@ title: ADMIN PAUSE DDL JOBS
 summary: TiDB データベースの ADMIN PAUSE DDL JOBS の使用法の概要。
 ---
 
-# 管理者によるDDLジョブの一時停止 {#admin-pause-ddl-jobs}
+# ADMIN PAUSE DDL JOBS {#admin-pause-ddl-jobs}
 
-`ADMIN PAUSE DDL`は実行中のDDLジョブを一時停止します。2 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
+`ADMIN PAUSE DDL`は実行中のDDLジョブを一時停止します。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 
 この文を使用すると、発行済みだがまだ実行が完了していないDDLジョブを一時停止できます。一時停止後、DDLジョブを実行するSQL文はすぐには戻りませんが、まだ実行中であるように見えます。すでに完了しているDDLジョブを一時停止しようとすると、列`RESULT`にエラー`DDL Job:90 not found`表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 

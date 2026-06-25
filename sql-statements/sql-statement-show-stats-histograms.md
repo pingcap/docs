@@ -3,9 +3,9 @@ title: SHOW STATS_HISTOGRAMS
 summary: TiDB データベースの SHOW STATS_HISTOGRAMS の使用法の概要。
 ---
 
-# 統計ヒストグラムを表示 {#show-stats-histograms}
+# SHOW STATS_HISTOGRAMS {#show-stats-histograms}
 
-このステートメントは、データベース[統計](/statistics.md)の一部として[`ANALYZE`ステートメント](/sql-statements/sql-statement-analyze-table.md)によって収集されたヒストグラム情報を表示します。
+このステートメントは、データベース[統計](/statistics.md)の一部として[ANALYZE](/sql-statements/sql-statement-analyze-table.md)によって収集されたヒストグラム情報を表示します。
 
 現在、 `SHOW STATS_HISTOGRAMS`ステートメントは次の列を返します。
 
@@ -75,5 +75,5 @@ SHOW STATS_HISTOGRAMS WHERE table_name = 't2';
 
 ## 参照 {#see-also}
 
--   [分析](/sql-statements/sql-statement-analyze-table.md)
+-   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

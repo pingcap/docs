@@ -3,7 +3,7 @@ title: ADD COLUMN | TiDB SQL Statement Reference
 summary: TiDB データベースの ADD COLUMN の使用法の概要。
 ---
 
-# 列を追加 {#add-column}
+# ADD COLUMN {#add-column}
 
 `ALTER TABLE.. ADD COLUMN`文は既存のテーブルに列を追加します。この操作は TiDB ではオンラインで実行されるため、列の追加によってテーブルへの読み取りも書き込みもブロックされることはありません。
 
@@ -92,5 +92,5 @@ mysql> SELECT * FROM t1;
 
 ## 参照 {#see-also}
 
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

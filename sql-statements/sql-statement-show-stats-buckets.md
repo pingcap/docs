@@ -3,7 +3,7 @@ title: SHOW STATS_BUCKETS
 summary: TiDB データベースの SHOW STATS_BUCKETS の使用法の概要。
 ---
 
-# STATS_BUCKETSを表示 {#show-stats-buckets}
+# SHOW STATS_BUCKETS {#show-stats-buckets}
 
 `SHOW STATS_BUCKETS`文は[統計](/statistics.md)のバケット情報を表示します。
 

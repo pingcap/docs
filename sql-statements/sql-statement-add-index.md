@@ -3,7 +3,7 @@ title: ADD INDEX | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 ---
 
-# インデックスを追加 {#add-index}
+# ADD INDEX {#add-index}
 
 `ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで実行されるため、インデックスの追加によってテーブルへの読み取りや書き込みがブロックされることはありません。
 
@@ -31,7 +31,7 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -110,15 +110,15 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 -   `PRIMARY KEY`インデックス オプションを使用して、 `UNIQUE INDEX`または`GLOBAL`グローバル インデックスとして[グローバルインデックス](/global-indexes.md)ことは、パーティション化[パーティション化されたテーブル](/partitioned-table.md)の TiDB 拡張機能であり、MySQL とは互換性がありません。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [インデックス選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [インデックスを作成する](/sql-statements/sql-statement-create-index.md)
--   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
--   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)

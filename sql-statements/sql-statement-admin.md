@@ -3,7 +3,7 @@ title: ADMIN | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるADMINの使用方法の概要。
 ---
 
-# 管理者 {#admin}
+# ADMIN {#admin}
 
 このステートメントは、TiDB のステータスを表示したり、TiDB 内のテーブルのデータをチェックしたりするために使用される TiDB 拡張構文です。このドキュメントでは、次の`ADMIN`関連のステートメントを紹介します。
 
@@ -148,7 +148,7 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=

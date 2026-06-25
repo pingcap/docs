@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-delete-data/','/ja/tidb/dev/dev-guide-delet
 
 # データ削除 {#delete-data}
 
-このドキュメントでは、[消去](/sql-statements/sql-statement-delete.md)SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、[生きる時間](/develop/dev-guide-time-to-live.md)機能を使用してください。
+このドキュメントでは、[DELETE](/sql-statements/sql-statement-delete.md)SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、[存続時間](/develop/dev-guide-time-to-live.md)機能を使用してください。
 
 ## 始める前に {#before-you-start}
 

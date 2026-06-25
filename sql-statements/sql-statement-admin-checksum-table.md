@@ -4,7 +4,7 @@ summary: TiDB データベースにおける ADMIN の使用法の概要。
 category: reference
 ---
 
-# 管理者チェックサムテーブル {#admin-checksum-table}
+# ADMIN CHECKSUM TABLE {#admin-checksum-table}
 
 `ADMIN CHECKSUM TABLE`のステートメントは、テーブルのデータとインデックスの CRC64 チェックサムを計算します。
 

@@ -46,7 +46,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## 参照 {#see-also}
 
--   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
--   [ロールバック](/sql-statements/sql-statement-rollback.md)
--   [始める](/sql-statements/sql-statement-begin.md)
+-   [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
+-   [ROLLBACK](/sql-statements/sql-statement-rollback.md)
+-   [BEGIN](/sql-statements/sql-statement-begin.md)
 -   [制約の遅延チェック](/transaction-overview.md#lazy-check-of-constraints)

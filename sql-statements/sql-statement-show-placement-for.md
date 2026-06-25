@@ -3,9 +3,9 @@ title: SHOW PLACEMENT FOR
 summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 ---
 
-# ショーの掲載場所 {#show-placement-for}
+# SHOW PLACEMENT FOR {#show-placement-for}
 
-`SHOW PLACEMENT FOR` 、すべての配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションに対して正規の形式で表示します。
+`SHOW PLACEMENT FOR`は、すべての配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションに対する正規の形式で表示します。
 
 > **注記：**
 >
@@ -13,11 +13,11 @@ summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 
 このステートメントは`Scheduling_State`フィールドがPlacement Driver(PD) が配置スケジュールに関して現在行っている進捗状況を示す結果セットを返します。
 
--   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいものの、現在のところクラスタで満たすことができないことを示している可能性があります。たとえば、 `FOLLOWERS=4`ですが、フォロワー候補となる TiKV ストアが 3 つしかない場合などです。
+-   `PENDING` : PD はまだ配置のスケジュールを開始していません。これは、配置ルールが意味的には正しいものの、現在のところクラスタで満たすことができないことを示している可能性があります。たとえば、 `FOLLOWERS=4`なのに、フォロワー候補となる TiKV ストアが 3 つしかない場合などです。
 -   `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -79,8 +79,8 @@ SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

@@ -3,9 +3,9 @@ title: ALTER INDEX
 summary: TiDB データベースの ALTER INDEX の使用法の概要。
 ---
 
-# インデックスの変更 {#alter-index}
+# ALTER INDEX {#alter-index}
 
-`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが非表示のインデックスを選択するように設定できます。
+`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。不可視インデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが不可視インデックスを選択するように設定できます。
 
 ## 概要 {#synopsis}
 
@@ -47,7 +47,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザーは**非表示のインデックス**`c1`を使用できません。
+オプティマイザーは**不可視インデックス**`c1`を使用できません。
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -80,7 +80,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
+`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは不可視インデックスを使用できません。そうでない場合は、エラーが返されます。
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);
@@ -104,13 +104,13 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB の非表示インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
--   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
+-   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを不可視にすることはできません。
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)

@@ -3,7 +3,7 @@ title: USE | TiDB SQL Statement Reference
 summary: TiDB データベースにおける USE の使用法の概要。
 ---
 
-# 使用 {#use}
+# USE {#use}
 
 `USE`ステートメントは、ユーザー セッションの現在のデータベースを選択します。
 
@@ -78,5 +78,5 @@ TiDBの`USE`文はMySQLと完全に互換性があります。互換性に違い
 
 ## 参照 {#see-also}
 
--   [データベースの作成](/sql-statements/sql-statement-create-database.md)
--   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+-   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
