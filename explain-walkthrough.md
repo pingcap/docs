@@ -46,7 +46,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 > **注記：**
 >
-> テーブルに含まれる地域の一般的なビューを表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)実行します。
+> テーブルに含まれるリージョンの概要を表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)実行します。
 
 ## 現在のパフォーマンスを評価する {#assess-the-current-performance}
 

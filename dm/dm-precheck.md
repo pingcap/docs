@@ -90,9 +90,9 @@ tiup dmctl check-task ./task.yaml
 
     -   シャードテーブルにAUTO_INCREMENT主キーがある場合、事前チェックにより警告が返されます。AUTO_INCREMENT主キーに競合がある場合の解決策については、 [AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)参照してください。
 
-#### 物理的に輸入する品目を確認してください {#check-items-for-physical-import}
+#### 物理インポートの確認項目 {#check-items-for-physical-import}
 
-タスク設定で`import-mode: "physical"`を設定した場合、 [物理的な輸入](/tidb-lightning/tidb-lightning-physical-import-mode.md)が正常に実行されることを確認するための以下のチェック項目が追加されます。指示に従っても、これらのチェック項目の要件を満たすことが難しい場合は、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
+タスク設定で`import-mode: "physical"`を設定した場合、 [物理インポート](/tidb-lightning/tidb-lightning-physical-import-mode.md)が正常に実行されることを確認するための以下のチェック項目が追加されます。指示に従っても、これらのチェック項目の要件を満たすことが難しい場合は、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
 
 -   下流データベース内の空のリージョン
 

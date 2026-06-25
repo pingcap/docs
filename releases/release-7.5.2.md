@@ -243,7 +243,7 @@ TiDB バージョン: 7.5.2
     -   TiDB データ移行 (DM)
 
         -   `go-mysql` [＃11041](https://github.com/pingcap/tiflow/issues/11041) @ [D3Hunter](https://github.com/D3Hunter)にアップグレードして接続ブロックの問題を修正しました
-        -   アップストリーム主キーがバイナリタイプ[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
+        -   アップストリーム主キーがバイナリ型[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
 
     -   TiDB Lightning
 

@@ -130,7 +130,7 @@ TiDB バージョン: 6.5.9
 
     -   TiDB データ移行 (DM)
 
-        -   アップストリーム主キーがバイナリタイプ[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
+        -   アップストリーム主キーがバイナリ型[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
 
     -   TiDB Lightning
 

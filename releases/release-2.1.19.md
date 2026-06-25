@@ -69,7 +69,7 @@ TiDB Ansible バージョン: 2.1.19
 
 -   Raftstore
     -   TiKVを再起動したときに発生するpanicを修正し、リージョンをマージしてCompact log [＃5884](https://github.com/tikv/tikv/pull/5884)を適用するプロセスで`is_merging`誤った値が与えられました。
--   輸入業者
+-   Importer
     -   gRPC メッセージの長さの制限を解除[＃5809](https://github.com/tikv/tikv/pull/5809)
 
 ## PD {#pd}

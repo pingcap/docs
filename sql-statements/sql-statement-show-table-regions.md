@@ -34,7 +34,7 @@ TableName ::=
 -   `START_KEY` :リージョンの開始キー。
 -   `END_KEY` :リージョンの終了キー。
 -   `LEADER_ID` :リージョンのLeaderID 。
--   `LEADER_STORE_ID` :リージョンリーダーが所在する店舗 (TiKV) の ID。
+-   `LEADER_STORE_ID` :リージョンリーダーが所在するストア (TiKV) の ID。
 -   `PEERS` : すべてのリージョンレプリカのID。
 -   `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`は true を意味します。
 -   `WRITTEN_BYTES` : 1回のハートビートサイクルでリージョンに書き込まれるデータの推定量。単位はバイトです。

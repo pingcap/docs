@@ -300,7 +300,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
 -   PD
 
-    -   店舗数が多い場合にPDLeaderの再選が遅くなる問題を修正しました [#3697](https://github.com/tikv/pd/issues/3697)
+    -   ストア数が多い場合にPDリーダーの再選が遅くなる問題を修正しました [#3697](https://github.com/tikv/pd/issues/3697)
 
     -   存在しないストアから退去リーダースケジューラを削除する際に発生するpanic問題を修正 [#3660](https://github.com/tikv/pd/issues/3660)
 
