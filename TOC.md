@@ -629,6 +629,7 @@
     - [User Account Management](/user-account-management.md)
     - [TiDB Password Management](/password-management.md)
     - [Role-Based Access Control](/role-based-access-control.md)
+    - [Column-Level Masking Policy](/column-level-masking-policy.md)
     - [Certificate-Based Authentication](/certificate-authentication.md)
   - SQL
     - SQL Language Structure and Syntax
@@ -686,6 +687,7 @@
       - [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       - [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
+      - [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md)
       - [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)
       - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
       - [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
@@ -773,6 +775,7 @@
       - [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
       - [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
+      - [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md)
       - [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
       - [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
       - [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)
