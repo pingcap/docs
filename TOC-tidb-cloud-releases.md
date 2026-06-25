@@ -7,7 +7,7 @@
 
 - [TiDB Cloud Release Overview](/tidb-cloud/releases/_index.md)
 
-## REGULAR CLOUD RELEASE NOTES
+## CLOUD PLATFORM RELEASE NOTES
 
 - [2026](/tidb-cloud/releases/tidb-cloud-release-notes.md)
 - [2025](/tidb-cloud/releases/release-notes-2025.md)
