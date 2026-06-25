@@ -187,7 +187,7 @@
             -   [AUTO_RANDOM](/auto-random.md)
             -   [_tidb_rowid](/tidb-rowid.md)
             -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
-        -   [文字通りの値](/literal-values.md)
+        -   [リテラル値](/literal-values.md)
         -   [スキーマオブジェクト名](/schema-object-names.md)
         -   [キーワードと予約語](/keywords.md)
         -   [ユーザー定義変数](/user-defined-variables.md)
