@@ -30,7 +30,7 @@ The TPC-H benchmark is a standard for evaluating decision support systems, focus
 
 > **Note:**
 >
-> This benchmark uses default settings for both Snowflake and {{{ .lake }}} without any special tuning. And remember, **don't just take our word for it — you're encouraged to run and verify these results yourself.**
+> This benchmark uses default settings for both Snowflake and {{{ .lake }}} without any special tuning. This comparison is based on Snowflake Gen1 standard warehouses (`GENERATION = '1'`). And remember, **don't just take our word for it — you're encouraged to run and verify these results yourself.**
 
 ### Data Loading Benchmark
 

@@ -21,7 +21,11 @@ We conducted four specific benchmarks to evaluate {{{ .lake }}} versus Snowflake
 
 ## Benchmark Conditions
 
-Conducted on a `Small-Size` warehouse (16vCPU, AWS us-east-2) using data from the same S3 bucket.
+Conducted on a `Small-Size` warehouse using data from the same S3 bucket.
+
+> **Note:**
+>
+> This comparison is based on Snowflake Gen1 standard warehouses (`GENERATION = '1'`).
 
 ## Performance and Cost Comparison
 
