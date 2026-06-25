@@ -355,7 +355,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^8]: Plugin is not supported on {{{ .starter }}} or {{{ .essential }}}.
 
-[^9]: {{{ .starter }}} and {{{ .essential }}} enforce strong password policy.
+[^9]: {{{ .starter }}} and {{{ .essential }}} enforce a strong password policy.
 
 [^10]: The variable is read-only on {{{ .starter }}} and {{{ .essential }}}.
 
