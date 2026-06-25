@@ -1,5 +1,5 @@
 ---
-title: TiDB Cloud CLI 参考
+title: TiDB Cloud CLI 参考（Beta）
 summary: 提供 TiDB Cloud CLI 的概览。
 ---
 

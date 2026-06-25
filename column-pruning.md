@@ -15,4 +15,10 @@ select a from t where b> 5
 
 在这个查询中，只使用了列 a 和列 b，而列 c 和列 d 是冗余的。关于该语句的查询计划，`Selection` 操作符使用了列 b，然后 `DataSource` 操作符使用了列 a 和列 b。列 c 和列 d 可以被裁剪，因为 `DataSource` 操作符不读取它们。
 
-因此，当 TiDB 在逻辑优化阶段进行自上而下的扫描时，会裁剪掉冗余的列以减少资源浪费。这个扫描过程被称为 "Column Pruning"，对应的规则是 `columnPruner`。如果你想禁用此规则，可以参考 [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)。
+因此，当 TiDB 在逻辑优化阶段进行自上而下的扫描时，会裁剪掉冗余的列以减少资源浪费。这个扫描过程被称为 "Column Pruning"，对应的规则是 `columnPruner`。
+
+<CustomContent platform="tidb">
+
+如果你想禁用此规则，可以参考 [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)。
+
+</CustomContent>

@@ -36,7 +36,8 @@ category: quick start
 
         > **注意**
         >
-        > 目前，TiDB Cloud Starter 已在 AWS 上正式开放，在阿里云上为公测版。本文档后续步骤以 AWS 为例。
+        > - {{{ .starter }}} 已在 AWS 上正式开放，在阿里云上为公测版。本文档后续步骤以 AWS 为例。
+        > - TiDB Cloud 是一项全托管服务。PingCAP 负责底层云基础设施的运营和管理。你只能通过 TiDB Cloud 控制台访问底层资源。
 
         </CustomContent>
 
@@ -44,7 +45,8 @@ category: quick start
 
         > **注意**
         >
-        > 目前，TiDB Cloud Starter 已在 AWS 上正式开放。本文档后续步骤以 AWS 为例。
+        > - {{{ .starter }}} 已在 AWS 上正式开放。本文档后续步骤以 AWS 为例。
+        > - TiDB Cloud 是一项全托管服务。PingCAP 负责底层云基础设施的运营和管理。你只能通过 TiDB Cloud 控制台访问底层资源。
 
         </CustomContent>
 
@@ -135,3 +137,4 @@ TiDB Cloud 提供了交互式教程和精心设计的示例数据集，帮助你
 - 了解如何使用 SQL Editor 和 Chat2Query 探索你的数据，请参见 [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)。
 - 了解 TiDB SQL 的使用方法，请参见 [Explore SQL with TiDB](/basic-sql-operations.md)。
 - 若需生产环境使用，享受跨可用区高可用、水平扩展和 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 等优势，请参见 [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)。
+- 如需使用 TiDB Cloud CLI 管理你的实例，请参见 [TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md)。

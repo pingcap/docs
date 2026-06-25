@@ -50,35 +50,6 @@ SELECT app_name, country FROM t1;
 
     TiFlash 支持的并发请求数取决于数据量和查询复杂度，但通常不超过 100 QPS。你可以使用 `INSERT INTO SELECT` 保存 TiFlash 查询结果，然后利用结果表支持高并发的在线请求。结果表中的数据可以在后台以较低频率（例如每 0.5 秒）更新，远低于 TiFlash 的并发限制，同时仍能保持较高的数据新鲜度。
 
-## 执行流程
-
-* 在执行 `INSERT INTO SELECT` 语句时，TiFlash 首先将 `SELECT` 子句的查询结果返回到集群中的 TiDB 服务器，然后将结果写入目标表（可以有 TiFlash 副本）。
-* `INSERT INTO SELECT` 语句的执行保证了 ACID 属性。
-
-## 限制
-
-<CustomContent platform="tidb">
-
-* 可以通过系统变量 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 调整 `INSERT INTO SELECT` 语句的 TiDB 内存限制。从 v6.5.0 开始，不建议使用 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) 来控制事务内存大小。
-
-    更多信息请参见 [TiDB 内存控制](/configure-memory-usage.md)。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-* 可以通过系统变量 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 调整 `INSERT INTO SELECT` 语句的 TiDB 内存限制。从 v6.5.0 开始，不建议使用 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) 来控制事务内存大小。
-
-    更多信息请参见 [TiDB 内存控制](https://docs.pingcap.com/tidb/stable/configure-memory-usage)。
-
-</CustomContent>
-
-* TiDB 对 `INSERT INTO SELECT` 语句的并发没有硬性限制，但建议考虑以下实践：
-
-    * 当“写事务”较大（例如接近 1 GiB）时，建议将并发控制在不超过 10。
-    * 当“写事务”较小时（例如少于 100 MiB），建议将并发控制在不超过 30。
-    * 根据测试结果和具体情况确定并发数。
-
 ## 示例
 
 数据定义：
@@ -128,3 +99,32 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 ```
 
 上述示例将每日分析结果物化到每日结果表中，基于此加速每月数据分析，从而提升数据分析效率。
+
+## 执行流程
+
+* 在执行 `INSERT INTO SELECT` 语句时，TiFlash 首先将 `SELECT` 子句的查询结果返回到集群中的 TiDB 服务器，然后将结果写入目标表（可以有 TiFlash 副本）。
+* `INSERT INTO SELECT` 语句的执行保证了 ACID 属性。
+
+## 限制
+
+<CustomContent platform="tidb">
+
+* 可以通过系统变量 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 调整 `INSERT INTO SELECT` 语句的 TiDB 内存限制。从 v6.5.0 开始，不建议使用 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) 来控制事务内存大小。
+
+    更多信息请参见 [TiDB 内存控制](/configure-memory-usage.md)。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* 可以通过系统变量 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 调整 `INSERT INTO SELECT` 语句的 TiDB 内存限制。从 v6.5.0 开始，不建议使用 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) 来控制事务内存大小。
+
+    更多信息请参见 [TiDB 内存控制](https://docs.pingcap.com/tidb/stable/configure-memory-usage)。
+
+</CustomContent>
+
+* TiDB 对 `INSERT INTO SELECT` 语句的并发没有硬性限制，但建议考虑以下实践：
+
+    * 当“写事务”较大（例如接近 1 GiB）时，建议将并发控制在不超过 10。
+    * 当“写事务”较小时（例如少于 100 MiB），建议将并发控制在不超过 30。
+    * 根据测试结果和具体情况确定并发数。

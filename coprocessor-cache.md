@@ -65,6 +65,18 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 
 执行结果中的 `execution info` 列会显示 `copr_cache_hit_ratio` 信息，表示 Coprocessor Cache 的命中率。上例中的 `0.75` 表示命中率大约为 75%。
 
+<CustomContent platform="tidb-cloud" plan="dedicated">
+
 ### 查看 Grafana 监控面板
 
 在 Grafana 中，你可以在 `tidb` 命名空间下的 `distsql` 子系统中看到 **copr-cache** 面板。该面板监控整个集群中 Coprocessor Cache 的命中次数、未命中次数和缓存丢弃情况。
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+### 查看 Grafana 面板 {#view-the-grafana-panel}
+
+在 Grafana 中，你可以在 `tidb` 命名空间下的 `distsql` 子系统中看到 **copr-cache** 面板。该面板用于监控整个集群中 Coprocessor Cache 的命中次数、未命中次数以及缓存丢弃次数。
+
+</CustomContent>

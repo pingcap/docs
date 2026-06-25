@@ -107,7 +107,7 @@ TiDB Cloud 会在 **统计/指标（信息）** 页面收集并展示你的 TiDB
 | :------------| :------| :-------------------------------------------- |
 | Request Units | RU per second | Request Unit（RU）是用于跟踪 {{{ .starter }}} 实例中查询或事务资源消耗的度量单位。除了用户查询，后台活动也会消耗 RU，因此即使 QPS 为 0，每秒 RU 使用量也可能大于 0。|
 | Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | {{{ .essential }}} 实例中每秒的 Request Capacity Units（RCU）和已消耗的 Request Units（RU）。 |
-| Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | 行存储、行标准存储和列存储的大小。仅当每种存储类型的大小达到 50 MiB 或更大时才显示该统计/指标（信息）。目前，**Row-based standard storage** 与 **Row-based storage** 含义相同。 |
+| Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | 行存储、行标准存储和列存储的大小。TiDB Cloud 仅在每种存储类型的大小达到 50 MiB 或更大时才显示该统计/指标（信息）。**Row-based standard storage** 与 **Row-based storage** 含义相同。 |
 | Query Per Second | All, {SQL type} | 每秒执行的 SQL 语句数量，按 SQL 类型（如 `SELECT`、`INSERT`、`UPDATE` 等）收集。 |
 | Query Duration | Avg, P99, P99-{SQL type} | 从客户端发送请求到 {{{ .starter }}} 或 {{{ .essential }}} 实例，直到实例执行请求并将结果返回给客户端的持续时间。 |
 | Failed Query | All | 每秒 SQL 语句执行错误的数量。 |
