@@ -11,7 +11,7 @@ summary: TiDB Cloud Lake supports multiple connection methods to suit different 
 
 | I want to... | Recommended |
 |-------------|-------------|
-| Run SQL queries interactively | **LakeSQL** (CLI) or **DBeaver** (GUI) |
+| Run SQL queries interactively | **LakeSQL** (CLI) |
 | Build an application | Language-specific **Driver** |
 | Create dashboards & reports | **BI/Visualization Tools** |
 

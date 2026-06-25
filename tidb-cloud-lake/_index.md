@@ -31,9 +31,9 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 [Connection Overview](https://docs.tidb.io/tidbcloudlake/connection-overview/)
 
-[Connect to TiDB Cloud Lake Using DBeaver](https://docs.tidb.io/tidbcloudlake/connect-using-dbeaver/)
+[Connect Using LakeSQL](https://docs.tidb.io/tidbcloudlake/connect-using-lakesql/)
 
-[Connect to TiDB Cloud Lake Using Golang](https://docs.tidb.io/tidbcloudlake/connect-using-golang/)
+[Connect Using Golang](https://docs.tidb.io/tidbcloudlake/connect-using-golang/)
 
 </LearningPath>
 
