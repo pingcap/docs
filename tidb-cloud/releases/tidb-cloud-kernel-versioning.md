@@ -9,7 +9,9 @@ This document describes the versioning rules for the underlying database kernel 
 
 > **Note:**
 >
-> This document is applicable to TiDB Cloud Premium only. For TiDB Cloud Starter, Essential, and Dedicated, their kernel versions correspond directly to TiDB Self-Managed versions. To learn about features, improvements, and bug fixes included in a specific kernel version, refer to the corresponding [TiDB Self-Managed release notes](/releases/release-notes.md).
+> - This document applies only to TiDB Cloud Premium.
+> - TiDB Cloud Starter and Essential instances run on a customized TiDB X engine based on the classic TiDB v8.5.3 kernel. This kernel differs slightly from the TiDB Cloud Premium kernel.
+> - TiDB Cloud Dedicated clusters run on the classic TiDB kernel, and their kernel versions correspond directly to TiDB Self-Managed versions.
 
 ## Kernel versioning
 
@@ -34,7 +36,7 @@ For example, `TiDB-X-CLOUD.202510.1` indicates that the kernel is based on a bra
 
 Because kernel development and release schedules are independent, a kernel version might be released several months after its baseline branch is created.
 
-Because TiDB Cloud Premium follows its own kernel release cadence, its release notes are published separately from the TiDB Self-Managed release notes.
+Because TiDB Cloud Premium follows its own kernel release cadence, TiDB Cloud Premium release notes are published separately from TiDB Self-Managed release notes.
 
 ## FAQ
 
