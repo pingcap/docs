@@ -488,7 +488,7 @@ Partial indexes are particularly useful in the following scenarios:
 
 ### Limitations
 
-- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) and `IN` predicates with constant values.
+- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL` and `IN` predicates with constant values.
 - The column and constant value must have the same type.
 - The predicate can only reference columns from the same table.
 - Partial indexes cannot be used on expression indexes.
