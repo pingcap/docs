@@ -331,7 +331,7 @@ TiDB Cloud Serverless Driverは、以下のORMと統合されています。
 
 ## 価格設定 {#pricing}
 
-TiDB Cloud Serverless Driver自体は無料ですが、ドライバーを使用してデータにアクセスすると[要求単位（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
+TiDB Cloud Serverless Driver自体は無料ですが、ドライバーを使用してデータにアクセスすると[リクエストユニット（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
 
 -   TiDB Cloud Starterインスタンスの料金は、 [TiDB Cloud Starter の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
 -   TiDB Cloud Essentialインスタンスの場合、価格は[TiDB Cloud Essential の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
