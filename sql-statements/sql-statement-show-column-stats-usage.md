@@ -3,7 +3,7 @@ title: SHOW COLUMN_STATS_USAGE
 summary: TiDB データベースの SHOW COLUMN_STATS_USAGE の使用法の概要。
 ---
 
-# COLUMN_STATS_USAGE を表示 {#show-column-stats-usage}
+# SHOW COLUMN_STATS_USAGE {#show-column-stats-usage}
 
 `SHOW COLUMN_STATS_USAGE`文は、列統計の最終使用時刻と収集時刻を表示します。また、統計が収集された`PREDICATE COLUMNS`列と列を特定するためにも使用できます。
 
@@ -54,3 +54,4 @@ SHOW COLUMN_STATS_USAGE;
 
 -   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
+

@@ -3,7 +3,7 @@ title: ADMIN | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるADMINの使用方法の概要。
 ---
 
-# 管理者 {#admin}
+# ADMIN {#admin}
 
 このステートメントは、TiDB のステータスを表示したり、TiDB 内のテーブルのデータをチェックしたりするために使用される TiDB 拡張構文です。このドキュメントでは、次の`ADMIN`関連のステートメントを紹介します。
 
@@ -294,3 +294,4 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 ## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
+

@@ -3,7 +3,7 @@ title: FLASHBACK TABLE
 summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回復する方法を学習します。
 ---
 
-# フラッシュバックテーブル {#flashback-table}
+# FLASHBACK TABLE {#flashback-table}
 
 `FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。3 ステートメント`FLASHBACK TABLE`使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 
@@ -85,3 +85,4 @@ FlashbackToNewName ::=
 ## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
+

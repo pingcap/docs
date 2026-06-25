@@ -3,7 +3,7 @@ title: SET RESOURCE GROUP
 summary: TiDBデータベースにおけるSET RESOURCE GROUPの使用方法の概要。
 ---
 
-# リソースグループを設定する {#set-resource-group}
+# SET RESOURCE GROUP {#set-resource-group}
 
 `SET RESOURCE GROUP`現在のセッションのリソース グループを設定するために使用されます。
 
@@ -94,3 +94,4 @@ MySQL は[リソースグループを設定する](https://dev.mysql.com/doc/ref
 -   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
 -   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソース制御](/tidb-resource-control-ru-groups.md)
+

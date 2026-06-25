@@ -3,7 +3,7 @@ title: BACKUP | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 ---
 
-# バックアップ {#backup}
+# BACKUP {#backup}
 
 このステートメントは、TiDBクラスタの分散バックアップを実行するために使用されます。
 
@@ -187,3 +187,4 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 -   [復元する](/sql-statements/sql-statement-restore.md)
 -   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)
+

@@ -3,7 +3,7 @@ title: ALTER INDEX
 summary: TiDB データベースの ALTER INDEX の使用法の概要。
 ---
 
-# インデックスの変更 {#alter-index}
+# ALTER INDEX {#alter-index}
 
 `ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが非表示のインデックスを選択するように設定できます。
 
@@ -114,3 +114,4 @@ Query OK, 0 rows affected (0.02 sec)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
+

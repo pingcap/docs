@@ -3,7 +3,7 @@ title: ADMIN RESUME DDL JOBS
 summary: TiDB データベースの ADMIN RESUME DDL の使用法の概要。
 ---
 
-# 管理者再開DDLジョブ {#admin-resume-ddl-jobs}
+# ADMIN RESUME DDL JOBS {#admin-resume-ddl-jobs}
 
 `ADMIN RESUME DDL`使用すると、一時停止中のDDLジョブを再開できます。2 は`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行すると確認できます。
 
@@ -60,3 +60,4 @@ ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
 -   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
 -   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
+

@@ -3,7 +3,7 @@ title: SHOW STATS_META
 summary: TiDB データベースの SHOW STATS_META の使用法の概要。
 ---
 
-# STATS_METAを表示 {#show-stats-meta}
+# SHOW STATS_META {#show-stats-meta}
 
 `SHOW STATS_META`使用すると、テーブル内の行数と、そのテーブルで変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`句を使用して必要な情報をフィルタリングできます。
 
@@ -74,3 +74,4 @@ SHOW STATS_META WHERE table_name = 't2';
 
 -   [分析](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
+

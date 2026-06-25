@@ -3,7 +3,7 @@ title: SHOW CREATE DATABASE
 summary: TiDB データベースでの SHOW CREATE DATABASE の使用の概要。
 ---
 
-# 表示データベースの作成 {#show-create-database}
+# SHOW CREATE DATABASE {#show-create-database}
 
 `SHOW CREATE DATABASE`は、既存のデータベースを再作成するための正確な SQL ステートメントを表示するために使用されます。2 `SHOW CREATE SCHEMA`その同義語です。
 
@@ -62,3 +62,4 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
 -   [列を表示](/sql-statements/sql-statement-show-columns-from.md)
+

@@ -3,7 +3,7 @@ title: ALTER INSTANCE
 summary: TiDBにおけるALTER INSTANCE`の使用方法の概要を学びましょう。
 ---
 
-# インスタンスの変更 {#alter-instance}
+# ALTER INSTANCE {#alter-instance}
 
 `ALTER INSTANCE`ステートメントは、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
 
@@ -64,3 +64,4 @@ ALTER INSTANCE RELOAD TLS;
 [TiDBクライアントとサーバー間でTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)。
 
 </CustomContent>
+

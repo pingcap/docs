@@ -3,7 +3,7 @@ title: LOCK TABLES and UNLOCK TABLES
 summary: TiDB データベースの LOCK TABLES および UNLOCK TABLES の使用法の概要。
 ---
 
-# テーブルのロックとテーブルのロック解除 {#lock-tables-and-unlock-tables}
+# LOCK TABLES and UNLOCK TABLES {#lock-tables-and-unlock-tables}
 
 > **警告：**
 >
@@ -109,3 +109,4 @@ ERROR 1066 (42000): Not unique table/alias: 't'
 ### テーブルロックの解除 {#table-lock-release}
 
 TiDB セッションでトランザクションが明示的に開始されると (たとえば、 `BEGIN`ステートメントを使用)、TiDB はセッションによって保持されているテーブル ロックを暗黙的に解放しませんが、MySQL は解放します。
+

@@ -3,7 +3,7 @@ title: ALTER TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの ALTER TABLE の使用法の概要。
 ---
 
-# テーブルの変更 {#alter-table}
+# ALTER TABLE {#alter-table}
 
 この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`は次の目的で使用できます。
 
@@ -190,3 +190,4 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
 -   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+

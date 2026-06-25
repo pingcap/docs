@@ -3,7 +3,7 @@ title: ROLLBACK | TiDB SQL Statement Reference
 summary: TiDB データベースの ROLLBACK の使用法の概要。
 ---
 
-# ロールバック {#rollback}
+# ROLLBACK {#rollback}
 
 このステートメントは、TiDB内の現在のトランザクション内のすべての変更を元に戻します。これは`COMMIT`ステートメントの逆の動作です。
 
@@ -48,3 +48,4 @@ Empty set (0.01 sec)
 -   [COMMIT](/sql-statements/sql-statement-commit.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
+

@@ -3,7 +3,7 @@ title: SELECT | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるSELECT文の使用方法の概要。
 ---
 
-# 選択 {#select}
+# SELECT {#select}
 
 `SELECT`ステートメントは、TiDB からデータを読み取るために使用されます。
 
@@ -234,3 +234,4 @@ Query OK, 3 rows affected (0.00 sec)
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
+

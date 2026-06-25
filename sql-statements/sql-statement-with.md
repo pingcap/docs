@@ -3,7 +3,7 @@ title: WITH | TiDB SQL Statement Reference
 summary: TiDB データベースの WITH (共通テーブル式) の使用法の概要。
 ---
 
-# と {#with}
+# WITH {#with}
 
 共通テーブル式（CTE）は、SQL文内で複数回参照できる一時的な結果セットであり、文の可読性と実行効率を向上させます。共通テーブル式を使用するには、 `WITH`文を適用します。
 
@@ -86,3 +86,4 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
+

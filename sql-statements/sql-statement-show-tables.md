@@ -3,7 +3,7 @@ title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW [FULL] TABLES の使用法の概要。
 ---
 
-# [全表]を表示 {#show-full-tables}
+# SHOW [FULL] TABLES {#show-full-tables}
 
 このステートメントは、現在選択されているデータベース内のテーブルとビューのリストを表示します。オプションのキーワード`FULL` 、テーブルのタイプが`BASE TABLE` 、 `SEQUENCE` 、または`VIEW`いずれであるかを示します。
 
@@ -85,3 +85,4 @@ TiDBの`SHOW [FULL] TABLES`文はMySQLと完全に互換性があります。互
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
 -   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
 -   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)
+

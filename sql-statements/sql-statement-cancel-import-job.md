@@ -3,7 +3,7 @@ title: CANCEL IMPORT
 summary: TiDB での CANCEL IMPORT の使用法の概要。
 ---
 
-# インポートをキャンセル {#cancel-import}
+# CANCEL IMPORT {#cancel-import}
 
 `CANCEL IMPORT`ステートメントは、TiDB で作成されたデータ インポート ジョブをキャンセルするために使用されます。
 
@@ -38,3 +38,4 @@ CANCEL IMPORT JOB 1;
 
 -   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 -   [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
+

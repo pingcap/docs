@@ -3,7 +3,7 @@ title: FLUSH STATUS | TiDB SQL Statement Reference
 summary: TiDB データベースの FLUSH STATUS の使用法の概要。
 ---
 
-# フラッシュステータス {#flush-status}
+# FLUSH STATUS {#flush-status}
 
 このステートメントはMySQLとの互換性のために含まれています。TiDBは`SHOW STATUS`代わりにPrometheusとGrafanaを使用して集中的なメトリクス収集を行うため、このステートメントはTiDBには影響しません。
 
@@ -79,3 +79,4 @@ mysql> show status;
 
 -   [[グローバル|セッション]ステータスを表示](/sql-statements/sql-statement-show-status.md)
 -   [サーバーステータス変数](/status-variables.md)
+

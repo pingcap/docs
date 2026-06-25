@@ -3,7 +3,7 @@ title: CREATE PLACEMENT POLICY
 summary: TiDBにおけるCREATE PLACEMENT POLICYの使用方法。
 ---
 
-# 配置ポリシーを作成する {#create-placement-policy}
+# CREATE PLACEMENT POLICY {#create-placement-policy}
 
 `CREATE PLACEMENT POLICY`後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
@@ -82,3 +82,4 @@ SHOW CREATE PLACEMENT POLICY p1;
 -   [番組掲載](/sql-statements/sql-statement-show-placement.md)
 -   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+

@@ -3,7 +3,7 @@ title: Split Region
 summary: TiDBデータベースにおけるスプリットリージョンの使用概要。
 ---
 
-# 分割リージョン {#split-region}
+# Split Region {#split-region}
 
 TiDBで新しいテーブルを作成するたびに、デフォルトで1つの[リージョン](/tidb-storage.md#region)が分割され、そのテーブルのデータが格納されます。このデフォルトの動作は、TiDB構成ファイルの`split-table`によって制御されます。このリージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。
 
@@ -391,3 +391,4 @@ CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REG
 
 -   [テーブルリージョンを表示する](/sql-statements/sql-statement-show-table-regions.md)
 -   セッション変数: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、 [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 、 [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。
+

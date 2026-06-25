@@ -3,7 +3,7 @@ title: SHOW CHARACTER SET | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW CHARACTER SET の使用法の概要。
 ---
 
-# 文字セットを表示 {#show-character-set}
+# SHOW CHARACTER SET {#show-character-set}
 
 このステートメントは、TiDBで使用可能な文字セットの静的リストを提供します。出力には、現在の接続またはユーザーの属性は反映されません。
 
@@ -68,3 +68,4 @@ TiDBの`SHOW CHARACTER SET`文の使用方法はMySQLと完全に互換性があ
 
 -   [照合順序を表示](/sql-statements/sql-statement-show-collation.md)
 -   [文字セットと照合順序](/character-set-and-collation.md)
+

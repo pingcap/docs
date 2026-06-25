@@ -3,7 +3,7 @@ title: ALTER RESOURCE GROUP
 summary: TiDBにおけるALTER RESOURCE GROUPの使い方を学びましょう。
 ---
 
-# アルター・リソース・グループ {#alter-resource-group}
+# ALTER RESOURCE GROUP {#alter-resource-group}
 
 `ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。
 
@@ -183,3 +183,4 @@ MySQL は[アルター・リソース・グループ](https://dev.mysql.com/doc/
 -   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
 -   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
+

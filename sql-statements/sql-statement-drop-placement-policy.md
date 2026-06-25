@@ -3,7 +3,7 @@ title: DROP PLACEMENT POLICY
 summary: TiDBにおけるALTER PLACEMENT POLICYの使用方法。
 ---
 
-# ドロップ配置ポリシー {#drop-placement-policy}
+# DROP PLACEMENT POLICY {#drop-placement-policy}
 
 `DROP PLACEMENT POLICY`は、以前に作成した配置ポリシーを削除するために使用されます。
 
@@ -69,3 +69,4 @@ Query OK, 0 rows affected (0.21 sec)
 -   [番組掲載](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
+

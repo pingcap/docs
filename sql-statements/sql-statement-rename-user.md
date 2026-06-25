@@ -3,7 +3,7 @@ title: RENAME USER
 summary: TiDB データベースの RENAME USER の使用法の概要。
 ---
 
-# ユーザー名の変更 {#rename-user}
+# RENAME USER {#rename-user}
 
 `RENAME USER`既存のユーザーの名前を変更するために使用されます。
 
@@ -79,3 +79,4 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 -   [ユーザーの作成](/sql-statements/sql-statement-create-user.md)
 -   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
+

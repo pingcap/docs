@@ -3,7 +3,7 @@ title: SHOW PRIVILEGES | TiDB SQL Statement Reference
 summary: TiDB データベースに対する SHOW PRIVILEGES の使用法の概要。
 ---
 
-# 権限を表示 {#show-privileges}
+# SHOW PRIVILEGES {#show-privileges}
 
 このステートメントは、TiDB で割り当て可能な権限のリストを表示します。これは静的なリストであり、現在のユーザーの権限を反映するものではありません。
 
@@ -97,3 +97,4 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 
 </CustomContent>
+

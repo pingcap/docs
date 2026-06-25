@@ -3,7 +3,7 @@ title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
 summary: TiDB データベースのEXPLAIN ANALYZE の使用法の概要。
 ---
 
-# EXPLAIN分析 {#explain-analyze}
+# EXPLAIN ANALYZE {#explain-analyze}
 
 `EXPLAIN ANALYZE`文は`EXPLAIN`と似た動作をしますが、大きな違いは実際に文を実行する点です。これにより、クエリプランニングに使用された推定値と、実行時に検出された実際の値を比較できます。推定値が実際の値と大きく異なる場合は、影響を受けるテーブルに対して`ANALYZE TABLE`実行することを検討してください。
 
@@ -325,3 +325,4 @@ TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`Befo
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
 -   [トレース](/sql-statements/sql-statement-trace.md)
+

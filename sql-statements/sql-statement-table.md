@@ -3,7 +3,7 @@ title: TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの TABLE の使用法の概要。
 ---
 
-# テーブル {#table}
+# TABLE {#table}
 
 集計や複雑なフィルタリングが不要な場合は、 `SELECT * FROM`代わりに`TABLE`ステートメントを使用できます。
 
@@ -85,3 +85,4 @@ TABLE t1 LIMIT 1;
 
 -   [`SELECT`](/sql-statements/sql-statement-select.md)
 -   [MySQLの`TABLE`文](https://dev.mysql.com/doc/refman/8.0/en/table.html)
+

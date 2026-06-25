@@ -3,7 +3,7 @@ title: SHOW DISTRIBUTION JOBS
 summary: TiDBデータベースにおけるSHOW DISTRIBUTION JOBSの使用方法の概要。
 ---
 
-# 配布ジョブの表示<span class="version-mark">（v8.5.4の新機能）</span> {#show-distribution-jobs-span-class-version-mark-new-in-v8-5-4-span}
+# SHOW DISTRIBUTION JOBS <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#show-distribution-jobs-span-class-version-mark-new-in-v8-5-4-span}
 
 `SHOW DISTRIBUTION JOBS`ステートメントは、現在実行中のリージョン配布ジョブをすべて表示します。
 
@@ -47,3 +47,4 @@ SHOW DISTRIBUTION JOBS;
 -   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 -   [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
 -   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
+

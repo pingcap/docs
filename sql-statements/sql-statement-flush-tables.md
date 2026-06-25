@@ -3,7 +3,7 @@ title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: TiDB データベースの FLUSH TABLES の使用法の概要。
 ---
 
-# フラッシュテーブル {#flush-tables}
+# FLUSH TABLES {#flush-tables}
 
 このステートメントはMySQLとの互換性のために含まれています。TiDBでは有効な用途はありません。
 
@@ -56,3 +56,4 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 ## 参照 {#see-also}
 
 -   [履歴データを読む](/read-historical-data.md)
+

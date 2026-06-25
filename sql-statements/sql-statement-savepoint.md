@@ -3,7 +3,7 @@ title: SAVEPOINT | TiDB SQL Statement Reference
 summary: TiDB データベースの SAVEPOINT の使用法の概要。
 ---
 
-# セーブポイント {#savepoint}
+# SAVEPOINT {#savepoint}
 
 `SAVEPOINT`はTiDB v6.2.0で導入された機能です。構文は次のとおりです。
 
@@ -158,3 +158,4 @@ TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていませ
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
+

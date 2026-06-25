@@ -3,7 +3,7 @@ title: BEGIN | TiDB SQL Statement Reference
 summary: TiDB データベースにおける BEGIN の使用法の概要。
 ---
 
-# 始める {#begin}
+# BEGIN {#begin}
 
 この文はTiDB内で新しいトランザクションを開始します。これは文`START TRANSACTION`と`SET autocommit=0`に似ています。
 
@@ -44,3 +44,4 @@ TiDBは`BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポー
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB楽観的トランザクションモデル](/optimistic-transaction.md)
 -   [TiDB悲観的トランザクションモード](/pessimistic-transaction.md)
+

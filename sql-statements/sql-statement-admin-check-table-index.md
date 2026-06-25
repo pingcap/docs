@@ -4,7 +4,7 @@ summary: TiDB データベースにおける ADMIN の使用法の概要。
 category: reference
 ---
 
-# 管理者チェック [テーブル|インデックス] {#admin-check-table-index}
+# ADMIN CHECK [TABLE|INDEX]{#admin-check-table-index}
 
 `ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの一貫性をチェックします。
 
@@ -66,3 +66,4 @@ ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_
 ## 参照 {#see-also}
 
 -   [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+

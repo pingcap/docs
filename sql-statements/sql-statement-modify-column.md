@@ -3,7 +3,7 @@ title: MODIFY COLUMN | TiDB SQL Statement Reference
 summary: TiDB データベースの MODIFY COLUMN の使用法の概要。
 ---
 
-# 列の変更 {#modify-column}
+# MODIFY COLUMN {#modify-column}
 
 `ALTER TABLE ... MODIFY COLUMN`文は既存のテーブルの列を変更します。変更にはデータ型と属性の変更が含まれます。同時に列名を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)文を使用してください。
 
@@ -204,3 +204,4 @@ CREATE TABLE `t1` (
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-change-column.md)
+

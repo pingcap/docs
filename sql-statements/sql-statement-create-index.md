@@ -3,7 +3,7 @@ title: CREATE INDEX | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるCREATE INDEXの使用方法の概要。
 ---
 
-# インデックスを作成する {#create-index}
+# CREATE INDEX {#create-index}
 
 このステートメントは、既存のテーブルに新しいインデックスを追加します。これは、 [`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-alter-table.md)の代替構文であり、MySQL との互換性のために含まれています。
 
@@ -415,3 +415,4 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+

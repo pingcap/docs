@@ -3,7 +3,7 @@ title: DROP STATS
 summary: TiDB データベースの DROP STATS の使用法の概要。
 ---
 
-# ドロップ統計 {#drop-stats}
+# DROP STATS {#drop-stats}
 
 `DROP STATS`ステートメントは、選択したデータベースから選択したテーブルの統計を削除するために使用されます。
 
@@ -81,3 +81,4 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 ## 参照 {#see-also}
 
 -   [統計入門](/statistics.md)
+

@@ -3,7 +3,7 @@ title: FLASHBACK CLUSTER
 summary: TiDBデータベースにおけるFLASHBACK CLUSTERの使い方を学びましょう。
 ---
 
-# フラッシュバック・クラスター {#flashback-cluster}
+# FLASHBACK CLUSTER {#flashback-cluster}
 
 TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されました。これを使用すると、クラスタを特定の時点に復元できます。タイムスタンプを指定する際には、datetime 値を設定するか、time 関数を使用できます。datetime の形式は「2016-10-08 16:45:26.999」のようで、最小時間単位はミリ秒です。ただし、ほとんどの場合、時間単位を秒としてタイムスタンプを指定するだけで十分です。たとえば、「2016-10-08 16:45:26」のように指定します。
 
@@ -185,3 +185,4 @@ ERROR 1105 (HY000): Detected another DDL job at 2023-01-29 14:33:12 +0800 CST, c
 ## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
+

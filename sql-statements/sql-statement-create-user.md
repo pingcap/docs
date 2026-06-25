@@ -3,7 +3,7 @@ title: CREATE USER | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE USER の使用法の概要。
 ---
 
-# ユーザーを作成 {#create-user}
+# CREATE USER {#create-user}
 
 この文は、パスワードを指定して新しいユーザーを作成します。MySQLの権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー領域を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
 
@@ -173,3 +173,4 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
 -   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
 -   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)
+

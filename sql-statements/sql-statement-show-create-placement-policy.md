@@ -3,7 +3,7 @@ title: SHOW CREATE PLACEMENT POLICY
 summary: TiDBにおけるSHOW CREATE PLACEMENT POLICYの使用方法。
 ---
 
-# 表示・作成・配置ポリシー {#show-create-placement-policy}
+# SHOW CREATE PLACEMENT POLICY {#show-create-placement-policy}
 
 `SHOW CREATE PLACEMENT POLICY`配置ポリシーの定義を表示するために使用されます。これを使用すると、現在の配置ポリシーの定義を確認し、別の TiDB クラスタでそれを再現できます。
 
@@ -49,3 +49,4 @@ SHOW CREATE PLACEMENT POLICY p1\G
 -   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+

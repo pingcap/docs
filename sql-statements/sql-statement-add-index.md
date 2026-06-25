@@ -3,7 +3,7 @@ title: ADD INDEX | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 ---
 
-# インデックスを追加 {#add-index}
+# ADD INDEX {#add-index}
 
 `ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで実行されるため、インデックスの追加によってテーブルへの読み取りや書き込みがブロックされることはありません。
 
@@ -122,3 +122,4 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
+

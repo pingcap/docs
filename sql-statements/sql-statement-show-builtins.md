@@ -3,7 +3,7 @@ title: SHOW BUILTINS
 summary: TiDB での SHOW BUILTINS の使用法。
 ---
 
-# ショービルド {#show-builtins}
+# SHOW BUILTINS {#show-builtins}
 
 `SHOW BUILTINS` 、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
 
@@ -321,3 +321,4 @@ SHOW BUILTINS;
 ## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
+

@@ -3,7 +3,7 @@ title: ADMIN PAUSE DDL JOBS
 summary: TiDB データベースの ADMIN PAUSE DDL JOBS の使用法の概要。
 ---
 
-# 管理者によるDDLジョブの一時停止 {#admin-pause-ddl-jobs}
+# ADMIN PAUSE DDL JOBS {#admin-pause-ddl-jobs}
 
 `ADMIN PAUSE DDL`は実行中のDDLジョブを一時停止します。2 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 
@@ -58,3 +58,4 @@ ADMIN PAUSE DDL JOBS job_id [, job_id] ...;
 -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
 -   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
 -   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
+

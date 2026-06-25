@@ -3,7 +3,7 @@ title: DISTRIBUTE TABLE
 summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法の概要。
 ---
 
-# 分散テーブル<span class="version-mark">（v8.5.4の新機能）</span> {#distribute-table-span-class-version-mark-new-in-v8-5-4-span}
+# DISTRIBUTE TABLE <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#distribute-table-span-class-version-mark-new-in-v8-5-4-span}
 
 > **警告：**
 >
@@ -118,3 +118,4 @@ DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash"
 -   [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
 -   [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
 -   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
+

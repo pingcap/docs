@@ -3,7 +3,7 @@ title: CREATE TABLE | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるCREATE TABLEの使用方法の概要。
 ---
 
-# テーブルを作成する {#create-table}
+# CREATE TABLE {#create-table}
 
 このステートメントは、現在選択されているデータベースに新しいテーブルを作成します。MySQL の`CREATE TABLE`ステートメントと同様の動作をします。
 
@@ -304,3 +304,4 @@ mysql> DESC t1;
 -   [テーブルを削除する](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table-like.md)
 -   [テーブルの作成を表示する](/sql-statements/sql-statement-show-create-table.md)
+

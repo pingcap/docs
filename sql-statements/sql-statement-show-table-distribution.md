@@ -3,7 +3,7 @@ title: SHOW TABLE DISTRIBUTION
 summary: TiDBデータベースにおけるSHOW TABLE DISTRIBUTIONの使用方法の概要。
 ---
 
-# 表の分布を表示する<span class="version-mark">（v8.5.4の新機能）</span> {#show-table-distribution-span-class-version-mark-new-in-v8-5-4-span}
+# SHOW TABLE DISTRIBUTION <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#show-table-distribution-span-class-version-mark-new-in-v8-5-4-span}
 
 `SHOW TABLE DISTRIBUTION`ステートメントは、指定されたテーブルのリージョン分布情報を表示します。
 
@@ -65,3 +65,4 @@ SHOW TABLE t DISTRIBUTIONS;
 -   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 -   [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
 -   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
+

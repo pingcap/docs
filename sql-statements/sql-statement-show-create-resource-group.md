@@ -3,7 +3,7 @@ title: SHOW CREATE RESOURCE GROUP
 summary: TiDBにおけるSHOW CREATE RESOURCE GROUPの使い方を学びましょう。
 ---
 
-# リソースグループの作成と表示 {#show-create-resource-group}
+# SHOW CREATE RESOURCE GROUP {#show-create-resource-group}
 
 `SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソース グループの現在の定義を表示できます。
 
@@ -54,3 +54,4 @@ SHOW CREATE RESOURCE GROUP rg1;
 -   [リソースグループを作成する](/sql-statements/sql-statement-alter-resource-group.md)
 -   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
+

@@ -3,7 +3,7 @@ title: SET ROLE | TiDB SQL Statement Reference
 summary: TiDB データベースの SET ROLE の使用法の概要。
 ---
 
-# 役割を設定する {#set-role}
+# SET ROLE {#set-role}
 
 `SET ROLE`文は、現在のセッションでロールを有効にするために使用されます。ロールを有効にすると、ユーザーはロールの権限を使用できるようになります。
 
@@ -98,3 +98,4 @@ TiDBの`SET ROLE`文はMySQL 8.0のロール機能と完全に互換性があり
 -   [ロールベースアクセス制御](/role-based-access-control.md)
 
 </CustomContent>
+

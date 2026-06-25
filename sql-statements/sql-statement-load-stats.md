@@ -3,7 +3,7 @@ title: LOAD STATS
 summary: TiDBデータベースにおけるLOAD STATSの使用方法の概要。
 ---
 
-# ロード統計 {#load-stats}
+# LOAD STATS {#load-stats}
 
 `LOAD STATS`ステートメントは、統計情報を TiDB にロードするために使用されます。
 
@@ -39,3 +39,4 @@ LOAD STATS '/tmp/stats.json';
 ## 関連項目 {#see-also}
 
 -   [統計](/statistics.md)
+

@@ -3,7 +3,7 @@ title: SHOW CONFIG
 summary: TiDBデータベースにおけるSHOW CONFIGの使用の概要
 ---
 
-# 設定を表示 {#show-config}
+# SHOW CONFIG {#show-config}
 
 `SHOW CONFIG`文は、TiDB の様々なコンポーネントの現在の設定を表示するために使用されます。設定変数とシステム変数は異なる次元で作用するため、混同しないように注意してください。システム変数の情報を取得する場合は、 [変数を表示](/sql-statements/sql-statement-show-variables.md)構文を使用してください。
 
@@ -74,3 +74,4 @@ SHOW CONFIG LIKE 'tidb';
 ## 参照 {#see-also}
 
 -   [変数を表示](/sql-statements/sql-statement-show-variables.md)
+

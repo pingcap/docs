@@ -3,7 +3,7 @@ title: SHOW TABLE REGIONS
 summary: TiDBでSHOW TABLE REGIONSを使用する方法を学びましょう。
 ---
 
-# テーブル領域を表示する {#show-table-regions}
+# SHOW TABLE REGIONS {#show-table-regions}
 
 `SHOW TABLE REGIONS`ステートメントは、TiDB のテーブルのリージョン情報を表示するために使用されます。
 
@@ -206,3 +206,4 @@ test> SHOW TABLE t REGIONS;
 
 -   [分割領域](/sql-statements/sql-statement-split-region.md)
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+

@@ -3,7 +3,7 @@ title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW [FULL] COLUMNS FROM の使用法の概要。
 ---
 
-# [全列表示] から {#show-full-columns-from}
+# SHOW [FULL] COLUMNS FROM {#show-full-columns-from}
 
 ステートメント`SHOW [FULL] COLUMNS FROM <table_name>` 、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL` 、現在のユーザーがその列に対して持っている権限と、テーブル定義の`comment`表示します。
 
@@ -134,3 +134,4 @@ TiDBの`SHOW [FULL] COLUMNS FROM`文はMySQLと完全に互換性があります
 ## 参照 {#see-also}
 
 -   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+

@@ -3,7 +3,7 @@ title: CANCEL DISTRIBUTION JOB
 summary: TiDBにおけるCANCEL DISTRIBUTION JOBの使用方法の概要。
 ---
 
-# 配布ジョブのキャンセル<span class="version-mark">（v8.5.4の新機能）</span> {#cancel-distribution-job-span-class-version-mark-new-in-v8-5-4-span}
+# CANCEL DISTRIBUTION JOB <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#cancel-distribution-job-span-class-version-mark-new-in-v8-5-4-span}
 
 `CANCEL DISTRIBUTION JOB`ステートメントは、TiDB の[`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)ステートメントを使用して作成されたリージョンスケジューリング タスクをキャンセルするために使用されます。
 
@@ -42,3 +42,4 @@ CANCEL DISTRIBUTION JOB 1;
 
 -   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 -   [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
+

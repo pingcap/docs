@@ -3,7 +3,7 @@ title: SHOW STATS_LOCKED
 summary: TiDB データベースの SHOW STATS_LOCKED の使用法の概要。
 ---
 
-# 統計を表示_ロック済み {#show-stats-locked}
+# SHOW STATS_LOCKED {#show-stats-locked}
 
 `SHOW STATS_LOCKED`統計がロックされているテーブルを表示します。
 
@@ -72,3 +72,4 @@ mysql> SHOW STATS_LOCKED;
 -   [統計](/statistics.md#lock-statistics)
 -   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
 -   [統計情報をアンロック](/sql-statements/sql-statement-unlock-stats.md)
+

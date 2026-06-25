@@ -3,7 +3,7 @@ title: UPDATE | TiDB SQL Statement Reference
 summary: TiDB データベースの UPDATE の使用法の概要。
 ---
 
-# アップデート {#update}
+# UPDATE {#update}
 
 `UPDATE`ステートメントは、指定されたテーブル内のデータを変更するために使用されます。
 
@@ -85,3 +85,4 @@ TiDB はより標準的な SQL 動作に従い、 `b`対 1 で更新します。
 -   [選択](/sql-statements/sql-statement-select.md)
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
+

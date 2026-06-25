@@ -3,7 +3,7 @@ title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるSHOW [BACKUPS|RESTORES]の使用方法の概要。
 ---
 
-# [バックアップ|復元]を表示 {#show-backups-restores}
+# SHOW [BACKUPS|RESTORES]{#show-backups-restores}
 
 これらのステートメントは、TiDBインスタンスで実行された、キューに入っている、実行中の、および最近完了したすべての[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクのリストを示します。
 
@@ -104,3 +104,4 @@ SHOW BACKUPS WHERE `Progress` < 25.0;
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [復元する](/sql-statements/sql-statement-restore.md)
+

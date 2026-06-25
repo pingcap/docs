@@ -3,7 +3,7 @@ title: ALTER USER | TiDB SQL Statement Reference
 summary: TiDB データベースの ALTER USER の使用法の概要。
 ---
 
-# ユーザーの変更 {#alter-user}
+# ALTER USER {#alter-user}
 
 この文は、TiDB権限システム内の既存のユーザーを変更します。MySQL権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー領域を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
 
@@ -189,3 +189,4 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
 -   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+

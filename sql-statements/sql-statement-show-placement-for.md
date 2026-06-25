@@ -3,7 +3,7 @@ title: SHOW PLACEMENT FOR
 summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 ---
 
-# ショーの掲載場所 {#show-placement-for}
+# SHOW PLACEMENT FOR {#show-placement-for}
 
 `SHOW PLACEMENT FOR` 、すべての配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションに対して正規の形式で表示します。
 
@@ -84,3 +84,4 @@ SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
 -   [番組掲載](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+

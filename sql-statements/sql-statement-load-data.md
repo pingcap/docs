@@ -3,7 +3,7 @@ title: LOAD DATA | TiDB SQL Statement Reference
 summary: TiDB データベースの LOAD DATA の使用法の概要。
 ---
 
-# データをロード {#load-data}
+# LOAD DATA {#load-data}
 
 `LOAD DATA`ステートメント バッチは、データを TiDB テーブルにロードします。
 
@@ -228,3 +228,4 @@ IGNORE 1 LINES;
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
 
 </CustomContent>
+

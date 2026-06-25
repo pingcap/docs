@@ -3,7 +3,7 @@ title: ADMIN ALTER DDL JOBS
 summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法の概要。
 ---
 
-# 管理者によるDDLジョブの変更 {#admin-alter-ddl-jobs}
+# ADMIN ALTER DDL JOBS {#admin-alter-ddl-jobs}
 
 > **注記：**
 >
@@ -97,3 +97,4 @@ AlterJobOption ::=
 -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
 -   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
 -   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+

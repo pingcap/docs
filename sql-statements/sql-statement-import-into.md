@@ -3,7 +3,7 @@ title: IMPORT INTO
 summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 ---
 
-# インポート先 {#import-into}
+# IMPORT INTO {#import-into}
 
 `IMPORT INTO`ステートメントを使用すると、 TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介して TiDB にデータをインポートできます。 `IMPORT INTO` 、次の 2 つの方法で使用できます。
 
@@ -369,3 +369,4 @@ IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
 -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
 -   [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
+

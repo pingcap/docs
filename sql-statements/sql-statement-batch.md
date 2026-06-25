@@ -3,7 +3,7 @@ title: BATCH
 summary: TiDB データベースにおける BATCH の使用法の概要。
 ---
 
-# バッチ {#batch}
+# BATCH {#batch}
 
 `BATCH`構文は、TiDB 内で DML 文を複数の文に分割して実行します。つまり、トランザクションの原子性と独立性は**保証されません**。したがって、これは「非トランザクション」文です。
 
@@ -54,3 +54,4 @@ ShardableStmt ::=
 ## 参照 {#see-also}
 
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+
