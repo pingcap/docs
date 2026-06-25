@@ -13,10 +13,10 @@ TiDB X kernel version: `TiDB-X-CLOUD.202510.1`
 
 In `TiDB-X-CLOUD.202510.1`:
 
-- `202510` represents that the baseline code branch of this kernel version was created in October 2025, which is different from the release date.
-- `1` represents that it is the first patch release built from the `TiDB-X-CLOUD.202510` baseline branch.
+- `202510` indicates that the baseline code branch of this kernel version was created in October 2025, which is different from the release date.
+- `1` indicates that it is the first patch release built from the `TiDB-X-CLOUD.202510` baseline branch.
 
-The `TiDB-X-CLOUD.202510.1` kernel is based on the TiDB v8.5.0 kernel, which means it supports most of the features and improvements as the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel.
+The `TiDB-X-CLOUD.202510.1` kernel is based on the TiDB v8.5.0 kernel, which means it supports most of the features and improvements of the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel.
 
 In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel, the `TiDB-X-CLOUD.202510.1` kernel introduces the following features:
 
@@ -26,10 +26,10 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
     This architecture enables elastic scalability, predictable performance, and optimized total cost of ownership (TCO) for AI-era workloads.
 
-    TiDB X represents a fundamental evolution from [classic TiDB](/tidb-architecture.md)'s shared-nothing architecture to a cloud-native shared-storage architecture. By transitioning from a shared-nothing to a shared-storage architecture, TiDB X addresses the physical limitations of coupled nodes to achieve the following technical objectives:
+    TiDB X represents a fundamental evolution from the shared-nothing architecture of [classic TiDB](/tidb-architecture.md) to a cloud-native shared-storage architecture. By transitioning from a shared-nothing to a shared-storage architecture, TiDB X addresses the physical limitations of coupled nodes to achieve the following technical objectives:
 
     - **Accelerated scaling**: Improving scaling performance by up to 10x by eliminating the need for physical data migration.
-    - **Task isolation**: Ensuring zero-interference between background maintenance tasks (such as compaction) and online transactional traffic.
+    - **Task isolation**: Ensuring zero interference between background maintenance tasks (such as compaction) and online transactional traffic.
     - **Resource elasticity**: Implementing a true "pay-as-you-go" model where compute resources scale independently of storage volume.
 
     For more information, see [TiDB X Architecture](/tidb-cloud/tidb-x-architecture.md).
@@ -57,7 +57,7 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
      For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze).
 
-### Observability features
+## Observability features
 
 * Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 
