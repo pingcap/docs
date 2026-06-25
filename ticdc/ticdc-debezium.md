@@ -61,7 +61,7 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 | `schema.fields`   | JSON    | ペイロード内の各フィールドの型情報（変更前後の行データのスキーマ情報を含む）。                                                                                                                   |
 | `schema.name`     | String  | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Key"` 。                                                                                            |
 | `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.                                                                        |
-| `schema.type`     | 弦       | フィールドのデータ型。                                                                                                                                               |
+| `schema.type`     | 文字列       | フィールドのデータ型。                                                                                                                                               |
 
 #### 値の形式 {#value-format}
 
@@ -157,12 +157,12 @@ The key fields of the preceding JSON data are explained as follows:
 | ペイロード.before         | JSON   | ステートメントの変更イベント前のデータ値。イベントが`"c"`場合、フィールド`before`の値は`null`なります。                                                                    |
 | ペイロード後               | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.                |
 | ペイロード.ソース.コミット_ts    | 番号     | TiCDC がこのメッセージを生成するときの`CommitTs`識別子。                                                                                             |
-| ペイロード.ソース.db         | 弦      | イベントが発生したデータベースの名前。                                                                                                              |
-| payload.source.table | 弦      | イベントが発生するテーブルの名前。                                                                                                                |
+| ペイロード.ソース.db         | 文字列      | イベントが発生したデータベースの名前。                                                                                                              |
+| payload.source.table | 文字列      | イベントが発生するテーブルの名前。                                                                                                                |
 | schema.fields        | JSON   | The type information of each field in the payload, including the schema information of the row data before and after the change. |
-| スキーマ名                | 弦      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"` 。                                                              |
+| スキーマ名                | 文字列      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"` 。                                                              |
 | スキーマ.オプション           | ブール値   | フィールドがオプションかどうかを示します。 `true`の場合、フィールドはオプションです。                                                                                   |
-| スキーマタイプ              | 弦      | フィールドのデータ型。                                                                                                                      |
+| スキーマタイプ              | 文字列      | フィールドのデータ型。                                                                                                                      |
 
 ### Data type mapping {#data-type-mapping}
 

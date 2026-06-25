@@ -47,7 +47,7 @@ TiDB は、MySQL 8.0 で利用可能な[数値関数と演算子](https://dev.my
 | [`POWER()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_power)         | 引数を指定されたべき乗で返す      |
 | [`RADIANS()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_radians)     | ラジアンに変換された引数を返す     |
 | [`RAND()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_rand)           | ランダムな浮動小数点値を返す      |
-| [`ROUND()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_round)         | 議論を迂回する             |
+| [`ROUND()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_round)         | 引数を丸める             |
 | [`SIGN()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_sign)           | 引数の符号を返す            |
 | [`SIN()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_sin)             | 引数の正弦を返す            |
 | [`SQRT()`](https://dev.mysql.com/doc/refman/8.0/en/mathematical-functions.html#function_sqrt)           | 引数の平方根を返す           |

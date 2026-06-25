@@ -268,7 +268,7 @@ Prisma でデータ モデルを定義する方法については、データモ
 
     ✔ Generated Prisma Client (5.1.1 | library) to ./node_modules/@prisma/client in 54ms
 
-このコマンドは`prisma/prisma.schema`に基づいて TiDB データベースにアクセスするための[Prismaクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)も生成します。
+このコマンドは`prisma/prisma.schema`に基づいて TiDB データベースにアクセスするための[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)も生成します。
 
 ### ステップ5：コードを実行する {#step-5-run-the-code}
 
@@ -395,7 +395,7 @@ await prisma.player.delete({
     >
     > **外部キーは、小規模から中規模のデータ量を扱う場合に適しています。**大規模なデータ量で外部キーを使用すると、深刻なパフォーマンス問題が発生したり、システムに予期せぬ影響を及ぼしたりする可能性があります。外部キーを使用する場合は、事前に徹底的な検証を行い、慎重に使用してください。
 
--   [Prisma Relation Mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)Prisma クライアント側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
+-   [Prisma Relation Mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)Prisma Client側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 
