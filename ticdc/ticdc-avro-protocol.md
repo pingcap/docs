@@ -161,7 +161,6 @@ dispatchers = [
 -   `{{TIDB_TYPE}}` TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
 -   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
-| SQLタイプ            | TIDB_タイプ          | AVRO_TYPE | 説明                                                                                                |
 | SQLの型             | TiDBの型             | AVRO_TYPE | 説明                                                                                                |
 | ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------- |
 | BOOL               | INT               | int       |                                                                                                   |
