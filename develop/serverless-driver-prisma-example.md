@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 # TiDB Cloud Serverless Driver Prisma チュートリアル {#tidb-cloud-serverless-driver-prisma-tutorial}
 
-[Prisma](https://www.prisma.io/docs)は、開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)で HTTPS 経由で[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)を使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
+[Prisma](https://www.prisma.io/docs)開発者が直感的、効率的、安全な方法でデータベースを操作できるようにするオープンソースの次世代 ORM (オブジェクト リレーショナル マッピング) です。 TiDB Cloudは[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)で HTTPS 経由で[Prismaクライアント](https://www.prisma.io/docs/concepts/components/prisma-client)使用できるようにします。従来の TCP 方法と比較して、[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)は次の利点があります。
 
 -   サーバーレス環境におけるPrisma Clientのパフォーマンス向上
 -   エッジ環境でPrisma Clientを使用できる機能
@@ -44,7 +44,7 @@ datasource db {
 }
 ```
 
-## Prisma Clientを初期化します {#initialize-prisma-client}
+## Prismaクライアントを初期化します {#initialize-prisma-client}
 
 Prisma Clientを使用する前に、 `@tidbcloud/prisma-adapter`を使用して初期化する必要があります。
 
@@ -93,7 +93,7 @@ const prisma = new PrismaClient({ adapter });
         mkdir prisma-example
         cd prisma-example
 
-2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`TiDB Cloud Serverless Driver、および Prisma CLI をインストールします。
+2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`サーバーレスドライバー、および Prisma CLI をインストールします。
 
     以下のコマンドはパッケージマネージャーとしてnpmを使用します。 `npm install @tidbcloud/serverless`を実行すると、プロジェクトディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
@@ -131,7 +131,7 @@ const prisma = new PrismaClient({ adapter });
 
     > **注記：**
     >
-    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma Clientの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
+    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma クライアントの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
 
 3.  `dotenv`ファイルから環境変数を読み込むには、 `.env` } をインストールしてください。
 
@@ -178,11 +178,11 @@ const prisma = new PrismaClient({ adapter });
 
     このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)参照してください。
 
-4.  Prisma Clientを生成する：
+4.  Prismaクライアントを生成する：
 
         npx prisma generate
 
-    このコマンドは、Prismaスキーマに基づいてPrisma Clientを生成します。
+    このコマンドは、Prismaスキーマに基づいてPrismaクライアントを生成します。
 
 ### ステップ4．CRUD操作を実行する {#step-4-execute-crud-operations}
 
