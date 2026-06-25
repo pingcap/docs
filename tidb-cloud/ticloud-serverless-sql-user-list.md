@@ -3,7 +3,7 @@ title: ticloud serverless sql-user list
 summary: ticloud serverless sql-user list` のリファレンス。
 ---
 
-# ticloud サーバーレス SQL ユーザーリスト {#ticloud-serverless-sql-user-list}
+# ticloud serverless sql-user list {#ticloud-serverless-sql-user-list}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスター内の SQL ユーザーを一覧表示します。
 

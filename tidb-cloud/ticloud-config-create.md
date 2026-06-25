@@ -3,7 +3,7 @@ title: ticloud config create
 summary: ticloud config create` のリファレンス。
 ---
 
-# ticloud 設定作成 {#ticloud-config-create}
+# ticloud config create {#ticloud-config-create}
 
 ユーザー プロファイル設定を保存する[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)作成します。
 

@@ -3,7 +3,7 @@ title: ticloud serverless export download
 summary: ticloud serverless export download` のリファレンス。
 ---
 
-# ticloud サーバーレスエクスポートのダウンロード {#ticloud-serverless-export-download}
+# ticloud serverless export download {#ticloud-serverless-export-download}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターからエクスポートされたデータをローカルストレージにダウンロードします。
 

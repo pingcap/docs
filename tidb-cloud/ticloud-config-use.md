@@ -3,7 +3,7 @@ title: ticloud config use
 summary: ticloud config use` のリファレンス。
 ---
 
-# ticloud 設定の使用 {#ticloud-config-use}
+# ticloud config use {#ticloud-config-use}
 
 指定したプロファイルをアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)として設定します。
 

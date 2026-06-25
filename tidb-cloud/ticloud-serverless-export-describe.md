@@ -3,7 +3,7 @@ title: ticloud serverless export describe
 summary: ticloud serverless export describe` のリファレンス。
 ---
 
-# ticloud サーバーレスエクスポートの説明 {#ticloud-serverless-export-describe}
+# ticloud serverless export describe {#ticloud-serverless-export-describe}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのエクスポート情報を取得します。
 

@@ -3,7 +3,7 @@ title: ticloud serverless authorized-network delete
 summary: ticloud serverless authorized-network delete` のリファレンス。
 ---
 
-# ticloud サーバーレス 承認済みネットワークの削除 {#ticloud-serverless-authorized-network-delete}
+# ticloud serverless authorized-network delete {#ticloud-serverless-authorized-network-delete}
 
 承認済みネットワークを削除します。
 

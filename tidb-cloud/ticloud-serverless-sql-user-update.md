@@ -3,7 +3,7 @@ title: ticloud serverless sql-user update
 summary: ticloud serverless sql-user update` のリファレンス。
 ---
 
-# ticloud サーバーレス SQL ユーザー更新 {#ticloud-serverless-sql-user-update}
+# ticloud serverless sql-user update {#ticloud-serverless-sql-user-update}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスター内の SQL ユーザーを更新します。
 

@@ -3,7 +3,7 @@ title: ticloud serverless branch create
 summary: ticloud serverless branch create` のリファレンス。
 ---
 
-# ticloud サーバーレスブランチ作成 {#ticloud-serverless-branch-create}
+# ticloud serverless branch create {#ticloud-serverless-branch-create}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターの[支店](/tidb-cloud/branch-overview.md)作成します。
 

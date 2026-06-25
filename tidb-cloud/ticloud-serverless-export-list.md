@@ -3,7 +3,7 @@ title: ticloud serverless export list
 summary: ticloud serverless export list` のリファレンス。
 ---
 
-# ticloud サーバーレスエクスポートリスト {#ticloud-serverless-export-list}
+# ticloud serverless export list {#ticloud-serverless-export-list}
 
 TiDB Cloud Starter およびTiDB Cloud Essential クラスターのデータ エクスポート タスクを一覧表示します。
 

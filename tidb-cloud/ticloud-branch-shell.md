@@ -4,7 +4,7 @@ summary: ticloud serverless branch shell` のリファレンス。
 aliases: ['/ja/tidbcloud/ticloud-connect']
 ---
 
-# ticloud サーバーレスブランチシェル {#ticloud-serverless-branch-shell}
+# ticloud serverless branch shell {#ticloud-serverless-branch-shell}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチに接続します。
 

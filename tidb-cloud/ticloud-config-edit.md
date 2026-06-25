@@ -3,7 +3,7 @@ title: ticloud config edit
 summary: ticloud config edit` のリファレンス。
 ---
 
-# ticloud 設定編集 {#ticloud-config-edit}
+# ticloud config edit {#ticloud-config-edit}
 
 macOS または Linux を使用している場合は、デフォルトのテキスト エディターでプロファイル構成ファイルを開くことができます。
 

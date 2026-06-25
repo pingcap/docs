@@ -3,7 +3,7 @@ title: ticloud serverless cluster describe
 summary: ticloud serverless describe` のリファレンス。
 ---
 
-# ticloud サーバーレスの説明 {#ticloud-serverless-describe}
+# ticloud serverless describe {#ticloud-serverless-describe}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターに関する情報 (クラスター構成やクラスターステータスなど) を取得します。
 

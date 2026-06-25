@@ -3,7 +3,7 @@ title: ticloud serverless import cancel
 summary: ticloud serverless import cancel` の参照。
 ---
 
-# ticloud サーバーレスインポートのキャンセル {#ticloud-serverless-import-cancel}
+# ticloud serverless import cancel {#ticloud-serverless-import-cancel}
 
 データインポートタスクをキャンセルします。
 

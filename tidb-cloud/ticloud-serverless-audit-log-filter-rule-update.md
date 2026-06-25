@@ -3,7 +3,7 @@ title: ticloud serverless audit-log filter-rule update
 summary: ticloud serverless audit-log filter-rule update` のリファレンス。
 ---
 
-# ticloud サーバーレス監査ログフィルタールールの更新 {#ticloud-serverless-audit-log-filter-rule-update}
+# ticloud serverless audit-log filter-rule update {#ticloud-serverless-audit-log-filter-rule-update}
 
 TiDB Cloud Essential クラスターの監査ログ フィルター ルールを更新します。
 

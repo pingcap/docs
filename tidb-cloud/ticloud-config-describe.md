@@ -3,7 +3,7 @@ title: ticloud config describe
 summary: ticloud config describe` のリファレンス。
 ---
 
-# ticloud 設定の説明 {#ticloud-config-describe}
+# ticloud config describe {#ticloud-config-describe}
 
 特定の[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)のプロパティ情報を取得します。
 

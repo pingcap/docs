@@ -3,7 +3,7 @@ title: ticloud serverless import list
 summary: ticloud serverless import list` のリファレンス。
 ---
 
-# ticloud サーバーレスインポートリスト {#ticloud-serverless-import-list}
+# ticloud serverless import list {#ticloud-serverless-import-list}
 
 データインポートタスクの一覧:
 

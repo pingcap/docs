@@ -3,7 +3,7 @@ title: ticloud serverless cluster delete
 summary: ticloud serverless delete` のリファレンス。
 ---
 
-# ticloud サーバーレス削除 {#ticloud-serverless-delete}
+# ticloud serverless delete {#ticloud-serverless-delete}
 
 プロジェクトからTiDB Cloud Starter またはTiDB Cloud Essential クラスターを削除します。
 

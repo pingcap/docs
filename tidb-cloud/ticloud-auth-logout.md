@@ -3,7 +3,7 @@ title: ticloud auth logout
 summary: ticloud auth logout` のリファレンス。
 ---
 
-# ticloud 認証ログアウト {#ticloud-auth-logout}
+# ticloud auth logout {#ticloud-auth-logout}
 
 TiDB Cloudからログアウトします:
 

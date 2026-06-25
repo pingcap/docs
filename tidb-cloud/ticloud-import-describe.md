@@ -3,7 +3,7 @@ title: ticloud serverless import describe
 summary: ticloud serverless import describe` のリファレンス。
 ---
 
-# ticloud サーバーレスインポートの説明 {#ticloud-serverless-import-describe}
+# ticloud serverless import describe {#ticloud-serverless-import-describe}
 
 データ インポート タスクについて説明します。
 

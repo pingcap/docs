@@ -3,7 +3,7 @@ title: ticloud serverless audit-log config update
 summary: ticloud serverless audit-log config update` のリファレンス。
 ---
 
-# ticloud サーバーレス監査ログ設定の更新 {#ticloud-serverless-audit-log-config-update}
+# ticloud serverless audit-log config update {#ticloud-serverless-audit-log-config-update}
 
 TiDB Cloud Essential クラスターのデータベース監査ログ構成を更新します。
 

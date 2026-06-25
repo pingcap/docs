@@ -3,7 +3,7 @@ title: ticloud serverless create
 summary: ticloud serverless create` のリファレンス。
 ---
 
-# ticloud サーバーレス作成 {#ticloud-serverless-create}
+# ticloud serverless create {#ticloud-serverless-create}
 
 TiDB Cloudクラスターを作成します。
 

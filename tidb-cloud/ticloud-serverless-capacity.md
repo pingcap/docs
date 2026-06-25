@@ -3,7 +3,7 @@ title: ticloud serverless capacity
 summary: ticloud serverless capacity` のリファレンス。
 ---
 
-# ticloud サーバーレス容量 {#ticloud-serverless-capacity}
+# ticloud serverless capacity {#ticloud-serverless-capacity}
 
 TiDB Cloudクラスターの容量を、最大および最小のリクエスト容量単位 (RCU) に基づいて設定します。
 
