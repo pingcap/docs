@@ -326,7 +326,7 @@ TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 
 `UPDATE`イベントには、それぞれ更新後のデータと更新前のデータを表す`data`フィールドと`old`フィールドの両方が含まれています。
 
-#### 消去 {#delete}
+#### DELETE {#delete}
 
 TiCDC は`DELETE`イベントを次の JSON 形式でエンコードします。
 

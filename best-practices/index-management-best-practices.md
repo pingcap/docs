@@ -39,7 +39,7 @@ TiDB は、次のツールを導入することでインデックスの最適化
 
 -   `INFORMATION_SCHEMA.TIDB_INDEX_USAGE` : インデックスの使用パターンとクエリ頻度を監視します。
 -   `sys.schema_unused_indexes` : データベースが最後に再起動されてから使用されていないインデックスを一覧表示します。
--   非表示のインデックス: インデックスを完全に削除する前に、削除の影響をテストできます。
+-   不可視インデックス: インデックスを完全に削除する前に、削除の影響をテストできます。
 
 これらの観測ツールを使用することで、パフォーマンスの低下を招くことなく、冗長なインデックスを確実にクリーンアップできます。
 
@@ -223,15 +223,15 @@ SELECT * FROM sys.schema_unused_indexes;
 
 詳細については[`schema_unused_indexes`ビューを手動で作成する](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view)参照してください。
 
-## 非表示のインデックスを使用してインデックスの削除を安全にテストする {#safely-test-index-removal-using-invisible-indexes}
+## 不可視インデックスを使用してインデックスの削除を安全にテストする {#safely-test-index-removal-using-invisible-indexes}
 
 適切な検証を行わずにインデックスを削除すると、特にインデックスが頻繁に使用されないものの、特定のクエリにとって依然として重要である場合、予期しないパフォーマンスの問題が発生する可能性があります。
 
 このリスクを軽減するために、TiDBは不可視インデックスを提供しています。これにより、インデックスを削除せずに一時的に無効化することができます。不可視インデックスを使用することで、インデックス削除の決定を安全に検証でき、より制御された予測可能なデータベース最適化プロセスを実現できます。
 
-### 非表示のインデックスとは何ですか? {#what-are-invisible-indexes}
+### 不可視インデックスとは何ですか? {#what-are-invisible-indexes}
 
-非表示のインデックスはデータベースに残りますが、TiDBオプティマイザによって無視されます。1 [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)使用してインデックスを非表示にすることで、インデックスを永久に削除することなく、本当に不要かどうかをテストできます。
+不可視インデックスはデータベースに残りますが、TiDBオプティマイザによって無視されます。1 [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)使用してインデックスを非表示にすることで、インデックスを永久に削除することなく、本当に不要かどうかをテストできます。
 
 不可視インデックスの主な利点は次のとおりです。
 

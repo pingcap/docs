@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER INDEX の使用法の概要。
 
 # ALTER INDEX {#alter-index}
 
-`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが非表示のインデックスを選択するように設定できます。
+`ALTER INDEX`文は、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。不可視インデックスはDML文によって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを恒久的に削除する前に二重チェックを行いたい場合に便利です。TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)変更することで、オプティマイザが不可視インデックスを選択するように設定できます。
 
 ## 概要 {#synopsis}
 
@@ -47,7 +47,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザーは**非表示のインデックス**`c1`を使用できません。
+オプティマイザーは**不可視インデックス**`c1`を使用できません。
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -80,7 +80,7 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
+`USE INDEX` SQL ヒントを使用して強制的にインデックスを使用した場合でも、オプティマイザーは不可視インデックスを使用できません。そうでない場合は、エラーが返されます。
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);
