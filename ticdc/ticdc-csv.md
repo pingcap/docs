@@ -105,19 +105,19 @@ ticdc-meta$operation,ticdc-meta$table,ticdc-meta$schema,ticdc-meta$commit-ts,tic
 
 ## データ型マッピング {#data-type-mapping}
 
-| MySQLの型                                                                      | CSV形式  | 例                               | 説明                             |
-| ----------------------------------------------------------------------------- | ------- | ------------------------------- | ------------------------------ |
-| `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | Integer | `123`                           | -                              |
-| `FLOAT` / `DOUBLE`                                                            | Float   | `153.123`                       | -                              |
-| `NULL`                                                                        | Null     | `\N`                            | -                              |
-| `TIMESTAMP` / `DATETIME`                                                      | String  | `"1973-12-30 15:30:00.123456"`  | 形式: `yyyy-MM-dd HH:mm:ss.%06d` |
-| `DATE`                                                                        | String  | `"2000-01-01"`                  | 形式: `yyyy-MM-dd`               |
-| `TIME`                                                                        | String  | `"23:59:59"`                    | 形式: `yyyy-MM-dd`               |
-| `YEAR`                                                                        | Integer | `1970`                          | -                              |
-| `VARCHAR` / `JSON` / `TINYTEXT` / `MEDIUMTEXT` / `LONGTEXT` / `TEXT` / `CHAR` | String  | `"test"`                        | UTF-8エンコード                     |
-| `VARBINARY` / `TINYBLOB` / `MEDIUMBLOB` / `LONGBLOB` / `BLOB` / `BINARY`      | String  | `"6Zi/5pav"`または`"e998bfe696af"` | Base64または16進数エンコード             |
-| `BIT`                                                                         | Integer | `81`                            | -                              |
-| `DECIMAL`                                                                     | String  | `"129012.1230000"`              | -                              |
-| `ENUM`                                                                        | String  | `"a"`                           | -                              |
-| `SET`                                                                         | String  | `"a,b"`                         | -                              |
-| `TiDBVectorFloat32`                                                           | String  | `"[1.23, -0.4]"`                | -                              |
+| MySQLタイプ                                                                      | CSV形式 | 例                               | 説明                             |
+| ----------------------------------------------------------------------------- | ----- | ------------------------------- | ------------------------------ |
+| `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | 整数    | `123`                           | -                              |
+| `FLOAT` / `DOUBLE`                                                            | フロート  | `153.123`                       | -                              |
+| `NULL`                                                                        | ヌル    | `\N`                            | -                              |
+| `TIMESTAMP` / `DATETIME`                                                      | 文字列     | `"1973-12-30 15:30:00.123456"`  | 形式: `yyyy-MM-dd HH:mm:ss.%06d` |
+| `DATE`                                                                        | 文字列     | `"2000-01-01"`                  | 形式: `yyyy-MM-dd`               |
+| `TIME`                                                                        | 文字列     | `"23:59:59"`                    | 形式: `yyyy-MM-dd`               |
+| `YEAR`                                                                        | 整数    | `1970`                          | -                              |
+| `VARCHAR` / `JSON` / `TINYTEXT` / `MEDIUMTEXT` / `LONGTEXT` / `TEXT` / `CHAR` | 文字列     | `"test"`                        | UTF-8エンコード                     |
+| `VARBINARY` / `TINYBLOB` / `MEDIUMBLOB` / `LONGBLOB` / `BLOB` / `BINARY`      | 文字列     | `"6Zi/5pav"`または`"e998bfe696af"` | Base64または16進数エンコード             |
+| `BIT`                                                                         | 整数    | `81`                            | -                              |
+| `DECIMAL`                                                                     | 文字列     | `"129012.1230000"`              | -                              |
+| `ENUM`                                                                        | 文字列     | `"a"`                           | -                              |
+| `SET`                                                                         | 文字列     | `"a,b"`                         | -                              |
+| `TiDBVectorFloat32`                                                           | 文字列     | `"[1.23, -0.4]"`                | -                              |

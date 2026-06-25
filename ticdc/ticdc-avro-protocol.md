@@ -161,39 +161,39 @@ dispatchers = [
 -   `{{TIDB_TYPE}}` TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
 -   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
-| SQLの型             | TiDBの型             | AVRO_TYPE | 説明                                                                                                |
+| SQLタイプ            | TIDB_タイプ          | AVRO_TYPE | 説明                                                                                                |
 | ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------- |
-| BOOL               | INT               | int       |                                                                                                   |
-| TINYINT            | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
-| SMALLINT           | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
-| MEDIUMINT          | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
-| INT                | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
-| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。1 `avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
-| TINYBLOB           | BLOB              | bytes     |  -                                                                                                                         |
-| BLOB               | BLOB              | bytes     |  -                                                                                                                         |
-| MEDIUMBLOB         | BLOB              | bytes     |  -                                                                                                                         |
-| LONGBLOB           | BLOB              | bytes     |  -                                                                                                                         |
-| BINARY             | BLOB              | bytes     |  -                                                                                                                         |
-| VARBINARY          | BLOB              | bytes     |  -                                                                                                                         |
-| TINYTEXT           | TEXT              | string    |  -                                                                                                                         |
-| TEXT               | TEXT              | string    |  -                                                                                                                         |
-| MEDIUMTEXT         | TEXT              | string    |  -                                                                                                                         |
-| LONGTEXT           | TEXT              | string    |  -                                                                                                                         |
-| CHAR               | TEXT              | string    |  -                                                                                                                         |
-| VARCHAR            | TEXT              | string    |  -                                                                                                                         |
-| FLOAT              | FLOAT             | double    |  -                                                                                                                         |
-| DOUBLE             | DOUBLE            | double    |  -                                                                                                                         |
-| DATE               | DATE              | string    |  -                                                                                                                         |
-| DATETIME           | DATETIME          | string    |  -                                                                                                                         |
-| TIMESTAMP          | TIMESTAMP         | string    |  -                                                                                                                         |
-| TIME               | TIME              | string    |  -                                                                                                                         |
-| YEAR               | YEAR              | int       |  -                                                                                                                         |
-| BIT                | BIT               | bytes     |  -                                                                                                                         |
-| JSON               | JSON              | string    |  -                                                                                                                         |
-| ENUM               | ENUM              | string    |  -                                                                                                                         |
-| SET                | SET               | string    |  -                                                                                                                         |
-| DECIMAL            | DECIMAL           | bytes     | `avro-decimal-handling-mode`文字列の場合、AVRO_TYPE は文字列です。                                              |
-| TiDBVECTORFloat32  | TiDBVECTORFloat32 | string    |  -                                                                                                                         |
+| ブール               | INT               | 整数        |                                                                                                   |
+| タイニーイント           | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| スモールイント           | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| ミディアムミント          | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
+| INT               | INT               | 整数        | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
+| ビッグイント            | ビッグイント            | 長さ        | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。1 `avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
+| タイニーブロブ           | ブロブ               | バイト       | <li></li>                                                                                         |
+| ブロブ               | ブロブ               | バイト       | <li></li>                                                                                         |
+| ミディアムブロブ          | ブロブ               | バイト       | <li></li>                                                                                         |
+| ロングブロブ            | ブロブ               | バイト       | <li></li>                                                                                         |
+| バイナリ              | ブロブ               | バイト       | <li></li>                                                                                         |
+| VARBINARY         | ブロブ               | バイト       | <li></li>                                                                                         |
+| 小さなテキスト           | TEXT              | 文字列         | <li></li>                                                                                         |
+| TEXT              | TEXT              | 文字列         | <li></li>                                                                                         |
+| 中テキスト             | TEXT              | 文字列         | <li></li>                                                                                         |
+| 長文                | TEXT              | 文字列         | <li></li>                                                                                         |
+| チャー               | TEXT              | 文字列         | <li></li>                                                                                         |
+| 可変長文字             | TEXT              | 文字列         | <li></li>                                                                                         |
+| フロート              | フロート              | ダブル       | <li></li>                                                                                         |
+| ダブル               | ダブル               | ダブル       | <li></li>                                                                                         |
+| 日付                | 日付                | 文字列         | <li></li>                                                                                         |
+| 日時                | 日時                | 文字列         | <li></li>                                                                                         |
+| タイムスタンプ           | タイムスタンプ           | 文字列         | <li></li>                                                                                         |
+| 時間                | 時間                | 文字列         | <li></li>                                                                                         |
+| 年                 | 年                 | 整数        | <li></li>                                                                                         |
+| 少し                | 少し                | バイト       | <li></li>                                                                                         |
+| JSON              | JSON              | 文字列         | <li></li>                                                                                         |
+| 列挙型               | 列挙型               | 文字列         | <li></li>                                                                                         |
+| セット               | セット               | 文字列         | <li></li>                                                                                         |
+| 小数点               | 小数点               | バイト       | `avro-decimal-handling-mode`文字列の場合、AVRO_TYPE は文字列です。                                              |
+| TiDBVECTORFloat32 | TiDBVECTORFloat32 | 文字列         | <li></li>                                                                                         |
 
 Avro プロトコルでは、他の 2 つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 

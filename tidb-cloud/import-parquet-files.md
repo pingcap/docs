@@ -300,22 +300,22 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 以下の表は、TiDB Cloudにインポート可能なサポートされているParquetデータタイプの一覧です。
 
-| Parquet プリミティブ型 | Parquet 論理型 | TiDBまたはMySQLの型                                                                                                                                                    |
+| パーケットプリミティブタイプ | Parquet 論理型   | TiDBまたはMySQLの型                                                                                                                                                    |
 | -------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOUBLE            | DOUBLE           | DOUBLE<br/>FLOAT                                                                                                                                                      |
-| FIXED_LEN_BYTE_ARRAY(9) | DECIMAL(20,0) | BIGINT UNSIGNED                                                                                                                                                        |
-| FIXED_LEN_BYTE_ARRAY(N) | DECIMAL(p,s)  | DECIMAL<br/>NUMERIC                                                                                                                                                        |
-| INT32          | DECIMAL(p,s)  | DECIMAL<br/>NUMERIC                                                                                                                                                        |
-| INT32          | N/A          | INT<br/>MEDIUMINT<br/>YEAR                                                                                                                                            |
-| INT64          | DECIMAL(p,s)  | DECIMAL<br/>NUMERIC                                                                                                                                                        |
-| INT64          | N/A          | BIGINT<br/>INT UNSIGNED<br/>MEDIUMINT UNSIGNED                                                                                                                          |
-| INT64          | TIMESTAMP_MICROS | DATETIME<br/>TIMESTAMP                                                                                                                                                    |
-| BYTE_ARRAY      | N/A          | BINARY<br/>BIT<br/>BLOB<br/>CHAR<br/>LINESTRING<br/>LONGBLOB<br/>MEDIUMBLOB<br/>MULTILINESTRING<br/>TINYBLOB<br/>VARBINARY                                                                |
-| BYTE_ARRAY          | STRING             | ENUM<br/>DATE<br/>DECIMAL<br/>GEOMETRY<br/>GEOMETRYCOLLECTION<br/>JSON<br/>LONGTEXT<br/>MEDIUMTEXT<br/>MULTIPOINT<br/>MULTIPOLYGON<br/>NUMERIC<br/>POINT<br/>POLYGON<br/>SET<br/>TEXT<br/>TIME<br/>TINYTEXT<br/>VARCHAR |
-| SMALLINT          | N/A          | INT32                                                                                                                                                             |
-| SMALLINT UNSIGNED | N/A          | INT32                                                                                                                                                             |
-| TINYINT        | N/A          | INT32                                                                                                                                                             |
-| TINYINT UNSIGNED   | N/A          | INT32                                                                                                                                                             |
+| ダブル            | ダブル           | ダブル<br/>フロート                                                                                                                                                      |
+| 固定長バイト配列(9)    | DECIMAL(20,0) | 符号なしビッグイント                                                                                                                                                        |
+| 固定長バイト配列(N)    | DECIMAL(p,s)  | 十進数<br/>数値                                                                                                                                                        |
+| INT32          | DECIMAL(p,s)  | 十進数<br/>数値                                                                                                                                                        |
+| INT32          | 該当なし          | INT<br/>メディウムミント<br/>年                                                                                                                                            |
+| INT64          | DECIMAL(p,s)  | 十進数<br/>数値                                                                                                                                                        |
+| INT64          | 該当なし          | ビッグイント<br/>INT UNSIGNED<br/>ミディアムミント 未署名                                                                                                                          |
+| INT64          | タイムスタンプマイクロ   | 日時<br/>タイムスタンプ                                                                                                                                                    |
+| バイト配列          | 該当なし          | バイナリ<br/>少し<br/>ブロブ<br/>チャール<br/>ラインストリング<br/>ロングブロブ<br/>中型スロブ<br/>マルチラインストリング<br/>タイニーブロブ<br/>二進法                                                                |
+| バイト配列          | 文字列             | 列挙型<br/>日付<br/>十進数<br/>幾何学<br/>ジオメトリーコレクション<br/>JSON<br/>長文<br/>中文<br/>マルチポイント<br/>マルチポリゴン<br/>数値<br/>ポイント<br/>ポリゴン<br/>セット<br/>TEXT<br/>時間<br/>小さな文字<br/>VARCHAR |
+| スモールイント        | 該当なし          | INT32                                                                                                                                                             |
+| スモールイント・アンサインド | 該当なし          | INT32                                                                                                                                                             |
+| TINYINT        | 該当なし          | INT32                                                                                                                                                             |
+| タイニント・アンサインド   | 該当なし          | INT32                                                                                                                                                             |
 
 ## トラブルシューティング {#troubleshooting}
 
