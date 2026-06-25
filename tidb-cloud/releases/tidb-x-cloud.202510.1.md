@@ -79,7 +79,7 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
 ## Limitations
 
-Because of the architectural differences between TiDB X and classic TiDB, the `TiDB-X-CLOUD.202510.1` kernel does not support the following storage features of the TiDB v8.5.0 kernel:
+Because of the architectural differences between TiDB X and classic TiDB, the TiDB X kernel does not support the following storage features of the classic TiDB kernel:
 
 - [TiKV MVCC In-Memory Engine (IME)](/tikv-in-memory-engine.md)
 - [Follower Read](/follower-read.md)
