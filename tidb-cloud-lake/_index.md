@@ -27,7 +27,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 </LearningPath>
 
-<LearningPath label="Develop" icon="doc8">
+<LearningPath label="Connect" icon="doc8">
 
 [Connection Overview](https://docs.tidb.io/tidbcloudlake/connection-overview/)
 
