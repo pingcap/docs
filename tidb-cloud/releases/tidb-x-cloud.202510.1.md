@@ -9,12 +9,12 @@ Release date: April 28, 2026
 
 TiDB X kernel version: `TiDB-X-CLOUD.202510.1`
 
-{{{ .premium }}} is in public preview starting from April 28, 2026, using the` TiDB-X-CLOUD.202510.1` kernel.
+{{{ .premium }}} is in public preview starting from April 28, 2026, using the `TiDB-X-CLOUD.202510.1` kernel.
 
 In `TiDB-X-CLOUD.202510.1`:
 
 - `202510` represents that the baseline code branch of this kernel version was created in October 2025, which is different from the release date.
-- `1` represents that it is the first patch release for the TiDB-X-CLOUD.202510.0 kernel.
+- `1` represents that it is the first patch release built from the `TiDB-X-CLOUD.202510` baseline branch.
 
 The `TiDB-X-CLOUD.202510.1` kernel is based on the TiDB v8.5.0 kernel, which means it supports most of the features and improvements as the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel.
 
@@ -53,7 +53,7 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
     - DDL statements that create new indexes: [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
     - DDL statements that reorganize existing indexes: [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) and [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
 
-  When this feature is enabled, TiDB automatically runs an `ANALYZE` (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
+    When you enable this feature, TiDB automatically runs an `ANALYZE` (statistics collection) operation before the new or reorganized index becomes visible to users. This prevents inaccurate optimizer estimates and potential plan changes caused by temporarily unavailable statistics after index creation or reorganization.
 
      For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze).
 
@@ -77,9 +77,9 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
     For more information, see [Statement Summary Tables](/statement-summary-tables.md) and [Identify Slow Queries](/identify-slow-queries.md).
 
-## Limitation
+## Limitations
 
-Because of the architecture difference between TiDB X and classic TiDB, the `TiDB-X-CLOUD.202510.1` kernel does not support the following storage features in TiDB v8.5.0 kernel:
+Because of the architectural differences between TiDB X and classic TiDB, the `TiDB-X-CLOUD.202510.1` kernel does not support the following storage features of the TiDB v8.5.0 kernel:
 
 - [TiKV MVCC In-Memory Engine (IME)](/tikv-in-memory-engine.md)
 - [Follower Read](/follower-read.md)
