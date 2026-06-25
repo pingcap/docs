@@ -273,83 +273,83 @@ COMMIT;
 
 `Column Type Code` 、行変更イベントの列データ型を表します。
 
-| タイプ                   | コード    | 出力例                                                                                                                      | 説明                                                          |
+| 型                     | コード    | 出力例                                                                                                                      | 説明                                                          |
 | :-------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| TINYINT/ブール値          | 1      | {"t":1,"v":1}                                                                                                            |                                                             |
-| SMALLINT               | 2      | {&quot;t&quot;:2,&quot;v&quot;:1}                                                                                        |                                                             |
+| TINYINT/BOOLEAN       | 1      | {"t":1,"v":1}                                                                                                            |                                                             |
+| SMALLINT              | 2      | {&quot;t&quot;:2,&quot;v&quot;:1}                                                                                        |                                                             |
 | INT                   | 3      | {&quot;t&quot;:3,&quot;v&quot;:123}                                                                                      |                                                             |
-| FLOAT                  | 4      | {&quot;t&quot;:4,&quot;v&quot;:153.123}                                                                                  |                                                             |
-| DOUBLE                   | 5      | {&quot;t&quot;:5,&quot;v&quot;:153.123}                                                                                  |                                                             |
-| ヌル                    | 6      | {&quot;t&quot;:6,&quot;v&quot;:null}                                                                                     |                                                             |
-| タイムスタンプ               | 7      | {&quot;t&quot;:7,&quot;v&quot;:&quot;1973-12-30 15:30:00&quot;}                                                          |                                                             |
+| FLOAT                 | 4      | {&quot;t&quot;:4,&quot;v&quot;:153.123}                                                                                  |                                                             |
+| DOUBLE                | 5      | {&quot;t&quot;:5,&quot;v&quot;:153.123}                                                                                  |                                                             |
+| NULL                  | 6      | {&quot;t&quot;:6,&quot;v&quot;:null}                                                                                     |                                                             |
+| TIMESTAMP             | 7      | {&quot;t&quot;:7,&quot;v&quot;:&quot;1973-12-30 15:30:00&quot;}                                                          |                                                             |
 | BIGINT                | 8      | {&quot;t&quot;:8,&quot;v&quot;:123}                                                                                      |                                                             |
-| MEDIUMINT              | 9      | {&quot;t&quot;:9,&quot;v&quot;:123}                                                                                      |                                                             |
-| 日付                    | 10月14日 | {&quot;t&quot;:10,&quot;v&quot;:&quot;2000-01-01&quot;}                                                                  |                                                             |
-| 時間                    | 11     | {&quot;t&quot;:11,&quot;v&quot;:&quot;23:59:59&quot;}                                                                    |                                                             |
-| 日時                    | 12     | {&quot;t&quot;:12,&quot;v&quot;:&quot;2015-12-20 23:58:58&quot;}                                                         |                                                             |
-| 年                     | 13     | {&quot;t&quot;:13,&quot;v&quot;:1970}                                                                                    |                                                             |
+| MEDIUMINT             | 9      | {&quot;t&quot;:9,&quot;v&quot;:123}                                                                                      |                                                             |
+| DATE                  | 10/14 | {&quot;t&quot;:10,&quot;v&quot;:&quot;2000-01-01&quot;}                                                                  |                                                             |
+| TIME                  | 11     | {&quot;t&quot;:11,&quot;v&quot;:&quot;23:59:59&quot;}                                                                    |                                                             |
+| DATETIME              | 12     | {&quot;t&quot;:12,&quot;v&quot;:&quot;2015-12-20 23:58:58&quot;}                                                         |                                                             |
+| YEAR                  | 13     | {&quot;t&quot;:13,&quot;v&quot;:1970}                                                                                    |                                                             |
 | VARCHAR/VARBINARY     | 15/253 | {&quot;t&quot;:15,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:15,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;}   | 値はUTF-8でエンコードされます。アップストリームの型がVARBINARYの場合、非表示の文字はエスケープされます。 |
-| 少し                    | 16     | {&quot;t&quot;:16,&quot;v&quot;:81}                                                                                      |                                                             |
+| BIT                   | 16     | {&quot;t&quot;:16,&quot;v&quot;:81}                                                                                      |                                                             |
 | JSON                  | 245    | {&quot;t&quot;:245,&quot;v&quot;:&quot;{\&quot;キー1\&quot;: \&quot;値1\&quot;}&quot;}                                      |                                                             |
 | DECIMAL               | 246    | {&quot;t&quot;:246,&quot;v&quot;:&quot;129012.1230000&quot;}                                                             |                                                             |
-| 列挙型                   | 247    | {&quot;t&quot;:247,&quot;v&quot;:1}                                                                                      |                                                             |
-| セット                   | 248    | {&quot;t&quot;:248,&quot;v&quot;:3}                                                                                      |                                                             |
-| TINYTEXT/TINYBLOB      | 249    | {&quot;t&quot;:249,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
+| ENUM                  | 247    | {&quot;t&quot;:247,&quot;v&quot;:1}                                                                                      |                                                             |
+| SET                   | 248    | {&quot;t&quot;:248,&quot;v&quot;:3}                                                                                      |                                                             |
+| TINYTEXT/TINYBLOB     | 249    | {&quot;t&quot;:249,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | MEDIUMTEXT/MEDIUMBLOB | 250    | {&quot;t&quot;:250,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | LONGTEXT/LONGBLOB     | 251    | {&quot;t&quot;:251,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | TEXT/BLOB             | 252    | {&quot;t&quot;:252,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
-| 文字/バイナリ               | 254    | {&quot;t&quot;:254,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:254,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
-| TiDBベクトルFLOAT32        | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
-| 幾何学                   | 255    |                                                                                                                          | Unsupported                                                 |
+| CHAR/BINARY           | 254    | {&quot;t&quot;:254,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:254,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
+| TiDBVectorFloat32     | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
+| GEOMETRY              | 255    |                                                                                                                          | Unsupported                                                 |
 
 ## DDLタイプコード {#ddl-type-code}
 
 `DDL Type Code` 、DDL イベントの DDL ステートメント タイプを表します。
 
-| タイプ                  | コード |
-| :------------------- | :-- |
-| スキーマの作成              | 1   |
-| スキーマの削除              | 2   |
-| テーブルを作成              | 3   |
-| ドロップテーブル             | 4   |
-| カラムを追加               | 5   |
-| カラムのドロップ             | 6   |
-| インデックスを追加            | 7   |
-| ドロップインデックス           | 8   |
-| 外部キーの追加              | 9   |
-| 外部キーの削除              | 10  |
-| テーブルを切り捨て            | 11  |
-| カラムの変更               | 12  |
-| 自動IDのリベース            | 13  |
-| テーブル名の変更             | 14  |
-| デフォルト値を設定する          | 15  |
-| シャード行ID              | 16  |
-| テーブルコメントの変更          | 17  |
-| インデックスの名前変更          | 18  |
-| テーブルパーティションの追加       | 19  |
-| テーブルパーティションの削除       | 20  |
-| ビューを作成               | 21  |
-| 表の文字セットと照合順序を変更する    | 22  |
-| テーブルパーティションの切り捨て     | 23  |
-| ドロップビュー              | 24  |
-| テーブルの回復              | 25  |
-| スキーマ文字セットと照合を変更する    | 26  |
-| ロックテーブル              | 27  |
-| テーブルのロックを解除          | 28  |
-| 修理テーブル               | 29  |
-| TiFlashレプリカを設定する     | 30  |
-| TiFlashレプリカのステータスを更新 | 31  |
-| 主キーの追加               | 32  |
-| 主キーの削除               | 33  |
-| シーケンスを作成             | 34  |
-| シーケンスの変更             | 35  |
-| ドロップシーケンス            | 36  |
+| Type                              | Code |
+| :-------------------------------- | :-- |
+| Create Schema                     | 1   |
+| Drop Schema                       | 2   |
+| Create Table                      | 3   |
+| Drop Table                        | 4   |
+| Add Column                        | 5   |
+| Drop Column                       | 6   |
+| Add Index                         | 7   |
+| Drop Index                        | 8   |
+| Add Foreign Key                   | 9   |
+| Drop Foreign Key                  | 10  |
+| Truncate Table                    | 11  |
+| Modify Column                     | 12  |
+| Rebase Auto ID                    | 13  |
+| Rename Table                      | 14  |
+| Set Default Value                 | 15  |
+| Shard RowID                       | 16  |
+| Modify Table Comment              | 17  |
+| Rename Index                      | 18  |
+| Add Table Partition               | 19  |
+| Drop Table Partition              | 20  |
+| Create View                       | 21  |
+| Modify Table Charset And Collate  | 22  |
+| Truncate Table Partition          | 23  |
+| Drop View                         | 24  |
+| Recover Table                     | 25  |
+| Modify Schema Charset And Collate | 26  |
+| Lock Table                        | 27  |
+| Unlock Table                      | 28  |
+| Repair Table                      | 29  |
+| Set TiFlash Replica               | 30  |
+| Update TiFlash Replica Status     | 31  |
+| Add Primary Key                   | 32  |
+| Drop Primary Key                  | 33  |
+| Create Sequence                   | 34  |
+| Alter Sequence                    | 35  |
+| Drop Sequence                     | 36  |
 
 ## 列のビットフラグ {#bit-flags-of-columns}
 
 ビット フラグは列の特定の属性を表します。
 
-| 少し | 価値   | 名前           | 説明                      |
+| Bit | 価値   | 名前           | 説明                      |
 | :- | :--- | :----------- | :---------------------- |
 | 1  | 0x01 | バイナリフラグ      | 列がバイナリエンコードされた列であるかどうか。 |
 | 2  | 0x02 | ハンドルキーフラグ    | 列がハンドル インデックス列であるかどうか。  |
