@@ -108,7 +108,7 @@ ticdc-meta$operation,ticdc-meta$table,ticdc-meta$schema,ticdc-meta$commit-ts,tic
 | MySQLタイプ                                                                      | CSV形式 | 例                               | 説明                             |
 | ----------------------------------------------------------------------------- | ----- | ------------------------------- | ------------------------------ |
 | `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | 整数    | `123`                           | -                              |
-| `FLOAT` / `DOUBLE`                                                            | フロート  | `153.123`                       | -                              |
+| `FLOAT` / `DOUBLE`                                                            | FLOAT  | `153.123`                       | -                              |
 | `NULL`                                                                        | ヌル    | `\N`                            | -                              |
 | `TIMESTAMP` / `DATETIME`                                                      | 弦     | `"1973-12-30 15:30:00.123456"`  | 形式: `yyyy-MM-dd HH:mm:ss.%06d` |
 | `DATE`                                                                        | 弦     | `"2000-01-01"`                  | 形式: `yyyy-MM-dd`               |

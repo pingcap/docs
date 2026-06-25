@@ -162,8 +162,8 @@ WHERE table_schema LIKE 'bookshop';
 | ID     | ビギント         | 著者の固有ID                   |
 | 名前     | varchar(100) | 著者名                       |
 | 性別     | 小さな整数        | 生物学的性別（0：女性、1：男性、NULL：不明） |
-| 生年     | スモールイント      | 生年                        |
-| 死亡年    | スモールイント      | 死亡年                       |
+| 生年     | SMALLINT      | 生年                        |
+| 死亡年    | SMALLINT      | 死亡年                       |
 
 ### <code>users</code>テーブル {#code-users-code-table}
 

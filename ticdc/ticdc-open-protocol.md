@@ -276,14 +276,14 @@ COMMIT;
 | タイプ                   | コード    | 出力例                                                                                                                      | 説明                                                          |
 | :-------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | TINYINT/ブール値          | 1      | {"t":1,"v":1}                                                                                                            |                                                             |
-| スモールイント               | 2      | {&quot;t&quot;:2,&quot;v&quot;:1}                                                                                        |                                                             |
+| SMALLINT               | 2      | {&quot;t&quot;:2,&quot;v&quot;:1}                                                                                        |                                                             |
 | INT                   | 3      | {&quot;t&quot;:3,&quot;v&quot;:123}                                                                                      |                                                             |
-| フロート                  | 4      | {&quot;t&quot;:4,&quot;v&quot;:153.123}                                                                                  |                                                             |
-| ダブル                   | 5      | {&quot;t&quot;:5,&quot;v&quot;:153.123}                                                                                  |                                                             |
+| FLOAT                  | 4      | {&quot;t&quot;:4,&quot;v&quot;:153.123}                                                                                  |                                                             |
+| DOUBLE                   | 5      | {&quot;t&quot;:5,&quot;v&quot;:153.123}                                                                                  |                                                             |
 | ヌル                    | 6      | {&quot;t&quot;:6,&quot;v&quot;:null}                                                                                     |                                                             |
 | タイムスタンプ               | 7      | {&quot;t&quot;:7,&quot;v&quot;:&quot;1973-12-30 15:30:00&quot;}                                                          |                                                             |
-| ビッグイント                | 8      | {&quot;t&quot;:8,&quot;v&quot;:123}                                                                                      |                                                             |
-| ミディアムミント              | 9      | {&quot;t&quot;:9,&quot;v&quot;:123}                                                                                      |                                                             |
+| BIGINT                | 8      | {&quot;t&quot;:8,&quot;v&quot;:123}                                                                                      |                                                             |
+| MEDIUMINT              | 9      | {&quot;t&quot;:9,&quot;v&quot;:123}                                                                                      |                                                             |
 | 日付                    | 10月14日 | {&quot;t&quot;:10,&quot;v&quot;:&quot;2000-01-01&quot;}                                                                  |                                                             |
 | 時間                    | 11     | {&quot;t&quot;:11,&quot;v&quot;:&quot;23:59:59&quot;}                                                                    |                                                             |
 | 日時                    | 12     | {&quot;t&quot;:12,&quot;v&quot;:&quot;2015-12-20 23:58:58&quot;}                                                         |                                                             |
@@ -294,12 +294,12 @@ COMMIT;
 | DECIMAL               | 246    | {&quot;t&quot;:246,&quot;v&quot;:&quot;129012.1230000&quot;}                                                             |                                                             |
 | 列挙型                   | 247    | {&quot;t&quot;:247,&quot;v&quot;:1}                                                                                      |                                                             |
 | セット                   | 248    | {&quot;t&quot;:248,&quot;v&quot;:3}                                                                                      |                                                             |
-| タイニーテキスト/タイニーブロブ      | 249    | {&quot;t&quot;:249,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
+| TINYTEXT/TINYBLOB      | 249    | {&quot;t&quot;:249,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | MEDIUMTEXT/MEDIUMBLOB | 250    | {&quot;t&quot;:250,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | LONGTEXT/LONGBLOB     | 251    | {&quot;t&quot;:251,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | TEXT/BLOB             | 252    | {&quot;t&quot;:252,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
 | 文字/バイナリ               | 254    | {&quot;t&quot;:254,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:254,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
-| TiDBベクトルフロート32        | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
+| TiDBベクトルFLOAT32        | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
 | 幾何学                   | 255    |                                                                                                                          | Unsupported                                                 |
 
 ## DDLタイプコード {#ddl-type-code}
