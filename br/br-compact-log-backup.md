@@ -49,11 +49,11 @@ br operator base64ify --storage "s3://your/log/backup/storage/here" --load-creds
 > **注記：**
 >
 > -   上記のコマンドを実行する際にオプション`--load-creds`を指定した場合、エンコードされたBase64文字列には、現在のBR環境から読み込まれた認証情報が含まれます。適切なセキュリティとアクセス制御を確保するためにご注意ください。
-> -   `--storage`値は、ログ バックアップ タスクの`log status`コマンドからのstorage出力と一致します。
+> -   `--storage`値は、ログ バックアップ タスクの`log status`コマンドの出力と一致する必要があります。
 
 #### ステップ2: ログ圧縮を実行する {#step-2-execute-log-compaction}
 
-Base64エンコードストレージでは、 `tikv-ctl`で圧縮を開始できます。デフォルトのログレベルは`tikv-ctl`ですが、 `warning`です。より詳細な情報を取得するには`--log-level info`使用してください。
+前の手順でBase64エンコードされた文字列を取得したら、`tikv-ctl`を使用して圧縮を開始できます。デフォルトでは、`tikv-ctl`のログレベルは`warning`です。より詳細な情報を取得するには、`--log-level info`を使用してください。
 
 ```shell
 tikv-ctl --log-level info compact-log-backup \
@@ -63,7 +63,7 @@ tikv-ctl --log-level info compact-log-backup \
 
 パラメータの説明:
 
--   `-s` : 先ほど取得した Base64 でエンコードされたstorage文字列。
+-   `-s` : 前の手順で取得したBase64エンコード文字列。
 -   `-N` : 同時ログ圧縮タスクの最大数。
 -   `--from` : 圧縮の開始タイムスタンプ。
 -   `--until` : 圧縮の終了タイムスタンプ。
