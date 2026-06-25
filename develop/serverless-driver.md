@@ -277,7 +277,7 @@ TiDBとJavaScript間の型マッピングは以下のとおりです。
 | --------------- | -------------- |
 | TINYINT         | number         |
 | UNSIGNED TINYINT | number         |
-| BOOLEAN         | number         |
+| BOOL            | number         |
 | SMALLINT        | number         |
 | UNSIGNED SMALLINT | number       |
 | MEDIUMINT       | number         |
@@ -310,7 +310,7 @@ TiDBとJavaScript間の型マッピングは以下のとおりです。
 | BIT             | Uint8Array     |
 | JSON            | object         |
 | NULL            | null           |
-| Others          | string         |
+| その他          | string         |
 
 > **注記：**
 >
