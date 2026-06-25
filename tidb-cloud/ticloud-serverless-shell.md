@@ -4,7 +4,7 @@ summary: ticloud serverless shell` のリファレンス。
 aliases: ['/ja/tidbcloud/ticloud-connect']
 ---
 
-# ticloud サーバーレスシェル {#ticloud-serverless-shell}
+# ticloud serverless shell {#ticloud-serverless-shell}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
 

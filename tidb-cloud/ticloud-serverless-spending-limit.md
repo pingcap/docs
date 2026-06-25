@@ -3,7 +3,7 @@ title: ticloud serverless spending-limit
 summary: ticloud serverless spending-limit` のリファレンス。
 ---
 
-# ticloud サーバーレス支出制限 {#ticloud-serverless-spending-limit}
+# ticloud serverless spending-limit {#ticloud-serverless-spending-limit}
 
 TiDB Cloud Serverless クラスターの月間最大数[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)設定します。
 

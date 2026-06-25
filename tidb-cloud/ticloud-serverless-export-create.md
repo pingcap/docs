@@ -3,7 +3,7 @@ title: ticloud serverless export create
 summary: ticloud serverless export create` のリファレンス。
 ---
 
-# ticloud サーバーレスエクスポート作成 {#ticloud-serverless-export-create}
+# ticloud serverless export create {#ticloud-serverless-export-create}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターからデータをエクスポートします。
 

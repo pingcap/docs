@@ -3,7 +3,7 @@ title: ticloud serverless sql-user delete
 summary: ticloud serverless sql-user delete` のリファレンス。
 ---
 
-# ticloud サーバーレス SQL ユーザー削除 {#ticloud-serverless-sql-user-delete}
+# ticloud serverless sql-user delete {#ticloud-serverless-sql-user-delete}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターから SQL ユーザーを削除します。
 

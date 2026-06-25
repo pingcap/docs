@@ -3,7 +3,7 @@ title: ticloud serverless branch list
 summary: ticloud serverless branch list` のリファレンス。
 ---
 
-# ticloud サーバーレス ブランチ リスト {#ticloud-serverless-branch-list}
+# ticloud serverless branch list {#ticloud-serverless-branch-list}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのすべてのブランチを一覧表示します。
 

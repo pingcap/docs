@@ -3,7 +3,7 @@ title: ticloud serverless cluster list
 summary: ticloud serverless list` のリファレンス。
 ---
 
-# ticloud サーバーレス リスト {#ticloud-serverless-list}
+# ticloud serverless list {#ticloud-serverless-list}
 
 プロジェクト内のすべてのTiDB Cloud Starter クラスターとTiDB Cloud Essential クラスターを一覧表示します。
 

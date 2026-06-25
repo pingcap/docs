@@ -3,7 +3,7 @@ title: ticloud config set
 summary: ticloud config set` のリファレンス。
 ---
 
-# ticloud 設定セット {#ticloud-config-set}
+# ticloud config set {#ticloud-config-set}
 
 アクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)のプロパティを設定します。
 

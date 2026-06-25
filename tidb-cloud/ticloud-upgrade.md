@@ -4,7 +4,7 @@ summary: ticloud アップグレード` のリファレンス。
 aliases: ['/ja/tidbcloud/ticloud-update']
 ---
 
-# ticloud アップグレード {#ticloud-upgrade}
+# ticloud upgrade {#ticloud-upgrade}
 
 TiDB Cloud CLI を最新バージョンにアップグレードします。
 

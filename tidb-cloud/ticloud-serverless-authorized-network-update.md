@@ -3,7 +3,7 @@ title: ticloud serverless authorized-network update
 summary: ticloud serverless authorized-network update` のリファレンス。
 ---
 
-# ticloud サーバーレス 承認ネットワーク アップデート {#ticloud-serverless-authorized-network-update}
+# ticloud serverless authorized-network update {#ticloud-serverless-authorized-network-update}
 
 承認済みネットワークを更新します。
 

@@ -3,7 +3,7 @@ title: ticloud serverless authorized-network list
 summary: ticloud serverless authorized-network list` のリファレンス。
 ---
 
-# ticloud サーバーレス 承認ネットワーク リスト {#ticloud-serverless-authorized-network-list}
+# ticloud serverless authorized-network list {#ticloud-serverless-authorized-network-list}
 
 承認されたネットワークをすべて一覧表示します。
 

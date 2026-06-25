@@ -3,7 +3,7 @@ title: ticloud serverless audit-log config describe
 summary: ticloud serverless audit-log config describe` のリファレンス。
 ---
 
-# ticloud サーバーレス監査ログ設定の説明 {#ticloud-serverless-audit-log-config-describe}
+# ticloud serverless audit-log config describe {#ticloud-serverless-audit-log-config-describe}
 
 TiDB Cloud Essential クラスターのデータベース監査ログ構成について説明します。
 

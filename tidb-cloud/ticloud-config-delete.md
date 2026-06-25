@@ -3,7 +3,7 @@ title: ticloud config delete
 summary: ticloud config delete` のリファレンス。
 ---
 
-# ticloud 設定の削除 {#ticloud-config-delete}
+# ticloud config delete {#ticloud-config-delete}
 
 [ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を削除:
 

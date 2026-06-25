@@ -3,7 +3,7 @@ title: ticloud serverless export cancel
 summary: ticloud serverless export cancel` の参照。
 ---
 
-# ticloud サーバーレスエクスポートのキャンセル {#ticloud-serverless-export-cancel}
+# ticloud serverless export cancel {#ticloud-serverless-export-cancel}
 
 データ エクスポート タスクをキャンセルします。
 

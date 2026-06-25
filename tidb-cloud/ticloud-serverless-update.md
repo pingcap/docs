@@ -3,7 +3,7 @@ title: ticloud serverless update
 summary: ticloud serverless update` のリファレンス。
 ---
 
-# ticloud サーバーレスアップデート {#ticloud-serverless-update}
+# ticloud serverless update {#ticloud-serverless-update}
 
 TiDB Cloud Starter またはTiDB Cloud Essential クラスターを更新します。
 

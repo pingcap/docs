@@ -4,7 +4,7 @@ summary: ticloud serverless import start` のリファレンス。
 aliases: ['/ja/tidbcloud/ticloud-import-start-local','/ja/tidbcloud/ticloud-import-start-mysql','/ja/tidbcloud/ticloud-import-start-s3']
 ---
 
-# ticloud サーバーレスインポートの開始 {#ticloud-serverless-import-start}
+# ticloud serverless import start {#ticloud-serverless-import-start}
 
 データ インポート タスクを開始します。
 

@@ -4,7 +4,7 @@ summary: ticloud serverless region` のリファレンス。
 aliases: ['/ja/tidbcloud/ticloud-serverless-regions']
 ---
 
-# ticloud サーバーレスリージョン {#ticloud-serverless-region}
+# ticloud serverless region {#ticloud-serverless-region}
 
 TiDB Cloud Starter およびTiDB Cloud Essential で利用可能なすべてのリージョンを一覧表示します。
 

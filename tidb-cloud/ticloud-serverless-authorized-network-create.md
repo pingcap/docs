@@ -3,7 +3,7 @@ title: ticloud serverless authorized-network create
 summary: ticloud serverless authorized-network create` のリファレンス。
 ---
 
-# ticloud サーバーレス 承認済みネットワークの作成 {#ticloud-serverless-authorized-network-create}
+# ticloud serverless authorized-network create {#ticloud-serverless-authorized-network-create}
 
 承認済みネットワークを作成します。
 

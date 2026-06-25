@@ -3,7 +3,7 @@ title: ticloud auth whoami
 summary: ticloud auth whoami` のリファレンス。
 ---
 
-# ticloud 認証 whoami {#ticloud-auth-whoami}
+# ticloud auth whoami {#ticloud-auth-whoami}
 
 現在のユーザーに関する情報を表示します。
 

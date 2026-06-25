@@ -3,7 +3,7 @@ title: ticloud serverless branch describe
 summary: ticloud serverless branch describe` のリファレンス。
 ---
 
-# ticloud サーバーレスブランチの説明 {#ticloud-serverless-branch-describe}
+# ticloud serverless branch describe {#ticloud-serverless-branch-describe}
 
 ブランチに関する情報 (エンドポイント、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix) 、使用状況など) を取得します。
 

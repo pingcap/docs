@@ -3,7 +3,7 @@ title: ticloud project list
 summary: ticloud プロジェクト リスト` の参照。
 ---
 
-# ticloud プロジェクトリスト {#ticloud-project-list}
+# ticloud project list {#ticloud-project-list}
 
 アクセス可能なすべてのプロジェクトを一覧表示します。
 
