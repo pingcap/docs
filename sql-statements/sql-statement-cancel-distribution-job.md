@@ -15,7 +15,7 @@ summary: TiDBにおけるCANCEL DISTRIBUTION JOBの使用方法の概要。
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CancelDistributionJobsStmt ::=

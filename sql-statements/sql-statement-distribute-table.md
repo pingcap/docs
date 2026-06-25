@@ -19,7 +19,7 @@ summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法
 
 `DISTRIBUTE TABLE`ステートメントは、指定されたテーブルのリージョンを再分配および再スケジュールし、テーブルレベルでバランスの取れた分散を実現します。このステートメントを実行することで、リージョンが少数のTiFlashまたは TiKV ノードに集中するのを防ぎ、テーブル内のリージョンの分散が不均一になる問題を解決できます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DistributeTableStmt ::=

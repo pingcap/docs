@@ -18,7 +18,7 @@ SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowTableRegionStmt ::=

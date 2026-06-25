@@ -18,7 +18,7 @@ CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterPolicyStmt ::=

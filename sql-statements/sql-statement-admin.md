@@ -148,7 +148,7 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=

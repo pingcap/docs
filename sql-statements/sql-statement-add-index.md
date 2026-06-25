@@ -31,7 +31,7 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt

@@ -22,7 +22,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 `BACKUP` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`BACKUP`を使用すると失敗します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 BackupStmt ::=

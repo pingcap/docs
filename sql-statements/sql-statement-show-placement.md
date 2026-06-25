@@ -17,7 +17,7 @@ summary: TiDBにおけるSHOW PLACEMENTの使用方法。
 -   `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=

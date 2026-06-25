@@ -26,7 +26,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 `RESTORE` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 RestoreStmt ::=

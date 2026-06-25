@@ -7,7 +7,7 @@ summary: TiDBデータベースにおけるSELECT文の使用方法の概要。
 
 `SELECT`ステートメントは、TiDB からデータを読み取るために使用されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SelectStmt ::=

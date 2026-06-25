@@ -64,7 +64,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 `IMPORT INTO`を実行するには、対象テーブルに対する`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限。TiDB ローカルストレージにファイルをインポートするには、 `FILE`権限も必要です。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ImportIntoStmt ::=

@@ -39,7 +39,7 @@ FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
 FLASHBACK CLUSTER TO TSO 445494839813079041;
 ```
 
-### あらすじ {#synopsis}
+### 概要 {#synopsis}
 
 ```ebnf+diagram
 FlashbackToTimestampStmt

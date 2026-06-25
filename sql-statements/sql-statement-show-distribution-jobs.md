@@ -15,7 +15,7 @@ summary: TiDBデータベースにおけるSHOW DISTRIBUTION JOBSの使用方法
 
 </CustomContent>
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowDistributionJobsStmt ::=
