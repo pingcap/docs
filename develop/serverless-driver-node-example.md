@@ -1,17 +1,17 @@
 ---
 title: TiDB Cloud Serverless Driver Node.js Tutorial
-summary: ローカルのNode.jsプロジェクトでTiDB Cloudサーバーレスドライバーを使用する方法を学びましょう。
+summary: ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 ---
 
 # TiDB Cloud Serverless Driver Node.js チュートリアル {#tidb-cloud-serverless-driver-node-js-tutorial}
 
-このチュートリアルでは、ローカルのNode.jsプロジェクトでTiDB Cloudサーバーレスドライバーを使用する方法について説明します。
+このチュートリアルでは、ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する方法について説明します。
 
 > **注記：**
 >
 > -   このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
-> -   Cloudflare Workers、Vercel Edge Functions、および Netlify Edge Functions でTiDB Cloudサーバーレス ドライバーを使用する方法については、[自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)を確認してください。
+> -   Cloudflare Workers、Vercel Edge Functions、および Netlify Edge Functions でTiDB Cloud Serverless Driverを使用する方法については、[自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)を確認してください。
 
 ## 始める前に {#before-you-begin}
 
@@ -30,7 +30,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
     cd node-example
     ```
 
-2.  npmまたはお好みのパッケージマネージャーを使用して、 TiDB Cloudサーバーレスドライバーをインストールしてください。
+2.  npmまたはお好みのパッケージマネージャーを使用して、 TiDB Cloud Serverless Driverをインストールしてください。
 
     以下のコマンドは、npm を使用したインストールを例として示しています。このコマンドを実行すると、プロジェクトディレクトリ内に`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 

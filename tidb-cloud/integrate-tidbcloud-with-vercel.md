@@ -115,7 +115,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
         DATABASE_URL
 
-    **TiDB CloudサーバーレスDriver**
+    **TiDB Cloud Serverless Driver**
 
         DATABASE_URL
 

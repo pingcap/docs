@@ -1,22 +1,22 @@
 ---
 title: TiDB Cloud Serverless Driver Drizzle Tutorial
-summary: TiDB CloudサーバーレスドライバーをDrizzleで使用する方法を学びましょう。
+summary: TiDB Cloud Serverless DriverをDrizzleで使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 ---
 
 # TiDB Cloud Serverless Driver Drizzle チュートリアル {#tidb-cloud-serverless-driver-drizzle-tutorial}
 
-[Drizzle ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`以降、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートしており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md).
+[Drizzle ORM](https://orm.drizzle.team/) 、開発者エクスペリエンスを念頭に置いた軽量で高性能な TypeScript ORM です。 `drizzle-orm@0.31.2`以降、 [drizzle-orm/tidb-serverless](https://orm.drizzle.team/docs/get-started-mysql#tidb-serverless)をサポートしており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md).
 
-このチュートリアルでは、Node.js環境およびエッジ環境でDrizzleとTiDB Cloudサーバーレスドライバーを使用する方法について説明します。
+このチュートリアルでは、Node.js環境およびエッジ環境でDrizzleとTiDB Cloud Serverless Driverを使用する方法について説明します。
 
 > **ヒント：**
 >
 > このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 
-## Node.js環境でDrizzleとTiDB Cloudのサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
+## Node.js環境でDrizzleとTiDB Cloud Serverless Driverを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
-このセクションでは、Node.js環境でDrizzleとTiDB Cloudサーバーレスドライバーを連携させる方法について説明します。
+このセクションでは、Node.js環境でDrizzleとTiDB Cloud Serverless Driverを連携させる方法について説明します。
 
 ### 始める前に {#before-you-begin}
 
@@ -148,7 +148,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
     ts-node --esm hello-world.ts
     ```
 
-## エッジ環境でDrizzleとTiDB Cloudのサーバーレスドライバーを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-edge-environments}
+## エッジ環境でDrizzleとTiDB Cloud Serverless Driverを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-edge-environments}
 
 このセクションでは、Vercel Edge関数を例として取り上げます。
 

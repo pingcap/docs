@@ -1,21 +1,21 @@
 ---
 title: TiDB Cloud Serverless Driver Kysely Tutorial
-summary: TiDB CloudサーバーレスドライバーをKyselyで使用する方法を学びましょう。
+summary: TiDB Cloud Serverless DriverをKyselyで使用する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 ---
 
 # TiDB Cloud Serverless Driver Kysely チュートリアル {#tidb-cloud-serverless-driver-kysely-tutorial}
 
-[Kysely](https://kysely.dev/docs/intro)、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloudサーバーレスドライバー](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
+[Kysely](https://kysely.dev/docs/intro)、タイプセーフでオートコンプリートに適した TypeScript SQL クエリ ビルダーです。 TiDB Cloudは[@tidbcloud/kysely](https://github.com/tidbcloud/kysely)を提供しており、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して HTTPS 経由で Kysely を使用できるようにします。従来の TCP 方式と比較して、 [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)は次の利点があります。
 
 -   サーバーレス環境におけるパフォーマンスの向上。
 -   Kyselyをエッジ環境で使用できる機能。
 
-このチュートリアルでは、Node.js環境およびエッジ環境で、 TiDB CloudサーバーレスドライバーをKyselyと組み合わせて使用​​する方法について説明します。
+このチュートリアルでは、Node.js環境およびエッジ環境で、 TiDB Cloud Serverless DriverをKyselyと組み合わせて使用​​する方法について説明します。
 
 ## Node.js環境でTiDB Cloud Kysely方言を使用する {#use-tidb-cloud-kysely-dialect-in-node-js-environments}
 
-このセクションでは、Node.js環境でKyselyとTiDB Cloudサーバーレスドライバーを連携させる方法について説明します。
+このセクションでは、Node.js環境でKyselyとTiDB Cloud Serverless Driverを連携させる方法について説明します。
 
 ### 始める前に {#before-you-begin}
 
