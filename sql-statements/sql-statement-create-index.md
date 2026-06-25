@@ -367,9 +367,11 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 - If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
 - For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
 
-## Partial indexes
+## Partial indexes <span class="version-mark">New in v8.5.7</span>
 
-A partial index is an index built on a subset of rows in a table, defined by a conditional expression (called the predicate of the partial index). The index contains entries only for those rows that satisfy the predicate.
+Starting from v8.5.7, TiDB supports creating partial indexes.
+
+A partial index is an index built on a subset of rows in a table. A conditional expression, called a predicate, defines the subset. The index contains entries only for rows that satisfy the predicate.
 
 ### Create partial indexes
 
@@ -386,7 +388,7 @@ You can also create partial indexes using `ALTER TABLE`:
 ALTER TABLE t1 ADD INDEX idx2 (c1, c2) WHERE c3 = 'abc';
 ```
 
-Or specify the partial index when creating the table:
+You can also specify a partial index when you create the table:
 
 ```sql
 CREATE TABLE t2 (
@@ -406,7 +408,7 @@ The following examples demonstrate how to use partial indexes effectively:
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
-    status varchar(20),
+    status VARCHAR(20),
     created_at DATETIME,
     score INT
 );
@@ -419,8 +421,7 @@ CREATE INDEX idx_pending_status ON users (created_at) WHERE status = 'pending';
 
 Then the following queries can use the partial index:
 
-```
-mysql> explain SELECT * FROM users WHERE status = 'active' AND name = 'John';
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' AND name = 'John';
 +-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
 | id                            | estRows | task      | access object                             | operator info                                         |
 +-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
@@ -431,7 +432,7 @@ mysql> explain SELECT * FROM users WHERE status = 'active' AND name = 'John';
 +-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
 4 rows in set (0.00 sec)
 
-mysql> explain SELECT * FROM users WHERE status = 'active' ORDER BY name;
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' ORDER BY name;
 +-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
 | id                            | estRows  | task      | access object                             | operator info                   |
 +-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
@@ -442,7 +443,7 @@ mysql> explain SELECT * FROM users WHERE status = 'active' ORDER BY name;
 +-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
 4 rows in set (0.00 sec)
 
-mysql> explain SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
+mysql> EXPLAIN SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
 +-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
 | id                            | estRows  | task      | access object                                       | operator info                  |
 +-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
@@ -453,7 +454,7 @@ mysql> explain SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
 +-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
 4 rows in set (0.00 sec)
 
-mysql> explain SELECT * FROM users WHERE status = 'pending';
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
 +-------------------------+----------+-----------+---------------+----------------------------------+
 | id                      | estRows  | task      | access object | operator info                    |
 +-------------------------+----------+-----------+---------------+----------------------------------+
@@ -464,10 +465,10 @@ mysql> explain SELECT * FROM users WHERE status = 'pending';
 3 rows in set (0.00 sec)
 ```
 
-If the predicates in query don't meet the index definition, the index will not be chosen even with hint:
+If the query predicates do not match the partial index definition, TiDB does not select the index, even with a hint:
 
 ```
-mysql> explain SELECT * FROM users use index(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
+mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |
 +---------------------------+----------+-----------+---------------+--------------------------------+
@@ -482,22 +483,22 @@ mysql> explain SELECT * FROM users use index(idx_high_score_users) WHERE score >
 
 Partial indexes are particularly useful in the following scenarios:
 
-- **Selective filtering**: When you frequently query a small subset of rows based on specific conditions
-- **Conditional uniqueness**: When you need unique constraints that only apply under certain conditions
+- **Selective filtering**: use a partial index when you frequently query a small subset of rows based on specific conditions.
+- **Conditional uniqueness**: use a partial index when you need unique constraints that apply only under certain conditions.
 
 ### Limitations
 
-- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) and `IN` predicates with constant values
-- The types of the column and constant value should be the same
-- The predicate can only reference columns from the same table
-- Partial indexes cannot be used on expression indexes
+- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`) and `IN` predicates with constant values.
+- The column and constant value must have the same type.
+- The predicate can only reference columns from the same table.
+- Partial indexes cannot be used on expression indexes.
 
 ### Performance benefits
 
-Partial indexes offer several advantages:
+Partial indexes have the following performance benefits:
 
-1. **Reduced storage**: Only rows matching the predicate are indexed, saving storage space
-2. **Faster DML**: It'll be faster to maintain the index of a subset of data during INSERT, UPDATE, and DELETE operations
+- **Reduced storage**: only the rows that match the predicate are indexed, which saves storage space.
+- **Faster DML**: maintaining an index for a subset of rows is faster during `INSERT`, `UPDATE`, and `DELETE` operations.
 
 ## Invisible index
 
