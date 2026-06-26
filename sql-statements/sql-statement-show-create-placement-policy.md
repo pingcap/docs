@@ -49,4 +49,3 @@ SHOW CREATE PLACEMENT POLICY p1\G
 -   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
-

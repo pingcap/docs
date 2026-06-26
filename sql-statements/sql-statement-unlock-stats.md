@@ -74,4 +74,3 @@ mysql> SHOW WARNINGS;
 -   [統計](/statistics.md#lock-statistics)
 -   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
 -   [統計を表示_ロック済み](/sql-statements/sql-statement-show-stats-locked.md)
-

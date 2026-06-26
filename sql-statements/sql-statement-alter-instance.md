@@ -64,4 +64,3 @@ ALTER INSTANCE RELOAD TLS;
 [TiDBクライアントとサーバー間でTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)。
 
 </CustomContent>
-

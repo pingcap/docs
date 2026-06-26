@@ -294,4 +294,3 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 ## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
-

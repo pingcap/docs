@@ -38,4 +38,3 @@ CANCEL IMPORT JOB 1;
 
 -   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 -   [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
-

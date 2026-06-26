@@ -42,4 +42,3 @@ SHOW CREATE SEQUENCE seq;
 -   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
 -   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
 -   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
-

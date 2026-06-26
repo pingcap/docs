@@ -193,4 +193,3 @@ SHOW CREATE SEQUENCE s2\G
 -   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
 -   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
 -   [シーケンス関数](/functions-and-operators/sequence-functions.md)
-

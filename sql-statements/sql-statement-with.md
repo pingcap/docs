@@ -86,4 +86,3 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
-

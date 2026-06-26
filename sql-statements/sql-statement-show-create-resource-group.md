@@ -54,4 +54,3 @@ SHOW CREATE RESOURCE GROUP rg1;
 -   [リソースグループを作成する](/sql-statements/sql-statement-alter-resource-group.md)
 -   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
-

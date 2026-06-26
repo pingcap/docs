@@ -208,9 +208,8 @@ Empty set (0.002 sec)
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
--   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
--   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+-   [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQLプラン管理](/sql-plan-management.md)
-

@@ -48,4 +48,3 @@ Empty set (0.01 sec)
 -   [COMMIT](/sql-statements/sql-statement-commit.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
-

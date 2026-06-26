@@ -39,4 +39,3 @@ LOAD STATS '/tmp/stats.json';
 ## 関連項目 {#see-also}
 
 -   [統計](/statistics.md)
-

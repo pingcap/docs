@@ -61,4 +61,3 @@ FlashbackToNewName ::=
 ## MySQLの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
-

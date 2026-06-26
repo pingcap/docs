@@ -65,4 +65,3 @@ SHOW TABLE t DISTRIBUTIONS;
 -   [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
 -   [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
 -   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
-

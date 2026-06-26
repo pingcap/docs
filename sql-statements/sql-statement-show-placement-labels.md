@@ -41,4 +41,3 @@ SHOW PLACEMENT LABELS;
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
 -   [番組掲載](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
-

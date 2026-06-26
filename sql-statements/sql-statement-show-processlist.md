@@ -36,6 +36,5 @@ mysql> SHOW PROCESSLIST;
 
 ## 参照 {#see-also}
 
--   [キル [TIDB]](/sql-statements/sql-statement-kill.md)
+-   [KILL](/sql-statements/sql-statement-kill.md)
 -   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)
-

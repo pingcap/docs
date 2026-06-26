@@ -158,4 +158,3 @@ TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていませ
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB 楽観的トランザクションモード](/optimistic-transaction.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
-

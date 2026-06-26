@@ -56,4 +56,3 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 ## 参照 {#see-also}
 
 -   [履歴データを読む](/read-historical-data.md)
-

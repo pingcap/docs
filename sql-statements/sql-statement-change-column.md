@@ -124,4 +124,3 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-modify-column.md)
-

@@ -33,4 +33,3 @@ SHUTDOWN;
 > TiDB は分散データベースであるため、TiDB のシャットダウン操作では、TiDB クラスター全体ではなく、クライアントに接続された TiDB インスタンスが停止されます。
 
 `SHUTDOWN`文はMySQLと部分的に互換性があります。互換性の問題が発生した場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)実行してください。
-

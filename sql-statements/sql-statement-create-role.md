@@ -144,4 +144,3 @@ TiDBの`CREATE ROLE`文はMySQL 8.0のロール機能と完全に互換性があ
 -   [ロールベースアクセス制御](/role-based-access-control.md)
 
 </CustomContent>
-

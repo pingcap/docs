@@ -189,4 +189,3 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
 -   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
-

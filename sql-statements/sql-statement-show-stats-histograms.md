@@ -77,4 +77,3 @@ SHOW STATS_HISTOGRAMS WHERE table_name = 't2';
 
 -   [分析](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
-

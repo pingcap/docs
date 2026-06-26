@@ -50,4 +50,3 @@ Query OK, 0 rows affected (0.01 sec)
 -   [ロールバック](/sql-statements/sql-statement-rollback.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [因果関係の一貫性のみでトランザクションを開始する](/transaction-overview.md#causal-consistency)
-

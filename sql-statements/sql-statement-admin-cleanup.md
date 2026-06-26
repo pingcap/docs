@@ -91,4 +91,3 @@ Query OK, 0 rows affected (0.01 sec)
 
 -   [`ADMIN CHECK TABLE/INDEX`](/sql-statements/sql-statement-admin-check-table-index.md)
 -   [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
-

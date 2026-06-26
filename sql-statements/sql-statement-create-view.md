@@ -99,4 +99,3 @@ ERROR 1105 (HY000): insert into view v1 is not supported now.
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
-

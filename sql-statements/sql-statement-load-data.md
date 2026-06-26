@@ -228,4 +228,3 @@ IGNORE 1 LINES;
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
 
 </CustomContent>
-

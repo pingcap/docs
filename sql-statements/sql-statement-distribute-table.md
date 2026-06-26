@@ -118,4 +118,3 @@ DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash"
 -   [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
 -   [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)
 -   [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
-

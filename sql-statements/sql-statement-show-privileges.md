@@ -97,4 +97,3 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 
 </CustomContent>
-

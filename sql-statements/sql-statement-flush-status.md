@@ -77,6 +77,5 @@ mysql> show status;
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]ステータスを表示](/sql-statements/sql-statement-show-status.md)
+-   [SHOW [GLOBAL|SESSION] STATUS](/sql-statements/sql-statement-show-status.md)
 -   [サーバーステータス変数](/status-variables.md)
-

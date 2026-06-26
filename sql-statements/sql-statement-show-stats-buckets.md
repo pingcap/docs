@@ -60,4 +60,3 @@ SHOW STATS_BUCKETS WHERE Table_name='t';
 
 -   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
-

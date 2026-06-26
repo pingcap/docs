@@ -43,4 +43,3 @@ ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 ## 参照 {#see-also}
 
 -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
-

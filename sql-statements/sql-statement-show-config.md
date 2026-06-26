@@ -74,4 +74,3 @@ SHOW CONFIG LIKE 'tidb';
 ## 参照 {#see-also}
 
 -   [変数を表示](/sql-statements/sql-statement-show-variables.md)
-

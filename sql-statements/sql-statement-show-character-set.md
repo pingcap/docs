@@ -68,4 +68,3 @@ TiDBの`SHOW CHARACTER SET`文の使用方法はMySQLと完全に互換性があ
 
 -   [照合順序を表示](/sql-statements/sql-statement-show-collation.md)
 -   [文字セットと照合順序](/character-set-and-collation.md)
-

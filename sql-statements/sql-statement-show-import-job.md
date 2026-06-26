@@ -72,4 +72,3 @@ SHOW IMPORT JOB 60001;
 
 -   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
-

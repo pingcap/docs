@@ -185,4 +185,3 @@ ERROR 1105 (HY000): Detected another DDL job at 2023-01-29 14:33:12 +0800 CST, c
 ## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
-

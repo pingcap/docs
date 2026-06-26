@@ -45,4 +45,3 @@ DROP SEQUENCE seq, seq2;
 -   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
 -   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
 -   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
-

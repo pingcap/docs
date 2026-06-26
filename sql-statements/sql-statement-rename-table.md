@@ -141,4 +141,3 @@ TiDBの`RENAME TABLE`文はMySQLと完全に互換性があります。互換性
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
 -   [テーブルの変更](/sql-statements/sql-statement-alter-table.md)
-

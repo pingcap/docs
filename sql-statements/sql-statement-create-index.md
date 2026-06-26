@@ -415,4 +415,3 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
-

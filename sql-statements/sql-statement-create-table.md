@@ -304,4 +304,3 @@ mysql> DESC t1;
 -   [テーブルを削除する](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table-like.md)
 -   [テーブルの作成を表示する](/sql-statements/sql-statement-show-create-table.md)
-

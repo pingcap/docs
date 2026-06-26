@@ -105,7 +105,7 @@ Query OK, 0 rows affected (0.02 sec)
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能に基づいてモデル化されています。
--   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを不可視にすることはできません。
 
 ## 参照 {#see-also}
 
@@ -114,4 +114,3 @@ Query OK, 0 rows affected (0.02 sec)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
-

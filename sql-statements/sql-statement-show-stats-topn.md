@@ -56,4 +56,3 @@ SHOW STATS_TOPN WHERE Table_name='t';
 
 -   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
-

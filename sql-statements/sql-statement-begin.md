@@ -44,4 +44,3 @@ TiDBは`BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポー
 -   [トランザクションを開始](/sql-statements/sql-statement-start-transaction.md)
 -   [TiDB楽観的トランザクションモデル](/optimistic-transaction.md)
 -   [TiDB悲観的トランザクションモード](/pessimistic-transaction.md)
-

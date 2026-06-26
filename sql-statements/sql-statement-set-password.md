@@ -67,4 +67,3 @@ TiDBの`SET PASSWORD`文はMySQLと完全に互換性があります。互換性
 -   [権限管理](/privilege-management.md)
 
 </CustomContent>
-

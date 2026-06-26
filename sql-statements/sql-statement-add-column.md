@@ -94,4 +94,3 @@ mysql> SELECT * FROM t1;
 
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
-

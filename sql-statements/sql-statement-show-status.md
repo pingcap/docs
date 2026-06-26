@@ -71,4 +71,3 @@ mysql> SHOW GLOBAL STATUS;
 
 -   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)
 -   [サーバーステータス変数](/status-variables.md)
-

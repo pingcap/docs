@@ -27,4 +27,3 @@ SHOW MASTER STATUS;
 `SHOW MASTER STATUS`の出力はMySQLと一致するように設計されています。ただし、MySQLの結果はbinlogの位置情報であり、TiDBの結果は最新のTSO情報であるという点で実行結果が異なります。
 
 `SHOW BINARY LOG STATUS`ステートメントは、MySQL 8.2.0 以降のバージョンでは非推奨となっている`SHOW MASTER STATUS`エイリアスとして TiDB に追加されました。
-

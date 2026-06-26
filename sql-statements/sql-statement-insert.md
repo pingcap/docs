@@ -109,4 +109,3 @@ TiDBの`INSERT`文はMySQLと完全に互換性があります。互換性に違
 -   [選択](/sql-statements/sql-statement-select.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
-

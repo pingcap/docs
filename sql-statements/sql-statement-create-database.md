@@ -81,4 +81,3 @@ TiDBの`CREATE DATABASE`文はMySQLと完全に互換性があります。互換
 -   [データベースの変更](/sql-statements/sql-statement-alter-database.md)
 -   [データベースの削除](/sql-statements/sql-statement-drop-database.md)
 -   [データベースを表示](/sql-statements/sql-statement-show-databases.md)
-

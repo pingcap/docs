@@ -122,4 +122,3 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 -   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
-

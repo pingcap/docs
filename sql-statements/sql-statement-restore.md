@@ -165,4 +165,3 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [ショーが復元する](/sql-statements/sql-statement-show-backups.md)
-

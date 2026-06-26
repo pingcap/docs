@@ -81,4 +81,3 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 ## 参照 {#see-also}
 
 -   [統計入門](/statistics.md)
-

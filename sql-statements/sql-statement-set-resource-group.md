@@ -94,4 +94,3 @@ MySQL は[リソースグループを設定する](https://dev.mysql.com/doc/ref
 -   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
 -   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソース制御](/tidb-resource-control-ru-groups.md)
-

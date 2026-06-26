@@ -60,4 +60,3 @@ TiDBの`RENAME INDEX`文はMySQLと完全に互換性があります。互換性
 -   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
 -   [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
-

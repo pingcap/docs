@@ -120,4 +120,4 @@ SELECT @myvar, @myvar + 1;
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)

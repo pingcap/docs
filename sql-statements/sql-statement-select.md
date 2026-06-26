@@ -234,4 +234,3 @@ Query OK, 3 rows affected (0.00 sec)
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
 -   [交換する](/sql-statements/sql-statement-replace.md)
-

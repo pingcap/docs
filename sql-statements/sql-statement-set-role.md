@@ -98,4 +98,3 @@ TiDBの`SET ROLE`文はMySQL 8.0のロール機能と完全に互換性があり
 -   [ロールベースアクセス制御](/role-based-access-control.md)
 
 </CustomContent>
-

@@ -190,4 +190,3 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
 -   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
-

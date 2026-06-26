@@ -369,4 +369,3 @@ IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
 -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
 -   [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)
-

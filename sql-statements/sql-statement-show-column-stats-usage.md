@@ -54,4 +54,3 @@ SHOW COLUMN_STATS_USAGE;
 
 -   [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)
-
