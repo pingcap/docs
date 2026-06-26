@@ -5,9 +5,7 @@ summary: Strict casting VARIANT values to ARRAY data type. If the input data typ
 
 # AS_ARRAY
 
-Strict casting `VARIANT` values to ARRAY data type.
-If the input data type is not `VARIANT`, the output is `NULL`.
-If the type of value in the `VARIANT` does not match the output value, the output is `NULL`.
+Strict casting `VARIANT` values to ARRAY data type. If the input data type is not `VARIANT`, the output is `NULL`. If the type of value in the `VARIANT` does not match the output value, the output is `NULL`.
 
 ## Syntax
 

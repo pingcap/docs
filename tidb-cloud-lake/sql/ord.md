@@ -7,8 +7,7 @@ summary: If the leftmost character is not a multibyte character, ORD() returns t
 
 If the leftmost character is not a multibyte character, ORD() returns the same value as the ASCII() function.
 
-If the leftmost character of the string str is a multibyte character, returns the code for that character,
-calculated from the numeric values of its constituent bytes using this formula:
+If the leftmost character of the string str is a multibyte character, returns the code for that character, calculated from the numeric values of its constituent bytes using this formula:
 
 ```sql
   (1st byte code)

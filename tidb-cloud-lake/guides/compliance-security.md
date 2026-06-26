@@ -20,19 +20,15 @@ summary: "{{{ .lake }}} is built with security at its core, providing comprehens
 
 ### Data Protection
 
-**Masking Policy**
-Protects sensitive data by controlling how it's displayed to different users, helping you comply with privacy regulations while still allowing authorized access.
+**Masking Policy**: Protects sensitive data by controlling how it's displayed to different users, helping you comply with privacy regulations while still allowing authorized access.
 
-**Network Policy**
-Controls which IP addresses can connect to your {{{ .lake }}} resources, allowing you to restrict access to specific networks or locations.
+**Network Policy**: Controls which IP addresses can connect to your {{{ .lake }}} resources, allowing you to restrict access to specific networks or locations.
 
-**Password Policy**
-Enforces strong passwords with customizable requirements for length, complexity, and rotation to prevent unauthorized access.
+**Password Policy**: Enforces strong passwords with customizable requirements for length, complexity, and rotation to prevent unauthorized access.
 
 ### Secure Connectivity
 
-**AWS PrivateLink**
-Enables private connections between your VPC and {{{ .lake }}} without exposing traffic to the public internet. Currently available on AWS only.
+**AWS PrivateLink**: Enables private connections between your VPC and {{{ .lake }}} without exposing traffic to the public internet. Currently available on AWS only.
 
 ## Encryption
 

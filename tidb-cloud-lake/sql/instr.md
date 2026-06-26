@@ -5,8 +5,7 @@ summary: Returns the position of the first occurrence of substring substr in str
 
 # INSTR
 
-Returns the position of the first occurrence of substring substr in string str.
-This is the same as the two-argument form of LOCATE(), except that the order of the arguments is reversed.
+Returns the position of the first occurrence of substring substr in string str. This is the same as the two-argument form of LOCATE(), except that the order of the arguments is reversed.
 
 ## Syntax
 

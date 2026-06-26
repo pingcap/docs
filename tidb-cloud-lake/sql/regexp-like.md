@@ -31,8 +31,7 @@ REGEXP_LIKE(<expr>, <pat[, match_type]>)
 
 ## Return Type
 
-`BIGINT`
-Returns `1` if the string expr matches the regular expression specified by the pattern pat, `0` otherwise. If expr or pat is NULL, the return value is NULL.
+`BIGINT`: Returns `1` if the string expr matches the regular expression specified by the pattern pat, `0` otherwise. If expr or pat is NULL, the return value is NULL.
 
 ## Examples
 

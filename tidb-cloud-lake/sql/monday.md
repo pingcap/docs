@@ -5,8 +5,7 @@ summary: Round down a date or date with time (timestamp/datetime) to the nearest
 
 # TO_MONDAY
 
-Round down a date or date with time (timestamp/datetime) to the nearest Monday.
-Returns the date.
+Round down a date or date with time (timestamp/datetime) to the nearest Monday. Returns the date.
 
 ## Syntax
 

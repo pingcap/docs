@@ -9,8 +9,7 @@ The `PIVOT` operation in {{{ .lake }}} allows you to transform a table by rotati
 
 It is a useful operation for summarizing and analyzing large amounts of data in a more readable format. In this document, we will explain the syntax and provide an example of how to use the `PIVOT` operation.
 
-**See also:**
-[UNPIVOT](/tidb-cloud-lake/sql/unpivot.md)
+**See also:** [UNPIVOT](/tidb-cloud-lake/sql/unpivot.md)
 
 ## Syntax
 

@@ -5,11 +5,9 @@ summary: Extracts value from a VARIANT that contains OBJECT by the field_name. T
 
 # GET_IGNORE_CASE
 
-Extracts value from a `VARIANT` that contains `OBJECT` by the field_name.
-The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
+Extracts value from a `VARIANT` that contains `OBJECT` by the field_name. The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
 
-`GET_IGNORE_CASE` is similar to `GET` but applies case-insensitive matching to field names.
-First match the exact same field name, if not found, match the case-insensitive field name alphabetically.
+`GET_IGNORE_CASE` is similar to `GET` but applies case-insensitive matching to field names. First match the exact same field name, if not found, match the case-insensitive field name alphabetically.
 
 ## Syntax
 

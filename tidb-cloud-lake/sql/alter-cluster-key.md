@@ -7,8 +7,7 @@ summary: Changes the cluster key for a table.
 
 Changes the cluster key for a table.
 
-See also:
-[DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md)
+See also: [DROP CLUSTER KEY](/tidb-cloud-lake/sql/drop-cluster-key.md)
 
 ## Syntax
 

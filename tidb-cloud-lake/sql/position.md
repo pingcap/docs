@@ -5,9 +5,7 @@ summary: POSITION(substr IN str) is a synonym for LOCATE(substr,str). Returns th
 
 # POSITION
 
-POSITION(substr IN str) is a synonym for LOCATE(substr,str).
-Returns the position of the first occurrence of substring substr in string str.
-Returns 0 if substr is not in str. Returns NULL if any argument is NULL.
+POSITION(substr IN str) is a synonym for LOCATE(substr,str). Returns the position of the first occurrence of substring substr in string str. Returns 0 if substr is not in str. Returns NULL if any argument is NULL.
 
 ## Syntax
 

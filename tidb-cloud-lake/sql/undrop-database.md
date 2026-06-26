@@ -8,8 +8,9 @@ summary: Restores the most recent version of a dropped database. This leverages 
 Restores the most recent version of a dropped database. This leverages the {{{ .lake }}} Time Travel feature; a dropped object can be restored only within a retention period (defaults to 24 hours).
 
 **See also:**
-[DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
-[SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
+
+- [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
+- [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)
 
 ## Syntax
 
@@ -36,7 +37,7 @@ UNDROP DATABASE <database_name>
 - Undropping a database does not automatically restore ownership to the original role. After undropping, ownership must be manually granted to the previous role or another role. Until then, the database will be accessible only to the `account-admin` role.
 
     ```sql title='Examples:'
-    GRNAT OWNERSHIP on doc.* to ROLE writer;
+    GRANT OWNERSHIP on doc.* to ROLE writer;
     ```
 
 ## Examples

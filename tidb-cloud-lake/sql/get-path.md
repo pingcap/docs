@@ -5,8 +5,7 @@ summary: Extracts value from a VARIANT by path_name. The value is returned as a 
 
 # GET_PATH
 
-Extracts value from a `VARIANT` by `path_name`.
-The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
+Extracts value from a `VARIANT` by `path_name`. The value is returned as a `Variant` or `NULL` if either of the arguments is `NULL`.
 
 `GET_PATH` is equivalent to a chain of `GET` functions, `path_name` consists of a concatenation of field names preceded by periods (.), colons (:) or index operators (`[index]`). The first field name does not require the leading identifier to be specified.
 
