@@ -45,7 +45,7 @@ SHOW CREATE PLACEMENT POLICY p1\G
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
--   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
--   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+-   [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
+-   [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

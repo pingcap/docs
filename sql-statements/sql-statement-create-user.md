@@ -170,6 +170,6 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 </CustomContent>
 
--   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
--   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
--   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)
+-   [DROP USER](/sql-statements/sql-statement-drop-user.md)
+-   [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+-   [ALTER USER](/sql-statements/sql-statement-alter-user.md)

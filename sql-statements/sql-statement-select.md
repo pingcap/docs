@@ -230,7 +230,7 @@ Query OK, 3 rows affected (0.00 sec)
 
 ## 関連項目 {#see-also}
 
--   [入れる](/sql-statements/sql-statement-insert.md)
--   [消去](/sql-statements/sql-statement-delete.md)
--   [アップデート](/sql-statements/sql-statement-update.md)
--   [交換する](/sql-statements/sql-statement-replace.md)
+-   [INSERT](/sql-statements/sql-statement-insert.md)
+-   [DELETE](/sql-statements/sql-statement-delete.md)
+-   [UPDATE](/sql-statements/sql-statement-update.md)
+-   [REPLACE](/sql-statements/sql-statement-replace.md)

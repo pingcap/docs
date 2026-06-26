@@ -78,6 +78,6 @@ mysql> SELECT * FROM t1;
 
 ## 参照 {#see-also}
 
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

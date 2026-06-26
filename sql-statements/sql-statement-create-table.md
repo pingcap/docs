@@ -301,6 +301,6 @@ mysql> DESC t1;
 ## 関連項目 {#see-also}
 
 -   [データ型](/data-type-overview.md)
--   [テーブルを削除する](/sql-statements/sql-statement-drop-table.md)
--   [テーブルを作成する](/sql-statements/sql-statement-create-table-like.md)
--   [テーブルの作成を表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

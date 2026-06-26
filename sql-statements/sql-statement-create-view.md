@@ -95,7 +95,7 @@ ERROR 1105 (HY000): insert into view v1 is not supported now.
 
 ## 参照 {#see-also}
 
--   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

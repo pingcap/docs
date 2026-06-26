@@ -83,6 +83,6 @@ MySQL は[リソースグループを削除する](https://dev.mysql.com/doc/ref
 
 ## 関連項目 {#see-also}
 
--   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

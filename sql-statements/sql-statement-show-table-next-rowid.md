@@ -62,7 +62,7 @@ SHOW TABLE t NEXT_ROW_ID;
 
 ## 関連項目 {#see-also}
 
--   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [AUTO_RANDOM](/auto-random.md)
 -   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
 -   [_tidb_rowid](/tidb-rowid.md)

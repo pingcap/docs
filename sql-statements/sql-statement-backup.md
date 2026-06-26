@@ -185,5 +185,5 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 ## 関連項目 {#see-also}
 
--   [復元する](/sql-statements/sql-statement-restore.md)
--   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)
+-   [RESTORE](/sql-statements/sql-statement-restore.md)
+-   [SHOW [BACKUPS|RESTORES]](/sql-statements/sql-statement-show-backups.md)

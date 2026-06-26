@@ -82,5 +82,5 @@ SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

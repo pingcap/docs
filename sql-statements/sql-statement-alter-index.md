@@ -109,8 +109,8 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスの削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)

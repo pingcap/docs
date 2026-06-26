@@ -162,7 +162,7 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
     -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
     -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
--   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+-   主キー列の[MODIFY COLUMN](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
 -   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 
@@ -181,12 +181,12 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 ## 参照 {#see-also}
 
 -   [MySQLの互換性](/mysql-compatibility.md#ddl-operations)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
--   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

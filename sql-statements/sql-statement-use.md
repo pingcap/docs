@@ -78,5 +78,5 @@ TiDBの`USE`文はMySQLと完全に互換性があります。互換性に違い
 
 ## 参照 {#see-also}
 
--   [データベースの作成](/sql-statements/sql-statement-create-database.md)
--   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+-   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)

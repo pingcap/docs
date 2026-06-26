@@ -199,8 +199,8 @@ CREATE TABLE `t1` (
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
--   [列の変更](/sql-statements/sql-statement-change-column.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+-   [CHANGE COLUMN](/sql-statements/sql-statement-change-column.md)

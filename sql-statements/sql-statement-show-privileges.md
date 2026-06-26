@@ -84,7 +84,7 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 
 <CustomContent platform="tidb">
 
--   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 -   [権限管理](/privilege-management.md)
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 
@@ -92,7 +92,7 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 
 <CustomContent platform="tidb-cloud">
 
--   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 -   [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 

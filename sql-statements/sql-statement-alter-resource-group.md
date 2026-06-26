@@ -180,6 +180,6 @@ MySQL は[アルター・リソース・グループ](https://dev.mysql.com/doc/
 
 ## 関連項目 {#see-also}
 
--   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
--   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
+-   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

@@ -323,5 +323,5 @@ TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`Befo
 
 -   [クエリ実行プランを理解する](/explain-overview.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
--   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
--   [トレース](/sql-statements/sql-statement-trace.md)
+-   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+-   [TRACE](/sql-statements/sql-statement-trace.md)

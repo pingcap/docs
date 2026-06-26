@@ -90,7 +90,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
 -   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
--   [ショー助成金](/sql-statements/sql-statement-show-grants.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 

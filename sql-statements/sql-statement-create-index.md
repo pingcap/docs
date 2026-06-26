@@ -400,7 +400,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 -   式インデックスはバインディングとの互換性に問題があります。式インデックスの式に定数が含まれている場合、対応するクエリ用に作成されるバインディングのスコープが拡張されます。たとえば、式インデックスの式が`a+1`で、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されるバインディングは`a+? > ?`となり、 `a+2 > 2`のような条件を持つクエリも式インデックスの使用を強制され、実行プランが最適化されません。さらに、これは SQL プラン管理 (SPM) におけるベースラインのキャプチャとベースラインの進化にも影響します。
 
--   複数値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細については、 [複数値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)参照してください。
+-   複数値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細については、 [CREATE INDEX](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)参照してください。
 
 -   `UNIQUE KEY`インデックス オプションを使用して、 `GLOBAL`を[グローバルインデックス](/global-indexes.md)として設定することは[パーティション化されたテーブル](/partitioned-table.md)の TiDB 拡張機能であり、MySQL とは互換性がありません。
 
@@ -408,10 +408,10 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 -   [インデックス選択](/choose-index.md)
 -   [インデックス問題の解決方法](/wrong-index-solution.md)
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
--   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)

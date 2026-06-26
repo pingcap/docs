@@ -389,5 +389,5 @@ CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REG
 
 ## 参照 {#see-also}
 
--   [テーブルリージョンを表示する](/sql-statements/sql-statement-show-table-regions.md)
+-   [SHOW TABLE REGIONS](/sql-statements/sql-statement-show-table-regions.md)
 -   セッション変数: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、 [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 、 [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。

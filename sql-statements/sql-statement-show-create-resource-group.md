@@ -51,6 +51,6 @@ SHOW CREATE RESOURCE GROUP rg1;
 ## 関連項目 {#see-also}
 
 -   [TiDBリソース制御](/tidb-resource-control-ru-groups.md)
--   [リソースグループを作成する](/sql-statements/sql-statement-alter-resource-group.md)
--   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+-   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)

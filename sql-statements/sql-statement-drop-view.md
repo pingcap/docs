@@ -77,5 +77,5 @@ TiDBの`DROP VIEW`文はMySQLと完全に互換性があります。互換性に
 
 ## 参照 {#see-also}
 
--   [ビューを作成](/sql-statements/sql-statement-create-view.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [CREATE VIEW](/sql-statements/sql-statement-create-view.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)

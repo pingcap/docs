@@ -52,5 +52,5 @@ SHOW PLACEMENT;
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [ショーの掲載場所](/sql-statements/sql-statement-show-placement-for.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT FOR](/sql-statements/sql-statement-show-placement-for.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

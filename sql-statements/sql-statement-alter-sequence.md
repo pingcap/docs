@@ -189,7 +189,7 @@ SHOW CREATE SEQUENCE s2\G
 
 ## 参照 {#see-also}
 
--   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
--   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
--   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
+-   [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+-   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
 -   [シーケンス関数](/functions-and-operators/sequence-functions.md)

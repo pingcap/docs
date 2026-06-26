@@ -90,7 +90,7 @@ MySQL は[リソースグループを設定する](https://dev.mysql.com/doc/ref
 
 ## 関連項目 {#see-also}
 
--   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
--   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
--   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+-   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソース制御](/tidb-resource-control-ru-groups.md)

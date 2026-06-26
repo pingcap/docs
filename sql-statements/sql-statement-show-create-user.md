@@ -50,6 +50,6 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## 参照 {#see-also}
 
--   [ユーザーの作成](/sql-statements/sql-statement-create-user.md)
--   [ショーグラント](/sql-statements/sql-statement-show-grants.md)
--   [ユーザーを削除](/sql-statements/sql-statement-drop-user.md)
+-   [CREATE USER](/sql-statements/sql-statement-create-user.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [DROP USER](/sql-statements/sql-statement-drop-user.md)

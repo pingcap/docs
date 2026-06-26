@@ -130,7 +130,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-ロック解除統計の詳細については、 [統計情報をアンロック](/sql-statements/sql-statement-unlock-stats.md)参照してください。
+ロック解除統計の詳細については、 [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 
@@ -139,5 +139,5 @@ mysql> SHOW WARNINGS;
 ## 参照 {#see-also}
 
 -   [統計](/statistics.md#lock-statistics)
--   [統計情報をアンロック](/sql-statements/sql-statement-unlock-stats.md)
--   [統計を表示_ロック済み](/sql-statements/sql-statement-show-stats-locked.md)
+-   [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

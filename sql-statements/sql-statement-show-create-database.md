@@ -58,7 +58,7 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
--   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
--   [列を表示](/sql-statements/sql-statement-show-columns-from.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
+-   [SHOW [FULL] COLUMNS FROM](/sql-statements/sql-statement-show-columns-from.md)

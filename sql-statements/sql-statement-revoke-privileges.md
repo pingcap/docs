@@ -101,7 +101,7 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 ## 関連項目 {#see-also}
 
 -   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
--   [ショー助成金](/sql-statements/sql-statement-show-grants.md)
+-   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 

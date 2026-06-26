@@ -204,5 +204,5 @@ test> SHOW TABLE t REGIONS;
 
 ## 関連項目 {#see-also}
 
--   [分割領域](/sql-statements/sql-statement-split-region.md)
--   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [Split Region](/sql-statements/sql-statement-split-region.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

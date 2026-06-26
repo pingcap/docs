@@ -81,7 +81,7 @@ TiDBの`SHOW [FULL] TABLES`文はMySQLと完全に互換性があります。互
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
 -   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)

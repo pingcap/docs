@@ -5,7 +5,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 # RESTORE {#restore}
 
-このステートメントは[`BACKUP`ステートメント](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
+このステートメントは[BACKUP](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
 
 > **警告：**
 >
@@ -163,5 +163,5 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 
 ## 関連項目 {#see-also}
 
--   [バックアップ](/sql-statements/sql-statement-backup.md)
--   [ショーが復元する](/sql-statements/sql-statement-show-backups.md)
+-   [BACKUP](/sql-statements/sql-statement-backup.md)
+-   [SHOW [BACKUPS|RESTORES]](/sql-statements/sql-statement-show-backups.md)

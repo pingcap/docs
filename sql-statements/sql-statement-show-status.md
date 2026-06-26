@@ -69,5 +69,5 @@ mysql> SHOW GLOBAL STATUS;
 
 ## 参照 {#see-also}
 
--   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)
+-   [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)
 -   [サーバーステータス変数](/status-variables.md)
