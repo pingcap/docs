@@ -589,7 +589,7 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
+  - [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - TiDB v8.5
