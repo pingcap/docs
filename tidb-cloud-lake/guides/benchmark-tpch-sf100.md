@@ -138,7 +138,7 @@ The benchmark includes both Cold and Hot runs for query execution:
 
 ### Prerequisites
 
-- Have a [Snowflake account](https://singup.snowflake.com)
+- Have a [Snowflake account](https://signup.snowflake.com)
 - Create a [{{{ .lake }}} account](https://tidbcloud.com)
 
 ### Data Loading
