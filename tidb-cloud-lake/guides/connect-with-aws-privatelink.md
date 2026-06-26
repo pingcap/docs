@@ -44,9 +44,9 @@ Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, 
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
-6. Wait for the PrivateLink creation.
+5. Wait for the PrivateLink creation.
 
-7. Modify private DNS name setting:
+6. Modify private DNS name setting:
 
     ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
 
@@ -56,7 +56,7 @@ Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, 
 
     Wait for changes to apply.
 
-8. Verify accessing {{{ .lake }}} via PrivateLink:
+7. Verify accessing {{{ .lake }}} via PrivateLink:
 
     Gateway domain is resolved to VPC internal IP address.
 
