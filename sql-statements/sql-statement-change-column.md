@@ -112,7 +112,7 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   主キー列の[MODIFY COLUMN](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+-   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 -   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
 -   TiDB と MySQL 間の`CAST`関数の動作の互換性の問題により、一部のデータ型 (TIME、BIT、SET、ENUM、JSON 型など) から他の型への変更はサポートされていません。

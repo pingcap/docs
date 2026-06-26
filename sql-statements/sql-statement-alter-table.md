@@ -162,7 +162,7 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
     -   TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
     -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右への変更が 1 つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
--   主キー列の[MODIFY COLUMN](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
+-   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 
 -   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
 

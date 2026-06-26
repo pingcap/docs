@@ -143,5 +143,5 @@ MySQL は[リソースグループを作成する](https://dev.mysql.com/doc/ref
 
 -   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 -   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
--   [ALTER USER](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+-   [ユーザーにバインドされているリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
