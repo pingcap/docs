@@ -5,7 +5,7 @@ summary: Learn how to connect to your {{{ .premium }}} instance via a private en
 
 # Connect to {{{ .premium }}} via Alibaba Cloud Private Endpoint
 
-This document describes how to connect to your {{{ .premium }}} instance via a private endpoint on Alibaba Cloud. Connecting through a private endpoint enables secure and private communication between your services and your TiDB instance without using the public internet.
+This document describes how to connect to your {{{ .premium }}} instance via a private endpoint on Alibaba Cloud. Connecting through a private endpoint enables secure and private communication between your services and your {{{ .premium }}} instance without using the public internet.
 
 > **Tip:**
 >
@@ -20,9 +20,9 @@ This document describes how to connect to your {{{ .premium }}} instance via a p
 
 To connect to your Premium instance via a private endpoint, perform the following steps.
 
-### Step 1. Choose a TiDB instance
+### Step 1. Choose a {{{ .premium }}} instance
 
-1. On the [**TiDB Instances**](https://{{{.console-url}}}/instances) page, click the name of your target TiDB instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**.
 4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
@@ -35,7 +35,7 @@ To use the Alibaba Cloud Management Console to create a VPC interface endpoint, 
 2. Navigate to **VPC** > **Endpoints**.
 3. Click the **Interface Endpoints** tab, and then click **Create Endpoint**.
 4. Fill in the endpoint details:
-    - **Region**: select the same region as your TiDB Cloud instance.
+    - **Region**: select the same region as your {{{ .premium }}} instance.
     - **Endpoint Name**: enter a name for the endpoint.
     - **Endpoint Type**: choose **Interface Endpoint**.
     - **Endpoint Service**: select **Other Endpoint Services**.
@@ -61,7 +61,7 @@ After creating the interface endpoint, navigate to the **EndPoints** page and se
 
 3. Click **Create Private Endpoint Connection** to accept the connection from your private endpoint.
 
-### Step 4. Connect to your TiDB instance
+### Step 4. Connect to your {{{ .premium }}} instance
 
 After you have accepted the endpoint connection, you are redirected back to the connection dialog.
 

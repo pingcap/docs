@@ -1,4 +1,4 @@
----
+﻿---
 title: Glossary
 summary: Glossaries about TiDB.
 ---
@@ -13,7 +13,9 @@ Other available glossaries:
 - [TiCDC Glossary](/ticdc/ticdc-glossary.md)
 - [TiDB Lightning Glossary](/tidb-lightning/tidb-lightning-glossary.md)
 
-## A
+<TabsPanel letters="ABCDEGHIKLMOPQRSTUV" />
+
+## <a id="A" class="letter" href="#A">A</a>
 
 ### ACID
 
@@ -27,7 +29,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 - **Durability** means that once a transaction is committed, it remains committed even in the event of a system failure. TiKV uses persistent storage to ensure durability.
 
-## B
+## <a id="B" class="letter" href="#B">B</a>
 
 ### Backup & Restore (BR)
 
@@ -47,7 +49,7 @@ The Batch Create Table feature greatly speeds up the creation of multiple tables
 
 A [Region](#regionpeerraft-group) is logically divided into several small ranges called bucket. TiKV collects query statistics by buckets and reports the bucket status to PD. For more information, see the [Bucket design doc](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket).
 
-## C
+## <a id="C" class="letter" href="#C">C</a>
 
 ### Cached Table
 
@@ -85,7 +87,7 @@ Continuous Profiling is a way to observe resource overhead at the system call le
 
 Coprocessor is a coprocessing mechanism that shares the computation workload with TiDB. It is located in the storage layer (TiKV or TiFlash) and collaboratively processes computations [pushed down](/functions-and-operators/expressions-pushed-down.md) from TiDB on a per-Region basis.
 
-## D
+## <a id="D" class="letter" href="#D">D</a>
 
 ### Dumpling
 
@@ -121,7 +123,7 @@ Distributed eXecution Framework (DXF) is the framework used by TiDB to centrally
 
 Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
 
-## E
+## <a id="E" class="letter" href="#E">E</a>
 
 ### Expression index
 
@@ -129,7 +131,7 @@ The expression index is a special type of index created on an expression. Once a
 
 For more information, see [CREATE INDEX - Expression index](/sql-statements/sql-statement-create-index.md#expression-index).
 
-## G
+## <a id="G" class="letter" href="#G">G</a>
 
 ### Garbage Collection (GC)
 
@@ -143,7 +145,7 @@ General Availability (GA) of a feature means the feature is fully tested and is 
 
 Global Transaction Identifiers (GTIDs) are unique transaction IDs used in MySQL binary logs to track which transactions have been replicated. [Data Migration (DM)](/dm/dm-overview.md) uses these IDs to ensure consistent replication.
 
-## H
+## <a id="H" class="letter" href="#H">H</a>
 
 ### Hotspot
 
@@ -153,7 +155,7 @@ Hotspot refers to a situation where the read and write workloads in TiKV are con
 
 Hybrid Transactional and Analytical Processing (HTAP) is a database feature that enables both OLTP (Online Transactional Processing) and OLAP (Online Analytical Processing) workloads within the same database. For TiDB, the HTAP feature is provided by using TiKV for row storage and TiFlash for columnar storage. For more information, see [Quick Start with TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
-## I
+## <a id="I" class="letter" href="#I">I</a>
 
 ### In-Memory Pessimistic Lock
 
@@ -163,7 +165,7 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Index Merge is a method introduced in TiDB v4.0 to access tables. Using this method, the TiDB optimizer can use multiple indexes per table and merge the results returned by each index. In some scenarios, this method makes the query more efficient by avoiding full table scans. Since v5.4, Index Merge has become a GA feature.
 
-## K
+## <a id="K" class="letter" href="#K">K</a>
 
 ### Key Management Service (KMS)
 
@@ -173,7 +175,7 @@ Key Management Service (KMS) enables the storage and retrieval of secret keys in
 
 Key-Value (KV) is a way of storing information by associating values with unique keys, allowing quick data retrieval. TiDB uses TiKV to map tables and indexes into key-value pairs, enabling efficient data storage and access across the database.
 
-## L
+## <a id="L" class="letter" href="#L">L</a>
 
 ### Leader/Follower/Learner
 
@@ -193,7 +195,7 @@ For more information, see system table documentation: [`TIDB_TRX`](/information-
 
 Long Term Support (LTS) refers to software versions that are extensively tested and maintained for extended periods. For more information, see [TiDB Versioning](/releases/versioning.md).
 
-## M
+## <a id="M" class="letter" href="#M">M</a>
 
 ### Massively Parallel Processing (MPP)
 
@@ -203,7 +205,7 @@ Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architec
 
 [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) is a concurrency control mechanism in TiDB and other databases. It processes the memory read by transactions to achieve concurrent access to TiDB, thereby avoiding blocking caused by conflicts between concurrent reads and writes.
 
-## O
+## <a id="O" class="letter" href="#O">O</a>
 
 ### Old value
 
@@ -246,7 +248,7 @@ Optimistic transactions are transactions that use optimistic concurrency control
 
 For more information, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
 
-## P
+## <a id="P" class="letter" href="#P">P</a>
 
 ### Partitioning
 
@@ -282,7 +284,7 @@ Point in Time Recovery (PITR) enables you to restore data to a specific point in
 
 In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called predicate columns. For more information, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
-## Q
+## <a id="Q" class="letter" href="#Q">Q</a>
 
 ### Queries Per Second (QPS)
 
@@ -292,7 +294,7 @@ Queries Per Second (QPS) is the number of queries a database service handles per
 
 Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory, and the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, the [quota-related configuration items](/tikv-configuration-file.md#quota) can be set to limit the CPU resources to be used by the foreground.
 
-## R
+## <a id="R" class="letter" href="#R">R</a>
 
 ### Raft Engine
 
@@ -324,7 +326,7 @@ Restore is the reverse of the backup operation. It is the process of bringing ba
 
 [RocksDB](https://rocksdb.org/) is an LSM-tree structured engine that provides key-value storage and read-write functionality. It was developed by Facebook and is based on LevelDB. RocksDB is the core storage engine of TiKV.
 
-## S
+## <a id="S" class="letter" href="#S">S</a>
 
 ### Scheduler
 
@@ -355,7 +357,7 @@ Static Sorted Table or Sorted String Table is a file storage format used in Rock
 
 A store refers to the storage node in the TiKV cluster (an instance of `tikv-server`). Each store has a corresponding TiKV instance.
 
-## T
+## <a id="T" class="letter" href="#T">T</a>
 
 ### Temporary table
 
@@ -397,7 +399,7 @@ Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiK
 
 Transactions Per Second (TPS) is the number of transactions a database processes per second, serving as a key metric for measuring database performance and throughput.
 
-## U
+## <a id="U" class="letter" href="#U">U</a>
 
 ### Uniform Resource Identifier (URI)
 
@@ -407,7 +409,7 @@ Uniform Resource Identifier (URI) is a standardized format for identifying a res
 
 Universally Unique Identifier (UUID) is a 128-bit (16-byte) generated ID used to uniquely identify records in a database. For more information, see [UUID](/best-practices/uuid.md).
 
-## V
+## <a id="V" class="letter" href="#V">V</a>
 
 ### Vector search
 

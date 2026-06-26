@@ -10,7 +10,7 @@ This tutorial describes how to use TiDB Cloud serverless driver in a local Node.
 
 > **Note:**
 >
-> - In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> - In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 > - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin
@@ -19,7 +19,7 @@ To complete this step-by-step tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} instance. If you don't have any, you can [create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ## Step 1. Create a local Node.js project
 
@@ -42,7 +42,7 @@ To complete this step-by-step tutorial, you need the following:
 
 The serverless driver supports both CommonJS and ES modules. The following steps take the usage of the ES module as an example.
 
-1. On the overview page of your {{{ .starter }}} cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your {{{ .starter }}} instance, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
    mysql://[username]:[password]@[host]/[database]
@@ -66,7 +66,7 @@ The serverless driver supports both CommonJS and ES modules. The following steps
     ```js
     import { connect } from '@tidbcloud/serverless'
     
-    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your {{{ .starter }}} cluster information
+    const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'}) // replace with your {{{ .starter }}} instance information
     console.log(await conn.execute("show tables"))
     ```
 

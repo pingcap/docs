@@ -7,6 +7,10 @@ summary: Learn about compatibility issues of TiCDC and how to handle them.
 
 This section describes compatibility issues related to TiCDC and how to handle them.
 
+## Compatibility between TiCDC new architecture and TiDB clusters
+
+The TiCDC new architecture supports TiDB clusters of v7.5.0 and later. For special compatibility notes, see [Compatibility](/ticdc/ticdc-architecture.md#compatibility).
+
 ## Compatibility with TiDB Lightning
 
 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) provides two data import modes: [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) and [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md). This section describes the compatibility of these modes with TiCDC and the steps to use TiDB Lightning and TiCDC together in a cluster.
@@ -35,11 +39,49 @@ Currently, when you use TiCDC to replicate tables to a downstream TiDB cluster, 
 * `ALTER TABLE table_name SET TIFLASH REPLICA count;`
 * `ALTER DATABASE db_name SET TIFLASH REPLICA count;`
 
+## Compatibility notes for upgrading from earlier versions
+
+TiCDC relies on TiDB, TiKV, and PD to provide upstream change data and related interfaces. As TiDB and related components continue to evolve, these data formats and interfaces might change. For example, features such as parallel DDL and fast table creation in TiDB can change related logic and data processing workflows, and TiCDC needs corresponding adaptations. Therefore, the **TiCDC classic architecture does not guarantee official forward or backward compatibility in mixed TiDB/TiKV/PD deployments across versions**. The TiCDC new architecture provides **backward compatibility** for TiDB clusters of v7.5.0 and later.
+
+### Upgrade recommendations for the TiCDC classic architecture
+
+Before upgrading TiCDC from the classic architecture to the new architecture, pause all changefeeds. For more information, see [TiCDC new architecture upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+
+If the upgrade is between TiCDC deployments that both use the classic architecture, rolling upgrades are supported between minor versions. However, for upgrades across major versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade), it is **not recommended to keep changefeeds running during a TiDB cluster rolling upgrade**. For a major version upgrade, perform the following steps in order:
+
+1. Pause all changefeeds.
+2. Perform a rolling upgrade on the TiDB cluster.
+3. Resume all changefeeds after the upgrade is complete.
+
+For example, assuming that you upgrade the cluster from v8.5.4 to v8.5.5, if you manage the cluster using TiUP, you can refer to the following commands. The following example uses `linux-amd64`. For other platforms, replace the platform information in the package names based on your environment.
+
+```sh
+# 1. Pause all changefeeds. Run this command once for each changefeed.
+tiup cdc:v8.5.4 cli changefeed pause \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+
+# 2. Perform a rolling upgrade on the TiDB cluster.
+tiup cluster upgrade <cluster-name> v8.5.5
+
+# 3. Resume all changefeeds after the upgrade is complete.
+#    Run this command once for each changefeed.
+tiup cdc:v8.5.5 cli changefeed resume \
+  --server=http://<ticdc-host>:8300 \
+  --changefeed-id=<changefeed-id>
+```
+
+### Upgrade recommendations for the TiCDC new architecture
+
+The TiCDC new architecture can keep changefeeds running during a TiDB rolling upgrade, but only if TiCDC has already been using the new architecture before the upgrade.
+
+If you need to upgrade or switch between the TiCDC classic and new architectures, see [Upgrade guide](/ticdc/ticdc-architecture.md#upgrade-guide).
+
 ## CLI and configuration file compatibility
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
+* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses `start_ts` to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
-* Starting from TiCDC v6.2.0, `cdc cli` can directly interact with TiCDC server via TiCDC Open API. You can specify the address of the TiCDC server using the `--server` parameter. `--pd` is deprecated.
+* Starting from TiCDC v6.2.0, `cdc cli` interacts directly with TiCDC server via the TiCDC Open API, without requiring access to PD. The `--pd` parameter in `cdc cli` subcommands is deprecated, and the `--server` parameter is added to specify the TiCDC server address. Use `--server` instead of `--pd`.
 * Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
 
 ## Handle compatibility issues

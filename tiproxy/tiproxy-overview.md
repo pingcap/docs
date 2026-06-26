@@ -11,7 +11,32 @@ TiProxy is an optional component. You can also use a third-party proxy component
 
 The following figure shows the architecture of TiProxy:
 
-<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-architecture.png" alt="TiProxy architecture" width="500" />
+```mermaid
+graph TD
+    Client[Client]
+
+    Client --> ProxyLayer
+
+    subgraph ProxyLayer["proxy layer"]
+        TiProxy1[TiProxy] ~~~ TiProxy2[TiProxy]
+    end
+
+    ProxyLayer --> ComputeLayer
+
+    subgraph ComputeLayer["compute layer"]
+        TiDB1[TiDB] ~~~ TiDB2[TiDB] ~~~ TiDB3[TiDB]
+    end
+
+    ComputeLayer --> StorageLayer
+
+    subgraph StorageLayer["storage layer"]
+        TiKV1[TiKV] ~~~ TiKV2[TiKV] ~~~ TiFlash[TiFlash]
+    end
+
+    style ProxyLayer stroke-dasharray: 5 5
+    style ComputeLayer stroke-dasharray: 5 5
+    style StorageLayer stroke-dasharray: 5 5
+```
 
 ## Main features
 
@@ -23,7 +48,17 @@ TiProxy can migrate connections from one TiDB server to another without breaking
 
 As shown in the following figure, the client originally connects to TiDB 1 through TiProxy. After the connection migration, the client actually connects to TiDB 2. When TiDB 1 is about to be offline or the ratio of connections on TiDB 1 to connections on TiDB 2 exceeds the set threshold, the connection migration is triggered. The client is unaware of the connection migration.
 
-<img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-session-migration.png" alt="TiProxy connection migration" width="400" />
+```mermaid
+graph TD
+    Client[Client]
+    TiProxy[TiProxy]
+    TiDB1[TiDB 1]
+    TiDB2[TiDB 2]
+
+    Client --> TiProxy
+    TiProxy -.-x TiDB1
+    TiProxy --> TiDB2
+```
 
 Connection migration usually occurs in the following scenarios:
 

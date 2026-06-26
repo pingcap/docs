@@ -450,3 +450,9 @@ In addition to output data files, you can define `--output-filename-template` to
 | view | `{{fn .DB}}.{{fn .Table}}-schema-view` |
 
 For example, using `--output-filename-template '{{define "table"}}{{fn .Table}}.$schema{{end}}{{define "data"}}{{fn .Table}}.{{printf "%09d" .Index}}{{end}}'`, Dumpling will write the schema of the table `db.tbl:normal` into a file named `tbl%3Anormal.$schema.sql`, and write the data into files `tbl%3Anormal.000000000.sql`, `tbl%3Anormal.000000001.sql`, and so on.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 7: Exporting Data Using Dumpling" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff6" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch08_en.png" duration="60 mins" />
+</RelatedResources>

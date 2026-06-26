@@ -47,7 +47,7 @@ You can locate the slow SQL statement executed in the cluster. Then you can opti
 + `pending-peer-region-count`: The number of Regions with outdated Raft logs. It is normal that a few pending peers are generated in the scheduling process. However, it is not normal if this value is large for a period of time (longer than 30 minutes).
 + `undersized-region-count`: The number of Regions with a size smaller than `max-merge-region-size` or `max-merge-region-keys`.
 
-Generally, it is normal that these values are not `0`. However, it is not normal that they are not `0` for quite a long time.
+Generally, it is normal for these metrics to show small and non-zero values.
 
 ### KV Request Duration
 

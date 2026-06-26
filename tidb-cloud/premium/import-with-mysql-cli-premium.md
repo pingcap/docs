@@ -7,12 +7,6 @@ summary: Learn how to import small CSV or SQL files into {{{ .premium }}} instan
 
 This document describes how to import data into {{{ .premium }}} using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. This process performs a logical import, where the MySQL Command-Line Client replays SQL statements from your local machine against TiDB Cloud.
 
-> **Warning:**
->
-> {{{ .premium }}} is currently available in **private preview** in select AWS regions.
->
-> If Premium is not yet enabled for your organization, or if you need access in another cloud provider or region, click **Support** in the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), or submit a request through the [Contact Us](https://www.pingcap.com/contact-us) form on the website.
-
 > **Tip:**
 >
 > - Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV Files from Cloud Storage into {{{ .premium }}}](/tidb-cloud/premium/import-csv-files-premium.md).
@@ -28,9 +22,9 @@ Before you can import data to a {{{ .premium }}} instance via the MySQL Command-
 
 ## Step 1. Connect to your {{{ .premium }}} instance
 
-Connect to your TiDB instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
+Connect to your {{{ .premium }}} instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/project/instances) page. Then, click the name of your target instance to go to its overview page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. Then, click the name of your target {{{ .premium }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

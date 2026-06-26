@@ -225,6 +225,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - DISK
 - DISTINCT (R)
 - DISTINCTROW (R)
+- DISTRIBUTE
+- DISTRIBUTION
+- DISTRIBUTIONS
 - DIV (R)
 - DO
 - DOUBLE (R)
@@ -438,6 +441,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MOD (R)
 - MODE
 - MODIFY
+- MONITOR
 - MONTH
 
 <a id="N" class="letter" href="#N">N</a>
@@ -576,6 +580,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RESTORES
 - RESTRICT (R)
 - RESUME
+- RETURNING
 - REUSE
 - REVERSE
 - REVOKE (R)
@@ -591,6 +596,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ROW_NUMBER (R-Window)
 - ROWS (R-Window)
 - RTREE
+- RULE
 - RUN
 
 <a id="S" class="letter" href="#S">S</a>
@@ -660,6 +666,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_BUCKETS
 - STATS_COL_CHOICE
 - STATS_COL_LIST
+- STATS_DELTA
 - STATS_EXTENDED
 - STATS_HEALTHY
 - STATS_HISTOGRAMS
@@ -702,6 +709,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TIFLASH
 - TIKV_IMPORTER
 - TIME
+- TIMEOUT
 - TIMESTAMP
 - TINYBLOB (R)
 - TINYINT (R)

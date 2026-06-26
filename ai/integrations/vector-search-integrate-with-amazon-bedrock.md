@@ -35,9 +35,9 @@ To complete this tutorial, you need:
     aws configure set region <your-region>
     ```
 
-- A {{{ .starter }}} cluster
+- A {{{ .starter }}} instance
 
-    Follow [creating a {{{ .starter }}} cluster](/tidb-cloud/select-cluster-tier.md#starter) to create your own TiDB Cloud cluster if you don't have one.
+    [Create a {{{ .starter }}} instance](/tidb-cloud/select-cluster-tier.md#starter) if you don't have one.
 
 - An AWS account with the [required permissions for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html) and access to the following models:
 
@@ -54,7 +54,7 @@ This section provides step-by-step instructions to integrate TiDB Vector Search 
 
 Get the TiDB connection information from the [TiDB Cloud console](https://tidbcloud.com/) and set the environment variables in your development environment as follows:
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -242,7 +242,7 @@ Base.metadata.create_all(engine)
 
 ### Step 7. Save the vector data to {{{ .starter }}}
 
-In `demo.py`, add the following code to save the vector data to your {{{ .starter }}} cluster:
+In `demo.py`, add the following code to save the vector data to your {{{ .starter }}} instance:
 
 ```python
 # ---- Saving Vectors to TiDB ----

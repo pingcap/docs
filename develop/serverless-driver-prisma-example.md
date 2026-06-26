@@ -15,7 +15,7 @@ This tutorial describes how to use [@tidbcloud/prisma-adapter](https://github.co
 
 > **Tip:**
 >
-> In addition to {{{ .starter }}} clusters, the steps in this document also work with {{{ .essential }}} clusters.
+> In addition to {{{ .starter }}} instances, the steps in this document also work with {{{ .essential }}} instances.
 
 ## Install
 
@@ -84,7 +84,7 @@ To complete this tutorial, you need the following:
 
 - [Node.js](https://nodejs.org/en) >= 18.0.0.
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A {{{ .starter }}} cluster. If you don't have any, you can [create a {{{ .starter }}} cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- A {{{ .starter }}} instance. If you don't have any, you can [create a {{{ .starter }}} instance](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -123,7 +123,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your {{{ .starter }}} cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your {{{ .starter }}} instance, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
@@ -184,13 +184,13 @@ To complete this tutorial, you need the following:
    }
    ```
 
-3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your {{{ .starter }}} cluster or use the Prisma CLI to create them automatically as follows:
+3. Synchronize your database with the Prisma schema. You can either manually create the database tables in your {{{ .starter }}} instance or use the Prisma CLI to create them automatically as follows:
 
     ```
     npx prisma db push
     ```
 
-   This command will create the `user` table in your {{{ .starter }}} cluster through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
+   This command will create the `user` table in your {{{ .starter }}} instance through the traditional TCP connection, rather than through the HTTPS connection using `@tidbcloud/prisma-adapter`. This is because it uses the same engine as Prisma Migrate. For more information about this command, see [Prototype your schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push).
 
 4. Generate Prisma Client:
 

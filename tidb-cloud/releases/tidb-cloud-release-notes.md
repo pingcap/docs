@@ -8,6 +8,315 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## June 16, 2026
+
+**General changes**
+
+- Add domain verification for [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md).
+
+    In the following scenarios, the **Allowed Email Domains** field is required. To improve security, you must verify domains before entering them in this field:
+
+    - Enabling auto-provisioning for the OIDC or SAML authentication method
+    - Enabling SCIM provisioning for the SAML authentication method
+
+  For more information, see [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml).
+
+## June 9, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Add a new AWS region for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `N. Virginia (us-east-1)`. The feature is now available in the following AWS regions:
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `N. Virginia (us-east-1)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+<CustomContent language="en,zh">
+
+**High availability changes**
+
+- **TiDB Cloud Essential**
+
+    - Starting from June 9, 2026, newly created [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances are deployed in a single Availability Zone and do not support regional high availability.
+
+        If you need regional high availability and cross-AZ failover, consider choosing [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium).
+
+        This change does not affect TiDB Cloud Essential instances created before June 9, 2026.
+        
+</CustomContent>
+
+**API changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce the following backup API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), enabling unified management for both active and deleted instances within your organization.
+
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): lists backups for both active and deleted TiDB Cloud Premium instances (in the recycle bin) within your organization.
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): deletes a specific backup within your organization by `backupId`.
+
+## June 2, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Introduce the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity) for organizations that require a large number of [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and branches.
+
+        By default, for each paid organization in TiDB Cloud, you can create up to 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance. To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+- **TiDB Cloud Essential**
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - AWS: `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
+
+      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+        This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+- **TiDB Cloud Premium**
+
+    - Support Dual-Layer Data Encryption on Alibaba Cloud for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances.
+
+        You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
+
+        This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+
+    - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
+
+        - Table Count by TTL Schedule Delay
+        - TTL Insert/Delete Rows by Day
+
+      These metrics help you observe TTL job health and detect data retention issues. For more information, see [{{{ .premium }}} Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md).
+
+**API changes**
+
+- **TiDB Cloud Starter**
+
+    - For a paid organization not enrolled in the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity), TiDB Cloud API now enforces a limit of 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance.
+
+        - When the limit is reached, API requests to create new TiDB Cloud Starter instances or branches are rejected.
+        - To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+## May 26, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Add two new AWS regions for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `Tokyo (ap-northeast-1)` and `Oregon (us-west-2)`. The feature is now available in the following AWS regions:
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+- **TiDB Cloud Essential**
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - AWS: `Oregon (us-west-2)`, `Frankfurt (eu-central-1)`, `Singapore (ap-southeast-1)`
+
+      This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify resource-intensive queries to reduce costs.
+
+      The feature is rolling out in phases. To request early access, contact [support@pingcap.com](mailto:support@pingcap.com).
+
+**API changes**
+
+- TiDB Cloud IAM API (v1beta1) supports managing organization members programmatically.
+
+    The new `/members` endpoints let you manage organization membership and role assignments. You can use these endpoints to automate user lifecycle management tasks, such as onboarding new members with specific roles, adjusting permissions as responsibilities change, and removing members who leave the organization.
+
+    For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Member).
+
+## May 19, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Recycle Bin is now available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It stores data of deleted TiDB Cloud resources that have valid backups.
+
+        When a TiDB Cloud Essential instance with existing backups is deleted, its backup files are moved to the Recycle Bin. Backup files created by automatic backups are retained in the Recycle Bin for a specified period. To avoid data loss, restore the data to a new TiDB Cloud Essential instance before the retention period expires. Note that if a TiDB Cloud Essential instance **has no backup**, the deleted instance is not displayed in the Recycle Bin.
+
+        For more information, see [Backup and Restore](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin).
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following region:
+
+        - Alibaba Cloud: `Mexico (na-south-1)`
+
+      This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify resource-intensive queries to reduce costs.
+
+        The feature is rolling out in phases. To request early access, contact [support@pingcap.com](mailto:support@pingcap.com).
+
+## May 12, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) **Metrics** page.
+    
+        `AVG RU/s` displays the average number of RUs consumed per second over the selected time range, helping you better understand resource consumption.
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
+
+        It delivers three-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, seamless data import and migration, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports bulk data import, migration from MySQL and other sources, and real-time replication to downstream systems. If you use [Azure Marketplace](https://azuremarketplace.microsoft.com/), you can also subscribe to TiDB Cloud Dedicated through Azure Marketplace.
+
+        For more information, see [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/).
+
+## April 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) is now in public preview on AWS<CustomContent language="en,zh"> and Alibaba Cloud</CustomContent>.
+
+        Powered by the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel, TiDB Cloud Premium is specifically designed for mission-critical enterprise workloads that require hyperscale, uncompromising performance, and the cost efficiency of a cloud-native consumption model.
+
+        TiDB Cloud Premium bridges the gap between [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+
+        - Compared with TiDB Cloud Essential, TiDB Cloud Premium delivers significantly stronger isolation across the compute, storage, and network layers, ensuring predictable performance for critical workloads. At the same time, it retains an elastic, on-demand scaling model, allowing compute capacity to scale independently without operational overhead.
+        - Compared with TiDB Cloud Dedicated, TiDB Cloud Premium improves cost efficiency by eliminating idle headroom, so you only pay for the performance you actually use.
+
+      For more information about TiDB Cloud Premium, see [TiDB Cloud Premium: Public Preview for Mission-Critical SQL](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/).
+
+      To try TiDB Cloud Premium, go to the [TiDB Cloud console](https://tidbcloud.com/), click **Create Resource**, and select **Premium** as your plan. For more information, see [Create a TiDB Cloud Premium instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+
+- **TiDB Cloud Dedicated**
+
+    - TiProxy is now generally available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
+
+        Key features of TiProxy:
+
+        - Maintains persistent client connections during scaling operations and rolling upgrades.
+        - Distributes traffic evenly across TiDB nodes for better resource utilization.
+
+      For implementation details, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+
+**Console changes**
+
+- Improve the firewall rule management experience for public endpoints of TiDB Cloud Starter and Essential.
+
+    The TiDB Cloud console now provides a streamlined dialog for managing firewall rules for public endpoints in TiDB Cloud Starter and Essential. You can add your current IP address, allow access from all AWS IP addresses for AWS-hosted instances, or manually specify an IP address or IP address range in one place.
+
+    For more information, see [Create and manage a firewall rule](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule).
+
+**API changes**
+
+- Introduce TiDB Cloud Premium API (v1beta2) for managing the following resources automatically and efficiently:
+
+    - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
+    - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
+    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
+
+  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
+
+## April 14, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/) to [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/).
+
+    - The Top SQL page in [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md) now supports collecting and displaying TiKV network traffic and logical I/O metrics for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters hosted on AWS.
+
+**Console changes**
+
+- Unify the [TiDB Cloud console](https://tidbcloud.com) experience across all TiDB Cloud plans (such as {{{ .starter }}}, Essential, and Dedicated). The following capabilities are now available:
+
+    - **[My TiDB](https://tidbcloud.com/tidbs) homepage**: A new org-level homepage with both the resource view and project view.
+ 
+        - The resource view lists all TiDB Cloud resources across plans in one place.
+        - The project view organizes TiDB Cloud resources by project and lets you manage projects in your organization.
+
+    - **Unified resource creation workflow**: A single creation flow applies to all TiDB Cloud resource types, including {{{ .starter }}}, Essential, and Dedicated.
+    - **TiDB X project support**: TiDB X instances (a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as {{{ .starter }}} and Essential) can now be optionally assigned to projects and moved between projects after creation.
+    - **Instance-level roles**: Role assignments can now be scoped to individual TiDB X instances, enabling fine-grained access control within a project.
+    - **Terminology update**: {{{ .starter }}} and Essential **clusters** are renamed to {{{ .starter }}} and Essential **instances** across the console.
+    - **Breaking change tour guide**: A guided walkthrough is shown to existing users to explain structural changes, reducing disruption during the transition.
+
+  For more information, see [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md) and [Project Migration FAQ for TiDB X Instances](/tidb-cloud/tidbx-instance-move-faq.md).
+
+**API changes**
+
+- `project_id` values for TiDB Cloud Starter and Essential instances **can change** because these instances can be moved between projects in the TiDB Cloud console. Do not hardcode `project_id` values.
+
+- Add a `type` field to the [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) endpoint.
+
+    - If your application only reads the `id` and `name` fields from project responses, no changes are required.
+    - If you need to distinguish between [project types](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud) (for example, to filter dedicated projects, TiDB X projects, or the TiDB X virtual project), start reading the `type` field.
+
+For more information, see [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md).
+
+## April 8, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Enhance the cloud storage data import experience for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        The import process is now streamlined into a 3-step wizard (Connection, Destination Mapping, and Pre-check) with a unified **Import data from Cloud Storage** entry point for Amazon S3, Google Cloud Storage, and Azure Blob Storage. The new flow supports single-file URIs and manual file mapping via wildcard patterns, and the pre-check step scans the source files and previews the mapping before the import runs, helping you catch configuration issues early and reduce import failures.
+
+        For more information, see the following documents:
+
+        - [Import CSV Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-csv-files.md)
+        - [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md)
+
+## March 31, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support configuring a private endpoint allowlist.
+
+        You can now secure and manage private endpoint access more easily by configuring an allowlist in the [TiDB Cloud console](https://tidbcloud.com). In the allowlist, you can specify the AWS VPC Endpoint IDs and Alibaba Cloud endpoint IDs that are allowed to connect.
+
+        For more information, see the following documents:
+
+        - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
+        - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
+    - Enable Prometheus metrics integration (Preview).
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) manages Prometheus integrations at the cluster level. This feature lets you seamlessly ship metrics from your TiDB Cloud Essential cluster to Prometheus, enabling advanced alerting on a unified platform. 
+
+        For integration steps, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md).
+
+## March 24, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Add a **Public Endpoint** status to [Console Audit Logging](/tidb-cloud/tidb-cloud-console-auditing.md) in TiDB Cloud to improve security tracking.
+
+**Console changes**
+
+- Support a logarithmic Y-axis to improve visualization for metrics with large value disparities. High-range and low-range fluctuations are clearly visible, making anomalies easier to identify.
+
+## March 10, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support Amazon MSK Provisioned in private link connections for dataflow scenarios.
+
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports creating private link connections to an [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) cluster. This feature enables private network connectivity for changefeeds to Amazon MSK Provisioned clusters, without exposing traffic to the public internet.
+
+        For more information, see [Connect to Amazon MSK Provisioned via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
+
 ## March 3, 2026
 
 **General changes**

@@ -1,16 +1,23 @@
 ---
-title: Changefeed (Beta)
+title: Changefeed
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
-# Changefeed (Beta)
+# Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka and MySQL.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .essential }}} supports streaming data to Apache Kafka and MySQL.
 
 > **Note:**
 >
-> - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} cluster.
-> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) clusters, the changefeed feature is unavailable.
+> - Currently, the changefeed feature for {{{ .essential }}} is only available upon request. To request this feature, do the following:
+>
+>     1. In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), click **?**.
+>     2. Click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+>     3. Create a ticket. In the "Description" field, fill in "Apply for changefeed".
+>     4. Click **Submit**.
+>
+> - TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} instance.
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 
 ## Restrictions
 
@@ -32,13 +39,13 @@ Additional regions will be supported in the future. For immediate support in a s
 
 To access the changefeed feature, take the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
     > **Tip:**
     >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
+2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
 On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as pausing, resuming, editing, and deleting a changefeed).
 
@@ -56,7 +63,7 @@ You can view a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the corresponding changefeed you want to view, and click **...** > **View** in the **Action** column.
 3. You can see the details of a changefeed, including its configuration, status, and metrics.
 
@@ -80,7 +87,7 @@ You can pause or resume a changefeed using the TiDB Cloud console or the TiDB Cl
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 </div>
@@ -113,7 +120,7 @@ You can edit a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
@@ -145,7 +152,7 @@ ticloud serverless changefeed edit --cluster-id <cluster-id> --changefeed-id <ch
 
 ## Duplicate a changefeed
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed that you want to duplicate. In the **Action** column, click **...** > **Duplicate**.
 3. TiDB Cloud automatically populates the new changefeed configuration with the original settings. You can review and modify the configuration as needed.
 4. After confirming the configuration, click **Submit** to create and start the new changefeed.
@@ -157,7 +164,7 @@ You can delete a changefeed using the TiDB Cloud console or the TiDB Cloud CLI.
 <SimpleTab>
 <div label="Console">
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target TiDB cluster.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target {{{ .essential }}} instance.
 2. Locate the changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 </div>

@@ -38,7 +38,7 @@ The following table lists the specifications and corresponding replication perfo
 
 ### Price
 
-Currently, {{{ .premium }}} is in private preview. You can [contact our sales](https://www.pingcap.com/contact-us/) for pricing details.
+Currently, {{{ .premium }}} is in public preview. For more information, see [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
 ## Private Data Link cost
 

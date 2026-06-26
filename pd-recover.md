@@ -32,11 +32,18 @@ To prevent data corruption or other unrecoverable errors caused by interactions 
 
 ### Step 2: Start the surviving PD node
 
-Start the surviving PD node using the `--force-new-cluster` startup parameter. The following is an example:
+Start the surviving PD node using the `--force-new-cluster` startup parameter, and ensure that the node uses its original data directory. You can specify it explicitly in the command line with `--data-dir`, or configure `data-dir` in `conf/pd.toml` in advance. For example:
 
 ```shell
-./bin/pd-server --force-new-cluster --name=pd-127.0.0.10-2379 --client-urls=http://0.0.0.0:2379 --advertise-client-urls=http://127.0.0.1:2379 --peer-urls=http://0.0.0.0:2380 --advertise-peer-urls=http://127.0.0.1:2380 --config=conf/pd.toml
+./bin/pd-server --force-new-cluster --name=pd-127.0.0.10-2379 --data-dir=/path/to/existing/pd/data --client-urls=http://0.0.0.0:2379 --advertise-client-urls=http://127.0.0.1:2379 --peer-urls=http://0.0.0.0:2380 --advertise-peer-urls=http://127.0.0.1:2380 --config=conf/pd.toml
 ```
+
+This command starts a temporary single-node PD, allowing `pd-recover` in the next step to connect and repair the metadata. Keep this PD process running, and perform the next step in another terminal window.
+
+> **Note:**
+>
+> - If `--data-dir` is not specified in the command line, ensure that `data-dir` in `conf/pd.toml` correctly points to the original data directory of the surviving PD node. Otherwise `pd-recover` might fail in subsequent operations.
+> - If `data-dir` is specified in both `conf/pd.toml` and the command-line arguments, the `data-dir` setting in `conf/pd.toml` takes precedence.
 
 ### Step 3: Repair metadata using `pd-recover`
 
@@ -54,11 +61,11 @@ Since this method relies on a minority PD node to recover the service, the node 
 
 ### Step 4: Restart the PD node
 
-Once you see the prompt message `recovery is successful`, restart the PD node.
+Once you see the prompt message `recovery is successful`, stop the temporary PD process that starts with `--force-new-cluster` in Step 2, and then restart the PD node normally without the `--force-new-cluster` parameter.
 
 ### Step 5: Scale out PD and start the cluster
 
-Scale out the PD cluster using the deployment tool and start the other components in the cluster. At this point, the PD service is available.
+After confirming that the PD in Step 4 has started normally and is providing service, scale out the PD cluster using the deployment tool and start the other components in the cluster. At this point, the service is restored.
 
 ## Method 2: Entirely rebuild a PD cluster
 

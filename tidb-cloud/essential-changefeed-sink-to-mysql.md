@@ -1,15 +1,24 @@
 ---
-title: Sink to MySQL (Beta)
+title: Sink to MySQL
 summary: This document explains how to stream data from {{{ .essential }}} to MySQL using the Sink to MySQL changefeed. It includes restrictions, prerequisites, and steps to create a MySQL sink for data replication. The process involves setting up network connections, loading existing data to MySQL, and creating target tables in MySQL. After completing the prerequisites, users can create a MySQL sink to replicate data to MySQL.
 ---
 
-# Sink to MySQL (Beta)
+# Sink to MySQL
 
 This document describes how to stream data from {{{ .essential }}} to MySQL using the **Sink to MySQL** changefeed.
 
+> **Note:**
+> 
+> Currently, the changefeed feature for {{{ .essential }}} is only available upon request. To request this feature, do the following:
+>
+> 1. In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), click **?**.
+> 2. Click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+> 3. Create a ticket. In the "Description" field, fill in "Apply for changefeed".
+> 4. Click **Submit**.
+
 ## Restrictions
 
-- For each {{{ .essential }}} cluster, you can create up to 10 changefeeds.
+- For each {{{ .essential }}} instance, you can create up to 10 changefeeds.
 - Because {{{ .essential }}} uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -23,7 +32,7 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 ### Network
 
-Make sure that your {{{ .essential }}} cluster can connect to the MySQL service. You can choose one of the following connection methods:
+Make sure that your {{{ .essential }}} instance can connect to the MySQL service. You can choose one of the following connection methods:
 
 - Private Link Connection: meeting security compliance and ensuring network quality.
 - Public Network: suitable for a quick setup.
@@ -33,7 +42,7 @@ Make sure that your {{{ .essential }}} cluster can connect to the MySQL service.
 
 Private link connections leverage **Private Link** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
-You can connect your {{{ .essential }}} cluster to your MySQL service securely through a private link connection. If the private link connection is not available for your MySQL service, follow [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md) or [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md) to create one.
+You can connect your {{{ .essential }}} instance to your MySQL service securely through a private link connection. If the private link connection is not available for your MySQL service, follow [Connect to Amazon RDS via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md) or [Connect to Alibaba Cloud ApsaraDB RDS for MySQL via a Private Link Connection](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md) to create one.
 
 </div>
 
@@ -47,7 +56,7 @@ If your MySQL service can be accessed over the public network, you can choose to
 
 ### Load existing data (optional)
 
-The **Sink to MySQL** connector can only sink incremental data from your {{{ .essential }}} cluster to MySQL after a certain timestamp. If you already have data in your {{{ .essential }}} cluster, you can export and load the existing data of your {{{ .essential }}} cluster into MySQL before enabling **Sink to MySQL**.
+The **Sink to MySQL** connector can only sink incremental data from your {{{ .essential }}} instance to MySQL after a certain timestamp. If you already have data in your {{{ .essential }}} instance, you can export and load the existing data of your {{{ .essential }}} instance into MySQL before enabling **Sink to MySQL**.
 
 To load the existing data:
 
@@ -62,7 +71,7 @@ To load the existing data:
     SET GLOBAL tidb_gc_life_time = '72h';
     ```
 
-2. Use the [Export](/tidb-cloud/serverless-export.md) feature to export data from your {{{ .essential }}} cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load the data into the MySQL service.
+2. Use the [Export](/tidb-cloud/serverless-export.md) feature to export data from your {{{ .essential }}} instance, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load the data into the MySQL service.
 
 3. Record the snapshot time returned by [Export](/tidb-cloud/serverless-export.md). Use this timestamp as the starting position when you configure the MySQL sink.
 
@@ -74,7 +83,7 @@ If you do not load the existing data, you need to create corresponding target ta
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the overview page of the target {{{ .essential }}} cluster, and then click **Data** > **Changefeed** in the left navigation pane.
+1. Navigate to the overview page of the target {{{ .essential }}} instance, and then click **Data** > **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
@@ -106,7 +115,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 8. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
     - If you have [loaded the existing data](#load-existing-data-optional) using Export, select **From Time** and fill in the snapshot time returned by Export. Ensure that the time zone is correct.
-    - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
+    - If you do not have any data in the upstream {{{ .essential }}} instance, select **Start replication from now on**.
 
 9. Click **Next** to configure your changefeed.
 

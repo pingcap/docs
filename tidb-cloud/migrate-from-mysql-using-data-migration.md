@@ -6,13 +6,21 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent> using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
+This document guides you through migrating your MySQL databases from Amazon Aurora MySQL, Amazon RDS, Azure Database for MySQL - Flexible Server, Google Cloud SQL for MySQL, or self-managed MySQL instances to <CustomContent plan="dedicated">{{{ .dedicated }}}</CustomContent><CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> using the Data Migration feature in the [TiDB Cloud console](https://tidbcloud.com/).
 
 <CustomContent plan="essential">
 
 > **Note:**
 >
 > Currently, the Data Migration feature is in beta for {{{ .essential }}}.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> Currently, the Data Migration feature is in public preview for {{{ .premium }}}.
 
 </CustomContent>
 
@@ -34,6 +42,17 @@ If you only want to replicate ongoing binlog changes from your MySQL-compatible 
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
+<CustomContent plan="premium">
+
+- The Data Migration feature for {{{ .premium }}} is in public preview.
+
+    - You cannot save or reuse source connection details across migration jobs.
+    - During public preview, additional restrictions might apply to migration jobs as the feature matures. For more information, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
+<CustomContent plan="essential,dedicated">
+
 ### Maximum number of migration jobs
 
 <CustomContent plan="dedicated">
@@ -43,7 +62,9 @@ You can create up to 200 migration jobs on {{{ .dedicated }}} clusters for each 
 </CustomContent>
 <CustomContent plan="essential">
 
-You can create up to 100 migration jobs on {{{ .essential }}} clusters for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+You can create up to 100 migration jobs on {{{ .essential }}} instances for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 </CustomContent>
 
@@ -53,11 +74,9 @@ You can create up to 100 migration jobs on {{{ .essential }}} clusters for each 
 
 <CustomContent plan="dedicated">
 
-- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
+- When you delete a TiDB Cloud Dedicated cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
 </CustomContent>
-
-<CustomContent plan="essential">
 
 ### Limitations of Alibaba Cloud RDS
 
@@ -68,8 +87,6 @@ When using Alibaba Cloud RDS as a data source, every table must have an explicit
 During full data migration, PolarDB-X schemas might contain keywords that are incompatible with the downstream database, causing the import to fail.
 
 To prevent this, create the target tables in the downstream database before starting the migration process.
-
-</CustomContent>
 
 ### Limitations of existing data migration
 
@@ -86,13 +103,30 @@ To prevent this, create the target tables in the downstream database before star
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+- For {{{ .premium }}}, both logical mode (default) and physical mode are supported. Logical mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance, which consumes Request Capacity Units (RCUs) during the load. Physical mode uses `IMPORT INTO` on the target {{{ .premium }}} instance and is recommended for large datasets when you prioritize load throughput and cost efficiency.
+- When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+- When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
+
+</CustomContent>
+
 ### Limitations of incremental data migration
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target cluster with the MySQL source records.
-
-- During incremental data migration (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the target TiDB Cloud cluster to ensure that all the data during the abrupt error has been migrated smoothly to the target TiDB Cloud cluster. In this scenario, for MySQL source tables without primary keys or non-null unique indexes, some data might be duplicated in the target TiDB Cloud cluster because the data might be inserted repeatedly into the target TiDB Cloud cluster.
-
 <CustomContent plan="dedicated">
+
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target {{{ .dedicated }}} cluster with the MySQL source records.
+
+</CustomContent>
+<CustomContent plan="essential">
+
+- During incremental data migration, if the table to be migrated already exists in the target database with duplicate keys, an error is reported and the migration is interrupted. In this situation, you need to verify that the MySQL source data is accurate. If it is accurate, click the **Restart** button of the migration job, and the migration job will replace the conflicting records in the target {{{ .essential }}} instance with the MySQL source records.
+- During incremental data migration (migrating ongoing changes to your {{{ .essential }}} instance), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .essential }}} instance so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .essential }}} instance.
+
+</CustomContent>
+<CustomContent plan="dedicated">
+
+- During incremental data migration (migrating ongoing changes to your {{{ .dedicated }}} cluster), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .dedicated }}} cluster so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .dedicated }}} cluster.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database. This allows Data Migration to get consecutive binary logs for incremental data migration:
 
@@ -101,9 +135,15 @@ To prevent this, create the target tables in the downstream database before star
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+- During incremental data migration (migrating ongoing changes to your {{{ .premium }}} instance), if the migration job recovers from an abrupt error, it might enter safe mode for 60 seconds. During safe mode, TiDB Cloud migrates `INSERT` statements as `REPLACE` and `UPDATE` statements as `DELETE` and `REPLACE`, and then applies these transactions to the target {{{ .premium }}} instance so that all data during the abrupt error reaches the target safely. For source tables without primary keys or non-null unique indexes, this can result in duplicated rows on the target {{{ .premium }}} instance.
+
+</CustomContent>
+
 ## Prerequisites
 
-Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target TiDB Cloud cluster database.
+Before migrating, check whether your data source is supported, enable binary logging in your MySQL-compatible database, ensure network connectivity, and grant required privileges for both the source database and the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> database.
 
 ### Make sure your data source and version are supported
 
@@ -127,25 +167,41 @@ For {{{ .essential }}}, the Data Migration feature supports the following data s
 
 | Data source                                      | Supported versions |
 |:-------------------------------------------------|:-------------------|
-| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7     |
-| Amazon Aurora MySQL                              | 8.0, 5.7     |
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7           |
+| Amazon Aurora MySQL                              | 8.0, 5.7           |
 | Amazon RDS MySQL                                 | 8.0, 5.7           |
 | Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
-| Azure Database for MySQL - Flexible Server                          | 8.0, 5.7           |
-| Google Cloud SQL for MySQL                                                | 8.0, 5.7    |
+| Azure Database for MySQL - Flexible Server       | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                       | 8.0, 5.7           |
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+For {{{ .premium }}}, the Data Migration feature supports the following MySQL-compatible source databases, and **MySQL** is the only data source type available in the migration job wizard. For supported connection methods, see [Ensure network connectivity](#ensure-network-connectivity).
+
+| Data source                                      | Supported versions |
+|:-------------------------------------------------|:-------------------|
+| Self-managed MySQL (on-premises or public cloud) | 8.0, 5.7           |
+| Amazon Aurora MySQL                              | 8.0, 5.7           |
+| Amazon RDS MySQL                                 | 8.0, 5.7           |
+| Azure Database for MySQL - Flexible Server       | 8.0, 5.7           |
+| Google Cloud SQL for MySQL                       | 8.0, 5.7           |
+| Alibaba Cloud RDS MySQL                          | 8.0, 5.7           |
 
 </CustomContent>
 
 ### Enable binary logs in the source MySQL-compatible database for replication
 
-To continuously replicate incremental changes from the source MySQL-compatible database to the TiDB Cloud target cluster using DM, you need the following configurations to enable binary logs in the source database:
+To continuously replicate incremental changes from the source MySQL-compatible database to the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> using DM, you need the following configurations to enable binary logs in the source database:
 
-| Configuration | Required value | Why |
-|:--------------|:---------------|:----|
-| `log_bin` | `ON` | Enables binary logging, which DM uses to replicate changes to TiDB |
-| `binlog_format` | `ROW` | Captures all data changes accurately (other formats miss edge cases) |
-| `binlog_row_image` | `FULL` | Includes all column values in events for safe conflict resolution |
-| `binlog_expire_logs_seconds` | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| Configuration                    | Required value | Why |
+|:---------------------------------|:---------------|:----|
+| `log_bin`                        | `ON`           | Enables binary logging, which DM uses to replicate changes to TiDB |
+| `binlog_format`                  | `ROW`          | Captures all data changes accurately (other formats miss edge cases) |
+| `binlog_row_image`               | `FULL`         | Includes all column values in events for safe conflict resolution |
+| `binlog_expire_logs_seconds`     | ≥ `86400` (1 day), `604800` (7 days, recommended) | Ensures DM can access consecutive logs during migration |
+| `binlog_transaction_compression` | `OFF`          | DM does not support transaction compression |
 
 #### Check current values and configure the source MySQL instance
 
@@ -154,7 +210,7 @@ To check the current configurations, connect to the source MySQL instance and ex
 ```sql
 SHOW VARIABLES WHERE Variable_name IN
 ('log_bin','server_id','binlog_format','binlog_row_image',
-'binlog_expire_logs_seconds','expire_logs_days');
+'binlog_expire_logs_seconds','expire_logs_days','binlog_transaction_compression');
 ```
 
 If necessary, change the source MySQL instance configurations to match the required values.
@@ -170,6 +226,7 @@ If necessary, change the source MySQL instance configurations to match the requi
     binlog_format = ROW
     binlog_row_image = FULL
     binlog_expire_logs_seconds = 604800   # 7 days retention
+    binlog_transaction_compression = OFF
     ```
 
 2. Restart the MySQL service to apply the changes:
@@ -248,7 +305,7 @@ For more information, see [Set instance parameters](https://www.alibabacloud.com
 
 ### Ensure network connectivity
 
-Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target TiDB Cloud cluster.
+Before creating a migration job, you need to plan and set up proper network connectivity between your source MySQL instance, the TiDB Cloud Data Migration (DM) service, and your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
 <CustomContent plan="dedicated">
 
@@ -269,6 +326,16 @@ For {{{ .essential }}}, the available connection methods are as follows:
 |:---------------------|:-------------|:----------------|
 | Public endpoints or IP addresses | All cloud providers supported by TiDB Cloud | Quick proof-of-concept migrations, testing, or when private connectivity is unavailable |
 | Private links or private endpoints | AWS and Alibaba Cloud only | Production workloads without exposing data to the public internet |
+
+</CustomContent>
+<CustomContent plan="premium">
+
+For {{{ .premium }}}, the available connection methods are as follows:
+
+| Connection method | Availability | Recommended for |
+|:---------------------|:-------------|:----------------|
+| Public endpoints or IP addresses | All cloud providers supported by {{{ .premium }}} | Quick proof-of-concept migrations, testing, or when private connectivity is unavailable |
+| Private links | AWS only | Production workloads without exposing data to the public internet |
 
 </CustomContent>
 
@@ -328,23 +395,51 @@ If you use a provider-native private link or private endpoint, create a private 
 <details>
 <summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
 
-AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB) and publish it as an endpoint service associated with your source MySQL instance.
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
 
-1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an NLB in the same subnet(s) as your RDS or Aurora writer. Configure the NLB with a TCP listener on port `3306` that forwards traffic to the database endpoint.
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Configure the following key settings:
+
+    - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's default VPC, which is rarely where your database resides, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least two Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`. Change it before you create the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. You cannot register RDS endpoints directly, so register the database's private IP instead.
+
+        To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
+
+        > **Note:**
+        >
+        > The RDS private IP can change on failover, maintenance, or storage scaling. For production deployments, see [Access Amazon RDS across VPCs using AWS PrivateLink and Network Load Balancer](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/) in the AWS Database Blog for an automated IP-rotation pattern.
 
     For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
 
-2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and then create an endpoint service. During the setup, select the NLB created in the previous step as the backing load balancer, and enable the **Require acceptance for endpoint** option. After the endpoint service is created, copy the service name (in the `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx` format) for later use.
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following settings:
+
+    - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
+    - **Acceptance required**: enabled (default).
+    - **Supported IP address types**: select **IPv4**.
+
+    After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
 
     For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
 
-3. Optional: Test connectivity from a bastion or client inside the same VPC or VNet before starting the migration:
+3. Authorize TiDB Cloud's AWS principal to use your endpoint service. On the endpoint service detail page in the [Amazon VPC console](https://console.aws.amazon.com/vpc/), open the **Allow principals** tab, click **Allow principals**, and add the following ARN:
+
+    ```text
+    arn:aws:iam::886436925895:root
+    ```
+
+    Without this step, TiDB Cloud cannot create the VPC endpoint that connects to your service, and the **Create Private Endpoint for External Services** dialog in TiDB Cloud hangs indefinitely with no error.
+
+    For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
+
+4. Optional: Test connectivity from a bastion or client inside the same VPC before starting the migration:
 
     ```shell
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
+5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
@@ -380,6 +475,79 @@ To add a new private endpoint, take the following steps:
 If you use a provider-native private link or private endpoint, create a [Private Link Connection](/tidb-cloud/serverless-private-link-connection.md) for your source MySQL instance.
 
 </CustomContent>
+<CustomContent plan="premium">
+
+For {{{ .premium }}} instances hosted on AWS, you can use AWS PrivateLink to connect to your source MySQL instance without exposing the database to the public internet. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds on the same {{{ .premium }}} instance.
+
+<details>
+<summary> Set up AWS PrivateLink and Private Endpoint for the MySQL source database </summary>
+
+AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you need to create a Network Load Balancer (NLB), publish it as an endpoint service associated with your source MySQL instance, and authorize TiDB Cloud's AWS principal to consume the service.
+
+1. In the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), create an internal NLB with a TCP listener on port `3306` that forwards to a target group containing your database's private IP. Configure the following key settings:
+
+    - **Scheme**: **Internal**. The load balancer stays inside your VPC; only the endpoint service in the next step exposes it to TiDB Cloud.
+    - **VPC**: the same VPC as your RDS or Aurora instance. The form defaults to your account's default VPC, which is rarely where your database resides, so switch the **VPC** dropdown before continuing.
+    - **Availability Zones**: select subnets in **at least two Availability Zones**. An NLB requires multi-AZ for endpoint service availability. If your RDS is single-AZ, you still need a second subnet in a different AZ in the same VPC.
+    - **Listener port**: `3306`. The wizard default is `80`. Change it before you create the listener.
+    - **Target group**: target type **IP addresses**, protocol **TCP**, port **3306**, in the same VPC as your database. You cannot register RDS endpoints directly, so register the database's private IP instead.
+
+        To find your database's private IP, in the [Amazon EC2 console](https://console.aws.amazon.com/ec2/), click **Network Interfaces** in the left navigation pane, and filter by **Description** = `RDSNetworkInterface` and **VPC** = your VPC. Use the **Primary private IPv4 address** shown in the matching network interface.
+
+        > **Note:**
+        >
+        > The RDS private IP can change on failover, maintenance, or storage scaling. For production deployments, see [Access Amazon RDS across VPCs using AWS PrivateLink and Network Load Balancer](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/) in the AWS Database Blog for an automated IP-rotation pattern.
+
+    For detailed instructions, see [Create a Network Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html) in AWS documentation.
+
+2. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), click **Endpoint Services** in the left navigation pane, and click **Create endpoint service**. Configure the following settings:
+
+    - **Load balancer type**: **Network**, and select the NLB created in the previous step. If the **Available load balancers** list is empty, wait until the NLB shows the **Active** state and click the refresh icon next to the list.
+    - **Acceptance required**: enabled (default).
+    - **Supported IP address types**: select **IPv4**.
+
+    After the endpoint service is created, copy the service name for later use. The service name is in the `com.amazonaws.vpce.<region>.vpce-svc-<id>` format, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.
+
+    For detailed instructions, see [Create an endpoint service](https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html) in AWS documentation.
+
+3. Authorize TiDB Cloud's AWS principal to use your endpoint service. On the endpoint service detail page in the [Amazon VPC console](https://console.aws.amazon.com/vpc/), open the **Allow principals** tab, click **Allow principals**, and add the following ARN:
+
+    ```text
+    arn:aws:iam::886436925895:root
+    ```
+
+    Without this step, TiDB Cloud cannot create the VPC endpoint that connects to your service, and the **Create Private Endpoint for External Services** dialog in TiDB Cloud hangs indefinitely with no error.
+
+    For detailed instructions, see [Manage permissions](https://docs.aws.amazon.com/vpc/latest/privatelink/configure-endpoint-service.html#add-remove-permissions) in AWS documentation.
+
+4. Optional: Test connectivity from a bastion or client inside the same VPC before starting the migration:
+
+    ```shell
+    mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
+    ```
+
+5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the AWS console and approve the pending connection request from TiDB Cloud to this private endpoint.
+
+</details>
+
+You can create the private endpoint either on the **Networking** page of your {{{ .premium }}} instance or during Data Migration job creation (see [Step 2](#step-2-configure-the-source-and-target-connections)).
+
+To create a private endpoint from the **Networking** page, take the following steps:
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the overview page of your {{{ .premium }}} instance.
+2. In the left navigation pane, click **Settings** > **Networking**.
+3. In the **AWS Private Endpoint for External Services** section, click **Create Private Endpoint for External Services**.
+4. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
+
+    > **Note:**
+    >
+    > Before clicking **Create**, ensure that you have authorized TiDB Cloud's AWS principal (`arn:aws:iam::886436925895:root`) on your endpoint service in AWS, as described in Step 3 of **Set up AWS PrivateLink and Private Endpoint for the MySQL source database** above. Otherwise, this dialog hangs indefinitely with no error.
+
+5. Click **Create**.
+
+    After the private endpoint becomes available, you can select it when creating a Data Migration job.
+
+</CustomContent>
 
 <CustomContent plan="dedicated">
 
@@ -392,12 +560,22 @@ If you use AWS VPC peering or Google Cloud VPC network peering, see the followin
 
 If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your {{{ .dedicated }}} cluster.
 
 2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+    <CustomContent plan="dedicated">
 
+    You must add [the CIDR of the region where your {{{ .dedicated }}} cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your {{{ .dedicated }}} cluster to the MySQL instance.
+
+    </CustomContent>
+    
+    <CustomContent plan="essential">
+
+    You must add [the CIDR of the region where your {{{ .essential }}} instance is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the inbound rules. Doing so allows the traffic to flow from your {{{ .essential }}} instance to the MySQL instance.
+
+    </CustomContent>
+    
 3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
@@ -412,11 +590,21 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 1. If it is a self-hosted MySQL, you can skip this step and proceed to the next step. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You might need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) developed by Google.
 
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your TiDB cluster.
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your {{{ .dedicated }}} cluster.
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+    <CustomContent plan="dedicated">
+
+    You must add [the CIDR of the region where your {{{ .dedicated }}} cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your {{{ .dedicated }}} cluster to the MySQL endpoint.
+
+    </CustomContent>
+    
+    <CustomContent plan="essential">
+
+    You must add [the CIDR of the region where your {{{ .essential }}} instance is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region) to the ingress firewall rules. This allows the traffic to flow from your {{{ .essential }}} instance to the MySQL endpoint.
+
+    </CustomContent>
 
 </details>
 
@@ -424,7 +612,7 @@ If your MySQL service is in a Google Cloud VPC, take the following steps:
 
 ### Grant required privileges for migration
 
-Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your TiDB Cloud cluster securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
+Before starting migration, you need to set up appropriate database users with the required privileges on both the source and target databases. These privileges enable TiDB Cloud DM to read data from MySQL, replicate changes, and write to your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> securely. Because the migration involves both full data dumps for existing data and binlog replication for incremental changes, your migration user requires specific permissions beyond basic read access.
 
 #### Grant required privileges to the migration user in the source MySQL database
 
@@ -438,18 +626,23 @@ For production workloads, it is recommended to have a dedicated user for data du
 | `RELOAD` | Global | Ensures consistent snapshots during full dump |
 | `REPLICATION SLAVE` | Global | Enables binlog streaming for incremental data migration |
 | `REPLICATION CLIENT` | Global | Provides access to binlog position and server status |
+| `LOCK TABLES` | Tables | Required when the source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted. In this case, DM falls back to `LOCK TABLES` to ensure consistency during full data export. Not required for self-managed MySQL instances where FTWRL is available. |
 
 For example, you can use the following `GRANT` statement in your source MySQL instance to grant corresponding privileges:
 
 ```sql
+-- For self-managed MySQL:
 GRANT SELECT, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
+
+-- For managed MySQL services (such as Amazon RDS and Aurora), also grant the LOCK TABLES privilege:
+GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'dm_source_user'@'%';
 ```
 
-#### Grant required privileges in the target TiDB Cloud cluster
+#### Grant required privileges in the target TiDB Cloud resource
 
-For testing purposes, you can use the `root` account of your TiDB Cloud cluster.
+For testing purposes, you can use the `root` account of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
 
-For production workloads, it is recommended to have a dedicated user for replication in the target TiDB Cloud cluster and grant only the necessary privileges:
+For production workloads, it is recommended to have a dedicated user for replication in the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> and grant only the necessary privileges:
 
 | Privilege | Scope | Purpose |
 |:----------|:------|:--------|
@@ -463,21 +656,17 @@ For production workloads, it is recommended to have a dedicated user for replica
 | `INDEX`  | Tables | Creates and modifies indexes |
 | `CREATE VIEW`  | Views | Creates views used by migration |
 
-For example, you can execute the following `GRANT` statement in your target TiDB Cloud cluster to grant corresponding privileges:
+For example, you can execute the following `GRANT` statement in your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to grant corresponding privileges:
 
 ```sql
-GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON *.* TO 'dm_target_user'@'%';
 ```
 
 ## Step 1: Go to the Data Migration page
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-    > **Tip:**
-    >
-    > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
-
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
 
@@ -508,6 +697,14 @@ On the **Create Migration Job** page, configure the source and target connection
         - **Private Link**: available for AWS and Alibaba Cloud only (recommended for production workloads requiring private connectivity).
 
     </CustomContent>
+    <CustomContent plan="premium">
+
+    - **Connectivity method**: select a connection method for your data source based on your security requirements and cloud provider:
+
+        - **Public**: available for all cloud providers supported by {{{ .premium }}} (recommended for testing and proof-of-concept migrations).
+        - **Private Link**: available for AWS only (recommended for production workloads requiring private connectivity).
+
+    </CustomContent>
 
     <CustomContent plan="dedicated">
 
@@ -515,7 +712,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
         - If **Public IP** or **VPC Peering** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, fill in the following information:
-            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce-svc-xxxxxxxxxxxxxxxxx`) that you created for your RDS or Aurora instance.
+            - **Endpoint Service Name** (available if **Data source** is from AWS): enter the VPC endpoint service name (format: `com.amazonaws.vpce.<region>.vpce-svc-<id>`, for example, `com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`) that you created for your RDS or Aurora instance.
             - **Private Endpoint Resource ID** (available if **Data source** is from Azure): enter the resource ID of your MySQL Flexible Server instance (format: `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`).
 
     </CustomContent>
@@ -525,6 +722,14 @@ On the **Create Migration Job** page, configure the source and target connection
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
         - If **Private Link** is selected, select the private link connection that you created in the [Private link or private endpoint](#private-link-or-private-endpoint) section.
+
+    </CustomContent>
+    <CustomContent plan="premium">
+
+    - Based on the selected **Connectivity method**, do the following:
+
+        - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
+        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
 
     </CustomContent>
 
@@ -561,7 +766,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Fill in the target connection profile.
 
-    - **User Name**: enter the username of the target cluster in TiDB Cloud.
+    - **User Name**: enter the username of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> in TiDB Cloud.
     - **Password**: enter the password of the TiDB Cloud username.
 
 4. Click **Validate Connection and Next** to validate the information you have entered.
@@ -572,13 +777,19 @@ On the **Create Migration Job** page, configure the source and target connection
 
     - If you use **Public IP** or **VPC Peering** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use **Private Link** as the connectivity method, you are prompted to accept the endpoint request:
-        - For AWS: go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
+        - For AWS: in the [AWS VPC console](https://console.aws.amazon.com/vpc/home), switch to the AWS region where you created the endpoint service, click **Endpoint services**, and accept the endpoint request from TiDB Cloud.
         - For Azure: go to the [Azure portal](https://portal.azure.com), search for your MySQL Flexible Server by name, click **Setting** > **Networking** in the left navigation pane, locate the **Private endpoint** section on the right side, and then approve the pending connection request from TiDB Cloud.
 
     </CustomContent>
     <CustomContent plan="essential">
 
     If you use Public IP, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+
+    </CustomContent>
+    <CustomContent plan="premium">
+
+    - If you use **Public** as the connectivity method, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
+    - If you use **Private Link** and the selected private endpoint has not yet been accepted in AWS, in the [AWS VPC console](https://console.aws.amazon.com/vpc/home), switch to the AWS region where you created the endpoint service, select **Endpoint services**, and accept the endpoint connection request from TiDB Cloud.
 
     </CustomContent>
 
@@ -596,6 +807,12 @@ In the **Choose migration job type** step, you can choose to migrate both existi
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+In the **Migration Type** step, you can choose **Full + Incremental** to migrate both existing data and incremental data, or **Incremental only** to migrate only incremental data.
+
+</CustomContent>
+
 ### Migrate existing data and incremental data
 
 <CustomContent plan="dedicated">
@@ -610,8 +827,8 @@ You can use **physical mode** or **logical mode** to migrate **existing data** a
 
 > **Note:**
 >
-> - When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
-> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the cluster. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
+> - When you use physical mode, you cannot create a second migration job or import task for the {{{ .dedicated }}} cluster before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .dedicated }}} cluster. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the MySQL source data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the MySQL source database during data export. The following table shows the performance regression of each specification.
 
@@ -628,6 +845,23 @@ Physical mode exports the MySQL source data as fast as possible, so [different s
 To migrate data to TiDB Cloud once and for all, choose both **Full + Incremental** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
 Currently you can only use **logical mode** to migrate **existing data**. This mode exports data from MySQL source databases as SQL statements and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+To migrate data to {{{ .premium }}} once and for all, choose **Full + Incremental**, which ensures data consistency between the source and target databases.
+
+You can use **physical mode** or **logical mode** for **existing data migration**:
+
+- The default mode is **logical mode**. This mode exports data from MySQL source databases as SQL statements and then executes them on the target {{{ .premium }}} instance. In this mode, the target tables can be either empty or non-empty before migration, but performance is slower than physical mode.
+
+- For large datasets, you can choose **physical mode**. This mode uses `IMPORT INTO` on the target {{{ .premium }}} instance for faster loading. Physical mode requires the target tables to be empty before migration. If precheck detects that the selected target tables are not empty, the migration job automatically falls back to logical mode.
+
+> **Note:**
+>
+> - When you use physical mode, you cannot create a second migration job or import task for the {{{ .premium }}} instance before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the {{{ .premium }}} instance. Otherwise, the migration job stops. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 </CustomContent>
 
@@ -685,6 +919,22 @@ If you encounter any problems during the migration, see [Migration errors and so
 
 </CustomContent>
 
+<CustomContent plan="premium">
+
+## Step 6: Monitor the migration progress
+
+After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+
+You can pause or delete a migration job when it is running. If a migration job has failed, you can resume it after solving the problem. You can delete a migration job in any status.
+
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+> **Note:**
+>
+> {{{ .premium }}} automatically manages migration job resources. The worker pool scales up and down based on the number of active migration jobs, so you do not need to choose a specification or perform manual scaling.
+
+</CustomContent>
+
 <CustomContent plan="dedicated">
 
 ## Step 6: Choose a spec and start migration
@@ -725,9 +975,9 @@ When scaling a migration job specification, note the following:
 
 ### Scaling procedure
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
+2. Click the name of your target {{{ .dedicated }}} cluster to go to its overview page, and then click **Data** > **Data Migration** in the left navigation pane.
 
 3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
 

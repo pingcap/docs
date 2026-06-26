@@ -13,7 +13,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 >
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md).
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, see the following documents:
+> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} instance via private endpoint, see the following documents:
 >     - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
 >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
@@ -25,7 +25,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 >
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with AWS, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md).
 > - To learn how to connect to a TiDB Cloud Dedicated cluster via private endpoint with Google Cloud, see [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
-> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} cluster via private endpoint, see [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} instance via private endpoint, see [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 </CustomContent>
 
@@ -61,7 +61,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 ### Step 1. Select a TiDB cluster
 
-1. On the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target TiDB cluster to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection** to open the **Create Azure Private Endpoint Connection** dialog.
 
@@ -77,23 +77,72 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
     >
     > For each TiDB Cloud Dedicated cluster, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-2. Log in to the [Azure portal](https://portal.azure.com/), and then create a private endpoint for your cluster using the copied TiDB Cloud resource ID as follows:
+2. Create the private endpoint by using either the Azure portal or Azure CLI.
 
-    1. In the Azure portal, search for **Private endpoints**, and then select **Private endpoints** in the result.
-    2. On the **Private endpoint** page, click **+ Create**.
-    3. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
-    4. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the TiDB Cloud resource ID to the **Resource ID or alias** field.
-    5. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+<SimpleTab>
+<div label="Use Azure portal">
 
-3. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
+1. Log in to the [Azure portal](https://portal.azure.com/).
+2. Search for **Private endpoints**, and then select **Private endpoints** in the result.
+3. On the **Private endpoint** page, click **+ Create**.
+4. In the **Basics** tab, fill in the project and instance information, and then click **Next: Resource**.
+5. In the **Resource** tab, choose **Connect to an Azure resource by resource ID or alias** as the **connection method**, and paste the copied TiDB Cloud resource ID to the **Resource ID or alias** field.
+6. Continue clicking **Next** to go through the remaining configuration tabs and complete the required settings. Then, click **Create** to create and deploy the private endpoint. It might take a few seconds for Azure to complete the deployment. For more information, see [Create a private endpoint](https://learn.microsoft.com/en-us/azure/private-link/create-private-endpoint-portal?tabs=dynamic-ip#create-a-private-endpoint) in Azure documentation.
+7. After the private endpoint is created and deployed, click **Go to resource**, and then do the following:
 
-     - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
+    - Click **Settings** > **Properties** in the left navigation pane, and copy its **Resource ID** for later use.
 
-         ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
+        ![Azure private endpoint resource ID](/media/tidb-cloud/azure-private-endpoint-resource-id.png)
 
-     - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
+    - Click **Settings** > **DNS configuration** in the left navigation pane, and then copy its **IP address** for later use.
 
-         ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+        ![Azure private endpoint DNS IP](/media/tidb-cloud/azure-private-endpoint-dns-ip.png)
+
+</div>
+<div label="Use Azure CLI">
+
+1. Sign in to Azure CLI and select your subscription:
+
+    ```bash
+    az login
+    az account set --subscription ${your_subscription_id}
+    ```
+
+2. Create the private endpoint by using the TiDB Cloud resource ID that you copied from the **Create Azure Private Endpoint Connection** dialog:
+
+    ```bash
+    az network private-endpoint create \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --vnet-name ${your_vnet_name} \
+      --subnet ${your_subnet_name} \
+      --private-connection-resource-id "${your_tidb_cloud_resource_id}" \
+      --connection-name ${your_private_endpoint_connection_name} \
+      --location ${your_region}
+    ```
+
+3. Get the private endpoint **Resource ID**:
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "id" \
+      --output tsv
+    ```
+
+4. Get the private endpoint **IP address** from DNS configuration:
+
+    ```bash
+    az network private-endpoint show \
+      --name ${your_private_endpoint_name} \
+      --resource-group ${your_resource_group_name} \
+      --query "customDnsConfigs[0].ipAddresses[0]" \
+      --output tsv
+    ```
+
+</div>
+</SimpleTab>
 
 ### Step 3. Accept the endpoint
 

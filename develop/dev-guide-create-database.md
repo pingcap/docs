@@ -12,7 +12,7 @@ This document describes how to create a database using SQL and various programmi
 
 Before creating a database, do the following:
 
-- [Create a {{{ .starter }}} Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Create a {{{ .starter }}} Instance](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 
 ## What is database
@@ -44,7 +44,7 @@ mysql
 
 ## View databases
 
-To view the databases in a cluster, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
+To view the databases, use the [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md) statement.
 
 For example:
 

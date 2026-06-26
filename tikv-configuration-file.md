@@ -512,9 +512,9 @@ Configuration items related to storage.
 
 + When TiKV is started, some space is reserved on the disk as disk protection. When the remaining disk space is less than the reserved space, TiKV restricts some write operations. The reserved space is divided into two parts: 80% of the reserved space is used as the extra disk space required for operations when the disk space is insufficient, and the other 20% is used to store the temporary file. In the process of reclaiming space, if the storage is exhausted by using too much extra disk space, this temporary file serves as the last protection for restoring services.
 + The name of the temporary file is `space_placeholder_file`, located in the `storage.data-dir` directory. When TiKV goes offline because its disk space ran out, if you restart TiKV, the temporary file is automatically deleted and TiKV tries to reclaim the space.
-+ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. When the value of this configuration item is `"0MiB"`, TiKV disables this disk protection feature.
++ When the remaining space is insufficient, TiKV does not create the temporary file. The effectiveness of the protection is related to the size of the reserved space. The size of the reserved space is the larger value between 5% of the disk capacity and this configuration value. If this configuration item is set to `0`, or to a zero value with any supported unit (for example, `0KiB`, `0MiB`, or `0GiB`), TiKV disables this disk protection feature.
 + Default value: `"5GiB"`
-+ Unit: MiB|GiB
++ Unit: B|KB|KiB|MB|MiB|GB|GiB|TB|TiB|PB|PiB
 
 ### `enable-ttl`
 
@@ -1168,7 +1168,7 @@ Configuration items related to Raftstore.
 ### `inspect-kvdb-interval` <span class="version-mark">New in v8.1.2</span>
 
 + The interval and timeout for checking the KV disk during slow node detection in TiKV. If KVDB and RaftDB share the same mount path, this value is overridden by `0` (no detection).
-+ Default value: `2s`
++ Default value: `100ms`. In v8.5.2 and earlier versions, the default value is `2s`.
 
 ### `min-pending-apply-region-count` <span class="version-mark">New in v8.0.0</span>
 
@@ -2344,6 +2344,23 @@ Configures the behavior of TiKV automatic compaction.
 
 + Controls whether to force compaction on the bottommost files in RocksDB.
 + Default value: `true`
+
+### `mvcc-read-aware-enabled` <span class="version-mark">New in v8.5.6</span>
+
++ Controls whether to enable MVCC-read-aware compaction. When enabled, TiKV tracks the number of MVCC versions scanned during read requests and uses this information to prioritize compaction for Regions with high MVCC read amplification. This reduces read latency for hot Regions that encounter many stale versions during scans.
++ Default value: `false`
+
+### `mvcc-scan-threshold` <span class="version-mark">New in v8.5.6</span>
+
++ The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
++ Default value: `1000`
++ Minimum value: `0`
+
+### `mvcc-read-weight` <span class="version-mark">New in v8.5.6</span>
+
++ The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. A higher value gives more weight to MVCC read amplification relative to other compaction triggers, such as tombstone density. This configuration item takes effect only when [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) is set to `true`.
++ Default value: `3.0`
++ Minimum value: `0.0`
 
 ## backup
 

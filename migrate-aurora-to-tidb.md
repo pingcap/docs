@@ -48,12 +48,12 @@ Create a new `tidb-lightning-schema.toml` file, copy the following content into 
 [tidb]
 
 # The target TiDB cluster information.
-host = ${host}
-port = ${port}
+host = "${host}"
+port = "${port}"
 user = "${user_name}"
 password = "${password}"
-status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
-pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.
+status-port = "${status-port}"  # The TiDB status port. Usually the port is 10080.
+pd-addr = "${ip}:${port}"       # The cluster PD address. Usually the port is 2379.
 
 [tikv-importer]
 # "local": Use the default Physical Import Mode (the "local" backend).
@@ -117,12 +117,12 @@ Create a new `tidb-lightning-data.toml` configuration file, copy the following c
 [tidb]
 
 # The target TiDB cluster information.
-host = ${host}
-port = ${port}
+host = "${host}"
+port = "${port}"
 user = "${user_name}"
 password = "${password}"
-status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
-pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.
+status-port = "${status-port}"  # The TiDB status port. Usually the port is 10080.
+pd-addr = "${ip}:${port}"       # The cluster PD address. Usually the port is 2379.
 
 [tikv-importer]
 # "local": Use the default Physical Import Mode (the "local" backend).
@@ -141,7 +141,7 @@ sorted-kv-dir = "${path}"
 data-source-dir = "${s3_path}"  # eg: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
-# The expression that parses the parquet file.
+# The expression that parses the Parquet file.
 pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'

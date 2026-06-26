@@ -30,7 +30,11 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     </thead>
     <tbody>
       <tr>
-        <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+        <td>Red Hat Enterprise Linux 9.4 or a later 9.x version</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
+        <td>Red Hat Enterprise Linux 8.6 or a later 8.x version</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
@@ -66,6 +70,10 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     >     - Before upgrading TiDB, make sure to check your operating system version. TiDB v8.4.0 DMR and v8.5.0 removed the support of glibc 2.17, and dropped support and testing with CentOS Linux 7. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on CentOS 7 to v8.4.0 or v8.5.0 will cause the risk of cluster unavailability.
     >     - Starting from v8.5.1, to assist users still using CentOS Linux 7, TiDB resumes the support of glibc 2.17, resumes testing of CentOS Linux 7, and is now compatible with CentOS Linux 7. However, due to the EOL status of CentOS Linux, it is strongly recommended that you review the [official announcements and security guidance](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol) for CentOS Linux 7 and migrate to an operating system supported by TiDB for production use, such as Rocky Linux 9.1 or later.
     > - According to [Red Hat Enterprise Linux Life Cycle](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates), the maintenance support for Red Hat Enterprise Linux 7 ended on June 30, 2024. TiDB ends the support for Red Hat Enterprise Linux 7 starting from the 8.4 DMR version. It is recommended to use Rocky Linux 9.1 or a later version. Upgrading a TiDB cluster on Red Hat Enterprise Linux 7 to v8.4.0 or later will cause the cluster to become unavailable. Before upgrading TiDB, make sure to check your operating system version.
+
+    > **Note:**
+    >
+    > Support for Red Hat Enterprise Linux 9.x starts from [TiUP](https://github.com/pingcap/tiup/releases) v1.16.5.
 
 + For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, because these combinations have not undergone comprehensive and systematic testing, TiDB **does not guarantee enterprise-level production quality**:
 
@@ -201,7 +209,11 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - In the production environment, the TiDB and PD instances can be deployed on the same server. If you have a higher requirement for performance and reliability, try to deploy them separately.
 > - It is strongly recommended to configure TiDB, TiKV, and TiFlash with at least 8 CPU cores each in the production environment. To get better performance, a higher configuration is recommended.
 > - It is recommended to keep the size of TiKV hard disk within 4 TB if you are using PCIe SSDs or within 1.5 TB if you are using regular SSDs.
-> - If you deploy TiKV on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes. Data on local disks might be lost if the TiKV instance crashes in the cloud environment.
+> - If you deploy TiDB clusters on a cloud provider, such as AWS, Google Cloud, or Azure, it is recommended to use cloud disks for TiKV nodes instead of instance store. 
+>
+>     - Data durability is relatively low for instance store volumes. The lifecycle of an instance store is tied to the lifecycle of the virtual machine. Data might be lost if the instance is restarted, stopped, migrated, affected by hardware failures, or undergoes maintenance. Most cloud providers explicitly classify instance store as ephemeral storage. For example, according to [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html): “The data on an instance store volume persists only during the life of the associated instance; if you stop, hibernate, or terminate an instance, any data on instance store volumes is lost.”
+>     - Instance store volumes typically do not support snapshots or cross-node or cross-region replication. As a result, data cannot be quickly recovered in the event of corruption or hardware failure.
+>     - The capacity of an instance store is tied to the instance type and cannot be scaled independently.
 
 Before you deploy TiFlash, note the following items:
 

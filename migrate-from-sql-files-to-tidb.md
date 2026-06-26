@@ -57,11 +57,11 @@ data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql
 
 [tidb]
 # The information of target cluster
-host = ${host}                # For example, 172.16.32.1
-port = ${port}                # For example, 4000
+host = "${host}"              # For example, 172.16.32.1
+port = "${port}"              # For example, 4000
 user = "${user_name}"         # For example, "root"
 password = "${password}"      # For example, "rootroot"
-status-port = ${status-port}  # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
+status-port = "${status-port}"  # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
