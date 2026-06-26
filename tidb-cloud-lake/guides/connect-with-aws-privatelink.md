@@ -16,29 +16,23 @@ PrivateLink-style private endpoints offered by major clouds (AWS PrivateLink, Az
 
 ## How it works
 
-After {{{ .lake }}} approves the cloud account or project you plan to connect, you create a private endpoint that points to the {{{ .lake }}} PrivateLink service for your region. The cloud provider automatically allocates private IP addresses and, once private DNS is enabled, your {{{ .lake }}} domains resolve to those addresses so every session stays on the secure, private path.
+Grab the PrivateLink service name from the **Connect to {{{ .lake }}}** dialog, then create a private endpoint that points to it. The cloud provider automatically allocates private IP addresses and accepts the endpoint, and once private DNS is enabled, your {{{ .lake }}} domains resolve to those addresses so every session stays on the secure, private path.
 
 ## How to setup AWS PrivateLink
 
-1. Provide the AWS account ID you are planning to connect to {{{ .lake }}}:
+1. Verify your VPC settings.
 
-   For example: `123456789012`
+    Ensure `Enable DNS resolution` and `Enable DNS hostnames` are checked.
 
-2. Verify your VPC settings
+2. Get the service name to connect to from the **Connect to {{{ .lake }}}** dialog:
 
-   ![VPC Settings](/media/tidb-cloud-lake/vpc-settings.png)
+    For example: `com.amazonaws.vpce.us-east-2.vpce-svc-0123456789abcdef0`.
 
-   Ensure `Enable DNS resolution` and `Enable DNS hostnames` are checked.
-
-3. Wait for cloud admin adding your account to whitelist, and get a service name for the cluster to connect to:
-
-   For example: `com.amazonaws.vpce.us-east-2.vpce-svc-0123456789abcdef0`
-
-4. Prepare a security group with tcp 443 port open:
+3. Prepare a security group with tcp 443 port open:
 
    ![Security Group](/media/tidb-cloud-lake/security-group.png)
 
-5. Goto AWS Console:
+4. Goto AWS Console:
 
    <https://us-east-2.console.aws.amazon.com/vpcconsole/home?region=us-east-2#Endpoints>:
 
@@ -46,15 +40,13 @@ After {{{ .lake }}} approves the cloud account or project you plan to connect, y
 
    ![Create Endpoint Button](/media/tidb-cloud-lake/create-endpoint-1.png)
 
-   Select the previously created security group `HTTPS`
+   Select the previously created security group `HTTPS`:
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 
-6. Wait for the cloud admin to approve your connection request.
+6. Wait for the PrivateLink creation.
 
-7. Wait for the PrivateLink creation to complete.
-
-8. Modify private DNS name setting:
+7. Modify private DNS name setting:
 
     ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
 
@@ -64,7 +56,7 @@ After {{{ .lake }}} approves the cloud account or project you plan to connect, y
 
     Wait for changes to apply.
 
-9. Verify accessing {{{ .lake }}} via PrivateLink:
+8. Verify accessing {{{ .lake }}} via PrivateLink:
 
     Gateway domain is resolved to VPC internal IP address.
 

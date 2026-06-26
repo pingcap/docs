@@ -110,11 +110,32 @@ Number of lines to be skipped from the beginning of the file.
 
 **Default**: `0`
 
+### TRIM_SPACE (Load Only)
+
+Trim leading and trailing ASCII whitespace from each field value before type conversion.
+
+The trim set is fixed to ASCII whitespace: space, tab, LF, CR, VT, FF.
+
+For CSV, trimming happens after csv-core extracts fields, so quoted field contents are also trimmed.
+
+**Default**: `false`
+
 ### OUTPUT_HEADER (Unload Only)
 
 Include a header row with column names.
 
 **Default**: `false`
+
+### QUOTE_STYLE (Unload Only)
+
+Controls how CSV values are quoted during output.
+
+| Available Values          | Description                                                  |
+|---------------------------|--------------------------------------------------------------|
+| `QUOTE_NOT_NULL` (Default)| Quote every non-NULL field in the CSV output.                |
+| `QUOTE_MINIMAL`           | Quote a field only when required by the CSV output format.   |
+
+**Default**: `QUOTE_NOT_NULL`
 
 ### NAN_DISPLAY
 
@@ -182,6 +203,25 @@ Encoding format for `Geometry` column.
 
 **Default**: `EWKT`
 
+### ENCODING (Load Only)
+
+Character set encoding of the source file. When set to a non-UTF-8 encoding, the file content is transcoded to UTF-8 before field parsing.
+
+Any label recognized by the [Encoding Standard](https://encoding.spec.whatwg.org/) is accepted (e.g., `UTF-8`, `GBK`, `SHIFT_JIS`, `EUC-KR`, `ISO-8859-1`). The label is validated at file format / stage creation time.
+
+**Default**: `UTF-8`
+
+### ENCODING_ERROR_MODE (Load Only)
+
+How to handle bytes that are invalid in the declared encoding (or invalid UTF-8 when encoding is `UTF-8`).
+
+| Available Values   | Description                                                          |
+|--------------------|----------------------------------------------------------------------|
+| `STRICT` (Default) | Abort with an error on the first malformed byte sequence.            |
+| `REPLACE`          | Replace each malformed byte sequence with U+FFFD and continue.       |
+
+**Default**: `STRICT`
+
 ### COMPRESSION
 
 The compression algorithm.
@@ -246,6 +286,46 @@ Delimiter character to separates fields in a record.
 
 **Default**: `\t` (TAB)
 
+### SKIP_HEADER (Load Only)
+
+Same as [the SKIP_HEADER option for CSV](#skip_header-load-only).
+
+### TRIM_SPACE (Load Only)
+
+Same as [the TRIM_SPACE option for CSV](#trim_space-load-only).
+
+### OUTPUT_HEADER (Unload Only)
+
+Same as [the OUTPUT_HEADER option for CSV](#output_header-unload-only).
+
+### NAN_DISPLAY
+
+Same as [the NAN_DISPLAY option for CSV](#nan_display).
+
+### NULL_DISPLAY
+
+Same as [the NULL_DISPLAY option for CSV](#null_display).
+
+### EMPTY_FIELD_AS (Load Only)
+
+Same as [the EMPTY_FIELD_AS option for CSV](#empty_field_as-load-only).
+
+Note: the default for TSV is `FIELD_DEFAULT` (different from CSV which defaults to `NULL`).
+
+**Default**: `FIELD_DEFAULT`
+
+### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only)
+
+Same as [the ERROR_ON_COLUMN_COUNT_MISMATCH option for CSV](#error_on_column_count_mismatch-load-only).
+
+### ENCODING (Load Only)
+
+Same as [the ENCODING option for CSV](#encoding-load-only).
+
+### ENCODING_ERROR_MODE (Load Only)
+
+Same as [the ENCODING_ERROR_MODE option for CSV](#encoding_error_mode-load-only).
+
 ### COMPRESSION
 
 Same as [the COMPRESSION option for CSV](#compression).
@@ -271,6 +351,14 @@ The value that missing field is converted to.
 | `NULL`           | NULL for nullable fields. Error for non-nullable fields. |
 | `FIELD_DEFAULT`  | The default value of the field.                          |
 
+### NULL_IF (Load Only)
+
+A list of strings. When a field value in the source file equals one of these strings, it is loaded as NULL. Matching is exact and case-sensitive.
+
+**Syntax**: `NULL_IF = ('value1', 'value2', ...)`
+
+**Default**: empty (no extra NULL markers)
+
 ### COMPRESSION
 
 Same as [the COMPRESSION option for CSV](#compression).
@@ -285,6 +373,16 @@ The value that missing field is converted to.
 |------------------|----------------------------------------------------------|
 | `ERROR` (Default)| Error.                                                   |
 | `FIELD_DEFAULT`  | The default value of the field.                          |
+
+### NULL_IF (Load Only)
+
+Same as [the NULL_IF option for NDJSON](#null_if-load-only).
+
+### USE_LOGIC_TYPE (Load Only)
+
+When enabled, Parquet logical types (e.g., DATE, TIMESTAMP, DECIMAL annotations) are used to determine the target column type during loading. When disabled, only the physical storage type is considered.
+
+**Default**: `true`
 
 ### COMPRESSION (Unload Only)
 
@@ -343,3 +441,13 @@ The value that missing field is converted to.
 |------------------|----------------------------------------------------------|
 | `ERROR` (Default)| Error.                                                   |
 | `FIELD_DEFAULT`  | The default value of the field.                          |
+
+### NULL_IF (Load Only)
+
+Same as [the NULL_IF option for NDJSON](#null_if-load-only).
+
+### USE_LOGIC_TYPE (Load Only)
+
+When enabled, Avro logical types (e.g., date, timestamp-millis, decimal) are used to determine the target column type during loading. When disabled, only the underlying Avro type is considered.
+
+**Default**: `true`
