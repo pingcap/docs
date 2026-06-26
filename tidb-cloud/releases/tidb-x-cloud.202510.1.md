@@ -86,4 +86,4 @@ Because of the architectural differences between TiDB X and classic TiDB, the Ti
 - [TiKV MVCC In-Memory Engine (IME)](/tikv-in-memory-engine.md)
 - [Follower Read](/follower-read.md)
 
-To learn more about the limitations, see [Limited SQL features on TiDB Cloud](/tidb-cloud/limited-sql-features.md).
+To learn more about the limitations, see [Limited SQL features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
