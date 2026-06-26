@@ -289,7 +289,7 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
     -   `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。
     -   `rollingback` : 操作が失敗し、ロールバックされていることを示します。
     -   `cancelling` : これは、操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ発生します。
-    -   `paused` : 操作が一時停止されていることを示します。この状態は[`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。ADMIN [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
+    -   `paused` : 操作が一時停止されていることを示します。この状態は[`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。[`ADMIN RESUME DDL JOBS RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
