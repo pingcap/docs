@@ -46,7 +46,6 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 | TIME           | `"09:10:00.000000"`            |
 | UNSIGNED INTEGER | `9223372036854776000`        |
 
-
 ## 制限 {#restrictions}
 
 -   現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)ご覧ください。
