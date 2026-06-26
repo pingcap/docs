@@ -141,27 +141,36 @@ formatTypeOptions ::=
   [ ERROR_ON_COLUMN_COUNT_MISMATCH = TRUE | FALSE ]
   [ EMPTY_FIELD_AS = null | string | field_default ]
   [ BINARY_FORMAT = HEX | BASE64 ]
+  [ TRIM_SPACE = TRUE | FALSE ]
+  [ ENCODING = '<encoding_label>' ]
+  [ ENCODING_ERROR_MODE = STRICT | REPLACE ]
 
   /* TSV specific options */
   [ RECORD_DELIMITER = '<character>' ]
   [ FIELD_DELIMITER = '<character>' ]
+  [ TRIM_SPACE = TRUE | FALSE ]
+  [ ENCODING = '<encoding_label>' ]
+  [ ENCODING_ERROR_MODE = STRICT | REPLACE ]
 
   /* NDJSON specific options */
   [ NULL_FIELD_AS = NULL | FIELD_DEFAULT ]
   [ MISSING_FIELD_AS = ERROR | NULL | FIELD_DEFAULT ]
-  [ ALLOW_DUPLICATE_KEYS = TRUE | FALSE ]
+  [ NULL_IF = ('value1', 'value2', ...) ]
 
   /* PARQUET specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
+  [ NULL_IF = ('value1', 'value2', ...) ]
+  [ USE_LOGIC_TYPE = TRUE | FALSE ]
 
   /* ORC specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
 
   /* AVRO specific options */
   [ MISSING_FIELD_AS = ERROR | FIELD_DEFAULT ]
+  [ NULL_IF = ('value1', 'value2', ...) ]
+  [ USE_LOGIC_TYPE = TRUE | FALSE ]
 
 copyOptions ::=
-  [ SIZE_LIMIT = <num> ]
   [ PURGE = <bool> ]
   [ FORCE = <bool> ]
   [ DISABLE_VARIANT_CHECK = <bool> ]
@@ -176,13 +185,6 @@ copyOptions ::=
     ) ]
 ```
 
-> **Note:**
->
-> For remote files, you can use glob patterns to specify multiple files. For example:
->
-> - `ontime_200{6,7,8}.csv` represents `ontime_2006.csv`, `ontime_2007.csv`, `ontime_2008.csv`
-> - `ontime_200[6-8].csv` represents the same files
-
 ## Key Parameters
 
 - **FILES**: Specifies one or more file names (separated by commas) to be loaded.
@@ -191,7 +193,7 @@ copyOptions ::=
 
 ## Format Type Options
 
-The `FILE_FORMAT` parameter supports different file types, each with specific formatting options. Below are the available options for each supported file format:
+The `FILE_FORMAT` parameter supports different file types, each with specific formatting options. The following are the available options for each supported file format. For full details on all options, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
 
 <SimpleTab>
 
@@ -219,6 +221,9 @@ These options are available for all file formats:
 | ERROR_ON_COLUMN_COUNT_MISMATCH | Error if column count doesn't match | TRUE |
 | EMPTY_FIELD_AS | How to handle empty fields | null |
 | BINARY_FORMAT | Encoding format(HEX or BASE64) for binary data | HEX |
+| TRIM_SPACE | Trim leading/trailing ASCII whitespace from fields | FALSE |
+| ENCODING | Character set encoding of source file | UTF-8 |
+| ENCODING_ERROR_MODE | How to handle invalid bytes: STRICT or REPLACE | STRICT |
 
 </div>
 
@@ -228,6 +233,14 @@ These options are available for all file formats:
 |--------|-------------|--------|
 | RECORD_DELIMITER | Character(s) separating records | newline |
 | FIELD_DELIMITER | Character(s) separating fields | tab (\t) |
+| SKIP_HEADER | Number of header lines to skip | 0 |
+| TRIM_SPACE | Trim leading/trailing ASCII whitespace from fields | FALSE |
+| NAN_DISPLAY | String representing NaN values | NaN |
+| NULL_DISPLAY | String representing NULL values | \N |
+| EMPTY_FIELD_AS | How to handle empty fields | FIELD_DEFAULT |
+| ERROR_ON_COLUMN_COUNT_MISMATCH | Error if column count doesn't match | TRUE |
+| ENCODING | Character set encoding of source file | UTF-8 |
+| ENCODING_ERROR_MODE | How to handle invalid bytes: STRICT or REPLACE | STRICT |
 
 </div>
 
@@ -237,7 +250,7 @@ These options are available for all file formats:
 |--------|-------------|--------|
 | NULL_FIELD_AS | How to handle null fields | NULL |
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
-| ALLOW_DUPLICATE_KEYS | Allow duplicate object keys | FALSE |
+| NULL_IF | List of strings treated as NULL | empty |
 
 </div>
 
@@ -246,6 +259,8 @@ These options are available for all file formats:
 | Option | Description | Default |
 |--------|-------------|--------|
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
+| NULL_IF | List of strings treated as NULL | empty |
+| USE_LOGIC_TYPE | Use Parquet logical types for column type inference | TRUE |
 
 </div>
 
@@ -262,6 +277,8 @@ These options are available for all file formats:
 | Option | Description | Default |
 |--------|-------------|--------|
 | MISSING_FIELD_AS | How to handle missing fields | ERROR |
+| NULL_IF | List of strings treated as NULL | empty |
+| USE_LOGIC_TYPE | Use Avro logical types for column type inference | TRUE |
 
 </div>
 </SimpleTab>
@@ -270,7 +287,6 @@ These options are available for all file formats:
 
 | Parameter | Description | Default |
 |-----------|-------------|----------|
-| SIZE_LIMIT | Maximum rows of data to load | `0` (no limit) |
 | PURGE | Purges files after successful load | `false` |
 | FORCE | Allows reloading of duplicate files | `false` (skips duplicates) |
 | DISABLE_VARIANT_CHECK | Replaces invalid JSON with null | `false` (fails on invalid JSON) |
@@ -382,8 +398,7 @@ COPY INTO mytable
         FIELD_DELIMITER = ',',
         RECORD_DELIMITER = '\n',
         SKIP_HEADER = 1
-    )
-    SIZE_LIMIT = 10;
+    );
 ```
 
 **Using IAM Role (Recommended for Production)**

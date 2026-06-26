@@ -44,7 +44,7 @@ Follow this tutorial to upload the sample file to the user stage and load data f
 
     ```sql
     root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @~
-    
+
     ┌───────────────────────────────────────────────┐
     │                 file                │  status │
     │                String               │  String │
@@ -97,13 +97,17 @@ Follow this tutorial to upload the sample file to an internal stage and load dat
 
 2. Verify the created stage:
 
-```sql
-SHOW STAGES;
+    ```sql
+    SHOW STAGES;
 
-name             |stage_type|number_of_files|creator   |comment|
------------------+----------+---------------+----------+-------+
-my_internal_stage|Internal  |              0|'root'@'%'|       |
-```
+    ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │        name       │ stage_type │   storage_type   │        url       │     endpoint     │ has_credentials │   has_encryption_key  │   storage_params  │  file_format_options │      creator     │  created_on │ comment │       owner      │
+    │       String      │   String   │ Nullable(String) │ Nullable(String) │ Nullable(String) │     Boolean     │        Boolean        │ Nullable(Variant) │        Variant       │ Nullable(String) │  Timestamp  │  String │ Nullable(String) │
+    ├───────────────────┼────────────┼──────────────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────────┼───────────────────┼──────────────────────┼──────────────────┼─────────────┼─────────┼──────────────────┤
+    │ my_internal_stage │ Internal   │ NULL             │ NULL             │ NULL             │ false           │ false                 │ NULL              │ {"compression":"Zst… │ 'root'@'%'       │ 2026-06-16  │         │ account_admin    │
+    │                   │            │                  │                  │                  │                 │                       │                   │                      │                  │ 22:21:19…   │         │                  │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ```
 
 ### Step 2: Upload Sample File
 
@@ -111,9 +115,9 @@ my_internal_stage|Internal  |              0|'root'@'%'|       |
 
     ```sql
     root@localhost:8000/default> CREATE STAGE my_internal_stage;
-    
+
     root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_internal_stage
-    
+
     ┌───────────────────────────────────────────────┐
     │                 file                │  status │
     │                String               │  String │
@@ -177,13 +181,13 @@ Follow this tutorial to upload the sample file to an external stage and load dat
 
 2. Verify the created stage:
 
-```sql
-SHOW STAGES;
+    ```sql
+    SHOW STAGES;
 
-name             |stage_type|number_of_files|creator           |comment|
------------------+----------+---------------+------------------+-------+
-my_external_stage|External  |               |'root'@'%'|       |
-```
+    name             |stage_type|creator           |comment|
+    -----------------+----------+------------------+-------+
+    my_external_stage|External  |'root'@'%'|       |
+    ```
 
 ### Step 2: Upload Sample File
 
@@ -191,7 +195,7 @@ my_external_stage|External  |               |'root'@'%'|       |
 
     ```sql
     root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_external_stage
-    
+
     ┌───────────────────────────────────────────────┐
     │                 file                │  status │
     │                String               │  String │
@@ -202,13 +206,13 @@ my_external_stage|External  |               |'root'@'%'|       |
 
 2. Verify the staged file:
 
-```sql
-LIST @my_external_stage;
+    ```sql
+    LIST @my_external_stage;
 
-name         |size|md5                               |last_modified                |creator|
--------------+----+----------------------------------+-----------------------------+-------+
-books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0000|       |
-```
+    name         |size|md5                               |last_modified                |creator|
+    -------------+----+----------------------------------+-----------------------------+-------+
+    books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0000|       |
+    ```
 
 ### Step 3. Copy Data into Table
 
