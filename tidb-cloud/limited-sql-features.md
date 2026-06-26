@@ -9,7 +9,7 @@ TiDB Cloud Dedicated works with almost all workloads that TiDB supports, but the
 
 > **Note:**
 >
-> This document applies only to TiDB Cloud Dedicated clusters. For TiDB X instances, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
+> This document applies only to TiDB Cloud Dedicated. For TiDB Cloud Starter, Essential, and Premium, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
 
 ## Statements
 
