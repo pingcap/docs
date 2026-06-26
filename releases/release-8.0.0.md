@@ -157,7 +157,6 @@ TiDB バージョン: 8.0.0
 
     バージョン8.0.0以降では、セッションレベルのシステム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) `ON`に設定することで、現在のセッションで不可視インデックスを認識させることができます。この機能を使用すると、新しいインデックスを作成し、最初にインデックスを可視化してから、現在のセッションのシステム変数を変更してテストすることで、他のセッションに影響を与えることなくパフォーマンスをテストできます。この改善により、SQLチューニングの安全性が向上し、本番データベースの安定性も向上します。
 
-
     詳細については、 [ドキュメント](/sql-statements/sql-statement-create-index.md#invisible-index)を参照してください。
 
 -   一般ログの別ファイルへの書き込みをサポート [#51248](https://github.com/pingcap/tidb/issues/51248) @[Defined2014](https://github.com/Defined2014)
