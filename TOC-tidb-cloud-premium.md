@@ -457,7 +457,7 @@
     - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/premium/limited-sql-features-premium.md)
+  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
