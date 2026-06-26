@@ -2727,29 +2727,29 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 + Controls whether to enable two-phase RU-based fair scheduling for read requests. When enabled, resource groups whose current RU consumption rate exceeds their historical baseline are placed in a lower-priority phase in the unified read pool queue, protecting sustained workloads from traffic spikes without hard-rejecting requests.
 + Default value: `false`
 
-### `enable-read-admission-control` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `enable-read-admission-control` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Controls whether to enable admission control for read requests. When enabled, read requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
 + Default value: `false`
 
-### `enable-write-admission-control` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `enable-write-admission-control` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Controls whether to enable admission control for write requests. When enabled, write requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
 + Default value: `false`
 
-### `historical-usage-window-mins` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `historical-usage-window-mins` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the size of the sliding time window (in minutes) that TiKV uses to compute per-resource-group historical RU baselines. A larger window smooths out short-term bursts, while a smaller window makes the baseline more responsive to recent usage. Valid range: `2-60`. **You must restart TiKV for changes to this configuration to take effect.**
 + Default value: `15`
 + Unit: minutes
 
-### `baseline-burst-pct` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `baseline-burst-pct` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the percentage of headroom above a resource group's historical RU baseline before TiKV considers the group "over baseline." For example, if you set this value to `20.0`, a resource group must exceed 1.2× its historical RU rate before fair scheduling deprioritizes it or admission control limits it.
 + Default value: `20.0`
 + Unit: percentage (%)
 
-### `admission-max-delayed-count` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `admission-max-delayed-count` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the maximum number of concurrent requests (reads and writes combined) that TiKV can hold in the admission control delay. When this limit is reached, TiKV rejects additional over-baseline requests immediately instead of delaying them. Set this value to `0` for unlimited concurrent delays.
 + Default value: `10000`
