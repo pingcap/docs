@@ -107,9 +107,9 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     リソースグループは、以下の方法で使用できます。
 
-    -   ユーザーレベル。CREATE [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、そのユーザーが新しく作成したセッションは、対応するリソースグループに自動的にバインドされます。
-    -   セッションレベル。SET [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用されるリソースグループを設定します。
-    -   ステートメントレベル。RESOURCE_GROUP [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、現在のステートメントで使用されるリソースグループを設定します。
+    -   ユーザーレベル。[`CREATE USER USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。リソースグループをユーザーにバインドすると、そのユーザーが新しく作成したセッションは、対応するリソースグループに自動的にバインドされます。
+    -   セッションレベル。[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用されるリソースグループを設定します。
+    -   ステートメントレベル。[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、現在のステートメントで使用されるリソースグループを設定します。
 
     詳細については、[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
