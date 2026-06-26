@@ -11,7 +11,7 @@ TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector searc
 
 > **Warning:**
 >
-> TiDB Cloud Lake is currently in **private preview**. Feature availability and service limits might change as we continue to improve the product.
+> TiDB Cloud Lake is currently in **public preview**. Feature availability and service limits might change as we continue to improve the product.
 
 ## Why {{{ .lake }}}?
 
