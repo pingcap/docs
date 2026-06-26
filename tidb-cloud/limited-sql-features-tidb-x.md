@@ -76,7 +76,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER` | Not supported [^3] | Not supported [^3] |
-| `IMPORT INTO` | Supported. Blocks `IMPORT INTO` from a local file path. Blocks `IMPORT INTO` statements that use an S3 `EXTERNAL_ID`. | Not supported |
+| `IMPORT INTO` | Supported, but blocks IMPORT INTO statements that use a local file path or an S3 EXTERNAL_ID. | Not supported |
 | `LOAD DATA INFILE` | Blocks `LOAD DATA LOCAL INFILE` from a local file path. | Only supports `LOAD DATA LOCAL INFILE` |
 | `LOAD STATS` | Not supported | Not supported |
 | `SELECT ... INTO OUTFILE` | Not supported [^4] | Not supported [^4] |
@@ -93,7 +93,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 | Function and operator | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
-| `SLEEP` | No Limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds. |
+| `SLEEP` | No limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) function supports a maximum sleep time of 300 seconds. |
 
 ## System tables
 
