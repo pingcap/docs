@@ -5,7 +5,7 @@ summary: TiDB データベースの SET [GLOBAL|SESSION] <variable> の使用法
 
 # <code>SET [GLOBAL|SESSION] &#x3C;variable></code> {#code-set-global-session-x3c-variable-code}
 
-文`SET [GLOBAL|SESSION]` TiDBの組み込み変数の1つを変更します。これらの変数は、 `SESSION`または`GLOBAL`スコープ、あるいは[ユーザー変数](/user-defined-variables.md)の[システム変数](/system-variables.md)かになります。
+`SET [GLOBAL|SESSION]`文は、TiDBの組み込み変数の1つを変更します。これらの変数は、 `SESSION`または`GLOBAL`スコープ、あるいは[ユーザー変数](/user-defined-variables.md)の[システム変数](/system-variables.md)かになります。
 
 > **警告：**
 >

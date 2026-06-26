@@ -5,7 +5,7 @@ summary: TiDB データベースの FLUSH PRIVILEGES の使用法の概要。
 
 # FLUSH PRIVILEGES {#flush-privileges}
 
-文`FLUSH PRIVILEGES` 、TiDB に権限テーブルからメモリ内の権限コピーを再ロードするよう指示します。 `mysql.user`のようなテーブルを手動で編集した後は、この文を実行する必要があります。ただし、 `GRANT`や`REVOKE`ような権限文を使用した後は、この文を実行する必要はありません。この文を実行するには、 `RELOAD`権限が必要です。
+`FLUSH PRIVILEGES`文は、TiDB に権限テーブルからメモリ内の権限コピーを再ロードするよう指示します。 `mysql.user`のようなテーブルを手動で編集した後は、この文を実行する必要があります。ただし、 `GRANT`や`REVOKE`ような権限文を使用した後は、この文を実行する必要はありません。この文を実行するには、 `RELOAD`権限が必要です。
 
 ## 概要 {#synopsis}
 

@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW INDEXES [FROM|IN] の使用法の概要
 
 # SHOW INDEXES [FROM|IN]{#show-indexes-from-in}
 
-文`SHOW INDEXES [FROM|IN]` 、指定されたテーブルのインデックスを一覧表示します。文`SHOW INDEX [FROM|IN]`と`SHOW KEYS [FROM|IN]`この文のエイリアスであり、MySQLとの互換性のために用意されています。
+`SHOW INDEXES [FROM|IN]`文は、指定されたテーブルのインデックスを一覧表示します。文`SHOW INDEX [FROM|IN]`と`SHOW KEYS [FROM|IN]`この文のエイリアスであり、MySQLとの互換性のために用意されています。
 
 ## 概要 {#synopsis}
 
