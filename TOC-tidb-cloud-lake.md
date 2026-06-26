@@ -1222,4 +1222,8 @@
   - [Editions](/tidb-cloud-lake/guides/editions.md)
   - [Platforms & Regions](/tidb-cloud-lake/guides/platforms-regions.md)
   - [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
+  - Benchmarks
+    - [Data Ingestion Benchmark](/tidb-cloud-lake/guides/benchmark-data-ingestion.md)
+    - [TPC-H SF100 Benchmark](/tidb-cloud-lake/guides/benchmark-tpch-sf100.md)
+    - [TPC-H SF1000 Benchmark](/tidb-cloud-lake/guides/benchmark-tpch-sf1000.md)
   - [Support Services](/tidb-cloud-lake/guides/support-services.md)
