@@ -3,7 +3,7 @@ title: SHOW MASTER STATUS
 summary: TiDB データベースの SHOW MASTER STATUS の使用法の概要。
 ---
 
-# マスターステータスを表示 {#show-master-status}
+# SHOW MASTER STATUS {#show-master-status}
 
 `SHOW MASTER STATUS`ステートメントは、クラスター内の最新の TSO を表示します。
 

@@ -3,7 +3,7 @@ title: SHOW PLACEMENT
 summary: TiDBにおけるSHOW PLACEMENTの使用方法。
 ---
 
-# 番組掲載 {#show-placement}
+# SHOW PLACEMENT {#show-placement}
 
 `SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、正規の形式で表示します。
 
@@ -17,7 +17,7 @@ summary: TiDBにおけるSHOW PLACEMENTの使用方法。
 -   `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -52,5 +52,5 @@ SHOW PLACEMENT;
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [ショーの掲載場所](/sql-statements/sql-statement-show-placement-for.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT FOR](/sql-statements/sql-statement-show-placement-for.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

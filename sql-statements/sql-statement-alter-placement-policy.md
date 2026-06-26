@@ -3,7 +3,7 @@ title: ALTER PLACEMENT POLICY
 summary: TiDBにおけるALTER PLACEMENT POLICYの使用方法。
 ---
 
-# 配置方針の変更 {#alter-placement-policy}
+# ALTER PLACEMENT POLICY {#alter-placement-policy}
 
 `ALTER PLACEMENT POLICY`は、既に作成済みの配置ポリシーを変更するために使用されます。この配置ポリシーを使用するすべてのテーブルとパーティションは自動的に更新されます。
 
@@ -18,7 +18,7 @@ CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterPolicyStmt ::=
@@ -85,6 +85,6 @@ SHOW CREATE PLACEMENT POLICY p1\G
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
--   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
+-   [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

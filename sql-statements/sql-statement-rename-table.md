@@ -3,7 +3,7 @@ title: RENAME TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの RENAME TABLE の使用法の概要。
 ---
 
-# テーブル名の変更 {#rename-table}
+# RENAME TABLE {#rename-table}
 
 このステートメントは、既存のテーブルとビューの名前を変更するために使用され、複数のテーブルの名前を一度に変更したり、データベース間で名前を変更したりすることをサポートします。
 
@@ -138,6 +138,6 @@ TiDBの`RENAME TABLE`文はMySQLと完全に互換性があります。互換性
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
--   [テーブルの変更](/sql-statements/sql-statement-alter-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)
+-   [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)

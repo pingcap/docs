@@ -4,7 +4,7 @@ summary: TiDB データベースの ADMIN CANCEL DDL の使用法の概要。
 category: reference
 ---
 
-# 管理者によるDDLのキャンセル {#admin-cancel-ddl}
+# ADMIN CANCEL DDL {#admin-cancel-ddl}
 
 `ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。3 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 

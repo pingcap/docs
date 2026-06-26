@@ -3,7 +3,7 @@ title: SHOW PLACEMENT FOR
 summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 ---
 
-# ショーの掲載場所 {#show-placement-for}
+# SHOW PLACEMENT FOR {#show-placement-for}
 
 `SHOW PLACEMENT FOR` 、すべての配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションに対して正規の形式で表示します。
 
@@ -17,7 +17,7 @@ summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 -   `INPROGRESS` : PD は現在配置のスケジュールを調整中です。
 -   `SCHEDULED` : PD は配置を正常にスケジュールしました。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowStmt ::=
@@ -82,5 +82,5 @@ SHOW PLACEMENT FOR TABLE t3 PARTITION p1\G
 ## 関連項目 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置ポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)

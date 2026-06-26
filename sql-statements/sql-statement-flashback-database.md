@@ -3,7 +3,7 @@ title: FLASHBACK DATABASE
 summary: TiDB データベースでの FLASHBACK DATABASE の使用方法を学習します。
 ---
 
-# フラッシュバックデータベース {#flashback-database}
+# FLASHBACK DATABASE {#flashback-database}
 
 TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されました。3 `FLASHBACK DATABASE`使用すると、ガベージコレクション (GC) の有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。
 

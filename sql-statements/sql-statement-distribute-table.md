@@ -3,7 +3,7 @@ title: DISTRIBUTE TABLE
 summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法の概要。
 ---
 
-# 分散テーブル<span class="version-mark">（v8.5.4の新機能）</span> {#distribute-table-span-class-version-mark-new-in-v8-5-4-span}
+# DISTRIBUTE TABLE <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#distribute-table-span-class-version-mark-new-in-v8-5-4-span}
 
 > **警告：**
 >
@@ -19,7 +19,7 @@ summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法
 
 `DISTRIBUTE TABLE`ステートメントは、指定されたテーブルのリージョンを再分配および再スケジュールし、テーブルレベルでバランスの取れた分散を実現します。このステートメントを実行することで、リージョンが少数のTiFlashまたは TiKV ノードに集中するのを防ぎ、テーブル内のリージョンの分散が不均一になる問題を解決できます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DistributeTableStmt ::=

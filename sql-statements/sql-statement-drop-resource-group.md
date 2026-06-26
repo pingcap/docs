@@ -11,7 +11,7 @@ summary: TiDBにおけるDROP RESOURCE GROUPの使い方を学びましょう。
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 DropResourceGroupStmt ::=
@@ -83,6 +83,6 @@ MySQL は[リソースグループを削除する](https://dev.mysql.com/doc/ref
 
 ## 関連項目 {#see-also}
 
--   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
--   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 -   [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)

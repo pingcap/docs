@@ -3,7 +3,7 @@ title: ADMIN ALTER DDL JOBS
 summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法の概要。
 ---
 
-# 管理者によるDDLジョブの変更 {#admin-alter-ddl-jobs}
+# ADMIN ALTER DDL JOBS {#admin-alter-ddl-jobs}
 
 > **注記：**
 >
@@ -74,7 +74,7 @@ ADMIN SHOW DDL JOBS 1;
     +--------+---------+------------+-----------+--------------+-----------+----------+-----------+----------------------------+----------------------------+----------------------------+--------+-----------------------+
     1 row in set (0.01 sec)
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AdminAlterDDLStmt ::=

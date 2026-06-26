@@ -3,7 +3,7 @@ title: ADMIN SHOW DDL [JOBS|JOB QUERIES] | TiDB SQL Statement Reference
 summary: TiDB データベースの ADMIN の使用法の概要。
 ---
 
-# 管理者 SHOW DDL [ジョブ|ジョブクエリ] {#admin-show-ddl-jobs-job-queries}
+# ADMIN SHOW DDL [JOBS|JOB QUERIES]{#admin-show-ddl-jobs-job-queries}
 
 `ADMIN SHOW DDL [JOBS|JOB QUERIES]`ステートメントは、実行中の DDL ジョブと最近完了した DDL ジョブに関する情報を表示します。
 

@@ -3,7 +3,7 @@ title: ALTER RANGE
 summary: TiDBにおけるALTER RANGEの使用方法の概要。
 ---
 
-# 範囲変更 {#alter-range}
+# ALTER RANGE {#alter-range}
 
 現在、 `ALTER RANGE`ステートメントは、TiDB の特定の配置ポリシーの範囲を変更する場合にのみ使用できます。
 
@@ -11,7 +11,7 @@ summary: TiDBにおけるALTER RANGEの使用方法の概要。
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 AlterRangeStmt ::=

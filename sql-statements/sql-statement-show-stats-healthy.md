@@ -3,7 +3,7 @@ title: SHOW STATS_HEALTHY
 summary: TiDB データベースの SHOW STATS_HEALTHY の使用法の概要。
 ---
 
-# 統計情報を表示_健康 {#show-stats-healthy}
+# SHOW STATS_HEALTHY {#show-stats-healthy}
 
 `SHOW STATS_HEALTHY`ステートメントは、統計の精度の推定値を示しています。健全性パーセンテージが低いテーブルでは、最適ではないクエリ実行プランが生成される場合があります。
 
@@ -87,5 +87,5 @@ mysql> SHOW STATS_HEALTHY;
 
 ## 参照 {#see-also}
 
--   [分析](/sql-statements/sql-statement-analyze-table.md)
+-   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
 -   [統計入門](/statistics.md)

@@ -3,7 +3,7 @@ title: SHOW CREATE SEQUENCE
 summary: TiDB データベースの SHOW CREATE SEQUENCE の使用法の概要。
 ---
 
-# シーケンスの作成を表示 {#show-create-sequence}
+# SHOW CREATE SEQUENCE {#show-create-sequence}
 
 `SHOW CREATE SEQUENCE` `SHOW CREATE TABLE`と同様にシーケンスの詳細情報を表示します。
 
@@ -39,6 +39,6 @@ SHOW CREATE SEQUENCE seq;
 
 ## 参照 {#see-also}
 
--   [シーケンスを作成](/sql-statements/sql-statement-create-sequence.md)
--   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
--   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
+-   [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
+-   [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)

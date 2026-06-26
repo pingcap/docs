@@ -252,7 +252,7 @@ ORDER BY
 14 rows in set (0.045 sec)
 ```
 
-[文字セットと照合](/character-set-and-collation.md)も参照してください。
+[文字セットと照合順序](/character-set-and-collation.md)も参照してください。
 
 ### インデックスの長さ {#index-length}
 

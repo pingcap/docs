@@ -5128,7 +5128,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
--   この変数は、オプティマイザが[目に見えないインデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。非表示のインデックスは DML ステートメントによって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために非表示のインデックスを選択できます。
+-   この変数は、オプティマイザが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。不可視インデックスは DML ステートメントによって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために不可視インデックスを選択できます。
 
 ### tidb_opt_write_row_id {#tidb-opt-write-row-id}
 
@@ -6530,7 +6530,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `0`
 -   範囲: `[0, 9223372036854775807]`
--   この変数は、各 TiDB ノード上の TTL ジョブにおける`DELETE`ステートメントのレートを制限するために使用されます。この値は、TTL ジョブ内の単一ノードで 1 秒あたりに許可される`DELETE`ステートメントの最大数を表します。この変数が`0`に設定されている場合、制限は適用されません。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノード上の TTL ジョブにおける`DELETE`ステートメントのレートを制限するために使用されます。この値は、TTL ジョブ内の単一ノードで 1 秒あたりに許可される`DELETE`ステートメントの最大数を表します。この変数が`0`に設定されている場合、制限は適用されません。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_delete_batch_size は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-delete-batch-size-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6543,7 +6543,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `100`
 -   範囲: `[1, 10240]`
--   この変数は、TTL ジョブの単一の`DELETE`トランザクションで削除できる最大行数を設定するために使用されます。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブの単一の`DELETE`トランザクションで削除できる最大行数を設定するために使用されます。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_delete_worker_count は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-delete-worker-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6556,7 +6556,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `4`
 -   範囲: `[1, 256]`
--   この変数は、各 TiDB ノードでの TTL ジョブの最大同時実行数を設定するために使用されます。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノードでの TTL ジョブの最大同時実行数を設定するために使用されます。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_enable <span class="version-mark">v6.5.0で追加</span> {#tidb-ttl-job-enable-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6569,7 +6569,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `ON`
 -   タイプ: ブール値
--   この変数は、TTL ジョブを有効にするかどうかを制御するために使用されます。 `OFF`に設定されている場合、TTL 属性を持つすべてのテーブルは、期限切れデータのクリーンアップを自動的に停止します。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブを有効にするかどうかを制御するために使用されます。 `OFF`に設定されている場合、TTL 属性を持つすべてのテーブルは、期限切れデータのクリーンアップを自動的に停止します。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_scan_batch_size は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-scan-batch-size-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6582,7 +6582,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `500`
 -   範囲: `[1, 10240]`
--   この変数は、TTL ジョブの期限切れデータのスキャンに使用される各`LIMIT` `SELECT`値を設定するために使用されます。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、TTL ジョブの期限切れデータのスキャンに使用される各`LIMIT` `SELECT`値を設定するために使用されます。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_scan_worker_count は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-scan-worker-count-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6595,7 +6595,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: `4`
 -   範囲: `[1, 256]`
--   この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_start_time は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-job-schedule-window-start-time-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6608,7 +6608,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 時間
 -   クラスターに保持される: はい
 -   デフォルト値: `00:00 +0000`
--   この変数は、バックグラウンドで実行されるTTLジョブのスケジューリングウィンドウの開始時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さすぎると期限切れデータのクリーンアップが失敗する可能性があるため注意してください。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、バックグラウンドで実行されるTTLジョブのスケジューリングウィンドウの開始時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さすぎると期限切れデータのクリーンアップが失敗する可能性があるため注意してください。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_end_time は<span class="version-mark">v6.5.0 で追加されました。</span> {#tidb-ttl-job-schedule-window-end-time-span-class-version-mark-new-in-v6-5-0-span}
 
@@ -6621,7 +6621,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 時間
 -   クラスターに保持される: はい
 -   デフォルト値: `23:59 +0000`
--   この変数は、バックグラウンドで実行されるTTLジョブのスケジューリングウィンドウの終了時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さすぎると期限切れデータのクリーンアップが失敗する可能性があるため注意してください。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   この変数は、バックグラウンドで実行されるTTLジョブのスケジューリングウィンドウの終了時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さすぎると期限切れデータのクリーンアップが失敗する可能性があるため注意してください。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_running_tasks は<span class="version-mark">v7.0.0 で追加されました。</span> {#tidb-ttl-running-tasks-span-class-version-mark-new-in-v7-0-0-span}
 
@@ -6635,7 +6635,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   型: 整数
 -   デフォルト値: `-1`
 -   範囲: `-1`および`[1, 256]`
--   クラスター全体で実行中の TTL タスクの最大数を指定します。 `-1`は、TTL タスクの数が TiKV ノードの数と等しいことを意味します。詳細については、[生きる時が来た](/time-to-live.md)を参照してください。
+-   クラスター全体で実行中の TTL タスクの最大数を指定します。 `-1`は、TTL タスクの数が TiKV ノードの数と等しいことを意味します。詳細については、[存続時間（TTL）](/time-to-live.md)を参照してください。
 
 ### tidb_txn_assertion_level <span class="version-mark">v6.0.0で追加</span> {#tidb-txn-assertion-level-span-class-version-mark-new-in-v6-0-0-span}
 

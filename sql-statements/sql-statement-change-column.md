@@ -3,7 +3,7 @@ title: CHANGE COLUMN | TiDB SQL Statement Reference
 summary: TiDB データベースの CHANGE COLUMN の使用法の概要。
 ---
 
-# 列の変更 {#change-column}
+# CHANGE COLUMN {#change-column}
 
 `ALTER TABLE.. CHANGE COLUMN`のステートメントは、既存のテーブルの列を変更します。変更には、列名の変更と、互換性のあるデータ型への変更の両方が含まれます。
 
@@ -119,8 +119,8 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
--   [列の変更](/sql-statements/sql-statement-modify-column.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+-   [MODIFY COLUMN](/sql-statements/sql-statement-modify-column.md)
