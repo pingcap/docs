@@ -2692,37 +2692,37 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
     + `conservative`: this policy prioritizes ensuring that system resources are fully utilized, allowing low-priority tasks to fully utilize system available resources as needed, and therefore has a greater performance impact on high-priority tasks.
 + Default value: `moderate`.
 
-### `bg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `bg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the CPU utilization percentage threshold at which background task throttling begins. Background tasks are tasks marked with a background resource group, including `import`, `br`, `ddl`, and `stats` task types (see [Background task types](/tidb-resource-control-background-tasks.md#background-parameters)). When CPU utilization reaches this value, TiKV starts to reduce the resource budget allocated to background tasks. The budget scales linearly from the configured limit down to a minimum floor of 1 CPU core as CPU utilization increases from this threshold toward [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
 + Default value: `60.0`
 + Unit: percentage (%)
 
-### `fg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `fg-cpu-throttle-threshold` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the CPU utilization percentage threshold above which foreground traffic protection is fully activated. When CPU utilization reaches this value, background tasks are completely throttled to their minimum floor and the background utilization budget is capped at this value. This threshold must be greater than [`bg-cpu-throttle-threshold`](#bg-cpu-throttle-threshold).
 + Default value: `70.0`
 + Unit: percentage (%)
 
-### `bg-compaction-pressure-threshold` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `bg-compaction-pressure-threshold` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the threshold, as a percentage of [`storage.flow-control.soft-pending-compaction-bytes-limit`](#soft-pending-compaction-bytes-limit), at which background write I/O throttling begins. Below this threshold, background write I/O increases toward [`bg-write-io-ceiling`](#bg-write-io-ceiling). At or above this threshold, TiKV scales background write I/O linearly down toward [`bg-write-io-floor`](#bg-write-io-floor) as compaction pressure approaches 100%.
 + Default value: `70.0`
 + Unit: percentage (%)
 
-### `bg-write-io-ceiling` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `bg-write-io-ceiling` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the maximum write I/O rate allowed for background tasks when compaction pressure is below [`bg-compaction-pressure-threshold`](#bg-compaction-pressure-threshold).
 + Default value: `"100GB"`
 + Unit: bytes per second
 
-### `bg-write-io-floor` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `bg-write-io-floor` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the minimum write I/O rate guaranteed to background tasks even at maximum compaction pressure. This floor prevents background tasks from being starved completely.
 + Default value: `"10MB"`
 + Unit: bytes per second
 
-### `enable-fair-scheduling` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `enable-fair-scheduling` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Controls whether to enable two-phase RU-based fair scheduling for read requests. When enabled, resource groups whose current RU consumption rate exceeds their historical baseline are placed in a lower-priority phase in the unified read pool queue, protecting sustained workloads from traffic spikes without hard-rejecting requests.
 + Default value: `false`
