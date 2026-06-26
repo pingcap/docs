@@ -661,56 +661,6 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
 
-### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
-
-- This variable is used only for internal statistics and is not visible to users.
-
-### password_history <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
-
-### mpp_exchange_compression_mode <span class="version-mark">New in v6.6.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `UNSPECIFIED`
-- Value options: `NONE`, `FAST`, `HIGH_COMPRESSION`, `UNSPECIFIED`
-- This variable is used to specify the data compression mode of the MPP Exchange operator. This variable takes effect when TiDB selects the MPP execution plan with the version number `1`. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB will automatically select the compression mode. Currently, TiDB automatically selects the `FAST` mode.
-    - `NONE`: no data compression is used.
-    - `FAST`: fast mode. The overall performance is good and the compression ratio is less than `HIGH_COMPRESSION`.
-    - `HIGH_COMPRESSION`: the high compression ratio mode.
-
-### mpp_version <span class="version-mark">New in v6.6.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `UNSPECIFIED`
-- Value options: `UNSPECIFIED`, `0`, `1`, `2`
-- This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
-    - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
-    - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
-    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
-
-### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. When this variable is set to a positive integer `N`, the reuse of any password used in the last `N` days is not allowed.
-
 ### max_connections
 
 - Scope: GLOBAL
@@ -748,6 +698,68 @@ For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_exec
 For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint, the maximum execution time of this statement is limited by the hint instead of this variable. The hint can also be used with SQL bindings as described [in the SQL FAQ](https://docs.pingcap.com/tidb/stable/sql-faq).
 
 </CustomContent>
+
+### max_user_connections <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
+- The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
+- If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
+
+### mpp_exchange_compression_mode <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: `UNSPECIFIED`
+- Value options: `NONE`, `FAST`, `HIGH_COMPRESSION`, `UNSPECIFIED`
+- This variable is used to specify the data compression mode of the MPP Exchange operator. This variable takes effect when TiDB selects the MPP execution plan with the version number `1`. The meanings of the variable values are as follows:
+    - `UNSPECIFIED`: means unspecified. TiDB will automatically select the compression mode. Currently, TiDB automatically selects the `FAST` mode.
+    - `NONE`: no data compression is used.
+    - `FAST`: fast mode. The overall performance is good and the compression ratio is less than `HIGH_COMPRESSION`.
+    - `HIGH_COMPRESSION`: the high compression ratio mode.
+
+### mpp_version <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: `UNSPECIFIED`
+- Value options: `UNSPECIFIED`, `0`, `1`, `2`
+- This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
+    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
+    - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
+    - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
+    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
+### password_history <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 4294967295]`
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
+
+### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 4294967295]`
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. When this variable is set to a positive integer `N`, the reuse of any password used in the last `N` days is not allowed.
 
 ### max_prepared_stmt_count
 
