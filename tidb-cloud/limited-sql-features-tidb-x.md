@@ -86,7 +86,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Not supported [^8] | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
-| `PLAN REPLAYER` | Supported | Supported in a different way[^11] |
+| `PLAN REPLAYER` | Supported | Supported, but uses a different file download method [^11] |
 | `time_to_live` | Supported | Not supported |
 
 ## Functions and operators
@@ -359,10 +359,10 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugin is not supported on {{{ .starter }}}, Essential, or Premium.
+[^8]: Plugins are not supported on {{{ .starter }}}, Essential, or Premium.
 
 [^9]: {{{ .starter }}} and {{{ .essential }}} enforce a strong password policy.
 
 [^10]: The variable is read-only on {{{ .starter }}} and {{{ .essential }}}.
 
-[^11]: {{{ .starter }}} and {{{ .essential }}} do not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, {{{ .starter }}} and {{{ .essential }}} generate a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.
+[^11]: {{{ .starter }}} and {{{ .essential }}} do not support downloading the file exported by `PLAN REPLAYER` through `${tidb-server-status-port}` as shown in the [example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information). Instead, {{{ .starter }}} and {{{ .essential }}} generate a [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) for you to download the file. Note that this URL remains valid for 10 hours after generation.

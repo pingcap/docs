@@ -70,7 +70,7 @@ TiDB Cloud Dedicated works with almost all workloads that TiDB supports, but the
 
 | Function and operator | TiDB Cloud Dedicated |
 |:-|:-|
-| `SLEEP` | No Limitation |
+| `SLEEP` | No limitation |
 
 ## System tables
 
