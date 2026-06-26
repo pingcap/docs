@@ -94,11 +94,3 @@ The following are feature lists of {{{ .lake }}} among editions:
 |----------|----------|----------|-----------|
 | Streams for tracking table changes. | ✓ | ✓ | ✓ |
 | Tasks for scheduling the execution of SQL statements, often in conjunction with table streams. | ✓ | ✓ | ✓ |
-
-### Customer Support
-
-| Features | Personal | Business | Dedicated |
-|----------|----------|----------|-----------|
-| Logging and tracking support tickets. | ✓ | ✓ | ✓ |
-| 4/7 coverage and 1-hour response window for Severity 1 issues. | ✓ | ✓ | ✓ |
-| **Response to non-severity-1 issues in hours**. | 8h | 4h | 1h |
