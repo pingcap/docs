@@ -3,7 +3,7 @@ title: LOCK TABLES and UNLOCK TABLES
 summary: TiDB データベースの LOCK TABLES および UNLOCK TABLES の使用法の概要。
 ---
 
-# LOCK TABLES and UNLOCK TABLES {#lock-tables-and-unlock-tables}
+# LOCK TABLES と UNLOCK TABLES {#lock-tables-and-unlock-tables}
 
 > **警告：**
 >
