@@ -1,0 +1,32 @@
+---
+title: MINUS
+summary: Negates a numeric value.
+---
+
+# MINUS
+
+Negates a numeric value.
+
+## Syntax
+
+```sql
+MINUS( <x> )
+```
+
+## Aliases
+
+- [NEG](/tidb-cloud-lake/sql/neg.md)
+- [NEGATE](/tidb-cloud-lake/sql/negate.md)
+- [SUBTRACT](/tidb-cloud-lake/sql/subtract.md)
+
+## Examples
+
+```sql
+SELECT MINUS(PI()), NEG(PI()), NEGATE(PI()), SUBTRACT(PI());
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│     minus(pi())    │      neg(pi())     │    negate(pi())    │   subtract(pi())   │
+├────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+│ -3.141592653589793 │ -3.141592653589793 │ -3.141592653589793 │ -3.141592653589793 │
+└───────────────────────────────────────────────────────────────────────────────────┘
+```

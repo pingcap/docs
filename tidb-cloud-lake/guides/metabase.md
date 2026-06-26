@@ -1,0 +1,83 @@
+---
+title: Metabase
+summary: Metabase is an open-source business intelligence platform. You can use Metabase to ask questions about your data, or embed Metabase in your app to let your customers explore their data on their own.
+---
+
+# Metabase
+
+[Metabase](https://www.metabase.com/) is an open-source business intelligence platform. You can use Metabase to ask questions about your data, or embed Metabase in your app to let your customers explore their data on their own.
+
+{{{ .lake }}} provides a JDBC driver named [Metabase {{{ .lake }}} Driver](https://github.com/databendcloud/metabase-databend-driver/releases/latest), enabling you to connect to Metabase and dashboard your data in {{{ .lake }}} / {{{ .lake }}}. For more information about the Metabase {{{ .lake }}} Driver, refer to <https://github.com/databendcloud/metabase-databend-driver>
+
+## Downloading & Installing Metabase {{{ .lake }}} Driver
+
+To download and install the Metabase {{{ .lake }}} Driver:
+
+1. Create a folder named **plugins** in the directory where the file **metabase.jar** is stored.
+
+    ```bash
+    $ ls
+    metabase.jar
+    $ mkdir plugins
+    ```
+
+2. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake }}} Driver, then save it in the **plugins** folder.
+
+3. To start Metabase, run the following command:
+
+```bash
+java -jar metabase.jar
+```
+
+## Tutorial: Integrating with Metabase
+
+This tutorial guides you through the process of integrating {{{ .lake }}} / {{{ .lake }}} with Metabase using the Metabase {{{ .lake }}} Driver.
+
+### Step 1. Set up Environment
+
+To follow along, you'll need to install Metabase with Docker. Before you begin, make sure that Docker is installed on your system.
+
+For this tutorial, you will integrate with {{{ .lake }}}. Make sure you can log in to your TiDB Cloud account and obtain the connection information for a warehouse. For more details, see [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
+
+### Step 2. Deploy Metabase
+
+Follow these steps to install and deploy Metabase with Docker:
+
+1. Pull the latest Docker image of Metabase from the Docker Hub registry.
+
+    ```bash
+    docker pull metabase/metabase
+    ```
+
+2. Deploy Metabase.
+
+    ```bash
+    docker run  -d -p 3000:3000 --name metabase metabase/metabase
+    ```
+
+3. [Download](https://github.com/databendcloud/metabase-databend-driver/releases/latest) the Metabase {{{ .lake }}} Driver, then import it to the **plugins** folder of the Metabase container in Docker.
+
+4. Restart the Metabase container.
+
+### Step 3. Connect to Metabase
+
+1. Open your web browser, and go to <http://localhost:3000/>.
+
+2. Complete the initial sign-up process. Select **I'll add my data later** in step 3.
+
+    ![Alt text](/media/tidb-cloud-lake/add-later.png)
+
+3. Click on the **gear** icon in the top right, and navigate to **Admin settings** > **Databases** > **Add a database** to create a connection:
+
+    | Parameter                     | {{{ .lake }}}                     |
+    | ----------------------------- | ---------------------------------- |
+    | Database type                 | `Databend`                         |
+    | Host                          | Obtain from connection information |
+    | Port                          | `443`                              |
+    | Username                      | `cloudapp`                         |
+    | Password                      | Obtain from connection information |
+    | Use a secure connection (SSL) | Toggle on                          |
+
+4. Click **Save changes**, then click **Exit admin**.
+
+You're all set! You can now start creating a query and building a dashboard. For more information, please refer to the Metabase documentation: <https://www.metabase.com/docs/latest/index.html>
