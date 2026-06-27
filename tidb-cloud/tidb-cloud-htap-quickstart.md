@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to experience the Hybrid Transactio
 
 ## Before you begin
 
-Before trying the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a {{{ .starter }}} instance, and then import your data (this document takes the **Steam Games Dataset 2021-2025** as an example) into the instance as follows:
+Before trying the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a {{{ .starter }}} instance, and then import your data (this document uses the **Steam Games Dataset 2021-2025** as an example) into the instance as follows:
 
 1. Download the [Steam Games Dataset 2021-2025](https://www.kaggle.com/datasets/jypenpen54534/steam-games-dataset-2021-2025-65k) from Kaggle.
 2. Open the **Import** page for your {{{ .starter }}} instance.
@@ -33,9 +33,9 @@ Before trying the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb
 
 ### Step 1. Replicate the sample data to the columnar storage engine
 
-After a {{{ .starter }}} instance is created, TiDB does not replicate data from TiKV to TiFlash by default. To replicate a target table to TiFlash, use a MySQL client to connect to your {{{ .starter }}} instance and execute a DDL statement. TiDB then creates the specified table replicas in TiFlash.
+After you create a {{{ .starter }}} instance, TiDB does not replicate data from TiKV to TiFlash by default. To replicate a target table to TiFlash, use a MySQL client to connect to your {{{ .starter }}} instance and execute a DDL statement. TiDB then creates the specified table replicas in TiFlash.
 
-For example, to replicate the `games` table (from the **Steam Games Dataset 2021-2025** sample dataset) to TiFlash, execute the following statements:
+For example, to replicate the `games` table (from the **Steam Games Dataset 2021-2025**) to TiFlash, execute the following statements:
 
 ```sql
 USE steam;
@@ -67,7 +67,7 @@ In the result of the preceding statement:
 
 ### Step 2. Query data using HTAP
 
-When the process of replication is completed, you can start to run some queries.
+After the replication completes, you can run queries.
 
 For example, you can check the number of games released every year, as well as the average price and average number of recommendations:
 
@@ -196,7 +196,7 @@ In this step, you can compare the execution statistics between TiKV (row-based s
 
 > **Note:**
 >
-> Because the sample dataset is small and the query in this document is relatively simple, if you have already forced the optimizer to choose TiKV for this query and then run the same query again, TiKV will reuse its cache, so the query might be much faster. If the data is updated frequently, the cache will be missed.
+> Because the sample dataset is small and the query in this document is relatively simple, if you force the optimizer to choose TiKV for this query and then run the same query again, TiKV reuses its cache, which makes the query much faster. If the data is updated frequently, the cache is invalidated.
 
 ## Learn more
 

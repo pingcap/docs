@@ -133,7 +133,7 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 
 ## Step 4: Connect to your {{{ .starter }}} instance
 
-TiDB is highly compatible with the MySQL protocol, so you can connect to it using most MySQL tools, drivers, and ORMs. The following steps use MySQL CLI client `mysql` as an example.
+TiDB is highly compatible with the MySQL protocol, so you can connect to it using most MySQL tools, drivers, and ORMs. The following steps use the MySQL CLI client `mysql` as an example.
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed with connection parameters.
