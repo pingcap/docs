@@ -3,6 +3,7 @@ from __future__ import annotations
 import dataclasses
 from functools import lru_cache
 import json
+import logging
 import os
 import re
 import shlex
@@ -15,6 +16,8 @@ from typing import Any
 
 from .constants import GENERATION_PROMPT_TEMPLATE, GITHUB_ITEM_URL_RE
 from .models import GeneratedNote, RowContext
+
+logger = logging.getLogger(__name__)
 
 
 class AIClient:
@@ -130,6 +133,11 @@ class AzureOpenAIClient(AIClient):
                 "is required when using --ai-provider azure"
             )
         self.client = OpenAI(api_key=key, base_url=base_url, timeout=timeout)
+        if not hasattr(self.client, "responses"):
+            raise ValueError(
+                "The installed OpenAI Python SDK does not support the Responses API. "
+                "Install a newer 'openai' package version before using --ai-provider azure."
+            )
         self.model = model or self.DEFAULT_MODEL
 
     def _is_reasoning_model(self) -> bool:
@@ -142,7 +150,7 @@ class AzureOpenAIClient(AIClient):
             "input": [{"role": "user", "content": prompt}],
             "max_output_tokens": self.MAX_OUTPUT_TOKENS,
         }
-        #print(prompt) This is kept on purpose just in case I need to take a look at the final prompt that was sent to the AI model.
+        logger.debug("Azure OpenAI prompt:\n%s", prompt)
         if not self._is_reasoning_model():
             kwargs["temperature"] = self.TEMPERATURE
         response = self.client.responses.create(**kwargs)

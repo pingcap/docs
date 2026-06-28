@@ -54,14 +54,16 @@ The generator does not create a complete formal release note. It does not genera
 
 - Prepare the AI settings in your environment.
 
-    - If you use `--ai-provider azure` instead, set the following environment variables:
+- If you use `--ai-provider azure` instead, set the following environment variables:
 
     ```bash
     export AZURE_OPENAI_KEY=<your-key>
     export AZURE_OPENAI_BASE_URL=<your-endpoint>
     ```
 
-    - If you use Codex CLI, install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`.
+    The installed `openai` Python package must support the Responses API used by the generator.
+
+- If you use Codex CLI, install and log in to Codex CLI. The default `--ai-command` uses `codex exec`, so the installed Codex CLI must support `exec`, `--sandbox read-only`, `--ephemeral`, `--output-schema`, `--output-last-message`, and `-m <model>`.
 
 ## Typical usage examples
 
@@ -112,7 +114,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 | Option | Required | Default value | Description |
 | --- | --- | --- | --- |
-| `--version <tidb-version>` | Yes | None | Target TiDB version. Used for scope filtering, existing release-note lookup, and the default output file name. |
+| `--version <tidb-version>` | Yes | None | Target TiDB version in `x.y.z` format. Used for scope filtering, existing release-note lookup, and the default output file name. |
 | `--excel <workbook-path>` | Yes | None | Path to the source release note Excel file. The source workbook is not overwritten. The processed workbook is written to `<original-name>_processed.xlsx` (or the path specified by `--output-excel`). |
 | `--releases-dir <releases-dir>` | Yes | None | Path to the existing English release notes directory. Used for historical release note scanning and scope filtering. |
 | `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to process. |
@@ -134,7 +136,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 | Option | Required | Default value | Description |
 | --- | --- | --- | --- |
-| `--version <tidb-version>` | Yes | None | Target TiDB version. Used for the Markdown front matter and default output file name. |
+| `--version <tidb-version>` | Yes | None | Target TiDB version in `x.y.z` format. Used for the Markdown front matter and default output file name. |
 | `--excel <workbook-path>` | Yes | None | Path to the processed Excel workbook (output of the `generate` phase). |
 | `--sheet <sheet-name>` | No | `pr_for_release_note` | Workbook sheet to read entries from. |
 | `--releases-dir <releases-dir>` | Yes | None | Path to the existing English release notes directory (used to determine the default output path). |
@@ -197,6 +199,19 @@ For a patch release such as `8.5.7`, the generator finds the previous patch rele
 
 For an `x.y.0` release, the generator uses `releases/release-timeline.md` and release-branch PR data to avoid including changes that were already shipped in the latest previous major.minor release.
 
+The decision flow is:
+
+1. The general rules still apply first. A row whose `pr_status` is not `merged` is moved out of scope immediately. A row whose `pr_merge_time` is empty or unparsable stays in scope because the generator cannot prove it is out of scope.
+2. The generator finds the latest previously released `x.y.0` entry in `releases/release-timeline.md` whose major.minor is lower than the target version. For example, if the target is `9.0.0` and the latest earlier released `x.y.0` entry in the timeline is `8.5.0`, then `8.5.0` becomes the comparison baseline.
+3. If the PR merge date is on or after that previous `x.y.0` release date, the row stays in scope.
+4. If the PR merge date is earlier than that previous `x.y.0` release date, the generator checks whether the row likely belonged to that previous release line instead:
+    1. It estimates the previous release branch start date from the earliest `created_at` among closed PRs whose base branch is that repo's `release-x.y` branch.
+    2. If `--scope-base-branch-start-date` is provided, that explicit date overrides the estimate.
+    3. If the PR merge date is earlier than the branch start date, the row is moved out of scope.
+    4. If the PR merge date falls between the branch start date and the previous `x.y.0` release date, the generator looks for a cherry-pick PR on that same repository and release branch.
+5. If a matching cherry-pick PR is found and that cherry-pick was merged before the previous `x.y.0` release date, the row is moved out of scope because the change was already shipped there.
+6. If the generator cannot find enough evidence, it keeps the row in scope.
+
 | Condition | Result | Why |
 | --- | --- | --- |
 | The PR was merged on or after the latest previously released `x.y.0` date. | Keep the row. | The PR is newer than that previous release boundary. |
@@ -204,15 +219,38 @@ For an `x.y.0` release, the generator uses `releases/release-timeline.md` and re
 | The PR was merged during the previous release-branch window, and a cherry-pick PR for the previous release branch was merged before that previous release date. | Move the row to `PRs_not_in_scope`. | The change was already included through that cherry-pick. |
 | No earlier-release evidence is found. | Keep the row. | The generator keeps the row when it cannot prove that the change is out of scope. |
 
-The estimated release-branch start date comes from the earliest closed PR that targets the previous release branch. You can override it with `--scope-base-branch-start-date`.
+The estimated release-branch start date comes from the earliest closed PR that targets the previous release branch in the same repository as the current PR. You can override it with `--scope-base-branch-start-date`.
+
+Example timeline for `9.0.0`:
+
+- Assume the latest earlier released `x.y.0` version in `releases/release-timeline.md` is `8.5.0`, published on `2024-12-19`.
+- If a PR was merged on `2025-01-10`, it stays in scope for `9.0.0` immediately because it is newer than the `8.5.0` release date.
+- If a PR was merged on `2024-08-01`, and the estimated `release-8.5` branch start date is `2024-09-15`, it is moved out of scope because it is older than the previous release-branch window.
+- If a PR was merged on `2024-10-20`, it falls inside the `release-8.5` branch window, so the generator checks for a matching cherry-pick PR on that repository's `release-8.5` branch.
+- If that cherry-pick PR was merged before `2024-12-19`, the row is moved out of scope because the change was already shipped in `8.5.0`.
+- If no matching cherry-pick PR is found, or the cherry-pick was merged on or after `2024-12-19`, the row stays in scope for `9.0.0`.
 
 When matching a cherry-pick PR to the original PR, the generator recognizes:
 
+- The release-branch candidate set is built from closed PRs whose base branch is the previous `release-x.y` branch in the same repository as the current PR.
+- For each candidate, the generator searches the PR title, body, head branch name, and PR URL for evidence that it references the original PR.
 - The full original PR URL.
 - A cross-repository reference such as `pingcap/tidb#12345`.
 - A same-repository suffix such as `(#12345)`.
 - A branch or text pattern such as `cherry-pick-12345`.
 - A line that contains `backport`, `cherry-pick`, `original`, `source`, or `from` together with `#12345`.
+
+Supported repositories for `x.y.0` release-branch scope checks:
+
+- `pingcap/tidb`
+- `tikv/tikv`
+- `pingcap/tiflash`
+- `pingcap/ticdc`
+- `tikv/pd`
+- `pingcap/monitoring`
+- `pingcap/tidb-dashboard`
+
+Rows from other repositories can still use the date-based checks, but release-branch start estimation and cherry-pick detection are skipped for them.
 
 ### Historical release note index
 
@@ -451,4 +489,3 @@ The processed workbook is saved to `<source-name>_processed.xlsx`. During AI gen
 - `0` disables checkpoint saves.
 
 Workbook saves are atomic. The generator first writes a temporary file in the target directory and then replaces the processed workbook. If replacement fails after a complete temporary workbook has been written, the error message includes the temporary file path.
-

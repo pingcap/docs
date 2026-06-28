@@ -807,6 +807,8 @@ def generate_notes_for_sheet(
         ]
         for future in as_completed(futures):
             result = future.result()
+            # Keep all openpyxl mutations on the main thread. Worker threads only
+            # compute RowGenerationResult objects.
             apply_generation_result(sheet, header, result, entries_by_row)
             completed += 1
             if checkpoint_callback:
@@ -1261,7 +1263,7 @@ def classify_note_level(note_level: str) -> tuple[str | None, str | None]:
     return note_type, None
 
 
-def classify_note_type_from_text(note: str, issue_type: str) -> str | None:
+def classify_note_type_from_text(note: str, issue_type: str) -> str:
     note_lower = note.lower()
     issue_type_lower = issue_type.lower()
     if "> bug fixes" in note_lower or "> 错误修复" in note_lower:

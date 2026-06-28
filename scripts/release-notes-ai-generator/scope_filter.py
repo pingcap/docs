@@ -14,6 +14,15 @@ from .utils import copy_cell, parse_github_url, str_value
 OUT_OF_SCOPE_SHEET = "PRs_not_in_scope"
 REASON_HEADER = "Reason"
 SCOPE_REQUIRED_HEADERS = {"pr_status", "pr_merge_time", "pr_link"}
+SCOPE_RELEASE_REPOS = {
+    ("pingcap", "tidb"),
+    ("tikv", "tikv"),
+    ("pingcap", "tiflash"),
+    ("pingcap", "ticdc"),
+    ("tikv", "pd"),
+    ("pingcap", "monitoring"),
+    ("pingcap", "tidb-dashboard"),
+}
 
 
 @dataclass(frozen=True)
@@ -32,6 +41,10 @@ class Version:
 
     @property
     def previous_patch_text(self) -> str:
+        if self.patch < 1:
+            raise ValueError(
+                f"Version {self.text} does not have a previous patch version"
+            )
         return f"{self.major}.{self.minor}.{self.patch - 1}"
 
 
@@ -49,7 +62,7 @@ class ScopeContext:
     github: Any
     base_branch_start_date: date | None = None
     timeline: list[TimelineRelease] | None = None
-    release_branch_pulls: dict[str, list[PullInfo]] | None = None
+    release_branch_pulls: dict[tuple[str, str, str], list[PullInfo]] | None = None
 
     def __post_init__(self) -> None:
         if self.timeline is None:
@@ -123,18 +136,54 @@ def copy_header(source_sheet: Any, target_sheet: Any) -> None:
     ensure_reason_header(source_sheet, target_sheet)
 
 
-def ensure_reason_header(source_sheet: Any, target_sheet: Any) -> None:
-    target_sheet.cell(row=1, column=source_sheet.max_column + 1, value=REASON_HEADER)
+def find_header_column(sheet: Any, header_name: str) -> int | None:
+    for column in range(1, sheet.max_column + 1):
+        if str_value(sheet.cell(row=1, column=column).value) == header_name:
+            return column
+    return None
+
+
+def ensure_reason_header(source_sheet: Any, target_sheet: Any) -> int:
+    reason_col = find_header_column(target_sheet, REASON_HEADER)
+    if not reason_col:
+        reason_col = max(source_sheet.max_column, target_sheet.max_column) + 1
+        copy_missing_header_cells(source_sheet, target_sheet)
+        target_sheet.cell(row=1, column=reason_col, value=REASON_HEADER)
+        return reason_col
+
+    while reason_col <= source_sheet.max_column:
+        target_sheet.insert_cols(reason_col)
+        reason_col += 1
+
+    copy_missing_header_cells(source_sheet, target_sheet)
+    return reason_col
+
+
+def copy_missing_header_cells(source_sheet: Any, target_sheet: Any) -> None:
+    for column in range(1, source_sheet.max_column + 1):
+        if not str_value(target_sheet.cell(row=1, column=column).value):
+            copy_cell(
+                source_sheet.cell(row=1, column=column),
+                target_sheet.cell(row=1, column=column),
+            )
 
 
 def append_row_with_reason(source_sheet: Any, target_sheet: Any, row_number: int, reason: str) -> None:
+    reason_col = ensure_reason_header(source_sheet, target_sheet)
     target_row = target_sheet.max_row + 1
+    source_dimension = source_sheet.row_dimensions[row_number]
+    target_dimension = target_sheet.row_dimensions[target_row]
+    target_dimension.height = source_dimension.height
+    target_dimension.hidden = source_dimension.hidden
+    target_dimension.outlineLevel = source_dimension.outlineLevel
+    target_dimension.collapsed = source_dimension.collapsed
+
     for column in range(1, source_sheet.max_column + 1):
         copy_cell(
             source_sheet.cell(row=row_number, column=column),
             target_sheet.cell(row=target_row, column=column),
         )
-    target_sheet.cell(row=target_row, column=source_sheet.max_column + 1, value=reason)
+    target_sheet.cell(row=target_row, column=reason_col, value=reason)
 
 
 def out_of_scope_reason(
@@ -182,17 +231,27 @@ def major_release_out_of_scope_reason(
     if merge_date >= latest_zero.release_date:
         return None
 
-    branch_start = context.base_branch_start_date or estimated_release_branch_start_date(context, latest_zero)
+    pr_link = str_value(sheet.cell(row=row_number, column=header["pr_link"]).value)
+    repo_coords = parse_supported_scope_repo(pr_link)
+    if not repo_coords:
+        return None
+    owner, repo = repo_coords
+
+    branch_start = context.base_branch_start_date or estimated_release_branch_start_date(
+        context,
+        latest_zero,
+        owner,
+        repo,
+    )
     if not branch_start:
         return None
     if merge_date < branch_start:
         return (
-            f"PR merged on {merge_date.isoformat()}, before estimated {latest_zero.version.release_branch} "
-            f"branch start date {branch_start.isoformat()}"
+            f"PR merged on {merge_date.isoformat()}, before estimated {owner}/{repo} "
+            f"{latest_zero.version.release_branch} branch start date {branch_start.isoformat()}"
         )
 
-    pr_link = str_value(sheet.cell(row=row_number, column=header["pr_link"]).value)
-    cherry_pick = find_release_branch_cherry_pick(context, latest_zero, pr_link)
+    cherry_pick = find_release_branch_cherry_pick(context, latest_zero, owner, repo, pr_link)
     if not cherry_pick:
         return None
     cherry_pick_date = parse_date_value(cherry_pick.merged_at)
@@ -207,8 +266,15 @@ def major_release_out_of_scope_reason(
 def estimated_release_branch_start_date(
     context: ScopeContext,
     latest_zero: TimelineRelease,
+    owner: str,
+    repo: str,
 ) -> date | None:
-    branch_pulls = release_branch_pulls(context, latest_zero.version.release_branch)
+    branch_pulls = release_branch_pulls(
+        context,
+        owner,
+        repo,
+        latest_zero.version.release_branch,
+    )
     created_dates = [parse_date_value(pull.created_at) for pull in branch_pulls]
     created_dates = [value for value in created_dates if value]
     return min(created_dates) if created_dates else None
@@ -217,17 +283,19 @@ def estimated_release_branch_start_date(
 def find_release_branch_cherry_pick(
     context: ScopeContext,
     latest_zero: TimelineRelease,
+    owner: str,
+    repo: str,
     pr_link: str,
 ) -> PullInfo | None:
-    try:
-        owner, repo, number = parse_github_url(pr_link, "pull")
-    except ValueError:
-        return None
-    if (owner, repo) != ("pingcap", "tidb"):
-        return None
+    _owner, _repo, number = parse_github_url(pr_link, "pull")
 
     candidates = []
-    for pull in release_branch_pulls(context, latest_zero.version.release_branch):
+    for pull in release_branch_pulls(
+        context,
+        owner,
+        repo,
+        latest_zero.version.release_branch,
+    ):
         haystack = "\n".join([pull.title, pull.body, pull.head_ref, pull.url])
         if references_original_pr(haystack, owner, repo, number, pr_link):
             candidates.append(pull)
@@ -268,16 +336,27 @@ def references_original_pr(
     )
 
 
-def release_branch_pulls(context: ScopeContext, branch: str) -> list[PullInfo]:
+def parse_supported_scope_repo(pr_link: str) -> tuple[str, str] | None:
+    try:
+        owner, repo, _number = parse_github_url(pr_link, "pull")
+    except ValueError:
+        return None
+    if (owner, repo) not in SCOPE_RELEASE_REPOS:
+        return None
+    return owner, repo
+
+
+def release_branch_pulls(context: ScopeContext, owner: str, repo: str, branch: str) -> list[PullInfo]:
     assert context.release_branch_pulls is not None
-    if branch not in context.release_branch_pulls:
-        context.release_branch_pulls[branch] = context.github.list_pulls_for_base(
-            "pingcap",
-            "tidb",
+    cache_key = (owner, repo, branch)
+    if cache_key not in context.release_branch_pulls:
+        context.release_branch_pulls[cache_key] = context.github.list_pulls_for_base(
+            owner,
+            repo,
             branch,
             state="closed",
         )
-    return context.release_branch_pulls[branch]
+    return context.release_branch_pulls[cache_key]
 
 
 def parse_release_timeline(path: Path) -> list[TimelineRelease]:

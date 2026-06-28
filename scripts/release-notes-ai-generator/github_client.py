@@ -230,6 +230,14 @@ class GitHubClient:
                 )
             if len(data) < 100:
                 break
+        else:
+            print(
+                "GitHub pull list may be truncated after "
+                f"{max_pages * 100} PRs for {owner}/{repo} base {base}; "
+                "increase max_pages if cherry-pick detection looks incomplete",
+                file=sys.stderr,
+                flush=True,
+            )
         return pulls
 
     def get_original_author_for_cherry_pick(

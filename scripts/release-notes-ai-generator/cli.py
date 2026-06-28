@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import tempfile
 from pathlib import Path
 
@@ -25,6 +26,8 @@ from .excel_workbook import (
 from .github_client import GitHubClient
 from .markdown_writer import write_release_file
 from .scope_filter import move_prs_not_in_scope, parse_date_value
+
+SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 
 
 def parse_args() -> argparse.Namespace:
@@ -66,7 +69,12 @@ def parse_args() -> argparse.Namespace:
 
 
 def add_generate_args(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--version", required=True, help="Target TiDB version, for example 8.5.7.")
+    parser.add_argument(
+        "--version",
+        required=True,
+        type=parse_tidb_version,
+        help="Target TiDB version in x.y.z format, for example 8.5.7.",
+    )
     parser.add_argument("--excel", required=True, help="Path to the release note Excel workbook.")
     parser.add_argument(
         "--releases-dir",
@@ -92,7 +100,7 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
     )
     parser.add_argument(
         "--ai-model",
-        default="gpt-5.4",
+        default=AzureOpenAIClient.DEFAULT_MODEL,
         help="Model name. Passed to codex exec with -m, or used as the model parameter for Azure OpenAI.",
     )
     parser.add_argument(
@@ -168,7 +176,12 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
 
 
 def add_export_markdown_args(parser: argparse.ArgumentParser) -> None:
-    parser.add_argument("--version", required=True, help="Target TiDB version, for example 8.5.7.")
+    parser.add_argument(
+        "--version",
+        required=True,
+        type=parse_tidb_version,
+        help="Target TiDB version in x.y.z format, for example 8.5.7.",
+    )
     parser.add_argument(
         "--excel",
         required=True,
@@ -337,6 +350,14 @@ def run_export_markdown(args: argparse.Namespace) -> int:
 def validate_positive_int(name: str, value: int) -> None:
     if value < 1:
         raise ValueError(f"{name} must be greater than or equal to 1")
+
+
+def parse_tidb_version(value: str) -> str:
+    if not SEMVER_RE.fullmatch(value):
+        raise argparse.ArgumentTypeError(
+            f"invalid TiDB version {value!r}; expected x.y.z such as 8.5.7"
+        )
+    return value
 
 
 def parse_on_off(value: str) -> str:
