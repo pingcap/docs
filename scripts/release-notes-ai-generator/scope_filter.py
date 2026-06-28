@@ -311,10 +311,12 @@ def latest_released_zero_patch(
     timeline: list[TimelineRelease],
     target_version_text: str,
 ) -> TimelineRelease | None:
+    target = parse_version(target_version_text)
     zero_patch_releases = [
         release
         for release in timeline
-        if release.version.patch == 0 and release.version.text != target_version_text
+        if release.version.patch == 0
+        and (release.version.major, release.version.minor) < (target.major, target.minor)
     ]
     if not zero_patch_releases:
         return None

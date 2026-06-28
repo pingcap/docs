@@ -324,4 +324,8 @@ def find_pr_reference_in_text(
     if same_repo:
         return default_owner, default_repo, same_repo.group("number")
 
+    bare_ref = re.search(r"(?<!\w)#(?P<number>\d+)\b", text or "")
+    if bare_ref:
+        return default_owner, default_repo, bare_ref.group("number")
+
     return None

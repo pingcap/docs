@@ -4,6 +4,7 @@ import dataclasses
 from functools import lru_cache
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -12,7 +13,7 @@ import textwrap
 from pathlib import Path
 from typing import Any
 
-from .constants import GENERATION_PROMPT_TEMPLATE
+from .constants import GENERATION_PROMPT_TEMPLATE, GITHUB_ITEM_URL_RE
 from .models import GeneratedNote, RowContext
 
 
@@ -327,6 +328,28 @@ def validate_ai_response(
                 expected = f"@[{contributor}](https://github.com/{contributor})"
                 if contributor and expected not in release_note:
                     errors.append(f"release_note is missing contributor: {contributor}")
+            extra_links = [
+                match.group()
+                for match in GITHUB_ITEM_URL_RE.finditer(release_note)
+                if match.group() not in expected_links
+            ]
+            if extra_links:
+                errors.append(
+                    f"release_note contains unexpected link(s): {', '.join(extra_links)}"
+                )
+            extra_contributors = [
+                match.group("user")
+                for match in re.finditer(
+                    r"@\[(?P<user>[^\]]+)\]\(https://github\.com/[^)]+\)",
+                    release_note,
+                )
+                if match.group("user") not in contributors
+            ]
+            if extra_contributors:
+                errors.append(
+                    f"release_note contains unexpected contributor(s): "
+                    f"{', '.join(extra_contributors)}"
+                )
 
     if errors:
         return None, errors
