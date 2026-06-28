@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import copy
 import re
 from dataclasses import dataclass
 from datetime import date, datetime
@@ -9,7 +8,7 @@ from typing import Any
 
 from .excel_workbook import get_header
 from .models import PullInfo
-from .utils import parse_github_url, str_value
+from .utils import copy_cell, parse_github_url, str_value
 
 
 OUT_OF_SCOPE_SHEET = "PRs_not_in_scope"
@@ -136,18 +135,6 @@ def append_row_with_reason(source_sheet: Any, target_sheet: Any, row_number: int
             target_sheet.cell(row=target_row, column=column),
         )
     target_sheet.cell(row=target_row, column=source_sheet.max_column + 1, value=reason)
-
-
-def copy_cell(source_cell: Any, target_cell: Any) -> None:
-    target_cell.value = source_cell.value
-    if source_cell.has_style:
-        target_cell._style = copy.copy(source_cell._style)
-    if source_cell.number_format:
-        target_cell.number_format = source_cell.number_format
-    if source_cell.hyperlink:
-        target_cell._hyperlink = copy.copy(source_cell.hyperlink)
-    if source_cell.comment:
-        target_cell.comment = copy.copy(source_cell.comment)
 
 
 def out_of_scope_reason(

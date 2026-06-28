@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from typing import Any, Iterable
 
 from .constants import (
@@ -85,3 +86,15 @@ def str_value(value: Any) -> str:
     if value is None:
         return ""
     return str(value).strip()
+
+
+def copy_cell(source_cell: Any, target_cell: Any) -> None:
+    target_cell.value = source_cell.value
+    if source_cell.has_style:
+        target_cell._style = copy.copy(source_cell._style)
+    if source_cell.number_format:
+        target_cell.number_format = source_cell.number_format
+    if source_cell.hyperlink:
+        target_cell._hyperlink = copy.copy(source_cell.hyperlink)
+    if source_cell.comment:
+        target_cell.comment = copy.copy(source_cell.comment)

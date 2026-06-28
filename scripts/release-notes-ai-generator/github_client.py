@@ -145,11 +145,16 @@ class GitHubClient:
         max_files: int = 40,
         max_patch_chars: int = 1200,
         max_total_chars: int = 20000,
+        max_pages: int = 5,
     ) -> str:
         lines: list[str] = []
         page = 1
         total_chars = 0
+        truncated = False
         while len(lines) < max_files and total_chars < max_total_chars:
+            if page > max_pages:
+                truncated = True
+                break
             files = self.get_api_json(
                 f"/repos/{owner}/{repo}/pulls/{number}/files",
                 params={"per_page": 100, "page": page},
@@ -158,6 +163,7 @@ class GitHubClient:
                 break
             for item in files:
                 if len(lines) >= max_files or total_chars >= max_total_chars:
+                    truncated = True
                     break
                 if not isinstance(item, dict):
                     continue
@@ -179,7 +185,7 @@ class GitHubClient:
             page += 1
         if not lines:
             return "No changed-file information is available."
-        if len(lines) >= max_files:
+        if truncated:
             lines.append("...[file list truncated]")
         return "\n\n".join(lines)
 

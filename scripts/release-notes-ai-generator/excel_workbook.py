@@ -30,6 +30,7 @@ from .models import (
     RowInput,
 )
 from .utils import (
+    copy_cell,
     extract_issue_urls,
     extract_pr_urls,
     normalize_component,
@@ -546,18 +547,6 @@ def append_row_with_reason(
             target_sheet.cell(row=target_row, column=column),
         )
     target_sheet.cell(row=target_row, column=reason_col, value=reason)
-
-
-def copy_cell(source_cell: Any, target_cell: Any) -> None:
-    target_cell.value = source_cell.value
-    if source_cell.has_style:
-        target_cell._style = copy.copy(source_cell._style)
-    if source_cell.number_format:
-        target_cell.number_format = source_cell.number_format
-    if source_cell.hyperlink:
-        target_cell._hyperlink = copy.copy(source_cell.hyperlink)
-    if source_cell.comment:
-        target_cell.comment = copy.copy(source_cell.comment)
 
 
 def apply_bot_author_replacements(
