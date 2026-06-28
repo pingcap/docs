@@ -43,15 +43,10 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 You can store audit logs in the following locations:
 
-- TiDB Cloud
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Google Cloud Storage](https://cloud.google.com/storage)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
-
-### TiDB Cloud
-
-You can store audit logs in TiDB Cloud and download them to your local machine. Audit logs expire and are deleted after 365 days. To request a longer retention period, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Amazon S3
 

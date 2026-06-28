@@ -175,7 +175,8 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## Changefeed billing
 
-Changefeeds are free of charge during the beta phase.
+For existing instances created before July 1st, 2026, Changefeeds are free of charge during the beta phase.
+Starting from July 1st, 2026, Changefeeds will be offered as a billable feature for newly created resources.
 
 ## Changefeed states
 

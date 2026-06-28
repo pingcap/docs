@@ -1,23 +1,23 @@
 ---
-title: Import Local Files to {{{ .starter }}} or Essential
-summary: Learn how to import local files to {{{ .starter }}} or {{{ .essential }}}.
+title: Import Local Files to {{{ .starter }}}
+summary: Learn how to import local files to {{{ .starter }}}.
 ---
 
-# Import Local Files to {{{ .starter }}} or Essential
+# Import Local Files to {{{ .starter }}}
 
-You can import local files to {{{ .starter }}} or {{{ .essential }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your {{{ .starter }}} or Essential instance. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
+You can import local files to {{{ .starter }}} directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your {{{ .starter }}} instance. Using this method, you do not need to provide the cloud storage and credentials. The whole importing process is quick and smooth.
 
 Currently, this method supports importing one CSV file for one task into either an existing empty table or a new table.
 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for {{{ .starter }}} and {{{ .essential }}} instances, not for TiDB Cloud Dedicated clusters.
+- Importing local files is supported only for {{{ .starter }}} instances, not for TiDB Cloud Dedicated clusters.
 - You cannot run more than one import task at the same time.
 
 ## Import local files
 
-1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
+1. Open the **Import** page for your target {{{ .starter }}} instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -25,7 +25,7 @@ Currently, this method supports importing one CSV file for one task into either 
         >
         > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click **Upload a local file** to select and upload the target local file. Note that you can upload only one CSV file of less than 250 MiB for one task. If your local file is larger than 250 MiB, see [How to import a local file larger than 250 MiB?](#how-to-import-a-local-file-larger-than-250-mib).
 
@@ -87,7 +87,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
-To import only some specified columns, you can use the MySQL client to connect your {{{ .starter }}} or Essential instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+To import only some specified columns, you can use the MySQL client to connect your {{{ .starter }}} instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
 
 ```sql
 CREATE TABLE `import_test` (

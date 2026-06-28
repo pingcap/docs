@@ -13,7 +13,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 >
 > To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint, take the following steps:
+To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint with shared model, take the following steps:
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
@@ -52,6 +52,29 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
     >
     > When you connect to a {{{ .starter }}} or {{{ .essential }}} instance, you must include the prefix for your {{{ .starter }}} or Essential instance in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > Your client IP must be in the allowed IP rules of the public endpoint of your {{{ .starter }}} or Essential instance. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
+
+The Essential Connection exclusive model will be rolled out to new users in phases starting July 1, 2026. It supports standalone endpoints, eliminating the need for users to include the previously required account prefix when connecting. To connect to a {{{ .essential }}} instance via public endpoint with exclusive model, take the following steps:
+
+1. Open the overview page of the target instance.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+        > **Tip:**
+        >
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+    2. Click the name of your target instance to go to its overview page.
+
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
+
+4. Click **CA cert** to download CA cert for TLS connection to {{{ .premium }}} instances. The CA cert supports TLS 1.2 by default.
+
+5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
+
 
 ## Disable a public endpoint
 
