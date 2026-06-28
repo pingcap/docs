@@ -91,12 +91,8 @@ def clear_output_columns(
     header: dict[str, int],
     clear_ai: bool = True,
     clear_published: bool = True,
-    start_row: int | None = None,
-    end_row: int | None = None,
 ) -> None:
-    effective_start = start_row if start_row is not None else 2
-    effective_end = end_row if end_row is not None else sheet.max_row
-    for row_number in range(effective_start, effective_end + 1):
+    for row_number in range(2, sheet.max_row + 1):
         if clear_ai:
             sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value = None
             if "ai_note_type" in header:
@@ -370,17 +366,13 @@ def move_not_needed_rows_to_sheet(
     workbook: Any,
     sheet: Any,
     header: dict[str, int],
-    start_row: int | None = None,
-    end_row: int | None = None,
 ) -> int:
     """Move rows where AI determined no release note is needed to a separate sheet."""
     ai_col = header["release_notes_written_by_ai"]
     target_sheet_name = "release_note_not_needed"
 
-    effective_start = start_row if start_row is not None else 2
-    effective_end = end_row if end_row is not None else sheet.max_row
     rows_to_move: list[int] = []
-    for row_number in range(effective_start, effective_end + 1):
+    for row_number in range(2, sheet.max_row + 1):
         ai_value = str_value(sheet.cell(row=row_number, column=ai_col).value)
         if ai_value.startswith(NOT_NEEDED_PREFIX):
             rows_to_move.append(row_number)
@@ -763,15 +755,11 @@ def generate_notes_for_sheet(
     ai_workers: int = 1,
     github_workers: int = 1,
     checkpoint_callback: Callable[[int, int], None] | None = None,
-    start_row: int | None = None,
-    end_row: int | None = None,
 ) -> list[MarkdownEntry]:
     entries_by_row: dict[int, list[MarkdownEntry]] = {}
-    effective_start = start_row if start_row is not None else 2
-    effective_end = end_row if end_row is not None else sheet.max_row
     row_inputs = [
         build_row_input(sheet, header, row_number)
-        for row_number in range(effective_start, effective_end + 1)
+        for row_number in range(2, sheet.max_row + 1)
     ]
     rows_to_generate: list[RowInput] = []
 
@@ -791,27 +779,24 @@ def generate_notes_for_sheet(
             continue
 
         existing_note = str_value(ai_cell.value)
-        if is_reusable_ai_note(existing_note):
-            if is_not_needed_note(existing_note):
-                print(f"Row {row_number}: skipped existing not-needed verdict", flush=True)
-                continue
-            persisted_type = str_value(
-                sheet.cell(row=row_number, column=header["ai_note_type"]).value
-            ) if "ai_note_type" in header else ""
-            note_type = (
-                persisted_type
-                if persisted_type in {"improvement", "bug_fix"}
-                else classify_note_type_from_text(existing_note, row_input.issue_type)
-            )
+        existing_type = str_value(
+            sheet.cell(row=row_number, column=header["ai_note_type"]).value
+        ) if "ai_note_type" in header else ""
+
+        if existing_type in {"bug_fix", "improvement"} and existing_note and not existing_note.startswith("AI_GENERATION_FAILED:"):
             entries_by_row[row_number] = [
                 MarkdownEntry(
-                    note_type or "improvement",
+                    existing_type,
                     component,
                     existing_note,
                     row_input.raw_component,
                 )
             ]
             print(f"Row {row_number}: skipped existing AI release note", flush=True)
+            continue
+
+        if existing_type == "not_needed" and existing_note.startswith(NOT_NEEDED_PREFIX):
+            print(f"Row {row_number}: skipped existing not-needed verdict", flush=True)
             continue
 
         rows_to_generate.append(row_input)
@@ -847,13 +832,9 @@ def generate_notes_for_sheet(
 def generate_notes_without_ai(
     sheet: Any,
     header: dict[str, int],
-    start_row: int | None = None,
-    end_row: int | None = None,
 ) -> list[MarkdownEntry]:
     entries: list[MarkdownEntry] = []
-    effective_start = start_row if start_row is not None else 2
-    effective_end = end_row if end_row is not None else sheet.max_row
-    for row_number in range(effective_start, effective_end + 1):
+    for row_number in range(2, sheet.max_row + 1):
         row_input = build_row_input(sheet, header, row_number)
         dup_text = str_value(sheet.cell(row=row_number, column=header["published_release_notes"]).value)
         if dup_text:
@@ -1003,10 +984,6 @@ def build_row_input(sheet: Any, header: dict[str, int], row_number: int) -> RowI
             sheet.cell(row=row_number, column=header["formated_release_note"]).value
         ),
     )
-
-
-def is_reusable_ai_note(note: str) -> bool:
-    return bool(note) and not note.startswith("AI_GENERATION_FAILED:")
 
 
 def is_not_needed_note(note: str) -> bool:

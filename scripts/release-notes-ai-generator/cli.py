@@ -158,27 +158,6 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
         ),
     )
     parser.add_argument(
-        "--start-row",
-        type=int,
-        default=None,
-        help=(
-            "Excel row number to start processing from (1-indexed, row 1 is the header). "
-            "Use this to resume from a previous interruption. When specified, "
-            "preprocessing steps (sort, merge, scope filter, same-series move) are "
-            "skipped because they should have been completed in the first run. "
-            "Default: process all data rows."
-        ),
-    )
-    parser.add_argument(
-        "--end-row",
-        type=int,
-        default=None,
-        help=(
-            "Excel row number to stop processing at (inclusive, 1-indexed). "
-            "Default: last row in the sheet."
-        ),
-    )
-    parser.add_argument(
         "--output-excel",
         default=None,
         help=(
@@ -238,16 +217,6 @@ def run_generate(args: argparse.Namespace) -> int:
         if not base_branch_start_date:
             raise ValueError("--scope-base-branch-start-date must use YYYY-MM-DD format")
 
-    row_range_specified = args.start_row is not None or args.end_row is not None
-    start_row = args.start_row
-    end_row = args.end_row
-    if start_row is not None and start_row < 2:
-        raise ValueError("--start-row must be >= 2 (row 1 is the header)")
-    if end_row is not None and end_row < 2:
-        raise ValueError("--end-row must be >= 2 (row 1 is the header)")
-    if start_row is not None and end_row is not None and start_row > end_row:
-        raise ValueError("--start-row must be <= --end-row")
-
     try:
         token = load_github_token()
     except ValueError as exc:
@@ -272,57 +241,35 @@ def run_generate(args: argparse.Namespace) -> int:
         raise ValueError(f"Cannot find sheet {args.sheet!r} in {args.excel}")
     sheet = workbook[args.sheet]
 
-    if end_row is not None and end_row > sheet.max_row:
-        print(
-            f"--end-row {end_row} exceeds the last row ({sheet.max_row}); "
-            f"clamping to {sheet.max_row} to avoid materializing blank rows",
-            flush=True,
-        )
-        end_row = sheet.max_row
-
-    if row_range_specified:
-        print(
-            f"Row range specified: processing rows "
-            f"{start_row or 2} to {end_row or sheet.max_row} "
-            f"(skipping preprocessing steps)",
-            flush=True,
-        )
-        header = prepare_sheet_columns(sheet)
-        if args.force_regenerate:
-            clear_output_columns(
-                sheet, header, clear_ai=True, clear_published=False,
-                start_row=start_row, end_row=end_row,
-            )
-    else:
-        if not args.skip_scope_preprocess:
-            move_prs_not_in_scope(
-                workbook,
-                sheet,
-                args.version,
-                Path(args.releases_dir),
-                github,
-                base_branch_start_date=base_branch_start_date,
-            )
-        sort_sheet_rows_by_component(sheet)
-        header = prepare_sheet_columns(sheet)
-        clear_output_columns(sheet, header, clear_ai=args.force_regenerate)
-
-        existing_notes = store_existing_release_notes(Path(args.releases_dir), args.version)
-        move_rows_with_issues_already_in_same_series(
+    if not args.skip_scope_preprocess:
+        move_prs_not_in_scope(
             workbook,
             sheet,
-            header,
-            existing_notes,
             args.version,
-        )
-        update_pr_authors_and_dup_notes(
-            sheet,
-            header,
-            existing_notes,
+            Path(args.releases_dir),
             github,
-            author_workers=args.author_workers,
+            base_branch_start_date=base_branch_start_date,
         )
-        merge_rows_by_issue_and_component(sheet, header)
+    sort_sheet_rows_by_component(sheet)
+    header = prepare_sheet_columns(sheet)
+    clear_output_columns(sheet, header, clear_ai=args.force_regenerate)
+
+    existing_notes = store_existing_release_notes(Path(args.releases_dir), args.version)
+    move_rows_with_issues_already_in_same_series(
+        workbook,
+        sheet,
+        header,
+        existing_notes,
+        args.version,
+    )
+    update_pr_authors_and_dup_notes(
+        sheet,
+        header,
+        existing_notes,
+        github,
+        author_workers=args.author_workers,
+    )
+    merge_rows_by_issue_and_component(sheet, header)
 
     if involve_ai_generation:
         checkpoint_callback = build_checkpoint_callback(
@@ -338,26 +285,11 @@ def run_generate(args: argparse.Namespace) -> int:
             ai_workers=args.ai_workers,
             github_workers=args.github_workers,
             checkpoint_callback=checkpoint_callback,
-            start_row=start_row,
-            end_row=end_row,
         )
     else:
-        generate_notes_without_ai(
-            sheet, header, start_row=start_row, end_row=end_row,
-        )
+        generate_notes_without_ai(sheet, header)
 
-    if row_range_specified:
-        # Moving (deleting) not-needed rows would shift the row numbers of later
-        # rows, breaking the stable-row-number contract that segmented resume
-        # relies on. Leave them in place; they are still excluded from Markdown
-        # because their AI note starts with the not-needed prefix.
-        print(
-            "Row range specified: keeping not-needed rows in place to preserve "
-            "row numbers for resume (they are still excluded from Markdown)",
-            flush=True,
-        )
-    else:
-        move_not_needed_rows_to_sheet(workbook, sheet, header)
+    move_not_needed_rows_to_sheet(workbook, sheet, header)
     save_workbook_safely(workbook, processed_excel_path)
 
     print("Phase 1 (generate) completed.", flush=True)

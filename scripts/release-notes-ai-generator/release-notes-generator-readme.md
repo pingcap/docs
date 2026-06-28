@@ -1,10 +1,10 @@
 # Readme: Release Notes AI Generator
 
-`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) generates English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues in an Excel workbook.
+`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) leverages AI to generate English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues listed in an Excel workbook.
 
 The generator uses a two-phase workflow:
 
-1. **`generate`** (Phase 1): Processes the source Excel workbook — runs preprocessing, calls AI to generate release notes, and writes results back to Excel. Supports row-range arguments (`--start-row` / `--end-row`) for resuming after interruptions.
+1. **`generate`** (Phase 1): Processes the source Excel workbook — runs preprocessing, calls AI to generate release notes, and writes results back to Excel. Automatically skips rows that already have valid AI-generated notes, so re-running after an interruption resumes from where it left off.
 2. **`export-markdown`** (Phase 2): Reads the processed Excel and exports a Markdown release note file. Does not call AI or modify the Excel.
 
 The source workbook is never overwritten. All processing results are written to a processed workbook (`<original-name>_processed.xlsx`).
@@ -93,33 +93,6 @@ python3 -m release-notes-ai-generator generate \
     --releases-dir </path/to/releases-folder>
 ```
 
-### Phase 1: Resume from interruption
-
-If the first run is interrupted (e.g. API quota exhausted), resume from where it left off using `--start-row`:
-
-```bash
-cd scripts
-python3 -m release-notes-ai-generator generate \
-    --version 8.5.7 \
-    --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir ../releases \
-    --ai-provider azure \
-    --start-row 51
-```
-
-You can also limit to a specific range with `--end-row`:
-
-```bash
-python3 -m release-notes-ai-generator generate \
-    --version 8.5.7 \
-    --excel /path/to/release-note-excel_processed.xlsx \
-    --releases-dir ../releases \
-    --ai-provider azure \
-    --start-row 51 --end-row 100
-```
-
-When `--start-row` or `--end-row` is specified, preprocessing steps (sort, merge, scope filter, same-series move) are skipped because they were completed in the first run.
-
 ### Phase 2: Export Markdown from processed Excel
 
 After Phase 1 is fully complete, export the Markdown:
@@ -155,8 +128,6 @@ python3 -m release-notes-ai-generator export-markdown \
 | `--force-regenerate` | No | Disabled | Clear existing AI-generated notes and regenerate all non-duplicate rows. |
 | `--skip-scope-preprocess` | No | Disabled | Skip moving not-in-scope PR rows to the `PRs_not_in_scope` sheet. |
 | `--scope-base-branch-start-date <YYYY-MM-DD>` | No | Estimated from release history | Override the estimated release-m.n branch start date for x.y.0 scope preprocessing. |
-| `--start-row <row>` | No | First data row | Excel row number to start processing from (1-indexed, row 1 is the header). When specified, preprocessing steps are skipped. Use this to resume after an interruption. |
-| `--end-row <row>` | No | Last row | Excel row number to stop processing at (inclusive, 1-indexed). |
 | `--output-excel <path>` | No | `<original-name>_processed.xlsx` | Path for the processed Excel output. |
 
 ### `export-markdown` subcommand options
@@ -176,7 +147,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 - The source Excel file passed to `--excel` is not overwritten (unless `--output-excel` points to the same file, which is useful for resume scenarios).
 - The processed Excel file is written to `<original-name>_processed.xlsx` next to the source workbook, or to the path specified by `--output-excel`.
-- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook. This move is skipped when `--start-row` or `--end-row` is used, so that deleting rows does not shift the row numbers a later segment relies on; such rows stay in the main sheet but are still excluded from Markdown.
+- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook.
 
 **Phase 2 (`export-markdown`):**
 
@@ -323,7 +294,7 @@ Rows are grouped by the raw Excel component, not the normalized Markdown compone
 
 ### Entry generation
 
-With `--involve-ai-generation ON`, the generator calls the configured AI command for non-duplicate rows that do not already have reusable text in `release_notes_written_by_ai`.
+With `--involve-ai-generation ON`, the generator calls the configured AI command for non-duplicate rows that need AI processing (see the skip/reprocess rules below).
 
 The prompt includes:
 
@@ -359,6 +330,18 @@ AI_GENERATION_FAILED: <error>
 Failed rows are not rendered to Markdown.
 
 If `release_notes_written_by_ai` already contains a value and does not start with `AI_GENERATION_FAILED:`, the generator reuses it instead of calling AI again. Use `--force-regenerate` to clear existing AI output and regenerate all non-duplicate rows.
+
+Specifically, the generator uses the following rules to decide whether to skip or reprocess a row:
+
+| `ai_note_type` | `release_notes_written_by_ai` | Action |
+| --- | --- | --- |
+| `bug_fix` or `improvement` | Not empty | Skip (reuse existing AI note). |
+| `not_needed` | Starts with `Release note is not needed:` | Skip (valid not-needed verdict). |
+| `not_needed` | Empty or does not start with `Release note is not needed:` | Reprocess with AI. |
+| Empty | Any value | Reprocess with AI. |
+| Any value | Empty | Reprocess with AI. |
+
+This means re-running the generator after an interruption automatically resumes: rows that were successfully processed retain their results, while incomplete rows are sent to AI again.
 
 With `--involve-ai-generation OFF`, the generator does not call the AI command. For non-duplicate rows, it splits `formated_release_note` into non-empty lines and renders those lines as Markdown entries. The preprocessing pipeline still runs in non-AI mode.
 
