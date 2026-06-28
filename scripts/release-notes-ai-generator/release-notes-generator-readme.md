@@ -395,11 +395,13 @@ This marker lets reviewers trace the generated component back to the workbook va
 
 The generator resolves components in this order:
 
-1. If the raw workbook value is already a known release-note component or alias, use that value.
-2. If the raw workbook value contains multiple comma-separated or newline-separated values, apply the multi-value priority rules.
-3. If the workbook value still cannot be resolved, infer the component from the GitHub repositories in the issue and PR URLs.
-4. If no rule matches, use the normalized raw workbook value.
-5. If the final value is empty, render the entry under `Other`.
+1. If the GitHub PR URL points to a repository with a known product mapping, use that repository as the primary signal.
+2. If no PR repository rule matches, try the GitHub issue URLs in the same way.
+3. Within a repository family, use the raw workbook value only for repo-local specializations. For example, `pingcap/tidb` plus `br` maps to `Backup & Restore (BR)`, and `pingcap/ticdc` plus `dm` maps to `TiDB Data Migration (DM)`.
+4. If repository evidence does not resolve the component, and the raw workbook value is already a known release-note component or alias, use that value.
+5. If the raw workbook value contains multiple comma-separated or newline-separated values, apply the multi-value priority rules.
+6. If no rule matches, use the normalized raw workbook value.
+7. If the final value is empty, render the entry under `Other`.
 
 Direct aliases:
 
@@ -446,7 +448,7 @@ When a workbook cell contains multiple component values, the generator applies t
 3. `TiDB Data Migration (DM)`.
 4. `TiCDC`.
 
-Repository fallback rules:
+Repository-first rules:
 
 | Repository evidence | Markdown component |
 | --- | --- |
@@ -462,6 +464,11 @@ Repository fallback rules:
 | `tidb`, and the raw component contains `dumpling` | `Dumpling` |
 | `tidb`, otherwise | `TiDB` |
 | `tidb-dashboard` | `TiDB` |
+
+Repository evidence has higher priority than raw component aliases. For example:
+
+- If the Excel component is `compute` but the related PR is in `pingcap/tiflash`, the generator maps the row to `TiFlash`.
+- If the Excel component is `pd` but the related PR is in `pingcap/tidb`, the generator maps the row to `TiDB`.
 
 ### Markdown rendering and safe saving
 

@@ -1173,29 +1173,63 @@ def release_component_for_row(sheet: Any, header: dict[str, int], row_number: in
         sheet.cell(row=row_number, column=get_component_col(header)).value
     )
     raw_lower = raw_component.lower()
+    pr_urls = extract_pr_urls(str_value(sheet.cell(row=row_number, column=header["pr_link"]).value))
+    issue_urls = issue_urls_for_row(sheet, header, row_number)
+    repo_release_component = release_component_from_repo_urls(raw_lower, pr_urls, issue_urls)
+
+    if repo_release_component:
+        return repo_release_component
+
     raw_release_component = release_component_from_raw(raw_component)
     if raw_release_component:
         return raw_release_component
 
-    urls = issue_urls_for_row(sheet, header, row_number)
-    urls.extend(extract_pr_urls(str_value(sheet.cell(row=row_number, column=header["pr_link"]).value)))
-    repos = {match.group("repo").lower() for url in urls for match in [GITHUB_ITEM_URL_RE.search(url)] if match}
+    return normalize_component(raw_component)
 
-    if "pd" in repos:
+
+def release_component_from_repo_urls(raw_lower: str, pr_urls: list[str], issue_urls: list[str]) -> str:
+    for repo in repos_from_urls(pr_urls):
+        component = release_component_from_repo_name(raw_lower, repo)
+        if component:
+            return component
+    for repo in repos_from_urls(issue_urls):
+        component = release_component_from_repo_name(raw_lower, repo)
+        if component:
+            return component
+    return ""
+
+
+def repos_from_urls(urls: list[str]) -> list[str]:
+    repos: list[str] = []
+    seen: set[str] = set()
+    for url in urls:
+        match = GITHUB_ITEM_URL_RE.search(url)
+        if not match:
+            continue
+        repo = match.group("repo").lower()
+        if repo in seen:
+            continue
+        seen.add(repo)
+        repos.append(repo)
+    return repos
+
+
+def release_component_from_repo_name(raw_lower: str, repo: str) -> str:
+    if repo == "pd":
         return "PD"
-    if "tikv" in repos:
+    if repo == "tikv":
         return "TiKV"
-    if "tiflash" in repos:
+    if repo == "tiflash":
         return "TiFlash"
-    if "ng-monitoring" in repos:
+    if repo in {"ng-monitoring", "monitoring"}:
         return "TiDB"
-    if "tiup" in repos:
+    if repo == "tiup":
         return "TiUP"
-    if repos.intersection({"tiflow", "ticdc"}):
+    if repo in {"tiflow", "ticdc"}:
         if "dm" in raw_lower and "cdc" not in raw_lower:
             return "TiDB Data Migration (DM)"
         return "TiCDC"
-    if "tidb" in repos:
+    if repo == "tidb":
         if "br" in raw_lower:
             return "Backup & Restore (BR)"
         if "lightning" in raw_lower:
@@ -1203,9 +1237,9 @@ def release_component_for_row(sheet: Any, header: dict[str, int], row_number: in
         if "dumpling" in raw_lower:
             return "Dumpling"
         return "TiDB"
-    if "tidb-dashboard" in repos:
+    if repo == "tidb-dashboard":
         return "TiDB"
-    return normalize_component(raw_component)
+    return ""
 
 
 def release_component_from_raw(raw_component: str) -> str:
