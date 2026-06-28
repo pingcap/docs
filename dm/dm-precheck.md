@@ -66,9 +66,13 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
 * (Mandatory) dump permission of the upstream database
 
-    - SELECT permission on INFORMATION_SCHEMA and dump tables
-    - RELOAD permission if `consistency=flush`
-    - LOCK TABLES permission on the dump tables if `consistency=flush/lock`
+    - `SELECT` permission on `INFORMATION_SCHEMA` and dump tables
+    - `RELOAD` permission if `consistency=flush`
+    - `LOCK TABLES` permission on the dump tables if `consistency=lock`
+
+    > **Note:**
+    >
+    > When `consistency=auto` (the default), DM first tries `FLUSH TABLES WITH READ LOCK` (FTWRL). If FTWRL is unavailable, DM falls back to `LOCK TABLES`. This fallback commonly occurs on managed MySQL services (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, and Google Cloud SQL), where FTWRL is not permitted. In this case, the `LOCK TABLES` privilege is required at runtime, but the precheck does not currently verify this privilege. For the full list of privileges, see [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges).
 
 * (Mandatory) Consistency of upstream MySQL multi-instance sharding tables
 
