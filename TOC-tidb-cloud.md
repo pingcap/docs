@@ -621,16 +621,16 @@
     -   [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
     -   Connected Careサポートサービスの特長
         -   [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
-        -   [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
-        -   Connected: IM Subscription for TiDB Cloud Alerts
+        -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   接続済み： TiDB CloudアラートのIMサブスクリプション
             -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
             -   [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
             -   [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
-        -   Connected: IM Ticket Creation and Update Subscription
+        -   接続済み：IMチケットの作成と更新のサブスクリプション
             -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   Connected: IM Interaction for Support Tickets
+        -   接続済み：サポートチケットのためのインスタントメッセージングによるやり取り
             -   [Slack経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
