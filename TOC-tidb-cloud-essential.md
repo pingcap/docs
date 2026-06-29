@@ -204,8 +204,8 @@
     -   [TiDBでSQLを探求しよう](/basic-sql-operations.md)
     -   SQL言語の構造と構文
         -   属性
-            -   [AUTO_INCREMENT](/auto-increment.md)
-            -   [AUTO_RANDOM](/auto-random.md)
+            -   [自動インクリメント](/auto-increment.md)
+            -   [自動乱数](/auto-random.md)
             -   [_tidb_rowid](/tidb-rowid.md)
             -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
         -   [文字通りの値](/literal-values.md)
@@ -481,7 +481,7 @@
             -   [説明する](/tidb-cloud/ticloud-branch-describe.md)
             -   [リスト](/tidb-cloud/ticloud-branch-list.md)
             -   [シェル](/tidb-cloud/ticloud-branch-shell.md)
-        -   インポート
+        -   輸入
             -   [キャンセル](/tidb-cloud/ticloud-import-cancel.md)
             -   [説明する](/tidb-cloud/ticloud-import-describe.md)
             -   [リスト](/tidb-cloud/ticloud-import-list.md)
@@ -557,9 +557,9 @@
     -   [通知](/tidb-cloud/notifications.md)
     -   [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
 -   サポートプラン
-    -   [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
-    -   [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
-    -   Connected Careサポートサービスの特長
+    -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
+    -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
+    -   コネクテッドケアサポートサービスの特長
         -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
         -   接続済み： TiDB CloudアラートのIMサブスクリプション
             -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
