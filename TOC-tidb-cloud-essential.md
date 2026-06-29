@@ -37,10 +37,6 @@
     - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-  - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [Overview](/tidb-cloud/branch-overview.md)
-    - [Manage Branches](/tidb-cloud/branch-manage.md)
-    - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
   - [Back Up and Restore TiDB Cloud Data](/tidb-cloud/backup-and-restore-serverless.md)
   - [Export Data from TiDB Cloud](/tidb-cloud/serverless-export.md)
   - Use TiFlash for HTAP
@@ -131,7 +127,6 @@
     - [Import Local Files](/tidb-cloud/tidb-cloud-import-local-files.md)
     - [Import Sample Data (SQL Files) from Cloud Storage](/tidb-cloud/import-sample-data-serverless.md)
     - [Import CSV Files from Cloud Storage](/tidb-cloud/import-csv-files-serverless.md)
-    - [Import Parquet Files from Cloud Storage](/tidb-cloud/import-parquet-files-serverless.md)
     - [Import Snapshot Files from Cloud Storage](/tidb-cloud/import-snapshot-files-serverless.md)
     - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)
   - Reference

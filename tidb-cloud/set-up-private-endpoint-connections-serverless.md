@@ -35,7 +35,14 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC settings. They are disabled by default when you create a VPC in the [AWS Management Console](https://console.aws.amazon.com/).
 
-## Set up a private endpoint with AWS (Shared Model)
+## Choose an endpoint model
+
+Depending on your TiDB Cloud plan, choose the appropriate private endpoint model:
+
+- For {{{ .starter }}} instances or for {{{ .essential }}} instances created before July 1, 2026, use the [**endpoint shared model**](#set-up-a-private-endpoint-with-aws-endpoint-shared-model). In this model, a single private endpoint can be shared by multiple {{{ .starter }}} or {{{ .essential }}} instances in the same AWS Region and VPC.
+- For {{{ .essential }}} instances created after July 1, 2026, use the [**endpoint exclusive model**](#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+
+## Set up a private endpoint with AWS (endpoint shared model)
 
 To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint using the shared model, follow these steps:
 
@@ -53,9 +60,7 @@ To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private
 
     > **Note:**
     >
-    > For each VPC in an AWS region, you only need to create one private endpoint. The endpoint can be used by all {{{ .starter }}} or {{{ .essential }}} instances in the same VPC of that AWS region , but cannot be shared across VPCs.
-
-
+    > For each VPC in an AWS region, you only need to create one private endpoint. The endpoint can be used by all {{{ .starter }}} or {{{ .essential }}} instances in the same VPC of that AWS region, but cannot be shared across VPCs.
 
 ### Step 2. Create an AWS interface endpoint
 
@@ -145,8 +150,15 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 >
 > When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, a private endpoint already exists in that VPC. You do not need to create another one for the same private DNS name.
 
-## Set up a private endpoint with AWS (Exclusive Model)
-The Essential Connection exclusive model rolls out to new users in phases starting July 1, 2026. It supports standalone endpoints, which eliminates the need to include the account prefix when connecting. To connect to a {{{ .essential }}} instance via a private endpoint using the exclusive model, take the following steps:
+## Set up a private endpoint with AWS (endpoint exclusive model)
+
+> **Note:**
+>
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created after July 1, 2026 in certain AWS regions. If it is not available for your instance, you can use the [endpoint shared model](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) instead.
+
+In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+
+To connect to a {{{ .essential }}} instance via a private endpoint using the exclusive model, take the following steps:
 
 1. [Select a {{{ .essential }}} instance](#step-1-select-a-essential-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -172,9 +184,10 @@ If you have multiple instances, you need to repeat these steps for each instance
 >
 > For each {{{ .essential }}} instance, the corresponding endpoint service is automatically created 3 to 4 minutes after the instance creation.
 
-If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
+In the connection dialog, if you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
-1. Fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can find these IDs from your [AWS Management Console](https://console.aws.amazon.com/). For multiple subnets, enter the IDs separated by spaces.
+1. In the connection dialog, click **How to Generate VPC Endpoint ID**, and then fill in the **Your VPC ID** and **Your Subnet IDs** fields. You can find these IDs from your [AWS Management Console](https://console.aws.amazon.com/). For multiple subnets, enter the IDs separated by spaces.
+
 2. Click **Generate Command** to get the following endpoint creation command.
 
     ```bash
@@ -281,7 +294,6 @@ After you have accepted the private endpoint connection, you are redirected back
 > **Tip:**
 >
 > If you cannot connect to the instance, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
-
 
 ## Troubleshooting
 
