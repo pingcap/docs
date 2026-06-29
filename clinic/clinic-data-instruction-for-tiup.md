@@ -5,13 +5,13 @@ summary: PingCAP Clinic診断サービスは、 TiUPを使用してTiDBおよび
 
 # PingCAP Clinic診断データ {#pingcap-clinic-diagnostic-data}
 
-このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスタからPingCAP Clinic診断サービス (PingCAP Clinic ) によって収集できる診断データの種類について説明します。また、各データの種類に対応するデータ収集パラメータも示します。1 [Diagクライアント（Diag）を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)コマンドを実行する際に、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
+このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスタからPingCAP Clinic診断サービス (PingCAP Clinic) によって収集できる診断データの種類について説明します。また、各データの種類に対応するデータ収集パラメータも示します。[Diagクライアント（Diag）を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)コマンドを実行する際に、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
 
 PingCAP Clinicによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 クラウドに展開される診断サービスである Clinic Server は、データのストレージの場所に応じて 2 つの独立したサービスを提供します。
 
--   [海外ユーザー向けClinic Server](https://clinic.pingcap.com) ：収集したデータを海外ユーザー向けのClinic Serverにアップロードすると、データはPingCAPがAWS米国リージョンに展開するAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
+-   [国際ユーザー向けClinic Server](https://clinic.pingcap.com) ：収集したデータを国際ユーザー向けのClinic Serverにアップロードすると、データはPingCAPがAWS米国リージョンに展開するAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
 -   [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) ：収集したデータを中国本土のユーザー向けClinic Serverにアップロードすると、データはPingCAPが中国（北京）リージョンに展開するAmazon S3サービスに保存されます。PingCAPは厳格なデータアクセスポリシーを採用しており、承認されたテクニカルサポート担当者のみがデータにアクセスできます。
 
 ## TiDB クラスター {#tidb-clusters}
