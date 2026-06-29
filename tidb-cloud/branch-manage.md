@@ -5,7 +5,7 @@ summary: Learn How to manage TiDB Cloud branches.
 
 # Manage TiDB Cloud Branches
 
-This document describes how to manage branches of your {{{ .starter }}} instance using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
+This document describes how to manage branches of your {{{ .starter }}} instance using the [TiDB Cloud console](https://tidbcloud.com). To manage branches using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
 
 ## Required access
 
@@ -38,7 +38,7 @@ To create a branch, perform the following steps:
 
 5. Click **Create**.
 
-Depending on the data size in your {{{ .starter }}} instance, the branch creation will be completed in a few minutes.
+Depending on the data size in your {{{ .starter }}} instance, branch creation completes in a few minutes.
 
 ## View branches
 

@@ -39,7 +39,7 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 Currently, TiDB Cloud branches are in beta and free of charge.
 
-- For each organization in TiDB Cloud, you can create a maximum of five branches by default across all {{{ .starter }}} instances. The branches of a {{{ .starter }}} instance will be created in the same region as the instance, and you cannot create branches for a {{{ .starter }}} instance that is throttled or larger than 100 GiB.
+- For each organization in TiDB Cloud, you can create a maximum of five branches by default across all {{{ .starter }}} instances. TiDB Cloud creates branches of a {{{ .starter }}} instance in the same region as the instance, and you cannot create branches for a {{{ .starter }}} instance that is throttled or larger than 100 GiB.
 
     > **Note:**
     >

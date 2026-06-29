@@ -87,7 +87,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
-To import only some specified columns, you can use the MySQL client to connect your {{{ .starter }}} instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+To import only some specified columns, you can use the MySQL client to connect to your {{{ .starter }}} instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
 
 ```sql
 CREATE TABLE `import_test` (

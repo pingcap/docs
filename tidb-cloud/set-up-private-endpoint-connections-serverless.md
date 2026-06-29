@@ -37,7 +37,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint with AWS (Shared Model)
 
-To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint with shared model, follow these steps:
+To connect to your {{{ .starter }}} or {{{ .essential }}} instance via a private endpoint using the shared model, follow these steps:
 
 1. [Choose a {{{ .starter }}} or Essential instance](#step-1-choose-a-tidb-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -146,7 +146,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 > When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, a private endpoint already exists in that VPC. You do not need to create another one for the same private DNS name.
 
 ## Set up a private endpoint with AWS (Exclusive Model)
-The Essential Connection exclusive model will be rolled out to new users in phases starting July 1, 2026. It supports standalone endpoints, eliminating the need for users to include the previously required account prefix when connecting. To connect to a {{{ .essential }}} instance via a private endpoint with exclusive model, take the following steps:
+The Essential Connection exclusive model rolls out to new users in phases starting July 1, 2026. It supports standalone endpoints, which eliminates the need to include the account prefix when connecting. To connect to a {{{ .essential }}} instance via a private endpoint using the exclusive model, take the following steps:
 
 1. [Select a {{{ .essential }}} instance](#step-1-select-a-essential-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
@@ -156,7 +156,7 @@ The Essential Connection exclusive model will be rolled out to new users in phas
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
-### Step 1. Select a {{{ .essential}}} instance {#step-1-select-a-essential-instance}
+### Step 1. Select a {{{ .essential }}} instance {#step-1-select-a-essential-instance}
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page of your TiDB Cloud console, click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -217,7 +217,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Tip:**
     >
-    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .essential}}} instance is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > If your service spans across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .essential }}} instance is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 8. In the **Security groups** area, select your security group properly.
 

@@ -306,7 +306,7 @@ ticloud serverless private-link-connection delete -c <cluster-id> --private-link
 </div>
 </SimpleTab>
 
-The Essential Connection exclusive model will be rolled out to new users in phases starting July 1, 2026. It supports standalone endpoints, eliminating the need for users to include the previously required account prefix when connecting. To Create an AWS Endpoint Service private link connection with exclusive model, same Networking page in the **AWS Private Endpoint for External Services** area, click **Create Private Endpoint for External Services**, enter the required information and create.
+The Essential Connection exclusive model rolls out to new users in phases starting July 1, 2026. It supports standalone endpoints, which eliminates the need to include the account prefix when connecting. To create an AWS Endpoint Service private link connection using the exclusive model, on the same **Networking** page, in the **AWS Private Endpoint for External Services** area, click **Create Private Endpoint for External Services**, enter the required information, and then create the connection.
 
 ## See also
 

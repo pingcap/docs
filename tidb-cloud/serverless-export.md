@@ -21,11 +21,11 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 You can export data to the following locations:
 
-- A local file (Only for Starter)
+- A local file (only for {{{ .starter }}})
 - An external storage, including:
 
     - [Amazon S3](https://aws.amazon.com/s3/)
-    - [Google Cloud Storage](https://cloud.google.com/storage) (Only for Starter)
+    - [Google Cloud Storage](https://cloud.google.com/storage) (only for {{{ .starter }}})
     - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
     - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
 
@@ -98,7 +98,7 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format. (Only for Starter)
+- `Parquet`: export data in Parquet format. (only for {{{ .starter }}})
 
 The schema and data are exported according to the following naming conventions:
 

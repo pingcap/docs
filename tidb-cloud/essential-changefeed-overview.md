@@ -175,8 +175,9 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## Changefeed billing
 
-For existing instances created before July 1st, 2026, Changefeeds are free of charge during the beta phase.
-Starting from July 1st, 2026, Changefeeds will be offered as a billable feature for newly created resources.
+For existing instances created before July 1, 2026, changefeeds are free of charge during the beta phase.
+
+Starting July 1, 2026, changefeeds are a billable feature for newly created TiDB Cloud Essential instances.
 
 ## Changefeed states
 
