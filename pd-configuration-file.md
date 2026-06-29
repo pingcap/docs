@@ -543,7 +543,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 >
 > - For versions from v8.1.0 to v8.5.2, TiDB removes the telemetry feature and this configuration item no longer takes effect. It is retained solely for compatibility with earlier versions.
 > - For versions from v8.5.3 to v8.5.6, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
-> - Starting from v8.5.7, TiDB deprecates this configuration item and removes the telemetry feature again.
+> - Starting from v8.5.7, TiDB deprecates this configuration item and the telemetry feature.
 
 + Controls whether to enable telemetry collection in TiDB Dashboard.
 + Default value: `false`
