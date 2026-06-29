@@ -660,13 +660,13 @@ Configuration items related to opentracing.
 
 Configuration items related to opentracing.sampler.
 
-### `type`
+#### `type`
 
 + Specifies the type of the opentracing sampler. The string value is case-insensitive.
 + Default value: `"const"`
 + Value options: `"const"`, `"probabilistic"`, `"ratelimiting"`, `"remote"`
 
-### `param`
+#### `param`
 
 + The parameter of the opentracing sampler.
     - For the `const` type, the value can be `0` or `1`, which indicates whether to enable the `const` sampler.
@@ -675,17 +675,17 @@ Configuration items related to opentracing.sampler.
     - For the `remote` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
 + Default value: `1.0`
 
-### `sampling-server-url`
+#### `sampling-server-url`
 
 + The HTTP URL of the jaeger-agent sampling server.
 + Default value: `""`
 
-### `max-operations`
+#### `max-operations`
 
 + The maximum number of operations that the sampler can trace. If an operation is not traced, the default probabilistic sampler is used.
 + Default value: `0`
 
-### `sampling-refresh-interval`
+#### `sampling-refresh-interval`
 
 + Controls the frequency of polling the jaeger-agent sampling policy.
 + Default value: `0`
@@ -694,22 +694,22 @@ Configuration items related to opentracing.sampler.
 
 Configuration items related to opentracing.reporter.
 
-### `queue-size`
+#### `queue-size`
 
 + The queue size with which the reporter records spans in memory.
 + Default value: `0`
 
-### `buffer-flush-interval`
+#### `buffer-flush-interval`
 
 + The interval at which the reporter flushes the spans in memory to the storage.
 + Default value: `0`
 
-### `log-spans`
+#### `log-spans`
 
 + Determines whether to print the log for all submitted spans.
 + Default value: `false`
 
-### `local-agent-host-port`
+#### `local-agent-host-port`
 
 + The address at which the reporter sends spans to the jaeger-agent.
 + Default value: `""`
@@ -814,7 +814,7 @@ Configuration items related to opentracing.reporter.
 
 This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
 
-### `capacity-mb`
+#### `capacity-mb`
 
 - The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
 - Default value: `1000.0`
