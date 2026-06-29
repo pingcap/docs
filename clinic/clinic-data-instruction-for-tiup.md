@@ -16,7 +16,7 @@ PingCAP Clinicによって収集された診断データは、クラスターの
 
 ## TiDB クラスター {#tidb-clusters}
 
-このセクションでは、 TiUPを使用して展開された TiDB クラスターから[診断](https://github.com/pingcap/diag)によって収集できる診断データの種類を示します。
+このセクションでは、 TiUPを使用して展開された TiDB クラスターから[Diag](https://github.com/pingcap/diag)によって収集できる診断データの種類を示します。
 
 ### TiDB クラスタ情報 {#tidb-cluster-information}
 

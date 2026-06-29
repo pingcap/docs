@@ -9,7 +9,7 @@ PingCAP Clinic診断サービス（PingCAP Clinic）は、 TiUPまたはTiDB Ope
 
 PingCAP Clinic は、クラスターの問題を診断するために次の 2 つのコンポーネントを提供します。
 
--   [診断クライアント](https://github.com/pingcap/diag) :
+-   [Diag client](https://github.com/pingcap/diag) :
 
     Diagクライアント（Diag）は、クラスタ側にデプロイされるオープンソースの診断ツールです。Diagは、クラスタ診断データの収集、Clinic Serverへの診断データのアップロード、そしてクラスタ上でローカルで簡単なヘルスチェックを実行するために使用されます。Diagで収集できる診断データの全リストについては、 [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)ご覧ください。
 
