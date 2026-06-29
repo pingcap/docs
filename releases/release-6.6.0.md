@@ -67,7 +67,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     ステイル読み取り機能はv5.1.1以降、一般提供（GA）されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。Stale Readは、ローカルのTiKVレプリカからデータを直接読み取ることで、読み取りレイテンシーを削減し、クエリのパフォーマンスを向上させることができます。v6.6.0より前のTiFlashでは、 ステイル読み取りはサポートされていません。テーブルにTiFlashレプリカが存在する場合でも、 ステイル読み取りはTiKVレプリカのみを読み取ることができます。
 
-    バージョン6.6.0以降、 TiFlashはステイル読み取り機能をサポートしています。[`AS OF TIMESTAMP OF TIMESTAMP`](/as-of-timestamp.md)構文または[`tidb_read_staleness`](/tidb-read-staleness.md)システム変数を使用してテーブルの履歴データをクエリする場合、テーブルにTiFlashレプリカが存在すると、オプティマイザは対応するデータをTiFlashレプリカから読み込むことを選択できるようになり、クエリのパフォーマンスがさらに向上します。
+    バージョン6.6.0以降、 TiFlashはステイル読み取り機能をサポートしています。[`AS OF TIMESTAMP`](/as-of-timestamp.md)構文または[`tidb_read_staleness`](/tidb-read-staleness.md)システム変数を使用してテーブルの履歴データをクエリする場合、テーブルにTiFlashレプリカが存在すると、オプティマイザは対応するデータをTiFlashレプリカから読み込むことを選択できるようになり、クエリのパフォーマンスがさらに向上します。
 
     詳細については、[ドキュメント](/stale-read.md)を参照してください。
 
