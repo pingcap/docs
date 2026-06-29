@@ -547,9 +547,9 @@
     -   [通知](/tidb-cloud/notifications.md)
     -   [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
 -   サポートプラン
-    -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
-    -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
-    -   コネクテッドケアサポートサービスの特長
+    -   [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
+    -   [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
+    -   Connected Careサポートサービスの特長
         -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
         -   接続済み：IMチケットの作成と更新のサブスクリプション
             -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
