@@ -123,7 +123,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
 
-## pdサーバー {#pd-server}
+## pd-server {#pd-server}
 
 pd-server関連のコンフィグレーション項目
 
@@ -189,7 +189,7 @@ pd-server関連のコンフィグレーション項目
 >
 > v6.0.0～v6.2.0からアップグレードされたクラスターの場合、デフォルト値の`min-resolved-ts-persistence-interval`はアップグレード後も変更されず、 `"0s"`ままとなります。この機能を有効にするには、この設定項目の値を手動で変更する必要があります。
 
-## 安全 {#security}
+## security {#security}
 
 セキュリティ関連のコンフィグレーション項目
 
@@ -548,7 +548,7 @@ pd-server関連のコンフィグレーション項目
 
 全リージョンのレプリケーションモードに関するコンフィグレーション項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
 
-## コントローラ {#controller}
+## controller {#controller}
 
 このセクションでは、 PD for [リソース管理](/tidb-resource-control-ru-groups.md)に組み込まれている構成項目について説明します。
 

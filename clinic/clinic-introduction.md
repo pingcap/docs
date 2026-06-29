@@ -1,38 +1,38 @@
 ---
 title: PingCAP Clinic Overview
-summary: PingCAPクリニックは、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けの診断サービスです。クラスタの問題をリモートでトラブルシューティングし、安定した運用を保証し、クラスタの状態を迅速に確認できます。このサービスには、データ収集用のDiagクライアントと、オンライン診断レポート用のClinic Serverが含まれています。ユーザーはリモートで問題をトラブルシューティングし、クラスタの状態を迅速に確認できます。Diagはさまざまな方法で診断データを収集しますが、Clinic Serverにはクラスタ、storage、およびデータサイズに制限があります。このサービスは2025年4月15日まで無料でご利用いただけます。今後の展開としては、 PingCAPクリニックをさまざまな環境で活用していく予定です。
+summary: PingCAP Clinicは、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けの診断サービスです。クラスタの問題をリモートでトラブルシューティングし、安定した運用を保証し、クラスタの状態を迅速に確認できます。このサービスには、データ収集用のDiagクライアントと、オンライン診断レポート用のClinic Serverが含まれています。ユーザーはリモートで問題をトラブルシューティングし、クラスタの状態を迅速に確認できます。Diagはさまざまな方法で診断データを収集しますが、Clinic Serverにはクラスタ、ストレージ、およびデータサイズに制限があります。このサービスは2025年4月15日まで無料でご利用いただけます。今後の展開としては、 PingCAP Clinicをさまざまな環境で活用していく予定です。
 ---
 
-# PingCAPクリニックの概要 {#pingcap-clinic-overview}
+# PingCAP Clinicの概要 {#pingcap-clinic-overview}
 
-PingCAPクリニック診断サービス（PingCAPクリニック）は、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けにPingCAPが提供する診断サービスです。このサービスは、クラスタの問題をリモートでトラブルシューティングし、ローカルでクラスタの状態を迅速に確認するのに役立ちます。PingCAP PingCAPクリニックを利用することで、TiDBクラスタのライフサイクル全体にわたる安定した運用を確保し、潜在的な問題を予測し、問題発生の可能性を低減し、クラスタの問題を迅速にトラブルシューティングして修復することができます。
+PingCAP Clinic診断サービス（PingCAP Clinic）は、 TiUPまたはTiDB Operatorを使用して導入されたTiDBクラスタ向けにPingCAPが提供する診断サービスです。このサービスは、クラスタの問題をリモートでトラブルシューティングし、ローカルでクラスタの状態を迅速に確認するのに役立ちます。PingCAP Clinicを利用することで、TiDBクラスタのライフサイクル全体にわたる安定した運用を確保し、潜在的な問題を予測し、問題発生の可能性を低減し、クラスタの問題を迅速にトラブルシューティングして修復することができます。
 
-PingCAPクリニック は、クラスターの問題を診断するために次の 2 つのコンポーネントを提供します。
+PingCAP Clinic は、クラスターの問題を診断するために次の 2 つのコンポーネントを提供します。
 
--   [診断クライアント](https://github.com/pingcap/diag) :
+-   [Diagクライアント](https://github.com/pingcap/diag) :
 
-    Diagクライアント（Diag）は、クラスタ側にデプロイされるオープンソースの診断ツールです。Diagは、クラスタ診断データの収集、Clinic Serverへの診断データのアップロード、そしてクラスタ上でローカルで簡単なヘルスチェックを実行するために使用されます。Diagで収集できる診断データの全リストについては、 [PingCAPクリニック診断データ](/clinic/clinic-data-instruction-for-tiup.md)ご覧ください。
+    Diagクライアント（Diag）は、クラスタ側にデプロイされるオープンソースの診断ツールです。Diagは、クラスタ診断データの収集、Clinic Serverへの診断データのアップロード、そしてクラスタ上でローカルで簡単なヘルスチェックを実行するために使用されます。Diagで収集できる診断データの全リストについては、 [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)ご覧ください。
 
     > **注記：**
     >
     > Diag は TiDB v4.0 以降のバージョンをサポートしていますが、TiDB Ansible を使用してデプロイされたクラスターからのデータ収集は**サポートしていません**。
 
--   クリニックサーバー:
+-   Clinic Server:
 
     Clinic Serverはクラウド上に展開されるクラウドサービスです。SaaSモデルで診断サービスを提供することで、Clinic Serverはアップロードされた診断データを受信するだけでなく、データの保存、閲覧、クラスター診断レポートの提供など、オンライン診断環境として機能します。Clinic Serverは、ストレージの場所に応じて2つの独立したサービスを提供します。
 
-    -   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
-    -   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+    -   [国際ユーザー向けClinic Server](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
+    -   [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 
 -   クラスタの問題をリモートでトラブルシューティングする
 
-    クラスターにすぐに解決できない問題が発生した場合、PingCAPまたはコミュニティから[サポートを受ける](/support.md)選択できます。リモートアシスタンスのためにテクニカルサポートに連絡する場合、クラスターからさまざまな診断データを保存し、サポートスタッフに転送する必要があります。この場合、Diagを使用すると、ワンクリックで診断データを収集できます。Diagを使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAPテクニカルサポートスタッフがクラスターの問題をトラブルシューティングできるように、データをクリニックサーバーにアップロードできます。クリニックサーバーは、アップロードされた診断データを安全にstorageし、オンライン診断をサポートすることで、トラブルシューティングの効率を大幅に向上させます。
+    クラスターにすぐに解決できない問題が発生した場合、PingCAPまたはコミュニティから[サポートを受ける](/support.md)を選択できます。リモートアシスタンスのためにテクニカルサポートに連絡する場合、クラスターからさまざまな診断データを保存し、サポートスタッフに転送する必要があります。この場合、Diagを使用すると、ワンクリックで診断データを収集できます。Diagを使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAPテクニカルサポートスタッフがクラスターの問題をトラブルシューティングできるように、データをClinic Serverにアップロードできます。Clinic Serverは、アップロードされた診断データを安全に保存し、オンライン診断をサポートすることで、トラブルシューティングの効率を大幅に向上させます。
 
 -   クラスターのステータスを素早く確認
 
-    クラスタが現時点で安定して動作している場合でも、潜在的な安定性リスクを検出するために、定期的にクラスタを検査する必要があります。PingCAP PingCAPクリニックが提供するローカルおよびサーバー側のクイックチェック機能を使用することで、クラスタの潜在的な健全性リスクを特定できます。
+    クラスタが現時点で安定して動作している場合でも、潜在的な安定性リスクを検出するために、定期的にクラスタを検査する必要があります。PingCAP Clinicが提供するローカルおよびサーバー側のクイックチェック機能を使用することで、クラスタの潜在的な健全性リスクを特定できます。
 
 ## 実施原則 {#implementation-principles}
 
@@ -57,7 +57,7 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 
     DiagはSQL文を使用して、TiDBのシステム変数やその他の情報を照会できます。この方法を使用するには、データ収集時にTiDBにアクセスするためのユーザー名とパスワードを**追加で入力する**必要があります。
 
-## クリニックサーバーの制限 {#the-limitations-of-clinic-server}
+## Clinic Serverの制限 {#the-limitations-of-clinic-server}
 
 > **注記：**
 >
@@ -74,11 +74,11 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 
 ## 次のステップ {#next-step}
 
--   オンプレミス環境でPingCAPクリニックを使用する
-    -   [PingCAPクリニックでクイックスタート](/clinic/quick-start-with-clinic.md)
-    -   [PingCAPクリニックを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
-    -   [PingCAPクリニック診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+-   オンプレミス環境でPingCAP Clinicを使用する
+    -   [PingCAP Clinicのクイックスタート](/clinic/quick-start-with-clinic.md)
+    -   [PingCAP Clinicを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+    -   [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)
 
--   Kubernetes でPingCAPクリニックを使用する
-    -   [PingCAPクリニックを使用して TiDBクラスタのトラブルシューティングを行う](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
-    -   [PingCAPクリニック診断データ](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)
+-   Kubernetes でPingCAP Clinicを使用する
+    -   [PingCAP Clinicを使用して TiDBクラスタのトラブルシューティングを行う](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
+    -   [PingCAP Clinic診断データ](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)

@@ -547,12 +547,12 @@
             -   [FAQ](/tidb-lightning/tidb-lightning-faq.md)
             -   [用語集](/tidb-lightning/tidb-lightning-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
-    -   PingCAPクリニック診断サービス
+    -   PingCAP Clinic診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
-        -   [PingCAPクリニックを使用してクラスターのトラブルシューティングを行う](/clinic/clinic-user-guide-for-tiup.md)
-        -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
-    -   同期差分検査ツール
+        -   [PingCAP Clinicを使用してクラスターのトラブルシューティングを行う](/clinic/clinic-user-guide-for-tiup.md)
+        -   [PingCAP Clinicの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+    -   sync-diff-inspector
         -   [概要](/sync-diff-inspector/sync-diff-inspector-overview.md)
         -   [スキーマ名／テーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)
         -   [シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)
