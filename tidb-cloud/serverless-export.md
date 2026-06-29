@@ -104,7 +104,7 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format. (only applicable to {{{ .starter }}} data exports)
+- `Parquet`: export data in Parquet format. It is only applicable to {{{ .starter }}} data exports.
 
 The schema and data are exported according to the following naming conventions:
 

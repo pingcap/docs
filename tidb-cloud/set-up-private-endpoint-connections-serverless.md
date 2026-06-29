@@ -154,21 +154,21 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 
 > **Note:**
 >
-> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026 in certain AWS regions. If it is not available for your instance, you can use the [endpoint shared model](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) instead.
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026, in certain AWS regions. If it is not available for your instance, you can use the [endpoint shared model](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) instead.
 
 In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
 To connect to a {{{ .essential }}} instance via a private endpoint using the exclusive model, take the following steps:
 
-1. [Select a {{{ .essential }}} instance](#step-1-select-a-essential-instance)
-2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection)
-4. [Enable private DNS](#step-4-enable-private-dns)
+1. [Select a {{{ .essential }}} instance](#step-1-select-an-essential-instance)
+2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint-exclusive-model)
+3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection-exclusive-model)
+4. [Enable private DNS](#step-4-enable-private-dns-exclusive-model)
 5. [Connect to your {{{ .essential }}} instance](#step-5-connect-to-your-essential-instance)
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
-### Step 1. Select a {{{ .essential }}} instance {#step-1-select-a-essential-instance}
+### Step 1. Select a {{{ .essential }}} instance {#step-1-select-an-essential-instance}
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page of your TiDB Cloud console, click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -178,7 +178,7 @@ If you have multiple instances, you need to repeat these steps for each instance
 >
 > If you have already created a private endpoint connection, the active endpoint will appear in the connection dialog. To create additional private endpoint connections, navigate to the **Networking** page by clicking **Settings** > **Networking** in the left navigation pane.
 
-### Step 2. Create an AWS interface endpoint
+### Step 2. Create an AWS interface endpoint {#step-2-create-an-aws-interface-endpoint-exclusive-model}
 
 > **Note:**
 >
@@ -243,7 +243,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 </div>
 </SimpleTab>
 
-### Step 3. Create a private endpoint connection
+### Step 3. Create a private endpoint connection {#step-3-create-a-private-endpoint-connection-exclusive-model}
 
 1. Go back to the TiDB Cloud console.
 2. On the **Create AWS Private Endpoint Connection** page, enter your VPC endpoint ID.
@@ -253,7 +253,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 >
 > You can view and manage private endpoint connections on the **Networking** page of your target {{{ .essential }}} instance. To access this page, click **Settings** > **Networking** in the left navigation pane.
 
-### Step 4. Enable private DNS
+### Step 4. Enable private DNS {#step-4-enable-private-dns-exclusive-model}
 
 Enable private DNS in AWS. You can either use the AWS CLI or the AWS Management Console.
 

@@ -64,7 +64,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
 
 > **Note:**
 >
-> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026 in certain regions. If it is not available for your instance, you can use the [endpoint shared model](#connect-via-a-public-endpoint-endpoint-shared-model) instead.
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026, in certain regions. If it is not available for your instance, you can use the [endpoint shared model](#connect-via-a-public-endpoint-endpoint-shared-model) instead.
 
 In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
