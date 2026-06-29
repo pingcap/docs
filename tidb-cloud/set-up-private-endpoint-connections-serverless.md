@@ -40,7 +40,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 Depending on your TiDB Cloud plan, choose the appropriate private endpoint model:
 
 - For {{{ .starter }}} instances or for {{{ .essential }}} instances created before July 1, 2026, use the [**endpoint shared model**](#set-up-a-private-endpoint-with-aws-endpoint-shared-model). In this model, a single private endpoint can be shared by multiple {{{ .starter }}} or {{{ .essential }}} instances in the same AWS Region and VPC.
-- For {{{ .essential }}} instances created after July 1, 2026, use the [**endpoint exclusive model**](#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+- For {{{ .essential }}} instances created starting July 1, 2026, use the [**endpoint exclusive model**](#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
 ## Set up a private endpoint with AWS (endpoint shared model)
 
@@ -154,7 +154,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 
 > **Note:**
 >
-> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created after July 1, 2026 in certain AWS regions. If it is not available for your instance, you can use the [endpoint shared model](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) instead.
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026 in certain AWS regions. If it is not available for your instance, you can use the [endpoint shared model](#set-up-a-private-endpoint-with-aws-endpoint-shared-model) instead.
 
 In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
@@ -208,7 +208,7 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 >
 > - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
 >
-> - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .essential }}} instance is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - If your service spans across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .essential }}} instance is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 </div>
 <div label="Use AWS Console">

@@ -12,7 +12,7 @@ Currently, this method supports importing one CSV file for one task into either 
 ## Limitations
 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 250 MiB for one task.
-- Importing local files is supported only for {{{ .starter }}} instances, not for TiDB Cloud Dedicated clusters.
+- Importing local files is supported only for {{{ .starter }}} instances, not for {{{ .essential }}} instances or TiDB Cloud Dedicated clusters.
 - You cannot run more than one import task at the same time.
 
 ## Import local files
@@ -87,7 +87,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
-To import only some specified columns, you can use the MySQL client to connect to your {{{ .starter }}} instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+To import only specified columns, you can use the MySQL client to connect to your {{{ .starter }}} instance, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
 
 ```sql
 CREATE TABLE `import_test` (

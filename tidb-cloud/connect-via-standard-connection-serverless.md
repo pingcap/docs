@@ -12,7 +12,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 Depending on your TiDB Cloud plan, choose the appropriate endpoint model:
 
 - For {{{ .starter }}} instances or for {{{ .essential }}} instances created before July 1, 2026, use the [**endpoint shared model**](#connect-via-a-public-endpoint-endpoint-shared-model). In this model, a single public endpoint can be shared by multiple {{{ .starter }}} and Essential instances in the same region.
-- For {{{ .essential }}} instances created after July 1, 2026, use the [**endpoint exclusive model**](#connect-via-a-public-endpoint-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+- For {{{ .essential }}} instances created starting July 1, 2026, use the [**endpoint exclusive model**](#connect-via-a-public-endpoint-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
 ## Connect via a public endpoint (endpoint shared model)
 
@@ -20,7 +20,7 @@ Depending on your TiDB Cloud plan, choose the appropriate endpoint model:
 >
 > To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint with the shared model, take the following steps:
+To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint using the shared model, take the following steps:
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
@@ -64,7 +64,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
 
 > **Note:**
 >
-> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created after July 1, 2026 in certain regions. If it is not available for your instance, you can use the [endpoint shared model](#connect-via-a-public-endpoint-endpoint-shared-model) instead.
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026 in certain regions. If it is not available for your instance, you can use the [endpoint shared model](#connect-via-a-public-endpoint-endpoint-shared-model) instead.
 
 In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
 
