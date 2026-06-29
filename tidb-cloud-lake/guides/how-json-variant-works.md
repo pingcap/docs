@@ -8,7 +8,7 @@ summary: TiDB Cloud Lake reimagines JSON analytics by pairing a native binary la
 See also:
 
 - [Variant Data Type](/tidb-cloud-lake/sql/variant.md)
-- [Semi-Structured Functions](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
+- [Semi-Structured Functions](/tidb-cloud-lake/guides/load-semi-structured-data.md)
 
 {{{ .lake }}} reimagines JSON analytics by pairing a native binary layout with automatic JSON indexing so semi-structured data behaves like first-class columns.
 

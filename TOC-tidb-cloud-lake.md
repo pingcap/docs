@@ -10,18 +10,27 @@
 
 ## Guides
 
-- Resources
+- Connect
+  - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
+  - SQL Clients
+    - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
+  - Drivers
+    - [Overview](/tidb-cloud-lake/guides/driver-overview.md)
+    - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)
+    - [Java](/tidb-cloud-lake/guides/connect-using-java.md)
+    - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
+    - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
+    - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
+  - Visualization
+    - [Tableau](/tidb-cloud-lake/guides/tableau.md)
+    - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
+  - Network Access
+    - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
+- Manage Resources
   - [Dashboards](/tidb-cloud-lake/guides/dashboards.md)
   - [Task Flow](/tidb-cloud-lake/guides/task-flow.md)
   - [Warehouses](/tidb-cloud-lake/guides/warehouse.md)
   - [Worksheets](/tidb-cloud-lake/guides/worksheet.md)
-- Administration
-  - [AI-Powered Features](/tidb-cloud-lake/guides/ai-powered-features.md)
-  - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
-  - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
-- Security
-  - [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)
-  - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
 - Data Integration
   - [Overview](/tidb-cloud-lake/guides/data-integration-overview.md)
   - Data Sources
@@ -40,21 +49,7 @@
     - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer Integration Task](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
-- Connect
-  - [Overview](/tidb-cloud-lake/guides/connection-overview.md)
-  - SQL Clients
-    - [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)
-  - Drivers
-    - [Overview](/tidb-cloud-lake/guides/driver-overview.md)
-    - [Golang](/tidb-cloud-lake/guides/connect-using-golang.md)
-    - [Java](/tidb-cloud-lake/guides/connect-using-java.md)
-    - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
-    - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
-    - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
-  - Visualization
-    - [Tableau](/tidb-cloud-lake/guides/tableau.md)
-    - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
-- Data Loading
+- Load Data
   - Work with Stages
     - [Stage Overview](/tidb-cloud-lake/guides/stage-overview.md)
     - [Upload to Stage](/tidb-cloud-lake/guides/upload-to-stage.md)
@@ -64,8 +59,8 @@
     - [Load from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [Load from Local File](/tidb-cloud-lake/guides/load-from-local-file.md)
     - [Load from Remote File](/tidb-cloud-lake/guides/load-from-remote-file.md)
-  - Load Semi-structured Formats
-    - [Overview](/tidb-cloud-lake/guides/load-semi-structured-formats.md)
+  - Load Semi-structured Data
+    - [Overview](/tidb-cloud-lake/guides/load-semi-structured-data.md)
     - [Load Parquet](/tidb-cloud-lake/guides/load-parquet.md)
     - [Load CSV](/tidb-cloud-lake/guides/load-csv.md)
     - [Load TSV](/tidb-cloud-lake/guides/load-tsv.md)
@@ -86,7 +81,7 @@
     - [Overview](/tidb-cloud-lake/guides/continuous-data-pipelines.md)
     - [Track and Transform Data via Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
     - [Automate Data Loading with Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
-- Data Unloading
+- Unload Data
   - [Overview](/tidb-cloud-lake/guides/unload-data.md)
   - [Unload Parquet File](/tidb-cloud-lake/guides/unload-parquet-file.md)
   - [Unload CSV File](/tidb-cloud-lake/guides/unload-csv-file.md)
@@ -100,7 +95,7 @@
   - [Vector Search](/tidb-cloud-lake/guides/vector-search-guide.md)
   - [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md)
   - [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md)
-- Performance Optimization
+- Performance Tuning
   - [Overview](/tidb-cloud-lake/guides/performance-optimization.md)
   - [Cluster Key](/tidb-cloud-lake/guides/cluster-key-performance.md)
   - [Virtual Column](/tidb-cloud-lake/guides/virtual-column.md)
@@ -115,17 +110,20 @@
     - [Privileges](/tidb-cloud-lake/guides/privileges.md)
     - [Roles](/tidb-cloud-lake/guides/roles.md)
     - [Ownership](/tidb-cloud-lake/guides/ownership.md)
-  - [Audit Trail](/tidb-cloud-lake/guides/audit-trail.md)
-  - Data Protection
+  - Data Protection Policies
     - [Overview](/tidb-cloud-lake/guides/data-protection-policies.md)
     - [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md)
     - [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md)
-  - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
+  - [Audit Trail](/tidb-cloud-lake/guides/audit-trail.md)
   - [Network Policy](/tidb-cloud-lake/guides/network-policy.md)
   - [Password Policy](/tidb-cloud-lake/guides/password-policy.md)
+  - [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)
+  - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [Recovery from Operational Errors](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
-- Data Management
-  - [Overview](/tidb-cloud-lake/guides/data-management.md)
+- Management
+  - [AI-Powered Features](/tidb-cloud-lake/guides/ai-powered-features.md)
+  - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
+  - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
@@ -1226,4 +1224,4 @@
     - [Data Ingestion Benchmark](/tidb-cloud-lake/guides/benchmark-data-ingestion.md)
     - [TPC-H SF100 Benchmark](/tidb-cloud-lake/guides/benchmark-tpch-sf100.md)
     - [TPC-H SF1000 Benchmark](/tidb-cloud-lake/guides/benchmark-tpch-sf1000.md)
-  - [Support Services](/tidb-cloud-lake/guides/support-services.md)
+- [Support Services](/tidb-cloud-lake/guides/support-services.md)
