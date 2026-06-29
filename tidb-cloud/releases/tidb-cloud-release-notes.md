@@ -227,7 +227,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
     -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[v8.5.5](https://docs.pingcap.com/tidb/stable/release-8.5.5/)から[v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/)にアップグレードします。
 
-    -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)のTop SQLページは、AWS 上でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiKV ネットワーク トラフィックと論理 I/O メトリックの収集と表示をサポートするようになりました。
+    -   [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)のTop SQLページは、AWS 上でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの TiKV ネットワーク トラフィックと論理 I/O メトリックの収集と表示をサポートするようになりました。
 
 **コンソールの変更**
 

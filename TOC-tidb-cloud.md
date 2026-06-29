@@ -74,7 +74,7 @@
             -   [概要](/tidb-cloud/third-party-monitoring-integrations.md)
             -   [DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)
             -   [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
-        -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)
+        -   [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
     -   チューニングパフォーマンス
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   パフォーマンスを分析する
