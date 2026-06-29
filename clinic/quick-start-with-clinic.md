@@ -7,7 +7,7 @@ summary: PingCAP Clinicは、クラスター診断データを迅速に収集・
 
 このドキュメントでは、 PingCAP Clinic診断サービス (PingCAP Clinic) を使用して、クラスター診断データを迅速に収集、アップロード、表示する方法について説明します。
 
-PingCAP Clinicは、 [Diag client](https://github.com/pingcap/diag) （Diagと略記）とClinic Serverクラウドサービス（Clinic Serverと略記）の2つのコンポーネントで構成されています。これらの2つのコンポーネントの詳細については、 [PingCAP Clinicの概要](/clinic/clinic-introduction.md)を参照してください。
+PingCAP Clinicは、 [Diagクライアント](https://github.com/pingcap/diag) （Diagと略記）とClinic Serverクラウドサービス（Clinic Serverと略記）の2つのコンポーネントで構成されています。これらの2つのコンポーネントの詳細については、 [PingCAP Clinicの概要](/clinic/clinic-introduction.md)を参照してください。
 
 ## ユーザーシナリオ {#user-scenarios}
 
