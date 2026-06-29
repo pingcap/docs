@@ -11,7 +11,7 @@ summary: データ移行に関する FAQ について説明します。
 
 -   [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md)
 -   [TiDB Lightningに関するよくある質問](/tidb-lightning/tidb-lightning-faq.md)
--   [TiDB データ移行 (DM) に関するよくある質問](/dm/dm-faq.md)
+-   [TiDB Data Migration (DM) に関するよくある質問](/dm/dm-faq.md)
 -   [TiCDC よくある質問](/ticdc/ticdc-faq.md)
 
 ## 完全なデータのエクスポートとインポート {#full-data-export-and-import}
@@ -132,7 +132,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 ### トラフィックを素早く移行するにはどうすればよいでしょうか? {#how-to-migrate-the-traffic-quickly}
 
-アプリケーションデータをMySQLからTiDBに移行する際は、 [TiDBデータ移行](/dm/dm-overview.md)ツールを使用することをお勧めします。必要に応じてネットワーク構成を編集することで、読み取りトラフィックと書き込みトラフィックを一括移行できます。上位レイヤーに安定したネットワークLB（HAproxy、LVS、F5、DNSなど）をデプロイことで、ネットワーク構成を直接編集し、シームレスな移行を実現できます。
+アプリケーションデータをMySQLからTiDBに移行する際は、 [TiDB Data Migration](/dm/dm-overview.md)ツールを使用することをお勧めします。必要に応じてネットワーク構成を編集することで、読み取りトラフィックと書き込みトラフィックを一括移行できます。上位レイヤーに安定したネットワークLB（HAproxy、LVS、F5、DNSなど）をデプロイすることで、ネットワーク構成を直接編集し、シームレスな移行を実現できます。
 
 ### TiDB の書き込み容量と読み取り容量の合計に制限はありますか? {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 

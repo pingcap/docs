@@ -5,7 +5,7 @@ summary: データ移行 (DM) の API を学習します。
 
 # データ移行APIの概要 {#data-migration-api-overview}
 
-[TiDBデータ移行](/dm/dm-overview.md) (DM) は、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データレプリケーションをサポートする統合データ移行タスク管理プラットフォームです。
+[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データレプリケーションをサポートする統合データ移行タスク管理プラットフォームです。
 
 DM は、 [dmctlツール](/dm/dmctl-introduction.md)と同様に、DM クラスターのクエリと操作を行うための OpenAPI を提供します。
 

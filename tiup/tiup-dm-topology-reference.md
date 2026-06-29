@@ -1,11 +1,11 @@
 ---
 title: Topology Configuration File for DM Cluster Deployment Using TiUP
-summary: TiUPを使用して TiDB データ移行 (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
+summary: TiUPを使用して TiDB Data Migration (DM) クラスターをデプロイまたは拡張するには、クラスターのグローバル設定、サーバー設定、マスターサーバー、ワーカーサーバー、モニタリングサーバー、Grafana サーバー、および Alertmanager サーバーを記述するトポロジファイルが必要です。各セクションには、設定用の特定のフィールドが含まれています。トポロジファイルの構造は、global、server_configs、master_servers、worker_servers、monitoring_servers、grafana_servers、およびalertmanager_servers で構成されます。各セクションには、デプロイと設定のための独自の設定可能なフィールドセットがあります。
 ---
 
 # TiUPを使用した DMクラスタ展開のトポロジコンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
-TiDBデータ移行（DM）クラスターをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
+TiDB Data Migration (DM)クラスターをデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル（ [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ）を提供する必要があります。
 
 同様に、クラスタトポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスタのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと、各セクション内の各フィールドについて説明します。
 

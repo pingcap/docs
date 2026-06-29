@@ -87,7 +87,7 @@ TiDB バージョン: 6.5.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiDBクラスタ[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
         -   PITRリカバリプロセス[＃42001](https://github.com/pingcap/tidb/issues/42001) @ [joccau](https://github.com/joccau)中に分割リージョンの再試行の待機時間が不十分になる問題を修正

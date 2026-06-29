@@ -3,9 +3,9 @@ title: Generate Self-signed Certificates for TiDB Data Migration
 summary: openssl` を使用して自己署名証明書を生成します。
 ---
 
-# TiDBデータ移行用の自己署名証明書を生成する {#generate-self-signed-certificates-for-tidb-data-migration}
+# TiDB Data Migration用の自己署名証明書を生成する {#generate-self-signed-certificates-for-tidb-data-migration}
 
-このドキュメントでは、 `openssl`使用して TiDB データ移行 (DM) 用の自己署名証明書を生成する例を示します。また、必要に応じて、要件を満たす証明書と鍵を生成することもできます。
+このドキュメントでは、 `openssl`を使用して TiDB Data Migration (DM) 用の自己署名証明書を生成する例を示します。また、必要に応じて、要件を満たす証明書と鍵を生成することもできます。
 
 インスタンス クラスターのトポロジが次のとおりであると仮定します。
 

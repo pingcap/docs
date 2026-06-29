@@ -424,7 +424,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITRリカバリプロセス中のリージョン分割再試行の待機時間が不十分な問題を修正 [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
         -   PITRリカバリプロセス中に発生した`memory is limited`エラーによるリカバリ失敗の問題を修正 [#41983](https://github.com/pingcap/tidb/issues/41983) @[joccau](https://github.com/joccau)
@@ -441,7 +441,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
         -   ローリング アップグレードが TiCDC OOM を引き起こす可能性がある問題、またはチェックポイントがスタックする問題を修正 [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
         -   Kubernetes で TiCDC クラスターの正常なアップグレードが失敗する問題を修正 [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DMワーカーノードがGoogle Cloud Storageを使用する際に、ブレークポイントが多すぎるためにGoogle Cloud Storageのリクエスト頻度制限に達し、DMワーカーがGoogle Cloud Storageにデータを書き込めなくなり、結果としてデータ全体の読み込みに失敗する問題を修正しました。 [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
         -   複数のDMタスクが同時に同じダウンストリームデータを複製し、すべてがダウンストリームメタデータテーブルを使用してブレークポイント情報を記録する場合、すべてのタスクのブレークポイント情報が同じメタデータテーブルに書き込まれ、同じタスクIDが使用される問題を修正しました。 [#8500](https://github.com/pingcap/tiflow/issues/8500) @[maxshuang](https://github.com/maxshuang)

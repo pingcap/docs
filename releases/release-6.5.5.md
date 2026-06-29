@@ -28,7 +28,7 @@ TiDB バージョン: 6.5.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップのCPUオーバーヘッドを削減`resolve lock` [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [3pointer](https://github.com/3pointer)
 
@@ -52,7 +52,7 @@ TiDB バージョン: 6.5.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITRによる暗黙の主キーの復元が競合[＃46520](https://github.com/pingcap/tidb/issues/46520) @ [3pointer](https://github.com/3pointer)を引き起こす可能性がある問題を修正
         -   PITRがメタkv [＃46578](https://github.com/pingcap/tidb/issues/46578) @ [Leavrth](https://github.com/Leavrth)を回復するときにエラーが発生する問題を修正しました

@@ -39,7 +39,7 @@ TiDB バージョン: 4.0.13
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `mysql`スキーマ[＃1077](https://github.com/pingcap/br/pull/1077)で作成されたユーザー テーブルのバックアップをサポート
         -   更新`checkVersion`クラスタデータとバックアップデータ[＃1090](https://github.com/pingcap/br/pull/1090)チェックする

@@ -228,7 +228,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `mysql`スキーマにおけるシステムテーブルのバックアップと復元をサポートする[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)
         -   仮想ホストアドレス指定モードに基づくS3互換ストレージをサポートする [#10243](https://github.com/tikv/tikv/pull/10243)
@@ -333,7 +333,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
         -   CSVファイルをインポートする際に、ファイルの最終行に改行文字（ `\r\n` ）が含まれていない場合にエラーが発生する問題を修正しました [#1133](https://github.com/pingcap/br/issues/1133)
         -   インポートするテーブルにdouble型のAUTO_INCREMENT列が含まれている場合、auto_incrementの値が異常になる問題を修正しました [#1178](https://github.com/pingcap/br/pull/1178)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
         -   一部のTiKVノードの障害によって発生するバックアップ中断の問題を修正しました [#980](https://github.com/pingcap/br/issues/980)
 
     -   TiCDC

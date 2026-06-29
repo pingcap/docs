@@ -123,7 +123,7 @@ TiDB バージョン: 7.3.0
 
     -   MPP はTiFlashエンジンが提供する分散コンピューティング フレームワークであり、ノード間でのデータ交換を可能にし、高性能かつ高スループットの SQL アルゴリズムを提供します。他のプロトコルと比較して、MPP プロトコルはより成熟しており、より優れたタスクおよびリソース管理を提供できます。v7.3.0 以降、TiDB が計算タスクをTiFlashにプッシュする場合、オプティマイザはデフォルトで MPP プロトコルを使用した実行プランのみを生成します。tidb_allow_mpp が`OFF`に設定されている場合、TiDB をアップグレードした後にクエリでエラーが発生する可能性があります。 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)前に`tidb_allow_mpp`の値を確認し、 `ON`に設定することをお勧めします。コスト見積もりに基づいて実行プランを生成するために、オプティマイザがCop、BatchCop、およびMPPプロトコルのいずれかを選択する必要がある場合は、 [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)変数を`ON`に設定できます。
 
--   バックアップと復元 (BR)
+-   Backup & Restore (BR)
 
     -   BR は、完全なデータ復元を実行する前に、空のクラスタのチェックを追加します。デフォルトでは、空でないクラスタへのデータ復元は許可されていません。復元を強制する場合は、 `--filter`オプションを使用して、データを復元する対応するテーブル名を指定できます。
 
@@ -216,7 +216,7 @@ TiDB バージョン: 7.3.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRを使用して Azure Blob Storage にデータをバックアップする場合、サーバー側暗号化の暗号化スコープまたは暗号化キーを指定できます [#45025](https://github.com/pingcap/tidb/issues/45025) @[Leavrth](https://github.com/Leavrth)
 

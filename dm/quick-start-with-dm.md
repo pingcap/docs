@@ -3,9 +3,9 @@ title: Quick Start with TiDB Data Migration
 summary: TiUP Playground を使用してデータ移行環境をすばやくセットアップする方法を学びます。
 ---
 
-# TiDBデータ移行のクイックスタート {#quick-start-with-tidb-data-migration}
+# TiDB Data Migrationのクイックスタート {#quick-start-with-tidb-data-migration}
 
-[TiDB データ移行 (DM)](/dm/dm-overview.md) 、MySQL互換データベースからTiDBにデータを複製する強力なツールです。このガイドでは、 [TiUP Playground](/tiup/tiup-playground.md)使用して開発またはテスト用のローカルTiDB DM環境を迅速に構築する方法と、ソースMySQLデータベースからターゲットTiDBデータベースへのデータ移行という簡単なタスクを段階的に説明します。
+[TiDB Data Migration (DM)](/dm/dm-overview.md) 、MySQL互換データベースからTiDBにデータを複製する強力なツールです。このガイドでは、 [TiUP Playground](/tiup/tiup-playground.md)使用して開発またはテスト用のローカルTiDB DM環境を迅速に構築する方法と、ソースMySQLデータベースからターゲットTiDBデータベースへのデータ移行という簡単なタスクを段階的に説明します。
 
 > **注記：**
 >

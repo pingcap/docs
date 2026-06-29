@@ -43,7 +43,7 @@ TiDB バージョン: 8.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ中の不要なログ出力を削減[＃55902](https://github.com/pingcap/tidb/issues/55902) @ [Leavrth](https://github.com/Leavrth)
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算（ `--checksum=false` ）をデフォルトで無効にする[＃56373](https://github.com/pingcap/tidb/issues/56373) @ [Tristan1900](https://github.com/Tristan1900)
@@ -138,7 +138,7 @@ TiDB バージョン: 8.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログに暗号化された情報[＃57585](https://github.com/pingcap/tidb/issues/57585) @ [kennytm](https://github.com/kennytm)が出力される問題を修正
         -   AWS EBS に基づくスナップショットバックアップが準備フェーズで失敗し、バックアップが[＃52049](https://github.com/pingcap/tidb/issues/52049) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました。
@@ -154,6 +154,6 @@ TiDB バージョン: 8.1.2
         -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @ [wlwilliamx](https://github.com/wlwilliamx)
         -   チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[＃11553](https://github.com/pingcap/tiflow/issues/11553) @ [3AceShowHand](https://github.com/3AceShowHand)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @ [GMHDBJD](https://github.com/GMHDBJD)

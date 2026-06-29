@@ -34,7 +34,7 @@ TiDB バージョン: 7.1.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止する機能をサポートし、GC の長時間のブロッキングや潜在的なクラスターの問題を回避します[＃50803](https://github.com/pingcap/tidb/issues/50803) @ [RidRisR](https://github.com/RidRisR)
         -   ログバックアップの互換性テストとインデックスアクセラレーション[＃51987](https://github.com/pingcap/tidb/issues/51987) @ [Leavrth](https://github.com/Leavrth)をカバーするPITR統合テストケースを追加します。
@@ -93,7 +93,7 @@ TiDB バージョン: 7.1.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイント[＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3pointer](https://github.com/3pointer)がすぐに復元されない問題を修正しました。
         -   フルバックアップが失敗したときにログが多すぎる問題を修正[＃51572](https://github.com/pingcap/tidb/issues/51572) @ [Leavrth](https://github.com/Leavrth)

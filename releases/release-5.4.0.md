@@ -54,7 +54,7 @@ TiDB バージョン: 5.4.0
 | TiFlash        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 修正済み     | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                 |
 | TiFlash        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftデータをストレージにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
 | TiFlash        | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加された | Raftを処理するスレッドの許容数。これはRaftstoreスレッドプールのサイズです。デフォルト値は`4`です。                                                                                                                                                                                                                                                             |
-| TiDBデータ移行（DM）  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新しく追加された | `CREATE` SQL ステートメントのデフォルトの照合照合順序を同期するモード。値のオプションは「loose」（デフォルト）と「strict」です。                                                                                                                                                                                                                                          |
+| TiDB Data Migration (DM)  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)         | 新しく追加された | `CREATE` SQL ステートメントのデフォルトの照合順序を同期するモード。値のオプションは「loose」（デフォルト）と「strict」です。                                                                                                                                                                                                                                          |
 | TiCDC          | `max-message-bytes`                                                                                             | 修正済み     | Kafkaシンクの`max-message-bytes`のデフォルト値を`104857601`に変更します（10MB）。                                                                                                                                                                                                                                                          |
 | TiCDC          | `partition-num`                                                                                                 | 修正済み     | Kafka Sink の`partition-num`のデフォルト値を`4`から`3`に変更します。これにより、TiCDC が Kafaka パーティションにメッセージをより均等に送信できるようになります。                                                                                                                                                                                                               |
 | TiDB Lightning | `meta-schema-name`                                                                                              | 修正済み     | ターゲット TiDB 内のメタデータのスキーマ名を指定します。v5.4.0 以降、このスキーマは有効になっている場合にのみ作成されます[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)(対応するパラメータは`tikv-importer.incremental-import = true`です)。                                                                                                                            |
@@ -66,7 +66,7 @@ TiDB バージョン: 5.4.0
 -   TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
 -   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
 -   バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行プランに対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行プランには影響しません。
--   v5.3 以前のバージョンでは、 [TiDBデータ移行（DM）](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
+-   v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
 -   ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
 -   システム変数を「DEFAULT」に設定する動作をMySQLとの互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
 -   システム変数`lc_time_names`を読み取り専用に設定する [#30084](https://github.com/pingcap/tidb/pull/30084)
@@ -197,7 +197,7 @@ TiDB バージョン: 5.4.0
 
 -   **バックアップタスクがクラスタに与える影響を軽減する**
 
-    バックアップと復元 (BR) では、自動調整機能 (デフォルトで有効) が導入されました。この機能は、クラスタのリソース使用状況を監視し、バックアップタスクで使用されるスレッド数を調整することで、クラスタに対するバックアップタスクの影響を軽減します。場合によっては、バックアップ用のクラスタハードウェアリソースを増やし、自動調整機能を有効にすると、クラスタに対するバックアップタスクの影響を 10% 以下に抑えることができます。
+    Backup & Restore (BR) では、自動調整機能 (デフォルトで有効) が導入されました。この機能は、クラスタのリソース使用状況を監視し、バックアップタスクで使用されるスレッド数を調整することで、クラスタに対するバックアップタスクの影響を軽減します。場合によっては、バックアップ用のクラスタハードウェアリソースを増やし、自動調整機能を有効にすると、クラスタに対するバックアップタスクの影響を 10% 以下に抑えることができます。
 
     [ユーザー向けドキュメント](/br/br-auto-tune.md)
 
@@ -227,7 +227,7 @@ TiDB バージョン: 5.4.0
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-error-resolution.md)
 
--   **TiDBデータ移行（DM）におけるリレーログの使用を最適化する**
+-   **TiDB Data Migration (DM)におけるリレーログの使用を最適化する**
 
     -   `enable-relay`構成で`source` } スイッチを復元します。
 
@@ -244,7 +244,7 @@ TiDB バージョン: 5.4.0
     `collation_compatible`設定項目を追加します。値のオプションは`loose` (デフォルト) と`strict`です。
 
     -   アプリケーションに照合順序に関する厳密な要件がなく、クエリ結果の照合順序が上流と下流で異なる可能性がある場合は、デフォルトの`loose`モードを使用してエラーの報告を回避できます。
-    -   アプリケーションで照合順序に関する厳格な要件があり、アップストリームとダウンストリーム間で照合順序を統一する必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合照合順序をサポートしていない場合、データレプリケーションでエラーが発生する可能性があります。
+    -   アプリケーションで照合順序に関する厳格な要件があり、アップストリームとダウンストリーム間で照合順序を統一する必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合順序をサポートしていない場合、データレプリケーションでエラーが発生する可能性があります。
 
     [ユーザー向けドキュメント](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
@@ -321,7 +321,7 @@ TiDB バージョン: 5.4.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRが暗号化バックアップを実行する際に、キーの有効性チェックを追加する [#29794](https://github.com/pingcap/tidb/issues/29794)
 
@@ -331,7 +331,7 @@ TiDB バージョン: 5.4.0
         -   多数のテーブルを複製する際のレプリケーションレイテンシーを削減する [#3900](https://github.com/pingcap/tiflow/issues/3900)
         -   TiKVストアがダウンした際にKVクライアントが復旧するまでの時間を短縮する [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   リレー有効時のCPU使用率を下げる [#2214](https://github.com/pingcap/dm/issues/2214)
 
@@ -391,7 +391,7 @@ TiDB バージョン: 5.4.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
         -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
@@ -414,7 +414,7 @@ TiDB バージョン: 5.4.0
         -   コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   `CREATE VIEW`ステートメントがデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
         -   DDLステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)

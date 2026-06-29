@@ -81,7 +81,7 @@ TiDB バージョン: 5.4.3
         -   TiDB Lightning がParquet ファイル内のスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしない問題を修正しました[＃36980](https://github.com/pingcap/tidb/issues/36980)
         -   TiDBがIPv6ホスト[＃35880](https://github.com/pingcap/tidb/issues/35880)を使用しているときにTiDB LightningがTiDBに接続できない問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DB Conn [＃3733](https://github.com/pingcap/tiflow/issues/3733)取得する際に DM ワーカーがスタックする可能性がある問題を修正しました
         -   DMが`Specified key was too long`エラーを報告する問題を修正しました[＃5315](https://github.com/pingcap/tiflow/issues/5315)
@@ -94,7 +94,7 @@ TiDB バージョン: 5.4.3
 
         -   `enable-old-value = false` [＃6198](https://github.com/pingcap/tiflow/issues/6198)を設定すると TiCDCpanicする問題を修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   外部ストレージ[＃37469](https://github.com/pingcap/tidb/issues/37469)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました
         -   復元中に同時実行が大きすぎる設定になっているためにリージョンのバランスが取れていない問題を修正[＃37549](https://github.com/pingcap/tidb/issues/37549)

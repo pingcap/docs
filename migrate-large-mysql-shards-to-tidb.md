@@ -342,7 +342,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | --マスターアドレス | dmctlが接続するクラスタ内の任意のDMマスターノードの{advertise-addr}。例：172.16.10.71:8261 |
 | タスクの開始     | データ移行タスクを開始します。                                                   |
 
-タスクの開始に失敗した場合は、返された結果のプロンプト メッセージに従って構成を変更し、次に`start-task task.yaml`の`tiup dmctl`サブコマンドを実行してタスクを再開します。問題が発生した場合は、[エラーを処理する](/dm/dm-error-handling.md)および[TiDBデータ移行に関するFAQ](/dm/dm-faq.md)参照してください。
+タスクの開始に失敗した場合は、返された結果のプロンプト メッセージに従って構成を変更し、次に`start-task task.yaml`の`tiup dmctl`サブコマンドを実行してタスクを再開します。問題が発生した場合は、[エラーを処理する](/dm/dm-error-handling.md)および[TiDB Data Migrationに関するFAQ](/dm/dm-faq.md)を参照してください。
 
 ### 移行状況を確認する {#check-the-migration-status}
 

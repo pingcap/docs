@@ -46,7 +46,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップ中に生成される一時ファイルの暗号化をサポート[＃15083](https://github.com/tikv/tikv/issues/15083) @ [YuJuncen](https://github.com/YuJuncen)
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @ [Leavrth](https://github.com/Leavrth)
@@ -172,7 +172,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   リージョンリーダー[＃17168](https://github.com/tikv/tikv/issues/17168) @ [Leavrth](https://github.com/Leavrth)の探索の中断により、チェックポイントバックアップ中のバックアップパフォーマンスが影響を受ける問題を修正しました。
         -   増分バックアップ[＃54139](https://github.com/pingcap/tidb/issues/54139) @ [3pointer](https://github.com/3pointer)中の DDL ジョブのスキャンの非効率性の問題を修正
@@ -190,7 +190,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
         -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [lidezhu](https://github.com/lidezhu)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [asddongmen](https://github.com/asddongmen)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   MariaDBデータの移行中に`SET`ステートメントがDMpanicを引き起こす問題を修正[＃10206](https://github.com/pingcap/tiflow/issues/10206) @ [dveeden](https://github.com/dveeden)
         -   `go-mysql` [＃11041](https://github.com/pingcap/tiflow/issues/11041) @ [D3Hunter](https://github.com/D3Hunter)にアップグレードして接続ブロックの問題を修正しました

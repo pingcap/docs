@@ -32,7 +32,7 @@ TiDB バージョン: 7.1.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   タイムアウトエラーまたはリージョンスキャッタ[＃47236](https://github.com/pingcap/tidb/issues/47236) @ [Leavrth](https://github.com/Leavrth)のキャンセルが発生した場合に、スナップショットリカバリ中にリージョンスキャッタの自動再試行を有効にする
         -   スナップショットバックアップの復元中に、 BRは特定のネットワークエラーが発生すると再試行します[＃48528](https://github.com/pingcap/tidb/issues/48528) @ [Leavrth](https://github.com/Leavrth)
@@ -130,7 +130,7 @@ TiDB バージョン: 7.1.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BR SQL コマンドと CLI のデフォルト値が異なるため、OOM の問題が発生する可能性がある問題を修正しました[＃48000](https://github.com/pingcap/tidb/issues/48000) @ [YuJuncen](https://github.com/YuJuncen)
         -   大規模なワイドテーブル[＃15714](https://github.com/tikv/tikv/issues/15714) @ [YuJuncen](https://github.com/YuJuncen)をバックアップするときに、一部のシナリオでログバックアップが停止する可能性がある問題を修正しました。
@@ -150,7 +150,7 @@ TiDB バージョン: 7.1.3
         -   REDOログが有効な場合にDDL文の複製間隔が長すぎる問題を修正[＃9960](https://github.com/pingcap/tiflow/issues/9960) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログが有効な場合にNFS障害によりオーナーノードが停止する問題を修正[＃9886](https://github.com/pingcap/tiflow/issues/9886) @ [3AceShowHand](https://github.com/3AceShowHand)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `CompareGTID` [＃9676](https://github.com/pingcap/tiflow/issues/9676) @ [GMHDBJD](https://github.com/GMHDBJD)に不適切なアルゴリズムが使用されることで DM のパフォーマンスが低下する問題を修正しました
 

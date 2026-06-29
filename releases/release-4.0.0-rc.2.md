@@ -101,7 +101,7 @@ TiDB バージョン: 4.0.0-rc.2
 
         -   `cdc cli` (changefeed) [＃546](https://github.com/pingcap/tiflow/pull/546)を使用してレプリケーションタスクの管理をサポート
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ中のGC時間の自動調整をサポート[＃257](https://github.com/pingcap/br/pull/257)
         -   データの復元時にPDパラメータを調整して復元を高速化します[＃198](https://github.com/pingcap/br/pull/198)
@@ -198,6 +198,6 @@ TiDB バージョン: 4.0.0-rc.2
 
     <!---->
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRが`auto_random`属性[＃241](https://github.com/pingcap/br/issues/241)を持つテーブルを復元した後にデータを挿入すると`duplicate entry`エラーが発生する可能性がある問題を修正しました。

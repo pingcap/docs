@@ -142,7 +142,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 -   ツール
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DMシンカーに外部キーの因果関係サポートを追加し、マルチワーカーシナリオにおける行変更の親から子への実行順序を保証する [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
@@ -182,7 +182,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップで`flush_ts`が`0`になる可能性がある問題を修正 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
         -   Amazon S3互換APIを介してS3スタイルの認証情報を使用してGoogle Cloud Storageにアクセスする際、Content-Lengthヘッダーが欠落しているため、マルチパートアップロード中にBRが失敗する可能性がある問題を修正しました。 [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
@@ -196,7 +196,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
         -   TiCDCが有効になっている場合に、データスキャン中にTiKVがクラッシュする可能性がある問題を修正しました [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         -   Azure Blob Storage の Azure Managed Identity 認証をサポートし、クラウドストレージへのアップロードが停止する可能性がある問題を修正します [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   アップストリームのbinlogファイルのローテーション後にDMがグローバルチェックポイントの位置を進めない問題を修正 [#12339](https://github.com/pingcap/tiflow/issues/12339) @[OliverS929](https://github.com/OliverS929)
         -   セーフモードで外部キー制約のあるテーブルの更新を処理する際に、主キーまたは一意キーが変更されていない場合でも、DM が誤って外部キーのカスケードをトリガーし、意図しないデータ削除を引き起こす可能性がある問題を修正します。 [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)

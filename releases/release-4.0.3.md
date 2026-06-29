@@ -23,7 +23,7 @@ TiDB バージョン: 4.0.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   zstd、lz4、snappy [＃404](https://github.com/pingcap/br/pull/404)を使用したバックアップファイルの圧縮をサポート
 
@@ -89,7 +89,7 @@ TiDB バージョン: 4.0.3
 
         -   メトリクス[＃695](https://github.com/pingcap/tiflow/pull/695)テーブルIDをテーブル名に置き換える
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   JSONログの出力をサポート[＃336](https://github.com/pingcap/br/issues/336)
         -   実行時にpprofを有効にするサポート[＃372](https://github.com/pingcap/br/pull/372)
@@ -156,7 +156,7 @@ TiDB バージョン: 4.0.3
         -   引用符で囲まれていないテーブル名がSQL構文エラーを引き起こす問題を修正[＃676](https://github.com/pingcap/tiflow/pull/676)
         -   `p.stop`が呼び出された後にプロセッサが完全に終了しない問題を修正[＃693](https://github.com/pingcap/tiflow/pull/693)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ時間がマイナス[＃405](https://github.com/pingcap/br/pull/405)になる可能性がある問題を修正
 

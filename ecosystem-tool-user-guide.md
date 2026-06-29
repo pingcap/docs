@@ -38,9 +38,9 @@ TiDB Operatorの基本は次のとおりです。
 
 TiDB は、インポートとエクスポート、バックアップと復元、増分データレプリケーション、データ検証などの複数のデータ管理ツールを提供します。
 
-### データ移行 - TiDB データ移行 (DM) {#data-migration-tidb-data-migration-dm}
+### データ移行 - TiDB Data Migration (DM) {#data-migration-tidb-data-migration-dm}
 
-[TiDBデータ移行](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
 
 DM の基本は次のとおりです。
 
@@ -98,7 +98,7 @@ TiDB Lightningの基本は次のとおりです。
 >
 > Loaderツールはメンテナンスされなくなりました。Loaderに関連するシナリオでは、代わりに`Logical Import Mode`使用することをお勧めします。
 
-### バックアップと復元 - バックアップと復元 (BR) {#backup-and-restore-backup-x26-restore-br}
+### バックアップと復元 - Backup & Restore (BR) {#backup-and-restore-backup-x26-restore-br}
 
 [バックアップと復元](/br/backup-and-restore-overview.md) (BR) は、TiDB クラスターデータの分散バックアップと復元のためのコマンドラインツールです。BRは、膨大なデータ量の TiDB クラスターを効率的にバックアップおよび復元できます。
 

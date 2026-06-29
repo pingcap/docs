@@ -53,7 +53,7 @@ TiDB バージョン: 7.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することにより、ログバックアップとPITRリストアタスクの接続再利用のサポートを強化します。
         -   ログバックアップのCPUオーバーヘッドを削減`resolve lock` [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [3pointer](https://github.com/3pointer)
@@ -66,7 +66,7 @@ TiDB バージョン: 7.1.2
         -   `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDMLステートメント[＃9644](https://github.com/pingcap/tiflow/issues/9644) @ [sdojjy](https://github.com/sdojjy)をブロックしないようにします。
         -   TiCDC が失敗後に再試行するときのステータス メッセージを改善する[＃9483](https://github.com/pingcap/tiflow/issues/9483) @ [asddongmen](https://github.com/asddongmen)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   互換性のない DDL ステートメント[＃9112](https://github.com/pingcap/tiflow/issues/9112) @ [GMHDBJD](https://github.com/GMHDBJD)に対して厳密な楽観的モードをサポートする
 
@@ -163,7 +163,7 @@ TiDB バージョン: 7.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITR を使用して暗黙の主キーを回復すると競合が発生する可能性がある問題を修正[＃46520](https://github.com/pingcap/tidb/issues/46520) @ [3pointer](https://github.com/3pointer)
         -   PITRがGCS [＃47022](https://github.com/pingcap/tidb/issues/47022) @ [Leavrth](https://github.com/Leavrth)からデータを回復できない問題を修正
@@ -197,7 +197,7 @@ TiDB バージョン: 7.1.2
         -   ダウンストリームでエラーが発生し、 [＃9450](https://github.com/pingcap/tiflow/issues/9450) @ [hicqu](https://github.com/hicqu)で再試行すると、レプリケーションタスクが停止する可能性がある問題を修正しました。
         -   Kafka [＃9855](https://github.com/pingcap/tiflow/issues/9855) @ [hicqu](https://github.com/hicqu)にデータを複製するときに TiCDC が停止する可能性がある問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3Hunter](https://github.com/D3Hunter)
         -   DM が大文字と小文字を区別しない照合[＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [hihihuhu](https://github.com/hihihuhu)で競合を正しく処理できない問題を修正しました

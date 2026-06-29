@@ -133,7 +133,7 @@ TiDB バージョン: 5.0.3
         -   解決された ts [＃1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅れることによって TiCDCサーバーのpanicを引き起こす可能性があるバグを修正しました。
         -   プロセッサ[＃2142](https://github.com/pingcap/tiflow/pull/2142)潜在的なデッドロック問題を修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元中にすべてのシステムテーブルがフィルタリングされるバグを修正[＃1197](https://github.com/pingcap/br/issues/1197) [＃1201](https://github.com/pingcap/br/issues/1201)
         -   復元中にTDEが有効になっていると、バックアップと復元で「ファイルが既に存在します」というエラーが報告される問題を修正しました[＃1179](https://github.com/pingcap/br/issues/1179)

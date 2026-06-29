@@ -3,7 +3,7 @@ title: Table Selector of TiDB Data Migration
 summary: データ移行のテーブル ルーティング、 binlogイベント フィルタリング、列マッピング ルールで使用されるテーブル セレクターについて学習します。
 ---
 
-# TiDBデータ移行のテーブルセレクター {#table-selector-of-tidb-data-migration}
+# TiDB Data Migrationのテーブルセレクター {#table-selector-of-tidb-data-migration}
 
 テーブルセレクターは、スキーマ/テーブルに対して[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。特定のテーブルに一致させるには、 `schema-pattern` / `table-pattern`を設定してください。
 

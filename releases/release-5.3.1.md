@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
-summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、バックアップと復元（BR）、およびTiDBデータ移行（DM）の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、構成パラメータなどに関連する問題に対処しています。
+summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、Backup & Restore (BR)、およびTiDB Data Migration (DM)の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、構成パラメータなどに関連する問題に対処しています。
 ---
 
 # TiDB 5.3.1 リリースノート {#tidb-5-3-1-release-notes}
@@ -111,7 +111,7 @@ TiDB バージョン: 5.3.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正しました[＃31034](https://github.com/pingcap/tidb/issues/31034)
 
@@ -147,7 +147,7 @@ TiDB バージョン: 5.3.1
         -   AvroシンクがJSON型列[＃3624](https://github.com/pingcap/tiflow/issues/3624)解析をサポートしていない問題を修正
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)の負の値エラーを修正
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DMマスターとDMワーカーを特定の順序で再起動した後にDMマスターのリレーステータスが間違っているというバグを修正[＃3478](https://github.com/pingcap/tiflow/issues/3478)
         -   DM-workerが再起動後に起動に失敗するバグを修正[＃3344](https://github.com/pingcap/tiflow/issues/3344)

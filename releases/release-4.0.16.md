@@ -34,7 +34,7 @@ TiDBバージョン: 4.0.16
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元の堅牢性を向上させる[＃27421](https://github.com/pingcap/tidb/issues/27421)
 

@@ -169,7 +169,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップの互換性テストとインデックスアクセラレーション[＃51987](https://github.com/pingcap/tidb/issues/51987) @ [Leavrth](https://github.com/Leavrth)をカバーするPITR統合テストケースを追加します。
         -   ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[＃52733](https://github.com/pingcap/tidb/issues/52733) @ [Leavrth](https://github.com/Leavrth)
@@ -250,7 +250,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRが`AUTO_RANDOM`列[＃52255](https://github.com/pingcap/tidb/issues/52255) @ [Leavrth](https://github.com/Leavrth)を含むユニオンクラスター化インデックスの`AUTO_RANDOM` ID割り当ての進行状況をバックアップできない問題を修正しました。
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイント[＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3pointer](https://github.com/3pointer)がすぐに復元されない問題を修正しました。

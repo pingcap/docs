@@ -93,7 +93,7 @@ TiDB バージョン: 4.0.10
 
         -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [＃233](https://github.com/pingcap/dumpling/pull/233)に設定して、TiDBのメモリ不足（OOM）を回避します。
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   GCS [＃688](https://github.com/pingcap/br/pull/688)でBR v4.0.8を使用してバックアップされたファイルをBR v4.0.9で復元できない問題を修正しました。
         -   GCSstorageURL にプレフィックス[＃673](https://github.com/pingcap/br/pull/673)がない場合にBR がパニックになる問題を修正しました

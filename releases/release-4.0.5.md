@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.5
 
         -   TSO [＃801](https://github.com/pingcap/tiflow/pull/801)取得頻度を下げる
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   いくつかのログを最適化する[＃428](https://github.com/pingcap/br/pull/428)
 
@@ -155,7 +155,7 @@ TiDB バージョン: 4.0.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ概要ログ[＃472](https://github.com/pingcap/br/pull/472)で合計 KV と合計バイト数が重複して計算される問題を修正しました
         -   このモードに切り替えてから最初の5分間はインポートモードが機能しない問題を修正しました[＃473](https://github.com/pingcap/br/pull/473)

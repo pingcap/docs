@@ -93,7 +93,7 @@ TiDB バージョン: 4.0.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元プロセスをパイプライン化してパフォーマンスを向上させる[＃266](https://github.com/pingcap/br/pull/266)
 

@@ -37,7 +37,7 @@ TiDB バージョン: 7.5.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラー[＃17224](https://github.com/tikv/tikv/issues/17224) @ [RidRisR](https://github.com/RidRisR)を返します。
 
@@ -102,7 +102,7 @@ TiDB バージョン: 7.5.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアッププロセス中に TiKV が応答しなくなった場合にバックアップタスクが停止する可能性がある問題を修正[＃53480](https://github.com/pingcap/tidb/issues/53480) @ [Leavrth](https://github.com/Leavrth)
         -   バックアップと復元のチェックポイントパスが一部の外部ストレージと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [Leavrth](https://github.com/Leavrth)
@@ -114,7 +114,7 @@ TiDB バージョン: 7.5.4
 
         -   変更フィードチェックポイントの**Barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[＃11553](https://github.com/pingcap/tiflow/issues/11553) @ [3AceShowHand](https://github.com/3AceShowHand)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   インデックスの長さがデフォルト値の`max-index-length` [＃11459](https://github.com/pingcap/tiflow/issues/11459) @ [michaelmdeng](https://github.com/michaelmdeng)を超えるとデータレプリケーションが中断される問題を修正しました
         -   DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラー[＃11503](https://github.com/pingcap/tiflow/issues/11503) @ [lance6716](https://github.com/lance6716)が発生する問題を修正しました。

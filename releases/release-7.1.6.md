@@ -48,7 +48,7 @@ TiDB バージョン: 7.1.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップのマージ操作に対する許容度を向上します。適度に長いマージ操作が発生した場合、ログバックアップタスクがエラー状態[＃16554](https://github.com/tikv/tikv/issues/16554) @ [YuJuncen](https://github.com/YuJuncen)に陥る可能性が低くなります。
         -   BRはデータ復旧中に空のSSTファイルをクリーンアップします[＃16005](https://github.com/tikv/tikv/issues/16005) @ [Leavrth](https://github.com/Leavrth)
@@ -65,7 +65,7 @@ TiDB バージョン: 7.1.6
         -   REDOログを使用してデータリカバリ中のメモリの安定性を向上させ、OOM [＃10900](https://github.com/pingcap/tiflow/issues/10900) @ [CharlesCheung96](https://github.com/CharlesCheung96)の確率を低減します。
         -   下流が`SUPER`権限が付与されたTiDBの場合、TiCDCは下流データベースから`ADD INDEX DDL`の実行ステータスを照会することをサポートします。これにより、DDL文の実行を再試行する際のタイムアウトによるデータ複製の失敗を回避できます[＃10682](https://github.com/pingcap/tiflow/issues/10682) @ [CharlesCheung96](https://github.com/CharlesCheung96)の場合）。
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   19文字を超えるパスワードを使用してMySQLサーバー8.0に接続できるように、 `go-mysql`を1.9.1にアップグレードします[＃11603](https://github.com/pingcap/tiflow/pull/11603) @ [fishiu](https://github.com/fishiu)
 
@@ -250,7 +250,7 @@ TiDB バージョン: 7.1.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BR統合テストケースが不安定になる問題を修正し、スナップショットまたはログバックアップファイルの破損をシミュレートする新しいテストケースを追加します[＃53835](https://github.com/pingcap/tidb/issues/53835) @ [Leavrth](https://github.com/Leavrth)
         -   `ADD INDEX`や`MODIFY COLUMN`などのバックフィルを必要とする DDL が、増分リストア[＃54426](https://github.com/pingcap/tidb/issues/54426) @ [3pointer](https://github.com/3pointer)中に正しく回復されない可能性がある問題を修正しました。
@@ -277,7 +277,7 @@ TiDB バージョン: 7.1.6
         -   `DROP PRIMARY KEY`と`DROP UNIQUE KEY`ステートメントが正しく複製されない問題を修正[＃10890](https://github.com/pingcap/tiflow/issues/10890) @ [asddongmen](https://github.com/asddongmen)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [asddongmen](https://github.com/asddongmen)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DMが`ALTER DATABASE`ステートメントを処理するときにデフォルトのデータベースを設定せず、レプリケーションエラー[＃11503](https://github.com/pingcap/tiflow/issues/11503) @ [lance6716](https://github.com/lance6716)が発生する問題を修正しました。
         -   複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @ [GMHDBJD](https://github.com/GMHDBJD)

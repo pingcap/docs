@@ -165,7 +165,7 @@ TiDB バージョン: 5.1.4
         -   デフォルト値の`max-message-bytes`を`10M` [＃3081](https://github.com/pingcap/tiflow/issues/3081)に設定することで、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正しました。
         -   Kafka メッセージの書き込み中にエラーが発生すると TiCDC 同期タスクが一時停止する可能性がある問題を修正[＃2978](https://github.com/pingcap/tiflow/issues/2978)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正[＃30425](https://github.com/pingcap/tidb/issues/30425) [＃31034](https://github.com/pingcap/tidb/issues/31034)
 
