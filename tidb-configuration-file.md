@@ -349,7 +349,7 @@ Configuration items related to log.
 - Unit: second
 - In some user scenarios, TiDB logs might be stored on hot-pluggable or network-attached disks, which might become permanently unavailable. In these cases, TiDB cannot recover automatically from such disaster and the log-writing operations will be permanently blocked. Although the TiDB process might seem to be running, it does not respond to any requests. This configuration item is designed to handle such situations.
 
-## log.file
+### log.file
 
 Configuration items related to log files.
 
@@ -656,7 +656,7 @@ Configuration items related to opentracing.
 + Enables RPC metrics.
 + Default value: `false`
 
-## opentracing.sampler
+### opentracing.sampler
 
 Configuration items related to opentracing.sampler.
 
@@ -690,7 +690,7 @@ Configuration items related to opentracing.sampler.
 + Controls the frequency of polling the jaeger-agent sampling policy.
 + Default value: `0`
 
-## opentracing.reporter
+### opentracing.reporter
 
 Configuration items related to opentracing.reporter.
 
@@ -810,7 +810,7 @@ Configuration items related to opentracing.reporter.
 + Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
 + Default value: `true`
 
-## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
+### tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
 
