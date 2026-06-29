@@ -44,7 +44,7 @@ TiDB Toolkitは以下のリンクからダウンロードできます。
 | [TiCDC](/ticdc/ticdc-overview.md)                                 | `cdc-{version}-linux-{arch}.tar.gz`                                                                                                                                 |
 | [バックアップと復元 (BR)](/br/backup-and-restore-overview.md)              | `br-{version}-linux-{arch}.tar.gz`                                                                                                                                  |
 | [同期差分検査ツール](/sync-diff-inspector/sync-diff-inspector-overview.md) | TiDB v8.5.6以降の場合： `tiflow-{version}-linux-{arch}.tar.gz`<br/> v8.5.6より前のバージョンの場合： `sync_diff_inspector`                                                             |
-| [PD回復](/pd-recover.md)                                            | `pd-recover-{version}-linux-{arch}.tar`                                                                                                                             |
+| [PD Recover](/pd-recover.md)                                            | `pd-recover-{version}-linux-{arch}.tar`                                                                                                                             |
 
 > **注記：**
 >
