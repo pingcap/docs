@@ -483,7 +483,7 @@
             -   [説明する](/tidb-cloud/ticloud-branch-describe.md)
             -   [リスト](/tidb-cloud/ticloud-branch-list.md)
             -   [シェル](/tidb-cloud/ticloud-branch-shell.md)
-        -   インポート
+        -   輸入
             -   [キャンセル](/tidb-cloud/ticloud-import-cancel.md)
             -   [説明する](/tidb-cloud/ticloud-import-describe.md)
             -   [リスト](/tidb-cloud/ticloud-import-list.md)
