@@ -322,7 +322,7 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
--   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してアップストリーム データベースとダウンストリーム データベースの間でデータを比較するときに、データベースのバージョンが異なり、[下流のTiDBに無効な外部キーがあります](#compatibility-between-tidb-versions)がある場合、sync-diff-inspector はテーブル スキーマの不整合エラーを報告することがあります。これは、TiDB v6.6.0 が無効な外部キーに対する`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
+-   [同期差分検査ツール](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してアップストリーム データベースとダウンストリーム データベースの間でデータを比較するときに、データベースのバージョンが異なり、[下流のTiDBに無効な外部キーがあります](#compatibility-between-tidb-versions)がある場合、sync-diff-inspector はテーブル スキーマの不整合エラーを報告することがあります。これは、TiDB v6.6.0 が無効な外部キーに対する`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
 
 </CustomContent>
 

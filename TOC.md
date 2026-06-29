@@ -552,7 +552,7 @@
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
         -   [PingCAP Clinicを使用してクラスターのトラブルシューティングを行う](/clinic/clinic-user-guide-for-tiup.md)
         -   [PingCAP Clinicの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
-    -   sync-diff-inspector
+    -   同期差分検査ツール
         -   [概要](/sync-diff-inspector/sync-diff-inspector-overview.md)
         -   [スキーマ名／テーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)
         -   [シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)
