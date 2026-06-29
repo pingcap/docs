@@ -26,7 +26,7 @@ The full-text search feature in TiDB provides the following capabilities:
 
 ## Prerequisites
 
-Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} and {{{ .essential }}} in the following regions:
+Full-text search is still in the early stages, and we are continuously rolling it out to more customers. Currently, full-text search is only available on {{{ .starter }}} in the following regions:
 
 - AWS: `Oregon (us-west-2)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
 
@@ -66,7 +66,7 @@ db = TiDBClient.connect(
 
 You can get these connection parameters from the [TiDB Cloud console](https://tidbcloud.com) as follows:
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed, with connection parameters listed.
 
