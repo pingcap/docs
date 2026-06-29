@@ -23,7 +23,7 @@ TiDBバージョン：8.5.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   新しくサポートされた AWS リージョンが検証に失敗することによって引き起こされるバックアップ エラーを避けるために、AWS リージョン名のチェックを削除します [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)シュート
 
@@ -119,7 +119,7 @@ TiDBバージョン：8.5.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   データ復元中に SST ファイルのダウンロードを繰り返すと、極端な場合に TiKV がpanicを引き起こす可能性がある問題を修正 [#18335](https://github.com/tikv/tikv/issues/18335) @[3pointer](https://github.com/3pointer)
         -   `status`を使用してログバックアップタスクをクエリした際に、結果に`br log status --json`フィールドが欠落する問題を修正 [#57959](https://github.com/pingcap/tidb/issues/57959) @[Leavrth](https://github.com/Leavrth)
@@ -137,7 +137,7 @@ TiDBバージョン：8.5.2
         -   PDスケールイン後にTiCDCがPDに正しく接続できない問題を修正 [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)
         -   TiCDCが`CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製する際にpanic可能性がある問題を修正しました [#11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   TLSと`start-task`の両方が設定されている場合、 `shard-mode`の事前チェックが失敗する問題を修正 [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
 

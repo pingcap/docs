@@ -13,7 +13,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 
 !TiDB Migration Tools media/migration-tools.png-->
 
-## <a href="/dm/dm-overview.md">TiDB データ移行 (DM)</a> {#a-href-dm-dm-overview-md-tidb-data-migration-dm-a}
+## <a href="/dm/dm-overview.md">TiDB Data Migration (DM)</a> {#a-href-dm-dm-overview-md-tidb-data-migration-dm-a}
 
 -   **ユーザーシナリオ**: MySQL互換データベースからTiDBへのデータ移行
 -   **アップストリーム**: MySQL、MariaDB、 Aurora
@@ -51,7 +51,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   Amazon S3へのデータのエクスポートをサポート
 -   **おすすめ**：
     -   エクスポートしたデータを TiDB 以外のデータベースに復元する場合は、 Dumplingを使用することをお勧めします。
-    -   エクスポートしたデータを別の TiDB クラスターに復元する場合は、バックアップと復元 (BR) を使用することをお勧めします。
+    -   エクスポートしたデータを別の TiDB クラスターに復元する場合は、Backup & Restore (BR) を使用することをお勧めします。
 
 ## <a href="/ticdc/ticdc-overview.md">TiCDC</a> {#a-href-ticdc-ticdc-overview-md-ticdc-a}
 
@@ -63,7 +63,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   RawKV のみを使用する TiKV クラスター。
     -   DDL 操作`CREATE SEQUENCE`と TiDB の`SEQUENCE`関数。
 
-## <a href="/br/backup-and-restore-overview.md">バックアップと復元 (BR)</a> {#a-href-br-backup-and-restore-overview-md-backup-x26-restore-br-a}
+## <a href="/br/backup-and-restore-overview.md">Backup & Restore (BR)</a> {#a-href-br-backup-and-restore-overview-md-backup-x26-restore-br-a}
 
 -   **ユーザーシナリオ**: データのバックアップとリストアによって大量の TiDB クラスターデータを移行する
 -   **上流**：TiDB

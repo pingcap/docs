@@ -20,13 +20,13 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 <CustomContent platform="tidb">
 
-鍵と証明書の作成には[オープンSSL](https://www.openssl.org/)使用することをお勧めします。証明書の生成プロセスは[TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。以下の段落では、証明書で検証する必要がある追加の属性フィールドを設定する方法を説明します。
+鍵と証明書の作成には[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは[TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。以下の段落では、証明書で検証する必要がある追加の属性フィールドを設定する方法を説明します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-鍵と証明書の作成には[オープンSSL](https://www.openssl.org/)使用することをお勧めします。証明書の生成プロセスは[TiDBクライアントとサーバー間のTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。以下の段落では、証明書で検証する必要がある追加の属性フィールドを設定する方法を説明します。
+鍵と証明書の作成には[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは[TiDBクライアントとサーバー間のTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。以下の段落では、証明書で検証する必要がある追加の属性フィールドを設定する方法を説明します。
 
 </CustomContent>
 

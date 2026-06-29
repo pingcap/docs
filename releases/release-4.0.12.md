@@ -55,7 +55,7 @@ TiDB バージョン: 4.0.12
         -   ユーザーが現在のタイムスタンプ[＃1497](https://github.com/pingcap/tiflow/pull/1497) `start-ts`日前または`checkpoint-ts`日前に変更フィードを作成または再開するときに、二重の確認を追加します。
         -   古い値機能[＃1571](https://github.com/pingcap/tiflow/pull/1571)用の Grafana パネルを追加する
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   環境変数`HTTP_PROXY`と`HTTPS_PROXY`ログに記録する[＃827](https://github.com/pingcap/br/pull/827)
         -   テーブル数が多い場合のバックアップパフォーマンスの向上[＃745](https://github.com/pingcap/br/pull/745)
@@ -125,7 +125,7 @@ TiDB バージョン: 4.0.12
         -   トランザクションカウンタが正しく更新されず、データベース接続リークが発生する可能性があるバグを修正しました[＃1524](https://github.com/pingcap/tiflow/pull/1524)
         -   PD にジッターがある場合に複数の所有者が共存し、テーブルが[＃1540](https://github.com/pingcap/tiflow/pull/1540)失われる可能性がある問題を修正しました。
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ターゲットパスがバケット名[＃733](https://github.com/pingcap/br/pull/733)の場合、S3ストレージの`WalkDir` `nil`返すバグを修正しました
         -   `status`ポートがTLS [＃839](https://github.com/pingcap/br/pull/839)で提供されないバグを修正

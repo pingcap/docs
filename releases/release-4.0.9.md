@@ -86,7 +86,7 @@ TiDB バージョン: 4.0.9
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   コマンドラインで曖昧な引数`--checksum false`使用しないでください。この引数はチェックサムを正しく無効化しません`--checksum=false`のみ使用できます[＃588](https://github.com/pingcap/br/pull/588)
         -   BRが誤って存在した後にPDが元の構成を回復できるように、PD構成を一時的に変更することをサポートします[＃596](https://github.com/pingcap/br/pull/596)
@@ -195,7 +195,7 @@ TiDB バージョン: 4.0.9
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   S3 シークレットアクセスキー[＃617](https://github.com/pingcap/br/pull/617)の特殊文字によって発生する障害を修正
 

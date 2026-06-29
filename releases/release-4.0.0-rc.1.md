@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   TiKVクライアントがプリライトイベント[＃446](https://github.com/pingcap/tiflow/pull/446)の繰り返し送信を正しく処理できない問題を修正
     -   TiKVクライアントが初期化[＃448](https://github.com/pingcap/tiflow/pull/448)前に受信した冗長な事前書き込みイベントを正しく処理できない問題を修正しました。
 
--   バックアップと復元 (BR)
+-   Backup & Restore (BR)
 
     -   チェックサムが無効になっている場合でもチェックサムが実行される問題を修正[＃223](https://github.com/pingcap/br/pull/223)
     -   TiDB [＃230](https://github.com/pingcap/br/pull/230) [＃231](https://github.com/pingcap/br/pull/231)で`auto-random`または`alter-pk`有効になっている場合に増分レプリケーションが失敗する問題を修正
@@ -94,7 +94,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   TiCDC サービスの GC セーフ ポイントを PD [＃487](https://github.com/pingcap/tiflow/pull/487)に自動的に更新する機能を追加します。
     -   データ複製[＃498](https://github.com/pingcap/tiflow/pull/498)タイムゾーン設定を追加する
 
--   バックアップと復元 (BR)
+-   Backup & Restore (BR)
 
     -   storageURL [＃246](https://github.com/pingcap/br/pull/246)での S3/GCS の設定をサポート
 

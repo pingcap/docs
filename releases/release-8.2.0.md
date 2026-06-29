@@ -232,7 +232,7 @@ TiDB バージョン: 8.2.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ機能を最適化し、ノードの再起動、クラスターのスケールアウト、および多数のテーブルをバックアップする際のネットワーク ジッター時のバックアップ パフォーマンスと安定性を向上させます [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
         -   データ復元時にTiCDCチェンジフィードのきめ細かいチェックを実装します。チェンジフィードの[`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts)データバックアップ時刻より後であれば、復元操作に影響はなく、不要な待ち時間を短縮し、ユーザーエクスペリエンスを向上させます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
@@ -329,7 +329,7 @@ TiDB バージョン: 8.2.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   空の`EndKey`が原因でBR がトランザクション KV クラスターの復元に失敗する問題を修正 [#52574](https://github.com/pingcap/tidb/issues/52574) @[3pointer](https://github.com/3pointer)
         -   PD接続障害により、ログバックアップアドバンサーの所有者が存在するTiDBインスタンスがpanicを起こす可能性がある問題を修正 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
@@ -346,7 +346,7 @@ TiDB バージョン: 8.2.0
         -   Grafana の**Kafka 送信バイト**パネルの表示が不正確な問題を修正 [#10777](https://github.com/pingcap/tiflow/issues/10777) @[asddongmen](https://github.com/asddongmen)
         -   マルチノード環境で多数の`UPDATE`操作を実行する際に Changefeed を繰り返し再起動するとデータ不整合が発生する可能性がある問題を修正しました [#11219](https://github.com/pingcap/tiflow/issues/11219) @[lidezhu](https://github.com/lidezhu)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   `go-mysql` [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)をアップグレードして、接続ブロックの問題を修正します。
         -   MariaDBデータの移行中に`SET`ステートメントが原因でDMがpanicを起こす問題を修正 [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)

@@ -38,7 +38,7 @@ TiDBバージョン: 7.1.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   データ復元中にデータベースをバッチで作成するサポート[＃50767](https://github.com/pingcap/tidb/issues/50767) @ [Leavrth](https://github.com/Leavrth)
         -   大規模なデータセット[＃48301](https://github.com/pingcap/tidb/issues/48301) @ [Leavrth](https://github.com/Leavrth)のシナリオで`RESTORE`ステートメントのテーブル作成パフォーマンスを向上
@@ -155,7 +155,7 @@ TiDBバージョン: 7.1.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[＃50839](https://github.com/pingcap/tidb/issues/50839) @ [YuJuncen](https://github.com/YuJuncen)
         -   TiKVノード[＃50566](https://github.com/pingcap/tidb/issues/50566) @ [Leavrth](https://github.com/Leavrth)にリーダーがいないためにデータの復元が遅くなる問題を修正しました
@@ -174,7 +174,7 @@ TiDBバージョン: 7.1.4
         -   変更フィードを再開するときに`snapshot lost caused by GC`時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB [＃10463](https://github.com/pingcap/tiflow/issues/10463) @ [sdojjy](https://github.com/sdojjy)の GC セーフポイントよりも小さい問題を修正しました。
         -   単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`種類のチェックサムの検証に失敗する問題を修正[＃10573](https://github.com/pingcap/tiflow/issues/10573) @ [3AceShowHand](https://github.com/3AceShowHand)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   タスク構成で間違ったbinlogイベントタイプがアップグレード失敗の原因となる問題を修正[＃10282](https://github.com/pingcap/tiflow/issues/10282) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   `shard_row_id_bits`テーブルでスキーマ トラッカーが[＃10308](https://github.com/pingcap/tiflow/issues/10308) @ [GMHDBJD](https://github.com/GMHDBJD)の初期化に失敗する問題を修正しました。

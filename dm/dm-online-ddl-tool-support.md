@@ -5,7 +5,7 @@ summary: DM における一般的なオンライン DDL ツールのサポート
 
 # オンライン DDL ツールの TiDB データ移行サポート {#tidb-data-migration-support-for-online-ddl-tools}
 
-MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用されています。TiDBデータ移行（DM）は、これらのツールをサポートし、不要な中間データの移行を回避します。
+MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用されています。TiDB Data Migration (DM)は、これらのツールをサポートし、不要な中間データの移行を回避します。
 
 このドキュメントでは、DM における一般的なオンライン DDL ツールのサポート、使用方法、および注意事項について説明します。
 

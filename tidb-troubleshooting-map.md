@@ -396,7 +396,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 6.1 データ移行 {#6-1-data-migration}
 
--   6.1.1 TiDBデータ移行（DM）は、MySQL/MariaDBからTiDBへのデータ移行をサポートする移行ツールです。詳細については、 [DMの概要](/dm/dm-overview.md)参照してください。
+-   6.1.1 TiDB Data Migration (DM)は、MySQL/MariaDBからTiDBへのデータ移行をサポートする移行ツールです。詳細については、 [DMの概要](/dm/dm-overview.md)参照してください。
 
 -   6.1.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` `query status`を実行したとき、またはログを確認したときに表示されます。
 

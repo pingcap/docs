@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.14
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   小さなバックアップファイルを結合して復元を高速化[＃655](https://github.com/pingcap/br/pull/655)
 
@@ -141,7 +141,7 @@ TiDB バージョン: 4.0.14
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `mysql`スキーマからのデータ復元が失敗する可能性がある問題を修正[＃1142](https://github.com/pingcap/br/pull/1142)
 

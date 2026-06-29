@@ -74,7 +74,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
         -   Fix panic of TiDB Lightning caused by invalid metric counters [＃37338](https://github.com/pingcap/tidb/issues/37338) @ [D3Hunter](https://github.com/D3Hunter)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DMタスクが同期ユニットに入り、中断されると上流のテーブル構造情報が失われる問題を修正[#7159](https://github.com/pingcap/tiflow/issues/7159) @ [lance6716](https://github.com/lance6716)
         -   チェックポイント[＃5010](https://github.com/pingcap/tiflow/issues/5010) @ [lance6716](https://github.com/lance6716)を保存するときに SQL ステートメントを分割して、大規模なトランザクション エラーを修正します。
@@ -91,7 +91,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
         -   etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[＃7131](https://github.com/pingcap/tiflow/issues/7131) @ [Rustin170506](https://github.com/Rustin170506)
         -   REDOログ内の非再入可能DDL文が2回実行されるとデータの不整合が発生する可能性がある問題を修正[＃6927](https://github.com/pingcap/tiflow/issues/6927) @ [hicqu](https://github.com/hicqu)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元中に同時実行が大きすぎる設定になっているため、リージョンのバランスが取れていない問題を修正しました[＃37549](https://github.com/pingcap/tidb/issues/37549) @ [3pointer](https://github.com/3pointer)
         -   外部ストレージ[＃37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれている場合にバックアップと復元が失敗する可能性がある問題を修正しました

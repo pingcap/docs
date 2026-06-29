@@ -1,9 +1,9 @@
 ---
 title: Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+
-summary: TiDBデータ移行をv1.0.xからv2.0+へ手動でアップグレードする方法を学びましょう。
+summary: TiDB Data Migrationをv1.0.xからv2.0+へ手動でアップグレードする方法を学びましょう。
 ---
 
-# TiDBデータ移行をv1.0.xからv2.0+へ手動でアップグレードする {#manually-upgrade-tidb-data-migration-from-v1-0-x-to-v2-0}
+# TiDB Data Migrationをv1.0.xからv2.0+へ手動でアップグレードする {#manually-upgrade-tidb-data-migration-from-v1-0-x-to-v2-0}
 
 このドキュメントでは、TiDB DMツールをv1.0.xからv2.0+に手動でアップグレードする方法について説明します。主な手順は、v1.0.xのグローバルチェックポイント情報を使用して、v2.0+クラスタで新しいデータ移行タスクを開始することです。
 

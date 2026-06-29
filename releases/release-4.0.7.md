@@ -49,7 +49,7 @@ TiDB バージョン: 4.0.7
 
         -   古い値機能が有効になっている場合に、MySQL シンクでより実行効率の高い SQL 文を変換する機能をサポート[＃955](https://github.com/pingcap/tiflow/pull/955)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ[＃508](https://github.com/pingcap/br/pull/508)中に接続が切断された場合に接続再試行を追加
 
@@ -95,7 +95,7 @@ TiDB バージョン: 4.0.7
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元プロセス後にTiDB構成が変更されるバグを修正[＃509](https://github.com/pingcap/br/pull/509)
 

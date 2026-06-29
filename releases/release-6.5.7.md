@@ -30,7 +30,7 @@ TiDB バージョン: 6.5.7
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   大規模なデータセット[＃48301](https://github.com/pingcap/tidb/issues/48301) @ [Leavrth](https://github.com/Leavrth)シナリオで`RESTORE`ステートメントのテーブル作成パフォーマンスを向上
         -   EBS ベースのスナップショット バックアップとTiDB Lightningインポート間の互換性の問題を解決[＃46850](https://github.com/pingcap/tidb/issues/46850) @ [YuJuncen](https://github.com/YuJuncen)
@@ -86,7 +86,7 @@ TiDB バージョン: 6.5.7
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[＃16056](https://github.com/tikv/tikv/issues/16056) @ [YuJuncen](https://github.com/YuJuncen)
 

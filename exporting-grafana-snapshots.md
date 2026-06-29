@@ -6,7 +6,7 @@ summary: Grafana ダッシュボードのスナップショットをエクスポ
 > **警告：**
 >
 > -   TiDB v6.0.0以降、PingCAPはMetricsToolのメンテナンスを終了しました。v6.1.0以降、PingCAPはMetricsToolドキュメントのメンテナンスを終了しました。
-> -   監視メトリック データをエクスポートするには、 [PingCAP Clinic診断サービス](/clinic/clinic-introduction.md)使用して、監視メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
+> -   監視メトリック データをエクスポートするには、 [PingCAP Clinic診断サービス](/clinic/clinic-introduction.md)を使用して、監視メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
 
 # Grafanaスナップショットのエクスポート {#export-grafana-snapshots}
 

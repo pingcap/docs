@@ -3,13 +3,13 @@ title: Create a Data Source for TiDB Data Migration
 summary: データ移行 (DM) のデータ ソースを作成する方法を学習します。
 ---
 
-# TiDBデータ移行用のデータソースを作成する {#create-a-data-source-for-tidb-data-migration}
+# TiDB Data Migration用のデータソースを作成する {#create-a-data-source-for-tidb-data-migration}
 
 > **注記：**
 >
 > データ ソースを作成する前に、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)実行する必要があります。
 
-このドキュメントでは、TiDB データ移行 (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
+このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
 
 データソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクは、アクセスの設定情報を取得するために、対応するデータソースを参照する必要があるため、データ移行タスクを作成する前に、タスクのデータソースを作成する必要があります。具体的なデータソース管理コマンドについては、 [データソース構成の管理](/dm/dm-manage-source.md)を参照してください。
 

@@ -58,7 +58,7 @@ TiDBバージョン：8.5.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITR中のインデックス修復速度を向上させるため、インデックスを同時修復する [#59158](https://github.com/pingcap/tidb/issues/59158) @[Leavrth](https://github.com/Leavrth)
         -   TiKV のダウンロード API は、バックアップ ファイルをダウンロードする際に、特定の時間範囲内のデータをフィルタリングして除外することをサポートしています。これにより、復元中に古いバージョンまたは将来のデータ バージョンがインポートされるのを回避できます [#18399](https://github.com/tikv/tikv/issues/18399) @[3pointer](https://github.com/3pointer)
@@ -125,7 +125,7 @@ TiDBバージョン：8.5.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ブレークポイントリカバリ中にストレージノードの空き容量が不必要に再チェックされる問題を修正 [#54316](https://github.com/pingcap/tidb/issues/54316) @[Leavrth](https://github.com/Leavrth)
         -   HTTP/2 GOAWAY エラーが発生した際に、外部ストレージからのデータインポートが自動的に再試行されない問題を修正 [#60143](https://github.com/pingcap/tidb/issues/60143) @[joechenrh](https://github.com/joechenrh)

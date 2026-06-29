@@ -9,7 +9,7 @@ summary: TiDBに関する用語集。
 
 その他の利用可能な用語集：
 
--   [TiDBデータ移行用語集](/dm/dm-glossary.md)
+-   [TiDB Data Migration用語集](/dm/dm-glossary.md)
 -   [TiCDC用語集](/ticdc/ticdc-glossary.md)
 -   [TiDB Lightning用語集](/tidb-lightning/tidb-lightning-glossary.md)
 
@@ -31,7 +31,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 ## <a id="B" class="letter" href="#B">B</a> {#a-id-b-class-letter-href-b-b-a}
 
-### バックアップと復元 (BR) {#backup-x26-restore-br}
+### Backup & Restore (BR) {#backup-x26-restore-br}
 
 BRは TiDB のバックアップおよび復元ツールです。詳細については[BR概要](/br/backup-and-restore-overview.md)参照してください。
 
@@ -43,7 +43,7 @@ TiDBでは、 `br`はバックアップまたはリストアに使用される[b
 
 ### バッチテーブル作成 {#batch-create-table}
 
-バッチテーブル作成機能は、テーブルをバッチで作成することで、一度に複数のテーブルを作成する処理を大幅に高速化します。たとえば、 [バックアップと復元 (BR)](/br/backup-and-restore-overview.md)ツールを使用して数千のテーブルを復元する場合、この機能は全体のリカバリ時間を短縮するのに役立ちます。詳細については、 [バッチテーブル作成](/br/br-batch-create-table.md)参照してください。
+バッチテーブル作成機能は、テーブルをバッチで作成することで、一度に複数のテーブルを作成する処理を大幅に高速化します。たとえば、 [Backup & Restore (BR)](/br/backup-and-restore-overview.md)ツールを使用して数千のテーブルを復元する場合、この機能は全体のリカバリ時間を短縮するのに役立ちます。詳細については、 [バッチテーブル作成](/br/br-batch-create-table.md)を参照してください。
 
 ### バケツ {#bucket}
 

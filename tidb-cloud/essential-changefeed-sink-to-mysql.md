@@ -71,9 +71,9 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
     SET GLOBAL tidb_gc_life_time = '72h';
     ```
 
-2.  [輸出](/tidb-cloud/serverless-export.md)機能を使用してTiDB Cloud Essentialインスタンスからデータをエクスポートし、その後、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してデータをMySQLサービスにロードします。
+2.  [エクスポート](/tidb-cloud/serverless-export.md)機能を使用してTiDB Cloud Essentialインスタンスからデータをエクスポートし、その後、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してデータをMySQLサービスにロードします。
 
-3.  [輸出](/tidb-cloud/serverless-export.md)によって返されるスナップショットの時刻を記録してください。このタイムスタンプを、MySQLシンクを設定する際の開始位置として使用してください。
+3.  [エクスポート](/tidb-cloud/serverless-export.md)によって返されるスナップショットの時刻を記録してください。このタイムスタンプを、MySQLシンクを設定する際の開始位置として使用してください。
 
 ### MySQLでターゲットテーブルを作成する {#create-target-tables-in-mysql}
 

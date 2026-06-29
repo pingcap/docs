@@ -77,7 +77,7 @@ TiDB バージョン: 4.0.6
         -   プーラー初期化中に解決されたロックをスキップする[＃910](https://github.com/pingcap/tiflow/pull/910)
         -   PD書き込み頻度を減らす[＃937](https://github.com/pingcap/tiflow/pull/937)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   概要ログ[＃486](https://github.com/pingcap/br/issues/486)にリアルタイムコストを追加
 
@@ -182,7 +182,7 @@ TiDB バージョン: 4.0.6
         -   `changefeed` MySQL ドライバ[＃936](https://github.com/pingcap/tiflow/pull/936)によってブロックされる可能性がある問題を修正しました
         -   TiCDC [＃8573](https://github.com/tikv/tikv/pull/8573)の誤ったResolved Ts間隔を修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   チェックサム[＃479](https://github.com/pingcap/br/pull/479)中に発生する可能性のあるpanicを修正
         -   PDリーダー[＃496](https://github.com/pingcap/br/pull/496)の変更後に発生する可能性のあるpanicを修正

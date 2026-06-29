@@ -3,7 +3,7 @@ title: Handle Errors in TiDB Data Migration
 summary: DM を使用する際のエラー システムと一般的なエラーの処理方法について学習します。
 ---
 
-# TiDBデータ移行におけるエラーの処理 {#handle-errors-in-tidb-data-migration}
+# TiDB Data Migrationにおけるエラーの処理 {#handle-errors-in-tidb-data-migration}
 
 このドキュメントでは、エラー システムと、DM を使用するときに発生する一般的なエラーの処理方法について説明します。
 

@@ -1,9 +1,9 @@
 ---
 title: Compatibility Catalog of TiDB Data Migration
-summary: このドキュメントでは、TiDBデータ移行（DM）と上流および下流データベースとの互換性について説明します。
+summary: このドキュメントでは、TiDB Data Migration (DM)と上流および下流データベースとの互換性について説明します。
 ---
 
-# TiDBデータ移行の互換性カタログ {#compatibility-catalog-of-tidb-data-migration}
+# TiDB Data Migrationの互換性カタログ {#compatibility-catalog-of-tidb-data-migration}
 
 DMは、さまざまなソースからTiDBクラスタへのデータ移行をサポートしています。データソースの種類に基づいて、DMには4つの互換性レベルがあります。
 

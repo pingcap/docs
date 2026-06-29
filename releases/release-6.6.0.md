@@ -164,7 +164,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照してください。
 
--   TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードと統合され、完全移行のパフォーマンスを最大10倍向上させます（実験的）@[lance6716](https://github.com/lance6716)
+-   TiDB Data Migration (DM)は、TiDB Lightningの物理インポートモードと統合され、完全移行のパフォーマンスを最大10倍向上させます（実験的）@[lance6716](https://github.com/lance6716)
 
     バージョン6.6.0では、DMの完全移行機能がTiDB Lightningの物理インポートモードと統合され、DMによる完全データ移行のパフォーマンスが最大10倍向上し、大容量データシナリオにおける移行時間を大幅に短縮できるようになりました。
 
@@ -418,7 +418,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKV側でのログバックアップファイルのダウンロードの同時実行性を最適化し、通常のシナリオにおけるPITRリカバリのパフォーマンスを向上させる [#14206](https://github.com/tikv/tikv/issues/14206) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -427,7 +427,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   TiCDCレプリケーションのパフォーマンスを向上させるためのバッチ`UPDATE` DMLステートメントのサポート [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
         -   MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DM アラート ルールとコンテンツを最適化 [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -523,7 +523,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップの復元時に、ホットリージョンが原因で復元が失敗する問題を修正 [#37207](https://github.com/pingcap/tidb/issues/37207) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップが実行されているクラスターにデータを復元すると、ログバックアップファイルが復元不能になる問題を修正しました [#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
@@ -544,7 +544,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   TiKV ノード間のトラフィックが多すぎる問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
         -   プルベースのシンクが有効になっている場合の CPU 使用率、メモリ制御、スループットに関する TiCDC のパフォーマンスの問題を修正[#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   `binlog-schema delete`コマンドの実行に失敗する問題を修正しました [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         -   最後のbinlogがスキップされたDDLである場合にチェックポイントが進まない問題を修正 [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)

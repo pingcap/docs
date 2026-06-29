@@ -131,7 +131,7 @@ TiDB バージョン: 5.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   データのバックアップと復元中の平均速度が正確ではない問題を修正[＃1405](https://github.com/pingcap/br/issues/1405)
 

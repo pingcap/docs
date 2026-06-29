@@ -264,7 +264,7 @@ TiDBバージョン: 6.4.0-DMR
     -   下流データベースへのデータ書き込みに関するパフォーマンス指標の名前を、TPSからRPS（行/秒）に変更します。
     -   DMの完全移行タスクにおけるデータエクスポートの進捗状況を示す進捗インジケーターを追加します。
 
-    これらの指標の詳細については、 [TiDBデータ移行におけるクエリタスクステータス](/dm/dm-query-status.md)参照してください。
+    これらの指標の詳細については、 [TiDB Data Migrationにおけるクエリタスクステータス](/dm/dm-query-status.md)を参照してください。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -366,7 +366,7 @@ TiDBバージョン: 6.4.0-DMR
         -   スロークエリリストとSQLステートメントリストの結果の行数を表示する [#1443](https://github.com/pingcap/tidb-dashboard/issues/1443) @[baurine](https://github.com/baurine)
         -   Alertmanagerが存在しない場合にAlertmanagerエラーを報告しないようにダッシュボードを最適化する [#1444](https://github.com/pingcap/tidb-dashboard/issues/1444) @[baurine](https://github.com/baurine)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   メタデータの読み込みメカニズムを改善します。メタデータは必要な場合にのみメモリに読み込まれるため、PITR中のメモリ使用量が大幅に削減されます。 [#38404](https://github.com/pingcap/tidb/issues/38404) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -378,7 +378,7 @@ TiDBバージョン: 6.4.0-DMR
         -   Syncpointが有効になっている場合に`tidb_enable_external_ts_read`変数を使用して下流のTiDBの履歴データを読み取ることをサポートする [#7419](https://github.com/pingcap/tiflow/issues/7419) @[asddongmen](https://github.com/asddongmen)
         -   トランザクション分割を有効にし、デフォルトでセーフモードを無効にすることで、レプリケーションの安定性を向上させます [#7505](https://github.com/pingcap/tiflow/issues/7505) @[asddongmen](https://github.com/asddongmen)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   役に立たない`operate-source update`コマンドを dmctl から削除します [#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
         -   上流データベースが TiDB と互換性のない DDL ステートメントを使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL ステートメントを使用して、事前に TiDB でターゲット テーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
@@ -426,7 +426,7 @@ TiDBバージョン: 6.4.0-DMR
         -   特定の複雑なSQL文の実行プランを照会する際のTiDBのOOM問題を修正 [#1386](https://github.com/pingcap/tidb-dashboard/issues/1386) @[baurine](https://github.com/baurine)
         -   NgMonitoringがPDノードへの接続を失った場合にTop SQLスイッチが有効にならない可能性がある問題を修正しました [#164](https://github.com/pingcap/ng-monitoring/issues/164) @[zhongzc](https://github.com/zhongzc)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元プロセス中にPDリーダーが切り替わったことが原因で発生する復元失敗の問題を修正しました [#36910](https://github.com/pingcap/tidb/issues/36910) @[MoCuishle28](https://github.com/MoCuishle28)
         -   ログバックアップタスクを一時停止できない問題を修正 [#38250](https://github.com/pingcap/tidb/issues/38250) @[joccau](https://github.com/joccau)
@@ -443,7 +443,7 @@ TiDBバージョン: 6.4.0-DMR
         -   マウンターモジュールのログレベルが不適切なため、大量のログが出力される問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
         -   TiCDCクラスターに2人のオーナーが存在する可能性がある問題を修正 [#4051](https://github.com/pingcap/tiflow/issues/4051) @[asddongmen](https://github.com/asddongmen)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DM WebUI が間違った`allow-list`パラメータを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
         -   DMワーカーが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)

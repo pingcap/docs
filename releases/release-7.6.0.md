@@ -319,7 +319,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   フルバックアップリカバリフェーズ中に Amazon S3 `session-token`および`assume-role`を使用した認証をサポート [#39832](https://github.com/pingcap/tidb/issues/39832) @[3pointer](https://github.com/3pointer)
         -   `delete range`シナリオにおけるポイントインタイムリカバリ (PITR) の新しい統合テストを導入し、PITR の安定性を向上させます [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
@@ -331,7 +331,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
         -   TiCDCによるオブジェクトストレージへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の[3エースショーハンド](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DM OpenAPIへのフルデータ物理インポートの設定を追加 [#10193](https://github.com/pingcap/tiflow/issues/10193) @[GMHDBJD](https://github.com/GMHDBJD)
 
@@ -460,7 +460,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRが外部ストレージファイルに対して不正なURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         -   ログバックアップタスクは開始できるものの、タスク初期化中にPDへの接続に失敗すると正しく動作しない問題を修正 [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
@@ -478,7 +478,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
         -   TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanic可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         -   TiCDCがデータを下流のMySQLに複製する際に`checkpoint-ts`が停止する可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DM で「イベント タイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
         -   GTID モードでデータをレプリケートする際のパフォーマンス低下の問題を修正 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)

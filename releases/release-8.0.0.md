@@ -381,7 +381,7 @@ TiDB バージョン: 8.0.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `--load-stats` `br` } を導入します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
         -   `--tikv-max-restore-concurrency`コマンドラインツールに、新しい復元パラメータ { `br` } を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)シュート
@@ -399,7 +399,7 @@ TiDB バージョン: 8.0.0
         -   TiCDCがデータを複製する際のメモリ消費量を削減するために、 `RowChangedEvent`のメモリ消費量を最適化します [#10386](https://github.com/pingcap/tiflow/issues/10386) @[lidezhu](https://github.com/lidezhu)
         -   チェンジフィードタスクの作成と再開時に start-ts パラメータが有効であることを確認します [#10499](https://github.com/pingcap/tiflow/issues/10499) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   MariaDBプライマリ/セカンダリレプリケーションシナリオにおいて、移行パスがMariaDBプライマリインスタンス→MariaDBセカンダリインスタンス→DM→TiDBである場合、 `gtid_strict_mode = off`かつMariaDBセカンダリインスタンスのGTIDが厳密にインクリメントされていない場合（例えば、MariaDBセカンダリインスタンスへのデータ書き込みがある場合）、DMタスクは`less than global checkpoint position`エラーを報告します。v8.0.0以降、TiDBはこのシナリオと互換性があり、データは正常に下流に移行できます。 [#10741](https://github.com/pingcap/tiflow/issues/10741) @[okJiang](https://github.com/okJiang)
 
@@ -511,7 +511,7 @@ TiDB バージョン: 8.0.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   リージョンがリーダーになった直後に分割またはマージされると、ログバックアップのチェックポイントが停止する問題を修正 [#16469](https://github.com/tikv/tikv/issues/16469) @[YuJuncen](https://github.com/YuJuncen)
         -   一部の極端なケースでフルバックアップがピアを見つけられなかった際にTiKVがパニックを起こす問題を修正 [#16394](https://github.com/tikv/tikv/issues/16394) @[Leavrth](https://github.com/Leavrth)
@@ -537,7 +537,7 @@ TiDB バージョン: 8.0.0
         -   KVクライアントでのデータ競合によりTiCDCがpanicを起こす問題を修正 [#10718](https://github.com/pingcap/tiflow/issues/10718) @[asddongmen](https://github.com/asddongmen)
         -   TiCDCがテーブルレプリケーションタスクのスケジュール時にパニックを起こす問題を修正 [#10613](https://github.com/pingcap/tiflow/issues/10613) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   アップストリームの主キーがバイナリタイプの場合にデータが失われる問題を修正 [#10672](https://github.com/pingcap/tiflow/issues/10672) @[GMHDBJD](https://github.com/GMHDBJD)
 
