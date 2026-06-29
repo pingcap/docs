@@ -550,11 +550,11 @@
     -   [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
     -   [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
     -   Connected Careサポートサービスの特長
-        -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
-        -   接続済み：IMチケットの作成と更新のサブスクリプション
+        -   [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   Connected: IM Ticket Creation and Update Subscription
             -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続済み：サポートチケットのためのインスタントメッセージングによるやり取り
+        -   Connected: IM Interaction for Support Tickets
             -   [Slack経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
