@@ -2909,7 +2909,7 @@ Query OK, 0 rows affected (0.09 sec)
 > - For versions earlier than v8.1.0, TiDB periodically reports telemetry data to PingCAP.
 > - For versions from v8.1.0 to v8.5.2, TiDB removes the telemetry feature and the `tidb_enable_telemetry` variable no longer takes effect. It is retained solely for compatibility with earlier versions.
 > - For versions from v8.5.3 to v8.5.6, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
-> - Starting from v8.5.7, TiDB deprecates this system variable and removes the telemetry feature again.
+> - Starting from v8.5.7, TiDB deprecates this system variable and the telemetry feature.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
