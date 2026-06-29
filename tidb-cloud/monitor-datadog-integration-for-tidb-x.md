@@ -13,7 +13,7 @@ TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send me
 
     If you do not have a Datadog account, sign up at [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance under your Organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner`, `Project Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance under your Organization in TiDB Cloud.
 
 ## Limitation
 
@@ -22,37 +22,7 @@ TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send me
 
 ## Steps
 
-### Step 1. Integrate with your Datadog API Key
-
-<CustomContent plan="essential">
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
-2. In the left navigation pane, click **Integrations** > **Integration to Datadog(Preview)**.
-3. Enter your Datadog API key and choose your Datadog site.
-4. Click **Test Integration**.
-
-    - If the test succeeds, the **Confirm** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
-
-5. Click **Confirm** to complete the integration.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
-2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Datadog(Preview)**.
-3. Enter your Datadog API key and choose your Datadog site.
-4. Click **Test Integration**.
-
-    - If the test succeeds, the **Confirm** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
-
-5. Click **Confirm** to complete the integration.
-
-</CustomContent>
-
-### Step 2. Import the pre-built Datadog dashboard
+### Step 1. Import the pre-built Datadog dashboard
 
 The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> is not yet available directly from the Datadog integration marketplace. You need to manually download and import the dashboard JSON file into Datadog.
 
@@ -80,15 +50,19 @@ The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}<
 
 6. Click **Yes, Replace** to confirm the import.
 
-## View the pre-built dashboard
-
-After the Datadog integration is set up, you can access the dashboard from the TiDB Cloud console:
+### Step 2. Integrate with your Datadog API Key
 
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. In the left navigation pane, click **Integrations** > **Integration to Datadog(Preview)**.
-3. Click the **Dashboard** link to open the dashboard in Datadog.
+3. Enter your Datadog API key and choose your Datadog Region.
+4. Click **Test Integration**.
+
+    - If the test succeeds, the **Confirm** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
+
+5. Click **Confirm** to complete the integration.
 
 </CustomContent>
 
@@ -96,9 +70,21 @@ After the Datadog integration is set up, you can access the dashboard from the T
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Datadog(Preview)**.
-3. Click the **Dashboard** link to open the dashboard in Datadog.
+3. Enter your Datadog API key and choose your Datadog Region.
+4. Click **Test Integration**.
+
+    - If the test succeeds, the **Confirm** button is displayed.
+    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
+
+5. Click **Confirm** to complete the integration.
 
 </CustomContent>
+
+## View the pre-built dashboard
+
+Option 1: In the [TiDB Cloud console](https://tidbcloud.com/), go to **Integrations**, click the **Datadog(Preview)** card to view the integration details, then click **Dashboard** button, you will be redirected to the Datadog Dashboard List page. On the Datadog website, select the dashboard imported in Step 1 and filter by your target instance name.
+
+Option 2: Go directly to Datadog → Dashboard List. Select the dashboard imported in Step 1, filter by your target instance name, and view the metrics.
 
 ## Metrics available to Datadog
 
@@ -108,7 +94,7 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 
 > **Note:**
 >
-> {{{ .essential }}} does not support TiCDC components, so the `tidb_cloud.changefeed_*` metrics are currently not available.
+> {{{ .essential }}} currently does not support TiCDC feature, so the `tidb_cloud.changefeed_*` metrics are currently not available.
 
 | Metric name | Metric type | Labels | Description |
 |:--- |:--- |:--- |:--- |
@@ -124,7 +110,7 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the {{{ .essential }}} instance in bytes |
 | `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the {{{ .essential }}} instance in bytes. Returns 0 if TiFlash is not enabled. |
-| `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units (RU) consumed |
+| `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units/s (RU/s) consumed |
 
 </CustomContent>
 
@@ -144,7 +130,7 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the {{{ .premium }}} instance in bytes |
 | `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the {{{ .premium }}} instance in bytes |
-| `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units (RU) consumed |
+| `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total Request Units/s (RU/s) consumed |
 | `tidb_cloud.changefeed_latency` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The data replication latency between the upstream and the downstream of a changefeed |
 | `tidb_cloud.changefeed_status` | gauge | `changefeed: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed status:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
 
