@@ -13,7 +13,7 @@ This document describes how to connect to your {{{ .starter }}} or {{{ .essentia
 >
 > To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint with shared model, take the following steps:
+To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint with the shared model, take the following steps:
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
@@ -53,7 +53,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
     > When you connect to a {{{ .starter }}} or {{{ .essential }}} instance, you must include the prefix for your {{{ .starter }}} or Essential instance in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > Your client IP must be in the allowed IP rules of the public endpoint of your {{{ .starter }}} or Essential instance. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
-The Essential Connection exclusive model will be rolled out to new users in phases starting July 1, 2026. It supports standalone endpoints, eliminating the need for users to include the previously required account prefix when connecting. To connect to a {{{ .essential }}} instance via public endpoint with exclusive model, take the following steps:
+The Essential Connection exclusive model rolls out to new users in phases starting July 1, 2026. It supports standalone endpoints, which eliminates the need to include the account prefix when connecting. To connect to a {{{ .essential }}} instance via a public endpoint using the exclusive model, take the following steps:
 
 1. Open the overview page of the target instance.
 
