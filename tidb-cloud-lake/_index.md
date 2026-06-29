@@ -13,7 +13,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 [Architecture](https://docs.tidb.io/tidbcloudlake/tidb-cloud-lake-architecture/)
 
-[Warehouse](https://docs.tidb.io/tidbcloudlake/warehouse/)
+[Editions](https://docs.tidb.io/tidbcloudlake/editions/)
 
 </LearningPath>
 
@@ -21,9 +21,9 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 [Quick Start](https://docs.tidb.io/tidbcloudlake/lake-quick-start/)
 
-[Ingest JSON Logs with Vector](https://docs.tidb.io/tidbcloudlake/ingest-json-logs-with-vector-cloud/)
+[Migrate from Snowflake](https://docs.tidb.io/tidbcloudlake/migrate-from-snowflake/)
 
-[Ingest Kafka with Kafka Connect](https://docs.tidb.io/tidbcloudlake/ingest-kafka-with-kafka-connect/)
+[Ingest JSON Logs with Vector](https://docs.tidb.io/tidbcloudlake/ingest-json-logs-with-vector-cloud/)
 
 </LearningPath>
 
@@ -35,15 +35,81 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 [Connect Using Golang](https://docs.tidb.io/tidbcloudlake/connect-using-golang/)
 
+[Connect with Tableau](https://docs.tidb.io/tidbcloudlake/tableau/)
+
+[Connect with AWS PrivateLink](https://docs.tidb.io/tidbcloudlake/connect-with-aws-privatelink/)
+
+</LearningPath>
+
+<LearningPath label="Integrate" icon="cloud4">
+
+[Data Integration Overview](https://docs.tidb.io/tidbcloudlake/data-integration-overview/)
+
+[Supported Data Sources](https://docs.tidb.io/tidbcloudlake/data-sources/)
+
+[Integration Tasks](https://docs.tidb.io/tidbcloudlake/integration-tasks/)
+
 </LearningPath>
 
 <LearningPath label="Load" icon="cloud3">
 
 [Work with Stages](https://docs.tidb.io/tidbcloudlake/stage-overview/)
 
-[Load from Stage](https://docs.tidb.io/tidbcloudlake/load-from-stage/)
+[Load from Files](https://docs.tidb.io/tidbcloudlake/load-from-files/)
 
-[Load Semi-structured Formats](https://docs.tidb.io/tidbcloudlake/load-semi-structured-formats/)
+[Query & Transform Data](https://docs.tidb.io/tidbcloudlake/query-stage/)
+
+[Continuous Data Pipelines](https://docs.tidb.io/tidbcloudlake/continuous-data-pipelines/)
+
+</LearningPath>
+
+<LearningPath label="Analyze" icon="cloud6">
+
+[Multimodal Data Analytics](https://docs.tidb.io/tidbcloudlake/multimodal-data-analytics/)
+
+[SQL Analytics](https://docs.tidb.io/tidbcloudlake/sql-analytics/)
+
+[Vector Search](https://docs.tidb.io/tidbcloudlake/vector-search-guide/)
+
+</LearningPath>
+
+<LearningPath label="Operate" icon="tidb-cloud-tune">
+
+[Manage Costs](https://docs.tidb.io/tidbcloudlake/manage-costs/)
+
+[Monitor Usage](https://docs.tidb.io/tidbcloudlake/monitor-usage/)
+
+[AI-Powered Features](https://docs.tidb.io/tidbcloudlake/ai-powered-features/)
+
+[Performance Tuning](https://docs.tidb.io/tidbcloudlake/performance-optimization/)
+
+[Troubleshooting](https://docs.tidb.io/tidbcloudlake/troubleshooting/)
+
+</LearningPath>
+
+<LearningPath label="Security" icon="users">
+
+[Security & Reliability](https://docs.tidb.io/tidbcloudlake/security-reliability/)
+
+[Access Control](https://docs.tidb.io/tidbcloudlake/access-control/)
+
+[Data Protection Policies](https://docs.tidb.io/tidbcloudlake/data-protection-policies/)
+
+[Authenticate with AWS IAM Role](https://docs.tidb.io/tidbcloudlake/authenticate-with-aws-iam-role/)
+
+[Compliance & Security](https://docs.tidb.io/tidbcloudlake/compliance-security/)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[SQL Reference](https://docs.tidb.io/tidbcloudlake/sql-statements-overview/)
+
+[Pricing & Billing](https://docs.tidb.io/tidbcloudlake/pricing-billing/)
+
+[Data Ingestion Benchmark](https://docs.tidb.io/tidbcloudlake/benchmark-data-ingestion/)
+
+[Support Services](https://docs.tidb.io/tidbcloudlake/support-services/)
 
 </LearningPath>
 

@@ -118,6 +118,7 @@
   - [Network Policy](/tidb-cloud-lake/guides/network-policy.md)
   - [Password Policy](/tidb-cloud-lake/guides/password-policy.md)
   - [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)
+  - [Compliance & Security](/tidb-cloud-lake/guides/compliance-security.md)
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [Recovery from Operational Errors](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - Management
@@ -1216,7 +1217,6 @@
     - [Optimizer](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [Data Sharing](/tidb-cloud-lake/guides/how-data-sharing-works.md)
-  - [Compliance & Security](/tidb-cloud-lake/guides/compliance-security.md)
   - [Editions](/tidb-cloud-lake/guides/editions.md)
   - [Platforms & Regions](/tidb-cloud-lake/guides/platforms-regions.md)
   - [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
