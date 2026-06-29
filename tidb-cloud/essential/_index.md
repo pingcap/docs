@@ -63,8 +63,6 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Import CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files-serverless/?plan=essential)
 
-[Import Parquet Files](https://docs.pingcap.com/tidbcloud/import-parquet-files-serverless/?plan=essential)
-
 [With MySQL CLI](https://docs.pingcap.com/tidbcloud/import-with-mysql-cli-serverless/?plan=essential)
 
 </LearningPath>
