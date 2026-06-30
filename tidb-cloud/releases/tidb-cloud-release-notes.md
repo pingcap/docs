@@ -16,9 +16,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Enhance the stability, security, and operational experience of [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). The following enhancements and changes are rolling out gradually to newly created TiDB Cloud Essential instances.
 
-        - **Improve connection experience**: support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
+        - **Improve the connection experience**: support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
         - **Change root password support**: you can change the root password directly from the TiDB Cloud console.
-        - **Enhance data import experience**: after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before the import. In addition, the import page now displays the size of imported files to improve visibility and management of import operations.
+        - **Enhance the data import experience**: after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before importing data. In addition, the import page now displays the size of files to be imported to improve visibility and management of import operations.
         - **Update the availability of the Branch feature**: starting from **July 14, 2026**, newly created TiDB Cloud Essential instances no longer support the [Branch](/tidb-cloud/branch-overview.md) feature. Existing TiDB Cloud Essential instances created before this date are not affected. The Branch feature remains available in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter).
         - **Update import and export capabilities**: to enhance security, importing data from local files and exporting data to local files are no longer supported.
         - **Update DB audit log storage requirements**: for security and compliance reasons, you must specify an external storage location for audit log retention.
@@ -59,7 +59,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - The following billing adjustments will take effect for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential):
 
-    - **Minimum RCU billing updates**: starting from **August 1, 2026**, the minimum RCU value is automatically determined based on your configured maximum RCU value (Minimum RCU = 0.1 × configured maximum RCU, with a lower bound of 2,000 RCUs). If your actual usage remains below the minimum RCU threshold, TiDB Cloud calculates charges based on the minimum RCU value. For **existing instances created before July 1, 2026**, the implementation of this minimum RCU billing policy is postponed, and the specific effective date will be announced later.
+    - **Minimum RCU billing updates**: starting from **August 1, 2026**, the minimum RCU value is automatically determined based on your configured maximum RCU value (Minimum RCU = 0.1 × configured maximum RCU, with a lower bound of 2,000 RCUs). If your actual usage remains below the minimum RCU threshold, TiDB Cloud calculates charges based on the minimum RCU value. For **existing instances created before July 1, 2026**, the implementation of this minimum RCU billing policy is postponed, and the exact effective date will be announced later.
     - **Additional billable features**: charges for backup usage and network egress will take effect on **September 1, 2026**. For more information, see [TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 ## June 16, 2026
