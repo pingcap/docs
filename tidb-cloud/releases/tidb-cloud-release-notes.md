@@ -16,12 +16,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Enhance the stability, security, and operational experience of [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). The following enhancements and changes are rolling out gradually to newly created TiDB Cloud Essential instances.
 
-        - **Improve connection experience:** support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
-        - **Change root password support:** you can change the root password directly from the TiDB Cloud console.
-        - **Enhance data import experience:** after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before the import. In addition, the import page now displays the size of imported files to improve visibility and management of import operations.
-        - **Update the availability of the Branch feature:** starting from **July 14, 2026**, newly created TiDB Cloud Essential instances no longer support the [Branch](/tidb-cloud/branch-overview.md) feature. Existing TiDB Cloud Essential instances created before this date are not affected. The Branch feature remains available in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter).
-        - **Update import and export capabilities:** to enhance security, importing data from local files and exporting data to local files are no longer supported.
-        - **Update DB audit log storage requirements:** for security and compliance reasons, you must specify an external storage location for audit log retention.
+        - **Improve connection experience**: support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
+        - **Change root password support**: you can change the root password directly from the TiDB Cloud console.
+        - **Enhance data import experience**: after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before the import. In addition, the import page now displays the size of imported files to improve visibility and management of import operations.
+        - **Update the availability of the Branch feature**: starting from **July 14, 2026**, newly created TiDB Cloud Essential instances no longer support the [Branch](/tidb-cloud/branch-overview.md) feature. Existing TiDB Cloud Essential instances created before this date are not affected. The Branch feature remains available in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter).
+        - **Update import and export capabilities**: to enhance security, importing data from local files and exporting data to local files are no longer supported.
+        - **Update DB audit log storage requirements**: for security and compliance reasons, you must specify an external storage location for audit log retention.
         - [Changefeed](/tidb-cloud/essential-changefeed-overview.md) will be available as a billable feature starting from **July 1, 2026**.
 
       These features are rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
