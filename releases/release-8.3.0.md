@@ -264,7 +264,7 @@ TiDBバージョン：8.3.0
 
     -   `async-io`が有効になっている場合、 Raftログの書き込みバッチ処理ポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
     -   リージョン部分購読をより適切にサポートするために、TiCDCデリゲートとダウンストリームモジュールを再設計します [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
-    -   単一の低速クエリ ログのサイズを削減 [#17294](https://github.com/tikv/tikv/issues/17294) @[Connor1996](https://github.com/Connor1996)
+    -   単一のスロークエリ ログのサイズを削減 [#17294](https://github.com/tikv/tikv/issues/17294) @[Connor1996](https://github.com/Connor1996)
     -   新しいモニタリング指標を追加`min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
     -   ピアメッセージチャネルのメモリ使用量を削減します [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
 

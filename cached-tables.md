@@ -229,7 +229,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 キャッシュされたテーブルは次のシナリオでは使用**できません**。
 
--   履歴データを読み取るためにシステム変数`tidb_snapshot`設定します。
+-   履歴データを読み取るためにシステム変数`tidb_snapshot`を設定します。
 -   変更中は、データが再ロードされるまでキャッシュされたデータは無効になります。
 
 ## TiDB移行ツールとの互換性 {#compatibility-with-tidb-migration-tools}

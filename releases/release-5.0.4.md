@@ -50,7 +50,7 @@ TiDB バージョン: 5.0.4
 
 -   PD
 
-    -   TiDBダッシュボード[＃3884](https://github.com/tikv/pd/pull/3884)にOIDCベースのSSOサポートを追加
+    -   TiDB Dashboard[＃3884](https://github.com/tikv/pd/pull/3884)にOIDCベースのSSOサポートを追加
 
 -   TiFlash
 

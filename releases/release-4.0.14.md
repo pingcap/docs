@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.14 Release Notes
-summary: TiDB 4.0.14は2021年7月27日にリリースされました。このリリースには、互換性の変更、機能強化、改善、バグ修正、および各種ツールのアップデートが含まれています。主な変更点としては、TiDBとTiKVのデフォルト値の更新、TiDBダッシュボードでのOIDC SSOのサポート、TiDB、TiKV、PD、 TiFlash、および各種ツールのバグ修正などがあります。
+summary: TiDB 4.0.14は2021年7月27日にリリースされました。このリリースには、互換性の変更、機能強化、改善、バグ修正、および各種ツールのアップデートが含まれています。主な変更点としては、TiDBとTiKVのデフォルト値の更新、TiDB DashboardでのOIDC SSOのサポート、TiDB、TiKV、PD、 TiFlash、および各種ツールのバグ修正などがあります。
 ---
 
 # TiDB 4.0.14 リリースノート {#tidb-4-0-14-release-notes}
@@ -28,9 +28,9 @@ TiDB バージョン: 4.0.14
     -   保留中のPDハートビートの数を監視するメトリック`pending`を追加します。これは、遅いPDスレッド[＃10008](https://github.com/tikv/tikv/pull/10008)の問題の特定に役立ちます。
     -   BRがS3互換storage[＃10242](https://github.com/tikv/tikv/pull/10242)サポートするために仮想ホストアドレス指定モードの使用をサポート
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
-    -   OIDC SSOをサポートします。OIDC対応のSSOサービス（OktaやAuth0など）を設定することで、ユーザーはSQLパスワードを入力せずにTiDBダッシュボードにログインできます[＃960](https://github.com/pingcap/tidb-dashboard/pull/960)
+    -   OIDC SSOをサポートします。OIDC対応のSSOサービス（OktaやAuth0など）を設定することで、ユーザーはSQLパスワードを入力せずにTiDB Dashboardにログインできます[＃960](https://github.com/pingcap/tidb-dashboard/pull/960)
     -   高度なデバッグのために、いくつかの一般的な TiDB および PD 内部 API を呼び出すためのコマンドラインの代替手段である**デバッグ API** UI を追加します[＃927](https://github.com/pingcap/tidb-dashboard/pull/927)
 
 ## 改善点 {#improvements}
@@ -54,9 +54,9 @@ TiDB バージョン: 4.0.14
 
     -   同時に実行される複数のスケジューラ間の競合を減らす[＃3858](https://github.com/pingcap/pd/pull/3858) [＃3854](https://github.com/tikv/pd/pull/3854)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
-    -   TiDBダッシュボードをv2021.07.17.1に更新[＃3882](https://github.com/pingcap/pd/pull/3882)
+    -   TiDB Dashboardをv2021.07.17.1に更新[＃3882](https://github.com/pingcap/pd/pull/3882)
     -   現在のセッションを読み取り専用セッションとして共有して、それ以上の変更を回避できるようにする[＃960](https://github.com/pingcap/tidb-dashboard/pull/960)
 
 -   ツール
@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.14
     -   存在しないストア[＃3660](https://github.com/tikv/pd/issues/3660)から`evict-leader`スケジューラを削除するときに発生する可能性のある PDpanicの問題を修正しました。
     -   ストア数が多い場合にPDリーダーの再選出が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   **プロファイリング**UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[＃944](https://github.com/pingcap/tidb-dashboard/pull/944)
     -   **明細書**UIに「プラン数」が表示されない問題を修正しました[＃939](https://github.com/pingcap/tidb-dashboard/pull/939)

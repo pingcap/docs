@@ -126,7 +126,7 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 -   [実際の作業負荷に基づいて容量を推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 -   [ハードウェアの導入状況に基づいて容量を推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-TiDB ダッシュボードで[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を表示できます。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を表示できます。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
 
 </CustomContent>
 
@@ -273,7 +273,7 @@ SQL文のRU消費量は、以下の方法で確認できます。
 
 -   システム変数`tidb_last_query_info`
 -   `EXPLAIN ANALYZE`
--   遅いクエリとそれに対応するシステムテーブル
+-   スロークエリとそれに対応するシステムテーブル
 -   `statements_summary`
 
 #### システム変数<code>tidb_last_query_info</code>を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
@@ -310,7 +310,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費される RU の量を取得できます。RU の量はキャッシュ (たとえば、[コプロセッサキャッシュ](/coprocessor-cache.md)) の影響を受けることに注意してください。同じ SQL を複数回実行すると、各実行で消費される RU の量は異なる場合があります。RU の値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
-#### 遅いクエリとそれに対応するシステムテーブル {#slow-queries-and-the-corresponding-system-table}
+#### スロークエリとそれに対応するシステムテーブル {#slow-queries-and-the-corresponding-system-table}
 
 <CustomContent platform="tidb">
 
@@ -361,7 +361,7 @@ TiDB はリソース制御に関する実行時情報を定期的に収集し、
 
 TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKVモニタリング指標の詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 
-TiDB ダッシュボードの現在の[`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)テーブルでリソース グループのデータを表示できます。詳しくは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)をご覧ください。
+TiDB Dashboardの現在の[`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)テーブルでリソース グループのデータを表示できます。詳しくは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)をご覧ください。
 
 </CustomContent>
 

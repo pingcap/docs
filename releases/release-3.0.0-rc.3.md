@@ -44,7 +44,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 -   サーバ
     -   GC [＃10683](https://github.com/pingcap/tidb/pull/10683)を修復する際に goroutine がリークする可能性がある問題を修正しました
-    -   低速クエリ[＃10693](https://github.com/pingcap/tidb/pull/10693)で`host`情報を表示することをサポート
+    -   スロークエリ[＃10693](https://github.com/pingcap/tidb/pull/10693)で`host`情報を表示することをサポート
     -   TiKV [＃10632](https://github.com/pingcap/tidb/pull/10632)と相互作用するアイドルリンクの再利用をサポート
     -   RBAC [＃10738](https://github.com/pingcap/tidb/pull/10738)で`skip-grant-table`オプションを有効にするためのサポートを修正
     -   `pessimistic-txn`構成が無効になる問題を修正[＃10825](https://github.com/pingcap/tidb/pull/10825)

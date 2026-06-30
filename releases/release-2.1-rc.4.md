@@ -26,7 +26,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     -   統計サンプリングプロセス[＃7982](https://github.com/pingcap/tidb/pull/7982)における値の最大長を制限する
 -   サーバ
     -   ラッチをリファクタリングしてトランザクションの競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させる[＃7711](https://github.com/pingcap/tidb/pull/7711)
-    -   一部のケースで遅いクエリを収集することによって発生するpanic問題を修正[＃7874](https://github.com/pingcap/tidb/pull/7847)
+    -   一部のケースでスロークエリを収集することによって発生するpanic問題を修正[＃7874](https://github.com/pingcap/tidb/pull/7847)
     -   `LOAD DATA`文[＃8005](https://github.com/pingcap/tidb/pull/8005)で`ESCAPED BY`が空文字列の場合のpanic問題を修正
     -   「コプロセッサエラー」ログ情報[＃8006](https://github.com/pingcap/tidb/pull/8006)を完了する
 -   互換性

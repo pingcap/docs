@@ -230,7 +230,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)参照してください。
 
--   低速クエリのデータストレージを強化する。
+-   スロークエリのデータストレージを強化する。
 
     [TiDB Cloudコンソール](https://tidbcloud.com)におけるクエリアクセスの遅延は、より安定し、データベースのパフォーマンスに影響を与えなくなりました。
 

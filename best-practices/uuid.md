@@ -22,7 +22,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 ### バイナリとして保存 {#store-as-binary}
 
-テキスト形式のUUID形式は次のようになります`ab06f63e-8fe7-11ec-a514-5405db7aad56`は36文字の文字列です。3 [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)使用すると、テキスト形式を16バイトのバイナリ形式に変換できます。これにより、テキストを[`BINARY(16)`](/data-type-string.md#binary-type)列に格納できます。UUIDを取得する際には、 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid)関数を使用してテキスト形式に戻すことができます。
+テキスト形式のUUID形式は次のようになります`ab06f63e-8fe7-11ec-a514-5405db7aad56`は36文字の文字列です。[`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)使用すると、テキスト形式を16バイトのバイナリ形式に変換できます。これにより、テキストを[`BINARY(16)`](/data-type-string.md#binary-type)列に格納できます。UUIDを取得する際には、 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid)関数を使用してテキスト形式に戻すことができます。
 
 ### UUID形式のバイナリ順序とクラスター化された主キー {#uuid-format-binary-order-and-clustered-primary-keys}
 
@@ -56,8 +56,8 @@ CREATE TABLE `uuid_demo_2` (
 
 Key Visualizer の詳細については、次のドキュメントを参照してください。
 
--   TiDB Self-Managedの場合は[キービジュアライザー](/dashboard/dashboard-key-visualizer.md)
--   TiDB Cloudの場合は[キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
+-   TiDB Self-Managedの場合は[Key Visualizer](/dashboard/dashboard-key-visualizer.md)
+-   TiDB Cloudの場合は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

@@ -31,7 +31,7 @@ TiDB バージョン: 4.0.11
     -   外部結合[＃22402](https://github.com/pingcap/tidb/pull/22402)から簡素化された内部結合を並べ替える
     -   Grafanaダッシュボードで複数のクラスターをサポート[＃22534](https://github.com/pingcap/tidb/pull/22534)
     -   複数のステートメントの問題に対する回避策を追加[＃22468](https://github.com/pingcap/tidb/pull/22468)
-    -   遅いクエリの指標[＃22405](https://github.com/pingcap/tidb/pull/22405) `internal`と`general`に分ける
+    -   スロークエリの指標[＃22405](https://github.com/pingcap/tidb/pull/22405) `internal`と`general`に分ける
     -   `utf8_unicode_ci`と`utf8mb4_unicode_ci`照合順序[＃22099](https://github.com/pingcap/tidb/pull/22099)インターフェースを追加
 
 -   TiKV

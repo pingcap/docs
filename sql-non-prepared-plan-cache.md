@@ -20,17 +20,17 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 ## 使用法 {#usage}
 
-準備されていないプランのキャッシュを有効または無効にするには、システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)設定します。また、システム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)使用して、準備されていないプランのキャッシュのサイズを制御することもできます。キャッシュされたプランの数が`tidb_session_plan_cache_size`を超えると、TiDB は LRU (Least Recently Used) 戦略を使用してプランを削除します。
+非プリペアドプランのキャッシュを有効または無効にするには、システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を設定します。また、システム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)使用して、非プリペアドプランのキャッシュのサイズを制御することもできます。キャッシュされたプランの数が`tidb_session_plan_cache_size`を超えると、TiDB は LRU (Least Recently Used) 戦略を使用してプランを削除します。
 
 バージョン7.1.0以降では、システム変数[`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用して、キャッシュできるプランの最大サイズを制御できます。デフォルト値は2 MBです。プランのサイズがこの値を超える場合、プランはキャッシュされません。
 
 > **注記：**
 >
-> `tidb_session_plan_cache_size`で指定されたメモリは、準備済みプランキャッシュと準備されていないプランキャッシュで共有されます。現在のクラスターで準備済みプランキャッシュを有効にしている場合、準備されていないプランキャッシュを有効にすると、元の準備済みプランキャッシュのヒット率が低下する可能性があります。
+> `tidb_session_plan_cache_size`で指定されたメモリは、準備済みプランキャッシュと非プリペアドプランキャッシュで共有されます。現在のクラスターで準備済みプランキャッシュを有効にしている場合、非プリペアドプランキャッシュを有効にすると、元の準備済みプランキャッシュのヒット率が低下する可能性があります。
 
 ## 例 {#example}
 
-次の例は、準備されていないプラン キャッシュを使用する方法を示しています。
+次の例は、非プリペアドプラン キャッシュを使用する方法を示しています。
 
 1.  テスト用にテーブル`t`を作成します。
 
@@ -38,7 +38,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
     CREATE TABLE t (a INT, b INT, KEY(b));
     ```
 
-2.  準備されていないプラン キャッシュを有効にします。
+2.  非プリペアドプラン キャッシュを有効にします。
 
     ```sql
     SET tidb_enable_non_prepared_plan_cache = ON;
@@ -80,7 +80,7 @@ TiDBは、パラメータ化されたクエリに対して1つのプランのみ
 
 上記のリスクと、実行プランキャッシュが大きなメリットをもたらすのは単純なクエリのみであるという事実（クエリが複雑で実行に時間がかかる場合、実行プランキャッシュの使用はあまり役に立たない可能性があります）を考慮し、TiDBでは非準備プランキャッシュのスコープに厳しい制限を設けています。制限は次のとおりです。
 
--   [準備されたプランキャッシュ](/sql-prepared-plan-cache.md)でサポートされていないクエリまたはプランは、準備されていないプラン キャッシュでもサポートされません。
+-   [準備されたプランキャッシュ](/sql-prepared-plan-cache.md)でサポートされていないクエリまたはプランは、非プリペアドプラン キャッシュでもサポートされません。
 -   `Window`や`Having`などの複雑な演算子を含むクエリはサポートされていません。
 -   3 つ以上の`Join`テーブルまたはサブクエリを含むクエリはサポートされていません。
 -   `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数字や式が含まれるクエリはサポートされていません`ORDER BY column_name`と`GROUP BY column_name`のみがサポートされています。
@@ -138,11 +138,11 @@ SHOW warnings;
 1 row in set (0.00 sec)
 ```
 
-前の例では、準備されていないプラン キャッシュが`+`操作をサポートしていないため、クエリはキャッシュにヒットできません。
+前の例では、非プリペアドプラン キャッシュが`+`操作をサポートしていないため、クエリはキャッシュにヒットできません。
 
 ## 監視 {#monitoring}
 
-準備されていないプラン キャッシュを有効にすると、次のペインでメモリ使用量、キャッシュ内のプランの数、キャッシュ ヒット率を監視できます。
+非プリペアドプラン キャッシュを有効にすると、次のペインでメモリ使用量、キャッシュ内のプランの数、キャッシュ ヒット率を監視できます。
 
 ![non-prepare-plan-cache](/media/tidb-non-prepared-plan-cache-metrics.png)
 
@@ -154,7 +154,7 @@ SHOW warnings;
     CREATE TABLE t (a int);
     ```
 
-2.  準備されていないプラン キャッシュを有効にします。
+2.  非プリペアドプラン キャッシュを有効にします。
 
     ```sql
     SET @@tidb_enable_non_prepared_plan_cache=ON;
