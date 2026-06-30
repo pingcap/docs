@@ -67,7 +67,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     ステイル読み取り機能はv5.1.1以降、一般提供（GA）されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。Stale Readは、ローカルのTiKVレプリカからデータを直接読み取ることで、読み取りレイテンシーを削減し、クエリのパフォーマンスを向上させることができます。v6.6.0より前のTiFlashでは、 ステイル読み取りはサポートされていません。テーブルにTiFlashレプリカが存在する場合でも、 ステイル読み取りはTiKVレプリカのみを読み取ることができます。
 
-    バージョン6.6.0以降、 TiFlashはステイル読み取り機能をサポートしています。AS [`AS OF TIMESTAMP`](/as-of-timestamp.md)構文または[`tidb_read_staleness`](/tidb-read-staleness.md)システム変数を使用してテーブルの履歴データをクエリする場合、テーブルにTiFlashレプリカが存在すると、オプティマイザは対応するデータをTiFlashレプリカから読み込むことを選択できるようになり、クエリのパフォーマンスがさらに向上します。
+    バージョン6.6.0以降、 TiFlashはステイル読み取り機能をサポートしています。[`AS OF TIMESTAMP`](/as-of-timestamp.md)構文または[`tidb_read_staleness`](/tidb-read-staleness.md)システム変数を使用してテーブルの履歴データをクエリする場合、テーブルにTiFlashレプリカが存在すると、オプティマイザは対応するデータをTiFlashレプリカから読み込むことを選択できるようになり、クエリのパフォーマンスがさらに向上します。
 
     詳細については、[ドキュメント](/stale-read.md)を参照してください。
 
@@ -367,7 +367,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | DM             | [`on-duplicate-logical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                 | 新しく追加された | この設定項目は、論理インポートモードで DM が競合するデータをどのように解決するかを制御します。デフォルト値は`"replace"`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。                                                                                        |
 | DM             | [`on-duplicate-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                | 新しく追加された | この設定項目は、物理インポートモードで DM が競合データをどのように解決するかを制御します。デフォルト値は`"none"`で、これは競合データを解決しないことを意味します。 `"none"`は最高のパフォーマンスを発揮しますが、下流のデータベースでデータの不整合が発生する可能性があります。                                              |
 | DM             | [`sorting-dir-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                 | 新しく追加された | この設定項目は、物理インポートモードでローカルKVソートに使用されるディレクトリを指定します。デフォルト値は`dir`設定と同じです。                                                                                                                             |
-| 同期差分検査ツール      | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)                                                                                                                                              | 新しく追加された | この設定項目は、下流側のテーブルが上流側に存在しない場合に、上流側と下流側のデータ整合性のチェックをスキップするかどうかを制御します。                                                                                                                             |
+| sync-diff-inspector      | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)                                                                                                                                              | 新しく追加された | この設定項目は、下流側のテーブルが上流側に存在しない場合に、上流側と下流側のデータ整合性のチェックをスキップするかどうかを制御します。                                                                                                                             |
 | TiSpark        | [`spark.tispark.replica_read`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview/#tispark-configurations)                                                                                                                                           | 新しく追加された | この構成項目は、読み取るレプリカの種類を制御します。値のオプションは`leader` 、 `follower` 、および`learner` 。                                                                                                                         |
 | TiSpark        | [`spark.tispark.replica_read.label`](https://docs-archive.pingcap.com/tidb/v6.6/tispark-overview#tispark-configurations)                                                                                                                                      | 新しく追加された | この設定項目は、対象となるTiKVノードのラベルを設定するために使用されます。                                                                                                                                                         |
 
@@ -450,7 +450,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
         -   外部キーの設定のエクスポートをサポート [#39913](https://github.com/pingcap/tidb/issues/39913) @[lichunzhu](https://github.com/lichunzhu)
 
-    -   同期差分検査ツール
+    -   sync-diff-inspector
 
         -   下流のテーブルが上流に存在しない場合に、上流と下流のデータ整合性のチェックをスキップするかどうかを制御する新しいパラメータ`skip-non-existing-table`を追加します [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu)@[liumengya94](https://github.com/liumengya94)
 

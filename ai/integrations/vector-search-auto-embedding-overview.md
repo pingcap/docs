@@ -153,7 +153,7 @@ EMBED_TEXT("model_name", text_content[, additional_json_options])
 VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 ```
 
-`ORDER BY`句でこの関数を使用すると、コサイン距離に基づいて結果をランク付けできます。VEC_COSINE_DISTANCE [`VEC_COSINE_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_cosine_distance)と同じ計算方法を使用しますが、クエリテキストの埋め込みを自動的に生成します。
+`ORDER BY`句でこの関数を使用すると、コサイン距離に基づいて結果をランク付けできます。[`VEC_COSINE_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_cosine_distance)と同じ計算方法を使用しますが、クエリテキストの埋め込みを自動的に生成します。
 
 ### <code>VEC_EMBED_L2_DISTANCE()</code> {#code-vec-embed-l2-distance-code}
 
