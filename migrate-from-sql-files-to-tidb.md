@@ -87,7 +87,6 @@ After the import is started, you can check the progress in one of the following 
 
 - Search the `progress` keyword in the `grep` log, which is updated every 5 minutes by default.
 - Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
-- Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 After the import is completed, TiDB Lightning automatically exits. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
