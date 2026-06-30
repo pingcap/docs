@@ -1,11 +1,11 @@
 ---
-title: Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}
-summary: Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}}.
+title: Import Apache Parquet Files from Cloud Storage into {{{ .starter }}} or Essential
+summary: Learn how to import Apache Parquet files from Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 ---
 
-# Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}
+# Import Apache Parquet Files from Cloud Storage into {{{ .starter }}} or Essential
 
-You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to {{{ .starter }}}. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}}.
+You can import both uncompressed and Snappy compressed [Apache Parquet](https://parquet.apache.org/) format data files to {{{ .starter }}} or {{{ .essential }}}. This document describes how to import Parquet files from Amazon Simple Storage Service (Amazon S3), Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud Object Storage Service (OSS) into {{{ .starter }}} or {{{ .essential }}}.
 
 > **Note:**
 >
@@ -81,24 +81,24 @@ Because Parquet files do not contain schema information, before importing data f
 
 To allow TiDB Cloud to access the Parquet files in the Amazon S3, GCS, Azure Blob Storage, or Alibaba Cloud Object Storage Service bucket, do one of the following:
 
-- If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .starter }}} instance.
+- If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .starter }}} or Essential instance.
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files).
 
-- If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your {{{ .starter }}} instance.
+- If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access) for your {{{ .starter }}} or Essential instance.
 
-- If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your {{{ .starter }}} instance.
+- If your Parquet files are located in Azure Blob Storage, [configure Azure Blob Storage access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) for your {{{ .starter }}} or Essential instance.
 
-- If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .starter }}} instance.
+- If your Parquet files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .starter }}} or Essential instance.
 
 ## Step 4. Import Parquet files
 
-To import the Parquet files to {{{ .starter }}}, take the following steps:
+To import the Parquet files to {{{ .starter }}} or {{{ .essential }}}, take the following steps:
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target {{{ .starter }}} instance.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -106,7 +106,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
         >
         > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -151,7 +151,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
 
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target {{{ .starter }}} instance.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -159,7 +159,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
         >
         > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -202,7 +202,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target {{{ .starter }}} instance.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -210,7 +210,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
         >
         > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -253,7 +253,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
-1. Open the **Import** page for your target {{{ .starter }}} instance.
+1. Open the **Import** page for your target {{{ .starter }}} or Essential instance.
 
     1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
@@ -261,7 +261,7 @@ To import the Parquet files to {{{ .starter }}}, take the following steps:
         >
         > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 2. Click **Import data from Cloud Storage**.
 
@@ -318,7 +318,7 @@ If you get an importing error, do the following:
 
 ## Supported data types
 
-The following table lists the supported Parquet data types that can be imported to {{{ .starter }}}.
+The following table lists the supported Parquet data types that can be imported to {{{ .starter }}} and {{{ .essential }}}.
 
 | Parquet Primitive Type | Parquet Logical Type | Types in TiDB or MySQL |
 |---|---|---|
