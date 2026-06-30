@@ -42,7 +42,3 @@ Not every data source corresponds to an ingestion task. For example, `FeiShuBot`
 2. Review supported task types and their use cases on the [Integration Tasks](/tidb-cloud-lake/guides/integration-tasks.md) page.
 3. Read the task-specific guide to configure the source, preview the data, and configure the result location or result viewing method.
 4. Use the [Task Management](/tidb-cloud-lake/guides/task-management.md) page to start tasks, check status, and troubleshoot execution issues.
-
-## Video Tour
-
-<iframe width="853" height="505" class="iframe-video" src="https://www.youtube.com/embed/yfYAPVD-oHE?si=m1Gyp3KPinO1JQ17" title="YouTube video player" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" allowfullscreen></iframe>
