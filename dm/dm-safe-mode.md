@@ -138,7 +138,7 @@ This session-level setting introduces a small overhead per batch (two `SET SESSI
 
 If `foreign_key_checks=1`, `worker-count > 1`, and the replication task includes tables with foreign keys, DM reads foreign key relationships from the downstream `CREATE TABLE` schema when the task starts. For each DML operation, DM injects causality keys based on these relationships. This ensures that DM assigns operations on parent rows and their dependent child rows to the same DML worker queue.
 
-In this mode, DM supports static one-to-one table routing, such as schema or table renaming. DM still rejects routing rules that map multiple source tables in the task to the same target table.
+Starting from v8.5.7, in this mode, DM supports static one-to-one table routing, such as schema or table renaming. DM still rejects routing rules that map multiple source tables in the task to the same target table.
 
 For detailed constraints, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
 
