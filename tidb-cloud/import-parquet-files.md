@@ -9,7 +9,7 @@ This document describes how to import Apache Parquet files from Amazon Simple St
 
 > **Tip:**
 >
-> For TiDB Cloud Starter, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter](/tidb-cloud/import-parquet-files-serverless.md).
+> For TiDB Cloud Starter or TiDB Cloud Essential, see [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Starter or Essential](/tidb-cloud/import-parquet-files-serverless.md).
 
 ## Limitations
 
