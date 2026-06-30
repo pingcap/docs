@@ -240,7 +240,7 @@ TiDBは、統計情報の収集パフォーマンスを向上させるための2
 
 バージョン5.3.0より前は、TiDBはリザーバーサンプリング方式を使用して統計情報を収集していました。バージョン5.3.0以降、TiDBバージョン2の統計情報は、デフォルトでベルヌーイサンプリング方式を使用して統計情報を収集します。リザーバーサンプリング方式を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
-現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。[`SHOW STATS_META STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合は、その行数を使用して 100,000 行に対応するサンプリングレートを計算できます。この行数を確認できない場合は、テーブルの[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)の結果にある`APPROXIMATE_KEYS`列のすべての値の合計を、サンプリングレートを計算するための別の参照値として使用できます。
+現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。[`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合は、その行数を使用して 100,000 行に対応するサンプリングレートを計算できます。この行数を確認できない場合は、テーブルの[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)の結果にある`APPROXIMATE_KEYS`列のすべての値の合計を、サンプリングレートを計算するための別の参照値として使用できます。
 
 > **注記：**
 >

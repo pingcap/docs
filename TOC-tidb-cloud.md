@@ -74,7 +74,7 @@
             -   [概要](/tidb-cloud/third-party-monitoring-integrations.md)
             -   [DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)
             -   [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
-        -   [TiDB Cloudクリニック](/tidb-cloud/tidb-cloud-clinic.md)
+        -   [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
     -   チューニングパフォーマンス
         -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
         -   パフォーマンスを分析する
@@ -617,20 +617,20 @@
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
     -   [通知](/tidb-cloud/notifications.md)
 -   サポートプラン
-    -   [コネクテッドケアの概要](/tidb-cloud/connected-care-overview.md)
-    -   [コネクテッドケアの詳細](/tidb-cloud/connected-care-detail.md)
-    -   コネクテッドケアサポートサービスの特長
-        -   [接続済み：クリニックサービス](/tidb-cloud/tidb-cloud-clinic.md)
-        -   [接続済み：インスタントメッセージングにおけるAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
-        -   接続済み： TiDB CloudアラートのIMサブスクリプション
+    -   [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
+    -   [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
+    -   Connected Careサポートサービスの特長
+        -   [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+        -   [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
+        -   Connected: TiDB CloudアラートのIMサブスクリプション
             -   [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
             -   [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
             -   [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
             -   [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
-        -   接続済み：IMチケットの作成と更新のサブスクリプション
+        -   Connected: IMチケットの作成と更新のサブスクリプション
             -   [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
             -   [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
-        -   接続済み：サポートチケットのためのインスタントメッセージングによるやり取り
+        -   Connected: サポートチケットのためのIMインタラクション
             -   [Slack経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
             -   [Lark経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
     -   [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)

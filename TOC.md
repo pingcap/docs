@@ -310,7 +310,7 @@
         -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
     -   [配置ルールを使用する](/configure-placement-rules.md)
     -   [ロードベース分割を使用する](/configure-load-base-split.md)
-    -   [ストア利用制限](/configure-store-limit.md)
+    -   [店舗利用制限](/configure-store-limit.md)
     -   [バッチ処理](/batch-processing.md)
     -   PDマイクロサービスを使用する
         -   [PDマイクロサービスの概要](/pd-microservices.md)
@@ -527,7 +527,7 @@
             -   [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)
             -   [カスタマイズされたファイル](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
             -   [Amazon S3からデータをインポートする](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)
-        -   物理インポートモード
+        -   物理輸入モード
             -   [要件と制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md)
             -   [物理インポートモードを使用する](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
         -   論理インポートモード
@@ -547,12 +547,12 @@
             -   [FAQ](/tidb-lightning/tidb-lightning-faq.md)
             -   [用語集](/tidb-lightning/tidb-lightning-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
-    -   PingCAPクリニック診断サービス
+    -   PingCAP Clinic診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
-        -   [PingCAPクリニックを使用してクラスターのトラブルシューティングを行う](/clinic/clinic-user-guide-for-tiup.md)
-        -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
-    -   同期差分検査ツール
+        -   [PingCAP Clinicを使用してクラスターのトラブルシューティングを行う](/clinic/clinic-user-guide-for-tiup.md)
+        -   [PingCAP Clinicの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+    -   sync-diff-inspector
         -   [概要](/sync-diff-inspector/sync-diff-inspector-overview.md)
         -   [スキーマ名／テーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)
         -   [シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)
