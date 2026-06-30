@@ -90,7 +90,7 @@ mvcc-amplification-threshold = 10
 
 ### インメモリエンジンが私のシナリオを改善できるかどうかを判断するにはどうすればよいでしょうか？ {#how-to-determine-if-the-in-memory-engine-can-improve-my-scenario}
 
-`Total_keys` `Process_keys`よりはるかに大きい低速クエリが存在するかどうかを確認するには、次のSQL文を実行してください。
+`Total_keys` `Process_keys`よりはるかに大きいスロークエリが存在するかどうかを確認するには、次のSQL文を実行してください。
 
 ```sql
 SELECT

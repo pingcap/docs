@@ -17,7 +17,7 @@ TiDB バージョン: 4.0.1
 
 -   PD
 
-    -   組み込みの TiDB ダッシュボード[＃2511](https://github.com/pingcap/pd/pull/2511)内部プロキシをサポート
+    -   組み込みの TiDB Dashboard[＃2511](https://github.com/pingcap/pd/pull/2511)内部プロキシをサポート
     -   PDクライアント[＃2509](https://github.com/pingcap/pd/pull/2509)のカスタムタイムアウト設定をサポート
 
 -   TiFlash

@@ -113,7 +113,7 @@ TiDB バージョン: 7.5.2
     -   統計の初期化が完了する前に自動統計収集がトリガーされる問題を修正[＃52346](https://github.com/pingcap/tidb/issues/52346) @ [Rustin170506](https://github.com/Rustin170506)
     -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。
     -   共通テーブル式 (CTE) を使用して、統計情報が欠落しているパーティション テーブルにアクセスすると、クエリ結果が正しくなくなる可能性がある問題を修正しました[＃51873](https://github.com/pingcap/tidb/issues/51873) @ [qw4990](https://github.com/qw4990)
-    -   TiDBダッシュボードのモニタリングページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)における接続数（接続数）の計算と表示が誤っていた問題を修正しました。
+    -   TiDB Dashboardのモニタリングページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)における接続数（接続数）の計算と表示が誤っていた問題を修正しました。
     -   外部キー[＃51838](https://github.com/pingcap/tidb/issues/51838) @ [YangKeao](https://github.com/YangKeao)を持つテーブルを復元するときに DDL 操作が停止する問題を修正しました
     -   列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正[＃50043](https://github.com/pingcap/tidb/issues/50043) [＃51324](https://github.com/pingcap/tidb/issues/51324) @ [crazycs520](https://github.com/crazycs520)
     -   `force-init-stats` [＃51473](https://github.com/pingcap/tidb/issues/51473) @ [hawkingrei](https://github.com/hawkingrei)に設定されている場合に TiDB が対応するポートを listen しない問題を修正しました

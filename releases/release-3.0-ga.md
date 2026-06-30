@@ -90,7 +90,7 @@ TiDB Ansible バージョン: 3.0.0
     -   `ANALYZE` `USE`ステートメント`SET GLOBAL`権限チェック`SHOW PROCESSLIST`実行する
     -   ロールベースのアクセス制御 (RBAC) をサポート (**Experimental**)
 -   サーバ
-    -   遅いクエリ ログを最適化します。
+    -   スロークエリ ログを最適化します。
         -   ログ形式の再構築
         -   ログの内容を最適化する
         -   メモリテーブルの`INFORMATION_SCHEMA.SLOW_QUERY`と`ADMIN SHOW SLOW`ステートメントを使用してスロー クエリ ログをクエリできるように、ログ クエリ メソッドを最適化します。

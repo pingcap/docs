@@ -68,7 +68,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 ### 可観測性 {#observability}
 
--   TiDB ダッシュボードは TiKV のヒープ プロファイリングをサポートします [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
+-   TiDB Dashboardは TiKV のヒープ プロファイリングをサポートします [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
 
     従来、TiKV の OOM やメモリ使用量過多の問題に対処するには、インスタンス環境でヒープ プロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV はヒープ プロファイルのリモート処理に対応しました。ヒープ プロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能により、Go のヒープ プロファイリングと同様に、シンプルで使いやすい操作性を実現しています。
 

@@ -184,7 +184,7 @@ TiDBバージョン：8.5.4
 
     -   クエリ対象の列に多数の`NULL`値が含まれている場合にクエリが失敗する可能性がある問題を修正 [#10340](https://github.com/pingcap/tiflash/issues/10340) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   TiFlashがRU消費量の統計情報を水増しして生成する問題を修正 [#10380](https://github.com/pingcap/tiflash/issues/10380) @[JinheLin](https://github.com/JinheLin)
-    -   分離されたストレージとコンピューティングアーキテクチャの下で低速クエリが存在する場合にTiFlash でOOM が発生する可能性がある問題を修正 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   分離されたストレージとコンピューティングアーキテクチャの下でスロークエリが存在する場合にTiFlash でOOM が発生する可能性がある問題を修正 [#10278](https://github.com/pingcap/tiflash/issues/10278) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャ下でTiFlashと S3 の間でネットワーク分割が発生した場合、 TiFlash が無期限に再試行する可能性がある問題を修正 [#10424](https://github.com/pingcap/tiflash/issues/10424) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `FLOOR()`関数と`CEIL()`関数のパラメータ`DECIMAL`型の場合、誤った結果を返すことがある問題を修正 [#10365](https://github.com/pingcap/tiflash/issues/10365) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 

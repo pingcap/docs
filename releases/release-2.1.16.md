@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 2.1.16
     -   タイムアウト[＃11487](https://github.com/pingcap/tidb/pull/11487)までにリージョン分散のスケジュールが完了していない場合に、エラーではなく、正常に分割されたリージョンの数と完了したパーセンテージを返す`SPLIT TABLE`ステートメントをサポートします。
     -   MySQL [＃11505](https://github.com/pingcap/tidb/pull/11505)との互換性を保つために、 `REGEXP BINARY`関数で大文字と小文字を区別する
     -   `DATE_ADD` / `DATE_SUB`の結果の`YEAR`の値が 0 より小さいか[＃11477](https://github.com/pingcap/tidb/pull/11477)より大きい場合にオーバーフローするため、 `NULL`が正しく返されない問題を修正しました。
-    -   遅いクエリテーブルに、実行が成功したかどうかを示すフィールドを`Succ`追加します[＃11412](https://github.com/pingcap/tidb/pull/11421)
+    -   スロークエリテーブルに、実行が成功したかどうかを示すフィールドを`Succ`追加します[＃11412](https://github.com/pingcap/tidb/pull/11421)
     -   SQL文に現在の時刻（ `CURRENT_TIMESTAMP`や`NOW`など）の計算が含まれる場合に、現在のタイムスタンプを複数回取得することによって発生するMySQLの非互換性の問題を修正しました[＃11392](https://github.com/pingcap/tidb/pull/11392)
     -   AUTO_INCREMENT列がFLOATまたはDOUBLE型[＃11389](https://github.com/pingcap/tidb/pull/11389)処理できない問題を修正
     -   `CONVERT_TZ`関数が無効な引数[＃11357](https://github.com/pingcap/tidb/pull/11357)を受け入れたときに`NULL`が正しく返されない問題を修正しました

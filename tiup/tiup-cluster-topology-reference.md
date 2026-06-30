@@ -183,7 +183,7 @@ server_configs:
 -   `tikv` : TiKVコンポーネントのバージョン
 -   `tiflash` : TiFlashコンポーネントのバージョン
 -   `pd` : PDコンポーネントのバージョン
--   `tidb_dashboard` : スタンドアロンの TiDB ダッシュボードコンポーネントのバージョン
+-   `tidb_dashboard` : スタンドアロンの TiDB Dashboardコンポーネントのバージョン
 -   `cdc` : CDCコンポーネントのバージョン
 -   `kvcdc` : TiKV-CDCコンポーネントのバージョン
 -   `tiproxy` : TiProxyコンポーネントのバージョン

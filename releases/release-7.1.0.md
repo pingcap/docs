@@ -87,7 +87,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v7.1.0では、実際のワークロードやハードウェア構成に基づいてシステム容量を見積もる機能が導入されました。この見積機能は、キャパシティプランニングのためのより正確な基準を提供し、エンタープライズレベルのシナリオにおける安定性のニーズを満たすためにTiDBのリソース割り当てをより適切に管理するのに役立ちます。
 
-    ユーザーエクスペリエンスを向上させるために、TiDB ダッシュボードは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
+    ユーザーエクスペリエンスを向上させるために、TiDB Dashboardは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
 
     詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)参照してください。
 
@@ -192,9 +192,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   [`PLAN REPLAYER`](/sql-plan-replayer.md)の出力は`debug_trace.json` 。
     -   [`EXPLAIN`](/explain-walkthrough.md)の出力における`operator info`部分的な統計詳細。
-    -   [遅いクエリ](/identify-slow-queries.md)の`Stats`フィールドの部分的な統計詳細。
+    -   [スロークエリ](/identify-slow-queries.md)の`Stats`フィールドの部分的な統計詳細。
 
-    詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [遅いクエリを特定する](/identify-slow-queries.md)を参照してください。
+    詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
 ### Security {#security}
 

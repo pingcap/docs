@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.0
     -   `ascii_bin`と`latin1_bin`エンコード[＃7919](https://github.com/tikv/tikv/pull/7919)の照合順序規則をサポート
 
 -   PD
-    -   組み込み TiDB ダッシュボード[＃2457](https://github.com/pingcap/pd/pull/2457)リバース プロキシ リソース プレフィックスの指定をサポート
+    -   組み込み TiDB Dashboard[＃2457](https://github.com/pingcap/pd/pull/2457)リバース プロキシ リソース プレフィックスの指定をサポート
     -   PDクライアントリージョン[＃2443](https://github.com/pingcap/pd/pull/2443)のインターフェースで`pending peer`と`down peer`情報を返すことをサポート
     -   `Direction of hotspot move leader` `Direction of hotspot move peer` `Hot cache read entry number`監視項目[＃2448](https://github.com/pingcap/pd/pull/2448)追加する
 

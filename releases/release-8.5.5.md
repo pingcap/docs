@@ -139,7 +139,7 @@ TiDBバージョン：8.5.5
 
     この機能は、特定の診断およびパフォーマンス最適化シナリオにおけるワークフローを簡素化し、問題特定効率を向上させます。
 
-    詳細については、[明細書概要表](/statement-summary-tables.md)および[遅いクエリを特定する](/identify-slow-queries.md)参照してください。
+    詳細については、[明細書概要表](/statement-summary-tables.md)および[スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
 ### Security {#security}
 

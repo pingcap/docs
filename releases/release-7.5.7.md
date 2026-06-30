@@ -126,7 +126,7 @@ TiDB バージョン: 7.5.7
 
     -   `split-merge-interval`構成項目の値を繰り返し変更すると（ `1s`から`1h`に変更して`1s`に戻すなど）、その設定項目が有効にならない可能性がある問題を修正しました[＃8404](https://github.com/tikv/pd/issues/8404) @ [lhy1024](https://github.com/lhy1024)
     -   デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @ [rleungx](https://github.com/rleungx)
-    -   TiDBダッシュボードTCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @ [baurine](https://github.com/baurine)
+    -   TiDB DashboardTCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @ [baurine](https://github.com/baurine)
     -   新しく追加された TiKV ノードが[＃9145](https://github.com/tikv/pd/issues/9145) @ [bufferflies](https://github.com/bufferflies)にスケジュールされない可能性がある問題を修正しました
     -   `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @ [Tema](https://github.com/Tema)
 

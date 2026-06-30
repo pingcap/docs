@@ -5,11 +5,11 @@ summary: TiDB クラスターの実行ステータスを確認する方法を学
 
 # クラスタのステータスを確認する {#check-cluster-status}
 
-TiDBクラスタをデプロイした後、クラスタが正常に動作しているかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)とGrafanaを使用してクラスタの状態を確認する方法と、TiDBデータベースにログインして簡単なSQL操作を実行する方法を紹介します。
+TiDBクラスタをデプロイした後、クラスタが正常に動作しているかどうかを確認する必要があります。このドキュメントでは、 TiUPコマンド[TiDB Dashboard](/dashboard/dashboard-intro.md)とGrafanaを使用してクラスタの状態を確認する方法と、TiDBデータベースにログインして簡単なSQL操作を実行する方法を紹介します。
 
 ## TiDBクラスタのステータスを確認する {#check-the-tidb-cluster-status}
 
-このセクションでは、 TiUPコマンド[TiDBダッシュボード](/dashboard/dashboard-intro.md)および Grafana を使用して TiDB クラスターのステータスを確認する方法について説明します。
+このセクションでは、 TiUPコマンド[TiDB Dashboard](/dashboard/dashboard-intro.md)および Grafana を使用して TiDB クラスターのステータスを確認する方法について説明します。
 
 ### TiUPを使用する {#use-tiup}
 
@@ -21,9 +21,9 @@ tiup cluster display tidb-test
 
 期待される出力: 各ノードの`Status`情報が`Up`の場合、クラスターは正常に実行されます。
 
-### TiDBダッシュボードを使用する {#use-tidb-dashboard}
+### TiDB Dashboardを使用する {#use-tidb-dashboard}
 
-1.  `${pd-ip}:${pd-port}/dashboard`で TiDB ダッシュボードにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。5 `root`パスワードを変更した場合は、変更後のパスワードを入力してください。デフォルトではパスワードは空です。
+1.  `${pd-ip}:${pd-port}/dashboard`で TiDB Dashboardにログインします。ユーザー名とパスワードは TiDB `root`ユーザーと同じです。5 `root`パスワードを変更した場合は、変更後のパスワードを入力してください。デフォルトではパスワードは空です。
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 

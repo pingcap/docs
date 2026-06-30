@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.6 Release Notes
-summary: TiDB 4.0.6は2020年9月15日にリリースされました。新機能には、外部結合のためのTiFlashサポートとTiDBダッシュボードの改善が含まれます。TiCDCやTiKVなどのツールもアップデートされました。このリリースには、TiDB、TiKV、PD、 TiFlash、および各種ツールのバグ修正が含まれています。
+summary: TiDB 4.0.6は2020年9月15日にリリースされました。新機能には、外部結合のためのTiFlashサポートとTiDB Dashboardの改善が含まれます。TiCDCやTiKVなどのツールもアップデートされました。このリリースには、TiDB、TiKV、PD、 TiFlash、および各種ツールのバグ修正が含まれています。
 ---
 
 # TiDB 4.0.6 リリースノート {#tidb-4-0-6-release-notes}
@@ -15,7 +15,7 @@ TiDB バージョン: 4.0.6
 
     -   TiFlashブロードキャスト結合で外部結合をサポート
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   クエリエディタと実行UIの追加（実験的） [＃713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
     -   ストアロケーショントポロジ可視化[＃719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)サポート
@@ -55,7 +55,7 @@ TiDB バージョン: 4.0.6
 
 -   PD
 
-    -   TiDBダッシュボードをv2020.09.08.1 [＃2928](https://github.com/pingcap/pd/pull/2928)に更新
+    -   TiDB Dashboardをv2020.09.08.1 [＃2928](https://github.com/pingcap/pd/pull/2928)に更新
     -   リージョンとストアのハートビート[＃2891](https://github.com/tikv/pd/pull/2891)メトリクスを追加します
     -   低スペースしきい値[＃2875](https://github.com/pingcap/pd/pull/2875)を制御するための元の方法に戻す
     -   標準エラーコードのサポート

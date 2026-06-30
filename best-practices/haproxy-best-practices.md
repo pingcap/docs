@@ -6,7 +6,7 @@ aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/re
 
 # TiDB で HAProxy を使用するためのベストプラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDBにおける[HAプロキシ](https://github.com/haproxy/haproxy)の設定と使用に関するベストプラクティスについて説明します。HAProxyは、TCPベースのアプリケーションの負荷分散を提供します。TiDBクライアントからは、HAProxyが提供するフローティング仮想IPアドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散を実現できます。
+このドキュメントでは、TiDBにおける[HAProxy](https://github.com/haproxy/haproxy)の設定と使用に関するベストプラクティスについて説明します。HAProxyは、TCPベースのアプリケーションの負荷分散を提供します。TiDBクライアントからは、HAProxyが提供するフローティング仮想IPアドレスに接続するだけでデータを操作できるため、TiDBサーバーレイヤーでの負荷分散を実現できます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 

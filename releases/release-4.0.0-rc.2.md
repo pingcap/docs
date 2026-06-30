@@ -66,7 +66,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   MySQLクライアント[＃17187](https://github.com/pingcap/tidb/pull/17187)にログインした後、TiDBサーバーのバージョン情報を表示する機能をサポート
     -   `GROUP_CONCAT`関数[＃16990](https://github.com/pingcap/tidb/pull/16990)の`ORDER BY`節をサポートする
     -   スローログに`Plan_from_cache`情報を表示して、ステートメントがプラン キャッシュ[＃17121](https://github.com/pingcap/tidb/pull/17121)にヒットしたかどうかを示すことをサポート
-    -   TiDBダッシュボードにTiFlashマルチディスク構成の容量情報を表示できる機能を追加
+    -   TiDB DashboardにTiFlashマルチディスク構成の容量情報を表示できる機能を追加
     -   ダッシュボードでSQL文を使用してTiFlashログを照会する機能を追加
 
 -   TiKV
@@ -170,7 +170,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   pd-ctl [＃2399](https://github.com/pingcap/pd/pull/2399)の`region key`コマンドを使用するときに発生する`404`問題を修正しました
     -   TSOとID割り当てのモニターメトリックがGrafanaダッシュボード[＃2405](https://github.com/pingcap/pd/pull/2405)に表示されない問題を修正
     -   pd-recoverがDockerイメージ[＃2406](https://github.com/pingcap/pd/pull/2406)に含まれていない問題を修正
-    -   データディレクトリのパスを絶対パスに解析して、TiDBダッシュボードにPD情報が正しく表示されない問題を修正しました[＃2420](https://github.com/pingcap/pd/pull/2420)
+    -   データディレクトリのパスを絶対パスに解析して、TiDB DashboardにPD情報が正しく表示されない問題を修正しました[＃2420](https://github.com/pingcap/pd/pull/2420)
     -   pd-ctl [＃2416](https://github.com/pingcap/pd/pull/2416)で`scheduler config shuffle-region-scheduler`コマンドを使用したときにデフォルトの出力がない問題を修正しました
 
 -   TiFlash
