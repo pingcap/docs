@@ -8,6 +8,60 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## June 30, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Enhance the stability, security, and operational experience of [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). The following enhancements and changes are rolling out gradually to newly created TiDB Cloud Essential instances.
+
+        - **Connection experience improvements:** support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
+        - **Change root password support:** you can change the root password directly from the TiDB Cloud console.
+        - **Enhance data import experience:** after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before the import. In addition, the import page now displays the size of imported files to improve visibility and management of import operations.
+        - **Update the availability of the Branch feature:** starting from **July 14, 2026**, newly created TiDB Cloud Essential instances no longer support the [Branch](/tidb-cloud/branch-overview.md) feature. Existing TiDB Cloud essential instances created before this date are not affected. The Branch feature remains available in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter).
+        - **Update import and export capabilities:** to enhance security, importing data from local files and exporting data to local files are no longer supported.
+        - **Update DB audit log storage requirements:** for security and compliance reasons, you must specify an external storage location for audit log retention.
+        - [Changefeed](/tidb-cloud/essential-changefeed-overview.md) will be available as a billable feature starting from **July 1, 2026**.
+
+      These features are rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+    - [Top RU](/tidb-cloud/top-ru.md) is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - Alibaba Cloud: `Singapore (ap-southeast-1)` and `Tokyo (ap-northeast-1)`
+
+      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+      This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+- **TiDB Cloud Dedicated**
+
+    - Refine the backup and restore flow for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        - The **Restore From Region** option is removed from the **Restore** page for TiDB Cloud Dedicated. Currently, the backup data for a TiDB Cloud Dedicated cluster is implicitly stored in the same region as the cluster, so you no longer need to select the region to restore from.
+        - The **Restore to Region** option is renamed to the **Cloud Provider & Region** option.
+
+      For more information, see [Restore data to a new cluster](/tidb-cloud/backup-and-restore.md).
+
+- **TiDB Cloud Lake**
+
+    - TiDB Cloud Lake is now in public preview.
+
+        TiDB Cloud Lake is a cloud-native analytics warehouse in TiDB Cloud for modern analytics and AI-oriented data workflows. It provides elastic warehouses, ANSI SQL analytics, object storage, full-text search, vector search, and geospatial analysis in one managed service, helping teams analyze structured and semi-structured data without managing separate analytics infrastructure.
+
+        With this public preview, you can run SQL analytics with elastic warehouses and use built-in search capabilities for BI, log analytics, semantic retrieval, and other modern analytics and AI use cases.
+
+        To try TiDB Cloud Lake, log in to the [TiDB Cloud console](https://tidbcloud.com/), click **My Lake** in the left navigation pane, and then click **Try TiDB Cloud Lake** in the upper-right corner.
+
+        For more information, see [TiDB Cloud Lake documentation](https://docs.pingcap.com/tidbcloudlake/).
+
+**Upcoming billing adjustments**
+
+- Upcoming billing adjustments for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)
+
+    - **Update minimum RCU billing:** starting from **August 1, 2026**, the minimum RCU value is automatically determined based on the configured maximum RCU value (Minimum RCU = 0.1 × configured maximum RCU, with a lower bound of 2,000 RCUs). If actual usage remains below the minimum RCU threshold, charges are calculated based on the minimum RCU value. For **existing instances created before July 1, 2026**, the implementation of this minimum RCU billing policy is postponed, and the specific effective date will be announced later.
+    - **Additional billable features:** charges for backup usage and network egress will take effect on **September 1, 2026**. For more information, see [TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
 ## June 16, 2026
 
 **General changes**
