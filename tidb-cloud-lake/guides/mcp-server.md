@@ -90,7 +90,7 @@ logger = logging.getLogger(__name__)
 
 def check_env_vars():
     required = {
-        "DATABEND_DSN": "https://docs.tidb.io/tidbcloudlake/driver-overview/#connection-string-dsn",
+        "DATABEND_DSN": "https://docs.pingcap.com/tidbcloudlake/driver-overview/#connection-string-dsn",
         "DEEPSEEK_API_KEY": "https://platform.deepseek.com/api_keys"
     }
 
