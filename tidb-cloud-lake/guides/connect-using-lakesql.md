@@ -34,7 +34,7 @@ curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash
 
 --------------------------------------------------------------------------------
 Website: https://tidbcloud.com
-Docs: https://docs.tidb.io/tidbcloudlake/
+Docs: https://docs.pingcap.com/tidbcloudlake/
 Github: https://github.com/tidbcloud/lakesql
 --------------------------------------------------------------------------------
 
