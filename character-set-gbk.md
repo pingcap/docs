@@ -96,7 +96,7 @@ MySQLにおけるGBK文字セットのデフォルトの照合照合順序は`gb
 
 -   現在、 TiFlash はGBK 文字セットをサポートしていません。
 
--   TiDB データ移行 (DM) では、 `charset=GBK`テーブルを v5.4.0 より前の TiDB クラスターに移行することはサポートされていません。
+-   TiDB Data Migration (DM) では、 `charset=GBK`テーブルを v5.4.0 より前の TiDB クラスターに移行することはサポートされていません。
 
 -   TiDB Lightning は、v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルのインポートをサポートしていません。
 

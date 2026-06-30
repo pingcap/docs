@@ -3,7 +3,7 @@ title: Software and Hardware Requirements for TiDB Data Migration
 summary: DM クラスターのソフトウェアおよびハードウェア要件について説明します。
 ---
 
-# TiDBデータ移行のソフトウェアおよびハードウェア要件 {#software-and-hardware-requirements-for-tidb-data-migration}
+# TiDB Data Migrationのソフトウェアおよびハードウェア要件 {#software-and-hardware-requirements-for-tidb-data-migration}
 
 TiDB Data Migration (DM) は、主要な Linux オペレーティングシステムをサポートしています。具体的なバージョン要件については、次の表をご覧ください。
 

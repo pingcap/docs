@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
-summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログとTRACE`ステートメントの出力を強化し、TiDBダッシュボードでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と構成ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、バックアップと復元（BR）、TiCDC、TiDB Binlog、TiDBデータ移行（DM）、およびTiDB Lightningの改善も含まれています。
+summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログとTRACE`ステートメントの出力を強化し、TiDBダッシュボードでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と構成ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、Backup & Restore (BR)、TiCDC、TiDB Binlog、TiDB Data Migration (DM)、およびTiDB Lightningの改善も含まれています。
 ---
 
 # TiDB 6.3.0 リリースノート {#tidb-6-3-0-release-notes}
@@ -307,7 +307,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITRはログバックアップで生成された小さなファイルをマージできるため、バックアップファイルの数を大幅に削減できます。 [#13232](https://github.com/tikv/tikv/issues/13232) @[Leavrth](https://github.com/Leavrth)
         -   PITRは、復元後にアップストリームクラスタ構成に基づいてTiFlashレプリカの数を自動的に構成することをサポートします [#37208](https://github.com/pingcap/tidb/issues/37208) @[YuJuncen](https://github.com/YuJuncen)
@@ -321,7 +321,7 @@ TiDBバージョン: 6.3.0-DMR
         -   非推奨のPulsarシンク [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)を削除します
         -   変更フィードに関係のない DDL ステートメントを破棄することで、レプリケーションのパフォーマンスを向上させます [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   MySQL 8.0をデータソースとして使用する際の互換性を向上させる [#6448](https://github.com/pingcap/tiflow/issues/6448) @[lance6716](https://github.com/lance6716)
         -   「無効な接続」が発生した場合にDDLを非同期で実行することでDDLを最適化する [#4689](https://github.com/pingcap/tiflow/issues/4689) @[lyzx2001](https://github.com/lyzx2001)
@@ -397,7 +397,7 @@ TiDBバージョン: 6.3.0-DMR
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   チェックポイントの情報が古くなる可能性がある問題を修正 [#36423](https://github.com/pingcap/tidb/issues/36423) @[YuJuncen](https://github.com/YuJuncen)
         -   復元中に同時実行数の設定が大きすぎるため、リージョンのバランスが取れていない問題を修正 [#37549](https://github.com/pingcap/tidb/issues/37549) @[3pointer](https://github.com/3pointer)
@@ -414,7 +414,7 @@ TiDBバージョン: 6.3.0-DMR
 
         -   コンプレッサーがgzipに設定されている場合に、 DrainerがPumpにリクエストを正しく送信できない問題を修正 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @[lichunzhu](https://github.com/lichunzhu)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DMが`Specified key was too long`エラー [#5315](https://github.com/pingcap/tiflow/issues/5315)を報告する問題を修正しました @[lance6716](https://github.com/lance6716)
         -   リレーがエラーに遭遇した際のゴルーチンリークを修正 [#6193](https://github.com/pingcap/tiflow/issues/6193) @[lance6716](https://github.com/lance6716)

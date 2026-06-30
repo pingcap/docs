@@ -5,7 +5,7 @@ summary: シャーディング シナリオでのデータ チェックについ
 
 # シャーディングシナリオにおけるデータチェック {#data-check-in-the-sharding-scenario}
 
-sync-diff-inspector は、シャーディングシナリオにおけるデータチェックをサポートします。1 ツール[TiDBデータ移行](/dm/dm-overview.md)使用して複数の MySQL インスタンスから TiDB にデータを複製する場合、sync-diff-inspector を使用して上流と下流のデータをチェックできます。
+sync-diff-inspector は、シャーディングシナリオにおけるデータチェックをサポートします。[TiDB Data Migration](/dm/dm-overview.md)を使用して複数の MySQL インスタンスから TiDB にデータを複製する場合、sync-diff-inspector を使用して上流と下流のデータをチェックできます。
 
 上流のシャードテーブルの数が少なく、シャードテーブルの命名規則にパターンがない場合（以下を参照）、 `Datasource config`使用して`table-0`設定し、対応する`rules`設定して、上流データベースと下流データベース間のマッピング関係を持つテーブルを設定できます。この設定方法では、すべてのシャードテーブルを設定する必要があります。
 

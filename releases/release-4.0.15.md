@@ -52,7 +52,7 @@ TiDB バージョン: 4.0.15
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   領域を同時に分割して分散させることで、復元速度が向上します[＃1363](https://github.com/pingcap/br/pull/1363)
         -   PD 要求エラーまたは TiKV I/O タイムアウト エラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
@@ -122,7 +122,7 @@ TiDB バージョン: 4.0.15
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップとリストアの平均速度が不正確に計算されるバグを修正[＃1405](https://github.com/pingcap/br/issues/1405)
 

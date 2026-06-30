@@ -204,7 +204,7 @@ TiDB バージョン: 7.2.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   Azure Blob Storage への共有アクセス署名 (SAS) によるアクセスをサポート [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
@@ -214,7 +214,7 @@ TiDB バージョン: 7.2.0
         -   KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
         -   Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンドにレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   MySQL 8.0 で圧縮バイナリログを増分レプリケーションのデータソースとして読み込むことをサポートする [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
@@ -266,7 +266,7 @@ TiDB バージョン: 7.2.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `checksum mismatch`が一部のケースで誤って報告される問題を修正 [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
         -   `resolved lock timeout`が一部のケースで誤って報告される問題を修正 [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)

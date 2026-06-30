@@ -113,7 +113,7 @@ TiDBバージョン：5.1.5
 
         -   `compressor`が`zip`に設定されている場合、 Drainer がPumpにリクエストを正しく送信できない問題を修正します。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
 

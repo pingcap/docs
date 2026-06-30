@@ -274,7 +274,7 @@ TiDBバージョン：8.3.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ポイントインタイムリカバリ（PITR）を初めて開始する前に、完全バックアップが存在するかどうかを確認する機能をサポートします。完全バックアップが見つからない場合、 BRはリストアを終了し、エラー [#54418](https://github.com/pingcap/tidb/issues/54418)を返します。@[Leavrth](https://github.com/Leavrth)
         -   スナップショットバックアップを復元する前に、TiKVとTiFlashのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRは復元を終了し、エラー [#54316](https://github.com/pingcap/tidb/issues/54316)を返します。@[RidRisR](https://github.com/RidRisR)
@@ -370,7 +370,7 @@ TiDBバージョン：8.3.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `ADD INDEX`や`MODIFY COLUMN`など、バックフィルが必要な DDL が増分リストア中に正しく復元されない可能性がある問題を修正します [#54426](https://github.com/pingcap/tidb/issues/54426) @[3pointer](https://github.com/3pointer)シュート
         -   バックアップと復元中に進行状況が停止する問題を修正 [#54140](https://github.com/pingcap/tidb/issues/54140) @[Leavrth](https://github.com/Leavrth)
@@ -380,7 +380,7 @@ TiDBバージョン：8.3.0
 
         -   下流の Kafka にアクセスできない場合にプロセッサが停止する可能性がある問題を修正しました [#11340](https://github.com/pingcap/tiflow/issues/11340) @[asddongmen](https://github.com/asddongmen)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   スキーマトラッカーがLISTパーティションテーブルを正しく処理せず、DMエラーが発生する問題を修正しました [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
         -   インデックスの長さが`max-index-length`のデフォルト値を超えるとデータレプリケーションが中断される問題を修正します [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)

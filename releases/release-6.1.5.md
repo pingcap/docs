@@ -49,7 +49,7 @@ TiDB バージョン: 6.1.5
         -   レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログがメタ[＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [CharlesCheung96](https://github.com/CharlesCheung96)への書き込みを有効にするとパフォーマンスが低下する問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `binlog-schema delete`コマンドが[＃7373](https://github.com/pingcap/tiflow/issues/7373) @ [liumengya94](https://github.com/liumengya94)実行に失敗する問題を修正
         -   最後のbinlogがスキップされたDDL [＃8175](https://github.com/pingcap/tiflow/issues/8175) @ [D3Hunter](https://github.com/D3Hunter)の場合にチェックポイントが進まない問題を修正しました

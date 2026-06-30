@@ -108,7 +108,7 @@ TiDB バージョン: 6.5.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップが失敗したときにBRのエラーメッセージ「ロックタイムアウトを解決してください」が誤解を招き、実際のエラー情報が隠れてしまう問題を修正しました[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [YuJuncen](https://github.com/YuJuncen)
 

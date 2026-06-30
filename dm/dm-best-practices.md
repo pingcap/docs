@@ -1,11 +1,11 @@
 ---
 title: TiDB Data Migration (DM) Best Practices
-summary: TiDB データ移行 (DM) を使用してデータを移行する場合のベスト プラクティスについて説明します。
+summary: TiDB Data Migration (DM) を使用してデータを移行する場合のベスト プラクティスについて説明します。
 ---
 
-# TiDB データ移行 (DM) のベストプラクティス {#tidb-data-migration-dm-best-practices}
+# TiDB Data Migration (DM) のベストプラクティス {#tidb-data-migration-dm-best-practices}
 
-[TiDB データ移行 (DM)](https://github.com/pingcap/tiflow/tree/release-8.5/dm)はPingCAPが開発したデータ移行ツールです。MySQL、Percona MySQL、MariaDB、Amazon RDS for MySQL、Amazon AuroraなどのMySQL互換データベースからTiDBへの完全および増分データ移行をサポートします。
+[TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/release-8.5/dm)はPingCAPが開発したデータ移行ツールです。MySQL、Percona MySQL、MariaDB、Amazon RDS for MySQL、Amazon AuroraなどのMySQL互換データベースからTiDBへの完全および増分データ移行をサポートします。
 
 DM は次のシナリオで使用できます。
 

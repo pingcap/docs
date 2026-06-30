@@ -64,7 +64,7 @@ TiDB バージョン: 6.5.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKV側でのログバックアップファイルのダウンロードの同時実行を最適化して、通常のシナリオ[＃14206](https://github.com/tikv/tikv/issues/14206) @ [YuJuncen](https://github.com/YuJuncen)でのPITRのパフォーマンスを向上させます。
 
@@ -149,7 +149,7 @@ TiDB バージョン: 6.5.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PDとtidb-server間の接続障害により、PITRバックアップの進行が[＃41082](https://github.com/pingcap/tidb/issues/41082) @ [YuJuncen](https://github.com/YuJuncen)に進まない問題を修正しました。
         -   PDとTiKV [＃14159](https://github.com/tikv/tikv/issues/14159) @ [YuJuncen](https://github.com/YuJuncen)間の接続障害によりTiKVがPITRタスクをリッスンできない問題を修正しました
@@ -178,7 +178,7 @@ TiDB バージョン: 6.5.1
         -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定した場合に発生するデータの不整合を修正しました。
         -   テーブルスケジューリングとブラックホールシンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [hicqu](https://github.com/hicqu)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `binlog-schema delete`コマンドが[＃7373](https://github.com/pingcap/tiflow/issues/7373) @ [liumengya94](https://github.com/liumengya94)実行に失敗する問題を修正
         -   最後のbinlogがスキップされたDDL [＃8175](https://github.com/pingcap/tiflow/issues/8175) @ [D3Hunter](https://github.com/D3Hunter)の場合にチェックポイントが進まない問題を修正しました

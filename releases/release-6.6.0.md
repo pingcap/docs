@@ -17,7 +17,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 バージョン6.6.0-DMRの主な新機能と改善点は以下のとおりです。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データ要求のバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサ要求をバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、古いデータの読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDBダッシュボード上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値指標</a>（実験的）</td><td> MySQL互換の複数値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードを統合することで、フルデータ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データ要求のバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサ要求をバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、古いデータの読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDBダッシュボード上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値指標</a>（実験的）</td><td> MySQL互換の複数値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDB Data Migration (DM)は、TiDB Lightningの物理インポートモードを統合することで、フルデータ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -164,7 +164,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照してください。
 
--   TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードと統合され、完全移行のパフォーマンスを最大10倍向上させます（実験的）@[lance6716](https://github.com/lance6716)
+-   TiDB Data Migration (DM)は、TiDB Lightningの物理インポートモードと統合され、完全移行のパフォーマンスを最大10倍向上させます（実験的）@[lance6716](https://github.com/lance6716)
 
     バージョン6.6.0では、DMの完全移行機能がTiDB Lightningの物理インポートモードと統合され、DMによる完全データ移行のパフォーマンスが最大10倍向上し、大容量データシナリオにおける移行時間を大幅に短縮できるようになりました。
 
@@ -418,7 +418,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKV側でのログバックアップファイルのダウンロードの同時実行性を最適化し、通常のシナリオにおけるPITRリカバリのパフォーマンスを向上させる [#14206](https://github.com/tikv/tikv/issues/14206) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -427,7 +427,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   TiCDCレプリケーションのパフォーマンスを向上させるためのバッチ`UPDATE` DMLステートメントのサポート [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
         -   MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   DM アラート ルールとコンテンツを最適化 [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -523,7 +523,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップの復元時に、ホットリージョンが原因で復元が失敗する問題を修正 [#37207](https://github.com/pingcap/tidb/issues/37207) @[Leavrth](https://github.com/Leavrth)
         -   ログバックアップが実行されているクラスターにデータを復元すると、ログバックアップファイルが復元不能になる問題を修正しました [#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
@@ -544,7 +544,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   TiKV ノード間のトラフィックが多すぎる問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
         -   プルベースのシンクが有効になっている場合の CPU 使用率、メモリ制御、スループットに関する TiCDC のパフォーマンスの問題を修正[#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   `binlog-schema delete`コマンドの実行に失敗する問題を修正しました [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
         -   最後のbinlogがスキップされたDDLである場合にチェックポイントが進まない問題を修正 [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)

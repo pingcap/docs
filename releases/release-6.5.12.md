@@ -33,7 +33,7 @@ TiDBバージョン: 6.5.12
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   完全復元のためにターゲットクラスタが空のクラスタであるかどうかを確認するチェックを追加します[＃35744](https://github.com/pingcap/tidb/issues/35744) @ [3pointer](https://github.com/3pointer)
         -   非完全復元[＃55087](https://github.com/pingcap/tidb/issues/55087) @ [RidRisR](https://github.com/RidRisR)の場合、ターゲット クラスターに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。
@@ -137,7 +137,7 @@ TiDBバージョン: 6.5.12
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [Tristan1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BR が復元に失敗する問題を修正しました。
         -   `br log status --json` [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [Leavrth](https://github.com/Leavrth)を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。
@@ -165,7 +165,7 @@ TiDBバージョン: 6.5.12
         -   PullerモジュールのResolved TSレイテンシーモニタリングで誤った値[＃11561](https://github.com/pingcap/tiflow/issues/11561) @ [wlwilliamx](https://github.com/wlwilliamx)が表示される問題を修正しました
         -   やり直しモジュールがエラー[＃11744](https://github.com/pingcap/tiflow/issues/11744) @ [CharlesCheung96](https://github.com/CharlesCheung96)を正しく報告できない問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   パスワードの長さが19文字を超えるとMySQL 8.0への接続に失敗する問題を修正[＃11603](https://github.com/pingcap/tiflow/issues/11603) @ [fishiu](https://github.com/fishiu)

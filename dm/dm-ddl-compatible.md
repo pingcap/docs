@@ -5,7 +5,7 @@ summary: DM がステートメントの種類に応じて DDL ステートメン
 
 # DM DDL の特別な処理 {#special-handling-of-dm-ddls}
 
-TiDB データ移行 (DM) はデータを移行する際に、DDL ステートメントを解析し、ステートメントの種類と現在の移行段階に応じて処理します。
+TiDB Data Migration (DM) はデータを移行する際に、DDL ステートメントを解析し、ステートメントの種類と現在の移行段階に応じて処理します。
 
 ## DDL文をスキップする {#skip-ddl-statements}
 

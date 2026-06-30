@@ -51,7 +51,7 @@ TiDB バージョン: 6.5.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することで接続の再利用のサポートを強化します
         -   PD または外部 S3ストレージへの接続に失敗した場合のBRのフォールトトレランスを向上[＃42909](https://github.com/pingcap/tidb/issues/42909) @ [Leavrth](https://github.com/Leavrth)
@@ -63,7 +63,7 @@ TiDB バージョン: 6.5.4
         -   TiCDC が Kafka に同期する際に制限を超えるメッセージを処理する方法を最適化し、主キーのみをダウンストリーム[＃9574](https://github.com/pingcap/tiflow/issues/9574) @ [3AceShowHand](https://github.com/3AceShowHand)に送信することをサポートしました。
         -   ストレージシンクは、HEX形式のデータの16進エンコードをサポートするようになり、AWS DMS形式仕様[＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)と互換性があります。
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   互換性のない DDL ステートメント[＃9112](https://github.com/pingcap/tiflow/issues/9112) @ [GMHDBJD](https://github.com/GMHDBJD)に対して厳密な楽観的モードをサポートする
 
@@ -147,7 +147,7 @@ TiDB バージョン: 6.5.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRで使用されるグローバルパラメータ`TableColumnCountLimit`と`IndexLimit`デフォルト値を最大値[＃45793](https://github.com/pingcap/tidb/issues/45793) @ [Leavrth](https://github.com/Leavrth)に増やすことで、復元が失敗する問題を修正しました。
         -   PITR [＃43184](https://github.com/pingcap/tidb/issues/43184) @ [Leavrth](https://github.com/Leavrth)で DDL メタ情報を処理するときに書き換えが失敗する問題を修正しました
@@ -173,7 +173,7 @@ TiDB バージョン: 6.5.4
         -   TiDB または MySQL [＃9180](https://github.com/pingcap/tiflow/issues/9180) @ [asddongmen](https://github.com/asddongmen)にデータを複製するときに、下流の双方向レプリケーション関連の変数を頻繁に設定することによって発生する下流ログが多すぎる問題を修正しました。
         -   Avroプロトコルが`Enum`タイプの値[＃9259](https://github.com/pingcap/tiflow/issues/9259) @ [3AceShowHand](https://github.com/3AceShowHand)を誤って識別する問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   一意のキー列名が null の場合に発生するpanic問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
         -   バリデータがエラーを誤って処理した場合に発生する可能性のあるデッドロックの問題を修正し、再試行メカニズムを最適化します[＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)

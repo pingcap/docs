@@ -57,7 +57,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
         -   `stale command`ようなエラーが発生した場合に再試行メカニズムを追加して、インポート成功率[＃36877](https://github.com/pingcap/tidb/issues/36877) @ [D3Hunter](https://github.com/D3Hunter)向上させます
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   ユーザーはTiDB Lightningローダー[＃5505](https://github.com/pingcap/tiflow/issues/5505)と[ブチュイトデゴウ](https://github.com/buchuitoudegou)同時実行数を手動で設定できます。
 
@@ -140,7 +140,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
         -   TiDB Lightning がParquet ファイル内のスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしない問題を修正[＃36980](https://github.com/pingcap/tidb/issues/36980) @ [D3Hunter](https://github.com/D3Hunter)
         -   重複排除により極端な場合にTiDB Lightning がpanicを起こす可能性がある問題を修正[＃34163](https://github.com/pingcap/tidb/issues/34163) @ [ForwardStar](https://github.com/ForwardStar)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DM [＃6161](https://github.com/pingcap/tiflow/issues/6161) @ [ForwardStar](https://github.com/ForwardStar)で`txn-entry-size-limit`設定項目が有効にならない問題を修正
         -   `check-task`コマンドが特殊文字[#5895](https://github.com/pingcap/tiflow/issues/5895) @ [Ehco1996](https://github.com/Ehco1996)を処理できない問題を修正
@@ -163,7 +163,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
         -   非同期的に再実行イベントを書き込むことで、再実行ログのパフォーマンス低下を修正[＃6011](https://github.com/pingcap/tiflow/issues/6011) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   MySQLシンクがIPv6アドレス[＃6135](https://github.com/pingcap/tiflow/issues/6135) @ [Rustin170506](https://github.com/Rustin170506)に接続できない問題を修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   RawKVモード[＃35279](https://github.com/pingcap/tidb/issues/35279) @ [3pointer](https://github.com/3pointer)でBRが`ErrRestoreTableIDMismatch`報告するバグを修正
         -   大規模クラスタバックアップ[#30087](https://github.com/pingcap/tidb/issues/30087) @ [MoCuishle28](https://github.com/MoCuishle28)での S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。

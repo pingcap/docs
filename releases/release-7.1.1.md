@@ -112,7 +112,7 @@ TiDB バージョン: 7.1.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `checksum mismatch`場合によっては誤って報告される問題を修正[＃44472](https://github.com/pingcap/tidb/issues/44472) @ [Leavrth](https://github.com/Leavrth)
         -   TiDBクラスタ[＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)にPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正
@@ -133,7 +133,7 @@ TiDB バージョン: 7.1.1
         -   ネットワーク分離やPDオーナーノードの再起動などのPD障害時にTiCDCが停止する問題を修正[＃8808](https://github.com/pingcap/tiflow/issues/8808) [＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @ [asddongmen](https://github.com/asddongmen)
         -   Avroプロトコルが`Enum`タイプの値[＃9259](https://github.com/pingcap/tiflow/issues/9259) @ [3AceShowHand](https://github.com/3AceShowHand)を誤って識別する問題を修正しました
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   移行対象のテーブル内の一意インデックスに空の列が含まれている場合にDMマスターが異常終了する問題を修正[＃9247](https://github.com/pingcap/tiflow/issues/9247) @ [lance6716](https://github.com/lance6716)
 

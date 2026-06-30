@@ -158,7 +158,7 @@ TiDB バージョン: 4.0.11
         -   KVクライアントがイベントフィード[＃1336](https://github.com/pingcap/tiflow/pull/1336)作成をスキップする可能性があるバグを修正しました
         -   トランザクションが下流に複製されたときにトランザクションの原子性が壊れるバグを修正[＃1375](https://github.com/pingcap/tiflow/pull/1375)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRがバックアップ[＃702](https://github.com/pingcap/br/pull/702)を復元した後にTiKVが大きなリージョンを生成する可能性がある問題を修正しました
         -   テーブルに自動 ID [＃720](https://github.com/pingcap/br/pull/720)がない場合でもBR がテーブルの自動 ID を復元する問題を修正しました

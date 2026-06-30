@@ -5,7 +5,7 @@ summary: TiDB データ移行ツールを使用してデータを移行すると
 
 # TiDB データ移行で失敗した DDL ステートメントを処理する {#handle-failed-ddl-statements-in-tidb-data-migration}
 
-このドキュメントでは、TiDB データ移行 (DM) ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法について説明します。
+このドキュメントでは、TiDB Data Migration (DM) ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法について説明します。
 
 現在、TiDBはMySQLのすべての構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDL文](/mysql-compatibility.md#ddl-operations)参照）。そのため、DMがMySQLからTiDBにデータを移行する際に、TiDBが対応するDDL文をサポートしていない場合、エラーが発生し、移行プロセスが中断される可能性があります。この場合、DMの`binlog`コマンドを使用して移行を再開できます。
 

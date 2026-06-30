@@ -71,7 +71,7 @@ TiDB バージョン: 6.5.8
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   古いバージョン[＃49466](https://github.com/pingcap/tidb/issues/49466) @ [3pointer](https://github.com/3pointer)のバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました
         -   S3 [＃49942](https://github.com/pingcap/tidb/issues/49942) @ [Leavrth](https://github.com/Leavrth)からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました

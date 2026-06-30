@@ -44,6 +44,6 @@ TiDB Ansible バージョン: 3.1.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRが`auto_random`属性を持つテーブルを復元した後、データを挿入すると重複エントリエラー[＃241](https://github.com/pingcap/br/issues/241)が発生する可能性がある問題を修正しました。

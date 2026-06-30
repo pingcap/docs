@@ -36,7 +36,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
             -   TiKVからMySQL互換データベースへの変更データの複製をサポートし、最終的なデータの一貫性を保証します。
             -   変更されたデータをKafkaに複製し、最終的なデータの一貫性または行レベルの順序性を保証することをサポート
             -   プロセスレベルの高可用性を提供する
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
         -   増分バックアップやAmazon S3へのファイルのバックアップなどの実験的機能を有効にする[＃175](https://github.com/pingcap/br/pull/175)
 
 -   TiDB アンシブル
@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     -   動的構成を有効にした後、Leaderが切り替えられるときに構成のレプリケーション遅延が発生する可能性がある問題を修正しました[＃2154](https://github.com/pingcap/pd/pull/2154)
 
 -   ツール
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
         -   PDが大容量データを処理できないため、 BRが大容量データの復元に失敗する可能性がある問題を修正[＃167](https://github.com/pingcap/br/pull/167)
         -   BRバージョンがTiDBバージョン[＃186](https://github.com/pingcap/br/pull/186)と互換性がないため発生したBR障害を修正
         -   BRバージョンがTiFlash [＃194](https://github.com/pingcap/br/pull/194)と互換性がないため発生したBR障害を修正

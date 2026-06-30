@@ -36,11 +36,11 @@ TiDB バージョン: 7.5.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップ中の不要なログ出力を削減[＃55902](https://github.com/pingcap/tidb/issues/55902) @ [Leavrth](https://github.com/Leavrth)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   認識されないMariaDBbinlogイベントのログレベルを下げる[＃10204](https://github.com/pingcap/tiflow/issues/10204) @ [dveeden](https://github.com/dveeden)
 
@@ -130,7 +130,7 @@ TiDB バージョン: 7.5.5
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   データの復元に失敗した後、チェックポイントから再開するとエラー`the target cluster is not fresh`が発生する問題を修正しました[＃50232](https://github.com/pingcap/tidb/issues/50232) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントが[＃57134](https://github.com/pingcap/tidb/issues/57134) @ [3pointer](https://github.com/3pointer)に進まない問題を修正しました。
@@ -147,7 +147,7 @@ TiDB バージョン: 7.5.5
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリーム[＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)に複製しない問題を修正しました。
         -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @ [wlwilliamx](https://github.com/wlwilliamx)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   物理インポートモード[＃11768](https://github.com/pingcap/tiflow/issues/11768) @ [D3Hunter](https://github.com/D3Hunter)でデータをインポートした後に、テーブル内の自動生成された ID に大きなジャンプが発生する可能性がある問題を修正しました。
         -   TLSと`shard-mode`両方が[＃11842](https://github.com/pingcap/tiflow/issues/11842) @ [sunxiaoguang](https://github.com/sunxiaoguang)に設定されている場合に`start-task`の事前チェックが失敗する問題を修正

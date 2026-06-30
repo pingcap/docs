@@ -325,7 +325,7 @@ TiDB バージョン: 7.4.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @ [YuJuncen](https://github.com/YuJuncen)
         -   HTTPクライアント[＃46011](https://github.com/pingcap/tidb/issues/46011) @ [Leavrth](https://github.com/Leavrth)で`MaxIdleConns`と`MaxIdleConnsPerHost`パラメータを設定することにより、ログバックアップとPITRリストアタスクの接続再利用のサポートを強化します。
@@ -407,7 +407,7 @@ TiDB バージョン: 7.4.0
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップが失敗したときに、誤解を招くエラーメッセージ`resolve lock timeout`実際のエラーを隠してしまう問題を修正しました[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [YuJuncen](https://github.com/YuJuncen)
         -   PITR を使用して暗黙の主キーを回復すると競合が発生する可能性がある問題を修正[＃46520](https://github.com/pingcap/tidb/issues/46520) @ [3pointer](https://github.com/3pointer)
@@ -425,7 +425,7 @@ TiDB バージョン: 7.4.0
         -   `scale-out`が有効になっている場合のノード間の書き込みキーの不均等な配布の問題を修正[＃9665](https://github.com/pingcap/tiflow/issues/9665) @ [sdojjy](https://github.com/sdojjy)
         -   ログ[＃9690](https://github.com/pingcap/tiflow/issues/9690) @ [sdojjy](https://github.com/sdojjy)に機密ユーザー情報が記録される問題を修正
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DM が大文字と小文字を区別しない照合[＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [hihihuhu](https://github.com/hihihuhu)で競合を正しく処理できない問題を修正しました
         -   DM バリデーターのデッドロック問題を修正し、再試行を[＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)に強化しました。

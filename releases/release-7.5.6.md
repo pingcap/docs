@@ -35,7 +35,7 @@ TiDB バージョン: 7.5.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [＃56373](https://github.com/pingcap/tidb/issues/56373) @ [Tristan1900](https://github.com/Tristan1900)
         -   非完全リストア[＃55087](https://github.com/pingcap/tidb/issues/55087) @ [RidRisR](https://github.com/RidRisR)の場合、ターゲット クラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。
@@ -113,7 +113,7 @@ TiDB バージョン: 7.5.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PD [＃18087](https://github.com/tikv/tikv/issues/18087) @ [YuJuncen](https://github.com/YuJuncen)にアクセスできないために致命的なエラーが発生した場合にログバックアップが正常に終了しない問題を修正しました。
         -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [Tristan1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BRが復元に失敗する問題を修正しました。

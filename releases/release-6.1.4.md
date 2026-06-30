@@ -70,7 +70,7 @@ TiDB バージョン: 6.1.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   リージョンサイズ[#36053](https://github.com/pingcap/tidb/issues/36053) @ [YuJuncen](https://github.com/YuJuncen)取得に失敗したために復元が中断される問題を修正しました
         -   BRが`backupmeta`ファイル[＃40878](https://github.com/pingcap/tidb/issues/40878) @ [MoCuishle28](https://github.com/MoCuishle28)をデバッグするときにpanicを引き起こす問題を修正しました
@@ -85,7 +85,7 @@ TiDB バージョン: 6.1.4
         -   `changefeed query`結果のうち`sasl-password`が[＃7182](https://github.com/pingcap/tiflow/issues/7182) @ [dveeden](https://github.com/dveeden)でマスクされない問題を修正しました
         -   Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [＃7657](https://github.com/pingcap/tiflow/issues/7657) @ [overvenus](https://github.com/overvenus)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `SHOW GRANTS`下流データベース名にワイルドカード (&quot;*&quot;) が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[＃7645](https://github.com/pingcap/tiflow/issues/7645) @ [lance6716](https://github.com/lance6716)
         -   binlogログクエリイベント[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [liumengya94](https://github.com/liumengya94)の「COMMIT」によって DM がログを過剰に出力問題を修正しました

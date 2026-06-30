@@ -32,7 +32,7 @@ TiDB バージョン: 7.5.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @ [Leavrth](https://github.com/Leavrth)
         -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止し、GC の長時間のブロッキングや潜在的なクラスターの問題を回避することをサポートします[＃50803](https://github.com/pingcap/tidb/issues/50803) @ [RidRisR](https://github.com/RidRisR)
@@ -115,7 +115,7 @@ TiDB バージョン: 7.5.3
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   アドバンサーオーナーの移行[＃53561](https://github.com/pingcap/tidb/issues/53561) @ [RidRisR](https://github.com/RidRisR)後にログバックアップが一時停止される可能性がある問題を修正しました
         -   復元プロセス中に複数のネストされた再試行によりBR がエラーを正しく識別できない問題を修正[＃54053](https://github.com/pingcap/tidb/issues/54053) @ [RidRisR](https://github.com/RidRisR)

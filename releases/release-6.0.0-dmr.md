@@ -180,7 +180,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 ### データ移行 {#data-migration}
 
-#### TiDB データ移行 (DM) {#tidb-data-migration-dm}
+#### TiDB Data Migration (DM) {#tidb-data-migration-dm}
 
 -   WebUI を追加 (実験的)
 
@@ -387,7 +387,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップデータの復元速度を向上しました。シミュレーションテストでは、 BRが15ノード（各ノードに16個のCPUコア）のTiKVクラスターに16TBのデータを復元した場合、スループットは2.66GiB/秒に達しました[＃27036](https://github.com/pingcap/tidb/issues/27036)
 
@@ -403,7 +403,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         -   作成時に変更フィードパラメータを検証し、エラーメッセージを改善する[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
         -   Kafka プロデューサーの設定パラメータを公開して、TiCDC [＃4385](https://github.com/pingcap/tiflow/issues/4385)で設定できるようにします。
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   上流のテーブルスキーマが不整合で楽観的モードの場合のタスクの開始をサポート[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
         -   `stopped`状態[＃4484](https://github.com/pingcap/tiflow/issues/4484)でのタスク作成をサポート
@@ -511,7 +511,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元操作中に回復不可能なエラーが発生するとBRが停止するバグを修正[＃33200](https://github.com/pingcap/tidb/issues/33200)
         -   バックアップ再試行中に暗号化情報が失われた場合に復元操作が失敗するバグを修正[＃32423](https://github.com/pingcap/tidb/issues/32423)
@@ -528,7 +528,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         -   Avroが`NOT NULL`列目をNULL許容フィールド[＃4818](https://github.com/pingcap/tiflow/issues/4818)に変換するバグを修正
         -   TiCDC が終了できない問題を修正[＃4699](https://github.com/pingcap/tiflow/issues/4699)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   ステータス[＃4281](https://github.com/pingcap/tiflow/issues/4281)を照会するときにのみ同期メトリックが更新される問題を修正しました
         -   セーフモードでの更新ステートメントの実行エラーにより、DMワーカーがpanicになる可能性がある問題を修正しました[＃4317](https://github.com/pingcap/tiflow/issues/4317)

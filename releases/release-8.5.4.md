@@ -131,7 +131,7 @@ TiDBバージョン：8.5.4
 
 -   ツール
 
-    -   TiDBデータ移行（DM）
+    -   TiDB Data Migration (DM)
 
         -   上流の`GTID_MODE`を取得する際に、大文字小文字を区別しないマッチングをサポートする [#12167](https://github.com/pingcap/tiflow/issues/12167) @[OliverS929](https://github.com/OliverS929)
 
@@ -190,7 +190,7 @@ TiDBバージョン：8.5.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログ バックアップの zstd 圧縮が有効にならず、出力が圧縮されないままになる問題を修正 [#18836](https://github.com/tikv/tikv/issues/18836) @[3pointer](https://github.com/3pointer)
         -   Azure Blob Storageへのデータバックアップ時にフラッシュ操作が時々遅くなる問題を修正 [#18410](https://github.com/tikv/tikv/issues/18410) @[YuJuncen](https://github.com/YuJuncen)

@@ -418,8 +418,8 @@
             -   [tiup-mirror](/tiup/tiup-mirror.md)
             -   [tiup-bench](/tiup/tiup-bench.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
-    -   TiDBデータ移行
-        -   [TiDBデータ移行について](/dm/dm-overview.md)
+    -   TiDB Data Migration
+        -   [TiDB Data Migrationについて](/dm/dm-overview.md)
         -   [アーキテクチャ](/dm/dm-arch.md)
         -   [クイックスタート](/dm/quick-start-with-dm.md)
         -   [ベストプラクティス](/dm/dm-best-practices.md)

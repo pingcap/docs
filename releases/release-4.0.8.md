@@ -68,7 +68,7 @@ TiDB バージョン: 4.0.8
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `split`と`ingest`パイプライン化して復元プロセスを高速化します[＃427](https://github.com/pingcap/br/pull/427)
         -   PDスケジューラ[＃530](https://github.com/pingcap/br/pull/530)手動復元をサポート
@@ -141,7 +141,7 @@ TiDB バージョン: 4.0.8
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元中に発生し`send on closed channel`panicを修正[＃559](https://github.com/pingcap/br/pull/559)
 

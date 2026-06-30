@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.1.0-rc
         -   TiDB Lightning [＃281](https://github.com/pingcap/tidb-lightning/pull/281) [＃275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化
         -   TiDB Lightning [＃270](https://github.com/pingcap/tidb-lightning/pull/270)の TLS 認証をサポート
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログ出力を最適化する[＃189](https://github.com/pingcap/br/pull/189)
 
@@ -108,6 +108,6 @@ TiDB Ansible バージョン: 3.1.0-rc
 
         -   TiDBバックエンド[＃283](https://github.com/pingcap/tidb-lightning/pull/283)で`&`文字目が`EOF`文字目に置き換えられるバグを修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRがTiFlashクラスタデータを復元できない問題を修正[＃194](https://github.com/pingcap/br/pull/194)

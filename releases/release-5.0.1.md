@@ -30,7 +30,7 @@ TiDB バージョン: 5.0.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   要約ログ[＃1009](https://github.com/pingcap/br/pull/1009)から誤解を招く情報を削除する
 
@@ -82,7 +82,7 @@ TiDB バージョン: 5.0.1
 
         -   インポート中に進行ログに不正確なテーブル数が表示される問題を修正[＃1005](https://github.com/pingcap/br/pull/1005)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   実際のバックアップ速度が`--ratelimit`制限を超えるバグを修正[＃1026](https://github.com/pingcap/br/pull/1026)
         -   いくつかの TiKV ノードの障害によって発生するバックアップ中断の問題を修正[＃1019](https://github.com/pingcap/br/pull/1019)

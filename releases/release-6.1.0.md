@@ -356,7 +356,7 @@ TiDB バージョン: 6.1.0
 
 -   Tools
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   空のデータベースのバックアップと復元をサポート[＃33866](https://github.com/pingcap/tidb/issues/33866)
 
@@ -416,7 +416,7 @@ TiDB バージョン: 6.1.0
         -   DDLスキーマのバッファリング方法を最適化することで過剰なメモリ使用量を修正[＃1386](https://github.com/pingcap/tiflow/issues/1386)
         -   特別な増分スキャンシナリオで発生するデータ損失を修正[＃5468](https://github.com/pingcap/tiflow/issues/5468)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `start-time`タイムゾーンの問題を修正し、DM の動作をダウンストリーム タイムゾーンの使用からアップストリーム タイムゾーンの使用に変更します[＃5471](https://github.com/pingcap/tiflow/issues/5471)
         -   タスクが自動的に再開された後にDMがより多くのディスクスペースを占有する問題を修正[＃3734](https://github.com/pingcap/tiflow/issues/3734) [＃5344](https://github.com/pingcap/tiflow/issues/5344)

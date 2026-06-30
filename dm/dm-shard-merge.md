@@ -5,7 +5,7 @@ summary: DM のシャードマージ機能について学習します。
 
 # TiDB データ移行シャードマージ {#tidb-data-migration-shard-merge}
 
-TiDB データ移行 (DM) は、アップストリーム MySQL/MariaDB シャード テーブル内の DML および DDL データのマージと、マージされたデータのダウンストリーム TiDB テーブルへの移行をサポートします。
+TiDB Data Migration (DM) は、アップストリーム MySQL/MariaDB シャード テーブル内の DML および DDL データのマージと、マージされたデータのダウンストリーム TiDB テーブルへの移行をサポートします。
 
 小さなデータセットの MySQL シャードを TiDB に移行してマージする必要がある場合は、 [このチュートリアル](/migrate-small-mysql-shards-to-tidb.md)を参照してください。
 

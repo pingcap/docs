@@ -38,7 +38,7 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 -   TiDB Self-Managedツール：
 
     -   データのバックアップと復元には、 [BR](/br/backup-and-restore-overview.md)のバージョン8.4.0以降を使用していることを確認してください。ベクトルデータ型のテーブルをTiDBバージョン8.4.0より前のバージョンに復元することはサポートされていません。
-    -   [TiDBデータ移行（DM）](/dm/dm-overview.md) MySQLベクトルデータ型をTiDBに移行または複製することをサポートしていません。
+    -   [TiDB Data Migration (DM)](/dm/dm-overview.md) MySQLベクトルデータ型をTiDBに移行または複製することをサポートしていません。
     -   [TiCDC](/ticdc/ticdc-overview.md)ベクトル データ タイプをサポートしていないダウンストリームにベクトル データをレプリケートすると、ベクトル データ タイプが別のタイプに変更されます。詳細については、 [ベクトルデータ型との互換性](/ticdc/ticdc-compatibility.md#compatibility-with-vector-data-types)を参照してください。
 
 ## フィードバック {#feedback}

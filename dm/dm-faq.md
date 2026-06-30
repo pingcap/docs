@@ -1,11 +1,11 @@
 ---
 title: TiDB Data Migration FAQs
-summary: TiDB データ移行 (DM) に関するよくある質問 (FAQ) について説明します。
+summary: TiDB Data Migration (DM) に関するよくある質問 (FAQ) について説明します。
 ---
 
-# TiDBデータ移行に関するよくある質問 {#tidb-data-migration-faqs}
+# TiDB Data Migrationに関するよくある質問 {#tidb-data-migration-faqs}
 
-このドキュメントでは、TiDB データ移行 (DM) に関するよくある質問 (FAQ) をまとめています。
+このドキュメントでは、TiDB Data Migration (DM) に関するよくある質問 (FAQ) をまとめています。
 
 ## DM は Alibaba RDS またはその他のクラウド データベースからのデータ移行をサポートしていますか? {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
 
