@@ -3,7 +3,7 @@ title: UNLOCK STATS
 summary: TiDB データベースの UNLOCK STATS の使用法の概要。
 ---
 
-# 統計情報をアンロック {#unlock-stats}
+# UNLOCK STATS {#unlock-stats}
 
 `UNLOCK STATS` 、テーブルまたはテーブルの統計のロックを解除するために使用されます。
 
@@ -25,7 +25,7 @@ PartitionNameList ::=
 
 ## 例 {#examples}
 
-[ロック統計](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、その統計をロックします。
+[LOCK STATS](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、その統計をロックします。
 
 表`t`の統計をロック解除すると、 `ANALYZE`正常に実行できます。
 
@@ -45,7 +45,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-[ロック統計](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、そのパーティション`p1`の統計をロックします。
+[LOCK STATS](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、そのパーティション`p1`の統計をロックします。
 
 パーティション`p1`の統計をロック解除すると、 `ANALYZE`正常に実行できます。
 
@@ -72,5 +72,5 @@ mysql> SHOW WARNINGS;
 ## 参照 {#see-also}
 
 -   [統計](/statistics.md#lock-statistics)
--   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
--   [統計を表示_ロック済み](/sql-statements/sql-statement-show-stats-locked.md)
+-   [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+-   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

@@ -3,7 +3,7 @@ title: CREATE [GLOBAL|SESSION] BINDING
 summary: TiDB データベースでの CREATE BINDING の使用。
 ---
 
-# [グローバル|セッション]バインディングの作成 {#create-global-session-binding}
+# CREATE [GLOBAL|SESSION] BINDING {#create-global-session-binding}
 
 このステートメントは、TiDB に新しい実行プラン バインディングを作成します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
@@ -322,8 +322,8 @@ Empty set (0.002 sec)
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]バインディングの削除](/sql-statements/sql-statement-drop-binding.md)
--   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
--   [表を分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+-   [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQLプラン管理](/sql-plan-management.md)

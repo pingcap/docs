@@ -3,7 +3,7 @@ title: SET TRANSACTION | TiDB SQL Statement Reference
 summary: TiDB データベースの SET TRANSACTION の使用法の概要。
 ---
 
-# トランザクションの設定 {#set-transaction}
+# SET TRANSACTION {#set-transaction}
 
 `SET TRANSACTION`文は、現在の分離レベルを`GLOBAL`または`SESSION`単位で変更するために使用できます。この構文は`SET transaction_isolation='new-value'`の代替であり、MySQL と SQL 標準の両方との互換性のために用意されています。
 

@@ -3,7 +3,7 @@ title: KILL
 summary: TiDB データベースに対する KILL の使用法の概要。
 ---
 
-# 殺す {#kill}
+# KILL {#kill}
 
 `KILL`文は、現在の TiDB クラスタ内の任意の TiDB インスタンスへの接続を終了するために使用されます。TiDB v6.2.0 以降では、 `KILL`文を使用して実行中の DDL ジョブを終了することもできます。
 
@@ -78,5 +78,5 @@ Global Kill 機能が有効になっていない場合、または v6.1.0 より
 
 ## 参照 {#see-also}
 
--   [プロセスリストを[完全]表示](/sql-statements/sql-statement-show-processlist.md)
+-   [SHOW [FULL] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
 -   [クラスタープロセスリスト](/information-schema/information-schema-processlist.md#cluster_processlist)

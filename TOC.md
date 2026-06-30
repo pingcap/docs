@@ -640,7 +640,7 @@
                 -   [AUTO_RANDOM](/auto-random.md)
                 -   [_tidb_rowid](/tidb-rowid.md)
                 -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
-            -   [文字通りの値](/literal-values.md)
+            -   [リテラル値](/literal-values.md)
             -   [スキーマオブジェクト名](/schema-object-names.md)
             -   [キーワードと予約語](/keywords.md)
             -   [ユーザー定義変数](/user-defined-variables.md)
@@ -868,10 +868,10 @@
         -   [キャッシュされたテーブル](/cached-tables.md)
         -   [外部キー制約](/foreign-key.md)
         -   [テーブルレベルのデータ親和性](/table-affinity.md)
-        -   文字セットと照合
+        -   文字セットと照合順序
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
-        -   [TTL（Time to Live：生きる時間）](/time-to-live.md)
+        -   [TTL（Time to Live：存続時間）](/time-to-live.md)
         -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
         -   システムテーブル
             -   `mysql`スキーマ

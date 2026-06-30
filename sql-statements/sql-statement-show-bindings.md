@@ -3,7 +3,7 @@ title: SHOW [GLOBAL|SESSION] BINDINGS
 summary: TiDB データベースでの SHOW BINDINGS バインディングの使用。
 ---
 
-# [グローバル|セッション]バインディングを表示 {#show-global-session-bindings}
+# SHOW [GLOBAL|SESSION] BINDINGS {#show-global-session-bindings}
 
 `SHOW BINDINGS`ステートメントは、作成されたSQLバインディングに関する情報を表示するために使用されます。3 `BINDING` `GLOBAL`または`SESSION`いずれかの基準で表されます。デフォルトは`SESSION`です。
 
@@ -129,8 +129,8 @@ Original_sql: select * from t1 where b = ?
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
--   [DROP [グローバル|セッション] バインディング](/sql-statements/sql-statement-drop-binding.md)
--   [テーブルを分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+-   [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQLプラン管理](/sql-plan-management.md)

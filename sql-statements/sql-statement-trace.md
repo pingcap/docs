@@ -3,7 +3,7 @@ title: TRACE | TiDB SQL Statement Reference
 summary: TiDB データベースにおける TRACE の使用法の概要。
 ---
 
-# トレース {#trace}
+# TRACE {#trace}
 
 `TRACE`文はクエリ実行に関する詳細情報を提供します。これは、TiDB サーバーのステータスポートによって公開されるグラフィカルインターフェースを通じて表示されるものです。
 
@@ -94,4 +94,4 @@ TRACE FORMAT='log' SELECT * FROM mysql.user;
 
 ## 参照 {#see-also}
 
--   [EXPLAIN分析](/sql-statements/sql-statement-explain-analyze.md)
+-   [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)

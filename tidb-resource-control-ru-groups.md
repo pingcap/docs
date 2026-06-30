@@ -207,7 +207,7 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 ```
 
-詳細については、 [`ALTER USER ... RESOURCE GROUP`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)参照してください。
+詳細については、 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)参照してください。
 
 #### 現在のセッションをリソースグループにバインドする {#bind-the-current-session-to-a-resource-group}
 

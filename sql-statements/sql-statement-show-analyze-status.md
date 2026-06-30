@@ -3,7 +3,7 @@ title: SHOW ANALYZE STATUS
 summary: TiDB データベースの SHOW ANALYZE STATUS の使用法の概要。
 ---
 
-# 分析ステータスを表示 {#show-analyze-status}
+# SHOW ANALYZE STATUS {#show-analyze-status}
 
 `SHOW ANALYZE STATUS`ステートメントは、TiDB によって実行されている統計収集タスクと、限られた数の履歴タスク レコードを表示します。
 

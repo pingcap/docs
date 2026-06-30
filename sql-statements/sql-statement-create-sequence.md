@@ -3,7 +3,7 @@ title: CREATE SEQUENCE
 summary: TiDB データベースの CREATE SEQUENCE の使用法の概要。
 ---
 
-# シーケンスを作成 {#create-sequence}
+# CREATE SEQUENCE {#create-sequence}
 
 `CREATE SEQUENCE`ステートメントは、TiDB にシーケンスオブジェクトを作成します。シーケンスは、テーブルや`View`のオブジェクトと同等のデータベースオブジェクトです。シーケンスは、カスタマイズされた方法でシリアル化された ID を生成するために使用されます。
 
@@ -254,7 +254,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 ## 参照 {#see-also}
 
--   [シーケンスの変更](/sql-statements/sql-statement-alter-sequence.md)
--   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
--   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
+-   [ALTER SEQUENCE](/sql-statements/sql-statement-alter-sequence.md)
+-   [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+-   [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
 -   [シーケンス関数](/functions-and-operators/sequence-functions.md)

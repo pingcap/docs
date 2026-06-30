@@ -3,7 +3,7 @@ title: SHOW PROFILES
 summary: TiDB データベースの SHOW PROFILES の使用法の概要。
 ---
 
-# プロフィールを表示 {#show-profiles}
+# SHOW PROFILES {#show-profiles}
 
 `SHOW PROFILES`ステートメントは現在、空の結果のみを返します。
 

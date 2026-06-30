@@ -3,7 +3,7 @@ title: SHOW [GLOBAL|SESSION] STATUS | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW [GLOBAL|SESSION] STATUS の使用法の概要。
 ---
 
-# [グローバル|セッション]ステータスを表示 {#show-global-session-status}
+# SHOW [GLOBAL|SESSION] STATUS {#show-global-session-status}
 
 このステートメントは、MySQL との互換性のために含まれています。TiDB は、ほとんどのメトリクスに対して`SHOW STATUS`ではなく、Prometheus と Grafana を使用して集中的なメトリクス収集を行います。
 
@@ -69,5 +69,5 @@ mysql> SHOW GLOBAL STATUS;
 
 ## 参照 {#see-also}
 
--   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)
+-   [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md)
 -   [サーバーステータス変数](/status-variables.md)

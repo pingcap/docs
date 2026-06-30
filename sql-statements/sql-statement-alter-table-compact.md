@@ -205,5 +205,5 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 ## 参照 {#see-also}
 
--   [テーブルの変更](/sql-statements/sql-statement-alter-table.md)
--   [TIDBを殺せ](/sql-statements/sql-statement-kill.md)
+-   [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
+-   [KILL](/sql-statements/sql-statement-kill.md)

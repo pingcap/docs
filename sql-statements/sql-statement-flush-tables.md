@@ -3,7 +3,7 @@ title: FLUSH TABLES | TiDB SQL Statement Reference
 summary: TiDB データベースの FLUSH TABLES の使用法の概要。
 ---
 
-# フラッシュテーブル {#flush-tables}
+# FLUSH TABLES {#flush-tables}
 
 このステートメントはMySQLとの互換性のために含まれています。TiDBでは有効な用途はありません。
 

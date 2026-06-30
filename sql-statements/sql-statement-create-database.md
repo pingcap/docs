@@ -3,7 +3,7 @@ title: CREATE DATABASE | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE DATABASE の使用法の概要。
 ---
 
-# データベースの作成 {#create-database}
+# CREATE DATABASE {#create-database}
 
 この文はTiDBに新しいデータベースを作成します。MySQLにおける「データベース」の用語は、SQL標準のスキーマに最も近いものです。
 
@@ -77,7 +77,7 @@ TiDBの`CREATE DATABASE`文はMySQLと完全に互換性があります。互換
 
 ## 参照 {#see-also}
 
--   [使用](/sql-statements/sql-statement-use.md)
--   [データベースの変更](/sql-statements/sql-statement-alter-database.md)
--   [データベースの削除](/sql-statements/sql-statement-drop-database.md)
--   [データベースを表示](/sql-statements/sql-statement-show-databases.md)
+-   [USE](/sql-statements/sql-statement-use.md)
+-   [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)
+-   [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
+-   [SHOW DATABASES](/sql-statements/sql-statement-show-databases.md)

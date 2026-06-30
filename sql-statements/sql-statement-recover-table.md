@@ -3,7 +3,7 @@ title: RECOVER TABLE
 summary: TiDB データベースの RECOVER TABLE の使用法の概要。
 ---
 
-# テーブルの回復 {#recover-table}
+# RECOVER TABLE {#recover-table}
 
 `RECOVER TABLE` 、 `DROP TABLE`ステートメントが実行された後、GC (ガベージ コレクション) の有効期間内に削除されたテーブルとその上のデータを回復するために使用されます。
 

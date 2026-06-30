@@ -3,7 +3,7 @@ title: CREATE VIEW | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE VIEW の使用法の概要。
 ---
 
-# ビューを作成 {#create-view}
+# CREATE VIEW {#create-view}
 
 `CREATE VIEW`の文は、 `SELECT`番目の文をテーブルと同様にクエリ可能なオブジェクトとして保存します。TiDB のビューは非マテリアライズドです。つまり、ビューがクエリされると、TiDB は内部的にクエリを書き換え、ビュー定義と SQL クエリを結合します。
 
@@ -95,7 +95,7 @@ ERROR 1105 (HY000): insert into view v1 is not supported now.
 
 ## 参照 {#see-also}
 
--   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
+-   [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
