@@ -49,7 +49,7 @@ If you have data files in SQL, CSV, Parquet, or Aurora Snapshot formats, you can
 
 - Import Apache Parquet files from Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud
 
-    You can import Parquet files from Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into {{{ .starter }}}](/tidb-cloud/import-parquet-files-serverless.md) and [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md).
+    You can import Parquet files from Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, or Alibaba Cloud OSS into TiDB Cloud. For more information, see [Import Apache Parquet Files from Cloud Storage into {{{ .starter }}} or Essential](/tidb-cloud/import-parquet-files-serverless.md) and [Import Apache Parquet Files from Cloud Storage into TiDB Cloud Dedicated](/tidb-cloud/import-parquet-files.md).
 
 ## Reference
 
