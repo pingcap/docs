@@ -1,0 +1,45 @@
+---
+title: REMOVE STAGE FILES
+summary: Removes files from a stage.
+---
+
+# REMOVE STAGE FILES
+
+Removes files from a stage.
+
+See also:
+
+- [LIST STAGE FILES](/tidb-cloud-lake/sql/list-stage-files.md): Lists files in a stage.
+- [PRESIGN](/tidb-cloud-lake/sql/presign.md): {{{ .lake }}} recommends using the Presigned URL method to upload files to the stage.
+
+## Syntax
+
+```sql
+REMOVE { userStage | internalStage | externalStage } [ PATTERN = '<regex_pattern>' ]
+```
+
+Where:
+
+### internalStage
+
+```sql
+internalStage ::= @<internal_stage_name>[/<file>]
+```
+
+### externalStage
+
+```sql
+externalStage ::= @<external_stage_name>[/<file>]
+```
+
+### PATTERN = 'regex_pattern'
+
+A regular expression pattern string, enclosed in single quotes, filters staged files to remove. It matches the file path portion after `@<stage_name>[/<path>]`. See [Filtering Staged Files with PATTERN](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern).
+
+## Examples
+
+This command removes all the files with a name matching the pattern *'ontime.*'* from the stage named *playground*:
+
+```sql
+REMOVE @playground PATTERN = 'ontime.*'
+```

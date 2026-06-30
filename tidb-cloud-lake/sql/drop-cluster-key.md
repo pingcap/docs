@@ -1,0 +1,24 @@
+---
+title: DROP CLUSTER KEY
+summary: Deletes the cluster key for a table.
+---
+
+# DROP CLUSTER KEY
+
+Deletes the cluster key for a table.
+
+See also: [ALTER CLUSTER KEY](/tidb-cloud-lake/sql/alter-cluster-key.md)
+
+## Syntax
+
+```sql
+ALTER TABLE [ IF EXISTS ] <name> DROP CLUSTER KEY
+```
+
+## Examples
+
+This command drops the cluster key for table *test*:
+
+```sql
+ALTER TABLE test DROP CLUSTER KEY
+```

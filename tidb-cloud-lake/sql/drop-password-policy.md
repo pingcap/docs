@@ -1,0 +1,23 @@
+---
+title: DROP PASSWORD POLICY
+summary: Deletes an existing password policy from {{{ .lake }}}. Please note that, before dropping a password policy, ensure that this policy is not associated with any users.
+---
+
+# DROP PASSWORD POLICY
+
+Deletes an existing password policy from {{{ .lake }}}. Please note that, before dropping a password policy, ensure that this policy is not associated with any users.
+
+## Syntax
+
+```sql
+DROP PASSWORD POLICY [ IF EXISTS ] <policy_name>
+```
+
+## Examples
+
+```sql
+CREATE PASSWORD POLICY SecureLogin
+    PASSWORD_MIN_LENGTH = 10;
+
+DROP PASSWORD POLICY SecureLogin;
+```
