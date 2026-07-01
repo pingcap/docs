@@ -131,6 +131,19 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 2. Choose a {{{ .starter }}} instance that you want to use for the tour, and click **Import Dataset**. The import process might take approximately one minute.
 3. Once the sample data is imported, follow the on-screen instructions to complete the tour.
 
+## Step 4: Connect to your {{{ .starter }}} instance
+
+TiDB is highly compatible with the MySQL protocol, so you can connect to it using most MySQL tools, drivers, and ORMs. The following steps use the MySQL CLI client `mysql` as an example.
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed with connection parameters.
+3. Ensure that the configurations in the connection dialog match your operating environment.
+4. Click **Generate Password** to create a random password.
+5. In the **Connect With** drop-down list, select **MySQL CLI**.
+6. Copy the connection command, paste it into your terminal, and then press **Enter** to run it.
+
+The MySQL CLI client opens and connects to your {{{ .starter }}} instance.
+
 ## What's next
 
 - To learn how to connect to your {{{ .starter }}} instance using different methods, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
