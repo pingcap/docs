@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     -   Backup & Restore (BR)
         -   増分バックアップやAmazon S3へのファイルのバックアップなどの実験的機能を有効にする[＃175](https://github.com/pingcap/br/pull/175)
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   etcd [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の注入をサポート
     -   ARM プラットフォーム[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)への TiDB サービスの導入をサポート
 

@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 3.0.10
     -   設定ファイルが見つからない場合に、一部の設定項目でデフォルト値を使用するようにする[＃255](https://github.com/pingcap/tidb-lightning/pull/255)
     -   非サーバーモードでWebインターフェースを開けない問題を修正[＃259](https://github.com/pingcap/tidb-lightning/pull/259)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   一部のシナリオでPDリーダーの取得に失敗したためにコマンド実行が失敗する問題を修正[＃1121](https://github.com/pingcap/tidb-ansible/pull/1121)
 -   TiDB Dashboard[＃1127](https://github.com/pingcap/tidb-ansible/pull/1127)に`Deadlock Detect Duration`監視項目を追加する

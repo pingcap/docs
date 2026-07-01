@@ -57,7 +57,7 @@ TiDB Ansible バージョン: 2.1.16
 -   TiDB Lightning
     -   2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`元の値に戻せない問題を修正しました[＃224](https://github.com/pingcap/tidb-lightning/pull/224)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   Spark [＃842](https://github.com/pingcap/tidb-ansible/pull/842)に`log4j`設定ファイルを追加する
 -   tispark jarパッケージをv2.1.2 [＃863](https://github.com/pingcap/tidb-ansible/pull/863)に更新します

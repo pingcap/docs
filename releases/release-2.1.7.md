@@ -36,6 +36,6 @@ TiDB Ansible バージョン: 2.1.7
 
 -   binlogを使用して生成された列の複製をサポートする
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 Prometheus 監視データのデフォルトの保持期間を 30 日に変更します

@@ -74,7 +74,7 @@ v5.0 の主な新機能または改善点は次のとおりです。
 -   [ユーザードキュメント](/character-set-and-collation.md#new-framework-for-collations)
 -   関連号: [＃17596](https://github.com/pingcap/tidb/issues/17596)
 
-## Security {#security}
+## セキュリティ {#security}
 
 ### エラーメッセージとログファイルのわかりやすさをサポート {#support-desensitizing-error-messages-and-log-files}
 

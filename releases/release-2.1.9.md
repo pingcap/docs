@@ -63,7 +63,7 @@ TiDB Ansible バージョン: 2.1.9
 -   同期差分インスペクター
     -   サポートチェックポイント[＃227](https://github.com/pingcap/tidb-tools/pull/227)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   ドキュメントのリファクタリング[＃740](https://github.com/pingcap/tidb-ansible/pull/740)に従って tidb-ansible ドキュメント内のリンク[＃741](https://github.com/pingcap/tidb-ansible/pull/741)更新します
 -   `inventory.ini`ファイル内の`enable_slow_query_log`パラメータを削除し、スロークエリログをデフォルトで別のログファイルに出力します[＃742](https://github.com/pingcap/tidb-ansible/pull/742)

@@ -247,9 +247,9 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 TiDB v7.5.0 のパフォーマンスについては、 [TPC-C性能試験報告書](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-tpcc)とTiDB Cloud Dedicatedクラスターの[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-sysbench)を参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [jgrande](https://github.com/jgrande) （初投稿者）
+-   [jgrande](https://github.com/jgrande) (初回貢献者)
 -   [shawn0915](https://github.com/shawn0915)

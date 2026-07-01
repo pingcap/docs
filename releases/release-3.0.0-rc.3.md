@@ -117,6 +117,6 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   コンテナ環境[＃634](https://github.com/pingcap/tidb-binlog/pull/634)でブリッジモードをサポートするために、 Drainerに`advertise-addr`構成を追加します。
     -   Pumpに`GetMvccByEncodeKey`関数を追加して、トランザクションステータス[＃632](https://github.com/pingcap/tidb-binlog/pull/632)クエリを高速化します。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   クラスターの最大QPS値を予測するための監視項目を追加する（デフォルトでは「非表示」） [#f5cfa4d](https://github.com/pingcap/tidb-ansible/commit/f5cfa4d903bbcd77e01eddc8d31eabb6e6157f73)

@@ -55,6 +55,6 @@ TiDB Ansible バージョン: 2.1.10
 -   TiDBBinlog
     -   トラブルシューティングを容易にするためにPumpstorageログを最適化します[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   TiDB Lightningの設定ファイルを更新し、 `tidb_lightning_ctl`スクリプト[#d3a4a368](https://github.com/pingcap/tidb-ansible/commit/d3a4a368810a421c49980899a286cf010569b4c7)を追加します。

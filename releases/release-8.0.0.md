@@ -186,7 +186,7 @@ TiDB バージョン: 8.0.0
 
     詳細については、 [ドキュメント](/information-schema/information-schema-tidb-index-usage.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiKV 保存時の暗号化は Google [キー管理サービス（クラウドKMS）](https://cloud.google.com/docs/security/key-management-deep-dive?hl)をサポートします (実験的) [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv)
 
@@ -256,7 +256,7 @@ TiDB バージョン: 8.0.0
 -   TiUPによってデプロイされたデフォルトのGrafanaバージョンを7.5.11から7.5.17にアップグレードします。
 -   GAではないがデフォルトで有効になっている証人関連のスケジューラを削除する [#7765](https://github.com/tikv/pd/pull/7765) @[rleungx](https://github.com/rleungx)
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   セキュリティ強化モード（SEM）で[`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) `ON`に設定することを禁止し、ユーザーの接続に関する潜在的な問題を防止します。 [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 -   DM では、暗号化および復号化用の固定秘密キーが削除され、暗号化および復号化用の秘密キーをカスタマイズできるようになります。アップグレード前に[データソース構成](/dm/dm-source-configuration-file.md)と[移行タスクの設定](/dm/task-configuration-file-full.md)で暗号化されたパスワードが使用されている場合、追加の操作については[DMの暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)のアップグレード手順を参照する必要があります。 [#9492](https://github.com/pingcap/tiflow/issues/9492) @[D3Hunter](https://github.com/D3Hunter)
@@ -547,21 +547,21 @@ TiDB バージョン: 8.0.0
         -   TiDB Lightningがファイルスキャン中に無効なシンボリックリンクファイルに遭遇した際にエラーを報告する問題を修正しました [#49423](https://github.com/pingcap/tidb/issues/49423) @[lance6716](https://github.com/lance6716)
         -   `0`が`NO_ZERO_IN_DATE` } に含まれていない場合に、 TiDB Lightning が`sql_mode`を含む日付値を正しく解析できない問題 [#50757](https://github.com/pingcap/tidb/issues/50757) @[GMHDBJD](https://github.com/GMHDBJD)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [アオアン](https://github.com/Aoang)
--   [バッファロー](https://github.com/bufferflies)
--   [デーモン365](https://github.com/daemon365)
--   [エルトシアー](https://github.com/eltociear)
--   [リチュンジュ](https://github.com/lichunzhu)
--   [ジフハスト](https://github.com/jiyfhust)
+-   [Aoang](https://github.com/Aoang)
+-   [bufferflies](https://github.com/bufferflies)
+-   [daemon365](https://github.com/daemon365)
+-   [eltociear](https://github.com/eltociear)
+-   [lichunzhu](https://github.com/lichunzhu)
+-   [jiyfhust](https://github.com/jiyfhust)
 -   [pingandb](https://github.com/pingandb)
--   [シェンキデバオジ](https://github.com/shenqidebaozi)
--   [スミティーズ](https://github.com/Smityz)
--   [ソンジビン97](https://github.com/songzhibin97)
--   [タンジンユ97](https://github.com/tangjingyu97)
--   [テーマ](https://github.com/Tema)
+-   [shenqidebaozi](https://github.com/shenqidebaozi)
+-   [Smityz](https://github.com/Smityz)
+-   [songzhibin97](https://github.com/songzhibin97)
+-   [tangjingyu97](https://github.com/tangjingyu97)
+-   [Tema](https://github.com/Tema)
 -   [ub-3](https://github.com/ub-3)
--   [ヨシキポム](https://github.com/yoshikipom)
+-   [yoshikipom](https://github.com/yoshikipom)

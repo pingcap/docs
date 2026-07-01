@@ -82,7 +82,7 @@ TiDB Lightning
 
 -   SQLダンプで指定された列名が小文字でない場合に発生するインポートエラーを修正しました[＃210](https://github.com/pingcap/tidb-lightning/pull/210)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   ansibleコマンドとその`jmespath`および`jinja2`依存パッケージ[＃803](https://github.com/pingcap/tidb-ansible/pull/803)の事前チェック機能を追加します[＃813](https://github.com/pingcap/tidb-ansible/pull/813)
 -   Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメータ値[＃806](https://github.com/pingcap/tidb-ansible/pull/806)より少ない場合にPumpでbinlogファイルの書き込みを停止します。

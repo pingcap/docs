@@ -55,7 +55,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/tidb-distributed-execution-framework.md)参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiDB ログ感度低下 (GA) [＃52364](https://github.com/pingcap/tidb/issues/52364) @ [xhebox](https://github.com/xhebox)を強化
 
@@ -93,7 +93,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 >
 > このセクションでは、v8.0.0から最新バージョン（v8.1.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v7.6.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
 -   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型AUTO_INCREMENT ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)をサポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
@@ -288,16 +288,16 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティからの以下の貢献者に感謝いたします。
 
--   [アルトゥルメランチク](https://github.com/arturmelanchyk) (初回投稿者)
--   [キャビンフィーバーB](https://github.com/CabinfeverB)
--   [ダンキシュ](https://github.com/danqixu) (初回投稿者)
--   [イマラソン](https://github.com/imalasong) (初回投稿者)
--   [ジフハウス](https://github.com/jiyfhust)
--   [ネガチョフ](https://github.com/negachov) (初回投稿者)
--   [テストウィル](https://github.com/testwill)
--   [yzhan1](https://github.com/yzhan1) (初回投稿者)
--   [zxc111](https://github.com/zxc111) (初回投稿者)
+-   [arturmelanchyk](https://github.com/arturmelanchyk) (初回貢献者)
+-   [CabinfeverB](https://github.com/CabinfeverB)
+-   [danqixu](https://github.com/danqixu) (初回貢献者)
+-   [imalasong](https://github.com/imalasong) (初回貢献者)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [negachov](https://github.com/negachov) (初回貢献者)
+-   [testwill](https://github.com/testwill)
+-   [yzhan1](https://github.com/yzhan1) (初回貢献者)
+-   [zxc111](https://github.com/zxc111) (初回貢献者)

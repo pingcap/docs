@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.0.5
 -   TiDB Lightning
     -   Loaderの完全なロジックインポート機能を統合し、バックエンドモード[＃221](https://github.com/pingcap/tidb-lightning/pull/221)構成をサポートします。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   インデックス速度[＃986](https://github.com/pingcap/tidb-ansible/pull/986)追加の監視メトリックを追加します
 -   設定ファイルの内容を簡素化し、ユーザーが設定する必要のないパラメータを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [＃998](https://github.com/pingcap/tidb-ansible/pull/998)

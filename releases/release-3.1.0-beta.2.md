@@ -42,7 +42,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
     -   場所ラベル名[＃2084](https://github.com/pingcap/pd/pull/2084)でバックスラッシュを許容する
 -   TiFlash
     -   初回リリース
--   TiDB アンシブル
+-   TiDB Ansible
     -   1つのクラスターに複数のGrafana/Prometheus/Alertmanagerをデプロイすることをサポート[＃1143](https://github.com/pingcap/tidb-ansible/pull/1143)
     -   TiFlashコンポーネント[＃1148](https://github.com/pingcap/tidb-ansible/pull/1148)展開をサポート
     -   TiFlashコンポーネント[＃1152](https://github.com/pingcap/tidb-ansible/pull/1152)に関連する監視メトリックを追加します
@@ -64,5 +64,5 @@ TiDB Ansible バージョン: 3.1.0-beta.2
         -   サーバーモード[＃259](https://github.com/pingcap/tidb-lightning/pull/259)以外ではWebインターフェースが動作しないバグを修正
     -   BR (バックアップと復元)
         -   データの復元時に回復不能なエラーが発生し、 BR が時間内に終了できない問題を修正しました[＃152](https://github.com/pingcap/br/pull/152)
--   TiDB アンシブル
+-   TiDB Ansible
     -   一部のシナリオでPDLeaderを取得できないためにローリングアップデートコマンドが失敗する問題を修正しました[＃1122](https://github.com/pingcap/tidb-ansible/pull/1122)

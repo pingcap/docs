@@ -16,7 +16,7 @@ TiDB バージョン: 6.5.4
 -   `Cursor Fetch`使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
 -   RocksDBの定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量の圧縮が行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)導入され、RocksDB [＃15355](https://github.com/tikv/tikv/issues/15355) @ [LykxSassinator](https://github.com/LykxSassinator)の定期的な圧縮を手動で設定できるようになりました。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 

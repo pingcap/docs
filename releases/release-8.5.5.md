@@ -11,7 +11,7 @@ TiDBバージョン：8.5.5
 
 クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
-## 特徴 {#features}
+## 機能 {#features}
 
 ### パフォーマンス {#performance}
 
@@ -141,7 +141,7 @@ TiDBバージョン：8.5.5
 
     詳細については、[ステートメントサマリーテーブル](/statement-summary-tables.md)および[スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   Azure Blob Storage へのBackup & Restore (BR) で Azure Managed Identity (MI) 認証をサポートする [#19006](https://github.com/tikv/tikv/issues/19006) @[RidRisR](https://github.com/RidRisR)
 
@@ -157,7 +157,7 @@ TiDBバージョン：8.5.5
 
 TiDBクラスタがv8.5.4で新規にデプロイされている場合（つまり、v8.5.3より前のバージョンからアップグレードされていない場合）、v8.5.5へスムーズにアップグレードできます。v8.5.5の変更点のほとんどは通常のアップグレードでは問題ありませんが、このリリースには動作の変更、MySQLとの互換性調整、​​システム変数の更新、構成パラメータの更新、システムテーブルの変更も含まれています。アップグレードする前に、このセクションをよくお読みください。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   バージョン8.5.5以降、TiDBはデータ復元時に対象テーブルを自動的に`restore`モードに設定します。 `restore`モードのテーブルでは、ユーザーによる読み取りまたは書き込み操作が禁止されます。復元が完了すると、TiDBはこれらのテーブルのモードを自動的に`normal`に戻し、ユーザーが通常どおりテーブルを読み書きできるようにします。この動作により、復元プロセス中のタスクの安定性とデータの一貫性が確保されます。
 -   バージョン8.5.5以降、 `--load-stats`パラメータが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)手動で実行してください。

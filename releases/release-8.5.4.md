@@ -11,7 +11,7 @@ TiDBバージョン：8.5.4
 
 クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)| [本番環境への展開](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
-## 特徴 {#features}
+## 機能 {#features}
 
 -   特定のテーブルのデータの再配布をサポート (実験的) [#63260](https://github.com/pingcap/tidb/issues/63260) @[bufferflies](https://github.com/bufferflies)
 

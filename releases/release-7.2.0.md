@@ -140,7 +140,7 @@ TiDB バージョン: 7.2.0
 >
 > このセクションでは、バージョン7.1.0から最新バージョン（7.2.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。バージョン7.0.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   更新イベントを処理する際、TiCDC は、イベント内で主キーまたは NULL 以外の一意インデックス値が変更された場合、そのイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)を参照してください。
 -   [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610)のデフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが不要なソート操作を回避するために、サブクエリから`ORDER BY`句を削除することを意味します。この変更により、クエリ結果の行の順序が変わる可能性があります。ISO/IEC SQL 標準では、クエリ結果がサブクエリで指定された`ORDER BY`ソートに従うことを要求していません。最終結果で特定の順序を確保する必要がある場合は、外側のクエリに`ORDER BY`句を追加します。アプリケーションがサブクエリのソートに依存している場合は、この変数を`OFF`に設定できます。以前のバージョンからアップグレードされたクラスターは、デフォルトでは以前の動作を維持します。
@@ -286,19 +286,19 @@ TiDB バージョン: 7.2.0
         -   `experimental.allow-expression-index`が有効でデフォルト値がUUIDの場合に発生するTiDB Lightningpanic問題を修正 [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
         -   データファイルの分割中にタスクが終了した際に発生するTiDB Lightningpanicの問題を修正 [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
 -   [asjdf](https://github.com/asjdf)
--   [ブラックティア23](https://github.com/blacktear23)
--   [キャヴァンスー](https://github.com/Cavan-xu)
--   [ダラエス](https://github.com/darraes)
--   [デモマニト](https://github.com/demoManito)
+-   [blacktear23](https://github.com/blacktear23)
+-   [Cavan-xu](https://github.com/Cavan-xu)
+-   [darraes](https://github.com/darraes)
+-   [demoManito](https://github.com/demoManito)
 -   [dhysum](https://github.com/dhysum)
--   [ハッピーv587](https://github.com/happy-v587)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
--   [ニュリク](https://github.com/nyurik)
+-   [happy-v587](https://github.com/happy-v587)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
+-   [nyurik](https://github.com/nyurik)
 -   [SeigeC](https://github.com/SeigeC)
--   [タンジンユ97](https://github.com/tangjingyu97)
+-   [tangjingyu97](https://github.com/tangjingyu97)

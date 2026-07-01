@@ -484,27 +484,27 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
         -   GTID モードでデータをレプリケートする際のパフォーマンス低下の問題を修正 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
         -   下流テーブル構造に`shard_row_id_bits`が含まれている場合にマイグレーションタスクエラーが発生する問題を修正 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [0o001](https://github.com/0o001) （初投稿者）
--   [バゲチェンジ](https://github.com/bagechengzi)(初投稿者)
--   [フェラン・モーガン・PingCAP](https://github.com/feran-morgan-pingcap)(初投稿者)
--   [ハイポン](https://github.com/highpon)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
--   [lkshminarayanan](https://github.com/lkshminarayanan) （初投稿者）
--   [lyang24](https://github.com/lyang24) （初投稿者）
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
--   [モルゴ](https://github.com/morgo)
--   [nkg-](https://github.com/nkg-) （初投稿者）
--   [オンリーキャット](https://github.com/onlyacat)
+-   [0o001](https://github.com/0o001) (初回貢献者)
+-   [bagechengzi](https://github.com/bagechengzi) (初回貢献者)
+-   [feran-morgan-pingcap](https://github.com/feran-morgan-pingcap) (初回貢献者)
+-   [highpon](https://github.com/highpon)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
+-   [lkshminarayanan](https://github.com/lkshminarayanan) (初回貢献者)
+-   [lyang24](https://github.com/lyang24) (初回貢献者)
+-   [mittalrishabh](https://github.com/mittalrishabh)
+-   [morgo](https://github.com/morgo)
+-   [nkg-](https://github.com/nkg-) (初回貢献者)
+-   [onlyacat](https://github.com/onlyacat)
 -   [shawn0915](https://github.com/shawn0915)
--   [スミティーズ](https://github.com/Smityz)
--   [szpnygo](https://github.com/szpnygo) （初投稿者）
--   [ub-3](https://github.com/ub-3) （初投稿者）
--   [シャオヤウェイ](https://github.com/xiaoyawei)(初投稿者)
--   [ヨークヘレン](https://github.com/yorkhellen)
--   [ヨシキポム](https://github.com/yoshikipom)(初投稿者)
--   [ジャオリ](https://github.com/Zheaoli)
+-   [Smityz](https://github.com/Smityz)
+-   [szpnygo](https://github.com/szpnygo) (初回貢献者)
+-   [ub-3](https://github.com/ub-3) (初回貢献者)
+-   [xiaoyawei](https://github.com/xiaoyawei) (初回貢献者)
+-   [yorkhellen](https://github.com/yorkhellen)
+-   [yoshikipom](https://github.com/yoshikipom) (初回貢献者)
+-   [Zheaoli](https://github.com/Zheaoli)

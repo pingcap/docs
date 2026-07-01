@@ -48,5 +48,5 @@ TiDB Ansible バージョン: 3.0.12
 -   PD
     -   PD がリージョンハートビート[＃2233](https://github.com/pingcap/pd/pull/2233)処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   クラスター[＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)内で複数の Grafana/Prometheus/Alertmanager のデプロイをサポート

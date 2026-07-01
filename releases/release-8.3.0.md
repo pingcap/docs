@@ -140,7 +140,7 @@ TiDBバージョン：8.3.0
 
 -   リクエストユニット（RU）設定に関するメトリクスを追加 [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   PDログの編集機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
 
@@ -174,7 +174,7 @@ TiDBバージョン：8.3.0
 >
 > このセクションでは、v8.2.0 から最新バージョン (v8.3.0) にアップグレードする際に知っておくべき互換性の変更点について説明します。v8.1.0 以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   コマンドの誤用を防ぐため、 `pd-ctl`はプレフィックスマッチングメカニズムを無効にします。たとえば、 `store remove-tombstone` `store remove`を介して呼び出すことはできません。 [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
 
@@ -393,16 +393,16 @@ TiDBバージョン：8.3.0
         -   TiDB Lightningを使用したデータインポート中にトランザクションの競合が発生する問題を修正しました [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)
         -   多数のデータベースとテーブルのインポート中に、大きなチェックポイントファイルがパフォーマンス低下を引き起こす問題を修正 [#55054](https://github.com/pingcap/tidb/issues/55054) @[D3Hunter](https://github.com/D3Hunter)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [アリエ](https://github.com/ari-e)
--   [杉本英](https://github.com/ei-sugimoto)
--   [ハオW30](https://github.com/HaoW30)
+-   [ari-e](https://github.com/ari-e)
+-   [ei-sugimoto](https://github.com/ei-sugimoto)
+-   [HaoW30](https://github.com/HaoW30)
 -   [JackL9u](https://github.com/JackL9u)
 -   [michaelmdeng](https://github.com/michaelmdeng)
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
+-   [mittalrishabh](https://github.com/mittalrishabh)
 -   [qingfeng777](https://github.com/qingfeng777)
--   [サンディープ・パディ](https://github.com/SandeepPadhi)
+-   [SandeepPadhi](https://github.com/SandeepPadhi)
 -   [yzhan1](https://github.com/yzhan1)

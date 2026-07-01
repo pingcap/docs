@@ -130,7 +130,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
     -   チェックサム[＃215](https://github.com/pingcap/tidb-tools/pull/215)計算してデータの整合性をチェックするための構成項目`only-use-checksum`追加します
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   より多くの TiKV 監視パネルをサポートし、Ansible、Grafana、Prometheus [＃727](https://github.com/pingcap/tidb-ansible/pull/727)のバージョンを更新しました。
     -   クラスターのステータスを表示するサマリーダッシュボード

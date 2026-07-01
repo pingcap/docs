@@ -196,7 +196,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashシステムテーブル情報のクエリに使用されるインターフェイスを置き換えます[＃6941](https://github.com/pingcap/tiflash/issues/6941) @ [flowbehappy](https://github.com/flowbehappy)
 
@@ -228,7 +228,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 >
 > このセクションでは、v7.0.0から最新バージョン（v7.1.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v6.6.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   セキュリティを向上させるために、 TiFlashはHTTPサービスポート（デフォルト`8123` ）を廃止し、代わりにgRPCポートを使用します。
 
@@ -472,16 +472,16 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 TiDB v7.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-sysbench)を参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティの以下の貢献者に感謝いたします。
 
 -   [blacktear23](https://github.com/blacktear23)
--   [イーサフロー](https://github.com/ethercflow)
--   [ヒヒフフ](https://github.com/hihihuhu)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
+-   [ethercflow](https://github.com/ethercflow)
+-   [hihihuhu](https://github.com/hihihuhu)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
 -   [lqs](https://github.com/lqs)
--   [ピンアンドビー](https://github.com/pingandb)
--   [ヨークヘレン](https://github.com/yorkhellen)
--   [ユジアリスタ](https://github.com/yujiarista) (初回投稿者)
+-   [pingandb](https://github.com/pingandb)
+-   [yorkhellen](https://github.com/yorkhellen)
+-   [yujiarista](https://github.com/yujiarista) (初回貢献者)

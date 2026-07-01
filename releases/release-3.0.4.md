@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 3.0.4
     -   TiKV で RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上
     -   クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`追加します。
     -   冗長なフィールドを削除して、TiDB のスロークエリログの出力を最適化します。
--   行動の変化
+-   動作の変更
     -   デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
     -   TiDBにグローバルスコープのシステム変数を`tidb_txn_mode`追加し、悲観的ロックの使用を許可します。ただし、TiDBはデフォルトで依然として楽観的ロックを採用していることに注意してください。
     -   TiDB スロー クエリ ログの`Index_ids`フィールドを`Index_names`に置き換えて、スロー クエリ ログの使いやすさを向上させます。
@@ -32,12 +32,12 @@ TiDB Ansible バージョン: 3.0.4
     -   カーソルを使用して`PREPARE` + `EXECUTE`の結果を取得するときに、スロークエリログが正しくないという TiDB の問題を修正しました。
     -   PDで隣接する小さいリージョンを結合できない問題を修正
     -   TiKV の問題を修正しました。アイドル状態のクラスターでファイル記述子がリークすると、プロセスの実行時間が長くなると TiKV プロセスが異常終了することがあります。
--   寄稿者
+-   貢献者
 
     このリリースにご協力いただいたコミュニティの以下の貢献者の方々に感謝申し上げます。
 
-    -   [スドゥズ](https://github.com/sduzh)
-    -   [リジェンダ](https://github.com/lizhenda)
+    -   [sduzh](https://github.com/sduzh)
+    -   [lizhenda](https://github.com/lizhenda)
 
 ## TiDB {#tidb}
 
@@ -117,7 +117,7 @@ TiDB Ansible バージョン: 3.0.4
     -   チェックポイントからデータを再インポートするとTiDB Lightning がpanicを起こす可能性がある問題を修正[＃237](https://github.com/pingcap/tidb-lightning/pull/237)
     -   `AUTO_INCREMENT`のアルゴリズムを最適化して、 `AUTO_INCREMENT`列[＃227](https://github.com/pingcap/tidb-lightning/pull/227)のオーバーフローのリスクを軽減します。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   TiSparkをv2.2.0 [＃926](https://github.com/pingcap/tidb-ansible/pull/926)にアップグレード
 -   TiDB構成項目`pessimistic_txn`のデフォルト値を`true` [＃933](https://github.com/pingcap/tidb-ansible/pull/933)に更新します。

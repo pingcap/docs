@@ -117,7 +117,7 @@ TiDB バージョン: 7.3.0
 >
 > このセクションでは、バージョン7.2.0から最新バージョン（7.3.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。バージョン7.1.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   TiDB
 
@@ -288,20 +288,20 @@ TiDB バージョン: 7.3.0
         -   TiDB Lightning のインポート完了後にチェックサムを実行すると SSL エラーが発生する可能性がある問題を修正しました [#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
         -   論理インポートモードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータがタイムリーに更新されない可能性がある問題を修正しました [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [チャールズジェン44](https://github.com/charleszheng44)
+-   [charleszheng44](https://github.com/charleszheng44)
 -   [dhysum](https://github.com/dhysum)
--   [ハイユクス](https://github.com/haiyux)
--   [ジャンファ](https://github.com/Jiang-Hua)
--   [ジル](https://github.com/Jille)
--   [ジフハスト](https://github.com/jiyfhust)
--   [クリシュナダット・パンチャグヌラ](https://github.com/krishnaduttPanchagnula)
--   [L-メープル](https://github.com/L-maple)
+-   [haiyux](https://github.com/haiyux)
+-   [Jiang-Hua](https://github.com/Jiang-Hua)
+-   [Jille](https://github.com/Jille)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [krishnaduttPanchagnula](https://github.com/krishnaduttPanchagnula)
+-   [L-maple](https://github.com/L-maple)
 -   [pingandb](https://github.com/pingandb)
--   [テストウィル](https://github.com/testwill)
--   [ティソンくん](https://github.com/tisonkun)
+-   [testwill](https://github.com/testwill)
+-   [tisonkun](https://github.com/tisonkun)
 -   [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
--   [ヤムチャイナ](https://github.com/yumchina)
+-   [yumchina](https://github.com/yumchina)
