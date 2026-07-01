@@ -115,7 +115,7 @@ TiDBバージョン：8.5.3
     -   `recovery-duration`が低速ノード検出メカニズムで有効にならない問題を修正 [#9384](https://github.com/tikv/pd/issues/9384) @[rleungx](https://github.com/rleungx)
     -   クラスタのアップグレード後に Evict Leaderスケジューラが誤って一時停止される可能性がある問題を修正しました [#9416](https://github.com/tikv/pd/issues/9416) @[rleungx](https://github.com/rleungx)
     -   TiDB DashboardのTCP接続を不適切に閉じるとPDゴルーチンリークが発生する問題を修正しました [#9402](https://github.com/tikv/pd/issues/9402) @[baurine](https://github.com/baurine)
-    -   新しく追加された TiKV ノードがスケジュールに失敗する可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
+    -   新規追加 TiKV ノードがスケジュールに失敗する可能性がある問題を修正 [#9145](https://github.com/tikv/pd/issues/9145) @[bufferflies](https://github.com/bufferflies)
 
 -   TiFlash
 

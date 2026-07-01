@@ -155,7 +155,7 @@ TiDBバージョン: 6.5.12
         -   Avroプロトコル[＃11994](https://github.com/pingcap/tiflow/issues/11994) @ [wk989898](https://github.com/wk989898)経由で`default NULL`文を複製するときにTiCDCがエラーを報告する問題を修正
         -   PDスケールイン[＃12004](https://github.com/pingcap/tiflow/issues/12004) @ [lidezhu](https://github.com/lidezhu)後にTiCDCがPDに正しく接続できない問題を修正
         -   チェンジフィードが停止または削除された後に初期スキャンがキャンセルされない問題を修正[＃11638](https://github.com/pingcap/tiflow/issues/11638) @ [3AceShowHand](https://github.com/3AceShowHand)
-        -   アップストリームで新しく追加された列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
+        -   アップストリームで新規追加列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
         -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが[＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [hongyunyan](https://github.com/hongyunyan)で停止する可能性がある問題を修正しました。
         -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメント[＃11839](https://github.com/pingcap/tiflow/issues/11839) @ [CharlesCheung96](https://github.com/CharlesCheung96)を複製するときに TiCDC がpanic可能性がある問題を修正しました
         -   有効なインデックス[＃11765](https://github.com/pingcap/tiflow/issues/11765) @ [asddongmen](https://github.com/asddongmen)のないテーブルで`TRUNCATE TABLE` DDL を複製するときに TiCDC がエラーを報告する可能性がある問題を修正しました。

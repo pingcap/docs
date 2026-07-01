@@ -124,7 +124,7 @@ TiDB バージョン: 7.5.6
     -   TiCDC
 
         -   多数の小さなテーブルがあるシナリオで TiCDC を有効にすると、TiKV が[＃18142](https://github.com/tikv/tikv/issues/18142) @ [hicqu](https://github.com/hicqu)で再起動する可能性がある問題を修正しました。
-        -   アップストリームで新しく追加された列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
+        -   アップストリームで新規追加列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
         -   Sarama クライアントによって再送信された順序が乱れたメッセージによって Kafka メッセージの順序が正しくなくなる問題を修正[＃11935](https://github.com/pingcap/tiflow/issues/11935) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   TiCDC が`RENAME TABLE`操作[＃11946](https://github.com/pingcap/tiflow/issues/11946) @ [wk989898](https://github.com/wk989898)中にフィルタリングに誤ったテーブル名を使用する問題を修正しました
         -   チェンジフィードが削除された後に goroutines リークが発生する問題を修正[＃11954](https://github.com/pingcap/tiflow/issues/11954) @ [hicqu](https://github.com/hicqu)

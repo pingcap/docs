@@ -153,7 +153,7 @@ TiDB バージョン: 8.2.0
 | [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                 | 変更     | デフォルト値を`ON`から`OFF`に変更します。これにより、履歴統計が無効になり、潜在的な安定性の問題を回避できます。                                                                                                                                    |
 | [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)                            | 変更     | `sort`演算子の同時実行設定のサポートを追加します。                                                                                                                                                                    |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL ステートメントの実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
-| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新しく追加された | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
+| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新規追加 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 

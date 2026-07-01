@@ -146,7 +146,7 @@ TiDB バージョン: 4.0.9
     -   インデックスマージがRead Committed分離レベルのトランザクションで使用されると、結果が正しくなくなる可能性がある問題を修正しました[＃21253](https://github.com/pingcap/tidb/pull/21253)
     -   書き込み競合後のトランザクション再試行によって発生する自動ID割り当ての失敗を修正[＃21079](https://github.com/pingcap/tidb/pull/21079)
     -   `LOAD DATA` [＃21074](https://github.com/pingcap/tidb/pull/21074)を使用してJSONデータを正しくTiDBにインポートできない問題を修正しました
-    -   新しく追加された`Enum`型列のデフォルト値が正しくない問題を修正しました[＃20998](https://github.com/pingcap/tidb/pull/20998)
+    -   新規追加`Enum`型列のデフォルト値が正しくない問題を修正しました[＃20998](https://github.com/pingcap/tidb/pull/20998)
     -   `adddate`関数が無効な文字を挿入する問題を修正[＃21176](https://github.com/pingcap/tidb/pull/21176)
     -   状況によっては間違った`PointGet`プランが生成され、間違った結果[＃21244](https://github.com/pingcap/tidb/pull/21244)が発生する問題を修正しました
     -   MySQL [＃20888](https://github.com/pingcap/tidb/pull/20888)との互換性を保つため、 `ADD_DATE`関数の夏時間の変換を無視する
