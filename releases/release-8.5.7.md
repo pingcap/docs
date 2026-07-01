@@ -150,7 +150,7 @@ TiKV
 
 ## Removed features
 
-* Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273-->
+* Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273--> <!--tw@lilin90-->
 
     To import data with TiDB Lightning, use the [TiDB Lightning command-line tools](/tidb-lightning/tidb-lightning-overview.md): [`tidb-lightning`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
 
