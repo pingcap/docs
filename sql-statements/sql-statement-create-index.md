@@ -369,7 +369,15 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 
 ## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-A partial index is an index built on a subset of rows in a table. A conditional expression, called a predicate, defines the subset. The index contains entries only for rows that satisfy the predicate.
+A partial index is an index built on a subset of rows in a table. When creating a partial index, you can use a conditional expression, called a predicate, to define the subset. The index contains entries only for rows that satisfy the predicate.
+
+### Applicable scenarios
+
+In the following scenarios, using partial indexes helps improve query performance or reduce index maintenance overhead:
+
+- **Selective filtering**: When you frequently query a small subset of rows based on specific conditions, you can use partial indexes. For queries that satisfy the partial index predicate, TiDB can use the partial index to avoid scanning irrelevant rows and reduce the storage space occupied by the index.
+- **Conditional uniqueness**: When you only need to enforce a uniqueness constraint on rows that satisfy specific conditions, you can use a unique partial index to avoid applying the uniqueness constraint to the entire table.
+- **Reduced DML overhead**: When many `INSERT`, `UPDATE`, or `DELETE` operations affect rows that do not need to be indexed, you can use partial indexes. Compared with maintaining a full index, maintaining a partial index can reduce index maintenance overhead.
 
 ### Create partial indexes
 
@@ -401,8 +409,9 @@ CREATE TABLE t2 (
 
 The following examples demonstrate how to use partial indexes effectively:
 
+Create a table with user data:
+
 ```sql
--- Create a table with user data
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
@@ -410,8 +419,11 @@ CREATE TABLE users (
     created_at DATETIME,
     score INT
 );
+```
 
--- Create partial indexes for common query patterns
+Create partial indexes for common query patterns:
+
+````sql
 CREATE INDEX idx_active_users ON users (name) WHERE status = 'active';
 CREATE INDEX idx_high_score_users ON users (created_at) WHERE score > 1000;
 CREATE INDEX idx_pending_status ON users (status) WHERE status = 'pending';
@@ -464,7 +476,7 @@ mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
 3 rows in set (0.00 sec)
 ```
 
-If a query predicate does not match the partial index definition, TiDB does not select the partial index, even with a hint. For example, the following statement cannot use the partial index `idx_high_score_users`, because the query predicate `score > 100` does not match the partial index definition `score > 1000`:
+If a query predicate does not satisfy the conditions defined by the partial index, TiDB does not select the partial index, even with a hint. For example, the following statement cannot use the partial index `idx_high_score_users`, because the query predicate `score > 100` does not satisfy the partial index definition `score > 1000`:
 
 ```sql
 mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
@@ -478,26 +490,12 @@ mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score >
 +---------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-### When to use partial indexes
-
-Partial indexes are particularly useful in the following scenarios:
-
-- **Selective filtering**: use a partial index when you frequently query a small subset of rows based on specific conditions.
-- **Conditional uniqueness**: use a partial index when you need unique constraints that apply only under certain conditions.
-
 ### Limitations
 
 - The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
-- The column and constant values must be of the same data type.
+- The columns and constant values in the predicate must be of the same data type.
 - The predicate can only reference columns from the same table.
 - Partial indexes cannot be created on expression indexes.
-
-### Performance benefits
-
-Partial indexes have the following performance benefits:
-
-- **Reduced storage**: only the rows that match the predicate are indexed, which saves storage space.
-- **Faster DML**: maintaining an index for a subset of rows is faster during `INSERT`, `UPDATE`, and `DELETE` operations.
 
 ## Invisible index
 
