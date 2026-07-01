@@ -11,7 +11,7 @@ This tutorial walks you through how to use [peewee](https://docs.peewee-orm.com/
 > **Note:**
 >
 > - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -67,11 +67,11 @@ pip install peewee pymysql python-dotenv tidb-vector
 Configure the environment variables depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} or Essential instance, take the following steps to obtain the connection string and configure environment variables:
+For a {{{ .starter }}} instance, take the following steps to obtain the connection string and configure environment variables:
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -94,8 +94,8 @@ For a {{{ .starter }}} or Essential instance, take the following steps to obtain
 
 5. In the root directory of your Python project, create a `.env` file and paste the connection parameters to the corresponding environment variables.
 
-    - `TIDB_HOST`: The host of the {{{ .starter }}} or Essential instance.
-    - `TIDB_PORT`: The port of the {{{ .starter }}} or Essential instance.
+    - `TIDB_HOST`: The host of the {{{ .starter }}} instance.
+    - `TIDB_PORT`: The port of the {{{ .starter }}} instance.
     - `TIDB_USERNAME`: The username to connect to TiDB.
     - `TIDB_PASSWORD`: The password to connect to TiDB.
     - `TIDB_DATABASE`: The database name to connect to.

@@ -7,13 +7,20 @@ summary: Learn how to connect to your {{{ .starter }}} or {{{ .essential }}} ins
 
 This document describes how to connect to your {{{ .starter }}} or {{{ .essential }}} instance via a public endpoint, using a SQL client from your computer, as well as how to disable a public endpoint.
 
-## Connect via a public endpoint
+## Choose an endpoint model
+
+Depending on your TiDB Cloud plan, choose the appropriate endpoint model:
+
+- For {{{ .starter }}} instances or for {{{ .essential }}} instances created before July 1, 2026, use the [**endpoint shared model**](#connect-via-a-public-endpoint-endpoint-shared-model). In this model, a single public endpoint can be shared by multiple {{{ .starter }}} and Essential instances in the same region.
+- For {{{ .essential }}} instances created starting July 1, 2026, use the [**endpoint exclusive model**](#connect-via-a-public-endpoint-endpoint-exclusive-model). In this model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+
+## Connect via a public endpoint (endpoint shared model)
 
 > **Tip:**
 >
 > To learn how to connect to a TiDB Cloud Dedicated cluster via public endpoint, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
-To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint, take the following steps:
+To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpoint using the shared model, take the following steps:
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
 
@@ -42,7 +49,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
 
     </CustomContent>
 
-4. TiDB Cloud lets you create [branches](/tidb-cloud/branch-overview.md) for your {{{ .starter }}} or {{{ .essential }}} instance. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the {{{ .starter }}} or Essential instance itself.
+4. TiDB Cloud lets you create [branches](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter) for your {{{ .starter }}} instance. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the {{{ .starter }}} instance itself.
 
 5. If you have not set a password yet, click **Generate Password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
@@ -53,6 +60,38 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
     > When you connect to a {{{ .starter }}} or {{{ .essential }}} instance, you must include the prefix for your {{{ .starter }}} or Essential instance in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
     > Your client IP must be in the allowed IP rules of the public endpoint of your {{{ .starter }}} or Essential instance. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md).
 
+## Connect via a public endpoint (endpoint exclusive model)
+
+> **Note:**
+>
+> Currently, the endpoint exclusive model is available only for {{{ .essential }}} instances created starting July 1, 2026, in certain regions. If it is not available for your instance, you can use the [endpoint shared model](#connect-via-a-public-endpoint-endpoint-shared-model) instead.
+
+In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone public endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting, but you need to repeat the setup steps for each {{{ .essential }}} instance.
+
+To connect to a {{{ .essential }}} instance via a public endpoint using the exclusive model, take the following steps:
+
+1. Open the overview page of the target instance.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+        > **Tip:**
+        >
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+    2. Click the name of your target instance to go to its overview page.
+
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    - If the public connection is disabled, click **Settings** > **Networking** in the left pane, and then enable the **Public Endpoint** option on the **Networking** page.
+    - If you have not configured the IP access list, click **Configure IP Access List** to configure it before your first connection.
+    - If you have not configured a root password for your {{{ .essential }}} instance, click **Set Root Password** and set it.
+
+4. Click **CA cert** to download the CA cert for TLS connection to {{{ .essential }}} instances. The CA cert supports TLS 1.2 by default.
+
+5. Choose your preferred connection method in the **Connection with** drop-down list, and then refer to the connection string to connect to your instance.
+
 ## Disable a public endpoint
 
 If you do not need to use a public endpoint of a {{{ .starter }}} or {{{ .essential }}} instance, you can disable it to prevent connections from the internet:
@@ -61,7 +100,7 @@ If you do not need to use a public endpoint of a {{{ .starter }}} or {{{ .essent
 
 2. In the left navigation pane, click **Settings** > **Networking**.
 
-3. On the **Networking** page, click **Disable**. A confirmation dialog is displayed.
+3. On the **Networking** page, click **Disable** for **Public Endpoint**. A confirmation dialog is displayed.
 
 4. Click **Disable** in the confirmation dialog.
 

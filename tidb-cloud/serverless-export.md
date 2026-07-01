@@ -21,13 +21,19 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 
 You can export data to the following locations:
 
-- A local file
-- An external storage, including:
+- For {{{ .starter }}}:
 
-    - [Amazon S3](https://aws.amazon.com/s3/)
-    - [Google Cloud Storage](https://cloud.google.com/storage)
-    - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
-    - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
+    - A local file
+    - Amazon S3
+    - Google Cloud Storage
+    - Azure Blob Storage
+    - Alibaba Cloud Object Storage Service (OSS)
+
+- For {{{ .essential }}}:
+
+    - Amazon S3
+    - Azure Blob Storage
+    - Alibaba Cloud Object Storage Service (OSS)
 
 > **Note:**
 >
@@ -35,7 +41,7 @@ You can export data to the following locations:
 
 ### A local file
 
-To export data from a {{{ .starter }}} or Essential instance to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
+To export data from a {{{ .starter }}} instance to a local file, you need to export data [using the TiDB Cloud console](#export-data-to-a-local-file) or [using the TiDB Cloud CLI](/tidb-cloud/ticloud-serverless-export-create.md), and then download the exported data using the TiDB Cloud CLI.
 
 Exporting data to a local file has the following limitations:
 
@@ -98,7 +104,7 @@ You can export data in the following formats:
     - `separator`: specify the character used to separate fields in the exported data. The default separator is `,`.
     - `header`: specify whether to include a header row in the exported data. The default value is `true`.
     - `null-value`: specify the string that represents a NULL value in the exported data. The default value is `\N`.
-- `Parquet`: export data in Parquet format.
+- `Parquet`: export data in Parquet format. It is only applicable to {{{ .starter }}} data exports.
 
 The schema and data are exported according to the following naming conventions:
 
@@ -181,7 +187,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, then choose **Local File** from the drop-down list. Fill in the following parameters:
 
@@ -192,7 +198,7 @@ When exporting data to the Parquet format, the data conversion between TiDB and 
 
    > **Tip:**
    >
-   > If your {{{ .starter }}} or Essential instance has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
+   > If your {{{ .starter }}} instance has neither imported nor exported any data before, you need to click **Click here to export data to...** at the bottom of the page to export data.
 
 4. Click **Export**.
 
@@ -276,7 +282,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .starter }}} or Essential instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+2. Click the name of your target {{{ .starter }}} instance to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
 3. On the **Import** page, click **Export Data to** in the upper-right corner, and then choose **Google Cloud Storage** from the drop-down list. Fill in the following parameters:
 
@@ -424,7 +430,3 @@ The export speed varies between {{{ .starter }}} and {{{ .essential }}}:
     - If the spending limit is greater than 0, the export speed is up to 100 MiB/s.
 
 - **{{{ .essential }}}**: up to 100 MiB/s.
-
-## Pricing
-
-The export service is free during the beta period. You only need to pay for the [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) generated during the export process of successful or canceled tasks. For failed export tasks, you will not be charged.
