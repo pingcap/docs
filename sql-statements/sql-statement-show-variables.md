@@ -21,7 +21,7 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-The following example demonstrates how to use the `SHOW [GLOBAL|SESSION] VARIABLES` statement to show variables whose names match a specific pattern. For detailed descriptions of these variables, see [System Variables](/system-variables.md).
+The following example demonstrates how to use the `SHOW [GLOBAL|SESSION] VARIABLES` statement to show variables whose names or values match a specific pattern. For detailed descriptions of these variables, see [System Variables](/system-variables.md).
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb_stmt_summary%';
