@@ -21,29 +21,25 @@ ShowLikeOrWhere ::=
 
 ## Examples
 
-The following example shows part of the TiDB-specific global variables. For detailed descriptions, refer to [System Variables](/system-variables.md).
+The following example shows some TiDB statement summary global variables. For detailed descriptions, refer to [System Variables](/system-variables.md).
 
 ```sql
-mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
-+--------------------------------------+-------------+
-| Variable_name                        | Value       |
-+--------------------------------------+-------------+
-| tidb_accelerate_user_creation_update | OFF         |
-| tidb_adaptive_closest_read_threshold | 4096        |
-| tidb_advancer_check_point_lag_limit  | 48h0m0s     |
-| tidb_allow_batch_cop                 | 1           |
-| tidb_allow_fallback_to_tikv          |             |
-| tidb_allow_mpp                       | ON          |
-| ...                                  | ...         |
-| tidb_txn_commit_batch_size           | 16384       |
-| tidb_txn_entry_size_limit            | 0           |
-| tidb_txn_mode                        | pessimistic |
-| tidb_use_plan_baselines              | ON          |
-| tidb_wait_split_region_finish        | ON          |
-| tidb_wait_split_region_timeout       | 300         |
-| tidb_window_concurrency              | -1          |
-+--------------------------------------+-------------+
-338 rows in set
+mysql> SHOW GLOBAL VARIABLES LIKE 'tidb_stmt_summary%';
++-------------------------------------+---------------------+
+| Variable_name                       | Value               |
++-------------------------------------+---------------------+
+| tidb_stmt_summary_enable_persistent | OFF                 |
+| tidb_stmt_summary_file_max_backups  | 0                   |
+| tidb_stmt_summary_file_max_days     | 3                   |
+| tidb_stmt_summary_file_max_size     | 64                  |
+| tidb_stmt_summary_filename          | tidb-statements.log |
+| tidb_stmt_summary_history_size      | 24                  |
+| tidb_stmt_summary_internal_query    | OFF                 |
+| tidb_stmt_summary_max_sql_length    | 4096                |
+| tidb_stmt_summary_max_stmt_count    | 3000                |
+| tidb_stmt_summary_refresh_interval  | 1800                |
++-------------------------------------+---------------------+
+10 rows in set (0.001 sec)
 
 mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 +---------------+--------+
