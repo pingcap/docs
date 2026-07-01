@@ -25,7 +25,7 @@ TiDB Ansible バージョン: 3.0.11
 -   TiDB
     -   `information_schema.PARTITIONS`テーブル[＃14849](https://github.com/pingcap/tidb/pull/14849)のパーティションテーブルのメタ情報の表示をサポート
 
--   TiDBBinlog
+-   TiDB Binlog
     -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃884](https://github.com/pingcap/tidb-binlog/pull/884) [＃909](https://github.com/pingcap/tidb-binlog/pull/909)
 
 -   TiDB Lightning

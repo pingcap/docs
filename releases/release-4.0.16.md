@@ -90,7 +90,7 @@ TiDBバージョン: 4.0.16
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   1 GBを超えるトランザクションを転送するときにDrainerが終了するバグを修正しました[＃28659](https://github.com/pingcap/tidb/issues/28659)
 

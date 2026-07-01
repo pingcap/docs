@@ -110,7 +110,7 @@ TiDB Ansible バージョン: 3.0.4
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Reparoの設定項目`worker-count`と`txn-batch`追加して回復速度[＃746](https://github.com/pingcap/tidb-binlog/pull/746)制御します
     -   Drainerのメモリ使用量を最適化し、同時実行の効率を高めます[＃737](https://github.com/pingcap/tidb-binlog/pull/737)
 -   TiDB Lightning

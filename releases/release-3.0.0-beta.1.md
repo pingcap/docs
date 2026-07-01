@@ -102,7 +102,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Kafka からbinlogを読み取り、データを MySQL に複製する Arbiter ツールを追加します。
     -   複製する必要のないファイルのフィルタリングをサポート
     -   生成された列の複製をサポート

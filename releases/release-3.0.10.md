@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.0.10
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Drainer[＃893](https://github.com/pingcap/tidb-binlog/pull/893)のサポートリレーログ
 -   TiDB Lightning
     -   設定ファイルが見つからない場合に、一部の設定項目でデフォルト値を使用するようにする[＃255](https://github.com/pingcap/tidb-lightning/pull/255)

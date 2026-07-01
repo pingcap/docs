@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   コンポーネント間のTLS認証をサポート[＃931](https://github.com/pingcap/tidb-binlog/pull/931) [＃937](https://github.com/pingcap/tidb-binlog/pull/937) [＃939](https://github.com/pingcap/tidb-binlog/pull/939)
         -   Drainerに`kafka-client-id`設定項目を追加して、KafkaのクライアントID [＃929](https://github.com/pingcap/tidb-binlog/pull/929)を設定します。

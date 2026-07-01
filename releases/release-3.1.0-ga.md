@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   TiFlash関連のDDLジョブがDrainer [＃948](https://github.com/pingcap/tidb-binlog/pull/948) [＃942](https://github.com/pingcap/tidb-binlog/pull/942)のレプリケーションを中断する可能性がある問題を修正しました。
 

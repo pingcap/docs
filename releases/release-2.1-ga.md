@@ -268,7 +268,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
 -   大量データの高速フルインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
--   新しい[TiDBBinlog](https://docs-archive.pingcap.com/tidb/v2.1/tidb-binlog-overview)サポート
+-   新しい[TiDB Binlog](https://docs-archive.pingcap.com/tidb/v2.1/tidb-binlog-overview)サポート
 
 ## アップグレードの注意事項 {#upgrade-caveat}
 

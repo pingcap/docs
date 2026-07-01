@@ -410,7 +410,7 @@ TiDBバージョン: 6.3.0-DMR
         -   `cdc cause cli changefeed list`コマンドが失敗した変更フィードを返さない問題を修正 [#6334](https://github.com/pingcap/tiflow/issues/6334) @[asddongmen](https://github.com/asddongmen)
         -   変更フィードの初期化に失敗した場合に TiCDC が利用できなくなる問題を修正 [#6859](https://github.com/pingcap/tiflow/issues/6859) @[asddongmen](https://github.com/asddongmen)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   コンプレッサーがgzipに設定されている場合に、 DrainerがPumpにリクエストを正しく送信できない問題を修正 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @[lichunzhu](https://github.com/lichunzhu)
 
