@@ -451,7 +451,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   企業認証プロセスを効率化するために、 [組織SSO](https://tidbcloud.com/org-settings/authentication)をサポートします。
+-   企業の認証プロセスを効率化するために、 [Cloud Organization SSO](https://tidbcloud.com/org-settings/authentication)をサポートします。
 
     この機能を使用すると、 [Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)または[OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/)を使用して、 TiDB Cloud を任意のアイデンティティ プロバイダー (IdP) とシームレスに統合できます。
 
