@@ -99,7 +99,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   [トランザクションが自動的に再試行されるかどうかを制御するには、 `tidb_disable_txn_auto_retry`システム変数を追加します](/system-variables.md#tidb_disable_txn_auto_retry)
 
-    -   [`admin show slow`ステートメントを使用して遅いクエリを取得できるようにサポートします](/identify-slow-queries.md#admin-show-slow-command)
+    -   [`admin show slow`ステートメントを使用してスロークエリを取得できるようにサポートします](/identify-slow-queries.md#admin-show-slow-command)
 
     -   [`tidb_slow_log_threshold`環境変数を追加して、スローログのしきい値を自動的に設定します](/system-variables.md#tidb_slow_log_threshold)
 

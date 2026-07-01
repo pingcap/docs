@@ -8,17 +8,17 @@ aliases: ['/ja/tidbcloud/index-insight']
 
 <CustomContent plan="starter,essential,dedicated">
 
-TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#slow-query)、[Statement Analysis](#statement-analysis)、および [Key Visualizer](#key-visualizer) を提供しています。
+TiDB Cloud では、パフォーマンスを分析するために [スロークエリ](#slow-query)、[Statement Analysis](#statement-analysis)、および [Key Visualizer](#key-visualizer) を提供しています。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#slow-query) と [SQL Statement](#sql-statement) を提供しています。
+TiDB Cloud では、パフォーマンスを分析するために [スロークエリ](#slow-query) と [SQL Statement](#sql-statement) を提供しています。
 
 </CustomContent>
 
-- Slow Query では、<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> 内のすべての低速クエリを検索して表示できます。また、実行計画、SQL 実行情報、その他の詳細を確認することで、各低速クエリのボトルネックを調査できます。
+- Slow Query では、<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> 内のすべてのスロークエリを検索して表示できます。また、実行計画、SQL 実行情報、その他の詳細を確認することで、各スロークエリのボトルネックを調査できます。
 
 - <CustomContent plan="starter,essential,dedicated">Statement Analysis</CustomContent><CustomContent plan="premium">SQL Statement</CustomContent> を使用すると、システムテーブルをクエリしなくても、ページ上で SQL の実行状況を直接確認し、パフォーマンスの問題を簡単に特定できます。
 
@@ -44,9 +44,9 @@ TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#
 
 ## Slow Query {#slow-query}
 
-デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリと見なされます。
+デフォルトでは、300 ミリ秒を超えて実行される SQL クエリはスロークエリと見なされます。
 
-<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> で低速クエリを表示するには、次の手順を実行します。
+<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> でスロークエリを表示するには、次の手順を実行します。
 
 <CustomContent plan="starter,essential,dedicated">
 
@@ -54,9 +54,9 @@ TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#
 
 2. **Slow Query** タブをクリックします。
 
-3. リスト内の任意の低速クエリをクリックして、その詳細な実行情報を表示します。
+3. リスト内の任意のスロークエリをクリックして、その詳細な実行情報を表示します。
 
-4. （任意）対象の時間範囲、関連するデータベース、および SQL キーワードに基づいて低速クエリをフィルタリングできます。表示する低速クエリの数を制限することもできます。
+4. （任意）対象の時間範囲、関連するデータベース、および SQL キーワードに基づいてスロークエリをフィルタリングできます。表示するスロークエリの数を制限することもできます。
 
 </CustomContent>
 
@@ -64,9 +64,9 @@ TiDB Cloud では、パフォーマンスを分析するために [Slow Query](#
 
 1. {{{ .premium }}} instance の概要ページに移動し、左側のナビゲーションペインで **Monitoring** > **Slow Query** をクリックします。
 
-2. リストから低速クエリを選択して、その詳細な実行情報を表示します。
+2. リストからスロークエリを選択して、その詳細な実行情報を表示します。
 
-3. （任意）対象の時間範囲と SQL キーワードに基づいて低速クエリをフィルタリングできます。表示する低速クエリの数を制限することもできます。
+3. （任意）対象の時間範囲と SQL キーワードに基づいてスロークエリをフィルタリングできます。表示するスロークエリの数を制限することもできます。
 
 </CustomContent>
 

@@ -123,7 +123,7 @@ TiDB バージョン: 4.0.5
     -   `anti-semi-join`クエリ[＃19472](https://github.com/pingcap/tidb/pull/19472)の誤った結果を修正
     -   `BatchPointGet` [＃19456](https://github.com/pingcap/tidb/pull/19456)の誤った使用法によって生じた誤った結果を修正
     -   `UnionScan` `Apply`演算子[＃19496](https://github.com/pingcap/tidb/pull/19496)の内側にある場合に発生する誤った結果を修正します。
-    -   `EXECUTE`文を使用して高価なクエリログ[＃17419](https://github.com/pingcap/tidb/pull/17419)を出力することで発生するpanicを修正
+    -   `EXECUTE`文を使用して負荷の高いクエリログ[＃17419](https://github.com/pingcap/tidb/pull/17419)を出力することで発生するpanicを修正
     -   結合キーが`ENUM`または`SET`場合のインデックス結合エラーを修正しました[＃19235](https://github.com/pingcap/tidb/pull/19235)
     -   インデックス列[＃19358](https://github.com/pingcap/tidb/pull/19358)に`NULL`値が存在する場合にクエリ範囲を構築できない問題を修正しました
     -   グローバル構成の更新によって発生するデータ競合の問題を修正[＃17964](https://github.com/pingcap/tidb/pull/17964)

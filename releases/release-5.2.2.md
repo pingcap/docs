@@ -27,7 +27,7 @@ TiDB バージョン: 5.2.2
 
     -   ホットスポット スケジューラ[＃3869](https://github.com/tikv/pd/issues/3869)の QPS ディメンションに書き込みクエリの種類を追加する
     -   バランスリージョンスケジューラの再試行制限を動的に調整して、スケジューラ[＃3744](https://github.com/tikv/pd/issues/3744)のパフォーマンスを向上させることをサポートしました。
-    -   TiDBダッシュボードをv2021.10.08.1 [＃4070](https://github.com/tikv/pd/pull/4070)に更新
+    -   TiDB Dashboardをv2021.10.08.1 [＃4070](https://github.com/tikv/pd/pull/4070)に更新
     -   退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[＃4093](https://github.com/tikv/pd/issues/4093)
     -   スケジューラ[＃4146](https://github.com/tikv/pd/issues/4146)の終了プロセスを高速化
 

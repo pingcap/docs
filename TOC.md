@@ -169,7 +169,7 @@
     -   [モニタリングAPI](/tidb-monitoring-api.md)
     -   [監視サービスをデプロイ](/deploy-monitoring-services.md)
     -   [監視サービスのアップグレード](/upgrade-monitoring-services.md)
-    -   TiDBダッシュボード
+    -   TiDB Dashboard
         -   [概要](/dashboard/dashboard-intro.md)
         -   管理
             -   [デプロイ](/dashboard/dashboard-ops-deploy.md)
@@ -180,7 +180,7 @@
         -   [概要ページ](/dashboard/dashboard-overview.md)
         -   [クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)
         -   [Top SQLページ](/dashboard/top-sql.md)
-        -   [キービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)
+        -   [Key Visualizerページ](/dashboard/dashboard-key-visualizer.md)
         -   [指標関係グラフ](/dashboard/dashboard-metrics-relation.md)
         -   SQLステートメントの分析
             -   [SQLステートメントページ](/dashboard/dashboard-statement-list.md)
@@ -211,9 +211,9 @@
         -   [TiDBクラスタ設定のトラブルシューティング](/troubleshoot-tidb-cluster.md)
         -   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
     -   問題シナリオ
-        -   遅いクエリ
-            -   [遅いクエリを特定する](/identify-slow-queries.md)
-            -   [遅いクエリを分析する](/analyze-slow-queries.md)
+        -   スロークエリ
+            -   [スロークエリを特定する](/identify-slow-queries.md)
+            -   [スロークエリを分析する](/analyze-slow-queries.md)
         -   [TiDB メモリ不足](/troubleshoot-tidb-oom.md)
         -   [ホットスポット](/troubleshoot-hot-spot-issues.md)
         -   [読み書きレイテンシの増加](/troubleshoot-cpu-issues.md)

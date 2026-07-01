@@ -5,7 +5,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 
 # TiProxy パフォーマンステストレポート {#tiproxy-performance-test-report}
 
-このレポートでは、Sysbench の OLTP シナリオで TiProxy のパフォーマンスをテストし、 [HAプロキシ](https://www.haproxy.org/)と比較します。
+このレポートでは、Sysbench の OLTP シナリオで TiProxy のパフォーマンスをテストし、 [HAProxy](https://www.haproxy.org/)と比較します。
 
 結果は次のとおりです。
 
@@ -20,10 +20,10 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 
 ### ハードウェア構成 {#hardware-configuration}
 
-| サービス    | 機械タイプ | CPUモデル                                     | インスタンス数 |
+| サービス    | マシン種別 | CPUモデル                                     | インスタンス数 |
 | ------- | ----- | ------------------------------------------ | ------- |
 | TiProxy | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
-| HAプロキシ  | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
+| HAProxy  | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 1       |
 | PD      | 4C8G  | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 3       |
 | TiDB    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
 | TiKV    | 8C16G | インテル(R) Xeon(R) Silver 4214R CPU @ 2.40GHz | 8       |
@@ -34,7 +34,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 | サービス    | ソフトウェアバージョン |
 | ------- | ----------- |
 | TiProxy | バージョン1.0.0  |
-| HAプロキシ  | 2.9.0       |
+| HAProxy  | 2.9.0       |
 | PD      | バージョン8.0.0  |
 | TiDB    | バージョン8.0.0  |
 | TiKV    | バージョン8.0.0  |

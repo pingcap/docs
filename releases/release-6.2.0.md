@@ -15,8 +15,8 @@ TiDBバージョン: 6.2.0-DMR
 
 バージョン6.2.0-DMRの主な新機能と改善点は以下のとおりです。
 
--   TiDB ダッシュボードは[視覚的な実行計画](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans)をサポートしており、実行計画をより直感的に表示できます。
--   パフォーマンス分析とチューニングをより効率的に行うために、TiDB ダッシュボードに[監視ページ](/dashboard/dashboard-monitoring.md)を追加します。
+-   TiDB Dashboardは[視覚的な実行計画](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans)をサポートしており、実行計画をより直感的に表示できます。
+-   パフォーマンス分析とチューニングをより効率的に行うために、TiDB Dashboardに[監視ページ](/dashboard/dashboard-monitoring.md)を追加します。
 -   TiDB の[ロックビュー](/information-schema/information-schema-data-lock-waits.md)機能は、楽観的トランザクションの待機情報の表示をサポートし、ロック競合の迅速な特定を容易にします。
 -   TiFlash は[ストレージフォーマットの新しいバージョン](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)をサポートし、安定性とパフォーマンスを強化します。
 -   [きめ細かいシャッフル機能](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)ウィンドウ関数を複数のスレッドで並列実行できます。
@@ -44,9 +44,9 @@ TiDBバージョン: 6.2.0-DMR
 
 ### 可観測性 {#observability}
 
--   TiDBダッシュボードをPDから分離
+-   TiDB DashboardをPDから分離
 
-    TiDBダッシュボードはPDから監視ノードに移動されました。これにより、TiDBダッシュボードがPDに与える影響が軽減され、PDの安定性が向上します。
+    TiDB DashboardはPDから監視ノードに移動されました。これにより、TiDB DashboardがPDに与える影響が軽減され、PDの安定性が向上します。
 
     @[Hawkson-jee](https://github.com/Hawkson-jee)
 

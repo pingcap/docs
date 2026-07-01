@@ -35,7 +35,7 @@ TiDBバージョン：8.5.6
 
 ### 可観測性 {#observability}
 
--   低速クエリログに対する多次元で詳細なトリガールールの定義をサポートする[#62959](https://github.com/pingcap/tidb/issues/62959) 、 [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
+-   スロークエリログに対する多次元で詳細なトリガールールの定義をサポートする[#62959](https://github.com/pingcap/tidb/issues/62959) 、 [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
 
     バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
 
@@ -99,7 +99,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`クラスタ内の TiKV ノードの数を表します。                                                 |
 | [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザは、連続する結合演算子間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザは可能な限りこれらの条件をより適切な位置に押し下げ、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
 | [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v856) | 新しく追加された | クエリに`ORDER BY ... LIMIT`が含まれている場合に、オプティマイザがインデックスの部分順序を利用して TopN 計算を最適化できるかどうかを制御します。デフォルト値は`DISABLE`で、これは最適化が無効になっていることを意味します。                                                                                                   |
-| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、低速クエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、スロークエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
 | [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)                                         | 新しく追加された | スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。                                                                                                                                                                     |
 
 ### コンフィグレーションパラメータ {#configuration-parameters}

@@ -131,14 +131,14 @@ TiDB Lightning
 -   Spark [＃841](https://github.com/pingcap/tidb-ansible/pull/841)に`log4j`設定ファイルを追加する
 -   Binlogが有効で Kafka または ZooKeeper が構成されている場合に Prometheus 構成ファイルが間違った形式で生成される問題を修正[＃844](https://github.com/pingcap/tidb-ansible/pull/844)
 -   生成されたTiDB構成ファイル[＃850](https://github.com/pingcap/tidb-ansible/pull/850)で`pessimistic-txn`構成パラメータが省略される問題を修正
--   TiDBダッシュボード[＃853](https://github.com/pingcap/tidb-ansible/pull/853)のメトリックを追加して最適化する
--   TiDBダッシュボード[＃854](https://github.com/pingcap/tidb-ansible/pull/854)の各監視項目の説明を追加します
+-   TiDB Dashboard[＃853](https://github.com/pingcap/tidb-ansible/pull/853)のメトリックを追加して最適化する
+-   TiDB Dashboard[＃854](https://github.com/pingcap/tidb-ansible/pull/854)の各監視項目の説明を追加します
 -   TiDB サマリーダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[＃855](https://github.com/pingcap/tidb-ansible/pull/855)
 -   TiKVダッシュボード[＃857](https://github.com/pingcap/tidb-ansible/pull/857)のアロケータ統計監視項目を更新します。
 -   Node Exporterの警告式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)の単位エラーを修正しました
 -   TiSpark jarパッケージをv2.1.2にアップグレードする[＃862](https://github.com/pingcap/tidb-ansible/pull/862)
 -   Ansible タスク機能[＃867](https://github.com/pingcap/tidb-ansible/pull/867)の説明を更新
--   TiDBダッシュボード[＃874](https://github.com/pingcap/tidb-ansible/pull/874)のローカルリーダーリクエスト監視項目の表現を更新します。
+-   TiDB Dashboard[＃874](https://github.com/pingcap/tidb-ansible/pull/874)のローカルリーダーリクエスト監視項目の表現を更新します。
 -   概要ダッシュボードの TiKV メモリ監視項目の表現を更新し、監視[＃879](https://github.com/pingcap/tidb-ansible/pull/879)が誤って表示される問題を修正しました。
 -   Kafka モード[＃878](https://github.com/pingcap/tidb-ansible/pull/878)でBinlogサポートを削除する
 -   `rolling_update.yml`操作[＃887](https://github.com/pingcap/tidb-ansible/pull/887)を実行するときにPDがLeaderの転送に失敗する問題を修正しました

@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.3 Release Notes
-summary: TiDB 4.0.3は2020年7月24日にリリースされました。新機能には、TiDBダッシュボードの改善、 TiFlashファイルの暗号化、各種ツールのサポートが含まれます。TiDB、TiKV、PD、TiDBダッシュボードの機能強化に加え、TiDB、TiKV、PD、TiDBダッシュボード、 TiFlash、TiCDC、バックアップ＆リストア、 Dumpling、 TiDB Lightning、TiDB Binlogのバグ修正も実装されました。
+summary: TiDB 4.0.3は2020年7月24日にリリースされました。新機能には、TiDB Dashboardの改善、 TiFlashファイルの暗号化、各種ツールのサポートが含まれます。TiDB、TiKV、PD、TiDB Dashboardの機能強化に加え、TiDB、TiKV、PD、TiDB Dashboard、 TiFlash、TiCDC、バックアップ＆リストア、 Dumpling、 TiDB Lightning、TiDB Binlogのバグ修正も実装されました。
 ---
 
 # TiDB 4.0.3 リリースノート {#tidb-4-0-3-release-notes}
@@ -11,9 +11,9 @@ TiDB バージョン: 4.0.3
 
 ## 新機能 {#new-features}
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
-    -   TiDBダッシュボードの詳細なバージョン情報を表示する[＃679](https://github.com/pingcap-incubator/tidb-dashboard/pull/679)
+    -   TiDB Dashboardの詳細なバージョン情報を表示する[＃679](https://github.com/pingcap-incubator/tidb-dashboard/pull/679)
     -   サポートされていないブラウザまたは古いブラウザのブラウザ互換性に関する通知を表示する[＃654](https://github.com/pingcap-incubator/tidb-dashboard/pull/654)
     -   **SQL文の**ページ[＃658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)での検索をサポート
 
@@ -70,7 +70,7 @@ TiDB バージョン: 4.0.3
 
     -   JSON形式のログ[＃2565](https://github.com/pingcap/pd/pull/2565)サポート
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   コールド論理範囲[＃674](https://github.com/pingcap-incubator/tidb-dashboard/pull/674)の Key Visualizer バケット マージの改善
     -   一貫性を保つために構成項目`disable-telemetry`の名前を`enable-telemetry`に変更します[＃684](https://github.com/pingcap-incubator/tidb-dashboard/pull/684)
@@ -135,7 +135,7 @@ TiDB バージョン: 4.0.3
     -   展開ディレクトリ[＃2600](https://github.com/pingcap/pd/pull/2600)の変更に応じてストアの展開パスが更新されない問題を修正
     -   `store limit` 0になるのを防ぐ[＃2588](https://github.com/pingcap/pd/pull/2588)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   TiDB がスケールアウトされたときの TiDB 接続エラーを修正[＃689](https://github.com/pingcap-incubator/tidb-dashboard/pull/689)
     -   ログ検索ページ[＃680](https://github.com/pingcap-incubator/tidb-dashboard/pull/680)にTiFlashインスタンスが表示されない問題を修正

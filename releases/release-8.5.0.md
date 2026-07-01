@@ -35,7 +35,7 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     リージョン数の多いTiDBクラスタでは、ハートビート処理やタスクスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなる可能性があります。クラスタにTiDBインスタンスが多数存在し、リージョン情報へのリクエストが同時に多数発生すると、PDリーダーのCPU負荷はさらに高まり、PDサービスが利用できなくなる恐れがあります。
 
-    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリ サービスの拡張性を向上させる実験的機能として Active PD Followerが導入されました。v8.5.0 では、この機能が一般提供 (GA) になります。Active PD Follower機能を有効にするには、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760) `ON`に設定します。この機能が有効になると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
+    高可用性を確保するため、TiDB v7.6.0 では、PD のリージョン情報クエリ サービスの拡張性を向上させる実験的機能として Active PD Followerが導入されました。v8.5.0 では、この機能が一般提供 (GA) になります。Active PD Follower機能を有効にするには、システム変数[`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)を`ON`に設定します。この機能が有効になると、TiDB はリージョン情報要求をすべての PD サーバーに均等に分散し、PD フォロワーもリージョン要求を処理できるようになるため、PD リーダーの CPU 負荷が軽減されます。
 
     詳細については、 [ドキュメント](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)を参照してください。
 

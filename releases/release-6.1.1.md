@@ -88,7 +88,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   クエリ条件でパーティションキーが使用され、照合がクエリパーティションテーブル[＃32749](https://github.com/pingcap/tidb/issues/32749) @ [mjonss](https://github.com/mjonss)の照合と異なる場合にパーティションが誤ってプルーニングされる問題を修正しました。
     -   TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータ バージョンが間違って発生し、 Drainer が[#36276](https://github.com/pingcap/tidb/issues/36276) @ [AilinKid](https://github.com/AilinKid)で終了する可能性がある問題を修正しました。
     -   極端なケースで起動時に誤った TiDB ステータスが表示される問題を修正[＃36791](https://github.com/pingcap/tidb/issues/36791) @ [xhebox](https://github.com/xhebox)
-    -   TiDBダッシュボード[＃35153](https://github.com/pingcap/tidb/issues/35153) @ [time-and-fate](https://github.com/time-and-fate)でパーティションテーブルの実行プランをクエリするときに発生する可能性のある`UnknownPlanID`問題を修正しました。
+    -   TiDB Dashboard[＃35153](https://github.com/pingcap/tidb/issues/35153) @ [time-and-fate](https://github.com/time-and-fate)でパーティションテーブルの実行プランをクエリするときに発生する可能性のある`UnknownPlanID`問題を修正しました。
     -   Fix the issue that the column list does not work in the LOAD DATA statement [＃35198](https://github.com/pingcap/tidb/issues/35198) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正[＃33608](https://github.com/pingcap/tidb/issues/33608) @ [zyguan](https://github.com/zyguan)
     -   `tidb_gc_life_time` [＃35392](https://github.com/pingcap/tidb/issues/35392) @ [TonsnakeLin](https://github.com/TonsnakeLin)の制限を解除
