@@ -3,7 +3,7 @@ title: Organization SSO Authentication
 summary: カスタマイズされた組織認証を使用してTiDB Cloudコンソールにログインする方法を学習します。
 ---
 
-# 組織のSSO認証 {#organization-sso-authentication}
+# Cloud Organization SSO認証 {#organization-sso-authentication}
 
 シングル サインオン (SSO) は、 TiDB Cloud [組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが電子メール アドレスとパスワードの代わりに ID プロバイダー (IdP) の ID を使用してTiDB Cloudにログインできるようにする認証スキームです。
 
@@ -13,9 +13,9 @@ TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 
 -   Cloud Organization SSO: メンバーは、組織で指定された認証方法を使用して、 TiDB Cloudのカスタムログインページにログインできます。Cloud Organization SSO はデフォルトで無効になっています。
 
-標準のSSOと比較して、Cloud Organization SSOはより柔軟でカスタマイズ性に優れているため、組織のセキュリティとコンプライアンス要件をより適切に満たすことができます。例えば、ログインページに表示される認証方法を指定したり、ログインに使用できるメールアドレスドメインを制限したり、メンバーが[OpenIDコネクト（OIDC）](https://openid.net/connect/)または[Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)アイデンティティプロトコルを使用するIDプロバイダ（IdP）を使用してTiDB Cloudにログインできるようにしたりできます。
+標準SSOと比較して、Cloud Organization SSOはより柔軟でカスタマイズ性に優れているため、組織のセキュリティとコンプライアンス要件をより適切に満たすことができます。例えば、ログインページに表示される認証方法を指定したり、ログインに使用できるメールアドレスドメインを制限したり、メンバーが[OpenID Connect（OIDC）](https://openid.net/connect/)または[Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)アイデンティティプロトコルを使用するIDプロバイダ（IdP）を使用してTiDB Cloudにログインできるようにしたりできます。
 
-このドキュメントでは、組織の認証スキームを標準 SSO から Cloud Organization SSO に移行する方法について説明します。
+このドキュメントでは、組織の認証スキームを標準SSOから Cloud Organization SSO に移行する方法について説明します。
 
 > **注記：**
 >
@@ -43,11 +43,11 @@ Cloud Organization SSO が有効になっている場合、メンバーはTiDB C
 TiDB Cloud は、組織 SSO に次の認証方法を提供します。
 
 -   ユーザー名とパスワード
--   グーグル
+-   Google
 -   GitHub
--   マイクロソフト
+-   Microsoft
 -   OIDC
--   サムエル
+-   SAML
 
 Cloud Organization SSO を有効にすると、最初の 4 つの認証方法がデフォルトで有効になります。組織で SSO の使用を強制したい場合は、ユーザー名とパスワードによる認証方法を無効にすることができます。
 
@@ -60,7 +60,7 @@ Cloud Organization SSO を有効にすると、最初の 4 つの認証方法が
 -   認証方法の自動プロビジョニングが無効になっている場合、 `Organization Owner`または`Project Owner`によって招待されたユーザーのみがカスタム URL にログインできます。
 -   認証方法の自動プロビジョニングを有効にすると、その認証方法を使用するすべてのユーザーがカスタムURLにログインできるようになります。ログイン後、組織内のデフォルトのロール`Organization Viewer`が自動的に割り当てられます。
 
-OIDC および SAML 認証方式では、 [認証方法の詳細を設定する](#step-2-configure-authentication-methods)ときに **Auto-provision Accounts** を有効にする場合、 **Allowed Email Domains** を設定する必要があります。SAML では、 **SCIM Provisioning Accounts** を有効にする場合にもこの要件が適用されます。 **Allowed Email Domains** でドメインを使用する前に、 **Domains** 領域でそのドメインを追加して検証してください。
+OIDC および SAML 認証方式では、 [認証方法の詳細を設定する](#step-2-configure-authentication-methods)ときに **Auto-provision Accounts** を有効にする場合、 **Allowed Email Domains** を設定する必要があります。SAML では、 **SCIM Provisioning Accounts** を有効にする場合にもこの要件が適用されます。 **Allowed Email Domains** でドメインを使用する前に、 **Domains** でそのドメインを追加して検証してください。
 
 その他の認証方法では、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 
@@ -127,12 +127,12 @@ Cloud Organization SSO を有効にした後、次のようにユーザー名と
 
 OIDC または SAML で **Auto-provision Accounts** を有効にする場合、または SAML で **SCIM Provisioning Accounts** を有効にする場合は、組織メンバーがサインインに使用するメールドメインを追加して検証してください。これらの場合、 **Allowed Email Domains** は必須であり、 **Verified** ステータスのドメインのみ使用できます。
 
-**Auto-provision Accounts** と **SCIM Provisioning Accounts** が無効な場合、 **Allowed Email Domains** は任意です。このフィールドにドメインを入力する場合でも、 **Domains** 領域で検証されている必要があります。
+**Auto-provision Accounts** と **SCIM Provisioning Accounts** が無効な場合、 **Allowed Email Domains** は任意です。このフィールドにドメインを入力する場合でも、 **Domains** で検証されている必要があります。
 
 ドメインを追加して検証するには、次の手順を実行します。
 
 1.  左側のナビゲーションペインで、 **Organization Settings** > **Authentication** をクリックします。
-2.  **Authentication** ページの **Domains** 領域で、 **Add Domain** をクリックします。
+2.  **Authentication** ページの **Domains** で、 **Add Domain** をクリックします。
 3.  許可するドメイン (たとえば `example.com`) を入力し、 **Add domain and next** をクリックします。
 4.  検証ダイアログで、TXT レコードの **Host** と **Value** をコピーします。
 5.  DNS プロバイダーで、コピーした **Host** と **Value** を使用して TXT レコードを追加します。
@@ -172,9 +172,9 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
     -   **許可されたメールドメイン**
 
-        OIDC で **Auto-provision Accounts** を有効にする場合、このフィールドは必須です。 **Domains** 領域で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織に自動プロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com`
+        OIDC で **Auto-provision Accounts** を有効にする場合、このフィールドは必須です。 **Domains** で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織に自動プロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com`
 
-        **Auto-provision Accounts** が無効な場合、このフィールドは任意です。ドメインを入力する場合でも、 **Domains** 領域で検証されている必要があります。
+        **Auto-provision Accounts** が無効な場合、このフィールドは任意です。ドメインを入力する場合でも、 **Domains** で検証されている必要があります。
 
         > **注記：**
         >
@@ -219,9 +219,9 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     -   **許可されたメールドメイン**
 
-        SAML で **Auto-provision Accounts** または **SCIM Provisioning Accounts** を有効にする場合、このフィールドは必須です。 **Domains** 領域で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織にプロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com` 。
+        SAML で **Auto-provision Accounts** または **SCIM Provisioning Accounts** を有効にする場合、このフィールドは必須です。 **Domains** で検証済みのドメインのみを入力してください。これらのメールドメインを持つユーザーのみが、カスタムURLを使用してTiDB Cloudにログインし、組織にプロビジョニングされます。 `@`記号を除外し、複数のドメインはカンマで区切ります。例： `company1.com,company2.com` 。
 
-        **Auto-provision Accounts** と **SCIM Provisioning Accounts** の両方が無効な場合、このフィールドは任意です。ドメインを入力する場合でも、 **Domains** 領域で検証されている必要があります。
+        **Auto-provision Accounts** と **SCIM Provisioning Accounts** の両方が無効な場合、このフィールドは任意です。ドメインを入力する場合でも、 **Domains** で検証されている必要があります。
 
         > **注記：**
         >
