@@ -25,6 +25,8 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart/?plan=starter)
 
+[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=starter)
+
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
@@ -49,7 +51,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=starter)
 
-[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=starter)
+[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/cli-reference/?plan=starter)
 
 </LearningPath>
 
