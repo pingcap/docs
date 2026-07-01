@@ -57,6 +57,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### SQL
 
+* Support partial indexes to reduce index storage and DML maintenance overhead [#62444](https://github.com/pingcap/tidb/issues/62444) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!--21903--> <!--2270-->
+    
+    Starting from v8.5.7, TiDB supports partial indexes, which index only rows that satisfy a predicate defined in the index `WHERE` clause. You can create a partial index using `CREATE INDEX ... WHERE ...`, `ALTER TABLE ... ADD INDEX ... WHERE ...`, or an index definition in `CREATE TABLE`.
+
+    Partial indexes are useful when you frequently query a selective subset of rows or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
+
+    To use partial indexes effectively, define the predicate to match the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index/#partial-indexes).
+
 * Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
 
     Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
@@ -153,7 +163,7 @@ TiKV
 + TiDB
 
     - Support `LATERAL` derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` [#40328](https://github.com/pingcap/tidb/issues/40328) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!--2432--> <!-- replace it with a feature description-->
-    - Improve compatibility of partial indexes with BR so that BR preserves their `WHERE` predicates when repairing ingest indexes during log restore [#62664](https://github.com/pingcap/tidb/issues/62664) @[Leavrth](https://github.com/Leavrth) <!-- component: sql-infra --> <!--2270--> <!-- replace it with a feature description-->
+    - Improve compatibility of partial indexes with BR so that BR preserves their `WHERE` predicates when repairing ingest indexes during log restore [#62664](https://github.com/pingcap/tidb/issues/62664) @[Leavrth](https://github.com/Leavrth) <!-- component: sql-infra -->
     - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate) <!-- component: planner --> <!--2262-->
     - Improve slow query observability by logging client connection attributes in the slow query log and exposing them in `information_schema.slow_query` and `information_schema.cluster_slow_query`; `performance_schema_session_connect_attrs_size` now controls attribute truncation, and truncated bytes are recorded in `_truncated` [#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba) <!-- component: observability --> <!--2374-->
     - Support the `max_user_connections` system variable and the `MAX_USER_CONNECTIONS` option in `CREATE USER` and `ALTER USER` to limit the number of concurrent connections for a user [#59203](https://github.com/pingcap/tidb/issues/59203) @[bb7133](https://github.com/bb7133) <!-- component: sql-infra --> <!--2405-->
