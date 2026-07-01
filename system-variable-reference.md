@@ -605,7 +605,11 @@ Referenced in:
 Referenced in:
 
 - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
+<<<<<<< HEAD
 - [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900)
+=======
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857)
+>>>>>>> 68bb5e64f0 (v8.5.7: support logging session connect attrs to slow query log (#22547) (#22775))
 
 ### plugin_dir
 
