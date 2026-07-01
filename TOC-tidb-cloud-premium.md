@@ -457,7 +457,7 @@
     - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP 客户](/tidb-cloud/managed-service-provider-customer.md)
     - [经销商的客户](/tidb-cloud/cppo-customer.md)
-  - [TiDB Cloud 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
+  - [TiDB X 实例上的有限 SQL 功能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB 限制](/tidb-limitations.md)
   - [系统变量](/system-variables.md)
   - [服务器状态变量](/status-variables.md)

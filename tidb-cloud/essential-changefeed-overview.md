@@ -182,7 +182,9 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## changefeed 计费
 
-changefeed 在 beta 阶段免费。
+对于 2026 年 7 月 1 日之前创建的现有 {{{ .essential }}} 实例，changefeed 免费。
+
+从 2026 年 7 月 1 日起，changefeed 对新创建的 {{{ .essential }}} 实例按功能收费。有关计费详情，请参见 [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
 
 ## changefeed 状态
 
