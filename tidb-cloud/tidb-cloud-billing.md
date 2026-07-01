@@ -98,13 +98,13 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 ### Row-based storage
 
-Standard row-based storage where data is stored in **TiKV**. The table's **Storage Class** is set to `Standard` or left unset (`NULL`).
+Standard row-based storage stores data in **TiKV**. The table's **Storage Class** is set to `Standard` or left unset (`NULL`).
 
 **Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.
 
-### Row-based storage with Infrequent Access (IA)
+### Row-based storage with IA
 
-Row-based storage where data is stored in **remote object storage**. The table's **Storage Class** is set to `IA`.
+Row-based storage with Infrequent Access (IA) stores data in **remote object storage**. The table's **Storage Class** is set to `IA`.
 
 > **Warning:**
 >
@@ -118,7 +118,7 @@ Row-based storage where data is stored in **remote object storage**. The table's
 
 ### Columnar storage
 
-Columnar storage powered by the **TiFlash** engine. To enable columnar storage for a table, add a TiFlash replica using the following SQL statement:
+Columnar storage is powered by the **TiFlash** engine. To enable columnar storage for a table, add a TiFlash replica using the following SQL statement:
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA n;
@@ -128,7 +128,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA n;
 
 ### Dual-layer encryption
 
-Both **Row-based storage** and **columnar storage** support dual-layer encryption. This mechanism protects data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
+Both **row-based storage** and **columnar storage** support dual-layer encryption. This mechanism protects your data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
 
 - **Infrastructure-level encryption:** The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
 - **TiDB Cloud-level encryption:** On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
