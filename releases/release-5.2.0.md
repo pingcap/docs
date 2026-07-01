@@ -31,7 +31,7 @@ TiDB バージョン: 5.2.0
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                       | 種類を変更する  | 説明                                                                     |
+| 変数名                                                                                                       | 変更の種類  | 説明                                                                     |
 | :-------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------- |
 | [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                     | 新しく追加された | サーバーが公開する認証方法を設定します。デフォルト値は`mysql_native_password`です。                  |
 | [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | 新しく追加された | 生成列または式インデックスを作成する際に`AUTO_INCREMENT`列を含めるかどうかを決定します。デフォルト値は`OFF`です。    |
@@ -42,7 +42,7 @@ TiDB バージョン: 5.2.0
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                                                | 種類を変更する  | 説明                                                                                                                              |
+| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                                                | 変更の種類  | 説明                                                                                                                              |
 | :------------- | :---------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | TiDB設定ファイル     | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)        | 新しく追加された | [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロックエラーメッセージを収集するかどうかを制御します。 |
 | TiDB設定ファイル     | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls)                                                                   | 新しく追加された | 起動時にTLS証明書を自動的に生成するかどうかを決定します。デフォルト値は`false`です。                                                                                 |
