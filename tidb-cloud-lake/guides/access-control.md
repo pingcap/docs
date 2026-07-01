@@ -1,0 +1,22 @@
+---
+title: Access Control
+summary: Learn about access control in TiDB Cloud Lake, which uses both Role-Based Access Control (RBAC) and Discretionary Access Control (DAC) to manage permissions for data objects like databases, tables, and views.
+---
+
+# Access Control
+
+{{{ .lake }}} incorporates both [Role-Based Access Control (RBAC)](https://en.wikipedia.org/wiki/Role-based_access_control) and [Discretionary Access Control (DAC)](https://en.wikipedia.org/wiki/Discretionary_access_control) models for its access control functionality. When a user accesses a data object in {{{ .lake }}}, they must be granted appropriate privileges or roles, or they need to have ownership of the data object. A data object can refer to various elements, such as a database, table, view, stage, or UDF.
+
+![Access control](/media/tidb-cloud-lake/access-control-1.png)
+
+| Concept   | Description                                              |
+|-----------|------------------------------------------------------------|
+| Privileges | Privileges play a crucial role when interacting with data objects in {{{ .lake }}}. These permissions, such as read, write, and execute, provide precise control over user actions, ensuring alignment with user requirements and maintaining data security.                                                                 |
+| Roles      | Roles simplify access control. Roles are predefined sets of privileges assigned to users, streamlining permission management. Administrators can categorize users based on responsibilities, granting permissions efficiently without individual configurations.                                                        |
+| Ownership | Ownership is a specialized privilege for controlling data access. When a user owns a data object, they have the highest control level, dictating access permissions. This straightforward ownership model empowers users to manage their data, controlling who can access or modify it within the {{{ .lake }}} environment. |
+
+This guide describes the related concepts and provides instructions on how to manage access control in {{{ .lake }}}:
+
+- [Privileges](/tidb-cloud-lake/guides/privileges.md)
+- [Roles](/tidb-cloud-lake/guides/roles.md)
+- [Ownership](/tidb-cloud-lake/guides/ownership.md)

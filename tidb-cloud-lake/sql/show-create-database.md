@@ -1,0 +1,25 @@
+---
+title: SHOW CREATE DATABASE
+summary: Shows the CREATE DATABASE statement that creates the named database.
+---
+
+# SHOW CREATE DATABASE
+
+Shows the CREATE DATABASE statement that creates the named database.
+
+## Syntax
+
+```sql
+SHOW CREATE DATABASE database_name
+```
+
+## Examples
+
+```sql
+SHOW CREATE DATABASE default;
++----------+---------------------------+
+| Database | Create Database           |
++----------+---------------------------+
+| default  | CREATE DATABASE `default` |
++----------+---------------------------+
+```
