@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 2.1.15
 
 ## ツール {#tools}
 
-TiDBBinlog
+TiDB Binlog
 
 -   Pump GC戦略を最適化し、未使用のbinlogをクリーンアップできないという制限を削除して、リソースが長時間占有されないようにします[＃663](https://github.com/pingcap/tidb-binlog/pull/663)
 
@@ -47,6 +47,6 @@ TiDB Lightning
 
 -   SQLダンプで指定された列名が小文字でない場合に発生するインポートエラーを修正しました[＃210](https://github.com/pingcap/tidb-lightning/pull/210)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   TiDBダッシュボードに監視項目`parse duration`と`compile duration`追加して、SQL文の解析とコンパイルの実行にかかる時間を監視します[＃815](https://github.com/pingcap/tidb-ansible/pull/815)

@@ -113,7 +113,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   データレプリケーション下流の遅延を追跡するためのメトリックを追加する[＃594](https://github.com/pingcap/tidb-binlog/pull/594)
 
 -   TiDB Lightning

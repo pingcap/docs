@@ -176,6 +176,6 @@ TiDB バージョン: 6.5.6
         -   TiDB Lightningが`writeToTiKV` [＃46321](https://github.com/pingcap/tidb/issues/46321) @ [lance6716](https://github.com/lance6716)で停止する問題を修正
         -   物理インポートモード[＃45507](https://github.com/pingcap/tidb/issues/45507) @ [mittalrishabh](https://github.com/mittalrishabh)で不要な`get_regions`呼び出しを削除します
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   1 GB [＃28659](https://github.com/pingcap/tidb/issues/28659) @ [jackysp](https://github.com/jackysp)を超えるトランザクションを転送するときにDrainer が終了する問題を修正しました

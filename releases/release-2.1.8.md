@@ -57,7 +57,7 @@ TiDB Ansible バージョン: 2.1.8
 -   TiDB Binlog Drainerに`syncer.sql-mode`構成項目を追加して、異なる`sql-mode` sを使用してDDLクエリを解析できるようにします[＃513](https://github.com/pingcap/tidb-binlog/pull/513)
 -   TiDB Binlog Drainerに`syncer.ignore-table`構成項目を追加して、複製しないテーブルのフィルタリングをサポートします[＃526](https://github.com/pingcap/tidb-binlog/pull/526)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   オペレーティングシステムのバージョン制限を変更し、CentOS 7.0以降とRed Hat 7.0以降のみをサポートします[＃734](https://github.com/pingcap/tidb-ansible/pull/734)
 -   `epollexclusive`すべてのOS [＃728](https://github.com/pingcap/tidb-ansible/pull/728)でサポートされているかどうかを確認する機能を追加

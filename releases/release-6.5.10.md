@@ -143,6 +143,6 @@ TiDB バージョン: 6.5.10
 
         -   テーブルとビューを同時にエクスポートするとDumpling がエラーを報告する問題を修正[＃53682](https://github.com/pingcap/tidb/issues/53682) @ [tangenta](https://github.com/tangenta)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   TiDB Binlogが有効な場合、 `ADD COLUMN`実行中に行を削除するとエラー`data and columnID count not match`が報告される可能性がある問題を修正しました[＃53133](https://github.com/pingcap/tidb/issues/53133) @ [tangenta](https://github.com/tangenta)

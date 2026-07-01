@@ -99,7 +99,7 @@ TiDB バージョン: 4.0.10
         -   GCSstorageURL にプレフィックス[＃673](https://github.com/pingcap/br/pull/673)がない場合にBR がパニックになる問題を修正しました
         -   BR OOM [＃693](https://github.com/pingcap/br/pull/693)回避するために、デフォルトでバックアップ統計を無効にする
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   `AMEND TRANSACTION`機能が有効になっている場合、 Drainer がSQL 文を生成するために間違ったスキーマバージョンを選択する可能性がある問題を修正しました[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
 

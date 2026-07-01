@@ -25,13 +25,13 @@ TiDB Ansible バージョン: 3.0.11
 -   TiDB
     -   `information_schema.PARTITIONS`テーブル[＃14849](https://github.com/pingcap/tidb/pull/14849)のパーティションテーブルのメタ情報の表示をサポート
 
--   TiDBBinlog
+-   TiDB Binlog
     -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃884](https://github.com/pingcap/tidb-binlog/pull/884) [＃909](https://github.com/pingcap/tidb-binlog/pull/909)
 
 -   TiDB Lightning
     -   TLS構成[＃44](https://github.com/tikv/importer/pull/44) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)をサポートする
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   `create_users.yml`のロジックを変更して、制御マシンのユーザーが`ansible_user` [＃1184](https://github.com/pingcap/tidb-ansible/pull/1184)と一貫性を保つ必要がないようにします。
 
 ## バグ修正 {#bug-fixes}
@@ -51,6 +51,6 @@ TiDB Ansible バージョン: 3.0.11
     -   高負荷時にピアが削除されたときに発生する可能性のあるpanicを修正[＃6704](https://github.com/tikv/tikv/pull/6704)
     -   一部のケースで休止状態領域が起動しない問題を修正[＃6732](https://github.com/tikv/tikv/pull/6732) [＃6738](https://github.com/tikv/tikv/pull/6738)
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   `tidb-ansible` [＃1169](https://github.com/pingcap/tidb-ansible/pull/1169)の古いドキュメントリンクを更新
     -   `wait for region replication complete`タスク[＃1173](https://github.com/pingcap/tidb-ansible/pull/1173)で未定義の変数が発生する可能性がある問題を修正しました

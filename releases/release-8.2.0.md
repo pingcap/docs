@@ -103,7 +103,7 @@ TiDB バージョン: 8.2.0
 
     詳細については、 [ドキュメント](/statement-summary-tables.md#fields-description)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashログの感度低下を強化 [#8977](https://github.com/pingcap/tiflash/issues/8977) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -131,7 +131,7 @@ TiDB バージョン: 8.2.0
 >
 > このセクションでは、v8.1.0 から最新バージョン (v8.2.0) にアップグレードする際に知っておくべき互換性の変更点について説明します。v8.0.0 以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポート パフォーマンスを向上させる場合は、 `terminator`明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
@@ -145,26 +145,26 @@ TiDB バージョン: 8.2.0
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                 | 種類を変更する  | 説明                                                                                                                                                                                              |
+| 変数名                                                                                                                 | 変更の種類  | 説明                                                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 修正済み     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて`scan`操作を実行する際に`ANALYZE`操作の同時実行性を適応的に調整します。                                                                                                   |
-| [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)                 | 修正済み     | バージョン8.2.0以降、TiDBは潜在的なメモリ不足リスクを回避するため、デフォルトでは`MEDIUMTEXT`および`LONGTEXT`型の列を収集しません。                                                                                                               |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 修正済み     | TiDB クラスタのパフォーマンスに対する自動統計収集の影響を軽減するため、デフォルト値を`128`から`8192`に変更します。値の範囲を`[1, 1024]`から`[1, 8192]`に変更します。                                                                                           |
-| [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                 | 修正済み     | デフォルト値を`ON`から`OFF`に変更します。これにより、履歴統計が無効になり、潜在的な安定性の問題を回避できます。                                                                                                                                    |
-| [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)                            | 修正済み     | `sort`演算子の同時実行設定のサポートを追加します。                                                                                                                                                                    |
-| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 修正済み     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL ステートメントの実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
-| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新しく追加された | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
+| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて`scan`操作を実行する際に`ANALYZE`操作の同時実行性を適応的に調整します。                                                                                                   |
+| [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)                 | 変更     | バージョン8.2.0以降、TiDBは潜在的なメモリ不足リスクを回避するため、デフォルトでは`MEDIUMTEXT`および`LONGTEXT`型の列を収集しません。                                                                                                               |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | TiDB クラスタのパフォーマンスに対する自動統計収集の影響を軽減するため、デフォルト値を`128`から`8192`に変更します。値の範囲を`[1, 1024]`から`[1, 8192]`に変更します。                                                                                           |
+| [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                 | 変更     | デフォルト値を`ON`から`OFF`に変更します。これにより、履歴統計が無効になり、潜在的な安定性の問題を回避できます。                                                                                                                                    |
+| [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)                            | 変更     | `sort`演算子の同時実行設定のサポートを追加します。                                                                                                                                                                    |
+| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL ステートメントの実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
+| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新規追加 | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                              | 種類を変更する | 説明                                                                                                                                                                    |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                              | 変更の種類 | 説明                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 修正済み    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。 |
-| TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 修正済み    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
-| TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 修正済み    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビット プラットフォーム) および`4294967295` `1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
-| TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 修正済み    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
-| TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 修正済み    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
-| TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 修正済み    | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                               |
+| TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 変更    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。 |
+| TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 変更    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
+| TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 変更    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビット プラットフォーム) および`4294967295` `1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
+| TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 変更    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
+| TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 変更    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
+| TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 変更    | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                               |
 
 ### システムテーブル {#system-tables}
 
@@ -359,26 +359,26 @@ TiDB バージョン: 8.2.0
 
         -   Dumplingがテーブルとビューを同時にエクスポートする際にエラーを報告する問題を修正 [#53682](https://github.com/pingcap/tidb/issues/53682) @[tangenta](https://github.com/tangenta)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   TiDB Binlogが有効になっている場合、 `ADD COLUMN`の実行中に行を削除するとエラー`data and columnID count not match`が報告される可能性がある問題を修正しました [#53133](https://github.com/pingcap/tidb/issues/53133) @[tangenta](https://github.com/tangenta)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [キャビンフィーバーB](https://github.com/CabinfeverB)
--   [ダン・ロシグノ](https://github.com/DanRoscigno)(初投稿者)
--   [杉本英](https://github.com/ei-sugimoto)(初投稿者)
--   [エルトシアー](https://github.com/eltociear)
--   [ジフハスト](https://github.com/jiyfhust)
--   [michaelmdeng](https://github.com/michaelmdeng) （初投稿者）
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
--   [オンリーキャット](https://github.com/onlyacat)
--   [qichengzx](https://github.com/qichengzx) （初投稿者）
--   [シーライズ](https://github.com/SeaRise)
+-   [CabinfeverB](https://github.com/CabinfeverB)
+-   [DanRoscigno](https://github.com/DanRoscigno) (初回貢献者)
+-   [ei-sugimoto](https://github.com/ei-sugimoto) (初回貢献者)
+-   [eltociear](https://github.com/eltociear)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [michaelmdeng](https://github.com/michaelmdeng) (初回貢献者)
+-   [mittalrishabh](https://github.com/mittalrishabh)
+-   [onlyacat](https://github.com/onlyacat)
+-   [qichengzx](https://github.com/qichengzx) (初回貢献者)
+-   [SeaRise](https://github.com/SeaRise)
 -   [shawn0915](https://github.com/shawn0915)
--   [藤田俊希](https://github.com/shunki-fujita)(初投稿者)
+-   [shunki-fujita](https://github.com/shunki-fujita) (初回貢献者)
 -   [tonyxuqqi](https://github.com/tonyxuqqi)
--   [wwu](https://github.com/wwu) （初投稿者）
+-   [wwu](https://github.com/wwu) (初回貢献者)
 -   [yzhan1](https://github.com/yzhan1)

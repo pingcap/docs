@@ -90,7 +90,7 @@ TiDB バージョン: 4.0.6
 
         -   より正確なサイズでリージョンを分割して取り込む[＃369](https://github.com/pingcap/tidb-lightning/pull/369)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   `go time`パッケージ形式[＃996](https://github.com/pingcap/tidb-binlog/pull/996)で GC 時間の設定をサポート
 

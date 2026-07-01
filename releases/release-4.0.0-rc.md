@@ -28,7 +28,7 @@ TiUPバージョン: 0.0.3
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)検証するための構成項目を追加します
 
@@ -66,7 +66,7 @@ TiUPバージョン: 0.0.3
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)検証するための構成項目を追加します
 

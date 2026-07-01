@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 3.0.8
     -   TiKVノードがオフラインのときに`gcworker`継続的に再試行するため、goroutineがリークする可能性がある問題を修正しました[＃14106](https://github.com/pingcap/tidb/pull/14106)
     -   問題追跡の使いやすさを向上させるために、スロークエリログにbinlogを`Prewrite`回記録します[＃14138](https://github.com/pingcap/tidb/pull/14138)
     -   `tidb_enable_table_partition`変数を`GLOBAL SCOPE` [＃14091](https://github.com/pingcap/tidb/pull/14091)サポートする
-    -   新しい権限が追加されたときに、新しく追加された権限が対応するユーザーに正しく付与されないため、ユーザー権限が欠落したり、誤って追加されたりする可能性がある問題を修正しました[＃14178](https://github.com/pingcap/tidb/pull/14178)
+    -   新しい権限が追加されたときに、新規追加権限が対応するユーザーに正しく付与されないため、ユーザー権限が欠落したり、誤って追加されたりする可能性がある問題を修正しました[＃14178](https://github.com/pingcap/tidb/pull/14178)
     -   TiKVサーバーが切断されたときに`rpcClient`閉じないために`CheckStreamTimeoutLoop`ゴルーチンがリークする可能性がある問題を修正しました[＃14227](https://github.com/pingcap/tidb/pull/14227)
     -   証明書ベースの認証をサポートする ( [ユーザードキュメント](/certificate-authentication.md) ) [＃13955](https://github.com/pingcap/tidb/pull/13955)
 -   トランザクション
@@ -100,10 +100,10 @@ TiDB Ansible バージョン: 3.0.8
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   PumpがコミットされたDDLbinlog[＃853](https://github.com/pingcap/tidb-binlog/pull/853)を受信しないため、binlogが無視される問題を修正しました。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   簡略化された構成項目[＃1053](https://github.com/pingcap/tidb-ansible/pull/1053)元に戻す
 -   ローリングアップデートを実行する際にTiDBのバージョンをチェックするロジックを最適化します[＃1056](https://github.com/pingcap/tidb-ansible/pull/1056)

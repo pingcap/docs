@@ -44,7 +44,7 @@ TiDB バージョン: 3.0.20
     -   `!= any()` [＃20061](https://github.com/pingcap/tidb/pull/20061)の誤った動作を修正する
     -   `BETWEEN...AND...`型変換で無効な結果が返される問題を修正[＃21503](https://github.com/pingcap/tidb/pull/21503)
     -   `ADDDATE`機能[＃21008](https://github.com/pingcap/tidb/pull/21008)の互換性の問題を修正
-    -   新しく追加された`Enum`列[＃20999](https://github.com/pingcap/tidb/pull/20999)の正しいデフォルト値を設定する
+    -   新規追加`Enum`列[＃20999](https://github.com/pingcap/tidb/pull/20999)の正しいデフォルト値を設定する
     -   `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`ようなSQL文の結果をMySQL [＃20627](https://github.com/pingcap/tidb/pull/20627)と互換性があるように修正します
     -   列タイプ[＃20532](https://github.com/pingcap/tidb/pull/20532)を変更するときに誤ったデフォルト値を修正
     -   入力引数が`float`または`decimal`型の場合に`timestamp`関数が間違った結果を取得する問題を修正しました[＃20469](https://github.com/pingcap/tidb/pull/20469)

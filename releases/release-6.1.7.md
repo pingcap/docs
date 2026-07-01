@@ -101,7 +101,7 @@ TiDB バージョン: 6.1.7
         -   データファイル[＃40400](https://github.com/pingcap/tidb/issues/40400) @ [buchuitoudegou](https://github.com/buchuitoudegou)に閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正しました。
         -   幅の広いテーブル[＃43728](https://github.com/pingcap/tidb/issues/43728) @ [D3Hunter](https://github.com/D3Hunter)をインポートするときに OOM が発生する可能性がある問題を修正しました
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   etcdクライアントが初期化中に最新のノード情報を自動的に同期しない問題を修正[＃1236](https://github.com/pingcap/tidb-binlog/issues/1236) @ [lichunzhu](https://github.com/lichunzhu)
         -   TiKVクライアント[＃1170](https://github.com/pingcap/tidb-binlog/issues/1170)を[リチュンジュ](https://github.com/lichunzhu)にアップグレードすることで、古いTiKVクライアントバージョンによるDrainerのpanic問題を修正しました。

@@ -115,7 +115,7 @@ TiDB バージョン: 4.0.9
         -   範囲プロパティを使用して、Local-backend [＃422](https://github.com/pingcap/tidb-lightning/pull/422)で範囲分割をより正確にします。
         -   `tikv-importer.region-split-size` `mydumper.batch-size`人間が[＃471](https://github.com/pingcap/tidb-lightning/pull/471)形式（「2.5 GiB」など） `mydumper.read-block-size`サポートする`mydumper.max-region-size`
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   上流PDがダウンしているか、下流へのDDLまたはDML文の適用に失敗した場合は、ゼロ以外のコードでDrainerプロセスを終了します[＃1012](https://github.com/pingcap/tidb-binlog/pull/1012)
 
@@ -146,7 +146,7 @@ TiDB バージョン: 4.0.9
     -   インデックスマージがRead Committed分離レベルのトランザクションで使用されると、結果が正しくなくなる可能性がある問題を修正しました[＃21253](https://github.com/pingcap/tidb/pull/21253)
     -   書き込み競合後のトランザクション再試行によって発生する自動ID割り当ての失敗を修正[＃21079](https://github.com/pingcap/tidb/pull/21079)
     -   `LOAD DATA` [＃21074](https://github.com/pingcap/tidb/pull/21074)を使用してJSONデータを正しくTiDBにインポートできない問題を修正しました
-    -   新しく追加された`Enum`型列のデフォルト値が正しくない問題を修正しました[＃20998](https://github.com/pingcap/tidb/pull/20998)
+    -   新規追加`Enum`型列のデフォルト値が正しくない問題を修正しました[＃20998](https://github.com/pingcap/tidb/pull/20998)
     -   `adddate`関数が無効な文字を挿入する問題を修正[＃21176](https://github.com/pingcap/tidb/pull/21176)
     -   状況によっては間違った`PointGet`プランが生成され、間違った結果[＃21244](https://github.com/pingcap/tidb/pull/21244)が発生する問題を修正しました
     -   MySQL [＃20888](https://github.com/pingcap/tidb/pull/20888)との互換性を保つため、 `ADD_DATE`関数の夏時間の変換を無視する

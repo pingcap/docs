@@ -55,7 +55,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/tidb-distributed-execution-framework.md)参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiDB ログ感度低下 (GA) [＃52364](https://github.com/pingcap/tidb/issues/52364) @ [xhebox](https://github.com/xhebox)を強化
 
@@ -93,7 +93,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 >
 > このセクションでは、v8.0.0から最新バージョン（v8.1.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v7.6.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
 -   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型AUTO_INCREMENT ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)をサポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
@@ -104,26 +104,26 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 | 変数名                                                                               | タイプを変更 | 説明                                                                                                                                                                                                                                                                                                                                                               |
 | --------------------------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) | 非推奨    | v8.1.0以降、TiDBのテレメトリ機能が削除され、この変数は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                                                                                                                                                                                                       |
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)         | 修正済み   | 値の範囲を`[0, 18446744073709551615]`から`(0, 1]`に変更します。                                                                                                                                                                                                                                                                                                                |
-| [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | 修正済み   | デフォルト値を`OFF`から`ON`に変更します。これは、Distributed eXecution Framework（DXF）がデフォルトで有効になることを意味します。これにより、TiDBクラスターのリソースが最大限に活用され、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスが大幅に向上します。DXFが有効になっているクラスターをv8.1.0以降にアップグレードする場合は、アップグレード前にDXFを無効にしてください（ `tidb_enable_dist_task`を`OFF`に設定）。これにより、アップグレード中に`ADD INDEX`操作が発生し、データインデックスの不整合が発生するのを回避できます。アップグレード後、DXFを手動で有効にすることができます。 |
-| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 修正済み   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。                                     |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)         | 変更   | 値の範囲を`[0, 18446744073709551615]`から`(0, 1]`に変更します。                                                                                                                                                                                                                                                                                                                |
+| [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | 変更   | デフォルト値を`OFF`から`ON`に変更します。これは、Distributed eXecution Framework（DXF）がデフォルトで有効になることを意味します。これにより、TiDBクラスターのリソースが最大限に活用され、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスが大幅に向上します。DXFが有効になっているクラスターをv8.1.0以降にアップグレードする場合は、アップグレード前にDXFを無効にしてください（ `tidb_enable_dist_task`を`OFF`に設定）。これにより、アップグレード中に`ADD INDEX`操作が発生し、データインデックスの不整合が発生するのを回避できます。アップグレード後、DXFを手動で有効にすることができます。 |
+| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 変更   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。                                     |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                 | タイプを変更   | 説明                                                                                                                                                                                                |
 | -------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)                                  | 非推奨      | v8.1.0以降、TiDBのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                                      |
-| TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)           | 新しく追加された | TiDBの起動時に統計を同時に初期化するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                  |
+| TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)           | 新規追加 | TiDBの起動時に統計を同時に初期化するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                  |
 | PD             | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)                                                | 非推奨      | v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                               |
-| TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)      | 修正済み     | v8.1.0 以降では、ユーザー入力に関係なく、 TiDB Lightning が`conflict.max-record-rows`の値に`conflict.threshold`の値を自動的に割り当てるため、 `conflict.max-record-rows`手動で構成する必要はありません。 `conflict.max-record-rows`将来のリリースで廃止される予定です。 |
-| TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                     | 修正済み     | デフォルト値を`9223372036854775807`から`10000`に変更することで、異常なタスクを迅速に中断し、対応する調整を迅速に行うことができます。これにより、異常なデータソースやテーブルスキーマ定義の誤りが原因で、インポート後に大量の競合データが発見されるというシナリオを回避し、時間と計算リソースを節約できます。                              |
-| TiKV           | [`raft-engine.batch-compression-threshold`](/tikv-configuration-file.md#batch-compression-threshold)            | 修正済み     | デフォルト値を`"8KiB"`から`"4KiB"`に変更して、 Raftログの書き込みの IOPS オーバーヘッドを削減し、圧縮率を向上させます。                                                                                                                         |
-| TiKV           | [`memory.enable-thread-exclusive-arena`](/tikv-configuration-file.md#enable-thread-exclusive-arena-new-in-v810) | 新しく追加された | 各TiKVスレッドのメモリ使用量を追跡するために、TiKVスレッドレベルでメモリ割り当てステータスを表示するかどうかを制御します。デフォルト値は`true`です。                                                                                                                 |
-| TiCDC          | [`security.client-allowed-user`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)        | 新しく追加された | クライアント認証に許可されるユーザー名をリストします。このリストに含まれていないユーザー名による認証要求は拒否されます。デフォルト値はnullです。                                                                                                                        |
-| TiCDC          | [`security.client-user-required`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)       | 新しく追加された | クライアント認証にユーザー名とパスワードを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                             |
-| TiCDC          | [`security.mtls`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)                       | 新しく追加された | TLSクライアント認証を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                     |
-| TiCDC          | [`sink.debezium.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)       | 新しく追加された | 行データが変更される前の値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、 `UPDATE`イベントは「before」フィールドを出力しません。                                                                                                           |
-| TiCDC          | [`sink.open.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)           | 新しく追加された | 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、イベント`UPDATE`は「p」フィールドを出力しません。                                                                                                                 |
+| TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)      | 変更     | v8.1.0 以降では、ユーザー入力に関係なく、 TiDB Lightning が`conflict.max-record-rows`の値に`conflict.threshold`の値を自動的に割り当てるため、 `conflict.max-record-rows`手動で構成する必要はありません。 `conflict.max-record-rows`将来のリリースで廃止される予定です。 |
+| TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                     | 変更     | デフォルト値を`9223372036854775807`から`10000`に変更することで、異常なタスクを迅速に中断し、対応する調整を迅速に行うことができます。これにより、異常なデータソースやテーブルスキーマ定義の誤りが原因で、インポート後に大量の競合データが発見されるというシナリオを回避し、時間と計算リソースを節約できます。                              |
+| TiKV           | [`raft-engine.batch-compression-threshold`](/tikv-configuration-file.md#batch-compression-threshold)            | 変更     | デフォルト値を`"8KiB"`から`"4KiB"`に変更して、 Raftログの書き込みの IOPS オーバーヘッドを削減し、圧縮率を向上させます。                                                                                                                         |
+| TiKV           | [`memory.enable-thread-exclusive-arena`](/tikv-configuration-file.md#enable-thread-exclusive-arena-new-in-v810) | 新規追加 | 各TiKVスレッドのメモリ使用量を追跡するために、TiKVスレッドレベルでメモリ割り当てステータスを表示するかどうかを制御します。デフォルト値は`true`です。                                                                                                                 |
+| TiCDC          | [`security.client-allowed-user`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)        | 新規追加 | クライアント認証に許可されるユーザー名をリストします。このリストに含まれていないユーザー名による認証要求は拒否されます。デフォルト値はnullです。                                                                                                                        |
+| TiCDC          | [`security.client-user-required`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)       | 新規追加 | クライアント認証にユーザー名とパスワードを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                             |
+| TiCDC          | [`security.mtls`](/ticdc/ticdc-server-config.md#cdc-server-configuration-file-parameters)                       | 新規追加 | TLSクライアント認証を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                     |
+| TiCDC          | [`sink.debezium.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)       | 新規追加 | 行データが変更される前の値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、 `UPDATE`イベントは「before」フィールドを出力しません。                                                                                                           |
+| TiCDC          | [`sink.open.output-old-value`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)           | 新規追加 | 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、イベント`UPDATE`は「p」フィールドを出力しません。                                                                                                                 |
 
 ## 非推奨の機能 {#deprecated-features}
 
@@ -288,16 +288,16 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティからの以下の貢献者に感謝いたします。
 
--   [アルトゥルメランチク](https://github.com/arturmelanchyk) (初回投稿者)
--   [キャビンフィーバーB](https://github.com/CabinfeverB)
--   [ダンキシュ](https://github.com/danqixu) (初回投稿者)
--   [イマラソン](https://github.com/imalasong) (初回投稿者)
--   [ジフハウス](https://github.com/jiyfhust)
--   [ネガチョフ](https://github.com/negachov) (初回投稿者)
--   [テストウィル](https://github.com/testwill)
--   [yzhan1](https://github.com/yzhan1) (初回投稿者)
--   [zxc111](https://github.com/zxc111) (初回投稿者)
+-   [arturmelanchyk](https://github.com/arturmelanchyk) (初回貢献者)
+-   [CabinfeverB](https://github.com/CabinfeverB)
+-   [danqixu](https://github.com/danqixu) (初回貢献者)
+-   [imalasong](https://github.com/imalasong) (初回貢献者)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [negachov](https://github.com/negachov) (初回貢献者)
+-   [testwill](https://github.com/testwill)
+-   [yzhan1](https://github.com/yzhan1) (初回貢献者)
+-   [zxc111](https://github.com/zxc111) (初回貢献者)

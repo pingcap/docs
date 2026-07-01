@@ -34,7 +34,7 @@ TiDB バージョン: 4.0.2
     -   TLS証明書[＃17698](https://github.com/pingcap/tidb/pull/17698)の`SAN`フィールドに基づく認証をサポート
     -   `REGEXP()`関数[＃17581](https://github.com/pingcap/tidb/pull/17581)照合順序をサポート
     -   `sql_select_limit`セッションとグローバル変数[＃17604](https://github.com/pingcap/tidb/pull/17604)サポート
-    -   新しく追加されたパーティションのリージョン分割をデフォルトでサポート[＃17665](https://github.com/pingcap/tidb/pull/17665)
+    -   新規追加パーティションのリージョン分割をデフォルトでサポート[＃17665](https://github.com/pingcap/tidb/pull/17665)
     -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数をTiFlashコプロセッサー[＃17651](https://github.com/pingcap/tidb/pull/17651) [＃17592](https://github.com/pingcap/tidb/pull/17592)にプッシュすることをサポート
     -   `COUNT(DISTINCT)` [＃18120](https://github.com/pingcap/tidb/pull/18120)のおおよその結果を計算する新しい集計関数`APPROX_COUNT_DISTINCT()`サポートします。
     -   TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash [＃17705](https://github.com/pingcap/tidb/pull/17705)にプッシュします。

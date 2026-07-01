@@ -169,6 +169,6 @@ TiDB バージョン: 4.0.3
 
         -   `--log-file`が有効にならない問題を修正[＃345](https://github.com/pingcap/tidb-lightning/pull/345)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   TiDB Binlog がTLS を有効にしてダウンストリームにデータを複製する場合、チェックポイント[＃988](https://github.com/pingcap/tidb-binlog/pull/988)更新に使用されるデータベース ドライバーで TLS が有効になっていないためにDrainerを起動できない問題を修正しました。

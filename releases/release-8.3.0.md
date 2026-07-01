@@ -140,7 +140,7 @@ TiDBバージョン：8.3.0
 
 -   リクエストユニット（RU）設定に関するメトリクスを追加 [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   PDログの編集機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
 
@@ -174,35 +174,35 @@ TiDBバージョン：8.3.0
 >
 > このセクションでは、v8.2.0 から最新バージョン (v8.3.0) にアップグレードする際に知っておくべき互換性の変更点について説明します。v8.1.0 以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   コマンドの誤用を防ぐため、 `pd-ctl`はプレフィックスマッチングメカニズムを無効にします。たとえば、 `store remove-tombstone` `store remove`を介して呼び出すことはできません。 [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                           | 種類を変更する  | 説明                                                                                                                                                                                                                                                                                                       |
+| 変数名                                                                                                           | 変更の種類  | 説明                                                                                                                                                                                                                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)                                 | 修正済み     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
-| [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)                                 | 修正済み     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
-| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)                 | 修正済み     | さらなるテストの結果、デフォルト値が`OFF`から`ON`に変更されます。これは、TiDB がデフォルトで`PREDICATE COLUMNS`を収集することを意味します。                                                                                                                                                                                                                   |
-| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 修正済み     | v8.3.0 以降、この変数は[ごみ収集（GC）](/garbage-collection-overview.md)プロセスの[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
-| [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 修正済み     | グローバルスコープを追加します。                                                                                                                                                                                                                                                                                         |
-| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 修正済み     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
-| [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                           | 修正済み     | 値の範囲は`0`または`[536870912, 9223372036854775807]`に変更されました。キャッシュサイズが小さすぎてパフォーマンスが低下するのを避けるため、最小値は`536870912`バイト (つまり 512 MiB) です。                                                                                                                                                                             |
-| [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新しく追加された | `ANALYZE TABLE`ステートメントの動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
-| [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)             | 新しく追加された | [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。                                                                                                                                                                                      |
-| [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)     | 新しく追加された | 共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。                                                                                                                                                                                                |
-| [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830) | 新しく追加された | TiFlashにプッシュダウンされる2段階または3段階のHashAgg操作の最初の段階で使用される事前集計戦略を制御します。                                                                                                                                                                                                                                           |
+| [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)                                 | 変更     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
+| [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)                                 | 変更     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
+| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)                 | 変更     | さらなるテストの結果、デフォルト値が`OFF`から`ON`に変更されます。これは、TiDB がデフォルトで`PREDICATE COLUMNS`を収集することを意味します。                                                                                                                                                                                                                   |
+| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 変更     | v8.3.0 以降、この変数は[ごみ収集（GC）](/garbage-collection-overview.md)プロセスの[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
+| [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 変更     | グローバルスコープを追加します。                                                                                                                                                                                                                                                                                         |
+| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 変更     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
+| [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                           | 変更     | 値の範囲は`0`または`[536870912, 9223372036854775807]`に変更されました。キャッシュサイズが小さすぎてパフォーマンスが低下するのを避けるため、最小値は`536870912`バイト (つまり 512 MiB) です。                                                                                                                                                                             |
+| [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新規追加 | `ANALYZE TABLE`ステートメントの動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
+| [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)             | 新規追加 | [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。                                                                                                                                                                                      |
+| [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)     | 新規追加 | 共有ロックを排他ロックにアップグレードする機能を有効にするかどうかを制御します。この変数のデフォルト値は`OFF`であり、これは共有ロックを排他ロックにアップグレードする機能が無効になっていることを意味します。                                                                                                                                                                                                |
+| [`tiflash_hashagg_preaggregation_mode`](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830) | 新規追加 | TiFlashにプッシュダウンされる2段階または3段階のHashAgg操作の最初の段階で使用される事前集計戦略を制御します。                                                                                                                                                                                                                                           |
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | 種類を変更する  | 説明                                                                                                                                                      |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                        | 変更の種類  | 説明                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
-| PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 修正済み     | PD構成項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
-| TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 修正済み     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
-| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 修正済み     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
-| BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
+| TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新規追加 | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
+| PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD構成項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
+| TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 変更     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
+| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 変更     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
+| BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新規追加 | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
 
 ### システムテーブル {#system-tables}
 
@@ -212,7 +212,7 @@ TiDBバージョン：8.3.0
 
 -   バージョン8.3.0以降、以下の機能は非推奨となります。
 
-    -   バージョン 7.5.0 以降、 [TiDBBinlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlog は完全に非推奨となり、今後のリリースで削除される予定です。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。
+    -   バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlog は完全に非推奨となり、今後のリリースで削除される予定です。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。
     -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)参照してください。
 
 -   以下の機能は、将来のバージョンで廃止される予定です。
@@ -393,16 +393,16 @@ TiDBバージョン：8.3.0
         -   TiDB Lightningを使用したデータインポート中にトランザクションの競合が発生する問題を修正しました [#49826](https://github.com/pingcap/tidb/issues/49826) @[lance6716](https://github.com/lance6716)
         -   多数のデータベースとテーブルのインポート中に、大きなチェックポイントファイルがパフォーマンス低下を引き起こす問題を修正 [#55054](https://github.com/pingcap/tidb/issues/55054) @[D3Hunter](https://github.com/D3Hunter)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [アリエ](https://github.com/ari-e)
--   [杉本英](https://github.com/ei-sugimoto)
--   [ハオW30](https://github.com/HaoW30)
+-   [ari-e](https://github.com/ari-e)
+-   [ei-sugimoto](https://github.com/ei-sugimoto)
+-   [HaoW30](https://github.com/HaoW30)
 -   [JackL9u](https://github.com/JackL9u)
 -   [michaelmdeng](https://github.com/michaelmdeng)
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
+-   [mittalrishabh](https://github.com/mittalrishabh)
 -   [qingfeng777](https://github.com/qingfeng777)
--   [サンディープ・パディ](https://github.com/SandeepPadhi)
+-   [SandeepPadhi](https://github.com/SandeepPadhi)
 -   [yzhan1](https://github.com/yzhan1)

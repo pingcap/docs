@@ -21,7 +21,7 @@ TiDB Ansible バージョン: 2.1.17
     -   積極的にプッシュするオペレータをサポートすることでPDのスケジュールプロセスを最適化します
     -   TiKV の起動プロセスを最適化し、ノードの再起動によって発生するジッターを軽減します。
 
--   行動の変化
+-   動作の変更
     -   TiDB スロークエリログの最後の再試行時刻から最初の実行時刻への変更`start ts`
     -   TiDB スロー クエリ ログの`Index_ids`フィールドを`Index_names`フィールドに置き換えて、スロー クエリ ログの使いやすさを向上させます。
     -   TiDB の構成ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。デフォルト構成では、1,000 から 10,000 に増加されます。
@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 2.1.17
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御[＃746](https://github.com/pingcap/tidb-binlog/pull/746)
     -   Drainerのメモリ使用量を最適化して並列実行効率を向上させる[＃735](https://github.com/pingcap/tidb-binlog/pull/735)
     -   Pumpが正常に終了できないことがあるバグを修正[＃739](https://github.com/pingcap/tidb-binlog/pull/739)
@@ -86,7 +86,7 @@ TiDB Ansible バージョン: 2.1.17
 -   TiDB Lightning
     -   チェックポイント[＃239](https://github.com/pingcap/tidb-lightning/pull/239)からデータを再インポートするとtidb-lightningがクラッシュする可能性があるバグを修正しました
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   Sparkバージョンを2.4.3にアップデートし、TiSparkバージョンをSpark 2.4.3 [＃914](https://github.com/pingcap/tidb-ansible/pull/914) 、 [＃919](https://github.com/pingcap/tidb-ansible/pull/927)と互換性のある2.2.0にアップデートします。
 -   リモートマシンのパスワードの有効期限が切れたときに長い待ち時間が発生する問題を修正[＃937](https://github.com/pingcap/tidb-ansible/pull/937) , [＃948](https://github.com/pingcap/tidb-ansible/pull/948)

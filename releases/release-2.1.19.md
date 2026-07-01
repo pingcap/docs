@@ -79,7 +79,7 @@ TiDB Ansible バージョン: 2.1.19
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   binlogctl [＃777](https://github.com/pingcap/tidb-binlog/pull/777)を通じてノードステータス情報の出力を最適化します。
     -   Drainerフィルター設定[＃802](https://github.com/pingcap/tidb-binlog/pull/802)の値`nil`が原因でpanicが発生する問題を修正
     -   Pump[＃825](https://github.com/pingcap/tidb-binlog/pull/825)の`Graceful`出口を最適化する
@@ -87,7 +87,7 @@ TiDB Ansible バージョン: 2.1.19
     -   Drainer がDDL 操作[＃836](https://github.com/pingcap/tidb-binlog/pull/836)を実行した後にテーブル情報を更新するように Drainer のロジックを最適化します。
     -   Pumpがこのbinlog[＃855](https://github.com/pingcap/tidb-binlog/pull/855)を受信しない場合、DDL操作のコミットbinlogが無視される問題を修正しました。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   TiDBサービスの監視項目`Uncommon Error OPM`名前を`Write Binlog Error`に変更し、対応するアラートメッセージ[＃1038](https://github.com/pingcap/tidb-ansible/pull/1038)を追加します。
 -   TiSparkを2.1.8にアップグレード[＃1063](https://github.com/pingcap/tidb-ansible/pull/1063)

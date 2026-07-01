@@ -32,6 +32,6 @@ TiDB Ansible バージョン: 2.1.13
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   データの書き込みに失敗したときにPumpが戻り値をチェックしないことによって発生する間違ったオフセットの問題を修正しました[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
     -   コンテナ環境[＃634](https://github.com/pingcap/tidb-binlog/pull/634)でブリッジモードをサポートするために、 Drainerに`advertise-addr`構成を追加します。

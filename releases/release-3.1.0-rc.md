@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   コンポーネント間のTLS認証をサポート[＃931](https://github.com/pingcap/tidb-binlog/pull/931) [＃937](https://github.com/pingcap/tidb-binlog/pull/937) [＃939](https://github.com/pingcap/tidb-binlog/pull/939)
         -   Drainerに`kafka-client-id`設定項目を追加して、KafkaのクライアントID [＃929](https://github.com/pingcap/tidb-binlog/pull/929)を設定します。
@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
         -   ログ出力を最適化する[＃189](https://github.com/pingcap/br/pull/189)
 
--   TiDB アンシブル
+-   TiDB Ansible
 
     -   TiFlashデータディレクトリの作成方法を最適化する[＃1242](https://github.com/pingcap/tidb-ansible/pull/1242)
     -   TiFlash [＃1234](https://github.com/pingcap/tidb-ansible/pull/1234)に`Write Amplification`監視項目を追加
