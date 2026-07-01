@@ -416,7 +416,7 @@ CREATE TABLE users (
 -- Create partial indexes for common query patterns
 CREATE INDEX idx_active_users ON users (name) WHERE status = 'active';
 CREATE INDEX idx_high_score_users ON users (created_at) WHERE score > 1000;
-CREATE INDEX idx_pending_status ON users (created_at) WHERE status = 'pending';
+CREATE INDEX idx_pending_status ON users (status) WHERE status = 'pending';
 ```
 
 Then the following queries can use the partial index:
@@ -456,13 +456,13 @@ mysql> EXPLAIN SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
 4 rows in set (0.00 sec)
 
 mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
-+-------------------------+----------+-----------+---------------+----------------------------------+
-| id                      | estRows  | task      | access object | operator info                    |
-+-------------------------+----------+-----------+---------------+----------------------------------+
-| TableReader_8           | 10.00    | root      |               | data:Selection_7                 |
-| └─Selection_7           | 10.00    | cop[tikv] |               | eq(test.users.status, "pending") |
-|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo   |
-+-------------------------+----------+-----------+---------------+----------------------------------+
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| id                            | estRows | task      | access object                                 | operator info                                               |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| IndexLookUp_7                 | 10.00   | root      |                                               |                                                             |
+| ├─IndexRangeScan_5(Build)     | 10.00   | cop[tikv] | table:users, index:idx_pending_status(status) | range:["pending","pending"], keep order:false, stats:pseudo |
+| └─TableRowIDScan_6(Probe)     | 10.00   | cop[tikv] | table:users                                   | keep order:false, stats:pseudo                              |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
 3 rows in set (0.00 sec)
 ```
 
@@ -474,9 +474,9 @@ mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score >
 | id                        | estRows  | task      | access object | operator info                  |
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | Sort_5                    | 3333.33  | root      |               | test.users.created_at          |
-| └─TableReader_11          | 3333.33  | root      |               | data:Selection_10              |
-|   └─Selection_10          | 3333.33  | cop[tikv] |               | gt(test.users.score, 100)      |
-|     └─TableFullScan_9     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo |
+| └─TableReader_10          | 3333.33  | root      |               | data:Selection_9               |
+|   └─Selection_9           | 3333.33  | cop[tikv] |               | gt(test.users.score, 100)      |
+|     └─TableFullScan_8     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo |
 +---------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
@@ -492,7 +492,7 @@ Partial indexes are particularly useful in the following scenarios:
 - The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 - The column and constant values must be of the same data type.
 - The predicate can only reference columns from the same table.
-- Partial indexes cannot be used on expression indexes.
+- Partial indexes cannot be created on expression indexes.
 
 ### Performance benefits
 
