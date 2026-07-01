@@ -130,8 +130,8 @@ ALTER TABLE table_name SET TIFLASH REPLICA n;
 
 Both **Row-based storage** and **columnar storage** support dual-layer encryption. This mechanism protects data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
 
-1. **Infrastructure-level encryption:** The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
-2. **TiDB Cloud-level encryption:** On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
+- **Infrastructure-level encryption:** The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
+- **TiDB Cloud-level encryption:** On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
 
 **Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.
 
