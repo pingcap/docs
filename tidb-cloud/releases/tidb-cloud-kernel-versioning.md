@@ -36,7 +36,7 @@ For example, `TiDB-X-CLOUD.202510.1` indicates that the kernel is based on a bra
 
 Because kernel development and release schedules are independent, a kernel version might be released several months after its baseline branch is created.
 
-Because TiDB Cloud Premium follows its own kernel release cadence, TiDB Cloud Premium release notes are published separately from TiDB Self-Managed release notes.
+Because TiDB Cloud Premium follows its own kernel release cadence, [TiDB Cloud Premium release notes](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) are published separately from [TiDB Self-Managed release notes](https://docs.pingcap.com/releases/tidb-self-managed/).
 
 ## FAQ
 
