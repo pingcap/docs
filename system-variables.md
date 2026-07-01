@@ -1749,7 +1749,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **注意：**
 >
-> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例，该变量为只读。
+> 对于 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 和 [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium) 实例，该变量为只读。
 
 - 作用域：GLOBAL
 - 是否持久化到集群：是

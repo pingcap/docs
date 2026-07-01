@@ -8,6 +8,60 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 6 月 30 日 {#june-30-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - 增强 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 的稳定性、安全性和运维体验。以下增强和变更将逐步向新创建的 TiDB Cloud Essential 实例推出。
+
+        - **改善连接体验**：为新创建的 TiDB Cloud Essential 实例支持独立端点，因此你在连接这些实例时不再需要包含必需的[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+        - **支持修改 root 密码**：你可以直接在 TiDB Cloud 控制台中修改 root 密码。
+        - **增强数据导入体验**：在导入数据页面中输入源目标字段后，你可以点击 **Test Bucket Access**，在导入数据之前验证对指定对象存储 bucket 的访问。此外，导入页面现在会显示待导入文件的大小，以提升导入操作的可见性和管理能力。
+        - **更新 Branch 功能的可用性**：从 **2026 年 7 月 14 日**开始，新创建的 TiDB Cloud Essential 实例将不再支持 [Branch](/tidb-cloud/branch-overview.md) 功能。在此日期之前创建的现有 TiDB Cloud Essential 实例不受影响。Branch 功能在 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 中仍然可用。
+        - **更新导入和导出能力**：为增强安全性，不再支持从本地文件导入数据以及将数据导出到本地文件。
+        - **更新 DB 审计日志存储要求**：出于安全和合规原因，你必须为审计日志保留指定一个外部存储位置。
+        - [Changefeed](/tidb-cloud/essential-changefeed-overview.md) 将从 **2026 年 7 月 1 日**起作为一项收费功能提供。
+
+      这些功能将分阶段推出。如需抢先体验，请联系 [support@pingcap.com](mailto:support@pingcap.com)。
+
+    - [Top RU](/tidb-cloud/top-ru.md) 现已在以下 Region 面向 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 开启公测：
+
+        - Alibaba Cloud：`Singapore (ap-southeast-1)` 和 `Tokyo (ap-northeast-1)`
+
+      此功能会显示分钟级别 RU 消耗最高的 SQL 语句，帮助你快速识别资源消耗最大的查询以降低成本。
+
+      此功能将分阶段推出。如需抢先体验，请联系 [support@pingcap.com](mailto:support@pingcap.com)。
+
+- **TiDB Cloud Dedicated**
+
+    - 优化 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的备份和恢复流程。
+
+        - TiDB Cloud Dedicated 的 **Restore** 页面不再包含 **Restore From Region** 选项。由于 TiDB Cloud Dedicated 会默认将备份数据存储在与集群相同的 Region 中，因此你不再需要选择要从哪个 Region 恢复。
+        - **Restore to Region** 选项已重命名为 **Cloud Provider & Region**。
+
+      更多信息，请参见[将数据恢复到新集群](/tidb-cloud/backup-and-restore.md)。
+
+- **TiDB Cloud Lake**
+
+    - TiDB Cloud Lake 现已进入公测阶段。
+
+        TiDB Cloud Lake 是 TiDB Cloud 中面向现代分析和 AI 导向数据工作流的云原生分析仓库。它在一项托管服务中提供弹性仓库、ANSI SQL 分析、对象存储、全文搜索、向量搜索和地理空间分析，帮助团队在无需管理独立分析基础设施的情况下分析结构化和半结构化数据。
+
+        通过此次公测，你可以使用弹性仓库运行 SQL 分析，并使用内置搜索能力来支持 BI、日志分析、语义检索及其他现代分析和 AI 用例。
+
+        如需试用 TiDB Cloud Lake，请登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，在左侧导航栏中点击 **My Lake**，然后点击右上角的 **Try TiDB Cloud Lake**。
+
+        更多信息，请参见 [TiDB Cloud Lake documentation](https://docs.pingcap.com/tidbcloudlake/)。
+
+**即将进行的计费调整**
+
+- 以下计费调整将对 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 生效：
+
+    - **最小 RCU 计费更新**：从 **2026 年 8 月 1 日**起，最小 RCU 值将根据你配置的最大 RCU 值自动确定（最小 RCU = 0.1 × 配置的最大 RCU，且下限为 2,000 RCU）。如果你的实际使用量始终低于最小 RCU 阈值，TiDB Cloud 将按最小 RCU 值计算费用。对于 **2026 年 7 月 1 日之前创建的现有实例**，此最小 RCU 计费策略的实现将推迟，确切生效日期将于稍后公布。
+    - **新增收费功能**：备份使用量和网络出口流量的收费将于 **2026 年 9 月 1 日**起生效。更多信息，请参见 [TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+
 ## 2026 年 6 月 16 日
 
 **常规变更**

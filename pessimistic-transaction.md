@@ -73,6 +73,10 @@ TiDB 中的悲观事务行为与 MySQL 类似。关于与 MySQL InnoDB 的细微
 
 - 如果 `Point Get` 和 `Batch Point Get` 操作没有读取数据，它们仍会锁定给定的主键或唯一键，从而阻止其他事务锁定或写入相同的主键或唯一键。
 
+    > **注意：**
+    >
+    > 此行为仅适用于 [Repeatable Read](/transaction-isolation-levels.md#repeatable-read-isolation-level) 隔离级别。在 [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level) 隔离级别下，`Point Get` 和 `Batch Point Get` 操作不会锁定不存在的键。
+
 - TiDB 支持 `FOR UPDATE OF TABLES` 语法。对于连接多个表的语句，TiDB 只会对与 `OF TABLES` 中表相关的行加悲观锁。
 
 ## 与 MySQL InnoDB 的差异

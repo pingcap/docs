@@ -43,15 +43,10 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 你可以将审计日志存储在以下位置：
 
-- TiDB Cloud
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Google Cloud Storage](https://cloud.google.com/storage)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 - [阿里云对象存储 OSS](https://www.alibabacloud.com/product/oss)
-
-### TiDB Cloud
-
-你可以将审计日志存储在 TiDB Cloud，并下载到本地。审计日志会在 365 天后过期并被删除。如需更长的保留时间，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 
 ### Amazon S3
 
@@ -357,46 +352,6 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 ```shell
 ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-rule-id <rule-id>
 ```
- 
-</div>
-</SimpleTab>
-
-## 通过 TiDB Cloud 存储访问审计日志
-
-当你将审计日志存储在 TiDB Cloud 时，TiDB Cloud Essential 会将其保存为可读文本文件，命名为 `YYYY-MM-DD-<index>.log`。你可以通过 TiDB Cloud 控制台或 TiDB Cloud CLI 查看和下载这些文件。
-
-> **注意：**
->
-> - TiDB Cloud Essential 不保证审计日志的存储顺序。名为 `YYYY-MM-DD-<index>.log` 的日志文件可能包含更早日期的日志条目。
-> - 如需获取某一天（如 2025 年 1 月 1 日）的所有日志，请设置 `--start-date 2025-01-01` 和 `--end-date 2025-01-02`。在某些情况下，你可能需要下载所有日志文件并按 `TIME` 字段进行排序。
-
-<SimpleTab>
-<div label="Console">
-
-1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
-
-    > **提示：**
-    >
-    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
-
-2. 点击目标 {{{ .essential }}} 实例名称进入概览页，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
-
-3. 在 **DB Audit Logging** 页面，你可以在 **TiDB Cloud Storage** 下查看审计日志列表。
-
-4. 如需下载审计日志，从列表中选择一个或多个日志，然后点击 **Download**。
-
-</div>
-
-<div label="CLI">
-
-如需通过 TiDB Cloud CLI 下载审计日志，运行以下命令：
-
-```shell
-ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
-```
-
-- `start-date`：要下载的审计日志起始日期，格式为 `YYYY-MM-DD`，如 `2025-01-01`。
-- `end-date`：要下载的审计日志结束日期，格式为 `YYYY-MM-DD`，如 `2025-01-01`。
  
 </div>
 </SimpleTab>

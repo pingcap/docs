@@ -659,7 +659,7 @@ GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* 
 例如，你可以在目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>中执行以下 `GRANT` 语句来授予相应权限：
 
 ```sql
-GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX ON *.* TO 'dm_target_user'@'%';
+GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON *.* TO 'dm_target_user'@'%';
 ```
 
 ## 第 1 步：进入数据迁移页面

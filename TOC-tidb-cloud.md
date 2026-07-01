@@ -589,7 +589,7 @@
     - [介绍](/tidb-distributed-execution-framework.md)
     - [TiDB 全局排序](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated 限制和配额](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Cloud 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
+  - [TiDB Cloud Dedicated 上受限的 SQL 功能](/tidb-cloud/limited-sql-features.md)
   - [TiDB 限制](/tidb-limitations.md)
   - 基准测试
     - TiDB v8.5
@@ -620,7 +620,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+    - [已连接：诊所服务](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
