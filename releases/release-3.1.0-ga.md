@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     -   `fromUnixTime`と`dateFormat`押し下げ関数をサポート
     -   デフォルトでラフセットフィルタを無効にする
 
--   TiDB アンシブル
+-   TiDB Ansible
 
     -   TiFlashモニター[＃1253](https://github.com/pingcap/tidb-ansible/pull/1253) [＃1257](https://github.com/pingcap/tidb-ansible/pull/1257)を追加
     -   TiFlash [＃1262](https://github.com/pingcap/tidb-ansible/pull/1262) [＃1265](https://github.com/pingcap/tidb-ansible/pull/1265) [＃1271](https://github.com/pingcap/tidb-ansible/pull/1271)の設定パラメータを最適化する

@@ -267,7 +267,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/partitioned-table.md#key-partitioning)を参照してください。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   TiCDC は、Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)の`FLOAT`データの不正なエンコードの問題を修正しました
 
@@ -451,18 +451,18 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
         -   物理インポートモードを使用してデータをインポートする場合、対象テーブルの複合主キーに`auto_random`列が存在するが、ソースデータでその列の値が指定されていない場合、 TiDB Lightning が`auto_random`列のデータを自動的に生成しない問題を修正しました。 [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
         -   論理インポートモードを使用してデータをインポートする際に、ターゲットクラスターに対する`CONFIG`権限がないためにインポートが失敗する問題を修正しました [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [アンチトップクォーク](https://github.com/AntiTopQuark)
--   [ブラックティア23](https://github.com/blacktear23)
--   [ボーンチェンジャー](https://github.com/BornChanger)
+-   [AntiTopQuark](https://github.com/AntiTopQuark)
+-   [blacktear23](https://github.com/blacktear23)
+-   [BornChanger](https://github.com/BornChanger)
 -   [Dousir9](https://github.com/Dousir9)
--   [エルワドバ](https://github.com/erwadba)
--   [ハッピーv587](https://github.com/happy-v587)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
+-   [erwadba](https://github.com/erwadba)
+-   [happy-v587](https://github.com/happy-v587)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
 -   [liumengya94](https://github.com/liumengya94)
--   [ウーフィーザオ](https://github.com/woofyzhao)
--   [夏関](https://github.com/xiaguan)
+-   [woofyzhao](https://github.com/woofyzhao)
+-   [xiaguan](https://github.com/xiaguan)

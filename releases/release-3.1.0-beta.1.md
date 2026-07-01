@@ -34,7 +34,7 @@ TiDB Ansible バージョン: 3.1.0-beta.1
     -   PDスケジューラ[＃123](https://github.com/pingcap/br/pull/123)自動スケジュール機能を追加
     -   `PKIsHandle`以外のテーブルを復元した後にデータが上書きされる問題を修正[＃139](https://github.com/pingcap/br/pull/139)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   初期化フェーズ[＃1086](https://github.com/pingcap/tidb-ansible/pull/1086)中にオペレーティング システムで Transparent Huge Pages (THP) を自動的に無効にする機能を追加します。
 -   BRコンポーネント[＃1093](https://github.com/pingcap/tidb-ansible/pull/1093)のGrafana監視を追加する

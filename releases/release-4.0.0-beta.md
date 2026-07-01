@@ -105,7 +105,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   TiDB Lightning
     -   コマンドラインツールにパラメータを追加して、ダウンストリームデータベース[＃253](https://github.com/pingcap/tidb-lightning/pull/253)のパスワードを設定します。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   ダウンロードしたパッケージが不完全な場合に備えて、パッケージにチェックサムチェックを追加します[＃1002](https://github.com/pingcap/tidb-ansible/pull/1002)
 -   systemd のバージョンのチェックをサポートします。バージョンは`systemd-219-52`以降である必要があります[＃1020](https://github.com/pingcap/tidb-ansible/pull/1020) [＃1074](https://github.com/pingcap/tidb-ansible/pull/1074)

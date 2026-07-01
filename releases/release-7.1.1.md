@@ -15,7 +15,7 @@ TiDB バージョン: 7.1.1
 
 -   TiDBは、変更されていないキー[＃44714](https://github.com/pingcap/tidb/issues/44714)をロックするかどうかを制御するための新しいシステム変数`tidb_lock_unchanged_keys`を導入しました[エキシウム](https://github.com/ekexium)
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 

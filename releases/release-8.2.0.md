@@ -103,7 +103,7 @@ TiDB バージョン: 8.2.0
 
     詳細については、 [ドキュメント](/statement-summary-tables.md#fields-description)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashログの感度低下を強化 [#8977](https://github.com/pingcap/tiflash/issues/8977) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -131,7 +131,7 @@ TiDB バージョン: 8.2.0
 >
 > このセクションでは、v8.1.0 から最新バージョン (v8.2.0) にアップグレードする際に知っておくべき互換性の変更点について説明します。v8.0.0 以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポート パフォーマンスを向上させる場合は、 `terminator`明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
@@ -363,22 +363,22 @@ TiDB バージョン: 8.2.0
 
         -   TiDB Binlogが有効になっている場合、 `ADD COLUMN`の実行中に行を削除するとエラー`data and columnID count not match`が報告される可能性がある問題を修正しました [#53133](https://github.com/pingcap/tidb/issues/53133) @[tangenta](https://github.com/tangenta)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [キャビンフィーバーB](https://github.com/CabinfeverB)
--   [ダン・ロシグノ](https://github.com/DanRoscigno)(初投稿者)
--   [杉本英](https://github.com/ei-sugimoto)(初投稿者)
--   [エルトシアー](https://github.com/eltociear)
--   [ジフハスト](https://github.com/jiyfhust)
--   [michaelmdeng](https://github.com/michaelmdeng) （初投稿者）
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
--   [オンリーキャット](https://github.com/onlyacat)
--   [qichengzx](https://github.com/qichengzx) （初投稿者）
--   [シーライズ](https://github.com/SeaRise)
+-   [CabinfeverB](https://github.com/CabinfeverB)
+-   [DanRoscigno](https://github.com/DanRoscigno) (初回貢献者)
+-   [ei-sugimoto](https://github.com/ei-sugimoto) (初回貢献者)
+-   [eltociear](https://github.com/eltociear)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [michaelmdeng](https://github.com/michaelmdeng) (初回貢献者)
+-   [mittalrishabh](https://github.com/mittalrishabh)
+-   [onlyacat](https://github.com/onlyacat)
+-   [qichengzx](https://github.com/qichengzx) (初回貢献者)
+-   [SeaRise](https://github.com/SeaRise)
 -   [shawn0915](https://github.com/shawn0915)
--   [藤田俊希](https://github.com/shunki-fujita)(初投稿者)
+-   [shunki-fujita](https://github.com/shunki-fujita) (初回貢献者)
 -   [tonyxuqqi](https://github.com/tonyxuqqi)
--   [wwu](https://github.com/wwu) （初投稿者）
+-   [wwu](https://github.com/wwu) (初回貢献者)
 -   [yzhan1](https://github.com/yzhan1)

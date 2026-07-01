@@ -264,7 +264,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/statement-summary-tables.md#persist-statements-summary)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashはTLS証明書の自動ローテーションをサポートします [#5503](https://github.com/pingcap/tiflash/issues/5503) @[ywqzzy](https://github.com/ywqzzy)
 
@@ -563,18 +563,18 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         -   PDClient の新しいバージョンで並列インポートが失敗する可能性がある問題を修正 [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
         -   TiDB Lightningの事前チェックで、以前のインポート失敗によって残されたダーティデータを見つけられない問題を修正 [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [モルゴ](https://github.com/morgo)
--   [ジフハスト](https://github.com/jiyfhust)
+-   [morgo](https://github.com/morgo)
+-   [jiyfhust](https://github.com/jiyfhust)
 -   [b41sh](https://github.com/b41sh)
--   [ソースリウ](https://github.com/sourcelliu)
--   [ソンジビン97](https://github.com/songzhibin97)
--   [マミル](https://github.com/mamil)
+-   [sourcelliu](https://github.com/sourcelliu)
+-   [songzhibin97](https://github.com/songzhibin97)
+-   [mamil](https://github.com/mamil)
 -   [Dousir9](https://github.com/Dousir9)
--   [ひひひひひ](https://github.com/hihihuhu)
--   [ミコキシン](https://github.com/mychoxin)
--   [シュニン97](https://github.com/xuning97)
+-   [hihihuhu](https://github.com/hihihuhu)
+-   [mychoxin](https://github.com/mychoxin)
+-   [xuning97](https://github.com/xuning97)
 -   [andreid-db](https://github.com/andreid-db)

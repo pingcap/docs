@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
         -   ログ出力を最適化する[＃189](https://github.com/pingcap/br/pull/189)
 
--   TiDB アンシブル
+-   TiDB Ansible
 
     -   TiFlashデータディレクトリの作成方法を最適化する[＃1242](https://github.com/pingcap/tidb-ansible/pull/1242)
     -   TiFlash [＃1234](https://github.com/pingcap/tidb-ansible/pull/1234)に`Write Amplification`監視項目を追加

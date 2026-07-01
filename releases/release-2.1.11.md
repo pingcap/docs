@@ -42,6 +42,6 @@ TiDB Ansible バージョン: 2.1.11
 -   TiDBBinlog
     -   GC中のデータ削除速度を制限して、 `WritePause` [＃620](https://github.com/pingcap/tidb-binlog/pull/620)によるQPSの低下を回避する
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   Drainerパラメータ[＃760](https://github.com/pingcap/tidb-ansible/pull/760)を追加

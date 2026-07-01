@@ -130,7 +130,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     [ユーザードキュメント](/table-attributes.md) [＃3839](https://github.com/tikv/pd/issues/3839)
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   **TiDB ダッシュボードで最小限の権限を持つユーザーの作成をサポート**
 

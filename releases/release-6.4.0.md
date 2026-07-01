@@ -57,7 +57,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashは保存時の暗号化にSM4アルゴリズムをサポートしています [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu)
 
@@ -464,24 +464,24 @@ TiDBバージョン: 6.4.0-DMR
         -   多数のテーブルをエクスポートする際にDumpling がタイムアウトする可能性がある問題を修正しました [#36549](https://github.com/pingcap/tidb/issues/36549) @[lance6716](https://github.com/lance6716)
         -   整合性ロックが有効になっているが、アップストリームにターゲットテーブルがない場合に報告されるロックエラーを修正 [#38683](https://github.com/pingcap/tidb/issues/38683) @[lance6716](https://github.com/lance6716)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
 -   [645775992](https://github.com/645775992)
--   [アン・DJ](https://github.com/An-DJ)
--   [アンドリューディ](https://github.com/AndrewDi)
--   [エルワドバ](https://github.com/erwadba)
--   [ふざ1989](https://github.com/fuzhe1989)
--   [ゴールドウィンドティング](https://github.com/goldwind-ting)(初投稿者)
+-   [An-DJ](https://github.com/An-DJ)
+-   [AndrewDi](https://github.com/AndrewDi)
+-   [erwadba](https://github.com/erwadba)
+-   [fuzhe1989](https://github.com/fuzhe1989)
+-   [goldwind-ting](https://github.com/goldwind-ting) (初回貢献者)
 -   [h3n4l](https://github.com/h3n4l)
--   [igxlin](https://github.com/igxlin) （初投稿者）
+-   [igxlin](https://github.com/igxlin) (初回貢献者)
 -   [ihcsim](https://github.com/ihcsim)
--   [ジガオルオ](https://github.com/JigaoLuo)
--   [モルゴ](https://github.com/morgo)
--   [ランクシー](https://github.com/Ranxy)
--   [シェンキデバオジ](https://github.com/shenqidebaozi)(初投稿者)
--   [桃峰流](https://github.com/taofengliu)(初投稿者)
+-   [JigaoLuo](https://github.com/JigaoLuo)
+-   [morgo](https://github.com/morgo)
+-   [Ranxy](https://github.com/Ranxy)
+-   [shenqidebaozi](https://github.com/shenqidebaozi) (初回貢献者)
+-   [taofengliu](https://github.com/taofengliu) (初回貢献者)
 -   [TszKitLo40](https://github.com/TszKitLo40)
--   [wxbty](https://github.com/wxbty) （初投稿者）
+-   [wxbty](https://github.com/wxbty) (初回貢献者)
 -   [zgcbj](https://github.com/zgcbj)

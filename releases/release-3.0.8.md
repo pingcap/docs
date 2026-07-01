@@ -103,7 +103,7 @@ TiDB Ansible バージョン: 3.0.8
 -   TiDBBinlog
     -   PumpがコミットされたDDLbinlog[＃853](https://github.com/pingcap/tidb-binlog/pull/853)を受信しないため、binlogが無視される問題を修正しました。
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   簡略化された構成項目[＃1053](https://github.com/pingcap/tidb-ansible/pull/1053)元に戻す
 -   ローリングアップデートを実行する際にTiDBのバージョンをチェックするロジックを最適化します[＃1056](https://github.com/pingcap/tidb-ansible/pull/1056)

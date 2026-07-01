@@ -20,7 +20,7 @@ TiDB バージョン: 7.1.2
 -   TiCDCは、CSVプロトコルにおけるバイナリデータのエンコード方式を制御するための設定項目[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)導入しました。デフォルト値は`'base64'` [＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)です。
 -   TiCDC では、設定項目[`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)導入されています。デフォルトでは空で、メッセージサイズが Kafka トピックの制限を超えると changefeed が失敗します。この設定を`"handle-key-only"`に設定すると、メッセージがサイズ制限を超えた場合、メッセージサイズを縮小するためにハンドルキーのみが送信されます。縮小されたメッセージでも制限を超える場合、changefeed は[＃9680](https://github.com/pingcap/tiflow/issues/9680) @ [3AceShowHand](https://github.com/3AceShowHand)で失敗します。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 

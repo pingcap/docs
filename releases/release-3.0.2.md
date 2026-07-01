@@ -125,7 +125,7 @@ TiDB Lightning
 -   2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`元の値に戻せない問題を修正しました[＃218](https://github.com/pingcap/tidb-lightning/pull/218)
 -   起動時に構成項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃217](https://github.com/pingcap/tidb-lightning/pull/217)
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   ディスクパフォーマンスモニターが秒をミリ秒として扱う単位エラーを修正[＃840](https://github.com/pingcap/tidb-ansible/pull/840)
 -   Spark [＃841](https://github.com/pingcap/tidb-ansible/pull/841)に`log4j`設定ファイルを追加する

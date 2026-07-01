@@ -237,7 +237,7 @@ TiDB バージョン: 7.4.0
 >
 > このセクションでは、v7.3.0から最新バージョン（v7.4.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v7.2.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   v7.4.0 以降、TiDB は MySQL 8.0 の必須機能と互換性があり、 `version()` `8.0.11`で始まるバージョンを返します。
 
@@ -440,23 +440,23 @@ TiDB バージョン: 7.4.0
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
         -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティからの以下の貢献者に感謝いたします。
 
--   [あいでんどう](https://github.com/aidendou)
--   [コーダープレイ](https://github.com/coderplay)
--   [運命](https://github.com/fatelei)
--   [ハイポン](https://github.com/highpon)
--   [ヒヒフフ](https://github.com/hihihuhu) (初回投稿者)
--   [イザベラ0428](https://github.com/isabella0428)
--   [ジフハウス](https://github.com/jiyfhust)
--   [JK1張](https://github.com/JK1Zhang)
--   [ジョーカー53-1](https://github.com/joker53-1) (初回投稿者)
--   [L-メープル](https://github.com/L-maple)
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
--   [舗装](https://github.com/paveyry)
--   [ショーン0915](https://github.com/shawn0915)
--   [テデュ](https://github.com/tedyu)
--   [ヤムチナ](https://github.com/yumchina)
+-   [aidendou](https://github.com/aidendou)
+-   [coderplay](https://github.com/coderplay)
+-   [fatelei](https://github.com/fatelei)
+-   [highpon](https://github.com/highpon)
+-   [hihihuhu](https://github.com/hihihuhu) (初回貢献者)
+-   [isabella0428](https://github.com/isabella0428)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [JK1Zhang](https://github.com/JK1Zhang)
+-   [joker53-1](https://github.com/joker53-1) (初回貢献者)
+-   [L-maple](https://github.com/L-maple)
+-   [mittalrishabh](https://github.com/mittalrishabh)
+-   [paveyry](https://github.com/paveyry)
+-   [shawn0915](https://github.com/shawn0915)
+-   [tedyu](https://github.com/tedyu)
+-   [yumchina](https://github.com/yumchina)
 -   [ZzzhHe](https://github.com/ZzzhHe)

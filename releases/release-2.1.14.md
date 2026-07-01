@@ -49,7 +49,7 @@ TiDBBinlog
 -   Drainer
     -   下流[＃655](https://github.com/pingcap/tidb-binlog/pull/655)の`BIT`列の更新の失敗を修正
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   `ansible`コマンドとその`jmespath`および`jinja2`依存パッケージ[＃807](https://github.com/pingcap/tidb-ansible/pull/807)事前チェック機能を追加します。
 -   Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは 10 GiB）を追加し、使用可能なディスク容量がパラメータ値[＃807](https://github.com/pingcap/tidb-ansible/pull/807)より小さい場合にPumpでのbinlogファイルの書き込みを停止します。
