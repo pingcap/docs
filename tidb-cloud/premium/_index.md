@@ -29,7 +29,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Create an Instance](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
+[Quick Start](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
 [Connect to TiDB](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb/)
 
