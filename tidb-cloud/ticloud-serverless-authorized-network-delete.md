@@ -5,7 +5,7 @@ summary: ticloud serverless authorized-network delete` のリファレンス。
 
 # ticloud serverless authorized-network delete {#ticloud-serverless-authorized-network-delete}
 
-承認済みネットワークを削除します。
+認可済みネットワークを削除します。
 
 ```shell
 ticloud serverless authorized-network delete [flags]
@@ -13,13 +13,13 @@ ticloud serverless authorized-network delete [flags]
 
 ## 例 {#examples}
 
-対話モードで承認済みネットワークを削除します。
+対話モードで認可済みネットワークを削除します。
 
 ```shell
 ticloud serverless authorized-network delete
 ```
 
-非対話型モードで承認済みネットワークを削除します。
+非対話型モードで認可済みネットワークを削除します。
 
 ```shell
 ticloud serverless authorized-network delete -c <cluster-id> --start-ip-address <start-ip-address> --end-ip-address <end-ip-address>
@@ -32,9 +32,9 @@ ticloud serverless authorized-network delete -c <cluster-id> --start-ip-address 
 | フラグ                    | 説明                            | 必須  | 注記                       |
 | ---------------------- | ----------------------------- | --- | ------------------------ |
 | -c, --cluster-id 文字列   | クラスターの ID を指定します。             | はい  | 非対話型モードでのみ動作します。         |
-| --force文字列             | 確認なしで承認済みネットワークを削除します。        | いいえ | 非対話型モードでのみ動作します。         |
-| --start-ip-address 文字列 | 承認されたネットワークの開始 IP アドレスを指定します。 | はい  | 非対話型モードでのみ動作します。         |
-| --end-ip-address 文字列   | 承認されたネットワークの終了 IP アドレスを指定します。 | はい  | 非対話型モードでのみ動作します。         |
+| --force文字列             | 確認なしで認可済みネットワークを削除します。        | いいえ | 非対話型モードでのみ動作します。         |
+| --start-ip-address 文字列 | 認可されたネットワークの開始 IP アドレスを指定します。 | はい  | 非対話型モードでのみ動作します。         |
+| --end-ip-address 文字列   | 認可されたネットワークの終了 IP アドレスを指定します。 | はい  | 非対話型モードでのみ動作します。         |
 | -h, --help             | このコマンドのヘルプ情報を表示します。           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

@@ -45,7 +45,7 @@ TiDB ダッシュボードの現在のセッションを他のユーザーと共
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
 
-2.  **承認コード**をクリックしてサインインに使用します。
+2.  **認可コード**をクリックしてサインインに使用します。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-2-v650.png)
 

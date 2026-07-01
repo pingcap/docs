@@ -210,7 +210,7 @@ SELECT name FROM person;
 SELECT * FROM person where id<5;
 ```
 
-## ユーザーの作成、承認、削除 {#create-authorize-and-delete-a-user}
+## ユーザーの作成、認可、削除 {#create-authorize-and-delete-a-user}
 
 DCLは通常、ユーザーの作成や削除、およびユーザー権限の管理に使用されます。
 

@@ -304,15 +304,15 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロール レコードと、承認テーブル内の関連レコードが削除され、2 つのロールに関連する承認が終了します。
+この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロール レコードと、認可テーブル内の関連レコードが削除され、2 つのロールに関連する承認が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`権限が必要です。
 
-### 承認テーブル {#authorization-table}
+### 認可テーブル {#authorization-table}
 
 4 つのシステム[権限テーブル](/privilege-management.md#privilege-table)に加えて、RBAC システムでは 2 つの新しいシステム権限テーブルが導入されています。
 
--   `mysql.role_edges` : ロールとユーザーの承認関係を記録します。
+-   `mysql.role_edges` : ロールとユーザーの認可関係を記録します。
 -   `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
 
 #### <code>mysql.role_edges</code> {#code-mysql-role-edges-code}

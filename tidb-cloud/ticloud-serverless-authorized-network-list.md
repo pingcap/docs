@@ -5,7 +5,7 @@ summary: ticloud serverless authorized-network list` のリファレンス。
 
 # ticloud serverless authorized-network list {#ticloud-serverless-authorized-network-list}
 
-承認されたネットワークをすべて一覧表示します。
+認可されたネットワークをすべて一覧表示します。
 
 ```shell
 ticloud serverless authorized-network list [flags]
@@ -13,13 +13,13 @@ ticloud serverless authorized-network list [flags]
 
 ## 例 {#examples}
 
-対話モードですべての承認済みネットワークを一覧表示します。
+対話モードですべての認可済みネットワークを一覧表示します。
 
 ```shell
 ticloud serverless authorized-network list
 ```
 
-非対話型モードですべての承認済みネットワークを一覧表示します。
+非対話型モードですべての認可済みネットワークを一覧表示します。
 
 ```shell
 ticloud serverless authorized-network list -c <cluster-id>
