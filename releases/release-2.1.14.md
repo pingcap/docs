@@ -38,7 +38,7 @@ TiDB Ansible バージョン: 2.1.14
 
 ## ツール {#tools}
 
-TiDBBinlog
+TiDB Binlog
 
 -   Reparo
     -   `safe-mode`構成項目を追加し、この項目を有効にした後に重複したデータのインポートをサポートします[＃662](https://github.com/pingcap/tidb-binlog/pull/662)

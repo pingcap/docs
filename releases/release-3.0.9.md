@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 3.0.9
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Drainer [＃862](https://github.com/pingcap/tidb-binlog/pull/862)によって出力されたbinlogプロトコルに一意のキー情報を追加します。
     -   Drainer [＃868](https://github.com/pingcap/tidb-binlog/pull/868)データベース接続に暗号化されたパスワードの使用をサポート
 

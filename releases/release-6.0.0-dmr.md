@@ -549,6 +549,6 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         -   `dumpling --sql $query` [＃30532](https://github.com/pingcap/tidb/issues/30532)実行時に表示される進行状況が正確ではない問題を修正
         -   Amazon S3 が圧縮データのサイズを正しく計算できない問題を修正[＃30534](https://github.com/pingcap/tidb/issues/30534)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   大規模な上流書き込みトランザクションが Kafka [＃1136](https://github.com/pingcap/tidb-binlog/issues/1136)にレプリケートされるときに TiDB Binlog がスキップされる可能性がある問題を修正しました

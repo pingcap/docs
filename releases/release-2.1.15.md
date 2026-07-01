@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 2.1.15
 
 ## ツール {#tools}
 
-TiDBBinlog
+TiDB Binlog
 
 -   Pump GC戦略を最適化し、未使用のbinlogをクリーンアップできないという制限を削除して、リソースが長時間占有されないようにします[＃663](https://github.com/pingcap/tidb-binlog/pull/663)
 

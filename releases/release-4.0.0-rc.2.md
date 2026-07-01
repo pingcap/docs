@@ -179,7 +179,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   ダウンストリームがKafka [＃962](https://github.com/pingcap/tidb-binlog/pull/962)場合に`mediumint`型のデータが処理されない問題を修正
         -   DDL内のデータベース名がキーワード[＃961](https://github.com/pingcap/tidb-binlog/pull/961)場合にreparoがDDL文の解析に失敗する問題を修正しました

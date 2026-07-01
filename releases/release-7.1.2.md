@@ -215,6 +215,6 @@ TiDB バージョン: 7.1.2
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
         -   CSVデータ[＃43284](https://github.com/pingcap/tidb/issues/43284) @ [lyzx2001](https://github.com/lyzx2001)をインポートする際にルートがpanicになる可能性がある問題を修正
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   1 GB [＃28659](https://github.com/pingcap/tidb/issues/28659) @ [jackysp](https://github.com/jackysp)を超えるトランザクションを転送するときにDrainer が終了する問題を修正しました

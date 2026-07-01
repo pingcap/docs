@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 2.1.17
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御[＃746](https://github.com/pingcap/tidb-binlog/pull/746)
     -   Drainerのメモリ使用量を最適化して並列実行効率を向上させる[＃735](https://github.com/pingcap/tidb-binlog/pull/735)
     -   Pumpが正常に終了できないことがあるバグを修正[＃739](https://github.com/pingcap/tidb-binlog/pull/739)

@@ -109,7 +109,7 @@ TiDBバージョン：5.1.5
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   `compressor`が`zip`に設定されている場合、 Drainer がPumpにリクエストを正しく送信できない問題を修正します。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 

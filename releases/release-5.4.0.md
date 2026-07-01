@@ -428,6 +428,6 @@ TiDB バージョン: 5.4.0
         -   TiDB Lightningの再起動時に一部のチェックがスキップされる問題を修正しました [#30772](https://github.com/pingcap/tidb/issues/30772)
         -   S3パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正しました [#30674](https://github.com/pingcap/tidb/pull/30674)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   `CREATE PLACEMENT POLICY`ステートメントと互換性がないためDrainer が失敗する問題を修正します [#1118](https://github.com/pingcap/tidb-binlog/issues/1118)

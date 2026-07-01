@@ -115,7 +115,7 @@ TiDB Ansible バージョン: 3.0.2
 
 ## ツール {#tools}
 
-TiDBBinlog
+TiDB Binlog
 
 -   起動時に構成項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[＃687](https://github.com/pingcap/tidb-binlog/pull/687)
 -   Drainer [＃684](https://github.com/pingcap/tidb-binlog/pull/684)で使用される特定のロジックを指定するには、 Drainerに`node-id`構成を追加します。

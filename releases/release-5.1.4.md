@@ -169,7 +169,7 @@ TiDB バージョン: 5.1.4
 
         -   復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正[＃30425](https://github.com/pingcap/tidb/issues/30425) [＃31034](https://github.com/pingcap/tidb/issues/31034)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   CSVファイルのサイズが約256MBで`strict-format`が`true` [＃27763](https://github.com/pingcap/tidb/issues/27763)場合、DBaaSのCSVインポートがInvalidRangeで失敗する問題を修正しました。
 

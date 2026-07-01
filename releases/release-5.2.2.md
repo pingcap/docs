@@ -114,6 +114,6 @@ TiDB バージョン: 5.2.2
         -   一部のタイプの列を Open Protocol 形式[＃2758](https://github.com/pingcap/tiflow/issues/2758)にエンコードするときに発生する可能性のあるpanic問題を修正しました。
         -   一部のタイプの列をAvro形式[＃2648](https://github.com/pingcap/tiflow/issues/2648)にエンコードする際に発生する可能性のあるpanic問題を修正しました
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   ほとんどのテーブルがフィルタリングされると、特定の負荷[＃1075](https://github.com/pingcap/tidb-binlog/pull/1075)でチェックポイントを更新できない問題を修正しました。

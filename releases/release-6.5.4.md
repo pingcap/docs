@@ -196,6 +196,6 @@ TiDB バージョン: 6.5.4
 
         -   Amazon S3 [＃45353](https://github.com/pingcap/tidb/issues/45353) @ [lichunzhu](https://github.com/lichunzhu)にエクスポートするときに、未処理のファイルライターの終了エラーによりエクスポートされたファイルが失われる問題を修正しました
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   etcdクライアントが初期化中に最新のノード情報を自動的に同期しない問題を修正[＃1236](https://github.com/pingcap/tidb-binlog/issues/1236) @ [lichunzhu](https://github.com/lichunzhu)

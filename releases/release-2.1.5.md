@@ -50,5 +50,5 @@ summary: TiDB 2.1.5とTiDB Ansible 2.1.5は、2019年2月28日にリリースさ
 
 -   稲妻
     -   クラスター[＃4223](https://github.com/tikv/tikv/pull/4223)に Tombstone ストアが存在する場合、エラーを報告したり終了したりしないでください。
--   TiDBBinlog
+-   TiDB Binlog
     -   DDLbinlogレプリケーションプランを更新して、DDL イベントレプリケーション[＃9304](https://github.com/pingcap/tidb/issues/9304)の正確性を保証します。

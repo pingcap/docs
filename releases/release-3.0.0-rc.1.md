@@ -109,7 +109,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   unsigned int 型の主キー列のbinlogデータが負の[＃573](https://github.com/pingcap/tidb-binlog/pull/573)場合にレプリケーションが中止される問題を修正しました。
     -   ダウンストリームが`pb`場合は圧縮オプションを提供しません。ダウンストリーム名を`pb`から`file`に変更します[＃559](https://github.com/pingcap/tidb-binlog/pull/559)
     -   Pumpにローカルストレージ[＃509](https://github.com/pingcap/tidb-binlog/pull/509)への非同期フラッシュを許可する`storage.sync-log`設定項目を追加する

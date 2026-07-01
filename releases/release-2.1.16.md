@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 2.1.16
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   トランザクション[＃697](https://github.com/pingcap/tidb-binlog/pull/697)内の一部のステートメントの実行をスキップするために、 Drainerに`ignore-txn-commit-ts`構成項目を追加します。
     -   起動時に構成項目のチェックを追加し、PumpとDrainerの実行を停止し、無効な構成項目[＃708](https://github.com/pingcap/tidb-binlog/pull/708)に該当する場合にエラーメッセージを返します。
     -   DrainerのノードID [＃706](https://github.com/pingcap/tidb-binlog/pull/706)を指定するためにDrainerに`node-id`設定を追加します。

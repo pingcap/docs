@@ -64,7 +64,7 @@ TiDB Ansible バージョン: 3.0.3
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Drainerの起動時にOOMが発生する可能性を減らすため、 Drainerのデフォルト値`defaultBinlogItemCount`を65536から512に変更しました[＃721](https://github.com/pingcap/tidb-binlog/pull/721)
     -   Pumpサーバーのオフラインロジックを最適化して、潜在的なオフライン輻輳を回避します[＃701](https://github.com/pingcap/tidb-binlog/pull/701)
 -   TiDB Lightning:

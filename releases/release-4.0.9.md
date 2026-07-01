@@ -115,7 +115,7 @@ TiDB バージョン: 4.0.9
         -   範囲プロパティを使用して、Local-backend [＃422](https://github.com/pingcap/tidb-lightning/pull/422)で範囲分割をより正確にします。
         -   `tikv-importer.region-split-size` `mydumper.batch-size`人間が[＃471](https://github.com/pingcap/tidb-lightning/pull/471)形式（「2.5 GiB」など） `mydumper.read-block-size`サポートする`mydumper.max-region-size`
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   上流PDがダウンしているか、下流へのDDLまたはDML文の適用に失敗した場合は、ゼロ以外のコードでDrainerプロセスを終了します[＃1012](https://github.com/pingcap/tidb-binlog/pull/1012)
 

@@ -52,7 +52,7 @@ TiDB Ansible バージョン: 2.1.10
 
 -   TiDB Lightning
     -   TiDB Lightningが`importer` [＃176](https://github.com/pingcap/tidb-lightning/pull/176)へのデータ送信に失敗した場合の再試行機能を追加
--   TiDBBinlog
+-   TiDB Binlog
     -   トラブルシューティングを容易にするためにPumpstorageログを最適化します[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
 
 ## TiDB Ansible {#tidb-ansible}
