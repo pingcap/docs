@@ -41,11 +41,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Reliability
 
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
+* Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) <!--2405--> <!--tw:lilin90-->
 
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
+    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md#token-limit) consumption by one user causes delays in responding to requests from other users.
 
-    For more information, see [Documentation](link).
+    For more information, see [documentation](/system-variables.md#max_user_connections-new-in-v857).
 
 ### Availability
 
@@ -113,7 +113,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [Documentation](link).
 
-* DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929) <!--2427--> <!-- https://github.com/pingcap/tiflow/pull/12707 --> <!--tw@lilin90-->
+* DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929) <!--2427--> <!-- https://github.com/pingcap/tiflow/pull/12707 --> <!--tw:lilin90-->
 
     Starting from v8.5.7, DM supports foreign key causality for static one-to-one schema/table routing when `foreign_key_checks=1` and `syncer.worker-count > 1`.
 
@@ -124,8 +124,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 ## Compatibility changes
 
 ### Behavior changes
-TiKV
-    - TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
+
+*  TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
+
 ### MySQL compatibility
 
 ### System variables
@@ -148,9 +149,11 @@ TiKV
 
 ### Other changes
 
+* Upgrade the Go compiler version of TiDB from go1.25.8 to go1.25.10, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure smooth compilation. <!--2468--> <!--tw:lilin90-->
+
 ## Removed features
 
-* Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273--> <!--tw@lilin90-->
+* Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273--> <!--tw:lilin90-->
 
     To import data with TiDB Lightning, use the [TiDB Lightning command-line tools](/tidb-lightning/tidb-lightning-overview.md): [`tidb-lightning`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
 
@@ -166,7 +169,6 @@ TiKV
     - Improve compatibility of partial indexes with BR so that BR preserves their `WHERE` predicates when repairing ingest indexes during log restore [#62664](https://github.com/pingcap/tidb/issues/62664) @[Leavrth](https://github.com/Leavrth) <!-- component: sql-infra -->
     - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate) <!-- component: planner --> <!--2262-->
     - Improve slow query observability by logging client connection attributes in the slow query log and exposing them in `information_schema.slow_query` and `information_schema.cluster_slow_query`; `performance_schema_session_connect_attrs_size` now controls attribute truncation, and truncated bytes are recorded in `_truncated` [#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba) <!-- component: observability --> <!--2374-->
-    - Support the `max_user_connections` system variable and the `MAX_USER_CONNECTIONS` option in `CREATE USER` and `ALTER USER` to limit the number of concurrent connections for a user [#59203](https://github.com/pingcap/tidb/issues/59203) @[bb7133](https://github.com/bb7133) <!-- component: sql-infra --> <!--2405-->
     - Add the `tidb_enable_strict_not_null_check` system variable to control whether TiDB enforces strict `NOT NULL` checks for single-row `INSERT` statements, helping reduce upgrade risk for workloads that depend on the previous non-strict behavior [#68108](https://github.com/pingcap/tidb/issues/68108) @[xhebox](https://github.com/xhebox) <!-- component: sql-infra --> <!--2459-->
     - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (Although it is listed under the PD component label, in fact it only involves changes on the TiDB side )--> <!--2385-->
     - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (this is only a change on the TiDB side,) --> <!--2463-->
