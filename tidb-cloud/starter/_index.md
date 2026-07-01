@@ -21,21 +21,19 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=starter)
 
-[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python/?plan=starter)
+[Try Out TiDB + AI](https://docs.pingcap.com/ai/quickstart-via-python/)
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart/?plan=starter)
-
-[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=starter)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview/?plan=starter)
+[Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud/?plan=starter)
+[Create an Instance](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot/?plan=starter)
+[Connect to TiDB](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
