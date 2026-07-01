@@ -465,7 +465,7 @@ mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
 3 rows in set (0.00 sec)
 ```
 
-If the query predicates do not match the partial index definition, TiDB does not select the index, even with a hint:
+If a query predicate does not match the partial index definition, TiDB does not select the partial index, even with a hint. For example, the following statement cannot use the partial index `idx_high_score_users`, because the query predicate `score > 100` does not match the partial index definition `score > 1000`:
 
 ```sql
 mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
@@ -488,8 +488,8 @@ Partial indexes are particularly useful in the following scenarios:
 
 ### Limitations
 
-- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL` and `IN` predicates with constant values.
-- The column and constant value must have the same type.
+- The `WHERE` clause in partial indexes supports basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
+- The column and constant values must be of the same data type.
 - The predicate can only reference columns from the same table.
 - Partial indexes cannot be used on expression indexes.
 
