@@ -113,13 +113,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [Documentation](link).
 
-* DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929) <!--2427--> <!-- https://github.com/pingcap/tiflow/pull/12707 -->
+* DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929) <!--2427--> <!-- https://github.com/pingcap/tiflow/pull/12707 --> <!--tw@lilin90-->
 
-    Starting from v8.5.7, DM supports foreign key causality for static one-to-one schema/table routing when foreign_key_checks=1 and syncer.worker-count > 1.
+    Starting from v8.5.7, DM supports foreign key causality for static one-to-one schema/table routing when `foreign_key_checks=1` and `syncer.worker-count > 1`.
 
-    Downstream schemas and foreign key definitions must be pre-created before task start. This support does not include many-to-one or shard-merge routing, dynamic foreign key DDL during replication, safe mode, or PK/UK-changing updates.
+    Downstream schemas and foreign key definitions must be pre-created before the task starts. This support does not include many-to-one or shard-merge routing, dynamic foreign key DDL during replication, `compact` or `multiple-rows` DML boundary options, or safe-mode updates that modify primary keys or unique keys. When foreign key causality is enabled, hot configuration updates that change `worker-count`, `case-sensitive`, route rules, block-allow-list rules, binlog filter rules, or `foreign_key_checks` are rejected. To change these settings, stop and restart the task with the new configuration.
 
-    For more information, see [Documentation](link).
+    For more information, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
 
 ## Compatibility changes
 
@@ -152,7 +152,7 @@ TiKV
 
 * Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273-->
 
-    To import data with TiDB Lightning, use the [TiDB Lightning command-line tools]((/tidb-lightning/tidb-lightning-overview.md)): [`tidb-lightning`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for checkpoint and troubleshooting operations.
+    To import data with TiDB Lightning, use the [TiDB Lightning command-line tools](/tidb-lightning/tidb-lightning-overview.md): [`tidb-lightning`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
 
     For new data import workloads, you can also use the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement.
 
