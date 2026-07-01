@@ -98,13 +98,21 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 ### Row-based storage
 
-Standard row-based storage stores data in **TiKV**. You can set the table's **Storage Class** to `Standard` or leave it unset (`NULL`).
+Standard row-based storage stores data in **TiKV**. You can set the table's **Storage Class** to `Standard` using the following SQL statement or leave it unset (`NULL`).
+
+```sql
+ALTER TABLE t1 STORAGE_CLASS='STANDARD';
+```
 
 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
 ### Row-based storage with IA
 
-Row-based storage with Infrequent Access (IA) stores data in **remote object storage**. You can set the table's **Storage Class** to `IA`.
+Row-based storage with Infrequent Access (IA) stores data in **remote object storage**. You can set the table's **Storage Class** to `IA` using the following SQL statement:
+
+```sql
+ALTER TABLE t1 STORAGE_CLASS='IA';
+```
 
 > **Warning:**
 >
