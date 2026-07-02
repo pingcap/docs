@@ -7,11 +7,11 @@ summary: Learn the syntax and current limitations of LATERAL derived tables in T
 
 A **lateral derived table** is a subquery in the `FROM` clause that can reference columns from tables that appear earlier in the same `FROM` clause. Compared with a standard derived table, whose subquery cannot reference columns from other tables in the same `FROM` clause, a lateral derived table is more flexible.
 
-Starting from v8.5.7 and v9.0.0, TiDB supports parsing the `LATERAL` syntax for derived tables, following the MySQL 8.0 syntax ([WL#8652](https://dev.mysql.com/worklog/task/?id=8652)).
+Starting from v8.5.7 and v9.0.0, TiDB supports parsing the `LATERAL` syntax for derived tables, which is compatible with the MySQL 8.0 syntax ([WL#8652](https://dev.mysql.com/worklog/task/?id=8652)).
 
 > **Note:**
 >
-> Currently, TiDB only supports parsing the `LATERAL` derived table syntax, but does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+> Currently, TiDB only supports parsing the `LATERAL` derived table syntax and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
 ## Syntax
 
@@ -44,7 +44,7 @@ LEFT JOIN LATERAL (SELECT t2.val FROM t2 WHERE t2.id = t1.id LIMIT 1) AS dt(val)
 ON TRUE;
 ```
 
-In this example, the `LATERAL` derived table is used as the right table of the `LEFT JOIN` and can reference the column `t1.id` from the left table `t1`. The derived column list `(val)` renames the column returned by the subquery to `val`.
+In this example, the `LATERAL` derived table is used as the right table of the `LEFT JOIN` and can reference the column `t1.id` from the left table `t1`. The derived column list `(val)` names the column returned by the subquery to `val`.
 
 ## Comparison with standard derived tables
 
