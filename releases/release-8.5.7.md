@@ -67,11 +67,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Compatibility changes
 
-For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.7. Most changes in v8.5.7 are safe for routine upgrades, but this release also includes several MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
+For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.7. Most changes in v8.5.7 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
 
 ### Behavior changes
 
 * TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
+* Starting from v8.5.7, TiDB enables [optimizer fix control `52869`](https://docs.pingcap.com/tidb/v8.5/optimizer-fix-controls#52869-new-in-v810) by default. This change allows the optimizer to consider `IndexMerge` automatically when alternative indexes exist, which can change query plans in some cases. [#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
 
 ### MySQL compatibility
 
@@ -83,19 +84,24 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| [`tidb_enable_telemetry`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_telemetry-new-in-v402) | Deprecated | Starting from v8.5.7, TiDB deprecates this system variable and the telemetry feature. This variable is retained only for compatibility and is no longer recommended. |
+| [`tidb_auto_analyze_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840) | Modified | Changes the default value from `1` to `3` to accelerate statistics collection tasks and improve auto-analyze efficiency. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade. |
+| [`tidb_auto_build_stats_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_build_stats_concurrency-new-in-v650) | Modified | Changes the default value from `1` to `2` to improve the default performance and consistency of auto `ANALYZE`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade. |
+| [`tidb_sysproc_scan_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_sysproc_scan_concurrency-new-in-v650) | Modified | Changes the default value from `1` to `4` to improve the default performance and consistency of auto `ANALYZE`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade. |
+| [`max_user_connections`](https://docs.pingcap.com/tidb/v8.5/system-variables#max_user_connections-new-in-v857) | Newly added | Controls the maximum number of connections that a user can establish to a TiDB server instance. The default value is `0`, which means there is no limit. If the value of this variable exceeds `max_connections`, TiDB uses `max_connections` as the effective limit. |
+| [`performance_schema_session_connect_attrs_size`](https://docs.pingcap.com/tidb/v8.5/system-variables#performance_schema_session_connect_attrs_size-new-in-v857) | Newly added | Controls the maximum total size of connection attributes for each session. The default value is `4096` bytes. When the size exceeds this limit, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes. |
+| [`tidb_enable_batch_query_region`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_batch_query_region-new-in-v857) | Newly added | Controls whether TiDB batches point queries for Region information to PD through the `QueryRegion` gRPC stream. The default value is `OFF`. When enabled, this feature can reduce the number of requests sent to PD and lower the CPU overhead of the PD leader in some scenarios. |
+| [`tidb_enable_strict_not_null_check`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_strict_not_null_check-new-in-v857) | Newly added | Controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column. The default value is `ON`. If your application depends on the earlier permissive behavior of writing implicit default values, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks. |
 
 ### Configuration parameters
 
 | Configuration file or component | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiKV | `storage.max-ts.action-on-invalid-update` | Newly added | Controls TiKV behavior when it confirms an invalid `max_ts` update. Valid values are `error`, `log`, and `panic`. The default value is `error`, which rejects the invalid update without panicking TiKV. |
-|  |  |  |  |
-|  |  |  |  |
-
-### System tables
+| TiDB | [`enable-telemetry`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file.md#enable-telemetry-new-in-v402) | Deprecated | Starting from v8.5.7, TiDB deprecates this configuration item and the telemetry feature. This item is retained only for compatibility and is no longer recommended. |
+| TiKV | [`backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#backupgcp-v2-enable-new-in-v857) | Newly added | Controls whether TiKV uses the `gcp_v2` external storage backend for GCS full backup and restore. The default value is `true`. When enabled, TiKV uses `gcp_v2`; when disabled, TiKV uses the legacy GCS implementation. |
+| TiKV | [`log-backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#log-backupgcp-v2-enable-new-in-v857) | Newly added | Controls whether TiKV uses the `gcp_v2` external storage backend for GCS log backup. The default value is `true`. When enabled, TiKV uses `gcp_v2`; when disabled, TiKV uses the legacy GCS implementation. |
+| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#resource-meteringenable-network-io-collection-new-in-v857) | Newly added | Controls whether TiKV collects network traffic and logical I/O information for Top SQL in addition to CPU data. The default value is `false`. |
+| TiKV | [`storage.max-ts.action-on-invalid-update`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#storagemax-tsaction-on-invalid-update-new-in-v857) | Newly added | Controls TiKV behavior when it confirms an invalid `max_ts` update. Valid values are `error`, `log`, and `panic`. The default value is `error`, which rejects the invalid update without panicking TiKV. |
 
 ### Other changes
 
