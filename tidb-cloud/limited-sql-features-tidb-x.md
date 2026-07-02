@@ -1,9 +1,9 @@
 ---
-title: TiDB X 实例上的受限 SQL 功能
-summary: 了解 TiDB X 实例上的受限 SQL 功能。
+title: TiDB X 实例上的 SQL 功能限制
+summary: 了解 TiDB X 实例上的 SQL 功能限制。
 ---
 
-# TiDB X 实例上的受限 SQL 功能
+# TiDB X 实例上的 SQL 功能限制
 
 TiDB X 实例是一种面向服务的 TiDB Cloud 产品，基于 [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}、Essential 或 Premium 实例。
 
@@ -11,7 +11,7 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 
 > **Note:**
 >
-> 本文档仅适用于 {{{ .starter }}}、Essential 和 Premium。对于 TiDB Cloud Dedicated，请参见 [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md)。
+> 本文档仅适用于 {{{ .starter }}}、Essential 和 Premium。对于 TiDB Cloud Dedicated，请参见 [TiDB Cloud Dedicated 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)。
 
 ## 语句 {#statements}
 

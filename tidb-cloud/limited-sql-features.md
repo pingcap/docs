@@ -1,15 +1,15 @@
 ---
-title: TiDB Cloud Dedicated 上受限的 SQL 功能
-summary: 了解 TiDB Cloud Dedicated 上受限的 SQL 功能。
+title: TiDB Cloud Dedicated 上的 SQL 功能限制
+summary: 了解 TiDB Cloud Dedicated 上的 SQL 功能限制。
 ---
 
-# TiDB Cloud Dedicated 上受限的 SQL 功能
+# TiDB Cloud Dedicated 上的 SQL 功能限制
 
 TiDB Cloud Dedicated 支持几乎所有 TiDB 支持的工作负载，但 TiDB 自建版与 TiDB Cloud Dedicated 之间存在一些功能差异。本文档描述了 TiDB Cloud Dedicated 上 SQL 功能的限制。我们正在不断弥补 TiDB 自建版与 TiDB Cloud Dedicated 之间的功能差距。如果你需要这些尚未支持的功能或能力，请[联系我们](/tidb-cloud/tidb-cloud-support.md)提交功能请求。
 
 > **注意：**
 >
-> 本文档仅适用于 TiDB Cloud Dedicated。对于 TiDB Cloud Starter、Essential 和 Premium，请参见 [TiDB X 实例上受限的 SQL 功能](/tidb-cloud/limited-sql-features-tidb-x.md)。
+> 本文档仅适用于 TiDB Cloud Dedicated。对于 TiDB Cloud Starter、Essential 和 Premium，请参见 [TiDB X 实例上的 SQL 功能限制](/tidb-cloud/limited-sql-features-tidb-x.md)。
 
 ## 语句
 
