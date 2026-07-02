@@ -41,7 +41,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `SET RESOURCE GROUP` | サポートされていません [^2] | サポートされていません [^2] |
 | `SHOW CREATE RESOURCE GROUP` | サポートされていません [^2] | サポートされていません [^2] |
 
-### Others {#others}
+### その他 {#others}
 
 | ステートメント | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
