@@ -13,21 +13,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Features
 
-### Scalability
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### Performance
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 * Support CPU-aware Hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382-->
 
@@ -47,18 +33,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#max_user_connections-new-in-v857).
 
-### Availability
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### SQL
 
 * Support partial indexes to reduce index storage and DML maintenance overhead [#62444](https://github.com/pingcap/tidb/issues/62444) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!--21903--> <!--2270-->
-    
+
     Starting from v8.5.7, TiDB supports partial indexes, which index only rows that satisfy a predicate defined in the index `WHERE` clause. You can create a partial index using `CREATE INDEX ... WHERE ...`, `ALTER TABLE ... ADD INDEX ... WHERE ...`, or an index definition in `CREATE TABLE`.
 
     Partial indexes are useful when you frequently query a selective subset of rows or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
@@ -66,20 +44,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
     To use partial indexes effectively, define the predicate to match the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index/#partial-indexes).
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
-### DB operations
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 ### Observability
 
@@ -91,27 +55,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
 
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
-### Security
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
-
 ### Data migration
-
-* Placeholder for feature summary [#issue-number](issue-link) @[pr-author-github-id](id-link) **tw@xxx** <!--1234-->
-
-    Provide a concise overview of what the feature is, the value it offers to users, and include a brief sentence on how to use it effectively. If there are any particularly important aspects of this feature, be sure to mention them as well.
-
-    For more information, see [Documentation](link).
 
 * DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929) <!--2427--> <!-- https://github.com/pingcap/tiflow/pull/12707 --> <!--tw:lilin90-->
 
@@ -123,13 +67,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ## Compatibility changes
 
+For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.7. Most changes in v8.5.7 are safe for routine upgrades, but this release also includes several MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
+
 ### Behavior changes
 
-*  TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
+* TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
 
 ### MySQL compatibility
 
-* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432--> 
+* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432-->
 
     Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](/lateral-derived-tables.md) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
