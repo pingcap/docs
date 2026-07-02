@@ -6,7 +6,7 @@ hide_commit: true
 summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的强大能力带入你的云端。它提供丰富的指南、示例和参考资料，帮助你学习、试用、开发、运维、迁移、监控、调优、安全管理、计费、集成和查阅。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的所有强大特性无缝带入你的云端。在这里，你可以找到使用 TiDB Cloud 所需的各类指南、示例和参考资料，助你高效上手、开发与运维。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Dedicated" subTitle="TiDB Cloud Dedicated 专为关键业务而设计，提供跨多个可用区的高可用、水平扩展以及完整的 HTAP 能力。">
 
 <LearningPath label="学习" icon="cloud1">
 
@@ -22,7 +22,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-quickstart)
 
-[试用 TiDB + AI](https://docs.pingcap.com/zh/tidbcloud/vector-search-get-started-using-python)
+[试用 TiDB + AI](https://docs.pingcap.com/zh/ai/quickstart-via-python/)
 
 [试用 HTAP](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-htap-quickstart)
 
@@ -32,11 +32,11 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 <LearningPath label="开发" icon="doc8">
 
-[开发者指南概览](https://docs.pingcap.com/zh/tidbcloud/dev-guide-overview)
+[开发者指南概览](https://docs.pingcap.com/zh/developer/)
 
-[快速开始](https://docs.pingcap.com/zh/tidbcloud/dev-guide-build-cluster-in-cloud)
+[快速开始](https://docs.pingcap.com/zh/developer/dev-guide-build-cluster-in-cloud/)
 
-[示例应用](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-spring-boot)
+[连接到 TiDB](https://docs.pingcap.com/zh/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
@@ -64,7 +64,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [导入示例数据](https://docs.pingcap.com/zh/tidbcloud/import-sample-data)
 
-[从 MySQL 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-data-into-tidb)
+[从 MySQL 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-mysql-using-data-migration/)
 
 [从 Amazon RDS for Oracle 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-oracle-using-aws-dms)
 
