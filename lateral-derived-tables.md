@@ -11,7 +11,7 @@ TiDB recognizes the `LATERAL` syntax for derived tables, following the MySQL 8.0
 
 > **Note:**
 >
-> Currently, TiDB supports parsing the `LATERAL` derived table syntax, but does not support executing it. If you attempt to execute such a query, TiDB returns an error. You can track the progress for full execution support in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+> Currently, TiDB supports parsing the `LATERAL` derived table syntax, but does not support executing queries that use it. If you attempt to execute such a query, TiDB returns an error. You can track the progress toward full execution support in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
 ## Syntax
 
@@ -23,7 +23,7 @@ SELECT ... FROM table_ref [LEFT] JOIN LATERAL (subquery) [AS] alias [(col_list)]
 - The `LATERAL` keyword must precede the derived table subquery.
 - A table alias is required after the closing parenthesis of the subquery.
 - The `AS` keyword before the alias is optional.
-- An optional derived column list can follow the alias: `LATERAL (...) AS dt(col1, col2)`.
+- An optional derived column list can follow the alias, for example, `LATERAL (...) AS dt(col1, col2)`.
 
 ## Examples
 
