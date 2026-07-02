@@ -93,7 +93,7 @@ Adjust the following system variables related to Fast Online DDL:
 
 For [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks executed by the DXF, TiDB collects a TiKV capacity snapshot before submitting the distributed task, predicts the TiKV index size based on block sampling, table statistics, and the replica count, and then checks whether TiKV has enough remaining disk space for the task. This precheck applies to both local sort and Global Sort execution paths.
 
-TiDB considers TiKV disk space insufficient if either of the following conditions is met:
+TiDB considers TiKV disk space insufficient in either of the following cases:
 
 - After subtracting the predicted index size, the remaining TiKV cluster capacity is less than 20% of the total TiKV cluster capacity.
 - After subtracting the per-store predicted index size, the remaining capacity of any TiKV store is less than 15% of that store's total capacity.
@@ -104,7 +104,7 @@ By default, [`enforce_disk_space_precheck_before_add_index`](/system-variables.m
 SET GLOBAL enforce_disk_space_precheck_before_add_index = ON;
 ```
 
-When this variable is `ON`, TiDB rejects the DDL job only if the prediction uses non-pseudo table statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. If TiDB cannot collect the TiKV capacity snapshot or complete the prediction within 5 seconds, TiDB logs a warning, skips the precheck, and continues to submit the DDL job.
+When this variable is `ON`, TiDB rejects the DDL job only if the prediction uses non-pseudo statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. If TiDB cannot collect the TiKV capacity snapshot or complete the prediction within 5 seconds, TiDB logs a warning, skips the precheck, and submits the DDL job.
 
 To observe the predicted and actual TiKV storage usage of a DXF `ADD INDEX` task, check the TiDB logs. TiDB logs prediction fields such as `block_sample_predicted_tikv_index_all_replica_bytes`, `block_sample_predicted_tikv_index_single_replica_bytes`, and `block_sample_mvcc_overhead_total_bytes` at task submission time. After the task succeeds, TiDB also logs fields such as `logical_index_kv_bytes`, `ingested_sst_bytes`, `ingested_sst_bytes_source`, and `ingested_sst_bytes_reliable`.
 
