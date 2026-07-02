@@ -58,7 +58,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 3.  **[データフローのプライベート リンク接続]**領域で、 **[プライベート リンク接続の作成] を**クリックして、エンドポイント共有モードでプライベートエンドポイントを作成します。このモデルでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-    > **Note:**
+    > **注記：**
     >
     > TiDB Cloud Essential インスタンスが 2026 年 6 月 30 日以降に作成され、**[データフローのプライベート リンク接続]**領域を利用できない場合は、代わりに **[AWS Private Endpoint for External Services]** 領域で **Create Private Endpoint for External Services** をクリックして、エンドポイント専用モードでプライベートリンク接続を作成できます。エンドポイント専用モデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用します。このモデルでは、接続時に [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) を含める必要がありません。
 
@@ -105,7 +105,7 @@ Amazon MSK プロビジョニングプライベートリンク接続を作成す
 
 3.  **[データフローのプライベート リンク接続]**領域で、 **[プライベート リンク接続の作成] を**クリックして、エンドポイント共有モードでプライベートエンドポイントを作成します。このモデルでは、同じ AWS Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-    > **Note:**
+    > **注記：**
     >
     > TiDB Cloud Essential インスタンスが 2026 年 6 月 30 日以降に作成され、**[データフローのプライベート リンク接続]**領域を利用できない場合は、代わりに **[Amazon MSK Provisioned Private Endpoint for External Services]** 領域で **Create Private Endpoint for External Services** をクリックして、エンドポイント専用モードでプライベートリンク接続を作成できます。エンドポイント専用モデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用します。このモデルでは、接続時に [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) を含める必要がありません。
 
@@ -146,7 +146,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 3.  **[データフローのプライベート リンク接続]**領域で、 **[プライベート リンク接続の作成] を**クリックして、エンドポイント共有モードでプライベートエンドポイントを作成します。このモデルでは、同じ Alibaba Cloud Region 内の複数の {{{ .essential }}} インスタンスで 1 つのプライベートエンドポイントを共有できます。
 
-    > **Note:**
+    > **注記：**
     >
     > TiDB Cloud Essential インスタンスが 2026 年 6 月 30 日以降に作成され、**[データフローのプライベート リンク接続]**領域を利用できない場合は、代わりに **[Alibaba Cloud Private Endpoint for External Services]** 領域で **Create Private Endpoint for External Services** をクリックして、エンドポイント専用モードでプライベートリンク接続を作成できます。エンドポイント専用モデルでは、各 {{{ .essential }}} インスタンスが独自のスタンドアロンプライベートエンドポイントを使用します。このモデルでは、接続時に [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) を含める必要がありません。
 

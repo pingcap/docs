@@ -9,7 +9,7 @@ TiDB X インスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに対応していますが、TiDB Self-Managed と TiDB Cloud の間には一部機能差があります。このドキュメントでは、TiDB Cloud Starter、Essential、Premium における SQL 機能の制限事項について説明します。TiDB Self-Managed と TiDB Cloud の機能差は継続的に解消されています。これらの不足している機能や機能性が必要な場合は、機能リクエストとして [contact us](/tidb-cloud/tidb-cloud-support.md) してください。
 
-> **Note:**
+> **注記：**
 >
 > このドキュメントは {{{ .starter }}}、Essential、Premium にのみ適用されます。TiDB Cloud Dedicated については、[Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md) を参照してください。
 
@@ -89,15 +89,15 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `PLAN REPLAYER` | サポートされています | サポートされていますが、異なるファイルダウンロード方法を使用します [^11] |
 | `time_to_live` | サポートされています | サポートされていません |
 
-## Functions and operators {#functions-and-operators}
+## 関数と演算子 {#functions-and-operators}
 
-| Function and operator | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| 関数と演算子 | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | 制限はありません | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 関数は、最大 300 秒のスリープ時間をサポートします。 |
 
-## System tables {#system-tables}
+## システムテーブル {#system-tables}
 
-| Database | Table | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| データベース | テーブル | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `metrics_schema` | すべてのデータベース | サポートされていません | サポートされていません |
 | `information_schema` | `ATTRIBUTES` | サポートされています | サポートされていません [^1] |
@@ -147,9 +147,9 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `mysql` | `opt_rule_blacklist` | サポートされていません [^4] | サポートされていません [^4] |
 | `mysql` | `tidb` | サポートされていません [^4] | サポートされていません [^4] |
 
-## System variables {#system-variables}
+## システム変数 {#system-variables}
 
-| Variable | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| 変数 | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `hostname` | 値は非表示です | 値は非表示です |
 | `datadir` | 値は非表示です | サポートされていません [^1] |
