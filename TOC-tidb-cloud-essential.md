@@ -172,6 +172,7 @@
   - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [Billing from Cloud Provider Marketplace](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+  - [Billing for Changefeed](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [Manage Budgets](/tidb-cloud/tidb-cloud-budget.md)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
