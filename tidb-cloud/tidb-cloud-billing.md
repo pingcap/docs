@@ -100,10 +100,6 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 TiDB tables use row-based storage by default, with data stored in **TiKV**.
 
-```sql
-ALTER TABLE t1 STORAGE_CLASS='STANDARD';
-```
-
 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
 ### Row-based storage with IA
