@@ -29,9 +29,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 * Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) <!--2405--> <!--tw:lilin90-->
 
-    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](/tidb-configuration-file.md#token-limit) consumption by one user causes delays in responding to requests from other users.
+    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB node. This helps prevent issues where excessive [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) consumption by one user causes delays in responding to requests from other users.
 
-    For more information, see [documentation](/system-variables.md#max_user_connections-new-in-v857).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#max_user_connections-new-in-v857).
 
 ### SQL
 
@@ -63,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Downstream schemas and foreign key definitions must be pre-created before the task starts. This support does not include many-to-one or shard-merge routing, dynamic foreign key DDL during replication, `compact` or `multiple-rows` DML boundary options, or safe-mode updates that modify primary keys or unique keys. When foreign key causality is enabled, hot configuration updates that change `worker-count`, `case-sensitive`, route rules, block-allow-list rules, binlog filter rules, or `foreign_key_checks` are rejected. To change these settings, stop and restart the task with the new configuration.
 
-    For more information, see [DM Compatibility Catalog](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations).
+    For more information, see [DM Compatibility Catalog](https://docs.pingcap.com/tidb/v8.5/dm-compatibility-catalog#foreign-key-cascade-operations).
 
 ## Compatibility changes
 
@@ -77,7 +77,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 * Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432--><!--tw:qiancai-->
 
-    Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](/lateral-derived-tables.md) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+    Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](https://docs.pingcap.com/tidb/v8.5/lateral-derived-tables) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
 ### System variables
 
@@ -105,9 +105,9 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 * Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273--> <!--tw:lilin90-->
 
-    To import data with TiDB Lightning, use the [TiDB Lightning command-line tools](/tidb-lightning/tidb-lightning-overview.md): [`tidb-lightning`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](/tidb-lightning/tidb-lightning-command-line-full.md#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
+    To import data with TiDB Lightning, use the [TiDB Lightning command-line tools](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-overview): [`tidb-lightning`](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-command-line-full#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-command-line-full#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
 
-    For new data import workloads, you can also use the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement.
+    For new data import workloads, you can also use the [`IMPORT INTO`](https://docs.pingcap.com/tidb/v8.5/sql-statement-import-into) statement.
 
     If this change affects your workflow, comment on [#67697](https://github.com/pingcap/tidb/issues/67697).
 
