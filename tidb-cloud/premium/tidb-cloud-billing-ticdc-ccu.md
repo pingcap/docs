@@ -9,7 +9,7 @@ This document describes the billing details for changefeeds in {{{ .premium }}} 
 
 ## CCU cost
 
-{{{ .premium }}} and {{{ .essential }}} measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+{{{ .premium }}} and {{{ .essential }}} measure the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
 
 ### Number of TiCDC CCUs
 
