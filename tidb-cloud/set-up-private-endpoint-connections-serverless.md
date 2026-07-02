@@ -7,7 +7,7 @@ summary: 了解如何通过私有端点连接到你的 {{{ .starter }}} 或 Esse
 
 本文档介绍如何通过 AWS PrivateLink 连接到你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
-> **提示：**
+> **Tip:**
 >
 > - 如需了解如何通过 AWS 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)。
 > - 如需了解如何通过 Azure 私有端点连接 TiDB Cloud Dedicated 集群，请参见 [Connect to a TiDB Cloud Dedicated Cluster via Azure Private Link](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)。
@@ -62,34 +62,6 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
     >
     > 对于 AWS 区域中的每个 VPC，你只需创建一个私有端点。该端点可供该 AWS 区域中同一 VPC 内的所有 {{{ .starter }}} 或 {{{ .essential }}} 实例使用，但不能跨 VPC 共享。
 
-## 使用 AWS 设置私有端点（端点独占模型） {#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model}
-
-> **注意：**
->
-> 目前，端点独占模型仅适用于在部分 AWS 区域中从 2026 年 7 月 1 日开始创建的 {{{ .essential }}} 实例。如果你的实例不支持该模型，可以改用[端点共享模型](#set-up-a-private-endpoint-with-aws-endpoint-shared-model)。
-
-在端点独占模型中，每个 {{{ .essential }}} 实例使用其各自独立的私有端点。此模型无需在连接时包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)，但你需要为每个 {{{ .essential }}} 实例重复执行设置步骤。
-
-要使用独占模型通过私有端点连接到 {{{ .essential }}} 实例，请按照以下步骤操作：
-
-1. [选择 {{{ .essential }}} 实例](#step-1-select-an-essential-instance)
-2. [创建 AWS interface 端点](#step-2-create-an-aws-interface-endpoint-exclusive-model)
-3. [创建私有端点连接](#step-3-create-a-private-endpoint-connection-exclusive-model)
-4. [启用私有 DNS](#step-4-enable-private-dns-exclusive-model)
-5. [连接到你的 {{{ .essential }}} 实例](#step-5-connect-to-your-essential-instance)
-
-如果你有多个实例，则需要为每个要使用 AWS PrivateLink 连接的实例重复执行这些步骤。
-
-### Step 1. 选择 {{{ .essential }}} 实例 {#step-1-select-an-essential-instance}
-
-1. 在 TiDB Cloud 控制台的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标 {{{ .essential }}} 实例的名称，进入其概览页面。
-2. 点击右上角的 **Connect**。此时会显示连接对话框。
-3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**，然后点击 **Create Private Endpoint Connection**。
-
-> **注意：**
->
-> 如果你已经创建了私有端点连接，活动端点将显示在连接对话框中。要创建更多私有端点连接，请在左侧导航栏中点击 **Settings** > **Networking**，进入 **Networking** 页面。
-
 ### Step 2. 创建 AWS interface 端点
 
 <SimpleTab>
@@ -129,7 +101,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink/?pr
 aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
 ```
 
-> **提示：**
+> **Tip:**
 >
 > 在运行命令前，你需要已安装并配置好 AWS CLI。详情参见 [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)。
 
@@ -155,7 +127,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
     - **Firewall Rule Name**：输入用于标识此连接的名称。
     - **Your VPC Endpoint ID**：粘贴你在 AWS Management Console 获取的 22 位 VPC Endpoint ID（以 `vpce-` 开头）。
 
-    > **提示：**
+    > **Tip:**
     >
     > - 如果将 **Authorized Networks** 表留空，则默认允许所有私有端点连接。
     > - 如需允许来自你的云 Region 的所有 private endpoint 连接（用于测试或开放 access），可在 **Your VPC Endpoint ID** 字段中输入单个星号（`*`）。
@@ -172,19 +144,47 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 4. 在 **Connect With** 下拉列表中，选择你偏好的连接方式。对话框底部会显示相应的连接字符串。
 5. 使用该连接字符串连接到你的 {{{ .starter }}} 或 Essential 实例。
 
-> **提示：**
+> **Tip:**
 >
 > 如果你无法连接到 {{{ .starter }}} 或 Essential 实例，原因可能是 AWS 中 VPC 端点的安全组设置不正确。请参见[此常见问题](#troubleshooting)获取解决方案。
 >
 > 创建 VPC 端点时，如果遇到错误 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`，说明该 VPC 中已存在一个私有端点。对于相同的私有 DNS 名称，你无需再创建另一个端点。
 
+## 使用 AWS 设置私有端点（端点独占模型） {#set-up-a-private-endpoint-with-aws-endpoint-exclusive-model}
+
+> **注意：**
+>
+> 目前，端点独占模型仅适用于在部分 AWS 区域中从 2026 年 7 月 1 日开始创建的 {{{ .essential }}} 实例。如果你的实例不支持此模型，可以改用[端点共享模型](#set-up-a-private-endpoint-with-aws-endpoint-shared-model)。
+
+在端点独占模型中，每个 {{{ .essential }}} 实例使用其各自独立的私有端点。此模型无需在连接时包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)，但你需要为每个 {{{ .essential }}} 实例重复执行设置步骤。
+
+要使用独占模型通过私有端点连接到 {{{ .essential }}} 实例，请执行以下步骤：
+
+1. [选择 {{{ .essential }}} 实例](#step-1-select-an-essential-instance)
+2. [创建 AWS interface 端点](#step-2-create-an-aws-interface-endpoint-exclusive-model)
+3. [创建私有端点连接](#step-3-create-a-private-endpoint-connection-exclusive-model)
+4. [启用私有 DNS](#step-4-enable-private-dns-exclusive-model)
+5. [连接到你的 {{{ .essential }}} 实例](#step-5-connect-to-your-essential-instance)
+
+如果你有多个实例，则需要为每个要使用 AWS PrivateLink 连接的实例重复执行这些步骤。
+
+### Step 1. 选择 {{{ .essential }}} 实例 {#step-1-select-an-essential-instance}
+
+1. 在 TiDB Cloud 控制台的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .essential }}} 实例的名称，进入其概览页面。
+2. 点击右上角的 **Connect**。此时会显示连接对话框。
+3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**，然后点击 **Create Private Endpoint Connection**。
+
+> **注意：**
+>
+> 如果你已经创建了私有端点连接，活动端点会显示在连接对话框中。要创建更多私有端点连接，请点击左侧导航栏中的 **Settings** > **Networking**，进入 **Networking** 页面。
+
 ### Step 2. 创建 AWS interface 端点 {#step-2-create-an-aws-interface-endpoint-exclusive-model}
 
 > **注意：**
 >
-> 对于每个 {{{ .essential }}} 实例，相应的端点服务会在实例创建后 3 到 4 分钟自动创建。
+> 对于每个 {{{ .essential }}} 实例，对应的端点服务会在实例创建后 3 到 4 分钟自动创建。
 
-在连接对话框中，如果你看到 `TiDB Private Link Service is ready` 消息，则表示相应的端点服务已就绪。你可以提供以下信息来创建端点。
+在连接对话框中，如果你看到 `TiDB Private Link Service is ready` 消息，则表示对应的端点服务已就绪。你可以提供以下信息来创建端点。
 
 1. 在连接对话框中，点击 **How to Generate VPC Endpoint ID**，然后填写 **Your VPC ID** 和 **Your Subnet IDs** 字段。你可以从 [AWS Management Console](https://console.aws.amazon.com/) 中找到这些 ID。对于多个子网，请输入以空格分隔的 ID。
 
@@ -206,7 +206,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 > **Tip:**
 >
-> - 在运行命令之前，你需要先安装并配置 AWS CLI。详情请参见 [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)。
+> - 运行命令前，你需要先安装并配置 AWS CLI。详情请参见 [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)。
 >
 > - 如果你的服务跨越三个以上的可用区（AZ），你将收到一条错误消息，指出 VPC 端点服务不支持该子网所在的 AZ。当你所选 Region 中除了 {{{ .essential }}} 实例所在的 AZ 之外还存在额外的 AZ 时，就会出现此问题。在这种情况下，你可以联系 [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
@@ -236,7 +236,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
     > **注意：**
     >
-    > 确保所选安全组允许你的 EC2 实例通过端口 `4000` 或客户自定义端口进行入站访问。
+    > 确保所选安全组允许你的 EC2 实例通过端口 `4000` 或自定义端口进行入站访问。
 
 9. 点击 **Create endpoint**。
 
@@ -246,12 +246,12 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 ### Step 3. 创建私有端点连接 {#step-3-create-a-private-endpoint-connection-exclusive-model}
 
 1. 返回 TiDB Cloud 控制台。
-2. 在 **Create AWS Private Endpoint Connection** 页面，输入你的 VPC 端点 ID。
+2. 在 **Create AWS Private Endpoint Connection** 页面上，输入你的 VPC 端点 ID。
 3. 点击 **Create Private Endpoint Connection**。
 
 > **Tip:**
 >
-> 你可以在目标 {{{ .essential }}} 实例的 **Networking** 页面查看和管理私有端点连接。要访问此页面，请在左侧导航栏中点击 **Settings** > **Networking**。
+> 你可以在目标 {{{ .essential }}} 实例的 **Networking** 页面上查看和管理私有端点连接。要访问此页面，请点击左侧导航栏中的 **Settings** > **Networking**。
 
 ### Step 4. 启用私有 DNS {#step-4-enable-private-dns-exclusive-model}
 
@@ -266,7 +266,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
-或者，你也可以在实例的 **Networking** 页面找到该命令。找到私有端点后，在 **Action** 列中点击 **...** > **Enable DNS**。
+或者，你也可以在实例的 **Networking** 页面上找到该命令。找到私有端点后，在 **Action** 列中点击 **...** > **Enable DNS**。
 
 </div>
 <div label="Use AWS Console">
@@ -285,15 +285,15 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 
 ### Step 5. 连接到你的 {{{ .essential }}} 实例 {#step-5-connect-to-your-essential-instance}
 
-接受私有端点连接后，你将被重定向回连接对话框。
+接受私有端点连接后，你会被重定向回连接对话框。
 
 1. 等待私有端点连接状态从 **System Checking** 变为 **Active**（大约 5 分钟）。
-2. 在 **Connect With** 下拉列表中，选择你偏好的连接方法。相应的连接字符串会显示在对话框底部。
+2. 在 **Connect With** 下拉列表中，选择你偏好的连接方法。对应的连接字符串会显示在对话框底部。
 3. 使用该连接字符串连接到你的实例。
 
 > **Tip:**
 >
-> 如果你无法连接到实例，原因可能是 AWS 中 VPC 端点的安全组设置不正确。请参见[此常见问题](#troubleshooting)获取解决方案。
+> 如果你无法连接到实例，原因可能是 AWS 中 VPC 端点的安全组设置不正确。请参见[此常见问题](#troubleshooting)了解解决方法。
 
 ## 故障排查
 
