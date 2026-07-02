@@ -26,7 +26,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 ## 前提条件 {#prerequisites}
 
-全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud StarterおよびTiDB Cloud Essentialでのみご利用いただけます。
+全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
 
 -   AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
@@ -66,7 +66,7 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 

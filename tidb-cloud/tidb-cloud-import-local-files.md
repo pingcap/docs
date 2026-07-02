@@ -1,23 +1,23 @@
 ---
-title: Import Local Files to TiDB Cloud Starter or Essential
-summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Essential にインポートする方法を学びます。
+title: Import Local Files to TiDB Cloud Starter
+summary: ローカル ファイルをTiDB Cloud Starter にインポートする方法を学びます。
 ---
 
-# ローカルファイルをTiDB Cloud StarterまたはEssentialにインポートする {#import-local-files-to-tidb-cloud-starter-or-essential}
+# ローカルファイルをTiDB Cloud Starterにインポートする {#import-local-files-to-tidb-cloud-starter-or-essential}
 
-ローカルファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
+ローカルファイルをTiDB Cloud Starterに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
 
 現在、この方法では、1 つのタスクに対して 1 つの CSV ファイルを既存の空のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
 ## 制限事項 {#limitations}
 
 -   現在、 TiDB Cloud は、1 つのタスクにつき 250 MiB 以内の CSV 形式のローカル ファイルのインポートのみをサポートしています。
--   ローカル ファイルのインポートは、 TiDB Cloud Starter およびTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+-   ローカル ファイルのインポートは、 TiDB Cloud Starter クラスターでのみサポートされ、 TiDB Cloud Essential クラスターおよび TiDB Cloud Dedicated クラスターではサポートされません。
 -   複数のインポート タスクを同時に実行することはできません。
 
 ## ローカルファイルをインポートする {#import-local-files}
 
-1.  ターゲット クラスターの**インポート**ページを開きます。
+1.  ターゲット TiDB Cloud Starter インスタンスの**インポート**ページを開きます。
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
@@ -25,7 +25,7 @@ summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Esse
         >
         > 左上隅のコンボ ボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
+    2.  ターゲット TiDB Cloud Starter インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **インポート**ページでは、ローカルファイルをアップロードエリアに直接ドラッグ＆ドロップするか、 **「ローカルファイルをアップロード」**をクリックして対象のローカルファイルを選択してアップロードできます。1つのタスクにつき、250MiB未満のCSVファイルを1つだけアップロードできます。ローカルファイルが250MiBを超える場合は、 [250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか?](#how-to-import-a-local-file-larger-than-250-mib)参照してください。
 
@@ -88,7 +88,7 @@ summary: ローカル ファイルをTiDB Cloud Starter またはTiDB Cloud Esse
 
 いいえ。現在、インポート機能を使用する場合、CSV ファイルのすべての列を既存のテーブルにインポートすることしかできません。
 
-特定の列のみをインポートするには、MySQLクライアントを使用してTiDBクラスタに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
+指定した列のみをインポートするには、MySQLクライアントを使用してTiDB Cloud Starter インスタンスに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
 
 ```sql
 CREATE TABLE `import_test` (

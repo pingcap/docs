@@ -388,7 +388,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
     > **注記：**
     >
-    > 現在、特定の AWS リージョンのTiDB Cloud StarterとTiDB Cloud Essentialインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
+    > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
 -   TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
 

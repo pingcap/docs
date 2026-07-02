@@ -43,15 +43,10 @@ TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合
 
 監査ログは以下の場所に保存できます。
 
--   TiDB Cloud
 -   [Amazon S3](https://aws.amazon.com/s3/)
 -   [Google Cloud Storage](https://cloud.google.com/storage)
 -   [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 -   [Alibaba Cloudオブジェクトストレージサービス（OSS）](https://www.alibabacloud.com/product/oss)
-
-### TiDB Cloud {#tidb-cloud}
-
-TiDB Cloudに監査ログを保存し、ローカルマシンにダウンロードできます。監査ログは365日後に期限切れとなり、削除されます。保存期間の延長をご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
 ### Amazon S3 {#amazon-s3}
 
@@ -357,46 +352,6 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 ```shell
 ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-rule-id <rule-id>
 ```
-
-</div>
-</SimpleTab>
-
-## TiDB Cloud Storage を使用した監査ログへのアクセス {#access-audit-logging-with-tidb-cloud-storage}
-
-TiDB Cloudに監査ログを保存すると、 TiDB Cloud Essentialはそれらを`YYYY-MM-DD-<index>.log`という名前の読み取り可能なテキストファイルとして保存します。これらのファイルは、 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して表示およびダウンロードできます。
-
-> **注記：**
->
-> -   TiDB Cloud Essentialは、監査ログが時系列順に保存されることを保証しません。 `YYYY-MM-DD-<index>.log`という名前のログファイルには、それ以前の日付のエントリが含まれている可能性があります。
-> -   特定の日付（例：2025年1月1日）のすべてのログを取得するには、 `--start-date 2025-01-01`と`--end-date 2025-01-02` 。場合によっては、すべてのログファイルをダウンロードし、 `TIME`フィールドでソートする必要があるかもしれません。
-
-<SimpleTab>
-<div label="Console">
-
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
-
-    > **ヒント：**
-    >
-    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
-
-2.  対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
-
-3.  **DB監査ログ**ページでは、 **TiDB Cloud Storageの**下にある監査ログの一覧を表示できます。
-
-4.  監査ログをダウンロードするには、リストから1つ以上のログを選択し、 **「ダウンロード」**をクリックします。
-
-</div>
-
-<div label="CLI">
-
-TiDB Cloud CLIを使用して監査ログをダウンロードするには、次のコマンドを実行します。
-
-```shell
-ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
-```
-
--   `start-date` : ダウンロードする監査ログの開始日。形式は`YYYY-MM-DD`です。例: `2025-01-01` 。
--   `end-date` : ダウンロードする監査ログの終了日。形式は`YYYY-MM-DD`です。例: `2025-01-01` 。
 
 </div>
 </SimpleTab>

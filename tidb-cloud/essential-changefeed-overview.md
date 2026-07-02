@@ -181,7 +181,9 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## Changefeedの請求 {#changefeed-billing}
 
-変更フィードはベータ版期間中は無料です。
+2026年7月1日より前に作成された既存の {{{ .essential }}} インスタンスでは、変更フィードは無料です。
+
+2026年7月1日以降、新しく作成された {{{ .essential }}} インスタンスでは、変更フィードは課金対象機能です。請求の詳細については、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
 
 ## Changefeedの状態 {#changefeed-states}
 
