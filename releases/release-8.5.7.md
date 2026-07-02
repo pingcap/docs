@@ -15,15 +15,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
-* Support CPU-aware Hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382--> <!--tw:qiancai-->
+* Support CPU-aware hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382--> <!--tw:qiancai-->
 
-    In earlier versions, the Hot Region scheduler balances read hotspots mainly by query and byte dimensions. In some workloads, TiKV CPU usage can still be uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
+    In earlier versions, the hot Region scheduler balances read hotspots mainly by query rate and byte throughput. In some workloads, TiKV CPU usage remains uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
 
-    Starting from v8.5.7, TiKV reports per-Region read CPU usage in PD heartbeats, and PD can use CPU usage as the first priority for Hot Region read scheduling. For clusters whose TiKV version supports CPU reporting, the default `read-priorities` of `balance-hot-region-scheduler` is `cpu,byte`; otherwise, PD falls back to `query,byte`. This helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
+    Starting from v8.5.7, TiKV reports per-Region read CPU usage in store heartbeats, and PD can use CPU usage as a scheduling dimension for read hot Region scheduling. This mechanism helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
 
-    This feature also adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in hot store statistics and the `min-hot-cpu-rate` and `cpu-rate-rank-step-ratio` scheduler configuration items.
+    This feature also adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and [the `min-hot-cpu-rate` and `cpu-rate-rank-step-ratio` scheduler configurations](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler).
 
-    For more information, see [Documentation](link).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#scatter-read-hotspots).
 
 ### Reliability
 
@@ -41,7 +41,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Partial indexes are useful when you frequently query a selective subset of rows or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
 
-    To use partial indexes effectively, define the predicate to match the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
+    To use partial indexes effectively, define a predicate that matches the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index/#partial-indexes).
 
