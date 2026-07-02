@@ -43,7 +43,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ### Others {#others}
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| ステートメント | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | サポートされていません [^3] | サポートされていません [^3] |
 | `SHOW BACKUPS` | サポートされていません [^3] | サポートされていません [^3] |
