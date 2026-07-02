@@ -30,7 +30,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `SHOW TABLE REGIONS` | サポートされています | サポートされていません [^1] |
 | `SPLIT REGION` | サポートされています | サポートされていません [^1] |
 
-### Resource groups {#resource-groups}
+### リソースグループ {#resource-groups}
 
 | Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
