@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Performance
 
-* Support CPU-aware Hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382-->
+* Support CPU-aware Hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024) <!--2382--> <!--tw:qiancai-->
 
     In earlier versions, the Hot Region scheduler balances read hotspots mainly by query and byte dimensions. In some workloads, TiKV CPU usage can still be uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
 
@@ -35,7 +35,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### SQL
 
-* Support partial indexes to reduce index storage and DML maintenance overhead [#62444](https://github.com/pingcap/tidb/issues/62444) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!--21903--> <!--2270-->
+* Support partial indexes to reduce index storage and DML maintenance overhead [#62444](https://github.com/pingcap/tidb/issues/62444) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016) <!--21903--> <!--2270--> <!--tw:qiancai-->
 
     Starting from v8.5.7, TiDB supports partial indexes, which index only rows that satisfy a predicate defined in the index `WHERE` clause. You can create a partial index using `CREATE INDEX ... WHERE ...`, `ALTER TABLE ... ADD INDEX ... WHERE ...`, or an index definition in `CREATE TABLE`.
 
@@ -47,7 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Observability
 
-* The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
+* The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87) <!--tw:qiancai-->
 
     In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
 
@@ -75,7 +75,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 ### MySQL compatibility
 
-* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432-->
+* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432--><!--tw:qiancai-->
 
     Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](/lateral-derived-tables.md) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
 
@@ -116,13 +116,13 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 + TiDB
 
     - Improve compatibility of partial indexes with BR so that BR preserves their `WHERE` predicates when repairing ingest indexes during log restore [#62664](https://github.com/pingcap/tidb/issues/62664) @[Leavrth](https://github.com/Leavrth) <!-- component: sql-infra -->
-    - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate) <!-- component: planner --> <!--2262-->
+    - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate) <!-- component: planner --> <!--2262--> <!--tw:qiancai-->
     - Improve slow query observability by logging client connection attributes in the slow query log and exposing them in `information_schema.slow_query` and `information_schema.cluster_slow_query`; `performance_schema_session_connect_attrs_size` now controls attribute truncation, and truncated bytes are recorded in `_truncated` [#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba) <!-- component: observability --> <!--2374--> <!-tw:lilin90--> 
     - Add the `tidb_enable_strict_not_null_check` system variable to control whether TiDB enforces strict `NOT NULL` checks for single-row `INSERT` statements, helping reduce upgrade risk for workloads that depend on the previous non-strict behavior [#68108](https://github.com/pingcap/tidb/issues/68108) @[xhebox](https://github.com/xhebox) <!-- component: sql-infra --> <!--2459-->
     - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (Although it is listed under the PD component label, in fact it only involves changes on the TiDB side )--> <!--2385-->
     - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato) <!-- component: pd (this is only a change on the TiDB side,) --> <!--2463-->
     - Improve the optimizer performance for queries on tables with many indexes by pruning irrelevant indexes before cost estimation, reducing query planning time and avoiding unnecessary full-range out-of-range estimation [#63856](https://github.com/pingcap/tidb/issues/63856) @[terry1purcell](https://github.com/terry1purcell) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!--2315-->
-    - Enhance the **Ping Latency** panel in the Blackbox exporter dashboard by adding a `Max Ping Latency` metric using the `max_over_time` alert rule. This change aligns the dashboard visualization with the TiDB alerting logic, which enables you to more easily identify peak latency spikes and verify alert triggers. [#1071](https://github.com/pingcap/monitoring/issues/1071) @[yibin87](https://github.com/yibin87) <!--2424-->
+    - Enhance the **Ping Latency** panel in the Blackbox exporter dashboard by adding a `Max Ping Latency` metric using the `max_over_time` alert rule. This change aligns the dashboard visualization with the TiDB alerting logic, which enables you to more easily identify peak latency spikes and verify alert triggers. [#1071](https://github.com/pingcap/monitoring/issues/1071) @[yibin87](https://github.com/yibin87) <!--2424--> <!--tw:qiancai-->
     - Support partial ordered index optimization for `TOPN` queries on prefix indexes to improve the performance of `ORDER BY ... LIMIT/OFFSET` queries when `tidb_opt_partial_ordered_index_for_topn` is set to `COST` [#66338](https://github.com/pingcap/tidb/issues/66338) @[xzhangxian1008](https://github.com/xzhangxian1008) @[winoros](https://github.com/winoros) <!-- component: execution -->
     - Optimize the performance of high-cardinality `GROUP BY` queries that use Stream Aggregate by reducing CPU overhead in memory tracking [#68475](https://github.com/pingcap/tidb/issues/68475) @[guo-shaoge](https://github.com/guo-shaoge) <!-- component: execution -->
     - Mitigate coprocessor request bursts for `IndexLookUp` queries on highly partitioned tables with local indexes to improve query stability and reduce performance spikes [#67545](https://github.com/pingcap/tidb/issues/67545) @[gengliqi](https://github.com/gengliqi) <!-- component: execution -->
