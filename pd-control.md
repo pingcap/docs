@@ -1076,7 +1076,7 @@ Usage:
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
-- `min-hot-cpu-rate` specifies the minimum CPU usage of read requests to count, which is usually 10.
+- `min-hot-cpu-rate` specifies the minimum CPU usage of read requests to count. The value is measured as a percentage of one CPU core, and the default value is usually `10`, which means 10% of one CPU core.
 
     ```bash
     scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
