@@ -547,7 +547,7 @@ Usage:
 }
 ```
 
-Starting from v8.5.7 and v9.0.0, the `hot read` and `hot history` commands include `flow_cpu`, and the `hot store` command includes `cpu-read-rate`. These fields show the read CPU usage for CPU-aware read hotspot scheduling.
+Starting from v8.5.7 and v9.0.0, the output of the `hot read` and `hot history` commands includes the `flow_cpu` field, and the output of the `hot store` command includes the `cpu-read-rate` field. These fields show the read CPU usage for CPU-aware read hotspot scheduling.
 
 ### `label [store <name> <value>]`
 
