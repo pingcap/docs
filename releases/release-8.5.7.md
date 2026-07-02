@@ -129,6 +129,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### MySQL compatibility
 
+* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432--> 
+
+    Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](/lateral-derived-tables.md) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+
 ### System variables
 
 | Variable name | Change type | Description |
@@ -165,7 +169,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 + TiDB
 
-    - Support `LATERAL` derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` [#40328](https://github.com/pingcap/tidb/issues/40328) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!--2432--> <!-- replace it with a feature description-->
     - Improve compatibility of partial indexes with BR so that BR preserves their `WHERE` predicates when repairing ingest indexes during log restore [#62664](https://github.com/pingcap/tidb/issues/62664) @[Leavrth](https://github.com/Leavrth) <!-- component: sql-infra -->
     - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate) <!-- component: planner --> <!--2262-->
     - Improve slow query observability by logging client connection attributes in the slow query log and exposing them in `information_schema.slow_query` and `information_schema.cluster_slow_query`; `performance_schema_session_connect_attrs_size` now controls attribute truncation, and truncated bytes are recorded in `_truncated` [#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba) <!-- component: observability --> <!--2374--> <!-tw:lilin90--> 
