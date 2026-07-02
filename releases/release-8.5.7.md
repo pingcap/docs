@@ -107,6 +107,10 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 * Upgrade the Go compiler version of TiDB from go1.25.8 to go1.25.10, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure smooth compilation. <!--2468--> <!--tw:lilin90-->
 
+## Deprecated features
+
+* Starting from v8.5.7, the [telemetry](https://docs.pingcap.com/tidb/v8.5/telemetry) feature in TiDB and TiDB Dashboard is deprecated.
+
 ## Removed features
 
 * Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter) <!--2273--> <!--tw:lilin90-->
