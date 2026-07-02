@@ -187,7 +187,10 @@ In a read hotspot scenario, the hotspot TiKV node cannot process read requests i
 
 Starting from v8.5.7 and v9.0.0, PD supports CPU-aware hot Region scheduling for read hotspots. TiKV reports per-Region read CPU usage in store heartbeats, and PD can use CPU usage as a scheduling dimension. This helps PD identify read hotspots whose QPS or byte throughput looks balanced but whose TiKV CPU usage is still uneven, such as workloads with queries that have different CPU costs or clusters with heterogeneous TiKV hardware.
 
-For clusters that support read CPU reporting, the default `read-priorities` value of `balance-hot-region-scheduler` is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. To view or adjust the scheduling dimensions, use [`pd-ctl scheduler config balance-hot-region-scheduler`](/pd-control.md#scheduler-config-balance-hot-region-scheduler).
+- For clusters that support read CPU reporting, the default `read-priorities` value of `balance-hot-region-scheduler` is `cpu,byte`. 
+- For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. 
+
+To view or adjust the scheduling dimensions, use [`pd-ctl scheduler config balance-hot-region-scheduler`](/pd-control.md#scheduler-config-balance-hot-region-scheduler).
 
 ## Use TiKV MVCC in-memory engine to mitigate read hotspots caused by high MVCC read amplification
 
