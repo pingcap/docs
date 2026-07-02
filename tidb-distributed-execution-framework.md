@@ -89,6 +89,25 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
+## TiKV disk space precheck for `ADD INDEX` tasks
+
+For [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks executed by the DXF, TiDB collects a TiKV capacity snapshot before submitting the distributed task, predicts the TiKV index size based on block sampling, table statistics, and the replica count, and then checks whether TiKV has enough remaining disk space for the task. This precheck applies to both local sort and Global Sort execution paths.
+
+TiDB considers TiKV disk space insufficient if either of the following conditions is met:
+
+- After subtracting the predicted index size, the remaining TiKV cluster capacity is less than 20% of the total TiKV cluster capacity.
+- After subtracting the per-store predicted index size, the remaining capacity of any TiKV store is less than 15% of that store's total capacity.
+
+By default, [`enforce_disk_space_precheck_before_add_index`](/system-variables.md#enforce_disk_space_precheck_before_add_index) is `OFF`. In this mode, TiDB logs a warning if the precheck predicts insufficient TiKV capacity, but it still submits the DDL job. To reject such DDL jobs before task submission, set this variable to `ON`:
+
+```sql
+SET GLOBAL enforce_disk_space_precheck_before_add_index = ON;
+```
+
+When this variable is `ON`, TiDB rejects the DDL job only if the prediction uses non-pseudo table statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. If TiDB cannot collect the TiKV capacity snapshot or complete the prediction within 5 seconds, TiDB logs a warning, skips the precheck, and continues to submit the DDL job.
+
+To observe the predicted and actual TiKV storage usage of a DXF `ADD INDEX` task, check the TiDB logs. TiDB logs prediction fields such as `block_sample_predicted_tikv_index_all_replica_bytes`, `block_sample_predicted_tikv_index_single_replica_bytes`, and `block_sample_mvcc_overhead_total_bytes` at task submission time. After the task succeeds, TiDB also logs fields such as `logical_index_kv_bytes`, `ingested_sst_bytes`, `ingested_sst_bytes_source`, and `ingested_sst_bytes_reliable`.
+
 ## Task scheduling
 
 By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Managed clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).

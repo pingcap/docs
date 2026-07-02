@@ -525,6 +525,17 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Default value: `0`
 - A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
 
+### enforce_disk_space_precheck_before_add_index
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether TiDB rejects a DXF [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) task when the TiKV disk space precheck predicts insufficient TiKV capacity.
+- When the value is `OFF`, TiDB still performs the precheck and logs warnings for insufficient TiKV capacity, but it does not reject the DDL job.
+- When the value is `ON`, TiDB rejects the DDL job if the precheck predicts insufficient TiKV capacity and the prediction uses non-pseudo table statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. For more information, see [TiKV disk space precheck for `ADD INDEX` tasks](/tidb-distributed-execution-framework.md#tikv-disk-space-precheck-for-add-index-tasks).
+
 ### foreign_key_checks
 
 - Scope: SESSION | GLOBAL
