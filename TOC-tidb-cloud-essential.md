@@ -542,7 +542,7 @@
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
     - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
   - [TiDB Cloud StarterとEssential制限事項](/tidb-cloud/serverless-limitations.md)
-  - [TiDB X インスタンスでの制限付き SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
+  - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDBの制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
   - [サーバー状態変数](/status-variables.md)
