@@ -1,15 +1,15 @@
 ---
-title: Changefeed Billing for {{{ .premium }}} and {{{ .essential }}}
-summary: Learn about billing for changefeeds in {{{ .premium }}} and {{{ .essential }}}.
+title: Changefeed Billing for {{{ .essential }}} and Premium
+summary: Learn about billing for changefeeds in {{{ .essential }}} and Premium.
 ---
 
-# Changefeed Billing for {{{ .premium }}} and {{{ .essential }}}
+# Changefeed Billing for {{{ .essential }}} and Premium
 
-This document describes the billing details for changefeeds in {{{ .premium }}} and {{{ .essential }}}.
+This document describes the billing details for changefeeds in {{{ .essential }}} and Premium.
 
 ## CCU cost
 
-{{{ .premium }}} and {{{ .essential }}} measure the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
+{{{ .essential }}} and Premium measure the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Changefeed Capacity Units (CCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for an instance, you can select an appropriate specification. The higher the CCU, the better the replication performance. You will be charged for these TiCDC CCUs.
 
 ### Number of TiCDC CCUs
 
@@ -38,8 +38,10 @@ The following table lists the specifications and corresponding replication perfo
 
 ### Price
 
-Currently, {{{ .essential }}} is in public preview. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
-Currently, {{{ .essential }}} is in public preview. For more information, see [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+Currently, {{{ .essential }}} and Premium are in public preview. For more information about pricing, see the following pages:
+
+- [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)
+- [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)
 
 ## Private Data Link cost
 
