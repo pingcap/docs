@@ -98,7 +98,7 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 ### Row-based storage
 
-Standard row-based storage stores data in **TiKV**. You can set the table's **Storage Class** to `Standard` using the following SQL statement or leave it unset (`NULL`).
+TiDB tables use row-based storage by default, with data stored in **TiKV**.
 
 ```sql
 ALTER TABLE t1 STORAGE_CLASS='STANDARD';
