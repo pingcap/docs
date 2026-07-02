@@ -17,7 +17,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ### Placement と range 管理 {#placement-and-range-management}
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| ステートメント | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | サポートされていません [^1] | サポートされていません [^1] |
 | `ALTER RANGE` | サポートされていません | サポートされていません |
