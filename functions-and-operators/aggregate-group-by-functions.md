@@ -33,6 +33,53 @@ This section describes the supported MySQL `GROUP BY` aggregate functions in TiD
 
 In addition, TiDB also provides the following aggregate functions:
 
++ `SUM_INT(expr)`
+
+    This function returns the sum of the integer expression `expr`. It works similarly to `SUM(expr)`, but only accepts integer arguments, including `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, and `BIGINT`. For a signed integer argument, the return type is `BIGINT`. For an unsigned integer argument, the return type is `BIGINT UNSIGNED`. If the sum of non-`NULL` values exceeds the range of the return type, TiDB returns an integer overflow error.
+
+    `SUM_INT()` ignores `NULL` values by default. If there are no non-`NULL` values, it returns `NULL`. `SUM_INT()` supports `DISTINCT` and can be used as a [window function](/functions-and-operators/window-functions.md).
+
+    The following example shows how to use this function:
+
+    ```sql
+    DROP TABLE IF EXISTS t;
+    CREATE TABLE t(id INT PRIMARY KEY, a BIGINT, b BIGINT UNSIGNED);
+    INSERT INTO t VALUES(1, 1, 1), (2, 1, 1), (3, 2, 2), (4, NULL, NULL);
+    ```
+
+    ```sql
+    SELECT SUM_INT(a), SUM_INT(DISTINCT a), SUM_INT(b) FROM t;
+    ```
+
+    ```sql
+    +------------+---------------------+------------+
+    | SUM_INT(a) | SUM_INT(DISTINCT a) | SUM_INT(b) |
+    +------------+---------------------+------------+
+    |          4 |                   3 |          4 |
+    +------------+---------------------+------------+
+    1 row in set (0.00 sec)
+    ```
+
+    The following example uses `SUM_INT()` as a window function:
+
+    ```sql
+    SELECT id, a, SUM_INT(a) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS rolling_sum
+    FROM t
+    ORDER BY id;
+    ```
+
+    ```sql
+    +----+------+-------------+
+    | id | a    | rolling_sum |
+    +----+------+-------------+
+    |  1 |    1 |           1 |
+    |  2 |    1 |           2 |
+    |  3 |    2 |           3 |
+    |  4 | NULL |           2 |
+    +----+------+-------------+
+    4 rows in set (0.00 sec)
+    ```
+
 + `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
     This function returns the percentile of `expr`. The `constant_integer_expr` argument indicates the percentage value which is a constant integer in the range of `[1,100]`. A percentile P<sub>k</sub> (`k` represents percentage) indicates that there are at least `k%` values in the data set that are less than or equal to P<sub>k</sub>.
@@ -86,7 +133,7 @@ In addition, TiDB also provides the following aggregate functions:
     2 rows in set (0.00 sec)
     ```
 
-Except for the `GROUP_CONCAT()`, `APPROX_PERCENTILE()`, and `APPROX_COUNT_DISTINCT` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
+Except for the `GROUP_CONCAT()`, `APPROX_PERCENTILE()`, and `APPROX_COUNT_DISTINCT()` functions, all the preceding functions can serve as [window functions](/functions-and-operators/window-functions.md).
 
 ## GROUP BY modifiers
 
