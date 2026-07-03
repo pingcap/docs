@@ -589,7 +589,7 @@
     - [介绍](/tidb-distributed-execution-framework.md)
     - [TiDB 全局排序](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated 限制和配额](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Cloud 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
+  - [TiDB Cloud Dedicated 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)
   - [TiDB 限制](/tidb-limitations.md)
   - 基准测试
     - TiDB v8.5

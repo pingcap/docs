@@ -235,6 +235,18 @@ TiDB Cloud 通过高级加密能力保护静态数据，确保安全性并符合
 
 - 对于未启用 CMEK 的 TiDB Cloud Dedicated 集群，TiDB Cloud 使用托管密钥；{{{ .starter }}} 和 {{{ .essential }}} 实例仅使用托管密钥。
 
+**Dual-layer encryption**
+
+- 双层加密通过两层独立的加密来保护数据。此方法通过防止任一单层加密被攻破来提供增强的安全性。
+
+    - 运行你的实例或集群的云服务提供商使用其原生存储级别加密机制对所有持久化的静态数据进行加密。
+
+    - 在云服务提供商加密的基础上，TiDB Cloud 通过使用客户管理的加密密钥 (CMEK) 或托管密钥自动对静态数据进行加密，从而增加第二层加密。
+
+- 对于 {{{ .starter }}} 实例，双层加密默认[**禁用**](/tidb-cloud/ticloud-cluster-create.md#flags)；对于 {{{ .essential }}} 实例，双层加密默认**启用**。
+
+- {{{ .dedicated }}} 集群**始终使用**双层加密。如果未启用 CMEK，TiDB Cloud 会使用托管密钥对集群中的所有静态数据进行加密。
+
 **Best practices:**
 
 - 定期轮换 CMEK 密钥以增强安全性并满足合规标准。

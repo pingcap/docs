@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的强大能力带入你的云端。它提供丰富的指南、示例和参考资料，帮助你学习、试用、开发、运维、迁移、监控、调优、安全管理、计费、集成和查阅。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的所有强大特性无缝带入你的云端。在这里，你可以找到使用 TiDB Cloud 所需的各类指南、示例和参考资料，助你高效上手、开发与运维。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Premium" subTitle="TiDB Cloud Premium 专为对实时弹性扩展能力有严苛要求的关键业务设计，提供基于工作负载的自动扩缩容能力和丰富的企业级功能。">
 
 <LearningPath label="学习" icon="cloud1">
 
@@ -31,7 +31,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [快速开始](https://docs.pingcap.com/zh/tidbcloud/dev-guide-build-cluster-in-cloud/?plan=premium)
 
-[示例应用](https://docs.pingcap.com/zh/tidbcloud/dev-guide-sample-application-spring-boot/?plan=premium)
+[连接到 TiDB](https://docs.pingcap.com/zh/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
