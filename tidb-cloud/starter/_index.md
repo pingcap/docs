@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的强大能力带入你的云端。它提供丰富的指南、示例和参考资料，帮助你学习、试用、开发、运维、迁移、监控、调优、安全管理、计费、集成和查阅。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter 是一种全托管的多租户 TiDB 服务。它提供即时、自动扩缩容的 MySQL 兼容数据库，并在超出免费限制后提供慷慨的免费额度和按量计费。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务，提供即时可用的 MySQL 兼容数据库，支持自动扩缩容，并配有慷慨的免费额度。超出免费额度后，将会按量计费。">
 
 <LearningPath label="学习" icon="cloud1">
 

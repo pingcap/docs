@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的强大能力带入你的云端。它提供丰富的指南、示例和参考资料，帮助你学习、试用、开发、运维、迁移、监控、调优、安全管理、计费、集成和查阅。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Essential" subTitle="TiDB Cloud Essential 专为工作负载不断增长且需要实时扩展性的应用程序而设计。它提供灵活性和性能，以跟上你的业务增长步伐。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Essential" subTitle="TiDB Cloud Essential 专为业务负载持续增长、需实时扩缩容能力的应用程序而设计，能在弹性伸缩的同时保持高性能，无缝支撑业务增长。">
 
 <LearningPath label="学习" icon="cloud1">
 
