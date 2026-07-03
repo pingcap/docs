@@ -2,18 +2,18 @@
 
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## クイックスタート {#quick-start}
+## クイックスタート
 
 -   [Pythonで始める](/ai/quickstart-via-python.md)
 -   [SQL経由で開始する](/ai/quickstart-via-sql.md)
 
-## コンセプト {#concepts}
+## コンセプト
 
 -   [ベクトル検索](/ai/concepts/vector-search-overview.md)
 
-## ガイド {#guides}
+## ガイド
 
 -   [TiDBに接続する](/ai/guides/connect.md)
 -   [表の操作](/ai/guides/tables.md)
@@ -32,7 +32,7 @@
     -   [生のSQLクエリ](/ai/guides/raw-queries.md)
     -   [トランザクション](/ai/guides/transactions.md)
 
-## 例 {#examples}
+## 例
 
 -   [基本的なCRUD操作](/ai/examples/basic-with-pytidb.md)
 -   [自動埋め込み](/ai/examples/auto-embedding-with-pytidb.md)
@@ -46,7 +46,7 @@
     -   [会話記憶](/ai/examples/memory-with-pytidb.md)
     -   [テキストからSQLへ](/ai/examples/text2sql-with-pytidb.md)
 
-## 統合 {#integrations}
+## 統合
 
 -   [統合の概要](/ai/integrations/vector-search-integration-overview.md)
 -   自動埋め込み
@@ -77,7 +77,7 @@
     -   [VS Code](/ai/integrations/tidb-mcp-vscode.md)
     -   [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
 
-## 参照 {#reference}
+## 参照
 
 -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
 -   [関数と演算子](/ai/reference/vector-search-functions-and-operators.md)

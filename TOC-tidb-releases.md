@@ -2,15 +2,15 @@
 
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## 概要 {#overview}
+## 概要
 
 -   [リリーススケジュール](/releases/release-timeline.md)
 -   [TiDB バージョン管理](/releases/versioning.md)
 -   [リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)
 
-## リリースノート {#release-notes}
+## リリースノート
 
 -   v8.5
     -   [8.5.6](/releases/release-8.5.6.md)

@@ -102,7 +102,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
     > **注記：**
     >
-    > 現在、特定の AWS リージョンのTiDB Cloud StarterとTiDB Cloud Essentialインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
+    > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 
 -   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 

@@ -8,6 +8,60 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年6月30日 {#june-30-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) の安定性、セキュリティ、運用エクスペリエンスを強化しました。以下の機能強化と変更は、新しく作成された TiDB Cloud Essential インスタンスに段階的に展開されています。
+
+        - **接続エクスペリエンスの改善**: 新しく作成された TiDB Cloud Essential インスタンスでスタンドアロンエンドポイントをサポートし、これらのインスタンスへの接続時に必須の[アカウントプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を含める必要がなくなりました。
+        - **root パスワードの変更をサポート**: TiDB Cloud コンソールから root パスワードを直接変更できます。
+        - **データインポートエクスペリエンスの強化**: データインポートページでソースと宛先のフィールドを入力した後、**Test Bucket Access** をクリックして、データをインポートする前に指定したオブジェクトストレージバケットへのアクセスを確認できます。さらに、インポートページにインポート対象ファイルのサイズが表示されるようになり、インポート操作の可視性と管理性が向上しました。
+        - **Branch 機能の提供状況を更新**: **2026年7月14日**以降、新しく作成された TiDB Cloud Essential インスタンスでは [Branch](/tidb-cloud/branch-overview.md) 機能がサポートされなくなります。この日付より前に作成された既存の TiDB Cloud Essential インスタンスは影響を受けません。Branch 機能は [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) では引き続き利用可能です。
+        - **インポートおよびエクスポート機能を更新**: セキュリティ強化のため、ローカルファイルからのデータインポートおよびローカルファイルへのデータエクスポートはサポートされなくなりました。
+        - **DB 監査ログの保存要件を更新**: セキュリティおよびコンプライアンス上の理由により、監査ログ保持用の外部ストレージロケーションを指定する必要があります。
+        - [Changefeed](/tidb-cloud/essential-changefeed-overview.md) は **2026年7月1日**から課金対象機能として利用可能になります。
+
+      これらの機能は段階的に展開されています。早期アクセスについては [support@pingcap.com](mailto:support@pingcap.com) までお問い合わせください。
+
+    - [Top RU](/tidb-cloud/top-ru.md) が、以下のリージョンの [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) でパブリックプレビューとして利用可能になりました。
+
+        - Alibaba Cloud: `Singapore (ap-southeast-1)` および `Tokyo (ap-northeast-1)`
+
+      この機能は、1 分単位で RU 消費量が上位の SQL ステートメントを表示し、最もリソースを消費するクエリをすばやく特定してコスト削減に役立てることができます。
+
+      この機能は段階的に展開されています。早期アクセスについては [support@pingcap.com](mailto:support@pingcap.com) までお問い合わせください。
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターのバックアップおよび復元フローを改善しました。
+
+        - TiDB Cloud Dedicated の **Restore** ページには、**Restore From Region** オプションが含まれなくなりました。TiDB Cloud Dedicated ではバックアップデータがクラスターと同じリージョンに暗黙的に保存されるため、復元元のリージョンを選択する必要がなくなりました。
+        - **Restore to Region** オプションの名前が **Cloud Provider & Region** に変更されました。
+
+      詳細については、[データを新しいクラスターに復元する](/tidb-cloud/backup-and-restore.md) を参照してください。
+
+- **TiDB Cloud Lake**
+
+    - TiDB Cloud Lake がパブリックプレビューになりました。
+
+        TiDB Cloud Lake は、モダンな分析および AI 指向のデータワークフロー向けの、TiDB Cloud におけるクラウドネイティブな分析ウェアハウスです。弾力的なウェアハウス、ANSI SQL 分析、オブジェクトストレージ、全文検索、ベクトル検索、地理空間分析を 1 つのマネージドサービスで提供し、個別の分析インフラを管理することなく、構造化データおよび半構造化データを分析できるよう支援します。
+
+        このパブリックプレビューでは、弾力的なウェアハウスで SQL 分析を実行し、組み込みの検索機能を BI、ログ分析、セマンティック検索、その他のモダンな分析および AI のユースケースに活用できます。
+
+        TiDB Cloud Lake を試すには、[TiDB Cloud コンソール](https://tidbcloud.com/) にログインし、左側のナビゲーションペインで **My Lake** をクリックしてから、右上隅の **Try TiDB Cloud Lake** をクリックします。
+
+        詳細については、[TiDB Cloud Lake documentation](https://docs.pingcap.com/tidbcloudlake/) を参照してください。
+
+**今後の課金調整**
+
+- 以下の課金調整が [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) に対して適用されます。
+
+    - **最小 RCU 課金の更新**: **2026年8月1日**から、最小 RCU 値は設定された最大 RCU 値に基づいて自動的に決定されます（最小 RCU = 設定された最大 RCU の 0.1 ×、下限は 2,000 RCU）。実際の使用量が最小 RCU しきい値を下回る場合、TiDB Cloud は最小 RCU 値に基づいて料金を計算します。**2026年7月1日より前に作成された既存インスタンス**については、この最小 RCU 課金ポリシーの実施は延期され、正確な適用日は後日発表されます。
+    - **追加の課金対象機能**: バックアップ使用量およびネットワーク外向きトラフィックの料金は **2026年9月1日** に適用開始となります。詳細については、[TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
+
 ## 2026年6月16日
 
 **一般的な変更**
