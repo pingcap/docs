@@ -532,9 +532,9 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether TiDB rejects a DXF [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) task when the TiKV disk space precheck predicts insufficient TiKV capacity.
+- This variable controls whether TiDB rejects an [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) job when the TiKV disk space precheck predicts insufficient TiKV capacity.
 - When the value is `OFF`, TiDB still performs the precheck and logs warnings for insufficient TiKV capacity, but it does not reject the DDL job.
-- When the value is `ON`, TiDB rejects the DDL job if the precheck predicts insufficient TiKV capacity and the prediction uses non-pseudo statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. For more information, see [TiKV disk space precheck for `ADD INDEX` tasks](/tidb-distributed-execution-framework.md#tikv-disk-space-precheck-for-add-index-tasks).
+- When the value is `ON`, TiDB rejects the DDL job if the precheck predicts insufficient TiKV capacity and the prediction uses non-pseudo statistics. If the prediction uses pseudo statistics, TiDB logs a warning and does not reject the DDL job. For more information, see [TiKV disk space precheck](/sql-statements/sql-statement-add-index.md#tikv-disk-space-precheck).
 
 ### foreign_key_checks
 

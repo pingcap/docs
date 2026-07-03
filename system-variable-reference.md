@@ -374,6 +374,7 @@ Referenced in:
 
 Referenced in:
 
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md#tikv-disk-space-precheck)
 - [System Variables](/system-variables.md#enforce_disk_space_precheck_before_add_index)
 - [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md#tikv-disk-space-precheck-for-add-index-tasks)
 
