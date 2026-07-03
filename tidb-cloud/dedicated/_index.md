@@ -72,7 +72,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-parquet-files)
 
 </LearningPath>
 
