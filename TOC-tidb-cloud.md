@@ -620,7 +620,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [已连接：诊所服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
