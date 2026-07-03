@@ -39,7 +39,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.5.7, TiDB supports partial indexes, which index only rows that satisfy a predicate defined in the index `WHERE` clause. You can create a partial index using `CREATE INDEX ... WHERE ...`, `ALTER TABLE ... ADD INDEX ... WHERE ...`, or an index definition in `CREATE TABLE`.
 
-    Partial indexes are useful when you frequently query a selective subset of rows or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
+    Partial indexes are useful when you frequently query a subset of rows based on specific conditions or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
 
     To use partial indexes effectively, define a predicate that matches the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 
@@ -71,7 +71,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 
 ### Behavior changes
 
-* TiKV now rejects confirmed invalid `max_ts` updates by default instead of only logging them. This improves safety by preventing invalid timestamp updates without panicking TiKV. To keep the previous log-only behavior, set `storage.max-ts.action-on-invalid-update` to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
+* TiKV now rejects `max_ts` updates that are confirmed to be invalid by default, instead of only logging them. This change improves safety by preventing invalid timestamp updates without triggering a TiKV panic. To keep the previous log-only behavior, set [`storage.max-ts.action-on-invalid-update`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#action-on-invalid-update-new-in-v857) to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium) <!-- component: tikv -->
 * Starting from v8.5.7, TiDB enables [optimizer fix control `52869`](https://docs.pingcap.com/tidb/v8.5/optimizer-fix-controls#52869-new-in-v810) by default. This change allows the optimizer to consider `IndexMerge` automatically when alternative indexes exist, which can change query plans in some cases. [#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate) <!--pr:<https://github.com/pingcap/docs/pull/23142>;tw:qiancai-->
 
 ### MySQL compatibility
@@ -79,6 +79,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 * Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including common use cases such as comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL` <!--2432--><!--tw:qiancai-->
 
     Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](https://docs.pingcap.com/tidb/v8.5/lateral-derived-tables) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution support for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+
 * Support `WITH MAX_USER_CONNECTIONS N` in `CREATE USER` and `ALTER USER` to improve MySQL compatibility. TiDB also adds the `max_user_connections` column to `mysql.user` and lets you use the `max_user_connections` system variable to control the maximum number of connections that a user can establish to a TiDB server instance. <!--pr:<https://github.com/pingcap/docs/pull/23125>;tw:lilin90-->
 
 ### System variables
