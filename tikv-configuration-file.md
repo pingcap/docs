@@ -649,7 +649,7 @@ Configuration items related to `max-ts`.
     + `"panic"`: TiKV panics. If the PD TSO cached in TiKV is not updated in time, TiKV uses an approximate method for validation, in which case invalid requests do not cause TiKV panic.
     + `"error"`: TiKV returns an error and stops processing the request.
     + `"log"`: TiKV prints an error log but still processes the request.
-+ Default value: `"panic"`
++ Default value: `"error"`
 
 ### `cache-sync-interval` <span class="version-mark">New in v8.5.7</span>
 
@@ -661,7 +661,7 @@ Configuration items related to `max-ts`.
 + Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV.
 + If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update-new-in-v857) configuration.
 + Default value: `"60s"`
-+ This value must be greater than [`cache-sync-interval`](#cache-sync-interval-introduced-in-v857). Otherwise, TiKV fails configuration validation and cannot start.
++ This value must be greater than [`cache-sync-interval`](#cache-sync-interval-new-in-v857). Otherwise, TiKV fails configuration validation and cannot start.
 + It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval-new-in-v857).
 
 ## pd
