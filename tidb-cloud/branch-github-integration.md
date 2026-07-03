@@ -123,7 +123,7 @@ github:
 
 ## 分岐型CIワークフローを作成する {#create-a-branching-ci-workflow}
 
-ブランチを活用するためのベストプラクティスの1つは、ブランチングCIワークフローを作成することです。このワークフローを使用すると、プルリクエストをマージする前に、本番インスタンス自体を使用する代わりに、 TiDB Cloud Starterインスタンスのブランチを使用してコードをテストできます。ライブデモは[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)ご覧ください。
+ブランチを活用するためのベストプラクティスの1つは、ブランチングCIワークフローを作成することです。このワークフローを使用すると、プルリクエストをマージする前に、本番インスタンス自体を使用する代わりに、 TiDB Cloud Starterインスタンスのブランチを使用してコードをテストできます。ライブデモは[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)をご覧ください。
 
 ワークフローを作成するための主な手順は以下のとおりです。
 
