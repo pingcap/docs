@@ -3,7 +3,7 @@ title: Import Local Files to TiDB Cloud Starter
 summary: ローカル ファイルをTiDB Cloud Starter にインポートする方法を学びます。
 ---
 
-# ローカルファイルをTiDB Cloud Starterにインポートする {#import-local-files-to-tidb-cloud-starter-or-essential}
+# ローカルファイルをTiDB Cloud Starterにインポートする {#import-local-files-to-tidb-cloud-starter}
 
 ローカルファイルをTiDB Cloud Starterに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
 
