@@ -2,15 +2,15 @@
 
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## クイックスタート {#quick-start}
+## クイックスタート
 
 -   [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [TiDBの基本](/develop/dev-guide-tidb-basics.md)
 -   [TiDBにおけるCRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
 
-## ガイド {#guides}
+## ガイド
 
 -   TiDBに接続する
     -   [概要](/develop/dev-guide-connect-to-tidb.md)
@@ -101,7 +101,7 @@
     -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
     -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
 
-## 統合 {#integrations}
+## 統合
 
 -   サードパーティサポート
     -   [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md)
@@ -110,7 +110,7 @@
 -   [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
 -   [WordPress](/develop/dev-guide-wordpress.md)
 
-## 参照 {#reference}
+## 参照
 
 -   開発ガイドライン
     -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)

@@ -2,16 +2,16 @@
 
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## TiDB Cloud {#tidb-cloud}
+## TiDB Cloud
 
 -   [APIの概要](/api/tidb-cloud-api-overview.md)
 -   [API v1beta2](/api/tidb-cloud-api-v1beta2.md)
 -   [API v1beta1](/api/tidb-cloud-api-v1beta1.md)
 -   [API v1beta](/api/tidb-cloud-api-v1beta.md)
 
-## TiDB Self-Managed {#tidb-self-managed}
+## TiDB Self-Managed
 
 -   [TiProxy API](/api/tiproxy-api-overview.md)
 -   [データ移行API](/api/dm-api-overview.md)

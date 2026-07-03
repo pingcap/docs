@@ -1,9 +1,9 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## さあ始めましょう {#get-started}
+## さあ始めましょう
 
 - TiDB Cloudを選ぶ理由
   - [導入](/tidb-cloud/tidb-cloud-intro.md)
@@ -26,7 +26,7 @@
   - [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
   - [セキュリティ](/tidb-cloud/security-concepts.md)
 
-## ガイド {#guides}
+## ガイド
 
 - [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
@@ -193,7 +193,7 @@
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
-## 参照 {#reference}
+## 参照
 
 - SQLリファレンス
   - [TiDBでSQLを探求しよう](/basic-sql-operations.md)

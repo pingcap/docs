@@ -2,9 +2,9 @@
 
 <!-- markdownlint-disable MD041 -->
 
-# 目次 {#table-of-contents}
+# 目次
 
-## リリースノート {#release-notes}
+## リリースノート
 
 -   [2026](/tidb-cloud/releases/tidb-cloud-release-notes.md)
 -   [2025](/tidb-cloud/releases/release-notes-2025.md)
@@ -15,7 +15,7 @@
     -   [2021](/tidb-cloud/releases/release-notes-2021.md)
     -   [2020](/tidb-cloud/releases/release-notes-2020.md)
 
-## メンテナンス通知 {#maintenance-notifications}
+## メンテナンス通知
 
 -   [[2024-09-15] TiDB Cloudコンソールメンテナンスのお知らせ](/tidb-cloud/releases/notification-2024-09-15-console-maintenance.md)
 -   [[2024-04-18] TiDB Cloudデータ移行（DM）機能メンテナンスのお知らせ](/tidb-cloud/releases/notification-2024-04-18-dm-feature-maintenance.md)
