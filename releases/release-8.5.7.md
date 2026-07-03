@@ -107,7 +107,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 ### Other changes
 
 * Upgrade the Go compiler version of TiDB from go1.25.8 to go1.25.10, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure smooth compilation. <!--2468--> <!--tw:lilin90-->
-* Upgrade the Rust compiler version of v8.5 from nightly-2023-12-28 to nightly-2025-02-28, which improves the TiKV performance. If you are a TiKV developer, upgrade your Rust compiler version to ensure smooth compilation.
+* Upgrade the Rust compiler version of TiKV v8.5 from nightly-2023-12-28 to nightly-2025-02-28, which improves the TiKV performance. If you are a TiKV developer, upgrade your Rust compiler version to ensure smooth compilation.
 
 ## Deprecated features
 
