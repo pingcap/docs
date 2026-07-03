@@ -650,7 +650,7 @@ Configuration items related to `max-ts`.
     + `"panic"`: TiKV panics. If the PD TSO cached in TiKV is not updated in time, TiKV uses an approximate method for validation, in which case invalid requests do not cause TiKV panic.
     + `"error"`: TiKV returns an error and stops processing the request.
     + `"log"`: TiKV prints an error log but still processes the request.
-+ Default value: `"panic"`
++ Default value: `"panic"`. Before v9.0.0, the default value is `"error"`.
 
 ### `cache-sync-interval` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
