@@ -70,7 +70,7 @@ After a restore failure, avoid writing, deleting, or creating tables in the clus
 >
 > If you are sure that you want to abandon the current restore result, first perform one of the following operations based on the restore type, and then `DROP` the restored table:
 >
-> - For `restore point`, execute [`br abort`](/br/br-pitr-manual.md#中止恢复操作).
+> - For `restore point`, execute [`br abort`](/br/br-pitr-manual.md#abort-restore-operations).
 > - For `restore full`, manually delete the checkpoint database in the downstream cluster. The name format of the checkpoint database is `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint_<restoreID>`, where `<restoreID>` can be found in `mysql.tidb_restore_registry`.
 
 ### Cross-major-version checkpoint recovery is not recommended
