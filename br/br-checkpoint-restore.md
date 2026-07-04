@@ -63,15 +63,15 @@ After a restore failure, avoid writing, deleting, or creating tables in the clus
 
 > **Warning:**
 >
-> Starting from v8.5.5, if you delete a table being restored during the restore and then retry the restore from the checkpoint, you might encounter the following issues (see [#68709](https://github.com/pingcap/tidb/issues/68709) for details):
+> Starting from v8.5.5, if you delete a table during the restore process and then retry the restore from the checkpoint, you might encounter the following issues (see [#68709](https://github.com/pingcap/tidb/issues/68709) for details):
 >
-> - The restore is terminated due to a checksum verification failure.
-> - The restored data is lost some time after the restore is completed.
+> - The restore terminates due to a checksum verification failure.
+> - The restored data is lost some time after the restore completes.
 >
 > If you are sure that you want to abandon the current restore result, first perform one of the following operations based on the restore type, and then `DROP` the restored table:
 >
 > - For `restore point`, execute [`br abort`](/br/br-pitr-manual.md#abort-restore-operations).
-> - For `restore full`, manually delete the checkpoint database in the downstream cluster. The name format of the checkpoint database is `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint_<restoreID>`, where `<restoreID>` can be found in `mysql.tidb_restore_registry`.
+> - For `restore full`, manually delete the checkpoint database in the downstream cluster. The name format of the checkpoint database is `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint_<restoreID>`, where you can find `<restoreID>` in the `mysql.tidb_restore_registry` table.
 
 ### Cross-major-version checkpoint recovery is not recommended
 
