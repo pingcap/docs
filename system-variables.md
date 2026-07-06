@@ -1266,7 +1266,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Range: `[1, 2147483647]`
 - This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
 - Before v8.4.0, this concurrency is fixed at `1`. 
-- Starting from v8.5.7, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+- Starting from v8.5.7 and v9.0.0, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_auto_analyze_end_time
 
@@ -1330,7 +1330,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`
 - Range: `[1, 256]`
 - This variable is used to set the concurrency of executing the automatic update of statistics. 
-- Starting from v8.5.7, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
 
@@ -6493,7 +6493,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- Starting from v8.5.7, the default value changes from `1` to `4`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+- Starting from v8.5.7 and v9.0.0, the default value changes from `1` to `4`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
