@@ -187,7 +187,7 @@ In a read hotspot scenario, the hotspot TiKV node cannot process read requests i
 
 ### CPU-aware hot Region scheduling for read hotspots
 
-Starting from v8.5.7 and v9.0.0, PD supports CPU-aware hot Region scheduling for read hotspots. TiKV reports per-Region read CPU usage in store heartbeats, and PD can use CPU usage as a scheduling dimension. This mechanism helps PD identify read hotspots whose QPS or byte throughput appears balanced but whose TiKV CPU usage remains uneven, such as workloads with queries that have different CPU costs or clusters where TiKV nodes handle different workload patterns.
+Starting from v8.5.7 and v9.0.0, PD supports CPU-aware hot Region scheduling for read hotspots. TiKV reports hot Region read CPU usage in store heartbeats, and PD can use CPU usage as a scheduling dimension. This mechanism helps PD identify read hotspots whose QPS or byte throughput appears balanced but whose TiKV CPU usage remains uneven, such as workloads with queries that have different CPU costs or clusters where TiKV nodes handle different workload patterns.
 
 - For clusters that support read CPU reporting, the default `read-priorities` value of `balance-hot-region-scheduler` is `cpu,byte`. 
 - For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. 
