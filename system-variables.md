@@ -2042,7 +2042,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `OFF`
 - This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
 
-### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
