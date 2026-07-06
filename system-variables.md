@@ -2042,8 +2042,6 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `OFF`
 - This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
 
-<<<<<<< HEAD
-=======
 ### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 - Scope: GLOBAL
@@ -2061,16 +2059,6 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
     - Changes such as Region split, Region merge, or Leader migration occur frequently in the cluster, causing many Region cache invalidations and triggering concentrated retries of query requests, generating a large number of Region query requests.
 - This variable and [`pd_enable_follower_handle_region`](#pd_enable_follower_handle_region-new-in-v760) optimize performance in complementary directions: the former reduces the number of requests sent to PD through batching, while the latter reduces the load on the PD leader by allowing PD followers to handle Region query requests. You can enable both variables at the same time.
 
-### tidb_enable_binding_usage <span class="version-mark">New in v9.0.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to collect the usage statistics of SQL plan bindings. When it is set to `ON`, TiDB writes the usage statistics of SQL plan bindings to the `mysql.bind_info` table every six hours.
-
->>>>>>> 117ebb012f (master: add the description of tidb_enable_batch_query_region (#23037))
 ### tidb_enable_cascades_planner
 
 > **Warning:**
