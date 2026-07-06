@@ -68,7 +68,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + "Session Tracker: Add GTIDs context to the OK packet"
 + Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
 + `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
-+ Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
++ Lateral derived tables (TiDB supports parsing [the `LATERAL` derived table syntax](/lateral-derived-tables.md) but does not support executing queries that use this syntax) [#40328](https://github.com/pingcap/tidb/issues/40328)
 + JOIN ON subquery [#11414](https://github.com/pingcap/tidb/issues/11414)
 
 ## Differences from MySQL
