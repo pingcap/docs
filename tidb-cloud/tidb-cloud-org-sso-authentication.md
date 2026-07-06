@@ -40,7 +40,7 @@ Cloud Organization SSO が有効になっている場合、メンバーはTiDB C
 
 ### 組織メンバーの認証方法を決定する {#decide-authentication-methods-for-your-organization-members}
 
-TiDB Cloud は、組織 SSO に次の認証方法を提供します。
+TiDB Cloud は、Cloud Organization SSO に次の認証方法を提供します。
 
 -   ユーザー名とパスワード
 -   Google
