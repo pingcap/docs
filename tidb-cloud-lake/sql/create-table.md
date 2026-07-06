@@ -204,7 +204,7 @@ CREATE TABLE employees (
 
 {{{ .lake }}}'s syntax is difference from MySQL mainly in the data type and some specific index hints.
 
-Unlike MySQL, {{{ .lake }}} follows PostgreSQL-style identifier casing by default: unquoted column names are folded to lowercase, while double-quoted names preserve their case and are case-sensitive. This is why a table created with quoted, case-preserving column names (e.g. `"Employee_ID"`) can return rows for `SELECT *` but fail for `SELECT Employee_ID` or `SELECT employee_id`. See [SQL Identifiers](/tidb-cloud-lake/sql/sql-identifiers.md#identifier-casing-rules) for the casing rules, the related settings, and how to troubleshoot this behavior.
+Unlike MySQL, {{{ .lake }}} follows PostgreSQL-style identifier casing by default: unquoted column names are folded to lowercase, while double-quoted names preserve their case and are case-sensitive. As a result, a table created with quoted, case-preserving column names (for example, `"Employee_ID"`) can return rows for `SELECT *` but fail for `SELECT Employee_ID` or `SELECT employee_id`. For more information about identifier casing rules, related settings, and troubleshooting, see [SQL Identifiers](/tidb-cloud-lake/sql/sql-identifiers.md#identifier-casing-rules).
 
 ## Access control requirements
 
