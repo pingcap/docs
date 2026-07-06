@@ -1,6 +1,6 @@
 {
-  "title": "TiDB X Essential Dynamic Tracker",
-  "description": "This dashboard provides a high-level overview for TiDB X Essential instances. It includes resource unit metrics, and excludes Dedicated-only node, DM, and CDC metrics.",
+  "title": "TiDB Cloud Essential Dynamic Tracker",
+  "description": "This dashboard provides a high-level overview for TiDB Cloud Essential instances. It includes resource unit metrics, and excludes Dedicated-only node, DM, and CDC metrics.",
   "layout_type": "ordered",
   "reflow_type": "fixed",
   "template_variables": [
@@ -30,7 +30,7 @@
             "id": 0,
             "definition": {
               "type": "note",
-              "content": "Database performance and storage metrics for TiDB X Essential.",
+              "content": "Database performance and storage metrics for TiDB Cloud Essential.",
               "background_color": "yellow",
               "font_size": "18",
               "text_align": "left",
@@ -475,7 +475,7 @@
             "id": 0,
             "definition": {
               "type": "note",
-              "content": "Connection state at TiDB X Essential instance scope.",
+              "content": "Connection state at TiDB Cloud Essential instance scope.",
               "background_color": "yellow",
               "font_size": "18",
               "text_align": "left",
@@ -915,7 +915,7 @@
             "id": 0,
             "definition": {
               "type": "note",
-              "content": "This panel shows RU usage for TiDB X Essential instances.",
+              "content": "This panel shows RU usage for TiDB Cloud Essential instances.",
               "background_color": "yellow",
               "font_size": "18",
               "text_align": "left",

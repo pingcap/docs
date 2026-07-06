@@ -52,7 +52,7 @@
             }
         ]
     },
-    "description": "TiDB X Essential dashboard for Grafana. Built from the current TiDB X support matrix: 10 DB metrics, 2 storage metrics, and resource unit metrics.",
+    "description": "TiDB Cloud Essential dashboard for Grafana. Built from the current TiDB Cloud support matrix: 10 DB metrics, 2 storage metrics, and resource unit metrics.",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -1434,6 +1434,6 @@
         "to": "now"
     },
     "timezone": "",
-    "title": "TiDB X Essential Overview",
+    "title": "TiDB Cloud Essential Overview",
     "version": 1
 }
