@@ -368,7 +368,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 
 ## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-A partial index is an index built on a subset of rows in a table. When creating a partial index, you can specify a conditional expression, also known as a predicate, to define the subset. The index contains entries only for rows that satisfy the predicate.
+A partial index is an index built on a subset of rows in a table. When creating a partial index, you can specify a conditional expression, also known as a predicate, to define that subset of rows. The index contains entries only for the rows that satisfy the predicate.
 
 ### Usage scenarios
 
