@@ -56,7 +56,7 @@ In this example, the `LATERAL` derived table is used as the right table of the `
 
 ## MySQL compatibility
 
-TiDB's LATERAL derived table syntax is compatible with MySQL 8.0 at the syntax level.
+The `LATERAL` derived table syntax of TiDB is compatible with MySQL 8.0 at the syntax level.
 
 ## See also
 
