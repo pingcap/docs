@@ -46,13 +46,39 @@ Note that using double backticks (``) or double quotes (") is equivalent:
 
 > **Note:**
 >
-> {{{ .lake }}} allows you to have control over the casing sensitivity of identifiers. Two key settings are available:
+> By default, {{{ .lake }}} follows PostgreSQL-style identifier casing: unquoted identifiers are folded to lowercase, while double-quoted identifiers preserve their exact case and are case-sensitive. This behavior is controlled by two settings:
 >
-> - unquoted_ident_case_sensitive: When set to 1, this option preserves the case of characters for unquoted identifiers, ensuring they are case-sensitive. If left at the default value of 0, unquoted identifiers remain case-insensitive, converting to lowercase.
+> - `unquoted_ident_case_sensitive`: Defaults to `0`, so unquoted identifiers are case-insensitive and folded to lowercase. Setting it to `1` preserves the case of unquoted identifiers, making them case-sensitive.
+> - `quoted_ident_case_sensitive`: Defaults to `1`, so double-quoted identifiers preserve the case of characters and are case-sensitive. Setting it to `0` makes double-quoted identifiers case-insensitive.
 >
-> - quoted_ident_case_sensitive: By setting this option to 0, you can indicate that double-quoted identifiers should not preserve the case of characters, making them case-insensitive.
+> If you prefer MySQL-style behavior where identifiers are case-insensitive regardless of quoting, set both `unquoted_ident_case_sensitive` and `quoted_ident_case_sensitive` to `0`.
 
-This example demonstrates how {{{ .lake }}} treats the casing of identifiers when creating and listing databases:
+### Why `SELECT *` works but `SELECT <column>` fails
+
+A common source of confusion is a table whose columns were created with case-preserving quotes (double quotes or backticks), for example `"Employee_ID"`. With the default settings, `SELECT *` returns data, but referencing a column by name fails no matter how you case it:
+
+```sql
+-- Columns created with the case preserved
+CREATE TABLE xxxTable ("Employee_ID" INT, "Department" VARCHAR);
+INSERT INTO xxxTable VALUES (1, 'Eng');
+
+-- Works: no column is referenced by name
+SELECT * FROM xxxTable;
+
+-- Fails: unquoted names are folded to lowercase (employee_id / department),
+-- which do not match the stored "Employee_ID" / "Department"
+SELECT Employee_ID FROM xxxTable;
+SELECT employee_id FROM xxxTable;
+
+-- Works: double quotes preserve the case and match the stored column name
+SELECT "Employee_ID" FROM xxxTable;
+```
+
+This happens because `unquoted_ident_case_sensitive` defaults to `0`, so both `Employee_ID` and `employee_id` are resolved as `employee_id`, which does not exist. To confirm the actual column casing, run `DESC xxxTable;` or `SHOW CREATE TABLE xxxTable;`.
+
+To avoid this, either reference the column with double quotes using the exact case from creation time, or, better, use only lowercase letters, digits, and underscores (no quoting) when creating databases, tables, and columns.
+
+The following example demonstrates how {{{ .lake }}} treats the casing of identifiers when creating and listing databases:
 
 ```sql
 -- Create a database named "datalake"
