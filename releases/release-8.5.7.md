@@ -107,7 +107,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
 | TiKV | [`storage.max-ts.cache-sync-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#cache-sync-interval-new-in-v857) | Newly added | Controls the interval at which TiKV updates its local PD TSO cache. The default value is `"15s"`. <!--pr:<https://github.com/pingcap/docs/pull/23197/files>;tw:qiancai--> |
 | TiKV | [`storage.max-ts.max-drift`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#max-drift-new-in-v857) | Newly added | Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV. The default value is `"60s"`. <!--pr:<https://github.com/pingcap/docs/pull/23197/files>;tw:qiancai--> |
 
-### Other changes
+### Compiler versions
 
 * Upgrade the Go compiler version of TiDB from go1.25.8 to go1.25.10, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure smooth compilation. [#953](https://github.com/PingCAP-QE/artifacts/pull/953) @[wuhuizuo](https://github.com/wuhuizuo) <!--2468--> <!--tw:lilin90-->
 * Upgrade the Rust compiler version of TiKV v8.5 from nightly-2023-12-28 to nightly-2025-02-28, which improves the TiKV performance. If you are a TiKV developer, upgrade your Rust compiler version to ensure smooth compilation.
