@@ -366,7 +366,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 - If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
 - For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
 
-## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+## Partial indexes <span class="version-mark">New in v8.5.7</span>
 
 A partial index is an index built on a subset of rows in a table. When creating a partial index, you can specify a conditional expression, also known as a predicate, to define that subset of rows. The index contains entries only for the rows that satisfy the predicate.
 
