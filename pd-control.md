@@ -1115,7 +1115,7 @@ Usage:
 
     > **Note:**
     >
-    > If a cluster component is earlier than v5.2, the configuration of the `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility.
+    > If any component in the cluster is earlier than v5.2, the configuration of the `query` dimension does not take effect. After some components are upgraded to v5.2 or later, the scheduler still prioritizes hotspot balancing based on the `byte` and `key` dimensions by default. After all components in the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility.
     >
     > Starting from v8.5.7 and v9.0.0, TiKV reports read CPU usage for hot Region scheduling. For clusters that support read CPU reporting, the default `read-priorities` value is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
 
