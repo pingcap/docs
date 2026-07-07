@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB Cloud instances with the Datadog integra
 
 # Integrate TiDB Cloud with Datadog (Preview)
 
-TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send metrics about your <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instances to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDB Cloud supports integration with Datadog. You can configure TiDB Cloud to send metrics for your <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instances to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
 ## Prerequisites
 
@@ -13,9 +13,9 @@ TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send me
 
     If you do not have a Datadog account, sign up at [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup).
 
-- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner`, `Project Owner` or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance under your Organization in TiDB Cloud.
+- To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner`, `Project Owner`, or `Instance Manager` access in TiDB Cloud. To view the integration page, you need at least the `Project Viewer` or `Instance Viewer` role to access the target <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance under your organization in TiDB Cloud.
 
-## Limitation
+## Limitations
 
 - Datadog integration is not available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances.
 - Datadog integration is not available when the status of your <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instance is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
@@ -50,12 +50,12 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
 6. Click **Yes, Replace** to confirm the import.
 
-### Step 2. Integrate with your Datadog API Key
+### Step 2. Integrate with your Datadog API key
 
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
-2. In the left navigation pane, click **Integrations** > **Integration to Datadog(Preview)**.
+2. In the left navigation pane, click **Integrations** > **Integration to Datadog (Preview)**.
 3. Enter your Datadog API key and choose your Datadog Region.
 4. Click **Test Integration**.
 
@@ -69,7 +69,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 <CustomContent plan="premium">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
-2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Datadog(Preview)**.
+2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Datadog (Preview)**.
 3. Enter your Datadog API key and choose your Datadog Region.
 4. Click **Test Integration**.
 
@@ -82,9 +82,9 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
 ## View the pre-built dashboard
 
-To view the pre-built dashboard after the integration, go to **Dashboards** > **Dashboard List** in [Datadog](https://app.datadoghq.com), and then select the dashboard imported in [Step 1](#step-1-import-the-pre-built-datadog-dashboard). On the dashboard page, you can filter by your target instance name, and view the metrics.
+To view the pre-built dashboard after the integration, go to **Dashboards** > **Dashboard List** in [Datadog](https://app.datadoghq.com), and then select the dashboard imported in [Step 1](#step-1-import-the-pre-built-datadog-dashboard). On the dashboard page, you can filter by your target instance name and view the metrics.
 
-You can also access the **Dashboard List** page of Datadog from the [TiDB Cloud console](https://tidbcloud.com/): go to the **Integrations** page of your target instance, click **Datadog(Preview)**, and then click **Dashboard**.
+You can also access the **Dashboard List** page in Datadog from the [TiDB Cloud console](https://tidbcloud.com/): go to the **Integrations** page of your target instance, click **Datadog (Preview)**, and then click **Dashboard**.
 
 ## Metrics available to Datadog
 
@@ -94,7 +94,7 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 
 > **Note:**
 >
-> Currently, the changefeed feature for {{{ .premium }}} is only available upon request, and the `tidb_cloud.changefeed_*` metrics are currently not available.
+> Currently, the changefeed feature for {{{ .essential }}} is only available upon request, and the `tidb_cloud.changefeed_*` metrics are not available.
 
 | Metric name | Metric type | Labels | Description |
 |:--- |:--- |:--- |:--- |
@@ -103,10 +103,10 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 | `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total time consumed by all SQL statements running in TiDB per second, including the CPU time of all processes and the non-idle waiting time |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
-| `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (for example, syntax errors, primary key conflicts) occurred when executing SQL statements per second |
+| `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (such as syntax errors and primary key conflicts) that occur per second when executing SQL statements |
 | `tidb_cloud.db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
-| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
-| `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
+| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of queries that hit the execution plan cache per second |
+| `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and the time a response is returned to the client |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the {{{ .essential }}} instance in bytes |
 | `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the {{{ .essential }}} instance in bytes. Returns 0 if TiFlash is not enabled. |
@@ -123,10 +123,10 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 | `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of clients disconnected by connection result |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The total time consumed by all SQL statements running in TiDB per second, including the CPU time of all processes and the non-idle waiting time |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of SQL statements executed per second, counted according to statement types |
-| `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (for example, syntax errors, primary key conflicts) occurred when executing SQL statements per second |
+| `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of error types (such as syntax errors and primary key conflicts) that occur per second when executing SQL statements |
 | `tidb_cloud.db_command_per_second` | gauge | `type: Query\|Ping\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of commands processed by TiDB per second |
-| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The statistics of queries hitting the Execution Plan Cache per second |
-| `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and returned to the client |
+| `tidb_cloud.db_queries_using_plan_cache_ops` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of queries that hit the execution plan cache per second |
+| `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The duration between the time a network request is sent to TiDB and the time a response is returned to the client |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | The number of transactions executed per second |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The row-based storage size of the {{{ .premium }}} instance in bytes |
 | `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | The columnar storage size of the {{{ .premium }}} instance in bytes |
