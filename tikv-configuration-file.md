@@ -643,26 +643,27 @@ Configuration items related to `max-ts`.
 
 `max-ts` is the maximum read timestamp known to the current TiKV node. It ensures linearizability and transaction concurrency control semantics for async commit and one-phase commit (1PC) transactions.
 
-### `action-on-invalid-update` <span class="version-mark">New in v9.0.0</span>
+### `action-on-invalid-update` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-+ Determines how TiKV handles invalid `max-ts` update requests. If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and [`max-drift`](#max-drift-new-in-v900)**, TiKV considers it an invalid `max-ts` update request. Invalid `max-ts` update requests might break the linearizability and transaction concurrency control semantics of the TiDB cluster.
++ Determines how TiKV handles invalid `max-ts` update requests. If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and [`max-drift`](#max-drift-new-in-v857-and-v900)**, TiKV considers it an invalid `max-ts` update request. Invalid `max-ts` update requests might break the linearizability and transaction concurrency control semantics of the TiDB cluster.
 + Value options:
     + `"panic"`: TiKV panics. If the PD TSO cached in TiKV is not updated in time, TiKV uses an approximate method for validation, in which case invalid requests do not cause TiKV panic.
     + `"error"`: TiKV returns an error and stops processing the request.
     + `"log"`: TiKV prints an error log but still processes the request.
-+ Default value: `"panic"`
++ Default value: `"panic"`. Before v9.0.0, the default value is `"error"`.
 
-### `cache-sync-interval` <span class="version-mark">New in v9.0.0</span>
+### `cache-sync-interval` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Controls the interval at which TiKV updates its local PD TSO cache. TiKV periodically retrieves the latest timestamp from PD and caches it locally to check the validity of `max-ts`.
 + Default value: `"15s"`
 
-### `max-drift` <span class="version-mark">New in v9.0.0</span>
+### `max-drift` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV.
-+ If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update-new-in-v900) configuration.
++ If a read or write request uses a timestamp that exceeds **the sum of the PD TSO cached in TiKV and `max-drift`**, TiKV considers it an invalid `max-ts` update request and handles it according to the [`action-on-invalid-update`](#action-on-invalid-update-new-in-v857-and-v900) configuration.
 + Default value: `"60s"`
-+ It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval-new-in-v900).
++ This value must be greater than [`cache-sync-interval`](#cache-sync-interval-new-in-v857-and-v900). Otherwise, TiKV fails configuration validation and cannot start.
++ It is recommended to set this value to at least three times the value of [`cache-sync-interval`](#cache-sync-interval-new-in-v857-and-v900).
 
 ## pd
 
@@ -2709,7 +2710,7 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 
 Configuration items related to resource metering.
 
-### `enable-network-io-collection` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `enable-network-io-collection` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 + Controls whether to collect TiKV network traffic and logical I/O information in [Top SQL](/dashboard/top-sql.md) in addition to CPU data.
 + When enabled, TiKV additionally records inbound network bytes, outbound network bytes, logical read bytes, and logical write bytes during request processing.

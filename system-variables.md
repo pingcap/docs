@@ -1262,9 +1262,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `3`
 - Range: `[1, 2147483647]`
-- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at 1. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- Before v8.4.0, this concurrency is fixed at `1`. 
+- Starting from v8.5.7 and v9.0.0, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_auto_analyze_end_time
 
@@ -1325,9 +1327,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- This variable is used to set the concurrency of executing the automatic update of statistics. 
+- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
 
@@ -2089,6 +2092,23 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
+
+### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the Batch Query Region feature. When TiDB accesses data, it queries PD for Region routing information to update the local Region cache. By default, point query requests such as `GetRegion` (queries the Region containing a key), `GetPrevRegion` (queries the previous adjacent Region by key), and `GetRegionByID` (queries by Region ID) are independent unary gRPC requests. The Batch Query Region feature batches and merges these three types of requests.
+    - When this variable is `OFF`, TiDB sends each point query for Region information to PD as an independent unary gRPC request.
+    - When this variable is `ON`, TiDB batches concurrent point query requests for Region information within a short period through the `QueryRegion` gRPC stream and sends them to PD together. PD then processes them and returns the results. Similar to the batching mechanism for TSO requests, this feature can significantly reduce the number of gRPC requests, thereby reducing the CPU overhead of the PD leader when it handles a large number of Region query requests.
+- This variable does not affect scan requests such as `BatchScanRegions`. Although `BatchScanRegions` can merge queries for multiple key ranges into one request, it is an independent unary gRPC request and does not go through the `QueryRegion` batching path.
+- Changes to this variable take effect immediately across the cluster without restarting TiDB, so you can enable or disable it dynamically. When you enable this variable, TiDB switches to batching mode to obtain Region information. When you disable it, TiDB resumes sending unary gRPC requests one by one.
+- You can enable the Batch Query Region feature in the following scenarios:
+    - The cluster has a large number of Regions, TiDB query concurrency is high, and Region cache misses or invalidations generate many concurrent Region query requests, resulting in high CPU pressure on the PD leader.
+    - Changes such as Region split, Region merge, or Leader migration occur frequently in the cluster, causing many Region cache invalidations and triggering concentrated retries of query requests, generating a large number of Region query requests.
+- This variable and [`pd_enable_follower_handle_region`](#pd_enable_follower_handle_region-new-in-v760) optimize performance in complementary directions: the former reduces the number of requests sent to PD through batching, while the latter reduces the load on the PD leader by allowing PD followers to handle Region query requests. You can enable both variables at the same time.
 
 ### tidb_enable_binding_usage <span class="version-mark">New in v9.0.0</span>
 
@@ -2865,6 +2885,26 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
+
+### tidb_enable_strict_not_null_check <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column.
+- Possible values:
+    - `ON`: Enables strict `NOT NULL` validation. This behavior is closer to MySQL 8.0 semantics.
+        - In strict SQL mode: if you insert a `NULL` value into a `NOT NULL` column, TiDB returns an error.
+        - In non-strict SQL mode: for a single-row `INSERT` statement, if you insert a `NULL` value into a `NOT NULL` column, TiDB returns an error; for a multi-row `INSERT` statement, if you insert a `NULL` value into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value of the column data type.
+    - `OFF`: Disables strict `NOT NULL` validation for compatibility with the permissive behavior in earlier TiDB versions. When disabled, if you insert a `NULL` value into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value for the column data type. For example, TiDB writes `0` for numeric types and an empty string `''` for string types.
+
+> **Note:**
+>
+> - Earlier TiDB versions were permissive in validating `NOT NULL` constraints. When you insert a `NULL` value into a `NOT NULL` column, TiDB might automatically write the implicit default value of the column data type. Starting from v8.5.0, TiDB tightened this validation: even in non-strict SQL mode, inserting a `NULL` value into a `NOT NULL` column might return an error. This behavior is closer to MySQL 8.0 semantics but might affect applications that depend on the earlier permissive behavior.
+>
+> - If you upgrade from an earlier TiDB version to a version where strict `NOT NULL` validation is enabled, and your existing application logic depends on the behavior of automatically using implicit default values after writing `NULL` to `NOT NULL` columns, related SQL statements might return errors after the upgrade. If you cannot immediately modify the business logic, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks. It is recommended that you later update the application logic to avoid explicitly writing `NULL` values to `NOT NULL` columns.
 
 ### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
 
@@ -6489,8 +6529,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `4`
 - Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Starting from v8.5.7 and v9.0.0, the default value changes from `1` to `4`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
