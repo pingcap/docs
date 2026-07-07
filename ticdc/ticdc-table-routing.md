@@ -3,7 +3,7 @@ title: TiCDC Table Routing
 summary: Learn about table routing configuration in the TiCDC new architecture, including how to rewrite downstream database and table names using target-schema and target-table, how to handle DDL rewriting and routing conflicts, and how to troubleshoot common issues.
 ---
 
-# TiCDC Table Routing <span class="version-mark">Introduced in v8.5.7</span>
+# TiCDC Table Routing <span class="version-mark">New in v8.5.7</span>
 
 TiCDC table routing allows you to map upstream tables to specified downstream database names or table names through changefeed configuration. This feature applies only to the [TiCDC new architecture](/ticdc/ticdc-architecture.md) and is not supported by the [TiCDC old architecture](/ticdc/ticdc-classic-architecture.md).
 
