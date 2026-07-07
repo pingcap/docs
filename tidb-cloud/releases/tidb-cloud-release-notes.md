@@ -8,6 +8,36 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## July 7, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support the Datadog integration (public preview).
+
+        You can now configure TiDB Cloud to send key metrics from your TiDB Cloud Essential instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
+
+        For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
+
+- **TiDB Cloud Premium**
+
+    - Support the Datadog integration (public preview).
+
+        You can now configure TiDB Cloud to send key metrics from your TiDB Cloud Premium instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
+
+        For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
+
+**API changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Introduce the changefeed API endpoints for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated), providing programmatic management of change data capture (CDC) changefeeds.
+
+        You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Kafka, MySQL, S3, GCS, and Azure Blob.
+
+        For more information, see [Changefeed API v1beta1 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/#tag/Changefeed).
+
 ## June 30, 2026
 
 **General changes**
