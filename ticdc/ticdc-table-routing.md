@@ -172,13 +172,13 @@ target-schema = "archive"
 target-table = "{table}_routed"
 ```
 
-For the following upstream DDL:
+For the following upstream DDL statement:
 
 ```sql
 RENAME TABLE `sales`.`temp_table` TO `sales`.`renamed_table`;
 ```
 
-TiCDC rewrites it into the following downstream DDL:
+TiCDC rewrites it into the following downstream DDL statement:
 
 ```sql
 RENAME TABLE `archive`.`temp_table_routed` TO `archive`.`renamed_table_routed`;
