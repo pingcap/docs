@@ -105,7 +105,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `ON`. Before v8.5.7, the default value is `OFF`.
 - Possible values: `ON`, `OFF`
-- When this fix control is set to `OFF`, if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge. For more details, see the **Note** in [Explain Statements Using Index Merge](/explain-index-merge.md#examples).
+- When this fix control is set to `OFF`, if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer does not automatically choose index merge. For more information, see the **Note** in [Explain Statements Using Index Merge](/explain-index-merge.md#examples).
 - When this fix control is set to `ON`, the preceding limitation is removed, and the optimizer can choose index merge automatically in more queries. However, due to factors such as inaccurate cost estimation, the optimizer might miss the otherwise optimal execution plan.
 
 ### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">New in v8.3.0</span>

@@ -92,7 +92,7 @@ When using the intersection-type index merge to access tables, the optimizer can
 >
 > - You can use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) to force the optimizer to apply Index Merge, regardless of the setting of `tidb_enable_index_merge`. To enable Index Merge when the filtering conditions contain expressions that cannot be pushed down, you must use the SQL hint [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-).
 >
-> - When [Optimizer Fix Control 52869](/optimizer-fix-controls.md#52869-new-in-v810) is set to `OFF`, if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer will not automatically use index merge. To use index merge, you need to use the optimizer hint. Starting from v8.1.0, you can remove this limitation by enabling this fix control; starting from v8.5.7, its default value is changed to `ON`, and the preceding limitation is removed by default. This enables the optimizer to choose index merge automatically in more queries.
+> - When [Optimizer Fix Control 52869](/optimizer-fix-controls.md#52869-new-in-v810) is set to `OFF`, if the optimizer can choose the single index scan method (other than full table scan) for a query plan, the optimizer does not automatically choose index merge. To use index merge, you need to specify an optimizer hint. Starting from v8.5.7, the default value of this control is changed to `ON`, which removes the preceding limitation by default and enables the optimizer to choose index merge automatically in more queries.
 >
 > - Index Merge is not supported in [temporary tables](/temporary-tables.md) for now.
 >
