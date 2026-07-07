@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can now configure TiDB Cloud to send key metrics from your TiDB Cloud Essential instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
 
-        For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
+        For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential).
 
 - **TiDB Cloud Premium**
 
@@ -26,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         You can now configure TiDB Cloud to send key metrics from your TiDB Cloud Premium instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
 
-        For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
+        For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
 
 **API changes**
 
