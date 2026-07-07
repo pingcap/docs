@@ -233,8 +233,8 @@ If an upstream table is dropped or renamed, TiCDC removes the routing relationsh
 
 ## Related documentation
 
-- [TiCDC Changefeed command-line flags and configuration parameters](/ticdc/ticdc-changefeed-config.md)
-- [Changefeed event filter](/ticdc/ticdc-filter.md)
+- [CLI and Configuration Parameters of TiCDC Changefeeds](/ticdc/ticdc-changefeed-config.md)
+- [Changefeed Log Filters](/ticdc/ticdc-filter.md)
 - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
 - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
 - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
