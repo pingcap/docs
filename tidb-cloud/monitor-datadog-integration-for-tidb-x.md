@@ -30,13 +30,13 @@ The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}<
 
     <CustomContent plan="essential">
 
-    <https://github.com/tidbcloud/metrics-integration/blob/main/artifacts/dashboard/datadog/essential-datadog.json>
+    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
 
     </CustomContent>
 
     <CustomContent plan="premium">
 
-    <https://github.com/tidbcloud/metrics-integration/blob/main/artifacts/dashboard/datadog/premium-datadog.json>
+    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-premium.json>
 
     </CustomContent>
 
