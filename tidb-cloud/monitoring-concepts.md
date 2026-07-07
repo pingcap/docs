@@ -47,6 +47,8 @@ You can view the logged events on the **Events** page, including the event type,
 
 For more information, see [Events](/tidb-cloud/tidb-cloud-events.md).
 
+<CustomContent plan="dedicated">
+
 ## Third-party metrics integrations
 
 TiDB Cloud lets you integrate any of the following third-party metrics services to receive TiDB Cloud alerts and view the performance metrics of your TiDB Cloud Dedicated cluster.
@@ -56,3 +58,13 @@ TiDB Cloud lets you integrate any of the following third-party metrics services 
 - [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 - [New Relic integration](/tidb-cloud/monitor-new-relic-integration.md)
+
+</CustomContent>
+
+<CustomContent plan="essential,premium">
+
+## Datadog integration
+
+TiDB Cloud lets you integrate Datadog to receive TiDB Cloud alerts and view the performance metrics of your target instance. For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
+
+</CustomContent>
