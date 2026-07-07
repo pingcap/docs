@@ -65,6 +65,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/dm-compatibility-catalog#foreign-key-cascade-operations).
 
+* TiCDC supports table routing [#4941](https://github.com/pingcap/ticdc/issues/4941) @[3AceShowHand](https://github.com/3AceShowHand) <!--2471--><!--tw:qiancai-->
+
+    Starting from v8.5.7, the [new TiCDC architecture](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture/) supports table routing. You can use `target-schema` and `target-table` in the `sink.dispatchers` configuration of a changefeed to map upstream tables to specified downstream database or table names.
+
+    This feature is useful when downstream database and table naming conventions differ from upstream ones, or when you need to replicate multiple source databases to the same target database while keeping target table names unique. With table routing, you can provide stable and expected target database and table names for downstream systems.
+
+    This feature applies only to the new TiCDC architecture. For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ticdc-table-routing).
+
 ## Compatibility changes
 
 For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions earlier than v8.5.4), you can smoothly upgrade to v8.5.7. Most changes in v8.5.7 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
