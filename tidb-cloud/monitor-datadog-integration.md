@@ -7,6 +7,14 @@ summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 
 TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send metrics about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
+> **Note:**
+>
+> This document only applies to TiDB Cloud Dedicated.
+>
+> For TiDB Cloud Starter, the Datadog integration is not available.
+> For TiDB Cloud Essential, see [Integrate TiDB Cloud Essential with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential).
+> For TiDB Cloud Premium, see [Integrate TiDB Cloud Premium with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
+
 ## Datadog integration version
 
 TiDB Cloud has supported the project-level Datadog integration (Beta) since March 4, 2022. Starting from July 31, 2025, TiDB Cloud introduces the cluster-level Datadog integration (Preview). Starting from September 30, 2025, the cluster-level Datadog integration becomes generally available (GA).
@@ -24,7 +32,7 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 
 ## Limitation
 
-- Datadog integrations are now only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+- Datadog integration is not available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 

@@ -24,7 +24,7 @@ TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send me
 
 ### Step 1. Import the pre-built Datadog dashboard
 
-The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> is not yet available directly from the Datadog integration marketplace. You need to manually download and import the dashboard JSON file into Datadog.
+Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> is not yet available in the Datadog integration marketplace. You need to manually download and import the dashboard JSON file into Datadog.
 
 1. Download the Datadog dashboard JSON file for your instance type:
 
@@ -40,13 +40,13 @@ The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}<
 
     </CustomContent>
 
-2. Log in to [Datadog](https://app.datadoghq.com) and go to **Dashboards** > **Dashboard List**.
+2. Log in to [Datadog](https://app.datadoghq.com), and then go to **Dashboards** > **Dashboard List**.
 
-3. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, then select **Start from blank dashboard**.
+3. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, and then select **Start from blank dashboard**.
 
-4. Once inside the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
+4. In the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
 
-5. In the dialog that appears, paste the JSON content or drag and drop the JSON file.
+5. In the dialog that appears, paste the JSON content, or drag and drop the JSON file.
 
 6. Click **Yes, Replace** to confirm the import.
 
@@ -82,9 +82,9 @@ The TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .essential }}}<
 
 ## View the pre-built dashboard
 
-Option 1: In the [TiDB Cloud console](https://tidbcloud.com/), go to **Integrations**, click the **Datadog(Preview)** card to view the integration details, then click **Dashboard** button, you will be redirected to the Datadog Dashboard List page. On the Datadog website, select the dashboard imported in Step 1 and filter by your target instance name.
+To view the pre-built dashboard after the integration, go to **Dashboards** > **Dashboard List** in [Datadog](https://app.datadoghq.com), and then select the dashboard imported in [Step 1](#step-1-import-the-pre-built-datadog-dashboard). On the dashboard page, you can filter by your target instance name, and view the metrics.
 
-Option 2: Go directly to Datadog → Dashboard List. Select the dashboard imported in Step 1, filter by your target instance name, and view the metrics.
+You can also access the **Dashboard List** page of Datadog from the [TiDB Cloud console](https://tidbcloud.com/): go to the **Integrations** page of your target instance, click **Datadog(Preview)**, and then click **Dashboard**.
 
 ## Metrics available to Datadog
 
@@ -94,7 +94,7 @@ Datadog tracks the following metrics for your <CustomContent plan="essential">{{
 
 > **Note:**
 >
-> {{{ .essential }}} currently does not support TiCDC feature, so the `tidb_cloud.changefeed_*` metrics are currently not available.
+> Currently, the changefeed feature for {{{ .premium }}} is only available upon request, and the `tidb_cloud.changefeed_*` metrics are currently not available.
 
 | Metric name | Metric type | Labels | Description |
 |:--- |:--- |:--- |:--- |
