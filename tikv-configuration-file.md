@@ -2781,12 +2781,12 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `enable-read-admission-control` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-+ Controls whether to enable admission control for read requests. When enabled, read requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
++ Controls whether to enable admission control for read requests. When enabled, read requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
 + Default value: `false`
 
 ### `enable-write-admission-control` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-+ Controls whether to enable admission control for write requests. When enabled, write requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold). This configuration takes effect only when [`enable-fair-scheduling`](#enable-fair-scheduling) is also enabled.
++ Controls whether to enable admission control for write requests. When enabled, write requests from over-baseline resource groups are delayed or rejected with `SchedTooBusy` when CPU utilization exceeds [`fg-cpu-throttle-threshold`](#fg-cpu-throttle-threshold).
 + Default value: `false`
 
 ### `historical-usage-window-mins` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
