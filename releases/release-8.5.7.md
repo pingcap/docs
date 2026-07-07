@@ -19,9 +19,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     In earlier versions, the hot Region scheduler balances read hotspots mainly by query rate and byte throughput. In some workloads, TiKV CPU usage remains uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
 
-    Starting from v8.5.7, TiKV reports per-Region read CPU usage in store heartbeats, and PD can use CPU usage as a scheduling dimension for read hot Region scheduling. This mechanism helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
+    Starting from v8.5.7, TiKV reports read CPU usage for hot Regions in store heartbeats, and PD can use CPU usage as a scheduling dimension for read hot Region scheduling. This mechanism helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
 
-    This feature also adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and [the `min-hot-cpu-rate` and `cpu-rate-rank-step-ratio` scheduler configurations](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler).
+    In addition, PD adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and the [`min-hot-cpu-rate` and `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) scheduler configurations.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#scatter-read-hotspots).
 
