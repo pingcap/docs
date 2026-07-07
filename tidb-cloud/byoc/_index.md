@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud BYOC" subTitle="TiDB Cloud BYOC (Bring Your Own Cloud) is a deployment option of TiDB Cloud Premium that lets you run the data plane in your own cloud environment while retaining the fully managed experience of TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud BYOC" subTitle="TiDB Cloud BYOC (Bring Your Own Cloud) is an enterprise solution that lets you run the data plane in your own cloud environment while retaining the fully managed experience of TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
