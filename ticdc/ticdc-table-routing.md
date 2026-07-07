@@ -25,7 +25,7 @@ You can configure table routing in the following scenarios:
 
 ## Configure table routing
 
-Before configuring table routing, enable the TiCDC new architecture. For more information, see [`newarch`](/ticdc-server-config.md#newarch-new-in-v854-release1).
+Before configuring table routing, enable the TiCDC new architecture. For more information, see [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1).
 
 The following example routes `sales.orders` to `archive.sales_orders`:
 
