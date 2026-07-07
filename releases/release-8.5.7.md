@@ -65,7 +65,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/dm-compatibility-catalog#foreign-key-cascade-operations).
 
-* TiCDC supports table routing [#4941](https://github.com/pingcap/ticdc/issues/4941) @[3AceShowHand](https://github.com/3AceShowHand) <!--2471--><!--tw:qiancai-->
+* TiCDC supports table routing [#4655](https://github.com/pingcap/ticdc/issues/4655) [#4941](https://github.com/pingcap/ticdc/issues/4941) @[3AceShowHand](https://github.com/3AceShowHand) <!--2471--><!--tw:qiancai-->
 
     Starting from v8.5.7, the [new TiCDC architecture](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture/) supports table routing. You can use `target-schema` and `target-table` in the `sink.dispatchers` configuration of a changefeed to map upstream tables to specified downstream database or table names.
 
@@ -234,7 +234,6 @@ For TiDB clusters newly deployed in v8.5.6 (that is, not upgraded from versions 
         - Add the `max-retry` Kafka sink URI parameter and enable bounded retries for transient Kafka producer send failures by default to improve TiCDC Kafka sink stability [#12655](https://github.com/pingcap/tiflow/issues/12655) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc -->
         - Add a local spool to the TiCDC cloud storage sink to stage accepted encoded DML locally before flushing to external storage, reducing memory pressure and improving stability when object storage is slow [#3745](https://github.com/pingcap/ticdc/issues/3745) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc -->
         - Support TiCDC syncing DDL statements for partial indexes [#3698](https://github.com/pingcap/ticdc/issues/3698) @[YangKeao](https://github.com/YangKeao) <!-- component: cdc -->
-        - Support configuring table routing at the changefeed level in TiCDC, including custom target schema and target table settings in dispatch rules [#4655](https://github.com/pingcap/ticdc/issues/4655) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc -->
         - Add metrics for the TiCDC blackhole sink to improve observability of changefeed replication and DDL processing [#5362](https://github.com/pingcap/ticdc/issues/5362) @[wk989898](https://github.com/wk989898) <!-- component: cdc -->
         - Optimize TiCDC log puller performance to reduce CPU usage and memory allocations when processing resolved-ts-heavy workloads, especially for small batches [#4697](https://github.com/pingcap/ticdc/issues/4697) @[asddongmen](https://github.com/asddongmen) <!-- component: cdc -->
         - Optimize TiCDC MySQL sink conflict detection to improve replication performance [#4582](https://github.com/pingcap/ticdc/issues/4582) @[wk989898](https://github.com/wk989898) <!-- component: cdc -->
