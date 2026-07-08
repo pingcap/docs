@@ -109,7 +109,7 @@
         - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
     - [TiKV Follower Readの調整](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
-    - ごみ収集（GC）
+    - ガベージコレクション（GC）
       - [概要](/garbage-collection-overview.md)
       - [コンフィグレーション](/garbage-collection-configuration.md)
     - [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
