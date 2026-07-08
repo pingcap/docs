@@ -12,7 +12,7 @@ To protect the security of user passwords, TiDB supports the following password 
 - Password reuse policy: prevent users from reusing old passwords.
 - Failed-login tracking and temporary account locking policy: temporarily lock a user account to prevent the same user from trying to log in after multiple login failures caused by wrong passwords.
 
-Starting from v9.0.0, TiDB also supports the dual password policy, which lets applications rotate passwords without downtime. For details, see [Dual password policy](#dual-password-policy).
+Starting from v9.0.0, TiDB also supports the dual password policy, which lets you rotate passwords for applications without downtime. For details, see [Dual password policy](#dual-password-policy).
 
 ## TiDB authentication credential storage
 
