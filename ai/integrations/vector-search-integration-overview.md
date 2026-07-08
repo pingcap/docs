@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-integration-overview/','/ja/tidb/dev/ve
 > **Note:**
 >
 > - ベクトル検索機能はベータ版です。事前の通知なく変更される場合があります。バグを見つけた場合は、GitHub で [issue](https://github.com/pingcap/tidb/issues) を報告できます。
-> - ベクトル検索機能は、[TiDB Self-Managed](/overview.md)、[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)、および [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) で利用できます。TiDB Self-Managed と TiDB Cloud Dedicated では、TiDB バージョンが v8.4.0 以降である必要があります（v8.5.0 以降を推奨します）。
+> - ベクトル検索機能は、[TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managed では、TiDB バージョンが v8.4.0 以降である必要があります（v8.5.0 以降を推奨します）。
 
 ## Auto Embedding {#auto-embedding}
 

@@ -59,6 +59,7 @@
       - [メールで購読する](/tidb-cloud/monitor-alert-email.md)
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
+    - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -169,6 +170,7 @@
 - 統合
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+  - [Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
