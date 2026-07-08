@@ -2395,11 +2395,11 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `OFF`.
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements.
 
-### `tidb_enable_cache_prepare_stmt` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+### tidb_enable_cache_prepare_stmt <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 > **Warning:**
 >
-> Currently, this variable is an experimental feature and is not recommended to be enabled in the production environment. This variable might be changed or removed without prior notice. If you find a bug, you can submit an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> Currently, this variable is experimental. It is not recommended that you use it in the production environment. This variable might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
