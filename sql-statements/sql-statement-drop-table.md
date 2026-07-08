@@ -68,6 +68,6 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
--   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [SHOW [FULL] TABLES](/sql-statements/sql-statement-show-tables.md)

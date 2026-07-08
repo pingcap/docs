@@ -3,15 +3,15 @@ title: SET RESOURCE GROUP
 summary: TiDBデータベースにおけるSET RESOURCE GROUPの使用方法の概要。
 ---
 
-# リソースグループを設定する {#set-resource-group}
+# SET RESOURCE GROUP {#set-resource-group}
 
-`SET RESOURCE GROUP`現在のセッションのリソース グループを設定するために使用されます。
+`SET RESOURCE GROUP`は、現在のセッションのリソースグループを設定するために使用されます。
 
 > **注記：**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 **SetResourceGroupStmt:**
 
@@ -88,9 +88,9 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 MySQL は[リソースグループを設定する](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)もサポートしています。ただし、受け入れられるパラメータは TiDB とは異なります。互換性がありません。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
--   [リソースグループを作成する](/sql-statements/sql-statement-create-resource-group.md)
--   [リソースグループを削除する](/sql-statements/sql-statement-drop-resource-group.md)
--   [アルター・リソース・グループ](/sql-statements/sql-statement-alter-resource-group.md)
+-   [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
+-   [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+-   [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 -   [リソース制御](/tidb-resource-control-ru-groups.md)

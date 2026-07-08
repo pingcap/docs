@@ -3,9 +3,9 @@ title: SHUTDOWN
 summary: TiDB データベースの SHUTDOWN の使用法の概要。
 ---
 
-# シャットダウン {#shutdown}
+# SHUTDOWN {#shutdown}
 
-`SHUTDOWN`文はTiDBのシャットダウン操作を実行するために使用されます。3 `SHUTDOWN`を実行するには、ユーザーは`SHUTDOWN privilege`必要です。
+`SHUTDOWN`文はTiDBのシャットダウン操作を実行するために使用されます。`SHUTDOWN`を実行するには、ユーザーに`SHUTDOWN`権限が必要です。
 
 > **注記：**
 >

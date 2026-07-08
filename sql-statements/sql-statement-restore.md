@@ -3,9 +3,9 @@ title: RESTORE | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 ---
 
-# 復元する {#restore}
+# RESTORE {#restore}
 
-このステートメントは[`BACKUP`ステートメント](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
+このステートメントは[BACKUP](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
 
 > **警告：**
 >
@@ -26,7 +26,7 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 `RESTORE` 「tikv」ストレージエンジンでのみ使用できます。「unistore」エンジンで`RESTORE`を使用すると失敗します。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 RestoreStmt ::=
@@ -161,7 +161,7 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
--   [バックアップ](/sql-statements/sql-statement-backup.md)
--   [ショーが復元する](/sql-statements/sql-statement-show-backups.md)
+-   [BACKUP](/sql-statements/sql-statement-backup.md)
+-   [SHOW [BACKUPS|RESTORES]](/sql-statements/sql-statement-show-backups.md)

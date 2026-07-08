@@ -11,9 +11,9 @@ summary: TiDB データベースにおけるEXPLAINの使用法の概要。
 >
 > 最適化フェーズでは、 `EXPLAIN`文であっても、最適な実行プランを生成するために特定のサブクエリが事前実行されます。この動作の詳細と無効化方法については、 [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)および[サブクエリの早期実行を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)参照してください。
 
-文`DESC`と`DESCRIBE`文`EXPLAIN`の別名です。文`EXPLAIN <tableName>`の代替使用法については[`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
+`DESC`文と`DESCRIBE`文は`EXPLAIN`の別名です。文`EXPLAIN <tableName>`の代替使用法については[`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
 
-TiDBは`EXPLAIN [options] FOR CONNECTION connection_id`文をサポートしています。ただし、この文はMySQLの`EXPLAIN FOR`文とは異なります。詳細については[`EXPLAIN FOR CONNECTION`](#explain-for-connection)参照してください。
+TiDBは`EXPLAIN [options] FOR CONNECTION connection_id`文をサポートしています。ただし、この文はMySQLの`EXPLAIN FOR`文とは異なります。詳細については[`EXPLAIN FOR CONNECTION`](#explain-for-connection)を参照してください。
 
 ## 概要 {#synopsis}
 
@@ -331,6 +331,6 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 ## 参照 {#see-also}
 
 -   [クエリ実行プランを理解する](/explain-overview.md)
--   [EXPLAIN分析](/sql-statements/sql-statement-explain-analyze.md)
--   [表を分析する](/sql-statements/sql-statement-analyze-table.md)
--   [トレース](/sql-statements/sql-statement-trace.md)
+-   [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+-   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
+-   [TRACE](/sql-statements/sql-statement-trace.md)

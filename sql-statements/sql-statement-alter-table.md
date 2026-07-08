@@ -3,7 +3,7 @@ title: ALTER TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの ALTER TABLE の使用法の概要。
 ---
 
-# テーブルの変更 {#alter-table}
+# ALTER TABLE {#alter-table}
 
 この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`は次の目的で使用できます。
 
@@ -181,12 +181,12 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 ## 参照 {#see-also}
 
 -   [MySQLの互換性](/mysql-compatibility.md#ddl-operations)
--   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
--   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
--   [インデックスを削除](/sql-statements/sql-statement-drop-index.md)
--   [インデックス名の変更](/sql-statements/sql-statement-rename-index.md)
--   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+-   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+-   [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+-   [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+-   [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

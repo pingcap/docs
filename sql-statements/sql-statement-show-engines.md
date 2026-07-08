@@ -3,9 +3,9 @@ title: SHOW ENGINES | TiDB SQL Statement Reference
 summary: TiDB データベースの SHOW ENGINES の使用法の概要。
 ---
 
-# エンジンを表示 {#show-engines}
+# SHOW ENGINES {#show-engines}
 
-このステートメントは、サポートされているすべてのストレージエンジンを一覧表示するために使用されます。この構文は、MySQLとの互換性のためにのみ含まれています。
+このステートメントは、サポートされているすべてのストレージエンジンを一覧表示するために使用されます。この構文は、MySQLとの互換性のためだけに含まれています。
 
 ## 概要 {#synopsis}
 

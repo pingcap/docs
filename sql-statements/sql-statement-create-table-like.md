@@ -3,7 +3,7 @@ title: CREATE TABLE LIKE | TiDB SQL Statement Reference
 summary: TiDB データベースの CREATE TABLE LIKE の使用法の概要。
 ---
 
-# 次のようなテーブルを作成する {#create-table-like}
+# CREATE TABLE LIKE {#create-table-like}
 
 このステートメントは、データをコピーせずに、既存のテーブルの定義をコピーします。
 
@@ -55,13 +55,13 @@ Empty set (0.00 sec)
 
 ## 分割前のリージョン {#pre-split-region}
 
-コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。5の詳細については、 `PRE_SPLIT_REGIONS` [`CREATE TABLE`文](/sql-statements/sql-statement-create-table.md)参照してください。
+コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。詳細については、 `PRE_SPLIT_REGIONS` [CREATE TABLE](/sql-statements/sql-statement-create-table.md)参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDBの`CREATE TABLE LIKE`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDBの`CREATE TABLE LIKE`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)してください。
 
 ## 参照 {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [表示テーブルの作成](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

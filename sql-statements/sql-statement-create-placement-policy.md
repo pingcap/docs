@@ -3,7 +3,7 @@ title: CREATE PLACEMENT POLICY
 summary: TiDBにおけるCREATE PLACEMENT POLICYの使用方法。
 ---
 
-# 配置ポリシーを作成する {#create-placement-policy}
+# CREATE PLACEMENT POLICY {#create-placement-policy}
 
 `CREATE PLACEMENT POLICY`後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
@@ -11,7 +11,7 @@ summary: TiDBにおけるCREATE PLACEMENT POLICYの使用方法。
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 CreatePolicyStmt ::=
@@ -76,9 +76,9 @@ SHOW CREATE PLACEMENT POLICY p1;
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [SQLにおける配置ルール](/placement-rules-in-sql.md)
--   [番組掲載](/sql-statements/sql-statement-show-placement.md)
--   [配置方針の変更](/sql-statements/sql-statement-alter-placement-policy.md)
--   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
+-   [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
+-   [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)

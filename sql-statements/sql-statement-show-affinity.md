@@ -3,9 +3,9 @@ title: SHOW AFFINITY
 summary: TiDB データベースに対する SHOW AFFINITY の使用法の概要。
 ---
 
-# アフィニティを表示<span class="version-mark">v8.5.5 の新機能</span> {#show-affinity-span-class-version-mark-new-in-v8-5-5-span}
+# SHOW AFFINITY <span class="version-mark">New in v8.5.5</span> {#show-affinity-span-class-version-mark-new-in-v8-5-5-span}
 
-`SHOW AFFINITY`文は、 `AFFINITY`オプションで設定されたテーブルの[親和性](/table-affinity.md)スケジュール情報と、PD によって現在記録されているターゲット レプリカ分散を表示します。
+`SHOW AFFINITY`文は、 `AFFINITY`オプションで設定されたテーブルの[アフィニティ](/table-affinity.md)スケジュール情報と、PD によって現在記録されているターゲットとするレプリカの分布を表示します。
 
 ## 概要 {#synopsis}
 

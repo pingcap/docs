@@ -3,7 +3,7 @@ title: ADMIN CLEANUP INDEX
 summary: TiDB データベースの ADMIN CLEANUP の使用法の概要。
 ---
 
-# 管理者クリーンアップインデックス {#admin-cleanup-index}
+# ADMIN CLEANUP INDEX {#admin-cleanup-index}
 
 `ADMIN CLEANUP INDEX`文は、テーブルに不整合なデータとインデックスがある場合に、テーブルから冗長なインデックスを削除するために使用されます。この構文は[外部キー制約](/foreign-key.md)まだサポートしていないことに注意してください。
 

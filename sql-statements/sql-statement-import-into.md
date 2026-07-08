@@ -3,7 +3,7 @@ title: IMPORT INTO
 summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 ---
 
-# インポート先 {#import-into}
+# IMPORT INTO {#import-into}
 
 `IMPORT INTO`ステートメントを使用すると、 TiDB Lightningの[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を介して TiDB にデータをインポートできます。 `IMPORT INTO` 、次の 2 つの方法で使用できます。
 
@@ -64,7 +64,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 `IMPORT INTO`を実行するには、対象テーブルに対する`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限。TiDB ローカルストレージにファイルをインポートするには、 `FILE`権限も必要です。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ImportIntoStmt ::=
@@ -363,7 +363,7 @@ IMPORT INTO t FROM SELECT * FROM src AS OF TIMESTAMP '2024-02-27 11:38:00';
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
 -   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

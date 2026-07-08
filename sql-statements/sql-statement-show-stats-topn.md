@@ -3,7 +3,7 @@ title: SHOW STATS_TOPN
 summary: TiDB データベースの SHOW STATS_TOPN の使用法の概要。
 ---
 
-# STATS_TOPNを表示 {#show-stats-topn}
+# SHOW STATS_TOPN {#show-stats-topn}
 
 `SHOW STATS_TOPN`文は[統計](/statistics.md)の Top-N 情報を表示します。
 

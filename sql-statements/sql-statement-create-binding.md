@@ -3,7 +3,7 @@ title: CREATE [GLOBAL|SESSION] BINDING
 summary: TiDB データベースでの CREATE BINDING の使用。
 ---
 
-# [グローバル|セッション]バインディングの作成 {#create-global-session-binding}
+# CREATE [GLOBAL|SESSION] BINDING {#create-global-session-binding}
 
 このステートメントは、TiDB に新しい実行プラン バインディングを作成します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
@@ -310,7 +310,7 @@ Empty set (0.002 sec)
 
 ## SQL文の切り捨て {#sql-statement-truncation}
 
-`CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`使用すると、そのダイジェストの[明細書要約表](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`増やす必要があります。
+`CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`使用すると、そのダイジェストの[ステートメントサマリーテーブル](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`増やす必要があります。
 
 ## 権限 {#permissions}
 
@@ -322,8 +322,8 @@ Empty set (0.002 sec)
 
 ## 参照 {#see-also}
 
--   [[グローバル|セッション]バインディングの削除](/sql-statements/sql-statement-drop-binding.md)
--   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
--   [表を分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
+-   [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
+-   [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [SQLプラン管理](/sql-plan-management.md)

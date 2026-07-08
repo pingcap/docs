@@ -95,7 +95,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### ステップ3. ベクトル埋め込みをテーブルに挿入する {#step-3-insert-vector-embeddings-to-the-table}
 
-[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)だ 3 つのドキュメントを`embedded_documents`テーブルに挿入します。
+[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を持つ3つのドキュメントを`embedded_documents`テーブルに挿入します。
 
 ```sql
 INSERT INTO embedded_documents
@@ -169,7 +169,7 @@ LIMIT 3;
 
 したがって、出力結果から判断すると、泳いでいる動物は魚か、泳ぎの才能に恵まれた犬である可能性が最も高い。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
 -   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
 -   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)

@@ -4,9 +4,9 @@ summary: TiDB データベースの ADMIN CANCEL DDL の使用法の概要。
 category: reference
 ---
 
-# 管理者によるDDLのキャンセル {#admin-cancel-ddl}
+# ADMIN CANCEL DDL {#admin-cancel-ddl}
 
-`ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。3 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
+`ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
 
 `ADMIN CANCEL DDL`文を使用すると、コミットされているもののまだ実行が完了していないDDLジョブをキャンセルすることもできます。キャンセル後、DDLジョブを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。すでに完了しているDDLジョブをキャンセルした場合は、 `RESULT`列に`DDL Job:90 not found`エラーが表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 

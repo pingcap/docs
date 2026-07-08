@@ -3,11 +3,11 @@ title: SELECT | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるSELECT文の使用方法の概要。
 ---
 
-# 選択 {#select}
+# SELECT {#select}
 
 `SELECT`ステートメントは、TiDB からデータを読み取るために使用されます。
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 SelectStmt ::=
@@ -228,9 +228,9 @@ Query OK, 3 rows affected (0.00 sec)
 -   構文`SELECT .. GROUP BY expr`は、 MySQL 5.7のように`GROUP BY expr ORDER BY expr`を暗示しません。TiDB は代わりに MySQL 8.0 の動作に一致し、デフォルトの順序を暗示しません。
 -   `SELECT ... TABLESAMPLE ...`という構文は、他のデータベースシステムや[ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/)規格との互換性のために設計された TiDB 拡張機能ですが、現在 MySQL ではサポートされていません。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
--   [入れる](/sql-statements/sql-statement-insert.md)
--   [消去](/sql-statements/sql-statement-delete.md)
--   [アップデート](/sql-statements/sql-statement-update.md)
--   [交換する](/sql-statements/sql-statement-replace.md)
+-   [INSERT](/sql-statements/sql-statement-insert.md)
+-   [DELETE](/sql-statements/sql-statement-delete.md)
+-   [UPDATE](/sql-statements/sql-statement-update.md)
+-   [REPLACE](/sql-statements/sql-statement-replace.md)

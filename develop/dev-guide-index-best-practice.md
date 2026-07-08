@@ -93,7 +93,7 @@ CREATE TABLE `books` (
 
     > **警告：**
     >
-    > 現在、式インデックスは実験的機能であり、TiDB設定ファイルで有効化する必要があります。詳細については[表現インデックス](/sql-statements/sql-statement-create-index.md#expression-index)参照してください。
+    > 現在、式インデックスは実験的機能であり、TiDB設定ファイルで有効化する必要があります。詳細については[式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)参照してください。
 
 -   クエリ対象の列がインデックス内の列に含まれるカバーリング インデックスを使用するようにし、 `SELECT *`ステートメントですべての列をクエリすることは避けてください。
 

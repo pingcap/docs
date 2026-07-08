@@ -296,7 +296,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [TiDB Cloud Serverlessの料金詳細](https://www.pingcap.com/tidb-serverless-pricing-details/#storage)を参照してください。
 
--   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)[生きる時間（TTL）](/time-to-live.md)をサポートします。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)の[存続時間（TTL）](/time-to-live.md)をサポートします。
 
 ## 2024年5月28日 {#may-28-2024}
 

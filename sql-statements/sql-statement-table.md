@@ -3,9 +3,9 @@ title: TABLE | TiDB SQL Statement Reference
 summary: TiDB データベースの TABLE の使用法の概要。
 ---
 
-# テーブル {#table}
+# TABLE {#table}
 
-集計や複雑なフィルタリングが不要な場合は、 `SELECT * FROM`代わりに`TABLE`ステートメントを使用できます。
+集計や複雑なフィルタリングが不要な場合は、 `SELECT * FROM`の代わりに`TABLE`ステートメントを使用できます。
 
 ## 概要 {#synopsis}
 

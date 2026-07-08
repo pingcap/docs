@@ -3,7 +3,7 @@ title: SHOW TABLE REGIONS
 summary: TiDBでSHOW TABLE REGIONSを使用する方法を学びましょう。
 ---
 
-# テーブル領域を表示する {#show-table-regions}
+# SHOW TABLE REGIONS {#show-table-regions}
 
 `SHOW TABLE REGIONS`ステートメントは、TiDB のテーブルのリージョン情報を表示するために使用されます。
 
@@ -18,7 +18,7 @@ SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
-## あらすじ {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 ShowTableRegionStmt ::=
@@ -202,7 +202,7 @@ test> SHOW TABLE t REGIONS;
 
 このステートメントは、MySQL構文に対するTiDBの拡張機能です。
 
-## 関連項目 {#see-also}
+## 参照 {#see-also}
 
--   [分割領域](/sql-statements/sql-statement-split-region.md)
--   [テーブルを作成する](/sql-statements/sql-statement-create-table.md)
+-   [Split Region](/sql-statements/sql-statement-split-region.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
