@@ -12,6 +12,8 @@ To protect the security of user passwords, TiDB supports the following password 
 - Password reuse policy: prevent users from reusing old passwords.
 - Failed-login tracking and temporary account locking policy: temporarily lock a user account to prevent the same user from trying to log in after multiple login failures caused by wrong passwords.
 
+Starting from v9.0.0, TiDB also supports the dual password policy, which lets applications rotate passwords without downtime. For details, see [Dual password policy](#dual-password-policy).
+
 ## TiDB authentication credential storage
 
 To ensure the authenticity of user identity, TiDB uses passwords as credentials to authenticate users when they log in to the TiDB server.
@@ -357,6 +359,55 @@ ALTER USER 'test'@'localhost'
 > - If you set the password reuse policy multiple times, the last set value takes effect.
 > - The default value of the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options is 0, which means that the reuse policy is disabled.
 > - When you modify a username, TiDB migrates the corresponding password history in the `mysql.password_history` system table from the original username to the new username.
+
+## Dual password policy
+
+Starting from v9.0.0, TiDB supports the MySQL-compatible [dual password policy](https://dev.mysql.com/doc/refman/8.0/en/password-management.html#dual-passwords), which lets an account hold two valid passwords at the same time: a primary password and a secondary password. When many applications share one account, dual passwords let you rotate the password in phases without any downtime: establish a new primary password while the old password keeps working, migrate the applications one by one, and then discard the old password.
+
+A typical rotation works as follows:
+
+1. Set a new primary password and retain the current password as the secondary password:
+
+    ```sql
+    ALTER USER 'app_user'@'%' IDENTIFIED BY 'new_password' RETAIN CURRENT PASSWORD;
+    ```
+
+    At this point, `app_user` can log in with both `new_password` and the previous password.
+
+2. Update every application to use the new password.
+
+3. After all applications are migrated, discard the secondary password:
+
+    ```sql
+    ALTER USER 'app_user'@'%' DISCARD OLD PASSWORD;
+    ```
+
+    At this point, only `new_password` is valid.
+
+`SET PASSWORD` supports the same clause:
+
+```sql
+SET PASSWORD FOR 'app_user'@'%' = 'new_password' RETAIN CURRENT PASSWORD;
+```
+
+The secondary password is stored in the `User_attributes` column of the `mysql.user` system table and is not displayed in the output of [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md).
+
+### Required privileges
+
+- Operating on your own account (including the `ALTER USER USER() ...` and `SET PASSWORD ... RETAIN CURRENT PASSWORD` forms) requires the `APPLICATION_PASSWORD_ADMIN` [dynamic privilege](/privilege-management.md#dynamic-privileges). The `CREATE USER` privilege or the `UPDATE` privilege on the `mysql` schema also suffices.
+- Operating on another account requires the normal cross-account authority: the `CREATE USER` privilege (or the `UPDATE` privilege on the `mysql` schema) for `ALTER USER`, and the `SUPER` privilege for `SET PASSWORD`. `APPLICATION_PASSWORD_ADMIN` does not grant authority over other accounts.
+
+### Restrictions
+
+- Dual passwords are only supported for accounts that authenticate with the `mysql_native_password`, `caching_sha2_password`, or `tidb_sm3_password` plugin.
+- `RETAIN CURRENT PASSWORD` requires a non-empty new password. Otherwise, TiDB reports the `ER_CURRENT_PASSWORD_CANNOT_BE_RETAINED` error.
+- `RETAIN CURRENT PASSWORD` requires a non-empty current password. Otherwise, TiDB reports the `ER_SECOND_PASSWORD_CANNOT_BE_EMPTY` error.
+- `RETAIN CURRENT PASSWORD` cannot be combined with a change of the authentication plugin. Otherwise, TiDB reports the `ER_PASSWORD_CANNOT_BE_RETAINED_ON_PLUGIN_CHANGE` error. Changing the authentication plugin without `RETAIN CURRENT PASSWORD` silently removes any existing secondary password.
+- Changing the primary password without `RETAIN CURRENT PASSWORD` leaves an existing secondary password unchanged.
+
+> **Note:**
+>
+> During a rolling upgrade, a retained secondary password authenticates only on TiDB nodes that are already upgraded to a version that supports dual passwords. The new primary password works on all nodes. Complete the cluster upgrade before relying on dual password rotation.
 
 ## Failed-login tracking and temporary account locking policy
 
