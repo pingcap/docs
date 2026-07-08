@@ -83,7 +83,7 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
 - Starting from v8.5.6, TiDB supports a MySQL-compatible column-level privilege management mechanism. You can grant or revoke `SELECT`, `INSERT`, `UPDATE`, and `REFERENCES` privileges for specific columns at the table level. For more information, see [Column-Level Privilege Management](https://docs.pingcap.com/tidb/v8.5/column-privilege-management).
 - Starting from v8.5.6, TiDB supports using table aliases in the `FOR UPDATE OF` clause. To maintain backward compatibility, you can still reference the base table name when an alias is defined, but this triggers a warning recommending the use of an explicit alias. For more information, see [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select).
-- Starting from v8.5.6, Dumpling supports exporting data from MySQL 8.4 by adopting the updated MySQL binary log terminology. [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
+- Starting from v8.5.6, Dumpling supports exporting data from MySQL 8.4 by adapting to the updated MySQL binary log naming. [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 - Starting from v8.5.6, TiDB Data Migration (DM) supports MySQL 8.4 as an upstream data source by adapting to the new terminology and version detection logic introduced in this version. [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
 
 ### System variables
