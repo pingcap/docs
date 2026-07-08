@@ -399,7 +399,7 @@ The secondary password is stored in the `User_attributes` column of the `mysql.u
 
 ### Restrictions
 
-- Dual passwords are only supported for accounts that authenticate with the `mysql_native_password`, `caching_sha2_password`, or `tidb_sm3_password` plugin.
+- TiDB only supports dual passwords for accounts that authenticate with the `mysql_native_password`, `caching_sha2_password`, or `tidb_sm3_password` plugin.
 - `RETAIN CURRENT PASSWORD` requires a non-empty new password. Otherwise, TiDB reports the `ER_CURRENT_PASSWORD_CANNOT_BE_RETAINED` error.
 - `RETAIN CURRENT PASSWORD` requires a non-empty current password. Otherwise, TiDB reports the `ER_SECOND_PASSWORD_CANNOT_BE_EMPTY` error.
 - `RETAIN CURRENT PASSWORD` cannot be combined with a change of the authentication plugin. Otherwise, TiDB reports the `ER_PASSWORD_CANNOT_BE_RETAINED_ON_PLUGIN_CHANGE` error. Changing the authentication plugin without `RETAIN CURRENT PASSWORD` silently removes any existing secondary password.
