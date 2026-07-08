@@ -2406,7 +2406,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to cache the results of `Prepare` statements. Typically, an application only needs to execute `Prepare` once and then execute `Execute` multiple times. All subsequent `Execute` operations can reuse the results of the first `Prepare`. If your application repeatedly sends the same `Prepare` statement, you can enable this variable so that TiDB can cache and reuse the processing results of identical `Prepare` statements, thereby reducing resource consumption.
+- This variable controls whether to cache the results of `Prepare` statements. Typically, an application only needs to execute `Prepare` once and then execute `Execute` multiple times. All subsequent `Execute` operations can reuse the results of the first `Prepare`. If your application repeatedly sends the same `Prepare` statement, you can enable this variable so that TiDB can cache and reuse the results of identical `Prepare` statements, thereby reducing resource consumption.
 
 ### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
 
