@@ -121,7 +121,7 @@ The following are the common steps to use Top SQL.
 
         ![Select order by](/media/dashboard/v8.5-top-sql-usage-select-order-by.png)
 
-    > **Note**
+    > **Note:**
     >
     > `By Region`, `Order By Network`, and `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857) is enabled. If this feature is not enabled but historical data still exists, the page continues to display historical data and prompt that new data cannot be fully collected.
 
