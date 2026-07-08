@@ -4439,7 +4439,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint for all queries that contain a subquery in the `SELECT` list.
 
-### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
