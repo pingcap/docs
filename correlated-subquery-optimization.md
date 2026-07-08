@@ -19,6 +19,8 @@ The disadvantage of this rewriting is that when the correlation is not lifted, t
 
 Therefore, when there are few external values, do not perform decorrelation, which might bring better execution performance. In this case, you can disable this optimization by using the [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) optimizer hint or by disabling the "subquery decorrelation" optimization rule in the [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md). In most cases, it is recommended to use the optimizer hint along with [SQL Plan Management](/sql-plan-management.md) to disable the decorrelation.
 
+Starting from v8.5.7 and v9.0.0, you can also use the system variable [`tidb_opt_enable_alternative_logical_plans`](/system-variables.md#tidb_opt_enable_alternative_logical_plans-从-v857-和-v900-版本开始引入) to optimize such scenarios. After it is enabled, if the candidate plan after [correlated subquery decorrelation](/correlated-subquery-optimization.md) does not generate an equivalent `IndexJoin` candidate with the same access direction as the original correlated subquery, the optimizer additionally keeps a "non-decorrelated" candidate plan, evaluates both "decorrelated" and "non-decorrelated" candidate plans, and finally selects the [execution plan](/explain-subqueries.md) with the lower cost.
+
 ## Example
 
 {{< copyable "sql" >}}
