@@ -8,6 +8,36 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 7 月 7 日 {#july-7-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - 支持 Datadog 集成（公测）。
+
+        你现在可以配置 TiDB Cloud，将 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例中的关键指标发送到 [Datadog](https://www.datadoghq.com/)，以进行集中监控和告警。
+
+        更多信息，参见 [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential)。
+
+- **TiDB Cloud Premium**
+
+    - 支持 Datadog 集成（公测）。
+
+        你现在可以配置 TiDB Cloud，将 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例中的关键指标发送到 [Datadog](https://www.datadoghq.com/)，以进行集中监控和告警。
+
+        更多信息，参见 [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium)。
+
+**API 变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 为 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 引入 changefeed API 端点，提供对变更数据捕获（CDC）changefeed 的编程管理。
+
+        你可以使用这些端点创建、列出、获取、删除、暂停、恢复和扩展 changefeed，以将实时数据复制到下游系统，包括 Apache Kafka、MySQL、Amazon S3、Google Cloud Storage (GCS) 和 Azure Blob Storage。
+
+        更多信息，参见 [Changefeed API v1beta1 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/#tag/Changefeed)。
+
 ## 2026 年 6 月 30 日 {#june-30-2026}
 
 **常规变更**

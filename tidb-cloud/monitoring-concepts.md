@@ -47,6 +47,8 @@ TiDB Cloud 的监控为你提供了工具和集成，能够监督 TiDB 性能、
 
 更多信息，参见 [Events](/tidb-cloud/tidb-cloud-events.md)。
 
+<CustomContent plan="dedicated">
+
 ## 第三方指标集成
 
 TiDB Cloud 支持集成以下任一第三方指标服务，以接收 TiDB Cloud 告警并查看 TiDB Cloud Dedicated 集群的性能指标。
@@ -56,3 +58,13 @@ TiDB Cloud 支持集成以下任一第三方指标服务，以接收 TiDB Cloud 
 - [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 - [New Relic integration](/tidb-cloud/monitor-new-relic-integration.md)
+
+</CustomContent>
+
+<CustomContent plan="essential,premium">
+
+## Datadog integration {#datadog-integration}
+
+TiDB Cloud 支持集成 Datadog，以接收 TiDB Cloud 告警并查看目标实例的性能指标。更多信息，参见 [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)。
+
+</CustomContent>
