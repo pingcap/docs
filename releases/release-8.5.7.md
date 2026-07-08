@@ -27,9 +27,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
 ### Reliability
 
-* Introduce a new system variable `max_user_connections` to limit the number of connections that different users can establish [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) <!--2405--> <!--tw:lilin90-->
+* Support limiting the number of connections that a single user can establish on a TiDB instance [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau) <!--2405--> <!--tw:lilin90-->
 
-    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the number of connections that a single user can establish to a single TiDB server instance. This helps prevent situations where excessive [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) consumption by one user delays responses to requests from other users.
+    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the maximum number of connections that a single user can establish to a single TiDB server instance. This helps prevent situations where excessive [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) consumption by one user delays responses to requests from other users.
+
+    In addition, you can use `WITH MAX_USER_CONNECTIONS N` in `CREATE USER` and `ALTER USER` statements to limit the maximum number of connections that the corresponding user can establish.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#max_user_connections-new-in-v857).
 
@@ -61,7 +63,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     Starting from v8.5.7, DM supports foreign key causality for static one-to-one schema/table routing when `foreign_key_checks=1` and `syncer.worker-count > 1`.
 
-    Downstream schemas and foreign key definitions must be created before the task starts. This feature does not support many-to-one or shard-merge routing, dynamic foreign key DDL during replication, the `compact` or `multiple-rows` DML boundary options, or safe-mode `UPDATE` statements that modify primary key or unique key values. When foreign key causality is enabled, hot configuration updates that modify `worker-count`, `case-sensitive`, route rules, block-allow-list rules, binlog filter rules, or `foreign_key_checks` are not supported. To change these settings, stop the task, update the configuration, and then restart the task.
+    Before the replication task starts, target schemas and foreign key definitions must be created in the downstream database. This feature does not support many-to-one or shard-merge routing, dynamic foreign key DDL during replication, options that change DML statement boundaries such as `syncer.compact` or `syncer.multiple-rows`, or safe-mode `UPDATE` statements that modify primary key or unique key values during replication. When foreign key causality is enabled, DM does not support hot configuration updates that modify `worker-count`, `case-sensitive`, route rules, block-allow-list rules, binlog filter rules, or `foreign_key_checks`. To change these settings, stop the task, update the configuration, and then restart the task.
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/dm-compatibility-catalog#foreign-key-cascade-operations).
 
