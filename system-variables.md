@@ -4439,9 +4439,6 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint for all queries that contain a subquery in the `SELECT` list.
 
-<<<<<<< HEAD
-### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
-=======
 ### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -4453,8 +4450,7 @@ mysql> desc select count(distinct a) from test.t;
     - By default, TiDB prioritizes attempting decorrelation rewrites for correlated subqueries.
     - After you enable this variable, if the decorrelated candidate plan fails to generate an equivalent `IndexJoin` candidate plan with the same access direction as the original correlated subquery, the optimizer additionally retains a non-decorrelated candidate plan, evaluates both the decorrelated and non-decorrelated candidate plans, and selects the [execution plan](/explain-subqueries.md) with the lower cost.
 
-### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4 and v9.0.0</span>
->>>>>>> cd746d661f (master: add info about tidb_opt_enable_alternative_logical_plans (#23218))
+### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
