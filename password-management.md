@@ -362,7 +362,7 @@ ALTER USER 'test'@'localhost'
 
 ## Dual password policy
 
-Starting from v9.0.0, TiDB supports the MySQL-compatible [dual password policy](https://dev.mysql.com/doc/refman/8.0/en/password-management.html#dual-passwords), which lets an account hold two valid passwords at the same time: a primary password and a secondary password. When many applications share one account, dual passwords let you rotate the password in phases without any downtime: establish a new primary password while the old password keeps working, migrate the applications one by one, and then discard the old password.
+Starting from v9.0.0, TiDB supports the MySQL-compatible [dual password policy](https://dev.mysql.com/doc/refman/8.0/en/password-management.html#dual-passwords), which allows an account to hold two valid passwords at the same time: a primary password and a secondary password. When many applications share one account, dual passwords let you rotate the password in phases without any downtime: establish a new primary password while the old password keeps working, migrate the applications one by one, and then discard the old password.
 
 A typical rotation works as follows:
 
