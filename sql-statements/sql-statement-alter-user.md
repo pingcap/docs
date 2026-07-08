@@ -87,7 +87,7 @@ ALTER USER 'newuser' IDENTIFIED BY 'newpassword' RETAIN CURRENT PASSWORD;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-At this point, `newuser` can log in with both the new and the previous password. The secondary password is stored under `$.additional_password` in the `User_attributes` column of the `mysql.user` system table:
+At this point, `newuser` can log in with both the new and the previous password. TiDB stores the secondary password under `$.additional_password` in the `User_attributes` column of the `mysql.user` system table:
 
 ```sql
 SELECT JSON_EXTRACT(User_attributes, '$.additional_password') IS NOT NULL AS has_secondary FROM mysql.user WHERE User = 'newuser';
