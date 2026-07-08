@@ -390,7 +390,7 @@ A typical rotation works as follows:
 SET PASSWORD FOR 'app_user'@'%' = 'new_password' RETAIN CURRENT PASSWORD;
 ```
 
-The secondary password is stored in the `User_attributes` column of the `mysql.user` system table and is not displayed in the output of [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md).
+TiDB stores the secondary password in the `User_attributes` column of the `mysql.user` system table, and [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md) does not display it in its output.
 
 ### Required privileges
 
