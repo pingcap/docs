@@ -2770,7 +2770,7 @@ Specifies the flow control strategy for low-priority tasks. TiKV ensures that hi
 
 ### `bg-write-io-floor` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-+ Specifies the minimum write I/O rate guaranteed to background tasks even at maximum compaction pressure. This floor prevents background tasks from being starved completely.
++ Specifies the minimum write I/O rate reserved for background tasks, even under maximum compaction pressure. This floor prevents background tasks from being completely starved.
 + Default value: `"10MB"`
 + Unit: bytes per second
 
