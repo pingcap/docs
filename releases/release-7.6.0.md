@@ -79,7 +79,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を参照してください。
 
--   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729)[アフェインベルク](https://github.com/afeinberg)
+-   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @[アフェインベルク](https://github.com/afeinberg)
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
@@ -198,7 +198,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、[ドキュメント](/dm/dm-compatibility-catalog.md)を参照してください。
 
--   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（実験的） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) [okJiang](https://github.com/okJiang) [asddongmen](https://github.com/asddongmen)
+-   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（実験的） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
     バージョン7.6.0以降、TiCDCは双方向レプリケーションが構成されたDDLステートメントのレプリケーションをサポートします。以前は、TiCDCはDDLステートメントのレプリケーションをサポートしていなかったため、TiCDCの双方向レプリケーションを使用するユーザーは、DDLステートメントを両方のTiDBクラスタに個別に適用する必要がありました。この機能により、TiCDCはクラスタに`PRIMARY` BDRロールを割り当てることができ、そのクラスタからダウンストリームクラスタへのDDLステートメントのレプリケーションが可能になります。
 
@@ -297,7 +297,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   `EXCHANGE PARTITION`操作により、統計情報のメンテナンス更新がトリガーされるようになりました [#47354](https://github.com/pingcap/tidb/issues/47354) @[Rustin170506](https://github.com/Rustin170506)
     -   TiDBは、連邦情報処理標準（FIPS）の要件を満たすバイナリファイルの作成をサポートしています。 [#47948](https://github.com/pingcap/tidb/issues/47948) @[tiancaiamao](https://github.com/tiancaiamao)
     -   一部の型変換を処理する際の TiDB 実装を最適化し、関連する問題を修正します[#47945](https://github.com/pingcap/tidb/issues/47945) [#47864](https://github.com/pingcap/tidb/issues/47864) [#47829](https://github.com/pingcap/tidb/issues/47829) [#47816](https://github.com/pingcap/tidb/issues/47816) @[YangKeao](https://github.com/YangKeao)@[lcwangchao](https://github.com/lcwangchao)
-    -   スキーマバージョンを取得する際、TiDBはデフォルトでKVタイムアウト機能を使用して読み取りを行うため、遅いメタリージョンリーダーの読み取りがスキーマバージョン更新に与える影響が軽減されます。 [#48125](https://github.com/pingcap/tidb/pull/48125) [cfzjywxk](https://github.com/cfzjywxk)
+    -   スキーマバージョンを取得する際、TiDBはデフォルトでKVタイムアウト機能を使用して読み取りを行うため、遅いメタリージョンリーダーの読み取りがスキーマバージョン更新に与える影響が軽減されます。 [#48125](https://github.com/pingcap/tidb/pull/48125) @[cfzjywxk](https://github.com/cfzjywxk)
 
 -   TiKV
 
@@ -353,7 +353,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   MPP によって計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正 [#48643](https://github.com/pingcap/tidb/issues/48643) @[AilinKid](https://github.com/AilinKid)
     -   パーティション列のタイプが`ALTER TABLE ... LAST PARTITION`の場合に`DATETIME`の実行が失敗する問題を修正します [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
     -   `_`で`LIKE`ワイルドカードを使用すると、データに末尾の空白が含まれている場合にクエリ結果が正しくない可能性がある問題を修正します [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
-    -   `tidb_server_memory_limit` [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)による長期メモリ負荷が原因で TiDB の CPU 使用率が高くなる問題を修正しました。
+    -   `tidb_server_memory_limit` による長期メモリ負荷が原因で TiDB の CPU 使用率が高くなる問題を修正しました。 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     -   `ENUM`型の列を結合キーとして使用した場合にクエリ結果が正しくない問題を修正 [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
     -   メモリ制限を超えると、CTE を含むクエリが予期せずスタックする問題を修正 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
     -   TiDBサーバーが監査ログ用のEnterpriseプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
@@ -380,7 +380,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   日付に大きな間隔を追加した際に、誤った結果が返される問題を修正しました。修正後、無効なプレフィックスまたは文字列`true`を含む間隔はゼロとして扱われ、MySQL 8.0 と整合性が取れます。 [#49227](https://github.com/pingcap/tidb/issues/49227) @[lcwangchao](https://github.com/lcwangchao)
     -   `ROW`関数が`null`型を誤って推論し、予期しないエラーが発生する問題を修正しました [#49015](https://github.com/pingcap/tidb/issues/49015) @[wshwsh12](https://github.com/wshwsh12)
     -   `ILIKE`関数が一部のシナリオでデータ競合を引き起こす可能性がある問題を修正しました [#49677](https://github.com/pingcap/tidb/issues/49677) @[lcwangchao](https://github.com/lcwangchao)
-    -   `STREAM_AGG()`が CI [#49902](https://github.com/pingcap/tidb/issues/49902)を正しく処理しないためにクエリ結果が正しくない問題を修正します @[wshwsh12](https://github.com/wshwsh12)
+    -   `STREAM_AGG()` が CI を正しく処理しないためにクエリ結果が正しくない問題を修正します [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
     -   `TIME`への変換時にエンコードが失敗する問題を修正 [#47346](https://github.com/pingcap/tidb/issues/47346) @[wshwsh12](https://github.com/wshwsh12)
     -   `ENFORCED`制約内の`CHECK`オプションの動作がMySQL 8.0と矛盾する問題を修正しました。 [#47567](https://github.com/pingcap/tidb/issues/47567) [#47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust)
     -   `CHECK`制約を持つDDLステートメントが停止する問題を修正 [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
@@ -398,7 +398,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   BRインポート後に`mysql.bind_info`テーブルに重複した組み込み行が存在する可能性がある問題を修正します [#46527](https://github.com/pingcap/tidb/issues/46527) @[qw4990](https://github.com/qw4990)
     -   パーティションが削除された後、パーティションテーブルの統計情報が期待どおりに更新されない問題を修正 [#48182](https://github.com/pingcap/tidb/issues/48182) @[Rustin170506](https://github.com/Rustin170506)
     -   パーティションテーブルのグローバル統計情報の同時マージ中にエラーが返される可能性がある問題を修正 [#48713](https://github.com/pingcap/tidb/issues/48713) @[hawkingrei](https://github.com/hawkingrei)
-    -   PADDING SPACE [#48821](https://github.com/pingcap/tidb/issues/48821) @[time-and-fate](https://github.com/time-and-fate)と運命を持つ列のインデックス範囲スキャンに`LIKE`演算子が使用されている場合、クエリ結果が正しくないことがある問題を修正します
+    -   PADDING SPACE を持つ列のインデックス範囲スキャンに`LIKE`演算子が使用されている場合、クエリ結果が正しくないことがある問題を修正します [#48821](https://github.com/pingcap/tidb/issues/48821) @[time-and-fate](https://github.com/time-and-fate)
     -   生成された列がメモリ上で同時読み取りと書き込みを引き起こし、データ競合が発生する可能性がある問題を修正しました [#44919](https://github.com/pingcap/tidb/issues/44919) @[tangenta](https://github.com/tangenta)
     -   `ANALYZE TABLE` （トップN統計を収集しないことを示す）が指定されている場合でも、 `WITH 0 TOPN`がトップ1統計を収集してしまう問題を修正しました。 [#49080](https://github.com/pingcap/tidb/issues/49080) @[hawkingrei](https://github.com/hawkingrei)
     -   無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正 [#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
@@ -465,7 +465,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
         -   BRが外部ストレージファイルに対して不正なURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         -   ログバックアップタスクは開始できるものの、タスク初期化中にPDへの接続に失敗すると正しく動作しない問題を修正 [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         -   ログバックアップタスクが起動後にメモリリークを起こして正常に実行されない可能性がある問題を修正 [#16070](https://github.com/tikv/tikv/issues/16070) @[YuJuncen](https://github.com/YuJuncen)
-        -   PITR処理中にシステムテーブル`mysql.gc_delete_range`にデータを挿入するとエラー [#49346](https://github.com/pingcap/tidb/issues/49346)が返される問題を修正しました。@[Leavrth](https://github.com/Leavrth)
+        -   PITR 処理中にシステムテーブル`mysql.gc_delete_range`にデータを挿入するとエラーが返される問題を修正しました。 [#49346](https://github.com/pingcap/tidb/issues/49346) @[Leavrth](https://github.com/Leavrth)
         -   古いバージョンのバックアップからデータを復元すると、 `Unsupported collation`エラーが報告される問題を修正 [#49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
         -   特定のシナリオでスナップショットを介してユーザーテーブルが復元された後、権限がタイムリーに更新されない問題を修正 [#49394](https://github.com/pingcap/tidb/issues/49394) @[Leavrth](https://github.com/Leavrth)
 

@@ -45,7 +45,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
--   TiFlash はFastScan (GA) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)の使用をサポートしています
+-   TiFlash は FastScan (GA) の使用をサポートしています [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
     TiFlash はv6.3.0 から FastScan を実験的機能として導入しました。v7.0.0 では、この機能が一般利用可能になります。FastScan はシステム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して有効にできます。この機能は、強力な一貫性を犠牲にすることで、テーブルスキャンのパフォーマンスを大幅に向上させます。対応するテーブルが`INSERT` / { `UPDATE`操作を含まず、 `DELETE`操作のみを含む場合、FastScan は強力な一貫性を維持し、スキャンのパフォーマンスを向上させることができます。
 
@@ -269,7 +269,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 動作の変更 {#behavior-changes}
 
--   TiCDC は、Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)の`FLOAT`データの不正なエンコードの問題を修正しました
+-   TiCDC は、Avro の `FLOAT` データの不正なエンコードの問題を修正しました [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)
 
     TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを`None`に手動で調整する必要があります。そうしないと、changefeed がスキーマを正常に更新できなくなります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
@@ -339,7 +339,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   場合によっては、TiDB でパーティションテーブルデータをグローバルに並べ替えないようにする [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
     -   `fair lock mode`と`lock only if exists`の同時使用をサポート [#42068](https://github.com/pingcap/tidb/issues/42068) @[MyonKeminta](https://github.com/MyonKeminta)
     -   トランザクションのスローログとトランザクション内部イベントの印刷をサポートする [#41863](https://github.com/pingcap/tidb/issues/41863) @[ekexium](https://github.com/ekexium)
-    -   `ILIKE`オペレーター [#40943](https://github.com/pingcap/tidb/issues/40943) @[xzhangxian1008](https://github.com/xzhangxian1008)をサポートします
+    -   `ILIKE` オペレーターをサポートします [#40943](https://github.com/pingcap/tidb/issues/40943) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   PD
 
@@ -363,7 +363,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         -   テーブルのスケジューリングを改善して、単一のテーブルをさまざまな TiCDC ノード間でより均等に分割します [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
-        -   MQ シンク [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)に Large Row モニタリング メトリクスを追加します
+        -   MQ シンクに Large Row モニタリング メトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)
 
         -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワーク トラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
 

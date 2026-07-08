@@ -124,7 +124,7 @@ TiDBバージョン：8.5.4
 -   TiFlash
 
     -   `TableScan`パフォーマンスを向上させるために不要なデータ読み取りをスキップします [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
-    -   TiFlash [#10361](https://github.com/pingcap/tiflash/issues/10361) 10361 @ジェイソン・ファンで、多くの列とスパース データ (つまり、大量の`TableScan` } または空の値) を含む広いテーブルでの { `NULL`パフォーマンスを最適[ジェイソン・ファン](https://github.com/JaySon-Huang)ます。
+    -   TiFlash [#10361](https://github.com/pingcap/tiflash/issues/10361) 10361 @ジェイソン・ファンで、多くの列とスパース データ (つまり、大量の`TableScan` または空の値) を含む広いテーブルでの { `NULL`パフォーマンスを最適[ジェイソン・ファン](https://github.com/JaySon-Huang)ます。
     -   多数のテーブルを持つクラスターにベクトル インデックスを追加することによって生じるTiFlash CPU オーバーヘッドを削減 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   無駄なRaftコマンド処理時の不要なログ出力を最小限にしてログ容量を削減 [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashの小さなパーティション分割テーブルでの`TableScan`パフォーマンスを向上 [#10487](https://github.com/pingcap/tiflash/issues/10487) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -177,7 +177,7 @@ TiDBバージョン：8.5.4
     -   TSOFollowerプロキシの誤ったエラー処理ロジックを修正 [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
     -   バケットのレポートが無効になった後でもバケットの分割が機能する問題を修正 [#9726](https://github.com/tikv/pd/issues/9726) @[bufferflies](https://github.com/bufferflies)
     -   リソースマネージャがトークンを誤って割り当て、クエリが停止する問題を修正しました [#9455](https://github.com/tikv/pd/issues/9455) @[JmPotato](https://github.com/JmPotato)
-    -   PDリーダーが交代した後、配置ルールが有効にならない問題を修正 [#9602](https://github.com/tikv/pd/issues/9602) [okJiang](https://github.com/okJiang)
+    -   PDリーダーが交代した後、配置ルールが有効にならない問題を修正 [#9602](https://github.com/tikv/pd/issues/9602) @[okJiang](https://github.com/okJiang)
     -   PDが科学表記の大きな数値を解析できない場合があり、その結果、一部のTTL関連の設定が有効にならない問題を修正します。 [#9343](https://github.com/tikv/pd/issues/9343) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash

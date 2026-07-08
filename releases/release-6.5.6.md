@@ -109,7 +109,7 @@ TiDB バージョン: 6.5.6
     -   リージョン[＃15919](https://github.com/tikv/tikv/issues/15919)を[金星の上](https://github.com/overvenus)にマージした後、古いピアが保持され、resolved-tsがブロックされる問題を修正しました。
     -   クラウド環境のGrafanaでスケジューラコマンド変数が正しくない問題を修正[＃15832](https://github.com/tikv/tikv/issues/15832) @ [Connor1996](https://github.com/Connor1996)
     -   Titanの`blob-run-mode`がオンライン[＃15978](https://github.com/tikv/tikv/issues/15978) @ [tonyxuqqi](https://github.com/tonyxuqqi)に更新できない問題を修正
-    -   リージョン[＃13311](https://github.com/tikv/tikv/issues/13311)と[cfzjywxk](https://github.com/cfzjywxk)間でメタデータが一致しないためにTiKVがパニックを起こす問題を修正しました
+    -   リージョン[＃13311](https://github.com/tikv/tikv/issues/13311)と@[cfzjywxk](https://github.com/cfzjywxk)間でメタデータが一致しないためにTiKVがパニックを起こす問題を修正しました
     -   オンラインアンセーフリカバリ[＃15629](https://github.com/tikv/tikv/issues/15629) @ [Connor1996](https://github.com/Connor1996)中にリーダーが強制終了するとTiKVがパニックになる問題を修正
     -   [＃15817](https://github.com/tikv/tikv/issues/15817) @ [Connor1996](https://github.com/Connor1996)にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました
     -   Raftピア[＃16069](https://github.com/tikv/tikv/issues/16069) @ [overvenus](https://github.com/overvenus)を削除するときに TiKV コプロセッサが古いデータを返す可能性がある問題を修正しました
@@ -120,7 +120,7 @@ TiDB バージョン: 6.5.6
 
     -   プラグインディレクトリとファイルの潜在的なセキュリティリスクを修正[＃7094](https://github.com/tikv/pd/issues/7094) @ [HuSharp](https://github.com/HuSharp)
     -   変更された分離レベルがデフォルトの配置ルール[＃7121](https://github.com/tikv/pd/issues/7121) @ [rleungx](https://github.com/rleungx)に同期されない問題を修正しました
-    -   `evict-leader-scheduler` [HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
+    -   `evict-leader-scheduler` @[HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
     -   BR [＃7148](https://github.com/tikv/pd/issues/7148) @ [CabinfeverB](https://github.com/CabinfeverB)の回復プロセス中に、空のリージョンをカウントする方法によってリージョンのバランスが崩れる可能性がある問題を修正しました。
     -   配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @ [disksing](https://github.com/disksing)
     -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[＃7221](https://github.com/tikv/pd/issues/7221) @ [disksing](https://github.com/disksing)

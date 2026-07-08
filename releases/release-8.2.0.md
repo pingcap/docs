@@ -35,7 +35,7 @@ TiDB バージョン: 8.2.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_executor_concurrency-new-in-v50)を参照してください。
 
--   TiDB の並列 HashAgg アルゴリズムは、ディスク スピル (GA) [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)をサポートしています。
+-   TiDB の並列 HashAgg アルゴリズムは、ディスク スピル (GA) をサポートしています。 [#35637](https://github.com/pingcap/tidb/issues/35637) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     TiDB v8.0.0 では、実験的機能としてディスクスピルをサポートする並列 HashAgg アルゴリズムが導入されました。v8.2.0 では、この機能が一般提供 (GA) されます。並列 HashAgg アルゴリズムを使用すると、TiDB はメモリ使用量に基づいて自動的にデータスピルをトリガーし、クエリのパフォーマンスとデータスループットのバランスを取ります。この機能はデフォルトで有効になっています。この機能を制御するシステム変数`tidb_enable_parallel_hashagg_spill`は、今後のリリースで非推奨となります。
 
@@ -227,7 +227,7 @@ TiDB バージョン: 8.2.0
 
     -   高並行データ読み取り操作時のロック競合を減らし、短いクエリのパフォーマンスを最適化 [#9125](https://github.com/pingcap/tiflash/issues/9125) @[JinheLin](https://github.com/JinheLin)
     -   `Join`演算子 [#9057](https://github.com/pingcap/tiflash/issues/9057) @[gengliqi](https://github.com/gengliqi)内の Join Key の重複コピーを削除します。
-    -   `HashAgg`演算子 [#8956](https://github.com/pingcap/tiflash/issues/8956) @[gengliqi](https://github.com/gengliqi)で2レベルハッシュテーブルの変換処理を同時に実行します
+    -   `HashAgg` 演算子で 2 レベルハッシュテーブルの変換処理を同時に実行します [#8956](https://github.com/pingcap/tiflash/issues/8956) @[gengliqi](https://github.com/gengliqi)
     -   `HashAgg`演算子の冗長な集計関数を削除して計算オーバーヘッドを削減 [#8891](https://github.com/pingcap/tiflash/issues/8891) @[guo-shaoge](https://github.com/guo-shaoge)
 
 -   ツール
@@ -310,7 +310,7 @@ TiDB バージョン: 8.2.0
     -   監視ダッシュボードで**gRPC リクエストソースの期間**メトリクスが正しく表示されない問題を修正 [#17133](https://github.com/tikv/tikv/issues/17133) @[King-Dylan](https://github.com/King-Dylan)
     -   TiKVからTiDBに送信されるメッセージに対して`grpc-compression-type`を介してgRPCメッセージ圧縮方法を設定しても効果がない問題を修正しました [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
     -   tikv-ctl の`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正 [#17037](https://github.com/tikv/tikv/issues/17037) @[glorv](https://github.com/glorv)
-    -   CDCとlog-backupが`check_leader`構成を使用して`advance-ts-interval` }}のタイムアウトを制限しないため、場合によってはTiKVが正常に再起動した際に`resolved_ts`のラグが大きくなりすぎる問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    -   CDCとlog-backupが`check_leader`構成を使用して`advance-ts-interval` のタイムアウトを制限しないため、場合によってはTiKVが正常に再起動した際に`resolved_ts`のラグが大きくなりすぎる問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
 
 -   PD
 
@@ -348,7 +348,7 @@ TiDB バージョン: 8.2.0
 
     -   TiDB Data Migration (DM)
 
-        -   `go-mysql` [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)をアップグレードして、接続ブロックの問題を修正します。
+        -   `go-mysql` をアップグレードして、接続ブロックの問題を修正します。 [#11041](https://github.com/pingcap/tiflow/issues/11041) @[D3Hunter](https://github.com/D3Hunter)
         -   MariaDBデータの移行中に`SET`ステートメントが原因でDMがpanicを起こす問題を修正 [#10206](https://github.com/pingcap/tiflow/issues/10206) @[dveeden](https://github.com/dveeden)
 
     -   TiDB Lightning

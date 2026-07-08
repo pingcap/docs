@@ -27,7 +27,7 @@ TiDBバージョン：8.5.3
     -   インデックス追加中の TiKV への書き込み速度を監視するためのモニタリング メトリックを追加 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `merge sort`サブタスクのスケジューリングロジックを最適化してソートパフォーマンスを向上させる [#60375](https://github.com/pingcap/tidb/issues/60375) @[tangenta](https://github.com/tangenta)
     -   外部キーを持つ多数のテーブルを作成する際のテーブル作成を高速化し、メモリ使用効率を最適化する [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD)
-    -   `information_schema.tables`テーブル [#62020](https://github.com/pingcap/tidb/issues/62020)の読み取りパフォーマンスを改善します @[tangenta](https://github.com/tangenta)
+    -   `information_schema.tables` テーブルの読み取りパフォーマンスを改善します [#62020](https://github.com/pingcap/tidb/issues/62020) @[tangenta](https://github.com/tangenta)
     -   データインポート時のリージョン分割とデータ取り込みのためのフロー制御インターフェースを追加 [#61553](https://github.com/pingcap/tidb/issues/61553) @[tangenta](https://github.com/tangenta)
     -   IndexScan のプラン構築プロセスを最適化し、 `fmt.Sprintf()`呼び出しを削減します [#56649](https://github.com/pingcap/tidb/issues/56649) @[crazycs520](https://github.com/crazycs520)
     -   インデックスを使用したグローバルソート時にマージソート段階の監視メトリクスを追加する [#61025](https://github.com/pingcap/tidb/issues/61025) @[fzzf678](https://github.com/fzzf678)

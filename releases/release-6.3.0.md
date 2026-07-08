@@ -40,7 +40,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB は[範囲列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
--   [交換パーティション](/partitioned-table.md#partition-management)GA [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)になります
+-   [交換パーティション](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
 -   TiFlashへのさらに 2 つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)のプッシュダウンをサポート [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
 
@@ -161,7 +161,7 @@ TiDBバージョン: 6.3.0-DMR
 
     MySQL との互換性の詳細については、 [MySQLとの正規表現互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)を参照してください。
 
--   `CREATE USER`および`ALTER USER`ステートメントは`ACCOUNT LOCK/UNLOCK`オプション [#37051](https://github.com/pingcap/tidb/issues/37051)をサポートします @[CbcWestwolf](https://github.com/CbcWestwolf)
+-   `CREATE USER` および `ALTER USER` ステートメントは `ACCOUNT LOCK/UNLOCK` オプションをサポートします [#37051](https://github.com/pingcap/tidb/issues/37051) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     [`CREATE USER`](/sql-statements/sql-statement-create-user.md)文を使用してユーザーを作成する際、 `ACCOUNT LOCK/UNLOCK`オプションを使用して、作成したユーザーがロックされているかどうかを指定できます。ロックされたユーザーはデータベースにログインできません。
 
@@ -197,7 +197,7 @@ TiDBバージョン: 6.3.0-DMR
 
     v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、 [TiCDCは複数のIDCに展開できます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
--   TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) [asddongmen](https://github.com/asddongmen)
+-   TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
     ディザスタリカバリのためのデータ レプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
 
@@ -296,11 +296,11 @@ TiDBバージョン: 6.3.0-DMR
 
 -   TiFlash
 
-    -   `elt`関数のTiFlash [#5104](https://github.com/pingcap/tiflash/issues/5104) @[Willendless](https://github.com/Willendless)へのプッシュダウンをサポート
+    -   `elt` 関数の TiFlash へのプッシュダウンをサポート [#5104](https://github.com/pingcap/tiflash/issues/5104) @[Willendless](https://github.com/Willendless)
     -   TiFlashへの`leftShift`機能のプッシュダウンをサポートします [#5099](https://github.com/pingcap/tiflash/issues/5099) @[AnnieoftheStars](https://github.com/AnnieoftheStars)
-    -   `castTimeAsDuration`関数のTiFlash [#5306](https://github.com/pingcap/tiflash/issues/5306) @[AntiTopQuark](https://github.com/AntiTopQuark)へのプッシュダウンのサポート
+    -   `castTimeAsDuration` 関数の TiFlash へのプッシュダウンのサポート [#5306](https://github.com/pingcap/tiflash/issues/5306) @[AntiTopQuark](https://github.com/AntiTopQuark)
     -   TiFlashへの`HexIntArg/HexStrArg`機能のプッシュダウンをサポートします [#5107](https://github.com/pingcap/tiflash/issues/5107) @[YangKeao](https://github.com/YangKeao)
-    -   TiFlashのインタープリタをリファクタリングし、新しいインタープリタプランナー [#4739](https://github.com/pingcap/tiflash/issues/4739)をサポートする @[SeaRise](https://github.com/SeaRise)
+    -   TiFlashのインタープリタをリファクタリングし、新しいインタープリタプランナーをサポートする [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
     -   TiFlashのメモリトラッカーの精度を向上 [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
     -   `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN`照合順序を使用した文字列列のパフォーマンスを改善 [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
     -   ReadLimiter [#5401](https://github.com/pingcap/tiflash/issues/5401) , [#5091](https://github.com/pingcap/tiflash/issues/5091) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)ポティガーでバックグラウンドでI/Oスループットを計算
@@ -318,7 +318,7 @@ TiDBバージョン: 6.3.0-DMR
         -   MySQL シンクでエラー [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)ヴィーナスが発生した場合の DML ステートメントのロギング`start ts`のサポート
         -   `api/v1/health` API を強化して、TiCDC クラスターのより正確な正常性状態を返します [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
         -   MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
-        -   非推奨のPulsarシンク [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)を削除します
+        -   非推奨の Pulsar シンクを削除します [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)
         -   変更フィードに関係のない DDL ステートメントを破棄することで、レプリケーションのパフォーマンスを向上させます [#6447](https://github.com/pingcap/tiflow/issues/6447) @[asddongmen](https://github.com/asddongmen)
 
     -   TiDB Data Migration (DM)
@@ -360,9 +360,9 @@ TiDBバージョン: 6.3.0-DMR
     -   悲観的DML 操作が非一意インデックス キーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     -   `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
     -   DML実行エンジンを使用した`EXPLAIN ANALYZE`ステートメントがトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
-    -   UPDATE文が場合によっては誤って投影を削除し、 `Can't find column`エラー [#37568](https://github.com/pingcap/tidb/issues/37568)が発生する問題を修正しました。@[AilinKid](https://github.com/AilinKid)
+    -   UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)
     -   結合したテーブルの再配置操作が誤って外部結合条件をプッシュダウンする問題を修正 [#37238](https://github.com/pingcap/tidb/issues/37238) @[AilinKid](https://github.com/AilinKid)
-    -   一部のパターンで`IN`と`NOT IN`サブクエリが`Can't find column`エラー [#37032](https://github.com/pingcap/tidb/issues/37032)を報告する問題を修正しました。@[AilinKid](https://github.com/AilinKid)
+    -   一部のパターンで `IN` と `NOT IN` サブクエリが `Can't find column` エラーを報告する問題を修正しました。 [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid)
     -   `Can't find column`ステートメントに共通テーブル式 (CTE) が含まれている場合に`UPDATE`が報告される問題を修正 [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
     -   間違った`PromQL` [#35856](https://github.com/pingcap/tidb/issues/35856) @[Defined2014](https://github.com/Defined2014)修正
 
@@ -416,7 +416,7 @@ TiDBバージョン: 6.3.0-DMR
 
     -   TiDB Data Migration (DM)
 
-        -   DMが`Specified key was too long`エラー [#5315](https://github.com/pingcap/tiflow/issues/5315)を報告する問題を修正しました @[lance6716](https://github.com/lance6716)
+        -   DM が `Specified key was too long` エラーを報告する問題を修正しました [#5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
         -   リレーがエラーに遭遇した際のゴルーチンリークを修正 [#6193](https://github.com/pingcap/tiflow/issues/6193) @[lance6716](https://github.com/lance6716)
         -   `collation_compatible` `"strict"`に設定した場合に、DM が重複した照合順序を持つ SQL を生成する可能性がある問題を修正します [#6832](https://github.com/pingcap/tiflow/issues/6832) @[lance6716](https://github.com/lance6716)
         -   DM-workerログにおける警告メッセージ「 binlog status_varsからタイムゾーンを取得する際にエラーが発生しました」の表示を減らす [#6628](https://github.com/pingcap/tiflow/issues/6628) @[lyzx2001](https://github.com/lyzx2001)

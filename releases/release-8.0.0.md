@@ -94,7 +94,7 @@ TiDB バージョン: 8.0.0
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を参照してください。
 
--   低精度 TSO [#51081](https://github.com/pingcap/tidb/issues/51081) @[Tema](https://github.com/Tema)の更新間隔の構成をサポート
+-   低精度 TSO の更新間隔の構成をサポート [#51081](https://github.com/pingcap/tidb/issues/51081) @[Tema](https://github.com/Tema)
 
     TiDBの[低精度TSO機能](/system-variables.md#tidb_low_resolution_tso)定期的に更新されるTSOをトランザクションのタイムスタンプとして使用します。古いデータの読み取りが許容されるシナリオでは、この機能はリアルタイム性能を犠牲にすることで、小規模な読み取り専用トランザクションのTSO取得のオーバーヘッドを削減し、高並行読み取りの能力を向上させます。
 
@@ -137,7 +137,7 @@ TiDB バージョン: 8.0.0
 
     詳細については、 [ドキュメント](/data-type-default-values.md#specify-expressions-as-default-values)を参照してください。
 
--   `div_precision_increment`システム変数 [#51501](https://github.com/pingcap/tidb/issues/51501)をサポートします @[yibin87](https://github.com/yibin87)
+-   `div_precision_increment` システム変数をサポートします [#51501](https://github.com/pingcap/tidb/issues/51501) @[yibin87](https://github.com/yibin87)
 
     MySQL 8.0 では、 `div_precision_increment`演算子を使用して実行される除算演算の結果の桁数を増やすことを指定する変数`/`がサポートされています。v8.0.0 より前の TiDB ではこの変数はサポートされておらず、除算は 4 桁の小数点以下で実行されます。v8.0.0 以降では、TiDB はこの変数をサポートしています。除算演算の結果の桁数を増やすことを必要に応じて指定できます。
 
@@ -145,7 +145,7 @@ TiDB バージョン: 8.0.0
 
 ### データベース操作 {#db-operations}
 
--   PITR は Amazon S3 オブジェクト ロック [#51184](https://github.com/pingcap/tidb/issues/51184) @[RidRisR](https://github.com/RidRisR)をサポートします
+-   PITR は Amazon S3 オブジェクト ロックをサポートします [#51184](https://github.com/pingcap/tidb/issues/51184) @[RidRisR](https://github.com/RidRisR)
 
     Amazon S3 オブジェクトロックを使用すると、指定された保持期間中にバックアップデータが誤ってまたは意図的に削除されるのを防ぎ、データのセキュリティと整合性を強化できます。バージョン 6.3.0 以降、 BR はスナップショットバックアップで Amazon S3 オブジェクトロックをサポートし、フルバックアップにセキュリティレイヤーを追加します。バージョン 8.0.0 以降、PITR も Amazon S3 オブジェクトロックをサポートします。フルバックアップでもログデータバックアップでも、オブジェクトロック機能はより信頼性の高いデータ保護を保証し、データバックアップとリカバリのセキュリティをさらに強化し、規制要件を満たします。
 
@@ -204,7 +204,7 @@ TiDB バージョン: 8.0.0
 
 ### データ移行 {#data-migration}
 
--   TiCDC は、Simple プロトコル [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)のサポートを追加します
+-   TiCDC は、Simple プロトコルのサポートを追加します [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)
 
     TiCDCは、新しいプロトコルであるSimpleプロトコルを導入しました。このプロトコルは、DDLおよびBOOTSTRAPイベントにテーブルスキーマ情報を埋め込むことで、インバンドスキーマ追跡機能を提供します。
 
@@ -342,8 +342,8 @@ TiDB バージョン: 8.0.0
     -   同じデータ行が複数回更新された場合のクエリ推定情報の精度を向上させる [#47523](https://github.com/pingcap/tidb/issues/47523) @[terry1purcell](https://github.com/terry1purcell)
     -   インデックスマージは、 `OR`述語への複数値インデックスと`AND`演算子の埋め込みをサポートします [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
     -   `force-init-stats` `true`に設定すると、TiDB は TiDB 起動中にサービスを提供する前に統計情報の初期化が完了するまで待機します。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは引き続き監視できるようになります [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
-    -   MemoryTrackerは`IndexLookup`演算子 [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)のメモリ使用量を追跡できます
-    -   MemoryTracker は`MemTableReaderExec`オペレーター [#51456](https://github.com/pingcap/tidb/issues/51456) @[wshwsh12](https://github.com/wshwsh12)のメモリ使用量を追跡できます
+    -   MemoryTracker は `IndexLookup` 演算子のメモリ使用量を追跡できます [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)
+    -   MemoryTracker は `MemTableReaderExec` オペレーターのメモリ使用量を追跡できます [#51456](https://github.com/pingcap/tidb/issues/51456) @[wshwsh12](https://github.com/wshwsh12)
     -   大規模テーブルをクエリする際に、PD からリージョンをバッチでロードして KV 範囲からリージョンへの変換プロセスを高速化するサポート [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     -   システムテーブル`INFORMATION_SCHEMA.TABLES` 、 `INFORMATION_SCHEMA.STATISTICS` 、 `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` 、および`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`パフォーマンスを最適化しました。以前のバージョンと比較して、パフォーマンスが最大 100 倍向上しています。 [#50305](https://github.com/pingcap/tidb/issues/50305) @[ywqzzy](https://github.com/ywqzzy)
 
@@ -377,14 +377,14 @@ TiDB バージョン: 8.0.0
 -   TiFlash
 
     -   `json_path`関数の`JSON_EXTRACT()`引数に非定数値を使用することをサポートする [#8510](https://github.com/pingcap/tiflash/issues/8510) @[SeaRise](https://github.com/SeaRise)
-    -   `JSON_LENGTH(json, path)`機能 [#8711](https://github.com/pingcap/tiflash/issues/8711)[シーライズ](https://github.com/SeaRise)をサポートします
+    -   `JSON_LENGTH(json, path)` 機能をサポートします [#8711](https://github.com/pingcap/tiflash/issues/8711) @[SeaRise](https://github.com/SeaRise)
 
 -   ツール
 
     -   Backup & Restore (BR)
 
-        -   `--load-stats` `br` } を導入します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
-        -   `--tikv-max-restore-concurrency`コマンドラインツールに、新しい復元パラメータ { `br` } を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)シュート
+        -   `--load-stats` `br` を導入します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
+        -   `--tikv-max-restore-concurrency`コマンドラインツールに、新しい復元パラメータ { `br` を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)シュート
         -   粒度の粗いリージョン分散アルゴリズムを有効にして同時パラメータを適応的に取得できるようにすることで、復元パフォーマンスを向上させます [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer)
         -   `log`のコマンドラインヘルプ情報に`br`コマンドを表示する [#50927](https://github.com/pingcap/tidb/issues/50927) @[RidRisR](https://github.com/RidRisR)
         -   テーブルIDの再利用を最大化し、リストアパフォーマンスを向上させるため、リストアプロセス中にテーブルIDを事前割り当てする機能をサポートする [#51736](https://github.com/pingcap/tidb/issues/51736) @[Leavrth](https://github.com/Leavrth)
@@ -478,7 +478,7 @@ TiDB バージョン: 8.0.0
 
     -   `tidb_enable_row_level_checksum`を有効にするとTiKVがpanicを起こす可能性がある問題を修正しました [#16371](https://github.com/tikv/tikv/issues/16371) @[cfzjywxk](https://github.com/cfzjywxk)
     -   例外的な状況で休止状態のリージョンがすぐに起動されない問題を修正 [#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
-    -   レプリカが1つオフラインになったときにリージョン全体が利用できなくなる問題を修正するため、ノードをオフラインにする前にリージョンのすべてのレプリカの最終ハートビート時間をチェックします [#16465](https://github.com/tikv/tikv/issues/16465) [tonyxuqqi](https://github.com/tonyxuqqi)
+    -   レプリカが1つオフラインになったときにリージョン全体が利用できなくなる問題を修正するため、ノードをオフラインにする前にリージョンのすべてのレプリカの最終ハートビート時間をチェックします [#16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
     -   TiKV が、最大値`INT64`より大きく、最大値`UINT64`より小さい JSON 整数を`FLOAT64`として解析し、TiDB との不整合を引き起こす問題を修正しました。 [#16512](https://github.com/tikv/tikv/issues/16512) @[YangKeao](https://github.com/YangKeao)
     -   監視メトリック`tikv_unified_read_pool_thread_count`にデータがない場合がある問題を修正 [#16629](https://github.com/tikv/tikv/issues/16629) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -488,13 +488,13 @@ TiDB バージョン: 8.0.0
     -   `evict-leader-scheduler`インターフェイスを呼び出したときに出力がない問題を修正 [#7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
     -   PD監視項目`learner-peer-count`がリーダー切り替え後に古い値を同期しない問題を修正 [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     -   `watch etcd`正しくオフになっていない場合に発生するメモリリークの問題を修正しました [#7807](https://github.com/tikv/pd/issues/7807) @[rleungx](https://github.com/rleungx)
-    -   一部の TSO ログでエラー原因 [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)が出力されない問題を修正
+    -   一部の TSO ログでエラー原因が出力されない問題を修正 [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
     -   再起動後に予期しない負のモニタリング指標が発生する問題を修正 [#4489](https://github.com/tikv/pd/issues/4489) @[lhy1024](https://github.com/lhy1024)
     -   Leaderのリースがログ時刻よりも後に期限切れになる問題を修正 [#7700](https://github.com/tikv/pd/issues/7700) @[CabinfeverB](https://github.com/CabinfeverB)
     -   TiDB (PD クライアント) と PD 間の TLS スイッチが矛盾している場合に TiDB がパニックになる問題を修正[#7900](https://github.com/tikv/pd/issues/7900) [#7902](https://github.com/tikv/pd/issues/7902) [#7916](https://github.com/tikv/pd/issues/7916) @[CabinfeverB](https://github.com/CabinfeverB)
     -   Goroutine が正しく閉じられなかった場合にメモリリークが発生する問題を修正しました [#7782](https://github.com/tikv/pd/issues/7782) @[HuSharp](https://github.com/HuSharp)
     -   特殊文字を含むスケジューラをpd-ctlが削除できない問題を修正 [#7798](https://github.com/tikv/pd/issues/7798) @[JmPotato](https://github.com/JmPotato)
-    -   TSO [#7864](https://github.com/tikv/pd/issues/7864) @[CabinfeverB](https://github.com/CabinfeverB)を取得するときに PD クライアントがブロックされる可能性がある問題を修正
+    -   TSO を取得するときに PD クライアントがブロックされる可能性がある問題を修正 [#7864](https://github.com/tikv/pd/issues/7864) @[CabinfeverB](https://github.com/CabinfeverB)
 
 -   TiFlash
 
@@ -545,7 +545,7 @@ TiDB バージョン: 8.0.0
 
         -   TiKVスペースのチェックによって発生するパフォーマンス低下の問題を修正 [#43636](https://github.com/pingcap/tidb/issues/43636) @[lance6716](https://github.com/lance6716)
         -   TiDB Lightningがファイルスキャン中に無効なシンボリックリンクファイルに遭遇した際にエラーを報告する問題を修正しました [#49423](https://github.com/pingcap/tidb/issues/49423) @[lance6716](https://github.com/lance6716)
-        -   `0`が`NO_ZERO_IN_DATE` } に含まれていない場合に、 TiDB Lightning が`sql_mode`を含む日付値を正しく解析できない問題 [#50757](https://github.com/pingcap/tidb/issues/50757) @[GMHDBJD](https://github.com/GMHDBJD)
+        -   `0`が`NO_ZERO_IN_DATE` に含まれていない場合に、 TiDB Lightning が`sql_mode`を含む日付値を正しく解析できない問題 [#50757](https://github.com/pingcap/tidb/issues/50757) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## 貢献者 {#contributors}
 

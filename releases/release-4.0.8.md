@@ -103,8 +103,8 @@ TiDB バージョン: 4.0.8
     -   プランキャッシュ[＃20246](https://github.com/pingcap/tidb/pull/20246)から古いプランを保存するときに発生する可能性のあるpanicを修正しました
     -   `FROM_UNIXTIME`と`UNION ALL`一緒に使用すると返される結果が誤って切り捨てられるバグを修正しました[＃20240](https://github.com/pingcap/tidb/pull/20240)
     -   `Enum`型の値を`Float`型に変換すると間違った結果が返される可能性がある問題を修正しました[＃20235](https://github.com/pingcap/tidb/pull/20235)
-    -   `RegionStore.accessStore` [#20210](https://github.com/pingcap/tidb/pull/20210)の可能性のあるpanicを修正
-    -   `BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)で最大の符号なし整数をソートしたときに返される誤った結果を修正しました
+    -   `RegionStore.accessStore` の可能性のある panic を修正 [#20210](https://github.com/pingcap/tidb/pull/20210)
+    -   `BatchPointGet` で最大の符号なし整数をソートしたときに返される誤った結果を修正しました [#20205](https://github.com/pingcap/tidb/pull/20205)
     -   `Enum`と`Set`の強制力が間違っているバグを修正[＃20364](https://github.com/pingcap/tidb/pull/20364)
     -   曖昧な`YEAR`変換[＃20292](https://github.com/pingcap/tidb/pull/20292)の問題を修正
     -   **KV期間**パネルに`store0` [＃20260](https://github.com/pingcap/tidb/pull/20260)が含まれている場合に発生する誤った報告結果の問題を修正しました

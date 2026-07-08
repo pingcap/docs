@@ -75,7 +75,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 信頼性 {#reliability}
 
--   リソース グループに基づくリソース制御のサポート (実験的) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch)@[BornChanger](https://github.com/BornChanger)[グロルヴ](https://github.com/glorv)@[tiancaiamao](https://github.com/tiancaiamao)@[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp)
+-   リソース グループに基づくリソース制御のサポート (実験的) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch)@[BornChanger](https://github.com/BornChanger)[グロルヴ](https://github.com/glorv)@[tiancaiamao](https://github.com/tiancaiamao)@[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @@[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp)
 
     TiDBクラスタのリソースグループを作成し、異なるデータベースユーザーを対応するリソースグループにバインドし、実際のニーズに応じて各リソースグループのクォータを設定できるようになりました。クラスタのリソースが制限されている場合、同じリソースグループ内のセッションで使用されるすべてのリソースはクォータに制限されます。このようにして、リソースグループが過剰に消費された場合でも、他のリソースグループのセッションには影響しません。TiDBは、Grafanaダッシュボード上でリソースの実際の使用状況を表示する組み込みビューを提供し、リソースをより合理的に割り当てるのに役立ちます。
 
@@ -272,7 +272,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/enable-tls-between-components.md)を参照してください。
 
--   TiDB LightningはAWS IAMロールキーとセッショントークンを介してAmazon S3データへのアクセスをサポートします [#40750](https://github.com/pingcap/tidb/issues/40750) [okJiang](https://github.com/okJiang)
+-   TiDB LightningはAWS IAMロールキーとセッショントークンを介してAmazon S3データへのアクセスをサポートします [#40750](https://github.com/pingcap/tidb/issues/40750) @[okJiang](https://github.com/okJiang)
 
     バージョン6.6.0より前は、 TiDB LightningはAWS IAM**ユーザーのアクセスキー**（各アクセスキーはアクセスキーIDとシークレットアクセスキーで構成されます）によるS3データへのアクセスのみをサポートしていたため、一時的なセッショントークンを使用してS3データにアクセスすることはできませんでした。バージョン6.6.0以降では、データセキュリティを向上させるため、 TiDB LightningはAWS IAM**ロールのアクセスキーとセッショントークン**によるS3データへのアクセスもサポートするようになりました。
 
@@ -402,12 +402,12 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   Raftstoreの非同期書き込みにおける優先度スケジューリングのサポート [#13730](https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
     -   コア数が1未満のCPUでTiKVを起動するサポート[#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
     -   Raftstoreのスロースコアの新しい検出メカニズムを最適化し、 `evict-slow-trend-scheduler` [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)を追加しました
-    -   RocksDBのブロックキャッシュを共有し、CF [#12936](https://github.com/tikv/tikv/issues/12936)に従ってブロックキャッシュを個別に設定することをサポートしなくなりました。@[busyjay](https://github.com/busyjay)
+    -   RocksDB のブロックキャッシュを共有し、CF に従ってブロックキャッシュを個別に設定することをサポートしなくなりました。 [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
 
 -   PD
 
-    -   OOM問題を軽減するためのグローバルメモリしきい値の管理をサポート（実験的） [#5827](https://github.com/tikv/pd/issues/5827) [hnes](https://github.com/hnes)
-    -   GC圧力を軽減するためにGCチューナーを追加（実験的） [#5827](https://github.com/tikv/pd/issues/5827) [hnes](https://github.com/hnes)
+    -   OOM問題を軽減するためのグローバルメモリしきい値の管理をサポート（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
+    -   GC圧力を軽減するためにGCチューナーを追加（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     -   異常なノードを検出してスケジュールするための`evict-slow-trend-scheduler`スケジューラを追加します [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
     -   キースペースを管理するためにキースペース マネージャーを追加 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
 

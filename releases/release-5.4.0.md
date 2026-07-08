@@ -229,7 +229,7 @@ TiDB バージョン: 5.4.0
 
 -   **TiDB Data Migration (DM)におけるリレーログの使用を最適化する**
 
-    -   `enable-relay`構成で`source` } スイッチを復元します。
+    -   `enable-relay`構成で`source` スイッチを復元します。
 
     -   `start-relay`および`stop-relay`コマンドを使用して、リレーログを動的に有効化および無効化することをサポートします。
 
@@ -409,7 +409,7 @@ TiDB バージョン: 5.4.0
         -   デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
         -   ディスクへの書き込みが完了した際にログが出力されない問題を修正 [#3362](https://github.com/pingcap/tiflow/issues/3362)
         -   DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
-        -   RHELリリース [#3584](https://github.com/pingcap/tiflow/issues/3584)において、タイムゾーンの問題によりサービスを開始できない問題を修正しました。
+        -   RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)
         -   不正確なチェックポイントによって引き起こされる可能性のあるデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
         -   コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)

@@ -80,7 +80,7 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/optimizer-hints.md#leadingt1_name--tl_name-) [#29932](https://github.com/pingcap/tidb/issues/29932) @[Reminiscent](https://github.com/Reminiscent)
 
--   `SEMI_JOIN_REWRITE`クエリのパフォーマンスを向上させるために、新しいオプティマイザ`EXISTS` }を追加します。
+-   `SEMI_JOIN_REWRITE`クエリのパフォーマンスを向上させるために、新しいオプティマイザ`EXISTS` を追加します。
 
     場合によっては、 `EXISTS`を含むクエリは最適な実行プランを取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
 
@@ -258,7 +258,7 @@ TiDBバージョン: 6.2.0-DMR
 | [tidb_enable_analyze_snapshot](/system-variables.md#tidb_enable_analyze_snapshot-new-in-v620)                           | 新しく追加された | この変数は`ANALYZE`を実行する際に、履歴データまたは最新データを読み込むかどうかを制御します。                                                                                                                                                          |
 | [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620)                                 | 新しく追加された | この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行プランを生成するかどうかを制御します。                                                                                                                                                    |
 | [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)                               | 新しく追加された | この変数は、オプティマイザが`DISTINCT`を含む集計関数を2レベルの集計関数に書き換えるかどうかを設定します。たとえば`SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えます。              |
-| [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` } 変数を表示するかどうかを制御します。                                                                                                                                                |
+| [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` 変数を表示するかどうかを制御します。                                                                                                                                                |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページング要求処理中に処理される行の最大数を設定するために使用されます。                                                                                                                                                            |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620)                               | 新しく追加された | この変数は、TiDBがTiKVに送信するトランザクションコミット要求のバッチサイズを制御するために使用されます。                                                                                                                                                     |
 | tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1 つの`ALTER TABLE`ステートメントで複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |

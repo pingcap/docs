@@ -95,7 +95,7 @@ TiDB Ansible バージョン: 3.0.8
     -   `KeepAlive`接続[＃2035](https://github.com/pingcap/pd/pull/2035)作成をサポート
 -   `/api/v1/regions` API [＃1986](https://github.com/pingcap/pd/pull/1986)のパフォーマンスを最適化
 -   `tombstone`状態でストアを削除するとpanicが発生する可能性がある問題を修正[＃2038](https://github.com/pingcap/pd/pull/2038)
--   ディスク[#2011](https://github.com/pingcap/pd/issues/2011)からリージョン情報をロードするときに重複したリージョンが誤って削除される問題[＃2040](https://github.com/pingcap/pd/pull/2040)修正しました
+-   ディスクからリージョン情報をロードするときに重複したリージョンが誤って削除される問題を修正しました [#2011](https://github.com/pingcap/pd/issues/2011) [＃2040](https://github.com/pingcap/pd/pull/2040)
 -   etcdをv3.4.0からv3.4.3にアップグレードします（アップグレード後はpd-recoverを使用してetcdをデグレードすることしかできないことに注意してください） [＃2058](https://github.com/pingcap/pd/pull/2058)
 
 ## ツール {#tools}

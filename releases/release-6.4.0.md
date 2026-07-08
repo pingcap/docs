@@ -51,7 +51,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
--   `FLASHBACK DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)を使用して削除されたデータベースの復元をサポートします
+-   `FLASHBACK DATABASE` を使用して削除されたデータベースの復元をサポートします [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)
 
     `FLASHBACK DATABASE`を使用すると、 `DROP`によってガベージコレクション(GC) の有効期間内に削除されたデータベースとそのデータを復元できます。この機能は外部ツールに依存しません。SQL ステートメントを使用して、データとメタデータを迅速に復元できます。
 
@@ -61,7 +61,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   TiFlashは保存時の暗号化にSM4アルゴリズムをサポートしています [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu)
 
-    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`構成ファイル内の`sm4-ctr` }}構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
+    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`構成ファイル内の`sm4-ctr` 構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
 
     詳細については、[ユーザー向けドキュメント](/encryption-at-rest.md#tiflash)を参照してください。
 
@@ -153,7 +153,7 @@ TiDBバージョン: 6.4.0-DMR
     -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
     -   マルチテナントなどの機能をサポートするために、キースペースフィールドを予約してください。
 
-    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` }を設定します。
+    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` を設定します。
 
     詳細については、 [ユーザー向けドキュメント](/tikv-configuration-file.md#api-version-new-in-v610)を参照してください。
 
@@ -256,7 +256,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
--   DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) [okJiang](https://github.com/okJiang)
+-   DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang)
 
     バージョン6.4.0では、DMに移行タスクのパフォーマンスと進捗状況を示す指標がさらに追加され、移行のパフォーマンスと進捗状況をより直感的に把握できるようになり、トラブルシューティングの際の参考情報としても役立ちます。
 
@@ -268,7 +268,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
--   TiCDC は`3.2.0`バージョン [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)の Kafka へのデータのレプリケーションをサポートします。
+-   TiCDC は`3.2.0`バージョンの Kafka へのデータのレプリケーションをサポートします。 [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)
 
     v6.4.0 以降、TiCDC は`3.2.0`バージョン以前のデータを[データをKafkaに複製する](/replicate-data-to-kafka.md)をサポートします。
 
@@ -342,7 +342,7 @@ TiDBバージョン: 6.4.0-DMR
 
     -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size` -0-PLACEHOLDER-E}}を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     -   リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
-    -   `json_constrains`演算子をコプロセッサー [#13592](https://github.com/tikv/tikv/issues/13592)にプッシュダウンするサポート @[lizhenhuan](https://github.com/lizhenhuan)
+    -   `json_constrains`演算子をコプロセッサーにプッシュダウンするサポート [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
     -   `CausalTsProvider`に非同期関数を追加して、一部のシナリオでのフラッシュパフォーマンスを改善します [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
 
 -   PD
@@ -350,11 +350,11 @@ TiDBバージョン: 6.4.0-DMR
     -   ホットリージョンスケジューラのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
     -   早期のタイムアウトを回避するためにオペレーター ステップのタイムアウト メカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
     -   大規模クラスターでのスケジューラーのパフォーマンスを向上 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
-    -   PD [#5637](https://github.com/tikv/pd/issues/5637)で提供されていない外部タイムスタンプの使用をサポートする @[lhy1024](https://github.com/lhy1024)
+    -   PD で提供されていない外部タイムスタンプの使用をサポートする [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash
 
-    -   MPP [#5095](https://github.com/pingcap/tiflash/issues/5095) @[windtalker](https://github.com/windtalker)の安定性をさらに向上させるために、 TiFlash MPP エラー処理ロジックをリファクタリングします。
+    -   TiFlash MPP エラー処理ロジックをリファクタリングして、MPP の安定性をさらに向上させます。 [#5095](https://github.com/pingcap/tiflash/issues/5095) @[windtalker](https://github.com/windtalker)
     -   TiFlash計算プロセスのソートを最適化し、Joinと集計のキー処理を最適化します [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
     -   デコード時のメモリ使用量を最適化し、冗長な転送列を削除して結合パフォーマンスを向上させる [#6157](https://github.com/pingcap/tiflash/issues/6157) @[yibin87](https://github.com/yibin87)
 
@@ -392,7 +392,7 @@ TiDBバージョン: 6.4.0-DMR
 -   TiDB
 
     -   新しいインデックスを作成した後に発生する可能性のあるインデックスの不整合の問題を修正します [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
-    -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブル [#38407](https://github.com/pingcap/tidb/issues/38407)の権限の問題を修正しました @[CbcWestwolf](https://github.com/CbcWestwolf)
+    -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルの権限の問題を修正しました [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `grantor`テーブルに`mysql.tables_priv`フィールドが欠落している問題を修正します [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   共通テーブル式の結合結果が間違っている可能性がある問題を修正 [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     -   共通テーブル式の和集合の結果が間違っている可能性がある問題を修正 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
@@ -401,13 +401,13 @@ TiDBバージョン: 6.4.0-DMR
     -   クエリ内の条件が誤ってプロジェクションにプッシュダウンされる問題を修正 [#35623](https://github.com/pingcap/tidb/issues/35623) @[Reminiscent](https://github.com/Reminiscent)
     -   `isNullRejected`および`OR` `AND`のチェック結果が間違っていたためにクエリ結果が間違っていた問題を修正しました [#38304](https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
     -   外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    -   結合したテーブルの再配置 [#38736](https://github.com/pingcap/tidb/issues/38736)により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。@[winoros](https://github.com/winoros)
+    -   結合したテーブルの再配置により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
 
 -   TiKV
 
     -   複数の`cgroup`および`mountinfo`が存在する場合に Gitpod で TiDB が起動に失敗する問題を修正 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     -   TiKV メトリクスの間違った式を修正`tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)
-    -   異常な`delete_files_in_range` [#13534](https://github.com/tikv/tikv/issues/13534)によって引き起こされたパフォーマンスの問題を修正します @[tabokie](https://github.com/tabokie)
+    -   異常な`delete_files_in_range` によって引き起こされたパフォーマンスの問題を修正します [#13534](https://github.com/tikv/tikv/issues/13534) @[tabokie](https://github.com/tabokie)
     -   スナップショット取得中のリース期限切れによって引き起こされる異常なリージョン競合を修正 [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   `FLASHBACK`最初のバッチで失敗したときに発生したエラーを修正します[#13672](https://github.com/tikv/tikv/issues/13672) [#13704](https://github.com/tikv/tikv/issues/13704) [#13723](https://github.com/tikv/tikv/issues/13723) @[HuSharp](https://github.com/HuSharp)
 

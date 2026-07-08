@@ -91,7 +91,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | 変数名                                                                                                                                                  | 変更の種類  | 説明                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_analyze_version`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_analyze_version-new-in-v510)                                       | 変更     | バージョン8.5.6以降、統計情報バージョン1（ `tidb_analyze_version = 1` ）は非推奨となり、今後のリリースで削除されます。統計情報バージョン2（ `tidb_analyze_version = 2` ）の使用をお勧めします。                                                                                                   |
-| [`tidb_ignore_inlist_plan_digest`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_ignore_inlist_plan_digest-new-in-v760)                   | 変更     | デフォルト値を`OFF`から`ON`に変更します。デフォルト値`ON`は、TiDB が`IN` } リスト内の要素の差異 (要素数の差異を含む) を無視し、プランダイジェストを生成する際に`...`を使用して`IN`リスト内の要素を置き換えることを意味します。                                                                                                |
+| [`tidb_ignore_inlist_plan_digest`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_ignore_inlist_plan_digest-new-in-v760)                   | 変更     | デフォルト値を`OFF`から`ON`に変更します。デフォルト値`ON`は、TiDB が`IN`リスト内の要素の差異 (要素数の差異を含む) を無視し、プランダイジェストを生成する際に`...`を使用して`IN`リスト内の要素を置き換えることを意味します。                                                                                                |
 | [`tidb_service_scope`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_service_scope-new-in-v740)                                           | 変更     | バージョン8.5.6以降、この変数の値は大文字と小文字を区別しません。TiDBは、ストレージおよび比較のために、入力値を小文字に変換します。                                                                                                                                                          |
 | [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856)                                                     | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856)                                                   | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
@@ -127,7 +127,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 -   TiDB
 
     -   インデックスプレフィックス列に対する`IN`述語を含むクエリのプラン選択を改善します。TiDB は`ORDER BY ... LIMIT`クエリの順序を保持するためにマージソートを使用できるようになり、不要なスキャンを削減してパフォーマンスを向上させます。 [#63449](https://github.com/pingcap/tidb/issues/63449) [#34882](https://github.com/pingcap/tidb/issues/34882) @[time-and-fate](https://github.com/time-and-fate)
-    -   印刷不可能なプリペアドステートメント引数を16進数として出力することで、スロークエリログの可読性を向上させる [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
+    -   表示できないプリペアドステートメント引数を16進数として出力することで、スロークエリログの可読性を向上させる [#65383](https://github.com/pingcap/tidb/issues/65383) @[dveeden](https://github.com/dveeden)
     -   `cluster_id`を`mysql.tidb`に追加し、外部ツールが 2 つの TiDB インスタンスが同じクラスターに属しているかどうかを判断できるようにします [#59476](https://github.com/pingcap/tidb/issues/59476) @[YangKeao](https://github.com/YangKeao)
 
 -   TiKV
@@ -137,14 +137,14 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 -   PD
 
-    -   存在しないラベルを削除する際に、 `404` `200` } を返す [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
+    -   存在しないラベルを削除する際に、 `200` ではなく `404` を返す [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)
     -   不要なエラーログを削減 [#9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 -   ツール
 
     -   TiDB Data Migration (DM)
 
-        -   DMシンカーに外部キーの因果関係サポートを追加し、マルチワーカーシナリオにおける行変更の親から子への実行順序を保証する [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
+        -   DM syncerに外部キーの因果関係サポートを追加し、マルチワーカーシナリオにおける行変更の親から子への実行順序を保証する [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
 
 ## バグ修正 {#bug-fixes}
 
@@ -154,7 +154,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
     -   `EXCHANGE PARTITION`を実行した後、非クラスター化パーティションテーブルの非一意グローバルインデックスまたは null 許容一意グローバルインデックスが不整合になり、不完全な結果を返す可能性がある問題を修正しました [#65289](https://github.com/pingcap/tidb/issues/65289) @[mjonss](https://github.com/mjonss)
     -   `KILL QUERY`がアイドル状態の接続を誤って終了する可能性がある問題を修正 [#65447](https://github.com/pingcap/tidb/issues/65447) @[gengliqi](https://github.com/gengliqi)
     -   `tidb_service_scope`の値が小文字に変換されない問題を修正 [#66749](https://github.com/pingcap/tidb/issues/66749) @[D3Hunter](https://github.com/D3Hunter)
-    -   TiDBの再起動後にアフィニティテーブルが表示されない問題を修正 [#66284](https://github.com/pingcap/tidb/issues/66284) [lcwangchao](https://github.com/lcwangchao)
+    -   TiDBの再起動後にアフィニティテーブルが表示されない問題を修正 [#66284](https://github.com/pingcap/tidb/issues/66284) @[lcwangchao](https://github.com/lcwangchao)
     -   システムテーブルが統計キャッシュから除外されていないため、Stats Healthyメトリックが不正確に表示される問題を修正しました [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
     -   `modify_count`の異常な更新により統計情報が更新されない可能性がある問題を修正しました [#65426](https://github.com/pingcap/tidb/issues/65426) @[0xPoe](https://github.com/0xPoe)
     -   フェアロックモードで最初のステートメントがロックを取得する際に、キープアライブメカニズムの失敗により悲観的トランザクションが予期せずロールバックされる可能性がある問題を修正 [#66571](https://github.com/pingcap/tidb/issues/66571) @[MyonKeminta](https://github.com/MyonKeminta)
@@ -172,11 +172,11 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 -   PD
 
     -   マージリージョン演算子が多数存在するシナリオで`DISTRIBUTE TABLE`を実行する際に発生する可能性のあるpanic問題を修正 [#10293](https://github.com/tikv/pd/issues/10293) @[bufferflies](https://github.com/bufferflies)
-    -   ストア制限の設定がすぐに反映されない場合がある問題を修正しました [#10108](https://github.com/tikv/pd/issues/10108) [okJiang](https://github.com/okJiang)
+    -   ストア制限の設定がすぐに反映されない場合がある問題を修正しました [#10108](https://github.com/tikv/pd/issues/10108) @[okJiang](https://github.com/okJiang)
 
 -   TiFlash
 
-    -   DDL ステートメントを実行して列 [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました。
+    -   DDL ステートメントを実行して列の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   Grafana ダッシュボードのRaftスループット メトリックに異常に大きな値が表示されることがある問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
     -   ランタイムフィルターが有効で結合キーのデータ型が一致しない場合、結合結果が正しくなくなることがある問題を修正 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 

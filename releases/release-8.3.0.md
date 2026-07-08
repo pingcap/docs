@@ -160,7 +160,7 @@ TiDBバージョン：8.3.0
 
 ### データ移行 {#data-migration}
 
--   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（GA） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) [okJiang](https://github.com/okJiang) [asddongmen](https://github.com/asddongmen)
+-   TiCDCは双方向レプリケーション（BDR）モードでのDDLステートメントのレプリケーションをサポートします（GA） [#10301](https://github.com/pingcap/tiflow/issues/10301) [#48519](https://github.com/pingcap/tidb/issues/48519) @[okJiang](https://github.com/okJiang) @[asddongmen](https://github.com/asddongmen)
 
     TiCDC v7.6.0 では、双方向レプリケーションが構成された DDL ステートメントのレプリケーションが導入されました。以前は、TiCDC は DDL ステートメントの双方向レプリケーションをサポートしていなかったため、TiCDC の双方向レプリケーションを使用するユーザーは、両方の TiDB クラスタで DDL ステートメントを個別に実行する必要がありました。この機能により、クラスタに`PRIMARY` BDR ロールを割り当てると、TiCDC はそのクラスタから`SECONDARY`クラスタに DDL ステートメントをレプリケートできます。
 
@@ -206,7 +206,7 @@ TiDBバージョン：8.3.0
 
 ### システムテーブル {#system-tables}
 
--   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システム テーブルに`SESSION_ALIAS`フィールドが追加され、DML ステートメント [#46889](https://github.com/pingcap/tidb/issues/46889)によって現在影響を受けている行数が表示されます。@[lcwangchao](https://github.com/lcwangchao)
+-   [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システム テーブルに`SESSION_ALIAS`フィールドが追加され、DML ステートメントによって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -231,7 +231,7 @@ TiDBバージョン：8.3.0
 
 -   TiDB
 
-    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )`ステートメント [#54162](https://github.com/pingcap/tidb/issues/54162)をサポートします[dveeden](https://github.com/dveeden)
+    -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )` ステートメントをサポートします [#54162](https://github.com/pingcap/tidb/issues/54162) @[dveeden](https://github.com/dveeden)
     -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     -   インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     -   `mysql.analyze_jobs`システムテーブル [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)に分析済みインデックスを表示します。
@@ -276,9 +276,9 @@ TiDBバージョン：8.3.0
 
     -   Backup & Restore (BR)
 
-        -   ポイントインタイムリカバリ（PITR）を初めて開始する前に、完全バックアップが存在するかどうかを確認する機能をサポートします。完全バックアップが見つからない場合、 BRはリストアを終了し、エラー [#54418](https://github.com/pingcap/tidb/issues/54418)を返します。@[Leavrth](https://github.com/Leavrth)
-        -   スナップショットバックアップを復元する前に、TiKVとTiFlashのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRは復元を終了し、エラー [#54316](https://github.com/pingcap/tidb/issues/54316)を返します。@[RidRisR](https://github.com/RidRisR)
-        -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRはリストアを終了し、エラー [#17224](https://github.com/tikv/tikv/issues/17224)を返します。@[RidRisR](https://github.com/RidRisR)
+        -   ポイントインタイムリカバリ（PITR）を初めて開始する前に、完全バックアップが存在するかどうかを確認する機能をサポートします。完全バックアップが見つからない場合、 BRはリストアを終了し、エラーを返します。[#54418](https://github.com/pingcap/tidb/issues/54418) @[Leavrth](https://github.com/Leavrth)
+        -   スナップショットバックアップを復元する前に、TiKVとTiFlashのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRは復元を終了し、エラーを返します。[#54316](https://github.com/pingcap/tidb/issues/54316) @[RidRisR](https://github.com/RidRisR)
+        -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRはリストアを終了し、エラーを返します。[#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
         -   Alibaba Cloudへのアクセス認証情報を環境変数で設定するサポート [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
         -   BR をバックアップおよびリストアに使用する際に OOM を回避するため、 BRプロセスの利用可能なメモリに基づいて環境変数`GOMEMLIMIT`を自動的に設定します [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         -   ポイントインタイムリカバリ(PITR) と互換性のある増分バックアップを作成する [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
@@ -341,7 +341,7 @@ TiDBバージョン：8.3.0
     -   暗号化マネージャが使用前に初期化されていない問題を修正 [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     -   一部のログが編集されない問題を修正 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     -   PDマイクロサービスの起動中にリダイレクトがpanic可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
-    -   `split-merge-interval`設定項目の値が繰り返し変更された場合（例えば、 `1s`から`1h` } に変更し、再び`1s` } に戻す場合など）に、その設定が有効にならない可能性がある問題を修正します。 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
+    -   `split-merge-interval`設定項目の値が繰り返し変更された場合（例えば、 `1s`から`1h` に変更し、再び`1s` に戻す場合など）に、その設定が有効にならない可能性がある問題を修正します。 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
     -   `replication.strictly-match-label`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     -   大規模なパーティションテーブルを分析する際にTSOの取得が遅くなり、 `ANALYZE`パフォーマンス低下を引き起こす問題を修正しました [#8500](https://github.com/tikv/pd/issues/8500) @[rleungx](https://github.com/rleungx)
     -   大規模クラスターにおける潜在的なデータ競合を修正 [#8386](https://github.com/tikv/pd/issues/8386) @[rleungx](https://github.com/rleungx)

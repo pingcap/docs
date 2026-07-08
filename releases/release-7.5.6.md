@@ -78,7 +78,7 @@ TiDB バージョン: 7.5.6
 
 -   TiKV
 
-    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602)対[LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
+    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602)対@[LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
     -   タイムロールバックにより異常なRocksDBフロー制御が発生し、パフォーマンスジッター[＃17995](https://github.com/tikv/tikv/issues/17995) @ [LykxSassinator](https://github.com/LykxSassinator)が発生する可能性がある問題を修正しました。
     -   1フェーズコミット（1PC）のみが有効で、非同期コミットが有効になっていない場合に、最後に書き込まれたデータが読み取れない可能性がある問題を修正[＃18117](https://github.com/tikv/tikv/issues/18117) @ [zyguan](https://github.com/zyguan)
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [overvenus](https://github.com/overvenus)
@@ -98,7 +98,7 @@ TiDB バージョン: 7.5.6
     -   `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanic可能性がある問題を修正[＃8950](https://github.com/tikv/pd/issues/8950) @ [okJiang](https://github.com/okJiang)
     -   `tidb_enable_tso_follower_proxy`システム変数が[＃8947](https://github.com/tikv/pd/issues/8947) @ [JmPotato](https://github.com/JmPotato)で有効にならない可能性がある問題を修正しました
     -   TSO [＃9004](https://github.com/tikv/pd/issues/9004) @ [rleungx](https://github.com/rleungx)を割り当てるときにメモリリークが発生する可能性がある問題を修正しました
-    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対[rleungx](https://github.com/rleungx)切り替え時にリージョン同期が間に合わない可能性がある問題を修正しました
+    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対@[rleungx](https://github.com/rleungx)切り替え時にリージョン同期が間に合わない可能性がある問題を修正しました
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
 
 -   TiFlash

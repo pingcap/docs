@@ -31,7 +31,7 @@ TiDB バージョン: 7.5.4
 
 -   TiFlash
 
-    -   `LENGTH()`と`ASCII()`関数[＃9344](https://github.com/pingcap/tiflash/issues/9344)の実行効率を[xzhangxian1008](https://github.com/xzhangxian1008)で最適化
+    -   `LENGTH()`と`ASCII()`関数[＃9344](https://github.com/pingcap/tiflash/issues/9344)の実行効率を@[xzhangxian1008](https://github.com/xzhangxian1008)で最適化
     -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
     -   JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセル要求にタイムリーに応答できるようにします[＃9430](https://github.com/pingcap/tiflash/issues/9430) @ [windtalker](https://github.com/windtalker)
 

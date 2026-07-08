@@ -28,7 +28,7 @@ TiDB バージョン: 7.1.2
 
 -   TiDB
 
-    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) [qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
+    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) @[qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
     -   コプロセッサ[＃46514](https://github.com/pingcap/tidb/issues/46514) @ [you06](https://github.com/you06)に関連する要求元情報を追加します
     -   TiDBノード[＃47172](https://github.com/pingcap/tidb/issues/47172) @ [zimulala](https://github.com/zimulala)のアップグレードステータスの開始と終了をマークするために`/upgrade/start`と`upgrade/finish` APIを追加します。
 
@@ -146,7 +146,7 @@ TiDB バージョン: 7.1.2
     -   コンテキストタイムアウトにより`lease timeout`エラー[＃6926](https://github.com/tikv/pd/issues/6926) @ [rleungx](https://github.com/rleungx)が発生する可能性がある問題を修正
     -   ピアがグループごとに適切に分散されず、リーダー[＃6962](https://github.com/tikv/pd/issues/6962) @ [rleungx](https://github.com/rleungx)の分布が不均等になる可能性がある問題を修正しました。
     -   pd-ctl [＃7121](https://github.com/tikv/pd/issues/7121) @ [rleungx](https://github.com/rleungx)を使用して更新するときに分離レベル ラベルが同期されない問題を修正しました
-    -   `evict-leader-scheduler` [HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
+    -   `evict-leader-scheduler` @[HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
     -   プラグインディレクトリとファイルの潜在的なセキュリティリスクを修正[＃7094](https://github.com/tikv/pd/issues/7094) @ [HuSharp](https://github.com/HuSharp)
     -   リソース制御[＃45050](https://github.com/pingcap/tidb/issues/45050) @ [glorv](https://github.com/glorv)を有効にした後に DDL がアトミック性を保証しない可能性がある問題を修正しました
     -   ルールチェッカーがピア[＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)を選択した場合に、不健全なピアを削除できない問題を修正しました

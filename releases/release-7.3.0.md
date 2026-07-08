@@ -241,13 +241,13 @@ TiDB バージョン: 7.3.0
     -   システムテーブル`INFORMATION_SCHEMA.TIKV_REGION_STATUS`をクエリした際に、場合によっては誤った結果が返される問題を修正しました [#45531](https://github.com/pingcap/tidb/issues/45531) @[Defined2014](https://github.com/Defined2014)
     -   一部のケースでパーティションテーブルのプルーニングが正しく行われない問題を修正 [#42273](https://github.com/pingcap/tidb/issues/42273) @[jiyfhust](https://github.com/jiyfhust)
     -   パーティションテーブルのパーティションを切り捨てる際にグローバルインデックスがクリアされない問題を修正 [#42435](https://github.com/pingcap/tidb/issues/42435) @[L-maple](https://github.com/L-maple)
-    -   TiDBノードの障害発生後、他のTiDBノードがTTLタスクを引き継がない問題を修正 [#45022](https://github.com/pingcap/tidb/issues/45022) [lcwangchao](https://github.com/lcwangchao)
+    -   TiDBノードの障害発生後、他のTiDBノードがTTLタスクを引き継がない問題を修正 [#45022](https://github.com/pingcap/tidb/issues/45022) @[lcwangchao](https://github.com/lcwangchao)
     -   TTL実行時のメモリリーク問題を修正 [#45510](https://github.com/pingcap/tidb/issues/45510) @[lcwangchao](https://github.com/lcwangchao)
     -   パーティションテーブルにデータを挿入する際の不正確なエラーメッセージの問題を修正 [#44966](https://github.com/pingcap/tidb/issues/44966) @[lilinghai](https://github.com/lilinghai)
     -   `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの読み取り権限の問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   パーティションテーブル名が間違っている場合にエラーが発生する問題を修正 [#44967](https://github.com/pingcap/tidb/issues/44967) @[River2000i](https://github.com/River2000i)
     -   `tidb_enable_dist_task`が有効になっている場合にインデックス作成が停止する問題を修正 [#44440](https://github.com/pingcap/tidb/issues/44440) @[tangenta](https://github.com/tangenta)
-    -   BR [#44716](https://github.com/pingcap/tidb/issues/44716)を使用して`duplicate entry`を含むテーブルを復元する際に発生する`AUTO_ID_CACHE=1`エラーを修正します。@[tiancaiamao](https://github.com/tiancaiamao)
+    -   BR を使用して `duplicate entry` を含むテーブルを復元する際に発生する `AUTO_ID_CACHE=1` エラーを修正します。 [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     -   `TRUNCATE TABLE`の実行に要した時間が`ADMIN SHOW DDL JOBS`に表示されるタスク実行時間と一致しない問題を修正しました。 [#44785](https://github.com/pingcap/tidb/issues/44785) @[tangenta](https://github.com/tangenta)
     -   TiDBのアップグレード時にメタデータの読み取りに1つのDDLリースよりも時間がかかると、アップグレードが停止する問題を修正しました [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
     -   `SELECT CAST(n AS CHAR)`ステートメント内の`n`が負の数の場合、クエリ結果が正しくない問題を修正しました [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
@@ -262,7 +262,7 @@ TiDB バージョン: 7.3.0
 
     -   PD の再起動によって`default`リソース グループが再初期化される可能性がある問題を修正 [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     -   etcdが既に起動しているがクライアントがまだ接続していない場合に、クライアントを呼び出すとPDがpanicを起こす可能性がある問題を修正しました [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
-    -   リージョンの出力`health-check`が、リージョンID [#6560](https://github.com/tikv/pd/issues/6560)を照会して返されるリージョン情報と一致しない問題を修正します。@[JmPotato](https://github.com/JmPotato)
+    -   リージョンの出力 `health-check` が、リージョン ID を照会して返されるリージョン情報と一致しない問題を修正します。 [#6560](https://github.com/tikv/pd/issues/6560) @[JmPotato](https://github.com/JmPotato)
     -   `unsafe recovery`で失敗した学習者ピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
     -   配置ルールがルールを満たしていないTiFlash学習者を選択してしまう問題を修正します [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
     -   ルールチェッカーがピアを選択する際に、不健全なピアを削除できない問題を修正 [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
@@ -277,7 +277,7 @@ TiDB バージョン: 7.3.0
 
     -   TiCDC
 
-        -   PD [#9294](https://github.com/pingcap/tiflow/issues/9294)が一時的に利用できないために changefeeds が失敗する問題を修正しました @[asddongmen](https://github.com/asddongmen)
+        -   PD が一時的に利用できないために changefeeds が失敗する問題を修正しました [#9294](https://github.com/pingcap/tiflow/issues/9294) @[asddongmen](https://github.com/asddongmen)
         -   TiCDCノードの一部がネットワークから隔離された場合に発生する可能性のあるデータ不整合の問題を修正します [#9344](https://github.com/pingcap/tiflow/issues/9344) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   Kafka Sinkでエラーが発生した場合、changefeedの進行が永久にブロックされる可能性がある問題を修正しました [#9309](https://github.com/pingcap/tiflow/issues/9309) @[hicqu](https://github.com/hicqu)
         -   TiCDCノードの状態変化時に発生する可能性のあるpanic問題を修正 [#9354](https://github.com/pingcap/tiflow/issues/9354) @[sdojjy](https://github.com/sdojjy)

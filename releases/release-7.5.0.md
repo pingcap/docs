@@ -86,7 +86,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
     v7.5.0 より前の DM Binlog Filter 機能は、指定されたイベントを移行またはフィルタリングすることしかできず、粒度が比較的粗いものでした。たとえば、 `ALTER`のような DDL イベントの大きな粒度しかフィルタリングできませんでした。この方法は、いくつかのシナリオで制限がありました。たとえば、アプリケーションは`ADD COLUMN`は許可しますが、 `DROP COLUMN`許可しませんが、以前の DM バージョンでは両方とも`ALTER`イベントでフィルタリングされていました。
 
-    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` } などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーション データへの影響を回避するために、タイムリーに手動で介入できます。
+    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーション データへの影響を回避するために、タイムリーに手動で介入できます。
 
     詳細については、 [ドキュメント](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。
 
@@ -192,7 +192,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   Sort オペレーターがスピル プロセス中に TiDB をクラッシュさせる可能性がある問題を修正 [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
     -   TiDB が`Can't find column`を使用したクエリに対して`GROUP_CONCAT`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
     -   `batch-client`の`client-go`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
-    -   `INDEX_LOOKUP_HASH_JOIN` [#47788](https://github.com/pingcap/tidb/issues/47788)のメモリ使用量推定の誤りを修正[シーライズ](https://github.com/SeaRise)
+    -   `INDEX_LOOKUP_HASH_JOIN` のメモリ使用量推定の誤りを修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     -   長期間オフラインだったTiFlashノードの再参加によって生じる不均一なワークロードの問題を修正 [#35418](https://github.com/pingcap/tidb/issues/35418) @[windtalker](https://github.com/windtalker)
     -   HashJoin オペレーターがプローブを実行する際にチャンクを再利用できない問題を修正します [#48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
     -   `COALESCE()`関数が`DATE`型のパラメータに対して誤った結果型を返す問題を修正しました [#46475](https://github.com/pingcap/tidb/issues/46475) @[xzhangxian1008](https://github.com/xzhangxian1008)
