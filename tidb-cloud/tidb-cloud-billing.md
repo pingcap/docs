@@ -96,6 +96,49 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
 
+### Row-based storage
+
+TiDB tables use row-based storage by default, with data stored in **TiKV**.
+
+<!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
+
+### Row-based storage with IA
+
+Row-based storage with Infrequent Access (IA) stores data in **remote object storage**. You can set the table's **Storage Class** to `IA` using the following SQL statement:
+
+```sql
+ALTER TABLE t1 STORAGE_CLASS='IA';
+```
+
+> **Warning:**
+>
+> Infrequent Access is currently an **experimental feature** and is available only in selected regions. It is currently supported only for {{{ .essential }}}.
+
+<!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
+
+> **Note:**
+>
+> Infrequent Access is designed for data that is rarely accessed but still needs to be available for online queries.
+
+### Columnar storage
+
+Columnar storage is powered by the **TiFlash** engine. To enable columnar storage for a table, add a TiFlash replica using the following SQL statement:
+
+```sql
+ALTER TABLE table_name SET TIFLASH REPLICA n;
+```
+
+<!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
+
+### Dual-layer encryption
+
+Both **row-based storage** and **columnar storage** support dual-layer encryption. This mechanism protects your data with two independent layers of encryption, ensuring that data remains protected even if one layer is compromised.
+
+- **Infrastructure-level encryption:** The underlying cloud provider encrypts all data at rest using its native storage encryption mechanism.
+- **TiDB Cloud-level encryption:** On top of the cloud provider's encryption, TiDB Cloud automatically applies a second layer of encryption using either a customer-managed encryption key (CMEK) or an escrow key.
+
+<!--**Use case:** Workloads with strict security and compliance requirements, such as those in the financial services, government, and healthcare industries.-->
+
 ## Cost explorer
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can view and analyze the usage costs of TiDB Cloud. Otherwise, skip this section.

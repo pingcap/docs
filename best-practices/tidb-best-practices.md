@@ -87,7 +87,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage format of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
 
     In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 
@@ -215,4 +215,4 @@ TiDB is suitable for the following scenarios:
 - You do not want to do sharding
 - The access mode has no obvious hotspot
 - Transactions, strong consistency, and disaster recovery are required
-- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce storage links
+- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce data pipelines

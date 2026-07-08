@@ -23,6 +23,8 @@ To view the metrics on the **Metrics** page, take the following steps:
 
 In TiDB Cloud, the metrics data is kept for 7 days.
 
+<CustomContent plan="dedicated">
+
 ## Metrics for TiDB Cloud Dedicated clusters
 
 The following sections illustrate the metrics on the **Metrics** page for TiDB Cloud Dedicated clusters.
@@ -86,22 +88,26 @@ The following sections illustrate the metrics on the **Metrics** page for TiDB C
 | TiProxy Throughput | node | The bytes transferred per second on each TiProxy node. |
 | TiProxy Sessions Migration Reasons | reason | The number of session migrations that happen every minute and the reasons for them. |
 
+</CustomContent>
+
+<CustomContent plan="starter,essential">
+
 ## Metrics for {{{ .starter }}} and {{{ .essential }}} instances
 
 The **Metrics** page provides two tabs for metrics of {{{ .starter }}} and {{{ .essential }}} instances:
 
-- **Cluster Status**: displays the cluster-level main metrics.
+- **Instance Overview**: displays the instance-level main metrics.
 - **Database Status**: displays the database-level main metrics.
 
-### Cluster Status
+### Instance Overview
 
-The following table illustrates the cluster-level main metrics under the **Cluster Status** tab.
+The following table illustrates the instance-level main metrics under the **Instance Overview** tab.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction in a {{{ .starter }}} instance. Besides user queries, background activities can also consume RUs, so when QPS is 0, RU usage per second might still be nonzero.|
 | Capacity vs Usage (RU/s) | Provisioned capacity (RCU), Consumed RU/s | The Request Capacity Units (RCUs) and the consumed Request Units (RU) per second in a {{{ .essential }}} instance. |
-| Used Storage Size | Row-based storage, Columnar storage | The size of row-based storage and columnar storage. This metric is displayed only when each storage type is 50 MiB or larger. |
+| Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | The size of row-based storage, row-based standard storage, and columnar storage. TiDB Cloud displays this metric only when the size of each storage type is 50 MiB or larger. **Row-based standard storage** has the same meaning as **Row-based storage**. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} instance until the instance executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
@@ -120,6 +126,8 @@ The following table illustrates the database-level main metrics under the **Data
 | QPS Per DB | All, {Database name} | The number of SQL statements executed per second on every database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Average Query Duration Per DB | All, {Database name} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client.|
 | Failed Query Per DB | All, {Database name} | The statistics of error types according to the SQL statement execution errors per second on every database.|
+
+</CustomContent>
 
 ## FAQ
 

@@ -42,13 +42,26 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 The Starter plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
+- **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
 ## {{{ .essential }}}
 
 For applications experiencing growing workloads and needing scalability in real time, the Essential plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+<CustomContent language="en,zh">
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+{{{ .essential }}} offers zonal high availability, which places all components within the same availability zone to reduce network latency. For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+
+</CustomContent>
+
+<CustomContent language="ja">
 
 - **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
 - **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
@@ -61,6 +74,8 @@ For applications experiencing growing workloads and needing scalability in real 
 - Regional High Availability: distributes nodes across multiple availability zones, providing maximum infrastructure isolation and redundancy.
 
 For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+
+</CustomContent>
 
 ## {{{ .premium }}}
 
