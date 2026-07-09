@@ -32,7 +32,7 @@ Connect your application with the languages and frameworks you prefer.
 
 </DocHomeCard>
 
-<DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
+<DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Preview)" icon="cloud-vector-mauve">
 
 Explore native support of Vector Search in {{{ .starter }}} to build your AI application.
 

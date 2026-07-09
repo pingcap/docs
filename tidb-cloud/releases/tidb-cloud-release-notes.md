@@ -28,6 +28,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
 
+**Console changes**
+
+- Standardize the label used in the [TiDB Cloud console](https://tidbcloud.com/) for public preview features to `PREVIEW`.
+
+    Previously, some public preview features were labeled as `BETA` or `PREVIEW`. Now, all public preview features use the `PREVIEW` label.
+
 **API changes**
 
 - **TiDB Cloud Dedicated**
