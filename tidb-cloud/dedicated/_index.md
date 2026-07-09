@@ -56,7 +56,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Stream Data](http://docs.pingcap.com/tidbcloud/changefeed-overview)
 
-[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+[Use API (Preview)](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 

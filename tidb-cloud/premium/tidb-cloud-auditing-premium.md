@@ -22,7 +22,7 @@ The audit logging feature is **disabled by default**. To audit a {{{ .premium }}
     > **Note:**
     >
     > - Database audit logging is not available for {{{ .starter }}}.
-    > - For {{{ .essential }}}, see [Database Audit Logging (Beta) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).
+    > - For {{{ .essential }}}, see [Database Audit Logging (Preview) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).
     > - For {{{ .dedicated }}}, see [{{{ .dedicated }}} Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
 
 - You must have the `Organization Owner` role in your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console.
@@ -332,7 +332,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 

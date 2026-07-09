@@ -20,11 +20,11 @@ After your {{{ .starter }}} or {{{ .essential }}} instance is created on TiDB Cl
 
   Direct connections mean the MySQL native connection system over TCP. You can connect to your {{{ .starter }}} or Essential instance using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
-- [Data Service (beta)](/tidb-cloud/data-service-overview.md)
+- [Data Service (Preview)](/tidb-cloud/data-service-overview.md)
 
   TiDB Cloud provides a Data Service feature that enables you to connect to your {{{ .starter }}} instance hosted on AWS via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses your {{{ .starter }}} or Essential instance data via a RESTful API rather than raw SQL.
 
-- [Serverless Driver (beta)](/develop/serverless-driver.md)
+- [Serverless Driver (Preview)](/develop/serverless-driver.md)
 
   TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your {{{ .starter }}} or {{{ .essential }}} instance in edge environments with the same experience as direct connections.
 
@@ -55,8 +55,8 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing {{{ .starter }}} hosted on AWS via Data Service (beta) does not need to specify the network type.                      |
-| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
+| Data Service (Preview)        | /                            | Accessing {{{ .starter }}} hosted on AWS via Data Service (Preview) does not need to specify the network type.                      |
+| Serverless Driver (Preview)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next
 

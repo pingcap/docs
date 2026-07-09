@@ -55,9 +55,9 @@ TiDB is trusted by over 1500 global enterprises across a variety of industries, 
 
 TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
 
-### What does BETA mean in TiDB Cloud?
+### What does preview mean in TiDB Cloud?
 
-BETA is the public preview stage of a TiDB Cloud feature or offering before it becomes generally available (GA).
+Preview is the public preview stage of a TiDB Cloud feature or offering before it becomes generally available (GA).
 
 ### How can I learn more about TiDB Cloud?
 

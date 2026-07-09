@@ -76,4 +76,4 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
     >
     > If you do not set a password, you cannot connect to the {{{ .starter }}} or Essential instance.
 
-- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md).
+- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (Preview)](/tidb-cloud/cli-reference.md).
