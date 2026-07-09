@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## July 9, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/) to [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/).
+
 ## July 7, 2026
 
 **General changes**
