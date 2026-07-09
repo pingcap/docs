@@ -139,7 +139,7 @@ TiDB バージョン: 8.0.0
 
 -   `div_precision_increment` システム変数をサポートします [#51501](https://github.com/pingcap/tidb/issues/51501) @[yibin87](https://github.com/yibin87)
 
-    MySQL 8.0 では、 `div_precision_increment`演算子を使用して実行される除算演算の結果の桁数を増やすことを指定する変数`/`がサポートされています。v8.0.0 より前の TiDB ではこの変数はサポートされておらず、除算は 4 桁の小数点以下で実行されます。v8.0.0 以降では、TiDB はこの変数をサポートしています。除算演算の結果の桁数を増やすことを必要に応じて指定できます。
+    MySQL 8.0 では、`/` 演算子を使用した除算の結果桁数を増やすことを指定する `div_precision_increment` システム変数がサポートされています。v8.0.0 より前の TiDB ではこの変数はサポートされておらず、除算は小数点以下 4 桁で実行されます。v8.0.0 以降では、TiDB はこの変数をサポートしており、除算の結果桁数を必要に応じて増やすことができます。
 
     詳細については、 [ドキュメント](/system-variables.md#div_precision_increment-new-in-v800)を参照してください。
 
@@ -274,7 +274,7 @@ TiDB バージョン: 8.0.0
 | `tidb_ddl_version`                                                                                                        | 名称変更     | TiDB DDL V2 を有効にするかどうかを制御します。バージョン 8.0.0 以降、この変数は目的をより明確にするために[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)に名称変更されました。                                                 |
 | [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info)                           | 変更     | [インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかのコントロールを追加します。デフォルト値は`ON`です。                                                                                                             |
 | [`tidb_redact_log`](/system-variables.md#tidb_redact_log)                                                                 | 変更     | TiDB ログおよびスロー ログを記録する際に、SAL テキスト内のユーザー情報をどのように処理するかを制御します。値のオプションは`OFF` (ログ内のユーザー情報を処理しないことを示す) と`ON` (ログ内のユーザー情報を非表示にすることを示す) です。ログ内のユーザー情報をより詳細に処理できるように、v8.0.0 ではログ情報をマークするための`MARKER`オプションが追加されました。                    |
-| [`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)                                     | 新しく追加された | `/`演算子を使用して実行される除算演算の結果の桁数を増やすかどうかを制御します。この変数はMySQLと同じです。                                                                                                                                                                  |
+| [`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)                                     | 新しく追加された | `/` 演算子を使用した除算の結果桁数を増やすかどうかを制御します。この変数はMySQLと同じです。                                                                                                                                                                  |
 | [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)                                                         | 新しく追加された | DML ステートメントの実行モードを制御します。値のオプションは`"standard"`と`"bulk"`です。                                                                                                                                                                   |
 | [`tidb_enable_auto_analyze_priority_queue`](/system-variables.md#tidb_enable_auto_analyze_priority_queue-new-in-v800)     | 新しく追加された | 統計情報の自動収集タスクをスケジュールするための優先度キューを有効にするかどうかを制御します。この変数を有効にすると、TiDB は統計情報を最も必要とするテーブルの統計情報の収集を優先します。                                                                                                                           |
 | [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)               | 新しく追加された | TiDBが並列HashAggアルゴリズムでディスクスピルをサポートするかどうかを制御します。 `ON`の場合、並列HashAggアルゴリズムでディスクスピルがトリガーされます。この機能が将来のリリースで一般提供されるようになったら、この変数は非推奨になります。                                                                                         |
