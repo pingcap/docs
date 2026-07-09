@@ -49,4 +49,4 @@ TiDB Lightning
 
 ## TiDB アンシブル {#tidb-ansible}
 
--   TiDBダッシュボードに監視項目`parse duration`と`compile duration`追加して、SQL文の解析とコンパイルの実行にかかる時間を監視します[＃815](https://github.com/pingcap/tidb-ansible/pull/815)
+-   TiDB Dashboardに監視項目`parse duration`と`compile duration`追加して、SQL文の解析とコンパイルの実行にかかる時間を監視します[＃815](https://github.com/pingcap/tidb-ansible/pull/815)

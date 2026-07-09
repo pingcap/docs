@@ -52,7 +52,7 @@ TiDBバージョン: 7.1.4
 
         -   ダウンストリームがKafkaの場合、トピック式は`schema`オプションとして許可し、トピック名を直接指定することをサポートします[＃9763](https://github.com/pingcap/tiflow/issues/9763) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   サポート[チェンジフィードの下流同期ステータスの照会](https://docs.pingcap.com/tidb/v7.1/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed)は、TiCDC が受信した上流データの変更が下流システムに完全に同期されているかどうかを判断するのに役立ちます[＃10289](https://github.com/pingcap/tiflow/issues/10289) @ [hongyunyan](https://github.com/hongyunyan)
-        -   TiDBダッシュボード[＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)でのTiCDCログの検索をサポート
+        -   TiDB Dashboard[＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)でのTiCDCログの検索をサポート
 
     -   TiDB Lightning
 
@@ -130,7 +130,7 @@ TiDBバージョン: 7.1.4
     -   `evict-leader-scheduler`インターフェースが[＃7672](https://github.com/tikv/pd/issues/7672) @ [CabinfeverB](https://github.com/CabinfeverB)で呼び出されたときに出力がない問題を修正しました
     -   `watch etcd`正しくオフになっていない場合に発生するメモリリークの問題を修正[＃7807](https://github.com/tikv/pd/issues/7807) @ [rleungx](https://github.com/rleungx)
     -   `MergeLabels`関数が[＃7535](https://github.com/tikv/pd/issues/7535) @ [lhy1024](https://github.com/lhy1024)で呼び出されたときにデータ競合が発生する問題を修正しました
-    -   TLS が有効な場合に TiDB ダッシュボードが TiKV プロファイルを取得できない問題を修正[＃7561](https://github.com/tikv/pd/issues/7561) @ [Connor1996](https://github.com/Connor1996)
+    -   TLS が有効な場合に TiDB Dashboardが TiKV プロファイルを取得できない問題を修正[＃7561](https://github.com/tikv/pd/issues/7561) @ [Connor1996](https://github.com/Connor1996)
     -   レプリカ数が要件[＃7584](https://github.com/tikv/pd/issues/7584) @ [bufferflies](https://github.com/bufferflies)を満たしていない場合に孤立ピアが削除される問題を修正しました
     -   データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[＃7221](https://github.com/tikv/pd/issues/7221) @ [disksing](https://github.com/disksing)
     -   配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[＃7201](https://github.com/tikv/pd/issues/7201) @ [disksing](https://github.com/disksing)

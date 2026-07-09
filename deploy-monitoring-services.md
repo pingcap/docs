@@ -5,7 +5,7 @@ summary: TiDB クラスターの監視サービスをデプロイする方法を
 
 # TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
-このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。1 [TiDBダッシュボード](/dashboard/dashboard-intro.md) PDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
+このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。[TiDB Dashboard](/dashboard/dashboard-intro.md)はPDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
@@ -235,7 +235,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
     > **注記：**
     >
-    > TiKV、PD、および TiDB ダッシュボードの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
+    > TiKV、PD、および TiDB Dashboardの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
 4.  **[ロード]**をクリックします。
 

@@ -57,7 +57,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v7.0.0では、同時実行OLTPの負荷容量を向上させるための実験的機能として、非準備プランキャッシュが導入されました。v7.1.0では、この機能が強化され、より多くのSQL文のキャッシュがサポートされるようになりました。
 
-    メモリ使用率を向上させるため、TiDB v7.1.0 では、準備されていないプランキャッシュと準備済みのプランキャッシュのキャッシュプールを統合します。キャッシュサイズはシステム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を使用して制御できます。システム変数[`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)と[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)は非推奨です。
+    メモリ使用率を向上させるため、TiDB v7.1.0 では、非プリペアドプランキャッシュと準備済みのプランキャッシュのキャッシュプールを統合します。キャッシュサイズはシステム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を使用して制御できます。システム変数[`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)と[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)は非推奨です。
 
     前方互換性を維持するため、以前のバージョンからv7.1.0以降のバージョンにアップグレードする場合、キャッシュサイズ`tidb_session_plan_cache_size` `tidb_prepared_plan_cache_size`と同じ値のままになり、 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)アップグレード前の設定のままになります。十分なパフォーマンステストを行った後、 `tidb_enable_non_prepared_plan_cache`を使用して非準備プランキャッシュを有効化できます。新規に作成されたクラスターでは、非準備プランキャッシュはデフォルトで有効化されています。
 
@@ -87,7 +87,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v7.1.0では、実際のワークロードやハードウェア構成に基づいてシステム容量を見積もる機能が導入されました。この見積機能は、キャパシティプランニングのためのより正確な基準を提供し、エンタープライズレベルのシナリオにおける安定性のニーズを満たすためにTiDBのリソース割り当てをより適切に管理するのに役立ちます。
 
-    ユーザーエクスペリエンスを向上させるために、TiDB ダッシュボードは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
+    ユーザーエクスペリエンスを向上させるために、TiDB Dashboardは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
 
     詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)参照してください。
 
@@ -192,9 +192,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   [`PLAN REPLAYER`](/sql-plan-replayer.md)の出力は`debug_trace.json` 。
     -   [`EXPLAIN`](/explain-walkthrough.md)の出力における`operator info`部分的な統計詳細。
-    -   [遅いクエリ](/identify-slow-queries.md)の`Stats`フィールドの部分的な統計詳細。
+    -   [スロークエリ](/identify-slow-queries.md)の`Stats`フィールドの部分的な統計詳細。
 
-    詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [遅いクエリを特定する](/identify-slow-queries.md)を参照してください。
+    詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
 ### Security {#security}
 
@@ -270,13 +270,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`authentication_ldap_simple_server_port`](/system-variables.md#authentication_ldap_simple_server_port-new-in-v710)                     | 新しく追加された | LDAP 簡易認証における LDAPサーバーのTCP/IP ポート番号を指定します。                                                                                                                                                                                                                                                                                                                                                      |
 | [`authentication_ldap_simple_tls`](/system-variables.md#authentication_ldap_simple_tls-new-in-v710)                                     | 新しく追加された | プラグインによる LDAPサーバーへの接続が LDAP 簡易認証で StartTLS を使用して保護されるかどうかを指定します。                                                                                                                                                                                                                                                                                                                                |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)                                                       | 新しく追加された | 分散実行フレームワーク（DXF）を有効にするかどうかを制御します。DXFを有効にすると、DDL、インポート、およびその他のサポートされているDXFタスクは、クラスター内の複数のTiDBノードによって共同で実行されます。この変数は`tidb_ddl_distribute_reorg`から名前が変更されました。                                                                                                                                                                                                                                      |
-| [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)           | 新しく追加された | DML ステートメントに対して[準備されていないプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                           |
+| [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)           | 新しく追加された | DML ステートメントに対して[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                           |
 | [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)                                     | 新しく追加された | 単一行データ機能に対して TiCDC データ整合性検証を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                    |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                | 新しく追加された | この変数は、オプティマイザをより細かく制御し、オプティマイザの動作の変更によって引き起こされるアップグレード後のパフォーマンスの低下を防ぐのに役立ちます。                                                                                                                                                                                                                                                                                                                   |
 | [`tidb_plan_cache_invalidation_on_fresh_stats`](/system-variables.md#tidb_plan_cache_invalidation_on_fresh_stats-new-in-v710)           | 新しく追加された | 関連テーブルの統計が更新されたときにプラン キャッシュを自動的に無効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                |
-| [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)                                       | 新しく追加された | 準備済みプラン キャッシュまたは準備されていないプラン キャッシュにキャッシュできるプランの最大サイズを制御します。                                                                                                                                                                                                                                                                                                                                      |
+| [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)                                       | 新しく追加された | 準備済みプラン キャッシュまたは非プリペアドプラン キャッシュにキャッシュできるプランの最大サイズを制御します。                                                                                                                                                                                                                                                                                                                                      |
 | [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710) | 新しく追加された | ネットワーク転送のオーバーヘッドが最小となるアルゴリズムを使用するかどうかを制御します。この変数を有効にすると、TiDBはネットワークで交換されるデータのサイズをそれぞれ`Broadcast Hash Join`と`Shuffled Hash Join`で推定し、サイズが小さい方を選択します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)無効になります。 |
-| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)                                         | 新しく追加された | キャッシュできるプランの最大数を制御します。準備済みプランのキャッシュと準備されていないプランのキャッシュは同じキャッシュを共有します。                                                                                                                                                                                                                                                                                                                            |
+| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)                                         | 新しく追加された | キャッシュできるプランの最大数を制御します。準備済みプランのキャッシュと非プリペアドプランのキャッシュは同じキャッシュを共有します。                                                                                                                                                                                                                                                                                                                            |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
@@ -397,7 +397,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @ [CbcWestwolf](https://github.com/CbcWestwolf)
     -   `UNION` [＃42563](https://github.com/pingcap/tidb/issues/42563) @ [lcwangchao](https://github.com/lcwangchao)でユニオンビューと一時テーブルをクエリするときに発生する TiDBpanic問題を修正しました。
     -   トランザクション[＃39664](https://github.com/pingcap/tidb/issues/39664) @ [tiancaiamao](https://github.com/tiancaiamao)で複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました
-    -   時間変換[＃42439](https://github.com/pingcap/tidb/issues/42439) @ [qw4990](https://github.com/qw4990)中に準備済みプラン キャッシュと準備されていないプラン キャッシュの動作間の非互換性の問題を修正しました
+    -   時間変換[＃42439](https://github.com/pingcap/tidb/issues/42439) @ [qw4990](https://github.com/qw4990)中に準備済みプラン キャッシュと非プリペアドプラン キャッシュの動作間の非互換性の問題を修正しました
     -   Decimal 型[＃43311](https://github.com/pingcap/tidb/issues/43311) @ [qw4990](https://github.com/qw4990)のプラン キャッシュによって発生する誤った結果を修正しました
     -   間違ったフィールドタイプチェック[＃42459](https://github.com/pingcap/tidb/issues/42459) @ [AilinKid](https://github.com/AilinKid)による、null 認識アンチ結合 (NAAJ) での TiDBpanic問題を修正しました。
     -   RC分離レベルでの悲観的トランザクションにおけるDML実行の失敗により、データとインデックス[＃43294](https://github.com/pingcap/tidb/issues/43294) @ [ekexium](https://github.com/ekexium)の間に不整合が発生する可能性がある問題を修正しました。

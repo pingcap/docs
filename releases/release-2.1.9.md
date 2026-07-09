@@ -32,11 +32,11 @@ TiDB Ansible バージョン: 2.1.9
     -   `TableReader` &amp; `IndexReader` &amp; `IndexLookup` [＃10169](https://github.com/pingcap/tidb/pull/10169)
 -   スロークエリログの改善
     -   類似したSQL [＃10093](https://github.com/pingcap/tidb/pull/10093)区別するために`SQL Digest`加算する
-    -   低速クエリステートメントで使用される統計のバージョン情報を追加する[＃10220](https://github.com/pingcap/tidb/pull/10220)
+    -   スロークエリステートメントで使用される統計のバージョン情報を追加する[＃10220](https://github.com/pingcap/tidb/pull/10220)
     -   スロークエリログ[＃10246](https://github.com/pingcap/tidb/pull/10246)でステートメントのメモリ消費量を表示する
     -   コプロセッサー関連情報の出力形式を調整し、pt-query-digest [＃10300](https://github.com/pingcap/tidb/pull/10300)で解析できるようにします。
-    -   遅いクエリステートメント[＃10275](https://github.com/pingcap/tidb/pull/10275)の`#`文字の問題を修正
-    -   遅いクエリステートメントのメモリテーブルにいくつかの情報列を追加する[＃10317](https://github.com/pingcap/tidb/pull/10317)
+    -   スロークエリステートメント[＃10275](https://github.com/pingcap/tidb/pull/10275)の`#`文字の問題を修正
+    -   スロークエリステートメントのメモリテーブルにいくつかの情報列を追加する[＃10317](https://github.com/pingcap/tidb/pull/10317)
     -   スロークエリログ[＃10310](https://github.com/pingcap/tidb/pull/10310)にトランザクションコミット時間を追加する
     -   一部の時間形式がpt-query-digest [＃10323](https://github.com/pingcap/tidb/pull/10323)で解析できない問題を修正
 

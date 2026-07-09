@@ -3,9 +3,9 @@ title: Statement Summary Tables
 summary: TiDBのステートメントサマリーテーブルについて学びましょう。
 ---
 
-# 明細書概要表 {#statement-summary-tables}
+# ステートメントサマリーテーブル {#statement-summary-tables}
 
-SQL のパフォーマンス問題をより適切に処理するために、MySQL は、統計情報を使用して SQL を監視するための`performance_schema`の[明細書概要表](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中でも、 `events_statements_summary_by_digest`は、レイテンシー、実行時間、スキャンされた行数、フルテーブルスキャンなどの豊富なフィールドを備えているため、SQL の問題を特定する際に非常に役立ちます。
+SQL のパフォーマンス問題をより適切に処理するために、MySQL は、統計情報を使用して SQL を監視するための`performance_schema`の[ステートメントサマリーテーブル](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中でも、 `events_statements_summary_by_digest`は、レイテンシー、実行時間、スキャンされた行数、フルテーブルスキャンなどの豊富なフィールドを備えているため、SQL の問題を特定する際に非常に役立ちます。
 
 したがって、v4.0.0-rc.1 以降、TiDB は`information_schema`と機能面で類似したシステム テーブルを`performance_schema` } `events_statements_summary_by_digest`*ではなく*) で提供します。
 
@@ -104,7 +104,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 <CustomContent platform="tidb">
 
-[TiDBダッシュボードのSQLステートメントページ](/dashboard/dashboard-statement-list.md#others)では、削除されたステートメントに関する情報が`Others`行に表示されます。
+[TiDB DashboardのSQLステートメントページ](/dashboard/dashboard-statement-list.md#others)では、削除されたステートメントに関する情報が`Others`行に表示されます。
 
 </CustomContent>
 

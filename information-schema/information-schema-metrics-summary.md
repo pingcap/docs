@@ -176,7 +176,7 @@ ORDER BY ratio DESC LIMIT 10;
 
 上記のクエリ結果から、次の情報を取得できます。
 
--   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB の遅いクエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
+-   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB のスロークエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
 -   期間t2における`tidb_distsql_partial_scan_key_total_num` （TiDBの`distsql`が要求するスキャンキー数）は、期間t1の3,648倍です。期間t2における`tidb_slow_query_cop_wait_total_time` （コプロセッサーがTiDBのスロークエリのキューイングを要求する際の待機時間）は、期間t1の267倍です。
 -   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
 -   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details` 、期間 t1 の 0 の 105 倍になります。

@@ -114,7 +114,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 | -------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)                                  | 非推奨      | v8.1.0以降、TiDBのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                                      |
 | TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)           | 新しく追加された | TiDBの起動時に統計を同時に初期化するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                  |
-| PD             | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)                                                | 非推奨      | v8.1.0以降、TiDBダッシュボードのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                               |
+| PD             | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)                                                | 非推奨      | v8.1.0以降、TiDB Dashboardのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                               |
 | TiDB Lightning | [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)      | 修正済み     | v8.1.0 以降では、ユーザー入力に関係なく、 TiDB Lightning が`conflict.max-record-rows`の値に`conflict.threshold`の値を自動的に割り当てるため、 `conflict.max-record-rows`手動で構成する必要はありません。 `conflict.max-record-rows`将来のリリースで廃止される予定です。 |
 | TiDB Lightning | [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                     | 修正済み     | デフォルト値を`9223372036854775807`から`10000`に変更することで、異常なタスクを迅速に中断し、対応する調整を迅速に行うことができます。これにより、異常なデータソースやテーブルスキーマ定義の誤りが原因で、インポート後に大量の競合データが発見されるというシナリオを回避し、時間と計算リソースを節約できます。                              |
 | TiKV           | [`raft-engine.batch-compression-threshold`](/tikv-configuration-file.md#batch-compression-threshold)            | 修正済み     | デフォルト値を`"8KiB"`から`"4KiB"`に変更して、 Raftログの書き込みの IOPS オーバーヘッドを削減し、圧縮率を向上させます。                                                                                                                         |
@@ -127,7 +127,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ## 非推奨の機能 {#deprecated-features}
 
--   v8.1.0 以降、TiDB および TiDB ダッシュボードのテレメトリ機能は削除されます。
+-   v8.1.0 以降、TiDB および TiDB Dashboardのテレメトリ機能は削除されます。
 
     -   システム変数[`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) 、 TiDB 構成項目[`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) 、および PD 構成項目[`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)非推奨となり、機能しなくなりました。
     -   `ADMIN SHOW TELEMETRY`構文は削除されます。
@@ -212,7 +212,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   HashJoinプローブ[＃52222](https://github.com/pingcap/tidb/issues/52222) @ [windtalker](https://github.com/windtalker)の不正確な実行時間統計を修正
     -   静的パーティションプルーニングモードで`TABLESAMPLE`使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [＃52282](https://github.com/pingcap/tidb/issues/52282) @ [tangenta](https://github.com/tangenta)
     -   夏時間[＃51675](https://github.com/pingcap/tidb/issues/51675) @ [lcwangchao](https://github.com/lcwangchao)でTTLが1時間ずれる問題を修正
-    -   TiDBダッシュボードのモニタリングページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)における接続数（接続数）の計算と表示が誤っていた問題を修正しました。
+    -   TiDB Dashboardのモニタリングページ[＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)における接続数（接続数）の計算と表示が誤っていた問題を修正しました。
     -   パーティションDDLタスク[＃51090](https://github.com/pingcap/tidb/issues/51090) @ [jiyfhust](https://github.com/jiyfhust)をロールバックするときにステータスが停止する問題を修正しました
     -   `EXPLAIN ANALYZE` [＃52646](https://github.com/pingcap/tidb/issues/52646) @ [JaySon-Huang](https://github.com/JaySon-Huang)を実行したときに`max_remote_stream`の値が正しくない問題を修正しました
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブル[＃50810](https://github.com/pingcap/tidb/issues/50810) @ [Defined2014](https://github.com/Defined2014)が返される可能性がある問題を修正しました。

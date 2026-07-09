@@ -49,7 +49,7 @@ tiup status [flags]
 
 > **注記：**
 >
-> TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB ダッシュボードの`Leaving`同じステータスを示します。
+> TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB Dashboardの`Leaving`同じステータスを示します。
 
 コンポーネントのステータスはPDスケジュール情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)参照してください。
 

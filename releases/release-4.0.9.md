@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.9 Release Notes
-summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDBダッシュボード、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける「enable-streaming」設定項目の廃止、 TiFlashにおけるストレージエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
+summary: TiDB 4.0.9は2020年12月21日にリリースされました。このリリースには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、TiDB Dashboard、PD、 TiFlash 、そして各種ツールのアップデートが含まれています。注目すべき変更点としては、TiDBにおける「enable-streaming」設定項目の廃止、 TiFlashにおけるストレージエンジンの最新データを複数のディスクに保存する機能のサポート、そしてTiDBとTiKVにおける各種バグ修正などが挙げられます。
 ---
 
 # TiDB 4.0.9 リリースノート {#tidb-4-0-9-release-notes}
@@ -25,7 +25,7 @@ TiDB バージョン: 4.0.9
 
     -   ストレージエンジンの最新データを複数のディスクに保存する機能をサポート (実験的)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   **SQLステートメント**ページ[＃749](https://github.com/pingcap/tidb-dashboard/pull/749)のすべてのフィールドによる表示と並べ替えをサポート
     -   トポロジグラフのズームとパンをサポート[＃772](https://github.com/pingcap/tidb-dashboard/pull/772)
@@ -70,7 +70,7 @@ TiDB バージョン: 4.0.9
     -   TiKVストアが`Tombstone`なったときにTiKVクラスターのバージョンをチェックし、ダウングレードまたはアップグレード[＃3213](https://github.com/pingcap/pd/pull/3213)プロセス中にユーザーが互換性のない機能を有効にするのを防ぎます。
     -   下位バージョンの TiKV ストアを`Tombstone`から`Up` [＃3206](https://github.com/pingcap/pd/pull/3206)に戻すことを禁止します。
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   SQL文[＃775](https://github.com/pingcap/tidb-dashboard/pull/775)の「展開」をクリックすると展開を続ける
     -   **SQL ステートメント**と**スロークエリ**[＃816](https://github.com/pingcap/tidb-dashboard/pull/816)の詳細ページを新しいウィンドウで開く
@@ -180,7 +180,7 @@ TiDB バージョン: 4.0.9
     -   `trace-region-flow`値が予期せず`false` [＃3120](https://github.com/pingcap/pd/pull/3120)に設定される問題を修正
     -   無制限の Time To Live (TTL) を持つサービスセーフポイントが機能しないバグを修正[＃3143](https://github.com/pingcap/pd/pull/3143)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   中国語の時間表示の問題を修正[＃755](https://github.com/pingcap/tidb-dashboard/pull/755)
     -   ブラウザ互換性通知が機能しないバグを修正[＃776](https://github.com/pingcap/tidb-dashboard/pull/776)

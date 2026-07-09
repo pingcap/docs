@@ -182,13 +182,13 @@ TiDB バージョン: 7.6.0
 
     アプリケーションのワークロードを分離するためにリソース グループを使用するユーザーが増えるにつれ、リソース コントロールはリソース グループに基づいた強化されたデータを提供します。これにより、リソース グループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
-    -   [遅いクエリ](/identify-slow-queries.md): リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
-    -   [明細書概要表](/statement-summary-tables.md): リソース グループ名、RU 消費量、リソースの待機時間を追加します。
+    -   [スロークエリ](/identify-slow-queries.md): リソース グループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+    -   [ステートメントサマリーテーブル](/statement-summary-tables.md): リソース グループ名、RU 消費量、リソースの待機時間を追加します。
     -   システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL ステートメントによって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
     -   リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、障害発生回数、接続数などです。
     -   すべてのリソースグループの1日あたりのRU消費量の履歴レコードを記録するために、システムテーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
 
-    詳細については、[遅いクエリを特定する](/identify-slow-queries.md)、[明細書概要表](/statement-summary-tables.md)、および[リソース制御の主要監視指標](/grafana-resource-control-dashboard.md)を参照してください。
+    詳細については、[スロークエリを特定する](/identify-slow-queries.md)、[ステートメントサマリーテーブル](/statement-summary-tables.md)、および[リソース制御の主要監視指標](/grafana-resource-control-dashboard.md)を参照してください。
 
 ### データ移行 {#data-migration}
 

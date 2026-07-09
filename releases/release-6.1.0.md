@@ -297,7 +297,7 @@ TiDB バージョン: 6.1.0
 
     新しいクラスターでは、 プリペアドプランキャッシュがデフォルトで有効化され、リクエストの`Prepare` `Execute`実行プランをキャッシュします。以降の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、設定ファイルから設定を継承します。新しいクラスターは新しいデフォルト値を使用するため、 プリペアドプランキャッシュ はデフォルトで有効化され、各セッションで最大100プランをキャッシュできます ( `capacity=100` )。この機能のメモリ消費量については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)参照してください。
 
--   TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`インスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後に消去されます。TiDB v6.1.0以降では、 `SHOW ANALYZE STATUS`クラスタレベルのタスクを示し、タスクレコードは再起動後も保持されます。5 `tidb_analyze_version = 2`場合、 `Job_info`列に`analyze option`情報が追加されます。
+-   TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`インスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後に消去されます。TiDB v6.1.0以降では、 `SHOW ANALYZE STATUS`クラスタレベルのタスクを示し、タスクレコードは再起動後も保持されます。`tidb_analyze_version = 2`場合、 `Job_info`列に`analyze option`情報が追加されます。
 
 -   TiKV内のSSTファイルが破損すると、TiKVプロセスがpanicになる可能性があります。TiDB v6.1.0より前では、SSTファイルが破損するとTiKVは直ちにpanic状態になりました。TiDB v6.1.0以降では、SSTファイルが破損してから1時間後にTiKVプロセスがpanicになります。
 
@@ -401,7 +401,7 @@ TiDB バージョン: 6.1.0
     -   PDリーダー移転後に削除した墓石ストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
 
--   TiDBダッシュボード
+-   TiDB Dashboard
 
     -   Top SQL機能が有効になる前に実行されていた SQL 文の CPU オーバーヘッドをTop SQLが収集できないバグを修正[＃33859](https://github.com/pingcap/tidb/issues/33859)
 
