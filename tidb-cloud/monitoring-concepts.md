@@ -65,6 +65,6 @@ TiDB Cloud 支持集成以下任一第三方指标服务，以接收 TiDB Cloud 
 
 ## Datadog integration {#datadog-integration}
 
-TiDB Cloud 支持集成 Datadog，以接收 TiDB Cloud 告警并查看目标实例的性能指标。更多信息，参见 [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)。
+TiDB Cloud 支持集成 Datadog，以接收 TiDB Cloud 告警并查看目标实例的性能指标。更多信息，参见 [将 TiDB Cloud 集成到 Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)。
 
 </CustomContent>

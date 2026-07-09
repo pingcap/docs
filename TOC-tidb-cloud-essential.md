@@ -61,7 +61,7 @@
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
-    - [将 TiDB Cloud 与 Datadog 集成](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
+    - [集成 TiDB Cloud 与 Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)

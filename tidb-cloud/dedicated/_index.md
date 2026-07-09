@@ -70,9 +70,9 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [从 TiDB Self-Managed 迁移](https://docs.pingcap.com/zh/tidbcloud/migrate-from-op-tidb)
 
-[从 Apache Parquet 文件导入](https://docs.pingcap.com/zh/tidbcloud/import-csv-files)
+[从 CSV 文件导入](https://docs.pingcap.com/zh/tidbcloud/import-csv-files)
 
-[从 Apache Parquet 文件](https://docs.pingcap.com/zh/tidbcloud/import-parquet-files)
+[从 Apache Parquet 文件导入](https://docs.pingcap.com/zh/tidbcloud/import-parquet-files)
 
 </LearningPath>
 

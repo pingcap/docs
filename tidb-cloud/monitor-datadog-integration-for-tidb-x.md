@@ -1,9 +1,9 @@
 ---
-title: 集成 TiDB Cloud 与 Datadog（预览版）
+title: 集成 TiDB Cloud 与 Datadog（公测中）
 summary: 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
 ---
 
-# 集成 TiDB Cloud 与 Datadog（预览版）
+# 集成 TiDB Cloud 与 Datadog（公测中）
 
 TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的指标发送到 [Datadog](https://www.datadoghq.com/)。完成后，你可以直接在 Datadog 仪表板中查看这些指标。
 
