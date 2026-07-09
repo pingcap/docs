@@ -250,7 +250,7 @@
         -   [チューニングリージョンのパフォーマンス](/tune-region-performance.md)
         -   [TiFlashのパフォーマンスをチューニング](/tiflash/tune-tiflash-performance.md)
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
-        -   ごみ収集（GC）
+        -   ガベージコレクション（GC）
             -   [概要](/garbage-collection-overview.md)
             -   [コンフィグレーション](/garbage-collection-configuration.md)
     -   SQLチューニング
