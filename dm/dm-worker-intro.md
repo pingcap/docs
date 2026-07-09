@@ -49,6 +49,16 @@ This section describes the upstream and downstream database users' privileges re
 
 The required privileges for the upstream database user depend on the database flavor (MySQL/MariaDB) and version.
 
+> **Note:**
+>
+> - If you migrate from a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL) where `FLUSH TABLES WITH READ LOCK` (FTWRL) is not permitted, also grant the `LOCK TABLES` privilege. With the default `consistency=auto` setting, DM falls back to `LOCK TABLES` when FTWRL is unavailable.
+>
+>     ```sql
+>     GRANT LOCK TABLES ON db1.* TO 'your_user'@'your_wildcard_of_host';
+>     ```
+>
+> - If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
+
 #### MySQL and MariaDB version before 10.5
 
 For MySQL and MariaDB versions before 10.5, the user must have the following privileges:
@@ -98,8 +108,6 @@ GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 > ```
 >
 > This option bypasses all pre-checks, so it is crucial to verify that all prerequisites are met before skipping.
-
-If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
 
 ### Downstream database user privileges
 

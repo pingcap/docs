@@ -478,6 +478,24 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
+### Binding usage statistics <span class="version-mark">New in v9.0.0</span>
+
+You can use the [`tidb_enable_binding_usage`](/system-variables.md#tidb_enable_binding_usage-new-in-v900) system variable (`ON` by default) to control whether to collect the usage statistics of SQL plan bindings. 
+
+When this variable is `ON`, TiDB writes the binding usage statistics to the `mysql.bind_info` table every six hours. You can use these statistics to identify unused bindings and optimize your binding management strategy, such as removing bindings that are no longer needed or adjusting existing bindings to improve query performance.
+
+For example, you can check the last usage time of a binding by executing the following SQL statement:
+
+```sql
+SELECT sql_digest, last_used_date FROM mysql.bind_info LIMIT 1;
+
++------------------------------------------------------------------+----------------+
+| sql_digest                                                       | last_used_date |
++------------------------------------------------------------------+----------------+
+| 5d3975ef2160c1e0517353798dac90a9914095d82c025e7cd97bd55aeb804798 | 2025-10-21     |
++------------------------------------------------------------------+----------------+
+```
+
 ## Utilize the statement summary table to obtain queries that need to be bound
 
 [Statement summary](/statement-summary-tables.md) records recent SQL execution information, such as latency, execution times, and corresponding query plans. You can query statement summary tables to get qualified `plan_digest`, and then [create bindings according to these historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
@@ -697,15 +715,15 @@ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VA
 
 | **Dimension name** | **Description**                                                     | Remarks                                                     |
 | :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
-| table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
-| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
+| table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains invalid characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
+| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed. | Setting frequency to a value smaller than 1 is considered invalid, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
 | user         | Filter by user name. Statements executed by blocklisted users are not captured.                           | If multiple users execute the same statement and their user names are all in the blocklist, this statement is not captured. |
 
 > **Note:**
 >
 > - Modifying a blocklist requires the super privilege.
 >
-> - If a blocklist contains illegal filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
+> - If a blocklist contains invalid filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
 
 ### Prevent regression of execution plans during an upgrade
 

@@ -29,6 +29,7 @@ TiDB Cloud limits how many of each kind of component you can create in a [TiDB C
 | Maximum number of total TiDB nodes for all clusters in your organization | 10 |
 | Maximum number of total TiKV nodes for all clusters in your organization | 15 |
 | Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+| Maximum number of total TiProxy nodes for all clusters in your organization | 10 |
 
 > **Note:**
 >

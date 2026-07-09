@@ -1,6 +1,7 @@
 ---
 title: Performance Tuning Best Practices
 summary: Introduces the best practices for tuning TiDB performance.
+aliases: ['/tidb/stable/dev-guide-optimize-sql-best-practices/','/tidb/dev/dev-guide-optimize-sql-best-practices/','/tidbcloud/dev-guide-optimize-sql-best-practices/']
 ---
 
 # Performance Tuning Best Practices
@@ -151,56 +152,18 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## Transaction conflicts
 
-<CustomContent platform="tidb">
-
 For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
-
-</CustomContent>
 
 ## Best practices for developing Java applications with TiDB
 
-<CustomContent platform="tidb">
-
-See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices).
-
-</CustomContent>
+See [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md).
 
 ### See also
 
-<CustomContent platform="tidb">
-
 - [Best Practices for High-Concurrency Writes](/best-practices/high-concurrency-best-practices.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- [Best Practices for High-Concurrency Writes](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
-
-</CustomContent>
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

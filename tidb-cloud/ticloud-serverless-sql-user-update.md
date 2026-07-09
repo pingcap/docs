@@ -5,7 +5,7 @@ summary: The reference of `ticloud serverless sql-user update`.
 
 # ticloud serverless sql-user update
 
-Update a TiDB Cloud Serverless SQL user:
+Update a SQL user in a {{{ .starter }}} or {{{ .essential }}} instance:
 
 ```shell
 ticloud serverless sql-user update [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user update [flags]
 
 ## Examples
 
-Update a TiDB Cloud Serverless SQL user in interactive mode:
+Update a SQL user in a {{{ .starter }}} or {{{ .essential }}} instance in interactive mode:
 
 ```shell
 ticloud serverless sql-user update
 ```
 
-Update a TiDB Cloud Serverless SQL user in non-interactive mode:
+Update a SQL user in a {{{ .starter }}} or {{{ .essential }}} instance in non-interactive mode:
 
 ```shell
 ticloud serverless sql-user update -c <cluster-id> --user <user-name> --password <password> --role <role>

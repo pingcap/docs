@@ -48,21 +48,21 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 2. Fill in the following parameters.
 
-    - Host: The endpoint of your TiDB Cloud cluster
+    - Host: The endpoint of your <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>
     - Port: The port of the database
     - Database: The database that you want to sync the data
     - Username: The username to access the database
     - Password: The password of the username
 
-    You can get the parameter values from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the parameter values from the connection dialog in the TiDB Cloud console. To open the dialog, go to the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> to go to its overview page, and then click **Connect** in the upper-right corner.
 
 3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
 
-    > Note:
+    > **Note:**
     >
     > - TiDB Cloud supports TLS connection. You can choose your TLS protocols in **TLSv1.2** and **TLSv1.3**, for example, `enabledTLSProtocols=TLSv1.2`.
     > - If you want to disable TLS connection to TiDB Cloud via JDBC, you need to set useSSL to `false` in JDBC URL Params specifically and close SSL connection, for example, `useSSL=false`.
-    > - TiDB Cloud Serverless only supports TLS connections.
+    > - {{{ .starter }}} and {{{ .essential }}} only support TLS connections.
 
 4. Click **Set up source** or **destination** to complete creating the connector. The following screenshot shows the configuration of TiDB as the source.
 
@@ -94,7 +94,7 @@ The following steps use TiDB as both a source and a destination. Other connector
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job. For more information about normalization, refer to [Transformations and Normalization](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt).
+7. Set **Normalization & Transformation** to **Normalized tabular data** to use the default normalization mode, or you can set the dbt file for your job.
 8. Click **Set up connection**.
 9. Once the connection is established, click **ENABLED** to activate the synchronization task. You can also click **Sync now** to sync immediately.
 
@@ -106,6 +106,8 @@ The following steps use TiDB as both a source and a destination. Other connector
 - TiDB destination converts the `timestamp` type to the `varchar` type in default normalization mode. It happens because Airbyte converts the timestamp type to string during transmission, and TiDB does not support `cast ('2020-07-28 14:50:15+1:00' as timestamp)`.
 - For some large ELT missions, you need to increase the parameters of [transaction restrictions](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions) in TiDB.
 
-## See also
+## Related resources
 
-[Using Airbyte to Migrate Data from TiDB Cloud to Snowflake](https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/).
+<RelatedResources>
+  <ResourceCard title="Using Airbyte to Migrate Data from TiDB Cloud to Snowflake" type="blog" link="https://www.pingcap.com/blog/using-airbyte-to-migrate-data-from-tidb-cloud-to-snowflake/" imgSrc="https://static.pingcap.com/files/2022/07/migrate-data-from-tidb-cloud-to-snowflake-scaled.jpeg" author="Qiang Wu" date="2022-07-28" />
+</RelatedResources>

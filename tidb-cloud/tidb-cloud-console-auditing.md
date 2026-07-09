@@ -5,7 +5,7 @@ summary: Learn about the audit logging feature for the TiDB Cloud console.
 
 # Console Audit Logging
 
-TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as inviting a user to join your organization and creating a cluster.
+TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as inviting a user to join your organization and importing data.
 
 ## Prerequisites
 
@@ -131,6 +131,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | UpdateIPAccessList             | Update the IP access list of a TiDB cluster                                      |
 | SetAutoBackup                  | Set the automatic backup mechanism of a TiDB cluster                             |
 | DoManualBackup                 | Perform a manual backup of TiDB cluster                                          |
+| BackupCompleted                | A backup task completes                                                          |
 | DeleteBackupTask               | Delete a backup task                                                             |
 | DeleteBackup                   | Delete a backup file                                                             |
 | RestoreFromBackup              | Restore to a TiDB cluster based on the backup files                              |
@@ -151,14 +152,15 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan                | Bind a support plan                                                              |
 | CancelSupportPlan              | Cancel a support plan                                                            |
 | UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Cloud Serverless scalable cluster                    |
+| SetSpendLimit                  | Edit the spending limit of a {{{ .starter }}} instance                    |
 | UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
 | DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Cloud Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Cloud Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Cloud Serverless branch                                   |
-| ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
-| DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
+| CreateBranch                   | Create a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
+| DeleteBranch                   | Delete a branch for {{{ .starter }}} or {{{ .essential }}} instance                                                  |
+| SetBranchRootPassword          | Set root password for a branch of your {{{ .starter }}} or {{{ .essential }}} instance                                   |
+| ConnectBranchGitHub            | Connect a {{{ .starter }}} or {{{ .essential }}} instance with a GitHub repository to enable branching integration     |
+| DisconnectBranchGitHub         | Disconnect a {{{ .starter }}} or {{{ .essential }}} instance from a GitHub repository to disable branching integration |
+| UpdateAuthenticationMethod     | Update the authentication method for Cloud Organization SSO                        |
 
 ## Console audit log fields
 

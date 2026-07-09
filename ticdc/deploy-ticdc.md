@@ -98,9 +98,9 @@ When you upgrade a TiCDC cluster, you need to pay attention to the following:
 
 - TiCDC v4.0.2 reconfigured `changefeed`. For details, see [Configuration file compatibility notes](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility).
 - If you encounter any problem during the upgrade, you can refer to [upgrade FAQs](/upgrade-tidb-using-tiup.md#faq) for solutions.
-- Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade takes effect automatically if the following conditions are met:
+- Since v6.3.0, TiCDC supports rolling upgrades. You can directly perform a rolling upgrade between minor versions (for example, v8.5.0 -> v8.5.3 is a minor version upgrade, while v8.1.x -> v8.5.x is a major version upgrade). For the TiCDC classic architecture, do not run changefeeds during a cross-major-version upgrade. Pause changefeeds before upgrading the classic architecture. The new TiCDC architecture supports running changefeeds during the rolling upgrade process. For more information, see [Compatibility notes for rolling upgrades from earlier TiCDC versions](/ticdc/ticdc-compatibility.md#compatibility-notes-for-upgrading-from-earlier-versions). Rolling upgrade takes effect automatically if the following conditions are met:
 
-- TiCDC is v6.3.0 or later.
+    - TiCDC is v6.3.0 or later.
     - TiUP is v1.11.3 or later.
     - At least two TiCDC instances are running in the cluster.
 
@@ -129,15 +129,15 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
 
     In the preceding command, `gc-ttl` is set to 48 hours.
 
-3. Run the `tiup cluster reload -R cdc` command to reload the configuration.
+3. Run the `tiup cluster reload <cluster-name> -R cdc` command to reload the configuration.
 
 ## Stop and start TiCDC using TiUP
 
 You can use TiUP to easily stop and start TiCDC nodes. The commands are as follows:
 
-- Stop TiCDC: `tiup cluster stop -R cdc`
-- Start TiCDC: `tiup cluster start -R cdc`
-- Restart TiCDC: `tiup cluster restart -R cdc`
+- Stop TiCDC: `tiup cluster stop <cluster-name> -R cdc`
+- Start TiCDC: `tiup cluster start <cluster-name> -R cdc`
+- Restart TiCDC: `tiup cluster restart <cluster-name> -R cdc`
 
 ## Enable TLS for TiCDC
 

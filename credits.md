@@ -20,7 +20,6 @@ TiDB developers contribute to new feature development, performance improvement, 
 - [pingcap/tidb-dashboard](https://github.com/pingcap/tidb-dashboard/graphs/contributors)
 - [pingcap/tiflow](https://github.com/pingcap/tiflow/graphs/contributors)
 - [pingcap/tidb-tools](https://github.com/pingcap/tidb-tools/graphs/contributors)
-- [pingcap/tispark](https://github.com/pingcap/tispark/graphs/contributors)
 - [tikv/client-java](https://github.com/tikv/client-java/graphs/contributors)
 - [tidb-incubator/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
 - [ti-community-infra](https://github.com/orgs/ti-community-infra/people)

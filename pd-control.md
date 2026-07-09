@@ -24,16 +24,16 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.5.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v8.5.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v8.5.0` in the `amd64` architecture is `https://download.pingcap.com/tidb-community-server-v8.5.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.25 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -515,6 +515,7 @@ Usage:
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -536,6 +537,7 @@ Usage:
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -545,6 +547,8 @@ Usage:
   ]
 }
 ```
+
+Starting from v8.5.7 and v9.0.0, the output of the `hot read` and `hot history` commands includes the `flow_cpu` field, and the output of the `hot store` command includes the `cpu-read-rate` field. These fields show the read CPU usage for CPU-aware read hotspot scheduling.
 
 ### `label [store <name> <value>]`
 
@@ -941,7 +945,7 @@ Usage:
 >> scheduler config evict-leader-scheduler                 // Display the stores in which the scheduler is located since v4.0.0
 >> scheduler config evict-leader-scheduler add-store 2     // Add leader eviction scheduling for store 2
 >> scheduler config evict-leader-scheduler delete-store 2  // Remove leader eviction scheduling for store 2
->> scheduler add evict-slow-store-scheduler                // When there is one and only one slow store, evict all Region leaders of that store
+>> scheduler add evict-slow-store-scheduler                // Automatically detect slow-disk or slow-network nodes and evict all Region leaders from those nodes when specific conditions are met
 >> scheduler remove grant-leader-scheduler-1               // Remove the corresponding scheduler, and `-1` corresponds to the store ID
 >> scheduler pause balance-region-scheduler 10             // Pause the balance-region scheduler for 10 seconds
 >> scheduler pause all 10                                  // Pause all schedulers for 10 seconds
@@ -964,6 +968,42 @@ The state of the scheduler can be one of the following:
 - `scheduling`: the scheduler is generating scheduling operators.
 - `pending`: the scheduler cannot generate scheduling operators. For a scheduler in the `pending` state, brief diagnostic information is returned. The brief information describes the state of stores and explains why these stores cannot be selected for scheduling.
 - `normal`: there is no need to generate scheduling operators.
+
+### `scheduler config evict-slow-store-scheduler`
+
+The `evict-slow-store-scheduler` limits PD from scheduling Leaders to abnormal TiKV nodes and actively evicts Leaders when necessary, thereby reducing the impact of slow nodes on the cluster when TiKV nodes experience disk I/O or network jitter.
+
+#### Slow-disk nodes
+
+Starting from v6.2.0, TiKV reports a `SlowScore` in store heartbeats to PD. This score is calculated based on disk I/O conditions and ranges from 1 to 100. A higher value indicates a higher possibility of disk performance anomalies on that node.
+
+For slow-disk nodes, the detection on TiKV and the scheduling via `evict-slow-store-scheduler` on PD are enabled by default, which means no additional configuration is required.
+
+#### Slow-network nodes
+
+Starting from v8.5.5 and v9.0.0, TiKV supports reporting a `NetworkSlowScore` in store heartbeats to PD. It is calculated based on network detection results and helps identify slow nodes experiencing network jitter. The score ranges from 1 to 100, where a higher value indicates a higher possibility of network anomalies.
+
+- TiKV enables detection of slow-network nodes by default, with a default probing interval of `100ms`. To modify the probing frequency, set the TiKV configuration item [`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855-and-v900) to an appropriate value. A smaller value increases the probing frequency, which helps detect network jitter more quickly, but also consumes more network and CPU resources.
+
+- Scheduling for slow-network nodes is disabled by default on the PD side. To enable it, configure PD as follows:
+
+    ```bash
+    scheduler config evict-slow-store-scheduler set enable-network-slow-store true
+    ```
+
+#### Recovery time control
+
+You can specify how long a slow node must remain stable before it is considered recovered by using the `recovery-duration` parameter.
+
+Example:
+
+```bash
+>> scheduler config evict-slow-store-scheduler
+{
+  "recovery-duration": "1800"  // 30 minutes
+}
+>> scheduler config evict-slow-store-scheduler set recovery-duration 600
+```
 
 ### `scheduler config balance-leader-scheduler`
 
@@ -989,22 +1029,24 @@ Usage:
   "min-hot-byte-rate": 100,
   "min-hot-key-rate": 10,
   "min-hot-query-rate": 10,
+  "min-hot-cpu-rate": 10,
   "max-zombie-rounds": 3,
   "max-peer-number": 1000,
   "byte-rate-rank-step-ratio": 0.05,
   "key-rate-rank-step-ratio": 0.05,
   "query-rate-rank-step-ratio": 0.05,
+  "cpu-rate-rank-step-ratio": 0.05,
   "count-rank-step-ratio": 0.01,
   "great-dec-ratio": 0.95,
   "minor-dec-ratio": 0.99,
   "src-tolerance-ratio": 1.05,
   "dst-tolerance-ratio": 1.05,
   "read-priorities": [
-    "query",
+    "cpu",
     "byte"
   ],
   "write-leader-priorities": [
-    "key",
+    "query",
     "byte"
   ],
   "write-peer-priorities": [
@@ -1035,6 +1077,12 @@ Usage:
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
+- `min-hot-cpu-rate` specifies the minimum CPU usage required for a read request to be included in hotspot statistics. The value is measured as a percentage of one CPU core, and the default value is `10`, which means 10% of one CPU core.
+
+    ```bash
+    scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
+    ```
+
 - `max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
 
     ```bash
@@ -1047,7 +1095,7 @@ Usage:
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
-- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, query, and count. The rank-step-ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, `cpu-rate-rank-step-ratio`, and `count-rank-step-ratio` represent the step ranks of byte, key, query, CPU, and count, respectively. The rank-step-ratio decides the step when calculating the rank. PD uses `great-dec-ratio` and `minor-dec-ratio` to determine the `dec` rank. Usually, you do not need to modify these items.
 
     ```bash
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -1061,15 +1109,18 @@ Usage:
 
 - `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
 
-    - `read-priorities` and `write-leader-priorities` control which dimensions the scheduler prioritizes for scheduling hot Regions of the read and write-leader types. The dimension options are `query`, `byte`, and `key`.
+    - `read-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the read type. The dimension options are `cpu`, `query`, `byte`, and `key`.
+    - `write-leader-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-leader type. The dimension options are `query`, `byte`, and `key`.
     - `write-peer-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-peer type. The dimension options are `byte` and `key`.
 
     > **Note:**
     >
-    > If a cluster component is earlier than v5.2, the configuration of `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
+    > If any component in the cluster is earlier than v5.2, the configuration of the `query` dimension does not take effect. After some components are upgraded to v5.2 or later, the scheduler still prioritizes hotspot balancing based on the `byte` and `key` dimensions by default. After all components in the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility.
+    >
+    > Starting from v8.5.7 and v9.0.0, TiKV reports read CPU usage for hot Region scheduling. For clusters that support read CPU reporting, the default `read-priorities` value is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
-    scheduler config balance-hot-region-scheduler set read-priorities query,byte
+    scheduler config balance-hot-region-scheduler set read-priorities cpu,byte
     ```
 
 - `strict-picking-store` controls the search space of hot Region scheduling. Usually, it is enabled. This configuration item only affects the behavior when `rank-formula-version` is `v1`. When it is enabled, hot Region scheduling ensures hot Region balance on the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance on the dimension with the first priority, which might reduce balance on other dimensions. Usually, you do not need to modify this configuration.
@@ -1236,15 +1287,17 @@ store weight 1 5 10
 You can set the scheduling speed of stores by using `store limit`. For more details about the principles and usage of `store limit`, see [`store limit`](/configure-store-limit.md).
 
 ```bash
->> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
->> store limit add-peer                // Show the speed limit of adding-peer operations per minute in all stores
->> store limit remove-peer             // Show the limit of removing-peer operations per minute in all stores
->> store limit all 5                   // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
->> store limit 1 5                     // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 add-peer          // Set the limit of adding-peer operations to 5 per minute for all stores
->> store limit 1 5 add-peer            // Set the limit of adding-peer operations to 5 per minute for store 1
->> store limit 1 5 remove-peer         // Set the limit of removing-peer operations to 5 per minute for store 1
->> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit                                  // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
+>> store limit add-peer                         // Show the speed limit of adding-peer operations per minute in all stores
+>> store limit remove-peer                      // Show the limit of removing-peer operations per minute in all stores
+>> store limit all 5                            // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for all stores
+>> store limit 1 5                              // Set the limit of adding-peer operations to 5 and the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 add-peer                   // Set the limit of adding-peer operations to 5 per minute for all stores
+>> store limit 1 5 add-peer                     // Set the limit of adding-peer operations to 5 per minute for store 1
+>> store limit 1 5 remove-peer                  // Set the limit of removing-peer operations to 5 per minute for store 1
+>> store limit all 5 remove-peer                // Set the limit of removing-peer operations to 5 per minute for all stores
+>> store limit all engine tikv 5 remove-peer    // Starting from v8.5.5 and v9.0.0, you can set the speed limit of removing-peer operations for all TiKV stores. This example sets the speed limit of removing-peer operations for all TiKV stores to 5 per minute.
+>> store limit all engine tiflash 5 remove-peer // Starting from v8.5.5 and v9.0.0, you can set the speed limit of removing-peer operations for all TiFlash stores. This example sets the speed limit of removing-peer operations for all TiFlash stores to 5 per minute.
 ```
 
 > **Note:**
@@ -1340,15 +1393,37 @@ store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_na
 
 ### Query all TiFlash nodes
 
-{{< copyable "" >}}
-
 ```bash
 store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | {id, address, state_name}'
 ```
 
 ```
-{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
-{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
+{"id":1,"address":"127.0.0.1:20161","state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162","state_name":"Up"}
+...
+```
+
+### Query TiFlash nodes in the disaggregated storage and compute architecture
+
+Query TiFlash Write Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md):
+
+```bash
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}, {"key":"engine_role","value":"write"}])) | {id, address, labels, state_name}'
+```
+
+```
+{"id":130,"address":"172.31.8.1:10161","labels":[{"key":"engine_role","value":"write"},{"key":"engine","value":"tiflash"}],"state_name":"Up"}
+...
+```
+
+Query TiFlash Compute Nodes in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md):
+
+```bash
+store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash_compute"}])) | {id, address, labels, state_name}'
+```
+
+```json
+{"id":131,"address":"172.31.9.1:10161","labels":[{"key":"engine","value":"tiflash_compute"}],"state_name":"Up"}
 ...
 ```
 

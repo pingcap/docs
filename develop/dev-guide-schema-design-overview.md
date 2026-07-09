@@ -1,6 +1,7 @@
 ---
 title: TiDB Database Schema Design Overview
 summary: Learn the basics on TiDB database schema design.
+aliases: ['/tidb/stable/dev-guide-schema-design-overview/','/tidb/dev/dev-guide-schema-design-overview/','/tidbcloud/dev-guide-schema-design-overview/']
 ---
 
 # TiDB Database Schema Design Overview
@@ -13,7 +14,7 @@ In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-desig
 
 To distinguish some general terms, here is a brief agreement on the terms used in TiDB:
 
-- To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
+- To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a running deployment of TiDB.
 
 - TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in a database. For more information, see [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
 
@@ -47,17 +48,7 @@ There are two common types of indexes:
 
 #### Specialized indexes
 
-<CustomContent platform="tidb">
-
 To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](/basic-features.md#indexing-and-constraints).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](https://docs.pingcap.com/tidb/stable/basic-features#indexing-and-constraints).
-
-</CustomContent>
 
 ### Other supported logical objects
 
@@ -69,17 +60,7 @@ TiDB supports the following logical objects at the same level as **table**:
 
 ## Access Control
 
-<CustomContent platform="tidb">
-
 TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](/privilege-management.md) to [users](/user-account-management.md) directly or grant [privileges](/privilege-management.md) to users through [roles](/role-based-access-control.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to [users](https://docs.pingcap.com/tidb/stable/user-account-management) directly or grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to users through [roles](https://docs.pingcap.com/tidb/stable/role-based-access-control).
-
-</CustomContent>
 
 ## Database schema changes
 
@@ -91,14 +72,6 @@ For more information, see [TiDB Limitations](/tidb-limitations.md).
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

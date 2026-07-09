@@ -192,11 +192,11 @@ Follow these steps to start `tidb-lightning`:
     [tidb]
     # Information of the target TiDB cluster.
     # Values here are only for illustration purpose. Replace them with your own values.
-    host = ${host}           # For example: "172.16.31.1"
-    port = ${port}           # For example: 4000
+    host = "${host}"           # For example: "172.16.31.1"
+    port = "${port}"           # For example: 4000
     user = "${user_name}"    # For example: "root"
     password = "${password}" # For example: "rootroot"
-    status-port = ${status-port} # The table information is read from the status port. For example: 10080
+    status-port = "${status-port}" # The table information is read from the status port. For example: 10080
     # the IP address of the PD cluster. TiDB Lightning gets some information through the PD cluster.
     # For example: "172.16.31.3:2379".
     # When backend = "local", make sure that the values of status-port and pd-addr are correct. Otherwise an error will occur.
@@ -217,7 +217,6 @@ Follow these steps to start `tidb-lightning`:
 
    - Use `grep` tool to search the keyword `progress` in the log. By default, a message reporting the progress is flushed into the log file every 5 minutes.
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
-   - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 

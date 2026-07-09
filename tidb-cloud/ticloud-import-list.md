@@ -31,7 +31,7 @@ List import tasks in non-interactive mode:
 ticloud serverless import list --cluster-id <cluster-id>
 ```
 
-List import tasks for a specified cluster in the JSON format:
+List import tasks for a specified {{{ .starter }}} or Essential instance in the JSON format:
 
 ```shell
 ticloud serverless import list --cluster-id <cluster-id> --output json

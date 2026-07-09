@@ -17,7 +17,35 @@ The log backup and PITR architecture is as follows:
 
 The process of a cluster log backup is as follows:
 
-![BR log backup process design](/media/br/br-log-backup-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant PD
+    participant TiKV
+    participant TiDB
+    participant Storage
+
+    User->>BR: Run `br log start`
+    BR->>PD: Register log backup task
+    TiKV->>PD: Fetch log backup task
+    par TiKV handles the local log backup task
+        loop
+            TiKV->>TiKV: Read KV change data
+            TiKV->>PD: Fetch global checkpoint ts
+            TiKV->>TiKV: Generate local metadata
+            TiKV->>Storage: Upload log data & metadata
+            TiKV->>PD: Configure GC
+        end
+    and
+        loop
+            TiDB->>TiKV: Watch backup progress
+            TiDB->>PD: Report global checkpoint ts
+        end
+    end
+    User->>BR: Run `br log status`
+    BR->>PD: Fetch status of log backup task
+```
 
 System components and key concepts involved in the log backup process:
 
@@ -25,7 +53,7 @@ System components and key concepts involved in the log backup process:
 * **local checkpoint ts** (in local metadata): indicates that all logs generated before local checkpoint ts in this TiKV node have been backed up to the target storage.
 * **global checkpoint ts**: indicates that all logs generated before global checkpoint ts in all TiKV nodes have been backed up to the target storage. TiDB Coordinator calculates this timestamp by collecting local checkpoint ts of all TiKV node and then reports it to PD.
 * **TiDB Coordinator**: a TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a new Coordinator is elected from the surviving TiDB nodes.
-* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
+* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after Region leader re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
 
 The complete backup process is as follows:
 
@@ -57,7 +85,29 @@ The complete backup process is as follows:
 
 The process of PITR is as follows:
 
-![Point-in-time recovery process design](/media/br/pitr-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant TiKV
+    participant PD
+    participant Storage
+
+    User->>BR: Run `br restore point`
+    BR->>TiKV: Restore full data
+    loop restore log data
+        BR->>Storage: Read backup data
+        BR->>PD: Fetch Region info
+        BR->>TiKV: Request TiKV to restore data
+        loop TiKV handles restore request
+            TiKV->>Storage: Download KVs
+            TiKV->>TiKV: Rewrite KVs
+            TiKV->>TiKV: Apply KVs
+        end
+        TiKV->>BR: Report restore result
+        BR->>BR: Handle all restore results
+    end
+```
 
 The complete PITR process is as follows:
 
@@ -97,7 +147,7 @@ The complete PITR process is as follows:
 
 Log backup generates the following types of files:
 
-- `{resolved_ts}-{uuid}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. The `{resolved_ts}` is the resolved timestamp of the TiKV node. The latest `resolved_ts` of the log backup task is the minimum resolved timestamp among all TiKV nodes. The `{uuid}` is generated randomly when the file is created.
+- `{flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta` file: is generated every time each TiKV node uploads the log backup data and stores metadata of all log backup data files uploaded this time. For the meaning of each field in the filename, see [Structure of backup files](#structure-of-backup-files).
 - `{store_id}.ts` file: is updated with global checkpoint ts every time each TiKV node uploads the log backup data. The `{store_id}` is the store ID of the TiKV node.
 - `{min_ts}-{uuid}.log` file: stores the KV change log data of the backup task. The `{min_ts}` is the minimum TSO timestamp of the KV change log data in the file, and the `{uuid}` is generated randomly when the file is created.
 - `v1_stream_truncate_safepoint.txt` file: stores the timestamp corresponding to the latest backup data in storage that deleted by `br log truncate`.
@@ -109,7 +159,7 @@ Log backup generates the following types of files:
 ├── v1
 │   ├── backupmeta
 │   │   ├── ...
-│   │   └── {resolved_ts}-{uuid}.meta
+│   │   └── {flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta
 │   ├── global_checkpoint
 │   │   └── {store_id}.ts
 │   └── {date}
@@ -122,7 +172,13 @@ Log backup generates the following types of files:
 
 Explanation of the backup file directory structure:
 
-- `backupmeta`: stores backup metadata. The `resolved_ts` in the filename indicates the backup progress, meaning that data before this TSO has been fully backed up. However, note that this TSO only reflects the progress of certain shards.
+- `backupmeta` directory: stores backup metadata files. Starting from v8.5.3 and v9.0.0, the naming convention of these files changes from `{resolved_ts}-{uuid}.meta` to `{flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta`. The filename contains the following timestamp fields:
+    - `flushTs`: the timestamp when the backup file is periodically uploaded to the external storage. This value is obtained from PD and is globally unique.
+    - `minDefaultTs` (only applicable to Write CF files): the earliest transaction start time covered by this backup.
+    - `minTs` and `maxTs`: the minimum and maximum timestamps of all key-value data included in the backup file.
+
+    All these timestamps are encoded as fixed-length 16-digit hexadecimal strings, left-padded with zeros to ensure consistent length. This encoding design guarantees that filenames are naturally sorted in lexicographical order, making it efficient to perform batch listing and range filtering operations in external storage systems.
+
 - `global_checkpoint`: represents the global backup progress. It records the latest point in time to which data can be restored using `br restore point`.
 - `{date}/{hour}`: stores backup data for the corresponding date and hour. When cleaning up storage, always use `br log truncate` instead of manually deleting data. This is because the metadata references the data in this directory, and manual deletion might lead to restore failures or data inconsistencies after restore.
 
@@ -133,9 +189,9 @@ The following is an example:
 ├── v1
 │   ├── backupmeta
 │   │   ├── ...
-│   │   ├── 435213818858112001-e2569bda-a75a-4411-88de-f469b49d6256.meta
-│   │   ├── 435214043785779202-1780f291-3b8a-455e-a31d-8a1302c43ead.meta
-│   │   └── 435214443785779202-224f1408-fff5-445f-8e41-ca4fcfbd2a67.meta
+│   │   ├── 060c4bc7b0cdd582-06097a780d1ba138-060ab960016d2f00-060c0b9e47d4787b.meta
+│   │   ├── 06123bc6a0cdd591-060c3d24585be000-060c4453954a4000-060c4bc7b0cdcfa4.meta
+│   │   └── 063c2ac1c0cdd5c3-0609d2e6b3bcb064-060ab960016d2f84-060c0b9e47d47a77.meta
 │   ├── global_checkpoint
 │   │   ├── 1.ts
 │   │   ├── 2.ts
