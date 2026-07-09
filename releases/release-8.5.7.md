@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     In addition, PD adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and the [`min-hot-cpu-rate` and `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) scheduler configurations.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#scatter-read-hotspots).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#cpu-aware-hot-region-scheduling-for-read-hotspots).
 
 ### Reliability
 
