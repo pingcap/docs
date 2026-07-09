@@ -61,6 +61,7 @@
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
+    - [集成 TiDB Cloud 与 Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - 性能调优
     - [概览](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [分析性能](/tidb-cloud/tune-performance.md)
@@ -172,10 +173,12 @@
   - [抵扣金](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+  - [Changefeed 计费](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [管理预算](/tidb-cloud/tidb-cloud-budget.md)
 - 集成
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+  - [Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
