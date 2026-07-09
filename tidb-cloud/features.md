@@ -27,7 +27,7 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="4" style="background-color: white;">基础</td>
+    <td rowspan="3" style="background-color: white;">基础</td>
     <td>可扩展的事务处理</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -40,13 +40,6 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
-  </tr>
-  <tr>
-    <td>向量存储 &amp; 向量搜索</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
-    <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
   </tr>
   <tr>
     <td>API</td>
@@ -119,6 +112,21 @@ summary: 了解不同 TiDB Cloud 套餐的功能支持状态。
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td rowspan="2" style="background-color: white;">专项功能</td>
+    <td>向量存储 &amp; 向量搜索</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+  </tr>
+  <tr>
+    <td>全文搜索</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(公测中)</span></td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">🚧</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td rowspan="4" style="background-color: white;">数据处理</td>
