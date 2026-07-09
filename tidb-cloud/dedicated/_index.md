@@ -70,7 +70,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [TiDB Self-Managedから](https://docs.pingcap.com/ja/tidbcloud/migrate-from-op-tidb)
 
-[Apache Parquet ファイルから](https://docs.pingcap.com/ja/tidbcloud/import-parquet-files)
+[CSV ファイルから](https://docs.pingcap.com/ja/tidbcloud/import-csv-files)
 
 [Apache Parquet ファイルから](https://docs.pingcap.com/ja/tidbcloud/import-parquet-files)
 

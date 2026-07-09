@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 > **ヒント**
 >
-> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)Jupyter Notebook で表示することも、 [コラボレーション](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
+> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 

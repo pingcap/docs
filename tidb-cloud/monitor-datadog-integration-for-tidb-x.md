@@ -1,9 +1,9 @@
 ---
-title: Datadog と TiDB Cloud の統合 (Preview)
+title: TiDB CloudとDatadogを統合する (Preview)
 summary: Datadog integration を使用して TiDB Cloud インスタンスを監視する方法を学びます。
 ---
 
-# Datadog と TiDB Cloud の統合 (Preview)
+# TiDB CloudとDatadogを統合する (Preview)
 
 TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud を設定して、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> インスタンスのメトリクスを [Datadog](https://www.datadoghq.com/) に送信できます。設定後は、これらのメトリクスを Datadog のダッシュボードで直接表示できます。
 
@@ -96,7 +96,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 >
 > 現在、{{{ .essential }}} の changefeed 機能はリクエストベースでのみ利用可能であり、`tidb_cloud.changefeed_*` メトリクスは利用できません。
 
-| Metric name | Metric type | Labels | Description |
+| メトリック名 | メトリックタイプ | ラベル | 説明 |
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB server における現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
@@ -116,7 +116,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 
 <CustomContent plan="premium">
 
-| Metric name | Metric type | Labels | Description |
+| メトリック名 | メトリックタイプ | ラベル | 説明 |
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB server における現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |

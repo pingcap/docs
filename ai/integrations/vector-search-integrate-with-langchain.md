@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 > **ヒント**
 >
-> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)Jupyter Notebook で表示することも、 [コラボレーション](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行することもできます。
+> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 
