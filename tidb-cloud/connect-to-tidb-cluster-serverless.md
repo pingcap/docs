@@ -55,7 +55,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (Preview)        | /                            | Accessing {{{ .starter }}} hosted on AWS via Data Service (Preview) does not need to specify the network type.                      |
+| Data Service (Preview)        | /                            | You do not need to specify the network type when accessing {{{ .starter }}} hosted on AWS via Data Service (Preview). |
 | Serverless Driver (Preview)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next
