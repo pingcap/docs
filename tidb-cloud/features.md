@@ -27,7 +27,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   </tr></thead>
 <tbody>
   <tr>
-    <td rowspan="4" style="background-color: white;">Basics</td>
+    <td rowspan="3" style="background-color: white;">Basics</td>
     <td>Scalable transactional processing</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -40,13 +40,6 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
-  </tr>
-  <tr>
-    <td>Vector storage &amp; vector search</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
-    <td style="text-align:center;">🚧</td>
-    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
     <td>API</td>
@@ -119,6 +112,21 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td rowspan="2" style="background-color: white;">Specialized features</td>
+    <td>Vector storage &amp; vector search</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+  </tr>
+  <tr>
+    <td>Full-text search</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">🚧</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td rowspan="4" style="background-color: white;">Data processing</td>
