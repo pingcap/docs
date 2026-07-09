@@ -661,56 +661,6 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - In the `SESSION` scope, this variable is read-only.
 - This variable is compatible with MySQL.
 
-### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
-
-- This variable is used only for internal statistics and is not visible to users.
-
-### password_history <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
-
-### mpp_exchange_compression_mode <span class="version-mark">New in v6.6.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `UNSPECIFIED`
-- Value options: `NONE`, `FAST`, `HIGH_COMPRESSION`, `UNSPECIFIED`
-- This variable is used to specify the data compression mode of the MPP Exchange operator. This variable takes effect when TiDB selects the MPP execution plan with the version number `1`. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB will automatically select the compression mode. Currently, TiDB automatically selects the `FAST` mode.
-    - `NONE`: no data compression is used.
-    - `FAST`: fast mode. The overall performance is good and the compression ratio is less than `HIGH_COMPRESSION`.
-    - `HIGH_COMPRESSION`: the high compression ratio mode.
-
-### mpp_version <span class="version-mark">New in v6.6.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
-- Default value: `UNSPECIFIED`
-- Value options: `UNSPECIFIED`, `0`, `1`, `2`
-- This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
-    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
-    - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
-    - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
-    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
-
-### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 4294967295]`
-- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. When this variable is set to a positive integer `N`, the reuse of any password used in the last `N` days is not allowed.
-
 ### max_connections
 
 - Scope: GLOBAL
@@ -748,6 +698,68 @@ For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_exec
 For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint, the maximum execution time of this statement is limited by the hint instead of this variable. The hint can also be used with SQL bindings as described [in the SQL FAQ](https://docs.pingcap.com/tidb/stable/sql-faq).
 
 </CustomContent>
+
+### max_user_connections <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 100000]`
+- This variable controls the maximum number of connections a user can establish to a TiDB server instance. It is used for resource control.
+- The default value `0` means there is no limit for user connections. When the value is greater than `0` and the number of user connections reaches this value, the TiDB server will reject the user's new connection.
+- If the value of this variable exceeds [`max_connections`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max_connections), TiDB uses `max_connections` to limit the maximum number of connections a single user can establish. For example, if `max_user_connections` of a user is set to `2000`, but `max_connections` is `1000`, the user can actually establish up to `1000` connections to a TiDB server instance.
+
+### mpp_exchange_compression_mode <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: `UNSPECIFIED`
+- Value options: `NONE`, `FAST`, `HIGH_COMPRESSION`, `UNSPECIFIED`
+- This variable is used to specify the data compression mode of the MPP Exchange operator. This variable takes effect when TiDB selects the MPP execution plan with the version number `1`. The meanings of the variable values are as follows:
+    - `UNSPECIFIED`: means unspecified. TiDB will automatically select the compression mode. Currently, TiDB automatically selects the `FAST` mode.
+    - `NONE`: no data compression is used.
+    - `FAST`: fast mode. The overall performance is good and the compression ratio is less than `HIGH_COMPRESSION`.
+    - `HIGH_COMPRESSION`: the high compression ratio mode.
+
+### mpp_version <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: `UNSPECIFIED`
+- Value options: `UNSPECIFIED`, `0`, `1`, `2`
+- This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
+    - `UNSPECIFIED`: means unspecified. TiDB automatically selects the latest version `2`.
+    - `0`: compatible with all TiDB cluster versions. Features with the MPP version greater than `0` do not take effect in this mode.
+    - `1`: new in v6.6.0, used to enable data exchange with compression on TiFlash. For details, see [MPP version and exchange data compression](/explain-mpp.md#mpp-version-and-exchange-data-compression).
+    - `2`: new in v7.3.0, used to provide more accurate error messages when MPP tasks encounter errors on TiFlash.
+
+### OutPacketBytes <span class="version-mark">New in v8.5.6</span>
+
+- This variable is used only for internal statistics and is not visible to users.
+
+### password_history <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 4294967295]`
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on the number of password changes. The default value `0` means disabling the password reuse policy based on the number of password changes. When this variable is set to a positive integer `N`, the reuse of the last `N` passwords is not allowed.
+
+### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 4294967295]`
+- This variable is used to establish a password reuse policy that allows TiDB to limit password reuse based on time elapsed. The default value `0` means disabling the password reuse policy based on time elapsed. When this variable is set to a positive integer `N`, the reuse of any password used in the last `N` days is not allowed.
 
 ### max_prepared_stmt_count
 
@@ -793,6 +805,26 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Scenarios for enabling Active PD Follower:
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
+
+### performance_schema_session_connect_attrs_size <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `4096`
+- Range: `[-1, 65536]`
+- Unit: Bytes
+- Controls the maximum total size of connection attributes for each session.
+- If the total size of connection attributes exceeds this value, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.
+- Connection attributes accepted within this limit are written to the `Session_connect_attrs` field in the slow log and can be queried from [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`.
+- You can control the size of `Session_connect_attrs` recorded in the slow log by adjusting this variable.
+- If the value is set to `-1`, this means the limit is not configured and TiDB treats it as up to `65536` bytes.
+- If the value is set to `0`, TiDB does not retain client-provided session connection attributes, which effectively disables recording session attributes.
+
+> **Note:**
+>
+> TiDB enforces a hard limit of 1 MiB for handshake connection attributes. If this hard limit is exceeded, the connection is rejected.
 
 ### plugin_dir
 
@@ -1214,9 +1246,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `3`
 - Range: `[1, 2147483647]`
-- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. Before v8.4.0, this concurrency is fixed at 1. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- Before v8.4.0, this concurrency is fixed at `1`. 
+- Starting from v8.5.7, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_auto_analyze_end_time
 
@@ -1277,9 +1311,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- This variable is used to set the concurrency of executing the automatic update of statistics. 
+- Starting from v8.5.7, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
 
@@ -2042,6 +2077,23 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `OFF`
 - This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
 
+### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the Batch Query Region feature. When TiDB accesses data, it queries PD for Region routing information to update the local Region cache. By default, point query requests such as `GetRegion` (queries the Region containing a key), `GetPrevRegion` (queries the previous adjacent Region by key), and `GetRegionByID` (queries by Region ID) are independent unary gRPC requests. The Batch Query Region feature batches and merges these three types of requests.
+    - When this variable is `OFF`, TiDB sends each point query for Region information to PD as an independent unary gRPC request.
+    - When this variable is `ON`, TiDB batches concurrent point query requests for Region information within a short period through the `QueryRegion` gRPC stream and sends them to PD together. PD then processes them and returns the results. Similar to the batching mechanism for TSO requests, this feature can significantly reduce the number of gRPC requests, thereby reducing the CPU overhead of the PD leader when it handles a large number of Region query requests.
+- This variable does not affect scan requests such as `BatchScanRegions`. Although `BatchScanRegions` can merge queries for multiple key ranges into one request, it is an independent unary gRPC request and does not go through the `QueryRegion` batching path.
+- Changes to this variable take effect immediately across the cluster without restarting TiDB, so you can enable or disable it dynamically. When you enable this variable, TiDB switches to batching mode to obtain Region information. When you disable it, TiDB resumes sending unary gRPC requests one by one.
+- You can enable the Batch Query Region feature in the following scenarios:
+    - The cluster has a large number of Regions, TiDB query concurrency is high, and Region cache misses or invalidations generate many concurrent Region query requests, resulting in high CPU pressure on the PD leader.
+    - Changes such as Region split, Region merge, or Leader migration occur frequently in the cluster, causing many Region cache invalidations and triggering concentrated retries of query requests, generating a large number of Region query requests.
+- This variable and [`pd_enable_follower_handle_region`](#pd_enable_follower_handle_region-new-in-v760) optimize performance in complementary directions: the former reduces the number of requests sent to PD through batching, while the latter reduces the load on the PD leader by allowing PD followers to handle Region query requests. You can enable both variables at the same time.
+
 ### tidb_enable_cascades_planner
 
 > **Warning:**
@@ -2317,6 +2369,19 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Type: Boolean
 - Default value: `OFF`.
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements.
+
+### tidb_enable_cache_prepare_stmt <span class="version-mark">New in v8.5.7</span>
+
+> **Warning:**
+>
+> Currently, this variable is experimental. It is not recommended that you use it in the production environment. This variable might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to cache the results of `Prepare` statements. Typically, an application only needs to execute `Prepare` once and then execute `Execute` multiple times. All subsequent `Execute` operations can reuse the results of the first `Prepare`. If your application repeatedly sends the same `Prepare` statement, you can enable this variable so that TiDB can cache and reuse the results of identical `Prepare` statements, thereby reducing resource consumption.
 
 ### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
 
@@ -2809,6 +2874,26 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
 
+### tidb_enable_strict_not_null_check <span class="version-mark">New in v8.5.7</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column.
+- Possible values:
+    - `ON`: Enables strict `NOT NULL` validation. This behavior is closer to MySQL 8.0 semantics.
+        - In strict SQL mode: if you insert a `NULL` value into a `NOT NULL` column, TiDB returns an error.
+        - In non-strict SQL mode: for a single-row `INSERT` statement, if you insert a `NULL` value into a `NOT NULL` column, TiDB returns an error; for a multi-row `INSERT` statement, if you insert a `NULL` value into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value of the column data type.
+    - `OFF`: Disables strict `NOT NULL` validation for compatibility with the permissive behavior in earlier TiDB versions. When disabled, if you insert a `NULL` value into a `NOT NULL` column, TiDB downgrades the error to a warning and writes the implicit default value for the column data type. For example, TiDB writes `0` for numeric types and an empty string `''` for string types.
+
+> **Note:**
+>
+> - Earlier TiDB versions were permissive in validating `NOT NULL` constraints. When you insert a `NULL` value into a `NOT NULL` column, TiDB might automatically write the implicit default value of the column data type. Starting from v8.5.0, TiDB tightened this validation: even in non-strict SQL mode, inserting a `NULL` value into a `NOT NULL` column might return an error. This behavior is closer to MySQL 8.0 semantics but might affect applications that depend on the earlier permissive behavior.
+>
+> - If you upgrade from an earlier TiDB version to a version where strict `NOT NULL` validation is enabled, and your existing application logic depends on the behavior of automatically using implicit default values after writing `NULL` to `NOT NULL` columns, related SQL statements might return errors after the upgrade. If you cannot immediately modify the business logic, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks. It is recommended that you later update the application logic to avoid explicitly writing `NULL` values to `NOT NULL` columns.
+
 ### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2850,8 +2935,9 @@ Query OK, 0 rows affected (0.09 sec)
 > **Warning:**
 >
 > - For versions earlier than v8.1.0, TiDB periodically reports telemetry data to PingCAP.
-> - For versions from v8.1.0 to v8.5.1, TiDB removes the telemetry feature and the `tidb_enable_telemetry` variable no longer takes effect. It is retained solely for compatibility with earlier versions.
-> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - For versions from v8.1.0 to v8.5.2, TiDB removes the telemetry feature and the `tidb_enable_telemetry` variable no longer takes effect. It is retained solely for compatibility with earlier versions.
+> - For versions from v8.5.3 to v8.5.6, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - Starting from v8.5.7, TiDB deprecates this system variable and the telemetry feature.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4438,6 +4524,17 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether the optimizer applies the [`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate) hint for all queries that contain a subquery in the `SELECT` list.
+
+### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the optimizer additionally builds a logical candidate plan that does not decorrelate in the [correlated subquery decorrelation](/correlated-subquery-optimization.md) scenario.
+    - By default, TiDB prioritizes attempting decorrelation rewrites for correlated subqueries.
+    - After you enable this variable, if the decorrelated candidate plan fails to generate an equivalent `IndexJoin` candidate plan with the same access direction as the original correlated subquery, the optimizer additionally retains a non-decorrelated candidate plan, evaluates both the decorrelated and non-decorrelated candidate plans, and selects the [execution plan](/explain-subqueries.md) with the lower cost.
 
 ### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
 
@@ -6344,8 +6441,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `1`
+- Default value: `4`
 - Range: `[0, 4294967295]`. The maximum value for v7.5.0 and earlier versions is `256`. Before v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Starting from v8.5.7, the default value changes from `1` to `4`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 - This variable is used to set the concurrency of scan operations performed when TiDB executes internal SQL statements (such as an automatic update of statistics).
 
 ### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
