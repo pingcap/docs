@@ -30,9 +30,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Standardize the label used in the [TiDB Cloud console](https://tidbcloud.com/) for public preview features to `PREVIEW`.
-
-    Previously, some public preview features were labeled as `BETA` or `PREVIEW`. Now, all public preview features use the `PREVIEW` label.
+- Standardize the label used in the [[TiDB Cloud console](https://tidbcloud.com/)](https://tidbcloud.com/) for public preview features as `PREVIEW`, replacing the previous mixed use of `BETA` and `PREVIEW`.
 
 **API changes**
 
