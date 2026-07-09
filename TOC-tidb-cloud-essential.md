@@ -61,6 +61,7 @@
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
     - [イベント](/tidb-cloud/tidb-cloud-events.md)
+    - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -172,10 +173,12 @@
   - [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+  - [Changefeed の課金](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [予算管理](/tidb-cloud/tidb-cloud-budget.md)
 - 統合
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+  - [Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)

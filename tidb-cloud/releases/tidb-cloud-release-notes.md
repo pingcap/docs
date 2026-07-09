@@ -8,6 +8,36 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年7月7日 {#july-7-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - Datadog 統合をサポートしました（パブリックプレビュー）。
+
+        TiDB Cloud Essential インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
+
+        詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential) を参照してください。
+
+- **TiDB Cloud Premium**
+
+    - Datadog 統合をサポートしました（パブリックプレビュー）。
+
+        TiDB Cloud Premium インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
+
+        詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
+
+**API の変更**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 向けに changefeed API エンドポイントが導入され、change data capture (CDC) changefeed をプログラムで管理できるようになりました。
+
+        これらのエンドポイントを使用して、Apache Kafka、MySQL、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage などのダウンストリームシステムへのリアルタイムデータレプリケーションのために、changefeed の作成、一覧表示、取得、削除、一時停止、再開、スケールを行えます。
+
+        詳細については、[Changefeed API v1beta1 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/#tag/Changefeed) を参照してください。
+
 ## 2026年6月30日 {#june-30-2026}
 
 **一般的な変更**

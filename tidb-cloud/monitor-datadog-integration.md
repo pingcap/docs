@@ -7,6 +7,14 @@ summary: Datadogとの連携により、TiDBクラスタを監視する方法を
 
 TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを設定することで、TiDBクラスタに関するメトリクスを[Datadog](https://www.datadoghq.com/)に送信できます。その後、これらのメトリクスをDatadogダッシュボードで直接確認できます。
 
+> **Note:**
+>
+> このドキュメントは TiDB Cloud Dedicated にのみ適用されます。
+>
+> TiDB Cloud Starter では、Datadog 統合は利用できません。
+> TiDB Cloud Essential については、[Integrate TiDB Cloud Essential with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential) を参照してください。
+> TiDB Cloud Premium については、[Integrate TiDB Cloud Premium with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
+
 ## Datadog統合バージョン {#datadog-integration-version}
 
 TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合（ベータ版）をサポートしてきました。2025年7月31日より、TiDB CloudレベルのDatadog統合（プレビュー版）を導入します。2025年9月30日より、クラスターレベルのDatadog統合が一般提供（GA）となります。
@@ -22,9 +30,9 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 -   TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
 
-## 制限 {#limitation}
+## 制限 {#limitations}
 
--   Datadogとの連携機能は、現在[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ利用可能です。
+-   Datadog統合は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは利用できません。
 
 -   クラスターの状態が**「作成中」** 、 **「復元中」** 、 **「一時停止中」** 、 **「再開中」**の場合は、Datadog の統合は利用できません。
 
