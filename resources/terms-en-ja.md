@@ -31,7 +31,6 @@
 | Dedicated | Dedicated | TiDB Cloud plan name, keep in English. |
 | Deploy | デプロイ | Do not translate to 「配備」. |
 | disaster recovery | ディザスタリカバリ | No long vowel mark at end. |
-| Distinct Optimization | クエリの最適化 |  |
 | DM WebUI | DM WebUI | Keep space between DM and WebUI. |
 | Drainer | Drainer | TiDB Binlog component name, keep in English. Do not translate to 「ドレイナー」. |
 | druid | druid | Library name, keep in English. Do not translate to 「ドルイド」. |
@@ -40,7 +39,6 @@
 | Encryption at Rest | 保存時の暗号化 |  |
 | Essential | Essential | TiDB Cloud tier name, keep in English. |
 | EXPLAIN | EXPLAIN | SQL keyword, keep in English. Do not translate to 「説明」. |
-| EXPLAIN Walkthrough | EXPLAIN コマンド |  |
 | experimental | 実験的 |  |
 | Experimental | Experimental | When used as a feature label, keep in English. |
 | Expression index | 式インデックス | Do not translate to 「発見指数」. |
@@ -80,8 +78,6 @@
 | pessimistic | 悲観的 |  |
 | PingCAP | PingCAP | Company name, keep exact capitalization. |
 | Placement rules | 配置ルール |  |
-| Precision Math | 精密計算 |  |
-| Predicates Push Down | Predicate Push Down |  |
 | prepared statement | プリペアドステートメント |  |
 | Prepared Plan Cache | プリペアドプランキャッシュ | Do not translate to 「準備済みプランキャッシュ」. |
 | Primary Cluster | プライマリクラスター |  |
@@ -102,7 +98,6 @@
 | Scale in | スケールイン |  |
 | Scattering | Scattering | Technical term, keep in English. |
 | Secondary Cluster | セカンダリクラスター |  |
-| Secure | セキュリティ |  |
 | Sequence | シーケンス |  |
 | server | サーバー | Use long vowel mark. |
 | single point of failure | 単一障害点 |  |
