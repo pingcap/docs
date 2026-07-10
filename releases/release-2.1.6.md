@@ -30,7 +30,7 @@ summary: TiDB 2.1.6およびTiDB Ansible 2.1.6は、2019年3月15日にリリー
 
 ## ツール {#tools}
 
--   稲妻
+-   Lightning
     -   インポーターのデフォルト`region-split-size` 512 MiB [＃4369](https://github.com/tikv/tikv/pull/4369)に変更
     -   メモリ使用量を削減するために、以前にメモリにキャッシュされた中間SSTをローカルディスクに保存します[＃4369](https://github.com/tikv/tikv/pull/4369)
     -   RocksDB [＃4369](https://github.com/tikv/tikv/pull/4369)のメモリ使用量を制限する
