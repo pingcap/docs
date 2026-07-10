@@ -117,7 +117,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   異なるSQLモード[＃511](https://github.com/pingcap/tidb-binlog/pull/511)でのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`構成項目を追加します。
     -   レプリケーションを必要としないテーブルを除外するための構成項目を`syncer.ignore-table`追加します[＃520](https://github.com/pingcap/tidb-binlog/pull/520)
 
--   稲妻
+-   Lightning
     -   行IDまたはデフォルトの列値を使用して、ダンプファイル[＃170](https://github.com/pingcap/tidb-lightning/pull/170)で欠落した列データを入力します。
     -   SST の一部がインポートに失敗した場合でも、インポート成功が返される可能性があるインポーターのバグを修正しました[＃4566](https://github.com/tikv/tikv/pull/4566)
     -   SST を TiKV [＃4412](https://github.com/tikv/tikv/pull/4412)にアップロードする際のインポーターの速度制限をサポート

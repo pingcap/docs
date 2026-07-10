@@ -29,7 +29,7 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
 
 ## ツール {#tools}
 
--   稲妻
+-   Lightning
     -   メモリ使用量を最適化する[＃107](https://github.com/pingcap/tidb-lightning/pull/107) , [＃108](https://github.com/pingcap/tidb-lightning/pull/108)
     -   ダンプファイルのチャンク分離を削除して、ダンプファイルの余分な解析を回避します[＃109](https://github.com/pingcap/tidb-lightning/pull/109)
     -   ダンプファイルの読み取りI/O同時実行を制限し、キャッシュミスが多すぎることによるパフォーマンスの低下を回避します[＃110](https://github.com/pingcap/tidb-lightning/pull/110)
