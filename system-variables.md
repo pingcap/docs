@@ -1969,9 +1969,21 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 >
 > The bulk DML execution mode (`tidb_dml_type = "bulk"`) is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues). In the current version, when TiDB performs large transactions using the bulk DML mode, it might affect the memory usage and execution efficiency of TiCDC, TiFlash, and the resolved-ts module of TiKV, and might cause OOM issues. Additionally, BR might be blocked and fail to process when encountering locks. Therefore, it is not recommended to use this mode when these components or features are enabled.
 
+<CustomContent platform="tidb-cloud" plan="starter">
+
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
+> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud" plan="essential,premium">
+
+> **Note:**
+>
+> This variable is read-only for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium). The value is fixed to `"standard"`, so you cannot enable Pipelined DML by setting this variable to `"bulk"`.
+
+</CustomContent>
 
 - Scope: SESSION
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -5695,19 +5707,11 @@ SHOW WARNINGS;
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
-<CustomContent platform="tidb-cloud" plan="starter,essential">
+<CustomContent platform="tidb-cloud" plan="starter,essential,premium">
 
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> This variable is read-only for [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium).
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), this variable is read-only and fixed to `leader`, which means other read modes are not supported.
 
 </CustomContent>
 
@@ -6723,7 +6727,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
-- Default value: `FAST`
+- Default value: `STRICT` for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium); `FAST` for other deployment options
 - Possible values: `OFF`, `FAST`, `STRICT`
 - This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 

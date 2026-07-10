@@ -46,6 +46,14 @@ Currently, Pipelined DML has the following limitations:
     - When [foreign key constraints](/foreign-key.md) are enabled (`foreign_key_checks = ON`), target tables must not include foreign key relationships.
 - When executing `INSERT IGNORE ... ON DUPLICATE KEY UPDATE` statements, conflicting updates might result in `Duplicate entry` errors.
 
+<CustomContent platform="tidb-cloud" plan="essential,premium">
+
+> **Note:**
+>
+> For [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), Pipelined DML is not supported, and you cannot enable Pipelined DML by setting [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) to `"bulk"` or by using the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint.
+
+</CustomContent>
+
 ## Usage
 
 This section describes how to enable Pipelined DML and verify whether it takes effect.

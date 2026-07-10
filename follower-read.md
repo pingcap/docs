@@ -46,6 +46,14 @@ To enable TiDB's Follower Read feature, modify the value of the `tidb_replica_re
 set [session | global] tidb_replica_read = '<target value>';
 ```
 
+<CustomContent platform="tidb-cloud" plan="essential,premium">
+
+> **Note:**
+>
+> For [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium), `tidb_replica_read` is read-only and fixed to `leader`. Other read modes are not supported.
+
+</CustomContent>
+
 Scope: SESSION | GLOBAL
 
 Default: leader

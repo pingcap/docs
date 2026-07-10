@@ -883,7 +883,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + When the session-level system variable [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) is set to `"bulk"`, the effect of this configuration in the session is equivalent to setting it to `false`.
-+ Default value: `false`
++ Default value: `true` for [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium); `false` for other deployment options
 
 ### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
 
