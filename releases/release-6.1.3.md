@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.3 Release Notes
-summary: TiDB 6.1.3は2022年12月5日にリリースされました。このリリースには、互換性の変更、改善、バグ修正、そしてTiCDC、PD、TiKV、 TiFlash、バックアップとリストア、TiCDC、TiDBデータ移行などの各種ツールのアップデートが含まれています。主な変更点としては、TiCDCのデフォルト値の変更、PDのロック粒度の最適化、TiDB、PD、TiKV、 TiFlash、および各種ツールのバグ修正などが挙げられます。また、このリリースにはTiDBのGoコンパイラバージョンがgo1.18からgo1.19にアップグレードされ、安定性が向上しています。
+summary: TiDB 6.1.3は2022年12月5日にリリースされました。このリリースには、互換性の変更、改善、バグ修正、そしてTiCDC、PD、TiKV、 TiFlash、バックアップとリストア、TiCDC、TiDB Data Migrationなどの各種ツールのアップデートが含まれています。主な変更点としては、TiCDCのデフォルト値の変更、PDのロック粒度の最適化、TiDB、PD、TiKV、 TiFlash、および各種ツールのバグ修正などが挙げられます。また、このリリースにはTiDBのGoコンパイラバージョンがgo1.18からgo1.19にアップグレードされ、安定性が向上しています。
 ---
 
 # TiDB 6.1.3 リリースノート {#tidb-6-1-3-release-notes}
@@ -72,7 +72,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   データベースまたはテーブル[#39150](https://github.com/pingcap/tidb/issues/39150) @ [MoCuishle28](https://github.com/MoCuishle28)照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました
 
@@ -81,7 +81,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
         -   最初にDDLステートメントを実行し、次に変更フィード[＃7682](https://github.com/pingcap/tiflow/issues/7682) @ [asddongmen](https://github.com/asddongmen)を一時停止して再開するシナリオで発生したデータ損失を修正しました
         -   Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @ [hicqu](https://github.com/hicqu)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序[#6832](https://github.com/pingcap/tiflow/issues/6832) @ [lance6716](https://github.com/lance6716)を持つ SQL を生成する可能性がある問題を修正しました。
         -   DMタスクが`Unknown placement policy`エラー[＃7493](https://github.com/pingcap/tiflow/issues/7493) @ [lance6716](https://github.com/lance6716)で停止する可能性がある問題を修正

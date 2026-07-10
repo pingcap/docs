@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRは3.1 GA [＃233](https://github.com/pingcap/br/pull/233)より前のTiKVクラスターからのデータの復元をサポートしていません。
 
@@ -87,7 +87,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
         -   TiFlash関連のDDLジョブがDrainer [＃948](https://github.com/pingcap/tidb-binlog/pull/948) [＃942](https://github.com/pingcap/tidb-binlog/pull/942)のレプリケーションを中断する可能性がある問題を修正しました。
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   `checksum`操作が無効になっているにもかかわらず[＃223](https://github.com/pingcap/br/pull/223)が実行される問題を修正しました
         -   TiDBが`auto-random`または`alter-pk` [＃230](https://github.com/pingcap/br/pull/230) [＃231](https://github.com/pingcap/br/pull/231)を有効にすると増分バックアップが失敗する問題を修正

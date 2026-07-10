@@ -44,7 +44,7 @@ TiDB バージョン：xyz
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
@@ -56,7 +56,7 @@ TiDB バージョン：xyz
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   プレースホルダー
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
@@ -108,7 +108,7 @@ TiDB バージョン：xyz
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   注[＃問題](https://github.com/pingcap/tidb/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
@@ -120,7 +120,7 @@ TiDB バージョン：xyz
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   プレースホルダー
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)
         -   注[＃問題](https://github.com/pingcap/tiflow/issues/$%7Bissue-id%7D) @ [献呈者 GitHub ID](https://github.com/$%7Bgithub-id%7D)

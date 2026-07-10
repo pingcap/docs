@@ -61,7 +61,7 @@ TiDB バージョン: 7.5.7
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiDBをAmazon EC2に導入する場合、 BRはAWSインスタンスメタデータサービスバージョン2（IMDSv2）をサポートします。EC2インスタンスを設定することで、 BRがインスタンスに関連付けられたIAMロールを使用してAmazon S3への適切なアクセス権限を付与できるようになります[＃16443](https://github.com/tikv/tikv/issues/16443) @ [pingyu](https://github.com/pingyu)
         -   TiKVのダウンロードAPIは、バックアップファイルをダウンロードする際に特定の時間範囲内のデータをフィルタリングすることをサポートしており、復元時に古いデータバージョンや将来のデータバージョンがインポートされるのを回避します[＃18399](https://github.com/tikv/tikv/issues/18399) @ [3pointer](https://github.com/3pointer)
@@ -142,7 +142,7 @@ TiDB バージョン: 7.5.7
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PITRが3072バイトを超えるインデックスの復元に失敗する問題を修正[＃58430](https://github.com/pingcap/tidb/issues/58430) @ [YuJuncen](https://github.com/YuJuncen)
         -   大量のデータを転送するときに Azure Blob Storage へのログ バックアップのアップロードが遅くなる問題を修正[＃18410](https://github.com/tikv/tikv/issues/18410) @ [YuJuncen](https://github.com/YuJuncen)

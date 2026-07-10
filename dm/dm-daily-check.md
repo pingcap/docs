@@ -1,11 +1,11 @@
 ---
 title: Daily Check for TiDB Data Migration
-summary: TiDB データ移行 (DM) の毎日のチェックについて説明します。
+summary: TiDB Data Migration (DM) の毎日のチェックについて説明します。
 ---
 
-# TiDBデータ移行の毎日のチェック {#daily-check-for-tidb-data-migration}
+# TiDB Data Migrationの毎日のチェック {#daily-check-for-tidb-data-migration}
 
-このドキュメントでは、TiDB データ移行 (DM) の毎日のチェックを実行する方法をまとめています。
+このドキュメントでは、TiDB Data Migration (DM) の毎日のチェックを実行する方法をまとめています。
 
 -   方法1：コマンド`query-status`を実行して、タスクの実行状態とエラー出力（ある場合）を確認します。詳細は[クエリステータス](/dm/dm-query-status.md)参照してください。
 

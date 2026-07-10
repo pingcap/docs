@@ -31,7 +31,7 @@ TiDB バージョン: 6.5.9
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ローリング再起動時のログバックアップのRPO（目標復旧時点）を最適化します。これにより、ローリング再起動時のログバックアップタスクのチェックポイントラグが短縮されます[＃15410](https://github.com/tikv/tikv/issues/15410) @ [YuJuncen](https://github.com/YuJuncen) 。
         -   ログバックアップのマージ操作に対する許容度を向上します。比較的長いマージ操作が発生した場合、ログバックアップタスクがエラー状態[＃16554](https://github.com/tikv/tikv/issues/16554) @ [YuJuncen](https://github.com/YuJuncen)に陥る可能性が低くなります。
@@ -108,7 +108,7 @@ TiDB バージョン: 6.5.9
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   フルバックアップが失敗したときにログが多すぎる問題を修正[＃51572](https://github.com/pingcap/tidb/issues/51572) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイント[＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3pointer](https://github.com/3pointer)がすぐに復元されない問題を修正しました。
@@ -128,7 +128,7 @@ TiDB バージョン: 6.5.9
         -   `open-protocol`の古い値部分が、実際のタイプ[＃10803](https://github.com/pingcap/tiflow/issues/10803) @ [3AceShowHand](https://github.com/3AceShowHand)ではなく、タイプ`STRING`に応じて誤ってデフォルト値を出力する問題を修正しました。
         -   オブジェクトストレージシンクに一時的な障害が発生した場合に、結果整合性が有効になっている変更フィードが失敗する可能性がある問題を修正しました[＃10710](https://github.com/pingcap/tiflow/issues/10710) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   アップストリーム主キーがバイナリ型[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました
 

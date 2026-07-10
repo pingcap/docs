@@ -3,9 +3,9 @@ title: TiDB Data Migration Table Routing
 summary: DM におけるテーブル ルーティングの使用方法と注意事項を学びます。
 ---
 
-# TiDBデータ移行テーブルルーティング {#tidb-data-migration-table-routing}
+# TiDB Data Migrationテーブルルーティング {#tidb-data-migration-table-routing}
 
-TiDB データ移行 (DM) を使用してデータを移行する場合、テーブル ルーティングを構成して、アップストリーム MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。
+TiDB Data Migration (DM) を使用してデータを移行する場合、テーブル ルーティングを構成して、アップストリーム MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。
 
 > **注記：**
 >

@@ -146,7 +146,7 @@ TiDB バージョン: 5.1.1
         -   テーブル移行直後に TiCDC ノードが強制終了した場合にデータ損失が発生する可能性があるバグを修正[＃2033](https://github.com/pingcap/tiflow/pull/2033)
         -   `changefeed update` on `--sort-dir`と`--start-ts` [＃1921](https://github.com/pingcap/tiflow/pull/1921)の処理ロジックを修正
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   復元するデータのサイズが正しく計算されない問題を修正[＃1270](https://github.com/pingcap/br/issues/1270)
         -   cdclog [＃870](https://github.com/pingcap/br/issues/870)から復元するときに発生する DDL イベントの欠落の問題を修正しました

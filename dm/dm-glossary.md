@@ -1,11 +1,11 @@
 ---
 title: TiDB Data Migration Glossary
-summary: TiDB データ移行で使用される用語を学習します。
+summary: TiDB Data Migration で使用される用語を学習します。
 ---
 
-# TiDB データ移行用語集 {#tidb-data-migration-glossary}
+# TiDB Data Migration 用語集 {#tidb-data-migration-glossary}
 
-このドキュメントでは、TiDB データ移行 (DM) のログ、監視、構成、およびドキュメントで使用される用語を示します。
+このドキュメントでは、TiDB Data Migration (DM) のログ、監視、構成、およびドキュメントで使用される用語を示します。
 
 TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参照してください。
 

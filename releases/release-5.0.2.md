@@ -50,7 +50,7 @@ TiDB バージョン: 5.0.2
         -   ソート段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)におけるメモリとCPUの使用を最適化する
         -   ユーザーの混乱を招く可能性のある不要なログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   曖昧なエラーメッセージを明確にする[＃1132](https://github.com/pingcap/br/pull/1132)
         -   バックアップ[＃1091](https://github.com/pingcap/br/pull/1091)のクラスタ バージョンの確認をサポート
@@ -119,7 +119,7 @@ TiDB バージョン: 5.0.2
         -   テーブル[＃1828](https://github.com/pingcap/tiflow/pull/1828)移動する際にレプリケーションタスクが停止する可能性があるバグを修正
         -   TiCDC チェンジフィード チェックポイント[＃1759](https://github.com/pingcap/tiflow/pull/1759)の停滞により TiKV GC セーフ ポイントがブロックされる問題を修正しました
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログの復元中に`DELETE`イベントが失われる問題を修正しました[＃1063](https://github.com/pingcap/br/issues/1063)
         -   BR がTiKV [＃1037](https://github.com/pingcap/br/pull/1037)に無駄な RPC リクエストを大量に送信してしまうバグを修正しました

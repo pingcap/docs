@@ -82,7 +82,7 @@ TiDB バージョン: 5.4.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   RawKVモード[＃35279](https://github.com/pingcap/tidb/issues/35279)でBRが`ErrRestoreTableIDMismatch`報告するバグを修正
         -   ファイルの保存時にエラーが発生したときにBRが再試行しないバグを修正[＃34865](https://github.com/pingcap/tidb/issues/34865)
@@ -101,7 +101,7 @@ TiDB バージョン: 5.4.2
         -   HTTPサーバー[＃5303](https://github.com/pingcap/tiflow/issues/5303)でゴルーチンリークを引き起こす可能性のあるバグを修正
         -   メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正[＃4756](https://github.com/pingcap/tiflow/issues/4756) [＃4762](https://github.com/pingcap/tiflow/issues/4762)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   タスクが自動的に再開された後にDMがより多くのディスク領域を占有する問題を修正[＃5344](https://github.com/pingcap/tiflow/issues/5344)
         -   `case-sensitive: true`が設定されていない場合、大文字のテーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)

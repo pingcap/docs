@@ -48,7 +48,7 @@ TiDB バージョン: 5.0.6
         -   デフォルト値の`max-message-bytes`を`10M`に設定すると、Kafkaメッセージが[＃3081](https://github.com/pingcap/tiflow/issues/3081)送信されない可能性が減ります。
         -   `no owner alert` [＃1606](https://github.com/pingcap/tiflow/issues/1606)含む`mounter row` Prometheusと[＃4054](https://github.com/pingcap/tiflow/issues/4054)の監視メトリックとアラート`table sink total row`追加します`buffer sink total row`
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   PD 要求エラーまたは TiKV I/O タイムアウト エラーが発生した場合は、 BRタスクを再試行します[＃27787](https://github.com/pingcap/tidb/issues/27787)
         -   復元の堅牢性を向上させる[＃27421](https://github.com/pingcap/tidb/issues/27421)
@@ -160,7 +160,7 @@ TiDB バージョン: 5.0.6
         -   株価データのスキャンに時間がかかりすぎると、TiKV が GC を実行するため株価データのスキャンが失敗する可能性がある問題を修正しました[＃2470](https://github.com/pingcap/tiflow/issues/2470)
         -   コンテナ環境におけるOOMの修正[＃1798](https://github.com/pingcap/ticdc/issues/1798)
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   バックアップとリストア[＃1405](https://github.com/pingcap/br/issues/1405)平均速度が不正確に計算されるバグを修正
 

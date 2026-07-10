@@ -335,7 +335,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ログバックアップ[＃14433](https://github.com/tikv/tikv/issues/14433) @ [joccau](https://github.com/joccau)中に TiKV 構成項目`log-backup.max-flush-interval`を変更することをサポート
 
@@ -430,7 +430,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   クラスター[＃42973](https://github.com/pingcap/tidb/issues/42973) @ [YuJuncen](https://github.com/YuJuncen)で TiKV ノードがクラッシュした場合のバックアップ速度低下の問題を修正しました
         -   一部のケースでバックアップの失敗により不正確なエラーメッセージが表示される問題を修正[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [YuJuncen](https://github.com/YuJuncen)
@@ -444,7 +444,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
         -   いくつかの特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正しました[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [hicqu](https://github.com/hicqu)
         -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[＃9023](https://github.com/pingcap/tiflow/issues/9023) @ [asddongmen](https://github.com/asddongmen)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   レプリケーション[＃7028](https://github.com/pingcap/tiflow/issues/7028) @ [lance6716](https://github.com/lance6716)中に latin1 データが破損する可能性がある問題を修正しました
 

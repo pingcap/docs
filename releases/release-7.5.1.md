@@ -62,7 +62,7 @@ TiDB バージョン: 7.5.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   より効率的なアルゴリズム[＃50613](https://github.com/pingcap/tidb/issues/50613) @ [Leavrth](https://github.com/Leavrth)を使用して、データ復元中に SST ファイルをマージする速度を改善します
         -   データ復元中にデータベースをバッチで作成するサポート[＃50767](https://github.com/pingcap/tidb/issues/50767) @ [Leavrth](https://github.com/Leavrth)
@@ -208,7 +208,7 @@ TiDB バージョン: 7.5.1
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   TiKVノード[＃50566](https://github.com/pingcap/tidb/issues/50566) @ [Leavrth](https://github.com/Leavrth)にリーダーがいないためにデータの復元が遅くなる問題を修正しました
         -   `--filter`オプションを指定した後でも、完全な復元を行うにはターゲット クラスターが空である必要があるという問題を修正しました[＃51009](https://github.com/pingcap/tidb/issues/51009) @ [3pointer](https://github.com/3pointer)
@@ -234,7 +234,7 @@ TiDB バージョン: 7.5.1
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリーム[＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)に複製しない問題を修正しました。
         -   `kv-client`初期化[＃10095](https://github.com/pingcap/tiflow/issues/10095) @ [3AceShowHand](https://github.com/3AceShowHand)中に発生する可能性のあるデータ競合問題を修正
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   下流のテーブル構造に`shard_row_id_bits` [＃10308](https://github.com/pingcap/tiflow/issues/10308) @ [GMHDBJD](https://github.com/GMHDBJD)が含まれている場合に移行タスクエラーが発生する問題を修正しました
         -   DM が「イベント タイプ切り捨てが無効です」というエラーに遭遇し、アップグレードが失敗する問題を修正しました[＃10282](https://github.com/pingcap/tiflow/issues/10282) @ [GMHDBJD](https://github.com/GMHDBJD)

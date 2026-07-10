@@ -53,7 +53,7 @@ TiDB バージョン: 7.5.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRはデータ復旧中に空のSSTファイルをクリーンアップします[＃16005](https://github.com/tikv/tikv/issues/16005) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップの互換性テストとインデックスアクセラレーション[＃51987](https://github.com/pingcap/tidb/issues/51987) @ [Leavrth](https://github.com/Leavrth)をカバーするPITR統合テストケースを追加します。
@@ -207,7 +207,7 @@ TiDB バージョン: 7.5.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   特別なイベントタイミングにより、ログバックアップ[＃16739](https://github.com/tikv/tikv/issues/16739) @ [YuJuncen](https://github.com/YuJuncen)でデータ損失が発生する可能性があるという稀な問題を修正しました。
         -   フルバックアップが失敗したときにログが多すぎる問題を修正[＃51572](https://github.com/pingcap/tidb/issues/51572) @ [Leavrth](https://github.com/Leavrth)
@@ -240,7 +240,7 @@ TiDB バージョン: 7.5.2
         -   KVクライアントのデータ競合によりTiCDCがpanic[＃10718](https://github.com/pingcap/tiflow/issues/10718) @ [asddongmen](https://github.com/asddongmen)になる問題を修正
         -   アップストリームの主キーまたは一意キーを更新すると、アップストリームとダウンストリーム間でデータの不整合が発生する可能性がある問題を修正[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [lidezhu](https://github.com/lidezhu)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   `go-mysql` [＃11041](https://github.com/pingcap/tiflow/issues/11041) @ [D3Hunter](https://github.com/D3Hunter)にアップグレードして接続ブロックの問題を修正しました
         -   アップストリーム主キーがバイナリ型[＃10672](https://github.com/pingcap/tiflow/issues/10672) @ [GMHDBJD](https://github.com/GMHDBJD)の場合にデータが失われる問題を修正しました

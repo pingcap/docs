@@ -23,7 +23,7 @@ TiDBはMySQLプロトコルと高い互換性を持ち、 MySQL 5.7およびMySQ
 
 TiDBはMySQLレプリケーションプロトコルをサポートしていない点に注意が必要です。代わりに、MySQLでデータをレプリケートするための専用ツールが提供されています。
 
--   MySQL からデータを複製する: [TiDBデータ移行（DM）](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+-   MySQL からデータを複製する: [TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
 -   データをMySQLに複製する: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV変更ログを取得してTiDBの増分データを複製するためのツールです。TiCDCは[MySQLシンク](/ticdc/ticdc-overview.md#replication-consistency)を使用して、TiDBの増分データをMySQLに複製します。
 
 </CustomContent>

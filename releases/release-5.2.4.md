@@ -159,7 +159,7 @@ TiDBバージョン：5.2.4
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   BRがRawKVのバックアップに失敗する問題を修正 [#32607](https://github.com/pingcap/tidb/issues/32607)
 

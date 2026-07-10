@@ -3,7 +3,7 @@ title: Handle Performance Issues of TiDB Data Migration
 summary: DM に存在する可能性のある一般的なパフォーマンスの問題とその対処方法について学習します。
 ---
 
-# TiDBデータ移行のパフォーマンス問題への対処 {#handle-performance-issues-of-tidb-data-migration}
+# TiDB Data Migrationのパフォーマンス問題への対処 {#handle-performance-issues-of-tidb-data-migration}
 
 このドキュメントでは、DM に存在する可能性のある一般的なパフォーマンスの問題とその対処方法について説明します。
 

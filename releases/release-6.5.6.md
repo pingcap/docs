@@ -41,7 +41,7 @@ TiDB バージョン: 6.5.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   スナップショットバックアップの復元中に、 BRは特定のネットワークエラーが発生すると再試行します[＃48528](https://github.com/pingcap/tidb/issues/48528) @ [Leavrth](https://github.com/Leavrth)
         -   `delete range`シナリオで Point-In-Time Recovery (PITR) の新しい統合テストを導入し、PITR の安定性を[＃47738](https://github.com/pingcap/tidb/issues/47738) @ [Leavrth](https://github.com/Leavrth)強化します。
@@ -138,7 +138,7 @@ TiDB バージョン: 6.5.6
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   大規模なワイドテーブル[＃15714](https://github.com/tikv/tikv/issues/15714) @ [YuJuncen](https://github.com/YuJuncen)をバックアップするときに、一部のシナリオでログバックアップが停止する可能性がある問題を修正しました。
         -   頻繁なフラッシュによりログバックアップが[＃15602](https://github.com/tikv/tikv/issues/15602) @ [3pointer](https://github.com/3pointer)で停止する問題を修正しました
@@ -162,7 +162,7 @@ TiDB バージョン: 6.5.6
         -   PD のスケールアップおよびスケールダウン中に TiCDC が無効な古いアドレスにアクセスする問題を修正[＃9584](https://github.com/pingcap/tiflow/issues/9584) @ [fubinzh](https://github.com/fubinzh) @ [asddongmen](https://github.com/asddongmen)
         -   間違ったメモリ情報を取得すると、一部のオペレーティングシステムで OOM 問題が発生する可能性がある問題を修正[＃9762](https://github.com/pingcap/tiflow/issues/9762) @ [sdojjy](https://github.com/sdojjy)
 
-    -   TiDB データ移行 (DM)
+    -   TiDB Data Migration (DM)
 
         -   DMが楽観的モード[＃9788](https://github.com/pingcap/tiflow/issues/9788) @ [GMHDBJD](https://github.com/GMHDBJD)でパーティションDDLをスキップする問題を修正
         -   オンライン DDL [＃9587](https://github.com/pingcap/tiflow/issues/9587) @ [GMHDBJD](https://github.com/GMHDBJD)をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました

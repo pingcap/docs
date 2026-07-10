@@ -18,7 +18,7 @@ TiDB バージョン: 3.1.2
 
 -   ツール
 
-    -   バックアップと復元 (BR)
+    -   Backup & Restore (BR)
 
         -   ネットワークの状態が悪い場合は自動的に再試行して、S3 および GCS ストレージの安定性を向上させます[＃314](https://github.com/pingcap/br/pull/314) [＃7965](https://github.com/tikv/tikv/pull/7965)
         -   小さなテーブルを復元するときにリージョンリーダーが見つからないために発生する復元エラーを修正[＃303](https://github.com/pingcap/br/pull/303)
