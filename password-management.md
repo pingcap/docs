@@ -12,7 +12,7 @@ To protect the security of user passwords, TiDB supports the following password 
 - Password reuse policy: prevent users from reusing old passwords.
 - Failed-login tracking and temporary account locking policy: temporarily lock a user account to prevent the same user from trying to log in after multiple login failures caused by wrong passwords.
 
-Starting from v9.0.0, TiDB also supports the dual password policy, which lets you rotate passwords for applications without downtime. For details, see [Dual password policy](#dual-password-policy).
+Starting from v8.5.7, TiDB also supports the dual password policy, which lets you rotate passwords for applications without downtime. For details, see [Dual password policy](#dual-password-policy).
 
 ## TiDB authentication credential storage
 
@@ -362,7 +362,7 @@ ALTER USER 'test'@'localhost'
 
 ## Dual password policy
 
-Starting from v9.0.0, TiDB supports the MySQL-compatible [dual password policy](https://dev.mysql.com/doc/refman/8.0/en/password-management.html#dual-passwords), which allows an account to hold two valid passwords at the same time: a primary password and a secondary password. When many applications share one account, dual passwords let you rotate the password in phases without any downtime: establish a new primary password while the old password keeps working, migrate the applications one by one, and then discard the old password.
+Starting from v8.5.7, TiDB supports the MySQL-compatible [dual password policy](https://dev.mysql.com/doc/refman/8.0/en/password-management.html#dual-passwords), which allows an account to hold two valid passwords at the same time: a primary password and a secondary password. When many applications share one account, dual passwords let you rotate the password in phases without any downtime: establish a new primary password while the old password keeps working, migrate the applications one by one, and then discard the old password.
 
 A typical rotation works as follows:
 

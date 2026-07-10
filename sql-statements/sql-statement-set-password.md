@@ -55,7 +55,7 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-Starting from v9.0.0, `SET PASSWORD ... RETAIN CURRENT PASSWORD` retains the current password as the secondary password while setting the new primary password, so both passwords remain valid during a password rotation. For details, see [Dual password policy](/password-management.md#dual-password-policy).
+Starting from v8.5.7, `SET PASSWORD ... RETAIN CURRENT PASSWORD` retains the current password as the secondary password while setting the new primary password, so both passwords remain valid during a password rotation. For details, see [Dual password policy](/password-management.md#dual-password-policy).
 
 ```sql
 SET PASSWORD FOR 'newuser' = 'newpassword' RETAIN CURRENT PASSWORD;
