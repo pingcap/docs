@@ -6,9 +6,9 @@ aliases: ['/tidbcloud/use-htap-cluster']
 
 # TiDB Cloud HTAP 快速入门 <!--Corresponding EN commit: 87b21d6d905ce9d293d57d0a80c1b9592ee932cb-->
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 指的是混合事务与分析处理。TiDB Cloud 中的 HTAP 架构由 [TiKV](https://tikv.org)（为事务处理设计的行存储引擎）和 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)（为分析处理设计的列式存储引擎）组成。你的应用数据首先存储在 TiKV 中，然后通过 Raft 共识算法实时同步到 TiFlash。因此，这是从行存储到列存储的实时复制。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 指的是混合事务与分析处理。TiDB Cloud 中的 HTAP 架构由 [TiKV](https://tikv.org)（为事务处理设计的行存储引擎）和 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)（为分析处理设计的列式存储引擎）组成。你的应用数据首先存储在 TiKV 中，然后通过 Raft 共识算法实时同步到 TiFlash。因此，这是从行存储到列存储的实时同步。
 
-本教程将引导你以简单的方式体验 TiDB Cloud 的混合事务与分析处理（HTAP）特性。内容包括如何将表复制到 TiFlash、如何使用 TiFlash 运行查询，以及如何体验性能提升。
+本教程将引导你以简单的方式体验 TiDB Cloud 的混合事务与分析处理（HTAP）特性。内容包括如何将表同步到 TiFlash、如何使用 TiFlash 运行查询，以及如何体验性能提升。
 
 ## 开始之前
 
@@ -31,11 +31,11 @@ aliases: ['/tidbcloud/use-htap-cluster']
 
 ## 操作步骤
 
-### 步骤 1. 将示例数据复制到列存储引擎
+### 步骤 1. 将示例数据同步到列存储引擎
 
-创建一个 {{{ .starter }}} 实例后，TiDB 默认不会将数据从 TiKV 复制到 TiFlash。要将目标表复制到 TiFlash，请使用 MySQL 客户端连接到你的 {{{ .starter }}} 实例并执行 DDL 语句。随后，TiDB 会在 TiFlash 中创建指定表的副本。
+创建一个 {{{ .starter }}} 实例后，TiDB 默认不会将数据从 TiKV 同步到 TiFlash。要将目标表同步到 TiFlash，请使用 MySQL 客户端连接到你的 {{{ .starter }}} 实例并执行 DDL 语句。随后，TiDB 会在 TiFlash 中创建指定表的副本。
 
-例如，要将（**Steam Games Dataset 2021-2025** 中的）`games` 表复制到 TiFlash，可以执行以下语句：
+例如，要将（**Steam Games Dataset 2021-2025** 中的）`games` 表同步到 TiFlash，可以执行以下语句：
 
 ```sql
 USE steam;
@@ -45,7 +45,7 @@ USE steam;
 ALTER TABLE games SET TIFLASH REPLICA 2;
 ```
 
-要检查复制进度，可以执行以下语句：
+要检查同步进度，可以执行以下语句：
 
 ```sql
 SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAILABLE, PROGRESS FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'steam' AND TABLE_NAME = 'games';
@@ -63,11 +63,11 @@ SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAIL
 在上述语句的结果中：
 
 - `AVAILABLE` 表示指定表的 TiFlash 副本是否可用。`1` 表示可用，`0` 表示不可用。一旦副本变为可用，该状态不会再变化。
-- `PROGRESS` 表示复制的进度。取值范围为 `0` 到 `1`。`1` 表示至少有一个副本已完成复制。
+- `PROGRESS` 表示同步的进度。取值范围为 `0` 到 `1`。`1` 表示至少有一个副本已完成同步。
 
 ### 步骤 2. 使用 HTAP 查询数据
 
-复制完成后，你可以运行查询。
+同步完成后，你可以运行查询。
 
 例如，你可以统计每年发布的游戏数量，以及平均价格和平均推荐数：
 
