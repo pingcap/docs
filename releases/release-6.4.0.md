@@ -51,17 +51,17 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
--   `FLASHBACK DATABASE` [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)を使用して削除されたデータベースの復元をサポートします
+-   `FLASHBACK DATABASE` を使用して削除されたデータベースの復元をサポートします [#20463](https://github.com/pingcap/tidb/issues/20463) @[erwadba](https://github.com/erwadba)
 
     `FLASHBACK DATABASE`を使用すると、 `DROP`によってガベージコレクション(GC) の有効期間内に削除されたデータベースとそのデータを復元できます。この機能は外部ツールに依存しません。SQL ステートメントを使用して、データとメタデータを迅速に復元できます。
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashは保存時の暗号化にSM4アルゴリズムをサポートしています [#5953](https://github.com/pingcap/tiflash/issues/5953) @[lidezhu](https://github.com/lidezhu)
 
-    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`構成ファイル内の`sm4-ctr` }}構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
+    TiFlashの保存時暗号化にSM4アルゴリズムを追加します。保存時暗号化を設定する際に、 `data-encryption-method`構成ファイル内の`sm4-ctr` 構成の値を`tiflash-learner.toml`暗号化機能を有効にできます。
 
     詳細については、[ユーザー向けドキュメント](/encryption-at-rest.md#tiflash)を参照してください。
 
@@ -153,7 +153,7 @@ TiDBバージョン: 6.4.0-DMR
     -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
     -   マルチテナントなどの機能をサポートするために、キースペースフィールドを予約してください。
 
-    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` }を設定します。
+    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` を設定します。
 
     詳細については、 [ユーザー向けドキュメント](/tikv-configuration-file.md#api-version-new-in-v610)を参照してください。
 
@@ -256,7 +256,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [DM 高度タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
--   DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) [okJiang](https://github.com/okJiang)
+-   DMが移行タスクのステータスインジケーターを追加 [#7343](https://github.com/pingcap/tiflow/issues/7343) @[okJiang](https://github.com/okJiang)
 
     バージョン6.4.0では、DMに移行タスクのパフォーマンスと進捗状況を示す指標がさらに追加され、移行のパフォーマンスと進捗状況をより直感的に把握できるようになり、トラブルシューティングの際の参考情報としても役立ちます。
 
@@ -268,7 +268,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
--   TiCDC は`3.2.0`バージョン [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)の Kafka へのデータのレプリケーションをサポートします。
+-   TiCDC は`3.2.0`バージョンの Kafka へのデータのレプリケーションをサポートします。 [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)
 
     v6.4.0 以降、TiCDC は`3.2.0`バージョン以前のデータを[データをKafkaに複製する](/replicate-data-to-kafka.md)をサポートします。
 
@@ -276,19 +276,19 @@ TiDBバージョン: 6.4.0-DMR
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                                 | 種類を変更する  | 説明                                                                                                                                                                                                                                  |
+| 変数名                                                                                                                                 | 変更の種類  | 説明                                                                                                                                                                                                                                  |
 | ----------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`max_execution_time`](/system-variables.md#max_execution_time)                                                                     | 修正済み     | バージョン6.4.0より前は、この変数はすべての種類のステートメントに適用されていました。バージョン6.4.0以降は、この変数は読み取り専用ステートメントの最大実行時間のみを制御します。                                                                                                                                       |
-| [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 修正済み     | グローバルスコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)設定項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクション内の一意制約をチェックするタイミングを制御します。 |
-| [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 修正済み     | バージョン6.4.0以降で有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行を制御します。デフォルト値は`64`です。                                                                                                |
-| [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 修正済み     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、主キーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                        |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサ要求を送信するためのページング方式がデフォルトで使用されることを意味します。                                                                                                                                                           |
-| [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                               | 修正済み     | SESSION スコープを追加します。この変数は[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを制御します。                                                                                                                                               |
-| [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)                                               | 修正済み     | デフォルト値を`0.8`から`0.7`に変更します。この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を制御します。                                                                                                                                                            |
-| [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)                                                             | 修正済み     | グローバルスコープを追加します。この変数は、オプティマイザが集計関数をJoin、Projection、およびUnionAllの前にプッシュダウンする最適化操作を実行するかどうかを制御します。                                                                                                                                     |
-| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                   | 修正済み     | SESSIONスコープを追加します。この変数は、セッション内でキャッシュできるプランの最大数を制御します。                                                                                                                                                                               |
-| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                           | 修正済み     | デフォルト値を`0`から`100`に変更します。これは、SQL 実行がデフォルトで最大 100 ミリ秒待機して、完全な列統計を同期的にロードできることを意味します。                                                                                                                                                  |
-| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)                                 | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、完全な列統計を同期的に読み込むタイムアウトに達した後、SQL 最適化が擬似統計を使用するように戻ることを意味します。                                                                                                                                             |
+| [`max_execution_time`](/system-variables.md#max_execution_time)                                                                     | 変更     | バージョン6.4.0より前は、この変数はすべての種類のステートメントに適用されていました。バージョン6.4.0以降は、この変数は読み取り専用ステートメントの最大実行時間のみを制御します。                                                                                                                                       |
+| [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 変更     | グローバルスコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)設定項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクション内の一意制約をチェックするタイミングを制御します。 |
+| [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 変更     | バージョン6.4.0以降で有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行を制御します。デフォルト値は`64`です。                                                                                                |
+| [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 変更     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、主キーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                        |
+| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサ要求を送信するためのページング方式がデフォルトで使用されることを意味します。                                                                                                                                                           |
+| [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                               | 変更     | SESSION スコープを追加します。この変数は[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを制御します。                                                                                                                                               |
+| [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)                                               | 変更     | デフォルト値を`0.8`から`0.7`に変更します。この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を制御します。                                                                                                                                                            |
+| [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)                                                             | 変更     | グローバルスコープを追加します。この変数は、オプティマイザが集計関数をJoin、Projection、およびUnionAllの前にプッシュダウンする最適化操作を実行するかどうかを制御します。                                                                                                                                     |
+| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                   | 変更     | SESSIONスコープを追加します。この変数は、セッション内でキャッシュできるプランの最大数を制御します。                                                                                                                                                                               |
+| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                           | 変更     | デフォルト値を`0`から`100`に変更します。これは、SQL 実行がデフォルトで最大 100 ミリ秒待機して、完全な列統計を同期的にロードできることを意味します。                                                                                                                                                  |
+| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)                                 | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、完全な列統計を同期的に読み込むタイムアウトに達した後、SQL 最適化が擬似統計を使用するように戻ることを意味します。                                                                                                                                             |
 | [`last_sql_use_alloc`](/system-variables.md#last_sql_use_alloc-new-in-v640)                                                         | 新しく追加された | 前のステートメントがキャッシュされたチャンク オブジェクト (チャンク割り当て) を使用しているかどうかを示します。この変数は読み取り専用で、デフォルト値は`OFF`です。                                                                                                                                              |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)                 | 新しく追加された | パーティションテーブルを分析するときに TiDB が一度に[自動的に分析します](/statistics.md#automatic-update)できるパーティションの数を指定します (つまり、パーティションテーブルに関する統計を自動的に収集します)。デフォルト値は`1`です。                                                                                         |
 | [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)                                     | 新しく追加された | TiDB が[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)で指定されたタイムスタンプを持つデータを読み取るかどうかを制御します。デフォルト値は`OFF`です。                                                                                                     |
@@ -306,7 +306,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                   | 種類を変更する  | 説明                                                                                                                                                                      |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                   | 変更の種類  | 説明                                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                                   | 削除済み     | この設定項目は無効になりました。                                                                                                                                                        |
 | TiDB           | `memory-usage-alarm-ratio`                                                                                                                        | 削除済み     | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられました。この設定項目が TiDB バージョン v6.4.0 より前のバージョンで設定されていた場合、アップグレード後には有効になりません。 |
@@ -318,11 +318,11 @@ TiDBバージョン: 6.4.0-DMR
 | TiKV           | [`causal-ts.renew-batch-max-size`](/tikv-configuration-file.md#renew-batch-max-size-new-in-v640)                                                  | 新しく追加された | タイムスタンプ要求におけるTSOの最大数を制御します。デフォルト値は`8192`です。                                                                                                                             |
 | TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
 | PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                          | 新しく追加された | バージョン6.4.0以降で有効になり、PDがTSOの物理時刻を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                            |
-| TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                              | 修正済み     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                     |
+| TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                              | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                     |
 | DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                              | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたテーブルのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
 | DM             | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたスキーマのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
 | DM             | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、ソースインスタンス情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。             |
-| TiCDC          | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)                                                     | 修正済み     | デフォルト値を`table`から`none`に変更します。この変更により、レプリケーションのレイテンシーとメモリ不足（OOM）のリスクが軽減されます。さらに、TiCDC はすべてのトランザクションを分割するのではなく、一部のトランザクション（単一のトランザクションのサイズが 1024 行を超える場合）のみを分割するようになります。  |
+| TiCDC          | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)                                                     | 変更     | デフォルト値を`table`から`none`に変更します。この変更により、レプリケーションのレイテンシーとメモリ不足（OOM）のリスクが軽減されます。さらに、TiCDC はすべてのトランザクションを分割するのではなく、一部のトランザクション（単一のトランザクションのサイズが 1024 行を超える場合）のみを分割するようになります。  |
 
 ### その他 {#others}
 
@@ -342,7 +342,7 @@ TiDBバージョン: 6.4.0-DMR
 
     -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size` -0-PLACEHOLDER-E}}を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     -   リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
-    -   `json_constrains`演算子をコプロセッサー [#13592](https://github.com/tikv/tikv/issues/13592)にプッシュダウンするサポート @[lizhenhuan](https://github.com/lizhenhuan)
+    -   `json_constrains`演算子をコプロセッサーにプッシュダウンするサポート [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
     -   `CausalTsProvider`に非同期関数を追加して、一部のシナリオでのフラッシュパフォーマンスを改善します [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)
 
 -   PD
@@ -350,11 +350,11 @@ TiDBバージョン: 6.4.0-DMR
     -   ホットリージョンスケジューラのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
     -   早期のタイムアウトを回避するためにオペレーター ステップのタイムアウト メカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
     -   大規模クラスターでのスケジューラーのパフォーマンスを向上 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
-    -   PD [#5637](https://github.com/tikv/pd/issues/5637)で提供されていない外部タイムスタンプの使用をサポートする @[lhy1024](https://github.com/lhy1024)
+    -   PD で提供されていない外部タイムスタンプの使用をサポートする [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)
 
 -   TiFlash
 
-    -   MPP [#5095](https://github.com/pingcap/tiflash/issues/5095) @[windtalker](https://github.com/windtalker)の安定性をさらに向上させるために、 TiFlash MPP エラー処理ロジックをリファクタリングします。
+    -   TiFlash MPP エラー処理ロジックをリファクタリングして、MPP の安定性をさらに向上させます。 [#5095](https://github.com/pingcap/tiflash/issues/5095) @[windtalker](https://github.com/windtalker)
     -   TiFlash計算プロセスのソートを最適化し、Joinと集計のキー処理を最適化します [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
     -   デコード時のメモリ使用量を最適化し、冗長な転送列を削除して結合パフォーマンスを向上させる [#6157](https://github.com/pingcap/tiflash/issues/6157) @[yibin87](https://github.com/yibin87)
 
@@ -392,7 +392,7 @@ TiDBバージョン: 6.4.0-DMR
 -   TiDB
 
     -   新しいインデックスを作成した後に発生する可能性のあるインデックスの不整合の問題を修正します [#38165](https://github.com/pingcap/tidb/issues/38165) @[tangenta](https://github.com/tangenta)
-    -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブル [#38407](https://github.com/pingcap/tidb/issues/38407)の権限の問題を修正しました @[CbcWestwolf](https://github.com/CbcWestwolf)
+    -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルの権限の問題を修正しました [#38407](https://github.com/pingcap/tidb/issues/38407) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `grantor`テーブルに`mysql.tables_priv`フィールドが欠落している問題を修正します [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   共通テーブル式の結合結果が間違っている可能性がある問題を修正 [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     -   共通テーブル式の和集合の結果が間違っている可能性がある問題を修正 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
@@ -401,13 +401,13 @@ TiDBバージョン: 6.4.0-DMR
     -   クエリ内の条件が誤ってプロジェクションにプッシュダウンされる問題を修正 [#35623](https://github.com/pingcap/tidb/issues/35623) @[Reminiscent](https://github.com/Reminiscent)
     -   `isNullRejected`および`OR` `AND`のチェック結果が間違っていたためにクエリ結果が間違っていた問題を修正しました [#38304](https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
     -   外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    -   結合したテーブルの再配置 [#38736](https://github.com/pingcap/tidb/issues/38736)により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。@[winoros](https://github.com/winoros)
+    -   結合したテーブルの再配置により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
 
 -   TiKV
 
     -   複数の`cgroup`および`mountinfo`が存在する場合に Gitpod で TiDB が起動に失敗する問題を修正 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
     -   TiKV メトリクスの間違った式を修正`tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)
-    -   異常な`delete_files_in_range` [#13534](https://github.com/tikv/tikv/issues/13534)によって引き起こされたパフォーマンスの問題を修正します @[tabokie](https://github.com/tabokie)
+    -   異常な`delete_files_in_range` によって引き起こされたパフォーマンスの問題を修正します [#13534](https://github.com/tikv/tikv/issues/13534) @[tabokie](https://github.com/tabokie)
     -   スナップショット取得中のリース期限切れによって引き起こされる異常なリージョン競合を修正 [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   `FLASHBACK`最初のバッチで失敗したときに発生したエラーを修正します[#13672](https://github.com/tikv/tikv/issues/13672) [#13704](https://github.com/tikv/tikv/issues/13704) [#13723](https://github.com/tikv/tikv/issues/13723) @[HuSharp](https://github.com/HuSharp)
 
@@ -464,24 +464,24 @@ TiDBバージョン: 6.4.0-DMR
         -   多数のテーブルをエクスポートする際にDumpling がタイムアウトする可能性がある問題を修正しました [#36549](https://github.com/pingcap/tidb/issues/36549) @[lance6716](https://github.com/lance6716)
         -   整合性ロックが有効になっているが、アップストリームにターゲットテーブルがない場合に報告されるロックエラーを修正 [#38683](https://github.com/pingcap/tidb/issues/38683) @[lance6716](https://github.com/lance6716)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
 -   [645775992](https://github.com/645775992)
--   [アン・DJ](https://github.com/An-DJ)
--   [アンドリューディ](https://github.com/AndrewDi)
--   [エルワドバ](https://github.com/erwadba)
--   [ふざ1989](https://github.com/fuzhe1989)
--   [ゴールドウィンドティング](https://github.com/goldwind-ting)(初投稿者)
+-   [An-DJ](https://github.com/An-DJ)
+-   [AndrewDi](https://github.com/AndrewDi)
+-   [erwadba](https://github.com/erwadba)
+-   [fuzhe1989](https://github.com/fuzhe1989)
+-   [goldwind-ting](https://github.com/goldwind-ting) (初回貢献者)
 -   [h3n4l](https://github.com/h3n4l)
--   [igxlin](https://github.com/igxlin) （初投稿者）
+-   [igxlin](https://github.com/igxlin) (初回貢献者)
 -   [ihcsim](https://github.com/ihcsim)
--   [ジガオルオ](https://github.com/JigaoLuo)
--   [モルゴ](https://github.com/morgo)
--   [ランクシー](https://github.com/Ranxy)
--   [シェンキデバオジ](https://github.com/shenqidebaozi)(初投稿者)
--   [桃峰流](https://github.com/taofengliu)(初投稿者)
+-   [JigaoLuo](https://github.com/JigaoLuo)
+-   [morgo](https://github.com/morgo)
+-   [Ranxy](https://github.com/Ranxy)
+-   [shenqidebaozi](https://github.com/shenqidebaozi) (初回貢献者)
+-   [taofengliu](https://github.com/taofengliu) (初回貢献者)
 -   [TszKitLo40](https://github.com/TszKitLo40)
--   [wxbty](https://github.com/wxbty) （初投稿者）
+-   [wxbty](https://github.com/wxbty) (初回貢献者)
 -   [zgcbj](https://github.com/zgcbj)

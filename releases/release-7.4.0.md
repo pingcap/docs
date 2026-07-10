@@ -237,7 +237,7 @@ TiDB バージョン: 7.4.0
 >
 > このセクションでは、v7.3.0から最新バージョン（v7.4.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v7.2.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   v7.4.0 以降、TiDB は MySQL 8.0 の必須機能と互換性があり、 `version()` `8.0.11`で始まるバージョンを返します。
 
@@ -254,7 +254,7 @@ TiDB バージョン: 7.4.0
 | 変数名                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tidb_enable_tiflash_pipeline_model`                                                                    | 削除済み     | この変数は、 TiFlashパイプライン実行モデルを有効にするかどうかを制御するために使用されます。v7.4.0以降では、 TiFlashリソース制御機能を有効にすると、 TiFlashパイプライン実行モデルも自動的に有効になります。                                                                                                                                                                                                                          |
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)       | 修正済み     | さらにテストを行った後、デフォルト値を`ON`から`OFF`に変更します。これは、準備されていない実行プラン キャッシュが無効であることを意味します。                                                                                                                                                                                                                                                                    |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)       | 変更     | さらにテストを行った後、デフォルト値を`ON`から`OFF`に変更します。これは、準備されていない実行プラン キャッシュが無効であることを意味します。                                                                                                                                                                                                                                                                    |
 | [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740)       | 新しく追加された | `utf8mb4`文字セットのデフォルトの照合順序を制御します。デフォルト値は`utf8mb4_bin`です。                                                                                                                                                                                                                                                                                        |
 | [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)                     | 新しく追加された | 有効にするクラウドストレージURI を指定します[グローバルソート](/tidb-global-sort.md) 。                                                                                                                                                                                                                                                                                   |
 | [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) | 新しく追加された | オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御します。デフォルトの値は`ON`です。3 に`OFF`すると、他に利用可能な実行プランがない限り、オプティマイザはテーブルのハッシュ結合を選択しません。                                                                                                                                                                                                                                 |
@@ -271,17 +271,17 @@ TiDB バージョン: 7.4.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                         | タイプを変更   | 説明                                                                                                                                                                      |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 修正済み     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 修正済み     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 修正済み     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
+| TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 変更     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 変更     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
+| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 変更     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
 | TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステート マシンによって進められた`applied_index`と最後のディスク スピル時の`applied_index`の差が`compact_log_min_gap`超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                        |
-| TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 修正済み     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
-| TiFlash        | [`task_scheduler_active_set_soft_limit`](/tiflash/tiflash-configuration.md#task_scheduler_active_set_soft_limit-new-in-v640)            | 修正済み     | デフォルト値を`vcpu * 0.25`から`vcpu * 2`に変更します。                                                                                                                                 |
+| TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 変更     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
+| TiFlash        | [`task_scheduler_active_set_soft_limit`](/tiflash/tiflash-configuration.md#task_scheduler_active_set_soft_limit-new-in-v640)            | 変更     | デフォルト値を`vcpu * 0.25`から`vcpu * 2`に変更します。                                                                                                                                 |
 | Dumpling       | [`--csv-line-terminator`](/dumpling-overview.md#option-list-of-dumpling)                                                                | 新しく追加された | CSVファイルの終端文字を指定します。このオプションは`"\r\n"`と`"\n"`サポートします。デフォルト値は`"\r\n"`で、以前のバージョンと同じです。                                                                                       |
 | TiCDC          | [`claim-check-storage-uri`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)                                      | 新しく追加された | `large-message-handle-option` `claim-check`に設定する場合、 `claim-check-storage-uri`有効な外部ストレージアドレスに設定する必要があります。そうでない場合、チェンジフィードの作成時にエラーが発生します。                               |
 | TiCDC          | [`large-message-handle-compression`](/ticdc/ticdc-sink-to-kafka.md#ticdc-data-compression)                                              | 新しく追加された | エンコード中に圧縮を有効にするかどうかを制御します。デフォルト値は空で、無効を意味します。                                                                                                                           |
-| TiCDC          | [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)                                  | 修正済み     | この設定項目は新しい値`claim-check`を追加します。これを`claim-check`に設定すると、TiCDC Kafka シンクは、メッセージサイズが制限を超えた場合にメッセージを外部ストレージに送信することをサポートし、外部ストレージ内のこの大きなメッセージのアドレスを含むメッセージを Kafka に送信します。 |
+| TiCDC          | [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)                                  | 変更     | この設定項目は新しい値`claim-check`を追加します。これを`claim-check`に設定すると、TiCDC Kafka シンクは、メッセージサイズが制限を超えた場合にメッセージを外部ストレージに送信することをサポートし、外部ストレージ内のこの大きなメッセージのアドレスを含むメッセージを Kafka に送信します。 |
 
 ## 廃止および削除された機能 {#deprecated-and-removed-features}
 
@@ -440,23 +440,23 @@ TiDB バージョン: 7.4.0
         -   `checksum = "optional"` [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)のときにチェックサムがエラーを報告する問題を修正しました
         -   PDクラスタアドレスが[＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)に変更されるとデータのインポートが失敗する問題を修正しました
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティからの以下の貢献者に感謝いたします。
 
--   [あいでんどう](https://github.com/aidendou)
--   [コーダープレイ](https://github.com/coderplay)
--   [運命](https://github.com/fatelei)
--   [ハイポン](https://github.com/highpon)
--   [ヒヒフフ](https://github.com/hihihuhu) (初回投稿者)
--   [イザベラ0428](https://github.com/isabella0428)
--   [ジフハウス](https://github.com/jiyfhust)
--   [JK1張](https://github.com/JK1Zhang)
--   [ジョーカー53-1](https://github.com/joker53-1) (初回投稿者)
--   [L-メープル](https://github.com/L-maple)
--   [ミッタルリシャブ](https://github.com/mittalrishabh)
--   [舗装](https://github.com/paveyry)
--   [ショーン0915](https://github.com/shawn0915)
--   [テデュ](https://github.com/tedyu)
--   [ヤムチナ](https://github.com/yumchina)
+-   [aidendou](https://github.com/aidendou)
+-   [coderplay](https://github.com/coderplay)
+-   [fatelei](https://github.com/fatelei)
+-   [highpon](https://github.com/highpon)
+-   [hihihuhu](https://github.com/hihihuhu) (初回貢献者)
+-   [isabella0428](https://github.com/isabella0428)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [JK1Zhang](https://github.com/JK1Zhang)
+-   [joker53-1](https://github.com/joker53-1) (初回貢献者)
+-   [L-maple](https://github.com/L-maple)
+-   [mittalrishabh](https://github.com/mittalrishabh)
+-   [paveyry](https://github.com/paveyry)
+-   [shawn0915](https://github.com/shawn0915)
+-   [tedyu](https://github.com/tedyu)
+-   [yumchina](https://github.com/yumchina)
 -   [ZzzhHe](https://github.com/ZzzhHe)

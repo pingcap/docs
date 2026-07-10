@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.3
 
 ## 互換性の変更 {#compatibility-changes}
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
@@ -48,7 +48,7 @@ TiDB バージョン: 6.5.3
         -   DDL レプリケーション操作を最適化して、DDL 操作による下流レイテンシー[＃8686](https://github.com/pingcap/tiflow/issues/8686) @ [Rustin170506](https://github.com/Rustin170506)への影響を軽減します。
         -   TiCDC レプリケーションタスクが失敗したときにアップストリームの GC TLS を設定する方法を最適化します[＃8403](https://github.com/pingcap/tiflow/issues/8403) @ [charleszheng44](https://github.com/charleszheng44)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   テーブル情報の取得方法を最適化し、 Drainer [＃1137](https://github.com/pingcap/tidb-binlog/issues/1137) @ [lichunzhu](https://github.com/lichunzhu)の初期化時間とメモリ使用量を削減します。
 
@@ -134,6 +134,6 @@ TiDB バージョン: 6.5.3
         -   データファイル[＃40400](https://github.com/pingcap/tidb/issues/40400) @ [buchuitoudegou](https://github.com/buchuitoudegou)に閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正しました。
         -   データのインポート中にエラーが発生した場合に再試行メカニズム[＃43291](https://github.com/pingcap/tidb/issues/43291) `unknown RPC` [D3ハンター](https://github.com/D3Hunter)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   TiDB Binlogが`CANCELED` DDL文[＃1228](https://github.com/pingcap/tidb-binlog/issues/1228) @ [okJiang](https://github.com/okJiang)に遭遇したときにエラーを報告する問題を修正しました

@@ -86,7 +86,7 @@ TiDB バージョン: 7.5.1
 
 -   TiDB
 
-    -   システム変数`tidb_service_scope`設定が[＃49245](https://github.com/pingcap/tidb/issues/49245)で[ywqzzy](https://github.com/ywqzzy)に反映されない問題を修正
+    -   システム変数`tidb_service_scope`設定が[＃49245](https://github.com/pingcap/tidb/issues/49245)で@[ywqzzy](https://github.com/ywqzzy)に反映されない問題を修正
     -   圧縮が有効になっている場合、通信プロトコルが16 MB以上のパケットを処理できない問題を修正[＃47157](https://github.com/pingcap/tidb/issues/47157) [＃47161](https://github.com/pingcap/tidb/issues/47161) @ [dveeden](https://github.com/dveeden)
     -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
     -   文字列関数の引数が`NULL`定数の場合に TiDB が暗黙的に`from_binary`関数を挿入し、一部の式がTiFlash [＃49526](https://github.com/pingcap/tidb/issues/49526) @ [YangKeao](https://github.com/YangKeao)にプッシュダウンできない問題を修正しました。

@@ -64,13 +64,13 @@ TiDB Ansible バージョン: 3.0.3
 
 ## ツール {#tools}
 
--   TiDBBinlog
+-   TiDB Binlog
     -   Drainerの起動時にOOMが発生する可能性を減らすため、 Drainerのデフォルト値`defaultBinlogItemCount`を65536から512に変更しました[＃721](https://github.com/pingcap/tidb-binlog/pull/721)
     -   Pumpサーバーのオフラインロジックを最適化して、潜在的なオフライン輻輳を回避します[＃701](https://github.com/pingcap/tidb-binlog/pull/701)
 -   TiDB Lightning:
     -   [＃225](https://github.com/pingcap/tidb-lightning/pull/225)インポートするときに、デフォルトでシステムデータベース`mysql` `performance_schema`スキップ`sys`ます`information_schema`
 
-## TiDB アンシブル {#tidb-ansible}
+## TiDB Ansible {#tidb-ansible}
 
 -   ローリングアップデートのPD操作を最適化して安定性を向上[＃894](https://github.com/pingcap/tidb-ansible/pull/894)
 -   現在のGrafanaバージョン[＃892](https://github.com/pingcap/tidb-ansible/pull/892)でサポートされていないGrafana Collectorコンポーネントを削除します。

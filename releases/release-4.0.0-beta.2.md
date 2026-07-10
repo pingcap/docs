@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 ## 互換性の変更 {#compatibility-changes}
 
 -   ツール
-    -   TiDBBinlog
+    -   TiDB Binlog
         -   Drainer [＃915](https://github.com/pingcap/tidb-binlog/pull/915)で`disable-dispatch`と`disable-causality`設定されている場合、システムがエラーを返して終了する問題を修正しました
 
 ## 新機能 {#new-features}
@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     -   動的に更新された構成をハードウェアディスク[＃2153](https://github.com/pingcap/pd/pull/2153)に永続化することをサポート
 
 -   ツール
-    -   TiDBBinlog
+    -   TiDB Binlog
         -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
     -   TiDB Lightning
         -   TLS構成[＃40](https://github.com/tikv/importer/pull/40) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)をサポートする
@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     -   Backup & Restore (BR)
         -   増分バックアップやAmazon S3へのファイルのバックアップなどの実験的機能を有効にする[＃175](https://github.com/pingcap/br/pull/175)
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   etcd [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の注入をサポート
     -   ARM プラットフォーム[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)への TiDB サービスの導入をサポート
 

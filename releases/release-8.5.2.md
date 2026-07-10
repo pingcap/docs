@@ -71,7 +71,7 @@ TiDBバージョン：8.5.2
 
 -   TiKV
 
-    -   `txn_status_cache` [#18384](https://github.com/tikv/tikv/issues/18384)でデッドロックが発生する可能性がある問題を修正しました @[ekexium](https://github.com/ekexium)
+    -   `txn_status_cache` でデッドロックが発生する可能性がある問題を修正しました [#18384](https://github.com/tikv/tikv/issues/18384) @[ekexium](https://github.com/ekexium)
     -   Resolved-TS の監視とログが異常になる可能性がある問題を修正 [#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
     -   リージョンマージによってRaftインデックスの不一致が原因でTiKVが異常終了する可能性がある問題を修正 [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
     -   ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正 [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)

@@ -86,7 +86,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
     v7.5.0 より前の DM Binlog Filter 機能は、指定されたイベントを移行またはフィルタリングすることしかできず、粒度が比較的粗いものでした。たとえば、 `ALTER`のような DDL イベントの大きな粒度しかフィルタリングできませんでした。この方法は、いくつかのシナリオで制限がありました。たとえば、アプリケーションは`ADD COLUMN`は許可しますが、 `DROP COLUMN`許可しませんが、以前の DM バージョンでは両方とも`ALTER`イベントでフィルタリングされていました。
 
-    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` } などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーション データへの影響を回避するために、タイムリーに手動で介入できます。
+    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーション データへの影響を回避するために、タイムリーに手動で介入できます。
 
     詳細については、 [ドキュメント](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。
 
@@ -106,12 +106,12 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                               | 種類を変更する  | 説明                                                                                    |
+| 変数名                                                                                                               | 変更の種類  | 説明                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
 | [`tidb_enable_fast_analyze`](/system-variables.md#tidb_enable_fast_analyze)                                       | 非推奨      | 統計情報`Fast Analyze`機能を有効にするかどうかを制御します。この機能はバージョン 7.5.0 で非推奨になりました。                     |
-| [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)                   | 修正済み     | さらなるテストの結果、デフォルト値を`1`から`2`に変更します。                                                     |
-| [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)                               | 修正済み     | さらなるテストの結果、デフォルト値を`4`から`2`に変更します。                                                     |
-| [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)           | 修正済み     | このシステム変数はv7.5.0から有効になります。TiDBがパーティションテーブルを分析する際に、パーティションテーブルの統計情報をマージする際の同時実行数を指定します。 |
+| [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)                   | 変更     | さらなるテストの結果、デフォルト値を`1`から`2`に変更します。                                                     |
+| [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)                               | 変更     | さらなるテストの結果、デフォルト値を`4`から`2`に変更します。                                                     |
+| [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)           | 変更     | このシステム変数はv7.5.0から有効になります。TiDBがパーティションテーブルを分析する際に、パーティションテーブルの統計情報をマージする際の同時実行数を指定します。 |
 | [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) | 新しく追加された | `ANALYZE`プロセスのサンプリング同時実行性を制御します。                                                      |
 | [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750)   | 新しく追加された | この変数は、TiDBが統計情報を非同期的にマージしてメモリ不足の問題を回避するために使用されます。                                     |
 | [`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750)                         | 新しく追加された | GOGCチューナーが調整できるGOGCの最大値を制御します。                                                        |
@@ -119,18 +119,18 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                    | 種類を変更する  | 説明                                                                                                                                      |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                    | 変更の種類  | 説明                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサー要求のタイムアウトを設定します。                                                                                                              |
-| TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 修正済み     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
-| TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                           |
-| TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 修正済み     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                          |
+| TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 変更     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
+| TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 変更     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                           |
+| TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 変更     | RocksDB の圧縮をトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                          |
 | TiKV           | [`raftstore.evict-cache-on-memory-ratio`](/tikv-configuration-file.md#evict-cache-on-memory-ratio-new-in-v750)                     | 新しく追加された | TiKV のメモリ使用量がシステムで使用可能なメモリの 90% を超え、Raftエントリ キャッシュによって占有されているメモリが使用済みメモリの`evict-cache-on-memory-ratio`を超えると、TiKV はRaftエントリ キャッシュを削除します。 |
 | TiKV           | [`memory.enable-heap-profiling`](/tikv-configuration-file.md#enable-heap-profiling-new-in-v750)                                    | 新しく追加された | TiKVのメモリ使用量を追跡するためにヒーププロファイリングを有効にするかどうかを制御します。                                                                                         |
 | TiKV           | [`memory.profiling-sample-per-bytes`](/tikv-configuration-file.md#profiling-sample-per-bytes-new-in-v750)                          | 新しく追加された | ヒーププロファイリングによって毎回サンプリングされるデータ量を指定します。値は2のべき乗に切り上げられます。                                                                                  |
 | BR             | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics)                                                                   | 新しく追加された | データベース統計情報のバックアップと復元を行うかどうかを制御します。このパラメーター`false`に設定すると、br コマンドラインツールは列、インデックス、およびテーブルの統計情報のバックアップと復元をサポートします。                          |
-| TiCDC          | [`case-sensitive`](/ticdc/ticdc-changefeed-config.md)                                                                              | 修正済み     | さらなるテストの結果、デフォルト値が`true`から`false`に変更されました。これは、TiCDC 構成ファイル内のテーブル名とデータベース名がデフォルトで大文字と小文字を区別しないことを意味します。                                  |
-| TiCDC          | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md)                                                                  | 修正済み     | TiCDC が増分データを Kafka パーティションにディスパッチする方法を制御します。v7.5.0 では、明示的に指定された列の値を使用してパーティション番号を計算する新しい値オプション`columns`が導入されました。                       |
+| TiCDC          | [`case-sensitive`](/ticdc/ticdc-changefeed-config.md)                                                                              | 変更     | さらなるテストの結果、デフォルト値が`true`から`false`に変更されました。これは、TiCDC 構成ファイル内のテーブル名とデータベース名がデフォルトで大文字と小文字を区別しないことを意味します。                                  |
+| TiCDC          | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md)                                                                  | 変更     | TiCDC が増分データを Kafka パーティションにディスパッチする方法を制御します。v7.5.0 では、明示的に指定された列の値を使用してパーティション番号を計算する新しい値オプション`columns`が導入されました。                       |
 | TiCDC          | [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md)                                                             | 新しく追加された | 内部エラーや例外が発生した場合に、チェンジフィードが自動的に再試行する期間を制御します。                                                                                            |
 | TiCDC          | [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)                                                                         | 新しく追加された | リドゥモジュール内のエンコードワーカーとデコードワーカーの数を制御します。                                                                                                   |
 | TiCDC          | [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md)                                                                            | 新しく追加された | リドゥモジュール内のフラッシュワーカーの数を制御します。                                                                                                            |
@@ -153,7 +153,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 -   TiKV インポーターは v7.5.0 で非推奨になりました。代わりに[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用することを強くお勧めします。
 
--   TiDB v7.5.0以降、 [TiDBBinlog](https://docs.pingcap.com/tidb/v7.5/tidb-binlog-overview)のデータレプリケーション機能に関する技術サポートは提供されなくなりました。データレプリケーションの代替ソリューションとして[TiCDC](/ticdc/ticdc-overview.md)を使用することを強くお勧めします。TiDB Binlog v7.5.0は引き続きポイントインタイムリカバリ（PITR）シナリオをサポートしていますが、このコンポーネントは将来のバージョンで完全に非推奨となります。データリカバリの代替ソリューションとして[PITR](/br/br-pitr-guide.md)使用することをお勧めします。
+-   TiDB v7.5.0以降、 [TiDB Binlog](https://docs.pingcap.com/tidb/v7.5/tidb-binlog-overview)のデータレプリケーション機能に関する技術サポートは提供されなくなりました。データレプリケーションの代替ソリューションとして[TiCDC](/ticdc/ticdc-overview.md)を使用することを強くお勧めします。TiDB Binlog v7.5.0は引き続きポイントインタイムリカバリ（PITR）シナリオをサポートしていますが、このコンポーネントは将来のバージョンで完全に非推奨となります。データリカバリの代替ソリューションとして[PITR](/br/br-pitr-guide.md)使用することをお勧めします。
 
 -   統計情報用の[`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze)機能（実験的）は、バージョン7.5.0で非推奨となりました。
 
@@ -192,7 +192,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   Sort オペレーターがスピル プロセス中に TiDB をクラッシュさせる可能性がある問題を修正 [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
     -   TiDB が`Can't find column`を使用したクエリに対して`GROUP_CONCAT`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
     -   `batch-client`の`client-go`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
-    -   `INDEX_LOOKUP_HASH_JOIN` [#47788](https://github.com/pingcap/tidb/issues/47788)のメモリ使用量推定の誤りを修正[シーライズ](https://github.com/SeaRise)
+    -   `INDEX_LOOKUP_HASH_JOIN` のメモリ使用量推定の誤りを修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     -   長期間オフラインだったTiFlashノードの再参加によって生じる不均一なワークロードの問題を修正 [#35418](https://github.com/pingcap/tidb/issues/35418) @[windtalker](https://github.com/windtalker)
     -   HashJoin オペレーターがプローブを実行する際にチャンクを再利用できない問題を修正します [#48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
     -   `COALESCE()`関数が`DATE`型のパラメータに対して誤った結果型を返す問題を修正しました [#46475](https://github.com/pingcap/tidb/issues/46475) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -247,9 +247,9 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 TiDB v7.5.0 のパフォーマンスについては、 [TPC-C性能試験報告書](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-tpcc)とTiDB Cloud Dedicatedクラスターの[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.5.0-performance-benchmarking-with-sysbench)を参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [jgrande](https://github.com/jgrande) （初投稿者）
+-   [jgrande](https://github.com/jgrande) (初回貢献者)
 -   [shawn0915](https://github.com/shawn0915)

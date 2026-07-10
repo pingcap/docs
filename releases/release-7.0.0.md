@@ -45,7 +45,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
--   TiFlash はFastScan (GA) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)の使用をサポートしています
+-   TiFlash は FastScan (GA) の使用をサポートしています [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
     TiFlash はv6.3.0 から FastScan を実験的機能として導入しました。v7.0.0 では、この機能が一般利用可能になります。FastScan はシステム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して有効にできます。この機能は、強力な一貫性を犠牲にすることで、テーブルスキャンのパフォーマンスを大幅に向上させます。対応するテーブルが`INSERT` / { `UPDATE`操作を含まず、 `DELETE`操作のみを含む場合、FastScan は強力な一貫性を維持し、スキャンのパフォーマンスを向上させることができます。
 
@@ -267,9 +267,9 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/partitioned-table.md#key-partitioning)を参照してください。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
--   TiCDC は、Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)の`FLOAT`データの不正なエンコードの問題を修正しました
+-   TiCDC は、Avro の `FLOAT` データの不正なエンコードの問題を修正しました [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)
 
     TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを`None`に手動で調整する必要があります。そうしないと、changefeed がスキーマを正常に更新できなくなります。そうしないと、アップグレード後に changefeed がスキーマを更新できず、エラー状態になります。
 
@@ -277,14 +277,14 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                               | 種類を変更する  | 説明                                                                                                                                                                                         |
+| 変数名                                                                                                                               | 変更の種類  | 説明                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_pessimistic_txn_aggressive_locking`                                                                                         | 削除済み     | この変数は[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)に名前が変更されました。                                                                 |
-| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)                                 | 修正済み     | v7.0.0 から有効になり、[準備されていないプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                      |
-| [`tidb_enable_null_aware_anti_join`](/system-variables.md#tidb_enable_null_aware_anti_join-new-in-v630)                           | 修正済み     | さらなるテストの後、デフォルト値を`OFF`から`ON`に変更します。これは、特別なセット演算子`NOT IN`および`!= ALL`によってリードされるサブクエリによって Anti Join が生成される場合に、TiDB がデフォルトで Null-Aware Hash Join を適用することを意味します。                                |
-| [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)                                   | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、クラスターがデフォルトでリソースグループごとにリソースを分離することを意味します。リソース制御は v7.0.0 でデフォルトで有効になっているため、いつでもこの機能を使用できます。                                                                    |
-| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                     | 修正済み     | v7.0.0 から有効になり、[準備されていないプランキャッシュ](/sql-non-prepared-plan-cache.md)によってキャッシュできる実行プランの最大数を制御します。                                                                                             |
-| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                 | 修正済み     | バージョン7.0.0以降、この変数はプリペアドステートメントプロトコルにおけるカーソルフェッチ読み取りには有効ではなくなりました。                                                                                                                          |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)                                 | 変更     | v7.0.0 から有効になり、[準備されていないプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                      |
+| [`tidb_enable_null_aware_anti_join`](/system-variables.md#tidb_enable_null_aware_anti_join-new-in-v630)                           | 変更     | さらなるテストの後、デフォルト値を`OFF`から`ON`に変更します。これは、特別なセット演算子`NOT IN`および`!= ALL`によってリードされるサブクエリによって Anti Join が生成される場合に、TiDB がデフォルトで Null-Aware Hash Join を適用することを意味します。                                |
+| [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)                                   | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、クラスターがデフォルトでリソースグループごとにリソースを分離することを意味します。リソース制御は v7.0.0 でデフォルトで有効になっているため、いつでもこの機能を使用できます。                                                                    |
+| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                     | 変更     | v7.0.0 から有効になり、[準備されていないプランキャッシュ](/sql-non-prepared-plan-cache.md)によってキャッシュできる実行プランの最大数を制御します。                                                                                             |
+| [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                 | 変更     | バージョン7.0.0以降、この変数はプリペアドステートメントプロトコルにおけるカーソルフェッチ読み取りには有効ではなくなりました。                                                                                                                          |
 | [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)           | 新しく追加された | この変数は、内部テーブルに`Selection`または`Projection`演算子がある場合に、インデックス結合がサポートされるかどうかを制御します。                                                                                                               |
 | [`tidb_enable_plan_cache_for_subquery`](/system-variables.md#tidb_enable_plan_cache_for_subquery-new-in-v700)                     | 新しく追加された | この変数は、プリペアドプランキャッシュがサブクエリを含むクエリをキャッシュするかどうかを制御します。                                                                                                                                         |
 | [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)   | 新しく追加された | この変数は、 [`PLAN REPLAYER CONTINUOUS CAPTURE`](/sql-plan-replayer.md#use-plan-replayer-continuous-capture)機能を有効にするかどうかを制御します。デフォルト値の`OFF`は、この機能を無効にすることを意味します。                                |
@@ -299,12 +299,12 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                      | 種類を変更する  | 説明                                                                                                                                                                                                                                                                        |
+| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                      | 変更の種類  | 説明                                                                                                                                                                                                                                                                        |
 | -------------- | ---------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiKV           | `server.snap-max-write-bytes-per-sec`                                                                | 削除済み     | このパラメータは[`server.snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)に名前が変更されました。                                                                                                                                                           |
-| TiKV           | [`raft-engine.enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)       | 修正済み     | デフォルト値が`false`から`true`に変更されます。                                                                                                                                                                                                                                            |
-| TiKV           | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                 | 修正済み     | デフォルト値が`"1s"`から`"20s"`に変更されます。この変更により、Resolved TSの定期的な更新間隔が長くなり、TiKVノード間のトラフィック消費量が削減されます。                                                                                                                                                                                |
-| TiKV           | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)                           | 修正済み     | デフォルト値が`false`から`true`に変更されます。                                                                                                                                                                                                                                            |
+| TiKV           | [`raft-engine.enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)       | 変更     | デフォルト値が`false`から`true`に変更されます。                                                                                                                                                                                                                                            |
+| TiKV           | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                 | 変更     | デフォルト値が`"1s"`から`"20s"`に変更されます。この変更により、Resolved TSの定期的な更新間隔が長くなり、TiKVノード間のトラフィック消費量が削減されます。                                                                                                                                                                                |
+| TiKV           | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)                           | 変更     | デフォルト値が`false`から`true`に変更されます。                                                                                                                                                                                                                                            |
 | TiKV           | [`raft-engine.prefill-for-recycle`](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700)     | 新しく追加された | Raft Engineのログリサイクル用に空のログファイルを生成するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                                                            |
 | PD             | [`degraded-mode-wait-duration`](/pd-configuration-file.md#degraded-mode-wait-duration)               | 新しく追加された | [リソース制御](/tidb-resource-control-ru-groups.md)関連する設定項目です。劣化モードをトリガーするまでの待機時間を制御します。デフォルト値は`0s`です。                                                                                                                                                                          |
 | PD             | [`read-base-cost`](/pd-configuration-file.md#read-base-cost)                                         | 新しく追加された | A[リソース制御](/tidb-resource-control-ru-groups.md)関連する設定項目です。読み取り要求から RU への変換の基準係数を制御します。デフォルト値は`0.25`です。                                                                                                                                                                     |
@@ -312,8 +312,8 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 | PD             | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost)                                     | 新しく追加された | [リソース制御](/tidb-resource-control-ru-groups.md)関連する設定項目です。CPUからRUへの変換の基準係数を制御します。デフォルト値は`1/3`です。                                                                                                                                                                            |
 | PD             | [`write-base-cost`](/pd-configuration-file.md#write-base-cost)                                       | 新しく追加された | [リソース制御](/tidb-resource-control-ru-groups.md)関連の設定項目です。書き込み要求からRUへの変換の基準係数を制御します。デフォルト値は`1`です。                                                                                                                                                                            |
 | PD             | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte)                               | 新しく追加された | [リソース制御](/tidb-resource-control-ru-groups.md)関連の設定項目です。書き込みフローからRUへの変換の基準係数を制御します。デフォルト値は`1/1024`です。                                                                                                                                                                      |
-| TiFlash        | [`mark_cache_size`](/tiflash/tiflash-configuration.md)                                               | 修正済み     | TiFlashのデータブロックのメタデータのデフォルトのキャッシュ制限を`5368709120`から`1073741824`に変更して、不要なメモリ使用量を削減します。                                                                                                                                                                                      |
-| TiFlash        | [`minmax_index_cache_size`](/tiflash/tiflash-configuration.md)                                       | 修正済み     | TiFlashのデータブロックの最小-最大インデックスのデフォルトのキャッシュ制限を`5368709120`から`1073741824`に変更して、不要なメモリ使用量を削減します。                                                                                                                                                                                |
+| TiFlash        | [`mark_cache_size`](/tiflash/tiflash-configuration.md)                                               | 変更     | TiFlashのデータブロックのメタデータのデフォルトのキャッシュ制限を`5368709120`から`1073741824`に変更して、不要なメモリ使用量を削減します。                                                                                                                                                                                      |
+| TiFlash        | [`minmax_index_cache_size`](/tiflash/tiflash-configuration.md)                                       | 変更     | TiFlashのデータブロックの最小-最大インデックスのデフォルトのキャッシュ制限を`5368709120`から`1073741824`に変更して、不要なメモリ使用量を削減します。                                                                                                                                                                                |
 | TiFlash        | [`flash.disaggregated_mode`](/tiflash/tiflash-disaggregated-and-s3.md)                               | 新しく追加された | TiFlashの分散アーキテクチャでは、このTiFlashノードが書き込みノードか計算ノードかを示します。値は`tiflash_write`または`tiflash_compute`になります。                                                                                                                                                                          |
 | TiFlash        | [`storage.s3.endpoint`](/tiflash/tiflash-disaggregated-and-s3.md)                                    | 新しく追加された | S3に接続するためのエンドポイント。                                                                                                                                                                                                                                                        |
 | TiFlash        | [`storage.s3.bucket`](/tiflash/tiflash-disaggregated-and-s3.md)                                      | 新しく追加された | TiFlashがすべてのデータを保存するバケット。                                                                                                                                                                                                                                                 |
@@ -339,7 +339,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   場合によっては、TiDB でパーティションテーブルデータをグローバルに並べ替えないようにする [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
     -   `fair lock mode`と`lock only if exists`の同時使用をサポート [#42068](https://github.com/pingcap/tidb/issues/42068) @[MyonKeminta](https://github.com/MyonKeminta)
     -   トランザクションのスローログとトランザクション内部イベントの印刷をサポートする [#41863](https://github.com/pingcap/tidb/issues/41863) @[ekexium](https://github.com/ekexium)
-    -   `ILIKE`オペレーター [#40943](https://github.com/pingcap/tidb/issues/40943) @[xzhangxian1008](https://github.com/xzhangxian1008)をサポートします
+    -   `ILIKE` オペレーターをサポートします [#40943](https://github.com/pingcap/tidb/issues/40943) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   PD
 
@@ -363,7 +363,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         -   テーブルのスケジューリングを改善して、単一のテーブルをさまざまな TiCDC ノード間でより均等に分割します [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
-        -   MQ シンク [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)に Large Row モニタリング メトリクスを追加します
+        -   MQ シンクに Large Row モニタリング メトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[Rustin170506](https://github.com/Rustin170506)
 
         -   リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワーク トラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
 
@@ -451,18 +451,18 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
         -   物理インポートモードを使用してデータをインポートする場合、対象テーブルの複合主キーに`auto_random`列が存在するが、ソースデータでその列の値が指定されていない場合、 TiDB Lightning が`auto_random`列のデータを自動的に生成しない問題を修正しました。 [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
         -   論理インポートモードを使用してデータをインポートする際に、ターゲットクラスターに対する`CONFIG`権限がないためにインポートが失敗する問題を修正しました [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [アンチトップクォーク](https://github.com/AntiTopQuark)
--   [ブラックティア23](https://github.com/blacktear23)
--   [ボーンチェンジャー](https://github.com/BornChanger)
+-   [AntiTopQuark](https://github.com/AntiTopQuark)
+-   [blacktear23](https://github.com/blacktear23)
+-   [BornChanger](https://github.com/BornChanger)
 -   [Dousir9](https://github.com/Dousir9)
--   [エルワドバ](https://github.com/erwadba)
--   [ハッピーv587](https://github.com/happy-v587)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
+-   [erwadba](https://github.com/erwadba)
+-   [happy-v587](https://github.com/happy-v587)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
 -   [liumengya94](https://github.com/liumengya94)
--   [ウーフィーザオ](https://github.com/woofyzhao)
--   [夏関](https://github.com/xiaguan)
+-   [woofyzhao](https://github.com/woofyzhao)
+-   [xiaguan](https://github.com/xiaguan)

@@ -103,7 +103,7 @@ TiDBバージョン: 6.5.12
     -   Grafana の TiKV パネルの**ストレージ非同期書き込み期間の**監視メトリックが不正確であるという問題を修正しました[＃17579](https://github.com/tikv/tikv/issues/17579) @ [overvenus](https://github.com/overvenus)
     -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
     -   リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[＃17840](https://github.com/tikv/tikv/issues/17840) @ [glorv](https://github.com/glorv)
-    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) [LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
+    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
     -   GBK/GB18030エンコードデータ[＃17618](https://github.com/tikv/tikv/issues/17618) @ [CbcWestwolf](https://github.com/CbcWestwolf)の処理時にエンコードが失敗する可能性がある問題を修正
 
 -   PD
@@ -113,7 +113,7 @@ TiDBバージョン: 6.5.12
     -   PD がpanicを起こす可能性のある潜在的な問題を修正[＃8915](https://github.com/tikv/pd/issues/8915) @ [bufferflies](https://github.com/bufferflies)
     -   長時間実行クラスタ[＃9047](https://github.com/tikv/pd/issues/9047) @ [bufferflies](https://github.com/bufferflies)でメモリリークが発生する可能性がある問題を修正
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
-    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対[rleungx](https://github.com/rleungx)の切り替え時にリージョン同期が間に合わない問題を修正しました
+    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対@[rleungx](https://github.com/rleungx)の切り替え時にリージョン同期が間に合わない問題を修正しました
     -   `evict-leader-scheduler`または`grant-leader-scheduler`作成時にエラーが発生しても、エラーメッセージが pd-ctl [＃8759](https://github.com/tikv/pd/issues/8759) @ [okJiang](https://github.com/okJiang)に返されない問題を修正しました。
     -   ホットスポット キャッシュ[＃8698](https://github.com/tikv/pd/issues/8698) @ [lhy1024](https://github.com/lhy1024)のメモリリーク問題を修正
     -   多数のリージョンが存在する場合にPDのリージョンAPIをリクエストできない問題を修正[＃55872](https://github.com/pingcap/tidb/issues/55872) @ [rleungx](https://github.com/rleungx)

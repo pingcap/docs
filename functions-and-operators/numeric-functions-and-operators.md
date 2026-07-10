@@ -56,4 +56,4 @@ TiDB は、MySQL 8.0 で利用可能な[数値関数と演算子](https://dev.my
 
 ## 関連するシステム変数 {#related-system-variables}
 
-[`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)は`/`演算子の精度を設定するために使用されます。
+[`div_precision_increment`](/system-variables.md#div_precision_increment-new-in-v800)は`/` 演算子を使用した除算の結果桁数を設定するために使用されます。

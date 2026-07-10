@@ -166,7 +166,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/partitioned-table.md#range-interval-partitioning)参照してください。
 
--   生成された列は[bb7133](https://github.com/bb7133)に一般公開（GA）されます
+-   生成された列は@[bb7133](https://github.com/bb7133)に一般公開（GA）されます
 
     生成列はデータベースにとって貴重な機能です。テーブル作成時に、列の値をユーザーが明示的に挿入または更新するのではなく、テーブル内の他の列の値に基づいて計算するように定義できます。この生成列は、仮想列または保存列のいずれかです。TiDBは以前のバージョンからMySQL互換の生成列をサポートしており、この機能はv7.1.0でGAになります。
 
@@ -196,7 +196,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [スロークエリを特定する](/identify-slow-queries.md)を参照してください。
 
-### Security {#security}
+### セキュリティ {#security}
 
 -   TiFlashシステムテーブル情報のクエリに使用されるインターフェイスを置き換えます[＃6941](https://github.com/pingcap/tiflash/issues/6941) @ [flowbehappy](https://github.com/flowbehappy)
 
@@ -228,7 +228,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 >
 > このセクションでは、v7.0.0から最新バージョン（v7.1.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。v6.6.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   セキュリティを向上させるために、 TiFlashはHTTPサービスポート（デフォルト`8123` ）を廃止し、代わりにgRPCポートを使用します。
 
@@ -246,9 +246,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                       | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | `tidb_ddl_distribute_reorg`                                                                                                             | 削除済み     | この変数の名前は[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)に変更されます。                                                                                                                                                                                                                                                                                               |
-| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                                   | 修正済み     | 2 つの新しい値オプション`authentication_ldap_sasl`と`authentication_ldap_simple`が導入されました。                                                                                                                                                                                                                                                                                                                   |
-| [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)                     | 修正済み     | バージョン7.1.0以降で有効となり、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を制御します。追加のテストを経て、デフォルト値を`"0s"`から`"1s"`に変更します。                                                                                                                                                                                                                                                                                                    |
-| [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                         | 修正済み     | デフォルト値を`OFF`から`ON`に変更します。これは、 TiFlash の遅延マテリアライゼーション機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                                                                  |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                                   | 変更     | 2 つの新しい値オプション`authentication_ldap_sasl`と`authentication_ldap_simple`が導入されました。                                                                                                                                                                                                                                                                                                                   |
+| [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)                     | 変更     | バージョン7.1.0以降で有効となり、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を制御します。追加のテストを経て、デフォルト値を`"0s"`から`"1s"`に変更します。                                                                                                                                                                                                                                                                                                    |
+| [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、 TiFlash の遅延マテリアライゼーション機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                                                                  |
 | [`authentication_ldap_sasl_auth_method_name`](/system-variables.md#authentication_ldap_sasl_auth_method_name-new-in-v710)               | 新しく追加された | LDAP SASL 認証における認証方法名を指定します。                                                                                                                                                                                                                                                                                                                                                                    |
 | [`authentication_ldap_sasl_bind_base_dn`](/system-variables.md#authentication_ldap_sasl_bind_base_dn-new-in-v710)                       | 新しく追加された | LDAP SASL認証における検索ツリー内の検索範囲を制限します。1 `AS ...`の句を指定せずにユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内の`dn`の句を自動的に検索します。                                                                                                                                                                                                                                                                                      |
 | [`authentication_ldap_sasl_bind_root_dn`](/system-variables.md#authentication_ldap_sasl_bind_root_dn-new-in-v710)                       | 新しく追加された | LDAP SASL 認証でユーザーを検索するために LDAPサーバーにログインするために使用される`dn`指定します。                                                                                                                                                                                                                                                                                                                                     |
@@ -287,12 +287,12 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | TiDB           | [`log.timeout`](/tidb-configuration-file.md#timeout-new-in-v710)                                                               | 新しく追加された | TiDBにおけるログ書き込み操作のタイムアウトを設定します。ディスク障害によりログの書き込みが不可能になった場合、この設定項目によりTiDBプロセスがハングアップする代わりにpanicになる可能性があります。デフォルト値は`0`で、タイムアウトは設定されません。                                                |
 | TiKV           | [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)               | 新しく追加された | RocksDBの圧縮をトリガーするために必要な冗長MVCC行の数を設定します。デフォルト値は`50000`です。                                                                                                                           |
 | TiKV           | [`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710)       | 新しく追加された | RocksDBの圧縮をトリガーするために必要な冗長MVCC行の割合を設定します。デフォルト値は`20`です。                                                                                                                             |
-| TiKV           | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50)                                                | 修正済み     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`30MiB`から`100MiB`に変更します。                                                                   |
-| TiKV           | [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold)                                                             | 修正済み     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`3000`から`7000`に変更します。                                                                      |
-| TiKV           | [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620)     | 修正済み     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`0.25`から`0.75`に変更します。                                                                      |
-| TiKV           | [`region-compact-check-step`](/tikv-configuration-file.md#region-compact-check-step)                                           | 修正済み     | Partitioned Raft KVが有効な場合（ `storage.engine="partitioned-raft-kv"` ）、デフォルト値を`100`から`5`に変更します。                                                                                       |
+| TiKV           | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50)                                                | 変更     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`30MiB`から`100MiB`に変更します。                                                                   |
+| TiKV           | [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold)                                                             | 変更     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`3000`から`7000`に変更します。                                                                      |
+| TiKV           | [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620)     | 変更     | [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 以上の場合、デフォルト値を`0.25`から`0.75`に変更します。                                                                      |
+| TiKV           | [`region-compact-check-step`](/tikv-configuration-file.md#region-compact-check-step)                                           | 変更     | Partitioned Raft KVが有効な場合（ `storage.engine="partitioned-raft-kv"` ）、デフォルト値を`100`から`5`に変更します。                                                                                       |
 | PD             | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710)                                             | 新しく追加された | ストア制限のモードを制御します。値のオプションは`"v1"`と`"v2"`です。                                                                                                                                           |
-| PD             | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                        | 修正済み     | デフォルト値を`false`から`true`に変更します。これは、スケジューラの診断機能がデフォルトで有効であることを意味します。                                                                                                                  |
+| PD             | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                        | 変更     | デフォルト値を`false`から`true`に変更します。これは、スケジューラの診断機能がデフォルトで有効であることを意味します。                                                                                                                  |
 | TiFlash        | `http_port`                                                                                                                    | 削除済み     | HTTP サービス ポート (デフォルト`8123` ) を廃止します。                                                                                                                                               |
 | TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | TiDB LightningがPDスケジュールを一時停止する範囲を制御します。デフォルト値は`"table"`で、値のオプションは`"global"`と`"table"`です。                                                                                           |
 | TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | 分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2 秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
@@ -302,7 +302,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | TiCDC          | [`integrity.corruption-handle-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | 新しく追加された | 単一行データのチェックサム検証に失敗した場合のChangefeedのログレベルを指定します。デフォルト値は`"warn"`です。値のオプションは`"warn"`と`"error"`です。                                                                                      |
 | TiCDC          | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds)   | 新しく追加された | 単一行データのチェックサム検証を有効にするかどうかを制御します。デフォルト値は`"none"`で、この機能は無効です。                                                                                                                        |
 | TiCDC          | [`sink.only-output-updated-columns`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds)  | 新しく追加された | 更新された列のみを出力するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                          |
-| TiCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds)   | 修正済み     | さらなるテストを経て、デフォルト値を`false`から`true`に変更しました。これは、テーブル内のパーティションがデフォルトで別々のディレクトリに保存されることを意味します。パーティション化されたテーブルをストレージサービスにレプリケーションする際にデータ損失が発生する可能性を回避するため、この値は`true`のままにしておくことをお勧めします。 |
+| TiCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds)   | 変更     | さらなるテストを経て、デフォルト値を`false`から`true`に変更しました。これは、テーブル内のパーティションがデフォルトで別々のディレクトリに保存されることを意味します。パーティション化されたテーブルをストレージサービスにレプリケーションする際にデータ損失が発生する可能性を回避するため、この値は`true`のままにしておくことをお勧めします。 |
 
 ## 改善点 {#improvements}
 
@@ -453,7 +453,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
         -   `UNSIGNED INTEGER`型の主キーがチャンク[＃42620](https://github.com/pingcap/tidb/issues/42620) @ [lichunzhu](https://github.com/lichunzhu)の分割に使用できない問題を修正しました
         -   `--output-file-template`誤って[＃42391](https://github.com/pingcap/tidb/issues/42391) @ [lichunzhu](https://github.com/lichunzhu)に設定されている場合に TiDB Dumpling がpanic可能性がある問題を修正しました
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   失敗したDDL文[＃1228](https://github.com/pingcap/tidb-binlog/issues/1228) @ [okJiang](https://github.com/okJiang)に遭遇したときにエラーが発生する可能性がある問題を修正しました
 
@@ -472,16 +472,16 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 TiDB v7.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-sysbench)を参照してください。
 
-## 寄稿者 {#contributors}
+## 貢献者 {#contributors}
 
 TiDB コミュニティの以下の貢献者に感謝いたします。
 
 -   [blacktear23](https://github.com/blacktear23)
--   [イーサフロー](https://github.com/ethercflow)
--   [ヒヒフフ](https://github.com/hihihuhu)
--   [ジフハスト](https://github.com/jiyfhust)
--   [L-メープル](https://github.com/L-maple)
+-   [ethercflow](https://github.com/ethercflow)
+-   [hihihuhu](https://github.com/hihihuhu)
+-   [jiyfhust](https://github.com/jiyfhust)
+-   [L-maple](https://github.com/L-maple)
 -   [lqs](https://github.com/lqs)
--   [ピンアンドビー](https://github.com/pingandb)
--   [ヨークヘレン](https://github.com/yorkhellen)
--   [ユジアリスタ](https://github.com/yujiarista) (初回投稿者)
+-   [pingandb](https://github.com/pingandb)
+-   [yorkhellen](https://github.com/yorkhellen)
+-   [yujiarista](https://github.com/yujiarista) (初回貢献者)

@@ -15,7 +15,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     -   デフォルトで休止リージョン機能を無効にする[＃7618](https://github.com/tikv/tikv/pull/7618)
 
--   TiDBBinlog
+-   TiDB Binlog
 
     -   Drainer [＃950](https://github.com/pingcap/tidb-binlog/pull/950)でのシーケンス DDL 操作のサポート
 

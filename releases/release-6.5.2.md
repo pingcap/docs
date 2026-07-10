@@ -64,7 +64,7 @@ TiDB バージョン: 6.5.2
     -   単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @ [mjonss](https://github.com/mjonss)
     -   準備済みプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
     -   準備プランキャッシュが有効な場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @ [qw4990](https://github.com/qw4990)
-    -   `max_prepared_stmt_count`の設定が[＃39735](https://github.com/pingcap/tidb/issues/39735)で[xuyifangreeneyes](https://github.com/xuyifangreeneyes)に反映されない問題を修正
+    -   `max_prepared_stmt_count`の設定が[＃39735](https://github.com/pingcap/tidb/issues/39735)で@[xuyifangreeneyes](https://github.com/xuyifangreeneyes)に反映されない問題を修正
     -   グローバルメモリ制御が、メモリ使用量が`tidb_server_memory_limit_sess_min_size` [＃42662](https://github.com/pingcap/tidb/issues/42662) @ [XuHuaiyu](https://github.com/XuHuaiyu)未満の SQL 文を誤って強制終了する可能性がある問題を修正しました。
     -   パーティションテーブル[＃40596](https://github.com/pingcap/tidb/issues/40596) @ [tiancaiamao](https://github.com/tiancaiamao)の動的トリミングモードでインデックス結合によりpanicが発生する可能性がある問題を修正しました。
 

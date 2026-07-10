@@ -131,7 +131,7 @@ TiDB バージョン: 4.0.15
         -   統合テスト[＃2422](https://github.com/pingcap/tiflow/issues/2422)でDDLジョブの重複が発生したときに発生する`ErrSchemaStorageTableMiss`エラーを修正します
         -   `ErrGCTTLExceeded`エラーが発生した場合に changefeed を削除できないバグを修正[＃2391](https://github.com/pingcap/tiflow/issues/2391)
         -   `capture list`コマンド[＃2388](https://github.com/pingcap/tiflow/issues/2388)の出力に古いキャプチャが表示される可能性がある問題を修正しました
-        -   TiCDCプロセッサ[#2017](https://github.com/pingcap/tiflow/pull/2017)のデッドロック問題を修正
+        -   TiCDC プロセッサのデッドロック問題を修正 [#2017](https://github.com/pingcap/tiflow/pull/2017)
         -   このテーブルが再スケジュールされているときに複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[＃2230](https://github.com/pingcap/tiflow/issues/2230)
         -   メタデータ管理[＃2557](https://github.com/pingcap/tiflow/pull/2557)で`EtcdWorker`ショット分離が違反されるバグを修正
         -   DDLシンクエラー[＃2552](https://github.com/pingcap/tiflow/issues/2552)によりチェンジフィードを停止できない問題を修正

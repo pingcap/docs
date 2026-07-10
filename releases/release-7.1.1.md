@@ -15,7 +15,7 @@ TiDB バージョン: 7.1.1
 
 -   TiDBは、変更されていないキー[＃44714](https://github.com/pingcap/tidb/issues/44714)をロックするかどうかを制御するための新しいシステム変数`tidb_lock_unchanged_keys`を導入しました[エキシウム](https://github.com/ekexium)
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
 
@@ -48,7 +48,7 @@ TiDB バージョン: 7.1.1
 
         -   Dumplingは、 `--sql`パラメータが使用されているときにテーブルクエリの実行を回避し、エクスポートのオーバーヘッドを削減します[＃45239](https://github.com/pingcap/tidb/issues/45239) @ [lance6716](https://github.com/lance6716)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   テーブル情報の取得方法を最適化し、 Drainer [＃1137](https://github.com/pingcap/tidb-binlog/issues/1137) @ [lichunzhu](https://github.com/lichunzhu)の初期化時間とメモリ使用量を削減します。
 
@@ -150,7 +150,7 @@ TiDB バージョン: 7.1.1
 
         -   クエリ結果セット`--sql`が空の場合にDumpling が異常終了する問題を修正[＃45200](https://github.com/pingcap/tidb/issues/45200) @ [D3Hunter](https://github.com/D3Hunter)
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   PDアドレス[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [lichunzhu](https://github.com/lichunzhu)の完全な変更後、TiDBが`SHOW PUMP STATUS`または`SHOW DRAINER STATUS`経由でBinlogノードステータスを正しく照会できない問題を修正しました。
         -   PD アドレス[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [lance6716](https://github.com/lance6716)の完全な変更後に TiDB がバイナリログを書き込めなくなる問題を修正しました

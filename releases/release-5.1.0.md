@@ -27,7 +27,7 @@ TiDB バージョン: 5.1.0
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                      | 種類を変更する  | 説明                                                                                                                            |
+| 変数名                                                                                      | 変更の種類  | 説明                                                                                                                            |
 | :--------------------------------------------------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
 | [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加された | 共通テーブル式における最大再帰深度を制御します。                                                                                                      |
 | [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加された | TiDBサーバーへの初期接続を制御します。                                                                                                         |
@@ -38,20 +38,20 @@ TiDB バージョン: 5.1.0
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                           | 種類を変更する  | 説明                                                                                                                                                                           |
+| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                           | 変更の種類  | 説明                                                                                                                                                                           |
 | :------------- | :------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB設定ファイル     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加された | セキュリティ強化モード（SEM）を有効にするかどうかを制御します。この設定項目のデフォルト値は`false`で、これはSEMが無効になっていることを意味します。                                                                                           |
-| TiDB設定ファイル     | `performance.committer-concurrency`                                                                      | 修正済み     | 単一トランザクションのコミットフェーズにおけるコミット操作に関連するリクエストの同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                               |
+| TiDB設定ファイル     | `performance.committer-concurrency`                                                                      | 変更     | 単一トランザクションのコミットフェーズにおけるコミット操作に関連するリクエストの同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                               |
 | TiDB設定ファイル     | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)                                   | 新しく追加された | TCPレイヤーで TCP_NODELAY を有効にするかどうかを決定します。デフォルト値は`true`で、これは TCP_NODELAY が有効になっていることを意味します。                                                                                      |
 | TiDB設定ファイル     | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)                                     | 新しく追加された | TiDB がインスタンス レベルでオプティマイザのコスト見積もりを無視し、MPP モードを強制するかどうかを制御します。デフォルト値は`false`です。この設定項目は、システム変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の初期値を制御します。 |
 | TiDB設定ファイル     | [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)     | 新しく追加された | 単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロック イベントの最大数を設定します。デフォルト値は`10`です。                             |
 | TiKV設定ファイル     | [`abort-on-panic`](/tikv-configuration-file.md#abort-on-panic)                                           | 新しく追加された | TiKVがパニックを起こした際に、 `abort`プロセスがコアダンプファイルの生成を許可するかどうかを設定します。デフォルト値は`false`で、これはコアダンプファイルの生成が許可されないことを意味します。                                                                    |
-| TiKV設定ファイル     | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)                                     | 修正済み     | デフォルト値が`false`から`true`に変更されます。リージョンが長時間アイドル状態になると、自動的に休止状態に設定されます。                                                                                                           |
+| TiKV設定ファイル     | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)                                     | 変更     | デフォルト値が`false`から`true`に変更されます。リージョンが長時間アイドル状態になると、自動的に休止状態に設定されます。                                                                                                           |
 | TiKV設定ファイル     | [`old-value-cache-memory-quota`](/tikv-configuration-file.md#old-value-cache-memory-quota)               | 新しく追加された | TiCDCの古い値に基づいてメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                              |
 | TiKV設定ファイル     | [`sink-memory-quota`](/tikv-configuration-file.md#sink-memory-quota)                                     | 新しく追加された | TiCDCデータ変更イベントによるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                           |
 | TiKV設定ファイル     | [`incremental-scan-threads`](/tikv-configuration-file.md#incremental-scan-threads)                       | 新しく追加された | 履歴データを増分的にスキャンするタスクのスレッド数を設定します。デフォルト値は`4`で、これはタスクに4つのスレッドが使用されることを意味します。                                                                                                    |
 | TiKV設定ファイル     | [`incremental-scan-concurrency`](/tikv-configuration-file.md#incremental-scan-concurrency)               | 新しく追加された | 履歴データの増分スキャンを行うタスクの同時実行の最大数を設定します。デフォルト値は`6`で、これは最大で 6 つのタスクを同時に実行できることを意味します。                                                                                               |
-| TiKV設定ファイル     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 修正済み     | 保留中の圧縮バイトのソフトリミット。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
+| TiKV設定ファイル     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 変更     | 保留中の圧縮バイトのソフトリミット。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
 | TiKV設定ファイル     | [`storage.io-rate-limit`](/tikv-configuration-file.md#storageio-rate-limit)                              | 新しく追加された | TiKV書き込みのI/Oレートを制御します。 `storage.io-rate-limit.max-bytes-per-sec`のデフォルト値は`"0MB"`です。                                                                                           |
 | TiKV設定ファイル     | [`resolved-ts.enable`](/tikv-configuration-file.md#enable)                                               | 新しく追加された | すべてのリージョンリーダーに対して`resolved-ts`を維持するかどうかを決定します。デフォルト値は`true`です。                                                                                                               |
 | TiKV設定ファイル     | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                     | 新しく追加された | `resolved-ts`が転送される間隔。デフォルト値は`"1s"`です。この値は動的に変更できます。                                                                                                                         |
@@ -64,7 +64,7 @@ TiDB バージョン: 5.1.0
 -   TiDBローリングアップグレード中は、TiDB Binlogを使用するクラスタでクラスター化インデックスを持つテーブルを作成しないようにしてください。
 -   TiDB のローリングアップグレード中は`alter table ... modify column`や`alter table ... change column`のようなステートメントを実行しないでください。
 -   バージョン5.1以降、各テーブルのTiFlashレプリカを作成する際に、システムテーブルのレプリカを設定する機能はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。クリアしないと、アップグレードは失敗します。
--   TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` } を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
+-   TiCDC の`--sort-dir`コマンドの`cdc cli changefeed`パラメータは非推奨です。代わりに、 `--sort-dir`コマンドで`cdc server` を設定できます。 [#1795](https://github.com/pingcap/tiflow/pull/1795)
 -   TiDB 5.1 にアップグレードした後、TiDB が「関数 READ ONLY には noop 実装しかありません」というエラーを返す場合、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)の値を`ON`に設定することで、TiDB がこのエラーを無視するようにできます。これは、MySQL の`read_only`変数が TiDB ではまだ有効になっていないためです (TiDB では「noop」動作です)。したがって、この変数が TiDB で設定されていても、TiDB クラスタにデータを書き込むことができます。
 
 ## 新機能 {#new-features}
@@ -219,7 +219,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
 -   PD
 
-    -   `scatter region`スケジューラ [#3602](https://github.com/pingcap/pd/pull/3602)を追加した後、予期しない統計情報を回避する
+    -   `scatter region` スケジューラを追加した後、予期しない統計情報を回避する [#3602](https://github.com/pingcap/pd/pull/3602)
     -   スケーリングプロセスにおける複数のスケジューリング問題を解決する
 
         -   レプリカスナップショットの生成プロセスを最適化し、スケーリング時のスケジューリングの遅延問題を解決します[#3563](https://github.com/tikv/pd/issues/3563) [#10059](https://github.com/tikv/tikv/pull/10059) [#10001](https://github.com/tikv/tikv/pull/10001)
@@ -264,7 +264,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   クラスター化インデックスの`IndexMerge`プランを作成する際に発生するエラーを修正します [#23906](https://github.com/pingcap/tidb/issues/23906)
     -   BIT型エラーの型推論を修正 [#23832](https://github.com/pingcap/tidb/issues/23832)
     -   `PointGet`演算子が存在する場合に、一部のオプティマイザヒントが有効にならない問題を修正しました [#23570](https://github.com/pingcap/tidb/issues/23570)
-    -   エラー [#23893](https://github.com/pingcap/tidb/issues/23893)によりロールバック時にDDL操作が失敗する可能性がある問題を修正しました。
+    -   エラーによりロールバック時に DDL 操作が失敗する可能性がある問題を修正しました。 [#23893](https://github.com/pingcap/tidb/issues/23893)
     -   バイナリリテラル定数のインデックス範囲が正しく構築されていない問題を修正しました [#23672](https://github.com/pingcap/tidb/issues/23672)
     -   `IN`句が場合によっては誤った結果をもたらす可能性がある問題を修正 [#23889](https://github.com/pingcap/tidb/issues/23889)
     -   一部の文字列関数の誤った結果を修正 [#23759](https://github.com/pingcap/tidb/issues/23759)
@@ -272,7 +272,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   ユーザーが`INSERT`操作を実行するには、テーブルに対する`DELETE`権限と`REPLACE`権限の両方が必要になりました [#24070](https://github.com/pingcap/tidb/pull/24070)
     -   バイナリとバイトの比較ミスによって発生した誤った`TableDual`プランを修正 [#23846](https://github.com/pingcap/tidb/issues/23846)
     -   プレフィックスインデックスとインデックス結合の使用によって発生するpanic問題を修正[#24547](https://github.com/pingcap/tidb/issues/24547) [#24716](https://github.com/pingcap/tidb/issues/24716) [#24717](https://github.com/pingcap/tidb/issues/24717)
-    -   トランザクション [#24741](https://github.com/pingcap/tidb/issues/24741)において、 `point get`ステートメントが`point get`の準備済みプランキャッシュを誤って使用する問題を修正します。
+    -   トランザクションにおいて、 `point get` ステートメントが `point get` の準備済みプランキャッシュを誤って使用する問題を修正します。 [#24741](https://github.com/pingcap/tidb/issues/24741)
     -   照合順序が`ascii_bin`または`latin1_bin`の場合に、誤ったプレフィックスインデックス値が書き込まれる問題を修正しました [#24569](https://github.com/pingcap/tidb/issues/24569)
     -   進行中のトランザクションがGCワーカーによって中断される可能性がある問題を修正しました [#24591](https://github.com/pingcap/tidb/issues/24591)
     -   `new-collation`が有効で`new-row-format`が無効になっている場合に、クラスター化インデックスでポイントクエリが正しく実行されない可能性があるバグを修正しました [#24541](https://github.com/pingcap/tidb/issues/24541)
@@ -281,7 +281,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   列剪定の改善により、 `Apply`および`Join`演算子の結果が不正になる問題を修正します [#23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックしたプライマリロックが解決できないバグを修正 [#24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketch レコードの重複を引き起こす可能性のある統計情報の GC 問題を修正しました [#24357](https://github.com/pingcap/tidb/pull/24357)
-    -   悲観的ロックが`ErrKeyExists`エラー [#23799](https://github.com/pingcap/tidb/issues/23799)を受け取った場合、不要な悲観的ロールバックを回避する
+    -   悲観的ロックが `ErrKeyExists` エラーを受け取った場合、不要な悲観的ロールバックを回避する [#23799](https://github.com/pingcap/tidb/issues/23799)
     -   sql_modeに`ANSI_QUOTES`が含まれている場合に数値リテラルが認識されない問題を修正しました [#24429](https://github.com/pingcap/tidb/issues/24429)
     -   `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`のようなステートメントがリストにないパーティションからデータを読み取ることを禁止する [#24746](https://github.com/pingcap/tidb/issues/24746)
     -   SQL文に`index out of range`と`GROUP BY`両方が含まれている場合に発生する可能性のある`UNION`エラーを修正し [#24281](https://github.com/pingcap/tidb/issues/24281)

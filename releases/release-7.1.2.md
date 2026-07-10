@@ -20,7 +20,7 @@ TiDB バージョン: 7.1.2
 -   TiCDCは、CSVプロトコルにおけるバイナリデータのエンコード方式を制御するための設定項目[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)導入しました。デフォルト値は`'base64'` [＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)です。
 -   TiCDC では、設定項目[`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)導入されています。デフォルトでは空で、メッセージサイズが Kafka トピックの制限を超えると changefeed が失敗します。この設定を`"handle-key-only"`に設定すると、メッセージがサイズ制限を超えた場合、メッセージサイズを縮小するためにハンドルキーのみが送信されます。縮小されたメッセージでも制限を超える場合、changefeed は[＃9680](https://github.com/pingcap/tiflow/issues/9680) @ [3AceShowHand](https://github.com/3AceShowHand)で失敗します。
 
-### 行動の変化 {#behavior-changes}
+### 動作の変更 {#behavior-changes}
 
 -   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
 
@@ -28,7 +28,7 @@ TiDB バージョン: 7.1.2
 
 -   TiDB
 
-    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) [qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
+    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) @[qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
     -   コプロセッサ[＃46514](https://github.com/pingcap/tidb/issues/46514) @ [you06](https://github.com/you06)に関連する要求元情報を追加します
     -   TiDBノード[＃47172](https://github.com/pingcap/tidb/issues/47172) @ [zimulala](https://github.com/zimulala)のアップグレードステータスの開始と終了をマークするために`/upgrade/start`と`upgrade/finish` APIを追加します。
 
@@ -146,7 +146,7 @@ TiDB バージョン: 7.1.2
     -   コンテキストタイムアウトにより`lease timeout`エラー[＃6926](https://github.com/tikv/pd/issues/6926) @ [rleungx](https://github.com/rleungx)が発生する可能性がある問題を修正
     -   ピアがグループごとに適切に分散されず、リーダー[＃6962](https://github.com/tikv/pd/issues/6962) @ [rleungx](https://github.com/rleungx)の分布が不均等になる可能性がある問題を修正しました。
     -   pd-ctl [＃7121](https://github.com/tikv/pd/issues/7121) @ [rleungx](https://github.com/rleungx)を使用して更新するときに分離レベル ラベルが同期されない問題を修正しました
-    -   `evict-leader-scheduler` [HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
+    -   `evict-leader-scheduler` @[HuSharp](https://github.com/HuSharp)で構成[＃6897](https://github.com/tikv/pd/issues/6897)失う可能性がある問題を修正
     -   プラグインディレクトリとファイルの潜在的なセキュリティリスクを修正[＃7094](https://github.com/tikv/pd/issues/7094) @ [HuSharp](https://github.com/HuSharp)
     -   リソース制御[＃45050](https://github.com/pingcap/tidb/issues/45050) @ [glorv](https://github.com/glorv)を有効にした後に DDL がアトミック性を保証しない可能性がある問題を修正しました
     -   ルールチェッカーがピア[＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)を選択した場合に、不健全なピアを削除できない問題を修正しました
@@ -215,6 +215,6 @@ TiDB バージョン: 7.1.2
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
         -   CSVデータ[＃43284](https://github.com/pingcap/tidb/issues/43284) @ [lyzx2001](https://github.com/lyzx2001)をインポートする際にルートがpanicになる可能性がある問題を修正
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   1 GB [＃28659](https://github.com/pingcap/tidb/issues/28659) @ [jackysp](https://github.com/jackysp)を超えるトランザクションを転送するときにDrainer が終了する問題を修正しました

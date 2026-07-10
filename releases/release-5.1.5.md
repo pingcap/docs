@@ -71,7 +71,7 @@ TiDBバージョン：5.1.5
 
     -   PDリーダーの移籍後に削除された墓石ストアが再び表示される問題を修正しました[#4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダーの転送後すぐにスケジューリングを開始できない問題を修正します [#4769](https://github.com/tikv/pd/issues/4769)
-    -   `not leader` [#4797](https://github.com/tikv/pd/issues/4797)の誤ったステータスコードを修正します。
+    -   `not leader` の誤ったステータスコードを修正します。 [#4797](https://github.com/tikv/pd/issues/4797)
     -   PDがダッシュボードプロキシ要求を正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)
     -   TSOフォールバックの特定の特殊ケースにおけるバグを修正 [#4884](https://github.com/tikv/pd/issues/4884)
     -   特定のシナリオでTiFlash学習者レプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
@@ -109,7 +109,7 @@ TiDBバージョン：5.1.5
 
 -   ツール
 
-    -   TiDBBinlog
+    -   TiDB Binlog
 
         -   `compressor`が`zip`に設定されている場合、 Drainer がPumpにリクエストを正しく送信できない問題を修正します。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 

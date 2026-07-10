@@ -33,7 +33,7 @@ TiDBバージョン：5.2.4
 -   TiKV
 
     -   レイテンシージッターを低減するために、リーダーシップをCDCオブザーバーに移管する [#12111](https://github.com/tikv/tikv/issues/12111)
-    -   解決ロック手順 [#11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことで、TiCDCのリカバリ時間を短縮します。
+    -   解決ロック手順を必要とするリージョンの数を減らすことで、TiCDC のリカバリ時間を短縮します。 [#11993](https://github.com/tikv/tikv/issues/11993)
     -   procファイルシステム（procfs）をv0.12.0にアップデートする [#11702](https://github.com/tikv/tikv/issues/11702)
     -   RaftログへのGC実行時に書き込みバッチサイズを増やすことで、ガベージコレクション（GC）プロセスを高速化する [#11404](https://github.com/tikv/tikv/issues/11404)
     -   検証プロセスを`Import`スレッドプールから`Apply`スレッドプールに移動することで、SSTファイルの挿入速度を向上させます [#11239](https://github.com/tikv/tikv/issues/11239)
@@ -51,7 +51,7 @@ TiDBバージョン：5.2.4
         -   `max-message-bytes`のデフォルト値を 10M に設定します [#4041](https://github.com/pingcap/tiflow/issues/4041)
         -   `no owner alert` 、 `mounter row` 、 `table sink total row`を含む、 `buffer sink total row`および Grafana の監視メトリクスとアラートをさらに追加します[#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         -   Grafanaダッシュボードで複数のKubernetesクラスターをサポートする [#4665](https://github.com/pingcap/tiflow/issues/4665)
-        -   `changefeed checkpoint`モニタリングメトリック [#5232](https://github.com/pingcap/tiflow/issues/5232)に、キャッチアップ ETA (到着予定時刻) を追加します。
+        -   `changefeed checkpoint` モニタリングメトリックに、キャッチアップ ETA (到着予定時刻) を追加します。 [#5232](https://github.com/pingcap/tiflow/issues/5232)
 
 ## バグ修正 {#bug-fixes}
 
@@ -152,7 +152,7 @@ TiDBバージョン：5.2.4
     -   TLSが有効になっているときに発生するpanic問題を修正 [#4196](https://github.com/pingcap/tiflash/issues/4196)
     -   メモリ制限が有効になっているときに発生するpanic問題を修正 [#3902](https://github.com/pingcap/tiflash/issues/3902)
     -   MPPクエリが停止した際にTiFlashが時折クラッシュする問題を修正しました [#3401](https://github.com/pingcap/tiflash/issues/3401)
-    -   `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)の予期しないエラーを修正します。
+    -   `Unexpected type of column: Nullable(Nothing)` の予期しないエラーを修正します。 [#3351](https://github.com/pingcap/tiflash/issues/3351)
     -   遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#4437](https://github.com/pingcap/tiflash/issues/4437)
     -   `JOIN`を含むクエリでエラーが発生した場合にハングアップする可能性がある問題を修正しました [#4195](https://github.com/pingcap/tiflash/issues/4195)
     -   実行プランの誤りにより、MPPクエリで誤った結果が返される可能性がある問題を修正 [#3389](https://github.com/pingcap/tiflash/issues/3389)
@@ -179,7 +179,7 @@ TiDBバージョン：5.2.4
         -   etcdでタスクの状態を手動でクリーンアップした際に発生するTiCDCpanic問題を修正 [#2980](https://github.com/pingcap/tiflow/issues/2980)
         -   DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
-        -   RHELリリース [#3584](https://github.com/pingcap/tiflow/issues/3584)において、タイムゾーンの問題によりサービスを開始できない問題を修正しました。
+        -   RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)
         -   `stopped`の変更フィードがクラスタのアップグレード後に自動的に再開される問題を修正します [#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   MySQLシンクのデッドロックによって発生する、警告が頻繁に発生する問題を修正しました [#2706](https://github.com/pingcap/tiflow/issues/2706)
         -   Canalプロトコルで`enable-old-value`設定項目が`true`に自動的に設定されないバグを修正しました [#3676](https://github.com/pingcap/tiflow/issues/3676)

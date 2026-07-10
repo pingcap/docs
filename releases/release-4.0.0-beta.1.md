@@ -28,7 +28,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 -   TiDB Lightning
     -   構成ファイル[＃255](https://github.com/pingcap/tidb-lightning/pull/255)で設定されていない特定の項目については、ドキュメントで指定されたデフォルト設定を使用します。
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   `theflash`を`tiflash` [＃1130](https://github.com/pingcap/tidb-ansible/pull/1130)に名前変更
     -   TiFlashの設定ファイル[＃1138](https://github.com/pingcap/tidb-ansible/pull/1138)のデフォルト値と関連設定を最適化します
 
@@ -64,12 +64,12 @@ TiDB Ansible バージョン: 4.0.0-beta.1
     -   `member` API [＃2130](https://github.com/pingcap/pd/pull/2130)の返されたメッセージにデプロイメントパスとコンポーネントバージョンの情報を追加します。
     -   pd-ctlに`component`サブコマンドを追加して、他のコンポーネントの構成を変更および確認します（実験的） [＃2092](https://github.com/pingcap/pd/pull/2092)
 
--   TiDBBinlog
+-   TiDB Binlog
     -   コンポーネント間のTLSをサポート[＃904](https://github.com/pingcap/tidb-binlog/pull/904) [＃894](https://github.com/pingcap/tidb-binlog/pull/894)
     -   Drainerに`kafka-client-id`設定項目を追加して、KafkaのクライアントID [＃902](https://github.com/pingcap/tidb-binlog/pull/902)を設定します。
     -   Drainer [＃885](https://github.com/pingcap/tidb-binlog/pull/885)の増分バックアップ データの削除をサポート
 
--   TiDB アンシブル
+-   TiDB Ansible
     -   1 つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイすることをサポート[＃1142](https://github.com/pingcap/tidb-ansible/pull/1142)
     -   TiFlashの設定ファイル[＃1145](https://github.com/pingcap/tidb-ansible/pull/1145)に`metric_port`設定項目（デフォルトでは`8234` ）を追加します。
     -   TiFlashの設定ファイル[＃1141](https://github.com/pingcap/tidb-ansible/pull/1141)に`flash_proxy_status_port`設定項目（デフォルトでは`20292` ）を追加します。
