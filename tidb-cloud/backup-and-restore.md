@@ -94,7 +94,7 @@ To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform 
         > **Note**
         >
         > - During data import, automatic backup jobs are delayed. In addition, you cannot run manual backups during data import.
-        > - During cluster scaling, During cluster scaling, automatic backup jobs are delayed. If the delay exceeds 30 minutes, TiDB Cloud skips the backup. **DO NOT** run manual backups during cluster scaling.
+        > - During cluster scaling, automatic backup jobs are delayed. If the delay exceeds 30 minutes, TiDB Cloud skips the backup. **DO NOT** run manual backups during cluster scaling.
 
     - In **Backup Retention**, configure the minimum backup data retention period. The default period is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
 
