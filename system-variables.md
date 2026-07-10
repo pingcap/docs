@@ -4840,7 +4840,11 @@ mysql> desc select count(distinct a) from test.t;
 +----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
 
+<<<<<<< HEAD
 ### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.6</span>
+=======
+### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+>>>>>>> 2bf9c4d260 (docs: fix tidb_opt_partial_ordered_index_for_topn version info (#23239))
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
