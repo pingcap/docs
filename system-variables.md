@@ -2176,7 +2176,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> Setting this variable to `ON` requires every TiKV store in the cluster to support descending-order index keys. TiDB rejects `CREATE INDEX` and `CREATE TABLE` statements that persist a descending column if any store reports a TiKV version below the minimum required version. Upgrade TiKV before you enable this variable.
+> Setting this variable to `ON` requires every TiKV store in the cluster to support descending-order index keys, which requires TiKV v9.0.0 or later. TiDB rejects `CREATE INDEX` and `CREATE TABLE` statements that persist a descending column if any store has not reported its version yet or reports a TiKV version below the minimum required version. Upgrade all TiKV stores before you enable this variable.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
