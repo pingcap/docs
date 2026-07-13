@@ -60,7 +60,7 @@ TiDBバージョン：8.5.2
     -   グローバルソートデ​​ータパスにネットワークレイテンシーエラーを注入すると、 `IMPORT INTO`操作が失敗する問題を修正 [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter)
     -   `ADD UNIQUE INDEX`の実行時にデータ不整合が発生する可能性がある問題を修正 [#60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)
     -   `LABELS`をクエリした際に`BINLOG_STATUS`列の値が誤って表示される問題を修正しました`INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
-    -   インデックス作成中にPDLeaderの強制終了エラーを注入するとデータ不整合が発生する可能性がある問題を修正 [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
+    -   インデックス作成中にPD Leaderの強制終了エラーを注入するとデータ不整合が発生する可能性がある問題を修正 [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
     -   TiDBが約650万個のテーブルを作成した後にメモリ不足（OOM）になる問題を修正 [#58368](https://github.com/pingcap/tidb/issues/58368) @[lance6716](https://github.com/lance6716)
     -   グローバルソート機能を有効にして大量のデータをインポートする際に、一意キーの追加が失敗する可能性がある問題を修正しました [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   TiDBがS3外部ストレージへのアクセスに失敗した後に判読不能なエラーメッセージを返す問題を修正 [#59326](https://github.com/pingcap/tidb/issues/59326) @[lance6716](https://github.com/lance6716)
@@ -94,7 +94,7 @@ TiDBバージョン：8.5.2
     -   TSOを割り当てる際にメモリリークが発生する可能性がある問題を修正 [#9004](https://github.com/tikv/pd/issues/9004) @[rleungx](https://github.com/rleungx)
     -   `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正 [#8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)
     -   PDノードがLeaderではない場合でもTSOを生成する可能性がある問題を修正 [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
-    -   PDLeader切り替え中にリージョンシンカーが時間内に終了しない可能性がある問題を修正 [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
+    -   PD Leader切り替え中にリージョンシンカーが時間内に終了しない可能性がある問題を修正 [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     -   `lease`のデフォルト値が正しく設定されていない問題を修正 [#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
     -   `tidb_enable_tso_follower_proxy`を有効にするとTSOサービスが利用できなくなる可能性がある問題を修正しました [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 

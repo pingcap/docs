@@ -134,7 +134,7 @@ TiDB バージョン: 6.5.10
 
     -   TiDB Lightning
 
-        -   PDLeaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
+        -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
         -   TiDB Lightning Grafanaダッシュボード[＃43357](https://github.com/pingcap/tidb/issues/43357) @ [lichunzhu](https://github.com/lichunzhu)でデータが欠落する問題を修正
         -   TiDB Lightningがサーバーモード[＃36374](https://github.com/pingcap/tidb/issues/36374) @ [kennytm](https://github.com/kennytm)でログに機密情報を出力する可能性がある問題を修正しました
         -   TiDB Lightning [＃52654](https://github.com/pingcap/tidb/issues/52654) @ [D3Hunter](https://github.com/D3Hunter)を使用して`SHARD_ROW_ID_BITS`と`AUTO_ID_CACHE=1`両方が設定されたテーブルをインポートした後、TiDB がAUTO_INCREMENT ID を生成できず、エラー`Failed to read auto-increment value from storage engine`を報告する問題を修正しました。

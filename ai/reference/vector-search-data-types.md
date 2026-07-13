@@ -26,7 +26,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 ## 構文 {#syntax}
 
-次の構文の文字列を使用して Vector 値を表すことができます。
+次の構文の文字列を使用してベクトル値を表すことができます。
 
 ```sql
 '[<float>, <float>, ...]'
