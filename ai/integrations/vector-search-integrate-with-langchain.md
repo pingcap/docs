@@ -15,7 +15,7 @@ This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/ve
 
 > **Tip**
 >
-> You can view the complete [sample code](https://docs.langchain.com/oss/python/integrations/vectorstores/tidb_vector) in LangChain documentation.
+> For the complete API, see [`TiDBVectorStore` in the LangChain reference](https://reference.langchain.com/python/langchain-community/vectorstores/tidb_vector/TiDBVectorStore).
 
 ## Prerequisites
 
