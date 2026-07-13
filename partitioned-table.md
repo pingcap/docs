@@ -1834,7 +1834,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 例2から、 `dynamic`モードでは、クエリを実行するとIndexJoinを使用した実行プランが選択されることがわかります。
 
-現在、 `static`プルーニング モードは、準備済みステートメントと未準備ステートメントの両方のプラン キャッシュをサポートしていません。
+現在、 `static`プルーニング モードは、プリペアドステートメントと非プリペアドステートメントの両方のプラン キャッシュをサポートしていません。
 
 ### 動的プルーニングモードでパーティションテーブルの統計情報を更新する {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
