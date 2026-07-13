@@ -51,7 +51,7 @@ To enable TiDB Support to assist with troubleshooting and observability, a secur
 
 **A. Execute Deployment Script**
 
-1. **Download:** Get the Bastion Host deployment script from the [PingCAP GitHub Repository](https://github.com/tidbcloud/byoc-account-setup/tree/main/bastion).  
+1. **Download:** Get the Bastion Host deployment script from the [PingCAP GitHub Repository](https://github.com/tidbcloud/byoc-account-setup/tree/main/bastion).
 2. **Execute Terraform Deployment**
 
 * *What this deployment does:*
@@ -66,6 +66,6 @@ To enable TiDB Support to assist with troubleshooting and observability, a secur
 
 After the script completes:
 
-1. **Check AWS Console:** verify that the Bastion Host EC2 instance is running.  
+1. **Check AWS Console:** verify that the Bastion Host EC2 instance is running.
 2. **Confirm with TiDB:** Notify your TiDB Cloud Representative. They will verify that the PingCAP engineering team can successfully connect via the internal secure tunnel.
 

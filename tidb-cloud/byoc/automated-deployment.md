@@ -9,21 +9,21 @@ With the AWS environment prepared and IAM permissions established, the TiDB Clou
 
 **Note:** This phase is fully managed by TiDB Cloud. No customer action is required until you receive the completion notification.
 
-## **3.1 Deployment Timeline**
+## Deployment Timeline
 
 The deployment consists of two automated stages:
 
 **Stage A: Image Synchronization (Approx. 1-2 Hours)**
 
-* **Customer action:** Select the AWS Region where the BYOC deployment will be created and provide the Region information to your TiDB Cloud representative.  
-* **What happens:** Database container images are synchronized from the TiDB Cloud central repository to your AWS account's region.  
+* **Customer action:** Select the AWS Region where the BYOC deployment will be created and provide the Region information to your TiDB Cloud representative.
+* **What happens:** Database container images are synchronized from the TiDB Cloud central repository to your AWS account's region.
 * **Note:** This step is time-intensive only for the **first BYOC deployment** in a new region. Subsequent deployments in the same region will reuse the existing images and complete significantly faster.
 
 **Stage B: Infrastructure Provisioning (Approx. 3 Hours)**
 
 **Action**: The system automatically provisions dedicated resources within your AWS account, including:
 
-*  **Network Environment (VPC & Networking):** Creates an isolated VPC to provide a secure network foundation for the database cluster.
+* **Network Environment (VPC & Networking):** Creates an isolated VPC to provide a secure network foundation for the database cluster.
 
 * **Control Plane Initialization:** Deploys essential management components responsible for the database's full lifecycle management. This includes automated resource provisioning, service scheduling, elastic scaling, and failure recovery—all executed automatically with no manual intervention required.
 
@@ -33,7 +33,7 @@ The deployment consists of two automated stages:
 
   * Deploy Data Plane Management Nodes: Hosts components (such as the TiDB Operator) to provide the runtime environment for the subsequent creation of TiDB compute and storage nodes.
 
-## **3.2 Deployment completion**
+## Deployment Completion
 
 Once the automation completes:
 

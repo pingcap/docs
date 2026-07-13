@@ -12,9 +12,9 @@ The final phase ensures that the environment is stable, secure, and fully observ
 | Category | Validation Item | Owner |
 | :---- | :---- | :---- |
 | **Connectivity** | SQL Endpoint: verify connectivity to both private and public SQL endpoints from your application servers. | Customer |
-|  | Secure Tunnel（Optional）: Confirm stable VPN links via the Bastion Host. | TiDB Cloud |
+| | Secure Tunnel（Optional）: Confirm stable VPN links via the Bastion Host. | TiDB Cloud |
 | **Observability** | Metrics: verify that system metrics are populating correctly in Grafana/Prometheus. | TiDB Cloud |
-|  | Logging: Confirm that logs are being collected. | TiDB Cloud |
+| | Logging: Confirm that logs are being collected. | TiDB Cloud |
 | **Security** | Audit: verify that AWS CloudTrail is actively logging access attempts to the Bastion Host. | Customer |
 | **Alerting** | Test Alerts: Trigger a test alert to confirm the notification delivery system is functioning. | Joint |
 

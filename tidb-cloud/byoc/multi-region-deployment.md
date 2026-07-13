@@ -16,15 +16,15 @@ There are two different multi-region scenarios:
 
 Select the section that matches your current deployment status:
 
-* For a new deployment with multiple planned regions, follow **Section 7.2**.  
+* For a new deployment with multiple planned regions, follow **Section 7.2**.
 * To add a region to an existing BYOC deployment, follow **Section 7.3**.
 
 ## Resource Planning: Shared and Dedicated Resources**
 
 Before configuring multiple regions, determine whether the following foundational resources will be shared across regions or dedicated to each region:
 
-* AWS Private Certificate Authority (PCA)  
-* Route 53 Hosted Zone for TiDB  
+* AWS Private Certificate Authority (PCA)
+* Route 53 Hosted Zone for TiDB
 * Route 53 Hosted Zone for O11Y
 
 ### Shared Resources**
@@ -39,21 +39,21 @@ You can prepare a separate PCA, TiDB Hosted Zone, and O11Y Hosted Zone for each 
 
 The primary region resources are provided through the standard parameters:
 
-* \--pca-arn  
-* \--tidb-hz-id  
+* \--pca-arn
+* \--tidb-hz-id
 * \--o11y-hz-id
 
 Resources for additional regions are provided through:
 
-* \--additional-pca-arns  
-* \--additional-tidb-hz-ids  
+* \--additional-pca-arns
+* \--additional-tidb-hz-ids
 * \--additional-o11y-hz-ids
 
 For two or more additional regions, provide the values as comma-separated lists in the same regional order.
 
 ### Mixed Resources**
 
-Shared and dedicated resources can be combined. 
+Shared and dedicated resources can be combined.
 
 For example, all regions can share the same PCA while using separate Hosted Zones.
 
@@ -100,7 +100,7 @@ The values in all comma-separated lists must follow the same regional order.
 
 For example:
 
-* The first value represents Region 2\.  
+* The first value represents Region 2\.
 * The second value represents Region 3\.
 
 ### Mixed Shared and Dedicated Resources**
@@ -132,19 +132,19 @@ Use `tidbcloud-byoc-update.s`h to update the existing CloudFormation stacks.The 
 
 Before running the update script:
 
-1. Confirm the AWS Regions to be added.  
-2. Select the Availability Zones for the new regions.  
-3. Plan the TiDB Cluster CIDR and O11Y CIDR for each new region.  
-4. Confirm whether each new region will:  
-   * share the existing PCA and Hosted Zones, or  
-   * use dedicated PCA and Hosted Zones.  
-5. Review and increase AWS service quotas in each new region.  
+1. Confirm the AWS Regions to be added.
+2. Select the Availability Zones for the new regions.
+3. Plan the TiDB Cluster CIDR and O11Y CIDR for each new region.
+4. Confirm whether each new region will:
+   * share the existing PCA and Hosted Zones, or
+   * use dedicated PCA and Hosted Zones.
+5. Review and increase AWS service quotas in each new region.
 6. Share the information for the new regions with your TiDB Cloud representative.
 
 The CIDR ranges for the new Regions must not overlap with:
 
-* the TiDB Cluster CIDR and O11Y CIDR within the same Region;  
-* existing application VPCs, on-premises networks, or VPN networks that will be connected through VPC Peering or VPN; or  
+* the TiDB Cluster CIDR and O11Y CIDR within the same Region;
+* existing application VPCs, on-premises networks, or VPN networks that will be connected through VPC Peering or VPN; or
 * other TiDB clusters that will participate in cross-region replication.
 
 ### Share Existing PCA and Hosted Zones
@@ -181,7 +181,7 @@ Each parameter is independent. Omit a parameter when the corresponding resource 
 
 The values in all comma-separated lists must follow the same regional order. For example:
 
-* The first value in each list represents Region 2\.  
+* The first value in each list represents Region 2\.
 * The second value in each list represents Region 3\.
 
 ### Use a Mix of Shared and Dedicated Resources
@@ -191,7 +191,7 @@ The new Regions can share some existing resources while using dedicated resource
 For example, to share the existing PCA while using dedicated Hosted Zones for the new Regions:
 
 ```shell
-bash tidbcloud-byoc-update.sh \ 
+bash tidbcloud-byoc-update.sh \
 --stack all \
 --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \ --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId>
 ```
@@ -224,7 +224,7 @@ Updating the CloudFormation stacks prepares the account-level permissions and re
 
 After the update succeeds:
 
-1. Share the script execution result with your TiDB Cloud representative.  
-2. TiDB Cloud verifies the updated IAM and regional resource configuration.  
-3. TiDB Cloud initiates automated infrastructure provisioning for the new Regions.  
+1. Share the script execution result with your TiDB Cloud representative.
+2. TiDB Cloud verifies the updated IAM and regional resource configuration.
+3. TiDB Cloud initiates automated infrastructure provisioning for the new Regions.
 4. After provisioning completes, perform the joint validation described in Section 5 for each new Region.

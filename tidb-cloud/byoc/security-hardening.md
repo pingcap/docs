@@ -45,7 +45,7 @@ Depending on your requirements for **automatic upgrades**, you can choose one of
 
 **Impact:**
 
-* **Maximum security:** All IAM roles used during the bootstrap phase are removed.  
+* **Maximum security:** All IAM roles used during the bootstrap phase are removed.
 * **Feature limitation:** Automatic upgrades will no longer be available. To upgrade database components in the future, you must redeploy the sync-image role.
 
 **Steps:**
