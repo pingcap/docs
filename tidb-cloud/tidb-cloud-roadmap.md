@@ -39,7 +39,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>✅ Support Data Service.</td>
-    <td>With Data Service (Preview), you can read or write TiDB Cloud data via an HTTPS request using a custom API endpoint.</td>
+    <td>With Data Service (PREVIEW), you can read or write TiDB Cloud data via an HTTPS request using a custom API endpoint.</td>
   </tr>
   <tr>
     <td>Cloud provider marketplace</td>

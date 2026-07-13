@@ -5,7 +5,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 # Get Started with Data Service
 
-Data Service (Preview) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
+Data Service (PREVIEW) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
 
 > **Tip:**
 >
@@ -13,7 +13,7 @@ Data Service (Preview) enables you to access TiDB Cloud data via an HTTPS reques
 >
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
-This document introduces how to quickly get started with TiDB Cloud Data Service (Preview) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
+This document introduces how to quickly get started with TiDB Cloud Data Service (PREVIEW) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
 
 ## Before you begin
 

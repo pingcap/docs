@@ -17,7 +17,7 @@ TiDB Cloud supports integration with Datadog. You can configure TiDB Cloud to se
 
 ## Datadog integration version
 
-TiDB Cloud has supported the project-level Datadog integration (Beta) since March 4, 2022. Starting from July 31, 2025, TiDB Cloud introduces the cluster-level Datadog integration (Preview). Starting from September 30, 2025, the cluster-level Datadog integration becomes generally available (GA).
+TiDB Cloud has supported the project-level Datadog integration (Beta) since March 4, 2022. Starting from July 31, 2025, TiDB Cloud introduces the cluster-level Datadog integration (PREVIEW). Starting from September 30, 2025, the cluster-level Datadog integration becomes generally available (GA).
 
 - **Cluster-level Datadog integration**: if no legacy project-level Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the cluster-level Datadog integration for your organization to experience the latest enhancements.
 - **Legacy project-level Datadog integration (Beta)**: if at least one legacy project-level Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. Note that the legacy project-level Datadog integration was deprecated on October 31, 2025. If your organization is still using these legacy integrations, follow [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.

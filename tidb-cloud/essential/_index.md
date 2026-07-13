@@ -47,7 +47,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential)
 
-[Use API (Preview)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=essential)
+[Use API (PREVIEW)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=essential)
 
 [Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=essential)
 

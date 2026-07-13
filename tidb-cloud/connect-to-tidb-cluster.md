@@ -44,7 +44,7 @@ After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connec
 
     If your cluster is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use the AI-assisted SQL Editor in the [TiDB Cloud console](https://tidbcloud.com/) to maximize your data value.
 
-    In SQL Editor, you can either write SQL queries manually or simply press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (Preview)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
+    In SQL Editor, you can either write SQL queries manually or simply press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (PREVIEW)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically. This enables you to run SQL queries against databases without a local SQL client. You can intuitively view the query results in tables or charts and easily check the query logs.
 
 ## What's next
 

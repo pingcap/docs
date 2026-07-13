@@ -5,7 +5,7 @@ summary: Learn how to create, develop, test, deploy, and delete an endpoint in a
 
 # Manage an Endpoint
 
-An endpoint in Data Service (Preview) is a web API that you can customize to execute SQL statements. You can specify parameters for the SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the SQL statement with the provided parameters and returns the results as part of the HTTP response.
+An endpoint in Data Service (PREVIEW) is a web API that you can customize to execute SQL statements. You can specify parameters for the SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the SQL statement with the provided parameters and returns the results as part of the HTTP response.
 
 This document describes how to manage your endpoints in a Data App in the TiDB Cloud console.
 

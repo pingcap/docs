@@ -1,9 +1,9 @@
 ---
-title: Integrate TiDB Cloud Branching (Preview) with GitHub 
+title: Integrate TiDB Cloud Branching (PREVIEW) with GitHub 
 summary: Learn how to integrate the TiDB Cloud Branching feature with GitHub.
 ---
 
-# Integrate TiDB Cloud Branching (Preview) with GitHub 
+# Integrate TiDB Cloud Branching (PREVIEW) with GitHub 
 
 > **Note:**
 >

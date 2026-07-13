@@ -43,13 +43,13 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 ### Data App
 
-A Data App in [Data Service (Preview)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+A Data App in [Data Service (PREVIEW)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
 For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
 ### Data Service
 
-Data Service (Preview) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+Data Service (PREVIEW) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
 
 For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
 

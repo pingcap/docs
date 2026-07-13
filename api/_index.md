@@ -7,7 +7,7 @@ summary: Learn about the APIs available for TiDB Cloud and TiDB Self-Managed.
 
 TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both [TiDB Cloud](https://docs.pingcap.com/tidbcloud/) and [TiDB Self-Managed](https://docs.pingcap.com/tidb/stable/).
 
-## TiDB Cloud API (Preview)
+## TiDB Cloud API (PREVIEW)
 
 [TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
 

@@ -70,7 +70,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your {{{ .sta
 
 - **Snapshot Restore**: restores your {{{ .starter }}} or Essential instance from a specific backup snapshot.
 
-- **Point-in-Time Restore (Preview)**: restores your {{{ .essential }}} instance to a specific time.
+- **Point-in-Time Restore (PREVIEW)**: restores your {{{ .essential }}} instance to a specific time.
 
     - {{{ .starter }}} instances: not supported.
     - {{{ .essential }}} instances: restores to any time within the backup retention, but not earlier than the {{{ .essential }}} instance creation time or later than one minute before the current time.

@@ -1,11 +1,11 @@
 ---
-title: TiDB Cloud Data Service (Preview) Overview
+title: TiDB Cloud Data Service (PREVIEW) Overview
 summary: Learn about Data Service in TiDB Cloud and its scenarios.
 ---
 
-# TiDB Cloud Data Service (Preview) Overview
+# TiDB Cloud Data Service (PREVIEW) Overview
 
-TiDB Cloud [Data Service (Preview)](https://tidbcloud.com/project/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
+TiDB Cloud [Data Service (PREVIEW)](https://tidbcloud.com/project/data-service) is a fully managed low-code backend-as-a-service solution that simplifies backend application development, empowering developers to rapidly build highly scalable, secure, data-driven applications.
 
 Data Service enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
 

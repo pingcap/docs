@@ -1,10 +1,10 @@
 ---
-title: Database Audit Logging (Preview) for {{{ .essential }}}
+title: Database Audit Logging (PREVIEW) for {{{ .essential }}}
 summary: Learn about how to audit a {{{ .essential }}} instance in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
-# Database Audit Logging (Preview) for {{{ .essential }}}
+# Database Audit Logging (PREVIEW) for {{{ .essential }}}
 
 {{{ .essential }}} provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 

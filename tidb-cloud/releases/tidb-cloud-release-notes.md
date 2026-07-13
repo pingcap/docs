@@ -375,7 +375,7 @@ For more information, see [Project API Migration Guide for {{{ .starter }}} and 
         - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
         - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
-    - Enable Prometheus metrics integration (Preview).
+    - Enable Prometheus metrics integration (PREVIEW).
 
         [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) manages Prometheus integrations at the cluster level. This feature lets you seamlessly ship metrics from your TiDB Cloud Essential cluster to Prometheus, enabling advanced alerting on a unified platform. 
 

@@ -180,7 +180,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
 
-    - [Prometheus integrations (Preview)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) are now available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+    - [Prometheus integrations (PREVIEW)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) are now available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
         TiDB Cloud now manages Prometheus integrations at the cluster level, offering more granular control and configuration. This feature enables you to seamlessly ship the metrics of your [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster to Prometheus, allowing for advanced alerting in a unified platform.
 
@@ -481,7 +481,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   This preview version is now available to organizations without existing Datadog or New Relic integrations. For organizations with existing Datadog or New Relic integrations, we will proactively reach out to you to coordinate a suitable migration plan and timeline next month.
 
-  For more information, see [Integrate TiDB Cloud with Datadog (Preview)](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic (Preview)](/tidb-cloud/monitor-new-relic-integration.md).
+  For more information, see [Integrate TiDB Cloud with Datadog (PREVIEW)](/tidb-cloud/monitor-datadog-integration.md) and [Integrate TiDB Cloud with New Relic (PREVIEW)](/tidb-cloud/monitor-new-relic-integration.md).
 
 ## July 22, 2025
 

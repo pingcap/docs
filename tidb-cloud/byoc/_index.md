@@ -45,7 +45,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Back Up and Restore Data](https://docs.tidb.io/tidbcloud/backup-and-restore-premium/?plan=byoc)
 
-[Use API (Preview)](https://docs.tidb.io/api/)
+[Use API (PREVIEW)](https://docs.tidb.io/api/)
 
 </LearningPath>
 

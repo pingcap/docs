@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Branching (Preview) Overview
+title: TiDB Cloud Branching (PREVIEW) Overview
 summary: Learn the concept of TiDB Cloud branches.
 ---
 
-# TiDB Cloud Branching (Preview) Overview
+# TiDB Cloud Branching (PREVIEW) Overview
 
 TiDB Cloud lets you create branches for {{{ .starter }}} instances. A branch for a {{{ .starter }}} instance is a separate instance that contains a diverged copy of data from the original {{{ .starter }}} instance. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original {{{ .starter }}} instance.
 
