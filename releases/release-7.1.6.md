@@ -292,7 +292,7 @@ TiDB バージョン: 7.1.6
         -   TiDB Lightning [＃49826](https://github.com/pingcap/tidb/issues/49826) @ [lance6716](https://github.com/lance6716)を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました
         -   EBS BRが[＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)で実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました
         -   2つのインスタンスが同時に並列インポートタスクを開始し、同じタスクID [＃55384](https://github.com/pingcap/tidb/issues/55384) @ [ei-sugimoto](https://github.com/ei-sugimoto)が割り当てられている場合に、 TiDB Lightningが`verify allocator base failed`エラーを報告する問題を修正しました。
-        -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
+        -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
 
     -   Dumpling
 

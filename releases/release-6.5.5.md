@@ -48,7 +48,7 @@ TiDB バージョン: 6.5.5
 
     -   スケジューラの起動に時間がかかる問題を修正[＃6920](https://github.com/tikv/pd/issues/6920) @ [HuSharp](https://github.com/HuSharp)
     -   スキャッターリージョンにおけるリーダーとピアの処理ロジックが[＃6962](https://github.com/tikv/pd/issues/6962) @ [bufferflies](https://github.com/bufferflies)で矛盾している問題を修正しました
-    -   クラスタが再起動されたとき、またはPD Leaderが[＃7008](https://github.com/tikv/pd/issues/7008) @ [CabinfeverB](https://github.com/CabinfeverB)に切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。
+    -   クラスタが再起動されたとき、またはPD Leaderに切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。[＃7008](https://github.com/tikv/pd/issues/7008) @ [CabinfeverB](https://github.com/CabinfeverB)
 
 -   ツール
 
