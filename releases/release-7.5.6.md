@@ -72,7 +72,7 @@ TiDB バージョン: 7.5.6
     -   ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanic[＃58374](https://github.com/pingcap/tidb/issues/58374) @ [Defined2014](https://github.com/Defined2014)が発生する問題を修正
     -   生成された列[＃58475](https://github.com/pingcap/tidb/issues/58475) @ [joechenrh](https://github.com/joechenrh)を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正[＃59347](https://github.com/pingcap/tidb/issues/59347) @ [YangKeao](https://github.com/YangKeao)
-    -   パーティション交換の誤った判断により実行エラーが発生する問題を修正[＃59534](https://github.com/pingcap/tidb/issues/59534) @ [mjonss](https://github.com/mjonss)
+    -   パーティション交換での誤った判断により実行エラーが発生する問題を修正[＃59534](https://github.com/pingcap/tidb/issues/59534) @ [mjonss](https://github.com/mjonss)
     -   `tidb_audit_log`変数を複数レベルの相対パスで設定すると、ログディレクトリ[＃58971](https://github.com/pingcap/tidb/issues/58971) @ [lcwangchao](https://github.com/lcwangchao)でエラーが発生する問題を修正しました。
     -   Join の等価条件の両側のデータ型が異なると、 TiFlash [＃59877](https://github.com/pingcap/tidb/issues/59877) @ [yibin87](https://github.com/yibin87)で誤った結果が生じる可能性がある問題を修正しました。
 
