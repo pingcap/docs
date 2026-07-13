@@ -64,4 +64,4 @@ CREATE DATABASE analytics OPTIONS (
 
 > **Note:**
 >
-> To use IAM roles with {{{ .lake }}}, you need to set up a trust relationship between your AWS account and {{{ .lake }}}. See [Authenticate with AWS IAM Role](/guides/cloud/security/iam-role) for detailed instructions.
+> To use IAM roles with {{{ .lake }}}, you need to set up a trust relationship between your AWS account and {{{ .lake }}}. See [Authenticate with AWS IAM Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) for detailed instructions.
