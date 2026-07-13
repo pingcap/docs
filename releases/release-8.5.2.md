@@ -46,7 +46,7 @@ TiDBバージョン：8.5.2
     -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスタで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlash Compute ノードに追加される可能性がある問題を修正しました [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   統計ファイルにnull値が含まれている場合、統計の手動読み込みに失敗することがある問題を修正 [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正 [#59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
-    -   交換パーティションでの誤った判断により実行が失敗する問題を修正 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
+    -   パーティション交換での誤った判断により実行が失敗する問題を修正 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     -   バックグラウンドタスクがタイムアウトした際に、統計情報の例外処理が不適切であるためにメモリ内の統計情報が誤って削除される問題を修正 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     -   Grafana の**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     -   キャンセルされたTTLタスクが未コミットのセッションをグローバルセッションプールに配置する可能性がある問題を修正 [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
