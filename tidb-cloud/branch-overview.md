@@ -3,7 +3,7 @@ title: TiDB Cloud Branching (Beta) Overview
 summary: TiDB Cloudのブランチの概念を学びましょう。
 ---
 
-# TiDB Cloudブランチング（ベータ版）の概要 {#tidb-cloud-branching-beta-overview}
+# TiDB Cloud Branching（ベータ版）の概要 {#tidb-cloud-branching-beta-overview}
 
 TiDB Cloudでは、TiDB Cloud Starterインスタンスのブランチを作成できます。TiDB Cloud Starterインスタンスのブランチは、元のTiDB Cloud Starterインスタンスから分岐したデータコピーを含む独立したインスタンスです。これにより、隔離された環境が提供され、元のTiDB Cloud Starterインスタンスへの影響を気にすることなく、自由に実験を行うことができます。
 

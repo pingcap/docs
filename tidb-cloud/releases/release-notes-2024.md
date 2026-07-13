@@ -54,7 +54,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     -   **ブランチのリセット**：ブランチをリセットして、親ブランチの最新の状態と同期させることができます。
 
-    -   **GitHubとの連携機能の改善**： [TiDB Cloudブランチング](https://github.com/apps/tidb-cloud-branching)GitHubアプリでは`reset`プルリクエストの同期時の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメータが導入されました。デフォルトモードでは、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
+    -   **GitHubとの連携機能の改善**： [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHubアプリでは`reset`プルリクエストの同期時の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメータが導入されました。デフォルトモードでは、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
 
     詳細については、 [TiDB Cloud Serverless Branchs の管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)参照してください。
 
