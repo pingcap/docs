@@ -55,9 +55,9 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
-2. In the left navigation pane, click **Integrations** > **Integration to Datadog (PREVIEW)**.
-3. Enter your Datadog API key and choose your Datadog Region.
-4. Click **Test Integration**.
+2. In the left navigation pane, click **Integrations**.
+3. On the **Integrations** page, locate the **Datadog (PREVIEW)** integration and click **Connect**.
+4. Enter your Datadog API key, choose your Datadog Region, and then click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
@@ -69,9 +69,9 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 <CustomContent plan="premium">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
-2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Datadog (PREVIEW)**.
-3. Enter your Datadog API key and choose your Datadog Region.
-4. Click **Test Integration**.
+2. In the left navigation pane, click **Settings** > **Integrations**.
+3. On the **Integrations** page, locate the **Datadog (PREVIEW)** integration and click **Connect**.
+4. Enter your Datadog API key, choose your Datadog Region, and then click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
