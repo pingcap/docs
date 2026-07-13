@@ -52,7 +52,7 @@ TiDB バージョン: 6.1.6
     -   単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @ [mjonss](https://github.com/mjonss)
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990) @ [fzzf678](https://github.com/fzzf678)
     -   インデックスマージを使用して`SET`型の列を含むテーブルを読み取ると、誤った結果[＃41293](https://github.com/pingcap/tidb/issues/41293) @ [time-and-fate](https://github.com/time-and-fate)が発生する可能性がある問題を修正しました
-    -   準備済みプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
+    -   プリペアドプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
     -   DDL文の実行中に`PointGet`使用してテーブルを読み込むSQL文がpanic[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)をスローする可能性がある問題を修正しました
     -   トランザクション内で`PointUpdate`実行した後、TiDB が`SELECT`文[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf) @ [zyguan](https://github.com/zyguan)
