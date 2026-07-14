@@ -762,7 +762,7 @@ This variable controls the concurrency for building statistics during manual `AN
 
 This variable controls the following aspects of `ANALYZE` concurrency:
 
-- The concurrency for merging samples collected from different regions.
+- The concurrency for merging samples collected from different Regions.
 - The concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
 
 The default value is `2`.
@@ -775,8 +775,8 @@ This variable controls the concurrency for saving `ANALYZE` results (writing Top
 
 This variable controls the following aspects of `ANALYZE` concurrency:
 
-- The concurrency of scanning TiKV regions. 
-- The concurrency of scanning regions for special indexes (indexes generated from virtual columns).
+- The concurrency of scanning TiKV Regions. 
+- The concurrency of scanning Regions for special indexes (indexes generated from virtual columns).
 
 The default value is `4`.
 

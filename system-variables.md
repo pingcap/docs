@@ -1172,7 +1172,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> In versions earlier than v7.6.0, regular `ANALYZE` region scans are controlled by `tidb_distsql_scan_concurrency`, and index statistics scans are controlled by `tidb_index_serial_scan_concurrency`. Therefore, to adjust the concurrency of scanning TiKV regions for these versions, consider changing the value of `tidb_distsql_scan_concurrency`.
+> In versions earlier than v7.6.0, regular `ANALYZE` region scans are controlled by `tidb_distsql_scan_concurrency`, and index statistics scans are controlled by `tidb_index_serial_scan_concurrency`. Therefore, to adjust the concurrency of scanning TiKV Regions for these versions, consider changing the value of `tidb_distsql_scan_concurrency`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1461,7 +1461,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`
 - Range: `[1, 256]`
 - This variable controls the following aspects of `ANALYZE` concurrency:
-    - The concurrency for merging samples collected from different regions.
+    - The concurrency for merging samples collected from different Regions.
     - The concurrency for special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
