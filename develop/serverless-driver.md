@@ -1,24 +1,24 @@
 ---
-title: TiDB Cloud Serverless Driver (Beta)
+title: TiDB Cloud Serverless Driver (PREVIEW)
 summary: Learn how to connect to {{{ .starter }}} or {{{ .essential }}} from serverless and edge environments.
 aliases: ['/tidbcloud/serverless-driver-config/','/tidbcloud/serverless-driver/']
 ---
 
-# TiDB Cloud Serverless Driver (Beta)
+# TiDB Cloud Serverless Driver (PREVIEW)
 
 > **Note:**
 >
-> The serverless driver is in beta and only applicable to {{{ .starter }}} or {{{ .essential }}} instances.
+> The serverless driver is in public preview and only applicable to {{{ .starter }}} or {{{ .essential }}} instances.
 
-## Why use TiDB Cloud Serverless Driver (Beta)
+## Why use TiDB Cloud Serverless Driver (PREVIEW)
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript lets you connect to your {{{ .starter }}} or {{{ .essential }}} instance over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} or {{{ .essential }}} instances from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers.
+[TiDB Cloud serverless driver (PREVIEW)](https://github.com/tidbcloud/serverless-js) for JavaScript lets you connect to your {{{ .starter }}} or {{{ .essential }}} instance over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to {{{ .starter }}} or {{{ .essential }}} instances from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers.
 
 > **Note:**
 >
-> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (beta)](https://docs.pingcap.com/tidbcloud/data-service-overview/).
+> If you prefer programming with RESTful API rather than SQL or ORM, you can use [Data Service (PREVIEW)](https://docs.pingcap.com/tidbcloud/data-service-overview/).
 
 ## Install the serverless driver
 

@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Branching (Beta) Overview
+title: TiDB Cloud Branching (PREVIEW) Overview
 summary: Learn the concept of TiDB Cloud branches.
 ---
 
-# TiDB Cloud Branching (Beta) Overview
+# TiDB Cloud Branching (PREVIEW) Overview
 
 TiDB Cloud lets you create branches for {{{ .starter }}} instances. A branch for a {{{ .starter }}} instance is a separate instance that contains a diverged copy of data from the original {{{ .starter }}} instance. It provides an isolated environment, allowing you to experiment freely without worrying about affecting the original {{{ .starter }}} instance.
 
@@ -11,7 +11,7 @@ With branches, developers can work in parallel, iterate rapidly on new features,
 
 > **Note:**
 >
-> Currently, TiDB Cloud Branching is in beta and is not available on TiDB Cloud Dedicated clusters.
+> Currently, TiDB Cloud Branching is in public preview and is not available on TiDB Cloud Dedicated clusters.
 
 ## Implementations
 
@@ -37,7 +37,7 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 ## Limitations and quotas
 
-Currently, TiDB Cloud branches are in beta and free of charge.
+Currently, TiDB Cloud branches are in public preview.
 
 - For each organization in TiDB Cloud, you can create a maximum of five branches by default across all {{{ .starter }}} instances. TiDB Cloud creates branches of a {{{ .starter }}} instance in the same region as the instance, and you cannot create branches for a {{{ .starter }}} instance that is throttled or larger than 100 GiB.
 

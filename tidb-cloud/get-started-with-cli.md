@@ -13,7 +13,7 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 
 > **Note:**
 >
-> TiDB Cloud CLI is in beta.
+> TiDB Cloud CLI is in public preview.
 
 ## Before you begin
 

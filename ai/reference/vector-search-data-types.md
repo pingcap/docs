@@ -10,7 +10,7 @@ A vector is a sequence of floating-point numbers, such as `[0.3, 0.5, -0.1, ...]
 
 > **Note:**
 >
-> - Vector data types are in beta and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - Vector data types are in public preview and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - Vector data types are available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 The following Vector data types are currently available:

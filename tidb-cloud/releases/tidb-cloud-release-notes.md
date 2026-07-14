@@ -36,6 +36,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
 
+**Console changes**
+
+- Standardize the label used in the [TiDB Cloud console](https://tidbcloud.com/) for public preview features as `PREVIEW`, replacing the previous mixed use of `BETA` and `PREVIEW`.
+
 **API changes**
 
 - **TiDB Cloud Dedicated**
@@ -379,7 +383,7 @@ For more information, see [Project API Migration Guide for {{{ .starter }}} and 
         - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
         - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
-    - Enable Prometheus metrics integration (Preview).
+    - Enable Prometheus metrics integration (PREVIEW).
 
         [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) manages Prometheus integrations at the cluster level. This feature lets you seamlessly ship metrics from your TiDB Cloud Essential cluster to Prometheus, enabling advanced alerting on a unified platform. 
 

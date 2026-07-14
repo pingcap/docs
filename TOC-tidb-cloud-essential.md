@@ -137,7 +137,7 @@
     - [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- Stream Data ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- Stream Data ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed Overview](/tidb-cloud/essential-changefeed-overview.md)
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
@@ -457,7 +457,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI Reference ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

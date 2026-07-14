@@ -1,10 +1,10 @@
 ---
-title: Database Audit Logging (Beta) for {{{ .essential }}}
+title: Database Audit Logging (PREVIEW) for {{{ .essential }}}
 summary: Learn about how to audit a {{{ .essential }}} instance in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
-# Database Audit Logging (Beta) for {{{ .essential }}}
+# Database Audit Logging (PREVIEW) for {{{ .essential }}}
 
 {{{ .essential }}} provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
@@ -409,7 +409,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 

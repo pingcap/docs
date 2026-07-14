@@ -21,7 +21,7 @@
   - [Transactions](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
-  - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Data Service](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - [High Availability](/tidb-cloud/serverless-high-availability.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
@@ -39,7 +39,7 @@
     - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [Connect via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Connect via Private Endpoint with Alibaba Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-  - Branch ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - Branch ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Overview](/tidb-cloud/branch-overview.md)
     - [Manage Branches](/tidb-cloud/branch-manage.md)
     - [GitHub Integration](/tidb-cloud/branch-github-integration.md)
@@ -135,9 +135,9 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
-- Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API
@@ -461,7 +461,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [Metadata Lock](/metadata-lock.md)
   - [TiDB Accelerated Table Creation](/accelerated-table-creation.md)
-- CLI Reference ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI Reference ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

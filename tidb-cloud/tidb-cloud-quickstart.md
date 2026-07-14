@@ -58,7 +58,7 @@ For {{{ .starter }}} instances hosted on AWS, you can use the built-in AI-assist
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and AWS Bedrock to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
-3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
+3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (PREVIEW)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
     For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, press <kbd>⌘</kbd> + <kbd>I</kbd>, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly.
 
@@ -150,4 +150,4 @@ The MySQL CLI client opens and connects to your {{{ .starter }}} instance.
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
-- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (Beta)](/tidb-cloud/cli-reference.md).
+- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md).
