@@ -249,5 +249,5 @@ TiDB バージョン: 7.5.2
 
         -   EBS BRが[＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)で実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました
         -   ソースファイル[＃51800](https://github.com/pingcap/tidb/issues/51800) @ [lance6716](https://github.com/lance6716)内の互換性のない SQL ステートメントが原因で、 TiDB Lightning がデータインポート中に`no database selected`報告する問題を修正しました。
-        -   PDLeaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
+        -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
         -   Parquet 形式[＃52518](https://github.com/pingcap/tidb/issues/52518) @ [kennytm](https://github.com/kennytm)の空のテーブルをインポートするときにTiDB Lightning がパニックになる問題を修正しました

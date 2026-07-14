@@ -113,7 +113,7 @@ TiDBバージョン: 6.5.12
     -   PD がpanicを起こす可能性のある潜在的な問題を修正[＃8915](https://github.com/tikv/pd/issues/8915) @ [bufferflies](https://github.com/bufferflies)
     -   長時間実行クラスタ[＃9047](https://github.com/tikv/pd/issues/9047) @ [bufferflies](https://github.com/bufferflies)でメモリリークが発生する可能性がある問題を修正
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
-    -   PDLeader[＃9017](https://github.com/tikv/pd/issues/9017)対@[rleungx](https://github.com/rleungx)の切り替え時にリージョン同期が間に合わない問題を修正しました
+    -   PD Leaderの切り替え時にリージョン同期が間に合わない問題を修正しました[＃9017](https://github.com/tikv/pd/issues/9017) @ [rleungx](https://github.com/rleungx)
     -   `evict-leader-scheduler`または`grant-leader-scheduler`作成時にエラーが発生しても、エラーメッセージが pd-ctl [＃8759](https://github.com/tikv/pd/issues/8759) @ [okJiang](https://github.com/okJiang)に返されない問題を修正しました。
     -   ホットスポット キャッシュ[＃8698](https://github.com/tikv/pd/issues/8698) @ [lhy1024](https://github.com/lhy1024)のメモリリーク問題を修正
     -   多数のリージョンが存在する場合にPDのリージョンAPIをリクエストできない問題を修正[＃55872](https://github.com/pingcap/tidb/issues/55872) @ [rleungx](https://github.com/rleungx)
@@ -141,7 +141,7 @@ TiDBバージョン: 6.5.12
 
         -   TiKV [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [Tristan1900](https://github.com/Tristan1900)にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BR が復元に失敗する問題を修正しました。
         -   `br log status --json` [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [Leavrth](https://github.com/Leavrth)を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。
-        -   ログバックアップ中のPDLeaderI/Oレイテンシーによりチェックポイントレイテンシー[＃58574](https://github.com/pingcap/tidb/issues/58574) @ [YuJuncen](https://github.com/YuJuncen)が増加する可能性がある問題を修正しました。
+        -   ログバックアップ中のPD Leader I/Oレイテンシーによりチェックポイントレイテンシーが増加する可能性がある問題を修正しました。[＃58574](https://github.com/pingcap/tidb/issues/58574) @ [YuJuncen](https://github.com/YuJuncen)
         -   `tiup br restore`コマンドがデータベースまたはテーブルの復元中にターゲット クラスタ テーブルが既に存在するかどうかのチェックを省略し、既存のテーブル[＃58168](https://github.com/pingcap/tidb/issues/58168) @ [RidRisR](https://github.com/RidRisR)を上書きする可能性がある問題を修正しました。
         -   アドバンサー所有者が[＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3pointer](https://github.com/3pointer)に切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。
         -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントが[＃57134](https://github.com/pingcap/tidb/issues/57134) @ [3pointer](https://github.com/3pointer)に進まない問題を修正しました。

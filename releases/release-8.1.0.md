@@ -280,7 +280,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
         -   ソースファイル[＃51800](https://github.com/pingcap/tidb/issues/51800) @ [lance6716](https://github.com/lance6716)内の互換性のない SQL ステートメントが原因で、 TiDB Lightning がデータインポート中に`no database selected`報告する問題を修正しました。
         -   TiDB Lightningがサーバーモード[＃36374](https://github.com/pingcap/tidb/issues/36374) @ [kennytm](https://github.com/kennytm)でログに機密情報を出力する可能性がある問題を修正しました
-        -   PDLeaderを強制終了すると、 TiDB Lightningがデータインポート[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)中に`invalid store ID 0`エラーを報告する問題を修正しました。
+        -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
         -   TiDB Lightningが`replace`戦略[＃52886](https://github.com/pingcap/tidb/issues/52886) @ [lyzx2001](https://github.com/lyzx2001)を使用して競合するデータを処理するときに`Unknown column in where clause`エラーを報告する問題を修正しました
         -   Parquet 形式[＃52518](https://github.com/pingcap/tidb/issues/52518) @ [kennytm](https://github.com/kennytm)の空のテーブルをインポートするときにTiDB Lightning がパニックになる問題を修正しました
 
