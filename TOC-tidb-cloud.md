@@ -35,6 +35,8 @@
   - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
   - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
 - [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
+- TiDB Cloud File System
+  - [Overview](/tidb-cloud/tidb-cloud-filesystem/fs-overview.md)
 - Manage {{{ .dedicated }}} Clusters
   - [Create a TiDB Cloud Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cloud Dedicated Cluster
