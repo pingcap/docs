@@ -35,6 +35,16 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 </LearningPath>
 
+<LearningPath label="Deploy" icon="deploy">
+
+[]()
+
+[]()
+
+[]()
+
+</LearningPath>
+
 <LearningPath label="Maintain" icon="cloud7">
 
 [Create a {{{ .premium }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-premium/?plan=byoc)
