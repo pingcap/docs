@@ -76,7 +76,7 @@ TiDBバージョン: 7.1.4
     -   `HashJoin`演算子がディスク[＃50841](https://github.com/pingcap/tidb/issues/50841) @ [wshwsh12](https://github.com/wshwsh12)にスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。
     -   `REPLACE INTO`文[＃34325](https://github.com/pingcap/tidb/issues/34325) @ [YangKeao](https://github.com/YangKeao)でヒントが使用できない問題を修正
     -   `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラー[＃49986](https://github.com/pingcap/tidb/issues/49986) @ [AilinKid](https://github.com/AilinKid)が返される可能性がある問題を修正しました
-    -   複数値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [YangKeao](https://github.com/YangKeao)
+    -   多値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [YangKeao](https://github.com/YangKeao)
     -   CTEクエリのメモリ使用量が制限[＃50337](https://github.com/pingcap/tidb/issues/50337) @ [guo-shaoge](https://github.com/guo-shaoge)を超えたときに発生するgoroutineリークの問題を修正しました
     -   古いインターフェースを使用するとテーブル[＃49751](https://github.com/pingcap/tidb/issues/49751) @ [hawkingrei](https://github.com/hawkingrei)のメタデータに不整合が発生する可能性がある問題を修正しました。
     -   `ORDER BY`句で`UNIQUE`インデックス検索を実行するとエラー[＃49920](https://github.com/pingcap/tidb/issues/49920) @ [jackysp](https://github.com/jackysp)が発生する可能性がある問題を修正しました

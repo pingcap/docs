@@ -185,7 +185,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB
 
-    -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
+    -   多値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
     -   OOMエラー発生後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @ [Rustin170506](https://github.com/Rustin170506)
     -   BRを使用して統計情報のないテーブルを復元した後、そのテーブルの統計の健全性が 100% [＃29769](https://github.com/pingcap/tidb/issues/29769) @ [winoros](https://github.com/winoros)のままになる問題を修正しました。
     -   アップグレード[＃52040](https://github.com/pingcap/tidb/issues/52040) @ [Rustin170506](https://github.com/Rustin170506)中に TiDB がシステム テーブルの統計を作成する問題を修正しました

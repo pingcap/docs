@@ -79,7 +79,7 @@ TiDB バージョン: 7.5.2
 
     -   一意インデックス[＃52914](https://github.com/pingcap/tidb/issues/52914) @ [wjhuang2016](https://github.com/wjhuang2016)を追加するときに同時 DML 操作によって発生するデータ インデックスの不整合の問題を修正しました。
     -   パーティションテーブル[＃52080](https://github.com/pingcap/tidb/issues/52080) @ [tangenta](https://github.com/tangenta)に複数のスキーマ変更を含むインデックスを追加することで発生するデータインデックスの不整合の問題を修正しました。
-    -   複数値インデックス[＃51162](https://github.com/pingcap/tidb/issues/51162) @ [ywqzzy](https://github.com/ywqzzy)を追加することによって発生するデータ インデックスの不整合の問題を修正しました
+    -   多値インデックス[＃51162](https://github.com/pingcap/tidb/issues/51162) @ [ywqzzy](https://github.com/ywqzzy)を追加することによって発生するデータ インデックスの不整合の問題を修正しました
     -   ネットワークの問題によりDDL操作が停止する問題を修正[＃47060](https://github.com/pingcap/tidb/issues/47060) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   起動時に統計情報をロードするときにTiDBがGCによるエラーを報告する可能性がある問題を修正[＃53592](https://github.com/pingcap/tidb/issues/53592) @ [you06](https://github.com/you06)
     -   TiDBが準備完了していないTiKVノード[＃50758](https://github.com/pingcap/tidb/issues/50758) @ [zyguan](https://github.com/zyguan)にリクエストを送信する可能性がある問題を修正
@@ -125,7 +125,7 @@ TiDB バージョン: 7.5.2
     -   `CPS by type`メトリックに誤った値[＃52605](https://github.com/pingcap/tidb/issues/52605) @ [nolouch](https://github.com/nolouch)が表示される問題を修正しました
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
     -   照合の新しいフレームワークが無効になっているときに、異なる照合を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @ [wjhuang2016](https://github.com/wjhuang2016)
-    -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
+    -   多値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラー[＃49438](https://github.com/pingcap/tidb/issues/49438) @ [qw4990](https://github.com/qw4990)が返される可能性がある問題を修正しました。
     -   TiDBが式[＃43527](https://github.com/pingcap/tidb/issues/43527) @ [Rustin170506](https://github.com/Rustin170506)内のシステム変数の型を正しく変換できない問題を修正
     -   `INSERT IGNORE`実行すると、一意インデックスとデータ[＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)の間に不整合が発生する可能性がある問題を修正しました。
     -   OOMエラー発生後に自動統計収集が停止する問題を修正[＃51993](https://github.com/pingcap/tidb/issues/51993) @ [Rustin170506](https://github.com/Rustin170506)
