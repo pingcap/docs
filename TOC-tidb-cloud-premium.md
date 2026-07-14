@@ -62,7 +62,9 @@
     - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    - [Analyze Performance](/tidb-cloud/tune-performance.md)
+    - Analyze Performance
+      - [Use the Diagnosis Page](/tidb-cloud/tune-performance.md)
+      - [Identify Slow Queries](/identify-slow-queries.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
