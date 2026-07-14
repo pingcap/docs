@@ -488,6 +488,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - OF (R)
 - OFF
 - OFFSET
+- OLD
 - OLTP_READ_ONLY
 - OLTP_READ_WRITE
 - OLTP_WRITE_ONLY
@@ -588,6 +589,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - REQUIRE (R)
 - REQUIRED
 - RESET
+- RETAIN
 - RESOURCE
 - RESPECT
 - RESTART
@@ -695,6 +697,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_TOPN
 - STATUS
 - STORAGE
+- STORAGE_CLASS
 - STORED (R)
 - STRAIGHT_JOIN (R)
 - STRICT_FORMAT
@@ -768,6 +771,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - USE (R)
 - USER
 - USING (R)
+- UUID
 - UTC_DATE (R)
 - UTC_TIME (R)
 - UTC_TIMESTAMP (R)
