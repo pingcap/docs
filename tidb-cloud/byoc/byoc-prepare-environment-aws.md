@@ -78,7 +78,7 @@ You need to create two separate **public hosted zones** in Amazon Route 53.
     nslookup -type=ns o11y.cluster.example.com
     ```
 
-<!--To confirm: whether to add image-->
+    <!--To confirm: whether to add image-->
 
     > **Note:**
     >

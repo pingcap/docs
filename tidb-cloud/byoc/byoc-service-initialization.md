@@ -13,16 +13,16 @@ Following the successful deployment of your BYOC infrastructure, the next phase 
 
 You can now provision TiDB instances directly via the TiDB Cloud Console.
 
-1. **Initiate instance creation.** Log in to the [TiDB Cloud Console](https://tidbcloud.com/) and follow the standard workflow to create a new instance.
+1. Initiate instance creation. Log in to the [TiDB Cloud Console](https://tidbcloud.com/) and follow the standard workflow to create a new instance.
 
-<!--To confirm: whether to add image-->
+    <!--To confirm: whether to add image-->
 
-2. **Configuration.** Select the region and specifications that match your workload requirements.
+2. Select the region and specifications that match your workload requirements.
 
     * Initial Setup Time: The creation of the **first instance** typically takes approximately **1 hour** as the system initializes the Kubernetes environment.
     * Subsequent instances: Creating additional instances in the same region will only take a few minutes.
 
-3. **Capacity Configuration.** Consult with your TiDB Cloud representative to determine the appropriate Request Unit (RU) settings for your initial connectivity and functional tests. They will recommend a configuration based on your specific testing requirements.
+3. Consult with your TiDB Cloud representative to determine the appropriate Request Unit (RU) settings for your initial connectivity and functional tests. They will recommend a configuration based on your specific testing requirements.
 
 ### Restore a new instance from Amazon S3
 
