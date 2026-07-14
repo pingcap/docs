@@ -97,14 +97,14 @@ TiDB バージョン: 7.5.1
     -   TiDB が履歴統計[＃49076](https://github.com/pingcap/tidb/issues/49076) @ [hawkingrei](https://github.com/hawkingrei)を記録するときに TiDB のバックグラウンド ジョブ スレッドがpanicになる可能性がある問題を修正しました
     -   TiDBがパーティションテーブル[＃49023](https://github.com/pingcap/tidb/issues/49023) @ [hawkingrei](https://github.com/hawkingrei)のグローバル統計のヒストグラムをマージするときに発生する可能性のあるエラーを修正しました。
     -   パーティションが[＃49334](https://github.com/pingcap/tidb/issues/49334) @ [Rustin170506](https://github.com/Rustin170506)に削除された後、 `stats_meta`テーブルの履歴統計が更新されない問題を修正しました
-    -   複数値インデックスが誤って`Index Join`プローブ側[＃50382](https://github.com/pingcap/tidb/issues/50382) @ [AilinKid](https://github.com/AilinKid)として選択されたために発生する誤ったクエリ結果の問題を修正しました。
-    -   `USE_INDEX_MERGE`ヒントが複数値インデックス[＃50553](https://github.com/pingcap/tidb/issues/50553) @ [AilinKid](https://github.com/AilinKid)に効果がない問題を修正しました
+    -   多値インデックスが誤って`Index Join`プローブ側[＃50382](https://github.com/pingcap/tidb/issues/50382) @ [AilinKid](https://github.com/AilinKid)として選択されたために発生する誤ったクエリ結果の問題を修正しました。
+    -   `USE_INDEX_MERGE`ヒントが多値インデックス[＃50553](https://github.com/pingcap/tidb/issues/50553) @ [AilinKid](https://github.com/AilinKid)に効果がない問題を修正しました
     -   `INFORMATION_SCHEMA.ANALYZE_STATUS`システムテーブル[＃48835](https://github.com/pingcap/tidb/issues/48835) @ [Rustin170506](https://github.com/Rustin170506)をクエリするときにユーザーがエラーを受け取る可能性がある問題を修正しました
     -   TiDB が`group by` [＃38756](https://github.com/pingcap/tidb/issues/38756) @ [Rustin170506](https://github.com/Rustin170506)の定数値を誤って削除することによる間違ったクエリ結果の問題を修正しました
     -   テーブル上の`ANALYZE`タスクのうち`processed_rows`が、そのテーブルの合計行数[＃50632](https://github.com/pingcap/tidb/issues/50632) @ [hawkingrei](https://github.com/hawkingrei)を超える可能性がある問題を修正しました。
     -   `tidb_enable_prepared_plan_cache`システム変数が有効になってから無効になった後に`EXECUTE`ステートメントを使用して`PREPARE STMT`実行すると、TiDB がpanicになる可能性がある問題を修正しました[＃49344](https://github.com/pingcap/tidb/issues/49344) @ [qw4990](https://github.com/qw4990)
     -   クエリで`NATURAL JOIN` [＃32044](https://github.com/pingcap/tidb/issues/32044) @ [AilinKid](https://github.com/AilinKid)が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します
-    -   複数値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [YangKeao](https://github.com/YangKeao)
+    -   多値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [YangKeao](https://github.com/YangKeao)
     -   集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @ [qw4990](https://github.com/qw4990)
     -   文字列型の変数に対する`SET_VAR`の制御が無効になる可能性がある問題を修正[＃50507](https://github.com/pingcap/tidb/issues/50507) @ [qw4990](https://github.com/qw4990)
     -   `tidb_server_memory_limit` [＃48741](https://github.com/pingcap/tidb/issues/48741) @ [XuHuaiyu](https://github.com/XuHuaiyu)による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正

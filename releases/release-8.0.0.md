@@ -87,9 +87,9 @@ TiDB バージョン: 8.0.0
 
 -   オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB v6.6.0 では[複数値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリ パフォーマンスが向上しました。v8.0.0 では、オプティマイザがマルチ値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
+    TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリ パフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
-    -   オプティマイザは、複数値インデックスに関する統計情報を収集し、その統計情報に基づいて実行プランを決定します。SQL文で複数の複数値インデックスを選択できる場合、オプティマイザはコストが最も低いインデックスを特定できます。
+    -   オプティマイザは、多値インデックスに関する統計情報を収集し、その統計情報に基づいて実行プランを決定します。SQL文で複数の多値インデックスを選択できる場合、オプティマイザはコストが最も低いインデックスを特定できます。
     -   `OR`を使用して複数の`member of`条件を接続する場合、オプティマイザは各 DNF 項目 ( `member of`条件) に対して有効なインデックス部分パスを照合し、これらのパスを Union を使用して結合して`Index Merge`を形成できます。これにより、条件フィルタリングとデータ取得の効率が向上します。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を参照してください。
@@ -340,7 +340,7 @@ TiDB バージョン: 8.0.0
     -   TiKVの負荷が高い時に広範囲にわたるタイムアウトが発生するのを避けるため、統計情報を同期的にロードするタスクの優先度を一時的に「高」に調整します。タイムアウトが発生すると、統計情報がロードされない可能性があります。 [#50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
     -   `PREPARE`ステートメントが実行プランキャッシュにヒットしなかった場合、TiDB では`SHOW WARNINGS`を実行することで理由を確認できます。 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)
     -   同じデータ行が複数回更新された場合のクエリ推定情報の精度を向上させる [#47523](https://github.com/pingcap/tidb/issues/47523) @[terry1purcell](https://github.com/terry1purcell)
-    -   インデックスマージは、 `OR`述語への複数値インデックスと`AND`演算子の埋め込みをサポートします [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
+    -   インデックスマージは、 `OR`述語への多値インデックスと`AND`演算子の埋め込みをサポートします [#51778](https://github.com/pingcap/tidb/issues/51778) @[time-and-fate](https://github.com/time-and-fate)
     -   `force-init-stats` `true`に設定すると、TiDB は TiDB 起動中にサービスを提供する前に統計情報の初期化が完了するまで待機します。この設定により HTTP サーバーの起動がブロックされなくなり、ユーザーは引き続き監視できるようになります [#50854](https://github.com/pingcap/tidb/issues/50854) @[hawkingrei](https://github.com/hawkingrei)
     -   MemoryTracker は `IndexLookup` 演算子のメモリ使用量を追跡できます [#45901](https://github.com/pingcap/tidb/issues/45901) @[solotzg](https://github.com/solotzg)
     -   MemoryTracker は `MemTableReaderExec` オペレーターのメモリ使用量を追跡できます [#51456](https://github.com/pingcap/tidb/issues/51456) @[wshwsh12](https://github.com/wshwsh12)

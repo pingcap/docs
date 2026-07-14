@@ -410,7 +410,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   ヒストグラムの境界に`NULL`が含まれる場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     -   `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正 [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
     -   `UPDATE` 、 `DELETE` 、および`INSERT`ステートメントが、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)
-    -   テーブルにマルチバリューインデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
+    -   テーブルに多値インデックスと非バイナリ型文字列で構成される複合インデックスがある場合にデータを挿入できない問題を修正 [#49680](https://github.com/pingcap/tidb/issues/49680) @[YangKeao](https://github.com/YangKeao)
     -   多階層にネストされた`LIMIT`クエリ内の`UNION`無効になる可能性がある問題を修正 [#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     -   `BETWEEN ... AND ...`条件を使用してパーティション テーブルをクエリすると誤った結果が返される問題を修正 [#49842](https://github.com/pingcap/tidb/issues/49842) @[Defined2014](https://github.com/Defined2014)
     -   `REPLACE INTO`ステートメントでヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)

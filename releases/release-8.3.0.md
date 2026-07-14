@@ -236,7 +236,7 @@ TiDBバージョン：8.3.0
     -   インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     -   `mysql.analyze_jobs`システムテーブル [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)に分析済みインデックスを表示します。
     -   `tidb_redact_log`ステートメントの出力に`EXPLAIN`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
-    -   クエリ効率を向上させるため、複数値インデックスに対して`Selection` `IndexRangeScan`演算子を生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
+    -   クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`演算子を生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     -   設定された時間枠外で実行されている自動タスク`ANALYZE`の強制終了をサポート [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     -   統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     -   TopNオペレーターはディスクスピルをサポートします [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008)
