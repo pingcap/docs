@@ -40,7 +40,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDB は[範囲列によるパーティション分割（列リスト）](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は単一列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
--   [交換パーティション](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
+-   [パーティション交換](/partitioned-table.md#partition-management)が GA になりました [#35996](https://github.com/pingcap/tidb/issues/35996) @[ymkzpx](https://github.com/ymkzpx)
 
 -   TiFlashへのさらに 2 つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)のプッシュダウンをサポート [#5579](https://github.com/pingcap/tiflash/issues/5579) @[SeaRise](https://github.com/SeaRise)
 
