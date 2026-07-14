@@ -350,7 +350,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### 多値インデックスを使用する {#use-multi-valued-indexes}
 
-詳細については [インデックスの選択 - 多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)参照してください。
+詳細については、[インデックスの選択 - 多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
 ### 制限事項 {#limitations}
 

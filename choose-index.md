@@ -151,7 +151,7 @@ mysql> SHOW WARNINGS;
 
 ### サポートされているシナリオ {#supported-scenarios}
 
-現在、TiDB は`json_member_of` 、 `json_contains` E}} 、 `json_overlaps`の条件から自動的に変換される IndexMerge を使用して、多値インデックスへのアクセスをサポートしています。オプティマイザがコストに基づいて IndexMerge を自動的に選択するようにするか、オプティマイザヒント[`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)または[`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して多値インデックスの選択を指定できます。以下の例を参照してください。
+現在、TiDB は`json_member_of`、`json_contains`、`json_overlaps`の条件から自動的に変換される IndexMerge を使用して、多値インデックスへのアクセスをサポートしています。オプティマイザがコストに基づいて IndexMerge を自動的に選択するようにするか、オプティマイザヒント[`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)または[`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して多値インデックスの選択を指定できます。以下の例を参照してください。
 
 ```sql
 mysql> CREATE TABLE t1 (j JSON, INDEX idx((CAST(j->'$.path' AS SIGNED ARRAY)))); -- Uses '$.path' as the path to create a multi-valued index
@@ -599,7 +599,7 @@ EXPLAIN SELECT /*+ use_index_merge(t6, idx, idx2) */ * FROM t6 WHERE a=1 AND ((1
 +-------------------------------+---------+-----------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-現在の多値インデックスの実装上の制約により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが発生する可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは発生しません。したがって、多値インデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
+現在の多値インデックスの実装上の制約により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが発生する可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用するとそのようなエラーは発生しません。したがって、多値インデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
