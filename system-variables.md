@@ -1827,7 +1827,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only.
+> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only.
 > - For [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
 
 - Scope: SESSION | GLOBAL
