@@ -589,10 +589,10 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - REQUIRE (R)
 - REQUIRED
 - RESET
-- RETAIN
 - RESOURCE
 - RESPECT
 - RESTART
+- RETAIN
 - RESTORE
 - RESTORES
 - RESTRICT (R)
@@ -771,10 +771,10 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - USE (R)
 - USER
 - USING (R)
-- UUID
 - UTC_DATE (R)
 - UTC_TIME (R)
 - UTC_TIMESTAMP (R)
+- UUID
 
 <a id="V" class="letter" href="#V">V</a>
 
