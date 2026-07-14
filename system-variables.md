@@ -1720,7 +1720,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> For {{{ .premium }}}, this variable is read-only and controlled by TiDB Cloud. You cannot modify it manually.
+> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
