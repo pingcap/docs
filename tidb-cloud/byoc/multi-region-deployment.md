@@ -15,7 +15,7 @@ The following two scenarios apply to multi-region deployments:
 | Add a region to an existing deployment | One or more BYOC regions have already been deployed, and an additional region will be enabled later. | `tidbcloud-byoc-update.sh` |
 
 * For a new deployment with multiple planned regions, see [Scenario 1: New multi-region deployment](#scenario-1-new-multi-region-deployment).
-* To add a region to an existing BYOC deployment, see [Scenario 2: Add a region to an existing deployment](#scenario-2-add-a-region-to-an-existing-deployment).
+* To add a region to an existing BYOC deployment, see [Scenario 2: Add a region to an existing deployment](#scenario-2-add-a-region-to-an-existing-byoc-deployment).
 
 ## Resource planning: shared and dedicated resources
 
