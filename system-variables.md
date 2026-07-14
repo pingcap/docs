@@ -1708,6 +1708,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -1717,10 +1721,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
 - Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is read-only and controlled by TiDB Cloud. You cannot modify it manually.
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
@@ -1800,6 +1800,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v6.5.12, v7.5.5, and v8.5.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -1819,15 +1823,11 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
-> **Note:**
->
-> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
 ### tidb_ddl_reorg_worker_cnt
 
 > **Note:**
 >
-> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only.
 > - For [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
 
 - Scope: SESSION | GLOBAL
@@ -2462,16 +2462,16 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 ### tidb_enable_metadata_lock <span class="version-mark">New in v6.3.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
