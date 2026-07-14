@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## July 14, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Enhance cross-region restore for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+
+        When the target restore region has no pre-allocated CIDR block, you can now create a CIDR block directly on the **Restore** page, eliminating the need to manually create a cluster in that region before starting the restore.
+
 ## July 9, 2026
 
 **General changes**
