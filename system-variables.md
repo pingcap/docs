@@ -735,6 +735,42 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
+<<<<<<< HEAD
+=======
+### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
+
+> **Note:**
+>
+> - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
+> - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
+> - For a newly deployed TiDB cluster from v8.3.0 to v8.5.4, this variable is set to `PREDICATE` by default.
+> - For a newly deployed TiDB cluster from v8.5.5 and v9.0.0 onwards, this variable is set to `ALL` by default.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Enumeration
+- Default value: `ALL`
+- Value options:`ALL`, `PREDICATE`
+- This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.
+
+### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
+
+> **Note:**
+>
+> In versions earlier than v7.6.0, regular `ANALYZE` region scans are controlled by `tidb_distsql_scan_concurrency`, and index statistics scans are controlled by `tidb_index_serial_scan_concurrency`. Therefore, to adjust the concurrency of scanning TiKV Regions for these versions, consider changing the value of `tidb_distsql_scan_concurrency`.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `4`
+- Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency of scanning TiKV Regions.
+    - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
+
+>>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 ### tidb_analyze_partition_concurrency
 
 > **Warning:**
@@ -743,8 +779,15 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+<<<<<<< HEAD
 - Default value: `1`
 - This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
+=======
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
+- Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
+- For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
+>>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -759,6 +802,76 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
 - For detailed introduction about this variable, see [Introduction to Statistics](/statistics.md).
 
+<<<<<<< HEAD
+=======
+### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: "json,blob,mediumblob,longblob,mediumtext,longtext". Before v8.2.0, the default value is "json,blob,mediumblob,longblob".
+- Possible values: "json,blob,mediumblob,longblob,text,mediumtext,longtext"
+- This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for `tidb_analyze_version = 2`. Even if you specify a column using `ANALYZE TABLE t COLUMNS c1, ... , cn`, no statistics will be collected for the specified column if its type is in `tidb_analyze_skip_column_types`.
+
+```
+mysql> SHOW CREATE TABLE t;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t     | CREATE TABLE `t` (
+  `a` int DEFAULT NULL,
+  `b` varchar(10) DEFAULT NULL,
+  `c` json DEFAULT NULL,
+  `d` blob DEFAULT NULL,
+  `e` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT @@tidb_analyze_skip_column_types;
++----------------------------------+
+| @@tidb_analyze_skip_column_types |
++----------------------------------+
+| json,blob,mediumblob,longblob,mediumtext,longtext        |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++---------------------------------------------------------------------+
+| job_info                                                            |
++---------------------------------------------------------------------+
+| analyze table columns a, b with 256 buckets, 500 topn, 1 samplerate |
++---------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t COLUMNS a, c;
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++------------------------------------------------------------------+
+| job_info                                                         |
++------------------------------------------------------------------+
+| analyze table columns a with 256 buckets, 500 topn, 1 samplerate |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### tidb_auto_analyze_concurrency <span class="version-mark">New in v8.4.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `3`
+- Range: `[1, 2147483647]`
+- This variable controls the number of concurrent auto-analyze operations that can run in a TiDB cluster. To accelerate statistics collection tasks, you can increase this concurrency based on the available resources in your cluster.
+- Before v8.4.0, this concurrency is fixed at `1`. 
+- Starting from v8.5.7 and v9.0.0, the default value changes from `1` to `3`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+
+>>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 ### tidb_auto_analyze_end_time
 
 - Scope: GLOBAL
@@ -805,7 +918,12 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
+<<<<<<< HEAD
 - This variable is used to set the concurrency of executing the automatic update of statistics.
+=======
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
+- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+>>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_backoff_lock_fast
 
@@ -899,9 +1017,24 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `4`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
+<<<<<<< HEAD
+=======
+### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Unit: Threads
+- Default value: `2`
+- Range: `[1, 256]`
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency for merging samples collected from different Regions.
+    - The concurrency for collecting statistics on special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
+
+>>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
 - Scope: GLOBAL
@@ -2435,14 +2568,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
+> **Warning:**
+>
+> This variable is deprecated and no longer controls execution behavior. The concurrency of sequential index scans is now controlled by [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of the `serial scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- This variable remains only for backward compatibility. Use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to control the concurrency of sequential index scans, or [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
 
 ### tidb_init_chunk_size
 
@@ -2749,7 +2885,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `1`
-- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+- This variable controls the concurrency for merging TopN results of partitioned tables.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
