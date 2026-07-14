@@ -48,7 +48,7 @@ TiDB バージョン: 5.4.3
     -   UPDATE文が場合によっては投影を誤って削除し、 `Can't find column`エラー[＃37568](https://github.com/pingcap/tidb/issues/37568)が発生する問題を修正しました。
     -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[＃33966](https://github.com/pingcap/tidb/issues/33966)
     -   特定のシナリオ[＃37187](https://github.com/pingcap/tidb/issues/37187)予期しないエラーが発生する可能性がある問題を修正しました`EXECUTE`
-    -   準備済みプランキャッシュが有効になっている`BIT`タイプのインデックスを使用すると、TiDBが間違った結果を返す可能性がある問題を修正しました[＃33067](https://github.com/pingcap/tidb/issues/33067)
+    -   プリペアドプランキャッシュが有効になっている`BIT`タイプのインデックスを使用すると、TiDBが間違った結果を返す可能性がある問題を修正しました[＃33067](https://github.com/pingcap/tidb/issues/33067)
 
 -   TiKV
 

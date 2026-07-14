@@ -49,7 +49,7 @@ TiDB バージョン: 8.4.0
     -   冗長性を排除し、同じメモリ消費量でより多くの実行プランをキャッシュします。
     -   インスタンスに固定サイズのメモリを割り当て、メモリ使用量をより効果的に制限します。
 
-    v8.4.0 では、インスタンス レベルの実行プラン キャッシュはクエリ実行プランのキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[準備された実行プランキャッシュ](/sql-prepared-plan-cache.md)と[準備されていない実行プランのキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
+    v8.4.0 では、インスタンス レベルの実行プラン キャッシュはクエリ実行プランのキャッシュのみをサポートしており、デフォルトでは無効になっています。 [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を使用してこの機能を有効にし、 [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840)を使用して最大メモリ使用量を設定できます。この機能を有効にする前に、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)と[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を無効にしてください。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)を参照してください。
 

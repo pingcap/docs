@@ -272,7 +272,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   ユーザーが`INSERT`操作を実行するには、テーブルに対する`DELETE`権限と`REPLACE`権限の両方が必要になりました [#24070](https://github.com/pingcap/tidb/pull/24070)
     -   バイナリとバイトの比較ミスによって発生した誤った`TableDual`プランを修正 [#23846](https://github.com/pingcap/tidb/issues/23846)
     -   プレフィックスインデックスとインデックス結合の使用によって発生するpanic問題を修正[#24547](https://github.com/pingcap/tidb/issues/24547) [#24716](https://github.com/pingcap/tidb/issues/24716) [#24717](https://github.com/pingcap/tidb/issues/24717)
-    -   トランザクションにおいて、 `point get` ステートメントが `point get` の準備済みプランキャッシュを誤って使用する問題を修正します。 [#24741](https://github.com/pingcap/tidb/issues/24741)
+    -   トランザクションにおいて、 `point get` ステートメントが `point get` のプリペアドプランキャッシュを誤って使用する問題を修正します。 [#24741](https://github.com/pingcap/tidb/issues/24741)
     -   照合順序が`ascii_bin`または`latin1_bin`の場合に、誤ったプレフィックスインデックス値が書き込まれる問題を修正しました [#24569](https://github.com/pingcap/tidb/issues/24569)
     -   進行中のトランザクションがGCワーカーによって中断される可能性がある問題を修正しました [#24591](https://github.com/pingcap/tidb/issues/24591)
     -   `new-collation`が有効で`new-row-format`が無効になっている場合に、クラスター化インデックスでポイントクエリが正しく実行されない可能性があるバグを修正しました [#24541](https://github.com/pingcap/tidb/issues/24541)

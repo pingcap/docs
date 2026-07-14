@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.0.1
 -   プラグイン`ADMIN PLUGINS DISABLE` `ADMIN PLUGINS ENABLE`ステートメントを追加する[＃11157](https://github.com/pingcap/tidb/pull/11157)
 -   監査プラグイン[＃11013](https://github.com/pingcap/tidb/pull/11013)にセッション接続情報を追加する
 -   リージョン分割期間中のデフォルトの動作を変更し、PD がスケジュール[＃11166](https://github.com/pingcap/tidb/pull/11166)を完了するまで待機します。
--   一部のケースで誤った結果を回避するために、ウィンドウ関数がプラン準備キャッシュにキャッシュされることを禁止します[＃11048](https://github.com/pingcap/tidb/pull/11048)
+-   一部のケースで誤った結果を回避するために、ウィンドウ関数がプリペアドプランキャッシュにキャッシュされることを禁止します[＃11048](https://github.com/pingcap/tidb/pull/11048)
 -   `ALTER`文が保存された生成列の定義を変更することを禁止する[＃11068](https://github.com/pingcap/tidb/pull/11068)
 -   仮想生成列を保存生成列に変更することを禁止する[＃11068](https://github.com/pingcap/tidb/pull/11068)
 -   インデックス[＃11068](https://github.com/pingcap/tidb/pull/11068)で生成された列式の変更を禁止する

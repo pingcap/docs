@@ -65,7 +65,7 @@ TiDB バージョン: 5.0.2
 -   TiDB
 
     -   一部のケースでプレフィックスインデックスとインデックス結合を使用することで発生するpanic問題を修正[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716) [＃24717](https://github.com/pingcap/tidb/issues/24717)
-    -   `point get`の準備されたプランキャッシュがトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`文によって誤って使用される問題を修正しました。
+    -   `point get`のプリペアドプランキャッシュがトランザクションの`point get`文によって誤って使用される問題を修正しました[＃24741](https://github.com/pingcap/tidb/issues/24741)。
     -   照合順序が`ascii_bin`または`latin1_bin`場合に間違ったプレフィックスインデックス値を書き込む問題を修正しました[＃24569](https://github.com/pingcap/tidb/issues/24569)
     -   GCワーカー[＃24591](https://github.com/pingcap/tidb/issues/24591)によって進行中のトランザクションが中断される可能性がある問題を修正
     -   `new-collation`が有効で`new-row-format`無効の場合、クラスター化インデックスでポイントクエリが間違って実行される可能性があるバグを修正しました[＃24541](https://github.com/pingcap/tidb/issues/24541)

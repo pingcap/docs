@@ -98,8 +98,8 @@
           - [クエリの最適化](/agg-distinct-optimization.md)
           - [コストモデル](/cost-model.md)
           - [ランタイムフィルタ](/runtime-filter.md)
-        - [準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)
-        - [未準備実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
+        - [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)
+        - [非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)
       - 実行計画の制御
         - [概要](/control-execution-plan.md)
         - [オプティマイザのヒント](/optimizer-hints.md)

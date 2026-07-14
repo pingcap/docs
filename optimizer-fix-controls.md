@@ -30,7 +30,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
--   この変数は、パーティションテーブルに対してプランキャッシュを許可するかどうかを制御します。 `ON`に設定した場合、 [パーティションテーブル](/partitioned-table.md)では[準備されたステートメントプランキャッシュ](/sql-prepared-plan-cache.md)も[非プリペアドステートメントプランキャッシュ](/sql-non-prepared-plan-cache.md)有効になりません。
+-   この変数は、パーティションテーブルに対してプランキャッシュを許可するかどうかを制御します。 `ON`に設定した場合、 [パーティションテーブル](/partitioned-table.md)では[プリペアドステートメントプランキャッシュ](/sql-prepared-plan-cache.md)も[非プリペアドステートメントプランキャッシュ](/sql-non-prepared-plan-cache.md)有効になりません。
 
 ### <a href="https://github.com/pingcap/tidb/issues/44262"><code>44262</code></a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-code-44262-code-a-span-class-version-mark-new-in-v6-5-3-and-v7-2-0-span}
 

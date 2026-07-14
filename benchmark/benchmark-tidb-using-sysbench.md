@@ -19,7 +19,7 @@ server_configs:
     log.level: "error"
 ```
 
-また、 [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)有効になっていることを確認し、 `--db-ps-mode=auto`使用して sysbench が準備済みステートメントを使用できるようにすることをお勧めします。SQL プランキャッシュの機能と監視方法については、 [SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)のドキュメントを参照してください。
+また、 [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)が有効になっていることを確認し、 `--db-ps-mode=auto`を使用して sysbench がプリペアドステートメントを使用できるようにすることをお勧めします。SQL プランキャッシュの機能と監視方法については、 [SQL プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)のドキュメントを参照してください。
 
 > **注記：**
 >

@@ -68,7 +68,7 @@ TiDB バージョン: 6.5.6
     -   CAST に精度損失がないのに条件`cast(col)=range`で FullScan が発生する問題を修正[＃45199](https://github.com/pingcap/tidb/issues/45199) @ [AilinKid](https://github.com/AilinKid)
     -   `batch-client` in `client-go` [＃47691](https://github.com/pingcap/tidb/issues/47691) @ [crazycs520](https://github.com/crazycs520)のpanic問題を修正
     -   非整数クラスター化インデックス[＃47350](https://github.com/pingcap/tidb/issues/47350) @ [tangenta](https://github.com/tangenta)でのテーブル分割操作を禁止する
-    -   時間変換[＃42439](https://github.com/pingcap/tidb/issues/42439) @ [qw4990](https://github.com/qw4990)中に準備済みプラン キャッシュと準備されていないプラン キャッシュの動作間の非互換性の問題を修正しました
+    -   時刻変換中にプリペアドプランキャッシュと非プリペアドプランキャッシュの動作間の非互換性の問題を修正しました[＃42439](https://github.com/pingcap/tidb/issues/42439) @ [qw4990](https://github.com/qw4990)
     -   取り込みモード[＃39641](https://github.com/pingcap/tidb/issues/39641) @ [tangenta](https://github.com/tangenta)を使用して空のテーブルにインデックスを作成できないことがある問題を修正しました
     -   パーティション交換[＃46492](https://github.com/pingcap/tidb/issues/46492) @ [mjonss](https://github.com/mjonss)中にパーティション定義に準拠していないデータを検出できない問題を修正
     -   `GROUP_CONCAT` `ORDER BY`列[＃41986](https://github.com/pingcap/tidb/issues/41986) @ [AilinKid](https://github.com/AilinKid)を解析できない問題を修正

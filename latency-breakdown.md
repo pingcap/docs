@@ -64,7 +64,7 @@ e2e duration =
 
 -   `tidb_server_get_token_duration_seconds`トークンの待機時間を記録します。これは通常1ミリ秒未満であり、無視できるほど小さい値です。
 -   `tidb_session_parse_duration_seconds` SQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
--   `tidb_session_compile_duration_seconds` AST を実行プランにコンパイルする時間を記録し、これは[SQL 準備済み実行プランキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
+-   `tidb_session_compile_duration_seconds` AST を実行プランにコンパイルする時間を記録し、これは[SQL プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
 -   `tidb_session_execute_duration_seconds{type="general"}`実行時間を記録しますが、これにはあらゆる種類のユーザークエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細分化した期間に分割する必要があります。
 
 一般的に、OLTP（オンライントランザクション処理）ワークロードは、重要なコードを共有する読み取りクエリと書き込みクエリに分けられます。以下のセクションでは、実行方法が異なる[読み取りクエリ](#read-queries)と[クエリを書く](#write-queries)のレイテンシーについて説明します。
