@@ -153,7 +153,6 @@
     - [TiDB CloudへのTLS接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
   - データアクセス制御
     - [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)
-    - [ユーザー制御のログ秘匿化](/tidb-cloud/tidb-cloud-log-redaction.md)
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
