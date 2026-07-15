@@ -325,7 +325,7 @@ TiDBで`CHECK`制約の適用を有効にするには、次のシステム変数
 SET GLOBAL tidb_enable_check_constraint=ON;
 ```
 
-この設定がない場合、TiDB は`CHECK`制約構文を受け入れますが、それを強制しないため、予期しないデータ整合性の問題が発生する可能性があります。詳細については、 [`CHECK`制約](/constraints.md#check)参照してください。 。
+この設定がない場合、TiDB は`CHECK`制約構文を受け入れますが、それを強制しないため、予期しないデータ整合性の問題が発生する可能性があります。詳細については、 [`CHECK`制約](/constraints.md#check)を参照してください。
 
 ## 次のステップ {#next-steps}
 

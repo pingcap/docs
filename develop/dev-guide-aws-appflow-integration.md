@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-aws-appflow-integration/','/ja/tidb/dev/dev
 
 # TiDBとAmazon AppFlowを統合する {#integrate-tidb-with-amazon-appflow}
 
-[Amazon AppFlow](https://aws.amazon.com/appflow/) Software as a Service (SaaS) アプリケーションを AWS サービスに接続し、データを安全に転送するために使用するフルマネージド API 統合サービスです。 Amazon AppFlow を使用すると、TiDB との間で、Salesforce、Amazon S3、LinkedIn、GitHub などのさまざまなタイプのデータプロバイダーにデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされている送信元および送信先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
+[Amazon AppFlow](https://aws.amazon.com/appflow/)は、Software as a Service (SaaS) アプリケーションを AWS サービスに接続し、データを安全に転送するために使用するフルマネージド API 統合サービスです。 Amazon AppFlow を使用すると、TiDB との間で、Salesforce、Amazon S3、LinkedIn、GitHub などのさまざまなタイプのデータプロバイダーにデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされている送信元および送信先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
 
 このドキュメントでは、TiDBをAmazon AppFlowと統合する方法について説明し、 TiDB Cloud Starterインスタンスの統合を例として取り上げます。
 
