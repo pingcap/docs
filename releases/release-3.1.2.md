@@ -13,7 +13,7 @@ TiDB バージョン: 3.1.2
 
 -   TiKV
 
-    -   S3 と GCS [＃7965](https://github.com/tikv/tikv/pull/7965)を使用したバックアップと復元中のエラー処理の問題を修正
+    -   S3 と GCS を使用したバックアップと復元中のエラー処理の問題を修正 [＃7965](https://github.com/tikv/tikv/pull/7965)
     -   復元中に発生する`DefaultNotFound`エラーを修正する[＃7838](https://github.com/tikv/tikv/pull/7938)
 
 -   ツール
@@ -22,6 +22,6 @@ TiDB バージョン: 3.1.2
 
         -   ネットワークの状態が悪い場合は自動的に再試行して、S3 および GCS ストレージの安定性を向上させます[＃314](https://github.com/pingcap/br/pull/314) [＃7965](https://github.com/tikv/tikv/pull/7965)
         -   小さなテーブルを復元するときにリージョンリーダーが見つからないために発生する復元エラーを修正[＃303](https://github.com/pingcap/br/pull/303)
-        -   テーブルの行IDが`2^(63)` [＃323](https://github.com/pingcap/br/pull/323)を超えると復元中にデータ損失が発生する問題を修正しました
+        -   テーブルの行IDが`2^(63)` を超えると復元中にデータ損失が発生する問題を修正しました [＃323](https://github.com/pingcap/br/pull/323)
         -   空のデータベースとテーブルを復元できない問題を修正[＃318](https://github.com/pingcap/br/pull/318)
         -   S3ストレージをターゲットとする場合、サーバー側暗号化（SSE）にAWS KMSを使用するサポート[＃261](https://github.com/pingcap/br/pull/261)

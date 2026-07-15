@@ -15,7 +15,7 @@ TiDB バージョン: 6.5.5
 
 -   TiDB
 
-    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) @ [＃45520](https://github.com/pingcap/tidb/issues/45520) [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)含む新しいオプティマイザヒント[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) @[qw4990](https://github.com/qw4990)し[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)
+    -   [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-)、[`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-)、[`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-)、[`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-)、[`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-)を含む新しいオプティマイザヒントを追加 [＃45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
     -   コプロセッサ[＃46514](https://github.com/pingcap/tidb/issues/46514) @ [you06](https://github.com/you06)に関連する要求元情報を追加します
 
 -   TiKV
@@ -72,5 +72,5 @@ TiDB バージョン: 6.5.5
 
         -   ターゲットサーバー[＃41040](https://github.com/pingcap/tidb/issues/41040) @ [lance6716](https://github.com/lance6716)にTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
-        -   PD のリーダー[＃46540](https://github.com/pingcap/tidb/issues/46540)を[ランス6716](https://github.com/lance6716)切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました
+        -   PD のリーダーを@ [lance6716](https://github.com/lance6716)切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [＃46540](https://github.com/pingcap/tidb/issues/46540)
         -   事前チェックがターゲット クラスター[＃41040](https://github.com/pingcap/tidb/issues/41040) @ [lance6716](https://github.com/lance6716)で実行中の TiCDC の存在を正確に検出できない問題を修正しました。

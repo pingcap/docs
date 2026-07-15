@@ -60,7 +60,7 @@ TiDBバージョン: 6.5.12
     -   分散実行フレームワーク[＃48680](https://github.com/pingcap/tidb/issues/48680) @ [lance6716](https://github.com/lance6716)の PD メンバーを変更した後に`ADD INDEX`実行が失敗する可能性がある問題を修正しました
     -   `cluster_slow_query table`クエリするときに`ORDER BY`使用すると、順序付けられていない結果[＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)が生成される可能性がある問題を修正しました。
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間[＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。
-    -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが[ランス6716](https://github.com/lance6716)で[＃58184](https://github.com/pingcap/tidb/issues/58184)低下する問題を修正
+    -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが@ [lance6716](https://github.com/lance6716)で低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184)
     -   `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` [＃55965](https://github.com/pingcap/tidb/issues/55965) @ [tiancaiamao](https://github.com/tiancaiamao)と互換性がない問題を修正
     -   クエリ条件`column IS NULL` [＃56116](https://github.com/pingcap/tidb/issues/56116) @ [hawkingrei](https://github.com/hawkingrei)で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。
     -   `IndexLookUp`演算子のメモリの一部が[＃56440](https://github.com/pingcap/tidb/issues/56440) @ [wshwsh12](https://github.com/wshwsh12)で追跡されない問題を修正
@@ -113,7 +113,7 @@ TiDBバージョン: 6.5.12
     -   PD がpanicを起こす可能性のある潜在的な問題を修正[＃8915](https://github.com/tikv/pd/issues/8915) @ [bufferflies](https://github.com/bufferflies)
     -   長時間実行クラスタ[＃9047](https://github.com/tikv/pd/issues/9047) @ [bufferflies](https://github.com/bufferflies)でメモリリークが発生する可能性がある問題を修正
     -   PDノードがLeader[＃9051](https://github.com/tikv/pd/issues/9051) @ [rleungx](https://github.com/rleungx)でない場合でもTSOを生成する可能性がある問題を修正しました
-    -   PD Leaderの切り替え時にリージョン同期が間に合わない問題を修正しました[＃9017](https://github.com/tikv/pd/issues/9017) @ [rleungx](https://github.com/rleungx)
+    -   PDリーダーの切り替え時にリージョン同期が間に合わない問題を修正しました [＃9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     -   `evict-leader-scheduler`または`grant-leader-scheduler`作成時にエラーが発生しても、エラーメッセージが pd-ctl [＃8759](https://github.com/tikv/pd/issues/8759) @ [okJiang](https://github.com/okJiang)に返されない問題を修正しました。
     -   ホットスポット キャッシュ[＃8698](https://github.com/tikv/pd/issues/8698) @ [lhy1024](https://github.com/lhy1024)のメモリリーク問題を修正
     -   多数のリージョンが存在する場合にPDのリージョンAPIをリクエストできない問題を修正[＃55872](https://github.com/pingcap/tidb/issues/55872) @ [rleungx](https://github.com/rleungx)

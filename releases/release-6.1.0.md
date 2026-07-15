@@ -329,30 +329,30 @@ TiDB バージョン: 6.1.0
 
     -   `UnionScanRead` オペレータのパフォーマンスを向上させる [#32433](https://github.com/pingcap/tidb/issues/32433)
     -   `EXPLAIN`の出力におけるタスクタイプの表示を改善（MPPタスクタイプを追加） [＃33332](https://github.com/pingcap/tidb/issues/33332)
-    -   列[＃10377](https://github.com/pingcap/tidb/issues/10377)のデフォルト値として`rand()`使用することをサポートします
-    -   列[＃33870](https://github.com/pingcap/tidb/issues/33870)のデフォルト値として`uuid()`使用することをサポートします
+    -   列のデフォルト値として`rand()`使用することをサポートします [＃10377](https://github.com/pingcap/tidb/issues/10377)
+    -   列のデフォルト値として`uuid()`使用することをサポートします [＃33870](https://github.com/pingcap/tidb/issues/33870)
     -   Support modifying the character set of columns from `latin1` to `utf8`/`utf8mb4` [＃34008](https://github.com/pingcap/tidb/issues/34008)
 
 -   TiKV
 
-    -   インメモリ悲観的ロック[＃12279](https://github.com/tikv/tikv/issues/12279)使用時の CDC の古い値のヒット率を改善
+    -   インメモリ悲観的ロック使用時の CDC の古い値のヒット率を改善 [＃12279](https://github.com/tikv/tikv/issues/12279)
     -   ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[＃12398](https://github.com/tikv/tikv/issues/12398)
-    -   Raft Engine [＃12255](https://github.com/tikv/tikv/issues/12255)のメモリ制限設定をサポート
+    -   Raft Engine のメモリ制限設定をサポート [＃12255](https://github.com/tikv/tikv/issues/12255)
     -   TiKVは、破損したSSTファイルを自動的に検出して削除し、製品の可用性を向上させます[＃10578](https://github.com/tikv/tikv/issues/10578)
-    -   CDCはRawKV [＃11965](https://github.com/tikv/tikv/issues/11965)をサポートしています
+    -   CDCはRawKV をサポートしています [＃11965](https://github.com/tikv/tikv/issues/11965)
     -   Support splitting a large snapshot file into multiple files [＃11595](https://github.com/tikv/tikv/issues/11595)
     -   スナップショットGCがRaftstoreのメッセージループをブロックするのを防ぐために、スナップショットガベージコレクションをRaftstoreからバックグラウンドスレッドに移動します[＃11966](https://github.com/tikv/tikv/issues/11966)
-    -   gPRCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） [＃12334](https://github.com/tikv/tikv/issues/12334)の動的設定をサポート
-    -   Raft [＃10483](https://github.com/tikv/tikv/issues/10483)によるオンラインの安全でない復元計画の実行をサポート
+    -   gPRCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） の動的設定をサポート [＃12334](https://github.com/tikv/tikv/issues/12334)
+    -   Raft によるオンラインの安全でない復元計画の実行をサポート [＃10483](https://github.com/tikv/tikv/issues/10483)
 
 -   PD
-    -   リージョンラベル[＃4694](https://github.com/tikv/pd/issues/4694)の Time-to-Live (TTL) をサポート
+    -   リージョンラベルの Time-to-Live (TTL) をサポート [＃4694](https://github.com/tikv/pd/issues/4694)
     -   サポートリージョンバケット[＃4668](https://github.com/tikv/pd/issues/4668)
     -   デフォルトでSwaggerサーバーのコンパイルを無効にする[#4932](https://github.com/tikv/pd/issues/4932)
 
 -   TiFlash
 
-    -   集約演算子のメモリ計算を最適化して、マージフェーズ[＃4451](https://github.com/pingcap/tiflash/issues/4451)でより効率的なアルゴリズムが使用されるようにします。
+    -   集約演算子のメモリ計算を最適化して、マージフェーズでより効率的なアルゴリズムが使用されるようにします。 [＃4451](https://github.com/pingcap/tiflash/issues/4451)
 
 -   Tools
 
@@ -375,14 +375,14 @@ TiDB バージョン: 6.1.0
     -   `in`関数が`bit`タイプのデータを処理する際に発生する可能性のあるpanicの問題を修正しました[＃33070](https://github.com/pingcap/tidb/issues/33070)
     -   `UnionScan`演算子が順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
     -   特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
-    -   動的プルーニングモード[＃33231](https://github.com/pingcap/tidb/issues/33231)で`index join`結果が間違っている可能性がある問題を修正しました
+    -   動的プルーニングモードで`index join`結果が間違っている可能性がある問題を修正しました [＃33231](https://github.com/pingcap/tidb/issues/33231)
     -   パーティションテーブルの一部のパーティションが削除されたときにデータがガベージコレクションされない可能性がある問題を修正[＃33620](https://github.com/pingcap/tidb/issues/33620)
     -   クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893)でスロークエリをチェックすると発生する可能性があります。
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルへのクエリ実行時に TiDBサーバーのメモリが発生する問題を修正しました。この問題は、Grafana ダッシュボードでスロークエリをチェックすると発生する可能性があります。 [＃33893](https://github.com/pingcap/tidb/issues/33893)
     -   システム変数`max_allowed_packet`が有効にならない問題を修正[＃31422](https://github.com/pingcap/tidb/issues/31422)
-    -   TopSQLモジュール[＃34525](https://github.com/pingcap/tidb/issues/34525) [＃34502](https://github.com/pingcap/tidb/issues/34502)のメモリリークの問題を修正
-    -   PointGetプラン[＃32371](https://github.com/pingcap/tidb/issues/32371)でプランキャッシュが間違っている可能性がある問題を修正しました
-    -   RC分離レベル[＃34447](https://github.com/pingcap/tidb/issues/34447)でプランキャッシュが開始されるとクエリ結果が間違っている可能性がある問題を修正しました
+    -   TopSQLモジュール のメモリリークの問題を修正 [＃34502](https://github.com/pingcap/tidb/issues/34502) [＃34525](https://github.com/pingcap/tidb/issues/34525)
+    -   PointGetプランでプランキャッシュが間違っている可能性がある問題を修正しました [＃32371](https://github.com/pingcap/tidb/issues/32371)
+    -   RC分離レベルでプランキャッシュが開始されるとクエリ結果が間違っている可能性がある問題を修正しました [＃34447](https://github.com/pingcap/tidb/issues/34447)
 
 -   TiKV
 
@@ -392,11 +392,11 @@ TiDB バージョン: 6.1.0
     -   メモリリソースが不足しているときにRaftログを追加することによって発生する OOM の問題を修正しました[#11379](https://github.com/tikv/tikv/issues/11379)
     -   Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [＃12368](https://github.com/tikv/tikv/issues/12368)
     -   `stats_monitor`デッドループに陥った後、短時間で TiKVメモリ使用量が急増する問題を修正[＃12416](https://github.com/tikv/tikv/issues/12416)
-    -   Follower Read [＃12478](https://github.com/tikv/tikv/issues/12478)使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました
+    -   Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました [＃12478](https://github.com/tikv/tikv/issues/12478)
 
 -   PD
 
-    -   `not leader` [＃4797](https://github.com/tikv/pd/issues/4797)の間違ったステータスコードを修正
+    -   `not leader` の間違ったステータスコードを修正 [＃4797](https://github.com/tikv/pd/issues/4797)
     -   Fix a bug of TSO fallback in some corner cases [＃4884](https://github.com/tikv/pd/issues/4884)
     -   PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
@@ -423,16 +423,16 @@ TiDB バージョン: 6.1.0
         -   チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[＃5279](https://github.com/pingcap/tiflow/issues/5279)
         -   Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [＃5272](https://github.com/pingcap/tiflow/issues/5272)
         -   `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        -   `SHOW CREATE TABLE`ステートメント[＃5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。
+        -   `SHOW CREATE TABLE`ステートメントによって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーpanicの問題を修正しました。 [＃5159](https://github.com/pingcap/tiflow/issues/5159)
         -   GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[＃5063](https://github.com/pingcap/tiflow/issues/5063)
-        -   DM WebUI [＃4993](https://github.com/pingcap/tiflow/issues/4993)のオフライン オプションとその他の使用上の問題を修正しました
-        -   アップストリーム[＃3731](https://github.com/pingcap/tiflow/issues/3731)でGTIDが空の場合に増分タスクの開始に失敗する問題を修正
+        -   DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [＃4993](https://github.com/pingcap/tiflow/issues/4993)
+        -   アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [＃3731](https://github.com/pingcap/tiflow/issues/3731)
         -   空の設定により dm-master がpanicを起こす可能性がある問題を修正[＃3732](https://github.com/pingcap/tiflow/issues/3732)
 
     -   TiDB Lightning
 
         -   事前チェックでローカルディスクリソースとクラスターの可用性がチェックされない問題を修正[＃34213](https://github.com/pingcap/tidb/issues/34213)
-        -   スキーマ[＃33381](https://github.com/pingcap/tidb/issues/33381)ルーティングが正しくない問題を修正しました
+        -   スキーマルーティングが正しくない問題を修正しました [＃33381](https://github.com/pingcap/tidb/issues/33381)
         -   TiDB LightningがパニックになったときにPD構成が正しく復元されない問題を修正[＃31733](https://github.com/pingcap/tidb/issues/31733)
         -   Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [＃27937](https://github.com/pingcap/tidb/issues/27937)
         -   Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [＃34208](https://github.com/pingcap/tidb/issues/34208)

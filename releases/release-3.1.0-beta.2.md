@@ -19,49 +19,49 @@ TiDB Ansible バージョン: 3.1.0-beta.2
 
 -   ツール
     -   TiDB Lightning
-        -   構成ファイル[＃255](https://github.com/pingcap/tidb-lightning/pull/255)で設定されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト設定を使用します。
+        -   構成ファイルで設定されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト設定を使用します。 [＃255](https://github.com/pingcap/tidb-lightning/pull/255)
         -   TiDBパスワードを設定するための`--tidb-password` CLIパラメータを追加する[＃253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}
 
 -   TiDB
     -   列属性に`AutoRandom`キーワードを追加することで、TiDB が主キーにランダムな整数を自動的に割り当てるようになり、主キー`AUTO_INCREMENT`によって発生する書き込みホットスポットを回避します[＃14555](https://github.com/pingcap/tidb/pull/14555)
-    -   DDL ステートメント[＃14537](https://github.com/pingcap/tidb/pull/14537)による列ストアのレプリカの作成または削除のサポート
+    -   DDL ステートメントによる列ストアのレプリカの作成または削除のサポート [＃14537](https://github.com/pingcap/tidb/pull/14537)
     -   オプティマイザが異なるストレージエンジンを独立して選択できる機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
     -   SQLヒントが異なるストレージエンジンをサポートする機能を追加[＃14537](https://github.com/pingcap/tidb/pull/14537)
-    -   `tidb_replica_read`システム変数[＃13464](https://github.com/pingcap/tidb/pull/13464)を使用してフォロワーからのデータの読み取りをサポート
+    -   `tidb_replica_read`システム変数を使用してフォロワーからのデータの読み取りをサポート [＃13464](https://github.com/pingcap/tidb/pull/13464)
 -   TiKV
     -   Raftstore
-        -   他のノードをTiKVサーバー[＃6491](https://github.com/tikv/tikv/pull/6491)に接続するための`peer_address`パラメータを追加します
+        -   他のノードをTiKVサーバーに接続するための`peer_address`パラメータを追加します [＃6491](https://github.com/tikv/tikv/pull/6491)
         -   `read_index`と`read_index_resp`監視メトリックを追加して、 `ReadIndex`リクエストの数を監視します[＃6610](https://github.com/tikv/tikv/pull/6610)
 -   PDクライアント
-    -   ローカルスレッドの統計情報をPD [＃6605](https://github.com/tikv/tikv/pull/6605)に報告する機能をサポート
+    -   ローカルスレッドの統計情報をPD に報告する機能をサポート [＃6605](https://github.com/tikv/tikv/pull/6605)
 -   バックアップ
-    -   `RocksIOLimiter`フロー制御ライブラリを Rust の`async-speed-limit`フロー制御ライブラリに置き換えて、ファイル[＃6462](https://github.com/tikv/tikv/pull/6462)をバックアップするときに余分なメモリコピーを排除します。
+    -   `RocksIOLimiter`フロー制御ライブラリを Rust の`async-speed-limit`フロー制御ライブラリに置き換えて、ファイルをバックアップするときに余分なメモリコピーを排除します。 [＃6462](https://github.com/tikv/tikv/pull/6462)
 -   PD
-    -   場所ラベル名[＃2084](https://github.com/pingcap/pd/pull/2084)でバックスラッシュを許容する
+    -   場所ラベル名でバックスラッシュを許容する [＃2084](https://github.com/pingcap/pd/pull/2084)
 -   TiFlash
     -   初回リリース
 -   TiDB Ansible
     -   1つのクラスターに複数のGrafana/Prometheus/Alertmanagerをデプロイすることをサポート[＃1143](https://github.com/pingcap/tidb-ansible/pull/1143)
-    -   TiFlashコンポーネント[＃1148](https://github.com/pingcap/tidb-ansible/pull/1148)展開をサポート
-    -   TiFlashコンポーネント[＃1152](https://github.com/pingcap/tidb-ansible/pull/1152)に関連する監視メトリックを追加します
+    -   TiFlashコンポーネント展開をサポート [＃1148](https://github.com/pingcap/tidb-ansible/pull/1148)
+    -   TiFlashコンポーネントに関連する監視メトリックを追加します [＃1152](https://github.com/pingcap/tidb-ansible/pull/1152)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiKV
     -   Raftstore
-        -   Hibernate Regions [＃6450](https://github.com/tikv/tikv/pull/6450)からデータが正しく読み込まれないため、読み取り要求を処理できない問題を修正しました。
+        -   Hibernate Regions からデータが正しく読み込まれないため、読み取り要求を処理できない問題を修正しました。 [＃6450](https://github.com/tikv/tikv/pull/6450)
         -   リーダー移行プロセス中の`ReadIndex`リクエストによって引き起こされるpanic問題を修正しました[＃6613](https://github.com/tikv/tikv/pull/6613)
         -   一部の特殊な状況で休止状態領域が正しく起動しない問題を修正[＃6730](https://github.com/tikv/tikv/pull/6730) [＃6737](https://github.com/tikv/tikv/pull/6737) [＃6972](https://github.com/tikv/tikv/pull/6972)
     -   バックアップ
-        -   追加データ[＃6659](https://github.com/tikv/tikv/pull/6659)のバックアップによって復元中に発生した不整合なデータインデックスを修正
+        -   追加データのバックアップによって復元中に発生した不整合なデータインデックスを修正 [＃6659](https://github.com/tikv/tikv/pull/6659)
         -   バックアップ中に削除された値を誤って処理することによって発生するpanicを修正[＃6726](https://github.com/tikv/tikv/pull/6726)
 -   PD
-    -   ルールチェッカーがリージョン[＃2161](https://github.com/pingcap/pd/pull/2161)にストアを割り当てられないために発生するpanicを修正
+    -   ルールチェッカーがリージョンにストアを割り当てられないために発生するpanicを修正 [＃2161](https://github.com/pingcap/pd/pull/2161)
 -   ツール
     -   TiDB Lightning
-        -   サーバーモード[＃259](https://github.com/pingcap/tidb-lightning/pull/259)以外ではWebインターフェースが動作しないバグを修正
+        -   サーバーモード以外ではWebインターフェースが動作しないバグを修正 [＃259](https://github.com/pingcap/tidb-lightning/pull/259)
     -   BR (バックアップと復元)
         -   データの復元時に回復不能なエラーが発生し、 BR が時間内に終了できない問題を修正しました[＃152](https://github.com/pingcap/br/pull/152)
 -   TiDB Ansible

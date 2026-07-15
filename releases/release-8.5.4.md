@@ -124,7 +124,7 @@ TiDBバージョン：8.5.4
 -   TiFlash
 
     -   `TableScan`パフォーマンスを向上させるために不要なデータ読み取りをスキップします [#9875](https://github.com/pingcap/tiflash/issues/9875) @[gengliqi](https://github.com/gengliqi)
-    -   TiFlash [#10361](https://github.com/pingcap/tiflash/issues/10361) 10361 @ジェイソン・ファンで、多くの列とスパース データ (つまり、大量の`TableScan` または空の値) を含む広いテーブルでの { `NULL`パフォーマンスを最適[ジェイソン・ファン](https://github.com/JaySon-Huang)ます。
+    -   TiFlashで、多くの列とスパースデータ (つまり、大量の`NULL`または空の値) を含む広いテーブルでの`TableScan`パフォーマンスを最適化します [#10361](https://github.com/pingcap/tiflash/issues/10361) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   多数のテーブルを持つクラスターにベクトル インデックスを追加することによって生じるTiFlash CPU オーバーヘッドを削減 [#10357](https://github.com/pingcap/tiflash/issues/10357) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   無駄なRaftコマンド処理時の不要なログ出力を最小限にしてログ容量を削減 [#10467](https://github.com/pingcap/tiflash/issues/10467) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashの小さなパーティション分割テーブルでの`TableScan`パフォーマンスを向上 [#10487](https://github.com/pingcap/tiflash/issues/10487) @[JaySon-Huang](https://github.com/JaySon-Huang)

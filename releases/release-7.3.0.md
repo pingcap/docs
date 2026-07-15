@@ -222,7 +222,7 @@ TiDB バージョン: 7.3.0
 
     -   TiCDC
 
-        -   `UPDATE`イベント送信時に更新された列値のみが含まれるように、Open Protocol 出力のメッセージ サイズを最適化します [#9336](https://github.com/pingcap/tiflow/issues/9336) @[3AceShowHand](https://github.com/3AceShowHand)ハンド
+        -   `UPDATE`イベント送信時に更新された列値のみが含まれるように、Open Protocol 出力のメッセージ サイズを最適化します [#9336](https://github.com/pingcap/tiflow/issues/9336) @[3AceShowHand](https://github.com/3AceShowHand)
         -   Storage Sink が HEX 形式のデータの 16 進数エンコーディングをサポートするようになり、AWS DMS フォーマット仕様との互換性が確保されました [#9373](https://github.com/pingcap/tiflow/issues/9373) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   Kafka Sink は、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)をサポートし、メッセージのサイズを削減します [#9382](https://github.com/pingcap/tiflow/issues/9382) @[3AceShowHand](https://github.com/3AceShowHand)
 

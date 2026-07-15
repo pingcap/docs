@@ -16,7 +16,7 @@ TiDB バージョン: 7.5.2
 -   RocksDB の TiKV 構成項目[`track-and-verify-wals-in-manifest`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#track-and-verify-wals-in-manifest-new-in-v659-v715-and-v752)追加します。これは、Write Ahead Log (WAL) の破損の可能性を調査するのに役立ちます。 [＃16549](https://github.com/tikv/tikv/issues/16549) @ [v01dstar](https://github.com/v01dstar)
 -   TiDB Lightning `strict-format`または`SPLIT_FILE`使用して CSV ファイルをインポートする場合は、行末文字を設定する必要があります[＃37338](https://github.com/pingcap/tidb/issues/37338) @ [lance6716](https://github.com/lance6716)
 -   TiCDCオープンプロトコルの`sink.open.output-old-value`設定項目を追加して、更新前の値を下流に出力するかどうかを制御します。 [＃10916](https://github.com/pingcap/tiflow/issues/10916) @ [sdojjy](https://github.com/sdojjy)
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.5.2以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`目のイベントを`DELETE` `INSERT`と13件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があるため、ダウンストリームデータの不整合が発生する問題に対処しています。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) [＃10918](https://github.com/pingcap/tiflow/issues/10918)してください[リデジュ](https://github.com/lidezhu)
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`目のイベントで主キーまたは非NULLの一意インデックス値が変更されると、TiCDCはこのイベントを`DELETE`目と`INSERT`目のイベントに分割していました。v7.5.2以降では、MySQLシンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS` TiCDC `thresholdTS` （TiCDCが対応するテーブルをダウンストリームに複製し始める際にPDから取得する現在のタイムスタンプ）より小さい場合、TiCDCは`UPDATE`目のイベントを`DELETE` `INSERT`と13件目のイベントに分割します。この動作変更は、TiCDCが受信した`UPDATE`目のイベントの順序が誤っている可能性があり、分割された`DELETE`と`INSERT`目のイベントの順序が誤っている可能性があるため、ダウンストリームデータの不整合が発生する問題に対処しています。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v7.5/ticdc-split-update-behavior#split-update-events-for-mysql-sinks) してください@ [lidezhu](https://github.com/lidezhu) [＃10918](https://github.com/pingcap/tiflow/issues/10918)
 
 ## 改善点 {#improvements}
 
@@ -29,8 +29,8 @@ TiDB バージョン: 7.5.2
     -   MPP ロード バランシング中にリージョンのないストアを削除する [＃52313](https://github.com/pingcap/tidb/issues/52313) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   PD からリージョンを一括ロードすることをサポートし、大規模なテーブルをクエリするときに KV 範囲からリージョンへの変換プロセスを高速化します。 [＃51326](https://github.com/pingcap/tidb/issues/51326) @ [SeaRise](https://github.com/SeaRise)
     -   `Resource Control`監視ページで、各リソース グループの最大 RU 消費率を表示する新しいパネル`RU(Max)`を追加します。 [＃49318](https://github.com/pingcap/tidb/issues/49318) @ [nolouch](https://github.com/nolouch)
-    -   同期ロードパフォーマンスを改善し、統計情報のロードのレイテンシーを削減します[＃52994](https://github.com/pingcap/tidb/issues/52294) [ホーキングレイ](https://github.com/hawkingrei)
-    -   統計初期化の同時実行性を高めて起動を高速化します[＃52466](https://github.com/pingcap/tidb/issues/52466) [＃52102](https://github.com/pingcap/tidb/issues/52102) [＃52553](https://github.com/pingcap/tidb/issues/52553) [ホーキングレイ](https://github.com/hawkingrei)
+    -   同期ロードパフォーマンスを改善し、統計情報のロードのレイテンシーを削減します[＃52994](https://github.com/pingcap/tidb/issues/52294) @ [hawkingrei](https://github.com/hawkingrei)
+    -   統計初期化の同時実行性を高めて起動を高速化します[＃52466](https://github.com/pingcap/tidb/issues/52466) [＃52102](https://github.com/pingcap/tidb/issues/52102) [＃52553](https://github.com/pingcap/tidb/issues/52553) @ [hawkingrei](https://github.com/hawkingrei)
 
 -   TiKV
 
@@ -62,7 +62,7 @@ TiDB バージョン: 7.5.2
         -   リストアプロセス中にテーブルIDを事前割り当てすることで、テーブルIDの再利用を最大化し、リストアパフォーマンスを向上します[＃51736](https://github.com/pingcap/tidb/issues/51736) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[＃52733](https://github.com/pingcap/tidb/issues/52733) @ [Leavrth](https://github.com/Leavrth)
         -   Google Cloud Storage（GCS）を外部ストレージとして使用する場合の古い互換性チェックを削除します[＃50533](https://github.com/pingcap/tidb/issues/50533) @ [lance6716](https://github.com/lance6716)
-        -   DNSエラーによる失敗の再試行回数を[＃53029](https://github.com/pingcap/tidb/issues/53029)から[ユジュンセン](https://github.com/YuJuncen)増やす
+        -   DNSエラーによる失敗の再試行回数をから@ [YuJuncen](https://github.com/YuJuncen)増やす [＃53029](https://github.com/pingcap/tidb/issues/53029)
 
     -   TiCDC
 
@@ -214,7 +214,7 @@ TiDB バージョン: 7.5.2
         -   PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [＃52597](https://github.com/pingcap/tidb/issues/52597) @ [YuJuncen](https://github.com/YuJuncen)
         -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @ [YuJuncen](https://github.com/YuJuncen)
         -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanic可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
-        -   不安定なテストケース[＃52547](https://github.com/pingcap/tidb/issues/52547) [リーヴルス](https://github.com/Leavrth)で修正する
+        -   不安定なテストケース[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [Leavrth](https://github.com/Leavrth)で修正する
         -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
         -   フルバックアップでピアが見つからない場合に TiKV がパニックを起こす問題を修正[＃16394](https://github.com/tikv/tikv/issues/16394) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイントがすぐに復元されない問題を修正しました。 [＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3pointer](https://github.com/3pointer)

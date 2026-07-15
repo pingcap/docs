@@ -151,7 +151,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   オプティマイザがクエリ[＃52869](https://github.com/pingcap/tidb/issues/52869) @ [time-and-fate](https://github.com/time-and-fate)に対して単一インデックス スキャン方式 (フル テーブル スキャン以外) を選択できる場合、オプティマイザがクエリに対してインデックス マージを自動的に選択しないという制限を削除するために、オプティマイザ修正コントロールの使用をサポートします。
     -   コプロセッサー演算子[＃28937](https://github.com/pingcap/tidb/issues/28937) @ [cfzjywxk](https://github.com/cfzjywxk)の列`execution info`に`total_kv_read_wall_time`メトリックを追加します。
     -   リソースコントロールダッシュボードに`RU (max)`メトリックを追加する[＃49318](https://github.com/pingcap/tidb/issues/49318) @ [nolouch](https://github.com/nolouch)
-    -   リソースロック（RLock）が[＃51883](https://github.com/pingcap/tidb/issues/51883)内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します[ヤンケオ](https://github.com/YangKeao)
+    -   リソースロック（RLock）が内に解放されない問題を回避するために、LDAP認証にタイムアウトメカニズムを追加します@ [YangKeao](https://github.com/YangKeao) [＃51883](https://github.com/pingcap/tidb/issues/51883)
 
 -   TiKV
 

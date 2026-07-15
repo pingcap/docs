@@ -141,7 +141,7 @@ TiDBバージョン: 6.3.0-DMR
 
     v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行プランがより安定します。
 
--   Titan の無効化が GA に[タボキー](https://github.com/tabokie)
+-   Titan の無効化が GA に@ [tabokie](https://github.com/tabokie)
 
     オンライン TiKV ノードに対して[Titanを無効にする](/storage-engine/titan-configuration.md#disable-titan)ことができます。
 
@@ -179,7 +179,7 @@ TiDBバージョン: 6.3.0-DMR
 
     TiDBクラスターがGoogle CloudまたはAzureにデプロイされている場合、クラスターをv6.3.0にアップグレードすると、PITR機能を使用できます。
 
--   BRは AWS S3 オブジェクト ロック [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)シュートをサポートします
+-   BRは AWS S3 オブジェクト ロック [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)をサポートします
 
     [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップ データが改ざんまたは削除されないように保護できます。
 
@@ -303,7 +303,7 @@ TiDBバージョン: 6.3.0-DMR
     -   TiFlashのインタープリタをリファクタリングし、新しいインタープリタプランナーをサポートする [#4739](https://github.com/pingcap/tiflash/issues/4739) @[SeaRise](https://github.com/SeaRise)
     -   TiFlashのメモリトラッカーの精度を向上 [#5609](https://github.com/pingcap/tiflash/issues/5609) @[bestwoody](https://github.com/bestwoody)
     -   `UTF8_BIN/ASCII_BIN/LATIN1_BIN/UTF8MB4_BIN`照合順序を使用した文字列列のパフォーマンスを改善 [#5294](https://github.com/pingcap/tiflash/issues/5294) @[solotzg](https://github.com/solotzg)
-    -   ReadLimiter [#5401](https://github.com/pingcap/tiflash/issues/5401) , [#5091](https://github.com/pingcap/tiflash/issues/5091) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)ポティガーでバックグラウンドでI/Oスループットを計算
+    -   ReadLimiter [#5401](https://github.com/pingcap/tiflash/issues/5401) , [#5091](https://github.com/pingcap/tiflash/issues/5091) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)でバックグラウンドでI/Oスループットを計算
 
 -   ツール
 
@@ -315,7 +315,7 @@ TiDBバージョン: 6.3.0-DMR
     -   TiCDC
 
         -   TiCDCと、上流のTiDBで導入された並行DDLフレームワークとの互換性を向上させる [#6506](https://github.com/pingcap/tiflow/issues/6506) @[lance6716](https://github.com/lance6716)
-        -   MySQL シンクでエラー [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)ヴィーナスが発生した場合の DML ステートメントのロギング`start ts`のサポート
+        -   MySQL シンクでエラー [#6460](https://github.com/pingcap/tiflow/issues/6460) @[overvenus](https://github.com/overvenus)が発生した場合の DML ステートメントのロギング`start ts`のサポート
         -   `api/v1/health` API を強化して、TiCDC クラスターのより正確な正常性状態を返します [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)
         -   MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
         -   非推奨の Pulsar シンクを削除します [#7087](https://github.com/pingcap/tiflow/issues/7087) @[Rustin170506](https://github.com/Rustin170506)

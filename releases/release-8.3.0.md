@@ -372,7 +372,7 @@ TiDBバージョン：8.3.0
 
     -   Backup & Restore (BR)
 
-        -   `ADD INDEX`や`MODIFY COLUMN`など、バックフィルが必要な DDL が増分リストア中に正しく復元されない可能性がある問題を修正します [#54426](https://github.com/pingcap/tidb/issues/54426) @[3pointer](https://github.com/3pointer)シュート
+        -   `ADD INDEX`や`MODIFY COLUMN`など、バックフィルが必要な DDL が増分リストア中に正しく復元されない可能性がある問題を修正します [#54426](https://github.com/pingcap/tidb/issues/54426) @[3pointer](https://github.com/3pointer)
         -   バックアップと復元中に進行状況が停止する問題を修正 [#54140](https://github.com/pingcap/tidb/issues/54140) @[Leavrth](https://github.com/Leavrth)
         -   バックアップとリストアのチェックポイントパスが一部の外部ストレージと互換性がない問題を修正 [#55265](https://github.com/pingcap/tidb/issues/55265) @[Leavrth](https://github.com/Leavrth)
 

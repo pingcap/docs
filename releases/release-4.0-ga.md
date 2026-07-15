@@ -16,12 +16,12 @@ TiDB バージョン: 4.0.0
 
 -   TiCDC
     -   `Changefeed`設定ファイルの構造を最適化して使いやすさを向上[＃588](https://github.com/pingcap/tiflow/pull/588)
-    -   `ignore-txn-start-ts`構成項目を追加し、トランザクションフィルタリング[＃589](https://github.com/pingcap/tiflow/pull/589)の条件を`commit_ts`から`start_ts`に変更します。
+    -   `ignore-txn-start-ts`構成項目を追加し、トランザクションフィルタリングの条件を`commit_ts`から`start_ts`に変更します。 [＃589](https://github.com/pingcap/tiflow/pull/589)
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
 -   TiKV
-    -   Backup & Restore (BR) [＃7937](https://github.com/tikv/tikv/pull/7937)を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します
+    -   Backup & Restore (BR) を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します [＃7937](https://github.com/tikv/tikv/pull/7937)
     -   順序がずれたパッケージ`ReadIndex`によるシステムパニックを修正[＃7930](https://github.com/tikv/tikv/pull/7930)
     -   TiKV の再起動後にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
 
@@ -31,15 +31,15 @@ TiDB バージョン: 4.0.0
 ## 新機能 {#new-features}
 
 -   TiDB
-    -   再試行コミットフェーズ[＃16849](https://github.com/pingcap/tidb/pull/16849)の`goroutines`数を制御するための`committer-concurrency`構成項目を追加します。
-    -   `show table partition regions`構文[＃17294](https://github.com/pingcap/tidb/pull/17294)サポートする
-    -   TiDBサーバー[＃15700](https://github.com/pingcap/tidb/pull/15700)が使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します
+    -   再試行コミットフェーズの`goroutines`数を制御するための`committer-concurrency`構成項目を追加します。 [＃16849](https://github.com/pingcap/tidb/pull/16849)
+    -   `show table partition regions`構文サポートする [＃17294](https://github.com/pingcap/tidb/pull/17294)
+    -   TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     -   テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
-    -   `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメント[＃17313](https://github.com/pingcap/tidb/pull/17313)サポートする
-    -   `Distinct`関数[＃17240](https://github.com/pingcap/tidb/pull/17240)使用するときに`collations`の値をチェックする機能をサポート
-    -   ハッシュパーティションプルーニング[＃17310](https://github.com/pingcap/tidb/pull/17310)中の`is null`フィルタ条件をサポート
-    -   パーティションテーブル[＃17392](https://github.com/pingcap/tidb/pull/17392) [＃17405](https://github.com/pingcap/tidb/pull/17405) [＃17317](https://github.com/pingcap/tidb/pull/17317)で`admin check index` 、 `admin cleanup index` 、 `admin recover index`サポート
-    -   `in`式[＃17320](https://github.com/pingcap/tidb/pull/17320)範囲パーティションプルーニングをサポート
+    -   `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
+    -   `Distinct`関数使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
+    -   ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [＃17310](https://github.com/pingcap/tidb/pull/17310)
+    -   パーティションテーブル[＃17392](https://github.com/pingcap/tidb/pull/17392) で`admin check index` 、 `admin cleanup index` 、 `admin recover index`サポート [＃17317](https://github.com/pingcap/tidb/pull/17317) [＃17405](https://github.com/pingcap/tidb/pull/17405)
+    -   `in`式範囲パーティションプルーニングをサポート [＃17320](https://github.com/pingcap/tidb/pull/17320)
 
 -   TiFlash
     -   Learnerがデータを読み取る際に、 `Lock CF`の`TSO`から`min commit ts`の条件を満たすデータをフィルタリングすることをサポートします。
@@ -47,41 +47,41 @@ TiDB バージョン: 4.0.0
     -   ログ検索時に正規表現でフラグの使用をサポート
 
 -   TiKV
-    -   `ascii_bin`と`latin1_bin`エンコード[＃7919](https://github.com/tikv/tikv/pull/7919)の照合順序規則をサポート
+    -   `ascii_bin`と`latin1_bin`エンコードの照合順序規則をサポート [＃7919](https://github.com/tikv/tikv/pull/7919)
 
 -   PD
-    -   組み込み TiDB Dashboard[＃2457](https://github.com/pingcap/pd/pull/2457)リバース プロキシ リソース プレフィックスの指定をサポート
-    -   PDクライアントリージョン[＃2443](https://github.com/pingcap/pd/pull/2443)のインターフェースで`pending peer`と`down peer`情報を返すことをサポート
-    -   `Direction of hotspot move leader` `Direction of hotspot move peer` `Hot cache read entry number`監視項目[＃2448](https://github.com/pingcap/pd/pull/2448)追加する
+    -   組み込み TiDB Dashboardリバース プロキシ リソース プレフィックスの指定をサポート [＃2457](https://github.com/pingcap/pd/pull/2457)
+    -   PDクライアントリージョンのインターフェースで`pending peer`と`down peer`情報を返すことをサポート [＃2443](https://github.com/pingcap/pd/pull/2443)
+    -   `Direction of hotspot move leader` `Direction of hotspot move peer` `Hot cache read entry number`監視項目追加する [＃2448](https://github.com/pingcap/pd/pull/2448)
 
 -   ツール
     -   Backup & Restore (BR)
         -   `Sequence`と`View`のバックアップと復元をサポート[＃242](https://github.com/pingcap/br/pull/242)
     -   TiCDC
-        -   `Changefeed` [＃561](https://github.com/pingcap/tiflow/pull/561)作成時に`Sink URI`の有効性チェックをサポート
+        -   `Changefeed` 作成時に`Sink URI`の有効性チェックをサポート [＃561](https://github.com/pingcap/tiflow/pull/561)
         -   システム起動時にPDとTiKVのバージョンがシステム要件を満たしているかどうかのチェックをサポート[＃570](https://github.com/pingcap/tiflow/pull/570)
-        -   同じスケジュールタスク生成サイクル[＃572](https://github.com/pingcap/tiflow/pull/572)で複数のテーブルのスケジュールをサポート
-        -   HTTP API [＃591](https://github.com/pingcap/tiflow/pull/591)にノードの役割に関する情報を追加する
+        -   同じスケジュールタスク生成サイクルで複数のテーブルのスケジュールをサポート [＃572](https://github.com/pingcap/tiflow/pull/572)
+        -   HTTP API にノードの役割に関する情報を追加する [＃591](https://github.com/pingcap/tiflow/pull/591)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
 
-    -   TiDB がTiFlash [＃17307](https://github.com/pingcap/tidb/pull/17307)にバッチコマンドを送信しないようにすることで、メッセージの送受信時に予期しないタイムアウトが発生する問題を修正しました。
+    -   TiDB がTiFlash にバッチコマンドを送信しないようにすることで、メッセージの送受信時に予期しないタイムアウトが発生する問題を修正しました。 [＃17307](https://github.com/pingcap/tidb/pull/17307)
     -   パーティションプルーニング中に符号付き整数と符号なし整数を誤って区別する問題を修正し、パフォーマンスが向上しました[＃17230](https://github.com/pingcap/tidb/pull/17230)
-    -   互換性のない`mysql.user`テーブル[＃17300](https://github.com/pingcap/tidb/pull/17300)が原因でv3.1.1からv4.0へのアップグレードが失敗する問題を修正しました
-    -   `update`文[＃17305](https://github.com/pingcap/tidb/pull/17305)でパーティションの選択が誤っている問題を修正
-    -   TiKV [＃17380](https://github.com/pingcap/tidb/pull/17380)から不明なエラーメッセージを受信したときにシステムパニックが発生する問題を修正
-    -   `key`パーティション[＃17242](https://github.com/pingcap/tidb/pull/17242)テーブルを作成するときに誤った処理ロジックによって発生するシステムパニックを修正しました。
-    -   オプティマイザ処理ロジック[＃17365](https://github.com/pingcap/tidb/pull/17365)誤りにより間違った`Index Merge Join`プランが選択される問題を修正
-    -   Grafana [＃16561](https://github.com/pingcap/tidb/pull/16561)の`SELECT`ステートメントの`duration`監視メトリックが不正確であるという問題を修正しました
+    -   互換性のない`mysql.user`テーブルが原因でv3.1.1からv4.0へのアップグレードが失敗する問題を修正しました [＃17300](https://github.com/pingcap/tidb/pull/17300)
+    -   `update`文でパーティションの選択が誤っている問題を修正 [＃17305](https://github.com/pingcap/tidb/pull/17305)
+    -   TiKV から不明なエラーメッセージを受信したときにシステムパニックが発生する問題を修正 [＃17380](https://github.com/pingcap/tidb/pull/17380)
+    -   `key`パーティションテーブルを作成するときに誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17242](https://github.com/pingcap/tidb/pull/17242)
+    -   オプティマイザ処理ロジック誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [＃17365](https://github.com/pingcap/tidb/pull/17365)
+    -   Grafana の`SELECT`ステートメントの`duration`監視メトリックが不正確であるという問題を修正しました [＃16561](https://github.com/pingcap/tidb/pull/16561)
     -   システムエラーが発生したときにGCワーカーがブロックされる問題を修正[＃16915](https://github.com/pingcap/tidb/pull/16915)
-    -   ブール列の制約`UNIQUE`が比較[＃17306](https://github.com/pingcap/tidb/pull/17306)で誤った結果をもたらす問題を修正
-    -   `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブル[＃17328](https://github.com/pingcap/tidb/pull/17328)をプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。
+    -   ブール列の制約`UNIQUE`が比較で誤った結果をもたらす問題を修正 [＃17306](https://github.com/pingcap/tidb/pull/17306)
+    -   `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブルをプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17328](https://github.com/pingcap/tidb/pull/17328)
     -   一部のケースで障害が発生した TiKV ノードにアクセスできない問題を修正[＃17342](https://github.com/pingcap/tidb/pull/17342)
     -   `tidb.toml`の`isolation-read`設定項目が有効にならない問題を修正[＃17322](https://github.com/pingcap/tidb/pull/17322)
-    -   `hint`使用してストリーム集約[＃17347](https://github.com/pingcap/tidb/pull/17347)強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。
-    -   `insert`異なる`SQL_MODE` [＃17314](https://github.com/pingcap/tidb/pull/17314)の下で DIV を処理する動作を修正
+    -   `hint`使用してストリーム集約強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
+    -   `insert`異なる`SQL_MODE` の下で DIV を処理する動作を修正 [＃17314](https://github.com/pingcap/tidb/pull/17314)
 
 -   TiFlash
 
@@ -94,23 +94,23 @@ TiDB バージョン: 4.0.0
 
 -   TiKV
 
-    -   BR [＃7937](https://github.com/tikv/tikv/pull/7937)を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します
-    -   順序が乱れた`ReadIndex`パケット[＃7930](https://github.com/tikv/tikv/pull/7930)によるシステムパニックを修正
+    -   BR を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します [＃7937](https://github.com/tikv/tikv/pull/7937)
+    -   順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [＃7930](https://github.com/tikv/tikv/pull/7930)
     -   読み取り要求コールバック関数が呼び出されないために予期しないエラーが返される問題を修正[＃7921](https://github.com/tikv/tikv/pull/7921)
     -   TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[＃7927](https://github.com/tikv/tikv/pull/7927)
-    -   ストレージ暗号化[＃7898](https://github.com/tikv/tikv/pull/7898)処理ロジックが正しくないため、 `master key`回転できない問題を修正しました
+    -   ストレージ暗号化処理ロジックが正しくないため、 `master key`回転できない問題を修正しました [＃7898](https://github.com/tikv/tikv/pull/7898)
     -   ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[＃7922](https://github.com/tikv/tikv/pull/7922)
 
 -   PD
 
-    -   pd-ctl [＃2446](https://github.com/pingcap/pd/pull/2446)を使用して`evict-leader-scheduler`または`grant-leader-scheduler`削除するときに発生する 404 エラーを修正しました
+    -   pd-ctl を使用して`evict-leader-scheduler`または`grant-leader-scheduler`削除するときに発生する 404 エラーを修正しました [＃2446](https://github.com/pingcap/pd/pull/2446)
     -   TiFlashレプリカが存在する場合に`presplit`機能が正しく動作しない可能性がある問題を修正しました[＃2447](https://github.com/pingcap/pd/pull/2447)
 
 -   ツール
 
     -   Backup & Restore (BR)
-        -   BRがクラウドストレージ[＃298](https://github.com/pingcap/br/pull/298)からデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正
+        -   BRがクラウドストレージからデータを復元する際にネットワークの問題によりデータの復元が失敗する問題を修正 [＃298](https://github.com/pingcap/br/pull/298)
     -   TiCDC
         -   データ競合によるシステムパニックを修正[＃565](https://github.com/pingcap/tiflow/pull/565) [＃566](https://github.com/pingcap/tiflow/pull/566)
         -   誤った処理ロジックによるリソースリークやシステムブロックを修正する[＃574](https://github.com/pingcap/tiflow/pull/574) [＃586](https://github.com/pingcap/tiflow/pull/586)
-        -   CLIがPD [＃579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンドラインが停止する問題を修正しました
+        -   CLIがPD に接続できないためにコマンドラインが停止する問題を修正しました [＃579](https://github.com/pingcap/tiflow/pull/579)

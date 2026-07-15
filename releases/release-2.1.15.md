@@ -15,18 +15,18 @@ TiDB Ansible バージョン: 2.1.15
 
 -   `DATE_ADD`関数がマイクロ秒を扱う際に誤ったアライメントにより間違った結果を返す問題を修正[＃11289](https://github.com/pingcap/tidb/pull/11289)
 -   文字列列の空の値を`FLOAT`または`INT`と比較するとエラーが報告される問題を修正しました[＃11279](https://github.com/pingcap/tidb/pull/11279)
--   パラメータが`NULL` [＃11249](https://github.com/pingcap/tidb/pull/11249)ときに`INSERT`関数が`NULL`値を正しく返さない問題を修正しました
--   非文字列型で長さ`0` [＃11215](https://github.com/pingcap/tidb/pull/11215)をインデックスするときにエラーが発生する問題を修正
--   SQL文[＃11238](https://github.com/pingcap/tidb/pull/11238)を使用してテーブルのリージョン分布を照会するための`SHOW TABLE REGIONS`文を追加します。
--   `SELECT`サブクエリ[＃11254](https://github.com/pingcap/tidb/pull/11254)ルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`ステートメントを使用するとエラーが報告される問題を修正しました。
+-   パラメータが`NULL` ときに`INSERT`関数が`NULL`値を正しく返さない問題を修正しました [＃11249](https://github.com/pingcap/tidb/pull/11249)
+-   非文字列型で長さ`0` をインデックスするときにエラーが発生する問題を修正 [＃11215](https://github.com/pingcap/tidb/pull/11215)
+-   SQL文を使用してテーブルのリージョン分布を照会するための`SHOW TABLE REGIONS`文を追加します。 [＃11238](https://github.com/pingcap/tidb/pull/11238)
+-   `SELECT`サブクエリルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`ステートメントを使用するとエラーが報告される問題を修正しました。 [＃11254](https://github.com/pingcap/tidb/pull/11254)
 -   プラグイン`ADMIN PLUGINS DISABLE` `ADMIN PLUGINS ENABLE`ステートメントを追加する[＃11189](https://github.com/pingcap/tidb/pull/11189)
--   監査プラグイン[＃11189](https://github.com/pingcap/tidb/pull/11189)にセッション接続情報を追加する
--   ポイントクエリ[＃11227](https://github.com/pingcap/tidb/pull/11227)で列を複数回クエリし、返された結果が`NULL`ある場合に発生するpanic問題を修正しました。
--   テーブル[＃11213](https://github.com/pingcap/tidb/pull/11213)を作成するときに、散布テーブルRegionsに`tidb_scatter_region`構成項目を追加します。
--   `RAND`関数[＃11170](https://github.com/pingcap/tidb/pull/11170)使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正
+-   監査プラグインにセッション接続情報を追加する [＃11189](https://github.com/pingcap/tidb/pull/11189)
+-   ポイントクエリで列を複数回クエリし、返された結果が`NULL`ある場合に発生するpanic問題を修正しました。 [＃11227](https://github.com/pingcap/tidb/pull/11227)
+-   テーブルを作成するときに、散布テーブルRegionsに`tidb_scatter_region`構成項目を追加します。 [＃11213](https://github.com/pingcap/tidb/pull/11213)
+-   `RAND`関数使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11170](https://github.com/pingcap/tidb/pull/11170)
 -   整数と非整数の比較結果が場合によっては正しくない問題を修正[＃11191](https://github.com/pingcap/tidb/pull/11191)
--   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 [＃11085](https://github.com/pingcap/tidb/pull/11085)である必要があります。
--   列のデフォルト値として`CURRENT_TIMESTAMP`使用され、float精度が[＃11087](https://github.com/pingcap/tidb/pull/11087)指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。
+-   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります。 [＃11085](https://github.com/pingcap/tidb/pull/11085)
+-   列のデフォルト値として`CURRENT_TIMESTAMP`使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)
 
 ## TiKV {#tikv}
 

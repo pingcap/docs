@@ -129,7 +129,7 @@ TiDB バージョン: 8.4.0
 
 ### SQL {#sql}
 
--   ベクトル検索のサポート (実験的) [#54245](https://github.com/pingcap/tidb/issues/54245) [#17290](https://github.com/tikv/tikv/issues/17290) [#9032](https://github.com/pingcap/tiflash/issues/9032) @[breezewish](https://github.com/breezewish)@[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)@[zimulala](https://github.com/zimulala)[エリックゼクアン](https://github.com/EricZequan)@ジムララ@[JaySon-Huang](https://github.com/JaySon-Huang)@[winoros](https://github.com/winoros)@[wk989898](https://github.com/wk989898)
+-   ベクトル検索のサポート (実験的) [#54245](https://github.com/pingcap/tidb/issues/54245) [#17290](https://github.com/tikv/tikv/issues/17290) [#9032](https://github.com/pingcap/tiflash/issues/9032) @[breezewish](https://github.com/breezewish)@[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)@[zimulala](https://github.com/zimulala)@ [EricZequan](https://github.com/EricZequan)@[JaySon-Huang](https://github.com/JaySon-Huang)@[winoros](https://github.com/winoros)@[wk989898](https://github.com/wk989898)
 
     ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、意味検索、推薦システムなど、さまざまなシナリオで活用できます。
 

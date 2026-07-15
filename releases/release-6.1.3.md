@@ -23,14 +23,14 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
 -   PD
 
-    -   ロックの粒度を最適化してロック競合を減らし、高並行性[＃5586](https://github.com/tikv/pd/issues/5586) @ [rleungx](https://github.com/rleungx)でハートビートを処理する能力を向上させる
+    -   ロックの粒度を最適化してロック競合を減らし、高並行性でハートビートを処理する能力を向上させる [＃5586](https://github.com/tikv/pd/issues/5586) @ [rleungx](https://github.com/rleungx)
 
 -   ツール
 
     -   TiCDC
 
         -   Enable transaction split and disable the safe mode of a changefeed in TiCDC by default to improve performance [＃7505](https://github.com/pingcap/tiflow/issues/7505) @ [asddongmen](https://github.com/asddongmen)
-        -   Kafka プロトコル エンコーダー[#7540](https://github.com/pingcap/tiflow/issues/7540) @ [＃7543](https://github.com/pingcap/tiflow/issues/7543) @ [3AceShowHand](https://github.com/3AceShowHand) [＃7532](https://github.com/pingcap/tiflow/issues/7532)パフォーマンス[スドジ](https://github.com/sdojjy)向上
+        -   Kafka プロトコルエンコーダーのパフォーマンスを向上 [#7540](https://github.com/pingcap/tiflow/issues/7540) [＃7532](https://github.com/pingcap/tiflow/issues/7532) [＃7543](https://github.com/pingcap/tiflow/issues/7543) @ [sdojjy](https://github.com/sdojjy) @ [3AceShowHand](https://github.com/3AceShowHand)
 
 -   その他
 
@@ -41,9 +41,9 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 -   TiDB
 
     -   Fix the issue that the `grantor` field is missing in the `mysql.tables_priv` table [＃38293](https://github.com/pingcap/tidb/issues/38293) @ [CbcWestwolf](https://github.com/CbcWestwolf)
-    -   結合したテーブルの再配置 [＃38736](https://github.com/pingcap/tidb/issues/38736) @ [winoros](https://github.com/winoros)によって誤ってプッシュダウンされた条件が破棄されたときに発生する間違ったクエリ結果の問題を修正しました。
+    -   結合したテーブルの再配置 によって誤ってプッシュダウンされた条件が破棄されたときに発生する間違ったクエリ結果の問題を修正しました。 [＃38736](https://github.com/pingcap/tidb/issues/38736) @ [winoros](https://github.com/winoros)
     -   `get_lock()`で取得したロックが10分以上保持できない問題を修正[＃38706](https://github.com/pingcap/tidb/issues/38706) @ [tangenta](https://github.com/tangenta)
-    -   AUTO_INCREMENT列がチェック制約[＃38894](https://github.com/pingcap/tidb/issues/38894) @ [YangKeao](https://github.com/YangKeao)で使用できない問題を修正しました
+    -   AUTO_INCREMENT列がチェック制約で使用できない問題を修正しました [＃38894](https://github.com/pingcap/tidb/issues/38894) @ [YangKeao](https://github.com/YangKeao)
     -   gPRCログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
     -   テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[#37168](https://github.com/pingcap/tidb/issues/37168) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [＃38541](https://github.com/pingcap/tidb/issues/38541) @ [lance6716](https://github.com/lance6716)
@@ -67,8 +67,8 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
     -   Fix the issue that logical operators return wrong results when the argument type is `UInt8` [＃6127](https://github.com/pingcap/tiflash/issues/6127) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `CAST(value AS DATETIME)`間違ったデータ入力によりTiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @ [xzhangxian1008](https://github.com/xzhangxian1008)の負荷が高くなる問題を修正
-    -   書き込み圧力が高すぎるとデルタレイヤー[＃6361](https://github.com/pingcap/tiflash/issues/6361) @ [lidezhu](https://github.com/lidezhu)に過剰な列ファイルが生成される可能性がある問題を修正しました。
-    -   TiFlash [＃6159](https://github.com/pingcap/tiflash/issues/6159) @ [lidezhu](https://github.com/lidezhu)を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。
+    -   書き込み圧力が高すぎるとデルタレイヤーに過剰な列ファイルが生成される可能性がある問題を修正しました。 [＃6361](https://github.com/pingcap/tiflash/issues/6361) @ [lidezhu](https://github.com/lidezhu)
+    -   TiFlash を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。 [＃6159](https://github.com/pingcap/tiflash/issues/6159) @ [lidezhu](https://github.com/lidezhu)
 
 -   ツール
 
@@ -78,12 +78,12 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 
     -   TiCDC
 
-        -   最初にDDLステートメントを実行し、次に変更フィード[＃7682](https://github.com/pingcap/tiflow/issues/7682) @ [asddongmen](https://github.com/asddongmen)を一時停止して再開するシナリオで発生したデータ損失を修正しました
+        -   最初にDDLステートメントを実行し、次に変更フィードを一時停止して再開するシナリオで発生したデータ損失を修正しました [＃7682](https://github.com/pingcap/tiflow/issues/7682) @ [asddongmen](https://github.com/asddongmen)
         -   Fix the issue that the sink component gets stuck if the downstream network is unavailable [#7706](https://github.com/pingcap/tiflow/issues/7706) @ [hicqu](https://github.com/hicqu)
 
     -   TiDB Data Migration (DM)
 
         -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序[#6832](https://github.com/pingcap/tiflow/issues/6832) @ [lance6716](https://github.com/lance6716)を持つ SQL を生成する可能性がある問題を修正しました。
-        -   DMタスクが`Unknown placement policy`エラー[＃7493](https://github.com/pingcap/tiflow/issues/7493) @ [lance6716](https://github.com/lance6716)で停止する可能性がある問題を修正
+        -   DMタスクが`Unknown placement policy`エラーで停止する可能性がある問題を修正 [＃7493](https://github.com/pingcap/tiflow/issues/7493) @ [lance6716](https://github.com/lance6716)
         -   場合によってはリレーログがアップストリームから再度取得される可能性がある問題を修正[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [liumengya94](https://github.com/liumengya94)
         -   既存のワーカーが終了する前に新しい DM ワーカーがスケジュールされると、データが複数回複製される問題を修正しました[#7658](https://github.com/pingcap/tiflow/issues/7658) @ [GMHDBJD](https://github.com/GMHDBJD)

@@ -86,7 +86,7 @@ TiDB バージョン: 7.5.1
 
 -   TiDB
 
-    -   システム変数`tidb_service_scope`設定が[＃49245](https://github.com/pingcap/tidb/issues/49245)で@[ywqzzy](https://github.com/ywqzzy)に反映されない問題を修正
+    -   システム変数`tidb_service_scope`の設定が反映されない問題を修正 [＃49245](https://github.com/pingcap/tidb/issues/49245) @[ywqzzy](https://github.com/ywqzzy)
     -   圧縮が有効になっている場合、通信プロトコルが16 MB以上のパケットを処理できない問題を修正[＃47157](https://github.com/pingcap/tidb/issues/47157) [＃47161](https://github.com/pingcap/tidb/issues/47161) @ [dveeden](https://github.com/dveeden)
     -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
     -   文字列関数の引数が`NULL`定数の場合に TiDB が暗黙的に`from_binary`関数を挿入し、一部の式がTiFlash [＃49526](https://github.com/pingcap/tidb/issues/49526) @ [YangKeao](https://github.com/YangKeao)にプッシュダウンできない問題を修正しました。
@@ -151,7 +151,7 @@ TiDB バージョン: 7.5.1
     -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`実行すると、エラー[＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)ではなく、誤って成功メッセージが返される問題を修正しました。
     -   クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行プランに`IndexMerge` [＃49605](https://github.com/pingcap/tidb/issues/49605) @ [AilinKid](https://github.com/AilinKid)が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。
     -   テーブルが[＃48869](https://github.com/pingcap/tidb/issues/48869) @ [tiancaiamao](https://github.com/tiancaiamao)と多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。
-    -   非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、 [天菜麻緒](https://github.com/tiancaiamao)でエラー[＃49369](https://github.com/pingcap/tidb/issues/49369)が報告される問題を修正しました。
+    -   非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、エラーが報告される問題を修正しました。 [＃49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     -   データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、誤ったクエリ結果[＃48983](https://github.com/pingcap/tidb/issues/48983) @ [time-and-fate](https://github.com/time-and-fate)が返される可能性がある問題を修正しました
     -   `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`実行すると`ERROR 8175` [＃49258](https://github.com/pingcap/tidb/issues/49258) @ [tangenta](https://github.com/tangenta)が返される問題を修正しました
     -   Golang の暗黙的な変換アルゴリズム[＃49801](https://github.com/pingcap/tidb/issues/49801) @ [qw4990](https://github.com/qw4990)によって発生する統計情報の構築における過剰な統計エラーの問題を修正しました

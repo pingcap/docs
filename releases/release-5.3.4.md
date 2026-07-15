@@ -22,21 +22,21 @@ TiDB バージョン: 5.3.4
     -   リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正[＃37141](https://github.com/pingcap/tidb/issues/37141)
     -   `ENUM` または`SET`列のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました。 [＃32302](https://github.com/pingcap/tidb/issues/32302)
     -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[＃38363](https://github.com/pingcap/tidb/issues/38363)
-    -   `mysql.tables_priv`テーブル[＃38293](https://github.com/pingcap/tidb/issues/38293)で`grantor`フィールドが欠落している問題を修正
+    -   `mysql.tables_priv`テーブルで`grantor`フィールドが欠落している問題を修正 [＃38293](https://github.com/pingcap/tidb/issues/38293)
     -   `KILL TIDB`アイドル接続時にすぐに効果を発揮できない問題を修正[＃24031](https://github.com/pingcap/tidb/issues/24031)
-    -   TiDBとMySQL [＃36394](https://github.com/pingcap/tidb/issues/36394) [＃27573](https://github.com/pingcap/tidb/issues/27573)間で`date_add`と`date_sub`戻り値の型が異なる問題を修正しました
-    -   パーサーがテーブルオプション[＃38368](https://github.com/pingcap/tidb/issues/38368)を復元するときに誤った`INSERT_METHOD`値を修正します
-    -   バージョン5.1以前のMySQLクライアントがTiDBサーバー[＃29725](https://github.com/pingcap/tidb/issues/29725)に接続する際に認証が失敗する問題を修正
-    -   符号なし`BIGINT`引数[＃30101](https://github.com/pingcap/tidb/issues/30101)を渡したときに`GREATEST`と`LEAST`間違った結果が返される問題を修正
-    -   TiDBの`concat(ifnull(time(3))`の結果がMySQL [＃29498](https://github.com/pingcap/tidb/issues/29498)の結果と異なる問題を修正
-    -   TiFlash [＃29952](https://github.com/pingcap/tidb/issues/29952)からクエリされたときに`avg()`関数が`ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.`返す問題を修正しました
-    -   `HashJoinExec` [＃30289](https://github.com/pingcap/tidb/issues/30289)を使用すると`ERROR 1105 (HY000): close of nil channel`が返される問題を修正
+    -   TiDBとMySQL 間で`date_add`と`date_sub`戻り値の型が異なる問題を修正しました [＃27573](https://github.com/pingcap/tidb/issues/27573) [＃36394](https://github.com/pingcap/tidb/issues/36394)
+    -   パーサーがテーブルオプションを復元するときに誤った`INSERT_METHOD`値を修正します [＃38368](https://github.com/pingcap/tidb/issues/38368)
+    -   バージョン5.1以前のMySQLクライアントがTiDBサーバーに接続する際に認証が失敗する問題を修正 [＃29725](https://github.com/pingcap/tidb/issues/29725)
+    -   符号なし`BIGINT`引数を渡したときに`GREATEST`と`LEAST`間違った結果が返される問題を修正 [＃30101](https://github.com/pingcap/tidb/issues/30101)
+    -   TiDBの`concat(ifnull(time(3))`の結果がMySQL の結果と異なる問題を修正 [＃29498](https://github.com/pingcap/tidb/issues/29498)
+    -   TiFlash からクエリされたときに`avg()`関数が`ERROR 1105 (HY000): other error for mpp stream: Could not convert to the target type - -value is out of range.`返す問題を修正しました [＃29952](https://github.com/pingcap/tidb/issues/29952)
+    -   `HashJoinExec` を使用すると`ERROR 1105 (HY000): close of nil channel`が返される問題を修正 [＃30289](https://github.com/pingcap/tidb/issues/30289)
     -   論理演算をクエリするときに TiKV とTiFlash が異なる結果を返す問題を修正[＃37258](https://github.com/pingcap/tidb/issues/37258)
     -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
     -   多数のリージョンをマージした後にリージョンキャッシュが適切にクリアされない問題を修正[＃37174](https://github.com/pingcap/tidb/issues/37174)
     -   特定のシナリオで`EXECUTE`文が予期しないエラーをスローする可能性がある問題を修正しました[＃37187](https://github.com/pingcap/tidb/issues/37187)
     -   `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT`と`ORDER BY`が失敗する可能性がある問題を修正しました [＃18216](https://github.com/pingcap/tidb/issues/18216)
-    -   プラン キャッシュ[＃29565](https://github.com/pingcap/tidb/issues/29565)使用時に、Decimal と Real の長さと幅が正しく設定されていない場合に返される誤った結果を修正しました。
+    -   プラン キャッシュ使用時に、Decimal と Real の長さと幅が正しく設定されていない場合に返される誤った結果を修正しました。 [＃29565](https://github.com/pingcap/tidb/issues/29565)
 
 -   PD
 
@@ -46,7 +46,7 @@ TiDB バージョン: 5.3.4
 
 -   TiFlash
 
-    -   引数の型がUInt8 [＃6127](https://github.com/pingcap/tiflash/issues/6127)場合に論理演算子が間違った結果を返す問題を修正しました
+    -   引数の型がUInt8 場合に論理演算子が間違った結果を返す問題を修正しました [＃6127](https://github.com/pingcap/tiflash/issues/6127)
     -   整数のデフォルト値として`0.0`使用されている場合 (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [＃3157](https://github.com/pingcap/tiflash/issues/3157) 、 TiFlashブートストラップが失敗する問題を修正しました。
 
 -   ツール
@@ -57,4 +57,4 @@ TiDB バージョン: 5.3.4
 
     -   TiCDC
 
-        -   MySQL関連のエラーが時間[＃6698](https://github.com/pingcap/tiflow/issues/6698)に所有者に報告されないため、changefeedの状態が正しくない問題を修正しました。
+        -   MySQL関連のエラーが時間に所有者に報告されないため、changefeedの状態が正しくない問題を修正しました。 [＃6698](https://github.com/pingcap/tiflow/issues/6698)

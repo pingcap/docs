@@ -174,7 +174,7 @@ TiDB バージョン: 7.4.0
 
 ### DB操作 {#db-operations}
 
--   照合順序`utf8mb4_0900_ai_ci`と`utf8mb4_0900_bin` [＃37566](https://github.com/pingcap/tidb/issues/37566) @ [YangKeao](https://github.com/YangKeao) @ [zimulala](https://github.com/zimulala) @ [bb7133](https://github.com/bb7133)をサポート
+-   照合順序`utf8mb4_0900_ai_ci`と`utf8mb4_0900_bin`をサポート [＃37566](https://github.com/pingcap/tidb/issues/37566) @ [YangKeao](https://github.com/YangKeao) @ [zimulala](https://github.com/zimulala) @ [bb7133](https://github.com/bb7133)
 
     TiDB v7.4.0 では、MySQL 8.0 からのデータ移行のサポートが強化され、 `utf8mb4_0900_ai_ci`と`utf8mb4_0900_bin` 2 つの照合順序が追加されました。5 `utf8mb4_0900_ai_ci` MySQL 8.0 のデフォルトの照合順序です。
 
@@ -217,7 +217,7 @@ TiDB バージョン: 7.4.0
 
     詳細については[ドキュメント](/dumpling-overview.md#option-list-of-dumpling)参照してください。
 
--   TiCDCはPulsar [＃9413](https://github.com/pingcap/tiflow/issues/9413) @ [yumchina](https://github.com/yumchina) @ [asddongmen](https://github.com/asddongmen)へのデータ複製をサポート
+-   TiCDCはPulsarへのデータ複製をサポート [＃9413](https://github.com/pingcap/tiflow/issues/9413) @ [yumchina](https://github.com/yumchina) @ [asddongmen](https://github.com/asddongmen)
 
     Pulsarは、クラウドネイティブかつ分散型のメッセージストリーミングプラットフォームであり、リアルタイムデータストリーミングエクスペリエンスを大幅に向上させます。v7.4.0以降、TiCDCは変更データをPulsarに`canal-json`形式で複製し、Pulsarとのシームレスな統合を実現します。この機能により、TiCDCはTiDBの変更を容易にキャプチャしてPulsarに複製できるため、データ処理と分析機能に新たな可能性をもたらします。Pulsarから新たに生成された変更データを読み取り、処理する独自のコンシューマーアプリケーションを開発することで、特定のビジネスニーズに対応できます。
 
@@ -308,7 +308,7 @@ TiDB バージョン: 7.4.0
     -   RocksDB 圧縮[＃15324](https://github.com/tikv/tikv/issues/15324) @ [overvenus](https://github.com/overvenus)によるメモリ変動を削減
     -   Partitioned Raft KV [＃15269](https://github.com/tikv/tikv/issues/15269) @ [overvenus](https://github.com/overvenus)のフロー制御モジュールのメモリ消費を削減
     -   接続再試行のプロセスでPDクライアントのバックオフメカニズムを追加し、エラー再試行中に再試行間隔を徐々に増やしてPD圧力[＃15428](https://github.com/tikv/tikv/issues/15428) @ [nolouch](https://github.com/nolouch)を軽減します。
-    -   RocksDB [＃15424](https://github.com/tikv/tikv/issues/15424)の`background_compaction` [栄光](https://github.com/glorv)で動的に調整するサポート
+    -   RocksDB の`background_compaction`を動的に調整するサポート [＃15424](https://github.com/tikv/tikv/issues/15424) @[glorv](https://github.com/glorv)
 
 -   PD
 

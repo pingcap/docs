@@ -15,21 +15,21 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 
 -   ツール
     -   TiDB Binlog
-        -   Drainer [＃915](https://github.com/pingcap/tidb-binlog/pull/915)で`disable-dispatch`と`disable-causality`設定されている場合、システムがエラーを返して終了する問題を修正しました
+        -   Drainer で`disable-dispatch`と`disable-causality`設定されている場合、システムがエラーを返して終了する問題を修正しました [＃915](https://github.com/pingcap/tidb-binlog/pull/915)
 
 ## 新機能 {#new-features}
 
 -   TiKV
-    -   動的に更新された構成をハードウェアディスク[＃6684](https://github.com/tikv/tikv/pull/6684)に永続化することをサポート
+    -   動的に更新された構成をハードウェアディスクに永続化することをサポート [＃6684](https://github.com/tikv/tikv/pull/6684)
 
 -   PD
-    -   動的に更新された構成をハードウェアディスク[＃2153](https://github.com/pingcap/pd/pull/2153)に永続化することをサポート
+    -   動的に更新された構成をハードウェアディスクに永続化することをサポート [＃2153](https://github.com/pingcap/pd/pull/2153)
 
 -   ツール
     -   TiDB Binlog
         -   TiDBクラスタ間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
     -   TiDB Lightning
-        -   TLS構成[＃40](https://github.com/tikv/importer/pull/40) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)をサポートする
+        -   TLS構成 をサポートする [＃270](https://github.com/pingcap/tidb-lightning/pull/270) [＃40](https://github.com/tikv/importer/pull/40)
     -   TiCDC
         -   変更データ キャプチャ (CDC) の最初のリリース。次の機能が提供されます。
             -   TiKVから変更されたデータのキャプチャをサポート
@@ -40,8 +40,8 @@ TiDB Ansible バージョン: 4.0.0-beta.2
         -   増分バックアップやAmazon S3へのファイルのバックアップなどの実験的機能を有効にする[＃175](https://github.com/pingcap/br/pull/175)
 
 -   TiDB Ansible
-    -   etcd [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の注入をサポート
-    -   ARM プラットフォーム[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)への TiDB サービスの導入をサポート
+    -   etcd へのノード情報の注入をサポート [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)
+    -   ARM プラットフォームへの TiDB サービスの導入をサポート [＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)
 
 ## バグ修正 {#bug-fixes}
 
@@ -50,11 +50,11 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     -   一部のケースで休止状態領域が正しく起動されない可能性がある問題を修正[＃6772](https://github.com/tikv/tikv/pull/6672) [＃6648](https://github.com/tikv/tikv/pull/6648) [＃6376](https://github.com/tikv/tikv/pull/6736)
 
 -   PD
-    -   ルールチェッカーがリージョン[＃2160](https://github.com/pingcap/pd/pull/2160)にストアを割り当てられないというpanic問題を修正しました
+    -   ルールチェッカーがリージョンにストアを割り当てられないというpanic問題を修正しました [＃2160](https://github.com/pingcap/pd/pull/2160)
     -   動的構成を有効にした後、Leaderが切り替えられるときに構成のレプリケーション遅延が発生する可能性がある問題を修正しました[＃2154](https://github.com/pingcap/pd/pull/2154)
 
 -   ツール
     -   Backup & Restore (BR)
         -   PDが大容量データを処理できないため、 BRが大容量データの復元に失敗する可能性がある問題を修正[＃167](https://github.com/pingcap/br/pull/167)
-        -   BRバージョンがTiDBバージョン[＃186](https://github.com/pingcap/br/pull/186)と互換性がないため発生したBR障害を修正
-        -   BRバージョンがTiFlash [＃194](https://github.com/pingcap/br/pull/194)と互換性がないため発生したBR障害を修正
+        -   BRバージョンがTiDBバージョンと互換性がないため発生したBR障害を修正 [＃186](https://github.com/pingcap/br/pull/186)
+        -   BRバージョンがTiFlash と互換性がないため発生したBR障害を修正 [＃194](https://github.com/pingcap/br/pull/194)
