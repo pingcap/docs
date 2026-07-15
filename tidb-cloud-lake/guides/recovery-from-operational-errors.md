@@ -53,7 +53,7 @@ If you've accidentally dropped a database, you can restore it using the `UNDROP 
 
 > **Important:**
 >
-> A dropped database can only be restored within the retention period (default is 24 hours).
+> You can restore a dropped database only within the retention period (default is 24 hours).
 
 For more details, see [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md) and [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md).
 
@@ -87,7 +87,7 @@ If you've accidentally dropped a table, you can restore it using the `UNDROP TAB
 
 > **Important:**
 >
-> A dropped table can only be restored within the retention period (default is 24 hours).
+> You can restore a dropped table only within the retention period (default is 24 hours).
 
 For more details, see [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) and [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md).
 

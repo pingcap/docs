@@ -80,4 +80,4 @@ SELECT city, population FROM citypopulation;
 
 > **Important:**
 >
-> When using VALUES in a FROM clause or CTE, it must be enclosed in parentheses: `FROM (VALUES ...)` or `AS (VALUES ...)`. This is required syntax.
+> When using `VALUES` in a `FROM` clause or CTE, you must enclose it in parentheses: `FROM (VALUES ...)` or `AS (VALUES ...)`. This is required syntax.
