@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.10
 -   TiDBの文字列を時間に変換する結果がMySQL と互換性がない問題を修正 [＃14570](https://github.com/pingcap/tidb/pull/14570)
 -   監査ログにユーザーのログイン失敗を記録する [＃14620](https://github.com/pingcap/tidb/pull/14620)
 -   悲観的トランザクションのロックキーの数を監視するための`tidb_session_ statement_lock_keys_count`監視項目を追加します。 [＃14634](https://github.com/pingcap/tidb/pull/14634)
--   JSON内の`&`など[＃14637](https://github.com/pingcap/tidb/pull/14637)文字が誤ってエスケープされる問題`<`修正しました`>`
+-   JSON内の`&`、`<`、`>`などの文字が誤ってエスケープされる問題を修正しました [＃14637](https://github.com/pingcap/tidb/pull/14637)
 -   `HashJoin`操作でハッシュテーブルを構築する際に過剰なメモリ使用によって発生するシステムpanicの問題を修正しました [＃14642](https://github.com/pingcap/tidb/pull/14642)
 -   SQLバインディングが無効なレコードを処理するときに、誤った処理ロジックによって発生するpanicの問題を修正しました[＃14645](https://github.com/pingcap/tidb/pull/14645)
 -   ix MySQLの非互換性の問題を修正するために、小数点割り算の計算に切り捨てエラー検出を追加しました[＃14673](https://github.com/pingcap/tidb/pull/14673)

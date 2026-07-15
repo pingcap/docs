@@ -47,7 +47,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 -   DDL
     -   TiDB の旧バージョンのストレージ内の文字セット名の大文字の問題を修正しました [＃10272](https://github.com/pingcap/tidb/pull/10272)
-    -   テーブル作成時にテーブルリージョンを事前割り当てして、 [＃10221](https://github.com/pingcap/tidb/pull/10221)作成後の書き込みホットスポットを回避するテーブルパーティションのサポート`preSplit`
+    -   テーブル作成時にテーブルリージョンを事前割り当てして、作成後の書き込みホットスポットを回避するテーブルパーティションの`preSplit`サポート [＃10221](https://github.com/pingcap/tidb/pull/10221)
     -   TiDBがPDのバージョン情報を誤って更新する場合がある問題を修正[＃10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`文を使用して文字セットと照合順序を変更することをサポートします [＃10393](https://github.com/pingcap/tidb/pull/10393)
     -   ホットスポットの問題を軽減するために、指定されたテーブルのインデックスと範囲に基づいてリージョンを分割することをサポートします[＃10203](https://github.com/pingcap/tidb/pull/10203)
@@ -101,9 +101,9 @@ TiDB Ansible バージョン: 3.0.0-rc.2
         -   `Time` の比較演算をサポート [＃4625](https://github.com/tikv/tikv/pull/4625)
         -   `Duration` の比較演算をサポート [＃4625](https://github.com/tikv/tikv/pull/4625)
         -   `Json` の比較演算をサポート [＃4625](https://github.com/tikv/tikv/pull/4625)
-        -   `Int` [＃4733](https://github.com/tikv/tikv/pull/4733)のサポートプラス算術
-        -   `Real` [＃4733](https://github.com/tikv/tikv/pull/4733)のサポートプラス算術
-        -   `Decimal` [＃4733](https://github.com/tikv/tikv/pull/4733)のサポートプラス算術
+        -   `Int` のプラス演算をサポート [＃4733](https://github.com/tikv/tikv/pull/4733)
+        -   `Real` のプラス演算をサポート [＃4733](https://github.com/tikv/tikv/pull/4733)
+        -   `Decimal` のプラス演算をサポート [＃4733](https://github.com/tikv/tikv/pull/4733)
         -   `Int` のMOD関数をサポート [＃4727](https://github.com/tikv/tikv/pull/4727)
         -   `Real` のMOD関数をサポート [＃4727](https://github.com/tikv/tikv/pull/4727)
         -   `Decimal` のMOD関数をサポート [＃4727](https://github.com/tikv/tikv/pull/4727)
