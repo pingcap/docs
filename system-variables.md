@@ -1134,7 +1134,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
-- Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
+- Range: `[1, 18446744073709551615]`
 - For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
