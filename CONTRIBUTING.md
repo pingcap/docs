@@ -121,7 +121,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 ### ステップ8: プルリクエストを作成する {#step-8-create-a-pull-request}
 
 1.  [https://github.com/$user/docs](https://github.com/$user/docs)でフォークにアクセスします ( `$user` GitHub ID に置き換えます)
-2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。5 [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)参照してください。
+2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。詳細は[プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
 これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの貢献者になります。
 

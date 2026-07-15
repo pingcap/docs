@@ -72,7 +72,7 @@ SHOW CREATE TABLE users;
 1 row in set (0.00 sec)
 ```
 
-キャッシュされたテーブルからデータを読み込んだ後、TiDBはデータをメモリにロードします。1 文[`TRACE`](/sql-statements/sql-statement-trace.md)使用すると、データがメモリにロードされているかどうかを確認できます。キャッシュにロードされていない場合、返される結果には`regionRequest.SendReqCtx`属性が含まれます。これは、TiDBがTiKVからデータを読み込んでいることを示します。
+キャッシュされたテーブルからデータを読み込んだ後、TiDBはデータをメモリにロードします。[`TRACE`](/sql-statements/sql-statement-trace.md)文を使用すると、データがメモリにロードされているかどうかを確認できます。キャッシュにロードされていない場合、返される結果には`regionRequest.SendReqCtx`属性が含まれます。これは、TiDBがTiKVからデータを読み込んでいることを示します。
 
 ```sql
 TRACE SELECT * FROM users;
