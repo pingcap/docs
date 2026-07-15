@@ -115,7 +115,7 @@ EXPLAIN SELECT MAX(id + a) FROM t GROUP BY a;
 8 rows in set (0.18 sec)
 ```
 
-上の例では、式`id + a`は計算のために事前にTiFlashにプッシュダウンされています。これにより、ネットワーク経由で転送されるデータ量が削減され、ネットワーク転送のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列目に`plus(test.t.id, test.t.a)`値が設定されている行の`task`列目に`mpp[tiflash]`値があることで示されています。
+上の例では、式`id + a`は計算のために事前にTiFlashにプッシュダウンされています。これにより、ネットワーク経由で転送されるデータ量が削減され、ネットワーク転送のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列に`plus(test.t.id, test.t.a)`値が設定されている行の`task`列に`mpp[tiflash]`値があることで示されています。
 
 ### 例3: プッシュダウンの制限 {#example-3-restrictions-for-pushdown}
 

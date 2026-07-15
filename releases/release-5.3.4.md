@@ -20,7 +20,7 @@ TiDB バージョン: 5.3.4
 -   TiDB
 
     -   リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正[＃37141](https://github.com/pingcap/tidb/issues/37141)
-    -   `ENUM` [＃32302](https://github.com/pingcap/tidb/issues/32302)または`SET`列目のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました。
+    -   `ENUM` または`SET`列のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました。 [＃32302](https://github.com/pingcap/tidb/issues/32302)
     -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[＃38363](https://github.com/pingcap/tidb/issues/38363)
     -   `mysql.tables_priv`テーブル[＃38293](https://github.com/pingcap/tidb/issues/38293)で`grantor`フィールドが欠落している問題を修正
     -   `KILL TIDB`アイドル接続時にすぐに効果を発揮できない問題を修正[＃24031](https://github.com/pingcap/tidb/issues/24031)

@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 3.0.9
 ## TiDB {#tidb}
 
 -   執行者
-    -   集計関数を`ENUM`列目とコレクション列[＃14364](https://github.com/pingcap/tidb/pull/14364)に適用した場合の誤った結果を修正しました
+    -   集計関数を`ENUM`列とコレクション列に適用した場合の誤った結果を修正しました [＃14364](https://github.com/pingcap/tidb/pull/14364)
 -   サーバ
     -   システム変数`auto_increment_increment`と`auto_increment_offset`サポート[＃14396](https://github.com/pingcap/tidb/pull/14396)
     -   `tidb_tikvclient_ttl_lifetime_reach_total`監視メトリックを追加して、TTL が 10 分の悲観的トランザクションの数を監視します[＃14300](https://github.com/pingcap/tidb/pull/14300)
@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.9
     -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から`200`に調整します[＃14285](https://github.com/pingcap/tidb/pull/14285)
     -   スロークエリテーブルに`plan_digest`フィールドを追加して、 `plan`署名[＃14292](https://github.com/pingcap/tidb/pull/14292)記録する
 -   DDL
-    -   `primary`列目に`alter table ... add index`を使用して作成された匿名インデックスの結果がMySQL [＃14310](https://github.com/pingcap/tidb/pull/14310)と一致しない問題を修正しました
+    -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果がMySQL と一致しない問題を修正しました [＃14310](https://github.com/pingcap/tidb/pull/14310)
     -   `drop table`構文で`VIEW`が誤って削除される問題を修正[＃14052](https://github.com/pingcap/tidb/pull/14052)
 -   プランナー
     -   `select max(a), min(a) from t`のような文のパフォーマンスを最適化します。3 `a`にインデックスが存在する場合、文は`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、フルテーブルスキャン[＃14410](https://github.com/pingcap/tidb/pull/14410)を回避します。

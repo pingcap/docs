@@ -139,7 +139,7 @@ SELECT @@tidb_current_ts;
 
 ## TIDB_DECODE_BINARY_PLAN {#tidb-decode-binary-plan}
 
-`TIDB_DECODE_BINARY_PLAN(binary_plan)`関数は、 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)表の`BINARY_PLAN`列目にあるようなバイナリ プランをデコードします。
+`TIDB_DECODE_BINARY_PLAN(binary_plan)`関数は、 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)表の`BINARY_PLAN`列にあるようなバイナリ プランをデコードします。
 
 バイナリ プランを使用できるようにするには、 [`tidb_generate_binary_plan`](/system-variables.md#tidb_generate_binary_plan-new-in-v620)変数を`ON`に設定する必要があります。
 

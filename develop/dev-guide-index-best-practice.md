@@ -45,7 +45,7 @@ CREATE TABLE `books` (
 
 -   結合インデックスを使用する場合は、左プレフィックスルールに従ってください。
 
-    `title`列目と`published_at`列目に新しい結合インデックスを作成するとします。
+    `title`列と`published_at`列に新しい結合インデックスを作成するとします。
 
     ```sql
     CREATE INDEX title_published_at_idx ON books (title, published_at);

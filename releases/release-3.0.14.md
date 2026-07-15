@@ -69,7 +69,7 @@ TiDB バージョン: 3.0.14
 
     -   SQLモードが`ALLOW_INVALID_DATES` [＃16170](https://github.com/pingcap/tidb/pull/16170)ときに`WEEKEND`関数がMySQLと互換性がない問題を修正しました
     -   インデックス列にAUTO_INCREMENT主キー[＃16008](https://github.com/pingcap/tidb/pull/16008)が含まれている場合に`DROP INDEX`文の実行が失敗する問題を修正しました
-    -   ステートメントサマリー[＃15231](https://github.com/pingcap/tidb/pull/15231)の`TABLE_NAMES`列目の値が誤っている問題を修正しました
+    -   ステートメントサマリーの`TABLE_NAMES`列の値が誤っている問題を修正しました [＃15231](https://github.com/pingcap/tidb/pull/15231)
     -   プランキャッシュが有効な場合に一部の式で誤った結果が発生する問題を修正[＃16184](https://github.com/pingcap/tidb/pull/16184)
     -   `not` / `istrue` / `isfalse`関数の結果が正しくない問題を修正しました[＃15916](https://github.com/pingcap/tidb/pull/15916)
     -   冗長インデックスを持つテーブルに対する`MergeJoin`操作によって引き起こされるpanicを修正[＃15919](https://github.com/pingcap/tidb/pull/15919)
@@ -84,7 +84,7 @@ TiDB バージョン: 3.0.14
     -   `CASE WHEN (not_int)` [＃15359](https://github.com/pingcap/tidb/pull/15359)の誤った動作を修正
     -   現在のスキーマ[＃15866](https://github.com/pingcap/tidb/pull/15866)に含まれない`view`使用すると`Unknown column`エラー メッセージが返される問題を修正しました
     -   時間文字列の解析結果がMySQL [＃16242](https://github.com/pingcap/tidb/pull/16242)と互換性がない問題を修正
-    -   `left join`の右子ノード[＃16528](https://github.com/pingcap/tidb/pull/16528)に`null`列目が存在する場合に照合順序子がpanicを修正
+    -   `left join`の右子ノードに`null`列が存在する場合に照合順序子がpanicを修正 [＃16528](https://github.com/pingcap/tidb/pull/16528)
     -   TiKVが`StaleCommand`エラーメッセージを返し続けているときにSQL実行がブロックされているにもかかわらずエラーメッセージが返されない問題を修正しました[＃16528](https://github.com/pingcap/tidb/pull/16528)
     -   監査プラグインが有効になっているときにポートプローブによって発生する可能性のあるpanicを修正[＃15967](https://github.com/pingcap/tidb/pull/15967)
     -   `fast analyze`インデックス[＃15967](https://github.com/pingcap/tidb/pull/15967)のみで動作する場合に発生するpanicを修正

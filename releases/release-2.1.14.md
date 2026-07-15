@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 2.1.14
 ## TiDB {#tidb}
 
 -   一部のケースで列プルーニングによって発生する誤ったクエリ結果を修正[＃11019](https://github.com/pingcap/tidb/pull/11019)
--   `show processlist` [＃11000](https://github.com/pingcap/tidb/pull/11000)の`db`列目と`info`列目に誤って表示された情報を修正
+-   `show processlist` の`db`列と`info`列に誤って表示された情報を修正 [＃11000](https://github.com/pingcap/tidb/pull/11000)
 -   `MAX_EXECUTION_TIME` SQLヒントとグローバル変数が場合によっては機能しない問題を修正[＃10999](https://github.com/pingcap/tidb/pull/10999)
 -   負荷[＃10997](https://github.com/pingcap/tidb/pull/10997)に基づいてAUTO_INCREMENT IDによって割り当てられた増分ギャップを自動的に調整する機能をサポート
 -   クエリ終了時にメモリ情報`Distsql` `MemTracker`正しく消去されない問題を修正[＃10971](https://github.com/pingcap/tidb/pull/10971)

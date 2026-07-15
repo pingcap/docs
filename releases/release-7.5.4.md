@@ -60,7 +60,7 @@ TiDB バージョン: 7.5.4
     -   DMから複製されたテーブルのインデックスの長さが`max-index-length` [＃55138](https://github.com/pingcap/tidb/issues/55138) @ [lance6716](https://github.com/lance6716)で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました
     -   `INFORMATION_SCHEMA.STATISTICS`表の`SUB_PART`値が`NULL` [＃55812](https://github.com/pingcap/tidb/issues/55812) @ [Defined2014](https://github.com/Defined2014)である問題を修正しました
     -   DML文にネストされた生成列[＃53967](https://github.com/pingcap/tidb/issues/53967) @ [wjhuang2016](https://github.com/wjhuang2016)が含まれている場合にエラーが発生する問題を修正しました
-    -   `mysql.stats_histograms`表の`tot_col_size`列目が負の数[＃55126](https://github.com/pingcap/tidb/issues/55126) @ [qw4990](https://github.com/qw4990)になる可能性がある問題を修正しました
+    -   `mysql.stats_histograms`表の`tot_col_size`列が負の数になる可能性がある問題を修正しました [＃55126](https://github.com/pingcap/tidb/issues/55126) @ [qw4990](https://github.com/qw4990)
     -   `IndexNestedLoopHashJoin` [＃49692](https://github.com/pingcap/tidb/issues/49692) @ [solotzg](https://github.com/solotzg)のデータ競合問題を修正
     -   メモリ使用量が`tidb_mem_quota_query` [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました
     -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文[＃53713](https://github.com/pingcap/tidb/issues/53713) @ [AilinKid](https://github.com/AilinKid)を実行すると`runtime error: index out of range`が発生する問題を修正しました。

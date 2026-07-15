@@ -81,7 +81,7 @@ TiDBバージョン: 6.5.12
     -   不一致な値型と型変換エラーを含む条件`IN`を使用してパーティション テーブルをクエリすると、誤ったクエリ結果[＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)が発生する問題を修正しました
     -   特定のフィールドに空の値が含まれている場合にスローログのクエリが失敗する可能性がある問題を修正[＃58147](https://github.com/pingcap/tidb/issues/58147) @ [yibin87](https://github.com/yibin87)
     -   `RADIANS()`関数が誤った順序で値を計算する問題を修正[＃57671](https://github.com/pingcap/tidb/issues/57671) @ [gengliqi](https://github.com/gengliqi)
-    -   `BIT`列目のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
+    -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
     -   CTE に`ORDER BY` 、 `LIMIT` 、または`SELECT DISTINCT`個の節が含まれており、別の CTE [＃56603](https://github.com/pingcap/tidb/issues/56603) @ [elsa0520](https://github.com/elsa0520)の再帰部分によって参照されている場合にインライン エラーが発生する可能性がある問題を修正しました。
     -   統計情報を同期的にロードする際に発生するタイムアウトが正しく処理されない可能性がある問題を修正[＃57710](https://github.com/pingcap/tidb/issues/57710) @ [hawkingrei](https://github.com/hawkingrei)
     -   CTE [＃54582](https://github.com/pingcap/tidb/issues/54582) @ [hawkingrei](https://github.com/hawkingrei)でデータベース名を解析するときに誤ったデータベース名が返される可能性がある問題を修正しました

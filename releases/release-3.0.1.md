@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 3.0.1
 -   `infoHandle` `NULL` [＃11022](https://github.com/pingcap/tidb/pull/11022)になる可能性があるため、DDL ジョブのpanic問題を修正しました。
 -   クエリされた列がサブクエリで参照されていないため、ネストされた集計クエリを実行するときに誤ってプルーニングされ、クエリ結果が正しくない問題を修正しました[＃11020](https://github.com/pingcap/tidb/pull/11020)
 -   `Sleep`の関数が`KILL` [＃11028](https://github.com/pingcap/tidb/pull/11028)のステートメントに応答しない問題を修正しました
--   `SHOW PROCESSLIST`コマンドで表示される`DB`目と`INFO`列目がMySQL [＃11003](https://github.com/pingcap/tidb/pull/11003)と互換性がない問題を修正
+-   `SHOW PROCESSLIST`コマンドで表示される`DB`列と`INFO`列がMySQL と互換性がない問題を修正 [＃11003](https://github.com/pingcap/tidb/pull/11003)
 -   `skip-grant-table=true`が設定されている場合に`FLUSH PRIVILEGES`ステートメントによって発生するシステムpanicの問題を修正[＃11027](https://github.com/pingcap/tidb/pull/11027)
 -   テーブルの主キーが`UNSIGNED`整数[＃11099](https://github.com/pingcap/tidb/pull/11099)の場合、 `FAST ANALYZE`で収集された主キー統計が正しくない問題を修正しました。
 -   `FAST ANALYZE`文で「無効なキー」エラーが報告される場合がある問題を修正[＃11098](https://github.com/pingcap/tidb/pull/11098)

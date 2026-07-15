@@ -85,7 +85,7 @@ TiDB バージョン: 6.5.4
     -   TTLタスクが時間[＃40109](https://github.com/pingcap/tidb/issues/40109) @ [YangKeao](https://github.com/YangKeao)で統計更新をトリガーできない問題を修正
     -   GC ロック解決ステップで一部の悲観的ロック[＃45134](https://github.com/pingcap/tidb/issues/45134) @ [MyonKeminta](https://github.com/MyonKeminta)が見逃される可能性がある問題を修正しました
     -   バイナリプロトコルを使用してTiDBに接続し、多数の`PREPARE`と`EXECUTE`ステートメント[＃44612](https://github.com/pingcap/tidb/issues/44612) @ [wshwsh12](https://github.com/wshwsh12)を実行すると、メモリリークと実行時間が増加し続ける問題を修正しました。
-    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列目のデータ長が列定義[＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)を超える可能性がある問題を修正しました
+    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義を超える可能性がある問題を修正しました [＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   多数のリージョンがあるが、 `Prepare`または`Execute` [＃39605](https://github.com/pingcap/tidb/issues/39605) @ [djshow832](https://github.com/djshow832)を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。
     -   パーティションテーブル[＃41638](https://github.com/pingcap/tidb/issues/41638) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)に新しいインデックスを追加した後、パーティションパーティションテーブルで統計の自動収集が正しくトリガーされない可能性がある問題を修正しました。
     -   統計情報におけるSQL実行詳細のメモリ消費量が多すぎると、極端なケースでTiDB OOMが発生する問題を修正[＃44047](https://github.com/pingcap/tidb/issues/44047) @ [wshwsh12](https://github.com/wshwsh12)

@@ -197,7 +197,7 @@ TiDB バージョン: 7.5.2
     -   分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanic可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   生成された列をクエリするとエラーが返される問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   チャンクエンコード[＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)中に`ENUM`列目がTiFlashを引き起こす可能性がある問題を修正しました
+    -   チャンクエンコード中に`ENUM`列がTiFlashを引き起こす可能性がある問題を修正しました [＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)
     -   ログの誤った`local_region_num`値を修正 [＃8895](https://github.com/pingcap/tiflash/issues/8895) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージとコンピューティングアーキテクチャで、シャットダウン中にTiFlash がpanicになる可能性がある問題を修正しました。 [＃8837](https://github.com/pingcap/tiflash/issues/8837) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlash が高同時読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @ [JinheLin](https://github.com/JinheLin)

@@ -90,7 +90,7 @@ ALTER TABLE t1 AFFINITY = '';
     -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
     -   `Stable` : すべてのリージョンが目標配布に到達しました。
 
--   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列目でテーブルのアフィニティ レベルを確認します。
+-   [`INFORMATION_SCHEMA.TABLES`](/information-schema/information-schema-tables.md)テーブルをクエリし、 `TIDB_AFFINITY`列でテーブルのアフィニティ レベルを確認します。
 
 -   [`INFORMATION_SCHEMA.PARTITIONS`](/information-schema/information-schema-partitions.md)テーブルをクエリし、パーティションのアフィニティ レベルの`TIDB_AFFINITY`列を確認します。
 

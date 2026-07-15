@@ -103,7 +103,7 @@ ALTER TABLE `tbl00` ADD COLUMN `Age` INT DEFAULT -1;
 
 ![optimistic-ddl-fail-example-3](/media/dm/optimistic-ddl-fail-example-3.png)
 
-この時点で、 `DEFAULT 0`と`DEFAULT -1`互いに互換性がないため、 `tbl00`の`Age`列目は不整合になります。このような状況では、DMはエラーを報告しますが、データの不整合を手動で修正する必要があります。
+この時点で、 `DEFAULT 0`と`DEFAULT -1`互いに互換性がないため、 `tbl00`の`Age`列は不整合になります。このような状況では、DMはエラーを報告しますが、データの不整合を手動で修正する必要があります。
 
 ## 実施原則 {#implementation-principle}
 
@@ -177,7 +177,7 @@ ALTER TABLE `tbl02` ADD COLUMN `Level` INT;
 
 その時までに、すべてのシャードテーブルに`Level`列が存在します。
 
-それぞれ`tbl00`と`tbl02`の`Name`列目を削除します。
+それぞれ`tbl00`と`tbl02`の`Name`列を削除します。
 
 ```sql
 ALTER TABLE `tbl00` DROP COLUMN `Name`;

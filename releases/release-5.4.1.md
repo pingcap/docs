@@ -50,11 +50,11 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 -   TiDB
 
     -   TiDBの`date_format`が`'\n'` MySQLと互換性のない方法で処理する問題を修正[＃32232](https://github.com/pingcap/tidb/issues/32232)
-    -   `ENUM` [＃32302](https://github.com/pingcap/tidb/issues/32302)または`SET`列目のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました。
+    -   `ENUM` または`SET`列のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正しました。 [＃32302](https://github.com/pingcap/tidb/issues/32302)
     -   特定のケースで Merge Join 演算子が間違った結果を返す問題を修正[＃33042](https://github.com/pingcap/tidb/issues/33042)
     -   相関サブクエリが定数[＃32089](https://github.com/pingcap/tidb/issues/32089)返すときにTiDBが間違った結果を取得する問題を修正しました
     -   TiFlash が空の範囲を持つテーブルの読み取りをまだサポートしていないにもかかわらず、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると TiDB が間違った結果を取得する問題を修正しました[＃33083](https://github.com/pingcap/tidb/issues/33083)
-    -   TiDB [＃31638](https://github.com/pingcap/tidb/issues/31638)で新しい照合順序が有効になっているときに、 `ENUM`または`SET`列目の`MAX`または`MIN`関数が間違った結果を返す問題を修正しました。
+    -   TiDB で新しい照合順序が有効になっているときに、 `ENUM`または`SET`列の`MAX`または`MIN`関数が間違った結果を返す問題を修正しました。 [＃31638](https://github.com/pingcap/tidb/issues/31638)
     -   クエリがエラーを報告したときに CTE がブロックされる可能性があるバグを修正[＃31302](https://github.com/pingcap/tidb/issues/31302)
     -   列挙値[＃32428](https://github.com/pingcap/tidb/issues/32428)の Nulleq 関数の誤った範囲計算結果を修正しました
     -   ChunkRPC [＃31981](https://github.com/pingcap/tidb/issues/31981) [＃30880](https://github.com/pingcap/tidb/issues/30880)を使用してデータをエクスポートする際の TiDB OOM を修正

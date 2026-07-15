@@ -101,7 +101,7 @@ tiup dm display prod-cluster
     172.19.0.101:3000  grafana       172.19.0.101  3000       linux/x86_64  Up         -                                  /home/tidb/deploy/grafana-3000
     172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
 
-`Status`列目では、 `Up`または`Down`使用して、サービスが正常に実行されているかどうかを示します。
+`Status`列では、 `Up`または`Down`使用して、サービスが正常に実行されているかどうかを示します。
 
 DMマスターコンポーネントの場合、ステータスに`|L`が付加され、DMマスターノードがLeaderであることを示します。DMワーカーコンポーネントの場合、 `Free`現在のDMワーカーノードがアップストリームにバインドされていないことを示します。
 

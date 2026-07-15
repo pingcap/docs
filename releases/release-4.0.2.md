@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.2
     -   TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash [＃17705](https://github.com/pingcap/tidb/pull/17705)にプッシュします。
     -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバ[＃17695](https://github.com/pingcap/tidb/pull/17695)のステータス アドレスを示します。
     -   `MYSQL.BIND_INFO`表に`SOURCE`列を追加して、バインディングの作成方法を示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
-    -   SQL文[＃17493](https://github.com/pingcap/tidb/pull/17493)のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列目を追加します。
+    -   SQL文のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加します。 [＃17493](https://github.com/pingcap/tidb/pull/17493)
     -   `enable-collect-execution-info`構成項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各演算子の実行情報を収集し、その情報をスロークエリログ[＃18073](https://github.com/pingcap/tidb/pull/18073) [＃18072](https://github.com/pingcap/tidb/pull/18072)に記録するかどうかを制御します。
     -   スロークエリログ[＃17694](https://github.com/pingcap/tidb/pull/17694)でクエリの感度を下げるかどうかを制御するグローバル変数`tidb_slow_log_masking`追加します。
     -   `storage.block-cache.capacity` TiKV構成項目[＃17671](https://github.com/pingcap/tidb/pull/17671) `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加します。
@@ -105,7 +105,7 @@ TiDB バージョン: 4.0.2
     -   `EXPLAIN FOR CONNECTION`文[＃18124](https://github.com/pingcap/tidb/pull/18124)実行するときに時々発生するランタイムエラーを修正
     -   いくつかのケースで`last_plan_from_cache`セッション変数の誤った結果を修正[＃18111](https://github.com/pingcap/tidb/pull/18111)
     -   プランキャッシュ[＃18002](https://github.com/pingcap/tidb/pull/18002) [＃17673](https://github.com/pingcap/tidb/pull/17673)から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイムエラーを修正しました
-    -   `HashJoin` Executor の子が`NULL`列目[＃17937](https://github.com/pingcap/tidb/pull/17937)返すときのランタイムエラーを修正しました
+    -   `HashJoin` Executor の子が`NULL`列返すときのランタイムエラーを修正しました [＃17937](https://github.com/pingcap/tidb/pull/17937)
     -   同じデータベース[＃17659](https://github.com/pingcap/tidb/pull/17659)で`DROP DATABASE`文と他の DDL 文を同時に実行することによって発生する実行時エラーを修正します。
     -   ユーザー変数[＃17890](https://github.com/pingcap/tidb/pull/17890)の関数`COERCIBILITY()`の誤った結果を修正
     -   `IndexMergeJoin`実行者が時々スタックする問題を修正[＃18091](https://github.com/pingcap/tidb/pull/18091)

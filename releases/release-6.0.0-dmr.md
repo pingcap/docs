@@ -302,7 +302,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `information_schema.placement_rules`システムテーブルの名前が`information_schema.placement_policies`に変更されました。このテーブルには、配置ポリシーに関する情報のみが表示されるようになりました。
     -   `placement_checks`システム変数は`tidb_placement_mode`に置き換えられます。
     -   TiFlashレプリカを持つテーブルに配置ルールを持つパーティションを追加することは禁止されています。
-    -   `INFORMATION_SCHEMA`テーブルから`TIDB_DIRECT_PLACEMENT`列目を削除します。
+    -   `INFORMATION_SCHEMA`テーブルから`TIDB_DIRECT_PLACEMENT`列を削除します。
 -   SQL プラン管理 (SPM) バインディングの`status`値が変更されます。
     -   `using`を削除します。
     -   `using`代わりに`enabled` (使用可能) を追加します。
@@ -525,7 +525,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         -   一部のケースでシーケンスが誤って複製されるバグを修正[＃4552](https://github.com/pingcap/tiflow/issues/4552)
         -   `Canal-JSON` nil [＃4736](https://github.com/pingcap/tiflow/issues/4736)をサポートしていないために発生する可能性がある TiCDCpanic問題を修正しました
         -   タイプ`Enum/Set`および`TinyText/MediumText/Text/LongText` [＃4454](https://github.com/pingcap/tiflow/issues/4454)のAvroコーデックの誤ったデータマッピングを修正
-        -   Avroが`NOT NULL`列目をNULL許容フィールド[＃4818](https://github.com/pingcap/tiflow/issues/4818)に変換するバグを修正
+        -   Avroが`NOT NULL`列をNULL許容フィールドに変換するバグを修正 [＃4818](https://github.com/pingcap/tiflow/issues/4818)
         -   TiCDC が終了できない問題を修正[＃4699](https://github.com/pingcap/tiflow/issues/4699)
 
     -   TiDB Data Migration (DM)

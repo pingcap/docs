@@ -96,7 +96,7 @@ ORDER BY
     >
     > MySQL 5.7.7より前のコマンドラインクライアントは、デフォルトでオプティマイザヒントを削除します。これらの以前のバージョンで`Hint`構文を使用している場合は、クライアントの起動時に`--comments`オプションを追加してください。例： `mysql -h 127.0.0.1 -P 4000 -uroot --comments`
 
-    出力では、 `execution info`列目から実行時間を取得できます。
+    出力では、 `execution info`列から実行時間を取得できます。
 
     ```sql
     id                         | estRows  | actRows | task      | access object | execution info                             | operator info                                 | memory  | disk    
@@ -126,7 +126,7 @@ ORDER BY
       `release_year` DESC;
     ```
 
-    出力では、 `execution info`列目から実行時間を取得できます。
+    出力では、 `execution info`列から実行時間を取得できます。
 
     ```sql
     id                                   | estRows  | actRows | task         | access object | execution info                                        | operator info                              | memory  | disk    

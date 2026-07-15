@@ -42,7 +42,7 @@ DESC data_lock_waits;
 
 ## <code>KEY_INFO</code> {#code-key-info-code}
 
-`KEY_INFO`列目は`KEY`列目の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
+`KEY_INFO`列は`KEY`列の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
 
 -   `"db_id"` : キーが属するスキーマの ID。
 -   `"db_name"` : キーが属するスキーマの名前。

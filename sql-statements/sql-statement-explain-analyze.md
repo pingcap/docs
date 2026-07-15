@@ -268,7 +268,7 @@ tiflash_scan: {
 >
 > この値は、今回の実行で実際に消費されたRU数を示します。キャッシュの影響により、同じSQL文でも実行ごとに消費されるRU数が異なる場合があります（例： [コプロセッサキャッシュ](/coprocessor-cache.md) ）。
 
-RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列目の他の値から計算できます。例えば、次のようになります。
+RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列の他の値から計算できます。例えば、次のようになります。
 
 ```json
 'executeInfo':

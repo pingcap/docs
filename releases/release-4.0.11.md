@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.11
     -   `@@tidb_snapshot`変数が設定されている場合にPointGetクエリがスナップショットデータを取得できないバグを修正しました [＃22527](https://github.com/pingcap/tidb/pull/22527)
     -   結合からヒントを生成するときに発生する可能性のあるpanicを修正[＃22518](https://github.com/pingcap/tidb/pull/22518)
     -   文字列が`BIT`型[＃22420](https://github.com/pingcap/tidb/pull/22420)に誤って変換される問題を修正
-    -   `tidb_rowid`列目に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
+    -   `tidb_rowid`列に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
     -   キャッシュされたプランが誤って使用されるバグを修正[＃22353](https://github.com/pingcap/tidb/pull/22353)
     -   バイナリ/文字列の長さが大きすぎる場合に関数`WEIGHT_STRING`で発生するランタイムpanicを修正[＃22332](https://github.com/pingcap/tidb/pull/22332)
     -   関数パラメータの数が無効な場合、生成された列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)

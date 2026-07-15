@@ -56,7 +56,7 @@ TiDB バージョン: 6.1.7
     -   ウィンドウ関数をTiFlash [＃43922](https://github.com/pingcap/tidb/issues/43922) @ [gengliqi](https://github.com/gengliqi)にプッシュダウンする際の実行プランが正しくない問題を修正しました
     -   非相関サブクエリ[＃44051](https://github.com/pingcap/tidb/issues/44051) @ [winoros](https://github.com/winoros)を含むステートメントで共通テーブル式 (CTE) を使用すると誤った結果が返される可能性がある問題を修正しました
     -   カーソルフェッチで`memTracker`使用するとメモリリークが発生する問題を修正[＃44254](https://github.com/pingcap/tidb/issues/44254) @ [YangKeao](https://github.com/YangKeao)
-    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列目のデータ長が列定義[＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)を超える可能性がある問題を修正しました
+    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義を超える可能性がある問題を修正しました [＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   `min, max`クエリ結果が正しくない問題を修正[＃43805](https://github.com/pingcap/tidb/issues/43805) @ [wshwsh12](https://github.com/wshwsh12)
     -   TiDBがテーブル[＃43392](https://github.com/pingcap/tidb/issues/43392) @ [guo-shaoge](https://github.com/guo-shaoge)を分析するときに構文エラーを報告する問題を修正しました
     -   `SHOW PROCESSLIST`文でサブクエリ時間が長い文のトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @ [crazycs520](https://github.com/crazycs520)

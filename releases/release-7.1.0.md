@@ -361,7 +361,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   パーティション[＃42183](https://github.com/pingcap/tidb/issues/42183) @ [CbcWestwolf](https://github.com/CbcWestwolf)を再編成した後、手動で`ANALYZE TABLE`実行するプロンプトが表示されない問題を修正しました。
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   Grafana モニタリング パネル[＃42562](https://github.com/pingcap/tidb/issues/42562) @ [pingandb](https://github.com/pingandb)で`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されないことがある問題を修正しました
-    -   `INFORMATION_SCHEMA.COLUMNS`テーブル[＃43379](https://github.com/pingcap/tidb/issues/43379) @ [bb7133](https://github.com/bb7133)をクエリするときに`ORDINAL_POSITION`列目が誤った結果を返す問題を修正しました
+    -   `INFORMATION_SCHEMA.COLUMNS`テーブルをクエリするときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました [＃43379](https://github.com/pingcap/tidb/issues/43379) @ [bb7133](https://github.com/bb7133)
     -   キャッシュ テーブルに新しい列が追加された後、列[＃42928](https://github.com/pingcap/tidb/issues/42928) @ [lqs](https://github.com/lqs)のデフォルト値ではなく値が`NULL`になる問題を修正しました。
     -   述語[＃43645](https://github.com/pingcap/tidb/issues/43645) @ [winoros](https://github.com/winoros)をプッシュダウンするときに CTE 結果が正しくない問題を修正しました
     -   多数のパーティションとTiFlashレプリカ[＃42940](https://github.com/pingcap/tidb/issues/42940) @ [mjonss](https://github.com/mjonss)を持つパーティション テーブルに対して`TRUNCATE TABLE`実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。
@@ -375,7 +375,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   TTLモニタリングパネルの`Scan Worker Time By Phase`チャートにデータ[＃42515](https://github.com/pingcap/tidb/issues/42515) @ [lcwangchao](https://github.com/lcwangchao)が表示されない問題を修正しました
     -   グローバルインデックスを持つパーティションテーブルに対する一部のクエリが誤った結果を返す問題を修正[＃41991](https://github.com/pingcap/tidb/issues/41991) [＃42065](https://github.com/pingcap/tidb/issues/42065) @ [L-maple](https://github.com/L-maple)
     -   パーティションテーブル[＃42180](https://github.com/pingcap/tidb/issues/42180) @ [mjonss](https://github.com/mjonss)の再編成プロセス中に一部のエラーログが表示される問題を修正しました
-    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列目のデータ長が列定義[＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)を超える可能性がある問題を修正しました
+    -   `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義を超える可能性がある問題を修正しました [＃42440](https://github.com/pingcap/tidb/issues/42440) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`テーブルでコンテナ[＃42851](https://github.com/pingcap/tidb/issues/42851) @ [hawkingrei](https://github.com/hawkingrei)に誤った値が表示される可能性がある問題を修正しました
     -   `ORDER BY` + `LIMIT` [＃43158](https://github.com/pingcap/tidb/issues/43158) @ [Defined2014](https://github.com/Defined2014)を使用してパーティションテーブルをクエリすると誤った結果が返される問題を修正しました
     -   取り込み方法[＃42903](https://github.com/pingcap/tidb/issues/42903) @ [tangenta](https://github.com/tangenta)を使用して複数の DDL タスクが同時に実行される問題を修正しました

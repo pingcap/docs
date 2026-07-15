@@ -102,7 +102,7 @@ TiDB バージョン: 6.5.9
 
     -   レプリカ移行[＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [JaySon-Huang](https://github.com/JaySon-Huang)中に PD とのネットワーク接続が不安定になり、 TiFlash がpanic可能性がある問題を修正しました
     -   リモート読み取り[＃8685](https://github.com/pingcap/tiflash/issues/8685) @ [solotzg](https://github.com/solotzg)の場合にデータ競合によりTiFlash がクラッシュする可能性がある問題を修正しました
-    -   チャンクエンコード[＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)中に`ENUM`列目がTiFlashを引き起こす可能性がある問題を修正しました
+    -   チャンクエンコード中に`ENUM`列がTiFlashを引き起こす可能性がある問題を修正しました [＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)
     -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanic可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `TIME`列の精度が変更された後にリージョンの移行、分割、またはマージが発生すると、クエリが失敗する可能性がある問題を修正しました。 [＃8601](https://github.com/pingcap/tiflash/issues/8601) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 

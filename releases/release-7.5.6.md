@@ -54,7 +54,7 @@ TiDB バージョン: 7.5.6
     -   `BIT`型から`CHAR`型にデータを変換すると TiKV パニック[＃56494](https://github.com/pingcap/tidb/issues/56494) @ [lcwangchao](https://github.com/lcwangchao)が発生する可能性がある問題を修正しました
     -   ハートビートを失った TTL ジョブが他のジョブのハートビート[＃57915](https://github.com/pingcap/tidb/issues/57915) @ [YangKeao](https://github.com/YangKeao)の取得をブロックする問題を修正しました
     -   不一致な値タイプとタイプ変換エラーを含む条件`IN`使用してパーティション テーブルをクエリすると、誤ったクエリ結果[＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)が発生する問題を修正しました。
-    -   `BIT`列目のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
+    -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
     -   Prepareプロトコルで、クライアントがUTF8以外の文字セット[＃58870](https://github.com/pingcap/tidb/issues/58870) @ [xhebox](https://github.com/xhebox)を使用するとエラーが発生する問題を修正しました。
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @ [mjonss](https://github.com/mjonss)
     -   統計ファイルに NULL 値[＃53966](https://github.com/pingcap/tidb/issues/53966) @ [King-Dylan](https://github.com/King-Dylan)が含まれている場合、統計を手動でロードすると失敗する可能性がある問題を修正しました。

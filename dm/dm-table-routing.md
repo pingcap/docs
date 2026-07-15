@@ -88,8 +88,8 @@ routes:
 
 `t`ストリームインスタンスをダウンストリームインスタンス`test`に移行するには、前のセクション[シャード化されたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティングルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`設定を追加する必要があります。
 
--   `extract-table` : `schema-pattern`と`table-pattern`一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列目) に書き込みます。
--   `extract-schema` : `schema-pattern`と`table-pattern`一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列目) に書き込みます。
+-   `extract-table` : `schema-pattern`と`table-pattern`一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列) に書き込みます。
+-   `extract-schema` : `schema-pattern`と`table-pattern`一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列) に書き込みます。
 -   `extract-source` : `schema-pattern`と`table-pattern`一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 
 ```yaml

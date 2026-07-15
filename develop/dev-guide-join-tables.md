@@ -131,7 +131,7 @@ LIMIT 10;
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-再度クエリを実行します。結果セットには書籍*「The Documentary of lion」*がまだ表示されますが、右側の表`ratings`の`score`から計算された`average_score`列目は`NULL`で埋められます。
+再度クエリを実行します。結果セットには書籍*「The Documentary of lion」*がまだ表示されますが、右側の表`ratings`の`score`から計算された`average_score`列は`NULL`で埋められます。
 
     +------------+---------------------------------+---------------+
     | book_id    | book_title                      | average_score |

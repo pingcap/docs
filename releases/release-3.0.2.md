@@ -47,7 +47,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `GRANT ROLE`文が`CURRENT_ROLE`受け取ったときにエラーが報告される問題を修正します。5 `REVOKE ROLE`が`mysql.default_role`権限[＃11356](https://github.com/pingcap/tidb/pull/11356)を正しく取り消さない問題を修正します。
     -   `SELECT ADDDATE('2008-01-34', -1)` [＃11447](https://github.com/pingcap/tidb/pull/11447)のような文を実行する際の`Incorrect datetime value`警告情報の表示形式の問題を修正しました
     -   JSONデータの浮動小数点フィールドを整数[＃11534](https://github.com/pingcap/tidb/pull/11534)に変換するときに結果がオーバーフローすると、エラーメッセージが`constant … overflows bigint`ではなく`constant … overflows float`報告する問題を修正しました。
-    -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列目のパラメータを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[＃11527](https://github.com/pingcap/tidb/pull/11527)
+    -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列のパラメータを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[＃11527](https://github.com/pingcap/tidb/pull/11527)
     -   `DATE_ADD`関数[＃11615](https://github.com/pingcap/tidb/pull/11615)の区間分数の符号を誤って処理することによって発生する誤った結果を修正しました。
     -   プレフィックスインデックスが正しく処理されていないために`Ranger`インデックスルックアップ結合にプレフィックスインデックスが含まれている場合に誤ったクエリ結果が発生する問題を修正しました[＃11565](https://github.com/pingcap/tidb/pull/11565)
     -   `NAME_CONST`の 2 番目のパラメータが負の数のときに`NAME_CONST`関数を実行すると、「NAME_CONST への引数が正しくありません」というメッセージが報告される問題を修正しました[＃11268](https://github.com/pingcap/tidb/pull/11268)

@@ -89,7 +89,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ## データ圧縮の進行状況を観察する {#observe-data-compaction-progress}
 
-`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列目を確認することで、データ圧縮の進行状況を確認したり、テーブルの圧縮を開始するかどうかを判断したりできます`TOTAL_DELTA_ROWS`の値が大きいほど、圧縮できるデータ量が多くなります。7 が`TOTAL_DELTA_ROWS` `0`場合、テーブル内のすべてのデータは最適な状態であり、圧縮する必要はありません。
+`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列を確認することで、データ圧縮の進行状況を確認したり、テーブルの圧縮を開始するかどうかを判断したりできます`TOTAL_DELTA_ROWS`の値が大きいほど、圧縮できるデータ量が多くなります。7 が`TOTAL_DELTA_ROWS` `0`場合、テーブル内のすべてのデータは最適な状態であり、圧縮する必要はありません。
 
 <details><summary>例:パーティションテーブルの圧縮状態を確認する</summary>
 

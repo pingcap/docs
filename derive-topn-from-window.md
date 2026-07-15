@@ -165,7 +165,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY value1) AS rownumb
     |           └─TableFullScan_12     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                                                                   |
     +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------+
 
-このクエリでは、 `PARTITION BY`列目が主キーのプレフィックスではないため、SQL は書き換えられません。
+このクエリでは、 `PARTITION BY`列が主キーのプレフィックスではないため、SQL は書き換えられません。
 
 #### 例6: PARTITION BY列は主キーのプレフィックスですが、クラスター化インデックスではありません {#example-6-partition-by-column-is-a-prefix-of-the-primary-key-but-not-a-clustered-index}
 
@@ -189,4 +189,4 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1) AS rownumber 
     |           └─TableFullScan_12     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                                                                |
     +----------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 
-このクエリでは、 `PARTITION BY`列目は主キーのプレフィックスですが、主キーがクラスター化インデックスではないため、SQL は書き換えられません。
+このクエリでは、 `PARTITION BY`列は主キーのプレフィックスですが、主キーがクラスター化インデックスではないため、SQL は書き換えられません。

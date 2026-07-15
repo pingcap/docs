@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   `Plan Cache`文がトリガーされた後に`@@LAST_PLAN_FROM_CACHE`実行すると間違った値が返される問題を修正[＃16831](https://github.com/pingcap/tidb/pull/16831)
     -   `IndexMerge` [＃16947](https://github.com/pingcap/tidb/pull/16947)の候補パスを計算するときにインデックスの`TableFilter`失われる問題を修正しました
     -   `MergeJoin`ヒントを使用し、 `TableDual`演算子が存在する場合に物理クエリプランを生成できない問題を修正しました[＃17016](https://github.com/pingcap/tidb/pull/17016)
-    -   ステートメントサマリーテーブル[＃17018](https://github.com/pingcap/tidb/pull/17018)の`Stmt_Type`列目の値の大文字と小文字の誤りを修正しました。
+    -   ステートメントサマリーテーブルの`Stmt_Type`列の値の大文字と小文字の誤りを修正しました。 [＃17018](https://github.com/pingcap/tidb/pull/17018)
     -   異なるユーザーが同じ`tmp-storage-path` [＃16996](https://github.com/pingcap/tidb/pull/16996)を使用するとサービスを開始できないため、 `Permission Denied`エラーが報告される問題を修正しました。
     -   結果の型が`CASE WHEN` [＃16995](https://github.com/pingcap/tidb/pull/16995)などの複数の入力列によって決定される式に対して、 `NotNullFlag`結果の型が誤って設定される問題を修正しました。
     -   ダーティストアが存在する場合にグリーンGCが未解決のロックを残す可能性がある問題を修正[＃16949](https://github.com/pingcap/tidb/pull/16949)
@@ -143,7 +143,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   Float型に対して`XOR`演算を実行した結果がMySQL 8.0 [＃16978](https://github.com/pingcap/tidb/pull/16978)と一致しない問題を修正
     -   サポートされていない`ALTER TABLE REORGANIZE PARTITION`文が実行されてもエラーが報告されない問題を修正[＃17178](https://github.com/pingcap/tidb/pull/17178)
     -   `EXPLAIN FORMAT="dot"  FOR CONNECTION ID`サポートされていないプランに遭遇したときにエラーが報告される問題を修正[＃17160](https://github.com/pingcap/tidb/pull/17160)
-    -   ステートメントサマリーテーブル[＃17086](https://github.com/pingcap/tidb/pull/17086)の`EXEC_COUNT`列目にあるプリペアドステートメントのレコードの問題を修正しました。
+    -   ステートメントサマリーテーブルの`EXEC_COUNT`列にあるプリペアドステートメントのレコードの問題を修正しました。 [＃17086](https://github.com/pingcap/tidb/pull/17086)
     -   ステートメントサマリーシステム変数[＃17129](https://github.com/pingcap/tidb/pull/17129)を設定するときに値が検証されない問題を修正しました
     -   プランキャッシュが有効な場合に、オーバーフロー値を使用して`UNSIGNED BIGINT`主キーをクエリするとエラーが報告される問題を修正しました[＃17120](https://github.com/pingcap/tidb/pull/17120)
     -   Grafana **TiDB サマリーダッシュ**ボード[＃17105](https://github.com/pingcap/tidb/pull/17105)で、マシンインスタンスとリクエストタイプによる QPS 表示が誤っていた問題を修正しました。

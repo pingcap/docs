@@ -212,7 +212,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-この実行プランの例では、 `Expand_20`行目の`operator info`列目に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
+この実行プランの例では、 `Expand_20`行目の`operator info`列に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
 
 `Expand`演算子のスキーマ情報では、 `GID`追加列として生成されます。その値は、 `Expand`演算子によって異なる次元のグループ化ロジックに基づいて計算され、現在のデータレプリカと`grouping set`関係を反映します。ほとんどの場合、 `Expand`演算子はBit-And演算を使用し、ROLLUPのグループ化項目の組み合わせを63通り表現でき、64次元のグループ化に対応します。このモードでは、TiDBは現在のデータレプリカを複製する際に、必要な次元の`grouping set`グループ化式が含まれているかどうかに応じて`GID`値を生成し、グループ化する列の順序で64ビットのUINT64値を埋めます。
 

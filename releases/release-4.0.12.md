@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.12
     -   `INT`型は`NULL`で`YEAR` [＃22844](https://github.com/pingcap/tidb/pull/22844)を比較すると調整しない
     -   `auto_random`列[＃22736](https://github.com/pingcap/tidb/pull/22736)列のテーブルにデータをロードする際に接続が失われる問題を修正しました
     -   DDL 操作がキャンセル パス[＃23297](https://github.com/pingcap/tidb/pull/23297)でpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。
-    -   `YEAR`列目と`NULL` [＃23104](https://github.com/pingcap/tidb/pull/23104)を比較する際のインデックススキャンのキー範囲の誤りを修正しました。
+    -   `YEAR`列と`NULL` を比較する際のインデックススキャンのキー範囲の誤りを修正しました。 [＃23104](https://github.com/pingcap/tidb/pull/23104)
     -   正常に作成されたビューが[＃23083](https://github.com/pingcap/tidb/pull/23083)使用できない問題を修正しました
 
 -   TiKV
