@@ -49,7 +49,7 @@ ClusterOption ::=
 
 Note the following behavior:
 
-- TiDB deduplicates overlapping targets: `*.*` covers all other targets, and `db_name.*` covers tables in that database.
+- TiDB deduplicates overlapping targets. For example, in `FLUSH STATS_DELTA *.*, test.t`, the `test.t` target is ignored because `*.*` already includes all tables. Similarly, in `FLUSH STATS_DELTA test.*, test.t`, the `test.t` target is ignored because `test.*` already includes all tables in the `test` database.
 - For a partitioned table, TiDB persists the statistics delta of the table and all its partitions.
 - If a specified database or table does not exist, TiDB returns a warning and skips that target.
 
