@@ -3,7 +3,7 @@ title: mysql.user
 summary: mysql` スキーマの `user` テーブルについて学習します。
 ---
 
-# <code>mysql.user</code> {#code-mysql-user-code}
+# `mysql.user` {#mysql-user}
 
 `mysql.user`表は、ユーザー アカウントとその権限に関する情報を提供します。
 

@@ -19,7 +19,7 @@ TiDB は、MySQL 8.0 で利用可能な[ビット関数と演算子](https://dev
 | [`&#x3C;&#x3C;`](#-left-shift) | 左シフト              |
 | [`>>`](#-right-shift)          | 右シフト              |
 
-## <code>BIT_COUNT()</code> {#code-bit-count-code}
+## `BIT_COUNT()` {#bit-count}
 
 `BIT_COUNT(expr)`関数は、 `expr`のうち 1 に設定されているビットの数を返します。
 

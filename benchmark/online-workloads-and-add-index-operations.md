@@ -95,7 +95,7 @@ sysbench $testname \
 | :----------- | :----------- |
 | 350.31       | 6806         |
 
-#### <code>tidb_ddl_reorg_batch_size = 32</code> {#code-tidb-ddl-reorg-batch-size-32-code}
+#### `tidb_ddl_reorg_batch_size = 32` {#tidb-ddl-reorg-batch-size-32}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -109,7 +109,7 @@ sysbench $testname \
 
 ![add-index-load-1-b32](/media/add-index-load-1-b32.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 64</code> {#code-tidb-ddl-reorg-batch-size-64-code}
+#### `tidb_ddl_reorg_batch_size = 64` {#tidb-ddl-reorg-batch-size-64}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -123,7 +123,7 @@ sysbench $testname \
 
 ![add-index-load-1-b64](/media/add-index-load-1-b64.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 128</code> {#code-tidb-ddl-reorg-batch-size-128-code}
+#### `tidb_ddl_reorg_batch_size = 128` {#tidb-ddl-reorg-batch-size-128}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -137,7 +137,7 @@ sysbench $testname \
 
 ![add-index-load-1-b128](/media/add-index-load-1-b128.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 256</code> {#code-tidb-ddl-reorg-batch-size-256-code}
+#### `tidb_ddl_reorg_batch_size = 256` {#tidb-ddl-reorg-batch-size-256}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -151,7 +151,7 @@ sysbench $testname \
 
 ![add-index-load-1-b256](/media/add-index-load-1-b256.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 512</code> {#code-tidb-ddl-reorg-batch-size-512-code}
+#### `tidb_ddl_reorg_batch_size = 512` {#tidb-ddl-reorg-batch-size-512}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -165,7 +165,7 @@ sysbench $testname \
 
 ![add-index-load-1-b512](/media/add-index-load-1-b512.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 1024</code> {#code-tidb-ddl-reorg-batch-size-1024-code}
+#### `tidb_ddl_reorg_batch_size = 1024` {#tidb-ddl-reorg-batch-size-1024}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -179,7 +179,7 @@ sysbench $testname \
 
 ![add-index-load-1-b1024](/media/add-index-load-1-b1024.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 2048</code> {#code-tidb-ddl-reorg-batch-size-2048-code}
+#### `tidb_ddl_reorg_batch_size = 2048` {#tidb-ddl-reorg-batch-size-2048}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -193,7 +193,7 @@ sysbench $testname \
 
 ![add-index-load-1-b2048](/media/add-index-load-1-b2048.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 4096</code> {#code-tidb-ddl-reorg-batch-size-4096-code}
+#### `tidb_ddl_reorg_batch_size = 4096` {#tidb-ddl-reorg-batch-size-4096}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -230,7 +230,7 @@ sysbench $testname \
 | :----------- | :----------- |
 | 550.9        | 8812.8       |
 
-#### <code>tidb_ddl_reorg_batch_size = 32</code> {#code-tidb-ddl-reorg-batch-size-32-code}
+#### `tidb_ddl_reorg_batch_size = 32` {#tidb-ddl-reorg-batch-size-32}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -244,7 +244,7 @@ sysbench $testname \
 
 ![add-index-load-2-b32](/media/add-index-load-2-b32.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 1024</code> {#code-tidb-ddl-reorg-batch-size-1024-code}
+#### `tidb_ddl_reorg_batch_size = 1024` {#tidb-ddl-reorg-batch-size-1024}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -258,7 +258,7 @@ sysbench $testname \
 
 ![add-index-load-2-b1024](/media/add-index-load-2-b1024.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 4096</code> {#code-tidb-ddl-reorg-batch-size-4096-code}
+#### `tidb_ddl_reorg_batch_size = 4096` {#tidb-ddl-reorg-batch-size-4096}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -292,7 +292,7 @@ sysbench $testname \
 | :----------- | :----------- |
 | 350.31       | 6806         |
 
-#### <code>tidb_ddl_reorg_batch_size = 32</code> {#code-tidb-ddl-reorg-batch-size-32-code}
+#### `tidb_ddl_reorg_batch_size = 32` {#tidb-ddl-reorg-batch-size-32}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -306,7 +306,7 @@ sysbench $testname \
 
 ![add-index-load-3-b32](/media/add-index-load-3-b32.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 1024</code> {#code-tidb-ddl-reorg-batch-size-1024-code}
+#### `tidb_ddl_reorg_batch_size = 1024` {#tidb-ddl-reorg-batch-size-1024}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |
@@ -320,7 +320,7 @@ sysbench $testname \
 
 ![add-index-load-3-b1024](/media/add-index-load-3-b1024.png)
 
-#### <code>tidb_ddl_reorg_batch_size = 4096</code> {#code-tidb-ddl-reorg-batch-size-4096-code}
+#### `tidb_ddl_reorg_batch_size = 4096` {#tidb-ddl-reorg-batch-size-4096}
 
 | tidb_ddl_reorg_worker_cnt | add_index_durations(s) | sysbench TPS | sysbench QPS |
 | :------------------------ | :--------------------- | :----------- | :----------- |

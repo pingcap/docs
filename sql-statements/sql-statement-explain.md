@@ -3,7 +3,7 @@ title: EXPLAIN | TiDB SQL Statement Reference
 summary: TiDB データベースにおけるEXPLAINの使用法の概要。
 ---
 
-# <code>EXPLAIN</code> {#code-explain-code}
+# `EXPLAIN` {#explain}
 
 `EXPLAIN`の文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`の文を補完するものです。5 `EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`実行して、テーブル統計が最新であることを確認することを検討してください。
 
@@ -320,7 +320,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 -   TiDB は`FORMAT=JSON`または`FORMAT=TREE`オプションをサポートしていません。
 -   TiDBの`FORMAT=tidb_json` 、デフォルトの`EXPLAIN`結果のJSON形式の出力です。形式とフィールドはMySQLの`FORMAT=JSON`の出力とは異なります。
 
-### <code>EXPLAIN FOR CONNECTION</code> {#code-explain-for-connection-code}
+### `EXPLAIN FOR CONNECTION` {#explain-for-connection}
 
 `EXPLAIN FOR CONNECTION` 、現在実行中のSQLクエリ、または接続内で最後に実行されたSQLクエリの実行プランを取得するために使用されます。出力形式は`EXPLAIN`と同じです。ただし、TiDBにおける`EXPLAIN FOR CONNECTION`の実装はMySQLとは異なります。出力形式以外の違いは次のとおりです。
 

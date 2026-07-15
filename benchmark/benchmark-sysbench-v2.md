@@ -40,7 +40,7 @@ IDCマシン
 | TiKV | 4ef5889947019e3cb55cc744f487aa63b42540e7 |
 | PD   | 776bcd940b71d295a2c7ed762582bc3aff7d3c0e |
 
-### v2.0.0-rc6 {#v2-0-0-rc6}
+### v2.0.0-rc6 {#v200-rc6}
 
 |  コンポーネント  |                  Git Hash                 |
 | :--: | :--------------------------------------: |
@@ -79,7 +79,7 @@ IDCマシン
 
 ## テスト結果 {#test-result}
 
-### Standard <code>Select</code> test {#standard-code-select-code-test}
+### Standard `Select` test {#standard-select-test}
 
 |    バージョン   | テーブル数 | テーブルサイズ | Sysbenchスレッド |   QPS  |     レイテンシー（平均/.95）    |
 | :--------: | :---: | :-----: | :----------: | :----: | :-------------------: |

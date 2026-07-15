@@ -9,73 +9,73 @@ summary: DM のコマンドライン フラグについて学習します。
 
 ## DMマスター {#dm-master}
 
-### <code>--advertise-addr</code> {#code-advertise-addr-code}
+### `--advertise-addr` {#advertise-addr}
 
 -   クライアントのリクエストを受信するために使用されるDMマスターの外部アドレス
 -   デフォルト値は`"{master-addr}"`です
 -   オプションフラグ。1の形式をとることができます`"domain-name:port"`
 
-### <code>--advertise-peer-urls</code> {#code-advertise-peer-urls-code}
+### `--advertise-peer-urls` {#advertise-peer-urls}
 
 -   DMマスターノード間の通信用の外部アドレス
 -   デフォルト値は`"{peer-urls}"`です
 -   オプションフラグ。1の形式をとることができます`"http(s)://domain-name:port"`
 
-### <code>--config</code> {#code-config-code}
+### `--config` {#config}
 
 -   DMマスターの設定ファイルパス
 -   デフォルト値は`""`です
 -   オプションフラグ
 
-### <code>--data-dir</code> {#code-data-dir-code}
+### `--data-dir` {#data-dir}
 
 -   DMマスターのデータを保存するディレクトリ
 -   デフォルト値は`"default.{name}"`です
 -   オプションフラグ
 
-### <code>--initial-cluster</code> {#code-initial-cluster-code}
+### `--initial-cluster` {#initial-cluster}
 
 -   DMマスタークラスタのブートストラップに使用される`"{node name}={external address}"`リスト
 -   デフォルト値は`"{name}={advertise-peer-urls}"`です
 -   `join`フラグが指定されていない場合は、このフラグを指定する必要があります。3ノードクラスタの構成例は`"dm-master-1=http://172.16.15.11:8291,dm-master-2=http://172.16.15.12:8291,dm-master-3=http://172.16.15.13:8291"`です。
 
-### <code>--join</code> {#code-join-code}
+### `--join` {#join}
 
 -   DMマスターノードがこのクラスタに参加したときの既存のクラスタの`advertise-addr`リスト
 -   デフォルト値は`""`です
 -   `initial-cluster`フラグが指定されていない場合は、このフラグを指定する必要があります。2ノードのクラスタに新しいノードが参加する場合、設定例は`"172.16.15.11:8261,172.16.15.12:8261"`です。
 
-### <code>--log-file</code> {#code-log-file-code}
+### `--log-file` {#log-file}
 
 -   ログの出力ファイル名
 -   デフォルト値は`""`です
 -   オプションフラグ
 
-### <code>-L</code> {#code-l-code}
+### `-L` {#l}
 
 -   ログレベル
 -   デフォルト値は`"info"`です
 -   オプションフラグ
 
-### <code>--master-addr</code> {#code-master-addr-code}
+### `--master-addr` {#master-addr}
 
 -   DMマスターがクライアントのリクエストをリッスンするアドレス
 -   デフォルト値は`""`です
 -   必須フラグ
 
-### <code>--name</code> {#code-name-code}
+### `--name` {#name}
 
 -   DMマスターノードの名前
 -   デフォルト値は`"dm-master-{hostname}"`です
 -   必須フラグ
 
-### <code>--peer-urls</code> {#code-peer-urls-code}
+### `--peer-urls` {#peer-urls}
 
 -   DMマスターノード間の通信のリスニングアドレス
 -   デフォルト値は`"http://127.0.0.1:8291"`です
 -   必須フラグ
 
-### <code>--secret-key-path</code> {#code-secret-key-path-code}
+### `--secret-key-path` {#secret-key-path}
 
 -   暗号化と復号化のためのカスタマイズされた秘密鍵のパス
 -   デフォルト値は`""`です
@@ -83,43 +83,43 @@ summary: DM のコマンドライン フラグについて学習します。
 
 ## DMワーカー {#dm-worker}
 
-### <code>--advertise-addr</code> {#code-advertise-addr-code}
+### `--advertise-addr` {#advertise-addr}
 
 -   クライアントのリクエストを受信するために使用されるDMワーカーの外部アドレス
 -   デフォルト値は`"{worker-addr}"`です
 -   オプションフラグ。1の形式をとることができます`"domain-name:port"`
 
-### <code>--config</code> {#code-config-code}
+### `--config` {#config}
 
 -   DM-workerの設定ファイルパス
 -   デフォルト値は`""`です
 -   オプションフラグ
 
-### <code>--join</code> {#code-join-code}
+### `--join` {#join}
 
 -   DMワーカーがこのクラスタに登録したときのクラスタ内のDMマスターノードの`{advertise-addr}`のリスト
 -   デフォルト値は`""`です
 -   必須フラグ。3ノード（DMマスターノード）クラスタの構成例は`"172.16.15.11:8261,172.16.15.12:8261,172.16.15.13:8261"`です。
 
-### <code>--log-file</code> {#code-log-file-code}
+### `--log-file` {#log-file}
 
 -   ログの出力ファイル名
 -   デフォルト値は`""`です
 -   オプションフラグ
 
-### <code>-L</code> {#code-l-code}
+### `-L` {#l}
 
 -   ログレベル
 -   デフォルト値は`"info"`です
 -   オプションフラグ
 
-### <code>--name</code> {#code-name-code}
+### `--name` {#name}
 
 -   DMワーカーノードの名前
 -   デフォルト値は`"{advertise-addr}"`です
 -   必須フラグ
 
-### <code>--worker-addr</code> {#code-worker-addr-code}
+### `--worker-addr` {#worker-addr}
 
 -   DMワーカーがクライアントのリクエストをリッスンするアドレス
 -   デフォルト値は`""`です
@@ -127,13 +127,13 @@ summary: DM のコマンドライン フラグについて学習します。
 
 ## dmctl {#dmctl}
 
-### <code>--config</code> {#code-config-code}
+### `--config` {#config}
 
 -   dmctlの設定ファイルパス
 -   デフォルト値は`""`です
 -   オプションフラグ
 
-### <code>--master-addr</code> {#code-master-addr-code}
+### `--master-addr` {#master-addr}
 
 -   dmctlによって接続されるクラスタ内の任意のDMマスターノードの`{advertise-addr}`
 -   デフォルト値は`""`です

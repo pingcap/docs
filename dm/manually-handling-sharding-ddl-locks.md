@@ -16,7 +16,7 @@ DMはシャーディングDDLロックを使用して、操作が正しい順序
 
 ## 指示 {#command}
 
-### <code>shard-ddl-lock</code> {#code-shard-ddl-lock-code}
+### `shard-ddl-lock` {#shard-ddl-lock}
 
 このコマンドを使用すると、DDLロックを表示し、DMマスターに指定されたDDLロックの解放を要求できます。このコマンドはDM v6.0以降でのみサポートされています。それより前のバージョンでは、コマンド`show-ddl-locks`と`unlock-ddl-locks`使用する必要があります。
 
@@ -46,7 +46,7 @@ shard-ddl-lock -h
 
 ## 使用例 {#usage-examples}
 
-### <code>shard-ddl-lock [task] [flags]</code> {#code-shard-ddl-lock-task-flags-code}
+### `shard-ddl-lock [task] [flags]` {#shard-ddl-lock-task-flags}
 
 `shard-ddl-lock [task] [flags]`使用すると、現在の DM マスターの DDL ロック情報を表示できます。例:
 
@@ -80,7 +80,7 @@ shard-ddl-lock test
 
 </details>
 
-### <code>shard-ddl-lock unlock</code> {#code-shard-ddl-lock-unlock-code}
+### `shard-ddl-lock unlock` {#shard-ddl-lock-unlock}
 
 このコマンドは、所有者に DDL ステートメントを実行するよう要求し、所有者以外の他のすべての DM ワーカーに DDL ステートメントをスキップするよう要求し、 `DM-master`のロック情報を削除するなど、指定された`DM-master`ロックのロックを解除するように 1 に積極的に要求します。
 

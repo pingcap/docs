@@ -143,7 +143,7 @@ trim-last-separator = false
 
 詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)参照してください。
 
-#### <code>separator</code> {#code-separator-code}
+#### `separator` {#separator}
 
 -   フィールドセパレーターを定義します。
 
@@ -157,7 +157,7 @@ trim-last-separator = false
 
 -   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 
-#### <code>delimiter</code> {#code-delimiter-code}
+#### `delimiter` {#delimiter}
 
 -   引用符に使用する区切り文字を定義します。
 
@@ -170,13 +170,13 @@ trim-last-separator = false
 
 -   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
 
-#### <code>terminator</code> {#code-terminator-code}
+#### `terminator` {#terminator}
 
 -   行末記号を定義します。
 -   `terminator`が空の場合、行末文字として`"\n"` (改行) と`"\r\n"` (復帰 + 改行) の両方が使用されます。
 -   `LOAD DATA`ステートメントの`LINES TERMINATED BY`オプションに対応します。
 
-#### <code>header</code> {#code-header-code}
+#### `header` {#header}
 
 -   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
 -   `header`が`true`場合、最初の行は*列名*として使用されます。7 が`header` `false`場合、最初の行は通常のデータ行として扱われます。
@@ -196,7 +196,7 @@ trim-last-separator = false
 
     デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B` TiDBにインポートされた後、両方ともNULLに変換されます。列`C`空文字列`''`ですが、NULLではありません。
 
-#### <code>backslash-escape</code> {#code-backslash-escape-code}
+#### `backslash-escape` {#backslash-escape}
 
 -   フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。
 
@@ -217,7 +217,7 @@ trim-last-separator = false
 
 -   `LOAD DATA`ステートメントの`FIELDS ESCAPED BY '\'`オプションに対応します。
 
-#### <code>trim-last-separator</code> {#code-trim-last-separator-code}
+#### `trim-last-separator` {#trim-last-separator}
 
 -   `separator`行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
 

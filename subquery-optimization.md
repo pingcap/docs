@@ -27,19 +27,19 @@ summary: サブクエリに関連する最適化を理解します。
 -   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられる
 -   `t.id > any (select s.id from s)`は`t.id > max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられる
 
-## <code>... != ANY (SELECT ... FROM ...)</code> {#code-any-select-from-code}
+## `... != ANY (SELECT ... FROM ...)` {#any-select-from}
 
 この場合、サブクエリのすべての値が一意であれば、クエリをそれらと比較するだけで十分です。サブクエリ内の異なる値の数が複数ある場合は、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き換えることができます。
 
 -   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられる
 
-## <code>... = ALL (SELECT ... FROM ...)</code> {#code-all-select-from-code}
+## `... = ALL (SELECT ... FROM ...)` {#all-select-from}
 
 この場合、サブクエリ内の異なる値の数が複数ある場合、この式の結果は必ず偽になります。そのため、TiDBではこのようなサブクエリは次のような形式に書き換えられます。
 
 -   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられる
 
-## <code>... IN (SELECT ... FROM ...)</code> {#code-in-select-from-code}
+## `... IN (SELECT ... FROM ...)` {#in-select-from}
 
 この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き換えられ、その後`JOIN`の通常形式に書き換えられます。
 

@@ -40,7 +40,7 @@ DESC data_lock_waits;
 > -   異なる TiKV ノードからの情報が、同じ時刻のスナップショットであるとは限りません。
 > -   `SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)参照してください。
 
-## <code>KEY_INFO</code> {#code-key-info-code}
+## `KEY_INFO` {#key-info}
 
 `KEY_INFO`列は`KEY`列の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
 

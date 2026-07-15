@@ -21,7 +21,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 
 このドキュメントでは、これらのテーブルの詳細を説明し、SQLのパフォーマンス問題のトラブルシューティングにそれらを使用する方法を紹介します。
 
-## <code>statements_summary</code> {#code-statements-summary-code}
+## `statements_summary` {#statements-summary}
 
 `statements_summary`は`information_schema`内のシステム テーブルです。 `statements_summary`は、SQL ステートメントをリソース グループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
 
@@ -82,13 +82,13 @@ select * from employee where id in (...) and salary between ? and ?;
 > -   TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
 > -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソース グループごとに集約されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
 
-## <code>statements_summary_history</code> {#code-statements-summary-history-code}
+## `statements_summary_history` {#statements-summary-history}
 
 `statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行うことができます。
 
 `SUMMARY_BEGIN_TIME`フィールドと`SUMMARY_END_TIME`フィールドは、履歴期間の開始時刻と終了時刻を表します。
 
-## <code>statements_summary_evicted</code> {#code-statements-summary-evicted-code}
+## `statements_summary_evicted` {#statements-summary-evicted}
 
 [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)システム変数は`statements_summary`テーブルと`statements_summary_history`テーブルがメモリに格納できる SQL ダイジェストの総数を制限します。この制限を超えると、TiDB は`statements_summary`テーブルと`statements_summary_history`テーブルの両方から、最も使用頻度の低い SQL ダイジェストを削除します。
 

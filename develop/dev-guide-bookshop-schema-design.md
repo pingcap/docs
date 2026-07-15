@@ -140,7 +140,7 @@ WHERE table_schema LIKE 'bookshop';
 
 このセクションでは、Bookshopアプリケーションのデータベーステーブルについて詳しく説明します。
 
-### <code>books</code> {#code-books-code-table}
+### `books` {#books-table}
 
 この表には書籍の基本情報が格納されています。
 

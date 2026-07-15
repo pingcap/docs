@@ -3,7 +3,7 @@ title: REVOKE <role> | TiDB SQL Statement Reference
 summary: TiDB データベースの REVOKE <role> の使用法の概要。
 ---
 
-# <code>REVOKE &#x3C;role></code> {#code-revoke-x3c-role-code}
+# `REVOKE &#x3C;role>` {#revoke-x3c-role}
 
 このステートメントは、指定されたユーザー (またはユーザーのリスト) から以前に割り当てられたロールを削除します。
 

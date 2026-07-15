@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | 圧縮前の文字列の長さを返す           |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | パスワードの強度を検証する           |
 
-### <code>AES_DECRYPT()</code> {#code-aes-decrypt-code}
+### `AES_DECRYPT()` {#aes-decrypt}
 
 `AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`復号化します。
 
@@ -44,7 +44,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
     +----------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>AES_ENCRYPT()</code> {#code-aes-encrypt-code}
+### `AES_ENCRYPT()` {#aes-encrypt}
 
 `AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data` `key`で暗号化します。
 
@@ -63,7 +63,7 @@ SELECT AES_ENCRYPT(0x616263,'secret');
     +----------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>COMPRESS()</code> {#code-compress-code}
+### `COMPRESS()` {#compress}
 
 `COMPRESS(expr)`関数は入力データ`expr`の圧縮バージョンを返します。
 
@@ -113,7 +113,7 @@ SELECT LENGTH(a),LENGTH(COMPRESS(a)) FROM x;
     +-----------+---------------------+
     1 row in set (0.00 sec)
 
-### <code>MD5()</code> {#code-md5-code}
+### `MD5()` {#md5}
 
 `MD5(expr)`関数は、指定された引数`expr`に対して 128 ビットの[MD5](https://en.wikipedia.org/wiki/MD5)ハッシュを計算します。
 
@@ -128,7 +128,7 @@ SELECT MD5('abc');
     +----------------------------------+
     1 row in set (0.00 sec)
 
-### <code>PASSWORD()</code> {#code-password-code}
+### `PASSWORD()` {#password}
 
 > **警告：**
 >
@@ -149,7 +149,7 @@ SELECT PASSWORD('secret');
 
     Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 
-### <code>RANDOM_BYTES()</code> {#code-random-bytes-code}
+### `RANDOM_BYTES()` {#random-bytes}
 
 `RANDOM_BYTES(n)`関数は`n`ランダム バイトを返します。
 
@@ -164,11 +164,11 @@ SELECT RANDOM_BYTES(3);
     +----------------------------------+
     1 row in set (0.00 sec)
 
-### <code>SHA()</code> {#code-sha-code}
+### `SHA()` {#sha}
 
 `SHA()`関数は[`SHA1`](#sha1)エイリアスです。
 
-### <code>SHA1()</code> {#code-sha1-code}
+### `SHA1()` {#sha1}
 
 `SHA1(expr)`関数は、指定された引数`expr`に対して 160 ビット[SHA-1](https://en.wikipedia.org/wiki/SHA-1)ハッシュを計算します。
 
@@ -183,7 +183,7 @@ SELECT SHA1('abc');
     +------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>SHA2()</code> {#code-sha2-code}
+### `SHA2()` {#sha2}
 
 `SHA2(str, n)`関数は`n` [SHA-2](https://en.wikipedia.org/wiki/SHA-2)ファミリーのアルゴリズムを使用してハッシュを計算します。5 引数はアルゴリズムを選択するために使用されます。7 `SHA2()` 、引数のいずれかが`NULL`の場合、または`n`で選択されたアルゴリズムが不明またはサポートされていない場合、 `NULL`返します。
 
@@ -208,7 +208,7 @@ SELECT SHA2('abc',224);
     +----------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>SM3()</code> {#code-sm3-code}
+### `SM3()` {#sm3}
 
 > **注記：**
 >
@@ -227,7 +227,7 @@ SELECT SM3('abc');
     +------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>UNCOMPRESS()</code> {#code-uncompress-code}
+### `UNCOMPRESS()` {#uncompress}
 
 `UNCOMPRESS(data)`関数は[`COMPRESS()`](#compress)関数で圧縮されたデータを解凍します。
 
@@ -242,7 +242,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
     +------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>UNCOMPRESSED_LENGTH()</code> {#code-uncompressed-length-code}
+### `UNCOMPRESSED_LENGTH()` {#uncompressed-length}
 
 `UNCOMPRESSED_LENGTH(data)`関数は、圧縮データの最初の 4 バイトを返します。これには、 [`COMPRESS()`](#compress)関数で圧縮される前の圧縮文字列の長さが格納されます。
 
@@ -257,7 +257,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### <code>VALIDATE_PASSWORD_STRENGTH()</code> {#code-validate-password-strength-code}
+### `VALIDATE_PASSWORD_STRENGTH()` {#validate-password-strength}
 
 <CustomContent platform="tidb">
 

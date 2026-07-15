@@ -3,7 +3,7 @@ title: mysql.tidb_mdl_view
 summary: mysql` スキーマの `tidb_mdl_view` テーブルについて学習します。
 ---
 
-# <code>mysql.tidb_mdl_view</code> {#code-mysql-tidb-mdl-view-code}
+# `mysql.tidb_mdl_view` {#mysql-tidb-mdl-view}
 
 この表には[メタデータロック](/metadata-lock.md)ビューに関する情報が表示されます。
 

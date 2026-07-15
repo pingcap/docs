@@ -44,60 +44,60 @@ secret-key-path = "/path/to/secret/key"
 
 ### グローバル構成 {#global-configuration}
 
-#### <code>name</code> {#code-name-code}
+#### `name` {#name}
 
 -   DM マスターの名前。
 
-#### <code>log-level</code> {#code-log-level-code}
+#### `log-level` {#log-level}
 
 -   ログ レベルを指定します。
 -   デフォルト値: `info`
 -   `fatal` `warn` `info` `error` `debug`
 
-#### <code>log-file</code> {#code-log-file-code}
+#### `log-file` {#log-file}
 
 -   ログファイルのディレクトリを指定します。パラメータが指定されていない場合、ログは標準出力に出力されます。
 
-#### <code>master-addr</code> {#code-master-addr-code}
+#### `master-addr` {#master-addr}
 
 -   サービスを提供するDMマスターのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8261"` ）を指定することもできます。
 
-#### <code>advertise-addr</code> {#code-advertise-addr-code}
+#### `advertise-addr` {#advertise-addr}
 
 -   DM マスターが外部に通知するアドレスを指定します。
 
-#### <code>peer-urls</code> {#code-peer-urls-code}
+#### `peer-urls` {#peer-urls}
 
 -   DM マスター ノードのピア URL を指定します。
 
-#### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
+#### `advertise-peer-urls` {#advertise-peer-urls}
 
 -   DMマスターが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
 
-#### <code>initial-cluster</code> {#code-initial-cluster-code}
+#### `initial-cluster` {#initial-cluster}
 
 -   値`initial-cluster`は、初期クラスター内のすべての DM マスター ノードの[`advertise-peer-urls`](#advertise-peer-urls)値の組み合わせです。
 
-#### <code>join</code> {#code-join-code}
+#### `join` {#join}
 
 -   `join`の値は、クラスター内の既存の DM マスターノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM マスターノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
 
-#### <code>ssl-ca</code> {#code-ssl-ca-code}
+#### `ssl-ca` {#ssl-ca}
 
 -   DM マスターが他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
-#### <code>ssl-cert</code> {#code-ssl-cert-code}
+#### `ssl-cert` {#ssl-cert}
 
 -   DM マスターが他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
-#### <code>ssl-key</code> {#code-ssl-key-code}
+#### `ssl-key` {#ssl-key}
 
 -   DM マスターが他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
-#### <code>cert-allowed-cn</code> {#code-cert-allowed-cn-code}
+#### `cert-allowed-cn` {#cert-allowed-cn}
 
 -   一般名リスト。
 
-#### <code>secret-key-path</code> {#code-secret-key-path-code}
+#### `secret-key-path` {#secret-key-path}
 
 -   アップストリームおよびダウンストリームのパスワードの暗号化と復号化に使用される秘密鍵のファイルパス。ファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。この鍵を生成する方法の一つは、ランダムデータ（例： `head -n 256 /dev/urandom | sha256sum` ）のSHA256チェックサムを計算することです。詳細については、 [DMの暗号化と復号化のための秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)参照してください。

@@ -30,7 +30,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 以下は、コマンド`cdc server`の`config`オプションで指定される設定ファイルについて説明します。デフォルトの設定ファイルは[`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml)にあります。
 
-### <code>newarch</code> <span class="version-mark">v8.5.4-release.1 の新機能</span> {#code-newarch-code-span-class-version-mark-new-in-v8-5-4-release-1-span}
+### `newarch` <span class="version-mark">v8.5.4-release.1 の新機能</span> {#newarch-new-in-v854-release-1}
 
 -   [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)を有効にするかどうかを制御します。
 -   デフォルト値: `false` 、 [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)が使用されることを示します。
@@ -38,39 +38,39 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 <!-- The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities. -->
 
-### <code>addr</code> {#code-addr-code}
+### `addr` {#addr}
 
 -   例: `"127.0.0.1:8300"`
 
-### <code>advertise-addr</code> {#code-advertise-addr-code}
+### `advertise-addr` {#advertise-addr}
 
 -   例: `""`
 
-### <code>log-file</code> {#code-log-file-code}
+### `log-file` {#log-file}
 
 -   例: `""`
 
-### <code>log-level</code> {#code-log-level-code}
+### `log-level` {#log-level}
 
 -   例: `"info"`
 
-### <code>data-dir</code> {#code-data-dir-code}
+### `data-dir` {#data-dir}
 
 -   例: `""`
 
-### <code>gc-ttl</code> {#code-gc-ttl-code}
+### `gc-ttl` {#gc-ttl}
 
 -   例: `86400` (24時間)
 
-### <code>tz</code> {#code-tz-code}
+### `tz` {#tz}
 
 -   例: `"System"`
 
-### <code>cluster-id</code> {#code-cluster-id-code}
+### `cluster-id` {#cluster-id}
 
 -   例: `"default"`
 
-### <code>gc-tuner-memory-threshold</code> {#code-gc-tuner-memory-threshold-code}
+### `gc-tuner-memory-threshold` {#gc-tuner-memory-threshold}
 
 -   GOGCチューニングの最大メモリしきい値を指定します。しきい値を小さくするとGCの頻度が増加します。しきい値を大きくするとGCの頻度は減少しますが、TiCDCプロセスで消費されるメモリリソースが増加します。メモリ使用量がこのしきい値を超えると、GOGC Tunerは動作を停止します。
 -   デフォルト値: `0` 、GOGCチューナーが無効であることを示します
@@ -78,48 +78,48 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 ### 安全 {#security}
 
-#### <code>ca-path</code> {#code-ca-path-code}
+#### `ca-path` {#ca-path}
 
 -   例: `""`
 
-#### <code>cert-path</code> {#code-cert-path-code}
+#### `cert-path` {#cert-path}
 
 -   例: `""`
 
-#### <code>key-path</code> {#code-key-path-code}
+#### `key-path` {#key-path}
 
 -   例: `""`
 
-#### <code>mtls</code> {#code-mtls-code}
+#### `mtls` {#mtls}
 
 -   TLS クライアント認証を有効にするかどうかを制御します。
 -   デフォルト値: `false`
 
-#### <code>client-user-required</code> {#code-client-user-required-code}
+#### `client-user-required` {#client-user-required}
 
 -   クライアント認証にユーザー名とパスワードを使用するかどうかを制御します。デフォルト値は false です。
 -   デフォルト値: `false`
 
-#### <code>client-allowed-user</code> {#code-client-allowed-user-code}
+#### `client-allowed-user` {#client-allowed-user}
 
 -   クライアント認証に許可されるユーザー名をリストします。このリストにないユーザー名による認証要求は拒否されます。
 -   デフォルト値: `null`
 
 <!-- Example: `["username_1", "username_2"]` -->
 
-### <code>capture-session-ttl</code> {#code-capture-session-ttl-code}
+### `capture-session-ttl` {#capture-session-ttl}
 
 -   TiCDCとetcdサービス間のセッション期間を指定します。このパラメータはオプションです。
 -   デフォルト値: `10`
 -   単位: 秒
 
-### <code>owner-flush-interval</code> {#code-owner-flush-interval-code}
+### `owner-flush-interval` {#owner-flush-interval}
 
 -   TiCDCクラスタ内のオーナーモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
 -   このパラメータは、数値のみを指定する（たとえば、 `40000000`に設定すると 40000000 ナノ秒、つまり 40 ミリ秒を表します）、または数値と単位の両方を指定する（たとえば、直接`40ms`に設定する）という 2 つの方法で設定できます。
 -   デフォルト値: `50000000` 、つまり50ミリ秒
 
-### <code>processor-flush-interval</code> {#code-processor-flush-interval-code}
+### `processor-flush-interval` {#processor-flush-interval}
 
 -   TiCDCクラスタ内のプロセッサモジュールがレプリケーションの進行状況をプッシュしようとする間隔を指定します。このパラメータはオプションで、デフォルト値は`50000000`ナノ秒（つまり50ミリ秒）です。
 -   このパラメータの設定方法は`owner-flush-interval`と同様です。
@@ -127,55 +127,55 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 ### ログ {#log}
 
-#### <code>error-output</code> {#code-error-output-code}
+#### `error-output` {#error-output}
 
 -   zapログモジュールの内部エラーログの出力場所を指定します。このパラメータはオプションです。
 -   デフォルト値: `"stderr"`
 
 #### ログファイル {#log-file}
 
-##### <code>max-size</code> {#code-max-size-code}
+##### `max-size` {#max-size}
 
 -   単一のログファイルの最大サイズを指定します。このパラメータはオプションです。
 -   デフォルト値: `300`
 -   単位: MiB
 
-##### <code>max-days</code> {#code-max-days-code}
+##### `max-days` {#max-days}
 
 -   ログファイルを保持する最大日数を指定します。このパラメータはオプションです。
 -   デフォルト値: `0` 、削除しないことを示します
 
-##### <code>max-backups</code> {#code-max-backups-code}
+##### `max-backups` {#max-backups}
 
 -   保持するログファイルの数を指定します。このパラメータはオプションです。
 -   デフォルト値: `0` 、すべてのログファイルを保持することを示します
 
 ### ソーター {#sorter}
 
-#### <code>cache-size-in-mb</code> {#code-cache-size-in-mb-code}
+#### `cache-size-in-mb` {#cache-size-in-mb}
 
 -   デフォルトで起動される 8 つの Pebble DB の Sorter モジュール内の共有 Pebbleブロックキャッシュのサイズを指定します。
 -   デフォルト値: `128`
 -   単位: MiB
 
-#### <code>sorter-dir</code> {#code-sorter-dir-code}
+#### `sorter-dir` {#sorter-dir}
 
 -   ソートファイルを保存するディレクトリを、データディレクトリ（ `data-dir` ）を基準として指定します。このパラメータはオプションです。
 -   デフォルト値: `"/tmp/sorter"`
 
 ### kvクライアント {#kv-client}
 
-#### <code>worker-concurrent</code> {#code-worker-concurrent-code}
+#### `worker-concurrent` {#worker-concurrent}
 
 -   単一のリージョンワーカーで使用できるスレッド数を指定します。このパラメータはオプションです。
 -   デフォルト値: `8`
 
-#### <code>worker-pool-size</code> {#code-worker-pool-size-code}
+#### `worker-pool-size` {#worker-pool-size}
 
 -   TiCDCの共有スレッドプール内のスレッド数を指定します。これは主にKVイベントの処理に使用されます。このパラメータはオプションです。
 -   デフォルト値: `0` 、デフォルトのプールサイズがCPUコア数の2倍であることを示します。
 
-#### <code>region-retry-duration</code> {#code-region-retry-duration-code}
+#### `region-retry-duration` {#region-retry-duration}
 
 -   リージョン接続の再試行期間を指定します。このパラメータはオプションです。
 -   このパラメータは次の 2 つの方法で設定できます。

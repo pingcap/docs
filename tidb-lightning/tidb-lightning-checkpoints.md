@@ -59,7 +59,7 @@ Lightning は、ターゲットデータベースをチェックポイントのs
 
 `tidb-lightning`回復不能なエラー（データ破損など）により異常終了した場合、エラーが解決されるまでチェックポイントの再利用を拒否します。これは状況の悪化を防ぐためです。チェックポイントエラーは`tidb-lightning-ctl`プログラムを使用して解決できます。
 
-### <code>--checkpoint-error-destroy</code> {#code-checkpoint-error-destroy-code}
+### `--checkpoint-error-destroy` {#checkpoint-error-destroy}
 
 ```sh
 tidb-lightning-ctl --checkpoint-error-destroy='`schema`.`table`'
@@ -80,7 +80,7 @@ tidb-lightning-ctl --checkpoint-error-destroy='`schema`.`table`'
 tidb-lightning-ctl --checkpoint-error-destroy=all
 ```
 
-### <code>--checkpoint-error-ignore</code> {#code-checkpoint-error-ignore-code}
+### `--checkpoint-error-ignore` {#checkpoint-error-ignore}
 
 ```sh
 tidb-lightning-ctl --checkpoint-error-ignore='`schema`.`table`'
@@ -93,7 +93,7 @@ tidb-lightning-ctl --checkpoint-error-ignore=all
 >
 > このオプションは、エラーが実際に無視できると確信できる場合にのみ使用してください。そうでない場合、インポートされたデータの一部が失われる可能性があります。唯一の安全策は最終的な「チェックサム」チェックであるため、 `--checkpoint-error-ignore`使用する場合は常に「チェックサム」オプションを有効にする必要があります。
 
-### <code>--checkpoint-remove</code> {#code-checkpoint-remove-code}
+### `--checkpoint-remove` {#checkpoint-remove}
 
 ```sh
 tidb-lightning-ctl --checkpoint-remove='`schema`.`table`'
@@ -102,7 +102,7 @@ tidb-lightning-ctl --checkpoint-remove=all
 
 このオプションは、ステータスに関係なく、1 つのテーブルまたはすべてのテーブルに関するすべてのチェックポイント情報を削除します。
 
-### <code>--checkpoint-dump</code> {#code-checkpoint-dump-code}
+### `--checkpoint-dump` {#checkpoint-dump}
 
 ```sh
 tidb-lightning-ctl --checkpoint-dump=output/directory

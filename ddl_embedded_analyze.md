@@ -41,7 +41,7 @@ EXPLAIN SELECT * FROM t WHERE a > 4;
 
 v8.5.0以降、TiDBはインデックス間のヒューリスティック比較と、統計情報が欠落している場合の動作を改善しました。それでもなお、複雑なシナリオでは、DDLに`ANALYZE`を埋め込むことがプラン変更を防ぐ最善の方法です。システム変数[`tidb_stats_update_during_ddl`](/system-variables.md#tidb_stats_update_during_ddl-new-in-v854)を使用して、インデックス作成時または再編成時に埋め込み`ANALYZE`実行するかどうかを制御できます。デフォルト値は`OFF`です。
 
-## <code>ADD INDEX</code> DDL {#code-add-index-code-ddl}
+## `ADD INDEX` DDL {#add-index-ddl}
 
 `tidb_stats_update_during_ddl`が`ON`の場合、 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)実行すると、再編成フェーズの終了後に埋め込まれた`ANALYZE`操作が自動的に実行されます。この`ANALYZE`操作は、新しく作成されたインデックスがユーザーに表示される前に、その統計情報を収集し、その後`ADD INDEX`残りのフェーズに進みます。
 

@@ -7,7 +7,7 @@ summary: このドキュメントでは、TiDB でサポートされているユ
 
 このドキュメントでは、一般的なデータ変換を簡素化して読みやすさを向上させるように設計された、TiDB でサポートされているユーティリティ関数を紹介します。
 
-## <code>FORMAT_BYTES()</code> {#code-format-bytes-code}
+## `FORMAT_BYTES()` {#format-bytes}
 
 `FORMAT_BYTES()`関数は、バイト数を人間が読める形式に変換します。
 
@@ -22,7 +22,7 @@ SELECT FORMAT_BYTES(10*1024*1024);
     +----------------------------+
     1 row in set (0.001 sec)
 
-## <code>FORMAT_NANO_TIME()</code> {#code-format-nano-time-code}
+## `FORMAT_NANO_TIME()` {#format-nano-time}
 
 `FORMAT_NANO_TIME()`関数は、ナノ秒数を人間が読める時間形式に変換します。
 

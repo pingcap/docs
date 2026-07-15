@@ -315,7 +315,7 @@ DROP ROLE 'app_read', 'app_write';
 -   `mysql.role_edges` : ロールとユーザーの承認関係を記録します。
 -   `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
 
-#### <code>mysql.role_edges</code> {#code-mysql-role-edges-code}
+#### `mysql.role_edges` {#mysql-role-edges}
 
 `mysql.role_edges`次のデータが含まれます。
 
@@ -333,7 +333,7 @@ SELECT * FROM mysql.role_edges;
 -   `FROM_HOST`と`FROM_USER`それぞれロールのホスト名とユーザー名を示します。
 -   `TO_HOST`と`TO_USER` 、ロールが付与されるユーザーのホスト名とユーザー名を示します。
 
-#### <code>mysql.default_roles</code> {#code-mysql-default-roles-code}
+#### `mysql.default_roles` {#mysql-default-roles}
 
 `mysql.default_roles` 、各ユーザーに対してデフォルトで有効になっているロールを示します。
 
