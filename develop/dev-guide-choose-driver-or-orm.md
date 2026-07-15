@@ -93,7 +93,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 > **Note:**
 >
-> -   現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)を実行します。
+> -   現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)。
 >
 > -   TiDBはv6.2.0以降、 [セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートしています。5 `@Transactional` `Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`設定するには、TiDBがv6.2.0以降であることを確認してください。
 

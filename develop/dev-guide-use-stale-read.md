@@ -93,7 +93,7 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内に最新のデータを照会します。
 
-指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`デフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)を参照してください。
+指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`はデフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ではミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)を参照してください。
 
 期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
 
