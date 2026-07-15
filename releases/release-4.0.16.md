@@ -73,7 +73,7 @@ TiDBバージョン: 4.0.16
     -   極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正しました[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   小数点以下の除算結果がゼロの場合の負の符号の問題を修正しました[＃29586](https://github.com/pingcap/tidb/issues/29586)
     -   TiKV メトリクスでインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正しました [＃11299](https://github.com/tikv/tikv/issues/11299)
-    -   下流データベースが見つからない場合に発生する TiCDCpanicの問題を修正しました[＃11123](https://github.com/tikv/tikv/issues/11123)
+    -   下流データベースが見つからない場合に発生する TiCDC panicの問題を修正しました[＃11123](https://github.com/tikv/tikv/issues/11123)
     -   チャネルがいっぱいになるとRaft接続が切断される問題を修正[＃11047](https://github.com/tikv/tikv/issues/11047)
     -   TiDBが`Max` `Min`の`Int64`型が符号付き整数かどうかを正しく識別できず、 `Max` / `Min` の計算結果が間違ってしまう問題を修正しました。 [＃10158](https://github.com/tikv/tikv/issues/10158)
     -   輻輳エラーによりCDCがスキャン再試行を頻繁に追加する問題を修正 [＃11082](https://github.com/tikv/tikv/issues/11082)

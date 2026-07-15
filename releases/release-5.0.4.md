@@ -69,7 +69,7 @@ TiDB バージョン: 5.0.4
     -   MPPクエリを起動する前にTiFlashの可用性を確認してください [＃1807](https://github.com/pingcap/tics/issues/1807)
     -   クエリ結果をより安定させるために、安定した結果モードをサポートします[＃26084](https://github.com/pingcap/tidb/pull/26084)
     -   MySQLシステム変数`init_connect`とその関連機能サポートする [＃18894](https://github.com/pingcap/tidb/issues/18894)
-    -   MPPモード[＃25861](https://github.com/pingcap/tidb/pull/25861)で`COUNT(DISTINCT)`集約機能を徹底的に押し下げる
+    -   MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [＃25861](https://github.com/pingcap/tidb/pull/25861)
     -   集計関数を`EXPLAIN`文でプッシュダウンできない場合にログ警告を出力する [＃25736](https://github.com/pingcap/tidb/pull/25736)
     -   Grafanaダッシュボードの`TiFlashQueryTotalCounter`にエラーラベルを追加する [＃25327](https://github.com/pingcap/tidb/pull/25327)
     -   HTTP API によるセカンダリインデックス経由でクラスター化インデックステーブルの MVCC データを取得する機能をサポート [＃24209](https://github.com/pingcap/tidb/issues/24209)
@@ -138,9 +138,9 @@ TiDB バージョン: 5.0.4
 -   TiKV
 
     -   破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[＃10813](https://github.com/tikv/tikv/issues/10813)
-    -   Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKVpanic問題を修正しました[＃10843](https://github.com/tikv/tikv/pull/10843)
+    -   Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[＃10843](https://github.com/tikv/tikv/pull/10843)
     -   新しいバージョンのTiKVをv5.0.xにロールバックできない問題を修正しました[＃10843](https://github.com/tikv/tikv/pull/10843)
-    -   5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKVpanicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスタをアップグレードした場合、このクラスタでこの問題が発生する可能性があります[＃10774](https://github.com/tikv/tikv/issues/10774)
+    -   5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKV panicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスタをアップグレードした場合、このクラスタでこの問題が発生する可能性があります[＃10774](https://github.com/tikv/tikv/issues/10774)
     -   左悲観的ロックによる解析エラーを修正[＃26404](https://github.com/pingcap/tidb/issues/26404)
     -   特定のプラットフォームで期間を計算するときに発生するpanicを修正[＃10571](https://github.com/tikv/tikv/pull/10571)
     -   Load Base Split の`batch_get_command`のキーがエンコードされていない問題を修正[＃10542](https://github.com/tikv/tikv/issues/10542)

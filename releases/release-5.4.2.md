@@ -63,14 +63,14 @@ TiDB バージョン: 5.4.2
     -   空の文字列の型変換を実行するときに TiKV がパニックになる問題を修正[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効な場合の悲観的トランザクションにおけるコミットレコードの重複の可能性を修正[＃12615](https://github.com/tikv/tikv/issues/12615)
     -   Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました [＃12478](https://github.com/tikv/tikv/issues/12478)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)バッチ分割の競合によって発生する TiKVpanicの問題を修正しました。
+    -   ピアの破壊とリージョンバッチ分割の競合によって発生する TiKV panicの問題を修正しました。 [＃12368](https://github.com/tikv/tikv/issues/12368)
     -   tikv-ctl が間違った文字列一致のために誤った結果を返す問題を修正[＃12329](https://github.com/tikv/tikv/issues/12329)
     -   AUFS でTiKVを起動できない問題を修正 [＃12543](https://github.com/tikv/tikv/issues/12543)
 
 -   PD
 
     -   `not leader` の間違ったステータスコードを修正 [＃4797](https://github.com/tikv/pd/issues/4797)
-    -   ホットリージョンにリーダーがない場合に発生するPDpanicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
+    -   ホットリージョンにリーダーがない場合に発生するPD panicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
     -   いくつかのコーナーケースにおけるTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)
 

@@ -92,7 +92,7 @@ TiDB バージョン: 5.4.3
 
     -   TiCDC
 
-        -   `enable-old-value = false` [＃6198](https://github.com/pingcap/tiflow/issues/6198)を設定すると TiCDCpanicする問題を修正
+        -   `enable-old-value = false` [＃6198](https://github.com/pingcap/tiflow/issues/6198)を設定すると TiCDC panicする問題を修正
 
     -   Backup & Restore (BR)
 

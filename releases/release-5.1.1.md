@@ -45,7 +45,7 @@ TiDB バージョン: 5.1.1
     -   MPPクエリの再試行をサポート[＃26480](https://github.com/pingcap/tidb/pull/26480)
     -   `UPDATE`読み取りで`point get`または`batch point get`使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26225](https://github.com/pingcap/tidb/pull/26225)
     -   古いクエリからのビューの作成を禁止する[＃26200](https://github.com/pingcap/tidb/pull/26200)
-    -   MPPモード[＃26194](https://github.com/pingcap/tidb/pull/26194)で`COUNT(DISTINCT)`集約機能を徹底的に押し下げる
+    -   MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [＃26194](https://github.com/pingcap/tidb/pull/26194)
     -   MPPクエリを起動する前にTiFlashの可用性を確認してください [＃26192](https://github.com/pingcap/tidb/pull/26192)
     -   読み取りタイムスタンプを将来の時刻に設定することを許可しない[＃25763](https://github.com/pingcap/tidb/pull/25763)
     -   集計関数を`EXPLAIN`文にプッシュダウンできない場合にログ警告を出力する [＃25737](https://github.com/pingcap/tidb/pull/25737)

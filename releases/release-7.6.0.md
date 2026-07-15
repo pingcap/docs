@@ -448,7 +448,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   クエリの遅延によりメモリ使用量が大幅に増加する問題を修正 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
     -   `RECOVER TABLE`および`FLASHBACK TABLE`TiFlash`CREATE TABLE` `DROP TABLE`を介して一部の TiFlash レプリカデータを復元できない問題 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ColumnRef in (Literal, Func...)`のようなフィルタリング条件を指定してクエリを実行すると、クエリ結果が正しくなくなる問題を修正 [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   DDL の同時実行中にTiFlash で競合が発生した場合のTiFlashpanic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   DDL の同時実行中にTiFlash で競合が発生した場合のTiFlash panic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlash が非集約ストレージおよびコンピューティングアーキテクチャの下でオブジェクトストレージデータの GC 所有者を選択できない場合がある問題を修正 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `lowerUTF8`および`upperUTF8`関数で、大文字と小文字が異なるバイトを占有することを許可しない問題を修正 [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
     -   TiFlashが`ENUM`の値が0の場合に`ENUM`を正しく処理しない問題を修正 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)

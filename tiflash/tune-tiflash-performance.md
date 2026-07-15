@@ -95,7 +95,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 
 ### 集計関数を<code>Join</code>または<code>Union</code>前の位置へプッシュダウンします {#push-down-aggregate-functions-to-a-position-before-code-join-code-or-code-union-code}
 
-集計演算を`Join`または`Union`前の位置まで押し下げることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
+集計演算を`Join`または`Union`前の位置までプッシュダウンすることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
 
 変数[`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down) 、オプティマイザが集計関数を`Join`または`Union`前の位置までプッシュダウンする最適化操作を実行するかどうかを制御します。クエリ内で集計操作が非常に遅い場合は、この変数を`ON`に設定できます。
 

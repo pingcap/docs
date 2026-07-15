@@ -17,7 +17,7 @@ TiDB バージョン: 4.0.8
 
 -   TiFlash
 
-    -   `CAST`関数を押し下げるサポート
+    -   `CAST`関数をプッシュダウンするサポート
 
 -   ツール
 
@@ -127,7 +127,7 @@ TiDB バージョン: 4.0.8
 
 -   PD
 
-    -   TiDB DashboardのKey VisualizerがPDpanicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
+    -   TiDB DashboardのKey VisualizerがPD panicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
     -   PDストアが10分以上ダウンした場合にPDがpanic可能性があるバグを修正[＃3069](https://github.com/pingcap/pd/pull/3069)
 
 -   TiFlash

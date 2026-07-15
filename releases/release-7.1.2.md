@@ -131,7 +131,7 @@ TiDB バージョン: 7.1.2
     -   ストアハートビートの再試行回数をに減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
     -   オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)
     -   暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [＃15080](https://github.com/tikv/tikv/issues/15080) @ [tabokie](https://github.com/tabokie)
-    -   リージョン[＃13311](https://github.com/tikv/tikv/issues/13311) @ [cfzjywxk](https://github.com/cfzjywxk)のメタデータが正しくないことによって引き起こされるTiKVpanic問題を修正しました
+    -   リージョンのメタデータが正しくないことによって引き起こされるTiKV panic問題を修正しました [＃13311](https://github.com/tikv/tikv/issues/13311) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサの要求がタイムアウトする問題を修正しました [＃15565](https://github.com/tikv/tikv/issues/15565) @ [lance6716](https://github.com/lance6716)
     -   ピアを移動するとFollower Readのパフォーマンスが低下する可能性がある問題を修正[＃15468](https://github.com/tikv/tikv/issues/15468) @ [YuJuncen](https://github.com/YuJuncen)
 
@@ -139,7 +139,7 @@ TiDB バージョン: 7.1.2
 
     -   v2 スケジューラ アルゴリズムでホット リージョンがスケジュールされない可能性がある問題を修正しました [＃6645](https://github.com/tikv/pd/issues/6645) @ [lhy1024](https://github.com/lhy1024)
     -   TLSハンドシェイクにより空のクラスタでCPU使用率が上昇する可能性がある問題を修正 [＃6913](https://github.com/tikv/pd/issues/6913) @ [nolouch](https://github.com/nolouch)
-    -   PDノード間の注入エラーによりPDpanic[＃6858](https://github.com/tikv/pd/issues/6858) @ [HuSharp](https://github.com/HuSharp)が発生する可能性がある問題を修正しました
+    -   PDノード間の注入エラーによりPD panicが発生する可能性がある問題を修正しました [＃6858](https://github.com/tikv/pd/issues/6858) @ [HuSharp](https://github.com/HuSharp)
     -   ストア情報の同期によりPDリーダーが終了し、 で停止する可能性がある問題を修正しました。 [＃6918](https://github.com/tikv/pd/issues/6918) @ [rleungx](https://github.com/rleungx)
     -   フラッシュバック後にリージョン情報が更新されない問題を修正 [＃6912](https://github.com/tikv/pd/issues/6912) @ [overvenus](https://github.com/overvenus)
     -   終了時に PD がpanicになる可能性がある問題を修正しました [＃7053](https://github.com/tikv/pd/issues/7053) @ [HuSharp](https://github.com/HuSharp)

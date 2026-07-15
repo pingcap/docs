@@ -53,7 +53,7 @@ TiDB バージョン: 7.1.5
     -   特定の条件下で`SURVIVAL_PREFERENCES`属性が`SHOW CREATE PLACEMENT POLICY`ステートメントの出力に表示されない可能性がある問題を修正[＃51699](https://github.com/pingcap/tidb/issues/51699) @ [lcwangchao](https://github.com/lcwangchao)
     -   自動統計更新の時間枠を設定した後、その時間枠外でも統計が更新される可能性がある問題を修正[＃49552](https://github.com/pingcap/tidb/issues/49552) @ [hawkingrei](https://github.com/hawkingrei)
     -   サブクエリの`HAVING`句に相関列が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。 [＃51107](https://github.com/pingcap/tidb/issues/51107) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
+    -   `approx_percentile`関数が TiDB panicを引き起こす可能性がある問題を修正しました [＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `IN()`述語に`NULL` が含まれている場合にクエリ結果が正しくない問題を修正しました [＃51560](https://github.com/pingcap/tidb/issues/51560) @ [winoros](https://github.com/winoros)
     -   無効な設定項目が含まれている場合、設定ファイルが有効にならない問題を修正しました [＃51399](https://github.com/pingcap/tidb/issues/51399) @ [Defined2014](https://github.com/Defined2014)
     -   `EXCHANGE PARTITION`外部キーを誤って処理する問題を修正 [＃51807](https://github.com/pingcap/tidb/issues/51807) @ [YangKeao](https://github.com/YangKeao)

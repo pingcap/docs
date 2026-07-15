@@ -61,7 +61,7 @@ TiDB バージョン: 5.3.1
     -   `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
     -   クエリ実行時に MPP タスク リストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
-    -   innerWorkerpanic[＃31494](https://github.com/pingcap/tidb/issues/31494)によって発生するインデックス結合の誤った結果を修正しました
+    -   innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   列タイプを`FLOAT`から`DOUBLE`に変更した後の間違ったクエリ結果を修正[＃31372](https://github.com/pingcap/tidb/issues/31372)
     -   インデックスルックアップ結合使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
     -   `Order By` の最適化による誤ったクエリ結果を修正 [＃30271](https://github.com/pingcap/tidb/issues/30271)
@@ -136,7 +136,7 @@ TiDB バージョン: 5.3.1
         -   `mq sink write row`監視データがない問題を修正[＃3431](https://github.com/pingcap/tiflow/issues/3431)
         -   レプリケーションタスクが削除されたときに発生する可能性のあるpanic問題を修正しました[＃3128](https://github.com/pingcap/tiflow/issues/3128)
         -   デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正しました[＃4055](https://github.com/pingcap/tiflow/issues/4055)
-        -   etcd [＃2980](https://github.com/pingcap/tiflow/issues/2980)でタスクステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正しました
+        -   etcd でタスクステータスを手動でクリーンアップするときに発生する TiCDC panicの問題を修正しました [＃2980](https://github.com/pingcap/tiflow/issues/2980)
         -   DDL文の特別なコメントによりレプリケーションタスクが停止する問題を修正[＃3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout` の誤った構成によって発生するレプリケーション停止の問題を修正しました [＃3352](https://github.com/pingcap/tiflow/issues/3352)
         -   一部の RHEL リリースでタイムゾーンの問題によりサービスを開始できない問題を修正しました [＃3584](https://github.com/pingcap/tiflow/issues/3584)

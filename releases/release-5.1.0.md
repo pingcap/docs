@@ -316,19 +316,19 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     -   文字列型を整数型にキャストした際に、結果が正しくない問題を修正しました。
     -   連続して高速な書き込みを行うと、 TiFlashのメモリが不足する可能性がある問題を修正しました。
     -   テーブルGC中にヌルポインタ例外が発生する可能性がある問題を修正しました。
-    -   削除されたテーブルにデータを書き込む際に発生するTiFlashpanic問題を修正します。
+    -   削除されたテーブルにデータを書き込む際に発生するTiFlash panic問題を修正します。
     -   TiFlashがBR復元中にpanic可能性がある問題を修正しました。
     -   共有デルタインデックスを同時クローンする際に結果が正しくない問題を修正しました。
     -   圧縮フィルター機能が有効になっているときに発生する可能性のあるpanicを修正します。
     -   TiFlashが非同期コミットからフォールバックしたロックを解決できない問題を修正します。
     -   `TIMEZONE`型のキャスト結果に`TIMESTAMP`型が含まれている場合に、誤った結果が返される問題を修正しました。
-    -   セグメント分割中に発生するTiFlashpanic問題を修正します
+    -   セグメント分割中に発生するTiFlash panic問題を修正します
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   KVデータ生成時に発生するTiDB Lightningpanicの問題を修正 [#1127](https://github.com/pingcap/br/pull/1127)
+        -   KVデータ生成時に発生するTiDB Lightning panicの問題を修正 [#1127](https://github.com/pingcap/br/pull/1127)
         -   データインポート中にキーの合計サイズがラフトエントリの制限を超えたためにバッチ分割リージョンが失敗するバグを修正しました [#969](https://github.com/pingcap/br/issues/969)
         -   CSVファイルをインポートする際に、ファイルの最終行に改行文字（ `\r\n` ）が含まれていない場合にエラーが発生する問題を修正しました [#1133](https://github.com/pingcap/br/issues/1133)
         -   インポートするテーブルにdouble型のAUTO_INCREMENT列が含まれている場合、auto_incrementの値が異常になる問題を修正しました [#1178](https://github.com/pingcap/br/pull/1178)

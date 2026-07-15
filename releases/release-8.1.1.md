@@ -74,7 +74,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   `?`の引数を含む`CONV`の式を持つ`PREPARE` `EXECUTE`ステートメントを複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @ [qw4990](https://github.com/qw4990)
     -   再帰CTE演算子がメモリ使用量を誤って追跡する問題を修正しました [＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `SHOW WARNINGS;`使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
-    -   TopN演算子が誤って[＃37986](https://github.com/pingcap/tidb/issues/37986) @ [qw4990](https://github.com/qw4990)にプッシュダウンされる可能性がある問題を修正しました
+    -   TopN演算子が誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @ [qw4990](https://github.com/qw4990)
     -   常に`true` となる述語を持つ`SHOW ERRORS`ステートメントを実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @ [elsa0520](https://github.com/elsa0520)
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[＃53726](https://github.com/pingcap/tidb/issues/53726) @ [hawkingrei](https://github.com/hawkingrei)
@@ -155,7 +155,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   リソースグループクエリをキャンセルするときに再試行回数が多すぎる問題を修正 [＃8217](https://github.com/tikv/pd/issues/8217) @ [nolouch](https://github.com/nolouch)
     -   PD がオペレータ チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @ [lhy1024](https://github.com/lhy1024)
     -   ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @ [JmPotato](https://github.com/JmPotato)
-    -   TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPDpanic[＃8323](https://github.com/tikv/pd/issues/8323) @ [JmPotato](https://github.com/JmPotato)が発生する問題を修正しました
+    -   TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @ [JmPotato](https://github.com/JmPotato)
 
 -   TiFlash
 
@@ -192,7 +192,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
     -   TiDB Data Migration (DM)
 
-        -   MariaDBデータの移行中に`SET`ステートメントがDMpanicを引き起こす問題を修正[＃10206](https://github.com/pingcap/tiflow/issues/10206) @ [dveeden](https://github.com/dveeden)
+        -   MariaDBデータの移行中に`SET`ステートメントがDM panicを引き起こす問題を修正[＃10206](https://github.com/pingcap/tiflow/issues/10206) @ [dveeden](https://github.com/dveeden)
         -   `go-mysql` にアップグレードして接続ブロックの問題を修正しました [＃11041](https://github.com/pingcap/tiflow/issues/11041) @ [D3Hunter](https://github.com/D3Hunter)
         -   インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [＃11459](https://github.com/pingcap/tiflow/issues/11459) @ [michaelmdeng](https://github.com/michaelmdeng)
         -   スキーマ トラッカーが LIST パーティション テーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [＃11408](https://github.com/pingcap/tiflow/issues/11408) @ [lance6716](https://github.com/lance6716)

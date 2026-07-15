@@ -120,8 +120,8 @@ TiDBバージョン：5.2.4
     -   コルーチンの実行速度が速すぎる場合に時折発生するデッドロック問題を修正します [#11549](https://github.com/tikv/tikv/issues/11549)
     -   ピアを削除するとレイテンシーが高くなる可能性がある問題を修正しました [#10210](https://github.com/tikv/tikv/issues/10210)
     -   TiKVがパニックを起こし、マージ対象のリージョンが無効なためにピアを予期せず破壊してしまう問題を修正しました [#12232](https://github.com/tikv/tikv/issues/12232)
-    -   リージョンをマージする際に、初期化されずに破棄されたピアでターゲットピアが置き換えられた場合に発生する TiKVpanicの問題を修正します [#12048](https://github.com/tikv/tikv/issues/12048)
-    -   スナップショットの適用が中止された際に発生する TiKVpanicの問題を修正 [#11618](https://github.com/tikv/tikv/issues/11618)
+    -   リージョンをマージする際に、初期化されずに破棄されたピアでターゲットピアが置き換えられた場合に発生する TiKV panicの問題を修正します [#12048](https://github.com/tikv/tikv/issues/12048)
+    -   スナップショットの適用が中止された際に発生する TiKV panicの問題を修正 [#11618](https://github.com/tikv/tikv/issues/11618)
     -   オペレーターの実行が失敗した場合に、TiKVが送信されるスナップショットの数を正しく計算できないバグを修正しました [#11341](https://github.com/tikv/tikv/issues/11341)
 
 -   PD
@@ -176,7 +176,7 @@ TiDBバージョン：5.2.4
         -   必要なプロセッサ情報が存在しない場合、HTTP APIがパニックを起こすバグを修正しました [#3840](https://github.com/pingcap/tiflow/issues/3840)
         -   不正確なチェックポイントによって引き起こされる可能性のあるデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
         -   デッドロックによってレプリケーションタスクが停止する可能性のある問題を修正します [#4055](https://github.com/pingcap/tiflow/issues/4055)
-        -   etcdでタスクの状態を手動でクリーンアップした際に発生するTiCDCpanic問題を修正 [#2980](https://github.com/pingcap/tiflow/issues/2980)
+        -   etcdでタスクの状態を手動でクリーンアップした際に発生するTiCDC panic問題を修正 [#2980](https://github.com/pingcap/tiflow/issues/2980)
         -   DDLステートメント内の特殊コメントがレプリケーションタスクの停止を引き起こす問題を修正 [#3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout`の設定ミスが原因で発生するレプリケーション停止の問題を修正します [#3352](https://github.com/pingcap/tiflow/issues/3352)
         -   RHEL リリースにおいて、タイムゾーンの問題によりサービスを開始できない問題を修正しました。 [#3584](https://github.com/pingcap/tiflow/issues/3584)

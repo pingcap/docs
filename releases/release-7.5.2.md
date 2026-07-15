@@ -91,9 +91,9 @@ TiDB バージョン: 7.5.2
     -   `UPDATE`リスト内のサブクエリによって TiDB がpanic可能性がある問題を修正[＃52687](https://github.com/pingcap/tidb/issues/52687) @ [winoros](https://github.com/winoros)
     -   述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @ [hawkingrei](https://github.com/hawkingrei)
     -   クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`が機能しない問題を修正[＃42093](https://github.com/pingcap/tidb/issues/42093) @ [qw4990](https://github.com/qw4990)
-    -   TopN演算子が誤って[＃37986](https://github.com/pingcap/tidb/issues/37986) @ [qw4990](https://github.com/qw4990)にプッシュダウンされる可能性がある問題を修正しました
+    -   TopN演算子が誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @ [qw4990](https://github.com/qw4990)
     -   空の投影により TiDB がpanicを引き起こす問題を修正しました [＃49109](https://github.com/pingcap/tidb/issues/49109) @ [winoros](https://github.com/winoros)
-    -   インデックス プランが[＃52947](https://github.com/pingcap/tidb/issues/52947) @ [AilinKid](https://github.com/AilinKid)順序に保たれている場合に、インデックス マージによって部分的な制限が誤って押し下げられる問題を修正しました。
+    -   インデックス プランが順序に保たれている場合に、インデックス マージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [＃52947](https://github.com/pingcap/tidb/issues/52947) @ [AilinKid](https://github.com/AilinKid)
     -   再帰CTE でビューの使用が機能しない問題を修正 [＃49721](https://github.com/pingcap/tidb/issues/49721) @ [hawkingrei](https://github.com/hawkingrei)
     -   列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [＃53236](https://github.com/pingcap/tidb/issues/53236) @ [winoros](https://github.com/winoros)
     -   常に`true` となる述語を持つ`SHOW ERRORS`文を実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @ [elsa0520](https://github.com/elsa0520)
@@ -120,7 +120,7 @@ TiDB バージョン: 7.5.2
     -   `IN()`述語に`NULL` が含まれている場合にクエリ結果が正しくない問題を修正しました [＃51560](https://github.com/pingcap/tidb/issues/51560) @ [winoros](https://github.com/winoros)
     -   TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力問題を修正しました。 [＃52657](https://github.com/pingcap/tidb/issues/52657) @ [hawkingrei](https://github.com/hawkingrei)
     -   `EXCHANGE PARTITION`外部キーを誤って処理する問題を修正 [＃51807](https://github.com/pingcap/tidb/issues/51807) @ [YangKeao](https://github.com/YangKeao)
-    -   `LIMIT` `OR`型`Index Merge` [＃48588](https://github.com/pingcap/tidb/issues/48588) @ [AilinKid](https://github.com/AilinKid)に押し下げられない可能性がある問題を修正しました
+    -   `LIMIT` `OR`型`Index Merge` にプッシュダウンされない可能性がある問題を修正しました [＃48588](https://github.com/pingcap/tidb/issues/48588) @ [AilinKid](https://github.com/AilinKid)
     -   相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @ [yibin87](https://github.com/yibin87)
     -   `CPS by type`メトリックに誤った値が表示される問題を修正しました [＃52605](https://github.com/pingcap/tidb/issues/52605) @ [nolouch](https://github.com/nolouch)
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
@@ -163,10 +163,10 @@ TiDB バージョン: 7.5.2
     -   不安定なテストケースの問題を修正し、各テストが独立した一時ディレクトリを使用するようにして、オンライン構成の変更が他のテストケースに影響しないようにします。 [＃16871](https://github.com/tikv/tikv/issues/16871) @ [glorv](https://github.com/glorv)
     -   バイナリからJSON への変換中にTiKVがpanic可能性がある問題を修正しました [＃16616](https://github.com/tikv/tikv/issues/16616) @ [YangKeao](https://github.com/YangKeao)
     -   tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [＃17037](https://github.com/tikv/tikv/issues/17037) @ [glorv](https://github.com/glorv)
-    -   1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`正常に[＃15999](https://github.com/tikv/tikv/issues/15999) @ [crazycs520](https://github.com/crazycs520)に進まなくなる問題を修正しました。
+    -   1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`正常に進まなくなる問題を修正しました。 [＃15999](https://github.com/tikv/tikv/issues/15999) @ [crazycs520](https://github.com/crazycs520)
     -   スナップショットの適用によってピアの破棄処理が中断された後、スナップショットの適用が完了しても再開されない問題を修正[＃16561](https://github.com/tikv/tikv/issues/16561) @ [tonyxuqqi](https://github.com/tonyxuqqi)
     -   `DECIMAL`型の小数点部分が場合に正しくない問題を修正しました [＃16913](https://github.com/tikv/tikv/issues/16913) @ [gengliqi](https://github.com/gengliqi)
-    -   クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKVpanic[＃16969](https://github.com/tikv/tikv/issues/16969) @ [gengliqi](https://github.com/gengliqi)が発生する問題を修正しました。
+    -   クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKV panicが発生する問題を修正しました。 [＃16969](https://github.com/tikv/tikv/issues/16969) @ [gengliqi](https://github.com/gengliqi)
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [overvenus](https://github.com/overvenus)
     -   監視メトリック`tikv_unified_read_pool_thread_count`データがない場合がある問題を修正[＃16629](https://github.com/tikv/tikv/issues/16629) @ [YuJuncen](https://github.com/YuJuncen)
     -   RocksDB の非アクティブな Write Ahead Logs (WAL) によってデータが破損する可能性がある問題を修正しました[＃16705](https://github.com/tikv/tikv/issues/16705) @ [Connor1996](https://github.com/Connor1996)

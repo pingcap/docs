@@ -102,7 +102,7 @@ TiDB バージョン: 7.1.1
 -   PD
 
     -   リソース マネージャーが既定のリソース グループを繰り返し初期化する問題を修正しました。 [＃6787](https://github.com/tikv/pd/issues/6787) @ [glorv](https://github.com/glorv)
-    -   SQLの配置ルールで設定された`location-labels` 、期待どおりに[＃6662](https://github.com/tikv/pd/issues/6662) @ [rleungx](https://github.com/rleungx)にスケジュールされない場合がある問題を修正しました。
+    -   SQLの配置ルールで設定された`location-labels` 、期待どおりにスケジュールされない場合がある問題を修正しました。 [＃6662](https://github.com/tikv/pd/issues/6662) @ [rleungx](https://github.com/rleungx)
     -   一部のコーナーケースで冗長レプリカが自動的に修復されない問題を修正[＃6573](https://github.com/tikv/pd/issues/6573) @ [nolouch](https://github.com/nolouch)
 
 -   TiFlash
@@ -142,7 +142,7 @@ TiDB バージョン: 7.1.1
         -   TiDB LightningとPD間の接続失敗を再試行できない問題を修正し、インポート成功率を向上 [＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)
         -   TiKV にデータを書き込むときに、スペース不足エラーが返されるときに、 TiDB Lightning がエラー メッセージを正しく表示しない問題を修正しました。 [＃44733](https://github.com/pingcap/tidb/issues/44733) @ [lance6716](https://github.com/lance6716)
         -   チェックサム操作中に`Region is unavailable`エラーが報告される問題を修正 [＃45462](https://github.com/pingcap/tidb/issues/45462) @ [D3Hunter](https://github.com/D3Hunter)
-        -   `experimental.allow-expression-index`が有効でデフォルト値が UUID [＃44497](https://github.com/pingcap/tidb/issues/44497) @ [lichunzhu](https://github.com/lichunzhu)の場合に発生するTiDB Lightningpanic問題を修正しました
+        -   `experimental.allow-expression-index`が有効でデフォルト値が UUID の場合に発生するTiDB Lightning panic問題を修正しました [＃44497](https://github.com/pingcap/tidb/issues/44497) @ [lichunzhu](https://github.com/lichunzhu)
         -   競合条件によりディスククォータが不正確になる可能性がある問題を修正 [＃44867](https://github.com/pingcap/tidb/issues/44867) @ [D3Hunter](https://github.com/D3Hunter)
         -   論理インポートモードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータが時間で更新されない可能性がある問題を修正しました。 [＃44614](https://github.com/pingcap/tidb/issues/44614) @ [dsdashun](https://github.com/dsdashun)
 

@@ -116,9 +116,9 @@ TiDB バージョン: 4.0.14
 
     -   削除操作を実行した後にスケジューラが再表示されることがあるバグを修正[＃2572](https://github.com/tikv/pd/issues/2572)
     -   一時構成がロードされる前にスケジューラが起動されたときに発生する可能性のあるデータ競合の問題を修正しました[＃3771](https://github.com/tikv/pd/issues/3771)
-    -   リージョン分散操作中に発生する可能性のあるPDpanic問題を修正しました[＃3761](https://github.com/pingcap/pd/pull/3761)
+    -   リージョン分散操作中に発生する可能性のあるPD panic問題を修正しました[＃3761](https://github.com/pingcap/pd/pull/3761)
     -   一部の演算子の優先順位が正しく設定されていない問題を修正[＃3703](https://github.com/pingcap/pd/pull/3703)
-    -   存在しないストア[＃3660](https://github.com/tikv/pd/issues/3660)から`evict-leader`スケジューラを削除するときに発生する可能性のある PDpanicの問題を修正しました。
+    -   存在しないストアから`evict-leader`スケジューラを削除するときに発生する可能性のある PD panicの問題を修正しました。 [＃3660](https://github.com/tikv/pd/issues/3660)
     -   ストア数が多い場合にPDリーダーの再選出が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
 -   TiDB Dashboard
@@ -150,7 +150,7 @@ TiDB バージョン: 4.0.14
         -   TiDB LightningがParquetファイルの`DECIMAL`型データを解析できない問題を修正 [＃1276](https://github.com/pingcap/br/pull/1276)
         -   TiDB Lightningがインポートした大きなCSVファイルを分割する際に報告されるEOFエラーを修正しました[＃1133](https://github.com/pingcap/br/issues/1133)
         -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1185](https://github.com/pingcap/br/pull/1185)
-        -   4 GBを超えるKVデータを生成する際に発生するTiDB Lightningpanicの問題を修正[＃1128](https://github.com/pingcap/br/pull/1128)
+        -   4 GBを超えるKVデータを生成する際に発生するTiDB Lightning panicの問題を修正[＃1128](https://github.com/pingcap/br/pull/1128)
 
     -   Dumpling
 

@@ -283,8 +283,8 @@ TiDB バージョン: 7.2.0
 
     -   TiDB Lightning
 
-        -   `experimental.allow-expression-index`が有効でデフォルト値がUUIDの場合に発生するTiDB Lightningpanic問題を修正 [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
-        -   データファイルの分割中にタスクが終了した際に発生するTiDB Lightningpanicの問題を修正 [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
+        -   `experimental.allow-expression-index`が有効でデフォルト値がUUIDの場合に発生するTiDB Lightning panic問題を修正 [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
+        -   データファイルの分割中にタスクが終了した際に発生するTiDB Lightning panicの問題を修正 [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
 
 ## 貢献者 {#contributors}
 

@@ -48,7 +48,7 @@ TiDB Ansible バージョン: 2.1.17
     -   スロークエリログの`Index_ids`フィールドを`Index_names`フィールドに置き換えて、スロークエリログの使いやすさを向上させます。 [＃12063](https://github.com/pingcap/tidb/pull/12063)
     -   `Duration` `-`が含まれる場合 ( `select time(‘--')`など)、TiDB が`-` EOF エラーとして解析することによって発生する接続切断の問題を修正しました[＃11910](https://github.com/pingcap/tidb/pull/11910)
     -   無効なリージョンを`RegionCache`からより迅速に削除して、このリージョンに送信されるリクエストの数を減らします。 [＃11931](https://github.com/pingcap/tidb/pull/11931)
-    -   `oom-action = "cancel"`と OOM が`Insert Into … Select`構文[＃12126](https://github.com/pingcap/tidb/pull/12126)で発生したときに OOMpanicの問題を誤って処理することによって発生する接続切断の問題を修正しました。
+    -   `oom-action = "cancel"`と OOM が`Insert Into … Select`構文で発生したときに OOM panicの問題を誤って処理することによって発生する接続切断の問題を修正しました。 [＃12126](https://github.com/pingcap/tidb/pull/12126)
 -   DDL
     -   `tikvSnapshot`にリバーススキャンインターフェースを追加し、DDL履歴ジョブを効率的にクエリできるようにします。このインターフェースを使用することで、 `ADMIN SHOW DDL JOBS`実行時間が大幅に短縮されます[＃11789](https://github.com/pingcap/tidb/pull/11789)
     -   `CREATE TABLE ... PRE_SPLIT_REGION`構文の改善: `PRE_SPLIT_REGION = N` の場合、事前分割されるリージョンの数を 2^(N-1) から 2^N に変更します。 [＃11797](https://github.com/pingcap/tidb/pull/11797/files)

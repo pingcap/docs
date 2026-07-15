@@ -4936,7 +4936,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
     -   演算子のトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     -   演算子の最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     -   演算子の最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。
--   `Projection`演算子を押し下げる最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
+-   `Projection`演算子をプッシュダウンする最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
 -   TiDB クラスターが v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードされた場合、この変数のデフォルト値は`OFF`です。
 
 ### tidb_opt_range_max_size <span class="version-mark">v6.4.0で追加</span> {#tidb-opt-range-max-size-span-class-version-mark-new-in-v6-4-0-span}

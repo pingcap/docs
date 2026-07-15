@@ -62,7 +62,7 @@ TiDB バージョン: 4.0.13
     -   `BIT`型の列と`INTEGER`型の列の間で`UNION`使用すると間違ったクエリ結果が発生する問題を修正しました[＃24026](https://github.com/pingcap/tidb/pull/24026)
     -   `BINARY`タイプと`CHAR`タイプを比較すると`TableDual`プランが誤って作成される問題を修正しました[＃23917](https://github.com/pingcap/tidb/pull/23917)
     -   `insert ignore on duplicate`文が予期せずテーブルレコードを削除する可能性がある問題を修正しました [＃23825](https://github.com/pingcap/tidb/pull/23825)
-    -   監査プラグインが TiDBpanicを引き起こす問題を修正[＃23819](https://github.com/pingcap/tidb/pull/23819)
+    -   監査プラグインが TiDB panicを引き起こす問題を修正[＃23819](https://github.com/pingcap/tidb/pull/23819)
     -   `HashJoin`演算子が照合順序誤って処理する問題を修正しました [＃23812](https://github.com/pingcap/tidb/pull/23812)
     -   `batch_point_get`悲観的トランザクションで異常値を誤って処理した場合に発生する切断の問題を修正 [＃23778](https://github.com/pingcap/tidb/pull/23778)
     -   `tidb_row_format_version`設定値が`1`に設定され、 `enable_new_collation`値が`true` に設定されている場合に発生する不整合なインデックスの問題を修正しました。 [＃23772](https://github.com/pingcap/tidb/pull/23772)
@@ -112,7 +112,7 @@ TiDB バージョン: 4.0.13
 -   TiFlash
 
     -   `delta-merge-tasks`の数がPrometheusに報告されない問題を修正
-    -   `Segment Split`中に発生するTiFlashpanic問題を修正
+    -   `Segment Split`中に発生するTiFlash panic問題を修正
     -   Grafanaの`Region write Duration (write blocks)`パネルが間違った場所に表示される問題を修正しました
     -   ストレージエンジンがデータの削除に失敗する潜在的な問題を修正
     -   `TIME`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました
@@ -120,8 +120,8 @@ TiDB バージョン: 4.0.13
     -   `STRING`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました
     -   連続した高速書き込みによりTiFlashのメモリが不足する可能性がある問題を修正しました
     -   テーブルGC中にヌルポインタの例外が発生する可能性がある問題を修正しました
-    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanic問題を修正しました
-    -   BR復元中に発生するTiFlashpanic問題を修正
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlash panic問題を修正しました
+    -   BR復元中に発生するTiFlash panic問題を修正
     -   一般的なCI照合順序を使用したときに一部の文字の重みが間違っているというバグを修正しました
     -   廃棄されたテーブルでデータが失われる可能性がある問題を修正
     -   ゼロバイトを含む文字列を比較するときに誤った結果が出る問題を修正しました

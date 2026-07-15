@@ -75,7 +75,7 @@ TiDB バージョン: 6.5.4
 
 -   TiDB
 
-    -   `STREAM_AGG()`演算子[＃40857](https://github.com/pingcap/tidb/issues/40857) @ [Dousir9](https://github.com/Dousir9)を押し下げると`index out of range`エラーが報告される可能性がある問題を修正しました
+    -   `STREAM_AGG()`演算子をプッシュダウンすると`index out of range`エラーが報告される可能性がある問題を修正しました [＃40857](https://github.com/pingcap/tidb/issues/40857) @ [Dousir9](https://github.com/Dousir9)
     -   `CREATE TABLE`文にサブパーティション定義 が含まれている場合、TiDB がすべてのパーティション情報を無視して非パーティションテーブルを作成する問題を修正しました。 [＃41200](https://github.com/pingcap/tidb/issues/41200) @ [mjonss](https://github.com/mjonss) [＃41198](https://github.com/pingcap/tidb/issues/41198)
     -   `stale_read_ts`設定が間違っていると`PREPARE stmt`データを誤って読み取る可能性がある問題を修正[＃43044](https://github.com/pingcap/tidb/issues/43044) @ [you06](https://github.com/you06)
     -   ActivateTxn で起こりうるデータ競合の問題を修正しました [＃42092](https://github.com/pingcap/tidb/issues/42092) @ [hawkingrei](https://github.com/hawkingrei)

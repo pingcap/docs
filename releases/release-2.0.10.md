@@ -14,14 +14,14 @@ summary: TiDB 2.0.10およびTiDB Ansible 2.0.10は、2018年12月18日にリリ
 -   `UNCOMPRESS`関数が不正な入力長を判断しない問題を修正 [＃8607](https://github.com/pingcap/tidb/pull/8607)
 -   TiDB アップグレード時に`ANSI_QUOTES SQL_MODE`で発生した問題を修正 [＃8575](https://github.com/pingcap/tidb/pull/8575)
 -   `select`場合によっては間違った結果が返される問題を修正[＃8570](https://github.com/pingcap/tidb/pull/8570)
--   終了信号[＃8501](https://github.com/pingcap/tidb/pull/8501)受信してもTiDBが終了できない可能性がある問題を修正しました
+-   終了信号を受信してもTiDBが終了できない可能性がある問題を修正しました [＃8501](https://github.com/pingcap/tidb/pull/8501)
 -   `IndexLookUpJoin`場合によっては間違った結果が返される問題を修正[＃8508](https://github.com/pingcap/tidb/pull/8508)
--   `GetVar`または`SetVar` [＃8454](https://github.com/pingcap/tidb/pull/8454)を含むフィルターを押し下げないでください
+-   `GetVar`または`SetVar` を含むフィルターをプッシュダウンしない [＃8454](https://github.com/pingcap/tidb/pull/8454)
 -   `UNION`集合演算子の結果の長さが場合によっては正しくない問題を修正[＃8491](https://github.com/pingcap/tidb/pull/8491)
 -   `PREPARE FROM @var_name` の問題を修正 [＃8488](https://github.com/pingcap/tidb/pull/8488)
 -   一部のケースで統計情報をダンプするときにpanic問題を修正[＃8464](https://github.com/pingcap/tidb/pull/8464)
 -   いくつかのケースにおけるポイントクエリの統計推定の問題を修正[＃8493](https://github.com/pingcap/tidb/pull/8493)
--   返されるデフォルト値`enum`が文字列[＃8476](https://github.com/pingcap/tidb/pull/8476)場合にpanic問題を修正
+-   返されるデフォルト値`enum`が文字列の場合にpanicする問題を修正 [＃8476](https://github.com/pingcap/tidb/pull/8476)
 -   ワイドテーブルのシナリオでメモリ消費量が多すぎる問題を修正 [＃8467](https://github.com/pingcap/tidb/pull/8467)
 -   パーサーがmod opcode を誤ってフォーマットした場合に発生する問題を修正しました [＃8431](https://github.com/pingcap/tidb/pull/8431)
 -   一部のケースで外部キー制約を追加することで発生するpanic問題を修正[＃8421](https://github.com/pingcap/tidb/pull/8421) 、 [＃8410](https://github.com/pingcap/tidb/pull/8410)

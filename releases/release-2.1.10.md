@@ -33,7 +33,7 @@ TiDB Ansible バージョン: 2.1.10
 -   `ALTER DATABASE`構文サポートする [＃10503](https://github.com/pingcap/tidb/pull/10503)
 -   スロークエリステートメントに`;`存在しない場合に`SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正しました [＃10536](https://github.com/pingcap/tidb/pull/10536)
 -   パーティションテーブルでの`Add index`がキャンセルできないことがある問題を修正[＃10533](https://github.com/pingcap/tidb/pull/10533)
--   OOMpanic回復できないケースがある問題を修正[＃10545](https://github.com/pingcap/tidb/pull/10545)
+-   OOM panic回復できないケースがある問題を修正[＃10545](https://github.com/pingcap/tidb/pull/10545)
 -   テーブルメタデータを書き換えるDDL操作のセキュリティを強化する[＃10547](https://github.com/pingcap/tidb/pull/10547)
 
 ## PD {#pd}

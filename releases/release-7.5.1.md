@@ -88,7 +88,7 @@ TiDB バージョン: 7.5.1
 
     -   システム変数`tidb_service_scope`の設定が反映されない問題を修正 [＃49245](https://github.com/pingcap/tidb/issues/49245) @[ywqzzy](https://github.com/ywqzzy)
     -   圧縮が有効になっている場合、通信プロトコルが16 MB以上のパケットを処理できない問題を修正[＃47157](https://github.com/pingcap/tidb/issues/47157) [＃47161](https://github.com/pingcap/tidb/issues/47161) @ [dveeden](https://github.com/dveeden)
-    -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
+    -   `approx_percentile`関数が TiDB panicを引き起こす可能性がある問題を修正しました [＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   文字列関数の引数が`NULL`定数の場合に TiDB が暗黙的に`from_binary`関数を挿入し、一部の式がTiFlash にプッシュダウンできない問題を修正しました。 [＃49526](https://github.com/pingcap/tidb/issues/49526) @ [YangKeao](https://github.com/YangKeao)
     -   `HashJoin`演算子がディスクにスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。 [＃50841](https://github.com/pingcap/tidb/issues/50841) @ [wshwsh12](https://github.com/wshwsh12)
     -   `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[＃49566](https://github.com/pingcap/tidb/issues/49566) [＃50850](https://github.com/pingcap/tidb/issues/50850) [＃50855](https://github.com/pingcap/tidb/issues/50855) @ [jiyfhust](https://github.com/jiyfhust)
@@ -197,7 +197,7 @@ TiDB バージョン: 7.5.1
     -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイトを占めることができない問題を修正しました。 [＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [gengliqi](https://github.com/gengliqi)
     -   ストリーム読み取り中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。 [＃8505](https://github.com/pingcap/tiflash/issues/8505) @ [gengliqi](https://github.com/gengliqi)
     -   クエリ中にTiFlash がメモリ制限に遭遇した場合のメモリリークの問題を修正しました [＃8447](https://github.com/pingcap/tiflash/issues/8447) @ [JinheLin](https://github.com/JinheLin)
-    -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlashpanic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`実行した後にTiFlash がパニックを起こし、null 許容列がに非 null 許容に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ColumnRef in (Literal, Func...)` のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました [＃8631](https://github.com/pingcap/tiflash/issues/8631) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [＃8450](https://github.com/pingcap/tiflash/issues/8450) @ [JaySon-Huang](https://github.com/JaySon-Huang)

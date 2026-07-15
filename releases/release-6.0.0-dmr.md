@@ -493,9 +493,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   TiFlash
 
-    -   メモリ制限が有効になっているときに発生するTiFlashpanicの問題を修正[＃3902](https://github.com/pingcap/tiflash/issues/3902)
+    -   メモリ制限が有効になっているときに発生するTiFlash panicの問題を修正[＃3902](https://github.com/pingcap/tiflash/issues/3902)
     -   期限切れのデータがゆっくりとリサイクルされる問題を修正[＃4146](https://github.com/pingcap/tiflash/issues/4146)
-    -   `Snapshot`複数の DDL 操作[＃4072](https://github.com/pingcap/tiflash/issues/4072)と同時に適用された場合にTiFlashpanicが発生する可能性がある問題を修正しました
+    -   `Snapshot`複数の DDL 操作と同時に適用された場合にTiFlash panicが発生する可能性がある問題を修正しました [＃4072](https://github.com/pingcap/tiflash/issues/4072)
     -   読み取りワークロードが重い状態で列を追加した後に発生する可能性のあるクエリエラーを修正[＃3967](https://github.com/pingcap/tiflash/issues/3967)
     -   負の引数を持つ`SQRT`関数が`Null`ではなく`NaN`返す問題を修正しました[＃3598](https://github.com/pingcap/tiflash/issues/3598)
     -   `INT`を`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正[＃3920](https://github.com/pingcap/tiflash/issues/3920)
@@ -521,9 +521,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         -   `batch-replace-enable`無効になっているときに MySQL シンクが重複した`replace` SQL 文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         -   PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
         -   一部のMySQLバージョンのエラー`Unknown system variable 'transaction_isolation'`を修正 [＃4504](https://github.com/pingcap/tiflow/issues/4504)
-        -   `Canal-JSON` `string` [＃4635](https://github.com/pingcap/tiflow/issues/4635)を誤って処理した場合に発生する可能性のある TiCDCpanic問題を修正しました
+        -   `Canal-JSON` `string` を誤って処理した場合に発生する可能性のある TiCDC panic問題を修正しました [＃4635](https://github.com/pingcap/tiflow/issues/4635)
         -   一部のケースでシーケンスが誤って複製されるバグを修正[＃4552](https://github.com/pingcap/tiflow/issues/4552)
-        -   `Canal-JSON` nil [＃4736](https://github.com/pingcap/tiflow/issues/4736)をサポートしていないために発生する可能性がある TiCDCpanic問題を修正しました
+        -   `Canal-JSON` nil をサポートしていないために発生する可能性がある TiCDC panic問題を修正しました [＃4736](https://github.com/pingcap/tiflow/issues/4736)
         -   タイプ`Enum/Set`および`TinyText/MediumText/Text/LongText` のAvroコーデックの誤ったデータマッピングを修正 [＃4454](https://github.com/pingcap/tiflow/issues/4454)
         -   Avroが`NOT NULL`列をNULL許容フィールドに変換するバグを修正 [＃4818](https://github.com/pingcap/tiflow/issues/4818)
         -   TiCDC が終了できない問題を修正[＃4699](https://github.com/pingcap/tiflow/issues/4699)

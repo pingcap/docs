@@ -256,7 +256,7 @@ TiDB バージョン: 7.3.0
 
 -   TiKV
 
-    -   GC中にデータを読み取ると、まれにTiKVpanicが発生する可能性がある問題を修正しました [#15109](https://github.com/tikv/tikv/issues/15109) @[MyonKeminta](https://github.com/MyonKeminta)
+    -   GC中にデータを読み取ると、まれにTiKV panicが発生する可能性がある問題を修正しました [#15109](https://github.com/tikv/tikv/issues/15109) @[MyonKeminta](https://github.com/MyonKeminta)
 
 -   PD
 

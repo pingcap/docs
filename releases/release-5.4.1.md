@@ -85,7 +85,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   メモリメトリックのオーバーフローによって引き起こされる断続的なパケット損失とメモリ不足（OOM）の問題を修正しました[＃12160](https://github.com/tikv/tikv/issues/12160)
     -   Ubuntu 18.04 でTiKVがプロファイリングを実行するときに発生する可能性のあるpanic問題を修正しました [＃9765](https://github.com/tikv/tikv/issues/9765)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正しました [＃12109](https://github.com/tikv/tikv/issues/12109)
-    -   リージョン[＃12048](https://github.com/tikv/tikv/issues/12048)をマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKVpanic問題を修正しました。
+    -   リージョンをマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKV panic問題を修正しました。 [＃12048](https://github.com/tikv/tikv/issues/12048)
     -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   解決ロックのステップ必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します。 [＃11993](https://github.com/tikv/tikv/issues/11993)
     -   ピアステータスが`Applying` ときにスナップショットファイルを削除すると発生するpanic問題を修正しました [＃11746](https://github.com/tikv/tikv/issues/11746)
@@ -94,7 +94,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   一部のコーナーケースで遅いスコア計算が不正確になる問題を修正[＃12254](https://github.com/tikv/tikv/issues/12254)
     -   `resolved_ts`モジュールによって引き起こされたOOM問題を修正し、さらにメトリックを追加します [＃12159](https://github.com/tikv/tikv/issues/12159)
     -   ネットワークが貧弱な場合、正常にコミットされた楽観的トランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正しました[＃34066](https://github.com/pingcap/tidb/issues/34066)
-    -   低品質のネットワークでレプリカ読み取りが有効になっている場合に発生する TiKVpanic問題を修正[＃12046](https://github.com/tikv/tikv/issues/12046)
+    -   低品質のネットワークでレプリカ読み取りが有効になっている場合に発生する TiKV panic問題を修正[＃12046](https://github.com/tikv/tikv/issues/12046)
 
 -   PD
 
@@ -113,7 +113,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   ローカルトンネルが有効な場合、キャンセルされた MPP クエリによってタスクが永久にハングする可能性があるバグを修正しました[＃4229](https://github.com/pingcap/tiflash/issues/4229)
     -   クエリがキャンセルされたときに発生するメモリリークの問題を修正しました[＃4098](https://github.com/pingcap/tiflash/issues/4098)
     -   `DATETIME`を`DECIMAL` にキャストするときに発生する誤った結果を修正 [＃4151](https://github.com/pingcap/tiflash/issues/4151)
-    -   `Snapshot`複数の DDL 操作[＃4072](https://github.com/pingcap/tiflash/issues/4072)と同時に適用された場合にTiFlashpanicが発生する可能性がある問題を修正しました
+    -   `Snapshot`複数の DDL 操作と同時に適用された場合にTiFlash panicが発生する可能性がある問題を修正しました [＃4072](https://github.com/pingcap/tiflash/issues/4072)
     -   無効なストレージディレクトリ設定が予期しない動作を引き起こすバグを修正[＃4093](https://github.com/pingcap/tiflash/issues/4093)
     -   一部の例外が適切に処理されないバグを修正[＃4101](https://github.com/pingcap/tiflash/issues/4101)
     -   `INT`を`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正しました[＃3920](https://github.com/pingcap/tiflash/issues/3920)
@@ -143,10 +143,10 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   TiCDC
 
         -   所有者の変更によって生じた誤ったメトリクスを修正[＃4774](https://github.com/pingcap/tiflow/issues/4774)
-        -   `Canal-JSON` nil [＃4736](https://github.com/pingcap/tiflow/issues/4736)サポートしていないために発生する可能性がある TiCDCpanic問題を修正しました
+        -   `Canal-JSON` nil サポートしていないために発生する可能性がある TiCDC panic問題を修正しました [＃4736](https://github.com/pingcap/tiflow/issues/4736)
         -   Unified Sorter で使用されるワーカープールの安定性の問題を修正しました [＃4447](https://github.com/pingcap/tiflow/issues/4447)
         -   一部のケースでシーケンスが誤って複製されるバグを修正[＃4552](https://github.com/pingcap/tiflow/issues/4552)
-        -   `Canal-JSON` `string` [＃4635](https://github.com/pingcap/tiflow/issues/4635)を誤って処理した場合に発生する可能性のある TiCDCpanic問題を修正しました
+        -   `Canal-JSON` `string` を誤って処理した場合に発生する可能性のある TiCDC panic問題を修正しました [＃4635](https://github.com/pingcap/tiflow/issues/4635)
         -   PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[＃4248](https://github.com/pingcap/tiflow/issues/4248)
         -   MySQLシンクが`batch-replace-enable`無効になっているときに重複した`replace` SQL文を生成するバグを修正[＃4501](https://github.com/pingcap/tiflow/issues/4501)
         -   `rename tables` DDL によって発生した DML 構造エラーを修正 [＃5059](https://github.com/pingcap/tiflow/issues/5059)

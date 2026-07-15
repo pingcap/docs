@@ -122,7 +122,7 @@ TiDB バージョン: 7.5.5
 
 -   TiFlash
 
-    -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlashpanic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   2番目のパラメータが負のの場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [＃9604](https://github.com/pingcap/tiflash/issues/9604) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブル スキーマを解析できない問題を修正しました。 [＃9461](https://github.com/pingcap/tiflash/issues/9461) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)

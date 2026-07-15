@@ -51,7 +51,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 -   TiKV
 
     -   リージョン[#13553](https://github.com/tikv/tikv/issues/13553) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)のバッチスナップショットによってスナップショットデータが不完全になる可能性がある問題を修正しました
-    -   フロー制御が有効で、 `level0_slowdown_trigger`明示的に[＃11424](https://github.com/tikv/tikv/issues/11424) @ [Connor1996](https://github.com/Connor1996)に設定されている場合に QPS が低下する問題を修正しました
+    -   フロー制御が有効で、 `level0_slowdown_trigger`明示的に設定されている場合に QPS が低下する問題を修正しました [＃11424](https://github.com/tikv/tikv/issues/11424) @ [Connor1996](https://github.com/Connor1996)
     -   TiKV が Web ID プロバイダーからエラーを取得し、デフォルトのプロバイダーにフェイルバックしたときに、権限拒否エラーが発生する問題を修正しました。 [＃13122](https://github.com/tikv/tikv/issues/13122) @ [3pointer](https://github.com/3pointer)
     -   TiKVインスタンスが隔離されたネットワーク環境にある場合、TiKVサービスが数分間利用できなくなる問題を修正[＃12966](https://github.com/tikv/tikv/issues/12966) @ [cosven](https://github.com/cosven)
 
@@ -60,7 +60,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   リージョンツリーの統計が不正確になる可能性がある問題を修正[＃5318](https://github.com/tikv/pd/issues/5318) @ [rleungx](https://github.com/rleungx)
     -   TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @ [HunDunDM](https://github.com/HunDunDM)
     -   PD がダッシュボード プロキシ リクエストを正しく処理できない問題を修正しました [＃5321](https://github.com/tikv/pd/issues/5321) @ [HunDunDM](https://github.com/HunDunDM)
-    -   不健全なリージョンがPDpanic[＃5491](https://github.com/tikv/pd/issues/5491) @ [nolouch](https://github.com/nolouch)を引き起こす可能性がある問題を修正
+    -   不健全なリージョンがPD panicを引き起こす可能性がある問題を修正 [＃5491](https://github.com/tikv/pd/issues/5491) @ [nolouch](https://github.com/nolouch)
 
 -   TiFlash
 

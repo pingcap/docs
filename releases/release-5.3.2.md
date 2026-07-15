@@ -69,7 +69,7 @@ TiDB バージョン: 5.3.2
     -   空の文字列の型変換を実行するときに TiKV がパニックになる問題を修正[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効な場合の悲観的トランザクションにおけるコミットレコードの重複の可能性を修正[＃12615](https://github.com/tikv/tikv/issues/12615)
     -   Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告するバグを修正しました [＃12478](https://github.com/tikv/tikv/issues/12478)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)バッチ分割の競合によって発生する TiKVpanicの問題を修正しました。
+    -   ピアの破壊とリージョンバッチ分割の競合によって発生する TiKV panicの問題を修正しました。 [＃12368](https://github.com/tikv/tikv/issues/12368)
     -   ネットワークが貧弱な場合、正常にコミットされた楽観的トランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正しました[＃34066](https://github.com/pingcap/tidb/issues/34066)
     -   マージリージョンのリージョンが無効な場合に TiKV がパニックを起こしてピアを予期せず破棄する問題を修正[＃12232](https://github.com/tikv/tikv/issues/12232)
     -   古いメッセージによって TiKV がpanicを起こすバグを修正[＃12023](https://github.com/tikv/tikv/issues/12023)
@@ -77,12 +77,12 @@ TiDB バージョン: 5.3.2
     -   Ubuntu 18.04 でTiKVがプロファイリングを実行するときに発生する可能性のあるpanic問題を修正しました [＃9765](https://github.com/tikv/tikv/issues/9765)
     -   tikv-ctl が間違った文字列一致のために誤った結果を返す問題を修正[＃12329](https://github.com/tikv/tikv/issues/12329)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正しました [＃12109](https://github.com/tikv/tikv/issues/12109)
-    -   リージョン[＃12048](https://github.com/tikv/tikv/issues/12048)をマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKVpanic問題を修正しました。
+    -   リージョンをマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKV panic問題を修正しました。 [＃12048](https://github.com/tikv/tikv/issues/12048)
     -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
 
 -   PD
 
-    -   ホットリージョンにリーダーがない場合に発生するPDpanicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
+    -   ホットリージョンにリーダーがない場合に発生するPD panicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
     -   PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     -   いくつかのコーナーケースにおけるTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)

@@ -47,7 +47,7 @@ TiDB バージョン: 6.1.6
     -   カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @ [YangKeao](https://github.com/YangKeao)
     -   DDLを使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータが同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @ [zimulala](https://github.com/zimulala)
     -   `information_schema.columns`テーブルを結合すると TiDB がpanic[＃32459](https://github.com/pingcap/tidb/issues/32459) @ [tangenta](https://github.com/tangenta)を起こす問題を修正
-    -   実行プラン[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)を生成する際に不整合な InfoSchema が取得され、TiDBpanicが発生する問題を修正しました。
+    -   実行プラン[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)を生成する際に不整合な InfoSchema が取得され、TiDB panicが発生する問題を修正しました。
     -   実行中にTiFlash が生成された列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @ [mjonss](https://github.com/mjonss)
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990) @ [fzzf678](https://github.com/fzzf678)

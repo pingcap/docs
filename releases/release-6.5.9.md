@@ -66,7 +66,7 @@ TiDB バージョン: 6.5.9
     -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   `auto analyze`パーティションテーブルを処理しているときに`tidb_merge_partition_stats_concurrency`変数が有効にならない問題を修正しました [＃47594](https://github.com/pingcap/tidb/issues/47594) @ [hawkingrei](https://github.com/hawkingrei)
     -   自動統計更新の時間枠を設定した後、その時間枠外でも統計が更新される可能性がある問題を修正[＃49552](https://github.com/pingcap/tidb/issues/49552) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
+    -   `approx_percentile`関数が TiDB panicを引き起こす可能性がある問題を修正しました [＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[＃49566](https://github.com/pingcap/tidb/issues/49566) [＃50850](https://github.com/pingcap/tidb/issues/50850) [＃50855](https://github.com/pingcap/tidb/issues/50855) @ [jiyfhust](https://github.com/jiyfhust)
     -   CTEクエリのメモリ使用量が制限を超えたときに発生するゴルーチンリークの問題を修正しました [＃50337](https://github.com/pingcap/tidb/issues/50337) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `force-init-stats` に設定されている場合に TiDB が対応するポートを listen しない問題を修正しました [＃51473](https://github.com/pingcap/tidb/issues/51473) @ [hawkingrei](https://github.com/hawkingrei)

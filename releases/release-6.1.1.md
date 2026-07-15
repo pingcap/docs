@@ -158,7 +158,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
         -   同期ポイントが有効な場合に、一部のシナリオでチェンジフィードがスタックする問題を修正[＃6827](https://github.com/pingcap/tiflow/issues/6827) @ [hicqu](https://github.com/hicqu)
         -   CDCサーバーの再起動後にchangefeed APIが正常に動作しないバグを修正[＃5837](https://github.com/pingcap/tiflow/issues/5837) @ [asddongmen](https://github.com/asddongmen)
         -   ブラックホールシンクのデータ競合問題を修正 [＃6206](https://github.com/pingcap/tiflow/issues/6206) @ [asddongmen](https://github.com/asddongmen)
-        -   `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198) @ [Rustin170506](https://github.com/Rustin170506)を設定すると TiCDCpanic問題を修正しました
+        -   `enable-old-value = false` [#6198](https://github.com/pingcap/tiflow/issues/6198) @ [Rustin170506](https://github.com/Rustin170506)を設定すると TiCDC panic問題を修正しました
         -   再実行ログ機能が有効になっている場合のデータ一貫性の問題を修正[＃6189](https://github.com/pingcap/tiflow/issues/6189) [＃6368](https://github.com/pingcap/tiflow/issues/6368) [＃6277](https://github.com/pingcap/tiflow/issues/6277) [＃6456](https://github.com/pingcap/tiflow/issues/6456) [＃6695](https://github.com/pingcap/tiflow/issues/6695) [#6764](https://github.com/pingcap/tiflow/issues/6764) [＃6859](https://github.com/pingcap/tiflow/issues/6859) @ [asddongmen](https://github.com/asddongmen)
         -   非同期的に再実行イベントを書き込むことで、再実行ログのパフォーマンス低下を修正[＃6011](https://github.com/pingcap/tiflow/issues/6011) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   MySQLシンクがIPv6アドレスに接続できない問題を修正 [＃6135](https://github.com/pingcap/tiflow/issues/6135) @ [Rustin170506](https://github.com/Rustin170506)

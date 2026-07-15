@@ -98,7 +98,7 @@ TiDB バージョン: 7.5.3
     -   リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @ [HuSharp](https://github.com/HuSharp)
     -   PD がオペレータ チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @ [lhy1024](https://github.com/lhy1024)
     -   削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [＃8286](https://github.com/tikv/pd/issues/8286) @ [JmPotato](https://github.com/JmPotato)
-    -   TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPDpanic[＃8323](https://github.com/tikv/pd/issues/8323) @ [JmPotato](https://github.com/JmPotato)が発生する問題を修正しました
+    -   TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @ [JmPotato](https://github.com/JmPotato)
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @ [releungx](https://github.com/releungx)
     -   PD構成項目[`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)が有効になっているときにPDログが完全に編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @ [releungx](https://github.com/releungx)
     -   ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @ [JmPotato](https://github.com/JmPotato)

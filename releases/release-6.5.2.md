@@ -55,7 +55,7 @@ TiDB バージョン: 6.5.2
     -   `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[＃42268](https://github.com/pingcap/tidb/issues/42268) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラー メッセージは「cgroup v1 からファイルメモリ.stat を読み取れません: /sys/メモリ.stat をオープンすると、そのようなファイルまたはディレクトリが見つかりません」です[＃42659](https://github.com/pingcap/tidb/issues/42659) @ [hawkingrei](https://github.com/hawkingrei)
     -   DDLデータバックフィルを実行するときにトランザクションで頻繁に発生する書き込み競合を修正 [＃24427](https://github.com/pingcap/tidb/issues/24427) @ [mjonss](https://github.com/mjonss)
-    -   実行プラン[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)を生成する際に不整合な InfoSchema が取得され、TiDBpanicが発生する問題を修正しました。
+    -   実行プランを生成する際に不整合な InfoSchema が取得され、TiDB panicが発生する問題を修正しました。 [＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   DDLを使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータが同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @ [zimulala](https://github.com/zimulala)
     -   トランザクション内で`PointUpdate`実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)
     -   カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @ [YangKeao](https://github.com/YangKeao)

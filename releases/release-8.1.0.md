@@ -229,7 +229,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     -   PD マイクロサービス モードのオン/オフを切り替えるときに TSO が停止する可能性がある問題を修正[＃7849](https://github.com/tikv/pd/issues/7849) @ [JmPotato](https://github.com/JmPotato)
     -   DR自動同期の`State`監視メトリックにデータが表示されない問題を修正[＃7974](https://github.com/tikv/pd/issues/7974) @ [lhy1024](https://github.com/lhy1024)
-    -   バイナリバージョンのチェックでPDpanic[＃7978](https://github.com/tikv/pd/issues/7978) @ [JmPotato](https://github.com/JmPotato)が発生する可能性がある問題を修正
+    -   バイナリバージョンのチェックでPD panicが発生する可能性がある問題を修正 [＃7978](https://github.com/tikv/pd/issues/7978) @ [JmPotato](https://github.com/JmPotato)
     -   TTLパラメータを解析する際に発生する型変換エラーを修正[＃7980](https://github.com/tikv/pd/issues/7980) @ [HuSharp](https://github.com/HuSharp)
     -   展開された2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @ [TonsnakeLin](https://github.com/TonsnakeLin)
     -   pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [＃8022](https://github.com/tikv/pd/issues/8022) @ [HuSharp](https://github.com/HuSharp)

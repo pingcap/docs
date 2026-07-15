@@ -33,11 +33,11 @@ TiDB バージョン: 5.0.3
     -   `TopN`演算子をTiFlash にプッシュダウンするサポート [＃25162](https://github.com/pingcap/tidb/pull/25162)
     -   組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [＃24415](https://github.com/pingcap/tidb/issues/24415)
     -   デュアルテーブルからユニオンブランチを削除することをサポート [＃25614](https://github.com/pingcap/tidb/pull/25614)
-    -   内蔵機能`replace()` TiFlash [＃25565](https://github.com/pingcap/tidb/pull/25565)に押し下げる機能をサポート
+    -   内蔵機能`replace()` TiFlash にプッシュダウンする機能をサポート [＃25565](https://github.com/pingcap/tidb/pull/25565)
     -   `day()`関数`unix_timestamp()` `concat()` TiFlash に`concat_ws()`ダウンする`datediff()` `year()` `datesub()` [＃25564](https://github.com/pingcap/tidb/pull/25564)
     -   集計オペレータのコスト係数を最適化する [＃25241](https://github.com/pingcap/tidb/pull/25241)
     -   `Limit`演算子をTiFlash にプッシュダウンするサポート [＃25159](https://github.com/pingcap/tidb/pull/25159)
-    -   内蔵機能`str_to_date` TiFlash [＃25148](https://github.com/pingcap/tidb/pull/25148)に押し下げる機能をサポート
+    -   内蔵機能`str_to_date` TiFlash にプッシュダウンする機能をサポート [＃25148](https://github.com/pingcap/tidb/pull/25148)
     -   MPP外部結合がテーブル行数に基づいてビルドテーブルを選択できるようにします。 [＃25142](https://github.com/pingcap/tidb/pull/25142)
     -   `abs()`関数`left()` `right()` TiFlash にプッシュダウンする機能をサポート [＃25133](https://github.com/pingcap/tidb/pull/25133)
     -   ブロードキャストカルテシアン結合をTiFlash にプッシュダウンする機能をサポート [＃25106](https://github.com/pingcap/tidb/pull/25106)
@@ -116,7 +116,7 @@ TiDB バージョン: 5.0.3
     -   TiFlashがデルタデータを削除できない潜在的な問題を修正
     -   TiFlashが`CAST`関数で非バイナリ文字に間違ったパディングを追加するバグを修正しました
     -   複雑な`GROUP BY`列の集計クエリを処理するときに誤った結果が発生する問題を修正しました
-    -   書き込み圧力が高い場合に発生するTiFlashpanic問題を修正
+    -   書き込み圧力が高い場合に発生するTiFlash panic問題を修正
     -   右結合キーが null 値ではなく、左結合キーが null 値の場合に発生するpanicを修正しました。
     -   `read-index`リクエストに長い時間がかかる可能性がある問題を修正しました
     -   読み取り負荷が大きい場合に発生するpanic問題を修正しました
@@ -140,7 +140,7 @@ TiDB バージョン: 5.0.3
 
     -   TiDB Lightning
 
-        -   一部の特殊データにおけるTiDB Lightningpanic問題を修正[＃1213](https://github.com/pingcap/br/issues/1213)
+        -   一部の特殊データにおけるTiDB Lightning panic問題を修正[＃1213](https://github.com/pingcap/br/issues/1213)
         -   TiDB Lightningがインポートした大きなCSVファイルを分割する際に報告されるEOFエラーを修正しました[＃1133](https://github.com/pingcap/br/issues/1133)
         -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[＃1186](https://github.com/pingcap/br/pull/1186)
         -   TiDBがParquetファイル内の`DECIMAL`種類のデータを解析できない問題を修正 [＃1277](https://github.com/pingcap/br/pull/1277)

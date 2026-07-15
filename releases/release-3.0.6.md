@@ -15,7 +15,7 @@ TiDB Ansible バージョン: 3.0.6
 
 -   SQLオプティマイザー
     -   ウィンドウ関数 AST が SQL テキストを復元した後に結果が正しくない (たとえば、 `over w`が誤って`over (w)` に復元される) 問題を修正しました。 [＃12933](https://github.com/pingcap/tidb/pull/12933)
-    -   `STREAM AGG()`から`doubleRead` [＃12690](https://github.com/pingcap/tidb/pull/12690)押し下げる問題を修正
+    -   `STREAM AGG()`から`doubleRead` プッシュダウンする問題を修正 [＃12690](https://github.com/pingcap/tidb/pull/12690)
     -   SQLバインディングで引用符が正しく処理されない問題を修正 [＃13117](https://github.com/pingcap/tidb/pull/13117)
     -   `select max(_tidb_rowid) from t`シナリオを最適化してテーブル全体のスキャンを回避する[＃13095](https://github.com/pingcap/tidb/pull/13095)
     -   クエリステートメントに変数代入式が含まれている場合にクエリ結果が正しくない問題を修正しました[＃13231](https://github.com/pingcap/tidb/pull/13231)
@@ -93,7 +93,7 @@ TiDB Ansible バージョン: 3.0.6
 -   TiDB Binlog
     -   Drainer で`initial-commit-ts` 「-1」に設定されている場合にPDから初期レプリケーションタイムスタンプを取得します。 [＃788](https://github.com/pingcap/tidb-binlog/pull/788)
     -   Drainerの`Checkpoint`ストレージを下流から分離し、MySQLまたはローカルファイルへの保存`Checkpoint`サポートします。 [＃790](https://github.com/pingcap/tidb-binlog/pull/790)
-    -   レプリケーションデータベース/テーブルフィルタリングを構成する際に空の値を使用することで発生するDrainerpanicの問題を修正しました[＃801](https://github.com/pingcap/tidb-binlog/pull/801)
+    -   レプリケーションデータベース/テーブルフィルタリングを構成する際に空の値を使用することで発生するDrainer panicの問題を修正しました[＃801](https://github.com/pingcap/tidb-binlog/pull/801)
     -   Drainer が下流にbinlogファイルを適用できないためにpanicが発生した後、プロセスが終了せずにデッドロック状態になる問題を修正しました[＃807](https://github.com/pingcap/tidb-binlog/pull/807)
     -   gRPC の`GracefulStop` が原因で、Pumpが終了時にブロックされる問題を修正しました。 [＃817](https://github.com/pingcap/tidb-binlog/pull/817)
     -   TiDB (v3.0.6 以降) で`DROP COLUMN`の実行中に列が欠落しているbinlogを受信するとDrainer が失敗する問題を修正しました[＃827](https://github.com/pingcap/tidb-binlog/pull/827)

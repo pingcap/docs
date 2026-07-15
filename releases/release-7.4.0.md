@@ -383,7 +383,7 @@ TiDB バージョン: 7.4.0
     -   Titanが有効になっているときにTiKVが起動に失敗し、 `Blob file deleted twice`エラーが発生する問題を修正しました [＃15454](https://github.com/tikv/tikv/issues/15454) @ [Connor1996](https://github.com/Connor1996)
     -   スレッド自発的およびスレッド非自発的監視パネルにデータがない問題を修正しました [＃15413](https://github.com/tikv/tikv/issues/15413) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   raftstore-applys が継続的に増加するデータエラーを修正しました [＃15371](https://github.com/tikv/tikv/issues/15371) @ [Connor1996](https://github.com/Connor1996)
-    -   リージョン[＃13311](https://github.com/tikv/tikv/issues/13311) @ [zyguan](https://github.com/zyguan)のメタデータが正しくないことによって引き起こされるTiKVpanic問題を修正しました
+    -   リージョンのメタデータが正しくないことによって引き起こされるTiKV panic問題を修正しました [＃13311](https://github.com/tikv/tikv/issues/13311) @ [zyguan](https://github.com/zyguan)
     -   `sync_recovery`から`sync` に切り替えた後に QPS が 0 に低下する問題を修正しました [＃15366](https://github.com/tikv/tikv/issues/15366) @ [nolouch](https://github.com/nolouch)
     -   オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)
     -   CpuRecord によって発生する潜在的なメモリリークの問題を修正しました [＃15304](https://github.com/tikv/tikv/issues/15304) @ [overvenus](https://github.com/overvenus)
