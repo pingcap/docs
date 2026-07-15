@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 3.0.10
 ## TiKV {#tikv}
 
 -   Raftstore
-    -   リージョンマージの失敗[＃6481](https://github.com/tikv/tikv/pull/6481)によって発生するシステムpanicの問題 #6460 またはデータ損失の問題 #598 を修正しました
+    -   リージョンマージの失敗によって発生するシステムpanicの問題＃6460またはデータ損失の問題＃598を修正しました [＃6481](https://github.com/tikv/tikv/pull/6481)
     -   スケジューリングの公平性を最適化するためのサポート`yield`と、リーダーのスケジューリングの安定性を向上させるためのリーダーの事前転送のサポート[＃6563](https://github.com/tikv/tikv/pull/6563)
 
 ## PD {#pd}
