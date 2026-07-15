@@ -112,6 +112,6 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
 
 メトリクス インターフェイスは、TiDB クラスター全体のステータスとパフォーマンスを監視します。
 
--   他のデプロイメント方法を使用する場合は、このインターフェイスを使用する前に[PrometheusとGrafanaをデプロイする](/deploy-monitoring-services.md)を実行します。
+-   他のデプロイメント方法を使用する場合は、このインターフェイスを使用する前に[PrometheusとGrafanaをデプロイしてください](/deploy-monitoring-services.md)。
 
 Prometheus と Grafana が正常にデプロイされたら、 [Grafanaを設定する](/deploy-monitoring-services.md#configure-grafana) 。
