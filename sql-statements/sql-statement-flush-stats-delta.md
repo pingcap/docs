@@ -3,9 +3,9 @@ title: FLUSH STATS_DELTA
 summary: An overview of the usage of FLUSH STATS_DELTA for the TiDB database.
 ---
 
-# FLUSH STATS_DELTA
+# FLUSH STATS_DELTA <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
-`FLUSH STATS_DELTA` persists the pending statistics delta buffered in TiDB memory to the [`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table immediately. TiDB supports this statement starting from v8.5.7 and v9.0.0.
+`FLUSH STATS_DELTA` persists the pending statistics delta buffered in TiDB memory to the [`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table immediately.
 
 When you change data using DML statements (such as `INSERT`, `UPDATE`, and `DELETE`), TiDB records the changes to the total number of rows and the number of modified rows for each table, buffers these changes (called the statistics delta) in the memory of the TiDB instance that executes the statements, and persists them to the `mysql.stats_meta` system table every 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) (60 seconds by default). For more information, see [Automatic update](/statistics.md#automatic-update).
 
