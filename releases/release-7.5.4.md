@@ -27,7 +27,7 @@ TiDB バージョン: 7.5.4
     -   RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [＃17269](https://github.com/tikv/tikv/issues/17269) @ [AndreMouche](https://github.com/AndreMouche)
     -   ピアメッセージチャネルのメモリ使用量を@ [Connor1996](https://github.com/Connor1996)に減らす [＃16229](https://github.com/tikv/tikv/issues/16229)
     -   ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [＃15874](https://github.com/tikv/tikv/issues/15874) @ [LykxSassinator](https://github.com/LykxSassinator)
-    -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が[＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)で一貫して動作することを保証します。
+    -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)
 
 -   TiFlash
 
@@ -50,7 +50,7 @@ TiDB バージョン: 7.5.4
 -   TiDB
 
     -   データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`失敗する問題を修正[＃54415](https://github.com/pingcap/tidb/issues/54415) @ [lance6716](https://github.com/lance6716)
-    -   厳密に自己増分ではないRANGEパーティションテーブルが[＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)で作成できる問題を修正
+    -   厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)
     -   `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [＃52985](https://github.com/pingcap/tidb/issues/52985) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   SQLが異常中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)
     -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに、繰り返しの開閉操作によって発生した以前のパラメータ値の再利用により発生する予期しないエラーを修正します。 [＃53600](https://github.com/pingcap/tidb/issues/53600) @ [XuHuaiyu](https://github.com/XuHuaiyu)
@@ -65,7 +65,7 @@ TiDB バージョン: 7.5.4
     -   メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)
     -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [＃53713](https://github.com/pingcap/tidb/issues/53713) @ [AilinKid](https://github.com/AilinKid)
     -   `SELECT ... WHERE ... ORDER BY ...`文の実行パフォーマンスが場合によっては低下する問題を修正[＃54969](https://github.com/pingcap/tidb/issues/54969) @ [tiancaiamao](https://github.com/tiancaiamao)
-    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB が[＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)でpanicを起こす可能性がある問題を修正しました
+    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   copタスク構築中にTiDBクエリをキャンセルできない問題を修正[＃55957](https://github.com/pingcap/tidb/issues/55957) @ [yibin87](https://github.com/yibin87)
     -   整数型の列に小さい表示幅が指定された場合、 `out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @ [windtalker](https://github.com/windtalker)
     -   一意インデックスを追加するときに`duplicate entry`発生する可能性がある問題を修正 [＃56161](https://github.com/pingcap/tidb/issues/56161) @ [tangenta](https://github.com/tangenta)
@@ -88,7 +88,7 @@ TiDB バージョン: 7.5.4
     -   マイクロサービスモードでPDリーダーが切り替えられたときにスケジューリングサーバーでデータ競合が発生する可能性がある問題を修正しました [＃8538](https://github.com/tikv/pd/issues/8538) @ [lhy1024](https://github.com/lhy1024)
     -   リソース グループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [＃7346](https://github.com/tikv/pd/issues/7346) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブルの時間データ型が正しくない問題を修正[＃54770](https://github.com/pingcap/tidb/issues/54770) @ [HuSharp](https://github.com/HuSharp)
-    -   `replication.strictly-match-label`を`true`に設定するとTiFlashが[＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)で起動しなくなる問題を修正
+    -   `replication.strictly-match-label`を`true`に設定するとTiFlashが起動しなくなる問題を修正 [＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)
 
 -   TiFlash
 

@@ -90,7 +90,7 @@ TiDB バージョン: 6.5.4
     -   パーティションテーブルに新しいインデックスを追加した後、パーティションパーティションテーブルで統計の自動収集が正しくトリガーされない可能性がある問題を修正しました。 [＃41638](https://github.com/pingcap/tidb/issues/41638) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   統計情報におけるSQL実行詳細のメモリ消費量が多すぎると、極端なケースでTiDB OOMが発生する問題を修正[＃44047](https://github.com/pingcap/tidb/issues/44047) @ [wshwsh12](https://github.com/wshwsh12)
     -   バッチコプロセッサの再試行によって誤ったリージョン情報が生成される可能性があり、クエリが失敗する問題を修正しました[＃44622](https://github.com/pingcap/tidb/issues/44622) @ [windtalker](https://github.com/windtalker)
-    -   `indexMerge`のクエリが[＃45279](https://github.com/pingcap/tidb/issues/45279) @ [xzhangxian1008](https://github.com/xzhangxian1008)で強制終了されたときに発生するハングアップの問題を修正しました
+    -   `indexMerge`のクエリが強制終了されたときに発生するハングアップの問題を修正しました [＃45279](https://github.com/pingcap/tidb/issues/45279) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   システムテーブル`INFORMATION_SCHEMA.TIKV_REGION_STATUS`をクエリすると、場合によっては誤った結果が返される問題を修正しました[＃45531](https://github.com/pingcap/tidb/issues/45531) @ [Defined2014](https://github.com/Defined2014)
     -   `tidb_enable_parallel_apply`有効になっている場合、MPP モードでのクエリ結果が正しくない問題を修正[＃45299](https://github.com/pingcap/tidb/issues/45299) @ [windtalker](https://github.com/windtalker)
     -   `tidb_opt_agg_push_down`有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[＃44795](https://github.com/pingcap/tidb/issues/44795) @ [AilinKid](https://github.com/AilinKid)
@@ -125,7 +125,7 @@ TiDB バージョン: 6.5.4
     -   暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [＃15080](https://github.com/tikv/tikv/issues/15080) @ [tabokie](https://github.com/tabokie)
     -   ストアハートビートの再試行回数をに減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
     -   保留中の圧縮バイト量が多い場合にトラフィック制御が機能しない可能性がある問題を修正しました。 [＃14392](https://github.com/tikv/tikv/issues/14392) @ [Connor1996](https://github.com/Connor1996)
-    -   PDとTiKV間のネットワーク中断によりPITRが[＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました
+    -   PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)
     -   TiCDC の古い値機能が有効になっているときに TiKV がより多くのメモリを消費する可能性がある問題を修正[＃14815](https://github.com/tikv/tikv/issues/14815) @ [YuJuncen](https://github.com/YuJuncen)
 
 -   PD
@@ -189,7 +189,7 @@ TiDB バージョン: 6.5.4
         -   `NEXT_GLOBAL_ROW_ID` を保存するときにデータ型が間違っている問題を修正しました [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [lyzx2001](https://github.com/lyzx2001)
         -   `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)
         -   PDクラスタアドレスがに変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
-        -   一部のPDノードが[＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)で失敗した場合にデータのインポートが失敗する問題を修正しました
+        -   一部のPDノードが失敗した場合にデータのインポートが失敗する問題を修正しました [＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)
         -   AUTO_INCREMENT列を持つテーブルが`AUTO_ID_CACHE=1`設定すると、ID アロケータのベース値が正しくなくなるという問題を修正しました [＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)
 
     -   Dumpling

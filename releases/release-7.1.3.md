@@ -94,7 +94,7 @@ TiDB バージョン: 7.1.3
     -   TiKV の実行速度が非常に遅い場合、リージョンと[金星の上](https://github.com/overvenus)マージ後にpanicする可能性がある問題を修正しました。 [＃16111](https://github.com/tikv/tikv/issues/16111)
     -   解決済みのTSが2時間ブロックされる可能性がある問題を修正[＃15520](https://github.com/tikv/tikv/issues/15520) [＃39130](https://github.com/pingcap/tidb/issues/39130) @ [overvenus](https://github.com/overvenus)
     -   TiKVがraft log を追加できないため`ServerIsBusy`エラーを報告する問題を修正しました。 [＃15800](https://github.com/tikv/tikv/issues/15800) @ [tonyxuqqi](https://github.com/tonyxuqqi)
-    -   BRが[＃15684](https://github.com/tikv/tikv/issues/15684) @ [YuJuncen](https://github.com/YuJuncen)でクラッシュしたときにスナップショットの復元が停止する可能性がある問題を修正しました
+    -   BRがクラッシュしたときにスナップショットの復元が停止する可能性がある問題を修正しました [＃15684](https://github.com/tikv/tikv/issues/15684) @ [YuJuncen](https://github.com/YuJuncen)
     -   大規模なトランザクションを追跡するときに、古い読み取りの解決済み TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました [＃14864](https://github.com/tikv/tikv/issues/14864) @ [overvenus](https://github.com/overvenus)
     -   破損したSSTファイルが他のTiKVノードに広がる可能性がある問題を修正 [＃15986](https://github.com/tikv/tikv/issues/15986) @ [Connor1996](https://github.com/Connor1996)
     -   にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [＃15817](https://github.com/tikv/tikv/issues/15817) @ [Connor1996](https://github.com/Connor1996)
@@ -104,7 +104,7 @@ TiDB バージョン: 7.1.3
     -   TiKV を再起動したときに発生する TiKV OOM 問題を修正し、適用されていないRaftログが多数存在するようになりました[＃15770](https://github.com/tikv/tikv/issues/15770) @ [overvenus](https://github.com/overvenus)
     -   `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [＃15621](https://github.com/tikv/tikv/issues/15621) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   Titanの`blob-run-mode`がオンラインに更新できない問題を修正 [＃15978](https://github.com/tikv/tikv/issues/15978) @ [tonyxuqqi](https://github.com/tonyxuqqi)
-    -   PDとTiKV間のネットワーク中断によりPITRが[＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました
+    -   PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)
     -   Raftピアを削除するときに TiKV コプロセッサが古いデータを返す可能性がある問題を修正しました [＃16069](https://github.com/tikv/tikv/issues/16069) @ [overvenus](https://github.com/overvenus)
 
 -   PD

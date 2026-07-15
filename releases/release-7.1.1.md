@@ -62,7 +62,7 @@ TiDB バージョン: 7.1.1
     -   バッチコプロセッサの再試行によって誤ったリージョン情報が生成される可能性があり、クエリが失敗する問題を修正しました[＃44622](https://github.com/pingcap/tidb/issues/44622) @ [windtalker](https://github.com/windtalker)
     -   インデックススキャンにおける潜在的なデータ競合問題を修正 [＃45126](https://github.com/pingcap/tidb/issues/45126) @ [wshwsh12](https://github.com/wshwsh12)
     -   `tidb_enable_parallel_apply`有効になっている場合、MPP モードでのクエリ結果が正しくない問題を修正[＃45299](https://github.com/pingcap/tidb/issues/45299) @ [windtalker](https://github.com/windtalker)
-    -   `indexMerge`のクエリが[＃45279](https://github.com/pingcap/tidb/issues/45279) @ [xzhangxian1008](https://github.com/xzhangxian1008)で強制終了されたときに発生するハングアップの問題を修正しました
+    -   `indexMerge`のクエリが強制終了されたときに発生するハングアップの問題を修正しました [＃45279](https://github.com/pingcap/tidb/issues/45279) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   統計情報におけるSQL実行詳細のメモリ消費量が多すぎると、極端なケースでTiDB OOMが発生する問題を修正[＃44047](https://github.com/pingcap/tidb/issues/44047) @ [wshwsh12](https://github.com/wshwsh12)
     -   `FormatSQL()`メソッドが入力の非常に長い SQL 文を適切に切り捨てることができない問題を修正しました。 [＃44542](https://github.com/pingcap/tidb/issues/44542) @ [hawkingrei](https://github.com/hawkingrei)
     -   クラスタのアップグレード中に DDL 操作が停止し、アップグレードが失敗する問題を修正しました[＃44158](https://github.com/pingcap/tidb/issues/44158) @ [zimulala](https://github.com/zimulala)

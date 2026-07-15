@@ -22,12 +22,12 @@ TiDB バージョン: 8.1.2
 
 -   TiDB
 
-    -   リクエストユニット（RU）設定に関するメトリックを[＃8444](https://github.com/tikv/pd/issues/8444) @ [nolouch](https://github.com/nolouch)に追加します
+    -   リクエストユニット（RU）設定に関するメトリックを追加します [＃8444](https://github.com/tikv/pd/issues/8444) @ [nolouch](https://github.com/nolouch)
 
 -   TiKV
 
     -   空のテーブルと小さなリージョンのシナリオでのリージョン結合の速度を向上 [＃17376](https://github.com/tikv/tikv/issues/17376) @ [LykxSassinator](https://github.com/LykxSassinator)
-    -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が[＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)で一貫して動作することを保証します。
+    -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [＃17269](https://github.com/tikv/tikv/issues/17269) @ [AndreMouche](https://github.com/AndreMouche)
     -   `import.num-threads`構成項目を動的に変更するサポート[＃17807](https://github.com/tikv/tikv/issues/17807) @ [RidRisR](https://github.com/RidRisR)
     -   Rusoto ライブラリを AWS Rust SDK に置き換えて、バックアップと復元のために外部ストレージ(Amazon S3 など) にアクセスします。これにより、IMDSv2 や EKS Pod Identity などの AWS 機能との互換性が向上します。 [＃12371](https://github.com/tikv/tikv/issues/12371) @ [akoshchiy](https://github.com/akoshchiy)
@@ -67,11 +67,11 @@ TiDB バージョン: 8.1.2
     -   配置ルールを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [＃54961](https://github.com/pingcap/tidb/issues/54961) @ [hawkingrei](https://github.com/hawkingrei)
     -   メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)
     -   copタスク構築中にTiDBクエリをキャンセルできない問題を修正 [＃55957](https://github.com/pingcap/tidb/issues/55957) @ [yibin87](https://github.com/yibin87)
-    -   TTLジョブ実行中に値を`tidb_ttl_delete_worker_count`減らすとジョブが[＃55561](https://github.com/pingcap/tidb/issues/55561) @ [lcwangchao](https://github.com/lcwangchao)で完了しなくなる問題を修正しました
+    -   TTLジョブ実行中に値を`tidb_ttl_delete_worker_count`減らすとジョブが完了しなくなる問題を修正しました [＃55561](https://github.com/pingcap/tidb/issues/55561) @ [lcwangchao](https://github.com/lcwangchao)
     -   `CAST`関数が文字セットの明示的な設定をサポートしていない問題を修正しました [＃55677](https://github.com/pingcap/tidb/issues/55677) @ [Defined2014](https://github.com/Defined2014)
     -   書き込み競合が発生したときにTTLタスクをキャンセルできない問題を修正[＃56422](https://github.com/pingcap/tidb/issues/56422) @ [YangKeao](https://github.com/YangKeao)
     -   `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @ [solotzg](https://github.com/solotzg)
-    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB が[＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)でpanicを起こす可能性がある問題を修正しました
+    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   相関サブクエリと CTE を含むクエリを実行すると、TiDB がハングしたり、誤った結果が返されたりする問題を修正しました。 [＃55551](https://github.com/pingcap/tidb/issues/55551) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   インデックス追加中の再試行によって発生するデータ インデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @ [lance6716](https://github.com/lance6716)
     -   整数型の列に小さい表示幅を指定すると`out of range`エラーが発生する可能性がある問題を修正しました。 [＃55837](https://github.com/pingcap/tidb/issues/55837) @ [windtalker](https://github.com/windtalker)
@@ -95,10 +95,10 @@ TiDB バージョン: 8.1.2
 
 -   TiKV
 
-    -   構成`resolved-ts.advance-ts-interval`有効にならないため、TiKV が[＃17107](https://github.com/tikv/tikv/issues/17107) @ [MyonKeminta](https://github.com/MyonKeminta)で再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。
+    -   構成`resolved-ts.advance-ts-interval`有効にならないため、TiKV が再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。 [＃17107](https://github.com/tikv/tikv/issues/17107) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   リソース制御をトリガーするときに一部のタスクで高いテールレイテンシーが発生する問題を修正しました [＃17589](https://github.com/tikv/tikv/issues/17589) @ [glorv](https://github.com/glorv)
     -   リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[＃17840](https://github.com/tikv/tikv/issues/17840) @ [glorv](https://github.com/glorv)
-    -   ディスクが[＃17939](https://github.com/tikv/tikv/issues/17939) @ [LykxSassinator](https://github.com/LykxSassinator)でスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました
+    -   ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました [＃17939](https://github.com/tikv/tikv/issues/17939) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[＃17884](https://github.com/tikv/tikv/issues/17884) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [＃17469](https://github.com/tikv/tikv/issues/17469) @ [hbisheng](https://github.com/hbisheng)
     -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
@@ -112,7 +112,7 @@ TiDB バージョン: 8.1.2
     -   PD HTTPクライアントの再試行ロジックが効果がない可能性がある問題を修正[＃8499](https://github.com/tikv/pd/issues/8499) @ [JmPotato](https://github.com/JmPotato)
     -   潜在的なセキュリティ脆弱性を修正するために、Gin Web Framework のバージョンを v1.9.1 から v1.10.0 にアップグレードしました[＃8643](https://github.com/tikv/pd/issues/8643) @ [JmPotato](https://github.com/JmPotato)
     -   etcdリーダー遷移中にPDがリーダーを素早く再選出できない問題を修正 [＃8823](https://github.com/tikv/pd/issues/8823) @ [rleungx](https://github.com/rleungx)
-    -   `replication.strictly-match-label`から`true`に設定するとTiFlash が[＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)で起動しなくなる問題を修正
+    -   `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)
     -   同じストアID で繰り返し作成された場合に`evict-leader-scheduler`正常に動作しない問題を修正 [＃8756](https://github.com/tikv/pd/issues/8756) @ [okJiang](https://github.com/okJiang)
     -   乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [＃8674](https://github.com/tikv/pd/issues/8674) @ [rleungx](https://github.com/rleungx)
     -   ホットスポット キャッシュのメモリリーク問題を修正 [＃8698](https://github.com/tikv/pd/issues/8698) @ [lhy1024](https://github.com/lhy1024)
@@ -141,7 +141,7 @@ TiDB バージョン: 8.1.2
     -   Backup & Restore (BR)
 
         -   ログに暗号化された情報が出力される問題を修正 [＃57585](https://github.com/pingcap/tidb/issues/57585) @ [kennytm](https://github.com/kennytm)
-        -   AWS EBS に基づくスナップショットバックアップが準備フェーズで失敗し、バックアップが[＃52049](https://github.com/pingcap/tidb/issues/52049) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました。
+        -   AWS EBS に基づくスナップショットバックアップが準備フェーズで失敗し、バックアップが停止する可能性がある問題を修正しました。 [＃52049](https://github.com/pingcap/tidb/issues/52049) @ [YuJuncen](https://github.com/YuJuncen)
         -   バックアップと復元のチェックポイントパスが一部の外部ストレージと互換性がない問題を修正[＃55265](https://github.com/pingcap/tidb/issues/55265) @ [Leavrth](https://github.com/Leavrth)
         -   `k8s.io/api`ライブラリバージョンにアップグレードして潜在的なセキュリティ脆弱性を修正します [＃57790](https://github.com/pingcap/tidb/issues/57790) @ [BornChanger](https://github.com/BornChanger)
         -   クラスター内に多数のテーブルがあるが、実際のデータサイズが小さい場合に PITR タスクが`Information schema is out of date`エラーを返す可能性がある問題を修正しました[＃57743](https://github.com/pingcap/tidb/issues/57743) @ [Tristan1900](https://github.com/Tristan1900)

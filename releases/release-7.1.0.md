@@ -325,7 +325,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     -   スナップショットの実行内容に基づいてストア制限のサイズを自動調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2` （実験的）に設定してください。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`設定を手動で調整する必要がなくなります（ [＃6147](https://github.com/tikv/pd/issues/6147) @ [bufferflies](https://github.com/bufferflies) 。
     -   ストレージエンジンが raft-kv2 [＃6297](https://github.com/tikv/pd/issues/6297) @ [bufferflies](https://github.com/bufferflies)の場合、ホットスポット スケジューラによって不安定な負荷のリージョンが頻繁にスケジュールされるのを避けるために、履歴負荷情報を追加します。
-    -   リーダーのヘルスチェックメカニズムを追加します。etcdリーダーが配置されているPDサーバーがリーダーとして選出できない場合、PDはetcdリーダーをアクティブに切り替え、PDリーダーが[＃6403](https://github.com/tikv/pd/issues/6403) @ [nolouch](https://github.com/nolouch)で利用可能であることを確認します。
+    -   リーダーのヘルスチェックメカニズムを追加します。etcdリーダーが配置されているPDサーバーがリーダーとして選出できない場合、PDはetcdリーダーをアクティブに切り替え、PDリーダーが利用可能であることを確認します。 [＃6403](https://github.com/tikv/pd/issues/6403) @ [nolouch](https://github.com/nolouch)
 
 -   TiFlash
 
@@ -439,7 +439,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
         -   TiCDC タイムゾーン設定[＃8798](https://github.com/pingcap/tiflow/issues/8798) @ [Rustin170506](https://github.com/Rustin170506)の問題を修正
         -   PDアドレスまたはリーダーに障害が発生したときにTiCDCが自動的に回復できない問題を修正[＃8812](https://github.com/pingcap/tiflow/issues/8812) [＃8877](https://github.com/pingcap/tiflow/issues/8877) @ [asddongmen](https://github.com/asddongmen)
-        -   上流の TiKV ノードの 1 つが[＃8858](https://github.com/pingcap/tiflow/issues/8858) @ [hicqu](https://github.com/hicqu)でクラッシュするとチェックポイントの遅延が増加する問題を修正しました
+        -   上流の TiKV ノードの 1 つがクラッシュするとチェックポイントの遅延が増加する問題を修正しました [＃8858](https://github.com/pingcap/tiflow/issues/8858) @ [hicqu](https://github.com/hicqu)
         -   オブジェクトストレージにデータを複製する際に、上流の`EXCHANGE PARTITION`操作が下流の[＃8914](https://github.com/pingcap/tiflow/issues/8914) @ [CharlesCheung96](https://github.com/CharlesCheung96)に正しく複製されない問題を修正しました。
         -   いくつかの特殊なシナリオでソートコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正しました[＃8974](https://github.com/pingcap/tiflow/issues/8974) @ [hicqu](https://github.com/hicqu)
         -   下流の Kafka シンクがローリング再起動されたときに発生する TiCDC ノードpanicを修正しました[＃9023](https://github.com/pingcap/tiflow/issues/9023) @ [asddongmen](https://github.com/asddongmen)

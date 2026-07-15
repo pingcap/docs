@@ -143,7 +143,7 @@ TiDB バージョン: 7.5.2
     -   TableDual で述語プッシュダウンを無効にすることで発生するパフォーマンス低下の問題を修正しました [＃50614](https://github.com/pingcap/tidb/issues/50614) @ [time-and-fate](https://github.com/time-and-fate)
     -   TiDBサーバーがHTTPインターフェース経由でラベルを追加し成功を返すが、それが有効にならない問題を修正[＃51427](https://github.com/pingcap/tidb/issues/51427) @ [you06](https://github.com/you06)
     -   取り込みモードでインデックスを追加すると、一部のコーナーケースでデータインデックスの不整合が発生する可能性がある問題を修正[＃51954](https://github.com/pingcap/tidb/issues/51954) @ [lance6716](https://github.com/lance6716)
-    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが[＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)で終了する可能性がある問題を修正しました。
+    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   無効な設定項目が含まれている場合、設定ファイルが有効にならない問題を修正しました [＃51399](https://github.com/pingcap/tidb/issues/51399) @ [Defined2014](https://github.com/Defined2014)
     -   SQL 文に`JOIN`が含まれ、文内の`SELECT`リストに定数のみが含まれる場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。 [＃50358](https://github.com/pingcap/tidb/issues/50358) @ [yibin87](https://github.com/yibin87)
     -   `determinate`モード（ `tidb_opt_objective='determinate'` ）でクエリに述語が含まれていない場合、統計がロードされない可能性がある問題を修正しました[＃48257](https://github.com/pingcap/tidb/issues/48257) @ [time-and-fate](https://github.com/time-and-fate)
@@ -236,7 +236,7 @@ TiDB バージョン: 7.5.2
         -   PDを再起動するとTiCDCノードがエラーで再起動する可能性がある問題を修正しました [＃10799](https://github.com/pingcap/tiflow/issues/10799) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   `open-protocol`の古い値部分が、実際のタイプではなく、タイプ`STRING`に応じて誤ってデフォルト値を出力する問題を修正しました。 [＃10803](https://github.com/pingcap/tiflow/issues/10803) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [＃10931](https://github.com/pingcap/tiflow/issues/10931) @ [3AceShowHand](https://github.com/3AceShowHand)
-        -   TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが[＃10859](https://github.com/pingcap/tiflow/issues/10859) @ [hongyunyan](https://github.com/hongyunyan)で停止する問題を修正しました。
+        -   TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [＃10859](https://github.com/pingcap/tiflow/issues/10859) @ [hongyunyan](https://github.com/hongyunyan)
         -   KVクライアントのデータ競合によりTiCDCがpanicになる問題を修正 [＃10718](https://github.com/pingcap/tiflow/issues/10718) @ [asddongmen](https://github.com/asddongmen)
         -   アップストリームの主キーまたは一意キーを更新すると、アップストリームとダウンストリーム間でデータの不整合が発生する可能性がある問題を修正[＃10918](https://github.com/pingcap/tiflow/issues/10918) @ [lidezhu](https://github.com/lidezhu)
 
@@ -247,7 +247,7 @@ TiDB バージョン: 7.5.2
 
     -   TiDB Lightning
 
-        -   EBS BRが[＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)で実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました
+        -   EBS BRが実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました [＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)
         -   ソースファイル内の互換性のない SQL ステートメントが原因で、 TiDB Lightning がデータインポート中に`no database selected`報告する問題を修正しました。 [＃51800](https://github.com/pingcap/tidb/issues/51800) @ [lance6716](https://github.com/lance6716)
         -   PDLeaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。 [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
         -   Parquet 形式の空のテーブルをインポートするときにTiDB Lightning がパニックになる問題を修正しました [＃52518](https://github.com/pingcap/tidb/issues/52518) @ [kennytm](https://github.com/kennytm)

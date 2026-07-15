@@ -55,7 +55,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
     -   TiCDC
 
-        -   シンプルプロトコルを使用したチェンジフィードが[＃11315](https://github.com/pingcap/tiflow/issues/11315) @ [asddongmen](https://github.com/asddongmen)で開始されたときに、すべてのテーブルの BOOTSTRAP メッセージをダウンストリームに一度に送信することをサポートします。
+        -   シンプルプロトコルを使用したチェンジフィードが開始されたときに、すべてのテーブルの BOOTSTRAP メッセージをダウンストリームに一度に送信することをサポートします。 [＃11315](https://github.com/pingcap/tiflow/issues/11315) @ [asddongmen](https://github.com/asddongmen)
         -   ダウンストリームがメッセージキュー（MQ）またはクラウドストレージの場合、生のイベントを直接出力することをサポート[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
@@ -64,8 +64,8 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
     -   HashAgg 演算子のディスク スピルにより並列計算中に誤ったクエリ結果が発生する問題を修正しました。 [＃55290](https://github.com/pingcap/tidb/issues/55290) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)
-    -   厳密に自己増分ではないRANGEパーティションテーブルが[＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)で作成できる問題を修正
-    -   `_tidb_rowid`の`PointGet`実行プランが[＃54583](https://github.com/pingcap/tidb/issues/54583) @ [Defined2014](https://github.com/Defined2014)で生成できる問題を修正
+    -   厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)
+    -   `_tidb_rowid`の`PointGet`実行プランが生成できる問題を修正 [＃54583](https://github.com/pingcap/tidb/issues/54583) @ [Defined2014](https://github.com/Defined2014)
     -   スローログ内の内部SQL文がデフォルトでnullに編集される問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) [＃52743](https://github.com/pingcap/tidb/issues/52743) [＃53264](https://github.com/pingcap/tidb/issues/53264) @ [lcwangchao](https://github.com/lcwangchao)
     -   `UPDATE`操作で複数テーブルシナリオで TiDB OOM が発生する可能性がある問題を修正 [＃53742](https://github.com/pingcap/tidb/issues/53742) @ [hawkingrei](https://github.com/hawkingrei)
     -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [hi-rustin](https://github.com/hi-rustin)
@@ -78,7 +78,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   常に`true` となる述語を持つ`SHOW ERRORS`ステートメントを実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @ [elsa0520](https://github.com/elsa0520)
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `SELECT DISTINCT CAST(col AS DECIMAL), CAST(col AS SIGNED) FROM ...`クエリを実行すると誤った結果が返される可能性がある問題を修正[＃53726](https://github.com/pingcap/tidb/issues/53726) @ [hawkingrei](https://github.com/hawkingrei)
-    -   DDL ステートメントが etcd を誤って使用し、タスクが[＃52335](https://github.com/pingcap/tidb/issues/52335) @ [wjhuang2016](https://github.com/wjhuang2016)でキューに入れられる問題を修正しました。
+    -   DDL ステートメントが etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [＃52335](https://github.com/pingcap/tidb/issues/52335) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   グローバル統計の`Distinct_count`情報が間違っている可能性がある問題を修正しました[＃53752](https://github.com/pingcap/tidb/issues/53752) @ [hawkingrei](https://github.com/hawkingrei)
     -   自動統計収集中にシステム変数`tidb_enable_async_merge_global_stats`と`tidb_analyze_partition_concurrency`有効にならない問題を修正[＃53972](https://github.com/pingcap/tidb/issues/53972) @ [hi-rustin](https://github.com/hi-rustin)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @ [xzhangxian1008](https://github.com/xzhangxian1008)
@@ -143,7 +143,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @ [rleungx](https://github.com/rleungx)
     -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @ [nolouch](https://github.com/nolouch)
     -   `store limit` に関連するデータ競合問題を修正 [＃8253](https://github.com/tikv/pd/issues/8253) @ [lhy1024](https://github.com/lhy1024)
-    -   `scheduling`マイクロサービスが[＃8331](https://github.com/tikv/pd/issues/8331) @ [rleungx](https://github.com/rleungx)で有効化された後にスケーリングの進行状況が正しく表示されない問題を修正しました
+    -   `scheduling`マイクロサービスが有効化された後にスケーリングの進行状況が正しく表示されない問題を修正しました [＃8331](https://github.com/tikv/pd/issues/8331) @ [rleungx](https://github.com/rleungx)
     -   `tso`マイクロサービスが有効になった後、TSO ノードが動的に更新されない問題を修正[＃8154](https://github.com/tikv/pd/issues/8154) @ [rleungx](https://github.com/rleungx)
     -   リソースグループのデータ競合問題を修正 [＃8267](https://github.com/tikv/pd/issues/8267) @ [HuSharp](https://github.com/HuSharp)
     -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @ [nolouch](https://github.com/nolouch)

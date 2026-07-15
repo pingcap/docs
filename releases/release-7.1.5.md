@@ -46,7 +46,7 @@ TiDB バージョン: 7.1.5
 
     -   `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する可能性がある問題を修正しました[＃51547](https://github.com/pingcap/tidb/issues/51547) @ [YangKeao](https://github.com/YangKeao)
     -   SQL 文に`JOIN`が含まれ、文内の`SELECT`リストに定数のみが含まれる場合に、MPP を使用してクエリを実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました。 [＃50358](https://github.com/pingcap/tidb/issues/50358) @ [yibin87](https://github.com/yibin87)
-    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが[＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)で終了する可能性がある問題を修正しました。
+    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   初期化が完了する前に TiDBサーバーが正常とマークされる問題を修正[＃51596](https://github.com/pingcap/tidb/issues/51596) @ [shenqidebaozi](https://github.com/shenqidebaozi)
     -   主キーの型が`VARCHAR` の場合に`ALTER TABLE ... COMPACT TIFLASH REPLICA`誤って終了する可能性がある問題を修正しました [＃51810](https://github.com/pingcap/tidb/issues/51810) @ [breezewish](https://github.com/breezewish)
     -   `shuffleExec`予期せず終了すると TiDB がクラッシュする問題を修正[＃48230](https://github.com/pingcap/tidb/issues/48230) @ [wshwsh12](https://github.com/wshwsh12)
@@ -65,7 +65,7 @@ TiDB バージョン: 7.1.5
     -   `INSERT IGNORE`実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [Rustin170506](https://github.com/Rustin170506)
-    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが[＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)で終了する可能性がある問題を修正しました。
+    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   TableDual で述語プッシュダウンを無効にすることで発生するパフォーマンス低下の問題を修正しました [＃50614](https://github.com/pingcap/tidb/issues/50614) @ [time-and-fate](https://github.com/time-and-fate)
     -   サブクエリの`HAVING`句に相関列が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。 [＃51107](https://github.com/pingcap/tidb/issues/51107) @ [hawkingrei](https://github.com/hawkingrei)
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
@@ -106,7 +106,7 @@ TiDB バージョン: 7.1.5
 
     -   TiCDC
 
-        -   TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが[＃10859](https://github.com/pingcap/tiflow/issues/10859) @ [hongyunyan](https://github.com/hongyunyan)で停止する問題を修正しました。
+        -   TiCDC が上流に書き込まれた後に下流の`Exchange Partition ... With Validation` DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [＃10859](https://github.com/pingcap/tiflow/issues/10859) @ [hongyunyan](https://github.com/hongyunyan)
         -   変更フィードを再開するときに`snapshot lost caused by GC`時間内に報告されず、変更フィードの`checkpoint-ts` TiDB の GC セーフポイントよりも小さい問題を修正しました。 [＃10463](https://github.com/pingcap/tiflow/issues/10463) @ [sdojjy](https://github.com/sdojjy)
         -   テーブルレプリケーションタスクをスケジュールするときに TiCDC がパニックになる問題を修正しました [＃10613](https://github.com/pingcap/tiflow/issues/10613) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   DDL文が頻繁に実行されるシナリオで、間違ったBarrierTSが原因でデータが間違ったCSVファイルに書き込まれる問題を修正[＃10668](https://github.com/pingcap/tiflow/issues/10668) @ [lidezhu](https://github.com/lidezhu)

@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.10
     -   `?`引数を含む`CONV` `EXECUTE` `PREPARE`を複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @ [qw4990](https://github.com/qw4990)
     -   オプティマイザーヒント[＃53767](https://github.com/pingcap/tidb/issues/53767) @ [hawkingrei](https://github.com/hawkingrei)使用時に誤った警告情報が表示される問題を修正しました
     -   情報スキーマキャッシュミス[＃53428](https://github.com/pingcap/tidb/issues/53428) @ [crazycs520](https://github.com/crazycs520)により、古い読み取りのクエリレイテンシーが増加する問題を修正しました。
-    -   DDL ステートメントが etcd を誤って使用し、タスクが[＃52335](https://github.com/pingcap/tidb/issues/52335) @ [wjhuang2016](https://github.com/wjhuang2016)でキューに入れられる問題を修正しました。
+    -   DDL ステートメントが etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [＃52335](https://github.com/pingcap/tidb/issues/52335) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   式インデックス[＃51431](https://github.com/pingcap/tidb/issues/51431) @ [ywqzzy](https://github.com/ywqzzy)の名前を変更する`RENAME INDEX`を実行したときに内部列の名前が変更されない問題を修正しました
     -   `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラー[＃53673](https://github.com/pingcap/tidb/issues/53673) @ [tangenta](https://github.com/tangenta)が発生する可能性がある問題を修正
     -   JOIN条件に暗黙的な型変換[＃46556](https://github.com/pingcap/tidb/issues/46556) @ [qw4990](https://github.com/qw4990)が含まれている場合にTiDBがpanic可能性がある問題を修正しました

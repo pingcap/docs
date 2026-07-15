@@ -63,7 +63,7 @@ TiDB バージョン: 6.5.9
     -   `IN()`述語に`NULL` が含まれている場合にクエリ結果が正しくない問題を修正しました [＃51560](https://github.com/pingcap/tidb/issues/51560) @ [winoros](https://github.com/winoros)
     -   `BINARY`タイプの JSON をクエリすると、場合によってはエラーが発生する可能性がある問題を修正しました[＃51547](https://github.com/pingcap/tidb/issues/51547) @ [YangKeao](https://github.com/YangKeao)
     -   テーブルにクラスター化インデックスがある場合に並列`Apply`で誤った結果が生成される可能性がある問題を修正しました。 [＃51372](https://github.com/pingcap/tidb/issues/51372) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが[＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)で終了する可能性がある問題を修正しました。
+    -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   `auto analyze`パーティションテーブルを処理しているときに`tidb_merge_partition_stats_concurrency`変数が有効にならない問題を修正しました [＃47594](https://github.com/pingcap/tidb/issues/47594) @ [hawkingrei](https://github.com/hawkingrei)
     -   自動統計更新の時間枠を設定した後、その時間枠外でも統計が更新される可能性がある問題を修正[＃49552](https://github.com/pingcap/tidb/issues/49552) @ [hawkingrei](https://github.com/hawkingrei)
     -   `approx_percentile`関数が TiDBpanic[＃40463](https://github.com/pingcap/tidb/issues/40463) @ [xzhangxian1008](https://github.com/xzhangxian1008)を引き起こす可能性がある問題を修正しました
@@ -94,7 +94,7 @@ TiDB バージョン: 6.5.9
 -   PD
 
     -   スケーリングの進行状況が正しく表示されない問題を修正[＃7726](https://github.com/tikv/pd/issues/7726) @ [CabinfeverB](https://github.com/CabinfeverB)
-    -   `MergeLabels`関数が[＃7535](https://github.com/tikv/pd/issues/7535) @ [lhy1024](https://github.com/lhy1024)で呼び出されたときにデータ競合が発生する問題を修正しました
+    -   `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [＃7535](https://github.com/tikv/pd/issues/7535) @ [lhy1024](https://github.com/lhy1024)
     -   リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [＃7728](https://github.com/tikv/pd/issues/7728) @ [CabinfeverB](https://github.com/CabinfeverB)
     -   クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @ [rleungx](https://github.com/rleungx)
 

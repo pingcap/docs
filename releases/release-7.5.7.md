@@ -73,8 +73,8 @@ TiDB バージョン: 7.5.7
     -   `IndexMerge`および`IndexLookUp`演算子の共有 KV リクエストがクエリをプッシュダウンするときにデータ競合を引き起こす問題を修正しました。 [＃60175](https://github.com/pingcap/tidb/issues/60175) @ [you06](https://github.com/you06)
     -   ハッシュ集計演算子における潜在的な goroutine リークの問題を修正しました。 [＃58004](https://github.com/pingcap/tidb/issues/58004) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   生成された列のインデックスが表示に設定されている場合、MPP プランが選択されない可能性がある問題を修正しました。 [＃47766](https://github.com/pingcap/tidb/issues/47766) @ [AilinKid](https://github.com/AilinKid)
-    -   `_charset(xxx), _charset(xxx2), ...`を含む SQL 文が[＃58447](https://github.com/pingcap/tidb/issues/58447) @ [xhebox](https://github.com/xhebox)で異なるダイジェストを生成する問題を修正しました
-    -   頻繁なリージョンのマージにより TTL ジョブが[＃61512](https://github.com/pingcap/tidb/issues/61512) @ [YangKeao](https://github.com/YangKeao)で開始できなくなる問題を修正しました
+    -   `_charset(xxx), _charset(xxx2), ...`を含む SQL 文が異なるダイジェストを生成する問題を修正しました [＃58447](https://github.com/pingcap/tidb/issues/58447) @ [xhebox](https://github.com/xhebox)
+    -   頻繁なリージョンのマージにより TTL ジョブが開始できなくなる問題を修正しました [＃61512](https://github.com/pingcap/tidb/issues/61512) @ [YangKeao](https://github.com/YangKeao)
     -   損失のあるDDL文を実行した後にTiFlashクエリ結果が矛盾する問題を修正しました [＃61455](https://github.com/pingcap/tidb/issues/61455) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `ALTER RANGE meta SET PLACEMENT POLICY` のキー範囲が正しくない問題を修正しました [＃60888](https://github.com/pingcap/tidb/issues/60888) @ [nolouch](https://github.com/nolouch)
     -   Grafanaの**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正しました[＃57176](https://github.com/pingcap/tidb/issues/57176) @ [hawkingrei](https://github.com/hawkingrei)
@@ -105,7 +105,7 @@ TiDB バージョン: 7.5.7
     -   システム変数`tidb_cost_model_version`のデフォルト値が誤って設定されている問題を修正[＃61565](https://github.com/pingcap/tidb/issues/61565) @ [hawkingrei](https://github.com/hawkingrei)
     -   テーブルの最初の列が仮想生成列の場合に統計が正しくない可能性がある問題を修正しました [＃61606](https://github.com/pingcap/tidb/issues/61606) @ [winoros](https://github.com/winoros)
     -   述語の簡素化でプラン キャッシュが誤ってスキップされる問題を修正しました [＃61513](https://github.com/pingcap/tidb/issues/61513) @ [hawkingrei](https://github.com/hawkingrei)
-    -   インデックスの追加中に`ADMIN CANCEL DDL JOBS`実行すると、インデックスの追加プロセスが[＃61087](https://github.com/pingcap/tidb/issues/61087) @ [tangenta](https://github.com/tangenta)でハングする問題を修正しました。
+    -   インデックスの追加中に`ADMIN CANCEL DDL JOBS`実行すると、インデックスの追加プロセスがハングする問題を修正しました。 [＃61087](https://github.com/pingcap/tidb/issues/61087) @ [tangenta](https://github.com/tangenta)
     -   一部の内部 SQL 実行が失敗した後でも`ADMIN CHECK`が成功を返す問題を修正[＃61612](https://github.com/pingcap/tidb/issues/61612) @ [joechenrh](https://github.com/joechenrh)
     -   マルチスキーマ変更で複数のインデックスを追加した後にデータとインデックスが不整合になる問題を修正 [＃61255](https://github.com/pingcap/tidb/issues/61255) @ [tangenta](https://github.com/tangenta)
 
@@ -116,7 +116,7 @@ TiDB バージョン: 7.5.7
     -   TiKVがクライアントがをデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [＃18079](https://github.com/tikv/tikv/issues/18079) @ [ekexium](https://github.com/ekexium)
     -   TiKV が高同時実行で過剰な SST 取り込み要求を許可する問題を修正 [＃18452](https://github.com/tikv/tikv/issues/18452) @ [hbisheng](https://github.com/hbisheng)
     -   Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`誤って表示される問題を修正しました [＃15990](https://github.com/tikv/tikv/issues/15990) @ [Connor1996](https://github.com/Connor1996)
-    -   TiKV が[＃18233](https://github.com/tikv/tikv/issues/18233) @ [LykxSassinator](https://github.com/LykxSassinator)で再起動した後に予期しない`Server is busy`エラーが発生する問題を修正しました
+    -   TiKV が再起動した後に予期しない`Server is busy`エラーが発生する問題を修正しました [＃18233](https://github.com/tikv/tikv/issues/18233) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [overvenus](https://github.com/overvenus)
     -   スローログの`StoreMsg`ログエントリの誤解を招く説明を修正 [＃18561](https://github.com/tikv/tikv/issues/18561) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   スレッドメモリメトリックの誤りを修正[＃18125](https://github.com/tikv/tikv/issues/18125) @ [Connor1996](https://github.com/Connor1996)
@@ -133,7 +133,7 @@ TiDB バージョン: 7.5.7
 -   TiFlash
 
     -   `IMPORT INTO`または`BR restore` の実行中に SST ファイルを誤って削除することによって発生するpanicの問題を修正しました [＃10141](https://github.com/pingcap/tiflash/issues/10141) @ [CalvinNeo](https://github.com/CalvinNeo)
-    -   `((NULL))`形式で式インデックスを作成するとTiFlash が[＃9891](https://github.com/pingcap/tiflash/issues/9891) @ [JaySon-Huang](https://github.com/JaySon-Huang)でpanicになる問題を修正しました
+    -   `((NULL))`形式で式インデックスを作成するとTiFlash がpanicになる問題を修正しました [＃9891](https://github.com/pingcap/tiflash/issues/9891) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   不規則なリージョンキー範囲を持つスナップショットを処理するときにTiFlash がpanic可能性がある問題を修正しました [＃10147](https://github.com/pingcap/tiflash/issues/10147) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   クラスター内のテーブルに多数の`ENUM`型列が含まれている場合、 TiFlashが大量のメモリを消費する可能性がある問題を修正しました。 [＃9947](https://github.com/pingcap/tiflash/issues/9947) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   16 MiB を超えるデータの単一行を挿入した後にTiFlash が再起動に失敗する可能性がある問題を修正しました [＃10052](https://github.com/pingcap/tiflash/issues/10052) @ [JaySon-Huang](https://github.com/JaySon-Huang)
@@ -152,7 +152,7 @@ TiDB バージョン: 7.5.7
 
         -   外部ストレージをダウンストリームとして使用すると、チェンジフィードが停止する可能性がある問題を修正しました。 [＃9162](https://github.com/pingcap/tiflow/issues/9162) @ [asddongmen](https://github.com/asddongmen)
         -   レプリケーショントラフィックが下流の Kafka のトラフィックしきい値を超えた後に、変更フィードがスタックする可能性がある問題を修正しました。 [＃12110](https://github.com/pingcap/tiflow/issues/12110) @ [3AceShowHand](https://github.com/3AceShowHand)
-        -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが[＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [hongyunyan](https://github.com/hongyunyan)で停止する可能性がある問題を修正しました。
+        -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [hongyunyan](https://github.com/hongyunyan)
         -   仮想列を含むテーブルでイベントフィルタ式を評価するとpanicが発生する可能性がある問題を修正[＃12206](https://github.com/pingcap/tiflow/issues/12206) @ [lidezhu](https://github.com/lidezhu)
         -   ディスパッチャ構成における列名とインデックス名の大文字と小文字を区別するマッチングの問題を修正しました [＃12103](https://github.com/pingcap/tiflow/issues/12103) @ [wk989898](https://github.com/wk989898)
         -   古いストア ID が原因で、同じ IP アドレス上の TiKV ノードをスケールインまたはスケールアウトした後に、解決された ts ラグが増加し続ける問題を修正しました。 [＃12162](https://github.com/pingcap/tiflow/issues/12162) @ [3AceShowHand](https://github.com/3AceShowHand)
@@ -160,7 +160,7 @@ TiDB バージョン: 7.5.7
     -   TiDB Lightning
 
         -   クラウドストレージから TiDB に Parquet ファイルをインポートするときに、 TiDB Lightning が数時間停止する可能性がある問題を修正しました。 [＃60224](https://github.com/pingcap/tidb/issues/60224) @ [joechenrh](https://github.com/joechenrh)
-        -   TiKVへのRPCリクエストが[＃61326](https://github.com/pingcap/tidb/issues/61326) @ [OliverS929](https://github.com/OliverS929)でタイムアウトするとTiDB Lightningが`context deadline exceeded`エラーを返す問題を修正しました
+        -   TiKVへのRPCリクエストがタイムアウトするとTiDB Lightningが`context deadline exceeded`エラーを返す問題を修正しました [＃61326](https://github.com/pingcap/tidb/issues/61326) @ [OliverS929](https://github.com/OliverS929)
 
     -   NG Monitoring
 

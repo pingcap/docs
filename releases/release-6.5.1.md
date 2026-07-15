@@ -93,7 +93,7 @@ TiDB バージョン: 6.5.1
     -   動的トリミングモードでパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました [＃40368](https://github.com/pingcap/tidb/issues/40368) @ [Yisaer](https://github.com/Yisaer)
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [zyguan](https://github.com/zyguan)
     -   `SHOW PROCESSLIST` の結果で`EXECUTE`情報が null になる問題を修正しました [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [YangKeao](https://github.com/YangKeao)
-    -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が[＃41057](https://github.com/pingcap/tidb/issues/41057) @ [wshwsh12](https://github.com/wshwsh12)で終了しない可能性がある問題を修正しました
+    -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [＃41057](https://github.com/pingcap/tidb/issues/41057) @ [wshwsh12](https://github.com/wshwsh12)
     -   `indexMerge`エラーに遭遇した後に TiDB がpanic可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [guo-shaoge](https://github.com/guo-shaoge) @ [windtalker](https://github.com/windtalker)
     -   `ANALYZE`文が`KILL` で終了する可能性がある問題を修正しました [＃41825](https://github.com/pingcap/tidb/issues/41825) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   `indexMerge` で goroutine リークが発生する可能性がある問題を修正しました [＃41605](https://github.com/pingcap/tidb/issues/41605) @ [guo-shaoge](https://github.com/guo-shaoge) [＃41545](https://github.com/pingcap/tidb/issues/41545)
@@ -111,10 +111,10 @@ TiDB バージョン: 6.5.1
     -   プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [＃41032](https://github.com/pingcap/tidb/issues/41032) @ [qw4990](https://github.com/qw4990) [＃40679](https://github.com/pingcap/tidb/issues/40679)
     -   プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [＃40224](https://github.com/pingcap/tidb/issues/40224) @ [qw4990](https://github.com/qw4990)
     -   `ignore_plan_cache`ヒントが`INSERT`ステートメント では機能しない可能性がある問題を修正しました [＃39717](https://github.com/pingcap/tidb/issues/39717) @ [qw4990](https://github.com/qw4990) [＃40079](https://github.com/pingcap/tidb/issues/40079)
-    -   自動分析により TiDB が[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)で終了できなくなる問題を修正しました
+    -   自動分析により TiDB が終了できなくなる問題を修正しました [＃40038](https://github.com/pingcap/tidb/issues/40038) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   パーティションテーブルの符号なし主キーに不正なアクセス間隔が構築される可能性がある問題を修正しました。 [＃40309](https://github.com/pingcap/tidb/issues/40309) @ [winoros](https://github.com/winoros)
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990)
-    -   パーティションテーブルにグローバルバインディングを作成すると、TiDB が[＃40368](https://github.com/pingcap/tidb/issues/40368) @ [Yisaer](https://github.com/Yisaer)で起動に失敗する可能性がある問題を修正しました。
+    -   パーティションテーブルにグローバルバインディングを作成すると、TiDB が起動に失敗する可能性がある問題を修正しました。 [＃40368](https://github.com/pingcap/tidb/issues/40368) @ [Yisaer](https://github.com/Yisaer)
     -   スローログでクエリプラン演算子が欠落する可能性がある問題を修正しました [＃41458](https://github.com/pingcap/tidb/issues/41458) @ [time-and-fate](https://github.com/time-and-fate)
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。 [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [Dousir9](https://github.com/Dousir9)
     -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) を追加するときにデータの不整合が発生する問題を修正しました [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [tangenta](https://github.com/tangenta) [＃40464](https://github.com/pingcap/tidb/issues/40464)
@@ -136,7 +136,7 @@ TiDB バージョン: 6.5.1
     -   特定の条件下で実行`replace-down-peer`が遅くなる問題を修正[＃5788](https://github.com/tikv/pd/issues/5788) @ [HunDunDM](https://github.com/HunDunDM)
     -   PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)
     -   リージョンスキャッタタスクが予期せず冗長レプリカを生成する問題を修正[＃5909](https://github.com/tikv/pd/issues/5909) @ [HunDunDM](https://github.com/HunDunDM)
-    -   `ReportMinResolvedTS`の呼び出しが[＃5965](https://github.com/tikv/pd/issues/5965) @ [HunDunDM](https://github.com/HunDunDM)で頻繁に発生する PD OOM 問題を修正しました
+    -   `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [＃5965](https://github.com/tikv/pd/issues/5965) @ [HunDunDM](https://github.com/HunDunDM)
     -   リージョン散布により、リーダーの分布が不均一になる可能性がある問題を修正しました。 [＃6017](https://github.com/tikv/pd/issues/6017) @ [HunDunDM](https://github.com/HunDunDM)
 
 -   TiFlash
@@ -161,7 +161,7 @@ TiDB バージョン: 6.5.1
         -   TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)
         -   ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[＃40797](https://github.com/pingcap/tidb/issues/40797) @ [Leavrth](https://github.com/Leavrth)
         -   完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[＃40704](https://github.com/pingcap/tidb/issues/40704) @ [Leavrth](https://github.com/Leavrth)
-        -   PITRエラーが[＃40576](https://github.com/pingcap/tidb/issues/40576) @ [Leavrth](https://github.com/Leavrth)で上書きされる問題を修正
+        -   PITRエラーが上書きされる問題を修正 [＃40576](https://github.com/pingcap/tidb/issues/40576) @ [Leavrth](https://github.com/Leavrth)
         -   PITR バックアップ タスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[＃41806](https://github.com/pingcap/tidb/issues/41806) @ [joccau](https://github.com/joccau)
 
     -   TiCDC

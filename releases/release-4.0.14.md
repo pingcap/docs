@@ -26,7 +26,7 @@ TiDB バージョン: 4.0.14
 -   TiKV
 
     -   保留中のPDハートビートの数を監視するメトリック`pending`を追加します。これは、遅いPDスレッドの問題の特定に役立ちます。 [＃10008](https://github.com/tikv/tikv/pull/10008)
-    -   BRがS3互換storage[＃10242](https://github.com/tikv/tikv/pull/10242)サポートするために仮想ホストアドレス指定モードの使用をサポート
+    -   BRがS3互換storageをサポートするために仮想ホストアドレス指定モードの使用をサポート [＃10242](https://github.com/tikv/tikv/pull/10242)
 
 -   TiDB Dashboard
 

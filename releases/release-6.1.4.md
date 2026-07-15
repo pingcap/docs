@@ -82,7 +82,7 @@ TiDB バージョン: 6.1.4
         -   Fix the issue that TiCDC mistakenly reports an error when the version of TiFlash is later than that of TiCDC [＃7744](https://github.com/pingcap/tiflow/issues/7744) @ [overvenus](https://github.com/overvenus)
         -   TiCDCが大規模なトランザクションを複製するときにOOMが発生する問題を修正 [＃7913](https://github.com/pingcap/tiflow/issues/7913) @ [overvenus](https://github.com/overvenus)
         -   TiCDCが大きなトランザクションを@ [Rustin170506](https://github.com/Rustin170506)に分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982)
-        -   `changefeed query`結果のうち`sasl-password`が[＃7182](https://github.com/pingcap/tiflow/issues/7182) @ [dveeden](https://github.com/dveeden)でマスクされない問題を修正しました
+        -   `changefeed query`結果のうち`sasl-password`がマスクされない問題を修正しました [＃7182](https://github.com/pingcap/tiflow/issues/7182) @ [dveeden](https://github.com/dveeden)
         -   Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [＃7657](https://github.com/pingcap/tiflow/issues/7657) @ [overvenus](https://github.com/overvenus)
 
     -   TiDB Data Migration (DM)
@@ -91,7 +91,7 @@ TiDB バージョン: 6.1.4
         -   binlogログクエリイベントの「COMMIT」によって DM がログを過剰に出力問題を修正しました [＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [liumengya94](https://github.com/liumengya94)
         -   SSL が`ssl-ca`しか設定されていない場合に DM タスクが起動に失敗する問題を修正しました [＃7941](https://github.com/pingcap/tiflow/issues/7941) @ [liumengya94](https://github.com/liumengya94)
         -   1つのテーブルに「更新」と「非更新」の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[＃7831](https://github.com/pingcap/tiflow/issues/7831) @ [lance6716](https://github.com/lance6716)
-        -   テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合に、フィルタルールが有効にならないか、DM が[＃7774](https://github.com/pingcap/tiflow/issues/7774) @ [lance6716](https://github.com/lance6716)でパニックになるバグを修正しました。
+        -   テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合に、フィルタルールが有効にならないか、DM がパニックになるバグを修正しました。 [＃7774](https://github.com/pingcap/tiflow/issues/7774) @ [lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 

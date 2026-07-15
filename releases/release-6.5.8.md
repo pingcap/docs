@@ -43,7 +43,7 @@ TiDB バージョン: 6.5.8
     -   `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [＃50519](https://github.com/pingcap/tidb/issues/50519) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   多数のテーブルまたはパーティションを処理するときに TiDB ノードが OOM エラーに遭遇する可能性がある問題を軽減します。 [＃50077](https://github.com/pingcap/tidb/issues/50077) @ [zimulala](https://github.com/zimulala)
     -   DDL所有者がネットワークから分離されている後に`ADD INDEX`実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @ [tangenta](https://github.com/tangenta)
-    -   クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが[＃50347](https://github.com/pingcap/tidb/issues/50347) @ [SeaRise](https://github.com/SeaRise)で発生すると TiDB がpanic可能性がある問題を修正しました。
+    -   クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanic可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @ [SeaRise](https://github.com/SeaRise)
     -   `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションをで終了できない問題を修正しました。 [＃49151](https://github.com/pingcap/tidb/issues/49151) @ [zyguan](https://github.com/zyguan)
     -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)
     -   `ORDER BY`句で`UNIQUE`インデックス検索を実行するとエラーが発生する可能性がある問題を修正しました。 [＃49920](https://github.com/pingcap/tidb/issues/49920) @ [jackysp](https://github.com/jackysp)
@@ -61,7 +61,7 @@ TiDB バージョン: 6.5.8
 
 -   PD
 
-    -   `pd-ctl`使用してリーダーのないリージョンを照会すると、PD が[＃7630](https://github.com/tikv/pd/issues/7630) @ [rleungx](https://github.com/rleungx)でpanicになる可能性がある問題を修正しました。
+    -   `pd-ctl`使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [＃7630](https://github.com/tikv/pd/issues/7630) @ [rleungx](https://github.com/rleungx)
 
 -   TiFlash
 
@@ -86,5 +86,5 @@ TiDB バージョン: 6.5.8
 
     -   TiDB Lightning
 
-        -   EBS BRが[＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)で実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました
+        -   EBS BRが実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました [＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)
         -   TiDB Lightningがファイルをバッチで取り込むときにデータが失われる可能性がある問題を修正しました [＃50198](https://github.com/pingcap/tidb/issues/50198) @ [D3Hunter](https://github.com/D3Hunter)

@@ -112,8 +112,8 @@ TiDB バージョン: 7.1.6
     -   統計[＃55684](https://github.com/pingcap/tidb/issues/55684) @ [winoros](https://github.com/winoros)を初期化するときに、非バイナリ照合の文字列列の統計の読み込みに失敗する可能性がある問題を修正しました。
     -   IndexJoin が Left Outer Anti Semi type [＃52902](https://github.com/pingcap/tidb/issues/52902) @ [yibin87](https://github.com/yibin87)のハッシュ値を計算するときに重複行を生成する問題を修正しました。
     -   `UNION`を含むクエリステートメントが誤った結果[＃52985](https://github.com/pingcap/tidb/issues/52985) @ [XuHuaiyu](https://github.com/XuHuaiyu)を返す可能性がある問題を修正しました
-    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB が[＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)でpanicを起こす可能性がある問題を修正しました
-    -   厳密に自己増分ではないRANGEパーティションテーブルが[＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)で作成できる問題を修正
+    -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @ [xzhangxian1008](https://github.com/xzhangxian1008)
+    -   厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [＃54829](https://github.com/pingcap/tidb/issues/54829) @ [Defined2014](https://github.com/Defined2014)
     -   メモリ使用量が`tidb_mem_quota_query` [＃55042](https://github.com/pingcap/tidb/issues/55042) @ [yibin87](https://github.com/yibin87)で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `IndexNestedLoopHashJoin` [＃49692](https://github.com/pingcap/tidb/issues/49692) @ [solotzg](https://github.com/solotzg)のデータ競合問題を修正
@@ -129,7 +129,7 @@ TiDB バージョン: 7.1.6
     -   相関サブクエリ[＃52777](https://github.com/pingcap/tidb/issues/52777) @ [yibin87](https://github.com/yibin87)における TopN 演算子の誤った結果を修正
     -   再帰CTE演算子がメモリ使用量[＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)を誤って追跡する問題を修正しました
     -   `SHOW COLUMNS`を使用してビュー[＃54964](https://github.com/pingcap/tidb/issues/54964) @ [lance6716](https://github.com/lance6716)の列を表示するとエラーが発生する問題を修正しました
-    -   TTLジョブ実行中に値を`tidb_ttl_delete_worker_count`減らすとジョブが[＃55561](https://github.com/pingcap/tidb/issues/55561) @ [lcwangchao](https://github.com/lcwangchao)で完了しなくなる問題を修正しました
+    -   TTLジョブ実行中に値を`tidb_ttl_delete_worker_count`減らすとジョブが完了しなくなる問題を修正しました [＃55561](https://github.com/pingcap/tidb/issues/55561) @ [lcwangchao](https://github.com/lcwangchao)
     -   再帰CTE [＃49721](https://github.com/pingcap/tidb/issues/49721) @ [hawkingrei](https://github.com/hawkingrei)でビューの使用が機能しない問題を修正
     -   外部キー[＃53652](https://github.com/pingcap/tidb/issues/53652) @ [hawkingrei](https://github.com/hawkingrei)を持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。
     -   クエリが強制終了された後にエラーではなく誤った結果を返す可能性がある問題を修正[＃50089](https://github.com/pingcap/tidb/issues/50089) @ [D3Hunter](https://github.com/D3Hunter)
@@ -167,7 +167,7 @@ TiDB バージョン: 7.1.6
     -   `ALTER TABLE` `AUTO_INCREMENT`フィールドを正しく処理しない問題を修正[＃47899](https://github.com/pingcap/tidb/issues/47899) @ [D3Hunter](https://github.com/D3Hunter)
     -   解放されていないセッションリソースがメモリリークを引き起こす可能性がある問題を修正[＃56271](https://github.com/pingcap/tidb/issues/56271) @ [lance6716](https://github.com/lance6716)
     -   浮動小数点数または整数オーバーフローがプランキャッシュ[＃46538](https://github.com/pingcap/tidb/issues/46538) @ [hawkingrei](https://github.com/hawkingrei)に影響を与える問題を修正しました
-    -   `IndexLookUp`演算子のメモリの一部が[＃56440](https://github.com/pingcap/tidb/issues/56440) @ [wshwsh12](https://github.com/wshwsh12)で追跡されない問題を修正
+    -   `IndexLookUp`演算子のメモリの一部が追跡されない問題を修正 [＃56440](https://github.com/pingcap/tidb/issues/56440) @ [wshwsh12](https://github.com/wshwsh12)
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間[＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。
     -   ストレージエンジン[＃56402](https://github.com/pingcap/tidb/issues/56402) @ [YangKeao](https://github.com/YangKeao)としてTiKVが選択されていない場合にTTLが失敗する可能性がある問題を修正
     -   書き込み競合が発生したときにTTLタスクをキャンセルできない問題を修正[＃56422](https://github.com/pingcap/tidb/issues/56422) @ [YangKeao](https://github.com/YangKeao)
@@ -209,7 +209,7 @@ TiDB バージョン: 7.1.6
     -   リージョン統計[＃8710](https://github.com/tikv/pd/issues/8710) @ [rleungx](https://github.com/rleungx)のメモリリーク問題を修正
     -   ホットスポット キャッシュ[＃8698](https://github.com/tikv/pd/issues/8698) @ [lhy1024](https://github.com/lhy1024)のメモリリーク問題を修正
     -   同じストアID [＃8756](https://github.com/tikv/pd/issues/8756) @ [okJiang](https://github.com/okJiang)で繰り返し作成された場合に`evict-leader-scheduler`正常に動作しない問題を修正
-    -   `replication.strictly-match-label`から`true`に設定するとTiFlash が[＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)で起動しなくなる問題を修正
+    -   `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [＃8480](https://github.com/tikv/pd/issues/8480) @ [rleungx](https://github.com/rleungx)
     -   設定ファイル経由でログレベルを変更しても反映されない問題を修正[＃8117](https://github.com/tikv/pd/issues/8117) @ [rleungx](https://github.com/rleungx)
     -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @ [nolouch](https://github.com/nolouch)
     -   PD がオペレータ チェック[＃8263](https://github.com/tikv/pd/issues/8263) @ [lhy1024](https://github.com/lhy1024)中に遭遇するデータ競合問題を修正しました
@@ -290,7 +290,7 @@ TiDB バージョン: 7.1.6
         -   TiDB LightningがTiKV [＃56114](https://github.com/pingcap/tidb/issues/56114) @ [fishiu](https://github.com/fishiu)から送信されたサイズ超過のメッセージを受信できない問題を修正しました
         -   TiDB Lightning [＃15003](https://github.com/tikv/tikv/issues/15003) [＃47694](https://github.com/pingcap/tidb/issues/47694) @ [lance6716](https://github.com/lance6716)のインポートモードを無効にした後にデータをインポートすると TiKV データが破損する可能性がある問題を修正しました
         -   TiDB Lightning [＃49826](https://github.com/pingcap/tidb/issues/49826) @ [lance6716](https://github.com/lance6716)を使用してデータのインポート中にトランザクションの競合が発生する問題を修正しました
-        -   EBS BRが[＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)で実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました
+        -   EBS BRが実行されているときにTiDB Lightningがデータのインポートに失敗する可能性がある問題を修正しました [＃49517](https://github.com/pingcap/tidb/issues/49517) @ [mittalrishabh](https://github.com/mittalrishabh)
         -   2つのインスタンスが同時に並列インポートタスクを開始し、同じタスクID [＃55384](https://github.com/pingcap/tidb/issues/55384) @ [ei-sugimoto](https://github.com/ei-sugimoto)が割り当てられている場合に、 TiDB Lightningが`verify allocator base failed`エラーを報告する問題を修正しました。
         -   PD Leaderを強制終了すると、 TiDB Lightningがデータインポート中に`invalid store ID 0`エラーを報告する問題を修正しました。[＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
 

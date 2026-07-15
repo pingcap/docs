@@ -87,7 +87,7 @@ TiDB バージョン: 7.1.2
     -   `MERGE_JOIN`の結果が間違っている問題を修正[＃46580](https://github.com/pingcap/tidb/issues/46580) @ [qw4990](https://github.com/qw4990)
     -   符号なし型と`Duration`型定数を比較したときに発生する誤った結果を修正しました [＃45410](https://github.com/pingcap/tidb/issues/45410) @ [wshwsh12](https://github.com/wshwsh12)
     -   `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @ [tiancaiamao](https://github.com/tiancaiamao)
-    -   TTLが[＃45510](https://github.com/pingcap/tidb/issues/45510) @ [lcwangchao](https://github.com/lcwangchao)で実行されているときのメモリリークの問題を修正しました
+    -   TTLが実行されているときのメモリリークの問題を修正しました [＃45510](https://github.com/pingcap/tidb/issues/45510) @ [lcwangchao](https://github.com/lcwangchao)
     -   接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[＃46034](https://github.com/pingcap/tidb/issues/46034) @ [pingyu](https://github.com/pingyu)
     -   インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[＃45716](https://github.com/pingcap/tidb/issues/45716) @ [wshwsh12](https://github.com/wshwsh12)
     -   ハッシュパーティションテーブルに対して`BatchPointGet`演算子が誤った結果を返す問題を修正しました [＃46779](https://github.com/pingcap/tidb/issues/46779) @ [jiyfhust](https://github.com/jiyfhust)
@@ -126,7 +126,7 @@ TiDB バージョン: 7.1.2
     -   データレプリケーション自動同期モードで同期回復フェーズでQPSがゼロに低下する問題を修正しました。 [＃14975](https://github.com/tikv/tikv/issues/14975) @ [nolouch](https://github.com/nolouch)
     -   1つのTiKVノードが分離され、別のノードが再起動されたときに発生する可能性のあるデータの不整合の問題を修正しました[＃15035](https://github.com/tikv/tikv/issues/15035) @ [overvenus](https://github.com/overvenus)
     -   オンラインアンセーフリカバリがマージ中止を処理できない問題を修正 [＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)
-    -   PDとTiKV間のネットワーク中断によりPITRが[＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)で停止する可能性がある問題を修正しました
+    -   PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)
     -   `FLASHBACK` を実行した後にリージョンマージがブロックされる可能性がある問題を修正しました [＃15258](https://github.com/tikv/tikv/issues/15258) @ [overvenus](https://github.com/overvenus)
     -   ストアハートビートの再試行回数をに減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
     -   オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)
@@ -151,7 +151,7 @@ TiDB バージョン: 7.1.2
     -   リソース制御を有効にした後に DDL がアトミック性を保証しない可能性がある問題を修正しました [＃45050](https://github.com/pingcap/tidb/issues/45050) @ [glorv](https://github.com/glorv)
     -   ルールチェッカーがピアを選択した場合に、不健全なピアを削除できない問題を修正しました [＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanicになる可能性がある問題を修正しました。 [＃6860](https://github.com/tikv/pd/issues/6860) @ [HuSharp](https://github.com/HuSharp)
-    -   RU消費量が0未満の場合にPDが[＃6973](https://github.com/tikv/pd/issues/6973) @ [CabinfeverB](https://github.com/CabinfeverB)でクラッシュする問題を修正
+    -   RU消費量が0未満の場合にPDがクラッシュする問題を修正 [＃6973](https://github.com/tikv/pd/issues/6973) @ [CabinfeverB](https://github.com/CabinfeverB)
     -   クラスタが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[＃46664](https://github.com/pingcap/tidb/issues/46664) @ [HuSharp](https://github.com/HuSharp)
 
 -   TiFlash

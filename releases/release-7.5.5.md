@@ -79,7 +79,7 @@ TiDB バージョン: 7.5.5
     -   異常終了時に`INDEX_HASH_JOIN`アップする可能性がある問題を修正[＃54055](https://github.com/pingcap/tidb/issues/54055) @ [wshwsh12](https://github.com/wshwsh12)
     -   分散実行フレームワーク (DXF) に関連するシステム テーブルをクエリすると、アップグレードが失敗する可能性がある問題を修正しました[＃49263](https://github.com/pingcap/tidb/issues/49263) @ [D3Hunter](https://github.com/D3Hunter)
     -   DDL内部トランザクションエラー`GC life time is shorter than transaction duration`によりインデックス追加が失敗する問題を修正[＃57043](https://github.com/pingcap/tidb/issues/57043) @ [tangenta](https://github.com/tangenta)
-    -   `EXCHANGE PARTITION`実行して無効な行に遭遇すると、InfoSchema が完全にロードされ、エラー`failed to load schema diff`が[＃56685](https://github.com/pingcap/tidb/issues/56685) @ [D3Hunter](https://github.com/D3Hunter)で報告される問題を修正しました。
+    -   `EXCHANGE PARTITION`実行して無効な行に遭遇すると、InfoSchema が完全にロードされ、エラー`failed to load schema diff`が報告される問題を修正しました。 [＃56685](https://github.com/pingcap/tidb/issues/56685) @ [D3Hunter](https://github.com/D3Hunter)
     -   `tidb_ddl_enable_fast_reorg`と`new_collations_enabled_on_first_bootstrap`有効になっているときに照合順序が正しく処理されず、データ インデックスが不一致になる問題を修正しました。 [＃58036](https://github.com/pingcap/tidb/issues/58036) @ [djshow832](https://github.com/djshow832)
     -   プランキャッシュがインデックスを追加するときに間違ったスキーマを使用するため、データインデックスが不整合になる問題を修正しました。 [＃56733](https://github.com/pingcap/tidb/issues/56733) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   アップグレード中に`ALTER TABLE TIFLASH REPLICA`実行するとTiDBノードがクラッシュする問題を修正[＃57863](https://github.com/pingcap/tidb/issues/57863) @ [tangenta](https://github.com/tangenta)
@@ -102,7 +102,7 @@ TiDB バージョン: 7.5.5
     -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
     -   読み取りスレッドがRaft EngineのMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。 [＃17383](https://github.com/tikv/tikv/issues/17383) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題が発生する可能性がある問題を修正しました [＃17394](https://github.com/tikv/tikv/issues/17394) @ [MyonKeminta](https://github.com/MyonKeminta)
-    -   すべての休止状態のリージョンが[＃17101](https://github.com/tikv/tikv/issues/17101) @ [hhwyt](https://github.com/hhwyt)で起動すると書き込みジッターが発生する可能性がある問題を修正しました
+    -   すべての休止状態のリージョンが起動すると書き込みジッターが発生する可能性がある問題を修正しました [＃17101](https://github.com/tikv/tikv/issues/17101) @ [hhwyt](https://github.com/hhwyt)
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [overvenus](https://github.com/overvenus)
     -   オンラインアンセーフリカバリがマージ中止を処理できない問題を修正 [＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)
     -   エラー発生時にCPUプロファイリングフラグが正しくリセットされない問題を修正[＃17234](https://github.com/tikv/tikv/issues/17234) @ [Connor1996](https://github.com/Connor1996)

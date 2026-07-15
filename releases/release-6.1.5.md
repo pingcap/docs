@@ -31,14 +31,14 @@ TiDB バージョン: 6.1.5
 
 -   TiDB
 
-    -   データ競合により TiDB が[＃27725](https://github.com/pingcap/tidb/issues/27725) @ [XuHuaiyu](https://github.com/XuHuaiyu)で再起動する可能性がある問題を修正しました
+    -   データ競合により TiDB が再起動する可能性がある問題を修正しました [＃27725](https://github.com/pingcap/tidb/issues/27725) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   Read Committed分離レベルが使用されている場合、 `UPDATE`文が最新のデータを読み取らない可能性がある問題を修正しました[＃41581](https://github.com/pingcap/tidb/issues/41581) @ [cfzjywxk](https://github.com/cfzjywxk)
 
 <!---->
 
 -   PD
 
-    -   `ReportMinResolvedTS`の呼び出しが[＃5965](https://github.com/tikv/pd/issues/5965) @ [HunDunDM](https://github.com/HunDunDM)で頻繁に発生する PD OOM 問題を修正しました
+    -   `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [＃5965](https://github.com/tikv/pd/issues/5965) @ [HunDunDM](https://github.com/HunDunDM)
 
 <!---->
 
