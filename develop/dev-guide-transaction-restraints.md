@@ -718,7 +718,7 @@ mysql> SELECT * FROM T2;
 -   単一トランザクションでサポートされる最大サイズは1 TiBです。
 
     -   TiDB v4.0 以降のバージョンでは、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)で設定できます。以前のバージョンでは、値は`100 MB`です。
-    -   TiDB v6.5.0以降のバージョンでは、この設定は推奨されなくなりました。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)参照してください。
+    -   TiDB v6.5.0以降のバージョンでは、この設定は推奨されなくなりました。詳細については、 [`performance.txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を参照してください。
 
 サイズ制限と行数制限の両方において、トランザクション実行時のエンコード処理とトランザクション用の追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
 

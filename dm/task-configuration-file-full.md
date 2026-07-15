@@ -9,7 +9,7 @@ summary: このドキュメントでは、データ移行（DM）の高度なタ
 
 ## 重要な概念 {#important-concepts}
 
-`source-id`や DM ワーカー ID などの重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)参照してください。
+`source-id`や DM ワーカー ID などの重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)を参照してください。
 
 ## タスク設定ファイルテンプレート（上級者向け） {#task-configuration-file-template-advanced}
 
@@ -264,11 +264,11 @@ mysql-instances:
 
 #### `routes` {#routes}
 
--   アップストリームテーブルとダウンストリームテーブル間のルーティングマッピングルールセット。アップストリームとダウンストリームのスキーマ名およびテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオと設定例については[テーブルルーティング](/dm/dm-table-routing.md)参照してください。
+-   アップストリームテーブルとダウンストリームテーブル間のルーティングマッピングルールセット。アップストリームとダウンストリームのスキーマ名およびテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオと設定例については[テーブルルーティング](/dm/dm-table-routing.md)を参照してください。
 
 #### `filters` {#filters}
 
--   アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)参照してください。
+-   アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)を参照してください。
 
 #### `block-allow-list` {#block-allow-list}
 

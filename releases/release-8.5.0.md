@@ -99,7 +99,7 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 
     バージョン8.5.0以降、両方の暗号化機能が一般提供（GA）となり、クライアント側のデータセキュリティが強化されます。
 
-    詳細については、 [バックアップデータを暗号化する](/br/br-snapshot-manual.md#encrypt-the-backup-data)および[ログバックアップデータを暗号化する](/br/br-pitr-manual.md#encrypt-the-log-backup-data)参照してください。
+    詳細については、 [バックアップデータを暗号化する](/br/br-snapshot-manual.md#encrypt-the-backup-data)および[ログバックアップデータを暗号化する](/br/br-pitr-manual.md#encrypt-the-log-backup-data)を参照してください。
 
 -   TiKVの保存時暗号化は[Google Cloud Key Management Service (Google Cloud KMS)](https://cloud.google.com/docs/security/key-management-deep-dive) (GA) をサポートします。 [#8906](https://github.com/tikv/tikv/issues/8906) @[glorv](https://github.com/glorv)
 

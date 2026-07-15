@@ -11,7 +11,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 <CustomContent platform="tidb">
 
-コプロセッサーキャッシュは、TiDB設定ファイルの`tikv-client.copr-cache`設定項目で設定できます。コプロセッサーキャッシュの有効化と設定方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)参照してください。
+コプロセッサーキャッシュは、TiDB設定ファイルの`tikv-client.copr-cache`設定項目で設定できます。コプロセッサーキャッシュの有効化と設定方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
 
 </CustomContent>
 

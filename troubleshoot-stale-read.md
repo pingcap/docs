@@ -47,7 +47,7 @@ resolved-ts）は、この値より小さいタイムスタンプを持つすべ
 
 ![Stale Read Req Traffic](/media/stale-read/traffic.png)
 
-上記のメトリックの詳細については、 [TiDB 監視メトリクス](/grafana-tidb-dashboard.md#kv-request)参照してください。
+上記のメトリックの詳細については、 [TiDB 監視メトリクス](/grafana-tidb-dashboard.md#kv-request)を参照してください。
 
 ステイル読み取り の問題が発生すると、前述の指標に変化が見られる場合があります。最も直接的な指標は、TiDB の WARN ログです。このログには、リージョンID が`DataIsNotReady`で、検出された`safe-ts`報告されます。
 
@@ -65,7 +65,7 @@ resolved-ts）は、この値より小さいタイムスタンプを持つすべ
 
 ### <code>tikv-ctl</code>を使用して診断する {#use-code-tikv-ctl-code-to-diagnose}
 
-`tikv-ctl`リゾルバの最新の詳細情報を提供し、 `RegionReadProgress`リゾルバの最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)参照してください。
+`tikv-ctl`リゾルバの最新の詳細情報を提供し、 `RegionReadProgress`リゾルバの最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 
 次に例を示します。
 
@@ -142,7 +142,7 @@ TiKV は 10 秒ごとに次のメトリックをチェックします。
 
 -   ログからロックに関する十分な情報を取得できない場合は、テーブル[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md#cluster_tidb_trx)を使用してアクティブなトランザクションを見つけます。
 
--   [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)実行すると、同じTiDBサーバーに接続されている現在のセッションと、現在のステートメントに費やされた時間が表示されます。ただし、start_tsは表示されません。
+-   [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を実行すると、同じTiDBサーバーに接続されている現在のセッションと、現在のステートメントに費やされた時間が表示されます。ただし、start_tsは表示されません。
 
 進行中の大規模トランザクションが原因でロックが存在する場合は、これらのロックによって解決の進行が妨げられる可能性があるため、アプリケーション ロジックの変更を検討してください。
 

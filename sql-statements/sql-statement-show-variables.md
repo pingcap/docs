@@ -73,7 +73,7 @@ mysql> SHOW VARIABLES WHERE Value=300;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDBの`SHOW [GLOBAL|SESSION] VARIABLES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDBの`SHOW [GLOBAL|SESSION] VARIABLES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)を参照してください。
 
 ## 参照 {#see-also}
 

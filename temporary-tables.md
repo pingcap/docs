@@ -226,7 +226,7 @@ SELECT * FROM users;
 
 テーブル定義時にどのストレージエンジンを`ENGINE`として宣言したとしても、ローカル一時テーブルとグローバル一時テーブルのデータはTiDBインスタンスのメモリ内にのみ保存されます。これらのデータは永続化されません。
 
-メモリオーバーフローを回避するために、システム変数[`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)使用して各一時テーブルのサイズを制限できます。一時テーブルのサイズがしきい値`tidb_tmp_table_max_size`を超えると、TiDB はエラーを報告します。デフォルト値は`tidb_tmp_table_max_size`ですが、現在は`64MB`です。
+メモリオーバーフローを回避するために、システム変数[`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)を使用して各一時テーブルのサイズを制限できます。一時テーブルのサイズがしきい値`tidb_tmp_table_max_size`を超えると、TiDB はエラーを報告します。デフォルト値は`tidb_tmp_table_max_size`ですが、現在は`64MB`です。
 
 たとえば、一時テーブルの最大サイズを`256MB`に設定します。
 

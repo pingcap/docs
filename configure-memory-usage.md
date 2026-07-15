@@ -31,7 +31,7 @@ SET tidb_mem_quota_query = 8 << 10;
 
 ## tidb-server インスタンスのメモリ使用量しきい値を構成する {#configure-the-memory-usage-threshold-of-a-tidb-server-instance}
 
-v6.5.0 以降では、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用して、tidb-server インスタンスのメモリ使用量のしきい値を設定できます。
+v6.5.0 以降では、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用して、tidb-server インスタンスのメモリ使用量のしきい値を設定できます。
 
 たとえば、tidb-server インスタンスの合計メモリ使用量を 32 GB に設定します。
 
@@ -121,7 +121,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 ## tidb-server の書き込みトランザクションのメモリ使用量を削減します {#reduce-the-memory-usage-for-write-transactions-in-tidb-server}
 
-TiDBが使用するトランザクションモデルでは、トランザクションのすべての書き込み操作はコミットされる前にメモリにキャッシュされる必要があります。TiDBが大規模なトランザクションを書き込む場合、メモリ使用量が増加し、ボトルネックになる可能性があります。様々な制約下で大規模トランザクションによるメモリ使用量の増加を軽減または回避するには、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に調整するか、 [非トランザクションDMLステートメント](/non-transactional-dml.md)使用します。
+TiDBが使用するトランザクションモデルでは、トランザクションのすべての書き込み操作はコミットされる前にメモリにキャッシュされる必要があります。TiDBが大規模なトランザクションを書き込む場合、メモリ使用量が増加し、ボトルネックになる可能性があります。様々な制約下で大規模トランザクションによるメモリ使用量の増加を軽減または回避するには、システム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に調整するか、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を使用します。
 
 ## tidb-serverのその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 

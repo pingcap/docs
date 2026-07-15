@@ -160,7 +160,7 @@ SHOW GRANTS;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDBの`REVOKE <role>`文はMySQL 8.0のロール機能と完全に互換性があります。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDBの`REVOKE <role>`文はMySQL 8.0のロール機能と完全に互換性があります。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)を参照してください。
 
 ## 参照 {#see-also}
 

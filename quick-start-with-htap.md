@@ -188,7 +188,7 @@ limit 10;
 
 `EXPLAIN`ステートメントの結果に`ExchangeSender`と`ExchangeReceiver`演算子が表示されている場合は、MPP モードが有効になっていることを示します。
 
-さらに、クエリ全体の各部分をTiFlashエンジンのみを使用して計算するように指定することもできます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)参照してください。
+さらに、クエリ全体の各部分をTiFlashエンジンのみを使用して計算するように指定することもできます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 これら 2 つの方法のクエリ結果とクエリ パフォーマンスを比較できます。
 

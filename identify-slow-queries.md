@@ -205,7 +205,7 @@ TiKVコプロセッサータスクフィールド：
 
 ### サポートされているフィールド {#supported-fields}
 
-フィールドの詳細な説明、診断の意味、背景情報については、 [`identify-slow-queries`のフィールド説明](/identify-slow-queries.md#fields-description)参照してください。
+フィールドの詳細な説明、診断の意味、背景情報については、 [`identify-slow-queries`のフィールド説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 特に断りのない限り、次の表のフィールドは [統一されたルール構文と型制約](#unified-rule-syntax-and-type-constraints)型安定」で説明されている一般的な一致および型ルールに従います。この表には、現在サポートされているフィールド名、タイプ、単位、およびルール固有のいくつかの注意事項のみがリストされています。各フィールドの意味論的な意味を繰り返すことはありません。
 
@@ -335,9 +335,9 @@ TiKVコプロセッサータスクフィールド：
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの戻り値は、 `EXPLAIN`または`EXPLAIN ANALYZE`とほぼ同じ形式です。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
+`Plan`フィールドの戻り値は、 `EXPLAIN`または`EXPLAIN ANALYZE`とほぼ同じ形式です。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
-詳細については、 [TiDB固有の変数と構文](/system-variables.md)参照してください。
+詳細については、 [TiDB固有の変数と構文](/system-variables.md)を参照してください。
 
 ## スローログのメモリマッピング {#memory-mapping-in-slow-log}
 

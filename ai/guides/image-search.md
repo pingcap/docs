@@ -11,7 +11,7 @@ TiDBは**ベクトル検索**による画像検索を可能にします。自動
 
 > **Note:**
 >
-> 画像検索の完全な例については、 [画像検索の例](/ai/examples/image-search-with-pytidb.md)参照してください。
+> 画像検索の完全な例については、 [画像検索の例](/ai/examples/image-search-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 

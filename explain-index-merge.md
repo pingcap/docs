@@ -90,7 +90,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 >
 > -   インデックスマージ機能はv5.4.0からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`なります。
 >
-> -   SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用すると、 `tidb_enable_index_merge`設定に関係なく、オプティマイザにインデックスマージを強制的に適用させることができます。フィルタリング条件にプッシュダウンできない式が含まれている場合にインデックスマージを有効にするには、SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用する必要があります。
+> -   SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用すると、 `tidb_enable_index_merge`設定に関係なく、オプティマイザにインデックスマージを強制的に適用させることができます。フィルタリング条件にプッシュダウンできない式が含まれている場合にインデックスマージを有効にするには、SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >
 > -   [オプティマイザー修正制御 52869](/optimizer-fix-controls.md#52869-new-in-v810)が`OFF`に設定されている場合、オプティマイザがクエリプランに対して単一インデックススキャン方式（フルテーブルスキャン以外）を選択できるとき、オプティマイザはインデックスマージを自動的には選択しません。インデックスマージを使用するには、オプティマイザヒントを指定する必要があります。v8.5.7以降、この制御のデフォルト値は`ON`に変更されており、これにより前述の制限がデフォルトで解除され、オプティマイザはより多くのクエリでインデックスマージを自動的に選択できるようになります。
 >

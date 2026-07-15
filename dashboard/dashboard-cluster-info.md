@@ -47,7 +47,7 @@ summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体
 > -   TiDB Dashboardの`Leaving` 、PD API によって返される`Offline` 、およびTiUPの`Pending Offline`同じステータスを示します。
 > -   テーブル内の一部の列は、インスタンスが起動している場合にのみ表示できます。
 
-インスタンスのステータスはPDのスケジュール情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)参照してください。
+インスタンスのステータスはPDのスケジュール情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
 ## ホストリスト {#host-list}
 

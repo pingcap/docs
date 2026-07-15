@@ -37,7 +37,7 @@ aliases: ['/ja/tidb/stable/dev-guide-object-naming-guidelines/','/ja/tidbcloud/d
 -   列に注釈を追加し、「0: オフライン、1: オンライン」などの列挙型の名前付きの値を指定することをお勧めします。
 -   ブール列の名前は`is_{description}`にすることをお勧めします。例えば、 `member`テーブルの、メンバーが有効かどうかを示す列の名前は`is_enabled`にすることができます。
 -   列名を 30 文字以上にすることは推奨されません。また、列の数は 60 未満にする必要があります。
--   `order` 、 `from` 、 `desc`などのTiDB予約語を列名として使用しないでください。キーワードが予約されているかどうかを確認するには、 [TiDBキーワード](/keywords.md)参照してください。
+-   `order` 、 `from` 、 `desc`などのTiDB予約語を列名として使用しないでください。キーワードが予約されているかどうかを確認するには、 [TiDBキーワード](/keywords.md)を参照してください。
 
 ## インデックスの命名規則 {#index-naming-convention}
 

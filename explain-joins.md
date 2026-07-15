@@ -41,7 +41,7 @@ ANALYZE TABLE t1, t2;
 
 > **Note:**
 >
-> 返される実行プランにおいて、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0以降では`estRows`の意味がv6.4.0以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)参照してください。
+> 返される実行プランにおいて、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0以降では`estRows`の意味がv6.4.0以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)を参照してください。
 
 ```sql
 EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id;
@@ -163,11 +163,11 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 > **Note:**
 >
-> 上記の例では、SQLオプティマイザはインデックス結合よりもパフォーマンスの低いハッシュ結合プランを選択します。クエリ最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適ではないプランが選択される場合があります。頻繁に実行されるクエリの場合は、 [SQLプラン管理](/sql-plan-management.md)使用してクエリにヒントをバインドすることをお勧めします。これは、アプリケーションがTiDBに送信するクエリにヒントを挿入するよりも管理が容易です。
+> 上記の例では、SQLオプティマイザはインデックス結合よりもパフォーマンスの低いハッシュ結合プランを選択します。クエリ最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適ではないプランが選択される場合があります。頻繁に実行されるクエリの場合は、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリにヒントをバインドすることをお勧めします。これは、アプリケーションがTiDBに送信するクエリにヒントを挿入するよりも管理が容易です。
 
 ### インデックス結合のバリエーション {#variations-of-index-join}
 
-ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)使用したインデックス結合操作では、外部テーブルに結合する前に中間結果のハッシュテーブルが作成されます。TiDBは、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルへのハッシュテーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQLオプティマイザによって自動的に選択されます。
+ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作では、外部テーブルに結合する前に中間結果のハッシュテーブルが作成されます。TiDBは、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルへのハッシュテーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQLオプティマイザによって自動的に選択されます。
 
 ### コンフィグレーション {#configuration}
 
@@ -254,7 +254,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### 関連する最適化 {#related-optimizations}
 
-TiDBは、ハッシュ結合のパフォーマンスを最適化し、実行速度を大幅に向上させるランタイムフィルタ機能を提供します。具体的な最適化の使用方法については、 [ランタイムフィルター](/runtime-filter.md)参照してください。
+TiDBは、ハッシュ結合のパフォーマンスを最適化し、実行速度を大幅に向上させるランタイムフィルタ機能を提供します。具体的な最適化の使用方法については、 [ランタイムフィルター](/runtime-filter.md)を参照してください。
 
 ## マージ結合 {#merge-join}
 

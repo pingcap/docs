@@ -33,7 +33,7 @@ summary: TiDB のデータ型のデフォルト値について学習します。
 
 ## 式をデフォルト値として指定する {#specify-expressions-as-default-values}
 
-MySQL 8.0.13以降では、 `DEFAULT`句のデフォルト値として式を指定できるようになりました。詳細については、 [MySQL 8.0.13以降の明示的なデフォルト処理](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit)参照してください。
+MySQL 8.0.13以降では、 `DEFAULT`句のデフォルト値として式を指定できるようになりました。詳細については、 [MySQL 8.0.13以降の明示的なデフォルト処理](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit)を参照してください。
 
 TiDB は、 `DEFAULT`句のデフォルト値として次の式を指定することをサポートしています。
 
@@ -69,7 +69,7 @@ CREATE TABLE t3 (
 );
 ```
 
-UUID の使用方法の詳細については、 [UUIDを主キーとして使用するベストプラクティス](/best-practices/uuid.md)参照してください。
+UUID の使用方法の詳細については、 [UUIDを主キーとして使用するベストプラクティス](/best-practices/uuid.md)を参照してください。
 
 `JSON`使用例:
 

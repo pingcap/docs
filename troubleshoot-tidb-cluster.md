@@ -13,7 +13,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 -   構成と展開トポロジ
 -   `dmesg`のTiDBコンポーネント関連の問題
 
-その他の情報については[よくある質問（FAQ）](/faq/tidb-faq.md)参照してください。
+その他の情報については[よくある質問（FAQ）](/faq/tidb-faq.md)を参照してください。
 
 ## データベースに接続できません {#cannot-connect-to-the-database}
 
@@ -40,7 +40,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 -   起動パラメータにエラーがあります。
 
-    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)参照してください。
+    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)を参照してください。
 
 -   港は占領されています。
 
@@ -57,7 +57,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 `tikv-server`起動できない場合の状況については以下を参照してください。
 
--   起動パラメータのエラー: [TiKVの設定とオプション](/command-line-flags-for-tikv-configuration.md)参照してください。
+-   起動パラメータのエラー: [TiKVの設定とオプション](/command-line-flags-for-tikv-configuration.md)を参照してください。
 
 -   ポートが使用中です: `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tikv-server`開始するポートが使用されていないことを確認します。
 
@@ -81,7 +81,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 -   起動パラメータにエラーがあります。
 
-    [PD構成とオプション](/command-line-flags-for-pd-configuration.md)参照してください。
+    [PD構成とオプション](/command-line-flags-for-pd-configuration.md)を参照してください。
 
 -   港は占領されています。
 

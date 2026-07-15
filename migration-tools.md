@@ -38,7 +38,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   インポートの進行状況を保存するチェックポイントをサポートし、再起動後に中断したところからインポートを続行します`tidb-lightning`
     -   データフィルタリングをサポート
 -   **制限事項**：
-    -   データのインポートに[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)使用すると、インポート プロセス中に TiDB クラスターはサービスを提供できません。
+    -   データのインポートに[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)を使用すると、インポート プロセス中に TiDB クラスターはサービスを提供できません。
     -   TiDB サービスに影響を与えたくない場合は、 TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータのインポートを実行してください。
 
 ## <a href="/dumpling-overview.md">Dumpling</a> {#dumpling}

@@ -86,7 +86,7 @@ DESC TIDB_INDEX_USAGE;
 14 rows in set (0.00 sec)
 ```
 
-これらの列の説明については、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)参照してください。
+これらの列の説明については、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を参照してください。
 
 ### <code>TIDB_INDEX_USAGE</code>を使用して未使用および非効率的なインデックスを特定する {#identify-unused-and-inefficient-indexes-using-code-tidb-index-usage-code}
 
@@ -221,7 +221,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 以前のバージョンから TiDB v8.0.0 以降にアップグレードされたクラスターの場合は、システム スキーマと含まれるビューを手動で作成する必要があります。
 
-詳細については[`schema_unused_indexes`ビューを手動で作成する](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view)参照してください。
+詳細については[`schema_unused_indexes`ビューを手動で作成する](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view)を参照してください。
 
 ## 不可視インデックスを使用してインデックスの削除を安全にテストする {#safely-test-index-removal-using-invisible-indexes}
 
@@ -272,13 +272,13 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 
 1.  **インデックスの使用状況を定期的に監視します。**
 
-    -   インデックスの使用アクティビティを追跡するには、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)と[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)使用します。
+    -   インデックスの使用アクティビティを追跡するには、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)と[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)を使用します。
     -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を使用して未使用のインデックスを識別し、削除できるかどうかを評価します。
     -   クエリ実行プランを監視して、過剰な I/O を引き起こす可能性のある非効率的なインデックスを検出します。
 
 2.  **インデックスを削除する前に検証します。**
 
-    -   [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)使用してインデックスを不可視にし、一時的にインデックスを無効にして、完全に削除する前にその影響を確認します。
+    -   [`ALTER TABLE ... INVISIBLE`](/sql-statements/sql-statement-alter-table.md)を使用してインデックスを不可視にし、一時的にインデックスを無効にして、完全に削除する前にその影響を確認します。
     -   クエリのパフォーマンスが安定している場合は、インデックスの削除に進みます。
     -   最終決定を下す前に、すべてのクエリ パターンを考慮するのに十分な観察期間を確保してください。
 

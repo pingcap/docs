@@ -78,7 +78,7 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
     | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
     ...
 
-存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
+存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)を参照してください。
 
 ### 相関サブクエリ {#correlated-subquery}
 

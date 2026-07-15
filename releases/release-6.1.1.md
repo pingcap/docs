@@ -24,7 +24,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 ## Other changes {#other-changes}
 
--   `TiDB-community-toolkit`バイナリパッケージに以下の内容を追加します。詳細は[TiDB Installation Packages](/binary-package.md)参照してください。
+-   `TiDB-community-toolkit`バイナリパッケージに以下の内容を追加します。詳細は[TiDB Installation Packages](/binary-package.md)を参照してください。
 
     -   `server-{version}-linux-amd64.tar.gz`
     -   `grafana-{version}-linux-amd64.tar.gz`
@@ -33,7 +33,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   `blackbox_exporter-{version}-linux-amd64.tar.gz`
     -   `node_exporter-{version}-linux-amd64.tar.gz`
 
--   オペレーティングシステムとCPUアーキテクチャの組み合わせに応じて、異なる品質基準に対する多層的なサポートを導入します。1 [OSおよびプラットフォームの要件](https://docs-archive.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements)参照してください。
+-   オペレーティングシステムとCPUアーキテクチャの組み合わせに応じて、異なる品質基準に対する多層的なサポートを導入します。1 [OSおよびプラットフォームの要件](https://docs-archive.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements)を参照してください。
 
 ## 改善点 {#improvements}
 

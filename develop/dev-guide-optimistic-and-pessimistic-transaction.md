@@ -30,7 +30,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 <div label="Java" value="java">
 
-複数のユーザーが同時にデータを挿入する状況をシミュレートするために複数のスレッドを使用するため、安全なスレッドを備えた接続オブジェクトを使用する必要があります。ここでは、デモとしてJavaの一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)使用します。
+複数のユーザーが同時にデータを挿入する状況をシミュレートするために複数のスレッドを使用するため、安全なスレッドを備えた接続オブジェクトを使用する必要があります。ここでは、デモとしてJavaの一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)を使用します。
 
 </div>
 

@@ -33,7 +33,7 @@ summary: シャードの小さなデータセットを MySQL から TiDB に移�
 
 ### シャードテーブルの競合をチェックする {#check-conflicts-for-the-sharded-tables}
 
-移行に異なるシャーディングされたテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意インデックスの競合が発生する可能性があります。そのため、移行前に、現在のシャーディングスキームをビジネスの観点から詳細に検討し、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間の主キーまたは一意インデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)参照してください。以下に簡単に説明します。
+移行に異なるシャーディングされたテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意インデックスの競合が発生する可能性があります。そのため、移行前に、現在のシャーディングスキームをビジネスの観点から詳細に検討し、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間の主キーまたは一意インデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下に簡単に説明します。
 
 この例では、 `sale_01`と`sale_02`次の同じテーブル構造を持ちます。
 
@@ -166,7 +166,7 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
+上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 タスク ファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
 
@@ -194,7 +194,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | `--master-addr` | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`例：172.16.10.71:8261 |
 | `start-task`    | データ移行タスクを開始します。                                                    |
 
-移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、手順`start-task task.yaml`再度実行して移行タスクを開始してください。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)参照してください。
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、手順`start-task task.yaml`再度実行して移行タスクを開始してください。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
 
 ## ステップ4. タスクを確認する {#step-4-check-the-task}
 

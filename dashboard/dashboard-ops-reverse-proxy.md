@@ -11,7 +11,7 @@ summary: TiDB Dashboardは、リバースプロキシを使用して安全に公
 
 ### ステップ1: 実際のTiDB Dashboardのアドレスを取得する {#step-1-get-the-actual-tidb-dashboard-address}
 
-クラスター内に複数のPDインスタンスがデプロイされている場合、TiDB Dashboardを実際に実行するのは1つのPDインスタンスのみです。そのため、リバースプロキシのアップストリームが正しいアドレスを指していることを確認する必要があります。このメカニズムの詳細については、 [複数のPDインスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)参照してください。
+クラスター内に複数のPDインスタンスがデプロイされている場合、TiDB Dashboardを実際に実行するのは1つのPDインスタンスのみです。そのため、リバースプロキシのアップストリームが正しいアドレスを指していることを確認する必要があります。このメカニズムの詳細については、 [複数のPDインスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
 デプロイメントにTiUPツールを使用する場合は、次のコマンドを実行して実際の TiDB Dashboard アドレスを取得します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
@@ -117,7 +117,7 @@ server_configs:
 
 <details><summary><strong>TiUPを使用して新しいクラスターを展開するときに構成を変更する</strong></summary>
 
-新しいクラスタをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスタをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)参照してください。
+新しいクラスタをデプロイする場合は、上記の設定を`topology.yaml` TiUPトポロジファイルに追加してクラスタをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)を参照してください。
 
 </details>
 

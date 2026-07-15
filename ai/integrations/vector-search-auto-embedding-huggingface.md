@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 # Hugging Face Embeddings {#hugging-face-embeddings}
 
-このドキュメントでは、 TiDB Cloudで Hugging Face 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで Hugging Face 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
 
 > **Note:**
 >

@@ -34,7 +34,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 ### ステップ1. Zoom Incoming Webhookアプリを追加する {#step-1-add-the-zoom-incoming-webhook-app}
 
 1.  [Zoomアプリマーケットプレイス](https://marketplace.zoom.us/)にアカウント管理者としてサインインします。
-2.  Zoom App Marketplaceの[受信Webhookアプリ](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ)ページに移動し、 **「追加」**をクリックしてこのアプリを追加します。アプリが事前承認されていない場合は、Zoom 管理者に連絡して、アカウントに対してこのアプリを承認してもらいます。詳細については、 [アプリの承認とアプリリクエストの管理](https://support.zoom.us/hc/en-us/articles/360027829671)参照してください。
+2.  Zoom App Marketplaceの[受信Webhookアプリ](https://marketplace.zoom.us/apps/eH_dLuquRd-VYcOsNGy-hQ)ページに移動し、 **「追加」**をクリックしてこのアプリを追加します。アプリが事前承認されていない場合は、Zoom 管理者に連絡して、アカウントに対してこのアプリを承認してもらいます。詳細については、 [アプリの承認とアプリリクエストの管理](https://support.zoom.us/hc/en-us/articles/360027829671)を参照してください。
 3.  アプリが必要とする権限を確認し、 **「承認」**をクリックして受信Webhookアプリを追加します。
 
 ### ステップ2. ZoomのWebhook URLを生成する {#step-2-generate-a-zoom-webhook-url}

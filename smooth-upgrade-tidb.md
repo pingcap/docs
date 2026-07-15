@@ -18,7 +18,7 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
     -   Upgrade from v7.1.1 to v7.2.0 or v7.3.0
     -   Upgrade from v7.2.0 to v7.3.0
 
--   この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)参照してください。サポートされているバージョンは次のとおりです。
+-   この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。サポートされているバージョンは次のとおりです。
     -   Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
     -   Upgrade from v7.4.0 to later versions
 

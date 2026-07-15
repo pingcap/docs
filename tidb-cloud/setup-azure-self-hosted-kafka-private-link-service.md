@@ -521,7 +521,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**プライベートリンク**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**プライベートリンク**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
 2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 

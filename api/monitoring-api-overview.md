@@ -12,4 +12,4 @@ TiDB モニタリングフレームワークは、 [Prometheus](https://promethe
 -   [ステータスインターフェース](/tidb-monitoring-api.md#use-the-status-interface) : 現在の TiDBサーバーの[実行ステータス](/tidb-monitoring-api.md#running-status)とテーブルの[ストレージ情報](/tidb-monitoring-api.md#storage-information)を監視します。
 -   [メトリクスインターフェース](/tidb-monitoring-api.md#use-the-metrics-interface) : コンポーネント内のさまざまな操作に関する詳細情報を取得し、Grafana を使用してこれらのメトリックを表示します。
 
-リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiDB モニタリング API](/tidb-monitoring-api.md)参照してください。
+リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiDB モニタリング API](/tidb-monitoring-api.md)を参照してください。

@@ -52,7 +52,7 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) NONCLUSTERED);
 
 列定義において、キーワード`KEY`と`PRIMARY KEY`は同じ意味を持つことに注意してください。
 
-TiDB の[コメント構文](/comment-syntax.md)使用して主キーのタイプを指定することもできます。例えば：
+TiDB の[コメント構文](/comment-syntax.md)を使用して主キーのタイプを指定することもできます。例えば：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY /*T![clustered_index] CLUSTERED */, b VARCHAR(255));

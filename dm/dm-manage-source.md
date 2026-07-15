@@ -144,7 +144,7 @@ help transfer-source
     Global Flags:
       -s, --source strings   MySQL Source ID.
 
-転送前に、DM はバインド解除するワーカーに実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、まず[タスクを一時停止する](/dm/dm-pause-task.md)実行し、バインドを変更してから[タスクを再開する](/dm/dm-resume-task.md)実行する必要があります。
+転送前に、DM はバインド解除するワーカーに実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、まず[タスクを一時停止する](/dm/dm-pause-task.md)実行し、バインドを変更してから[タスクを再開する](/dm/dm-resume-task.md)を実行する必要があります。
 
 ### 使用例 {#usage-example}
 

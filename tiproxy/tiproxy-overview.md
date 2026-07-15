@@ -83,8 +83,8 @@ TiProxyは、以下のシナリオに適しています。
 
 -   接続の維持：TiDBサーバーがスケールイン、ローリングアップグレード、またはローリング再起動を実行すると、クライアント接続が切断され、エラーが発生します。クライアントに冪等なエラー再試行メカニズムがない場合、エラーを手動で確認して修正する必要があり、作業コストが大幅に増加します。TiProxyはクライアント接続を維持できるため、クライアントはエラーを報告しません。
 -   頻繁なスケールインとスケールアウト：アプリケーションのワークロードは定期的に変化する可能性があります。コストを削減するために、TiDBをクラウドにデプロイし、ワークロードに応じてTiDBサーバーを自動的にスケールインおよびスケールアウトすることができます。ただし、スケールインによってクライアントが切断される可能性があり、スケールアウトによって負荷が不均衡になる可能性があります。TiProxyはクライアント接続を維持し、負荷分散を実現できます。
--   CPU負荷の不均衡: バックグラウンドタスクが大量のCPUリソースを消費したり、接続間でワークロードが大きく変動してCPU負荷が不均衡になったりすると、TiProxyはCPU使用率に基づいて接続を移行して負荷分散を実現できます。詳細については、 [CPUベースの負荷分散](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing)参照してください。
--   TiDBサーバーのOOM: 暴走クエリによってTiDBサーバーのメモリが不足した場合、TiProxyはOOMリスクを事前に検出し、他の正常な接続を別のTiDBサーバーに移行することで、クライアントの接続を継続的に確保します。詳細については、 [メモリベースの負荷分散](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing)参照してください。
+-   CPU負荷の不均衡: バックグラウンドタスクが大量のCPUリソースを消費したり、接続間でワークロードが大きく変動してCPU負荷が不均衡になったりすると、TiProxyはCPU使用率に基づいて接続を移行して負荷分散を実現できます。詳細については、 [CPUベースの負荷分散](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing)を参照してください。
+-   TiDBサーバーのOOM: 暴走クエリによってTiDBサーバーのメモリが不足した場合、TiProxyはOOMリスクを事前に検出し、他の正常な接続を別のTiDBサーバーに移行することで、クライアントの接続を継続的に確保します。詳細については、 [メモリベースの負荷分散](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing)を参照してください。
 
 TiProxyは、以下のシナリオには適していません。
 
@@ -105,7 +105,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 その他の導入方法については、以下のドキュメントを参照してください。
 
 -   TiDB Operatorを使用して TiProxy をデプロイするには、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tiproxy)ドキュメントを参照してください。
--   TiUPを使用して TiProxy をローカルにすばやくデプロイするには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)参照してください。
+-   TiUPを使用して TiProxy をローカルにすばやくデプロイするには、 [TiProxyをデプロイ](/tiup/tiup-playground.md#deploy-tiproxy)を参照してください。
 
 ### TiProxyでクラスターを作成する {#create-a-cluster-with-tiproxy}
 
@@ -129,13 +129,13 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
     以下の点にご注意ください。
 
-    -   ワークロードの種類と最大 QPS に基づいて、TiProxy インスタンスのモデルと数を選択します。詳細については、 [TiProxyのパフォーマンステストレポート](/tiproxy/tiproxy-performance-test.md)参照してください。
-    -   TiProxyインスタンスは通常TiDBサーバーインスタンスよりも少ないため、TiProxyのネットワーク帯域幅がボトルネックになりやすくなります。たとえば、AWSでは、同じシリーズのEC2インスタンスのベースラインネットワーク帯域幅はCPUコア数に比例しません。ネットワーク帯域幅がボトルネックになった場合は、TiProxyインスタンスをより多くの小さなインスタンスに分割してQPSを向上させることができます。詳細については、 [ネットワーク仕様](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network)参照してください。
+    -   ワークロードの種類と最大 QPS に基づいて、TiProxy インスタンスのモデルと数を選択します。詳細については、 [TiProxyのパフォーマンステストレポート](/tiproxy/tiproxy-performance-test.md)を参照してください。
+    -   TiProxyインスタンスは通常TiDBサーバーインスタンスよりも少ないため、TiProxyのネットワーク帯域幅がボトルネックになりやすくなります。たとえば、AWSでは、同じシリーズのEC2インスタンスのベースラインネットワーク帯域幅はCPUコア数に比例しません。ネットワーク帯域幅がボトルネックになった場合は、TiProxyインスタンスをより多くの小さなインスタンスに分割してQPSを向上させることができます。詳細については、 [ネットワーク仕様](https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html#co_network)を参照してください。
     -   トポロジ構成ファイルでTiProxyのバージョンを指定することをお勧めします。これにより、TiDBクラスタをアップグレードするためにコマンド[`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を実行した際にTiProxyが自動的にアップグレードされるのを防ぎ、TiProxyのアップグレードによってクライアント接続が切断されるのを防止できます。
 
-    TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)参照してください。
+    TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)を参照してください。
 
-    TiDBクラスタトポロジファイル内の構成項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)参照してください。
+    TiDBクラスタトポロジファイル内の構成項目の詳細については、 [TiUPを使用したTiDBデプロイメントのトポロジーコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
     設定例は以下のとおりです。
 
@@ -157,7 +157,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 3.  クラスターを起動します。
 
-    TiUPを使用してクラスターを起動するには、 [TiUPドキュメント](/tiup/tiup-documentation-guide.md)参照してください。
+    TiUPを使用してクラスターを起動するには、 [TiUPドキュメント](/tiup/tiup-documentation-guide.md)を参照してください。
 
 4.  TiProxyに接続します。
 
@@ -225,7 +225,7 @@ TiProxyがデプロイされていないクラスターの場合、TiProxyイン
 
 ### TiProxyの設定を変更します {#modify-tiproxy-configuration}
 
-TiProxy がクライアント接続を維持するようにするため、必要がない限り TiProxy を再起動しないでください。そのため、TiProxy の設定項目のほとんどはオンラインで変更できます。オンラインでの変更をサポートする設定項目のリストについては、 [TiProxyの設定](/tiproxy/tiproxy-configuration.md)参照してください。
+TiProxy がクライアント接続を維持するようにするため、必要がない限り TiProxy を再起動しないでください。そのため、TiProxy の設定項目のほとんどはオンラインで変更できます。オンラインでの変更をサポートする設定項目のリストについては、 [TiProxyの設定](/tiproxy/tiproxy-configuration.md)を参照してください。
 
 TiUPを使用してTiProxyの設定を変更する場合、変更する設定項目がオンライン変更に対応している場合は、オプション[`--skip-restart`](/tiup/tiup-component-cluster-reload.md#--skip-restart)を使用することでTiProxyの再起動を回避できます。
 
@@ -247,7 +247,7 @@ tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version
 
 [`tiup cluster restart`](/tiup/tiup-component-cluster-restart.md)を使用して TiDB クラスターを再起動すると、TiDB サーバーがローリング再起動されないため、クライアント接続が切断されます。したがって、このコマンドの使用は避けてください。
 
-その代わりに、 [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)使用してクラスターをアップグレードしたり、 [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md)を使用して構成を再読み込みしたりすると、TiDB サーバーがローリング再起動されるため、クライアント接続には影響しません。
+その代わりに、 [`tiup cluster upgrade`](/tiup/tiup-component-cluster-upgrade.md)を使用してクラスターをアップグレードしたり、 [`tiup cluster reload`](/tiup/tiup-component-cluster-reload.md)を使用して構成を再読み込みしたりすると、TiDB サーバーがローリング再起動されるため、クライアント接続には影響しません。
 
 ## 他のコンポーネントとの互換性 {#compatibility-with-other-components}
 
@@ -255,7 +255,7 @@ tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version
 -   TiProxy の TLS 接続は TiDB と互換性のない機能を持っています。詳細は[Security](#security)参照してください。
 -   TiDB DashboardとGrafanaは、バージョン7.6.0以降でTiProxyをサポートしています。
 -   TiUPはv1.14.1以降でTiProxyをサポートし、 TiDB Operatorはv1.5.1以降でTiProxyをサポートしています。
--   TiProxyのステータスポートが提供するインターフェースはTiDBサーバーのものとは異なるため、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータをインポートする場合、ターゲットデータベースはTiProxyのアドレスではなく、TiDBサーバーのアドレスである必要があります。
+-   TiProxyのステータスポートが提供するインターフェースはTiDBサーバーのものとは異なるため、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータをインポートする場合、ターゲットデータベースはTiProxyのアドレスではなく、TiDBサーバーのアドレスである必要があります。
 
 ## Security {#security}
 

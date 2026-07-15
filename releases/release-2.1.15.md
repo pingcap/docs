@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.15
 -   監査プラグインにセッション接続情報を追加する [＃11189](https://github.com/pingcap/tidb/pull/11189)
 -   ポイントクエリで列を複数回クエリし、返された結果が`NULL`ある場合に発生するpanic問題を修正しました。 [＃11227](https://github.com/pingcap/tidb/pull/11227)
 -   テーブルを作成するときに、散布テーブルRegionsに`tidb_scatter_region`構成項目を追加します。 [＃11213](https://github.com/pingcap/tidb/pull/11213)
--   `RAND`関数使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11170](https://github.com/pingcap/tidb/pull/11170)
+-   `RAND`関数を使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11170](https://github.com/pingcap/tidb/pull/11170)
 -   整数と非整数の比較結果が場合によっては正しくない問題を修正[＃11191](https://github.com/pingcap/tidb/pull/11191)
 -   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります。 [＃11085](https://github.com/pingcap/tidb/pull/11085)
 -   列のデフォルト値として`CURRENT_TIMESTAMP`使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)

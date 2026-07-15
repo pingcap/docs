@@ -131,7 +131,7 @@ tiup br restore full \
 >
 > v8.5.5以降、パラメータ`--load-stats`を`false`に設定すると、 BRは復元されたテーブルの統計情報をテーブル`mysql.stats_meta`に書き込まなくなります。復元が完了したら、SQL文[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行して関連する統計情報を更新できます。
 
-バックアップと復元機能は、データをバックアップする際に、統計情報をJSON形式で`backupmeta`ファイルに保存します。データを復元する際には、JSON形式の統計情報をクラスターに読み込みます。詳細については、 [負荷統計](/sql-statements/sql-statement-load-stats.md)参照してください。
+バックアップと復元機能は、データをバックアップする際に、統計情報をJSON形式で`backupmeta`ファイルに保存します。データを復元する際には、JSON形式の統計情報をクラスターに読み込みます。詳細については、 [負荷統計](/sql-statements/sql-statement-load-stats.md)を参照してください。
 
 v8.5.5以降、 BRは`--fast-load-sys-tables`パラメータを導入し、デフォルトで有効になっています。3 `br`ラインツールを使用して新しいクラスターにデータを復元する場合、上流クラスターと下流クラスター間のテーブルとパーティションのIDを再利用できます（そうでない場合、 BRは自動的に統計を論理的にロードします） `--fast-load-sys-tables`有効にすると、 BRはまず統計関連のシステムテーブルを一時システムデータベース`__TiDB_BR_Temporary_mysql`に復元し、次に`RENAME TABLE`ステートメントを使用してこれらのテーブルを`mysql`データベース内の対応するテーブルとアトミックにスワップします。
 
@@ -182,7 +182,7 @@ tiup br restore full \
 
 上記のコマンドでは、次のようになります。
 
--   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)参照してください。
+-   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
 -   `--ratelimit` : 復元タスクを実行する**TiKVあたりの**最大速度。単位はMiB/sです。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 

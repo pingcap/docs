@@ -63,7 +63,7 @@ TiDB バージョン: 5.3.1
     -   クエリ実行時に MPP タスク リストが空になるエラーを修正 [＃31636](https://github.com/pingcap/tidb/issues/31636)
     -   innerWorker panicによって発生するインデックス結合の誤った結果を修正しました [＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   列タイプを`FLOAT`から`DOUBLE`に変更した後の間違ったクエリ結果を修正[＃31372](https://github.com/pingcap/tidb/issues/31372)
-    -   インデックスルックアップ結合使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
+    -   インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
     -   `Order By` の最適化による誤ったクエリ結果を修正 [＃30271](https://github.com/pingcap/tidb/issues/30271)
     -   `MaxDays`と`MaxBackups`の設定がスローログに反映されない問題を修正 [＃25716](https://github.com/pingcap/tidb/issues/25716)
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [＃28078](https://github.com/pingcap/tidb/issues/28078)

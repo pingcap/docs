@@ -13,15 +13,15 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 クラスター内に複数のPlacement Driver（PD）インスタンスがデプロイされている場合、TiDB Dashboardサービスを実際に実行するPDインスタンスは1つだけです。このPDインスタンスではなく他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。TiDB Dashboardへのアクセス用にファイアウォールまたはリバースプロキシが適切に設定されていない場合、ダッシュボードにアクセスした際に、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
--   複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)参照してください。
--   リバース プロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
+-   複数の PD インスタンスを使用した TiDB Dashboardの動作原理については、 [TiDB Dashboardのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
+-   リバース プロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 -   ファイアウォールを正しく構成する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
 ### TiDB Dashboardがデュアルネットワークインターフェースカード（NIC）で展開されている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。 {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
 
 セキュリティ上の理由から、PD上のTiDB Dashboardは、デプロイメント時に指定されたIPアドレスのみを監視します（つまり、1つのNICのみを監視します）。`0.0.0.0`ですべてのNICを監視するわけではありません。そのため、ホストに複数のNICがインストールされている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。
 
-`tiup cluster`または`tiup playground`コマンドを使用して TiDB をデプロイした場合、現時点ではこの問題を解決できません。リバースプロキシを使用して、TiDB Dashboardを別の NIC に安全に公開することをお勧めします。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
+`tiup cluster`または`tiup playground`コマンドを使用して TiDB をデプロイした場合、現時点ではこの問題を解決できません。リバースプロキシを使用して、TiDB Dashboardを別の NIC に安全に公開することをお勧めします。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ## UIに関するよくあるFAQ {#ui-related-faq}
 

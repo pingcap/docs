@@ -61,11 +61,11 @@ summary: TiCDCに基づいたプライマリ・セカンダリディザスタリ
 -   [TiDB向けのソフトウェアおよびハードウェアに関する推奨事項](/hardware-and-software-requirements.md)
 -   [TiCDC向けのソフトウェアおよびハードウェアに関する推奨事項](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
 
-TiDBプライマリクラスタとセカンダリクラスタのデプロイ方法の詳細については、 [TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
+TiDBプライマリクラスタとセカンダリクラスタのデプロイ方法の詳細については、 [TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 TiCDCを導入する際は、セカンダリクラスタとTiCDCを一緒に導入・管理する必要があり、両者間のネットワークが接続されている必要があることに注意してください。
 
--   既存のプライマリ クラスターに TiCDC をデプロイするには、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。
+-   既存のプライマリ クラスターに TiCDC をデプロイするには、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
 -   新しいプライマリクラスタとTiCDCをデプロイするには、以下のデプロイテンプレートを使用し、必要に応じて構成パラメータを変更してください。
 
     ```yaml
@@ -226,7 +226,7 @@ nohup ./minio server ./data --address :6060 &
     tiup cdc cli changefeed create --server=http://10.1.1.9:8300 --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561" --config changefeed.toml
     ```
 
-    変更フィードの設定の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)参照してください。
+    変更フィードの設定の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 2.  変更フィードタスクが正しく実行されているかどうかを確認するには、コマンド`changefeed query`を実行します。クエリ結果には、タスク情報とタスクの状態が含まれます。引数`--simple`または`-s`を指定すると、基本的なレプリケーション状態とチェックポイント情報のみが表示されます。この引数を指定しない場合、出力には詳細なタスク構成、レプリケーション状態、およびレプリケーションテーブル情報が含まれます。
 
@@ -408,8 +408,8 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 双方向レプリケーション機能により、2つのリージョンにあるTiDBクラスタ間でデータのレプリケーションが可能になります。このDRソリューションは、データのセキュリティと信頼性を保証するとともに、データベースの書き込みパフォーマンスも確保します。計画的なDR切り替えでは、新しいチェンジフィードを開始する前に実行中のチェンジフィードを停止する必要がないため、運用とメンテナンスが簡素化されます。
 
-双方向DRクラスタを構築するには、 [TiCDCの双方向複製](/ticdc/ticdc-bidirectional-replication.md)参照してください。
+双方向DRクラスタを構築するには、 [TiCDCの双方向複製](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
-前の手順で問題が発生した場合は、まず[TiDBに関するよくある質問](/faq/faq-overview.md)で問題の解決策を見つけてください。問題が解決しない場合は、 [バグを報告する](/support.md)実行してください。
+前の手順で問題が発生した場合は、まず[TiDBに関するよくある質問](/faq/faq-overview.md)で問題の解決策を見つけてください。問題が解決しない場合は、 [バグを報告する](/support.md)を実行してください。

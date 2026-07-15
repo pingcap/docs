@@ -652,7 +652,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
-    詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)参照してください。
+    詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。
 
 2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 

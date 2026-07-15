@@ -45,7 +45,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
         1.  **宛先**で、 **Kafka**を選択します。
         2.  **[接続方法]**で**[プライベート リンク]**を選択します。
     4.  **続行する前に、** TiDB Cloud AWS アカウントの情報をリマインダーに書き留めておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
-    5.  **「AZの数」**を選択します。この例では、 **「3つのAZ」**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)参照してください。
+    5.  **「AZの数」**を選択します。この例では、 **「3つのAZ」**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)を参照してください。
     6.  Kafka プライベート リンク サービスに固有の**Kafka アドバタイズ リスナー パターン**を入力します。
         1.  一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafkaアドバタイズリスナーパターン**を生成する際に使用します。
         2.  **「使用状況を確認して生成」をクリックすると、**ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズ リスナーを組み立てるために使用される**Kafka アドバタイズ リスナー パターンが**生成されます。
@@ -772,7 +772,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>**プライベートリンク**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>**プライベートリンク**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
 2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 

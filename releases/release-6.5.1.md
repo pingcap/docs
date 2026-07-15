@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
--   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)参照してください。
+-   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
     -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
@@ -36,11 +36,11 @@ TiDB バージョン: 6.5.1
         -   IPv6 アドレスの完全サポート: TiDB は、クライアント接続、ノード間の内部通信、外部システムとの通信など、すべてのネットワーク接続で IPv6 アドレスの使用をサポートします。
         -   デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワーク展開モードを選択できます。
 
-        IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)参照してください。
+        IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)を参照してください。
 
     -   TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [morgo](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)参照してください。
+        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
 
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf)
 

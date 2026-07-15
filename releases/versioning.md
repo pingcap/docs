@@ -16,7 +16,7 @@ TiDB には 2 つのリリース シリーズがあります。
 -   長期サポートリリース
 -   開発マイルストーンリリース（TiDB v6.0.0 で導入）
 
-TiDB のメジャー リリースのサポート ポリシーについては、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)参照してください。
+TiDB のメジャー リリースのサポート ポリシーについては、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)を参照してください。
 
 ## リリースバージョン管理 {#release-versioning}
 

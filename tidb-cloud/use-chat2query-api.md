@@ -111,7 +111,7 @@ TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイント
 | 置く | `/v3/dataSummaries/{data_summary_id}`                             | このエンドポイントは、特定のデータ サマリーを更新します。                                                                                                            |
 | 置く | `/v3/dataSummaries/{data_summary_id}/tables/{table_name}`         | このエンドポイントは、特定のデータ サマリー内の特定のテーブルの説明を更新します。                                                                                                |
 | 置く | `/v3/dataSummaries/{data_summary_id}/tables/{table_name}/columns` | このエンドポイントは、特定のデータ サマリー内の特定のテーブルの列の説明を更新します。                                                                                              |
-| 役職 | `/v3/knowledgeBases`                                              | このエンドポイントは新しいナレッジベースを作成します。ナレッジベース関連のエンドポイントの使用方法の詳細については、 [ナレッジベースを活用する](/tidb-cloud/use-chat2query-knowledge.md)参照してください。              |
+| 役職 | `/v3/knowledgeBases`                                              | このエンドポイントは新しいナレッジベースを作成します。ナレッジベース関連のエンドポイントの使用方法の詳細については、 [ナレッジベースを活用する](/tidb-cloud/use-chat2query-knowledge.md)を参照してください。              |
 | 得る | `/v3/knowledgeBases`                                              | このエンドポイントはすべてのナレッジ ベースを取得します。                                                                                                            |
 | 得る | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジ ベースを取得します。                                                                                                            |
 | 置く | `/v3/knowledgeBases/{knowledge_base_id}`                          | このエンドポイントは、特定のナレッジ ベースを更新します。                                                                                                            |
@@ -119,7 +119,7 @@ TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイント
 | 得る | `/v3/knowledgeBases/{knowledge_base_id}/data`                     | このエンドポイントは、特定のナレッジ ベースからデータを取得します。                                                                                                       |
 | 置く | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジ ベース内の特定のデータを更新します。                                                                                                       |
 | 削除 | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | このエンドポイントは、ナレッジ ベースから特定のデータを削除します。                                                                                                       |
-| 役職 | `/v3/sessions`                                                    | このエンドポイントは新しいセッションを作成します。セッション関連のエンドポイントの使用方法の詳細については、 [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)参照してください。         |
+| 役職 | `/v3/sessions`                                                    | このエンドポイントは新しいセッションを作成します。セッション関連のエンドポイントの使用方法の詳細については、 [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)を参照してください。         |
 | 得る | `/v3/sessions`                                                    | このエンドポイントは、すべてのセッションのリストを取得します。                                                                                                          |
 | 得る | `/v3/sessions/{session_id}`                                       | このエンドポイントは、特定のセッションの詳細を取得します。                                                                                                            |
 | 置く | `/v3/sessions/{session_id}`                                       | このエンドポイントは特定のセッションを更新します。                                                                                                                |

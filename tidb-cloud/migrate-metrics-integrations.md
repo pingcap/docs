@@ -37,7 +37,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 2.  左側のナビゲーションパネルで、 **[設定]** &gt; **[統合]**をクリックします。
 
-3.  **「統合」**ページで、必要に応じて新しい統合を作成します。詳細については、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)および[TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)参照してください。
+3.  **「統合」**ページで、必要に応じて新しい統合を作成します。詳細については、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)および[TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
 
 ## インパクトステートメント {#impact-statement}
 

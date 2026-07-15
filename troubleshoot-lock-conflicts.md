@@ -155,7 +155,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 セッションがスキーマの変更を待機している場合、メタデータ ロックが原因である可能性があります。
 
-詳細については[メタデータロック](/metadata-lock.md)参照してください。
+詳細については[メタデータロック](/metadata-lock.md)を参照してください。
 
 ## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 

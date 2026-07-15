@@ -406,14 +406,14 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   説明：
 
-    低速TiKVノードがあります。1 `raftstore.inspect-interval` TiKV低速ノードの検出を制御します。詳細については[`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)参照してください。
+    低速TiKVノードがあります。1 `raftstore.inspect-interval` TiKV低速ノードの検出を制御します。詳細については[`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)を参照してください。
 
 -   解決：
 
     -   [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)監視し、ストア低速スコアのメトリックを確認します。メトリック値が80を超えるノードを特定し、低速ノードとして検出します。
     -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     -   レイテンシーのタイムアウト制限を増やすには、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)構成項目を大きな値に設定します。
-    -   アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)参照してください。
+    -   アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 ## TiKVアラートルール {#tikv-alert-rules}
 
@@ -449,7 +449,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`を実行して、GC リーダーに対応する`tidb-server`を見つけます。
     2.  `tidb-server`のログを確認し、`grep gc_worker tidb.log` を実行します。
-    3.  この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受ける](/support.md)取得してください。
+    3.  この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受ける](/support.md)を取得してください。
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
@@ -539,7 +539,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  [**TiKV詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)監視し、アラート対象の TiKV ノードの**サーバーあたりの 99% Propose 待機期間**メトリックが他の TiKV ノードと比べて大幅に高いかどうかを確認します。高い場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジューリングが適切に機能しているかどうかを確認する必要があります。
     2.  [**TiKV詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
-    3.  アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)参照してください。
+    3.  アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 #### `TiKV_coprocessor_request_wait_seconds` {#tikv-coprocessor-request-wait-seconds}
 
@@ -772,11 +772,11 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 ## TiFlashアラートルール {#tiflash-alert-rules}
 
-TiFlashアラート ルールの詳細な説明については、 [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)参照してください。
+TiFlashアラート ルールの詳細な説明については、 [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
 ## TiCDCアラートルール {#ticdc-alert-rules}
 
-TiCDC アラート ルールの詳細な説明については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)参照してください。
+TiCDC アラート ルールの詳細な説明については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)を参照してください。
 
 ## Node_exporterホストアラートルール {#node-exporter-host-alert-rules}
 

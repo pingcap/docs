@@ -22,7 +22,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   スケーリング操作およびローリング アップグレード中に永続的なクライアント接続を維持します。
         -   リソース利用率を向上させるために、TiDB ノード全体にトラフィックを均等に分散します。
 
-        詳細については[TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)参照してください。
+        詳細については[TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)を参照してください。
 
 -   **TiDB Cloud Essential**
 
@@ -34,7 +34,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         プライベートリンク接続は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の[TiDB Cloudコンソール](https://tidbcloud.com)と[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)両方で利用できるようになりました。この機能により、TiDB Cloudと下流リソース（MySQL、Apache Kafka など）間のプライベートかつ直接的な接続を確立できます。これは、 TiDB Cloudからお客様のインフラストラクチャへの接続を開始する変更フィードやその他のデータフローサービスとの統合向けにカスタマイズされています。
 
-        詳細については[Dataflow のプライベート リンク接続](/tidb-cloud/serverless-private-link-connection.md)参照してください。
+        詳細については[Dataflow のプライベート リンク接続](/tidb-cloud/serverless-private-link-connection.md)を参照してください。
 
 ## 2025年12月16日 {#december-16-2025}
 
@@ -46,7 +46,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         既存の変更フィードを複製する際に、主要な設定とルーティング情報を保持できるようになりました。この機能により、失敗した変更フィードを迅速に再作成したり、同様の設定で新しい変更フィードを作成したりできるため、セットアップ時間と運用上の労力を削減できます。
 
-        詳細については[チェンジフィードを複製する](/tidb-cloud/changefeed-overview.md#duplicate-a-changefeed)参照してください。
+        詳細については[チェンジフィードを複製する](/tidb-cloud/changefeed-overview.md#duplicate-a-changefeed)を参照してください。
 
 **コンソールの変更**
 
@@ -90,7 +90,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     [監査ログの一覧表示](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Audit-Log/paths/~1auditLogs/get)エンドポイントは、コンソール監査ログへのプログラムによるアクセスを提供します。このエンドポイントを使用することで、監査ログを自動的に取得し、セキュリティとコンプライアンスの要件を満たすために定期的なバックアップをスケジュールできます。
 
-    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)参照してください。
+    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)を参照してください。
 
 ## 2025年12月2日 {#december-2-2025}
 
@@ -102,9 +102,9 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
-        統合手順については、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
+        統合手順については、 [TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 
-        既存の Prometheus 統合をクラスター レベルに移行するには、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)参照してください。
+        既存の Prometheus 統合をクラスター レベルに移行するには、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)を参照してください。
 
 ## 2025年11月18日 {#november-18-2025}
 
@@ -116,7 +116,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         以前は、変更フィードを一時停止して設定を確認し、再開する必要がありました。**変更フィード**ページでは、サマリービューに完全な設定が直接表示されるようになりました。今回のアップデートでは、編集モードと表示モードの一貫性を維持し、レイアウトを再設計して読​​みやすさを向上させました。これにより、現在の設定をより効率的に確認できます。
 
-        詳細については[チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)参照してください。
+        詳細については[チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
 
 ## 2025年11月11日 {#november-11-2025}
 
@@ -128,7 +128,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         この機能を使用すると、元の構成を正確に復元するか、ニーズに合った別のストレージタイプを選択できます。
 
-        詳細については[新しいクラスターにデータを復元する](/tidb-cloud/backup-and-restore.md#restore-data-to-a-new-cluster)参照してください。
+        詳細については[新しいクラスターにデータを復元する](/tidb-cloud/backup-and-restore.md#restore-data-to-a-new-cluster)を参照してください。
 
 ## 2025年11月4日 {#november-4-2025}
 
@@ -138,11 +138,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに VPC ピアリング経由で接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP 範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要がなくなりました。
 
-        詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
+        詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
     -   TiDB Cloud Dedicated では、4 vCPU ノードサイズに関するガイダンスとメッセージがより明確になりました。このノードサイズは、非本番環境でのTiDB Cloud機能のテスト、学習、および探索にのみ使用してください。
 
-        詳細については[TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)参照してください。
+        詳細については[TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 ## 2025年10月28日 {#october-28-2025}
 
@@ -152,7 +152,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     接続の安定性を向上させ、TiDBサーバーの再起動またはメンテナンス中に予期しない切断を防ぐには、データベース接続の最大有効期間を 30 分未満に設定することをお勧めします。
 
-    詳細については[接続の有効期間を設定する](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections)参照してください。
+    詳細については[接続の有効期間を設定する](/develop/dev-guide-connection-parameters.md#configure-the-lifetime-of-connections)を参照してください。
 
 **APIの変更**
 
@@ -178,13 +178,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   **MySQL のプライベート リンク シンク**: MySQL にデータをシンクするためのより安全な方法を提供し、プライベート リンク経由で別のTiDB Cloud Dedicated クラスターにデータを直接シンクすることもサポートするようになりました。
         -   **カスタム ドメインのサポート**: セルフホスト型 Kafka サービスを使用する場合、データ シンクのカスタム ドメインを構成して、セキュリティを強化し、サーバーの再起動を必要とせずに、アドバタイズされたリスナーの更新をより柔軟に行うことができます。
 
-        詳細については[Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)参照してください。
+        詳細については[Changefeeds のプライベート エンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)を参照してください。
 
     -   現在、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[Prometheus 統合（PREVIEW）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)が使用可能です。
 
         TiDB Cloudは、Prometheusとの連携をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になります。この機能により、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのメトリクスをシームレスにPrometheusに送信できるようになり、統合プラットフォームで高度なアラート機能を実現できます。
 
-        詳細については[TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)参照してください。
+        詳細については[TiDB Cloud をPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 
 ## 2025年10月14日 {#october-14-2025}
 
@@ -215,7 +215,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         <CustomContent language="en,zh">
 
-        詳細については[TiDB Cloud Essential が AWS と Alibaba Cloud でパブリックプレビューとして利用可能になりました](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/)参照してください。
+        詳細については[TiDB Cloud Essential が AWS と Alibaba Cloud でパブリックプレビューとして利用可能になりました](https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/)を参照してください。
 
         </CustomContent>
 
@@ -229,7 +229,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         使用量の上限を超えると、処理能力が制限される可能性があります。サービスへの影響を避けるため、最大RCUを増やすことをご検討ください。
 
-        イベントの詳細については、 [TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)参照してください。
+        イベントの詳細については、 [TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
 
     -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)では、より迅速な診断と容量計画のために次のメトリックが追加されます。
 
@@ -237,7 +237,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   `Lock-wait (P95/P99)` : ロック待機時間のパーセンタイルを監視して競合ホットスポットを表面化させます。
         -   `Idle Connection Duration (P99 incl. not/in txn)` : プーラーの制限とタイムアウトを調整するために、トランザクション中とトランザクション外での長時間アイドル状態の接続を識別します。
 
-        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
 ## 2025年9月30日 {#september-30-2025}
 
@@ -251,7 +251,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         統合手順については、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)と[TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
 
-        既存の Datadog と New Relic の統合をクラスター レベルに移行するには、 [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)参照してください。
+        既存の Datadog と New Relic の統合をクラスター レベルに移行するには、 [DatadogとNew Relicの統合の移行](/tidb-cloud/migrate-metrics-integrations.md)を参照してください。
 
 ## 2025年9月23日 {#september-23-2025}
 
@@ -265,7 +265,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         この機能は、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md)、[Apache Kafka へのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)、および[Apache Pulsar へのシンク](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)で利用可能です。
 
-        分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+        分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
     -   Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノード サイズ`32 vCPU, 64 GiB`を指定します。
 
@@ -295,7 +295,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         2.  プロジェクトの CMEK 構成を完了します。
         3.  CMEK 構成と同じリージョンの Azure でホストされるTiDB Cloud Dedicated クラスターを作成します。
 
-        詳細については[Azure での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)参照してください。
+        詳細については[Azure での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)を参照してください。
 
 ## 2025年9月9日 {#september-9-2025}
 
@@ -312,7 +312,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     -   新しく作成された[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターでは、リージョン高可用性がデフォルトで有効になっており、クラスターの作成時に必要に応じてゾーン高可用性に変更できます。
 
-    詳細については[TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
+    詳細については[TiDB Cloud StarterとEssentialの高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
 
 </CustomContent>
 
@@ -352,19 +352,19 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   **AWS Bedrock とのネイティブ統合**: AWS Bedrock の Amazon Titan および Cohere テキスト埋め込みモデルを含む、無料クォータで管理される埋め込みモデル。
         -   **SQL および Python のサポート**、埋め込みの作成、保存、クエリのコード例。
 
-        詳細については[自動埋め込み](https://docs.pingcap.com/tidbcloud/vector-search-auto-embedding-overview/?plan=starter)参照してください。
+        詳細については[自動埋め込み](https://docs.pingcap.com/tidbcloud/vector-search-auto-embedding-overview/?plan=starter)を参照してください。
 
 -   **TiDB Cloud Dedicated**
 
     -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)では Index Insight (ベータ) 機能はサポートされなくなりました。
 
-        代わりに、TiDB v8.5.0 以降のバージョンで利用可能な[インデックスアドバイザー](/index-advisor.md)使用することをお勧めします。Index Advisor では`RECOMMEND INDEX` SQL ステートメントが導入されており、クエリのパフォーマンスを向上させるインデックスを推奨することで、ワークロードの最適化に役立ちます。
+        代わりに、TiDB v8.5.0 以降のバージョンで利用可能な[インデックスアドバイザー](/index-advisor.md)を使用することをお勧めします。Index Advisor では`RECOMMEND INDEX` SQL ステートメントが導入されており、クエリのパフォーマンスを向上させるインデックスを推奨することで、ワークロードの最適化に役立ちます。
 
     -   週次バックアップが有効になっている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで、ポイントインタイム リストア機能を手動で無効にできるようになりました。
 
         この機能強化により、高 RPO 保護のためのポイントインタイム リストアを必要としないクラスターのコストが削減されます。
 
-        詳細については[TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+        詳細については[TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 ## 2025年8月12日 {#august-12-2025}
 
@@ -408,7 +408,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
         -   [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
 
-        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
 </CustomContent>
 
@@ -433,7 +433,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
         -   [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
 
-        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)参照してください。
+        詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
 </CustomContent>
 
@@ -455,13 +455,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
     -   **エクスポート**: クラスターのデータ エクスポート タスクを管理します。
     -   **インポート**: クラスターのデータ インポート タスクを管理します。
 
-    詳細については[TiDB Cloud Starterと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)参照してください。
+    詳細については[TiDB Cloud Starterと基本 API](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless/)を参照してください。
 
 -   TiDB Cloud IAM API (v1beta1) は、組織レベルとプロジェクトレベルの両方で API キー管理のロールベースのアクセス制御 (RBAC) をサポートします。
 
     セキュリティとアクセス制御を強化するために、組織レベルまたはプロジェクト レベルで API キーのロールを設定できます。
 
-    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)参照してください。
+    詳細については[TiDB CloudIAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/)を参照してください。
 
 ## 2025年7月31日 {#july-31-2025}
 
@@ -522,13 +522,13 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能強化により、セキュリティとコンプライアンスの要件を満たすためにバックアップ完了アクティビティをログに記録できます。
 
-    詳細については[コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)参照してください。
+    詳細については[コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)を参照してください。
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 変更フィード内の列値のフィルタリングをサポートします。
 
     式を使用して変更フィード内の特定の列値をフィルタリングし、ソースで無関係なデータを除外できるようになりました。この機能により、DMLイベントのきめ細かなフィルタリングが可能になり、リソース消費を削減し、パフォーマンスを向上させることができます。
 
-    詳細については[チェンジフィード](/tidb-cloud/changefeed-overview.md)参照してください。
+    詳細については[チェンジフィード](/tidb-cloud/changefeed-overview.md)を参照してください。
 
 ## 2025年6月24日 {#june-24-2025}
 
@@ -542,7 +542,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能を使用すると、キー管理サービス (KMS) を通じて管理する対称暗号化キーを活用して、保存中のデータを保護できます。
 
-    詳細については[AWS での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)参照してください。
+    詳細については[AWS での顧客管理の暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)を参照してください。
 
 ## 2025年6月17日 {#june-17-2025}
 
@@ -550,7 +550,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、16 vCPU および 32 vCPU を持つ TiKV ノードの最大ストレージサイズが**6144 GiB**から**4096 GiB**に変更されます。
 
-    詳細については[TiKVノードのストレージサイズ](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)参照してください。
+    詳細については[TiKVノードのストレージサイズ](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)を参照してください。
 
 **コンソールの変更**
 
@@ -588,7 +588,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これで、 `tidbcloud_disk_read_latency`や`tidbcloud_kv_request_duration`などの追加のメトリックを Prometheus に統合して、 TiDB Cloud Dedicated のパフォーマンスのより多くの側面を追跡できるようになりました。
 
-    利用可能なメトリックと、既存ユーザーと新規ユーザーの両方に対してメトリックを有効にする方法の詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)参照してください。
+    利用可能なメトリックと、既存ユーザーと新規ユーザーの両方に対してメトリックを有効にする方法の詳細については、 [TiDB Cloud をPrometheus および Grafana と統合する (ベータ版)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)を参照してください。
 
 -   TiKV [標準](/tidb-cloud/size-your-cluster.md#standard-storage)および[パフォーマンス](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage)ストレージの価格が正式に発表されました。
 
@@ -632,11 +632,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能強化により、TiDB Cloud Dedicated クラスターの分析データストレージ容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
-    詳細については[TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。
+    詳細については[TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)を参照してください。
 
 -   メンテナンス タスクを構成および再スケジュールするための直感的なオプションを提供することで、メンテナンス ウィンドウの構成エクスペリエンスを強化します。
 
-    詳細については[メンテナンスウィンドウを構成する](/tidb-cloud/configure-maintenance-window.md)参照してください。
+    詳細については[メンテナンスウィンドウを構成する](/tidb-cloud/configure-maintenance-window.md)を参照してください。
 
 -   TiKV [標準](/tidb-cloud/size-your-cluster.md#standard-storage)および[パフォーマンス](/tidb-cloud/size-your-cluster.md#performance-and-plus-storage)ストレージタイプの割引期間を延長します。プロモーションは2025年6月5日に終了します。この日以降は、価格が標準料金に戻ります。
 
@@ -654,7 +654,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターは、 [アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)を使用して[Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)にデータをエクスポートできるようになりました。
 
-    詳細については[TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md#alibaba-cloud-oss)参照してください。
+    詳細については[TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md#alibaba-cloud-oss)を参照してください。
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターの TiDB バージョンを[バージョン7.1.3](https://docs.pingcap.com/tidb/stable/release-7.1.3)から[バージョン7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)にアップグレードします。
 
@@ -717,7 +717,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。1 [TiDB Cloudコンソール](https://tidbcloud.com/)許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
-    詳細については[パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)参照してください。
+    詳細については[パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## 2025年3月18日 {#march-18-2025}
 
@@ -725,17 +725,17 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   リソース管理の柔軟性を高めるために、Google Cloud にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して TiDB ノードグループの作成をサポートします。
 
-    詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)参照してください。
+    詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)を参照してください。
 
 -   AWS にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのTiDB Cloudにデータベース監査ログ ファイルを保存することをサポートします。
 
     これらの監査ログファイルは、 TiDB Cloudから直接ダウンロードできます。この機能はリクエストに応じてのみ利用可能であることにご注意ください。
 
-    詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
+    詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
 
 -   多要素認証（MFA）の管理を改善することで、 TiDB Cloudアカウントのセキュリティを強化します。この機能は、TiDB Cloudのパスワードベースのログインに適用されます。
 
-    詳細については[パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)参照してください。
+    詳細については[パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)を参照してください。
 
 ## 2025年2月18日 {#february-18-2025}
 
@@ -766,7 +766,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   タスクあたり最大 250 MiB の単一のローカル CSV ファイルを[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターにインポートできるようになりました。これは、以前の 50 MiB の制限から増加されました。
 
-    詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)参照してください。
+    詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 
 ## 2025年1月14日 {#january-14-2025}
 
@@ -776,7 +776,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   通知機能を導入すると、 [TiDB Cloudコンソール](https://tidbcloud.com/)を通じてTiDB Cloud の更新とアラートに関する最新情報を即座に入手できます。
 
-    詳細については[通知](/tidb-cloud/notifications.md)参照してください。
+    詳細については[通知](/tidb-cloud/notifications.md)を参照してください。
 
 ## 2025年1月2日 {#january-2-2025}
 
@@ -784,7 +784,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   リソース管理の柔軟性を高めるために、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでの TiDB ノードグループの作成をサポートします。
 
-    詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)参照してください。
+    詳細については[TiDBノードグループの概要](/tidb-cloud/tidb-node-group-overview.md)を参照してください。
 
 -   Private Connect (ベータ版) を介して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを AWS および Google Cloud の汎用 Kafka に接続することをサポートします。
 
@@ -796,17 +796,17 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能を使用すると、追加の[プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生することに注意してください。
 
-    詳細については[Apache Kafka への Changefeed シンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network)参照してください。
+    詳細については[Apache Kafka への Changefeed シンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md#network)を参照してください。
 
 -   Kafka の変更フィードに追加の構成可能なオプションを導入します。
 
-    -   Debeziumプロトコルのサポート。Debeziumはデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はイベントと呼ばれるメッセージに変換され、Kafkaに送信されます。詳細については、 [TiCDC Debeziumプロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)参照してください。
+    -   Debeziumプロトコルのサポート。Debeziumはデータベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はイベントと呼ばれるメッセージに変換され、Kafkaに送信されます。詳細については、 [TiCDC Debeziumプロトコル](https://docs.pingcap.com/tidb/v8.1/ticdc-debezium)を参照してください。
 
     -   すべてのテーブルに対して単一のパーティション ディスパッチャーを定義することも、テーブルごとに異なるパーティション ディスパッチャーを定義することもサポートします。
 
     -   Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2 つの新しいディスパッチャ タイプを導入しました。
 
-    詳細については[Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+    詳細については[Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
 -   TiDB Cloudでの役割の強化:
 
@@ -818,7 +818,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
         -   `Organization Billing Admin`から`Organization Billing Manager`
         -   `Organization Console Audit Admin`から`Organization Console Audit Manager`
 
-    詳細については[アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md#organization-roles)参照してください。
+    詳細については[アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md#organization-roles)を参照してください。
 
 -   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターのリージョン高可用性 (ベータ版)。
 
@@ -830,7 +830,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     この機能は現在、AWS 東京 (ap-northeast-1) リージョンでのみ利用可能で、クラスターの作成時にのみ有効にできます。
 
-    詳細については[TiDB Cloud Serverless の高可用性](/tidb-cloud/serverless-high-availability.md)参照してください。
+    詳細については[TiDB Cloud Serverless の高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
 
 -   新しい[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[バージョン8.1.1](https://docs.pingcap.com/tidb/stable/release-8.1.1)から[バージョン8.1.2](https://docs.pingcap.com/tidb/stable/release-8.1.2)にアップグレードします。
 

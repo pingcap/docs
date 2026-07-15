@@ -11,7 +11,7 @@ summary: TiDBの機能概要について学びましょう。
 
 > **Note:**
 >
-> PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な用途には、[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)使用することをお勧めします。
+> PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な用途には、[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。
 >
 > 下記の表の略語は、それぞれ以下の意味を持ちます。
 >
@@ -317,7 +317,7 @@ summary: TiDBの機能概要について学びましょう。
 
 [^1]: TiDBはlatin1をutf8のサブセットとして誤って扱っています。詳細は[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 
-[^2]: バージョン6.5.0以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数にリストされている関数に対して作成された式インデックスはテスト済みであり、本番環境で使用できます。今後のリリースでは、さらに多くの関数がサポートされる予定です。この変数にリストされていない関数については、対応する式インデックスは本番環境での使用は推奨されません。詳細については、 [発現指数](/sql-statements/sql-statement-create-index.md#expression-index)参照してください。
+[^2]: バージョン6.5.0以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数にリストされている関数に対して作成された式インデックスはテスト済みであり、本番環境で使用できます。今後のリリースでは、さらに多くの関数がサポートされる予定です。この変数にリストされていない関数については、対応する式インデックスは本番環境での使用は推奨されません。詳細については、 [発現指数](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 [^3]: サポートされている SQL ステートメントの完全なリストについては[ステートメント参照](/sql-statements/sql-statement-select.md)てください。
 

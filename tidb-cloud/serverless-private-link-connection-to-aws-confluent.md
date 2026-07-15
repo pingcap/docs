@@ -46,7 +46,7 @@ Confluent Cloud ネットワークの一意の名前を取得するには、次�
 
 ## ステップ2. ネットワークにPrivateLinkアクセスを追加する {#step-2-add-a-privatelink-access-to-the-network}
 
-[ステップ1](#step-1-set-up-a-confluent-cloud-network)で特定または設定したネットワークにPrivateLinkアクセスを追加します。詳細については、 [Confluent Cloud に PrivateLink アクセスを追加する](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud)参照してください。
+[ステップ1](#step-1-set-up-a-confluent-cloud-network)で特定または設定したネットワークにPrivateLinkアクセスを追加します。詳細については、 [Confluent Cloud に PrivateLink アクセスを追加する](https://docs.confluent.io/cloud/current/networking/private-links/aws-privatelink.html#add-a-privatelink-access-in-ccloud)を参照してください。
 
 プロセス中に、次の操作を行う必要があります。
 
@@ -55,7 +55,7 @@ Confluent Cloud ネットワークの一意の名前を取得するには、次�
 
 ## ステップ3. ネットワークの下にConfluent Cloud専用クラスタを作成する {#step-3-create-a-confluent-cloud-dedicated-cluster-under-the-network}
 
-[ステップ1](#step-1-set-up-a-confluent-cloud-network)で設定した既存のネットワーク下に Confluent Cloud Dedicated クラスターを作成します。詳細については、 [Confluent Cloud で専用クラスターを作成する](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters)参照してください。
+[ステップ1](#step-1-set-up-a-confluent-cloud-network)で設定した既存のネットワーク下に Confluent Cloud Dedicated クラスターを作成します。詳細については、 [Confluent Cloud で専用クラスターを作成する](https://docs.confluent.io/cloud/current/clusters/create-cluster.html#create-ak-clusters)を参照してください。
 
 ## ステップ4. TiDB Cloudでプライベートリンク接続を作成する {#step-4-create-a-private-link-connection-in-tidb-cloud}
 
@@ -63,7 +63,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 1.  Confluent Cloud の`VPC Service Endpoint`を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
-    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)参照してください。
+    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
     > **Note:**
     >
@@ -71,4 +71,4 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 2.  TiDB Cloudのデータフロー サービスが Confluent クラスターにアクセスできるように、Confluent Cloud サービス ドメインをプライベート リンク接続に接続します。
 
-    詳細については[プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)参照してください。
+    詳細については[プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。

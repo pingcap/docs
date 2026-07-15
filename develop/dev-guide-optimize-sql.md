@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimize-sql/','/ja/tidbcloud/dev-guide-opt
 
 ## 始める前に {#before-you-begin}
 
-[`tiup demo`インポート](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo)使用してデータを準備できます。
+[`tiup demo`インポート](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo)を使用してデータを準備できます。
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
@@ -60,7 +60,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 実行プランの`TableFullScan_5`からわかるように、TiDBは`books`番目のテーブルに対してフルテーブルスキャンを実行し、各行について`title`条件を満たすかどうかを確認します。9の`estRows` `TableFullScan_5`の値は`1000000.00`です。これは、オプティマイザがこのフルテーブルスキャンで`1000000.00`行のデータが使用されると見積もっていることを意味します。
 
-`EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)参照してください。
+`EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
 ### 解決策: セカンダリインデックスを使用する {#solution-use-secondary-index}
 
@@ -110,7 +110,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 実行プラン`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
-TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)参照してください。
+TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)を参照してください。
 
 ### 解決策: カバーインデックスを使用する {#solution-use-covering-index}
 

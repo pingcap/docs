@@ -13,7 +13,7 @@ TiDB バージョン: 6.1.5
 
 ## 互換性の変更 {#compatibility-changes}
 
--   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.1.5を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)参照してください。
+-   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.1.5を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
     -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。

@@ -241,7 +241,7 @@ TiDBコンポーネント間の通信にTLSを設定したら、以下のコマ�
 
 ## 証明書の有効期限 {#certificate-validity}
 
-TiDBクラスタ内の各コンポーネントのTLS証明書の有効期間をカスタマイズできます。例えば、OpenSSLを使用してTLS証明書を発行・生成する場合、 **days**パラメータを使用して有効期間を設定できます。詳細については、 [自己署名証明書を生成する](/generate-self-signed-certificates.md)参照してください。
+TiDBクラスタ内の各コンポーネントのTLS証明書の有効期間をカスタマイズできます。例えば、OpenSSLを使用してTLS証明書を発行・生成する場合、 **days**パラメータを使用して有効期間を設定できます。詳細については、 [自己署名証明書を生成する](/generate-self-signed-certificates.md)を参照してください。
 
 ## 参照 {#see-also}
 

@@ -62,8 +62,8 @@ xxx
 
 このセクションでは、ユーザーが読みたいと思う可能性のある次のような関連ドキュメントを提供します。
 
--   TiCDC を展開および保守する方法については、 [TiCDCのデプロイと管理](/ticdc/deploy-ticdc.md)参照してください。
--   changefeed の詳細については、 [チェンジフィードの概要](/ticdc/ticdc-changefeed-overview.md)参照してください。
+-   TiCDC を展開および保守する方法については、 [TiCDCのデプロイと管理](/ticdc/deploy-ticdc.md)を参照してください。
+-   changefeed の詳細については、 [チェンジフィードの概要](/ticdc/ticdc-changefeed-overview.md)を参照してください。
 
 次のような、ユーザーが興味を持ちそうなドキュメントを直接提供することもできます。
 
