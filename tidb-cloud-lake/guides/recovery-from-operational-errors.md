@@ -51,7 +51,9 @@ If you've accidentally dropped a database, you can restore it using the `UNDROP 
    GRANT OWNERSHIP on sales_data.* to ROLE <role_name>;
    ```
 
-**Important**: A dropped database can only be restored within the retention period (default is 24 hours).
+> **Important:**
+>
+> A dropped database can only be restored within the retention period (default is 24 hours).
 
 For more details, see [UNDROP DATABASE](/tidb-cloud-lake/sql/undrop-database.md) and [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md).
 
@@ -83,7 +85,9 @@ If you've accidentally dropped a table, you can restore it using the `UNDROP TAB
    GRANT OWNERSHIP on sales_data.orders to ROLE <role_name>;
    ```
 
-**Important**: A dropped table can only be restored within the retention period (default is 24 hours).
+> **Important:**
+>
+> A dropped table can only be restored within the retention period (default is 24 hours).
 
 For more details, see [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) and [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md).
 
@@ -122,7 +126,9 @@ If you've accidentally modified or deleted data in a table, you can restore it t
     SELECT * FROM sales_data.orders LIMIT 3;
     ```
 
-**Important**: Flashback operations are only possible for existing tables and within the retention period.
+> **Important:**
+>
+> Flashback operations are only possible for existing tables and within the retention period.
 
 For more details, see [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md).
 
