@@ -1319,13 +1319,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[1, 256]`
-<<<<<<< HEAD
-- This variable is used to set the concurrency of executing the automatic update of statistics. 
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 - Starting from v8.5.7, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
-=======
-- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
-- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_backoff_lock_fast
 
