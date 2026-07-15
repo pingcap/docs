@@ -412,37 +412,14 @@ When you run the `ANALYZE` statement, you can adjust the concurrency using the f
 
 #### `tidb_build_stats_concurrency`
 
-<<<<<<< HEAD
 Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `4`.
-=======
-This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
 
-#### `tidb_build_sampling_stats_concurrency`
+#### `tidb_distsql_scan_concurrency`
 
-This variable controls the following aspects of `ANALYZE` concurrency:
-
-- The concurrency for merging samples collected from different Regions.
-- The concurrency for collecting statistics on special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
-
-The default value is `2`.
-
-#### `tidb_analyze_partition_concurrency`
-
-This variable controls the concurrency for saving `ANALYZE` results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
-
-#### `tidb_analyze_distsql_scan_concurrency`
-
-<<<<<<< HEAD
 When you analyze regular columns, you can use the `tidb_distsql_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `15`.
-=======
-This variable controls the following aspects of `ANALYZE` concurrency:
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
-- The concurrency of scanning TiKV Regions. 
-- The concurrency of scanning Regions for special indexes (indexes generated from virtual columns).
+#### `tidb_index_serial_scan_concurrency`
 
-<<<<<<< HEAD
 When you analyze index columns, you can use the `tidb_index_serial_scan_concurrency` parameter to control the number of Region to be read at one time. The default value is `1`.
 
 ### Persist ANALYZE configurations
@@ -887,9 +864,6 @@ mysql> show warnings;
 +-------+------+-----------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
-=======
-The default value is `4`.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ## See also
 
