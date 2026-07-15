@@ -2435,17 +2435,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
-> **Warning:**
->
-> This variable is deprecated and no longer controls execution behavior. The concurrency of sequential index scans is now controlled by [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50).
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable remains only for backward compatibility. Use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to control the concurrency of sequential index scans.
+- This variable is used to set the concurrency of the `serial scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
 ### tidb_init_chunk_size
 
