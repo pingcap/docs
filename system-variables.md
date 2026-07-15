@@ -1123,7 +1123,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
-- Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
+- Range: `[1, 4294967295]`
 - This variable controls the following aspects of `ANALYZE` concurrency:
     - The concurrency of scanning TiKV Regions.
     - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
@@ -1179,7 +1179,7 @@ mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
-| json,blob,mediumblob,longblob,mediumtext,longtext        |
+| json,blob,mediumblob,longblob    |
 +----------------------------------+
 1 row in set (0.00 sec)
 
@@ -1257,8 +1257,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
-- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_backoff_lock_fast
 

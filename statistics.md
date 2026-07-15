@@ -782,7 +782,7 @@ This variable controls the concurrency for saving `ANALYZE` results (writing Top
 
 This variable controls the following aspects of `ANALYZE` concurrency:
 
-- The concurrency of scanning TiKV Regions. 
+- The concurrency of scanning TiKV Regions.
 - The concurrency of scanning Regions for special indexes (indexes generated from virtual columns).
 
 The default value is `4`.
