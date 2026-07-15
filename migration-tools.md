@@ -13,7 +13,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 
 !TiDB Migration Tools media/migration-tools.png-->
 
-## <a href="/dm/dm-overview.md">TiDB Data Migration (DM)</a> {#a-href-dm-dm-overview-md-tidb-data-migration-dm-a}
+## <a href="/dm/dm-overview.md">TiDB Data Migration (DM)</a> {#tidb-data-migration-dm}
 
 -   **ユーザーシナリオ**: MySQL互換データベースからTiDBへのデータ移行
 -   **アップストリーム**: MySQL、MariaDB、 Aurora
@@ -24,7 +24,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   シャードのマージと移行をサポート
 -   **制限事項**：データのインポート速度はTiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)とほぼ同等で、TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)よりも大幅に遅くなります。そのため、1TiB未満のデータ全体を移行する場合は、DMを使用することをお勧めします。
 
-## <a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a> {#a-href-tidb-lightning-tidb-lightning-overview-md-tidb-lightning-a}
+## <a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a> {#tidb-lightning}
 
 -   **ユーザーシナリオ**: TiDBへの完全なデータのインポート
 -   **上流（インポートされたソースファイル）** :
@@ -41,7 +41,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   データのインポートに[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)使用すると、インポート プロセス中に TiDB クラスターはサービスを提供できません。
     -   TiDB サービスに影響を与えたくない場合は、 TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータのインポートを実行してください。
 
-## <a href="/dumpling-overview.md">Dumpling</a> {#a-href-dumpling-overview-md-dumpling-a}
+## <a href="/dumpling-overview.md">Dumpling</a> {#dumpling}
 
 -   **ユーザーシナリオ**: MySQLまたはTiDBからの完全なデータエクスポート
 -   **アップストリーム**: MySQL、TiDB
@@ -53,7 +53,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   エクスポートしたデータを TiDB 以外のデータベースに復元する場合は、 Dumplingを使用することをお勧めします。
     -   エクスポートしたデータを別の TiDB クラスターに復元する場合は、Backup & Restore (BR) を使用することをお勧めします。
 
-## <a href="/ticdc/ticdc-overview.md">TiCDC</a> {#a-href-ticdc-ticdc-overview-md-ticdc-a}
+## <a href="/ticdc/ticdc-overview.md">TiCDC</a> {#ticdc}
 
 -   **ユーザーシナリオ**：このツールは、TiKVの変更ログをプルすることで実装されます。これにより、クラスターデータを上流のTSOと整合性のある状態に復元し、他のシステムがデータ変更をサブスクライブできるようになります。
 -   **上流**：TiDB
@@ -63,7 +63,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   RawKV のみを使用する TiKV クラスター。
     -   DDL 操作`CREATE SEQUENCE`と TiDB の`SEQUENCE`関数。
 
-## <a href="/br/backup-and-restore-overview.md">Backup & Restore (BR)</a> {#a-href-br-backup-and-restore-overview-md-backup-x26-restore-br-a}
+## <a href="/br/backup-and-restore-overview.md">Backup & Restore (BR)</a> {#backup--restore-br}
 
 -   **ユーザーシナリオ**: データのバックアップとリストアによって大量の TiDB クラスターデータを移行する
 -   **上流**：TiDB
@@ -75,7 +75,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   BR がTiCDC の上流クラスターにデータを復元する場合、復元されたデータは TiCDC によって下流に複製できません。
     -   BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
 
-## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a> {#a-href-sync-diff-inspector-sync-diff-inspector-overview-md-sync-diff-inspector-a}
+## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a> {#sync-diff-inspector}
 
 -   **ユーザーシナリオ**: MySQLプロトコルを使用してデータベースに保存されたデータを比較する
 -   **アップストリーム**: TiDB、MySQL
