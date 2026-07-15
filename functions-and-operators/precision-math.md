@@ -5,7 +5,7 @@ summary: TiDB の高精度計算について学びます。
 
 # 精密計算 {#precision-math}
 
-TiDBの高精度演算サポートはMySQLと一致しています。詳細については、 [MySQL における精密計算](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html)参照してください。
+TiDBの高精度演算サポートはMySQLと一致しています。詳細については、 [MySQL における精密計算](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html)を参照してください。
 
 ## 数値型 {#numeric-types}
 
@@ -50,7 +50,7 @@ DECIMAL列には、先頭の`+`文字目、 `-`文字目、または先頭の`0`
 
 DECIMAL列では、列定義で指定された範囲を超える値は許可されません。例えば、 `DECIMAL(3,0)`列は`-999`から`999`までの範囲をサポートします。7 `DECIMAL(M,D)`列では、小数点の左側に最大`M - D`桁までしか許可されません。
 
-DECIMAL 値の内部形式の詳細については、TiDB ソース コードの[`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go)参照してください。
+DECIMAL 値の内部形式の詳細については、TiDB ソース コードの[`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/types/mydecimal.go)を参照してください。
 
 ## 式の処理 {#expression-handling}
 

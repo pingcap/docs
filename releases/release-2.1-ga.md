@@ -51,7 +51,7 @@ summary: TiDB 2.1 GA は 2018 年 11 月 30 日にリリースされ、安定性
 
     -   ハッシュ結合の実行を最適化します。結合タイプが内部結合またはセミ結合で、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)使用して、各演算子の実行時間と返された行数を含む実行時統計をチェックすることをサポートします。
+    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、各演算子の実行時間と返された行数を含む実行時統計をチェックすることをサポートします。
 
 -   統計
 

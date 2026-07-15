@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 > **Note:**
 >
-> -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
+> -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
@@ -179,7 +179,7 @@ table.bulk_insert([
 
 ## 最近傍を検索 {#search-for-nearest-neighbors}
 
-指定されたクエリの最近傍を検索するには、 `table.search()`メソッドを使用できます。このメソッドは、 デフォルトで[ベクトル検索](/ai/guides/vector-search.md)実行します。
+指定されたクエリの最近傍を検索するには、 `table.search()`メソッドを使用できます。このメソッドは、 デフォルトで[ベクトル検索](/ai/guides/vector-search.md)を実行します。
 
 ```python
 table.search(

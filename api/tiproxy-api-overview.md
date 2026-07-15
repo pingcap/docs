@@ -16,4 +16,4 @@ TiProxy API を使用して、TiProxy クラスターで次の操作を実行で
 -   [TiProxy のヘルスステータスを取得する](/tiproxy/tiproxy-api.md#get-tiproxy-health-status)
 -   [TiProxy監視データを取得する](/tiproxy/tiproxy-api.md#get-tiproxy-monitoring-data)
 
-リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiProxy API](/tiproxy/tiproxy-api.md)参照してください。
+リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiProxy API](/tiproxy/tiproxy-api.md)を参照してください。

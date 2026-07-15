@@ -275,5 +275,5 @@ MySQL 8.0 と以前のバージョンの MySQL では、ビット関数と演算
 
 以下の場合、TiDB のクエリ結果はMySQL 5.7と同じですが、MySQL 8.0 とは異なります。
 
--   バイナリ引数によるビット演算。詳細については[＃30637](https://github.com/pingcap/tidb/issues/30637)参照してください。
--   `BIT_COUNT()`関数の結果。詳細については[＃44621](https://github.com/pingcap/tidb/issues/44621)参照してください。
+-   バイナリ引数によるビット演算。詳細については[＃30637](https://github.com/pingcap/tidb/issues/30637)を参照してください。
+-   `BIT_COUNT()`関数の結果。詳細については[＃44621](https://github.com/pingcap/tidb/issues/44621)を参照してください。

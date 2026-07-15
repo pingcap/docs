@@ -33,5 +33,5 @@ TiDB Cloudリカバリグループを使用すると、 TiDB Cloud Dedicated ク
 
 ## 次は何？ {#what-s-next}
 
--   リカバリ グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)参照してください。
--   リカバリグループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)参照してください。
+-   リカバリ グループの使用を開始するには、 [データベース復旧グループの作成](/tidb-cloud/recovery-group-get-started.md)を参照してください。
+-   リカバリグループの使用方法については、 [データベースのフェイルオーバーと再保護](/tidb-cloud/recovery-group-failover.md)を参照してください。

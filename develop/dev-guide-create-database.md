@@ -78,7 +78,7 @@ mysql
 
 ## 次のステップ {#next-step}
 
-データベースを作成したら、そこに**テーブル**を追加できます。詳細については、[テーブルを作成する](/develop/dev-guide-create-table.md)参照してください。
+データベースを作成したら、そこに**テーブル**を追加できます。詳細については、[テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。
 
 ## お困りですか？ {#need-help}
 

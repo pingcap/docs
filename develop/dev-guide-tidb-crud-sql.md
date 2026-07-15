@@ -16,13 +16,13 @@ TiDB に接続していることを確認してください。そうでない場
 
 > **Note:**
 >
-> このドキュメントは[TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)参照してください。
+> このドキュメントは[TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照してください。
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
 SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)試すことができます。最初に[TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、その中で SQL ステートメントを実行することもできます。
 
-このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [SQLステートメントの概要](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## カテゴリ {#category}
 
@@ -36,7 +36,7 @@ SQLは、その関数に応じて以下の4種類に分類されます。
 
 -   **DCL（データ制御言語）** ：アクセス権限とセキュリティレベルを定義するために使用されます。
 
-以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)または[SQLステートメントの概要](/sql-statements/sql-statement-overview.md)参照してください。
+以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)または[SQLステートメントの概要](/sql-statements/sql-statement-overview.md)を参照してください。
 
 ## データ操作言語 {#data-manipulation-language}
 

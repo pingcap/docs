@@ -26,7 +26,7 @@ TiDB のロールベースアクセス制御 (RBAC) システムの実装は、M
 CREATE ROLE 'app_developer', 'app_read', 'app_write';
 ```
 
-ロールの命名形式と規則については、 [TiDB ユーザーアカウント管理](/user-account-management.md)参照してください。
+ロールの命名形式と規則については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。
 
 ロールは`mysql.user`テーブルに保存され、ロール名のホスト名部分（省略されている場合）はデフォルトで`'%'`になります。作成しようとしているロール名は一意である必要があります。一意でない場合はエラーが報告されます。
 
@@ -34,7 +34,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 ### ロールに権限を付与する {#grant-a-privilege-to-a-role}
 
-ロールに権限を付与する操作は、ユーザーに権限を付与する操作と同じです。詳細は[TiDB権限管理](/privilege-management.md)参照してください。
+ロールに権限を付与する操作は、ユーザーに権限を付与する操作と同じです。詳細は[TiDB権限管理](/privilege-management.md)を参照してください。
 
 たとえば、次のステートメントを使用して、 `app_read`ロールに`app_db`データベースを読み取る権限を付与できます。
 

@@ -50,7 +50,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
         {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
         ]
 
-    設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)参照してください。
+    設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
 2.  増分データを Kafka に複製するための変更フィードを作成します。
 

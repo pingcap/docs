@@ -89,7 +89,7 @@ CentOS 7の新規インスタンスの使用をお勧めします。仮想マシ
 
     -   v5.4.0 より前のTiDB Lightningでは、 `charset=GBK`のテーブルをインポートできません。
 
--   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)参照してください。
+-   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
 
 -   BRでTiDB Lightning を使用する場合は、次の点に注意してください。
 

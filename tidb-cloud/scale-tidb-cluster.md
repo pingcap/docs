@@ -16,7 +16,7 @@ TiDB クラスターは次の次元で拡張できます。
 -   TiDB、TiKV、 TiFlashの vCPU と RAM
 -   TiKVとTiFlashの保存
 
-TiDB クラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)参照してください。
+TiDB クラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 > **Note:**
 >
@@ -63,7 +63,7 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を増減できます。
 >     -   Google Cloud でホストされ、2023/04/26 以降に作成されています。
 >     -   Azure でホストされます。
 > -   AWS では、vCPU と RAM の変更にクールダウン期間があります。TiDB クラスターが AWS でホストされている場合、TiKV またはTiFlashの vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
-> -   vCPUを減らす前に、TiKVまたはTiFlashの現在のノードストレージが、対象のvCPUの最大ノードストレージを超えていないことを確認してください。詳細は[TiKVノードストレージ](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)と[TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)参照してください。いずれかのコンポーネントの現在のストレージが上限を超えている場合は、vCPUを減らすことはできません。
+> -   vCPUを減らす前に、TiKVまたはTiFlashの現在のノードストレージが、対象のvCPUの最大ノードストレージを超えていないことを確認してください。詳細は[TiKVノードストレージ](/tidb-cloud/size-your-cluster.md#tikv-node-storage-size)と[TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)を参照してください。いずれかのコンポーネントの現在のストレージが上限を超えている場合は、vCPUを減らすことはできません。
 
 TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、次の手順を実行します。
 

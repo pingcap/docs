@@ -22,7 +22,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 >
 > Python の使い方については、 [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)ご覧ください。
 >
-> AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)参照してください。
+> AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)を参照してください。
 
 ## さあ始めましょう {#get-started}
 

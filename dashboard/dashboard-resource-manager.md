@@ -23,7 +23,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 リソース マネージャー ページには、次の 3 つのセクションがあります。
 
--   コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)参照してください。
+-   コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
 -   容量の見積もり：リソース計画を立てる前に、クラスター全体の容量を把握する必要があります。以下のいずれかの方法を使用できます。
 
@@ -65,7 +65,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 > **Note:**
 >
-> 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)参照してください。
+> 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)を参照してください。
 
 ## メトリクス {#metrics}
 

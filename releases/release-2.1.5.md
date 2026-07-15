@@ -23,7 +23,7 @@ summary: TiDB 2.1.5とTiDB Ansible 2.1.5は、2019年2月28日にリリースさ
     -   `RAND()`関数の結果がMySQL と互換性がない問題を修正 [＃9446](https://github.com/pingcap/tidb/pull/9446)
     -   `Semi Join`処理`NULL`と空の結果セットのロジックをリファクタリングして正しい結果を取得し、MySQL との互換性を向上させます。 [＃9449](https://github.com/pingcap/tidb/pull/9449)
 -   サーバ
-    -   `INSERT`ステートメント実行するときにデータの一意性制約をチェックするための`tidb_constraint_check_in_place`システム変数を追加します。 [＃9401](https://github.com/pingcap/tidb/pull/9401)
+    -   `INSERT`ステートメントを実行するときにデータの一意性制約をチェックするための`tidb_constraint_check_in_place`システム変数を追加します。 [＃9401](https://github.com/pingcap/tidb/pull/9401)
     -   `tidb_force_priority`システム変数の値が設定ファイルに設定されている値と異なる問題を修正しました [＃9347](https://github.com/pingcap/tidb/pull/9347)
     -   一般ログに`current_db`フィールドを追加して、現在使用されているデータベースの名前を出力します。 [＃9346](https://github.com/pingcap/tidb/pull/9346)
     -   テーブルID のテーブル情報を取得するHTTP APIを追加します。 [＃9408](https://github.com/pingcap/tidb/pull/9408)

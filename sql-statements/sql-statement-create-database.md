@@ -49,7 +49,7 @@ create_specification:
 
 既存のデータベースを作成し、 `IF NOT EXISTS`指定しないと、エラーが表示されます。
 
-`create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細については、 [文字セットと照合順序のサポート](/character-set-and-collation.md)参照してください。
+`create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細については、 [文字セットと照合順序のサポート](/character-set-and-collation.md)を参照してください。
 
 ## 例 {#examples}
 
@@ -73,7 +73,7 @@ mysql> SHOW TABLES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDBの`CREATE DATABASE`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDBの`CREATE DATABASE`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)を参照してください。
 
 ## 参照 {#see-also}
 

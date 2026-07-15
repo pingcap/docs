@@ -5,7 +5,7 @@ summary: TiDB Cloudでリカバリ グループを作成し、その詳細を表
 
 # リカバリグループの使用を開始する {#get-started-with-recovery-groups}
 
-このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)使用してTiDB Cloud Dedicated クラスター上で実行されているデータベースを保護するためのリカバリグループを作成する方法について説明します。また、リカバリグループの詳細を表示する方法も示します。
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してTiDB Cloud Dedicated クラスター上で実行されているデータベースを保護するためのリカバリグループを作成する方法について説明します。また、リカバリグループの詳細を表示する方法も示します。
 
 ## 前提条件 {#prerequisites}
 

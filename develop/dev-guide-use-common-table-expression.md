@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-common-table-expression/','/ja/tidbclou
 
 トランザクションのシナリオによっては、アプリケーションの複雑さにより、最大2,000行にも及ぶ単一のSQL文を記述しなければならない場合があります。この文には、多数の集計や複数レベルのサブクエリのネストが含まれる可能性があります。このような長いSQL文を管理することは、開発者にとって悪夢となる可能性があります。
 
-このような長い SQL 文を回避するには、 [ビュー](/develop/dev-guide-use-views.md)使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
+このような長い SQL 文を回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
 このドキュメントでは、クエリ結果を再利用するためのより便利な方法である、TiDB の共通テーブル式 (CTE) 構文を紹介します。
 

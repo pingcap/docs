@@ -313,7 +313,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set cluster-version 8.5.5             // Set the version of the cluster to 8.5.5
     ```
 
--   `replication-mode`デュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
+-   `replication-mode`デュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
 
 -   `leader-schedule-policy`はリーダーのスケジューリング戦略を選択するために使用されます。2 または`size`に従ってリーダー`count`スケジュールできます。
 
@@ -468,7 +468,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 
 ### `config placement-rules [disable | enable | load | save | show | rule-group]` {#config-placement-rules-disable-enable-load-save-show-rule-group}
 
-`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)参照してください。
+`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)を参照してください。
 
 ### `health` {#health}
 
@@ -565,7 +565,7 @@ v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`
 
 > **Note:**
 >
-> 本番環境では、 `member delete`コマンドを使用して PD ノードを削除**しないでください**。PD ノードを削除するには、 [TiDB/PD/TiKV クラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster)と[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)参照してください。
+> 本番環境では、 `member delete`コマンドを使用して PD ノードを削除**しないでください**。PD ノードを削除するには、 [TiDB/PD/TiKV クラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster)と[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)を参照してください。
 
 このコマンドを使用して、PD メンバーを表示したり、指定されたメンバーを削除したり、リーダーの優先度を設定したりします。
 
@@ -1281,7 +1281,7 @@ store weight 1 5 10
 
 #### ストアスケジュールの速度を設定する {#configure-store-scheduling-speed}
 
-`store limit`使ってストアのスケジュール速度を設定できます。 `store limit`の原理と使用方法の詳細については、 [`store limit`](/configure-store-limit.md)参照してください。
+`store limit`使ってストアのスケジュール速度を設定できます。 `store limit`の原理と使用方法の詳細については、 [`store limit`](/configure-store-limit.md)を参照してください。
 
 ```bash
 >> store limit                                  // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
@@ -1299,7 +1299,7 @@ store weight 1 5 10
 
 > **Note:**
 >
-> `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
+> `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### `log [fatal | error | warn | info | debug]` {#log-fatal-error-warn-info-debug}
 

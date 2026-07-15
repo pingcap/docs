@@ -89,7 +89,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 ### 上流データベースへの暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
 
-1.  アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)参照してください。
+1.  アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
 
 2.  ソース構成ファイルで MySQL クライアント証明書を設定します。
 

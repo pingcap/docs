@@ -15,7 +15,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     -   新しいクラスターへのデータ復元をサポートすることで、柔軟性が向上し、現在のクラスターの運用が中断されないことが保証されます。
 
-    -   クラスター計画に合わせてバックアップと復元の戦略を調整します。詳細については、 [TiDB Cloud Serverless データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#learn-about-the-backup-setting)参照してください。
+    -   クラスター計画に合わせてバックアップと復元の戦略を調整します。詳細については、 [TiDB Cloud Serverless データのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md#learn-about-the-backup-setting)を参照してください。
 
     -   スムーズな移行を支援するために、以下の互換性ポリシーを適用してください。
 
@@ -56,7 +56,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     -   **GitHubとの連携機能の改善**： [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHubアプリでは`reset`プルリクエストの同期時の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメータが導入されました。デフォルトモードでは、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
 
-    詳細については、 [TiDB Cloud Serverless Branchs の管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)参照してください。
+    詳細については、 [TiDB Cloud Serverless Branchs の管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 ## 2024年11月12日 {#november-12-2024}
 
@@ -146,7 +146,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     以前は、 TiDB Cloud は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)を使用したデータエクスポートのみをサポートしていました。今後は、 [TiDB Cloudコンソール](https://tidbcloud.com/)TiDB Cloud Serverless クラスターからローカルファイルや Amazon S3 へ簡単にデータをエクスポートできます。
 
-    詳細については、 [TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)参照してください。
+    詳細については、 [TiDB Cloud Serverless からデータをエクスポート](/tidb-cloud/serverless-export.md)[TiDB Cloud Serverless の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)を参照してください。
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを向上させます。
 
@@ -154,7 +154,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     -   クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**ネットワーク設定**ページを導入しました。
     -   **セキュリティ設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
 
-    詳細については、 [TiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+    詳細については、 [TiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデータインポートエクスペリエンスを向上させます。
 
@@ -162,7 +162,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     -   TiDB Cloud Serverless クラスターとTiDB Cloud Dedicatedクラスターのインポート手順を統一します。
     -   AWSロールARNの作成プロセスを簡素化し、接続設定を容易にします。
 
-    詳細については、 [ファイルからデータをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)参照してください。
+    詳細については、 [ファイルからデータをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)を参照してください。
 
 ## 2024年8月20日 {#august-20-2024}
 
@@ -170,7 +170,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **「プライベートエンドポイント接続の作成」**ページのレイアウトを改良します。
 
-    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
+    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
@@ -200,13 +200,13 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     この機能により[ダイファイ](https://dify.ai/)や[GPT](https://openai.com/blog/introducing-gpts)などのAIプラットフォームとのシームレスな統合が可能になり、高度な自然言語処理とAI機能を活用して、より複雑なタスクやインテリジェントなソリューションに対応できるアプリケーションを構築できます。
 
-    詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
+    詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)を参照してください。
 
 -   TiDB Cloudの実際のコストを計画された支出と比較して追跡し、予期せぬコストの発生を防ぐのに役立つ予算機能を導入します。
 
     この機能にアクセスするには、組織内で`Organization Owner`または`Organization Billing Admin`の役割を担っている必要があります。
 
-    詳細については、 [TiDB Cloudの予算を管理する](/tidb-cloud/tidb-cloud-budget.md)参照してください。
+    詳細については、 [TiDB Cloudの予算を管理する](/tidb-cloud/tidb-cloud-budget.md)を参照してください。
 
 ## 2024年7月9日 {#july-9-2024}
 
@@ -228,7 +228,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
 
-    詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)参照してください。
+    詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)を参照してください。
 
 -   スロークエリのデータストレージを強化する。
 
@@ -268,7 +268,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     -   **SQLエディタ**： TiDB CloudコンソールでSQLクエリを手動で記述および実行するためのデフォルトインターフェース。
     -   **Chat2Query** ：AIを活用したテキストクエリ機能で、自然言語を使ってデータベースと対話し、SQLクエリを生成、書き換え、最適化することができます。
 
-    詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
+    詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 ## 2024年6月18日 {#june-18-2024}
 
@@ -352,7 +352,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     -   [ローカルストレージからTiDB Cloud Serverlessクラスターにデータをインポートする](/tidb-cloud/ticloud-import-start.md)
     -   [OAuth経由で認証する](/tidb-cloud/ticloud-auth-login.md)
 
-    TiDB Cloud CLI をアップグレードする前に、この新しい CLI は以前のバージョンと互換性がないことに注意してください。たとえば、CLI コマンドの`ticloud cluster`は`ticloud serverless`に更新されます。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)参照してください。 .
+    TiDB Cloud CLI をアップグレードする前に、この新しい CLI は以前のバージョンと互換性がないことに注意してください。たとえば、CLI コマンドの`ticloud cluster`は`ticloud serverless`に更新されます。詳細については、 [TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)を参照してください。 .
 
 ## 2024年4月9日 {#april-9-2024}
 
@@ -372,7 +372,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   TiDB Cloud Serverless クラスターが使用量クォータに達した際のスロットリング動作を変更します。クラスターが使用量クォータに達すると、新規接続試行を即座に拒否し、既存の操作に対するサービスの中断を防ぎます。
 
-    詳細については、 [使用クォータ](/tidb-cloud/serverless-limitations.md#usage-quota)参照してください。
+    詳細については、 [使用クォータ](/tidb-cloud/serverless-limitations.md#usage-quota)を参照してください。
 
 ## 2024年3月5日 {#march-5-2024}
 
@@ -435,7 +435,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     注：プロジェクトに対する以前のグローバルレベルのCIDR設定は廃止されますが、アクティブな状態にある既存の地域別CIDRはすべて影響を受けません。既存のクラスターのネットワークにも影響はありません。
 
-    詳細については、 [地域ごとにCIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
+    詳細については、 [地域ごとにCIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
 
 -   TiDB Cloud Serverlessのユーザーは、クラスターのパブリックエンドポイントを無効にすることができるようになりました。
 
@@ -445,7 +445,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     TiDB Cloud Data Serviceは、デフォルトでは各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性をさらに高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランドURLを使用でき、セキュリティも強化されます。
 
-    詳細については、 [データサービスのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)参照してください。
+    詳細については、 [データサービスのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 ## 2024年1月3日 {#january-3-2024}
 

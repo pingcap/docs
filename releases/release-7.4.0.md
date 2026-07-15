@@ -21,9 +21,9 @@ TiDB バージョン: 7.4.0
 
 -   分散実行フレームワーク (DXF) のバックエンド`ADD INDEX`または`IMPORT INTO`タスクを並列実行するための TiDB ノードの選択をサポート (実験的) [＃46453](https://github.com/pingcap/tidb/pull/46453) @ [ywqzzy](https://github.com/ywqzzy)
 
-    リソースを大量に消費するクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、TiDBノードのリソースを大量に消費し、クラスターのパフォーマンス低下につながる可能性があります。v7.4.0以降では、システム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)以下の各TiDBノードのサービススコープを制御できます。既存のTiDBノードを複数選択するか、新しいTiDBノードにTiDBサービススコープを設定すると、すべての並列タスク`ADD INDEX`と`IMPORT INTO`これらのノードでのみ実行されます。このメカニズムにより、既存のサービスへのパフォーマンスへの影響を回避できます。
+    リソースを大量に消費するクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、TiDBノードのリソースを大量に消費し、クラスターのパフォーマンス低下につながる可能性があります。v7.4.0以降では、システム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)以下の各TiDBノードのサービススコープを制御できます。既存のTiDBノードを複数選択するか、新しいTiDBノードにTiDBサービススコープを設定すると、すべての並列タスク`ADD INDEX`と`IMPORT INTO`これらのノードでのみ実行されます。このメカニズムにより、既存のサービスへのパフォーマンスへの影響を回避できます。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)を参照してください。
 
 -   パーティション化されたRaft KVストレージエンジンの強化 (実験的) [＃11515](https://github.com/tikv/tikv/issues/11515) [＃12842](https://github.com/tikv/tikv/issues/12842) @ [busyjay](https://github.com/busyjay) @ [tonyxuqqi](https://github.com/tonyxuqqi) @ [tabokie](https://github.com/tabokie) @ [bufferflies](https://github.com/bufferflies) @ [5kbpers](https://github.com/5kbpers) @ [SpadeA-Tang](https://github.com/SpadeA-Tang) @ [nolouch](https://github.com/nolouch)
 
@@ -31,7 +31,7 @@ TiDB バージョン: 7.4.0
 
     TiDB v7.4.0では、Partitioned Raft KVストレージエンジンの互換性と安定性がさらに向上しました。大規模データテストを通じて、DM、 Dumpling、 TiDB Lightning、TiCDC、 BR、PITRといったTiDBエコシステムツールおよび機能との互換性が確保されています。さらに、Partitioned Raft KVストレージエンジンは、読み取りと書き込みが混在するワークロードにおいてもより安定したパフォーマンスを提供し、特に書き込み負荷の高いシナリオに適しています。さらに、各TiKVノードは8コアCPUをサポートし、8TBのデータストレージと64GBのメモリを搭載できるようになりました。
 
-    詳細については[ドキュメント](/partitioned-raft-kv.md)参照してください。
+    詳細については[ドキュメント](/partitioned-raft-kv.md)を参照してください。
 
 -   TiFlashは、分散ストレージおよびコンピューティングアーキテクチャ（GA）をサポートします[＃6882](https://github.com/pingcap/tiflash/issues/6882) @ [JaySon-Huang](https://github.com/JaySon-Huang) @ [JinheLin](https://github.com/JinheLin) @ [breezewish](https://github.com/breezewish) @ [lidezhu](https://github.com/lidezhu) @ [CalvinNeo](https://github.com/CalvinNeo) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
@@ -41,7 +41,7 @@ TiDB バージョン: 7.4.0
 
     TiFlash**の分散ストレージおよびコンピューティングアーキテクチャ**と**結合ストレージおよびコンピューティングアーキテクチャ**は、同じクラスター内で使用したり、相互に変換したりすることはできません。TiFlashをデプロイする際に、使用するアーキテクチャを設定できます。
 
-    詳細については[ドキュメント](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
 
 ### パフォーマンス {#performance}
 
@@ -49,7 +49,7 @@ TiDB バージョン: 7.4.0
 
     -   `value MEMBER OF(json_array)`
 
-    詳細については[ドキュメント](/functions-and-operators/expressions-pushed-down.md)参照してください。
+    詳細については[ドキュメント](/functions-and-operators/expressions-pushed-down.md)を参照してください。
 
 -   任意のフレーム定義タイプのウィンドウ関数をTiFlash にプッシュダウンする機能をサポート [＃7376](https://github.com/pingcap/tiflash/issues/7376) @ [xzhangxian1008](https://github.com/xzhangxian1008)
 
@@ -61,7 +61,7 @@ TiDB バージョン: 7.4.0
 
     v7.4.0では、TiDBに[グローバルソート](/tidb-global-sort.md)の機能が導入されました。エンコードされたデータをローカルに書き込んでソートする代わりに、クラウドストレージに書き込んでグローバルソートを行うようになりました。ソート後、インデックスデータとテーブルデータの両方がTiKVに並列でインポートされるため、パフォーマンスと安定性が向上します。
 
-    詳細については[ドキュメント](/tidb-global-sort.md)参照してください。
+    詳細については[ドキュメント](/tidb-global-sort.md)を参照してください。
 
 -   非プリペアドステートメントの実行プランのキャッシュをサポート (GA) [＃36598](https://github.com/pingcap/tidb/issues/36598) @ [qw4990](https://github.com/qw4990)
 
@@ -69,9 +69,9 @@ TiDB バージョン: 7.4.0
 
     非プリペアドプランキャッシュを有効にすると、メモリとCPUのオーバーヘッドが増加する可能性があり、すべての状況に適しているとは限りません。v7.4.0以降、この機能はデフォルトで無効になっています。[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を有効にし、 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)でキャッシュサイズを制御できます。
 
-    また、この機能はデフォルトではDML文をサポートしておらず、SQL文には一定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)参照してください。
+    また、この機能はデフォルトではDML文をサポートしておらず、SQL文には一定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
 
-    詳細については[ドキュメント](/sql-non-prepared-plan-cache.md)参照してください。
+    詳細については[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 
 ### 信頼性 {#reliability}
 
@@ -81,7 +81,7 @@ TiDB バージョン: 7.4.0
 
     v7.4.0では、 TiFlashにクエリレベルのデータスピルが導入されました。TiFlashへのクエリのメモリ制限を[`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)に設定し、データスピルをトリガーするメモリ比率を[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)に設定することで、クエリのメモリ使用量を効率的に管理し、 TiFlashのメモリリソースをより適切に制御できます。
 
-    詳細については[ドキュメント](/tiflash/tiflash-spill-disk.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-spill-disk.md)を参照してください。
 
 -   ユーザー定義の TiKV 読み取りタイムアウトをサポート [＃45380](https://github.com/pingcap/tidb/issues/45380) @ [crazycs520](https://github.com/crazycs520)
 
@@ -89,7 +89,7 @@ TiDB バージョン: 7.4.0
 
     TiDB v7.4.0 では、新しいシステム変数[`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)が導入され、クエリで TiDB が TiKV に送信する RPC 読み取り要求のタイムアウトをカスタマイズできるようになりました。つまり、ディスクまたはネットワークの問題により TiKV ノードに送信された要求が遅延した場合、TiDB はより早くタイムアウトし、他の TiKV ノードに要求を再送信できるため、クエリのレイテンシーが短縮されます。すべての TiKV ノードでタイムアウトが発生した場合、TiDB はデフォルトのタイムアウトを使用して再試行します。さらに、クエリでオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`使用して、TiDB が TiKV RPC 読み取り要求を送信するタイムアウトを設定することもできます。この機能強化により、不安定なネットワークやstorage環境に TiDB が柔軟に適応できるようになり、クエリのパフォーマンスが向上し、ユーザーエクスペリエンスが強化されます。
 
-    詳細については[ドキュメント](/system-variables.md#tikv_client_read_timeout-new-in-v740)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tikv_client_read_timeout-new-in-v740)を参照してください。
 
 -   オプティマイザヒントを使用して、一部のシステム変数の値を一時的に変更することをサポートします。 [＃45892](https://github.com/pingcap/tidb/issues/45892) @ [winoros](https://github.com/winoros)
 
@@ -97,7 +97,7 @@ TiDB バージョン: 7.4.0
 
     変更可能なシステム変数は、ヒント`SET_VAR()`の[システム変数](/system-variables.md)で確認できます。明示的にサポートされていない変数を変更すると、予期しない動作が発生する可能性があるため、変更しないことを強くお勧めします。
 
-    詳細については[ドキュメント](/optimizer-hints.md)参照してください。
+    詳細については[ドキュメント](/optimizer-hints.md)を参照してください。
 
 -   TiFlashはリソース制御をサポート [＃7660](https://github.com/pingcap/tiflash/issues/7660) @ [guo-shaoge](https://github.com/guo-shaoge)
 
@@ -105,13 +105,13 @@ TiDB バージョン: 7.4.0
 
     TiFlashリソース制御機能を有効にするかどうかを制御するには、 TiFlashパラメータ`enable_resource_control`設定します。この機能を有効にすると、 TiFlashはTiDBのリソースグループ設定に基づいてリソースのスケジュールと管理を実行し、全体的なリソースの適切な割り当てと使用を保証します。
 
-    詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
 -   TiFlashはパイプライン実行モデル（GA） をサポートします。 [＃6518](https://github.com/pingcap/tiflash/issues/6518) @ [SeaRise](https://github.com/SeaRise)
 
     TiFlash v7.2.0 以降、パイプライン実行モデルが導入されました。このモデルは、すべてのスレッドリソースを一元管理し、タスク実行を均一にスケジュールすることで、スレッドリソースを最大限に活用し、リソースの過剰使用を回避します。v7.4.0 では、 TiFlash はスレッドリソースの使用状況の統計を改善し、パイプライン実行モデルは GA 機能となり、デフォルトで有効化されます。この機能はTiFlashリソース制御機能と相互に依存しているため、TiDB v7.4.0 では、以前のバージョンでパイプライン実行モデルの有効化/無効化に使用されていた変数`tidb_enable_tiflash_pipeline_model`削除されました。代わりに、 TiFlashパラメータ`tidb_enable_resource_control`を設定することで、パイプライン実行モデルとTiFlashリソース制御機能を有効化または無効化できます。
 
-    詳細については[ドキュメント](/tiflash/tiflash-pipeline-model.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-pipeline-model.md)を参照してください。
 
 -   オプティマイザモードのオプションを追加 [＃46080](https://github.com/pingcap/tidb/issues/46080) @ [time-and-fate](https://github.com/time-and-fate)
 
@@ -119,7 +119,7 @@ TiDB バージョン: 7.4.0
 
     長期にわたって安定したOLTPアプリケーションや、既存の実行プランに自信がある場合は、テスト後にモード`determinate`に切り替えることをお勧めします。これにより、プラン変更の可能性が軽減されます。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_opt_objective-new-in-v740)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_opt_objective-new-in-v740)を参照してください。
 
 -   TiDB リソース制御はバックグラウンドタスクの管理をサポートします (実験的) [＃44517](https://github.com/pingcap/tidb/issues/44517) @ [glorv](https://github.com/glorv)
 
@@ -134,13 +134,13 @@ TiDB バージョン: 7.4.0
 
     デフォルトでは、バックグラウンドタスクとしてマークされたタスクタイプは空で、バックグラウンドタスクの管理は無効になっています。このデフォルトの動作は、TiDB v7.4.0より前のバージョンと同じです。バックグラウンドタスクを管理するには、 `default`リソースグループのバックグラウンドタスクタイプを手動で変更する必要があります。
 
-    詳細については[ドキュメント](/tidb-resource-control-background-tasks.md)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control-background-tasks.md)を参照してください。
 
 -   ロック統計が一般公開（GA）される[＃46351](https://github.com/pingcap/tidb/issues/46351) @ [Rustin170506](https://github.com/Rustin170506)
 
     v7.4.0では、 [ロック統計](/statistics.md#lock-statistics)一般提供となります。運用上のセキュリティを確保するため、統計情報のロックとロック解除には、統計情報の収集と同じ権限が必要です。さらに、TiDBは特定のパーティションに対する統計情報のロックとロック解除をサポートし、柔軟性が向上しています。データベース内のクエリや実行プランに自信があり、変更を防止したい場合は、統計情報をロックすることで安定性を高めることができます。
 
-    詳細については[ドキュメント](/statistics.md#lock-statistics)参照してください。
+    詳細については[ドキュメント](/statistics.md#lock-statistics)を参照してください。
 
 -   テーブルにハッシュ結合を選択するかどうかを制御するシステム変数を導入します。 [＃46695](https://github.com/pingcap/tidb/issues/46695) @ [coderplay](https://github.com/coderplay)
 
@@ -148,7 +148,7 @@ TiDB バージョン: 7.4.0
 
     TiDB v7.4.0以降、テーブルのハッシュ結合を制御するためのシステム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)導入されました。これはデフォルトで有効になっています（ `ON` ）。実行プランでテーブル間のハッシュ結合を選択する必要がない場合は、この変数を`OFF`に変更することで、実行プランのロールバックの可能性を低減し、システムの安定性を向上させることができます。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)を参照してください。
 
 -   統計キャッシュのメモリ制御は一般提供（GA） [＃45367](https://github.com/pingcap/tidb/issues/45367) @ [hawkingrei](https://github.com/hawkingrei)
 
@@ -156,7 +156,7 @@ TiDB バージョン: 7.4.0
 
     v7.4.0 以降、この機能は一般提供 (GA) されます。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を参照してください。
 
 ### SQL {#sql}
 
@@ -164,13 +164,13 @@ TiDB バージョン: 7.4.0
 
     v7.4.0より前のバージョンでは、TiDBのパーティションテーブルのパーティションタイプは変更できませんでした。v7.4.0以降では、パーティションテーブルを非パーティションテーブルに変更したり、非パーティションテーブルをパーティションテーブルに変更したり、パーティションタイプの変更がサポートされるようになりました。これにより、パーティションテーブルのパーティションタイプと数を柔軟に調整できるようになりました。例えば、 `ALTER TABLE t PARTITION BY ...`ステートメントを使用してパーティションタイプを変更できます。
 
-    詳細については[ドキュメント](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table)参照してください。
+    詳細については[ドキュメント](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table)を参照してください。
 
 -   TiDBは`ROLLUP`修飾子と`GROUPING`関数の使用をサポートしています [＃44487](https://github.com/pingcap/tidb/issues/44487) @ [AilinKid](https://github.com/AilinKid)
 
     `WITH ROLLUP`修飾子と`GROUPING`関数は、多次元データ要約のためのデータ分析でよく使用されます。v7.4.0 以降では、 `GROUP BY`句で`WITH ROLLUP`修飾子と`GROUPING`関数を使用できます。例えば、 `SELECT ... FROM ... GROUP BY ... WITH ROLLUP`構文で`WITH ROLLUP`修飾子を使用できます。
 
-    詳細については[ドキュメント](/functions-and-operators/group-by-modifier.md)参照してください。
+    詳細については[ドキュメント](/functions-and-operators/group-by-modifier.md)を参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -180,7 +180,7 @@ TiDB バージョン: 7.4.0
 
     TiDB v7.4.0では、MySQL 8.0と互換性のあるシステム変数`default_collation_for_utf8mb4`も導入されました。これにより、utf8mb4文字セットのデフォルトの照合順序を指定できるようになり、 MySQL 5.7以前のバージョンからの移行やデータレプリケーションとの互換性が確保されます。
 
-    詳細については[ドキュメント](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)参照してください。
+    詳細については[ドキュメント](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)を参照してください。
 
 ### 可観測性 {#observability}
 
@@ -194,7 +194,7 @@ TiDB バージョン: 7.4.0
 
     v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行プランをテーブル ビューで表示することをサポートしています。
 
-    詳細については[ドキュメント](/dashboard/dashboard-statement-details.md)参照してください。
+    詳細については[ドキュメント](/dashboard/dashboard-statement-details.md)を参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -207,7 +207,7 @@ TiDB バージョン: 7.4.0
     -   `Split_File`オプションの構成をサポートします。これにより、大きな CSV ファイルを複数の 256 MiB の小さな CSV ファイルに分割して並列処理し、インポート パフォーマンスを向上させることができます。
     -   圧縮されたCSVファイルとSQLファイル`.snappy`インポート`.zst`サポートします。サポートされている`.zstd`形式は、 `.gzip` `.gz` 。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 
 -   Dumplingは、データをCSVファイルにエクスポートする際に、ユーザー定義のターミネータをサポートします[＃46982](https://github.com/pingcap/tidb/issues/46982) @ [GMHDBJD](https://github.com/GMHDBJD)
 
@@ -215,13 +215,13 @@ TiDB バージョン: 7.4.0
 
     バージョン7.4.0以降、 Dumplingに新しいパラメータ`--csv-line-terminator`が導入されました。このパラメータを使用すると、データをCSVファイルにエクスポートする際に、任意の終端文字を指定できます。このパラメータは`"\r\n"`と`"\n"`サポートしています。以前のバージョンとの一貫性を保つため、デフォルトの終端文字は`"\r\n"`です。
 
-    詳細については[ドキュメント](/dumpling-overview.md#option-list-of-dumpling)参照してください。
+    詳細については[ドキュメント](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
 -   TiCDCはPulsarへのデータ複製をサポート [＃9413](https://github.com/pingcap/tiflow/issues/9413) @ [yumchina](https://github.com/yumchina) @ [asddongmen](https://github.com/asddongmen)
 
     Pulsarは、クラウドネイティブかつ分散型のメッセージストリーミングプラットフォームであり、リアルタイムデータストリーミングエクスペリエンスを大幅に向上させます。v7.4.0以降、TiCDCは変更データをPulsarに`canal-json`形式で複製し、Pulsarとのシームレスな統合を実現します。この機能により、TiCDCはTiDBの変更を容易にキャプチャしてPulsarに複製できるため、データ処理と分析機能に新たな可能性をもたらします。Pulsarから新たに生成された変更データを読み取り、処理する独自のコンシューマーアプリケーションを開発することで、特定のビジネスニーズに対応できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-sink-to-pulsar.md)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-sink-to-pulsar.md)を参照してください。
 
 <!---->
 
@@ -229,7 +229,7 @@ TiDB バージョン: 7.4.0
 
     バージョン7.4.0より前のTiCDCでは、Kafkaの最大メッセージサイズ（ `max.message.bytes` ）を超える大きなメッセージを下流に送信できませんでした。バージョン7.4.0以降では、Kafkaを下流として変更フィードを設定する際に、大きなメッセージを保存する外部ストレージの場所を指定し、外部ストレージ内の大きなメッセージのアドレスを含む参照メッセージをKafkaに送信できるようになりました。コンシューマーはこの参照メッセージを受信すると、外部ストレージのアドレスからメッセージの内容を取得できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-sink-to-kafka.md#send-large-messages-to-external-storage)を参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -247,7 +247,7 @@ TiDB バージョン: 7.4.0
 
 -   MySQL 8.0 との互換性を向上させるために[`information_schema.CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)テーブルが追加されました。
 
--   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたは非NULLの一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)参照してください。
+-   複数の変更を含むトランザクションにおいて、更新イベントで主キーまたは非NULLの一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割し、すべてのイベントが挿入イベントに先行する削除イベントの順序に従うようにします。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-multiple-update-changes)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -286,7 +286,7 @@ TiDB バージョン: 7.4.0
 ## 廃止および削除された機能 {#deprecated-and-removed-features}
 
 -   [mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview)バージョン7.5.0で廃止され、その機能の大部分は[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
--   TiKVインポーターはバージョン7.5.0で廃止されます。代替として[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用することを強くお勧めします。
+-   TiKVインポーターはバージョン7.5.0で廃止されます。代替として[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用することを強くお勧めします。
 -   TiCDCの`enable-old-value`のパラメータは削除されます[＃9667](https://github.com/pingcap/tiflow/issues/9667) @ [3AceShowHand](https://github.com/3AceShowHand)
 
 ## 改善点 {#improvements}

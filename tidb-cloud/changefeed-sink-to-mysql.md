@@ -53,7 +53,7 @@ MySQLサービスがパブリックインターネットアクセスを持たな
 
 MySQL サービスがパブリック インターネット アクセスのない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
 
-1.  MySQL サービスが Google Cloud SQL の場合、Google Cloud SQL インスタンスに関連付けられた VPC に MySQL エンドポイントを公開する必要があります。Cloud [**Cloud SQL認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。これは Google によって開発されています。
+1.  MySQL サービスが Google Cloud SQL の場合、Google Cloud SQL インスタンスに関連付けられた VPC に MySQL エンドポイントを公開する必要があります。Cloud [**Cloud SQL認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。これは Google によって開発されています。
 2.  MySQL サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 3.  MySQLが配置されているVPCの受信ファイアウォールルールを変更します。
 

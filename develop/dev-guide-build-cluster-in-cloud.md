@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 # TiDB Cloud Starterインスタンスを作成する {#create-a-tidb-cloud-starter-instance}
 
-このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。TiDB [TiDB Cloud](https://www.pingcap.com/tidb-cloud)使用してTiDB Cloud Starterインスタンスを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。TiDB [TiDB Cloud](https://www.pingcap.com/tidb-cloud)を使用してTiDB Cloud Starterインスタンスを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカル マシンで TiDB を実行する必要がある場合は、 [TiDBをローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
@@ -34,7 +34,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 > **Note:**
 >
-> TiDB Cloud Starterインスタンスに接続するときは、ユーザー名にインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
+> TiDB Cloud Starterインスタンスに接続するときは、ユーザー名にインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
 ## ステップ2. TiDB Cloud Starterインスタンスに接続します {#step-2-connect-to-a-starter-instance} {#step-2-connect-to-a-starter-instance}
 

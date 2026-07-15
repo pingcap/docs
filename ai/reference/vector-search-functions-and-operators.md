@@ -46,7 +46,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`+`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_plus)  | ベクトル要素ごとの加算演算子 |
 | [`-`](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus) | ベクトル要素ごとの減算演算子 |
 
-ベクトル演算の仕組みの詳細については、 [ベクトルデータ型 | 算術](/ai/reference/vector-search-data-types.md#arithmetic)参照してください。
+ベクトル演算の仕組みの詳細については、 [ベクトルデータ型 | 算術](/ai/reference/vector-search-data-types.md#arithmetic)を参照してください。
 
 **集計（GROUP BY）関数：**
 
@@ -78,7 +78,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`!=` 、 `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 値が値のセット内にないかどうかを確認する |
 
-ベクトルの比較方法の詳細については、 [ベクトルデータ型 | 比較](/ai/reference/vector-search-data-types.md#comparison)参照してください。
+ベクトルの比較方法の詳細については、 [ベクトルデータ型 | 比較](/ai/reference/vector-search-data-types.md#comparison)を参照してください。
 
 **制御フロー関数:**
 
@@ -96,7 +96,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | 値を文字列またはベクトルとしてキャストする |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | 値を文字列としてキャストする        |
 
-`CAST()`使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)参照してください。
+`CAST()`使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)を参照してください。
 
 ## 完全な参考文献 {#full-references}
 

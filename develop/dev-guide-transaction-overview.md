@@ -159,7 +159,7 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（「繰り返し読み取り」とも呼ばれます）を実装しています。この分離レベルは[ANSI繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)参照してください。
+TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（「繰り返し読み取り」とも呼ばれます）を実装しています。この分離レベルは[ANSI繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 繰り返し読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 

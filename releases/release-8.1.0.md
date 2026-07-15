@@ -29,11 +29,11 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     リソースグループ内のクエリの最大実行時間を設定できます。クエリの実行時間が設定値を超えると、クエリの優先度が自動的に下げられるか、クエリがキャンセルされます。また、問題のあるクエリの同時実行数が多すぎる場合、特定フェーズで過剰なリソース消費を回避するために、テキストまたは実行プランを通じて、特定されたクエリに一致するクエリを一定期間内に即時に指定することもできます。
 
-    TiDBはクエリの手動マークもサポートしています。1コマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいてクエリをマークできます。マークに一致するクエリはダウングレードまたはキャンセルされ、SQLブロックリストを追加する目的を達成できます。
+    TiDBはクエリの手動マークもサポートしています。1コマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいてクエリをマークできます。マークに一致するクエリはダウングレードまたはキャンセルされ、SQLブロックリストを追加する目的を達成できます。
 
     予想よりも多くのリソースを消費するクエリの自動管理機能により、根本原因が特定される前にクエリの問題が全体的なパフォーマンスに与える影響を迅速に軽減する効果的な手段がユーザーに提供され、データベースの安定性が向上します。
 
-    詳細については[ドキュメント](/tidb-resource-control-runaway-queries.md)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 ### SQL {#sql}
 
@@ -43,7 +43,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     v8.1.0 以降では、列を`ADD COLUMN`ずつ追加するときに、式をデフォルト値として使用できます。
 
-    詳細については[ドキュメント](/data-type-default-values.md#specify-expressions-as-default-values)参照してください。
+    詳細については[ドキュメント](/data-type-default-values.md#specify-expressions-as-default-values)を参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -53,7 +53,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v8.1.0以降、この機能はデフォルトで有効になっています（ [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)デフォルト`ON`に設定されます）。この機能を有効にすると、DXFは複数のTiDBノードで同じ`ADD INDEX`または`IMPORT INTO`タスクを並列実行するようにスケジュールできます。これにより、TiDBクラスターのリソースを最大限に活用し、これらのタスクのパフォーマンスを大幅に向上させることができます。さらに、TiDBノードを追加し、追加したノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することで、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスを直線的に向上させることができます。
 
-    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)参照してください。
+    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)を参照してください。
 
 ### セキュリティ {#security}
 
@@ -61,7 +61,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     強化された TiDB ログの非感度化は、ログファイル内の SQL テキスト情報をマークすることで実装され、ユーザーがログを表示するときに機密データを削除することをサポートします。ログ情報をマークするかどうかを制御することで、さまざまなシナリオで TiDB ログを安全に使用でき、ログ非感度化を使用する際のセキュリティと柔軟性が向上します。この機能を使用するには、システム変数`tidb_redact_log`を`MARKER`に設定すると、TiDB のランタイムログ内の SQL テキストがマークされます。さらに、TiDBサーバーで`collect-log`サブコマンドを使用して、マークされた機密データをログから削除し、ログを安全な方法で表示できます。すべてのマーカーを削除して通常のログを取得することもできます。この機能は、v8.1.0 で一般提供されました。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_redact_log)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_redact_log)を参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -71,7 +71,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`ステートメントの機能シナリオが充実します。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 
 -   TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [＃51036](https://github.com/pingcap/tidb/issues/51036) @ [lyzx2001](https://github.com/lyzx2001)
 
@@ -79,13 +79,13 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     TiDB Lightning v8.0.0では、物理インポートモードにおける[競合検出の古いバージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略が廃止され、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータ（実験的）を介して論理インポートモードと物理インポートモードの両方で競合検出戦略を制御できるようになり、このパラメータの設定が簡素化されました。さらに、物理インポートモードでは、 `replace`戦略により、インポート時に主キーまたは一意キーの競合が検出された場合に、最新のデータを保持し、古いデータを上書きすることがサポートされます。v8.1.0では、 `replace`戦略で競合データを処理する機能が一般提供（GA）されます。
 
-    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 -   TiCDCはクライアント認証をサポートします [＃10636](https://github.com/pingcap/tiflow/issues/10636) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
     v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層Security（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)を参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -95,9 +95,9 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### 動作の変更 {#behavior-changes}
 
--   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+-   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 -   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型AUTO_INCREMENT ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)をサポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意インデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)参照してください。
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意インデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -106,7 +106,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) | 非推奨    | v8.1.0以降、TiDBのテレメトリ機能が削除され、この変数は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                                                                                                                                                                                                       |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)         | 変更   | 値の範囲を`[0, 18446744073709551615]`から`(0, 1]`に変更します。                                                                                                                                                                                                                                                                                                                |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | 変更   | デフォルト値を`OFF`から`ON`に変更します。これは、Distributed eXecution Framework（DXF）がデフォルトで有効になることを意味します。これにより、TiDBクラスターのリソースが最大限に活用され、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスが大幅に向上します。DXFが有効になっているクラスターをv8.1.0以降にアップグレードする場合は、アップグレード前にDXFを無効にしてください（ `tidb_enable_dist_task`を`OFF`に設定）。これにより、アップグレード中に`ADD INDEX`操作が発生し、データインデックスの不整合が発生するのを回避できます。アップグレード後、DXFを手動で有効にすることができます。 |
-| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 変更   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。                                     |
+| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 変更   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。                                     |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
@@ -286,7 +286,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ## パフォーマンステスト {#performance-test}
 
-TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)参照してください。
+TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)を参照してください。
 
 ## 貢献者 {#contributors}
 

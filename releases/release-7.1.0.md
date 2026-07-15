@@ -29,7 +29,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     現在、この機能は実験的であり、本番環境での使用は推奨されません。このエンジンは新規に作成されたクラスターでのみ使用でき、元のTiKVストレージエンジンから直接アップグレードすることはできません。
 
-    詳細については[ドキュメント](/partitioned-raft-kv.md)参照してください。
+    詳細については[ドキュメント](/partitioned-raft-kv.md)を参照してください。
 
 -   TiFlashは遅延マテリアライゼーション（GA） をサポートします [＃5829](https://github.com/pingcap/tiflash/issues/5829) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
@@ -37,7 +37,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     バージョン7.1.0以降、 TiFlashの遅延マテリアライゼーション機能が一般提供され、デフォルトで有効化されています（システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)はデフォルトで`ON`に設定されています）。TiDBオプティマイザーは、クエリの統計情報とフィルター条件に基づいて、TableScan演算子にプッシュダウンするフィルターを決定します。
 
-    詳細については[ドキュメント](/tiflash/tiflash-late-materialization.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-late-materialization.md)を参照してください。
 
 -   TiFlashは、ネットワーク伝送のオーバーヘッドに応じてMPP Joinアルゴリズムを自動的に選択することをサポートしています[＃7084](https://github.com/pingcap/tiflash/issues/7084) @ [solotzg](https://github.com/solotzg)
 
@@ -45,13 +45,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v7.1.0 では、TiDB に[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数が導入されました。この変数は、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御し、この変数はデフォルトで無効になっています。この変数を`ON`に設定すると、デフォルトのアルゴリズム選択方法が v7.1.0 以前と同じままであることを示します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなります（この時点では両方の変数は有効になりません）。TiDB は、異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択します。これにより、ネットワークトラフィックが削減され、MPP クエリのパフォーマンスが向上します。
 
-    詳細については[ドキュメント](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)参照してください。
+    詳細については[ドキュメント](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)を参照してください。
 
 -   読み取りホットスポットを軽減するために負荷ベースのレプリカ読み取りをサポートする[＃14151](https://github.com/tikv/tikv/issues/14151) @ [sticnarf](https://github.com/sticnarf) @ [you06](https://github.com/you06)
 
     読み取りホットスポットが発生すると、ホットスポット TiKV ノードは読み取り要求を時間内に処理できず、読み取り要求がキューイングされます。ただし、この時点ですべての TiKV リソースが使い果たされるわけではありません。レイテンシーを短縮するために、TiDB v7.1.0 では負荷ベースのレプリカ読み取り機能が導入されました。この機能により、TiDB はホットスポット TiKV ノードでキューイングすることなく、他の TiKV ノードからデータを読み取ることができます。読み取り要求のキューの長さは、 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して制御できます。リーダーノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットが発生すると、読み取りホットスポットを分散させない場合と比較して、読み取りスループットが 70% ～ 200% 向上します。
 
-    詳細については[ドキュメント](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots)参照してください。
+    詳細については[ドキュメント](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots)を参照してください。
 
 -   非プリペアドステートメントの実行プランをキャッシュする機能の強化（実験的） [＃36598](https://github.com/pingcap/tidb/issues/36598) @ [qw4990](https://github.com/qw4990)
 
@@ -63,7 +63,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     非プリペアドプランキャッシュは、デフォルトではDML文をサポートしません。この制限を解除するには、システム変数[`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)を`ON`に設定してください。
 
-    詳細については[ドキュメント](/sql-non-prepared-plan-cache.md)参照してください。
+    詳細については[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 
 -   TiDB 分散実行フレームワーク (DXF) のサポート (実験的) [＃41495](https://github.com/pingcap/tidb/issues/41495) @ [benjamin2037](https://github.com/benjamin2037)
 
@@ -75,7 +75,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)参照してください。
+    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)を参照してください。
 
 ### 信頼性 {#reliability}
 
@@ -89,13 +89,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     ユーザーエクスペリエンスを向上させるために、TiDB Dashboardは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
 
-    詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
 -   フォールトトレランスと自動リカバリ機能を向上させるために、高速オンラインDDLのチェックポイントメカニズムをサポートします[＃42164](https://github.com/pingcap/tidb/issues/42164) @ [tangenta](https://github.com/tangenta)
 
     TiDB v7.1.0では、 [高速オンラインDDL](/best-practices/ddl-introduction.md)のチェックポイント機構が導入され、Fast Online DDLのフォールトトレランスと自動リカバリ機能が大幅に向上しました。障害によりTiDBオーナーノードが再起動または変更された場合でも、TiDBは定期的に自動更新されるチェックポイントから進捗状況をリカバリできるため、DDL実行の安定性と効率性が向上します。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 -   バックアップと復元はチェックポイント復元をサポートします [＃42339](https://github.com/pingcap/tidb/issues/42339) @ [Leavrth](https://github.com/Leavrth)
 
@@ -103,7 +103,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v7.1.0以降、バックアップ＆リストア（BR）にチェックポイント・リストア機能が導入され、中断されたリストアを再開できるようになりました。この機能により、中断されたリストアのリカバリ進行状況の大部分を保持できます。
 
-    詳細については[ドキュメント](/br/br-checkpoint-restore.md)参照してください。
+    詳細については[ドキュメント](/br/br-checkpoint-restore.md)を参照してください。
 
 -   統計のロード戦略を最適化する [＃42160](https://github.com/pingcap/tidb/issues/42160) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
@@ -111,19 +111,19 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDBの起動時、初期統計情報が完全にロードされる前に実行されるSQL文は、最適ではない実行プランを持つ可能性があり、パフォーマンスの問題を引き起こす可能性があります。このような問題を回避するために、TiDB v7.1.0では設定パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されました。このオプションを使用すると、起動時に統計情報の初期化が完了した後にのみTiDBがサービスを提供するかどうかを制御できます。このパラメータはデフォルトで無効になっています。
 
-    詳細については[ドキュメント](/statistics.md#load-statistics)参照してください。
+    詳細については[ドキュメント](/statistics.md#load-statistics)を参照してください。
 
 -   TiCDCは、単一行データのデータ整合性検証機能をサポートしています[＃8718](https://github.com/pingcap/tiflow/issues/8718) [＃42747](https://github.com/pingcap/tidb/issues/42747) @ [3AceShowHand](https://github.com/3AceShowHand) @ [zyguan](https://github.com/zyguan)
 
     v7.1.0以降、TiCDCはデータ整合性検証機能を導入しました。この機能は、チェックサムアルゴリズムを用いて単一行データの整合性を検証します。この機能は、TiDBからデータを書き込み、TiCDCを介してレプリケーションし、Kafkaクラスターに書き込むプロセスでエラーが発生していないかどうかを検証するのに役立ちます。データ整合性検証機能は、Kafkaをダウンストリームとして使用するチェンジフィードのみをサポートし、現在はAvroプロトコルをサポートしています。
 
-    詳細については[ドキュメント](/ticdc/ticdc-integrity-check.md)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-integrity-check.md)を参照してください。
 
 -   TiCDCはDDLレプリケーション操作[＃8686](https://github.com/pingcap/tiflow/issues/8686) [ハイ・ラスティン](https://github.com/Rustin170506)で最適化します
 
     v7.1.0より前のバージョンでは、大規模なテーブルのすべての行に影響を与えるDDL操作（列の追加や削除など）を実行すると、TiCDCのレプリケーションレイテンシーが大幅に増加していました。v7.1.0以降、TiCDCはこのレプリケーション操作を最適化し、DDL操作が下流のレイテンシーに与える影響を軽減します。
 
-    詳細については[ドキュメント](/ticdc/ticdc-faq.md#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-faq.md#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream)を参照してください。
 
 -   TiB レベルのデータをインポートする際のTiDB Lightningの安定性を向上[＃43510](https://github.com/pingcap/tidb/issues/43510) [＃43657](https://github.com/pingcap/tidb/issues/43657) @ [D3Hunter](https://github.com/D3Hunter) @ [lance6716](https://github.com/lance6716)
 
@@ -134,7 +134,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   `tikv-importer.region-check-backoff-limit` 、分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2 秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
     -   `tikv-importer.pause-pd-scheduler-scope` TiDB Lightning がPD スケジューリングを一時停止する範囲を制御します。値のオプションは`"table"`と`"global"`です。デフォルト値は`"table"`です。v6.1.0 より前のバージョンの TiDB では、データインポート中にグローバルスケジューリングを一時停止する`"global"`オプションのみを設定できます。v6.1.0 以降では、ターゲットテーブルデータが格納されているリージョンのスケジューリングのみを一時停止する`"table"`オプションがサポートされています。データ量が多いシナリオでは、安定性を向上させるために、この設定項目を`"global"`に設定することをお勧めします。
 
-    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ### SQL {#sql}
 
@@ -144,7 +144,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     この機能はバージョン7.1.0で一般公開されています。3 `INSERT INTO SELECT`の`SELECT`句の実行中、オプティマイザーは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`句をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
 
-    詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)を参照してください。
 
 -   MySQL互換の多値インデックスが一般提供（GA）される[＃39592](https://github.com/pingcap/tidb/issues/39592) @ [xiongjiwei](https://github.com/xiongjiwei) @ [qw4990](https://github.com/qw4990) @ [YangKeao](https://github.com/YangKeao)
 
@@ -152,19 +152,19 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     バージョン7.1.0では、多値インデックス機能が一般提供（GA）されました。より包括的なデータ型をサポートし、TiDBツールとの互換性も備えています。多値インデックスを使用することで、本番環境におけるJSON配列の検索操作を高速化できます。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を参照してください。
 
 -   ハッシュおよびキーパーティションテーブルのパーティション管理を改善[＃42728](https://github.com/pingcap/tidb/issues/42728) @ [mjonss](https://github.com/mjonss)
 
     v7.1.0より前では、TiDBのハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`TRUNCATE PARTITION`をサポートしていました。v7.1.0以降では、ハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`ADD PARTITION`および`COALESCE PARTITION`もサポートするようになりました。そのため、必要に応じてハッシュおよびキーパーティションテーブルのパーティション数を柔軟に調整できます。例えば、パーティション管理ステートメント`ADD PARTITION`でパーティション数を増やしたり、パーティション管理ステートメント`COALESCE PARTITION`でパーティション数を減らしたりすることができます。
 
-    詳細については[ドキュメント](/partitioned-table.md#manage-hash-and-key-partitions)参照してください。
+    詳細については[ドキュメント](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
 -   範囲INTERVALパーティションの構文が一般公開（GA） になります [＃35683](https://github.com/pingcap/tidb/issues/35683) @ [mjonss](https://github.com/mjonss)
 
     バージョン6.3.0で導入されたRange INTERVALパーティショニングの構文がGAになりました。この構文を使用すると、すべてのパーティションを列挙することなく、任意の間隔でRangeパーティショニングを定義できるため、RangeパーティショニングのDDL文の長さが大幅に短縮されます。この構文は、従来のRangeパーティショニングの構文と同等です。
 
-    詳細については[ドキュメント](/partitioned-table.md#range-interval-partitioning)参照してください。
+    詳細については[ドキュメント](/partitioned-table.md#range-interval-partitioning)を参照してください。
 
 -   生成された列は一般公開（GA）されます @[bb7133](https://github.com/bb7133)
 
@@ -172,7 +172,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     生成列を使用すると、TiDBのMySQL互換性が向上し、MySQLからの移行プロセスが簡素化されます。また、データメンテナンスの複雑さが軽減され、データの一貫性とクエリ効率が向上します。
 
-    詳細については[ドキュメント](/generated-columns.md)参照してください。
+    詳細については[ドキュメント](/generated-columns.md)を参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -182,7 +182,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     よりスムーズなアップグレードを実現するために、TiDB v7.1.0 では DDL タスクの自動一時停止と再開をサポートしています。v7.1.0 以降では、事前に DDL タスクを手動でキャンセルすることなく、クラスターをアップグレードできます。TiDB は、アップグレード前に実行中またはキューに登録されているユーザー DDL タスクを自動的に一時停止し、ローリングアップグレード後にこれらのタスクを再開します。これにより、TiDB クラスターのアップグレードが容易になります。
 
-    詳細については[ドキュメント](/smooth-upgrade-tidb.md)参照してください。
+    詳細については[ドキュメント](/smooth-upgrade-tidb.md)を参照してください。
 
 ### 可観測性 {#observability}
 
@@ -206,7 +206,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v7.1.0 以降、TiDB は LDAP 認証をサポートし、 `authentication_ldap_sasl`と`authentication_ldap_simple` 2 つの認証プラグインを提供します。
 
-    詳細については[ドキュメント](/security-compatibility-with-mysql.md)参照してください。
+    詳細については[ドキュメント](/security-compatibility-with-mysql.md)を参照してください。
 
 -   データベース監査機能の強化（Enterprise Edition）
 
@@ -236,15 +236,15 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバル スケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲット テーブル データを格納するリージョンに対してのみ一時停止され、ターゲット テーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)設定することで、グローバル スケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲット テーブル データを格納するリージョンのスケジュールを一時停止します。ターゲット クラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
--   TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
+-   TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [＃44292](https://github.com/pingcap/tidb/issues/44292)
 
 ### システム変数 {#system-variables}
 
 | 変数名                                                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)                   | 非推奨      | デフォルト値を`OFF`から`ON`に変更します。 [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザーは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。                                                                                                                                                                                         |
-| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
-| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                       | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
+| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
+| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                       | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。1 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
 | `tidb_ddl_distribute_reorg`                                                                                                             | 削除済み     | この変数の名前は[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)に変更されます。                                                                                                                                                                                                                                                                                               |
 | [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                                   | 変更     | 2 つの新しい値オプション`authentication_ldap_sasl`と`authentication_ldap_simple`が導入されました。                                                                                                                                                                                                                                                                                                                   |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)                     | 変更     | バージョン7.1.0以降で有効となり、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を制御します。追加のテストを経て、デフォルト値を`"0s"`から`"1s"`に変更します。                                                                                                                                                                                                                                                                                                    |

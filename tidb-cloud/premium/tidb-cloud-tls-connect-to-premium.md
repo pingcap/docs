@@ -27,7 +27,7 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] を**クリックして設定します。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)参照してください。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] を**クリックして設定します。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)を参照してください。
 
 4.  **「CA証明書」**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
@@ -46,7 +46,7 @@ TiDB Cloud Premium は、クライアントとTiDB Cloud Premium インスタン
 
 ### TiDB Cloud Premiumインスタンスへの接続には、どのTLSバージョンがサポートされていますか？ {#which-tls-versions-are-supported-to-connect-to-my-tidb-cloud-premium-instance}
 
-セキュリティ上の理由から、 TiDB Cloud Premium は TLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 または TLS 1.1 はサポートしません。詳細については、「IETF [TLS 1.0およびTLS 1.1のサポートを終了します](https://datatracker.ietf.org/doc/rfc8996/)参照してください。
+セキュリティ上の理由から、 TiDB Cloud Premium は TLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 または TLS 1.1 はサポートしません。詳細については、「IETF [TLS 1.0およびTLS 1.1のサポートを終了します](https://datatracker.ietf.org/doc/rfc8996/)を参照してください。
 
 ### 私のクライアントとTiDB Cloud Premium間の双方向TLS認証はサポートされていますか？ {#is-two-way-tls-authentication-between-my-client-and-tidb-cloud-premium-supported}
 

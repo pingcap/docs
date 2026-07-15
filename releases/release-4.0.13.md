@@ -90,7 +90,7 @@ TiDB バージョン: 4.0.13
     -   `TableScan`が降順の場合にオプティマイザによってTiFlashが誤って選択されるバグを修正[＃23974](https://github.com/pingcap/tidb/pull/23974)
     -   `point_get`プランがMySQL と一致しない列名を返すバグを修正しました [＃23970](https://github.com/pingcap/tidb/pull/23970)
     -   大文字の名前を持つデータベースで`show table status`文を実行すると間違った結果が返される問題を修正しました[＃23958](https://github.com/pingcap/tidb/pull/23958)
-    -   テーブルに対して同時に`INSERT`と`DELETE`権限を持たないユーザーが`REPLACE`操作実行できるバグを修正しました。 [＃23938](https://github.com/pingcap/tidb/pull/23938)
+    -   テーブルに対して同時に`INSERT`と`DELETE`権限を持たないユーザーが`REPLACE`操作を実行できるバグを修正しました。 [＃23938](https://github.com/pingcap/tidb/pull/23938)
     -   照合順序が正しく処理されていないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正しました[＃23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`パーティションを持つテーブルでクエリを実行するときに発生するpanicを修正しました [＃23689](https://github.com/pingcap/tidb/pull/23689)
     -   問題を修正: 以前のバージョンのクラスターで、変数`tidb_enable_table_partition` `false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして扱われます。クラスターを新しいバージョンにアップグレードした後、このテーブルに対して`batch point get`クエリを実行すると、接続panicが発生します[＃23682](https://github.com/pingcap/tidb/pull/23682)

@@ -117,7 +117,7 @@ tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_
 
 通常、 `tidb_hash_join_concurrency`や`tidb_index_lookup_join_concurrency`などのシステム変数を使用して、実行演算子の TiDB パラメータを調整できます。
 
-このテストでは、これらのパラメータは調整されていません。実際のアプリケーションの負荷テストにおいて、実行オペレータが過剰なCPUリソースを消費する場合は、アプリケーションのシナリオに応じて特定のオペレータのリソース使用量を制限することができます。詳細については、 [TiDB システム変数](/system-variables.md)参照してください。
+このテストでは、これらのパラメータは調整されていません。実際のアプリケーションの負荷テストにおいて、実行オペレータが過剰なCPUリソースを消費する場合は、アプリケーションのシナリオに応じて特定のオペレータのリソース使用量を制限することができます。詳細については、 [TiDB システム変数](/system-variables.md)を参照してください。
 
 #### `performance.max-procs` {#performance-max-procs}
 

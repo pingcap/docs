@@ -295,7 +295,7 @@ TiKV ノードに障害が発生した場合、PD はデフォルトで、対応
 
 TiDB v5.2.0以降、TiKVは低速ディスクノードを検出するメカニズムを導入しました。このメカニズムは、TiKV内のリクエストをサンプリングすることで、1から100までのスコアを算出します。スコアが80以上のTiKVノードは低速としてマークされます。1 [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)加算することで、低速ノードをスケジュールできます。低速と検出されたTiKVノードが1つだけで、その低速スコアが上限（デフォルトでは80）に達した場合、そのノードのリーダーは排除されます（ `evict-leader-scheduler`加算した場合と同様の効果）。
 
-v8.5.5以降、TiKVは低速ネットワークノードを検出するメカニズムを導入しました。低速ディスクノード検出と同様に、このメカニズムはTiKVノード間のネットワークレイテンシーをプローブし、スコアを計算することで低速ノードを特定します。このメカニズムを有効にするには[`enable-network-slow-store`](/pd-control.md#scheduler-config-evict-slow-store-scheduler)指定します（デフォルトでは無効）。
+v8.5.5以降、TiKVは低速ネットワークノードを検出するメカニズムを導入しました。低速ディスクノード検出と同様に、このメカニズムはTiKVノード間のネットワークレイテンシーをプローブし、スコアを計算することで低速ノードを特定します。このメカニズムを有効にするには[`enable-network-slow-store`](/pd-control.md#scheduler-config-evict-slow-store-scheduler)を指定します（デフォルトでは無効）。
 
 > **Note:**
 >

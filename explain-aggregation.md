@@ -190,4 +190,4 @@ explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 
 前のステートメントの`GROUP BY year, month WITH ROLLUP`構文に従って、このステートメントの SQL 集計結果は、それぞれ`{year, month}` 、 `{year}` 、 `{}` 3 つのグループに計算され、連結されます。
 
-詳細については[GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)参照してください。
+詳細については[GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。

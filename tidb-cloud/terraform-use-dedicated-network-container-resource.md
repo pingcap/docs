@@ -58,8 +58,8 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
     -   `tidbcloud_dedicated_network_container`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_network_container`に設定します。
     -   リソース名は、必要に応じて定義できます（例： `example` ）。
-    -   必要な引数の値を取得する方法がわからない場合は、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
-    -   TiDB Cloud Dedicated ネットワーク コンテナ仕様の詳細については、 [tidbcloud_dedicated_network_container (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container)参照してください。
+    -   必要な引数の値を取得する方法がわからない場合は、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
+    -   TiDB Cloud Dedicated ネットワーク コンテナ仕様の詳細については、 [tidbcloud_dedicated_network_container (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 

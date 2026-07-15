@@ -57,7 +57,7 @@ TiCDCにおけるChangefeedとTaskは、2つの論理的な概念です。具体
         {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
     ]
 
-前述の`cdc cli changefeed create`コマンドのパラメータの詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
+前述の`cdc cli changefeed create`コマンドのパラメータの詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 上記のコマンド`cdc cli changefeed create`は、 `test1.tab1` 、 `test1.tab2` 、 `test3.tab3` 、 `test4.tab4` Kafkaクラスターに複製する changefeed タスクを作成します。TiCDCがこのコマンドを受信した後の処理フローは以下のとおりです。
 

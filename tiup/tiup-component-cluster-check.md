@@ -11,7 +11,7 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 ### オペレーティング システムのバージョン {#operating-system-version}
 
-デプロイされたマシンのオペレーティングシステムのディストリビューションとバージョンを確認してください。サポートされているバージョンのリストについては、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)参照してください。
+デプロイされたマシンのオペレーティングシステムのディストリビューションとバージョンを確認してください。サポートされているバージョンのリストについては、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を参照してください。
 
 ### CPU EPOLLEX限定 {#cpu-epollexclusive}
 

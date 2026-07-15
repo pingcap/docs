@@ -183,7 +183,7 @@ results = table.query(
 ).to_list()
 ```
 
-`AND` 、 `OR` 、括弧を使用して複数の条件を組み合わせたり、TiDB でサポートされている[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)使用したりできます。
+`AND` 、 `OR` 、括弧を使用して複数の条件を組み合わせたり、TiDB でサポートされている[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)を使用したりできます。
 
 > **Warning:**
 >

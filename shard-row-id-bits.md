@@ -28,7 +28,7 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 
 > **Warning:**
 >
-> `_tidb_rowid`は TiDB によって暗黙的に割り当てられる内部行 ID です。すべての場合においてグローバルに一意であると想定しないでください。クラスター化インデックスを使用しないパーティション テーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`異なるパーティションに同じ`_tidb_rowid`値を残す可能性があります。詳細については、 [`_tidb_rowid`](/tidb-rowid.md)参照してください。
+> `_tidb_rowid`は TiDB によって暗黙的に割り当てられる内部行 ID です。すべての場合においてグローバルに一意であると想定しないでください。クラスター化インデックスを使用しないパーティション テーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`異なるパーティションに同じ`_tidb_rowid`値を残す可能性があります。詳細については、 [`_tidb_rowid`](/tidb-rowid.md)を参照してください。
 
 > **Note:**
 >
@@ -39,13 +39,13 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 
 <CustomContent platform="tidb">
 
-使用方法の詳細については、 [ホットスポットの問題のトラブルシューティングガイド](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)参照してください。
+使用方法の詳細については、 [ホットスポットの問題のトラブルシューティングガイド](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-使用方法の詳細については、 [ホットスポットの問題のトラブルシューティングガイド](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)参照してください。
+使用方法の詳細については、 [ホットスポットの問題のトラブルシューティングガイド](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 

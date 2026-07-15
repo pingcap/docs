@@ -20,9 +20,9 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 > **Tip:**
 >
-> SQL の使用法については、 [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)参照してください。
+> SQL の使用法については、 [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)を参照してください。
 >
-> AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)参照してください。
+> AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -147,7 +147,7 @@ df = (
 # 1   2  the quick brown        2
 ```
 
-完全な例については、 [pytidb全文検索デモ](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search)参照してください。
+完全な例については、 [pytidb全文検索デモ](https://github.com/pingcap/pytidb/blob/main/examples/fulltext_search)を参照してください。
 
 ## 関連項目 {#see-also}
 

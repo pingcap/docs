@@ -41,6 +41,6 @@ chmod +x tidb-lightning
 
 ### TiDB Lightning のアップグレード {#upgrade-tidb-lightning}
 
-TiDB Lightning は、追加の設定を必要とせず、バイナリのみを置き換えるだけでアップグレードできます。アップグレード後は、 TiDB Lightningを再起動する必要があります。詳細は[TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)参照してください。
+TiDB Lightning は、追加の設定を必要とせず、バイナリのみを置き換えるだけでアップグレードできます。アップグレード後は、 TiDB Lightningを再起動する必要があります。詳細は[TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
 インポートタスクが実行中の場合は、 TiDB Lightningをアップグレードする前に、タスクが完了するまで待つことをお勧めします。そうしないと、チェックポイントがバージョン間で機能する保証がないため、最初から再インポートが必要になる可能性があります。

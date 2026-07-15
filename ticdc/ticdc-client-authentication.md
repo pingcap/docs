@@ -31,7 +31,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
     <SimpleTab groupId="cdc">
      <div label="TiCDC command-line tool" value="cdc-cli">
 
-    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)使用する場合、以下の方法でクライアント証明書を指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
+    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でクライアント証明書を指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
     1.  コマンドラインパラメータ`--cert`と`--key`使用して、証明書と秘密鍵を指定します。サーバーが自己署名証明書を使用している場合は、パラメータ`--ca`を使用して信頼できる CA 証明書も指定する必要があります。
 
@@ -53,7 +53,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)使用する場合、 `--cert`と`--key`使用してクライアント証明書と秘密鍵を指定できます。サーバーが自己署名証明書を使用する場合は、 `--cacert`パラメータを使用して信頼されたCA証明書も指定する必要があります。例：
+    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合、 `--cert`と`--key`使用してクライアント証明書と秘密鍵を指定できます。サーバーが自己署名証明書を使用する場合は、 `--cacert`パラメータを使用して信頼されたCA証明書も指定する必要があります。例：
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --cert client.crt --key client.key --cacert ca.crt
@@ -85,7 +85,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
     <SimpleTab groupId="cdc">
      <div label="TiCDC command-line tool" value="cdc-cli">
 
-    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)使用する場合、以下の方法でユーザー名とパスワードを指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
+    [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でユーザー名とパスワードを指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
     1.  コマンドラインパラメータ`--user`と`--password`使用してユーザー名とパスワードを指定します。
 
@@ -112,7 +112,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)使用する場合は、 `--user <user>:<password>`を使用してユーザー名とパスワードを指定できます。例:
+    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合は、 `--user <user>:<password>`を使用してユーザー名とパスワードを指定できます。例:
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --user test:password

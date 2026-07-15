@@ -59,7 +59,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 TiDB Cloud Starterインスタンスが使用クォータに達すると、ユーザーが または新しい月の開始時に使用がリセットさ[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)まで、新しい接続試行は即座に拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料のTiDB Cloud Starter TiDB Cloud Starterインスタンスの行ベースのストレージが5 GiB を超えると、インスタンスは自動的に新しい接続試行を制限します。
 
-さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク出力など）のRU消費量、価格の詳細、およびスロットリング情報の詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
+さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク出力など）のRU消費量、価格の詳細、およびスロットリング情報の詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
 ### インスタンス容量計画 {#instance-capacity-plan}
 

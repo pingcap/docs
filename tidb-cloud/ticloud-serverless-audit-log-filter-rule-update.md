@@ -45,7 +45,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 | --display-name 文字列   | フィルター ルールの表示名。                                                                                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
 | --enabled                 | フィルター ルールを有効または無効にします。                                                                                                                                   | いいえ | 非対話型モードでのみ動作します。                     |
 | --filter-rule-id 文字列 | フィルター ルールの ID。                                                                                                                                           | はい  | 非対話型モードでのみ動作します。                     |
-| --rule             | フィルタルール式を完了します。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
+| --rule             | フィルタルール式を完了します。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                                                      | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
@@ -58,4 +58,4 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

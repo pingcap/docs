@@ -5,7 +5,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 # TiDB Dashboard診断レポート {#tidb-dashboard-diagnostic-report}
 
-このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)参照してください。
+このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
 ## レポートを表示する {#view-report}
 

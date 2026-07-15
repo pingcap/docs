@@ -7,7 +7,7 @@ summary: Learn the terms about TiCDC and their definitions.
 
 この用語集では、TiCDC関連の用語と定義について説明します。これらの用語は、TiCDCのログ、監視メトリック、設定、およびドキュメントで使用されます。
 
-TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参照してください。
+TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
 ## C {#c}
 

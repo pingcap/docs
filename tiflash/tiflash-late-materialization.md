@@ -9,12 +9,12 @@ summary: TiFlash の遅延マテリアライゼーション機能を使用して
 >
 > TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効になりません。
 
-TiFlash の遅延マテリアライゼーションは、OLAP シナリオにおけるクエリを高速化するための最適化手法です。システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)使用して、 TiFlash の遅延マテリアライゼーションの有効化または無効化を制御できます。
+TiFlash の遅延マテリアライゼーションは、OLAP シナリオにおけるクエリを高速化するための最適化手法です。システム変数[`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)を使用して、 TiFlash の遅延マテリアライゼーションの有効化または無効化を制御できます。
 
 -   無効にすると、フィルタ条件（ `WHERE`句）を含む`SELECT`ステートメントを処理するために、 TiFlash はクエリに必要な列からすべてのデータを読み取り、クエリ条件に基づいてデータをフィルタリングして集計します。
 -   有効にすると、 TiFlash はフィルター条件の一部を TableScan オペレーターにプッシュダウンすることをサポートします。つまり、 TiFlash はまず TableScan オペレーターにプッシュダウンされたフィルター条件に関連する列データをスキャンし、条件を満たす行をフィルタリングした後、それらの行の残りの列データをスキャンしてさらに計算を行います。これにより、データ処理における IO スキャンと計算量が削減されます。
 
-OLAPシナリオにおける特定のクエリのパフォーマンスを向上させるため、v7.1.0以降ではTiFlashの遅延マテリアライゼーション機能がデフォルトで有効化されています。TiDBオプティマイザーは、統計情報とフィルタ条件に基づいてプッシュダウンするフィルタ条件を決定し、フィルタリング率の高いフィルタ条件を優先的にプッシュダウンします。詳細なアルゴリズムについては、 [RFC文書](https://github.com/pingcap/tidb/tree/release-8.5/docs/design/2022-12-06-support-late-materialization.md)参照してください。
+OLAPシナリオにおける特定のクエリのパフォーマンスを向上させるため、v7.1.0以降ではTiFlashの遅延マテリアライゼーション機能がデフォルトで有効化されています。TiDBオプティマイザーは、統計情報とフィルタ条件に基づいてプッシュダウンするフィルタ条件を決定し、フィルタリング率の高いフィルタ条件を優先的にプッシュダウンします。詳細なアルゴリズムについては、 [RFC文書](https://github.com/pingcap/tidb/tree/release-8.5/docs/design/2022-12-06-support-late-materialization.md)を参照してください。
 
 例えば：
 

@@ -50,9 +50,9 @@ tiup dmctl check-task ./task.yaml
 
 -   アップストリームのMySQLテーブルスキーマの互換性
 
-    -   アップストリームテーブルに外部キーがあるかどうかを確認してください。TiDBは外部キーをサポートしています（v8.5.0以降でGA）。また、DMはv8.5.6以降、外部キー制約を持つテーブルのレプリケーションを実験的にサポートしています。事前チェック中に、外部キーが検出された場合、DMは警告を返します。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)参照してください。 .
+    -   アップストリームテーブルに外部キーがあるかどうかを確認してください。TiDBは外部キーをサポートしています（v8.5.0以降でGA）。また、DMはv8.5.6以降、外部キー制約を持つテーブルのレプリケーションを実験的にサポートしています。事前チェック中に、外部キーが検出された場合、DMは警告を返します。サポートされているシナリオと制限事項については、 [DM互換性カタログ](/dm/dm-compatibility-catalog.md#foreign-key-cascade-operations)を参照してください。 .
 
-    -   上流のテーブルで TiDB と互換性のない文字セットが使用されていないか確認してください。詳細については、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)参照してください。
+    -   上流のテーブルで TiDB と互換性のない文字セットが使用されていないか確認してください。詳細については、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)を参照してください。
 
     -   上流テーブルに主キー制約または一意キー制約（v1.0.7以降で導入）があるかどうかを確認します。
 
@@ -92,7 +92,7 @@ tiup dmctl check-task ./task.yaml
 
 -   シャーディングされたテーブルで主キーをAUTO_INCREMENTする
 
-    -   シャードテーブルにAUTO_INCREMENT主キーがある場合、事前チェックにより警告が返されます。AUTO_INCREMENT主キーに競合がある場合の解決策については、 [AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)参照してください。
+    -   シャードテーブルにAUTO_INCREMENT主キーがある場合、事前チェックにより警告が返されます。AUTO_INCREMENT主キーに競合がある場合の解決策については、 [AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照してください。
 
 #### 物理インポートの確認項目 {#check-items-for-physical-import}
 

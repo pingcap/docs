@@ -14,7 +14,7 @@ summary: GC 構成パラメータについて学習します。
 -   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) : GC のロック解決ステップでロックをスキャンする方法を指定します。
 -   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) : アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を指定します。
 
-システム変数の値を変更する方法の詳細については、 [システム変数](/system-variables.md)参照してください。
+システム変数の値を変更する方法の詳細については、 [システム変数](/system-variables.md)を参照してください。
 
 ## GC I/O制限 {#gc-i-o-limit}
 

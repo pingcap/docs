@@ -29,7 +29,7 @@ PDはオペレータ単位でスケジューリングを実行します。オペ
 
 ## 使用法 {#usage}
 
-Store Limit のパラメータは[`PD Control`](/pd-control.md)使用して設定できます。
+Store Limit のパラメータは[`PD Control`](/pd-control.md)を使用して設定できます。
 
 ### 現在のストアのビュー設定 {#view-setting-of-the-current-store}
 

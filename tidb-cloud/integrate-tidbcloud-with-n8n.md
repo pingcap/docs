@@ -21,7 +21,7 @@ summary: n8nにおけるTiDB Cloudノードの使い方を学びましょう。
 4.  APIキーの説明を入力し、 **「次へ」**をクリックしてください。
 5.  作成したAPIキーをコピーしてn8nで後で使用するようにし、 **「完了」**をクリックしてください。
 
-詳細については、 [TiDB Cloud APIの概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)参照してください。
+詳細については、 [TiDB Cloud APIの概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)を参照してください。
 
 ## ステップ1：n8nをインストールする {#step-1-install-n8n}
 

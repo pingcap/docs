@@ -103,7 +103,7 @@ TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサ
 
 2.  **「Changefeed のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)参照してください。
+3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
 
 4.  [ネットワーク](#network)セクションで収集した**エンドポイント サービス名**を入力します。
 
