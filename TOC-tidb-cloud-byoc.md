@@ -29,7 +29,16 @@
 
 - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
 - [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
-- Manage {{{ .premium }}} Instances
+- Deploy BYOC
+  - [Onboarding Overview](/tidb-cloud/byoc/byoc-onboarding-overview.md)
+  - [Prepare AWS Environment](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
+  - [Configure IAM Permissions](/tidb-cloud/byoc/byoc-iam-configuration.md)
+  - [Automated Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md)
+  - [Service Initialization](/tidb-cloud/byoc/byoc-service-initialization.md)
+  - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
+  - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
+  - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)
+- Manage Instances
   - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
   - Connect to Your {{{ .premium }}} Instance
     - [Connection Overview](/tidb-cloud/premium/connect-to-tidb-instance.md)
