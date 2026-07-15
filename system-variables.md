@@ -1123,15 +1123,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
-<<<<<<< HEAD
-- Range: `[1, 4294967295]`
-- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
-=======
 - Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
 - This variable controls the following aspects of `ANALYZE` concurrency:
     - The concurrency of scanning TiKV Regions.
     - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_analyze_partition_concurrency
 
@@ -1139,12 +1134,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
-<<<<<<< HEAD
-- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
-=======
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
 - For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1266,12 +1257,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-<<<<<<< HEAD
-- This variable is used to set the concurrency of executing the automatic update of statistics.
-=======
 - This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
 - Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_backoff_lock_fast
 
