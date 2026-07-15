@@ -68,7 +68,7 @@ FLUSH STATS_DELTA t;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-TiDB has now persisted the row count changes of the table to the `mysql.stats_meta` system table. You can view them using `SHOW STATS_META`. Note that `SHOW STATS_META` reads statistics from the memory of the TiDB instance you are connected to. Because this instance loads the persisted values within [`stats-lease`](/tidb-configuration-file.md#stats-lease) (`3s` by default), the flushed values might appear in the output after a short delay:
+TiDB has now persisted the row count changes of the table to the `mysql.stats_meta` system table. You can view persisted values using `SHOW STATS_META`. Note that `SHOW STATS_META` reads statistics from the memory of the TiDB node you are connected to. Because this TiDB node loads the persisted values within [`stats-lease`](/tidb-configuration-file.md#stats-lease) (`3s` by default), the flushed values might appear in the output after a short delay:
 
 ```sql
 SHOW STATS_META WHERE table_name = 't';
