@@ -39,7 +39,7 @@ For details, see [tips for choosing the affected versions](https://github.com/pi
 - This PR is translated from:
 - Other reference link(s):
 
-## AI agent involvement
+### AI agent involvement
 
 - [ ] The changes in this PR were primarily made by an AI agent on behalf of the PR author.
 
