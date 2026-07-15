@@ -43,9 +43,9 @@ ClusterOption ::=
 - **Targets (`FlushTargetList`)**: specifies which tables to flush. You must specify at least one target.
     - `table_name`: flushes the statistics delta of a table in the current database. If you do not select a database, TiDB returns the `No database selected` error.
     - `db_name.table_name`: flushes the statistics delta of a table in the specified database.
-    - `db_name.*`: flushes the statistics delta of every table in the specified database.
-    - `*.*`: flushes the statistics delta of every table.
-- **`CLUSTER`**: broadcasts the statement to every TiDB instance in the cluster. Each TiDB instance buffers the statistics delta of the DML statements that it executes. Without this option, TiDB persists only the delta buffered on the instance you are connected to.
+    - `db_name.*`: flushes the statistics delta of all tables in the specified database.
+    - `*.*`: flushes the statistics delta of all tables.
+- **`CLUSTER`**: broadcasts the statement to all TiDB nodes in the cluster. Each TiDB node buffers the statistics delta of the DML statements that it executes. Without this option, TiDB only persists the delta buffered on the TiDB node you are connected to.
 
 Note the following behavior:
 
