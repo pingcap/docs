@@ -26,37 +26,37 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ## オプティマイザー修正コントロールリファレンス {#optimizer-fix-controls-reference}
 
-### <a href="https://github.com/pingcap/tidb/issues/33031">`33031`</a><span class="version-mark">バージョン8.0.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-33031-33031-a-new-in-v800}
+### <a href="https://github.com/pingcap/tidb/issues/33031">`33031`</a><span class="version-mark">バージョン8.0.0の新機能</span> {#33031-new-in-v800}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
 -   この変数は、パーティションテーブルに対してプランキャッシュを許可するかどうかを制御します。 `ON`に設定した場合、 [パーティションテーブル](/partitioned-table.md)では[プリペアドステートメントプランキャッシュ](/sql-prepared-plan-cache.md)も[非プリペアドステートメントプランキャッシュ](/sql-non-prepared-plan-cache.md)有効になりません。
 
-### <a href="https://github.com/pingcap/tidb/issues/44262">`44262`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-44262-a-new-in-v653-and-v720}
+### <a href="https://github.com/pingcap/tidb/issues/44262">`44262`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#44262-new-in-v653-and-v720}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
 -   この変数は、パーティションテーブルの[世界統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してそのテーブルにアクセスできるようにするかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44389">`44389`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44389-44389-a-new-in-v653-and-v720}
+### <a href="https://github.com/pingcap/tidb/issues/44389">`44389`</a> <span class="version-mark">v6.5.3 および v7.2.0 の新機能</span> {#44389-new-in-v653-and-v720}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
 -   `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`などのフィルターの場合、この変数は`IndexRangeScan`より包括的なスキャン範囲を構築するかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44823">`44823`</a><span class="version-mark">バージョン7.3.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44823-44823-a-new-in-v730}
+### <a href="https://github.com/pingcap/tidb/issues/44823">`44823`</a><span class="version-mark">バージョン7.3.0の新機能</span> {#44823-new-in-v730}
 
 -   デフォルト値: `200`
 -   可能な値: `[0, 2147483647]`
 -   メモリを節約するために、プラン キャッシュでは、この変数で指定された数を超えるパラメータを持つクエリはキャッシュされません。 `0`制限がないことを意味します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44830">`44830`</a> <span class="version-mark">v6.5.7 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44830-44830-a-new-in-v657-and-v730}
+### <a href="https://github.com/pingcap/tidb/issues/44830">`44830`</a> <span class="version-mark">v6.5.7 および v7.3.0 の新機能</span> {#44830-new-in-v657-and-v730}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
 -   この変数は、物理的な最適化中に生成された`PointGet`演算子を使用して実行プランをプラン キャッシュがキャッシュできるかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/44855">`44855`</a> <span class="version-mark">v6.5.4 および v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44855-44855-a-new-in-v654-and-v730}
+### <a href="https://github.com/pingcap/tidb/issues/44855">`44855`</a> <span class="version-mark">v6.5.4 および v7.3.0 の新機能</span> {#44855-new-in-v654-and-v730}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
@@ -64,26 +64,26 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 -   この問題を軽減するために、TiDB では改善が導入されました。ただし、クエリプランのフォールバックによる潜在的なリスクがあるため、この改善はデフォルトで無効になっています。
 -   この変数は、前述の改善を有効にするかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/45132">`45132`</a><span class="version-mark">バージョン7.4.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45132-45132-a-new-in-v740}
+### <a href="https://github.com/pingcap/tidb/issues/45132">`45132`</a><span class="version-mark">バージョン7.4.0の新機能</span> {#45132-new-in-v740}
 
 -   デフォルト値: `1000`
 -   可能な値: `[0, 2147483647]`
 -   この変数は、オプティマイザがアクセスパスを選択する際のヒューリスティック戦略の閾値を設定します。あるアクセスパスの推定行数（例えば`Index_A` ）が他のアクセスパスの推定行数（デフォルトでは`1000`倍）よりも大幅に少ない場合、オプティマイザはコスト比較をスキップし、直接`Index_A`選択します。
 -   `0` 、このヒューリスティック戦略を無効にすることを意味します。
 
-### <a href="https://github.com/pingcap/tidb/issues/45798">`45798`</a><span class="version-mark">バージョン7.5.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45798-45798-a-new-in-v750}
+### <a href="https://github.com/pingcap/tidb/issues/45798">`45798`</a><span class="version-mark">バージョン7.5.0の新機能</span> {#45798-new-in-v750}
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`
 -   この変数は、プラン キャッシュが[生成された列](/generated-columns.md)アクセスする実行プランをキャッシュできるかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/46177">`46177`</a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-46177-46177-a-new-in-v656-v713-and-v750}
+### <a href="https://github.com/pingcap/tidb/issues/46177">`46177`</a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#46177-new-in-v656-v713-and-v750}
 
 -   デフォルト値: `ON` 。v8.5.0 より前では、デフォルト値は`OFF`です。
 -   可能`OFF`値: `ON`
 -   この変数は、強制されていないプランを見つけた後、クエリの最適化中にオプティマイザーが強制されているプランを探索するかどうかを制御します。
 
-### <a href="https://github.com/pingcap/tidb/issues/47400">`47400`</a><span class="version-mark">バージョン8.4.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-47400-47400-a-new-in-v840}
+### <a href="https://github.com/pingcap/tidb/issues/47400">`47400`</a><span class="version-mark">バージョン8.4.0の新機能</span> {#47400-new-in-v840}
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`
@@ -91,7 +91,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 -   `ON` : 最小値`estRows`を 1 に制限します。これは、v8.4.0 で導入された新しい動作であり、Oracle や Db2 などの他のデータベースと一致しています。
 -   `OFF` : 最小行数推定制限を無効にします。これにより、v8.4.0 より前のバージョンとの動作の一貫性が維持されます。この場合、 `estRows` 0 になる可能性があります。
 
-### <a href="https://github.com/pingcap/tidb/issues/52592">`52592`</a><span class="version-mark">バージョン8.4.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-52592-52592-a-new-in-v840}
+### <a href="https://github.com/pingcap/tidb/issues/52592">`52592`</a><span class="version-mark">バージョン8.4.0の新機能</span> {#52592-new-in-v840}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
@@ -101,14 +101,14 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
     -   多数の列を持つ幅の広いテーブルで、少数の列のみがクエリされます。
     -   大きな JSON 値を持つテーブルで、JSON 列がクエリされないか、JSON 列の小さな部分のみがクエリされます。
 
-### <a href="https://github.com/pingcap/tidb/issues/52869">`52869`</a><span class="version-mark">バージョン8.1.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-52869-52869-a-new-in-v810}
+### <a href="https://github.com/pingcap/tidb/issues/52869">`52869`</a><span class="version-mark">バージョン8.1.0の新機能</span> {#52869-new-in-v810}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
 -   [インデックスマージを使用したステートメントの説明](/explain-index-merge.md#examples)の**注記**で述べたように、オプティマイザがクエリ プランに対して単一インデックス スキャン方式 (フル テーブル スキャン以外) を選択できる場合、オプティマイザはインデックス マージを自動的に使用しません。
 -   この制限は、この修正制御を有効にすることで解除できます。この制限を解除すると、オプティマイザはより多くのクエリでインデックスマージを自動的に選択できるようになりますが、最適な実行プランを無視してしまう可能性があります。したがって、この制限を解除する前に、実際のユースケースで十分なテストを実施し、パフォーマンスの低下が発生しないことを確認することをお勧めします。
 
-### <a href="https://github.com/pingcap/tidb/issues/54337">`54337`</a><span class="version-mark">バージョン8.3.0の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-54337-54337-a-new-in-v830}
+### <a href="https://github.com/pingcap/tidb/issues/54337">`54337`</a><span class="version-mark">バージョン8.3.0の新機能</span> {#54337-new-in-v830}
 
 -   デフォルト値: `OFF`
 -   可能`OFF`値: `ON`
