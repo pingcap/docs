@@ -2164,7 +2164,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Default value: `ON`. Before v8.3.0, the default value is `OFF`.
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
-### tidb_enable_connection_event_log <span class="version-mark">New in v9.0.0</span>
+### tidb_enable_connection_event_log <span class="version-mark">New in v8.5.8 and v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
