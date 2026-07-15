@@ -31,7 +31,7 @@ TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関
 | [`RANK()`](#rank)                 | パーティション内の現在の行の順位を返します。順位にはギャップがある場合があります。                                |
 | [`ROW_NUMBER()`](#row_number)     | パーティション内の現在の行番号を返します。                                                    |
 
-## <code>CUME_DIST()</code> {#code-cume-dist-code}
+## `CUME_DIST()` {#cume-dist}
 
 `CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`句と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
 
@@ -63,7 +63,7 @@ FROM
     +------+------------------------------+
     4 rows in set (0.00 sec)
 
-## <code>DENSE_RANK()</code> {#code-dense-rank-code}
+## `DENSE_RANK()` {#dense-rank}
 
 `DENSE_RANK()`関数は現在行の順位を返します。3 [`RANK()`](#rank)と似ていますが、同順位（同じ値と順序条件を共有する行）の場合に空白を残しません。
 
@@ -97,7 +97,7 @@ FROM (
     +----+--------------------------------+
     6 rows in set (0.00 sec)
 
-## <code>FIRST_VALUE()</code> {#code-first-value-code}
+## `FIRST_VALUE()` {#first-value}
 
 `FIRST_VALUE(expr)`ウィンドウ内の最初の値を返します。
 
@@ -134,7 +134,7 @@ ORDER BY
     +------+-------------------------------------------------------+------------------------------------------------------+
     4 rows in set (0.00 sec)
 
-## <code>LAG()</code> {#code-lag-code}
+## `LAG()` {#lag}
 
 `LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`は`1`は`default` `NULL`扱われます。
 
@@ -174,7 +174,7 @@ FROM
     +------+----------------+
     10 rows in set (0.01 sec)
 
-## <code>LAST_VALUE()</code> {#code-last-value-code}
+## `LAST_VALUE()` {#last-value}
 
 `LAST_VALUE()`関数はウィンドウ内の最後の値を返します。
 
@@ -215,7 +215,7 @@ ORDER BY
     +------+----------------------------------------+
     10 rows in set (0.00 sec)
 
-## <code>LEAD()</code> {#code-lead-code}
+## `LEAD()` {#lead}
 
 `LEAD(expr [, num [,default]])`関数は、現在の行から`num`行後の行の値`expr`返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`指定されていない場合は`1`が、 `default`指定されていない場合は`NULL`が返されます。
 
@@ -256,7 +256,7 @@ FROM
     +------+-----------------+
     10 rows in set (0.00 sec)
 
-## <code>NTH_VALUE()</code> {#code-nth-value-code}
+## `NTH_VALUE()` {#nth-value}
 
 `NTH_VALUE(expr, n)`関数はウィンドウの`n`番目の値を返します。
 
@@ -302,7 +302,7 @@ ORDER BY
     +------+-------+--------+-------+------+
     10 rows in set (0.00 sec)
 
-## <code>NTILE()</code> {#code-ntile-code}
+## `NTILE()` {#ntile}
 
 `NTILE(n)`関数はウィンドウを`n`グループに分割し、各行のグループ番号を返します。
 
@@ -345,7 +345,7 @@ FROM
 
 ```
 
-## <code>PERCENT_RANK()</code> {#code-percent-rank-code}
+## `PERCENT_RANK()` {#percent-rank}
 
 `PERCENT_RANK()`関数は、現在の行の値よりも小さい値を持つ行の割合を示す 0 から 1 までの数値を返します。
 
@@ -380,7 +380,7 @@ FROM (
     +----+----------------------------------+---------------------------------------+
     6 rows in set (0.00 sec)
 
-## <code>RANK()</code> {#code-rank-code}
+## `RANK()` {#rank}
 
 `RANK()`関数は[`DENSE_RANK()`](#dense_rank)に似ていますが、同点（同じ値と順序条件を持つ行）の場合は空白を残します。つまり、絶対的な順位付けを提供します。例えば、順位が 7 の場合、それより低い順位の行が 6 行あることを意味します。
 
@@ -415,7 +415,7 @@ FROM (
     +----+--------------------------+--------------------------------+
     6 rows in set (0.00 sec)
 
-## <code>ROW_NUMBER()</code> {#code-row-number-code}
+## `ROW_NUMBER()` {#row-number}
 
 `ROW_NUMBER()`結果セット内の現在の行の行番号を返します。
 

@@ -440,7 +440,7 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 ヒント`ORDER_INDEX`の例と同様に、オプティマイザはこのクエリに対して`Limit + IndexScan(keep order: true)`と`TopN + IndexScan(keep order: false)` 2種類のプランを生成します。ヒント`NO_ORDER_INDEX`が使用される場合、オプティマイザは後者のプランを選択してインデックスを順不同で読み取ります。
 
-### INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])<span class="version-mark">バージョン8.5.5の新機能</span> {#index-lookup-pushdown-t1-name-idx1-name-idx2-name-span-class-version-mark-new-in-v8-5-5-span}
+### INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])<span class="version-mark">バージョン8.5.5の新機能</span> {#index-lookup-pushdown-t1-name-idx1-name-idx2-name-new-in-v855}
 
 ヒント`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`は、指定されたインデックスのみを使用して指定されたテーブルにアクセスし、演算子`IndexLookUp` TiKV にプッシュダウンして実行するようにオプティマイザに指示します。
 
@@ -477,7 +477,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 -   プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)サポートしません。
 
-### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no-index-lookup-pushdown-t1-name-span-class-version-mark-new-in-v8-5-5-span}
+### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no-index-lookup-pushdown-t1-name-new-in-v855}
 
 `NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`ヒントは、指定されたテーブルの`IndexLookUp`プッシュダウンを明示的に無効にします。このヒントは通常、 [`tidb_index_lookup_pushdown_policy`](/system-variables.md#tidb_index_lookup_pushdown_policy-new-in-v855)システム変数と組み合わせて使用されます。この変数の値が`force`または`affinity-force`の場合、このヒントを使用して特定のテーブルの`IndexLookUp`プッシュダウンを防止できます。
 

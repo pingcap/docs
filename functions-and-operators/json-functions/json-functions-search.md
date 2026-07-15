@@ -7,7 +7,7 @@ summary: JSON 値を検索する JSON関数について学習します。
 
 TiDB は、MySQL 8.0 で利用可能な[JSON値を検索するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html)のほとんどをサポートしています。
 
-## <code>JSON_CONTAINS()</code> {#code-json-contains-code}
+## `JSON_CONTAINS()` {#json-contains}
 
 `JSON_CONTAINS(json_doc, candidate [,path])`関数は、 `1`または`0`返すことにより、指定された`candidate` JSON ドキュメントがターゲット JSON ドキュメント内に含まれているかどうかを示します。
 
@@ -78,7 +78,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
     +------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <code>JSON_CONTAINS_PATH()</code> {#code-json-contains-path-code}
+## `JSON_CONTAINS_PATH()` {#json-contains-path}
 
 `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])`関数は、JSON ドキュメントに指定されたパスのデータが含まれているかどうかを示す`0`または`1`返します。
 
@@ -123,7 +123,7 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
     +-----------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <code>JSON_EXTRACT()</code> {#code-json-extract-code}
+## `JSON_EXTRACT()` {#json-extract}
 
 `JSON_EXTRACT(json_doc, path[, path] ...)`関数は、 `path`引数に一致するドキュメントの部分から選択して、JSON ドキュメントからデータを抽出します。
 
@@ -138,7 +138,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
     +---------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <code>-></code> {#code-code}
+## `->` {#-}
 
 `column->path`関数は、 `path`引数に一致する`column`のデータを返します。これは[`JSON_EXTRACT()`](#json_extract)のエイリアスです。
 
@@ -159,7 +159,7 @@ FROM (
     +------------+--------------------------+
     1 row in set (0.00 sec)
 
-## <code>->></code> {#code-code}
+## `->>` {#--1}
 
 `column->>path`関数は、 `path`引数に一致する`column`内のデータを引用符で囲まないようにします。これは`JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名です。
 
@@ -182,7 +182,7 @@ FROM (
     +------------+--------------------------+-------------+----------------------------------------+
     1 row in set (0.00 sec)
 
-## <code>JSON_KEYS()</code> {#code-json-keys-code}
+## `JSON_KEYS()` {#json-keys}
 
 `JSON_KEYS(json_doc [,path])`関数は、JSONオブジェクトの最上位キーをJSON配列として返します。3 引数`path`指定された場合は、選択されたパスの最上位キーを返します。
 
@@ -214,7 +214,7 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}',
     +-------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## <code>JSON_SEARCH()</code> {#code-json-search-code}
+## `JSON_SEARCH()` {#json-search}
 
 `JSON_SEARCH(json_doc, one_or_all, str)`関数は、JSON ドキュメントで文字列の 1 つまたはすべての一致を検索します。
 
@@ -246,7 +246,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
     +------------------------------------------------------------------------+
     1 row in set (0.01 sec)
 
-## <code>MEMBER OF()</code> {#code-member-of-code}
+## `MEMBER OF()` {#member-of}
 
 `str MEMBER OF (json_array)`関数は、渡された値`str`が`json_array`の要素かどうかをテストし、 `1`を返します。そうでない場合は`0`返します。引数のいずれかが`NULL`の場合は`NULL`返します。
 
@@ -262,7 +262,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ```
 
-## <code>JSON_OVERLAPS()</code> {#code-json-overlaps-code}
+## `JSON_OVERLAPS()` {#json-overlaps}
 
 `JSON_OVERLAPS(json_doc, json_doc)`関数は、2つのJSONドキュメントに重複部分があるかどうかを示します。重複がある場合は`1` 、重複しない場合は`0`返します。引数のいずれかが`NULL`の場合は`NULL`返します。
 

@@ -3,7 +3,7 @@ title: GRANT <role> | TiDB SQL Statement Reference
 summary: TiDB データベースに対する GRANT <role> の使用法の概要。
 ---
 
-# <code>GRANT &#x3C;role></code> {#code-grant-x3c-role-code}
+# `GRANT &#x3C;role>` {#grant-x3c-role}
 
 既存のユーザーに、以前に作成したロールを割り当てます。ユーザーは、ステートメント`SET ROLE <rolename>`を使用してロールの権限を引き受けるか、ステートメント`SET ROLE ALL`使用して割り当てられているすべてのロールを引き受けることができます。
 

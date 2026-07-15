@@ -262,27 +262,27 @@ mysql-instances:
 
 各機能構成セットの引数は、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
 
-#### <code>routes</code> {#code-routes-code}
+#### `routes` {#routes}
 
 -   アップストリームテーブルとダウンストリームテーブル間のルーティングマッピングルールセット。アップストリームとダウンストリームのスキーマ名およびテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオと設定例については[テーブルルーティング](/dm/dm-table-routing.md)参照してください。
 
-#### <code>filters</code> {#code-filters-code}
+#### `filters` {#filters}
 
 -   アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)参照してください。
 
-#### <code>block-allow-list</code> {#code-block-allow-list-code}
+#### `block-allow-list` {#block-allow-list}
 
 -   上流のデータベース インスタンスの一致するテーブルのブロック許可リストのフィルター ルール セット。この項目で移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベントフィルタ](/dm/dm-binlog-event-filter.md)と[ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)を参照してください。
 
-#### <code>mydumpers</code> {#code-mydumpers-code}
+#### `mydumpers` {#mydumpers}
 
 -   ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `thread`のみを使用して`mydumper-thread` } を設定することもできます。
 
-#### <code>loaders</code> {#code-loaders-code}
+#### `loaders` {#loaders}
 
 -   負荷処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `pool-size`のみを使用して`loader-thread` } を設定することもできます。
 
-#### <code>syncers</code> {#code-syncers-code}
+#### `syncers` {#syncers}
 
 -   同期処理ユニットのコンフィグレーション引数。デフォルト設定で要件を満たしている場合は、この項目を設定する必要はありません。または、 `worker-count`のみを使用して`syncer-thread` } を設定することもできます。
 

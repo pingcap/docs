@@ -3,7 +3,7 @@ title: AUTO_RANDOM
 summary: AUTO_RANDOM 属性について学習します。
 ---
 
-# AUTO_RANDOM <span class="version-mark">v3.1.0 の新機能</span> {#auto-random-span-class-version-mark-new-in-v3-1-0-span}
+# AUTO_RANDOM <span class="version-mark">v3.1.0 の新機能</span> {#auto-random-new-in-v310}
 
 ## ユーザーシナリオ {#user-scenario}
 

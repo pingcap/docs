@@ -27,7 +27,7 @@ WhereClauseOptional ::=
 
 ## 例 {#examples}
 
-### <code>ADMIN SHOW DDL</code> {#code-admin-show-ddl-code}
+### `ADMIN SHOW DDL` {#admin-show-ddl}
 
 現在実行中のDDLジョブのステータスを表示するには、 `ADMIN SHOW DDL`使用します。出力には、現在のスキーマバージョン、DDL IDと所有者のアドレス、実行中のDDLジョブとSQL文、現在のTiDBインスタンスのDDL IDが含まれます。返される結果フィールドは以下のとおりです。
 
@@ -53,7 +53,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
 1 row in set (0.00 sec)
 ```
 
-### <code>ADMIN SHOW DDL JOBS</code> {#code-admin-show-ddl-jobs-code}
+### `ADMIN SHOW DDL JOBS` {#admin-show-ddl-jobs}
 
 `ADMIN SHOW DDL JOBS`ステートメントは、現在のDDLジョブキューにある10個のジョブ（実行中および保留中のジョブ（存在する場合）を含む）と、実行済みのDDLジョブキューにある最後の10個のジョブ（存在する場合）を表示します。返される結果フィールドは、以下のとおりです。
 
@@ -171,7 +171,7 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 -   `NUM` : 完了したDDLジョブキューの最後の`NUM`結果を表示します。指定しない場合は、デフォルトで`NUM` （10）になります。
 -   `WHERE` : フィルター条件を追加します。
 
-### <code>ADMIN SHOW DDL JOB QUERIES</code> {#code-admin-show-ddl-job-queries-code}
+### `ADMIN SHOW DDL JOB QUERIES` {#admin-show-ddl-job-queries}
 
 `job_id`に対応する DDL ジョブの元の SQL ステートメントを表示するには、 `ADMIN SHOW DDL JOB QUERIES`使用します。
 
@@ -192,7 +192,7 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 
 DDL 履歴ジョブ キュー内の過去 10 件の結果のうち、 `job_id`に対応する実行中の DDL ジョブのみを検索できます。
 
-### <code>ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n</code> {#code-admin-show-ddl-job-queries-limit-m-offset-n-code}
+### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n` {#admin-show-ddl-job-queries-limit-m-offset-n}
 
 `job_id`に対応する指定された範囲`[n+1, n+m]`内の DDL ジョブの元の SQL ステートメントを表示するには、 `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`使用します。
 

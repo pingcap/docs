@@ -3,7 +3,7 @@ title: tiup dm import
 summary: TiUP DMの「import」コマンドは、DMクラスタをv1.0からv2.0以降のバージョンにアップグレードするために使用されます。このコマンドは、v1.0クラスタからのDMポータルコンポーネントのインポートをサポートしておらず、インポート前に元のクラスタを停止する必要があります。このコマンドはDM v2.0.0-rc.2以降のバージョンへのインポートのみをサポートしており、DM v1.0クラスタを新しいDM v2.0クラスタにインポートするために使用できます。インポート後、クラスタ内のDMマスターノードは1つだけになり、一部のコンポーネントのデプロイメントディレクトリは元のクラスタと異なる場合があります。
 ---
 
-# tiup dm import <span class="version-mark">DM v1.0 のアップグレードのみ</span> {#tiup-dm-import-span-class-version-mark-only-for-upgrading-dm-v1-0-span}
+# tiup dm import <span class="version-mark">DM v1.0 のアップグレードのみ</span> {#tiup-dm-import-only-for-upgrading-dm-v10}
 
 <Note>
 

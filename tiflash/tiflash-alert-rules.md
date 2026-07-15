@@ -7,7 +7,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
 このドキュメントでは、 TiFlashクラスターのアラート ルールについて説明します。
 
-## <code>TiFlash_schema_error</code> {#code-tiflash-schema-error-code}
+## `TiFlash_schema_error` {#tiflash-schema-error}
 
 -   アラートルール:
 
@@ -21,7 +21,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
     このエラーは、何らかの間違ったロジックによって発生した可能性があります。1 [サポートを受ける](/support.md)またはコミュニティから。
 
-## <code>TiFlash_schema_apply_duration</code> {#code-tiflash-schema-apply-duration-code}
+## `TiFlash_schema_apply_duration` {#tiflash-schema-apply-duration}
 
 -   アラートルール:
 
@@ -35,7 +35,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
     これは、 TiFlashストレージエンジンの内部的な問題が原因である可能性があります。1 [サポートを受ける](/support.md) PingCAP またはコミュニティから提供されました。
 
-## <code>TiFlash_raft_read_index_duration</code> {#code-tiflash-raft-read-index-duration-code}
+## `TiFlash_raft_read_index_duration` {#tiflash-raft-read-index-duration}
 
 -   アラートルール:
 
@@ -53,7 +53,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
     頻繁な再試行は、TiKV クラスターの頻繁な分割または移行が原因である可能性があります。再試行の理由を特定するには、TiKV クラスターのステータスを確認してください。
 
-## <code>TiFlash_raft_wait_index_duration</code> {#code-tiflash-raft-wait-index-duration-code}
+## `TiFlash_raft_wait_index_duration` {#tiflash-raft-wait-index-duration}
 
 -   アラートルール:
 

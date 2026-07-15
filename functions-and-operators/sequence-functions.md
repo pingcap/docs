@@ -14,7 +14,7 @@ TiDB のシーケンス関数は、 [`CREATE SEQUENCE`](/sql-statements/sql-stat
 | [`SETVAL()`](#setval)               | シーケンスの現在の値を設定します。                    |
 | [`LASTVAL()`](#lastval)             | 現在のセッションでシーケンスによって生成された最後の値を返します。    |
 
-## <code>NEXTVAL()</code> {#code-nextval-code}
+## `NEXTVAL()` {#nextval}
 
 `NEXTVAL()`関数は、シーケンスの次の値を返します。
 
@@ -41,7 +41,7 @@ SELECT NEXTVAL(s1);
     +-------------+
     1 row in set (0.00 sec)
 
-## <code>NEXT VALUE FOR</code> {#code-next-value-for-code}
+## `NEXT VALUE FOR` {#next-value-for}
 
 `NEXT VALUE FOR`関数は[`NEXTVAL()`](#nextval)エイリアスです。
 
@@ -77,7 +77,7 @@ SELECT NEXT VALUE FOR s1;
     +-------------------+
     1 row in set (0.00 sec)
 
-## <code>SETVAL()</code> {#code-setval-code}
+## `SETVAL()` {#setval}
 
 `SETVAL(n)`関数は、シーケンスの現在の値を設定します。
 
@@ -128,7 +128,7 @@ SELECT NEXTVAL(s1);
     +-------------+
     1 row in set (0.00 sec)
 
-## <code>LASTVAL()</code> {#code-lastval-code}
+## `LASTVAL()` {#lastval}
 
 `LASTVAL()`関数は**、現在のセッションで**シーケンスによって生成された最後の値を返します。
 

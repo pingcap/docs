@@ -38,60 +38,60 @@ cert-allowed-cn = ["dm"]
 
 ### グローバル {#global}
 
-#### <code>name</code> {#code-name-code}
+#### `name` {#name}
 
 -   DM ワーカーの名前。
 
-#### <code>log-level</code> {#code-log-level-code}
+#### `log-level` {#log-level}
 
 -   ログ レベルを指定します。
 -   デフォルト値: `info`
 -   `fatal` `warn` `info` `error` `debug`
 
-#### <code>log-file</code> {#code-log-file-code}
+#### `log-file` {#log-file}
 
 -   ログファイルのディレクトリを指定します。このパラメータが指定されていない場合、ログは標準出力に出力されます。
 
-#### <code>worker-addr</code> {#code-worker-addr-code}
+#### `worker-addr` {#worker-addr}
 
 -   サービスを提供するDMワーカーのアドレスを指定します。IPアドレスを省略し、ポート番号のみ（例： `":8262"` ）を指定することもできます。
 
-#### <code>advertise-addr</code> {#code-advertise-addr-code}
+#### `advertise-addr` {#advertise-addr}
 
 -   DM ワーカーが外部にアドバタイズするアドレスを指定します。
 
-#### <code>join</code> {#code-join-code}
+#### `join` {#join}
 
 -   DM マスター構成ファイル内の 1 つ以上の[`master-addr`](/dm/dm-master-configuration-file.md#global-configuration)に対応します。
 
-#### <code>keepalive-ttl</code> {#code-keepalive-ttl-code}
+#### `keepalive-ttl` {#keepalive-ttl}
 
 -   DM ワーカー ノードの上流データ ソースがリレー ログを有効にしていない場合の、DM ワーカー ノードから DM マスター ノードへのキープアライブ時間 (秒単位)。
 -   デフォルト値: `60`
 -   単位: 秒
 
-#### <code>relay-keepalive-ttl</code> <span class="version-mark">DM v2.0.2の新機能</span> {#code-relay-keepalive-ttl-code-span-class-version-mark-new-in-dm-v2-0-2-span}
+#### `relay-keepalive-ttl` <span class="version-mark">DM v2.0.2の新機能</span> {#relay-keepalive-ttl-new-in-dm-v202}
 
 -   DM ワーカー ノードの上流データ ソースがリレー ログを有効にしている場合の、DM ワーカー ノードから DM マスター ノードへのキープアライブ時間 (秒単位)。
 -   デフォルト値: `1800`
 -   単位: 秒
 
-#### <code>relay-dir</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-relay-dir-code-span-class-version-mark-new-in-v5-4-0-span}
+#### `relay-dir` <span class="version-mark">v5.4.0 の新機能</span> {#relay-dir-new-in-v540}
 
 -   バインドされた上流データソースでリレーログが有効になっている場合、DM-workerはリレーログをこのディレクトリに保存します。このパラメータは、上流データソースの設定よりも優先されます。
 
-#### <code>ssl-ca</code> {#code-ssl-ca-code}
+#### `ssl-ca` {#ssl-ca}
 
 -   DM-worker が他のコンポーネントに接続するための信頼できる SSL CA のリストが含まれるファイルのパス。
 
-#### <code>ssl-cert</code> {#code-ssl-cert-code}
+#### `ssl-cert` {#ssl-cert}
 
 -   DM-worker が他のコンポーネントに接続するための PEM 形式の X509 証明書を含むファイルのパス。
 
-#### <code>ssl-key</code> {#code-ssl-key-code}
+#### `ssl-key` {#ssl-key}
 
 -   DM-worker が他のコンポーネントに接続するための PEM 形式の X509 キーを含むファイルのパス。
 
-#### <code>cert-allowed-cn</code> {#code-cert-allowed-cn-code}
+#### `cert-allowed-cn` {#cert-allowed-cn}
 
 -   一般名リスト。

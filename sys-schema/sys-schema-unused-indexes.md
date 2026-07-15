@@ -3,7 +3,7 @@ title: schema_unused_indexes
 summary: sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
 ---
 
-# <code>schema_unused_indexes</code> {#code-schema-unused-indexes-code}
+# `schema_unused_indexes` {#schema-unused-indexes}
 
 `schema_unused_indexes` 、TiDB の前回の起動以降使用されていないインデックスを記録します。以下の列が含まれます。
 

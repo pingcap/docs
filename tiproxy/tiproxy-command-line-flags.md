@@ -11,14 +11,14 @@ summary: TiProxy のコマンドライン起動フラグについて学習しま
 
 このセクションでは、サーバープログラム`tiproxy`のフラグを一覧表示します。
 
-### <code>--advertise-addr</code> {#code-advertise-addr-code}
+### `--advertise-addr` {#advertise-addr}
 
 -   クライアントがこの TiProxy インスタンスに接続するために使用するアドレスを指定します。
 -   タイプ: `string`
 -   デフォルト: `""`
 -   このフラグは、 TiUPまたはTiDB Operatorを使用して TiProxy をデプロイすると自動的に設定されます。設定されていない場合は、TiProxy インスタンスの外部 IP アドレスが使用されます。
 
-### <code>--config</code> {#code-config-code}
+### `--config` {#config}
 
 -   TiProxy 構成ファイルのパスを指定します。
 -   タイプ: `string`
@@ -73,19 +73,19 @@ ls bin/tiproxyctl
 
 ### オプション {#options}
 
-#### <code>--host</code> {#code-host-code}
+#### `--host` {#host}
 
 -   TiProxyサーバーのアドレスを指定します。
 -   タイプ: `string`
 -   デフォルト: `localhost`
 
-#### <code>--port</code> {#code-port-code}
+#### `--port` {#port}
 
 -   TiProxy API ゲートウェイのポート番号を指定します。
 -   タイプ: `int`
 -   デフォルト: `3080`
 
-#### <code>--log_encoder</code> {#code-log-encoder-code}
+#### `--log_encoder` {#log-encoder}
 
 -   `tiproxyctl`のログ形式を指定します。
 -   タイプ: `string`
@@ -95,27 +95,27 @@ ls bin/tiproxyctl
     -   `console` : より人間が読みやすい形式
     -   `json` : 構造化されたログ形式
 
-#### <code>--log_level</code> {#code-log-level-code}
+#### `--log_level` {#log-level}
 
 -   tiproxyctl のログ レベルを指定します。
 -   タイプ: `string`
 -   デフォルト: `"warn"`
 -   `debug` `info` `error`でき`panic` `warn`
 
-#### <code>-k, --insecure</code> {#code-k-insecure-code}
+#### `-k, --insecure` {#k-insecure}
 
 -   サーバーにダイヤルするときに TLS CA 検証をスキップするかどうかを指定します。
 -   タイプ: `boolean`
 -   デフォルト: `false`
 -   テストに使用されます。
 
-#### <code>--ca</code> {#code-ca-code}
+#### `--ca` {#ca}
 
 -   サーバーにダイヤルするときに CA を指定します。
 -   タイプ: `string`
 -   デフォルト: `""`
 
-#### <code>--cert</code> {#code-cert-code}
+#### `--cert` {#cert}
 
 -   サーバーにダイヤルするときに証明書を指定します。
 -   タイプ: `string`
@@ -123,7 +123,7 @@ ls bin/tiproxyctl
 
 ### コマンド {#commands}
 
-#### <code>config set</code> {#code-config-set-code}
+#### `config set` {#config-set}
 
 `tiproxyctl config set`コマンドは標準入力からTOML形式の設定ファイルを読み取り、これらの設定項目をTiProxyに設定します。指定されていない設定項目は変更されないため、変更したい項目のみを指定してください。
 
@@ -139,11 +139,11 @@ $ tiproxyctl config get | grep level
 level = 'warning'
 ```
 
-#### <code>config get</code> {#code-config-get-code}
+#### `config get` {#config-get}
 
 `tiproxyctl config get`コマンドは、現在の TiProxy 構成を TOML 形式で取得するために使用されます。
 
-#### <code>health</code> {#code-health-code}
+#### `health` {#health}
 
 `tiproxyctl health`コマンドは、TiProxy のヘルスステータスと設定のチェックサムを取得するために使用されます。TiProxy が正常に動作している場合は、設定のチェックサムを返します。TiProxy がシャットダウンまたはオフラインの場合は、エラーを返します。
 
@@ -153,7 +153,7 @@ level = 'warning'
 {"config_checksum":3006078629}
 ```
 
-#### <code>traffic capture</code> {#code-traffic-capture-code}
+#### `traffic capture` {#traffic-capture}
 
 `tiproxyctl traffic capture`コマンドはトラフィックをキャプチャするために使用されます。
 
@@ -170,7 +170,7 @@ level = 'warning'
 tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" --duration=1h
 ```
 
-#### <code>traffic replay</code> {#code-traffic-replay-code}
+#### `traffic replay` {#traffic-replay}
 
 `tiproxyctl traffic replay`コマンドは、キャプチャされたトラフィックを再生するために使用されます。
 
@@ -189,11 +189,11 @@ tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" 
 tiproxyctl traffic replay --host 10.0.1.10 --port 3080 --username="u1" --password="123456" --input="/tmp/traffic" --speed=2
 ```
 
-#### <code>traffic cancel</code> {#code-traffic-cancel-code}
+#### `traffic cancel` {#traffic-cancel}
 
 `tiproxyctl traffic cancel`コマンドは、現在のキャプチャまたは再生タスクをキャンセルするために使用されます。
 
-#### <code>traffic show</code> {#code-traffic-show-code}
+#### `traffic show` {#traffic-show}
 
 `tiproxyctl traffic show`コマンドは、履歴キャプチャおよび再生タスクを表示するために使用されます。
 

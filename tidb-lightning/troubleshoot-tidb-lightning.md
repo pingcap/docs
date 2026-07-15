@@ -64,11 +64,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ## TiDB Lightningがエラーを報告 {#tidb-lightning-reports-an-error}
 
-### <code>could not find first pair, this shouldn't happen</code> {#code-could-not-find-first-pair-this-shouldn-t-happen-code}
+### `could not find first pair, this shouldn't happen` {#could-not-find-first-pair-this-shouldn-t-happen}
 
 このエラーは、 TiDB Lightningがソート済みのローカルファイルを読み取る際に、開いているファイル数がシステム制限を超えたために発生する可能性があります。Linuxシステムでは、 `ulimit -n`コマンドを使用して、このシステム制限の値が小さすぎないかどうかを確認できます。インポート中にこの値を`1000000` （ `ulimit -n 1000000` ）に調整することをお勧めします。
 
-### <code>checksum failed: checksum mismatched remote vs local</code> {#code-checksum-failed-checksum-mismatched-remote-vs-local-code}
+### `checksum failed: checksum mismatched remote vs local` {#checksum-failed-checksum-mismatched-remote-vs-local}
 
 **原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。2 `checksum mismatched`含むログを確認することで、原因をさらに特定できます。
 
@@ -110,7 +110,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)参照してください。
 
-### <code>cannot guess encoding for input file, please convert to UTF-8 manually</code> {#code-cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually-code}
+### `cannot guess encoding for input file, please convert to UTF-8 manually` {#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually}
 
 **原因**: TiDB Lightning は、テーブルスキーマのエンコーディングとして UTF-8 と GB-18030 のみを認識します。ファイルがこれらのいずれのエンコーディングでもない場合、このエラーが発生します。また、過去の`ALTER TABLE`の実行により、ファイルに UTF-8 の文字列と GB-18030 の文字列が混在しているなど、エンコーディングが混在している可能性もあります。
 
@@ -141,7 +141,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
     CentOS では、 `yum info tzdata`実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
 
-### <code>[Error 8025: entry too large, the max entry size is 6291456]</code> {#code-error-8025-entry-too-large-the-max-entry-size-is-6291456-code}
+### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 
 **原因**: TiDB Lightningによって生成されたキーと値のペアの 1 行が、TiDB によって設定された制限を超えています。
 
@@ -159,24 +159,24 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 -   クラスター内にTiFlashノードがある場合は、クラスターを`v4.0.0-rc.2`以上のバージョンに更新できます。
 -   クラスターをアップグレードしない場合は、 TiFlash を一時的に無効にします。
 
-### <code>tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'</code> {#code-tidb-lightning-encountered-error-tidb-version-too-old-expected-4-0-0-found-3-0-18-code}
+### `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'` {#tidb-lightning-encountered-error-tidb-version-too-old-expected-4-0-0-found-3-0-18}
 
 TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータインポートのみをサポートしています。Local-backend を使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。その場合は、設定を変更して、データのインポートに Importer-backend または TiDB-backend を使用するように設定できます。
 
 `nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。5 バージョン`nightly`使用時にこのエラーが発生した場合は、設定`check-requirements = false`設定することでバージョンチェックを省略できます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
 
-### <code>restore table test.district failed: unknown columns in header [...]</code> {#code-restore-table-test-district-failed-unknown-columns-in-header-code}
+### `restore table test.district failed: unknown columns in header [...]` {#restore-table-test-district-failed-unknown-columns-in-header}
 
 このエラーは通常、CSVデータファイルにヘッダーが含まれていないこと（最初の行が列名ではなくデータである）が原因で発生します。そのため、 TiDB Lightning設定ファイルに以下の設定を追加する必要があります。
 
     [mydumper.csv]
     header = false
 
-### <code>Unknown character set</code> {#code-unknown-character-set-code}
+### `Unknown character set` {#unknown-character-set}
 
 TiDBはMySQLのすべての文字セットをサポートしていません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)使用して下流で事前にテーブルスキーマを作成してください。
 
-### <code>invalid compression type ...</code> {#code-invalid-compression-type-code}
+### `invalid compression type ...` {#invalid-compression-type}
 
 -   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスク`zstd`エラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)参照してください。
 

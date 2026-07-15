@@ -3,7 +3,7 @@ title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるREVOKE <権限>の使用方法の概要。
 ---
 
-# <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}
+# `REVOKE &#x3C;privileges>` {#revoke-x3c-privileges}
 
 このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには`GRANT OPTION`権限と、取り消すすべての権限が必要です。
 

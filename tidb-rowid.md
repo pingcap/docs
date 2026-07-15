@@ -3,7 +3,7 @@ title: _tidb_rowid
 summary: _tidb_rowid`とは何か、いつ利用できるのか、そして安全に使用する方法について学びましょう。
 ---
 
-# <code>_tidb_rowid</code> {#code-tidb-rowid-code}
+# `_tidb_rowid` {#tidb-rowid}
 
 `_tidb_rowid`はTiDBによって自動的に生成される非表示のシステム列です。クラスター化インデックスを使用しないテーブルの場合、この列はテーブルの内部行IDとして機能します。テーブルスキーマでこの列を宣言または変更することはできませんが、テーブルが内部行IDとして`_tidb_rowid`使用している場合は、SQLで参照できます。
 

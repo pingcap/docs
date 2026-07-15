@@ -19,7 +19,7 @@ TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参
 
 TiDB LightningはTiDBを経由せずにデータをインポートするため、統計情報は自動的に更新されません。そのため、 TiDB Lightningはインポート後に各テーブルを明示的に分析します。この手順は、 `post-restore.analyze`設定を`false`に設定することで省略できます。
 
-### <code>AUTO_INCREMENT_ID</code> {#code-auto-increment-id-code}
+### `AUTO_INCREMENT_ID` {#auto-increment-id}
 
 各テーブルには、AUTO_INCREMENT列のデフォルト値を提供するためのカウンタ`AUTO_INCREMENT_ID`が関連付けられています。TiDBでは、このカウンタは行IDの割り当てにも使用されます。
 

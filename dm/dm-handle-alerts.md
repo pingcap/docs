@@ -9,7 +9,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
 ## 高可用性に関連するアラート {#alerts-related-to-high-availability}
 
-### <code>DM_master_all_down</code> {#code-dm-master-all-down-code}
+### `DM_master_all_down` {#dm-master-all-down}
 
 -   説明：
 
@@ -22,7 +22,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
     1.  クラスターの環境を確認します。
     2.  トラブルシューティングのために、すべての DM マスター ノードのログを確認してください。
 
-### <code>DM_worker_offline</code> {#code-dm-worker-offline-code}
+### `DM_worker_offline` {#dm-worker-offline}
 
 -   説明：
 
@@ -36,7 +36,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
     2.  ノードが接続されているかどうかを確認します。
     3.  ログを通じてエラーをトラブルシューティングします。
 
-### <code>DM_DDL_error</code> {#code-dm-ddl-error-code}
+### `DM_DDL_error` {#dm-ddl-error}
 
 -   説明：
 
@@ -46,7 +46,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_pending_DDL</code> {#code-dm-pending-ddl-code}
+### `DM_pending_DDL` {#dm-pending-ddl}
 
 -   説明：
 
@@ -58,7 +58,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
 ## タスクステータスに関連するアラートルール {#alert-rules-related-to-task-status}
 
-### <code>DM_task_state</code> {#code-dm-task-state-code}
+### `DM_task_state` {#dm-task-state}
 
 -   説明：
 
@@ -70,7 +70,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
 ## リレーログに関連するアラートルール {#alert-rules-related-to-relay-log}
 
-### <code>DM_relay_process_exits_with_error</code> {#code-dm-relay-process-exits-with-error-code}
+### `DM_relay_process_exits_with_error` {#dm-relay-process-exits-with-error}
 
 -   説明：
 
@@ -80,7 +80,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_remain_storage_of_relay_log</code> {#code-dm-remain-storage-of-relay-log-code}
+### `DM_remain_storage_of_relay_log` {#dm-remain-storage-of-relay-log}
 
 -   説明：
 
@@ -94,7 +94,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
     -   [リレーログの自動データ消去戦略](/dm/relay-log.md#automatic-purge)または[データを手動で消去する](/dm/relay-log.md#manual-purge)を再構成します。
     -   コマンド`pause-relay`を実行して、リレーログのプルプロセスを一時停止します。十分なディスク空き容量が確保できたら、コマンド`resume-relay`を実行してプロセスを再開します。リレーログのプルプロセスを一時停止した後、プルされていないアップストリームのbinlogファイルを削除しないでください。
 
-### <code>DM_relay_log_data_corruption</code> {#code-dm-relay-log-data-corruption-code}
+### `DM_relay_log_data_corruption` {#dm-relay-log-data-corruption}
 
 -   説明：
 
@@ -104,7 +104,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_fail_to_read_binlog_from_master</code> {#code-dm-fail-to-read-binlog-from-master-code}
+### `DM_fail_to_read_binlog_from_master` {#dm-fail-to-read-binlog-from-master}
 
 -   説明：
 
@@ -114,7 +114,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_fail_to_write_relay_log</code> {#code-dm-fail-to-write-relay-log-code}
+### `DM_fail_to_write_relay_log` {#dm-fail-to-write-relay-log}
 
 -   説明：
 
@@ -124,7 +124,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_binlog_file_gap_between_master_relay</code> {#code-dm-binlog-file-gap-between-master-relay-code}
+### `DM_binlog_file_gap_between_master_relay` {#dm-binlog-file-gap-between-master-relay}
 
 -   説明：
 
@@ -136,7 +136,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
 ## ダンプ/ロードに関連するアラートルール {#alert-rules-related-to-dump-load}
 
-### <code>DM_dump_process_exists_with_error</code> {#code-dm-dump-process-exists-with-error-code}
+### `DM_dump_process_exists_with_error` {#dm-dump-process-exists-with-error}
 
 -   説明：
 
@@ -146,7 +146,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_load_process_exists_with_error</code> {#code-dm-load-process-exists-with-error-code}
+### `DM_load_process_exists_with_error` {#dm-load-process-exists-with-error}
 
 -   説明：
 
@@ -158,7 +158,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
 ## binlogレプリケーションに関連するアラートルール {#alert-rules-related-to-binlog-replication}
 
-### <code>DM_sync_process_exists_with_error</code> {#code-dm-sync-process-exists-with-error-code}
+### `DM_sync_process_exists_with_error` {#dm-sync-process-exists-with-error}
 
 -   説明：
 
@@ -168,7 +168,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [DMのトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### <code>DM_binlog_file_gap_between_master_syncer</code> {#code-dm-binlog-file-gap-between-master-syncer-code}
+### `DM_binlog_file_gap_between_master_syncer` {#dm-binlog-file-gap-between-master-syncer}
 
 -   説明：
 
@@ -178,7 +178,7 @@ summary: DM 内のアラート情報を処理する方法を理解します。
 
     [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)を参照してください。
 
-### <code>DM_binlog_file_gap_between_relay_syncer</code> {#code-dm-binlog-file-gap-between-relay-syncer-code}
+### `DM_binlog_file_gap_between_relay_syncer` {#dm-binlog-file-gap-between-relay-syncer}
 
 -   説明：
 

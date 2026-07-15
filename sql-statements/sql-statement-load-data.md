@@ -44,7 +44,7 @@ Fields ::=
 
 ## パラメータ {#parameters}
 
-### <code>LOCAL</code> {#code-local-code}
+### `LOCAL` {#local}
 
 `LOCAL`使用して、インポートするクライアント上のデータ ファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
 
