@@ -169,7 +169,7 @@ pd-server関連のコンフィグレーション項目
 -   最小値: `0`
 -   最大値: `0.9`
 
-### `flow-round-by-digit` <span class="version-mark">TiDB 5.1 の新機能</span> {#flow-round-by-digit-new-in-tidb-5-1}
+### `flow-round-by-digit` <span class="version-mark">TiDB 5.1 の新機能</span> {#flow-round-by-digit-new-in-tidb-51}
 
 -   デフォルト値: 3
 -   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`はデフォルト値が`3`であるため、 `101000`に丸められます。この設定は`trace-region-flow`置き換えます。

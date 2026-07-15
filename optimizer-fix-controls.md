@@ -115,7 +115,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 -   現在、TiDBオプティマイザは、各接続詞が範囲のリストで構成される複雑な接続詞条件のインデックス範囲の導出に制限があります。これは、一般的な範囲交差を適用することで解決できます。
 -   この修正コントロールを有効にすると、この制限が解除され、オプティマイザーは複雑な範囲交差を処理できるようになります。ただし、接続詞の数が多い（10個を超える）条件の場合、最適化時間がわずかに長くなる可能性があります。
 
-### <a href="https://github.com/pingcap/tidb/issues/56318">`56318`</a> {#a-href-https-github-com-pingcap-tidb-issues-56318-56318-a}
+### <a href="https://github.com/pingcap/tidb/issues/56318">`56318`</a> {#56318}
 
 > **注記：**
 >

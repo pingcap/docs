@@ -69,6 +69,6 @@ summary: スケジュール構成フラグは、コマンド ライン フラグ
 -   デフォルト: `"info"`
 -   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 
-## `-V` , `--version` {#v-code-version-code}
+## `-V` , `--version` {#v-version}
 
 -   バージョン情報を出力して終了します。

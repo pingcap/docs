@@ -138,7 +138,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
     +---------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `->` {#code-code}
+## `->` {#-}
 
 `column->path`関数は、 `path`引数に一致する`column`のデータを返します。これは[`JSON_EXTRACT()`](#json_extract)のエイリアスです。
 
@@ -159,7 +159,7 @@ FROM (
     +------------+--------------------------+
     1 row in set (0.00 sec)
 
-## `->>` {#code-code}
+## `->>` {#--1}
 
 `column->>path`関数は、 `path`引数に一致する`column`内のデータを引用符で囲まないようにします。これは`JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名です。
 
