@@ -35,11 +35,11 @@ In addition, TiDB also provides the following aggregate functions:
 
 + `SUM_INT(expr)`
 
-    This function returns the sum of the integer expression `expr`. It works similarly to `SUM(expr)`, but only accepts integer arguments, including `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, and `BIGINT`. For a signed integer argument, the return type is `BIGINT`. For an unsigned integer argument, the return type is `BIGINT UNSIGNED`. If the sum of non-`NULL` values exceeds the range of the return type, TiDB returns an integer overflow error.
+    This function returns the sum of the integer expression `expr`. It works similarly to `SUM(expr)`, but only accepts integer arguments, including `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, and `BIGINT` (both signed and unsigned). For a signed integer argument, the return type is `BIGINT`. For an unsigned integer argument, the return type is `BIGINT UNSIGNED`. If the sum of non-`NULL` values exceeds the range of the return type, TiDB returns an integer overflow error.
 
-    `SUM_INT()` ignores `NULL` values by default. If there are no non-`NULL` values, it returns `NULL`. `SUM_INT()` supports `DISTINCT` and can be used as a [window function](/functions-and-operators/window-functions.md).
+    `SUM_INT()` ignores `NULL` values. If there are no non-`NULL` values, it returns `NULL`. `SUM_INT()` supports `DISTINCT` and can be used as a [window function](/functions-and-operators/window-functions.md).
 
-    The following example shows how to use this function:
+    The following example shows how to use `SUM_INT()`:
 
     ```sql
     DROP TABLE IF EXISTS t;
