@@ -80,6 +80,67 @@ In addition, TiDB also provides the following aggregate functions:
     4 rows in set (0.00 sec)
     ```
 
++ `MAX_COUNT([ALL] expr)` and `MIN_COUNT([ALL] expr)`
+
+    These functions are TiDB-specific aggregate functions that count occurrences of the maximum or minimum value in a group. `MAX_COUNT(expr)` returns the number of rows whose value equals the maximum non-`NULL` value of `expr` in the current group. `MIN_COUNT(expr)` returns the number of rows whose value equals the minimum non-`NULL` value of `expr` in the current group.
+
+    These functions ignore `NULL` values by default. If there are no non-`NULL` values in the current group, they return `0`. The return type is `BIGINT`. These functions support omitting `ALL` or explicitly specifying `ALL`, but do not support `DISTINCT`. For example, `MAX_COUNT(DISTINCT expr)` and `MIN_COUNT(DISTINCT expr)` return a syntax error. These functions can also be used as [window functions](/functions-and-operators/window-functions.md).
+
+    The following example shows how to use these functions:
+
+    ```sql
+    DROP TABLE IF EXISTS t;
+    CREATE TABLE t(a INT);
+    INSERT INTO t VALUES(1), (1), (2), (2), (2), (NULL);
+    ```
+
+    ```sql
+    SELECT MAX_COUNT(a), MIN_COUNT(a) FROM t;
+    ```
+
+    ```sql
+    +--------------+--------------+
+    | MAX_COUNT(a) | MIN_COUNT(a) |
+    +--------------+--------------+
+    |            3 |            2 |
+    +--------------+--------------+
+    1 row in set (0.00 sec)
+    ```
+
+    If there are no non-`NULL` values, these functions return `0`:
+
+    ```sql
+    SELECT MAX_COUNT(a), MIN_COUNT(a) FROM t WHERE a IS NULL;
+    ```
+
+    ```sql
+    +--------------+--------------+
+    | MAX_COUNT(a) | MIN_COUNT(a) |
+    +--------------+--------------+
+    |            0 |            0 |
+    +--------------+--------------+
+    1 row in set (0.00 sec)
+    ```
+
+    The following example uses `MAX_COUNT()` and `MIN_COUNT()` as window functions:
+
+    ```sql
+    SELECT
+        MAX_COUNT(a) OVER () AS max_count,
+        MIN_COUNT(a) OVER () AS min_count
+    FROM t
+    LIMIT 1;
+    ```
+
+    ```sql
+    +-----------+-----------+
+    | max_count | min_count |
+    +-----------+-----------+
+    |         3 |         2 |
+    +-----------+-----------+
+    1 row in set (0.00 sec)
+    ```
+
 + `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
     This function returns the percentile of `expr`. The `constant_integer_expr` argument indicates the percentage value which is a constant integer in the range of `[1,100]`. A percentile P<sub>k</sub> (`k` represents percentage) indicates that there are at least `k%` values in the data set that are less than or equal to P<sub>k</sub>.
