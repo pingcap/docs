@@ -962,6 +962,66 @@ The following table describes the behaviors of locking statistics:
 | A partitioned table and the whole table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
 | A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
 
+## Manage `ANALYZE` tasks and concurrency
+
+This section describes how to terminate background `ANALYZE` tasks and control the `ANALYZE` concurrency.
+
+### Terminate background `ANALYZE` tasks
+
+Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
+
+1. Execute the following SQL statement:
+
+    ```sql
+    SHOW ANALYZE STATUS
+    ```
+
+    By checking the `instance` column and the `process_id` column in the result, you can get the TiDB instance address and the task `ID` of the background `ANALYZE` task.
+
+2. Terminate the `ANALYZE` task that is running in the background.
+
+    <CustomContent platform="tidb">
+
+    - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+    - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    To terminate the `ANALYZE` task, you can execute the `KILL TIDB ${id};` statement, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+
+    </CustomContent>
+
+For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
+
+### Control `ANALYZE` concurrency
+
+When you run the `ANALYZE` statement, you can adjust the concurrency using system variables, to control its effect on the system.
+
+The relationships of the relevant system variables are shown below:
+
+![analyze_concurrency](/media/analyze_concurrency.png)
+
+`tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency`, and `tidb_analyze_partition_concurrency` are in an upstream-downstream relationship, as shown in the preceding diagram. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When modifying these variables, you need to consider their respective values at the same time. It is recommended to adjust them one by one in the order of `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency`, and observe the impact on the system. The larger the values of these three variables, the greater the resource overhead on the system.
+
+#### `tidb_build_stats_concurrency`
+
+This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
+
+#### `tidb_build_sampling_stats_concurrency`
+
+This variable controls the following aspects of `ANALYZE` concurrency:
+
+- The concurrency for merging samples collected from different Regions.
+- The concurrency for collecting statistics on special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
+
+The default value is `2`.
+
+#### `tidb_analyze_partition_concurrency`
+
+This variable controls the concurrency for saving `ANALYZE` results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
+
 ## See also
 
 <CustomContent platform="tidb">
