@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.12
     -   `DECIMAL`型は`TIMESTAMP`または`DATETIME`に変換可能[＃10734](https://github.com/pingcap/tidb/pull/10734)
 -   テーブルの文字セットを変更するときに列の文字セットも変更する [＃10714](https://github.com/pingcap/tidb/pull/10714)
 -   一部のケースで小数を浮動小数点数に変換するときに発生するオーバーフローの問題を修正[＃10730](https://github.com/pingcap/tidb/pull/10730)
--   TiDB と TiKV [＃10710](https://github.com/pingcap/tidb/pull/10710)の gRPC で送受信されるメッセージの最大サイズが一致していないために、一部の非常に大きなメッセージで「grpc: 受信したメッセージが最大値を超えています」というエラーが報告される問題を修正しました。
+-   TiDB と TiKV の gRPC で送受信されるメッセージの最大サイズが一致していないために、一部の非常に大きなメッセージで「grpc: received message larger than max」というエラーが報告される問題を修正しました。 [＃10710](https://github.com/pingcap/tidb/pull/10710)
 -   `ORDER BY`一部のケースでNULLをフィルタリングしないことによって発生するpanic問題を修正[＃10488](https://github.com/pingcap/tidb/pull/10488)
 -   複数のノードが存在する場合、 `UUID`関数によって返される値が重複する可能性がある問題を修正しました[＃10711](https://github.com/pingcap/tidb/pull/10711)
 -   `CAST(-num as datetime)`によって返される値を`error`から NULL に変更します [＃10703](https://github.com/pingcap/tidb/pull/10703)

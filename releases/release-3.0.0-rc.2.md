@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     -   パラメータなしのDDL文の実行を許可する`prepare` / `execute` [＃10144](https://github.com/pingcap/tidb/pull/10144)
     -   バックオフ時間を制御する変数`tidb_back_off_weight`を追加する[＃10266](https://github.com/pingcap/tidb/pull/10266)
     -   デフォルト値を`tidb_disable_txn_auto_retry`から`on` に設定することで、デフォルト条件で自動的にコミットされていないトランザクションをTiDBが再試行することを禁止します。 [＃10266](https://github.com/pingcap/tidb/pull/10266)
-    -   `RBAC` [＃10261](https://github.com/pingcap/tidb/pull/10261)分の`role`のデータベース権限判定を修正
+    -   `RBAC`における`role`のデータベース権限判定を修正 [＃10261](https://github.com/pingcap/tidb/pull/10261)
     -   悲観的トランザクションモードのサポート（実験的） [＃10297](https://github.com/pingcap/tidb/pull/10297)
     -   いくつかのケースでロック競合の処理の待ち時間を短縮[＃10006](https://github.com/pingcap/tidb/pull/10006)
     -   リーダーノードに障害が発生したときにリージョンキャッシュがフォロワーノードを訪問できるようにする [＃10256](https://github.com/pingcap/tidb/pull/10256)

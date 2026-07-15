@@ -51,7 +51,7 @@ TiDB バージョン: 8.1.2
     -   TiCDC
 
         -   TiCDCは、 `SUPER`権限を付与された後に非同期で実行されたDDLタスクのステータスを照会することをサポートし、同じテーブルでDDLタスクを繰り返し実行することによって発生する実行エラーを防止します。 [＃11521](https://github.com/pingcap/tiflow/issues/11521) @ [CharlesCheung96](https://github.com/CharlesCheung96)
-        -   下流が`SUPER`権限が付与されたTiDBの場合、TiCDCは下流データベースから`ADD INDEX DDL`の実行ステータスを照会することをサポートします。これにより、DDL文の実行を再試行する際のタイムアウトによるデータ複製の失敗を回避できます[＃10682](https://github.com/pingcap/tiflow/issues/10682) @ [CharlesCheung96](https://github.com/CharlesCheung96)の場合）。
+        -   下流が`SUPER`権限が付与されたTiDBの場合、TiCDCは下流データベースから`ADD INDEX DDL`の実行ステータスを照会することをサポートします。これにより、DDL文の実行を再試行する際のタイムアウトによるデータ複製の失敗を回避できる場合があります。 [＃10682](https://github.com/pingcap/tiflow/issues/10682) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
 
