@@ -430,7 +430,7 @@ When you run the `ANALYZE` statement, you can adjust the concurrency using the f
 
 #### `tidb_build_stats_concurrency`
 
-Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `4`.
+This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously. The default value is `4`.
 
 #### `tidb_distsql_scan_concurrency`
 
