@@ -1,11 +1,11 @@
 ---
-title: TiDB Cloud Data Service (Beta) Overview
+title: TiDB Cloud Data Service (PREVIEW) Overview
 summary: TiDB Cloudのデータ サービスとそのシナリオについて学習します。
 ---
 
-# TiDB Cloudデータ サービス (ベータ版) の概要 {#tidb-cloud-data-service-beta-overview}
+# TiDB Cloudデータ サービス (PREVIEW) の概要 {#tidb-cloud-data-service-beta-overview}
 
-TiDB Cloud [データサービス（ベータ版）](https://tidbcloud.com/project/data-service) 、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードのバックエンド サービス ソリューションです。
+TiDB Cloud [データサービス（PREVIEW）](https://tidbcloud.com/project/data-service) 、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードのバックエンド サービス ソリューションです。
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能はサーバーレスアーキテクチャを採用し、コンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 

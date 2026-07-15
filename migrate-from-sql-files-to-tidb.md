@@ -83,7 +83,6 @@ TiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み
 
 -   ログ内のキーワード`progress`を`grep`することで、インポートの進行状況を確認できます。このログはデフォルトで 5 分ごとに更新されます。
 -   Grafana ダッシュボードを使用します。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
--   Webインターフェイスを使用します。詳細については、 [TiDB Lightning Webインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
 インポートが完了すると、 TiDB Lightning は自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合は、インポートは成功です。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 

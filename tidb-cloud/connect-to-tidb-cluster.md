@@ -44,7 +44,7 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
     クラスターがAWS上でホストされており、クラスターのTiDBバージョンがv6.5.0以降である場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)のAI支援SQLエディタを使用して、データの価値を最大化できます。
 
-    SQLエディタでは、SQLクエリを手動で記述することも、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押すだけで[Chat2Query（ベータ版）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)にSQLクエリを自動生成させることもできます。これにより、ローカルSQLクライアントがなくてもデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
+    SQLエディタでは、SQLクエリを手動で記述することも、macOSでは<kbd>⌘</kbd> + <kbd>I</kbd> （WindowsまたはLinuxでは<kbd>Control</kbd> + <kbd>I</kbd> ）を押すだけで[Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)にSQLクエリを自動生成させることもできます。これにより、ローカルSQLクライアントがなくてもデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
 
 ## 次は？ {#what-s-next}
 

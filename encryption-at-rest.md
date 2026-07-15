@@ -165,7 +165,23 @@ Google Cloud KMS を使用してマスター キーを指定するには、 `[se
     credential-file-path = "/path/to/credential.json"
 
 -   `key-id` KMS CMK のキー ID を指定します。
--   `credential-file-path`認証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKV環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`設定する必要はありません。
+-   `vendor = "gcp"` の場合、`credential-file-path`は検証資格情報ファイルのパスを指定します。現在、このファイルではサービスアカウントと認証ユーザーの2種類の資格情報がサポートされています。TiKVの実行環境が既に[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)で構成されている場合は、 `credential-file-path`設定する必要はありません。
+
+Google Cloud KMS シナリオで Workload Identity Federation (WIF) を使用する必要がある場合は、代わりに `gcp_v2` を使用します。
+
+```toml
+[security.encryption.master-key]
+type = "kms"
+key-id = "projects/project-name/locations/global/keyRings/key-ring-name/cryptoKeys/key-name"
+vendor = "gcp_v2"
+
+[security.encryption.master-key.gcp]
+credential-file-path = "/path/to/external-account.json"
+```
+
+-   `vendor = "gcp_v2"` の場合、明示的な資格情報では Service Account と `external_account` のみがサポートされます。
+-   ADC によって生成された `authorized_user` JSON を使用している場合、その JSON を `credential-file-path` として直接設定することはできません。この場合は、`credential-file-path` を省略し、TiKV が実行環境内の[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)を通じて認証情報を取得するようにします。
+-   古い `vendor = "gcp"` では、明示的な資格情報として `external_account` を使用することがサポートされていないため、この方法では WIF を使用できません。
 
 </div>
 <div label="Azure KMS">

@@ -51,11 +51,21 @@ Binlogログレプリケーション/同期処理ユニットは、上流の MyS
 | `REPLICATION SLAVE`  | グローバル |
 | `REPLICATION CLIENT` | グローバル |
 
+> **Note:**
+>
+> `FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていないマネージド MySQL サービス (Amazon RDS、Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) から移行する場合は、`LOCK TABLES` 権限も付与してください。デフォルトの `consistency=auto` 設定では、FTWRL が使用できないときに DM は `LOCK TABLES` にフォールバックします。
+
 `db1`から TiDB にデータを移行する必要がある場合は、次の`GRANT`ステートメントを実行します。
 
 ```sql
 GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
+```
+
+`FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていないマネージド MySQL サービスの場合は、`LOCK TABLES` 権限も付与してください。
+
+```sql
+GRANT LOCK TABLES ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 他のデータベースから TiDB にデータを移行する必要がある場合は、それぞれのデータベースのユーザーに同じ権限が付与されていることを確認してください。

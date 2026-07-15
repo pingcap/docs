@@ -1,24 +1,24 @@
 ---
-title: TiDB Cloud Serverless Driver (Beta)
+title: TiDB Cloud Serverless Driver (PREVIEW)
 summary: サーバーレス環境およびエッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialに接続する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-driver/']
 ---
 
-# TiDB Cloud Serverless Driver（ベータ版） {#tidb-cloud-serverless-driver-beta}
+# TiDB Cloud Serverless Driver（PREVIEW） {#tidb-cloud-serverless-driver-beta}
 
 > **注記：**
 >
-> TiDB Cloud Serverless Driverはベータ版であり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能です。
+> TiDB Cloud Serverless Driverはパブリックプレビューであり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能です。
 
-## TiDB Cloud Serverless Driver （ベータ版）を使用する理由 {#why-use-tidb-cloud-serverless-driver-beta}
+## TiDB Cloud Serverless Driver （PREVIEW）を使用する理由 {#why-use-tidb-cloud-serverless-driver-preview}
 
 従来のTCPベースのMySQLドライバは、サーバーレス関数の短命な性質と矛盾する、長期間持続するTCP接続を前提としているため、サーバーレス関数には適していません。さらに、 [Vercel Edgeの機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのエッジ環境では、包括的なTCPサポートと完全なNode.js互換性が欠けている場合があり、これらのドライバは全く動作しない可能性があります。
 
-[TiDB Cloud Serverless Driver（ベータ版）](https://github.com/tidbcloud/serverless-js) for JavaScript を使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続できます。これにより、エッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続し、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、TCP による接続オーバーヘッドを削減することが可能になります。
+[TiDB Cloud Serverless Driver（PREVIEW）](https://github.com/tidbcloud/serverless-js) for JavaScript を使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続できます。これにより、エッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続し、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、TCP による接続オーバーヘッドを削減することが可能になります。
 
 > **注記：**
 >
-> SQL や ORM ではなく RESTful API を使用したプログラミングを好む場合は、 [データサービス（ベータ版）](https://docs.pingcap.com/tidbcloud/data-service-overview/)を使用できます。
+> SQL や ORM ではなく RESTful API を使用したプログラミングを好む場合は、 [データサービス（PREVIEW）](https://docs.pingcap.com/tidbcloud/data-service-overview/)を使用できます。
 
 ## TiDB Cloud Serverless Driverをインストールします {#install-the-serverless-driver}
 

@@ -138,11 +138,33 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 </div>
 <div label="GCS" value="gcs">
 
-GCSへのアクセスに使用するアカウントは、アクセスキーを指定することで設定できます。1 パラメータ`credentials-file`指定した場合、指定された`credentials-file`を使用して認証が行われます。URIでキーを指定する以外にも、以下の方法がサポートされています。
+GCS へのアクセスに使用する認証情報は、次の方法で設定できます。
 
--   BRは環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスのファイルを読み取ります。
--   BRはファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
--   BR は、クラスターが GCE または GAE で実行されているときに、メタデータサーバーから資格情報を取得します。
+-   方法1: `credentials-file`を明示的に指定する
+
+    -   `credentials-file`が Service Account JSON ファイルを指している場合、BR と TiKV はこの認証情報を使用して GCS にアクセスします。
+    -   TiKV が`gcp_v2`外部ストレージバックエンドを使用している場合、 `credentials-file`は Google Cloud WIF で使用される`external_account` JSON を指すこともできます。
+
+-   方法2: Application Default Credentials (ADC) を使用する
+
+    -   BRは環境変数`$GOOGLE_APPLICATION_CREDENTIALS`で指定されたパスのファイルを読み取ります。
+    -   BRはファイル`~/.config/gcloud/application_default_credentials.json`を読み取ります。
+    -   BR が GCE または GAE で実行される場合、メタデータサーバーから取得した認証情報を使用します。
+
+TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部ストレージバックエンドを有効にする必要があります。**v8.5.7 以降、TiKV はデフォルトで`gcp_v2`外部ストレージバックエンドを有効にします。** `gcp_v2`は次の方法で設定できます。
+
+-   完全バックアップと復元: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[backup].gcp-v2-enable`を`true`に設定します
+-   ログバックアップ: [TiKV Configuration File Descriptions](/tikv-configuration-file.md)で`[log-backup].gcp-v2-enable`を`true`に設定します
+
+前述の 2 つの設定項目のデフォルト値はどちらも`true`です。 `gcp_v2`を無効にすると、TiKV は引き続き従来の GCS 実装を使用します。この実装は Service Account JSON のみをサポートし、WIF の直接使用はサポートしません。
+
+> **Note:**
++>
++> `gcp_v2`に明示的に渡される GCS JSON 認証情報は、 `service_account`型と`external_account`型のみをサポートします。ADC によって生成された`authorized_user` JSON を使用していて、TiKV が GCS に直接アクセスする必要がある場合は、 `--send-credentials-to-tikv=false`を設定し、各 TiKV ノードで ADC を設定することをお勧めします。そうしないと、BR が`authorized_user` JSON を明示的な認証情報として TiKV に送信する可能性がありますが、 `gcp_v2`はこの種の明示的な JSON を受け入れません。
++
++> **Tip:**
++>
++> `gcp_v2`が有効になった後、TiKV 側で GCS JSON 認証情報が明示的に提供されていない場合、TiKV は Google Default Credentials フローを使用します。そのため、ADC を使用して`--send-credentials-to-tikv=false`を設定する場合は、各 TiKV ノード自体に使用可能な Google 認証情報環境があることを確認してください。
 
 </div>
 <div label="Azure Blob Storage" value="azure">

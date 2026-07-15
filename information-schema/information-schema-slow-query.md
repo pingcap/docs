@@ -118,12 +118,15 @@ DESC SLOW_QUERY;
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-81 rows in set (0.00 sec)
+82 rows in set (0.00 sec)
 ```
 
 `Query`列の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
+
+`Session_connect_attrs`カラムには、スローログから解析されたセッション接続属性が JSON 形式で格納されます。TiDB は、[`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) を使用して、このフィールドに書き込まれる最大ペイロードサイズを制御します。
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 

@@ -137,7 +137,7 @@
     - [データインポートのためのCSV設定](/tidb-cloud/csv-config-for-import-data.md)
     - [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- ストリームデータ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- ストリームデータ ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [変更フィードの概要](/tidb-cloud/essential-changefeed-overview.md)
   - [MySQLへのシンク](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
@@ -457,7 +457,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
   - [TiDB高速テーブル作成](/accelerated-table-creation.md)
-- CLIリファレンス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/cli-reference.md)
   - 認証
     - [ログイン](/tidb-cloud/ticloud-auth-login.md)

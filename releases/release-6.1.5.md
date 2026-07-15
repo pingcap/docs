@@ -9,7 +9,7 @@ summary: TiDB 6.1.5 における互換性の変更、改善、およびバグ修
 
 TiDB バージョン: 6.1.5
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 

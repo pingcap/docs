@@ -6,24 +6,39 @@ aliases: ['/ja/tidbcloud/use-htap-cluster']
 
 # TiDB Cloud HTAP クイックスタート {#tidb-cloud-htap-quick-start}
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースストレージエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向ストレージ[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースストレージから列指向ストレージへのリアルタイムレプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) は、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースストレージエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向ストレージエンジン[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースストレージから列指向ストレージへのリアルタイムレプリケーションです。
 
 このチュートリアルでは、 TiDB Cloudのハイブリッドトランザクションおよび分析処理（HTAP）機能を簡単に体験する方法をご案内します。TiFlashへのテーブルのレプリケーション方法、 TiFlashを使用したクエリの実行方法、そしてパフォーマンス向上の体験方法などについて説明します。
 
 ## 始める前に {#before-you-begin}
 
-HTAP 機能を体験する前に、 [TiDB Cloudクイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)に従ってTiDB Cloud Serverless クラスターを作成し、 **Steam Game Stats**サンプル データセットをクラスターにインポートします。
+HTAP 機能を試す前に、[TiDB Cloudクイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)に従って {{{ .starter }}} インスタンスを作成し、次のようにデータ（このドキュメントでは **Steam Games Dataset 2021-2025** を例として使用します）をインスタンスにインポートします。
+
+1. Kaggle から [Steam Games Dataset 2021-2025](https://www.kaggle.com/datasets/jypenpen54534/steam-games-dataset-2021-2025-65k) をダウンロードします。
+2. {{{ .starter }}} インスタンスの **Import** ページを開きます。
+
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .starter }}} インスタンス名をクリックして概要ページに移動します。
+    2. 概要ページの左側のナビゲーションペインで、**Data** > **Import** をクリックします。
+
+3. ダウンロードした CSV ファイルを {{{ .starter }}} インスタンスにインポートします。
+
+    1. **Import** ページで **Upload a local file** をクリックし、ダウンロードした CSV ファイルを選択してアップロードします。
+    2. **Destination** セクションで、**Database** フィールドに `steam`、**Table** フィールドに `games` を入力します。
+    3. **Define Table** をクリックし、カラム `categories` のデータ型を `TEXT` に変更してから、カラム `developer` のデータ型を `TEXT` に変更します。
+    4. **Start Import** をクリックします。
+
+        **Import Task Detail** ページでインポートの進行状況を確認できます。
 
 ## 手順 {#steps}
 
 ### ステップ1. サンプルデータを列指向ストレージエンジンに複製する {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
 
-TiFlashノードを含むクラスターを作成した後、TiKVはデフォルトではTiFlashにデータを複製しません。複製するテーブルを指定するには、TiDBのMySQLクライアントでDDL文を実行する必要があります。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。
+{{{ .starter }}} インスタンスを作成した後、TiDB はデフォルトでは TiKV から TiFlash にデータを複製しません。対象のテーブルを TiFlash に複製するには、MySQL クライアントを使用して {{{ .starter }}} インスタンスに接続し、DDL 文を実行します。TiDB はその後、指定されたテーブルのレプリカを TiFlash に作成します。
 
-たとえば、 `games`テーブル ( **Steam Game Stats**サンプル データセット内) をTiFlashに複製するには、次のステートメントを実行します。
+たとえば、`games` テーブル（**Steam Games Dataset 2021-2025** から）を TiFlash に複製するには、次のステートメントを実行します。
 
 ```sql
-USE game;
+USE steam;
 ```
 
 ```sql
@@ -33,16 +48,16 @@ ALTER TABLE games SET TIFLASH REPLICA 2;
 レプリケーションの進行状況を確認するには、次のステートメントを実行します。
 
 ```sql
-SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAILABLE, PROGRESS FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'game' and TABLE_NAME = 'games';
+SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAILABLE, PROGRESS FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'steam' AND TABLE_NAME = 'games';
 ```
 
 ```sql
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
 | TABLE_SCHEMA | TABLE_NAME | TABLE_ID | REPLICA_COUNT | LOCATION_LABELS | AVAILABLE | PROGRESS |
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
-| game         | games      |       88 |             2 |                 |         1 |        1 |
+| steam        | games      |      227 |             2 |                 |         1 |        1 |
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
-1 row in set (0.20 sec)
+1 row in set (0.24 sec)
 ```
 
 上記のステートメントの結果は次のようになります。
@@ -52,18 +67,20 @@ SELECT TABLE_SCHEMA, TABLE_NAME, TABLE_ID, REPLICA_COUNT, LOCATION_LABELS, AVAIL
 
 ### ステップ2. HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
 
-レプリケーションのプロセスが完了したら、いくつかのクエリの実行を開始できます。
+レプリケーションが完了したら、クエリを実行できます。
 
-たとえば、毎年リリースされるゲームの数、平均価格、平均プレイ時間を確認できます。
+たとえば、毎年リリースされるゲームの数、平均価格、および平均推奨数を確認できます。
 
 ```sql
 SELECT
-  YEAR(`release_date`) AS `release_year`,
+  `release_year`,
   COUNT(*) AS `games_released`,
   AVG(`price`) AS `average_price`,
-  AVG(`average_playtime_forever`) AS `average_playtime`
+  AVG(`recommendations`) AS `average_recommendations`
 FROM
   `games`
+WHERE
+  `release_year` IS NOT NULL
 GROUP BY
   `release_year`
 ORDER BY
@@ -78,16 +95,30 @@ ORDER BY
 
     ```sql
     EXPLAIN ANALYZE SELECT /*+ READ_FROM_STORAGE(TIKV[games]) */
-      YEAR(`release_date`) AS `release_year`,
+      `release_year`,
+      `genres`,
+      `developer`,
       COUNT(*) AS `games_released`,
+      SUM(`recommendations`) AS `total_recommendations`,
+      AVG(`recommendations`) AS `average_recommendations`,
       AVG(`price`) AS `average_price`,
-      AVG(`average_playtime_forever`) AS `average_playtime`
+      MAX(`recommendations`) AS `max_recommendations`
     FROM
       `games`
+    WHERE
+      `release_year` IS NOT NULL
+      AND `genres` IS NOT NULL
+      AND `developer` IS NOT NULL
     GROUP BY
-      `release_year`
+      `release_year`,
+      `genres`,
+      `developer`
+    HAVING
+      COUNT(*) >= 2
     ORDER BY
-      `release_year` DESC;
+      `total_recommendations` DESC,
+      `games_released` DESC
+    LIMIT 20;
     ```
 
     TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいて、TiKVレプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。前述の`EXPLAIN ANALYZE`の文では、 `/*+ READ_FROM_STORAGE(TIKV[games]) */`ヒントを使用してオプティマイザーにTiKVを選択させ、TiKVの実行統計を確認できるようにしています。
@@ -99,55 +130,73 @@ ORDER BY
     出力では、 `execution info`列から実行時間を取得できます。
 
     ```sql
-    id                         | estRows  | actRows | task      | access object | execution info                             | operator info                                 | memory  | disk    
-    ---------------------------+----------+---------+-----------+---------------+--------------------------------------------+-----------------------------------------------+---------+---------
-    Sort_5                     | 4019.00  | 28      | root      |               | time:672.7ms, loops:2, RU:1159.679690      | Column#36:desc                                | 18.0 KB | 0 Bytes 
-    └─Projection_7             | 4019.00  | 28      | root      |               | time:672.7ms, loops:6, Concurrency:5       | year(game.games.release_date)->Column#36, ... | 35.5 KB | N/A     
-      └─HashAgg_15             | 4019.00  | 28      | root      |               | time:672.6ms, loops:6, partial_worker:...  | group by:Column#38, funcs:count(Column#39)... | 56.7 KB | N/A     
-        └─TableReader_16       | 4019.00  | 28      | root      |               | time:672.4ms, loops:2, cop_task: {num:...  | data:HashAgg_9                                | 3.60 KB | N/A     
-          └─HashAgg_9          | 4019.00  | 28      | cop[tikv] |               | tikv_task:{proc max:300ms, min:0s, avg...  | group by:year(game.games.release_date), ...   | N/A     | N/A     
-            └─TableFullScan_14 | 68223.00 | 68223   | cop[tikv] | table:games   | tikv_task:{proc max:290ms, min:0s, avg...  | keep order:false                              | N/A     | N/A     
-    (6 rows)
+    id                                | estRows  | actRows | task      | access object | execution info                              | operator info                              | memory   | disk
+    ----------------------------------+----------+---------+-----------+---------------+---------------------------------------------+--------------------------------------------+----------+---------
+    Projection_10                     | 20.00    | 20      | root      |               | time:234.4ms, loops:2, RU:241.66, ...       | steam.games.release_year, ...              | 6.03 KB  | N/A
+    └─TopN_13                         | 20.00    | 20      | root      |               | time:234.4ms, loops:2                       | Column#13:desc, Column#12:desc, ...        | 12.6 KB  | 0 Bytes
+      └─Selection_18                  | 36774.40 | 2458    | root      |               | time:233.9ms, loops:5                       | ge(Column#12, ?)                           | 187.0 KB | N/A
+        └─HashAgg_22                  | 45968.00 | 59883   | root      |               | time:228.4ms, loops:62, partial_worker:...  | group by:Column#39, Column#40, ...         | 31.7 MB  | 0 Bytes
+          └─Projection_38             | 65521.00 | 65521   | root      |               | time:142.9ms, loops:66, Concurrency:5       | cast(steam.games.recommendations, ...      | 1.16 MB  | N/A
+            └─TableReader_32          | 65521.00 | 65521   | root      |               | time:49.5ms, loops:66, cop_task:{num:9...   | data:Selection_31                          | 3.26 MB  | N/A
+              └─Selection_31          | 65521.00 | 65521   | cop[tikv] |               | tikv_task:{proc max:20ms, min:0s, ...       | not(isnull(steam.games.developer)), ...    | N/A      | N/A
+                └─TableFullScan_30    | 65521.00 | 65521   | cop[tikv] | table:games   | tikv_task:{proc max:10ms, min:0s, ...       | keep order:false                           | N/A      | N/A
+    (8 rows)
     ```
 
--   TiFlashを使用してこのクエリの実行統計を取得するには、次のステートメントを実行します。
+-   TiFlashを使用してこのクエリの実行統計を取得するには、`/*+ READ_FROM_STORAGE(TIKV[games]) */` ヒントを付けずに同じステートメントを実行します。
 
     ```sql
     EXPLAIN ANALYZE SELECT
-      YEAR(`release_date`) AS `release_year`,
+      `release_year`,
+      `genres`,
+      `developer`,
       COUNT(*) AS `games_released`,
+      SUM(`recommendations`) AS `total_recommendations`,
+      AVG(`recommendations`) AS `average_recommendations`,
       AVG(`price`) AS `average_price`,
-      AVG(`average_playtime_forever`) AS `average_playtime`
+      MAX(`recommendations`) AS `max_recommendations`
     FROM
       `games`
+    WHERE
+      `release_year` IS NOT NULL
+      AND `genres` IS NOT NULL
+      AND `developer` IS NOT NULL
     GROUP BY
-      `release_year`
+      `release_year`,
+      `genres`,
+      `developer`
+    HAVING
+      COUNT(*) >= 2
     ORDER BY
-      `release_year` DESC;
+      `total_recommendations` DESC,
+      `games_released` DESC
+    LIMIT 20;
     ```
 
     出力では、 `execution info`列から実行時間を取得できます。
 
     ```sql
-    id                                   | estRows  | actRows | task         | access object | execution info                                        | operator info                              | memory  | disk    
-    -------------------------------------+----------+---------+--------------+---------------+-------------------------------------------------------+--------------------------------------------+---------+---------
-    Sort_5                               | 4019.00  | 28      | root         |               | time:222.2ms, loops:2, RU:25.609675                   | Column#36:desc                             | 3.77 KB | 0 Bytes 
-    └─TableReader_39                     | 4019.00  | 28      | root         |               | time:222.1ms, loops:2, cop_task: {num: 2, max: 0s,... | MppVersion: 1, data:ExchangeSender_38      | 4.64 KB | N/A     
-      └─ExchangeSender_38                | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:214.8ms, loops:1, threads:1}       | ExchangeType: PassThrough                  | N/A     | N/A     
-        └─Projection_8                   | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:214.8ms, loops:1, threads:1}       | year(game.games.release_date)->Column#3... | N/A     | N/A     
-          └─Projection_34                | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:214.8ms, loops:1, threads:1}       | Column#33, div(Column#34, cast(case(eq(... | N/A     | N/A     
-            └─HashAgg_35                 | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:214.8ms, loops:1, threads:1}       | group by:Column#63, funcs:sum(Column#64... | N/A     | N/A     
-              └─ExchangeReceiver_37      | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:214.8ms, loops:1, threads:8}       |                                            | N/A     | N/A     
-                └─ExchangeSender_36      | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:210.6ms, loops:1, threads:1}       | ExchangeType: HashPartition, Compressio... | N/A     | N/A     
-                  └─HashAgg_33           | 4019.00  | 28      | mpp[tiflash] |               | tiflash_task:{time:210.6ms, loops:1, threads:1}       | group by:Column#75, funcs:count(1)->Col... | N/A     | N/A     
-                    └─Projection_40      | 68223.00 | 68223   | mpp[tiflash] |               | tiflash_task:{time:210.6ms, loops:2, threads:8}       | game.games.price, game.games.price, gam... | N/A     | N/A     
-                      └─TableFullScan_23 | 68223.00 | 68223   | mpp[tiflash] | table:games   | tiflash_task:{time:210.6ms, loops:2, threads:8}, ...  | keep order:false                           | N/A     | N/A     
-    (11 rows)
+    id                                      | estRows  | actRows | task         | access object | execution info                              | operator info                              | memory  | disk
+    ----------------------------------------+----------+---------+--------------+---------------+---------------------------------------------+--------------------------------------------+---------+---------
+    Projection_10                           | 20.00    | 20      | root         |               | time:92.5ms, loops:2, RU:120.42, ...        | steam.games.release_year, ...              | 6.03 KB | N/A
+    └─TopN_14                               | 20.00    | 20      | root         |               | time:92.4ms, loops:2                        | Column#13:desc, Column#12:desc, ...        | 4.32 KB | 0 Bytes
+      └─TableReader_68                      | 20.00    | 20      | root         |               | time:92.4ms, loops:2, cop_task:{num:2...    | MppVersion: 2, data:ExchangeSender_67      | 7.99 KB | N/A
+        └─ExchangeSender_67                 | 20.00    | 20      | mpp[tiflash] |               | tiflash_task:{time:91ms, loops:1, ...       | ExchangeType: PassThrough                  | N/A     | N/A
+          └─TopN_66                         | 20.00    | 20      | mpp[tiflash] |               | tiflash_task:{time:91ms, loops:1, ...       | Column#13:desc, Column#12:desc, ...        | N/A     | N/A
+            └─Selection_65                  | 36774.40 | 2458    | mpp[tiflash] |               | tiflash_task:{time:91ms, loops:1, ...       | ge(Column#12, ?)                           | N/A     | N/A
+              └─Projection_58               | 45968.00 | 59883   | mpp[tiflash] |               | tiflash_task:{time:91ms, loops:1, ...       | Column#12, Column#13, div(Column#14, ...   | N/A     | N/A
+                └─HashAgg_56                | 45968.00 | 59883   | mpp[tiflash] |               | tiflash_task:{time:71ms, loops:1, ...       | group by:Column#79, Column#80, ...         | N/A     | N/A
+                  └─Projection_71           | 65521.00 | 65521   | mpp[tiflash] |               | tiflash_task:{time:31ms, loops:7, ...       | cast(steam.games.recommendations, ...      | N/A     | N/A
+                    └─ExchangeReceiver_41   | 65521.00 | 65521   | mpp[tiflash] |               | tiflash_task:{time:31ms, loops:7, ...       |                                            | N/A     | N/A
+                      └─ExchangeSender_40   | 65521.00 | 65521   | mpp[tiflash] |               | tiflash_task:{time:31.2ms, loops:7, ...     | ExchangeType: HashPartition, ...           | N/A     | N/A
+                        └─Selection_39      | 65521.00 | 65521   | mpp[tiflash] |               | tiflash_task:{time:21.2ms, loops:7, ...     | not(isnull(steam.games.developer)), ...    | N/A     | N/A
+                          └─TableFullScan_38| 65521.00 | 65521   | mpp[tiflash] | table:games   | tiflash_task:{time:21.2ms, loops:7, ...     | pushed down filter:empty, keep order:false | N/A     | N/A
+    (13 rows)
     ```
 
 > **注記：**
 >
-> サンプルデータのサイズが小さく、このドキュメントのクエリは非常に単純なため、このクエリに対してオプティマイザーにTiKVを選択させ、同じクエリを再度実行すると、TiKVはキャッシュを再利用するため、クエリの速度が大幅に向上する可能性があります。ただし、データが頻繁に更新される場合は、キャッシュが失われる可能性があります。
+> サンプルデータセットは小さく、このドキュメントのクエリは比較的単純であるため、このクエリに対してオプティマイザーにTiKVを選択させてから同じクエリを再度実行すると、TiKV はキャッシュを再利用するため、クエリは大幅に高速になります。データが頻繁に更新される場合、キャッシュは無効になります。
 
 ## もっと詳しく知る {#learn-more}
 

@@ -11,7 +11,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Essentialのデータ移行機能はベータ版です。
+> 現在、 TiDB Cloud Essentialのデータ移行機能はパブリックプレビュー版です。
 
 </CustomContent>
 

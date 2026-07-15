@@ -378,6 +378,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
 - LASTVAL
+- LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
 - LEAVE (R)

@@ -3,28 +3,28 @@ title: TiDB API Overview
 summary: TiDB CloudおよびTiDB Self-Managedで利用可能なAPIについて学びましょう。
 ---
 
-# TiDB APIの概要 {#tidb-api-overview}
+# TiDB API Overview
 
-TiDBは、クラスタのクエリと操作、データレプリケーションの管理、システムステータスの監視などを行うためのさまざまなAPIを提供します。このドキュメントでは[TiDB Cloud](https://docs.pingcap.com/tidbcloud/)と[TiDB Self-Managed](https://docs.pingcap.com/tidb/stable/)両方で利用可能なAPIの概要を説明します。
+TiDB provides various APIs for querying and operating clusters, managing data replication, monitoring system status, and more. This document provides an overview of the available APIs for both [TiDB Cloud](https://docs.pingcap.com/ja/tidbcloud/) and [TiDB Self-Managed](https://docs.pingcap.com/ja/tidb/stable/).
 
-## TiDB Cloud API（ベータ版） {#tidb-cloud-api-beta}
+## TiDB Cloud API (PREVIEW)
 
-[TiDB Cloud API](/api/tidb-cloud-api-overview.md)は[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)APIであり、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、データサービスリソースなど、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。
+[TiDB Cloud API](/api/tidb-cloud-api-overview.md) is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud, such as projects, clusters, backups, restores, imports, billings, and Data Service resources.
 
-| API                                       | 説明                                                                           |
-| ----------------------------------------- | ---------------------------------------------------------------------------- |
-| [v1beta2](/api/tidb-cloud-api-v1beta2.md) | TiDB Cloud Premiumインスタンスを管理します。                                              |
-| [v1beta1](/api/tidb-cloud-api-v1beta1.md) | TiDB Cloud Starter、 Essential、およびDedicatedクラスタに加え、課金、データサービス、 IAMリソースを管理します。 |
-| [v1beta](/api/tidb-cloud-api-v1beta.md)   | TiDB Cloudのプロジェクト、クラスター、バックアップ、インポート、およびリストアを管理します。                          |
+| API | Description |
+| --- | --- |
+| [v1beta2](/api/tidb-cloud-api-v1beta2.md) | Manage TiDB Cloud Premium instances. |
+| [v1beta1](/api/tidb-cloud-api-v1beta1.md) | Manage TiDB Cloud Starter, Essential, and Dedicated clusters, as well as billing, Data Service, and IAM resources. |
+| [v1beta](/api/tidb-cloud-api-v1beta.md) | Manage projects, clusters, backups, imports, and restores for TiDB Cloud. |
 
-## TiDB Self-Managed API {#tidb-self-managed-api}
+## TiDB Self-Managed API
 
-TiDB Self-Managedは、TiDBツール用のさまざまなAPIを提供し、クラスタコンポーネントの管理、システムステータスの監視、データレプリケーションワークフローの制御を支援します。
+TiDB Self-Managed provides various APIs for TiDB tools to help you manage cluster components, monitor system status, and control data replication workflows.
 
-| API                                                                                                                                    | 説明                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [TiProxy API](/tiproxy/tiproxy-api.md)                                                                                                 | TiProxyの設定、稼働状況、および監視データにアクセスできます。                                              |
-| [データ移行API](/dm/dm-open-api.md)                                                                                                         | DMマスターノードとDMワーカーノード、データソース、およびデータレプリケーションタスクを管理します。                             |
-| [モニタリングAPI](/tidb-monitoring-api.md)                                                                                                   | TiDBサーバーの実行状況、テーブルストレージ情報、およびTiKVクラスタの詳細を取得します。                               |
-| [TiCDC API](/ticdc/ticdc-open-api-v2.md)                                                                                               | TiCDCノードの状態を照会し、レプリケーションタスク（作成、一時停止、再開、更新操作など）を管理します。                           |
-| [TiDB OperatorAPI](https://github.com/pingcap/tidb-operator/blob/%7B%7B%7B.tidb-operator-version%7D%7D%7D/docs/api-references/docs.md) | Kubernetes 上で TiDB クラスタを管理します。これには、デプロイ、アップグレード、スケーリング、バックアップ、フェイルオーバーなどが含まれます。 |
+| API | Description |
+| --- | --- |
+| [TiProxy API](/tiproxy/tiproxy-api.md) | Access TiProxy configuration, health status, and monitoring data. |
+| [Data Migration API](/dm/dm-open-api.md) | Manage DM-master and DM-worker nodes, data sources, and data replication tasks. |
+| [Monitoring API](/tidb-monitoring-api.md) | Get TiDB server running status, table storage information, and TiKV cluster details. |
+| [TiCDC API](/ticdc/ticdc-open-api-v2.md) | Query TiCDC node status and manage replication tasks, including creating, pausing, resuming, and updating operations. |
+| [TiDB Operator API](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md) | Manage TiDB clusters on Kubernetes, including deployment, upgrades, scaling, backup, and failover. |

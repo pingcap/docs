@@ -21,7 +21,7 @@
   - [トランザクション](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI機能](/tidb-cloud/ai-feature-concepts.md)
-  - [データサービス](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [データサービス](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [拡張性](/tidb-cloud/scalability-concepts.md)
   - [高可用性](/tidb-cloud/serverless-high-availability.md)
   - [監視](/tidb-cloud/monitoring-concepts.md)
@@ -39,7 +39,7 @@
     - [パブリックエンドポイント経由で接続](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-  - ブランチ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - ブランチ ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [概要](/tidb-cloud/branch-overview.md)
     - [支店の管理](/tidb-cloud/branch-manage.md)
     - [GitHub連携](/tidb-cloud/branch-github-integration.md)
@@ -135,9 +135,9 @@
     - [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - データ探索
-  - [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQLプロキシアカウント](/tidb-cloud/sql-proxy-account.md)
-- データサービス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/data-service-overview.md)
   - [さあ始めましょう](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API
@@ -461,7 +461,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
   - [TiDB高速テーブル作成](/accelerated-table-creation.md)
-- CLIリファレンス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/cli-reference.md)
   - 認証
     - [ログイン](/tidb-cloud/ticloud-auth-login.md)

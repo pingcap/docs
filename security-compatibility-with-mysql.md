@@ -10,7 +10,7 @@ TiDBはMySQL 5.7と同様のセキュリティ機能をサポートし、MySQL 8
 ## サポートされていないセキュリティ機能 {#unsupported-security-features}
 
 -   カラムレベルの権限。
--   これらの権限属性: `max_questions` 、 `max_updated` 、および`max_user_connections` 。
+-   これらの権限属性: `max_questions` および `max_updated`。
 -   パスワード検証ポリシー。パスワードを変更するときに、現在のパスワードを検証する必要があります。
 -   二重パスワードポリシー。
 -   Random password generation.

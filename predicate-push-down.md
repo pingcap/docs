@@ -73,18 +73,18 @@ explain select * from t join s on t.a = s.a where t.a < 1;
 ### ケース4:ストレージ層でサポートされていない述語はプッシュダウンできない {#case-4-predicates-that-are-not-supported-by-storage-layers-cannot-be-pushed-down}
 
 ```sql
-create table t(id int primary key, a varchar(10) not null);
-desc select * from t where truncate(a, " ") = '1';
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
-| id                      | estRows  | task      | access object | operator info                                     |
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
-| Selection_5             | 8000.00  | root      |               | eq(truncate(cast(test.t.a, double BINARY), 0), 1) |
-| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                              |
-|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                    |
-+-------------------------+----------+-----------+---------------+---------------------------------------------------+
+create table t(id int primary key, a decimal(10, 2) not null);
+desc select * from t where truncate(a, 0) = 1;
++-------------------------+----------+-----------+---------------+--------------------------------+
+| id                      | estRows  | task      | access object | operator info                  |
++-------------------------+----------+-----------+---------------+--------------------------------+
+| Selection_5             | 8000.00  | root      |               | eq(truncate(test.t.a, 0), 1)   |
+| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6           |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
++-------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-このクエリには述語`truncate(a, " ") = '1'`があります。
+このクエリには述語`truncate(a, 0) = 1`があります。
 
 `explain`結果から、述語が計算のために TiKV にプッシュダウンされていないことがわかります。これは、TiKV コプロセッサが組み込み関数`truncate`サポートしていないためです。
 

@@ -58,3 +58,18 @@ TABLE SESSION_CONNECT_ATTRS;
 -   `ATTR_NAME` : 属性名。
 -   `ATTR_VALUE` : 属性値。
 -   `ORDINAL_POSITION` : 名前/値のペアの順序位置。
+
+## サイズ制限と切り捨て {#size-limit-and-truncation}
+
+TiDB は、[`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) グローバルシステム変数を使用して、セッションごとの接続属性の合計最大サイズを制御します。
+
+- デフォルト値: `4096` バイト
+- 範囲: `[-1, 65536]`
+- `-1` は制限が設定されていないことを意味し、TiDB はこれを最大 `65536` バイトとして扱います。
+- `0` は、TiDB がクライアントから提供されたセッション接続属性を保持しないことを意味し、実質的にセッション属性の記録を無効にします。
+
+合計サイズがこの制限を超えると、TiDB は超過した属性を切り捨て、切り捨てられたバイト数を示すために `_truncated` を追加します。
+
+受け入れられた接続属性は、スローログの `Session_connect_attrs` フィールドにも書き込まれ、[`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) および `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` からクエリできます。スローログに書き込まれるペイロードサイズを制御するには、`performance_schema_session_connect_attrs_size` を調整します。
+
+TiDB は、ハンドシェイクパケット内の接続属性ペイロードに対して 1 MiB のハード制限も適用します。このハード制限を超えると、接続は拒否されます。

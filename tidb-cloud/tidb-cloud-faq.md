@@ -41,7 +41,7 @@ MySQLクライアントまたはドライバがサポートする言語であれ
 
 ### TiDB Cloudでは、どのバージョンのTiDBがサポートされていますか？ {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2026年4月14日以降、新規のTiDB Cloud DedicatedクラスターのデフォルトのTiDBバージョンは[v8.5.6](https://docs.pingcap.com/tidb/v8.5/release-8.5.6)となります。
+-   2026年7月9日以降、新規のTiDB Cloud DedicatedクラスターのデフォルトのTiDBバージョンは[v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7)となります。
 -   TiDB Cloud Starterインスタンスの場合、2026年2月10日以降はTiDBのバージョンは[v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)となります。
 -   TiDB Cloud Essentialインスタンスの場合、2025年4月22日以降、TiDBのバージョンは[v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)となります。
 
@@ -55,9 +55,9 @@ TiDBは、金融サービス、ゲーム、eコマースなど、さまざまな
 
 TiDB Cloudは99.99% の SLA を提供します。詳細については、 [TiDB Cloudサービスのサービスレベル契約](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)を参照してください。
 
-### TiDB Cloudにおける「BETA」とはどういう意味ですか？ {#what-does-beta-mean-in-tidb-cloud}
+### TiDB Cloudにおける「PREVIEW」とはどういう意味ですか？ {#what-does-preview-mean-in-tidb-cloud}
 
-BETAとは、 TiDB Cloudの機能またはサービスが一般提供（GA）される前に、一般公開されるプレビュー段階のことです。
+PREVIEWとは、 TiDB Cloudの機能またはサービスが一般提供（GA）される前に、一般公開されるプレビュー段階のことです。
 
 ### TiDB Cloudについてもっと詳しく知るにはどうすればよいですか？ {#how-can-i-learn-more-about-tidb-cloud}
 
