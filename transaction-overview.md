@@ -161,7 +161,7 @@ SET GLOBAL autocommit = 0;
 
 > **Note:**
 >
-> 一部の文は暗黙的にコミットされます。例えば、 `[BEGIN|START TRANSACTION]`実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作はMySQLとの互換性を保つために必要です。詳細は[暗黙のコミット](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
+> 一部の文は暗黙的にコミットされます。例えば、 `[BEGIN|START TRANSACTION]`を実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作はMySQLとの互換性を保つために必要です。詳細は[暗黙のコミット](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
 
 TiDBは明示的なトランザクション（`[BEGIN|START TRANSACTION]`と`COMMIT`を使用してトランザクションの開始と終了を定義する）と暗黙的なトランザクション（`SET autocommit = 1`）をサポートしています。
 

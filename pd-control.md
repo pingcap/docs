@@ -1299,7 +1299,7 @@ store weight 1 5 10
 
 > **Note:**
 >
-> `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
+> `pd-ctl`を使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
 
 ### `log [fatal | error | warn | info | debug]` {#log-fatal-error-warn-info-debug}
 

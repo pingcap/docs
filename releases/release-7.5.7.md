@@ -84,7 +84,7 @@ TiDB バージョン: 7.5.7
     -   修正コントロール#44855が有効になっている場合にTiDBセッションがクラッシュする可能性がある問題を修正[＃59762](https://github.com/pingcap/tidb/issues/59762) @ [winoros](https://github.com/winoros)
     -   `IndexLookup`オペレータが`context canceled`エラーに遭遇したときに冗長なログエントリを削除します [＃61072](https://github.com/pingcap/tidb/issues/61072) @ [yibin87](https://github.com/yibin87)
     -   統計の不適切な例外処理により、バックグラウンドタスクがタイムアウトしたときにメモリ内の統計が誤って削除される問題を修正しました[＃57901](https://github.com/pingcap/tidb/issues/57901) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `ADD UNIQUE INDEX`実行するとデータの不整合が発生する可能性がある問題を修正[＃60339](https://github.com/pingcap/tidb/issues/60339) @ [tangenta](https://github.com/tangenta)
+    -   `ADD UNIQUE INDEX`を実行するとデータの不整合が発生する可能性がある問題を修正[＃60339](https://github.com/pingcap/tidb/issues/60339) @ [tangenta](https://github.com/tangenta)
     -   統計システムテーブルに非公開インデックスが表示される問題を修正しました [＃60430](https://github.com/pingcap/tidb/issues/60430) @ [tangenta](https://github.com/tangenta)
     -   ハッシュ結合v1演算子の`Close()`メソッドがpanicから回復できない問題を修正しました [＃60926](https://github.com/pingcap/tidb/issues/60926) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `PhysicalExchangeSender.HashCol`の浅いコピーによりTiFlash がクラッシュしたり、誤った結果が生成される問題を修正[＃60517](https://github.com/pingcap/tidb/issues/60517) @ [windtalker](https://github.com/windtalker)
@@ -105,7 +105,7 @@ TiDB バージョン: 7.5.7
     -   システム変数`tidb_cost_model_version`のデフォルト値が誤って設定されている問題を修正[＃61565](https://github.com/pingcap/tidb/issues/61565) @ [hawkingrei](https://github.com/hawkingrei)
     -   テーブルの最初の列が仮想生成列の場合に統計が正しくない可能性がある問題を修正しました [＃61606](https://github.com/pingcap/tidb/issues/61606) @ [winoros](https://github.com/winoros)
     -   述語の簡素化でプラン キャッシュが誤ってスキップされる問題を修正しました [＃61513](https://github.com/pingcap/tidb/issues/61513) @ [hawkingrei](https://github.com/hawkingrei)
-    -   インデックスの追加中に`ADMIN CANCEL DDL JOBS`実行すると、インデックスの追加プロセスがハングする問題を修正しました。 [＃61087](https://github.com/pingcap/tidb/issues/61087) @ [tangenta](https://github.com/tangenta)
+    -   インデックスの追加中に`ADMIN CANCEL DDL JOBS`を実行すると、インデックスの追加プロセスがハングする問題を修正しました。 [＃61087](https://github.com/pingcap/tidb/issues/61087) @ [tangenta](https://github.com/tangenta)
     -   一部の内部 SQL 実行が失敗した後でも`ADMIN CHECK`が成功を返す問題を修正[＃61612](https://github.com/pingcap/tidb/issues/61612) @ [joechenrh](https://github.com/joechenrh)
     -   マルチスキーマ変更で複数のインデックスを追加した後にデータとインデックスが不整合になる問題を修正 [＃61255](https://github.com/pingcap/tidb/issues/61255) @ [tangenta](https://github.com/tangenta)
 

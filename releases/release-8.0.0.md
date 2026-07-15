@@ -335,7 +335,7 @@ TiDB バージョン: 8.0.0
     -   ディスクへのデータ流出中にクエリをキャンセルする機能をサポートし、データ流出機能の終了メカニズムを最適化します [#50511](https://github.com/pingcap/tidb/issues/50511) @[wshwsh12](https://github.com/wshwsh12)
     -   複数の等しい条件を持つテーブル結合クエリを処理する際に、部分条件に一致するインデックスを使用してインデックス結合を構築することをサポートする [#47233](https://github.com/pingcap/tidb/issues/47233) @[winoros](https://github.com/winoros)
     -   クエリ内のソート要件を識別し、ソート要件を満たすインデックスを選択するインデックスマージ機能を強化します [#48359](https://github.com/pingcap/tidb/issues/48359) @[AilinKid](https://github.com/AilinKid)
-    -   `Apply`演算子が同時に実行されない場合、TiDB では`SHOW WARNINGS`実行することで、同時実行をブロックしている演算子の名前を表示できます。 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
+    -   `Apply`演算子が同時に実行されない場合、TiDB では`SHOW WARNINGS`を実行することで、同時実行をブロックしている演算子の名前を表示できます。 [#50256](https://github.com/pingcap/tidb/issues/50256) @[hawkingrei](https://github.com/hawkingrei)
     -   `point get`クエリがすべてのインデックスでサポートされている場合に、クエリに最適なインデックスを選択することで`point get`クエリのインデックス選択を最適化します。 [#50184](https://github.com/pingcap/tidb/issues/50184) @[elsa0520](https://github.com/elsa0520)
     -   TiKVの負荷が高い時に広範囲にわたるタイムアウトが発生するのを避けるため、統計情報を同期的にロードするタスクの優先度を一時的に「高」に調整します。タイムアウトが発生すると、統計情報がロードされない可能性があります。 [#50332](https://github.com/pingcap/tidb/issues/50332) @[winoros](https://github.com/winoros)
     -   `PREPARE`ステートメントが実行プランキャッシュにヒットしなかった場合、TiDB では`SHOW WARNINGS`を実行することで理由を確認できます。 [#50407](https://github.com/pingcap/tidb/issues/50407) @[hawkingrei](https://github.com/hawkingrei)

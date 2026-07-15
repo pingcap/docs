@@ -201,7 +201,7 @@ mysql> ALTER TABLE users ADD INDEX k_id(id);
 ERROR 8242 (HY000): 'Alter Table' is unsupported on cache tables.
 ```
 
-キャッシュされたテーブルを通常のテーブルに戻すには、 `ALTER TABLE t NOCACHE`使用します。
+キャッシュされたテーブルを通常のテーブルに戻すには、 `ALTER TABLE t NOCACHE`を使用します。
 
 ```sql
 ALTER TABLE users NOCACHE;
@@ -236,7 +236,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 キャッシュテーブルは、MySQL構文に対するTiDBの拡張です。1 `ALTER TABLE ... CACHE`を認識できるのはTiDBのみです。TiDB移行ツール（Backup &amp; Restore (BR)、TiCDC、 Dumplingなど）は、キャッシュテーブルをサポートし**ていません**。これらのツールは、キャッシュテーブルを通常のテーブルとして扱います。
 
-つまり、キャッシュテーブルはバックアップとリストアが行われると、通常のテーブルになります。下流クラスターが別のTiDBクラスターであり、キャッシュテーブル機能を引き続き使用したい場合は、下流クラスターで`ALTER TABLE ... CACHE`実行することで、キャッシュテーブルを手動で有効化できます。
+つまり、キャッシュテーブルはバックアップとリストアが行われると、通常のテーブルになります。下流クラスターが別のTiDBクラスターであり、キャッシュテーブル機能を引き続き使用したい場合は、下流クラスターで`ALTER TABLE ... CACHE`を実行することで、キャッシュテーブルを手動で有効化できます。
 
 ## 参照 {#see-also}
 

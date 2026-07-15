@@ -120,7 +120,7 @@ TiDB バージョン: 6.5.1
     -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) を追加するときにデータの不整合が発生する問題を修正しました [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [tangenta](https://github.com/tangenta) [＃40464](https://github.com/pingcap/tidb/issues/40464)
     -   インデックスを追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました [＃41515](https://github.com/pingcap/tidb/issues/41515) @ [tangenta](https://github.com/tangenta)
     -   一意インデックスを追加するときに誤って報告される重複キーエラーの問題を修正しました [＃41630](https://github.com/pingcap/tidb/issues/41630) @ [tangenta](https://github.com/tangenta)
-    -   TiDB で`paging`使用するとパフォーマンスが低下する問題を修正 [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [solotzg](https://github.com/solotzg)
+    -   TiDB で`paging`を使用するとパフォーマンスが低下する問題を修正 [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [solotzg](https://github.com/solotzg)
 
 -   TiKV
 
@@ -175,7 +175,7 @@ TiDB バージョン: 6.5.1
         -   REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   TiCDCが大きなトランザクションを@ [Rustin170506](https://github.com/Rustin170506)に分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982)
         -   PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [sdojjy](https://github.com/sdojjy)
-        -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)
+        -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)
         -   テーブルスケジューリングとブラックホールシンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [hicqu](https://github.com/hicqu)
 
     -   TiDB Data Migration (DM)

@@ -14,7 +14,7 @@ TiDB クラスタの問題を特定してトラブルシューティングする
 
 ## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートします {#use-code-plan-replayer-code-to-export-cluster-information}
 
-`PLAN REPLAYER`使用すると、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェースは次のとおりです。
+`PLAN REPLAYER`を使用すると、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェースは次のとおりです。
 
 ```sql
 PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
@@ -190,7 +190,7 @@ mysql> show stats_meta;
 
 ## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-code-plan-replayer-capture-code-to-capture-target-plans}
 
-TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
+TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
 
 `PLAN REPLAYER CAPTURE`は主に次の機能があります。
 

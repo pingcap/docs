@@ -58,7 +58,7 @@ TiDBバージョン: 6.5.12
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @ [mjonss](https://github.com/mjonss)
     -   解放されていないセッションリソースがメモリリークを引き起こす可能性がある問題を修正[＃56271](https://github.com/pingcap/tidb/issues/56271) @ [lance6716](https://github.com/lance6716)
     -   分散実行フレームワークの PD メンバーを変更した後に`ADD INDEX`実行が失敗する可能性がある問題を修正しました [＃48680](https://github.com/pingcap/tidb/issues/48680) @ [lance6716](https://github.com/lance6716)
-    -   `cluster_slow_query table`クエリするときに`ORDER BY`使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
+    -   `cluster_slow_query table`クエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。 [＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが@ [lance6716](https://github.com/lance6716)で低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184)
     -   `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` と互換性がない問題を修正 [＃55965](https://github.com/pingcap/tidb/issues/55965) @ [tiancaiamao](https://github.com/tiancaiamao)
@@ -131,7 +131,7 @@ TiDBバージョン: 6.5.12
     -   TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [＃9444](https://github.com/pingcap/tiflash/issues/9444) @ [windtalker](https://github.com/windtalker)
     -   2番目のパラメータが負のの場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [＃9604](https://github.com/pingcap/tiflash/issues/9604) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[＃9465](https://github.com/pingcap/tiflash/issues/9465) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   大きなテーブルで`DROP TABLE`実行するとTiFlash OOM が発生する可能性がある問題を修正しました [＃9437](https://github.com/pingcap/tiflash/issues/9437) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   大きなテーブルで`DROP TABLE`を実行するとTiFlash OOM が発生する可能性がある問題を修正しました [＃9437](https://github.com/pingcap/tiflash/issues/9437) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   CPUコア数を取得する際にゼロ除算エラーが発生し、 TiFlashが起動に失敗する問題を修正しました。 [＃9212](https://github.com/pingcap/tiflash/issues/9212) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[＃9812](https://github.com/pingcap/tiflash/issues/9812) @ [CalvinNeo](https://github.com/CalvinNeo)
 

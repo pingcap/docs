@@ -389,7 +389,7 @@ systemctl start docker
 
     > **Note:**
     >
-    > ***デバッグの場合：*** TiDB Cloud Starterインスタンスに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、および`proxysql-connect.py`確認してください。提供したサーバー情報が利用可能で正しいことを確認してください。
+    > ***デバッグの場合：*** TiDB Cloud Starterインスタンスに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、および`proxysql-connect.py`を確認してください。提供したサーバー情報が利用可能で正しいことを確認してください。
 
 3.  コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
 

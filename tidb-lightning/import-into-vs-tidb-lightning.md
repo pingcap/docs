@@ -7,7 +7,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 多くのユーザーから、 [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md)の展開、構成、メンテナンスは、特に[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)の大規模なデータセットが関係するシナリオでは複雑であるというフィードバックが寄せられています。
 
-皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。3 `IMPORT INTO`実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
+皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。3 `IMPORT INTO`を実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
 
 `IMPORT INTO`はv7.2.0で導入され、v7.5.0で一般提供（GA）されます。今後のバージョンでも引き続き改良と最適化が行われます。2 `IMPORT INTO`機能がTiDB Lightningを完全に置き換えることが可能になった時点で、 TiDB Lightningは廃止されます。その際には、TiDBのリリースノートおよびドキュメントで事前にお知らせいたします。
 

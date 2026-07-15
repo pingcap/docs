@@ -53,8 +53,8 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 パラメータの説明：
 
 -   `--ssl-mode=VERIFY_IDENTITY`では、MySQL CLI クライアントは TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証することを強制します。
--   `--ssl-ca=<CA_path>`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
--   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`を使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
 
 </div>
 
@@ -68,7 +68,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 パラメータの説明：
 
--   `--ssl-ca=<CA_path>`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
 -   `--ssl-verify-server-cert`でTiDB Cloud Dedicated クラスターを検証します。
 
 </div>
@@ -140,7 +140,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 パラメータの説明：
 
 -   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`設定します。
--   `ssl={"ca": "<CA_path>"}`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
 
 </div>
 

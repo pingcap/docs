@@ -80,7 +80,7 @@ TiDB バージョン: 4.0.0
     -   `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブルをプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17328](https://github.com/pingcap/tidb/pull/17328)
     -   一部のケースで障害が発生した TiKV ノードにアクセスできない問題を修正[＃17342](https://github.com/pingcap/tidb/pull/17342)
     -   `tidb.toml`の`isolation-read`設定項目が有効にならない問題を修正[＃17322](https://github.com/pingcap/tidb/pull/17322)
-    -   `hint`使用してストリーム集約強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
+    -   `hint`を使用してストリーム集約強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
     -   `insert`異なる`SQL_MODE` の下で DIV を処理する動作を修正 [＃17314](https://github.com/pingcap/tidb/pull/17314)
 
 -   TiFlash
@@ -103,7 +103,7 @@ TiDB バージョン: 4.0.0
 
 -   PD
 
-    -   pd-ctl を使用して`evict-leader-scheduler`または`grant-leader-scheduler`削除するときに発生する 404 エラーを修正しました [＃2446](https://github.com/pingcap/pd/pull/2446)
+    -   pd-ctl を使用して`evict-leader-scheduler`または`grant-leader-scheduler`を削除するときに発生する 404 エラーを修正しました [＃2446](https://github.com/pingcap/pd/pull/2446)
     -   TiFlashレプリカが存在する場合に`presplit`機能が正しく動作しない可能性がある問題を修正しました[＃2447](https://github.com/pingcap/pd/pull/2447)
 
 -   ツール

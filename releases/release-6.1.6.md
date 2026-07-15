@@ -53,8 +53,8 @@ TiDB バージョン: 6.1.6
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990) @ [fzzf678](https://github.com/fzzf678)
     -   インデックスマージを使用して`SET`型の列を含むテーブルを読み取ると、誤った結果[＃41293](https://github.com/pingcap/tidb/issues/41293) @ [time-and-fate](https://github.com/time-and-fate)が発生する可能性がある問題を修正しました
     -   プリペアドプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
-    -   DDL文の実行中に`PointGet`使用してテーブルを読み込むSQL文がpanic[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)をスローする可能性がある問題を修正しました
-    -   トランザクション内で`PointUpdate`実行した後、TiDB が`SELECT`文[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
+    -   DDL文の実行中に`PointGet`を使用してテーブルを読み込むSQL文がpanic[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)をスローする可能性がある問題を修正しました
+    -   トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf) @ [zyguan](https://github.com/zyguan)
     -   Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [＃42121](https://github.com/pingcap/tidb/issues/42121) @ [zyguan](https://github.com/zyguan)
 
@@ -84,7 +84,7 @@ TiDB バージョン: 6.1.6
 
         -   データレプリケーション中の`UPDATE`と`INSERT`ステートメントの順序が乱れると、 `Duplicate entry`エラー[＃8597](https://github.com/pingcap/tiflow/issues/8597) @ [sdojjy](https://github.com/sdojjy)が発生する可能性がある問題を修正しました。
         -   PDとTiCDC [＃8562](https://github.com/pingcap/tiflow/issues/8562) @ [overvenus](https://github.com/overvenus)間のネットワーク分離によって発生するTiCDCサービスの異常終了問題を修正
-        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [zhaoxinyu](https://github.com/zhaoxinyu)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定した場合に発生するデータの不整合を修正しました。
+        -   TiDB または MySQL シンクにデータを複製するときに、主キー[＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [zhaoxinyu](https://github.com/zhaoxinyu)のない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。
         -   `db sorter`のメモリ使用量が`cgroup memory limit` [＃8588](https://github.com/pingcap/tiflow/issues/8588) @ [amyangfei](https://github.com/amyangfei)で制御されない問題を修正
         -   無効な入力[＃7903](https://github.com/pingcap/tiflow/issues/7903)に対する`cdc cli`のエラーメッセージを[チャールズ・チュン96](https://github.com/CharlesCheung96)で最適化します
         -   S3storage障害[＃8089](https://github.com/pingcap/tiflow/issues/8089) @ [CharlesCheung96](https://github.com/CharlesCheung96)に対して、REDO ログが許容できる期間が不十分である問題を修正しました

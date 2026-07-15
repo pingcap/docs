@@ -244,7 +244,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 -   `RESTRICTED_VARIABLES_ADMIN`は、SEM が有効になっている場合に、権限所有者がすべてのシステム変数を表示できるようにします。
 -   `RESTRICTED_USER_ADMIN` SEM が有効になっている場合、特権所有者が SUPER ユーザーによってアクセス権を取り消されることを禁止します。
 -   `RESTRICTED_CONNECTION_ADMIN`権限所有者が`RESTRICTED_USER_ADMIN`ユーザーの接続を強制終了することを許可します。この権限は`KILL`および`KILL TIDB`ステートメントに影響します。
--   `RESTRICTED_REPLICA_WRITER_ADMIN`使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)参照してください。
+-   `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、TiDB クラスタで読み取り専用モードが有効になっている場合でも、権限所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)参照してください。
 
 動的権限の全セットを確認するには、 `SHOW PRIVILEGES`ステートメントを実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 

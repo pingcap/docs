@@ -163,7 +163,7 @@ ORDER BY total_queries DESC;
 
     `TIDB_INDEX_USAGE`と同様に、このシステムテーブルはノードの再起動後にデータを保持しません。ノードがダウンした場合、記録されたインデックス使用状況データは失われます。
 
-`CLUSTER_TIDB_INDEX_USAGE`使用すると、インデックスの動作を全体的に把握でき、インデックス戦略が分散クエリのワークロードに適合していることを確認できます。
+`CLUSTER_TIDB_INDEX_USAGE`を使用すると、インデックスの動作を全体的に把握でき、インデックス戦略が分散クエリのワークロードに適合していることを確認できます。
 
 ## <code>schema_unused_indexes</code>を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-code-schema-unused-indexes-code}
 
@@ -175,7 +175,7 @@ ORDER BY total_queries DESC;
 -   `INSERT` 、 `UPDATE` 、 `DELETE`クエリにオーバーヘッドを追加するインデックスを削除することで、DML 操作を高速化します。
 -   クエリ パターンを手動で分析する必要なく、インデックス監査を合理化します。
 
-`schema_unused_indexes`使用すると、不要なインデックスをすばやく識別し、最小限の労力でデータベースのオーバーヘッドを削減できます。
+`schema_unused_indexes`を使用すると、不要なインデックスをすばやく識別し、最小限の労力でデータベースのオーバーヘッドを削減できます。
 
 ### <code>schema_unused_indexes</code>仕組み {#how-code-schema-unused-indexes-code-works}
 
@@ -198,7 +198,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 ### <code>schema_unused_indexes</code>を使用する際の考慮事項 {#considerations-when-using-code-schema-unused-indexes-code}
 
-`schema_unused_indexes`使用する場合は、次の点に注意してください。
+`schema_unused_indexes`を使用する場合は、次の点に注意してください。
 
 #### インデックスは最後の再起動以降のみ未使用とみなされます {#indexes-are-considered-unused-only-since-the-last-restart}
 
@@ -302,7 +302,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
         -   フィルタリングの効率を向上させるために列を追加します。
         -   インデックス構造の変更 (プレフィックス インデックス、複合インデックスなど)。
 
-    -   インデックスの選択性を分析します。3 `TIDB_INDEX_USAGE`フィールドのうち`PERCENTAGE_ACCESS_*`使用して、インデックスがデータをどの程度適切にフィルタリングしているかを評価します。
+    -   インデックスの選択性を分析します。3 `TIDB_INDEX_USAGE`フィールドのうち`PERCENTAGE_ACCESS_*`を使用して、インデックスがデータをどの程度適切にフィルタリングしているかを評価します。
 
 4.  **DML パフォーマンスへの影響に注意してください。**
 

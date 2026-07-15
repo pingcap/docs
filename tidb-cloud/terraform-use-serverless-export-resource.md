@@ -115,9 +115,9 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
     この例では、 `tidbcloud_serverless_export.example`リソースがクラスター全体からデータをエクスポートするエクスポート タスクを作成します。
 
-    このリソースは同期されていません。1 `terraform refresh`使用すると最新の状態を取得できます。
+    このリソースは同期されていません。1 `terraform refresh`を使用すると最新の状態を取得できます。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`を使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_export.example
@@ -167,7 +167,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エ
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_serverless_export.example: Importing... 

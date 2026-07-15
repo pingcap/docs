@@ -350,7 +350,7 @@ TiDBバージョン：8.3.0
 -   TiFlash
 
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む datetime に変換すると、結果が正しくない問題を修正しました [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
-    -   データベース全体に空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`実行するとTiFlash がpanicになる問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベース全体に空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`を実行するとTiFlash がpanicになる問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   遅延マテリアライゼーションが有効になった後、一部のクエリで列型の不一致エラーが報告される可能性がある問題を修正 [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     -   仮想生成列を含むクエリが遅延マテリアライゼーション有効後に誤った結果を返す可能性がある問題を修正 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     -   TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)

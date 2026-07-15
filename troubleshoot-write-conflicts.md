@@ -59,7 +59,7 @@ TiDBログを検索するキーワードとして`[kv:9007]Write conflict`を使
 上記のログの説明は次のとおりです。
 
 -   `[kv:9007]Write conflict` : 書き込み間の競合を示します。
--   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`示します。4ツール`pd-ctl`使用して、 `start_ts`物理時間に変換できます。
+-   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`示します。4ツール`pd-ctl`を使用して、 `start_ts`物理時間に変換できます。
 -   `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`示します。
 -   `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`示します。
 -   `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。2 `tableID`書き込み競合テーブルのIDを示します。4 `indexID`書き込み競合インデックスのIDを示します。書き込み競合キーがレコードキーの場合、ログには競合が発生しているレコード（行）を示す`handle=x`が出力。8 `indexValues`競合が発生しているインデックスの値を示します。
@@ -71,7 +71,7 @@ TiDBログを検索するキーワードとして`[kv:9007]Write conflict`を使
 tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 tso {TIMESTAMP}
 ```
 
-`tableID`使用して、関連するテーブルの名前を見つけることができます。
+`tableID`を使用して、関連するテーブルの名前を見つけることができます。
 
 ```shell
 curl http://{TiDBIP}:10080/db-table/{TableID}

@@ -60,7 +60,7 @@ TiDB バージョン: 7.5.3
     -   `HashJoin`または`IndexLookUp`演算子が`Apply`演算子の駆動側サブノードである場合に`memTracker`切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [＃54005](https://github.com/pingcap/tidb/issues/54005) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   再帰CTE演算子がメモリ使用量を誤って追跡する問題を修正しました [＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @ [ekexium](https://github.com/ekexium)
-    -   `SHOW WARNINGS;`使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
+    -   `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
     -   `sql_mode=''` の場合に、フィールドの`UNSIGNED`型を`-1`に更新すると`0`ではなく`null`返される問題を修正しました。 [＃47816](https://github.com/pingcap/tidb/issues/47816) @ [lcwangchao](https://github.com/lcwangchao)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @ [YangKeao](https://github.com/YangKeao)
@@ -75,13 +75,13 @@ TiDB バージョン: 7.5.3
     -   特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正しました[＃53634](https://github.com/pingcap/tidb/issues/53634) @ [zimulala](https://github.com/zimulala)
     -   クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラー[＃53582](https://github.com/pingcap/tidb/issues/53582) [＃53580](https://github.com/pingcap/tidb/issues/53580) を報告する可能性がある問題を修正しました [＃53603](https://github.com/pingcap/tidb/issues/53603) @ [YangKeao](https://github.com/YangKeao) [＃53594](https://github.com/pingcap/tidb/issues/53594)
     -   トランザクション内のステートメントが OOM によって強制終了された後、TiDB が同じトランザクション内で次のステートメントの実行を継続すると、エラー`Trying to start aggressive locking while it's already started`が発生し、panicが発生する可能性がある問題を修正しました。 [＃53540](https://github.com/pingcap/tidb/issues/53540) @ [MyonKeminta](https://github.com/MyonKeminta)
-    -   `ALTER TABLE ... REMOVE PARTITIONING`実行するとでデータが失われる可能性がある問題を修正 [＃53385](https://github.com/pingcap/tidb/issues/53385) @ [mjonss](https://github.com/mjonss)
+    -   `ALTER TABLE ... REMOVE PARTITIONING`を実行するとでデータが失われる可能性がある問題を修正 [＃53385](https://github.com/pingcap/tidb/issues/53385) @ [mjonss](https://github.com/mjonss)
     -   `?`の引数を含む`CONV`の式を持つ`PREPARE` `EXECUTE`ステートメントを複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @ [qw4990](https://github.com/qw4990)
     -   `auth_socket`認証プラグインを使用しているときに、TiDB が認証されていないユーザーの接続を拒否できないことがある問題を修正しました。 [＃54031](https://github.com/pingcap/tidb/issues/54031) @ [lcwangchao](https://github.com/lcwangchao)
     -   情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [＃53428](https://github.com/pingcap/tidb/issues/53428) @ [crazycs520](https://github.com/crazycs520)
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   自動統計収集中にシステム変数`tidb_enable_async_merge_global_stats`と`tidb_analyze_partition_concurrency`有効にならない問題を修正[＃53972](https://github.com/pingcap/tidb/issues/53972) @ [Rustin170506](https://github.com/Rustin170506)
-    -   列のデフォルト値として`CURRENT_DATE()`使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
+    -   列のデフォルト値として`CURRENT_DATE()`を使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
     -   `SELECT ... FOR UPDATE` の間違ったPointGetプランを再利用する問題を修正しました [＃54652](https://github.com/pingcap/tidb/issues/54652) @ [qw4990](https://github.com/qw4990)
 
 -   TiKV
@@ -110,7 +110,7 @@ TiDB バージョン: 7.5.3
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @ [JinheLin](https://github.com/JinheLin)
-    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`実行した後にTiFlash がpanic可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanic可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール

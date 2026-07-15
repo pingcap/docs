@@ -117,7 +117,7 @@ TiDB バージョン: 4.0.5
     -   `STR_TO_DATE`のフォーマットトークン &#39;%r&#39;、 &#39;%h&#39; の処理が MySQL と矛盾している問題を修正しました。 [＃18727](https://github.com/pingcap/tidb/pull/18727)
     -   `cluster_info`表の TiDB バージョン情報が PD/TiKV のバージョン情報と一致しない問題を修正しました。 [＃18413](https://github.com/pingcap/tidb/pull/18413)
     -   悲観的トランザクションの既存のチェックを修正[＃19004](https://github.com/pingcap/tidb/pull/19004)
-    -   `union select for update`実行すると同時競合発生する可能性がある問題を修正 [＃19006](https://github.com/pingcap/tidb/pull/19006)
+    -   `union select for update`を実行すると同時競合発生する可能性がある問題を修正 [＃19006](https://github.com/pingcap/tidb/pull/19006)
     -   `apply` `PointGet`演算子の子がある場合の間違ったクエリ結果を修正しました [＃19046](https://github.com/pingcap/tidb/pull/19046)
     -   `IndexLookUp` `Apply`演算子の内側にある場合に発生する誤った結果を修正します。 [＃19496](https://github.com/pingcap/tidb/pull/19496)
     -   `anti-semi-join`クエリの誤った結果を修正 [＃19472](https://github.com/pingcap/tidb/pull/19472)
@@ -166,7 +166,7 @@ TiDB バージョン: 4.0.5
 
     -   TiCDC
 
-        -   失敗した`changefeed`削除できない問題を修正[＃782](https://github.com/pingcap/tiflow/pull/782)
+        -   失敗した`changefeed`を削除できない問題を修正[＃782](https://github.com/pingcap/tiflow/pull/782)
         -   ハンドルインデックスとして1つの一意インデックスを選択して無効なイベント`delete`修正します [＃787](https://github.com/pingcap/tiflow/pull/787)
         -   GCセーフポイントが停止した`changefeed` のチェックポイントを超えて転送されるバグを修正 [＃797](https://github.com/pingcap/tiflow/pull/797)
         -   ネットワークI/O待機によりタスクの終了がブロックされるバグを修正[＃825](https://github.com/pingcap/tiflow/pull/825)

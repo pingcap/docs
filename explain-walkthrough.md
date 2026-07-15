@@ -39,7 +39,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 子演算子`└─TableFullScan_18`から戻ると、その実行プロセスは次のようになります。これは現時点では最適ではありません。
 
 1.  コプロセッサ（TiKV）は、 `trips`テーブル全体を`TableFullScan`演算として読み取ります。その後、読み取った行をTiKV内の`Selection_19`の演算子に渡します。
-2.  述語`WHERE start_date BETWEEN ..`演算子`Selection_19`でフィルタリングされます。この選択に該当する行は約`250`行と推定されます。この数は統計情報と演算子のロジックに基づいて推定されることに注意してください。演算子`└─TableFullScan_18` `stats:pseudo`表示されますが、これはテーブルに実際の統計情報が存在しないことを意味します。11 `ANALYZE TABLE trips`実行して統計情報を収集すると、統計の精度が向上することが期待されます。
+2.  述語`WHERE start_date BETWEEN ..`演算子`Selection_19`でフィルタリングされます。この選択に該当する行は約`250`行と推定されます。この数は統計情報と演算子のロジックに基づいて推定されることに注意してください。演算子`└─TableFullScan_18` `stats:pseudo`表示されますが、これはテーブルに実際の統計情報が存在しないことを意味します。11 `ANALYZE TABLE trips`を実行して統計情報を収集すると、統計の精度が向上することが期待されます。
 3.  選択基準を満たす行には、関数`count`が適用されます。これも演算子`StreamAgg_9`内で完了しますが、演算子 3 も TiKV 内にあります ( `cop[tikv]` )。TiKV コプロセッサは、MySQL の組み込み関数を多数実行できます。そのうちの 1 つが`count`です。
 4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`演算子（ `root`のタスク）に送信されます。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセス対象のTiKVリージョンごとに1行ずつ受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
 5.  次に、演算子`StreamAgg_20`は演算子`└─TableReader_21`の各行に関数`count`適用します。これは演算子[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からもわかるように、約 56 行になります。これはルート演算子であるため、結果をクライアントに返します。
@@ -50,7 +50,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 ## 現在のパフォーマンスを評価する {#assess-the-current-performance}
 
-`EXPLAIN`クエリ実行プランを返すだけで、クエリは実行されません。実際の実行時間を取得するには、クエリを実行するか、 `EXPLAIN ANALYZE`使用してください。
+`EXPLAIN`クエリ実行プランを返すだけで、クエリは実行されません。実際の実行時間を取得するには、クエリを実行するか、 `EXPLAIN ANALYZE`を使用してください。
 
 ```sql
 EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -71,7 +71,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 上記のクエリの例は実行に`1.03`秒かかりますが、これは理想的なパフォーマンスではありません。
 
-上記`EXPLAIN ANALYZE`の結果から、 `actRows`推定値の一部（ `estRows` ）が不正確であることを示しています（1万行と予想していたのに1900万行が検出された）。これは`└─TableFullScan_18`の`operator info` （ `stats:pseudo` ）で既に示されています。まず[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)実行し、次に`EXPLAIN ANALYZE`実行すると、推定値がはるかに近くなることがわかります。
+上記`EXPLAIN ANALYZE`の結果から、 `actRows`推定値の一部（ `estRows` ）が不正確であることを示しています（1万行と予想していたのに1900万行が検出された）。これは`└─TableFullScan_18`の`operator info` （ `stats:pseudo` ）で既に示されています。まず[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)実行し、次に`EXPLAIN ANALYZE`を実行すると、推定値がはるかに近くなることがわかります。
 
 ```sql
 ANALYZE TABLE trips;
@@ -93,7 +93,7 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-`ANALYZE TABLE`実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の 2 つのケースでは、実行プラン（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
+`ANALYZE TABLE`を実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の 2 つのケースでは、実行プラン（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
 
 `ANALYZE TABLE`に加えて、TiDB はしきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計情報を自動的に再生成します。5 [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどれだけ近いか（TiDB が統計情報をどの程度健全であると見なしているか）を確認できます。
 

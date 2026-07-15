@@ -22,7 +22,7 @@ TiDB Ansible バージョン: 2.1.19
     -   `minAutoAnalyzeRatio`制約を取り除き、自動`ANALYZE`をよりタイムリーにする [＃14013](https://github.com/pingcap/tidb/pull/14013)
     -   `WHERE`句に一意キー等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。 [＃13385](https://github.com/pingcap/tidb/pull/13385)
 -   SQL実行エンジン
-    -   `ConvertJSONToInt` で`unit64`中間結果として`int64`使用するときに精度オーバーフローが発生する問題を修正しました。 [＃13036](https://github.com/pingcap/tidb/pull/13036)
+    -   `ConvertJSONToInt` で`unit64`中間結果として`int64`を使用するときに精度オーバーフローが発生する問題を修正しました。 [＃13036](https://github.com/pingcap/tidb/pull/13036)
     -   クエリに`SLEEP`関数が含まれている場合（たとえば`select 1 from (select sleep(1)) t;)` ）、列の整理によってクエリ内の`sleep(1)`無効になる問題を修正しました[＃13039](https://github.com/pingcap/tidb/pull/13039)
     -   `INSERT ON DUPLICATE UPDATE`文で`Chunk`再利用してメモリのオーバーヘッドを削減します [＃12999](https://github.com/pingcap/tidb/pull/12999)
     -   `slow_query`テーブルにトランザクション関連のフィールドを追加します。 [＃13129](https://github.com/pingcap/tidb/pull/13129)
@@ -58,7 +58,7 @@ TiDB Ansible バージョン: 2.1.19
     -   TiDBサーバーのバージョンを制御および変更するための`server-version`構成項目を追加します。 [＃13904](https://github.com/pingcap/tidb/pull/13904)
     -   Go1.13でコンパイルされたバイナリ`plugin`正常に動作しない問題を修正[＃13527](https://github.com/pingcap/tidb/pull/13527)
 -   DDL
-    -   テーブルが作成され、テーブルに`COLLATE` が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`使用します。 [＃13190](https://github.com/pingcap/tidb/pull/13190)
+    -   テーブルが作成され、テーブルに`COLLATE` が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`を使用します。 [＃13190](https://github.com/pingcap/tidb/pull/13190)
     -   テーブルを作成するときにインデックス名の長さを制限する [＃13311](https://github.com/pingcap/tidb/pull/13311)
     -   テーブル名を変更するときにテーブル名の長さがチェックされない問題を修正[＃13345](https://github.com/pingcap/tidb/pull/13345)
     -   `BIT`列の幅の範囲を確認する [＃13511](https://github.com/pingcap/tidb/pull/13511)

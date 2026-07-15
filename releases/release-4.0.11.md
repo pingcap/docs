@@ -107,7 +107,7 @@ TiDB バージョン: 4.0.11
     -   `cast`関数の強制値が正しく設定されていない問題を修正[＃21714](https://github.com/pingcap/tidb/pull/21714)
     -   `IF`関数使用時に予期しないpanicが発生する問題を修正 [＃21711](https://github.com/pingcap/tidb/pull/21711)
     -   JSON検索から返される`NULL`結果がMySQL と互換性がない問題を修正しました [＃21700](https://github.com/pingcap/tidb/pull/21700)
-    -   `ORDER BY`と`HAVING`使用して`only_full_group_by`モードをチェックするときに発生する問題を修正しました[＃21697](https://github.com/pingcap/tidb/pull/21697)
+    -   `ORDER BY`と`HAVING`を使用して`only_full_group_by`モードをチェックするときに発生する問題を修正しました[＃21697](https://github.com/pingcap/tidb/pull/21697)
     -   `Day`と`Time`の単位がMySQL と互換性がない問題を修正 [＃21676](https://github.com/pingcap/tidb/pull/21676)
     -   デフォルト値`LEAD`と`LAG`フィールドタイプに適応できない問題を修正 [＃21665](https://github.com/pingcap/tidb/pull/21665)
     -   `LOAD DATA`文がベーステーブルにのみデータをロードできることを確認するためのチェックを実行します。 [＃21638](https://github.com/pingcap/tidb/pull/21638)

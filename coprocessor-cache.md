@@ -50,7 +50,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 ## キャッシュ効果を確認する {#check-the-cache-effect}
 
-`EXPLAIN ANALYZE`実行するか、Grafana 監視パネルを表示することで、コプロセッサーのキャッシュ効果を確認できます。
+`EXPLAIN ANALYZE`を実行するか、Grafana 監視パネルを表示することで、コプロセッサーのキャッシュ効果を確認できます。
 
 ### <code>EXPLAIN ANALYZE</code>使用する {#use-code-explain-analyze-code}
 

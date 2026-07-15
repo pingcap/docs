@@ -394,7 +394,7 @@ TiDB バージョン: 5.4.0
     -   Backup & Restore (BR)
 
         -   リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
-        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
+        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`を指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
         -   システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
 
     -   TiCDC

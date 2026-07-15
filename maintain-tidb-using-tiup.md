@@ -31,7 +31,7 @@ tiup cluster start ${cluster-name}
 
 > **Note:**
 >
-> `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`実行して確認してください。
+> `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
 コマンドに`-R`または`-N`パラメータを追加することで、一部のコンポーネントのみを起動できます。例：
 

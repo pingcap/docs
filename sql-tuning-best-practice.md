@@ -101,7 +101,7 @@ TiDBは、リテラルとバインド変数を`?`に置き換えることで、S
 
 -   最も遅い SQL クエリ。
 -   TiKV から最も多くのデータを読み取る SQL クエリ。
--   詳細な実行分析を行うには、クエリをクリックして`EXPLAIN ANALYZE`出力します。
+-   詳細な実行分析を行うには、クエリをクリックして`EXPLAIN ANALYZE`を出力します。
 
 **「スロークエリ」**ページにはSQL実行頻度は表示されません。クエリの実行時間が単一インスタンスの[`tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)設定項目を超えた場合、このページにそのクエリが表示されます。
 
@@ -123,7 +123,7 @@ TiDB Dashboardに加えて、他のツールを使用してリソースを大量
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
 ```
 
-可能な限り`EXPLAIN ANALYZE`使用してください。これは、実行プランと実際のパフォーマンス メトリックの両方が提供され、クエリ パフォーマンスに関するより正確な分析情報が得られるためです。
+可能な限り`EXPLAIN ANALYZE`を使用してください。これは、実行プランと実際のパフォーマンス メトリックの両方が提供され、クエリ パフォーマンスに関するより正確な分析情報が得られるためです。
 
 ## SQLチューニングガイド {#sql-tuning-guide}
 
@@ -399,7 +399,7 @@ FROM (
 
 実行計画を読む際は、上から下に向かって読み進めてください。次の例では、計画ツリーのリーフノードは`TableFullScan_18`で、テーブル全体のスキャンを実行します。このスキャンで得られた行は`Selection_19`演算子によって使用され、 `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`に基づいてデータがフィルタリングされます。その後、 group-by 演算子`StreamAgg_9`によって最終的な集計`COUNT(*)`実行されます。
 
-これらの3つの演算子（ `TableFullScan_18` ） `Selection_19` TiKV（ `StreamAgg_9`で`cop[tikv]` ）にプッシュダウンされ、TiKVでの早期フィルタリングと集計が可能になり、TiKVとTiDB間のデータ転送が削減されます。最後に、 `TableReader_21` `StreamAgg_9`からデータを読み取り、 `StreamAgg_20`最終的な集計`count(*)`実行します。
+これらの3つの演算子（ `TableFullScan_18` ） `Selection_19` TiKV（ `StreamAgg_9`で`cop[tikv]` ）にプッシュダウンされ、TiKVでの早期フィルタリングと集計が可能になり、TiKVとTiDB間のデータ転送が削減されます。最後に、 `TableReader_21` `StreamAgg_9`からデータを読み取り、 `StreamAgg_20`最終的な集計`count(*)`を実行します。
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -686,7 +686,7 @@ LIMIT
   1000
 ```
 
-実行プランには170ミリ秒の期間が表示されています。TiDBは`test_index`使用して、フィルター`snapshot_id = 459840`で`IndexRangeScan_20`実行します。次に、テーブルからすべての列を取得し、 `IndexLookUp_23`後に5,715行をTiDBに返します。TiDBはこれらの行をソートし、1,000行を返します。
+実行プランには170ミリ秒の期間が表示されています。TiDBは`test_index`を使用して、フィルター`snapshot_id = 459840`で`IndexRangeScan_20`を実行します。次に、テーブルからすべての列を取得し、 `IndexLookUp_23`後に5,715行をTiDBに返します。TiDBはこれらの行をソートし、1,000行を返します。
 
 列`id`は主キーであるため、暗黙的にインデックス`test_idx`に含まれます。ただし、 `IndexRangeScan_20`順序を保証しません。これは、列`test_idx`はインデックスプレフィックス列`snapshot_id`後に 2 つの追加列（ `user_id`と`status` ）が含まれているためです。その結果、列`id`の順序は保持されません。
 

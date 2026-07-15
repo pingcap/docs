@@ -155,7 +155,7 @@ VALUES
 
 ### ディクト付き {#with-dict}
 
-`dict`使って行を表し、それをテーブルに挿入することもできます。この方法はより柔軟で、データを挿入するために`TableModel`使用する必要がありません。
+`dict`使って行を表し、それをテーブルに挿入することもできます。この方法はより柔軟で、データを挿入するために`TableModel`を使用する必要がありません。
 
 単一のレコードを挿入するには:
 
@@ -192,7 +192,7 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 
 > **Note:**
 >
-> テーブル内にレコードIDが既に存在する場合、 `table.save()`​​レコード全体を上書きします。レコードの一部のみを変更するには、 `table.update()`使用します。
+> テーブル内にレコードIDが既に存在する場合、 `table.save()`​​レコード全体を上書きします。レコードの一部のみを変更するには、 `table.update()`を使用します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">

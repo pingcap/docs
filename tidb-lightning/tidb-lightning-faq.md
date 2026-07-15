@@ -174,7 +174,7 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
         tiup dumpling -B test -o /tmp/bck1
 
-2.  次の内容のファイルを`/tmp/tidb-lightning.toml`作成します。
+2.  次の内容のファイルを`/tmp/tidb-lightning.toml`に作成します。
 
     ```toml
     [tidb]

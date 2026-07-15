@@ -211,7 +211,7 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### 実行時統計 {#runtime-statistics}
 
-[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時ストレージの使用を試み、ハッシュ結合の一部として使用される`Build`演算子をディスク上に作成する可能性があります。メモリ使用量などの実行時統計は、結果テーブル`EXPLAIN ANALYZE`の`execution info`に記録されます。次の例は、1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB のクォータで`EXPLAIN ANALYZE`実行した場合の出力を示しています。500 MB の場合、ディスクは一時ストレージとして使用されます。
+[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時ストレージの使用を試み、ハッシュ結合の一部として使用される`Build`演算子をディスク上に作成する可能性があります。メモリ使用量などの実行時統計は、結果テーブル`EXPLAIN ANALYZE`の`execution info`に記録されます。次の例は、1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB のクォータで`EXPLAIN ANALYZE`を実行した場合の出力を示しています。500 MB の場合、ディスクは一時ストレージとして使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;

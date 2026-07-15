@@ -21,7 +21,7 @@ summary: TiDB 監視サービスの API を学習します。
 
 ### 実行ステータス {#running-status}
 
-次の例では、 `http://${host}:${port}/status`使用して TiDBサーバーの現在のステータスを取得し、サーバーが稼働中かどうかを判断します。結果は**JSON**形式で返されます。
+次の例では、 `http://${host}:${port}/status`を使用して TiDBサーバーの現在のステータスを取得し、サーバーが稼働中かどうかを判断します。結果は**JSON**形式で返されます。
 
 ```bash
 curl http://127.0.0.1:10080/status
@@ -34,7 +34,7 @@ curl http://127.0.0.1:10080/status
 
 #### 保管情報 {#storage-information}
 
-次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`使用して特定のデータテーブルのストレージ情報を取得します。結果は**JSON**形式で返されます。
+次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`を使用して特定のデータテーブルのストレージ情報を取得します。結果は**JSON**形式で返されます。
 
 ```bash
 curl http://127.0.0.1:10080/schema_storage/mysql/stats_histograms

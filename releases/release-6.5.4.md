@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.4
 
 ## 互換性の変更 {#compatibility-changes}
 
--   `Cursor Fetch`使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
+-   `Cursor Fetch`を使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
 -   RocksDBの定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量の圧縮が行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)導入され、RocksDB の定期的な圧縮を手動で設定できるようになりました。 [＃15355](https://github.com/tikv/tikv/issues/15355) @ [LykxSassinator](https://github.com/LykxSassinator)
 
 ### 動作の変更 {#behavior-changes}
@@ -132,7 +132,7 @@ TiDB バージョン: 6.5.4
 
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanicになる可能性がある問題を修正しました。 [＃6860](https://github.com/tikv/pd/issues/6860) @ [HuSharp](https://github.com/HuSharp)
     -   リーダーが長時間退出できない問題を修正[＃6918](https://github.com/tikv/pd/issues/6918) @ [bufferflies](https://github.com/bufferflies)
-    -   配置ルールが`LOCATION_LABELS`使用する場合、SQL とルールチェッカーがと互換性がない問題を修正しました [＃38605](https://github.com/pingcap/tidb/issues/38605) @ [nolouch](https://github.com/nolouch)
+    -   配置ルールが`LOCATION_LABELS`を使用する場合、SQL とルールチェッカーがと互換性がない問題を修正しました [＃38605](https://github.com/pingcap/tidb/issues/38605) @ [nolouch](https://github.com/nolouch)
     -   PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)
     -   ルールチェッカーがピアを選択した場合に、不健全なピアを削除できない問題を修正しました [＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)
     -   `unsafe recovery`で不合格になったラーナーのピアが`auto-detect`モードで無視される問題を修正 [＃6690](https://github.com/tikv/pd/issues/6690) @ [v01dstar](https://github.com/v01dstar)

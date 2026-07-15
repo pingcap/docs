@@ -88,7 +88,7 @@ TiDB バージョン: 4.0.9
 
     -   Backup & Restore (BR)
 
-        -   コマンドラインで曖昧な引数`--checksum false`使用しないでください。この引数はチェックサムを正しく無効化しません`--checksum=false`のみ使用できます[＃588](https://github.com/pingcap/br/pull/588)
+        -   コマンドラインで曖昧な引数`--checksum false`を使用しないでください。この引数はチェックサムを正しく無効化しません`--checksum=false`のみ使用できます[＃588](https://github.com/pingcap/br/pull/588)
         -   BRが誤って存在した後にPDが元の構成を回復できるように、PD構成を一時的に変更することをサポートします[＃596](https://github.com/pingcap/br/pull/596)
         -   復元後のテーブル分析をサポート[＃622](https://github.com/pingcap/br/pull/622)
         -   `read index not ready`と`proposal in merging mode`エラーを再試行してください[＃626](https://github.com/pingcap/br/pull/626)

@@ -80,7 +80,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
 -   パッケージの特定のバージョンをクローンするかどうかを決定します
 
-    コンポーネントの1つのバージョンのみ（すべてのバージョンではなく）を複製したい場合は、 `--<component>=<version>`使用してそのバージョンを指定します。例：
+    コンポーネントの1つのバージョンのみ（すべてのバージョンではなく）を複製したい場合は、 `--<component>=<version>`を使用してそのバージョンを指定します。例：
 
     -   `tiup mirror clone <target-dir> --tidb v8.5.3`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンのクローンを作成します。
     -   `tiup mirror clone <target-dir> --tidb v8.5.3 --tikv all`コマンドを実行して、TiDBコンポーネントの v8.5.3 バージョンと TiKVコンポーネントのすべてのバージョンのクローンを作成します。
@@ -102,9 +102,9 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **Note:**
 >
-> `tiup mirror clone`実行したマシンで`tiup mirror set...`実行した場合、次に`tiup mirror clone...`実行したときに、マシンはリモートミラーではなくローカルミラーからクローンを作成します。そのため、プライベートミラーを更新する前に`tiup mirror set --reset`実行してミラーをリセットする必要があります。
+> `tiup mirror clone`を実行したマシンで`tiup mirror set...`を実行した場合、次に`tiup mirror clone...`を実行したときに、マシンはリモートミラーではなくローカルミラーからクローンを作成します。そのため、プライベートミラーを更新する前に`tiup mirror set --reset`を実行してミラーをリセットする必要があります。
 
-ミラーを使用する別の方法は、環境変数`TIUP_MIRRORS`使用することです。以下は、プライベートリポジトリで`tiup list`実行する例です。
+ミラーを使用する別の方法は、環境変数`TIUP_MIRRORS`を使用することです。以下は、プライベートリポジトリで`tiup list`を実行する例です。
 
 ```bash
 export TIUP_MIRRORS=/shared_data/tiup
@@ -191,7 +191,7 @@ tiup mirror grant jdoe
         Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
         hello
 
-    `tiup mirror merge`使用すると、カスタムコンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`内のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
+    `tiup mirror merge`を使用すると、カスタムコンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`内のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
 
     ```bash
     $ tiup mirror set /data/my_mirror

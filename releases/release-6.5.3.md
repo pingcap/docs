@@ -75,7 +75,7 @@ TiDB バージョン: 6.5.3
     -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @ [CbcWestwolf](https://github.com/CbcWestwolf)
     -   パスワードの複雑さのチェックが有効になっているときに`tidb_auth_token`ユーザーの作成に失敗する問題を修正[＃44098](https://github.com/pingcap/tidb/issues/44098) @ [CbcWestwolf](https://github.com/CbcWestwolf)
     -   動的プルーニングモードで内部結合中にパーティションが見つからない問題を修正 [＃43686](https://github.com/pingcap/tidb/issues/43686) @ [mjonss](https://github.com/mjonss)
-    -   パーティションテーブルで`MODIFY COLUMN`実行すると`Data Truncated`警告が発生する問題を修正しました [＃41118](https://github.com/pingcap/tidb/issues/41118) @ [mjonss](https://github.com/mjonss)
+    -   パーティションテーブルで`MODIFY COLUMN`を実行すると`Data Truncated`警告が発生する問題を修正しました [＃41118](https://github.com/pingcap/tidb/issues/41118) @ [mjonss](https://github.com/mjonss)
     -   IPv6環境で誤ったTiDBアドレスが表示される問題を修正[＃43260](https://github.com/pingcap/tidb/issues/43260) @ [nexustar](https://github.com/nexustar)
     -   述語をプッシュダウンするときに CTE 結果が正しくない問題を修正しました [＃43645](https://github.com/pingcap/tidb/issues/43645) @ [winoros](https://github.com/winoros)
     -   非相関サブクエリを含むステートメントで共通テーブル式 (CTE) を使用すると誤った結果が返される可能性がある問題を修正しました [＃44051](https://github.com/pingcap/tidb/issues/44051) @ [winoros](https://github.com/winoros)

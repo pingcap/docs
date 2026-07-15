@@ -97,19 +97,19 @@ groups:
 
 -   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 -   警戒レベル：警告
--   説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`実行してください。
+-   説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`を実行してください。
 
 #### ログバックアップ一時停止中（12時間以上） {#logbackuppausingmorethan12h}
 
 -   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 12 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 -   警戒レベル: 重大
--   説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
+-   説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`を実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
 
 #### ログバックアップ失敗 {#logbackupfailed}
 
 -   警告項目: `max(tikv_log_backup_task_status) by (task) == 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0`
 -   警戒レベル: 重大
--   説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
+-   説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`を実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
 
 #### ログバックアップGCセーフポイントがチェックポイントを超える {#logbackupgcsafepointexceedscheckpoint}
 

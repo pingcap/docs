@@ -37,7 +37,7 @@ TiDB バージョン: 4.0.14
 
 -   TiDB
 
-    -   `UPDATE`読み取りで`point get`または`batch point get`使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26223](https://github.com/pingcap/tidb/pull/26223)
+    -   `UPDATE`読み取りで`point get`または`batch point get`を使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26223](https://github.com/pingcap/tidb/pull/26223)
     -   MySQLシステム変数`init_connect`とその関連機能サポートする [＃26031](https://github.com/pingcap/tidb/pull/26031)
     -   クエリ結果をより安定させるために、安定した結果モードをサポートします[＃26003](https://github.com/pingcap/tidb/pull/26003)
     -   組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [＃25721](https://github.com/pingcap/tidb/pull/25721)
@@ -110,7 +110,7 @@ TiDB バージョン: 4.0.14
     -   リージョンハートビートにより、TiKV が特定の状況で大規模なリージョンを分割できない問題を修正[＃10111](https://github.com/tikv/tikv/issues/10111)
     -   TiKVとTiDB 間のCMスケッチの形式の不一致によって発生した誤った統計を修正しました [＃25638](https://github.com/pingcap/tidb/issues/25638)
     -   `apply wait duration`メトリックの誤った統計を修正 [＃9893](https://github.com/tikv/tikv/issues/9893)
-    -   Titan で`delete_files_in_range`使用した後に発生する「Missing Blob」エラーを修正 [＃10232](https://github.com/tikv/tikv/pull/10232)
+    -   Titan で`delete_files_in_range`を使用した後に発生する「Missing Blob」エラーを修正 [＃10232](https://github.com/tikv/tikv/pull/10232)
 
 -   PD
 

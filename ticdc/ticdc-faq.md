@@ -18,15 +18,15 @@ summary: TiCDC を使用する際に遭遇する可能性のある FAQ につい
 -   `start-ts`という値は、現在の TiDB クラスターの`tikv_gc_safe_point`という値よりも大きいです。それ以外の場合、タスクの作成時にエラーが発生します。
 -   タスクを開始する前に、ダウンストリームにすべてのデータが`start-ts`あることを確認してください。メッセージキューにデータを複製するなどのシナリオでは、アップストリームとダウンストリーム間のデータの整合性が要求されない場合は、アプリケーションのニーズに応じてこの要件を緩和できます。
 
-`start-ts`指定しない場合、または`start-ts` `0`として指定した場合、レプリケーション タスクが開始されると、TiCDC は現在の TSO を取得し、この TSO からタスクを開始します。
+`start-ts`を指定しない場合、または`start-ts` `0`として指定した場合、レプリケーション タスクが開始されると、TiCDC は現在の TSO を取得し、この TSO からタスクを開始します。
 
 ## TiCDC でタスクを作成するときに一部のテーブルを複製できないのはなぜですか? {#why-can-t-some-tables-be-replicated-when-i-create-a-task-in-ticdc}
 
-`cdc cli changefeed create`実行してレプリケーションタスクを作成すると、TiCDC は上流のテーブルが[レプリケーション要件](/ticdc/ticdc-overview.md#best-practices)を満たしているかどうかを確認します。要件を満たしていないテーブルがある場合は、 `some tables are not eligible to replicate`不適格なテーブルのリストが返されます。タスクの作成を続行するには`Y`または`y`選択できます。この場合、これらのテーブルに対するすべての更新はレプリケーション中に自動的に無視されます。 `Y`または`y`以外の入力を選択した場合、レプリケーションタスクは作成されません。
+`cdc cli changefeed create`を実行してレプリケーションタスクを作成すると、TiCDC は上流のテーブルが[レプリケーション要件](/ticdc/ticdc-overview.md#best-practices)を満たしているかどうかを確認します。要件を満たしていないテーブルがある場合は、 `some tables are not eligible to replicate`不適格なテーブルのリストが返されます。タスクの作成を続行するには`Y`または`y`選択できます。この場合、これらのテーブルに対するすべての更新はレプリケーション中に自動的に無視されます。 `Y`または`y`以外の入力を選択した場合、レプリケーションタスクは作成されません。
 
 ## TiCDC レプリケーション タスクの状態を確認するにはどうすればよいですか? {#how-do-i-view-the-state-of-ticdc-replication-tasks}
 
-TiCDC レプリケーションタスクのステータスを表示するには、 `cdc cli`使用します。例:
+TiCDC レプリケーションタスクのステータスを表示するには、 `cdc cli`を使用します。例:
 
 ```shell
 cdc cli changefeed list --server=http://127.0.0.1:8300
@@ -185,7 +185,7 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 
 ## レプリケーション タスクが失敗した後に回復するにはどうすればよいですか? {#how-to-recover-a-replication-task-after-it-fails}
 
-1.  `cdc cli changefeed query`使用してレプリケーション タスクのエラー情報を照会し、できるだけ早くエラーを修正します。
+1.  `cdc cli changefeed query`を使用してレプリケーション タスクのエラー情報を照会し、できるだけ早くエラーを修正します。
 2.  値を`gc-ttl`に増やすと、エラーを修正するための時間が長くなり、エラーが修正された後にレプリケーションの遅延が`gc-ttl`超えたためにレプリケーション タスクが`failed`ステータスにならないようになります。
 3.  システムへの影響を評価した後、TiDB の値を[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)増やして GC をブロックし、データを保持して、エラーが修正された後に GC がデータをクリーンアップすることによってレプリケーション タスクが`failed`ステータスにならないようにします。
 

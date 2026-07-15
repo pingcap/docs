@@ -45,7 +45,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 ### ユースケース {#use-cases}
 
--   データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`使用することをお勧めします。
+-   データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`を使用することをお勧めします。
 
 詳細については[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)参照してください。
 

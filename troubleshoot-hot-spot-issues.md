@@ -100,7 +100,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 `CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。5 `NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS` `CLUSTERED`が使用できます。9型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
+以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`を使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
 
 ![Dashboard Example 5](/media/troubleshoot-hot-spot-issues-5.png)
 
@@ -110,11 +110,11 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 ## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-code-auto-random-code}
 
-AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
+AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
 
 この機能を有効にすると、TiDB は書き込みホットスポットを分散させる目的を達成するために、ランダムに分散され、重複のない (スペースが使い果たされる前に) 主キーを生成します。
 
-TiDB によって生成される主キーはAUTO_INCREMENT主キーではなくなり、 `LAST_INSERT_ID()`使用して前回割り当てられた主キー値を取得できることに注意してください。
+TiDB によって生成される主キーはAUTO_INCREMENT主キーではなくなり、 `LAST_INSERT_ID()`を使用して前回割り当てられた主キー値を取得できることに注意してください。
 
 この機能を使用するには、 `CREATE TABLE`ステートメントの`AUTO_INCREMENT`を`AUTO_RANDOM`に変更してください。この機能は、主キーの一意性のみを保証する必要がある非アプリケーションシナリオに適しています。
 
@@ -146,13 +146,13 @@ SELECT LAST_INSERT_ID();
 +------------------+
 ```
 
-以下の2つの負荷図は、 `AUTO_INCREMENT` ～ `AUTO_RANDOM`を変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`使用し、2番目の図では`AUTO_RANDOM`使用しています。
+以下の2つの負荷図は、 `AUTO_INCREMENT` ～ `AUTO_RANDOM`を変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`使用し、2番目の図では`AUTO_RANDOM`を使用しています。
 
 ![Dashboard Example 7](/media/troubleshoot-hot-spot-issues-7.png)
 
 ![Dashboard Example 8](/media/troubleshoot-hot-spot-issues-8.png)
 
-上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`使用すると、ホットスポットを適切に分散できます。
+上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`を使用すると、ホットスポットを適切に分散できます。
 
 詳細については[AUTO_RANDOM](/auto-random.md)参照してください。
 

@@ -48,7 +48,7 @@ Available Commands:
 
 `tiup br log start`コマンドを実行すると、ログバックアップタスクを開始できます。このタスクはTiDBクラスターのバックグラウンドで実行され、KVストレージの変更ログをバックアップストレージに自動的にバックアップします。
 
-ヘルプ情報を表示するには、 `tiup br log start --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log start --help`を実行します。
 
 ```shell
 tiup br log start --help
@@ -75,7 +75,7 @@ Global Flags:
 
 -   `--start-ts` : ログバックアップの開始タイムスタンプを指定します。このパラメータが指定されていない場合、バックアッププログラムは現在の時刻を`start-ts`として使用します。
 -   `task-name` : ログバックアップのタスク名を指定します。この名前は、バックアップタスクのクエリ、一時停止、再開にも使用されます。
--   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`指定します。
+-   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`を指定します。
 -   `--pd` : バックアップ クラスターの PD アドレスを指定します。BRはログ バックアップ タスクを開始するために PD にアクセスする必要があります。
 -   `--storage` : バックアップストレージのアドレスを指定します。現在、 BRはログバックアップのstorageとしてAmazon S3、Google Cloud Storage (GCS)、またはAzure Blob Storageをサポートしています。上記のコマンドではAmazon S3を例として使用しています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
@@ -156,7 +156,7 @@ tiup br log start \
 
 `tiup br log status`コマンドを実行して、ログ バックアップの状態を照会できます。
 
-ヘルプ情報を表示するには、 `tiup br log status --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log status --help`を実行します。
 
 ```shell
 tiup br log status --help
@@ -213,7 +213,7 @@ checkpoint[global]: 2022-07-25 22:52:15.518 +0800; gap=2m52s
 
 実行中のログ バックアップ タスクを一時停止するには、 `tiup br log pause`コマンドを実行します。
 
-ヘルプ情報を表示するには、 `tiup br log pause --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log pause --help`を実行します。
 
 ```shell
 tiup br log pause --help
@@ -247,7 +247,7 @@ tiup br log pause --task-name=pitr --pd="${PD_IP}:2379"
 
 一時停止されたバックアップ タスクを再開するには、 `tiup br log resume`コマンドを実行します。
 
-ヘルプ情報を表示するには、 `tiup br log resume --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log resume --help`を実行します。
 
 ```shell
 tiup br log resume --help
@@ -267,7 +267,7 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-バックアップタスクが24時間以上一時停止された後、 `tiup br log resume`実行するとエラーが発生し、 BRはバックアップデータが失われたというメッセージを表示します。このエラーに対処するには、 [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task)を参照してください。
+バックアップタスクが24時間以上一時停止された後、 `tiup br log resume`を実行するとエラーが発生し、 BRはバックアップデータが失われたというメッセージを表示します。このエラーに対処するには、 [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task)を参照してください。
 
 使用例:
 
@@ -283,7 +283,7 @@ tiup br log resume --task-name=pitr --pd="${PD_IP}:2379"
 
 ログバックアップタスクを停止するには、コマンド`tiup br log stop`を実行します。このコマンドは、バックアップクラスター内のタスクメタデータをクリーンアップします。
 
-ヘルプ情報を表示するには、 `tiup br log stop --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log stop --help`を実行します。
 
 ```shell
 tiup br log stop --help
@@ -305,7 +305,7 @@ Global Flags:
 
 > **Note:**
 >
-> このコマンドは注意して使用してください。ログバックアップタスクを一時停止する必要がある場合は、代わりに`tiup br log pause`と`tiup br log resume`使用してください。
+> このコマンドは注意して使用してください。ログバックアップタスクを一時停止する必要がある場合は、代わりに`tiup br log pause`と`tiup br log resume`を使用してください。
 
 使用例:
 
@@ -318,14 +318,14 @@ tiup br log stop --task-name=pitr --pd="${PD_IP}:2379"
 `tiup br log stop`コマンドを実行してログバックアップタスクを停止した後、別の`--storage`ディレクトリに新しいログバックアップタスクを作成するか、 `tiup br log start`コマンドを実行して元の`--storage`ディレクトリでログバックアップタスクを再開できます。元の`--storage`ディレクトリでタスクを再開する場合は、以下の点に注意してください。
 
 -   タスクを再開するための`--storage`ディレクトリのパラメータは、停止されたタスクと同じである必要があります。
--   `--start-ts`指定する必要はありません。BRは最後のバックアップ チェックポイントから自動的にバックアップを開始します。
+-   `--start-ts`を指定する必要はありません。BRは最後のバックアップ チェックポイントから自動的にバックアップを開始します。
 -   タスクが長時間停止し、複数のバージョンのデータがガベージコレクションされている場合、タスクを再開しようとするとエラー`BR:Backup:ErrBackupGCSafepointExceeded`が報告されます。この場合、別のディレクトリ`--storage`に新しいログバックアップタスクを作成する必要があります。
 
 ### ログバックアップデータをクリーンアップする {#clean-up-log-backup-data}
 
 `tiup br log truncate`コマンドを実行して、古くなった、または不要になったログ バックアップ データをクリーンアップできます。
 
-ヘルプ情報を表示するには、 `tiup br log truncate --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log truncate --help`を実行します。
 
 ```shell
 tiup br log truncate --help
@@ -372,7 +372,7 @@ Removing metadata... DONE; take = 24.038962ms
 
 `tiup br log metadata`コマンドを実行すると、復元できる最も古いタイムスタンプや最新のタイムスタンプなど、ストレージシステム内のログ バックアップ メタデータを表示できます。
 
-ヘルプ情報を表示するには、 `tiup br log metadata --help`実行します。
+ヘルプ情報を表示するには、 `tiup br log metadata --help`を実行します。
 
 ```shell
 tiup br log metadata --help
@@ -408,11 +408,11 @@ tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-ke
 
 > **Note:**
 >
-> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental` `true`に設定する必要があります。
+> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`を指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental` `true`に設定する必要があります。
 
 `tiup br restore point`コマンドを実行して、新しいクラスターで PITR を実行したり、ログ バックアップ データを復元したりできます。
 
-ヘルプ情報を表示するには、 `tiup br restore point --help`実行します。
+ヘルプ情報を表示するには、 `tiup br restore point --help`を実行します。
 
 ```shell
 tiup br restore point --help
@@ -448,7 +448,7 @@ Global Flags:
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BRはログバックアップで利用可能な最新のタイムスタンプ、つまりバックアップデータのチェックポイントにデータを復元します。
 -   `--start-ts` : ログバックアップデータを復元する開始タイムスタンプ。ログバックアップデータのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。
--   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`指定します。
+-   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`を指定します。
 -   `--storage` : ログバックアップのストレージアドレス。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、またはAzure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
 使用例:

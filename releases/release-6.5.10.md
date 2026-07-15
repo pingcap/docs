@@ -105,7 +105,7 @@ TiDB バージョン: 6.5.10
 
 -   TiFlash
 
-    -   データベース間で`ALTER TABLE ... EXCHANGE PARTITION`実行した後にTiFlash がスキーマの同期に失敗する可能性がある問題を修正しました[＃7296](https://github.com/pingcap/tiflash/issues/7296) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベース間で`ALTER TABLE ... EXCHANGE PARTITION`を実行した後にTiFlash がスキーマの同期に失敗する可能性がある問題を修正しました[＃7296](https://github.com/pingcap/tiflash/issues/7296) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   空のキー範囲を持つクエリがTiFlashで読み取りタスクを正しく生成できず、 TiFlashクエリがブロックされる可能性がある問題を修正しました。 [＃9108](https://github.com/pingcap/tiflash/issues/9108) @ [JinheLin](https://github.com/JinheLin)
     -   `SUBSTRING_INDEX()`関数が一部のコーナーケースでTiFlash のクラッシュを引き起こす可能性がある問題を修正[＃9116](https://github.com/pingcap/tiflash/issues/9116) @ [wshwsh12](https://github.com/wshwsh12)
     -   クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @ [JaySon-Huang](https://github.com/JaySon-Huang)

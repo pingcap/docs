@@ -9,7 +9,7 @@ summary: データ移行のテーブル ルーティング、 binlogイベント
 
 ## ワイルドカード文字 {#wildcard-character}
 
-テーブルセレクターは`schema-pattern`で次の 2 つのワイルドカード文字`table-pattern`使用します。
+テーブルセレクターは`schema-pattern`で次の 2 つのワイルドカード文字`table-pattern`を使用します。
 
 -   アスタリスク文字（ `*` 、「スター」とも呼ばれる）
 

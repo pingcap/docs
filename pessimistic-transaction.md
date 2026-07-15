@@ -108,7 +108,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 2.  TiDB は`SELECT LOCK IN SHARE MODE`をサポートしていません。
 
-    TiDB はデフォルトでは`SELECT LOCK IN SHARE MODE`構文をサポートしていません。tidb_enable_noop_functions [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効にすることで、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を持たせることができます。 `SELECT LOCK IN SHARE MODE`実行しても、ロックなしの場合と同じ効果が得られるため、他のトランザクションの読み取りまたは書き込み操作をブロックすることはありません。
+    TiDB はデフォルトでは`SELECT LOCK IN SHARE MODE`構文をサポートしていません。tidb_enable_noop_functions [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効にすることで、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を持たせることができます。 `SELECT LOCK IN SHARE MODE`を実行しても、ロックなしの場合と同じ効果が得られるため、他のトランザクションの読み取りまたは書き込み操作をブロックすることはありません。
 
     TiDB は v8.3.0 以降、 [`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)システム変数を使用して`SELECT LOCK IN SHARE MODE`ステートメントを有効にしてロックを追加することをサポートしています。ただし、この時点で追加されるロックは真の共有ロックではなく、 `SELECT FOR UPDATE`と互換性のある排他ロックであることに注意してください。読み取り中に並列書き込みトランザクションによってデータが変更されないように書き込みをブロックしつつ、TiDB を`SELECT LOCK IN SHARE MODE`構文と互換性を維持したい場合は、この変数を有効にできます。この変数を有効にすると、 [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効になっているかどうかに関係なく、 `SELECT LOCK IN SHARE MODE`ステートメントに影響します。
 

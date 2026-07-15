@@ -15,7 +15,7 @@ RELEASE SAVEPOINT identifier
 
 > **Warning:**
 >
-> [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)無効になっている場合、悲観的トランザクションで`SAVEPOINT`使用することはできません。
+> [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)無効になっている場合、悲観的トランザクションで`SAVEPOINT`を使用することはできません。
 
 -   `SAVEPOINT` 、現在のトランザクションに指定された名前のセーブポイントを設定するために使用されます。同じ名前のセーブポイントが既に存在する場合、それは削除され、同じ名前の新しいセーブポイントが設定されます。
 
@@ -147,7 +147,7 @@ SELECT * FROM t1;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`ROLLBACK TO SAVEPOINT`使用してトランザクションを指定されたセーブポイントまでロールバックすると、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放します。一方、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされた時点ですべてのロックを解放します。
+`ROLLBACK TO SAVEPOINT`を使用してトランザクションを指定されたセーブポイントまでロールバックすると、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放します。一方、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされた時点ですべてのロックを解放します。
 
 TiDB は MySQL 構文`ROLLBACK WORK TO SAVEPOINT ...`サポートしていません。
 

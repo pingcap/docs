@@ -42,10 +42,10 @@ TiDB バージョン: 6.5.8
     -   誤ったパーティションプルーニングが原因で、範囲パーティションテーブルのクエリ結果が間違っている場合がある問題を修正しました。 [＃50082](https://github.com/pingcap/tidb/issues/50082) @ [Defined2014](https://github.com/Defined2014)
     -   `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [＃50519](https://github.com/pingcap/tidb/issues/50519) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   多数のテーブルまたはパーティションを処理するときに TiDB ノードが OOM エラーに遭遇する可能性がある問題を軽減します。 [＃50077](https://github.com/pingcap/tidb/issues/50077) @ [zimulala](https://github.com/zimulala)
-    -   DDL所有者がネットワークから分離されている後に`ADD INDEX`実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @ [tangenta](https://github.com/tangenta)
+    -   DDL所有者がネットワークから分離されている後に`ADD INDEX`を実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @ [tangenta](https://github.com/tangenta)
     -   クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanic可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @ [SeaRise](https://github.com/SeaRise)
     -   `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションをで終了できない問題を修正しました。 [＃49151](https://github.com/pingcap/tidb/issues/49151) @ [zyguan](https://github.com/zyguan)
-    -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)
+    -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)
     -   `ORDER BY`句で`UNIQUE`インデックス検索を実行するとエラーが発生する可能性がある問題を修正しました。 [＃49920](https://github.com/pingcap/tidb/issues/49920) @ [jackysp](https://github.com/jackysp)
     -   `tidb_multi_statement_mode`モードが有効になっている場合、インデックス検索を使用する`DELETE`および`UPDATE`ステートメントでエラーが報告される可能性がある問題を修正しました[＃50012](https://github.com/pingcap/tidb/issues/50012) @ [tangenta](https://github.com/tangenta)
     -   `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正しました [＃50067](https://github.com/pingcap/tidb/issues/50067) @ [hawkingrei](https://github.com/hawkingrei)
@@ -61,12 +61,12 @@ TiDB バージョン: 6.5.8
 
 -   PD
 
-    -   `pd-ctl`使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [＃7630](https://github.com/tikv/pd/issues/7630) @ [rleungx](https://github.com/rleungx)
+    -   `pd-ctl`を使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [＃7630](https://github.com/tikv/pd/issues/7630) @ [rleungx](https://github.com/rleungx)
 
 -   TiFlash
 
     -   `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイトを占めることができない問題を修正しました。 [＃8484](https://github.com/pingcap/tiflash/issues/8484) @ [gengliqi](https://github.com/gengliqi)
-    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`実行した後にTiFlash がパニックを起こし、NULL 可能列がに非 NULL に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、NULL 可能列がに非 NULL に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   クエリを終了した後、 TiFlash上の多数のタスクが同時にキャンセルされると、同時データの競合によりTiFlashがクラッシュする問題を修正[＃7432](https://github.com/pingcap/tiflash/issues/7432) @ [SeaRise](https://github.com/SeaRise)
 
 -   ツール

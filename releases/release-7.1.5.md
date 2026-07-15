@@ -62,7 +62,7 @@ TiDB バージョン: 7.1.5
     -   TTL 機能により、データ範囲の分割が不正確になり、場合によってはでデータ ホットスポットが発生する問題を修正しました。 [＃51527](https://github.com/pingcap/tidb/issues/51527) @ [lcwangchao](https://github.com/lcwangchao)
     -   TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[＃46602](https://github.com/pingcap/tidb/issues/46602) @ [zyguan](https://github.com/zyguan)
     -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。 [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)
-    -   `INSERT IGNORE`実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   `INSERT IGNORE`を実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [Rustin170506](https://github.com/Rustin170506)
     -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)

@@ -5,7 +5,7 @@ summary: TiDB データベースの ADMIN RESUME DDL の使用法の概要。
 
 # ADMIN RESUME DDL JOBS {#admin-resume-ddl-jobs}
 
-`ADMIN RESUME DDL`使用すると、一時停止中のDDLジョブを再開できます。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行すると確認できます。
+`ADMIN RESUME DDL`を使用すると、一時停止中のDDLジョブを再開できます。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行すると確認できます。
 
 このステートメントを使用すると、一時停止中のDDLジョブを再開できます。再開が完了した後も、DDLジョブを実行するSQL文は実行中として表示されます。すでに完了しているDDLジョブを再開しようとすると、列`RESULT`にエラー`DDL Job:90 not found`が表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 

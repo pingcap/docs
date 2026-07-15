@@ -78,7 +78,7 @@ echo $(( $(date --date '2004-05-06 15:02:01Z' +%s%3N) << 18 ))
 
 > **Note:**
 >
-> macOS ユーザーの場合は、 Homebrew経由で`coreutils`インストールし、 `date`ではなく`gdate`使用する必要があります。
+> macOS ユーザーの場合は、 Homebrew経由で`coreutils`インストールし、 `date`ではなく`gdate`を使用する必要があります。
 >
 > ```shell
 > echo $(( $(gdate --date '2004-05-06 15:02:01Z' +%s%3N) << 18 ))

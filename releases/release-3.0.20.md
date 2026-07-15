@@ -36,7 +36,7 @@ TiDB バージョン: 3.0.20
     -   TiKVクライアントのgoroutineリークの問題を修正 [＃20863](https://github.com/pingcap/tidb/pull/20863)
     -   `year`型の誤ったデフォルトのゼロ値を修正 [＃20828](https://github.com/pingcap/tidb/pull/20828)
     -   インデックス検索結合におけるゴルーチンリークの問題を修正 [＃20791](https://github.com/pingcap/tidb/pull/20791)
-    -   `INSERT SELECT FOR UPDATE`実行すると悲観的トランザクションで不正なパケットが返される問題を修正 [＃20681](https://github.com/pingcap/tidb/pull/20681)
+    -   `INSERT SELECT FOR UPDATE`を実行すると悲観的トランザクションで不正なパケットが返される問題を修正 [＃20681](https://github.com/pingcap/tidb/pull/20681)
     -   不明なタイムゾーンを修正`'posixrules'` [＃20605](https://github.com/pingcap/tidb/pull/20605)
     -   符号なし整数型をビット型に変換するときに発生する問題を修正しました [＃20362](https://github.com/pingcap/tidb/pull/20362)
     -   ビット型列の破損したデフォルト値を修正 [＃20339](https://github.com/pingcap/tidb/pull/20339)

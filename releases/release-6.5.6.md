@@ -82,7 +82,7 @@ TiDB バージョン: 6.5.6
     -   `tidb_enable_ordered_result_mode`有効になっているときにpanicが発生する可能性がある問題を修正[＃45044](https://github.com/pingcap/tidb/issues/45044) @ [qw4990](https://github.com/qw4990)
     -   ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました。 [＃46177](https://github.com/pingcap/tidb/issues/46177) @ [qw4990](https://github.com/qw4990)
     -   述語が共通テーブル式にプッシュダウンされたときに結果が不正確になる可能性がある問題を修正しました [＃47881](https://github.com/pingcap/tidb/issues/47881) @ [winoros](https://github.com/winoros)
-    -   DUALテーブルを最初のサブノードとして`UNION ALL`実行するとエラーが発生する可能性がある問題を修正しました。 [＃48755](https://github.com/pingcap/tidb/issues/48755) @ [winoros](https://github.com/winoros)
+    -   DUALテーブルを最初のサブノードとして`UNION ALL`を実行するとエラーが発生する可能性がある問題を修正しました。 [＃48755](https://github.com/pingcap/tidb/issues/48755) @ [winoros](https://github.com/winoros)
     -   特定の状況で列の整理によってpanicが発生する可能性がある問題を修正[＃47331](https://github.com/pingcap/tidb/issues/47331) @ [Rustin170506](https://github.com/Rustin170506)
     -   集計関数またはウィンドウ関数を含む共通テーブル式 (CTE) が他の再帰 CTE によって参照されるときに発生する可能性のある構文エラーの問題を修正しました[＃47603](https://github.com/pingcap/tidb/issues/47603) [＃47711](https://github.com/pingcap/tidb/issues/47711) @ [elsa0520](https://github.com/elsa0520)
     -   プリペアドステートメントで`QB_NAME`ヒントを使用すると例外が発生する可能性がある問題を修正しました [＃46817](https://github.com/pingcap/tidb/issues/46817) @ [jackysp](https://github.com/jackysp)
@@ -151,7 +151,7 @@ TiDB バージョン: 6.5.6
     -   TiCDC
 
         -   アップストリームで損失のある DDL 文を実行すると TiCDCサーバーがpanic可能性がある問題を修正しました。 [＃9739](https://github.com/pingcap/tiflow/issues/9739) @ [hicqu](https://github.com/hicqu)
-        -   再実行ログ機能を有効にした状態で`RESUME`実行するとレプリケーションタスクがエラーを報告する問題を修正[＃9769](https://github.com/pingcap/tiflow/issues/9769) @ [hicqu](https://github.com/hicqu)
+        -   再実行ログ機能を有効にした状態で`RESUME`を実行するとレプリケーションタスクがエラーを報告する問題を修正[＃9769](https://github.com/pingcap/tiflow/issues/9769) @ [hicqu](https://github.com/hicqu)
         -   TiKVノードがクラッシュするとレプリケーションラグが長くなる問題を修正[＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [sdojjy](https://github.com/sdojjy)
         -   `WHERE`文が TiDB または MySQL にデータを複製するときに主キーを条件として使用しない問題を修正しました [＃9988](https://github.com/pingcap/tiflow/issues/9988) @ [asddongmen](https://github.com/asddongmen)
         -   レプリケーションタスクのワークロードが TiCDC ノード間で均等に分散されない問題を修正しました [＃9839](https://github.com/pingcap/tiflow/issues/9839) @ [3AceShowHand](https://github.com/3AceShowHand)

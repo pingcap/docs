@@ -71,7 +71,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-`SET SESSION`使用するとすぐに有効になります。
+`SET SESSION`を使用するとすぐに有効になります。
 
 ```sql
 mysql> SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -110,7 +110,7 @@ SELECT @myvar, @myvar + 1;
     -   グローバル変数: ほとんどのシステム変数 (たとえば、クラスターの動作やオプティマイザーの動作に影響するもの) の場合、 `SET GLOBAL`で行われた変更はクラスター内のすべての TiDB インスタンスに適用されます。
     -   インスタンス レベルの変数: 一部のシステム変数 (たとえば、 `max_connections` ) の場合、 `SET GLOBAL`で行われた変更は、現在の接続で使用されている TiDB インスタンスにのみ適用されます。
 
-    したがって、 `SET GLOBAL`使用して変数を変更する場合は、常にその変数の[ドキュメント](/system-variables.md) 、特に「クラスターに保持」属性をチェックして、変更の範囲を確認してください。
+    したがって、 `SET GLOBAL`を使用して変数を変更する場合は、常にその変数の[ドキュメント](/system-variables.md) 、特に「クラスターに保持」属性をチェックして、変更の範囲を確認してください。
 
 -   TiDBは、いくつかの変数を読み取りと設定の両方が可能としています。これは、アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的であるため、MySQLとの互換性を保つために必要です。例えば、JDBCコネクタは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
 

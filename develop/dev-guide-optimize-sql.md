@@ -42,7 +42,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.582s
 ```
 
-このクエリが遅い理由を理解するには、 `EXPLAIN`使用して実行プランを確認します。
+このクエリが遅い理由を理解するには、 `EXPLAIN`を使用して実行プランを確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -90,7 +90,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-パフォーマンスが向上した理由を理解するには、 `EXPLAIN`使用して新しい実行プランを確認します。
+パフォーマンスが向上した理由を理解するには、 `EXPLAIN`を使用して新しい実行プランを確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -221,7 +221,7 @@ SELECT * FROM books WHERE id = 896;
 Time: 0.004s
 ```
 
-実行プランを確認するには`EXPLAIN`使用します。
+実行プランを確認するには`EXPLAIN`を使用します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;

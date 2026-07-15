@@ -110,7 +110,7 @@ TiDB バージョン: 5.1.2
 -   PD
 
     -   PDがダウンしたピアを時間内に修復しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   `replication.max-replicas`更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
+    -   `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
     -   TiKV をスケールアウトするときに PD がpanic可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
     -   クラスターにエビクトリーダースケジューラがある場合にホットリージョンスケジューラが動作しないバグを修正しました [＃3697](https://github.com/tikv/pd/issues/3697)
 

@@ -43,7 +43,7 @@ TiDB バージョン: 5.1.1
     -   クエリ結果をより安定させるために、安定した結果モードをサポートします[＃25995](https://github.com/pingcap/tidb/pull/25995)
     -   組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [＃26265](https://github.com/pingcap/tidb/pull/26265)
     -   MPPクエリの再試行をサポート[＃26480](https://github.com/pingcap/tidb/pull/26480)
-    -   `UPDATE`読み取りで`point get`または`batch point get`使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26225](https://github.com/pingcap/tidb/pull/26225)
+    -   `UPDATE`読み取りで`point get`または`batch point get`を使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[＃26225](https://github.com/pingcap/tidb/pull/26225)
     -   古いクエリからのビューの作成を禁止する[＃26200](https://github.com/pingcap/tidb/pull/26200)
     -   MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [＃26194](https://github.com/pingcap/tidb/pull/26194)
     -   MPPクエリを起動する前にTiFlashの可用性を確認してください [＃26192](https://github.com/pingcap/tidb/pull/26192)
@@ -56,7 +56,7 @@ TiDB バージョン: 5.1.1
 
     -   未確定エラーの可能性を減らすために、事前書き込みリクエストを可能な限りべき等にしてください[＃10586](https://github.com/tikv/tikv/pull/10586)
     -   多数の期限切れコマンドを処理する際のスタックオーバーフローのリスクを防ぐ[＃10502](https://github.com/tikv/tikv/pull/10502)
-    -   `max_ts` を更新するためにステイル読み取り要求の`start_ts`使用しないことで、コミット要求の再試行を過度に回避します。 [＃10451](https://github.com/tikv/tikv/pull/10451)
+    -   `max_ts` を更新するためにステイル読み取り要求の`start_ts`を使用しないことで、コミット要求の再試行を過度に回避します。 [＃10451](https://github.com/tikv/tikv/pull/10451)
     -   読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[＃10592](https://github.com/tikv/tikv/pull/10592)
     -   I/Oレート制限が有効になっている場合のデータインポート速度への影響を軽減します[＃10390](https://github.com/tikv/tikv/pull/10390)
     -   Raft gRPC接続間の負荷分散を改善する[＃10495](https://github.com/tikv/tikv/pull/10495)
@@ -128,7 +128,7 @@ TiDB バージョン: 5.1.1
     -   読み取り負荷が大きい場合に発生するpanic問題を修正しました
     -   `DateFormat`関数の実行時に発生する可能性のあるpanic問題を修正
     -   MPPタスク実行時に発生する可能性のあるメモリリークの問題を修正
-    -   集計関数`COUNT`または`COUNT DISTINCT`実行するときに予期しない結果が発生する問題を修正しました
+    -   集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
     -   複数のディスクに展開されたときにTiFlash がデータを復元できない潜在的なバグを修正しました
     -   TiDB DashboardがTiFlashのディスク情報を正しく表示できない問題を修正
     -   解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`

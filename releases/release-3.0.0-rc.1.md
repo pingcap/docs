@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   TiDB の古いバージョンにおける UTF8 および UTF8MB4 文字セットの互換性の問題を修正しました [＃9820](https://github.com/pingcap/tidb/pull/9820)
     -   表の`shard_row_id_bits`の潜在的なバグを修正 [＃9868](https://github.com/pingcap/tidb/pull/9868)
     -   テーブルの文字セットを変更しても列の文字セットが変更されないバグを修正[＃9790](https://github.com/pingcap/tidb/pull/9790)
-    -   列のデフォルト値として`BINARY` / `BIT`使用する場合の`SHOW COLUMN`の潜在的なバグを修正[＃9897](https://github.com/pingcap/tidb/pull/9897)
+    -   列のデフォルト値として`BINARY` / `BIT`を使用する場合の`SHOW COLUMN`の潜在的なバグを修正[＃9897](https://github.com/pingcap/tidb/pull/9897)
     -   `SHOW FULL COLUMNS`文で`CHARSET` `COLLATION`説明を表示する際の互換性の問題を修正 [＃10007](https://github.com/pingcap/tidb/pull/10007)
     -   `SHOW COLLATIONS`文が TiDB でサポートされている照合順序のみをリストする問題を修正しました [＃10186](https://github.com/pingcap/tidb/pull/10186)
 

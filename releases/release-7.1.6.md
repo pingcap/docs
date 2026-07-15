@@ -77,7 +77,7 @@ TiDB バージョン: 7.1.6
     -   `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[＃50235](https://github.com/pingcap/tidb/issues/50235) @ [qw4990](https://github.com/qw4990)
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @ [wshwsh12](https://github.com/wshwsh12)
     -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @ [tangenta](https://github.com/tangenta)
-    -   `SHOW WARNINGS;`使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
+    -   `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると TiDB がpanicを起こす可能性がある問題を修正[＃54324](https://github.com/pingcap/tidb/issues/54324) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   `HashJoin`または`IndexLookUp`演算子が`Apply`演算子の駆動側サブノードである場合に`memTracker`切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [＃54005](https://github.com/pingcap/tidb/issues/54005) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   再帰CTEクエリが無効なポインタを生成する可能性がある問題を修正しました [＃54449](https://github.com/pingcap/tidb/issues/54449) @ [hawkingrei](https://github.com/hawkingrei)
@@ -123,7 +123,7 @@ TiDB バージョン: 7.1.6
     -   `auth_socket`認証プラグインを使用しているときに、TiDB が認証されていないユーザーの接続を拒否できないことがある問題を修正しました。 [＃54031](https://github.com/pingcap/tidb/issues/54031) @ [lcwangchao](https://github.com/lcwangchao)
     -   `memory_quota`ヒントがサブクエリで機能しない可能性がある問題を修正しました [＃53834](https://github.com/pingcap/tidb/issues/53834) @ [qw4990](https://github.com/qw4990)
     -   プランキャッシュシナリオでメタデータロックがDDL操作の実行を阻止できない問題を修正 [＃51407](https://github.com/pingcap/tidb/issues/51407) @ [wjhuang2016](https://github.com/wjhuang2016)
-    -   列のデフォルト値として`CURRENT_DATE()`使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
+    -   列のデフォルト値として`CURRENT_DATE()`を使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
     -   `COALESCE()`関数が`DATE`の型パラメータに対して誤った結果型を返す問題を修正しました [＃46475](https://github.com/pingcap/tidb/issues/46475) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに発生する予期しないエラーを修正します。これはの繰り返し操作による以前のパラメータ値の再利用が原因です。 [＃53600](https://github.com/pingcap/tidb/issues/53600) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @ [yibin87](https://github.com/yibin87)
@@ -156,7 +156,7 @@ TiDB バージョン: 7.1.6
     -   インデックス追加中の再試行によって発生するデータ インデックスの不整合の問題を修正しました [＃55808](https://github.com/pingcap/tidb/issues/55808) @ [lance6716](https://github.com/lance6716)
     -   列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [＃53236](https://github.com/pingcap/tidb/issues/53236) @ [winoros](https://github.com/winoros)
     -   トランザクション内のステートメントが OOM によって強制終了された後、TiDB が同じトランザクション内で次のステートメントの実行を継続すると、エラー`Trying to start aggressive locking while it's already started`が発生し、panicが発生する可能性がある問題を修正しました。 [＃53540](https://github.com/pingcap/tidb/issues/53540) @ [MyonKeminta](https://github.com/MyonKeminta)
-    -   `RECOVER TABLE BY JOB JOB_ID;`実行すると TiDB がpanicを起こす可能性がある問題を修正[＃55113](https://github.com/pingcap/tidb/issues/55113) @ [crazycs520](https://github.com/crazycs520)
+    -   `RECOVER TABLE BY JOB JOB_ID;`を実行すると TiDB がpanicを起こす可能性がある問題を修正[＃55113](https://github.com/pingcap/tidb/issues/55113) @ [crazycs520](https://github.com/crazycs520)
     -   分散実行フレームワークの PD メンバーを変更した後に`ADD INDEX`実行が失敗する可能性がある問題を修正しました [＃48680](https://github.com/pingcap/tidb/issues/48680) @ [lance6716](https://github.com/lance6716)
     -   2人のDDL所有者が同時に存在する可能性がある問題を修正[＃54689](https://github.com/pingcap/tidb/issues/54689) @ [joccau](https://github.com/joccau)
     -   `ADD INDEX`の実行中に TiDB のローリング再起動が発生すると、インデックスの追加操作が失敗する可能性がある問題を修正しました[＃52805](https://github.com/pingcap/tidb/issues/52805) @ [tangenta](https://github.com/tangenta)
@@ -246,7 +246,7 @@ TiDB バージョン: 7.1.6
     -   空のキー範囲を持つクエリがTiFlash上で読み取りタスクを正しく生成できず、 TiFlashクエリがブロックされる可能性がある問題を修正しました。 [＃9108](https://github.com/pingcap/tiflash/issues/9108) @ [JinheLin](https://github.com/JinheLin)
     -   特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[＃9301](https://github.com/pingcap/tiflash/issues/9301) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラーが発生する問題を修正しました [＃9473](https://github.com/pingcap/tiflash/issues/9473) @ [gengliqi](https://github.com/gengliqi)
-    -   大きなテーブルで`DROP TABLE`実行するとTiFlash OOM が発生する可能性がある問題を修正しました [＃9437](https://github.com/pingcap/tiflash/issues/9437) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   大きなテーブルで`DROP TABLE`を実行するとTiFlash OOM が発生する可能性がある問題を修正しました [＃9437](https://github.com/pingcap/tiflash/issues/9437) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

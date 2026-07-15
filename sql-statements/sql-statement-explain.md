@@ -5,7 +5,7 @@ summary: TiDB データベースにおけるEXPLAINの使用法の概要。
 
 # `EXPLAIN` {#explain}
 
-`EXPLAIN`の文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`の文を補完するものです。5 `EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`実行して、テーブル統計が最新であることを確認することを検討してください。
+`EXPLAIN`の文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`の文を補完するものです。5 `EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`を実行して、テーブル統計が最新であることを確認することを検討してください。
 
 > **Note:**
 >
@@ -45,7 +45,7 @@ ExplainableStmt ::=
 >
 > 返される実行プランにおいて、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降では`estRows`の意味が v6.4.0 以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)を参照してください。
 
-現在、TiDBの`EXPLAIN`は5つの列（ `id` `estRows` `access object`出力します。実行プラン内の各演算子`task`これらの属性によって記述され、 `EXPLAIN`出力の各行は演算子`operator info`記述します。各属性の説明は次のとおりです。
+現在、TiDBの`EXPLAIN`は5つの列（ `id` `estRows` `access object`を出力します。実行プラン内の各演算子`task`これらの属性によって記述され、 `EXPLAIN`出力の各行は演算子`operator info`記述します。各属性の説明は次のとおりです。
 
 | 属性名        | 説明                                                                                                                                                                                                                                                                                                           |
 | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -211,7 +211,7 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 
 <div label="DotGraph">
 
-MySQL 標準の結果形式に加えて、TiDB は DotGraph もサポートしており、次の例のように`FORMAT = "dot"`指定する必要があります。
+MySQL 標準の結果形式に加えて、TiDB は DotGraph もサポートしており、次の例のように`FORMAT = "dot"`を指定する必要があります。
 
 ```sql
 CREATE TABLE t(a bigint, b bigint);
@@ -269,7 +269,7 @@ The xx.dot is the result returned by the above statement.
 
 <div label="JSON">
 
-JSON形式で出力を取得するには、 `EXPLAIN`ステートメントに`FORMAT = "tidb_json"`指定します。以下は例です。
+JSON形式で出力を取得するには、 `EXPLAIN`ステートメントに`FORMAT = "tidb_json"`を指定します。以下は例です。
 
 ```sql
 CREATE TABLE t(id int primary key, a int, b int, key(a));

@@ -47,7 +47,7 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 ログの復元が完了すると、GCは手動で起動することなく自動的に再起動されます。ただし、復元を続行しない場合は、以下の手順でGCを手動で有効にすることができます。
 
-`br` GCを一時停止する原理は、 `SET config tikv gc.ratio-threshold = -1.0`実行して`gc.ratio-threshold`負の値に設定し、GCを一時停止することです。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GCを手動で有効にすることができます。例えば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`実行します。
+`br` GCを一時停止する原理は、 `SET config tikv gc.ratio-threshold = -1.0`を実行して`gc.ratio-threshold`負の値に設定し、GCを一時停止することです。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GCを手動で有効にすることができます。例えば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`を実行します。
 
 ### 一部のデータは再度復元する必要があります {#some-data-needs-to-be-restored-again}
 
@@ -87,7 +87,7 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 初期リストアでは、 `br`スナップショットリストアフェーズに入ります。BRは、チェックポイントデータ、上流クラスタID、バックアップデータのBackupTS（つまり、ログリストアの開始時点`start-ts` ）、およびログリストアの復元時点`restored-ts` `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint`データベースに記録します。このフェーズでリストアに失敗した場合、チェックポイントリストアを再開する際に、ログリストアの`start-ts`と`restored-ts`を調整することはできません。
 
-初期復元中にログ復元フェーズに入ると、 `br`ターゲットクラスターに`__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを作成します。このデータベースには、チェックポイントデータ、アップストリームクラスターID、および復元時間範囲（ `start-ts`と`restored-ts` ）が記録されます。このフェーズで復元に失敗した場合は、再試行時にチェックポイントデータベースに記録されているのと同じ`start-ts`と`restored-ts`指定する必要があります。そうでない場合、 `br`エラーを報告し、現在指定されている復元時間範囲またはアップストリームクラスターIDがチェックポイントレコードと異なることを通知します。復元クラスターがクリーンアップされている場合は、 `__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを手動で削除し、別のバックアップで再試行できます。
+初期復元中にログ復元フェーズに入ると、 `br`ターゲットクラスターに`__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを作成します。このデータベースには、チェックポイントデータ、アップストリームクラスターID、および復元時間範囲（ `start-ts`と`restored-ts` ）が記録されます。このフェーズで復元に失敗した場合は、再試行時にチェックポイントデータベースに記録されているのと同じ`start-ts`と`restored-ts`を指定する必要があります。そうでない場合、 `br`エラーを報告し、現在指定されている復元時間範囲またはアップストリームクラスターIDがチェックポイントレコードと異なることを通知します。復元クラスターがクリーンアップされている場合は、 `__TiDB_BR_Temporary_Log_Restore_Checkpoint`データベースを手動で削除し、別のバックアップで再試行できます。
 
 初期リストア中のログリストアフェーズに入る前に、 `br` `restored-ts`時点における上流および下流のクラスタデータベースとテーブルIDのマッピングを構築することに注意してください。このマッピングは、データベースIDとテーブルIDの重複割り当てを防ぐため、システムテーブル`mysql.tidb_pitr_id_map`に保存されます。mysql.tidb_pitr_id_map**からデータを恣意的に削除すると`mysql.tidb_pitr_id_map` PITRリストアデータの不整合が発生する可能性があります。**
 
@@ -153,7 +153,7 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 初期リストアでは、 `br`スナップショットリストアフェーズに入ります。BRは、チェックポイントデータ、上流クラスタID、バックアップデータのBackupTS（つまり、ログリストアの開始時点`start-ts` ）、およびログリストアの復元時点`restored-ts` `restore-{downstream-cluster-ID}/snapshot`パスに記録します。このフェーズでリストアに失敗した場合、チェックポイントリストアを再開する際に、ログリストアの`start-ts`と`restored-ts`を調整することはできません。
 
-初期復元中にログ復元フェーズに入ると、 `br`​​指定された外部ストレージに`restore-{downstream-cluster-ID}/log`パスを作成します。このパスには、チェックポイント データ、アップストリーム クラスタ ID、および復元時間範囲 ( `start-ts`と`restored-ts` ) が記録されます。このフェーズで復元が失敗した場合は、再試行時にチェックポイント データベースに記録されているのと同じ`start-ts`と`restored-ts`指定する必要があります。そうでない場合、 `br`はエラーを報告し、現在指定されている復元時間範囲またはアップストリーム クラスタ ID がチェックポイント レコードと異なることを通知します。復元クラスタがクリーンアップされている場合は、外部ストレージ内のチェックポイント データを手動でクリーンアップするか、チェックポイント データを保存するための別の外部ストレージパスを指定して、別のバックアップで再試行できます。
+初期復元中にログ復元フェーズに入ると、 `br`​​指定された外部ストレージに`restore-{downstream-cluster-ID}/log`パスを作成します。このパスには、チェックポイント データ、アップストリーム クラスタ ID、および復元時間範囲 ( `start-ts`と`restored-ts` ) が記録されます。このフェーズで復元が失敗した場合は、再試行時にチェックポイント データベースに記録されているのと同じ`start-ts`と`restored-ts`を指定する必要があります。そうでない場合、 `br`はエラーを報告し、現在指定されている復元時間範囲またはアップストリーム クラスタ ID がチェックポイント レコードと異なることを通知します。復元クラスタがクリーンアップされている場合は、外部ストレージ内のチェックポイント データを手動でクリーンアップするか、チェックポイント データを保存するための別の外部ストレージパスを指定して、別のバックアップで再試行できます。
 
 初期リストア中のログリストアフェーズに入る前に、 `br` `restored-ts`時点における上流クラスタと下流クラスタのデータベースIDとテーブルIDのマッピングを構築することに注意してください。このマッピングは、データベースIDとテーブルIDの重複割り当てを防ぐため、ファイル名`pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`でチェックポイントストレージに保存されます。pitr_id_maps **`pitr_id_maps`からファイルを恣意的に削除すると、PITR リストアデータの不整合が発生する可能性があります。**
 

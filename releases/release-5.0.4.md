@@ -13,7 +13,7 @@ TiDB バージョン: 5.0.4
 
 -   TiDB
 
-    -   新規セッションで`SHOW VARIABLES`実行すると遅くなる問題を修正しました。この修正により、 で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326) [＃19341](https://github.com/pingcap/tidb/pull/19341)
+    -   新規セッションで`SHOW VARIABLES`を実行すると遅くなる問題を修正しました。この修正により、 で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326) [＃19341](https://github.com/pingcap/tidb/pull/19341)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[＃25873](https://github.com/pingcap/tidb/pull/25873)
 
     <!---->
@@ -148,7 +148,7 @@ TiDB バージョン: 5.0.4
 -   PD
 
     -   PDがダウンしたピアを時間内に修復しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   `replication.max-replicas`更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
+    -   `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
     -   TiKV をスケールアウトするときに PD がpanic可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
     -   複数のスケジューラが同時に実行されているときに発生するスケジュール競合の問題を修正[＃3807](https://github.com/tikv/pd/issues/3807)
     -   スケジューラが削除された後でも再び表示されることがある問題を修正[＃2572](https://github.com/tikv/pd/issues/2572)
@@ -158,7 +158,7 @@ TiDB バージョン: 5.0.4
     -   テーブルスキャンタスクの実行時に発生する可能性のあるpanic問題を修正しました
     -   MPPタスク実行時に発生する可能性のあるメモリリークの問題を修正
     -   TiFlashがDAQリクエストを処理する際に`duplicated region`エラーを発生させるバグを修正しました
-    -   集計関数`COUNT`または`COUNT DISTINCT`実行するときに予期しない結果が発生する問題を修正しました
+    -   集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
     -   MPPタスク実行時に発生する可能性のあるpanic問題を修正
     -   複数のディスクに展開されたときにTiFlash がデータを復元できない潜在的なバグを修正しました
     -   解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`

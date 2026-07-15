@@ -91,7 +91,7 @@ TiDB Ansible バージョン: 3.0.8
 ## PD {#pd}
 
 -   クライアント
-    -   `context`使用してクライアントを作成し、新しいクライアントを作成するときにタイムアウト期間を設定することをサポートします。 [＃1994](https://github.com/pingcap/pd/pull/1994)
+    -   `context`を使用してクライアントを作成し、新しいクライアントを作成するときにタイムアウト期間を設定することをサポートします。 [＃1994](https://github.com/pingcap/pd/pull/1994)
     -   `KeepAlive`接続作成をサポート [＃2035](https://github.com/pingcap/pd/pull/2035)
 -   `/api/v1/regions` API のパフォーマンスを最適化 [＃1986](https://github.com/pingcap/pd/pull/1986)
 -   `tombstone`状態でストアを削除するとpanicが発生する可能性がある問題を修正[＃2038](https://github.com/pingcap/pd/pull/2038)
