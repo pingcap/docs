@@ -1086,54 +1086,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
 
-<<<<<<< HEAD
-=======
-### tidb_analyze_column_options <span class="version-mark">New in v8.3.0</span>
-
-> **Note:**
->
-> - This variable only works when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`.
-> - If you upgrade your TiDB cluster from a version earlier than v8.3.0 to v8.3.0 or later, this variable is set to `ALL` by default to keep the original behavior.
-> - For a newly deployed TiDB cluster from v8.3.0 to v8.5.4, this variable is set to `PREDICATE` by default.
-> - For a newly deployed TiDB cluster from v8.5.5 and v9.0.0 onwards, this variable is set to `ALL` by default.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Enumeration
-- Default value: `ALL`
-- Value options:`ALL`, `PREDICATE`
-- This variable controls the behavior of the `ANALYZE TABLE` statement. Setting it to `PREDICATE` means only collecting statistics for [predicate columns](/statistics.md#collect-statistics-on-some-columns); setting it to `ALL` means collecting statistics for all columns. In scenarios where OLAP queries are used, it is recommended to set it to `ALL`, otherwise collecting statistics can result in a significant drop in query performance.
-
-### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
-
-> **Note:**
->
-> In versions earlier than v7.6.0, regular `ANALYZE` region scans are controlled by `tidb_distsql_scan_concurrency`, and index statistics scans are controlled by `tidb_index_serial_scan_concurrency`. Therefore, to adjust the concurrency of scanning TiKV Regions for these versions, consider changing the value of `tidb_distsql_scan_concurrency`.
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `4`
-- Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- This variable controls the following aspects of `ANALYZE` concurrency:
-    - The concurrency of scanning TiKV Regions.
-    - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
-
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 ### tidb_analyze_partition_concurrency
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
-<<<<<<< HEAD
-- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
-=======
-- Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
+- Range: `[1, 18446744073709551615]`
 - For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1177,7 +1137,7 @@ mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
-| json,blob,mediumblob,longblob,mediumtext,longtext        |
+| json,blob,mediumblob,longblob    |
 +----------------------------------+
 1 row in set (0.00 sec)
 
@@ -1255,12 +1215,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-<<<<<<< HEAD
-- This variable is used to set the concurrency of executing the automatic update of statistics.
-=======
-- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
-- Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
->>>>>>> 3d8180e56a (tidb: update tidb_index_serial_scan_concurrency docs (#21938))
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_backoff_lock_fast
 
@@ -3247,10 +3202,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
-> **Warning:**
->
-> This variable is deprecated and no longer controls execution behavior. The concurrency of sequential index scans is now controlled by [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -3258,7 +3209,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable remains only for backward compatibility. Use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to control the concurrency of sequential index scans, or [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
+- This variable is used to set the concurrency of the `serial scan` operation.
+- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
 
 ### tidb_init_chunk_size
 
