@@ -18,7 +18,7 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - Review the local file against the template before calling `gh`.
 3. Fill in the required sections with concrete information.
    - **What is changed, added or deleted? (Required)**: describe what changed and why in clear, specific language. Do not leave this blank or fill it with a generic placeholder.
-   - **Which TiDB version(s) do your changes apply to? (Required)**: check at least one version checkbox. Follow the affected-version rules in `.ai/shared/repo-conventions.md`:
+   - **Which TiDB version(s) do your changes apply to? (Required)**: check at least one version checkbox.
      - Default to `master` only for general improvements, wording fixes, missing-content additions, and corrections not tied to a specific released behavior.
      - Check the affected release branch(es) together with `master` when the change involves version-specific behavior, compatibility changes, changed defaults, or fixes in published docs.
    - **What is the related PR or file link(s)?**: fill in the translation source link under `This PR is translated from:` when the PR is a translation from `docs-cn`. Fill in other reference links such as product PRs, issues, or related doc PRs under `Other reference link(s):`.
@@ -26,7 +26,7 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - **Do your changes match any of the following descriptions?**: check all that apply. If the change needs different wording on another branch, check `Need modification after applied to another branch` and comment `/label version-specific-changes-required`.
 4. Choose the correct base branch.
    - Default to `master` for most documentation PRs.
-   - Use `release-8.5` for TiDB Cloud documentation changes (see `.ai/shared/repo-conventions.md` for TiDB Cloud conventions).
+   - Use `release-8.5` for TiDB Cloud documentation changes.
    - Use a specific `release-X.Y` branch when the change is scoped to a single published version and does not apply to `master`.
 5. For an existing PR, update only the mutable sections.
    - Safe targets: the description text under "What is changed, added or deleted?", the version checkboxes, the related-link fields, and the description checkboxes.
