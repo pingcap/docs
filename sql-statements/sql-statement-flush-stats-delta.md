@@ -89,7 +89,7 @@ Persist the statistics delta of a table in the current database and every table 
 FLUSH STATS_DELTA t, sales.*;
 ```
 
-Persist the statistics delta of all tables buffered on every TiDB instance in the cluster:
+Persist the statistics delta of all tables buffered on every TiDB node in the cluster:
 
 ```sql
 FLUSH STATS_DELTA *.* CLUSTER;
