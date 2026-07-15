@@ -307,7 +307,7 @@ dispatchers = [
 
 > **Note:**
 >
-> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。5 `partition` `dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
+> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。`partition` `dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
 >
 >     [sink]
 >     dispatchers = [

@@ -168,7 +168,7 @@ dispatchers = [
 | SMALLINT           | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | MEDIUMINT          | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | INT                | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
-| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。1 `avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
+| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。`avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
 | TINYBLOB           | BLOB              | bytes     |  -                                                                                                                         |
 | BLOB               | BLOB              | bytes     |  -                                                                                                                         |
 | MEDIUMBLOB         | BLOB              | bytes     |  -                                                                                                                         |

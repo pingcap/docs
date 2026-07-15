@@ -61,7 +61,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 -   `--pitr-concurrency` : ログ復元中の同時タスクの数。
 -   `--tikv-max-restore-concurrency` : スナップショット復元中の TiKV ノードあたりの同時タスクの最大数。
 -   `--compression` : バックアップファイルの生成に使用する圧縮アルゴリズムを決定します。2、4、6 `lz4`サポートし、デフォルトは`zstd`です（通常は変更する必要`zstd`ありません）。異なる圧縮アルゴリズムの選択に関するガイダンスについては、 [この文書](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md)を`snappy`してください。
--   `--compression-level` : バックアップに選択した圧縮アルゴリズムに対応する圧縮レベルを設定します。2 `zstd`のデフォルトの圧縮レベルは 3 です。ほとんどの場合、このオプションを設定する必要はありません。
+-   `--compression-level` : バックアップに選択した圧縮アルゴリズムに対応する圧縮レベルを設定します。`zstd`のデフォルトの圧縮レベルは 3 です。ほとんどの場合、このオプションを設定する必要はありません。
 
 ## フルバックアップのコマンド {#commands-of-full-backup}
 

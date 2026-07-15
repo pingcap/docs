@@ -157,7 +157,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 -   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
 -   `description` :*文字列*。データ概要の説明。
--   `reuse` :*ブール値*。既存のデータサマリーを再利用するかどうかを指定します`true`に設定すると、APIは既存のデータサマリーを再利用します。6 `false`設定すると、APIは新しいデータサマリーを生成します。
+-   `reuse` :*ブール値*。既存のデータサマリーを再利用するかどうかを指定します`true`に設定すると、APIは既存のデータサマリーを再利用します。`false`設定すると、APIは新しいデータサマリーを生成します。
 
 応答の例は次のとおりです。
 
@@ -288,7 +288,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }
 ```
 
-`/v3/chat2data` APIは非同期です。3 `/v2/jobs/{job_id}`ポイントを呼び出すことでジョブのステータスを確認できます。
+`/v3/chat2data` APIは非同期です。`/v2/jobs/{job_id}`ポイントを呼び出すことでジョブのステータスを確認できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/jobs/{job_id}'\

@@ -189,7 +189,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
             user_name    = "example_user"
         }
 
-`builtin_role` `role_readonly`に変更されます。5 `password`センシティブな値であるため表示されません。
+`builtin_role` `role_readonly`に変更されます。`password`センシティブな値であるため表示されません。
 
 ## SQLユーザーをインポートする {#import-a-sql-user}
 

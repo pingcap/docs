@@ -36,7 +36,7 @@ image_embed = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-vector-field}
 
-`VectorField()`画像の埋め込みを格納するためのベクトルフィールドを定義します。3 `source_field`画像のURLを格納するフィールドを指定するためのパラメータです。
+`VectorField()`画像の埋め込みを格納するためのベクトルフィールドを定義します。`source_field`画像のURLを格納するフィールドを指定するためのパラメータです。
 
 ```python
 from pytidb.schema import TableModel, Field

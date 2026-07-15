@@ -161,7 +161,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
 上の図では、プロトコルレイヤーの右側に TiDBサーバーのオプティマイザーがあり、次のように SQL ステートメントを処理します。
 
 1.  SQL ステートメントはプロトコルレイヤーを介して SQL オプティマイザーに到達し、抽象構文ツリー (AST) に解析されます。
-2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。1文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。7 `Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
+2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。1文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。`Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
 3.  クエリが`Point Get`でない場合、AST は論理変換され、TiDB は特定のルールに基づいて SQL を論理的に書き換えます。
 4.  論理変換後、TiDB はコストベースの最適化を通じて AST を処理します。
 5.  コストベースの最適化では、オプティマイザーは統計を使用して適切な演算子を選択し、物理的な実行プランを生成します。
@@ -343,7 +343,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 `EXPLAIN ANALYZE`出力には以下が含まれます。
 
 -   `actRows` : 演算子によって出力される行数。
--   `execution info` : オペレータの詳細な実行情報。2 `time` 、すべてのサブオペレータの合計実行時間を含む合計`wall time`表します。オペレータが親オペレータによって何度も呼び出される場合、時間は累積時間を参照します。
+-   `execution info` : オペレータの詳細な実行情報。`time` 、すべてのサブオペレータの合計実行時間を含む合計`wall time`表します。オペレータが親オペレータによって何度も呼び出される場合、時間は累積時間を参照します。
 -   `memory` : 演算子によって使用されるメモリ。
 -   `disk` : オペレータが使用するディスク容量。
 
@@ -418,7 +418,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 次の例では、プランツリーの最初のリーフノードである`IndexRangeScan_47`調べることから始めます。オプティマイザは、 `stars`テーブルから`name`と`id`列のみを選択します。これらの列は`name(name)`インデックスから取得できます。その結果、 `stars`のルートリーダーは`IndexReader_48`ではなく`TableReader`なります。
 
-`stars`と`planets`の結合はハッシュ結合です（ `HashJoin_44` ）。7 `planets`テーブルはフルテーブルスキャン（ `TableFullScan_45` ）を使用してアクセスされます。結合後、 `TopN_26`と`TopN_19`それぞれ`ORDER BY`と`LIMIT`句を適用します。最後の演算子`Projection_16` 、最後の列`t5.name`選択します。
+`stars`と`planets`の結合はハッシュ結合です（ `HashJoin_44` ）。`planets`テーブルはフルテーブルスキャン（ `TableFullScan_45` ）を使用してアクセスされます。結合後、 `TopN_26`と`TopN_19`それぞれ`ORDER BY`と`LIMIT`句を適用します。最後の演算子`Projection_16` 、最後の列`t5.name`選択します。
 
 ```sql
 EXPLAIN 
@@ -481,7 +481,7 @@ LIMIT 3;
     -   推定精度を評価するには、 `actRows`と`estRows`を比較します。
     -   実行時間の長さやその他のメトリックなど、 `execution info`の詳細なメトリックを分析します。
     -   潜在的なリソース制約について、 `memory`と`disk`使用状況を確認します。
-3.  これらの要因を相関させることで、パフォーマンス問題の根本原因を特定できます。例えば、 `TableFullScan`操作で`actRows`カウントが高く、 `execution info`で実行時間が長い場合は、インデックスの作成を検討してください。7 `HashJoin`操作でメモリ使用量と実行時間が高い場合は、結合順序を最適化するか、別の結合方法を使用することを検討してください。
+3.  これらの要因を相関させることで、パフォーマンス問題の根本原因を特定できます。例えば、 `TableFullScan`操作で`actRows`カウントが高く、 `execution info`で実行時間が長い場合は、インデックスの作成を検討してください。`HashJoin`操作でメモリ使用量と実行時間が高い場合は、結合順序を最適化するか、別の結合方法を使用することを検討してください。
 
 以下の実行プランでは、クエリは5分51秒間実行された後、キャンセルされます。主な問題点は次のとおりです。
 

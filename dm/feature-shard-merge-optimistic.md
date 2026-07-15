@@ -21,7 +21,7 @@ DMは、シャーディングDDLと呼ばれるシャーディングテーブル
 
 ## 楽観的モードのコンフィグレーション {#configuration-of-the-optimistic-mode}
 
-楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。5 `strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
+楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。`strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
 
 ## 制限 {#restrictions}
 
@@ -48,7 +48,7 @@ DMは、シャーディングDDLと呼ばれるシャーディングテーブル
 -   デフォルト値のない`NOT NULL`列を追加します: `ALTER TABLE table_name ADD COLUMN column_1 NOT NULL;` 。
 -   インデックスの名前を変更します: `ALTER TABLE table_name RENAME INDEX index_1 TO index_2;` 。
 
-シャードテーブルが上記のDDL文を実行する際、 `strict-optimistic-shard-mode: true`設定されている場合はタスクが直接中断され、エラーが報告されます。3 `strict-optimistic-shard-mode: false`設定されている場合、または指定されていない場合は、シャードテーブル内のDDL文の実行順序が異なるため、移行が中断されます。例：
+シャードテーブルが上記のDDL文を実行する際、 `strict-optimistic-shard-mode: true`設定されている場合はタスクが直接中断され、エラーが報告されます。`strict-optimistic-shard-mode: false`設定されている場合、または指定されていない場合は、シャードテーブル内のDDL文の実行順序が異なるため、移行が中断されます。例：
 
 -   シャード 1 は列の名前を変更し、列の種類を変更します。
     1.  列の名前を変更します: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;` .

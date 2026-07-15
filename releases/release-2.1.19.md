@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 2.1.19
     -   `select max(_tidb_rowid) from t`のシナリオを最適化して、テーブル全体のスキャンを回避する[＃13294](https://github.com/pingcap/tidb/pull/13294)
     -   クエリ内のユーザー変数に割り当てられた誤った値と述語のプッシュダウンによって発生する誤った結果を修正しました[＃13230](https://github.com/pingcap/tidb/pull/13230)
     -   統計情報の更新時にデータ競合が発生し、統計情報が正確でない問題を修正しました[＃13690](https://github.com/pingcap/tidb/pull/13690)
-    -   `UPDATE`ステートメントにサブクエリとストアされた生成列の両方が含まれている場合に結果が正しくない問題を修正しました。3 `UPDATE`ステートメントに異なるデータベースの同じ名前のテーブルが 2 つ含まれている場合にステートメント実行エラーが発生する問題を修正しました[＃13357](https://github.com/pingcap/tidb/pull/13357)
+    -   `UPDATE`ステートメントにサブクエリとストアされた生成列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`ステートメントに異なるデータベースの同じ名前のテーブルが 2 つ含まれている場合にステートメント実行エラーが発生する問題を修正しました[＃13357](https://github.com/pingcap/tidb/pull/13357)
     -   `PhysicalUnionScan`演算子が統計誤って設定するため、クエリ プランが誤って選択される可能性がある問題を修正しました。 [＃14134](https://github.com/pingcap/tidb/pull/14134)
     -   `minAutoAnalyzeRatio`制約を取り除き、自動`ANALYZE`をよりタイムリーにする [＃14013](https://github.com/pingcap/tidb/pull/14013)
     -   `WHERE`句に一意キー等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。 [＃13385](https://github.com/pingcap/tidb/pull/13385)

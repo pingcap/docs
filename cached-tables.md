@@ -234,7 +234,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## TiDB移行ツールとの互換性 {#compatibility-with-tidb-migration-tools}
 
-キャッシュテーブルは、MySQL構文に対するTiDBの拡張です。1 `ALTER TABLE ... CACHE`を認識できるのはTiDBのみです。TiDB移行ツール（Backup &amp; Restore (BR)、TiCDC、 Dumplingなど）は、キャッシュテーブルをサポートし**ていません**。これらのツールは、キャッシュテーブルを通常のテーブルとして扱います。
+キャッシュテーブルは、MySQL構文に対するTiDBの拡張です。`ALTER TABLE ... CACHE`を認識できるのはTiDBのみです。TiDB移行ツール（Backup &amp; Restore (BR)、TiCDC、 Dumplingなど）は、キャッシュテーブルをサポートし**ていません**。これらのツールは、キャッシュテーブルを通常のテーブルとして扱います。
 
 つまり、キャッシュテーブルはバックアップとリストアが行われると、通常のテーブルになります。下流クラスターが別のTiDBクラスターであり、キャッシュテーブル機能を引き続き使用したい場合は、下流クラスターで`ALTER TABLE ... CACHE`実行することで、キャッシュテーブルを手動で有効化できます。
 

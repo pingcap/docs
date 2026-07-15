@@ -37,10 +37,10 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## コプロセッサー {#coprocessor}
 
--   要求 QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ要求の数。1 `batch`バッチ要求の数です。3 `batch_cop`バッチ要求内のコプロセッサ要求の数です。5 `cop`コプロセッサ インターフェイスを介して直接送信されたコプロセッサ要求の数です。7 `cop_dag`すべてのコプロセッサ要求内の DAG 要求の数です。9 `super_batch`スーパー バッチ機能を有効にするための要求の数です。
--   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。1 `table_scan`テーブル スキャン Executor です。3 は選択 Executor です`selection` `aggregation`集約 Executor です`top_n`は`TopN` Executor です`limit`制限 Executor です。
+-   要求 QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ要求の数。`batch`バッチ要求の数です。`batch_cop`バッチ要求内のコプロセッサ要求の数です。`cop`コプロセッサ インターフェイスを介して直接送信されたコプロセッサ要求の数です。`cop_dag`すべてのコプロセッサ要求内の DAG 要求の数です。`super_batch`スーパー バッチ機能を有効にするための要求の数です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`テーブル スキャン Executor です。3 は選択 Executor です`selection` `aggregation`集約 Executor です`top_n`は`TopN` Executor です`limit`制限 Executor です。
 -   リクエスト期間: コプロセッサリクエストを処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサリクエストを受信してからリクエストへの応答が完了するまでの期間です。
--   エラー QPS: コプロセッサ要求を処理するすべてのTiFlashインスタンスのエラー数。1 `meet_lock`読み取りデータがロックされていることを意味します。3 `region_not_found`リージョンが存在しないことを意味します。5 `epoch_not_match`読み取りリージョンエポックがローカル エポックと一致していないことを意味します。7 `kv_client_error` TiKV との通信でエラーが返されたことを意味します`internal_error`はTiFlashの内部システム エラーです。11 `other`その他のタイプのエラーです。
+-   エラー QPS: コプロセッサ要求を処理するすべてのTiFlashインスタンスのエラー数。`meet_lock`読み取りデータがロックされていることを意味します。`region_not_found`リージョンが存在しないことを意味します。`epoch_not_match`読み取りリージョンエポックがローカル エポックと一致していないことを意味します。`kv_client_error` TiKV との通信でエラーが返されたことを意味します`internal_error`はTiFlashの内部システム エラーです。11 `other`その他のタイプのエラーです。
 -   リクエスト処理期間：すべてのTiFlashインスタンスがコプロセッサリクエストを処理する期間。処理時間は、コプロセッサリクエストの実行開始から完了までです。
 -   応答バイト/秒: すべてのTiFlashインスタンスからの応答の合計バイト数。
 -   Cop タスクのメモリ使用量: コプロセッサ要求を処理するすべてのTiFlashインスタンスの合計メモリ使用量。
@@ -69,7 +69,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 ## ストレージ {#storage}
 
 -   書き込みコマンド OPS: すべてのTiFlashインスタンスのストレージレイヤーで 1 秒あたりに受信される書き込み要求の数。
--   書き込み増幅: 各TiFlashインスタンスの書き込み増幅 (実際のディスク書き込みバイト数を論理データの書き込みバイト数で割った値)。1 `total`この開始以降の書き込み増幅で、 `5min`過去 5 分間の書き込み増幅です。
+-   書き込み増幅: 各TiFlashインスタンスの書き込み増幅 (実際のディスク書き込みバイト数を論理データの書き込みバイト数で割った値)。`total`この開始以降の書き込み増幅で、 `5min`過去 5 分間の書き込み増幅です。
 -   読み取りタスク OPS: TiFlashインスタンスごとのストレージレイヤーでの 1 秒あたりの読み取りタスクの数。
 -   粗セット フィルタ レート: ストレージストレージの粗セットレイヤーによってフィルタされた、過去 1 分間に各TiFlashインスタンスによって読み取られたパケット数の割合。
 -   内部タスク OPS: すべてのTiFlashインスタンスが 1 秒あたりに内部データ ソート タスクを実行する回数。

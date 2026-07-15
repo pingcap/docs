@@ -548,7 +548,7 @@ tiup cluster audit 4BLhr0
 
 ## TiDB クラスター内のホストでコマンドを実行する {#run-commands-on-a-host-in-the-tidb-cluster}
 
-TiDBクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。3 `exec`のコマンドの使用方法は次のとおりです。
+TiDBクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。`exec`のコマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:

@@ -152,7 +152,7 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 
 | フィールド名                   | 型    | 説明                                                                                                                               |
 | :------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------- |
-| payload.op             | String | 変更イベントのタイプ。1 `"c"` `INSERT`イベント、 `"u"` `UPDATE`イベント、 `"d"` `DELETE`イベントを示します。                                                    |
+| payload.op             | String | 変更イベントのタイプ。`"c"` `INSERT`イベント、 `"u"` `UPDATE`イベント、 `"d"` `DELETE`イベントを示します。                                                    |
 | payload.ts_ms          | number     | TiCDC がこのメッセージを生成したときのタイムスタンプ (ミリ秒単位)。                                                                                           |
 | payload.before         | JSON   | ステートメントの変更イベント前のデータ値。イベントが`"c"`場合、フィールド`before`の値は`null`なります。                                                                    |
 | payload.after               | JSON   | The data value after the change event of a statement. For `"d"` events, the value of the `after` field is `null`.                |

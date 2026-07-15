@@ -132,7 +132,7 @@ SELECT @@tidb_last_txn_info;
 
 ### パイプライン DML を使用してクエリが実行されなかったのはなぜですか? {#why-wasn-t-my-query-executed-using-pipelined-dml}
 
-TiDBがパイプラインDMLを使用したステートメントの実行を拒否した場合、それに応じた警告メッセージが生成されます。1 `SHOW WARNINGS;`実行すると警告の内容を確認し、原因を特定できます。
+TiDBがパイプラインDMLを使用したステートメントの実行を拒否した場合、それに応じた警告メッセージが生成されます。`SHOW WARNINGS;`実行すると警告の内容を確認し、原因を特定できます。
 
 一般的な理由:
 

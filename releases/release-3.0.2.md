@@ -44,7 +44,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `DATE_ADD`と`DATE_SUB`関数の結果が超える場合に`NULL`返されない場合がある問題を修正しました。 [＃11476](https://github.com/pingcap/tidb/pull/11476)
     -   長い文字列を整数に変換するときに、文字列に無効な文字が含まれているとMySQLの変換結果と異なる問題を修正しました。 [＃11469](https://github.com/pingcap/tidb/pull/11469)
     -   この関数大文字と小文字の区別により、関数`REGEXP BINARY`の結果がMySQLと互換性がない問題を修正しました。 [＃11504](https://github.com/pingcap/tidb/pull/11504)
-    -   `GRANT ROLE`文が`CURRENT_ROLE`受け取ったときにエラーが報告される問題を修正します。5 `REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [＃11356](https://github.com/pingcap/tidb/pull/11356)
+    -   `GRANT ROLE`文が`CURRENT_ROLE`受け取ったときにエラーが報告される問題を修正します。`REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [＃11356](https://github.com/pingcap/tidb/pull/11356)
     -   `SELECT ADDDATE('2008-01-34', -1)` のような文を実行する際の`Incorrect datetime value`警告情報の表示形式の問題を修正しました [＃11447](https://github.com/pingcap/tidb/pull/11447)
     -   JSONデータの浮動小数点フィールドを整数に変換するときに結果がオーバーフローすると、エラーメッセージが`constant … overflows bigint`ではなく`constant … overflows float`報告する問題を修正しました。 [＃11534](https://github.com/pingcap/tidb/pull/11534)
     -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列のパラメータを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[＃11527](https://github.com/pingcap/tidb/pull/11527)

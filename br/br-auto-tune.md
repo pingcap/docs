@@ -69,7 +69,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
     -   自動調整により、 `backup.auto-tune-refresh-interval`分ごとに統計が更新され、バックアップ タスクで使用できる CPU コアの最大数が再計算されます。
     -   デフォルト値: `1m`
 
-以下は、自動チューニングの動作例です。1 `*`バックアップ タスクで使用される CPU コアを示します。3 `^`他のタスクで使用される CPU コアを示します。5 `-` 、アイドル状態の CPU コアを示します。
+以下は、自動チューニングの動作例です。`*`バックアップ タスクで使用される CPU コアを示します。`^`他のタスクで使用される CPU コアを示します。`-` 、アイドル状態の CPU コアを示します。
 
     |--------| The server has 8 logical CPU cores.
     |****----| By default, `backup.num-threads` is `4`. Note that auto-tune makes sure that the thread pool size is never larger than `backup.num-threads`.

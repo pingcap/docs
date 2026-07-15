@@ -177,7 +177,7 @@ TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理
 ALTER TABLE t AUTO_RANDOM_BASE=0;
 ```
 
-このステートメントは適切な基数を自動的に決定します。1 `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`ような警告メッセージが表示されますが、基数は変更さ**れる**ため、この警告は無視しても問題ありません。
+このステートメントは適切な基数を自動的に決定します。`Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`ような警告メッセージが表示されますが、基数は変更さ**れる**ため、この警告は無視しても問題ありません。
 
 > **Note:**
 >

@@ -19,7 +19,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### インストールパッケージをダウンロードする {#download-the-installation-package}
 
-最新バージョンの`pd-ctl`入手するには、TiDBサーバーインストール パッケージをダウンロードします。3 `pd-ctl` `ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
+最新バージョンの`pd-ctl`入手するには、TiDBサーバーインストール パッケージをダウンロードします。`pd-ctl` `ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
 
 | インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256チェックサム                                                                             |
 | :----------------------------------------------------------------------------------------- | :---- | :------ | :--------------------------------------------------------------------------------------- |
@@ -186,13 +186,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`リージョンマージのサイズ上限を制御します（単位は MiB）。2 `regionSize`指定値を超える場合、PD は隣接するリージョンとマージしません。0 に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`リージョンマージのサイズ上限を制御します（単位は MiB）。`regionSize`指定値を超える場合、PD は隣接するリージョンとマージしません。0 に設定すると、リージョンマージが無効になります。
 
     ```bash
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
--   `max-merge-region-keys`リージョンマージのキー数の上限を制御します。2 `regionKeyCount`指定された値を超える場合、PD は隣接するリージョンとマージしません。
+-   `max-merge-region-keys`リージョンマージのキー数の上限を制御します。`regionKeyCount`指定された値を超える場合、PD は隣接するリージョンとマージしません。
 
     ```bash
     config set max-merge-region-keys 50000 // Set the upper limit on keyCount to 50000
@@ -204,13 +204,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge` 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。2 `false`設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
+-   `enable-one-way-merge` 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
     ```
 
--   `enable-cross-table-merge` 、テーブル間のリージョンのマージを有効にするために使用されます。2 `false`設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが「テーブル」の場合にのみ機能します。
+-   `enable-cross-table-merge` 、テーブル間のリージョンのマージを有効にするために使用されます。`false`設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが「テーブル」の場合にのみ機能します。
 
     ```bash
     config set enable-cross-table-merge true  // Enable cross table merge.
@@ -219,7 +219,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `key-type` 、クラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
     -   クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
-    -   クラスター内にTiDBインスタンスが存在する場合、 `key-type` 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。5 `key-type` 「raw」の場合、配置ルールは機能しません。
+    -   クラスター内にTiDBインスタンスが存在する場合、 `key-type` 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type` 「raw」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
@@ -321,7 +321,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `enable-remove-down-replica`は`false`ダウンタイムレプリカの自動削除機能を有効にするために使用されます。2 に設定すると、PDはダウンタイムレプリカを自動的にクリーンアップしません。
 
--   `enable-replace-offline-replica`は、OfflineReplica の移行機能を有効にするために使用されます。2 `false`設定すると、PD はオフラインレプリカを移行しません。
+-   `enable-replace-offline-replica`は、OfflineReplica の移行機能を有効にするために使用されます。`false`設定すると、PD はオフラインレプリカを移行しません。
 
 -   `enable-make-up-replica`はレプリカ作成機能を有効にするために使用されます。 `false`に設定すると、PDはレプリカが不足しているリージョンに対してレプリカを追加しません。
 
@@ -333,7 +333,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `enable-placement-rules`は配置ルールを有効にするために使用され、v5.0 以降のバージョンではデフォルトで有効になっています。
 
--   `store-limit-mode`はストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。6 `auto`では、ストアは負荷に応じて自動的にバランス調整されます（非推奨）。
+-   `store-limit-mode`はストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。`auto`では、ストアは負荷に応じて自動的にバランス調整されます（非推奨）。
 
 -   `store-limit-version`ストア制限の計算式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更することで、単一の TiKV のスケジュール速度を制限できます。v2 モードでは、PD が TiKV スナップショットの機能に基づいて 4 の値を動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
@@ -1101,7 +1101,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
     ```
 
--   `src-tolerance-ratio`と`dst-tolerance-ratio`期待値スケジューラの設定項目です。4 `tolerance-ratio`小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
+-   `src-tolerance-ratio`と`dst-tolerance-ratio`期待値スケジューラの設定項目です。`tolerance-ratio`小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
 
     ```bash
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1

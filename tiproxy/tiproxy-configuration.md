@@ -65,20 +65,20 @@ SQL ポートのコンフィグレーション。
 -   デフォルト値: `15`
 -   ホットリロードのサポート: はい
 -   単位: 秒
--   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。3 `graceful-close-conn-timeout` `graceful-wait-before-shutdown`後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
+-   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。`graceful-close-conn-timeout` `graceful-wait-before-shutdown`後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
 
 #### `max-connections` {#max-connections}
 
 -   デフォルト値: `0`
 -   ホットリロードのサポート: はい
--   各 TiProxy インスタンスは最大`max-connections`接続を受け入れることができます。3 `0`制限がないことを意味します。
+-   各 TiProxy インスタンスは最大`max-connections`接続を受け入れることができます。`0`制限がないことを意味します。
 
 #### `conn-buffer-size` {#conn-buffer-size}
 
 -   デフォルト値: `32768`
 -   ホットリロードのサポート: はい、ただし新規接続のみ
 -   範囲: `[1024, 16777216]`
--   この設定項目では、接続バッファのサイズを指定できます。各接続は、読み取りバッファと書き込みバッファをそれぞれ1つずつ使用します。これはメモリとパフォーマンスのトレードオフです。バッファサイズを大きくするとパフォーマンスは向上しますが、メモリ消費量も増加します。1 `0`設定すると、TiProxy はデフォルトのバッファサイズを使用します。
+-   この設定項目では、接続バッファのサイズを指定できます。各接続は、読み取りバッファと書き込みバッファをそれぞれ1つずつ使用します。これはメモリとパフォーマンスのトレードオフです。バッファサイズを大きくするとパフォーマンスは向上しますが、メモリ消費量も増加します。`0`設定すると、TiProxy はデフォルトのバッファサイズを使用します。
 
 #### `pd-addrs` {#pd-addrs}
 
@@ -91,7 +91,7 @@ SQL ポートのコンフィグレーション。
 -   デフォルト値: `""`
 -   ホットリロードのサポート: はい、ただし新規接続のみ
 -   可能な`"v2"` : `""`
--   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。3 `"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。`"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
 
 ### API {#api}
 
@@ -101,14 +101,14 @@ HTTP ゲートウェイの構成。
 
 -   デフォルト値: `0.0.0.0:3080`
 -   ホットリロードのサポート: いいえ
--   APIゲートウェイアドレス。1 `ip:port`指定できます。
+-   APIゲートウェイアドレス。`ip:port`指定できます。
 
 #### `proxy-protocol` {#proxy-protocol}
 
 -   デフォルト値: `""`
 -   ホットリロードのサポート: いいえ
 -   可能な`"v2"` : `""`
--   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。3 `"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。`"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
 
 ### バランス {#balance}
 

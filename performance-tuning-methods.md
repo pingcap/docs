@@ -254,7 +254,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
     -   `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
     -   `TiDB -> TiKV: internal` : 内部トランザクションが TiDB から TiKV に書き込まれる速度
     -   `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
-    -   `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。2 `RocksDB Compaction` `TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
+    -   `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction` `TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
 
         ```toml
         [rocksdb.titan]
@@ -331,7 +331,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 -   アプリケーションサーバーからデータベースへのネットワークレイテンシーが高い。例えば、パブリッククラウド環境では、アプリケーションとTiDBクラスタが同じリージョンに存在しない、またはDNSワークロードバランサとTiDBクラスタが同じリージョンに存在しない場合、ネットワークレイテンシーが高くなります。
 -   ボトルネックとなっているのはクライアントアプリケーションです。アプリケーションサーバーのCPUコアとNumaリソースを最大限に活用できていません。例えば、TiDBへの数千ものJDBC接続を確立するのに、たった1つのJVMしか使用されていません。
 
-「接続数」パネルでは、総接続数と各TiDBノードの接続数を確認できます。これにより、総接続数が正常かどうか、また各TiDBノードの接続数が不均衡かどうかを確認できます。1 `active connections`アクティブな接続数を示し、これは1秒あたりのデータベース時間に相当します。右側のY軸（ `disconnection/s` ）は、クラスター内の1秒あたりの切断数を示しており、アプリケーションが短い接続を使用しているかどうかを判断するのに役立ちます。
+「接続数」パネルでは、総接続数と各TiDBノードの接続数を確認できます。これにより、総接続数が正常かどうか、また各TiDBノードの接続数が不均衡かどうかを確認できます。`active connections`アクティブな接続数を示し、これは1秒あたりのデータベース時間に相当します。右側のY軸（ `disconnection/s` ）は、クラスター内の1秒あたりの切断数を示しており、アプリケーションが短い接続を使用しているかどうかを判断するのに役立ちます。
 
 **例1: 切断回数が多すぎる**
 
@@ -341,7 +341,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
 
 -   すべての SQL ステートメントの平均レイテンシーと P99レイテンシーは、それぞれ 10.8 ミリ秒と 84.1 ミリ秒です。
 -   トランザクション`avg-in-txn`の平均接続アイドル時間は 9.4 ミリ秒です。
--   クラスタへの総接続数は3,700で、各TiDBノードへの接続数は1,800です。アクティブ接続の平均数は40.3で、ほとんどの接続がアイドル状態であることを示しています。1 `disconnection/s`平均数は55.8で、アプリケーションが頻繁に接続と切断を繰り返していることを示しています。短い接続の動作は、TiDBのリソースと応答時間に一定の影響を与えます。
+-   クラスタへの総接続数は3,700で、各TiDBノードへの接続数は1,800です。アクティブ接続の平均数は40.3で、ほとんどの接続がアイドル状態であることを示しています。`disconnection/s`平均数は55.8で、アプリケーションが頻繁に接続と切断を繰り返していることを示しています。短い接続の動作は、TiDBのリソースと応答時間に一定の影響を与えます。
 
 **例2: TiDBがユーザー応答時間のボトルネックとなっている**
 
@@ -492,7 +492,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 `Commit Log Duration` `Apply Log Duration` 、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これら`Append Log Duration`レイテンシは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
 
--   `Commit Log Duration`と`Append Log Duration` 、 `Store`スレッドで実行された操作時間を記録します。6 `Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。8 `Commit Log Duration`は通常、リーダー用とフォロワー用の 2 つの`Append Log Duration`操作が含まれます。12 は、通常、 `Append Log Duration`よりも大幅に大きくなります。 `Commit Log Duration` 、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
+-   `Commit Log Duration`と`Append Log Duration` 、 `Store`スレッドで実行された操作時間を記録します。`Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。`Commit Log Duration`は通常、リーダー用とフォロワー用の 2 つの`Append Log Duration`操作が含まれます。12 は、通常、 `Append Log Duration`よりも大幅に大きくなります。 `Commit Log Duration` 、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
 -   `Apply Log Duration` `Apply`スレッドによる`apply` Raftログのレイテンシーを記録します。
 
 `Commit Log Duration`が長い場合の一般的なシナリオ:

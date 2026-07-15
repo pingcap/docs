@@ -108,7 +108,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 -   `id` : ノードのキャプチャ ID。
 -   `pid` : ノードのキャプチャプロセス ID (PID)。
 -   `is_owner` : ノードが所有者であるかどうかを示します。
--   `liveness` : このノードがライブかどうか。2 `0`正常を意味します。4 `1`ノードが`graceful shutdown`状態にあることを意味します。
+-   `liveness` : このノードがライブかどうか。`0`正常を意味します。`1`ノードが`graceful shutdown`状態にあることを意味します。
 
 ## TiCDC クラスターのヘルスステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
@@ -250,15 +250,15 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `case_sensitive`          | `BOOLEAN`型。テーブル名をフィルタリングする際に大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0以降では、デフォルト値が`true`から`false`に変更されます。（オプション）                                                 |
 | `check_gc_safe_point`     | `BOOLEAN`型。レプリケーションタスクの開始時刻がGC時刻よりも前であるかどうかを確認するかどうかを指定します。デフォルト値は`true`です。（オプション）                                                                                |
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
-| `enable_sync_point`       | `BOOLEAN`型。2 `sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
+| `enable_sync_point`       | `BOOLEAN`型。`sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
 | `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
 | `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
 | `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
 | `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |
 | `sink`                    | `sink`の設定パラメータ。(オプション)                                                                                                                                            |
-| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
-| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
+| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
+| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
 
 `consistent`パラメータは次のように記述されます。
 
@@ -357,7 +357,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `worker_count`            | `INT`型。下流のクラウドストレージへのデータストレージの同時実行性が変更されます。                                                                                                   |
 | `flush_interval`          | `STRING`型。下流のクラウドストレージへのデータ保存間隔が変更されます。                                                                                                       |
 | `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
-| `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。2 `date-separator` `day`に設定されている場合にのみ有効になります。                                                                              |
+| `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。`date-separator` `day`に設定されている場合にのみ有効になります。                                                                              |
 | `file_cleanup_cron_spec`  | `STRING`型。crontab 設定と互換性のある、スケジュールされたクリーンアップタスクの実行サイクル。形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
 | `flush_concurrency`       | `INT`型。単一ファイルのアップロードの同時実行性。                                                                                                                     |
 | `output_raw_change_event` | `BOOLEAN`タイプ。MySQL 以外のシンクの元のデータ変更イベントを出力するかどうかを制御します。                                                                                           |
@@ -803,7 +803,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 応答には次のフィールドが含まれます。
 
--   `synced` : このレプリケーションタスクが完了したかどうか。2 `true`タスクが完了したこと、 `false`タスクが完了していない可能性があることを意味します。6 `false`場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
+-   `synced` : このレプリケーションタスクが完了したかどうか。`true`タスクが完了したこと、 `false`タスクが完了していない可能性があることを意味します。`false`場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
 -   `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
 -   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
 -   `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
