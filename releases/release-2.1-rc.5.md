@@ -13,13 +13,13 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
 
 -   SQLオプティマイザー
     -   `IndexReader`場合によっては間違ったハンドルを読み取る問題を修正[＃8132](https://github.com/pingcap/tidb/pull/8132)
-    -   `IndexScan Prepared`文で`Plan Cache` [＃8055](https://github.com/pingcap/tidb/pull/8055)を使用しているときに発生する問題を修正
+    -   `IndexScan Prepared`文で`Plan Cache` を使用しているときに発生する問題を修正 [＃8055](https://github.com/pingcap/tidb/pull/8055)
     -   `Union`文の結果が不安定になる問題を修正[＃8165](https://github.com/pingcap/tidb/pull/8165)
 -   SQL実行エンジン
-    -   ワイドテーブル[＃8024](https://github.com/pingcap/tidb/pull/8024)挿入または更新におけるTiDBのパフォーマンスを向上
+    -   ワイドテーブル挿入または更新におけるTiDBのパフォーマンスを向上 [＃8024](https://github.com/pingcap/tidb/pull/8024)
     -   組み込み関数`Truncate`のunsigned `int`フラグをサポートする[＃8068](https://github.com/pingcap/tidb/pull/8068)
-    -   JSONデータを[＃8109](https://github.com/pingcap/tidb/pull/8109)進数型に変換する際に発生したエラーを修正しました
-    -   `Update` float型[＃8170](https://github.com/pingcap/tidb/pull/8170)で発生したエラーを修正
+    -   JSONデータを数値型に変換する際に発生したエラーを修正しました [＃8109](https://github.com/pingcap/tidb/pull/8109)
+    -   `Update` float型で発生したエラーを修正 [＃8170](https://github.com/pingcap/tidb/pull/8170)
 -   統計
     -   ポイントクエリ中に一部のケースで統計情報が正しく表示されない問題を修正[＃8035](https://github.com/pingcap/tidb/pull/8035)
     -   いくつかのケースにおける主キーの統計の選択性推定を修正[＃8149](https://github.com/pingcap/tidb/pull/8149)
@@ -32,17 +32,17 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
 
     <!---->
 
-    -   `infoschema.profiling` [＃8096](https://github.com/pingcap/tidb/pull/8096)のテーブルデータを取得する際に発生したエラーを修正
+    -   `infoschema.profiling` のテーブルデータを取得する際に発生したエラーを修正 [＃8096](https://github.com/pingcap/tidb/pull/8096)
     -   バイナリログを書き込むために、UNIXソケットをPumpクライアントに置き換えます[＃8098](https://github.com/pingcap/tidb/pull/8098)
-    -   `tidb_slow_log_threshold`環境変数のしきい値を追加して、スローログ[＃8094](https://github.com/pingcap/tidb/pull/8094)動的に設定します。
-    -   `tidb_query_log_max_len`環境変数が動的にログ[＃8200](https://github.com/pingcap/tidb/pull/8200)を設定する間に切り捨てられたSQL文の元の長さを追加します
+    -   `tidb_slow_log_threshold`環境変数のしきい値を追加して、スローログ動的に設定します。 [＃8094](https://github.com/pingcap/tidb/pull/8094)
+    -   `tidb_query_log_max_len`環境変数が動的にログを設定する間に切り捨てられたSQL文の元の長さを追加します [＃8200](https://github.com/pingcap/tidb/pull/8200)
     -   `tidb_opt_write_row_id`環境変数を追加して、書き込みを許可するかどうかを制御する`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
-    -   ticlientの`Scan`コマンドに上限を追加して、オーバーバウンドスキャン[＃8081](https://github.com/pingcap/tidb/pull/8081) [＃8247](https://github.com/pingcap/tidb/pull/8247)回避する
+    -   ticlientの`Scan`コマンドに上限を追加して、オーバーバウンドスキャン 回避する [＃8247](https://github.com/pingcap/tidb/pull/8247) [＃8081](https://github.com/pingcap/tidb/pull/8081)
 -   DDL
     -   トランザクション内でDDL文を実行するとエラーが発生する場合がある問題を修正[＃8056](https://github.com/pingcap/tidb/pull/8056)
     -   パーティションテーブルで`truncate table`実行しても効果がない問題を修正[＃8103](https://github.com/pingcap/tidb/pull/8103)
     -   一部のケースでDDL操作がキャンセルされた後に正しくロールバックされない問題を修正しました[＃8057](https://github.com/pingcap/tidb/pull/8057)
-    -   次の利用可能な行ID [＃8268](https://github.com/pingcap/tidb/pull/8268)を返すコマンド`admin show next_row_id`を追加します。
+    -   次の利用可能な行ID を返すコマンド`admin show next_row_id`を追加します。 [＃8268](https://github.com/pingcap/tidb/pull/8268)
 
 ## PD {#pd}
 
@@ -56,11 +56,11 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
 
 ## TiKV {#tikv}
 
--   `WriteConflict` [＃3750](https://github.com/tikv/tikv/pull/3750)のエラーメッセージを改善する
--   panicマークファイル[＃3746](https://github.com/tikv/tikv/pull/3746)を追加
--   gRPC [＃3650](https://github.com/tikv/tikv/pull/3650)の新バージョンによって引き起こされるセグメント障害の問題を回避するために、grpcio をダウングレードします。
--   `kv_scan`インターフェース[＃3749](https://github.com/tikv/tikv/pull/3749)に上限を追加する
+-   `WriteConflict` のエラーメッセージを改善する [＃3750](https://github.com/tikv/tikv/pull/3750)
+-   panicマークファイルを追加 [＃3746](https://github.com/tikv/tikv/pull/3746)
+-   gRPC の新バージョンによって引き起こされるセグメント障害の問題を回避するために、grpcio をダウングレードします。 [＃3650](https://github.com/tikv/tikv/pull/3650)
+-   `kv_scan`インターフェースに上限を追加する [＃3749](https://github.com/tikv/tikv/pull/3749)
 
 ## ツール {#tools}
 
--   binlog [＃8093](https://github.com/pingcap/tidb/pull/8093)の古いバージョンと互換性のないTiDB-Binlogクラスターをサポートします[ドキュメント](https://docs-archive.pingcap.com/tidb/v2.1/tidb-binlog-overview)
+-   binlog の古いバージョンと互換性のないTiDB-Binlogクラスターをサポートします[ドキュメント](https://docs-archive.pingcap.com/tidb/v2.1/tidb-binlog-overview) [＃8093](https://github.com/pingcap/tidb/pull/8093)

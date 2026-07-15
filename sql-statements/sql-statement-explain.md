@@ -181,7 +181,7 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 | `dot`        | `EXPLAIN`ステートメントは DOT 実行プランを出力します。これを使用して、 `dot`プログラム ( `graphviz`パッケージ内) を通じて PNG ファイルを生成することができます。                      |
 | `row`        | `EXPLAIN`文は結果を表形式で出力します。詳細については[クエリ実行プランを理解する](/explain-overview.md)参照してください。                                             |
 | `tidb_json`  | `EXPLAIN`ステートメントは実行プランを JSON 形式で出力し、演算子情報を JSON 配列に格納します。                                                                 |
-| `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列目にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)参照してください。 |
+| `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)参照してください。 |
 | `plan_cache` | `EXPLAIN`ステートメントは、 [プランキャッシュ](/sql-non-prepared-plan-cache.md#diagnostics)情報を警告として含めて、 `row`形式で結果を出力します。                  |
 | `cost_trace` | `EXPLAIN`ステートメントは、推定コストの`estCost`とコストの計算式の`costFormula`列の 2 つの追加列を含む拡張`row`形式で結果を出力します。                                   |
 

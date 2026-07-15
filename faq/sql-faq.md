@@ -195,7 +195,7 @@ TiDBはマルチバージョン同時実行制御（MVCC）を使用している
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。TiDB `SHOW PROCESSLIST`ではシステムプロセスIDが表示されません。表示されるのは現在のセッションIDです。TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
 -   TiDBは分散データベースであるため、 `tidb-server`インスタンスはSQL文を解析および実行するためのステートレスエンジンです（詳細は[TiDBアーキテクチャ](/tidb-architecture.md)を参照）。5 `SHOW PROCESSLIST` 、ユーザーがMySQLクライアントからログインした`tidb-server`インスタンスで実行されたセッションリストを表示します。クラスタ内で実行されているすべてのセッションのリストではありません。ただし、MySQLはスタンドアロンデータベースであり、 `SHOW PROCESSLIST`はMySQLで実行されたすべてのSQL文を表示します。
--   TiDBの`State`列目は、クエリ実行中に継続的に更新されるわけではありません。TiDBは並列クエリをサポートしているため、各ステートメントが複数の*状態*にある場合があり、単一の値に単純化することが困難です。
+-   TiDBの`State`列は、クエリ実行中に継続的に更新されるわけではありません。TiDBは並列クエリをサポートしているため、各ステートメントが複数の*状態*にある場合があり、単一の値に単純化することが困難です。
 
 ## SQL コミットの実行優先度を制御または変更するにはどうすればよいですか? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
 
@@ -433,7 +433,7 @@ ADMIN SHOW DDL;
     RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganization, SchemaID:1, TableID:118, RowCount:77312, ArgLen:0, start time: 2018-12-05 16:26:10.652 +0800 CST, Err:<nil>, ErrCount:0, SnapshotVersion:404749908941733890
          SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
 
-上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列目の`RowCount`番目のフィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
+上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`番目のフィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
 
 ### DDL ジョブを表示するにはどうすればいいですか? {#how-to-view-the-ddl-job}
 

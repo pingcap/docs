@@ -13,42 +13,42 @@ TiDB バージョン: 3.0.20
 
 -   TiDB
 
-    -   `enable-streaming`構成項目[＃21054](https://github.com/pingcap/tidb/pull/21054)廃止する
+    -   `enable-streaming`構成項目廃止する [＃21054](https://github.com/pingcap/tidb/pull/21054)
 
 ## 改善点 {#improvements}
 
 -   TiDB
 
-    -   `LOAD DATA`文[＃21222](https://github.com/pingcap/tidb/pull/21222)を準備するときにエラーが発生する
+    -   `LOAD DATA`文を準備するときにエラーが発生する [＃21222](https://github.com/pingcap/tidb/pull/21222)
 
 -   TiKV
 
-    -   `end_point_slow_log_threshold`構成項目[＃9145](https://github.com/tikv/tikv/pull/9145)追加する
+    -   `end_point_slow_log_threshold`構成項目追加する [＃9145](https://github.com/tikv/tikv/pull/9145)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
 
     -   悲観的トランザクションのトランザクションステータスの誤ったキャッシュを修正[＃21706](https://github.com/pingcap/tidb/pull/21706)
-    -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [＃21319](https://github.com/pingcap/tidb/pull/21319)をクエリするときに発生する不正確な統計の問題を修正しました
-    -   データベース名が純粋な下位表現でない場合、データが正しく削除[＃21205](https://github.com/pingcap/tidb/pull/21205)れない可能性がある問題を修正しました`DELETE`
-    -   再帰ビュー[＃21000](https://github.com/pingcap/tidb/pull/21000)構築時に発生するスタックオーバーフローの問題を修正
-    -   TiKVクライアント[＃20863](https://github.com/pingcap/tidb/pull/20863)のgoroutineリークの問題を修正
-    -   `year`型[＃20828](https://github.com/pingcap/tidb/pull/20828)の誤ったデフォルトのゼロ値を修正
-    -   インデックス検索結合[＃20791](https://github.com/pingcap/tidb/pull/20791)におけるゴルーチンリークの問題を修正
-    -   `INSERT SELECT FOR UPDATE`実行すると悲観的トランザクション[＃20681](https://github.com/pingcap/tidb/pull/20681)で不正なパケットが返される問題を修正
+    -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` をクエリするときに発生する不正確な統計の問題を修正しました [＃21319](https://github.com/pingcap/tidb/pull/21319)
+    -   データベース名が純粋な下位表現でない場合、データが正しく削除れない可能性がある問題を修正しました`DELETE` [＃21205](https://github.com/pingcap/tidb/pull/21205)
+    -   再帰ビュー構築時に発生するスタックオーバーフローの問題を修正 [＃21000](https://github.com/pingcap/tidb/pull/21000)
+    -   TiKVクライアントのgoroutineリークの問題を修正 [＃20863](https://github.com/pingcap/tidb/pull/20863)
+    -   `year`型の誤ったデフォルトのゼロ値を修正 [＃20828](https://github.com/pingcap/tidb/pull/20828)
+    -   インデックス検索結合におけるゴルーチンリークの問題を修正 [＃20791](https://github.com/pingcap/tidb/pull/20791)
+    -   `INSERT SELECT FOR UPDATE`実行すると悲観的トランザクションで不正なパケットが返される問題を修正 [＃20681](https://github.com/pingcap/tidb/pull/20681)
     -   不明なタイムゾーンを修正`'posixrules'` [＃20605](https://github.com/pingcap/tidb/pull/20605)
-    -   符号なし整数型をビット型[＃20362](https://github.com/pingcap/tidb/pull/20362)に変換するときに発生する問題を修正しました
-    -   ビット型列[＃20339](https://github.com/pingcap/tidb/pull/20339)の破損したデフォルト値を修正
-    -   等価条件の1つが`Enum`または`Set`タイプ[＃20296](https://github.com/pingcap/tidb/pull/20296)である場合に、潜在的に誤った結果を修正します。
-    -   `!= any()` [＃20061](https://github.com/pingcap/tidb/pull/20061)の誤った動作を修正する
+    -   符号なし整数型をビット型に変換するときに発生する問題を修正しました [＃20362](https://github.com/pingcap/tidb/pull/20362)
+    -   ビット型列の破損したデフォルト値を修正 [＃20339](https://github.com/pingcap/tidb/pull/20339)
+    -   等価条件の1つが`Enum`または`Set`タイプである場合に、潜在的に誤った結果を修正します。 [＃20296](https://github.com/pingcap/tidb/pull/20296)
+    -   `!= any()` の誤った動作を修正する [＃20061](https://github.com/pingcap/tidb/pull/20061)
     -   `BETWEEN...AND...`型変換で無効な結果が返される問題を修正[＃21503](https://github.com/pingcap/tidb/pull/21503)
-    -   `ADDDATE`機能[＃21008](https://github.com/pingcap/tidb/pull/21008)の互換性の問題を修正
-    -   新しく追加された`Enum`列[＃20999](https://github.com/pingcap/tidb/pull/20999)の正しいデフォルト値を設定する
-    -   `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`ようなSQL文の結果をMySQL [＃20627](https://github.com/pingcap/tidb/pull/20627)と互換性があるように修正します
-    -   列タイプ[＃20532](https://github.com/pingcap/tidb/pull/20532)を変更するときに誤ったデフォルト値を修正
+    -   `ADDDATE`機能の互換性の問題を修正 [＃21008](https://github.com/pingcap/tidb/pull/21008)
+    -   新しく追加された`Enum`列の正しいデフォルト値を設定する [＃20999](https://github.com/pingcap/tidb/pull/20999)
+    -   `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`ようなSQL文の結果をMySQL と互換性があるように修正します [＃20627](https://github.com/pingcap/tidb/pull/20627)
+    -   列タイプを変更するときに誤ったデフォルト値を修正 [＃20532](https://github.com/pingcap/tidb/pull/20532)
     -   入力引数が`float`または`decimal`型の場合に`timestamp`関数が間違った結果を取得する問題を修正しました[＃20469](https://github.com/pingcap/tidb/pull/20469)
-    -   統計[＃20424](https://github.com/pingcap/tidb/pull/20424)における潜在的なデッドロック問題を修正
+    -   統計における潜在的なデッドロック問題を修正 [＃20424](https://github.com/pingcap/tidb/pull/20424)
     -   オーバーフローしたfloat型データが挿入される問題を修正[＃20251](https://github.com/pingcap/tidb/pull/20251)
 
 -   TiKV

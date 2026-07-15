@@ -9,7 +9,7 @@ TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロ
 
 > **注記：**
 >
-> This document applies only to TiDB Cloud Dedicated. For TiDB Cloud Starter, Essential, and Premium, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
+> このドキュメントは TiDB Cloud Dedicated にのみ適用されます。TiDB Cloud Starter、Essential、Premium については、[TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md) を参照してください。
 
 ## ステートメント {#statements}
 

@@ -121,7 +121,7 @@ TiDB Ansible バージョン: 3.0.0
 -   単一ノードからのクラスターの再作成をサポート
 -   大規模クラスタのetcdのストレージボトルネックを解決するために、リージョンメタデータをetcdからgo-leveldbストレージエンジンに移行します。
 -   API
-    -   トゥームストーンストアをクリアするための`remove-tombstone` API を追加します
+    -   tombstoneストアをクリアするための`remove-tombstone` API を追加します
     -   リージョン情報を一括クエリするAPI `ScanRegions`を追加
     -   実行中の演算子を照会するための`GetOperator` API を追加します
     -   `GetStores` APIのパフォーマンスを最適化

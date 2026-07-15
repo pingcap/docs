@@ -384,7 +384,7 @@ TiDB バージョン: 8.0.0
     -   Backup & Restore (BR)
 
         -   `--load-stats` `br` を導入します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
-        -   `--tikv-max-restore-concurrency`コマンドラインツールに、新しい復元パラメータ { `br` を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)シュート
+        -   `--tikv-max-restore-concurrency`コマンドラインツールに、新しい復元パラメータ { `br` を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)
         -   粒度の粗いリージョン分散アルゴリズムを有効にして同時パラメータを適応的に取得できるようにすることで、復元パフォーマンスを向上させます [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer)
         -   `log`のコマンドラインヘルプ情報に`br`コマンドを表示する [#50927](https://github.com/pingcap/tidb/issues/50927) @[RidRisR](https://github.com/RidRisR)
         -   テーブルIDの再利用を最大化し、リストアパフォーマンスを向上させるため、リストアプロセス中にテーブルIDを事前割り当てする機能をサポートする [#51736](https://github.com/pingcap/tidb/issues/51736) @[Leavrth](https://github.com/Leavrth)
@@ -416,7 +416,7 @@ TiDB バージョン: 8.0.0
     -   `auto analyze`の同時実行設定が正しくない問題を修正 [#51749](https://github.com/pingcap/tidb/issues/51749) @[hawkingrei](https://github.com/hawkingrei)
     -   単一のSQL文を使用して複数のインデックスを追加した際に発生するインデックスの不整合の問題を修正 [#51746](https://github.com/pingcap/tidb/issues/51746) @[tangenta](https://github.com/tangenta)
     -   クエリで`Column ... in from clause is ambiguous`を使用する場合に発生する可能性がある`NATURAL JOIN`エラーを修正 [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
-    -   TiDB が`group by`の定数値を誤って削除したことによる誤ったクエリ結果の問題を修正 [#38756](https://github.com/pingcap/tidb/issues/38756) @[Rustin170506](https://github.com/Rustin170506)ラスティン
+    -   TiDB が`group by`の定数値を誤って削除したことによる誤ったクエリ結果の問題を修正 [#38756](https://github.com/pingcap/tidb/issues/38756) @[Rustin170506](https://github.com/Rustin170506)
     -   `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正 [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
     -   `BIT`型の列が一部の関数の計算に関与している場合、デコードエラーによりクエリエラーが発生する可能性がある問題を修正しました。 [#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     -   PDとの相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリングアップグレードを実行するとTiDBがpanic可能性がある問題を修正しました [#50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
@@ -440,7 +440,7 @@ TiDB バージョン: 8.0.0
     -   `init-stats`プロセスが TiDB をpanic、 `load stats`プロセスを終了する可能性がある問題を修正しました [#51581](https://github.com/pingcap/tidb/issues/51581) @[hawkingrei](https://github.com/hawkingrei)
     -   `IN()`述語に`NULL`が含まれている場合にクエリ結果が正しくない問題を修正 [#51560](https://github.com/pingcap/tidb/issues/51560) @[winoros](https://github.com/winoros)
     -   DDLタスクが複数のテーブルに関係する場合、ブロックされたDDLステートメントがMDLビューに表示されない問題を修正します [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
-    -   テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @ホーキング[ホーキングレイ](https://github.com/hawkingrei)
+    -   テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @ [hawkingrei](https://github.com/hawkingrei)
     -   `HashJoin`演算子がディスクにスピルしない場合に発生する可能性のあるゴルーチンリークの問題を修正 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     -   CTEクエリのメモリ使用量が制限を超えた場合に発生するゴルーチンリークの問題を修正 [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     -   集計関数をグループ計算に使用した際に発生する可能性のある`Can't find column ...`エラーを修正 [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)

@@ -54,7 +54,7 @@ TiDB バージョン: 7.2.0
 
 ### 信頼性 {#reliability}
 
--   予想よりも多くのリソースを消費するクエリを自動的に管理する (実験的) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[glorv](https://github.com/glorv)[キャビンフィーバーB](https://github.com/CabinfeverB) @グロルヴ@[HuSharp](https://github.com/HuSharp) @[nolouch](https://github.com/nolouch)
+-   予想よりも多くのリソースを消費するクエリを自動的に管理する (実験的) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[glorv](https://github.com/glorv)@[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) @[nolouch](https://github.com/nolouch)
 
     データベースの安定性に対する最も一般的な課題は、SQLのパフォーマンス問題が突発的に発生することによるデータベース全体のパフォーマンス低下です。SQLのパフォーマンス問題には、十分にテストされていない新しいSQL文、データ量の急激な変化、実行プランの急激な変更など、多くの原因があります。これらの問題を根本から完全に回避することは困難です。TiDB v7.2.0では、想定よりも多くのリソースを消費するクエリを管理する機能を提供しています。この機能により、パフォーマンス問題が発生した場合の影響範囲を迅速に縮小できます。
 
@@ -212,7 +212,7 @@ TiDB バージョン: 7.2.0
 
         -   オブジェクトストレージサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
-        -   Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンドにレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加
+        -   Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)にレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加
 
     -   TiDB Data Migration (DM)
 
@@ -283,8 +283,8 @@ TiDB バージョン: 7.2.0
 
     -   TiDB Lightning
 
-        -   `experimental.allow-expression-index`が有効でデフォルト値がUUIDの場合に発生するTiDB Lightningpanic問題を修正 [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
-        -   データファイルの分割中にタスクが終了した際に発生するTiDB Lightningpanicの問題を修正 [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
+        -   `experimental.allow-expression-index`が有効でデフォルト値がUUIDの場合に発生するTiDB Lightning panic問題を修正 [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
+        -   データファイルの分割中にタスクが終了した際に発生するTiDB Lightning panicの問題を修正 [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
 
 ## 貢献者 {#contributors}
 

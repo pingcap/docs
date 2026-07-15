@@ -30,14 +30,14 @@ TiUPバージョン: 0.0.3
 
     -   TiDB Binlog
 
-        -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)検証するための構成項目を追加します
+        -   共通名検証するための構成項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
 -   TiDB
 
-    -   内部レコード[＃15435](https://github.com/pingcap/tidb/pull/15435)のジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、上流と下流間のレプリケーションが失敗する可能性がある問題を修正しました。
-    -   分離レベル`Read Committed` 、分離レベル[＃15471](https://github.com/pingcap/tidb/pull/15471)でサブクエリ結果が不正確になる問題を修正
+    -   内部レコードのジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、上流と下流間のレプリケーションが失敗する可能性がある問題を修正しました。 [＃15435](https://github.com/pingcap/tidb/pull/15435)
+    -   分離レベル`Read Committed` 、分離レベルでサブクエリ結果が不正確になる問題を修正 [＃15471](https://github.com/pingcap/tidb/pull/15471)
     -   インライン投影の最適化によって誤った結果が発生する問題を修正[＃15411](https://github.com/pingcap/tidb/pull/15411)
     -   SQLヒント`INL_MERGE_JOIN`一部のケースで誤って実行される問題を修正しました[＃15515](https://github.com/pingcap/tidb/pull/15515)
     -   `AutoRandom`属性の列に負の数が明示的に書き込まれた場合に、それらの列がリベースされる問題を修正しました[＃15397](https://github.com/pingcap/tidb/pull/15397)
@@ -46,43 +46,43 @@ TiUPバージョン: 0.0.3
 
 -   TiDB
 
-    -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスター[＃33](https://github.com/pingcap/tidb/projects/33)で`utf8mb4_general_ci`と`utf8_general_ci`有効にできるようにします。
-    -   切り捨てられたテーブル[＃15398](https://github.com/pingcap/tidb/pull/15398)回復をサポートするために`RECOVER TABLE`構文を拡張します
+    -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスターで`utf8mb4_general_ci`と`utf8_general_ci`有効にできるようにします。 [＃33](https://github.com/pingcap/tidb/projects/33)
+    -   切り捨てられたテーブル回復をサポートするために`RECOVER TABLE`構文を拡張します [＃15398](https://github.com/pingcap/tidb/pull/15398)
     -   tidb-server ステータスポートが使用中の場合、アラートログを返す代わりに開始を拒否します[＃15177](https://github.com/pingcap/tidb/pull/15177)
     -   デフォルトの列値としてシーケンスを使用する書き込みパフォーマンスを最適化する[＃15216](https://github.com/pingcap/tidb/pull/15216)
-    -   DDLジョブ[＃14837](https://github.com/pingcap/tidb/pull/14837)の詳細を照会するためのシステムテーブル`DDLJobs`を追加します
-    -   `aggFuncSum`パフォーマンス[＃14887](https://github.com/pingcap/tidb/pull/14887)を最適化する
-    -   `EXPLAIN` [＃15507](https://github.com/pingcap/tidb/pull/15507)の出力を最適化する
+    -   DDLジョブの詳細を照会するためのシステムテーブル`DDLJobs`を追加します [＃14837](https://github.com/pingcap/tidb/pull/14837)
+    -   `aggFuncSum`パフォーマンスを最適化する [＃14887](https://github.com/pingcap/tidb/pull/14887)
+    -   `EXPLAIN` の出力を最適化する [＃15507](https://github.com/pingcap/tidb/pull/15507)
 
 -   TiKV
 
     -   悲観的トランザクションにおける`pipelined`機能をサポートすることで、TPC-Cのパフォーマンスが20%向上します。ただし、実行中のロック失敗によりトランザクションのコミットが失敗するリスクがあります[＃6984](https://github.com/tikv/tikv/pull/6984)
-    -   HTTPポート[＃5393](https://github.com/tikv/tikv/pull/5393)でTLSをサポート
+    -   HTTPポートでTLSをサポート [＃5393](https://github.com/tikv/tikv/pull/5393)
     -   新しいクラスターではデフォルトで`unify-read-pool`構成項目を有効にし、古いクラスターではこの項目の以前の設定を使用します[＃7059](https://github.com/tikv/tikv/pull/7059)
 
 -   PD
 
-    -   HTTP API [＃2258](https://github.com/pingcap/pd/pull/2258)を介してデフォルトの PD 構成情報を取得する機能をサポート
+    -   HTTP API を介してデフォルトの PD 構成情報を取得する機能をサポート [＃2258](https://github.com/pingcap/pd/pull/2258)
 
 -   ツール
 
     -   TiDB Binlog
 
-        -   共通名[＃934](https://github.com/pingcap/tidb-binlog/pull/934)検証するための構成項目を追加します
+        -   共通名検証するための構成項目を追加します [＃934](https://github.com/pingcap/tidb-binlog/pull/934)
 
     -   TiDB Lightning
 
-        -   TiDB Lightning [＃281](https://github.com/pingcap/tidb-lightning/pull/281) [＃275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化
+        -   TiDB Lightning のパフォーマンスを最適化 [＃275](https://github.com/pingcap/tidb-lightning/pull/275) [＃281](https://github.com/pingcap/tidb-lightning/pull/281)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
 
-    -   内部レコード[＃15435](https://github.com/pingcap/tidb/pull/15435)のジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、上流と下流間のレプリケーションが失敗する可能性がある問題を修正しました。
-    -   分離レベル`Read Committed` 、分離レベル[＃15471](https://github.com/pingcap/tidb/pull/15471)でサブクエリ結果が不正確になる問題を修正
-    -   `INSERT ... VALUES`使用して`BIT(N)`データ型[＃15350](https://github.com/pingcap/tidb/pull/15350)指定するときに発生する可能性のある誤った動作の問題を修正しました
+    -   内部レコードのジョブクエリが正しくないため、 `PREPARE`ステートメントを使用して DDL ジョブを実行すると、上流と下流間のレプリケーションが失敗する可能性がある問題を修正しました。 [＃15435](https://github.com/pingcap/tidb/pull/15435)
+    -   分離レベル`Read Committed` 、分離レベルでサブクエリ結果が不正確になる問題を修正 [＃15471](https://github.com/pingcap/tidb/pull/15471)
+    -   `INSERT ... VALUES`使用して`BIT(N)`データ型指定するときに発生する可能性のある誤った動作の問題を修正しました [＃15350](https://github.com/pingcap/tidb/pull/15350)
     -   `ErrorCount`の値が正しく合計されないため、DDL ジョブの内部再試行で期待どおりの結果が完全に得られない問題を修正しました[＃15373](https://github.com/pingcap/tidb/pull/15373)
-    -   TiDBがTiFlash [＃15505](https://github.com/pingcap/tidb/pull/15505)に接続したときにガベージコレクションが異常動作する可能性がある問題を修正しました
+    -   TiDBがTiFlash に接続したときにガベージコレクションが異常動作する可能性がある問題を修正しました [＃15505](https://github.com/pingcap/tidb/pull/15505)
     -   インライン投影の最適化によって誤った結果が発生する問題を修正[＃15411](https://github.com/pingcap/tidb/pull/15411)
     -   SQLヒント`INL_MERGE_JOIN`一部のケースで誤って実行される問題を修正しました[＃15515](https://github.com/pingcap/tidb/pull/15515)
     -   `AutoRandom`属性の列に負の数が明示的に書き込まれた場合に、それらの列がリベースされる問題を修正しました[＃15397](https://github.com/pingcap/tidb/pull/15397)
@@ -94,11 +94,11 @@ TiUPバージョン: 0.0.3
 
     -   TiDB Lightning
 
-        -   バックエンドが TiDB [＃283](https://github.com/pingcap/tidb-lightning/pull/283)場合に文字変換エラーによって発生するデータエラーの問題を修正しました
+        -   バックエンドが TiDB 場合に文字変換エラーによって発生するデータエラーの問題を修正しました [＃283](https://github.com/pingcap/tidb-lightning/pull/283)
 
     -   TiCDC
 
-        -   MySQLシンクがDDL文[＃353](https://github.com/pingcap/tiflow/pull/353)を実行する際に下流に`test`スキーマが存在しない場合エラーが返される問題を修正
-        -   CDC cli [＃351](https://github.com/pingcap/tiflow/pull/351)のリアルタイムインタラクティブモードをサポート
+        -   MySQLシンクがDDL文を実行する際に下流に`test`スキーマが存在しない場合エラーが返される問題を修正 [＃353](https://github.com/pingcap/tiflow/pull/353)
+        -   CDC cli のリアルタイムインタラクティブモードをサポート [＃351](https://github.com/pingcap/tiflow/pull/351)
         -   データレプリケーション中に上流のテーブルが複製可能かどうかのチェックをサポート[＃368](https://github.com/pingcap/tiflow/pull/368)
-        -   Kafka [＃344](https://github.com/pingcap/tiflow/pull/344)への非同期書き込みをサポート
+        -   Kafka への非同期書き込みをサポート [＃344](https://github.com/pingcap/tiflow/pull/344)

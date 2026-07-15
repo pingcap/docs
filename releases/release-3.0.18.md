@@ -15,7 +15,7 @@ TiDB バージョン: 3.0.18
 
     -   TiDB Binlog
 
-        -   Pump GC 構成[＃996](https://github.com/pingcap/tidb-binlog/pull/996)の Go の時間期間形式をサポートします。
+        -   Pump GC 構成の Go の時間期間形式をサポートします。 [＃996](https://github.com/pingcap/tidb-binlog/pull/996)
 
 ## バグ修正 {#bug-fixes}
 
@@ -23,18 +23,18 @@ TiDB バージョン: 3.0.18
 
     -   `Hash`関数による`decimal`型の誤った処理により、HashJoin 結果が誤っている問題を修正[＃19185](https://github.com/pingcap/tidb/pull/19185)
     -   `Hash`関数による`set`と`enum`型の誤った処理により、HashJoinの結果が誤っている問題を修正しました[＃19175](https://github.com/pingcap/tidb/pull/19175)
-    -   悲観的ロックモード[＃19236](https://github.com/pingcap/tidb/pull/19236)で重複キーのチェックが失敗する問題を修正
+    -   悲観的ロックモードで重複キーのチェックが失敗する問題を修正 [＃19236](https://github.com/pingcap/tidb/pull/19236)
     -   `Apply`と`Union Scan`演算子が間違った実行結果を引き起こす問題を修正しました[＃19297](https://github.com/pingcap/tidb/pull/19297)
-    -   トランザクション[＃19274](https://github.com/pingcap/tidb/pull/19274)で一部のキャッシュされた実行プランが誤って実行される問題を修正しました
+    -   トランザクションで一部のキャッシュされた実行プランが誤って実行される問題を修正しました [＃19274](https://github.com/pingcap/tidb/pull/19274)
 
 -   TiKV
 
-    -   GC失敗ログを`error`から`warning`レベル[＃8444](https://github.com/tikv/tikv/pull/8444)に変更する
+    -   GC失敗ログを`error`から`warning`レベルに変更する [＃8444](https://github.com/tikv/tikv/pull/8444)
 
 -   ツール
 
     -   TiDB Lightning
 
         -   `--log-file`引数が有効にならない問題を修正[＃345](https://github.com/pingcap/tidb-lightning/pull/345)
-        -   TiDB バックエンド[＃357](https://github.com/pingcap/tidb-lightning/pull/357)使用時の空のバイナリ/16 進リテラルの構文エラーを修正しました
-        -   TiDBバックエンド[＃368](https://github.com/pingcap/tidb-lightning/pull/368)使用時の予期しない`switch-mode`呼び出しを修正
+        -   TiDB バックエンド使用時の空のバイナリ/16 進リテラルの構文エラーを修正しました [＃357](https://github.com/pingcap/tidb-lightning/pull/357)
+        -   TiDBバックエンド使用時の予期しない`switch-mode`呼び出しを修正 [＃368](https://github.com/pingcap/tidb-lightning/pull/368)

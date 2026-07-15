@@ -17,22 +17,22 @@ TiDB バージョン: 5.0.1
 
 -   TiDB
 
-    -   組み込み関数`VITESS_HASH()` [＃23915](https://github.com/pingcap/tidb/pull/23915)をサポート
+    -   組み込み関数`VITESS_HASH()` をサポート [＃23915](https://github.com/pingcap/tidb/pull/23915)
 
 -   TiKV
 
-    -   `zstd`使用してリージョンスナップショット[＃10005](https://github.com/tikv/tikv/pull/10005)を圧縮します
+    -   `zstd`使用してリージョンスナップショットを圧縮します [＃10005](https://github.com/tikv/tikv/pull/10005)
 
 -   PD
 
-    -   異性体ストア[＃3605](https://github.com/pingcap/pd/pull/3605)より適切に満たすようにリージョンスコア計算機を修正する
-    -   `scatter region`スケジューラ[＃3602](https://github.com/pingcap/pd/pull/3602)追加した後の予期しない統計を回避する
+    -   異性体ストアより適切に満たすようにリージョンスコア計算機を修正する [＃3605](https://github.com/pingcap/pd/pull/3605)
+    -   `scatter region`スケジューラ追加した後の予期しない統計を回避する [＃3602](https://github.com/pingcap/pd/pull/3602)
 
 -   ツール
 
     -   Backup & Restore (BR)
 
-        -   要約ログ[＃1009](https://github.com/pingcap/br/pull/1009)から誤解を招く情報を削除する
+        -   要約ログから誤解を招く情報を削除する [＃1009](https://github.com/pingcap/br/pull/1009)
 
 ## バグ修正 {#bug-fixes}
 
@@ -40,22 +40,22 @@ TiDB バージョン: 5.0.1
 
     -   投影結果が空の場合にプロジェクト除去の実行結果が間違っている可能性がある問題を修正[＃24093](https://github.com/pingcap/tidb/pull/24093)
     -   列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[＃24063](https://github.com/pingcap/tidb/pull/24063)
-    -   スキャンに仮想列[＃24058](https://github.com/pingcap/tidb/pull/24058)が含まれている場合、MPP プランの生成を禁止します。
-    -   プランキャッシュ[＃24043](https://github.com/pingcap/tidb/pull/24043)の`PointGet`と`TableDual`の誤った再利用を修正
+    -   スキャンに仮想列が含まれている場合、MPP プランの生成を禁止します。 [＃24058](https://github.com/pingcap/tidb/pull/24058)
+    -   プランキャッシュの`PointGet`と`TableDual`の誤った再利用を修正 [＃24043](https://github.com/pingcap/tidb/pull/24043)
     -   オプティマイザがクラスター化インデックス[＃24042](https://github.com/pingcap/tidb/pull/24042) `IndexMerge`プランを構築するときに発生するエラーを修正します
     -   BIT型エラーの型推論を修正[＃24027](https://github.com/pingcap/tidb/pull/24027)
     -   `PointGet`演算子が存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[＃23685](https://github.com/pingcap/tidb/pull/23685)
-    -   エラー[＃24080](https://github.com/pingcap/tidb/pull/24080)によりロールバック時にDDL操作が失敗する可能性がある問題を修正
+    -   エラーによりロールバック時にDDL操作が失敗する可能性がある問題を修正 [＃24080](https://github.com/pingcap/tidb/pull/24080)
     -   バイナリリテラル定数のインデックス範囲が正しく構築されない問題を修正[＃24041](https://github.com/pingcap/tidb/pull/24041)
-    -   いくつかのケースで`IN`節の潜在的な誤った結果を修正[＃24023](https://github.com/pingcap/tidb/pull/24023)
+    -   いくつかのケースで`IN`述語の潜在的な誤った結果を修正[＃24023](https://github.com/pingcap/tidb/pull/24023)
     -   いくつかの文字列関数の誤った結果を修正[＃23879](https://github.com/pingcap/tidb/pull/23879)
     -   ユーザーは、テーブルに対して`REPLACE`操作を実行するために`INSERT`と`DELETE`両方の権限が必要になります[＃23939](https://github.com/pingcap/tidb/pull/23939)
-    -   ポイントクエリ[＃24070](https://github.com/pingcap/tidb/pull/24070)を実行する際のパフォーマンスの低下を修正
+    -   ポイントクエリを実行する際のパフォーマンスの低下を修正 [＃24070](https://github.com/pingcap/tidb/pull/24070)
     -   バイナリとバイトを誤って比較することによって発生した間違った`TableDual`計画を修正[＃23918](https://github.com/pingcap/tidb/pull/23918)
 
 -   TiKV
 
-    -   コプロセッサが`IN`式[＃10018](https://github.com/tikv/tikv/pull/10018)の符号付きまたは符号なし整数型を適切に処理できない問題を修正しました。
+    -   コプロセッサが`IN`式の符号付きまたは符号なし整数型を適切に処理できない問題を修正しました。 [＃10018](https://github.com/tikv/tikv/pull/10018)
     -   SST ファイルのバッチ取り込み後に多くの空のリージョンが発生する問題を修正[＃10015](https://github.com/tikv/tikv/pull/10015)
     -   `cast_string_as_time`の入力が無効なUTF-8バイトである場合に発生する潜在的なpanicを修正[＃9995](https://github.com/tikv/tikv/pull/9995)
     -   ファイル辞書ファイルが破損した後にTiKVが起動できなくなるバグを修正[＃9992](https://github.com/tikv/tikv/pull/9992)
@@ -73,7 +73,7 @@ TiDB バージョン: 5.0.1
     -   重複した列名によりTiFlashでエラーが発生する問題を修正しました
     -   TiFlashがMPPプランを解析できない問題を修正
     -   テーブルGC中にヌルポインタの例外が発生する可能性がある問題を修正しました
-    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanic問題を修正しました
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlash panic問題を修正しました
     -   BRの復元中にTiFlashがpanic可能性がある問題を修正
 
 -   ツール
@@ -91,8 +91,8 @@ TiDB バージョン: 5.0.1
     -   TiCDC
 
         -   Unified Sorter の同時実行の問題を修正し、役に立たないエラーメッセージをフィルタリングします[＃1678](https://github.com/pingcap/tiflow/pull/1678)
-        -   冗長ディレクトリの作成によりMinIO [＃1672](https://github.com/pingcap/tiflow/pull/1672)でのレプリケーションが中断される可能性があるバグを修正
-        -   MySQL 5.7ダウンストリームがアップストリーム TiDB [＃1659](https://github.com/pingcap/tiflow/pull/1659)と同じ動作を維持するように、 `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定します。
+        -   冗長ディレクトリの作成によりMinIO でのレプリケーションが中断される可能性があるバグを修正 [＃1672](https://github.com/pingcap/tiflow/pull/1672)
+        -   MySQL 5.7ダウンストリームがアップストリーム TiDB と同じ動作を維持するように、 `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定します。 [＃1659](https://github.com/pingcap/tiflow/pull/1659)
         -   `io.EOF`の誤った処理によりレプリケーションが中断される可能性がある問題を修正[＃1648](https://github.com/pingcap/tiflow/pull/1648)
-        -   TiCDCダッシュボード[＃1645](https://github.com/pingcap/tiflow/pull/1645)のTiKV CDCエンドポイントCPUメトリックを修正
+        -   TiCDCダッシュボードのTiKV CDCエンドポイントCPUメトリックを修正 [＃1645](https://github.com/pingcap/tiflow/pull/1645)
         -   場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`増やす[＃1632](https://github.com/pingcap/tiflow/pull/1632)

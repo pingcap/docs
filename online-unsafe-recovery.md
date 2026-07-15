@@ -83,10 +83,10 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 回復プロセスには複数の段階があります。
 
 -   `collect report` : PD が TiKV からレポートを収集し、グローバル情報を取得する初期段階。
--   `tombstone tiflash learner` : 異常なリージョンのうち、他の正常なピアよりも新しいTiFlash学習者を削除して、このような極端な状況やpanicの可能性を防ぎます。
+-   `tombstone tiflash learner` : 異常なリージョンのうち、他の正常なピアよりも新しいTiFlashラーナーを削除して、このような極端な状況やpanicの可能性を防ぎます。
 -   `force leader for commit merge` : 特別な段階。コミットマージが完了していない場合、極端な状況を想定して、コミットマージが行われたリージョンに対してまず`force leader`実行されます。
 -   `force leader` : 正常でないリージョンに、残りの正常なピアの中からRaftリーダーを割り当てるように強制します。
--   `demote failed voter` : リージョンの失敗した投票者を学習者に降格し、その後、リージョンは通常どおりRaftリーダーを選出できます。
+-   `demote failed voter` : リージョンの失敗した投票者をラーナーに降格し、その後、リージョンは通常どおりRaftリーダーを選出できます。
 -   `create empty region` : キー範囲のギャップを埋めるために空のリージョンを作成します。これは、一部のリージョンのすべてのレプリカを含むストアが破損しているケースを解決するためのものです。
 
 上記の各ステージは、情報、時間、詳細な復旧計画を含むJSON形式で出力されます。例：

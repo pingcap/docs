@@ -56,7 +56,7 @@ DISTRIBUTE TABLE t1 RULE = "leader-scatter" ENGINE = "tikv" TIMEOUT = "1h";
     |    100 |
     +--------+
 
-TiFlash上の表`t2`内の学習者の領域を再分配します。
+TiFlash上の表`t2`内のラーナーのリージョンを再分配します。
 
 ```sql
 CREATE TABLE t2 (a INT);

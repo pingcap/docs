@@ -9,8 +9,8 @@ summary: TiDB 2.0.2は2018年5月21日にリリースされ、システムの安
 
 ## TiDB {#tidb}
 
--   小数点以下の除算式を押し下げる問題を修正
--   Support using the `USE INDEX` syntax in the `Delete` statement
+-   小数点以下の除算式をプッシュダウンする問題を修正
+-   `Delete`文で`USE INDEX`構文の使用をサポートする
 -   `Auto-Increment`列では`shard_row_id_bits`機能の使用を禁止する
 -   Binlog書き込みのタイムアウト機構を追加する
 
@@ -19,12 +19,12 @@ summary: TiDB 2.0.2は2018年5月21日にリリースされ、システムの安
 -   バランスリーダースケジューラが切断されたノードをフィルタリングするようにする
 -   転送リーダーオペレータのタイムアウトを10秒に変更します
 -   クラスターのリージョンが異常な状態にあるときにラベル スケジューラがスケジュールを実行しない問題を修正しました
--   Fix the improper scheduling issue of `evict leader scheduler`
+-   `evict leader scheduler`の不適切なスケジューリングの問題を修正
 
 ## TiKV {#tikv}
 
 -   Raftログが印刷されない問題を修正
 -   より多くの gRPC 関連パラメータの設定をサポート
 -   リーダー選出のタイムアウト範囲の設定をサポート
--   古くなった学習者が削除されない問題を修正
--   Fix the issue that the snapshot intermediate file is mistakenly deleted
+-   古くなったラーナーが削除されない問題を修正
+-   スナップショットの中間ファイルが誤って削除される問題を修正

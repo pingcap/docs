@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.4
 
 -   TiDB
 
-    -   `information_schema.columns` [＃18849](https://github.com/pingcap/tidb/pull/18849)のクエリ時にスタックする問題を修正
-    -   `PointGet`と`BatchPointGet`演算子が`in null` [＃18848](https://github.com/pingcap/tidb/pull/18848)遭遇したときに発生するエラーを修正します
-    -   `BatchPointGet` [＃18815](https://github.com/pingcap/tidb/pull/18815)の間違った結果を修正
-    -   `HashJoin`演算子が`set`または`enum`型[＃18859](https://github.com/pingcap/tidb/pull/18859)に遭遇したときに発生する不正なクエリ結果の問題を修正しました。
+    -   `information_schema.columns` のクエリ時にスタックする問題を修正 [＃18849](https://github.com/pingcap/tidb/pull/18849)
+    -   `PointGet`と`BatchPointGet`演算子が`in null` 遭遇したときに発生するエラーを修正します [＃18848](https://github.com/pingcap/tidb/pull/18848)
+    -   `BatchPointGet` の間違った結果を修正 [＃18815](https://github.com/pingcap/tidb/pull/18815)
+    -   `HashJoin`演算子が`set`または`enum`型に遭遇したときに発生する不正なクエリ結果の問題を修正しました。 [＃18859](https://github.com/pingcap/tidb/pull/18859)

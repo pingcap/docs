@@ -23,30 +23,30 @@ TiDB Ansible バージョン: 3.0.12
 ## 新機能 {#new-features}
 
 -   TiDB
-    -   `alter instance`文[＃15080](https://github.com/pingcap/tidb/pull/15080) [＃15292](https://github.com/pingcap/tidb/pull/15292)を使用して、置き換えられた証明書ファイルの動的読み込みをサポートします。
+    -   `alter instance`文 を使用して、置き換えられた証明書ファイルの動的読み込みをサポートします。 [＃15292](https://github.com/pingcap/tidb/pull/15292) [＃15080](https://github.com/pingcap/tidb/pull/15080)
     -   `cluster-verify-cn`設定項目を追加します。設定後、ステータスサービスは対応するCN証明書がある場合にのみ使用できます[＃15164](https://github.com/pingcap/tidb/pull/15164)
     -   各 TiDBサーバーの DDL リクエストのフロー制限機能を追加して、DDL リクエストの競合のエラー報告頻度を削減します[＃15148](https://github.com/pingcap/tidb/pull/15148)
     -   binlogの書き込みが失敗した場合に TiDBサーバーの終了をサポートする[＃15339](https://github.com/pingcap/tidb/pull/15339)
 
 -   ツール
     -   TiDB Binlog
-        -   Drainerに`kafka-client-id`設定項目を追加します。これは、クライアント ID [＃929](https://github.com/pingcap/tidb-binlog/pull/929)を設定するために Kafka クライアントへの接続をサポートします。
+        -   Drainerに`kafka-client-id`設定項目を追加します。これは、クライアント ID を設定するために Kafka クライアントへの接続をサポートします。 [＃929](https://github.com/pingcap/tidb-binlog/pull/929)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
     -   `GRANT`複数のユーザー`REVOKE`変更するときに原子性を保証する[＃15092](https://github.com/pingcap/tidb/pull/15092)
-    -   パーティションテーブルに対する悲観的ロックのロックが正しい行[＃15114](https://github.com/pingcap/tidb/pull/15114)ロックできなかった問題を修正しました
-    -   インデックスの長さが制限[＃15130](https://github.com/pingcap/tidb/pull/15130)超えたときに、構成の値`max-index-length`に応じてエラーメッセージを表示するようにします。
-    -   `FROM_UNIXTIME`関数[＃15270](https://github.com/pingcap/tidb/pull/15270)の小数点の誤りの問題を修正
-    -   トランザクション[＃15176](https://github.com/pingcap/tidb/pull/15176)で自分自身が書き込んだレコードを削除することで発生する競合検出の失敗やデータインデックスの不整合の問題を修正
+    -   パーティションテーブルに対する悲観的ロックのロックが正しい行ロックできなかった問題を修正しました [＃15114](https://github.com/pingcap/tidb/pull/15114)
+    -   インデックスの長さが制限超えたときに、構成の値`max-index-length`に応じてエラーメッセージを表示するようにします。 [＃15130](https://github.com/pingcap/tidb/pull/15130)
+    -   `FROM_UNIXTIME`関数の小数点の誤りの問題を修正 [＃15270](https://github.com/pingcap/tidb/pull/15270)
+    -   トランザクションで自分自身が書き込んだレコードを削除することで発生する競合検出の失敗やデータインデックスの不整合の問題を修正 [＃15176](https://github.com/pingcap/tidb/pull/15176)
 
 -   TiKV
-    -   整合性チェックパラメータ[＃7054](https://github.com/tikv/tikv/pull/7054)を無効にしたときに、既存のキーをトランザクションに挿入してすぐに削除すると競合検出が失敗したり、データ インデックスの不整合が発生したりする問題を修正しました。
+    -   整合性チェックパラメータを無効にしたときに、既存のキーをトランザクションに挿入してすぐに削除すると競合検出が失敗したり、データ インデックスの不整合が発生したりする問題を修正しました。 [＃7054](https://github.com/tikv/tikv/pull/7054)
     -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと追跡が遅くなりすぎてクラスターがスタックする可能性があり、トランザクションのサイズによって TiKV 接続が頻繁に再接続される可能性があるという問題を解決します[＃7072](https://github.com/tikv/tikv/pull/7072) [＃6993](https://github.com/tikv/tikv/pull/6993)
 
 -   PD
-    -   PD がリージョンハートビート[＃2233](https://github.com/pingcap/pd/pull/2233)処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。
+    -   PD がリージョンハートビート処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。 [＃2233](https://github.com/pingcap/pd/pull/2233)
 
 -   TiDB Ansible
-    -   クラスター[＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)内で複数の Grafana/Prometheus/Alertmanager のデプロイをサポート
+    -   クラスター内で複数の Grafana/Prometheus/Alertmanager のデプロイをサポート [＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)

@@ -13,11 +13,11 @@ TiDB バージョン: 3.0.17
 
 -   TiDB
 
-    -   `query-feedback-limit`構成項目のデフォルト値を1024から512に減らし、統計フィードバックメカニズムを改善してクラスタ[＃18770](https://github.com/pingcap/tidb/pull/18770)への影響を軽減します。
+    -   `query-feedback-limit`構成項目のデフォルト値を1024から512に減らし、統計フィードバックメカニズムを改善してクラスタへの影響を軽減します。 [＃18770](https://github.com/pingcap/tidb/pull/18770)
     -   1 回のリクエストのバッチ分割数を制限する[＃18694](https://github.com/pingcap/tidb/pull/18694)
-    -   TiDB クラスタ[＃18386](https://github.com/pingcap/tidb/pull/18386)に多くの履歴 DDL ジョブがある場合に`/tiflash/replica` HTTP API を高速化する
-    -   インデックスの等価条件[＃17609](https://github.com/pingcap/tidb/pull/17609)行数推定の改善
-    -   `kill tidb conn_id` [＃18506](https://github.com/pingcap/tidb/pull/18506)の実行を高速化する
+    -   TiDB クラスタに多くの履歴 DDL ジョブがある場合に`/tiflash/replica` HTTP API を高速化する [＃18386](https://github.com/pingcap/tidb/pull/18386)
+    -   インデックスの等価条件行数推定の改善 [＃17609](https://github.com/pingcap/tidb/pull/17609)
+    -   `kill tidb conn_id` の実行を高速化する [＃18506](https://github.com/pingcap/tidb/pull/18506)
 
 -   TiKV
 
@@ -27,17 +27,17 @@ TiDB バージョン: 3.0.17
 
     -   TiDB Lightning
 
-        -   `[black-white-list]` 、より新しい、より理解しやすいフィルター形式[＃332](https://github.com/pingcap/tidb-lightning/pull/332)で廃止されました。
+        -   `[black-white-list]` 、より新しい、より理解しやすいフィルター形式で廃止されました。 [＃332](https://github.com/pingcap/tidb-lightning/pull/332)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
 
-    -   `IndexHashJoin`または`IndexMergeJoin`を含むクエリがpanic[＃18498](https://github.com/pingcap/tidb/pull/18498)に遭遇した場合、空のセットではなく実際のエラー メッセージを返します。
-    -   `SELECT a FROM t HAVING t.a` [＃18432](https://github.com/pingcap/tidb/pull/18432)のようなSQL文の不明な列エラーを修正
+    -   `IndexHashJoin`または`IndexMergeJoin`を含むクエリがpanicに遭遇した場合、空のセットではなく実際のエラー メッセージを返します。 [＃18498](https://github.com/pingcap/tidb/pull/18498)
+    -   `SELECT a FROM t HAVING t.a` のようなSQL文の不明な列エラーを修正 [＃18432](https://github.com/pingcap/tidb/pull/18432)
     -   テーブルに主キーがない場合、またはテーブルにすでに整数の主キーがある場合は、テーブルに主キーを追加することを禁止します[＃18342](https://github.com/pingcap/tidb/pull/18342)
-    -   `EXPLAIN FORMAT="dot" FOR CONNECTION` [＃17157](https://github.com/pingcap/tidb/pull/17157)実行すると空のセットを返します
-    -   フォーマットトークン &#39;%r&#39;、&#39;%h&#39; [＃18725](https://github.com/pingcap/tidb/pull/18725)処理を修正`STR_TO_DATE`
+    -   `EXPLAIN FORMAT="dot" FOR CONNECTION` 実行すると空のセットを返します [＃17157](https://github.com/pingcap/tidb/pull/17157)
+    -   フォーマットトークン &#39;%r&#39;、&#39;%h&#39; 処理を修正`STR_TO_DATE` [＃18725](https://github.com/pingcap/tidb/pull/18725)
 
 -   TiKV
 

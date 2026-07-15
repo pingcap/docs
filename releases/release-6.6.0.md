@@ -23,7 +23,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 拡張性 {#scalability}
 
--   サポートパーティションRaft KVストレージエンジン (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)[タボキー](https://github.com/tabokie)[バッファロー](https://github.com/bufferflies)[5kb](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
+-   サポートパーティションRaft KVストレージエンジン (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)@ [tabokie](https://github.com/tabokie)@ [bufferflies](https://github.com/bufferflies)[5kb](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
 
     TiDB v6.6.0 より前は、TiKV の Raft ベースのストレージエンジンは、単一の RocksDB インスタンスを使用して、TiKV インスタンスのすべての「リージョン」のデータを保存していました。より大規模なクラスタをより安定してサポートするために、TiDB v6.6.0 以降では、複数の RocksDB インスタンスを使用して TiKVリージョンデータを保存する新しい TiKVストレージエンジンが導入され、各リージョンのデータは個別の RocksDB インスタンスに独立して保存されます。この新しいエンジンは、RocksDB インスタンス内のファイルの数とレベルをより適切に制御し、リージョン間のデータ操作の物理的な分離を実現し、より多くのデータを安定して管理できます。これは、TiKV がパーティショニングによって複数の RocksDB インスタンスを管理していると考えることができます。そのため、この機能は Partitioned-Raft-KV と呼ばれています。この機能の主な利点は、書き込みパフォーマンスの向上、スケーリングの高速化、および同じハードウェアでサポートできるデータ量の拡大です。また、より大規模なクラスタにも対応できます。
 
@@ -75,7 +75,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 信頼性 {#reliability}
 
--   リソース グループに基づくリソース制御のサポート (実験的) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch)@[BornChanger](https://github.com/BornChanger)[グロルヴ](https://github.com/glorv)@[tiancaiamao](https://github.com/tiancaiamao)@[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp)
+-   リソース グループに基づくリソース制御のサポート (実験的) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch)@[BornChanger](https://github.com/BornChanger)@ [glorv](https://github.com/glorv)@[tiancaiamao](https://github.com/tiancaiamao)@[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp)
 
     TiDBクラスタのリソースグループを作成し、異なるデータベースユーザーを対応するリソースグループにバインドし、実際のニーズに応じて各リソースグループのクォータを設定できるようになりました。クラスタのリソースが制限されている場合、同じリソースグループ内のセッションで使用されるすべてのリソースはクォータに制限されます。このようにして、リソースグループが過剰に消費された場合でも、他のリソースグループのセッションには影響しません。TiDBは、Grafanaダッシュボード上でリソースの実際の使用状況を表示する組み込みビューを提供し、リソースをより合理的に割り当てるのに役立ちます。
 
@@ -186,7 +186,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
--   TiKV-CDC ツールは現在 GA であり、RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou)@[haojinming](https://github.com/haojinming)[ピンギュ](https://github.com/pingyu)データ変更のサブスクライブをサポートしています。
+-   TiKV-CDC ツールは現在 GA であり、RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou)@[haojinming](https://github.com/haojinming)@ [pingyu](https://github.com/pingyu)データ変更のサブスクライブをサポートしています。
 
     TiKV-CDCは、TiKVクラスタ用のCDC（変更データキャプチャ）ツールです。TiKVとPDは、TiDBを使用しない場合、RawKVと呼ばれるKVデータベースを構成できます。TiKV-CDCは、RawKVのデータ変更を購読し、それを下流のTiKVクラスタにリアルタイムで複製することをサポートしており、RawKVのクラスタ間レプリケーションを可能にします。
 
@@ -313,7 +313,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)                                                                | 変更     | この変数はv6.6.0から有効になり、 [`PLAN REPLAYER CAPTURE`機能](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans)を有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、 `PLAN REPLAYER CAPTURE`機能がデフォルトで有効になります。                                                   |
 | [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)                                                                            | 変更     | デフォルト値が`ON`から`OFF`に変更されます。これは、TiDB でテレメトリがデフォルトで無効になっていることを意味します。                                                                                                                                                                                            |
 | `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行プランの最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
-| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用する学習者レプリカを指定できます。                                                                                                                                                                                  |
+| [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用するラーナーレプリカを指定できます。                                                                                                                                                                                  |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | TiDBクラスタの読み取り可用性を向上させるため、この変数に新しい値オプション`prefer-leader`が追加されました。このオプションを設定すると、TiDBはリーダーレプリカからの読み取りを優先します。リーダーレプリカのパフォーマンスが著しく低下した場合、TiDBは自動的にフォロワーレプリカからの読み取りに切り替わります。                                                                                        |
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチ サイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4 つのコプロセッサータスクが 1 つのタスクにまとめられます。                                                                                                          |
 | [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレータのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行プランを選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
@@ -495,7 +495,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   一意インデックスが場合によっては重複データを生成する可能性がある問題を修正 [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
     -   `Prepare`または`Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     -   インデックス追加時にデータ競合が発生する可能性がある問題を修正 [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
-    -   仮想列 [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)キッドによって引き起こされる`can't find proper physical plan`の問題を修正します
+    -   仮想列 [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)によって引き起こされる`can't find proper physical plan`の問題を修正します
     -   動的トリミングモードでパーティションテーブルのグローバルバインディングが作成された後、TiDBが再起動できない問題を修正 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     -   `auto analyze`が原因で正常シャットダウンに時間がかかる問題を修正 [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   IndexMerge オペレーターがメモリ制限動作をトリガーしたときの TiDBサーバーのpanicを修正 [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)

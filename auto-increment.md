@@ -465,7 +465,7 @@ IDは常に増加し、 `AUTO_ID_CACHE 0`のような大きなギャップは発
 
 -   TiDB v6.6.0 以前のバージョンの場合、定義された列は主キーまたはインデックス プレフィックスのいずれかである必要があります。
 -   `INTEGER` 、 `FLOAT` 、または`DOUBLE`タイプの列に定義する必要があります。
--   `DEFAULT`列目の値と同じ列には指定できません。
+-   `DEFAULT`列の値と同じ列には指定できません。
 -   `ALTER TABLE` 、属性`AUTO_INCREMENT`を持つ列を追加または変更するために使用できません。これには、属性`AUTO_INCREMENT`既存の列に追加するために`ALTER TABLE ... MODIFY/CHANGE COLUMN`使用することや、属性`AUTO_INCREMENT`を持つ列を追加するために`ALTER TABLE ... ADD COLUMN`使用することも含まれます。
 -   `ALTER TABLE` `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18 および v3.0.4 以降、TiDB はセッション変数`@@tidb_allow_remove_auto_inc`使用して、列の`AUTO_INCREMENT`の属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`使用して`AUTO_INCREMENT`番目の属性を削除することはできません。
 -   `ALTER TABLE` 、 `AUTO_INCREMENT`値を小さい値に設定するには`FORCE`オプションが必要です。

@@ -33,7 +33,7 @@ TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関
 
 ## <code>CUME_DIST()</code> {#code-cume-dist-code}
 
-`CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`節と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
+`CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`句と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
 
 ```sql
 WITH RECURSIVE cte(n) AS (

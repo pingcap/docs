@@ -179,8 +179,8 @@ show warnings;
 | `gc.enable-compaction-filter`                             | 圧縮フィルタを有効にするかどうか                                                                                                                           |
 | `gc.compaction-filter-skip-version-check`                 | 圧縮フィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
 | `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）圧縮をトリガーするかどうかを確認する間隔                                                                                                       |
-| `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの数                                                                                            |
-| `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBトゥームストーンの割合                                                                                           |
+| `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBのtombstoneの数                                                                                            |
+| `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBのtombstoneの割合                                                                                           |
 | `gc.auto-compaction.redundant-rows-threshold`             | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の数                                                                                                    |
 | `gc.auto-compaction.redundant-rows-percent-threshold`     | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の割合                                                                                                   |
 | `gc.auto-compaction.bottommost-level-force`               | RocksDBの最下層ファイルの圧縮を強制するかどうか                                                                                                                |

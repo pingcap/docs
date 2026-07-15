@@ -92,7 +92,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレータ固有の実行情報も含まれます。これには主に、オペレータが RPC 要求を送信するのにかかった時間やその他のステップの実行時間が含まれます。
 
-### ポイントゲット {#point-get}
+### PointGet {#point-get}
 
 `Point_Get`演算子からの実行情報には通常、次の情報が含まれます。
 
@@ -100,13 +100,13 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 -   `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
 -   `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss` `tikvRPC` ）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
 
-### バッチポイント取得 {#batch-point-get}
+### Batch PointGet {#batch-point-get}
 
 `Batch_Point_Get`オペレータの実行情報は`Point_Get`オペレータと似ていますが、 `Batch_Point_Get`通常、データを読み取りするために`BatchGet` RPC 要求を TiKV に送信します。
 
 `BatchGet:{num_rpc:2, total_time:83.13µs}` : TiKVに送信された`BatchGet`タイプのRPC要求の数( `num_rpc` )とすべてのRPC要求に費やされた合計時間( `total_time` )。
 
-### テーブルリーダー {#tablereader}
+### TableReader {#tablereader}
 
 `TableReader`演算子の実行情報は、通常、次のようになります。
 
@@ -120,7 +120,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 -   `rpc_info` : 要求タイプ別に集計された、TiKV に送信された RPC 要求の合計数と合計時間。
 -   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
-### 入れる {#insert}
+### Insert {#insert}
 
 `Insert`演算子の実行情報は、通常、次のようになります。
 
@@ -136,7 +136,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
         -   `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
 -   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
-### インデックス結合 {#indexjoin}
+### IndexJoin {#indexjoin}
 
 `IndexJoin`演算子は、1つの外部ワーカーとN個の内部ワーカーを並列実行のために使用します。結合結果は外部テーブルの順序を保持します。詳細な実行プロセスは以下のとおりです。
 
@@ -158,7 +158,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
     -   `Build` : 内部ワーカーが対応する内部テーブル行のハッシュ テーブルを構築するのにかかる合計時間。
 -   `probe` : メイン`IndexJoin`スレッドが外部テーブル行と内部テーブル行のハッシュ テーブルとの結合操作を実行するのに費やした合計時間。
 
-### インデックスハッシュ結合 {#indexhashjoin}
+### IndexHashJoin {#indexhashjoin}
 
 `IndexHashJoin`演算子の実行プロセスは`IndexJoin`演算子と同様です。5演算`IndexHashJoin`も1つの外部ワーカーとN個の内部ワーカーで並列実行されますが、出力順序は外部テーブルと一致するとは限りません。詳細な実行プロセスは以下のとおりです。
 
@@ -181,7 +181,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
     -   `Build` : 内部ワーカーが外部テーブル行のハッシュ テーブルを構築するのに費やされた合計時間。
     -   `join` : 内部ワーカーが内部テーブル行と外部テーブル行のハッシュ テーブルを結合するのにかかる合計時間。
 
-### ハッシュジョイン {#hashjoin}
+### HashJoin {#hashjoin}
 
 `HashJoin`演算子は、内部ワーカー、外部ワーカー、および N 個の結合ワーカーで構成されます。詳細な実行プロセスは次のとおりです。
 
@@ -206,7 +206,7 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
     -   `probe` : 外部テーブルの行とハッシュ テーブルとの結合に費やされた合計時間。
     -   `fetch` : 結合ワーカーが外部テーブルの行データを読み取るために待機する合計時間。
 
-### テーブルフルスキャン (TiFlash) {#tablefullscan-tiflash}
+### TableFullScan (TiFlash) {#tablefullscan-tiflash}
 
 TiFlashノードで実行される`TableFullScan`演算子には、次の実行情報が含まれます。
 
@@ -268,7 +268,7 @@ tiflash_scan: {
 >
 > この値は、今回の実行で実際に消費されたRU数を示します。キャッシュの影響により、同じSQL文でも実行ごとに消費されるRU数が異なる場合があります（例： [コプロセッサキャッシュ](/coprocessor-cache.md) ）。
 
-RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列目の他の値から計算できます。例えば、次のようになります。
+RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列の他の値から計算できます。例えば、次のようになります。
 
 ```json
 'executeInfo':

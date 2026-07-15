@@ -468,7 +468,7 @@ TiDBバージョン: 6.4.0-DMR
 
 TiDBコミュニティの以下の貢献者の皆様に感謝申し上げます。
 
--   [645775992](https://github.com/645775992)
+-   @ [645775992](https://github.com/645775992)
 -   [An-DJ](https://github.com/An-DJ)
 -   [AndrewDi](https://github.com/AndrewDi)
 -   [erwadba](https://github.com/erwadba)

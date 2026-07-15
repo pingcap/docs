@@ -5,7 +5,7 @@ summary: TIKV_REGION_PEERS` INFORMATION_SCHEMA テーブルについて学習し
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`テーブルには、TiKV 内の単一のリージョンノードの詳細情報が表示されます。たとえば、それが学習者かリーダーかなどです。
+`TIKV_REGION_PEERS`テーブルには、TiKV 内の単一のリージョンノードの詳細情報が表示されます。たとえば、それがラーナーかリーダーかなどです。
 
 > **注記：**
 >
@@ -55,7 +55,7 @@ WHERE
 -   REGION_ID:リージョンID。
 -   PEER_ID:リージョンピアのID。
 -   STORE_ID:リージョンが配置されている TiKV ストアの ID。
--   IS_LEARNER: 相手が学習者であるかどうか。
+-   IS_LEARNER: 相手がラーナーであるかどうか。
 -   IS_LEADER: 相手がリーダーであるかどうか。
 -   ステータス：ピアのステータス：
     -   保留中：一時的に利用できません。

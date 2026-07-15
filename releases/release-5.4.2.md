@@ -11,7 +11,7 @@ TiDB バージョン: 5.4.2
 
 > **警告：**
 >
-> v5.4.2 には既知のバグがあるため、使用は推奨されません。詳細は[＃12934](https://github.com/tikv/tikv/issues/12934)ご覧ください。このバグは v5.4.3 で修正されています。v3 [バージョン5.4.3](/releases/release-5.4.3.md)使用を推奨します。
+> v5.4.2 には既知のバグがあるため、使用は推奨されません。詳細はご覧ください。このバグは v5.4.3 で修正されています。v3 [バージョン5.4.3](/releases/release-5.4.3.md)使用を推奨します。 [＃12934](https://github.com/tikv/tikv/issues/12934)
 
 ## 改善点 {#improvements}
 
@@ -39,38 +39,38 @@ TiDB バージョン: 5.4.2
 
 -   TiDB
 
-    -   バイナリプロトコル[＃34690](https://github.com/pingcap/tidb/issues/34690) [＃34678](https://github.com/pingcap/tidb/issues/34678)で間違った TableDual プランがキャッシュされる問題を修正
-    -   EqualAll ケース[＃34584](https://github.com/pingcap/tidb/issues/34584)でTiFlash `firstrow`集計関数の誤って推論された null フラグの問題を修正しました
-    -   プランナーがTiFlash [＃34682](https://github.com/pingcap/tidb/issues/34682)に対して間違った 2 フェーズ集計プランを生成する問題を修正しました
+    -   バイナリプロトコル で間違った TableDual プランがキャッシュされる問題を修正 [＃34678](https://github.com/pingcap/tidb/issues/34678) [＃34690](https://github.com/pingcap/tidb/issues/34690)
+    -   EqualAll ケースでTiFlash `firstrow`集計関数の誤って推論された null フラグの問題を修正しました [＃34584](https://github.com/pingcap/tidb/issues/34584)
+    -   プランナーがTiFlash に対して間違った 2 フェーズ集計プランを生成する問題を修正しました [＃34682](https://github.com/pingcap/tidb/issues/34682)
     -   `tidb_opt_agg_push_down`と`tidb_enforce_mpp`有効になっているときに発生するプランナーの誤った動作を修正[＃34465](https://github.com/pingcap/tidb/issues/34465)
     -   プランキャッシュが削除されたときに使用される間違ったメモリ使用量の値を修正しました[＃34613](https://github.com/pingcap/tidb/issues/34613)
-    -   `LOAD DATA`文[＃35198](https://github.com/pingcap/tidb/issues/35198)で列リストが機能しない問題を修正
-    -   悲観的トランザクション[＃11612](https://github.com/tikv/tikv/issues/11612)で`WriteConflict`エラーを報告しないようにする
+    -   `LOAD DATA`文で列リストが機能しない問題を修正 [＃35198](https://github.com/pingcap/tidb/issues/35198)
+    -   悲観的トランザクションで`WriteConflict`エラーを報告しないようにする [＃11612](https://github.com/tikv/tikv/issues/11612)
     -   リージョンエラーやネットワーク問題が発生した場合に事前書き込みリクエストが冪等性を持たない問題を修正[＃34875](https://github.com/pingcap/tidb/issues/34875)
-    -   ロールバックされる非同期コミットトランザクションがアトミック性[＃33641](https://github.com/pingcap/tidb/issues/33641)を満たさない可能性がある問題を修正しました
+    -   ロールバックされる非同期コミットトランザクションがアトミック性を満たさない可能性がある問題を修正しました [＃33641](https://github.com/pingcap/tidb/issues/33641)
     -   以前は、ネットワーク接続の問題が発生した場合、TiDBは切断されたセッションによって保持されていたリソースを正しく解放できないことがありました。この問題は修正され、開いているトランザクションをロールバックし、その他の関連リソースを解放できるようになりました[＃34722](https://github.com/pingcap/tidb/issues/34722)
-    -   TiDBがCTE [＃33965](https://github.com/pingcap/tidb/issues/33965)ビューをクエリするときに`references invalid table`エラーが誤って報告される可能性がある問題を修正しました。
-    -   `fatal error: concurrent map read and map write`エラー[＃35340](https://github.com/pingcap/tidb/issues/35340)によるpanic問題を修正
+    -   TiDBがCTE ビューをクエリするときに`references invalid table`エラーが誤って報告される可能性がある問題を修正しました。 [＃33965](https://github.com/pingcap/tidb/issues/33965)
+    -   `fatal error: concurrent map read and map write`エラーによるpanic問題を修正 [＃35340](https://github.com/pingcap/tidb/issues/35340)
 
 -   TiKV
 
-    -   `max_sample_size` `0` [＃11192](https://github.com/tikv/tikv/issues/11192)に設定されている場合に統計を分析することによって発生するpanicの問題を修正しました
-    -   TiKV [＃12231](https://github.com/tikv/tikv/issues/12231)を終了するときに誤って TiKV パニックを報告する潜在的な問題を修正しました
-    -   リージョンマージプロセス[＃12663](https://github.com/tikv/tikv/issues/12663)でソースピアがスナップショットによってログをキャッチアップするときに発生する可能性のpanic問題を修正しました。
+    -   `max_sample_size` `0` に設定されている場合に統計を分析することによって発生するpanicの問題を修正しました [＃11192](https://github.com/tikv/tikv/issues/11192)
+    -   TiKV を終了するときに誤って TiKV パニックを報告する潜在的な問題を修正しました [＃12231](https://github.com/tikv/tikv/issues/12231)
+    -   リージョンマージプロセスでソースピアがスナップショットによってログをキャッチアップするときに発生する可能性のpanic問題を修正しました。 [＃12663](https://github.com/tikv/tikv/issues/12663)
     -   ピアが同時に分割され、破棄されたときに発生する可能性のあるpanic問題を修正しました[＃12825](https://github.com/tikv/tikv/issues/12825)
-    -   PDクライアントがエラー[＃12345](https://github.com/tikv/tikv/issues/12345)に遭遇したときに発生するPDクライアントの頻繁な再接続の問題を修正しました
-    -   `DATETIME`値に小数点と`Z` [＃12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正しました
+    -   PDクライアントがエラーに遭遇したときに発生するPDクライアントの頻繁な再接続の問題を修正しました [＃12345](https://github.com/tikv/tikv/issues/12345)
+    -   `DATETIME`値に小数点と`Z` が含まれている場合に発生する時間解析エラーの問題を修正しました [＃12739](https://github.com/tikv/tikv/issues/12739)
     -   空の文字列の型変換を実行するときに TiKV がパニックになる問題を修正[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効な場合の悲観的トランザクションにおけるコミットレコードの重複の可能性を修正[＃12615](https://github.com/tikv/tikv/issues/12615)
-    -   Follower Read [＃12478](https://github.com/tikv/tikv/issues/12478)使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)バッチ分割の競合によって発生する TiKVpanicの問題を修正しました。
+    -   Follower Read 使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正しました [＃12478](https://github.com/tikv/tikv/issues/12478)
+    -   ピアの破壊とリージョンバッチ分割の競合によって発生する TiKV panicの問題を修正しました。 [＃12368](https://github.com/tikv/tikv/issues/12368)
     -   tikv-ctl が間違った文字列一致のために誤った結果を返す問題を修正[＃12329](https://github.com/tikv/tikv/issues/12329)
-    -   AUFS [＃12543](https://github.com/tikv/tikv/issues/12543)でTiKVを起動できない問題を修正
+    -   AUFS でTiKVを起動できない問題を修正 [＃12543](https://github.com/tikv/tikv/issues/12543)
 
 -   PD
 
-    -   `not leader` [＃4797](https://github.com/tikv/pd/issues/4797)の間違ったステータスコードを修正
-    -   ホットリージョンにリーダーがない場合に発生するPDpanicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
+    -   `not leader` の間違ったステータスコードを修正 [＃4797](https://github.com/tikv/pd/issues/4797)
+    -   ホットリージョンにリーダーがない場合に発生するPD panicを修正[＃5005](https://github.com/tikv/pd/issues/5005)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
     -   いくつかのコーナーケースにおけるTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)
 
@@ -78,13 +78,13 @@ TiDB バージョン: 5.4.2
 
     -   状況によっては、クラスター化インデックスを持つテーブルの列を削除した後にTiFlash がクラッシュする問題を修正しました[＃5154](https://github.com/pingcap/tiflash/issues/5154)
     -   多数のINSERTおよびDELETE操作後に発生する可能性のあるデータの不整合を修正[＃4956](https://github.com/pingcap/tiflash/issues/4956)
-    -   コーナーケース[＃4512](https://github.com/pingcap/tiflash/issues/4512)での誤った小数比較結果を修正
+    -   コーナーケースでの誤った小数比較結果を修正 [＃4512](https://github.com/pingcap/tiflash/issues/4512)
 
 -   ツール
 
     -   Backup & Restore (BR)
 
-        -   RawKVモード[＃35279](https://github.com/pingcap/tidb/issues/35279)でBRが`ErrRestoreTableIDMismatch`報告するバグを修正
+        -   RawKVモードでBRが`ErrRestoreTableIDMismatch`報告するバグを修正 [＃35279](https://github.com/pingcap/tidb/issues/35279)
         -   ファイルの保存時にエラーが発生したときにBRが再試行しないバグを修正[＃34865](https://github.com/pingcap/tidb/issues/34865)
         -   BR実行中のpanic問題を修正[＃34956](https://github.com/pingcap/tidb/issues/34956)
         -   BRがS3内部エラーを処理できない問題を修正[＃34350](https://github.com/pingcap/tidb/issues/34350)
@@ -98,7 +98,7 @@ TiDB バージョン: 5.4.2
         -   ファイル名の競合によりデータ損失が発生する可能性がある問題を修正[＃5486](https://github.com/pingcap/tiflow/issues/5486)
         -   リージョンリーダーが見つからず、再試行が制限を超えた場合に発生するレプリケーション中断を修正[＃5230](https://github.com/pingcap/tiflow/issues/5230)
         -   MySQL Sink が間違ったチェックポイントを保存する可能性があるバグを修正しました[＃5107](https://github.com/pingcap/tiflow/issues/5107)
-        -   HTTPサーバー[＃5303](https://github.com/pingcap/tiflow/issues/5303)でゴルーチンリークを引き起こす可能性のあるバグを修正
+        -   HTTPサーバーでゴルーチンリークを引き起こす可能性のあるバグを修正 [＃5303](https://github.com/pingcap/tiflow/issues/5303)
         -   メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正[＃4756](https://github.com/pingcap/tiflow/issues/4756) [＃4762](https://github.com/pingcap/tiflow/issues/4762)
 
     -   TiDB Data Migration (DM)

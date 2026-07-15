@@ -4544,7 +4544,7 @@ mysql> desc select count(distinct a) from test.t;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 -   型: Boolean
 -   デフォルト値: `OFF`
--   この変数は、特定の複数テーブル結合クエリの結合したテーブルの再配置最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザは、連続する複数の結合間のフィルタ条件 ( `Selection` ) を結合したテーブルの再配置最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザはこれらの条件をより適切な位置に押し下げ、より多くのテーブルが結合したテーブルの再配置最適化に参加できるようにします。
+-   この変数は、特定の複数テーブル結合クエリの結合したテーブルの再配置最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザは、連続する複数の結合間のフィルタ条件 ( `Selection` ) を結合したテーブルの再配置最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザはこれらの条件をより適切な位置にプッシュダウン、より多くのテーブルが結合したテーブルの再配置最適化に参加できるようにします。
 -   この変数を有効にした後にパフォーマンスの低下や不安定な実行プランが見られる場合は、この変数を`OFF`に設定して、この機能を無効にしてください。
 -   式の評価意味論が変更されないようにするため、フィルタ条件に非決定的な関数や関数のある関数 ( `RAND()`など) が含まれている場合、この変数が有効になっていてもオプティマイザは条件プッシュダウンを実行しません。
 
@@ -4936,7 +4936,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
     -   演算子のトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     -   演算子の最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     -   演算子の最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。
--   `Projection`演算子を押し下げる最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
+-   `Projection`演算子をプッシュダウンする最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
 -   TiDB クラスターが v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードされた場合、この変数のデフォルト値は`OFF`です。
 
 ### tidb_opt_range_max_size <span class="version-mark">v6.4.0で追加</span> {#tidb-opt-range-max-size-span-class-version-mark-new-in-v6-4-0-span}

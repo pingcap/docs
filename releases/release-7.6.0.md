@@ -79,7 +79,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を参照してください。
 
--   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @[アフェインベルク](https://github.com/afeinberg)
+-   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @@ [afeinberg](https://github.com/afeinberg)
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
@@ -134,7 +134,7 @@ TiDB バージョン: 7.6.0
 
 ### データベース操作 {#db-operations}
 
--   `FLASHBACK CLUSTER`は、正確な TSO [#48372](https://github.com/pingcap/tidb/issues/48372) @ [ボーンチェンジャー](https://github.com/BornChanger/BornChanger)の指定をサポートしています
+-   `FLASHBACK CLUSTER`は、正確な TSO [#48372](https://github.com/pingcap/tidb/issues/48372) @ [BornChanger](https://github.com/BornChanger)の指定をサポートしています
 
     TiDB v7.6.0 では、フラッシュバック機能がより強力かつ正確になりました。クラスタを指定した履歴タイムスタンプにロールバックできるだけでなく、 `FLASHBACK CLUSTER TO TSO`を使用して正確なリカバリ[TSO](/tso.md)指定できるため、データリカバリの柔軟性が向上します。たとえば、この機能を TiCDC と組み合わせて使用​​できます。ダウンストリームの TiDB クラスタでデータレプリケーションを一時停止し、オンライン前の読み書きテストを実行した後、この機能を使用すると、クラスタは一時停止した TSO にスムーズかつ迅速にロールバックし、TiCDC を使用してデータのレプリケーションを再開できます。これにより、オンライン前の検証プロセスが効率化され、データ管理が簡素化されます。
 
@@ -178,7 +178,7 @@ TiDB バージョン: 7.6.0
 
 ### 可観測性 {#observability}
 
--   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)[バッファロー](https://github.com/bufferflies)[ノルーチ](https://github.com/nolouch)
+-   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@ [bufferflies](https://github.com/bufferflies)@ [nolouch](https://github.com/nolouch)
 
     アプリケーションのワークロードを分離するためにリソース グループを使用するユーザーが増えるにつれ、リソース コントロールはリソース グループに基づいた強化されたデータを提供します。これにより、リソース グループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
@@ -329,7 +329,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   TiCDC
 
         -   TiCDCによるオブジェクトストレージへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の[3エースショーハンド](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
+        -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の@ [3AceShowHand](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
 
     -   TiDB Data Migration (DM)
 
@@ -448,7 +448,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   クエリの遅延によりメモリ使用量が大幅に増加する問題を修正 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
     -   `RECOVER TABLE`および`FLASHBACK TABLE`TiFlash`CREATE TABLE` `DROP TABLE`を介して一部の TiFlash レプリカデータを復元できない問題 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ColumnRef in (Literal, Func...)`のようなフィルタリング条件を指定してクエリを実行すると、クエリ結果が正しくなくなる問題を修正 [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   DDL の同時実行中にTiFlash で競合が発生した場合のTiFlashpanic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   DDL の同時実行中にTiFlash で競合が発生した場合のTiFlash panic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlash が非集約ストレージおよびコンピューティングアーキテクチャの下でオブジェクトストレージデータの GC 所有者を選択できない場合がある問題を修正 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   `lowerUTF8`および`upperUTF8`関数で、大文字と小文字が異なるバイトを占有することを許可しない問題を修正 [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
     -   TiFlashが`ENUM`の値が0の場合に`ENUM`を正しく処理しない問題を修正 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
@@ -473,7 +473,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
         -   `WHERE`句が、特定のシナリオで`DELETE`ステートメントを複製する際に主キーを条件として使用しない問題を修正しました [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
         -   TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanic可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
-        -   `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)ショーハンド
+        -   `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
         -   TiCDCが特定の特殊なシナリオで誤ってTiKVとの接続を閉じる問題を修正 [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
         -   TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanic可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         -   TiCDCがデータを下流のMySQLに複製する際に`checkpoint-ts`が停止する可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)

@@ -222,7 +222,7 @@ TiDB バージョン: 7.3.0
 
     -   TiCDC
 
-        -   `UPDATE`イベント送信時に更新された列値のみが含まれるように、Open Protocol 出力のメッセージ サイズを最適化します [#9336](https://github.com/pingcap/tiflow/issues/9336) @[3AceShowHand](https://github.com/3AceShowHand)ハンド
+        -   `UPDATE`イベント送信時に更新された列値のみが含まれるように、Open Protocol 出力のメッセージ サイズを最適化します [#9336](https://github.com/pingcap/tiflow/issues/9336) @[3AceShowHand](https://github.com/3AceShowHand)
         -   Storage Sink が HEX 形式のデータの 16 進数エンコーディングをサポートするようになり、AWS DMS フォーマット仕様との互換性が確保されました [#9373](https://github.com/pingcap/tiflow/issues/9373) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   Kafka Sink は、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)をサポートし、メッセージのサイズを削減します [#9382](https://github.com/pingcap/tiflow/issues/9382) @[3AceShowHand](https://github.com/3AceShowHand)
 
@@ -231,7 +231,7 @@ TiDB バージョン: 7.3.0
 -   TiDB
 
     -   MySQL Cursor Fetch プロトコルを使用した場合に、結果セットのメモリ消費量が`tidb_mem_quota_query`制限を超え、TiDB のメモリ不足が発生する問題を修正しました。修正後、TiDB は自動的に結果セットをディスクに書き込み、メモリを解放します。 [#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
-    -   データ競合によって引き起こされる TiDBpanic問題を修正 [#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
+    -   データ競合によって引き起こされる TiDBのpanic問題を修正 [#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
     -   `indexMerge`を含むクエリが強制終了されたときに発生するハングアップ問題を修正 [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `tidb_enable_parallel_apply`が有効な場合、MPP モードでのクエリ結果が正しくない問題を修正 [#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
     -   `resolve lock` PD時間の急激な変化時にハングアップする可能性がある問題を修正 [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
@@ -256,15 +256,15 @@ TiDB バージョン: 7.3.0
 
 -   TiKV
 
-    -   GC中にデータを読み取ると、まれにTiKVpanicが発生する可能性がある問題を修正しました [#15109](https://github.com/tikv/tikv/issues/15109) @[MyonKeminta](https://github.com/MyonKeminta)
+    -   GC中にデータを読み取ると、まれにTiKV panicが発生する可能性がある問題を修正しました [#15109](https://github.com/tikv/tikv/issues/15109) @[MyonKeminta](https://github.com/MyonKeminta)
 
 -   PD
 
     -   PD の再起動によって`default`リソース グループが再初期化される可能性がある問題を修正 [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     -   etcdが既に起動しているがクライアントがまだ接続していない場合に、クライアントを呼び出すとPDがpanicを起こす可能性がある問題を修正しました [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     -   リージョンの出力 `health-check` が、リージョン ID を照会して返されるリージョン情報と一致しない問題を修正します。 [#6560](https://github.com/tikv/pd/issues/6560) @[JmPotato](https://github.com/JmPotato)
-    -   `unsafe recovery`で失敗した学習者ピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
-    -   配置ルールがルールを満たしていないTiFlash学習者を選択してしまう問題を修正します [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
+    -   `unsafe recovery`で失敗したラーナーピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
+    -   配置ルールがルールを満たしていないTiFlashラーナーを選択してしまう問題を修正します [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
     -   ルールチェッカーがピアを選択する際に、不健全なピアを削除できない問題を修正 [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
 
 -   TiFlash

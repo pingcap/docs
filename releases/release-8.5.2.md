@@ -25,7 +25,7 @@ TiDBバージョン：8.5.2
 
     -   Backup & Restore (BR)
 
-        -   新しくサポートされた AWS リージョンが検証に失敗することによって引き起こされるバックアップ エラーを避けるために、AWS リージョン名のチェックを削除します [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)シュート
+        -   新しくサポートされた AWS リージョンが検証に失敗することによって引き起こされるバックアップ エラーを避けるために、AWS リージョン名のチェックを削除します [#18159](https://github.com/tikv/tikv/issues/18159) @[3pointer](https://github.com/3pointer)
 
     -   TiDB Lightning
 
@@ -106,7 +106,7 @@ TiDBバージョン：8.5.2
     -   特定の状況でTiFlash が予期せず終了した場合に、エラー スタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   大量のデータをインポートした後にTiFlash が高いメモリ使用量を維持する可能性がある問題を修正 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     -   `profiles.default.init_thread_count_scale`が`0`に設定されている場合、 TiFlash の起動がブロックされる場合がある問題を修正 [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後、そのパーティションテーブルに対するクエリがエラーを返すことがある問題を修正 [#9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)ポティガー
+    -   パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後、そのパーティションテーブルに対するクエリがエラーを返すことがある問題を修正 [#9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   クエリに仮想列が含まれ、リモート読み取りがトリガーされた場合に`Not found column`エラーが発生する可能性がある問題を修正 [#9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
     -   クラスター内のテーブルに多数の`ENUM`タイプのカラムが含まれている場合、 TiFlash が大量のメモリを消費する可能性がある問題を修正 [#9947](https://github.com/pingcap/tiflash/issues/9947) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   16 MiB を超えるデータを 1 行挿入するとTiFlash が再起動に失敗することがある問題を修正 [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -129,7 +129,7 @@ TiDBバージョン：8.5.2
 
     -   TiCDC
 
-        -   レプリケーション トラフィックがダウンストリーム Kafka のトラフィックしきい値を超えた後に変更フィードが停止する可能性がある問題を修正 [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)ハンド
+        -   レプリケーション トラフィックがダウンストリーム Kafka のトラフィックしきい値を超えた後に変更フィードが停止する可能性がある問題を修正 [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)
         -   `pulsar+http`または`pulsar+https`プロトコルが使用されている場合に Kafka シンクのディスパッチ ルールが有効にならない問題を修正 [#12068](https://github.com/pingcap/tiflow/issues/12068) @[SandeepPadhi](https://github.com/SandeepPadhi)
         -   TiCDCがPDリーダーの移行を時間内に監視できず、レプリケーションレイテンシーが増加する問題を修正 [#11997](https://github.com/pingcap/tiflow/issues/11997) @[lidezhu](https://github.com/lidezhu)
         -   TiCDCがAvroプロトコル経由で`default NULL` SQLステートメントを複製する際にエラーを報告する問題を修正しました [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)

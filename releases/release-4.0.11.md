@@ -13,12 +13,12 @@ TiDB バージョン: 4.0.11
 
 -   TiDB
 
-    -   `utf8_unicode_ci`と`utf8mb4_unicode_ci`照合順序[＃22558](https://github.com/pingcap/tidb/pull/22558)サポート
+    -   `utf8_unicode_ci`と`utf8mb4_unicode_ci`照合順序サポート [＃22558](https://github.com/pingcap/tidb/pull/22558)
 
 -   TiKV
 
-    -   `utf8mb4_unicode_ci`照合順序[＃9577](https://github.com/tikv/tikv/pull/9577)サポートする
-    -   `cast_year_as_time`照合順序[＃9299](https://github.com/tikv/tikv/pull/9299)サポートする
+    -   `utf8mb4_unicode_ci`照合順序サポートする [＃9577](https://github.com/tikv/tikv/pull/9577)
+    -   `cast_year_as_time`照合順序サポートする [＃9299](https://github.com/tikv/tikv/pull/9299)
 
 -   TiFlash
 
@@ -28,21 +28,21 @@ TiDB バージョン: 4.0.11
 
 -   TiDB
 
-    -   外部結合[＃22402](https://github.com/pingcap/tidb/pull/22402)から簡素化された内部結合を並べ替える
+    -   外部結合から簡素化された内部結合を並べ替える [＃22402](https://github.com/pingcap/tidb/pull/22402)
     -   Grafanaダッシュボードで複数のクラスターをサポート[＃22534](https://github.com/pingcap/tidb/pull/22534)
     -   複数のステートメントの問題に対する回避策を追加[＃22468](https://github.com/pingcap/tidb/pull/22468)
     -   スロークエリの指標[＃22405](https://github.com/pingcap/tidb/pull/22405) `internal`と`general`に分ける
-    -   `utf8_unicode_ci`と`utf8mb4_unicode_ci`照合順序[＃22099](https://github.com/pingcap/tidb/pull/22099)インターフェースを追加
+    -   `utf8_unicode_ci`と`utf8mb4_unicode_ci`照合順序インターフェースを追加 [＃22099](https://github.com/pingcap/tidb/pull/22099)
 
 -   TiKV
 
-    -   DBaaS [＃9591](https://github.com/tikv/tikv/pull/9591)サーバー情報のメトリクスを追加
+    -   DBaaS サーバー情報のメトリクスを追加 [＃9591](https://github.com/tikv/tikv/pull/9591)
     -   Grafanaダッシュボードで複数のクラスターをサポート[＃9572](https://github.com/tikv/tikv/pull/9572)
-    -   RocksDB メトリックを TiDB [＃9316](https://github.com/tikv/tikv/pull/9316)に報告する
-    -   コプロセッサータスク[＃9277](https://github.com/tikv/tikv/pull/9277)の中断時間を記録する
-    -   Load Base Split [＃9354](https://github.com/tikv/tikv/pull/9354)のキー数とキーサイズのしきい値を追加します。
+    -   RocksDB メトリックを TiDB に報告する [＃9316](https://github.com/tikv/tikv/pull/9316)
+    -   コプロセッサータスクの中断時間を記録する [＃9277](https://github.com/tikv/tikv/pull/9277)
+    -   Load Base Split のキー数とキーサイズのしきい値を追加します。 [＃9354](https://github.com/tikv/tikv/pull/9354)
     -   データのインポート前にファイルが存在するかどうかを確認する[＃9544](https://github.com/tikv/tikv/pull/9544)
-    -   ファストチューンパネル[＃9180](https://github.com/tikv/tikv/pull/9180)改善
+    -   ファストチューンパネル改善 [＃9180](https://github.com/tikv/tikv/pull/9180)
 
 -   PD
 
@@ -58,81 +58,81 @@ TiDB バージョン: 4.0.11
 
     -   TiCDC
 
-        -   `capture`メタデータにバージョン情報を追加し、 `changefeed`メタデータ[＃1342](https://github.com/pingcap/tiflow/pull/1342)に`changefeed`の CLI バージョンを追加します。
+        -   `capture`メタデータにバージョン情報を追加し、 `changefeed`メタデータに`changefeed`の CLI バージョンを追加します。 [＃1342](https://github.com/pingcap/tiflow/pull/1342)
 
     -   TiDB Lightning
 
         -   インポートパフォーマンスを向上させるためにテーブルを並列に作成する[＃502](https://github.com/pingcap/tidb-lightning/pull/502)
-        -   エンジンの合計サイズがリージョンサイズ[＃524](https://github.com/pingcap/tidb-lightning/pull/524)より小さい場合は、リージョンの分割をスキップしてインポート パフォーマンスを向上させます。
+        -   エンジンの合計サイズがリージョンサイズより小さい場合は、リージョンの分割をスキップしてインポート パフォーマンスを向上させます。 [＃524](https://github.com/pingcap/tidb-lightning/pull/524)
         -   インポート進行状況バーを追加し、復元進行状況の精度を最適化します[＃506](https://github.com/pingcap/tidb-lightning/pull/506)
 
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
 
-    -   異常な`unicode_ci`定数伝播[＃22614](https://github.com/pingcap/tidb/pull/22614)の問題を修正
+    -   異常な`unicode_ci`定数伝播の問題を修正 [＃22614](https://github.com/pingcap/tidb/pull/22614)
     -   誤った照合順序と強制可能性を引き起こす可能性のある問題を修正[＃22602](https://github.com/pingcap/tidb/pull/22602)
     -   照合順序結果が誤っている可能性がある問題を修正[＃22599](https://github.com/pingcap/tidb/pull/22599)
     -   異なる照合順序における定数置換の問題を修正[＃22582](https://github.com/pingcap/tidb/pull/22582)
-    -   照合順序[＃22531](https://github.com/pingcap/tidb/pull/22531)使用すると関数`like`間違った結果を返す可能性があるバグを修正しました
-    -   `least`と`greatest`関数[＃22580](https://github.com/pingcap/tidb/pull/22580)における誤った`duration`型推論の問題を修正
+    -   照合順序使用すると関数`like`間違った結果を返す可能性があるバグを修正しました [＃22531](https://github.com/pingcap/tidb/pull/22531)
+    -   `least`と`greatest`関数における誤った`duration`型推論の問題を修正 [＃22580](https://github.com/pingcap/tidb/pull/22580)
     -   `like`関数が単一文字のワイルドカード ( `_` ) に続いて複数文字のワイルドカード ( `%` ) を処理するときに発生するバグを修正しました[＃22575](https://github.com/pingcap/tidb/pull/22575)
     -   TiDBの組み込み関数の型推論エラーを修正（ `least`と`greatest` ） [＃22562](https://github.com/pingcap/tidb/pull/22562)
-    -   パターン文字列がUnicode文字列[＃22529](https://github.com/pingcap/tidb/pull/22529)の場合に`like`関数が間違った結果を返すバグを修正しました
-    -   `@@tidb_snapshot`変数が[＃22527](https://github.com/pingcap/tidb/pull/22527)設定されている場合にポイント取得クエリがスナップショットデータを取得できないバグを修正しました
+    -   パターン文字列がUnicode文字列の場合に`like`関数が間違った結果を返すバグを修正しました [＃22529](https://github.com/pingcap/tidb/pull/22529)
+    -   `@@tidb_snapshot`変数が設定されている場合にPointGetクエリがスナップショットデータを取得できないバグを修正しました [＃22527](https://github.com/pingcap/tidb/pull/22527)
     -   結合からヒントを生成するときに発生する可能性のあるpanicを修正[＃22518](https://github.com/pingcap/tidb/pull/22518)
-    -   文字列が`BIT`型[＃22420](https://github.com/pingcap/tidb/pull/22420)に誤って変換される問題を修正
-    -   `tidb_rowid`列目に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
+    -   文字列が`BIT`型に誤って変換される問題を修正 [＃22420](https://github.com/pingcap/tidb/pull/22420)
+    -   `tidb_rowid`列に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
     -   キャッシュされたプランが誤って使用されるバグを修正[＃22353](https://github.com/pingcap/tidb/pull/22353)
     -   バイナリ/文字列の長さが大きすぎる場合に関数`WEIGHT_STRING`で発生するランタイムpanicを修正[＃22332](https://github.com/pingcap/tidb/pull/22332)
     -   関数パラメータの数が無効な場合、生成された列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)
     -   実行プランを構築する前にプロセス情報を正しく設定する[＃22148](https://github.com/pingcap/tidb/pull/22148)
-    -   `IndexLookUp` [＃22136](https://github.com/pingcap/tidb/pull/22136)の不正確な実行時統計の問題を修正
-    -   コンテナ[＃22116](https://github.com/pingcap/tidb/pull/22116)にクラスタをデプロイするときにメモリ使用量情報のキャッシュを追加する
+    -   `IndexLookUp` の不正確な実行時統計の問題を修正 [＃22136](https://github.com/pingcap/tidb/pull/22136)
+    -   コンテナにクラスタをデプロイするときにメモリ使用量情報のキャッシュを追加する [＃22116](https://github.com/pingcap/tidb/pull/22116)
     -   デコードプランエラーの問題を修正[＃22022](https://github.com/pingcap/tidb/pull/22022)
     -   無効なウィンドウ仕様の使用によるエラーを報告[＃21976](https://github.com/pingcap/tidb/pull/21976)
-    -   `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` [＃21972](https://github.com/pingcap/tidb/pull/21972)とネストされている場合はエラーを報告します。
-    -   存在しないパーティション[＃21971](https://github.com/pingcap/tidb/pull/21971)で`INSERT IGNORE`ステートメントが使用された場合にエラーが報告されない問題を修正しました
-    -   `EXPLAIN`結果のエンコードを統一し、 [＃21964](https://github.com/pingcap/tidb/pull/21964)遅いログ
-    -   集計演算子[＃21957](https://github.com/pingcap/tidb/pull/21957)使用するときに結合で不明な列が発生する問題を修正しました
-    -   `ceiling`関数[＃21936](https://github.com/pingcap/tidb/pull/21936)の間違った型推論を修正
-    -   `Double`型の列が小数点[＃21916](https://github.com/pingcap/tidb/pull/21916)無視する問題を修正しました
-    -   相関集計がサブクエリ[＃21877](https://github.com/pingcap/tidb/pull/21877)で計算される問題を修正
+    -   `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` とネストされている場合はエラーを報告します。 [＃21972](https://github.com/pingcap/tidb/pull/21972)
+    -   存在しないパーティションで`INSERT IGNORE`ステートメントが使用された場合にエラーが報告されない問題を修正しました [＃21971](https://github.com/pingcap/tidb/pull/21971)
+    -   `EXPLAIN`結果のエンコードを統一し、 遅いログ [＃21964](https://github.com/pingcap/tidb/pull/21964)
+    -   集計演算子使用するときに結合で不明な列が発生する問題を修正しました [＃21957](https://github.com/pingcap/tidb/pull/21957)
+    -   `ceiling`関数の間違った型推論を修正 [＃21936](https://github.com/pingcap/tidb/pull/21936)
+    -   `Double`型の列が小数点無視する問題を修正しました [＃21916](https://github.com/pingcap/tidb/pull/21916)
+    -   相関集計がサブクエリで計算される問題を修正 [＃21877](https://github.com/pingcap/tidb/pull/21877)
     -   キーの長さが65536以上のJSONオブジェクトのエラーを報告します[＃21870](https://github.com/pingcap/tidb/pull/21870)
-    -   `dyname`関数がMySQL [＃21850](https://github.com/pingcap/tidb/pull/21850)と互換性がない問題を修正
+    -   `dyname`関数がMySQL と互換性がない問題を修正 [＃21850](https://github.com/pingcap/tidb/pull/21850)
     -   入力データが長すぎる場合に`to_base64`関数が`NULL`返す問題を修正しました[＃21813](https://github.com/pingcap/tidb/pull/21813)
-    -   サブクエリ[＃21808](https://github.com/pingcap/tidb/pull/21808)で複数のフィールドを比較できない問題を修正
-    -   JSON [＃21785](https://github.com/pingcap/tidb/pull/21785)で float 型を比較する際に発生する問題を修正しました
+    -   サブクエリで複数のフィールドを比較できない問題を修正 [＃21808](https://github.com/pingcap/tidb/pull/21808)
+    -   JSON で float 型を比較する際に発生する問題を修正しました [＃21785](https://github.com/pingcap/tidb/pull/21785)
     -   JSONオブジェクトの型を比較する際に発生する問題を修正[＃21718](https://github.com/pingcap/tidb/pull/21718)
     -   `cast`関数の強制値が正しく設定されていない問題を修正[＃21714](https://github.com/pingcap/tidb/pull/21714)
-    -   `IF`関数[＃21711](https://github.com/pingcap/tidb/pull/21711)使用時に予期しないpanicが発生する問題を修正
-    -   JSON検索から返される`NULL`結果がMySQL [＃21700](https://github.com/pingcap/tidb/pull/21700)と互換性がない問題を修正しました
+    -   `IF`関数使用時に予期しないpanicが発生する問題を修正 [＃21711](https://github.com/pingcap/tidb/pull/21711)
+    -   JSON検索から返される`NULL`結果がMySQL と互換性がない問題を修正しました [＃21700](https://github.com/pingcap/tidb/pull/21700)
     -   `ORDER BY`と`HAVING`使用して`only_full_group_by`モードをチェックするときに発生する問題を修正しました[＃21697](https://github.com/pingcap/tidb/pull/21697)
-    -   `Day`と`Time`の単位がMySQL [＃21676](https://github.com/pingcap/tidb/pull/21676)と互換性がない問題を修正
-    -   デフォルト値`LEAD`と`LAG`フィールドタイプ[＃21665](https://github.com/pingcap/tidb/pull/21665)に適応できない問題を修正
-    -   `LOAD DATA`文がベーステーブル[＃21638](https://github.com/pingcap/tidb/pull/21638)にのみデータをロードできることを確認するためのチェックを実行します。
-    -   `addtime`と`subtime`関数が無効な引数[＃21635](https://github.com/pingcap/tidb/pull/21635)処理するときに発生する問題を修正しました
+    -   `Day`と`Time`の単位がMySQL と互換性がない問題を修正 [＃21676](https://github.com/pingcap/tidb/pull/21676)
+    -   デフォルト値`LEAD`と`LAG`フィールドタイプに適応できない問題を修正 [＃21665](https://github.com/pingcap/tidb/pull/21665)
+    -   `LOAD DATA`文がベーステーブルにのみデータをロードできることを確認するためのチェックを実行します。 [＃21638](https://github.com/pingcap/tidb/pull/21638)
+    -   `addtime`と`subtime`関数が無効な引数処理するときに発生する問題を修正しました [＃21635](https://github.com/pingcap/tidb/pull/21635)
     -   近似値の丸めルールを「最も近い偶数に丸める」に変更します[＃21628](https://github.com/pingcap/tidb/pull/21628)
     -   `WEEK()`明示的に読み込まれるまで`@@GLOBAL.default_week_format`認識しない問題を修正[＃21623](https://github.com/pingcap/tidb/pull/21623)
 
 -   TiKV
 
-    -   `PROST=1` [＃9604](https://github.com/tikv/tikv/pull/9604)でTiKVのビルドに失敗する問題を修正
+    -   `PROST=1` でTiKVのビルドに失敗する問題を修正 [＃9604](https://github.com/tikv/tikv/pull/9604)
     -   一致しないメモリ診断を修正[＃9589](https://github.com/tikv/tikv/pull/9589)
-    -   部分的なRawKV復元範囲の終了キーが[＃9583](https://github.com/tikv/tikv/pull/9583)含む問題を修正
-    -   TiCDC の増分スキャン中にロールバックされたトランザクションのキーの古い値をロードするときに発生する TiKVpanicの問題を修正しました[＃9569](https://github.com/tikv/tikv/pull/9569)
-    -   異なる設定の変更フィードが 1 つのリージョン[＃9565](https://github.com/tikv/tikv/pull/9565)に接続したときに古い値の構成の不具合を修正しました。
+    -   部分的なRawKV復元範囲の終了キーが含む問題を修正 [＃9583](https://github.com/tikv/tikv/pull/9583)
+    -   TiCDC の増分スキャン中にロールバックされたトランザクションのキーの古い値をロードするときに発生する TiKV panicの問題を修正しました[＃9569](https://github.com/tikv/tikv/pull/9569)
+    -   異なる設定の変更フィードが 1 つのリージョンに接続したときに古い値の構成の不具合を修正しました。 [＃9565](https://github.com/tikv/tikv/pull/9565)
     -   MAC アドレスのないネットワーク インターフェースを持つマシンで TiKV クラスターを実行すると発生するクラッシュの問題を修正しました (v4.0.9 で導入) [＃9516](https://github.com/tikv/tikv/pull/9516)
-    -   巨大なリージョン[＃9448](https://github.com/tikv/tikv/pull/9448)をバックアップする際のTiKV OOMの問題を修正
+    -   巨大なリージョンをバックアップする際のTiKV OOMの問題を修正 [＃9448](https://github.com/tikv/tikv/pull/9448)
     -   `region-split-check-diff`カスタマイズできない問題を修正[＃9530](https://github.com/tikv/tikv/pull/9530)
-    -   システム時刻が[＃9542](https://github.com/tikv/tikv/pull/9542)に戻ったときにTiKVpanicが発生する問題を修正
+    -   システム時刻がに戻ったときにTiKV panicが発生する問題を修正 [＃9542](https://github.com/tikv/tikv/pull/9542)
 
 -   PD
 
     -   メンバーの健康指標が正しく表示されない問題を修正[＃3368](https://github.com/pingcap/pd/pull/3368)
-    -   ピア[＃3352](https://github.com/pingcap/pd/pull/3352)まだ残っているトゥームストーンストアの削除を禁止する
+    -   ピアまだ残っているtombstoneストアの削除を禁止する [＃3352](https://github.com/pingcap/pd/pull/3352)
     -   ストア制限が維持できない問題を修正[＃3403](https://github.com/pingcap/pd/pull/3403)
-    -   散布範囲スケジューラ[＃3401](https://github.com/pingcap/pd/pull/3401)の制限制限を修正
+    -   散布範囲スケジューラの制限制限を修正 [＃3401](https://github.com/pingcap/pd/pull/3401)
 
 -   TiFlash
 
@@ -140,7 +140,7 @@ TiDB バージョン: 4.0.11
     -   TiFlashがデータ読み取り時にクラッシュする可能性があるバグを修正
     -   DDL操作後に書き込まれたデータの一部がデータ圧縮後に失われる可能性がある問題を修正しました
     -   TiFlashがコプロセッサー内の10進定数を正しく処理しない問題を修正
-    -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
+    -   ラーナーの読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
     -   TiDBとTiFlash間の`0`または`NULL`による除算の不一致な動作を修正
 
 -   ツール
@@ -148,23 +148,23 @@ TiDB バージョン: 4.0.11
     -   TiCDC
 
         -   `ErrTaskStatusNotExists`と`capture`セッションの終了が同時に発生した場合、TiCDCサービスが予期せず終了する可能性があるバグを修正[＃1240](https://github.com/pingcap/tiflow/pull/1240)
-        -   `changefeed`が別の`changefeed` [＃1347](https://github.com/pingcap/tiflow/pull/1347)の影響を受ける可能性があるという古い値の切り替え問題を修正しました
-        -   無効な`sort-engine`パラメータ[＃1309](https://github.com/pingcap/tiflow/pull/1309)を持つ新しい`changefeed`処理するときにTiCDCサービスがハングする可能性があるバグを修正しました
+        -   `changefeed`が別の`changefeed` の影響を受ける可能性があるという古い値の切り替え問題を修正しました [＃1347](https://github.com/pingcap/tiflow/pull/1347)
+        -   無効な`sort-engine`パラメータを持つ新しい`changefeed`処理するときにTiCDCサービスがハングする可能性があるバグを修正しました [＃1309](https://github.com/pingcap/tiflow/pull/1309)
         -   非オーナーノードでデバッグ情報を取得する際に発生するpanicの問題を修正[＃1349](https://github.com/pingcap/tiflow/pull/1349)
-        -   テーブル[＃1351](https://github.com/pingcap/tiflow/pull/1351)を追加または削除したときに、 `ticdc_processor_num_of_tables`と`ticdc_processor_table_resolved_ts`メトリックが正しく更新されない問題を修正しました。
-        -   テーブル[＃1363](https://github.com/pingcap/tiflow/pull/1363)を追加するときにプロセッサがクラッシュした場合に潜在的なデータ損失が発生する問題を修正しました
+        -   テーブルを追加または削除したときに、 `ticdc_processor_num_of_tables`と`ticdc_processor_table_resolved_ts`メトリックが正しく更新されない問題を修正しました。 [＃1351](https://github.com/pingcap/tiflow/pull/1351)
+        -   テーブルを追加するときにプロセッサがクラッシュした場合に潜在的なデータ損失が発生する問題を修正しました [＃1363](https://github.com/pingcap/tiflow/pull/1363)
         -   テーブル移行中に所有者が TiCDCサーバーの異常終了を引き起こす可能性があるバグを修正[＃1352](https://github.com/pingcap/tiflow/pull/1352)
         -   サービスGCセーフポイントが失われた後にTiCDCが時間内に終了しないバグを修正[＃1367](https://github.com/pingcap/tiflow/pull/1367)
-        -   KVクライアントがイベントフィード[＃1336](https://github.com/pingcap/tiflow/pull/1336)作成をスキップする可能性があるバグを修正しました
+        -   KVクライアントがイベントフィード作成をスキップする可能性があるバグを修正しました [＃1336](https://github.com/pingcap/tiflow/pull/1336)
         -   トランザクションが下流に複製されたときにトランザクションの原子性が壊れるバグを修正[＃1375](https://github.com/pingcap/tiflow/pull/1375)
 
     -   Backup & Restore (BR)
 
-        -   BRがバックアップ[＃702](https://github.com/pingcap/br/pull/702)を復元した後にTiKVが大きなリージョンを生成する可能性がある問題を修正しました
-        -   テーブルに自動 ID [＃720](https://github.com/pingcap/br/pull/720)がない場合でもBR がテーブルの自動 ID を復元する問題を修正しました
+        -   BRがバックアップを復元した後にTiKVが大きなリージョンを生成する可能性がある問題を修正しました [＃702](https://github.com/pingcap/br/pull/702)
+        -   テーブルに自動 ID がない場合でもBR がテーブルの自動 ID を復元する問題を修正しました [＃720](https://github.com/pingcap/br/pull/720)
 
     -   TiDB Lightning
 
-        -   TiDBバックエンド[＃535](https://github.com/pingcap/tidb-lightning/pull/535)使用時に`column count mismatch`が発生する可能性があるバグを修正
+        -   TiDBバックエンド使用時に`column count mismatch`が発生する可能性があるバグを修正 [＃535](https://github.com/pingcap/tidb-lightning/pull/535)
         -   ソースファイルの列数とターゲットテーブルの列数が一致しない場合に TiDB バックエンドがパニックを起こすバグを修正[＃528](https://github.com/pingcap/tidb-lightning/pull/528)
         -   TiDB Lightning のデータインポート中に TiKV が予期せずpanic可能性があるバグを修正[＃554](https://github.com/pingcap/tidb-lightning/pull/554)

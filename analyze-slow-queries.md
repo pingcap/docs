@@ -244,4 +244,4 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 1.  [インデックス問題の解決方法](/wrong-index-solution.md)
 2.  [結合順序が間違っています](/join-reorder.md)
-3.  [式は押し下げられない](/blocklist-control-plan.md)
+3.  [式はプッシュダウンできない](/blocklist-control-plan.md)

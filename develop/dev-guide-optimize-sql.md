@@ -136,7 +136,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-`title_idx`インデックスには`title`列目のデータのみが含まれているため、TiDB は最初にインデックス データをスキャンし、次にテーブルから`price`列目をクエリする必要があります。
+`title_idx`インデックスには`title`列のデータのみが含まれているため、TiDB は最初にインデックス データをスキャンし、次にテーブルから`price`列をクエリする必要があります。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
