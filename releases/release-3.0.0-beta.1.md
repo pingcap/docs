@@ -65,7 +65,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   TiDBに表示されるMySQLのバージョンを5.7.10から5.7.25に変更する[＃9553](https://github.com/pingcap/tidb/pull/9553)
     -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
     -   統計に基づいて実際のデータ量と推定データ量の差を記録するための監視項目`high_error_rate_feedback_total`追加します。 [＃9209](https://github.com/pingcap/tidb/pull/9209)
-    -   データベースディメンションにQPS監視項目を追加します。これは、構成項目[＃9151](https://github.com/pingcap/tidb/pull/9151)使用して有効にできます。
+    -   データベースディメンションにQPS監視項目を追加します。これは、構成項目を使用して有効にできます。 [＃9151](https://github.com/pingcap/tidb/pull/9151)
 -   DDL
     -   DDLタスクの再試行回数を制限するために、 `ddl_error_count_limit`グローバル変数（デフォルトでは「512」）を追加します（この回数が制限を超えると、DDLタスクはキャンセルされます） [＃9295](https://github.com/pingcap/tidb/pull/9295)
     -   ALTER ALGORITHM `INPLACE` / `INSTANT` をサポート [＃8811](https://github.com/pingcap/tidb/pull/8811)

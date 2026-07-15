@@ -231,7 +231,7 @@ TiDB バージョン: 7.3.0
 -   TiDB
 
     -   MySQL Cursor Fetch プロトコルを使用した場合に、結果セットのメモリ消費量が`tidb_mem_quota_query`制限を超え、TiDB のメモリ不足が発生する問題を修正しました。修正後、TiDB は自動的に結果セットをディスクに書き込み、メモリを解放します。 [#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
-    -   データ競合によって引き起こされる TiDBpanic問題を修正 [#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
+    -   データ競合によって引き起こされる TiDBのpanic問題を修正 [#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
     -   `indexMerge`を含むクエリが強制終了されたときに発生するハングアップ問題を修正 [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `tidb_enable_parallel_apply`が有効な場合、MPP モードでのクエリ結果が正しくない問題を修正 [#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
     -   `resolve lock` PD時間の急激な変化時にハングアップする可能性がある問題を修正 [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)

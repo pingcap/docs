@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 2.1.14
 -   サポートされていない集計関数の使用によって発生するpanicを修正[＃10911](https://github.com/pingcap/tidb/pull/10911)
 -   `load data`文が失敗した場合、最後のトランザクションに自動ロールバック機能を追加します[＃10862](https://github.com/pingcap/tidb/pull/10862)
 -   `OOMAction`構成項目が`Cancel` に設定されている場合に TiDB が誤った結果を返す場合がある問題を修正しました。 [＃11016](https://github.com/pingcap/tidb/pull/11016)
--   TiDBpanic問題[＃11039](https://github.com/pingcap/tidb/pull/11039)回避するために`TRACE`文を無効にする
+-   TiDBのpanic問題を回避するために`TRACE`文を無効にする [＃11039](https://github.com/pingcap/tidb/pull/11039)
 -   特定の関数をコプロセッサーにプッシュダウンすることを動的に有効/無効にする`mysql.expr_pushdown_blacklist`システム テーブルを追加します。 [＃10998](https://github.com/pingcap/tidb/pull/10998)
 -   `ANY_VALUE`機能が`ONLY_FULL_GROUP_BY`モードで動作しない問題を修正 [＃10994](https://github.com/pingcap/tidb/pull/10994)
 -   文字列型のユーザー変数を評価する際にディープコピーを行わないことで発生する誤った評価を修正しました。 [＃11043](https://github.com/pingcap/tidb/pull/11043)
@@ -44,7 +44,7 @@ TiDB Binlog
     -   `safe-mode`構成項目を追加し、この項目を有効にした後に重複したデータのインポートをサポートします[＃662](https://github.com/pingcap/tidb-binlog/pull/662)
 -   Pump
     -   利用可能なbinlogスペースを制限するための`stop-write-at-available-space`設定項目を追加します[＃659](https://github.com/pingcap/tidb-binlog/pull/659)
-    -   LevelDB L0ファイルの数が[＃648](https://github.com/pingcap/tidb-binlog/pull/648)の場合にガベージコレクターが動作しないことがある問題を修正しました。
+    -   LevelDB L0ファイルの数が多い場合にガベージコレクターが動作しないことがある問題を修正しました。 [＃648](https://github.com/pingcap/tidb-binlog/pull/648)
     -   ログファイルを削除するアルゴリズムを最適化して、スペースの解放を高速化します[＃648](https://github.com/pingcap/tidb-binlog/pull/648)
 -   Drainer
     -   下流の`BIT`列の更新の失敗を修正 [＃655](https://github.com/pingcap/tidb-binlog/pull/655)

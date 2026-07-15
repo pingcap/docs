@@ -395,11 +395,11 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     -   TiCDC がテーブル名の変更[＃43338](https://github.com/pingcap/tidb/issues/43338) @ [tangenta](https://github.com/tangenta)中に一部の行の変更を失う可能性がある問題を修正しました
     -   クライアントがカーソル読み取り[＃38116](https://github.com/pingcap/tidb/issues/38116) @ [YangKeao](https://github.com/YangKeao)を使用すると TiDBサーバーがクラッシュする問題を修正しました
     -   `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[＃42298](https://github.com/pingcap/tidb/issues/42298) @ [CbcWestwolf](https://github.com/CbcWestwolf)
-    -   `UNION` [＃42563](https://github.com/pingcap/tidb/issues/42563) @ [lcwangchao](https://github.com/lcwangchao)でユニオンビューと一時テーブルをクエリするときに発生する TiDBpanic問題を修正しました。
+    -   `UNION` でユニオンビューと一時テーブルをクエリするときに発生する TiDBのpanic問題を修正しました。 [＃42563](https://github.com/pingcap/tidb/issues/42563) @ [lcwangchao](https://github.com/lcwangchao)
     -   トランザクション[＃39664](https://github.com/pingcap/tidb/issues/39664) @ [tiancaiamao](https://github.com/tiancaiamao)で複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました
     -   時刻変換中にプリペアドプランキャッシュと非プリペアドプランキャッシュの動作間の非互換性の問題を修正しました[＃42439](https://github.com/pingcap/tidb/issues/42439) @ [qw4990](https://github.com/qw4990)
     -   Decimal 型[＃43311](https://github.com/pingcap/tidb/issues/43311) @ [qw4990](https://github.com/qw4990)のプラン キャッシュによって発生する誤った結果を修正しました
-    -   間違ったフィールドタイプチェック[＃42459](https://github.com/pingcap/tidb/issues/42459) @ [AilinKid](https://github.com/AilinKid)による、null 認識アンチ結合 (NAAJ) での TiDBpanic問題を修正しました。
+    -   間違ったフィールドタイプチェックによる、null 認識アンチ結合 (NAAJ) での TiDBのpanic問題を修正しました。 [＃42459](https://github.com/pingcap/tidb/issues/42459) @ [AilinKid](https://github.com/AilinKid)
     -   RC分離レベルでの悲観的トランザクションにおけるDML実行の失敗により、データとインデックス[＃43294](https://github.com/pingcap/tidb/issues/43294) @ [ekexium](https://github.com/ekexium)の間に不整合が発生する可能性がある問題を修正しました。
     -   極端なケースで、悲観的トランザクションの最初のステートメントが再試行されるときに、このトランザクションのロックを解決するとトランザクションの正確性に影響する可能性がある問題を修正しました[＃42937](https://github.com/pingcap/tidb/issues/42937) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   GC がロック[＃43243](https://github.com/pingcap/tidb/issues/43243) @ [MyonKeminta](https://github.com/MyonKeminta)を解決するときに、まれに悲観的トランザクションの残余悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。

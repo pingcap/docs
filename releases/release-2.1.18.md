@@ -45,7 +45,7 @@ TiDB Ansible バージョン: 2.1.18
     -   `skip-grant-table=true`構成の`FLUSH PRIVILEGES`ステートメントによって引き起こされるpanic問題を修正 [＃12816](https://github.com/pingcap/tidb/pull/12816)
     -   短時間に多数の書き込み要求があった場合にパフォーマンスのボトルネックを回避するために、AutoID を適用するデフォルトの最小ステップを`1000`から`30000`に増やします[＃12891](https://github.com/pingcap/tidb/pull/12891)
     -   TiDBがパニックになったときに失敗した`Prepared`文がエラーログに出力されない問題を修正しました[＃12954](https://github.com/pingcap/tidb/pull/12954)
-    -   スロークエリログの`COM_STMT_FETCH`回限りのレコードがMySQL [＃12953](https://github.com/pingcap/tidb/pull/12953)ものと矛盾する問題を修正しました。
+    -   スロークエリログの`COM_STMT_FETCH`時間レコードがMySQLのものと矛盾する問題を修正しました。 [＃12953](https://github.com/pingcap/tidb/pull/12953)
     -   書き込み競合のエラーメッセージにエラーコードを追加して、原因を素早く特定します[＃12878](https://github.com/pingcap/tidb/pull/12878)
 -   DDL
     -   デフォルトでは、列の`AUTO INCREMENT`の属性の削除は許可されません。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`の変数の値を変更してください。詳細は[システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)参照してください[＃12146](https://github.com/pingcap/tidb/pull/12146)

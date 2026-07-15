@@ -38,7 +38,7 @@ TiDB バージョン: 3.0.15
     -   浮動小数点数に対して XOR 演算を実行すると TiDB と MySQL の間で結果が一致しない問題を修正しました。 [＃16976](https://github.com/pingcap/tidb/pull/16976)
     -   準備された方法でDDL文を実行するときに発生するエラーを修正[＃17415](https://github.com/pingcap/tidb/pull/17415)
     -   IDアロケータのバッチサイズ計算の誤った処理ロジックを修正 [＃17548](https://github.com/pingcap/tidb/pull/17548)
-    -   時間が高価なしきい値[＃17534](https://github.com/pingcap/tidb/pull/17534)超えたときに`MAX_EXEC_TIME`ヒントが有効にならない問題を修正
+    -   実行時間が大きいしきい値を超えたときに`MAX_EXEC_TIME`ヒントが有効にならない問題を修正 [＃17534](https://github.com/pingcap/tidb/pull/17534)
 
 -   TiKV
 
