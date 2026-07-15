@@ -56,7 +56,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [流式数据](http://docs.pingcap.com/zh/tidbcloud/changefeed-overview)
 
-[使用 API (Beta)](https://docs.pingcap.com/zh/tidbcloud/api-overview)
+[使用 API（预览版）](https://docs.pingcap.com/zh/tidbcloud/api-overview)
 
 </LearningPath>
 

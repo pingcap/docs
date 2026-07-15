@@ -1,25 +1,25 @@
 ---
-title: 数据服务（Beta）
+title: 数据服务（PREVIEW）
 summary: 了解 TiDB Cloud 的数据服务概念。
 ---
 
-# 数据服务（Beta）
+# 数据服务（PREVIEW）
 
-TiDB Cloud [数据服务（beta）](https://tidbcloud.com/project/data-service)是一个完全托管的低代码后端即服务解决方案，它简化了后端应用程序开发，使开发人员能够快速构建高度可扩展、安全的数据驱动应用程序。
+TiDB Cloud [数据服务（PREVIEW）](https://tidbcloud.com/project/data-service)是一个完全托管的低代码后端即服务解决方案，它简化了后端应用程序开发，使开发人员能够快速构建高度可扩展、安全的数据驱动应用程序。
 
 数据服务使你能够通过自定义 API 端点使用 HTTPS 请求访问 TiDB Cloud 数据。此功能使用无服务器架构来处理计算资源和弹性扩展，因此你可以专注于端点中的查询逻辑，而无需担心基础设施或维护成本。
 
-更多信息，请参阅 [TiDB Cloud 数据服务（Beta）概述](/tidb-cloud/data-service-overview.md)。
+更多信息，请参阅 [TiDB Cloud 数据服务（PREVIEW）概述](/tidb-cloud/data-service-overview.md)。
 
 ## 数据应用
 
-[数据服务（beta）](https://tidbcloud.com/project/data-service)中的数据应用是一组可用于访问特定应用程序数据的端点的集合。通过创建数据应用，你可以对端点进行分组，并使用 API 密钥配置授权设置来限制对端点的访问。这样，你可以确保只有授权用户才能访问和操作你的数据，使你的应用程序更加安全。
+[数据服务（PREVIEW）](https://tidbcloud.com/project/data-service)中的数据应用是一组可用于访问特定应用程序数据的端点的集合。通过创建数据应用，你可以对端点进行分组，并使用 API 密钥配置授权设置来限制对端点的访问。这样，你可以确保只有授权用户才能访问和操作你的数据，使你的应用程序更加安全。
 
 更多信息，请参阅[管理数据应用](/tidb-cloud/data-service-manage-data-app.md)。
 
 ## 数据应用端点
 
-[数据服务（beta）](https://tidbcloud.com/project/data-service)中的端点是一个可以自定义来执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如在 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中为参数提供值时，端点会使用提供的参数执行相应的 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
+[数据服务（PREVIEW）](https://tidbcloud.com/project/data-service)中的端点是一个可以自定义来执行 SQL 语句的 Web API。你可以为 SQL 语句指定参数，例如在 `WHERE` 子句中使用的值。当客户端调用端点并在请求 URL 中为参数提供值时，端点会使用提供的参数执行相应的 SQL 语句，并将结果作为 HTTP 响应的一部分返回。
 
 更多信息，请参阅[管理端点](/tidb-cloud/data-service-manage-endpoint.md)。
 

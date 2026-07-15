@@ -22,7 +22,7 @@ TiDB Cloud 提供审计日志功能，用于记录数据库的用户访问活动
     > **注意：**
     >
     > - {{{ .starter }}} 不支持数据库审计日志。
-    > - 对于 {{{ .essential }}}，请参见 [{{{ .essential }}} 的数据库审计日志（Beta）](/tidb-cloud/essential-database-audit-logging.md)。
+    > - 对于 {{{ .essential }}}，请参见 [{{{ .essential }}} 的数据库审计日志（PREVIEW）](/tidb-cloud/essential-database-audit-logging.md)。
     > - 对于 {{{ .dedicated }}}，请参见 [{{{ .dedicated }}} 数据库审计日志](/tidb-cloud/tidb-cloud-auditing.md)。
 
 - 你必须在组织中拥有 `Organization Owner` 角色。否则，你将无法在 TiDB Cloud 控制台中看到与数据库审计相关的选项。
@@ -332,7 +332,7 @@ TiDB Cloud 审计日志是可读的文本文件，其完整文件名中包含实
 
 > **Note:**
 >
-> 为了提高流量可见性，对于通过 AWS PrivateLink 建立的连接，`CLIENT_IP` 显示实际客户端 IP 地址，而不是负载均衡器 IP。此功能目前为 beta，仅在 AWS 区域 `Frankfurt (eu-central-1)` 中可用。
+> 为了提高流量可见性，对于通过 AWS PrivateLink 建立的连接，`CLIENT_IP` 显示实际客户端 IP 地址，而不是负载均衡器 IP。此功能目前为公开预览版，仅在 AWS 区域 `Frankfurt (eu-central-1)` 中可用。
 
 ### 审计操作信息 {#audit-operation-information}
 

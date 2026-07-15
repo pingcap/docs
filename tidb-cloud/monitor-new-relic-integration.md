@@ -9,10 +9,10 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 
 ## New Relic 集成版本
 
-自 2023 年 4 月 11 日起，TiDB Cloud 支持项目级 New Relic 集成（Beta）。自 2025 年 7 月 31 日起，TiDB Cloud 推出集群级 New Relic 集成（预览版）。自 2025 年 9 月 30 日起，集群级 New Relic 集成将正式发布（GA）。
+自 2023 年 4 月 11 日起，TiDB Cloud 支持项目级 New Relic 集成（Beta）。自 2025 年 7 月 31 日起，TiDB Cloud 推出集群级 New Relic 集成（PREVIEW）。自 2025 年 9 月 30 日起，集群级 New Relic 集成将正式发布（GA）。
 
 - **集群级 New Relic 集成**：如果在 2025 年 7 月 31 日前，你的组织内没有未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 将为你的组织提供集群级 New Relic 集成，以体验最新增强功能。
-- **旧版项目级 New Relic 集成（Beta）**：如果在 2025 年 7 月 31 日前，你的组织内至少有一个未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 会保留现有和新建的项目级集成，以避免影响当前仪表盘。请注意，旧版项目级 New Relic 集成将于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些旧版集成，请按照 [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md) 迁移到新的集群级集成，以最大程度减少对统计/指标（信息）相关服务的影响。
+- **旧版项目级 New Relic 集成（Beta）**：如果在 2025 年 7 月 31 日前，你的组织内至少有一个未删除的旧版项目级 Datadog 或 New Relic 集成，TiDB Cloud 会保留现有和新建的项目级集成，以避免影响当前仪表盘。请注意，旧版项目级 New Relic 集成已于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些旧版集成，请按照 [迁移 Datadog 和 New Relic 集成](/tidb-cloud/migrate-metrics-integrations.md) 迁移到新的集群级集成，以最大程度减少对统计/指标（信息）相关服务的影响。
 
 ## 前提条件
 

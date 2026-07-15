@@ -12,7 +12,7 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 > **注意：**
 >
-> 目前，数据迁移功能在 TiDB Cloud Essential 上处于 beta 阶段。
+> 目前，数据迁移功能在 TiDB Cloud Essential 上处于公测阶段。
 
 </CustomContent>
 

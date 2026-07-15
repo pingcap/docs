@@ -13,7 +13,7 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
 > **Note:**
 >
-> TiDB Cloud CLI 目前处于 beta 阶段。
+> TiDB Cloud CLI 目前处于公开预览阶段。
 
 ## 开始之前
 

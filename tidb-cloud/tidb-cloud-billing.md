@@ -347,7 +347,7 @@ If you already have a TiDB Cloud account and you want to pay for the usage via y
 
 要将你的 TiDB Cloud 账户关联到 Azure billing account，请执行以下步骤：
 
-1. 打开 [Azure Marketplace 页面](https://azuremarketplace.microsoft.com)，搜索 `TiDB Cloud`，并在搜索结果中选择 **TiDB Cloud on Azure (Preview)**。此时会显示 TiDB Cloud 产品页面。
+1. 打开 [Azure Marketplace 页面](https://azuremarketplace.microsoft.com)，搜索 `TiDB Cloud`，并在搜索结果中选择 **TiDB Cloud on Azure (PREVIEW)**。此时会显示 TiDB Cloud 产品页面。
 
 2. 在 TiDB Cloud 产品页面上，点击 **Get It Now**，接受使用条款，然后点击 **Continue** 进入订单页面。
 

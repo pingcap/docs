@@ -26,7 +26,7 @@ TiDB Cloud 提供了审计日志功能，用于记录数据库的用户访问活
     > **注意：**
     >
     > - TiDB Cloud Starter 不支持数据库审计日志功能。
-    > - 对于 TiDB Cloud Essential，请参见 [TiDB Cloud Essential 数据库审计日志（Beta）](/tidb-cloud/essential-database-audit-logging.md)。
+    > - 对于 TiDB Cloud Essential，请参见 [TiDB Cloud Essential 数据库审计日志（预览版）](/tidb-cloud/essential-database-audit-logging.md)。
 
 - 你在组织中拥有 `Organization Owner` 或 `Project Owner` 角色。否则，你无法在 TiDB Cloud 控制台中看到与数据库审计相关的选项。更多信息请参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 

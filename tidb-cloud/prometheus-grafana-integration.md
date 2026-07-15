@@ -1,9 +1,9 @@
 ---
-title: 将 TiDB Cloud 集成到 Prometheus 和 Grafana（预览版）
+title: 将 TiDB Cloud 集成到 Prometheus 和 Grafana（PREVIEW）
 summary: 了解如何通过 Prometheus 和 Grafana 集成监控你的 TiDB Cloud 实例。
 ---
 
-# 将 TiDB Cloud 集成到 Prometheus 和 Grafana（预览版）
+# 将 TiDB Cloud 集成到 Prometheus 和 Grafana（PREVIEW）
 
 TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如果你拥有 Prometheus service，可以轻松地从该端点监控 TiDB Cloud 的关键统计/指标（信息）。
 
@@ -29,7 +29,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 <CustomContent plan="essential">
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Essential 实例名称，进入其概览页面。
-2. 在左侧导航栏，点击 **Integrations** > **Integration to Prometheus(Preview)**。
+2. 在左侧导航栏，点击 **Integrations** > **Integration to Prometheus(PREVIEW)**。
 3. 点击 **Add File**，为当前 TiDB Cloud Essential 实例生成并显示 `scrape_config` 文件。
 4. 复制 `scrape_config` 文件内容，供后续使用。
 
@@ -38,7 +38,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 <CustomContent plan="premium">
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Premium 实例名称，进入其概览页面。
-2. 在左侧导航栏，点击 **Settings** > **Integrations** > **Integration to Prometheus(Preview)**。
+2. 在左侧导航栏，点击 **Settings** > **Integrations** > **Integration to Prometheus(PREVIEW)**。
 3. 点击 **Add File**，为当前 TiDB Cloud Premium 实例生成并显示 `scrape_config` 文件。
 4. 复制 `scrape_config` 文件内容，供后续使用。
 

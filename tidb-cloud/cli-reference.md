@@ -1,13 +1,13 @@
 ---
-title: TiDB Cloud CLI 参考（Beta）
+title: TiDB Cloud CLI 参考（PREVIEW）
 summary: 提供 TiDB Cloud CLI 的概览。
 ---
 
-# TiDB Cloud CLI 参考（Beta）
+# TiDB Cloud CLI 参考（PREVIEW）
 
 > **Note:**
 >
-> 目前，TiDB Cloud CLI 处于 beta 阶段，暂不适用于 TiDB Cloud Dedicated 集群。
+> 目前，TiDB Cloud CLI 处于公开预览阶段，暂不适用于 TiDB Cloud Dedicated 集群。
 
 TiDB Cloud CLI 是一个命令行界面，允许你通过几行命令在终端中操作 TiDB Cloud。在 TiDB Cloud CLI 中，你可以轻松管理 {{{ .starter }}} 和 Essential 实例、向实例导入数据以及执行更多操作。
 

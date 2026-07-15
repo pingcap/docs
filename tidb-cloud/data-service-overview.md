@@ -1,11 +1,11 @@
 ---
-title: TiDB Cloud Data Service (Beta) Overview
+title: TiDB Cloud Data Service (PREVIEW) Overview
 summary: 了解 TiDB Cloud 中的 Data Service 及其应用场景。
 ---
 
-# TiDB Cloud Data Service (Beta) 概述
+# TiDB Cloud Data Service (PREVIEW) 概述
 
-TiDB Cloud [Data Service (beta)](https://tidbcloud.com/project/data-service) 是一款全托管的低代码后端即服务（BaaS）解决方案，简化了后端应用开发，帮助开发者快速构建高可扩展性、安全、数据驱动的应用。
+TiDB Cloud [Data Service (PREVIEW)](https://tidbcloud.com/project/data-service) 是一款全托管的低代码后端即服务（BaaS）解决方案，简化了后端应用开发，帮助开发者快速构建高可扩展性、安全、数据驱动的应用。
 
 Data Service 允许你通过自定义 API 端点，以 HTTPS 请求的方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩展，因此你只需专注于端点中的查询逻辑，无需担心基础设施或运维成本。
 

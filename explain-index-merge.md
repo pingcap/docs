@@ -92,7 +92,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 >
 > - 你可以使用 SQL 提示 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) 强制优化器应用索引合线，无论 `tidb_enable_index_merge` 的设置如何。若过滤条件中包含无法下推的表达式，必须使用此提示启用索引合线。
 >
-> - 如果优化器能为某个查询计划选择单一索引扫描方式（非全表扫描），则不会自动使用索引合线。要让优化器使用索引合线，你需要使用优化器提示。从 v8.1.0 开始，可以通过设置 [Optimizer Fix Control 52869](/optimizer-fix-controls.md#52869-new-in-v810) 来移除此限制。移除后，优化器可以在更多查询中自动选择索引合线，但可能会忽略最优执行计划。因此，建议在实际用例中充分测试后再移除此限制，以确保不会引起性能回归。
+> - 当 [Optimizer Fix Control 52869](/optimizer-fix-controls.md#52869-new-in-v810) 设置为 `OFF` 时，如果优化器能为某个查询计划选择单一索引扫描方式（非全表扫描），则不会自动选择索引合线。要使用索引合线，你需要指定优化器提示。从 v8.5.7 开始，该控制项的默认值变更为 `ON`，默认移除了上述限制，使优化器能够在更多查询中自动选择索引合线。
 >
 > - 目前索引合线不支持 [临时表](/temporary-tables.md)。
 >

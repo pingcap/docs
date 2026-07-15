@@ -137,7 +137,7 @@
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- 同步数据 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- 流数据 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
@@ -457,7 +457,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

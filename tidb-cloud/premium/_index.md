@@ -45,7 +45,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [备份和恢复数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-premium/?plan=premium)
 
-[使用 API (Beta)](https://docs.pingcap.com/zh/tidbcloud/api-overview/?plan=premium)
+[使用 API（预览版）](https://docs.pingcap.com/zh/api/)
 
 </LearningPath>
 

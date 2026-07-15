@@ -119,11 +119,9 @@ TiDB 中的唯一索引在一个或多个列上强制实施唯一性，确保表
 
 ### 向量索引
 
-对于以下 TiDB 部署选项，TiDB 支持向量数据类型和向量搜索索引。
-
-- TiDB Cloud Serverless
-
-- TiDB Self-Managed v8.4.0 或更高版本
+> **注意：**
+>
+> 向量索引功能目前处于公开预览阶段。该功能可能会在不事先通知的情况下发生变更。如果你发现了 bug，可以在 GitHub 上报告一个 [issue](https://github.com/pingcap/tidb/issues)。
 
 在 TiDB 中，[向量索引](/ai/reference/vector-search-index.md)是一种专门设计的索引，用于在包含向量数据的列上进行高效的近似最近邻（ANN）搜索。向量索引，特别是 HNSW（分层可导航小世界）算法，允许 K-最近邻（KNN）搜索快速识别向量空间中最接近的数据点。这显著提高了查询性能，使结果能够在毫秒级内返回，相比暴力搜索方法有很大提升。
 

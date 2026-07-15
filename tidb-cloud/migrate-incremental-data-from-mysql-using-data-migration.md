@@ -11,7 +11,7 @@ summary: 了解如何使用 Data Migration，将托管于 Amazon Aurora MySQL、
 
 > **注意：**
 >
-> 目前，Data Migration 功能在 TiDB Cloud Essential 上处于 beta 阶段。
+> 目前，Data Migration 功能在 TiDB Cloud Essential 上处于 public preview 阶段。
 
 </CustomContent>
 

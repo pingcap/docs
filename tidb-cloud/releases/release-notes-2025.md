@@ -180,7 +180,7 @@ summary: 了解 2025 年 TiDB Cloud 的发布说明。
 
       了解更多信息，请参见 [为 Changefeeds 设置私有端点](/tidb-cloud/set-up-sink-private-endpoint.md)。
 
-    - [Prometheus 集成（预览）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 现已适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+    - [Prometheus 集成（PREVIEW）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 现已适用于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
         TiDB Cloud 现以集群级别管理 Prometheus 集成，提供更细粒度的控制和配置。该功能可让你将 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的统计/指标（信息）无缝发送到 Prometheus，实现统一平台下的高级报警/告警。
 
@@ -481,7 +481,7 @@ summary: 了解 2025 年 TiDB Cloud 的发布说明。
 
   该预览版现已面向未配置 Datadog 或 New Relic 集成的组织开放。对于已配置 Datadog 或 New Relic 集成的组织，我们将在下月主动联系你，协商合适的迁移方案和时间表。
 
-  了解更多信息，请参见 [集成 TiDB Cloud 与 Datadog（预览）](/tidb-cloud/monitor-datadog-integration.md) 和 [集成 TiDB Cloud 与 New Relic（预览）](/tidb-cloud/monitor-new-relic-integration.md)。
+  了解更多信息，请参见 [集成 TiDB Cloud 与 Datadog（PREVIEW）](/tidb-cloud/monitor-datadog-integration.md) 和 [集成 TiDB Cloud 与 New Relic（PREVIEW）](/tidb-cloud/monitor-new-relic-integration.md)。
 
 ## 2025 年 7 月 22 日
 
