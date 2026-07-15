@@ -872,7 +872,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > バージョン7.5.7および8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に置き換えられました。
 
--   RocksDBの圧縮をトリガーするために必要な墓石の数
+-   RocksDBの圧縮をトリガーするために必要なtombstoneの数
 -   デフォルト値: `10000`
 -   最小値: `0`
 
@@ -882,7 +882,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > バージョン7.5.7および8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に置き換えられました。
 
--   RocksDBの圧縮をトリガーするために必要な墓石の割合
+-   RocksDBの圧縮をトリガーするために必要なtombstoneの割合
 -   デフォルト値: `30`
 -   最小値: `1`
 -   最大値: `100`
@@ -2325,14 +2325,14 @@ TiKVの自動圧縮の動作を設定します。
 
 ### <code>tombstone-num-threshold</code><span class="version-mark">は v7.5.7 および v8.5.4 で追加されました。</span> {#code-tombstone-num-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKVの自動圧縮をトリガーするために必要なRocksDBのトゥームストーンの数。トゥームストーンの数がこのしきい値に達するか、トゥームストーンの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
+-   TiKVの自動圧縮をトリガーするために必要なRocksDBのtombstoneの数。tombstoneの数がこのしきい値に達するか、tombstoneの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
 -   デフォルト値: `10000`
 -   最小値: `0`
 
 ### <code>tombstone-percent-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#code-tombstone-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKVによる自動圧縮をトリガーするために必要なRocksDBのトゥームストーンの割合。トゥームストーンの割合がこのしきい値に達するか、トゥームストーンの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
+-   TiKVによる自動圧縮をトリガーするために必要なRocksDBのtombstoneの割合。tombstoneの割合がこのしきい値に達するか、tombstoneの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
 -   デフォルト値: `30`
 -   最小値: `0`
@@ -2340,14 +2340,14 @@ TiKVの自動圧縮の動作を設定します。
 
 ### <code>redundant-rows-threshold</code> <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#code-redundant-rows-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKVの自動圧縮をトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのトゥームストーン、TiKVの古いバージョン、およびTiKVの削除トゥームストーンが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
+-   TiKVの自動圧縮をトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのtombstone、TiKVの古いバージョン、およびTiKVの削除tombstoneが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 -   デフォルト値: `50000`
 -   最小値: `0`
 
 ### <code>redundant-rows-percent-threshold</code> <span class="version-mark">（v7.5.7およびv8.5.4で追加）</span> {#code-redundant-rows-percent-threshold-code-span-class-version-mark-new-in-v7-5-7-and-v8-5-4-span}
 
--   TiKV の自動圧縮をトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のトゥームストーン、TiKV の古いバージョン、および TiKV の削除トゥームストーンが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動圧縮をトリガーします。
+-   TiKV の自動圧縮をトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のtombstone、TiKV の古いバージョン、および TiKV の削除tombstoneが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動圧縮をトリガーします。
 -   この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 -   デフォルト値: `20`
 -   最小値: `0`
@@ -2371,7 +2371,7 @@ TiKVの自動圧縮の動作を設定します。
 
 ### <code>mvcc-read-weight</code> <span class="version-mark">v8.5.6で追加</span> {#code-mvcc-read-weight-code-span-class-version-mark-new-in-v8-5-6-span}
 
--   リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、墓石密度などの他の圧縮トリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) `true`に設定されている場合にのみ有効になります。
+-   リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、tombstone密度などの他の圧縮トリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) `true`に設定されている場合にのみ有効になります。
 -   デフォルト値: `3.0`
 -   最小値: `0.0`
 

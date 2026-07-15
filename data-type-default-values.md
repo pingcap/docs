@@ -20,7 +20,7 @@ summary: TiDB のデータ型のデフォルト値について学習します。
 -   列が値として`NULL`取ることができる場合、列は明示的な`DEFAULT NULL`句で定義されます。
 -   列が値として`NULL`取ることができない場合は、TiDB は明示的な`DEFAULT`句なしで列を定義します。
 
-明示的な`DEFAULT`節のない`NOT NULL`列へのデータ入力の場合、 `INSERT`または`REPLACE`ステートメントに列の値が含まれていないと、TiDB はその時点で有効な SQL モードに従って列を処理します。
+明示的な`DEFAULT`句のない`NOT NULL`列へのデータ入力の場合、 `INSERT`または`REPLACE`ステートメントに列の値が含まれていないと、TiDB はその時点で有効な SQL モードに従って列を処理します。
 
 -   厳密なSQLモードが有効になっている場合、トランザクションテーブルではエラーが発生し、文はロールバックされます。非トランザクションテーブルではエラーが発生します。
 -   厳密モードが有効になっていない場合、TiDB は列を列データ型の暗黙的なデフォルト値に設定します。
@@ -33,7 +33,7 @@ summary: TiDB のデータ型のデフォルト値について学習します。
 
 ## 式をデフォルト値として指定する {#specify-expressions-as-default-values}
 
-MySQL 8.0.13以降では、 `DEFAULT`節のデフォルト値として式を指定できるようになりました。詳細については、 [MySQL 8.0.13以降の明示的なデフォルト処理](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit)参照してください。
+MySQL 8.0.13以降では、 `DEFAULT`句のデフォルト値として式を指定できるようになりました。詳細については、 [MySQL 8.0.13以降の明示的なデフォルト処理](https://dev.mysql.com/doc/refman/8.0/en/data-type-defaults.html#data-type-defaults-explicit)参照してください。
 
 TiDB は、 `DEFAULT`句のデフォルト値として次の式を指定することをサポートしています。
 

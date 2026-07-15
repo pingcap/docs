@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 -   TiDB
 
-    -   `WHERE`節に同等の条件が 1 つしかない場合に間違ったパーティションが選択される問題を修正[＃17054](https://github.com/pingcap/tidb/pull/17054)
+    -   `WHERE`句に同等の条件が 1 つしかない場合に間違ったパーティションが選択される問題を修正[＃17054](https://github.com/pingcap/tidb/pull/17054)
     -   `WHERE`句に文字列列[＃16660](https://github.com/pingcap/tidb/pull/16660)のみが含まれている場合に誤ったインデックス範囲を構築することで誤った結果が発生する問題を修正しました。
     -   `DELETE`操作[＃16991](https://github.com/pingcap/tidb/pull/16991)後にトランザクション内の`PointGet`クエリを実行するときに発生するpanic問題を修正しました
     -   エラーが発生したときにGCワーカーがデッドロックに遭遇する可能性がある問題を修正しました[＃16915](https://github.com/pingcap/tidb/pull/16915)
@@ -64,7 +64,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   `CREATE TABLE`の文の`auto_random`オプションをサポートする[＃16813](https://github.com/pingcap/tidb/pull/16813)
     -   TiKV がリクエストをより適切にスケジュールして処理できるように、DistSQL リクエストに TaskID を割り当てます[＃17155](https://github.com/pingcap/tidb/pull/17155)
     -   MySQLクライアント[＃17187](https://github.com/pingcap/tidb/pull/17187)にログインした後、TiDBサーバーのバージョン情報を表示する機能をサポート
-    -   `GROUP_CONCAT`関数[＃16990](https://github.com/pingcap/tidb/pull/16990)の`ORDER BY`節をサポートする
+    -   `GROUP_CONCAT`関数の`ORDER BY`句をサポートする [＃16990](https://github.com/pingcap/tidb/pull/16990)
     -   スローログに`Plan_from_cache`情報を表示して、ステートメントがプラン キャッシュ[＃17121](https://github.com/pingcap/tidb/pull/17121)にヒットしたかどうかを示すことをサポート
     -   TiDB DashboardにTiFlashマルチディスク構成の容量情報を表示できる機能を追加
     -   ダッシュボードでSQL文を使用してTiFlashログを照会する機能を追加
@@ -132,7 +132,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   悲観的トランザクションモード[＃16897](https://github.com/pingcap/tidb/pull/16897)で`SELECT FOR UPDATE`文がスローログに記録できない問題を修正
     -   `Enum`または`Set`タイプの列で`SELECT DISTINCT`実行したときに発生する誤った結果を修正[＃16892](https://github.com/pingcap/tidb/pull/16892)
     -   `SHOW CREATE TABLE`文[＃16864](https://github.com/pingcap/tidb/pull/16864)の`auto_random_base`の表示エラーを修正
-    -   `WHERE`節[＃16559](https://github.com/pingcap/tidb/pull/16559)の`string_value`の誤った値を修正する
+    -   `WHERE`句の`string_value`の誤った値を修正する [＃16559](https://github.com/pingcap/tidb/pull/16559)
     -   `GROUP BY`ウィンドウ関数のエラーメッセージがMySQL [＃16165](https://github.com/pingcap/tidb/pull/16165)と一致しない問題を修正しました
     -   データベース名に大文字の[＃17167](https://github.com/pingcap/tidb/pull/17167)含まれている場合に`FLASH TABLE`文の実行が失敗する問題を修正しました
     -   投影実行プログラム[＃17118](https://github.com/pingcap/tidb/pull/17118)の不正確なメモリトレースを修正しました

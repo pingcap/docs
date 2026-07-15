@@ -116,7 +116,7 @@ TiDB バージョン: 7.1.3
     -   大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[＃7248](https://github.com/tikv/pd/issues/7248) @ [rleungx](https://github.com/rleungx)
     -   TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正[＃7253](https://github.com/tikv/pd/issues/7253) @ [nolouch](https://github.com/nolouch)
     -   Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[＃7438](https://github.com/tikv/pd/issues/7438) @ [niubell](https://github.com/niubell)
-    -   ルールチェッカーが配置ルール[＃7185](https://github.com/tikv/pd/issues/7185) @ [nolouch](https://github.com/nolouch)設定に従って学習者を追加しない問題を修正しました
+    -   ルールチェッカーが配置ルール設定に従ってラーナーを追加しない問題を修正しました [＃7185](https://github.com/tikv/pd/issues/7185) @ [nolouch](https://github.com/nolouch)
     -   TiKVノードが利用できない場合にPDが通常のピアを削除する可能性がある問題を修正[＃7249](https://github.com/tikv/pd/issues/7249) @ [lhy1024](https://github.com/lhy1024)
     -   DR自動同期モード[＃6988](https://github.com/tikv/pd/issues/6988) @ [HuSharp](https://github.com/HuSharp)でリーダーの切り替えに時間がかかる問題を修正
 

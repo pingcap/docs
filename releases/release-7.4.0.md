@@ -168,7 +168,7 @@ TiDB バージョン: 7.4.0
 
 -   TiDBは`ROLLUP`修飾子と`GROUPING`関数[＃44487](https://github.com/pingcap/tidb/issues/44487) @ [AilinKid](https://github.com/AilinKid)の使用をサポートしています
 
-    `WITH ROLLUP`修飾子と`GROUPING`関数は、多次元データ要約のためのデータ分析でよく使用されます。v7.4.0 以降では、 `GROUP BY`節で`WITH ROLLUP`修飾子と`GROUPING`関数を使用できます。例えば、 `SELECT ... FROM ... GROUP BY ... WITH ROLLUP`構文で`WITH ROLLUP`修飾子を使用できます。
+    `WITH ROLLUP`修飾子と`GROUPING`関数は、多次元データ要約のためのデータ分析でよく使用されます。v7.4.0 以降では、 `GROUP BY`句で`WITH ROLLUP`修飾子と`GROUPING`関数を使用できます。例えば、 `SELECT ... FROM ... GROUP BY ... WITH ROLLUP`構文で`WITH ROLLUP`修飾子を使用できます。
 
     詳細については[ドキュメント](/functions-and-operators/group-by-modifier.md)参照してください。
 
@@ -351,7 +351,7 @@ TiDB バージョン: 7.4.0
     -   TiDBパーサーが状態のままになり、解析エラーが発生する問題を修正[＃45898](https://github.com/pingcap/tidb/issues/45898) @ [qw4990](https://github.com/qw4990)
     -   `EXCHANGE PARTITION`制約[＃45922](https://github.com/pingcap/tidb/issues/45922) @ [mjonss](https://github.com/mjonss)をチェックしない問題を修正
     -   `tidb_enforce_mpp`システム変数が正しく復元できない問題を修正[＃46214](https://github.com/pingcap/tidb/issues/46214) @ [djshow832](https://github.com/djshow832)
-    -   `LIKE`節の`_`誤って処理される問題を修正[＃46287](https://github.com/pingcap/tidb/issues/46287) [＃46618](https://github.com/pingcap/tidb/issues/46618) @ [Defined2014](https://github.com/Defined2014)
+    -   `LIKE`述語の`_`が誤って処理される問題を修正[＃46287](https://github.com/pingcap/tidb/issues/46287) [＃46618](https://github.com/pingcap/tidb/issues/46618) @ [Defined2014](https://github.com/Defined2014)
     -   TiDBがスキーマ[＃46325](https://github.com/pingcap/tidb/issues/46325) @ [hihihuhu](https://github.com/hihihuhu)を取得できなかった場合に`schemaTs`が0に設定される問題を修正しました
     -   `AUTO_ID_CACHE=1` [＃46444](https://github.com/pingcap/tidb/issues/46444) @ [tiancaiamao](https://github.com/tiancaiamao)に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました
     -   `AUTO_ID_CACHE=1` [＃46454](https://github.com/pingcap/tidb/issues/46454) @ [tiancaiamao](https://github.com/tiancaiamao)に設定されている場合に、panic後に TiDB がゆっくりと回復する問題を修正しました。

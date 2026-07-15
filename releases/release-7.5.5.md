@@ -70,9 +70,9 @@ TiDB バージョン: 7.5.5
     -   グローバルソート[＃54147](https://github.com/pingcap/tidb/issues/54147) @ [tangenta](https://github.com/tangenta)を使用してインデックスを追加するときにパフォーマンスが不安定になる問題を修正しました
     -   外部キー[＃56456](https://github.com/pingcap/tidb/issues/56456) @ [hawkingrei](https://github.com/hawkingrei)を含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。
     -   `RANGE COLUMNS`パーティション関数と`utf8mb4_0900_ai_ci`照合順序を同時に使用すると、クエリ結果[＃57261](https://github.com/pingcap/tidb/issues/57261) @ [Defined2014](https://github.com/Defined2014)が正しくなくなる可能性がある問題を修正しました。
-    -   `NATURAL JOIN`または`USING`節の後にサブクエリを使用するとエラー[＃53766](https://github.com/pingcap/tidb/issues/53766) @ [dash12653](https://github.com/dash12653)が発生する可能性がある問題を修正しました
+    -   `NATURAL JOIN`または`USING`句の後にサブクエリを使用するとエラーが発生する可能性がある問題を修正しました [＃53766](https://github.com/pingcap/tidb/issues/53766) @ [dash12653](https://github.com/dash12653)
     -   書き込み競合が発生したときにTTLタスクをキャンセルできない問題を修正[＃56422](https://github.com/pingcap/tidb/issues/56422) @ [YangKeao](https://github.com/YangKeao)
-    -   CTE に`ORDER BY` 、 `LIMIT` 、または`SELECT DISTINCT`節が含まれており、別の CTE の再帰部分によって参照されている場合、誤ってインライン化され、実行エラー[＃56603](https://github.com/pingcap/tidb/issues/56603) @ [elsa0520](https://github.com/elsa0520)が発生する可能性がある問題を修正しました。
+    -   CTE に`ORDER BY` 、 `LIMIT` 、または`SELECT DISTINCT`句が含まれており、別の CTE の再帰部分によって参照されている場合、誤ってインライン化され、実行エラーが発生する可能性がある問題を修正しました。 [＃56603](https://github.com/pingcap/tidb/issues/56603) @ [elsa0520](https://github.com/elsa0520)
     -   `UPDATE`文が`ENUM`型[＃56832](https://github.com/pingcap/tidb/issues/56832) @ [xhebox](https://github.com/xhebox)の値を誤って更新する問題を修正しました
     -   `RECOVER TABLE BY JOB JOB_ID;`実行すると TiDB がpanicを起こす可能性がある問題を修正[＃55113](https://github.com/pingcap/tidb/issues/55113) @ [crazycs520](https://github.com/crazycs520)
     -   クエリに利用可能なインデックスマージ実行プラン[＃56217](https://github.com/pingcap/tidb/issues/56217) @ [AilinKid](https://github.com/AilinKid)がある場合に`read_from_storage`ヒントが有効にならない可能性がある問題を修正しました

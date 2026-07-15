@@ -40,7 +40,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
 
 ## PD {#pd}
 
--   Grafana [＃1261](https://github.com/pingcap/pd/pull/1261)から墓石 TiKV が削除されない問題を修正
+-   Grafana からtombstone TiKV が削除されない問題を修正 [＃1261](https://github.com/pingcap/pd/pull/1261)
 -   grpc-goがステータス[＃1265](https://github.com/pingcap/pd/pull/1265)を設定する際のデータ競合問題を修正
 -   etcdの起動失敗によりPDサーバーが停止する問題を修正[＃1267](https://github.com/pingcap/pd/pull/1267)
 -   リーダー切り替え時にデータ競合が発生する可能性がある問題を修正[＃1273](https://github.com/pingcap/pd/pull/1273)

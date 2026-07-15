@@ -35,13 +35,13 @@ TiDB バージョン: 5.3.4
     -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
     -   多数のリージョンをマージした後にリージョンキャッシュが適切にクリアされない問題を修正[＃37174](https://github.com/pingcap/tidb/issues/37174)
     -   特定のシナリオで`EXECUTE`文が予期しないエラーをスローする可能性がある問題を修正しました[＃37187](https://github.com/pingcap/tidb/issues/37187)
-    -   `ORDER BY`節に相関サブクエリ[＃18216](https://github.com/pingcap/tidb/issues/18216)が含まれている場合に`GROUP CONCAT`と`ORDER BY`が失敗する可能性がある問題を修正しました
+    -   `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT`と`ORDER BY`が失敗する可能性がある問題を修正しました [＃18216](https://github.com/pingcap/tidb/issues/18216)
     -   プラン キャッシュ[＃29565](https://github.com/pingcap/tidb/issues/29565)使用時に、Decimal と Real の長さと幅が正しく設定されていない場合に返される誤った結果を修正しました。
 
 -   PD
 
     -   PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[＃5321](https://github.com/tikv/pd/issues/5321)
-    -   特定のシナリオでTiFlash学習者レプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
+    -   特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正[＃5401](https://github.com/tikv/pd/issues/5401)
     -   不正確なストリームタイムアウトを修正し、リーダーの切り替えを高速化[＃5207](https://github.com/tikv/pd/issues/5207)
 
 -   TiFlash

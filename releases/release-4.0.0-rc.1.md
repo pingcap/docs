@@ -80,7 +80,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
     -   `handle`目と`version`列目をキャッシュして、単一の読み取りまたは書き込み要求のディスクI/Oを削減します。
-    -   `fromUnixTime`と`dateFormat`押し下げ関数をサポート
+    -   `fromUnixTime`と`dateFormat`プッシュダウン関数をサポート
     -   最初のディスクに従ってグローバル状態を評価し、この評価を報告する
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します
     -   `Chunk`コーデックの 10 進データエンコードを最適化します
@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   楽観的トランザクション[＃7604](https://github.com/tikv/tikv/pull/7604)で多くの書き込み競合が発生する場合、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないようにする
     -   ロック競合の負荷が高いワークロードで、トランザクションの不要なウェイクアップによって無駄な再試行が発生し、パフォーマンスが低下する問題を修正しました[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正[＃7518](https://github.com/tikv/tikv/pull/7518)
-    -   学習者[＃7518](https://github.com/tikv/tikv/pull/7518)削除しても学習者が削除されない問題を修正
+    -   ラーナー削除してもラーナーが削除されない問題を修正 [＃7518](https://github.com/tikv/tikv/pull/7518)
     -   raft-rs [＃7408](https://github.com/tikv/tikv/pull/7408)でフォロワーの読み取りによってpanicが発生する可能性がある問題を修正しました
     -   `group by constant`エラー[＃7383](https://github.com/tikv/tikv/pull/7383)によりSQL操作が失敗する可能性があるバグを修正しました
     -   対応するプライマリロックが悲観的ロックの場合に楽観的ロックが読み取りをブロックする可能性がある問題を修正[＃7328](https://github.com/tikv/tikv/pull/7328)

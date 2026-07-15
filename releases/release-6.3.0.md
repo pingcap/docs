@@ -384,7 +384,7 @@ TiDBバージョン: 6.3.0-DMR
 
     -   `enable-forwarding`が有効になっている場合にgRPCがエラーを不適切に処理する問題によって発生するPDパニックを修正 [#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     -   不健康なリージョンがPDpanicを引き起こす可能性がある問題を修正 [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
-    -   TiFlash学習者レプリカが作成されない可能性がある問題を修正 [#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
+    -   TiFlashラーナーレプリカが作成されない可能性がある問題を修正 [#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
 
 -   TiFlash
 

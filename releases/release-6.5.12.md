@@ -48,7 +48,7 @@ TiDBバージョン: 6.5.12
 
 -   TiDB
 
-    -   `NATURAL JOIN`または`USING`節の後にサブクエリを使用するとエラー[＃53766](https://github.com/pingcap/tidb/issues/53766) @ [dash12653](https://github.com/dash12653)が発生する可能性がある問題を修正しました
+    -   `NATURAL JOIN`または`USING`句の後にサブクエリを使用するとエラーが発生する可能性がある問題を修正しました [＃53766](https://github.com/pingcap/tidb/issues/53766) @ [dash12653](https://github.com/dash12653)
     -   `CAST`関数が文字セット[＃55677](https://github.com/pingcap/tidb/issues/55677) @ [Defined2014](https://github.com/Defined2014)の明示的な設定をサポートしていない問題を修正しました
     -   `LOAD DATA ... REPLACE INTO`操作でデータの不整合が発生する問題を修正[＃56408](https://github.com/pingcap/tidb/issues/56408) @ [fzzf678](https://github.com/fzzf678)
     -   `ADD INDEX` [＃56930](https://github.com/pingcap/tidb/issues/56930) @ [fzzf678](https://github.com/fzzf678)を実行するときに TiDB がインデックスの長さ制限をチェックしない問題を修正しました

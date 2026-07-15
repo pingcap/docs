@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
 -   PD
 
-    -   `shuffle-region-scheduler` [＃2235](https://github.com/pingcap/pd/pull/2235)を使用して学習者のスケジュール管理をサポート
+    -   `shuffle-region-scheduler` を使用してラーナーのスケジュール管理をサポート [＃2235](https://github.com/pingcap/pd/pull/2235)
     -   pd-ctlに配置ルール[＃2306](https://github.com/pingcap/pd/pull/2306)を設定するためのコマンドを追加する
 
 -   ツール

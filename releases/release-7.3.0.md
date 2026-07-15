@@ -263,8 +263,8 @@ TiDB バージョン: 7.3.0
     -   PD の再起動によって`default`リソース グループが再初期化される可能性がある問題を修正 [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     -   etcdが既に起動しているがクライアントがまだ接続していない場合に、クライアントを呼び出すとPDがpanicを起こす可能性がある問題を修正しました [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     -   リージョンの出力 `health-check` が、リージョン ID を照会して返されるリージョン情報と一致しない問題を修正します。 [#6560](https://github.com/tikv/pd/issues/6560) @[JmPotato](https://github.com/JmPotato)
-    -   `unsafe recovery`で失敗した学習者ピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
-    -   配置ルールがルールを満たしていないTiFlash学習者を選択してしまう問題を修正します [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
+    -   `unsafe recovery`で失敗したラーナーピアが`auto-detect`モードでは無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
+    -   配置ルールがルールを満たしていないTiFlashラーナーを選択してしまう問題を修正します [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
     -   ルールチェッカーがピアを選択する際に、不健全なピアを削除できない問題を修正 [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
 
 -   TiFlash

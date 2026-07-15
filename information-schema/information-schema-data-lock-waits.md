@@ -34,7 +34,7 @@ DESC data_lock_waits;
 
 > **警告：**
 >
-> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
+> -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
 > -   現在、楽観的トランザクションの場合、フィールド`SQL_DIGEST`とフィールド`SQL_DIGEST_TEXT`は`null` （使用不可）になっています。回避策として、ブロックの原因となっているSQL文を特定するには、このテーブルを[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべてのSQL文を取得できます。
 > -   `DATA_LOCK_WAITS`テーブルの情報は、クエリ実行中にすべての TiKV ノードからリアルタイムで取得されます。現在、クエリに`WHERE`条件が含まれている場合でも、情報収集はすべての TiKV ノードに対して実行されます。クラスターの規模が大きく、負荷が高い場合、このテーブルへのクエリはパフォーマンスジッターのリスクを引き起こす可能性があります。したがって、実際の状況に応じて使用してください。
 > -   異なる TiKV ノードからの情報が、同じ時刻のスナップショットであるとは限りません。

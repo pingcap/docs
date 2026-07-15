@@ -36,6 +36,6 @@ summary: TiDB 2.0.4は2018年6月15日にリリースされ、システムの互
 -   デバッグ用のRocksDB `PerfContext`インターフェースを追加する
 -   `import-mode`パラメータを削除します
 -   `tikv-ctl`に`region-properties`コマンドを追加
--   RocksDBの墓石が多数存在する場合に`reverse-seek`遅くなる問題を修正
+-   RocksDBのtombstoneが多数存在する場合に`reverse-seek`遅くなる問題を修正
 -   `do_sub`によって引き起こされたクラッシュの問題を修正
 -   GC がデータの複数のバージョンに遭遇したときにログを記録するようにする

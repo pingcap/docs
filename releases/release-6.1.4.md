@@ -42,7 +42,7 @@ TiDB バージョン: 6.1.4
     -   `LazyTxn.LockKeys`関数[＃40355](https://github.com/pingcap/tidb/issues/40355) @ [HuSharp](https://github.com/HuSharp)のデータ競合問題を修正
     -   長いセッション接続[＃40351](https://github.com/pingcap/tidb/issues/40351) @ [fanrenhoo](https://github.com/fanrenhoo)で`INSERT`または`REPLACE`ステートメントがpanic可能性がある問題を修正しました
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [zyguan](https://github.com/zyguan)のためにエラーが返される可能性がある問題を修正しました。
-    -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がポイント取得クエリ[＃39928](https://github.com/pingcap/tidb/issues/39928) @ [zyguan](https://github.com/zyguan)で有効にならない問題を修正しました
+    -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @ [zyguan](https://github.com/zyguan)
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルをクエリすると誤った結果が返される問題を修正[＃37436](https://github.com/pingcap/tidb/issues/37436) @ [zimulala](https://github.com/zimulala)
     -   一部のパターンの`IN`と`NOT IN`サブクエリが`Can't find column`エラー[＃37032](https://github.com/pingcap/tidb/issues/37032) @ [AilinKid](https://github.com/AilinKid) @ [lance6716](https://github.com/lance6716)を報告する問題を修正しました
 
@@ -50,7 +50,7 @@ TiDB バージョン: 6.1.4
 
 -   PD
 
-    -   PD が予期せず複数の学習者をリージョン[＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)に追加する可能性がある問題を修正しました。
+    -   PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)
 
 <!---->
 

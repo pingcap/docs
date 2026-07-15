@@ -142,7 +142,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v6.5.0以降、 `INSERT INTO SELECT`ステートメントの`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`の句で指定されたTiDBテーブルに簡単に保存し、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。
 
-    この機能はバージョン7.1.0で一般公開されています。3 `INSERT INTO SELECT`の`SELECT`節の実行中、オプティマイザーは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`節をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
+    この機能はバージョン7.1.0で一般公開されています。3 `INSERT INTO SELECT`の`SELECT`句の実行中、オプティマイザーは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`句をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
 
     詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)参照してください。
 

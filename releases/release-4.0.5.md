@@ -63,7 +63,7 @@ TiDB バージョン: 4.0.5
     -   リージョン分散[＃2684](https://github.com/tikv/pd/pull/2684)後のリーダー分布の改善
     -   TSOリクエスト[＃2678](https://github.com/tikv/pd/pull/2678)テストとログを追加する
     -   リージョンのリーダーが変更された後の無効なキャッシュ更新を回避する[＃2672](https://github.com/tikv/pd/pull/2672)
-    -   `store.GetLimit`墓石ストア[＃2743](https://github.com/tikv/pd/pull/2743)を返却できるようにするオプションを追加します
+    -   `store.GetLimit`tombstoneストアを返却できるようにするオプションを追加します [＃2743](https://github.com/tikv/pd/pull/2743)
     -   PDリーダーとフォロワー間のリージョンリーダーの変更の同期をサポート[＃2795](https://github.com/tikv/pd/pull/2795)
     -   GCセーフポイントサービス[＃2797](https://github.com/tikv/pd/pull/2797)照会するためのコマンドを追加する
     -   パフォーマンスを向上させるためにフィルターの`region.Clone`の呼び出しを置き換えます[＃2801](https://github.com/tikv/pd/pull/2801)

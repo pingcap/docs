@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 -   TiFlash
 
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
-    -   `fromUnixTime`と`dateFormat`押し下げ関数をサポート
+    -   `fromUnixTime`と`dateFormat`プッシュダウン関数をサポート
     -   デフォルトでラフセットフィルタを無効にする
 
 -   TiDB Ansible

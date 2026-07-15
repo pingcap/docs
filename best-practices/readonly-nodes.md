@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
-summary: このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用ストレージノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードに学習者としてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
+summary: このドキュメントでは、オンラインサービスから高許容遅延負荷を分離するための読み取り専用ストレージノードの設定方法を紹介します。手順としては、TiKVノードを読み取り専用としてマークし、配置ルールを使用して読み取り専用ノードにラーナーとしてデータを保存し、Follower Readを使用して読み取り専用ノードからデータを読み取ることが含まれます。
 aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
 ---
 
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
         labels:
           $mode: readonly
 
-### 2. 配置ルールを使用して、学習者として読み取り専用ノードにデータを保存する {#2-use-placement-rules-to-store-data-on-read-only-nodes-as-learners}
+### 2. 配置ルールを使用して、ラーナーとして読み取り専用ノードにデータを保存する {#2-use-placement-rules-to-store-data-on-read-only-nodes-as-learners}
 
 1.  `pd-ctl config placement-rules`コマンドを実行して、デフォルトの配置ルールをエクスポートします。
 
@@ -52,7 +52,7 @@ aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
     ]
     ```
 
-2.  すべてのデータを学習者として読み取り専用ノードに保存します。以下の例はデフォルトの設定に基づいています。
+2.  すべてのデータをラーナーとして読み取り専用ノードに保存します。以下の例はデフォルトの設定に基づいています。
 
     ```json
     [
@@ -101,7 +101,7 @@ aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
 > **注記：**
 >
 > -   大規模なデータセットを持つクラスターで上記の操作を実行すると、クラスター全体のデータが読み取り専用ノードに完全に複製されるまでに時間がかかる場合があります。この間、読み取り専用ノードはサービスを提供できない可能性があります。
-> -   バックアップの特別な実装のため、各ラベルの学習者数は 1 を超えることはできません。そうでない場合、バックアップ中に重複データが生成されます。
+> -   バックアップの特別な実装のため、各ラベルのラーナー数は 1 を超えることはできません。そうでない場合、バックアップ中に重複データが生成されます。
 
 ### 3. Follower Readを使用して読み取り専用ノードからデータを読み取る {#3-use-follower-read-to-read-data-from-read-only-nodes}
 

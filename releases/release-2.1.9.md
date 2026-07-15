@@ -19,11 +19,11 @@ TiDB Ansible バージョン: 2.1.9
 -   DistSQL [＃10197](https://github.com/pingcap/tidb/pull/10197)でメモリ使用量を追跡および制御する
 -   照合順序を`utf8mb4_0900_ai_ci` [＃10201](https://github.com/pingcap/tidb/pull/10201)として指定するサポート
 -   主キーが符号なし型[＃10209](https://github.com/pingcap/tidb/pull/10209)の場合の`MAX`関数の誤った結果の問題を修正しました
--   非厳密SQLモード[＃10254](https://github.com/pingcap/tidb/pull/10254)でNOT NULL列にNULL値が挿入される問題を修正
+-   非厳密モードでNOT NULL列にNULL値が挿入される問題を修正 [＃10254](https://github.com/pingcap/tidb/pull/10254)
 -   `DISTINCT` [＃10270](https://github.com/pingcap/tidb/pull/10270)に複数の列が存在する場合の`COUNT`関数の誤った結果の問題を修正しました
 -   `LOAD DATA`不規則なCSVファイルを解析する際に発生するpanic問題を修正[＃10269](https://github.com/pingcap/tidb/pull/10269)
 -   `Index Lookup Join` [＃10244](https://github.com/pingcap/tidb/pull/10244)で外部結合キーと内部結合キーの型が一致しない場合は、オーバーフローエラーを無視します。
--   一部のケースで誤ってポイント取得と判断される問題を修正[＃10299](https://github.com/pingcap/tidb/pull/10299)
+-   一部のケースで誤ってPointGetと判断される問題を修正[＃10299](https://github.com/pingcap/tidb/pull/10299)
 -   一部のケースで時間型がタイムゾーンを変換しない場合に誤った結果が出る問題を修正[＃10345](https://github.com/pingcap/tidb/pull/10345)
 -   TiDB の文字セットの大文字と小文字が一致しないケースがいくつかある問題を修正[＃10354](https://github.com/pingcap/tidb/pull/10354)
 -   演算子[＃9166](https://github.com/pingcap/tidb/issues/9166)によって返される行数を制御するサポート

@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 -   Raftstore
     -   ラフトストアCPUの消費を減らすために休止状態リージョンをサポートする[＃4591](https://github.com/tikv/tikv/pull/4591)
-    -   リーダーが学習者[＃4653](https://github.com/tikv/tikv/pull/4653) `ReadIndex`リクエストに返信しない問題を修正
+    -   リーダーがラーナー[＃4653](https://github.com/tikv/tikv/pull/4653) `ReadIndex`リクエストに返信しない問題を修正
     -   一部のケースでリーダーの転送に失敗する問題を修正[＃4684](https://github.com/tikv/tikv/pull/4684)
     -   いくつかのケースでダーティリードの問題を修正[＃4688](https://github.com/tikv/tikv/pull/4688)
     -   スナップショットで適用されたデータが失われる場合がある問題を修正[＃4716](https://github.com/tikv/tikv/pull/4716)

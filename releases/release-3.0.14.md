@@ -105,9 +105,9 @@ TiDB バージョン: 3.0.14
 
     -   一部のケースで分離回復後にノードを正しく削除できない問題を修正[＃7703](https://github.com/tikv/tikv/pull/7703)
     -   リージョンマージ操作[＃7679](https://github.com/tikv/tikv/pull/7679)によってネットワーク分離中に発生するデータ損失の問題を修正
-    -   学習者が正しく削除されない場合がある問題を修正[＃7598](https://github.com/tikv/tikv/pull/7598)
+    -   ラーナーが正しく削除されない場合がある問題を修正[＃7598](https://github.com/tikv/tikv/pull/7598)
     -   生のキーと値のペアのスキャン結果が順序どおりに行われない可能性がある問題を修正[＃7597](https://github.com/tikv/tikv/pull/7597)
     -   Raftメッセージのバッチが大きすぎる場合の再接続の問題を修正[＃7542](https://github.com/tikv/tikv/pull/7542)
     -   空のリクエスト[＃7538](https://github.com/tikv/tikv/pull/7538)によって引き起こされるgRPCスレッドデッドロックの問題を修正
-    -   マージ処理中に学習者を再起動する処理ロジックが正しくない問題を修正[＃7457](https://github.com/tikv/tikv/pull/7457)
+    -   マージ処理中にラーナーを再起動する処理ロジックが正しくない問題を修正[＃7457](https://github.com/tikv/tikv/pull/7457)
     -   ロックのクリーンアップの繰り返しリクエストによりトランザクションの原子性が破壊される可能性がある問題を修正[＃7388](https://github.com/tikv/tikv/pull/7388)

@@ -79,7 +79,7 @@ TiDB バージョン: 4.0.11
     -   `like`関数が単一文字のワイルドカード ( `_` ) に続いて複数文字のワイルドカード ( `%` ) を処理するときに発生するバグを修正しました[＃22575](https://github.com/pingcap/tidb/pull/22575)
     -   TiDBの組み込み関数の型推論エラーを修正（ `least`と`greatest` ） [＃22562](https://github.com/pingcap/tidb/pull/22562)
     -   パターン文字列がUnicode文字列[＃22529](https://github.com/pingcap/tidb/pull/22529)の場合に`like`関数が間違った結果を返すバグを修正しました
-    -   `@@tidb_snapshot`変数が[＃22527](https://github.com/pingcap/tidb/pull/22527)設定されている場合にポイント取得クエリがスナップショットデータを取得できないバグを修正しました
+    -   `@@tidb_snapshot`変数が設定されている場合にPointGetクエリがスナップショットデータを取得できないバグを修正しました [＃22527](https://github.com/pingcap/tidb/pull/22527)
     -   結合からヒントを生成するときに発生する可能性のあるpanicを修正[＃22518](https://github.com/pingcap/tidb/pull/22518)
     -   文字列が`BIT`型[＃22420](https://github.com/pingcap/tidb/pull/22420)に誤って変換される問題を修正
     -   `tidb_rowid`列目に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.11
 -   PD
 
     -   メンバーの健康指標が正しく表示されない問題を修正[＃3368](https://github.com/pingcap/pd/pull/3368)
-    -   ピア[＃3352](https://github.com/pingcap/pd/pull/3352)まだ残っているトゥームストーンストアの削除を禁止する
+    -   ピアまだ残っているtombstoneストアの削除を禁止する [＃3352](https://github.com/pingcap/pd/pull/3352)
     -   ストア制限が維持できない問題を修正[＃3403](https://github.com/pingcap/pd/pull/3403)
     -   散布範囲スケジューラ[＃3401](https://github.com/pingcap/pd/pull/3401)の制限制限を修正
 
@@ -140,7 +140,7 @@ TiDB バージョン: 4.0.11
     -   TiFlashがデータ読み取り時にクラッシュする可能性があるバグを修正
     -   DDL操作後に書き込まれたデータの一部がデータ圧縮後に失われる可能性がある問題を修正しました
     -   TiFlashがコプロセッサー内の10進定数を正しく処理しない問題を修正
-    -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
+    -   ラーナーの読み取りプロセス中に発生する可能性のあるクラッシュを修正しました
     -   TiDBとTiFlash間の`0`または`NULL`による除算の不一致な動作を修正
 
 -   ツール

@@ -134,7 +134,7 @@ TiKVコプロセッサータスクフィールド：
 -   `Cop_wait_p90` : 警官タスクの P90 待機時間。
 -   `Cop_wait_max` : 警官タスクの最大待機時間。
 -   `Cop_wait_addr` : 待ち時間が最も長い警官タスクのアドレス。
--   `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンする際に検出する削除済み (墓石) キーの数。
+-   `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンする際に検出する削除済み (tombstone) キーの数。
 -   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンする際に遭遇するすべてのキーの数。
 -   `Rocksdb_block_cache_hit_count` : RocksDB がブロックキャッシュからデータを読み取る回数。
 -   `Rocksdb_block_read_count` : RocksDB がファイルシステムからデータを読み取る回数。

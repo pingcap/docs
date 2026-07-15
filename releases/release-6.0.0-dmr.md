@@ -501,7 +501,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `INT`を`DECIMAL`にキャストするとオーバーフローが発生する可能性がある問題を修正[＃3920](https://github.com/pingcap/tiflash/issues/3920)
     -   複数値式[＃4016](https://github.com/pingcap/tiflash/issues/4016)で`IN`の結果が正しくない問題を修正
     -   日付形式が`'\n'`無効な区切り文字として認識する問題を修正[＃4036](https://github.com/pingcap/tiflash/issues/4036)
-    -   同時実行性の高いシナリオで学習者の読み取りプロセスに時間がかかりすぎる問題を修正[＃3555](https://github.com/pingcap/tiflash/issues/3555)
+    -   同時実行性の高いシナリオでラーナーの読み取りプロセスに時間がかかりすぎる問題を修正[＃3555](https://github.com/pingcap/tiflash/issues/3555)
     -   `DATETIME`を`DECIMAL` [＃4151](https://github.com/pingcap/tiflash/issues/4151)にキャストするときに発生する誤った結果を修正
     -   クエリがキャンセルされたときに発生するメモリリークの問題を修正しました[＃4098](https://github.com/pingcap/tiflash/issues/4098)
     -   エラスティックスレッドプールを有効にするとメモリリークが発生する可能性があるバグを修正[＃4098](https://github.com/pingcap/tiflash/issues/4098)

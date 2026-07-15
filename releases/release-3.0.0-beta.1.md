@@ -81,12 +81,12 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 -   ホットスポットのスケジュールを設定可能にする[＃1412](https://github.com/pingcap/pd/pull/1412)
 -   以前のストアID [＃1429](https://github.com/pingcap/pd/pull/1429)を置き換えるために、ディメンション監視項目としてストアアドレスを追加します。
 -   `GetStores`オーバーヘッドを最適化して、リージョン検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)高速化します。
--   トゥームストーンストア[＃1472](https://github.com/pingcap/pd/pull/1472)を削除するためのインターフェースを追加する
+-   tombstoneストアを削除するためのインターフェースを追加する [＃1472](https://github.com/pingcap/pd/pull/1472)
 
 ## TiKV {#tikv}
 
 -   コプロセッサーの計算実行フレームワークを最適化し、TableScanセクションを実装することで、単一のTableScanのパフォーマンスが5％〜30％向上しました。
-    -   `BatchRows`行目と`BatchColumn`列目の[＃3660](https://github.com/tikv/tikv/pull/3660)の定義を実装する
+    -   `BatchRows`行と`BatchColumn`列の定義を実装する [＃3660](https://github.com/tikv/tikv/pull/3660)
     -   `VectorLike`実装して、エンコードされたデータとデコードされたデータに同じ方法でアクセスできるようにする[＃4242](https://github.com/tikv/tikv/pull/4242)
     -   `BatchExecutor`インターフェースに定義し、リクエストを`BatchExecutor` [＃4243](https://github.com/tikv/tikv/pull/4243)に変換する方法を実装する
     -   式ツリーをRPN形式に変換する実装[＃4329](https://github.com/tikv/tikv/pull/4329)

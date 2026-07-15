@@ -7,7 +7,7 @@ summary: TiDB GROUP BY 修飾子の使用方法を学習します。
 
 v7.4.0 以降、TiDB の`GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。
 
-`GROUP BY`節では、1 つ以上の列をグループリストとして指定し、リストの後に`WITH ROLLUP`修飾子を付加できます。すると、TiDB はグループリスト内の列に基づいて多次元降順グループ化を実行し、各グループの要約結果を出力します。
+`GROUP BY`句では、1 つ以上の列をグループリストとして指定し、リストの後に`WITH ROLLUP`修飾子を付加できます。すると、TiDB はグループリスト内の列に基づいて多次元降順グループ化を実行し、各グループの要約結果を出力します。
 
 -   グループ化方法:
 
@@ -70,7 +70,7 @@ ALTER TABLE bank SET TIFLASH REPLICA 1; -- Add a TiFlash replica for the table i
 INSERT INTO bank VALUES(2000, "Jan", 1, 10.3),(2001, "Feb", 2, 22.4),(2000,"Mar", 3, 31.6)
 ```
 
-銀行の年間利益を取得するには、次のように単純な`GROUP BY`節を使用できます。
+銀行の年間利益を取得するには、次のように単純な`GROUP BY`句を使用できます。
 
 ```sql
 SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
@@ -242,4 +242,4 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 +------------+------+-------+-----+
 ```
 
-クエリ内の`SELECT`節は`GROUPING`関数を使用していることに注意してください。 `GROUPING`関数が`SELECT` 、 `HAVING` 、または`ORDER BY`節で使用されている場合、TiDB は論理最適化フェーズでそれを書き換え、 `GROUPING`関数と`GROUP BY`項目の関係をディメンショングループ（ `grouping set`とも呼ばれます）のロジックに関連する`GID`に変換し、この`GID`新しい`GROUPING`関数にメタデータとして入力します。
+クエリ内の`SELECT`句は`GROUPING`関数を使用していることに注意してください。 `GROUPING`関数が`SELECT` 、 `HAVING` 、または`ORDER BY`句で使用されている場合、TiDB は論理最適化フェーズでそれを書き換え、 `GROUPING`関数と`GROUP BY`項目の関係をディメンショングループ（ `grouping set`とも呼ばれます）のロジックに関連する`GID`に変換し、この`GID`新しい`GROUPING`関数にメタデータとして入力します。

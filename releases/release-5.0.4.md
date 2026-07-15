@@ -33,7 +33,7 @@ TiDB バージョン: 5.0.4
         -   `LOAD DATA`文が非 UTF8 データを異常にインポートする可能性がある問題を修正[＃25979](https://github.com/pingcap/tidb/issues/25979)
         -   `insert ignore on duplicate update`セカンダリインデックスに主キーと同じ列がある場合に間違ったデータが挿入される可能性がある問題を修正[＃25809](https://github.com/pingcap/tidb/issues/25809)
         -   パーティションテーブルにクラスター化インデックスがある場合に間違ったデータが挿入される可能性が`insert ignore duplicate update`問題を修正しました[＃25846](https://github.com/pingcap/tidb/issues/25846)
-        -   ポイント取得またはバッチポイント取得[＃24562](https://github.com/pingcap/tidb/issues/24562)でキーが`ENUM`型の場合にクエリ結果が間違っている可能性がある問題を修正しました
+        -   PointGetまたはバッチPointGetでキーが`ENUM`型の場合にクエリ結果が間違っている可能性がある問題を修正しました [＃24562](https://github.com/pingcap/tidb/issues/24562)
         -   `BIT`型の値を[＃23479](https://github.com/pingcap/tidb/issues/23479)割ったときに発生する誤った結果を修正しました
         -   `prepared`ステートメントと直接クエリの結果が矛盾する可能性がある問題を修正[＃22949](https://github.com/pingcap/tidb/issues/22949)
         -   `YEAR`型を文字列または整数型[＃23262](https://github.com/pingcap/tidb/issues/23262)と比較するとクエリ結果が間違っている可能性がある問題を修正しました

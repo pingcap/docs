@@ -81,7 +81,7 @@ TiDB バージョン: 4.0.14
 
 -   TiDB
 
-    -   `false` [＃24865](https://github.com/pingcap/tidb/issues/24865)と評価される`WHERE`節を持つサブクエリを結合すると、 `SELECT`結果が MySQL と互換性がない問題を修正しました。
+    -   `false` と評価される`WHERE`句を持つサブクエリを結合すると、 `SELECT`結果が MySQL と互換性がない問題を修正しました。 [＃24865](https://github.com/pingcap/tidb/issues/24865)
     -   引数が`ENUM`または`SET`型の場合に発生する`ifnull`関数の計算エラーを修正[＃24944](https://github.com/pingcap/tidb/issues/24944)
     -   いくつかのケースで誤った集計プルーニングを修正[＃25202](https://github.com/pingcap/tidb/issues/25202)
     -   列が`SET`型[＃25669](https://github.com/pingcap/tidb/issues/25669)の場合に発生する可能性のあるマージ結合操作の誤った結果を修正しました

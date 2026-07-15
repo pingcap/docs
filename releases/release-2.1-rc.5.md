@@ -18,7 +18,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
 -   SQL実行エンジン
     -   ワイドテーブル[＃8024](https://github.com/pingcap/tidb/pull/8024)挿入または更新におけるTiDBのパフォーマンスを向上
     -   組み込み関数`Truncate`のunsigned `int`フラグをサポートする[＃8068](https://github.com/pingcap/tidb/pull/8068)
-    -   JSONデータを[＃8109](https://github.com/pingcap/tidb/pull/8109)進数型に変換する際に発生したエラーを修正しました
+    -   JSONデータを数値型に変換する際に発生したエラーを修正しました [＃8109](https://github.com/pingcap/tidb/pull/8109)
     -   `Update` float型[＃8170](https://github.com/pingcap/tidb/pull/8170)で発生したエラーを修正
 -   統計
     -   ポイントクエリ中に一部のケースで統計情報が正しく表示されない問題を修正[＃8035](https://github.com/pingcap/tidb/pull/8035)

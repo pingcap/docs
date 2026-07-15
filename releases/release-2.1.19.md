@@ -20,7 +20,7 @@ TiDB Ansible バージョン: 2.1.19
     -   `UPDATE`ステートメントにサブクエリとストアされた生成列の両方が含まれている場合に結果が正しくない問題を修正しました。3 `UPDATE`ステートメントに異なるデータベースの同じ名前のテーブルが 2 つ含まれている場合にステートメント実行エラーが発生する問題を修正しました[＃13357](https://github.com/pingcap/tidb/pull/13357)
     -   `PhysicalUnionScan`演算子が統計[＃14134](https://github.com/pingcap/tidb/pull/14134)誤って設定するため、クエリ プランが誤って選択される可能性がある問題を修正しました。
     -   `minAutoAnalyzeRatio`制約を取り除き、自動`ANALYZE`をよりタイムリーに[＃14013](https://github.com/pingcap/tidb/pull/14013)する
-    -   `WHERE`節に一意キー[＃13385](https://github.com/pingcap/tidb/pull/13385)等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。
+    -   `WHERE`句に一意キー等号条件が含まれている場合に推定行数が`1`より大きくなる問題を修正しました。 [＃13385](https://github.com/pingcap/tidb/pull/13385)
 -   SQL実行エンジン
     -   `ConvertJSONToInt` [＃13036](https://github.com/pingcap/tidb/pull/13036)で`unit64`中間結果として`int64`使用するときに精度オーバーフローが発生する問題を修正しました。
     -   クエリに`SLEEP`関数が含まれている場合（たとえば`select 1 from (select sleep(1)) t;)` ）、列の整理によってクエリ内の`sleep(1)`無効になる問題を修正しました[＃13039](https://github.com/pingcap/tidb/pull/13039)
@@ -37,7 +37,7 @@ TiDB Ansible バージョン: 2.1.19
         -   `Write_size`
         -   `Prewrite_region`
         -   `Txn_retry`
-    -   `UPDATE`文に含まれるサブクエリが誤って変換される問題を修正しました。5 `WHERE`にサブクエリ[＃13120](https://github.com/pingcap/tidb/pull/13120)が含まれている場合に`UPDATE`実行エラーが発生する問題を修正しました。
+    -   `UPDATE`文に含まれるサブクエリが誤って変換される問題を修正しました。`WHERE`句にサブクエリが含まれている場合に`UPDATE`実行エラーが発生する問題を修正しました。 [＃13120](https://github.com/pingcap/tidb/pull/13120)
     -   パーティションテーブル[＃13143](https://github.com/pingcap/tidb/pull/13143)で`ADMIN CHECK TABLE`実行をサポート
     -   列属性として`ON UPDATE CURRENT_TIMESTAMP`使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[＃12462](https://github.com/pingcap/tidb/pull/12462)
     -   列[＃14162](https://github.com/pingcap/tidb/pull/14162)削除、修正、または変更するときに外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`文の実行時にpanicが発生する問題を修正しました。

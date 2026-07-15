@@ -40,7 +40,7 @@ TiDBバージョン: 3.0.19
     -   小数型を整数型に変更することを禁止する[＃19681](https://github.com/pingcap/tidb/pull/19681)
     -   `ENUM`型列[＃20045](https://github.com/pingcap/tidb/pull/20045) `SET`変更する際に制約がチェックされない問題を修正
     -   panic後にtidb-serverがテーブルロックを解放しないバグを修正[＃20021](https://github.com/pingcap/tidb/pull/20021)
-    -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正
+    -   `WHERE`句で`OR`演算子が正しく処理されないバグを修正 [＃19901](https://github.com/pingcap/tidb/pull/19901)
 
 -   TiKV
 

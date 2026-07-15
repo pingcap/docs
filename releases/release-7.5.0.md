@@ -213,7 +213,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   `evict-leader-scheduler`の設定が失われる可能性がある問題を修正 [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
     -   ストアがオフラインになった後、その統計情報の監視メトリックが削除されない問題を修正します [#7180](https://github.com/tikv/pd/issues/7180) @[rleungx](https://github.com/rleungx)
     -   データレプリケーション自動同期（DR Auto-Sync）モードを採用しているクラスターにおいて、配置ルールの設定が複雑な場合に`canSync` `hasMajority`が正しく計算されない可能性がある問題を修正します [#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
-    -   ルールチェッカーが配置ルールの設定に従って学習者を追加しない問題を修正 [#7185](https://github.com/tikv/pd/issues/7185) @[nolouch](https://github.com/nolouch)
+    -   ルールチェッカーが配置ルールの設定に従ってラーナーを追加しない問題を修正 [#7185](https://github.com/tikv/pd/issues/7185) @[nolouch](https://github.com/nolouch)
     -   TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正 [#7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)
     -   内部的に取得したリージョンが空であるためにPDがpanic可能性がある問題を修正 [#7261](https://github.com/tikv/pd/issues/7261) @[lhy1024](https://github.com/lhy1024)
     -   データレプリケーション自動同期（DR Auto-Sync）モードを採用しているクラスターで`available_stores`が正しく計算されない問題を修正します [#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)

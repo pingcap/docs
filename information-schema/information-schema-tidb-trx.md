@@ -57,7 +57,7 @@ DESC TIDB_TRX;
 
 > **注記：**
 >
-> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルの完全な情報を取得できます。PROCESS権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
+> -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルの完全な情報を取得できます。PROCESS権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
 > -   `CURRENT_SQL_DIGEST`列目と`ALL_SQL_DIGESTS`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算さ`CURRENT_SQL_DIGEST_TEXT`たハッシュ値です。5列目の情報と`TIDB_DECODE_SQL_DIGESTS`目の関数から返される結果は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [明細書概要表](/statement-summary-tables.md)参照してください。
 > -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しは大きなオーバーヘッドを伴います。この関数を多数のトランザクションの履歴SQL文のクエリに使用した場合、クエリに長時間かかる可能性があります。クラスターが大きく、同時トランザクション数が多い場合は、 `TIDB_TRX`のテーブル全体をクエリする際に、 `ALL_SQL_DIGEST`列に対してこの関数を直接使用することは避けてください。つまり、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`ようなSQL文は避けてください。
 > -   現在、 `TIDB_TRX`テーブルは TiDB 内部トランザクションの情報の表示をサポートしていません。

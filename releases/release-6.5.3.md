@@ -93,7 +93,7 @@ TiDB バージョン: 6.5.3
     -   継続的プロファイリング[＃14224](https://github.com/tikv/tikv/issues/14224) @ [tabokie](https://github.com/tabokie)におけるファイル ハンドル リークの問題を修正しました
     -   PD クラッシュにより PITR が[＃14184](https://github.com/tikv/tikv/issues/14184) @ [YuJuncen](https://github.com/YuJuncen)で続行できなくなる問題を修正しました
     -   暗号化キーIDの競合により古いキー[＃14585](https://github.com/tikv/tikv/issues/14585) @ [tabokie](https://github.com/tabokie)が削除される可能性がある問題を修正しました
-    -   自動コミットとポイント取得レプリカ読み取りによって線形化可能性[＃14715](https://github.com/tikv/tikv/issues/14715) @ [cfzjywxk](https://github.com/cfzjywxk)が破壊される可能性がある問題を修正しました
+    -   自動コミットとPointGetレプリカ読み取りによって線形化可能性が破壊される可能性がある問題を修正しました [＃14715](https://github.com/tikv/tikv/issues/14715) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   クラスタを以前のバージョンからv6.5以降のバージョン[＃14780](https://github.com/tikv/tikv/issues/14780) @ [MyonKeminta](https://github.com/MyonKeminta)にアップグレードしたときに、蓄積されたロックレコードによって引き起こされるパフォーマンス低下の問題を修正しました。
     -   TiDB Lightning がSST ファイルの漏洩を引き起こす可能性がある問題を修正[＃14745](https://github.com/tikv/tikv/issues/14745) @ [YuJuncen](https://github.com/YuJuncen)
     -   暗号化キーとラフトログファイルの削除の間の潜在的な競合を修正しました。これにより、TiKV が[＃14761](https://github.com/tikv/tikv/issues/14761) @ [Connor1996](https://github.com/Connor1996)で起動しなくなる可能性があります。

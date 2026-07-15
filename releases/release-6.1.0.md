@@ -398,7 +398,7 @@ TiDB バージョン: 6.1.0
 
     -   `not leader` [＃4797](https://github.com/tikv/pd/issues/4797)の間違ったステータスコードを修正
     -   Fix a bug of TSO fallback in some corner cases [＃4884](https://github.com/tikv/pd/issues/4884)
-    -   PDリーダー移転後に削除した墓石ストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
+    -   PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[＃4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダー移行後すぐにスケジュールを開始できない問題を修正[＃4769](https://github.com/tikv/pd/issues/4769)
 
 -   TiDB Dashboard

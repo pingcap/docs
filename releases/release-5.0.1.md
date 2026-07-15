@@ -47,7 +47,7 @@ TiDB バージョン: 5.0.1
     -   `PointGet`演算子が存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[＃23685](https://github.com/pingcap/tidb/pull/23685)
     -   エラー[＃24080](https://github.com/pingcap/tidb/pull/24080)によりロールバック時にDDL操作が失敗する可能性がある問題を修正
     -   バイナリリテラル定数のインデックス範囲が正しく構築されない問題を修正[＃24041](https://github.com/pingcap/tidb/pull/24041)
-    -   いくつかのケースで`IN`節の潜在的な誤った結果を修正[＃24023](https://github.com/pingcap/tidb/pull/24023)
+    -   いくつかのケースで`IN`述語の潜在的な誤った結果を修正[＃24023](https://github.com/pingcap/tidb/pull/24023)
     -   いくつかの文字列関数の誤った結果を修正[＃23879](https://github.com/pingcap/tidb/pull/23879)
     -   ユーザーは、テーブルに対して`REPLACE`操作を実行するために`INSERT`と`DELETE`両方の権限が必要になります[＃23939](https://github.com/pingcap/tidb/pull/23939)
     -   ポイントクエリ[＃24070](https://github.com/pingcap/tidb/pull/24070)を実行する際のパフォーマンスの低下を修正

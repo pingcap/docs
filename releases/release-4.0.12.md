@@ -34,7 +34,7 @@ TiDB バージョン: 4.0.12
 -   TiKV
 
     -   短時間に大量の再接続を防ぐ[＃9879](https://github.com/tikv/tikv/pull/9879)
-    -   多数の墓石のシナリオで書き込み操作とバッチ取得を最適化します[＃9729](https://github.com/tikv/tikv/pull/9729)
+    -   多数のtombstoneのシナリオで書き込み操作とバッチ取得を最適化します[＃9729](https://github.com/tikv/tikv/pull/9729)
     -   リーダー移行の成功率を上げるために、デフォルト値の`leader-transfer-max-log-lag`を`128`に変更します[＃9605](https://github.com/tikv/tikv/pull/9605)
 
 -   PD
@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.12
     -   `NULL`定数[＃23135](https://github.com/pingcap/tidb/pull/23135)の戻り値の型で予期しない`NotNullFlag`が発生する問題を修正
     -   テキストタイプ[＃23092](https://github.com/pingcap/tidb/pull/23092)で照合順序が処理されない可能性があるバグを修正
     -   範囲パーティションが`IN`式[＃23074](https://github.com/pingcap/tidb/pull/23074)を誤って処理する可能性がある問題を修正しました
-    -   TiKVストアをトゥームストーンとしてマークした後、同じIPアドレスとポートで異なるStoreIDを持つ新しいTiKVストアを開始すると、 `StoreNotMatch`エラー[＃23071](https://github.com/pingcap/tidb/pull/23071)が返され続ける問題を修正しました。
+    -   TiKVストアをtombstoneとしてマークした後、同じIPアドレスとポートで異なるStoreIDを持つ新しいTiKVストアを開始すると、 `StoreNotMatch`エラーが返され続ける問題を修正しました。 [＃23071](https://github.com/pingcap/tidb/pull/23071)
     -   `INT`型は`NULL`で`YEAR` [＃22844](https://github.com/pingcap/tidb/pull/22844)を比較すると調整しない
     -   `auto_random`列[＃22736](https://github.com/pingcap/tidb/pull/22736)列のテーブルにデータをロードする際に接続が失われる問題を修正しました
     -   DDL 操作がキャンセル パス[＃23297](https://github.com/pingcap/tidb/pull/23297)でpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。

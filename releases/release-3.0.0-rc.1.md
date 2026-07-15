@@ -82,7 +82,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   読み取りトラフィックの統計情報が不正確になる可能性がある問題を修正[＃4436](https://github.com/tikv/tikv/pull/4436)
     -   範囲[＃4503](https://github.com/tikv/tikv/pull/4503)削除するときにプレフィックス抽出プログラムがpanicを起こす可能性がある問題を修正しました
     -   メモリ管理を最適化してメモリ割り当てとコピーを削減`Iterator Key Bound Option` [＃4537](https://github.com/tikv/tikv/pull/4537)
-    -   学習者のログギャップを考慮しないと、場合によってはpanicが発生する可能性がある問題を修正しました[＃4559](https://github.com/tikv/tikv/pull/4559)
+    -   ラーナーのログギャップを考慮しないと、場合によってはpanicが発生する可能性がある問題を修正しました[＃4559](https://github.com/tikv/tikv/pull/4559)
     -   異なる`column families` [＃4612](https://github.com/tikv/tikv/pull/4612)間での`block cache`共有をサポート
 
 -   サーバ

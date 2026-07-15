@@ -219,8 +219,8 @@ DROP PLACEMENT POLICY myplacementpolicy;
 | `CONSTRAINTS`          | すべての役割に適用される制約のリスト。例: `CONSTRAINTS="[+disk=ssd]"` 。                          |
 | `LEADER_CONSTRAINTS`   | Leaderにのみ適用される制約のリスト。                                                        |
 | `FOLLOWER_CONSTRAINTS` | フォロワーにのみ適用される制約事項のリスト。                                                       |
-| `LEARNER_CONSTRAINTS`  | 学習者のみに適用される制約事項のリスト。                                                         |
-| `LEARNERS`             | 学習者の数。                                                                       |
+| `LEARNER_CONSTRAINTS`  | ラーナーのみに適用される制約事項のリスト。                                                         |
+| `LEARNERS`             | ラーナーの数。                                                                       |
 | `SURVIVAL_PREFERENCE`  | ラベルの災害耐性レベルに応じたレプリカ配置の優先順位。例： `SURVIVAL_PREFERENCE="[region, zone, host]"` 。 |
 
 ### 制約形式 {#constraints-formats}

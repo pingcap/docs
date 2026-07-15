@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 3.0.4
     -   `PREPARED`文が正しく実行されなかった場合に、SQL文をログに出力します[＃12191](https://github.com/pingcap/tidb/pull/12191)
     -   `UNIX_TIMESTAMP`関数を使用してパーティショニング[＃12169](https://github.com/pingcap/tidb/pull/12169)実装する場合にパーティション プルーニングをサポートする
     -   `AUTO_INCREMENT` `MAX int64`と`MAX uint64`誤って割り当てた場合にエラーが報告されない問題を修正しました[＃12162](https://github.com/pingcap/tidb/pull/12162)
-    -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`構文に`WHERE`節を追加する[＃12123](https://github.com/pingcap/tidb/pull/12123)
+    -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`構文に`WHERE`句を追加する[＃12123](https://github.com/pingcap/tidb/pull/12123)
     -   SQL実行がメモリ制限[＃12127](https://github.com/pingcap/tidb/pull/12127)を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返す
     -   `JSON_UNQUOTE`関数がJSONテキスト[＃11955](https://github.com/pingcap/tidb/pull/11955)を処理するときに誤った結果が返される問題を修正
     -   最初の行の`AUTO_INCREMENT`列に値を割り当てるときに`LAST INSERT ID`間違っているという問題を修正しました（たとえば、 `insert into t (pk, c) values (1, 2), (NULL, 3)` ） [＃12002](https://github.com/pingcap/tidb/pull/12002)

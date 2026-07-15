@@ -120,7 +120,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   `global.tidb_cloud_storage_uri` [＃54096](https://github.com/pingcap/tidb/issues/54096) @ [lance6716](https://github.com/lance6716)を設定するときに不明瞭なエラーメッセージが表示される問題を修正しました
     -   同期負荷QPSモニタリングメトリックが正しくない問題を修正[＃53558](https://github.com/pingcap/tidb/issues/53558) @ [hawkingrei](https://github.com/hawkingrei)
     -   初期統計を同時に[＃53607](https://github.com/pingcap/tidb/issues/53607) @ [hawkingrei](https://github.com/hawkingrei)でロードするときに一部の統計情報が失われる可能性がある問題を修正しました
-    -   `SELECT ... FOR UPDATE` [＃54652](https://github.com/pingcap/tidb/issues/54652) @ [qw4990](https://github.com/qw4990)の間違ったポイント取得プランを再利用する問題を修正しました
+    -   `SELECT ... FOR UPDATE` の間違ったPointGetプランを再利用する問題を修正しました [＃54652](https://github.com/pingcap/tidb/issues/54652) @ [qw4990](https://github.com/qw4990)
 
 -   TiKV
 

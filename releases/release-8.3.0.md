@@ -320,7 +320,7 @@ TiDBバージョン：8.3.0
     -   Grafana の接続数監視メトリックが、ハンドシェイクが完了する前に一部の接続が切断された場合に正しく表示されない問題を修正しました [#54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
     -   TiProxyとリソースグループを使用している際に、各リソースグループの接続数が正しく表示されない問題を修正しました [#54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     -   クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行プランが生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
-    -   `SELECT ... FOR UPDATE`の誤ったポイント取得プランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
+    -   `SELECT ... FOR UPDATE`の誤ったPointGetプランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
     -   `TIMESTAMPADD()`関数の最初の引数が`month`で、2 番目の引数が負の値の場合に無限ループに陥る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   スローログ内の内部SQLステートメントがデフォルトでnullに編集される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
     -   `PointGet`の実行プランが`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)

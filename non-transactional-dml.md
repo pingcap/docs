@@ -321,7 +321,7 @@ batch-dml は、DML ステートメントの実行中にトランザクション
 
 ### 複数のテーブル結合ステートメントを実行すると<code>Unknown column xxx in &#39;where clause&#39;</code>エラーが発生します。 {#executing-a-multiple-table-joins-statement-results-in-the-code-unknown-column-xxx-in-where-clause-code-error}
 
-このエラーは、クエリ内で連結された`WHERE`節が、 [破片の列](#parameter-description)が定義されているテーブル以外のテーブルに関係する場合に発生します。例えば、次のSQL文では、シャード列は`t2.id`で、テーブル`t2`に定義されていますが、 `WHERE`節はテーブル`t2`と`t3`に関係しています。
+このエラーは、クエリ内で連結された`WHERE`句が、 [破片の列](#parameter-description)が定義されているテーブル以外のテーブルに関係する場合に発生します。例えば、次のSQL文では、シャード列は`t2.id`で、テーブル`t2`に定義されていますが、 `WHERE`句はテーブル`t2`と`t3`に関係しています。
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 

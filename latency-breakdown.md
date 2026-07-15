@@ -73,9 +73,9 @@ e2e duration =
 
 読み取りクエリにはプロセス フォームが 1 つだけあります。
 
-### ポイントゲット {#point-get}
+### PointGet {#point-get}
 
-以下は[ポイントゲット](/glossary.md#point-get)操作の時間コスト図です。
+以下は[PointGet](/glossary.md#point-get)操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -140,9 +140,9 @@ read value duration(from disk) =
 
 TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
 
-### バッチポイント取得 {#batch-point-get}
+### Batch PointGet {#batch-point-get}
 
-以下はバッチ ポイント取得操作の時間コスト図です。
+以下はBatch PointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -156,7 +156,7 @@ Diagram(
 )
 ```
 
-バッチポイント取得中、 `tidb_session_execute_duration_seconds{type="general"}`次のように計算されます。
+Batch PointGetの実行中、 `tidb_session_execute_duration_seconds{type="general"}`次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -165,7 +165,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read values duration
 ```
 
-バッチ ポイント取得のプロセスは、バッチ ポイント取得が複数の値を同時に読み取る点を除いて、 [ポイントゲット](#point-get)とほぼ同じです。
+Batch PointGetのプロセスは、Batch PointGetが複数の値を同時に読み取る点を除いて、 [PointGet](#point-get)とほぼ同じです。
 
 `read handles duration`と`read values duration`次のように計算されます。
 
@@ -197,7 +197,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="batch_get"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="batch_get"}))
 ```
 
-スナップショットを取得した後、TiKVは同じスナップショットから複数の値を読み取ります。読み取り時間は[ポイントゲット](#point-get)と同じです。TiKVがディスクからデータを読み込む場合の平均時間は、 `tikv_storage_rocksdb_perf`と`req="batch_get"`で計算できます。
+スナップショットを取得した後、TiKVは同じスナップショットから複数の値を読み取ります。読み取り時間は[PointGet](#point-get)と同じです。TiKVがディスクからデータを読み込む場合の平均時間は、 `tikv_storage_rocksdb_perf`と`req="batch_get"`で計算できます。
 
 ### テーブルスキャンとインデックススキャン {#table-scan-x26-index-scan}
 
@@ -319,11 +319,11 @@ Diagram(
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
-例外はポイントゲットとバッチポイントゲットによるロックタイム読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
+例外はPointGetとバッチPointGetによるロックタイム読み取り操作（ `SELECT FOR UPDATE` ）で、これは1回のリモートプロシージャコール（RPC）で読み取りとロックを実行します。
 
-### ロックタイムポイント取得 {#lock-time-point-get}
+### Lock Time PointGet {#lock-time-point-get}
 
-以下は、ロックタイムポイント取得操作の時間コスト図です。
+以下は、Lock Time PointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -349,11 +349,11 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-ロックタイムポイント取得はキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロックタイムポイント取得の実行時間は[ロック期間](#lock)として扱うことができます。
+Lock Time PointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。Lock Time PointGetの実行時間は[ロック期間](#lock)として扱うことができます。
 
-### ロックタイムバッチポイント取得 {#lock-time-batch-point-get}
+### Lock Time Batch PointGet {#lock-time-batch-point-get}
 
-以下は、ロックタイム バッチ ポイント取得操作の時間コスト図です。
+以下は、Lock Time Batch PointGet操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -367,7 +367,7 @@ Diagram(
 )
 ```
 
-ロックタイム バッチ ポイント取得中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
+Lock Time Batch PointGetの実行中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -377,7 +377,7 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-ロックタイムバッチポイント取得の実行は、1回のRPCで複数の値を読み取る点を除けば、 [ロックタイムポイント取得](#lock-time-point-get)と同様です。3 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [バッチポイント取得](#batch-point-get)セクションを参照してください。
+Lock Time Batch PointGetの実行は、1回のRPCで複数の値を読み取る点を除けば、 [Lock Time PointGet](#lock-time-point-get)と同様です。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`所要時間の詳細については、 [Batch PointGet](#batch-point-get)セクションを参照してください。
 
 ### ロック {#lock}
 
@@ -863,7 +863,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`ステートメントがデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
-スロークエリの実行プランは、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、および[シンプルなコプロセッサクエリ](#table-scan--index-scan) [バッチポイント取得](#batch-point-get)できます。
+スロークエリの実行プランは、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って[PointGet](#point-get) 、および[シンプルなコプロセッサクエリ](#table-scan--index-scan) [Batch PointGet](#batch-point-get)できます。
 
 ### 書き込みクエリが遅い {#slow-write-queries}
 

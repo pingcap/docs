@@ -93,7 +93,7 @@ TiDB バージョン: 4.0.15
 
     -   [＃26553](https://github.com/pingcap/tidb/pull/26553)に`GROUP BY`と`UNION`両方が含まれている場合に発生する「インデックスが範囲外です」というエラーを修正しました。
 
-    -   TiKVにトゥームストーンストアがある場合、TiDBがリクエストの送信に失敗する可能性がある問題を修正[＃23676](https://github.com/pingcap/tidb/issues/23676) [＃24648](https://github.com/pingcap/tidb/issues/24648)
+    -   TiKVにtombstoneストアがある場合、TiDBがリクエストの送信に失敗する可能性がある問題を修正[＃23676](https://github.com/pingcap/tidb/issues/23676) [＃24648](https://github.com/pingcap/tidb/issues/24648)
 
     -   文書化されていない`/debug/sub-optimal-plan` HTTP API [＃27264](https://github.com/pingcap/tidb/pull/27264)を削除する
 

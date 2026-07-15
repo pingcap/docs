@@ -16,7 +16,7 @@ TiDB は、MySQL 8.0 で利用可能な[情報関数](https://dev.mysql.com/doc/
 | [`CURRENT_ROLE()`](#current_role)                  | 接続で使用されているロールを返します                            |
 | [`CURRENT_USER()` 、 `CURRENT_USER`](#current_user) | 認証されたユーザー名とホスト名を返す                            |
 | [`DATABASE()`](#database)                          | デフォルト（現在の）データベース名を返す                          |
-| [`FOUND_ROWS()`](#found_rows)                      | `LIMIT`節を持つ`SELECT`の場合、 `LIMIT`節がない場合に返される行の数 |
+| [`FOUND_ROWS()`](#found_rows)                      | `LIMIT`句を持つ`SELECT`の場合、 `LIMIT`句がない場合に返される行の数 |
 | [`LAST_INSERT_ID()`](#last_insert_id)              | 最後の`INSERT`列の`AUTOINCREMENT`番目の値を返す           |
 | [`ROW_COUNT()`](#row_count)                        | 影響を受ける行数                                      |
 | [`SCHEMA()`](#schema)                              | `DATABASE()`の同義語                              |

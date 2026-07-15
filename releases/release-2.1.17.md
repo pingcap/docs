@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 2.1.17
 -   新機能
     -   TiDBの`SHOW TABLE REGIONS`構文に`WHERE`句を追加する
     -   TiKVとPDに`config-check`機能を追加して構成項目をチェックする
-    -   pd-ctlに`remove-tombstone`コマンドを追加して、トゥームストーンストアのレコードをクリアします。
+    -   pd-ctlに`remove-tombstone`コマンドを追加して、tombstoneストアのレコードをクリアします。
     -   Reparoに`worker-count`と`txn-batch`設定項目を追加して回復速度を制御します
 
 -   改善点
@@ -51,7 +51,7 @@ TiDB Ansible バージョン: 2.1.17
     -   `oom-action = "cancel"`と OOM が`Insert Into … Select`構文[＃12126](https://github.com/pingcap/tidb/pull/12126)で発生したときに OOMpanicの問題を誤って処理することによって発生する接続切断の問題を修正しました。
 -   DDL
     -   `tikvSnapshot`にリバーススキャンインターフェースを追加し、DDL履歴ジョブを効率的にクエリできるようにします。このインターフェースを使用することで、 `ADMIN SHOW DDL JOBS`実行時間が大幅に短縮されます[＃11789](https://github.com/pingcap/tidb/pull/11789)
-    -   `CREATE TABLE ... PRE_SPLIT_REGION`構文の改善: `PRE_SPLIT_REGION = N` [＃11797](https://github.com/pingcap/tidb/pull/11797/files)の場合、事前分割領域の数を 2^(N-1) から 2^N に変更します。
+    -   `CREATE TABLE ... PRE_SPLIT_REGION`構文の改善: `PRE_SPLIT_REGION = N` の場合、事前分割されるリージョンの数を 2^(N-1) から 2^N に変更します。 [＃11797](https://github.com/pingcap/tidb/pull/11797/files)
     -   オンラインワークロードに大きな影響を与えないように、 `Add Index`操作のバックグラウンドワーカースレッドのデフォルトパラメータ値を減らします[＃11875](https://github.com/pingcap/tidb/pull/11875)
     -   `SPLIT TABLE`構文の動作を改善します。3 `SPLIT TABLE ... REGIONS N`使用して領域[＃11929](https://github.com/pingcap/tidb/pull/11929)を分割すると、N 個のデータリージョンと 1 つのインデックスリージョンが生成されます。
     -   設定ファイルに`split-region-max-num`パラメータ（デフォルトでは`10000` ）を追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を調整可能にします[＃12080](https://github.com/pingcap/tidb/pull/12080)
@@ -73,7 +73,7 @@ TiDB Ansible バージョン: 2.1.17
 ## PD {#pd}
 
 -   PDに`config-check`オプションを追加して、PD構成項目が有効かどうかを確認する[＃1725](https://github.com/pingcap/pd/pull/1725)
--   pd-ctlに`remove-tombstone`コマンドを追加して、トゥームストーンストアレコードのクリアをサポートする[＃1705](https://github.com/pingcap/pd/pull/1705)
+-   pd-ctlに`remove-tombstone`コマンドを追加して、tombstoneストアレコードのクリアをサポートする[＃1705](https://github.com/pingcap/pd/pull/1705)
 -   オペレーターのスケジュール調整を積極的に促進するサポート[＃1686](https://github.com/pingcap/pd/pull/1686)
 
 ## ツール {#tools}

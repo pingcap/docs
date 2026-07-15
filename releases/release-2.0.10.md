@@ -17,7 +17,7 @@ summary: TiDB 2.0.10およびTiDB Ansible 2.0.10は、2018年12月18日にリリ
 -   終了信号[＃8501](https://github.com/pingcap/tidb/pull/8501)受信してもTiDBが終了できない可能性がある問題を修正しました
 -   `IndexLookUpJoin`場合によっては間違った結果が返される問題を修正[＃8508](https://github.com/pingcap/tidb/pull/8508)
 -   `GetVar`または`SetVar` [＃8454](https://github.com/pingcap/tidb/pull/8454)を含むフィルターを押し下げないでください
--   `UNION`節の結果の長さが場合によっては正しくない問題を修正[＃8491](https://github.com/pingcap/tidb/pull/8491)
+-   `UNION`集合演算子の結果の長さが場合によっては正しくない問題を修正[＃8491](https://github.com/pingcap/tidb/pull/8491)
 -   `PREPARE FROM @var_name` [＃8488](https://github.com/pingcap/tidb/pull/8488)の問題を修正
 -   一部のケースで統計情報をダンプするときにpanic問題を修正[＃8464](https://github.com/pingcap/tidb/pull/8464)
 -   いくつかのケースにおけるポイントクエリの統計推定の問題を修正[＃8493](https://github.com/pingcap/tidb/pull/8493)

@@ -17,7 +17,7 @@ TiDB バージョン: 3.0.15
     -   パーティションテーブル[＃17315](https://github.com/pingcap/tidb/pull/17315) [＃17390](https://github.com/pingcap/tidb/pull/17390)の`admin recover index`と`admin check index`ステートメントをサポートします
     -   範囲パーティションテーブル[＃17318](https://github.com/pingcap/tidb/pull/17318)の条件`in`のパーティションプルーニングをサポート
     -   `SHOW CREATE TABLE`の出力を最適化し、パーティション名[＃16315](https://github.com/pingcap/tidb/pull/16315)に引用符を追加します。
-    -   `GROUP_CONCAT`関数[＃16988](https://github.com/pingcap/tidb/pull/16988)の`ORDER BY`節をサポートする
+    -   `GROUP_CONCAT`関数の`ORDER BY`句をサポートする [＃16988](https://github.com/pingcap/tidb/pull/16988)
     -   `CMSketch`統計のメモリ割り当てメカニズムを最適化して、ガベージコレクション（GC）がパフォーマンスに与える影響を軽減する[＃17543](https://github.com/pingcap/tidb/pull/17543)
 
 -   PD

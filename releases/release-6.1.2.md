@@ -44,7 +44,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
     -   リージョンが[＃37141](https://github.com/pingcap/tidb/issues/37141) @ [sticnarf](https://github.com/sticnarf)にマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました
     -   KVクライアントが不要なpingメッセージ[＃36861](https://github.com/pingcap/tidb/issues/36861) @ [jackysp](https://github.com/jackysp)を送信する問題を修正しました
     -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @ [cfzjywxk](https://github.com/cfzjywxk)
-    -   `ORDER BY`節に相関サブクエリ[＃18216](https://github.com/pingcap/tidb/issues/18216) @ [winoros](https://github.com/winoros)が含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。
+    -   `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。 [＃18216](https://github.com/pingcap/tidb/issues/18216) @ [winoros](https://github.com/winoros)
     -   `UPDATE`文に共通テーブル式 (CTE) [＃35758](https://github.com/pingcap/tidb/issues/35758) @ [AilinKid](https://github.com/AilinKid)が含まれている場合に`Can't find column`報告される問題を修正しました
     -   特定のシナリオで予期しないエラーが発生[＃37187](https://github.com/pingcap/tidb/issues/37187) `EXECUTE` [思い出させる](https://github.com/Reminiscent)
 
@@ -58,7 +58,7 @@ Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quic
 -   PD
 
     -   リージョンツリーの統計が不正確になる可能性がある問題を修正[＃5318](https://github.com/tikv/pd/issues/5318) @ [rleungx](https://github.com/rleungx)
-    -   TiFlash学習者レプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @ [HunDunDM](https://github.com/HunDunDM)
+    -   TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @ [HunDunDM](https://github.com/HunDunDM)
     -   PD がダッシュボード プロキシ リクエスト[＃5321](https://github.com/tikv/pd/issues/5321) @ [HunDunDM](https://github.com/HunDunDM)を正しく処理できない問題を修正しました
     -   不健全なリージョンがPDpanic[＃5491](https://github.com/tikv/pd/issues/5491) @ [nolouch](https://github.com/nolouch)を引き起こす可能性がある問題を修正
 

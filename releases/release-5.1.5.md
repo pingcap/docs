@@ -69,12 +69,12 @@ TiDBバージョン：5.1.5
 
 -   PD
 
-    -   PDリーダーの移籍後に削除された墓石ストアが再び表示される問題を修正しました[#4941](https://github.com/tikv/pd/issues/4941)
+    -   PDリーダーの移籍後に削除されたtombstoneストアが再び表示される問題を修正しました[#4941](https://github.com/tikv/pd/issues/4941)
     -   PDリーダーの転送後すぐにスケジューリングを開始できない問題を修正します [#4769](https://github.com/tikv/pd/issues/4769)
     -   `not leader` の誤ったステータスコードを修正します。 [#4797](https://github.com/tikv/pd/issues/4797)
     -   PDがダッシュボードプロキシ要求を正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)
     -   TSOフォールバックの特定の特殊ケースにおけるバグを修正 [#4884](https://github.com/tikv/pd/issues/4884)
-    -   特定のシナリオでTiFlash学習者レプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
+    -   特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
     -   ラベル分布にメトリクスに残余ラベルが含まれる問題を修正 [#4825](https://github.com/tikv/pd/issues/4825)
     -   大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小型ストアを検出できず、結果としてバランス演算子が生成されない問題を修正します [#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`が`1`に設定されている場合、スケジューラが機能しない問題を修正します。 [#4946](https://github.com/tikv/pd/issues/4946)
