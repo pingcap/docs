@@ -48,11 +48,11 @@ ON TRUE;
 
 ## 標準的な派生テーブルとの比較 {#comparison-with-standard-derived-tables}
 
-| Feature | Standard derived table | LATERAL derived table |
+| 項目 | 標準的な派生テーブル | `LATERAL` 派生テーブル |
 |---|---|---|
-| 同じ `FROM` 句内で先行するテーブルのカラムを参照できるか | No | Yes |
-| エイリアスが必須か | Yes | Yes |
-| 派生カラムリスト | Supported | Supported |
+| 同じ `FROM` 句内で先行するテーブルのカラムを参照できるか | いいえ | はい |
+| エイリアスが必須か | はい | はい |
+| 派生カラムリスト | サポート | サポート |
 
 ## MySQL 互換性 {#mysql-compatibility}
 
