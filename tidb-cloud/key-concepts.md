@@ -29,7 +29,7 @@ TiDB Cloudの AI 機能を使用すると、データの探索、検索、統合
 
 ## Data Service（PREVIEW） {#data-service-preview}
 
-Data Serviceを使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。Data Service[Data Serviceについて詳しくはこちらをご覧ください](/tidb-cloud/data-service-concepts.md)。
+Data Serviceを使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。[Data Serviceについて詳しくはこちらをご覧ください](/tidb-cloud/data-service-concepts.md)。
 
 ## 拡張性 {#scalability}
 
