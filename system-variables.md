@@ -967,7 +967,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `1`
-- This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
+- For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1028,7 +1028,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics.
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_backoff_lock_fast
 
@@ -1124,8 +1124,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `4`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -3225,7 +3224,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `1`
-- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+- This variable controls the concurrency for merging TopN results of partitioned tables.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
