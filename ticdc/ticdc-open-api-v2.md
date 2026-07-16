@@ -9,7 +9,7 @@ summary: OpenAPI v2 インターフェースを使用してクラスターのス
 
 TiCDCは、TiCDCクラスターのクエリと操作のためのOpenAPI機能を提供します。OpenAPI機能は、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)のサブセットです。
 
-> **注記：**
+> **Note:**
 >
 > TiCDC OpenAPI v1は将来削除される予定です。TiCDC OpenAPI v2のご利用をお勧めします。
 

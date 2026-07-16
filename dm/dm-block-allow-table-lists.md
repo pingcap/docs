@@ -54,7 +54,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 -   `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)と同様です。
 -   `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)と同様です。
 
-> **注記：**
+> **Note:**
 >
 > DM と MySQL では、ブロック リストと許可リストのフィルタリング ルールが次の点で異なります。
 >
@@ -92,7 +92,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
     3.  `do-tables`と`ignore-tables`両方が空の場合は、 `test` 。 `t` 。
 
-> **注記：**
+> **Note:**
 >
 > スキーマ`test`フィルタリングする必要があるかどうかを確認するには、スキーマ レベルでフィルタリングするだけで済みます。
 

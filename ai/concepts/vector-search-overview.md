@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 
 ベクトル検索は、文書、画像、音声、動画など、多様なデータタイプにわたる意味的類似性検索のための強力なソリューションを提供します。開発者は、MySQLの専門知識を活用して、生成型AI機能を備えた拡張性の高いアプリケーションを構築でき、高度な検索機能の統合を簡素化できます。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。

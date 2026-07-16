@@ -57,7 +57,7 @@ SHOW VARIABLES LIKE '%tidb_gc_life_time%';
 SET GLOBAL tidb_gc_life_time=60h;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのストレージ使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
 
@@ -123,7 +123,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 この段階では、古いクラスタは元のバージョンのままですが、新しいクラスタはターゲットバージョンにアップグレードされています。このステップでは、古いクラスタから新しいクラスタへの順方向データレプリケーションチャネルを確立する必要があります。
 
-> **注記：**
+> **Note:**
 >
 > TiCDCコンポーネントのバージョンは、古いクラスターのメジャー バージョンと一致する必要があります。
 

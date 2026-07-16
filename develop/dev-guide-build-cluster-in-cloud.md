@@ -32,7 +32,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 8.  **「パスワードを生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは二度と表示されないため、安全な場所に保存してください。ルートパスワードを設定しないと、 TiDB Cloud Starterインスタンスに接続できません。
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Starterインスタンスに接続するときは、ユーザー名にインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)参照してください。
 
@@ -109,7 +109,7 @@ mysql --version
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
 
-> **注記：**
+> **Note:**
 >
 > -   TiDB Cloud Starterインスタンスに接続するときは、 [TLS接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)必要があります。
 > -   TiDB Cloud Starterインスタンスへの接続時に問題が発生した場合は、 [TiDB Cloud Starterインスタンスへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)で詳細を確認してください。

@@ -29,7 +29,7 @@ TiDB クラスター内のコンポーネントは次の順序で起動されま
 tiup cluster start ${cluster-name}
 ```
 
-> **注記：**
+> **Note:**
 >
 > `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`実行して確認してください。
 
@@ -47,7 +47,7 @@ tiup cluster start ${cluster-name}
     tiup cluster start ${cluster-name} -N 1.2.3.4:2379,1.2.3.5:2379
     ```
 
-> **注記：**
+> **Note:**
 >
 > `-R`または`-N`パラメータを使用して指定されたコンポーネントを起動する場合は、起動順序が正しいことを確認してください。例えば、PDコンポーネントをTiKVコンポーネントより先に起動してください。そうしないと、起動に失敗する可能性があります。
 
@@ -154,7 +154,7 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 tiup cluster rename ${cluster-name} ${new-name}
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   クラスターの名前を変更する操作により、監視システム (Prometheus および Grafana) が再起動されます。
 > -   クラスターの名前を変更した後、古いクラスター名を持つパネルがGrafanaに残る場合があります。これらのパネルは手動で削除する必要があります。

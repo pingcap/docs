@@ -10,7 +10,7 @@ aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/re
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
-> **注記：**
+> **Note:**
 >
 > TiDBのすべてのバージョンで動作するHAProxyの最小バージョンはv1.5です。v1.5とv2.1の間では、 `mysql-check`の`post-41`オプションを設定する必要があります。HAProxy v2.2以降の使用をお勧めします。
 
@@ -57,7 +57,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 | Oracle Enterprise Linux | 7または8         |
 | Ubuntu LTS            | 18.04以降のバージョン |
 
-> **注記：**
+> **Note:**
 >
 > -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)参照してください。
 
@@ -204,7 +204,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 send-proxy check inter 2000 rise 2 fall 3
 ```
 
-> **注記：**
+> **Note:**
 >
 > PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)構成する必要があります。
 

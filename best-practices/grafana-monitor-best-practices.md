@@ -91,7 +91,7 @@ Y 軸を線形スケールに切り替えます。
 
 ![Switch to a linear scale](/media/best-practices/axes-scale-linear.jpg)
 
-> **ヒント：**
+> **Tip:**
 >
 > ヒント 2 とヒント 1 を組み合わせると、 `SELECT`ステートメントと`UPDATE`ステートメントのどちらが遅いかをすぐに分析するのに役立つ`sql_type`ディメンションを見つけることができます。また、遅い SQL ステートメントを含むインスタンスを見つけることもできます。
 

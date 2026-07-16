@@ -162,7 +162,7 @@ SELECT FOUND_ROWS();
     +--------------+
     1 row in set (0.00 sec)
 
-> **注記：**
+> **Note:**
 >
 > クエリ修飾子`SQL_CALC_FOUND_ROWS` 、クエリ修飾子`LIMIT`を考慮せずに結果セットの合計行数を計算しますが、クエリ修飾子[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりにクエリ修飾子`COUNT(*)`使用することをお勧めします。
 

@@ -176,7 +176,7 @@ tikv_servers:
     raftstore.raft-max-election-timeout-ticks: 60
     ```
 
-> **注記：**
+> **Note:**
 >
 > TiKVノードの選出タイムアウト値を`raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下します。ただし、一部のTiKVノードがオフラインになり、残りのアクティブなTiKVノードのRaftログが遅延しているような災害シナリオでは、このTiKVノード上の選出タイムアウト値が大きいリージョンのみがリーダーになることができます。このTiKVノード上のリージョンは、選出を開始する前に少なくとも`raftstore.raft-min-election-timeout-ticks`で設定された期間待機する必要があるため、このようなシナリオではクラスターの可用性への影響を防ぐため、これらの値を過度に大きく設定しないことをお勧めします。
 
@@ -192,7 +192,7 @@ tikv_servers:
     config set label-property reject-leader dc 3
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > TiDB v5.2以降、 `label-property`構成はデフォルトではサポートされません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)使用してください。
 

@@ -7,7 +7,7 @@ summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 
 `SHOW PLACEMENT FOR`は、すべての配置オプションを要約し、特定のテーブル、データベーススキーマ、またはパーティションに対する正規の形式で表示します。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

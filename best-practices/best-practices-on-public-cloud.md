@@ -30,7 +30,7 @@ min-blob-size = "1KB"
 blob-file-compression = "zstd"
 ```
 
-> **注記：**
+> **Note:**
 >
 > Titanを有効にすると、主キーの範囲スキャンのパフォーマンスが若干低下する可能性があります。詳細については、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)参照してください。
 

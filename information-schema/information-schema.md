@@ -100,7 +100,7 @@ summary: TiDBは、システムメタデータを表示するためのANSI標準
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > 以下のテーブルの一部は、TiDB Self-Managed でのみサポートされており、 TiDB Cloudではサポートされていません。TiDB Cloudでサポートされていないテーブルの完全なリストについては、 [システムテーブル](https://docs.pingcap.com/tidbcloud/limited-sql-features#system-tables)を参照してください。
 

@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-cohere/']
 
 このドキュメントでは、 TiDB Cloudで Cohere 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
@@ -70,7 +70,7 @@ CREATE TABLE sample (
 );
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   Cohere埋め込みモデルの場合、テーブルを定義する際に、{{ `input_type` `EMBED_TEXT()` }を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
 > -   `@search`サフィックスは、そのフィールドがベクトル検索クエリの実行時のみ有効であることを示しています。そのため、クエリを作成する際に`input_type`を再度指定する必要はありません。

@@ -63,7 +63,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     [メトリクス](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
 
-> **注記：**
+> **Note:**
 >
 > 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)参照してください。
 

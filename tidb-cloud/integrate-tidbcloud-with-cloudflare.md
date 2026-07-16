@@ -11,7 +11,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 このドキュメントでは、TiDB Cloud Serverless Driverを使用してCloudflare Workersに接続する方法をステップバイステップで説明します。
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Serverless Driverは、 TiDB Cloud StarterおよびTiDB Cloud Essentialでのみ使用できます。
 

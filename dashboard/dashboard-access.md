@@ -7,7 +7,7 @@ summary: TiDB Dashboardにアクセスするには、ブラウザで指定され
 
 TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-> **注記：**
+> **Note:**
 >
 > TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB DashboardをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
 
@@ -15,7 +15,7 @@ TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:
 
 クラスターに複数の PD インスタンスがデプロイされていて、**すべての**PD インスタンスとポートに直接アクセスできる場合は、アドレス[http://127.0.0.1:2379/dashboard/](http://127.0.0.1:2379/dashboard/)の`127.0.0.1:2379`**任意の**PD インスタンスのアドレスとポートに置き換えるだけです。
 
-> **注記：**
+> **Note:**
 >
 > ファイアウォールまたはリバースプロキシが設定されており、すべてのPDインスタンスに直接アクセスできない場合、TiDB Dashboardにアクセスできない可能性があります。これは通常、ファイアウォールまたはリバースプロキシが正しく設定されていないことが原因です。複数のPDインスタンスがデプロイされている場合にファイアウォールまたはリバースプロキシを正しく設定する方法については、 [リバースプロキシの背後でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
@@ -27,7 +27,7 @@ TiDB Dashboardは、比較的新しいバージョンの次の一般的なデス
 -   Firefox &gt;= 68
 -   Edge &gt;= 17
 
-> **注記：**
+> **Note:**
 >
 > 上記のブラウザまたは以前のバージョンのブラウザ、あるいはその他のブラウザを使用して TiDB Dashboardにアクセスすると、一部の機能が正しく動作しない可能性があります。
 

@@ -93,7 +93,7 @@ DMがチェックポイントから増分レプリケーションタスクを再
 
 ## 外部キーの処理<span class="version-mark">（v8.5.6の新機能）</span> {#foreign-key-handling-span-class-version-mark-new-in-v8-5-6-span}
 
-> **警告：**
+> **Warning:**
 >
 > この機能は実験的です。本番環境での使用は推奨されません。予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tiflow/issues)を報告してください。
 
@@ -122,7 +122,7 @@ REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);
 REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -- No cascade
 ```
 
-> **警告：**
+> **Warning:**
 >
 > `foreign_key_checks=1`の場合、DM は主キーまたは一意キーの値を変更する`UPDATE`ステートメントの複製をサポートしません。この場合、複製タスクはエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`で一時停止されます。外部キーを持つテーブルでそのような`UPDATE`ステートメントを複製するには、 `safe-mode: false`を設定します。
 

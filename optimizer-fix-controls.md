@@ -117,7 +117,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ### <a href="https://github.com/pingcap/tidb/issues/56318">`56318`</a> {#56318}
 
-> **注記：**
+> **Note:**
 >
 > これは[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)のみ利用可能です。
 

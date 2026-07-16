@@ -5,7 +5,7 @@ summary: TIFLASH_TABLES` information_schema テーブルについて学習しま
 
 # TIFLASH_TABLES {#tiflash-tables}
 
-> **警告：**
+> **Warning:**
 >
 > このテーブルは不安定であり、TiDB の新しいリリースで予告なく変更される可能性があるため、本番環境では使用しないでください。
 

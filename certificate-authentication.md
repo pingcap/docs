@@ -63,7 +63,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     Email Address []:s@pingcap.com
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > 上記の証明書詳細において、 `:`以降のテキストは入力された情報です。
 
@@ -118,7 +118,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     Getting CA Private Key
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > ログインすると、TiDB は上記の出力の`subject`セクションの情報が一貫しているかどうかを確認します。
 
@@ -175,7 +175,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
     Getting CA Private Key
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > 上記出力のセクション`subject`の情報は、セクション`REQUIRE`のセクション[ログイン検証用の証明書設定](#configure-the-user-certificate-information-for-login-verification)に使用されます。
 
@@ -221,7 +221,7 @@ MySQL クライアントを例にとると、 `ssl-cert` 、 `ssl-key` 、 `ssl-
 mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
 ```
 
-> **注記：**
+> **Note:**
 >
 > `/path/to/client-cert.new.pem` 、 `/path/to/client-key.new.pem` 、 `/path/to/ca-cert.pem`は、CA証明書、クライアント鍵、クライアント証明書のディレクトリです。これらは任意のディレクトリに置き換えることができます。
 
@@ -367,7 +367,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl req -new -x509 -nodes -days 365000 -key ca-key.pem -out ca-cert.new.pem
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > 新しいCA証明書を生成することは、クライアントとサーバーの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためです。したがって、上記のコマンドに追加される情報は、 `REQUIRE ISSUER`情報と一致している必要があります。
 
@@ -383,7 +383,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
 
 ### クライアントキーと証明書を更新する {#update-client-key-and-certificate}
 
-> **注記：**
+> **Note:**
 >
 > クライアントとサーバーの古い CA 証明書を結合された CA 証明書に置き換えた**後にのみ、**以下の手順を実行してください。
 
@@ -394,7 +394,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     sudo openssl rsa -in client-key.new.pem -out client-key.new.pem
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > 上記のコマンドは、クライアントの鍵と証明書を置き換え、オンラインユーザーに影響を与えないようにするためのものです。そのため、上記のコマンドに追加される情報は、 `REQUIRE SUBJECT`情報と一致している必要があります。
 
@@ -410,7 +410,7 @@ CA証明書は、クライアントとサーバー間の相互検証の基盤と
     mysql -u test -h 0.0.0.0 -P 4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key /path/to/client-key.new.pem --ssl-ca /path/to/ca-cert.pem
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > `/path/to/client-cert.new.pem` 、 `/path/to/client-key.new.pem` 、 `/path/to/ca-cert.pem` 、CA証明書、クライアント鍵、クライアント証明書のディレクトリを指定します。これらは任意のディレクトリに置き換えることができます。
 

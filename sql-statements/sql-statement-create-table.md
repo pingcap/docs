@@ -175,7 +175,7 @@ NextValueForSequence ::=
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > -   `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)参照してください。
 > -   `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
@@ -184,7 +184,7 @@ NextValueForSequence ::=
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > -   TiDBは、新しく作成されたテーブルごとに個別のリージョンを作成します。
 > -   `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
@@ -275,7 +275,7 @@ mysql> DESC t1;
 
 -   TiDB Self-Managed およびTiDB Cloud Dedicatedは`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
-    > **注記：**
+    > **Note:**
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 

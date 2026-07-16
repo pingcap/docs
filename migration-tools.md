@@ -148,7 +148,7 @@ tiup install dm
 tiup install dm tidb-lightning
 ```
 
-> **注記：**
+> **Note:**
 >
 > 特定のバージョンのコンポーネントをインストールするには、 `tiup install <component>[:version]`コマンドを使用します。
 

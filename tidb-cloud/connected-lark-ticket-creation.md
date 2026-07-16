@@ -7,7 +7,7 @@ summary: Lark チケットの作成と更新サブスクリプションに関す
 
 TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)をご契約のお客様には、 [Lark](https://www.larksuite.com/)で**「PingCAP Support Bot」**と呼ばれるチケットボットをご利用いただけます。このボットは、サポートチケットの作成や、サポートチケットシステムからの最新情報の直接受信に役立ちます。
 
-> **注記：**
+> **Note:**
 >
 > Larkのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート（ <a href="mailto:support@pingcap.com">[support@pi​​ngcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までご連絡ください。
 

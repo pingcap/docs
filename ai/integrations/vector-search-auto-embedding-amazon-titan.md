@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 
 このドキュメントでは、Amazon Titanの埋め込みモデルをTiDB Cloudで[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)に使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 

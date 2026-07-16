@@ -31,7 +31,7 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
 
 `JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるストレージ容量を返します。
 
-> **注記：**
+> **Note:**
 >
 > TiDBはMySQLとは異なるstorageアーキテクチャを採用しているため、この関数は有効なJSON値に対して常に`0`返します。これは[MySQL 8.0との互換性](/mysql-compatibility.md)で実装されています。TiDBはインプレース更新を行わないことに注意してください。詳細については[RocksDB のスペース使用量](/storage-engine/rocksdb-overview.md#rocksdb-space-usage)参照してください。
 

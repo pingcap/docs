@@ -31,7 +31,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 -   `--target-ts` : 変更フィードの終了TSOを指定します。このTSOに達すると、TiCDCクラスタはデータのプルを停止します。デフォルト値は空で、これはTiCDCが自動的にデータのプルを停止しないことを意味します。
 -   `--config` : チェンジフィード構成ファイルを指定します。詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-> **注記：**
+> **Note:**
 >
 > -   TiCDCは増分データのみを複製します。完全なデータを初期化するには、 Dumpling/ TiDB LightningまたはBRを使用してください。
 > -   完全なデータ初期化が完了したら、アップストリームバックアップを実行する際に`start-ts`をTSOとして指定する必要があります。例えば、 Dumplingディレクトリ内のメタデータファイルにある`pos`の値、またはBRがバックアップを完了した後のログ出力にある`backupTS`の値などです。
@@ -42,7 +42,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-> **注記：**
+> **Note:**
 >
 > `/path`は MySQL シンクには使用されません。
 
@@ -78,7 +78,7 @@ MySQLの設定例：
 | `tidb-txn-mode`             | [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数を指定します (オプション、デフォルト値は`optimistic`です)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `safe-mode`                 | TiCDC がデータを下流に複製する際に`INSERT`および`UPDATE`ステートメントをどのように処理するかを指定します。 `true`の場合、TiCDC は上流のすべての`INSERT`ステートメントを`REPLACE INTO`ステートメントに変換し、すべての`UPDATE`ステートメントを`DELETE` + `REPLACE INTO`ステートメントに変換します。v6.1.3 より前は、このパラメーターのデフォルト値は`true`です。バージョン 6.1.3 以降、デフォルト値は`false`に変更されます。TiCDC が起動すると、現在のタイムスタンプ`ThresholdTs`を取得します。 `INSERT`と`UPDATE`ステートメントで`CommitTs`が`ThresholdTs`より小さい場合、TiCDC はそれぞれ`REPLACE INTO`ステートメントと`DELETE` + `REPLACE INTO`ステートメントに変換します。 `INSERT`が`UPDATE`以上である`CommitTs`および`ThresholdTs`ステートメントの場合、 `INSERT`ステートメントはダウンストリームに直接レプリケートされますが、 `UPDATE`ステートメントの動作は[TiCDCにおけるUPDATEイベント分割時の動作](/ticdc/ticdc-split-update-behavior.md)に従います。 |
 
-> **注記：**
+> **Note:**
 >
 > -   `time-zone`は`mysql`および`tidb`シンクでのみ有効です。TiCDC がダウンストリームとの接続を確立した後、セッションの`time_zone`を設定します。この`time_zone`は、ダウンストリームが DDL および DML ステートメントを実行する際に、 `TIMESTAMP`などのタイムゾーンの影響を受ける時間値を解析するために使用されます。 `DATETIME` 、 `DATE` 、および`TIME`データ型は、タイムゾーン設定の影響を受けません。
 > -   タイムゾーン設定の不一致によって発生するデータの不整合を回避するために、 `time-zone`明示的に設定し、その値が TiCDC サーバーの`--tz`パラメータおよび下流データベースのタイムゾーンと一致していることを確認することをお勧めします。
@@ -95,7 +95,7 @@ echo -n '12345678' | base64   # '12345678' is the password to be encoded.
 MTIzNDU2Nzg=
 ```
 
-> **注記：**
+> **Note:**
 >
 > シンク URI パラメータに`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、 [URIエンコーダー](https://www.urlencoder.org/)のように特殊文字をエスケープする必要があります。
 >
@@ -139,7 +139,7 @@ TiCDCのレプリケーション遅延は、以下のシナリオで増加しま
 -   `add index`のような時間のかかる DDL ステートメントは、上流で実行されます。
 -   PDは積極的なスケジューリング戦略で構成されており、その結果、リージョンリーダーの頻繁な異動、あるいはリージョンの統合や分割が頻繁に発生します。
 
-> **注記：**
+> **Note:**
 >
 > バージョン6.1.1以降、TiCDCの最終整合性レプリケーション機能はAmazon S3互換のオブジェクトストレージをサポートしています。バージョン6.1.4以降、この機能はGCSおよびAzure互換のオブジェクトストレージもサポートしています。
 

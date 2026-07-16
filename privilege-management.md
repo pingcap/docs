@@ -142,7 +142,7 @@ SELECT user,host,db FROM mysql.db WHERE user='genius';
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 ```
 
-> **注記：**
+> **Note:**
 >
 > 権限を取り消すには、完全一致が必要です。一致する結果が見つからない場合は、エラーが表示されます。
 
@@ -305,7 +305,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 -   `ALTER...DROP`ステートメントを使用するには、ユーザーは対応するテーブルに対して`DROP`権限を持っている必要があります。
 -   `ALTER...RENAME TO`ステートメントを実行するには、ユーザーは名前変更前にテーブルに対する`DROP`権限を持ち、名前変更後にテーブルに対する`CREATE`および`INSERT`権限ている必要があります。
 
-> **注記：**
+> **Note:**
 >
 > MySQL 5.7のドキュメントでは、テーブルに対して`INSERT`操作を実行するには、 `CREATE`および`ALTER`の権限であるとされています。しかし、実際にはMySQL 5.7では、この場合`ALTER`権限のみが必要です。現在、TiDB の`ALTER`権限は、MySQL の実際の動作と一致しています。
 
@@ -335,7 +335,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `CREATE VIEW`権限が必要です。
 
-> **注記：**
+> **Note:**
 >
 > 現在のユーザーがビューを作成したユーザーでない場合、 `CREATE VIEW`と`SUPER`の両方の権限が必要です。
 
@@ -487,7 +487,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 `Host`内の`User`と`mysql.db`は、ユーザーがアクセスできるデータベースを決定します。有効な範囲はデータベースです。
 
-> **注記：**
+> **Note:**
 >
 > `GRANT` 、 `CREATE USER` }}、 `DROP USER` `FLUSH PRIVILEGES`が実行されるまで予期しない動作が発生する可能性があります。
 

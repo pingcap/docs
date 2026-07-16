@@ -101,6 +101,6 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 | 負荷             | ヌル                                                                                                         | `SELECT` (チェックポイント履歴を照会する)<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DELETE` （チェックポイントを削除）<br/> `INSERT` (ダンプデータを挿入)                                                                                     | ローカルファイルの読み取り/書き込み |
 | Binlogレプリケーション | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `show master status` , `show slave status` ) | `SELECT` (インデックスと列を表示)<br/> `INSERT` （DML）<br/> `UPDATE` (DML)<br/> `DELETE` （DML）<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DROP` (データベース/テーブルを削除)<br/> `ALTER` （テーブルを変更する）<br/> `INDEX` (インデックスの作成/削除) | ローカルファイルの読み取り/書き込み |
 
-> **注記：**
+> **Note:**
 >
 > これらの権限は不変ではなく、リクエストが変更されると変更されます。

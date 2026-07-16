@@ -13,7 +13,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 -   TiDB Cloud Dedicated VPC ピアリングをインポートします。
 -   TiDB Cloud Dedicated VPC ピアリングを削除します。
 
-> **注記：**
+> **Note:**
 >
 > `tidbcloud_dedicated_vpc_peering`リソースは変更できません。TiDB Cloud Dedicated VPC ピアリングの設定を変更する場合は、既存のピアリングを削除してから、新しいピアリングを作成する必要があります。
 

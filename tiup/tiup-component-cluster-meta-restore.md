@@ -16,7 +16,7 @@ tiup cluster meta restore <cluster-name> <backup-file> [flags]
 -   `<cluster-name>`は操作対象となるクラスターの名前です。
 -   `<backup-file>`はTiUPメタ バックアップ ファイルへのパスです。
 
-> **注記：**
+> **Note:**
 >
 > 復元操作により、現在のメタファイルが上書きされます。メタファイルは、失われた場合にのみ復元することをお勧めします。
 

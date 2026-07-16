@@ -56,7 +56,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 ## <code>ADMIN PLUGINS</code>関連のステートメント {#code-admin-plugins-code-related-statement}
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -102,7 +102,7 @@ ADMIN RELOAD BINDINGS;
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > この TiDB の記述はTiDB Cloudには適用されません。
 
@@ -130,7 +130,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 
 ## <code>ADMIN SHOW SLOW</code>ステートメント {#code-admin-show-slow-code-statement}
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

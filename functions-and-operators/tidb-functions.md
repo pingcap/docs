@@ -289,7 +289,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメータの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`なります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`"..."`が追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`なります。
 
-> **注記：**
+> **Note:**
 >
 > -   この機能を使用できるのは、 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみです。
 > -   `TIDB_DECODE_SQL_DIGESTS`実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL ステートメントを照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [明細書要約表](/statement-summary-tables.md)参照してください。

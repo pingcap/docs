@@ -14,7 +14,7 @@ TiDB は MySQL 互換データベースであり、[Prisma](https://github.com/p
 -   Prismaを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -391,7 +391,7 @@ await prisma.player.delete({
 
 -   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)、TiDB v6.6.0 以降でサポートされている機能であり、v8.5.0 以降で一般的に利用可能です。外部キーを使用すると、関連データのテーブル間参照が可能になり、外部キー制約によって関連データの一貫性が確保されます。
 
-    > **警告：**
+    > **Warning:**
     >
     > **外部キーは、小規模から中規模のデータ量を扱う場合に適しています。**大規模なデータ量で外部キーを使用すると、深刻なパフォーマンス問題が発生したり、システムに予期せぬ影響を及ぼしたりする可能性があります。外部キーを使用する場合は、事前に徹底的な検証を行い、慎重に使用してください。
 

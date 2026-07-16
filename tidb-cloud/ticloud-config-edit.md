@@ -13,7 +13,7 @@ ticloud config edit [flags]
 
 Windows を使用している場合は、上記のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが出力されます。
 
-> **注記：**
+> **Note:**
 >
 > フォーマットエラーや実行エラーを避けるため、設定ファイルを手動で編集することは推奨されません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)使用して設定を変更できます。
 

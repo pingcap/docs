@@ -163,7 +163,7 @@ with connection:
 
 </SimpleTab>
 
-> **注記：**
+> **Note:**
 >
 > -   `rated_at`フィールドは、[日付と時刻の種類](/data-type-date-and-time.md)種類の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを保存するため、異なるタイム[タイムゾーン](/configure-time-zone.md)には異なる時刻文字列が表示されます。
 > -   MySQLと同様に、 `TIMESTAMP`データ型は[2038年の問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
@@ -350,7 +350,7 @@ with connection:
 
 ## 非トランザクション一括削除 {#non-transactional-bulk-delete}
 
-> **注記：**
+> **Note:**
 >
 > v6.1.0 以降、TiDB は[非トランザクションDMLステートメント](/non-transactional-dml.md)ステートメントをサポートします。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
 

@@ -7,7 +7,7 @@ summary: TiDB Cloud Premiumインスタンスへのアクセスを許可するIP
 
 TiDB Cloudの各TiDB Cloud Premium インスタンスに対して、IP アクセス リストを設定することで、インスタンスへのアクセスを試みるインターネット トラフィックをフィルタリングできます。これはファイアウォールのアクセス制御リストと同様の機能を持ちます。設定後、IP アクセス リストに登録されている IP アドレスを持つクライアントおよびアプリケーションのみが、 TiDB Cloud Premium インスタンスに接続できるようになります。
 
-> **注記：**
+> **Note:**
 >
 > このドキュメントは**TiDB Cloud Premium**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)するを参照してください。
 
@@ -15,7 +15,7 @@ TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するに
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

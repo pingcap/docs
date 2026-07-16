@@ -11,7 +11,7 @@ TiDBで新しいテーブルを作成するたびに、デフォルトで1つの
 
 上記シナリオにおけるホットスポット問題を解決するために、TiDBは事前分割機能を導入しました。この機能は、指定されたパラメータに従って特定のテーブルに対して複数のリージョンを事前に分割し、それらを各TiKVノードに分散させることができます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -71,7 +71,7 @@ RowValue ::=
 -   `TOTAL_SPLIT_REGION` : 新たに分割されたリージョンの数。
 -   `SCATTER_FINISH_RATIO` : 新しく分割されたリージョンの再配置完了率。 `1.0`すべてのリージョンが再配置されたことを意味します。 `0.5`は、リージョンの半分のみが再配置され、残りは再配置中であることを意味します。
 
-> **注記：**
+> **Note:**
 >
 > 以下の2つのセッション変数は`SPLIT`ステートメントの動作に影響を与える可能性があります。
 >
@@ -268,7 +268,7 @@ SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:
 
     上記の記述において、 `0`と`10000`はそれぞれ、散布したいホットスポットデータに対応する上側境界と下側境界の`row_id`を表します。
 
-    > **注記：**
+    > **Note:**
     >
     > この例は、ホットスポット データが均等に分散されているシナリオにのみ適用されます。ホットスポット データが指定されたデータ範囲内で不均等に分散している場合は、[パーティション化されたテーブルのリージョンを分割する](#split-regions-for-partitioned-tables)不均等分割の構文を参照してください。
 
@@ -354,7 +354,7 @@ SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:
 
 `AUTO_RANDOM`または`SHARD_ROW_ID_BITS`属性を使用してテーブルを作成する場合、テーブル作成直後にテーブルをリージョンに均等に事前分割したい場合は`PRE_SPLIT_REGIONS`オプションを指定することもできます。テーブルの事前分割リージョンの数は`2^(PRE_SPLIT_REGIONS)`です。
 
-> **注記：**
+> **Note:**
 >
 > `PRE_SPLIT_REGIONS`の値は、 `SHARD_ROW_ID_BITS`または`AUTO_RANDOM`の値以下でなければなりません。
 
@@ -377,7 +377,7 @@ CREATE TABLE t (a INT, b INT, INDEX idx1(a)) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REG
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > Split リージョンステートメントによって分割されたリージョンは、PD の[リージョンの統合](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラーによって制御されます。 PD が新しく分割されたリージョンをすぐに再マージしないようにするには、[テーブル属性](/table-attributes.md)プロパティ[動的に変更する](/pd-control.md)に変更するリージョンマージ機能に関連する構成アイテムを使用する必要があります。
 

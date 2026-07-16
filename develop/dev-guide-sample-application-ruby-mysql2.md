@@ -14,7 +14,7 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 -   mysql2を使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 

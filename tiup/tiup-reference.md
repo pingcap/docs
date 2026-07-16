@@ -32,13 +32,13 @@ tiup [flags] <component> [args...]      # Runs a component
 
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-> **注記：**
+> **Note:**
 >
 > このオプションは、 `tiup [flags] <component> [args...]`形式のコマンドでのみ使用できます。
 
 ### --binpath {#binpath}
 
-> **注記：**
+> **Note:**
 >
 > このオプションは、 `tiup [flags] <component> [args...]`形式のコマンドでのみ使用できます。
 

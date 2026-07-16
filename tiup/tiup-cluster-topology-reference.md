@@ -167,7 +167,7 @@ server_configs:
 
 ### `component_versions` {#component-versions}
 
-> **注記：**
+> **Note:**
 >
 > TiDB、TiKV、PD、TiCDC など、バージョン番号を共有するコンポーネントについては、混在バージョンのデプロイメントシナリオで正常に動作することを保証するための完全なテストは存在しません。このセクションは、テスト環境でのみ使用するか、 [テクニカルサポート](/support.md)の支援を受けて使用してください。
 
@@ -736,7 +736,7 @@ monitoring_servers:
 
 -   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > `dashboard_dir`フィールドが`grafana_servers`に設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >

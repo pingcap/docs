@@ -12,7 +12,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)と比較して、 `IMPORT INTO` TiDBノード上で直接実行でき、自動分散タスクスケジューリングと[TiDB グローバルソート](/tidb-global-sort.md)グローバルをサポートし、デプロイ、リソース利用率、タスク構成の利便性、呼び出しと統合の容易さ、高可用性、スケーラビリティにおいて大幅な改善を提供します。適切なシナリオでは、 TiDB Lightningの代わりに`IMPORT INTO`の使用を検討することをお勧めします。
 
@@ -117,7 +117,7 @@ OptionItem ::=
 
 -   TiDB ローカルファイルパス: 絶対パスである必要があり、ファイル拡張子は`.csv` 、 `.sql` 、または`.parquet`である必要があります。このパスに対応するファイルが、現在のユーザーが接続している TiDB ノードに保存されていること、およびユーザーが`FILE`権限を持っていることを確認してください。
 
-> **注記：**
+> **Note:**
 >
 > ターゲット クラスターで[SEM](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、 `fileLocation`をローカル ファイル パスとして指定することはできません。
 
@@ -161,7 +161,7 @@ OptionItem ::=
 
 <CustomContent platform="tidb-cloud" plan="premium">
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Premium では、 `DISK_QUOTA` 、 `THREAD` 、 `MAX_WRITE_SPEED` 、および`CLOUD_STORAGE_URI`つのオプションは、適切な値に自動的に調整されるため、ユーザーが変更することはできません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
@@ -188,14 +188,14 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 | `.zstd` 、 `.zst` | ZStd圧縮フォーマット  |
 | `.snappy`        | Snappy圧縮フォーマット |
 
-> **注記：**
+> **Note:**
 >
 > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 > -   TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズがインポート速度に影響します。解凍後のソースファイルのサイズは256MiB以下にすることをお勧めします。
 
 ### グローバルソート {#global-sort}
 
-> **注記：**
+> **Note:**
 >
 > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは、グローバルソートは利用できません。
 
@@ -216,7 +216,7 @@ SET GLOBAL tidb_server_memory_limit_gc_trigger=1;
 SET GLOBAL tidb_server_memory_limit='75%';
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   ソースデータファイル内のキーバリュー範囲の重複が少ない場合、グローバルソートを有効にするとインポートのパフォーマンスが低下する可能性があります。これは、グローバルソートを有効にすると、TiDB はグローバルソート操作とそれに続くインポートに進む前に、すべてのサブジョブにおけるローカルソートの完了を待つ必要があるためです。
 > -   Global Sortを使用したインポート処理が完了すると、Global Sort用にクラウドストレージに保存されたファイルは、バックグラウンドスレッドで非同期的にクリーンアップされます。

@@ -23,7 +23,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 
 テーブル内の既存の行を更新するには、更新対象の列をフィルタリングするために`WHERE`句を含む[`UPDATE`文](/sql-statements/sql-statement-update.md)使用する必要があります。
 
-> **注記：**
+> **Note:**
 >
 > 多数の行（例えば1万行以上）を更新する必要がある場合は、一度にすべてを更新するのではなく、すべての行が更新されるまで、一部ずつ繰り返し更新することをお***勧め***します。この操作をループさせるスクリプトやプログラムを作成できます。詳しくは[一括更新](#bulk-update)ご覧ください。
 
@@ -172,7 +172,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
 ```
 
-> **注記：**
+> **Note:**
 >
 > この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータテーブルのスキーマを変更します。TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、[列を追加](/sql-statements/sql-statement-add-column.md)参照してください。
 

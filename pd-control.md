@@ -9,7 +9,7 @@ PD のコマンドラインツールであるPD Control は、クラスターの
 
 ## PD Controlをインストールする {#install-pd-control}
 
-> **注記：**
+> **Note:**
 >
 > 使用する制御ツールのバージョンは、クラスターのバージョンと一致させることをお勧めします。
 
@@ -26,7 +26,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | リナックス | amd64   | `https://download.pingcap.com/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
 | `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | リナックス | アーム64   | `https://download.pingcap.com/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
-> **注記：**
+> **Note:**
 >
 > リンク内の`{version}` TiDBのバージョン番号を示します。例えば、 `amd64`アーキテクチャの`v8.5.5`のダウンロードリンクは`https://download.pingcap.com/tidb-community-server-v8.5.5-linux-amd64.tar.gz`です。
 
@@ -357,7 +357,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `rate-limit` : PD によって処理される HTTP API リクエストの最大レートと同時実行性を制限します。
 -   `grpc-rate-limit` : PD によって処理される gRPC API リクエストの最大レートと同時実行性を制限します。
 
-> **注記：**
+> **Note:**
 >
 > リクエスト レート制限と同時実行制限が PD パフォーマンスに与える影響を回避するために、 `service-middleware`の設定を変更することはお勧めしません。
 
@@ -563,7 +563,7 @@ v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`
 
 ### `member [delete | leader_priority | leader [show | resign | transfer &#x3C;member_name>]]` {#member-delete-leader-priority-leader-show-resign-transfer-x3c-member-name}
 
-> **注記：**
+> **Note:**
 >
 > 本番環境では、 `member delete`コマンドを使用して PD ノードを削除**しないでください**。PD ノードを削除するには、 [TiDB/PD/TiKV クラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster)と[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)参照してください。
 
@@ -606,7 +606,7 @@ member leader_priority  pd-4 1
 member leader_priority  pd-5 0
 ```
 
-> **注記：**
+> **Note:**
 >
 > 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
@@ -1114,7 +1114,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     -   `write-peer-priorities` 、書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
 
-    > **注記：**
+    > **Note:**
     >
     > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラはデフォルトで`byte`および`key`ディメンションに基づいてホットスポット バランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
     >
@@ -1234,7 +1234,7 @@ store cancel-delete 1
 store remove-tombstone
 ```
 
-> **注記：**
+> **Note:**
 >
 > ストアの削除中に PD リーダーが変更された場合は、 [`store limit`](#configure-store-scheduling-speed)コマンドを使用してストア制限を手動で変更する必要があります。
 
@@ -1266,7 +1266,7 @@ store remove-tombstone
     store label 1 disk --delete
     ```
 
-> **注記：**
+> **Note:**
 >
 > -   ストアのラベルはマージ戦略によって更新されます。TiKVプロセスが再起動されると、その設定ファイル内のストアラベルはPDに保存されているストアラベルとマージされ、マージされた結果が保持されます。マージプロセス中に、PD側とTiKV設定ファイルの間で重複するストアラベルが存在する場合、TiKVストアラベル設定によってPDラベルが上書きされます。例えば、ストア1のストアラベルが`"zone=cn"` ～ `store label 1 zone=cn`に設定されているのに、TiKV設定ファイルに`zone = "us"`設定されている場合、TiKVの再起動後に`"zone"`が`"us"`に更新されます。
 > -   TiUPを使用してストアのラベルを管理するには、クラスターを再起動する前に、 `store label <id> --force`コマンドを実行して PD に保存されているラベルを空にします。
@@ -1297,7 +1297,7 @@ store weight 1 5 10
 >> store limit all engine tiflash 5 remove-peer // Starting from v8.5.5, you can set the speed limit of removing-peer operations for all TiFlash stores. This example sets the speed limit of removing-peer operations for all TiFlash stores to 5 per minute.
 ```
 
-> **注記：**
+> **Note:**
 >
 > `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
 
@@ -1325,7 +1325,7 @@ logic:  120102
 
 ### `unsafe remove-failed-stores [store-ids | show]` {#unsafe-remove-failed-stores-store-ids-show}
 
-> **警告：**
+> **Warning:**
 >
 > -   この機能は非可逆回復であるため、TiKV はこの機能を使用した後のデータの整合性とデータ インデックスの整合性を保証できません。
 > -   機能関連の操作は、TiDB チームのサポートを受けながら実行することをお勧めします。誤った操作を行うと、クラスターの復旧が困難になる可能性があります。

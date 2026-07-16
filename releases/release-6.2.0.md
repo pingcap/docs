@@ -9,7 +9,7 @@ summary: TiDB 6.2.0-DMRでは、ビジュアル実行プラン、モニタリン
 
 TiDBバージョン: 6.2.0-DMR
 
-> **注記：**
+> **Note:**
 >
 > TiDB 6.2.0-DMR ドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.2/)です。 PingCAP は、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨します。
 

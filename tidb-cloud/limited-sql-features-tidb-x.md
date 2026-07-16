@@ -9,7 +9,7 @@ TiDB X インスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに対応していますが、TiDB Self-Managed と TiDB Cloud の間には一部機能差があります。このドキュメントでは、TiDB Cloud Starter、Essential、Premium における SQL 機能の制限事項について説明します。TiDB Self-Managed と TiDB Cloud の機能差は継続的に解消されています。これらの不足している機能や機能性が必要な場合は、機能リクエストとして [お問い合わせ](/tidb-cloud/tidb-cloud-support.md) ください。
 
-> **注記：**
+> **Note:**
 >
 > このドキュメントは {{{ .starter }}}、Essential、Premium にのみ適用されます。TiDB Cloud Dedicated については、[Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md) を参照してください。
 

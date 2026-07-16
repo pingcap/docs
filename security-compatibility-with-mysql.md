@@ -186,7 +186,7 @@ Here is an example for Header:
 
 署名は、ヘッダーとペイロード データに署名するために使用されます。
 
-> **警告：**
+> **Warning:**
 >
 > -   ヘッダーとペイロードのBase64エンコードは可逆です。機密情報を添付し**ないで**ください。
 > -   `tidb_auth_token`認証方法では、クライアントが[`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html)プラグインをサポートし、トークンをプレーンテキストで TiDB に送信する必要があります。そのため、 `tidb_auth_token`使用する前に[クライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)実行する必要があります。

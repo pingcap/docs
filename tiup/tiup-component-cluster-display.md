@@ -29,7 +29,7 @@ tiup cluster display <cluster-name> [flags]
 -   データ型: `STRINGS`
 -   コマンドでこのオプションを指定しない場合は、デフォルトですべてのノードがチェックされます。
 
-> **注記：**
+> **Note:**
 >
 > `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
 
@@ -39,7 +39,7 @@ tiup cluster display <cluster-name> [flags]
 -   データ型: `STRINGS`
 -   コマンドでこのオプションを指定しない場合は、デフォルトですべてのロールが表示されます。
 
-> **注記：**
+> **Note:**
 >
 > `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが表示されます。
 
@@ -95,7 +95,7 @@ tiup cluster display <cluster-name> [flags]
 -   オフライン保留中: ノードサービス上のデータが移行中で、スケールインが進行中です。このステータスは TiKV またはTiFlashでのみ表示されます。
 -   不明: ノード サービスの実行ステータスは不明です。
 
-> **注記：**
+> **Note:**
 >
 > TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB Dashboardの`Leaving`同じステータスを示します。
 

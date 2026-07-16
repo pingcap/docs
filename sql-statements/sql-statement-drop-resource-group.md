@@ -7,7 +7,7 @@ summary: TiDBにおけるDROP RESOURCE GROUPの使い方を学びましょう。
 
 `DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -25,7 +25,7 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)が`ON`に設定されている場合にのみ実行できます。
 > -   `default`リソース グループは予約済みであり、削除できません。

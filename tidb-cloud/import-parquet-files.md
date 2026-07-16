@@ -7,7 +7,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
 このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、または Azure Blob Storage からTiDB Cloud Dedicatedに Apache Parquet ファイルをインポートする方法について説明します。インポートできる Parquet ファイルは、非圧縮ファイルでも[Google Snappy](https://github.com/google/snappy)で圧縮されたファイルでも構いません。その他の Parquet 圧縮コーデックはサポートされていません。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud StarterまたはTiDB Cloud Essentialについては、 [クラウドストレージからTiDB Cloud StarterまたはEssentialにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)参照してください。
 
@@ -19,7 +19,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
-> **注記：**
+> **Note:**
 >
 > 現在、 TiDB Cloud、[サポートされているデータ型](#supported-data-types)のデータ型を含む Parquet ファイルのインポートはサポートされていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず (例: `STRING` ) を使用して Parquet ファイルを再生成する必要があります。または、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
 >
@@ -39,7 +39,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
     -   1つのテーブルのデータが複数のParquetファイルに分割されている場合は、これらのParquetファイルに数値サフィックスを追加してください。例えば、 `${db_name}.${table_name}.000001.parquet`と`${db_name}.${table_name}.000002.parquet`のようにです。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
-    > **注記：**
+    > **Note:**
     >
     > -   前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**宛先マッピング**サブステップで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDB ファイル命名規則</a>を使用して自動マッピングを行う」**の選択を解除して、ソース ファイルを単一のターゲット テーブルに手動でマッピングできます。
     > -   Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
@@ -79,7 +79,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
         COUNT INT );
         ```
 
-        > **注記：**
+        > **Note:**
         >
         > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
 
@@ -106,7 +106,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-        > **ヒント：**
+        > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -130,7 +130,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     **ソースURI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う**」オプションを選択します。
 
-    > **注記：**
+    > **Note:**
     >
     > **ソースURI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
@@ -159,7 +159,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-        > **ヒント：**
+        > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -181,7 +181,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     **ソースURI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う**」オプションを選択します。
 
-    > **注記：**
+    > **Note:**
     >
     > **ソースURI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
@@ -210,7 +210,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-        > **ヒント：**
+        > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -249,7 +249,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     4.  [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
 
-    > **注記：**
+    > **Note:**
     >
     > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。Azure でリクエスト[Azureポータル](https://portal.azure.com/)承認してから、再試行してください。
 
@@ -257,7 +257,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     **ソースURI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**<a href="/tidb-cloud/naming-conventions-for-data-import.md">「TiDBファイル命名規則</a>を使用して自動マッピングを行う**」オプションを選択します。
 
-    > **注記：**
+    > **Note:**
     >
     > **ソースURI**で単一のファイルを指定すると、 TiDB Cloudは**「自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する」**オプションを表示せず、**ソース**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 

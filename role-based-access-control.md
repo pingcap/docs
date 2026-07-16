@@ -186,7 +186,7 @@ SET DEFAULT ROLE ALL TO 'dev1'@'localhost';
 SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
 ```
 
-> **注記：**
+> **Note:**
 >
 > このロールにデフォルト ロールを設定する前に、ユーザーにロールを付与する必要があります。
 
@@ -234,7 +234,7 @@ SET ROLE NONE
 SET ROLE ALL EXCEPT 'app_read'
 ```
 
-> **注記：**
+> **Note:**
 >
 > `SET ROLE`使用してロールを有効にすると、このロールは現在のセッションでのみ有効になります。
 

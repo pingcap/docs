@@ -44,7 +44,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 -   Dumplingには、データソース全体を保存できる（またはエクスポートされるすべての上流テーブルを保存できる）ディスク容量が必要です。必要なスペースを計算するには、 [ターゲットデータベースのストレージ要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート処理中、 TiDB Lightningはソート済みのキーと値のペアを保存するための一時的な領域を必要とします。ディスク容量は、データソースの最大の単一テーブルを格納できるのに十分な量が必要です。
 
-**注記：** DumplingによってMySQLからエクスポートされる正確なデータ量を計算することは困難ですが、次のSQLステートメントを使用して`information_schema.tables`テーブルの`DATA_LENGTH`フィールドを要約することで、データ量を推定できます。
+**Note:** DumplingによってMySQLからエクスポートされる正確なデータ量を計算することは困難ですが、次のSQLステートメントを使用して`information_schema.tables`テーブルの`DATA_LENGTH`フィールドを要約することで、データ量を推定できます。
 
 ```sql
 -- Calculate the size of all schemas
@@ -143,7 +143,7 @@ LIMIT
 
 4.  TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
-> **注記：**
+> **Note:**
 >
 > インポートが成功したかどうかに関わらず、ログの最後の行には`tidb lightning exit`と表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
 

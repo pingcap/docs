@@ -98,7 +98,7 @@ TiDB クラスターのストレージが不足しています。 [TiKVノード
 
 ソース データベース ユーザーに`LOCK TABLES`権限がないため、データの完全なエクスポートが失敗します。このエラーは通常、マネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) から移行する場合に発生します。これらのサービスでは、クラウド プロバイダーによって`FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていません。このシナリオでは、DM はデフォルトの`consistency=auto`モードを使用し、完全なエクスポート中にデータの一貫性を確保するために`LOCK TABLES`にフォールバックします。この操作には`LOCK TABLES`権限が必要です。
 
-> **注記：**
+> **Note:**
 >
 > このエラーは`RELOAD`権限がないなど、他の理由で FTWRL が利用できない場合にも、自己管理型の MySQL インスタンスで発生する可能性があります。
 

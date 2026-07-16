@@ -24,7 +24,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-> **注記：**
+> **Note:**
 >
 > サービスを提供しているクラスターを強制的にアップグレードすると、サービスが利用できなくなる可能性があります。アップグレードが成功すると、起動していないクラスターは自動的に起動されます。
 
@@ -34,7 +34,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `uint`
 -   デフォルト: 600
 
-> **注記：**
+> **Note:**
 >
 > 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが不安定になる可能性があります。
 
@@ -131,7 +131,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### ---アップグレード前スクリプト {#pre-upgrade-script}
 
-> **警告：**
+> **Warning:**
 >
 > このオプションは実験的であり、本番での展開には推奨されません。
 
@@ -141,7 +141,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### ---アップグレード後のスクリプト {#post-upgrade-script}
 
-> **警告：**
+> **Warning:**
 >
 > このオプションは実験的であり、本番での展開には推奨されません。
 

@@ -17,7 +17,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 -   TiDB Cloud Dedicated ネットワーク コンテナーをインポートします。
 -   TiDB Cloud Dedicated ネットワーク コンテナーを削除します。
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Dedicatedネットワークコンテナは、ステータスが`ACTIVE`場合、変更または削除できません。適用する前に、 `tidbcloud_network_container`リソースの構成が正しいことを確認してください。
 

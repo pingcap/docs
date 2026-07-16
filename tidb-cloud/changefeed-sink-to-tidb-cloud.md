@@ -7,7 +7,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 このドキュメントでは、TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > Changefeed機能を使用するには、 TiDB Cloud Dedicatedクラスタのバージョンがv6.1.3以降であることを確認してください。
 

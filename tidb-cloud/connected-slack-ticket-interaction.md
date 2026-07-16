@@ -7,7 +7,7 @@ summary: サポート チケットの Slack でのやり取りに関する詳細
 
 **Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポート チケットのより包括的なやり取りと管理をサポートするために、 [Slack](https://slack.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
 
-> **注記：**
+> **Note:**
 >
 > Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 

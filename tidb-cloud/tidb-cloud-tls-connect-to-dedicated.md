@@ -32,7 +32,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
-    > **注記：**
+    > **Note:**
     >
     > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスをご自身のCA証明書パスに置き換える必要があります。
     > -   TiDB Cloud Dedicated では、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在TiDB Cloud Dedicated ではサポートされていません。

@@ -9,7 +9,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)使用することをお勧めします。
 
@@ -17,7 +17,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)使用することをお勧めします。
 
@@ -31,7 +31,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 パフォーマンス上の理由から、各TiDBサーバーには、 `AUTO_INCREMENT`個の数値が一括で割り当てられます（デフォルトでは3万個）。つまり、 `AUTO_INCREMENT`数値は一意であることが保証されますが、 `INSERT`ステートメントに割り当てられる値は、TiDBサーバーごとに単調なものになります。
 
-> **注記：**
+> **Note:**
 >
 > すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、TiDB バージョンが v6.5.0 以降であれば、 [MySQL互換モード](#mysql-compatibility-mode)有効にすることをお勧めします。
 
@@ -106,7 +106,7 @@ INSERT INTO t (c) VALUES (1)
 
 ### ユニークさ {#uniqueness}
 
-> **警告：**
+> **Warning:**
 >
 > クラスタに複数のTiDBインスタンスがあり、テーブルスキーマにAUTO_INCREMENT IDが含まれている場合、明示的な挿入と暗黙的な割り当て（AUTO_INCREMENT列のデフォルト値とカスタム値の使用）を同時に使用しないことを推奨します。そうしないと、暗黙的に割り当てられた値の一意性が損なわれる可能性があります。
 
@@ -451,7 +451,7 @@ IDは常に増加し、 `AUTO_ID_CACHE 0`のような大きなギャップは発
 
 -   通常の同時トランザクション中（MySQLと同様）
 
-> **注記：**
+> **Note:**
 >
 > `AUTO_ID_CACHE 1`の動作とパフォーマンスは、TiDB のバージョンごとに進化しています。
 >

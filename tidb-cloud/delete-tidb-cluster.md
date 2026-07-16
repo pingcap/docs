@@ -17,7 +17,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
 2.  削除する対象リソースの行で、 **...**をクリックします。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > または、対象のリソース名をクリックして概要ページに移動し、右上隅の**「…」**をクリックすることもできます。
 
@@ -34,7 +34,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
     -   TiDB Cloud Dedicatedクラスターをバックアップする方法の詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
 
-    > **注記：**
+    > **Note:**
     >
     > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスは、削除後のデータの復元をサポートしていません。 TiDB Cloud Starterインスタンスを削除し、将来そのデータを復元したい場合は、 [TiDB Cloud Starterからデータをエクスポート](/tidb-cloud/serverless-export.md)を参照してデータをバックアップとしてエクスポートします。
 
@@ -46,7 +46,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
     -   手動で作成したバックアップファイルは、手動で削除されるまでごみ箱に保存されます。
 
-    > **注記：**
+    > **Note:**
     >
     > バックアップは削除されるまで料金が発生し続けることにご注意ください。
 

@@ -12,13 +12,13 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサ
 -   S3およびGCSからのデータのインポートをサポート
 -   新しいパラメータ`FIELDS DEFINED NULL BY`を追加する
 
-> **警告：**
+> **Warning:**
 >
 > 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告してください。
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage の`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
 
@@ -179,7 +179,7 @@ IGNORE 1 LINES;
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > -   TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1 つのトランザクションでコミットします。ただし、 `LOAD DATA`ステートメントで一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
@@ -196,7 +196,7 @@ IGNORE 1 LINES;
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > -   TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1 つのトランザクションでコミットします。ただし、 `LOAD DATA`ステートメントで一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。

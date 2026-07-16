@@ -7,7 +7,7 @@ summary: TiDBでSHOW TABLE REGIONSを使用する方法を学びましょう。
 
 `SHOW TABLE REGIONS`ステートメントは、TiDB のテーブルのリージョン情報を表示するために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -56,7 +56,7 @@ TableName ::=
 
 -   `SCHEDULING_STATE` : 配置ポリシーを持つリージョンのスケジューリング状態。
 
-> **注記：**
+> **Note:**
 >
 > `WRITTEN_BYTES` 、 `READ_BYTES` 、 `APPROXIMATE_SIZE(MB)` 、 `APPROXIMATE_KEYS`は正確なデータではありません。これらは、PD がリージョンから受信するハートビート情報に基づいて PD が推定したデータです。
 

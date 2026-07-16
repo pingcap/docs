@@ -7,7 +7,7 @@ summary: tiup cluster edit-config` コマンドを使用すると、デプロイ
 
 クラスタのデプロイ後にクラスタ設定を変更する必要がある場合は、 `tiup cluster edit-config`コマンドを使用してエディタを起動し、クラスタの[トポロジファイル](/tiup/tiup-cluster-topology-reference.md)編集できます。このエディタは、デフォルトで`$EDITOR`環境変数に指定されています。7 環境変数が存在しない場合は、 `$EDITOR`エディタ`vi`使用されます。
 
-> **注記：**
+> **Note:**
 >
 > -   設定を変更すると、マシンの追加や削除はできなくなります。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-cluster-scale-out.md)参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-cluster-scale-in.md)参照してください。
 > -   `tiup cluster edit-config`コマンドを実行すると、コントロールマシン上でのみ設定が変更されます。その後、 `tiup cluster reload`コマンドを実行して設定を再読み込みする必要があります。

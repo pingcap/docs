@@ -9,7 +9,7 @@ summary: TiDB 6.6.0 の新機能、互換性の変更点、改善点、および
 
 TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone-releases)
 
-> **注記：**
+> **Note:**
 >
 > TiDB 6.6.0-DMR ドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.6/)です。 PingCAP は、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨します。
 
@@ -285,7 +285,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ## 互換性の変更 {#compatibility-changes}
 
-> **注記：**
+> **Note:**
 >
 > このセクションでは、バージョン6.5.0から最新バージョン（6.6.0）にアップグレードする際に知っておくべき互換性の変更点について説明します。バージョン6.4.0以前のバージョンから最新バージョンにアップグレードする場合は、中間バージョンで導入された互換性の変更点も確認する必要があるかもしれません。
 

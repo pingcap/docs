@@ -7,7 +7,7 @@ summary: TIDB_SERVERS_INFO` INFORMATION_SCHEMA テーブルについて学習し
 
 `TIDB_SERVERS_INFO`テーブルは、TiDBクラスタ内の TiDB サーバー (具体的には、tidb-server プロセス) に関する情報を提供します。
 
-> **注記：**
+> **Note:**
 >
 > このテーブルは、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 

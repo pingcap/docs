@@ -65,7 +65,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
     詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)参照してください。
 
-    > **注記：**
+    > **Note:**
     >
     > AWS 上の Confluent Cloud Dedicated クラスターの場合、 TiDB Cloudからのエンドポイント接続リクエストを手動で承認するために、AWS コンソールのエンドポイントサービスの詳細ページに移動する必要はありません。Confluent Cloud が自動的に処理します。
 

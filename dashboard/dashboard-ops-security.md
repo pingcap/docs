@@ -23,7 +23,7 @@ TiDB Dashboardにアクセスしてサインインするには、最小限の権
 
 ## ファイアウォールを使用して信頼できないアクセスをブロックする {#use-a-firewall-to-block-untrusted-access}
 
-> **注記：**
+> **Note:**
 >
 > TiDB v6.5.0以降およびTiDB Operator v1.4.0以降は、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイすることをサポートしています。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。このポートはPDの他の特権インターフェースとは通信しないため、外部から提供される場合は追加のファイアウォールは必要ありません。詳細については、 [TiDB DashboardをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
 
@@ -33,7 +33,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 -   ファイアウォールを使用して、コンポーネントが外部ネットワークまたは信頼できないネットワーク経由で PDコンポーネントの**クライアント**ポートにアクセスすることを禁止します。
 
-    > **注記：**
+    > **Note:**
     >
     > TiDB、TiKV、その他のコンポーネントは、PDクライアントポートを介してPDコンポーネントと通信する必要があるため、コンポーネント間の内部ネットワークへのアクセスをブロックしないでください。ブロックすると、クラスターが使用できなくなります。
 
@@ -41,7 +41,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 ### 複数のPDインスタンスを展開するときにTiDB Dashboardポートへのアクセスを開く方法 {#how-to-open-access-to-tidb-dashboard-port-when-deploying-multiple-pd-instances}
 
-> **警告：**
+> **Warning:**
 >
 > このセクションでは、テスト環境のみを対象とした、安全でないアクセスに対する解決策について説明します。本番環境では使用**しないでください**。
 
@@ -57,7 +57,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 出力は実際の TiDB Dashboard アドレスです。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >

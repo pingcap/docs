@@ -7,7 +7,7 @@ summary: TiDB データベースの CALIBRATE RESOURCE の使用法の概要。
 
 `CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット（RU）」](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)容量を推定して出力するために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
@@ -43,7 +43,7 @@ TiDB は推定に 2 つの方法を提供します。
 -   時間枠は 10 分から 24 時間までです。
 -   指定された時間枠内で、TiDB と TiKV の CPU 使用率が低すぎる場合、容量を見積もることはできません。
 
-> **注記：**
+> **Note:**
 >
 > TiKVはmacOSのCPU使用率メトリクスを監視しません。macOSの実際のワークロードに基づく容量推定はサポートしていません。
 
@@ -57,7 +57,7 @@ TiDB は推定に 2 つの方法を提供します。
 -   `OLTP_READ_ONLY` : 大量のデータ読み取りを伴うワークロードに適用されます。これは`sysbench oltp_read_only`と同様のワークロードモデルに基づいて推定されます。
 -   `TPCH_10` : APクエリに適用されます。2 からの`TPCH-10G`のクエリに基づいて推定されます。
 
-> **注記：**
+> **Note:**
 >
 > クラスタのRU容量は、クラスタのトポロジと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスタが提供できる実際のRUは、実際のワークロードにも依存します。ハードウェア構成に基づく推定値は参考値であり、実際の最大値と異なる場合があります[実際の作業量に基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)を推奨します。
 

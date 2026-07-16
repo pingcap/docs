@@ -13,7 +13,7 @@ ROLLBACK TO [SAVEPOINT] identifier
 RELEASE SAVEPOINT identifier
 ```
 
-> **警告：**
+> **Warning:**
 >
 > [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)無効になっている場合、悲観的トランザクションで`SAVEPOINT`使用することはできません。
 

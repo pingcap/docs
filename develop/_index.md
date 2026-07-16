@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidb/dev/dev-guide-overview
 
 このガイドは、アプリケーション開発者が TiDB への接続、データベースの設計、データの書き込みとクエリ、TiDB 上での信頼性の高い高パフォーマンスのアプリケーションの構築方法を迅速に習得するのに役立ちます。
 
-> **注記：**
+> **Note:**
 >
 > このガイドはアプリケーション開発者向けに書かれていますが、TiDB の内部動作に興味がある場合や、TiDB 開発に参加したい場合は、TiDB の詳細情報については[TiDB カーネル開発ガイド](https://pingcap.github.io/tidb-dev-guide/)をお読みください。
 

@@ -86,6 +86,6 @@ TiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み
 
 インポートが完了すると、 TiDB Lightning は自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合は、インポートは成功です。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
-> **注記：**
+> **Note:**
 >
 > インポートが成功したかどうかに関わらず、最後の行には`tidb lightning exit`と表示されます。これは、 TiDB Lightning が正常に終了したことを意味するだけで、タスクが完了したことを意味するものではありません。インポート処理中に問題が発生した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してトラブルシューティングを行ってください。

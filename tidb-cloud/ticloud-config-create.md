@@ -11,7 +11,7 @@ summary: ticloud config create` のリファレンス。
 ticloud config create [flags]
 ```
 
-> **注記：**
+> **Note:**
 >
 > ユーザー プロファイルを作成する前に、 [TiDB Cloud APIキーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)必要があります。
 

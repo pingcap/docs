@@ -143,7 +143,7 @@ DROP INDEX person_id ON person;
 ALTER TABLE person DROP INDEX person_unique_id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > DDL操作はトランザクションではありません。DDL操作を実行する際に`COMMIT`ステートメントを実行する必要はありません。
 
@@ -175,7 +175,7 @@ UPDATE person SET birthday='20180808' WHERE id=2;
 DELETE FROM person WHERE id=2;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `UPDATE`および`DELETE`ステートメントは、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
 

@@ -61,7 +61,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 このリポジトリへのプルリクエストを作成するには、以下の手順を実行してください。コマンドを使いたくない場合は、 [GitHubデスクトップ](https://desktop.github.com/)使用することもできます。こちらの方が簡単です。
 
-> **注記：**
+> **Note:**
 >
 > このセクションでは、ブランチ`master`への PR の作成を例に説明します。他のブランチへの PR の作成手順も同様です。
 
@@ -146,7 +146,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 現在、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud/)英語版のみで提供されており、SQLドキュメントとTiDB v8.1の開発ドキュメントを再利用するために、このリポジトリの[リリース8.1](https://github.com/pingcap/docs/tree/release-8.1/tidb-cloud)ブランチに保存されています。したがって、 TiDB Cloudドキュメントのプルリクエストを作成する場合は、プルリクエストが[リリース8.1](https://github.com/pingcap/docs/tree/release-8.1)ブランチに基づいていることを確認してください。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)確認してください。
 >

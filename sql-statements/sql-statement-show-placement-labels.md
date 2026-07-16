@@ -7,7 +7,7 @@ summary: TiDBにおけるSHOW PLACEMENT LABELSの使用方法。
 
 `SHOW PLACEMENT LABELS`は配置ルールで使用可能なラベルと値を要約するために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

@@ -71,7 +71,7 @@ TiDB v6.5.0以降、メタデータロックはデフォルトで有効になり
 
 TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得するのに役立つ`mysql.tidb_mdl_view`ビューが導入されています。
 
-> **注記：**
+> **Note:**
 >
 > `mysql.tidb_mdl_view`ビューを選択するには、 [`PROCESS`権限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)が必要です。
 

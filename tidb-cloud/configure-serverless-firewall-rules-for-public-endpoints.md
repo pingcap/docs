@@ -7,7 +7,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの
 
 このドキュメントでは、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのパブリック接続オプションについて説明します。インターネット経由でアクセス可能なTiDB Cloud StarterまたはEssentialインスタンスを安全に管理するための重要な概念を習得できます。
 
-> **注記：**
+> **Note:**
 >
 > このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセス リストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
 
@@ -53,7 +53,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
     -   お使いのコンピュータの現在のIPアドレスを追加するには、 **「現在のIPアドレスを追加」**をクリックします。これにより、 TiDB Cloudが認識するコンピュータのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
 
-        > **注記：**
+        > **Note:**
         >
         > TiDB Cloudコンソールが認識するIPアドレスは、データベースクライアントが使用するIPアドレスと異なる場合があります。ルールが期待どおりに機能しない場合は、開始IPアドレスと終了IPアドレスを調整してください。公開IPアドレスを確認するには、検索エンジンまたはオンラインツールを使用できます。たとえば、「自分のIPアドレスは何ですか」と検索してください。
 
@@ -61,7 +61,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
     -   アドレス範囲を追加するには、単一のIPアドレスまたはIPアドレスの範囲を指定します。ルールを単一のIPアドレスに限定するには、 **「開始IPアドレス」**と**「終了IPアドレス」**のフィールドに同じIPアドレスを入力します。
 
-        > **注記：**
+        > **Note:**
         >
         > ファイアウォールを開放すると、指定されたIPアドレスまたはIPアドレス範囲からの管理者、ユーザー、およびアプリケーションは、有効な認証情報を持つTiDB Cloud StarterまたはEssentialインスタンス上の任意のデータベースにアクセスできるようになります。
 

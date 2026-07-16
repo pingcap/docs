@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 
 この文書では、TiDBベクトル検索の既知の制限事項について説明します。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。

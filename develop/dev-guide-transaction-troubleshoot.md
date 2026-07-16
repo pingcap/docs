@@ -116,7 +116,7 @@ while True:
             sleep(sleep_ms) # make sure your sleep() takes milliseconds
 ```
 
-> **注記：**
+> **Note:**
 >
 > `Error 9007: Write conflict`頻繁に発生する場合は、スキーマ設計とワークロードのデータ アクセス パターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
 

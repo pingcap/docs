@@ -24,7 +24,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 バージョン7.1.0以降では、システム変数[`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用して、キャッシュできるプランの最大サイズを制御できます。デフォルト値は2 MBです。プランのサイズがこの値を超える場合、プランはキャッシュされません。
 
-> **注記：**
+> **Note:**
 >
 > `tidb_session_plan_cache_size`で指定されたメモリは、プリペアドプランキャッシュと非プリペアドプランキャッシュで共有されます。現在のクラスターでプリペアドプランキャッシュを有効にしている場合、非プリペアドプランキャッシュを有効にすると、元のプリペアドプランキャッシュのヒット率が低下する可能性があります。
 

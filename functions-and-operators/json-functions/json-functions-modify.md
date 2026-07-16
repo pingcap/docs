@@ -157,7 +157,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 
 ## `JSON_MERGE()` {#json-merge}
 
-> **警告：**
+> **Warning:**
 >
 > この機能は非推奨です。
 

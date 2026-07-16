@@ -55,7 +55,7 @@ DESC TIDB_TRX;
 -   `ALL_SQL_DIGESTS` : トランザクションによって実行された文のダイジェストリスト。このリストはJSON形式の文字列配列として表示されます。各トランザクションは最大で最初の50文を記録します。2 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)を使用すると、この列の情報を対応する正規化されたSQL文のリストに変換できます。
 -   `RELATED_TABLE_IDS` : トランザクションがアクセスするテーブル、ビュー、およびその他のオブジェクトの ID。
 
-> **注記：**
+> **Note:**
 >
 > -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルの完全な情報を取得できます。PROCESS権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
 > -   `CURRENT_SQL_DIGEST`列と`ALL_SQL_DIGESTS`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返される結果は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)参照してください。

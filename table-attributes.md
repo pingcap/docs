@@ -19,7 +19,7 @@ summary: TiDB のテーブル属性機能の使用方法を学習します。
 
 </CustomContent>
 
-> **注記：**
+> **Note:**
 >
 > TiCDC を使用してレプリケーションを実行したり、 BRを使用して増分バックアップを実行したりする場合、レプリケーションまたはバックアップ操作ではテーブル属性を設定する DDL 文がスキップされます。ダウンストリームまたはバックアップクラスターでテーブル属性を使用するには、ダウンストリームまたはバックアップクラスターで DDL 文を手動で実行する必要があります。
 
@@ -131,7 +131,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)実行する必要があります。
 > -   `merge_option`属性を使用する場合は、PD設定パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。5 属性`merge_option`設定されていない場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、指定された間隔後にリージョンをマージするかどうかを決定します。
@@ -140,7 +140,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)実行する必要があります。
 > -   `merge_option`の属性が設定されていない場合、リージョンが条件を満たしていれば、1時間後にリージョンを統合できます。3 `merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、1時間後にリージョンを統合するかどうかを決定します。

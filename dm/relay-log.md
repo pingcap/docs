@@ -21,7 +21,7 @@ MySQLではストレージ容量が限られているため、最大保存期間
 
 リレーログはディスクに書き込む必要があるため、外部IOおよびCPUリソースを消費します。これにより、データレプリケーションプロセス全体が長くなり、データレプリケーションのレイテンシーが増加します。**レイテンシが重要な**シナリオでは、リレーログを有効にすることは推奨されません。
 
-> **注記：**
+> **Note:**
 >
 > DM v2.0.7以降のバージョンでは、リレーログの書き込みが最適化されており、レイテンシーとCPUリソースの消費量は比較的低くなっています。
 
@@ -54,13 +54,13 @@ start-relay -s mysql-replica-01
 
 <div label="versions between v2.0.2 (included) and v5.3.0 (included)">
 
-> **注記：**
+> **Note:**
 >
 > DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース設定ファイル内の設定項目`enable-relay`無効になっており、リレーログの有効化と無効化には`start-relay`と`stop-relay`のみを使用できます。DM は、 [データソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)ときに`enable-relay` `true`に設定されていることを検出した場合、以下のメッセージを出力します。
 >
 >     Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
 
-> **警告：**
+> **Warning:**
 >
 > この起動方法はバージョン6.1で非推奨とされており、将来のリリースで削除される可能性があります。関連コマンドの出力には、次のプロンプトが表示されます: `start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead` 。
 
@@ -214,7 +214,7 @@ resume-relay -s mysql-replica-01
 
 DM では、リレーログをパージする方法として、手動パージと自動パージの 2 つの方法を提供しています。どちらの方法でも、アクティブなリレーログはパージされません。
 
-> **注記：**
+> **Note:**
 >
 > -   アクティブリレーログ：リレーログはデータ移行タスクによって使用されています。アクティブリレーログは現在、Syncerユニット内でのみ更新および書き込みされます。「すべて」モードのデータ移行タスクが、データソースのパージで設定された有効期限よりも長い時間、フルエクスポート/インポートを実行した場合でも、リレーログはパージされます。
 >
@@ -351,6 +351,6 @@ purge:
 
     -   GTID モードでは、DM ワーカーは、各サブタスクが移行している最も古い GTID から移行を開始し、最新の GTID が移行されるまで続けます。
 
-    > **注記：**
+    > **Note:**
     >
     > 上流のリレーログがパージされている場合はエラーが発生します。この場合、移行の開始位置を指定するために[`relay-binlog-gtid`](/dm/dm-source-configuration-file.md#global-configuration)設定する必要があります。

@@ -30,7 +30,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ### TiDBノードの状態 {#tidb-node-status}
 
-> **注記：**
+> **Note:**
 >
 > TiDBノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
 
@@ -45,7 +45,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ### TiKVノードの状態 {#tikv-node-status}
 
-> **注記：**
+> **Note:**
 >
 > TiKVノードの状態は、 TiDB Cloud Dedicatedクラスタでのみ利用可能です。
 
@@ -91,7 +91,7 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -105,7 +105,7 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

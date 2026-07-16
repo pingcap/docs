@@ -18,7 +18,7 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
-> **注記：**
+> **Note:**
 >
 > `PREPARE`ステートメントごとに、プレースホルダーの最大数は 65535 です。
 

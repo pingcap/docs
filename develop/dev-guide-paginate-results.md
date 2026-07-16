@@ -214,7 +214,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 非クラスター化インデックス テーブル (「非インデックス構成テーブル」とも呼ばれます) の場合、内部フィールド`_tidb_rowid`ページ区切りキーとして使用でき、ページ区切りの方法は単一フィールドの主キー テーブルの場合と同じです。
 
-> **ヒント：**
+> **Tip:**
 >
 > `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)使用しているかどうかを確認できます。
 
@@ -278,7 +278,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-> **注記：**
+> **Note:**
 >
 > 上記のSQL文は`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)で高速化できます。
 

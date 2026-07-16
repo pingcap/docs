@@ -7,7 +7,7 @@ summary: TiDB データベースの SHOW COLLATION の使用法の概要。
 
 このステートメントは照合順序の静的リストを提供し、MySQL クライアント ライブラリとの互換性を提供するために含まれています。
 
-> **注記：**
+> **Note:**
 >
 > [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)有効になっている場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 

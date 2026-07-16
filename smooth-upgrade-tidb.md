@@ -73,7 +73,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 スムーズ アップグレード機能を使用する場合は、次の制限に注意してください。
 
-> **注記：**
+> **Note:**
 >
 > The limitations in this section apply not only to scenarios using the smooth upgrade feature, but also to [upgrading TiDB using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
 

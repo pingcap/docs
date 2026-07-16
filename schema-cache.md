@@ -7,7 +7,7 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 
 マルチテナント環境では、データベースやテーブルが数十万、あるいは数百万にも及ぶ場合があります。これらのデータベースやテーブルすべてのスキーマ情報をメモリにロードすると、大量のメモリを消費するだけでなく、アクセス性能も低下します。この問題を解決するため、TiDBはLRU（Least Recently Used：最小使用頻度）に似たスキーマキャッシュメカニズムを導入しています。最も最近アクセスされたデータベースやテーブルのスキーマ情報のみがメモリにキャッシュされます。
 
-> **注記：**
+> **Note:**
 >
 > 現在、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

@@ -53,7 +53,7 @@ stop-task test
         ]
     }
 
-> **注記：**
+> **Note:**
 >
 > `stop-task`コマンドで移行タスクを停止した後、 [`query-status`](/dm/dm-query-status.md)を実行してもタスクは表示されなくなります。ただし、このタスクのチェックポイントやその他の関連情報は`dm_meta`データベースに保持されます。
 >

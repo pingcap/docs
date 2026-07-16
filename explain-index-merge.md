@@ -86,7 +86,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 
 交差型インデックスマージを使用してテーブルにアクセスする場合、オプティマイザはテーブルに対して複数のインデックスを使用し、各インデックスから返される結果をマージして、前述の出力例の`IndexMerge`の実行プランを生成することができます。7 `IndexMerge_9`の演算子の`operator info`の情報`type: intersection`は、この演算子が交差型インデックスマージであることを示しています。実行プランのその他の部分は、前述のユニオン型インデックスマージの例と同様です。
 
-> **注記：**
+> **Note:**
 >
 > -   インデックスマージ機能はv5.4.0からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`なります。
 >

@@ -35,7 +35,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
     上記の設定により、changefeed によって Kafka に書き込まれる各メッセージには、対応するデータのチェックサムが含まれます。これらのチェックサム値に基づいてデータの整合性を検証できます。
 
-    > **注記：**
+    > **Note:**
     >
     > 既存の変更フィードにおいて、 `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`設定されていない場合、チェックサム検証機能を有効にするとスキーマ互換性の問題が発生する可能性があります。この問題を解決するには、スキーマレジストリの互換性タイプを`NONE`に変更してください。詳細については、 [スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking)参照してください。
 
@@ -108,7 +108,7 @@ For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later
 
 Golangを使用したデータ消費とチェックサム検証の実装の詳細については、 [TiCDC 行データチェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > -   チェックサム検証機能を有効にすると、DECIMAL型およびUNSIGNED BIGINT型のデータはSTRING型に変換されます。そのため、下流のコンシューマーコードでは、チェックサム値を計算する前に、これらのデータを対応する数値型に戻す必要があります。
 > -   チェックサム検証プロセスにはDELETEイベントは含まれません。これは、DELETEイベントにはハンドルキー列のみが含まれるのに対し、チェックサムはすべての列に基づいて計算されるためです。

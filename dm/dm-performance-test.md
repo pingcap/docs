@@ -82,7 +82,7 @@ mydumpers:
 
 移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`使用します。これにより、データのエクスポートが高速化されます。
 > -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`調整できます。
@@ -138,7 +138,7 @@ syncers:
 
 データ移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > さまざまな構成でのパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`調整できます。
 
@@ -150,7 +150,7 @@ syncers:
 sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --report-interval=10 --time=1800 run
 ```
 
-> **注記：**
+> **Note:**
 >
 > 異なる`sysbench`のステートメントを使用して、さまざまなシナリオでのデータ移行のパフォーマンスをテストできます。
 

@@ -23,7 +23,7 @@ SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1,
 
 ヒントが不正確または不完全な場合、ステートメントエラーは発生しません。これは、ヒントがクエリ実行に対する*ヒント*（提案）の意味のみを持つことを意図しているためです。同様に、TiDBはヒントが適用できない場合、せいぜい警告を返します。
 
-> **注記：**
+> **Note:**
 >
 > 指定されたキーワードの後にコメントが続かない場合、一般的なMySQLコメントとして扱われます。コメントは有効にならず、警告も表示されません。
 
@@ -54,7 +54,7 @@ SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1
 -   ヒントの最初のパラメータとしてクエリブロック名を設定し、他のパラメータとはスペースで区切ってください。このセクションにリストされているすべてのヒントには、 `QB_NAME`に加えて、オプションの隠しパラメータ`@QB_NAME`も存在します。このパラメータを使用することで、ヒントの有効範囲を指定できます。
 -   パラメータ内のテーブル名に`@QB_NAME`追加して、このテーブルがどのクエリ ブロックに属するかを明示的に指定します。
 
-> **注記：**
+> **Note:**
 >
 > ヒントは、ヒントが有効になるクエリブロック内またはその前に置く必要があります。ヒントをクエリブロックの後に置くと、ヒントは有効になりません。
 
@@ -70,7 +70,7 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 
 このヒントは、外側の`SELECT`クエリ ブロックの名前を`QB1`に指定します。これにより、 `QB1`とデフォルト名`sel_1`両方がクエリ ブロックに対して有効になります。
 
-> **注記：**
+> **Note:**
 >
 > 上記の例では、ヒントが`QB_NAME`から`sel_2`指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`指定していない場合、2 番目のクエリ ブロック`SELECT`に対して`sel_2`無効な名前になります。
 
@@ -82,7 +82,7 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `TIDB_SMJ`は TiDB 3.0.x 以前のバージョンにおける`MERGE_JOIN`の別名です。これらのバージョンを使用している場合は、ヒントに`TIDB_SMJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、ヒントの名前として`TIDB_SMJ`と`MERGE_JOIN`はどちらも有効ですが、 `MERGE_JOIN`使用を推奨します。
 
@@ -96,7 +96,7 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### INL_JOIN(t1_name [, tl_name ...]) {#inl-join-t1-name-tl-name}
 
-> **注記：**
+> **Note:**
 >
 > 場合によっては、 `INL_JOIN`ヒントが効かないことがあります。詳しくは[`INL_JOIN`ヒントは有効になりません](#inl_join-hint-does-not-take-effect)参照してください。
 
@@ -110,7 +110,7 @@ SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id =
 
 `INL_JOIN()`で指定されたパラメータは、クエリプランを作成する際に内部テーブルとして使用される候補テーブルです。例えば、 `INL_JOIN(t1)` 、TiDB がクエリプランを作成する際に内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとしてその別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用してください。例えば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名である`t1`または`t2`使用する必要があります。
 
-> **注記：**
+> **Note:**
 >
 > `TIDB_INLJ`は TiDB 3.0.x 以前のバージョンにおける`INL_JOIN`の別名です。これらのバージョンを使用している場合は、ヒントに`TIDB_INLJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、ヒントの名前として`TIDB_INLJ`と`INL_JOIN`はどちらも有効ですが、 `INL_JOIN`使用を推奨します。
 
@@ -146,7 +146,7 @@ SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `TIDB_HJ`は TiDB 3.0.x 以前のバージョンにおける`HASH_JOIN`の別名です。これらのバージョンを使用している場合は、ヒントに`TIDB_HJ(t1_name [, tl_name ...])`構文を適用する必要があります。TiDB のそれ以降のバージョンでは、ヒントの名前として`TIDB_HJ`と`HASH_JOIN`はどちらも有効ですが、 `HASH_JOIN`使用を推奨します。
 
@@ -230,7 +230,7 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 > -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
@@ -243,7 +243,7 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 > -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
@@ -332,7 +332,7 @@ select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
@@ -344,7 +344,7 @@ SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **注記：**
+> **Note:**
 >
 > このヒントを使用する前に、現在のTiDBクラスタがクエリでTiFlash MPPモードの使用をサポートしていることを確認してください。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
@@ -356,7 +356,7 @@ SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 ```
 
-> **注記：**
+> **Note:**
 >
 > このヒントでテーブル名のみを指定し、インデックス名を指定しない場合、実行ではインデックスは考慮されず、テーブル全体がスキャンされます。
 
@@ -387,7 +387,7 @@ select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 
 ヒント`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`は、指定されたテーブルに対して指定されたインデックスのみを使用し、指定されたインデックスを順番に読み取るようにオプティマイザに指示します。
 
-> **警告：**
+> **Warning:**
 >
 > このヒントはSQL文の実行に失敗する可能性があります。事前にテストすることをお勧めします。テスト中にエラーが発生した場合は、ヒントを削除してください。テストが正常に実行された場合は、引き続き使用できます。
 
@@ -411,7 +411,7 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 オプティマイザはこのクエリに対して2種類のプラン（ `Limit + IndexScan(keep order: true)`と`TopN + IndexScan(keep order: false)` ）を生成します。5ヒント`ORDER_INDEX`使用される場合、オプティマイザはインデックスを順番に読み取る最初のプランを選択します。
 
-> **注記：**
+> **Note:**
 >
 > -   クエリ自体がインデックスを順番に読み取る必要がない場合（つまり、ヒントがない場合、オプティマイザはいかなる状況でもインデックスを順番に読み取るプランを生成しません）、ヒント`ORDER_INDEX`を使用するとエラー`Can't find a proper physical plan for this query`が発生します。この場合、対応するヒント`ORDER_INDEX`を削除する必要があります。
 > -   パーティションテーブルのインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスでは`ORDER_INDEX`ヒントを使用しないでください。
@@ -490,7 +490,7 @@ SET @@tidb_index_lookup_pushdown_policy = 'force';
 SELECT /*+ NO_INDEX_LOOKUP_PUSHDOWN(t) */ * FROM t WHERE a > 1;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `NO_INDEX_LOOKUP_PUSHDOWN`は[`INDEX_LOOKUP_PUSHDOWN`](#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)よりも優先されます。同じクエリで両方のヒントを指定した場合、 `NO_INDEX_LOOKUP_PUSHDOWN`有効になります。
 
@@ -532,7 +532,7 @@ SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10
 
 同じテーブルに複数の`USE_INDEX_MERGE`ヒントが指定されている場合、オプティマイザーはこれらのヒントによって指定されたインデックス セットの結合からインデックスを選択しようとします。
 
-> **注記：**
+> **Note:**
 >
 > `USE_INDEX_MERGE`のパラメータは列名ではなくインデックス名を参照します。主キーのインデックス名は`primary`です。
 
@@ -573,7 +573,7 @@ SHOW WARNINGS;
 +---------+------+-------------------------------------------------------------------------------------------------------------------+
 ```
 
-> **注記：**
+> **Note:**
 >
 > クエリ文に外部結合が含まれている場合、ヒントには結合順序を入れ替え可能なテーブルのみを指定できます。ヒントに結合順序を入れ替えられないテーブルが含まれている場合、ヒントは無効になります。例えば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` `t3` `t4`テーブルの結合順序を制御したい場合、 `LEADING`のヒントに`t1`指定することはできません。
 
@@ -589,7 +589,7 @@ WITH CTE AS (SELECT /*+ MERGE() */ * FROM tc WHERE tc.a < 60) SELECT * FROM CTE 
 WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2), CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3, CTE4) SELECT * FROM CTE1, CTE2;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `MERGE()`は単純な CTE クエリにのみ適用されます。以下の状況には適用されません。
 >
@@ -606,7 +606,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 [`QB_NAME`ヒント](#qb_name)は、ビューの各クエリブロックに新しい名前を定義するために使用します。ビューの`QB_NAME`のヒントの定義は[クエリブロック](#qb_name)と同じですが、構文が`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
 
-> **注記：**
+> **Note:**
 >
 > `@QueryBlockName`と直後の`.ViewName@QueryBlockName`の間には空白があります。そうでない場合、 `.ViewName@QueryBlockName`は`QueryBlockName`の一部として扱われます。例えば、 `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`は有効ですが、 `QB_NAME(v2_1, v2@SEL_1.@SEL_1)`正しく解析できません。
 
@@ -653,7 +653,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
         ) tt;
     ```
 
-> **注記：**
+> **Note:**
 >
 > -   ビューでグローバルヒントを使用するには、対応するヒントをビューに`QB_NAME`定義する必要があります。そうしないと、グローバルヒントは有効になりません。
 >
@@ -701,7 +701,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 このカテゴリのヒントは、**最初の**`SELECT` 、 `UPDATE` 、または`DELETE`のキーワードの後にのみ指定できます。これは、このクエリの実行時に指定されたシステム変数の値を変更することと同等です。ヒントの優先順位は、既存のシステム変数の優先順位よりも高くなります。
 
-> **注記：**
+> **Note:**
 >
 > このカテゴリのヒントにはオプションの隠し変数`@QB_NAME`ありますが、変数を指定した場合でもヒントはクエリ全体に適用されます。
 
@@ -717,7 +717,7 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 
 このヒントに加えて、 `tidb_enable_index_merge`システム変数を設定することで、この機能を有効にするかどうかも制御できます。
 
-> **注記：**
+> **Note:**
 >
 > -   `NO_INDEX_MERGE`は`USE_INDEX_MERGE`よりも優先度が高くなります。両方のヒントが使用されている場合、 `USE_INDEX_MERGE`効果がありません。
 > -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
@@ -782,7 +782,7 @@ prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 
 `SET_VAR(VAR_NAME=VAR_VALUE)`ヒントを使用すると、文の実行中にシステム変数の値を一時的に変更できます。文の実行後、現在のセッションにおけるシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザとエグゼキュータに関連する一部のシステム変数を変更するために使用できます。このヒントを使用して変更できるシステム変数のリストについては、 [システム変数](/system-variables.md)を参照してください。
 
-> **警告：**
+> **Warning:**
 >
 > -   予期しない動作が発生する可能性があるため、明示的にサポートされていない変数を変更しないことを強くお勧めします。
 > -   サブクエリに`SET_VAR`記述しないでください。記述すると、効果が得られない可能性があります。詳細については、 [`SET_VAR`サブクエリに記述すると効果を発揮しません](#set_var-does-not-take-effect-when-written-in-subqueries)参照してください。
@@ -819,7 +819,7 @@ SELECT @@MAX_EXECUTION_TIME;
 SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   `STRAIGHT_JOIN`は`LEADING`よりも優先度が高くなります。両方のヒントが使用されている場合、 `LEADING`効果がありません。
 > -   `STRAIGHT_JOIN`ヒントよりも一般的な`LEADING`ヒントを使用することをお勧めします。
@@ -838,7 +838,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `NTH_PLAN(N)`は主にテスト用に使用されており、それ以降のバージョンとの互換性は保証されていません。このヒントは**慎重に**使用してください。
 
@@ -852,7 +852,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
-> **注記：**
+> **Note:**
 >
 > TiDB v8.2.0以降、このヒントに対する権限制御が導入されました。システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このヒントを使用するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。必要な権限がない場合、このヒントは無視され、TiDBは警告を返します。クエリ実行後に`SHOW WARNINGS;`実行すると、詳細を確認できます。
 

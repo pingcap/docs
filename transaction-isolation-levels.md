@@ -28,7 +28,7 @@ SQL-92標準では、トランザクション分離レベルとして、Read Unc
 
 TiDBはスナップショット分離（SI）一貫性を実装しており、MySQLとの互換性のために`REPEATABLE-READ`として宣伝されています。これはSI [ANSI繰り返し読み取り分離レベル](#difference-between-tidb-and-ansi-repeatable-read)やSI [MySQL 繰り返し読み取りレベル](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 
-> **注記：**
+> **Note:**
 >
 > TiDB v3.0以降、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベルが損なわれる**可能性があるため、有効にすることは推奨されません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
 >
@@ -67,7 +67,7 @@ TiDB v4.0.0-beta 以降、TiDB は Read Committed 分離レベルをサポート
 
 歴史的な理由により、現在主流のデータベースのRead Committed分離レベルは基本的に[Oracleが定義する一貫性読み取り分離レベル](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)です。この状況に対応するため、TiDBの悲観的トランザクションにおけるRead Committed分離レベルも、本質的には一貫性のある読み取り動作となっています。
 
-> **注記：**
+> **Note:**
 >
 > Read Committed 分離レベルは[悲観的トランザクションモード](/pessimistic-transaction.md)でのみ有効になります。 [楽観的トランザクションモード](/optimistic-transaction.md)では、トランザクション分離レベルを`Read Committed`に設定しても有効にならず、トランザクションは引き続き Repeatable Read 分離レベルを使用します。
 

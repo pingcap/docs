@@ -9,7 +9,7 @@ summary: TiDB 6.4.0-DMRでは、クラスタを特定の時点に復元する機
 
 TiDBバージョン: 6.4.0-DMR
 
-> **注記：**
+> **Note:**
 >
 > TiDB 6.4.0-DMR ドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.4/)です。 PingCAP は、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨します。
 

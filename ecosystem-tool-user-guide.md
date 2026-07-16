@@ -57,7 +57,7 @@ DM の基本は次のとおりです。
 2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
 3.  TiDB DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
 
-> **注記：**
+> **Note:**
 >
 > Syncerツールはメンテナンスが終了しました。Syncer関連のシナリオでは、増分レプリケーションを実行するためにDMを使用することをお勧めします。
 
@@ -72,7 +72,7 @@ Dumplingの基本は次のとおりです。
 -   サポートされている TiDB バージョン: すべてのバージョン
 -   Kubernetesサポート: いいえ
 
-> **注記：**
+> **Note:**
 >
 > PingCAPは以前、TiDBに特化した機能強化を加えたバージョン[mydumperプロジェクト](https://github.com/maxbube/mydumper)のフォークを保守していました。バージョン7.5.0以降、バージョン[mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview/)は非推奨となり、その機能の大部分はバージョン[Dumpling](/dumpling-overview.md)に置き換えられました。mydumperではなくDumplingを使用することを強くお勧めします。
 
@@ -94,7 +94,7 @@ TiDB Lightningの基本は次のとおりです。
 -   サポートされている TiDB バージョン: v2.1 以降
 -   Kubernetes サポート: はい。詳細は[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータを迅速に復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > Loaderツールはメンテナンスされなくなりました。Loaderに関連するシナリオでは、代わりに`Logical Import Mode`使用することをお勧めします。
 

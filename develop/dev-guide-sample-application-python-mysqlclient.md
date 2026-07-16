@@ -14,7 +14,7 @@ TiDBはMySQL互換のデータベースであり、 [mysqlclient](https://github
 -   mysqlclientを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。必要に応じて、基本的なCRUD操作のサンプルコードスニペットも利用できます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -75,13 +75,13 @@ pip install -r requirements.txt
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

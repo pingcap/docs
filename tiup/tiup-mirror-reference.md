@@ -45,7 +45,7 @@ TiUPミラーは、コンポーネントとそのメタデータを保存するT
        |-- {hash}-snapshot.json                     # Private key of the snapshots
        |-- {hash}-timestamp.json                    # Private key of the timestamps
 
-> **注記：**
+> **Note:**
 >
 > -   `commits`ディレクトリには、ミラー更新プロセスで生成されたログが保存され、ミラーのロールバックに使用されます。ディスク容量が不足している場合は、古いログディレクトリを定期的に削除できます。
 > -   `keys`ディレクトリに保存されている秘密鍵は機密情報です。別途保管することをお勧めします。

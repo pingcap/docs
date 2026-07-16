@@ -7,7 +7,7 @@ summary: TiDBにおけるALTER RANGEの使用方法の概要。
 
 現在、 `ALTER RANGE`ステートメントは、TiDB の特定の配置ポリシーの範囲を変更する場合にのみ使用できます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

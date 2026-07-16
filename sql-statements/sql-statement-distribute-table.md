@@ -5,13 +5,13 @@ summary: TiDBデータベースにおけるDISTRIBUTE T​​ABLEの使用方法
 
 # DISTRIBUTE TABLE <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#distribute-table-new-in-v854}
 
-> **警告：**
+> **Warning:**
 >
 > この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

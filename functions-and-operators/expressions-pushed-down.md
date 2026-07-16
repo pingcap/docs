@@ -9,7 +9,7 @@ TiDB は TiKV からデータを読み取る際に、処理するいくつかの
 
 TiFlash は関数と演算子のプッシュダウンもサポートしています[このページに記載されている](/tiflash/tiflash-supported-pushdown-calculations.md) 。
 
-> **注記：**
+> **Note:**
 >
 > Aggregate関数は、 [ウィンドウ関数](/functions-and-operators/window-functions.md)として使用される場合、 TiKV へのプッシュダウンをサポートしません。
 

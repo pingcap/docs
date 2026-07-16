@@ -55,7 +55,7 @@ from:
 #   action: Ignore
 ```
 
-> **注記：**
+> **Note:**
 >
 > DM v2.0.1では、 `enable-gtid`と`enable-relay`を同時に`true`に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
@@ -138,7 +138,7 @@ from:
 -   デフォルト値: `15`
 -   単位: GiB
 
-> **注記：**
+> **Note:**
 >
 > 自動データ消去戦略は、 [`interval`](#interval) `0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)うち少なくとも 1 つが`0`でない場合にのみ有効になります。
 

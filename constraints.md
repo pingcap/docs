@@ -45,7 +45,7 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 
 ## チェック {#check}
 
-> **注記：**
+> **Note:**
 >
 > `CHECK`制約機能はデフォルトで無効になっています。有効にするには、 [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720)変数を`ON`に設定する必要があります。
 
@@ -300,7 +300,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
 -   この変数が無効になっている場合、悲観的トランザクションで DML ステートメントを実行するとエラー`8147: LazyUniquenessCheckFailure`が返される可能性があります。
 
-    > **注記：**
+    > **Note:**
     >
     > `8147`エラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
@@ -371,7 +371,7 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 
 ## 外部キー {#foreign-key}
 
-> **注記：**
+> **Note:**
 >
 > TiDBはv6.6.0以降、 [FOREIGN KEY制約](/foreign-key.md)サポートします。v6.6.0より前のバージョンでは、TiDBは外部キー制約の作成と削除をサポートしていますが、実際には制約は有効になっていません。TiDBをv6.6.0以降にアップグレードすると、無効な外部キーを削除し、新しい外部キーを作成することで、外部キー制約を有効にすることができます。この機能はv8.5.0で一般提供開始となります。
 

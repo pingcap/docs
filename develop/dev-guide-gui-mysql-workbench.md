@@ -8,14 +8,14 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-mysql-workbench/','/ja/tidb/dev/dev-gui
 
 TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.mysql.com/products/workbench/)はMySQLデータベースユーザー向けのGUIツールセットです。
 
-> **警告：**
+> **Warning:**
 >
 > -   MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしているわけではありません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
 > -   [DataGrip](/develop/dev-guide-gui-datagrip.md)、 [DBeaver](/develop/dev-guide-gui-dbeaver.md) 、 [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md)など、TiDB を正式にサポートする他の GUI ツールを使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
 このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学ぶことができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -51,7 +51,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

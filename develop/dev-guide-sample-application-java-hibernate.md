@@ -14,7 +14,7 @@ TiDBはMySQL互換データベースであり、[Hibernate](https://hibernate.or
 -   Hibernateを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -66,13 +66,13 @@ cd tidb-java-hibernate-quickstart
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
@@ -311,7 +311,7 @@ SET GLOBAL tidb_skip_isolation_level_check=1;
 
 この変数を有効にすると、TiDB は`SERIALIZABLE`を指定したリクエストをエラーを返さずに受け入れます。内部的には、TiDB は引き続き最も強力な分離レベルである`REPEATABLE-READ`を使用します。詳細については、 [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > コミュニティが管理する`TiDBDialect` `SERIALIZABLE`分離レベルを必要とする機能をスキップすることで、この動作を自動的に処理します。
 

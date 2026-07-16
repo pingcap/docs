@@ -7,7 +7,7 @@ summary: TiDBにおけるSHOW CREATE PLACEMENT POLICYの使用方法。
 
 `SHOW CREATE PLACEMENT POLICY`は配置ポリシーの定義を表示するために使用されます。これを使用すると、現在の配置ポリシーの定義を確認し、別の TiDB クラスタでそれを再現できます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

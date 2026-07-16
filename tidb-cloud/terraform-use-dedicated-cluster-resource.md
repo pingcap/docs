@@ -119,7 +119,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 ## TiDB Cloud Dedicatedクラスターを作成する {#create-a-tidb-cloud-dedicated-cluster}
 
-> **注記：**
+> **Note:**
 >
 > -   始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
 > -   CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。

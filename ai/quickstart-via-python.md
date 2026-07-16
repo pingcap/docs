@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 -   ベクトルをTiDBテーブルに格納します。
 -   ベクトル類似度を用いて意味検索を実行する。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
@@ -75,7 +75,7 @@ client = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > 上記の例はあくまでも説明のためのものです。パラメータにはご自身の値を入力し、安全に保管してください。
 
@@ -97,7 +97,7 @@ client = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > 実際の導入環境に合わせて、接続パラメータを必ず更新してください。
 

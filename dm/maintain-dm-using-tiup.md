@@ -9,7 +9,7 @@ summary: TiUPを使用して DM クラスターを保守する方法を学びま
 
 DM クラスターをまだ展開していない場合は、手順[TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
-> **注記：**
+> **Note:**
 >
 > -   以下のコンポーネント間のポートが相互接続されていることを確認してください
 >     -   DM マスター ノードのうち`peer_port` (デフォルトでは`8291` ) が相互接続されています。
@@ -137,7 +137,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 1.  `scale.yaml`ファイルを作成し、新しいワーカー ノードの情報を追加します。
 
-    > **注記：**
+    > **Note:**
     >
     > トポロジファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれます。デプロイメントディレクトリなどの詳細な設定項目については、こちら[TiUP構成パラメータの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 
@@ -159,7 +159,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 ## ローリングアップグレード {#rolling-upgrade}
 
-> **注記：**
+> **Note:**
 >
 > v2.0.5 以降、dmctl は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)サポートします。
 >
@@ -175,7 +175,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 DMクラスタをアップグレードするには、コマンド`tiup dm upgrade`を実行します。例えば、次のコマンドはクラスタを`${version}`にアップグレードします。このコマンドを実行する前に、 `${version}`必要なバージョンに変更してください。
 
-> **注記：**
+> **Note:**
 >
 > バージョン8.0.0以降、DMは暗号化および復号化用の固定秘密鍵を削除し、暗号化および復号化用の秘密鍵をカスタマイズできるようになりました。アップグレード前に[データソース構成](/dm/dm-source-configuration-file.md)および[移行タスクの構成](/dm/task-configuration-file-full.md)で暗号化パスワードを使用している場合は、追加の操作については[DM 暗号化と復号化用の秘密鍵をカスタマイズする](/dm/dm-customized-secret-key.md)のアップグレード手順を参照してください。
 
@@ -239,7 +239,7 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 
 ## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートおよびアップグレードする {#import-and-upgrade-a-dm-1-0-cluster-deployed-using-dm-ansible}
 
-> **注記：**
+> **Note:**
 >
 > -   TiUP は、DM 1.0 クラスターへの DM Portalコンポーネントのインポートをサポートしていません。
 > -   インポートする前に元のクラスターを停止する必要があります。
@@ -366,6 +366,6 @@ export TIUP_NATIVE_SSH=enable
 
 この環境変数と`--native-ssh`同時に指定した場合、 `--native-ssh`優先されます。
 
-> **注記：**
+> **Note:**
 >
 > クラスターの展開プロセス中に、接続にパスワードを使用する必要がある場合、またはキー ファイルに`passphrase`設定されている場合は、コントロール マシンに`sshpass`インストールされていることを確認する必要があります。そうでない場合、タイムアウト エラーが報告されます。

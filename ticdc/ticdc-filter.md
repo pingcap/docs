@@ -56,7 +56,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
 -   `matcher` : このイベントフィルタルールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
 
-    > **注記：**
+    > **Note:**
     >
     > `matcher`データベース名と一致するため、設定時には特に注意が必要です。例えば、 `event-filters`設定が以下の場合：
     >
@@ -113,7 +113,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
     | TTLの変更と削除           | DDL |             | テーブルのすべてのTTL属性を削除するDDLイベントに一致します                                        |
     | 複数のスキーマの変更          | DDL |             | 同じDDL文内でテーブルの複数の属性を変更するDDLイベントに一致します。                                   |
 
-    > **注記：**
+    > **Note:**
     >
     > TiDBのDDL文は、 `ALTER TABLE t MODIFY COLUMN a INT, ADD COLUMN b INT, DROP COLUMN c;`のように単一テーブルの複数の属性を同時に変更することをサポートしています。この操作はMultiSchemaChangeとして定義されています。このタイプのDDLを除外したい場合は、 `ignore-event`で`"multi schema change"`設定する必要があります。
 
@@ -127,7 +127,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
 -   `ignore-update-new-value-expr` : このパラメータは、デフォルトの SQL モードに従う SQL 式を受け入れ、指定された新しい値を持つ`UPDATE` DML イベントを除外するために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > -   TiDB がクラスター化インデックスの列の値を更新すると、イベント`UPDATE`がイベント`DELETE`とイベント`INSERT`に分割されます。TiCDC はこれらのイベントをイベント`UPDATE`として識別しないため、正しくフィルタリングできません。
 > -   SQL式を設定する際は、 `matcher`一致するすべてのテーブルに、SQL式で指定されたすべての列が含まれていることを確認してください。そうでない場合、レプリケーションタスクを作成できません。また、レプリケーション中にテーブルスキーマが変更され、必要な列がテーブルに含まれなくなった場合、レプリケーションタスクは失敗し、自動的に再開できません。このような場合は、手動で設定を変更してタスクを再開する必要があります。

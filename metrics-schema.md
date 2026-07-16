@@ -195,7 +195,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 
 1.  2 つのセッション変数の値を変更し、時間の粒度を 30 秒に設定します。
 
-    > **注記：**
+    > **Note:**
     >
     > Prometheus でサポートされる最小粒度は 30 秒です。
 

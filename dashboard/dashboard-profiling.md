@@ -5,7 +5,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 # TiDB Dashboardインスタンスプロファイリング - 手動プロファイリング {#tidb-dashboard-instance-profiling-manual-profiling}
 
-> **注記：**
+> **Note:**
 >
 > この機能はデータベースのエキスパート向けに設計されています。エキスパートでない方は、PingCAPテクニカルサポートの指示に従ってこの機能を使用することをお勧めします。
 
