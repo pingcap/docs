@@ -46,7 +46,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
 
-**Console changes**
+**コンソールの変更**
 
 - [TiDB Cloud console](https://tidbcloud.com/) でパブリックプレビュー機能に使用するラベルを `PREVIEW` に標準化し、これまで混在していた `BETA` と `PREVIEW` の使用を置き換えました。
 
