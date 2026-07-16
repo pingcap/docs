@@ -233,9 +233,10 @@ DESC CLUSTER_SLOW_QUERY;
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-82 rows in set (0.00 sec)
+83 rows in set (0.00 sec)
 ```
 
 クラスタシステムテーブルにクエリを実行する際、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行プランは以下のとおりです。
