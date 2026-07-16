@@ -29,6 +29,14 @@ env:
   TERMS_BRANCH: master
   JA_BRANCH: i18n-ja-release-8.5
   TOC_FILES: TOC.md,TOC-ai.md,TOC-api.md,TOC-best-practices.md,TOC-develop.md,TOC-tidb-releases.md,TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
+  # Exclude specified doc files from specified TOC files after Japanese translation.
+  TOC_EXCLUSIONS: >-
+    {
+      "tidb-cloud-log-redaction.md": [
+        "TOC-tidb-cloud.md",
+        "TOC-tidb-cloud-premium.md"
+      ]
+    }
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
   AI_TRANSLATOR_REF: main
@@ -168,6 +176,64 @@ jobs:
           set -euo pipefail
           cd ai-pr-translator/scripts
           python commit_sync_workflow.py
+
+      - name: Post-process translated TOCs
+        if: always() && steps.source_files.outputs.has_source_changes == 'true'
+        continue-on-error: true
+        shell: bash
+        working-directory: docs
+        env:
+          TOC_EXCLUSIONS: ${{ env.TOC_EXCLUSIONS }}
+        run: |
+          set -euo pipefail
+
+          python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          exclusions = json.loads(os.environ["TOC_EXCLUSIONS"])
+          if not isinstance(exclusions, dict) or not exclusions:
+              raise ValueError("TOC_EXCLUSIONS must be a non-empty JSON object")
+
+          for exclude_file, target_toc_files in exclusions.items():
+              if not isinstance(target_toc_files, list) or not target_toc_files:
+                  raise ValueError(
+                      f"TOC exclusion for {exclude_file} must contain at least one TOC file"
+                  )
+
+              link_pattern = re.compile(
+                  r"\]\(\s*(?:[^)\s]*/)?"
+                  + re.escape(exclude_file)
+                  + r"(?:#[^)\s]*)?\s*\)"
+              )
+
+              for file_name in target_toc_files:
+                  toc_file = Path(file_name)
+                  if not toc_file.is_file():
+                      print(
+                          f"::warning file={toc_file}::Target TOC file does not exist; "
+                          "skipping this exclusion."
+                      )
+                      continue
+
+                  lines = toc_file.read_text(encoding="utf-8").splitlines(keepends=True)
+                  retained_lines = [line for line in lines if not link_pattern.search(line)]
+                  removed_count = len(lines) - len(retained_lines)
+
+                  if removed_count:
+                      toc_file.write_text("".join(retained_lines), encoding="utf-8")
+                      print(
+                          f"Removed {removed_count} TOC line(s) linking to {exclude_file} "
+                          f"from {toc_file}."
+                      )
+                  else:
+                      print(
+                          f"::notice file={toc_file}::No TOC entry linking to {exclude_file} "
+                          "was found; no changes needed."
+                      )
+          PY
 
       - name: Prepare translated changes
         id: changes
