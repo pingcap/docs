@@ -16,9 +16,9 @@ summary: このドキュメントでは、Google Cloud でセルフホスト型 
 
 Google Cloud でセルフホスト型 Kafka に Private Service Connect を設定するには、次の 2 つの方法があります。
 
--   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。1 [PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)参照してください。
+-   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。詳細は[PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)を参照してください。
 
--   [Kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)使用してください。この方法では、Kafka クライアントと Kafka ブローカー間のプロキシとして、追加の実行プロセスが導入されます。プロキシはポートとブローカーのマッピングを動的に設定し、リクエストを転送します。既存の Kafka クラスターを再設定する必要はありません。3 [Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続のセットアップ](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)参照してください。
+-   [Kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)使用してください。この方法では、Kafka クライアントと Kafka ブローカー間のプロキシとして、追加の実行プロセスが導入されます。プロキシはポートとブローカーのマッピングを動的に設定し、リクエストを転送します。既存の Kafka クラスターを再設定する必要はありません。詳細は[Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続のセットアップ](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)を参照してください。
 
 このドキュメントでは、Google Cloud の 3 つのアベイラビリティゾーン（AZ）にデプロイされた Kafka Private Service Connect サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Service Connect サービスの基本的な設定プロセスについて説明します。本番環境では、運用の保守性と可観測性を強化した、より回復力の高い Kafka Private Service Connect サービスの使用を推奨します。
 
