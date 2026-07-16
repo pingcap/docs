@@ -35,6 +35,22 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 </LearningPath>
 
+<LearningPath label="Deploy" icon="deploy">
+
+[BYOC Onboarding Overview](https://docs.tidb.io/tidbcloud/byoc-onboarding-overview/?plan=byoc)
+
+[Prepare AWS Environment](https://docs.tidb.io/tidbcloud/byoc-prepare-environment-aws/?plan=byoc)
+
+[Configure IAM Permissions](https://docs.tidb.io/tidbcloud/byoc-iam-configuration/?plan=byoc)
+
+[Automated Deployment](https://docs.tidb.io/tidbcloud/byoc-automated-deployment/?plan=byoc)
+
+[Service Initialization](https://docs.tidb.io/tidbcloud/byoc-service-initialization/?plan=byoc)
+
+[Joint Validation](https://docs.tidb.io/tidbcloud/joint-validation/?plan=byoc)
+
+</LearningPath>
+
 <LearningPath label="Maintain" icon="cloud7">
 
 [Create a {{{ .premium }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-premium/?plan=byoc)
