@@ -2171,9 +2171,8 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- Possible values: `OFF`, `ON`
-- This variable controls whether TiDB writes successful login and client logout events to the TiDB log.
-- In workloads that frequently create and close connections, enabling this variable can generate a large number of log entries.
+- This variable controls whether to write successful client login and logout events to the TiDB log.
+- If your workload frequently creates and closes connections, enabling this variable can generate a large number of log entries.
 
 ### tidb_enable_enhanced_security
 
