@@ -137,7 +137,7 @@
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- 流数据 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- 同步数据 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
