@@ -7,7 +7,7 @@
 
 - Why TiDB Cloud
   - [Introduction](/tidb-cloud/tidb-cloud-intro.md)
-  - [Features](/tidb-cloud/features.md)
+  - [Features](/tidb-cloud/byoc/byoc-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
