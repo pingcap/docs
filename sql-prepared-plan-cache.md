@@ -354,6 +354,6 @@ TiDBページの**Executor**セクションの[Grafanaダッシュボード](/gr
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)の[**監視**](/tidb-cloud/built-in-monitoring.md)ページ目で`Queries Using Plan Cache OPS`メトリックをチェックして、すべての TiDB インスタンスで 1 秒あたりにプラン キャッシュを使用している、またはプラン キャッシュがないクエリの数を取得できます。
+[TiDB Cloudコンソール](https://tidbcloud.com/)の[**監視**](/tidb-cloud/built-in-monitoring.md)ページで`Queries Using Plan Cache OPS`メトリックをチェックして、すべての TiDB インスタンスで 1 秒あたりにプラン キャッシュを使用している、またはプラン キャッシュがないクエリの数を取得できます。
 
 </CustomContent>

@@ -466,7 +466,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### ステップ2. KafkaクラスターをPrivate Service Connectとして公開する {#step-2-expose-the-kafka-cluster-as-private-service-connect}
 
-1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページ目に進みます。以下の手順でネットワークエンドポイントグループを作成します。
+1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページに進みます。以下の手順でネットワークエンドポイントグループを作成します。
 
     -   **名前**: `kafka-neg`
     -   **ネットワークエンドポイントグループタイプ**: `Port Mapping NEG(Regional)`
@@ -489,7 +489,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         -   **VMポート**: `39092`
         -   **クライアントポート**: `9095`
 
-3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページ目に進みます。以下の手順でロードバランサーを作成します。
+3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに進みます。以下の手順でロードバランサーを作成します。
 
     -   **ロードバランサーの種類**: `Network Load Balancer`
     -   **プロキシまたはパススルー**: `Passthrough`
