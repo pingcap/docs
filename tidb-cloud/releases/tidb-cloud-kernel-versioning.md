@@ -9,8 +9,10 @@ This document describes the versioning rules for the underlying database kernel 
 
 > **Note:**
 >
-> - This document applies only to TiDB Cloud Premium.
-> - TiDB Cloud Starter and Essential instances run on a customized TiDB X engine based on the classic TiDB v8.5.3 kernel. This kernel differs slightly from the TiDB Cloud Premium kernel.
+> The kernel versioning rules described in this document apply only to TiDB Cloud Premium. Other TiDB Cloud plans use different kernel versioning models:
+>
+> - TiDB Cloud Starter instances run on a customized TiDB X engine based on the classic TiDB v8.5.3 kernel. This kernel differs slightly from the TiDB Cloud Premium kernel.
+> - TiDB Cloud Essential instances run on a customized TiDB X engine based on the classic TiDB v8.5.3 kernel by default. If you want to run your TiDB Cloud Essential instances on the same kernel as TiDB Cloud Premium, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support). 
 > - TiDB Cloud Dedicated clusters run on the classic TiDB kernel, and their kernel versions correspond directly to TiDB Self-Managed versions.
 
 ## Kernel versioning
