@@ -29,6 +29,7 @@ env:
   TERMS_BRANCH: master
   JA_BRANCH: i18n-ja-release-8.5
   TOC_FILES: TOC.md,TOC-ai.md,TOC-api.md,TOC-best-practices.md,TOC-develop.md,TOC-tidb-releases.md,TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
+  # Exclude specified doc files from specified TOC files after Japanese translation.
   TOC_EXCLUSIONS: >-
     {
       "tidb-cloud-log-redaction.md": [
