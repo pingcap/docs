@@ -118,7 +118,7 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
-<CustomContent platform="tidb-cloud" plan="byoc">
+<CustomContent plan="byoc">
 
 - {{{ .byoc }}}
 
