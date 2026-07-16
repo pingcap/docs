@@ -99,7 +99,6 @@ You can take the following measures to reduce the memory usage of SQL statements
 
 - Reduce the number of Regions to be read simultaneously or reduce the concurrency of operators to avoid memory problems caused by high concurrency. The corresponding system variables include:
     - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
-    - [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)
     - [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)
 
 - The concurrency of sessions is too high near the time point when the problem occurs. In this case, consider scaling out the TiDB cluster by adding more TiDB nodes.
