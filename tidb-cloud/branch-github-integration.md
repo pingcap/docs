@@ -1,9 +1,9 @@
 ---
-title: 集成 TiDB Cloud Branching（Beta）与 GitHub
+title: 集成 TiDB Cloud Branching（PREVIEW）与 GitHub
 summary: 了解如何将 TiDB Cloud Branching 功能与 GitHub 集成。
 ---
 
-# 集成 TiDB Cloud Branching（Beta）与 GitHub
+# 集成 TiDB Cloud Branching（PREVIEW）与 GitHub
 
 > **Note:**
 >

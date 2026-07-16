@@ -8,6 +8,24 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 7 月 14 日 {#july-14-2026}
+
+**常规变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 增强 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 的跨 Region 恢复。
+
+        当目标恢复 Region 没有预分配的 CIDR block 时，你现在可以直接在 **Restore** 页面创建 CIDR block，无需在开始恢复前手动在该 Region 中创建集群。
+
+## 2026 年 7 月 9 日 {#july-9-2026}
+
+**常规变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 将新的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的默认 TiDB 版本从 [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/) 升级到 [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/)。
+
 ## 2026 年 7 月 7 日 {#july-7-2026}
 
 **常规变更**
@@ -27,6 +45,10 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
         你现在可以配置 TiDB Cloud，将 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例中的关键指标发送到 [Datadog](https://www.datadoghq.com/)，以进行集中监控和告警。
 
         更多信息，参见 [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium)。
+
+**Console 变更**
+
+- 将 [TiDB Cloud console](https://tidbcloud.com/) 中用于公测功能的标签统一为 `PREVIEW`，替换此前混用的 `BETA` 和 `PREVIEW`。
 
 **API 变更**
 
@@ -371,7 +393,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
         - [通过 AWS 私有端点连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) 
         - [通过阿里云私有端点连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
-    - 启用 Prometheus 统计/指标（信息）集成（预览版）。
+    - 启用 Prometheus 统计/指标（信息）集成（PREVIEW）。
 
         [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 在集群级别管理 Prometheus 集成。该功能可以让你将 TiDB Cloud Essential 集群的统计/指标（信息）无缝发送到 Prometheus，实现统一平台上的高级报警/告警。
 

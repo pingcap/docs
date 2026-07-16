@@ -31,7 +31,7 @@ TiDB 每 60 秒持久化一次更新信息。
 
 |  系统变量 | 默认值 | 描述 |
 |---|---|---|
-| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) | `1` | TiDB 集群内自动分析操作的并发度。 |
+| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) | `3` | TiDB 集群内自动分析操作的并发度。 |
 | [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | TiDB 可执行自动更新的每日结束时间。 |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `8192` | TiDB 在分析分区表时（即自动更新分区表统计信息时）自动分析的分区数。 |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | 自动更新的阈值。 |

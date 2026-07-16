@@ -118,12 +118,15 @@ DESC SLOW_QUERY;
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-81 rows in set (0.00 sec)
+82 rows in set (0.00 sec)
 ```
 
 `Query` 列的最大语句长度受 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) 系统变量限制。
+
+`Session_connect_attrs` 列存储从慢日志中解析出的 JSON 格式的会话连接属性。TiDB 使用 [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) 控制写入该字段的最大负载大小。
 
 ## CLUSTER_SLOW_QUERY 表
 
@@ -230,9 +233,10 @@ DESC CLUSTER_SLOW_QUERY;
 | Plan_digest                   | varchar(128)        | YES  |      | NULL    |       |
 | Binary_plan                   | longtext            | YES  |      | NULL    |       |
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
+| Session_connect_attrs         | json                | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-82 rows in set (0.00 sec)
+83 rows in set (0.00 sec)
 ```
 
 当查询集群系统表时，TiDB 并不会从所有节点拉取数据，而是将相关计算下推到其他节点。执行计划如下：

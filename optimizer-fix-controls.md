@@ -103,10 +103,10 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ### [`52869`](https://github.com/pingcap/tidb/issues/52869) <span class="version-mark">v8.1.0 新增</span>
 
-- 默认值：`OFF`
+- 默认值：`ON`。在 v8.5.7 之前，默认值为 `OFF`。
 - 可选值：`ON`、`OFF`
-- 如 [Explain Statements Using Index Merge](/explain-index-merge.md#examples) **Note** 所述，如果优化器能够为查询计划选择单一索引扫描方式（非全表扫描），则不会自动使用索引合并。
-- 你可以通过开启该修复控制项移除此限制。移除该限制后，优化器可以在更多查询中自动选择索引合并，但也可能导致优化器忽略最优的执行计划。因此，建议在实际使用场景中充分测试后再移除此限制，以确保不会引发性能回退。
+- 当该修复控制项设置为 `OFF` 时，如果优化器能够为查询计划选择单一索引扫描方式（非全表扫描），则不会自动选择索引合并。更多信息，参见 [Explain Statements Using Index Merge](/explain-index-merge.md#examples) 中的 **Note**。
+- 当该修复控制项设置为 `ON` 时，将移除上述限制，优化器可以在更多查询中自动选择索引合并。但是，由于成本估算不准确等因素，优化器可能会错过原本最优的执行计划。
 
 ### [`54337`](https://github.com/pingcap/tidb/issues/54337) <span class="version-mark">v8.3.0 新增</span>
 

@@ -21,7 +21,7 @@
   - [事务](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI 功能](/tidb-cloud/ai-feature-concepts.md)
-  - [数据服务](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [数据服务](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [可扩展性](/tidb-cloud/scalability-concepts.md)
   - [高可用性](/tidb-cloud/serverless-high-availability.md)
   - [监控](/tidb-cloud/monitoring-concepts.md)
@@ -39,7 +39,7 @@
     - [通过 Public Endpoint 连接](/tidb-cloud/connect-via-standard-connection-serverless.md)
     - [通过 AWS Private Link 连接](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [通过 Alibaba Cloud Private Endpoint 连接](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
-  - 分支 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - 分支 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [概览](/tidb-cloud/branch-overview.md)
     - [管理分支](/tidb-cloud/branch-manage.md)
     - [GitHub 集成](/tidb-cloud/branch-github-integration.md)
@@ -135,9 +135,9 @@
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 探索数据
-  - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](/tidb-cloud/sql-proxy-account.md)
-- 数据服务 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- 数据服务 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/data-service-overview.md)
   - [快速上手](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API
@@ -461,7 +461,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- CLI 参考 ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- CLI 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)

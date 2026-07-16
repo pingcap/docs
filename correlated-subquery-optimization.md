@@ -19,6 +19,8 @@ TiDB 需要进行此类重写的原因在于，相关子查询每次执行时都
 
 因此，当外部值较少时，不建议进行去相关化，这样可能会带来更好的执行性能。在这种情况下，你可以通过使用 [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate) 优化器提示，或者在 [优化规则和表达式下推的黑名单](/blocklist-control-plan.md) 中禁用“子查询去相关化”优化规则。大多数情况下，建议结合 [SQL Plan Management](/sql-plan-management.md) 使用优化器提示，以禁用去相关化。
 
+从 v8.5.7 开始，你还可以使用系统变量 [`tidb_opt_enable_alternative_logical_plans`](/system-variables.md#tidb_opt_enable_alternative_logical_plans-new-in-v857) 来优化此类场景。启用该变量后，如果去相关化后的候选计划无法生成与原始关联子查询具有相同访问方向的等效 `IndexJoin` 候选计划，优化器会额外保留一个未去相关化的候选计划，对去相关化和未去相关化的候选计划都进行评估，并选择成本更低的[执行计划](/explain-subqueries.md)。
+
 ## 示例
 
 ```sql

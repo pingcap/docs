@@ -20,11 +20,11 @@ summary: 了解如何通过不同方法连接到你的 TiDB Cloud Starter 或 Ti
 
   直连指的是通过 TCP 的 MySQL 原生连接系统。你可以使用任何支持 MySQL 连接的工具连接到你的 TiDB Cloud Starter 或 Essential 实例，例如 [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)。
 
-- [Data Service (beta)](/tidb-cloud/data-service-overview.md)
+- [Data Service (PREVIEW)](/tidb-cloud/data-service-overview.md)
 
   TiDB Cloud 提供 Data Service 功能，使你能够通过自定义 API endpoint，使用 HTTPS request 连接到托管在 AWS 上的 TiDB Cloud Starter 实例。与直连不同，Data Service 通过 RESTful API 访问你的 TiDB Cloud Starter 或 TiDB Cloud Essential 实例数据，而不是原始 SQL。
 
-- [Serverless Driver (beta)](/develop/serverless-driver.md)
+- [Serverless Driver (PREVIEW)](/develop/serverless-driver.md)
 
   TiDB Cloud 为 JavaScript 提供了 serverless driver，允许你在边缘环境中以与直连相同的体验连接到 TiDB Cloud Starter 或 TiDB Cloud Essential 实例。
 
@@ -55,8 +55,8 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持两种网络连接类型：
 | 连接方法                  | 网络类型                   | 描述                                                                                                   |
 |--------------------------|----------------------------|--------------------------------------------------------------------------------------------------------|
 | 直连                     | 公网或私有 endpoint        | 直连可通过公网或私有 endpoint 进行。                                                                   |
-| Data Service (beta)      | /                          | 通过 Data Service (beta) 访问托管在 AWS 上的 TiDB Cloud Starter 无需指定网络类型。                      |
-| Serverless Driver (beta) | 公网 endpoint              | Serverless Driver 仅支持通过公网 endpoint 连接。                                                       |
+| Data Service (PREVIEW)        | /                          | 访问托管在 AWS 上的 TiDB Cloud Starter 时，无需通过 Data Service (PREVIEW) 指定网络类型。 |
+| Serverless Driver (PREVIEW)   | 公网 endpoint              | Serverless Driver 仅支持通过公网 endpoint 连接。                                                       |
 
 ## 后续操作
 

@@ -11,7 +11,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
 ## Prometheus 集成版本
 
-自 2022 年 3 月 15 日起，TiDB Cloud 支持项目级 Prometheus 集成（Beta）。自 2025 年 10 月 21 日起，TiDB Cloud 推出集群级 Prometheus 集成（预览版）。自 2025 年 12 月 2 日起，集群级 Prometheus 集成正式可用（GA）。
+自 2022 年 3 月 15 日起，TiDB Cloud 支持项目级 Prometheus 集成（Beta）。自 2025 年 10 月 21 日起，TiDB Cloud 推出集群级 Prometheus 集成（PREVIEW）。自 2025 年 12 月 2 日起，集群级 Prometheus 集成正式可用（GA）。
 
 - **集群级 Prometheus 集成**：如果在 2025 年 10 月 21 日前，你的组织内没有未删除的遗留项目级 Prometheus 集成，TiDB Cloud 将为你的组织提供集群级 Prometheus 集成，以体验最新增强功能。
 
@@ -19,7 +19,7 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
     > **注意**
     >
-    > 遗留项目级 Prometheus 集成将于 2026 年 1 月 9 日弃用。如果你的组织仍在使用这些遗留集成，请按照 [迁移 Prometheus 集成](/tidb-cloud/migrate-prometheus-metrics-integrations.md) 指南迁移到新的集群级集成，以最大程度减少对统计/指标（信息）相关服务的影响。
+    > 遗留项目级 Prometheus 集成已于 2026 年 1 月 9 日弃用。如果你的组织仍在使用这些遗留集成，请按照 [迁移 Prometheus 集成](/tidb-cloud/migrate-prometheus-metrics-integrations.md) 指南迁移到新的集群级集成，以最大程度减少对统计/指标（信息）相关服务的影响。
 
 ## 前提条件
 

@@ -86,7 +86,7 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 
     点击 **Pause** 后，集群会先进入 **Pausing** 状态。暂停操作完成后，集群会变为 **Paused** 状态。
 
-你也可以通过 TiDB Cloud API 暂停集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以通过 TiDB Cloud API 暂停集群。目前，TiDB Cloud API 处于公开预览阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 ## 恢复 TiDB 集群
 
@@ -109,4 +109,4 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 
 根据你的集群规模，恢复集群可能需要几分钟。集群恢复后，状态会从 **Resuming** 变为 **Available**。
 
-你也可以通过 TiDB Cloud API 恢复集群。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以通过 TiDB Cloud API 恢复集群。目前，TiDB Cloud API 处于公开预览阶段。更多信息请参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。

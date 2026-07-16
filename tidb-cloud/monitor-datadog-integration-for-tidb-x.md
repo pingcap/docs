@@ -1,9 +1,9 @@
 ---
-title: 集成 TiDB Cloud 与 Datadog（公测中）
+title: 集成 TiDB Cloud 与 Datadog（PREVIEW）
 summary: 了解如何使用 Datadog 集成监控你的 TiDB Cloud 实例。
 ---
 
-# 集成 TiDB Cloud 与 Datadog（公测中）
+# 集成 TiDB Cloud 与 Datadog（PREVIEW）
 
 TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的指标发送到 [Datadog](https://www.datadoghq.com/)。完成后，你可以直接在 Datadog 仪表板中查看这些指标。
 
@@ -55,9 +55,9 @@ TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的
 <CustomContent plan="essential">
 
 1. 在 [TiDB Cloud console](https://tidbcloud.com/) 中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .essential }}} 实例的名称，进入其实例概览页面。
-2. 在左侧导航栏中，点击 **Integrations** > **Integration to Datadog (Preview)**。
-3. 输入你的 Datadog API key，并选择你的 Datadog Region。
-4. 点击 **Test Integration**。
+2. 在左侧导航栏中，点击 **Integrations**。
+3. 在 **Integrations** 页面上，找到 **Datadog (PREVIEW)** 集成并点击 **Connect**。
+4. 输入你的 Datadog API key，选择你的 Datadog Region，然后点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
     - 如果测试失败，会显示错误信息。请根据提示进行故障排查，然后重试集成。
@@ -69,9 +69,9 @@ TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的
 <CustomContent plan="premium">
 
 1. 在 [TiDB Cloud console](https://tidbcloud.com/) 中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
-2. 在左侧导航栏中，点击 **Settings** > **Integrations** > **Integration to Datadog (Preview)**。
-3. 输入你的 Datadog API key，并选择你的 Datadog Region。
-4. 点击 **Test Integration**。
+2. 在左侧导航栏中，点击 **Settings** > **Integrations**。
+3. 在 **Integrations** 页面上，找到 **Datadog (PREVIEW)** 集成并点击 **Connect**。
+4. 输入你的 Datadog API key，选择你的 Datadog Region，然后点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
     - 如果测试失败，会显示错误信息。请根据提示进行故障排查，然后重试集成。
@@ -84,7 +84,7 @@ TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的
 
 完成集成后，要查看预构建的仪表板，请在 [Datadog](https://app.datadoghq.com) 中进入 **Dashboards** > **Dashboard List**，然后选择在[第 1 步](#step-1-import-the-pre-built-datadog-dashboard)中导入的仪表板。在仪表板页面中，你可以按目标实例名称进行筛选并查看指标。
 
-你也可以从 [TiDB Cloud console](https://tidbcloud.com/) 进入 Datadog 的 **Dashboard List** 页面：进入目标实例的 **Integrations** 页面，点击 **Datadog (Preview)**，然后点击 **Dashboard**。
+你也可以从 [TiDB Cloud console](https://tidbcloud.com/) 进入 Datadog 的 **Dashboard List** 页面：进入目标实例的 **Integrations** 页面，点击 **Datadog (PREVIEW)**，然后点击 **Dashboard**。
 
 ## Datadog 可用的指标 {#metrics-available-to-datadog}
 

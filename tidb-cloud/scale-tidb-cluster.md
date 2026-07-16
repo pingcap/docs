@@ -47,7 +47,7 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 4. 在 **Modify Cluster** 页面，修改 TiDB、TiKV 或 TiFlash 的节点数量。
 5. 在右侧面板确认集群规格，然后点击 **Confirm**。
 
-你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiDB、TiKV 或 TiFlash 的节点数量。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiDB、TiKV 或 TiFlash 的节点数量。目前，TiDB Cloud API 处于公开预览阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 ## 更改 vCPU 和内存
 
@@ -75,7 +75,7 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 4. 在 **Modify Cluster** 页面，修改 TiDB、TiKV 或 TiFlash 节点的 vCPU 和内存。
 5. 在右侧面板确认集群规格，然后点击 **Confirm**。
 
-你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiDB、TiKV 或 TiFlash 节点的 vCPU 和内存。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiDB、TiKV 或 TiFlash 节点的 vCPU 和内存。目前，TiDB Cloud API 处于公开预览阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 ## 更改存储空间
 
@@ -99,4 +99,4 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 4. 在 **Modify Cluster** 页面，修改每个 TiKV 或 TiFlash 节点的存储空间。
 5. 在右侧面板确认集群规格，然后点击 **Confirm**。
 
-你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiKV 或 TiFlash 节点的存储空间。目前，TiDB Cloud API 仍处于 beta 阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+你也可以通过 TiDB Cloud API，使用 [Modify a TiDB Cloud Dedicated cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 接口更改 TiKV 或 TiFlash 节点的存储空间。目前，TiDB Cloud API 处于公开预览阶段。更多信息，参见 [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta)。

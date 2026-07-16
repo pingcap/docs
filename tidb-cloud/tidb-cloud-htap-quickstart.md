@@ -4,7 +4,7 @@ summary: 了解如何在 TiDB Cloud 中开始使用 HTAP。
 aliases: ['/tidbcloud/use-htap-cluster']
 ---
 
-# TiDB Cloud HTAP 快速入门 <!--Corresponding EN commit: 87b21d6d905ce9d293d57d0a80c1b9592ee932cb-->
+# TiDB Cloud HTAP 快速入门
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) 指的是混合事务与分析处理。TiDB Cloud 中的 HTAP 架构由 [TiKV](https://tikv.org)（为事务处理设计的行存储引擎）和 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)（为分析处理设计的列式存储引擎）组成。你的应用数据首先存储在 TiKV 中，然后通过 Raft 共识算法实时同步到 TiFlash。因此，这是从行存储到列存储的实时同步。
 

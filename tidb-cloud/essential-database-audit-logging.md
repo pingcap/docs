@@ -1,10 +1,10 @@
 ---
-title: TiDB Cloud Essential 数据库审计日志（Beta）
+title: TiDB Cloud Essential 数据库审计日志（PREVIEW）
 summary: 了解如何在 TiDB Cloud 中对 TiDB Cloud Essential 集群进行审计。
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
-# TiDB Cloud Essential 数据库审计日志（Beta）
+# TiDB Cloud Essential 数据库审计日志（PREVIEW）
 
 TiDB Cloud Essential 提供了审计日志功能，用于记录数据库的用户访问活动，例如执行的 SQL 语句。
 
@@ -409,7 +409,7 @@ ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-ru
 
 > **注意：**
 >
-> 为提升流量可见性，`CLIENT_IP` 现已支持在通过 AWS PrivateLink 连接时显示真实客户端 IP，而非负载均衡（LB）IP。该功能目前为 Beta，仅在 AWS 区域 `Frankfurt (eu-central-1)` 可用。
+> 为提升流量可见性，`CLIENT_IP` 现已支持在通过 AWS PrivateLink 连接时显示真实客户端 IP，而非负载均衡（LB）IP。该功能目前为公开预览版，仅在 AWS 区域 `Frankfurt (eu-central-1)` 可用。
 
 ### 审计操作信息
 

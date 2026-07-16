@@ -64,3 +64,18 @@ TABLE SESSION_CONNECT_ATTRS;
 * `ATTR_NAME`：属性名称。
 * `ATTR_VALUE`：属性值。
 * `ORDINAL_POSITION`：名称/值对的顺序位置。
+
+## 大小限制与截断 {#size-limit-and-truncation}
+
+TiDB 使用全局系统变量 [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) 来控制每个会话的连接属性总大小上限。
+
+- 默认值：`4096` 字节
+- 取值范围：`[-1, 65536]`
+- `-1` 表示未配置限制，TiDB 会将其视为最大 `65536` 字节。
+- `0` 表示 TiDB 不保留客户端提供的会话连接属性，这实际上会禁用会话属性记录。
+
+当总大小超过此限制时，TiDB 会截断超出的属性，并添加 `_truncated` 以指示被截断的字节数。
+
+已接受的连接属性也会写入慢日志中的 `Session_connect_attrs` 字段，并且可以从 [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) 和 `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` 中查询。要控制写入慢日志的负载大小，请调整 `performance_schema_session_connect_attrs_size`。
+
+TiDB 还会对握手包中的连接属性负载强制实施 1 MiB 的硬限制。如果超过此硬限制，连接将被拒绝。

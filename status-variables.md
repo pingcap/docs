@@ -31,6 +31,18 @@ summary: 使用状态变量查看系统和会话状态
 - Type: Integer
 - 表示用于 MySQL Protocol 的压缩级别。
 
+### Performance_schema_session_connect_attrs_longest_seen {#performance-schema-session-connect-attrs-longest-seen}
+
+- 作用域：GLOBAL
+- 类型：Integer
+- TiDB 观察到的会话连接属性总大小（以字节为单位）的最大值。
+
+### Performance_schema_session_connect_attrs_lost {#performance-schema-session-connect-attrs-lost}
+
+- 作用域：GLOBAL
+- 类型：Integer
+- 由于 `performance_schema_session_connect_attrs_size`，连接属性被截断的会话数量。
+
 ### Ssl_cipher
 
 - Scope: SESSION | GLOBAL

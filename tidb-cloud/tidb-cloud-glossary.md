@@ -43,13 +43,13 @@ TiDB Cloud 为概念验证（PoC）用户提供一定数量的 credit。1 个 cr
 
 ### Data App
 
-[Data Service (beta)](#data-service) 中的 Data App 是一组 endpoint 的集合，你可以用来为特定应用访问数据。你可以通过 API key 配置授权设置，限制对 Data App 中 endpoint 的访问。
+[Data Service (PREVIEW)](#data-service) 中的 Data App 是一组 endpoint 的集合，你可以用来为特定应用访问数据。你可以通过 API key 配置授权设置，限制对 Data App 中 endpoint 的访问。
 
 更多信息，参见 [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)。
 
 ### Data Service
 
-Data Service（beta）允许你通过自定义 API [endpoint](#endpoint) 以 HTTPS 请求方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩缩容，因此你可以专注于 endpoint 中的查询逻辑，无需担心基础设施或运维成本。
+Data Service（PREVIEW）允许你通过自定义 API [endpoint](#endpoint) 以 HTTPS 请求方式访问 TiDB Cloud 数据。该功能采用无服务器架构，自动处理计算资源和弹性扩缩容，因此你可以专注于 endpoint 中的查询逻辑，无需担心基础设施或运维成本。
 
 更多信息，参见 [Data Service Overview](/tidb-cloud/data-service-overview.md)。
 

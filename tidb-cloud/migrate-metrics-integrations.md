@@ -5,7 +5,7 @@ summary: 了解如何将 Datadog 和 New Relic 的遗留项目级指标集成迁
 
 # 迁移 Datadog 和 New Relic 集成
 
-TiDB Cloud 现在在集群级别管理 Datadog 和 New Relic 集成，提供了更细粒度的控制和配置。遗留的项目级 Datadog 和 New Relic 集成将于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些遗留集成，请按照本指南迁移到新的集群级集成，以最大程度减少对指标相关服务的影响。
+TiDB Cloud 现在在集群级别管理 Datadog 和 New Relic 集成，提供了更细粒度的控制和配置。遗留的项目级 Datadog 和 New Relic 集成已于 2025 年 10 月 31 日弃用。如果你的组织仍在使用这些遗留集成，请按照本指南迁移到新的集群级集成，以最大程度减少对指标相关服务的影响。
 
 ## 前提条件
 

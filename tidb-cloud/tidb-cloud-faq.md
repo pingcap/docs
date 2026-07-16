@@ -41,7 +41,7 @@ TiDB Cloud 是 TiDB 的完全托管云数据库服务（Database as a Service）
 
 ### TiDB Cloud 支持哪些 TiDB 版本？
 
-- 对于新建的 TiDB Cloud Dedicated 集群，默认 TiDB 版本自 2026 年 4 月 14 日起为 [v8.5.6](https://docs.pingcap.com/tidb/v8.5/release-8.5.6)。
+- 对于新建的 TiDB Cloud Dedicated 集群，默认 TiDB 版本自 2026 年 7 月 9 日起为 [v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7)。
 - 对于 TiDB Cloud Starter 实例，TiDB 版本自 2026 年 2 月 10 日起为 [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3)。
 - 对于 TiDB Cloud Essential 实例，TiDB 版本自 2025 年 4 月 22 日起为 [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)。
 
@@ -55,9 +55,9 @@ TiDB 已被全球 1500 多家企业信赖，覆盖金融服务、游戏、电商
 
 TiDB Cloud 提供 99.99% SLA。详情请参见 [TiDB Cloud 服务级别协议](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)。
 
-### TiDB Cloud 中的 BETA 是什么意思？
+### TiDB Cloud 中的 PREVIEW 是什么意思？ {#what-does-preview-mean-in-tidb-cloud}
 
-BETA 表示 TiDB Cloud 某项功能或服务在正式发布（GA）前的公开预览阶段。
+PREVIEW 表示 TiDB Cloud 某项功能或服务在正式发布（GA）前的公开预览阶段。
 
 ### 如何进一步了解 TiDB Cloud？
 

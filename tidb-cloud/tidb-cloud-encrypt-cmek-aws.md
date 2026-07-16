@@ -46,7 +46,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 你可以通过 TiDB Cloud API 的 [Create a CMEK-enabled project](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject) 接口完成此步骤。请确保 `aws_cmek_enabled` 字段设置为 `true`。
 
-目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+目前，TiDB Cloud API 处于公开预览阶段。更多信息请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 </div>
 </SimpleTab>
@@ -132,7 +132,7 @@ aliases: ['/tidbcloud/tidb-cloud-encrypt-cmek']
 
 2. 调用 TiDB Cloud API 的 [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) 接口。
 
-    目前，TiDB Cloud API 仍处于 beta 阶段。更多信息请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
+    目前，TiDB Cloud API 处于公开预览阶段。更多信息请参见 [TiDB Cloud API 文档](https://docs.pingcap.com/tidbcloud/api/v1beta)。
 
 </div>
 </SimpleTab>
