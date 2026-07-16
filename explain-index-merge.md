@@ -96,4 +96,4 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 >
 > -   現時点では、インデックスマージは[一時テーブル](/temporary-tables.md)ではサポートされていません。
 >
-> -   交差型インデックスのマージは、オプティマイザによって自動的に選択されません。選択されるには、ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index-merget1_name-idx1_name--idx2_name-)を使用して**テーブル名とインデックス名**を指定する必要があります。
+> -   交差型インデックスのマージは、オプティマイザによって自動的に選択されません。選択されるには、ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用して**テーブル名とインデックス名**を指定する必要があります。
