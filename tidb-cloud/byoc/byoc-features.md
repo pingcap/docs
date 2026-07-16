@@ -34,7 +34,7 @@ This document lists the feature support status for TiDB Cloud BYOC.
   </tr>
   <tr>
     <td>API</td>
-    <td style="text-align:center;">🔒<br/><span style="font-size: 14px; white-space: nowrap;">(Private preview)</span></td>
+    <td style="text-align:center;">🔒</td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">Developer experience</td>
