@@ -13,7 +13,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can discover, access, a
 
 A TiDB Cloud resource is a deployable unit that you can manage. It can be one of the following:
 
-- A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, or Premium instance
+- A TiDB X instance, which is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, Premium<CustomContent platform="tidb-cloud" plan="byoc">, or {{{ .byoc }}}</CustomContent> instance
 - A {{{ .dedicated }}} cluster
 
 ### TiDB Cloud projects
@@ -44,6 +44,12 @@ For more information, see the following documents:
 - [Create a {{{ .starter }}} or Essential Instance](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
+
+<CustomContent platform="tidb-cloud" plan="byoc">
+
+- [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
+
+</CustomContent>
 
 - [Create a {{{ .dedicated }}} Cluster](/tidb-cloud/create-tidb-cluster.md)
 
@@ -97,6 +103,12 @@ To create a new project, take the following steps:
         > **Note:**
         >
         > For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+        >
+        > <CustomContent platform="tidb-cloud" plan="byoc">
+        >
+        > For {{{ .byoc }}} instances, projects are optional. The data plane runs in your own cloud account, and BYOC environment-level settings are configured during BYOC onboarding.
+        >
+        > </CustomContent>
 
     - If the project is created for {{{ .dedicated }}} clusters, select the **Create for Dedicated Cluster** option, configure [Customer-Managed Encryption Keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [maintenance window](/tidb-cloud/configure-maintenance-window.md) for the project, and then click **Confirm**.
 
