@@ -2446,7 +2446,7 @@ BRバックアップに関連するコンフィグレーション項目。
 + デフォルト値: `true`
 + この設定項目が `true` の場合、TiKV は GCS へのアクセスに `gcp_v2` 実装を使用します。この設定項目が `false` の場合、TiKV は引き続き古い GCS 実装を使用します。
 + フルバックアップまたはリストアのシナリオで Google Cloud Workload Identity Federation (WIF) を使用する必要がある場合は、この設定項目を `true` に設定したままにしてください。
-+ GCS の認証方法および WIF/ADC の使用方法については、[Backup storage](/br/backup-and-restore-storages.md) を参照してください。
++ GCS の認証方法および WIF/ADC の使用方法については、[バックアップストレージ](/br/backup-and-restore-storages.md) を参照してください。
 
 ## backup.hadoop {#backup-hadoop}
 
@@ -2509,7 +2509,7 @@ BRバックアップに関連するコンフィグレーション項目。
 + デフォルト値: `true`
 + この設定項目が `true` の場合、TiKV は GCS へのアクセスに `gcp_v2` 実装を使用します。この設定項目が `false` の場合、TiKV は引き続き古い GCS 実装を使用します。
 + ログバックアップのシナリオで Google Cloud Workload Identity Federation (WIF) を使用する必要がある場合は、この設定項目を `true` に設定したままにしてください。
-+ GCS の認証方法および WIF/ADC の使用方法については、[Backup storage](/br/backup-and-restore-storages.md) を参照してください。
++ GCS の認証方法および WIF/ADC の使用方法については、[バックアップストレージ](/br/backup-and-restore-storages.md) を参照してください。
 
 ## CDC {#cdc}
 
