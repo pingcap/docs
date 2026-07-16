@@ -11,7 +11,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
 >
 > -   データをクラウドストレージにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB Cloud Dedicatedクラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 > -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
-> -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はベータ版です。詳細については、 [変更フィード（ベータ版）](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
+> -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
 ## 制限 {#restrictions}
 

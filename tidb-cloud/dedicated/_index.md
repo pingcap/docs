@@ -56,7 +56,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [ストリームデータ](http://docs.pingcap.com/ja/tidbcloud/changefeed-overview)
 
-[API を使用する（ベータ版）](https://docs.pingcap.com/ja/tidbcloud/api-overview)
+[API を使用する（プレビュー）](https://docs.pingcap.com/ja/tidbcloud/api-overview)
 
 </LearningPath>
 

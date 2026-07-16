@@ -187,10 +187,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `dispatchers` {#dispatchers}
 
--   MQタイプのシンクの場合、ディスパッチャを使用してイベントディスパッチャを設定できます。
+-   changefeed のダウンストリームが MQ シンクの場合、`dispatchers` を使用してイベントディスパッチャを設定できます。v8.5.7 以降、[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md) では、`dispatchers` を使用してテーブルルーティングを設定し、アップストリームテーブルを特定のダウンストリームデータベース名またはテーブル名にマッピングすることもできます。詳細については、[TiCDC テーブルルーティング](/ticdc/ticdc-table-routing.md) を参照してください。
 -   バージョン6.1.0以降、TiDBはパーティションとトピックという2種類のイベントディスパッチャをサポートしています。
 -   マッチャーのマッチング構文は、フィルタルールの構文と同じです。
--   この設定項目は、ダウンストリームがMQの場合にのみ有効になります。
 -   ダウンストリーム MQ が Pulsar の場合、 `partition`のルーティング ルールが`ts` 、 `index-value` 、 `table` 、または`default`にも指定されていない場合、各 Pulsar メッセージは、キーとして設定した文字列を使用してルーティングされます。たとえば、マッチャーのルーティング ルールを文字列`code`として指定した場合、そのマッチャーに一致するすべての Pulsar メッセージは`code`をキーとしてルーティングされます。
 
 #### `column-selectors` <span class="version-mark">v7.5.0の新機能）</span> {#column-selectors-new-in-v750}

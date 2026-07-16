@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 
 > **注記：**
 >
-> -   ベクトル関数と演算子はベータ版であり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> -   ベクトル関数と演算子はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > -   ベクトルデータ型は、 [TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) で使用できます。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## ベクトル関数 {#vector-functions}

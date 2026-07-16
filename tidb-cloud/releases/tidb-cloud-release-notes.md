@@ -8,6 +8,24 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年7月14日 {#july-14-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) のクロスリージョンリストアを強化しました。
+
+        リストア先のリージョンに事前割り当て済みの CIDR ブロックがない場合でも、**Restore** ページで直接 CIDR ブロックを作成できるようになり、リストアを開始する前にそのリージョンでクラスターを手動作成する必要がなくなりました。
+
+## 2026年7月9日 {#july-9-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Dedicated**
+
+    - 新しい [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターのデフォルト TiDB バージョンを [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/) から [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) にアップグレードしました。
+
 ## 2026年7月7日 {#july-7-2026}
 
 **一般的な変更**
@@ -27,6 +45,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
         TiDB Cloud Premium インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
 
         詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
+
+**コンソールの変更**
+
+- [TiDB Cloud console](https://tidbcloud.com/) でパブリックプレビュー機能に使用するラベルを `PREVIEW` に標準化し、これまで混在していた `BETA` と `PREVIEW` の使用を置き換えました。
 
 **API の変更**
 
@@ -375,7 +397,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
         -   [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
         -   [Alibaba Cloudとプライベートエンドポイント経由で接続](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
-    -   Prometheusメトリクス統合を有効にする（プレビュー）。
+    -   Prometheusメトリクス統合を有効にする（PREVIEW）。
 
         [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターレベルでPrometheusとの連携を管理します。この機能により、 TiDB Cloud EssentialクラスターからPrometheusへメトリクスをシームレスに送信でき、統合プラットフォーム上で高度なアラート機能を実現できます。
 

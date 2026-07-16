@@ -67,9 +67,13 @@ tiup dmctl check-task ./task.yaml
 
 -   上流データベースのダンプ権限（必須）
 
-    -   INFORMATION_SCHEMAに対するSELECT権限とダンプテーブル
-    -   `consistency=flush`の場合、再読み込みの権限が必要です。
-    -   `consistency=flush/lock`の場合、ダンプ テーブルに対する LOCK TABLES 権限
+    -   `INFORMATION_SCHEMA`に対する`SELECT`権限とダンプテーブル
+    -   `consistency=flush`の場合、`RELOAD`権限
+    -   `consistency=lock`の場合、ダンプ テーブルに対する `LOCK TABLES` 権限
+
+    > **Note:**
+    >
+    > `consistency=auto`（デフォルト）の場合、DM は最初に `FLUSH TABLES WITH READ LOCK`（FTWRL）を試行します。FTWRL を利用できない場合、DM は `LOCK TABLES` にフォールバックします。このフォールバックは、FTWRL が許可されていないマネージド MySQL サービス（Amazon RDS、Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など）で一般的に発生します。この場合、実行時には `LOCK TABLES` 権限が必要ですが、事前チェックでは現在この権限を検証しません。権限の完全な一覧については、[DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges)を参照してください。
 
 -   （必須）上流のMySQLマルチインスタンスシャーディングテーブルの一貫性
 

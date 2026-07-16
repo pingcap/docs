@@ -1,9 +1,9 @@
 ---
-title: Integrate TiDB Cloud Branching (Beta) with GitHub 
+title: Integrate TiDB Cloud Branching (PREVIEW) with GitHub
 summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学びましょう。
 ---
 
-# TiDB Cloud Branching（ベータ版）とGitHubの統合 {#integrate-tidb-cloud-branching-beta-with-github}
+# TiDB Cloud Branching（PREVIEW）とGitHubの統合 {#integrate-tidb-cloud-branching-beta-with-github}
 
 > **注記：**
 >

@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/api-overview/']
 
 > **注記：**
 >
-> TiDB Cloud APIはベータ版です。
+> TiDB Cloud APIはパブリックプレビューです。
 
 TiDB Cloud APIは[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)APIであり、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。このAPIを使用すると、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、データ[データサービス](https://docs.pingcap.com/tidbcloud/data-service-overview)内のリソースなどのリソースを自動的かつ効率的に管理できます。
 

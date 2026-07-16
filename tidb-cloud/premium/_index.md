@@ -45,7 +45,7 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 [データのバックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-premium/?plan=premium)
 
-[APIを使用する（ベータ版）](https://docs.pingcap.com/ja/api/)
+[API を使用する（PREVIEW）](https://docs.pingcap.com/ja/api/)
 
 </LearningPath>
 

@@ -12,7 +12,7 @@ aliases: ['/ja/tidbcloud/migrate-data-into-tidb','/ja/tidbcloud/migrate-incremen
 
 > **注記：**
 >
-> 現在、 TiDB Cloud Essentialのデータ移行機能はベータ版です。
+> 現在、 TiDB Cloud Essentialのデータ移行機能はパブリックプレビュー版です。
 
 </CustomContent>
 

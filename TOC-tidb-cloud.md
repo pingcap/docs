@@ -20,7 +20,7 @@
   - [トランザクション](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI機能](/tidb-cloud/ai-feature-concepts.md)
-  - [データサービス](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [データサービス](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [拡張性](/tidb-cloud/scalability-concepts.md)
   - [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
   - [監視](/tidb-cloud/monitoring-concepts.md)
@@ -166,9 +166,9 @@
     - [データ移行に関する事前チェックエラー、移行エラー、およびアラート](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - データ探索
-  - [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQLプロキシアカウント](/tidb-cloud/sql-proxy-account.md)
-- データサービス![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/data-service-overview.md)
   - [さあ始めましょう](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API

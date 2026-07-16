@@ -1,13 +1,13 @@
 ---
-title: TiDB Cloud CLI Reference (Beta)
+title: TiDB Cloud CLI Reference (PREVIEW)
 summary: TiDB Cloud CLIの概要を説明します。
 ---
 
-# TiDB Cloud CLI リファレンス (ベータ版) {#tidb-cloud-cli-reference-beta}
+# TiDB Cloud CLI リファレンス (PREVIEW) {#tidb-cloud-cli-reference-beta}
 
-> **注記：**
+> **Note:**
 >
-> 現在、 TiDB Cloud CLIはベータ版であり、 TiDB Cloud Dedicatedクラスタには適用できません。
+> 現在、 TiDB Cloud CLIはパブリックプレビューであり、 TiDB Cloud Dedicatedクラスタには適用できません。
 
 TiDB Cloud CLIはコマンドラインインターフェースであり、ターミナルから数行のコマンドを入力するだけでTiDB Cloudを操作できます。TiDB Cloud CLIを使用すると、 TiDB Cloud StarterおよびEssentialインスタンスを簡単に管理したり、インスタンスにデータをインポートしたり、その他の操作を実行したりできます。
 

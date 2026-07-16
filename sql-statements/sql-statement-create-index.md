@@ -52,6 +52,7 @@ IndexOption ::=
 |   'COMMENT' stringLit
 |   ("VISIBLE" | "INVISIBLE")
 |   ("GLOBAL" | "LOCAL")
+|   'WHERE' Expression
 
 IndexTypeName ::=
     'BTREE'
@@ -364,6 +365,136 @@ Query OK, 1 row affected (0.00 sec)
 -   多値インデックスは式インデックスの特殊なタイプであるため、式インデックスと同様の制限があります。
 -   テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートすることはできません。
 -   複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
+
+## Partial indexes <span class="version-mark">v8.5.7 の新機能</span> {#partial-indexes-new-in-v857}
+
+部分インデックスは、テーブル内の行のサブセットに対して構築されるインデックスです。部分インデックスを作成する際には、その行のサブセットを定義するために、述語とも呼ばれる条件式を指定できます。インデックスには、その述語を満たす行に対するエントリのみが含まれます。
+
+### 使用シナリオ {#usage-scenarios}
+
+次のシナリオでは、部分インデックスを使用することで、クエリパフォーマンスの向上やインデックス管理のオーバーヘッド削減に役立ちます。
+
+- **選択的フィルタリング**: 特定の条件に基づいて少数の行のサブセットを頻繁にクエリする場合、部分インデックスを使用できます。部分インデックスの述語を満たすクエリでは、TiDB は部分インデックスを使用して無関係な行のスキャンを回避し、インデックスが占有するストレージ容量を削減できます。
+- **条件付き一意性**: 特定の条件を満たす行に対してのみ一意制約を適用する必要がある場合、ユニーク部分インデックスを使用して、テーブル全体に一意制約を適用することを回避できます。
+- **DML オーバーヘッドの削減**: 多くの `INSERT`、`UPDATE`、または `DELETE` 操作がインデックス化する必要のない行に影響する場合、部分インデックスを使用できます。完全なインデックスを管理する場合と比べて、部分インデックスを管理することでインデックス管理のオーバーヘッドを削減できます。
+
+### 部分インデックスの作成 {#create-partial-indexes}
+
+インデックス定義に `WHERE` 句を追加することで、部分インデックスを作成できます。例:
+
+```sql
+CREATE TABLE t1 (c1 INT, c2 INT, c3 TEXT);
+CREATE INDEX idx1 ON t1 (c1) WHERE c2 > 10;
+```
+
+`ALTER TABLE` を使用して部分インデックスを作成することもできます。
+
+```sql
+ALTER TABLE t1 ADD INDEX idx2 (c1, c2) WHERE c3 = 'abc';
+```
+
+テーブル作成時に部分インデックスを指定することもできます。
+
+```sql
+CREATE TABLE t2 (
+    id INT PRIMARY KEY,
+    status VARCHAR(20),
+    created_at DATETIME,
+    INDEX idx_active_status (status) WHERE status = 'active'
+);
+```
+
+### 使用例 {#usage-examples}
+
+次の例は、部分インデックスを効果的に使用する方法を示しています。
+
+ユーザーデータを含むテーブルを作成します。
+
+```sql
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    status VARCHAR(20),
+    created_at DATETIME,
+    score INT
+);
+```
+
+一般的なクエリパターンに対して部分インデックスを作成します。
+
+```sql
+CREATE INDEX idx_active_users ON users (name) WHERE status = 'active';
+CREATE INDEX idx_high_score_users ON users (created_at) WHERE score > 1000;
+CREATE INDEX idx_pending_status ON users (status) WHERE status = 'pending';
+```
+
+次のクエリでは部分インデックスを使用できます。
+
+```sql
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' AND name = 'John';
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| id                            | estRows | task      | access object                             | operator info                                         |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+| IndexLookUp_9                 | 1.00    | root      |                                           |                                                       |
+| ├─IndexRangeScan_6(Build)     | 10.00   | cop[tikv] | table:users, index:idx_active_users(name) | range:["John","John"], keep order:false, stats:pseudo |
+| └─Selection_8(Probe)          | 1.00    | cop[tikv] |                                           | eq(test.users.status, "active")                       |
+|   └─TableRowIDScan_7          | 10.00   | cop[tikv] | table:users                               | keep order:false, stats:pseudo                        |
++-------------------------------+---------+-----------+-------------------------------------------+-------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' ORDER BY name;
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| id                            | estRows  | task      | access object                             | operator info                   |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+| IndexLookUp_18                | 10.00    | root      |                                           |                                 |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_active_users(name) | keep order:true, stats:pseudo   |
+| └─Selection_17(Probe)         | 10.00    | cop[tikv] |                                           | eq(test.users.status, "active") |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                               | keep order:false, stats:pseudo  |
++-------------------------------+----------+-----------+-------------------------------------------+---------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE score > 10000 ORDER BY created_at;
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| id                            | estRows  | task      | access object                                       | operator info                  |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+| IndexLookUp_18                | 3333.33  | root      |                                                     |                                |
+| ├─IndexFullScan_15(Build)     | 10000.00 | cop[tikv] | table:users, index:idx_high_score_users(created_at) | keep order:true, stats:pseudo  |
+| └─Selection_17(Probe)         | 3333.33  | cop[tikv] |                                                     | gt(test.users.score, 10000)     |
+|   └─TableRowIDScan_16         | 10000.00 | cop[tikv] | table:users                                         | keep order:false, stats:pseudo |
++-------------------------------+----------+-----------+-----------------------------------------------------+--------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| id                            | estRows | task      | access object                                 | operator info                                               |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+| IndexLookUp_7                 | 10.00   | root      |                                               |                                                             |
+| ├─IndexRangeScan_5(Build)     | 10.00   | cop[tikv] | table:users, index:idx_pending_status(status) | range:["pending","pending"], keep order:false, stats:pseudo |
+| └─TableRowIDScan_6(Probe)     | 10.00   | cop[tikv] | table:users                                   | keep order:false, stats:pseudo                              |
++-------------------------------+---------+-----------+-----------------------------------------------+-------------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
+
+クエリの述語が部分インデックスで定義された条件を満たさない場合、TiDB はヒントを指定していても部分インデックスを選択しません。たとえば、次のステートメントでは、クエリ述語 `score > 100` が部分インデックス定義 `score > 1000` を満たさないため、部分インデックス `idx_high_score_users` を使用できません。
+
+```sql
+mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
++---------------------------+----------+-----------+---------------+--------------------------------+
+| id                        | estRows  | task      | access object | operator info                  |
++---------------------------+----------+-----------+---------------+--------------------------------+
+| Sort_5                    | 3333.33  | root      |               | test.users.created_at          |
+| └─TableReader_10          | 3333.33  | root      |               | data:Selection_9               |
+|   └─Selection_9           | 3333.33  | cop[tikv] |               | gt(test.users.score, 100)      |
+|     └─TableFullScan_8     | 10000.00 | cop[tikv] | table:users   | keep order:false, stats:pseudo |
++---------------------------+----------+-----------+---------------+--------------------------------+
+```
+
+### 制限事項 {#limitations}
+
+- 部分インデックスの `WHERE` 句では、基本的な比較演算子（`=`、`!=`、`<`、`<=`、`>`、`>=`）、`IS NULL`、`IS NOT NULL`、および定数値を使用する `IN` 述語をサポートします。
+- 述語内のカラムと定数値は同じデータ型である必要があります。
+- 述語は同じテーブルのカラムのみを参照できます。
+- 式インデックスには部分インデックスを作成できません。
 
 ## 不可視インデックス {#invisible-index}
 

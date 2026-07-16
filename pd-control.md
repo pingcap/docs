@@ -32,7 +32,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
-1.  [Go](https://golang.org/) Go モジュールが使用されるため、1.23 以降が必要です。
+1.  [Go](https://golang.org/) Go モジュールが使用されるため、1.25 以降が必要です。
 2.  [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用して`bin/pd-ctl`コンパイルして生成します。
 
 ## 使用法 {#usage}
@@ -515,6 +515,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -536,6 +537,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -545,6 +547,8 @@ config set service-middleware rate-limit GetRegion concurrency 0
   ]
 }
 ```
+
+v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`flow_cpu`フィールドが含まれ、 `hot store`コマンドの出力に`cpu-read-rate`フィールドが含まれます。これらのフィールドは、CPU を認識した読み取りホットスポット スケジューリングのための読み取り CPU 使用率を示します。
 
 ### `label [store &#x3C;name> &#x3C;value>]` {#label-store-x3c-name-x3c-value}
 
@@ -1025,22 +1029,24 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
   "min-hot-byte-rate": 100,
   "min-hot-key-rate": 10,
   "min-hot-query-rate": 10,
+  "min-hot-cpu-rate": 10,
   "max-zombie-rounds": 3,
   "max-peer-number": 1000,
   "byte-rate-rank-step-ratio": 0.05,
   "key-rate-rank-step-ratio": 0.05,
   "query-rate-rank-step-ratio": 0.05,
+  "cpu-rate-rank-step-ratio": 0.05,
   "count-rank-step-ratio": 0.01,
   "great-dec-ratio": 0.95,
   "minor-dec-ratio": 0.99,
   "src-tolerance-ratio": 1.05,
   "dst-tolerance-ratio": 1.05,
   "read-priorities": [
-    "query",
+    "cpu",
     "byte"
   ],
   "write-leader-priorities": [
-    "key",
+    "query",
     "byte"
   ],
   "write-peer-priorities": [
@@ -1071,6 +1077,12 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
+-   `min-hot-cpu-rate`は、読み取りリクエストがホットスポット統計に含まれるために必要な最小 CPU 使用率を指定します。この値は 1 CPU コアに対する割合で測定され、デフォルト値は`10`で、1 CPU コアの 10% を意味します。
+
+    ```bash
+    scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
+    ```
+
 -   `max-zombie-rounds`オペレータが保留中の影響力を持つと見なされるハートビートの最大数を意味します。より大きな値に設定すると、より多くのオペレータが保留中の影響力に含まれる可能性があります。通常、この値を調整する必要はありません。保留中の影響力とは、スケジューリング中に生成されるものの、依然として効果を持つオペレータの影響力を指します。
 
     ```bash
@@ -1083,7 +1095,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
--   `byte-rate-rank-step-ratio` 、 `key-rate-rank-step-ratio` 、 `query-rate-rank-step-ratio` 、 `count-rank-step-ratio`はそれぞれ、バイト、キー、クエリ、カウントのステップランクを表します。rank-step-ratio は、ランクを計算する際のステップを決定します。8 と`minor-dec-ratio` `great-dec-ratio` `dec`ランクを決定するために使用されます。通常、これらの項目を変更する必要はありません。
+-   `byte-rate-rank-step-ratio` 、 `key-rate-rank-step-ratio` 、 `query-rate-rank-step-ratio` 、 `cpu-rate-rank-step-ratio` 、 `count-rank-step-ratio`はそれぞれ、バイト、キー、クエリ、CPU、カウントのステップランクを表します。rank-step-ratio は、ランクを計算する際のステップを決定します。PD は`great-dec-ratio`と`minor-dec-ratio`を使用して`dec`ランクを決定します。通常、これらの項目を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -1097,16 +1109,19 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 -   `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities` 、ホットリージョンスケジューリングにおいてスケジューラがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
 
-    -   `read-priorities`と`write-leader-priorities` 、読み取りリーダー型および書き込みリーダー型のホットリージョンをスケジューリングする際に、スケジューラがどの次元を優先するかを制御します。次元のオプションは`query` 、 `byte` 、 `key`です。
+    -   `read-priorities` 、読み取りタイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`cpu` 、 `query` 、 `byte` 、 `key`です。
+    -   `write-leader-priorities` 、書き込みリーダータイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`query` 、 `byte` 、 `key`です。
 
     -   `write-peer-priorities` 、書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
 
     > **注記：**
     >
-    > クラスタコンポーネントがv5.2より前のバージョンの場合、 `query`次元の設定は有効になりません。一部のコンポーネントをv5.2以降にアップグレードした場合でも、 `byte`と`key`次元はデフォルトでホットリージョンスケジューリングの優先権を持ちます。クラスタのすべてのコンポーネントをv5.2以降にアップグレードした後も、互換性のためにこれらの設定は有効になります。7 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
+    > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラはデフォルトで`byte`および`key`ディメンションに基づいてホットスポット バランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
+    >
+    > v8.5.7 以降では、TiKV はホットリージョン スケジューリングのために読み取り CPU 使用率を報告します。読み取り CPU レポートをサポートするクラスターでは、デフォルトの`read-priorities`値は`cpu,byte`です。読み取り CPU レポートをサポートしないクラスターでは、PD は自動的に`query,byte`にフォールバックし、クラスターが`query`ディメンションもサポートしない場合は`byte,key`にフォールバックします。 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
 
     ```bash
-    scheduler config balance-hot-region-scheduler set read-priorities query,byte
+    scheduler config balance-hot-region-scheduler set read-priorities cpu,byte
     ```
 
 -   `strict-picking-store`ホットリージョンスケジューリングの検索空間を制御します。通常は有効になっています。この設定項目は、 `rank-formula-version`が`v1`場合のみ動作に影響します。有効にすると、ホットリージョンスケジューリングは設定された2つのディメンションのホットリージョンバランスを確保します。無効にすると、ホットリージョンスケジューリングは優先度が最も高いディメンションのバランスのみを確保するため、他のディメンションのバランスが低下する可能性があります。通常、この設定を変更する必要はありません。

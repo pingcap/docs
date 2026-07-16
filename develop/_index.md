@@ -19,7 +19,7 @@ aliases: ['/ja/tidb/stable/dev-guide-overview/','/ja/tidb/dev/dev-guide-overview
 サンプル コード付きのガイドに従って、使用する言語でアプリケーションを構築します。
 
 <DevLangAccordion label="JavaScript" defaultExpanded>
-<DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
+<DevToolCard title="Serverless Driver (PREVIEW)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
 エッジ環境から HTTPS 経由で TiDB に接続します ( TiDB Cloudにのみ適用されます)。
 

@@ -1,13 +1,26 @@
 ---
 title: TiDB Lightning Web Interface
-summary: TiDB LightningはWebインターフェースを通じて制御できます。
+summary: TiDB Lightning Webインターフェースの削除と推奨される代替手段について説明します。
 ---
 
 # TiDB Lightning Webインターフェース {#tidb-lightning-web-interface}
 
-> **警告：**
+> **Warning:**
 >
-> バージョン8.5.6以降、 TiDB Lightning Webインターフェースは非推奨となり、バージョン8.5.7で削除されます。Web UIビルドはバージョン8.4.0以降、不具合が発生しています。代わりに[`tidb-lightning` CLI](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントを使用してください。この変更がワークフローに影響する場合は、 [#67697](https://github.com/pingcap/tidb/issues/67697)にコメントしてください。
+> TiDB v8.5.7以降、TiDB LightningはWebインターフェースをサポートしなくなりました。v8.5.6以降、TiDB Lightning Webインターフェースは非推奨です。Web UIビルドはv8.4.0以降壊れています。
+
+TiDB Lightningでデータをインポートするには、TiDB Lightningコマンドラインツールを使用します。インポートタスクには`tidb-lightning`を、チェックポイントおよびトラブルシューティング操作には`tidb-lightning-ctl`を使用します。
+
+- 基本的な手順については、[TiDB Lightningを使い始める](/get-started-with-tidb-lightning.md)を参照してください。
+- コマンドラインオプションについては、[TiDB Lightningコマンドラインフラグ](/tidb-lightning/tidb-lightning-command-line-full.md)を参照してください。
+
+インポートの進行状況を確認するには、TiDB Lightningログで`progress`キーワードを検索するか、[TiDB Lightning監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)を使用します。
+
+新しいデータのインポートワークロードには、[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントを使用することもできます。
+
+> **Note:**
+>
+> TiDB Lightning Webインターフェースがまだある以前のバージョンのTiDBを使用している場合は、参考として以下の内容を参照できます。
 
 TiDB Lightningは、インポートの進行状況を確認したり、簡単なタスク管理を実行したりするためのウェブページを提供します。これは*サーバーモード*と呼ばれます。
 

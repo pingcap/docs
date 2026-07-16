@@ -9,7 +9,7 @@ summary: TiDB 6.1.7 の改善点とバグ修正について説明します。
 
 TiDB バージョン: 6.1.7
 
-クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境への展開](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 改善点 {#improvements}
 

@@ -1,9 +1,9 @@
 ---
-title: Quick Start for TiDB Lightning
+title: Get Started with TiDB Lightning
 summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポートするためのツールです。本番や開発環境ではなく、テストおよび試用目的でのみ使用することをお勧めします。このプロセスには、フルバックアップデータの準備、TiDBクラスタのデプロイ、 TiDB Lightningのインストール、 TiDB Lightningの起動、およびデータ整合性のチェックが含まれます。詳細な機能と使用方法については、 TiDB Lightningの概要を参照してください。
 ---
 
-# TiDB Lightningクイックスタート {#quick-start-for-tidb-lightning}
+# TiDB Lightningを使い始める {#get-started-with-tidb-lightning}
 
 このドキュメントでは、MySQLデータをTiDBクラスタにインポートすることでTiDB Lightningを使い始めるための簡単なガイドを提供します。
 

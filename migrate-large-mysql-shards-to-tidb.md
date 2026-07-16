@@ -205,7 +205,6 @@ CREATE TABLE `table5` (
 
     -   `grep`ツールを使用して、ログファイル内でキーワード`progress`を検索してください。デフォルトでは、進行状況を報告するメッセージが5分ごとにログファイルに書き込まれます。
     -   監視ダッシュボードから進捗状況をビュー。詳細については、 [TiDB Lightningモニタリング](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
-    -   Web ページから進捗状況をビュー。 [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
 TiDB Lightning はインポートが完了すると自動的に終了します。`tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認してください。含まれている場合はインポートが成功しています。含まれていない場合は、インポート中にエラーが発生しました。エラーメッセージの指示に従ってエラーに対処してください。
 
