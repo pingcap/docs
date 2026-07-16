@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/api-overview/']
 >
 > TiDB Cloud APIはパブリックプレビューです。
 
-TiDB Cloud APIは[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)APIであり、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。このAPIを使用すると、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、データ[データサービス](https://docs.pingcap.com/tidbcloud/data-service-overview)内のリソースなどのリソースを自動的かつ効率的に管理できます。
+TiDB Cloud APIは[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)APIであり、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。このAPIを使用すると、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、データ[Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview)内のリソースなどのリソースを自動的かつ効率的に管理できます。
 
 このAPIには以下の機能があります。
 
@@ -21,5 +21,5 @@ TiDB Cloud APIは[RESTインターフェース](https://en.wikipedia.org/wiki/Re
 TiDB Cloud APIは、以下のバージョンで利用可能です。
 
 -   [v1beta2](/api/tidb-cloud-api-v1beta2.md) ： TiDB Cloud Premiumインスタンスを管理します。
--   [v1beta1](/api/tidb-cloud-api-v1beta1.md) ： TiDB Cloud Starter、 Essential、およびDedicatedクラスタ、ならびに課金、データサービス、およびIAMリソースを管理します。
+-   [v1beta1](/api/tidb-cloud-api-v1beta1.md) ： TiDB Cloud Starter、 Essential、およびDedicatedクラスタ、ならびに課金、Data Service、およびIAMリソースを管理します。
 -   [v1beta](/api/tidb-cloud-api-v1beta.md) : TiDB Cloudのプロジェクト、クラスター、バックアップ、インポート、リストアを管理します。

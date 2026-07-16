@@ -130,9 +130,9 @@ TiDB Cloud StarterまたはEssentialインスタンスを新しい TiDB X プロ
 -   統合
 -   プロジェクトベースの運用ワークフロー
 -   ユーザーアクセスとRBACの割り当て
--   データサービスの設定
+-   Data Serviceの設定
 -   データアプリ
--   データサービスAPIキー
+-   Data ServiceAPIキー
 
 プロジェクトレベルのRBAC権限は新しいプロジェクトにコピーされますが、移行後もアクセス権限を確認し、ユーザーとワークフローが期待どおりに機能することを確認する必要があります。
 
@@ -140,4 +140,4 @@ TiDB Cloud API を使用してインスタンスを管理する場合は、 [TiD
 
 ## どこで助けを得られますか？ {#where-can-i-get-help}
 
-自動化、統合、またはデータサービスの設定が元のプロジェクトIDに依存しているかどうか不明な場合は、移行を開始する前に、 TiDB Cloudサポート（ [support@pi​​ngcap.com](mailto:support@pingcap.com)にお問い合わせください。
+自動化、統合、またはData Serviceの設定が元のプロジェクトIDに依存しているかどうか不明な場合は、移行を開始する前に、 TiDB Cloudサポート（ [support@pi​​ngcap.com](mailto:support@pingcap.com)にお問い合わせください。

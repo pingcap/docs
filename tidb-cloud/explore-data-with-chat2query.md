@@ -167,7 +167,7 @@ Chat2Queryでは、以下の手順でChat2Queryデータアプリにアクセス
 
 ## SQLファイルからエンドポイントを生成する {#generate-an-endpoint-from-a-sql-file}
 
-TiDB Cloud には、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるデータ[データサービス（PREVIEW）](/tidb-cloud/data-service-overview.md)機能があります。SQL エディターでは、以下の手順で SQL ファイルからデータ サービス（PREVIEW）のエンドポイントを生成できます。
+TiDB Cloud には、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるデータ[Data Service（PREVIEW）](/tidb-cloud/data-service-overview.md)機能があります。SQL エディターでは、以下の手順で SQL ファイルからData Service（PREVIEW）のエンドポイントを生成できます。
 
 1.  ファイル名にカーソルを合わせ、ファイル名の横にある**「...」**をクリックして、 **「エンドポイントを生成」**を選択します。
 2.  **「エンドポイントの生成」**ダイアログボックスで、エンドポイントを生成するデータアプリを選択し、エンドポイント名を入力します。

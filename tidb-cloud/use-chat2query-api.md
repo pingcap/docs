@@ -21,7 +21,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データ ア
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**「データアプリを作成」を**クリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**「データアプリを作成」を**クリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
 
     > **Tip:**
     >
@@ -39,7 +39,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データ ア
 
 API キーを作成するには、次の手順を実行します。
 
-1.  [**データサービス**](https://tidbcloud.com/project/data-service)の左側のペインで、Chat2Query データ アプリをクリックすると、右側にその詳細が表示されます。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)の左側のペインで、Chat2Query データ アプリをクリックすると、右側にその詳細が表示されます。
 
 2.  **認証**領域で、 **「API キーの作成」を**クリックします。
 
@@ -85,7 +85,7 @@ API キーを作成するには、次の手順を実行します。
 
 TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すためのコードサンプルを提供しています。Chat2Queryエンドポイントのコードサンプルを取得するには、以下の手順を実行してください。
 
-1.  [**データサービス**](https://tidbcloud.com/project/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
 
     エンドポイント URL、コード例、リクエスト メソッドなど、このエンドポイントを呼び出すための情報が右側に表示されます。
 
@@ -101,7 +101,7 @@ TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すための
 
 ### Chat2Query v3エンドポイントまたはv2エンドポイントを呼び出す {#call-chat2query-v3-endpoints-or-v2-endpoints}
 
-TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
+TiDB CloudData Serviceは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
 
 | 方法 | 終点                                                                | 説明                                                                                                                                       |
 | -- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -347,7 +347,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 >
 > Chat2Data v1エンドポイントは非推奨です。代わりにChat2Data v3エンドポイントを呼び出すことをお勧めします。
 
-TiDB Cloudデータ サービスは、次の Chat2Query v1 エンドポイントを提供します。
+TiDB CloudData Serviceは、次の Chat2Query v1 エンドポイントを提供します。
 
 | 方法 | 終点              | 説明                                                                       |
 | -- | --------------- | ------------------------------------------------------------------------ |
@@ -447,4 +447,4 @@ API呼び出しが失敗した場合、ステータスコード`200`以外の値
 -   [APIキーを管理する](/tidb-cloud/data-service-api-key.md)
 -   [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
 -   [ナレッジベースを使用する](/tidb-cloud/use-chat2query-knowledge.md)
--   [データサービスの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
+-   [Data Serviceの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
