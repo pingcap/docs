@@ -744,7 +744,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `1`
-- Range: `[1, 18446744073709551615]`
 - For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
