@@ -189,6 +189,8 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
 - `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
 
+- `ALTER TABLE ... COMPRESSION` only accepts `'NONE'` (case-insensitive) and it is a no-op: the statement is accepted only for compatibility (for example, for tables migrated from MySQL that carry a `COMPRESSION` attribute), and TiDB does not compress or uncompress any table data. Other values such as `'ZLIB'` and `'LZ4'` return the error `This type of ALTER TABLE is currently unsupported` (error code 8200). If an unsupported `COMPRESSION` value is specified together with other options in one statement, none of the options take effect.
+
 For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
 
 ## See also
