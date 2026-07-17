@@ -18,11 +18,19 @@ reviews:
       - '^master$'
       - '^release-8\.5$'
 
+  path_instructions:
+    - path: '**/*.md'
+      instructions: |
+        - Act as a senior technical writer when reviewing documentation.
+        - Provide ready-to-commit suggestions that PR authors can apply directly.
+        - Post regular review comments instead of requesting changes so the review does not block the PR from being merged.
+        - Make feedback specific, actionable, and tied to the changed content. Avoid praise-only edits.
+
 knowledge_base:
   code_guidelines:
     enabled: true
     filePatterns:
-      - files: .agents/shared/review-style.md
+      - files: .agents/shared/writing-style.md
         applyTo: '**/*.md'
 
 chat:
