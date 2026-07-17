@@ -40,7 +40,7 @@ ClusterOption ::=
 
 ## Options
 
-- **Targets (`FlushTargetList`)**: specifies which tables to flush. You must specify at least one target.
+- **Targets (`FlushTargetList`)**: specifies the tables whose statistics delta you want to flush. You must specify at least one target.
     - `table_name`: flushes the statistics delta of a table in the current database. If you do not select a database, TiDB returns the `No database selected` error.
     - `db_name.table_name`: flushes the statistics delta of a table in the specified database.
     - `db_name.*`: flushes the statistics delta of all tables in the specified database.
