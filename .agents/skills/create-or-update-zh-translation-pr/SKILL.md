@@ -106,7 +106,7 @@ Do not process every changed file the same way.
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
   --mode create \
   --source-pr-url "<source-pr-url>" \
   --target-repo-dir "<path-to-docs-cn>"
@@ -117,7 +117,7 @@ python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translatio
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
   --mode update \
   --target-translation-pr-url "<target-translation-pr-url>" \
   --source-update-range "<commit-sha-or-base..head>" \
@@ -161,7 +161,7 @@ Script behavior in `update` mode:
 Run:
 
 ```bash
-bash .ai/skills/create-or-update-zh-translation-pr/scripts/create_translation_branch.sh \
+bash .agents/skills/create-or-update-zh-translation-pr/scripts/create_translation_branch.sh \
   "$WORKDIR/translation-meta.env"
 ```
 
@@ -176,7 +176,7 @@ This script uses `gh` for the remote branch operations and then prepares the loc
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/apply_translation_units.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/apply_translation_units.py \
   --meta-env "$WORKDIR/translation-meta.env" \
   --write
 ```
@@ -233,7 +233,7 @@ Start from the deterministic script output:
 Run this only after the translated target files are ready:
 
 ```bash
-bash .ai/skills/create-or-update-zh-translation-pr/scripts/create_translation_pr.sh \
+bash .agents/skills/create-or-update-zh-translation-pr/scripts/create_translation_pr.sh \
   "$WORKDIR/translation-meta.env"
 ```
 
