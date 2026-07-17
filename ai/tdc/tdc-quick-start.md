@@ -13,29 +13,41 @@ This quick start installs tdc, configures one profile, and gets a successful res
 
 ## Prerequisites
 
-Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page. The key must be able to access a `tidbx_virtual` project.
+Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page.
 
 ## Step 1. Install tdc
 
-On macOS or Linux:
+On macOS or Linux, run the installer:
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
+```
+
+After installation, add tdc to the current shell and verify it:
+
+```bash
 export PATH="$HOME/.tdc/bin:$PATH"
 tdc --version
 ```
 
 Add `export PATH="$HOME/.tdc/bin:$PATH"` to your shell profile to keep tdc available in new terminals.
 
-On Windows PowerShell:
+On Windows PowerShell, run the installer:
 
 ```powershell
 $script = "$env:TEMP\install-tdc.ps1"
 iwr https://github.com/tidbcloud/tdc/releases/latest/download/install.ps1 -OutFile $script
 powershell -ExecutionPolicy Bypass -File $script -Yes
+```
+
+After installation, add tdc to the current PowerShell session and verify it:
+
+```powershell
 $env:Path = "$HOME\.tdc\bin;$env:Path"
 tdc --version
 ```
+
+Add `$HOME\.tdc\bin` to your user `PATH` to keep tdc available in new PowerShell sessions.
 
 ## Step 2. Configure tdc
 
@@ -45,7 +57,7 @@ Run the interactive configuration:
 tdc configure
 ```
 
-Enter your API public key, private key, and a canonical region code such as `aws-us-east-1`. tdc validates the key, discovers the `tidbx_virtual` project, and saves it as the default project.
+Enter your API public key, private key, and a canonical region code such as `aws-us-east-1`.
 
 Verify the configuration:
 
@@ -59,26 +71,23 @@ Complete either the Filesystem workflow or the Starter database workflow.
 
 ### Option A: Write and read a file
 
-Create a Filesystem and capture its owner token without displaying it:
+Create a Filesystem and make it the default:
 
 ```bash
-export TDC_FS_TOKEN="$(tdc fs create-file-system \
+tdc fs create-file-system \
   --file-system-name quickstart-fs \
-  --query fs_token \
-  --output text)"
+  --set-default \
+  --output text
 ```
 
-Write and read a file through the data plane:
+tdc stores the Filesystem credential locally. Write and read a file directly:
 
 ```bash
 printf 'hello from tdc\n' | tdc fs copy-file \
-  --file-system-name quickstart-fs \
   --from-stdin \
   --to-remote /hello.txt
 
-tdc fs read-file \
-  --file-system-name quickstart-fs \
-  --path /hello.txt
+tdc fs read-file --path /hello.txt
 ```
 
 Expected output:
@@ -93,27 +102,37 @@ Clean up:
 tdc fs delete-file-system \
   --file-system-name quickstart-fs \
   --confirm-file-system-name quickstart-fs
-unset TDC_FS_TOKEN
 ```
 
 ### Option B: Query a Starter database
 
-List clusters and select an active cluster ID:
+Create a Starter cluster and save its ID:
 
 ```bash
-tdc db list-db-clusters --output text
-export TDC_DB_CLUSTER_ID="<active-cluster-id>"
+export TDC_DB_CLUSTER_ID="$(tdc db create-db-cluster \
+  --db-cluster-name quickstart-db \
+  --db-cluster-type starter \
+  --query id \
+  --output text)"
 ```
 
-If the cluster does not yet have tdc-managed SQL users, create them:
+Wait until the cluster is active:
 
 ```bash
-tdc db create-db-sql-users --db-cluster-id "$TDC_DB_CLUSTER_ID"
+until [ "$(tdc db describe-db-cluster \
+  --db-cluster-id "$TDC_DB_CLUSTER_ID" \
+  --query state \
+  --output text)" = "ACTIVE" ]; do
+  sleep 5
+done
 ```
 
-Run a read-only verification query:
+Create the SQL users and run a read-only verification query:
 
 ```bash
+tdc db create-db-sql-users \
+  --db-cluster-id "$TDC_DB_CLUSTER_ID"
+
 tdc db execute-sql-statement \
   --db-cluster-id "$TDC_DB_CLUSTER_ID" \
   --read-only \
@@ -122,6 +141,13 @@ tdc db execute-sql-statement \
 ```
 
 The command executes one statement through the HTTPS SQL API and returns a result containing `ready = 1`.
+
+Clean up:
+
+```bash
+tdc db delete-db-cluster --db-cluster-id "$TDC_DB_CLUSTER_ID"
+unset TDC_DB_CLUSTER_ID
+```
 
 ## What's next
 

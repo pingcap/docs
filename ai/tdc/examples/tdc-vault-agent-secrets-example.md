@@ -5,11 +5,23 @@ summary: Store a secret, grant one field to an agent, inject it into a process, 
 
 # Delegate Filesystem Vault Secrets to an Agent
 
-This example gives an agent temporary access to one field without sharing the Filesystem owner token.
+This example gives an agent temporary access to one secret field without sharing the Filesystem owner token or the complete secret.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## The agent problem
+
+An agent might need one API endpoint or token to complete a short task. Putting the complete secret in a prompt, `.env` file, or sandbox image exposes it beyond the process and lifetime that need it. Sharing the Filesystem owner token also grants much more access than one secret field requires.
+
+## Why ordinary environment variables and files are not enough
+
+Environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. A separate cloud secret manager can provide those controls, but it requires another identity, policy, and integration path for every sandbox.
+
+## How tdc changes the workflow
+
+The Filesystem owner stores the secret once and creates a short-lived grant scoped to the required field. The agent receives only the delegated vault token and can inject the allowed value into a child process. The owner can inspect audit events and revoke the grant without rotating or exposing the Filesystem owner credential.
 
 ## Prerequisites
 

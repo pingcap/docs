@@ -5,11 +5,23 @@ summary: Create one Filesystem, securely access it from a second machine, and ve
 
 # Share a TiDB Cloud Filesystem Across Machines
 
-This example creates a Filesystem on machine A and accesses the same data from machine B without copying a tdc profile.
+This example gives agents or users on two machines one shared workspace without copying files between machine-local disks.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## The agent problem
+
+An agent can prepare source files or artifacts on machine A and continue the task on machine B, but each machine normally sees only its own disk. Copying a snapshot before every handoff adds latency, and changes made after the copy are invisible to the other machine. Concurrent handoffs can also create conflicting copies with no clear source of truth.
+
+## Why native local disks and manual synchronization are not enough
+
+Local disks do not provide a shared namespace. Commands such as `scp` and archive upload transfer point-in-time copies rather than live state, while object storage does not by itself behave like the mounted directory expected by editors, build tools, and agents.
+
+## How tdc changes the workflow
+
+Both machines select the same TiDB Cloud Filesystem. Data-plane commands and the mounted path address one remote namespace, so a write from either interface becomes visible through the other after it is flushed. Machine B needs only the Filesystem token, region code, and name; it does not need TiDB Cloud API keys or a copied profile.
 
 ## Prerequisites
 

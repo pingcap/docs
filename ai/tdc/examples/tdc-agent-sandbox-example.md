@@ -5,11 +5,23 @@ summary: Provision a Filesystem on a trusted machine and give a clean agent sand
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox
 
-This example provisions a Filesystem on a trusted machine, transfers the minimum environment to a clean sandbox, and uses tdc without copying `~/.tdc/`.
+This example gives an ephemeral coding agent a durable workspace without copying a user's complete tdc configuration into the sandbox.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## The agent problem
+
+Coding agents often start in clean, short-lived sandboxes. The local disk disappears when the sandbox is replaced, but the agent still needs previous artifacts, repository state, and files produced by other workers. Rebuilding that state wastes task time, while copying `~/.tdc/` or injecting TiDB Cloud API keys gives the sandbox control-plane credentials it does not need.
+
+## Why local storage and full cloud credentials are not enough
+
+A sandbox-local directory is fast but not durable or shared. Generic object-storage APIs require application-specific download and upload logic instead of ordinary file operations. Giving every sandbox the user's complete cloud credentials solves access at the cost of a much broader security boundary.
+
+## How tdc changes the workflow
+
+A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token, region code, and Filesystem name, and can immediately use data-plane, mount, Git, journal, and vault workflows without `tdc configure`. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
 
 ## Prerequisites
 

@@ -28,10 +28,14 @@ Alibaba Cloud currently supports only Singapore in tdc. Users cannot configure r
 
 ## Filesystem regions
 
-Filesystem endpoint availability is resolved from the hosted Drive9 region manifest. At publication time, TiDB Cloud native Filesystem mode is available for:
+Filesystem endpoint availability is resolved from the hosted Drive9 region manifest. At publication time, TiDB Cloud native Filesystem mode is available in:
 
-- `aws-us-east-1`;
-- `aws-ap-southeast-1`.
+| Cloud provider | Canonical region code |
+| --- | --- |
+| AWS | `aws-ap-southeast-1` |
+| AWS | `aws-us-east-1` |
+| AWS | `aws-us-west-2` |
+| Alibaba Cloud | `ali-ap-southeast-1` |
 
 The hosted manifest is authoritative and can change during Preview. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement appears in the manifest.
 

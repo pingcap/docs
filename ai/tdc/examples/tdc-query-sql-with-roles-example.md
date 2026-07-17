@@ -5,11 +5,23 @@ summary: Prepare tdc-managed SQL users and run read-only, read-write, and admin 
 
 # Query TiDB Cloud Starter with Explicit SQL Roles
 
-This example uses all three tdc-managed SQL roles without exposing generated passwords.
+This example lets an agent perform schema, data, and verification work while making the required privilege level explicit for every statement.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## The agent problem
+
+An agent that can inspect data often also needs to apply a migration or update a row. Giving it one administrator connection for the complete task is convenient, but a mistaken statement during an inspection step then has the authority to change or delete data. Giving it only a read-only connection prevents legitimate write and schema work.
+
+## Why one native database connection is not enough
+
+TiDB supports SQL privileges, but a conventional client session uses the privileges of the one credential used to connect. Users must create, store, and switch among credentials themselves, and an agent can silently keep using an overly privileged connection across task phases.
+
+## How tdc changes the workflow
+
+`tdc db create-db-sql-users` creates stable read-only, read-write, and admin identities and stores their credentials locally. Each `execute-sql-statement` invocation selects one role explicitly, uses the corresponding credential, and executes one statement. The agent can therefore use admin for schema changes, read-write for data changes, and read-only for verification without handling passwords directly.
 
 ## Prerequisites
 

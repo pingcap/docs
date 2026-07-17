@@ -25,17 +25,19 @@ tdc fs-git clone-git-workspace \
   --target-path /path/to/workspace/tidb
 ```
 
-For a large repository, create a blobless workspace and hydrate synchronously:
+For a large repository, create a blobless workspace and hydrate in the background:
 
 ```bash
 tdc fs-git clone-git-workspace \
   --repo-url https://github.com/pingcap/tidb.git \
   --target-path /path/to/workspace/tidb \
   --blobless \
-  --hydrate sync
+  --hydrate background
 ```
 
-`--hydrate` accepts `auto`, `background`, `sync`, or `off`.
+The command returns after registering the workspace, so the file tree becomes available while clean content and Git objects continue to hydrate. Reads before hydration finishes use Git lazy fetch for correctness. This moves most repository download work out of the agent startup path.
+
+`--hydrate` accepts `auto`, `background`, `sync`, or `off`. Use `sync` when the caller must wait for hydration before continuing, such as a deterministic benchmark.
 
 ## Hydrate an existing workspace
 

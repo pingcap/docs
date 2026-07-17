@@ -15,8 +15,15 @@ This guide covers the supported release installers, profile configuration, help 
 
 ### macOS and Linux
 
+Run the installer:
+
 ```bash
 curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
+```
+
+After installation, add tdc to the current shell and verify it:
+
+```bash
 export PATH="$HOME/.tdc/bin:$PATH"
 tdc --version
 ```
@@ -25,10 +32,17 @@ The installer places `tdc` and its `tdc-drive9` companion in `~/.tdc/bin`. Add t
 
 ### Windows
 
+Run the installer:
+
 ```powershell
 $script = "$env:TEMP\install-tdc.ps1"
 iwr https://github.com/tidbcloud/tdc/releases/latest/download/install.ps1 -OutFile $script
 powershell -ExecutionPolicy Bypass -File $script -Yes
+```
+
+After installation, add tdc to the current PowerShell session and verify it:
+
+```powershell
 $env:Path = "$HOME\.tdc\bin;$env:Path"
 tdc --version
 ```

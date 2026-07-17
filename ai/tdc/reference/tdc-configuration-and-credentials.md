@@ -43,7 +43,7 @@ The profile namespace is selected in this order:
 2. `TDC_PROFILE`;
 3. `default`.
 
-An explicit empty profile is invalid. Environment credentials do not create an `[env]` profile and do not change the selected namespace.
+An explicit empty profile is invalid.
 
 ## TiDB Cloud API credentials
 

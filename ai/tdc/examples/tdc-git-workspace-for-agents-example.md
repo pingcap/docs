@@ -1,15 +1,27 @@
 ---
 title: Prepare a Git Workspace for Agents on TiDB Cloud Filesystem
-summary: Mount a Filesystem, create a fast Git workspace and linked worktree, use Git normally, and clean up safely.
+summary: Make a large Git workspace visible quickly, hydrate clean objects in the background, and let an agent start work before the full download finishes.
 ---
 
 # Prepare a Git Workspace for Agents on TiDB Cloud Filesystem
 
-This example prepares a repository and an isolated linked worktree for an agent.
+This example removes a large repository clone from the critical path of starting an agent task.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## The agent problem
+
+An ephemeral agent normally waits for `git clone` and checkout to download a repository before it can inspect the tree or begin work. For a large monorepo, that startup delay is paid again for every replacement sandbox. The agent appears idle even when its first task needs only a small part of the repository.
+
+## Why a normal clone or partial clone is not enough
+
+A normal clone blocks until the initial object transfer and checkout finish. A native blobless partial clone reduces the first transfer, but later Git commands and file reads can still trigger many on-demand fetches on the agent's critical path. Neither approach by itself provides a shared Filesystem workspace that can be restored across agent runtimes.
+
+## How tdc changes the workflow
+
+`tdc fs-git clone-git-workspace --blobless --hydrate background` registers the Git workspace and exposes its file tree before all clean blobs finish downloading. The command returns so the agent can inspect paths and start working while tdc hydrates the clean tree and local Git object database in the background. Reads that arrive before hydration completes fall back to Git's lazy fetch for correctness. Ordinary Git remains responsible for edits, commits, fetches, and pushes.
 
 ## Prerequisites
 
@@ -26,20 +38,29 @@ tdc fs mount-file-system \
   --driver fuse
 ```
 
-## Step 2. Clone and hydrate
+## Step 2. Create the workspace and hydrate in the background
 
 ```bash
 tdc fs-git clone-git-workspace \
   --repo-url https://github.com/pingcap/tidb.git \
   --target-path /path/to/workspace/tidb \
   --blobless \
-  --hydrate sync
+  --hydrate background
 ```
 
-Verify:
+The workspace tree is now available, and hydration continues in the background. Let the agent start with ordinary commands:
 
 ```bash
+find /path/to/workspace/tidb -maxdepth 2 -type f | head
 git -C /path/to/workspace/tidb status
+```
+
+Before a deterministic benchmark or before draining the mount, you can wait for hydration explicitly:
+
+```bash
+tdc fs-git hydrate-git-workspace \
+  --target-path /path/to/workspace/tidb \
+  --timeout 30m
 ```
 
 ## Step 3. Create an agent worktree
