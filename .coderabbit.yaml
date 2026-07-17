@@ -4,7 +4,6 @@ language: en-US
 early_access: false
 
 reviews:
-  # Preserve the LOW severity threshold so documentation wording, grammar, spelling, and punctuation are reviewed.
   profile: assertive
   request_changes_workflow: false
   poem: false
