@@ -152,7 +152,7 @@ MASK_FULL(column)
 **Logic and data types**
 
 - **Logic**: replaces the entire value with a type-specific default masked value.
-- **Types**: strings, `DATE`/`DATETIME`/`TIMESTAMP`, `Duration`, and `YEAR`.
+- **Types**: strings, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, and `YEAR`.
 - **Return rules**:
     - **Strings**: returns a string of the same length, with all characters replaced by `'X'`.
     - **`DATE`/`DATETIME`/`TIMESTAMP`**: returns `1970-01-01`, preserving the original type and fractional seconds precision.
@@ -172,7 +172,7 @@ MASK_FULL(customer_id)
 -- String: hide an email address completely
 MASK_FULL(email)
 -- Input:  'alice@example.com'
--- Result: 'XXXXXXXXXXXXXXXX'
+-- Result: 'XXXXXXXXXXXXXXXXX'
 
 -- Date: replace with the default date
 MASK_FULL(birth_date)
@@ -258,7 +258,7 @@ MASK_DATE(created_at, '2020-01-01')
 **Complete example:**
 
 ```sql
--- Mask date of birth to show only the year
+-- Mask the date of birth by displaying a specified fixed date
 CREATE MASKING POLICY dob_mask ON customers(dob)
   AS CASE
       WHEN CURRENT_USER() = 'hr_admin@%' THEN dob
@@ -516,7 +516,7 @@ CREATE MASKING POLICY email_policy ON employees(email)
 -- Salary: show only to users with the salary_access role
 CREATE MASKING POLICY salary_policy ON employees(salary)
   AS CASE
-      WHEN CURRENT_ROLE() = 'salary_access' THEN salary
+      WHEN CURRENT_ROLE() = '`salary_access`@`%`' THEN salary
       ELSE NULL
     END
   ENABLE;

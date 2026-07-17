@@ -44,7 +44,7 @@ MaskingPolicyStateOpt ::=
 | `TableName` | The name of the target table. |
 | `Identifier` (in parentheses) | The name of the target column. Each column can be bound to at most one masking policy. |
 | `Expression` | The masking expression. You can use built-in masking functions such as `MASK_FULL`, `MASK_PARTIAL`, `MASK_NULL`, and `MASK_DATE`, or use a custom expression containing `CURRENT_USER()` or `CURRENT_ROLE()` to implement identity-based conditional masking. |
-| `RESTRICT ON (...)` | Optional. Restricts specific operations on the masked column to prevent the original data from being obtained indirectly through these operations. The operations that can be restricted include `INSERT INTO SELECT`, `UPDATE SELECT`, `DELETE SELECT`, and `CTAS`. |
+| `RESTRICT ON (...)` | Optional. Restricts specific operations on the masked column to prevent the original data from being obtained indirectly through these operations. The operations that can be restricted include `INSERT_INTO_SELECT`, `UPDATE_SELECT`, `DELETE_SELECT`, and `CTAS`. |
 | `ENABLE` \| `DISABLE` | Optional. Specifies whether the policy is enabled immediately after creation. The default is `ENABLE`. |
 
 ### Built-in masking functions
@@ -108,13 +108,13 @@ CREATE MASKING POLICY p_mask_ssn
 
 ### Create a masking policy with operation restrictions
 
-The following example creates a masking policy that restricts `INSERT INTO SELECT` and `CTAS` operations on the masked column:
+The following example creates a masking policy that restricts `INSERT ... SELECT` and `CREATE TABLE ... AS SELECT` operations on the masked column:
 
 ```sql
 CREATE MASKING POLICY p_mask_credit_card
   ON users(credit_card)
   AS MASK_FULL(credit_card)
-  RESTRICT ON (INSERT INTO SELECT, CTAS) ENABLE;
+  RESTRICT ON (INSERT_INTO_SELECT, CTAS) ENABLE;
 ```
 
 ### Create a conditional masking policy
@@ -124,7 +124,7 @@ The following example creates a role-based conditional masking policy. Only user
 ```sql
 CREATE MASKING POLICY p_mask_salary
   ON employees(salary)
-  AS IF(CURRENT_ROLE() IN ('hr_manager', 'ceo'), salary, MASK_NULL(salary)) ENABLE;
+  AS IF(CURRENT_ROLE() IN ('`hr_manager`@`%`', '`ceo`@`%`'), salary, MASK_NULL(salary)) ENABLE;
 ```
 
 ## MySQL compatibility

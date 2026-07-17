@@ -65,7 +65,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 ### Filter results using the WHERE clause
 
-You can also use the `WHERE` clause to filter masking policies that meet specific conditions. For example, you can view enabled masking policies on the `employee` table as follows:
+You can also use the `WHERE` clause to filter masking policies that meet specific conditions. For example, you can view enabled masking policies on the `employees` table as follows:
 
 ```sql
 SHOW MASKING POLICIES FOR employees WHERE Status = 'ENABLE';
