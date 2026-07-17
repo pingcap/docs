@@ -13,7 +13,7 @@ DM-worker is a component of TiDB Data Migration (DM) that executes tasks to dump
 - A DM-worker can perform a full export of data from the MySQL source and then transition to reading the MySQL binlog for continuous, incremental replication.
 - The DM-worker is the execution engine for tasks and subtasks received from the DM-master. It dumps data from one MySQL source instance, acts as a replication client reading the binlog events, performs data transformation and filtering, stores data in a local relay log, applies data to the downstream target TiDB, and reports the status back to the DM-master.
 - If a worker instance goes offline, DM-master can automatically reschedule its tasks to another available worker to resume the data replication. Note that this does not apply during a full export/import phase.
-- A single DM-worker process connects to **one** upstream source database at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
+- A single DM-worker process connects to **one** upstream source database instance at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
 
 > **Note:**
 >
