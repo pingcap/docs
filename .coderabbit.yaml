@@ -22,7 +22,7 @@ knowledge_base:
   code_guidelines:
     enabled: true
     filePatterns:
-      - files: .ai/shared/review-style.md
+      - files: .agents/shared/review-style.md
         applyTo: '**/*.md'
 
 chat:

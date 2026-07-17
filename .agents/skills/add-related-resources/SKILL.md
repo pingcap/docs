@@ -59,7 +59,7 @@ Do not invent values. If any required attribute cannot be found, stop and ask th
 When the user provides only a URL, first run:
 
 ```bash
-python3 .ai/skills/add-related-resources/scripts/fetch_resource_metadata.py "<url>" --lang en|zh|ja
+python3 .agents/skills/add-related-resources/scripts/fetch_resource_metadata.py "<url>" --lang en|zh|ja
 ```
 
 The script emits a JSON card draft with `type`, `title`, `link`, `imgSrc`, optional fields, and warnings. Use it as a helper, not as unquestioned truth: review warnings, verify missing fields, and ask the user before fallbacks or substitutions.
@@ -131,7 +131,7 @@ Keep the page's actual image filename, including `_en.png` images used by locali
 6. Verify formatting with:
 
    ```bash
-   python3 .ai/skills/add-related-resources/scripts/validate_related_resources.py "<target-file>"
+   python3 .agents/skills/add-related-resources/scripts/validate_related_resources.py "<target-file>"
    ```
 
 7. Fix validation errors and rerun the validator until it prints `OK`.
