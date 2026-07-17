@@ -8,7 +8,7 @@ Use this file as the entrypoint for agent work in this repository.
 
 Before making changes:
 
-1. Use `.agents/AI-README.md` as the map of the repo-local AI guidance.
+1. Use `.agents/README.md` as the map of the repo-local AI guidance.
 2. Read the relevant shared guidance in `.agents/shared/`.
 3. Use a matching skill in `.agents/skills/` when the task is workflow-specific.
 4. Keep edits minimal and scoped to the requested task.
@@ -24,11 +24,11 @@ When rules conflict, follow this priority order:
 
 ## Start here
 
-Read `.agents/AI-README.md` first when you need the current layout of repo-local AI guidance.
+Read `.agents/README.md` first when you need the current layout of repo-local AI guidance.
 
 Then read the shared guidance in `.agents/shared/` before making changes:
 
-- `.agents/AI-README.md`
+- `.agents/README.md`
 - `.agents/shared/repo-conventions.md`
 - `.agents/shared/writing-style.md`
 - `.agents/shared/translation-rules.md` when the task involves EN -> ZH translation

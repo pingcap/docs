@@ -13,7 +13,7 @@ from urllib.parse import quote
 
 
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".bmp", ".ico"}
-SKIP_PREFIXES = ("tidb-cloud/",)
+SKIP_PREFIXES = (".agents/", "tidb-cloud/","tidb-cloud-lake/","ai/")
 SKIP_FILES = {"TOC-tidb-cloud.md"}
 LABEL_EXCLUDES = (
     "size",

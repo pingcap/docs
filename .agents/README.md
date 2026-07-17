@@ -1,4 +1,4 @@
-# AI Collaboration Guide
+# Agent Collaboration Guide
 
 This directory stores repo-local guidance for AI agents working in `pingcap/docs`.
 

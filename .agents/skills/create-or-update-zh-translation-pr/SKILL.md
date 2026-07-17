@@ -96,7 +96,7 @@ Do not process every changed file the same way.
 - Deleted files: remove the matching target files directly. No AI is needed.
 - `TOC.md` and `keywords.md`: use structure-aware updates, not generic section translation.
 - Image files: copy, replace, or delete the binary files directly. Do not send image diffs to the LLM.
-- `ai` files, `tidb-cloud/` files, and `TOC-tidb-cloud-*.md` files: skip them for `docs -> docs-cn` unless the user explicitly asks otherwise.
+- `.agents/` files, `ai/` files, `tidb-cloud/` files, `tidb-cloud-lake/` files, and `TOC-tidb-cloud-*.md` files: skip them for `docs -> docs-cn` unless the user explicitly asks otherwise.
 - Large translation inputs: if the total changed source content is too large for one LLM request, split the work by file or by section batches before translating.
 
 ## Step 1. Prepare translation inputs
