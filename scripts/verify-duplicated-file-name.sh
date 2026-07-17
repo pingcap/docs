@@ -7,6 +7,7 @@ DuplicateFilename=$(
     -path './node_modules' -prune -o \
     -name '*.md' \
     ! -name '_*.md' \
+    ! -name 'README.md' \
     ! -name 'SKILL.md' \
     -print | rev | cut -d'/' -f1 | rev | sort | uniq -c -d
 )
