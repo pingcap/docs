@@ -1,0 +1,106 @@
+---
+title: Use TiDB Cloud Filesystem in an Agent Sandbox
+summary: Provision a Filesystem on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
+---
+
+# Use TiDB Cloud Filesystem in an Agent Sandbox
+
+This example provisions a Filesystem on a trusted machine, transfers the minimum environment to a clean sandbox, and uses tdc without copying `~/.tdc/`.
+
+> **Note:**
+>
+> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Prerequisites
+
+- Install and configure tdc on a trusted machine.
+- Install tdc in the sandbox. The release installer includes `tdc-drive9`.
+- Use a secure secret manager or encrypted sandbox input for token transfer.
+
+## Step 1. Provision on the trusted machine
+
+```bash
+export TDC_FS_TOKEN="$(tdc fs create-file-system \
+  --file-system-name agent-sandbox \
+  --query fs_token \
+  --output text)"
+```
+
+Record the canonical region code used by the profile, for example `aws-us-east-1`. Do not print the token.
+
+## Step 2. Inject the minimum sandbox environment
+
+Configure the sandbox secret/environment mechanism with:
+
+```bash
+TDC_FS_TOKEN=<owner-token>
+TDC_REGION_CODE=aws-us-east-1
+TDC_FS_FILE_SYSTEM_NAME=agent-sandbox
+```
+
+The sandbox does not need `TDC_PUBLIC_KEY`, `TDC_PRIVATE_KEY`, `tdc configure`, or files copied from `~/.tdc/`.
+
+## Step 3. Verify direct access
+
+In the sandbox:
+
+```bash
+printf 'sandbox ready\n' | tdc fs copy-file \
+  --from-stdin \
+  --to-remote /sandbox/status.txt
+
+tdc fs read-file --path /sandbox/status.txt
+```
+
+Expected output:
+
+```text
+sandbox ready
+```
+
+## Step 4. Optionally mount the Filesystem
+
+On Linux with FUSE:
+
+```bash
+mkdir -p /workspace
+tdc fs mount-file-system \
+  --file-system-name agent-sandbox \
+  --mount-path /workspace \
+  --driver fuse
+
+cat /workspace/sandbox/status.txt
+```
+
+On macOS, omit `--driver fuse` to use the default WebDAV path. Use FUSE only after installing macFUSE.
+
+After mounting, you can use `tdc fs-git`, `tdc fs-journal`, and owner-authorized `tdc fs-vault` commands with the same FS environment. Give agents a delegated `TDC_VAULT_TOKEN` instead of the owner token when they need only selected secret fields.
+
+## Cleanup
+
+Stop writers. For FUSE:
+
+```bash
+tdc fs drain-file-system --mount-path /workspace
+tdc fs unmount-file-system --mount-path /workspace
+```
+
+For WebDAV, close files and run only unmount. Back on the trusted machine:
+
+```bash
+tdc fs delete-file-system \
+  --file-system-name agent-sandbox \
+  --confirm-file-system-name agent-sandbox
+```
+
+## Security notes
+
+- Treat `TDC_FS_TOKEN` as an owner credential.
+- Do not place it in an image, repository, command flag, or operation log.
+- Deleting the sandbox does not delete the remote Filesystem.
+- Draining is required before deleting a FUSE sandbox when pending writes must be durable.
+
+## What's next
+
+- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

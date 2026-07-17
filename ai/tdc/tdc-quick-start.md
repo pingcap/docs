@@ -1,0 +1,130 @@
+---
+title: Get Started with TiDB Cloud CLI (tdc)
+summary: Install and configure tdc, then complete a first TiDB Cloud Starter database or Filesystem operation.
+---
+
+# Get Started with TiDB Cloud CLI (tdc)
+
+This quick start installs tdc, configures one profile, and gets a successful result from either TiDB Cloud Starter or TiDB Cloud Filesystem.
+
+> **Note:**
+>
+> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Prerequisites
+
+Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page. The key must be able to access a `tidbx_virtual` project.
+
+## Step 1. Install tdc
+
+On macOS or Linux:
+
+```bash
+curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
+export PATH="$HOME/.tdc/bin:$PATH"
+tdc --version
+```
+
+Add `export PATH="$HOME/.tdc/bin:$PATH"` to your shell profile to keep tdc available in new terminals.
+
+On Windows PowerShell:
+
+```powershell
+$script = "$env:TEMP\install-tdc.ps1"
+iwr https://github.com/tidbcloud/tdc/releases/latest/download/install.ps1 -OutFile $script
+powershell -ExecutionPolicy Bypass -File $script -Yes
+$env:Path = "$HOME\.tdc\bin;$env:Path"
+tdc --version
+```
+
+## Step 2. Configure tdc
+
+Run the interactive configuration:
+
+```bash
+tdc configure
+```
+
+Enter your API public key, private key, and a canonical region code such as `aws-us-east-1`. tdc validates the key, discovers the `tidbx_virtual` project, and saves it as the default project.
+
+Verify the configuration:
+
+```bash
+tdc organization list-projects --output text
+```
+
+## Step 3. Choose a first workflow
+
+Complete either the Filesystem workflow or the Starter database workflow.
+
+### Option A: Write and read a file
+
+Create a Filesystem and capture its owner token without displaying it:
+
+```bash
+export TDC_FS_TOKEN="$(tdc fs create-file-system \
+  --file-system-name quickstart-fs \
+  --query fs_token \
+  --output text)"
+```
+
+Write and read a file through the data plane:
+
+```bash
+printf 'hello from tdc\n' | tdc fs copy-file \
+  --file-system-name quickstart-fs \
+  --from-stdin \
+  --to-remote /hello.txt
+
+tdc fs read-file \
+  --file-system-name quickstart-fs \
+  --path /hello.txt
+```
+
+Expected output:
+
+```text
+hello from tdc
+```
+
+Clean up:
+
+```bash
+tdc fs delete-file-system \
+  --file-system-name quickstart-fs \
+  --confirm-file-system-name quickstart-fs
+unset TDC_FS_TOKEN
+```
+
+### Option B: Query a Starter database
+
+List clusters and select an active cluster ID:
+
+```bash
+tdc db list-db-clusters --output text
+export TDC_DB_CLUSTER_ID="<active-cluster-id>"
+```
+
+If the cluster does not yet have tdc-managed SQL users, create them:
+
+```bash
+tdc db create-db-sql-users --db-cluster-id "$TDC_DB_CLUSTER_ID"
+```
+
+Run a read-only verification query:
+
+```bash
+tdc db execute-sql-statement \
+  --db-cluster-id "$TDC_DB_CLUSTER_ID" \
+  --read-only \
+  --sql "SELECT 1 AS ready" \
+  --output text
+```
+
+The command executes one statement through the HTTPS SQL API and returns a result containing `ready = 1`.
+
+## What's next
+
+- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
+- [Manage TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

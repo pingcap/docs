@@ -7,10 +7,15 @@
 
 - [Get Started via Python](/ai/quickstart-via-python.md)
 - [Get Started via SQL](/ai/quickstart-via-sql.md)
+- TiDB Cloud CLI (tdc) (Preview)
+  - [Overview](/ai/tdc/tdc-overview.md)
+  - [Quick Start](/ai/tdc/tdc-quick-start.md)
 
 ## CONCEPTS
 
 - [Vector Search](/ai/concepts/vector-search-overview.md)
+- TiDB Cloud CLI (tdc) (Preview)
+  - [Concepts and Architecture](/ai/tdc/concepts/tdc-concepts-and-architecture.md)
 
 ## GUIDES
 
@@ -30,6 +35,14 @@
   - [Join Queries](/ai/guides/join-queries.md)
   - [Raw SQL Queries](/ai/guides/raw-queries.md)
   - [Transactions](/ai/guides/transactions.md)
+- TiDB Cloud CLI (tdc) (Preview)
+  - [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md)
+  - [Organization](/ai/tdc/guides/tdc-organization.md)
+  - [Starter Database](/ai/tdc/guides/tdc-starter-database.md)
+  - [Filesystem](/ai/tdc/guides/tdc-filesystem.md)
+  - [Filesystem Git](/ai/tdc/guides/tdc-filesystem-git.md)
+  - [Filesystem Journal](/ai/tdc/guides/tdc-filesystem-journal.md)
+  - [Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md)
 
 ## EXAMPLES
 
@@ -44,6 +57,14 @@
   - [RAG Application](/ai/examples/rag-with-pytidb.md)
   - [Conversational Memory](/ai/examples/memory-with-pytidb.md)
   - [Text-to-SQL](/ai/examples/text2sql-with-pytidb.md)
+- TiDB Cloud CLI (tdc) (Preview)
+  - [Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md)
+  - [Daily Workflow](/ai/tdc/examples/tdc-daily-workflow-example.md)
+  - [Query SQL with Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md)
+  - [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md)
+  - [Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md)
+  - [Journal an Agent Workflow](/ai/tdc/examples/tdc-journal-agent-workflow-example.md)
+  - [Delegate Vault Secrets](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
 
 ## INTEGRATIONS
 
@@ -84,3 +105,8 @@
 - [Performance Tuning](/ai/reference/vector-search-improve-performance.md)
 - [Limitations](/ai/reference/vector-search-limitations.md)
 - [Changelogs](/ai/reference/vector-search-changelogs.md)
+- TiDB Cloud CLI (tdc) (Preview)
+  - [CLI Reference](/ai/tdc/reference/tdc-cli-reference.md)
+  - [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+  - [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+  - [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md)

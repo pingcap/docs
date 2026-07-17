@@ -16,6 +16,13 @@ Get up and running quickly with TiDB's AI capabilities.
 | [Get Started with Python](/ai/quickstart-via-python.md) | Build your first AI application with TiDB in minutes using Python. |
 | [Get Started with SQL](/ai/quickstart-via-sql.md) | Quick start guide for vector search using SQL. |
 
+### TiDB Cloud CLI (tdc) (Preview)
+
+| Document | Description |
+| --- | --- |
+| [tdc Overview](/ai/tdc/tdc-overview.md) | Understand what tdc manages and how it uses its bundled Filesystem companion. |
+| [Get Started with tdc](/ai/tdc/tdc-quick-start.md) | Install and configure tdc, then complete a first database or Filesystem operation. |
+
 ## Concepts
 
 Understand the foundational concepts behind AI-powered search in TiDB.
@@ -23,6 +30,7 @@ Understand the foundational concepts behind AI-powered search in TiDB.
 | Document | Description |
 | --- | --- |
 | [Vector Search](/ai/concepts/vector-search-overview.md) | Comprehensive overview of vector search, including concepts, how it works, and use cases. |
+| [tdc Concepts and Architecture (Preview)](/ai/tdc/concepts/tdc-concepts-and-architecture.md) | Understand profiles, regions, credentials, SQL roles, Filesystems, and the Drive9 companion boundary. |
 
 ## Guides
 
@@ -39,6 +47,18 @@ Step-by-step guides for building AI applications with TiDB using the [`pytidb`](
 | [Auto Embedding](/ai/guides/auto-embedding.md) | Automatically generate embeddings on data insertion. |
 | [Filtering](/ai/guides/filtering.md) | Filter search results with metadata conditions. |
 
+### TiDB Cloud CLI (tdc) (Preview)
+
+| Document | Description |
+| --- | --- |
+| [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md) | Install release binaries, configure profiles, update, and uninstall tdc. |
+| [Organization](/ai/tdc/guides/tdc-organization.md) | List projects and understand virtual-project selection. |
+| [Starter Database](/ai/tdc/guides/tdc-starter-database.md) | Manage clusters, branches, SQL users, connection strings, and SQL execution. |
+| [Filesystem](/ai/tdc/guides/tdc-filesystem.md) | Manage resources, data, layers, packs, and FUSE or WebDAV mounts. |
+| [Filesystem Git](/ai/tdc/guides/tdc-filesystem-git.md) | Clone, hydrate, and manage linked Git worktrees. |
+| [Filesystem Journal](/ai/tdc/guides/tdc-filesystem-journal.md) | Record, search, and verify append-only workflow events. |
+| [Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md) | Store secrets, delegate access, audit, inject, and mount a read-only vault. |
+
 ## Examples
 
 Complete code examples and demos showcasing TiDB's AI capabilities.
@@ -51,6 +71,18 @@ Complete code examples and demos showcasing TiDB's AI capabilities.
 | [Image Search](/ai/examples/image-search-with-pytidb.md) | Multimodal image search with Jina AI embeddings. |
 | [Conversational Memory](/ai/examples/memory-with-pytidb.md) | Persistent memory for AI agents and chatbots. |
 | [Text-to-SQL](/ai/examples/text2sql-with-pytidb.md) | Convert natural language to SQL queries. |
+
+### TiDB Cloud CLI (tdc) (Preview)
+
+| Document | Description |
+| --- | --- |
+| [Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
+| [Daily Workflow](/ai/tdc/examples/tdc-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
+| [Query SQL with Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
+| [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
+| [Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md) | Prepare a mounted Git workspace and isolated linked worktree. |
+| [Journal an Agent Workflow](/ai/tdc/examples/tdc-journal-agent-workflow-example.md) | Record structured events and verify their hash chain. |
+| [Delegate Vault Secrets](/ai/tdc/examples/tdc-vault-agent-secrets-example.md) | Grant an agent temporary access to one secret field. |
 
 ## Integrations
 
@@ -75,3 +107,12 @@ Technical reference documentation for TiDB's AI and vector search features.
 | [Vector Search Index](/ai/reference/vector-search-index.md) | Create and manage vector indexes for performance. |
 | [Performance Tuning](/ai/reference/vector-search-improve-performance.md) | Optimize vector search performance. |
 | [Limitations](/ai/reference/vector-search-limitations.md) | Current limitations and constraints. |
+
+### TiDB Cloud CLI (tdc) (Preview)
+
+| Document | Description |
+| --- | --- |
+| [CLI Reference](/ai/tdc/reference/tdc-cli-reference.md) | Global flags, output, queries, dry-run, help, errors, and aliases. |
+| [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
+| [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and Preview constraints. |
+| [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
