@@ -168,6 +168,7 @@
     - Table Engines
       - [Overview](/tidb-cloud-lake/sql/table-engines.md)
       - [Fuse Engine Tables](/tidb-cloud-lake/sql/fuse-engine-tables.md)
+      - [Apache Iceberg™ Tables](/tidb-cloud-lake/sql/apache-icebergtm-tables.md)
       - [Apache Hive Tables](/tidb-cloud-lake/sql/apache-hive-tables.md)
       - [Delta Lake Engine](/tidb-cloud-lake/sql/delta-lake-engine.md)
     - System Tables
