@@ -124,7 +124,6 @@ ALTER TABLE users ADD FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD;
 CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
 ```
 
-
 ### Insert text data
 
 Inserting data into a table with a full-text index is identical to inserting data into any other tables.
@@ -265,7 +264,6 @@ Where:
 TiDB's implementation uses fixed values of `k1 = 1.2` and `b = 0.75`, which are the standard defaults for BM25 in information retrieval.
 
 The returned score is a non-negative floating-point number. A higher value indicates higher relevance to the query. Scores are not directly comparable across different datasets.
-
 
 ## Advanced example: Join search results with other tables
 
