@@ -19,9 +19,9 @@ Do not stop to ask whether to run the scripts referenced in this skill.
 
 ## Load this context first
 
-- `.ai/shared/repo-conventions.md`
-- `.ai/shared/translation-rules.md`
-- `.ai/shared/translation-terms.md`
+- `.agents/shared/repo-conventions.md`
+- `.agents/shared/translation-rules.md`
+- `.agents/shared/translation-terms.md`
 - `resources/terms.md` when terminology is uncertain
 
 ## Preconditions
@@ -78,7 +78,7 @@ Please sync https://github.com/pingcap/docs-cn/pull/12345 with source update ran
 
 ## Use the bundled scripts
 
-Prefer the scripts in `.ai/skills/create-or-update-zh-translation-pr/scripts/` over retyping long commands:
+Prefer the scripts in `.agents/skills/create-or-update-zh-translation-pr/scripts/` over retyping long commands:
 
 - `prepare_translation_inputs.py`: fetch PR and commit metadata with `gh`, apply the `gh-util.user.js` title/body/label rules, and generate `translation-input.json` plus `translation-meta.env`
 - `create_translation_branch.sh`: sync the fork base branch with upstream, create or reuse the translation branch with `gh`, and check it out locally

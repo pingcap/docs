@@ -8,9 +8,9 @@ Use this file as the entrypoint for agent work in this repository.
 
 Before making changes:
 
-1. Use `.ai/AI-README.md` as the map of the repo-local AI guidance.
-2. Read the relevant shared guidance in `.ai/shared/`.
-3. Use a matching skill in `.ai/skills/` when the task is workflow-specific.
+1. Use `.agents/AI-README.md` as the map of the repo-local AI guidance.
+2. Read the relevant shared guidance in `.agents/shared/`.
+3. Use a matching skill in `.agents/skills/` when the task is workflow-specific.
 4. Keep edits minimal and scoped to the requested task.
 5. Reuse existing wording, structure, and terminology unless there is a clear reason to change them.
 
@@ -19,29 +19,29 @@ When rules conflict, follow this priority order:
 1. Direct user instructions
 2. Repository rules in this file
 3. Task-specific instructions in the selected skill
-4. Shared guidance in `.ai/shared/`
+4. Shared guidance in `.agents/shared/`
 5. General writing preferences
 
 ## Start here
 
-Read `.ai/AI-README.md` first when you need the current layout of repo-local AI guidance.
+Read `.agents/AI-README.md` first when you need the current layout of repo-local AI guidance.
 
-Then read the shared guidance in `.ai/shared/` before making changes:
+Then read the shared guidance in `.agents/shared/` before making changes:
 
-- `.ai/AI-README.md`
-- `.ai/shared/repo-conventions.md`
-- `.ai/shared/writing-style.md`
-- `.ai/shared/translation-rules.md` when the task involves EN -> ZH translation
-- `.ai/shared/translation-terms.md` when the task involves terminology decisions for translation
+- `.agents/AI-README.md`
+- `.agents/shared/repo-conventions.md`
+- `.agents/shared/writing-style.md`
+- `.agents/shared/translation-rules.md` when the task involves EN -> ZH translation
+- `.agents/shared/translation-terms.md` when the task involves terminology decisions for translation
 
 Use `resources/terms.md` when additional product terminology context is needed.
 
 ## Use the repo skills
 
-Use the workflow-specific skills in `.ai/skills/` when they match the task:
+Use the workflow-specific skills in `.agents/skills/` when they match the task:
 
 - `review-doc-pr`: review Markdown diffs, doc PRs, wording, structure, factual accuracy, and possible cross-file impact
-- `create-or-update-zh-translation-pr`: create or update an EN -> ZH translation PR that maps an English docs change or incremental source update to `pingcap/docs-cn`, using the bundled scripts in `.ai/skills/create-or-update-zh-translation-pr/scripts/` when applicable
+- `create-or-update-zh-translation-pr`: create or update an EN -> ZH translation PR that maps an English docs change or incremental source update to `pingcap/docs-cn`, using the bundled scripts in `.agents/skills/create-or-update-zh-translation-pr/scripts/` when applicable
 - `write-update-tidb-docs`: write new TiDB documentation or update existing documentation based on code PRs from `pingcap/tidb` or other TiDB ecosystem repositories, issues, design docs, or feature descriptions
 - `docs-pr-metadata-guard`: guard PR template structure when creating or editing pull requests — version checkboxes, required sections, HTML comments, related-link fields, and cherry-pick conventions
 - `docs-issue-metadata-guard`: guard issue template structure when creating or editing issues — template selection, required fields, scope boundaries, and label hygiene
@@ -71,8 +71,8 @@ If no existing skill matches the task, follow this file plus the shared guidance
 
 When the task involves translation or translation review:
 
-- Follow `.ai/shared/translation-rules.md` and `.ai/shared/translation-terms.md`.
-- For translation PR creation or update workflows, prefer the script-backed process in `.ai/skills/create-or-update-zh-translation-pr/`.
+- Follow `.agents/shared/translation-rules.md` and `.agents/shared/translation-terms.md`.
+- For translation PR creation or update workflows, prefer the script-backed process in `.agents/skills/create-or-update-zh-translation-pr/`.
 - Prefer updating the existing translation with the smallest necessary change instead of retranslating entire sections.
 - Preserve structure, headings, lists, code blocks, links, and note/admonition semantics.
 - Reuse existing translated terminology when it is still correct.
