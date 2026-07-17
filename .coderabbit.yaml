@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: en-US
+early_access: false
+
+reviews:
+  # Preserve the LOW severity threshold so documentation wording, grammar, spelling, and punctuation are reviewed.
+  profile: assertive
+  request_changes_workflow: false
+  poem: false
+  in_progress_fortune: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    # CodeRabbit always includes the default branch. Keep target branches explicit so auto review remains enabled even if the default branch changes.
+    base_branches:
+      - '^master$'
+      - '^release-8\.5$'
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - files: .ai/shared/review-style.md
+        applyTo: '**/*.md'
+
+chat:
+  art: false
