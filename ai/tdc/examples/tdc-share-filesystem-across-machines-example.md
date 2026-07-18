@@ -34,6 +34,7 @@ Both machines select the same TiDB Cloud Filesystem. Data-plane commands and the
 ```bash
 export TDC_FS_TOKEN="$(tdc fs create-file-system \
   --file-system-name shared-workspace \
+  --wait \
   --query fs_token \
   --output text)"
 

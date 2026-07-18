@@ -34,6 +34,7 @@ A trusted machine provisions the Filesystem once. The sandbox receives only the 
 ```bash
 export TDC_FS_TOKEN="$(tdc fs create-file-system \
   --file-system-name agent-sandbox \
+  --wait \
   --query fs_token \
   --output text)"
 ```

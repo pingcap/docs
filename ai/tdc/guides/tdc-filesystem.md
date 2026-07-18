@@ -26,14 +26,18 @@ Create a resource and make it the profile default:
 ```bash
 tdc fs create-file-system \
   --file-system-name workspace \
-  --set-default
+  --set-default \
+  --wait
 ```
+
+Without `--wait`, tdc returns after Drive9 accepts provisioning. With the flag, tdc waits up to 10 minutes until the root is readable through the public Drive9 data-plane CLI. A failed wait leaves the resource and locally stored credential intact.
 
 The JSON response includes `fs_token`. Capture it without displaying the complete result:
 
 ```bash
 export TDC_FS_TOKEN="$(tdc fs create-file-system \
   --file-system-name sandbox \
+  --wait \
   --query fs_token \
   --output text)"
 ```
@@ -66,7 +70,7 @@ tdc fs delete-file-system \
   --confirm-file-system-name workspace
 ```
 
-Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and a locally registered resource; an FS token alone cannot delete the resource.
+Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and a locally registered resource; an FS token alone cannot delete the resource. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while tdc removes the selected local registry entry and credential.
 
 ## Select one of multiple Filesystems
 

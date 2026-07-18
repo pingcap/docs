@@ -66,10 +66,11 @@ tdc db delete-db-cluster \
   --dry-run
 
 tdc db delete-db-cluster \
-  --db-cluster-id "<cluster-id>"
+  --db-cluster-id "<cluster-id>" \
+  --wait
 ```
 
-tdc resolves the cluster name internally; no name-confirmation flag is required.
+tdc resolves the cluster name internally; no name-confirmation flag is required. Without `--wait`, delete returns after TiDB Cloud accepts the asynchronous request. The wait flag waits up to 12 minutes and returns when the cluster is `DELETED` or no longer accessible.
 
 ## Manage branches
 
@@ -78,14 +79,15 @@ Create and list branches:
 ```bash
 tdc db create-db-cluster-branch \
   --db-cluster-id "<cluster-id>" \
-  --db-cluster-branch-name development
+  --db-cluster-branch-name development \
+  --wait
 
 tdc db list-db-cluster-branches \
   --db-cluster-id "<cluster-id>" \
   --page-size 20
 ```
 
-Use `--page-token` to continue a paginated branch list.
+Use `--page-token` to continue a paginated branch list. Without `--wait`, branch creation returns after the request is accepted. The wait flag waits up to five minutes for `ACTIVE`.
 
 Describe and delete a branch:
 

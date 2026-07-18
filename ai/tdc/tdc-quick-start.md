@@ -77,6 +77,7 @@ Create a Filesystem and make it the default:
 tdc fs create-file-system \
   --file-system-name quickstart-fs \
   --set-default \
+  --wait \
   --output text
 ```
 
@@ -112,19 +113,9 @@ Create a Starter cluster and save its ID:
 export TDC_DB_CLUSTER_ID="$(tdc db create-db-cluster \
   --db-cluster-name quickstart-db \
   --db-cluster-type starter \
+  --wait \
   --query id \
   --output text)"
-```
-
-Wait until the cluster is active:
-
-```bash
-until [ "$(tdc db describe-db-cluster \
-  --db-cluster-id "$TDC_DB_CLUSTER_ID" \
-  --query state \
-  --output text)" = "ACTIVE" ]; do
-  sleep 5
-done
 ```
 
 Create the SQL users and run a read-only verification query:
@@ -145,7 +136,9 @@ The command executes one statement through the HTTPS SQL API and returns a resul
 Clean up:
 
 ```bash
-tdc db delete-db-cluster --db-cluster-id "$TDC_DB_CLUSTER_ID"
+tdc db delete-db-cluster \
+  --db-cluster-id "$TDC_DB_CLUSTER_ID" \
+  --wait
 unset TDC_DB_CLUSTER_ID
 ```
 
