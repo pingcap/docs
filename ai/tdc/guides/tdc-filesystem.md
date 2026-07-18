@@ -221,6 +221,88 @@ The default `--driver auto` is platform-specific. `--remote-path` exposes a subt
 | Linux | FUSE | FUSE3 and access to `/dev/fuse`; install `davfs2` for explicit WebDAV | FUSE supports drain and FUSE cache controls |
 | Windows | WebDAV | Windows WebClient service | Mount path must be a drive letter such as `X:`; FUSE and vault mount are unavailable |
 
+### Mount in Docker and Docker Compose
+
+Installing FUSE3 inside an image is not sufficient by itself. The Docker host must provide `/dev/fuse`, and the container must receive permission to perform the mount. The following Dockerfile installs the required Ubuntu package and tdc without storing any cloud or Filesystem credentials in the image:
+
+```dockerfile
+FROM ubuntu:24.04
+
+ARG TDC_VERSION=latest
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates curl fuse3 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh \
+    | sh -s -- --yes --version "${TDC_VERSION}"
+
+ENV PATH="/root/.tdc/bin:${PATH}"
+
+RUN mkdir -p /workspace
+
+CMD ["bash"]
+```
+
+Build the image, then pass the Filesystem owner token, canonical region code, and Filesystem name at runtime:
+
+```bash
+docker build -t tdc-fuse .
+
+docker run --rm -it \
+  --device /dev/fuse \
+  --cap-add SYS_ADMIN \
+  --security-opt apparmor=unconfined \
+  --env TDC_FS_TOKEN \
+  --env TDC_REGION_CODE \
+  --env TDC_FS_FILE_SYSTEM_NAME \
+  tdc-fuse
+```
+
+The three environment variables must already exist in the host shell. Inside the container, mount and use the Filesystem normally:
+
+```bash
+tdc fs mount --mount-path /workspace
+printf 'hello from Docker\n' > /workspace/hello.txt
+tdc fs drain --mount-path /workspace
+tdc fs umount --mount-path /workspace
+```
+
+Use the equivalent runtime settings in `compose.yaml`:
+
+```yaml
+services:
+  agent:
+    build:
+      context: .
+      args:
+        TDC_VERSION: latest
+    devices:
+      - /dev/fuse:/dev/fuse
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor=unconfined
+    environment:
+      TDC_FS_TOKEN: ${TDC_FS_TOKEN}
+      TDC_REGION_CODE: ${TDC_REGION_CODE}
+      TDC_FS_FILE_SYSTEM_NAME: ${TDC_FS_FILE_SYSTEM_NAME}
+    stdin_open: true
+    tty: true
+```
+
+Start an interactive container with:
+
+```bash
+docker compose run --rm agent
+```
+
+`fuse3` provides `/usr/bin/fusermount3`. If mounting reports `fusermount3: mount failed: Permission denied`, confirm that the host has `/dev/fuse` and that all required `devices`, `cap_add`, and AppArmor settings reached the container. `apparmor=unconfined` applies to AppArmor-enabled hosts such as Ubuntu and can be omitted where AppArmor is not active.
+
+> **Warning:**
+>
+> `SYS_ADMIN` and an unconfined AppArmor profile weaken container isolation. Use them only for a dedicated, trusted agent container. Rootless Docker and managed container platforms might prohibit these settings; use tdc fs data-plane commands without a mount when FUSE cannot be granted. The mount exists in the container mount namespace and disappears when the container stops, so drain and unmount before stopping a container that might have pending writes.
+
 macOS intentionally keeps WebDAV as the automatic choice even when macFUSE is installed. To use FUSE, install a supported release from the [official macFUSE site](https://macfuse.github.io/), complete any approval or restart requested by its installer, and run:
 
 ```bash
