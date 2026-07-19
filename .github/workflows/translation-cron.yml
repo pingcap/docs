@@ -38,7 +38,7 @@ env:
       ]
     }
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
-  AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
+  AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
   AI_TRANSLATOR_REF: main
 
 jobs:
@@ -75,11 +75,11 @@ jobs:
           persist-credentials: false
 
       - uses: actions/checkout@v6
-        name: Checkout ai-pr-translator
+        name: Checkout ai-markdown-translator
         with:
           repository: ${{ env.AI_TRANSLATOR_REPO }}
           ref: ${{ env.AI_TRANSLATOR_REF }}
-          path: ai-pr-translator
+          path: ai-markdown-translator
           persist-credentials: false
 
       - uses: actions/setup-python@v6
@@ -87,14 +87,14 @@ jobs:
         with:
           python-version: "3.9"
           cache: pip
-          cache-dependency-path: ai-pr-translator/scripts/requirements.txt
+          cache-dependency-path: ai-markdown-translator/scripts/requirements.txt
 
       - name: Install Python dependencies
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          pip install -r ai-pr-translator/scripts/requirements.txt
+          pip install -r ai-markdown-translator/scripts/requirements.txt
 
       - name: Resolve commit range
         id: commits
@@ -142,7 +142,7 @@ jobs:
           INDEX_FILES: ${{ env.INDEX_FILES }}
         run: |
           set -euo pipefail
-          python ai-pr-translator/scripts/resolve_cloud_source_files.py
+          python ai-markdown-translator/scripts/resolve_cloud_source_files.py
 
       - name: Run commit sync workflow
         id: sync
@@ -174,7 +174,7 @@ jobs:
           FAIL_ON_TRANSLATION_ERROR: "true"
         run: |
           set -euo pipefail
-          cd ai-pr-translator/scripts
+          cd ai-markdown-translator/scripts
           python commit_sync_workflow.py
 
       - name: Post-process translated TOCs
@@ -243,7 +243,7 @@ jobs:
         env:
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           SOURCE_BRANCH: ${{ env.SOURCE_BRANCH }}
-          FAILURE_REPORT: ${{ github.workspace }}/ai-pr-translator/scripts/temp_output/translation-failures.md
+          FAILURE_REPORT: ${{ github.workspace }}/ai-markdown-translator/scripts/temp_output/translation-failures.md
         run: |
           set -euo pipefail
 
@@ -294,7 +294,7 @@ jobs:
           body: |
             ### What is changed, added or deleted? (Required)
 
-            Translate documentation changes from `pingcap/docs` `${{ env.SOURCE_BRANCH }}` to Japanese via `ai-pr-translator` commit-diff sync.
+            Translate documentation changes from `pingcap/docs` `${{ env.SOURCE_BRANCH }}` to Japanese via `ai-markdown-translator` commit-diff sync.
 
             English commit diff:
 
