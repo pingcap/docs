@@ -88,6 +88,7 @@ The following is a sample output of querying `statements_summary`:
 >
 > - In TiDB, the time unit of fields in statement summary tables is nanosecond (ns), whereas in MySQL the time unit is picosecond (ps).
 > - Starting from v7.5.1 and v7.6.0, for clusters with [resource control](/tidb-resource-control-ru-groups.md) enabled, `statements_summary` will be aggregated by resource group, for example, the same statements executed in different resource groups will be collected as different records.
+> - Starting from v8.5.7, you can use [`tidb_stmt_summary_group_by_user`](/system-variables.md#tidb_stmt_summary_group_by_user-new-in-v857) to control whether to aggregate statement summaries by execution user. When this variable is set to `ON`, TiDB aggregates the same SQL digest executed by different users into separate records, and the `SAMPLE_USER` field of each record indicates the user who executed the statement.
 
 ## `statements_summary_history`
 
@@ -145,6 +146,8 @@ The following system variables are used to control the statement summary:
 
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
 - `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
+- `tidb_stmt_summary_group_by_user`: Determines whether to aggregate statement summaries by execution user. `1` means to aggregate by user, and `0` means not to aggregate by user. The default value is `0`. After you enable this variable, TiDB aggregates the same SQL digest executed by different users into separate rows, which might increase the number of statement summary records and memory usage. Modifying this variable clears the current in-memory statement summary data.
+- `tidb_stmt_summary_persist_evicted`: Determines whether to write statement summary records evicted by LRU to the statement summary log after you enable [statements summary persistence](#persist-statements-summary). `1` means to write, and `0` means not to write. The default value is `0`. After you enable this variable, the log contains JSON records marked with `"evicted": true`, and the log volume increases as LRU evictions become more frequent.
 
 An example of the statement summary configuration is shown as follows:
 
@@ -262,6 +265,7 @@ After statements summary persistence is enabled, the memory keeps only the curre
 >
 > - When statements summary persistence is enabled, the `tidb_stmt_summary_history_size` configuration described in the [Parameter configuration](#parameter-configuration) section will no longer take effect because the memory does not keep the history data. Instead, the following three configurations will be used to control the retention period and size of history data for persistence: [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660), [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660), and [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
 > - The smaller the value of `tidb_stmt_summary_refresh_interval`, the more immediate data is written to the disk. However, this also means more redundant data is written to the disk.
+> - Starting from v8.5.7, you can enable [`tidb_stmt_summary_persist_evicted`](/system-variables.md#tidb_stmt_summary_persist_evicted-new-in-v857) to write records evicted by LRU to the statement summary log. TiDB marks these JSON records with `"evicted": true` for downstream log consumers to identify. TiDB does not return these records as query results of `statements_summary_history` or `cluster_statements_summary_history`.
 
 </CustomContent>
 
