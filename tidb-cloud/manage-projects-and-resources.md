@@ -100,15 +100,22 @@ To create a new project, take the following steps:
 
     - If the project is created for TiDB X instances, click **Confirm**.
 
+        <CustomContent plan="starter,essential,premium,dedicated">
+
         > **Note:**
         >
         > For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+
+        </CustomContent>
+
+        <CustomContent plan="byoc">
+
+        > **Note:**
         >
-        > <CustomContent plan="byoc">
-        >
-        > For {{{ .byoc }}} instances, projects are optional. The data plane runs in your own cloud account, and BYOC environment-level settings are configured during BYOC onboarding.
-        >
-        > </CustomContent>
+        > - For {{{ .byoc }}} instances, projects are optional. The data plane runs in your own cloud account, and BYOC environment-level settings are configured during BYOC onboarding.
+        > - For {{{ .premium }}} instances, encryption is configured per instance rather than per project. After you create the instance, you can enable [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md) to add a database-layer encryption on top of the default storage-layer encryption.
+
+        </CustomContent>
 
     - If the project is created for {{{ .dedicated }}} clusters, select the **Create for Dedicated Cluster** option, configure [Customer-Managed Encryption Keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md) and [maintenance window](/tidb-cloud/configure-maintenance-window.md) for the project, and then click **Confirm**.
 
