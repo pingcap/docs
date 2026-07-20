@@ -14,7 +14,7 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
 
-<CustomContent  plan="byoc">
+<CustomContent plan="byoc">
 - [{{{ .byoc }}}](#byoc)
 </CustomContent>
 
