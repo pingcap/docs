@@ -91,8 +91,7 @@ tdc update
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name daily-workspace \
-  --confirm-file-system-name daily-workspace
+  --file-system-name daily-workspace
 
 tdc db delete-db-cluster \
   --db-cluster-id "<cluster-id>"

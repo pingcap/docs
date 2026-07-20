@@ -89,8 +89,7 @@ Before terminating an ephemeral machine:
 
 1. Commit or otherwise preserve required working-tree changes.
 2. Remove linked worktrees you no longer need.
-3. Drain the Filesystem mount.
-4. Unmount it.
+3. Unmount the Filesystem. Graceful unmount automatically drains pending FUSE work.
 
 The default coding-agent mount profile keeps `.git` and rebuildable generated files in local overlay storage. Preserve or pack that local state when it must survive machine deletion.
 

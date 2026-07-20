@@ -120,7 +120,7 @@ The companion owns:
 - FUSE and WebDAV mount processes, caches, drain, and unmount;
 - pack/unpack, Git workspace, journal, and vault semantics.
 
-A background mount leaves a long-running `tdc-drive9 mount --foreground` process. `tdc fs drain-file-system` asks that process to flush pending FUSE work, and `tdc fs unmount-file-system` stops the mount. Do not terminate a machine with unflushed writes or local-only overlay data that you need to keep.
+A background mount leaves a long-running `tdc-drive9 mount --foreground` process. `tdc fs unmount-file-system` gracefully flushes pending FUSE work and stops that process. `tdc fs drain-file-system` provides an explicit, reportable durability barrier while leaving a FUSE mount active so it can accept later writes. Do not abruptly terminate a machine with unflushed writes or local-only overlay data that you need to keep.
 
 ## What's next
 

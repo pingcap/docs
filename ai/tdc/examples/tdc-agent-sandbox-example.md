@@ -76,34 +76,32 @@ sandbox ready
 On Linux with FUSE:
 
 ```bash
-mkdir -p /workspace
+mkdir -p "$HOME/workspace"
 tdc fs mount-file-system \
   --file-system-name agent-sandbox \
-  --mount-path /workspace \
+  --mount-path "$HOME/workspace" \
   --driver fuse
 
-cat /workspace/sandbox/status.txt
+cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-On macOS, omit `--driver fuse` to use the default WebDAV path. Use FUSE only after installing macFUSE.
+Using a path under `$HOME` also avoids the default `fusermount3` AppArmor mount-path restriction on Ubuntu 26.04. On macOS, omit `--driver fuse` to use the default WebDAV path. Use FUSE only after installing macFUSE.
 
 After mounting, you can use `tdc fs-git`, `tdc fs-journal`, and owner-authorized `tdc fs-vault` commands with the same FS environment. Give agents a delegated `TDC_VAULT_TOKEN` instead of the owner token when they need only selected secret fields.
 
 ## Cleanup
 
-Stop writers. For FUSE:
+Stop writers and unmount. A graceful FUSE unmount automatically flushes and drains pending work:
 
 ```bash
-tdc fs drain-file-system --mount-path /workspace
-tdc fs unmount-file-system --mount-path /workspace
+tdc fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-For WebDAV, close files and run only unmount. Back on the trusted machine:
+Use `tdc fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. Back on the trusted machine:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name agent-sandbox \
-  --confirm-file-system-name agent-sandbox
+  --file-system-name agent-sandbox
 ```
 
 ## Security notes
@@ -111,7 +109,7 @@ tdc fs delete-file-system \
 - Treat `TDC_FS_TOKEN` as an owner credential.
 - Do not place it in an image, repository, command flag, or operation log.
 - Deleting the sandbox does not delete the remote Filesystem.
-- Draining is required before deleting a FUSE sandbox when pending writes must be durable.
+- Graceful unmount drains pending FUSE writes; deleting the sandbox without unmounting does not.
 
 ## What's next
 

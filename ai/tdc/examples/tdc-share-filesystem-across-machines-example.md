@@ -80,13 +80,7 @@ The first read proves data-plane writes are visible through the mount. The final
 
 ## Cleanup
 
-Stop writers. If the mount is FUSE:
-
-```bash
-tdc fs drain-file-system --mount-path /path/to/shared-workspace
-```
-
-Unmount either driver:
+Stop writers and unmount either driver. A graceful FUSE unmount automatically drains pending work:
 
 ```bash
 tdc fs unmount-file-system --mount-path /path/to/shared-workspace
@@ -97,15 +91,14 @@ On machine A:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name shared-workspace \
-  --confirm-file-system-name shared-workspace
+  --file-system-name shared-workspace
 ```
 
 ## Security notes
 
 - The FS token grants owner access. Transfer it as a secret, not in chat or command history.
 - Concurrent writers can overwrite the same paths; coordinate ownership at the workflow level.
-- Do not terminate a machine before pending FUSE writes are drained.
+- Do not terminate a machine before graceful unmount completes. Use an explicit drain only when you need remote durability while keeping the FUSE mount online.
 
 ## What's next
 

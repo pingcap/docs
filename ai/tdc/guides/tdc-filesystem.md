@@ -66,8 +66,7 @@ Delete a resource only after removing data you need:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name workspace \
-  --confirm-file-system-name workspace
+  --file-system-name workspace
 ```
 
 Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and a locally registered resource; an FS token alone cannot delete the resource. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while tdc removes the selected local registry entry and credential.
@@ -264,7 +263,6 @@ The three environment variables must already exist in the host shell. Inside the
 ```bash
 tdc fs mount --mount-path /workspace
 printf 'hello from Docker\n' > /workspace/hello.txt
-tdc fs drain --mount-path /workspace
 tdc fs umount --mount-path /workspace
 ```
 
@@ -301,7 +299,7 @@ docker compose run --rm agent
 
 > **Warning:**
 >
-> `SYS_ADMIN` and an unconfined AppArmor profile weaken container isolation. Use them only for a dedicated, trusted agent container. Rootless Docker and managed container platforms might prohibit these settings; use tdc fs data-plane commands without a mount when FUSE cannot be granted. The mount exists in the container mount namespace and disappears when the container stops, so drain and unmount before stopping a container that might have pending writes.
+> `SYS_ADMIN` and an unconfined AppArmor profile weaken container isolation. Use them only for a dedicated, trusted agent container. Rootless Docker and managed container platforms might prohibit these settings; use tdc fs data-plane commands without a mount when FUSE cannot be granted. The mount exists in the container mount namespace and disappears when the container stops, so wait for graceful unmount to succeed before stopping a container that might have pending writes.
 
 macOS intentionally keeps WebDAV as the automatic choice even when macFUSE is installed. To use FUSE, install a supported release from the [official macFUSE site](https://macfuse.github.io/), complete any approval or restart requested by its installer, and run:
 
@@ -325,28 +323,62 @@ tdc fs mount-file-system \
   --read-cache-ttl 30s
 ```
 
+### Ubuntu 26.04 mount paths
+
+Ubuntu 26.04 enforces an AppArmor profile for `/usr/bin/fusermount3`. The default profile allows FUSE mounts under the current user's home directory, `/mnt`, `/media`, `/tmp`, and `/run/user/<uid>`, but not directly under `/workspace`. This restriction applies to root as well as non-root users and produces an error similar to `/usr/bin/fusermount3: mount failed: Permission denied`.
+
+Prefer an allowed mount path:
+
+```bash
+mkdir -p "$HOME/workspace"
+tdc fs mount-file-system \
+  --file-system-name workspace \
+  --mount-path "$HOME/workspace"
+```
+
+For a system-level path, `/mnt/workspace` is allowed by the default profile:
+
+```bash
+sudo mkdir -p /mnt/workspace
+sudo chown "$(id -u):$(id -g)" /mnt/workspace
+tdc fs mount-file-system \
+  --file-system-name workspace \
+  --mount-path /mnt/workspace
+```
+
+If an application requires `/workspace`, add the following rules to `/etc/apparmor.d/local/fusermount3`, and then reload the profile with `sudo apparmor_parser -r /etc/apparmor.d/fusermount3`:
+
+```text
+mount fstype=@{fuse_types} options=(nosuid,nodev) options in (ro,rw,noatime,dirsync,nodiratime,noexec,sync) -> /workspace/{,**/},
+umount /workspace/{,**/},
+```
+
 The default mount profile is `coding-agent`, which keeps common development state such as dependencies, caches, generated output, and Git internals in a local overlay. Those local-only files do not survive machine deletion unless you pack or preserve the local volume. Use `--mount-profile portable` when you want automatic portable pack behavior, or `none` when you do not want the coding-agent overlay policy.
 
 ## Drain and unmount
 
-Stop writers and close open files before cleanup. For FUSE:
+Stop writers and close open files before cleanup. A normal unmount performs a graceful shutdown: the companion flushes open handles and pending FUSE write-back work, waits for its upload queues, and then exits. You do not need to run drain first:
+
+```bash
+tdc fs unmount-file-system \
+  --mount-path /path/to/workspace
+```
+
+Use drain when you need an explicit durability barrier while keeping a FUSE mount online, for example before handing the mount to another process or checking remote visibility:
 
 ```bash
 tdc fs drain-file-system \
   --mount-path /path/to/workspace \
   --timeout 30s
-
-tdc fs unmount-file-system \
-  --mount-path /path/to/workspace
 ```
 
-Drain waits for dirty handles and pending writes. It is not supported for WebDAV. `unmount-file-system` also supports `--timeout`, `--force`, `--ignore-absent`, `--pack-archive-path`, and `--no-auto-pack`.
+Drain flushes dirty handles and waits for pending writes, but the mount remains available and can accept new writes afterward. It is not supported for WebDAV. `unmount-file-system` also supports `--timeout`, `--force`, `--ignore-absent`, `--pack-archive-path`, and `--no-auto-pack`.
 
 A successful background mount writes a non-secret locator under `~/.tdc/mounts/`. Drain and unmount can use that locator from the same `HOME` without `TDC_FS_TOKEN` or `TDC_REGION_CODE`.
 
 > **Warning:**
 >
-> Do not terminate a sandbox or virtual machine while writes remain pending. Remote-committed data survives, but in-memory writes, write-back data on a deleted local disk, and coding-agent local-only files can be lost.
+> Do not terminate a sandbox or virtual machine while writes remain pending or after unmount returns a timeout or error. Remote-committed data survives, but in-memory writes, write-back data on a deleted local disk, and coding-agent local-only files can be lost.
 
 ## Unix-style aliases
 

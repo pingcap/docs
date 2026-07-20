@@ -86,11 +86,10 @@ Commit or push required changes before removing the worktree.
 tdc fs-git remove-git-worktree \
   --worktree-path /path/to/workspace/tidb-agent-task
 
-tdc fs drain-file-system --mount-path /path/to/workspace
 tdc fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Use `--force` for worktree removal only when uncommitted changes can be discarded.
+Use `--force` for worktree removal only when uncommitted changes can be discarded. Filesystem unmount performs a graceful drain automatically; use `tdc fs drain-file-system` separately only when you need to flush remote work without unmounting.
 
 ## Security and durability notes
 

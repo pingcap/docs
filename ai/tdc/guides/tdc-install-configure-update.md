@@ -123,15 +123,14 @@ Install a specific tdc release:
 tdc update --target-version v0.1.2
 ```
 
-The update command replaces both binaries in the user-owned install directory. An active Filesystem mount keeps running the already loaded companion process. To avoid mixing the old mount runtime with new CLI commands, stop writers, drain FUSE mounts, and unmount before updating:
+The update command replaces both binaries in the user-owned install directory. An active Filesystem mount keeps running the already loaded companion process. To avoid mixing the old mount runtime with new CLI commands, stop writers and unmount before updating. Graceful unmount automatically flushes and drains pending FUSE work:
 
 ```bash
-tdc fs drain-file-system --mount-path /path/to/workspace
 tdc fs unmount-file-system --mount-path /path/to/workspace
 tdc update
 ```
 
-For WebDAV, close writers and unmount; drain is FUSE-only. Installations in protected or package-manager-owned locations are not modified. Run the installer once to migrate an older `/usr/local/bin` installation to `~/.tdc/bin`.
+For WebDAV, close writers and unmount. Use the FUSE-only drain command separately only when you need a durability barrier without unmounting. Installations in protected or package-manager-owned locations are not modified. Run the installer once to migrate an older `/usr/local/bin` installation to `~/.tdc/bin`.
 
 ## Uninstall tdc
 

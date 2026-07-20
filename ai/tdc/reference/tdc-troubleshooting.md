@@ -143,6 +143,30 @@ tdc fs mount-file-system \
 
 Linux needs FUSE3 and access to `/dev/fuse`. Windows WebDAV needs the WebClient service and a drive letter such as `X:`.
 
+## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
+
+Ubuntu 26.04 applies an AppArmor profile to `fusermount3`. Its default mount-path allowlist does not include `/workspace`, so root and non-root users can both receive:
+
+```text
+/usr/bin/fusermount3: mount failed: Permission denied
+```
+
+Confirm the denial:
+
+```bash
+sudo journalctl -k --since "10 minutes ago" |
+  grep 'profile="fusermount3"'
+```
+
+An entry with `operation="mount"`, `name="/workspace/"`, and `info="failed mntpnt match"` identifies this restriction. Mount under `$HOME` or `/mnt` instead:
+
+```bash
+mkdir -p "$HOME/workspace"
+tdc fs mount-file-system --mount-path "$HOME/workspace"
+```
+
+Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md#ubuntu-2604-mount-paths).
+
 ## Mount becomes stale after a process crash
 
 If the companion is killed without graceful unmount, FUSE access can return `EIO` or `Transport endpoint is not connected`. Stop processes with open files, then try:
@@ -157,14 +181,13 @@ Use `--ignore-absent` when cleanup should succeed if no locator remains. Abrupt 
 
 ## Unmount reports busy
 
-Close editors, shells whose working directory is inside the mount, and other open file handles. For FUSE, drain before retrying:
+Close editors, shells whose working directory is inside the mount, and other open file handles, and then retry:
 
 ```bash
-tdc fs drain-file-system --mount-path /path/to/workspace --timeout 30s
 tdc fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Do not use drain for WebDAV.
+Unmount performs the graceful FUSE drain automatically. Running `drain-file-system` separately does not close file descriptors or resolve a busy mount; use it only when you need to flush pending work while leaving the mount online. Drain is not supported for WebDAV.
 
 ## An interrupted command leaves resources
 
@@ -181,7 +204,6 @@ Preview supported cleanup:
 tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --dry-run
 tdc fs delete-file-system \
   --file-system-name "<filesystem-name>" \
-  --confirm-file-system-name "<filesystem-name>" \
   --dry-run
 ```
 

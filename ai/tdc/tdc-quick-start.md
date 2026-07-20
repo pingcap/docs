@@ -101,8 +101,7 @@ Clean up:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name quickstart-fs \
-  --confirm-file-system-name quickstart-fs
+  --file-system-name quickstart-fs
 ```
 
 ### Option B: Query a Starter database

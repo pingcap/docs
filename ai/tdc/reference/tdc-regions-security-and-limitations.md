@@ -71,10 +71,13 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 
 FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. tdc does not fall back to a separate native mount implementation.
 
+Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path under `$HOME` or `/mnt`; `/workspace` requires an explicit local AppArmor rule even when tdc runs as root.
+
 ## Durability limitations
 
 - Default FUSE behavior uses local buffering and asynchronous remote work where permitted by the companion.
-- `drain-file-system` is FUSE-only.
+- A successful `unmount-file-system` gracefully flushes and drains FUSE work; a separate drain is not required first.
+- `drain-file-system` is a FUSE-only online durability barrier that leaves the mount active.
 - Abruptly killing the mount process or deleting a machine can lose uncommitted memory/write-back state.
 - The default coding-agent mount profile stores dependency trees, generated output, caches, and Git internals locally. Local-only data disappears when its disk disappears unless it is packed or otherwise preserved.
 - A running mount remains on the companion version loaded at mount time. Unmount and remount after updating tdc.
