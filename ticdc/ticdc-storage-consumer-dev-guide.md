@@ -176,3 +176,13 @@ The consumption logic is consistent. Specifically, the consumer parses the table
 After DDL events are properly processed, you can process DML events in the `{schema}/{table}/{table-version-separator}/` directory based on the specific file format (CSV or Canal-JSON) and file number.
 
 TiCDC ensures that data is replicated at least once. Therefore, there might be duplicate data. You need to compare the commit ts of the change data with the consumer checkpoint. If the commit ts is less than the consumer checkpoint, you need to perform deduplication.
+
+When processing files, a downstream consumer might read a data file before it is fully written, causing some data to fail to be read successfully. To avoid this issue, when writing a downstream consumer, read data in the following order:
+
+1. Read the `meta/CDC.index` file in the `{schema}/{table}/{table-version-separator}/` directory to obtain the name of the file that has been completely written.  
+2. For the [new TiCDC architecture](/ticdc/ticdc-architecture.md), read files in sequence whose file numbers are less than or equal to the number in that file name. For the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), read files in sequence whose file numbers are less than the number in that file name.
+
+> **Note:**
+>
+> When `scheduler.enable-table-across-nodes` is enabled in the [new TiCDC architecture](/ticdc/ticdc-architecture.md), the file name format for recording data changes changes from `CDC_{num}.{extension}` to `CDC_{uuid}_{num}.{extension}`, and the Index file name format changes from `CDC.index` to `CDC_{uuid}.index`. In this case, files with different UUIDs but the same sequence number exist in the `{schema}/{table}/{table-version-separator}/` directory. When writing a downstream consumer, refer to the order described in [Storage Sink file name changes and consumption instructions](/ticdc/ticdc-architecture.md#storage-sink-file-name-changes-and-consumption-instructions) for consumption.
+
