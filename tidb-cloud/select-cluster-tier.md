@@ -13,9 +13,11 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 - [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-<CustomContent platform="tidb-cloud" plan="byoc">
+
+<CustomContent  plan="byoc">
 - [{{{ .byoc }}}](#byoc)
 </CustomContent>
+
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
 > **Note:**
@@ -108,7 +110,7 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
 
-<CustomContent platform="tidb-cloud" plan="byoc">
+<CustomContent plan="byoc">
 
 ## {{{ .byoc }}} {#byoc}
 
