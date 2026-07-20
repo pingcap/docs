@@ -10,15 +10,24 @@ The plan determines the throughput and performance of your TiDB resource.
 
 TiDB Cloud provides the following options of plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a TiDB resource, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#starter)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
+- [{{{ .dedicated }}}](#dedicated)
 
-<CustomContent plan="byoc">
-- [{{{ .byoc }}}](#byoc)
 </CustomContent>
 
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#dedicated)
+
+</CustomContent>
 
 > **Note:**
 >
@@ -126,7 +135,7 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 
 </CustomContent>
 
-## TiDB Cloud Dedicated
+## TiDB Cloud Dedicated {#dedicated}
 
 TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
