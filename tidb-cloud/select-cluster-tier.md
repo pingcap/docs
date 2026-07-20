@@ -13,6 +13,11 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 - [TiDB Cloud Starter](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
+
+<CustomContent plan="byoc">
+- [{{{ .byoc }}}](#byoc)
+</CustomContent>
+
 - [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
 
 > **Note:**
@@ -104,6 +109,22 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Zero-infrastructure management**: offers a fully managed service that eliminates manual scaling, patching, and capacity planning.
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
+
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} is designed for enterprise workloads that require stronger control over data location, cloud resources, network boundaries, and compliance posture. With {{{ .byoc }}}, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account.
+
+{{{ .byoc }}} provides a managed TiDB Cloud experience with the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, storage, networking, and data in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup and restore, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+- **Cloud-account-level security controls**: lets you apply your own cloud policies, network controls, audit logging, and compliance controls to the BYOC data plane.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated
 
