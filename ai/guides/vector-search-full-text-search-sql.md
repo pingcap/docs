@@ -74,7 +74,7 @@ The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
 - `MULTILINGUAL`: supports multiple languages, including English, Chinese, Japanese, and Korean.
 
-### Managing full-text indexes
+### Manage full-text indexes
 
 When creating a full-text index, the index name is optional. If not specified, TiDB automatically uses the first column name of the index as the index name.
 
@@ -105,7 +105,7 @@ WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
 ALTER TABLE stock_items DROP INDEX title;
 ```
 
-#### Specifying an index name
+#### Specify an index name
 
 In both `CREATE TABLE` and `ALTER TABLE` syntax, you can specify a name for the index after `FULLTEXT INDEX` or `FULLTEXT KEY`:
 
