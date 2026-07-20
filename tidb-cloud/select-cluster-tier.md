@@ -15,7 +15,7 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 - [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-- [{{{ .dedicated }}}](#dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 
 </CustomContent>
 
@@ -25,7 +25,7 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
 - [{{{ .byoc }}}](#byoc)
-- [{{{ .dedicated }}}](#dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 
 </CustomContent>
 
@@ -135,7 +135,7 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 
 </CustomContent>
 
-## {{{ .dedicated }}} {#dedicated}
+## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
