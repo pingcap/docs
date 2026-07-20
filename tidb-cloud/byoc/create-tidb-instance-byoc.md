@@ -43,11 +43,11 @@ If you have the required permissions, you can create a {{{ .byoc }}} instance as
 
 6. In the **Capacity** area, set the maximum number of Request Capacity Units (RCUs) for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
-7. For {{{ .byoc }}} instances, the high availability mode is determined by the BYOC deployment configuration. If your BYOC environment is deployed in Regional mode, the instance uses Regional high availability. If your BYOC environment is deployed in Zonal mode, the instance uses Zonal high availability. The high availability mode is not configurable when you create an instance. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
+7. For {{{ .byoc }}} instances, the BYOC deployment configuration determines the high availability mode. If you deploy your BYOC environment in Regional mode, the instance uses Regional high availability. If you deploy your BYOC environment in Zonal mode, the instance uses Zonal high availability. You cannot configure the high availability mode when you create an instance. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
 8. Click **Create**.
 
-    The instance creation process begins. Provisioning time can vary depending on the selected region, capacity, and cloud provider.
+    The instance creation process begins. Provisioning time can vary depending on the region, capacity, and cloud provider you select.
 
 ## What's next
 
