@@ -194,12 +194,6 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 In an `EXPLAIN` statement, you can use the `/*+ HYPO_INDEX(...) */` SQL comment syntax to define a hypothetical index for the query planner to consider. This approach enables the Index Advisor to evaluate how the specified index would affect query plans and their estimated costs without physically creating the index.
 
-> **Note:**
-
->
-
-> The `/*+ HYPO_INDEX(...) */` comment is dedicated to hypothetical indexes and currently takes effect only in `EXPLAIN` statements.
-
 For example, the `/*+ HYPO_INDEX(t, idx_ab, a, b) */` comment instructs the query planner to create a hypothetical index named `idx_ab` on table `t` for columns `a` and `b`. The planner generates the index's metadata but does not physically materialize it. If applicable, the planner considers this hypothetical index during query optimization without incurring the costs associated with index creation.
 
 The `RECOMMEND INDEX` advisor uses hypothetical indexes for "What-If" analysis to evaluate potential benefits of different indexes. You can also use hypothetical indexes directly to experiment with index designs before proceeding to create them.
