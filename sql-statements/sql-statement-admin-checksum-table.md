@@ -12,7 +12,7 @@ category: reference
 
 [チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 、テーブルのデータと`table_id`などのプロパティに基づいて計算されます。つまり、同じデータを持ちながらも`table_id`値が異なる 2 つのテーブルでは、チェックサムは異なります。
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 、 [TiDB Data Migration](/dm/dm-overview.md) 、または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してテーブルをインポートした後、データの整合性を検証するためにデフォルトで`ADMIN CHECKSUM TABLE <table>`実行されます。
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 、 [TiDB Data Migration](/dm/dm-overview.md) 、または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してテーブルをインポートした後、データの整合性を検証するためにデフォルトで`ADMIN CHECKSUM TABLE <table>`が実行されます。
 
 </CustomContent>
 
