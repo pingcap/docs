@@ -59,4 +59,3 @@ If you want to perform Point-in-time Restore, note the following:
 TiDB Cloud supports restoring data from backup snapshots or point-in-time recovery to a new cluster or instance. Restore operations help you recover from accidental data loss, data corruption, or application errors.
 
 For {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> instances, you can restore data to a new instance. You can restore from automatic backups, manual backups, or supported external cloud storage backups. PITR is supported only for automatic backups and is not supported for manual backups.
-
