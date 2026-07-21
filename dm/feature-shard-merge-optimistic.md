@@ -21,7 +21,7 @@ DMは、シャーディングDDLと呼ばれるシャーディングテーブル
 
 ## 楽観的モードのコンフィグレーション {#configuration-of-the-optimistic-mode}
 
-楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。`strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)参照してください。
+楽観的モードを使用するには、タスク設定ファイルの`shard-mode`項目を`optimistic`に指定します。`strict-optimistic-shard-mode`の設定を有効にすると、楽観的モードの動作を制限できます。詳細なサンプル設定ファイルについては、 [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## 制限 {#restrictions}
 

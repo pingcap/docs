@@ -125,7 +125,7 @@ TIMESTAMP[(fsp)]
 
 #### タイムゾーンの処理 {#timezone-handling}
 
-`TIMESTAMP`保存する場合、TiDB は`TIMESTAMP`値を現在のタイムゾーンから UTC タイムゾーンに変換します。`TIMESTAMP`取得する場合、TiDB は保存されている`TIMESTAMP`値を UTC タイムゾーンから現在のタイムゾーンに変換します（注: `DATETIME`この方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンですが、環境変数`time_zone`で変更できます。
+`TIMESTAMP`を保存する場合、TiDB は`TIMESTAMP`値を現在のタイムゾーンから UTC タイムゾーンに変換します。`TIMESTAMP`を取得する場合、TiDB は保存されている`TIMESTAMP`値を UTC タイムゾーンから現在のタイムゾーンに変換します（注: `DATETIME`この方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンですが、環境変数`time_zone`で変更できます。
 
 > **Warning:**
 >
@@ -177,7 +177,7 @@ CREATE TABLE t1 (
 
 `DATETIME`と`TIMESTAMP`値は、マイクロ秒単位の精度で最大 6 桁の小数部を持つことができます`DATETIME`型または`TIMESTAMP`型の列では、小数部は破棄されずに保存されます。小数部がある場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で表され、小数部の範囲は 000000 から 999999 です。小数部と残りの部分を区切るために小数点を使用する必要があります。
 
--   小数精度をサポートする列を定義するには`type_name(fsp)`使用します。`type_name` `TIME` 、 `DATETIME`または`TIMESTAMP`になります。例えば、
+-   小数精度をサポートする列を定義するには`type_name(fsp)`を使用します。`type_name` `TIME` 、 `DATETIME`または`TIMESTAMP`になります。例えば、
 
     ```sql
     CREATE TABLE t1 (t TIME(3), dt DATETIME(6));

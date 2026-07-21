@@ -98,7 +98,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 `SHARD_ROW_ID_BITS`の値は動的に変更できます。変更された値は、新しく書き込まれたデータにのみ適用されます。
 
-`CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。`NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS` `CLUSTERED`が使用できます。9型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+`CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。`NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`機能が使用できます。`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
 

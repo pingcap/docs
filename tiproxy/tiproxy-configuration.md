@@ -65,7 +65,7 @@ SQL ポートのコンフィグレーション。
 -   デフォルト値: `15`
 -   ホットリロードのサポート: はい
 -   単位: 秒
--   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。`graceful-close-conn-timeout` `graceful-wait-before-shutdown`後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
+-   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。`graceful-close-conn-timeout`は`graceful-wait-before-shutdown`の後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
 
 #### `max-connections` {#max-connections}
 
@@ -101,7 +101,7 @@ HTTP ゲートウェイの構成。
 
 -   デフォルト値: `0.0.0.0:3080`
 -   ホットリロードのサポート: いいえ
--   APIゲートウェイアドレス。`ip:port`指定できます。
+-   APIゲートウェイアドレス。`ip:port`を指定できます。
 
 #### `proxy-protocol` {#proxy-protocol}
 

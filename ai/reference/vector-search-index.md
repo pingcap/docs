@@ -148,7 +148,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 ## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。`TableFullScan`キュータの`operator info`列に`annIndex:`表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
+クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。`TableFullScan`エグゼキュータの`operator info`列に`annIndex:`が表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
 
 **例: ベクトルインデックスが使用される**
 

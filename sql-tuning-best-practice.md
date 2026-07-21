@@ -161,7 +161,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
 上の図では、プロトコルレイヤーの右側に TiDBサーバーのオプティマイザーがあり、次のように SQL ステートメントを処理します。
 
 1.  SQL ステートメントはプロトコルレイヤーを介して SQL オプティマイザーに到達し、抽象構文ツリー (AST) に解析されます。
-2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。1文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。`Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
+2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。この文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。`Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
 3.  クエリが`Point Get`でない場合、AST は論理変換され、TiDB は特定のルールに基づいて SQL を論理的に書き換えます。
 4.  論理変換後、TiDB はコストベースの最適化を通じて AST を処理します。
 5.  コストベースの最適化では、オプティマイザーは統計を使用して適切な演算子を選択し、物理的な実行プランを生成します。

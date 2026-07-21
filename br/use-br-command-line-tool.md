@@ -60,7 +60,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 -   `--concurrency` : バックアップタスクを複数のリクエストに分割し、同じ TiKV ノードに同時に送信する方法を制御します。このパラメータは主にBRから TiKV へのリクエスト分割の粒度に影響し、全体的なバックアップスループットを直接決定するものではありません。ほとんどの場合、この値を変更する必要はありません。バックアップパフォーマンスを向上させるには、代わりに[`tikv.backup.num-threads`](/tikv-configuration-file.md#num-threads-1)調整する必要があります。
 -   `--pitr-concurrency` : ログ復元中の同時タスクの数。
 -   `--tikv-max-restore-concurrency` : スナップショット復元中の TiKV ノードあたりの同時タスクの最大数。
--   `--compression` : バックアップファイルの生成に使用する圧縮アルゴリズムを決定します。2、4、6 `lz4`サポートし、デフォルトは`zstd`です（通常は変更する必要`zstd`ありません）。異なる圧縮アルゴリズムの選択に関するガイダンスについては、 [この文書](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md)を`snappy`してください。
+-   `--compression` : バックアップファイルの生成に使用する圧縮アルゴリズムを決定します。`lz4` 、 `snappy` 、 `zstd`をサポートし、デフォルトは`zstd`です（通常は変更する必要はありません）。異なる圧縮アルゴリズムの選択に関するガイダンスについては、 [この文書](https://github.com/EighteenZi/rocksdb_wiki/blob/master/Compression.md)を参照してください。
 -   `--compression-level` : バックアップに選択した圧縮アルゴリズムに対応する圧縮レベルを設定します。`zstd`のデフォルトの圧縮レベルは 3 です。ほとんどの場合、このオプションを設定する必要はありません。
 
 ## フルバックアップのコマンド {#commands-of-full-backup}

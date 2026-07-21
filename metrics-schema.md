@@ -138,7 +138,7 @@ SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 ```
 
 -   `time` : 監視項目の時間。
--   `instance`と`sql_type` : `tidb_query_duration`監視項目のラベル。`instance`監視アドレスを意味します。`sql_type`実行された SQL 文の種類を意味します。
+-   `instance`と`sql_type` : `tidb_query_duration`監視項目のラベル。`instance`は監視アドレスを意味します。`sql_type`は実行された SQL 文の種類を意味します。
 -   `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。例えば、 `quantile = 0.9` P90の時間をクエリすることを意味します。
 -   `value` : 監視項目の値。
 

@@ -192,7 +192,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
--   `max-merge-region-keys`リージョンマージのキー数の上限を制御します。`regionKeyCount`指定された値を超える場合、PD は隣接するリージョンとマージしません。
+-   `max-merge-region-keys`はリージョンマージのキー数の上限を制御します。`regionKeyCount`が指定された値を超える場合、PD は隣接するリージョンとマージしません。
 
     ```bash
     config set max-merge-region-keys 50000 // Set the upper limit on keyCount to 50000
