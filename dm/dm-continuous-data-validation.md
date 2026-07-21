@@ -195,7 +195,7 @@ dmctl --master-addr=127.0.0.1:8261 validation start --start-time 2021-10-21T00:0
 
 dmctl は 3 つのエラー処理コマンドを提供します。
 
--   `clear-error` : エラー行をクリアします。2 コマンド`show-error`実行すると、エラー行は表示されなくなります。
+-   `clear-error` : エラー行をクリアします。`show-error`コマンドを実行すると、エラー行は表示されなくなります。
 
         Usage:
           dmctl validation clear-error <task-name> <error-id|--all> [flags]

@@ -29,7 +29,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 #### `IMPORT INTO` {#import-into}
 
-`IMPORT INTO`タスクと他のビジネスワークロードは、TiDB リソースを共有したり、異なるタイミングで利用したりすることで、TiDB リソースを最大限に活用できます。3 タスクのパフォーマンスと安定性を維持しながら、ビジネスワークロードの安定した運用を確保するために、 `IMPORT INTO`タスクにデータインポート専用の[特定のTiDBノード](/system-variables.md#tidb_service_scope-new-in-v740)を指定することができ`IMPORT INTO` 。
+`IMPORT INTO`タスクと他のビジネスワークロードは、TiDB リソースを共有したり、異なるタイミングで利用したりすることで、TiDB リソースを最大限に活用できます。`IMPORT INTO`タスクのパフォーマンスと安定性を維持しながら、ビジネスワークロードの安定した運用を確保するために、データインポート用に`IMPORT INTO`専用の[特定のTiDBノード](/system-variables.md#tidb_service_scope-new-in-v740)を指定することができます。
 
 [TiDB グローバルソート](/tidb-global-sort.md)使用する場合、大容量のローカルディスクをマウントする必要はありません。TiDB Global Sort は Amazon S3 をstorageとして使用できます。インポートタスクが完了すると、グローバルソート用に Amazon S3 に保存された一時データは自動的に削除され、ストレージコストを節約できます。
 

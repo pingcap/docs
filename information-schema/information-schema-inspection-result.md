@@ -7,7 +7,7 @@ summary: INSPECTION_RESULT` 診断結果テーブルを確認します。
 
 TiDB には、システム内の障害や隠れた問題を検出するための診断ルールがいくつか組み込まれています。
 
-`INSPECTION_RESULT`診断テーブルは、問題を迅速に発見し、手作業の繰り返しを削減するのに役立ちます。3 ステートメント`select * from information_schema.inspection_result`使用して、内部診断をトリガーできます。
+`INSPECTION_RESULT`診断テーブルは、問題を迅速に発見し、手作業の繰り返しを削減するのに役立ちます。`select * from information_schema.inspection_result`ステートメントを使用して、内部診断をトリガーできます。
 
 > **Note:**
 >

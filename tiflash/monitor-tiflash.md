@@ -38,7 +38,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 ## コプロセッサー {#coprocessor}
 
 -   要求 QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ要求の数。1 `batch`バッチ要求の数です。3 `batch_cop`バッチ要求内のコプロセッサ要求の数です。5 `cop`コプロセッサ インターフェイスを介して直接送信されたコプロセッサ要求の数です。7 `cop_dag`すべてのコプロセッサ要求内の DAG 要求の数です。9 `super_batch`スーパー バッチ機能を有効にするための要求の数です。
--   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。1 `table_scan`テーブル スキャン Executor です。3 は選択 Executor です`selection` `aggregation`集約 Executor です`top_n`は`TopN` Executor です`limit`制限 Executor です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブル スキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
 -   リクエスト期間: コプロセッサリクエストを処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサリクエストを受信してからリクエストへの応答が完了するまでの期間です。
 -   エラー QPS: コプロセッサ要求を処理するすべてのTiFlashインスタンスのエラー数。1 `meet_lock`読み取りデータがロックされていることを意味します。3 `region_not_found`リージョンが存在しないことを意味します。5 `epoch_not_match`読み取りリージョンエポックがローカル エポックと一致していないことを意味します。7 `kv_client_error` TiKV との通信でエラーが返されたことを意味します`internal_error`はTiFlashの内部システム エラーです。11 `other`その他のタイプのエラーです。
 -   リクエスト処理期間：すべてのTiFlashインスタンスがコプロセッサリクエストを処理する期間。処理時間は、コプロセッサリクエストの実行開始から完了までです。

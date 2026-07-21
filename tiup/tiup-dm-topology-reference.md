@@ -63,7 +63,7 @@ global:
 
 ### `server_configs` {#server-configs}
 
-`server_configs` `server_configs`サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 セクションと同様に、 `global`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。6 `server_configs`は主に以下のフィールドが含まれます。
+`server_configs`は、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。`global`セクションと同様に、 `server_configs`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。`server_configs`には主に以下のフィールドが含まれます。
 
 -   `master` : DMマスターサービスに関連する設定。サポートされているすべての設定項目については、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)参照してください。
 -   `worker` : DM ワーカー サービスに関連する構成。サポートされているすべての構成項目については、 [DMワーカーコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)参照してください。
