@@ -85,6 +85,23 @@ Read-only commands reject `--dry-run`. Dry-run is not a general global simulatio
 
 ## Help and version forms
 
+Running `tdc` without a command returns exit code `2` and prints a compact command-tree synopsis to stderr:
+
+```text
+tdc [ERROR]: the following arguments are required: command
+
+The TiDB Cloud Command Line Interface is a unified tool to manage your TiDB Cloud Filesystem (FS) and Starter services.
+
+usage: tdc <command> <subcommand> [<subcommand> ...] [parameters]
+To see help information, you can run:
+
+  tdc help
+  tdc <command> help
+  tdc <command> <subcommand> help
+```
+
+Use an explicit help form to display commands and flags:
+
 ```bash
 tdc help
 tdc db help
