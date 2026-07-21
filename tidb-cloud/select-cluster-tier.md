@@ -10,10 +10,24 @@ The plan determines the throughput and performance of your TiDB resource.
 
 TiDB Cloud provides the following options of plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a TiDB resource, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#starter)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
 
 > **Note:**
 >
@@ -54,7 +68,7 @@ For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter 
 
 For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
 
-You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
+You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved.
 
 ## {{{ .essential }}} {#essential}
 
@@ -104,6 +118,22 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Zero-infrastructure management**: offers a fully managed service that eliminates manual scaling, patching, and capacity planning.
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
+
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} is designed for enterprise workloads that require stronger control over data location, cloud resources, network boundaries, and compliance posture. With {{{ .byoc }}}, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account.
+
+{{{ .byoc }}} provides a managed TiDB Cloud experience with the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, storage, networking, and data in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup and restore, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+- **Cloud-account-level security controls**: lets you apply your own cloud policies, network controls, audit logging, and compliance controls to the BYOC data plane.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated
 

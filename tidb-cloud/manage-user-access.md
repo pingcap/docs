@@ -137,7 +137,8 @@ At the project level, TiDB Cloud defines four roles, in which `Project Owner` ca
 | Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all {{{ .starter }}} instances in the project. | ✅ | ❌ | ❌ | ❌ |
 | Manage resource operations in the project, such as creating, modifying, moving, and deleting instances or clusters supported by the project type. | ✅ | ❌ | ❌ | ❌ |
 | Manage branches for {{{ .starter }}} and {{{ .essential }}} instances in the project, such as branch creation, connection, and deletion. | ✅ | ❌ | ❌ | ❌ |
-| Manage resource data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ | ❌ |
+| Manage resource data such as data import, data backup, and data migration. | ✅ | ✅ | ❌ | ❌ |
+| Restore an instance or cluster from a backup as a new resource. | ✅ | ❌ | ❌ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ | ❌ |
 | Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ | ❌ |
 | View resource data using [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md), if supported by the resource type. | ✅ | ✅ | ✅ | ❌ |
