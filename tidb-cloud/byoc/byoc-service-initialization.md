@@ -1,21 +1,17 @@
 ---
-title: Create a TiDB Cloud BYOC Instance
+title: Create Your First TiDB Cloud BYOC Instance
 summary: This document outlines the process for creating a TiDB Cloud BYOC instance and setting up secure access.
 ---
 
-# Create a TiDB Cloud BYOC Instance
+# Create Your First TiDB Cloud BYOC Instance
 
-Following the successful deployment of your BYOC infrastructure, the next phase involves creating your first database instance and establishing secure administrative access channels.
+After deploying your BYOC infrastructure, create your first {{{ .byoc }}} instance and configure secure administrative access.
 
-## Create TiDB Instance
-
-### Create a new TiDB Instance
+## Create a BYOC instance
 
 You can now provision TiDB instances directly via the TiDB Cloud Console.
 
-1. Initiate instance creation. Log in to the [TiDB Cloud Console](https://tidbcloud.com/) and follow the standard workflow to create a new instance.
-
-    <!--To confirm: whether to add image-->
+1. Initiate instance creation. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow the [BYOC instance creation workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance.
 
 2. Select the region and specifications that match your workload requirements.
 
@@ -24,25 +20,25 @@ You can now provision TiDB instances directly via the TiDB Cloud Console.
 
 3. Consult with your TiDB Cloud representative to determine the appropriate Request Unit (RU) settings for your initial connectivity and functional tests. They will recommend a configuration based on your specific testing requirements.
 
-### Restore a new instance from Amazon S3
+## Restore data from Amazon S3 to your new instance
 
-After successfully preparing your backup file in Amazon S3, you can proceed to restore the data into your newly created TiDB Cloud BYOC instance.
+After preparing your backup file in Amazon S3, you can proceed to restore the data to your newly created TiDB Cloud BYOC instance.
 
-1. **Configure Amazon S3 Access (AK/SK).**
+1. Configure Amazon S3 Access (AK/SK).
 
     To allow TiDB Cloud to read your S3 backup, you must configure external storage access by generating an AWS Access Key ID and Secret Access Key (AK/SK) with the appropriate S3 read permissions.
 
-    Follow the detailed instructions here: [Configure Amazon S3 access using an AWS Access Key](https://docs-preview.pingcap.com/tidbcloud/configure-external-storage-access/#configure-amazon-s3-access-using-an-aws-access-key).
+    For detailed instructions, see [Configure Amazon S3 access using an AWS Access Key](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-an-aws-access-key).
 
-2. **Execute the Restore Process.**
+2. Execute the Restore Process.
 
     Once the access keys are configured, you can initiate the restore job from the TiDB Cloud Console.
 
-    For step-by-step restoration procedures, refer to [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
+    For step-by-step restoration procedures, see [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
 
-## (Optional) Deploy secure access solution (bastion host)
+## Configure secure administrative access
 
-To enable TiDB Support to assist with troubleshooting and observability, a secure access channel must be established. This is achieved by deploying a hardened Bastion Host within your VPC that connects via **Tailscale** (a secure VPN protocol).
+To enable TiDB Cloud Support to assist with troubleshooting and observability, a secure access channel must be established. This is achieved by deploying a hardened Bastion Host within your VPC that connects via **Tailscale** (a secure VPN protocol).
 
 > **Note:**
 >
