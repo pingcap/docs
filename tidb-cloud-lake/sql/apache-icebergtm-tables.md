@@ -5,8 +5,6 @@ summary: Learn how to connect TiDB Cloud Lake to Apache Iceberg catalogs and que
 
 # Apache Iceberg™ Tables
 
-## Overview
-
 {{{ .lake }}} can connect to [Apache Iceberg™](https://iceberg.apache.org/) catalogs so that you can query Iceberg tables without loading their data into Fuse tables. You can also create and write Iceberg tables when the connected catalog supports write operations.
 
 ## When to Use Iceberg
