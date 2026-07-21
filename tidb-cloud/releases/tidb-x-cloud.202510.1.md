@@ -5,11 +5,11 @@ summary: Learn about the features for the TiDB-X-CLOUD.202510.1 kernel.
 
 # TiDB-X-CLOUD.202510.1 Release Notes
 
-Release date: April 28, 2026
+**Release date**: April 28, 2026
 
-Applicable TiDB Cloud plan: {{{ .premium }}}
+**Applicable TiDB Cloud plan**: {{{ .premium }}}
 
-TiDB X kernel version: `TiDB-X-CLOUD.202510.1`
+**TiDB X kernel version**: `TiDB-X-CLOUD.202510.1`
 
 {{{ .premium }}} is available in public preview starting April 28, 2026, using the `TiDB-X-CLOUD.202510.1` kernel.
 
