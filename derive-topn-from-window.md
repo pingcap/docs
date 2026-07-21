@@ -89,7 +89,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY value) AS rownumber FR
 
 ### PARTITION BYを使用したウィンドウ関数 {#window-functions-with-partition-by}
 
-> **注記：**
+> **Note:**
 >
 > `PARTITION BY`を含むウィンドウ関数の場合、パーティション列が主キーのプレフィックスであり、主キーがクラスター化インデックスである場合にのみ最適化ルールが有効になります。
 

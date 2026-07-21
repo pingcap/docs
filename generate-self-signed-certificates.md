@@ -5,7 +5,7 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 # 証明書を生成する {#generate-self-signed-certificates}
 
-> **注記：**
+> **Note:**
 >
 > クライアントとサーバー間の TLS を有効にするには、 `auto-tls`設定するだけです。
 

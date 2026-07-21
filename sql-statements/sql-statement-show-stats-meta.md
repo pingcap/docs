@@ -19,7 +19,7 @@ summary: TiDB データベースの SHOW STATS_META の使用法の概要。
 | 行数       | 合計行数            |
 | 最終分析時間   | テーブルが最後に分析されたとき |
 
-> **注記：**
+> **Note:**
 >
 > `update_time` 、TiDBがDML文に従って`modify_count`と`row_count`フィールドを更新したときに更新されます。したがって、 `update_time` `ANALYZE`文の最終実行時刻ではありません。
 

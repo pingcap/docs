@@ -17,7 +17,7 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-1-v650.png)
 
-    > **注記：**
+    > **Note:**
     >
     > セキュリティ上の理由により、共有セッションを再度共有することはできません。
 
@@ -35,7 +35,7 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-3-v650.png)
 
-    > **警告：**
+    > **Warning:**
     >
     > 認証コードは安全に保管し、信頼できない人に送らないでください。そうしないと、あなたの許可なくTiDB Dashboardにアクセスして操作できるようになります。
 

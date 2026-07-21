@@ -7,7 +7,7 @@ summary: TiDBにおけるCREATE PLACEMENT POLICYの使用方法。
 
 `CREATE PLACEMENT POLICY`後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -49,7 +49,7 @@ AdvancedPlacementOption ::=
 
 ## 例 {#examples}
 
-> **注記：**
+> **Note:**
 >
 > クラスターで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >

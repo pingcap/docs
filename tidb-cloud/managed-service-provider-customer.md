@@ -22,7 +22,7 @@ TiDB Cloudコンソールでのその他の日常的な操作は、直接のTiDB
 
 ## 直接のTiDB Cloudアカウントから MSP 顧客アカウントに移行する {#migrate-from-a-direct-tidb-cloud-account-to-an-msp-customer-account}
 
-> **ヒント：**
+> **Tip:**
 >
 > 直接顧客とは、 TiDB Cloudを購入し、PingCAP から直接請求書を支払うエンド カスタマーです。
 

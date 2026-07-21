@@ -62,7 +62,7 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 | TiDB Cloud Serverless | `u1@pingcap.com`                      | `{user_name_prefix}.u1@pingcap.com`  |
 | TiDB Cloud Serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9` |
 
-> **注記：**
+> **Note:**
 >
 > 上記の表の`{user_name_prefix}`は、 TiDB Cloud Serverless クラスターを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Serverless クラスターの「 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 

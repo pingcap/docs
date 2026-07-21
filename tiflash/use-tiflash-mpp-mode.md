@@ -60,7 +60,7 @@ set @@session.tidb_enforce_mpp=1;
 
 </CustomContent>
 
-> **注記：**
+> **Note:**
 >
 > `tidb_enforce_mpp=1`有効になると、TiDB オプティマイザはコスト見積もりを無視して MPP モードを選択します。ただし、他の要因によって MPP モードがブロックされる場合、TiDB は MPP モードを選択しません。これらの要因には、 TiFlashレプリカが存在しない、 TiFlashレプリカのレプリケーションが未完了である、MPP モードでサポートされていない演算子または関数を含むステートメントなどがあります。
 >

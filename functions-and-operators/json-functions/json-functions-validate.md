@@ -7,7 +7,7 @@ summary: JSONドキュメントを検証するJSON関数について学びまし
 
 TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://dev.mysql.com/doc/refman/8.0/en/json-validation-functions.html)のほとんどをサポートしています。
 
-> **注記：**
+> **Note:**
 >
 > 現在、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

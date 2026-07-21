@@ -185,6 +185,6 @@ results = table.query(
 
 `AND` 、 `OR` 、括弧を使用して複数の条件を組み合わせたり、TiDB でサポートされている[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)使用したりできます。
 
-> **警告：**
+> **Warning:**
 >
 > 動的なユーザー入力で SQL 文字列フィルターを使用する場合は、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)脆弱性を防ぐために常に入力を検証します。

@@ -9,7 +9,7 @@ summary: TiDBの機能概要について学びましょう。
 
 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_features)でTiDBの機能を試すことができます。
 
-> **注記：**
+> **Note:**
 >
 > PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な用途には、[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)使用することをお勧めします。
 >

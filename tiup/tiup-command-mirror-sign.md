@@ -37,7 +37,7 @@ tiup mirror sign <manifest-file> [flags]
 -   データ型: `INT`
 -   デフォルト: 10
 
-> **注記：**
+> **Note:**
 >
 > このオプションは、 `<manifest-file>`がネットワーク アドレスの場合にのみ有効です。
 

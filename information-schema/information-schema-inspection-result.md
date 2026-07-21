@@ -9,7 +9,7 @@ TiDB には、システム内の障害や隠れた問題を検出するための
 
 `INSPECTION_RESULT`診断テーブルは、問題を迅速に発見し、手作業の繰り返しを削減するのに役立ちます。3 ステートメント`select * from information_schema.inspection_result`使用して、内部診断をトリガーできます。
 
-> **注記：**
+> **Note:**
 >
 > このテーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 

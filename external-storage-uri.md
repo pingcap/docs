@@ -80,7 +80,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     -   `role-arn` : TiDB Cloud が特定の[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)使用して Amazon S3 データにアクセスできるようにするには、 `role-arn` URL クエリパラメータにロールの[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)指定します。例: `arn:aws:iam::888888888888:role/my-role` 。
 
-        > **注記：**
+        > **Note:**
         >
         > -   IAMロールを自動的に作成するには、 [TiDB Cloudコンソール](https://tidbcloud.com/)でクラスターの**[Amazon S3 からのデータのインポート]**ページに移動し、 **[フォルダー URI]**フィールドに入力し、 **[ロール ARN]**フィールドの [**ここをクリックして AWS CloudFormation で新しく作成] を**クリックして、 **[新しいロール ARN の追加]**ダイアログの画面上の指示に従います。
         > -   AWS CloudFormation を使用してIAMロールを作成する際に問題が発生した場合は、 **「新しいロール ARN を追加」**ダイアログで**「問題が発生した場合は、ロール ARN を手動で作成する」を**クリックしてTiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得し、 [ロール ARN を使用して Amazon S3 アクセスを構成する](https://docs.pingcap.com/tidbcloud/dedicated-external-storage#configure-amazon-s3-access-using-a-role-arn)の手順に従って手動でロールを作成してください。IAMIAMを設定する際は、 **「アカウント ID」**フィールドにTiDB Cloudアカウント ID を入力し、 [混乱した副官の攻撃](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)から保護するために**外部 ID を要求する」**を選択してください。

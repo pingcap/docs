@@ -7,7 +7,7 @@ summary: TiDB Cloudの制限と割り当てについて説明します。
 
 TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内で作成できる各コンポーネントの数と、TiDBの一般的な使用制限が制限されています。さらに、組織レベルのクォータによってユーザーが作成できるリソースの量を制限し、実際に必要な量を超えるリソースの作成を防ぐことができます。以下の表は、制限とクォータの概要を示しています。
 
-> **注記：**
+> **Note:**
 >
 > これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
@@ -18,7 +18,7 @@ TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-clo
 | [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)部あたりのコピー数 | 3  |
 | クロスゾーン展開のアベイラビリティゾーンの数                                      | 3  |
 
-> **注記：**
+> **Note:**
 >
 > TiDB の一般的な使用上の制限について詳しくは、 [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
@@ -31,6 +31,6 @@ TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-clo
 | 組織内のすべてのクラスタのTiFlashノードの最大数   | 5           |
 | 組織内のすべてのクラスタの TiProxy ノードの最大数 | 10          |
 
-> **注記：**
+> **Note:**
 >
 > これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。

@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/dev-guide-sample-application-spring-boot','/ja/tidb/dev
 -   HibernateとSpring Data JPAを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -66,13 +66,13 @@ cd tidb-java-springboot-jpa-quickstart
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

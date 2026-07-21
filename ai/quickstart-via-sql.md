@@ -15,7 +15,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 -   ベクトル埋め込みを保存する。
 -   ベクトル検索クエリを実行します。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。

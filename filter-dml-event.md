@@ -63,7 +63,7 @@ MySQL [test]> select * from tbl;
 -   `update-new-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって送信される新しい値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
 -   `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と同時に使用することはできません。
 
-> **注記：**
+> **Note:**
 >
 > -   `update-old-value-expr`と`update-new-value-expr`一緒に設定できます。
 > -   `update-old-value-expr`と`update-new-value-expr`一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`一致し**、** 「更新 + 新しい値」が`update-new-value-expr`一致する行がフィルタリングされます。
@@ -75,6 +75,6 @@ SQL式は1つの列でも複数の列でも使用できます。また、TiDBで
 
 `expression-filter`設定項目で複数のフィルタリングルールを設定できます。上流データソースは、 `expression-filters`の必要なルールを参照してルールを有効にします。複数のルールを使用する場合、**いずれ**かのルールに一致すると、行の変更全体がフィルタリングされます。
 
-> **注記：**
+> **Note:**
 >
 > 式フィルタリング ルールを多く設定しすぎると、DM の計算オーバーヘッドが増加し、データ複製が遅くなります。

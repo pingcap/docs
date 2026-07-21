@@ -19,7 +19,7 @@ ticloud config set <property-name> <value> [flags]
 | 秘密鍵     | TiDB Cloud API の秘密キーを指定します。                                        | はい  |
 | API URL | TiDB Cloudの基本 API URL を指定します (デフォルトは`https://api.tidbcloud.com` )。 | いいえ |
 
-> **注記：**
+> **Note:**
 >
 > 特定のユーザー プロファイルのプロパティを構成する場合は、 `-P`フラグを追加し、コマンドで対象のユーザー プロファイル名を指定できます。
 
@@ -43,7 +43,7 @@ API ホストを設定します。
 ticloud config set api-url https://api.tidbcloud.com
 ```
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud APIのURLはデフォルトで`https://api.tidbcloud.com`設定されています。通常は設定する必要はありません。
 

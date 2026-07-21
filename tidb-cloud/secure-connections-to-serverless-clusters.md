@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 クライアントとTiDB Cloud StarterまたはTiDB Cloud Essentialクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB Cloudのサーバー証明書は、独立したサードパーティの証明書プロバイダによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloudクラスタに簡単に接続できます。
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Dedicated クラスターへの TLS 接続を確立する方法については、 [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)参照してください。
 
@@ -29,7 +29,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 4.  パスワードをまだ設定していない場合は、 **「パスワードを生成」**をクリックして、クラスター用のランダムパスワードを生成します。パスワードはサンプル接続文字列に自動的に埋め込まれ、クラスターへの接続が簡単になります。
 
-    > **注記：**
+    > **Note:**
     >
     > -   ランダム パスワードは、大文字、小文字、数字、特殊文字を含む 16 文字で構成されます。
     > -   このダイアログを閉じると、生成されたパスワードは表示されなくなりますので、安全な場所に保存してください。パスワードを忘れた場合は、このダイアログの**「パスワードをリセット」**をクリックしてリセットできます。
@@ -37,7 +37,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 5.  接続文字列を使用してクラスターに接続します。
 
-    > **注記：**
+    > **Note:**
     >
     > TiDB Cloudクラスターに接続する際は、ユーザー名にクラスターのプレフィックスを含め、引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
 

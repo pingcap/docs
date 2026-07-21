@@ -7,7 +7,7 @@ summary: TiDB HTAPをすぐに使い始める方法を学びます。
 
 このガイドでは、TiDB のハイブリッド トランザクションおよび分析処理 (HTAP) のワンストップ ソリューションを最も簡単に使い始める方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > このガイドで紹介する手順は、テスト環境での迅速な開始のみを目的としています。本番環境では、 [HTAPを探索する](/explore-htap.md)推奨します。
 
@@ -32,7 +32,7 @@ TiDB HTAPを使用する前に、 [TiDB Self-Managedのクイックスタート]
 tiup playground
 ```
 
-> **注記：**
+> **Note:**
 >
 > `tiup playground`コマンドはクイック スタート専用であり、本番用ではありません。
 
@@ -40,7 +40,7 @@ tiup playground
 
 以下の手順で、 TiDB HTAPを使用するためのテストデータとして[TPC-H](http://www.tpc.org/tpch/)データセットを作成します。TPC-H にご興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)ご覧ください。
 
-> **注記：**
+> **Note:**
 >
 > 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)実行できます。独自のテスト データを設計および作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
 

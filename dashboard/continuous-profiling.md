@@ -5,7 +5,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 # TiDB Dashboardインスタンスプロファイリング - 継続的なプロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
 
-> **注記：**
+> **Note:**
 >
 > この機能はデータベースのエキスパート向けに設計されています。エキスパートでない方は、PingCAPテクニカルサポートの指示に従ってこの機能を使用することをお勧めします。
 
@@ -46,7 +46,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 継続的なプロファイリングを有効にする {#enable-continuous-profiling}
 
-> **注記：**
+> **Note:**
 >
 > 継続的プロファイリングを使用するには、クラスターを最新バージョンのTiUP （v1.9.0以上）またはTiDB Operator （v1.3.0以上）でデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスターをアップグレードした場合は、手順[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)ご覧ください。
 

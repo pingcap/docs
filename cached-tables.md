@@ -153,7 +153,7 @@ SELECT * FROM users;
 1 row in set (0.00 sec)
 ```
 
-> **注記：**
+> **Note:**
 >
 > キャッシュされたテーブルにデータを挿入すると、第2レベルの書き込みレイテンシーが発生する可能性があります。このレイテンシーはグローバル環境変数[`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに応じてレイテンシーが許容できるかどうかを確認することで、キャッシュされたテーブル機能を使用するかどうかを決定できます。例えば、読み取り専用のシナリオでは、この値を`tidb_table_cache_lease`に増やすことができます。
 >
@@ -181,7 +181,7 @@ Create Table: CREATE TABLE `table_cache_meta` (
 
 ### キャッシュされたテーブルを通常のテーブルに戻す {#revert-a-cached-table-to-a-normal-table}
 
-> **注記：**
+> **Note:**
 >
 > キャッシュされたテーブルでDDL文を実行すると失敗します。キャッシュされたテーブルでDDL文を実行する前に、まずキャッシュ属性を削除し、キャッシュされたテーブルを通常のテーブルに戻す必要があります。
 

@@ -5,7 +5,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 # <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-code-tidbcloud-cluster-code-resource-deprecated}
 
-> **警告：**
+> **Warning:**
 >
 > [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)をご覧ください。
 
@@ -262,7 +262,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ## クラスターリソースを使用してクラスターを作成する {#create-a-cluster-using-the-cluster-resource}
 
-> **注記：**
+> **Note:**
 >
 > 始める前に、 TiDB Cloudコンソールで CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
 

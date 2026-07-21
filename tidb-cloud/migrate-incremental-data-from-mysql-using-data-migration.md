@@ -9,7 +9,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 <CustomContent plan="essential">
 
-> **注記：**
+> **Note:**
 >
 > 現在、 TiDB Cloud Essentialのデータ移行機能はパブリックプレビュー版です。
 
@@ -17,7 +17,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 <CustomContent plan="premium">
 
-> **注記：**
+> **Note:**
 >
 > 現在、データ移行機能はTiDB Cloud Premiumのパブリックプレビュー版として提供されています。
 
@@ -152,7 +152,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

@@ -17,7 +17,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

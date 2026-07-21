@@ -13,7 +13,7 @@ Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporterを
 
 TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlash-Proxy-Details の**3つのダッシュボードパネルがあります。これらのパネルに表示されるメトリックは、 TiFlashの現在の状態を示します。 **TiFlash-Proxy-Summary**パネルと**TiFlash-Proxy-Details**パネルは、主にRaftレイヤーの情報を表示します。メトリックの詳細は[TiKVの主要な監視指標](/grafana-tikv-dashboard.md)を参照してください。
 
-> **注記：**
+> **Note:**
 >
 > TiFlashのモニターを改善するには、 TiDB v4.0.5 以降のバージョンを使用することをお勧めします。
 
@@ -31,7 +31,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 -   ファイルオープン OPS: TiFlashインスタンスあたりの`open`秒あたりの操作数。
 -   開かれたファイル数: 現在各TiFlashインスタンスによって開かれているファイル記述子の数。
 
-> **注記：**
+> **Note:**
 >
 > ストア サイズ、FSync OPS、ファイル オープン OPS、および開かれたファイル数は、現在、 TiFlashストレージレイヤーの監視情報のみをカバーしており、 TiFlash-Proxy ではカバーしていません。
 
@@ -81,7 +81,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 -   書き込みフロー: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
 -   読み取りフロー: すべてのTiFlashインスタンスによるディスク読み取りのトラフィック。
 
-> **注記：**
+> **Note:**
 >
 > これらのメトリックは、 TiFlashストレージレイヤーの監視情報のみをカバーし、 TiFlash-Proxy の監視情報はカバーしません。
 

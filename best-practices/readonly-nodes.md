@@ -98,7 +98,7 @@ aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
     pd-ctl config placement-rules rule-bundle save --in="rules.json"
     ```
 
-> **注記：**
+> **Note:**
 >
 > -   大規模なデータセットを持つクラスターで上記の操作を実行すると、クラスター全体のデータが読み取り専用ノードに完全に複製されるまでに時間がかかる場合があります。この間、読み取り専用ノードはサービスを提供できない可能性があります。
 > -   バックアップの特別な実装のため、各ラベルのラーナー数は 1 を超えることはできません。そうでない場合、バックアップ中に重複データが生成されます。

@@ -25,7 +25,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 http://192.168.0.123:2379/dashboard/
 ```
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 `tiup cluster`デプロイメント ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
@@ -58,7 +58,7 @@ http://192.168.0.123:2379/dashboard/
 
     `192.168.0.123:2379` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
 
-    > **警告：**
+    > **Warning:**
     >
     > **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
@@ -85,7 +85,7 @@ http://192.168.0.123:2379/dashboard/
 
     `http://192.168.0.123:2379/dashboard/` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
 
-    > **警告：**
+    > **Warning:**
     >
     > `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持してください。これにより、このパスの下にあるサービスのみがリバースプロキシされます。そうしないと、セキュリティリスクが発生します。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
@@ -187,7 +187,7 @@ server_configs:
     dashboard.public-path-prefix: /
 ```
 
-> **警告：**
+> **Warning:**
 >
 > 変更およびカスタマイズされたパスプレフィックスが有効になると、TiDB Dashboardに直接アクセスできなくなります。TiDB Dashboardにアクセスするには、パスプレフィックスに一致するリバースプロキシを経由する必要があります。
 
@@ -210,7 +210,7 @@ backend tidb_dashboard_back
 
 `192.168.0.123:2379` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
 
-> **警告：**
+> **Warning:**
 >
 > **このパス内のサービスのみが**リバースプロキシの背後にあることを保証するには、 `use_backend`ディレクティブの`if`部分を保持する必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
@@ -245,7 +245,7 @@ server {
 
 `http://192.168.0.123:2379/dashboard/` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
 
-> **警告：**
+> **Warning:**
 >
 > `proxy_pass`ディレクティブの`/dashboard/`パスは必ず保持し**、このパス内のサービスのみが**リバースプロキシの背後にあるようにする必要があります。そうしないと、セキュリティリスクが発生する可能性があります。[TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 

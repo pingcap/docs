@@ -9,7 +9,7 @@ TiProxyはPingCAPの公式プロキシコンポーネントです。クライア
 
 詳細については、 [TiProxyの概要](https://docs.pingcap.com/tidb/stable/tiproxy-overview)をご覧ください。
 
-> **注記：**
+> **Note:**
 >
 > TiProxyは現在、AWS上にデプロイされたTiDB Cloud Dedicatedクラスターでのみ利用可能です。
 

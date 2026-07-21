@@ -67,7 +67,7 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 ## 実装の詳細: チェックポイントデータを下流のクラスタに保存する {#implementation-details-store-checkpoint-data-in-the-downstream-cluster}
 
-> **注記：**
+> **Note:**
 >
 > v8.5.5以降、 BRはデフォルトでチェックポイントデータをダウンストリームクラスターに保存します。1パラメータを使用して`--checkpoint-storage`チェックポイントデータのストレージを指定できます。
 
@@ -91,13 +91,13 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 初期リストア中のログリストアフェーズに入る前に、 `br` `restored-ts`時点における上流および下流のクラスタデータベースとテーブルIDのマッピングを構築することに注意してください。このマッピングは、データベースIDとテーブルIDの重複割り当てを防ぐため、システムテーブル`mysql.tidb_pitr_id_map`に保存されます。mysql.tidb_pitr_id_map**からデータを恣意的に削除すると`mysql.tidb_pitr_id_map` PITRリストアデータの不整合が発生する可能性があります。**
 
-> **注記：**
+> **Note:**
 >
 > 以前のバージョンのクラスターとの互換性を確保するため、v8.5.5以降では、復元クラスターにシステムテーブル`mysql.tidb_pitr_id_map`存在しない場合、 `pitr_id_map`データがログバックアップディレクトリに書き込まれます。ファイル名は`pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`です。
 
 ## 実装の詳細: チェックポイントデータを外部ストレージに保存する {#implementation-details-store-checkpoint-data-in-the-external-storage}
 
-> **注記：**
+> **Note:**
 >
 > v8.5.5以降、 BRはデフォルトでチェックポイントデータをダウンストリームクラスターに保存します。1パラメータを使用して`--checkpoint-storage`チェックポイントデータの外部ストレージを指定できます。例：
 >
@@ -157,6 +157,6 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 初期リストア中のログリストアフェーズに入る前に、 `br` `restored-ts`時点における上流クラスタと下流クラスタのデータベースIDとテーブルIDのマッピングを構築することに注意してください。このマッピングは、データベースIDとテーブルIDの重複割り当てを防ぐため、ファイル名`pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`でチェックポイントストレージに保存されます。pitr_id_maps **`pitr_id_maps`からファイルを恣意的に削除すると、PITR リストアデータの不整合が発生する可能性があります。**
 
-> **注記：**
+> **Note:**
 >
 > 以前のバージョンのクラスターとの互換性を確保するため、v8.5.5以降では、復元クラスターにシステムテーブル`mysql.tidb_pitr_id_map`が存在せず、パラメータ`--checkpoint-storage`が指定されていない場合、 `pitr_id_map`データはログバックアップディレクトリに書き込まれます。ファイル名は`pitr_id_maps/pitr_id_map.cluster_id:{downstream-cluster-ID}.restored_ts:{restored-ts}`です。

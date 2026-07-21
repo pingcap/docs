@@ -13,7 +13,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 
 このチュートリアルでは、サーバーレス環境およびエッジ環境で[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)使用する方法について説明します。
 
-> **ヒント：**
+> **Tip:**
 >
 > このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 
@@ -129,7 +129,7 @@ const prisma = new PrismaClient({ adapter });
     DATABASE_URL='mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict'
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma Clientの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
 

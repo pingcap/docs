@@ -40,7 +40,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   デフォルト: &quot;${GOARCH}&quot;
 
-> **注記：**
+> **Note:**
 >
 > `--arch` `any`に設定する場合は、 `--os` `any`に設定する必要があります。
 
@@ -56,7 +56,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   デフォルト: &quot;${GOOS}&quot;
 
-> **注記：**
+> **Note:**
 >
 > `--os` `any`に設定する場合は、 `--arch` `any`に設定する必要があります。
 

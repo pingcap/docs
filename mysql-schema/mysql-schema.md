@@ -7,7 +7,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 `mysql`スキーマには、TiDBシステムテーブルが含まれています。この設計は、MySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能となるテーブルも多数含まれています。
 
-> **注記：**
+> **Note:**
 >
 > ほとんどのシナリオでは、 `INSERT` 、 `UPDATE` 、または`DELETE`を使用してシステムテーブルの内容を直接変更することは推奨されません。代わりに、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 、[`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 、 [`DROP USER`](/sql-statements/sql-statement-drop-user.md) 、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 、 [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 、および[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)などのステートメントを使用して、ユーザーと権限を管理してください。システムテーブルの直接変更が避けられない場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を使用して変更を有効にしてください。
 
@@ -67,7 +67,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 ## GCワーカーシステムテーブル {#gc-worker-system-tables}
 
-> **注記：**
+> **Note:**
 >
 > GCワーカーシステムテーブルは、TiDB Self-Managedでのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
@@ -121,7 +121,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、 `table_cache_meta` 、 `tidb_import_jobs` 、および`tidb_timers`システムテーブルは、TiDB Self-Managedにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 

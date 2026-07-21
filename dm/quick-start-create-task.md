@@ -71,7 +71,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
 ```
 
-> **警告：**
+> **Warning:**
 >
 > このドキュメントの TiDB のデプロイメント方法は、本番環境または開発環境には**適用されません**。
 
@@ -81,14 +81,14 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 ### パスワードを暗号化する {#encrypt-the-password}
 
-> **注記：**
+> **Note:**
 >
 > -   データベースにパスワードがない場合、この手順をスキップできます。
 > -   DM v1.0.6 以降のバージョンでは、プレーンテキスト パスワードを使用してソース情報を構成できます。
 
 安全上の理由から、暗号化されたパスワードを設定して使用することをお勧めします。dmctlを使用してMySQL/TiDBのパスワードを暗号化できます。パスワードが「123456」だと仮定します。
 
-> **注記：**
+> **Note:**
 >
 > v8.0.0 以降では、 `dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)設定する必要があります。
 

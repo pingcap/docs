@@ -56,7 +56,7 @@ DESC deadlocks;
 
 </CustomContent>
 
-> **警告：**
+> **Warning:**
 >
 > -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
 > -   `CURRENT_SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`CURRENT_SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)参照してください。
@@ -82,7 +82,7 @@ DESC deadlocks;
 
 上記のフィールドのうち、該当しない、または現在利用できない場合、そのフィールドはクエリ結果から省略されます。例えば、行キー情報には`index_id` 、 `index_name` 、 `index_values`含まれません。インデックスキーには`handle_type`と`handle_value`含まれません。非パーティションテーブルでは`partition_id`と`partition_name`表示されません。削除されたテーブルのキー情報では`table_name` 、 `db_id` 、 `db_name` 、 `index_name`などのスキーマ情報を取得できず、テーブルがパーティションテーブルであるかどうかを区別できません。
 
-> **注記：**
+> **Note:**
 >
 > パーティションが有効になっているテーブルからキーが取得され、クエリ中に何らかの理由（例えば、キーが属するテーブルが削除されているなど）により、キーが属するスキーマの情報が取得できない場合、キーが属するパーティションのIDが`table_id`フィールドに表示されることがあります。これは、TiDBが複数の独立したテーブルのキーをエンコードするのと同じ方法で、異なるパーティションのキーをエンコードするためです。したがって、スキーマ情報が欠落している場合、TiDBはキーがパーティション化されていないテーブルに属しているのか、それともテーブル内の1つのパーティションに属しているのかを確認できません。
 
@@ -90,7 +90,7 @@ DESC deadlocks;
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > このセクションはTiDB Cloudには適用されません。
 
@@ -98,7 +98,7 @@ DESC deadlocks;
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > `DEADLOCKS`テーブルは、デフォルトでは再試行可能なデッドロックエラーの情報を収集しません。再試行可能なデッドロックエラー情報を収集したい場合は、TiDB 設定ファイルで[`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)の値を調整してください。
 

@@ -15,7 +15,7 @@ TiDB 6.5.0 は長期サポートリリース (LTS) です。
 
 TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では次の主要な機能と改善が導入されています。
 
-> **ヒント：**
+> **Tip:**
 >
 > 以前の LTS 6.1.0 と比較して、 TiDB 6.5.0 には、 [6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、 [6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善、バグ修正も含まれています。
 >

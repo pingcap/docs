@@ -19,7 +19,7 @@ TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `B
 
 <CustomContent platform="tidb">
 
-> **警告：**
+> **Warning:**
 >
 > バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`なります）。整数型の表示幅の指定は推奨されません。
 
@@ -27,7 +27,7 @@ TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `B
 
 <CustomContent platform="tidb-cloud">
 
-> **警告：**
+> **Warning:**
 >
 > バージョン8.5.0以降、整数の表示幅は非推奨となりました。整数型の表示幅の指定は推奨されません。
 
@@ -143,7 +143,7 @@ FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
 FLOAT(p) [UNSIGNED] [ZEROFILL]
 ```
 
-> **注記：**
+> **Note:**
 >
 > MySQLと同様に、 `FLOAT`データ型は近似値を保存します。通貨などの値の場合は、代わりに`DECIMAL`データ型を使用することをお勧めします。
 >
@@ -158,11 +158,11 @@ DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
 DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL]
 ```
 
-> **警告：**
+> **Warning:**
 >
 > MySQLと同様に、 `DOUBLE`データ型は近似値を保存します。通貨などの値の場合は、代わりに`DECIMAL`データ型を使用することをお勧めします。
 
-> **注記：**
+> **Note:**
 >
 > TiDBが科学表記法で表現された倍精度浮動小数点数を`CHAR`型に変換すると、MySQLでの表示と矛盾する結果が表示されます。詳細は[キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)参照してください。
 

@@ -5,7 +5,7 @@ summary: TiFlash の遅延マテリアライゼーション機能を使用して
 
 # TiFlash遅延マテリアライゼーション {#tiflash-late-materialization}
 
-> **注記：**
+> **Note:**
 >
 > TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効になりません。
 

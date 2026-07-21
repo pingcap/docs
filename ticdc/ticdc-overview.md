@@ -50,7 +50,7 @@ TiCDCには、以下の主要な機能があります。
 
     -   TiCDCは、下流のトランザクションが上流のトランザクションと同じ順序で実行されることを保証しません。
 
-    > **注記：**
+    > **Note:**
     >
     > バージョン6.2以降では、シンクURIパラメータ[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を使用して、単一テーブルトランザクションを分割するかどうかを制御できます。単一テーブルトランザクションを分割することで、大規模トランザクションのレプリケーションにおけるレイテンシーとメモリ消費量を大幅に削減できます。
 
@@ -83,7 +83,7 @@ TiCDCのアーキテクチャを次の図に示す。
 -   主キー（ `PRIMARY KEY` ）は有効なインデックスです。
 -   一意インデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が明示的に非 null 許容 ( `NOT NULL` ) として定義され、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
 
-> **注記：**
+> **Note:**
 >
 > [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) `true`に設定すると、TiCDC は[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)。
 
@@ -104,7 +104,7 @@ TiCDCのアーキテクチャを次の図に示す。
 
 上流の DDL 操作によって生成されたデータ変更については、TiCDC は完全な DDL SQL ステートメントを取得し、下流のシンクタイプに基づいて対応する形式に変換して、下流に送信します。このセクションでは、これについては詳しく説明しません。
 
-> **注記：**
+> **Note:**
 >
 > TiCDCがデータ変更を処理するロジックは、今後のバージョンで調整される可能性があります。
 

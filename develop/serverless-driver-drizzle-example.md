@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 このチュートリアルでは、Node.js環境およびエッジ環境でDrizzleとTiDB Cloud Serverless Driverを使用する方法について説明します。
 
-> **ヒント：**
+> **Tip:**
 >
 > このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 
@@ -78,7 +78,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
@@ -192,7 +192,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

@@ -15,7 +15,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 -   [`cluster_statements_summary_history`](#statements_summary_evicted)
 -   [`statements_summary_evicted`](#statements_summary_evicted)
 
-> **注記：**
+> **Note:**
 >
 > 上記の表は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは利用できません。
 
@@ -77,7 +77,7 @@ select * from employee where id in (...) and salary between ? and ?;
               PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
                      PLAN:  Point_Get_1     root    1       table:employee, handle:3100
 
-> **注記：**
+> **Note:**
 >
 > -   TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
 > -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソース グループごとに集約されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
@@ -94,7 +94,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)有効になっている場合、 `statements_summary_history`テーブルのデータはディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count` 、 `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、{{B-PLACEHOLDER-5-PLACEHOLDER- `tidb_stmt_summary_max_stmt_count` `statements_summary`から最も使用頻度の低い SQL ダイジェストのみを削除します。
 
@@ -134,7 +134,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
     この制限を超えると、TiDB は`statements_summary`テーブルと`statements_summary_history`テーブルの両方から、最も使用頻度の低い SQL ダイジェストを削除します。削除されたダイジェストは、 [`statements_summary_evicted`](#statements_summary_evicted)テーブルにカウントされます。
 
-    > **注記：**
+    > **Note:**
     >
     > -   SQLダイジェストが削除されると、関連するすべての時間範囲のサマリーデータが`statements_summary`テーブルと`statements_summary_history`テーブルの両方から削除されます。その結果、特定の時間範囲内のSQLダイジェストの数が制限を超えない場合でも、 `statements_summary_history`テーブルのSQLダイジェストの数が実際のSQLダイジェストの数よりも少なくなる可能性があります。このような状況が発生し、パフォーマンスに影響する場合は、 `tidb_stmt_summary_max_stmt_count`の値を増やすことをお勧めします。
     > -   TiDB Self-Managed の場合、 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)が有効になっていると、 `statements_summary_history`テーブルのデータがディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count` `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、 `statements_summary` -E}} を超えると、TiDB は`tidb_stmt_summary_max_stmt_count`のみを削除します。
@@ -154,7 +154,7 @@ set global tidb_stmt_summary_history_size = 24;
 
 前述の設定が有効になると、 `statements_summary`テーブルは 30 分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000 種類の SQL ステートメントが格納されます。各タイプについて、 `statements_summary_history`テーブルには直近 24 期間のデータが格納されます。 `statements_summary_evicted`テーブルには、ステートメント サマリーから SQL ステートメントが削除された直近 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
 
-> **注記：**
+> **Note:**
 >
 > -   SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12 時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1 日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24 日分のデータが格納されます。
 > -   `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3` 。
@@ -221,7 +221,7 @@ select * from information_schema.statements_summary_evicted;
 
 </CustomContent>
 
-> **警告：**
+> **Warning:**
 >
 > 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
@@ -253,7 +253,7 @@ tidb_stmt_summary_enable_persistent = true
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > -   ステートメントサマリーの永続化が有効になっている場合、メモリが履歴データを保持しないため、[パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`構成は無効になります。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、次の 3 つの構成が使用されます[`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) 。
 > -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、ディスクに書き込まれるデータ量は多くなります。しかし、これは同時に、ディスクに書き込まれる冗長なデータ量も多くなることを意味します。

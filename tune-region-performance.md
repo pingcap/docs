@@ -13,7 +13,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 大規模なデータセットが関係するシナリオでは、リージョンサイズが比較的小さい場合、TiKV のリージョンが多すぎる可能性があり、リソースの消費量が増加し、 [パフォーマンスの回帰](/best-practices/massive-regions-best-practices.md#performance-problem)発生します。
 
-> **注記：**
+> **Note:**
 >
 > -   v6.1.0 では、TiDB は実験的機能としてリージョンサイズのカスタマイズをサポートしています。
 > -   v6.5.0 以降、この機能は一般提供 (GA) されます。
@@ -23,7 +23,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 ## リージョンサイズを調整するには、 <code>region-split-size</code>を使用します。 {#use-code-region-split-size-code-to-adjust-region-size}
 
-> **注記：**
+> **Note:**
 >
 > リージョンサイズの推奨範囲は[48 MiB、256 MiB]です。一般的に使用されるサイズは96 MiB、128 MiB、256 MiBです。リージョンサイズを1 GiBを超える値に設定することは推奨されません。10 GiBを超えるサイズの設定は避けてください。リージョンサイズが大きすぎると、以下の副作用が発生する可能性があります。
 >
@@ -35,7 +35,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 ## バケットを使用して同時実行性を高める {#use-bucket-to-increase-concurrency}
 
-> **警告：**
+> **Warning:**
 >
 > 現在、これはTiDB v6.1.0で導入された実験的機能です。本番環境での使用は推奨されません。
 

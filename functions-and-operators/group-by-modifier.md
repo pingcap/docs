@@ -26,7 +26,7 @@ SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 
 この例では、TiDB は`count(1)`の計算結果を 4 つのグループ (つまり`{a, b, c}` 、 `{a, b}` 、 `{a}` 、 `{}` ) に集計し、各グループの概要結果を出力します。
 
-> **注記：**
+> **Note:**
 >
 > 現在、TiDB は Cube 構文をサポートしていません。
 

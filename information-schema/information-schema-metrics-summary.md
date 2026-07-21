@@ -10,7 +10,7 @@ TiDB クラスタには多くの監視メトリックがあります。異常な
 -   `information_schema.metrics_summary`
 -   `information_schema.metrics_summary_by_label`
 
-> **注記：**
+> **Note:**
 >
 > 上記の 2 つの監視概要テーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 

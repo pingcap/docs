@@ -53,7 +53,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > レプリカの損失によりデータとインデックスが不整合になった場合:
 >
@@ -68,7 +68,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > レプリカの損失によりデータとインデックスが不整合になった場合:
 >

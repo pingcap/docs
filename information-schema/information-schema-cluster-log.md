@@ -7,7 +7,7 @@ summary: CLUSTER_LOG` information_schema テーブルについて学習します
 
 クラスターログテーブル`CLUSTER_LOG`に対してクラスターログのクエリを実行できます。クエリ条件を各インスタンスにプッシュダウンすることで、クエリがクラスターのパフォーマンスに与える影響は、コマンド`grep`よりも小さくなります。
 
-> **注記：**
+> **Note:**
 >
 > このテーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
@@ -39,7 +39,7 @@ DESC cluster_log;
 -   `LEVEL` : ログレベル。
 -   `MESSAGE` : ログの内容。
 
-> **注記：**
+> **Note:**
 >
 > -   クラスターログテーブルのすべてのフィールドは、対応するインスタンスにプッシュダウンされて実行されます。クラスターログテーブルの使用に伴うオーバーヘッドを削減するには、検索に使用するキーワード、時間範囲、そして可能な限り多くの条件を指定する必要があります。例えば、 `select * from cluster_log where message like '%ddl%' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00' and type='tidb'`に指定します。
 >

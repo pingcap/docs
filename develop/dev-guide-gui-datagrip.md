@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-datagrip/','/ja/tidb/dev/dev-guide-gui-
 
 TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html)データベースとSQLのための強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスタに接続する手順を説明します。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -51,7 +51,7 @@ DataGripは2つの方法で使用できます。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

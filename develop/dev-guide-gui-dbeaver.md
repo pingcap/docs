@@ -10,7 +10,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 このチュートリアルでは、DBeaver Communityを使用してTiDBに接続する方法を学ぶことができます。
 
-> **注記：**
+> **Note:**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
@@ -60,7 +60,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

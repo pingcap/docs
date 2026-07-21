@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-openai/']
 
 このドキュメントでは、 TiDB Cloudで OpenAI 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
@@ -262,7 +262,7 @@ Azure OpenAI から OpenAI に直接切り替えるには、 `TIDB_EXP_EMBED_OPE
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_BASE = '';
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   セキュリティ上の理由から、API ベースとして設定できるのは Azure OpenAI の URL または OpenAI の URL のみです。任意のベース URL は許可されていません。
 > -   OpenAI互換の別の埋め込みサービスを利用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

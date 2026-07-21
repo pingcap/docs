@@ -7,7 +7,7 @@ summary: TiDB Cloud Dedicatedクラスターの作成方法を学びましょう
 
 このチュートリアルでは、TiDB Cloud Dedicatedクラスターへのサインアップと作成の手順を説明します。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
@@ -26,7 +26,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -40,7 +40,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     3.  クラウドプロバイダーと、クラスターをホストするリージョンを選択してください。
 
-        > **注記：**
+        > **Note:**
         >
         > -   [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更することはできません。
         > -   [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
@@ -52,7 +52,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     6.  このリージョンにCIDRが設定されていない場合は、CIDRを設定する必要があります。**プロジェクトCIDR**フィールドが表示されない場合は、このリージョンにCIDRが既に設定されていることを意味します。
 
-        > **注記：**
+        > **Note:**
         >
         > -   TiDB Cloudは、このリージョンで最初のクラスターが作成される際に、このCIDRを持つVPCを作成します。このリージョン内の同じプロジェクトの以降のすべてのクラスターは、このVPCを使用します。
         > -   CIDRを設定する際は、アプリケーションが配置されているVPCのCIDRと競合しないようにしてください。VPCが作成されると、CIDRを変更することはできません。
@@ -61,7 +61,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 5.  支払い方法を登録していない場合は、右下隅の**「クレジットカードを追加」**をクリックしてください。
 
-    > **注記：**
+    > **Note:**
     >
     > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
@@ -69,7 +69,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     TiDB Cloudクラスタの作成には約20～30分かかります。作成が完了すると、 TiDB Cloudコンソールから通知が届きます。
 
-    > **注記：**
+    > **Note:**
     >
     > クラスターの作成時間は地域によって異なり、30分以上かかる場合があります。処理に予想以上に時間がかかる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 

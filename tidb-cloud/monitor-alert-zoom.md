@@ -7,7 +7,7 @@ summary: Zoom経由でアラート通知を受け取ることで、TiDBクラス
 
 TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)を介してアラート通知を購読する簡単な方法を提供します。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
 
@@ -64,7 +64,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、以下の手順に従ってください。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
 
@@ -97,7 +97,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 TiDB Cloud Essentialインスタンスのアラート通知を購読するには、以下の手順を実行してください。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud Essentialの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Essentialインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 
@@ -126,7 +126,7 @@ TiDB Cloud Essentialインスタンスのアラート通知を購読するには
 
 TiDB Cloud Premiumインスタンスのアラート通知を購読するには、以下の手順に従ってください。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud Premiumの場合、アラートの購読は現在のインスタンス内のすべてのアラートに適用されます。複数のTiDB Cloud Premiumインスタンスをお持ちの場合は、各インスタンスごとに個別に購読する必要があります。
 

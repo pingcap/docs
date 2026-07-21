@@ -81,7 +81,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `UINT`
 -   このオプションを指定しない場合、 TiUP は`600`秒待機した後、サービスを直接再起動します。
 
-> **注記：**
+> **Note:**
 >
 > タイムアウト後にTiUP がサービスを直接再起動すると、サービスのパフォーマンスが不安定になる可能性があります。
 
@@ -91,7 +91,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `STRINGS`
 -   このオプションを指定しないと、 TiUP はデフォルトで置換するノードを選択しません。
 
-> **注記：**
+> **Note:**
 >
 > オプション`-R, --role`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 
@@ -101,7 +101,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `STRINGS`
 -   このオプションを指定しないと、 TiUP はデフォルトで置き換えるロールを選択しません。
 
-> **注記：**
+> **Note:**
 >
 > オプション`-N, --node`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 

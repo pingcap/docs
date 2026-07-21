@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-improve-performance/','/ja/tidbcloud/ve
 
 TiDB Vector Searchを使用すると、画像、ドキュメント、その他の入力に類似した結果を検索する近似近傍法（ANN）クエリを実行できます。クエリのパフォーマンスを向上させるには、以下のベストプラクティスを確認してください。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > -   ベクトル検索機能は[TiDB Self-Managed](/overview.md) と [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用可能です。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。

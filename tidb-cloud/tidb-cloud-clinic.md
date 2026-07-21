@@ -9,7 +9,7 @@ TiDB Cloud Clinic は、 TiDB Cloud上で高度な監視および診断機能を
 
 ![tidb-cloud-clinic](/media/tidb-cloud/tidb-cloud-clinic.png)
 
-> **注記：**
+> **Note:**
 >
 > 現在、 TiDB Cloud Clinic は[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのみ使用できます。
 

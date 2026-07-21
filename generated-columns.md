@@ -129,7 +129,7 @@ desc select a+1 from t where a+1=3;
 2 rows in set (0.01 sec)
 ```
 
-> **注記：**
+> **Note:**
 >
 > 置換対象の式と生成列の両方が文字列型で長さが異なる場合でも、システム変数[`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)を`ON`に設定することで式を置換できます。このシステム変数を設定する際は、生成列によって計算される値が生成列の定義を厳密に満たしていることを確認してください。そうでない場合、長さの違いによりデータが切り捨てられ、誤った結果になる可能性があります。GitHub の問題[＃35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)参照してください。
 

@@ -87,7 +87,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 ### ステップ2. DatadogにTiDB Cloud統合をインストールする {#step-2-install-tidb-cloud-integration-in-datadog}
 
-> **注記：**
+> **Note:**
 >
 > Datadog にTiDB Cloud統合をすでにインストールしている場合は、このセクションの次の手順をスキップできます。 [**TiDB Cloudダイナミックトラッカー**](https://app.datadoghq.com/dash/integration/32021/tidb-cloud-dynamic-tracker)または[**TiDB Cloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードは、Datadog [**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)で自動的に利用可能になります。
 

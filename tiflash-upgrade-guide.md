@@ -12,7 +12,7 @@ summary: TiFlash をアップグレードする際の注意事項を説明しま
 -   [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)
 -   [Kubernetes 上の TiDB をアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
 
-> **注記：**
+> **Note:**
 >
 > -   [ファストスキャン](/tiflash/use-fastscan.md)はv6.2.0で実験的機能として導入され、v7.0.0で一般提供（GA）されます。強力なデータ整合性を犠牲にして、より効率的なクエリパフォーマンスを実現します。
 >
@@ -104,7 +104,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 -   V3のみ: PageStorage V3を使用しているテーブルの数（パーティションを含む）
 -   混合モード: PageStorage V2 から PageStorage V3 に変換されたデータ形式を持つテーブルの数 (パーティションを含む)
 
-> **注記：**
+> **Note:**
 >
 > 以下のパッチバージョンには既知の問題（問題[＃9039](https://github.com/pingcap/tiflash/issues/9039) ）があります。これらのバージョンにアップグレードすると、 TiFlashデータが破損する可能性があります。
 >

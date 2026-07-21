@@ -77,7 +77,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-        > **ヒント：**
+        > **Tip:**
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

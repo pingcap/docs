@@ -13,7 +13,7 @@ TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一
 
 1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 

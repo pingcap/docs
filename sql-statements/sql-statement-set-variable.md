@@ -7,11 +7,11 @@ summary: TiDB データベースの SET [GLOBAL|SESSION] <variable> の使用法
 
 `SET [GLOBAL|SESSION]`文は、TiDBの組み込み変数の1つを変更します。これらの変数は、 `SESSION`または`GLOBAL`スコープの[システム変数](/system-variables.md)、あるいは[ユーザー変数](/user-defined-variables.md)になります。
 
-> **警告：**
+> **Warning:**
 >
 > ユーザー定義変数はまだ実験的機能です。本番環境での使用は推奨さ**れません**。
 
-> **注記：**
+> **Note:**
 >
 > MySQLと同様に、 `GLOBAL`変数への変更は既存の接続にもローカル接続にも適用されません。値の変更は新しいセッションにのみ反映されます。
 

@@ -682,7 +682,7 @@ mysql> SELECT * FROM doctors;
 
 ## <code>savepoint</code>とネストされたトランザクションのサポート {#support-for-code-savepoint-code-and-nested-transactions}
 
-> **注記：**
+> **Note:**
 >
 > TiDBはv6.2.0以降、 [`savepoint`](/sql-statements/sql-statement-savepoint.md)機能をサポートしています。TiDBのバージョンがv6.2.0より前の場合、 `PROPAGATION_NESTED`の動作はサポートされていません。v6.2.0以降のバージョンにアップグレードすることをお勧めします。TiDBのアップグレードが不可能な場合、アプリケーションが`PROPAGATION_NESTED`伝播動作を使用する**Java Spring**フレームワークに基づいている場合は、ネストされたトランザクションのロジックを削除するようにアプリケーション側で対応する必要があります。
 

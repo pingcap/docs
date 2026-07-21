@@ -14,7 +14,7 @@ TiDB に接続していることを確認してください。そうでない場
 
 ## TiDBでSQLを探求しよう {#explore-sql-with-tidb}
 
-> **注記：**
+> **Note:**
 >
 > このドキュメントは[TiDBでSQLを探求しよう](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDBでSQLを探求しよう](/basic-sql-operations.md)参照してください。
 
@@ -66,7 +66,7 @@ UPDATE person SET birthday='20180808' WHERE id=2;
 DELETE FROM person WHERE id=2;
 ```
 
-> **注記：**
+> **Note:**
 >
 > `UPDATE`および`DELETE`ステートメントは、フィルターとして`WHERE`句を指定しない場合、テーブル全体に対して動作します。
 

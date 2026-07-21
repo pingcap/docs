@@ -11,7 +11,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 このドキュメントでは、コマンドラインパラメータに含まれないパラメータについてのみ説明します。コマンドラインパラメータについては、 [ここ](/command-line-flags-for-pd-configuration.md)参照してください。
 
-> **ヒント：**
+> **Tip:**
 >
 > PD 初期化後に設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)と[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
@@ -129,7 +129,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `server-memory-limit` <span class="version-mark">v6.6.0 の新機能</span> {#server-memory-limit-new-in-v660}
 
-> **警告：**
+> **Warning:**
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
@@ -140,7 +140,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `server-memory-limit-gc-trigger` <span class="version-mark">v6.6.0の新機能</span> {#server-memory-limit-gc-trigger-new-in-v660}
 
-> **警告：**
+> **Warning:**
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
@@ -151,7 +151,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `enable-gogc-tuner` <span class="version-mark">v6.6.0 の新機能</span> {#enable-gogc-tuner-new-in-v660}
 
-> **警告：**
+> **Warning:**
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
@@ -160,7 +160,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `gc-tuner-threshold` <span class="version-mark">6.6.0の新機能</span> {#gc-tuner-threshold-new-in-v660}
 
-> **警告：**
+> **Warning:**
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 
@@ -174,7 +174,7 @@ pd-server関連のコンフィグレーション項目
 -   デフォルト値: 3
 -   PDはフロー番号の最下位桁を丸めることで、リージョンフロー情報の変更に伴う統計情報の更新を削減します。この設定項目は、リージョンフロー情報の最小桁数を指定します。例えば、フロー`100512`はデフォルト値が`3`であるため、 `101000`に丸められます。この設定は`trace-region-flow`置き換えます。
 
-> **注記：**
+> **Note:**
 >
 > クラスターをTiDB 4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一致します。つまり、アップグレード前の値`trace-region-flow`がfalseの場合、アップグレード後の値`flow-round-by-digit`は127になります。また、アップグレード前の値`trace-region-flow`が`true`の場合、アップグレード後の値`flow-round-by-digit`は`3`になります。
 
@@ -185,7 +185,7 @@ pd-server関連のコンフィグレーション項目
 -   最小値: `0`
 -   単位: 秒
 
-> **注記：**
+> **Note:**
 >
 > v6.0.0～v6.2.0からアップグレードされたクラスターの場合、デフォルト値の`min-resolved-ts-persistence-interval`はアップグレード後も変更されず、 `"0s"`ままとなります。この機能を有効にするには、この設定項目の値を手動で変更する必要があります。
 
@@ -272,7 +272,7 @@ pd-server関連のコンフィグレーション項目
 
 スケジュールに関連するコンフィグレーション項目
 
-> **注記：**
+> **Note:**
 >
 > `schedule`に関連するこれらの PD 構成項目を変更するには、クラスターのステータスに基づいて次のいずれかの方法を選択します。
 >
@@ -304,7 +304,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `patrol-region-worker-count`<span class="version-mark">バージョン8.5.0の新機能</span> {#patrol-region-worker-count-new-in-v850}
 
-> **警告：**
+> **Warning:**
 >
 > この設定項目を1より大きい値に設定すると、同時チェックが有効になります。これは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/tikv/pd/issues)報告してください。
 
@@ -413,7 +413,7 @@ pd-server関連のコンフィグレーション項目
 -   デフォルト値: `v2`
 -   オプション値: `v1`および`v2`と比較して、v2 の変更はよりスムーズになり、スペースの再利用によって発生するスケジュールのジッターが改善されています。
 
-> **注記：**
+> **Note:**
 >
 > クラスターをTiDB 4.0バージョンから最新バージョンにアップグレードした場合、アップグレード前後のPD動作の一貫性を確保するため、新しいFormulaバージョンはデフォルトで自動的に無効化されます。Formulaバージョンを変更する場合は、 `pd-ctl`設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
 
@@ -435,7 +435,7 @@ pd-server関連のコンフィグレーション項目
 -   PD がホットリージョン情報を保存する時間間隔。
 -   デフォルト値: `10m`
 
-> **注記：**
+> **Note:**
 >
 > ホットリージョンに関する情報は3分ごとに更新されます。更新間隔を3分未満に設定した場合、更新間隔中の更新は意味をなさない可能性があります。
 
@@ -490,7 +490,7 @@ pd-server関連のコンフィグレーション項目
 
 ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
 
-> **注記：**
+> **Note:**
 >
 > バージョン5.2以降、ラベル関連の設定項目は非推奨となりました。レプリカポリシーの設定には[配置ルール](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center)使用することをお勧めします。
 
@@ -537,7 +537,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `enable-telemetry` {#enable-telemetry}
 
-> **警告：**
+> **Warning:**
 >
 > v8.1.0以降、TiDB Dashboardのテレメトリ機能は削除され、この設定項目は機能しなくなりました。これは以前のバージョンとの互換性のためだけに残されています。
 

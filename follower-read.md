@@ -32,7 +32,7 @@ Follower Read は次のシナリオに適しています。
 -   ローカルレプリカからの読み取りを優先して、AZ 間の帯域幅使用量を削減するマルチ AZ 展開。
 -   全体的な読み取りパフォーマンスをさらに向上させたい読み取り/書き込み分離アーキテクチャ。
 
-> **注記：**
+> **Note:**
 >
 > 読み取り結果の強い一貫性を確保するため、 Follower Readは読み取り前にリーダーと通信し、最新のコミットの進行状況を確認します（ Raft `ReadIndex`操作を実行することで）。これにより、追加のネットワークインタラクションが発生します。そのため、 Follower Readは、多数の読み取りリクエストが存在する場合、または読み取りと書き込みの分離が求められる場合に最も効果的です。ただし、レイテンシの低い単一クエリの場合、パフォーマンスの向上はそれほど大きくない可能性があります。
 
@@ -86,7 +86,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 <CustomContent platform="tidb">
 
-> **注記：**
+> **Note:**
 >
 > `tidb_replica_read`を`closest-replicas`または`closest-adaptive`に設定した場合、指定された構成に従ってレプリカがアベイラビリティゾーン全体に分散されるようにするには、PD に`location-labels`設定し、TiDB と TiKV に[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)に従って正しい`labels`設定する必要があります。TiDB は、同じアベイラビリティゾーン内の TiKV ノードを一致させるために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの構成に`zone`が含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 >

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 
 ベクトルは、 `[0.3, 0.5, -0.1, ...]`などの浮動小数点数のシーケンスです。TiDB は、AI アプリケーションで広く使用されているベクトル埋め込みを効率的に保存およびクエリするために特別に最適化されたベクトル データ型を提供します。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトルデータ型はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > -   ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。

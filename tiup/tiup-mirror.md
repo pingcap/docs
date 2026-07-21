@@ -66,7 +66,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     `--full`フラグを指定すると、公式ミラーを完全にクローンできます。
 
-    > **注記：**
+    > **Note:**
     >
     > フラグ`--full` 、およびコンポーネントバージョン`global-version`指定されていない場合は、一部のメタ情報のみが複製されます。
 
@@ -100,7 +100,7 @@ tiup mirror set /shared_data/tiup
 tiup mirror set https://tiup-mirror.example.com/
 ```
 
-> **注記：**
+> **Note:**
 >
 > `tiup mirror clone`実行したマシンで`tiup mirror set...`実行した場合、次に`tiup mirror clone...`実行したときに、マシンはリモートミラーではなくローカルミラーからクローンを作成します。そのため、プライベートミラーを更新する前に`tiup mirror set --reset`実行してミラーをリセットする必要があります。
 
@@ -117,7 +117,7 @@ tiup list
 
 同じ`target-dir`で`tiup mirror clone`コマンドを再度実行すると、マシンは新しいマニフェストを作成し、利用可能なコンポーネントの最新バージョンをダウンロードします。
 
-> **注記：**
+> **Note:**
 >
 > マニフェストを再作成する前に、すべてのコンポーネントとバージョン (以前にダウンロードしたものも含む) が含まれていることを確認してください。
 

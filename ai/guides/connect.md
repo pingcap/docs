@@ -44,7 +44,7 @@ db = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要です。 `pytidb`クライアントは、 TiDB Cloud Starterインスタンスの TLS を**自動的に**有効にします。
 
@@ -67,7 +67,7 @@ db = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > テスト用にTiDBクラスタをデプロイするために`tiup playground`を使用する場合、デフォルトのホストは`127.0.0.1`で、デフォルトのパスワードは空です。
 
@@ -97,7 +97,7 @@ db = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud Starterの場合、パブリック エンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要となるため、接続文字列に`ssl_verify_cert=true&ssl_verify_identity=true`を設定する必要があります。
 
@@ -114,7 +114,7 @@ db = TiDBClient.connect(
 )
 ```
 
-> **注記：**
+> **Note:**
 >
 > `tiup playground`を使用してテスト用のTiDBクラスタをデプロイする場合、接続文字列は次のとおりです。
 >

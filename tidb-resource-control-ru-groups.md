@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/v8.5/tidb-resource-control/','/ja/tidb/stable/tidb-resource-
 
 # リソース制御を使用して、リソースグループの制限とフロー制御を実現します。 {#use-resource-control-to-achieve-resource-group-limitation-and-flow-control}
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
@@ -52,7 +52,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減することができます。
 
-> **注記：**
+> **Note:**
 >
 > -   リソース管理の有効性を評価するには、クラスタを独立したコンピューティングノードとストレージノードにデプロイすることをお勧めします。 `tiup playground`で作成されたデプロイメントでは、リソースがインスタンス間で共有されるため、スケジューリングやその他のクラスタのリソースに依存する機能が正しく動作しない場合があります。
 
@@ -66,7 +66,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 <table><thead><tr><th>リソースタイプ</th><th>RU消費量</th></tr></thead><tbody><tr><td rowspan="3">読む</td><td>ストレージ読み取りバッチ2つで1RUを消費します</td></tr><tr><td>8回のストレージ読み取りリクエストで1RUを消費します</td></tr><tr><td>64 KiBの読み取りリクエストペイロードは1 RUを消費します</td></tr><tr><td rowspan="3">書く</td><td>ストレージ書き込みバッチ1つにつき1RUを消費します</td></tr><tr><td>ストレージ書き込みリクエスト1件につき1RUを消費します。</td></tr><tr><td> 1 KiBの書き込みリクエストペイロードは1 RUを消費します</td></tr><tr><td>CPU</td><td> 3ミリ秒で1RUを消費します</td></tr></tbody></table>
 
-> **注記：**
+> **Note:**
 >
 > -   各書き込み操作は最終的にすべてのレプリカに複製されます（デフォルトでは、TiKVには3つのレプリカがあります）。各複製操作は、それぞれ異なる書き込み操作として扱われます。
 > -   上記の表には、TiDB Self-ManagedクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
@@ -196,7 +196,7 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 
 リソースグループに必要なリソースが不足するほどリクエストが多すぎる場合、クライアントのリクエストは待機状態になります。待機時間が長すぎると、リクエストはエラーを報告します。
 
-> **注記：**
+> **Note:**
 >
 > -   `CREATE USER`または`ALTER USER`を使用してユーザーをリソース グループにバインドすると、その設定はユーザーの既存のセッションには適用されず、ユーザーの新しいセッションにのみ適用されます。
 > -   TiDB はクラスタ初期化時に`default`リソース グループを自動的に作成します。このリソース グループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。リソース グループにバインドされていないステートメントは、自動的にこのリソース グループにバインドされます。このリソース グループは削除をサポートしていませんが、RU の設定を変更することはできます。
@@ -349,7 +349,7 @@ SELECT * FROM request_unit_by_group LIMIT 5;
     +----------------------------+----------------------------+----------------+----------+
     5 rows in set (0.01 sec)
 
-> **注記：**
+> **Note:**
 >
 > `mysql.request_unit_by_group`のデータは、TiDB のスケジュールされたタスクによって毎日終了時に自動的にインポートされます。特定の日にリソース グループの RU 消費量が 0 の場合、レコードは生成されません。デフォルトでは、このテーブルには過去 3 か月 (最大 92 日) のデータが格納されます。この期間を超えるデータは自動的にクリアされます。
 
@@ -367,7 +367,7 @@ TiDB Dashboardの現在の[`RESOURCE_GROUPS`](/information-schema/information-sc
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > このセクションは、TiDB Self-Managed にのみ適用されます。現在、 TiDB Cloudリソース制御メトリクスは提供されていません。
 

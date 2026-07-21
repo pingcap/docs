@@ -13,7 +13,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクをインポートします。
 -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エクスポート タスクを削除します。
 
-> **注記：**
+> **Note:**
 >
 > `tidbcloud_serverless_export`リソースは変更できません。3 `tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 

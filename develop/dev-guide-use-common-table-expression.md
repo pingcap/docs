@@ -161,7 +161,7 @@ FROM
 
 `books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。3 と`books_with_orders` `books_with_average_ratings`クエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
 
-> **ヒント：**
+> **Tip:**
 >
 > デフォルトの CTE クエリの効率が良くない場合は、ヒント[`MERGE()`](/optimizer-hints.md#merge)を使用して CTE サブクエリを外部クエリに拡張し、効率を向上させることができます。
 

@@ -13,7 +13,7 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
 -   TiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートします。
 -   TiDB Cloud Starter またはTiDB Cloud Essential ブランチを削除します。
 
-> **注記：**
+> **Note:**
 >
 > `tidbcloud_serverless_branch`リソースは変更できません。サーバーレスブランチリソースの設定を変更する場合は、既存のリソースを削除して新しいリソースを作成する必要があります。
 

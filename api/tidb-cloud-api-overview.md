@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/api-overview/']
 
 # TiDB Cloud APIの概要 {#tidb-cloud-api-overview}
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud APIはパブリックプレビューです。
 

@@ -7,7 +7,7 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 
 このドキュメントでは、TiDB Cloud EssentialからApache Kafkaへデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > 現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >

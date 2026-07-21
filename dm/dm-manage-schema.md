@@ -40,7 +40,7 @@ DMが増分レプリケーションを実行する際、まず上流のbinlogを
 
 `binlog-schema`コマンドを実行して、DM で管理されている`schema-I`テーブル スキーマを取得、変更、または削除できます。
 
-> **注記：**
+> **Note:**
 >
 > `binlog-schema`コマンドは DM v6.0 以降のバージョンでのみサポートされます。それ以前のバージョンでは、 `operate-schema`コマンドを使用する必要があります。
 
@@ -68,7 +68,7 @@ help binlog-schema
 
     Use "dmctl binlog-schema [command] --help" for more information about a command.
 
-> **注記：**
+> **Note:**
 >
 > -   データ移行中にテーブル スキーマが変更される可能性があるため、予測可能なテーブル スキーマを取得するには、現在、データ移行タスクが`Paused`状態にある場合にのみ`binlog-schema`コマンドを使用できます。
 > -   誤った取り扱いによるデータ損失を避けるため、スキーマを変更する前に、まずテーブル スキーマを取得してバックアップすること**を強くお勧めします**。
@@ -193,7 +193,7 @@ help binlog-schema delete
     Global Flags:
       -s, --source strings   MySQL Source ID.
 
-> **注記：**
+> **Note:**
 >
 > DM で管理されているテーブル スキーマが削除された後、このテーブルに関連する DDL/DML ステートメントをダウンストリームに移行する必要がある場合、DM は次の 3 つのソースからテーブル スキーマを順番に取得しようとします。
 >

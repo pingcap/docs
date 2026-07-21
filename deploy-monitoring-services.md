@@ -206,7 +206,7 @@ Grafana サービスを開始します。
 
     -   デフォルトのパスワード: admin
 
-    > **注記：**
+    > **Note:**
     >
     > **パスワードの変更**手順では、 **「スキップ」**を選択できます。
 
@@ -233,7 +233,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 3.  **「.json ファイルのアップロード」を**クリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [ティックブ/ティックブ](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)および[ティックブ/PD](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
 
-    > **注記：**
+    > **Note:**
     >
     > TiKV、PD、および TiDB Dashboardの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 

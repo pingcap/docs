@@ -7,7 +7,7 @@ summary: コンソールウィザードを使用して、Amazon S3からTiDB Clo
 
 このドキュメントでは、Amazon Simple Storage Service (Amazon S3) からTiDB Cloud Premium インスタンスに CSV ファイルをインポートする方法について説明します。
 
-> **ヒント：**
+> **Tip:**
 >
 > -   TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
 > -   TiDB Cloud Dedicatedについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。

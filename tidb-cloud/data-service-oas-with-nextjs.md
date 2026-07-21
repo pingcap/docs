@@ -178,7 +178,7 @@ SELECT * FROM test.repository;
     }
     ```
 
-    > **注記：**
+    > **Note:**
     >
     > データアプリにリンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトのエンドポイント パスを次のように構成する必要があります。
     >
@@ -194,7 +194,7 @@ SELECT * FROM test.repository;
 
 ## ステップ5．Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
 
-> **注記：**
+> **Note:**
 >
 > プレビューを実行する前に、必要な依存関係がすべてインストールされ、正しく設定されていることを確認してください。
 

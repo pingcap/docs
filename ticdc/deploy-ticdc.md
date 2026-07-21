@@ -37,7 +37,7 @@ cdc_servers:
 -   設定可能なフィールドの詳細については、 [TiUPを使用して`cdc_servers`を設定する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
 -   TiDB クラスターを展開する詳細な手順については、 [TiUPを使用してTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > TiCDC をインストールする前に、 TiUPコントロール マシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)いることを確認してください。
 
@@ -88,7 +88,7 @@ tiup update --all && \
 tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 ```
 
-> **注記：**
+> **Note:**
 >
 > 上記のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスタ名とクラスタバージョンに置き換える必要があります。たとえば、バージョンは v8.5.4 です。
 

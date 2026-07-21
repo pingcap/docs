@@ -29,7 +29,7 @@ v2.0.5 以降のバージョンでは、 `task`構成ファイル内の`online-d
 online-ddl: true
 ```
 
-> **注記：**
+> **Note:**
 >
 > v2.0.5以降、 `online-ddl-scheme`非推奨となりました。そのため、 `online-ddl-scheme`ではなく`online-ddl`使用する必要があります。つまり、 `online-ddl: true`設定すると`online-ddl-scheme`上書きされ、 `online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
 

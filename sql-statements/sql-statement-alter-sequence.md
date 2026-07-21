@@ -58,7 +58,7 @@ ALTER SEQUENCE sequence_name
 | `CACHE`     | `1000`                       | TiDB 内のシーケンスのローカル キャッシュ サイズを指定します。                                                                                                  |
 | `CYCLE`     | `NO CYCLE`                   | シーケンスを最小値（降順シーケンスの場合は最大値）から再開するかどうかを指定します。1 &gt; `0` `INCREMENT` 、デフォルト値は`MINVALUE`です。7 &lt; `INCREMENT` `0`場合、デフォルト値は`MAXVALUE`です。 |
 
-> **注記：**
+> **Note:**
 >
 > `START`値を変更しても、 `ALTER SEQUENCE ... RESTART`実行するまで生成された値には影響しません。
 
@@ -78,7 +78,7 @@ ALTER SEQUENCE sequence_name
 
     この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメータはシーケンスの`identifier` 、2番目のパラメータは`num`です。
 
-> **注記：**
+> **Note:**
 >
 > TiDBにおけるシーケンスの実装において、 `SETVAL`関数はシーケンスの初期進行またはサイクル進行を変更できません。この関数は、この進行に基づいて次の有効な値を返すだけです。
 

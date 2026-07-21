@@ -230,7 +230,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `enable-kafka-sink-v2` {#enable-kafka-sink-v2}
 
-> **警告：**
+> **Warning:**
 >
 > この設定は実験的機能です。本番環境での使用は推奨されません。
 

@@ -192,7 +192,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 
 2番目のクエリ文`EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);`では、テーブル`t`と`s`列`a`と`b`が NULL 可能であるため、 `IN`サブクエリは NULL 対応のセミ結合に変換される必要があります。しかし、TiDB はセミ結合を内部結合と集計に変換することで最適化します。これは、非スカラー出力の`IN`のサブクエリでは、 `NULL`と`false`等価であるためです。プッシュダウンフィルタの`NULL`行は、 `WHERE`句の否定的なセマンティクスになります。したがって、これらの行は事前に無視できます。
 
-> **注記：**
+> **Note:**
 >
 > `Exists`演算子もセミ結合に変換されますが、null を認識しません。
 
@@ -255,7 +255,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 
 現在、TiDBはアンチセミ結合とアンチ左外部セミ結合のNULL値のみに対応しています。ハッシュ結合タイプのみがサポートされており、その構築テーブルは右側のテーブルに固定する必要があります。
 
-> **注記：**
+> **Note:**
 >
 > `Not Exists`演算子もアンチセミ結合に変換されますが、null を認識しません。
 

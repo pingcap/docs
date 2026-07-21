@@ -7,7 +7,7 @@ summary: TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデー
 
 TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスへデータをストリーミングできます。現在、 TiDB Cloud EssentialはApache Kafka と MySQL へのデータストリーミングをサポートしています。
 
-> **注記：**
+> **Note:**
 >
 > -   現在、 TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
@@ -40,7 +40,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -108,7 +108,7 @@ ticloud serverless changefeed pause --cluster-id <cluster-id> --changefeed-id <c
 
 ## 変更フィードを編集する {#edit-a-changefeed}
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud現在、一時停止状態の変更フィードの編集のみが許可されています。
 

@@ -54,7 +54,7 @@ target-database:       # Configuration of target TiDB database.
 
 ## 移行するテーブルを構成する {#configure-tables-to-be-migrated}
 
-> **注記：**
+> **Note:**
 >
 > 特定のテーブルをフィルタリングしたり、特定のテーブルを移行したりする必要がない場合は、この構成をスキップします。
 
@@ -92,7 +92,7 @@ target-database:       # Configuration of target TiDB database.
 
 ## 移行するbinlogイベントを構成する {#configure-binlog-events-to-be-migrated}
 
-> **注記：**
+> **Note:**
 >
 > 特定のスキーマまたはテーブルの特定のbinlogイベントをフィルターする必要がない場合は、この構成をスキップします。
 
@@ -129,7 +129,7 @@ target-database:       # Configuration of target TiDB database.
 
 ## データソーステーブルから下流の TiDB テーブルへのマッピングを構成する {#configure-the-mapping-of-data-source-tables-to-downstream-tidb-tables}
 
-> **注記：**
+> **Note:**
 >
 > -   データ ソースの特定のテーブルをダウンストリーム TiDB インスタンス内の別の名前のテーブルに移行する必要がない場合は、この構成をスキップします。
 >
@@ -168,7 +168,7 @@ target-database:       # Configuration of target TiDB database.
 
 ## シャードマージタスクを構成する {#configure-a-shard-merge-task}
 
-> **注記：**
+> **Note:**
 >
 > -   シャードマージのシナリオでシャーディングDDL文を移行する必要がある場合は、 `shard-mode`フィールドを明示的に設定する**必要があります**。それ以外の場合は、 `shard-mode`を設定し**ないでください**。
 >

@@ -29,7 +29,7 @@ tiup cluster reload <cluster-name> [flags]
 -   データ型: `UINT`
 -   デフォルト: 600
 
-> **注記：**
+> **Note:**
 >
 > 待機をスキップして直接再起動する場合、サービスのパフォーマンスが不安定になる可能性があります。
 
@@ -45,7 +45,7 @@ tiup cluster reload <cluster-name> [flags]
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合は、デフォルトですべてのノードが選択されます。
 
-> **注記：**
+> **Note:**
 >
 > -   `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
 > -   オプション`--skip-restart`指定した場合、オプション`-N, --node`は無効になります。
@@ -56,7 +56,7 @@ tiup cluster reload <cluster-name> [flags]
 -   データ型: `STRINGS`
 -   コマンドでこのオプションを指定しない場合は、すべてのロールがデフォルトで選択されます。
 
-> **注記：**
+> **Note:**
 >
 > 1.  `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
 > 2.  オプション`--skip-restart`指定した場合、オプション`-R, --role`は無効になります。
@@ -81,7 +81,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --pre-restart-script {#pre-restart-script}
 
-> **警告：**
+> **Warning:**
 >
 > このオプションは実験的であり、本番での展開には推奨されません。
 
@@ -91,7 +91,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --post-restart-script {#post-restart-script}
 
-> **警告：**
+> **Warning:**
 >
 > このオプションは実験的であり、本番での展開には推奨されません。
 

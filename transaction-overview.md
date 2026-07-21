@@ -11,7 +11,7 @@ TiDBは、 [悲観的](/pessimistic-transaction.md)または[楽観的](/optimis
 
 一般的な変数には、 [`autocommit`](#autocommit) 、 [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) 、 [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) 、 [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)などがあります。
 
-> **注記：**
+> **Note:**
 >
 > 変数[`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)と[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
 
@@ -41,7 +41,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 これらのステートメントのいずれかが実行されたときに現在のセッションがトランザクションの処理中である場合、TiDB は新しいトランザクションを開始する前に現在のトランザクションを自動的にコミットします。
 
-> **注記：**
+> **Note:**
 >
 > MySQLとは異なり、TiDBは上記のステートメントを実行した後に現在のデータベースのスナップショットを取得します。MySQLの`BEGIN`と`START TRANSACTION`は、トランザクション開始後、InnoDBからデータを読み取る最初の`SELECT`ステートメント（`SELECT FOR UPDATE`ではありません）を実行した後にスナップショットを取得します。MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`は、`START TRANSACTION`ステートメントの実行中にスナップショットを取得します。その結果、TiDBの`BEGIN`/`START TRANSACTION`は、MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
 
@@ -55,7 +55,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 COMMIT;
 ```
 
-> **ヒント：**
+> **Tip:**
 >
 > [楽観的トランザクション](/optimistic-transaction.md)有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)使用することをお勧めします。
 
@@ -159,7 +159,7 @@ SET GLOBAL autocommit = 0;
 
 ## 明示的トランザクションと暗黙的トランザクション {#explicit-and-implicit-transaction}
 
-> **注記：**
+> **Note:**
 >
 > 一部の文は暗黙的にコミットされます。例えば、 `[BEGIN|START TRANSACTION]`実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作はMySQLとの互換性を保つために必要です。詳細は[暗黙のコミット](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
 
@@ -214,7 +214,7 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 
 遅延チェック最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place)設定することで無効にできます。
 
-> **注記：**
+> **Note:**
 >
 > -   この最適化は楽観的トランザクションにのみ適用されます。
 > -   この最適化は`INSERT IGNORE`と`INSERT ON DUPLICATE KEY UPDATE`には適用されず、通常の`INSERT`ステートメントにのみ適用されます。
@@ -278,7 +278,7 @@ TiDBでは以前、1トランザクションあたりのキーと値のペアの
 
 ## 因果関係の一貫性 {#causal-consistency}
 
-> **注記：**
+> **Note:**
 >
 > 因果一貫性のあるトランザクションは、非同期コミット機能と1相コミット機能が有効な場合にのみ有効になります。これらの2つの機能の詳細については、 [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)参照してください。
 

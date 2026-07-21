@@ -79,7 +79,7 @@ OOM の問題は通常、次の原因で発生します。
 
 このセクションでは、データベースの問題によって発生する OOM の原因と解決策について説明します。
 
-> **注記：**
+> **Note:**
 >
 > [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)設定した場合、エラーが発生します: `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]` 。これはデータベースのメモリ使用量制御の動作によるもので、正常な動作です。
 

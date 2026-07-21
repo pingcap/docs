@@ -31,7 +31,7 @@ Int64Num ::= NUM
 NUM ::= intLit
 ```
 
-> **注記：**
+> **Note:**
 >
 > テーブルが削除され、GCの有効期間が過ぎた場合、 `RECOVER TABLE`ではテーブルを回復できません。このシナリオで`RECOVER TABLE`実行すると、 `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`ようなエラーが返されます。
 

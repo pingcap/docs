@@ -7,13 +7,13 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 `ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB ではオンラインで実行されるため、インデックスの追加によってテーブルへの読み取りや書き込みがブロックされることはありません。
 
-> **ヒント：**
+> **Tip:**
 >
 > [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)使用すると、このステートメントの操作を高速化できます。
 
 <CustomContent platform="tidb-cloud">
 
-> **注記：**
+> **Note:**
 >
 > 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの場合、インデックス作成中にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響を軽減できます。
 
@@ -21,7 +21,7 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 <CustomContent platform="tidb">
 
-> **警告：**
+> **Warning:**
 >
 > -   TiDB クラスターで DDL ステートメントが実行されている間は、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。
 > -   アップグレードを行う前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスタで実行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスタで DDL ジョブが実行されている場合は、クラスタをアップグレードする前に、DDL ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
@@ -100,7 +100,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 -   TiDB Self-Managed およびTiDB Cloud Dedicated は`FULLTEXT`構文の解析をサポートしていますが、 `FULLTEXT`インデックスの使用はサポートしていません。
 
-    > **注記：**
+    > **Note:**
     >
     > 現在、特定の AWS リージョンのTiDB Cloud Starterインスタンスのみが[`FULLTEXT`構文と索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)をサポートしています。
 

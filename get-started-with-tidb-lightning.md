@@ -7,7 +7,7 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
 このドキュメントでは、MySQLデータをTiDBクラスタにインポートすることでTiDB Lightningを使い始めるための簡単なガイドを提供します。
 
-> **警告：**
+> **Warning:**
 >
 > このチュートリアルで紹介するデプロイ方法は、テストおよび試用のみを推奨します。**本番や開発環境では適用しないでください。**
 
@@ -56,7 +56,7 @@ tiup install tidb-lightning
 
 ## ステップ4： TiDB Lightningを起動する {#step-4-start-tidb-lightning}
 
-> **注記：**
+> **Note:**
 >
 > このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境については、 [MySQLからTiDBへの大規模データセットの移行](/migrate-large-mysql-to-tidb.md)を参照してください。
 

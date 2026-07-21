@@ -14,7 +14,7 @@ TiDBはMySQL互換データベースであり、JDBC（Java Database Connectivit
 -   JDBCを使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記：**
+> **Note:**
 >
 > -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 > -   TiDB v7.4 以降、 `connectionCollation`が構成されておらず、JDBC URL で`characterEncoding`が構成されていないか、または`UTF-8`に設定されている場合、JDBC 接続で使用される照合順序は JDBC ドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)を参照してください。
@@ -67,13 +67,13 @@ cd tidb-java-jdbc-quickstart
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

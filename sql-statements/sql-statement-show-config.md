@@ -7,7 +7,7 @@ summary: TiDBデータベースにおけるSHOW CONFIGの使用の概要
 
 `SHOW CONFIG`文は、TiDB の様々なコンポーネントの現在の設定を表示するために使用されます。構成パラメータとシステム変数は異なる次元で作用するため、混同しないように注意してください。システム変数の情報を取得する場合は、 [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)構文を使用してください。
 
-> **注記：**
+> **Note:**
 >
 > この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 

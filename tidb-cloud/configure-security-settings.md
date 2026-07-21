@@ -7,13 +7,13 @@ summary: TiDB Cloud Dedicatedクラスターに接続するためのルートパ
 
 TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を許可するIPアドレスを設定できます。
 
-> **注記：**
+> **Note:**
 >
 > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、このドキュメントは適用されないため、代わりに[TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
 1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
@@ -23,6 +23,6 @@ TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を
 
     **「パスワードを自動生成」をクリックすると、ランダムなパスワード**が生成されます。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud Dedicatedクラスターの概要ページを表示している場合は、ページ右上隅の「 **...」**をクリックし、 **「パスワード設定」**を選択して、これらの設定を構成することもできます。

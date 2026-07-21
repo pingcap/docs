@@ -99,7 +99,7 @@ CREATE TABLE `bookshop`.`books` (
 
 [主キー](/constraints.md#primary-key)とは、テーブル内の行を一意に識別する値を持つ、テーブル内の列または列のセットのことです。
 
-> **注記：**
+> **Note:**
 >
 > TiDBにおける**主キー**のデフォルト定義は、 [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html) （MySQLの一般的なストレージエンジン）における定義とは異なります。
 >
@@ -142,7 +142,7 @@ TiDB は v5.0 以降、[クラスター化インデックス](/clustered-indexes
 
 [主キーを選択](#select-primary-key)で説明されているように、**クラスター化インデックス**は TiDB でキーワード`CLUSTERED`および`NONCLUSTERED`を使用して制御されます。
 
-> **注記：**
+> **Note:**
 >
 > TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 *{* `PRIMARY KEY`と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
 
@@ -226,7 +226,7 @@ CREATE TABLE `bookshop`.`users` (
 
 ## HTAP機能を使用する {#use-htap-capabilities}
 
-> **注記：**
+> **Note:**
 >
 > このセクションで説明する手順は、クイック スタートとテスト***のみ***を目的としています。 TiDB での HTAP の使用法の詳細については、 [HTAPを探索する](/explore-htap.md)参照してください。
 
@@ -259,7 +259,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 ```
 
-> **注記：**
+> **Note:**
 >
 > クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`を報告します。 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)を使用して、 **TiFlash**を含むTiDB Cloud Starterインスタンスを作成できます。
 

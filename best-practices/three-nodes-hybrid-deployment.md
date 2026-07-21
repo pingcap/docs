@@ -109,7 +109,7 @@ TiDBはマルチバージョン同時実行制御（MVCC）モデルを使用し
 tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
 ```
 
-> **注記：**
+> **Note:**
 >
 > 頻繁に更新されるアプリケーションシナリオでは、GCトラフィックを制限するとMVCCバージョンが蓄積され、読み取りパフォーマンスに影響する可能性があります。現在、パフォーマンスジッターとパフォーマンス低下のバランスをとるために、このパラメータの値を複数回調整する必要がある可能性があります。
 

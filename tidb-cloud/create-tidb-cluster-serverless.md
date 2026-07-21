@@ -7,7 +7,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの作
 
 このドキュメントでは、TiDB [TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法について説明します。
 
-> **ヒント：**
+> **Tip:**
 >
 > TiDB Cloud Dedicatedクラスターを作成する方法については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
 
@@ -72,7 +72,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 - TiDB Cloud StarterまたはEssentialインスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)インスタンスのパスワードを作成します。
 
-    > **注記：**
+    > **Note:**
     >
     > パスワードを設定しないと、 TiDB Cloud StarterまたはEssentialインスタンスに接続できません。
 

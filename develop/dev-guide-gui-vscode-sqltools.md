@@ -10,7 +10,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 このチュートリアルでは、Visual Studio Code を使用して TiDB に接続する方法を学ぶことができます。
 
-> **注記：**
+> **Note:**
 >
 > -   このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 > -   このチュートリアルは、 [GitHub Codespaces](https://github.com/features/codespaces) 、Visual Studio [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers)[Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl) Code リモート開発環境でも動作します。
@@ -52,13 +52,13 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > VS Code をリモート開発環境で実行している場合は、リストからリモートのオペレーティングシステムを選択してください。たとえば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えてください。GitHub Codespaces を使用している場合は、この操作は不要です。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 
@@ -81,7 +81,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
         -   **認証プロトコル**：**デフォルト**を選択してください。
         -   **SSL** ： **[有効]**を選択します。TiDB Cloud Starterは安全な接続を必要とします。SSL**オプション（node.TLSSocket）**領域で、 TiDB Cloud接続ダイアログの`CA`パラメーターを**[認証局（CA）証明書**ファイル]フィールドに設定してください。
 
-            > **注記：**
+            > **Note:**
             >
             > Windows または GitHub コードスペースで実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB Cloud Starterルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)参照してください。
 

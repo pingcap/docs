@@ -26,11 +26,11 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 -   AUTO_INCREMENTビットの値はTiKVに格納され、順次割り当てられます。値が割り当てられるたびに、次の値は1ずつ増加します。AUTO_INCREMENTビットの値が使い果たされると（つまり、最大値に達すると）、以降の自動割り当てはエラー`Failed to read auto-increment value from storage engine`で失敗します。
 -   値の範囲は`_tidb_rowid`です。最終的に生成される値の最大ビット数は、シャードビット + AUTO_INCREMENTビットなので、最大値は`(2^63)-1`です。
 
-> **警告：**
+> **Warning:**
 >
 > `_tidb_rowid`は TiDB によって暗黙的に割り当てられる内部行 ID です。すべての場合においてグローバルに一意であると想定しないでください。クラスター化インデックスを使用しないパーティション テーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`異なるパーティションに同じ`_tidb_rowid`値を残す可能性があります。詳細については、 [`_tidb_rowid`](/tidb-rowid.md)参照してください。
 
-> **注記：**
+> **Note:**
 >
 > シャードビットの選択（ `S` ）：
 >

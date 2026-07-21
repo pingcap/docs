@@ -41,7 +41,7 @@ tiup cluster display tidb-test
 
 ## データベースにログインして簡単な操作を実行する {#log-in-to-the-database-and-perform-simple-operations}
 
-> **注記：**
+> **Note:**
 >
 > データベースにログインする前に、MySQL クライアントをインストールしてください。
 

@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
 このチュートリアルでは、ローカルのNode.jsプロジェクトでTiDB Cloud Serverless Driverを使用する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > -   このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
 > -   Cloudflare Workers、Vercel Edge Functions、および Netlify Edge Functions でTiDB Cloud Serverless Driverを使用する方法については、[自動車販売に関する洞察](https://car-sales-insight.vercel.app/)と[サンプルリポジトリ](https://github.com/tidbcloud/car-sales-insight)を確認してください。

@@ -7,7 +7,7 @@ summary: TiDBデータベースにおけるLOAD STATSの使用方法の概要。
 
 `LOAD STATS`ステートメントは、統計情報を TiDB にロードするために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 

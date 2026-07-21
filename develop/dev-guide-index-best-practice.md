@@ -91,7 +91,7 @@ CREATE TABLE `books` (
 
     ここで、 `SELECT * FROM books WHERE YEAR(published_at)=2022;`クエリを実行すると、クエリは`published_year_idx`インデックスを使用して実行を高速化できます。
 
-    > **警告：**
+    > **Warning:**
     >
     > 現在、式インデックスは実験的機能であり、TiDB設定ファイルで有効化する必要があります。詳細については[式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)参照してください。
 

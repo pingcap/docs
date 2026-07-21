@@ -14,13 +14,13 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-overview/']
 2.  **テキストデータを挿入すると**、ベクトルが自動的に生成され保存されます。
 3.  **テキストを使用してクエリを実行します**。 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用して、意味的に類似したコンテンツを検索します。
 
-> **注記：**
+> **Note:**
 >
 > 自動埋め込み機能は、AWS上でホストされているTiDB Cloud Starterインスタンスでのみ利用可能です。
 
 ## クイックスタートの例 {#quick-start-example}
 
-> **ヒント：**
+> **Tip:**
 >
 > Python の使用方法については、 [Pythonで自動埋め込みを使用する](#use-auto-embedding-in-python)を参照してください。
 
@@ -99,7 +99,7 @@ ORDER BY VEC_EMBED_COSINE_DISTANCE(
 LIMIT 3;
 ```
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトルインデックスを定義する場合は、 `VEC_COSINE_DISTANCE()`または`VEC_L2_DISTANCE()`を使用します。
 > -   クエリを実行する際は、 `VEC_EMBED_COSINE_DISTANCE()`または`VEC_EMBED_L2_DISTANCE()`を使用してください。

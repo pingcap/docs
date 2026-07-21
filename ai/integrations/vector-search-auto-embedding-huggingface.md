@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 このドキュメントでは、 TiDB Cloudで Hugging Face 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、テキストクエリによる意味検索を実行する方法について説明します。
 
-> **注記：**
+> **Note:**
 >
 > [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
@@ -192,7 +192,7 @@ LIMIT 2;
 
 ## Qwen3-Embedding-0.6B {#qwen3-embedding-0-6b}
 
-> **注記：**
+> **Note:**
 >
 > このモデルでは、Hugging Face Inference APIが不安定になる可能性があります。
 
@@ -289,7 +289,7 @@ class Document(TableModel):
 table = tidb_client.create_table(schema=Document, if_exists="overwrite")
 ```
 
-> **ヒント：**
+> **Tip:**
 >
 > ベクトルの次元は、選択したモデルによって異なります。たとえば、 `huggingface/sentence-transformers/all-MiniLM-L6-v2`は 384 次元のベクトルを生成し、 `huggingface/sentence-transformers/all-mpnet-base-v2`は 768 次元のベクトルを生成します。
 

@@ -104,7 +104,7 @@ TableSample ::=
 | `LOCK IN SHARE MODE`               | 互換性を保証するため、TiDBはこれら3つの修飾子を解析しますが、無視します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `TABLESAMPLE`                      | テーブルから行のサンプルを取得する。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-> **注記：**
+> **Note:**
 >
 > -   バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブル エイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。クエリが異なるデータベースにまたがる同じ名前の複数のテーブル (たとえば`FROM db1.t, db2.t FOR UPDATE OF t` ) に関係する場合、TiDB は現在のデータベース コンテキストではなく、 `FROM`句の順序に基づいて、対象テーブルを左から右に照合するようになりました。曖昧さを避けるため、 `FOR UPDATE OF`句でデータベース名を指定するか、エイリアスを使用することをお勧めします。
 > -   v6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度（ `HIGH_PRIORITY` ）は適用されなくなります。 を使用して、異なるSQLステートメントの[リソース制御](/tidb-resource-control-ru-groups.md)使用量を管理することをお勧めします。
@@ -158,7 +158,7 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 
 `SELECT ... INTO OUTFILE`ステートメントは、クエリの結果をファイルに書き込むために使用されます。
 
-> **注記：**
+> **Note:**
 >
 > -   この記述はTiDB Self-Managedにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 > -   このステートメントは、Amazon S3 や GCS などの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)へのクエリ結果の書き込みをサポートしていません。

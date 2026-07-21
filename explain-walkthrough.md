@@ -44,7 +44,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`演算子（ `root`のタスク）に送信されます。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセス対象のTiKVリージョンごとに1行ずつ受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
 5.  次に、演算子`StreamAgg_20`は演算子`└─TableReader_21`の各行に関数`count`適用します。これは演算子[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からもわかるように、約 56 行になります。これはルート演算子であるため、結果をクライアントに返します。
 
-> **注記：**
+> **Note:**
 >
 > テーブルに含まれるリージョンの概要を表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)実行します。
 
@@ -153,7 +153,7 @@ ALTER TABLE trips ADD INDEX (start_date);
 Query OK, 0 rows affected (2 min 10.23 sec)
 ```
 
-> **注記：**
+> **Note:**
 >
 > DDLジョブの進行状況は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して監視できます。TiDBのデフォルト設定は、インデックスの追加が本番環境の本番ロードに過度な影響を与えないよう、慎重に選択されています。テスト環境では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。リファレンスシステムでは、バッチサイズを`10240` 、ワーカー数を`32`にすることで、デフォルト設定の10倍のパフォーマンス向上を実現できます。
 
@@ -195,7 +195,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 上記の結果から、クエリ時間は 1.03 秒から 0.0 秒に短縮されました。
 
-> **注記：**
+> **Note:**
 >
 > Another optimization that applies here is the coprocessor cache. If you are unable to add indexes, consider enabling the [コプロセッサキャッシュ](/coprocessor-cache.md). When it is enabled, as long as the Region has not been modified since the operator is last executed, TiKV will return the value from the cache. This will also help reduce much of the cost of the expensive `TableFullScan` and `Selection` operators.
 
@@ -247,6 +247,6 @@ EXPLAIN SELECT * FROM t2 WHERE a = (SELECT a FROM t1);
 
 ご覧のとおり、スカラーサブクエリは実行中に展開されないため、このような SQL の具体的な実行プロセスを理解しやすくなります。
 
-> **注記：**
+> **Note:**
 >
 > [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) `EXPLAIN`ステートメントの動作にのみ影響し、 `EXPLAIN ANALYZE`ステートメントは引き続きサブクエリを事前に実行します。

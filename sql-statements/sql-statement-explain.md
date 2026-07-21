@@ -7,7 +7,7 @@ summary: TiDB データベースにおけるEXPLAINの使用法の概要。
 
 `EXPLAIN`の文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`の文を補完するものです。5 `EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`実行して、テーブル統計が最新であることを確認することを検討してください。
 
-> **注記：**
+> **Note:**
 >
 > 最適化フェーズでは、 `EXPLAIN`文であっても、最適な実行プランを生成するために特定のサブクエリが事前実行されます。この動作の詳細と無効化方法については、 [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)および[サブクエリの早期実行を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)参照してください。
 
@@ -37,11 +37,11 @@ ExplainableStmt ::=
 
 ## <code>EXPLAIN</code>出力形式 {#code-explain-code-output-format}
 
-> **注記：**
+> **Note:**
 >
 > MySQLクライアントを使用してTiDBに接続する場合、出力結果を行の折り返しなしでより明確に読み取るには、 `pager less -S`コマンドを使用します。3 `EXPLAIN`結果が出力された後、キーボードの右矢印<kbd>→</kbd>キーを押して出力を水平にスクロールします。
 
-> **注記：**
+> **Note:**
 >
 > 返される実行プランにおいて、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降では`estRows`の意味が v6.4.0 以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)を参照してください。
 

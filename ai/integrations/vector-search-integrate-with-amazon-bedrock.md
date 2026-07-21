@@ -6,13 +6,13 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 # TiDB Vector SearchをAmazon Bedrockと統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
 
-> **注記：**
+> **Note:**
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
 このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
@@ -70,13 +70,13 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
 4.  **「パスワードを生成」を**クリックすると、ランダムなパスワードが生成されます。
 
-    > **ヒント：**
+    > **Tip:**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

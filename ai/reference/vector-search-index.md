@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-in
 
 検索効率を向上させるために、TiDBでは近似KNN（ANN）検索用のベクトル検索インデックスを作成できます。ベクトル検索にベクトルインデックスを使用すると、TiDBは精度をわずかに低下させるだけでクエリパフォーマンスを大幅に向上させ、通常90%以上の検索再現率を維持できます。
 
-> **注記：**
+> **Note:**
 >
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > -   ベクトル検索機能は[TiDB Self-Managed](/overview.md)および[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用可能です。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
@@ -56,7 +56,7 @@ TiDB では、次のいずれかの方法で、 [ベクトルデータ型](/ai/r
     ALTER TABLE foo ADD VECTOR INDEX idx_embedding ((VEC_COSINE_DISTANCE(embedding))) USING HNSW;
     ```
 
-> **注記：**
+> **Note:**
 >
 > ベクトル検索インデックス機能は、テーブルのTiFlashレプリカに依存します。
 >
@@ -236,7 +236,7 @@ LIMIT 10;
 +-----+--------------------------------------------------------+-----+
 ```
 
-> **注記：**
+> **Note:**
 >
 > 実行情報は内部情報です。フィールドとフォーマットは予告なく変更される場合があります。これらの情報に依存しないでください。
 

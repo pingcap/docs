@@ -13,7 +13,7 @@ TiDB Cloudの直接顧客とは異なり、リセラーの顧客はPingCAPに直
 
 ## 直接のTiDB Cloudアカウントから再販業者の顧客アカウントに移行する {#migrate-from-a-direct-tidb-cloud-account-to-a-reseller-s-customer-account}
 
-> **ヒント：**
+> **Tip:**
 >
 > 直接顧客とは、PingCAP からTiDB Cloudを直接購入し、請求書を PingCAP に支払うエンド カスタマーです。
 

@@ -31,7 +31,7 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 4.  **「CA証明書」**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
-    > **注記：**
+    > **Note:**
     >
     > -   ダウンロードしたCA証明書は、オペレーティングシステムのデフォルトのストレージパスに保存することも、別のストレージパスを指定することもできます。以降の手順では、コード例のCA証明書パスを、ご自身のCA証明書パスに置き換える必要があります。
     > -   TiDB Cloud Premiumでは、クライアントにTLS接続の使用を強制することはなく、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義設定は現在TiDB Cloud Premiumではサポートされていません。
