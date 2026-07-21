@@ -167,8 +167,8 @@ TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERM
 
 上記の例からわかるように、Canal-JSON は統一されたデータ形式を持ち、イベントの種類ごとに異なるフィールドの入力ルールを備えています。コンシューマーは、統一された方法でこの JSON 形式のデータを解析し、フィールド値をチェックすることでイベントの種類を判別できます。
 
--   `isDdl`が`true`場合、メッセージには DDL イベントが含まれます。
--   `isDdl`が`false`場合、 `type`フィールドをさらに確認する必要があります。`type`が`TIDB_WATERMARK`の場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。
+-   `isDdl`が`true`の場合、メッセージには DDL イベントが含まれます。
+-   `isDdl`が`false`の場合、 `type`フィールドをさらに確認する必要があります。`type`が`TIDB_WATERMARK`の場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。
 
 ## フィールドの説明 {#field-descriptions}
 

@@ -214,7 +214,7 @@ tiup cluster display prod-cluster
     172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
     172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up      -                     deploy/tiproxy-6000
 
-`Status`列では、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
+`Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
 PDコンポーネントの場合、 `|L`または`|UI` `Up`または`Down`に追加されることがあります。 `|L` PD ノードがLeaderであることを示し、 `|UI` [TiDB Dashboard](/dashboard/dashboard-intro.md) PD ノードで実行されていることを示します。
 

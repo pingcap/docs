@@ -179,7 +179,7 @@ trim-last-separator = false
 #### `header` {#header}
 
 -   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
--   `header`が`true`場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
+-   `header`が`true`の場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
 
 #### <code>not-null</code>と<code>null</code> {#code-not-null-code-and-code-null-code}
 
