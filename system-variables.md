@@ -5725,7 +5725,7 @@ SHOW WARNINGS;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソース グループを変更するには`SUPER` `RESOURCE_GROUP_ADMIN` 、 `RESOURCE_GROUP_USER` PLACEHOLDER-E}} の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
+-   この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソース グループを変更するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
 -   TiDB クラスターを以前のバージョンから v8.2.0 以降にアップグレードすると、この変数のデフォルト値は`OFF`に設定され、この機能はデフォルトで無効になります。
 
 ### tidb_retry_limit {#tidb-retry-limit}
