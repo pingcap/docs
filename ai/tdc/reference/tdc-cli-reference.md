@@ -28,6 +28,13 @@ tdc db describe-db-cluster
   [--view <string>]
 ```
 
+In the generated `Flags` and `Global Flags` sections, value types are enclosed in angle brackets and required flags include `(required)` after the flag name and type:
+
+```text
+--db-cluster-name <string> (required)   Starter DB cluster display name
+--project-id <string>                   TiDB Cloud project ID
+```
+
 ## Global flags
 
 | Flag | Description |
@@ -117,7 +124,7 @@ tdc fs --version
 
 ## Errors and exit behavior
 
-Human-readable errors use a stable prefix:
+Human-readable errors start with a blank line and use a stable prefix:
 
 ```text
 tdc [ERROR]: <message>
