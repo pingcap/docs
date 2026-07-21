@@ -5,77 +5,38 @@ summary: Row access policies protect data by filtering table rows at query time.
 
 # Row Access Policy
 
-Row access policies protect data by filtering table rows at query time. They let you define centralized row-level predicates once, attach them to tables, and ensure users only see rows that satisfy the policy.
+Row access policies filter table rows at query time. Define a Boolean predicate once, attach it to a table, and users only see rows that pass the policy.
 
-## When to Use
-
-- **Multi-tenant SaaS**: each tenant only sees their own data — no need for separate tables or views per tenant.
-- **Regional isolation**: sales reps only see orders in their territory; managers see everything.
-- **Time-window control**: a real-time alerting system can only query the last 1 day; an offline analysis system can query 7 days.
-- **Compliance auditing**: external auditors only see data from a specific time period.
-
-If you need all users to see the same rows but with certain column values redacted, use a [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md) instead.
+For column-level redaction instead of hiding rows, use a [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md).
 
 > **Note:**
 >
-> Row access policy is currently experimental. Enable it with `SET enable_experimental_row_access_policy = 1` for the current session or `SET GLOBAL enable_experimental_row_access_policy = 1` for the account.
+> This is an **experimental** feature. Enable it with `SET enable_experimental_row_access_policy = 1` (session) or `SET GLOBAL enable_experimental_row_access_policy = 1` (account).
 
-## How Row Access Works
+## When to Use
 
-Policies evaluate a Boolean expression for each row. Only rows where the expression returns `TRUE` are visible.
+- Multi-tenant isolation — each tenant only sees its own rows
+- Regional / department isolation — sales sees only its territory
+- Time-window control — alerting can scan 1 day; offline analysis can scan 7 days
+- Vector / RAG search — shared knowledge base, role-based document visibility
+- Compliance — auditors only see an approved time range or subset
 
-**Admin role sees all rows**
-
-```sql
-id | name    | department
----|---------|-------------
- 1 | Alice   | Engineering
- 2 | Bob     | Sales
- 3 | Charlie | Engineering
-```
-
-**Other roles see policy-visible rows**
-
-```sql
-id | name    | department
----|---------|-------------
- 1 | Alice   | Engineering
- 3 | Charlie | Engineering
-```
-
-### Key Traits
-
-- **Query-time** - rows are filtered during SELECT and DML planning; stored data never changes.
-- **Role-aware** - expressions can reference `current_role()` or other context functions.
-- **Table-scoped** - attach one row access policy to a table and map one or more table columns to policy arguments.
-- **Reusable** - use the same policy across tables when the mapped columns have compatible types.
-
-## End-to-End Workflow
-
-### 1. Enable the feature
+## Quick Start
 
 ```sql
 SET enable_experimental_row_access_policy = 1;
-```
 
-### 2. Create the target table
-
-```sql
 CREATE TABLE employees (
-    id INT,
-    name STRING,
-    department STRING
+  id INT,
+  name STRING,
+  department STRING
 );
 
 INSERT INTO employees VALUES
-    (1, 'Alice', 'Engineering'),
-    (2, 'Bob', 'Sales'),
-    (3, 'Charlie', 'Engineering');
-```
+  (1, 'Alice', 'Engineering'),
+  (2, 'Bob', 'Sales'),
+  (3, 'Charlie', 'Engineering');
 
-### 3. Define the row access policy
-
-```sql
 CREATE ROW ACCESS POLICY rap_engineering
 AS (dept STRING)
 RETURNS BOOLEAN ->
@@ -84,149 +45,27 @@ CASE
   WHEN dept = 'Engineering' THEN true
   ELSE false
 END;
-```
 
-### 4. Attach the policy
-
-```sql
+-- ON (column) maps to the policy argument by position
 ALTER TABLE employees ADD ROW ACCESS POLICY rap_engineering ON (department);
-```
 
-The `ON (department)` clause maps the table column `department` to the policy argument `dept`.
-
-### 5. Query the table
-
-```sql
 SELECT id, name, department FROM employees ORDER BY id;
 ```
 
-**Result**
-
-```sql
+```
 id | name    | department
 ---|---------|-------------
  1 | Alice   | Engineering
  3 | Charlie | Engineering
 ```
 
-## Read and Write Behavior
+**How it works**
 
-Row access policies are enforced on reads and on DML target-row matching. `UPDATE`, `DELETE`, and `MERGE` only affect rows visible through the policy; invisible rows are not matched or modified.
+- Query-time only — stored data is unchanged
+- One policy per table; arguments map to columns by position in `ON (...)`
+- Prefer `IS_ROLE_IN_SESSION()` over `current_role()` so users cannot bypass with `SET ROLE`
 
-`INSERT` is different: it writes rows normally. If an inserted row does not satisfy the policy, it is stored but hidden from policy-protected reads and DML.
-
-### Complete DML Example
-
-The example below uses a policy that exposes only `sales` rows. It temporarily detaches the policy after each operation only to inspect the stored data.
-
-```sql
-SET enable_experimental_row_access_policy = 1;
-
-DROP TABLE IF EXISTS rap_dml_orders;
-DROP TABLE IF EXISTS rap_dml_src;
-DROP ROW ACCESS POLICY IF EXISTS rap_sales_only;
-
-CREATE ROW ACCESS POLICY rap_sales_only
-AS (dept STRING)
-RETURNS BOOLEAN -> dept = 'sales';
-
-CREATE TABLE rap_dml_orders(id INT, dept STRING, amount INT);
-ALTER TABLE rap_dml_orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
-
--- INSERT is not affected: both visible and invisible rows are stored.
-INSERT INTO rap_dml_orders VALUES
-    (1, 'sales', 100),
-    (2, 'eng',   200),
-    (3, 'sales', 300);
-
--- SELECT is affected: only policy-visible rows are returned.
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 1 | sales |    100
- 3 | sales |    300
-
--- Detach only for inspection: the inserted 'eng' row exists.
-ALTER TABLE rap_dml_orders DROP ROW ACCESS POLICY rap_sales_only;
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 1 | sales |    100
- 2 | eng   |    200
- 3 | sales |    300
-
-ALTER TABLE rap_dml_orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
-
--- UPDATE is affected: only visible target rows are updated.
-UPDATE rap_dml_orders SET amount = amount + 10;
-
-ALTER TABLE rap_dml_orders DROP ROW ACCESS POLICY rap_sales_only;
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 1 | sales |    110
- 2 | eng   |    200
- 3 | sales |    310
-
-ALTER TABLE rap_dml_orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
-
--- DELETE is affected: invisible target rows are not deleted.
-DELETE FROM rap_dml_orders WHERE dept = 'eng';
-
-ALTER TABLE rap_dml_orders DROP ROW ACCESS POLICY rap_sales_only;
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 1 | sales |    110
- 2 | eng   |    200
- 3 | sales |    310
-
-ALTER TABLE rap_dml_orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
-
--- DELETE still affects visible target rows.
-DELETE FROM rap_dml_orders WHERE id = 1;
-
-ALTER TABLE rap_dml_orders DROP ROW ACCESS POLICY rap_sales_only;
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 2 | eng   |    200
- 3 | sales |    310
-
-CREATE TABLE rap_dml_src(id INT, new_amount INT);
-INSERT INTO rap_dml_src VALUES (2, 777), (3, 888);
-
-ALTER TABLE rap_dml_orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
-
--- MERGE is affected: invisible target rows are not matched or updated.
-MERGE INTO rap_dml_orders AS t
-USING rap_dml_src AS s
-ON t.id = s.id
-WHEN MATCHED THEN UPDATE SET t.amount = s.new_amount;
-
-ALTER TABLE rap_dml_orders DROP ROW ACCESS POLICY rap_sales_only;
-SELECT id, dept, amount FROM rap_dml_orders ORDER BY id;
-
-id | dept  | amount
----|-------|-------
- 2 | eng   |    200
- 3 | sales |    888
-
-DROP TABLE rap_dml_src;
-DROP TABLE rap_dml_orders;
-DROP ROW ACCESS POLICY rap_sales_only;
-```
-
-To inspect or modify all rows, use a role that satisfies the policy or detach the policy.
-
-## Multiple Arguments
-
-A policy can depend on multiple columns. The columns in `ON (...)` bind to policy arguments by position, not by name.
+Multi-column policy:
 
 ```sql
 CREATE ROW ACCESS POLICY rap_region_dept
@@ -234,45 +73,107 @@ AS (region STRING, dept STRING)
 RETURNS BOOLEAN ->
   region = 'APAC' AND dept = 'Engineering';
 
-ALTER TABLE employees ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
+ALTER TABLE employees
+ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
 ```
 
-## Example: Limiting Query Time Range per System
+## Examples
 
-In time-series scenarios (metrics, logs, events), different systems often need access to different historical ranges. For example, a real-time alerting system only needs the last 1 day of data, while an offline analysis system needs 7 or 15 days. Row access policies enforce these boundaries at the database layer — each system's service account can only scan the time range it actually needs, preventing accidental full-table scans and reducing resource contention.
+### Vector / RAG document visibility
 
-### Scenario
+Shared knowledge-base table + vector search. Configure visibility once; search SQL does not carry document-ID filters. See [Vector Search](/tidb-cloud-lake/guides/vector-search-guide.md).
 
-| Service Account | Granted Roles | Allowed Time Range | Use Case |
-|-----------------|---------------|-------------------|----------|
-| `svc_realtime_alert` | `rap_role_1_day` | Last 1 day | Real-time alerting |
-| `svc_offline_analysis` | `rap_role_1_day`, `rap_role_7_day` | Up to 7 days | Offline analysis |
-
-### Setup (run as account_admin)
+| Role | Sees |
+|------|------|
+| `admin` | All rows |
+| `sales` | `dept = 'sales'` + public |
+| `finance` | `dept = 'finance'` + public |
 
 ```sql
 SET enable_experimental_row_access_policy = 1;
 
--- Create roles representing different time-range tiers
+CREATE ROLE IF NOT EXISTS admin;
+CREATE ROLE IF NOT EXISTS sales;
+CREATE ROLE IF NOT EXISTS finance;
+
+CREATE TABLE knowledge_docs (
+  doc_id    BIGINT,
+  title     STRING,
+  dept      STRING,
+  is_public BOOLEAN,
+  embedding VECTOR(4),
+  VECTOR INDEX idx_emb(embedding) distance='cosine'
+);
+
+INSERT INTO knowledge_docs VALUES
+  (1, 'Sales contract template',  'sales',   false, [0.90, 0.10, 0.05, 0.05]),
+  (2, 'Q2 financial draft',       'finance', false, [0.10, 0.90, 0.05, 0.05]),
+  (3, 'Public company handbook',  'hr',      true,  [0.20, 0.20, 0.90, 0.10]),
+  (4, 'Competitor pricing notes', 'sales',   false, [0.85, 0.15, 0.10, 0.05]),
+  (5, 'Internal audit checklist', 'finance', false, [0.15, 0.85, 0.10, 0.05]);
+
+CREATE ROW ACCESS POLICY rap_knowledge_docs
+AS (dept STRING, is_public BOOLEAN)
+RETURNS BOOLEAN ->
+CASE
+  WHEN IS_ROLE_IN_SESSION('admin') THEN true
+  WHEN is_public THEN true
+  WHEN IS_ROLE_IN_SESSION('sales') AND dept = 'sales' THEN true
+  WHEN IS_ROLE_IN_SESSION('finance') AND dept = 'finance' THEN true
+  ELSE false
+END;
+
+ALTER TABLE knowledge_docs
+ADD ROW ACCESS POLICY rap_knowledge_docs ON (dept, is_public);
+
+GRANT SELECT ON knowledge_docs TO ROLE sales;
+GRANT SELECT ON knowledge_docs TO ROLE finance;
+
+-- Activate one role for the session, then run the same search SQL
+SET ROLE sales;
+SET SECONDARY ROLES NONE;
+
+SELECT doc_id, title,
+       round(cosine_distance(embedding, [0.88, 0.12, 0.08, 0.05]::VECTOR(4)), 4) AS dist
+FROM knowledge_docs
+ORDER BY dist
+LIMIT 10;
+```
+
+| As `sales` | As `finance` (`SET ROLE finance`) |
+|------------|-------------------------------------|
+| 1 Sales contract template `0.0009` | 3 Public company handbook `0.6731` |
+| 4 Competitor pricing notes `0.0011` | 5 Internal audit checklist `0.6855` |
+| 3 Public company handbook `0.6731` | 2 Q2 financial draft `0.7504` |
+
+### Time-range access by role
+
+Different service accounts may only scan different history windows.
+
+| Account | Roles | Window |
+|---------|-------|--------|
+| `svc_realtime_alert` | `rap_role_1_day` | Last 1 day |
+| `svc_offline_analysis` | `rap_role_1_day`, `rap_role_7_day` | Up to 7 days |
+
+```sql
+SET enable_experimental_row_access_policy = 1;
+
 CREATE ROLE rap_role_7_day;
 CREATE ROLE rap_role_1_day;
 
--- The policy: check which role is active in the session, filter rows accordingly.
--- CASE is evaluated top-down: 7-day is checked first (wider window takes priority).
+-- CASE is top-down: put the wider window first
 CREATE ROW ACCESS POLICY rap_time_range
 AS (start_time TIMESTAMP)
 RETURNS BOOLEAN ->
-  CASE
-    WHEN IS_ROLE_IN_SESSION('rap_role_7_day') THEN
-      start_time >= now() - INTERVAL 7 DAY
-    WHEN IS_ROLE_IN_SESSION('rap_role_1_day') THEN
-      start_time >= now() - INTERVAL 1 DAY
-    ELSE false
-  END;
+CASE
+  WHEN IS_ROLE_IN_SESSION('rap_role_7_day') THEN
+    start_time >= now() - INTERVAL 7 DAY
+  WHEN IS_ROLE_IN_SESSION('rap_role_1_day') THEN
+    start_time >= now() - INTERVAL 1 DAY
+  ELSE false
+END;
 
--- Sample metrics table
 CREATE TABLE metrics(id INT, start_time TIMESTAMP);
-
 INSERT INTO metrics VALUES
   (1, now() - INTERVAL 15 DAY),
   (2, now() - INTERVAL 5 DAY),
@@ -280,192 +181,124 @@ INSERT INTO metrics VALUES
   (4, now() - INTERVAL 1 HOUR),
   (5, now() - INTERVAL 8 DAY);
 
--- Attach the policy
 ALTER TABLE metrics ADD ROW ACCESS POLICY rap_time_range ON (start_time);
 
--- Grant roles to service accounts
 GRANT ROLE rap_role_1_day TO USER svc_realtime_alert;
-
 GRANT ROLE rap_role_1_day TO USER svc_offline_analysis;
 GRANT ROLE rap_role_7_day TO USER svc_offline_analysis;
-```
 
-### How it works after login
-
-{{{ .lake }}} defaults to `SET SECONDARY ROLES ALL` — all granted roles are active in the session immediately after login. The policy CASE is evaluated top-down, so the first matching branch wins.
-
-### svc_realtime_alert connects (only has `rap_role_1_day`)
-
-After login, all granted roles are active (secondary roles default to ALL). Since this account only has `rap_role_1_day`, the CASE skips the `rap_role_7_day` branch and hits the 1-day branch. It cannot widen the range because it was never granted `rap_role_7_day`.
-
-```sql
--- Real-time alerting system connects (secondary roles ALL by default)
 SELECT id, start_time FROM metrics ORDER BY id;
 ```
 
-```
-id | start_time
----|---------------------
- 3 | 12 hours ago
- 4 | 1 hour ago
-```
+After login, {{{ .lake }}} activates all granted roles (`SECONDARY ROLES ALL`).
 
-Only 2 rows visible — data within the last 1 day. The alerting system physically cannot scan older data.
+| Session | Visible rows |
+|---------|--------------|
+| `svc_realtime_alert` (1-day only) | last 1 day |
+| `svc_offline_analysis` (both roles) | last 7 days by default |
 
-### svc_offline_analysis connects (has both roles)
-
-After login, both `rap_role_7_day` and `rap_role_1_day` are active (secondary roles ALL). The CASE checks `rap_role_7_day` first — it matches, so this account sees the 7-day window by default:
-
-```sql
--- Offline analysis system connects (secondary roles ALL, both roles active)
-SELECT id, start_time FROM metrics ORDER BY id;
-```
-
-```
-id | start_time
----|---------------------
- 2 | 5 days ago
- 3 | 12 hours ago
- 4 | 1 hour ago
-```
-
-3 rows visible — data within the last 7 days.
-
-**Narrow down to 1-day when needed** — for example, when the offline system runs a quick recent-data check:
+Narrow the offline account to 1 day:
 
 ```sql
 SET ROLE rap_role_1_day;
 SET SECONDARY ROLES NONE;
-
 SELECT id, start_time FROM metrics ORDER BY id;
 ```
 
-```
-id | start_time
----|---------------------
- 3 | 12 hours ago
- 4 | 1 hour ago
-```
-
-Now only 2 rows — the 1-day window. `SET SECONDARY ROLES NONE` deactivates all secondary roles, leaving only the primary role (`rap_role_1_day`) in session.
-
-**Switch back to the 7-day window:**
+Widen again:
 
 ```sql
 SET ROLE rap_role_7_day;
-
 SELECT id, start_time FROM metrics ORDER BY id;
 ```
 
+An account can only activate roles it was granted. `svc_realtime_alert` cannot `SET ROLE rap_role_7_day`.
+
+## Read and Write Behavior
+
+| Operation | Effect |
+|-----------|--------|
+| `SELECT` | Only policy-visible rows |
+| `UPDATE` / `DELETE` / `MERGE` | Only match / modify visible target rows |
+| `INSERT` | Not filtered — rows are stored even if currently invisible |
+
+To inspect all stored rows, use a role that passes the policy, or temporarily detach it.
+
+```sql
+SET enable_experimental_row_access_policy = 1;
+
+CREATE ROW ACCESS POLICY rap_sales_only
+AS (dept STRING) RETURNS BOOLEAN -> dept = 'sales';
+
+CREATE TABLE orders(id INT, dept STRING, amount INT);
+ALTER TABLE orders ADD ROW ACCESS POLICY rap_sales_only ON (dept);
+
+INSERT INTO orders VALUES (1, 'sales', 100), (2, 'eng', 200), (3, 'sales', 300);
+
+SELECT * FROM orders ORDER BY id;
+-- 1 sales 100
+-- 3 sales 300
+
+UPDATE orders SET amount = amount + 10;
+DELETE FROM orders WHERE dept = 'eng';   -- no-op: eng rows are invisible
+DELETE FROM orders WHERE id = 1;         -- deletes visible row 1
+
+-- MERGE only matches visible targets
+CREATE TABLE src(id INT, new_amount INT);
+INSERT INTO src VALUES (2, 777), (3, 888);
+
+MERGE INTO orders AS t
+USING src AS s
+ON t.id = s.id
+WHEN MATCHED THEN UPDATE SET t.amount = s.new_amount;
+
+-- Detach to inspect storage
+ALTER TABLE orders DROP ROW ACCESS POLICY rap_sales_only;
+SELECT * FROM orders ORDER BY id;
+-- 2 eng 200   (never updated)
+-- 3 sales 888 (merged)
 ```
-id | start_time
----|---------------------
- 2 | 5 days ago
- 3 | 12 hours ago
- 4 | 1 hour ago
-```
 
-Back to 3 rows. The offline analysis account can freely toggle between time ranges within a single session using `SET ROLE`.
-
-### Why this works
-
-- {{{ .lake }}} defaults to `SECONDARY ROLES ALL` after login — all granted roles are active in the session.
-- `IS_ROLE_IN_SESSION('<role>')` returns `TRUE` when the role is the current primary role **or** an activated secondary role.
-- The CASE expression is evaluated top-down. Put the widest window first so that when an account has multiple roles, the widest window takes priority by default.
-- Accounts can only activate roles that were granted to them. `svc_realtime_alert` cannot `SET ROLE rap_role_7_day` — the database rejects it.
-- To narrow the visible range, use `SET SECONDARY ROLES NONE` to deactivate all secondary roles, then `SET ROLE` to pick the desired tier.
-- No application code needed: the policy is enforced at the storage layer during query planning.
-
-## Managing Policies
-
-### DESCRIBE ROW ACCESS POLICY
-
-View metadata, including creation time, signature, return type, body, and comment.
+## Manage Policies
 
 ```sql
 DESC ROW ACCESS POLICY rap_engineering;
-```
 
-### DROP ROW ACCESS POLICY
-
-Remove a policy definition you no longer need. Detach it from every table first.
-
-```sql
 ALTER TABLE employees DROP ROW ACCESS POLICY rap_engineering;
 DROP ROW ACCESS POLICY rap_engineering;
-```
 
-### Drop All Row Access Policies From a Table
-
-```sql
 ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 ```
 
-## Limits and Requirements
+Detach before `DROP ROW ACCESS POLICY`. Drop or detach before altering protected columns.
 
-- A table can have at most one row access policy at a time.
-- Row access policies can only be attached to regular tables. Views, streams, and temporary tables do not allow `ADD ROW ACCESS POLICY`.
-- Each policy argument must map to one table column with a compatible data type.
-- A column can belong to at most one security policy, either masking or row access.
-- `INSERT` is not filtered by row access policies. Inserted rows are stored even when they do not satisfy the policy predicate.
-- `SELECT` is filtered by row access policies and only returns policy-visible rows.
-- `UPDATE`, `DELETE`, and `MERGE` are filtered by row access policies when matching target rows. Invisible target rows are not updated, deleted, or merged.
-- Drop or detach the policy before altering or dropping protected columns.
-- `CREATE OR REPLACE ROW ACCESS POLICY` and `ALTER ROW ACCESS POLICY` are not supported. Drop and recreate instead.
-- Policy names are globally unique across both row access policies and masking policies.
-- Policy argument names are normalized to lowercase at creation time.
-- Row access policies cannot be applied to tables in ICE-type databases.
+## Limits
+
+- One row access policy per table
+- Regular tables only — not views, streams, temporary tables, or ICE databases
+- One security policy per column (masking **or** row access, not both)
+- No `CREATE OR REPLACE` / `ALTER` policy — drop and recreate
+- Policy names are globally unique across masking and row access policies
+- Policy argument names are lowercased at create time
 
 ## Best Practices
 
-### Use `IS_ROLE_IN_SESSION()` over `current_role()`
-
-`IS_ROLE_IN_SESSION()` checks all roles granted to the user, including secondary roles active in the session. Users cannot bypass the policy by switching roles with `SET ROLE`. `current_role()` only checks the single active role and can be circumvented.
-
-```sql
--- Preferred: accounts for role hierarchy
-CASE
-  WHEN IS_ROLE_IN_SESSION('admin') THEN true
-  WHEN IS_ROLE_IN_SESSION('sales_apac') THEN region = 'APAC'
-  ELSE false
-END
-
--- Avoid: can be bypassed with SET ROLE
-CASE WHEN current_role() = 'admin' THEN true ELSE false END
-```
-
-### Order CASE branches from widest to narrowest
-
-CASE expressions evaluate top-down. Put the most permissive condition first (e.g., admin sees all) to short-circuit evaluation for privileged roles and reduce unnecessary computation.
-
-### Keep mapping tables in the same database
-
-If your policy references a lookup table (e.g., role-to-region mapping), store it in the same database as the protected table. This simplifies privilege management and avoids cross-database access issues.
-
-### Test with multiple roles
-
-After attaching a policy, connect as different users/roles and compare query results. Verify that:
-
-- Admin roles see all rows
-- Restricted roles see only their permitted subset
-- Roles with no matching condition see zero rows
-
-### Use account_admin for full-data access
-
-When you need to inspect all rows (debugging, auditing), use a role that satisfies the policy (like `account_admin`) rather than repeatedly detaching and reattaching the policy.
-
-### Detach before dropping
-
-`DROP ROW ACCESS POLICY` fails if the policy is still attached to a table. Use `ALTER TABLE ... DROP ROW ACCESS POLICY` or `DROP ALL ROW ACCESS POLICIES` first.
+1. Prefer `IS_ROLE_IN_SESSION()` over `current_role()`.
+2. Order `CASE` branches widest → narrowest (admin first).
+3. If a policy references a lookup table, keep it in the same database as the protected table.
+4. Verify with multiple roles after attach — admin, restricted, and no-match.
+5. Prefer a privileged role for full-data inspection over repeated detach/attach.
 
 ## Privileges & References
 
-- Grant `CREATE ROW ACCESS POLICY` on `*.*` to roles responsible for creating policies; the creator automatically owns the policy.
-- Grant `ALTER` on the target table plus the global `APPLY ROW ACCESS POLICY` privilege or `APPLY ON ROW ACCESS POLICY <policy_name>` to roles that attach or detach policies via `ALTER TABLE`.
-- Audit access with `SHOW GRANTS ON ROW ACCESS POLICY <policy_name>`.
-- Find policy usage with [`POLICY_REFERENCES`](/tidb-cloud-lake/sql/policy-references.md): `POLICY_REFERENCES(POLICY_NAME => '<policy_name>')`.
-- Additional references:
-    - [User & Role](/tidb-cloud-lake/sql/user-role.md)
-    - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
-    - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
-    - [Row Access Policy Commands](/tidb-cloud-lake/sql/row-access-policy-overview.md)
+- `CREATE ROW ACCESS POLICY` on `*.*` to create policies (creator gets OWNERSHIP)
+- `ALTER` on the table + `APPLY ROW ACCESS POLICY` (global) or `APPLY ON ROW ACCESS POLICY <name>` to attach/detach
+- Audit: `SHOW GRANTS ON ROW ACCESS POLICY <name>`
+- Usage: [`POLICY_REFERENCES`](/sql/sql-functions/table-functions/policy-references)
+
+Also see:
+
+- [User & Role](/tidb-cloud-lake/sql/user-role.md)
+- [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
+- [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
+- [Row Access Policy Commands](/tidb-cloud-lake/sql/row-access-policy-overview.md)
