@@ -20,7 +20,7 @@ In `TiDB-X-CLOUD.202510.1`:
 
 The `TiDB-X-CLOUD.202510.1` kernel is based on the [TiDB v8.5.0](/releases/release-8.5.0.md) kernel and includes most of the features and improvements introduced in TiDB v8.5.0.
 
-In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) kernel, the `TiDB-X-CLOUD.202510.1` kernel introduces the following features:
+In addition, compared with the [TiDB v8.5.0](/releases/release-8.5.0.md) kernel, the `TiDB-X-CLOUD.202510.1` kernel introduces the following features:
 
 ## New TiDB X architecture
 
