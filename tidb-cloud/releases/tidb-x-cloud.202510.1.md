@@ -59,26 +59,6 @@ In addition, compared with the [TiDB v8.5.0](/release-notes/release-8.5.0.md) ke
 
      For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ddl_embedded_analyze).
 
-## Observability features
-
-* Add storage engine identifiers to statement summary tables and slow query logs [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
-
-    When both TiKV and TiFlash are deployed in a cluster, users often need to filter SQL statements by storage engine during database diagnostics and performance optimization. For example, if TiFlash is under high load, users might need to identify SQL statements running on TiFlash to locate potential causes. To meet this need, TiDB now adds storage engine identifier fields to statement summary tables and slow query logs.
-
-    New fields in [statement summary tables](/statement-summary-tables.md):
-
-    * `STORAGE_KV`: `1` indicates that the SQL statement accesses TiKV.
-    * `STORAGE_MPP`: `1` indicates that the SQL statement accesses TiFlash.
-
-    New fields in [slow query logs](/identify-slow-queries.md):
-
-    * `Storage_from_kv`: `true` indicates that the SQL statement accesses TiKV.
-    * `Storage_from_mpp`: `true` indicates that the SQL statement accesses TiFlash.
-
-    This feature simplifies workflows in certain diagnostics and performance optimization scenarios and improves issue identification efficiency.
-
-    For more information, see [Statement Summary Tables](/statement-summary-tables.md) and [Identify Slow Queries](/identify-slow-queries.md).
-
 ## Limitations
 
 Because of the architectural differences between TiDB X and classic TiDB, the TiDB X kernel does not support the following storage features of the classic TiDB kernel:
