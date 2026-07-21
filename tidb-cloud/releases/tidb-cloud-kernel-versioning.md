@@ -42,15 +42,8 @@ Because TiDB Cloud Premium follows its own kernel release cadence, [TiDB Cloud P
 
 ## FAQ
 
-### How do I check the kernel version of my TiDB Cloud Premium instance?
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the **My TiDB** page, and then click the name of your TiDB Cloud Premium instance to go to its overview page.
-2. On the overview page, locate the **TiDB version** information in the details pane of your TiDB Cloud Premium instance.
-
 ### Can I choose the kernel version for my TiDB Cloud Premium instance?
 
 No. TiDB Cloud manages the entire kernel lifecycle for TiDB Cloud Premium.
-
-Although the kernel version is displayed for transparency, you cannot select a specific version when creating a TiDB Cloud Premium instance.
 
 TiDB Cloud automatically provides validated kernel versions for new deployments and performs managed upgrades when appropriate. This helps ensure security, stability, compatibility, and access to the latest features and improvements without requiring manual maintenance.
