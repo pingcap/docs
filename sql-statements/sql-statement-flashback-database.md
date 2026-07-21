@@ -34,7 +34,7 @@ FlashbackToNewName ::=
 
 -   `tikv_gc_safe_point`回目より前にデータベースが削除された場合、 `FLASHBACK DATABASE`ステートメントを使用してデータを復元することはできません。`FLASHBACK DATABASE`のステートメントは`ERROR 1105 (HY000): Can't find dropped database 'test' in GC safe point 2022-11-06 16:10:10 +0800 CST`と同様のエラーを返します。
 
--   `FLASHBACK DATABASE`ステートメントを使用して、同じデータベースを複数回リストアすることはできません。3 でリストアされ`FLASHBACK DATABASE`データベースは元のデータベースと同じスキーマ ID を持つため、同じデータベースを複数回リストアするとスキーマ ID が重複します。TiDB では、データベースのスキーマ ID はグローバルに一意である必要があります。
+-   `FLASHBACK DATABASE`ステートメントを使用して、同じデータベースを複数回リストアすることはできません。 `FLASHBACK DATABASE`でリストアされたデータベースは元のデータベースと同じスキーマ ID を持つため、同じデータベースを複数回リストアするとスキーマ ID が重複します。TiDB では、データベースのスキーマ ID はグローバルに一意である必要があります。
 
 ## 例 {#example}
 

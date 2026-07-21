@@ -46,7 +46,7 @@ ticloud serverless create --display-name <display-name> --region <region> --max-
 | -n, --display-name 文字列  | 作成するクラスターの名前を指定します。                                                                                  | はい  | 非対話型モードでのみ動作します。        |
 | --spending-limit-monthly int       | 月間最大支出限度額を USD セント単位で指定します。                                                                          | いいえ | 非対話型モードでのみ動作します。        |
 | -p, --project-id 文字列 | クラスターが作成されるプロジェクトのIDを指定します。デフォルト値は`default project`です。                                               | いいえ | 非対話型モードでのみ動作します。        |
-| -r, --region 文字列     | クラウドリージョンの名前を指定します。1 コマンド`ticloud serverless region`使用すると、利用可能なすべてのリージョンを表示できます。                     | はい  | 非対話型モードでのみ動作します。        |
+| -r, --region 文字列     | クラウドリージョンの名前を指定します。 `ticloud serverless region`コマンドを使用すると、利用可能なすべてのリージョンを表示できます。                     | はい  | 非対話型モードでのみ動作します。        |
 | --disable-public-endpoint | パブリックエンドポイントを無効にします。クラスターへのパブリックアクセスを禁止する場合は、このオプションを使用します。                                          | いいえ | 非対話型モードでのみ動作します。        |
 | --encryption                | 二重層データ暗号化を有効にします。TiDB Cloud Essential クラスタではデフォルトで有効、 TiDB Cloud Starter クラスタではデフォルトで無効になっています。 | いいえ | 非対話型モードでのみ動作します。        |
 | --max-rcu int32      | TiDB Cloud Essential クラスターの最大リクエスト容量単位 (RCU) を 100000 まで設定します。                                       | いいえ | 非対話型モードでのみ動作します。        |
