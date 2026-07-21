@@ -27,10 +27,6 @@ The TiDB Cloud BYOC deployment process is a collaborative effort between your or
 
 ## Architecture overview
 
-TiDB Cloud BYOC employs a strict separation between the Control Plane and the Data Plane. Your data remains entirely within your AWS account. The Control Plane connects to your VPC exclusively via AWS PrivateLink. No public internet exposure is required for database nodes.
+TiDB Cloud BYOC uses a split-plane architecture. The TiDB Cloud control plane is managed by PingCAP, while the TiDB data plane runs in your own cloud account.
 
-> **Note:**
->
-> This architecture defaults to a Multi-AZ deployment for production high availability, but also supports a Single-AZ deployment for Proof of Concept (POC) or cost optimization scenarios.
-
-![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
+Before you begin the onboarding process, review the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) to understand the BYOC control plane, data plane, network connectivity model, and high availability options.
