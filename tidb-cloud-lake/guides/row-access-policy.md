@@ -294,7 +294,7 @@ Detach before `DROP ROW ACCESS POLICY`. Drop or detach before altering protected
 - `CREATE ROW ACCESS POLICY` on `*.*` to create policies (creator gets OWNERSHIP)
 - `ALTER` on the table + `APPLY ROW ACCESS POLICY` (global) or `APPLY ON ROW ACCESS POLICY <name>` to attach/detach
 - Audit: `SHOW GRANTS ON ROW ACCESS POLICY <name>`
-- Usage: [`POLICY_REFERENCES`](/sql/sql-functions/table-functions/policy-references)
+- Usage: [`POLICY_REFERENCES`](/tidb-cloud-lake/sql/policy-references.md)
 
 Also see:
 
