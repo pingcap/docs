@@ -3,7 +3,7 @@ title: AUTO_INCREMENT
 summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 ---
 
-# AUTO_INCREMENT {#auto-increment}
+# AUTO_INCREMENT {#auto_increment}
 
 このドキュメントでは、 `AUTO_INCREMENT`列属性の概念、実装原則、AUTO_INCREMENT関連の機能、制限などについて説明します。
 
@@ -181,7 +181,7 @@ Records: 2  Duplicates: 1  Warnings: 0
 
 この例では、 `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;`のキー`A`の`INSERT`に値`3`の`AUTO_INCREMENT`が割り当てられていますが、この`INSERT`文には重複キー`A`が含まれているため、実際には使用されません。これにより、シーケンスが連続しないギャップが発生します。この動作はMySQLとは異なりますが、有効とみなされます。MySQLでは、トランザクションが中止されてロールバックされるなどの他のシナリオでも、シーケンスにギャップが発生します。
 
-## 自動IDキャッシュ {#auto-id-cache}
+## 自動IDキャッシュ {#auto_id_cache}
 
 異なるTiDBサーバーに対して`INSERT`操作を実行すると、 `AUTO_INCREMENT`番目のシーケンスが大幅に*ジャンプする*ように見える場合があります。これは、各サーバーが`AUTO_INCREMENT`の値のキャッシュを独自に持っているためです。
 

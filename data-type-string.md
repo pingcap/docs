@@ -9,7 +9,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 ## サポートされているタイプ {#supported-types}
 
-### <code>CHAR</code>型 {#code-char-code-type}
+### <code>CHAR</code>型 {#char-type}
 
 `CHAR`は固定長文字列です。Mは列の長さを文字数（バイト数ではありません）で表します。Mの範囲は0から255です。2とは異なり、 `VARCHAR`列にデータを挿入する場合、末尾のスペース`CHAR`切り捨てられます。
 
@@ -17,7 +17,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>VARCHAR</code>型 {#code-varchar-code-type}
+### <code>VARCHAR</code>型 {#varchar-type}
 
 `VARCHAR`は可変長の文字列です。Mは列の最大長（バイト数ではありません）を文字数で表します。2 `VARCHAR`最大サイズは65,535バイトを超えることはできません。4 `VARCHAR`長さは、行の最大長と使用されている文字セットによって決まります。
 
@@ -35,7 +35,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 [NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>TEXT</code>タイプ {#code-text-code-type}
+### <code>TEXT</code>タイプ {#text-type}
 
 `TEXT`は可変長の文字列です。列の最大長は65,535バイトです。オプションのM引数は文字数で、 `TEXT`列の最適な型を自動的に選択するために使用されます。例えば`TEXT(60)`指定すると、最大255バイトを保持できる`TINYTEXT`データ型が生成され、1文字あたり最大4バイト（4×60=240）の60文字のUTF-8文字列に適合します。M引数の使用は推奨されません。
 
@@ -43,7 +43,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>TINYTEXT</code>型 {#code-tinytext-code-type}
+### <code>TINYTEXT</code>型 {#tinytext-type}
 
 `TINYTEXT`型は[`TEXT`タイプ](#text-type)と似ていますが、 `TINYTEXT`の最大列長が255である点が異なります。
 
@@ -51,7 +51,7 @@ TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>MEDIUMTEXT</code>タイプ {#code-mediumtext-code-type}
+### <code>MEDIUMTEXT</code>タイプ {#mediumtext-type}
 
 <CustomContent platform="tidb">
 
@@ -68,7 +68,7 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>LONGTEXT</code>型 {#code-longtext-code-type}
+### <code>LONGTEXT</code>型 {#longtext-type}
 
 <CustomContent platform="tidb">
 
@@ -85,7 +85,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 ```
 
-### <code>BINARY</code>型 {#code-binary-code-type}
+### <code>BINARY</code>型 {#binary-type}
 
 `BINARY`型は[`CHAR`型](#char-type)と似ています。違いは、 `BINARY`バイナリバイト文字列を格納することです。
 
@@ -93,7 +93,7 @@ LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 BINARY(M)
 ```
 
-### <code>VARBINARY</code>型 {#code-varbinary-code-type}
+### <code>VARBINARY</code>型 {#varbinary-type}
 
 `VARBINARY`型は[`VARCHAR`型](#varchar-type)と似ています。違いは、 `VARBINARY`バイナリバイト文字列を格納するという点です。
 
@@ -101,7 +101,7 @@ BINARY(M)
 VARBINARY(M)
 ```
 
-### <code>BLOB</code>型 {#code-blob-code-type}
+### <code>BLOB</code>型 {#blob-type}
 
 `BLOB`は大きなバイナリファイルです。M は列の最大長（バイト単位）を表し、範囲は 0 から 65,535 です。
 
@@ -109,7 +109,7 @@ VARBINARY(M)
 BLOB[(M)]
 ```
 
-### <code>TINYBLOB</code>型 {#code-tinyblob-code-type}
+### <code>TINYBLOB</code>型 {#tinyblob-type}
 
 `TINYBLOB`型は[`BLOB`型](#blob-type)と似ていますが、 `TINYBLOB`の最大列長が255である点が異なります。
 
@@ -117,7 +117,7 @@ BLOB[(M)]
 TINYBLOB
 ```
 
-### <code>MEDIUMBLOB</code>型 {#code-mediumblob-code-type}
+### <code>MEDIUMBLOB</code>型 {#mediumblob-type}
 
 <CustomContent platform="tidb">
 
@@ -134,7 +134,7 @@ TINYBLOB
 MEDIUMBLOB
 ```
 
-### <code>LONGBLOB</code>型 {#code-longblob-code-type}
+### <code>LONGBLOB</code>型 {#longblob-type}
 
 <CustomContent platform="tidb">
 
@@ -151,7 +151,7 @@ MEDIUMBLOB
 LONGBLOB
 ```
 
-### <code>ENUM</code>型 {#code-enum-code-type}
+### <code>ENUM</code>型 {#enum-type}
 
 `ENUM`は、テーブル作成時に列指定で明示的に列挙された許容値のリストから選択された値を持つ文字列オブジェクトです。構文は次のとおりです。
 
@@ -174,7 +174,7 @@ ENUM('apple', 'orange', 'pear')
 
 詳細については[MySQLのENUM型](https://dev.mysql.com/doc/refman/8.0/en/enum.html)参照してください。
 
-### <code>SET</code>型 {#code-set-code-type}
+### <code>SET</code>型 {#set-type}
 
 `SET` 、0 個以上の値を持つことができる文字列オブジェクトです。各値は、テーブルの作成時に指定された許可された値のリストから選択する必要があります。構文は次のとおりです。
 

@@ -10,46 +10,46 @@ TiKV は、コマンドラインパラメータに対していくつかの読み
 -   ファイルサイズ（バイト単位）: KB、MB、GB、TB、PB（または小文字）
 -   時間（ミリ秒単位）: ms、s、m、h
 
-## `-A, --addr` {#a-addr}
+## `-A, --addr` {#-a---addr}
 
 -   TiKVサーバーが監視するアドレス
 -   デフォルト: `"127.0.0.1:20160"`
 -   クラスターをデプロイするには、現在のホストのIPアドレスを`--addr`で指定する必要があります（例： `"192.168.100.113:20160"` 。クラスターがDocker上で実行される場合は、DockerのIPアドレスを`"0.0.0.0:20160"`で指定します。
 
-## `--advertise-addr` {#advertise-addr}
+## `--advertise-addr` {#--advertise-addr}
 
 -   サーバーは外部からのクライアントトラフィックのアドレスをアドバタイズします
 -   デフォルト: `${addr}`
 -   Docker または NAT ネットワークのためにクライアントが`--addr`アドレス経由で TiKV に接続できない場合は、 `--advertise-addr`アドレスを手動で設定する必要があります。
 -   例えば、Dockerの内部IPアドレスが172.17.0.1で、ホストのIPアドレスが192.168.100.113で、ポートマッピングが`-p 20160:20160`に設定されている場合、 `--advertise-addr` 「192.168.100.113:20160」に設定できます。クライアントは192.168.100.113:20160を介してこのサービスにアクセスできます。
 
-## `--status-addr` {#status-addr}
+## `--status-addr` {#--status-addr}
 
 -   TiKV サービスのステータスをリッスンするポート
 -   デフォルト: `"20180"`
 -   Prometheus は`http://host:status_port/metrics`介してこのステータス情報にアクセスできます。
 -   プロファイルは`http://host:status_port/debug/pprof/profile`を介してこのステータス情報にアクセスできます。
 
-## `--advertise-status-addr` {#advertise-status-addr}
+## `--advertise-status-addr` {#--advertise-status-addr}
 
 -   TiKV が外部からサービス ステータスにアクセスするために使用するアドレス。
 -   デフォルト: 値`--status-addr`が使用されます。
 -   Docker または NAT ネットワークのためにクライアントが`--status-addr`アドレス経由で TiKV に接続できない場合は、 `--advertise-status-addr`アドレスを手動で設定する必要があります。
 -   例えば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 20180:20180`に設定されています。この場合、 `--advertise-status-addr="192.168.100.113:20180"`設定します。クライアントは`192.168.100.113:20180`を通じてこのサービスを見つけられます。
 
-## `-C, --config` {#c-config}
+## `-C, --config` {#-c---config}
 
 -   設定ファイル
 -   デフォルト: `""`
 -   コマンドラインを使用して設定を行うと、設定ファイル内の同じ設定が上書きされます。
 
-## `--capacity` {#capacity}
+## `--capacity` {#--capacity}
 
 -   ストアキャパシティ
 -   デフォルト: `0` (無制限)
 -   PDはこのフラグを使用して、TiKVサーバーのバランス調整方法を決定します。（ヒント：1073741824の代わりに10GBを使用することもできます）
 
-## `--config-info &#x3C;FORMAT>` {#config-info-x3c-format}
+## `--config-info &#x3C;FORMAT>` {#--config-info-format}
 
 -   このフラグを使用すると、使用可能な構成値が`FORMAT`に従ってリストされ、終了します。
 -   `FORMAT`の値オプション: `json` 。現在、JSON 形式のみがサポートされています。
@@ -74,24 +74,24 @@ TiKV は、コマンドラインパラメータに対していくつかの読み
     }
     ```
 
-## `--data-dir` {#data-dir}
+## `--data-dir` {#--data-dir}
 
 -   データディレクトリへのパス
 -   デフォルト: `"/tmp/tikv/store"`
 
-## `-L` {#l}
+## `-L` {#-l}
 
 -   ログレベル
 -   デフォルト: `"info"`
 -   `"warn"` `"fatal"` `"error"` `"debug"` `"info"`
 
-## `--log-file` {#log-file}
+## `--log-file` {#--log-file}
 
 -   ログファイル
 -   デフォルト: `""`
 -   このフラグが設定されていない場合、ログは「stderr」に書き込まれます。このフラグが設定されている場合、ログは対応するファイルに出力されます。
 
-## `--pd` {#pd}
+## `--pd` {#--pd}
 
 -   PDサーバーのアドレスリスト
 -   デフォルト: `""`

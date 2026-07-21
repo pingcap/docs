@@ -61,7 +61,7 @@ DESC deadlocks;
 > -   [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
 > -   `CURRENT_SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`CURRENT_SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)参照してください。
 
-## `KEY_INFO` {#key-info}
+## `KEY_INFO` {#key_info}
 
 `KEY_INFO`列は`KEY`列の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
 
@@ -192,7 +192,7 @@ SELECT * FROM INFORMATION_SCHEMA.DEADLOCKS;
 
 上記のクエリ結果の`DEADLOCK_ID`列を見ると、最初の2行はデッドロックエラーの情報を表しており、互いに待機する2つのトランザクションがデッドロックを形成していることがわかります。次の3行は別のデッドロックエラーの情報を表しており、循環的に待機する3つのトランザクションがデッドロックを形成しています。
 
-## クラスターデッドロック {#cluster-deadlocks}
+## クラスターデッドロック {#cluster_deadlocks}
 
 `CLUSTER_DEADLOCKS`テーブルは、クラスター全体の各 TiDB ノードの最近のデッドロック エラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。5 `CLUSTER_DEADLOCKS`は、異なる TiDB ノードを区別するために、ノードの IP アドレスとポートを表示する追加の`INSTANCE`列も含まれています。
 

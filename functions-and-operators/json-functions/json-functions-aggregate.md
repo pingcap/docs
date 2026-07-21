@@ -9,7 +9,7 @@ summary: JSON 値を集約する JSON関数について学習します。
 
 TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html)サポートします。
 
-## `JSON_ARRAYAGG()` {#json-arrayagg}
+## `JSON_ARRAYAGG()` {#json_arrayagg}
 
 `JSON_ARRAYAGG(key)`関数は、指定された`key`に従ってキーの値を JSON 配列に集約します。5 `key`通常、式または列名です。
 
@@ -28,7 +28,7 @@ SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
     +------------------+
     1 row in set (0.00 sec)
 
-## `JSON_OBJECTAGG()` {#json-objectagg}
+## `JSON_OBJECTAGG()` {#json_objectagg}
 
 `JSON_OBJECTAGG(key,value)`関数は、指定された`key`と`value`に従って、キーとキーの値をJSONオブジェクトに集約します。 `key`と`value`は通常、式または列名です。
 

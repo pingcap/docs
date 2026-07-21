@@ -140,7 +140,7 @@ The support for TLS authentication is configured differently. For detailed infor
 | GSSAPI (MariaDB)             | いいえ              |
 | ファイド                         | いいえ              |
 
-### `tidb_auth_token` {#tidb-auth-token}
+### `tidb_auth_token` {#tidb_auth_token}
 
 `tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)ベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
 

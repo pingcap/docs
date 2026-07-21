@@ -237,7 +237,7 @@ tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
 tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 ```
 
-## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートおよびアップグレードする {#import-and-upgrade-a-dm-1-0-cluster-deployed-using-dm-ansible}
+## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートおよびアップグレードする {#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible}
 
 > **Note:**
 >
@@ -339,7 +339,7 @@ dmctlのバージョンを指定します。このコマンドを実行する前
 tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 ```
 
-## システムのネイティブSSHクライアントを使用してクラスタに接続します {#use-the-system-s-native-ssh-client-to-connect-to-cluster}
+## システムのネイティブSSHクライアントを使用してクラスタに接続します {#use-the-systems-native-ssh-client-to-connect-to-cluster}
 
 クラスタマシン上で実行される上記のすべての操作は、 TiUPに組み込まれたSSHクライアントを使用してクラスタに接続し、コマンドを実行します。ただし、シナリオによっては、制御マシンシステムにネイティブなSSHクライアントを使用してクラスタ操作を実行する必要がある場合もあります。例：
 

@@ -3,7 +3,7 @@ title: TIDB_TRX
 summary: TIDB_TRX` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# TIDB_TRX {#tidb-trx}
+# TIDB_TRX {#tidb_trx}
 
 `TIDB_TRX`テーブルは、TiDB ノードで現在実行されているトランザクションに関する情報を提供します。
 
@@ -123,7 +123,7 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
 
 このクエリは、テーブル`TIDB_TRX`の列`ALL_SQL_DIGESTS`に対して関数[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)呼び出し、システム内部クエリを通じてSQLダイジェスト配列を正規化されたSQL文の配列に変換します。これにより、トランザクションによって実行された過去のSQL文の情報を視覚的に取得できます。ただし、上記のクエリはテーブル`TIDB_TRX`全体をスキャンし、各行に対して関数`TIDB_DECODE_SQL_DIGESTS`呼び出すことに注意してください。関数`TIDB_DECODE_SQL_DIGESTS`呼び出しには大きなオーバーヘッドがかかります。したがって、クラスター内に多数の同時トランザクションが存在する場合は、このタイプのクエリの使用を避けてください。
 
-## クラスター_TIDB_TRX {#cluster-tidb-trx}
+## クラスター_TIDB_TRX {#cluster_tidb_trx}
 
 `TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示するには、 `CLUSTER_TIDB_TRX`テーブルをクエリする必要があります。5 テーブルのクエリ結果と比較すると、 `TIDB_TRX`テーブルのクエリ結果には`INSTANCE`フィールドが追加されています`INSTANCE`フィールド`CLUSTER_TIDB_TRX`は、クラスター内の各ノードの IP アドレスとポート番号が表示され、トランザクションが配置されている TiDB ノードを識別するために使用されます。
 

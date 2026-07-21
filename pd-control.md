@@ -64,43 +64,43 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 ## コマンドラインフラグ {#command-line-flags}
 
-### `--cacert` {#cacert}
+### `--cacert` {#--cacert}
 
 -   信頼されたCAの証明書ファイルへのパスをPEM形式で指定します。
 -   デフォルト： &quot;&quot;
 
-### `--cert` {#cert}
+### `--cert` {#--cert}
 
 -   PEM形式のSSL証明書へのパスを指定します
 -   デフォルト： &quot;&quot;
 
-### `--detach` / `-d` {#detach-code-d-code}
+### `--detach` / `-d` {#--detach---d}
 
 -   単一のコマンドラインモードを使用します（readline には入りません）
 -   デフォルト: true
 
-### `--help` / `-h` {#help-code-h-code}
+### `--help` / `-h` {#--help---h}
 
 -   ヘルプ情報を出力します
 -   デフォルト: false
 
-### `--interact` / `-i` {#interact-code-i-code}
+### `--interact` / `-i` {#--interact---i}
 
 -   対話モードを使用する（readlineに入る）
 -   デフォルト: false
 
-### `--key` {#key}
+### `--key` {#--key}
 
 -   PEM形式のSSL証明書キーファイルへのパスを指定します。これは`--cert`で指定された証明書の秘密鍵です。
 -   デフォルト： &quot;&quot;
 
-### `--pd` / `-u` {#pd-code-u-code}
+### `--pd` / `-u` {#--pd---u}
 
 -   PDアドレスを指定します
 -   デフォルトアドレス: `http://127.0.0.1:2379`
 -   環境変数: `PD_ADDR`
 
-### `--version` / `-V` {#version-code-v-code}
+### `--version` / `-V` {#--version---v}
 
 -   バージョン情報を出力して終了します
 -   デフォルト: false
@@ -121,7 +121,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 }
 ```
 
-### `config [show | set &#x3C;option> &#x3C;value> | placement-rules]` {#config-show-set-x3c-option-x3c-value-placement-rules}
+### `config [show | set &#x3C;option> &#x3C;value> | placement-rules]` {#config-show--set-option-value--placement-rules}
 
 このコマンドを使用して、構成情報を表示または変更します。
 
@@ -349,7 +349,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set flow-round-by-digit 4
     ```
 
-### `config [show | set service-middleware &#x3C;option> [&#x3C;key> &#x3C;value> | &#x3C;label> &#x3C;qps|concurrency> &#x3C;value>]]` {#config-show-set-service-middleware-x3c-option-x3c-key-x3c-value-x3c-label-x3c-qps-concurrency-x3c-value}
+### `config [show | set service-middleware &#x3C;option> [&#x3C;key> &#x3C;value> | &#x3C;label> &#x3C;qps|concurrency> &#x3C;value>]]` {#config-show--set-service-middleware-option-key-value--label-qpsconcurrency-value}
 
 `service-middleware`はPDの設定モジュールであり、主にPDサービスのミドルウェア関数（監査ログ、リクエストレート制限、同時実行制限など）の管理と制御に使用されます。v8.5.0以降では、 `pd-ctl`を使用して`service-middleware`の以下の設定を変更できます。
 
@@ -466,7 +466,7 @@ config set service-middleware rate-limit GetRegion qps 0
 config set service-middleware rate-limit GetRegion concurrency 0
 ```
 
-### `config placement-rules [disable | enable | load | save | show | rule-group]` {#config-placement-rules-disable-enable-load-save-show-rule-group}
+### `config placement-rules [disable | enable | load | save | show | rule-group]` {#config-placement-rules-disable--enable--load--save--show--rule-group}
 
 `config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)参照してください。
 
@@ -492,7 +492,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 ]
 ```
 
-### `hot [read | write | store|  history &#x3C;start_time> &#x3C;end_time> [&#x3C;key> &#x3C;value>]]` {#hot-read-write-store-history-x3c-start-time-x3c-end-time-x3c-key-x3c-value}
+### `hot [read | write | store|  history &#x3C;start_time> &#x3C;end_time> [&#x3C;key> &#x3C;value>]]` {#hot-read--write--store--history-start_time-end_time-key-value}
 
 このコマンドを使用して、クラスターのホット スポット情報を表示します。
 
@@ -550,7 +550,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 
 v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`flow_cpu`フィールドが含まれ、 `hot store`コマンドの出力に`cpu-read-rate`フィールドが含まれます。これらのフィールドは、CPU を認識した読み取りホットスポット スケジューリングのための読み取り CPU 使用率を示します。
 
-### `label [store &#x3C;name> &#x3C;value>]` {#label-store-x3c-name-x3c-value}
+### `label [store &#x3C;name> &#x3C;value>]` {#label-store-name-value}
 
 このコマンドを使用して、クラスターのラベル情報を表示します。
 
@@ -561,7 +561,7 @@ v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`
 >> label store zone cn                  // Display all stores including the "zone":"cn" label
 ```
 
-### `member [delete | leader_priority | leader [show | resign | transfer &#x3C;member_name>]]` {#member-delete-leader-priority-leader-show-resign-transfer-x3c-member-name}
+### `member [delete | leader_priority | leader [show | resign | transfer &#x3C;member_name>]]` {#member-delete--leader_priority--leader-show--resign--transfer-member_name}
 
 > **Note:**
 >
@@ -610,7 +610,7 @@ member leader_priority  pd-5 0
 >
 > 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
-### `operator [check | show | add | remove]` {#operator-check-show-add-remove}
+### `operator [check | show | add | remove]` {#operator-check--show--add--remove}
 
 このコマンドを使用して、スケジュール操作を表示および制御します。
 
@@ -647,7 +647,7 @@ member leader_priority  pd-5 0
 time: 43.12698ms
 ```
 
-### `region &#x3C;region_id> [--jq="&#x3C;query string>"]` {#region-x3c-region-id-jq-x3c-query-string}
+### `region &#x3C;region_id> [--jq="&#x3C;query string>"]` {#region-region_id---jqquery-string}
 
 このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
 
@@ -688,7 +688,7 @@ time: 43.12698ms
 }
 ```
 
-### `region key [--format=raw|encode|hex] &#x3C;key>` {#region-key-format-raw-encode-hex-x3c-key}
+### `region key [--format=raw|encode|hex] &#x3C;key>` {#region-key---formatrawencodehex-key}
 
 このコマンドを使用して、特定のキーが存在するリージョンを照会します。raw形式、エンコード形式、および16進形式をサポートしています。エンコード形式の場合は、キーを一重引用符で囲む必要があります。
 
@@ -742,7 +742,7 @@ time: 43.12698ms
 }
 ```
 
-### `region sibling &#x3C;region_id>` {#region-sibling-x3c-region-id}
+### `region sibling &#x3C;region_id>` {#region-sibling-region_id}
 
 このコマンドを使用して、特定のリージョンに隣接するリージョンを確認します。
 
@@ -756,7 +756,7 @@ time: 43.12698ms
 }
 ```
 
-### `region keys [--format=raw|encode|hex] &#x3C;start_key> &#x3C;end_key> &#x3C;limit>` {#region-keys-format-raw-encode-hex-x3c-start-key-x3c-end-key-x3c-limit}
+### `region keys [--format=raw|encode|hex] &#x3C;start_key> &#x3C;end_key> &#x3C;limit>` {#region-keys---formatrawencodehex-start_key-end_key-limit}
 
 このコマンドを使用して、指定された範囲`[startkey, endkey)`内のすべてのリージョンを照会します。 `endKey`のない範囲もサポートされています。
 
@@ -790,7 +790,7 @@ time: 43.12698ms
 }
 ```
 
-### `region store &#x3C;store_id>` {#region-store-x3c-store-id}
+### `region store &#x3C;store_id>` {#region-store-store_id}
 
 このコマンドを使用して、特定のストアのすべてのリージョンを一覧表示します。
 
@@ -875,7 +875,7 @@ time: 43.12698ms
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]` {#region-check-miss-peer-extra-peer-down-peer-pending-peer-offline-peer-empty-region-hist-size-hist-keys-jq-x3c-query-string}
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]` {#region-check-miss-peer--extra-peer--down-peer--pending-peer--offline-peer--empty-region--hist-size--hist-keys---jqquery-string}
 
 このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)参照してください。
 
@@ -932,7 +932,7 @@ resource-manager config controller show
 pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
 ```
 
-### `scheduler [show | add | remove | pause | resume | config | describe]` {#scheduler-show-add-remove-pause-resume-config-describe}
+### `scheduler [show | add | remove | pause | resume | config | describe]` {#scheduler-show--add--remove--pause--resume--config--describe}
 
 このコマンドを使用して、スケジュール ポリシーを表示および制御します。
 
@@ -1187,7 +1187,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 }
 ```
 
-### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]` {#store-delete-cancel-delete-label-weight-remove-tombstone-limit-x3c-store-id-jq-x3c-query-string}
+### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]` {#store-delete--cancel-delete--label--weight--remove-tombstone--limit--store_id---jqquery-string}
 
 jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
 
@@ -1301,7 +1301,7 @@ store weight 1 5 10
 >
 > `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
 
-### `log [fatal | error | warn | info | debug]` {#log-fatal-error-warn-info-debug}
+### `log [fatal | error | warn | info | debug]` {#log-fatal--error--warn--info--debug}
 
 このコマンドを使用して、PD リーダーのログ レベルを設定します。
 
@@ -1323,7 +1323,7 @@ system:  2017-10-09 05:50:59 +0800 CST
 logic:  120102
 ```
 
-### `unsafe remove-failed-stores [store-ids | show]` {#unsafe-remove-failed-stores-store-ids-show}
+### `unsafe remove-failed-stores [store-ids | show]` {#unsafe-remove-failed-stores-store-ids--show}
 
 > **Warning:**
 >
@@ -1358,7 +1358,7 @@ unsafe remove-failed-stores show
 
 ## Jq形式のJSON出力の使用 {#jq-formatted-json-output-usage}
 
-### <code>store</code>の出力を簡素化 {#simplify-the-output-of-code-store-code}
+### <code>store</code>の出力を簡素化 {#simplify-the-output-of-store}
 
 ```bash
 >> store --jq=".stores[].store | {id, address, state_name}"
@@ -1376,7 +1376,7 @@ unsafe remove-failed-stores show
 ...
 ```
 
-### ステータスが<code>Up</code>ではないすべてのノードを照会する {#query-all-nodes-whose-status-is-not-code-up-code}
+### ステータスが<code>Up</code>ではないすべてのノードを照会する {#query-all-nodes-whose-status-is-not-up}
 
 ```bash
 store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_name}'

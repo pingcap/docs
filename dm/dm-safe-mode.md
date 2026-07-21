@@ -91,7 +91,7 @@ DMがチェックポイントから増分レプリケーションタスクを再
         # Other configuration items are not provided in this example.
         syncer-config-name: "global"            # Name of the syncers configuration.
 
-## 外部キーの処理<span class="version-mark">（v8.5.6の新機能）</span> {#foreign-key-handling-span-class-version-mark-new-in-v8-5-6-span}
+## 外部キーの処理<span class="version-mark">（v8.5.6の新機能）</span> {#foreign-key-handling-new-in-v856}
 
 > **Warning:**
 >
@@ -99,7 +99,7 @@ DMがチェックポイントから増分レプリケーションタスクを再
 
 セーフ モードを有効にしてダウンストリーム タスク セッションで`foreign_key_checks=1`を設定すると、 `DELETE`ステートメントのデフォルトの`REPLACE` + `UPDATE`書き換えにより、子行に意図しない`ON DELETE CASCADE`影響が発生する可能性があります。v8.5.6 以降、DM ではこの問題に対処するために以下の改善が導入されています。
 
-### 非キー<code>UPDATE</code>最適化 {#non-key-code-update-code-optimization}
+### 非キー<code>UPDATE</code>最適化 {#non-key-update-optimization}
 
 主キーまたは一意キーの値を変更しない`UPDATE`ステートメントの場合、DM は`DELETE`ステップをスキップし、 `REPLACE INTO`のみを実行します。主キーは変更されないため、 `REPLACE INTO`外部キーのカスケード削除をトリガーすることなく既存の行を上書きします。この最適化はセーフモードで自動的に適用されます。
 
@@ -126,7 +126,7 @@ REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -
 >
 > `foreign_key_checks=1`の場合、DM は主キーまたは一意キーの値を変更する`UPDATE`ステートメントの複製をサポートしません。この場合、複製タスクはエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`で一時停止されます。外部キーを持つテーブルでそのような`UPDATE`ステートメントを複製するには、 `safe-mode: false`を設定します。
 
-### セッションレベルの<code>foreign_key_checks</code> {#session-level-code-foreign-key-checks-code}
+### セッションレベルの<code>foreign_key_checks</code> {#session-level-foreign_key_checks}
 
 セーフモードでのバッチ実行中、DM は`SET SESSION foreign_key_checks=0`および`INSERT`バッチを実行する前に`UPDATE`を実行し、その後`foreign_key_checks`の元の値を復元します。これにより`REPLACE INTO` (内部で`DELETE` + `INSERT`を実行) が下流で外部キーのカスケード操作をトリガーするのを防ぎます。
 

@@ -3,7 +3,7 @@ title: Eliminate Max/Min
 summary: Max/Min関数を排除するための規則を紹介します。
 ---
 
-# 最大/最小を排除 {#eliminate-max-min}
+# 最大/最小を排除 {#eliminate-maxmin}
 
 SQL文に`max` `min`関数が含まれている場合、クエリオプティマイザは`max`最適化ルールを適用して、 `max` / `min`集計関数をTopN演算子に変換しようとします。これにより、TiDBはインデックスを通じてクエリ`min`より効率的に実行できます。
 
@@ -12,7 +12,7 @@ SQL文に`max` `min`関数が含まれている場合、クエリオプティマ
 -   [`max` / `min`関数が1つだけあるステートメント](#one-maxmin-function)
 -   [複数の`max` / `min`関数を含むステートメント](#multiple-maxmin-functions)
 
-## 1つの<code>max</code> / <code>min</code>関数 {#one-code-max-code-code-min-code-function}
+## 1つの<code>max</code> / <code>min</code>関数 {#one-maxmin-function}
 
 SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 
@@ -49,7 +49,7 @@ mysql> explain select max(a) from t;
 5 rows in set (0.00 sec)
 ```
 
-## 複数の<code>max</code> / <code>min</code>関数 {#multiple-code-max-code-code-min-code-functions}
+## 複数の<code>max</code> / <code>min</code>関数 {#multiple-maxmin-functions}
 
 SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 

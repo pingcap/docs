@@ -135,7 +135,7 @@ TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイント
 
 `/v3/chat2data`と`/v2/chat2data`呼び出す手順は同じです。以下のセクションでは、 `/v3/chat2data`例に挙げてその呼び出し方法を説明します。
 
-#### 1. <code>/v3/dataSummaries</code>を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-code-v3-datasummaries-code}
+#### 1. <code>/v3/dataSummaries</code>を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-v3datasummaries}
 
 `/v3/chat2data`呼び出す前に、まず`/v3/dataSummaries`呼び出して AI にデータベースを分析してデータの概要を生成させます。そうすることで、後で`/v3/chat2data` SQL 生成でより優れたパフォーマンスを得ることができます。
 
@@ -172,7 +172,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }
 ```
 
-#### 2. <code>/v2/jobs/{job_id}</code>を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-code-v2-jobs-job-id-code}
+#### 2. <code>/v2/jobs/{job_id}</code>を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-v2jobsjob_id}
 
 `/v3/dataSummaries` APIは非同期です。大規模なデータセットを持つデータベースの場合、データベース分析を完了して完全なデータサマリーを返すまでに数分かかる場合があります。
 
@@ -238,7 +238,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 }
 ```
 
-#### 3. <code>/v3/chat2data</code>を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-code-v3-chat2data-code}
+#### 3. <code>/v3/chat2data</code>を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-v3chat2data}
 
 データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`呼び出して SQL ステートメントを生成および実行できます。
 

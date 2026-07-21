@@ -61,7 +61,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `CACHE`     | `1000`                       | TiDB 内のシーケンスのローカル キャッシュ サイズを指定します。                                                                                                  |
 | `CYCLE`     | `NO CYCLE`                   | シーケンスを最小値（降順シーケンスの場合は最大値）から再開するかどうかを指定します。1 &gt; `0` `INCREMENT` 、デフォルト値は`MINVALUE`です。7 &lt; `INCREMENT` `0`場合、デフォルト値は`MAXVALUE`です。 |
 
-## <code>SEQUENCE</code>関数 {#code-sequence-code-function}
+## <code>SEQUENCE</code>関数 {#sequence-function}
 
 次の式関数を通じてシーケンスを制御できます。
 

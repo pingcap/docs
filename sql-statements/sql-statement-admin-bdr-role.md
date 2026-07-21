@@ -3,7 +3,7 @@ title: ADMIN [SET|SHOW|UNSET] BDR ROLE
 summary: TiDB データベースの ADMIN [SET|SHOW|UNSET] BDR ROLE の使用法の概要。
 ---
 
-# ADMIN [SET|SHOW|UNSET] BDR ROLE {#admin-set-show-unset-bdr-role}
+# ADMIN [SET|SHOW|UNSET] BDR ROLE {#admin-setshowunset-bdr-role}
 
 -   クラスターのBDRロールを設定するには、 `ADMIN SET BDR ROLE`使用します。現在、TiDBクラスターには`PRIMARY`と`SECONDARY` BDRロールを設定できます。BDRロールの詳細については、 [TiCDC 双方向レプリケーションにおける DDL 同期](/ticdc/ticdc-bidirectional-replication.md#ddl-replication)参照してください。
 -   クラスターの BDR ロールを表示するには、 `ADMIN SHOW BDR ROLE`使用します。

@@ -133,7 +133,7 @@ analyze = "optional"
 
 新しいバージョンの競合検出では`precheck-conflict-before-import`パラメータを使用して、インポート前の競合検出を有効にするかどうかを制御します。元のデータに競合データが多く含まれている場合、インポート前後の競合検出にかかる合計時間は、旧バージョンよりも短くなります。そのため、競合レコードの割合が 1% 以上で、ローカルディスクの空き容量が十分な場合は、インポート前の競合検出を有効にすることをお勧めします。
 
-### 旧バージョンの競合検出機能（v8.0.0で非推奨） {#the-old-version-of-conflict-detection-deprecated-in-v8-0-0}
+### 旧バージョンの競合検出機能（v8.0.0で非推奨） {#the-old-version-of-conflict-detection-deprecated-in-v800}
 
 バージョン 8.0.0 以降、競合検出の旧バージョン ( `tikv-importer.duplicate-resolution` ) は非推奨となります。 `tikv-importer.duplicate-resolution`パラメータは今後のリリースで削除されます。 `tikv-importer.duplicate-resolution`が`remove`であり、 `conflict.strategy`が設定されていない場合、 TiDB Lightning は`conflict.strategy`の値`"replace"` 。 `tikv-importer.duplicate-resolution`と`conflict.strategy`は同時に設定できません。同時に設定するとエラーが発生しますのでご注意ください。
 
@@ -276,7 +276,7 @@ TiDB Lightningは、物理インポートモードでのインポートパフォ
 
 TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)設定もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、 `num-threads` CPU コア数に設定することをお勧めします。
 
-## ディスククォータの設定<span class="version-mark">（v6.2.0の新機能）</span> {#configure-disk-quota-span-class-version-mark-new-in-v6-2-0-span}
+## ディスククォータの設定<span class="version-mark">（v6.2.0の新機能）</span> {#configure-disk-quota-new-in-v620}
 
 物理インポートモードでデータをインポートする場合、 TiDB Lightning は元のデータをエンコード、ソート、分割するために、ローカルディスク上に多数の一時ファイルを作成します。ローカルディスクの空き容量が不足すると、書き込みエラーが発生し、 TiDB Lightning はエラーを報告して終了します。
 

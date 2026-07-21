@@ -57,7 +57,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 </CustomContent>
 
-## 現在のリソースグループ {#current-resource-group}
+## 現在のリソースグループ {#current_resource_group}
 
 `CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。3 [リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
 
@@ -101,11 +101,11 @@ SELECT CURRENT_RESOURCE_GROUP();
     +--------------------------+
     1 row in set (0.00 sec)
 
-## TIDB_BOUNDED_STALENESS {#tidb-bounded-staleness}
+## TIDB_BOUNDED_STALENESS {#tidb_bounded_staleness}
 
 `TIDB_BOUNDED_STALENESS()`関数は[`AS OF TIMESTAMP`](/as-of-timestamp.md)構文の一部として使用されます。
 
-## TIDB_CURRENT_TSO {#tidb-current-tso}
+## TIDB_CURRENT_TSO {#tidb_current_tso}
 
 `TIDB_CURRENT_TSO()`関数は、現在のトランザクションの[TSO](/tso.md)を返します。これはシステム変数[`tidb_current_ts`](/system-variables.md#tidb_current_ts)に似ています。
 
@@ -137,7 +137,7 @@ SELECT @@tidb_current_ts;
     +--------------------+
     1 row in set (0.00 sec)
 
-## TIDB_DECODE_BINARY_PLAN {#tidb-decode-binary-plan}
+## TIDB_DECODE_BINARY_PLAN {#tidb_decode_binary_plan}
 
 `TIDB_DECODE_BINARY_PLAN(binary_plan)`関数は、 [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)表の`BINARY_PLAN`列にあるようなバイナリ プランをデコードします。
 
@@ -158,7 +158,7 @@ SELECT BINARY_PLAN,TIDB_DECODE_BINARY_PLAN(BINARY_PLAN) FROM information_schema.
 
     1 row in set (0.00 sec)
 
-## TIDB_デコード_キー {#tidb-decode-key}
+## TIDB_デコード_キー {#tidb_decode_key}
 
 `TIDB_DECODE_KEY()`関数は、TiDBでエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルとログ出力に存在します。
 
@@ -262,7 +262,7 @@ ORDER BY
 
 `TIDB_DECODE_KEY`成功した場合は有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
 
-## TIDB_デコード_プラン {#tidb-decode-plan}
+## TIDB_デコード_プラン {#tidb_decode_plan}
 
 TiDB実行プランは、スロークエリログにエンコードされた形式で保存されています。1関数`TIDB_DECODE_PLAN()` 、エンコードされたプランを人間が読める形式にデコードするために使用されます。
 
@@ -280,7 +280,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
       └─TableFullScan_5    cop[tikv]    960        table:t, keep order:false, stats:pseudo    960        tikv_task:{time:153µs, loops:960}                                                                                                     N/A        N/A
 ```
 
-## TIDB_DECODE_SQL_DIGESTS {#tidb-decode-sql-digests}
+## TIDB_DECODE_SQL_DIGESTS {#tidb_decode_sql_digests}
 
 `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタ内のSQLダイジェストセットに対応する正規化されたSQL文（フォーマットと引数のない形式）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
 
@@ -333,7 +333,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 -   [明細書要約表](/statement-summary-tables.md)
 -   [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
-## TIDB_ENCODE_SQL_DIGEST {#tidb-encode-sql-digest}
+## TIDB_ENCODE_SQL_DIGEST {#tidb_encode_sql_digest}
 
 `TIDB_ENCODE_SQL_DIGEST(query_str)`クエリ文字列の SQL ダイジェストを返します。
 
@@ -361,7 +361,7 @@ SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 2');
     +------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## TIDB_IS_DDL_OWNER {#tidb-is-ddl-owner}
+## TIDB_IS_DDL_OWNER {#tidb_is_ddl_owner}
 
 接続しているインスタンスが DDL 所有者である場合、 `TIDB_IS_DDL_OWNER()`関数は`1`返します。
 
@@ -376,7 +376,7 @@ SELECT TIDB_IS_DDL_OWNER();
     +---------------------+
     1 row in set (0.00 sec)
 
-## TIDB_PARSE_TSO {#tidb-parse-tso}
+## TIDB_PARSE_TSO {#tidb_parse_tso}
 
 `TIDB_PARSE_TSO()`関数は、TiDB TSO タイムスタンプから物理タイムスタンプを抽出します。3 [TSO](/tso.md) Time Stamp Oracle を表し、PD (Placement Driver) によってトランザクションごとに発行される単調に増加するタイムスタンプです。
 
@@ -402,7 +402,7 @@ ROLLBACK;
 
 ここで`TIDB_PARSE_TSO` 、セッション変数`tidb_current_ts`で利用可能なタイムスタンプ番号から物理タイムスタンプを抽出するために使用されています。タイムスタンプはトランザクションごとに発行されるため、この関数はトランザクション内で実行されます。
 
-## TIDB_PARSE_TSO_LOGICAL {#tidb-parse-tso-logical}
+## TIDB_PARSE_TSO_LOGICAL {#tidb_parse_tso_logical}
 
 `TIDB_PARSE_TSO_LOGICAL(tso)`関数は、 [TSO](/tso.md)タイムスタンプの論理部分を返します。
 
@@ -428,7 +428,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610434);
     +--------------------------------------------+
     1 row in set (0.00 sec)
 
-## TIDB_ROW_CHECKSUM {#tidb-row-checksum}
+## TIDB_ROW_CHECKSUM {#tidb_row_checksum}
 
 `TIDB_ROW_CHECKSUM()`関数は、行のチェックサム値を照会するために使用されます。この関数は、FastPlanプロセス内の`SELECT`ステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントで照会できます。
 
@@ -465,7 +465,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 1 row in set (0.000 sec)
 ```
 
-## TIDB_シャード {#tidb-shard}
+## TIDB_シャード {#tidb_shard}
 
 `TIDB_SHARD()`関数は、インデックスホットスポットを分散させるためのシャードインデックスを作成します。シャードインデックスは、 `TIDB_SHARD()`関数をプレフィックスとして持つ式インデックスです。
 
@@ -518,7 +518,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
     ```
 
-## TIDB_バージョン {#tidb-version}
+## TIDB_バージョン {#tidb_version}
 
 `TIDB_VERSION()`関数は、接続している TiDBサーバーのバージョンとビルドの詳細を取得するために使用されます。この関数は、GitHub で問題を報告するときに使用できます。
 
@@ -540,7 +540,7 @@ Store: tikv
 1 row in set (0.00 sec)
 ```
 
-## VITESS_ハッシュ {#vitess-hash}
+## VITESS_ハッシュ {#vitess_hash}
 
 `VITESS_HASH(num)`関数は、Vitess と同じ方法で数値をハッシュするために使用されます。これは、Vitess から TiDB への移行を容易にするためのものです。
 
@@ -557,7 +557,7 @@ SELECT VITESS_HASH(123);
     +---------------------+
     1 row in set (0.00 sec)
 
-## TIDB_ENCODE_INDEX_KEY {#tidb-encode-index-key}
+## TIDB_ENCODE_INDEX_KEY {#tidb_encode_index_key}
 
 `TIDB_ENCODE_INDEX_KEY()`関数は、指定されたインデックスキーを16進文字列にエンコードします。構文は次のとおりです。
 
@@ -622,7 +622,7 @@ SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
     +----------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## TIDB_ENCODE_RECORD_KEY {#tidb-encode-record-key}
+## TIDB_ENCODE_RECORD_KEY {#tidb_encode_record_key}
 
 `TIDB_ENCODE_RECORD_KEY()`関数は、指定された行レコードキーを16進文字列にエンコードします。関数の構文は次のとおりです。
 
@@ -670,7 +670,7 @@ SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
     +-----------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## TIDB_MVCC_INFO {#tidb-mvcc-info}
+## TIDB_MVCC_INFO {#tidb_mvcc_info}
 
 キーの[MVCC (マルチバージョン同時実行制御)](https://docs.pingcap.com/tidb/stable/glossary#multi-version-concurrency-control-mvcc)の情報を返します。キーを取得するには[`TIDB_ENCODE_INDEX_KEY`](#tidb_encode_index_key)関数を使用できます。
 

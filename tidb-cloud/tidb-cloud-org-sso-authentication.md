@@ -123,7 +123,7 @@ Cloud Organization SSO を有効にした後、次のようにユーザー名と
 
 4.  **［保存］**をクリックします。
 
-### OIDC と SAML のドメインを追加して検証する
+### OIDC と SAML のドメインを追加して検証する {#add-and-verify-domains-for-oidc-and-saml}
 
 OIDC または SAML で **Auto-provision Accounts** を有効にする場合、または SAML で **SCIM Provisioning Accounts** を有効にする場合は、組織メンバーがサインインに使用するメールドメインを追加して検証してください。これらの場合、 **Allowed Email Domains** は必須であり、 **Verified** ステータスのドメインのみ使用できます。
 

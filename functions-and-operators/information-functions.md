@@ -51,7 +51,7 @@ SELECT BENCHMARK(5, SLEEP(2));
     +------------------------+
     1 row in set (10.00 sec)
 
-### 接続ID() {#connection-id}
+### 接続ID() {#connection_id}
 
 <CustomContent platform="tidb">
 
@@ -80,7 +80,7 @@ SELECT CONNECTION_ID();
     +-----------------+
     1 row in set (0.00 sec)
 
-### 現在のロール() {#current-role}
+### 現在のロール() {#current_role}
 
 <CustomContent platform="tidb">
 
@@ -105,7 +105,7 @@ SELECT CURRENT_ROLE();
     +----------------+
     1 row in set (0.00 sec)
 
-### 現在のユーザー() {#current-user}
+### 現在のユーザー() {#current_user}
 
 `CURRENT_USER()`関数は、現在のセッションで使用されているアカウントを返します。
 
@@ -135,7 +135,7 @@ SELECT DATABASE();
     +------------+
     1 row in set (0.00 sec)
 
-### 見つかった行() {#found-rows}
+### 見つかった行() {#found_rows}
 
 `FOUND_ROWS()`関数は、最後に実行された`SELECT`ステートメントの結果セット内の行数を返します。
 
@@ -166,7 +166,7 @@ SELECT FOUND_ROWS();
 >
 > クエリ修飾子`SQL_CALC_FOUND_ROWS` 、クエリ修飾子`LIMIT`を考慮せずに結果セットの合計行数を計算しますが、クエリ修飾子[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりにクエリ修飾子`COUNT(*)`使用することをお勧めします。
 
-### 最終挿入ID() {#last-insert-id}
+### 最終挿入ID() {#last_insert_id}
 
 `LAST_INSERT_ID()`関数は、 [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)列を含むテーブルに最後に挿入された行の ID を返します。
 
@@ -206,7 +206,7 @@ TABLE t1;
 
 `LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
 
-### ROW_COUNT() {#row-count}
+### ROW_COUNT() {#row_count}
 
 `ROW_COUNT()`関数は影響を受ける行の数を返します。
 
@@ -231,11 +231,11 @@ SELECT ROW_COUNT();
 
 `SCHEMA()`関数は[`DATABASE()`](#database)の同義語です。
 
-### セッションユーザー() {#session-user}
+### セッションユーザー() {#session_user}
 
 `SESSION_USER()`関数は[`USER()`](#user)の同義語です。
 
-### SYSTEM_USER() {#system-user}
+### SYSTEM_USER() {#system_user}
 
 `SYSTEM_USER()`関数は[`USER()`](#user)の同義語です。
 

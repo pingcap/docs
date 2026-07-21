@@ -19,7 +19,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)読んでください。
 -   `UPDATE`データを取得したい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)必要があります。
 
-## <code>UPDATE</code>を使用する {#use-code-update-code}
+## <code>UPDATE</code>を使用する {#use-update}
 
 テーブル内の既存の行を更新するには、更新対象の列をフィルタリングするために`WHERE`句を含む[`UPDATE`文](/sql-statements/sql-statement-update.md)使用する必要があります。
 
@@ -27,7 +27,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 >
 > 多数の行（例えば1万行以上）を更新する必要がある場合は、一度にすべてを更新するのではなく、すべての行が更新されるまで、一部ずつ繰り返し更新することをお***勧め***します。この操作をループさせるスクリプトやプログラムを作成できます。詳しくは[一括更新](#bulk-update)ご覧ください。
 
-### <code>UPDATE</code> SQL構文 {#code-update-code-sql-syntax}
+### <code>UPDATE</code> SQL構文 {#update-sql-syntax}
 
 SQLでは、 `UPDATE`ステートメントは一般的に次の形式になります。
 
@@ -45,14 +45,14 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 詳細については、 [UPDATE構文](/sql-statements/sql-statement-update.md)を参照してください。
 
-### ベストプラクティス<code>UPDATE</code> {#code-update-code-best-practices}
+### ベストプラクティス<code>UPDATE</code> {#update-best-practices}
 
 データ更新に関するベストプラクティスを以下に示します。
 
 -   `WHERE`ステートメントには、必ず`UPDATE`句を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
 -   大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
 
-### <code>UPDATE</code>例 {#code-update-code-example}
+### <code>UPDATE</code>例 {#update-example}
 
 [著者](/develop/dev-guide-bookshop-schema-design.md#authors-table)が名前を**ヘレン・ハルキ**に変更したとします。テーブルを変更する必要があります。彼女の固有の`id`が**1で**あると仮定すると、フィルターは`id = 1`になります。
 
@@ -82,11 +82,11 @@ try (Connection connection = ds.getConnection()) {
 </div>
 </SimpleTab>
 
-## <code>INSERT ON DUPLICATE KEY UPDATE</code>使用する {#use-code-insert-on-duplicate-key-update-code}
+## <code>INSERT ON DUPLICATE KEY UPDATE</code>使用する {#use-insert-on-duplicate-key-update}
 
 テーブルに新しいデータを挿入する必要があるが、一意キー（主キーも一意キーです）の競合がある場合、最初に競合したレコードが更新されます。挿入または更新には`INSERT ... ON DUPLICATE KEY UPDATE ...`ステートメントを使用できます。
 
-### <code>INSERT ON DUPLICATE KEY UPDATE</code> SQL構文 {#code-insert-on-duplicate-key-update-code-sql-syntax}
+### <code>INSERT ON DUPLICATE KEY UPDATE</code> SQL構文 {#insert-on-duplicate-key-update-sql-syntax}
 
 SQLでは、 `INSERT ... ON DUPLICATE KEY UPDATE ...`ステートメントは一般的に次の形式になります。
 
@@ -103,12 +103,12 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 | `{update_column}` |  更新するカラム名 |
 |  `{update_value}` | 更新するカラムの値 |
 
-### <code>INSERT ON DUPLICATE KEY UPDATE</code>ベストプラクティス {#code-insert-on-duplicate-key-update-code-best-practices}
+### <code>INSERT ON DUPLICATE KEY UPDATE</code>ベストプラクティス {#insert-on-duplicate-key-update-best-practices}
 
 -   `INSERT ON DUPLICATE KEY UPDATE`は、一意キーが 1 つだけのテーブルでのみ使用してください。このステートメントは***、一意キー***(主キーを含む) の競合が検出された場合、データを更新します。競合する行が複数ある場合、更新されるのは 1 行のみです。したがって、競合する行が 1 つだけであることを保証できない限り、一意キーが複数あるテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
 -   データを作成または更新する際に、このステートメントを使用してください。
 
-### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
+### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#insert-on-duplicate-key-update-example}
 
 例えば、 [評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新して、ユーザーが書籍に付けた評価を含める必要があるとします。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合は、以前の評価が更新されます。
 

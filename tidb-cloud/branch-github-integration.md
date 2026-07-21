@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud Branching (PREVIEW) with GitHub
 summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学びましょう。
 ---
 
-# TiDB Cloud Branching（PREVIEW）とGitHubの統合 {#integrate-tidb-cloud-branching-beta-with-github}
+# TiDB Cloud Branching（PREVIEW）とGitHubの統合 {#integrate-tidb-cloud-branching-preview-with-github}
 
 > **Note:**
 >
@@ -67,7 +67,7 @@ TiDB Cloud Starterインスタンスを GitHub リポジトリに接続すると
 
 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)の動作を設定するには リポジトリのルートディレクトリに`tidbcloud.yml`ファイルを追加し、以下の手順に従って必要な設定をこのファイルに追加します。
 
-### branch.blockList {#branch-blocklist}
+### branch.blockList {#branchblocklist}
 
 **型:**文字列の配列。**デフォルト:** `[]` 。
 
@@ -81,7 +81,7 @@ github:
             - ".*_blackList"
 ```
 
-### branch.allowList {#branch-allowlist}
+### branch.allowList {#branchallowlist}
 
 **型:**文字列の配列。**デフォルト:** `[.*]` 。
 
@@ -94,7 +94,7 @@ github:
             - ".*_db"
 ```
 
-### branch.mode {#branch-mode}
+### branch.mode {#branchmode}
 
 **型:**文字列。**デフォルト:** `reset` 。
 
@@ -109,7 +109,7 @@ github:
         mode: reset
 ```
 
-### branch.autoDestroy {#branch-autodestroy}
+### branch.autoDestroy {#branchautodestroy}
 
 **型:**ブール値。**デフォルト:** `true` 。
 
@@ -127,7 +127,7 @@ github:
 
 ワークフローを作成するための主な手順は以下のとおりです。
 
-1.  [TiDB Cloud BranchingをGitHubリポジトリと統合する](#integrate-branching-with-your-github-repository)。
+1.  [TiDB Cloud BranchingをGitHubリポジトリと統合する](#integrate-tidb-cloud-branching-with-your-github-repository)。
 
 2.  支店の接続情報を取得します。
 
@@ -159,7 +159,7 @@ github:
 
     テストコードを修正して、GitHub Actions からの接続情報を受け入れるようにしてください。たとえば、 [ライブデモ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)で示されているように、環境を介して接続情報を受け入れることができます。
 
-## 次は？ {#what-s-next}
+## 次は？ {#whats-next}
 
 以下の例を通して、ブランチング機能を備えたGitHub連携の使い方を学びましょう。
 
