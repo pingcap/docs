@@ -59,7 +59,7 @@ BIT[(M)]
 
 ### <code>BOOLEAN</code>型 {#code-boolean-code-type}
 
-`BOOLEAN`型とそのエイリアス`BOOL` `TINYINT(1)`と同等です。値が`0`場合は`False` 、それ以外の場合は`True`とみなされます。MySQLと同様に、 `True`は`1` 、 `False`は`0`です。
+`BOOLEAN`型とそのエイリアス`BOOL`は`TINYINT(1)`と同等です。値が`0`の場合は`False` 、それ以外の場合は`True`とみなされます。MySQLと同様に、 `True`は`1` 、 `False`は`0`です。
 
 ```sql
 BOOLEAN

@@ -108,4 +108,4 @@ tidb-lightning-ctl --checkpoint-remove=all
 tidb-lightning-ctl --checkpoint-dump=output/directory
 ```
 
-このオプションは、チェックポイントの内容を指定されたディレクトリにダンプします。このディレクトリは主に技術スタッフによるデバッグに使用されます。このオプションは`driver = "mysql"`場合にのみ有効になります。
+このオプションは、チェックポイントの内容を指定されたディレクトリにダンプします。このディレクトリは主に技術スタッフによるデバッグに使用されます。このオプションは`driver = "mysql"`の場合にのみ有効になります。

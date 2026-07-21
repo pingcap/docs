@@ -85,7 +85,7 @@ TiDB バージョン: 5.4.3
 
         -   DB Conn [＃3733](https://github.com/pingcap/tiflow/issues/3733)取得する際に DM ワーカーがスタックする可能性がある問題を修正しました
         -   DMが`Specified key was too long`エラーを報告する問題を修正しました[＃5315](https://github.com/pingcap/tiflow/issues/5315)
-        -   レプリケーション[＃7028](https://github.com/pingcap/tiflow/issues/7028)中にlatin1データが破損する可能性がある問題を修正
+        -   レプリケーション中にlatin1データが破損する可能性がある問題を修正[＃7028](https://github.com/pingcap/tiflow/issues/7028)
         -   TiDBがIPv6ホスト[＃6249](https://github.com/pingcap/tiflow/issues/6249)を使用しているときにDMが起動に失敗する問題を修正
         -   `query-status` [＃4811](https://github.com/pingcap/tiflow/issues/4811)で起こりうるデータ競合の問題を修正
         -   リレーがエラー[＃6193](https://github.com/pingcap/tiflow/issues/6193)に遭遇したときの goroutine リークを修正

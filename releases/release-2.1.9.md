@@ -52,7 +52,7 @@ TiDB Ansible バージョン: 2.1.9
 
 -   TiDB Binlog
     -   主キー列のunsigned int型のデータがマイナスであるため、データレプリケーションが中断される問題を修正しました。 [＃574](https://github.com/pingcap/tidb-binlog/pull/574)
-    -   ダウンストリームが`pb`場合に圧縮オプションを削除し、ダウンストリーム名を`pb`から`file`に変更します[＃597](https://github.com/pingcap/tidb-binlog/pull/575)
+    -   ダウンストリームが`pb`の場合に圧縮オプションを削除し、ダウンストリーム名を`pb`から`file`に変更します[＃597](https://github.com/pingcap/tidb-binlog/pull/575)
     -   2.1.7で導入されたReparoが間違った`UPDATE`ステートメントを生成するバグを修正しました [＃576](https://github.com/pingcap/tidb-binlog/pull/576)
 -   TiDB Lightning
     -   列データのビット型がパーサーによって誤って解析されるバグを修正 [＃164](https://github.com/pingcap/tidb-lightning/pull/164)

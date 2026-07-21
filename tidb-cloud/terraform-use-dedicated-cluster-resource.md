@@ -657,7 +657,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 ### クラスターを一時停止または再開する {#pause-or-resume-a-cluster}
 
-クラスターの状態が`ACTIVE`ときは一時停止し、状態が`PAUSED`ときは再開できます。
+クラスターの状態が`ACTIVE`のときは一時停止し、状態が`PAUSED`のときは再開できます。
 
 -   クラスターを一時停止するには`paused = true`設定します。
 -   クラスターを再開するには`paused = false`設定します。
@@ -896,7 +896,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 ### クラスターのTiDBノードグループを更新する {#update-a-tidb-node-group-of-the-cluster}
 
-クラスターの TiDB ノード グループの状態が`ACTIVE`場合、そのグループを更新できます。
+クラスターの TiDB ノード グループの状態が`ACTIVE`の場合、そのグループを更新できます。
 
 1.  [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidbcloud_dedicated_node_group`の設定を編集します。
 

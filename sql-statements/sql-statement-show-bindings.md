@@ -5,7 +5,7 @@ summary: TiDB データベースでの SHOW BINDINGS バインディングの使
 
 # SHOW [GLOBAL|SESSION] BINDINGS {#show-global-session-bindings}
 
-`SHOW BINDINGS`ステートメントは、作成されたSQLバインディングに関する情報を表示するために使用されます。 `BINDING` `GLOBAL`または`SESSION`いずれかの基準で表されます。デフォルトは`SESSION`です。
+`SHOW BINDINGS`ステートメントは、作成されたSQLバインディングに関する情報を表示するために使用されます。 `BINDING`は`GLOBAL`または`SESSION`のいずれかの基準で表されます。デフォルトは`SESSION`です。
 
 ## 概要 {#synopsis}
 

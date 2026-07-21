@@ -89,7 +89,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `SPLIT TABLE … REGIONS/INDEX`で返された結果を追加し、 `TOTAL_SPLIT_REGION`と`SCATTER_FINISH_RATIO`に、結果のタイムアウト前に正常に分割されたリージョンの数を表示するようにします。 [＃11484](https://github.com/pingcap/tidb/pull/11484)
     -   列属性が`ON UPDATE CURRENT_TIMESTAMP`で浮動小数点精度が指定されている場合、 `SHOW CREATE TABLE`ようなステートメントで表示される精度が不完全になる問題を修正しました[＃11591](https://github.com/pingcap/tidb/pull/11591)
     -   仮想生成列の式に別の仮想生成列が含まれている場合、列のインデックス結果が正しく計算されない問題を修正しました。 [＃11475](https://github.com/pingcap/tidb/pull/11475)
-    -   `ALTER TABLE … ADD PARTITION …`文の`VALUE LESS THAN`後にマイナス記号を追加できない問題を修正 [＃11581](https://github.com/pingcap/tidb/pull/11581)
+    -   `ALTER TABLE … ADD PARTITION …`文の`VALUE LESS THAN`の後にマイナス記号を追加できない問題を修正 [＃11581](https://github.com/pingcap/tidb/pull/11581)
 -   モニター
     -   `TiKVTxnCmdCounter`監視メトリックが登録されていないため、データが収集および報告されない問題を修正しました[＃11316](https://github.com/pingcap/tidb/pull/11316)
     -   Bind Info の`BindUsageCounter` `BindTotalGauge`監視メトリックを追加します`BindMemoryUsage` [＃11467](https://github.com/pingcap/tidb/pull/11467)

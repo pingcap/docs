@@ -154,7 +154,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`使用します。5 と`SHOW GRANTS FOR CURRENT_USER()` `SHOW GRANTS`の点で異なります。
 
 -   `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
--   `SHOW GRANTS FOR CURRENT_USER()`場合、有効なロールの権限は表示されません。
+-   `SHOW GRANTS FOR CURRENT_USER()`の場合、有効なロールの権限は表示されません。
 
 ### デフォルトロールを設定する {#set-the-default-role}
 

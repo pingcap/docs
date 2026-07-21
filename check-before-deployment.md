@@ -539,7 +539,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `--update-kernel`後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
+            > `--update-kernel`の後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
 
         3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`実行します。
 
@@ -549,7 +549,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `--info`後には実際のデフォルトのカーネル バージョンが続きます。
+            > `--info`の後には実際のデフォルトのカーネル バージョンが続きます。
 
                 index=0
                 kernel=/boot/vmlinuz-3.10.0-957.el7.x86_64

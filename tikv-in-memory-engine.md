@@ -136,7 +136,7 @@ LIMIT 5;
 
 ### TiKV MVCCのインメモリエンジンが有効になっているかどうかを確認するにはどうすればよいですか？ {#how-can-i-check-whether-the-tikv-mvcc-in-memory-engine-is-enabled}
 
-TiKVの設定は、 [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)ステートメントを使用して確認できます。3の値が`in-memory-engine.enable` `true`場合、TiKV MVCCインメモリエンジンが有効になっていることを意味します。
+TiKVの設定は、 [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)ステートメントを使用して確認できます。`in-memory-engine.enable`の値が`true`の場合、TiKV MVCCインメモリエンジンが有効になっていることを意味します。
 
 ```sql
 SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';

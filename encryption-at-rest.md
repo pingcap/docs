@@ -82,7 +82,7 @@ TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バー
 
 -   `data-key-rotation-period` 、TiKV がキーをローテーションする頻度を指定します。
 
-暗号化が有効になっている場合（つまり、 `data-encryption-method`値が`"plaintext"`ではない場合）、次のいずれかの方法でマスター キーを指定する必要があります。
+暗号化が有効になっている場合（つまり、 `data-encryption-method`の値が`"plaintext"`ではない場合）、次のいずれかの方法でマスター キーを指定する必要があります。
 
 -   [KMS経由でマスターキーを指定する](#specify-a-master-key-via-kms)
 -   [ファイル経由でマスターキーを指定する](#specify-a-master-key-via-a-file)

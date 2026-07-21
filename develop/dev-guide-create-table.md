@@ -146,7 +146,7 @@ TiDB は v5.0 以降、[クラスター化インデックス](/clustered-indexes
 >
 > TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 *{* `PRIMARY KEY`と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
 
-[クラスター化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)ためのガイドラインに従って、次の例では、 `books`と`users` } の間の関連付けを持つテーブルを作成します。これは、 `ratings` `book`を表します。 `users` .この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを構築し、その**主キー**に**クラスター化インデックス**を作成します。
+[クラスター化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に従って、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `users`による`book`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを構築し、その**主キー**に**クラスター化インデックス**を作成します。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (

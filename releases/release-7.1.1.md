@@ -114,7 +114,7 @@ TiDB バージョン: 7.1.1
 
     -   Backup & Restore (BR)
 
-        -   `checksum mismatch`場合によっては誤って報告される問題を修正[＃44472](https://github.com/pingcap/tidb/issues/44472) @ [Leavrth](https://github.com/Leavrth)
+        -   `checksum mismatch`が場合によっては誤って報告される問題を修正[＃44472](https://github.com/pingcap/tidb/issues/44472) @ [Leavrth](https://github.com/Leavrth)
         -   TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)
 
     -   TiCDC

@@ -104,11 +104,11 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 
 具体的には：
 
--   最初の行の`profit`値は 2 次元グループ`{year, month}`からのもので、細粒度`{2000, "Jan"}`グループに対する集計結果を表しています。
+-   最初の行の`profit`の値は 2 次元グループ`{year, month}`からのもので、細粒度`{2000, "Jan"}`グループに対する集計結果を表しています。
 -   2 行目の値`profit`は 1 次元グループ`{year}`からのもので、中間レベルのグループ`{2001}`の集計結果を表しています。
--   最後の行の`profit`値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
+-   最後の行の`profit`の値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
 
-`WITH ROLLUP`結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
+`WITH ROLLUP`の結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
 
 たとえば、 `HAVING`句の`NULL`使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
 

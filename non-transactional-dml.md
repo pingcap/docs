@@ -181,7 +181,7 @@ SHOW PROCESSLIST;
 
 非トランザクションDML文を終了するには、 `KILL TIDB <processlist_id>`使用します。TiDBは現在実行中のバッチ以降のすべてのバッチをキャンセルします。実行結果はログから取得できます。
 
-`KILL TIDB`詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+`KILL TIDB`の詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### バッチ分割ステートメントをクエリする {#query-the-batch-dividing-statement}
 

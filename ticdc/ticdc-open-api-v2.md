@@ -808,7 +808,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 -   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
 -   `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
 -   `now_ts` : 現在の PD 時間。
--   `info` : 特に`synced`が`false`場合、同期ステータスの判別を支援する補足情報。
+-   `info` : 特に`synced`が`false`の場合、同期ステータスの判別を支援する補足情報。
 
 **例2: 同期が完了していない**
 

@@ -14,7 +14,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
 > **Note:**
 >
-> ネットワークアクセスのセキュリティを確保するため、TiCDC クライアント認証は[TLSが有効になっています](/enable-tls-between-clients-and-servers.md)場合にのみ使用することを強くお勧めします。TLS が有効になっていない場合、ユーザー名とパスワードはネットワーク上でプレーンテキストとして送信され、深刻な資格情報漏洩につながる可能性があります。
+> ネットワークアクセスのセキュリティを確保するため、TiCDC クライアント認証は[TLSが有効になっている](/enable-tls-between-clients-and-servers.md)場合にのみ使用することを強くお勧めします。TLS が有効になっていない場合、ユーザー名とパスワードはネットワーク上でプレーンテキストとして送信され、深刻な資格情報漏洩につながる可能性があります。
 
 ## クライアント認証にmTLSを使用する {#use-mtls-for-client-authentication}
 

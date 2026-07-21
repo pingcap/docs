@@ -83,12 +83,12 @@ from:
 #### `relay-binlog-name` {#relay-binlog-name}
 
 -   DM-workerがbinlogの取得を開始するファイル名を指定します。例： `"mysql-bin.000002"` 。
--   [`enable-gtid`](#enable-gtid)が`false`場合にのみ機能します。このパラメータが指定されていない場合、DM-workerは複製される最も古いbinlogファイルからプルを開始します。通常、手動設定は必要ありません。
+-   [`enable-gtid`](#enable-gtid)が`false`の場合にのみ機能します。このパラメータが指定されていない場合、DM-workerは複製される最も古いbinlogファイルからプルを開始します。通常、手動設定は必要ありません。
 
 #### `relay-binlog-gtid` {#relay-binlog-gtid}
 
 -   DMワーカーがbinlogのプルを開始するGTIDを指定します。例： `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。
--   [`enable-gtid`](#enable-gtid)が`true`場合にのみ機能します。このパラメータが指定されていない場合、DMワーカーはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
+-   [`enable-gtid`](#enable-gtid)が`true`の場合にのみ機能します。このパラメータが指定されていない場合、DMワーカーはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
 
 #### `relay-dir` {#relay-dir}
 
@@ -140,7 +140,7 @@ from:
 
 > **Note:**
 >
-> 自動データ消去戦略は、 [`interval`](#interval) `0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)うち少なくとも 1 つが`0`でない場合にのみ有効になります。
+> 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1 つが`0`でない場合にのみ有効になります。
 
 ### タスクステータスチェッカーの設定（ <code>checker</code> ） {#task-status-checker-configuration-code-checker-code}
 

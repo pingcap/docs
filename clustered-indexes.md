@@ -143,7 +143,7 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 現在、クラスター化インデックス機能にはいくつかの異なる制限があります。以下を参照してください。
 
 -   サポート対象外であり、サポートプランにも含まれていない状況：
-    -   クラスター化インデックスと属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を併用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) [`AUTO_RANDOM`](/auto-random.md)ではないクラスター化インデックスを持つテーブルには適用されません。
+    -   クラスター化インデックスと属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を併用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)は、 [`AUTO_RANDOM`](/auto-random.md)ではないクラスター化インデックスを持つテーブルには適用されません。
     -   クラスター化インデックスを持つテーブルのダウングレードはサポートされていません。そのようなテーブルをダウングレードする必要がある場合は、代わりに論理バックアップツールを使用してデータを移行してください。
 -   まだサポートされていないが、サポート計画に含まれている状況：
     -   `ALTER TABLE`ステートメントを使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
