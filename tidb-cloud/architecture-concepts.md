@@ -88,6 +88,38 @@ For mission-critical applications that require high performance and enhanced sec
 
 To maximize uptime and resilience for mission-critical workloads, {{{ .premium }}} provides [Regional High Availability](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture), which distributes nodes across multiple availability zones for greater redundancy than zonal deployments.
 
+<CustomContent plan="byoc">
+
+## TiDB Cloud BYOC
+
+TiDB Cloud BYOC (Bring Your Own Cloud) is designed for organizations that need stronger control over data location, cloud resources, network boundaries, and compliance posture while still using TiDB Cloud as a managed service. With BYOC, the TiDB Cloud control plane is managed by PingCAP, while the TiDB data plane runs in your own cloud account.
+
+BYOC provides the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, data storage, and network boundaries in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments so you can choose between lower-latency zonal deployment and higher-resilience regional deployment.
+- **Cloud-account-level controls**: lets you apply your own cloud policies for networking, security, auditability, and compliance.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+To meet different workload requirements, TiDB Cloud BYOC supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+
+![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
+
+A TiDB Cloud BYOC deployment includes the following major components:
+
+- **TiDB Cloud control plane**: provides the TiDB Cloud console, organization and project management, billing, lifecycle orchestration, monitoring views, alerting, and maintenance workflows.
+- **BYOC data plane**: runs the TiDB service and related infrastructure in your cloud account. TiDB Cloud operates this environment based on the permissions granted during BYOC onboarding.
+- **TiDB service VPC**: hosts TiDB service components that serve application traffic.
+- **Observability service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
+- **Application VPC**: hosts your applications. You manage this VPC and configure network connectivity to access the BYOC TiDB service.
+
+Each BYOC region is deployed and operated independently. When a BYOC region is added, TiDB Cloud provisions the required regional resources in your cloud account. Because each BYOC region has its own data-plane setup, regions do not share a single TiDB Service VPC or Observability Service VPC.
+
+Your applications connect to a {{{ .byoc }}} instance from your application environment. Depending on your BYOC configuration, connections use either private or controlled public access. For private access, BYOC supports VPC peering and other private connectivity options.
+
+</CustomContent>
+
 ## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.

@@ -118,6 +118,16 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
+<CustomContent plan="byoc">
+
+- {{{ .byoc }}}
+
+    {{{ .byoc }}} is designed for large-scale production workloads that require greater control, security, and compliance. It enables you to run the data plane in your own AWS account while benefiting from TiDB Cloud's automated operations, elastic scalability, and enterprise-grade security.
+
+    Currently, {{{ .byoc }}} is in private preview on AWS.
+
+</CustomContent>
+
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
@@ -139,6 +149,14 @@ TiDB Cloud provides the following deployment options:
 - Your VPC
 
     You can connect to your TiDB Cloud resource via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).
+
+</CustomContent>
 
 ## Related resources
 

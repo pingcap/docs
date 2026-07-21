@@ -186,3 +186,5 @@ FRAME-0401| VID-20250103-001 | night_lowlight | 0.63       | 1.0020
 ```
 
 Because the embeddings live next to relational tables, you can pivot from “frames that look alike” to “frames that also had `hard_brake` tags, specific weather, or JSON detections” without exporting data to another service.
+
+To restrict which documents a role can retrieve during vector search, attach a [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md#vector--rag-document-visibility) so visibility is enforced by the engine, not by stuffing document IDs into the query.

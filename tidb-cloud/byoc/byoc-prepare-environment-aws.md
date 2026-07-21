@@ -82,7 +82,7 @@ You need to create two separate **public hosted zones** in Amazon Route 53.
 
     > **Note:**
     >
-    > If you plan to deploy TiDB Cloud BYOC in **multiple AWS regions**, the same hosted zones can be shared across all regions, or you can choose to create dedicated hosted zones per region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for detailed multi-region architecture configurations. |
+    > If you plan to deploy TiDB Cloud BYOC in **multiple AWS regions**, the same hosted zones can be shared across all regions, or you can choose to create dedicated hosted zones per region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for detailed multi-region architecture configurations.
 
 ## Step 5. Set up private certificate authority (PCA)
 
