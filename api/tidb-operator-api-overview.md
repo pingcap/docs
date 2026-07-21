@@ -17,4 +17,4 @@ Kubernetes 上で TiDB クラスターを管理するには、次のTiDB Operato
 -   [Tidbイニシャライザー](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md#tidbinitializer)
 -   [Tidbモニター](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md#tidbmonitor)
 
-詳細については[TiDB OperatorAPI ドキュメント](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md)を参照してください。
+詳細については[TiDB Operator API ドキュメント](https://github.com/pingcap/tidb-operator/blob/v1.6.4/docs/api-references/docs.md)を参照してください。

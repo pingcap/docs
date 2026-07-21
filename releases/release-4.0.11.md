@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.11
     -   誤った照合順序と強制可能性を引き起こす可能性のある問題を修正[＃22602](https://github.com/pingcap/tidb/pull/22602)
     -   照合順序結果が誤っている可能性がある問題を修正[＃22599](https://github.com/pingcap/tidb/pull/22599)
     -   異なる照合順序における定数置換の問題を修正[＃22582](https://github.com/pingcap/tidb/pull/22582)
-    -   照合順序を使用すると関数`like`間違った結果を返す可能性があるバグを修正しました [＃22531](https://github.com/pingcap/tidb/pull/22531)
+    -   照合順序を使用すると関数`like`が間違った結果を返す可能性があるバグを修正しました [＃22531](https://github.com/pingcap/tidb/pull/22531)
     -   `least`と`greatest`関数における誤った`duration`型推論の問題を修正 [＃22580](https://github.com/pingcap/tidb/pull/22580)
     -   `like`関数が単一文字のワイルドカード ( `_` ) に続いて複数文字のワイルドカード ( `%` ) を処理するときに発生するバグを修正しました[＃22575](https://github.com/pingcap/tidb/pull/22575)
     -   TiDBの組み込み関数の型推論エラーを修正（ `least`と`greatest` ） [＃22562](https://github.com/pingcap/tidb/pull/22562)

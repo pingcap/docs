@@ -204,7 +204,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-エラーが発生した場合は、 `query-status ${task-name}`使用して詳細情報を表示してください。3 `query-status`のクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
+エラーが発生した場合は、 `query-status ${task-name}`を使用して詳細情報を表示してください。`query-status`のクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
 ## ステップ5. タスクを監視し、ログを確認する（オプション） {#step-5-monitor-tasks-and-check-logs-optional}
 

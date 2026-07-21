@@ -465,7 +465,7 @@ large-message-handle-option = "claim-check"
 }
 ```
 
-Kafkaコンシューマーはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、値が`true`場合、メッセージには完全なデータのハンドルキーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流のTiDBにクエリを実行し、 [履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)を使用する必要があります。
+Kafkaコンシューマーはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、値が`true`の場合、メッセージには完全なデータのハンドルキーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流のTiDBにクエリを実行し、 [履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)を使用する必要があります。
 
 > **Warning:**
 >

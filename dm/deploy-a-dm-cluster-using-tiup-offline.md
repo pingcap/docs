@@ -113,7 +113,7 @@ alertmanager_servers:
 >
 > -   特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
 >
-> -   `.`構成のサブカテゴリ（例： `log.slow-threshold`を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+> -   `.`は構成のサブカテゴリ（例： `log.slow-threshold`）を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
 > -   詳細なパラメータの説明については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)と[ワーカー`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 >

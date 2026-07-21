@@ -63,7 +63,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行プランをキャッシュすることもできるため、実行プラン キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
 
-    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) `ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行プランをキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
+    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行プランをキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
 
     詳細については、[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 

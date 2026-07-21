@@ -217,7 +217,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 バージョン4.0.8以降、 Dumplingはクラウドストレージへのデータエクスポートをサポートしています。Amazon S3にデータをバックアップする必要がある場合は、 `-o`パラメータでAmazon S3ストレージパスを指定する必要があります。
 
-指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [Amazonドキュメント - S3バケットの作成方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)参照)。バケット内にフォルダーを作成する必要がある場合は、 [Amazonドキュメント - フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [Amazonドキュメント - S3バケットの作成方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケット内にフォルダーを作成する必要がある場合は、 [Amazonドキュメント - フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
 Amazon S3バックエンドストレージへのアクセス権限を持つアカウントの`SecretKey`と`AccessKey`を環境変数としてDumplingノードに渡します。
 

@@ -39,7 +39,7 @@ TiDBバージョン：8.5.6
 
     バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
 
-    バージョン 8.5.6 以降、TiDB [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856)スロークエリログの制御を強化しました。tidb_slow_log_rules システム変数を使用して、 `Query_time` 、 `Digest`などの条件に基づいて、 `Mem_max` `KV_total`多次元のスロークエリログ出力ルールを定義できます。tidb_slow_log_max_per_sec [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856)を使用して、1 秒あたりに書き込まれるログエントリの数を制限したり、 [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints)ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
+    バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) を使用して、1 秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL ステートメントに対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries)を参照してください。
 

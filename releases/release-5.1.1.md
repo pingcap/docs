@@ -13,7 +13,7 @@ TiDB バージョン: 5.1.1
 
 -   TiDB
 
-    -   TiDBクラスタをv4.0からv5.1にアップグレードする場合、デフォルト値は`tidb_multi_statement_mode`ではなく`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください[＃25751](https://github.com/pingcap/tidb/pull/25751)
+    -   TiDBクラスタをv4.0からv5.1にアップグレードする場合、`tidb_multi_statement_mode`のデフォルト値は`OFF`です。代わりに、クライアントライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください[＃25751](https://github.com/pingcap/tidb/pull/25751)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[＃25874](https://github.com/pingcap/tidb/pull/25874)
     -   `table_storage_stats`テーブルアクセスするには`SUPER`権限が必要です [＃26352](https://github.com/pingcap/tidb/pull/26352)
     -   他のユーザーの権限表示するには、 `information_schema.user_privileges`テーブルにアクセスするために`mysql.user`の`SELECT`権限が必要です。 [＃26311](https://github.com/pingcap/tidb/pull/26311)

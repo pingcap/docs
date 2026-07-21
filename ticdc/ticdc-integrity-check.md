@@ -37,7 +37,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
     > **Note:**
     >
-    > 既存の変更フィードにおいて、 `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`設定されていない場合、チェックサム検証機能を有効にするとスキーマ互換性の問題が発生する可能性があります。この問題を解決するには、スキーマレジストリの互換性タイプを`NONE`に変更してください。詳細については、 [スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking)を参照してください。
+    > 既存の変更フィードにおいて、 `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`が設定されていない場合、チェックサム検証機能を有効にするとスキーマ互換性の問題が発生する可能性があります。この問題を解決するには、スキーマレジストリの互換性タイプを`NONE`に変更してください。詳細については、 [スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking)を参照してください。
 
 ## 機能を無効にする {#disable-the-feature}
 

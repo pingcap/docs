@@ -172,6 +172,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 以前のバージョンからデータを復元するには、次のいずれかの方法を使用できます。
 
--   単純なケースでは、変数`tidb_snapshot`設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)を使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用してデータをインポートします。
+-   単純なケースでは、変数`tidb_snapshot`を設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)を使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`を使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用してデータをインポートします。
 
 -   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)を使用します。Dumplingは、より大きなデータセットのエクスポートに適しています。

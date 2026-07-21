@@ -130,7 +130,7 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 
 `_tidb_rowid`使用するテーブルの場合、TiDB はデフォルトで行 ID を昇順で割り当てます。書き込み負荷の高いワークロードでは、これにより書き込みホットスポットが発生する可能性があります。
 
-この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用することを検討してください。
+この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用することを検討してください。
 
 例：
 

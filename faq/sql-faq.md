@@ -144,7 +144,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 ## TiDB で、後から挿入されたデータのAUTO_INCREMENT ID が、前に挿入されたデータのAUTO_INCREMENT ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
-TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)を参照してください。
+TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`を指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)を参照してください。
 
 ## TiDB の<code>sql_mode</code>変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
@@ -413,10 +413,10 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 推奨事項:
 
--   ハードウェア構成を改善してください。1 [TiDB のソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)を参照してください。
+-   ハードウェア構成を改善してください。[TiDB のソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)を参照してください。
 -   同時実行性を向上させます。デフォルト値は10です。50に上げて試してみることもできますが、通常はデフォルト値の2～4倍の改善が見られます。
 -   大量のデータの場合は`count`をテストします。
--   TiKV設定を最適化します。1と[TiKVメモリパフォーマンスの調整](/tune-tikv-memory-performance.md) [TiKVスレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)を参照してください。
+-   TiKV設定を最適化します。[TiKVスレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKVメモリパフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にします。
 
 ### 現在の DDL ジョブの進行状況を表示するにはどうすればよいでしょうか? {#how-to-view-the-progress-of-the-current-ddl-job}
@@ -459,7 +459,7 @@ ADMIN SHOW DDL;
 
 `cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。2 `root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 
-通常、 `root task`の入力データは`cop task`から取得されます。5 `root task`データを処理している間、TiKVの`cop task`同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
+通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
 
 ## データベースの最適化 {#database-optimization}
 

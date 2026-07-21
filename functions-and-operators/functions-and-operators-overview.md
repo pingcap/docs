@@ -5,7 +5,7 @@ summary: 関数と演算子の使い方を学びます。
 
 # 関数と演算子のリファレンス {#function-and-operator-reference}
 
-TiDBの関数と演算子の使い方はMySQLと似ています。1 [MySQLの関数と演算子](https://dev.mysql.com/doc/refman/8.0/en/functions.html)を参照してください。
+TiDBの関数と演算子の使い方はMySQLと似ています。[MySQLの関数と演算子](https://dev.mysql.com/doc/refman/8.0/en/functions.html)を参照してください。
 
 SQL 文では、 [`SELECT`](/sql-statements/sql-statement-select.md)文の`ORDER BY`と`HAVING`句、 [`SELECT`](/sql-statements/sql-statement-select.md) / [`DELETE`](/sql-statements/sql-statement-delete.md) / [`UPDATE`](/sql-statements/sql-statement-update.md)文の`WHERE`句、 [`SET`](/sql-statements/sql-statement-set-variable.md)文で式を使用できます。
 

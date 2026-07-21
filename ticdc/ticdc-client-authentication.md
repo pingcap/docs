@@ -53,7 +53,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合、 `--cert`と`--key`使用してクライアント証明書と秘密鍵を指定できます。サーバーが自己署名証明書を使用する場合は、 `--cacert`パラメータを使用して信頼されたCA証明書も指定する必要があります。例：
+    [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合、 `--cert`と`--key`を使用してクライアント証明書と秘密鍵を指定できます。サーバーが自己署名証明書を使用する場合は、 `--cacert`パラメータを使用して信頼されたCA証明書も指定する必要があります。例：
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --cert client.crt --key client.key --cacert ca.crt
@@ -87,7 +87,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     [TiCDC コマンドラインツール](/ticdc/ticdc-manage-changefeed.md)を使用する場合、以下の方法でユーザー名とパスワードを指定できます。TiCDC は以下の順序でクライアント証明書の読み取りを試みます。
 
-    1.  コマンドラインパラメータ`--user`と`--password`使用してユーザー名とパスワードを指定します。
+    1.  コマンドラインパラメータ`--user`と`--password`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         cdc cli changefeed list --user test --password password
@@ -99,7 +99,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
         cdc cli changefeed list --user test
         ```
 
-    3.  環境変数`TICDC_USER`と`TICDC_PASSWORD`使用してユーザー名とパスワードを指定します。
+    3.  環境変数`TICDC_USER`と`TICDC_PASSWORD`を使用してユーザー名とパスワードを指定します。
 
         ```bash
         export TICDC_USER=test
@@ -112,7 +112,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
     <div label="TiCDC OpenAPI" value="cdc-api">
 
-    [TiCDC オープンAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合は、 `--user <user>:<password>`を使用してユーザー名とパスワードを指定できます。例:
+    [TiCDC OpenAPI](/ticdc/ticdc-open-api-v2.md)を使用する場合は、 `--user <user>:<password>`を使用してユーザー名とパスワードを指定できます。例:
 
     ```bash
     curl -X GET http://127.0.0.1:8300/api/v2/status --user test:password

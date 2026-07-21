@@ -23,7 +23,7 @@ summary: TiProxy のコマンドライン起動フラグについて学習しま
 -   TiProxy 構成ファイルのパスを指定します。
 -   タイプ: `string`
 -   デフォルト: `""`
--   設定ファイルを指定する必要があります。詳細な設定項目については、 [TiProxy を設定する](/tiproxy/tiproxy-configuration.md)を参照してください。設定ファイルが変更されると、TiProxyは自動的に設定を再読み込みするため、設定ファイルを直接変更しないでください。3または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration) [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)を実行して設定を変更することをお勧めします。
+-   設定ファイルを指定する必要があります。詳細な設定項目については、 [TiProxy を設定する](/tiproxy/tiproxy-configuration.md)を参照してください。設定ファイルが変更されると、TiProxyは自動的に設定を再読み込みするため、設定ファイルを直接変更しないでください。[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)または[`kubectl edit tc`](https://docs.pingcap.com/tidb-in-kubernetes/stable/modify-tidb-configuration)を実行して設定を変更することをお勧めします。
 
 ## TiProxy コントロール {#tiproxy-control}
 
