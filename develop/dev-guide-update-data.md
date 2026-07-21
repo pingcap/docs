@@ -150,7 +150,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## 一括更新 {#bulk-update}
 
-テーブル内の複数のデータ行を更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)`WHERE`句を使用して、更新する必要のあるデータをフィルタリングできます。
+テーブル内の複数のデータ行を更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)を、 `WHERE`句を使用して、更新する必要のあるデータをフィルタリングできます。
 
 ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新すること、つまり、更新が完了するまで各繰り返しでデータの一部のみを更新することをお勧めします。これは、TiDB が単一トランザクションのサイズを制限しているためです ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。一度にあまりに多くのデータ更新を行うと、長時間ロックが保持されたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 

@@ -84,7 +84,7 @@ TiDB バージョン: 4.0.7
 
 -   PD
 
-    -   `balance-region`有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanic可能性があるバグを修正しました[＃2994](https://github.com/pingcap/pd/pull/2994)
+    -   `balance-region`有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanicする可能性があるバグを修正しました[＃2994](https://github.com/pingcap/pd/pull/2994)
     -   リージョンマージ後のリージョンサイズとリージョンキーの統計的偏差を修正 [＃2985](https://github.com/pingcap/pd/pull/2985)
     -   ホットスポット統計の誤りを修正[＃2991](https://github.com/pingcap/pd/pull/2991)
     -   `redirectSchedulerDelete` に`nil`チェックインがない問題を修正 [＃2974](https://github.com/pingcap/pd/pull/2974)

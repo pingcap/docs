@@ -40,7 +40,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --ignore-config-check {#ignore-config-check}
 
--   バイナリの更新後、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、PD コンポーネントの構成チェックが実行されます。3 `<binary>`新しくデプロイされたバイナリへのパス、 `<config-file>`ユーザー設定に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用します。
+-   バイナリの更新後、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、PD コンポーネントの構成チェックが実行されます。`<binary>`は、新しくデプロイされたバイナリへのパスであり、 `<config-file>`は、ユーザー設定に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用します。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 

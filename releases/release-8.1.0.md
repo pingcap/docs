@@ -165,7 +165,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlash
 
-    -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
+    -   TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
 
 -   ツール
 
@@ -218,7 +218,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [＃50810](https://github.com/pingcap/tidb/issues/50810) @ [Defined2014](https://github.com/Defined2014)
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
     -   `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [＃51765](https://github.com/pingcap/tidb/issues/51765) @ [YangKeao](https://github.com/YangKeao)
-    -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
 
 -   TiKV
 
@@ -233,7 +233,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   TTLパラメータを解析する際に発生する型変換エラーを修正[＃7980](https://github.com/tikv/pd/issues/7980) @ [HuSharp](https://github.com/HuSharp)
     -   展開された2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @ [TonsnakeLin](https://github.com/TonsnakeLin)
     -   pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [＃8022](https://github.com/tikv/pd/issues/8022) @ [HuSharp](https://github.com/HuSharp)
-    -   `Merge`スケジュールを生成する際にPDがpanic可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @ [nolouch](https://github.com/nolouch)
+    -   `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @ [nolouch](https://github.com/nolouch)
     -   `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [＃8079](https://github.com/tikv/pd/issues/8079) @ [HuSharp](https://github.com/HuSharp)
     -   PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @ [HuSharp](https://github.com/HuSharp)
     -   クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @ [rleungx](https://github.com/rleungx)
@@ -241,11 +241,11 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlash
 
-    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanic可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   TiFlash が高同時読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @ [JinheLin](https://github.com/JinheLin)
     -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`構成項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @ [JinheLin](https://github.com/JinheLin)
     -   クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanic可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @ [guo-shaoge](https://github.com/guo-shaoge)
+    -   分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   仮想生成列を含むクエリを実行するとTiFlash がエラーを返す可能性がある問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @ [guo-shaoge](https://github.com/guo-shaoge)
 
 -   ツール
@@ -258,12 +258,12 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
         -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @ [YuJuncen](https://github.com/YuJuncen)
         -   フルバックアップ中に`--concurrency`に関連する紛らわしい情報がログに表示される問題を修正 [＃50837](https://github.com/pingcap/tidb/issues/50837) @ [BornChanger](https://github.com/BornChanger)
         -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
-        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントがに進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
+        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
         -   不安定なテストケース`TestClearCache` を修正 [＃51671](https://github.com/pingcap/tidb/issues/51671) @ [zxc111](https://github.com/zxc111)
         -   不安定なテストケース`TestGetMergeRegionSizeAndCount` を修正 [＃52095](https://github.com/pingcap/tidb/issues/52095) @ [3pointer](https://github.com/3pointer)
         -   不安定な統合テストを修正`br_tikv_outage` [＃52673](https://github.com/pingcap/tidb/issues/52673) @ [Leavrth](https://github.com/Leavrth)
         -   テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [Leavrth](https://github.com/Leavrth)
-        -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanic可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
+        -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
 

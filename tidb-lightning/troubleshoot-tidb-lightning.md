@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`を実行してパッケージをアップグレードします。
+    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
 ### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 

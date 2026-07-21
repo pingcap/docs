@@ -146,13 +146,13 @@ SELECT LAST_INSERT_ID();
 +------------------+
 ```
 
-以下の2つの負荷図は、 `AUTO_INCREMENT` ～ `AUTO_RANDOM`を変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`使用し、2番目の図では`AUTO_RANDOM`を使用しています。
+以下の2つの負荷図は、 `AUTO_INCREMENT`を`AUTO_RANDOM`に変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`を使用し、2番目の図では`AUTO_RANDOM`を使用しています。
 
 ![Dashboard Example 7](/media/troubleshoot-hot-spot-issues-7.png)
 
 ![Dashboard Example 8](/media/troubleshoot-hot-spot-issues-8.png)
 
-上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`を使用すると、ホットスポットを適切に分散できます。
+上記の負荷図に示されているように、 `AUTO_INCREMENT`の代わりに`AUTO_RANDOM`を使用すると、ホットスポットを適切に分散できます。
 
 詳細については[AUTO_RANDOM](/auto-random.md)参照してください。
 

@@ -47,7 +47,7 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 -   `FIRST_SEEN` : このエラー (または警告) が最初に送信されたとき。
 -   `LAST_SEEN` : このエラー (または警告) が最後に送信された時刻。
 
-以下の例は、ローカルTiDBサーバーへの接続時に生成される警告を示しています。1 `FLUSH CLIENT_ERRORS_SUMMARY`を実行するとサマリーがリセットされます。
+以下の例は、ローカルTiDBサーバーへの接続時に生成される警告を示しています。`FLUSH CLIENT_ERRORS_SUMMARY`を実行するとサマリーがリセットされます。
 
 ```sql
 SELECT 0/0;

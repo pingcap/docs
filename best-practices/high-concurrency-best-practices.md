@@ -194,7 +194,7 @@ ORDER BY
 
 テーブルに主キーがない場合、または主キーが`Int`型ではなく、ランダムに分布する主キーIDを生成したくない場合、TiDBは暗黙的に`_tidb_rowid`列を行IDとして提供します。一般的に、 `SHARD_ROW_ID_BITS`列のパラメータを使用しない場合、 `_tidb_rowid`列の値も単調に増加するため、ホットスポットが発生する可能性があります。詳細は[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
 
-このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [分割前のリージョン](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
+このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
 
 `SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列に生成された行 ID をランダムに散布するために使用されます。4 `PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
 

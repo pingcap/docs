@@ -56,7 +56,7 @@ DESC CLIENT_ERRORS_SUMMARY_BY_HOST;
 -   `FIRST_SEEN` : このエラー (または警告) がクライアント ホストから初めて確認されました。
 -   `LAST_SEEN` : このエラー (または警告) がクライアント ホストから最後に確認された時刻。
 
-以下の例は、クライアントがローカルTiDBサーバーに接続する際に生成される警告を示しています。1 `FLUSH CLIENT_ERRORS_SUMMARY`を実行するとサマリーはリセットされます。
+以下の例は、クライアントがローカルTiDBサーバーに接続する際に生成される警告を示しています。`FLUSH CLIENT_ERRORS_SUMMARY`を実行するとサマリーはリセットされます。
 
 ```sql
 SELECT 0/0;

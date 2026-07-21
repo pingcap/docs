@@ -104,7 +104,7 @@ TiDB バージョン: 6.5.6
     -   `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [＃15621](https://github.com/tikv/tikv/issues/15621) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   バージョン`tokio`を 6.5 にアップグレードしてセキュリティ問題を修正しました [＃15621](https://github.com/tikv/tikv/issues/15621) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   `flatbuffer` を削除してセキュリティ問題を修正 [＃15621](https://github.com/tikv/tikv/issues/15621) @ [tonyxuqqi](https://github.com/tonyxuqqi)
-    -   TiKVストアがに分割されているときにresolved-tsの遅延が増加する問題を修正しました [＃15679](https://github.com/tikv/tikv/issues/15679) @ [hicqu](https://github.com/hicqu)
+    -   TiKVストアが分割されているときにresolved-tsの遅延が増加する問題を修正しました [＃15679](https://github.com/tikv/tikv/issues/15679) @ [hicqu](https://github.com/hicqu)
     -   TiKV を再起動したときに発生する TiKV OOM 問題を修正し、適用されていないRaftログが多数存在するようになりました[＃15770](https://github.com/tikv/tikv/issues/15770) @ [overvenus](https://github.com/overvenus)
     -   リージョンを[金星の上](https://github.com/overvenus)にマージした後、古いピアが保持され、resolved-tsがブロックされる問題を修正しました。 [＃15919](https://github.com/tikv/tikv/issues/15919)
     -   クラウド環境のGrafanaでスケジューラコマンド変数が正しくない問題を修正[＃15832](https://github.com/tikv/tikv/issues/15832) @ [Connor1996](https://github.com/Connor1996)
@@ -145,12 +145,12 @@ TiDB バージョン: 6.5.6
         -   EC2 メタデータ接続のリセット後の再試行により、バックアップとリストアのパフォーマンスが低下する問題を修正[＃47650](https://github.com/pingcap/tidb/issues/47650) @ [Leavrth](https://github.com/Leavrth)
         -   1分以内にPITRを複数回実行するとデータ損失が発生する可能性がある問題を修正[＃15483](https://github.com/tikv/tikv/issues/15483) @ [YuJuncen](https://github.com/YuJuncen)
         -   BR SQL コマンドと CLI のデフォルト値が異なるため、OOM の問題が発生する可能性がある問題を修正しました[＃48000](https://github.com/pingcap/tidb/issues/48000) @ [YuJuncen](https://github.com/YuJuncen)
-        -   PD所有者がから@ [YuJuncen](https://github.com/YuJuncen)転送されたときにログバックアップがpanic可能性がある問題を修正しました [＃47533](https://github.com/pingcap/tidb/issues/47533)
+        -   PD所有者がから@ [YuJuncen](https://github.com/YuJuncen)転送されたときにログバックアップがpanicする可能性がある問題を修正しました [＃47533](https://github.com/pingcap/tidb/issues/47533)
         -   BRが外部ストレージファイルに対して誤ったURIを生成する問題を修正 [＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)
 
     -   TiCDC
 
-        -   アップストリームで損失のある DDL 文を実行すると TiCDCサーバーがpanic可能性がある問題を修正しました。 [＃9739](https://github.com/pingcap/tiflow/issues/9739) @ [hicqu](https://github.com/hicqu)
+        -   アップストリームで損失のある DDL 文を実行すると TiCDCサーバーがpanicする可能性がある問題を修正しました。 [＃9739](https://github.com/pingcap/tiflow/issues/9739) @ [hicqu](https://github.com/hicqu)
         -   再実行ログ機能を有効にした状態で`RESUME`を実行するとレプリケーションタスクがエラーを報告する問題を修正[＃9769](https://github.com/pingcap/tiflow/issues/9769) @ [hicqu](https://github.com/hicqu)
         -   TiKVノードがクラッシュするとレプリケーションラグが長くなる問題を修正[＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [sdojjy](https://github.com/sdojjy)
         -   `WHERE`文が TiDB または MySQL にデータを複製するときに主キーを条件として使用しない問題を修正しました [＃9988](https://github.com/pingcap/tiflow/issues/9988) @ [asddongmen](https://github.com/asddongmen)
@@ -158,7 +158,7 @@ TiDB バージョン: 6.5.6
         -   REDOログが有効な場合にDDL文の複製間隔が長すぎる問題を修正[＃9960](https://github.com/pingcap/tiflow/issues/9960) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   ターゲットテーブルが削除され、その後アップストリームで再作成された場合、変更フィードが双方向レプリケーションモードで DML イベントをレプリケートできない問題を修正しました。 [＃10079](https://github.com/pingcap/tiflow/issues/10079) @ [asddongmen](https://github.com/asddongmen)
         -   オブジェクトストレージサービスにデータを複製する際に、NFSファイルが多すぎるためにレプリケーションの遅延が長くなる問題を修正[＃10041](https://github.com/pingcap/tiflow/issues/10041) @ [CharlesCheung96](https://github.com/CharlesCheung96)
-        -   オブジェクトストレージサービスにデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました [＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)
+        -   オブジェクトストレージサービスにデータを複製するときに TiCDCサーバーがpanicする可能性がある問題を修正しました [＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)
         -   PD のスケールアップおよびスケールダウン中に TiCDC が無効な古いアドレスにアクセスする問題を修正[＃9584](https://github.com/pingcap/tiflow/issues/9584) @ [fubinzh](https://github.com/fubinzh) @ [asddongmen](https://github.com/asddongmen)
         -   間違ったメモリ情報を取得すると、一部のオペレーティングシステムで OOM 問題が発生する可能性がある問題を修正[＃9762](https://github.com/pingcap/tiflow/issues/9762) @ [sdojjy](https://github.com/sdojjy)
 

@@ -50,7 +50,7 @@ v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-
 
 v8.3.0以降では、上記の制限は解除されました。TiDBクラスターにTiFlashノードが含まれているかどうかに関係なく、TiDBは`WITH ROLLUP`構文の有効な実行プランの生成をサポートします。
 
-TiDBとTiFlashのどちらが演算子`Expand`を実行するかを確認するには、実行プランで演算子`Expand`の属性`task`を確認します。詳細については、 [ROLLUP実行プランの解釈方法](#how-to-interpret-the-rollup-execution-plan)参照してください。
+TiDBとTiFlashのどちらが演算子`Expand`を実行するかを確認するには、実行プランで演算子`Expand`の属性`task`を確認します。詳細については、 [ROLLUP実行プランの解釈方法](#how-to-interpret-the-rollup-execution-plan)を参照してください。
 
 ## 例 {#examples}
 

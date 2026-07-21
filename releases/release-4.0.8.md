@@ -112,7 +112,7 @@ TiDB バージョン: 4.0.8
     -   生成された列が不正な`NULL`値を処理できないバグを修正しました[＃20216](https://github.com/pingcap/tidb/pull/20216)
     -   範囲外の`YEAR`型データの不正確なエラー情報を修正 [＃20170](https://github.com/pingcap/tidb/pull/20170)
     -   悲観的トランザクション再試行中に発生する可能性のある予期しないエラー`invalid auto-id`を修正[＃20134](https://github.com/pingcap/tidb/pull/20134)
-    -   `ALTER TABLE`を使用して`Enum`タイプ[＃20046](https://github.com/pingcap/tidb/pull/20046) `Set`するときに制約がチェックされない問題を修正
+    -   `ALTER TABLE`を使用して`Enum`/`Set`タイプを変更するときに制約がチェックされない問題を修正[＃20046](https://github.com/pingcap/tidb/pull/20046)
     -   複数の演算子を並行処理に使用した場合に記録される`cop`タスクの誤った実行時間情報を修正[＃19947](https://github.com/pingcap/tidb/pull/19947)
     -   読み取り専用システム変数をセッション変数として明示的に選択できない問題を修正[＃19944](https://github.com/pingcap/tidb/pull/19944)
     -   重複した`ORDER BY`条件により、最適ではない実行プランが発生する可能性がある問題を修正しました。 [＃20333](https://github.com/pingcap/tidb/pull/20333)
@@ -128,7 +128,7 @@ TiDB バージョン: 4.0.8
 -   PD
 
     -   TiDB DashboardのKey VisualizerがPD panicを引き起こす可能性があるバグを修正[＃3096](https://github.com/pingcap/pd/pull/3096)
-    -   PDストアが10分以上ダウンした場合にPDがpanic可能性があるバグを修正[＃3069](https://github.com/pingcap/pd/pull/3069)
+    -   PDストアが10分以上ダウンした場合にPDがpanicする可能性があるバグを修正[＃3069](https://github.com/pingcap/pd/pull/3069)
 
 -   TiFlash
 

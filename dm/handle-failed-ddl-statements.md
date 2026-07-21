@@ -242,7 +242,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DANISH_CI;
 ```
 
-このDDL文はTiDBでサポートされていないため、DMの移行タスクは中断されます。コマンド`query-status` `shard_db_1`を実行すると、MySQLインスタンス1のテーブル`shard_table_1`とMySQLインスタンス`shard_table_1` `shard_db_2`以下のエラーが報告されます。
+このDDL文はTiDBでサポートされていないため、DMの移行タスクは中断されます。`query-status`コマンドを実行すると、MySQLインスタンス1の`shard_db_1`.`shard_table_1`テーブル、およびMySQLインスタンス2の`shard_db_2`.`shard_table_1`テーブルによって報告される以下のエラーが確認できます。
 
     {
         "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
@@ -283,7 +283,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
             ]
         }
 
-2.  `query-status`コマンドを実行すると、MySQL インスタンス 1 の`shard_db_1` `shard_table_2`と MySQL インスタンス 2 `shard_table_2` `shard_db_2`によって報告されたエラーを確認できます。
+2.  `query-status`コマンドを実行すると、MySQLインスタンス1の`shard_db_1`.`shard_table_2`テーブル、およびMySQLインスタンス2の`shard_db_2`.`shard_table_2`テーブルによって報告されるエラーを確認できます。
 
         {
             "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_2` CHARACTER SET UTF8 COLLATE UTF8_UNICODE_CI",
@@ -565,7 +565,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 ```
 
-このDDL文はTiDBでサポートされていないため、移行タスクは中断されます。コマンド`query-status`を実行すると、MySQLインスタンス`shard_table_1` `shard_db_1` MySQLインスタンス2のテーブル`shard_db_2`で以下のエラー`shard_table_1`報告されます。
+このDDL文はTiDBでサポートされていないため、移行タスクは中断されます。`query-status`コマンドを実行すると、MySQLインスタンス1の`shard_db_1`.`shard_table_1`テーブル、およびMySQLインスタンス2の`shard_db_2`.`shard_table_1`テーブルによって報告される以下のエラーが確認できます。
 
     {
         "Message": "cannot track DDL: ALTER TABLE `shard_db_1`.`shard_table_1` ADD COLUMN `new_col` INT UNIQUE KEY",
@@ -617,7 +617,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
             ]
         }
 
-2.  `query-status <task-name>`を使用してタスクのステータス`shard_table_2` `shard_db_1` `shard_table_2` `shard_db_2`された次のエラーを確認できます。
+2.  `query-status <task-name>`を使用してタスクのステータスを表示すると、MySQLインスタンス1の`shard_db_1`.`shard_table_2`テーブル、およびMySQLインスタンス2の`shard_db_2`.`shard_table_2`テーブルによって報告される次のエラーを確認できます。
 
         {
             "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_1`.`shard_table_2`], right DDL sequence should be ..."

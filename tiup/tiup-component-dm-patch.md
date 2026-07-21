@@ -33,7 +33,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 -   `find .`を実行して、一時パッケージ ディレクトリ内のファイル構造を表示します。
 -   バイナリ ファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
 -   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、一時ディレクトリにファイルをパックします。
--   最後に、 `tiup dm patch`コマンドの`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`使用できます。
+-   最後に、 `tiup dm patch`コマンドの`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
 
 ## オプション {#options}
 

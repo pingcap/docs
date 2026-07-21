@@ -3,7 +3,7 @@ title: Stress Test TiDB Using TiUP Bench Component
 summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレス テストを実行する方法を学習します。
 ---
 
-# TiUPベンチコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
+# TiUP Benchコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
 
 データベースのパフォーマンスをテストする際には、データベースのストレステストが必要になることがよくあります。これを容易にするために、 TiUPにはベンチコンポーネントが統合されており、ストレステスト用の複数のワークロードが用意されています。これらのワークロードには、以下のコマンドでアクセスできます。
 
@@ -51,7 +51,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 
 ## TiUPを使用してTPC-Cテストを実行する {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
+TiUP Benchコンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -113,7 +113,7 @@ TPC-Cテストを実行するための簡略化された手順を以下に示し
 
 ## TiUPを使用してTPC-Hテストを実行する {#run-tpc-h-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-H テストを実行するために次のコマンドとパラメーターをサポートしています。
+TiUP Benchコンポーネントは、TPC-H テストを実行するために次のコマンドとパラメーターをサポートしています。
 
 ```bash
 Available Commands:

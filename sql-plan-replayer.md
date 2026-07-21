@@ -186,7 +186,7 @@ mysql> show stats_meta;
 
 > **Note:**
 >
-> `mysql`コマンドラインクライアントを使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`遭遇した場合は、接続文字列に`--local-infile=true`追加できます。
+> `mysql`コマンドラインクライアントを使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`に遭遇した場合は、接続文字列に`--local-infile=true`を追加できます。
 
 ## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-code-plan-replayer-capture-code-to-capture-target-plans}
 

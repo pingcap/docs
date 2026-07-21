@@ -50,7 +50,7 @@ ERROR 1054 (42S22): Unknown column '_tidb_rowid' in 'field list'
 
 ## <code>_tidb_rowid</code>を読み込む {#read-code-tidb-rowid-code}
 
-`_tidb_rowid`を使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`クエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
+`_tidb_rowid`を使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`をクエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
 
 例：
 
@@ -123,7 +123,7 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 -   `_tidb_rowid`という名前のユーザー列を作成することはできません。
 -   既存のユーザー列の名前を`_tidb_rowid`に変更することはできません。
 -   `_tidb_rowid`はTiDBの内部列です。ビジネス上の主キーや長期的な識別子として扱わないでください。
--   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`値はパーティション間で一意であることが保証されません。3 `EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`値を持つ行が含まれる可能性があります。
+-   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`値を持つ行が含まれる可能性があります。
 -   `_tidb_rowid`存在するかどうかは、テーブルのスキーマによって異なります。クラスター化インデックスを持つテーブルの場合は、行識別子として主キーを使用してください。
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}

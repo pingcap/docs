@@ -72,7 +72,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 -   TiDB
 
     -   `LIMIT` と併用すると`INL_HASH_JOIN`ハングする可能性がある問題を修正しました [＃35638](https://github.com/pingcap/tidb/issues/35638) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   `UPDATE`文の実行時に TiDB がpanic可能性がある問題を修正しました [＃32311](https://github.com/pingcap/tidb/issues/32311) @ [Yisaer](https://github.com/Yisaer)
+    -   `UPDATE`文の実行時に TiDB がpanicする可能性がある問題を修正しました [＃32311](https://github.com/pingcap/tidb/issues/32311) @ [Yisaer](https://github.com/Yisaer)
     -   `SHOW COLUMNS`文を実行するときに TiDB がコプロセッサ要求を送信する可能性があるバグを修正しました。 [＃36496](https://github.com/pingcap/tidb/issues/36496) @ [tangenta](https://github.com/tangenta)
     -   TiDBが`SHOW WARNINGS`ステートメントを実行するときに`invalid memory address or nil pointer dereference`エラーを返す可能性があるバグを修正しました [＃31569](https://github.com/pingcap/tidb/issues/31569) @ [zyguan](https://github.com/zyguan)
     -   静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性があるバグを修正[＃35295](https://github.com/pingcap/tidb/issues/35295) @ [tiancaiamao](https://github.com/tiancaiamao)
@@ -83,7 +83,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   `IGNORE_PLAN_CACHE`ヒントでバインディングを作成するとプラン キャッシュが機能しない問題を修正しました [＃34596](https://github.com/pingcap/tidb/issues/34596) @ [fzzf678](https://github.com/fzzf678)
     -   ハッシュパーティションウィンドウと単一パーティションウィンドウの間に`EXCHANGE`演算子が欠落している問題を修正しました。 [＃35990](https://github.com/pingcap/tidb/issues/35990) @ [LittleFall](https://github.com/LittleFall)
     -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[#33966](https://github.com/pingcap/tidb/issues/33966) @ [mjonss](https://github.com/mjonss)
-    -   集計がにプッシュダウンされた後に部分集計に間違ったデフォルト値が設定された場合の間違ったクエリ結果の問題を修正しました [＃35295](https://github.com/pingcap/tidb/issues/35295) @ [tiancaiamao](https://github.com/tiancaiamao)
+    -   集計がプッシュダウンされた後に部分集計に間違ったデフォルト値が設定された場合の間違ったクエリ結果の問題を修正しました [＃35295](https://github.com/pingcap/tidb/issues/35295) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   パーティションテーブルをクエリすると、場合によってはで`index-out-of-range`エラーが発生する可能性がある問題を修正しました。 [＃35181](https://github.com/pingcap/tidb/issues/35181) @ [mjonss](https://github.com/mjonss)
     -   クエリ条件でパーティションキーが使用され、照合がクエリパーティションテーブルの照合と異なる場合にパーティションが誤ってプルーニングされる問題を修正しました。 [＃32749](https://github.com/pingcap/tidb/issues/32749) @ [mjonss](https://github.com/mjonss)
     -   TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータ バージョンが間違って発生し、 Drainer が[#36276](https://github.com/pingcap/tidb/issues/36276) @ [AilinKid](https://github.com/AilinKid)で終了する可能性がある問題を修正しました。
@@ -111,7 +111,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   proc ファイルシステム (procfs) が見つからない場合に冗長なログ警告を回避する[＃13116](https://github.com/tikv/tikv/issues/13116) @ [tabokie](https://github.com/tabokie)
     -   ダッシュボードの`Unified Read Pool CPU`の誤った表現を修正 [＃13086](https://github.com/tikv/tikv/issues/13086) @ [glorv](https://github.com/glorv)
     -   リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)バケット サイズよりも大きくなる可能性がある問題を修正しました。 [＃12598](https://github.com/tikv/tikv/issues/12598) @ [tonyxuqqi](https://github.com/tonyxuqqi)
-    -   スナップショットの適用が中止され、 Raft Engineが有効になっている場合に TiKV がpanic可能性がある問題を修正[＃12470](https://github.com/tikv/tikv/issues/12470) @ [tabokie](https://github.com/tabokie)
+    -   スナップショットの適用が中止され、 Raft Engineが有効になっている場合に TiKV がpanicする可能性がある問題を修正[＃12470](https://github.com/tikv/tikv/issues/12470) @ [tabokie](https://github.com/tabokie)
     -   Fix the issue that the PD client might cause deadlocks [＃13191](https://github.com/tikv/tikv/issues/13191) @ [bufferflies](https://github.com/bufferflies) [＃12933](https://github.com/tikv/tikv/issues/12933) @ [BurtonQin](https://github.com/BurtonQin)
 
 -   PD

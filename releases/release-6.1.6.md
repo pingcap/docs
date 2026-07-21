@@ -33,7 +33,7 @@ TiDB バージョン: 6.1.6
 -   TiDB
 
     -   `ignore_plan_cache`ヒントが`INSERT`ステートメント[＃40079](https://github.com/pingcap/tidb/issues/40079) [＃39717](https://github.com/pingcap/tidb/issues/39717) @ [qw4990](https://github.com/qw4990)では機能しない可能性がある問題を修正しました
-    -   `indexMerge`エラーに遭遇した後に TiDB がpanic可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [guo-shaoge](https://github.com/guo-shaoge) @ [windtalker](https://github.com/windtalker)
+    -   `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [guo-shaoge](https://github.com/guo-shaoge) @ [windtalker](https://github.com/windtalker)
     -   仮想列を持つ TopN 演算子が誤って TiKV またはTiFlash [＃41355](https://github.com/pingcap/tidb/issues/41355) @ [Dousir9](https://github.com/Dousir9)にプッシュダウンすると、誤った結果が返される可能性がある問題を修正しました。
     -   多数のリージョンがあるが、 `Prepare`または`Execute` [＃39605](https://github.com/pingcap/tidb/issues/39605) @ [djshow832](https://github.com/djshow832)を使用して一部の仮想テーブルをクエリするときにテーブル ID をプッシュダウンできないという PD OOM 問題を修正しました。
     -   プランキャッシュが`int_col in (decimal...)`条件[＃40224](https://github.com/pingcap/tidb/issues/40224) @ [qw4990](https://github.com/qw4990)を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました
@@ -53,8 +53,8 @@ TiDB バージョン: 6.1.6
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @ [qw4990](https://github.com/qw4990) @ [fzzf678](https://github.com/fzzf678)
     -   インデックスマージを使用して`SET`型の列を含むテーブルを読み取ると、誤った結果[＃41293](https://github.com/pingcap/tidb/issues/41293) @ [time-and-fate](https://github.com/time-and-fate)が発生する可能性がある問題を修正しました
     -   プリペアドプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @ [fzzf678](https://github.com/fzzf678)
-    -   DDL文の実行中に`PointGet`を使用してテーブルを読み込むSQL文がpanic[＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)をスローする可能性がある問題を修正しました
-    -   トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文[＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)に対して誤った結果を返す問題を修正しました。
+    -   DDL文の実行中に`PointGet`を使用してテーブルを読み込むSQL文がpanicをスローする可能性がある問題を修正しました。 [＃41622](https://github.com/pingcap/tidb/issues/41622) @ [tiancaiamao](https://github.com/tiancaiamao)
+    -   トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @ [zyguan](https://github.com/zyguan)
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf) @ [zyguan](https://github.com/zyguan)
     -   Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [＃42121](https://github.com/pingcap/tidb/issues/42121) @ [zyguan](https://github.com/zyguan)
 

@@ -84,7 +84,7 @@ operate-source create ./source.yaml
 >
 > `config`コマンドは DM v6.0 以降のバージョンでのみサポートされます。それ以前のバージョンでは、 `get-config`コマンドを使用する必要があります。
 
-`source-id`わかっている場合は、 `dmctl --master-addr <master-addr> config source <source-id>`を実行してデータ ソース構成を取得できます。
+`source-id`がわかっている場合は、 `dmctl --master-addr <master-addr> config source <source-id>`を実行してデータ ソース構成を取得できます。
 
 ```bash
 config source mysql-replica-01
@@ -103,7 +103,7 @@ config source mysql-replica-01
             password: '******'
     }
 
-`source-id`わからない場合は、まず`dmctl --master-addr <master-addr> operate-source show`を実行してすべてのデータ ソースを一覧表示できます。
+`source-id`がわからない場合は、まず`dmctl --master-addr <master-addr> operate-source show`を実行してすべてのデータ ソースを一覧表示できます。
 
 ```bash
 operate-source show

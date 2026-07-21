@@ -125,7 +125,7 @@ TiDB バージョン: 4.0.11
     -   MAC アドレスのないネットワーク インターフェースを持つマシンで TiKV クラスターを実行すると発生するクラッシュの問題を修正しました (v4.0.9 で導入) [＃9516](https://github.com/tikv/tikv/pull/9516)
     -   巨大なリージョンをバックアップする際のTiKV OOMの問題を修正 [＃9448](https://github.com/tikv/tikv/pull/9448)
     -   `region-split-check-diff`カスタマイズできない問題を修正[＃9530](https://github.com/tikv/tikv/pull/9530)
-    -   システム時刻がに戻ったときにTiKV panicが発生する問題を修正 [＃9542](https://github.com/tikv/tikv/pull/9542)
+    -   システム時刻が戻ったときにTiKV panicが発生する問題を修正 [＃9542](https://github.com/tikv/tikv/pull/9542)
 
 -   PD
 
@@ -167,4 +167,4 @@ TiDB バージョン: 4.0.11
 
         -   TiDBバックエンド使用時に`column count mismatch`が発生する可能性があるバグを修正 [＃535](https://github.com/pingcap/tidb-lightning/pull/535)
         -   ソースファイルの列数とターゲットテーブルの列数が一致しない場合に TiDB バックエンドがパニックを起こすバグを修正[＃528](https://github.com/pingcap/tidb-lightning/pull/528)
-        -   TiDB Lightning のデータインポート中に TiKV が予期せずpanic可能性があるバグを修正[＃554](https://github.com/pingcap/tidb-lightning/pull/554)
+        -   TiDB Lightning のデータインポート中に TiKV が予期せずpanicする可能性があるバグを修正[＃554](https://github.com/pingcap/tidb-lightning/pull/554)

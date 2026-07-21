@@ -100,7 +100,7 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-`mysql`を使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`遭遇した場合は、接続文字列に`--local-infile=true`追加できます。
+`mysql`を使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`に遭遇した場合は、接続文字列に`--local-infile=true`を追加できます。
 
 ### TiDB Cloudにデータをインポートした後、予約キーワードを含む列をクエリできないのはなぜですか? {#why-can-t-i-query-a-column-with-a-reserved-keyword-after-importing-data-into-tidb-cloud}
 
@@ -110,7 +110,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
 
-あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`を実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`なります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
+あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`を実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`になります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
 
 次のスクリプトを参照してください。
 

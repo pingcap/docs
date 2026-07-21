@@ -179,7 +179,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## DM v1.0 では、タスクにエラーがある場合にコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
-まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。5 `sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
+まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。`sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
 
 場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
 

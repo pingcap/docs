@@ -13,7 +13,7 @@ TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されました。`FLASHBAC
 SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
 ```
 
-`tikv_gc_safe_point`回目以降に`DROP`でデータベースが削除されていれば、 `FLASHBACK DATABASE`を使用してデータベースを復元できます。
+`tikv_gc_safe_point`の時刻以降に`DROP`でデータベースが削除されていれば、 `FLASHBACK DATABASE`を使用してデータベースを復元できます。
 
 ## 構文 {#syntax}
 
@@ -32,7 +32,7 @@ FlashbackToNewName ::=
 
 ## 注記 {#notes}
 
--   `tikv_gc_safe_point`回目より前にデータベースが削除された場合、 `FLASHBACK DATABASE`ステートメントを使用してデータを復元することはできません。`FLASHBACK DATABASE`のステートメントは`ERROR 1105 (HY000): Can't find dropped database 'test' in GC safe point 2022-11-06 16:10:10 +0800 CST`と同様のエラーを返します。
+-   `tikv_gc_safe_point`の時刻より前にデータベースが削除された場合、 `FLASHBACK DATABASE`ステートメントを使用してデータを復元することはできません。`FLASHBACK DATABASE`のステートメントは`ERROR 1105 (HY000): Can't find dropped database 'test' in GC safe point 2022-11-06 16:10:10 +0800 CST`と同様のエラーを返します。
 
 -   `FLASHBACK DATABASE`ステートメントを使用して、同じデータベースを複数回リストアすることはできません。3 でリストアされ`FLASHBACK DATABASE`データベースは元のデータベースと同じスキーマ ID を持つため、同じデータベースを複数回リストアするとスキーマ ID が重複します。TiDB では、データベースのスキーマ ID はグローバルに一意である必要があります。
 

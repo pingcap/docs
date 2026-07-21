@@ -33,7 +33,7 @@ TiDB Ansible バージョン: 3.0.0
 -   SQLオプティマイザー
     -   `NOT EXISTS`サブクエリを最適化し、 `Anti Semi Join`に変換してパフォーマンスを向上させます
     -   `Outer Join`の定数伝播を最適化し、 `Outer Join`除去の最適化ルールを追加して、効果のない計算を減らし、パフォーマンスを向上させます。
-    -   パフォーマンスを向上させるために、集計後に`IN`サブクエリを`Inner Join`を実行するように最適化します。
+    -   パフォーマンスを向上させるために、集計後に`Inner Join`を実行するように`IN`サブクエリを最適化します。
     -   `Index Join`最適化してより多くのシナリオに適応する
     -   レンジパーティションのパーティションプルーニング最適化ルールの改善
     -   `_tidb_rowid`のクエリロジックを最適化して、テーブル全体のスキャンを回避し、パフォーマンスを向上させます。
@@ -87,7 +87,7 @@ TiDB Ansible バージョン: 3.0.0
         -   分離レベルがSERIALIZABLEに設定されている場合にエラーを報告するかどうかを制御する`tidb_skip_isolation_level_check`変数を追加します。
         -   `tidb_disable_txn_auto_retry`システム変数を変更して、再試行可能なすべてのエラーで機能するようにします。
 -   権限管理
-    -   `ANALYZE` `USE`ステートメント`SET GLOBAL`権限チェック`SHOW PROCESSLIST`を実行する
+    -   `ANALYZE`、`USE`、`SET GLOBAL`、`SHOW PROCESSLIST`ステートメントに対して権限チェックを実行する
     -   ロールベースのアクセス制御 (RBAC) をサポート (**Experimental**)
 -   サーバ
     -   スロークエリ ログを最適化します。

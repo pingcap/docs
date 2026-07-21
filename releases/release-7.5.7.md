@@ -88,7 +88,7 @@ TiDB バージョン: 7.5.7
     -   統計システムテーブルに非公開インデックスが表示される問題を修正しました [＃60430](https://github.com/pingcap/tidb/issues/60430) @ [tangenta](https://github.com/tangenta)
     -   ハッシュ結合v1演算子の`Close()`メソッドがpanicから回復できない問題を修正しました [＃60926](https://github.com/pingcap/tidb/issues/60926) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   `PhysicalExchangeSender.HashCol`の浅いコピーによりTiFlash がクラッシュしたり、誤った結果が生成される問題を修正[＃60517](https://github.com/pingcap/tidb/issues/60517) @ [windtalker](https://github.com/windtalker)
-    -   `BIT`タイプのテーブルの統計情報をにロードできない問題を修正しました [＃62289](https://github.com/pingcap/tidb/issues/62289) @ [YangKeao](https://github.com/YangKeao)
+    -   `BIT`タイプのテーブルの統計情報をロードできない問題を修正しました [＃62289](https://github.com/pingcap/tidb/issues/62289) @ [YangKeao](https://github.com/YangKeao)
     -   `BIT`型列の統計がメモリにロードされない問題を修正しました [＃59759](https://github.com/pingcap/tidb/issues/59759) @ [YangKeao](https://github.com/YangKeao)
     -   極端なケースで`ANALYZE`ステートメントのディスクスピル操作に時間がかかりすぎると、他の TiDB ノードが最新の統計を更新できない可能性がある問題を修正しました。 [＃54552](https://github.com/pingcap/tidb/issues/54552) @ [0xPoe](https://github.com/0xPoe)
     -   収集された列統計がすべて TopN にある場合、後続の書き込みの後でも行数の推定が 0 のままになる可能性がある問題を修正しました。 [＃47400](https://github.com/pingcap/tidb/issues/47400) @ [terry1purcell](https://github.com/terry1purcell)
@@ -112,8 +112,8 @@ TiDB バージョン: 7.5.7
 -   TiKV
 
     -   CPUプロファイリング中にデッドロックが発生する可能性がある問題を修正 [＃18474](https://github.com/tikv/tikv/issues/18474) @ [YangKeao](https://github.com/YangKeao)
-    -   特定のTiFlashレプリカによってオンライン アンセーフ リカバリがブロックされ、コミット インデックスがに進まなくなる問題を修正しました。 [＃18197](https://github.com/tikv/tikv/issues/18197) @ [v01dstar](https://github.com/v01dstar)
-    -   TiKVがクライアントがをデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [＃18079](https://github.com/tikv/tikv/issues/18079) @ [ekexium](https://github.com/ekexium)
+    -   特定のTiFlashレプリカによってオンライン アンセーフ リカバリがブロックされ、コミット インデックスが進まなくなる問題を修正しました。 [＃18197](https://github.com/tikv/tikv/issues/18197) @ [v01dstar](https://github.com/v01dstar)
+    -   TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [＃18079](https://github.com/tikv/tikv/issues/18079) @ [ekexium](https://github.com/ekexium)
     -   TiKV が高同時実行で過剰な SST 取り込み要求を許可する問題を修正 [＃18452](https://github.com/tikv/tikv/issues/18452) @ [hbisheng](https://github.com/hbisheng)
     -   Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`誤って表示される問題を修正しました [＃15990](https://github.com/tikv/tikv/issues/15990) @ [Connor1996](https://github.com/Connor1996)
     -   TiKV が再起動した後に予期しない`Server is busy`エラーが発生する問題を修正しました [＃18233](https://github.com/tikv/tikv/issues/18233) @ [LykxSassinator](https://github.com/LykxSassinator)
@@ -127,14 +127,14 @@ TiDB バージョン: 7.5.7
     -   `split-merge-interval`構成項目の値を繰り返し変更すると（ `1s`から`1h`に変更して`1s`に戻すなど）、その設定項目が有効にならない可能性がある問題を修正しました[＃8404](https://github.com/tikv/pd/issues/8404) @ [lhy1024](https://github.com/lhy1024)
     -   デフォルト値`lease`が正しく設定されていない問題を修正[＃9156](https://github.com/tikv/pd/issues/9156) @ [rleungx](https://github.com/rleungx)
     -   TiDB Dashboard TCP接続を不適切に閉じるとPDゴルーチンリークが発生する可能性がある問題を修正[＃9402](https://github.com/tikv/pd/issues/9402) @ [baurine](https://github.com/baurine)
-    -   新しく追加された TiKV ノードがにスケジュールされない可能性がある問題を修正しました [＃9145](https://github.com/tikv/pd/issues/9145) @ [bufferflies](https://github.com/bufferflies)
+    -   新しく追加された TiKV ノードがスケジュールされない可能性がある問題を修正しました [＃9145](https://github.com/tikv/pd/issues/9145) @ [bufferflies](https://github.com/bufferflies)
     -   `tidb_enable_tso_follower_proxy`有効にすると TSO サービスが利用できなくなる可能性がある問題を修正[＃9188](https://github.com/tikv/pd/issues/9188) @ [Tema](https://github.com/Tema)
 
 -   TiFlash
 
     -   `IMPORT INTO`または`BR restore` の実行中に SST ファイルを誤って削除することによって発生するpanicの問題を修正しました [＃10141](https://github.com/pingcap/tiflash/issues/10141) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   `((NULL))`形式で式インデックスを作成するとTiFlash がpanicになる問題を修正しました [＃9891](https://github.com/pingcap/tiflash/issues/9891) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   不規則なリージョンキー範囲を持つスナップショットを処理するときにTiFlash がpanic可能性がある問題を修正しました [＃10147](https://github.com/pingcap/tiflash/issues/10147) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   不規則なリージョンキー範囲を持つスナップショットを処理するときにTiFlash がpanicする可能性がある問題を修正しました [＃10147](https://github.com/pingcap/tiflash/issues/10147) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   クラスター内のテーブルに多数の`ENUM`型列が含まれている場合、 TiFlashが大量のメモリを消費する可能性がある問題を修正しました。 [＃9947](https://github.com/pingcap/tiflash/issues/9947) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   16 MiB を超えるデータの単一行を挿入した後にTiFlash が再起動に失敗する可能性がある問題を修正しました [＃10052](https://github.com/pingcap/tiflash/issues/10052) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   リソース制御の低トークン信号が欠落するとクエリスロットリングが発生する問題を修正しました [＃10137](https://github.com/pingcap/tiflash/issues/10137) @ [guo-shaoge](https://github.com/guo-shaoge)

@@ -420,7 +420,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 ## 文字セットと照合順序の選択に関する一般的なルール {#general-rules-on-selecting-character-sets-and-collation}
 
 -   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`指定し、 `COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+-   ルール 2: `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
 -   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
 
 ## 文字の有効性チェック {#validity-check-of-characters}

@@ -43,7 +43,7 @@ TiDB Ansible バージョン: 3.0.11
     -   サポートされていない式を使用してパーティションテーブルを作成する際にTiDBサーバーがpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`返されます[＃14769](https://github.com/pingcap/tidb/pull/14769)
     -   `Union` を含むサブクエリで`select max() from subquery`文を実行したときに発生した誤った結果を修正しました [＃14944](https://github.com/pingcap/tidb/pull/14944)
     -   実行バインディングを削除する`DROP BINDING`を実行した後に`SHOW BINDINGS`ステートメントを実行するとエラーメッセージが返される問題を修正しました [＃14865](https://github.com/pingcap/tidb/pull/14865)
-    -   MySQLプロトコルではクエリのエイリアスの最大長が256文字であるが、TiDBはこのプロトコルに従ってクエリ結果に[別名を切る](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)出力しないため、接続が切断される問題を修正しました。 [＃14940](https://github.com/pingcap/tidb/pull/14940)
+    -   MySQLプロトコルではクエリのエイリアスの最大長が256文字であるにもかかわらず、TiDBがこのプロトコルに従ってクエリ結果の[エイリアスを切り詰め](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)ないため、接続が切断される問題を修正しました。 [＃14940](https://github.com/pingcap/tidb/pull/14940)
     -   `DIV`で文字列型を使用した際に発生する可能性のある誤ったクエリ結果を修正しました。例えば、 `select 1 / '2007' div 1`文正しく実行できるようになりました。 [＃14098](https://github.com/pingcap/tidb/pull/14098)
 
 -   TiKV

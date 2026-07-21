@@ -105,4 +105,4 @@ TiDB バージョン: 6.5.2
         -   PDとTiCDC 間のネットワーク分離によって発生するTiCDCサービスの異常終了問題を修正 [＃8562](https://github.com/pingcap/tiflow/issues/8562) @ [overvenus](https://github.com/overvenus)
         -   Kubernetes で TiCDC クラスターの正常なアップグレードが失敗する問題を修正しました [＃8484](https://github.com/pingcap/tiflow/issues/8484) @ [overvenus](https://github.com/overvenus)
         -   すべての下流 Kafka サーバーが利用できない場合に TiCDCサーバーがパニックになる問題を修正[＃8523](https://github.com/pingcap/tiflow/issues/8523) @ [3AceShowHand](https://github.com/3AceShowHand)
-        -   変更フィードを再開するとデータが失われる可能性がある、またはチェックポイントがに進めない問題を修正しました。 [＃8242](https://github.com/pingcap/tiflow/issues/8242) @ [overvenus](https://github.com/overvenus)
+        -   変更フィードを再開するとデータが失われる可能性がある、またはチェックポイントが進めない問題を修正しました。 [＃8242](https://github.com/pingcap/tiflow/issues/8242) @ [overvenus](https://github.com/overvenus)

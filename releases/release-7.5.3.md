@@ -27,7 +27,7 @@ TiDB バージョン: 7.5.3
 
 -   TiFlash
 
-    -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
+    -   TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
     -   同時実行性の高いデータ読み取り操作におけるロック競合を減らし、短いクエリのパフォーマンスを最適化します[＃9125](https://github.com/pingcap/tiflash/issues/9125) @ [JinheLin](https://github.com/JinheLin)
 
 -   ツール
@@ -61,7 +61,7 @@ TiDB バージョン: 7.5.3
     -   再帰CTE演算子がメモリ使用量を誤って追跡する問題を修正しました [＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @ [ekexium](https://github.com/ekexium)
     -   `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
-    -   `sql_mode=''` の場合に、フィールドの`UNSIGNED`型を`-1`に更新すると`0`ではなく`null`返される問題を修正しました。 [＃47816](https://github.com/pingcap/tidb/issues/47816) @ [lcwangchao](https://github.com/lcwangchao)
+    -   `sql_mode=''` の場合に、フィールドの`UNSIGNED`型を`-1`に更新すると`0`ではなく`null`が返される問題を修正しました。 [＃47816](https://github.com/pingcap/tidb/issues/47816) @ [lcwangchao](https://github.com/lcwangchao)
     -   最初の引数が`month`で、2番目の引数が負の場合に`TIMESTAMPADD()`関数が無限ループに入る問題を修正しました。 [＃54908](https://github.com/pingcap/tidb/issues/54908) @ [xzhangxian1008](https://github.com/xzhangxian1008)
     -   ハンドシェイクが完了する前に一部の接続が終了した場合に、Grafana の接続数監視メトリックが正しくない問題を修正しました[＃54428](https://github.com/pingcap/tidb/issues/54428) @ [YangKeao](https://github.com/YangKeao)
     -   TiProxy とリソース グループを使用するときに、各リソース グループの接続数が正しくない問題を修正しました。 [＃54545](https://github.com/pingcap/tidb/issues/54545) @ [YangKeao](https://github.com/YangKeao)
@@ -89,7 +89,7 @@ TiDB バージョン: 7.5.3
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [＃17176](https://github.com/tikv/tikv/issues/17176) @ [ekexium](https://github.com/ekexium)
     -   同時実行性の高いコプロセッサー要求により TiKV OOM が発生する可能性がある問題を修正しました [＃16653](https://github.com/tikv/tikv/issues/16653) @ [overvenus](https://github.com/overvenus)
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @ [MyonKeminta](https://github.com/MyonKeminta)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
 
 -   PD
 
@@ -110,8 +110,8 @@ TiDB バージョン: 7.5.3
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @ [JinheLin](https://github.com/JinheLin)
-    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanic可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 
@@ -121,12 +121,12 @@ TiDB バージョン: 7.5.3
         -   復元プロセス中に複数のネストされた再試行によりBR がエラーを正しく識別できない問題を修正[＃54053](https://github.com/pingcap/tidb/issues/54053) @ [RidRisR](https://github.com/RidRisR)
         -   増分バックアップ中の DDL ジョブのスキャンの非効率性の問題を修正 [＃54139](https://github.com/pingcap/tidb/issues/54139) @ [3pointer](https://github.com/3pointer)
         -   リージョンリーダーの探索の中断により、チェックポイントバックアップ中のバックアップパフォーマンスが影響を受ける問題を修正しました。 [＃17168](https://github.com/tikv/tikv/issues/17168) @ [Leavrth](https://github.com/Leavrth)
-        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントがに進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
+        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
         -   `ADD INDEX`や`MODIFY COLUMN`などのバックフィルを必要とする DDL が、増分リストア中に正しく回復されない可能性がある問題を修正しました。 [＃54426](https://github.com/pingcap/tidb/issues/54426) @ [3pointer](https://github.com/3pointer)
 
     -   TiCDC
 
-        -   `UPDATE`イベントをに分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [＃11402](https://github.com/pingcap/tiflow/issues/11402) @ [3AceShowHand](https://github.com/3AceShowHand)
+        -   `UPDATE`イベントを分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [＃11402](https://github.com/pingcap/tiflow/issues/11402) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [asddongmen](https://github.com/asddongmen)
 
     -   Dumpling

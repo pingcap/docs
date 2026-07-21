@@ -28,7 +28,7 @@ TiDB バージョン: 6.5.3
 
 -   TiKV
 
-    -   gzip を使用して`check_leader`リクエストをで圧縮し、トラフィックを削減します [＃14839](https://github.com/tikv/tikv/issues/14839) @ [cfzjywxk](https://github.com/cfzjywxk)
+    -   gzip を使用して`check_leader`リクエストを圧縮し、トラフィックを削減します [＃14839](https://github.com/tikv/tikv/issues/14839) @ [cfzjywxk](https://github.com/cfzjywxk)
 
 -   PD
 

@@ -174,7 +174,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 
 > **Note:**
 >
-> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。13 `cdc cli changefeed query`を実行すると`t1`取得できます。
+> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。`cdc cli changefeed query`を実行すると`t1`を取得できます。
 > -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがチェンジフィード（ `t1` ）の現在のチェックポイントTSOより小さい場合、TiCDCは古い時点（ `t2` ）からデータをプルします。これにより、データの重複が発生する可能性があります（たとえば、下流がMQシンクの場合）。
 
 ## レプリケーションタスクを削除する {#remove-a-replication-task}

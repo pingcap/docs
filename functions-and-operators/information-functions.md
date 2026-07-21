@@ -164,7 +164,7 @@ SELECT FOUND_ROWS();
 
 > **Note:**
 >
-> クエリ修飾子`SQL_CALC_FOUND_ROWS` 、クエリ修飾子`LIMIT`を考慮せずに結果セットの合計行数を計算しますが、クエリ修飾子[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりにクエリ修飾子`COUNT(*)`を使用することをお勧めします。
+> クエリ修飾子`SQL_CALC_FOUND_ROWS`は、`LIMIT`句を考慮せずに結果セットの合計行数を計算しますが、[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりに`COUNT(*)`を使用することをお勧めします。
 
 ### 最終挿入ID() {#last-insert-id}
 

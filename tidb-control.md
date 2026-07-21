@@ -276,7 +276,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>log</code>コマンド {#the-code-log-code-command}
 
-TiDBエラーログのスタック情報は1行形式です。1 `tidb-ctl log`を指定すると、複数行形式に変更できます。
+TiDBエラーログのスタック情報は1行形式です。`tidb-ctl log`を指定すると、複数行形式に変更できます。
 
 ### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 

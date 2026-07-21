@@ -153,7 +153,7 @@ trim-last-separator = false
 
     -   CSV (カンマ区切り値)の場合は`','` 。
     -   TSV (タブ区切り値)の場合は`"\t"` 。
-    -   `"\u0001"`を指定すると ASCII 文字`0x01`使用されます。
+    -   `"\u0001"`を指定すると ASCII 文字`0x01`が使用されます。
 
 -   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 

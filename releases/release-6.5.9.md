@@ -71,7 +71,7 @@ TiDB バージョン: 6.5.9
     -   CTEクエリのメモリ使用量が制限を超えたときに発生するゴルーチンリークの問題を修正しました [＃50337](https://github.com/pingcap/tidb/issues/50337) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `force-init-stats` に設定されている場合に TiDB が対応するポートを listen しない問題を修正しました [＃51473](https://github.com/pingcap/tidb/issues/51473) @ [hawkingrei](https://github.com/hawkingrei)
     -   主キーの型が`VARCHAR` の場合に`ALTER TABLE ... COMPACT TIFLASH REPLICA`誤って終了する可能性がある問題を修正しました [＃51810](https://github.com/pingcap/tidb/issues/51810) @ [breezewish](https://github.com/breezewish)
-    -   `tidb_server_memory_limit`変数がに変更された後、 `tidb_gogc_tuner_threshold`システム変数がそれに応じて調整されない問題を修正しました [＃48180](https://github.com/pingcap/tidb/issues/48180) @ [hawkingrei](https://github.com/hawkingrei)
+    -   `tidb_server_memory_limit`変数が変更された後、 `tidb_gogc_tuner_threshold`システム変数がそれに応じて調整されない問題を修正しました [＃48180](https://github.com/pingcap/tidb/issues/48180) @ [hawkingrei](https://github.com/hawkingrei)
     -   集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @ [qw4990](https://github.com/qw4990)
     -   `BIT`タイプの列 を処理するときに`REVERSE`関数がエラーを報告する問題を修正しました [＃50855](https://github.com/pingcap/tidb/issues/50855) @ [jiyfhust](https://github.com/jiyfhust) [＃50850](https://github.com/pingcap/tidb/issues/50850)
     -   DDL操作を実行しているテーブルにデータを一括挿入するときにエラーが報告される問題を修正しました`INSERT IGNORE` [＃50993](https://github.com/pingcap/tidb/issues/50993) @ [YangKeao](https://github.com/YangKeao)
@@ -100,10 +100,10 @@ TiDB バージョン: 6.5.9
 
 -   TiFlash
 
-    -   レプリカ移行中に PD とのネットワーク接続が不安定になり、 TiFlash がpanic可能性がある問題を修正しました [＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   レプリカ移行中に PD とのネットワーク接続が不安定になり、 TiFlash がpanicする可能性がある問題を修正しました [＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   リモート読み取りの場合にデータ競合によりTiFlash がクラッシュする可能性がある問題を修正しました [＃8685](https://github.com/pingcap/tiflash/issues/8685) @ [solotzg](https://github.com/solotzg)
     -   チャンクエンコード中に`ENUM`列がTiFlashを引き起こす可能性がある問題を修正しました [＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)
-    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanic可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `TIME`列の精度が変更された後にリージョンの移行、分割、またはマージが発生すると、クエリが失敗する可能性がある問題を修正しました。 [＃8601](https://github.com/pingcap/tiflash/issues/8601) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール

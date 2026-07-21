@@ -399,7 +399,7 @@ FROM (
 
 実行計画を読む際は、上から下に向かって読み進めてください。次の例では、計画ツリーのリーフノードは`TableFullScan_18`で、テーブル全体のスキャンを実行します。このスキャンで得られた行は`Selection_19`演算子によって使用され、 `ge(trips.start_date, 2017-07-01 00:00:00.000000), le(trips.start_date, 2017-07-01 23:59:59.000000)`に基づいてデータがフィルタリングされます。その後、 group-by 演算子`StreamAgg_9`によって最終的な集計`COUNT(*)`実行されます。
 
-これらの3つの演算子（ `TableFullScan_18` ） `Selection_19` TiKV（ `StreamAgg_9`で`cop[tikv]` ）にプッシュダウンされ、TiKVでの早期フィルタリングと集計が可能になり、TiKVとTiDB間のデータ転送が削減されます。最後に、 `TableReader_21` `StreamAgg_9`からデータを読み取り、 `StreamAgg_20`最終的な集計`count(*)`を実行します。
+これらの3つの演算子（`TableFullScan_18`、`Selection_19`、`StreamAgg_9`）はTiKV（`cop[tikv]`）にプッシュダウンされ、TiKVでの早期フィルタリングと集計が可能になり、TiKVとTiDB間のデータ転送が削減されます。最後に、`TableReader_21`が`StreamAgg_9`からデータを読み取り、`StreamAgg_20`が最終的な集計`count(*)`を実行します。
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -686,7 +686,7 @@ LIMIT
   1000
 ```
 
-実行プランには170ミリ秒の期間が表示されています。TiDBは`test_index`を使用して、フィルター`snapshot_id = 459840`で`IndexRangeScan_20`を実行します。次に、テーブルからすべての列を取得し、 `IndexLookUp_23`後に5,715行をTiDBに返します。TiDBはこれらの行をソートし、1,000行を返します。
+実行プランには170ミリ秒の期間が表示されています。TiDBは`test_index`を使用して、フィルター`snapshot_id = 459840`で`IndexRangeScan_20`を実行します。次に、テーブルからすべての列を取得し、 `IndexLookUp_23`の後に5,715行をTiDBに返します。TiDBはこれらの行をソートし、1,000行を返します。
 
 列`id`は主キーであるため、暗黙的にインデックス`test_idx`に含まれます。ただし、 `IndexRangeScan_20`順序を保証しません。これは、列`test_idx`はインデックスプレフィックス列`snapshot_id`後に 2 つの追加列（ `user_id`と`status` ）が含まれているためです。その結果、列`id`の順序は保持されません。
 

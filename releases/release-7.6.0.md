@@ -367,7 +367,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   Golangの暗黙的な型変換アルゴリズムが原因で統計構築時に発生する過剰な統計誤差の問題を修正 [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
     -   一部のタイムゾーンでサマータイムが正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     -   `AUTO_ID_CACHE=1`を含むテーブルが多数存在する場合に gRPC クライアントのリークを引き起こす可能性がある問題を修正しました [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
-    -   TiDBサーバーが正常なシャットダウン中にpanic可能性がある問題を修正しました [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
+    -   TiDBサーバーが正常なシャットダウン中にpanicする可能性がある問題を修正しました [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     -   `ADMIN RECOVER INDEX`が`ERROR 1105`を報告する問題を、 `CommonHandle`を含むテーブルを処理する際に修正します。 [#47687](https://github.com/pingcap/tidb/issues/47687) @[Defined2014](https://github.com/Defined2014)
     -   `ALTER TABLE t PARTITION BY`を実行する際に配置ルールを指定すると`ERROR 8239`というエラーが報告される問題を修正しました。 [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     -   `START_TIME`の`INFORMATION_SCHEMA.CLUSTER_INFO`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
@@ -419,7 +419,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
 -   TiKV
 
-    -   破損したSSTファイルが他のTiKVノードに拡散し、TiKVがpanic可能性がある問題を修正しました [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
+    -   破損したSSTファイルが他のTiKVノードに拡散し、TiKVがpanicする可能性がある問題を修正しました [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     -   オンラインの安全でない回復がマージ中止を処理できない問題を修正 [#15580](https://github.com/tikv/tikv/issues/15580) @[v01dstar](https://github.com/v01dstar)
     -   スケールアウト時に DR Auto-Sync のジョイント状態がタイムアウトする可能性がある問題を修正します [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
     -   Titan の`blob-run-mode`オンラインで更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
@@ -432,7 +432,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   TiDBとTiKVが`DECIMAL`算術乗算の切り捨て処理時に一貫性のない結果を生成する可能性がある問題を修正 [#16268](https://github.com/tikv/tikv/issues/16268) @[solotzg](https://github.com/solotzg)
     -   `cast_duration_as_time`が誤った結果を返す可能性がある問題を修正 [#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
     -   TiKV がブラジルとエジプトのタイムゾーンを誤って変換する問題を修正 [#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
-    -   gRPCスレッドが`is_shutdown`をチェックしているときにTiKVがpanic可能性がある問題を修正 [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
+    -   gRPCスレッドが`is_shutdown`をチェックしているときにTiKVがpanicする可能性がある問題を修正 [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
 
 -   PD
 
@@ -472,10 +472,10 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   TiCDC
 
         -   `WHERE`句が、特定のシナリオで`DELETE`ステートメントを複製する際に主キーを条件として使用しない問題を修正しました [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
-        -   TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanic可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
+        -   TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanicする可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         -   `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
         -   TiCDCが特定の特殊なシナリオで誤ってTiKVとの接続を閉じる問題を修正 [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
-        -   TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanic可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
+        -   TiCDCサーバーが損失のあるDDLステートメントを実行する際にpanicする可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         -   TiCDCがデータを下流のMySQLに複製する際に`checkpoint-ts`が停止する可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
 
     -   TiDB Data Migration (DM)

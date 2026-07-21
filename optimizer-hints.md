@@ -72,7 +72,7 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 
 > **Note:**
 >
-> 上記の例では、ヒントが`QB_NAME`から`sel_2`指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`を指定していない場合、2 番目のクエリ ブロック`SELECT`に対して`sel_2`無効な名前になります。
+> 上記の例では、ヒントが`QB_NAME`から`sel_2`を指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`を指定していない場合、2 番目のクエリ ブロック`SELECT`に対して`sel_2`が無効な名前になります。
 
 ### MERGE_JOIN(t1_name [, tl_name ...]) {#merge-join-t1-name-tl-name}
 
@@ -108,7 +108,7 @@ SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id =
 
 上記のSQL文では、ヒント`INL_JOIN(t1, t2)`はオプティマイザに、 `t1`と`t2`に対してインデックス・ネストループ結合アルゴリズムを使用するように指示しています。これは、 `t1`と`t2`の間でインデックス・ネストループ結合アルゴリズムが使用されることを意味するわけではないことに注意してください。ヒントは、 `t1`と`t2`がそれぞれ別のテーブル（ `t3` ）に対してインデックス・ネストループ結合アルゴリズムを使用することを示しています。
 
-`INL_JOIN()`で指定されたパラメータは、クエリプランを作成する際に内部テーブルとして使用される候補テーブルです。例えば、 `INL_JOIN(t1)` 、TiDB がクエリプランを作成する際に内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとしてその別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用してください。例えば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名である`t1`または`t2`を使用する必要があります。
+`INL_JOIN()`で指定されたパラメータは、クエリプランを作成する際に内部テーブルとして使用される候補テーブルです。例えば、 `INL_JOIN(t1)`は、TiDB がクエリプランを作成する際に内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとしてその別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用してください。例えば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`というクエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名である`t1`または`t2`を使用する必要があります。
 
 > **Note:**
 >
@@ -854,7 +854,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **Note:**
 >
-> TiDB v8.2.0以降、このヒントに対する権限制御が導入されました。システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このヒントを使用するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。必要な権限がない場合、このヒントは無視され、TiDBは警告を返します。クエリ実行後に`SHOW WARNINGS;`を実行すると、詳細を確認できます。
+> TiDB v8.2.0以降、このヒントに対する権限制御が導入されました。システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このヒントを使用するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。必要な権限がない場合、このヒントは無視され、TiDBは警告を返します。クエリ実行後に`SHOW WARNINGS;`を実行すると、詳細を確認できます。
 
 ## ヒントが効かない一般的な問題のトラブルシューティング {#troubleshoot-common-issues-that-hints-do-not-take-effect}
 
@@ -938,7 +938,7 @@ SHOW WARNINGS;
 
 場合によっては、テーブルを結合する列で組み込み関数を使用すると、オプティマイザーが`IndexJoin`プランを選択できず、 `INL_JOIN`ヒントも有効にならないことがあります。
 
-たとえば、次のクエリは、テーブルを結合する列`tname`で組み込み関数`substr`を使用します。
+たとえば、次のクエリは、テーブルの結合に使われる列`tname`で組み込み関数`substr`を使用します。
 
 ```sql
 CREATE TABLE t1 (id varchar(10) primary key, tname varchar(10));
@@ -1056,7 +1056,7 @@ EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND
 
 前の例では、 `t1`と`t3`は`IndexJoin`によって直接結合されていません。
 
-`t1`と`t3`の間で直接`IndexJoin`を実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例:
+`t1`と`t3`の間で直接`IndexJoin`を実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)を使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例:
 
 ```sql
 EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;

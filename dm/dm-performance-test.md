@@ -84,7 +84,7 @@ mydumpers:
 
 > **Note:**
 >
-> -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
+> -   複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
 > -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`調整できます。
 
 #### テスト結果を取得する {#get-test-results}
@@ -156,4 +156,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DMの移行ステータスを確認するには、コマンド`query-status`を実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)参照してください。
+DMの移行ステータスを確認するには、コマンド`query-status`を実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

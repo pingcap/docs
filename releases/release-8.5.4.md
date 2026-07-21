@@ -208,4 +208,4 @@ TiDBバージョン：8.5.4
         -   Azure Blob Storage をダウンストリームとして使用している場合、changefeed タスクが停止する可能性がある問題を修正します [#12277](https://github.com/pingcap/tiflow/issues/12277) @[zurakutsia](https://github.com/zurakutsia)
         -   `DROP FOREIGN KEY` DDL がダウンストリームにレプリケートされない問題を修正 [#12328](https://github.com/pingcap/tiflow/issues/12328) @[3AceShowHand](https://github.com/3AceShowHand)
         -   リージョンサブスクリプション中にロールバックと事前書き込みエントリが発生したときに TiCDC がpanicになる可能性がある問題を修正 [#19048](https://github.com/tikv/tikv/issues/19048) @[3AceShowHand](https://github.com/3AceShowHand)
-        -   TiKV のアサーション エラーが TiCDC をpanic可能性がある問題を修正 [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)
+        -   TiKV のアサーション エラーが TiCDC をpanicする可能性がある問題を修正 [#18498](https://github.com/tikv/tikv/issues/18498) @[tharanga](https://github.com/tharanga)

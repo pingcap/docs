@@ -75,7 +75,7 @@ Global Flags:
 
 -   `--start-ts` : ログバックアップの開始タイムスタンプを指定します。このパラメータが指定されていない場合、バックアッププログラムは現在の時刻を`start-ts`として使用します。
 -   `task-name` : ログバックアップのタスク名を指定します。この名前は、バックアップタスクのクエリ、一時停止、再開にも使用されます。
--   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`を指定します。
+-   `--ca` 、 `--cert` 、 `--key` : TiKVおよびPDと通信するためのmTLS暗号化方式を指定します。
 -   `--pd` : バックアップ クラスターの PD アドレスを指定します。BRはログ バックアップ タスクを開始するために PD にアクセスする必要があります。
 -   `--storage` : バックアップストレージのアドレスを指定します。現在、 BRはログバックアップのstorageとしてAmazon S3、Google Cloud Storage (GCS)、またはAzure Blob Storageをサポートしています。上記のコマンドではAmazon S3を例として使用しています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
 
@@ -408,7 +408,7 @@ tiup br log metadata --storage='s3://backup-101/logbackup?access-key=${access-ke
 
 > **Note:**
 >
-> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`を指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental` `true`に設定する必要があります。
+> `restore point`の増分バックアップ アドレスとして`--full-backup-storage`を指定した場合、このバックアップと以前の増分バックアップを復元するには、増分バックアップと後続のログ バックアップとの互換性を確保するために、パラメータ`--allow-pitr-from-incremental`を`true`に設定する必要があります。
 
 `tiup br restore point`コマンドを実行して、新しいクラスターで PITR を実行したり、ログ バックアップ データを復元したりできます。
 
@@ -448,8 +448,8 @@ Global Flags:
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BRはログバックアップで利用可能な最新のタイムスタンプ、つまりバックアップデータのチェックポイントにデータを復元します。
 -   `--start-ts` : ログバックアップデータを復元する開始タイムスタンプ。ログバックアップデータのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。
--   `--ca` : TiKVおよびPDと通信`--key`ためのmTLS暗号化方式`--cert`を指定します。
--   `--storage` : ログバックアップのストレージアドレス。現在、 BRはログバックアップのstorageとしてAmazon S3、GCS、またはAzure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+-   `--ca` 、 `--cert` 、 `--key` : TiKVおよびPDと通信するためのmTLS暗号化方式を指定します。
+-   `--storage` : ログバックアップのストレージアドレス。現在、 BRはログバックアップのストレージとしてAmazon S3、GCS、またはAzure Blob Storageをサポートしています。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 使用例:
 

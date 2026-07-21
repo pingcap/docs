@@ -47,7 +47,7 @@ Query OK, 0 rows affected (0.01 sec)
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-デフォルトでは、 `analyticsteam`ロールに関連付けられた権限を使用できるようにするには、 `jennifer` `SET ROLE analyticsteam`を実行する必要があることに注意してください。
+デフォルトでは、 `analyticsteam`ロールに関連付けられた権限を使用できるようにするには、 `jennifer`が`SET ROLE analyticsteam`を実行する必要があることに注意してください。
 
 ```sql
 SHOW GRANTS;
@@ -102,7 +102,7 @@ Query OK, 0 rows affected (0.02 sec)
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-この後、ユーザー`jennifer`ロール`analyticsteam`に関連付け`jennifer`た権限を持ち、ステートメント`SET ROLE`を実行する必要がなくなります。
+この後、ユーザー`jennifer`は、ロール`analyticsteam`に関連付けられた権限を持ち、`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;

@@ -118,7 +118,7 @@ ALTER TABLE t DROP CONSTRAINT t_chk_1;
 テーブルに[`CHECK`制約を追加する](#add-check-constraints)設定すると、データの挿入または更新時に TiDB が制約チェックを実装する必要があるかどうかを指定できます。
 
 -   `NOT ENFORCED`を指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
--   `NOT ENFORCED`指定されていないか`ENFORCED`指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
+-   `NOT ENFORCED`が指定されていないか`ENFORCED`が指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
 
 制約を追加するときに`[NOT] ENFORCED`を指定するだけでなく、 `ALTER TABLE`ステートメントを使用して`CHECK`制約を有効または無効にすることもできます。例：
 

@@ -65,7 +65,7 @@ validators:
 
 -   `--mode` : 検証モードを指定します。指定できる値は`fast`と`full`です。
 -   `--start-time` : 検証の開始時刻を指定します。形式は`2021-10-21 00:01:00`または`2021-10-21T00:01:00`に従います。
--   `task` : 継続的検証を有効にするタスク名を指定します。2 `--all-task`を指定すると、すべてのタスクに対して検証が有効になります。
+-   `task` : 継続的検証を有効にするタスク名を指定します。`--all-task`を指定すると、すべてのタスクに対して検証が有効になります。
 
 例えば：
 
@@ -195,7 +195,7 @@ dmctl --master-addr=127.0.0.1:8261 validation start --start-time 2021-10-21T00:0
 
 dmctl は 3 つのエラー処理コマンドを提供します。
 
--   `clear-error` : エラー行をクリアします。2 コマンド`show-error`を実行すると、エラー行は表示されなくなります。
+-   `clear-error` : エラー行をクリアします。`show-error`コマンドを実行すると、エラー行は表示されなくなります。
 
         Usage:
           dmctl validation clear-error <task-name> <error-id|--all> [flags]

@@ -102,8 +102,8 @@ TiDBとMySQLの実装メカニズムは一貫しています。どちらも`mysq
 
 -   シナリオ：ユーザー（ `user01` ）は通常の方法で作成されず、 `INSERT INTO mysql.password_history VALUES (...)`文を使用して`user01`のレコードを`mysql.password_history`システムテーブルに追加することで作成されます。この場合、 `user01`のレコードは`mysql.user`システムテーブルに存在しないため、 `user01`に対して`DROP USER`を実行すると、TiDBとMySQLの動作が異なります。
 
-    -   MySQL: `DROP USER user01`を実行すると、MySQL は`mysql.user`と`mysql.password_history`から`user01`探します。いずれかのシステムテーブルに`user01`が含まれている場合、 `DROP USER`文は正常に実行され、エラーは報告されません。
-    -   TiDB: `DROP USER user01`を実行すると、TiDBは`mysql.user`からのみ`user01`検索しようとします。関連レコードが見つからない場合、 `DROP USER`文は失敗し、エラーが報告されます。文を正常に実行し、 `mysql.password_history`から`user01`レコードを削除したい場合は、代わりに`DROP USER IF EXISTS user01`を使用してください。
+    -   MySQL: `DROP USER user01`を実行すると、MySQL は`mysql.user`と`mysql.password_history`から`user01`を探します。いずれかのシステムテーブルに`user01`が含まれている場合、 `DROP USER`文は正常に実行され、エラーは報告されません。
+    -   TiDB: `DROP USER user01`を実行すると、TiDBは`mysql.user`からのみ`user01`を検索しようとします。関連レコードが見つからない場合、 `DROP USER`文は失敗し、エラーが報告されます。文を正常に実行し、 `mysql.password_history`から`user01`レコードを削除したい場合は、代わりに`DROP USER IF EXISTS user01`を使用してください。
 
 ## Authentication plugin status {#authentication-plugin-status}
 
@@ -189,7 +189,7 @@ Here is an example for Header:
 > **Warning:**
 >
 > -   ヘッダーとペイロードのBase64エンコードは可逆です。機密情報を添付し**ないで**ください。
-> -   `tidb_auth_token`認証方法では、クライアントが[`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html)プラグインをサポートし、トークンをプレーンテキストで TiDB に送信する必要があります。そのため、 `tidb_auth_token`を使用する前に[クライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)実行する必要があります。
+> -   `tidb_auth_token`認証方法では、クライアントが[`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html)プラグインをサポートし、トークンをプレーンテキストで TiDB に送信する必要があります。そのため、 `tidb_auth_token`を使用する前に[クライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)を実行する必要があります。
 
 #### 使用法 {#usage}
 

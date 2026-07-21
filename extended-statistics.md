@@ -142,7 +142,7 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-オブジェクト作成後に`ANALYZE`を実行すると、 TiDB はテーブル`t`の`col1`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトをテーブル`mysql.stats_extended`に書き込みます。
+オブジェクト作成後に`ANALYZE`を実行すると、 TiDB はテーブル`t`の`col1`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)を計算し、オブジェクトをテーブル`mysql.stats_extended`に書き込みます。
 
 ### ステップ4. 拡張統計がどのように違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 

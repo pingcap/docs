@@ -58,7 +58,7 @@ TiDBバージョン: 6.5.12
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @ [mjonss](https://github.com/mjonss)
     -   解放されていないセッションリソースがメモリリークを引き起こす可能性がある問題を修正[＃56271](https://github.com/pingcap/tidb/issues/56271) @ [lance6716](https://github.com/lance6716)
     -   分散実行フレームワークの PD メンバーを変更した後に`ADD INDEX`実行が失敗する可能性がある問題を修正しました [＃48680](https://github.com/pingcap/tidb/issues/48680) @ [lance6716](https://github.com/lance6716)
-    -   `cluster_slow_query table`クエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
+    -   `cluster_slow_query table`をクエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
     -   stale read が読み取り操作のタイムスタンプを厳密に検証しない問題を修正しました。その結果、TSO と実際の物理時間の間にオフセットが存在する場合に、トランザクションの一貫性にわずかながら影響する可能性が生じます。 [＃56809](https://github.com/pingcap/tidb/issues/56809) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが@ [lance6716](https://github.com/lance6716)で低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184)
     -   `INSERT ... ON DUPLICATE KEY`文が`mysql_insert_id` と互換性がない問題を修正 [＃55965](https://github.com/pingcap/tidb/issues/55965) @ [tiancaiamao](https://github.com/tiancaiamao)
@@ -78,14 +78,14 @@ TiDBバージョン: 6.5.12
     -   Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [＃58870](https://github.com/pingcap/tidb/issues/58870) @ [xhebox](https://github.com/xhebox)
     -   一時テーブルをクエリすると、場合によっては予期しない TiKV リクエストがトリガーされる可能性がある問題を修正しました[＃58875](https://github.com/pingcap/tidb/issues/58875) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   ビューのステートメントに`ONLY_FULL_GROUP_BY`設定が反映されない問題を修正しました [＃53175](https://github.com/pingcap/tidb/issues/53175) @ [mjonss](https://github.com/mjonss)
-    -   不一致な値型と型変換エラーを含む条件`IN`を使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました [＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)
+    -   不一致な値型と型変換エラーを含む`IN`条件を使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました [＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)
     -   特定のフィールドに空の値が含まれている場合にスローログのクエリが失敗する可能性がある問題を修正[＃58147](https://github.com/pingcap/tidb/issues/58147) @ [yibin87](https://github.com/yibin87)
     -   `RADIANS()`関数が誤った順序で値を計算する問題を修正[＃57671](https://github.com/pingcap/tidb/issues/57671) @ [gengliqi](https://github.com/gengliqi)
     -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
     -   CTE に`ORDER BY` 、 `LIMIT` 、または`SELECT DISTINCT`個の節が含まれており、別の CTE の再帰部分によって参照されている場合にインライン エラーが発生する可能性がある問題を修正しました。 [＃56603](https://github.com/pingcap/tidb/issues/56603) @ [elsa0520](https://github.com/elsa0520)
     -   統計情報を同期的にロードする際に発生するタイムアウトが正しく処理されない可能性がある問題を修正[＃57710](https://github.com/pingcap/tidb/issues/57710) @ [hawkingrei](https://github.com/hawkingrei)
     -   CTE でデータベース名を解析するときに誤ったデータベース名が返される可能性がある問題を修正しました [＃54582](https://github.com/pingcap/tidb/issues/54582) @ [hawkingrei](https://github.com/hawkingrei)
-    -   無効なデータバインディングにより、TiDB が起動時にpanic可能性がある問題を修正しました [＃58016](https://github.com/pingcap/tidb/issues/58016) @ [qw4990](https://github.com/qw4990)
+    -   無効なデータバインディングにより、TiDB が起動時にpanicする可能性がある問題を修正しました [＃58016](https://github.com/pingcap/tidb/issues/58016) @ [qw4990](https://github.com/qw4990)
     -   特定の極端なケースでコスト推定によって無効な INF/NaN 値が生成される可能性があり、その結果、結合したテーブルの再配置の結果が不正確になる可能性がある問題を修正しました[＃56704](https://github.com/pingcap/tidb/issues/56704) @ [winoros](https://github.com/winoros)
     -   統計ファイルに NULL 値が含まれている場合、統計を手動でロードすると失敗する可能性がある問題を修正しました。 [＃53966](https://github.com/pingcap/tidb/issues/53966) @ [King-Dylan](https://github.com/King-Dylan)
     -   同じ名前のビューを2つ作成してもエラーが報告されない問題を修正[＃58769](https://github.com/pingcap/tidb/issues/58769) @ [tiancaiamao](https://github.com/tiancaiamao)
@@ -95,15 +95,15 @@ TiDBバージョン: 6.5.12
 -   TiKV
 
     -   Follower Readが古いデータを読み取る可能性がある問題を修正しました [＃17018](https://github.com/tikv/tikv/issues/17018) @ [glorv](https://github.com/glorv)
-    -   ピアを破壊するときに TiKV がpanic可能性がある問題を修正しました [＃18005](https://github.com/tikv/tikv/issues/18005) @ [glorv](https://github.com/glorv)
+    -   ピアを破壊するときに TiKV がpanicする可能性がある問題を修正しました [＃18005](https://github.com/tikv/tikv/issues/18005) @ [glorv](https://github.com/glorv)
     -   タイムロールバックによって異常なRocksDBフロー制御が発生し、パフォーマンスジッターが発生する可能性がある問題を修正しました。 [＃17995](https://github.com/tikv/tikv/issues/17995) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   ディスクストールによりリーダーの移行が妨げられ、パフォーマンスジッターが発生する問題を修正しました [＃17363](https://github.com/tikv/tikv/issues/17363) @ [hhwyt](https://github.com/hhwyt)
     -   1フェーズコミット（1PC）のみが有効で、非同期コミットが有効になっていない場合に、最後に書き込まれたデータが読み取れない可能性がある問題を修正[＃18117](https://github.com/tikv/tikv/issues/18117) @ [zyguan](https://github.com/zyguan)
     -   GCワーカーの負荷が高いときにデッドロックが発生する可能性がある問題を修正[＃18214](https://github.com/tikv/tikv/issues/18214) @ [zyguan](https://github.com/zyguan)
     -   Grafana の TiKV パネルの**ストレージ非同期書き込み期間の**監視メトリックが不正確であるという問題を修正しました[＃17579](https://github.com/tikv/tikv/issues/17579) @ [overvenus](https://github.com/overvenus)
-    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanic可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
+    -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanicする可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
     -   リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[＃17840](https://github.com/tikv/tikv/issues/17840) @ [glorv](https://github.com/glorv)
-    -   リージョンをに分割した後、リーダーをすぐに選出できない問題を修正しました [＃17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
+    -   リージョンを分割した後、リーダーをすぐに選出できない問題を修正しました [＃17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     -   GBK/GB18030エンコードデータの処理時にエンコードが失敗する可能性がある問題を修正 [＃17618](https://github.com/tikv/tikv/issues/17618) @ [CbcWestwolf](https://github.com/CbcWestwolf)
 
 -   PD
@@ -143,8 +143,8 @@ TiDBバージョン: 6.5.12
         -   `br log status --json` を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。 [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップ中のPDLeaderI/Oレイテンシーによりチェックポイントレイテンシーが増加する可能性がある問題を修正しました。 [＃58574](https://github.com/pingcap/tidb/issues/58574) @ [YuJuncen](https://github.com/YuJuncen)
         -   `tiup br restore`コマンドがデータベースまたはテーブルの復元中にターゲット クラスタ テーブルが既に存在するかどうかのチェックを省略し、既存のテーブルを上書きする可能性がある問題を修正しました。 [＃58168](https://github.com/pingcap/tidb/issues/58168) @ [RidRisR](https://github.com/RidRisR)
-        -   アドバンサー所有者がに切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。 [＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3pointer](https://github.com/3pointer)
-        -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントがに進まない問題を修正しました。 [＃57134](https://github.com/pingcap/tidb/issues/57134) @ [3pointer](https://github.com/3pointer)
+        -   アドバンサー所有者が切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。 [＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3pointer](https://github.com/3pointer)
+        -   ログバックアップが残留ロックをすぐに解決できず、チェックポイントが進まない問題を修正しました。 [＃57134](https://github.com/pingcap/tidb/issues/57134) @ [3pointer](https://github.com/3pointer)
         -   BR統合テストケースが不安定になる問題を修正し、スナップショットまたはログバックアップファイルの破損をシミュレートする新しいテストケースを追加します[＃53835](https://github.com/pingcap/tidb/issues/53835) @ [Leavrth](https://github.com/Leavrth)
         -   ログに暗号化された情報が出力される問題を修正 [＃57585](https://github.com/pingcap/tidb/issues/57585) @ [kennytm](https://github.com/kennytm)
         -   クラスター内に多数のテーブルがあるが、実際のデータサイズが小さい場合に PITR タスクが`Information schema is out of date`エラーを返す可能性がある問題を修正しました[＃57743](https://github.com/pingcap/tidb/issues/57743) @ [Tristan1900](https://github.com/Tristan1900)
@@ -157,7 +157,7 @@ TiDBバージョン: 6.5.12
         -   チェンジフィードが停止または削除された後に初期スキャンがキャンセルされない問題を修正[＃11638](https://github.com/pingcap/tiflow/issues/11638) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   アップストリームで新しく追加された列のデフォルト値を`NOT NULL`から`NULL`に変更すると、ダウンストリームのその列のデフォルト値が正しくなくなる問題を修正しました[＃12037](https://github.com/pingcap/tiflow/issues/12037) @ [wk989898](https://github.com/wk989898)
         -   `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [＃12055](https://github.com/pingcap/tiflow/issues/12055) @ [hongyunyan](https://github.com/hongyunyan)
-        -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製するときに TiCDC がpanic可能性がある問題を修正しました [＃11839](https://github.com/pingcap/tiflow/issues/11839) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   `CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製するときに TiCDC がpanicする可能性がある問題を修正しました [＃11839](https://github.com/pingcap/tiflow/issues/11839) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   有効なインデックスのないテーブルで`TRUNCATE TABLE` DDL を複製するときに TiCDC がエラーを報告する可能性がある問題を修正しました。 [＃11765](https://github.com/pingcap/tiflow/issues/11765) @ [asddongmen](https://github.com/asddongmen)
         -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @ [wlwilliamx](https://github.com/wlwilliamx)
         -   新しい TiKV ノードがクラスターに追加された後に、変更フィードがスタックする可能性がある問題を修正しました。 [＃11766](https://github.com/pingcap/tiflow/issues/11766) @ [lidezhu](https://github.com/lidezhu)
@@ -169,7 +169,7 @@ TiDBバージョン: 6.5.12
 
         -   複数の DM マスターノードが同時にリーダーになり、データの不整合が発生する可能性がある問題を修正しました[＃11602](https://github.com/pingcap/tiflow/issues/11602) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   パスワードの長さが19文字を超えるとMySQL 8.0への接続に失敗する問題を修正[＃11603](https://github.com/pingcap/tiflow/issues/11603) @ [fishiu](https://github.com/fishiu)
-        -   TLSと`shard-mode`両方がに設定されている場合に`start-task`の事前チェックが失敗する問題を修正 [＃11842](https://github.com/pingcap/tiflow/issues/11842) @ [sunxiaoguang](https://github.com/sunxiaoguang)
+        -   TLSと`shard-mode`の両方が設定されている場合に`start-task`の事前チェックが失敗する問題を修正 [＃11842](https://github.com/pingcap/tiflow/issues/11842) @ [sunxiaoguang](https://github.com/sunxiaoguang)
 
     -   TiDB Lightning
 

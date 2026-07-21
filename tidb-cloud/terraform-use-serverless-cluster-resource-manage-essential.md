@@ -226,7 +226,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -357,7 +357,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用してリソースの状態を確認します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用してリソースの状態を確認します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example
