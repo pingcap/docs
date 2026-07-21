@@ -110,8 +110,8 @@ A TiDB Cloud BYOC deployment includes the following major components:
 
 - **TiDB Cloud control plane**: provides the TiDB Cloud console, organization and project management, billing, lifecycle orchestration, monitoring views, alerting, and maintenance workflows.
 - **BYOC data plane**: runs the TiDB service and related infrastructure in your cloud account. TiDB Cloud operates this environment based on the permissions granted during BYOC onboarding.
-- **TiDB Service VPC**: hosts TiDB service components that serve application traffic.
-- **Observability Service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
+- **TiDB service VPC**: hosts TiDB service components that serve application traffic.
+- **Observability service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
 - **Application VPC**: hosts your applications. You manage this VPC and configure network connectivity to access the BYOC TiDB service.
 
 Each BYOC region is deployed and operated independently. When a BYOC region is added, TiDB Cloud provisions the required regional resources in your cloud account. Because each BYOC region has its own data-plane setup, regions do not share a single TiDB Service VPC or Observability Service VPC.

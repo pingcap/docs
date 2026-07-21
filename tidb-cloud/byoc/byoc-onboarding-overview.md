@@ -29,4 +29,4 @@ The TiDB Cloud BYOC deployment process is a collaborative effort between your or
 
 TiDB Cloud BYOC uses a split-plane architecture. The TiDB Cloud control plane is managed by PingCAP, while the TiDB data plane runs in your own cloud account.
 
-Before you start onboarding, review the [TiDB Cloud BYOC architecture](https://docs.tidb.io/tidbcloud/architecture-concepts/?plan=byoc#tidb-cloud-byoc) to understand the BYOC control plane, data plane, network connectivity model, and high availability options.
+Before you begin the onboarding process, review the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) to understand the BYOC control plane, data plane, network connectivity model, and high availability options.
