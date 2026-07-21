@@ -72,7 +72,7 @@ explain select * from t where x = 1;
 
 ##### シナリオ1 {#scenario-one}
 
-クエリ結果`between` 1つの`>` `in` ）のみに該当するという条件を確認できない場合は、パーティションプルーニング最適化`<=`使用できません。 `<` `>=`
+クエリ結果が1つのパーティションのみに該当するという条件（ `in` 、 `between` 、 `>` 、 `<` 、 `>=` 、 `<=`など）を確認できない場合は、パーティションプルーニング最適化を使用できません。例:
 
 ```sql
 create table t (x int) partition by hash(x) partitions 4;

@@ -293,7 +293,7 @@ TiDB バージョン: 8.2.0
     -   `CURRENT_DATE()`を列のデフォルト値として使用するとクエリ結果が正しくない問題を修正 [#53746](https://github.com/pingcap/tidb/issues/53746) @[tangenta](https://github.com/tangenta)
     -   `ALTER DATABASE ... SET TIFLASH REPLICA`ステートメントがTiFlashレプリカを`SEQUENCE`テーブルに誤って追加する問題を修正しました [#51990](https://github.com/pingcap/tidb/issues/51990) @[jiyfhust](https://github.com/jiyfhust)
     -   `REFERENCED_TABLE_SCHEMA`テーブルの`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`フィールドが正しくない問題を修正します [#52350](https://github.com/pingcap/tidb/issues/52350) @[wd0517](https://github.com/wd0517)
-    -   単一のステートメントで複数の行を挿入すると、{{B `AUTO_ID_CACHE=1` `AUTO_INCREMENT`列が不連続になる問題を修正しました。 [#52465](https://github.com/pingcap/tidb/issues/52465) @[tiancaiamao](https://github.com/tiancaiamao)
+    -   `AUTO_ID_CACHE=1`の場合に、単一のステートメントで複数の行を挿入すると`AUTO_INCREMENT`列が不連続になる問題を修正しました。 [#52465](https://github.com/pingcap/tidb/issues/52465) @[tiancaiamao](https://github.com/tiancaiamao)
     -   非推奨警告のフォーマットを修正 [#52515](https://github.com/pingcap/tidb/issues/52515) @[dveeden](https://github.com/dveeden)
     -   `TRACE`で`copr.buildCopTasks`コマンドが欠落している問題を修正 [#53085](https://github.com/pingcap/tidb/issues/53085) @[time-and-fate](https://github.com/time-and-fate)
     -   `memory_quota`ヒントがサブクエリで機能しない可能性がある問題を修正しました [#53834](https://github.com/pingcap/tidb/issues/53834) @[qw4990](https://github.com/qw4990)
