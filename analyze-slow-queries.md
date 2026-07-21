@@ -96,7 +96,7 @@ SQL文の実行中に、TiDBは複数のTiKVインスタンスからデータを
 # Cop_wait: Avg_time: 1ms P90_time: 2ms Max_time: 110ms Max_Addr: 10.6.131.78
 ```
 
-上記のログは、インスタンス`10.6.131.78`に送信された`cop-task`実行されるまでに`110ms`待機していることを示しています。これは、このインスタンスがビジー状態であることを示しています。その時点のCPUモニタリングを確認することで、原因を確認できます。
+上記のログは、インスタンス`10.6.131.78`に送信された`cop-task`が実行されるまでに`110ms`待機していることを示しています。これは、このインスタンスがビジー状態であることを示しています。その時点のCPUモニタリングを確認することで、原因を確認できます。
 
 #### 廃止されたMVCCバージョンと過剰なキー {#obsolete-mvcc-versions-and-excessive-keys}
 
@@ -157,7 +157,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDBの実行プランは正しいものの、実行速度が遅い場合を考えてみましょう。このような問題を解決するには、SQL文の`EXPLAIN ANALYZE`の結果に応じてパラメータを調整するか、ヒントを使用します。
 
-実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)参照してください。
+実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)を参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 
@@ -233,7 +233,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 1.  `select * from t` : フィルター条件はなく、テーブル全体のスキャンが実行されます。そのため、データの読み取りには`TableFullScan`演算子が使用されます。
 2.  `select a from t where a=2` : フィルター条件があり、インデックス列のみが読み取られるため、 `IndexReader`演算子を使用してデータを読み取ります。
 3.  `select * from t where a=2` : `a`のフィルター条件がありますが、 `a`インデックスでは読み取るデータを完全にカバーできないため、 `IndexLookup`演算子が使用されます。
-4.  `select b from t where c=3` : プレフィックス条件がないと、マルチカラムインデックスは使用できません。そのため、 `IndexFullScan`使用されます。
+4.  `select b from t where c=3` : プレフィックス条件がないと、マルチカラムインデックスは使用できません。そのため、 `IndexFullScan`が使用されます。
 5.  ...
 
 上記の例は、データ読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)参照してください。

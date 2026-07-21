@@ -11,12 +11,12 @@ SyncpointはTiDBが提供するスナップショット機能を利用し、TiCD
 
 ## 同期ポイントを有効にする {#enable-syncpoint}
 
-Syncpoint 機能を有効にすると、 [一貫性のあるスナップショット読み取り](#consistent-snapshot-read)と[データ一貫性検証](#data-consistency-validation)使用できるようになります。
+Syncpoint 機能を有効にすると、 [一貫性のあるスナップショット読み取り](#consistent-snapshot-read)と[データ一貫性検証](#data-consistency-validation)を使用できるようになります。
 
 Syncpoint機能を有効にするには、レプリケーションタスクの作成時にTiCDC構成項目の値を`enable-sync-point`から`true`に設定します。Syncpointを有効にすると、TiCDCは以下の情報を下流のTiDBクラスターに書き込みます。
 
 1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
-2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
+2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
 
 次の TiCDC 構成例では、レプリケーション タスクの作成時に Syncpoint を有効にします。
 

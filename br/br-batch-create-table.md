@@ -32,7 +32,7 @@ tiup br restore full \
 --ddl-batch-size=1
 ```
 
-この機能が無効にされると、 BR は代わりに[シリアル実行実装](#implementation)使用します。
+この機能が無効にされると、 BR は代わりに[シリアル実行実装](#implementation)を使用します。
 
 ## 実装 {#implementation}
 

@@ -649,7 +649,7 @@ time: 43.12698ms
 
 ### `region &#x3C;region_id> [--jq="&#x3C;query string>"]` {#region-x3c-region-id-jq-x3c-query-string}
 
-このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
+このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -877,7 +877,7 @@ time: 43.12698ms
 
 ### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]` {#region-check-miss-peer-extra-peer-down-peer-pending-peer-offline-peer-empty-region-hist-size-hist-keys-jq-x3c-query-string}
 
-このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)参照してください。
+このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 各種タイプの説明:
 
@@ -1189,7 +1189,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]` {#store-delete-cancel-delete-label-weight-remove-tombstone-limit-x3c-store-id-jq-x3c-query-string}
 
-jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
+jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 #### ストアを取得する {#get-a-store}
 

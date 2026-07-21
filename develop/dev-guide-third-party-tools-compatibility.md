@@ -31,7 +31,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 **回避方法**
 
-TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`使用できます。
+TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`を使用できます。
 
 ### TiDBは<code>Com_*</code>カウンタを維持しません {#tidb-does-not-maintain-code-com-code-counters}
 
@@ -159,7 +159,7 @@ MySQL Connector/J 8.0.31 以前のバージョンを、MySQL サーバー 5.7.5 
 
 TiDB では、次の方法でもこれを修正します。
 
--   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)使用できます。
+-   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)を使用できます。
 -   サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーをv6.3.0 以降のバージョンにアップグレードできます。
 
 ## Sequelizeとの互換性 {#compatibility-with-sequelize}

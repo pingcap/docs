@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 2.1.15
 -   `RAND`関数使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11170](https://github.com/pingcap/tidb/pull/11170)
 -   整数と非整数の比較結果が場合によっては正しくない問題を修正[＃11191](https://github.com/pingcap/tidb/pull/11191)
 -   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります。 [＃11085](https://github.com/pingcap/tidb/pull/11085)
--   列のデフォルト値として`CURRENT_TIMESTAMP`使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)
+-   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11087](https://github.com/pingcap/tidb/pull/11087)
 
 ## TiKV {#tikv}
 

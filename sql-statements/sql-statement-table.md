@@ -45,7 +45,7 @@ TABLE t1;
 3 rows in set (0.01 sec)
 ```
 
-クエリ`t1`実行し、結果を`id`フィールドで降順に並べ替えます。
+クエリ`t1`を実行し、結果を`id`フィールドで降順に並べ替えます。
 
 ```sql
 TABLE t1 ORDER BY id DESC;

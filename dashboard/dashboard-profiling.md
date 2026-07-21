@@ -75,4 +75,4 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-プロファイリング ステータス ページでの詳細な操作については、 [プロファイリングステータスを表示する](#view-profiling-status)参照してください。
+プロファイリング ステータス ページでの詳細な操作については、 [プロファイリングステータスを表示する](#view-profiling-status)を参照してください。

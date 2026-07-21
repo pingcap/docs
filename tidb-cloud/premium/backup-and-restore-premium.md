@@ -229,7 +229,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
     > **Tip:**
     >
-    > ストレージバケットのアクセスキーを作成するには、 [AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)および[Alibaba Cloud OSSへのアクセスを設定する](#configure-alibaba-cloud-oss-access)参照してください。
+    > ストレージバケットのアクセスキーを作成するには、 [AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)および[Alibaba Cloud OSSへのアクセスを設定する](#configure-alibaba-cloud-oss-access)を参照してください。
 
 3.  **「バックアップの確認」をクリックし、「次へ」を**クリックします。
 

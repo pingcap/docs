@@ -27,7 +27,7 @@ tiup mirror genkey [flags]
 
 ### -n, --name {#n-name}
 
--   キーの名前を指定します。この名前は、最終的に生成されるファイルの名前も決定します。生成される秘密鍵ファイルのパスは`${TIUP_HOME}/keys/{name}.json`です。 `TIUP_HOME` TiUPのホームディレクトリ（デフォルトでは`$HOME/.tiup`を指します。 `name` `-n/--name`指定される秘密鍵の名前を指します。
+-   キーの名前を指定します。この名前は、最終的に生成されるファイルの名前も決定します。生成される秘密鍵ファイルのパスは`${TIUP_HOME}/keys/{name}.json`です。 `TIUP_HOME`は TiUPのホームディレクトリ（デフォルトでは`$HOME/.tiup`を指します。 `name`は `-n/--name`で指定される秘密鍵の名前を指します。
 -   データ型: `STRING`
 -   デフォルト:「プライベート」
 

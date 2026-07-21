@@ -7,7 +7,7 @@ summary: TiDB 監視サービスの API を学習します。
 
 次のタイプのインターフェースを使用して、TiDB クラスターのステータスを監視できます。
 
--   [ステータスインターフェース](#use-the-status-interface) : このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)とテーブルの[ストレージ情報](#storage-information)取得できます。
+-   [ステータスインターフェース](#use-the-status-interface) : このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)とテーブルの[ストレージ情報](#storage-information)を取得できます。
 -   [メトリクスインターフェース](#use-the-metrics-interface) : このインターフェースは Prometheus を使用してコンポーネント内のさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリックを表示します。
 
 ## ステータスインターフェースを使用する {#use-the-status-interface}

@@ -236,8 +236,8 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | `sql`            | string   | DDL ステートメント。                                                                                          |
 | `commitTs`       | number  | DDL ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
-| `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)参照してください。                            |
-| `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。1 `CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
+| `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。                            |
+| `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。`CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
 
 ### DML {#dml}
 
@@ -471,7 +471,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 | `type`        | string   | `BOOTSTRAP`のイベントタイプ。                                                          |
 | `commitTs`    | number  | `BOOTSTRAP`のうちの`commitTs` `0`です。これはTiCDCによって内部的に生成されるため、 `commitTs`は意味を持ちません。 |
 | `buildTs`     | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                    |
-| `tableSchema` | object  | テーブルのスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)参照してください。       |
+| `tableSchema` | object  | テーブルのスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。       |
 
 ## メッセージ生成と送信ルール {#message-generation-and-sending-rules}
 

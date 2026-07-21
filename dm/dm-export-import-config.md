@@ -59,7 +59,7 @@ config import [--dir directory]
 
 > **Note:**
 >
-> v2.0.2以降のクラスターでは、現在、リレーワーカー関連の設定の自動インポートはサポートされていません`start-relay`コマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#enable-and-disable-relay-log)実行できます。
+> v2.0.2以降のクラスターでは、現在、リレーワーカー関連の設定の自動インポートはサポートされていません。`start-relay`コマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#enable-and-disable-relay-log)を実行できます。
 
 ### パラメータの説明 {#parameter-explanation}
 

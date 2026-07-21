@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.2
     -   疑似統計がダンプされるときにいくつかの`nil`情報によって引き起こされるpanicの問題を修正しました[＃11460](https://github.com/pingcap/tidb/pull/11460)
     -   定数畳み込み最適化によって発生した`SELECT … CASE WHEN … ELSE NULL ...`の誤ったクエリ結果を修正 [＃11441](https://github.com/pingcap/tidb/pull/11441)
     -   `floatStrToIntStr` `+999.9999e2` などの入力を正しく解析しない問題を修正 [＃11473](https://github.com/pingcap/tidb/pull/11473)
-    -   `DATE_ADD`と`DATE_SUB`関数の結果が超える場合に`NULL`返されない場合がある問題を修正しました。 [＃11476](https://github.com/pingcap/tidb/pull/11476)
+    -   `DATE_ADD`と`DATE_SUB`関数の結果が超える場合に`NULL`が返されない場合がある問題を修正しました。 [＃11476](https://github.com/pingcap/tidb/pull/11476)
     -   長い文字列を整数に変換するときに、文字列に無効な文字が含まれているとMySQLの変換結果と異なる問題を修正しました。 [＃11469](https://github.com/pingcap/tidb/pull/11469)
     -   この関数大文字と小文字の区別により、関数`REGEXP BINARY`の結果がMySQLと互換性がない問題を修正しました。 [＃11504](https://github.com/pingcap/tidb/pull/11504)
     -   `GRANT ROLE`文が`CURRENT_ROLE`受け取ったときにエラーが報告される問題を修正します。5 `REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [＃11356](https://github.com/pingcap/tidb/pull/11356)

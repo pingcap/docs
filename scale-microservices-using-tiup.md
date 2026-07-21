@@ -87,7 +87,7 @@ scheduling_servers:
 -   `--user root` 、クラスタのスケールアウトを完了するために、ターゲットマシンに`root`ユーザーとしてログインすることを示します。4 `root`ユーザーは、ターゲットマシンに対して`ssh`と`sudo`権限を持つことが想定されています。または、 `ssh`と`sudo`権限を持つ他のユーザーを使用してデプロイを完了することもできます。
 -   `[-i]`と`[-p]`オプションです。ターゲットマシンへのログインにパスワードを使用しない設定をしている場合は、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできるルートユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。8 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。
 
-`Scaled cluster <cluster-name> out successfully`表示された場合、スケールアウト操作は成功しています。
+`Scaled cluster <cluster-name> out successfully`が表示された場合、スケールアウト操作は成功しています。
 
 ### 3. クラスターのステータスを確認する {#3-check-the-cluster-status}
 
@@ -167,7 +167,7 @@ tiup cluster scale-in <cluster-name> --node 10.0.1.9:3379
 
 `--node`パラメータは、オフラインにするノードの ID です。
 
-`Scaled cluster <cluster-name> in successfully`表示された場合、スケールイン操作は成功しています。
+`Scaled cluster <cluster-name> in successfully`が表示された場合、スケールイン操作は成功しています。
 
 ### 3. クラスターのステータスを確認する {#3-check-the-cluster-status}
 

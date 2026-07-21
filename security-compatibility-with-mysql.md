@@ -166,7 +166,7 @@ Here is an example for Header:
 
 ペイロードはJWTの主要部分であり、ユーザー情報が格納されます。ペイロード内の各フィールドはクレームと呼ばれます。TiDBユーザー認証に必要なクレームは以下のとおりです。
 
--   `iss` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)ときに`TOKEN_ISSUER`指定されていないか空に設定されている場合、このクレームは必要ありません。それ以外の場合、 `iss` `TOKEN_ISSUER`と同じ値を使用する必要があります。
+-   `iss` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)のときに`TOKEN_ISSUER`が指定されていないか空に設定されている場合、このクレームは必要ありません。それ以外の場合、 `iss`は`TOKEN_ISSUER`と同じ値を使用する必要があります。
 -   `sub` : このクレームは、認証されるユーザー名と同じである必要があります。
 -   `iat`: it means `issued at`, the timestamp when the token is issued. In TiDB, this value must not be later than the authentication time or earlier than 15 minutes before authentication.
 -   `exp` : トークンの有効期限のタイムスタンプ。認証時刻より前の場合、認証は失敗します。

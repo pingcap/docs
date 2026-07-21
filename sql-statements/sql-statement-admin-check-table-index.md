@@ -11,9 +11,9 @@ category: reference
 以下はサポートされていません。
 
 -   [FOREIGN KEY制約](/foreign-key.md)を確認しています。
--   [クラスター化された主キー](/clustered-indexes.md)使用されている場合は、PRIMARY KEY インデックスをチェックします。
+-   [クラスター化された主キー](/clustered-indexes.md)が使用されている場合は、PRIMARY KEY インデックスをチェックします。
 
-`ADMIN CHECK [TABLE|INDEX]`問題が見つかった場合は、インデックスを削除して再作成することで解決できます。問題が解決しない場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)実行できます。
+`ADMIN CHECK [TABLE|INDEX]`で問題が見つかった場合は、インデックスを削除して再作成することで解決できます。問題が解決しない場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)を実行できます。
 
 ## 原則 {#principles}
 

@@ -69,7 +69,7 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 
 クエリ実行プランからは、条件`city ='Beijing'`満たす行の`HANDLE`読み込むために`city`インデックスが使用され、次にこの`HANDLE`使用して行のデータを読み込んでいることがわかります。
 
-パス`$.city`にデータが存在しない場合、 `JSON_EXTRACT` `NULL`返します。 `city`必ず`NOT NULL`になるという制約を適用したい場合は、次のように仮想生成列を定義します。
+パス`$.city`にデータが存在しない場合、 `JSON_EXTRACT` `NULL`を返します。 `city`が必ず`NOT NULL`になるという制約を適用したい場合は、次のように仮想生成列を定義します。
 
 ```sql
 CREATE TABLE person (

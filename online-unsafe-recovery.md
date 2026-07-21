@@ -38,7 +38,7 @@ Online Unsafe Recovery を使用する前に、次の要件が満たされてい
 
 ### ステップ1. 回復できないストアを指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-自動リカバリをトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)実行し、リカバリできない**すべての**TiKV ノードとTiFlashノードをコンマで区切って指定します。
+自動リカバリをトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行し、リカバリできない**すべての**TiKV ノードとTiFlashノードをコンマで区切って指定します。
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
@@ -51,7 +51,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 
 リカバリタスクの最長時間を指定するには、 `--timeout <seconds>`オプションを使用します。このオプションを指定しない場合、デフォルトの最長時間は5分です。タイムアウトが発生すると、リカバリは中断され、エラーが返されます。
 
-コマンドが`Success`返した場合、 PD Control はタスクを PD に正常に登録しました。これはリクエストが承認されたことのみを意味し、リカバリが正常に実行されたことを意味するものではありません。リカバリタスクはバックグラウンドで実行されます。リカバリの進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)使用してください。
+コマンドが`Success`を返した場合、 PD Control はタスクを PD に正常に登録しました。これはリクエストが承認されたことのみを意味し、リカバリが正常に実行されたことを意味するものではありません。リカバリタスクはバックグラウンドで実行されます。リカバリの進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用してください。
 
 コマンドが`Failed`返す場合、 PD ControlはタスクをPDに登録できませんでした。考えられるエラーは次のとおりです。
 
@@ -74,7 +74,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores --auto-detect
 
 ### ステップ2. 回復の進行状況を確認し、完了を待ちます {#step-2-check-the-recovery-progress-and-wait-for-the-completion}
 
-上記のストア削除コマンドが正常に実行されたら、 PD Controlを使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)実行し、削除の進行状況を確認できます。
+上記のストア削除コマンドが正常に実行されたら、 PD Controlを使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行し、削除の進行状況を確認できます。
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores show
@@ -84,7 +84,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 
 -   `collect report` : PD が TiKV からレポートを収集し、グローバル情報を取得する初期段階。
 -   `tombstone tiflash learner` : 異常なリージョンのうち、他の正常なピアよりも新しいTiFlashラーナーを削除して、このような極端な状況やpanicの可能性を防ぎます。
--   `force leader for commit merge` : 特別な段階。コミットマージが完了していない場合、極端な状況を想定して、コミットマージが行われたリージョンに対してまず`force leader`実行されます。
+-   `force leader for commit merge` : 特別な段階。コミットマージが完了していない場合、極端な状況を想定して、コミットマージが行われたリージョンに対してまず`force leader`が実行されます。
 -   `force leader` : 正常でないリージョンに、残りの正常なピアの中からRaftリーダーを割り当てるように強制します。
 -   `demote failed voter` : リージョンの失敗した投票者をラーナーに降格し、その後、リージョンは通常どおりRaftリーダーを選出できます。
 -   `create empty region` : キー範囲のギャップを埋めるために空のリージョンを作成します。これは、一部のリージョンのすべてのレプリカを含むストアが破損しているケースを解決するためのものです。

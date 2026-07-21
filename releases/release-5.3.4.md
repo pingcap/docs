@@ -47,7 +47,7 @@ TiDB バージョン: 5.3.4
 -   TiFlash
 
     -   引数の型がUInt8 場合に論理演算子が間違った結果を返す問題を修正しました [＃6127](https://github.com/pingcap/tiflash/issues/6127)
-    -   整数のデフォルト値として`0.0`使用されている場合 (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [＃3157](https://github.com/pingcap/tiflash/issues/3157) 、 TiFlashブートストラップが失敗する問題を修正しました。
+    -   整数のデフォルト値として`0.0`が使用されている場合 (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [＃3157](https://github.com/pingcap/tiflash/issues/3157) 、 TiFlashブートストラップが失敗する問題を修正しました。
 
 -   ツール
 

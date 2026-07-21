@@ -181,7 +181,7 @@ TiKVコプロセッサータスクフィールド：
 -   `tidb_slow_log_rules`が設定されていない場合、スロークエリログのトリガーは引き続き[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (ミリ秒単位) に依存します。
 -   `tidb_slow_log_rules`が設定されている場合、設定済みのルールが優先され、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)は無視されます。
 
-各フィールドの意味、診断値、および背景情報の詳細については、[フィールドの説明](#fields-description)参照してください。
+各フィールドの意味、診断値、および背景情報の詳細については、[フィールドの説明](#fields-description)を参照してください。
 
 ### 統一されたルール構文と型制約 {#unified-rule-syntax-and-type-constraints}
 

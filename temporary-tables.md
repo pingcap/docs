@@ -210,7 +210,7 @@ SELECT * FROM users;
 
     Empty set (0.00 sec)
 
-セッション A で`users`作成されると、セッション B は`users`テーブルに対して読み取りと書き込みも実行できるようになります。
+セッション A で`users`が作成されると、セッション B は`users`テーブルに対して読み取りと書き込みも実行できるようになります。
 
 ```sql
 SELECT * FROM users;

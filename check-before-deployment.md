@@ -400,7 +400,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
+    > `[always] madvise never`が出力された場合、THP が有効になっています。無効にする必要があります。
 
 2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
@@ -415,7 +415,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `noop [deadline] cfq`出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
+    > `noop [deadline] cfq`が出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
     データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
@@ -456,7 +456,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `The governor "powersave"`出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
+    > `The governor "powersave"`が出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
 
 5.  オペレーティング システムの最適なパラメータを構成します。
 

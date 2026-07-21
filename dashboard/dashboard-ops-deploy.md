@@ -115,7 +115,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-TiDB Dashboardを提供するPDインスタンスを手動で指定することで、TiDB Dashboardを再度有効にすることもできます。[TiDB Dashboardを提供するために別のPDインスタンスに切り替える](#switch-to-another-pd-instance-to-serve-tidb-dashboard)参照してください。
+TiDB Dashboardを提供するPDインスタンスを手動で指定することで、TiDB Dashboardを再度有効にすることもできます。[TiDB Dashboardを提供するために別のPDインスタンスに切り替える](#switch-to-another-pd-instance-to-serve-tidb-dashboard)を参照してください。
 
 > **Warning:**
 >

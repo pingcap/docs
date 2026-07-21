@@ -117,7 +117,7 @@ TiDB Lightning は、10 ギガビット ネットワーク カードで使用す
 
 ## TiDB Lightningのランタイムgoroutine情報を取得する方法 {#how-to-get-the-runtime-goroutine-information-of-tidb-lightning}
 
-1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)指定されている場合は、この手順をスキップしてください。それ以外の場合は、 `status-port`有効にするためにTiDB Lightningに USR1 信号を送信する必要があります。
+1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、 `status-port`を有効にするためにTiDB Lightningに USR1 信号を送信する必要があります。
 
     `ps`などのコマンドを使用してTiDB Lightningのプロセス ID (PID) を取得し、次のコマンドを実行します。
 
@@ -125,7 +125,7 @@ TiDB Lightning は、10 ギガビット ネットワーク カードで使用す
     kill -USR1 <lightning-pid>
     ```
 
-    TiDB Lightningのログを確認します。1/ `starting HTTP server` / `started HTTP server`のログに`start HTTP server`新たに有効化された`status-port`表示されます。
+    TiDB Lightningのログを確認します。`starting HTTP server` / `start HTTP server` / `started HTTP server`のログに、新たに有効化された`status-port`が表示されます。
 
 2.  `http://<lightning-ip>:<status-port>/debug/pprof/goroutine?debug=2`アクセスして、goroutine 情報を取得します。
 
