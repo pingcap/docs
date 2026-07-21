@@ -25,7 +25,7 @@ TiKV 3.0以降では、デフォルトですべてのCFが1つのブロックキ
 
 TiKV 3.0 より前では、共有ブロックキャッシュはサポートされていないため、各 CF ごとにブロックキャッシュを個別に構成する必要があります。
 
-各 CF にはそれぞれ`write buffer`あります。3 パラメータ`write-buffer-size`設定することでサイズを設定できます。
+各 CF にはそれぞれ`write buffer`あります。`write-buffer-size`パラメータを設定することでサイズを設定できます。
 
 ## パラメータ仕様 {#parameter-specification}
 

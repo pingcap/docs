@@ -142,7 +142,7 @@ TiDBは、TiKV/ TiFlashからスキャンされたデータまたは計算結果
 -   **TableReader** : TiKV の`TableFullScan`や`TableRangeScan`の基礎となる演算子によって取得されたデータを集計します。
 -   **IndexReader** : TiKV の`IndexFullScan`や`IndexRangeScan`の基礎となる演算子によって取得されたデータを集計します。
 -   **IndexLookUp** : まず、 `Build`側でスキャンされたRowID（TiKV内）を集計します。次に、 `Probe`側でこれらのRowIDに基づいてTiKVからデータを正確に読み取ります。6 `Build`には`IndexFullScan`や`IndexRangeScan`などの演算子があり、 `Probe`側には`TableRowIDScan`演算子があります。
--   **IndexMerge** : `IndexLookUp`と同様です。4 `IndexMerge` `IndexLookupReader`の拡張と見なすことができます。8 `IndexMerge`複数のインデックスの同時読み取りをサポートします。10 は`Build`あり、 `Probe`は1つです。14 の実行プロセスは`IndexMerge` `IndexLookUp`同じです。
+-   **IndexMerge** : `IndexLookUp`と同様です。4 `IndexMerge` `IndexLookupReader`の拡張と見なすことができます。8 `IndexMerge`複数のインデックスの同時読み取りをサポートします。`Build`は多数あり、 `Probe`は1つです。`IndexMerge`の実行プロセスは`IndexLookUp`と同じです。
 
 構造はツリー構造のように見えますが、クエリの実行において子ノードが親ノードより先に完了している必要は必ずしもありません。TiDBはクエリ内並列処理をサポートしているため、より正確な表現は、子ノードが親ノード*に流れ込む*というものです。親ノード、子ノード、兄弟ノードの演算子によって、クエリの一部が並列実行される可能性*があります*。
 

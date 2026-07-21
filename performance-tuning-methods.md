@@ -492,7 +492,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 
 `Commit Log Duration` `Apply Log Duration` 、raftstore内の主要な操作のレイテンシー指標です。これらのレイテンシはバッチ操作レベルで計測され、各操作は複数の書き込みリクエストを組み合わせます。したがって、これら`Append Log Duration`レイテンシは前述の`Store Duration`と`Apply Duration`に直接対応するものではありません。
 
--   `Commit Log Duration`と`Append Log Duration` 、 `Store`スレッドで実行された操作時間を記録します。6 `Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。8 `Commit Log Duration`は通常、リーダー用とフォロワー用の 2 つの`Append Log Duration`操作が含まれます。12 は、通常、 `Append Log Duration`よりも大幅に大きくなります。 `Commit Log Duration` 、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
+-   `Commit Log Duration`と`Append Log Duration` 、 `Store`スレッドで実行された操作時間を記録します。6 `Commit Log Duration`は、 Raftログを他の TiKV ノードにコピーする時間が含まれます (raft-log の永続性を確保するため)。8 `Commit Log Duration`は通常、リーダー用とフォロワー用の 2 つの`Append Log Duration`操作が含まれます。`Commit Log Duration`は、通常、 `Append Log Duration`よりも大幅に大きくなります。これは、前者には、ネットワークを介してRaftログを他の TiKV ノードにコピーする時間が含まれるためです。
 -   `Apply Log Duration` `Apply`スレッドによる`apply` Raftログのレイテンシーを記録します。
 
 `Commit Log Duration`が長い場合の一般的なシナリオ:
