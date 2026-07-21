@@ -92,7 +92,7 @@ tdc [ERROR]: the following arguments are required: command
 
 The TiDB Cloud Command Line Interface is a unified tool to manage your TiDB Cloud Filesystem (FS) and Starter services.
 
-usage: tdc <command> <subcommand> [<subcommand> ...] [parameters]
+usage: tdc <command> [<subcommand>] [parameters]
 To see help information, you can run:
 
   tdc help
