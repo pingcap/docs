@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    - [Top RU](/tidb-cloud/top-ru.md) is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following region:
+    - [Top RU](/tidb-cloud/top-ru.md) (public preview) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports the following additional region:
 
         - Alibaba Cloud: `Jakarta (ap-southeast-5)`
 
