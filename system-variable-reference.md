@@ -1095,6 +1095,7 @@ Referenced in:
 
 - [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
 - [System Variables](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)
+- [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
 - [TiDB Global Sort](/tidb-global-sort.md)
 - [TiDB 8.1.1 Release Notes](/releases/release-8.1.1.md)
 - [TiDB 7.4.0 Release Notes](/releases/release-7.4.0.md)
