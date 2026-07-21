@@ -5,7 +5,7 @@ summary: This document outlines the process for creating a TiDB Cloud BYOC insta
 
 # Create Your First TiDB Cloud BYOC Instance
 
-After deploying your BYOC infrastructure, create your first TiDB database instance and configure secure administrative access.
+After deploying your BYOC infrastructure, create your first {{{ .byoc }}} instance and configure secure administrative access.
 
 ## Create a BYOC instance
 
@@ -24,17 +24,17 @@ You can now provision TiDB instances directly via the TiDB Cloud Console.
 
 After preparing your backup file in Amazon S3, you can proceed to restore the data to your newly created TiDB Cloud BYOC instance.
 
-1. **Configure Amazon S3 Access (AK/SK).**
+1. Configure Amazon S3 Access (AK/SK).
 
     To allow TiDB Cloud to read your S3 backup, you must configure external storage access by generating an AWS Access Key ID and Secret Access Key (AK/SK) with the appropriate S3 read permissions.
 
-    Follow the detailed instructions here: [Configure Amazon S3 access using an AWS Access Key](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-an-aws-access-key).
+    For detailed instructions, see [Configure Amazon S3 access using an AWS Access Key](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-an-aws-access-key).
 
-2. **Execute the Restore Process.**
+2. Execute the Restore Process.
 
     Once the access keys are configured, you can initiate the restore job from the TiDB Cloud Console.
 
-    For step-by-step restoration procedures, refer to [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
+    For step-by-step restoration procedures, see [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
 
 ## Configure secure administrative access
 
