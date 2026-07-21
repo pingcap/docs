@@ -11,7 +11,7 @@ After deploying your BYOC infrastructure, create your first TiDB database instan
 
 You can now provision TiDB instances directly via the TiDB Cloud Console.
 
-1. Initiate instance creation. Log in to the [TiDB Cloud Console](https://tidbcloud.com/) and follow the [standard workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance.
+1. Initiate instance creation. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow the [BYOC instance creation workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance.
 
 2. Select the region and specifications that match your workload requirements.
 
