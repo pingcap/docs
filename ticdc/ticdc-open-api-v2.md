@@ -240,7 +240,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `start_ts`       | `UINT64`型。変更フィードの開始TSOを指定します。TiCDCクラスターは、このTSOからデータのプルを開始します。デフォルト値は現在時刻です。（オプション）                     |
 | `target_ts`      | `UINT64`型。変更フィードのターゲットTSOを指定します。TiCDCクラスターは、このTSOに到達するとデータのプルを停止します。デフォルト値は空で、TiCDCは自動的に停止しません。(オプション) |
 
-`changefeed_id` `target_ts`意味と`sink_uri`は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これら`start_ts`パラメータの詳細については、 `sink_uri`のドキュメントを参照してください。11 で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id` `target_ts`意味と`sink_uri`は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これら`start_ts`パラメータの詳細については、 `sink_uri`のドキュメントを参照してください。`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
 `replica_config`パラメータの説明は次のとおりです。
 
@@ -313,7 +313,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
 | `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`ターミネータとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
-| `only_output_updated_columns` | `BOOLEAN`型。2 または`canal-json`プロトコル`open-protocol`使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
+| `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
 | `open`                        | オープンプロトコルの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |
@@ -333,7 +333,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `include_commit_ts`      | `BOOLEAN`型。CSV行にコミット情報を含めるかどうか。デフォルト値は`false`です。                             |
 | `null`                   | `STRING`型。CSV列がnullの場合に表示される文字。デフォルト値は`\N`です。                                |
 | `quote`                  | `STRING`型。CSVファイル内のフィールドを囲むために使用される引用符文字。値が空の場合、引用符は使用されません。デフォルト値は`"`です。    |
-| `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。2 または`"base64"` `"hex"`指定できます。デフォルト値は`"base64"`です。 |
+| `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。`"base64"`または`"hex"`を指定できます。デフォルト値は`"base64"`です。 |
 
 `sink.dispatchers` : MQタイプのシンクの場合、このパラメータを使用してイベントディスパッチャを設定できます。サポートされているディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`です。ディスパッチャのルールは以下のとおりです。
 

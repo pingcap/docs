@@ -142,7 +142,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ3. クラスターポリシーをアタッチする {#step-3-attach-the-cluster-policy}
 
-[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) [前提条件](#prerequisites-for-essential)して、 TiDB Cloud がMSK クラスターに接続できるようにします。2 で取得したTiDB Cloud AWS アカウント ID を使用してください。
+[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 

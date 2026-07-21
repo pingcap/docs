@@ -134,7 +134,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 > **Note:**
 >
 > -   パーティションを持つテーブルの場合、 `merge_option`属性がテーブルレベルでのみ設定されている場合、 `merge_option=allow`であっても、テーブルはデフォルトで実際のパーティション数に応じて複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)実行する必要があります。
-> -   `merge_option`属性を使用する場合は、PD設定パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。5 属性`merge_option`設定されていない場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、指定された間隔後にリージョンをマージするかどうかを決定します。
+> -   `merge_option`属性を使用する場合は、PD設定パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。`merge_option`属性が設定されていない場合、リージョンが条件を満たしている場合、 `split-merge-interval`で指定された間隔後にリージョンをマージできます`merge_option`属性が設定されている場合、PDは`merge_option`設定に基づいて、指定された間隔後にリージョンをマージするかどうかを決定します。
 
 </CustomContent>
 

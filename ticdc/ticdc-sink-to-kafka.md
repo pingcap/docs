@@ -408,7 +408,7 @@ large-message-handle-compression = "none"
 -   `large-message-handle-compression`で指定された圧縮アルゴリズムは、単一のKafkaメッセージを圧縮します。圧縮は、メッセージサイズの制限と比較する前に実行されます。
 -   同時に、 [`sink-uri`](#configure-sink-uri-for-kafka)の`compression`パラメータを使用して圧縮アルゴリズムを設定することもできます。この圧縮アルゴリズムは、複数のKafkaメッセージを含むデータ送信リクエスト全体に適用されます。
 
-`large-message-handle-compression`設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。5 に`compression` [`sink-uri`](#configure-sink-uri-for-kafka)設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
+`large-message-handle-compression`設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
 
 前述の 2 つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
 

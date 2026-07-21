@@ -37,7 +37,7 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
 -   TiKVの設定を最適化する
 
-    -   `readpool`スレッドプールに自己適応するように設定します。3 パラメータ`readpool.unified.max-thread-count`設定することで、 `readpool.storage`と`readpool.coprocessor`統合スレッドプールを共有し、それぞれ自己適応スイッチを設定できます。
+    -   `readpool`スレッドプールに自己適応するように設定します。`readpool.unified.max-thread-count`パラメータを設定することで、 `readpool.storage`と`readpool.coprocessor`統合スレッドプールを共有し、それぞれ自己適応スイッチを設定できます。
 
         -   `readpool.storage`と`readpool.coprocessor`有効にする:
 
