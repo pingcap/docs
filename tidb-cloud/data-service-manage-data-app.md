@@ -7,7 +7,7 @@ summary: TiDB Cloudコンソールでデータ アプリを作成、表示、変
 
 Data Service（プレビュー版）のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。APIキーを使用して認証設定を構成し、データアプリ内のエンドポイントへのアクセスを制限できます。
 
-このドキュメントでは、 TiDB Cloudコンソールでデータアプリを管理する方法について説明します。1 [**Data Service**](https://tidbcloud.com/project/data-service)目では、すべてのデータアプリ、エンドポイント、API キーを管理できます。
+このドキュメントでは、 TiDB Cloudコンソールでデータアプリを管理する方法について説明します。[**Data Service**](https://tidbcloud.com/project/data-service)ページでは、すべてのデータアプリ、エンドポイント、API キーを管理できます。
 
 ## データアプリを作成する {#create-a-data-app}
 

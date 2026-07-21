@@ -27,7 +27,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
 
-さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)参照してください。.
+さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。.
 
 ### クラスタ {#cluster}
 

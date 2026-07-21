@@ -101,7 +101,7 @@ TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すための
 
 ### Chat2Query v3エンドポイントまたはv2エンドポイントを呼び出す {#call-chat2query-v3-endpoints-or-v2-endpoints}
 
-TiDB CloudData Serviceは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
+TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
 
 | 方法 | 終点                                                                | 説明                                                                                                                                       |
 | -- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -347,7 +347,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 >
 > Chat2Data v1エンドポイントは非推奨です。代わりにChat2Data v3エンドポイントを呼び出すことをお勧めします。
 
-TiDB CloudData Serviceは、次の Chat2Query v1 エンドポイントを提供します。
+TiDB Cloud Data Serviceは、次の Chat2Query v1 エンドポイントを提供します。
 
 | 方法 | 終点              | 説明                                                                       |
 | -- | --------------- | ------------------------------------------------------------------------ |
