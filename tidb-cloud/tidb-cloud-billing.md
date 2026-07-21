@@ -19,11 +19,11 @@ TiDB Cloudは、お客様が使用したリソースに応じて課金されま�
 
 ### TiDB Cloud Essentialの価格設定 {#pricing-for-essential} {#pricing-for-essential}
 
-TiDB Cloud Essentialでは、アプリケーションの実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。TiDB [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)ご覧ください。
+TiDB Cloud Essentialでは、アプリケーションの実際の使用量で**はなく**、プロビジョニングされたリクエスト容量ユニット (RCU) の数に基づいて課金されます。[TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)をご覧ください。
 
 ### TiDB Cloud Premium の価格設定 {#pricing-for-premium} {#pricing-for-premium}
 
-TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプロビジョニングされたディスク サイズではなく、実際の[要求容量単位（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)ご覧ください。
+TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプロビジョニングされたディスク サイズではなく、実際の[要求容量単位（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)の消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)をご覧ください。
 
 ## 請求書 {#invoices}
 

@@ -28,7 +28,7 @@ Cloud Organization SSO に移行する前に、組織についてこのセクシ
 > **Note:**
 >
 > -   Cloud Organization SSO を有効にすると、無効にすることはできません。
-> -   Cloud Organization SSOを有効にするには、 TiDB Cloud組織の`Organization Owner`ロールに属している必要があります。ロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
+> -   Cloud Organization SSOを有効にするには、 TiDB Cloud組織の`Organization Owner`ロールに属している必要があります。ロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)をご覧ください。
 
 ### 組織のTiDB Cloudログインページのカスタム URL を決定します {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}
 
@@ -87,7 +87,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
 
     > **Note:**
     >
-    > Cloud Organization SSO を有効にすると、URL を変更できなくなります。組織のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできるようになります。後で設定済みの URL を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+    > Cloud Organization SSO を有効にすると、URL を変更できなくなります。組織のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできるようになります。後で設定済みの URL を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 5.  **[理解して確認します]**チェックボックスをクリックし、 **[有効にする]**をクリックします。
 
@@ -229,7 +229,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     -   **SCIMプロビジョニングアカウント**
 
-        デフォルトでは無効になっています。TiDB Cloud組織のユーザーとグループのプロビジョニング、デプロビジョニング、およびID管理をIDプロバイダから一元化・自動化したい場合は、有効にすることができます。詳細な設定手順については、 [SCIMプロビジョニングを構成する](#configure-scim-provisioning)ご覧ください。
+        デフォルトでは無効になっています。TiDB Cloud組織のユーザーとグループのプロビジョニング、デプロビジョニング、およびID管理をIDプロバイダから一元化・自動化したい場合は、有効にすることができます。詳細な設定手順については、 [SCIMプロビジョニングを構成する](#configure-scim-provisioning)をご覧ください。
 
         **SCIM Provisioning Accounts** を有効にする前に、プロビジョニングするユーザーのメールドメインを追加して検証し、 **Allowed Email Domains** フィールドで設定してください。
 

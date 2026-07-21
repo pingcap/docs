@@ -17,11 +17,11 @@ SQL文のパフォーマンスを向上させるには、以下の原則を考�
 -   スキャン対象データの範囲を最小限に抑えましょう。常に、必要最小限のデータのみをスキャンし、すべてのデータをスキャンすることは避けるのが最善策です。
 -   適切なインデックスを使用してください。SQL文の`WHERE`句の各列には、対応するインデックスが存在することを確認してください。そうでない場合、 `WHERE`句はテーブル全体をスキャンするため、パフォーマンスが低下します。
 -   適切な結合タイプを使用してください。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。一般に、TiDB のコストベースのオプティマイザーは、最適な結合タイプを自動的に選択します。ただし、場合によっては、結合タイプを手動で指定する必要がある場合があります。詳細については、[テーブル結合を使用するステートメントについて説明します](/explain-joins.md)を参照してください。
--   適切なストレージエンジンを使用してください。ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードには、 TiFlashストレージエンジンを使用することをお勧めします。HTAP [HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
+-   適切なストレージエンジンを使用してください。ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードには、 TiFlashストレージエンジンを使用することをお勧めします。[HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
 TiDB Cloudには、スロークエリを分析するのに役立つツールがいくつか用意されています。以下のセクションでは、スロークエリを最適化するためのいくつかの方法について説明します。
 
-### 診断ページの「使用説明書」を参照してください。 {#use-statement-on-the-diagnosis-page}
+### 診断ページで Statement を使用する {#use-statement-on-the-diagnosis-page}
 
 TiDB Cloudコンソールには、 [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)上に[**SQLステートメント**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL ステートメントの実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL ステートメントを特定し、分析することができます。
 
@@ -53,7 +53,7 @@ TiDBによって選択された実行プランが最適でない場合は、 EXP
 
 ### 実行計画を最適化する {#optimize-the-execution-plan}
 
-`parser`による元のクエリテキストの解析と基本的な妥当性検証の後、TiDB はまずクエリに対して論理的に同等の変更を行います。詳細については、 [SQL論理最適化](/sql-logical-optimization.md)を参照してください。 .
+`parser`による元のクエリテキストの解析と基本的な妥当性検証の後、TiDB はまずクエリに対して論理的に同等の変更を行います。詳細については、 [SQL論理最適化](/sql-logical-optimization.md)を参照してください。
 
 これらの等価性の変更により、クエリは論理実行プランで扱いやすくなります。等価性の変更後、TiDB は元のクエリと等価なクエリ プラン構造を取得し、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行プランを取得します。詳細については、 [SQLの物理的最適化](/sql-physical-optimization.md)を参照してください。
 
@@ -61,7 +61,7 @@ TiDBによって選択された実行プランが最適でない場合は、 EXP
 
 ### フルテーブルスキャンを最適化 {#optimize-full-table-scan}
 
-SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステートメントがフルテーブルスキャンを実行するか、不適切なインデックスを使用していることです。EXPLAINまたはEXPLAIN ANALYZEを使用してクエリの実行プランを表示し、実行が遅くなる原因を特定できます。最適化に使用できる[3つの方法](/develop/dev-guide-optimize-sql.md)あります。
+SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステートメントがフルテーブルスキャンを実行するか、不適切なインデックスを使用していることです。EXPLAINまたはEXPLAIN ANALYZEを使用してクエリの実行プランを表示し、実行が遅くなる原因を特定できます。最適化に使用できる[3つの方法](/develop/dev-guide-optimize-sql.md)があります。
 
 -   セカンダリインデックスを使用する
 -   カバーインデックスを使用する
@@ -77,7 +77,7 @@ SQLクエリが遅くなる最も一般的な原因は、 `SELECT`ステート�
 
 ### インデックスのベストプラクティス {#index-best-practices}
 
-インデックス [インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)ベストプラクティスには、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
+[インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
 
 インデックスの作成速度はデフォルトでは控えめですが、シナリオによっては[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)によってインデックス作成プロセスを高速化できます。
 
@@ -124,6 +124,6 @@ Key Visualizerには[4つの一般的なヒートマップ結果](https://docs.p
 
 X軸とY軸が交互に明暗を繰り返す場合、どちらのケースでも読み書き時の筆圧に対処する必要があります。
 
-SQLのパフォーマンス[SQL最適化](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization)を参照してください。
+SQL パフォーマンスの最適化の詳細については、[SQL最適化](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization)を参照してください。
 
 </CustomContent>

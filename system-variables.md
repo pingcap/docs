@@ -1771,7 +1771,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   範囲: `[32, 10240]`
 -   単位：行
 -   この変数は、DDL 操作の`re-organize`フェーズ中にバッチ サイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行すると、インデックス データは`tidb_ddl_reorg_worker_cnt` (数) 個の同時実行ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックス データをバッチ単位でバックフィルします。
-    -   `tidb_ddl_enable_fast_reorg`が`OFF`に設定されている場合、 `ADD INDEX`はトランザクションとして実行されます。 `UPDATE`の実行中に、対象列で`REPLACE`や`ADD INDEX` }} などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクション競合が発生する可能性が高くなります。この場合、バッチサイズを小さい値に設定することをお勧めします。最小値は 32 です。
+    -   `tidb_ddl_enable_fast_reorg`が`OFF`に設定されている場合、 `ADD INDEX`はトランザクションとして実行されます。 `ADD INDEX`の実行中に、対象列で`UPDATE`や`REPLACE`などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクション競合が発生する可能性が高くなります。この場合、バッチサイズを小さい値に設定することをお勧めします。最小値は 32 です。
     -   トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合は、バッチ サイズを大きな値に設定できます。これにより、データのバックフィルが高速になりますが、TiKV への書き込み圧力も増加します。適切なバッチ サイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
     -   バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDLステートメントには影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
     -   バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。

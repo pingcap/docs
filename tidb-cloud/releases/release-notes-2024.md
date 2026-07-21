@@ -445,7 +445,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     TiDB Cloud Data Serviceは、デフォルトでは各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性をさらに高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランドURLを使用でき、セキュリティも強化されます。
 
-    詳細については、 [データサービスのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
+    詳細については、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 ## 2024年1月3日 {#january-3-2024}
 

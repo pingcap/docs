@@ -39,7 +39,7 @@ Query OK, 0 rows affected (0.01 sec)
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   現在、TiDBはメタデータロック（MDL）を使用して、DDL文によるトランザクションで使用されるテーブルの変更をデフォルトで防止しています。メタデータロックの動作はTiDBとMySQLで異なります。詳細については、 [メタデータロック](/metadata-lock.md)を参照してください。
--   TiDB 3.0.8以降のバージョンでは、デフォルトで[悲観的ロック](/pessimistic-transaction.md)使用されます。 [楽観的ロック](/optimistic-transaction.md)を使用する場合は、別のトランザクションによって行が変更されているために`COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。
+-   TiDB 3.0.8以降のバージョンでは、デフォルトで[悲観的ロック](/pessimistic-transaction.md)が使用されます。 [楽観的ロック](/optimistic-transaction.md)を使用する場合は、別のトランザクションによって行が変更されているために`COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。
 -   楽観的ロックが有効な場合、制約`UNIQUE`と`PRIMARY KEY`チェックは文のコミットまで延期されます。これにより、制約`COMMIT`文が失敗する状況が増えます。この動作は`tidb_constraint_check_in_place=ON`設定することで変更できます。
 -   TiDBは構文`ROLLBACK AND [NO] RELEASE`を解析しますが、無視します。この機能はMySQLでトランザクションのコミット直後にクライアントセッションを切断するために使用されます。TiDBでは、代わりにクライアントドライバの`mysql_close()`機能を使用することをお勧めします。
 -   TiDBは構文`ROLLBACK AND [NO] CHAIN`を解析しますが、無視します。この機能はMySQLで使用され、現在のトランザクションがコミットされている間に、同じ分離レベルで新しいトランザクションを即座に開始します。TiDBでは、代わりに新しいトランザクションを開始することが推奨されます。

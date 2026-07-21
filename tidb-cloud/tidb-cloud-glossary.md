@@ -13,7 +13,7 @@ aliases: ['/ja/tidbcloud/glossary']
 
 ACIDとは、トランザクションの4つの主要な特性、すなわち原子性、一貫性、分離性、および永続性を指します。これらの特性はそれぞれ以下で説明します。
 
--   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのどちらかであることを意味します。TiDB は[TiDBリージョン](#region)です。
+-   **原子性**とは、操作のすべての変更が実行されるか、まったく実行されないかのどちらかであることを意味します。TiDB は、主キーを格納する[TiDBリージョン](#region)の原子性を確保することで、トランザクションの原子性を実現します。
 
 -   **一貫性と**は、トランザクションによってデータベースが常に一貫性のある状態から別の一貫性のある状態へと移行することを意味します。TiDBでは、メモリにデータを書き込む前にデータの一貫性が確保されます。
 
@@ -27,7 +27,7 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、データサービスに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。.
+さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。.
 
 ### クラスタ {#cluster}
 
@@ -81,7 +81,7 @@ TiDB Cloudの[組織](#organization)に招待されたユーザー。
 
 ### MPP {#mpp}
 
-バージョン5.0以降、TiDBはTiFlashノードを介した大規模並列処理（MPP）アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPPモードが有効になっている場合、TiDBはコストに基づいて、計算にMPPフレームワークを使用するかどうかを決定します。MPPモードでは、結合キーは計算中にExchange操作によって再分配され、計算負荷が各TiFlashノードに分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。 .
+バージョン5.0以降、TiDBはTiFlashノードを介した大規模並列処理（MPP）アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPPモードが有効になっている場合、TiDBはコストに基づいて、計算にMPPフレームワークを使用するかどうかを決定します。MPPモードでは、結合キーは計算中にExchange操作によって再分配され、計算負荷が各TiFlashノードに分散され、計算速度が向上します。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
 ### MSP顧客 {#msp-customer}
 
@@ -168,7 +168,7 @@ TiDB Cloud は、TiCDC Replication Capacity Unit (RCU) の[変更フィード](/
 
 TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエスト容量ユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティング リソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースライン パフォーマンスとスループット容量が決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
 
--   TiDB Cloud Essential は、ワークロードに基づいて RCU を自動的にプロビジョニングします。QPS が増加すると、 TiDB Cloud はプロビジョニングされた RCU を動的にスケールアップしてパフォーマンスを維持します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+-   TiDB Cloud Essential は、ワークロードに基づいて RCU を自動的にプロビジョニングします。QPS が増加すると、 TiDB Cloud はプロビジョニングされた RCU を動的にスケールアップしてパフォーマンスを維持します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
 -   TiDB Cloud Premium では、ワークロードの RCU の最大数 ( `RCU_max` ) を指定できます。 TiDB Cloudは、リアルタイムの需要に基づいて、 `0.25 * RCU_max`から`RCU_max`の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumでユニットと容量をリクエストする](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
 
 ### リクエストユニット（RU） {#request-unit-ru}
@@ -232,7 +232,7 @@ SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可�
 
 ### ベクトル検索 {#vector-search}
 
-[ベクトル検索](/ai/concepts/vector-search-overview.md)、データの意味を優先して関連性の高い結果を提供する検索方法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクトル検索は、テキスト、画像、音声などのさまざまなデータタイプを高次元ベクトルに変換し、これらのベクトル間の類似性に基づいてクエリを実行します。この検索方法は、データの意味と文脈情報を捉え、ユーザーの意図をより正確に理解することを可能にします。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクトル検索はデータの意味を分析することで、ユーザーの意図に沿った結果を提供できます。
+[ベクトル検索](/ai/concepts/vector-search-overview.md)は、データの意味を優先して関連性の高い結果を提供する検索方法です。キーワードの完全一致や単語の出現頻度に依存する従来の全文検索とは異なり、ベクトル検索は、テキスト、画像、音声などのさまざまなデータタイプを高次元ベクトルに変換し、これらのベクトル間の類似性に基づいてクエリを実行します。この検索方法は、データの意味と文脈情報を捉え、ユーザーの意図をより正確に理解することを可能にします。検索語がデータベース内のコンテンツと完全に一致しない場合でも、ベクトル検索はデータの意味を分析することで、ユーザーの意図に沿った結果を提供できます。
 
 ### 仮想プライベートクラウド {#virtual-private-cloud}
 

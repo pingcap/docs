@@ -74,7 +74,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 データ ソースを作成したら、次のコマンドを使用してデータ ソースをクエリできます。
 
--   データ ソースの`source-id`わかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータ ソースの構成を直接確認できます。
+-   データ ソースの`source-id`がわかっている場合は、 `dmctl config source <source-id>`コマンドを使用してデータ ソースの構成を直接確認できます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> config source mysql-01
@@ -93,7 +93,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
               password: '******'
         }
 
--   `source-id`わからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
+-   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
 
     ```bash
     tiup dmctl --master-addr <master-addr> operate-source show

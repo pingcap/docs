@@ -412,4 +412,4 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 ## トラブルシューティング {#troubleshooting}
 
-前の手順で問題が発生した場合は、まず[TiDBに関するよくある質問](/faq/faq-overview.md)で問題の解決策を見つけてください。問題が解決しない場合は、 [バグを報告する](/support.md)を実行してください。
+前の手順で問題が発生した場合は、まず[TiDBに関するよくある質問](/faq/faq-overview.md)で問題の解決策を見つけてください。問題が解決しない場合は、 [バグを報告](/support.md)をしてください。

@@ -21,7 +21,7 @@ TiDB バージョン: 7.4.0
 
 -   分散実行フレームワーク (DXF) のバックエンド`ADD INDEX`または`IMPORT INTO`タスクを並列実行するための TiDB ノードの選択をサポート (実験的) [＃46453](https://github.com/pingcap/tidb/pull/46453) @ [ywqzzy](https://github.com/ywqzzy)
 
-    リソースを大量に消費するクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、TiDBノードのリソースを大量に消費し、クラスターのパフォーマンス低下につながる可能性があります。v7.4.0以降では、システム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)以下の各TiDBノードのサービススコープを制御できます。既存のTiDBノードを複数選択するか、新しいTiDBノードにTiDBサービススコープを設定すると、すべての並列タスク`ADD INDEX`と`IMPORT INTO`これらのノードでのみ実行されます。このメカニズムにより、既存のサービスへのパフォーマンスへの影響を回避できます。
+    リソースを大量に消費するクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、TiDBノードのリソースを大量に消費し、クラスターのパフォーマンス低下につながる可能性があります。v7.4.0以降では、システム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)配下の各TiDBノードのサービススコープを制御できます。既存のTiDBノードを複数選択するか、新しいTiDBノードにTiDBサービススコープを設定すると、すべての並列タスク`ADD INDEX`と`IMPORT INTO`はこれらのノードでのみ実行されます。このメカニズムにより、既存のサービスへのパフォーマンスへの影響を回避できます。
 
     詳細については[ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)を参照してください。
 

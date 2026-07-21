@@ -17,7 +17,7 @@ CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネン
 tiup install bench
 ```
 
-TiUP Benchコンポーネントの詳細な使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)を参照してください。
+TiUP Benchコンポーネントの詳細な使用方法については、 [TiUP Bench](/tiup/tiup-bench.md)を参照してください。
 
 ## データを読み込む {#load-data}
 

@@ -481,7 +481,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8249
 
-    リソースグループが存在しません。このエラーは、存在しないリソースグループを変更またはバインドした場合に返されます。1 [リソースグループを作成する](/tidb-resource-control-ru-groups.md#create-a-resource-group)を参照してください。
+    リソースグループが存在しません。このエラーは、存在しないリソースグループを変更またはバインドした場合に返されます。[リソースグループを作成する](/tidb-resource-control-ru-groups.md#create-a-resource-group)を参照してください。
 
 -   エラー番号: 8250
 
@@ -505,11 +505,11 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8253
 
-    クエリはランナウェイクエリの条件を満たしているため停止します。1 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
+    クエリはランナウェイクエリの条件を満たしているため停止します。[ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 -   エラー番号: 8254
 
-    クエリは、ランナウェイクエリの隔離監視条件を満たしているため停止します。1 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
+    クエリは、ランナウェイクエリの隔離監視条件を満たしているため停止します。[ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 -   エラー番号: 8260
 

@@ -103,7 +103,7 @@ DM-worker のログを確認してください。1 `all data files have been fin
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。1を`source-id` `source-1`設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリームMySQLのソースを作成します。`source-id`を`source-1`に設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
 

@@ -333,7 +333,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
-現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。1 [システム変数](/system-variables.md)を使用してTiDB構成を変更できます。
+現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。[システム変数](/system-variables.md)を使用してTiDB構成を変更できます。
 
 次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`動的に変更する方法を示しています。
 

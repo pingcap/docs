@@ -83,7 +83,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
             > **Note:**
             >
-            > Windows または GitHub コードスペースで実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB Cloud Starterルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
+            > Windows または GitHub Codespacesで実行している場合は、 **SSL** を空白のままにすることができます。デフォルトでは、SQLTools は Let's Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB Cloud Starterルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Starter](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 

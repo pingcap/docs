@@ -9,7 +9,7 @@ TiDB Cloud [データサービス（PREVIEW）](https://tidbcloud.com/project/da
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
-詳細については[TiDB Cloudデータ サービス (PREVIEW) の概要](/tidb-cloud/data-service-overview.md)を参照してください。
+詳細については[TiDB Cloud Data Service (PREVIEW) の概要](/tidb-cloud/data-service-overview.md)を参照してください。
 
 ## データアプリ {#data-app}
 
