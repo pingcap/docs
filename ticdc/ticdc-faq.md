@@ -413,11 +413,13 @@ For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC 
 
 ## What is the order of executing DML and DDL statements?
 
-Currently, TiCDC adopts the following order:
+For most DDL statements, TiCDC adopts the following order:
 
 1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `commitTS`. This ensures that DML statements executed before DDL `commitTS` can be successfully replicated to the downstream first.
-2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
-3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `commitTS`.
+2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC usually replicates them in a serial manner.
+3. After the DDL statements are executed in the downstream, TiCDC continues with the replication of DML statements executed after DDL `commitTS`.
+
+When the downstream is TiDB, `ADD INDEX` and `CREATE INDEX` are exceptions to the preceding order. To minimize the impact on changefeed replication latency, TiCDC executes these two DDL types asynchronously and does not wait for them to finish in the downstream before returning. Therefore, these DDLs do not fully follow the preceding "wait for downstream execution to finish before continuing replication" order. For details about this special handling and later optimizations, see [Asynchronous execution of `ADD INDEX` and `CREATE INDEX` DDLs](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls).
 
 ## How should I check whether the upstream and downstream data is consistent?
 
