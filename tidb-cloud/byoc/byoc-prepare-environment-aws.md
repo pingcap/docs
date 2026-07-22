@@ -11,7 +11,7 @@ Before initiating the BYOC deployment, prepare the required infrastructure compo
 
 Unique identifier for your organization within TiDB Cloud.
 
-1. Log in to the [TiDB Cloud Console](https://tidbcloud.com/).
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/).
 
     If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up. You can sign up with an email and password to manage TiDB Cloud credentials, or use single sign-on (SSO) via Google, GitHub, or Microsoft accounts.
 

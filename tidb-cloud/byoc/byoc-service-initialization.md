@@ -9,7 +9,7 @@ After deploying your BYOC infrastructure, create your first {{{ .byoc }}} instan
 
 ## Create a BYOC instance
 
-You can now provision TiDB instances directly via the TiDB Cloud Console.
+You can now provision TiDB instances directly via the TiDB Cloud console.
 
 1. Initiate instance creation. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow the [BYOC instance creation workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance.
 
@@ -32,7 +32,7 @@ After preparing your backup file in Amazon S3, you can proceed to restore the da
 
 2. Execute the Restore Process.
 
-    Once the access keys are configured, you can initiate the restore job from the TiDB Cloud Console.
+    Once the access keys are configured, you can initiate the restore job from the TiDB Cloud console.
 
     For step-by-step restoration procedures, see [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
 
