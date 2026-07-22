@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage Limitations and Impact
-summary: Learn about the limitations, access throttling, tool compatibility, and query performance uncertainty of Tiered Storage on TiDB Cloud Essential.
+summary: Learn about limitations, throttling, compatibility, and query performance uncertainty of Tiered Storage on TiDB Cloud BYOC/Premium/Essential.
 ---
 
 # Tiered Storage Limitations and Impact
@@ -8,7 +8,7 @@ summary: Learn about the limitations, access throttling, tool compatibility, and
 > **Note:**
 >
 > - **Version:** Private Preview
-> - **Platform:** TiDB Cloud Essential
+> - **Platform:** TiDB Cloud BYOC/Premium/Essential
 > - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ---
@@ -84,7 +84,7 @@ If issues arise with IA tables, you and the TiDB Cloud team can use the followin
 | Method | Scenario | Priority | Description |
 |-|-|-|-|
 | IA → Standard switch-back | You find performance unacceptable | **Your primary choice** | System reloads data locally, bypassing the remote path |
-| **Flow Control (already available)** | Control traffic between IA tables and S3 | TiDB Cloud team's choice | Rate-limiting protects cluster stability; managed by the TiDB Cloud team |
+| **Flow Control (already available)** | Control traffic between IA tables and object storage | TiDB Cloud team's choice | Rate-limiting protects cluster stability; managed by the TiDB Cloud team |
 
 ---
 

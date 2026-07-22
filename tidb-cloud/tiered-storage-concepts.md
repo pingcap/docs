@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage Concepts
-summary: Learn about Tiered Storage on TiDB Cloud Essential, including its concepts, architecture, use scenarios, and read amplification behavior.
+summary: Learn about Tiered Storage on TiDB Cloud BYOC/Premium/Essential, including its concepts, architecture, use cases, and read amplification.
 ---
 
 # Tiered Storage Concepts
@@ -8,14 +8,14 @@ summary: Learn about Tiered Storage on TiDB Cloud Essential, including its conce
 > **Note:**
 >
 > - **Version:** Private Preview
-> - **Platform:** TiDB Cloud Essential
+> - **Platform:** TiDB Cloud BYOC/Premium/Essential
 > - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ---
 
 ## What is Tiered Storage
 
-Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud Essential, designed for infrequently accessed data. You can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
+Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud BYOC/Premium/Essential, designed for infrequently accessed data. You can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
 
 In summary, an IA table is still a regular table from the application layer — all query, transaction, backup, and recovery semantics remain unchanged. The difference lies in cost and performance: local disk usage drops significantly, but on a cold read (when the local cache is missing), data must be fetched from remote object storage, resulting in higher latency than Standard tables.
 
@@ -116,7 +116,7 @@ SSTable ──→ Segment ──→ Block ──→ KV Pair
 
 | Layer | Default Size | Role |
 |-|-|-|
-| **Segment** | 1 MiB | The **minimum unit** TiKV reads from object storage; avoids excessive small requests that could incur S3 API call costs and QPS throttling |
+| **Segment** | 1 MiB | The **minimum unit** TiKV reads from object storage; avoids excessive small requests that could incur API call costs and QPS throttling |
 | **Block** | 32 KiB | The basic unit for local file reading, compression, and **memory/disk caching** |
 
 This means a cache miss does not fetch just a single KV record — it loads an entire Segment to local storage. If subsequent queries hit data within the same segment, they benefit from hot-read performance. However, for one-time queries with no subsequent access, the read amplification penalty is relatively high.
@@ -128,8 +128,8 @@ This means a cache miss does not fetch just a single KV record — it loads an e
 ```Plaintext
 User queries 1 record (100 Bytes)
 → Block cache miss
-→ TiKV loads segments from 3 LSM levels from S3
-→ Approximately 3 MiB data fetched from S3 to local
+→ TiKV loads segments from 3 LSM levels from object storage
+→ Approximately 3 MiB data fetched from object storage to local
 → Read amplification: ~30,000×
 ```
 
@@ -171,10 +171,10 @@ TiDB schema takes effect → Schema Manager sync (30s) → TiKV broadcast
 
 ### IA → Standard
 
-Test reference: 2.09 TB of logical data (including indexes) took approximately 3 hours 10 minutes (~1.61k regions/hour per TiKV), S3 GET throughput was approximately 1.6 GiB/s. During conversion, Standard partition QPS dropped by about 3.78%, P99 increased by about 18.63%, and single TiKV CPU increased by about 0.5c.
+Test reference: 2.09 TB of logical data (including indexes) took approximately 3 hours 10 minutes (~1.61k regions/hour per TiKV), object storage GET throughput was approximately 1.6 GiB/s. During conversion, Standard partition QPS dropped by about 3.78%, P99 increased by about 18.63%, and single TiKV CPU increased by about 0.5c.
 
 ```Plaintext
-Same chain as above + full S3 data download to local
+Same chain as above + full object storage data download to local
 ```
 
 > These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.

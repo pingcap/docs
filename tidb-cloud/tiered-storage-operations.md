@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage Operations Guide
-summary: Learn how to configure and manage Tiered Storage on TiDB Cloud Essential, including DDL, partition selectors, observability, and best practices.
+summary: Learn how to configure and manage Tiered Storage on TiDB Cloud BYOC/Premium/Essential, including DDL, partition selectors, and best practices.
 ---
 
 # Tiered Storage Operations Guide
@@ -8,7 +8,7 @@ summary: Learn how to configure and manage Tiered Storage on TiDB Cloud Essentia
 > **Note:**
 >
 > - **Version:** Private Preview
-> - **Platform:** TiDB Cloud Essential
+> - **Platform:** TiDB Cloud BYOC/Premium/Essential
 > - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ---
@@ -296,7 +296,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 
 ### Switch-back considerations
 
-- IA → Standard conversion downloads all data from S3, generating significant cold storage bandwidth usage
+- IA → Standard conversion downloads all data from object storage, generating significant cold storage bandwidth usage
 - Monitor bandwidth usage to ensure smooth operation; if necessary, **contact the TiDB Cloud team in advance** for joint monitoring
 - Business SQL reads/writes are not affected during conversion, but performance (e.g., QPS/TPS) may have minor impact — test environment shows less than 5%
 
@@ -305,7 +305,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 Keep the storage class setting stable and avoid frequent switching between IA and Standard. Each switch triggers:
 
 - Region reload
-- S3 data download or metadata rebuild
+- Object storage data download or metadata rebuild
 - IA cache data flushing
 
 The cumulative cost of these operations is not negligible.

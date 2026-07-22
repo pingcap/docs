@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage FAQ
-summary: Learn about frequently asked questions about Tiered Storage on TiDB Cloud Essential, including DML support, replicas, and object storage outages.
+summary: Learn about common Tiered Storage questions on TiDB Cloud BYOC/Premium/Essential, including DML, replicas, and object storage outages.
 ---
 
 # Tiered Storage FAQ
@@ -10,20 +10,20 @@ summary: Learn about frequently asked questions about Tiered Storage on TiDB Clo
 > **Note:**
 >
 > - **Version:** Private Preview
-> - **Platform:** TiDB Cloud Essential
+> - **Platform:** TiDB Cloud BYOC/Premium/Essential
 > - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ## Can IA tables execute UPDATE / DELETE?
 
-Yes. An UPDATE operation first loads the corresponding data from S3 into the IA cache, performs the modification, and writes a new SST file — the same flow as a regular UPDATE. Performance is affected by cold reads.
+Yes. An UPDATE operation first loads the corresponding data from object storage into the IA cache, performs the modification, and writes a new SST file — the same flow as a regular UPDATE. Performance is affected by cold reads.
 
 ## Can TiFlash replicas of IA tables be set to IA?
 
 No. TiFlash does not follow the IA attribute of the source table.
 
-## What happens to IA tables when the object store (S3) experiences an outage?
+## What happens to IA tables when the object storage experiences an outage?
 
-IA tables will be affected and become unavailable — since all data resides remotely, read requests must fetch from S3. Additionally, if S3 bandwidth is saturated, IA read/write performance will also be impacted.
+IA tables will be affected and become unavailable — since all data resides remotely, read requests must fetch from object storage. Additionally, if object storage bandwidth is saturated, IA read/write performance will also be impacted.
 
 ## Can the system tell me which data is cold before I set IA?
 
@@ -38,8 +38,8 @@ TiKV's Raft three-replica mechanism is identical between the IA and Standard lay
 - **Standard layer**: Three replicas are each stored on the local disks of three TiKV nodes
 - **IA layer**: Three replicas are each uploaded to object storage independently in IA format
 
-Each replica on each TiKV node runs its own independent LSM-Tree, performing independent flush and compaction operations. When a table switches to IA storage class, all subsequently generated SST files are written to S3 in IA type. The three replicas produce their own independent SST files — three separate objects in S3, not shared.
+Each replica on each TiKV node runs its own independent LSM-Tree, performing independent flush and compaction operations. When a table switches to IA storage class, all subsequently generated SST files are written to object storage in IA type. The three replicas produce their own independent SST files — three separate objects in object storage, not shared.
 
 IA is a **storage format/location optimization**, not a **replica reduction mechanism**. It changes "how each node stores its own copy," not "how many copies exist." The Raft write and replication flow is identical to the Standard layer.
 
-**Cost impact**: Since all three replicas upload independently, the total storage on S3 remains approximately 3× the data volume. However, the unit storage cost of STANDARD_IA is lower, so the overall storage expense is reduced.
+**Cost impact**: Since all three replicas upload independently, the total storage in object storage remains approximately 3× the data volume. However, the unit storage cost of the object storage infrequent-access tier is lower, so the overall storage expense is reduced.
