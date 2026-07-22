@@ -84,7 +84,7 @@ mysql> SELECT * FROM t;
 
 上記の使用法はMySQLの`AUTO_INCREMENT`と同じです。ただし、暗黙的に割り当てられる具体的な値に関しては、TiDBはMySQLとは大きく異なります。
 
-## 実施原則 {#implementation-principles}
+## 実装原理 {#implementation-principles}
 
 TiDB は`AUTO_INCREMENT`暗黙的な割り当てを次のように実装します。
 

@@ -11,7 +11,7 @@ DMが増分レプリケーションを実行する際、まず上流のbinlogを
 
 特別な状況に対処したり、テーブル スキーマの不一致によって発生する移行の中断を処理したりするために、DM は内部テーブル スキーマを取得、変更、および削除する`binlog-schema`コマンドを提供します。
 
-## 実施原則 {#implementation-principles}
+## 実装原理 {#implementation-principles}
 
 内部テーブル スキーマは次のソースから取得されます。
 
@@ -44,7 +44,7 @@ DMが増分レプリケーションを実行する際、まず上流のbinlogを
 >
 > `binlog-schema`コマンドは DM v6.0 以降のバージョンでのみサポートされます。それ以前のバージョンでは、 `operate-schema`コマンドを使用する必要があります。
 
-## 指示 {#command}
+## コマンド {#command}
 
 ```bash
 help binlog-schema
