@@ -99,7 +99,6 @@ OOM 問題のさまざまな原因に応じて、SQL ステートメントのメ
 
 -   同時実行数の増加によるメモリ問題を回避するには、同時に読み取る領域の数を減らすか、演算子の同時実行数を減らしてください。対応するシステム変数は次のとおりです。
     -   [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
-    -   [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)
     -   [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)
 
 -   問題発生時点付近では、セッションの同時実行性が高すぎます。この場合は、TiDBノードを追加してTiDBクラスターをスケールアウトすることを検討してください。
