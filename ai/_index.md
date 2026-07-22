@@ -20,7 +20,7 @@ Get up and running quickly with TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [tdc Overview](/ai/tdc/tdc-overview.md) | Understand what tdc manages and how it uses its bundled Filesystem companion. |
+| [tdc Overview](/ai/tdc/tdc-overview.md) | Learn when to use tdc, how it differs from the legacy ticloud CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
 | [Get Started with tdc](/ai/tdc/tdc-quick-start.md) | Install and configure tdc, then complete a first database or Filesystem operation. |
 
 ## Concepts
@@ -49,15 +49,18 @@ Step-by-step guides for building AI applications with TiDB using the [`pytidb`](
 
 ### TiDB Cloud CLI (tdc) (Preview)
 
+Use these guides to complete a focused task or manage one tdc feature area.
+
 | Document | Description |
 | --- | --- |
 | [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md) | Install release binaries, configure profiles, update, and uninstall tdc. |
-| [Organization](/ai/tdc/guides/tdc-organization.md) | List projects and understand virtual-project selection. |
+| [Manage Projects in TiDB Cloud Organizations with tdc](/ai/tdc/guides/tdc-organization.md) | List projects and understand virtual-project selection. |
 | [Starter Database](/ai/tdc/guides/tdc-starter-database.md) | Manage clusters, branches, SQL users, connection strings, and SQL execution. |
 | [Filesystem](/ai/tdc/guides/tdc-filesystem.md) | Manage resources, data, layers, packs, and FUSE or WebDAV mounts. |
 | [Filesystem Git](/ai/tdc/guides/tdc-filesystem-git.md) | Clone, hydrate, and manage linked Git worktrees. |
 | [Filesystem Journal](/ai/tdc/guides/tdc-filesystem-journal.md) | Record, search, and verify append-only workflow events. |
 | [Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md) | Store secrets, delegate access, audit, inject, and mount a read-only vault. |
+| [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
 
 ## Examples
 
@@ -74,12 +77,21 @@ Complete code examples and demos showcasing TiDB's AI capabilities.
 
 ### TiDB Cloud CLI (tdc) (Preview)
 
+These examples combine multiple commands into end-to-end scenarios. Choose a workflow based on who runs it.
+
+#### For users and automation
+
 | Document | Description |
 | --- | --- |
-| [Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
 | [Daily Workflow](/ai/tdc/examples/tdc-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
 | [Query SQL with Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
 | [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
+
+#### For AI agents
+
+| Document | Description |
+| --- | --- |
+| [Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
 | [Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md) | Prepare a mounted Git workspace and isolated linked worktree. |
 | [Journal an Agent Workflow](/ai/tdc/examples/tdc-journal-agent-workflow-example.md) | Record structured events and verify their hash chain. |
 | [Delegate Vault Secrets](/ai/tdc/examples/tdc-vault-agent-secrets-example.md) | Grant an agent temporary access to one secret field. |
@@ -115,4 +127,3 @@ Technical reference documentation for TiDB's AI and vector search features.
 | [CLI Reference](/ai/tdc/reference/tdc-cli-reference.md) | Global flags, output, queries, dry-run, help, errors, and aliases. |
 | [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
 | [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and Preview constraints. |
-| [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |

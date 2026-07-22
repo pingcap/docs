@@ -11,6 +11,10 @@ This quick start installs tdc, configures one profile, and gets a successful res
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
 
+## When to use this quick start
+
+Use this quick start when you want to automate a new Starter database or create a persistent workspace for a user, script, or AI agent. It follows the new tdc workflow. If you manage TiDB Cloud Essential or need a legacy operation that tdc does not yet provide, use the [`ticloud` CLI documentation](/tidb-cloud/get-started-with-cli.md) during the transition.
+
 ## Prerequisites
 
 Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page.

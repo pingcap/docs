@@ -52,14 +52,16 @@ The hosted manifest is authoritative and can change during Preview. A profile in
 
 TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generated SQL username/password Basic authentication over TLS. These credentials are not interchangeable.
 
-## Security guidance
+## Security best practices
 
-- Prefer environment variables or protected credential files for secrets.
-- Use explicit read-only, read-write, or admin roles for SQL.
-- Give agents delegated vault grants instead of FS owner tokens when only secret access is required.
-- Use `--dry-run` before destructive control-plane operations.
-- Keep `~/.tdc/credentials`, resource credentials, and DB SQL credentials owner-readable only.
-- Review local operation logs before sharing diagnostics even though tdc redacts known secret classes.
+- Create TiDB Cloud API keys with only the organization and project access required for the workflow. Do not reuse a personal administrator key in unattended automation.
+- Inject automation credentials from a CI secret store or runtime secret manager. Do not place credentials in source control, container images, shell scripts, or command-line arguments that can appear in process listings and shell history.
+- Do not copy the complete `~/.tdc/` directory into an agent sandbox. For an existing Filesystem, pass only `TDC_FS_TOKEN`, `TDC_REGION_CODE`, and `TDC_FS_FILE_SYSTEM_NAME`.
+- Treat an FS owner token as full access to that Filesystem. When an agent needs only selected secrets, create a vault grant with the narrowest field scope and shortest practical TTL, and pass the delegated vault token instead.
+- Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
+- Use `--dry-run` before destructive control-plane operations. Keep `~/.tdc/credentials`, resource credentials, and DB SQL credentials owner-readable only.
+- Grant Docker access to `/dev/fuse`, `SYS_ADMIN`, and an unconfined AppArmor profile only to dedicated, trusted containers. These settings reduce container isolation.
+- Review local operation logs before sharing diagnostics. tdc redacts known secret classes, but SQL text, resource names, paths, and operational context can still be sensitive.
 
 ## Mount platform limitations
 

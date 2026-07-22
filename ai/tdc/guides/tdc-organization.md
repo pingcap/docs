@@ -1,9 +1,9 @@
 ---
-title: Manage TiDB Cloud Organizations with tdc
+title: Manage Projects in TiDB Cloud Organizations with tdc
 summary: List accessible TiDB Cloud projects and understand regular and virtual project types used by tdc.
 ---
 
-# Manage TiDB Cloud Organizations with tdc
+# Manage Projects in TiDB Cloud Organizations with tdc
 
 Use `tdc organization` to inspect the projects accessible to the configured TiDB Cloud API key.
 

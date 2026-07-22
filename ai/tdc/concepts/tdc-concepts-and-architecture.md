@@ -25,6 +25,14 @@ The command tree is at most two levels. Long, descriptive command and flag names
 
 Structured commands return JSON by default. Use `--output text` for a terminal-oriented representation and `--query` for a JMESPath projection.
 
+## Product boundaries
+
+tdc is the new CLI for TiDB Cloud Starter and TiDB Cloud Filesystem. It is intended for users, scripts, CI jobs, and AI agents that need predictable non-interactive commands and structured output.
+
+The legacy `ticloud` CLI manages TiDB Cloud Starter and Essential. During the transition to tdc, continue to use `ticloud` for Essential and for operations that tdc does not yet expose, including import, export, and audit-log commands. The `ticloud` CLI will be gradually retired as supported workflows move to tdc.
+
+The TiDB Cloud console remains the browser-based interface for visual inspection and guided manual operations. Choosing tdc does not prevent you from using the console against the same cloud resources.
+
 ## Profiles and regions
 
 A profile is a named local namespace containing TiDB Cloud placement, a default virtual project, and credentials. The default profile is named `default`; select another with `--profile`.
