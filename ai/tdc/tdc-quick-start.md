@@ -13,7 +13,7 @@ This quick start installs tdc, configures one profile, and gets a successful res
 
 ## When to use this quick start
 
-Use this quick start when you want to automate a new Starter database or create a persistent workspace for a user, script, or AI agent. It follows the new tdc workflow. If you manage TiDB Cloud Essential or need a legacy operation that tdc does not yet provide, use the [`ticloud` CLI documentation](/tidb-cloud/get-started-with-cli.md) during the transition.
+Use this quick start when you want to automate a new Starter database or create a persistent workspace for a user, script, or AI agent. It follows the tdc workflow. If you manage TiDB Cloud Essential or need an operation that tdc does not provide, use the [`ticloud` CLI documentation](/tidb-cloud/get-started-with-cli.md).
 
 ## Prerequisites
 

@@ -22,19 +22,19 @@ Use tdc when a workflow needs to manage TiDB Cloud from a terminal, script, CI j
 - **Start large Git workspaces sooner.** Expose a repository file tree while clean Git data continues hydrating in the background.
 - **Record and delegate agent work.** Store append-only workflow events in journals and grant temporary, scoped access to selected vault fields.
 
-For a visual, interactive workflow, use the TiDB Cloud console instead. For TiDB Cloud Essential or legacy CLI operations that tdc does not yet provide, continue to use `ticloud` during the transition.
+For a visual, interactive workflow, use the TiDB Cloud console instead. For TiDB Cloud Essential or CLI operations that tdc does not provide, use `ticloud`.
 
 ## tdc, ticloud, and the TiDB Cloud console
 
-TiDB Cloud currently has two command-line interfaces. `tdc` is the new CLI and `ticloud` is the legacy CLI that is being gradually replaced.
+TiDB Cloud currently has two command-line interfaces with different product scopes. `tdc` is the new CLI for Starter and TiDB Cloud Filesystem. `ticloud` remains the CLI for Essential and also supports existing Starter workflows.
 
 | Interface | Use it for | Interaction model |
 | --- | --- | --- |
 | `tdc` (Preview) | New TiDB Cloud Starter automation and TiDB Cloud Filesystem workflows | Predictable commands, JSON output by default, and non-interactive operation except for `tdc configure` |
-| `ticloud` (legacy) | TiDB Cloud Essential and operations not yet available in tdc, such as import, export, and audit-log commands | Traditional CLI workflows with interactive and non-interactive modes |
+| `ticloud` | TiDB Cloud Essential and operations not available in tdc, such as import, export, and audit-log commands | Traditional CLI workflows with interactive and non-interactive modes |
 | TiDB Cloud console | Visual resource inspection, guided setup, and manual operations | Browser-based and interactive |
 
-New Starter and Filesystem automation should use tdc. During the transition, keep `ticloud` for Essential and any command that has no tdc equivalent. The legacy `ticloud` CLI will be gradually retired as its supported workflows move to tdc.
+New Starter and Filesystem automation should use tdc. Use `ticloud` for Essential and any command that has no tdc equivalent. tdc replaces `ticloud` only for the Starter workflows that tdc supports; it does not replace `ticloud` for Essential.
 
 ## What tdc manages
 
