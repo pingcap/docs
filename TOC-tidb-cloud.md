@@ -16,7 +16,6 @@
 - Key Concepts
   - [Overview](/tidb-cloud/key-concepts.md)
   - [Architecture](/tidb-cloud/architecture-concepts.md)
-  - [Tiered Storage](/tidb-cloud/tieredstorage_concepts.md)
   - [Database Schema](/tidb-cloud/database-schema-concepts.md)
   - [Transactions](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
@@ -75,11 +74,6 @@
       - [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md)
       - [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
-  - Tiered Storage
-    - [Concept](/tidb-cloud/tieredstorage_concepts.md)
-    - [Management](/tidb-cloud/tieredstorage_operations.md)
-    - [Limitation](tidb-cloud/tieredstorage_limitations.md)
-    - [FAQ](tidb-cloud/tieredstorage_faq)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance

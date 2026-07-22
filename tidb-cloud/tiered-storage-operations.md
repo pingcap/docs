@@ -1,17 +1,23 @@
+---
+title: Tiered Storage Operations Guide
+summary: Learn how to configure and manage Tiered Storage on TiDB Cloud Essential, including DDL, partition selectors, observability, and best practices.
+---
+
 # Tiered Storage Operations Guide
 
-> **Version**: Private Preview
-> **Platform**: TiDB Cloud Essential
-> **Document Nature**: **This document reflects the current system state only. Some behaviors may change when the feature reaches GA.**
-> **Updated**: 2026-07-22
+> **Note:**
+>
+> - **Version:** Private Preview
+> - **Platform:** TiDB Cloud Essential
+> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ---
 
-## 1 How to Use
+## How to use
 
-### 1.1 Storage Class Support Matrix
+### Storage class support matrix
 
-#### Storage Class Values
+#### Storage class values
 
 | Value | Meaning | Default |
 |-|-|-|
@@ -20,7 +26,7 @@
 
 Values are case-insensitive.
 
-#### Supported Table Types
+#### Supported table types
 
 | Table Type | IA Support | Notes |
 |-|-|-|
@@ -32,7 +38,7 @@ Values are case-insensitive.
 | Hash partitioned table | **Not supported** | — |
 | Key partitioned table | **Not supported** | — |
 
-#### Storage Type Inheritance Rules for Indexes and Related Objects
+#### Storage type inheritance rules for indexes and related objects
 
 | Object | Inheritance Rule |
 |-|-|
@@ -41,9 +47,9 @@ Values are case-insensitive.
 | Partitioned table Global Index | Same as the table-level setting |
 | TiFlash | **Does not follow table storage settings** |
 
-### 1.2 Regular Table DDL
+### Regular table DDL
 
-#### Specifying at Create Time
+#### Specifying at create time
 
 Syntactic sugar (recommended):
 
@@ -65,7 +71,7 @@ CREATE TABLE t_ia (
 
 > **Conflict constraint**: `STORAGE_CLASS` syntactic sugar and `ENGINE_ATTRIBUTE`'s `storage_class` **cannot be specified together** — the system will reject with an error.
 
-#### Modifying an Existing Table
+#### Modifying an existing table
 
 ```SQL
 -- Standard → IA
@@ -79,7 +85,7 @@ ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"STANDARD"}';
 
 ALTER operations preserve all data access, and SQL reads/writes are not affected during the conversion.
 
-### 1.3 Partitioned Table DDL
+### Partitioned table DDL
 
 Partitioned tables **do not support** the `STORAGE_CLASS` syntactic sugar and must use `ENGINE_ATTRIBUTE`.
 
@@ -92,7 +98,7 @@ Partition attributes support three selector types (cannot be mixed) plus a table
 | By range | `"less_than":"2024-01-01"` | RANGE / RANGE COLUMNS | Match partitions by boundary value |
 | By list value | `"values_in":["1","2"]` | LIST / LIST COLUMNS | Match partitions by list value |
 
-#### Example A: Table-level IA with Specific Partitions Overridden to Standard
+#### Example A: table-level IA with specific partitions overridden to Standard
 
 ```SQL
 CREATE TABLE orders (
@@ -115,7 +121,7 @@ PARTITION BY RANGE (YEAR(created_at)) (
 
 Result: p2023 / p2024 → IA, p2025 / p_future → Standard.
 
-#### Example B: Range Selector
+#### Example B: range selector
 
 ```SQL
 CREATE TABLE users (
@@ -136,7 +142,7 @@ PARTITION BY RANGE (user_id) (
 
 Result: p0 / p1 → IA, p2 / p3 → Standard.
 
-#### Example C: List Value Selector
+#### Example C: list value selector
 
 ```SQL
 CREATE TABLE order_status_log (
@@ -158,13 +164,13 @@ PARTITION BY LIST (status) (
 
 Result: p_pending / p_paid → IA, p_shipped / p_completed → Standard.
 
-#### Partition Selector Rules
+#### Partition selector rules
 
 - **Priority**: Partition-level configuration **overrides** table-level configuration
 - **Mutual exclusion**: Multiple matching methods (e.g., `"names_in"` and `"less_than"`) cannot be used together in the same selector — this will raise an error
 - **Forward compatibility**: New partitions added later (`ADD PARTITION` / `REORGANIZE PARTITION`) are automatically evaluated against the persistent storage class rules; matching partitions inherit the configuration
 
-### 1.4 Viewing and Monitoring
+### Viewing and monitoring
 
 ```SQL
 -- View DDL definition
@@ -183,14 +189,14 @@ WHERE TABLE_SCHEMA = 'your_database'
   AND TABLE_NAME = 'your_table';
 ```
 
-#### Monitoring IA Storage Space
+#### Monitoring IA storage space
 
 View in Cloud Console:
 
 - **Path**: Cloud Console → Monitoring → Metrics → Instance Overview (or Overview → Core Metrics)
 - **New metrics**:
-  - `Row-based IA Storage` — Total IA table space
-  - `Row-based Standard Storage` — Total Standard table space
+    - `Row-based IA Storage` — Total IA table space
+    - `Row-based Standard Storage` — Total Standard table space
 - **Relationship**: `Row-based Storage` = `Row-based IA Storage` + `Row-based Standard Storage`
 
 The single-table space query method remains unchanged:
@@ -210,9 +216,9 @@ ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
 
 ---
 
-## 2 Observability
+## Observability
 
-### 2.1 EXPLAIN ANALYZE
+### EXPLAIN ANALYZE
 
 When a query involves remote data loading, the `scan_detail` includes new fields:
 
@@ -228,7 +234,7 @@ EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
 >
 > Additionally, ia_remote_read_segment_wait_time is the aggregate time of all remote requests. Due to TiKV's underlying parallel reading mechanism, this value may exceed the SQL's actual execution time.
 
-### 2.2 Statement Summary
+### Statement summary
 
 `STATEMENTS_SUMMARY_HISTORY` and `CLUSTER_STATEMENTS_SUMMARY_HISTORY` have 6 new columns:
 
@@ -241,7 +247,7 @@ EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
 | `AVG_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Average remote wait time |
 | `MAX_IA_REMOTE_READ_SEGMENT_WAIT_TIME` | Maximum remote wait time |
 
-### 2.3 Slow Queries
+### Slow queries
 
 `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` has 3 new columns:
 
@@ -253,9 +259,9 @@ Corresponding panels are also visible in the Cloud Console slow query details.
 
 ---
 
-## 3 Best Practices
+## Best practices
 
-### 3.1 Tiering Strategy: Prefer Partition-Level IA
+### Tiering strategy: prefer partition-level IA
 
 For partitioned tables, **always prefer partition-level IA** over table-level IA. This gives you precise control over cold/hot boundaries:
 
@@ -263,7 +269,7 @@ For partitioned tables, **always prefer partition-level IA** over table-level IA
 - Recent hot partitions (e.g., `p2025`) → Standard
 - Future partitions (e.g., `p_future`) → Standard
 
-### 3.2 Rollout Strategy: Start with the Smallest Oldest Partition
+### Rollout strategy: start with the smallest oldest partition
 
 ```Plaintext
 Step 1: Select the oldest and smallest partition → ALTER PARTITION → IA
@@ -275,26 +281,26 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 
 **Do not batch-set all partitions to IA at once.**
 
-### 3.3 Write Optimization
+### Write optimization
 
 - When importing concurrently into IA partitions, having each thread target a different IA partition reduces lock contention and improves throughput. Test environment measurements: random writes to IA partitions averaged 50k rows/sec; fixed single-thread writes to the same IA partition averaged 70k rows/sec (~40% improvement).
 - Newly imported data only transitions to IA mode after flush/compaction. Large-range queries immediately after import may encounter cold cache.
 
-> These figures are from test environments and do not represent real-world production scenarios. Customers should obtain accurate data based on their own business testing.
+> These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
 
-### 3.4 Query Optimization
+### Query optimization
 
 - Queries spanning IA partitions are recommended to cover **no more than 3 partitions**; exceeding this may cause significant response time degradation
 - Avoid running many `SELECT *` full table scans on IA tables simultaneously
 - Monitor IA remote read volume via `EXPLAIN ANALYZE` and slow queries, and adjust accordingly
 
-### 3.5 Switch-Back Considerations
+### Switch-back considerations
 
 - IA → Standard conversion downloads all data from S3, generating significant cold storage bandwidth usage
 - Monitor bandwidth usage to ensure smooth operation; if necessary, **contact the TiDB Cloud team in advance** for joint monitoring
 - Business SQL reads/writes are not affected during conversion, but performance (e.g., QPS/TPS) may have minor impact — test environment shows less than 5%
 
-### 3.6 Configuration Stability
+### Configuration stability
 
 Keep the storage class setting stable and avoid frequent switching between IA and Standard. Each switch triggers:
 

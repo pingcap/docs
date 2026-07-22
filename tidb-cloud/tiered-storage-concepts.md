@@ -1,31 +1,37 @@
+---
+title: Tiered Storage Concepts
+summary: Learn about Tiered Storage on TiDB Cloud Essential, including its concepts, architecture, use scenarios, and read amplification behavior.
+---
+
 # Tiered Storage Concepts
 
-> **Version**: Private Preview
-> **Platform**: TiDB Cloud Essential
-> **Document Nature**: **This document reflects the current system state only. Some behaviors may change when the feature reaches GA.**
-> **Updated**: 2026-07-22
+> **Note:**
+>
+> - **Version:** Private Preview
+> - **Platform:** TiDB Cloud Essential
+> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
 
 ---
 
-## 1 What is Tiered Storage
+## What is Tiered Storage
 
-Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud Essential, designed for infrequently accessed data. Users can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
+Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud Essential, designed for infrequently accessed data. You can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
 
-**In a nutshell**: An IA table is still a regular table from the application layer — all query, transaction, backup, and recovery semantics remain unchanged. The difference lies in cost and performance: local disk usage drops significantly, but on a cold read (when the local cache is missing), data must be fetched from remote object storage, resulting in higher latency than Standard tables.
+In summary, an IA table is still a regular table from the application layer — all query, transaction, backup, and recovery semantics remain unchanged. The difference lies in cost and performance: local disk usage drops significantly, but on a cold read (when the local cache is missing), data must be fetched from remote object storage, resulting in higher latency than Standard tables.
 
 Key features:
 
 - **Semantic transparency**: All SQL operations — SELECT, INSERT, UPDATE, DELETE — behave identically
-- **Cost optimization**: Data is fully stored in low-cost object storage, with only cached hot data locally; expected storage cost reduction of approximately 50%
+- **Cost optimization**: Data is fully stored in low-cost object storage, with only hot data cached locally, which is expected to reduce storage costs by approximately 50% in typical scenarios
 - **Fine-grained control**: Supports both table-level and partition-level granularity; partition-level settings override table-level configuration
 - **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
 - **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup & restore, TiCDC, etc.
 
 ---
 
-## 2 Usage Scenario Decisions
+## Usage scenario decisions
 
-### 2.1 Recommended Scenarios
+### Recommended scenarios
 
 | Business Scenario | Data Characteristics | Recommended Cold/Hot Boundary |
 |-|-|-|
@@ -42,7 +48,7 @@ Key features:
 
 **General rule of thumb**: Large data volume + decreasing access frequency over time + occasional queries with no strict response time requirement → suitable for IA.
 
-### 2.2 Not Recommended Scenarios
+### Not recommended scenarios
 
 - **Hot OLTP tables** with strict latency sensitivity (core online transaction tables sensitive to every millisecond)
 - Datasets requiring **frequent large-range scans** (AP queries that continuously access large amounts of cold data)
@@ -50,7 +56,7 @@ Key features:
 - Data with **highly scattered** access patterns and almost no locality
 - Scenarios where the access pattern does not follow a "decreasing over time" trend
 
-### 2.3 Decision Checklist
+### Decision checklist
 
 Before setting IA, verify each item:
 
@@ -60,7 +66,7 @@ Before setting IA, verify each item:
 - [ ] Cold data access frequency is very low, e.g., query QPS does not exceed 10 concurrent (to avoid saturating object storage bandwidth)
 - [ ] No need for frequent large-range AP scans on IA tables
 - [ ] Cold read latency is acceptable (a single SQL execution may involve multiple TiKV remote requests; each remote request adds about 500ms~2s), meaning a single-row index lookup on cold data adds approximately +500ms~2s
-- [ ] Awareness that cold reads have read amplification: a single 100KB record can exhibit up to 30,000× amplification (3 MiB cold data)
+- [ ] Awareness that cold reads have read amplification: a single 100-byte record can exhibit up to 30,000× amplification (approximately 3 MiB of cold data)
 - [ ] Single query involves no more than 100 MiB of cold data
 - [ ] Single query accesses no more than 100 rows of cold data
 - [ ] An observation period has been planned (at least one full business day for the first partition)
@@ -68,9 +74,9 @@ Before setting IA, verify each item:
 
 ---
 
-## 3 Implementation Principles
+## Implementation principles
 
-### 3.1 Architecture Overview
+### Architecture overview
 
 Tiered Storage implementation spans the TiDB → TiKV → Object Store three-layer architecture:
 
@@ -99,23 +105,23 @@ Tiered Storage implementation spans the TiDB → TiKV → Object Store three-lay
 
 **Raft ChangeSet ensures consistency**: Storage class changes are replicated to all replicas via Raft ChangeSet. This ensures that every related shard maintains a consistent storage class state across restarts, recovery, splits, and merges, preventing data loss or corruption due to region topology changes.
 
-### 3.2 Data Storage Hierarchy
+### Data storage hierarchy
 
 The internal hierarchy of an SSTable from top to bottom:
 
 ```Plaintext
 SSTable ──→ Segment ──→ Block ──→ KV Pair
-(file)      (1MB)       (32KB)      (single record)
+(file)      (1 MiB)     (32 KiB)    (single record)
 ```
 
 | Layer | Default Size | Role |
 |-|-|-|
-| **Segment** | 1 MB | The **minimum unit** TiKV reads from object storage; avoids excessive small requests that could incur S3 API call costs and QPS throttling |
-| **Block** | 32 KB | The basic unit for local file reading, compression, and **memory/disk caching** |
+| **Segment** | 1 MiB | The **minimum unit** TiKV reads from object storage; avoids excessive small requests that could incur S3 API call costs and QPS throttling |
+| **Block** | 32 KiB | The basic unit for local file reading, compression, and **memory/disk caching** |
 
 This means a cache miss does not fetch just a single KV record — it loads an entire Segment to local storage. If subsequent queries hit data within the same segment, they benefit from hot-read performance. However, for one-time queries with no subsequent access, the read amplification penalty is relatively high.
 
-### 3.3 Read Amplification Analysis
+### Read amplification analysis
 
 **Read amplification path on a cache miss**:
 
@@ -123,7 +129,7 @@ This means a cache miss does not fetch just a single KV record — it loads an e
 User queries 1 record (100 Bytes)
 → Block cache miss
 → TiKV loads segments from 3 LSM levels from S3
-→ Approximately 3 MB data fetched from S3 to local
+→ Approximately 3 MiB data fetched from S3 to local
 → Read amplification: ~30,000×
 ```
 
@@ -134,7 +140,7 @@ This amplification manifests differently in two scenarios:
 
 Therefore, Tiered Storage is best suited for **small, concentrated query patterns** rather than frequent large-range scans.
 
-### 3.4 LSM-Tree Write Path
+### LSM-Tree write path
 
 The write path remains the same as Standard tables:
 
@@ -152,9 +158,9 @@ INSERT/UPDATE/DELETE
 
 ---
 
-## 4 Conversion Efficiency
+## Conversion efficiency
 
-### 4.1 Standard → IA
+### Standard → IA
 
 Test reference: Approximately 1 TB of logical data (including indexes) completed conversion within 5 minutes, with negligible impact on QPS and latency during the process. Single TiKV CPU increased by about 0.5c and recovered within approximately 5 minutes.
 
@@ -163,7 +169,7 @@ TiDB schema takes effect → Schema Manager sync (30s) → TiKV broadcast
 → Region alignment / Split → ChangeSet updates Shard → Reload files
 ```
 
-### 4.2 IA → Standard
+### IA → Standard
 
 Test reference: 2.09 TB of logical data (including indexes) took approximately 3 hours 10 minutes (~1.61k regions/hour per TiKV), S3 GET throughput was approximately 1.6 GiB/s. During conversion, Standard partition QPS dropped by about 3.78%, P99 increased by about 18.63%, and single TiKV CPU increased by about 0.5c.
 
@@ -171,4 +177,4 @@ Test reference: 2.09 TB of logical data (including indexes) took approximately 3
 Same chain as above + full S3 data download to local
 ```
 
-> These figures are from test environments and do not represent real-world production scenarios. Customers should obtain accurate data based on their own business testing.
+> These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
