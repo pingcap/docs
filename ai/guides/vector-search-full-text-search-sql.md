@@ -76,17 +76,17 @@ The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
 ### Manage full-text indexes
 
-When creating a full-text index, the index name is optional. If not specified, TiDB automatically uses the first column name of the index as the index name.
+When creating a full-text index, specifying an index name is optional. If you do not specify one, TiDB uses the name of the first indexed column as the index name by default.
 
 ```sql
--- Without specifying an index name, TiDB automatically generates the name "title"
+-- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
 ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
 
 -- Specifying an index name
 ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
 ```
 
-**Viewing existing index names:**
+**View existing index names:**
 
 ```sql
 -- The Key_name column shows the index name
@@ -98,7 +98,7 @@ FROM INFORMATION_SCHEMA.STATISTICS
 WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
 ```
 
-**Dropping a full-text index:**
+**Drop a full-text index:**
 
 ```sql
 -- Use SHOW INDEX to confirm the index name first
@@ -107,7 +107,7 @@ ALTER TABLE stock_items DROP INDEX title;
 
 #### Specify an index name
 
-In both `CREATE TABLE` and `ALTER TABLE` syntax, you can specify a name for the index after `FULLTEXT INDEX` or `FULLTEXT KEY`:
+In both `CREATE TABLE` and `ALTER TABLE` statements, you can specify an index name after `FULLTEXT INDEX` or `FULLTEXT KEY`:
 
 ```sql
 -- Specifying a name in CREATE TABLE
@@ -204,9 +204,9 @@ SELECT COUNT(*) FROM stock_items
 
 #### Multi-word search: tokenization and query semantics
 
-When using `fts_match_word()`, the query string is split into individual tokens according to the parser's rules, and each token is matched independently.
+When you use `fts_match_word()`, the query string is tokenized according to the parser's rules, and each token is matched independently.
 
-For the STANDARD parser, strings are split into words by spaces and punctuation. For the MULTILINGUAL parser, strings are split according to each language's segmentation rules.
+The STANDARD parser tokenizes strings into words using spaces and punctuation as delimiters. The MULTILINGUAL parser tokenizes strings according to language-specific segmentation rules.
 
 ```sql
 -- This query is tokenized into two tokens: "Alice" and "Smith"
@@ -221,9 +221,11 @@ SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
 SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
 ```
 
-A common misconception is that `fts_match_word('Alice X', name)` treats `"Alice X"` as a single entity for exact matching. In reality, it is tokenized into `Alice` and `X`, using OR semantics. Since `X` is a very short term, it can match many irrelevant documents. Avoid using very short query terms or single letters.
+A common misconception is that `fts_match_word('Alice X', name)` treats `"Alice X"` as a single entity for exact matching. In reality, it is tokenized into `Alice` and `X`, using OR semantics. Because `X` is a very short query term, it can match many irrelevant documents. Avoid using very short query terms or single letters.
 
-> **Note:** TiDB full-text search does not support exact phrase matching (matching all tokens consecutively in order).
+> **Note:**
+>
+> TiDB full-text search does not support exact phrase matching, where all query tokens must appear consecutively and in the specified order.
 
 #### Prefix search
 
@@ -242,7 +244,7 @@ In this example, a document matching `Alice` receives twice the weight contribut
 
 #### Relevance scoring algorithm
 
-TiDB full-text search uses the **BM25Tanvity** algorithm for computing relevance scores. It is a variant of the classic BM25 (Okapi BM25) that uses Count-Min Sketch to approximate document frequency (DF) estimation for improved performance.
+TiDB full-text search uses the **BM25Tantivy** algorithm to calculate relevance scores. This algorithm is a variant of the classic BM25 (Okapi BM25) algorithm that uses Count-Min Sketch to approximate document frequency (DF) for improved performance.
 
 **BM25 formula (standard form):**
 
