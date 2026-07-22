@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## July 21, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - [Top RU](/tidb-cloud/top-ru.md) (public preview) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports the following additional region:
+
+        - Alibaba Cloud: `Jakarta (ap-southeast-5)`
+
+      This feature displays minute-level top RU-consuming SQLs, helping you quickly identify the most resource-intensive queries to reduce costs.
+
 ## July 14, 2026
 
 **General changes**

@@ -154,7 +154,7 @@ TiDB Cloud provides the following deployment options:
 
 > **Note:**
 >
-> TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see [TiDB Cloud BYOC Architecture](/tidb-cloud/byoc/byoc-onboarding-overview.md#architecture-overview).
+> TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).
 
 </CustomContent>
 
