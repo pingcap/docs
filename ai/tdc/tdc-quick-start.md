@@ -115,7 +115,6 @@ Create a Starter cluster and save its ID:
 ```bash
 export TDC_DB_CLUSTER_ID="$(tdc db create-db-cluster \
   --db-cluster-name quickstart-db \
-  --db-cluster-type starter \
   --wait \
   --query id \
   --output text)"
@@ -147,6 +146,6 @@ unset TDC_DB_CLUSTER_ID
 
 ## What's next
 
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
-- [Manage TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

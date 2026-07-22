@@ -1,15 +1,30 @@
 ---
-title: Install, Configure, and Update tdc
-summary: Install tdc release binaries, configure profiles interactively or in automation, update safely, and remove the CLI.
+title: tdc Installation, Configuration, and Update Command Reference
+summary: Reference tdc release installation, configure and update commands, version checks, and uninstallation.
 ---
 
-# Install, Configure, and Update tdc
+# tdc Installation, Configuration, and Update Command Reference
 
-This guide covers the supported release installers, profile configuration, help and version behavior, updates, and uninstallation.
+This reference documents the supported release installers, top-level configuration and update commands, help and version behavior, and uninstallation.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc
+├── configure
+└── update
+```
+
+| Command | Required inputs | Main optional inputs | Example |
+| --- | --- | --- | --- |
+| `tdc configure` | Interactive input, or region and TiDB Cloud API keys in non-interactive mode | `--profile`, `--non-interactive`, `--region-code`, key flags | `tdc configure --profile staging` |
+| `tdc update` | None | `--check`, `--fail-if-update-available`, `--dry-run`, `--target-version` | `tdc update --check` |
+
+Run `tdc configure help` or `tdc update help` for the complete generated flag list.
 
 ## Install tdc
 
@@ -157,5 +172,5 @@ Deleting local state does not delete remote Starter clusters or Filesystem resou
 ## What's next
 
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
-- [Manage TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)

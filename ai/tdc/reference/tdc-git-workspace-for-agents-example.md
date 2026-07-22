@@ -99,5 +99,5 @@ Use `--force` for worktree removal only when uncommitted changes can be discarde
 
 ## What's next
 
-- [Use Git Workspaces on TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem-git.md)
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc fs-git Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)

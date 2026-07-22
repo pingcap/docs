@@ -1,15 +1,50 @@
 ---
-title: Manage TiDB Cloud Starter Databases with tdc
-summary: Manage Starter clusters and branches, create SQL users, format connection strings, and execute SQL with explicit roles.
+title: tdc db Command Reference
+summary: Reference every tdc db command for Starter clusters, branches, SQL users, connection strings, and SQL execution.
 ---
 
-# Manage TiDB Cloud Starter Databases with tdc
+# tdc db Command Reference
 
 Use `tdc db` to manage TiDB Cloud Starter clusters, branches, and SQL access.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc db
+├── create-db-cluster
+├── list-db-clusters
+├── describe-db-cluster
+├── update-db-cluster
+├── delete-db-cluster
+├── create-db-cluster-branch
+├── list-db-cluster-branches
+├── describe-db-cluster-branch
+├── delete-db-cluster-branch
+├── create-db-sql-users
+├── format-db-connection-string
+└── execute-sql-statement
+```
+
+## Command details
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `create-db-cluster` | Creates a Starter cluster. Requires `--db-cluster-name`; `--db-cluster-type` is optional and defaults to `starter`. Use `--wait` for an `ACTIVE` result. | `tdc db create-db-cluster --db-cluster-name app-db --wait` |
+| `list-db-clusters` | Lists Starter clusters with pagination, filter, ordering, and query support. | `tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name}'` |
+| `describe-db-cluster` | Reads one cluster by `--db-cluster-id`; `--view FULL` requests expanded fields. | `tdc db describe-db-cluster --db-cluster-id "<cluster-id>" --view FULL` |
+| `update-db-cluster` | Changes the name or monthly spending limit of one cluster. Supports `--dry-run`. | `tdc db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2` |
+| `delete-db-cluster` | Deletes one cluster by ID. Use `--wait` to wait until deletion is observable. | `tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --wait` |
+| `create-db-cluster-branch` | Creates a branch from a cluster. Requires cluster ID and branch name; supports `--wait`. | `tdc db create-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-name dev --wait` |
+| `list-db-cluster-branches` | Lists branches for one cluster with pagination. | `tdc db list-db-cluster-branches --db-cluster-id "<cluster-id>" --output text` |
+| `describe-db-cluster-branch` | Reads one branch by cluster ID and branch ID. | `tdc db describe-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>"` |
+| `delete-db-cluster-branch` | Deletes one branch. Supports `--dry-run`. | `tdc db delete-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>"` |
+| `create-db-sql-users` | Idempotently creates or repairs read-only, read-write, and admin users for one cluster. | `tdc db create-db-sql-users --db-cluster-id "<cluster-id>"` |
+| `format-db-connection-string` | Formats stored SQL credentials as a MySQL URI, JDBC, Go, SQLAlchemy, or environment output. | `tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --read-only --format env` |
+| `execute-sql-statement` | Executes exactly one statement using read-write by default or an explicit SQL role. | `tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --read-only --sql "SELECT 1"` |
 
 ## Prerequisites
 
@@ -24,15 +59,13 @@ Preview and create a Starter cluster:
 ```bash
 tdc db create-db-cluster \
   --db-cluster-name demo-cluster \
-  --db-cluster-type starter \
   --dry-run
 
 tdc db create-db-cluster \
-  --db-cluster-name demo-cluster \
-  --db-cluster-type starter
+  --db-cluster-name demo-cluster
 ```
 
-The configured virtual project is used unless you provide `--project-id`. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
+The configured virtual project is used unless you provide `--project-id`. `--db-cluster-type` is optional and defaults to `starter`; the only accepted explicit value is `starter`. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
 
 List and filter clusters:
 
@@ -182,25 +215,8 @@ tdc db execute-sql-statement \
 
 The default `--transport https` sends the SQL request over HTTPS without a persistent database connection. Use `--transport mysql` as an explicit compatibility fallback; it opens a connection for the command and closes it afterward.
 
-## Command summary
-
-| Command | Purpose |
-| --- | --- |
-| `create-db-cluster` | Create a Starter cluster |
-| `list-db-clusters` | List Starter clusters |
-| `describe-db-cluster` | Read one cluster |
-| `update-db-cluster` | Change cluster name or spending limit |
-| `delete-db-cluster` | Delete a cluster |
-| `create-db-cluster-branch` | Create a branch |
-| `list-db-cluster-branches` | List branches |
-| `describe-db-cluster-branch` | Read one branch |
-| `delete-db-cluster-branch` | Delete a branch |
-| `create-db-sql-users` | Create or repair three SQL roles |
-| `format-db-connection-string` | Format prepared credentials |
-| `execute-sql-statement` | Execute one SQL statement |
-
 ## What's next
 
-- [Query SQL with Explicit Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md)
+- [Query SQL with Explicit Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md)
 - [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md)
 - [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)

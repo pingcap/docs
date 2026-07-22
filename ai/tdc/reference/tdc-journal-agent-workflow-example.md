@@ -92,5 +92,5 @@ Journals are append-only and currently have no delete command in the tdc public 
 
 ## What's next
 
-- [Use TiDB Cloud Filesystem Journals](/ai/tdc/guides/tdc-filesystem-journal.md)
-- [Delegate Secrets to an Agent](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
+- [tdc fs-journal Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
+- [Delegate Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)

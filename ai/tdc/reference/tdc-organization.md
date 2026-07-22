@@ -1,15 +1,24 @@
 ---
-title: Manage Projects in TiDB Cloud Organizations with tdc
-summary: List accessible TiDB Cloud projects and understand regular and virtual project types used by tdc.
+title: tdc organization Command Reference
+summary: Reference the tdc organization command tree, project listing inputs, output, and examples.
 ---
 
-# Manage Projects in TiDB Cloud Organizations with tdc
+# tdc organization Command Reference
 
 Use `tdc organization` to inspect the projects accessible to the configured TiDB Cloud API key.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc organization
+└── list-projects
+```
+
+`list-projects` requires a configured TiDB Cloud API key. It accepts `--page-size` and `--page-token` for pagination, plus the global output and query flags.
 
 ## Prerequisites
 
@@ -55,11 +64,10 @@ project_id = "..."
 ```bash
 tdc db create-db-cluster \
   --db-cluster-name project-specific-cluster \
-  --db-cluster-type starter \
   --project-id "<project-id>"
 ```
 
 ## What's next
 
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

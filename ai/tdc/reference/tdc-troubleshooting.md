@@ -5,7 +5,7 @@ summary: Diagnose tdc authentication, project, Filesystem selection, companion, 
 
 # Troubleshoot tdc
 
-Use this guide to diagnose common current tdc failures. Add `--debug` only when needed; debug output is redacted but should still be reviewed before sharing.
+Use this reference to diagnose common current tdc failures. Add `--debug` only when needed; debug output is redacted but should still be reviewed before sharing.
 
 > **Note:**
 >
@@ -165,7 +165,7 @@ mkdir -p "$HOME/workspace"
 tdc fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md#ubuntu-2604-mount-paths).
+Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md#ubuntu-2604-mount-paths).
 
 ## Mount becomes stale after a process crash
 

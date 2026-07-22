@@ -111,5 +111,5 @@ rm -f .env.tidb
 
 ## What's next
 
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

@@ -102,5 +102,5 @@ tdc fs delete-file-system \
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
-- [Use a Filesystem in an Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [Use a Filesystem in an Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md)

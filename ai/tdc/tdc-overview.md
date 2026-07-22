@@ -63,37 +63,36 @@ You do not need to install, configure, or invoke Drive9 separately for normal td
 ## Find the right documentation
 
 - Follow the [Quick Start](/ai/tdc/tdc-quick-start.md) to install tdc and complete your first Starter or Filesystem workflow.
-- Read [Concepts and Architecture](/ai/tdc/concepts/tdc-concepts-and-architecture.md) to understand profiles, credentials, regions, SQL roles, and the Filesystem companion.
+- Use the command references for exact command trees, inputs, behavior, and examples:
 
-### Guides
-
-Use guides to complete one focused task or manage one feature area:
-
-- [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md)
-- [Manage Projects in TiDB Cloud Organizations with tdc](/ai/tdc/guides/tdc-organization.md)
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
-- [Manage TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem.md)
-- [Use Git Workspaces on TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem-git.md)
-- [Use Filesystem Journals](/ai/tdc/guides/tdc-filesystem-journal.md)
-- [Use Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md)
+- [Install, Configure, and Update tdc](/ai/tdc/reference/tdc-install-configure-update.md)
+- [Manage Projects in TiDB Cloud Organizations with tdc](/ai/tdc/reference/tdc-organization.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [tdc fs-git Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)
+- [tdc fs-journal Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
+- [tdc fs-vault Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)
 - [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)
 
-### Examples
+### Scenario references
 
-Use examples to follow a complete scenario that combines multiple commands and features:
+Use scenarios to follow a complete workflow that combines multiple commands and features:
 
 For users and automation:
 
-- [Run a Daily tdc Workflow](/ai/tdc/examples/tdc-daily-workflow-example.md)
-- [Query SQL with Explicit Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md)
-- [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md)
+- [Run a Daily tdc Workflow](/ai/tdc/reference/tdc-daily-workflow-example.md)
+- [Query SQL with Explicit Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md)
+- [Share a Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md)
+- [Hand Off CI Artifacts Between Jobs](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md)
 
 For AI agents:
 
-- [Use a Filesystem in an Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md)
-- [Prepare a Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md)
-- [Record an Agent Workflow in a Journal](/ai/tdc/examples/tdc-journal-agent-workflow-example.md)
-- [Delegate Secrets to an Agent](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
+- [Use a Filesystem in an Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md)
+- [Persist Agent State Across Sandboxes](/ai/tdc/reference/tdc-persistent-agent-state-example.md)
+- [Share a Read-Only Dataset Across Parallel Agents](/ai/tdc/reference/tdc-parallel-agent-dataset-example.md)
+- [Prepare a Git Workspace for Agents](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md)
+- [Record an Agent Workflow in a Journal](/ai/tdc/reference/tdc-journal-agent-workflow-example.md)
+- [Delegate Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)
 
 ### Reference
 

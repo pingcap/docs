@@ -1,15 +1,46 @@
 ---
-title: Use TiDB Cloud Filesystem Vault
-summary: Store Filesystem secrets, delegate limited access, inject secrets into processes, audit access, and mount a read-only vault.
+title: tdc fs-vault Command Reference
+summary: Reference every tdc fs-vault command for secrets, grants, audit events, process injection, and read-only mounts.
 ---
 
-# Use TiDB Cloud Filesystem Vault
+# tdc fs-vault Command Reference
 
 `tdc fs-vault` stores structured secrets and delegates limited, expiring access to agents. Owner operations use the Filesystem owner credential; delegated reads use a vault token scoped to selected secrets or fields.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc fs-vault
+├── create-secret
+├── replace-secret
+├── read-secret
+├── list-secrets
+├── delete-secret
+├── create-grant
+├── delete-grant
+├── list-audit-events
+├── run-with-secret
+├── mount-vault
+└── unmount-vault
+```
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `create-secret` | Creates a structured secret from repeatable literal, file, or stdin fields. | `tdc fs-vault create-secret --secret-name db-prod --field PASSWORD=@./password.txt` |
+| `replace-secret` | Replaces all fields from files in one directory. | `tdc fs-vault replace-secret --secret-path /n/vault/db-prod --from-directory ./secret-fields` |
+| `read-secret` | Reads all fields or one field as structured, raw, or environment output. | `tdc fs-vault read-secret --secret-name db-prod --field DB_URL --format raw` |
+| `list-secrets` | Lists secrets visible to the active owner or delegated credential. | `tdc fs-vault list-secrets` |
+| `delete-secret` | Deletes one owner-visible secret. | `tdc fs-vault delete-secret --secret-name db-prod` |
+| `create-grant` | Creates a scoped, expiring delegated token for one agent. | `tdc fs-vault create-grant --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m` |
+| `delete-grant` | Revokes one grant by ID. | `tdc fs-vault delete-grant --grant-id "<grant-id>" --reason completed` |
+| `list-audit-events` | Lists vault access events using secret, agent, time, and limit filters. | `tdc fs-vault list-audit-events --secret-name db-prod --limit 20` |
+| `run-with-secret` | Runs a child command with secret fields injected as environment variables. | `tdc fs-vault run-with-secret --secret-path /n/vault/db-prod -- ./deploy.sh` |
+| `mount-vault` | Mounts delegated readable fields as a local read-only FUSE filesystem. | `tdc fs-vault mount-vault --mount-path /path/to/vault --vault-token "$TDC_VAULT_TOKEN"` |
+| `unmount-vault` | Unmounts a local vault mount. | `tdc fs-vault unmount-vault --mount-path /path/to/vault` |
 
 ## Prerequisites
 
@@ -137,5 +168,5 @@ Unmount also supports `--timeout`, `--force`, and `--ignore-absent`. Vault mount
 
 ## What's next
 
-- [Delegate Secrets to an Agent](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
+- [Delegate Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)
 - [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

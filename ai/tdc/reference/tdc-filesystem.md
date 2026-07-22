@@ -1,15 +1,105 @@
 ---
-title: Manage TiDB Cloud Filesystem with tdc
-summary: Manage Filesystem resources, operate on files, use layers and packs, and mount Filesystems through the bundled Drive9 companion.
+title: tdc fs Command Reference
+summary: Reference every tdc fs command for Filesystem resources, files, layers, packs, and mounts.
 ---
 
-# Manage TiDB Cloud Filesystem with tdc
+# tdc fs Command Reference
 
 Use `tdc fs` to provision TiDB Cloud Filesystem resources and access their data from commands or local mounts.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc fs
+├── create-file-system
+├── list-file-systems
+├── describe-file-system
+├── set-default-file-system
+├── unset-default-file-system
+├── check-file-system
+├── delete-file-system
+├── copy-file
+├── read-file
+├── list-files
+├── describe-file
+├── move-file
+├── delete-file
+├── create-directory
+├── chmod-file
+├── create-symlink
+├── create-hardlink
+├── search-file-content
+├── find-files
+├── create-layer
+├── list-layers
+├── describe-layer
+├── diff-layer
+├── create-layer-checkpoint
+├── rollback-layer
+├── commit-layer
+├── pack-file-system
+├── unpack-file-system
+├── mount-file-system
+├── drain-file-system
+└── unmount-file-system
+```
+
+## Command details
+
+### Resource commands
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `create-file-system` | Provisions a Filesystem. Requires `--file-system-name`; `--set-default` selects it and `--wait` waits until data-plane access is ready. | `tdc fs create-file-system --file-system-name workspace --set-default --wait` |
+| `list-file-systems` | Lists resources registered in the selected local profile. | `tdc fs list-file-systems --output text` |
+| `describe-file-system` | Reads one locally registered resource by name. | `tdc fs describe-file-system --file-system-name workspace` |
+| `set-default-file-system` | Sets the default resource used when no name is supplied. | `tdc fs set-default-file-system --file-system-name workspace` |
+| `unset-default-file-system` | Clears the profile's default resource without deleting it. | `tdc fs unset-default-file-system` |
+| `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `tdc fs check-file-system --file-system-name workspace` |
+| `delete-file-system` | Requests asynchronous deletion and removes its local registration. Requires TiDB Cloud credentials and the owner resource credential. | `tdc fs delete-file-system --file-system-name workspace` |
+
+### Data and namespace commands
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `copy-file` | Uploads, downloads, streams, appends, resumes, or recursively copies local and remote paths. | `tdc fs copy-file --from-local ./report.md --to-remote /reports/report.md` |
+| `read-file` | Writes a complete file or byte range to stdout. | `tdc fs read-file --path /reports/report.md --offset 0 --length 1024` |
+| `list-files` | Lists entries under a remote path. | `tdc fs list-files --path /reports --output text` |
+| `describe-file` | Returns metadata for one remote path. | `tdc fs describe-file --path /reports/report.md` |
+| `move-file` | Moves or renames one remote path. | `tdc fs move-file --from-remote /draft.md --to-remote /reports/final.md` |
+| `delete-file` | Deletes one remote path; `--recursive` is required for non-empty directories. | `tdc fs delete-file --path /scratch --recursive` |
+| `create-directory` | Creates a remote directory and optionally sets its mode. | `tdc fs create-directory --path /reports/archive --mode 0755` |
+| `chmod-file` | Changes remote POSIX mode metadata. | `tdc fs chmod-file --path /reports/final.md --mode 0600` |
+| `create-symlink` | Creates a symbolic link with a target string and link path. | `tdc fs create-symlink --target final.md --link-path /reports/latest.md` |
+| `create-hardlink` | Creates a hard link from an existing remote path. | `tdc fs create-hardlink --source-path /reports/final.md --link-path /reports/final-copy.md` |
+| `search-file-content` | Searches file contents below a path, optionally within a layer. | `tdc fs search-file-content --path /reports --pattern "TODO"` |
+| `find-files` | Finds paths by name, type, tags, size, or timestamps. | `tdc fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review` |
+
+### Layer and portability commands
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `create-layer` | Creates an isolated change layer over `--base-root-path`; returns a generated layer ID when one is not supplied. | `tdc fs create-layer --base-root-path /workspace --layer-name task` |
+| `list-layers` | Lists layers for the selected Filesystem. | `tdc fs list-layers --output text` |
+| `describe-layer` | Reads one layer by ID. | `tdc fs describe-layer --layer-id "<layer-id>"` |
+| `diff-layer` | Lists changes recorded in one layer. | `tdc fs diff-layer --layer-id "<layer-id>"` |
+| `create-layer-checkpoint` | Records a named checkpoint for a layer. | `tdc fs create-layer-checkpoint --layer-id "<layer-id>" --checkpoint-id before-review` |
+| `rollback-layer` | Restores a layer to its rollback state without committing it to the base. | `tdc fs rollback-layer --layer-id "<layer-id>"` |
+| `commit-layer` | Applies a layer's changes to the base Filesystem. | `tdc fs commit-layer --layer-id "<layer-id>"` |
+| `pack-file-system` | Stores selected local overlay state in a remote archive. | `tdc fs pack-file-system --mount-path /path/to/workspace` |
+| `unpack-file-system` | Restores local overlay state from a remote archive. | `tdc fs unpack-file-system --mount-path /path/to/workspace` |
+
+### Mount commands
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; resource selection can come from a flag, environment, or profile. | `tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace` |
+| `drain-file-system` | Flushes pending FUSE work while leaving the mount online. | `tdc fs drain-file-system --mount-path /path/to/workspace --timeout 30s` |
+| `unmount-file-system` | Gracefully flushes and unmounts a background FUSE or WebDAV mount. | `tdc fs unmount-file-system --mount-path /path/to/workspace` |
 
 ## Prerequisites
 
@@ -402,18 +492,8 @@ Aliases change only the command name. All flags remain long and identical to the
 | `tdc fs drain` | `tdc fs drain-file-system` |
 | `tdc fs umount` | `tdc fs unmount-file-system` |
 
-## Command summary
-
-| Area | Commands |
-| --- | --- |
-| Resources | `create-file-system`, `list-file-systems`, `describe-file-system`, `set-default-file-system`, `unset-default-file-system`, `check-file-system`, `delete-file-system` |
-| Data | `copy-file`, `read-file`, `list-files`, `describe-file`, `move-file`, `delete-file`, `create-directory`, `chmod-file`, `create-symlink`, `create-hardlink`, `search-file-content`, `find-files` |
-| Layers | `create-layer`, `list-layers`, `describe-layer`, `diff-layer`, `create-layer-checkpoint`, `rollback-layer`, `commit-layer` |
-| Portability | `pack-file-system`, `unpack-file-system` |
-| Mounts | `mount-file-system`, `drain-file-system`, `unmount-file-system` |
-
 ## What's next
 
-- [Use a Filesystem in an Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md)
-- [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md)
-- [Use Git Workspaces on TiDB Cloud Filesystem](/ai/tdc/guides/tdc-filesystem-git.md)
+- [Use a Filesystem in an Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md)
+- [Share a Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md)
+- [tdc fs-git Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)

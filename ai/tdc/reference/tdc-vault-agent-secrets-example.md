@@ -105,5 +105,5 @@ rm -f ./api-token.txt
 
 ## What's next
 
-- [Use TiDB Cloud Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md)
+- [tdc fs-vault Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)
 - [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

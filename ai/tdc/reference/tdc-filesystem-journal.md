@@ -1,15 +1,34 @@
 ---
-title: Use TiDB Cloud Filesystem Journals
-summary: Create append-only workflow journals, append and search structured events, and verify their hash chains.
+title: tdc fs-journal Command Reference
+summary: Reference every tdc fs-journal command for creating, appending, reading, searching, and verifying journals.
 ---
 
-# Use TiDB Cloud Filesystem Journals
+# tdc fs-journal Command Reference
 
 `tdc fs-journal` provides an append-only, verifiable ledger for agent and workflow events. Unlike a mutable text file, a journal assigns ordered sequence numbers, supports structured search, and maintains a hash chain that can detect alteration.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc fs-journal
+├── create-journal
+├── append-journal-entries
+├── read-journal-entries
+├── search-journal-entries
+└── verify-journal
+```
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `create-journal` | Creates a journal with an optional caller-provided ID, kind, actor, title, and labels. | `tdc fs-journal create-journal --journal-kind agent --title "review task" --actor agent:reviewer` |
+| `append-journal-entries` | Appends JSON entries from repeatable flags, JSON Lines stdin, or a JSON array. | `tdc fs-journal append-journal-entries --journal-id jrn-demo --entry-json '{"type":"task.started"}'` |
+| `read-journal-entries` | Reads ordered entries after a sequence number. | `tdc fs-journal read-journal-entries --journal-id jrn-demo --after-seq 0 --limit 100` |
+| `search-journal-entries` | Searches journals and entries by type, kind, actor, status, subject, label, or time. | `tdc fs-journal search-journal-entries --entry-type task.started --include-entries` |
+| `verify-journal` | Recalculates and verifies one journal's ordered hash chain. | `tdc fs-journal verify-journal --journal-id jrn-demo --output text` |
 
 ## Prerequisites
 
@@ -78,5 +97,5 @@ Verification recalculates the ordered hash chain and reports whether the entries
 
 ## What's next
 
-- [Record an Agent Workflow in a Journal](/ai/tdc/examples/tdc-journal-agent-workflow-example.md)
+- [Record an Agent Workflow in a Journal](/ai/tdc/reference/tdc-journal-agent-workflow-example.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

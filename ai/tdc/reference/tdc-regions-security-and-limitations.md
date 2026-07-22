@@ -98,6 +98,6 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 
 ## Related documentation
 
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
 - [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)

@@ -1,15 +1,32 @@
 ---
-title: Use Git Workspaces on TiDB Cloud Filesystem
-summary: Clone, hydrate, and manage linked Git worktrees in a mounted TiDB Cloud Filesystem workspace.
+title: tdc fs-git Command Reference
+summary: Reference every tdc fs-git command for cloning, hydrating, and managing linked Git worktrees.
 ---
 
-# Use Git Workspaces on TiDB Cloud Filesystem
+# tdc fs-git Command Reference
 
 `tdc fs-git` accelerates Git workspace setup on mounted TiDB Cloud Filesystem paths. It augments Git; you continue to use ordinary `git` commands for status, edit, add, commit, fetch, and push.
 
 > **Note:**
 >
 > tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+
+## Command tree
+
+```text
+tdc fs-git
+├── clone-git-workspace
+├── hydrate-git-workspace
+├── add-git-worktree
+└── remove-git-worktree
+```
+
+| Command | Purpose and key inputs | Example |
+| --- | --- | --- |
+| `clone-git-workspace` | Clones into a mounted Filesystem path. `--blobless` and `--hydrate background` expose the tree before all clean data finishes hydrating. | `tdc fs-git clone-git-workspace --repo-url https://github.com/pingcap/tidb.git --target-path /workspace/tidb --blobless --hydrate background` |
+| `hydrate-git-workspace` | Materializes clean Git data for an existing fast or blobless workspace. | `tdc fs-git hydrate-git-workspace --target-path /workspace/tidb --timeout 30m` |
+| `add-git-worktree` | Creates a linked worktree from a base workspace. | `tdc fs-git add-git-worktree --base-path /workspace/tidb --worktree-path /workspace/feature --branch-name feature-x` |
+| `remove-git-worktree` | Removes a linked worktree; dirty worktrees require explicit `--force`. | `tdc fs-git remove-git-worktree --worktree-path /workspace/feature` |
 
 ## Prerequisites
 
@@ -95,5 +112,5 @@ The default coding-agent mount profile keeps `.git` and rebuildable generated fi
 
 ## What's next
 
-- [Prepare a Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md)
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [Prepare a Git Workspace for Agents](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)

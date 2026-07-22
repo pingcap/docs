@@ -19,6 +19,86 @@ tdc <command> [subcommand] [required flags] [optional flags] [global flags]
 
 tdc accepts long flags only. A one-letter flag such as `-p` is rejected.
 
+## Command tree
+
+```text
+tdc
+├── configure
+├── update
+├── organization
+│   └── list-projects
+├── db
+│   ├── create-db-cluster
+│   ├── list-db-clusters
+│   ├── describe-db-cluster
+│   ├── update-db-cluster
+│   ├── delete-db-cluster
+│   ├── create-db-cluster-branch
+│   ├── list-db-cluster-branches
+│   ├── describe-db-cluster-branch
+│   ├── delete-db-cluster-branch
+│   ├── create-db-sql-users
+│   ├── format-db-connection-string
+│   └── execute-sql-statement
+├── fs
+│   ├── create-file-system
+│   ├── list-file-systems
+│   ├── describe-file-system
+│   ├── set-default-file-system
+│   ├── unset-default-file-system
+│   ├── check-file-system
+│   ├── delete-file-system
+│   ├── copy-file
+│   ├── read-file
+│   ├── list-files
+│   ├── describe-file
+│   ├── move-file
+│   ├── delete-file
+│   ├── create-directory
+│   ├── chmod-file
+│   ├── create-symlink
+│   ├── create-hardlink
+│   ├── search-file-content
+│   ├── find-files
+│   ├── create-layer
+│   ├── list-layers
+│   ├── describe-layer
+│   ├── diff-layer
+│   ├── create-layer-checkpoint
+│   ├── rollback-layer
+│   ├── commit-layer
+│   ├── pack-file-system
+│   ├── unpack-file-system
+│   ├── mount-file-system
+│   ├── drain-file-system
+│   └── unmount-file-system
+├── fs-git
+│   ├── clone-git-workspace
+│   ├── hydrate-git-workspace
+│   ├── add-git-worktree
+│   └── remove-git-worktree
+├── fs-journal
+│   ├── create-journal
+│   ├── append-journal-entries
+│   ├── read-journal-entries
+│   ├── search-journal-entries
+│   └── verify-journal
+└── fs-vault
+    ├── create-secret
+    ├── replace-secret
+    ├── read-secret
+    ├── list-secrets
+    ├── delete-secret
+    ├── create-grant
+    ├── delete-grant
+    ├── list-audit-events
+    ├── run-with-secret
+    ├── mount-vault
+    └── unmount-vault
+```
+
+For each command's inputs and examples, see the family references linked in [Command families](#command-families).
+
 Required flags appear before optional flags in generated usage. Optional flags are enclosed in brackets:
 
 ```text
@@ -138,14 +218,14 @@ Errors are written to stderr and successful command output is written to stdout.
 
 | Command | Purpose |
 | --- | --- |
-| `tdc configure` | Configure a local profile |
-| `tdc update` | Check or apply release updates |
-| `tdc organization` | Inspect projects |
-| `tdc db` | Manage Starter clusters, branches, and SQL |
-| `tdc fs` | Manage Filesystems, files, layers, packs, and mounts |
-| `tdc fs-git` | Manage Git workspaces on mounted Filesystems |
-| `tdc fs-journal` | Manage verifiable journals |
-| `tdc fs-vault` | Manage secrets and delegated access |
+| [`tdc configure`](/ai/tdc/reference/tdc-install-configure-update.md) | Configure a local profile |
+| [`tdc update`](/ai/tdc/reference/tdc-install-configure-update.md) | Check or apply release updates |
+| [`tdc organization`](/ai/tdc/reference/tdc-organization.md) | Inspect projects |
+| [`tdc db`](/ai/tdc/reference/tdc-starter-database.md) | Manage Starter clusters, branches, and SQL |
+| [`tdc fs`](/ai/tdc/reference/tdc-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
+| [`tdc fs-git`](/ai/tdc/reference/tdc-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |
+| [`tdc fs-journal`](/ai/tdc/reference/tdc-filesystem-journal.md) | Manage verifiable journals |
+| [`tdc fs-vault`](/ai/tdc/reference/tdc-filesystem-vault.md) | Manage secrets and delegated access |
 
 For complete commands and flags, run:
 
@@ -178,5 +258,5 @@ Aliases use the same long flags, authentication, output, query, and error behavi
 
 ## Related documentation
 
-- [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md)
+- [Install, Configure, and Update tdc](/ai/tdc/reference/tdc-install-configure-update.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

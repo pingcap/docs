@@ -29,15 +29,14 @@ tdc fs list-file-systems --output text
 ```bash
 tdc db create-db-cluster \
   --db-cluster-name daily-demo \
-  --db-cluster-type starter \
   --dry-run
 
 tdc db create-db-cluster \
   --db-cluster-name daily-demo \
-  --db-cluster-type starter
+  --wait
 ```
 
-Record the returned cluster ID and wait until the cluster is active:
+Record the returned cluster ID. Because `--wait` was set, the create command returns after the cluster is active. You can inspect it again later:
 
 ```bash
 tdc db describe-db-cluster \
@@ -107,5 +106,5 @@ Deleting local tdc configuration is not a substitute for deleting remote resourc
 
 ## What's next
 
-- [Manage TiDB Cloud Starter Databases](/ai/tdc/guides/tdc-starter-database.md)
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)

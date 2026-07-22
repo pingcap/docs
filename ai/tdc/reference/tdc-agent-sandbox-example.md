@@ -113,5 +113,5 @@ tdc fs delete-file-system \
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem with tdc](/ai/tdc/guides/tdc-filesystem.md)
+- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
 - [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
