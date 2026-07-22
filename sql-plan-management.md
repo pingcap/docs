@@ -226,7 +226,7 @@ SQL文の実行計画を過去の実行計画に固定するには、Plan Digest
 
 この機能を使用する場合、次の点に注意してください。
 
--   この機能は、過去の実行計画に基づいてヒントを生成し、生成されたヒントをバインディングに使用します。過去の実行計画は[明細書要約表](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、 [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
+-   この機能は、過去の実行計画に基づいてヒントを生成し、生成されたヒントをバインディングに使用します。過去の実行計画は[ステートメントサマリーテーブル](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、 [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
 -   TiFlashクエリ、3つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されるヒントが適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインドの作成時に警告が表示されます。
 -   履歴実行プランがヒント付きのSQL文用である場合、ヒントはバインディングに追加されます。例えば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`実行した後、そのプランダイジェストで作成されたバインディングには`max_execution_time(1000)`含まれます。
 
