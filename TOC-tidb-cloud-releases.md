@@ -11,8 +11,8 @@
 
 - [2026](/tidb-cloud/releases/tidb-cloud-release-notes.md)
 - [2025](/tidb-cloud/releases/release-notes-2025.md)
-- [2024](/tidb-cloud/releases/release-notes-2024.md)
 - Earlier Releases
+  - [2024](/tidb-cloud/releases/release-notes-2024.md)
   - [2023](/tidb-cloud/releases/release-notes-2023.md)
   - [2022](/tidb-cloud/releases/release-notes-2022.md)
   - [2021](/tidb-cloud/releases/release-notes-2021.md)
