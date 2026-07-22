@@ -714,6 +714,7 @@ The basic principle is to limit the size of the transaction. At the KV level, Ti
 
     - You can adjust it by using the [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500) configuration parameter of tidb-server for TiDB v4.0.10 and later v4.0.x versions, TiDB v5.0.0 and later versions. The value is `6 MB` for versions earlier than v4.0.10.
     - Starting from v7.6.0, you can use the [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760) system variable to dynamically modify the value of this configuration item.
+    - Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raftstore.raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is `8 MiB` by default, TiKV rejects the request. When a table contains a large row, you need to adjust both limits at the same time.
 
 - The maximum single transaction size supported is 1 TiB. 
 
