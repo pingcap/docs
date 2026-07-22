@@ -85,21 +85,22 @@ Technical reference documentation for TiDB's AI and vector search features.
 
 ### TiDB Cloud CLI (tdc) (Preview)
 
-The command references document every tdc command family and provide examples for each operation. The scenario references combine commands into complete user, automation, and AI agent workflows.
+The command reference follows the two-level tdc command tree. Every command has a dedicated page with its syntax and examples. Expand **Command Reference** in the documentation navigation to browse commands by family.
 
 #### Command reference
 
 | Document | Description |
 | --- | --- |
 | [tdc Overview](/ai/tdc/tdc-overview.md) | Decide when to use tdc and understand its scope relative to ticloud and the TiDB Cloud console. |
-| [CLI Syntax and Global Behavior](/ai/tdc/reference/tdc-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, and aliases. |
-| [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md) | Install releases, configure profiles, update, and uninstall tdc. |
-| [Organization and Projects](/ai/tdc/reference/tdc-organization.md) | List projects and understand virtual-project selection. |
-| [Starter Databases and SQL](/ai/tdc/reference/tdc-starter-database.md) | Manage clusters, branches, SQL users, connection strings, and SQL execution. |
-| [Filesystem](/ai/tdc/reference/tdc-filesystem.md) | Manage resources, data, layers, packs, and FUSE or WebDAV mounts. |
-| [Filesystem Git Workspaces](/ai/tdc/reference/tdc-filesystem-git.md) | Clone, hydrate, and manage linked Git worktrees. |
-| [Filesystem Journals](/ai/tdc/reference/tdc-filesystem-journal.md) | Record, search, and verify append-only workflow events. |
-| [Filesystem Vault](/ai/tdc/reference/tdc-filesystem-vault.md) | Store secrets, delegate access, audit, inject, and mount a read-only vault. |
+| [CLI Syntax and Global Behavior](/ai/tdc/reference/tdc-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
+| [`tdc configure`](/ai/tdc/reference/commands/tdc/tdc-configure.md) | Configure a local profile interactively or non-interactively. |
+| [`tdc update`](/ai/tdc/reference/commands/tdc/tdc-update.md) | Check for and install release updates. |
+| [`tdc organization list-projects`](/ai/tdc/reference/commands/organization/tdc-organization-list-projects.md) | List accessible TiDB Cloud projects. |
+| [`tdc db create-db-cluster`](/ai/tdc/reference/commands/db/tdc-db-create-db-cluster.md) | Start with the database command reference. |
+| [`tdc fs create-file-system`](/ai/tdc/reference/commands/fs/tdc-fs-create-file-system.md) | Start with the Filesystem command reference. |
+| [`tdc fs-git clone-git-workspace`](/ai/tdc/reference/commands/fs-git/tdc-fs-git-clone-git-workspace.md) | Start with the Filesystem Git command reference. |
+| [`tdc fs-journal create-journal`](/ai/tdc/reference/commands/fs-journal/tdc-fs-journal-create-journal.md) | Start with the Filesystem journal command reference. |
+| [`tdc fs-vault create-secret`](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-create-secret.md) | Start with the Filesystem Vault command reference. |
 | [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
 | [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and Preview constraints. |
 | [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |

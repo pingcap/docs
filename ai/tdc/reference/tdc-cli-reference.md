@@ -97,7 +97,7 @@ tdc
     └── unmount-vault
 ```
 
-For each command's inputs and examples, see the family references linked in [Command families](#command-families).
+Every operation has a dedicated command page with syntax and examples. Expand **Command Reference** in the documentation navigation and select a command under `tdc`, `organization`, `db`, `fs`, `fs-git`, `fs-journal`, or `fs-vault`.
 
 Required flags appear before optional flags in generated usage. Optional flags are enclosed in brackets:
 
@@ -214,18 +214,19 @@ Errors are written to stderr and successful command output is written to stdout.
 
 `--debug` can show redacted request and resolution context. It must not show API keys, FS tokens, DB passwords, SQL text, file contents, or connection strings.
 
-## Command families
+## Feature guides
 
-| Command | Purpose |
+The following task-oriented guides explain how commands work together. They are separate from the per-command reference pages.
+
+| Guide | Purpose |
 | --- | --- |
-| [`tdc configure`](/ai/tdc/reference/tdc-install-configure-update.md) | Configure a local profile |
-| [`tdc update`](/ai/tdc/reference/tdc-install-configure-update.md) | Check or apply release updates |
-| [`tdc organization`](/ai/tdc/reference/tdc-organization.md) | Inspect projects |
-| [`tdc db`](/ai/tdc/reference/tdc-starter-database.md) | Manage Starter clusters, branches, and SQL |
-| [`tdc fs`](/ai/tdc/reference/tdc-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
-| [`tdc fs-git`](/ai/tdc/reference/tdc-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |
-| [`tdc fs-journal`](/ai/tdc/reference/tdc-filesystem-journal.md) | Manage verifiable journals |
-| [`tdc fs-vault`](/ai/tdc/reference/tdc-filesystem-vault.md) | Manage secrets and delegated access |
+| [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md) | Install releases, configure profiles, update, and uninstall tdc |
+| [Organization and Projects](/ai/tdc/reference/tdc-organization.md) | Inspect projects and understand virtual-project selection |
+| [Starter Databases and SQL](/ai/tdc/reference/tdc-starter-database.md) | Manage Starter clusters, branches, and SQL |
+| [Filesystem](/ai/tdc/reference/tdc-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
+| [Filesystem Git Workspaces](/ai/tdc/reference/tdc-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |
+| [Filesystem Journals](/ai/tdc/reference/tdc-filesystem-journal.md) | Manage verifiable journals |
+| [Filesystem Vault](/ai/tdc/reference/tdc-filesystem-vault.md) | Manage secrets and delegated access |
 
 For complete commands and flags, run:
 
