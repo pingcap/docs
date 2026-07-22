@@ -5,16 +5,15 @@
 
 ## QUICK START
 
-- [Get Started via Python](/ai/quickstart-via-python.md)
-- [Get Started via SQL](/ai/quickstart-via-sql.md)
-- TiDB Cloud CLI (tdc) (Preview)
-  - [Overview](/ai/tdc/tdc-overview.md)
-  - [Quick Start](/ai/tdc/tdc-quick-start.md)
+- [Get Started with Vector Search via Python](/ai/quickstart-via-python.md)
+- [Get Started with Vector Search via SQL](/ai/quickstart-via-sql.md)
+- [Get Started with TiDB Cloud CLI (tdc)](/ai/tdc-quick-start.md)
 
 ## CONCEPTS
 
 - [Vector Search](/ai/concepts/vector-search-overview.md)
-- TiDB Cloud CLI (tdc) (Preview)
+- TiDB Cloud CLI (tdc)
+  - [Overview](/ai/tdc/tdc-overview.md)
   - [Concepts and Architecture](/ai/tdc/concepts/tdc-concepts-and-architecture.md)
 
 ## GUIDES
@@ -35,14 +34,14 @@
   - [Join Queries](/ai/guides/join-queries.md)
   - [Raw SQL Queries](/ai/guides/raw-queries.md)
   - [Transactions](/ai/guides/transactions.md)
-- TiDB Cloud CLI (tdc) (Preview)
+- Manage Starter Instances and File System via TiDB Cloud CLI (tdc)
   - [Install, Configure, and Update tdc](/ai/tdc/guides/tdc-install-configure-update.md)
-  - [Organization](/ai/tdc/guides/tdc-organization.md)
-  - [Starter Database](/ai/tdc/guides/tdc-starter-database.md)
-  - [Filesystem](/ai/tdc/guides/tdc-filesystem.md)
-  - [Filesystem Git](/ai/tdc/guides/tdc-filesystem-git.md)
-  - [Filesystem Journal](/ai/tdc/guides/tdc-filesystem-journal.md)
-  - [Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md)
+  - [Manage Organizations and Projects](/ai/tdc/guides/tdc-organization.md)
+  - [Manage Starter Databases and SQL Access](/ai/tdc/guides/tdc-starter-database.md)
+  - [Manage Cloud Filesystem Resources](/ai/tdc/guides/tdc-filesystem.md)
+  - [Use Git Workspaces on Cloud Filesystem](/ai/tdc/guides/tdc-filesystem-git.md)
+  - [Track Changes with Filesystem Journals](/ai/tdc/guides/tdc-filesystem-journal.md)
+  - [Manage Secrets with Filesystem Vault](/ai/tdc/guides/tdc-filesystem-vault.md)
 
 ## EXAMPLES
 
@@ -58,13 +57,13 @@
   - [Conversational Memory](/ai/examples/memory-with-pytidb.md)
   - [Text-to-SQL](/ai/examples/text2sql-with-pytidb.md)
 - TiDB Cloud CLI (tdc) (Preview)
-  - [Agent Sandbox](/ai/tdc/examples/tdc-agent-sandbox-example.md)
-  - [Daily Workflow](/ai/tdc/examples/tdc-daily-workflow-example.md)
-  - [Query SQL with Roles](/ai/tdc/examples/tdc-query-sql-with-roles-example.md)
+  - [Set Up an Agent Sandbox Environment](/ai/tdc/examples/tdc-agent-sandbox-example.md)
+  - [Automate Daily Database Operations](/ai/tdc/examples/tdc-daily-workflow-example.md)
+  - [Run SQL Queries with Role-Based Access](/ai/tdc/examples/tdc-query-sql-with-roles-example.md)
   - [Share a Filesystem Across Machines](/ai/tdc/examples/tdc-share-filesystem-across-machines-example.md)
-  - [Git Workspace for Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md)
-  - [Journal an Agent Workflow](/ai/tdc/examples/tdc-journal-agent-workflow-example.md)
-  - [Delegate Vault Secrets](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
+  - [Set Up a Git Workspace for AI Agents](/ai/tdc/examples/tdc-git-workspace-for-agents-example.md)
+  - [Record Agent Workflows in a Journal](/ai/tdc/examples/tdc-journal-agent-workflow-example.md)
+  - [Delegate Secrets Securely to Agents](/ai/tdc/examples/tdc-vault-agent-secrets-example.md)
 
 ## INTEGRATIONS
 
