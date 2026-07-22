@@ -4,20 +4,24 @@ summary: Learn how to back up and restore your {{{ .premium }}} instances.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore {{{ .premium }}} Data
+# Back Up and Restore {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Data
+
+<CustomContent plan="premium">
 
 This document describes how to back up and restore your data on {{{ .premium }}} instances. {{{ .premium }}} supports both automatic backups and manual backups, and lets you restore backup data to a new instance as needed.
 
+</CustomContent>
+
 <CustomContent plan="byoc">
 
-This document also applies to {{{ .byoc }}}. Backup and restore capabilities for {{{ .byoc }}} are currently consistent with {{{ .premium }}}.
+This document describes how to back up and restore your data on {{{ .premium }}} or {{{ .byoc }}} instances. {{{ .premium }}} and {{{ .byoc }}} support both automatic backups and manual backups, and let you restore backup data to a new instance as needed.
 
 </CustomContent>
 
 Backup files can originate from the following sources:
 
-- Active {{{ .premium }}} instances
-- The Recycle Bin for backups from deleted {{{ .premium }}} instances
+- Active {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances
+- The Recycle Bin for backups from deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances
 
 > **Tip:**
 >
@@ -26,7 +30,7 @@ Backup files can originate from the following sources:
 
 ## View the Backup page
 
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}} instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page.
 
     > **Tip:**
     >
@@ -36,11 +40,21 @@ Backup files can originate from the following sources:
 
 ## Automatic backups
 
+<CustomContent plan="premium">
+
 {{{ .premium }}} provides enhanced automatic backup capabilities for production environments. It combines high-frequency snapshots with log backups to ensure data reliability.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} and {{{ .byoc }}} provide enhanced automatic backup capabilities for production environments. They combine high-frequency snapshots with log backups to ensure data reliability.
+
+</CustomContent>
 
 ### Automatic backup policies
 
-{{{ .premium }}} instances use a multi-layer backup architecture to protect your data, as described in the following table:
+{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances use a multi-layer backup architecture to protect your data, as described in the following table:
 
 | Backup type | Retention period | Restore granularity |
 | --- | --- | --- |
@@ -50,7 +64,7 @@ Backup files can originate from the following sources:
 
 ### Backup execution rules
 
-- **Backup cycle**: {{{ .premium }}} instances perform both hourly and daily automatic backups.
+- **Backup cycle**: {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances perform both hourly and daily automatic backups.
 
 - **Backup schedule**:
 
@@ -67,7 +81,7 @@ Backup files can originate from the following sources:
 
 ### Delete backup files
 
-To delete an existing backup file for your {{{ .premium }}} instance, perform the following steps:
+To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, perform the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -75,7 +89,17 @@ To delete an existing backup file for your {{{ .premium }}} instance, perform th
 
 ## Manual backups
 
+<CustomContent plan="premium">
+
 In addition to automatic backups, {{{ .premium }}} supports manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support manual backups. A manual backup provides a controlled, guaranteed restore point. It is highly recommended that you create a manual backup before you perform high-risk operations such as system upgrades, critical data deletion, or irreversible schema or configuration changes.
+
+</CustomContent>
 
 ### Key characteristics
 
@@ -111,15 +135,15 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 - **Point-in-Time Restore**: restores your instance to a specific point in time.
 
-    - Premium instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
+    - Premium<CustomContent plan="byoc"> or BYOC</CustomContent> instances: can be restored to any time within the last 7 days, but not earlier than the instance creation time or later than one minute before the current time. Note that PITR is not supported for manual backups.
 
 ### Restore destination
 
 TiDB Cloud supports restoring data to a new instance.
 
-### Restore to a new {{{ .premium }}} instance {#restore-to-a-new-instance}
+### Restore to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance {#restore-to-a-new-instance}
 
-To restore your data to a new {{{ .premium }}} instance, take the following steps:
+To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, take the following steps:
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
@@ -138,7 +162,7 @@ To restore your data to a new {{{ .premium }}} instance, take the following step
     </div>
     <div label="Point-in-Time Restore">
 
-    To restore to a specific point in time for a Premium instance, take the following steps:
+    To restore to a specific point in time for a Premium<CustomContent plan="byoc"> or BYOC</CustomContent> instance, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
@@ -148,7 +172,7 @@ To restore your data to a new {{{ .premium }}} instance, take the following step
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new {{{ .premium }}} instance for restoration. The steps are the same as [creating a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. The steps are the same as [creating a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
 
     > **Note:**
     >
@@ -160,7 +184,7 @@ To restore your data to a new {{{ .premium }}} instance, take the following step
 
 ### Restore from Recycle Bin
 
-To restore a deleted {{{ .premium }}} instance from the Recycle Bin, take the following steps:
+To restore a deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance from the Recycle Bin, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
@@ -199,13 +223,37 @@ To restore a backup generated by a {{{ .dedicated }}} cluster, follow these step
 
 ### Restore backups from cloud storage
 
-<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> supports restoring backups from cloud storage (such as Amazon S3 and Alibaba Cloud Object Storage Service (OSS)) to a new instance. This feature is compatible with backups generated from {{{ .dedicated }}} clusters or TiDB Self-Managed clusters.
+<CustomContent plan="premium">
+
+{{{ .premium }}} supports restoring backups from cloud storage (such as Amazon S3 and Alibaba Cloud Object Storage Service (OSS)) to a new instance. This feature is compatible with backups generated from {{{ .dedicated }}} clusters or TiDB Self-Managed clusters.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} or {{{ .byoc }}} support restoring backups from cloud storage (such as Amazon S3) to a new instance. This feature is compatible with backups generated from {{{ .dedicated }}} clusters or TiDB Self-Managed clusters.
+
+</CustomContent>
+
+<CustomContent plan="premium">
 
 >**Note:**
 >
 > - Currently, only backups located in **Amazon S3** and **Alibaba Cloud OSS** are supported for restore.
 > - You can restore backups only to a new instance hosted by the same cloud provider as your storage bucket.
 > - If the instance and the storage bucket are located in different regions, additional cross-region data transfer fees might apply.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+>**Note:**
+>
+> - Currently, only backups located in **Amazon S3** are supported for restore.
+> - You can restore backups only to a new instance hosted by the same cloud provider as your storage bucket.
+> - If the instance and the storage bucket are located in different regions, additional cross-region data transfer fees might apply.
+
+</CustomContent>
 
 #### Steps
 
@@ -218,18 +266,35 @@ To restore backups from cloud storage, do the following:
 2. On the **Select Backup Storage Location** page, provide the following information:
 
     - **Cloud Provider**: select the cloud provider where your backup files are stored.
+    <CustomContent plan="premium">
+
     - **Region**: if your cloud provider is Alibaba Cloud OSS, select a region.
+
+    </CustomContent>
+
     - **Backup Files URI**: enter the URI of the top-level folder that contains your backup files.
     - **Access Key ID**: enter your access key ID.
     - **Access Key Secret**: enter your access key secret.
+
+    <CustomContent plan="premium">
 
     > **Tip:**
     >
     > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key) and [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access).
 
+    </CustomContent>
+
+    <CustomContent plan="byoc">
+
+    > **Tip:**
+    >
+    > To create an access key for your storage bucket, see [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key).
+
+    </CustomContent>
+
 3. Click **Verify Backup and Next**.
 
-4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
+4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
 
     If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
 
@@ -237,7 +302,17 @@ To restore backups from cloud storage, do the following:
 
 ## References
 
+<CustomContent plan="premium">
+
 This section describes how to configure access for Amazon S3 and Alibaba Cloud OSS.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+This section describes how to configure access for Amazon S3.
+
+</CustomContent>
 
 ### Configure Amazon S3 access using an AWS access key
 
@@ -253,7 +328,7 @@ Take the following steps to configure an access key:
 
 2. Grant permissions to the IAM user.
 
-    Create a policy with only the permissions required for your task and attach it to the IAM user. To restore data to a {{{ .premium }}} instance, grant the `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
+    Create a policy with only the permissions required for your task and attach it to the IAM user. To restore data to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, grant the `s3:GetObject`, `s3:GetBucketLocation`, and `s3:ListBucket` permissions.
 
     The following is an example policy that allows TiDB Cloud to restore data from a specific folder in your Amazon S3 bucket.
 
@@ -294,6 +369,8 @@ Take the following steps to configure an access key:
 >
 > TiDB Cloud does not store your access keys. To maintain security, [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import or export task is complete.
 
+<CustomContent plan="premium">
+
 ### Configure Alibaba Cloud OSS access
 
 To grant TiDB Cloud access to your Alibaba Cloud OSS bucket, you need to create an AccessKey pair for the bucket.
@@ -312,7 +389,7 @@ Take the following steps to configure an AccessKey pair:
 
         > **Tip:**
         >
-        > To enhance security for restore operations, you can  restrict access to the specific folder (`oss:Prefix`) where your backup files are stored rather than granting access to the entire bucket.
+        > To enhance security for restore operations, you can restrict access to the specific folder (`oss:Prefix`) where your backup files are stored rather than granting access to the entire bucket.
 
         The following JSON example shows a policy for a restore task. This policy restricts access to a specific bucket and backup folder.
 
@@ -344,3 +421,5 @@ Take the following steps to configure an AccessKey pair:
 3. Attach the custom policies to the RAM user.
 
     For more information, see [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user).
+
+</CustomContent>
