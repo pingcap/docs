@@ -7,13 +7,9 @@ summary: TiDB 中 CANCEL DISTRIBUTION JOB 的用法概述。
 
 `CANCEL DISTRIBUTION JOB` 语句用于取消通过 [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) 语句在 TiDB 中创建的 Region 调度任务。
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
-
-</CustomContent>
 
 ## 语法
 

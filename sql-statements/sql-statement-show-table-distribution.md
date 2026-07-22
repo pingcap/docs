@@ -7,13 +7,9 @@ summary: TiDB 数据库中 SHOW TABLE DISTRIBUTION 的用法概述。
 
 `SHOW TABLE DISTRIBUTION` 语句用于显示指定表的 Region 分布信息。
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > 此功能不适用于 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例。
-
-</CustomContent>
 
 ## 语法
 

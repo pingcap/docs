@@ -7,13 +7,9 @@ summary: SHOW DISTRIBUTION JOBS 在 TiDB 数据库中的用法概述。
 
 `SHOW DISTRIBUTION JOBS` 语句用于显示当前所有的 Region 分布作业。
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > 此功能在 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
-
-</CustomContent>
 
 ## 语法
 

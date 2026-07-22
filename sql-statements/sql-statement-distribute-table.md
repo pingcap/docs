@@ -9,13 +9,9 @@ summary: TiDB 数据库中 DISTRIBUTE TABLE 的用法概述。
 >
 > 该功能为实验性功能。不建议在生产环境中使用。该功能可能会在没有提前通知的情况下更改或移除。如果你发现了 bug，可以在 GitHub 上提交一个 [issue](https://github.com/pingcap/tidb/issues)。
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > 该功能在 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 实例中不可用。
-
-</CustomContent>
 
 `DISTRIBUTE TABLE` 语句会重新分布并重新调度指定表的 Region，以实现表级别的均衡分布。执行该语句有助于防止 Region 集中在少数 TiFlash 或 TiKV 节点上，从而解决表内 Region 分布不均的问题。
 
