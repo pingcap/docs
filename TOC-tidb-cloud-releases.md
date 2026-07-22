@@ -27,7 +27,7 @@
 
 - [[2024-09-15] TiDB Cloud 控制台维护通知](/tidb-cloud/releases/notification-2024-09-15-console-maintenance.md)
 - [[2024-04-18] TiDB Cloud 数据迁移 (DM) 功能维护通知](/tidb-cloud/releases/notification-2024-04-18-dm-feature-maintenance.md)
-- 更早的通知
+- 早期维护通知
   - [[2024-04-16] TiDB Cloud 监控功能维护通知](/tidb-cloud/releases/notification-2024-04-16-monitoring-features-maintenance.md)
   - [[2024-04-11] TiDB Cloud 数据迁移 (DM) 功能维护通知](/tidb-cloud/releases/notification-2024-04-11-dm-feature-maintenance.md)
   - [[2024-04-09] TiDB Cloud 监控功能维护通知](/tidb-cloud/releases/notification-2024-04-09-monitoring-features-maintenance.md)

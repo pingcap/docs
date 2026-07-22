@@ -11,7 +11,7 @@ summary: 了解 TiDB-X-CLOUD.202510.1 内核的功能。
 
 **TiDB X 内核版本**：`TiDB-X-CLOUD.202510.1`
 
-{{{ .premium }}} 自 2026 年 4 月 28 日起提供公开预览，使用 `TiDB-X-CLOUD.202510.1` 内核。
+{{{ .premium }}} 自 2026 年 4 月 28 日起开始公测，使用 `TiDB-X-CLOUD.202510.1` 内核。
 
 在 `TiDB-X-CLOUD.202510.1` 中：
 

@@ -198,7 +198,7 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 `RECOMMEND INDEX` Advisor 会利用假设索引进行 “What-If” 分析，评估不同索引的潜在收益。你也可以直接使用假设索引，在正式创建索引前进行设计实验。
 
-以下示例展示了一个使用假设索引的 `EXPLAIN` 语句：
+以下示例展示了如何在 `EXPLAIN` 语句中使用假设索引：
 
 ```sql
 CREATE TABLE t(a INT, b INT, c INT);
