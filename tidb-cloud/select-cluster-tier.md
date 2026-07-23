@@ -122,15 +122,15 @@ TiDB Cloud 中的每个付费组织总共最多可以创建 100 个 TiDB Cloud S
 
 ## {{{ .byoc }}} {#byoc}
 
-{{{ .byoc }}} 专为需要更强数据位置控制、云资源控制、网络边界控制以及合规态势控制的企业级工作负载而设计。使用 {{{ .byoc }}} 时，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在您自己的云账户中。
+{{{ .byoc }}} 专为需要更强数据位置控制、云资源控制、网络边界控制以及合规态势控制的企业级工作负载而设计。使用 {{{ .byoc }}} 时，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在你自己的云账户中。
 
 {{{ .byoc }}} 提供托管式 TiDB Cloud 体验，并具有以下特性：
 
-- **Customer-owned data plane**：将 TiDB 服务资源、存储、网络和数据保留在您的云账户中。
-- **Managed operations**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份与恢复以及生命周期管理。
-- **Flexible high availability**：同时支持 Single-AZ 和 Multi-AZ 部署，使您能够在更低延时的单可用区部署与跨多个可用区的更高韧性部署之间进行选择。
-- **Cloud-account-level security controls**：允许您将自己的云策略、网络控制、审计日志记录和合规控制应用到 BYOC 数据平面。
-- **Private connectivity**：根据您的 BYOC 配置，支持 VPC peering 等私有网络访问模式。
+- **Data plane 部署在客户自己的账户中**：将 TiDB 服务资源、存储、网络和数据保留在你的云账户中。
+- **托管运维**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份与恢复以及生命周期管理。
+- **灵活的高可用性**：同时支持 Single-AZ 和 Multi-AZ 部署，使你能够在更低延时的单可用区部署与跨多个可用区的更高韧性部署之间进行选择。
+- **云账户级安全控制**：允许你将自己的云策略、网络控制、审计日志记录和合规控制应用到 BYOC 数据平面。
+- **私有网络连接**：根据你的 BYOC 配置，支持 VPC peering 等私有网络访问模式。
 
 </CustomContent>
 

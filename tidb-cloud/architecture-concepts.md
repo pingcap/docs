@@ -91,7 +91,7 @@ For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverle
 
 ## TiDB Cloud BYOC {#tidb-cloud-byoc}
 
-TiDB Cloud BYOC（Bring Your Own Cloud）专为需要更强的数据位置、云资源、网络边界和合规态势控制能力，同时仍希望将 TiDB Cloud 作为托管服务使用的组织而设计。使用 BYOC 时，TiDB Cloud 控制平面由 PingCAP 管理，而 TiDB 数据平面运行在您自己的云账户中。
+TiDB Cloud BYOC（Bring Your Own Cloud）专为需要更强的数据位置、云资源、网络边界和合规态势控制能力，同时仍希望将 TiDB Cloud 作为托管服务使用的组织而设计。使用 BYOC 时，TiDB Cloud 控制平面由 PingCAP 管理，而 TiDB 数据平面运行在你自己的云账户中。
 
 BYOC 提供以下特性：
 
@@ -99,23 +99,23 @@ BYOC 提供以下特性：
 - **托管运维**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份和生命周期管理。
 - **灵活的高可用性**：同时支持 Single-AZ 和 Multi-AZ 部署，你可以在更低延时的单可用区部署与更高韧性的跨可用区部署之间进行选择。
 - **云账户级自主控制**：允许你应用自己的云策略来管理网络、安全、可审计性和合规性。
-- **私有网络连接**：根据您的 BYOC 配置，支持 VPC peering 等私有网络访问方式。
+- **私有网络连接**：根据你的 BYOC 配置，支持 VPC peering 等私有网络访问方式。
 
-为满足不同工作负载的需求，TiDB Cloud BYOC 同时支持 Single-AZ 和 Multi-AZ 部署，使您能够在更低延时的单可用区部署和跨多个可用区的更高韧性部署之间进行选择。
+为满足不同工作负载的需求，TiDB Cloud BYOC 同时支持 Single-AZ 和 Multi-AZ 部署，使你能够在更低延时的单可用区部署和跨多个可用区的更高韧性部署之间进行选择。
 
 ![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
 
 一个 TiDB Cloud BYOC 部署包含以下主要组件：
 
 - **TiDB Cloud control plane**：提供 TiDB Cloud 控制台、组织和项目管理、计费、生命周期编排、监控视图、告警以及维护工作流。
-- **BYOC data plane**：在你的云账户中运行 TiDB 服务及相关基础设施。TiDB Cloud 会基于您在 BYOC 接入过程中授予的权限来运维此环境。
+- **BYOC data plane**：在你的云账户中运行 TiDB 服务及相关基础设施。TiDB Cloud 会基于你在 BYOC 接入过程中授予的权限来运维此环境。
 - **TiDB 服务 VPC**：承载为应用流量提供服务的 TiDB 服务组件。
 - **可观测性服务 VPC**：承载可观测性组件，用于收集 BYOC 部署的指标、日志和运维数据。
 - **应用 VPC**：承载你的应用。此 VPC 由你管理，你需要配置网络连通性以访问 BYOC TiDB 服务。
 
-每个 BYOC Region 都是独立部署和运维的。添加某个 BYOC Region 时，TiDB Cloud 会在您的云账户中预配该 Region 所需的资源。由于每个 BYOC Region 都有各自独立的数据平面设置，因此不同 Region 不会共享同一个 TiDB Service VPC 或 Observability Service VPC。
+每个 BYOC Region 都是独立部署和运维的。添加某个 BYOC Region 时，TiDB Cloud 会在你的云账户中预配该 Region 所需的资源。由于每个 BYOC Region 都有各自独立的数据平面设置，因此不同 Region 不会共享同一个 TiDB Service VPC 或 Observability Service VPC。
 
-您的应用会从应用环境连接到 {{{ .byoc }}} 实例。根据您的 BYOC 配置，连接可以使用私有访问或受控的公网访问。对于私有访问，BYOC 支持 VPC peering 及其他私有连接选项。
+你的应用会从应用环境连接到 {{{ .byoc }}} 实例。根据你的 BYOC 配置，连接可以使用私有访问或受控的公网访问。对于私有访问，BYOC 支持 VPC peering 及其他私有连接选项。
 
 </CustomContent>
 
