@@ -35,7 +35,7 @@
   - [Prepare AWS Environment](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
   - [Configure IAM Permissions](/tidb-cloud/byoc/byoc-configure-iam-permissions.md)
   - [Automated Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md)
-  - [Service Initialization](/tidb-cloud/byoc/byoc-initialize-service.md)
+  - [Initialize Service](/tidb-cloud/byoc/byoc-initialize-service.md)
   - [Configure a Bastion Host](/tidb-cloud/byoc/byoc-configure-bastion-host.md)
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
