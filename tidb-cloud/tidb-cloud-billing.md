@@ -25,9 +25,9 @@ For {{{ .essential }}}, you are charged based on the number of provisioned Reque
 
 For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit (RCU)](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) consumption and the storage that you actually use, rather than the underlying backend nodes or provisioned disk size. See [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
-### Pricing for {{{ .lake}}} {#pricing-for-lake}
+### Pricing for {{{ .lake }}} {#pricing-for-lake}
 
-For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md).
+For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
 
 ## Invoices
 
