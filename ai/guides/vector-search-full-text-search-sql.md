@@ -70,9 +70,59 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 The following parsers are accepted in the `WITH PARSER <PARSER_NAME>` clause:
 
-- `STANDARD`: fast, works for English content, splitting words by spaces and punctuation.
+- `STANDARD`: fast, works for English content, splitting words by spaces and punctuation. All text is lowercased for indexing and search (case-insensitive matching).
 
 - `MULTILINGUAL`: supports multiple languages, including English, Chinese, Japanese, and Korean.
+
+### Manage full-text indexes
+
+When creating a full-text index, specifying an index name is optional. If you do not specify one, TiDB uses the name of the first indexed column as the index name by default.
+
+```sql
+-- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
+
+-- Specifying an index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
+```
+
+**View existing index names:**
+
+```sql
+-- The Key_name column shows the index name
+SHOW INDEX FROM stock_items;
+
+-- Or query INFORMATION_SCHEMA
+SELECT INDEX_NAME, COLUMN_NAME, INDEX_TYPE
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
+```
+
+**Drop a full-text index:**
+
+```sql
+-- Use SHOW INDEX to confirm the index name first
+ALTER TABLE stock_items DROP INDEX title;
+```
+
+#### Specify an index name
+
+In both `CREATE TABLE` and `ALTER TABLE` statements, you can specify an index name after `FULLTEXT INDEX` or `FULLTEXT KEY`:
+
+```sql
+-- Specifying a name in CREATE TABLE
+CREATE TABLE users (
+    id INT,
+    name TEXT,
+    FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD
+);
+
+-- Specifying a name in ALTER TABLE
+ALTER TABLE users ADD FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD;
+
+-- Using standalone CREATE FULLTEXT INDEX (an index name is required)
+CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
+```
 
 ### Insert text data
 
@@ -151,6 +201,71 @@ SELECT COUNT(*) FROM stock_items
 |        5 |
 +----------+
 ```
+
+#### Multi-word search: tokenization and query semantics
+
+When you use `fts_match_word()`, the query string is tokenized according to the parser's rules, and each token is matched independently.
+
+The STANDARD parser tokenizes strings into words using spaces and punctuation as delimiters. The MULTILINGUAL parser tokenizes strings according to language-specific segmentation rules.
+
+```sql
+-- This query is tokenized into two tokens: "Alice" and "Smith"
+SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
+```
+
+`fts_match_word()` uses **OR** semantics: a document matches if it contains any of the tokens, and matching more tokens increases the relevance score.
+
+```sql
+-- The query below returns all rows where the name column contains
+-- "Alice" or "Smith" or both
+SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
+```
+
+A common misconception is that `fts_match_word('Alice X', name)` treats `"Alice X"` as a single entity for exact matching. In reality, it is tokenized into `Alice` and `X`, using OR semantics. Because `X` is a very short query term, it can match many irrelevant documents. Avoid using very short query terms or single letters.
+
+> **Note:**
+>
+> TiDB full-text search does not support exact phrase matching, where all query tokens must appear consecutively and in the specified order.
+
+#### Prefix search
+
+**Not supported.**
+
+#### Effect of repeated terms on relevance scores
+
+The relevance score returned by `fts_match_word()` is based on the **BM25** algorithm. If a query string contains repeated terms, the term frequency of that term is doubled in scoring.
+
+```sql
+-- "Alice" appears twice; in BM25 scoring, Alice's term frequency is 2
+SELECT * FROM users WHERE fts_match_word('Alice alice bob', name);
+```
+
+In this example, a document matching `Alice` receives twice the weight contribution compared to `bob`. This is expected behavior of the BM25 algorithm, which evaluates relevance based on term frequency (TF).
+
+#### Relevance scoring algorithm
+
+TiDB full-text search uses the **BM25Tantivy** algorithm to calculate relevance scores. This algorithm is a variant of the classic BM25 (Okapi BM25) algorithm that uses Count-Min Sketch to approximate document frequency (DF) for improved performance.
+
+**BM25 formula (standard form):**
+
+```
+score(D, Q) = sum_{t in Q} IDF(t) * TF(t, D) * (k1 + 1) / (TF(t, D) + k1 * (1 - b + b * |D| / avgdl))
+```
+
+Where:
+
+- `t`: query term
+- `Q`: query string (all tokens after tokenization)
+- `D`: the document being evaluated
+- `TF(t, D)`: term frequency of `t` in the document
+- `IDF(t)`: inverse document frequency, measuring the rarity of the term
+- `|D|`: document length
+- `avgdl`: average document length across all documents
+- `k1`, `b`: BM25 tuning parameters
+
+TiDB's implementation uses fixed values of `k1 = 1.2` and `b = 0.75`, which are the standard defaults for BM25 in information retrieval.
+
+The returned score is a non-negative floating-point number. A higher value indicates higher relevance to the query. Scores are not directly comparable across different datasets.
 
 ## Advanced example: Join search results with other tables
 

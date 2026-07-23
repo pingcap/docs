@@ -33,6 +33,10 @@ For pricing information about {{{ .byoc }}}, contact [TiDB Cloud Support](/tidb-
 
 </CustomContent>
 
+### Pricing for {{{ .lake }}} {#pricing-for-lake}
+
+For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
+
 ## Invoices
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.

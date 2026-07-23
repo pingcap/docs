@@ -128,6 +128,7 @@
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [Data Protection](/tidb-cloud-lake/guides/data-protection.md)
   - [Data Purge and Recycle](/tidb-cloud-lake/guides/data-purge-and-recycle.md)
+- [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
 - [Troubleshooting](/tidb-cloud-lake/guides/troubleshooting.md)
 
 ## Tutorials
@@ -1220,7 +1221,6 @@
     - [Data Sharing](/tidb-cloud-lake/guides/how-data-sharing-works.md)
   - [Editions](/tidb-cloud-lake/guides/editions.md)
   - [Platforms & Regions](/tidb-cloud-lake/guides/platforms-regions.md)
-  - [Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md)
   - Benchmarks
     - [Data Ingestion Benchmark](/tidb-cloud-lake/guides/benchmark-data-ingestion.md)
     - [TPC-H SF100 Benchmark](/tidb-cloud-lake/guides/benchmark-tpch-sf100.md)
