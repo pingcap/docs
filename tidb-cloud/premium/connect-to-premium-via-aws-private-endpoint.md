@@ -5,7 +5,7 @@ summary: Learn how to connect to your {{{ .premium }}} instance via private endp
 
 # Connect to {{{ .premium }}} via AWS PrivateLink
 
-This document describes how to connect to your {{{ .premium }}} instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
+This document describes how to connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
 
 > **Tip:**
 >
@@ -27,7 +27,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 ## Restrictions
 
 - Only users with the `Organization Owner` role can create private endpoint connections.
-- The private endpoint and the {{{ .premium }}} instance you want to connect to must be located in the same region.
+- The private endpoint and the {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance you want to connect to must be located in the same region.
 
 ## Prerequisites
 
@@ -35,19 +35,19 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint connection and connect to your instance
 
-To connect to your {{{ .premium }}} instance via a private endpoint, follow these steps:
+To connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via a private endpoint, follow these steps:
 
-1. [Select a {{{ .premium }}} instance](#step-1-select-a-premium-instance)
+1. [Select a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance](#step-1-select-a-premium-instance)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Create a private endpoint connection](#step-3-create-a-private-endpoint-connection)
 4. [Enable private DNS](#step-4-enable-private-dns)
-5. [Connect to your {{{ .premium }}} instance](#step-5-connect-to-your-premium-instance)
+5. [Connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance](#step-5-connect-to-your-premium-instance)
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
 ### Step 1. Select a {{{ .premium }}} instance {#step-1-select-a-premium-instance}
 
-1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page of your TiDB Cloud console, click the name of your target {{{ .premium }}} instance to go to its overview page.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page of your TiDB Cloud console, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Connection Type** drop-down list, select **Private Endpoint**, and then click **Create Private Endpoint Connection**.
 
@@ -59,7 +59,7 @@ If you have multiple instances, you need to repeat these steps for each instance
 
 > **Note:**
 >
-> For each {{{ .premium }}} instance, the corresponding endpoint service is automatically created 3 to 4 minutes after the instance creation.
+> For each {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, the corresponding endpoint service is automatically created 3 to 4 minutes after the instance creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
@@ -84,7 +84,7 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 >
 > - Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
 >
-> - If your service spans across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .premium }}} instance is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - If your service spans across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 </div>
 <div label="Use AWS Console">
@@ -102,11 +102,11 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 4. In the **Service settings** area, enter the service name `${your_endpoint_service_name}` from the generated command (`--service-name ${your_endpoint_service_name}`).
 5. Click **Verify service**.
 6. In the **Network settings** area, select your VPC in the drop-down list.
-7. In the **Subnets** area, select the availability zones where your {{{ .premium }}} instance is located.
+7. In the **Subnets** area, select the availability zones where your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance is located.
 
     > **Tip:**
     >
-    > If your service spans across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .premium }}} instance is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > If your service spans across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance is located. In this case, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
 8. In the **Security groups** area, select your security group properly.
 
@@ -127,7 +127,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
 > **Tip:**
 >
-> You can view and manage private endpoint connections on the **Networking** page of your target {{{ .premium }}} instance. To access this page, click **Settings** > **Networking** in the left navigation pane.
+> You can view and manage private endpoint connections on the **Networking** page of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance. To access this page, click **Settings** > **Networking** in the left navigation pane.
 
 ### Step 4. Enable private DNS
 
@@ -175,7 +175,7 @@ After you have accepted the private endpoint connection, you are redirected back
 
 When you use private endpoint connections, the statuses of private endpoints and private endpoint services are displayed on the instance-level **Networking** page:
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page.
 2. Click **Settings** > **Networking** in the left navigation pane.
 
 The possible statuses of a private endpoint are explained as follows:
