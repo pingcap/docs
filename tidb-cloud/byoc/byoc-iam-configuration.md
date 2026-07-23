@@ -49,7 +49,7 @@ Use the table below to map the required parameters for the script:
 
 After execution, the script will output the ARNs of the created IAM roles.
 
-- **Action required:** Share the **execution result/log** with your TiDB Cloud representative.
+**Action required:** Share the **execution result/log** with your TiDB Cloud representative.
 
 ## What's next
 

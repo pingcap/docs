@@ -45,7 +45,7 @@ To enable TiDB Cloud Support to assist with troubleshooting and observability, y
 > - This step is **optional**. You may choose to provide your own secure login method for maintenance.
 > - The Bastion Host is used only for troubleshooting and does not need to maintain a persistent connection. You may terminate this channel at any time.
 
-For deployment and verification steps, see [Configure a Bastion Host for {{{ .byoc }}}](/tidb-cloud/byoc/byoc-bastion-host.md).
+For deployment and verification steps, see [Configure a Bastion Host for {{{ .byoc }}}](/tidb-cloud/byoc/byoc-configure-bastion-host.md).
 
 ## What's next
 
