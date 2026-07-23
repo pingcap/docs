@@ -128,6 +128,14 @@ Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services
 
 ![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
+## {{{ .lake }}} {#lake}
+
+TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, allowing you to provision warehouses independently, scale with workload changes, and store data cost-effectively in object storage.
+
+TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector search, and AI-oriented workflows in one platform. It is designed for teams that want a managed analytics experience without operating the underlying infrastructure themselves.
+
+For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
+
 ## TiDB Cloud console
 
 The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for TiDB Cloud resources. It provides tools to manage TiDB Cloud resources, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
