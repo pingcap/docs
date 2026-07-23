@@ -242,7 +242,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 5. Click **Test Connection** to verify whether TiDB Cloud can access and write to the container.
 
-    If it is successful, **The connection is successfully** is displayed. Otherwise, check your access configuration.
+    If it is successful, **The connection is successful** is displayed. Otherwise, check your access configuration.
 
 6. Click **Enable** to enable audit logging for the cluster.
 
