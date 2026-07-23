@@ -641,4 +641,3 @@
 ## _BUILD_ALLOWLIST
 
 - [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
-- [Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md)
