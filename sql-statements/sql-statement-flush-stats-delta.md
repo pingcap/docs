@@ -9,7 +9,7 @@ summary: An overview of the usage of FLUSH STATS_DELTA for the TiDB database.
 
 When you change data using DML statements (such as `INSERT`, `UPDATE`, and `DELETE`), TiDB records changes to the total row count and modified row count of each affected table, buffers these changes (called the statistics delta) in the memory of the TiDB node that executes the statements, and persists them to the `mysql.stats_meta` system table every 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) (60 seconds by default). For more information, see [Automatic update](/statistics.md#automatic-update).
 
-Because the [health state of tables](/sql-statements/sql-statement-show-stats-healthy.md), the output of [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), and the scheduling of automatic statistics collection depend on the persisted statistics metadata, `FLUSH STATS_DELTA` is useful when you need the persisted statistics metadata to reflect recent data changes immediately, such as in testing scenarios that verify optimizer behavior. You do not need to execute this statement before [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), because TiDB automatically flushes the pending statistics delta of a table before collecting statistics on it.
+Because the [statistics health state of tables](/sql-statements/sql-statement-show-stats-healthy.md), the output of [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), and the scheduling of automatic statistics collection depend on the persisted statistics metadata, `FLUSH STATS_DELTA` is useful when you need the persisted statistics metadata to reflect recent data changes immediately, such as in testing scenarios that verify optimizer behavior. You do not need to execute `FLUSH STATS_DELTA` before executing [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), because TiDB automatically flushes the pending statistics delta of a table before collecting statistics on it.
 
 ## Synopsis
 
@@ -41,11 +41,11 @@ ClusterOption ::=
 ## Options
 
 - **Targets (`FlushTargetList`)**: specifies the tables whose statistics delta you want to flush. You must specify at least one target.
-    - `table_name`: flushes the statistics delta of a table in the current database. If you do not select a database, TiDB returns the `No database selected` error.
-    - `db_name.table_name`: flushes the statistics delta of a table in the specified database.
-    - `db_name.*`: flushes the statistics delta of all tables in the specified database.
+    - `table_name`: flushes the statistics delta of a specific table in the current database. If you do not select a database, TiDB returns the `No database selected` error.
+    - `db_name.table_name`: flushes the statistics delta of a specific table in the specific database.
+    - `db_name.*`: flushes the statistics delta of all tables in the specific database.
     - `*.*`: flushes the statistics delta of all tables.
-- **`CLUSTER`**: broadcasts the statement to all TiDB nodes in the cluster. Each TiDB node buffers the statistics delta of the DML statements that it executes. Without this option, TiDB only persists the delta buffered on the TiDB node you are connected to.
+- **`CLUSTER`**: executes the statement on all TiDB nodes in the cluster. Each TiDB node buffers the statistics delta of the DML statements that it executes. Without this option, TiDB only persists the delta buffered on the TiDB node you are connected to.
 
 Note the following behavior:
 
@@ -97,7 +97,13 @@ FLUSH STATS_DELTA *.* CLUSTER;
 
 ## Privileges
 
-To execute `FLUSH STATS_DELTA`, you must have the `SELECT` privilege on the target objects: the target table for `table_name` or `db_name.table_name` targets, the target database for `db_name.*` targets, and the global `SELECT` privilege for `*.*` targets. Unlike other `FLUSH` statements, `FLUSH STATS_DELTA` does not require the `RELOAD` privilege.
+To execute `FLUSH STATS_DELTA`, you must have the `SELECT` privilege on the target objects: 
+
+- For `table_name` or `db_name.table_name`, you need the `SELECT` privilege on the target table.
+- For `db_name.*`, you need the `SELECT` privilege on the target database.
+- For `*.*`, you need the global `SELECT` privilege.
+
+Unlike other `FLUSH` statements, `FLUSH STATS_DELTA` does not require the `RELOAD` privilege.
 
 ## MySQL compatibility
 
