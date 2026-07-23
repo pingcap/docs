@@ -108,7 +108,7 @@ TiDB Cloud provides the following deployment options:
 
     <CustomContent language="en,zh">
 
-    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud. 
+    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud.
 
     </CustomContent>
 
@@ -133,6 +133,10 @@ TiDB Cloud provides the following deployment options:
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
 
     Currently, TiDB Cloud Dedicated is generally available on AWS, Azure, and Google Cloud. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
+
+- {{{ .lake }}}
+
+    TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows. For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
 
 ## Architecture
 
