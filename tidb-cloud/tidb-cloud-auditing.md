@@ -17,6 +17,8 @@ TiDB Cloud provides an audit logging feature that records user access activities
 >
 > To request access for an ineligible cluster, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
 
+For documentation of the earlier audit logging version, see [TiDB Cloud Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md).
+
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
 The audit logging feature is **disabled by default**. To audit a cluster, you must first enable the audit logging, and then specify the auditing filter rules.

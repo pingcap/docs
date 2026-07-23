@@ -9,7 +9,7 @@ TiDB Cloud provides an audit logging feature that records user access activities
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
+> This is the legacy version of the database audit logging feature. It was previously enabled for a small group of test users and is now in maintenance mode. This document is intended for those existing users. For new deployments, see [TiDB Cloud Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md), which provides more granular event classes and more detailed audit logs.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
