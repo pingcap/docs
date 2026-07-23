@@ -154,7 +154,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 > **Note:**
 >
-> TiDB Cloud BYOC は、他の TiDB Cloud のデプロイオプションとは異なるアーキテクチャを採用しています。BYOC では、TiDB Cloud のコントロールプレーンは PingCAP によって管理され、データプレーンはお客様自身のクラウドアカウントで実行されます。詳細については、[TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) を参照してください。
+> TiDB Cloud BYOC は、他の TiDB Cloud のデプロイオプションとは異なるアーキテクチャを採用しています。BYOC では、TiDB Cloud のコントロールプレーンは PingCAP によって管理され、データプレーンはお客様自身のクラウドアカウントで実行されます。詳細については、[TiDB Cloud BYOC アーキテクチャ](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) を参照してください。
 
 </CustomContent>
 
