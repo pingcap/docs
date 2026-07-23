@@ -3,7 +3,7 @@ title: Connect to {{{ .premium }}} via Public Connection
 summary: Learn how to connect to your {{{ .premium }}} via public connection.
 ---
 
-# Connect to {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> via Public Connection
+# Connect to {{{ .premium }}} via Public Connection
 
 This document describes how to connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via a SQL client from your laptop.
 
@@ -19,6 +19,8 @@ For public connections, {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc
 ## Connect to the instance
 
 To connect to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via public connection, take the following steps:
+
+<CustomContent plan="premium">
 
 1. Open the overview page of the target instance.
 
@@ -36,8 +38,6 @@ To connect to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</Cu
 
     If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
-<CustomContent plan="premium">
-
 4. Click **CA cert** to download CA cert for TLS connection to {{{ .premium }}} instances. The CA cert supports TLS 1.2 by default.
 
 5. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
@@ -45,6 +45,22 @@ To connect to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</Cu
 </CustomContent>
 
 <CustomContent plan="byoc">
+
+1. Open the overview page of the target instance.
+
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
+
+        > **Tip:**
+        >
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
+
+    2. Click the name of your target instance to go to its overview page.
+
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+
+3. In the connection dialog, select **Public** from the **Connection Type** drop-down list.
+
+    If you have not configured the IP access list, click **Configure IP Access List** or follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
 4. Choose your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your instance.
 

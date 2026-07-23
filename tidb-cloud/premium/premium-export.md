@@ -3,7 +3,7 @@ title: Export Data from {{{ .premium }}}
 summary: Learn how to export data from {{{ .premium }}} instances.
 ---
 
-# Export Data from {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent>
+# Export Data from {{{ .premium }}}
 
 TiDB Cloud enables you to export data from a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 

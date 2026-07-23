@@ -3,7 +3,7 @@ title: Connect to Your {{{ .premium }}} Instance
 summary: Learn how to connect to your {{{ .premium }}} instance via different methods.
 ---
 
-# Connect to Your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance
+# Connect to Your {{{ .premium }}} Instance
 
 This document describes how to connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
 
@@ -23,7 +23,7 @@ Direct connections mean the MySQL native connection system over TCP. You can con
 
 ## Network
 
-There are two network connection types for {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent>:
+There are two network connection types for {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent>:
 
 - [Private endpoint](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md) (recommended)
 

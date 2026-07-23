@@ -3,7 +3,7 @@ title: Delete a {{{ .premium }}} instance
 summary: Learn how to delete a {{{ .premium }}} instance.
 ---
 
-# Delete a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance
+# Delete a {{{ .premium }}} instance
 
 This document describes how to delete a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
 

@@ -3,7 +3,7 @@ title: Connect to {{{ .premium }}} via AWS PrivateLink
 summary: Learn how to connect to your {{{ .premium }}} instance via private endpoint with AWS.
 ---
 
-# Connect to {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> via AWS PrivateLink
+# Connect to {{{ .premium }}} via AWS PrivateLink
 
 This document describes how to connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via [AWS PrivateLink](https://aws.amazon.com/privatelink).
 
@@ -45,7 +45,7 @@ To connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}<
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
-### Step 1. Select a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance {#step-1-select-a-premium-instance}
+### Step 1. Select a {{{ .premium }}} instance {#step-1-select-a-premium-instance}
 
 1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page of your TiDB Cloud console, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
@@ -159,7 +159,7 @@ To enable private DNS in your AWS Management Console:
 </div>
 </SimpleTab>
 
-### Step 5. Connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance {#step-5-connect-to-your-premium-instance}
+### Step 5. Connect to your {{{ .premium }}} instance {#step-5-connect-to-your-premium-instance}
 
 After you have accepted the private endpoint connection, you are redirected back to the connection dialog.
 
@@ -194,7 +194,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ## Troubleshooting
 
-### I cannot connect to a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via a private endpoint after enabling private DNS. Why?
+### I cannot connect to a {{{ .premium }}} instance via a private endpoint after enabling private DNS. Why?
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
 
