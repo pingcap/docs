@@ -8,6 +8,18 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年7月21日 {#july-21-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - [Top RU](/tidb-cloud/top-ru.md)（パブリックプレビュー）が、[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) で次の追加リージョンをサポートするようになりました。
+
+        - Alibaba Cloud: `Jakarta (ap-southeast-5)`
+
+      この機能は、分単位で RU 消費量の多い上位の SQL を表示し、最もリソースを消費するクエリをすばやく特定してコストを削減するのに役立ちます。
+
 ## 2026年7月14日 {#july-14-2026}
 
 **一般的な変更**
@@ -190,7 +202,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
-        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)参照してください。
+        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
 
     -   TiDB Cloud Premiumインスタンス向けに、**メトリクス**ページ（**インスタンス概要**タブ）に2つの新しいTTL監視メトリクスを追加します。
 

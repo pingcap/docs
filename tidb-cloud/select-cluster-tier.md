@@ -10,10 +10,24 @@ aliases: ['/ja/tidbcloud/developer-tier-cluster']
 
 TiDB Cloud、以下のプランをご用意しています。新規導入の場合でも、アプリケーションの需要増加に合わせて拡張していく場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。TiDBリソースを作成する前に、どのプランがお客様のニーズに最適かを検討する必要があります。
 
--   [TiDB Cloud Starter](#starter)
--   [TiDB Cloud Essential](#essential)
--   [TiDB Cloud Premium](#premium)
--   [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
 
 > **Note:**
 >
@@ -105,6 +119,22 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 -   **ゼロインフラストラクチャ管理**：手動によるスケーリング、パッチ適用、キャパシティプランニングを排除する、完全マネージドサービスを提供します。
 -   **予測可能な料金体系**：storageとリクエスト容量ユニット（RCU）に基づいて課金されるため、ニーズに合わせて拡張可能な透明性の高い使用量ベースの料金体系が実現し、予期せぬ追加料金なしで使用した分だけを支払うことができます。
 -   **高度なセキュリティとコンプライアンス**：高度な暗号化、顧客管理型暗号化キー（CMEK）、プライベートネットワーク、およびコンプライアンス認証をサポートし、機密データを保護します。
+
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} は、データの配置場所、クラウドリソース、ネットワーク境界、コンプライアンス体制をより強力に制御する必要があるエンタープライズワークロード向けに設計されています。{{{ .byoc }}} では、TiDB Cloud のコントロールプレーンは PingCAP によって管理され、データプレーンはお客様自身のクラウドアカウント内で実行されます。
+
+{{{ .byoc }}} は、以下の機能を備えたマネージド TiDB Cloud エクスペリエンスを提供します。
+
+- **Customer-owned data plane**: TiDB サービスのリソース、ストレージ、ネットワーク、およびデータをお客様のクラウドアカウント内に保持します。
+- **Managed operations**: デプロイ、スケーリング、モニタリング、アップグレード、バックアップとリストア、ライフサイクル管理に TiDB Cloud を使用します。
+- **Flexible high availability**: Single-AZ と Multi-AZ の両方のデプロイをサポートし、低レイテンシーのゾーン単位デプロイと、複数のアベイラビリティゾーンにまたがる高い耐障害性を持つデプロイのいずれかを選択できます。
+- **Cloud-account-level security controls**: 独自のクラウドポリシー、ネットワーク制御、監査ログ、およびコンプライアンス制御を BYOC データプレーンに適用できます。
+- **Private connectivity**: BYOC の設定に応じて、VPC peering などのプライベートネットワークアクセスパターンをサポートします。
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated {#tidb-cloud-dedicated}
 

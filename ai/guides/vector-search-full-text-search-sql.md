@@ -44,7 +44,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供する全文インデックスが必要です。全文インデックスは、新規テーブルに作成することも、既存のテーブルに追加することもできます。
 
-全文検索インデックス付きのテーブルを作成します。
+全文インデックス付きのテーブルを作成します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -54,7 +54,7 @@ CREATE TABLE stock_items(
 );
 ```
 
-または、既存のテーブルに全文検索インデックスを追加します。
+または、既存のテーブルに全文インデックスを追加します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -70,13 +70,63 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 `WITH PARSER <PARSER_NAME>`句では、以下のパーサーが受け入れられます。
 
--   `STANDARD` : 高速で、英語コンテンツに対応し、スペースと句読点によって単語を分割します。
+-   `STANDARD` : 高速で、英語コンテンツに対応し、スペースと句読点によって単語を分割します。インデックス作成と検索では、すべてのテキストが小文字化されます（大文字と小文字を区別しないマッチング）。
 
 -   `MULTILINGUAL` : 英語、中国語、日本語、韓国語など、複数の言語をサポートしています。
 
+### 全文インデックスを管理する {#manage-full-text-indexes}
+
+全文インデックスを作成する際、インデックス名の指定は任意です。指定しない場合、TiDB はデフォルトで最初にインデックス化されるカラム名をインデックス名として使用します。
+
+```sql
+-- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL;
+
+-- Specifying an index name
+ALTER TABLE stock_items ADD FULLTEXT INDEX ft_title (title) WITH PARSER MULTILINGUAL;
+```
+
+**既存のインデックス名を表示する:**
+
+```sql
+-- The Key_name column shows the index name
+SHOW INDEX FROM stock_items;
+
+-- Or query INFORMATION_SCHEMA
+SELECT INDEX_NAME, COLUMN_NAME, INDEX_TYPE
+FROM INFORMATION_SCHEMA.STATISTICS
+WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
+```
+
+**全文インデックスを削除する:**
+
+```sql
+-- Use SHOW INDEX to confirm the index name first
+ALTER TABLE stock_items DROP INDEX title;
+```
+
+#### インデックス名を指定する {#specify-an-index-name}
+
+`CREATE TABLE` 文と `ALTER TABLE` 文のどちらでも、`FULLTEXT INDEX` または `FULLTEXT KEY` の後にインデックス名を指定できます。
+
+```sql
+-- Specifying a name in CREATE TABLE
+CREATE TABLE users (
+    id INT,
+    name TEXT,
+    FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD
+);
+
+-- Specifying a name in ALTER TABLE
+ALTER TABLE users ADD FULLTEXT INDEX ft_name (name) WITH PARSER STANDARD;
+
+-- Using standalone CREATE FULLTEXT INDEX (an index name is required)
+CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
+```
+
 ### テキストデータを挿入する {#insert-text-data}
 
-全文検索インデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
+全文インデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
 
 例えば、以下のSQL文を実行することで、複数の言語でデータを挿入できます。TiDBの多言語パーサーがテキストを自動的に処理します。
 
@@ -151,6 +201,71 @@ SELECT COUNT(*) FROM stock_items
 |        5 |
 +----------+
 ```
+
+#### 複数語検索: トークン化とクエリのセマンティクス
+
+`fts_match_word()` を使用すると、クエリ文字列はパーサーのルールに従ってトークン化され、各トークンが独立して照合されます。
+
+STANDARD パーサーは、スペースと句読点を区切り文字として文字列を単語にトークン化します。MULTILINGUAL パーサーは、言語固有の分割ルールに従って文字列をトークン化します。
+
+```sql
+-- This query is tokenized into two tokens: "Alice" and "Smith"
+SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
+```
+
+`fts_match_word()` は **OR** セマンティクスを使用します。つまり、いずれかのトークンを含むドキュメントが一致し、一致するトークンが多いほど関連性スコアが高くなります。
+
+```sql
+-- The query below returns all rows where the name column contains
+-- "Alice" or "Smith" or both
+SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
+```
+
+よくある誤解として、`fts_match_word('Alice X', name)` が `"Alice X"` を完全一致のための単一の実体として扱うというものがあります。実際には、これは `Alice` と `X` にトークン化され、OR セマンティクスが使用されます。`X` は非常に短いクエリ語であるため、無関係な多くのドキュメントに一致する可能性があります。非常に短いクエリ語や単一文字の使用は避けてください。
+
+> **Note:**
+>
+> TiDB 全文検索は、すべてのクエリトークンが連続して指定された順序で出現する必要がある完全なフレーズ一致をサポートしていません。
+
+#### プレフィックス検索
+
+**サポートされていません。**
+
+#### 繰り返し語が関連性スコアに与える影響
+
+`fts_match_word()` が返す関連性スコアは、**BM25** アルゴリズムに基づいています。クエリ文字列に繰り返し語が含まれる場合、その語の単語頻度はスコアリングで 2 倍になります。
+
+```sql
+-- "Alice" appears twice; in BM25 scoring, Alice's term frequency is 2
+SELECT * FROM users WHERE fts_match_word('Alice alice bob', name);
+```
+
+この例では、`Alice` に一致するドキュメントは、`bob` と比べて 2 倍の重みが与えられます。これは、単語頻度 (TF) に基づいて関連性を評価する BM25 アルゴリズムの想定どおりの動作です。
+
+#### 関連性スコアリングアルゴリズム
+
+TiDB 全文検索では、関連性スコアの計算に **BM25Tantivy** アルゴリズムを使用します。このアルゴリズムは、パフォーマンス向上のために Count-Min Sketch を使用して文書頻度 (DF) を近似する、古典的な BM25 (Okapi BM25) アルゴリズムの変種です。
+
+**BM25 formula (standard form):**
+
+```
+score(D, Q) = sum_{t in Q} IDF(t) * TF(t, D) * (k1 + 1) / (TF(t, D) + k1 * (1 - b + b * |D| / avgdl))
+```
+
+Where:
+
+- `t`: クエリ語
+- `Q`: クエリ文字列（トークン化後のすべてのトークン）
+- `D`: 評価対象のドキュメント
+- `TF(t, D)`: ドキュメント内の `t` の単語頻度
+- `IDF(t)`: 逆文書頻度。語の希少性を測定します
+- `|D|`: ドキュメント長
+- `avgdl`: すべてのドキュメントにおける平均ドキュメント長
+- `k1`, `b`: BM25 のチューニングパラメータ
+
+TiDB の実装では、情報検索における BM25 の標準デフォルト値である `k1 = 1.2` と `b = 0.75` の固定値を使用します。
+
+返されるスコアは非負の浮動小数点数です。値が高いほど、クエリとの関連性が高いことを示します。スコアは異なるデータセット間で直接比較することはできません。
 
 ## 高度な例：検索結果を他のテーブルと結合する {#advanced-example-join-search-results-with-other-tables}
 
