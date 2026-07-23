@@ -38,7 +38,7 @@ TiDB-X-CLOUD.202510.1
 
 カーネルの開発スケジュールとリリーススケジュールは独立しているため、カーネルバージョンはベースラインブランチの作成から数か月後にリリースされる場合があります。
 
-TiDB Cloud Premium は独自のカーネルリリースサイクルに従うため、[TiDB Cloud Premium release notes](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) は [TiDB Self-Managed release notes](https://docs.pingcap.com/releases/tidb-self-managed/) とは別に公開されます。
+TiDB Cloud Premium は独自のカーネルリリースサイクルに従うため、[TiDB Cloud Premium リリースノート](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) は [TiDB Self-Managed リリースノート](https://docs.pingcap.com/releases/tidb-self-managed/) とは別に公開されます。
 
 ## FAQ {#faq}
 
