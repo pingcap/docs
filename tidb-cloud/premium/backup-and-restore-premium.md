@@ -141,7 +141,7 @@ TiDB Cloud supports snapshot restore and point-in-time restore for your instance
 
 TiDB Cloud supports restoring data to a new instance.
 
-### Restore to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance {#restore-to-a-new-instance}
+### Restore to a new {{{ .premium }}} instance {#restore-to-a-new-instance}
 
 To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, take the following steps:
 
