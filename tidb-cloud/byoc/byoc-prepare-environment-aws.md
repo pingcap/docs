@@ -183,4 +183,4 @@ Review the following quota categories in each target AWS region:
 
 ## What's next
 
-After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-iam-configuration.md) to configure the IAM permissions required for automated deployment.
+After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated deployment.

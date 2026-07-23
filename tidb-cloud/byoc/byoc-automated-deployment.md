@@ -49,4 +49,4 @@ Once the automation completes:
 
 ## What's next
 
-After your {{{ .byoc }}} region is fully operational, continue with [Create Your First TiDB Cloud BYOC Instance](/tidb-cloud/byoc/byoc-service-initialization.md) to create your first TiDB instance and configure secure administrative access.
+After your {{{ .byoc }}} region is fully operational, continue with [Create Your First TiDB Cloud BYOC Instance](/tidb-cloud/byoc/byoc-initialize-service.md) to create your first TiDB instance and configure secure administrative access.

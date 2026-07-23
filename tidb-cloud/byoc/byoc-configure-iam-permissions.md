@@ -1,10 +1,10 @@
 ---
-title: TiDB Cloud BYOC IAM Configuration
+title: Configure TiDB Cloud BYOC IAM Permissions
 summary: This document outlines the IAM configuration required for TiDB Cloud BYOC controller access.
 ---
 
-# TiDB Cloud BYOC IAM Configuration
-
+# Configure TiDB Cloud BYOC IAM Permissions
+`
 Once the AWS environment is prepared, you must authorize the TiDB Cloud Control Plane to manage resources within your account. This is achieved by executing a bootstrapping script that establishes the necessary IAM Roles based on the Principle of Least Privilege.
 
 ## Preparation
