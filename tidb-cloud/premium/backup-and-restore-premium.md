@@ -4,7 +4,7 @@ summary: Learn how to back up and restore your {{{ .premium }}} instances.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Data
+# Back Up and Restore {{{ .premium }}} Data
 
 <CustomContent plan="premium">
 
