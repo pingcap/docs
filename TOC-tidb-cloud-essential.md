@@ -53,7 +53,7 @@
   - 監視と警告
     - [概要](/tidb-cloud/monitor-tidb-cluster.md)
     - [組み込みの指標](/tidb-cloud/built-in-monitoring.md)
-    - [トップRU](/tidb-cloud/top-ru.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Top RU](/tidb-cloud/top-ru.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [内蔵アラート機能](/tidb-cloud/monitor-built-in-alerting.md)
     - [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)
     - アラート通知を購読する
