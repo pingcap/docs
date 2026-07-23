@@ -11,7 +11,7 @@ TiDB Cloud provides an audit logging feature that records user access activities
 >
 > Database audit logging is now in Public Preview for eligible clusters.
 >
-> * **Public Preview Eligibility**: * Version: TiDB v7.5.6+ or v8.5.2+.
+> * **Public Preview Eligibility**: Version: TiDB v7.5.6+ or v8.5.2+.
 >   * **Azure Restriction**: Must be created after April 15, 2026.
 > * **Other Clusters**: For all other versions or configurations, the feature remains available upon request.
 >
@@ -109,7 +109,7 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
+4. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must disable and re-enable audit logging.
@@ -166,7 +166,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 
 1. In the **Bucket URI** field, enter your full GCS bucket name.
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
+3. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
 > - After enabling audit logging, if you make any new changes to the bucket URI or location, you must disable and re-enable audit logging.
@@ -230,7 +230,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
     - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
     - In the **SAS Token** field, enter the SAS token for accessing the container.
-5. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigate to the next step for **Database Audit Logging Settings**.
+5. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the container. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
 >
@@ -264,9 +264,9 @@ To specify auditing filter rules for a cluster, take the following steps:
 
 2. In the **Add Filter Rule** dialog, configure the following items:
 
-    - **Filter Name**: enter a name for the filter rule.
-    - **SQL User**: enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
-    - **Filter Events**: select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
+    - **Filter Name**: Enter a name for the filter rule.
+    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
+    - **Filter Events**: Select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
 
 3. **Confirm** the filter rule.
 
@@ -387,7 +387,7 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-{{{ .dedicated }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
+{{{ .dedicated }}} does not guarantee the sequential order of audit logs, which means that you might have to review all log files to find the most recent events. To sort the logs chronologically, you can use the `TIME` field in the audit logs.
 
 ## Legacy database audit logging reference
 
