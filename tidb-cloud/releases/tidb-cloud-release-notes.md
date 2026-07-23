@@ -202,7 +202,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
 
         Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
-        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)参照してください。
+        この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
 
     -   TiDB Cloud Premiumインスタンス向けに、**メトリクス**ページ（**インスタンス概要**タブ）に2つの新しいTTL監視メトリクスを追加します。
 
