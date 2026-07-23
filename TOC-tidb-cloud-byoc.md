@@ -36,6 +36,7 @@
   - [Configure IAM Permissions](/tidb-cloud/byoc/byoc-iam-configuration.md)
   - [Automated Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md)
   - [Service Initialization](/tidb-cloud/byoc/byoc-service-initialization.md)
+  - [Configure a Bastion Host](/tidb-cloud/byoc/byoc-bastion-host.md)
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
   - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)

@@ -38,29 +38,15 @@ After preparing your backup file in Amazon S3, you can proceed to restore the da
 
 ## Configure secure administrative access
 
-To enable TiDB Cloud Support to assist with troubleshooting and observability, a secure access channel must be established. This is achieved by deploying a hardened Bastion Host within your VPC that connects via **Tailscale** (a secure VPN protocol).
+To enable TiDB Cloud Support to assist with troubleshooting and observability, you can configure a secure access channel by deploying a hardened bastion host within your VPC.
 
 > **Note:**
 >
 > - This step is **optional**. You may choose to provide your own secure login method for maintenance.
 > - The Bastion Host is used only for troubleshooting and does not need to maintain a persistent connection. You may terminate this channel at any time.
-> - The Bastion Host deployment instruction for Single-AZ will be provided in the separated tab.
 
-1. **Execute the deployment script.**
+For deployment and verification steps, see [Configure a Bastion Host for {{{ .byoc }}}](/tidb-cloud/byoc/byoc-bastion-host.md).
 
-    1. Download the bastion host deployment script from the [PingCAP GitHub repository](https://github.com/tidbcloud/byoc-account-setup/tree/main/bastion).
+## What's next
 
-    2. Execute Terraform deployment.
-
-        What this deployment does:
-
-        * Provisions a hardened EC2 Bastion Host in your VPC.
-        * Creates an EKS Access Entry to allow the Bastion limited access to the Kubernetes cluster for management tasks.
-        * Establishes a secure Tailscale tunnel upon startup.
-
-2. **Verify access.**
-
-    After the script completes:
-
-    1. **Check AWS Console:** verify that the Bastion Host EC2 instance is running.
-    2. **Confirm with TiDB:** Notify your TiDB Cloud Representative. They will verify that the PingCAP engineering team can successfully connect via the internal secure tunnel.
+After you create your first {{{ .byoc }}} instance and configure secure administrative access, continue with [TiDB Cloud BYOC Joint Validation](/tidb-cloud/byoc/joint-validation.md) to validate connectivity, observability, security, and alerting.
