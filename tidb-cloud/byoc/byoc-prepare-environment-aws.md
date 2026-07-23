@@ -160,24 +160,27 @@ Fill out the table below with the information gathered in steps above and share 
 
 ## Review and increase AWS service quotas
 
-<!--To confirm: need to update-->
+AWS service quota requirements vary by customer environment. The required quota values depend on factors such as your workload size, target capacity, selected AWS region, availability mode, and expected scaling range.
 
-### Recommended Quota Limits
+During environment preparation, work with TiDB Cloud Support or your TiDB Cloud representative to calculate the required quota values for your deployment. If your current AWS service quotas are lower than the calculated requirements, request quota increases before the automated deployment starts.
 
-You can request quota increases for the following resources in your target AWS region:
+### Quota categories to review
 
-* **Amazon EC2 (vCPU-based quotas):** Increase relevant instance family quotas (e.g., Standard instances) to support up to 1024 vCPUs.
-* **Amazon EBS (gp3 storage):** Increase General Purpose (gp3) volume storage quota to 150 TiB.
-* **Amazon EKS / Cluster Scaling Capacity:** Ensure the environment supports scaling to at least 40 worker nodes, including:
-    * EC2 capacity
-    * Auto Scaling Group limits
-    * EKS managed node group limits
+Review the following quota categories in each target AWS region:
 
-### How to Request a Quota Increase
+- **Amazon EC2 quotas**: quota values related to vCPU-based instance usage and instance families required by the deployment.
+- **Amazon EBS quotas**: quota values related to the storage types and volume capacity required by the deployment.
+- **Amazon EKS and scaling-related quotas**: quota values that affect EKS clusters and node scaling capacity, including EC2 capacity, Auto Scaling Group limits, and EKS managed node group limits.
+
+### How to request a quota increase
 
 1. Log in to the AWS Management Console.
 2. Navigate to Service Quotas.
-3. Search for the relevant services: Amazon EC2， Amazon EBS，Amazon EKS
+3. Search for the relevant services: Amazon EC2, Amazon EBS, and Amazon EKS.
 4. Select the required quota.
-5. Click Request quota increase.
+5. Click **Request quota increase**.
 6. Enter the target values and submit the request.
+
+## What's next
+
+After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated deployment.

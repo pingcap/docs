@@ -47,4 +47,6 @@ Once the automation completes:
 
     **AWS Invoice:** You will begin seeing charges from AWS for the underlying resources (EC2, NAT Gateways, EKS).
 
-**Status:** Your BYOC region is now fully operational. You may proceed to [**BYOC service initialization**](/tidb-cloud/byoc/byoc-service-initialization.md) to create your first TiDB instance.
+## What's next
+
+After your {{{ .byoc }}} region is fully operational, continue with [Create Your First TiDB Cloud BYOC Instance](/tidb-cloud/byoc/byoc-initialize-service.md) to create your first TiDB instance and configure secure administrative access.
