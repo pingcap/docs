@@ -137,7 +137,8 @@ TiDB Cloud 定义了不同的用户角色，用于管理组织、项目和实例
 | 管理项目下所有 {{{ .starter }}} 实例的 [消费限额](/tidb-cloud/manage-serverless-spend-limit.md)。 | ✅ | ❌ | ❌ | ❌ |
 | 管理项目中的资源操作，例如创建、修改、移动和删除项目类型支持的实例或集群。 | ✅ | ❌ | ❌ | ❌ |
 | 管理项目下 {{{ .starter }}} 和 {{{ .essential }}} 实例的分支，如分支创建、连接和删除。 | ✅ | ❌ | ❌ | ❌ |
-| 管理资源数据，如数据导入、数据备份与恢复、数据迁移。 | ✅ | ✅ | ❌ | ❌ |
+| 管理资源数据，如数据导入、数据备份、数据迁移。 | ✅ | ✅ | ❌ | ❌ |
+| 从备份中将实例或集群恢复为新资源。 | ✅ | ❌ | ❌ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的只读操作，如使用或创建端点读取数据。 | ✅ | ✅ | ✅ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的读写操作。 | ✅ | ✅ | ❌ | ❌ |
 | 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 查看资源数据（如果资源类型支持）。 | ✅ | ✅ | ✅ | ❌ |

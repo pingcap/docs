@@ -192,13 +192,13 @@ WHERE last_access_time IS NOT NULL AND percentage_access_0 + percentage_access_0
 
 ## 假设索引
 
-假设索引（Hypothetical Indexes，Hypo Indexes）是通过 SQL 注释（类似于 [查询提示](/optimizer-hints.md)）而非 `CREATE INDEX` 语句创建的。这种方式可以让你在无需物理落地索引的情况下，轻量级地进行索引实验。
+在 `EXPLAIN` 语句中，你可以使用 `/*+ HYPO_INDEX(...) */` SQL 注释语法来定义一个供查询优化器考虑的假设索引。这种方式可以让你在无需物理落地索引的情况下，轻量级地进行索引实验。
 
-例如，`/*+ HYPO_INDEX(t, idx_ab, a, b) */` 注释会指示查询优化器为表 `t` 的 `a`、`b` 列创建名为 `idx_ab` 的假设索引。优化器会生成该索引的元数据，但不会实际创建物理索引。如果适用，优化器会在查询优化阶段考虑该假设索引，而不会产生索引创建的相关开销。
+例如，`/*+ HYPO_INDEX(t, idx_ab, a, b) */` 注释会指示查询优化器为表 `t` 的 `a`、`b` 列创建名为 `idx_ab` 的假设索引。优化器会生成该索引的元信息，但不会实际创建物理索引。如果适用，优化器会在查询优化阶段考虑该假设索引，而不会产生索引创建的相关开销。
 
 `RECOMMEND INDEX` Advisor 会利用假设索引进行 “What-If” 分析，评估不同索引的潜在收益。你也可以直接使用假设索引，在正式创建索引前进行设计实验。
 
-以下示例展示了如何在查询中使用假设索引：
+以下示例展示了如何在 `EXPLAIN` 语句中使用假设索引：
 
 ```sql
 CREATE TABLE t(a INT, b INT, c INT);

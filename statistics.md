@@ -748,23 +748,29 @@ mysql> SHOW WARNINGS;
 
 #### `tidb_build_stats_concurrency`
 
-执行 `ANALYZE` 语句时，任务会被拆分为多个小任务，每个小任务只处理一个列或索引的统计信息。你可以通过 [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency) 变量控制同时运行的小任务数。默认值为 `2`。v7.4.0 及更早版本默认值为 `4`。
+该变量控制手动执行 `ANALYZE` 时构建统计信息的并发度，例如可同时处理的表或分区分析任务数。默认值为 `2`。v7.4.0 及更早版本默认值为 `4`。
 
 #### `tidb_build_sampling_stats_concurrency`
 
-分析普通列时，可以通过 [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) 控制采样任务的并发度。默认值为 `2`。
+该变量控制 `ANALYZE` 并发的以下方面：
+
+- 合并从不同 Region 收集的样本的并发度。
+- 收集特殊索引（例如基于生成虚拟列的索引）统计信息的并发度，例如 TiDB 可同时为其收集统计信息的索引数。
+
+默认值为 `2`。
 
 #### `tidb_analyze_partition_concurrency`
 
-执行 `ANALYZE` 语句时，可以通过 [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) 控制分区表读写统计信息的并发度。默认值为 `2`。v7.4.0 及更早版本默认值为 `1`。
+该变量控制保存 `ANALYZE` 结果（将 TopN 和直方图写入系统表）的并发度。默认值为 `2`。v7.4.0 及更早版本默认值为 `1`。
 
-#### `tidb_distsql_scan_concurrency`
+#### `tidb_analyze_distsql_scan_concurrency` {#tidb-analyze-distsql-scan-concurrency}
 
-分析普通列时，可以通过 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 变量控制一次读取的 Region 数。默认值为 `15`。注意，修改该值会影响查询性能，请谨慎调整。
+该变量控制 `ANALYZE` 并发的以下方面：
 
-#### `tidb_index_serial_scan_concurrency`
+- 扫描 TiKV Region 的并发度。
+- 扫描特殊索引（基于虚拟列生成的索引）的 Region 的并发度。
 
-分析索引列时，可以通过 [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) 变量控制一次读取的 Region 数。默认值为 `1`。注意，修改该值会影响查询性能，请谨慎调整。
+默认值为 `4`。
 
 ## 另请参阅
 

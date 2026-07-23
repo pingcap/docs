@@ -8,6 +8,12 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 本文档介绍如何在 {{{ .premium }}} 实例上备份和恢复数据。{{{ .premium }}} 同时支持自动备份和手动备份，并允许你根据需要将备份数据恢复到新的实例。
 
+<CustomContent plan="byoc">
+
+本文档也适用于 {{{ .byoc }}}。{{{ .byoc }}} 的备份和恢复功能目前与 {{{ .premium }}} 保持一致。
+
+</CustomContent>
+
 备份文件可以来自以下来源：
 
 - 活跃的 {{{ .premium }}} 实例
@@ -162,13 +168,15 @@ TiDB Cloud 支持将数据恢复到新实例。
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 在 **Recycle Bin** 页面，点击 **Premium** 页签，进入 {{{ .premium }}} 实例的回收站。
+2. 在 **Recycle Bin** 页面，点击 <CustomContent plan="premium">**Premium**</CustomContent><CustomContent plan="byoc">**BYOC**</CustomContent> 页签，进入 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的回收站。
 
-3. 找到你要恢复的 {{{ .premium }}} 实例，然后点击 **>** 按钮以展开该实例的可用备份。
+3. 找到你要恢复的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例，然后点击 **>** 按钮以展开该实例的可用备份。
 
 4. 在目标备份所在行中，点击 **...**，然后选择 **Restore**。
 
 5. 在 **Restore** 页面，按照[恢复到新实例](#restore-to-a-new-instance)中的相同步骤，将备份恢复到新实例。
+
+<CustomContent plan="premium">
 
 ### 从不同套餐类型恢复备份 {#restore-backups-from-a-different-plan-type}
 
@@ -187,15 +195,18 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 3. 在 **Restore** 页面，按照[恢复到新实例](#restore-to-a-new-instance)中的相同步骤，将备份恢复到新实例。
 
+</CustomContent>
+
 ### 从云存储恢复备份 {#restore-backups-from-cloud-storage}
 
-{{{ .premium }}} 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
+<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
 
 >**Note:**
 >
 > - 当前仅支持恢复位于 **Amazon S3** 和 **Alibaba Cloud OSS** 中的备份。
 > - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
 > - 如果实例和存储 bucket 位于不同 region，可能会产生额外的跨 region 数据传输费用。
+
 #### 步骤 {#steps}
 
 开始之前，请确保你拥有具有足够权限以访问备份文件的 access key 和 secret key。

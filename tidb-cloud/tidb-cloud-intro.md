@@ -118,6 +118,16 @@ TiDB Cloud 提供以下部署选项：
 
     </CustomContent>
 
+<CustomContent plan="byoc">
+
+- {{{ .byoc }}}
+
+    {{{ .byoc }}} 专为需要更高控制力、安全性和合规性的大规模生产负载而设计。它使你能够在自己的 AWS 账户中运行数据平面，同时享受 TiDB Cloud 的自动化运维、弹性扩展性和企业级安全能力。
+
+    目前，{{{ .byoc }}} 在 AWS 上处于私有预览阶段。
+
+</CustomContent>
+
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated 面向关键业务，提供跨多个可用区的高可用、横向扩展和完整的 HTAP 能力。
@@ -139,3 +149,11 @@ TiDB Cloud 提供以下部署选项：
 - 你的 VPC
 
     你可以通过私有端点连接或 VPC 对等连接访问你的 TiDB Cloud 资源。详情请参考 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
+
+<CustomContent plan="byoc">
+
+> **注意：**
+>
+> TiDB Cloud BYOC 使用的架构与其他 TiDB Cloud 部署选项不同。在 BYOC 中，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在你自己的云账户中。详情请参阅 [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc)。
+
+</CustomContent>

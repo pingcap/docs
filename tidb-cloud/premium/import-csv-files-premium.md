@@ -214,4 +214,4 @@ summary: 了解如何将 Amazon S3 或 Alibaba Cloud Object Storage Service (OSS
 
 ### 导入后的表中行数为零 {#zero-rows-in-the-imported-tables}
 
-当导入进度显示为 **Completed** 后，请检查已导入的表。如果行数为零，表示没有数据文件与您输入的 Bucket URI 匹配。在这种情况下，请通过提供正确的源文件、按照 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行修改来解决此问题。之后，重新导入这些表。
+当导入进度显示为 **Completed** 后，请检查已导入的表。如果行数为零，表示没有数据文件与你输入的 Bucket URI 匹配。在这种情况下，请通过提供正确的源文件、按照 [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md) 重命名现有文件，或使用 **Advanced Settings** 进行修改来解决此问题。之后，重新导入这些表。

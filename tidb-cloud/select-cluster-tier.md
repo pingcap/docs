@@ -10,10 +10,24 @@ aliases: ['/tidbcloud/developer-tier-cluster']
 
 TiDB Cloud 提供了以下几种方案选项。无论你是刚刚开始使用，还是需要扩展以满足不断增长的应用需求，这些服务方案都能为你提供所需的灵活性和能力。在创建 TiDB 资源之前，你需要考虑哪种选项更适合你的需求。
 
-- [TiDB Cloud Starter](#starter)
-- [TiDB Cloud Essential](#essential)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
 
 > **注意：**
 >
@@ -103,6 +117,22 @@ TiDB Cloud 中的每个付费组织总共最多可以创建 100 个 TiDB Cloud S
 - **零基础设施管理**：提供全托管服务，无需手动扩缩容、打补丁和进行容量规划。
 - **可预测的定价**：基于存储和 Request Capacity Units (RCUs) 计费，提供透明的按使用量计费模式，可随你的需求扩展，因此你只需为实际使用量付费，不会有意外费用。
 - **高级安全性与合规性**：支持高级加密、客户管理的加密密钥 (CMEK)、私有网络和合规认证，以保护敏感数据。
+
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} 专为需要更强数据位置控制、云资源控制、网络边界控制以及合规态势控制的企业级工作负载而设计。使用 {{{ .byoc }}} 时，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在你自己的云账户中。
+
+{{{ .byoc }}} 提供托管式 TiDB Cloud 体验，并具有以下特性：
+
+- **Data plane 部署在客户自己的账户中**：将 TiDB 服务资源、存储、网络和数据保留在你的云账户中。
+- **托管运维**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份与恢复以及生命周期管理。
+- **灵活的高可用性**：同时支持 Single-AZ 和 Multi-AZ 部署，使你能够在更低延时的单可用区部署与跨多个可用区的更高韧性部署之间进行选择。
+- **云账户级安全控制**：允许你将自己的云策略、网络控制、审计日志记录和合规控制应用到 BYOC 数据平面。
+- **私有网络连接**：根据你的 BYOC 配置，支持 VPC peering 等私有网络访问模式。
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated
 
