@@ -10,7 +10,7 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 <CustomContent plan="byoc">
 
-本文档也适用于 {{{ .byoc }}}。{{{ .byoc }}} 的备份和恢复功能目前与 {{{ .premium }}} 保持一致。
+本文档也适用于 BYOC。BYOC 的备份和恢复功能目前与 {{{ .premium }}} 保持一致。
 
 </CustomContent>
 
@@ -168,9 +168,9 @@ TiDB Cloud 支持将数据恢复到新实例。
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 在 **Recycle Bin** 页面，点击 <CustomContent plan="premium">**Premium**</CustomContent><CustomContent plan="byoc">**BYOC**</CustomContent> 页签，进入 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的回收站。
+2. 在 **Recycle Bin** 页面，点击 <CustomContent plan="premium">**Premium**</CustomContent><CustomContent plan="byoc">**BYOC**</CustomContent> 页签，进入 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">BYOC</CustomContent> 实例的回收站。
 
-3. 找到你要恢复的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例，然后点击 **>** 按钮以展开该实例的可用备份。
+3. 找到你要恢复的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">BYOC</CustomContent> 实例，然后点击 **>** 按钮以展开该实例的可用备份。
 
 4. 在目标备份所在行中，点击 **...**，然后选择 **Restore**。
 
@@ -199,7 +199,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ### 从云存储恢复备份 {#restore-backups-from-cloud-storage}
 
-<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
+<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">BYOC</CustomContent> 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
 
 >**Note:**
 >
