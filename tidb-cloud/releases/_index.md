@@ -11,7 +11,7 @@ TiDB Cloud には、[クラウドプラットフォーム リリース](#cloud-p
 
 ## クラウドプラットフォーム リリースノート
 
-クラウドプラットフォーム リリースには、TiDB Cloud のコンソール、API、コントロール プレーンが含まれ、すべての TiDB Cloud プランにわたる新しいプラン機能、UI の変更、統合、運用上の改善が含まれます。
+クラウドプラットフォーム リリースには、TiDB Cloud のコンソール、API、コントロールプレーンが含まれ、すべての TiDB Cloud プランにわたる新しいプラン機能、UI の変更、統合、運用上の改善が含まれます。
 
 - [TiDB Cloud Release Notes](/tidb-cloud/releases/tidb-cloud-release-notes.md)
 
