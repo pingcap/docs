@@ -7,7 +7,7 @@ summary: An overview of the usage of FLUSH STATS_DELTA for the TiDB database.
 
 `FLUSH STATS_DELTA` persists the pending statistics delta buffered in TiDB memory to the [`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table immediately.
 
-When you change data using DML statements (such as `INSERT`, `UPDATE`, and `DELETE`), TiDB records changes to the total row count and modified row count of each affected table, buffers these changes (called the statistics delta) in the memory of the TiDB node that executes the statements, and persists them to the `mysql.stats_meta` system table every 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) (60 seconds by default). For more information, see [Automatic update](/statistics.md#automatic-update).
+When you change data using DML statements (such as `INSERT`, `UPDATE`, and `DELETE`), TiDB records changes to the total row count and modified row count of each affected table, and buffers these changes (called the statistics delta) in the memory of the TiDB node that executes the statements. By default, TiDB persists statistics delta to the `mysql.stats_meta` system table every 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) (60 seconds by default). For more information, see [Automatic update](/statistics.md#automatic-update).
 
 Because the [statistics health state of tables](/sql-statements/sql-statement-show-stats-healthy.md), the output of [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), and the scheduling of automatic statistics collection depend on the persisted statistics metadata, `FLUSH STATS_DELTA` is useful when you need the persisted statistics metadata to reflect recent data changes immediately, such as in testing scenarios that verify optimizer behavior. You do not need to execute `FLUSH STATS_DELTA` before executing [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md), because TiDB automatically flushes the pending statistics delta of a table before collecting statistics on it.
 
@@ -49,7 +49,7 @@ ClusterOption ::=
 
 Note the following behavior:
 
-- TiDB deduplicates overlapping targets. For example, in `FLUSH STATS_DELTA *.*, test.t`, the `test.t` target is ignored because `*.*` already includes all tables. Similarly, in `FLUSH STATS_DELTA test.*, test.t`, the `test.t` target is ignored because `test.*` already includes all tables in the `test` database.
+- TiDB deduplicates overlapping targets to be flushed. For example, in `FLUSH STATS_DELTA *.*, test.t`, the `test.t` target is ignored because `*.*` already includes all tables. Similarly, in `FLUSH STATS_DELTA test.*, test.t`, the `test.t` target is ignored because `test.*` already includes all tables in the `test` database.
 - For a partitioned table, TiDB persists the statistics delta of the table and all its partitions.
 - If a specified database or table does not exist, TiDB returns a warning and skips that target.
 
