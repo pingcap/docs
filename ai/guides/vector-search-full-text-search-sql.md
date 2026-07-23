@@ -240,7 +240,7 @@ SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
 SELECT * FROM users WHERE fts_match_word('Alice alice bob', name);
 ```
 
-この例では、`Alice` に一致するドキュメントは、`bob` と比べて 2 倍の重みの寄与を受けます。これは、単語頻度 (TF) に基づいて関連性を評価する BM25 アルゴリズムの想定どおりの動作です。
+この例では、`Alice` に一致するドキュメントは、`bob` と比べて 2 倍の重みが与えられます。これは、単語頻度 (TF) に基づいて関連性を評価する BM25 アルゴリズムの想定どおりの動作です。
 
 #### 関連性スコアリングアルゴリズム
 
