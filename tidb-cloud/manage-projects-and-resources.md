@@ -110,7 +110,7 @@ TiDB Cloud 资源是你可以管理的可部署单元。它可以是以下之一
 
         <CustomContent plan="byoc">
 
-> **Note:**
+        > **Note:**
         >
         > - 对于 {{{ .byoc }}} 实例，项目是可选的。数据平面运行在你自己的云账户中，并且 BYOC 环境级别设置会在 BYOC onboarding 期间完成配置。
         > - 对于 {{{ .premium }}} 实例，加密是按实例而不是按项目配置的。创建实例后，你可以启用 [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)，在默认的存储层加密之上增加数据库层加密。
