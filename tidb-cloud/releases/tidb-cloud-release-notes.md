@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
 
 - **TiDB Cloud Essential**
 
-    - [Top RU](/tidb-cloud/top-ru.md)（公测）现已在 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 中支持以下新增 Region：
+    - [Top RU](/tidb-cloud/top-ru.md)（公测中）现已在 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 中支持以下新增 Region：
 
         - Alibaba Cloud：`Jakarta (ap-southeast-5)`
 

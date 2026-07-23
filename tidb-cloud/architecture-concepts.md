@@ -95,11 +95,11 @@ TiDB Cloud BYOC（Bring Your Own Cloud）专为需要更强的数据位置、云
 
 BYOC 提供以下特性：
 
-- **Customer-owned data plane**：将 TiDB 服务资源、数据存储和网络边界保留在您的云账户中。
-- **Managed operations**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份和生命周期管理。
-- **Flexible high availability**：同时支持 Single-AZ 和 Multi-AZ 部署，您可以在更低延时的单可用区部署与更高韧性的跨可用区部署之间进行选择。
-- **Cloud-account-level controls**：允许您应用自己的云策略来管理网络、安全、可审计性和合规性。
-- **Private connectivity**：根据您的 BYOC 配置，支持 VPC peering 等私有网络访问方式。
+- **Data plane 部署在客户自己的账户中**：将 TiDB 服务资源、数据存储和网络边界保留在你的云账户中。
+- **托管运维**：使用 TiDB Cloud 进行部署、扩缩容、监控、升级、备份和生命周期管理。
+- **灵活的高可用性**：同时支持 Single-AZ 和 Multi-AZ 部署，你可以在更低延时的单可用区部署与更高韧性的跨可用区部署之间进行选择。
+- **云账户级自主控制**：允许你应用自己的云策略来管理网络、安全、可审计性和合规性。
+- **私有网络连接**：根据您的 BYOC 配置，支持 VPC peering 等私有网络访问方式。
 
 为满足不同工作负载的需求，TiDB Cloud BYOC 同时支持 Single-AZ 和 Multi-AZ 部署，使您能够在更低延时的单可用区部署和跨多个可用区的更高韧性部署之间进行选择。
 
@@ -108,10 +108,10 @@ BYOC 提供以下特性：
 一个 TiDB Cloud BYOC 部署包含以下主要组件：
 
 - **TiDB Cloud control plane**：提供 TiDB Cloud 控制台、组织和项目管理、计费、生命周期编排、监控视图、告警以及维护工作流。
-- **BYOC data plane**：在您的云账户中运行 TiDB 服务及相关基础设施。TiDB Cloud 会基于您在 BYOC 接入过程中授予的权限来运维此环境。
-- **TiDB service VPC**：承载为应用流量提供服务的 TiDB 服务组件。
-- **Observability service VPC**：承载可观测性组件，用于收集 BYOC 部署的指标、日志和运维数据。
-- **Application VPC**：承载您的应用。此 VPC 由您管理，您需要配置网络连通性以访问 BYOC TiDB 服务。
+- **BYOC data plane**：在你的云账户中运行 TiDB 服务及相关基础设施。TiDB Cloud 会基于您在 BYOC 接入过程中授予的权限来运维此环境。
+- **TiDB 服务 VPC**：承载为应用流量提供服务的 TiDB 服务组件。
+- **可观测性服务 VPC**：承载可观测性组件，用于收集 BYOC 部署的指标、日志和运维数据。
+- **应用 VPC**：承载你的应用。此 VPC 由你管理，你需要配置网络连通性以访问 BYOC TiDB 服务。
 
 每个 BYOC Region 都是独立部署和运维的。添加某个 BYOC Region 时，TiDB Cloud 会在您的云账户中预配该 Region 所需的资源。由于每个 BYOC Region 都有各自独立的数据平面设置，因此不同 Region 不会共享同一个 TiDB Service VPC 或 Observability Service VPC。
 
