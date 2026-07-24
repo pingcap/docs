@@ -14,7 +14,7 @@ DMはシャーディングDDLロックを使用して、操作が正しい順序
 > -   コマンドによってもたらされる可能性のある影響を完全に認識し、それを受け入れられる場合を除き、 `shard-ddl-lock unlock`使用しないでください。
 > -   異常な DDL ロックを手動で処理する前に、DM [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)必ず読んでください。
 
-## 指示 {#command}
+## コマンド {#command}
 
 ### `shard-ddl-lock` {#shard-ddl-lock}
 

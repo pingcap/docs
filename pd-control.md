@@ -105,7 +105,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   バージョン情報を出力して終了します
 -   デフォルト: false
 
-## 指示 {#command}
+## コマンド {#command}
 
 ### `cluster` {#cluster}
 
