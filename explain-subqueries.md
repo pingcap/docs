@@ -123,7 +123,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 
 元の文は*相関サブクエリ*とみなされます。これは、サブクエリがサブクエリの外部に存在する列 ( `t1.int_col` ) を参照しているためです。ただし、 `EXPLAIN`の出力は、 [サブクエリの相関除去最適化](/correlated-subquery-optimization.md)適用した後の実行プランを示しています。条件`t1_id != t1.int_col`は`t1.id != t1.int_col`に書き換えられます。TiDB はテーブル`t1`からデータを読み取る際に`└─Selection_21`でこれを実行できるため、この相関関係の除去と書き換えによって実行効率が大幅に向上します。
 
-## アンチセミジョイン（サブクエリ<code>NOT IN</code> ） {#anti-semi-join-code-not-in-code-subquery}
+## アンチセミジョイン（サブクエリ<code>NOT IN</code> ） {#anti-semi-join-not-in-subquery}
 
 次の例では、サブクエリに`t3.t1_id`が含まれてい*ない限り、*クエリは意味的にテーブル`t3`のすべての行を返します。
 
@@ -146,7 +146,7 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 
 このクエリは、まずテーブル`t3`読み取り、次にテーブル`t1` `PRIMARY KEY`に基づいてプローブを実行します。結合タイプは*アンチセミ結合*です。この例は値 ( `NOT IN` ) が存在しないことを想定しているためアンチ結合、結合を拒否するには最初の行のみが一致する必要があるためセミ結合です。
 
-## Null 対応セミ結合 ( <code>IN</code>および<code>= ANY</code>サブクエリ) {#null-aware-semi-join-code-in-code-and-code-any-code-subqueries}
+## Null 対応セミ結合 ( <code>IN</code>および<code>= ANY</code>サブクエリ) {#null-aware-semi-join-in-and--any-subqueries}
 
 `IN`または`= ANY`集合演算子の値は3つの値（ `true` 、 `false` 、 `NULL` ）です。2つの演算子のいずれかから変換された結合型の場合、TiDBは結合キーの両側にある`NULL`を認識し、特別な方法で処理する必要があります。
 
@@ -196,7 +196,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 >
 > `Exists`演算子もセミ結合に変換されますが、null を認識しません。
 
-## Null 対応アンチセミ結合 ( <code>NOT IN</code>かつ<code>!= ALL</code>サブクエリ) {#null-aware-anti-semi-join-code-not-in-code-and-code-all-code-subqueries}
+## Null 対応アンチセミ結合 ( <code>NOT IN</code>かつ<code>!= ALL</code>サブクエリ) {#null-aware-anti-semi-join-not-in-and--all-subqueries}
 
 `NOT IN`または`!= ALL`集合演算子の値は3つの値（ `true` 、 `false` 、 `NULL` ）です。2つの演算子のいずれかから変換された結合型の場合、TiDBは結合キーの両側にある`NULL`を認識し、特別な方法で処理する必要があります。
 

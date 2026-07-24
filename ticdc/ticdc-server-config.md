@@ -7,7 +7,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 
 このドキュメントでは、TiCDC で使用される CLI および構成ファイルのパラメータについて説明します。
 
-## <code>cdc server</code> CLIパラメータ {#code-cdc-server-code-cli-parameters}
+## <code>cdc server</code> CLIパラメータ {#cdc-server-cli-parameters}
 
 以下は、 `cdc server`コマンドで使用できるオプションの説明です。
 
@@ -26,11 +26,11 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   `tz` : TiCDC サービスが使用するタイムゾーン。TiCDC は、 `TIMESTAMP`などの時間データ型を内部的に変換するとき、またはデータをダウンストリームに複製するときに、このタイムゾーンを使用します。デフォルトは、プロセスが実行されるローカルタイムゾーンです。6 `sink-uri` `time-zone`パラメータは、 `mysql`と`tidb`シンクにのみ有効で、ダウンストリーム接続セッションのタイムゾーンを設定するために使用されることに注意してください。12 パラメータと`time-zone`パラメータの`tz`を指定する場合は、両方のパラメータで同じタイムゾーンを使用するようにしてください。これは、TiCDC プロセスは内部的に`tz`で指定されたタイムゾーンを使用するのに対し、MySQL シンクと TiDB シンクはダウンストリーム操作の実行時に`time-zone`で指定されたタイムゾーンを使用するためです。
 -   `cluster-id` : (オプション) TiCDC クラスターの ID。デフォルト値は`default`です。 `cluster-id`は TiCDC クラスターの一意の識別子です。同じ`cluster-id`を持つ TiCDC ノードは同じクラスターに属します。 `cluster-id`の長さは最大 128 文字です。 `cluster-id` `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`のパターンに従う必要があり、 `owner` 、 `capture` 、 `task` 、 `changefeed` 、 `job` 、 `meta`のいずれかにすることはできません。
 
-## <code>cdc server</code>構成ファイルのパラメータ {#code-cdc-server-code-configuration-file-parameters}
+## <code>cdc server</code>構成ファイルのパラメータ {#cdc-server-configuration-file-parameters}
 
 以下は、コマンド`cdc server`の`config`オプションで指定される設定ファイルについて説明します。デフォルトの設定ファイルは[`pkg/cmd/util/ticdc.toml`](https://github.com/pingcap/tiflow/blob/master/pkg/cmd/util/ticdc.toml)にあります。
 
-### `newarch` <span class="version-mark">v8.5.4-release.1 の新機能</span> {#newarch-new-in-v854-release-1}
+### `newarch` <span class="version-mark">v8.5.4-release.1 の新機能</span> {#newarch-new-in-v854-release1}
 
 -   [TiCDCの新しいアーキテクチャ](/ticdc/ticdc-architecture.md)を有効にするかどうかを制御します。
 -   デフォルト値: `false` 、 [TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)が使用されることを示します。
@@ -132,7 +132,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   zapログモジュールの内部エラーログの出力場所を指定します。このパラメータはオプションです。
 -   デフォルト値: `"stderr"`
 
-#### ログファイル {#log-file}
+#### ログファイル {#logfile}
 
 ##### `max-size` {#max-size}
 

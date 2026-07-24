@@ -7,7 +7,7 @@ summary: JSON 値を検索する JSON関数について学習します。
 
 TiDB は、MySQL 8.0 で利用可能な[JSON値を検索するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html)のほとんどをサポートしています。
 
-## `JSON_CONTAINS()` {#json-contains}
+## `JSON_CONTAINS()` {#json_contains}
 
 `JSON_CONTAINS(json_doc, candidate [,path])`関数は、 `1`または`0`返すことにより、指定された`candidate` JSON ドキュメントがターゲット JSON ドキュメント内に含まれているかどうかを示します。
 
@@ -78,7 +78,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
     +------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_CONTAINS_PATH()` {#json-contains-path}
+## `JSON_CONTAINS_PATH()` {#json_contains_path}
 
 `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])`関数は、JSON ドキュメントに指定されたパスのデータが含まれているかどうかを示す`0`または`1`返します。
 
@@ -123,7 +123,7 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
     +-----------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_EXTRACT()` {#json-extract}
+## `JSON_EXTRACT()` {#json_extract}
 
 `JSON_EXTRACT(json_doc, path[, path] ...)`関数は、 `path`引数に一致するドキュメントの部分から選択して、JSON ドキュメントからデータを抽出します。
 
@@ -182,7 +182,7 @@ FROM (
     +------------+--------------------------+-------------+----------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_KEYS()` {#json-keys}
+## `JSON_KEYS()` {#json_keys}
 
 `JSON_KEYS(json_doc [,path])`関数は、JSONオブジェクトの最上位キーをJSON配列として返します。3 引数`path`指定された場合は、選択されたパスの最上位キーを返します。
 
@@ -214,7 +214,7 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}',
     +-------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_SEARCH()` {#json-search}
+## `JSON_SEARCH()` {#json_search}
 
 `JSON_SEARCH(json_doc, one_or_all, str)`関数は、JSON ドキュメントで文字列の 1 つまたはすべての一致を検索します。
 
@@ -262,7 +262,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ```
 
-## `JSON_OVERLAPS()` {#json-overlaps}
+## `JSON_OVERLAPS()` {#json_overlaps}
 
 `JSON_OVERLAPS(json_doc, json_doc)`関数は、2つのJSONドキュメントに重複部分があるかどうかを示します。重複がある場合は`1` 、重複しない場合は`0`返します。引数のいずれかが`NULL`の場合は`NULL`返します。
 

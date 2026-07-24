@@ -3,7 +3,7 @@ title: ALTER TABLE ... COMPACT
 summary: TiDB データベースの ALTER TABLE ... COMPACT の使用法の概要。
 ---
 
-# ALTER TABLE ... COMPACT {#alter-table-compact}
+# ALTER TABLE ... COMPACT {#alter-table--compact}
 
 読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はストレージノード上でバックグラウンドでデータ圧縮を自動的にスケジュールします。圧縮中、ストレージノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。1 ステートメントを使用すると、 `ALTER TABLE ... COMPACT`グラウンドで圧縮がトリガーされるまで待たずに、特定のテーブルの圧縮を即座に開始できます。
 

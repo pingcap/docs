@@ -3,7 +3,7 @@ title: Use the `tidbcloud_cluster` Resource (Deprecated)
 summary: クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-code-tidbcloud-cluster-code-resource-deprecated}
+# <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-tidbcloud_cluster-resource-deprecated}
 
 > **Warning:**
 >
@@ -23,7 +23,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 
-## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
+## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud_projects-data-source}
 
 各 TiDB クラスターはプロジェクトに属します。TiDB クラスターを作成する前に、クラスターを作成するプロジェクトの ID を取得する必要があります。
 
@@ -119,7 +119,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## <code>tidbcloud_cluster_specs</code>データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-code-tidbcloud-cluster-specs-code-data-source}
+## <code>tidbcloud_cluster_specs</code>データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
 クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウド プロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
 

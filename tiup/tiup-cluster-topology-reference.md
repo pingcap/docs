@@ -127,7 +127,7 @@ monitored:
 
 上記の構成では、 `node_exporter` `9100`ポートを使用し、 `blackbox_exporter` `9115`ポートを使用するように指定しています。
 
-### `server_configs` {#server-configs}
+### `server_configs` {#server_configs}
 
 `server_configs` 、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 `global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
 
@@ -165,7 +165,7 @@ server_configs:
 
 上記の構成は、TiDB と TiKV のグローバル構成を指定します。
 
-### `component_versions` {#component-versions}
+### `component_versions` {#component_versions}
 
 > **Note:**
 >
@@ -202,7 +202,7 @@ component_versions:
 
 上記の構成では、TiKV-CDC のバージョン番号を`v1.1.1`に指定しています。
 
-### `pd_servers` {#pd-servers}
+### `pd_servers` {#pd_servers}
 
 `pd_servers` 、PD サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`pd_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -260,7 +260,7 @@ pd_servers:
 
 上記の構成では、 PD が`10.0.1.11`と`10.0.1.12`に展開されることを指定し、 `10.0.1.11`の PD に対して特定の構成を作成します。
 
-### `tidb_servers` {#tidb-servers}
+### `tidb_servers` {#tidb_servers}
 
 `tidb_servers` TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tidb_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -310,7 +310,7 @@ tidb_servers:
   - host: 10.0.1.15
 ```
 
-### `tikv_servers` {#tikv-servers}
+### `tikv_servers` {#tikv_servers}
 
 `tikv_servers` TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`tikv_servers`は配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -364,7 +364,7 @@ tikv_servers:
       server.labels: { zone: "zone1", host: "host2" }
 ```
 
-### `tiflash_servers` {#tiflash-servers}
+### `tiflash_servers` {#tiflash_servers}
 
 `tiflash_servers` 、 TiFlashサービスが展開されるマシンを指定します。また、各マシンにおけるサービス構成も指定します。このセクションは配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -424,7 +424,7 @@ tiflash_servers:
   - host: 10.0.1.22
 ```
 
-### `tiproxy_servers` {#tiproxy-servers}
+### `tiproxy_servers` {#tiproxy_servers}
 
 `tiproxy_servers` 、TiProxy サービスが展開されるマシンと、各マシン上のサービスの構成を指定します。2 `tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
 
@@ -472,7 +472,7 @@ tiproxy_servers:
 
 その他の構成例については、 [TiProxy 展開トポロジ](/tiproxy/tiproxy-deployment-topology.md)参照してください。
 
-### `kvcdc_servers` {#kvcdc-servers}
+### `kvcdc_servers` {#kvcdc_servers}
 
 `kvcdc_servers` 、 [TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`kvcdc_servers`は配列です。各配列要素には、以下のフィールドが含まれます。
 
@@ -520,7 +520,7 @@ kvcdc_servers:
   - host: 10.0.1.22
 ```
 
-### `cdc_servers` {#cdc-servers}
+### `cdc_servers` {#cdc_servers}
 
 `cdc_servers` TiCDCサービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス構成も指定します`cdc_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -575,7 +575,7 @@ cdc_servers:
     data_dir: "/cdc-data"
 ```
 
-### `tso_servers` {#tso-servers}
+### `tso_servers` {#tso_servers}
 
 `tso_servers` 、 `tso`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `tso_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -605,7 +605,7 @@ tso_servers:
   - host: 10.0.1.22
 ```
 
-### `scheduling_servers` {#scheduling-servers}
+### `scheduling_servers` {#scheduling_servers}
 
 `scheduling_servers` 、 `scheduling`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `scheduling_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
@@ -635,7 +635,7 @@ scheduling_servers:
   - host: 10.0.1.22
 ```
 
-### `monitoring_servers` {#monitoring-servers}
+### `monitoring_servers` {#monitoring_servers}
 
 `monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス設定も指定します`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -710,7 +710,7 @@ monitoring_servers:
         web_port: 9094
 ```
 
-### `grafana_servers` {#grafana-servers}
+### `grafana_servers` {#grafana_servers}
 
 `grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、各マシンにおけるサービス設定も指定します`grafana_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -759,7 +759,7 @@ grafana_servers:
     dashboard_dir: /local/dashboard/dir
 ```
 
-### `alertmanager_servers` {#alertmanager-servers}
+### `alertmanager_servers` {#alertmanager_servers}
 
 `alertmanager_servers` 、Alertmanager サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します`alertmanager_servers`は配列です。各配列要素には、以下のフィールドが含まれます。
 

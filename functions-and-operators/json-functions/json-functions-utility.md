@@ -7,7 +7,7 @@ summary: JSON ユーティリティ関数について学習します。
 
 TiDB は、MySQL 8.0 で利用可能な[JSONユーティリティ関数](https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html)すべてをサポートします。
 
-## `JSON_PRETTY()` {#json-pretty}
+## `JSON_PRETTY()` {#json_pretty}
 
 `JSON_PRETTY(json_doc)`関数は JSON ドキュメントのフォーマットを整えます。
 
@@ -27,7 +27,7 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
     }
     1 row in set (0.00 sec)
 
-## `JSON_STORAGE_FREE()` {#json-storage-free}
+## `JSON_STORAGE_FREE()` {#json_storage_free}
 
 `JSON_STORAGE_FREE(json_doc)`関数は、JSON 値がその場で更新された後にバイナリ表現で解放されるストレージ容量を返します。
 
@@ -46,7 +46,7 @@ SELECT JSON_STORAGE_FREE('{}');
     +-------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_STORAGE_SIZE()` {#json-storage-size}
+## `JSON_STORAGE_SIZE()` {#json_storage_size}
 
 `JSON_STORAGE_SIZE(json_doc)`関数は、JSON 値を格納するために必要なバイト数の概算値を返します。このサイズは TiKV 圧縮を考慮していないため、この関数の出力は MySQL と厳密には互換性がありません。
 

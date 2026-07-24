@@ -39,7 +39,7 @@ FROM
     table_name
 ```
 
-### <code>ORDER BY</code>句 {#code-order-by-code-clause}
+### <code>ORDER BY</code>句 {#order-by-clause}
 
 集計ウィンドウ関数`sum()`を使用すると、特定の書籍の注文量の推移を分析できます。例えば、次のようになります。
 
@@ -80,7 +80,7 @@ ORDER BY month ASC;
 
 上記のデータを、横軸に時間、縦軸に累計受注額を取った折れ線グラフで視覚化します。傾きの変化から、書籍の過去の受注傾向を簡単に把握できます。
 
-### <code>PARTITION BY</code>句 {#code-partition-by-code-clause}
+### <code>PARTITION BY</code>句 {#partition-by-clause}
 
 さまざまな種類の書籍の過去の注文傾向を分析し、それを複数のシリーズを含む同じ折れ線グラフで視覚化したいとします。
 

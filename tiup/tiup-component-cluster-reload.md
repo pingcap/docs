@@ -17,13 +17,13 @@ tiup cluster reload <cluster-name> [flags]
 
 ## オプション {#options}
 
-### &#x20;--force {#force}
+### &#x20;--force {#--force}
 
 -   再ロード プロセス中のエラーを無視し、強制的に再ロードします。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-### --transfer-timeout {#transfer-timeout}
+### --transfer-timeout {#--transfer-timeout}
 
 -   PDまたはTiKVを再起動する際、再起動されたノードのリーダーノードが最初に他のノードに移行されるため、移行プロセスには時間がかかります。最大待機時間（秒単位）を`-transfer-timeout`に設定できます。タイムアウト後、サービスは待機せずに直接再起動できます。
 -   データ型: `UINT`
@@ -33,13 +33,13 @@ tiup cluster reload <cluster-name> [flags]
 >
 > 待機をスキップして直接再起動する場合、サービスのパフォーマンスが不安定になる可能性があります。
 
-### --ignore-config-check {#ignore-config-check}
+### --ignore-config-check {#--ignore-config-check}
 
 -   コンポーネントのバイナリファイルがデプロイされた後、 `<binary> --config-check <config-file>`使用して TiDB、TiKV、PD コンポーネントの設定がチェックされます。3 `<binary>`デプロイされたバイナリファイルのパスです。5 `<config-file>`ユーザー設定に基づいて生成された設定ファイルです。このチェックをスキップしたい場合は、このオプションを使用できます。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-### -N, --node {#n-node}
+### -N, --node {#-n---node}
 
 -   再起動するノードを指定します。指定しない場合は、すべてのノードが再起動されます。このオプションの値は、ノードIDのカンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスターステータステーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
@@ -50,7 +50,7 @@ tiup cluster reload <cluster-name> [flags]
 > -   `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
 > -   オプション`--skip-restart`指定した場合、オプション`-N, --node`は無効になります。
 
-### -R, --role {#r-role}
+### -R, --role {#-r---role}
 
 -   再起動するロールを指定します。指定しない場合は、すべてのロールが再起動されます。このオプションの値は、ノードロールのカンマ区切りのリストです。ロールは、表[クラスターステータス](/tiup/tiup-component-cluster-display.md)の2番目の列です。
 -   データ型: `STRINGS`
@@ -61,7 +61,7 @@ tiup cluster reload <cluster-name> [flags]
 > 1.  `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
 > 2.  オプション`--skip-restart`指定した場合、オプション`-R, --role`は無効になります。
 
-### --skip-restart {#skip-restart}
+### --skip-restart {#--skip-restart}
 
 `tiup cluster reload`コマンドは 2 つの操作を実行します。
 
@@ -73,13 +73,13 @@ tiup cluster reload <cluster-name> [flags]
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-### -h, --help {#h-help}
+### -h, --help {#-h---help}
 
 -   ヘルプ情報を出力します。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-### --pre-restart-script {#pre-restart-script}
+### --pre-restart-script {#--pre-restart-script}
 
 > **Warning:**
 >
@@ -89,7 +89,7 @@ tiup cluster reload <cluster-name> [flags]
 -   データ型: `STRINGS`
 -   このオプションは、リロードするノードで実行されるスクリプトのパスを指定します。1 `--skip-restart` `true`に設定した場合は無効になります。
 
-### --post-restart-script {#post-restart-script}
+### --post-restart-script {#--post-restart-script}
 
 > **Warning:**
 >

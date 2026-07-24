@@ -21,7 +21,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 多くのリージョンのパフォーマンスオーバーヘッドを削減するには、 [休止状態リージョン](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances)または[`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval)有効にすることもできます。
 
-## リージョンサイズを調整するには、 <code>region-split-size</code>を使用します。 {#use-code-region-split-size-code-to-adjust-region-size}
+## リージョンサイズを調整するには、 <code>region-split-size</code>を使用します。 {#use-region-split-size-to-adjust-region-size}
 
 > **Note:**
 >
@@ -41,7 +41,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 リージョンのサイズを大きくした後、クエリの同時実行性をさらに向上させたい場合は、 [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610)から`true`に設定できます。この設定では、リージョンがバケットに分割されます。バケットはリージョン内の小さな範囲であり、スキャンの同時実行性を向上させるための同時クエリの単位として使用されます。バケットサイズは[`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610)で制御できます。
 
-## アクティブPDFollower機能を使用して、PDのリージョン情報クエリサービスのスケーラビリティを強化します。 {#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pd-s-region-information-query-service}
+## アクティブPDFollower機能を使用して、PDのリージョン情報クエリサービスのスケーラビリティを強化します。 {#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service}
 
 多数のリージョンを持つTiDBクラスターでは、ハートビート処理とタスクのスケジューリングによるオーバーヘッドの増加により、PDリーダーのCPU負荷が高くなる可能性があります。クラスターに多数のTiDBインスタンスがあり、リージョン情報へのリクエストが同時に発生すると、PDリーダーのCPU負荷がさらに高まり、PDサービスが利用できなくなる可能性があります。
 

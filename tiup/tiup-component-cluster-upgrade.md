@@ -18,7 +18,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ## オプション {#options}
 
-### &#x20;--force {#force}
+### &#x20;--force {#--force}
 
 -   クラスターをアップグレードするには、クラスターが現在起動していることを確認する必要があります。場合によっては、クラスターが起動していない状態でアップグレードを実行したい場合があります。その場合は、 `--force`使用すると、アップグレード中のエラーを無視し、バイナリファイルを強制的に置き換えてクラスターを起動できます。
 -   データ型: `BOOLEAN`
@@ -28,7 +28,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 >
 > サービスを提供しているクラスターを強制的にアップグレードすると、サービスが利用できなくなる可能性があります。アップグレードが成功すると、起動していないクラスターは自動的に起動されます。
 
-### --transfer-timeout {#transfer-timeout}
+### --transfer-timeout {#--transfer-timeout}
 
 -   PDまたはTiKVをアップグレードする場合、アップグレード対象ノードのリーダーノードが最初に他のノードに移行されます。移行プロセスには時間がかかります。1 `-transfer-timeout`で最大待機時間（秒単位）を設定できます。タイムアウト後、待機はスキップされ、サービスは直接アップグレードされます。
 -   データ型: `uint`
@@ -38,98 +38,98 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 >
 > 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが不安定になる可能性があります。
 
-### --ignore-config-check {#ignore-config-check}
+### --ignore-config-check {#--ignore-config-check}
 
 -   バイナリの更新後、 `<binary> --config-check <config-file>`使用して TiDB、TiKV、PD コンポーネントの構成チェックが実行されます。3 `<binary>`新しくデプロイされたバイナリへのパス、 `<config-file>`ユーザー設定に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用します。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
-### --ignore-version-check {#ignore-version-check}
+### --ignore-version-check {#--ignore-version-check}
 
 -   アップグレード前に、 TiUP はターゲットバージョンが現在のバージョン以上であるかどうかを確認します。このチェックを省略するには、オプション`--ignore-version-check`使用します。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-### &#x20;--offline {#offline}
+### &#x20;--offline {#--offline}
 
 -   現在のクラスターが実行中でないことを宣言します。このオプションが指定されると、 TiUP はサービスリーダーを別のノードに移動させたり、サービスを再起動したりせず、クラスターコンポーネントのバイナリファイルのみを置き換えます。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-### --pdバージョン {#pd-version}
+### --pdバージョン {#--pd-version}
 
 -   PDのバージョンを指定します。このオプションを設定すると、PDのバージョンとクラスターのバージョンが一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、PD のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv バージョン {#tikv-version}
+### --tikv バージョン {#--tikv-version}
 
 -   TiKVのバージョンを指定します。このオプションを設定すると、TiKVのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiKV のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv-cdc-バージョン {#tikv-cdc-version}
+### --tikv-cdc-バージョン {#--tikv-cdc-version}
 
 -   TiKV CDCのバージョンを指定します。このオプションを設定すると、TiKV CDCのバージョンはクラスタのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiKV CDC のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tiflash-version {#tiflash-version}
+### --tiflash-version {#--tiflash-version}
 
 -   TiFlashのバージョンを指定します。このオプションを設定すると、 TiFlashのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、 TiFlashのバージョンはクラスターのバージョンと一致したままになります。
 
-### --cdc バージョン {#cdc-version}
+### --cdc バージョン {#--cdc-version}
 
 -   TiCDCのバージョンを指定します。このオプションを設定すると、TiCDCのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiCDC のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tiproxy バージョン {#tiproxy-version}
+### --tiproxy バージョン {#--tiproxy-version}
 
 -   TiProxyのバージョンを指定します。このオプションを設定すると、TiProxyのバージョンはクラスタのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiProxy のバージョンはクラスターのバージョンと一致したままになります。
 
-### --tidb-ダッシュボードバージョン {#tidb-dashboard-version}
+### --tidb-ダッシュボードバージョン {#--tidb-dashboard-version}
 
 -   TiDB Dashboardのバージョンを指定します。このオプションを設定すると、TiDB Dashboardのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、TiDB Dashboardのバージョンはクラスターのバージョンと一致したままになります。
 
-### --alertmanager-バージョン {#alertmanager-version}
+### --alertmanager-バージョン {#--alertmanager-version}
 
 -   Alertmanagerのバージョンを指定します。このオプションを設定すると、Alertmanagerのバージョンはクラスターのバージョンと一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、アラート マネージャーのバージョンはクラスターのバージョンと一致したままになります。
 
-### --blackbox-exporter-version {#blackbox-exporter-version}
+### --blackbox-exporter-version {#--blackbox-exporter-version}
 
 -   Blackbox Exporterのバージョンを指定します。このオプションを設定すると、Blackbox Exporterのバージョンとクラスタのバージョンが一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、Blackbox Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
-### --node-exporter-version {#node-exporter-version}
+### --node-exporter-version {#--node-exporter-version}
 
 -   Node Exporterのバージョンを指定します。このオプションを設定すると、Node Exporterのバージョンとクラスターのバージョンが一致しなくなります。
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、Node Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
-### --再起動タイムアウト {#restart-timeout}
+### --再起動タイムアウト {#--restart-timeout}
 
 -   ローリング アップグレード中にコンポーネントをアップグレードした後の待機時間を指定します。
 -   データ型: `STRINGS` [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration)で解析できるすべての型がサポートされます。
 -   デフォルト: `0`
 -   このオプションを指定しないと、コンポーネントのアップグレード後に待機時間は発生しません。
 
-### -h, --help {#h-help}
+### -h, --help {#-h---help}
 
 -   ヘルプ情報を出力します。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-### ---アップグレード前スクリプト {#pre-upgrade-script}
+### ---アップグレード前スクリプト {#---pre-upgrade-script}
 
 > **Warning:**
 >
@@ -139,7 +139,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `STRINGS`
 -   このオプションは、アップグレードするノードで実行されるスクリプトのパスを指定します。
 
-### ---アップグレード後のスクリプト {#post-upgrade-script}
+### ---アップグレード後のスクリプト {#---post-upgrade-script}
 
 > **Warning:**
 >

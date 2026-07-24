@@ -7,11 +7,11 @@ summary: JSON 値を変更する JSON関数について学習します。
 
 TiDB は、MySQL 8.0 で利用可能な[JSON値を変更するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html)すべてをサポートします。
 
-## `JSON_APPEND()` {#json-append}
+## `JSON_APPEND()` {#json_append}
 
 [`JSON_ARRAY_APPEND()`](#json_array_append)の別名。
 
-## `JSON_ARRAY_APPEND()` {#json-array-append}
+## `JSON_ARRAY_APPEND()` {#json_array_append}
 
 `JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)`関数は、JSON ドキュメント内の指定された配列の末尾に指定された`path`に値を追加し、結果を返します。
 
@@ -45,7 +45,7 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
     +-------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_ARRAY_INSERT()` {#json-array-insert}
+## `JSON_ARRAY_INSERT()` {#json_array_insert}
 
 `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)`関数は、 `path`の`json_array`の指定された位置に`value`挿入し、結果を返します。
 
@@ -79,7 +79,7 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Tra
     +--------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_INSERT()` {#json-insert}
+## `JSON_INSERT()` {#json_insert}
 
 `JSON_INSERT(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントに 1 つ以上の値を挿入し、結果を返します。
 
@@ -113,7 +113,7 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
     +---------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_MERGE_PATCH()` {#json-merge-patch}
+## `JSON_MERGE_PATCH()` {#json_merge_patch}
 
 `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)`関数は、重複するキーの値を保持せずに、2つ以上のJSONドキュメントを1つのJSONドキュメントにマージします。重複するキーを持つ`json_doc`引数の場合、マージされた結果には、後に指定された`json_doc`引数の値のみが保持されます。
 
@@ -136,7 +136,7 @@ SELECT JSON_MERGE_PATCH(
     +-----------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_MERGE_PRESERVE()` {#json-merge-preserve}
+## `JSON_MERGE_PRESERVE()` {#json_merge_preserve}
 
 `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)`関数は、各キーに関連付けられたすべての値を保持しながら 2 つ以上の JSON ドキュメントをマージし、マージされた結果を返します。
 
@@ -155,7 +155,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
     +--------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_MERGE()` {#json-merge}
+## `JSON_MERGE()` {#json_merge}
 
 > **Warning:**
 >
@@ -163,7 +163,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 
 [`JSON_MERGE_PRESERVE()`](#json_merge_preserve)の非推奨のエイリアス。
 
-## `JSON_REMOVE()` {#json-remove}
+## `JSON_REMOVE()` {#json_remove}
 
 `JSON_REMOVE(json_doc, path [,path] ...)`関数は、JSON ドキュメントから指定された`path`のデータを削除し、結果を返します。
 
@@ -195,7 +195,7 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
     +--------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_REPLACE()` {#json-replace}
+## `JSON_REPLACE()` {#json_replace}
 
 `JSON_REPLACE(json_doc, path, value [, path, value] ...)`関数は、JSON ドキュメント内の指定されたパス内の値を置き換え、結果を返します。指定されたパスが存在しない場合、そのパスに対応する値は結果に追加されません。
 
@@ -229,7 +229,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
     +------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_SET()` {#json-set}
+## `JSON_SET()` {#json_set}
 
 `JSON_SET(json_doc, path, value [,path, value] ...)`関数は、JSON ドキュメントにデータを挿入または更新し、結果を返します。
 
@@ -263,7 +263,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch'
     +------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_UNQUOTE()` {#json-unquote}
+## `JSON_UNQUOTE()` {#json_unquote}
 
 `JSON_UNQUOTE(json)`関数はJSON値の引用符を解除し、結果を文字列として返します。これは[`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote)関数の逆の動作です。
 

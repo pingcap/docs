@@ -86,7 +86,7 @@ SELECT BIN(-7);
 +------------------------------------------------------------------+
 ```
 
-### `BIT_LENGTH()` {#bit-length}
+### `BIT_LENGTH()` {#bit_length}
 
 `BIT_LENGTH()`関数は、指定された引数の長さをビット単位で返すために使用されます。
 
@@ -198,7 +198,7 @@ SELECT CHAR(65,66,67);
     +----------------+
     1 row in set (0.00 sec)
 
-### `CHAR_LENGTH()` {#char-length}
+### `CHAR_LENGTH()` {#char_length}
 
 `CHAR_LENGTH()`関数は、指定された引数内の文字の合計数を整数として取得するために使用されます。
 
@@ -229,7 +229,7 @@ SELECT CustomerName, CHAR_LENGTH(CustomerName) AS LengthOfName FROM Customers;
 >
 > 上記の例は、 `Customers`という名前のテーブルと、テーブル内に`CustomerName`という名前の列を持つデータベースが存在するという前提で動作します。
 
-### `CHARACTER_LENGTH()` {#character-length}
+### `CHARACTER_LENGTH()` {#character_length}
 
 関数`CHARACTER_LENGTH()`は関数`CHAR_LENGTH()`と同じです。どちらの関数も同じ出力を生成するため、同義語として使用できます。
 
@@ -295,7 +295,7 @@ SELECT 'Ti' 'DB' ' ' 'Server';
 +-------------+
 ```
 
-### `CONCAT_WS()` {#concat-ws}
+### `CONCAT_WS()` {#concat_ws}
 
 `CONCAT_WS()`関数は、セパレーター付きの[`CONCAT()`](#concat)の形式で、指定されたセパレーターで連結された文字列を返します。
 
@@ -433,7 +433,7 @@ SELECT ELT(3, 'This', 'is', 'TiDB');
 
 上記の例では、 3 番目の要素である`'TiDB'`返します。
 
-### `EXPORT_SET()` {#export-set}
+### `EXPORT_SET()` {#export_set}
 
 `EXPORT_SET()`関数は、指定された数（ `number_of_bits` ）の`on`または`off`の値からなる文字列を返します。これらの値は、オプションで`separator`で区切られます。これらの値は、 `bits`引数の対応するビットが`1`であるかどうかに基づいて決定されます。最初の値は`bits`の右端（最下位）ビットに対応します。
 
@@ -512,7 +512,7 @@ SELECT FIELD('needle', 'A', 'needle', 'in', 'a', 'haystack');
 1 row in set (0.00 sec)
 ```
 
-### `FIND_IN_SET()` {#find-in-set}
+### `FIND_IN_SET()` {#find_in_set}
 
 2 番目の引数内の最初の引数のインデックス位置を返します。
 
@@ -580,7 +580,7 @@ mysql> SELECT FORMAT(12.36, 2);
 +------------------+
 ```
 
-### `FROM_BASE64()` {#from-base64}
+### `FROM_BASE64()` {#from_base64}
 
 `FROM_BASE64()`関数は、 [ベース64](https://datatracker.ietf.org/doc/html/rfc4648)エンコードされた文字列をデコードし、デコードされた結果を 16 進形式で返すために使用されます。
 
@@ -1350,7 +1350,7 @@ SELECT CONCAT('«',LTRIM('    hello'),'»');
     +------------------------------------+
     1 row in set (0.00 sec)
 
-### `MAKE_SET()` {#make-set}
+### `MAKE_SET()` {#make_set}
 
 `MAKE_SET()`関数は、 `bits`引数の対応するビットが`1`に設定されているかどうかに基づいて、コンマで区切られた文字列のセットを返します。
 
@@ -1548,7 +1548,7 @@ SELECT n, OCT(n) FROM nr;
     +------+--------+
     20 rows in set (0.00 sec)
 
-### `OCTET_LENGTH()` {#octet-length}
+### `OCTET_LENGTH()` {#octet_length}
 
 [`LENGTH()`](#length)の同義語。
 
@@ -1681,7 +1681,7 @@ WHERE
     +------+
     1 row in set (0.01 sec)
 
-### `REGEXP_INSTR()` {#regexp-instr}
+### `REGEXP_INSTR()` {#regexp_instr}
 
 正規表現に一致する部分文字列の開始インデックスを返します（MySQLと部分的に互換性があります。詳細については[MySQLとの正規表現の互換性](#regular-expression-compatibility-with-mysql)参照してください）。
 
@@ -1802,7 +1802,7 @@ SELECT REGEXP_INSTR('abcabc','A' COLLATE utf8mb4_bin);
     +------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `REGEXP_LIKE()` {#regexp-like}
+### `REGEXP_LIKE()` {#regexp_like}
 
 文字列が正規表現に一致するかどうか（MySQLと部分的に互換性があります。詳細については[MySQLとの正規表現の互換性](#regular-expression-compatibility-with-mysql)参照してください）。
 
@@ -1849,7 +1849,7 @@ SELECT REGEXP_LIKE('abc','^A','i');
     +-----------------------------+
     1 row in set (0.00 sec)
 
-### `REGEXP_REPLACE()` {#regexp-replace}
+### `REGEXP_REPLACE()` {#regexp_replace}
 
 正規表現に一致する部分文字列を置き換えます（MySQLと部分的に互換性があります。詳しくは[MySQLとの正規表現の互換性](#regular-expression-compatibility-with-mysql)参照してください）。
 
@@ -1931,7 +1931,7 @@ SELECT REGEXP_REPLACE('TooDB', 'O{2}','i',1,1,'i');
     +---------------------------------------------+
     1 row in set (0.00 sec)
 
-### `REGEXP_SUBSTR()` {#regexp-substr}
+### `REGEXP_SUBSTR()` {#regexp_substr}
 
 正規表現に一致する部分文字列を返します（MySQLと部分的に互換性があります。詳細については[MySQLとの正規表現の互換性](#regular-expression-compatibility-with-mysql)参照してください）。
 
@@ -2046,7 +2046,7 @@ SELECT REPEAT('ha',3);
 
 指定されたとおりに部分文字列を返します。
 
-### `SUBSTRING_INDEX()` {#substring-index}
+### `SUBSTRING_INDEX()` {#substring_index}
 
 `SUBSTRING_INDEX()`関数は、指定された区切り文字とカウントに基づいて文字列から部分文字列を抽出するために使用されます。この関数は、CSVデータの解析やログファイルの処理など、特定の区切り文字で区切られたデータを扱う場合に特に便利です。
 
@@ -2095,7 +2095,7 @@ SELECT SUBSTRING_INDEX('www.tidbcloud.com', '.', -1);
 +------------------------------------------+
 ```
 
-### `TO_BASE64()` {#to-base64}
+### `TO_BASE64()` {#to_base64}
 
 `TO_BASE64()`関数は、指定された引数をBase64エンコードされた文字列に変換し、現在の接続の文字セットと照合順序に従って結果を返します。Base64エンコードされた文字列は、 [`FROM_BASE64()`](#from_base64)関数を使用してデコードできます。
 
@@ -2221,7 +2221,7 @@ SELECT UPPER('bigdata') AS result_upper, UPPER(null) AS result_null;
 +--------------+-------------+
 ```
 
-### `WEIGHT_STRING()` {#weight-string}
+### `WEIGHT_STRING()` {#weight_string}
 
 `WEIGHT_STRING()`関数は、入力文字列の重み文字列（バイナリ文字）を返します。これは主に、複数文字セットのシナリオにおけるソートや比較演算に使用されます。引数が`NULL`の場合、 `NULL`返します。構文は次のとおりです。
 
@@ -2268,7 +2268,7 @@ SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab
 
 MySQLはInternational Components for Unicode (ICU)を使用して正規表現を実装し、TiDBはRE2を使用しています。2つのライブラリの構文の違いについては、 [ICUの文書](https://unicode-org.github.io/icu/userguide/)と[RE2 構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
-### <code>match_type</code>互換性 {#code-match-type-code-compatibility}
+### <code>match_type</code>互換性 {#match_type-compatibility}
 
 TiDB と MySQL 間の`match_type`の値オプションは次のとおりです。
 

@@ -7,7 +7,7 @@ summary: JSON 値を返す JSON関数について学習します。
 
 TiDB は、MySQL 8.0 で利用可能な[JSON値属性を返すJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-attribute-functions.html)すべてをサポートします。
 
-## `JSON_DEPTH()` {#json-depth}
+## `JSON_DEPTH()` {#json_depth}
 
 `JSON_DEPTH(json_doc)`関数は、JSON ドキュメントの最大深度を返します。
 
@@ -30,7 +30,7 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
     +-------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_LENGTH()` {#json-length}
+## `JSON_LENGTH()` {#json_length}
 
 `JSON_LENGTH(json_doc [,path])`番目の関数はJSONドキュメントの長さを返します。3 `path`引数が指定された場合は、パス内の値の長さを返します。
 
@@ -62,7 +62,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.
     +------------------------------------------------------------------------------------+
     1 row in set (0.01 sec)
 
-## `JSON_TYPE()` {#json-type}
+## `JSON_TYPE()` {#json_type}
 
 `JSON_TYPE(json_val)`関数は[JSON値の型](/data-type-json.md#json-value-types)を示す文字列を返します。
 
@@ -120,7 +120,7 @@ SELECT JSON_TYPE('"2025-06-14"'),JSON_TYPE(CAST(CAST('2025-06-14' AS date) AS js
     +---------------------------+-----------------------------------------------------+
     1 row in set (0.00 sec)
 
-## `JSON_VALID()` {#json-valid}
+## `JSON_VALID()` {#json_valid}
 
 `JSON_VALID(str)`関数は、引数が有効なJSONかどうかを確認します。これは、列を`JSON`型に変換する前にチェックするのに役立ちます。
 

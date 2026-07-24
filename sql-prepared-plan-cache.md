@@ -126,7 +126,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## プリペアドプランキャッシュの診断 {#diagnostics-of-prepared-plan-cache}
 
-### <code>SHOW WARNINGS</code>を使用して診断する {#use-code-show-warnings-code-to-diagnose}
+### <code>SHOW WARNINGS</code>を使用して診断する {#use-show-warnings-to-diagnose}
 
 一部のクエリまたはプランはキャッシュできません。1 ステートメント`SHOW WARNINGS`使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
 
@@ -166,7 +166,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### 診断には<code>Statements Summary</code>を使用する {#use-code-statements-summary-code-to-diagnose}
+### 診断には<code>Statements Summary</code>を使用する {#use-statements-summary-to-diagnose}
 
 `Statements Summary`テーブルには`plan_cache_unqualified`と`plan_cache_unqualified_last_reason`という2つのフィールドがあり、それぞれ対応するクエリがプランキャッシュを使用できなかった回数とその理由を示します。これらの2つのフィールドは診断に使用できます。
 
@@ -287,7 +287,7 @@ MySQL [test]> admin flush global plan_cache;
 ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 ```
 
-## <code>COM_STMT_CLOSE</code>コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視します。 {#ignore-the-code-com-stmt-close-code-command-and-the-code-deallocate-prepare-code-statement}
+## <code>COM_STMT_CLOSE</code>コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視します。 {#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement}
 
 SQL ステートメントの構文解析コストを削減するには、 `prepare stmt` 1 回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`実行することをお勧めします。
 

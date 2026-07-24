@@ -63,7 +63,7 @@ UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
 
-### （オプション）TiKV Network IO collectionを有効にする <span class="version-mark">v8.5.7の新機能</span>
+### （オプション）TiKV Network IO collectionを有効にする <span class="version-mark">v8.5.7の新機能</span> {#optional-enable-tikv-network-io-collection-new-in-v857}
 
 TiKVノードで`Order By Network`または`Order By Logical IO`によるTop SQLを表示したり、`By Region`集計を使用したりするには、Top SQL設定で**Enable TiKV Network IO collection (multi-dimensional)**スイッチを有効にして変更を保存します。
 
@@ -167,7 +167,7 @@ UIに加えて、TiDBシステム変数[`tidb_enable_top_sql`](/system-variables
 SET GLOBAL tidb_enable_top_sql = 0;
 ```
 
-### TiKV Network IO collectionを無効にする
+### TiKV Network IO collectionを無効にする {#disable-tikv-network-io-collection}
 
 Top SQLのCPU次元の分析機能は維持したまま、TiKVの`Network Bytes`や`Logical IO Bytes`などの多次元データの収集のみを停止したい場合は、Top SQL設定パネルで**Enable TiKV Network IO collection (multi-dimensional)**スイッチを無効にします。
 

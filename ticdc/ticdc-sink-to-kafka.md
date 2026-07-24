@@ -542,7 +542,7 @@ Kafkaコンシューマーは、外部ストレージ内の大きなメッセー
 
 `key`と`value`フィールドは、Kafka メッセージ内の同名のフィールドに対応しています。コンシューマーは、これらの 2 つのフィールドのデータを解析することで、元の大きなメッセージを取得できます。オープンプロトコルでエンコードされた Kafka メッセージのみが、 `key`フィールドに有効なコンテンツを含みます。TiCDC は、 `key`と`value`両方を単一の JSON オブジェクトにエンコードして、完全なメッセージを一度に配信します。他のプロトコルでは、 `key`フィールドは常に空です。
 
-#### <code>value</code>フィールドを外部ストレージにのみ送信する {#send-the-code-value-code-field-to-external-storage-only}
+#### <code>value</code>フィールドを外部ストレージにのみ送信する {#send-the-value-field-to-external-storage-only}
 
 バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信できるようになりました。この機能は、Open Protocol以外のシナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメータ（デフォルトは`false`を設定することで制御できます。
 

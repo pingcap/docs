@@ -3,7 +3,7 @@ title: TIDB_INDEX_USAGE
 summary: TIDB_INDEX_USAGE` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# TIDB_INDEX_USAGE {#tidb-index-usage}
+# TIDB_INDEX_USAGE {#tidb_index_usage}
 
 <CustomContent platform="tidb">
 
@@ -61,7 +61,7 @@ DESC TIDB_INDEX_USAGE;
 -   `PERCENTAGE_ACCESS_100` : 行アクセス率が 100% になる回数。
 -   `LAST_ACCESS_TIME` : インデックスへの最新のアクセス時刻。
 
-## クラスターTIDBインデックス使用状況 {#cluster-tidb-index-usage}
+## クラスターTIDBインデックス使用状況 {#cluster_tidb_index_usage}
 
 `TIDB_INDEX_USAGE`テーブルは、単一の TiDB ノード上のすべてのインデックスの使用統計情報のみを提供します。クラスタ内のすべての TiDB ノードのインデックス使用統計情報を取得するには、 `CLUSTER_TIDB_INDEX_USAGE`テーブルをクエリする必要があります。
 

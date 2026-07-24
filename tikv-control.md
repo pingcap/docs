@@ -346,7 +346,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<re
 > -   `tombstone`コマンドはローカル モードのみをサポートします。
 > -   `-p`オプションの引数は、 `http`プレフィックスのない PD エンドポイントを指定します。PD エンドポイントを指定するのは、PD が安全に Tombstone に切り替えられるかどうかを照会するためです。
 
-### TiKVに<code>consistency-check</code>リクエストを送信する {#send-a-code-consistency-check-code-request-to-tikv}
+### TiKVに<code>consistency-check</code>リクエストを送信する {#send-a-consistency-check-request-to-tikv}
 
 `consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗した場合、TiKV 自体がパニック状態になります`--host`で指定された TiKV インスタンスがリージョンリーダーでない場合は、エラーが報告されます。
 
@@ -602,7 +602,7 @@ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 -   `overlap region`番目の部分は、関係するリージョンの情報を示しています。この情報はPDサーバーから取得されます。
 -   パート`suggested operations` 、破損したSSTファイルをクリーンアップするための提案が示されています。この提案に従ってファイルをクリーンアップし、TiKVインスタンスを再起動してください。
 
-### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-region-s-code-regionreadprogress-code}
+### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-regions-regionreadprogress}
 
 v6.5.4およびv7.3.0以降、TiKVはリゾルバの最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`と`RegionReadProgress`導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
 

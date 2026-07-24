@@ -61,7 +61,7 @@ global:
 
 この例では、構成により、クラスターを起動するために`tidb`ユーザーが使用され、各コンポーネントの実行時に最大 2 GB のメモリに制限されることが指定されています。
 
-### `server_configs` {#server-configs}
+### `server_configs` {#server_configs}
 
 `server_configs` `server_configs`サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 セクションと同様に、 `global`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。6 `server_configs`は主に以下のフィールドが含まれます。
 
@@ -81,7 +81,7 @@ server_configs:
     log-level: info
 ```
 
-## `master_servers` {#master-servers}
+## `master_servers` {#master_servers}
 
 `master_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`master_servers`配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -138,7 +138,7 @@ master_servers:
     name: master3
 ```
 
-## `worker_servers` {#worker-servers}
+## `worker_servers` {#worker_servers}
 
 `worker_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`worker_servers`配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -182,7 +182,7 @@ worker_servers:
   - host: 10.0.1.19
 ```
 
-### `monitoring_servers` {#monitoring-servers}
+### `monitoring_servers` {#monitoring_servers}
 
 `monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます`monitoring_servers`配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -236,7 +236,7 @@ monitoring_servers:
       web_port: 9094
 ```
 
-### `grafana_servers` {#grafana-servers}
+### `grafana_servers` {#grafana_servers}
 
 `grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます`grafana_servers`配列です。各配列要素には以下のフィールドが含まれます。
 
@@ -274,7 +274,7 @@ grafana_servers:
     dashboard_dir: /local/dashboard/dir
 ```
 
-### `alertmanager_servers` {#alertmanager-servers}
+### `alertmanager_servers` {#alertmanager_servers}
 
 `alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 

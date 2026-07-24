@@ -91,7 +91,7 @@ TiDB Cloudコンソールのデフォルトの[**スロークエリ**](/tidb-clo
 
 詳細については[TiDB Dashboardのスロークエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)参照してください。
 
-## TopSQLを監視する {#monitor-topsql}
+## TopSQLを監視する {#monitor-top-sql}
 
 TiDB Cloud ClinicはTopSQL情報を提供し、データベース内の各SQL文のCPUオーバーヘッドをリアルタイムで監視し、視覚的に調査することができます。これにより、データベースのパフォーマンスに関する問題の最適化と解決に役立ちます。
 

@@ -49,7 +49,7 @@ sync-point-retention = "1h"
 
 アップストリーム クラスターとダウンストリーム クラスターのデータを検証するには、sync-diff-inspector で`snapshot`設定するだけです。
 
-### ステップ1: <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
+### ステップ1: <code>ts-map</code>を取得する {#step-1-obtain-ts-map}
 
 下流TiDBクラスタで次のSQL文を実行すると、上流TSO（ `primary_ts` ）と下流TSO（ `secondary_ts` ）を取得できます。
 
