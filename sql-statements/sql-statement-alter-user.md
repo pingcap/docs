@@ -12,13 +12,16 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 ```ebnf+diagram
 AlterUserStmt ::=
-    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString) ResourceGroupNameOption
+    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption | 'USER' '(' ')' ('IDENTIFIED' 'BY' AuthString DualPasswordOption | 'DISCARD' 'OLD' 'PASSWORD')) ResourceGroupNameOption
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 
 UserSpec ::=
-    Username AuthOption
+    Username AuthOption DualPasswordOption
+
+DualPasswordOption ::=
+    ( 'RETAIN' 'CURRENT' 'PASSWORD' | 'DISCARD' 'OLD' 'PASSWORD' )?
 
 Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
@@ -73,6 +76,41 @@ mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+Rotate the password for `newuser` without downtime using [dual passwords](/password-management.md#dual-password-policy): retain the current password as the secondary password while setting a new primary password, and discard it after all applications have switched to the new password. Both statements require the `APPLICATION_PASSWORD_ADMIN` dynamic privilege when operating on your own account.
+
+```sql
+ALTER USER 'newuser' IDENTIFIED BY 'newpassword' RETAIN CURRENT PASSWORD;
+```
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
+
+At this point, `newuser` can log in with both the new and the previous password. TiDB stores the secondary password under `$.additional_password` in the `User_attributes` column of the `mysql.user` system table:
+
+```sql
+SELECT JSON_EXTRACT(User_attributes, '$.additional_password') IS NOT NULL AS has_secondary FROM mysql.user WHERE User = 'newuser';
+```
+
+```
++---------------+
+| has_secondary |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+ALTER USER 'newuser' DISCARD OLD PASSWORD;
+```
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
+
+After `DISCARD OLD PASSWORD`, only the new password is valid.
 
 Lock the user `newuser`:
 
@@ -216,6 +254,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 <CustomContent platform="tidb">
 
 * [TiDB User Account Management](/user-account-management.md)
+* [TiDB Password Management](/password-management.md)
 * [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
 
 </CustomContent>
