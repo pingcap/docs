@@ -146,7 +146,7 @@ SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
     X'1z' (z is not a hexadecimal legal digit)
     0X12AC (0X must be written as 0x)
 
-`X'val'`記法で記述された`val`進数リテラルは、偶数桁でなければなりません。3 の長さが奇数（例えば`X'A'`や`X'11A'` ）の場合、構文エラーを回避するには、値の先頭にゼロを付加します。
+`X'val'`記法で記述された`val`進数リテラルは、偶数桁でなければなりません。`val`の長さが奇数（例えば`X'A'`や`X'11A'` ）の場合、構文エラーを回避するには、値の先頭にゼロを付加します。
 
 ```sql
 mysql> select X'aff';

@@ -928,7 +928,7 @@ SELECT LENGTH(NULL);
 
 ### `LIKE` {#like}
 
-`LIKE`演算子は単純な文字列マッチングに使用されます。式`expr LIKE pat [ESCAPE 'escape_char']` `1` ( `TRUE` ) または`0` ( `FALSE` ) を返します。13 または`expr` `pat`いずれかが`NULL`の場合、結果は`NULL`なります。
+`LIKE`演算子は単純な文字列マッチングに使用されます。式`expr LIKE pat [ESCAPE 'escape_char']` `1` ( `TRUE` ) または`0` ( `FALSE` ) を返します。`expr`または`pat`のいずれかが`NULL`の場合、結果は`NULL`になります。
 
 `LIKE`では次の 2 つのワイルドカード パラメータを使用できます。
 

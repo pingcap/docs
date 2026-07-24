@@ -67,7 +67,7 @@ TiKVは、TiDBが使用する分散キーバリューストレージエンジン
 
 -   各 TiKV ピアによって報告される状態情報:
 
-    各 TiKV ピアは定期的に PD にハートビートを送信します。PD はストアが生きているかどうかを確認するだけでなく、ハートビートメッセージで[`StoreState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L473)も収集します。3 には`StoreState`が含まれます。
+    各 TiKV ピアは定期的に PD にハートビートを送信します。PD はストアが生きているかどうかを確認するだけでなく、ハートビートメッセージで[`StoreState`](https://github.com/pingcap/kvproto/blob/release-8.5/proto/pdpb.proto#L473)も収集します。`StoreState`には次の情報が含まれます。
 
     -   ディスク容量合計
     -   使用可能なディスク容量

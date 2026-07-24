@@ -267,7 +267,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
     実際には、 KEY が`/tidb/ddl/all_schema_versions/foo`で VALUE が`bar`あるキーと値のペアが etcd に追加されます。
 
--   `tidb-ctl etcd delkey` etcd 内の KEY を削除します。2 または`/tidb/ddl/fg/owner/` `/tidb/ddl/all_schema_versions/`プレフィックスを持つ KEY のみ削除できます。
+-   `tidb-ctl etcd delkey` etcd 内の KEY を削除します。`/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`プレフィックスを持つ KEY のみ削除できます。
 
     ```shell
     tidb-ctl etcd delkey "/tidb/ddl/fg/owner/foo"

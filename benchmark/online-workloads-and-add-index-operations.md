@@ -82,7 +82,7 @@ sysbench $testname \
 ## テストプラン1: <code>ADD INDEX</code>文の対象列への書き込み操作を頻繁に実行する {#test-plan-1-frequently-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement}
 
 1.  `oltp_read_write`テストを開始します。
-2.  手順`alter table sbtest1 add index c_idx(c)`と同時に実行します。1 を使用してインデックスを追加します。
+2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_write`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
@@ -217,7 +217,7 @@ sysbench $testname \
 ## テストプラン 2: <code>ADD INDEX</code>ステートメントのターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement-query-only}
 
 1.  `oltp_read_only`テストを開始します。
-2.  手順`alter table sbtest1 add index c_idx(c)`と同時に実行します。1 を使用してインデックスを追加します。
+2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
@@ -279,7 +279,7 @@ sysbench $testname \
 ## テストプラン3: <code>ADD INDEX</code>文のターゲット列はオンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-code-add-index-code-statement-is-irrelevant-to-online-workloads}
 
 1.  `oltp_read_write`テストを開始します。
-2.  手順`alter table test add index pad_idx(pad)`と同時に実行します。1 を使用してインデックスを追加します。
+2.  手順 1 と同時に実行します。`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。
 3.  手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4.  `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
