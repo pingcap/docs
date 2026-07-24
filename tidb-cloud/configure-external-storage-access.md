@@ -23,7 +23,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
 > **Note:**
 >
-> Amazon S3 へのロール ARN アクセスは、ターゲットTiDB Cloud Starter、 Essential、または Premium インスタンスのクラウドプロバイダーが AWS である場合にのみサポートされます。別のクラウドプロバイダーを使用する場合は、代わりに AWS アクセスキーを使用してください。詳細については、 [AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)参照してください。
+> Amazon S3 へのロール ARN アクセスは、ターゲットTiDB Cloud Starter、 Essential、または Premium インスタンスのクラウドプロバイダーが AWS である場合にのみサポートされます。別のクラウドプロバイダーを使用する場合は、代わりに AWS アクセスキーを使用してください。詳細については、 [AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)を参照してください。
 
 1.  対象のTiDB Cloud Starter、 Essential、またはPremiumインスタンスの**インポート**ページを開きます。
 

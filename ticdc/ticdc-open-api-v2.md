@@ -112,7 +112,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ## TiCDC クラスターのヘルスステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
-このAPIは同期インターフェースです。クラスターが正常な場合は`200 OK`返されます。
+このAPIは同期インターフェースです。クラスターが正常な場合は`200 OK`が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -382,7 +382,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
 ### レスポンス本文の形式 {#response-body-format}
 
@@ -552,11 +552,11 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 curl -X DELETE http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
 ## レプリケーション構成を更新する {#update-the-replication-configuration}
 
-このAPIはレプリケーションタスクの更新に使用されます。リクエストが成功した場合、 `200 OK`返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
+このAPIはレプリケーションタスクの更新に使用されます。リクエストが成功した場合、 `200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
 changefeed 設定を変更するには、 `pause the replication task -> modify the configuration -> resume the replication task`の手順に従います。
 
@@ -678,7 +678,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。JSONレスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細は3のセクションを参照してください。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。JSONレスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細はそのセクションを参照してください。
 
 ## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
@@ -877,7 +877,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
 ## レプリケーションタスクを再開する {#resume-a-replication-task}
 
@@ -915,7 +915,7 @@ curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/resume -d '{}'
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
 ## レプリケーションサブタスクリストを照会する {#query-the-replication-subtask-list}
 
@@ -1042,11 +1042,11 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
 ## TiCDCサーバーのログレベルを動的に調整する {#dynamically-adjust-the-log-level-of-the-ticdc-server}
 
-このAPIは同期インターフェースです。リクエストが成功すると`200 OK`返されます。
+このAPIは同期インターフェースです。リクエストが成功すると`200 OK`が返されます。
 
 ### リクエストURI {#request-uri}
 
@@ -1068,4 +1068,4 @@ curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
 ```
 
-リクエストが成功した場合は`200 OK`返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
+リクエストが成功した場合は`200 OK`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。

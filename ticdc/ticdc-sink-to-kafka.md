@@ -26,7 +26,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 -   `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
 -   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
--   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`kafka`でシンクURIを設定する](#configure-sink-uri-for-kafka)参照してください。
+-   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`kafka`でシンクURIを設定する](#configure-sink-uri-for-kafka)を参照してください。
 -   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
 -   `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。

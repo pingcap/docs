@@ -363,7 +363,7 @@ SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 2');
 
 ## TIDB_IS_DDL_OWNER {#tidb-is-ddl-owner}
 
-接続しているインスタンスが DDL 所有者である場合、 `TIDB_IS_DDL_OWNER()`関数は`1`返します。
+接続しているインスタンスが DDL 所有者である場合、 `TIDB_IS_DDL_OWNER()`関数は`1`を返します。
 
 ```sql
 SELECT TIDB_IS_DDL_OWNER();

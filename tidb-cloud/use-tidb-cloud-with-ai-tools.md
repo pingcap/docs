@@ -13,7 +13,7 @@ TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、
 
 このガイドを完了するには、次のものが必要です。
 
--   TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)実行できます。
+-   TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
 -   [Python 3.11以上](https://www.python.org/downloads/)個インストールされました。
 -   [uv](https://docs.astral.sh/uv/getting-started/installation/)個インストールされました。
 -   MCP をサポートする AI 開発ツール:
@@ -49,7 +49,7 @@ TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順
 
 6.  選択したツールのセットアップ手順を完了します。
 
-    詳細については[ツール固有の設定](#tool-specific-setup)参照してください。
+    詳細については[ツール固有の設定](#tool-specific-setup)を参照してください。
 
 ## ツール固有の設定 {#tool-specific-setup}
 

@@ -11,7 +11,7 @@ summary: TiDB のデータ型のデフォルト値について学習します。
 
 -   時間型の場合、 `TIMESTAMP`と`DATETIME`列のデフォルト値として`NOW` 、 `CURRENT_TIMESTAMP` 、 `LOCALTIME` 、 `LOCALTIMESTAMP`関数を使用できます。
 -   整数型の場合、 `NEXT VALUE FOR`関数を使用してシーケンスの次の値を列の既定値として設定し、 [`RAND()`](/functions-and-operators/numeric-functions-and-operators.md)関数を使用してランダムな浮動小数点値を列の既定値として生成できます。
--   文字列型の場合、 [`UUID()`](/functions-and-operators/miscellaneous-functions.md)関数を使用して、列のデフォルト値として[ユニバーサルユニーク識別子 (UUID)](/best-practices/uuid.md)生成できます。
+-   文字列型の場合、 [`UUID()`](/functions-and-operators/miscellaneous-functions.md)関数を使用して、列のデフォルト値として[ユニバーサルユニーク識別子 (UUID)](/best-practices/uuid.md)を生成できます。
 -   バイナリ型の場合、 [`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md)関数を使用して UUID をバイナリ形式に変換し、変換された値を列のデフォルト値として設定できます。
 -   v8.0.0 以降、TiDB は[`BLOB`](/data-type-string.md#blob-type) 、 [`TEXT`](/data-type-string.md#text-type) 、 [`JSON`](/data-type-json.md#json-data-type)データ型に対して[デフォルト値を指定する](#specify-expressions-as-default-values)追加でサポートしますが、それらに対して[デフォルト値](#default-values)を設定するには式のみを使用できます。
 

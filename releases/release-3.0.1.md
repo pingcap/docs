@@ -39,14 +39,14 @@ TiDB Ansible バージョン: 3.0.1
 -   `skip-grant-table=true`が設定されている場合に`FLUSH PRIVILEGES`ステートメントによって発生するシステムpanicの問題を修正[＃11027](https://github.com/pingcap/tidb/pull/11027)
 -   テーブルの主キーが`UNSIGNED`整数の場合、 `FAST ANALYZE`で収集された主キー統計が正しくない問題を修正しました。 [＃11099](https://github.com/pingcap/tidb/pull/11099)
 -   `FAST ANALYZE`文で「無効なキー」エラーが報告される場合がある問題を修正[＃11098](https://github.com/pingcap/tidb/pull/11098)
--   列のデフォルト値として`CURRENT_TIMESTAMP`使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11088](https://github.com/pingcap/tidb/pull/11088)
+-   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントで表示される精度が不完全になる問題を修正しました。 [＃11088](https://github.com/pingcap/tidb/pull/11088)
 -   MySQL との互換性を保つために、ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正しました。 [＃11118](https://github.com/pingcap/tidb/pull/11118)
 -   TiKV クライアント バッチ gRPC のバックグラウンド スレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[＃11101](https://github.com/pingcap/tidb/pull/11101)
 -   文字列の浅いコピーにより変数が誤って`SetVar`に設定される問題を修正しました [＃11044](https://github.com/pingcap/tidb/pull/11044)
 -   `INSERT … ON DUPLICATE`ステートメントがテーブルパーティションに適用されると実行が失敗し、エラーが報告される問題を修正しました。 [＃11231](https://github.com/pingcap/tidb/pull/11231)
 -   悲観的ロック（実験的機能）
     -   悲観的ロックを使用してポイントクエリを実行し、返されたデータが空の場合に、行の無効なロックのために誤った結果が返される問題を修正しました[＃10976](https://github.com/pingcap/tidb/pull/10976)
-    -   クエリで悲観的ロックを使用する際に正しいTSO `SELECT … FOR UPDATE`使用されていないため、クエリ結果が正しくない問題を修正しました。 [＃11015](https://github.com/pingcap/tidb/pull/11015)
+    -   クエリで悲観的ロックを使用する際に正しいTSO `SELECT … FOR UPDATE`が使用されていないため、クエリ結果が正しくない問題を修正しました。 [＃11015](https://github.com/pingcap/tidb/pull/11015)
     -   ロック競合の悪化を避けるために、楽観的トランザクションが悲観的ロックに遭遇したときの検出動作を即時競合検出から待機に変更します[＃11051](https://github.com/pingcap/tidb/pull/11051)
 
 ## TiKV {#tikv}

@@ -130,7 +130,7 @@ SELECT VEC_L2_DISTANCE('[0, 3]', '[4, 0]');
 VEC_COSINE_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)計算します。
+次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
 
 $距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}}\cdot {\sqrt {\sum \limits *{i=1}^{n}{q* {i}^{2}}}}}}$
 

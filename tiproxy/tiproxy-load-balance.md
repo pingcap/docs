@@ -17,7 +17,7 @@ TiProxy v1.0.0 は、TiDB サーバーに対してステータスベースおよ
 6.  ロケーションベースの負荷分散: TiProxy は、TiProxy に地理的に最も近い TiDBサーバーへのルーティング要求を優先します。
 7.  接続数ベースの負荷分散: TiDBサーバーの接続数が他の TiDB サーバーよりも大幅に多い場合、TiProxy はその TiDBサーバーから接続数の少ない TiDBサーバーに接続を移行します。
 
-負荷分散ポリシーの優先順位を調整するには、 [負荷分散ポリシーを構成する](#configure-load-balancing-policies)参照してください。
+負荷分散ポリシーの優先順位を調整するには、 [負荷分散ポリシーを構成する](#configure-load-balancing-policies)を参照してください。
 
 ## ステータスベースの負荷分散 {#status-based-load-balancing}
 

@@ -61,9 +61,9 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `WITH NUM BUCKETS`生成されるヒストグラムのバケットの最大数を指定します。
+-   `WITH NUM BUCKETS`は生成されるヒストグラムのバケットの最大数を指定します。
 
--   `WITH NUM TOPN`生成される`TOPN`の最大数を指定します。
+-   `WITH NUM TOPN`は生成される`TOPN`の最大数を指定します。
 
 -   `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
 
@@ -136,7 +136,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 TiDB が SQL ステートメントを実行する際、オプティマイザはほとんどの場合、一部の列のみの統計情報を使用します。たとえば、 `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`句に現れる列などです。これらの列は述語列と呼ばれます。
 
-テーブルに多数の列がある場合、すべての列の統計情報を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、オプティマイザで使用する特定の列（選択した列）または`PREDICATE COLUMNS`のみの統計情報を収集できます。列のサブセットの列リストを将来再利用するために保持するには、[列構成を保持する](#persist-column-configurations)参照してください。
+テーブルに多数の列がある場合、すべての列の統計情報を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、オプティマイザで使用する特定の列（選択した列）または`PREDICATE COLUMNS`のみの統計情報を収集できます。列のサブセットの列リストを将来再利用するために保持するには、[列構成を保持する](#persist-column-configurations)を参照してください。
 
 > **Note:**
 >
@@ -387,7 +387,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 すべてのテーブル、インデックス、パーティションで同じ統計バージョンを使用することをお勧めします。クラスタでまだ統計バージョン1を使用している場合は、できるだけ早く統計バージョン2に移行してください。テーブル、インデックス、パーティションなどのオブジェクトに対してバージョン2の統計が収集されるまで、TiDBはそのオブジェクトに対して既存のバージョン1の統計を引き続き使用します。
 
-移行の主な理由の1つは、Count-Min Sketchでハッシュ衝突が発生する可能性があるため、バージョン1ではequal/IN述語の推定値が不正確になる可能性があることです。詳細については、[カウントミニスケッチ](#count-min-sketch)参照してください。この問題を回避するには、 `tidb_analyze_version = 2`を設定し、すべてのオブジェクトで`ANALYZE`を再実行してください。
+移行の主な理由の1つは、Count-Min Sketchでハッシュ衝突が発生する可能性があるため、バージョン1ではequal/IN述語の推定値が不正確になる可能性があることです。詳細については、[カウントミニスケッチ](#count-min-sketch)を参照してください。この問題を回避するには、 `tidb_analyze_version = 2`を設定し、すべてのオブジェクトで`ANALYZE`を再実行してください。
 
 統計バージョン1から統計バージョン2への移行準備として、 `ANALYZE`を準備します。
 

@@ -55,7 +55,7 @@ TiDB Ansible バージョン: 3.0.8
     -   エラーコード`ErrInvalidFieldSize`を`1105(Unknow Error)`から`3013`に変更します[＃13737](https://github.com/pingcap/tidb/pull/13737)
     -   TiDBサーバーを停止するコマンド`SHUTDOWN`を追加し、権限`ShutdownPriv`を追加します[＃14104](https://github.com/pingcap/tidb/pull/14104)
     -   TiDBがステートメント実行に失敗したときに一部のロールが予期せず削除されるのを回避するために、ステートメント`DROP ROLE`のアトミック性の問題を修正しました。 [＃14130](https://github.com/pingcap/tidb/pull/14130)
-    -   TiDB バージョンが 3.0 にアップグレードされたときに、 `SHOW VARIABLE`結果の`tidb_enable_window_function`誤って`1`出力される問題を修正し、間違った結果を`0` に置き換えます。 [＃14131](https://github.com/pingcap/tidb/pull/14131)
+    -   TiDB バージョンが 3.0 にアップグレードされたときに、 `SHOW VARIABLE`結果の`tidb_enable_window_function`誤って`1`が出力される問題を修正し、間違った結果を`0` に置き換えます。 [＃14131](https://github.com/pingcap/tidb/pull/14131)
     -   TiKVノードがオフラインのときに`gcworker`継続的に再試行するため、goroutineがリークする可能性がある問題を修正しました[＃14106](https://github.com/pingcap/tidb/pull/14106)
     -   問題追跡の使いやすさを向上させるために、スロークエリログにbinlogを`Prewrite`回記録します[＃14138](https://github.com/pingcap/tidb/pull/14138)
     -   `tidb_enable_table_partition`変数を`GLOBAL SCOPE` サポートする [＃14091](https://github.com/pingcap/tidb/pull/14091)

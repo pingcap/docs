@@ -39,8 +39,8 @@ TiDB クラスターをバックアップする必要がある場合、または
 
 TiDB クラスターから別の TiDB クラスターにデータを移行する必要がある場合は、 [Dumpling](/dumpling-overview.md)使用して TiDB から完全なデータを SQL ダンプ ファイルとしてエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータを別の TiDB クラスターにインポートします。
 
-増分データも移行する必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)使用できます。
+増分データも移行する必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## TiDB 増分データサブスクリプション {#tidb-incremental-data-subscription}
 
-TiDB の増分変更をサブスクライブする必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)使用できます。
+TiDB の増分変更をサブスクライブする必要がある場合は、 [TiCDC](/ticdc/ticdc-overview.md)を使用できます。

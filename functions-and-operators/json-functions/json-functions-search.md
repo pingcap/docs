@@ -80,7 +80,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
 
 ## `JSON_CONTAINS_PATH()` {#json-contains-path}
 
-`JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])`関数は、JSON ドキュメントに指定されたパスのデータが含まれているかどうかを示す`0`または`1`返します。
+`JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])`関数は、JSON ドキュメントに指定されたパスのデータが含まれているかどうかを示す`0`または`1`を返します。
 
 例:
 
@@ -248,7 +248,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ## `MEMBER OF()` {#member-of}
 
-`str MEMBER OF (json_array)`関数は、渡された値`str`が`json_array`の要素かどうかをテストし、 `1`を返します。そうでない場合は`0`返します。引数のいずれかが`NULL`の場合は`NULL`返します。
+`str MEMBER OF (json_array)`関数は、渡された値`str`が`json_array`の要素かどうかをテストし、 `1`を返します。そうでない場合は`0`を返します。引数のいずれかが`NULL`の場合は`NULL`を返します。
 
     SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
 
@@ -264,7 +264,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 
 ## `JSON_OVERLAPS()` {#json-overlaps}
 
-`JSON_OVERLAPS(json_doc, json_doc)`関数は、2つのJSONドキュメントに重複部分があるかどうかを示します。重複がある場合は`1` 、重複しない場合は`0`返します。引数のいずれかが`NULL`の場合は`NULL`返します。
+`JSON_OVERLAPS(json_doc, json_doc)`関数は、2つのJSONドキュメントに重複部分があるかどうかを示します。重複がある場合は`1` 、重複しない場合は`0`を返します。引数のいずれかが`NULL`の場合は`NULL`を返します。
 
 例:
 

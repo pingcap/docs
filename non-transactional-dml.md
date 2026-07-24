@@ -373,7 +373,7 @@ WHERE t.c1 IS NULL;
 このエラーを回避するには、次の推奨事項に従ってください。
 
 -   非トランザクションDML文ではテーブルエイリアスの使用は避けてください。例えば、 `t.c1`を`c1`または`t_old.c1`に書き換えます。
--   [破片の列](#parameter-description)指定する際は、テーブルエイリアスを使用しないでください。例えば、 `BATCH ON t.id` `BATCH ON db.t_old.id`または`BATCH ON t_old.id`に書き換えます。
+-   [破片の列](#parameter-description)を指定する際は、テーブルエイリアスを使用しないでください。例えば、 `BATCH ON t.id`を `BATCH ON db.t_old.id`または`BATCH ON t_old.id`に書き換えます。
 -   実行する前に、 `DRY RUN QUERY`または`DRY RUN`を使用して書き換えられたステートメントをプレビューし、期待どおりであることを確認します。
 
 ### 実際のバッチサイズは指定されたバッチサイズと同じではありません {#the-actual-batch-size-is-not-the-same-as-the-specified-batch-size}

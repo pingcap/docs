@@ -84,13 +84,13 @@ SELECT CONNECTION_ID();
 
 <CustomContent platform="tidb">
 
-`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](/role-based-access-control.md)返します。
+`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](/role-based-access-control.md)を返します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)返します。
+`CURRENT_ROLE()`関数は、現在のセッションの現在の[役割](https://docs.pingcap.com/tidb/stable/role-based-access-control)を返します。
 
 </CustomContent>
 

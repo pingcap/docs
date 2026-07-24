@@ -8,7 +8,7 @@ summary: TiFlashと互換性のない TiDB 機能について説明します。
 次の状況では、 TiFlashは TiDB と互換性がありません。
 
 -   TiFlash計算レイヤー:
-    -   オーバーフローした[数値](/data-type-numeric.md)チェックはサポートされていません。例えば、 `BIGINT`の最大値2つを加算して`9223372036854775807 + 9223372036854775807` 。TiDBでは、この計算は`ERROR 1690 (22003): BIGINT value is out of range`エラーを返すことが期待されます。しかし、この計算をTiFlashで実行すると、エラーなしでオーバーフロー値`-2`返されます。
+    -   オーバーフローした[数値](/data-type-numeric.md)チェックはサポートされていません。例えば、 `BIGINT`の最大値2つを加算して`9223372036854775807 + 9223372036854775807` 。TiDBでは、この計算は`ERROR 1690 (22003): BIGINT value is out of range`エラーを返すことが期待されます。しかし、この計算をTiFlashで実行すると、エラーなしでオーバーフロー値`-2`が返されます。
     -   [ウィンドウ関数](/functions-and-operators/window-functions.md)すべてが[プッシュダウン](/tiflash/tiflash-supported-pushdown-calculations.md)でサポートされているわけではありません。
     -   TiKV からのデータの読み取りはサポートされていません。
     -   現在、 TiFlashの[`SUM`](/functions-and-operators/aggregate-group-by-functions.md#supported-aggregate-functions)関数は文字列型の引数をサポートしていません。しかし、TiDBはコンパイル時に`SUM`関数に文字列型の引数が渡されたかどうかを識別できません。そのため、 `SELECT SUM(string_col) FROM t`のような文を実行すると、 TiFlashは`[FLASH:Coprocessor:Unimplemented] CastStringAsReal is not supported.`エラーを返します。このようなエラーを回避するには、このSQL文を`SELECT SUM(CAST(string_col AS double)) FROM t`に変更する必要があります。
@@ -36,4 +36,4 @@ summary: TiFlashと互換性のない TiDB 機能について説明します。
         Empty set (0.01 sec)
         ```
 
-        上の例では、コンパイルから推論された`a/b`の型は、TiDB とTiFlashの両方で`DECIMAL(7,4)`です。 `DECIMAL(7,4)`制約により、 `a/b`の戻り型は`0.0000`なります。TiDB では、 `a/b`の実行時精度は`DECIMAL(7,4)`よりも高いため、元のテーブルデータは`WHERE a/b`条件によってフィルタリングされません。しかし、 TiFlashでは、 `a/b`の計算で結果の型として`DECIMAL(7,4)`使用されるため、元のテーブルデータは`WHERE a/b`条件によってフィルタリングされます。
+        上の例では、コンパイルから推論された`a/b`の型は、TiDB とTiFlashの両方で`DECIMAL(7,4)`です。 `DECIMAL(7,4)`の制約により、 `a/b`の戻り型は`0.0000`になります。TiDB では、 `a/b`の実行時精度は`DECIMAL(7,4)`よりも高いため、元のテーブルデータは`WHERE a/b`条件によってフィルタリングされません。しかし、 TiFlashでは、 `a/b`の計算で結果の型として`DECIMAL(7,4)`が使用されるため、元のテーブルデータは`WHERE a/b`条件によってフィルタリングされます。

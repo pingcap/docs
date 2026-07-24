@@ -36,7 +36,7 @@ TiDB Ansible バージョン: 2.1.17
     -   `CAST`関数が数値型を変換するときに最初に`UINT`に変換される数値によって発生するいくつかの誤った結果 ( `select cast(13835058000000000000 as double)`など) を修正しました。 [＃11712](https://github.com/pingcap/tidb/pull/11712)
     -   `DIV`計算の被除数が小数で、この計算に負の数が含まれている場合に計算結果が正しくない可能性がある問題を修正しました。 [＃11812](https://github.com/pingcap/tidb/pull/11812)
     -   `SELECT` / `EXPLAIN`文を実行するときに一部の文字列が`INT`型に変換されることで発生する MySQL の非互換性の問題を修正するために`ConvertStrToIntStrict`関数を追加します [＃11892](https://github.com/pingcap/tidb/pull/11892)
-    -   `EXPLAIN ... FOR CONNECTION`使用されているときに`stmtCtx`の設定が間違っているために`Explain`結果が正しくない可能性がある問題を修正しました[＃11978](https://github.com/pingcap/tidb/pull/11978)
+    -   `EXPLAIN ... FOR CONNECTION`が使用されているときに`stmtCtx`の設定が間違っているために`Explain`結果が正しくない可能性がある問題を修正しました[＃11978](https://github.com/pingcap/tidb/pull/11978)
     -   `unaryMinus`関数によって返される結果が MySQL と互換性がない問題を修正しました。これは、整数結果がオーバーフローしたときに非小数点結果になるためです。 [＃11990](https://github.com/pingcap/tidb/pull/11990)
     -   `LOAD DATA`文の実行時にカウント順序が原因で`last_insert_id()`間違っている可能性がある問題を修正しました[＃11994](https://github.com/pingcap/tidb/pull/11994)
     -   ユーザーがAUTO_INCREMENT列データを明示的・暗黙的に混合して書き込む場合に`last_insert_id()`間違っている可能性がある問題を修正[＃12001](https://github.com/pingcap/tidb/pull/12001)

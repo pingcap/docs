@@ -68,7 +68,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     > **Note:**
     >
-    > フラグ`--full` 、およびコンポーネントバージョン`global-version`指定されていない場合は、一部のメタ情報のみが複製されます。
+    > フラグ`--full` 、およびコンポーネントバージョン`global-version`が指定されていない場合は、一部のメタ情報のみが複製されます。
 
 -   特定のプラットフォームからパッケージをクローンするかどうかを決定します
 

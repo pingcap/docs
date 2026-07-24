@@ -113,7 +113,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 1.  TiDBインスタンスを設定します。
 
-    TiProxyを使用する場合は、TiDB用に[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)設定する必要があります。この値は、アプリケーションの最長トランザクションの継続時間より少なくとも10秒長く設定する必要があります。これにより、TiDBサーバーがオフラインになったときにクライアント接続が中断されるのを防ぎます。トランザクションの継続時間は[TiDB監視ダッシュボードのトランザクションメトリクス](/grafana-tidb-dashboard.md#transaction)で確認できます。詳細については、 [制限事項](#limitations)参照してください。
+    TiProxyを使用する場合は、TiDB用に[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)を設定する必要があります。この値は、アプリケーションの最長トランザクションの継続時間より少なくとも10秒長く設定する必要があります。これにより、TiDBサーバーがオフラインになったときにクライアント接続が中断されるのを防ぎます。トランザクションの継続時間は[TiDB監視ダッシュボードのトランザクションメトリクス](/grafana-tidb-dashboard.md#transaction)で確認できます。詳細については、 [制限事項](#limitations)を参照してください。
 
     設定例は以下のとおりです。
 
@@ -201,7 +201,7 @@ TiProxyがデプロイされていないクラスターの場合、TiProxyイン
 
 3.  TiDBの設定を変更してください。
 
-    TiProxyを使用する場合は、TiDB用に[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)設定する必要があります。この値は、TiDBサーバーがオフラインになったときにクライアント接続が中断されないように、アプリケーションの最長トランザクションの継続時間より少なくとも10秒長くする必要があります。トランザクションの継続時間は[TiDB監視ダッシュボードのトランザクションメトリクス](/grafana-tidb-dashboard.md#transaction)で確認できます。詳細については、 [制限事項](#limitations)参照してください。
+    TiProxyを使用する場合は、TiDB用に[`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)を設定する必要があります。この値は、TiDBサーバーがオフラインになったときにクライアント接続が中断されないように、アプリケーションの最長トランザクションの継続時間より少なくとも10秒長くする必要があります。トランザクションの継続時間は[TiDB監視ダッシュボードのトランザクションメトリクス](/grafana-tidb-dashboard.md#transaction)で確認できます。詳細については、 [制限事項](#limitations)を参照してください。
 
     設定例は以下のとおりです。
 
@@ -252,7 +252,7 @@ tiup cluster upgrade <cluster-name> <version> --tiproxy-version <tiproxy-version
 ## 他のコンポーネントとの互換性 {#compatibility-with-other-components}
 
 -   TiProxyはTiDB v6.5.0以降のバージョンのみをサポートしています。
--   TiProxy の TLS 接続は TiDB と互換性のない機能を持っています。詳細は[Security](#security)参照してください。
+-   TiProxy の TLS 接続は TiDB と互換性のない機能を持っています。詳細は[Security](#security)を参照してください。
 -   TiDB DashboardとGrafanaは、バージョン7.6.0以降でTiProxyをサポートしています。
 -   TiUPはv1.14.1以降でTiProxyをサポートし、 TiDB Operatorはv1.5.1以降でTiProxyをサポートしています。
 -   TiProxyのステータスポートが提供するインターフェースはTiDBサーバーのものとは異なるため、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータをインポートする場合、ターゲットデータベースはTiProxyのアドレスではなく、TiDBサーバーのアドレスである必要があります。

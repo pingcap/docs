@@ -42,7 +42,7 @@ TiDB バージョン: 3.0.14
     -   現在のトランザクションの`start_ts`情報を`information_schema.processlist`テーブルに追加します [＃16160](https://github.com/pingcap/tidb/pull/16160)
     -   クラスタ間の通信に使用されるTLS証明書情報の自動再読み込みをサポート[＃15162](https://github.com/pingcap/tidb/pull/15162)
     -   パーティションプルーニングを再構築することで、パーティションテーブルの読み取りパフォーマンスが向上します。 [＃15628](https://github.com/pingcap/tidb/pull/15628)
-    -   `range`パーティションテーブルのパーティション式として`floor(unix_timestamp(a))`使用される場合のパーティションプルーニング機能をサポートします。 [＃16521](https://github.com/pingcap/tidb/pull/16521)
+    -   `range`パーティションテーブルのパーティション式として`floor(unix_timestamp(a))`が使用される場合のパーティションプルーニング機能をサポートします。 [＃16521](https://github.com/pingcap/tidb/pull/16521)
     -   `view`を含む`update`文の実行を許可し、 `view` を更新しない [＃16787](https://github.com/pingcap/tidb/pull/16787)
     -   ネストされた`view` 作成を禁止する [＃15424](https://github.com/pingcap/tidb/pull/15424)
     -   切り捨てを禁止する`view` [＃16420](https://github.com/pingcap/tidb/pull/16420)

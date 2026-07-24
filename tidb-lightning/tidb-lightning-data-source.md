@@ -45,7 +45,7 @@ rename srcdb. tgtdb. *.sql
 
 ### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
 
-正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)参照してください。
+正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`を希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)を参照してください。
 
 以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 

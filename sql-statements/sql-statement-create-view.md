@@ -89,8 +89,8 @@ ERROR 1105 (HY000): insert into view v1 is not supported now.
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   現在、TiDB 内のどのビューも挿入または更新できません (つまり、 `INSERT VIEW`と`UPDATE VIEW`サポートされていません)。5 `WITH CHECK OPTION`構文的に互換性があるだけで、有効ではありません。
--   現在、TiDB のビューは`ALTER VIEW`サポートしていませんが、代わりに`CREATE OR REPLACE`使用できます。
+-   現在、TiDB 内のどのビューも挿入または更新できません (つまり、 `INSERT VIEW`と`UPDATE VIEW`サポートされていません)。`WITH CHECK OPTION`構文的に互換性があるだけで、有効ではありません。
+-   現在、TiDB のビューは`ALTER VIEW`をサポートしていませんが、代わりに`CREATE OR REPLACE`を使用できます。
 -   現在、 `ALGORITHM`フィールドは TiDB において構文的に互換性があるものの、効果がありません。TiDB は現在 MERGE アルゴリズムのみをサポートしています。
 
 ## 参照 {#see-also}

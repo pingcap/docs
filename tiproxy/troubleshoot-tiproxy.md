@@ -36,7 +36,7 @@ summary: TiProxy の一般的な問題、原因、および解決策について
 2.  TiDBサーバーの接続数が徐々にゼロに減少する場合、他の負荷分散ポリシーの影響を受けている可能性があります。Grafanaで[`Session Migration Reasons`](/tiproxy/tiproxy-grafana.md#balance)メトリックを確認することで、他のポリシーに基づく移行が発生しているかどうかを確認できます。
 3.  TiProxy 設定項目[`policy`](/tiproxy/tiproxy-configuration.md#policy) `location`に設定されているかどうかを確認してください。ロケーションベースの優先順位付けが有効になっている場合、TiProxy は異なるロケーション間で CPU 使用率を分散しません。
 4.  TiProxyのバージョンを確認してください。CPUベースの負荷分散はv1.1.0以降のバージョンでのみサポートされます。それ以前のバージョンでは、最小接続数に基づく負荷分散ポリシーが使用されます。
-5.  上記のいずれの状況にも該当しない場合は、接続の移行が失敗した可能性があります。さらにトラブルシューティングを行うには、 [TiProxyは接続を移行しません](#tiproxy-does-not-migrate-connections)参照してください。
+5.  上記のいずれの状況にも該当しない場合は、接続の移行が失敗した可能性があります。さらにトラブルシューティングを行うには、 [TiProxyは接続を移行しません](#tiproxy-does-not-migrate-connections)を参照してください。
 
 ## レイテンシーが大幅に増加 {#latency-is-significantly-increased}
 

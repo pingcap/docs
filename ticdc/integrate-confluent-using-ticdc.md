@@ -156,8 +156,8 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 ### 前提条件 {#prerequisites}
 
--   Snowflakeクラスターの登録と作成が完了しました[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)参照してください。
--   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。1 [キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)参照してください。
+-   Snowflakeクラスターの登録と作成が完了しています。[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)を参照してください。
+-   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。[キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)を参照してください。
 
 ### 統合手順 {#integration-procedure}
 

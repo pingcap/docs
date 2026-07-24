@@ -259,7 +259,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 -   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
--   `data_summary_id` :*整数*。SQL生成に使用されるデータサマリーのID。このプロパティは、 `cluster_id`と`database`指定されていない場合にのみ有効になります。8と`cluster_id` `database`両方を指定した場合、APIはデータベースのデフォルトのデータサマリーを使用します。
+-   `data_summary_id` :*整数*。SQL生成に使用されるデータサマリーのID。このプロパティは、 `cluster_id`と`database`が指定されていない場合にのみ有効になります。`cluster_id`と`database`の両方を指定した場合、APIはデータベースのデフォルトのデータサマリーを使用します。
 -   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
 -   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question` SQL文に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question` SQL文を複数のタスクに分割し、各タスクごとにSQL文を生成します。
 
@@ -355,7 +355,7 @@ TiDB Cloudデータ サービスは、次の Chat2Query v1 エンドポイント
 
 `/v1/chat2data`エンドポイントを直接呼び出して、SQL文を生成・実行できます。3 と比較すると、 `/v2/chat2data` `/v1/chat2data`レスポンスが速くなりますが、パフォーマンスは低くなります。
 
-TiDB Cloudは、エンドポイントの呼び出しを支援するためのコードサンプルを生成します。サンプルコードを入手して実行するには、 [エンドポイントのコード例を取得する](#get-the-code-example-of-an-endpoint)参照してください。
+TiDB Cloudは、エンドポイントの呼び出しを支援するためのコードサンプルを生成します。サンプルコードを入手して実行するには、 [エンドポイントのコード例を取得する](#get-the-code-example-of-an-endpoint)を参照してください。
 
 `/v1/chat2data`呼び出すときは、次のパラメータを置き換える必要があります。
 

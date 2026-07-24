@@ -461,7 +461,7 @@ SHOW binding_cache status;
 
 ## ステートメントサマリーテーブルを利用して、バインドする必要があるクエリを取得します。 {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
 
-[ステートメントの要約](/statement-summary-tables.md) 、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行すると、条件付き`plan_digest` 、そして[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)取得できます。
+[ステートメントの要約](/statement-summary-tables.md)は、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行して条件を満たす`plan_digest`を取得し、[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)ことができます。
 
 以下の例では、過去2週間に10回以上実行され、SQLバインディングのない複数の実行プランを持つ`SELECT`ステートメントをクエリします。クエリを実行時間でソートし、上位100件のクエリを最も高速なプランにバインドします。
 
@@ -676,7 +676,7 @@ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VA
 
 | **ディメンション名** | **説明**                                                                                                                                                      | 備考                                                                                                                                     |
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| テーブル         | テーブル名でフィルタリングします。各フィルタリングルールは`db.table`形式です。サポートされているフィルタリング構文には[プレーンテーブル名](/table-filter.md#plain-table-names)と[ワイルドカード](/table-filter.md#wildcards)含まれます。 | 大文字と小文字は区別されません。テーブル名に無効な文字が含まれている場合、ログに警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`返されます。                |
+| テーブル         | テーブル名でフィルタリングします。各フィルタリングルールは`db.table`形式です。サポートされているフィルタリング構文には[プレーンテーブル名](/table-filter.md#plain-table-names)と[ワイルドカード](/table-filter.md#wildcards)が含まれます。 | 大文字と小文字は区別されません。テーブル名に無効な文字が含まれている場合、ログに警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`が返されます。                |
 | 頻度           | 頻度でフィルタリングします。複数回実行されたSQL文はデフォルトでキャプチャされます。頻繁に実行されるSQL文をキャプチャするには、高い頻度を設定することができます。                                                                         | 頻度を1未満の値に設定すると無効とみなされ、ログに警告メッセージ`[sql-bind] frequency threshold is less than 1, ignore it`が返されます。複数の頻度フィルタルールが挿入された場合、最も高い頻度の値が優先されます。 |
 | ユーザー         | ユーザー名でフィルタリングします。ブロックリストに登録されたユーザーが実行したステートメントはキャプチャされません。                                                                                                  | 複数のユーザーが同じステートメントを実行し、そのユーザー名がすべてブロックリストに含まれている場合、このステートメントはキャプチャされません。                                                                |
 

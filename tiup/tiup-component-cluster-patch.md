@@ -65,7 +65,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
     tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *
     ```
 
-上記の手順を完了すると、 `tiup cluster patch`コマンドの`<package-path>`として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`使用できます。
+上記の手順を完了すると、 `tiup cluster patch`コマンドの`<package-path>`として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
 
 ## オプション {#options}
 

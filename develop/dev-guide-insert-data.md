@@ -278,7 +278,7 @@ INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'n
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
--   この列を指定する***必要が***あることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
+-   この列を指定する***必要が***あることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/tidb/stable/sql-statement-set-variable)を使用できます。 ユーザー変数を変更することで、挿入時に`AUTO_RANDOM`の列を指定できるようにします。
 
     ```sql
     SET @@allow_auto_random_explicit_insert = true;

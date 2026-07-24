@@ -340,12 +340,12 @@ purge:
 
 -   ローカルリレーログが有効な場合、つまりリレーログに有効な`server-uuid.index` 、 `subdir` 、 `relay.meta`ファイルが含まれている場合、DM-worker は`relay.meta`に記録された位置から移行を回復します。
 
--   有効なローカルリレーログが存在しないが、アップストリームデータソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`指定されている場合:
+-   有効なローカルリレーログが存在しないが、アップストリームデータソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合:
 
     -   非 GTID モードでは、 `relay-binlog-name`指定すると、DM ワーカーは指定されたbinlogファイルから移行を開始します。
     -   GTID モードでは、 `relay-binlog-gtid`指定すると、DM ワーカーは指定された GTID から移行を開始します。
 
--   有効なローカルリレーログがなく、DM 構成ファイルに`relay-binlog-name`または`relay-binlog-gtid`指定されていない場合:
+-   有効なローカルリレーログがなく、DM 構成ファイルに`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合:
 
     -   非 GTID モードでは、DM ワーカーは、各サブタスクが移行している最も古いbinlogから移行を開始し、最新のbinlogが移行されるまで続けます。
 

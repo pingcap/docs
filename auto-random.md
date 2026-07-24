@@ -7,7 +7,7 @@ summary: AUTO_RANDOM 属性について学習します。
 
 ## ユーザーシナリオ {#user-scenario}
 
-`AUTO_RANDOM`の値はランダムかつ一意であるため、TiDBが連続したIDを割り当てることで単一ストレージノードに書き込みホットスポットが発生するのを回避するため、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`使用されることがよくあります。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
+`AUTO_RANDOM`の値はランダムかつ一意であるため、TiDBが連続したIDを割り当てることで単一ストレージノードに書き込みホットスポットが発生するのを回避するため、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`が使用されることがよくあります。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`の場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 
 <CustomContent platform="tidb">
 
@@ -210,4 +210,4 @@ ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 -   `AUTO_RANDOM`属性で指定された主キー列の列タイプを変更することはできません。
 -   同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`指定することはできません。
 -   同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定することはできません。
--   列に`AUTO_RANDOM`使用されている場合、自動生成される値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。
+-   列に`AUTO_RANDOM`が使用されている場合、自動生成される値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。
