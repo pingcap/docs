@@ -70,6 +70,8 @@ The following behavior applies:
 
 ## Troubleshooting
 
+If connectivity is not working as expected after configuring allowed access CIDRs, review the following common issues and their solutions.
+
 ### The VPC peering connection is active, but I cannot connect to the instance
 
 An active VPC peering connection does not automatically allow traffic. Make sure that you have configured allowed access CIDR rules for the source application subnets.
