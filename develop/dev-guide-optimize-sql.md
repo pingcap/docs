@@ -112,7 +112,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)参照してください。
 
-### 解決策: カバーインデックスを使用する {#solution-use-covering-index}
+### 解決策: カバリングインデックスを使用する {#solution-use-covering-index}
 
 インデックスが、SQL ステートメントによってクエリされるすべての列を含むカバーリング インデックスである場合は、インデックス データをスキャンするだけでクエリに十分です。
 
@@ -152,7 +152,7 @@ EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-パフォーマンスを最適化するには、インデックス`title_idx`を削除し、新しいカバーインデックス`title_price_idx`を作成します。
+パフォーマンスを最適化するには、インデックス`title_idx`を削除し、新しいカバリングインデックス`title_price_idx`を作成します。
 
 ```sql
 ALTER TABLE books DROP INDEX title_idx;
