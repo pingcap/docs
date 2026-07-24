@@ -11,7 +11,7 @@ summary: TiDB データベースにおける BATCH の使用法の概要。
 
 `BATCH`構文は、列に基づいてDML文を複数の実行範囲に分割します。各範囲では、1つのSQL文が実行されます。
 
-使用方法および制限事項の詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)参照してください。
+使用方法および制限事項の詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を参照してください。
 
 `BATCH`ステートメントで複数テーブルの結合を使用する場合は、あいまいさを避けるために列の完全なパスを指定する必要があります。
 
@@ -29,7 +29,7 @@ Non-transactional DML, shard column must be fully specified
 
 > **Note:**
 >
-> `BATCH`文は実行時に内部的に書き換えられ、複数のDML文に分割されます。現在のバージョンでは、テーブルエイリアスが保持されない可能性があり、 `Unknown column '<alias>.<column>' in 'where clause'`のようなエラーが発生する可能性があります。この問題を回避するには、テーブルエイリアスを使用しないでください。実行前に、 `DRY RUN QUERY`または`DRY RUN`を使用して分割文をプレビューしてください。詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)参照してください。
+> `BATCH`文は実行時に内部的に書き換えられ、複数のDML文に分割されます。現在のバージョンでは、テーブルエイリアスが保持されない可能性があり、 `Unknown column '<alias>.<column>' in 'where clause'`のようなエラーが発生する可能性があります。この問題を回避するには、テーブルエイリアスを使用しないでください。実行前に、 `DRY RUN QUERY`または`DRY RUN`を使用して分割文をプレビューしてください。詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を参照してください。
 
 ## 概要 {#synopsis}
 

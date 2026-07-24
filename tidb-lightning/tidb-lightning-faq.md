@@ -17,7 +17,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 ## ターゲット データベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
 
-権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)参照してください。
+権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 
 ## TiDB Lightning で1 つのテーブルのインポート中にエラーが発生しました。他のテーブルにも影響しますか？プロセスは終了しますか？ {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
 

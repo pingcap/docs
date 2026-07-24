@@ -47,7 +47,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 -   データの移行や復旧などのデータインポートシナリオに適しています。該当する場合は、 TiDB Lightningではなく`IMPORT INTO`使用することをお勧めします。
 
-詳細については[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)参照してください。
+詳細については[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を参照してください。
 
 ## データの挿入、更新、削除 {#data-inserts-updates-and-deletions}
 
@@ -69,7 +69,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 -   大量のデータの挿入、更新、削除などの一般的なバッチ処理タスクに適しています。
 
-詳細については[パイプラインDML](/pipelined-dml.md)参照してください。
+詳細については[パイプラインDML](/pipelined-dml.md)を参照してください。
 
 ### 非トランザクションDMLステートメント {#non-transactional-dml-statements}
 
@@ -91,7 +91,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 -   大量のデータの挿入、更新、削除を伴うシナリオに適しています。ただし、その制限のため、パイプラインDMLが適用できない場合にのみ、非トランザクションDMLを検討することをお勧めします。
 
-詳細については[非トランザクションDML](/non-transactional-dml.md)参照してください。
+詳細については[非トランザクションDML](/non-transactional-dml.md)を参照してください。
 
 ### 非推奨のbatch-dml機能 {#deprecated-batch-dml-feature}
 

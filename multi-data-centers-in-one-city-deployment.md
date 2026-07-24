@@ -82,7 +82,7 @@ member leader_priority pdName3 3
 
 > **Note:**
 >
-> TiDB v5.2以降、 `label-property`構成はデフォルトではサポートされません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)使用してください。
+> TiDB v5.2以降、 `label-property`構成はデフォルトではサポートされません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用してください。
 
 **デメリット:**
 

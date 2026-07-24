@@ -57,7 +57,7 @@ COMMIT;
 
 > **Tip:**
 >
-> [楽観的トランザクション](/optimistic-transaction.md)有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)使用することをお勧めします。
+> [楽観的トランザクション](/optimistic-transaction.md)有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)を使用することをお勧めします。
 
 ### トランザクションのロールバック {#rolling-back-a-transaction}
 
@@ -280,7 +280,7 @@ TiDBでは以前、1トランザクションあたりのキーと値のペアの
 
 > **Note:**
 >
-> 因果一貫性のあるトランザクションは、非同期コミット機能と1相コミット機能が有効な場合にのみ有効になります。これらの2つの機能の詳細については、 [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)参照してください。
+> 因果一貫性のあるトランザクションは、非同期コミット機能と1相コミット機能が有効な場合にのみ有効になります。これらの2つの機能の詳細については、 [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)を参照してください。
 
 TiDBは、トランザクションの因果一貫性の有効化をサポートしています。因果一貫性のあるトランザクションは、コミット時にPDからタイムスタンプを取得する必要がなく、コミットレイテンシーが低くなります。因果一貫性を有効にする構文は次のとおりです。
 

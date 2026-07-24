@@ -9,7 +9,7 @@ summary: TiDB データベースに対する ANALYZE の使用法の概要。
 
 TiDB は、統計が自身の推定値と一致していないことが判明すると、時間の経過とともに統計を自動的に更新します。
 
-現在、TiDBは`ANALYZE TABLE`文を使用して完全なコレクションとして統計情報を収集します。詳細については、 [統計学入門](/statistics.md)参照してください。
+現在、TiDBは`ANALYZE TABLE`文を使用して完全なコレクションとして統計情報を収集します。詳細については、 [統計学入門](/statistics.md)を参照してください。
 
 ## 概要 {#synopsis}
 
@@ -96,7 +96,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 TiDBは、収集する統計情報と、クエリ実行時に統計情報を利用する方法の**両方**においてMySQLとは異なります。この文は構文的にはMySQLに似ていますが、以下の違いがあります。
 
--   TiDBは、 `ANALYZE TABLE`実行時に、ごく最近コミットされた変更を反映させない可能性があります。行のバッチ更新後、統計情報の更新にこれらの変更を反映させるには、 `ANALYZE TABLE`実行する前に`sleep(1)`実行する必要がある場合があります[＃16570](https://github.com/pingcap/tidb/issues/16570)参照してください。
+-   TiDBは、 `ANALYZE TABLE`実行時に、ごく最近コミットされた変更を反映させない可能性があります。行のバッチ更新後、統計情報の更新にこれらの変更を反映させるには、 `ANALYZE TABLE`を実行する前に`sleep(1)`を実行する必要がある場合があります[＃16570](https://github.com/pingcap/tidb/issues/16570)を参照してください。
 -   `ANALYZE TABLE` 、MySQL よりも TiDB で実行するのに大幅に時間がかかります。
 
 ## 参照 {#see-also}

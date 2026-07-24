@@ -153,7 +153,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 -   TiKV インポーターは v7.5.0 で非推奨になりました。代わりに[TiDB Lightningの物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用することを強くお勧めします。
 
--   TiDB v7.5.0以降、 [TiDB Binlog](https://docs.pingcap.com/tidb/v7.5/tidb-binlog-overview)のデータレプリケーション機能に関する技術サポートは提供されなくなりました。データレプリケーションの代替ソリューションとして[TiCDC](/ticdc/ticdc-overview.md)を使用することを強くお勧めします。TiDB Binlog v7.5.0は引き続きポイントインタイムリカバリ（PITR）シナリオをサポートしていますが、このコンポーネントは将来のバージョンで完全に非推奨となります。データリカバリの代替ソリューションとして[PITR](/br/br-pitr-guide.md)使用することをお勧めします。
+-   TiDB v7.5.0以降、 [TiDB Binlog](https://docs.pingcap.com/tidb/v7.5/tidb-binlog-overview)のデータレプリケーション機能に関する技術サポートは提供されなくなりました。データレプリケーションの代替ソリューションとして[TiCDC](/ticdc/ticdc-overview.md)を使用することを強くお勧めします。TiDB Binlog v7.5.0は引き続きポイントインタイムリカバリ（PITR）シナリオをサポートしていますが、このコンポーネントは将来のバージョンで完全に非推奨となります。データリカバリの代替ソリューションとして[PITR](/br/br-pitr-guide.md)を使用することをお勧めします。
 
 -   統計情報用の[`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze)機能（実験的）は、バージョン7.5.0で非推奨となりました。
 

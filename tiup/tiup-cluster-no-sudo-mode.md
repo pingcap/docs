@@ -160,7 +160,7 @@ Node            Check         Result  Message
 
 no-sudoモードでは、 `tidb`ユーザーにはsudo権限がありません。そのため、 `tiup cluster check topology.yaml --apply --user tidb`実行しても失敗したチェック項目を自動的に修正することはできません。対象マシンで`root`ユーザーを使用して手動で修正する必要があります。
 
-詳細については、 [TiDB環境とシステムコンフィグレーションのチェック](/check-before-deployment.md)参照してください。ドキュメントの手順[SSH相互信頼とパスワードなしのsudoを手動で設定する](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)スキップする必要があることに注意してください。
+詳細については、 [TiDB環境とシステムコンフィグレーションのチェック](/check-before-deployment.md)を参照してください。ドキュメントの手順[SSH相互信頼とパスワードなしのsudoを手動で設定する](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)スキップする必要があることに注意してください。
 
 ## クラスターのデプロイと管理 {#deploy-and-manage-the-cluster}
 

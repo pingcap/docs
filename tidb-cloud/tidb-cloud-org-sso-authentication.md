@@ -253,15 +253,15 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     1.  ID プロバイダーで、 TiDB Cloud組織の SCIM プロビジョニングを SAML アプリ統合に追加します。
 
-        たとえば、ID プロバイダーが Okta の場合は、 [アプリ統合に SCIM プロビジョニングを追加する](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm)参照してください。
+        たとえば、ID プロバイダーが Okta の場合は、 [アプリ統合に SCIM プロビジョニングを追加する](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm)を参照してください。
 
     2.  SAML アプリ統合を ID プロバイダー内の目的のグループに割り当て、グループのメンバーがアプリ統合にアクセスして使用できるようにします。
 
-        たとえば、ID プロバイダーが Okta の場合は、 [アプリ統合をグループに割り当てる](https://help.okta.com/en-us/content/topics/provisioning/lcm/lcm-assign-app-groups.htm)参照してください。
+        たとえば、ID プロバイダーが Okta の場合は、 [アプリ統合をグループに割り当てる](https://help.okta.com/en-us/content/topics/provisioning/lcm/lcm-assign-app-groups.htm)を参照してください。
 
     3.  アイデンティティ プロバイダーからTiDB Cloudにユーザー グループをプッシュします。
 
-        たとえば、ID プロバイダーが Okta の場合は、 [グループプッシュを管理する](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-group-push-main.htm)参照してください。
+        たとえば、ID プロバイダーが Okta の場合は、 [グループプッシュを管理する](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-group-push-main.htm)を参照してください。
 
 3.  TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループを表示します。
 
@@ -276,8 +276,8 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
     >
     > グループにロールを付与すると、グループ内のすべてのメンバーにそのロールが付与されます。グループにTiDB Cloud組織に既に所属しているメンバーが含まれている場合、これらのメンバーにもグループの新しいロールが付与されます。
 
-    1.  グループに組織ロールを付与するには、 **「組織別」を**クリックし、 **「組織ロール」**列でロールを設定します。組織ロールの権限については、 [組織の役割](/tidb-cloud/manage-user-access.md#organization-roles)参照してください。
-    2.  グループにプロジェクトロールを付与するには、 **「プロジェクト別」を**クリックし、 **「プロジェクトロール」**列でロールを設定します。プロジェクトロールの権限については、 [プロジェクトの役割](/tidb-cloud/manage-user-access.md#project-roles)参照してください。
+    1.  グループに組織ロールを付与するには、 **「組織別」を**クリックし、 **「組織ロール」**列でロールを設定します。組織ロールの権限については、 [組織の役割](/tidb-cloud/manage-user-access.md#organization-roles)を参照してください。
+    2.  グループにプロジェクトロールを付与するには、 **「プロジェクト別」を**クリックし、 **「プロジェクトロール」**列でロールを設定します。プロジェクトロールの権限については、 [プロジェクトの役割](/tidb-cloud/manage-user-access.md#project-roles)を参照してください。
 
 5.  アイデンティティ プロバイダーでプッシュされたグループのメンバーを変更すると、これらの変更はTiDB Cloud内の対応するグループに動的に同期されます。
 

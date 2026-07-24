@@ -173,7 +173,7 @@ TiDB Cloud には、カスタム API エンドポイントを使用して HTTPS 
 2.  **「エンドポイントの生成」**ダイアログボックスで、エンドポイントを生成するデータアプリを選択し、エンドポイント名を入力します。
 3.  **「生成」**をクリックします。エンドポイントが生成され、その詳細ページが表示されます。
 
-詳細については、[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)参照してください.
+詳細については、[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください.
 
 ## SQLエディターの設定を管理する {#manage-sql-editor-settings}
 

@@ -61,6 +61,6 @@ TiDB Ansible バージョン: 2.1.16
 
 -   Spark に`log4j`設定ファイルを追加する [＃842](https://github.com/pingcap/tidb-ansible/pull/842)
 -   tispark jarパッケージをv2.1.2 に更新します [＃863](https://github.com/pingcap/tidb-ansible/pull/863)
--   TiDB Binlog がKafka または ZooKeeper 使用する場合に Prometheus 構成ファイルが間違った形式で生成される問題を修正しました [＃845](https://github.com/pingcap/tidb-ansible/pull/845)
+-   TiDB Binlog がKafka または ZooKeeper を使用する場合に Prometheus 構成ファイルが間違った形式で生成される問題を修正しました [＃845](https://github.com/pingcap/tidb-ansible/pull/845)
 -   `rolling_update.yml`オペレーション実行時にPDがLeaderの切り替えに失敗するバグを修正 [＃888](https://github.com/pingcap/tidb-ansible/pull/888)
 -   PDノードのローリング更新ロジックを最適化 - フォロワーを最初にアップグレードし、次にLeaderをアップグレード - 安定性を向上[＃895](https://github.com/pingcap/tidb-ansible/pull/895)

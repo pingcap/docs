@@ -48,7 +48,7 @@ TiDB Ansible バージョン: 2.1.18
     -   スロークエリログの`COM_STMT_FETCH`時間レコードがMySQLのものと矛盾する問題を修正しました。 [＃12953](https://github.com/pingcap/tidb/pull/12953)
     -   書き込み競合のエラーメッセージにエラーコードを追加して、原因を素早く特定します[＃12878](https://github.com/pingcap/tidb/pull/12878)
 -   DDL
-    -   デフォルトでは、列の`AUTO INCREMENT`の属性の削除は許可されません。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`の変数の値を変更してください。詳細は[システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)参照してください[＃12146](https://github.com/pingcap/tidb/pull/12146)
+    -   デフォルトでは、列の`AUTO INCREMENT`の属性の削除は許可されません。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`の変数の値を変更してください。詳細は[システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)を参照してください[＃12146](https://github.com/pingcap/tidb/pull/12146)
     -   `Create Table`文で一意インデックスを作成するときに複数の`unique`をサポートする [＃12469](https://github.com/pingcap/tidb/pull/12469)
     -   `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラーを返す代わりに、作成されたテーブルのスキーマを使用するという互換性の問題を修正しました。 [＃12678](https://github.com/pingcap/tidb/pull/12678)
     -   `ADMIN CANCEL DDL JOBS` 実行時に`invalid list index`エラーが報告される問題を修正 [＃12681](https://github.com/pingcap/tidb/pull/12681)

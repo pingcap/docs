@@ -63,7 +63,7 @@ tiup update --self && tiup update dumpling
 
 1.  [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2.  対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)参照してください。 。
+2.  対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。 。
 
 #### Dumplingの権限を設定する {#configure-privileges-for-dumpling}
 
@@ -79,9 +79,9 @@ tiup update --self && tiup update dumpling
 
 アップストリームの TiDB Self-Managed クラスターからダウンストリームのTiDB Cloudリソースに増分データをレプリケートするには、 [TiCDCをデプロイする](https://docs.pingcap.com/tidb/dev/deploy-ticdc)必要があります。
 
-1.  アップストリーム TiDB Self-Managedクラスターの現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、上流の TiDB Self-Managedクラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
+1.  アップストリーム TiDB Self-Managedクラスターの現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、上流の TiDB Self-Managedクラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
-2.  TiCDCコンポーネントをアップストリームの TiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
+2.  TiCDCコンポーネントをアップストリームの TiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
@@ -137,7 +137,7 @@ SELECT @@global.tidb_gc_enable;
 
 #### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定します {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
-AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
+AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
 1.  AWSアカウントIDまたはアカウントエイリアス、 IAMユーザー名、およびパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインしてください。
 
@@ -160,7 +160,7 @@ Dumplingを使用して、アップストリームのTiDBクラスタからAmazo
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照してください。
+2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
     以下のスクリーンショットは、S3バケットURI情報を取得する方法を示しています。
 
@@ -203,8 +203,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)以下のドキュメントに従って、対象のTiDBリソースのアカウントIDと外部IDを取得してください。
 
-    -   TiDB Cloud Dedicatedクラスターについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)参照してください。
-    -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn)参照してください。
+    -   TiDB Cloud Dedicatedクラスターについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)を参照してください。
+    -   TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn)を参照してください。
 
 2.  Amazon S3 のアクセス権限を設定します。通常、以下の読み取り専用権限が必要です。
 
@@ -264,7 +264,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     }
     ```
 
-4.  役割を設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
+4.  ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
 5.  ロール ARN を取得します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
@@ -287,8 +287,8 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
-        -   TiDB Cloud StarterまたはEssentialの場合は、 **「認可されたネットワーク」**セクションで**「ルールの追加」**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォール ルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)参照してください。
-        -   TiDB Cloud Dedicatedの場合は、 **「IP アドレスの追加」**をクリックします。表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+]**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**[IP アドレス]**フィールドに入力して、 **[確認]**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+        -   TiDB Cloud StarterまたはEssentialの場合は、 **「認可されたネットワーク」**セクションで**「ルールの追加」**をクリックします。表示されたダイアログで、TiCDCコンポーネントのパブリック IP アドレスを使用するファイアウォール ルールを追加し、 **[保存]**をクリックします。詳細については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)を参照してください。
+        -   TiDB Cloud Dedicatedの場合は、 **「IP アドレスの追加」**をクリックします。表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+]**をクリックし、TiCDCコンポーネントのパブリック IP アドレスを**[IP アドレス]**フィールドに入力して、 **[確認]**をクリックします。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloudリソースの接続情報を取得します。
 

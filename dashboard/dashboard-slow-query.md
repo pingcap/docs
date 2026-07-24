@@ -11,7 +11,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 > **Note:**
 >
-> スロークエリログが無効になっている場合、この機能は利用できません。スロークエリログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)使用して有効または無効にすることができます。
+> スロークエリログが無効になっている場合、この機能は利用できません。スロークエリログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にすることができます。
 
 ## ページにアクセスしてください {#access-the-page}
 
@@ -68,7 +68,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 ### 実行計画 {#execution-plans}
 
-TiDB Dashboardでは、表、テキスト、グラフの 3 つの方法で実行計画を表示できます。実行計画の読み方については、[クエリ実行プランを理解する](/explain-overview.md)参照してください。
+TiDB Dashboardでは、表、テキスト、グラフの 3 つの方法で実行計画を表示できます。実行計画の読み方については、[クエリ実行プランを理解する](/explain-overview.md)を参照してください。
 
 #### 実行計画を表形式で表示 {#execution-plan-in-table-format}
 

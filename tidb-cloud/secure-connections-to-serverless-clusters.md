@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 > **Note:**
 >
-> TiDB Cloud Dedicated クラスターへの TLS 接続を確立する方法については、 [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)参照してください。
+> TiDB Cloud Dedicated クラスターへの TLS 接続を確立する方法については、 [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -39,7 +39,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
     > **Note:**
     >
-    > TiDB Cloudクラスターに接続する際は、ユーザー名にクラスターのプレフィックスを含め、引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
+    > TiDB Cloudクラスターに接続する際は、ユーザー名にクラスターのプレフィックスを含め、引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 ## ルート証明書の管理 {#root-certificate-management}
 
@@ -47,7 +47,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 TiDB Cloudは、クライアントとTiDB Cloudクラスタ間のTLS接続において、 [レッツ・エンクリプト](https://letsencrypt.org/)の証明書を証明機関（CA）として使用します。TiDB Cloud証明書の有効期限が切れると、クラスタの通常の動作や確立されたTLSセキュア接続に影響を与えることなく、自動的にローテーションされます。
 
-JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloudクラスタに安全に接続できます。ただし、一部のドライバやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)使用してTiDB Cloudクラスタに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
+JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloudクラスタに安全に接続できます。ただし、一部のドライバやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlclient](https://github.com/PyMySQL/mysqlclient)を使用してTiDB Cloudクラスタに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`を設定する必要があります。
 
 複数の証明書が含まれる証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRGルートX1](https://letsencrypt.org/certs/isrgrootx1.pem)証明書をダウンロードする必要があります。
 
@@ -77,7 +77,7 @@ JavaやGoなど、クライアントがシステムのルートCAストアをデ
 
 **ウィンドウズ**
 
-WindowsはCAルートへの特定のパスを提供していません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)使用して証明書を保存します。そのため、WindowsでCAルートパスを指定するには、次の手順に従います。
+WindowsはCAルートへの特定のパスを提供していません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。そのため、WindowsでCAルートパスを指定するには、次の手順に従います。
 
 1.  [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `<path_to_ca>`などの任意のパスに保存します。
 2.  TiDB Cloudクラスターに接続するときは、パス ( `<path_to_ca>` ) を CA ルート パスとして使用します。

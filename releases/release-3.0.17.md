@@ -36,7 +36,7 @@ TiDB バージョン: 3.0.17
     -   `IndexHashJoin`または`IndexMergeJoin`を含むクエリがpanicに遭遇した場合、空のセットではなく実際のエラー メッセージを返します。 [＃18498](https://github.com/pingcap/tidb/pull/18498)
     -   `SELECT a FROM t HAVING t.a` のようなSQL文の不明な列エラーを修正 [＃18432](https://github.com/pingcap/tidb/pull/18432)
     -   テーブルに主キーがない場合、またはテーブルにすでに整数の主キーがある場合は、テーブルに主キーを追加することを禁止します[＃18342](https://github.com/pingcap/tidb/pull/18342)
-    -   `EXPLAIN FORMAT="dot" FOR CONNECTION` 実行すると空のセットを返します [＃17157](https://github.com/pingcap/tidb/pull/17157)
+    -   `EXPLAIN FORMAT="dot" FOR CONNECTION` を実行すると空のセットを返します [＃17157](https://github.com/pingcap/tidb/pull/17157)
     -   フォーマットトークン &#39;%r&#39;、&#39;%h&#39; 処理を修正`STR_TO_DATE` [＃18725](https://github.com/pingcap/tidb/pull/18725)
 
 -   TiKV

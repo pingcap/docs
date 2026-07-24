@@ -175,7 +175,7 @@ I/O トラフィック制限設定を構成します。
 
 #### storage.s3 {#storage-s3}
 
-以下の設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
+以下の設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
 
 ##### `endpoint` {#endpoint}
 
@@ -238,7 +238,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `disaggregated_mode` {#disaggregated-mode}
 
--   この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)参照してください。
+-   この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
 -   値`"tiflash_compute"`オプション: `"tiflash_write"`
 
 ##### `graceful_wait_shutdown_timeout` <span class="version-mark">v8.5.4 の新機能</span> {#graceful-wait-shutdown-timeout-new-in-v854}
@@ -444,17 +444,17 @@ I/O トラフィック制限設定を構成します。
 
 ##### `task_scheduler_thread_soft_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task-scheduler-thread-soft-limit-new-in-v600}
 
--   この項目はMinTSOスケジューラで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)参照してください。
+-   この項目はMinTSOスケジューラで使用されます。1つのリソースグループが使用できるスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 -   デフォルト値: `5000`
 
 ##### `task_scheduler_thread_hard_limit`<span class="version-mark">バージョン6.0.0の新機能</span> {#task-scheduler-thread-hard-limit-new-in-v600}
 
--   この項目はMinTSOスケジューラで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)参照してください。
+-   この項目はMinTSOスケジューラで使用されます。グローバルスコープ内のスレッドの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 -   デフォルト値: `10000`
 
 ##### `task_scheduler_active_set_soft_limit`<span class="version-mark">バージョン6.4.0の新機能</span> {#task-scheduler-active-set-soft-limit-new-in-v640}
 
--   この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)参照してください。
+-   この項目はMinTSOスケジューラに使用されます。TiFlashで同時に実行できるクエリの最大数を指定します。詳細については、 [TiFlash MinTSO スケジューラ](/tiflash/tiflash-mintso-scheduler.md)を参照してください。
 -   デフォルト値: バージョン7.4.0より前のバージョンでは、デフォルト値は`vcpu * 0.25`で、これはvCPU数の4分の1を意味します。バージョン7.4.0以降では、デフォルト値は`vcpu * 2`で、これはvCPU数の2倍を意味します。
 
 #### セキュリティ<span class="version-mark">v4.0.5 の新機能</span> {#security-span-class-version-mark-new-in-v4-0-5-span}
@@ -491,7 +491,7 @@ I/O トラフィック制限設定を構成します。
 
 ### <code>tiflash-learner.toml</code>ファイルを設定する {#configure-the-code-tiflash-learner-toml-code-file}
 
-`tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
+`tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 
 -   TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)追加パラメーターがあります。
 -   キーが`engine`の`label`は予約されており、手動で設定することはできません。
@@ -565,22 +565,22 @@ I/O トラフィック制限設定を構成します。
 
 #### セキュリティ.暗号化.マスターキー {#security-encryption-master-key}
 
--   暗号化が有効になっている場合、マスターキーを指定します。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)参照してください。
+-   暗号化が有効になっている場合、マスターキーを指定します。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 #### セキュリティ.暗号化.以前のマスターキー {#security-encryption-previous-master-key}
 
--   新しいマスターキーをローテーションする際に使用する古いマスターキーを指定します。設定形式は`master-key`と同じです。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)参照してください。
+-   新しいマスターキーをローテーションする際に使用する古いマスターキーを指定します。設定形式は`master-key`と同じです。マスターキーの設定方法については、 [暗号化を設定する](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 #### サーバー {#server}
 
 ##### `labels` {#labels}
 
--   `{ zone = "us-west-1", disk = "ssd" }`などのサーバー属性を指定します。ラベルを使用してレプリカをスケジュールする方法の詳細については、 [利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)参照してください。
+-   `{ zone = "us-west-1", disk = "ssd" }`などのサーバー属性を指定します。ラベルを使用してレプリカをスケジュールする方法の詳細については、 [利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
 -   デフォルト値: `{}`
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
-TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメータを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)参照してください。
+TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメータを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートしています。TiFlashノードを複数のディスクにデプロイする場合は、ノードのI/Oパフォーマンスを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。
 

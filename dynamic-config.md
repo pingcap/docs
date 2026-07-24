@@ -333,7 +333,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
-現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。1 [システム変数](/system-variables.md)使用してTiDB構成を変更できます。
+現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。[システム変数](/system-variables.md)を使用してTiDB構成を変更できます。
 
 次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`動的に変更する方法を示しています。
 
@@ -376,7 +376,7 @@ select @@tidb_slow_log_threshold;
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 
-現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
+現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
 
 デフォルト値は`tidb_max_tiflash_threads` `-1` 、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`使用すると、 `max_threads`から 10 に設定できます。
 

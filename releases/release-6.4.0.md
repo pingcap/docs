@@ -95,7 +95,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   TiDBチャンク再利用メカニズムの強化 [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221)
 
-    以前のバージョンでは、TiDB は`writechunk`関数内でのみチャンクを再利用していました。TiDB v6.4.0 では、チャンク再利用メカニズムが Executor の演算子に拡張されました。チャンクを再利用することで、TiDB はメモリ解放を頻繁に要求する必要がなくなり、一部のシナリオでは SQL クエリの実行効率が向上します。システム変数[`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)使用して、チャンク オブジェクトを再利用するかどうかを制御できます。この機能はデフォルトで有効になっています。
+    以前のバージョンでは、TiDB は`writechunk`関数内でのみチャンクを再利用していました。TiDB v6.4.0 では、チャンク再利用メカニズムが Executor の演算子に拡張されました。チャンクを再利用することで、TiDB はメモリ解放を頻繁に要求する必要がなくなり、一部のシナリオでは SQL クエリの実行効率が向上します。システム変数[`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を使用して、チャンク オブジェクトを再利用するかどうかを制御できます。この機能はデフォルトで有効になっています。
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 

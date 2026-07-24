@@ -30,7 +30,7 @@ TiDB v8.5.6以降の場合：
     tiup install sync-diff-inspector
     ```
 
--   バイナリ パッケージ: TiDB Toolkitに含まれています。ツールキットをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
+-   バイナリ パッケージ: TiDB Toolkitに含まれています。ツールキットをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 -   Dockerイメージ：以下のコマンドを実行してダウンロードしてください。
 
@@ -40,7 +40,7 @@ TiDB v8.5.6以降の場合：
 
 バージョン8.5.6より前のバージョンの場合：
 
--   バイナリ パッケージ: TiDB Toolkitに含まれています (従来の[`tidb-tools`](https://github.com/pingcap/tidb-tools)リポジトリから)。ツールキットをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
+-   バイナリ パッケージ: TiDB Toolkitに含まれています (従来の[`tidb-tools`](https://github.com/pingcap/tidb-tools)リポジトリから)。ツールキットをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 -   Dockerイメージ（旧バージョン）：以下のコマンドを実行してダウンロードしてください。
 

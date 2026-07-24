@@ -30,7 +30,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
     tiup cluster reload ${cluster-name} -R tikv
     ```
 
-    詳細なコマンドについては[TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)参照してください。
+    詳細なコマンドについては[TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 -   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境では推奨さ**れません**)。
 
@@ -71,7 +71,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
 Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポート モードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイル サイズ**パネルを観察してデータ サイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
 
-書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1 時間で Titan に変換できました。
+書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動で圧縮できます。詳細は[手作業による圧縮](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1 時間で Titan に変換できました。
 
 Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、圧縮時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlでRocksDBに完全圧縮変換するのに12時間かかりました。
 
@@ -81,15 +81,15 @@ Titanパラメータを適切に設定することで、データベースのパ
 
 ### `min-blob-size` {#min-blob-size}
 
-[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、適切なしきい値は`32KB`です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
+[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、適切なしきい値は`32KB`です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
 
 ### <code>blob-file-compression</code>と<code>zstd-dict-size</code> {#code-blob-file-compression-code-and-code-zstd-dict-size-code}
 
-[`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)使用すると、Titan の値に使用する圧縮アルゴリズムを指定できます。また、 `zstd`から[`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size)の辞書圧縮を有効にして圧縮率を向上させることもできます。
+[`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)を使用すると、Titan の値に使用する圧縮アルゴリズムを指定できます。また、 `zstd`から[`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size)の辞書圧縮を有効にして圧縮率を向上させることもできます。
 
 ### `blob-cache-size` {#blob-cache-size}
 
-Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size`](/tikv-configuration-file.md#blob-cache-size)使用します。キャッシュサイズが大きいほど、Titanの読み取りパフォーマンスが向上します。ただし、キャッシュサイズが大きすぎると、メモリ不足（OOM）の問題が発生します。
+Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size`](/tikv-configuration-file.md#blob-cache-size)を使用します。キャッシュサイズが大きいほど、Titanの読み取りパフォーマンスが向上します。ただし、キャッシュサイズが大きすぎると、メモリ不足（OOM）の問題が発生します。
 
 ストアサイズからBLOBファイルサイズを引いた値を`storage.block-cache.capacity`に設定し、データベースが安定して動作している場合は、監視指標に応じて`blob-cache-size` ～ `memory size * 50% - block cache size`設定することをお勧めします。これにより、ブロックキャッシュがRocksDBエンジン全体に十分な大きさである場合に、BLOBキャッシュサイズが最大化されます。
 

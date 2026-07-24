@@ -104,7 +104,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 4.  **「接続」** ＞ **「インポート開始」**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
 
-データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)参照してください。
+データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
 ### データインポート状況を表示する {#view-data-import-status}
 

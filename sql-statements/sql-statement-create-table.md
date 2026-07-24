@@ -177,7 +177,7 @@ NextValueForSequence ::=
 
 > **Note:**
 >
-> -   `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)参照してください。
+> -   `split-table`設定オプションはデフォルトで有効になっています。このオプションを有効にすると、新しく作成されるテーブルごとに個別のリージョンが作成されます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md)を参照してください。
 > -   `AFFINITY`を使用する前に、アフィニティが有効になっているテーブルのパーティショニング スキームの変更 (パーティションの追加、削除、再編成、または交換など) はサポートされておらず、一時テーブルまたはビューで`AFFINITY`を構成することもサポートされていないことに注意してください。
 
 </CustomContent>
@@ -283,7 +283,7 @@ mysql> DESC t1;
 
 <CustomContent platform="tidb">
 
--   互換性のために、 `index_col_name`属性は、デフォルトで最大長3072バイトの長さオプションをサポートしています。長さの制限は`max-index-length`設定オプションで変更できます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md#max-index-length)参照してください。
+-   互換性のために、 `index_col_name`属性は、デフォルトで最大長3072バイトの長さオプションをサポートしています。長さの制限は`max-index-length`設定オプションで変更できます。詳細は、 [TiDB設定ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
 
 </CustomContent>
 

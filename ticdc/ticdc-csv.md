@@ -39,7 +39,7 @@ output-field-header = false # New in v8.5.6 (only available in the TiCDC new arc
 
 ## データストレージパス構造 {#data-storage-path-structure}
 
-データのストレージパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)参照してください。
+データのストレージパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)を参照してください。
 
 ## データ形式の定義 {#definition-of-the-data-format}
 

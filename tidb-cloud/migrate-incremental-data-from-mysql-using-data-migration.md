@@ -23,7 +23,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 </CustomContent>
 
-既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
+既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -281,7 +281,7 @@ SHOW MASTER STATUS;
 
 エラーと解決策の詳細については、 [事前チェックのエラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
 
-事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)参照してください。
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
 すべてのチェック項目が**「合格」**と表示されたら、 **「次へ」**をクリックしてください。
 
@@ -297,7 +297,7 @@ SHOW MASTER STATUS;
 
 移行ジョブはどのステータスでも削除できます。
 
-移行中に問題が発生した場合は、 [移行エラーとその解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
+移行中に問題が発生した場合は、 [移行エラーとその解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
 
 </CustomContent>
 
@@ -305,7 +305,7 @@ SHOW MASTER STATUS;
 
 ## ステップ6：仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)参照してください。
+**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択したら、 **「ジョブの作成」をクリックし、「開始」を**クリックして移行を開始します。
 
@@ -319,6 +319,6 @@ SHOW MASTER STATUS;
 
 移行ジョブはどのステータスでも削除できます。
 
-移行中に問題が発生した場合は、 [移行エラーとその解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。
+移行中に問題が発生した場合は、 [移行エラーとその解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
 
 </CustomContent>

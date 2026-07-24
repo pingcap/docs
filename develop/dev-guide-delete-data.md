@@ -29,7 +29,7 @@ DELETE FROM {table} WHERE {filter}
 |  `{table}` |    テーブル名   |
 | `{filter}` | フィルターの適合条件 |
 
-この例は`DELETE`の簡単な使用例のみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)参照してください。 。
+この例は`DELETE`の簡単な使用例のみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)を参照してください。 。
 
 ## ベストプラクティス {#best-practices}
 

@@ -97,7 +97,7 @@ TiDB バージョン: 5.3.2
     -   `commit state jump backward`エラーによる繰り返しのクラッシュを修正 [＃2576](https://github.com/pingcap/tiflash/issues/2576)
     -   多数のINSERTおよびDELETE操作後に発生する可能性のあるデータの不整合を修正[＃4956](https://github.com/pingcap/tiflash/issues/4956)
     -   ローカルトンネルが有効な場合、キャンセルされた MPP クエリによってタスクが永久にハングする可能性があるバグを修正しました[＃4229](https://github.com/pingcap/tiflash/issues/4229)
-    -   TiFlash がリモート読み取り使用するときに、 TiFlash のバージョンが一致しないという誤ったレポートを修正しました。 [＃3713](https://github.com/pingcap/tiflash/issues/3713)
+    -   TiFlash がリモート読み取りを使用するときに、 TiFlash のバージョンが一致しないという誤ったレポートを修正しました。 [＃3713](https://github.com/pingcap/tiflash/issues/3713)
     -   ランダムな gRPC キープアライブタイムアウトにより MPP クエリが失敗する可能性があるバグを修正[＃4662](https://github.com/pingcap/tiflash/issues/4662)
     -   交換レシーバーで再試行がある場合にMPPクエリが永久にハングする可能性があるバグを修正しました [＃3444](https://github.com/pingcap/tiflash/issues/3444)
     -   `DATETIME`を`DECIMAL` にキャストするときに発生する誤った結果を修正 [＃4151](https://github.com/pingcap/tiflash/issues/4151)

@@ -5,7 +5,7 @@ summary: TiCDC 変更フィードを管理する方法を学びます。
 
 # チェンジフィードを管理する {#manage-changefeeds}
 
-このドキュメントでは、TiCDCコマンドラインツール`cdc cli`を使用してTiCDCの変更フィードを作成および管理する方法について説明します。変更フィードは、TiCDCのHTTPインターフェース経由でも管理できます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)参照してください。
+このドキュメントでは、TiCDCコマンドラインツール`cdc cli`を使用してTiCDCの変更フィードを作成および管理する方法について説明します。変更フィードは、TiCDCのHTTPインターフェース経由でも管理できます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 

@@ -520,7 +520,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
-ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)参照してください。
+ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
 
 インデックスのリストを明示的に指定すると、TiDB はリストからインデックスを選択してインデックス マージを構築します。インデックスのリストを指定しないと、TiDB は利用可能なすべてのインデックスからインデックスを選択してインデックス マージを構築します。
 

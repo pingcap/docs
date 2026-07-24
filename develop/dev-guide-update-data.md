@@ -21,7 +21,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 
 ## <code>UPDATE</code>を使用する {#use-code-update-code}
 
-テーブル内の既存の行を更新するには、更新対象の列をフィルタリングするために`WHERE`句を含む[`UPDATE`文](/sql-statements/sql-statement-update.md)使用する必要があります。
+テーブル内の既存の行を更新するには、更新対象の列をフィルタリングするために`WHERE`句を含む[`UPDATE`文](/sql-statements/sql-statement-update.md)を使用する必要があります。
 
 > **Note:**
 >
@@ -174,7 +174,7 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **Note:**
 >
-> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータテーブルのスキーマを変更します。TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、[列を追加](/sql-statements/sql-statement-add-column.md)参照してください。
+> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータテーブルのスキーマを変更します。TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、[列を追加](/sql-statements/sql-statement-add-column.md)を参照してください。
 
 <SimpleTab groupId="language">
 <div label="Golang" value="golang">

@@ -28,7 +28,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 -   TiDB
 
     -   `explain format = "dot"` のコプロセッサータスク情報の表示をサポート [＃16125](https://github.com/pingcap/tidb/pull/16125)
-    -   `disable-error-stack`設定項目使用してログの冗長スタック情報を削減する [＃16182](https://github.com/pingcap/tidb/pull/16182)
+    -   `disable-error-stack`設定項目を使用してログの冗長スタック情報を削減する [＃16182](https://github.com/pingcap/tidb/pull/16182)
 
 -   Placement Driver（PD）
 

@@ -20,7 +20,7 @@ TiDBは、オンライントランザクション処理（OLTP）には行ベー
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature)実行して事前に準備されたサンプル データをインポートすることもできます。
+または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#tidb-cloud-via-the-import-feature)を実行して事前に準備されたサンプル データをインポートすることもできます。
 
 ## ウィンドウ関数 {#window-functions}
 
@@ -143,7 +143,7 @@ TiDB は、より多くの分析ステートメントのために、集約され
 
 ### TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-TiDB はデフォルトで行ベースのストレージエンジン TiKV を使用します。列指向ストレージエンジンTiFlashを使用するには、 [HTAP機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)参照してください。TiFlashを介してデータをクエリする前に、次のステートメントを使用して`books`および`orders`テーブルのTiFlashレプリカを作成する必要があります。
+TiDB はデフォルトで行ベースのストレージエンジン TiKV を使用します。列指向ストレージエンジンTiFlashを使用するには、 [HTAP機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。TiFlashを介してデータをクエリする前に、次のステートメントを使用して`books`および`orders`テーブルのTiFlashレプリカを作成する必要があります。
 
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
@@ -235,7 +235,7 @@ SELECT * FROM acc;
 
 `EXPLAIN`ステートメントを使用して、上記のSQL文の実行プランを確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
 
-TiDBがTiFlashをどのように使用するかの詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)参照してください。
+TiDBがTiFlashをどのように使用するかの詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ## 続きを読む {#read-more}
 

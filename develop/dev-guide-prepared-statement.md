@@ -28,7 +28,7 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 | `{prepared_statement_name}` |         プリペアドステートメントの名前         |
 |  `{prepared_statement_sql}` | プレースホルダとして疑問符が付いプリペアドステートメントSQL |
 
-詳細については[PREPARE文](/sql-statements/sql-statement-prepare.md)参照してください。
+詳細については[PREPARE文](/sql-statements/sql-statement-prepare.md)を参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
@@ -130,7 +130,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-[`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)を例に挙げると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` （挿入時の現在時刻）の書籍を挿入する必要があります。17 `books`の**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入に関する詳細は、 [データの挿入](/develop/dev-guide-insert-data.md)参照してください。
+[`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)を例に挙げると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` （挿入時の現在時刻）の書籍を挿入する必要があります。`books`の**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入に関する詳細は、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
 

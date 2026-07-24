@@ -64,7 +64,7 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 
 > **Note:**
 >
-> 上記の表の`{user_name_prefix}`は、 TiDB Cloud Serverless クラスターを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Serverless クラスターの「 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
+> 上記の表の`{user_name_prefix}`は、 TiDB Cloud Serverless クラスターを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Serverless クラスターの「 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 ## SQLプロキシアカウントのパスワード {#sql-proxy-account-password}
 

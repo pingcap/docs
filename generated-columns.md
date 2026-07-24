@@ -94,7 +94,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 クエリ内の式がインデックス付きの生成列と厳密に同等である場合、TiDB は式を対応する生成列に置き換え、実行プランの構築時にオプティマイザーがそのインデックスを考慮できるようにします。
 
-次の例では、式`a+1`に対して生成列を作成し、インデックスを追加します。列`a`の型はint、列`a+1`の型はbigintです。生成列の型がintに設定されている場合、置換は行われません。型変換ルールについては、 [式評価の型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)参照してください。
+次の例では、式`a+1`に対して生成列を作成し、インデックスを追加します。列`a`の型はint、列`a+1`の型はbigintです。生成列の型がintに設定されている場合、置換は行われません。型変換ルールについては、 [式評価の型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)を参照してください。
 
 ```sql
 create table t(a int);
@@ -131,7 +131,7 @@ desc select a+1 from t where a+1=3;
 
 > **Note:**
 >
-> 置換対象の式と生成列の両方が文字列型で長さが異なる場合でも、システム変数[`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)を`ON`に設定することで式を置換できます。このシステム変数を設定する際は、生成列によって計算される値が生成列の定義を厳密に満たしていることを確認してください。そうでない場合、長さの違いによりデータが切り捨てられ、誤った結果になる可能性があります。GitHub の問題[＃35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)参照してください。
+> 置換対象の式と生成列の両方が文字列型で長さが異なる場合でも、システム変数[`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)を`ON`に設定することで式を置換できます。このシステム変数を設定する際は、生成列によって計算される値が生成列の定義を厳密に満たしていることを確認してください。そうでない場合、長さの違いによりデータが切り捨てられ、誤った結果になる可能性があります。GitHub の問題[＃35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -141,7 +141,7 @@ JSON と生成された列の現在の制限は次のとおりです。
 -   `ALTER TABLE`文を使用して、保存された生成列を通常の列に変換したり、通常の列を保存された生成列に変換したりすることはできません。
 -   保存された生成列の式を`ALTER TABLE`ステートメントを通じて変更することはできません。
 -   [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
--   [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)サポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)使用してください。
+-   [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)サポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
 -   現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存された生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。
 -   次の関数と式は生成された列の定義では許可されておらず、使用すると TiDB によってエラーが返されます。
 

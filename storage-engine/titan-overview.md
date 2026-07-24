@@ -33,7 +33,7 @@ Titan を有効にするための前提条件は次のとおりです。
 
 バージョン7.6.0以降、新規作成されたクラスターではTitanがデフォルトで有効になっています。小さなTiKV値はRocksDBに保存されたままなので、このシナリオでもTitanを有効にすることができます。
 
-Titan のパフォーマンスを向上させたい場合は、ブログ投稿[Titan: 書き込み増幅を減らす RocksDB プラグイン](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)参照してください。
+Titan のパフォーマンスを向上させたい場合は、ブログ投稿[Titan: 書き込み増幅を減らす RocksDB プラグイン](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)を参照してください。
 
 ## アーキテクチャと実装 {#architecture-and-implementation}
 

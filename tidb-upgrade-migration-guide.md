@@ -31,14 +31,14 @@ summary: 完全バックアップと復元のためのBRと、増分データレ
 
 -   TiCDC の互換性を確認します。
 
-    -   **テーブルスキーマの要件**：レプリケートするテーブルに有効なインデックスが含まれていることを確認してください。詳細については、 [TiCDC有効インデックス](/ticdc/ticdc-overview.md#valid-index)参照してください。
-    -   **機能制限**：TiCDCはシーケンスDDLレプリケーションまたはTiFlash DDLレプリケーションをサポートしていません。詳細については、 [TiCDC がサポートしていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)参照してください。
+    -   **テーブルスキーマの要件**：レプリケートするテーブルに有効なインデックスが含まれていることを確認してください。詳細については、 [TiCDC有効インデックス](/ticdc/ticdc-overview.md#valid-index)を参照してください。
+    -   **機能制限**：TiCDCはシーケンスDDLレプリケーションまたはTiFlash DDLレプリケーションをサポートしていません。詳細については、 [TiCDC がサポートしていないシナリオ](/ticdc/ticdc-overview.md#unsupported-scenarios)を参照してください。
     -   **ベスト プラクティス**: スイッチオーバー中に TiCDC のアップストリーム クラスターで DDL 操作を実行しないでください。
 
 -   BRの互換性を確認します。
 
-    -   BRフルバックアップの互換性マトリックスを確認してください。詳細については、 [BRバージョン互換性マトリックス](/br/backup-and-restore-overview.md#br-version-compatibility-matrix-between-tidb-v650-and-v850)参照してください。
-    -   BRバックアップと復元の既知の制限事項を確認してください。詳細については、 [BRの使用制限](/br/backup-and-restore-overview.md#restrictions)参照してください。
+    -   BRフルバックアップの互換性マトリックスを確認してください。詳細については、 [BRバージョン互換性マトリックス](/br/backup-and-restore-overview.md#br-version-compatibility-matrix-between-tidb-v650-and-v850)を参照してください。
+    -   BRバックアップと復元の既知の制限事項を確認してください。詳細については、 [BRの使用制限](/br/backup-and-restore-overview.md#restrictions)を参照してください。
 
 -   [リージョン](/glossary.md#regionpeerraft-group)健全性やノードのリソース使用率など、クラスターの健全性状態を確認します。
 
@@ -59,7 +59,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 > **Note:**
 >
-> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのストレージ使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
+> `tidb_gc_life_time`増やすと、 [MVCC](/glossary.md#multi-version-concurrency-control-mvcc)データのストレージ使用量が増加し、クエリのパフォーマンスに影響する可能性があります。詳細については、 [GCの概要](/garbage-collection-overview.md)を参照してください。storageとパフォーマンスへの影響を考慮しながら、推定操作時間に基づいてGC期間を調整してください。
 
 ### 2. 新しいクラスターに全データを移行する {#2-migrate-full-data-to-the-new-cluster}
 
@@ -107,7 +107,7 @@ SET GLOBAL tidb_gc_life_time=60h;
 
 ### 3. 新しいクラスターをターゲットバージョンにアップグレードする {#3-upgrade-the-new-cluster-to-the-target-version}
 
-時間を節約するために、以下のコマンドを使用してオフラインアップグレードを実行できます。その他のアップグレード方法については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)参照してください。
+時間を節約するために、以下のコマンドを使用してオフラインアップグレードを実行できます。その他のアップグレード方法については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。
 
 ```shell
 tiup cluster stop <new_cluster_name>      # Stop the cluster
@@ -175,7 +175,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     ./sync_diff_inspector --config=./config.toml
     ```
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)参照してください。
+-   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
 
 -   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
 

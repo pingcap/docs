@@ -95,7 +95,7 @@ SELECT @@tidb_last_txn_info;
 ## ベストプラクティス {#best-practices}
 
 -   Executorなどのコンポーネントのメモリ使用量が制限を超えないように、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の値を少し増やしてください。少なくとも2GiBの値を推奨します。十分なTiDBメモリがある環境では、この値をさらに増やすことができます。
--   新しいテーブルにデータを挿入するシナリオでは、パイプラインDMLのパフォーマンスがホットスポットの影響を受ける可能性があります。最適なパフォーマンスを実現するには、事前にホットスポットに対処することをお勧めします。詳細については、 [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)参照してください。
+-   新しいテーブルにデータを挿入するシナリオでは、パイプラインDMLのパフォーマンスがホットスポットの影響を受ける可能性があります。最適なパフォーマンスを実現するには、事前にホットスポットに対処することをお勧めします。詳細については、 [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 ## 関連構成 {#related-configurations}
 

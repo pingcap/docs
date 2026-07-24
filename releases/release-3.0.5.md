@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 3.0.5
 -   リージョンが占有するストレージの精度を向上 [＃1782](https://github.com/pingcap/pd/pull/1782)
 -   `--help`コマンドの出力を改善する [＃1763](https://github.com/pingcap/pd/pull/1763)
 -   TLS を有効にした後に HTTP リクエストがリダイレクトに失敗する問題を修正[＃1777](https://github.com/pingcap/pd/pull/1777)
--   pd-ctlが`store shows limit`コマンド使用する際に発生するpanic問題を修正 [＃1808](https://github.com/pingcap/pd/pull/1808)
+-   pd-ctlが`store shows limit`コマンドを使用する際に発生するpanic問題を修正 [＃1808](https://github.com/pingcap/pd/pull/1808)
 -   ラベル監視メトリクスの可読性を向上させ、リーダーが切り替わるときに元のリーダーの監視データをリセットして、誤ったレポートを回避する[＃1815](https://github.com/pingcap/pd/pull/1815)
 
 ## ツール {#tools}

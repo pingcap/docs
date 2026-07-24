@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 
 # Gemini埋め込み {#gemini-embeddings}
 
-このドキュメントでは、 TiDB Cloudで Gemini 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)使用する方法、およびテキストクエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、 TiDB Cloudで Gemini 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、およびテキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **Note:**
 >

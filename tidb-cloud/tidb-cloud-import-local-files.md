@@ -72,7 +72,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 7.  必要に応じて CSV 構成を編集します。
 
-    **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)参照してください。
+    **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
 8.  **[インポートの開始]を**クリックします。
 
@@ -88,7 +88,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 いいえ。現在、インポート機能を使用する場合、CSV ファイルのすべての列を既存のテーブルにインポートすることしかできません。
 
-指定した列のみをインポートするには、MySQLクライアントを使用してTiDB Cloud Starter インスタンスに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
+指定した列のみをインポートするには、MySQLクライアントを使用してTiDB Cloud Starter インスタンスに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)を使用してインポートする列を指定します。例：
 
 ```sql
 CREATE TABLE `import_test` (
@@ -108,7 +108,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 ### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 
-ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
+ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)を使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
 
 あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`なります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
 

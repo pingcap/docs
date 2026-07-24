@@ -13,7 +13,7 @@ TiDB バージョン: 7.5.6
 
 ## 互換性の変更 {#compatibility-changes}
 
--   openEuler 22.03 LTS SP3/SP4 オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v7.5/hardware-and-software-requirements#os-and-platform-requirements)参照してください。
+-   openEuler 22.03 LTS SP3/SP4 オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v7.5/hardware-and-software-requirements#os-and-platform-requirements)を参照してください。
 
 ## 改善点 {#improvements}
 

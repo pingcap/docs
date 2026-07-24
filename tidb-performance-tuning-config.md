@@ -74,7 +74,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 
 以下では、追加の最適化を可能にするオプティマイザ制御構成について説明します。
 
--   [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720) : [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合は、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)使用してパーティションテーブルにアクセスします。
+-   [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720) : [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合は、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してパーティションテーブルにアクセスします。
 -   [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720) : `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`のようなフィルターの場合、 `IndexRangeScan`のより包括的なスキャン範囲を作成します。
 -   [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) ：メモリを節約するため、プランキャッシュは、この変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。長いインリストを持つクエリでもプランキャッシュを使用できるようにするには、プランキャッシュのパラメータ制限を`200`から`10000`に増やしてください。
 -   [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プランキャッシュは、物理最適化中に生成された`PointGet`演算子を含む実行プランをキャッシュすることを許可します。
@@ -124,7 +124,7 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込み要求に対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を上げると、書き込み負荷が高い場合の書き込み停止が減少します。                                                                                          | しきい値を高く設定すると、L0ファイルが多数存在する場合に、より積極的な圧縮処理が行われる可能性があります。                                                                                                                   |
 | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中の圧縮バイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、圧縮処理が追いつかない場合、保留中の圧縮バイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファ領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
-| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じ圧縮効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)参照してください。                                                                                                   |
+| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じ圧縮効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
 
 前述の表に示されている圧縮およびフロー制御構成の調整は、以下の仕様を持つインスタンスへの TiKV デプロイメントに合わせて調整されていることに注意してください。
 
@@ -248,7 +248,7 @@ sysbench oltp_read_only prepare --mysql-host={host} --mysql-port={port} --mysql-
 sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user=root --db-driver=mysql --mysql-db=test --threads=200 --time=900 --report-interval=10 --tables=1000 --table-size=10000
 ```
 
-詳細については、 [Sysbenchを使用してTiDBをテストする方法](/benchmark/benchmark-tidb-using-sysbench.md)参照してください。
+詳細については、 [Sysbenchを使用してTiDBをテストする方法](/benchmark/benchmark-tidb-using-sysbench.md)を参照してください。
 
 ### YCSBの大規模レコード値に関するワークロード {#ycsb-workloads-on-large-record-value}
 

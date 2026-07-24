@@ -46,7 +46,7 @@ TiDB Dashboardにログインすると、デフォルトで概要ページが表
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQL文」**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)参照してください。
+この領域に表示される情報は、より詳細な[SQL文ページ](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQL文」**の見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL文ページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 > **Note:**
 >

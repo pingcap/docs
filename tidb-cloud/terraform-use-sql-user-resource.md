@@ -56,7 +56,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     -   `tidbcloud_sql_user`リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
     -   TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データ ソースを実行することでユーザー プレフィックスを取得できます。
-    -   SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)参照してください。
+    -   SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 

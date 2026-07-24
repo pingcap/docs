@@ -30,9 +30,9 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
     今後、削除したTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターを復元したい場合は、必ずバックアップを作成してください。バックアップがない場合、復元することはできません。
 
-    -   TiDB Cloud Essentialインスタンスをバックアップする方法の詳細については、 [TiDB Cloud Essentialデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
+    -   TiDB Cloud Essentialインスタンスをバックアップする方法の詳細については、 [TiDB Cloud Essentialデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
-    -   TiDB Cloud Dedicatedクラスターをバックアップする方法の詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+    -   TiDB Cloud Dedicatedクラスターをバックアップする方法の詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
     > **Note:**
     >

@@ -40,7 +40,7 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 TiDBは、データのバージョン管理にマルチバージョン同時実行制御（MVCC）を実装しています。データの履歴バージョンは保持されます。これは、更新/削除のたびにデータオブジェクトの新しいバージョンが作成されるためです。データオブジェクトをその場で更新/削除するのではなく、新しいバージョンが作成されます。ただし、すべてのバージョンが保持されるわけではありません。特定の時間よりも古いバージョンは完全に削除され、履歴バージョンの過剰によって発生するストレージの占有量とパフォーマンスのオーバーヘッドを削減します。
 
-TiDBでは、ガベージコレクション（GC）が定期的に実行され、古いデータバージョンが削除されます。GCの詳細については、 [TiDB ガベージコレクション (GC)](/garbage-collection-overview.md)参照してください。
+TiDBでは、ガベージコレクション（GC）が定期的に実行され、古いデータバージョンが削除されます。GCの詳細については、 [TiDB ガベージコレクション (GC)](/garbage-collection-overview.md)を参照してください。
 
 以下の点に特に注意してください。
 
@@ -172,6 +172,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 以前のバージョンからデータを復元するには、次のいずれかの方法を使用できます。
 
--   単純なケースでは、変数`tidb_snapshot`設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)使用してデータをインポートします。
+-   単純なケースでは、変数`tidb_snapshot`を設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)を使用して出力をコピーして貼り付けるか、 `SELECT ... INTO OUTFILE`を使用し、後で[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用してデータをインポートします。
 
--   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)使用します。Dumplingは、より大きなデータセットのエクスポートに適しています。
+-   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)を使用します。Dumplingは、より大きなデータセットのエクスポートに適しています。

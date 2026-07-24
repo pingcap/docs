@@ -58,9 +58,9 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
-        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraformドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
+        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
+    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
@@ -121,7 +121,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 > **Note:**
 >
-> -   始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
+> -   始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
 > -   CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
 
 次のように、 `tidbcloud_dedicated_cluster`リソースを使用してTiDB Cloud Dedicated クラスターを作成できます。

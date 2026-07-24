@@ -110,7 +110,7 @@ DROP VIEW book_with_ratings;
 
 ## 制限 {#limitation}
 
-TiDB のビューの制限については、 [ビューの制限](/views.md#limitations)参照してください。
+TiDB のビューの制限については、 [ビューの制限](/views.md#limitations)を参照してください。
 
 ## 続きを読む {#read-more}
 

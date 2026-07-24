@@ -150,14 +150,14 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 4.  **データフォーマット**領域で、希望するKafkaメッセージのフォーマットを選択してください。
 
-    -   Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)参照してください。
-    -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)参照してください。
+    -   Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
+    -   Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
     -   オープン プロトコルは、監視、キャッシュ、全文インデックス作成、分析エンジン、および異なるデータベース間のプライマリとセカンダリのレプリケーションのためのデータ ソースを提供する行レベルのデータ変更通知プロトコルです。詳細については、 [オープンプロトコルデータフォーマット](https://docs.pingcap.com/tidb/stable/ticdc-open-protocol)を参照してください。
-    -   Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)参照してください。
+    -   Debeziumは、データベースの変更をキャプチャするためのツールです。キャプチャされた各データベース変更を「イベント」と呼ばれるメッセージに変換し、これらのイベントをKafkaに送信します。詳細については、 [Debeziumデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-debezium)を参照してください。
 
 5.  TiDB拡張フィールドをKafkaメッセージ本文に追加する場合は、 **TiDB拡張**オプションを有効にしてください。
 
-    TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)参照してください。
+    TiDB 拡張フィールドの詳細については、 [Avroデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)フィールド」および[Canal-JSONデータ形式のTiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
 6.  データ形式として**Avroを**選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
@@ -209,7 +209,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
     -   **レプリケーション係数**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
     -   **パーティション番号**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
 
-10. **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+10. **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 11. **「次へ」**をクリックしてください。
 

@@ -174,9 +174,9 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
 -   空間データ型はサポートされていません。
 
--   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)参照してください。
+-   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-詳細な制限については[MySQLの互換性](/mysql-compatibility.md#ddl-operations)参照してください。
+詳細な制限については[MySQLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## 参照 {#see-also}
 

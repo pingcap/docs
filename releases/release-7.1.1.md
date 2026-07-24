@@ -17,7 +17,7 @@ TiDB バージョン: 7.1.1
 
 ### 動作の変更 {#behavior-changes}
 
--   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)参照してください。
+-   更新イベントの処理中に、イベント内の主キーまたはnull以外の一意インデックス値が変更された場合、TiCDCはイベントを削除イベントと挿入イベントに分割します。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#transactions-containing-a-single-update-change)を参照してください。
 
 ## 改善点 {#improvements}
 

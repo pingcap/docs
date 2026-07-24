@@ -102,7 +102,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` PDから[TSO (タイムスタンプ オラクル)](/tso.md)取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` PDから[TSO (タイムスタンプ オラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
 
 `read handle duration`と`read value duration`次のように計算されます。
 
@@ -419,7 +419,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     lock write duration
 ```
 
--   TiDB v6.0以降、TiKVはデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)使用します。メモリ内悲観的ロックは非同期書き込みプロセスをバイパスします。
+-   TiDB v6.0以降、TiKVはデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)を使用します。メモリ内悲観的ロックは非同期書き込みプロセスをバイパスします。
 
 -   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショットタイプの期間です。詳細については、 [TiKVスナップショット](#tikv-snapshot)セクションを参照してください。
 
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
 
 クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
-v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
+v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用するようになり、ログの書き込みプロセスが変更されました。
 
 ### KV DB {#kv-db}
 

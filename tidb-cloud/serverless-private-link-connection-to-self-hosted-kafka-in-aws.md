@@ -730,7 +730,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 1.  [ステップ2](#2-set-up-an-aws-endpoint-service)で取得した AWS エンドポイントサービス名 (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
-    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)参照してください。
+    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
 2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 

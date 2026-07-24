@@ -20,8 +20,8 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 -   スカラーサブクエリ (例: `SELECT (SELECT s1 FROM t2) FROM t1` )。
 -   派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
--   存在テスト、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
--   `WHERE t1.a = ANY(SELECT ... FROM t2)`など`WHERE t1.a = ANY(SELECT ... FROM t2)`定量化された比較。
+-   存在判定、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
+-   量化比較、例: `WHERE t1.a = ANY(SELECT ... FROM t2)` 、 `WHERE t1.a = ANY(SELECT ... FROM t2)` 。
 -   比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
 
 ## サブクエリのカテゴリ {#category-of-subquery}
@@ -78,7 +78,7 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
     | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
     ...
 
-存在テストや定量比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)参照してください。
+存在判定や量化比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)を参照してください。
 
 ### 相関サブクエリ {#correlated-subquery}
 

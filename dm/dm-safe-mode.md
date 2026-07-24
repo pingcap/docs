@@ -26,7 +26,7 @@ summary: DMセーフモードについて、その目的、動作原理、およ
 
     バージョン8.5.6以降、タスクセッションで`foreign_key_checks=1`を設定すると、DMは主キーまたは一意インデックス値を変更しない`DELETE` `UPDATE`ステップをスキップします。詳細については、[外部キーの処理](#foreign-key-handling-new-in-v856)キー を参照してください。
 
-`REPLACE`は、MySQL でデータを挿入するための固有の構文です。 `REPLACE`を使用してデータを挿入し、新しいデータと既存のデータに主キーまたは一意制約の競合がある場合、MySQL は競合するすべてのレコードを削除し、挿入操作を実行します。これは「強制挿入」と同等です。詳細については、MySQL ドキュメントの[`REPLACE`文](https://dev.mysql.com/doc/refman/8.0/en/replace.html)参照してください。
+`REPLACE`は、MySQL でデータを挿入するための固有の構文です。 `REPLACE`を使用してデータを挿入し、新しいデータと既存のデータに主キーまたは一意制約の競合がある場合、MySQL は競合するすべてのレコードを削除し、挿入操作を実行します。これは「強制挿入」と同等です。詳細については、MySQL ドキュメントの[`REPLACE`文](https://dev.mysql.com/doc/refman/8.0/en/replace.html)を参照してください。
 
 `dummydb.dummytbl`テーブルに主キー`id`があると仮定します。このテーブルに対して、次の SQL ステートメントを繰り返し実行します。
 

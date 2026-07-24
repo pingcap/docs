@@ -142,7 +142,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
     ALTER TABLE <TABLE_NAME> COMPACT;
     ```
 
-    詳細については[`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)参照してください。
+    詳細については[`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)を参照してください。
 
 さらに、 `ADMIN SHOW DDL JOBS;`実行して`row count`を確認することで、DDLジョブの実行進捗状況を監視できます。ただし、 `row count`値は`TIFLASH_INDEXES`の`rows_stable_indexed`フィールドから取得されるため、この方法は完全に正確ではありません。この方法は、インデックス作成の進捗状況を追跡するための参照として使用できます。
 
