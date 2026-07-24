@@ -53,9 +53,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[Create a {{{ .premium }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-premium/?plan=byoc)
+[Create a {{{ .byoc }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-premium/?plan=byoc)
 
-[Connect to a {{{ .premium }}} Instance](https://docs.tidb.io/tidbcloud/connect-to-tidb-instance/?plan=byoc)
+[Connect to a {{{ .byoc }}} Instance](https://docs.tidb.io/tidbcloud/connect-to-tidb-instance/?plan=byoc)
 
 [Use an HTAP Cluster](https://docs.tidb.io/tidbcloud/tiflash-overview/?plan=byoc)
 
@@ -103,11 +103,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs.tidb.io/tidbcloud/tidb-cloud-password-authentication/?plan=byoc)
 
-[User Roles](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc/#user-roles)
+[User Roles](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc#user-roles)
 
-[Manage User Profiles](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc/#manage-user-profiles)
+[Manage User Profiles](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc#manage-user-profiles)
 
-[Manage Organization Access](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc/#manage-organization-access)
+[Manage Organization Access](https://docs.tidb.io/tidbcloud/manage-user-access/?plan=byoc#manage-organization-access)
 
 [Configure an IP Access List](https://docs.tidb.io/tidbcloud/configure-ip-access-list-premium/?plan=byoc)
 
@@ -115,11 +115,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc/#pricing-for-premium)
+[Pricing](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#billing-details)
 
-[Invoices](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc/#invoices)
+[Invoices](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#invoices)
 
-[Credits](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc/#credits)
+[Credits](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#credits)
 
 </LearningPath>
 
