@@ -72,7 +72,7 @@ CREATE TABLE sample (
 
 > **Note:**
 >
-> -   Cohere埋め込みモデルの場合、テーブルを定義する際に、{{ `input_type` `EMBED_TEXT()` }を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
+> -   Cohere埋め込みモデルの場合、テーブルを定義する際に、 `EMBED_TEXT()`関数で`input_type`を指定する必要があります。例えば、 `'{"input_type": "search_document", "input_type@search": "search_query"}'`は、データ挿入時に`input_type`が`search_document`に設定され、ベクトル検索時に`search_query`が自動的に適用されることを意味します。
 > -   `@search`サフィックスは、そのフィールドがベクトル検索クエリの実行時のみ有効であることを示しています。そのため、クエリを作成する際に`input_type`を再度指定する必要はありません。
 
 データ挿入とデータ照会：

@@ -199,7 +199,7 @@ collation = ""
 ./sync_diff_inspector --config=./config.toml
 ```
 
-このコマンドは`summary.txt`の`output-dir`にチェック レポート`config.toml`とログ`sync_diff.log`を出力します。また、 `output-dir` }} には、 `config. toml`ファイルのハッシュ値で命名されたフォルダも生成されます。このフォルダには、ブレークポイントのチェックポイント ノード情報と、データに不整合が生じた場合に生成される SQL ファイルが含まれます。
+このコマンドは`summary.txt`の`output-dir`にチェック レポート`config.toml`とログ`sync_diff.log`を出力します。また、 `output-dir`には、 `config. toml`ファイルのハッシュ値で命名されたフォルダも生成されます。このフォルダには、ブレークポイントのチェックポイント ノード情報と、データに不整合が生じた場合に生成される SQL ファイルが含まれます。
 
 ### 進捗状況 {#progress-information}
 

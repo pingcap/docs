@@ -668,7 +668,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 | `sink_uri`       | `STRING`型。レプリケーションタスクのダウンストリームアドレス。（オプション）  |
 | `replica_config` | シンクの設定パラメータ。すべて指定する必要があります。（オプション）          |
 
-上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、セクション1を参照してください。
+上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、当該セクションを参照してください。
 
 ### 例 {#example}
 
@@ -762,7 +762,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-JSONレスポンスボディの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細はセクション1を参照してください。
+JSONレスポンスボディの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細は当該セクションを参照してください。
 
 ## 特定のレプリケーションタスクが完了したかどうかを照会する {#query-whether-a-specific-replication-task-is-completed}
 

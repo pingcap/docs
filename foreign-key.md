@@ -66,7 +66,7 @@ ReferenceOption
 `UPDATE`または`DELETE`操作が親テーブルの外部キー値に影響を与える場合、子テーブルの対応する外部キー値は、外部キー定義の`ON UPDATE`または`ON DELETE`句で定義された参照操作によって決定されます。参照操作には、次のものが含まれます。
 
 -   `CASCADE` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する行を自動的に更新または削除します。カスケード操作は深さ優先で実行されます。
--   `SET NULL` : `NULL`操作が親テーブルに影響を与える場合、子テーブルの対応する外部キー列を自動的に {{B `UPDATE` `DELETE`に設定します。
+-   `SET NULL` : `UPDATE`または`DELETE`操作が親テーブルに影響を与える場合、子テーブルの対応する外部キー列を自動的に`NULL`に設定します。
 -   `RESTRICT` : 子テーブルに一致する行が含まれている場合、 `UPDATE`または`DELETE`操作を拒否します。
 -   `NO ACTION` : `RESTRICT`と同じです。
 -   `SET DEFAULT` : `RESTRICT`と同じです。

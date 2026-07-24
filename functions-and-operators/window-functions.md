@@ -99,7 +99,7 @@ FROM (
 
 ## `FIRST_VALUE()` {#first-value}
 
-`FIRST_VALUE(expr)`ウィンドウ内の最初の値を返します。
+`FIRST_VALUE(expr)`は、ウィンドウ内の最初の値を返します。
 
 次の例では、 2 つの異なるウィンドウ定義を使用しています。
 
@@ -136,7 +136,7 @@ ORDER BY
 
 ## `LAG()` {#lag}
 
-`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`は`1`は`default` `NULL`扱われます。
+`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、指定されていない場合、 `num`は`1` 、 `default`は`NULL`として扱われます。
 
 次の例では、 `num`指定されていないため、 `LAG(n)`前の行の`n`の値を返します。7が`n`の場合、前の行は存在せず、 `default`指定されていないため、 `LAG(1)`は`NULL`返します。
 
