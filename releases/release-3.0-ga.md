@@ -23,7 +23,7 @@ TiDB Ansible バージョン: 3.0.0
 ## TiDB {#tidb}
 
 -   新機能
-    -   ウィンドウ関数`NTH_VALUE` `RANK` 。1、3、5、7、9、11、13、15、17、19、21 `LEAD`含むMySQL 8.0 `NTILE`すべての`CUME_DIST`関数`ROW_NUMBER` `LAST_VALUE` `FIRST_VALUE` `PERCENT_RANK`あり`DENSE_RANK` `LAG`
+    -   ウィンドウ関数をサポート。`NTILE` 、 `LEAD` 、 `LAG` 、 `PERCENT_RANK` 、 `NTH_VALUE` 、 `CUME_DIST` 、 `FIRST_VALUE` 、 `LAST_VALUE` 、 `RANK` 、 `DENSE_RANK` 、 `ROW_NUMBER`を含む、MySQL 8.0のすべてのウィンドウ関数と互換性があります
     -   ビューのサポート（**Experimental**）
     -   テーブルパーティションの改善
         -   サポート範囲パーティション
@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 3.0.0
     -   ログ出力を最適化: `EXECUTE`ユーザー変数を出力し、 `COMMIT`トラブルシューティングを容易にするためにスロークエリログを出力します。
     -   SQLチューニングの使いやすさを向上させる`EXPLAIN ANALYZE`機能をサポート
     -   次の行のIDを取得するための`admin show next_row_id`コマンドをサポートします
-    -   6 `NAME_CONST` `JSON_ARRAY_APPEND`組み込み関数`BENCHMARK`追加し`COALESCE` `JSON_MERGE_PRESERVE` `JSON_QUOTE`
+    -   `JSON_QUOTE` 、 `JSON_ARRAY_APPEND` 、 `JSON_MERGE_PRESERVE` 、 `BENCHMARK` 、 `COALESCE` 、 `NAME_CONST`の6つの組み込み関数を追加
     -   チャンクサイズの制御ロジックを最適化し、クエリコンテキストに基づいて動的に調整することで、SQL実行時間とリソース消費を削減します。
     -   3つの演算子（ `TableReader` `IndexLookupReader`でメモリ使用量の追跡と制御をサポートします`IndexReader`
     -   空の`ON`条件をサポートするように Merge Join 演算子を最適化します。

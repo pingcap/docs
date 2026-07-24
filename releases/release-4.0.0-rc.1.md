@@ -117,7 +117,7 @@ TiDB バージョン: 4.0.0-rc.1
 -   `show create table`文のデフォルトシーケンス値の誤った表示を修正 [＃16526](https://github.com/pingcap/tidb/pull/16526)
 -   シーケンスが主キーのデフォルト値として使用されるために`not-null`エラーが返される問題を修正しました [＃16510](https://github.com/pingcap/tidb/pull/16510)
 -   TiKVが`StaleCommand`エラーを返し続けているときに、ブロックされたSQL実行に対してエラーが報告されない問題を修正しました。 [＃16530](https://github.com/pingcap/tidb/pull/16530)
--   データベースの作成時に`COLLATE`を指定するとエラーが報告される問題を修正しました。5 `SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[＃16540](https://github.com/pingcap/tidb/pull/16540)
+-   データベースの作成時に`COLLATE`を指定するとエラーが報告される問題を修正しました。`SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[＃16540](https://github.com/pingcap/tidb/pull/16540)
 -   プランキャッシュが有効な場合のパーティションプルーニングの失敗を修正[＃16723](https://github.com/pingcap/tidb/pull/16723)
 -   オーバーフロー処理時に誤った結果を返すバグ`PointGet`修正 [＃16755](https://github.com/pingcap/tidb/pull/16755)
 -   同じ時間値を持つ`slow_query`システムテーブルをクエリすると間違った結果が返される問題を修正しました[＃16806](https://github.com/pingcap/tidb/pull/16806)

@@ -88,7 +88,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 <div label="earlier than v2.0.2">
 
-DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`チェックされます。3 `enable-relay` `true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
+DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`がチェックされます。`enable-relay`が`true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
 
 設定項目`enable-relay`設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
 
@@ -276,7 +276,7 @@ purge:
     purge-relay -s mysql-replica-01 --filename mysql-bin.000001 --sub-dir e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
     ```
 
--   dmctlで次の`purge-relay`コマンドを実行すると、**現在の**（ `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` ）ディレクトリの`mysql-bin.000001`より前のすべてのリレーログファイル（ `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`と`e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`にあるすべてのリレーログファイル）が削除されます。13 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003`ファイルは保持されます。
+-   dmctlで次の`purge-relay`コマンドを実行すると、**現在の**（ `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` ）ディレクトリの`mysql-bin.000001`より前のすべてのリレーログファイル（ `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`と`e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`にあるすべてのリレーログファイル）が削除されます。`deb76a2b-09cc-11e9-9129-5242cf3bb246.000003`内のファイルは保持されます。
 
     ```bash
     purge-relay -s mysql-replica-01 --filename mysql-bin.000001

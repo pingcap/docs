@@ -45,7 +45,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP`を使用した特定の時点へのクラスターの復元のサポート (実験的) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
-    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスタを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、{{B-PLACEHOLDER-2-PLACEHOLDER-E} `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスタを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
+    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスタを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、 `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスタを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
 
     `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーション タスクを一時停止し、 `FLASHBACK`が完了した後に再開する必要があります。そうしないと、レプリケーション タスクが失敗する可能性があります。
 
@@ -340,7 +340,7 @@ TiDBバージョン: 6.4.0-DMR
 
 -   TiKV
 
-    -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size` -0-PLACEHOLDER-E}}を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
+    -   Applyスレッドが1回のポーリングで1つの有限状態マシンに対して書き込める最大バイト数を制御し、Applyスレッドが大量のデータを書き込む際のRaftstoreの混雑を緩和するために、新しい設定項目`apply-yield-write-size`を追加します。 [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
     -   リージョンのリーダーを移行する前にエントリキャッシュをウォームアップして、リーダー転送プロセス中のQPSジッターを回避する [#13060](https://github.com/tikv/tikv/issues/13060) @[cosven](https://github.com/cosven)
     -   `json_constrains`演算子をコプロセッサーにプッシュダウンするサポート [#13592](https://github.com/tikv/tikv/issues/13592) @[lizhenhuan](https://github.com/lizhenhuan)
     -   `CausalTsProvider`に非同期関数を追加して、一部のシナリオでのフラッシュパフォーマンスを改善します [#13428](https://github.com/tikv/tikv/issues/13428) @[zeminzhou](https://github.com/zeminzhou)

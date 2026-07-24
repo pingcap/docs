@@ -200,8 +200,8 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   デフォルト設定では[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)がサポートされているため、 TiDB Cloud Starterへの接続が容易になります。
     -   TiDBのバージョンを識別して、外部キーのタブを表示または非表示にする機能をサポートしています。
     -   `EXPLAIN`結果に SQL 実行プランを視覚化することをサポートします。
-    -   `PESSIMISTIC` 、 `OPTIMISTIC` 、 `AUTO_RANDOM` 、 `PLACEMENT` 、 {{B-PLACEHOLDER `POLICY` 、 `REORGANIZE` 、 `EXCHANGE` 、 `CACHE` `NONCLUSTERED` } 、 `CLUSTERED`などの TiDB キーワードの強調表示をサポートします。
-    -   `TIDB_BOUNDED_STALENESS` 、 `TIDB_DECODE_KEY` 、 `TIDB_DECODE_PLAN` 、 `TIDB_IS_DDL_OWNER` 、{{B-PLACEHOLDER `TIDB_PARSE_TSO` 、 `TIDB_VERSION` `TIDB_DECODE_SQL_DIGESTS` }}、 `TIDB_SHARD`などのTiDB関数の強調表示をサポートします。
+    -   `PESSIMISTIC` 、 `OPTIMISTIC` 、 `AUTO_RANDOM` 、 `PLACEMENT` 、 `POLICY` 、 `REORGANIZE` 、 `EXCHANGE` 、 `CACHE` 、 `NONCLUSTERED` 、 `CLUSTERED`などの TiDB キーワードの強調表示をサポートします。
+    -   `TIDB_BOUNDED_STALENESS` 、 `TIDB_DECODE_KEY` 、 `TIDB_DECODE_PLAN` 、 `TIDB_IS_DDL_OWNER` 、 `TIDB_PARSE_TSO` 、 `TIDB_VERSION` 、 `TIDB_DECODE_SQL_DIGESTS` 、 `TIDB_SHARD`などのTiDB関数の強調表示をサポートします。
 
     詳細については、 [DBeaverのドキュメント](https://github.com/dbeaver/dbeaver/wiki)を参照してください。
 

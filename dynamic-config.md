@@ -103,7 +103,7 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。1 `set tikv key=val`使用して TiKV クラスター全体の設定を変更すると、一部のインスタンスで変更が失敗する可能性があります。3 `show warnings`使用して結果を確認できます。
+バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。`set tikv key=val`を使用して TiKV クラスター全体の設定を変更すると、一部のインスタンスで変更が失敗する可能性があります。`show warnings`を使用して結果を確認できます。
 
 一部の変更が失敗した場合は、対応するステートメントを再実行するか、失敗したインスタンスを個別に変更する必要があります。ネットワークの問題やマシンの障害により一部のTiKVインスタンスにアクセスできない場合は、復旧後にこれらのインスタンスを変更してください。
 
@@ -236,7 +236,7 @@ show warnings;
 | `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                                         |
 | `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                                      |
 
-上記の表で、プレフィックスが`{db-name}`または`{db-name}.{cf-name}`パラメータはRocksDB関連の設定です。5のオプション値は`db-name` `rocksdb` `raftdb`です。
+上記の表で、`{db-name}`または`{db-name}.{cf-name}`プレフィックスを持つパラメータはRocksDB関連の設定です。`db-name`のオプション値は`rocksdb`と`raftdb`です。
 
 -   `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
 -   `db-name`が`raftdb`とき、 `cf-name`の値は`defaultcf`になります。
@@ -333,7 +333,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
-現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。1 [システム変数](/system-variables.md)使用してTiDB構成を変更できます。
+現在、TiDB構成の変更方法は、TiKVおよびPD構成の変更方法とは異なります。[システム変数](/system-variables.md)を使用してTiDB構成を変更できます。
 
 次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`動的に変更する方法を示しています。
 
@@ -378,7 +378,7 @@ select @@tidb_slow_log_threshold;
 
 現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
 
-デフォルト値は`tidb_max_tiflash_threads` `-1` 、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`使用すると、 `max_threads`から 10 に設定できます。
+`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を 10 に設定できます。
 
 ```sql
 set tidb_max_tiflash_threads = 10;

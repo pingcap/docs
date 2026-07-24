@@ -13,7 +13,7 @@ summary: TiCDC のデータ複製機能について学びます。
 
 -   TiCDCは`UPDATE` `INSERT` `DELETE`を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)参照してください。
 
--   TiCDCはトランザクションの最終的な一貫性を保証します。1 [再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)有効にすると、TiCDCは災害復旧シナリオにおいて最終的な一貫性を保証できます。3 [同期ポイント](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)有効にすると、TiCDCは一貫性のあるスナップショット読み取りとデータ整合性の検証をサポートします。
+-   TiCDCはトランザクションの最終的な一貫性を保証します。[再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を有効にすると、TiCDCは災害復旧シナリオにおいて最終的な一貫性を保証できます。[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)を有効にすると、TiCDCは一貫性のあるスナップショット読み取りとデータ整合性の検証をサポートします。
 
 ## サポートされている下流システム {#supported-downstream-systems}
 

@@ -11,7 +11,7 @@ summary: Titan の設定方法を学びます。
 
 > **Note:**
 >
-> -   TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。1 [`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
+> -   TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
 > -   v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは元の構成を保持します。つまり、Titan が明示的に有効になっていない場合は、引き続き RocksDB が使用されます。
 > -   クラスタをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスタ構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
 
@@ -111,7 +111,7 @@ Titan BLOBファイルとRocksDBブロックファイルの共有キャッシュ
 
 ### Titanの構成例 {#titan-configuration-example}
 
-以下は Titan 設定ファイルの例です。1 または[Kubernetes上でTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster) [TiUPを使用して設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)かを選択できます。
+以下は Titan 設定ファイルの例です。[TiUPを使用して設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)か[Kubernetes上でTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster)かを選択できます。
 
 ```toml
 [rocksdb]

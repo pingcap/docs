@@ -249,7 +249,7 @@ hikari:
 
 パラメータの説明は以下の通りです。詳細については、 [HikariCPの公式ドキュメント](https://github.com/brettwooldridge/HikariCP/blob/dev/README.md)を参照してください。
 
--   `maximumPoolSize` : プール内の最大接続数。デフォルト値は`10`です。コンテナ化された環境では、 Javaアプリケーションで使用可能な CPU コア数の 4～10 倍に設定することをお勧めします。この値を高く設定しすぎるとリソースの無駄遣いにつながり、低く設定しすぎると接続の取得が遅くなる可能性があります。 詳細については、を参照[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)ください。
+-   `maximumPoolSize` : プール内の最大接続数。デフォルト値は`10`です。コンテナ化された環境では、 Javaアプリケーションで使用可能な CPU コア数の 4～10 倍に設定することをお勧めします。この値を高く設定しすぎるとリソースの無駄遣いにつながり、低く設定しすぎると接続の取得が遅くなる可能性があります。 詳細については、[プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してくださいください。
 -   `minimumIdle` : HikariCPでは、このパラメータを設定しないことを推奨します。デフォルト値は`maximumPoolSize`の値と同じで、接続プールのスケーリングを無効にします。これにより、トラフィックの急増時にも接続がすぐに利用可能になり、接続作成による遅延を回避できます。
 -   `connectionTimeout` : アプリケーションが接続プールから接続を取得するために待機する最大時間 (ミリ秒)。デフォルト値は`30000`ミリ秒 (30 秒) です。この時間内に利用可能な接続が得られない場合、 `SQLException`例外が発生します。
 -   `maxLifetime` : プール内の接続の最大有効期間 (ミリ秒)。デフォルト値は`1800000`ミリ秒 (30 分) です。使用中の接続には影響しません。接続が閉じられた後、この設定に従って削除されます。この値を低く設定しすぎると、再接続が頻繁に発生する可能性があります。graceful [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)使用している場合は、この値が待機時間よりも小さいことを確認してください。

@@ -22,7 +22,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDB Cloud Dedicatedクラスタはプロジェクトに属します。TiDB Cloud Dedicatedクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDB Cloud Dedicatedクラスタはプロジェクトに属します。TiDB Cloud Dedicatedクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -244,7 +244,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
 
     通常、 TiDB Cloud Dedicated クラスターの作成には少なくとも 10 分かかります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_cluster.example_cluster
@@ -486,7 +486,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_dedicated_cluster.${resource-name}`使用して状態を確認します。
+4.  `terraform state show tidbcloud_dedicated_cluster.${resource-name}`を使用して状態を確認します。
 
         $ terraform state show tidbcloud_dedicated_cluster.example_cluster
 

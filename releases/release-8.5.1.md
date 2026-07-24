@@ -15,9 +15,9 @@ TiDBバージョン：8.5.1
 
 バージョン8.5.1以降、TiDBはCentOS Linux 7のテストを再開し、互換性を確保しています。TiDB v8.5をデプロイする場合、またはクラスタをv8.5にアップグレードする場合は、TiDB v8.5.1以降のバージョンを使用してください。
 
--   TiDB v8.4.0 DMR および v8.5.0 リリースは[2024年6月30日をもってサポート終了となります](https://www.redhat.com/en/topics/linux/centos-linux-eol) CentOS 7 上の TiDB クラスターを v8.4.0 または v8.5.0 にアップグレードすると、クラスターが使用できなくなるリスクが発生します。
+-   CentOS Linux 7 は[2024年6月30日をもってサポート終了となります](https://www.redhat.com/en/topics/linux/centos-linux-eol)。そのため、TiDB v8.4.0 DMR および v8.5.0 リリースでは、CentOS Linux 7 のサポートとテストを終了しました。CentOS 7 上の TiDB クラスターを v8.4.0 または v8.5.0 にアップグレードすると、クラスターが使用できなくなるリスクが発生します。
 
--   現在も CentOS Linux 7 を使用しているユーザーを支援するために、TiDB は v8.5.1 から CentOS Linux 7 のテストを再開します。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)およびセキュリティに関するガイダンスを確認し、Rocky Linux 9.1 以降などの本番使用用の[TiDBがサポートするオペレーティングシステム](/hardware-and-software-requirements.md#os-and-platform-requirements)する報酬システムに移行することを強くお勧めします。
+-   現在も CentOS Linux 7 を使用しているユーザーを支援するために、TiDB は v8.5.1 から CentOS Linux 7 のテストを再開します。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 以降などの本番使用向けの[TiDBがサポートするオペレーティングシステム](/hardware-and-software-requirements.md#os-and-platform-requirements)に移行することを強くお勧めします。
 
 CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDBリリースではこのディストリビューションのテストは中止されます。
 

@@ -123,4 +123,4 @@ tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_
 
 このパラメータは、Goプロセス全体で使用できるCPUコアの数を制御するために使用されます。デフォルトでは、この値は現在のマシンまたはcgroupのCPUコア数と同じです。
 
-Goの実行中、GCなどのバックグラウンドタスクには一定量のスレッドが使用されます。1パラメータの値を制限しないと、これらのバックグラウンドタスク`performance.max-procs` CPUを過剰に消費することになります。
+Goの実行中、GCなどのバックグラウンドタスクには一定量のスレッドが使用されます。`performance.max-procs`パラメータの値を制限しないと、これらのバックグラウンドタスクがCPUを過剰に消費することになります。

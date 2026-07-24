@@ -15,7 +15,7 @@ summary: TiDB Dashboardの診断レポートは、異なる時間範囲でのシ
 
 ![QPS example](/media/dashboard/dashboard-diagnostics-usage1.png)
 
-`go-ycsb` `2020-03-10 13:24:30`テストの結果は上の画像に示されています。3でQPSが急激に低下し始めたことがわかります。3分後、QPSは正常に戻り始めました。TiDB Dashboardの診断レポートを使用して原因を特定できます。
+`go-ycsb`圧力テストの結果は上の画像に示されています。`2020-03-10 13:24:30`にQPSが急激に低下し始めたことがわかります。3分後、QPSは正常に戻り始めました。TiDB Dashboardの診断レポートを使用して原因を特定できます。
 
 次の 2 つの時間範囲でシステムを比較するレポートを生成します。
 
@@ -65,7 +65,7 @@ digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8
 
 ![QPS results](/media/dashboard/dashboard-diagnostics-usage3.png)
 
-もう`go-ycsb`圧力テストの結果を上の`2020-03-08 01:46:30`に示します。3でQPSが急激に低下し始め、回復していないことがわかります。
+もう1つの`go-ycsb`圧力テストの結果を上の画像に示します。`2020-03-08 01:46:30`にQPSが急激に低下し始め、回復していないことがわかります。
 
 次の 2 つの時間範囲でシステムを比較するレポートを生成します。
 
@@ -96,7 +96,7 @@ MESSAGE  | [expensivequery.go:167] [expensive_query] [cost_time=60.085949605s] [
 
 ![QPS results](/media/dashboard/dashboard-diagnostics-usage5.png)
 
-`go-ycsb` `2020-05-22 22:14:00`テストの結果は上の画像に示されています。3でQPSが急激に低下し始めたことがわかります。3分後、QPSは正常に戻り始めました。TiDB Dashboardの比較診断レポートを使用して、原因を特定できます。
+`go-ycsb`圧力テストの結果は上の画像に示されています。`2020-05-22 22:14:00`にQPSが急激に低下し始めたことがわかります。3分後、QPSは正常に戻り始めました。TiDB Dashboardの比較診断レポートを使用して、原因を特定できます。
 
 次の 2 つの時間範囲でシステムを比較するレポートを生成します。
 

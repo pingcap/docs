@@ -114,7 +114,7 @@ summary: tidbcloud_dedicated_network_container` リソースを使用して、 T
 
     TiDB Cloud Dedicated ネットワークコンテナのリージョンにTiDB Cloud Dedicated クラスターを作成するまで、リソースのステータスは`INACTIVE`ままです。その後、ステータスは`ACTIVE`に変わります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_network_container.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_network_container.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_network_container.example          

@@ -33,7 +33,7 @@ output-field-header = false # New in v8.5.6 (only available in the TiCDC new arc
 
 ## トランザクション上の制約 {#transactional-constraints}
 
--   単一のCSVファイルでは、ある行の`commit-ts`は、次の行の{{B-PLACEHOLDER-E}}と同じかそれ以下です。
+-   単一のCSVファイルでは、ある行の`commit-ts`は、次の行の`commit-ts`と同じかそれ以下です。
 -   同一テーブルの同じトランザクションは、同じCSVファイルに保存されます。
 -   同じトランザクションの複数のテーブルを、異なるCSVファイルに保存することができます。
 

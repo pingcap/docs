@@ -5,7 +5,7 @@ summary: tiup cluster edit-config` コマンドを使用すると、デプロイ
 
 # tiup cluster edit-config {#tiup-cluster-edit-config}
 
-クラスタのデプロイ後にクラスタ設定を変更する必要がある場合は、 `tiup cluster edit-config`コマンドを使用してエディタを起動し、クラスタの[トポロジファイル](/tiup/tiup-cluster-topology-reference.md)編集できます。このエディタは、デフォルトで`$EDITOR`環境変数に指定されています。7 環境変数が存在しない場合は、 `$EDITOR`エディタ`vi`使用されます。
+クラスタのデプロイ後にクラスタ設定を変更する必要がある場合は、 `tiup cluster edit-config`コマンドを使用してエディタを起動し、クラスタの[トポロジファイル](/tiup/tiup-cluster-topology-reference.md)編集できます。このエディタは、デフォルトで`$EDITOR`環境変数に指定されています。`$EDITOR`環境変数が存在しない場合は、 `vi`エディタが使用されます。
 
 > **Note:**
 >

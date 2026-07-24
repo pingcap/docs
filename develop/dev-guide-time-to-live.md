@@ -38,7 +38,7 @@ CREATE TABLE app_messages (
 ) TTL = `created_at` + INTERVAL 3 MONTH;
 ```
 
-この例では、 `TTL = ...`有効期限ポリシーを定義します。3 `created_at`には各行の作成時刻が記録され、 `INTERVAL 3 MONTH`各行が最大 3 か月間保持されることを指定します。
+この例では、 `TTL = ...`有効期限ポリシーを定義します。`created_at`には各行の作成時刻が記録され、 `INTERVAL 3 MONTH`各行が最大 3 か月間保持されることを指定します。
 
 ### 既存のテーブルのTTL属性を構成する {#configure-the-ttl-attribute-for-an-existing-table}
 

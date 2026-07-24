@@ -125,7 +125,7 @@ TiDB に`enablePacketDebug`パラメータを設定しないでください。
 
 **説明**
 
-TiDB は`UpdatableResultSet`サポートしていません。5 パラメータ`ResultSet.CONCUR_UPDATABLE`指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
+TiDB は`UpdatableResultSet`サポートしていません。`ResultSet.CONCUR_UPDATABLE`パラメータを指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
 
 **回避方法**
 

@@ -70,7 +70,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ### `checksum failed: checksum mismatched remote vs local` {#checksum-failed-checksum-mismatched-remote-vs-local}
 
-**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。2 `checksum mismatched`含むログを確認することで、原因をさらに特定できます。
+**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`含むログを確認することで、原因をさらに特定できます。
 
 `checksum mismatched`を含む行は情報`total_kvs: x vs y`提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
 
@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    CentOS では、 `yum info tzdata`実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
+    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
 ### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 
@@ -163,7 +163,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータインポートのみをサポートしています。Local-backend を使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。その場合は、設定を変更して、データのインポートに Importer-backend または TiDB-backend を使用するように設定できます。
 
-`nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。5 バージョン`nightly`使用時にこのエラーが発生した場合は、設定`check-requirements = false`設定することでバージョンチェックを省略できます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
+`nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。`nightly`バージョンの使用時にこのエラーが発生した場合は、設定`check-requirements = false`設定することでバージョンチェックを省略できます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
 
 ### `restore table test.district failed: unknown columns in header [...]` {#restore-table-test-district-failed-unknown-columns-in-header}
 

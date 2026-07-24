@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-unique-serial-number-generation/','/ja/tidb
 
 ## AUTO_INCREMENT列 {#auto-increment-column}
 
-`AUTO_INCREMENT`は、MySQL プロトコルと互換性のある多くの RDBMS の列属性です。2 属性を使用すると、データベースはユーザーの介入なしにこの列に自動的に値を割り当てることができます。テーブル内のレコード数が増加すると、この列の値は自動的に増加し、一意であることが保証されます。 `AUTO_INCREMENT`のシナリオでは、 `AUTO_INCREMENT`列は実際には意味を持たない代理主キーとして使用されます。
+`AUTO_INCREMENT`は、MySQL プロトコルと互換性のある多くの RDBMS の列属性です。`AUTO_INCREMENT`属性を使用すると、データベースはユーザーの介入なしにこの列に自動的に値を割り当てることができます。テーブル内のレコード数が増加すると、この列の値は自動的に増加し、一意であることが保証されます。 `AUTO_INCREMENT`のシナリオでは、 `AUTO_INCREMENT`列は実際には意味を持たない代理主キーとして使用されます。
 
 `AUTO_INCREMENT`列の制限は、列が整数型でなければならず、割り当てられる値も整数でなければならないことです。アプリケーションで必要なシリアル番号が文字、数字、その他の文字で区切られている場合、ユーザーは`AUTO_INCREMENT`列を通してシリアル番号に必要なAUTO_INCREMENT番号を取得することが困難になります。
 

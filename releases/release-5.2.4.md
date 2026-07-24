@@ -65,7 +65,7 @@ TiDBバージョン：5.2.4
     -   ウィンドウ関数がトランザクションを使用する場合と使用しない場合で異なる結果を返す可能性がある問題を修正しました [#29947](https://github.com/pingcap/tidb/issues/29947)
     -   SQL文に自然結合が含まれている場合に`Column 'col_name' in field list is ambiguous`エラーが予期せず報告される問題を修正しました [#25041](https://github.com/pingcap/tidb/issues/25041)
     -   `Decimal`を`String`にキャストする際に長さ情報が間違っている問題を修正しました [#29417](https://github.com/pingcap/tidb/issues/29417)
-    -   `GREATEST`関数が`tidb_enable_vectorized_expression`の値が異なる場合（{{B-PLACEHOLDER-2- `on`または`off` 。 [#29434](https://github.com/pingcap/tidb/issues/29434)
+    -   `GREATEST`関数が`tidb_enable_vectorized_expression`の値が異なる場合（`on`または`off`に設定）に一貫性のない結果を返す問題を修正しました [#29434](https://github.com/pingcap/tidb/issues/29434)
     -   `left join`を使用して複数のテーブルのデータを削除する際の誤った結果を修正 [#31321](https://github.com/pingcap/tidb/issues/31321)
     -   TiDBがTiFlashに重複したタスクをディスパッチする可能性があるバグを修正しました [#32814](https://github.com/pingcap/tidb/issues/32814)
     -   クエリ実行時に発生するMPPタスクリストの空エラーを修正する [#31636](https://github.com/pingcap/tidb/issues/31636)

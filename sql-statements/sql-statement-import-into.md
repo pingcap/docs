@@ -283,7 +283,7 @@ IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 
 #### ワイルドカードを使用して複数のデータファイルをインポートする {#import-multiple-data-files-using-wildcards}
 
-`file-01.csv`ディレクトリに`file-02.csv` 、 `file-03.csv` 、 `/path/to/` -PLACEHOLDER-E}} という名前のファイルが 3 つあるとします。これらの 3 つのファイルを`t`を使用してターゲット テーブル`IMPORT INTO`にインポートするには、次の SQL ステートメントを実行します。
+`/path/to/`ディレクトリに`file-01.csv` 、 `file-02.csv` 、 `file-03.csv`という名前のファイルが 3 つあるとします。これらの 3 つのファイルを`IMPORT INTO`を使用してターゲット テーブル`t`にインポートするには、次の SQL ステートメントを実行します。
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-*.csv';

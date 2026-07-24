@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 3.0.9
     -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果がMySQL と一致しない問題を修正しました [＃14310](https://github.com/pingcap/tidb/pull/14310)
     -   `drop table`構文で`VIEW`が誤って削除される問題を修正[＃14052](https://github.com/pingcap/tidb/pull/14052)
 -   プランナー
-    -   `select max(a), min(a) from t`のような文のパフォーマンスを最適化します。3 `a`にインデックスが存在する場合、文は`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、フルテーブルスキャンを回避します。 [＃14410](https://github.com/pingcap/tidb/pull/14410)
+    -   `select max(a), min(a) from t`のような文のパフォーマンスを最適化します。`a`にインデックスが存在する場合、文は`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、フルテーブルスキャンを回避します。 [＃14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV {#tikv}
 

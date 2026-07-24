@@ -32,7 +32,7 @@ SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 
 ## ユースケース {#use-cases}
 
-複数`WITH ROLLUP`列からのデータの集計と要約は、OLAP（オンライン分析処理）シナリオでよく使用されます。1 修飾子を使用すると、集計結果に他の高レベルディメンションからのスーパーサマリー情報を表示する行を追加できます。これにより、スーパーサマリー情報を高度なデータ分析やレポート作成に活用できます。
+複数の列からのデータの集計と要約は、OLAP（オンライン分析処理）シナリオでよく使用されます。`WITH ROLLUP`修飾子を使用すると、集計結果に他の高レベルディメンションからのスーパーサマリー情報を表示する行を追加できます。これにより、スーパーサマリー情報を高度なデータ分析やレポート作成に活用できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -100,7 +100,7 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 6 rows in set (0.025 sec)
 ```
 
-上記の結果には、年と月の両方、年ごと、全体という異なるディメンションで集計されたデータが含まれています。結果において、 `NULL`値が存在しない行は、その行の`profit`年と月の両方をグループ化して計算されていることを示します。7 列の値が`NULL`で`month`行は、その行の`profit` 1 年間のすべての月を集計して計算されていることを示し、 `year`列の値が`NULL`である行は、その行の`profit`すべての年を集計して計算されていることを示します。
+上記の結果には、年と月の両方、年ごと、全体という異なるディメンションで集計されたデータが含まれています。結果において、 `NULL`値が存在しない行は、その行の`profit`年と月の両方をグループ化して計算されていることを示します。`month`列の値が`NULL`である行は、その行の`profit`が 1 年間のすべての月を集計して計算されていることを示し、 `year`列の値が`NULL`である行は、その行の`profit`すべての年を集計して計算されていることを示します。
 
 具体的には：
 
@@ -124,7 +124,7 @@ SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH RO
 3 rows in set (0.02 sec)
 ```
 
-`GROUP BY`の列にネイティブ`NULL`値が含まれている場合、 `WITH ROLLUP`の集計結果がクエリ結果を誤解させる可能性があることに注意してください。この問題に対処するには、 `GROUPING()`関数を使用して、ネイティブ`NULL`値と`WITH ROLLUP`によって生成された`NULL`値を区別できます。この関数はグループ化式をパラメータとして受け取り、現在の結果でグループ化式が集計されているかどうかを示す`0`または`1`返します。19 `1`集計されていることを表し、 `0`集計されていないことを表します。
+`GROUP BY`の列にネイティブ`NULL`値が含まれている場合、 `WITH ROLLUP`の集計結果がクエリ結果を誤解させる可能性があることに注意してください。この問題に対処するには、 `GROUPING()`関数を使用して、ネイティブ`NULL`値と`WITH ROLLUP`によって生成された`NULL`値を区別できます。この関数はグループ化式をパラメータとして受け取り、現在の結果でグループ化式が集計されているかどうかを示す`0`または`1`を返します。`1`は集計されていることを表し、 `0`は集計されていないことを表します。
 
 次の例は、 `GROUPING()`関数の使用方法を示しています。
 
@@ -174,7 +174,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 `Expand`演算子の実装は`Projection`演算子と似ています。違いは、 `Expand`多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`演算子は結果に 1 行のみを生成しますが、 `Expand`演算子は結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
-次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。3 `Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
+次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。`Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -191,7 +191,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 6 rows in set (0.00 sec)
 ```
 
-次の例は、 TiFlash MPP モードでの実行プランを示しています。3 `Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
+次の例は、 TiFlash MPP モードでの実行プランを示しています。`Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;

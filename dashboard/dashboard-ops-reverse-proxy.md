@@ -133,7 +133,7 @@ server_configs:
     tiup cluster edit-config CLUSTER_NAME
     ```
 
-2.  `server_configs`の`pd`設定の下にある設定項目を変更または追加します。5 `server_configs`存在しない場合は、最上位レベルに追加します。
+2.  `server_configs`の`pd`設定の下にある設定項目を変更または追加します。`server_configs`存在しない場合は、最上位レベルに追加します。
 
     ```yaml
     monitored:

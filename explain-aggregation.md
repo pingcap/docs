@@ -65,7 +65,7 @@ EXPLAIN SELECT COUNT(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-これは`EXPLAIN ANALYZE`で最も簡単に確認できます。1 では、 `TableFullScan`使用されており、セカンダリ インデックスがないため、 `actRows` `SHOW TABLE REGIONS`のリージョンの数と一致しています。
+これは`EXPLAIN ANALYZE`で最も簡単に確認できます。`EXPLAIN ANALYZE`では、 `TableFullScan`が使用されており、セカンダリ インデックスがないため、 `actRows`は`SHOW TABLE REGIONS`のリージョンの数と一致しています。
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;

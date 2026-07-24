@@ -22,7 +22,7 @@ SELECT 1 UNION SELECT 2;
 2 rows in set (0.00 sec)
 ```
 
-TiDB は`UNION DISTINCT`と`UNION ALL`両方の演算子をサポートします。5 `UNION DISTINCT`結果セットから重複レコードを削除し、 `UNION ALL`重複を含むすべてのレコードを保持します。TiDB では`UNION DISTINCT`デフォルトで使用されます。
+TiDB は`UNION DISTINCT`と`UNION ALL`両方の演算子をサポートします。`UNION DISTINCT`結果セットから重複レコードを削除し、 `UNION ALL`重複を含むすべてのレコードを保持します。TiDB では`UNION DISTINCT`デフォルトで使用されます。
 
 ```sql
 CREATE TABLE t1 (a int);

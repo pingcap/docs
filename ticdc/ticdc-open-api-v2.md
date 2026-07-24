@@ -108,7 +108,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 -   `id` : ノードのキャプチャ ID。
 -   `pid` : ノードのキャプチャプロセス ID (PID)。
 -   `is_owner` : ノードが所有者であるかどうかを示します。
--   `liveness` : このノードがライブかどうか。2 `0`正常を意味します。4 `1`ノードが`graceful shutdown`状態にあることを意味します。
+-   `liveness` : このノードがライブかどうか。`0`正常を意味します。`1`ノードが`graceful shutdown`状態にあることを意味します。
 
 ## TiCDC クラスターのヘルスステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
@@ -240,25 +240,25 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `start_ts`       | `UINT64`型。変更フィードの開始TSOを指定します。TiCDCクラスターは、このTSOからデータのプルを開始します。デフォルト値は現在時刻です。（オプション）                     |
 | `target_ts`      | `UINT64`型。変更フィードのターゲットTSOを指定します。TiCDCクラスターは、このTSOに到達するとデータのプルを停止します。デフォルト値は空で、TiCDCは自動的に停止しません。(オプション) |
 
-`changefeed_id` `target_ts`意味と`sink_uri`は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これら`start_ts`パラメータの詳細については、 `sink_uri`のドキュメントを参照してください。11 で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id` `target_ts`意味と`sink_uri`は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これら`start_ts`パラメータの詳細については、 `sink_uri`のドキュメントを参照してください。`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
 `replica_config`パラメータの説明は次のとおりです。
 
 | パラメータ名                    | 説明                                                                                                                                                                |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bdr_mode`                | `BOOLEAN`型。2 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)有効にするかどうかを決定します。デフォルト値は`false`です。（オプション）                                                     |
+| `bdr_mode`                | `BOOLEAN`型。[双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。（オプション）                                                     |
 | `case_sensitive`          | `BOOLEAN`型。テーブル名をフィルタリングする際に大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0以降では、デフォルト値が`true`から`false`に変更されます。（オプション）                                                 |
 | `check_gc_safe_point`     | `BOOLEAN`型。レプリケーションタスクの開始時刻がGC時刻よりも前であるかどうかを確認するかどうかを指定します。デフォルト値は`true`です。（オプション）                                                                                |
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
-| `enable_sync_point`       | `BOOLEAN`型。2 `sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
+| `enable_sync_point`       | `BOOLEAN`型。`sync point`有効にするかどうかを決定します。（オプション）                                                                                                                  |
 | `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
 | `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
 | `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
 | `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |
 | `sink`                    | `sink`の設定パラメータ。(オプション)                                                                                                                                            |
-| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
-| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。4 `sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
+| `sync_point_interval`     | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは同期ポイントが上流と下流のスナップショットを同期させる間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。（オプション）               |
+| `sync_point_retention`    | `STRING`型。返される値は`UINT64`型のナノ秒単位の時間であることに注意してください。`sync point`が有効な場合、このパラメータは、下流テーブルにおける同期ポイントによるデータの保持期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。（オプション） |
 
 `consistent`パラメータは次のように記述されます。
 
@@ -306,14 +306,14 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
 | `column_selectors`            | 列セレクターの構成。(オプション)                                                                                                            |
 | `csv`                         | CSV 構成。(オプション)                                                                                                               |
-| `date_separator`              | `STRING`型。ファイルディレクトリの日付区切り文字の種類を示します。値の選択肢は`none` 、 `year` 、 `month` 、 `day`です。10 `none`デフォルト値で、日付が区切られないことを意味します。(オプション)    |
+| `date_separator`              | `STRING`型。ファイルディレクトリの日付区切り文字の種類を示します。値の選択肢は`none` 、 `year` 、 `month` 、 `day`です。`none`がデフォルト値で、日付が区切られないことを意味します。(オプション)    |
 | `dispatchers`                 | イベントディスパッチ用の構成配列。(オプション)                                                                                                     |
 | `encoder_concurrency`         | `INT`型。MQシンク内のエンコーダスレッドの数。デフォルト値は`16`です。（オプション）                                                                              |
 | `protocol`                    | `STRING`型。MQシンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは、 `canal-json` 、 `open-protocol` 、 `avro` 、 `debezium` 、 `simple` 。 |
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
 | `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`ターミネータとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
-| `only_output_updated_columns` | `BOOLEAN`型。2 または`canal-json`プロトコル`open-protocol`使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
+| `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
 | `open`                        | オープンプロトコルの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |
@@ -333,7 +333,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `include_commit_ts`      | `BOOLEAN`型。CSV行にコミット情報を含めるかどうか。デフォルト値は`false`です。                             |
 | `null`                   | `STRING`型。CSV列がnullの場合に表示される文字。デフォルト値は`\N`です。                                |
 | `quote`                  | `STRING`型。CSVファイル内のフィールドを囲むために使用される引用符文字。値が空の場合、引用符は使用されません。デフォルト値は`"`です。    |
-| `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。2 または`"base64"` `"hex"`指定できます。デフォルト値は`"base64"`です。 |
+| `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。`"base64"`または`"hex"`を指定できます。デフォルト値は`"base64"`です。 |
 
 `sink.dispatchers` : MQタイプのシンクの場合、このパラメータを使用してイベントディスパッチャを設定できます。サポートされているディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`です。ディスパッチャのルールは以下のとおりです。
 
@@ -357,7 +357,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `worker_count`            | `INT`型。下流のクラウドストレージへのデータストレージの同時実行性が変更されます。                                                                                                   |
 | `flush_interval`          | `STRING`型。下流のクラウドストレージへのデータ保存間隔が変更されます。                                                                                                       |
 | `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
-| `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。2 `date-separator` `day`に設定されている場合にのみ有効になります。                                                                              |
+| `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。`date-separator` `day`に設定されている場合にのみ有効になります。                                                                              |
 | `file_cleanup_cron_spec`  | `STRING`型。crontab 設定と互換性のある、スケジュールされたクリーンアップタスクの実行サイクル。形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
 | `flush_concurrency`       | `INT`型。単一ファイルのアップロードの同時実行性。                                                                                                                     |
 | `output_raw_change_event` | `BOOLEAN`タイプ。MySQL 以外のシンクの元のデータ変更イベントを出力するかどうかを制御します。                                                                                           |
@@ -509,7 +509,7 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 | `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクは ts を解決しました。                                               |
 | `sink_uri`        | `STRING`タイプ。レプリケーション タスク シンクの URI。                                                  |
 | `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                     |
-| `state`           | `STRING`型。レプリケーションタスクの`failed` 。2、4、6、8、10 `stopped` `normal`か`finished`なります`error` |
+| `state`           | `STRING`型。レプリケーションタスクのステータス。`normal` 、 `stopped` 、 `error` 、 `failed` 、または`finished`になります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
 | `task_status`     | レプリケーション タスクのディスパッチの詳細なステータス。                                                       |
 
@@ -803,7 +803,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 応答には次のフィールドが含まれます。
 
--   `synced` : このレプリケーションタスクが完了したかどうか。2 `true`タスクが完了したこと、 `false`タスクが完了していない可能性があることを意味します。6 `false`場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
+-   `synced` : このレプリケーションタスクが完了したかどうか。`true`タスクが完了したこと、 `false`タスクが完了していない可能性があることを意味します。`false`の場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
 -   `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
 -   `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
 -   `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。

@@ -96,7 +96,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 > **Note:**
 >
-> [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)有効になっている場合、 `statements_summary_history`テーブルのデータはディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count` 、 `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、{{B-PLACEHOLDER-5-PLACEHOLDER- `tidb_stmt_summary_max_stmt_count` `statements_summary`から最も使用頻度の低い SQL ダイジェストのみを削除します。
+> [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)有効になっている場合、 `statements_summary_history`テーブルのデータはディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count`は、 `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、TiDB は`tidb_stmt_summary_max_stmt_count`を超えると`statements_summary`テーブルから最も使用頻度の低い SQL ダイジェストのみを削除します。
 
 </CustomContent>
 

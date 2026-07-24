@@ -1287,7 +1287,7 @@ Raftstoreに関連するコンフィグレーション項目。
 > **Warning:**
 >
 > -   `enable-region-bucket`は、TiDB v6.1.0 で導入された実験的機能です。本番環境での使用は推奨されません。
-> -   この設定は、 `region-split-size` `region-bucket-size`の 2 倍以上である場合にのみ有効です。それ以外の場合は、バケットは実際には生成されません。
+> -   この設定は、 `region-split-size`が`region-bucket-size`の 2 倍以上である場合にのみ有効です。それ以外の場合は、バケットは実際には生成されません。
 > -   `region-split-size`をより大きな値に調整すると、パフォーマンスの低下やスケジューリングの遅延のリスクが生じる可能性があります。
 
 ### `region-bucket-size` <span class="version-mark">v6.1.0の新機能</span> {#region-bucket-size-new-in-v610}
@@ -1697,7 +1697,7 @@ Titanに関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位：KiB｜MiB｜GiB
--   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が &quot;no:no:lz4:lz4:lz4:lz4:lz4&quot; の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、{{B-PLACEHOLDER `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
+-   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が &quot;no:no:lz4:lz4:lz4:lz4:lz4&quot; の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
 
 ### `target-file-size-base` {#target-file-size-base}
 

@@ -40,7 +40,7 @@ DESC inspection_summary;
 -   `RULE` : 要約ルール。新しいルールは継続的に追加されるため、 `select * from inspection_rules where type='summary'`ステートメントを実行すると最新のルールリストを照会できます。
 -   `INSTANCE` : 監視対象インスタンス。
 -   `METRICS_NAME` : 監視メトリック名。
--   `QUANTILE` : `QUANTILE`含む監視テーブルに有効です。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。例えば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`実行してDDL関連の監視メトリックを要約し、P80/P90/P99/P999の結果を照会できます。6 、 `MIN_VALUE` 、 `MAX_VALUE` `AVG_VALUE` 、集計の平均値、最小値、最大値を示します。
+-   `QUANTILE` : `QUANTILE`を含む監視テーブルに有効です。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。例えば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行してDDL関連の監視メトリックを要約し、P80/P90/P99/P999の結果を照会できます。`AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`は、それぞれ集計の平均値、最小値、最大値を示します。
 -   `COMMENT` : 対応する監視メトリックに関するコメント。
 
 > **Note:**
@@ -49,7 +49,7 @@ DESC inspection_summary;
 
 使用例:
 
-診断結果表と診断監視サマリー表はどちらも、 `hint`を使用して診断時間範囲を指定できます。3 `select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` 、 `2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`期間の監視サマリーです。監視サマリー表と同様に、 `inspection_summary`表を使用すると、異なる2期間のデータを比較することで、差異の大きい監視項目を素早く見つけることができます。
+診断結果表と診断監視サマリー表はどちらも、 `hint`を使用して診断時間範囲を指定できます。`select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary` 、 `2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`期間の監視サマリーです。監視サマリー表と同様に、 `inspection_summary`表を使用すると、異なる2期間のデータを比較することで、差異の大きい監視項目を素早く見つけることができます。
 
 次の例では、2 つの期間における読み取りリンクの監視メトリックを比較します。
 

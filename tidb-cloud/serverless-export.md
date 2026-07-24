@@ -332,7 +332,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
     -   **データ形式**: **SQL** 、 **CSV** 、または**Parquet を**選択します。
     -   **圧縮**: **Gzip** 、 **Snappy** 、 **Zstd** 、または**None**を選択します。
     -   **フォルダー URI** : `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`形式で Azure Blob Storage の URI を入力します。
-    -   **SASトークン**: コンテナへのアクセス権を持つSASトークンを入力します。2でSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)してください。
+    -   **SASトークン**: コンテナへのアクセス権を持つSASトークンを入力します。[Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)を使用してSASトークンを作成することをお勧めします。詳細については、 [Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
 4.  **［エクスポート］**をクリックします。
 

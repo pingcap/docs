@@ -49,7 +49,7 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 はい。TiDB は、単一の場所に少数のノードがある場合でも、多数の[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md)がある場合でも、クラスター全体にトランザクションを分散します。
 
-GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルをベースに、実用的な最適化が施されています。このモデルは、タイムスタンプアロケータを利用して各トランザクションに単調増加するタイムスタンプを割り当てることで、競合を検出します。1 [PD](/tidb-architecture.md#placement-driver-pd-server) TiDBクラスタ内でタイムスタンプアロケータとして機能します。
+GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルをベースに、実用的な最適化が施されています。このモデルは、タイムスタンプアロケータを利用して各トランザクションに単調増加するタイムスタンプを割り当てることで、競合を検出します。[PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタ内でタイムスタンプアロケータとして機能します。
 
 ### TiDB を操作するためにどのプログラミング言語を使用できますか? {#what-programming-language-can-i-use-to-work-with-tidb}
 

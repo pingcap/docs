@@ -140,28 +140,28 @@ I/O トラフィック制限設定を構成します。
 
 <!-- The following  default configurations indicate that each type of traffic gets a weight of 25% (25 / (25 + 25 + 25 + 25) = 25%) -->
 
--   TiFlashは内部的にI/O要求を4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。1 `foreground_write_weight`フォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+-   TiFlashは内部的にI/O要求を4つのタイプに分類します。フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取りです。`foreground_write_weight`フォアグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
 -   I/O トラフィック制限が初期化されると、 TiFlash は`foreground_write_weight` 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_write_weight` {#background-write-weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。1 `background_write_weight` 、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+-   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_write_weight` 、バックグラウンド書き込みI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
 -   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 `background_write_weight` 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `foreground_read_weight` {#foreground-read-weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。1 `foreground_read_weight` 、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+-   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`foreground_read_weight` 、フォアグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
 -   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 `foreground_read_weight` 、 [`background_read_weight`](/tiflash/tiflash-configuration.md#background_read_weight)の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
 
 ##### `background_read_weight` {#background-read-weight}
 
--   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。1 `background_read_weight` 、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
+-   TiFlashは内部的にI/O要求を4つのタイプ（フォアグラウンド書き込み、バックグラウンド書き込み、フォアグラウンド読み取り、バックグラウンド読み取り）に分類します。`background_read_weight` 、バックグラウンド読み取りI/Oトラフィックタイプに割り当てられる帯域幅の重みを制御します。通常、これらのパラメータを調整する必要はありません。
 -   I/O トラフィック制限が初期化されると、 TiFlash は[`foreground_write_weight`](/tiflash/tiflash-configuration.md#foreground_write_weight) 、 [`background_write_weight`](/tiflash/tiflash-configuration.md#background_write_weight) 、 [`foreground_read_weight`](/tiflash/tiflash-configuration.md#foreground_read_weight) 、 `background_read_weight`の比率に従って、これら 4 種類の要求に帯域幅を割り当てます。
 -   重みが`0`に設定されている場合、対応する I/O トラフィックは制限されません。
 -   デフォルト値: `25` 、帯域幅の 25% の割り当てを表します。
@@ -350,7 +350,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `max_threads` {#max-threads}
 
--   `max_threads` 、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。2 `0`設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
+-   `max_threads` 、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。`0`設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
 -   このパラメータは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) `-1`に設定されている場合にのみ有効になります。
 -   デフォルト値: `0`
 
@@ -358,7 +358,7 @@ I/O トラフィック制限設定を構成します。
 
 -   単一のクエリで生成される中間データのメモリ使用量の制限。
 -   値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味します。
--   値が 1 から`[0.0, 1.0)`の範囲の浮動小数点数の場合、ノードの総メモリに対する許容メモリ使用量の比率を表します。例えば、 `0.8`総メモリの 80% を意味し、 `0.0`無制限を意味します。
+-   値が`[0.0, 1.0)`の範囲の浮動小数点数の場合、ノードの総メモリに対する許容メモリ使用量の比率を表します。例えば、 `0.8`総メモリの 80% を意味し、 `0.0`無制限を意味します。
 -   クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
 -   デフォルト値: `0` 、制限がないことを意味します。
 
@@ -366,7 +366,7 @@ I/O トラフィック制限設定を構成します。
 
 -   すべてのクエリで生成される中間データのメモリ使用量制限。
 -   値が整数の場合、単位はバイトです。例えば、 `34359738368` 32GiBのメモリ制限を意味し、 `0`制限なしを意味します。
--   v6.6.0以降では、 `[0.0, 1.0)`から10000000000000の範囲の浮動小数点数で値を設定できます。この数値は、許容されるメモリ使用量とノード全体のメモリ使用量の比率を表します。例えば、 `0.8`メモリの80%、 `0.0`無制限を意味します。
+-   v6.6.0以降では、 `[0.0, 1.0)`の範囲の浮動小数点数で値を設定できます。この数値は、許容されるメモリ使用量とノード全体のメモリ使用量の比率を表します。例えば、 `0.8`メモリの80%、 `0.0`無制限を意味します。
 -   クエリがこの制限を超えるメモリを消費しようとすると、クエリは終了され、エラーが報告されます。
 -   デフォルト値： `0.8` （総メモリの80%を意味します）。v6.6.0より前のバージョンでは、デフォルト値は`0` （無制限を意味します）でした。
 
@@ -438,7 +438,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `enable_resource_control`<span class="version-mark">バージョン7.4.0の新機能</span> {#enable-resource-control-new-in-v740}
 
--   TiFlashリソース制御機能を有効にするかどうかを制御します。1 `true`設定すると、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
+-   TiFlashリソース制御機能を有効にするかどうかを制御します。`true`設定すると、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
 -   デフォルト値: `true`
 -   値`false`オプション: `true`
 
@@ -536,7 +536,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `snap-handle-pool-size` <span class="version-mark">v4.0.0 の新機能</span> {#snap-handle-pool-size-new-in-v400}
 
--   スナップショットを処理するスレッドの数。1 `0`設定すると、マルチスレッド最適化は無効になります。
+-   スナップショットを処理するスレッドの数。`0`設定すると、マルチスレッド最適化は無効になります。
 -   デフォルト値: `2`
 
 #### 安全 {#security}
@@ -554,7 +554,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `data-encryption-method` {#data-encryption-method}
 
--   データファイルの暗号化方法。1以外の値は暗号化`"plaintext"`有効であることを意味します。その場合はマスターキーを指定する必要があります。
+-   データファイルの暗号化方法。`"plaintext"`以外の値は暗号化が有効であることを意味します。その場合はマスターキーを指定する必要があります。
 -   デフォルト値: `"plaintext"` 。これは、暗号化がデフォルトで無効になっていることを意味します。
 -   `"aes256-ctr"` `"aes192-ctr"`オプション: `"aes128-ctr"` `"sm4-ctr"` `"plaintext"`で導入`"sm4-ctr"`れました。
 

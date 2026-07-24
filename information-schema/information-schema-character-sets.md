@@ -24,7 +24,7 @@ DESC CHARACTER_SETS;
     +----------------------+-------------+------+------+---------+-------+
     4 rows in set (0.00 sec)
 
-`CHARACTER_SETS`テーブルをビュー:
+`CHARACTER_SETS`テーブルを確認します:
 
 ```sql
 SELECT * FROM `CHARACTER_SETS`;

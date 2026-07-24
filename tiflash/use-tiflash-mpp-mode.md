@@ -17,7 +17,7 @@ summary: TiFlashの MPP モードとその使用方法を学びます。
 
 </CustomContent>
 
-TiFlashは、クエリ実行にMPPモードをサポートしています。このモードでは、ノード間のデータ交換（データシャッフルプロセス）が計算に導入されます。TiDBは、オプティマイザのコスト推定に基づいて、MPPモードを選択するかどうかを自動的に決定します。1と[`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50) [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)値を変更することで、選択戦略を変更できます。
+TiFlashは、クエリ実行にMPPモードをサポートしています。このモードでは、ノード間のデータ交換（データシャッフルプロセス）が計算に導入されます。TiDBは、オプティマイザのコスト推定に基づいて、MPPモードを選択するかどうかを自動的に決定します。[`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することで、選択戦略を変更できます。
 
 次の図は、MPP モードの動作を示しています。
 
@@ -81,7 +81,7 @@ set @@session.tidb_enforce_mpp=1;
 
 ## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行プランを確認するには、 `EXPLAIN`のステートメントを実行してください。3 `EXPLAIN`のステートメントの結果にExchangeSender演算子とExchangeReceiver演算子が表示された場合、MPPモードが有効になっていることを示します。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行プランを確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSender演算子とExchangeReceiver演算子が表示された場合、MPPモードが有効になっていることを示します。
 
 次のステートメントは、TPC-H テスト セット内のテーブル構造を例として示しています。
 

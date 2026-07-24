@@ -132,7 +132,7 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 
 ## インデックスリーダー {#indexreader}
 
-TiDBは*カバーインデックス最適化*をサポートしています。インデックスからすべての行を取得できる場合、TiDBは通常`IndexLookup`で必要な2番目のステップを省略します。次の2つの例を考えてみましょう。
+TiDBは*カバリングインデックス最適化*をサポートしています。インデックスからすべての行を取得できる場合、TiDBは通常`IndexLookup`で必要な2番目のステップを省略します。次の2つの例を考えてみましょう。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;
@@ -161,7 +161,7 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 
 `id`内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
 
-## Point_Get と Batch_Point_Get {#point-get-and-batch-point-get}
+## Point_Get と Batch_Point_Get {#point_get-and-batch_point_get}
 
 TiDBは、主キーまたは一意キーから直接データを取得する際に、 `Point_Get`または`Batch_Point_Get`演算子を使用します。これらの演算子は`IndexLookup`よりも効率的です。例えば、
 
@@ -247,9 +247,9 @@ EXPLAIN SELECT MAX(intkey) FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-上記の文では、各TiKVリージョンに対してタスク`IndexFullScan`が実行されます。3 `FullScan`名前にもかかわらず、読み取る必要があるのは最初の行（ `└─Limit_28` ）のみです。各TiKVリージョンは`MIN`または`MAX`値をTiDBに返し、TiDBはストリーム集計を実行して単一行をフィルタリングします。また、集約関数`MAX`または`MIN`使用したストリーム集計により、テーブルが空の場合に`NULL`返されることも保証されます。
+上記の文では、各TiKVリージョンに対してタスク`IndexFullScan`が実行されます。`FullScan`という名前にもかかわらず、読み取る必要があるのは最初の行（ `└─Limit_28` ）のみです。各TiKVリージョンは`MIN`または`MAX`値をTiDBに返し、TiDBはストリーム集計を実行して単一行をフィルタリングします。また、集約関数`MAX`または`MIN`を使用したストリーム集計により、テーブルが空の場合に`NULL`が返されることも保証されます。
 
-対照的に、インデックスなしの値に対して関数`MIN`実行すると、結果は`TableFullScan`になります。このクエリではTiKV内のすべての行をスキャンする必要がありますが、各TiKVリージョンがTiDBに1行のみを返すように、 `TopN`計算が実行されます。 `TopN` TiKVとTiDB間で過剰な行が転送されるのを防ぎますが、この文は、インデックスを利用できる上記の例`MIN`よりもはるかに効率が悪いと考えられます。
+対照的に、インデックスなしの値に対して関数`MIN`を実行すると、結果は`TableFullScan`になります。このクエリではTiKV内のすべての行をスキャンする必要がありますが、各TiKVリージョンがTiDBに1行のみを返すように、 `TopN`計算が実行されます。 `TopN`は、TiKVとTiDB間で過剰な行が転送されるのを防ぎますが、この文は、`MIN`がインデックスを利用できる上記の例よりもはるかに効率が悪いと考えられます。
 
 ```sql
 EXPLAIN SELECT MIN(pad1) FROM t1;

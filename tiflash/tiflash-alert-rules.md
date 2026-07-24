@@ -19,7 +19,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
 -   解決：
 
-    このエラーは、何らかの間違ったロジックによって発生した可能性があります。1 [サポートを受ける](/support.md)またはコミュニティから。
+    このエラーは、何らかの間違ったロジックによって発生した可能性があります。PingCAP またはコミュニティから[サポートを受ける](/support.md)。
 
 ## `TiFlash_schema_apply_duration` {#tiflash-schema-apply-duration}
 
@@ -33,7 +33,7 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
 -   解決：
 
-    これは、 TiFlashストレージエンジンの内部的な問題が原因である可能性があります。1 [サポートを受ける](/support.md) PingCAP またはコミュニティから提供されました。
+    これは、 TiFlashストレージエンジンの内部的な問題が原因である可能性があります。PingCAP またはコミュニティから[サポートを受ける](/support.md)。
 
 ## `TiFlash_raft_read_index_duration` {#tiflash-raft-read-index-duration}
 
@@ -65,4 +65,4 @@ summary: TiFlashクラスターのアラート ルールについて学習しま
 
 -   解決：
 
-    これは、TiKV とプロキシ間の通信エラーが原因である可能性があります。1 [サポートを受ける](/support.md) PingCAP またはコミュニティから提供されました。
+    これは、TiKV とプロキシ間の通信エラーが原因である可能性があります。PingCAP またはコミュニティから[サポートを受ける](/support.md)。

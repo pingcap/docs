@@ -46,7 +46,7 @@ SELECT * FROM variables_info ORDER BY variable_name LIMIT 3;
 `VARIABLES_INFO`テーブル内のフィールドは次のように説明されます。
 
 -   `VARIABLE_NAME` : システム変数の名前。
--   `VARIABLE_SCOPE` : システム変数のスコープ。2 `SESSION` 、システム変数が現在のセッションでのみ有効であることを意味します。4 `INSTANCE` 、システム変数が TiDB インスタンスで有効であることを意味します。6 `GLOBAL` 、システム変数が TiDB クラスターで有効であることを意味します。8 `NONE` 、システム変数が TiDB クラスターで読み取り専用であることを意味します。
+-   `VARIABLE_SCOPE` : システム変数のスコープ。`SESSION` 、システム変数が現在のセッションでのみ有効であることを意味します。`INSTANCE` 、システム変数が TiDB インスタンスで有効であることを意味します。`GLOBAL` 、システム変数が TiDB クラスターで有効であることを意味します。`NONE` 、システム変数が TiDB クラスターで読み取り専用であることを意味します。
 -   `DEFAULT_VALUE` : システム変数のデフォルト値。
 -   `CURRENT_VALUE` : システム変数の現在の値。スコープに`SESSION`含まれる場合、現在のセッションでは`CURRENT_VALUE`値となります。
 -   `MIN_VALUE` : システム変数に許容される最小値。システム変数が数値でない場合、 `MIN_VALUE` NULL になります。

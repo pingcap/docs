@@ -117,7 +117,7 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
     クラウドプロバイダーのコンソールでVPCピアリング接続を承認するまで、リソースのステータスは`Creating`ままです。VPCピアリング接続を承認すると、ステータスは[VPC ピアリングの承認と設定](/tidb-cloud/set-up-vpc-peering-connections.md#step-2-approve-and-configure-the-vpc-peering)基準に`Active`に変わります。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}`を使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_vpc_peering.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_vpc_peering.example

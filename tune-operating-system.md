@@ -99,7 +99,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 #### <code>mount</code>パラメータ {#code-mount-code-parameters}
 
-`mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。5 `nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
+`mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。`nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
 
 ### ネットワークチューニング {#network-tuning}
 

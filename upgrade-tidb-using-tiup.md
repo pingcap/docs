@@ -142,7 +142,7 @@ tiup update cluster
     tiup cluster edit-config <cluster-name>
     ```
 
-2.  フォーマットを参照[トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)設定テンプレートを参照し、トポロジファイルの`server_configs`セクションに変更したいパラメータを入力します。
+2.  [トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)設定テンプレートのフォーマットを参照し、トポロジファイルの`server_configs`セクションに変更したいパラメータを入力します。
 
 3.  変更後、 <kbd>「:</kbd> + <kbd>w</kbd> + <kbd>q」</kbd>と入力して変更を保存し、編集モードを終了します。変更を確定するには<kbd>「Y」</kbd>と入力してください。
 

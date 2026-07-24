@@ -11,7 +11,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 ### <code>CHAR</code>型 {#code-char-code-type}
 
-`CHAR`は固定長文字列です。Mは列の長さを文字数（バイト数ではありません）で表します。Mの範囲は0から255です。2とは異なり、 `VARCHAR`列にデータを挿入する場合、末尾のスペース`CHAR`切り捨てられます。
+`CHAR`は固定長文字列です。Mは列の長さを文字数（バイト数ではありません）で表します。Mの範囲は0から255です。`VARCHAR`型とは異なり、 `CHAR`列にデータを挿入する場合、末尾のスペースは切り捨てられます。
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -19,7 +19,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 ### <code>VARCHAR</code>型 {#code-varchar-code-type}
 
-`VARCHAR`は可変長の文字列です。Mは列の最大長（バイト数ではありません）を文字数で表します。2 `VARCHAR`最大サイズは65,535バイトを超えることはできません。4 `VARCHAR`長さは、行の最大長と使用されている文字セットによって決まります。
+`VARCHAR`は可変長の文字列です。Mは列の最大長（バイト数ではありません）を文字数で表します。`VARCHAR`最大サイズは65,535バイトを超えることはできません。`VARCHAR`長さは、行の最大長と使用されている文字セットによって決まります。
 
 1文字が占めるスペースは、文字セットによって異なります。次の表は、1文字が消費するバイト数と、各文字セットにおける`VARCHAR`列の長さの範囲を示しています。
 

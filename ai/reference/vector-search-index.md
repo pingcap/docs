@@ -130,7 +130,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 +---------------+------------+----------+-------------+---------------+-----------+----------+------------+---------------------+-------------------------+--------------------+------------------------+---------------+------------------+
 ```
 
--   インデックス構築の進行状況は、 `ROWS_STABLE_INDEXED`と`ROWS_STABLE_NOT_INDEXED`列で確認できます。5 `ROWS_STABLE_NOT_INDEXED` 0になると、インデックス構築が完了します。
+-   インデックス構築の進行状況は、 `ROWS_STABLE_INDEXED`と`ROWS_STABLE_NOT_INDEXED`列で確認できます。`ROWS_STABLE_NOT_INDEXED` 0になると、インデックス構築が完了します。
 
     参考までに、768次元の500MiBベクトルデータセットのインデックス作成には最大20分かかる場合があります。インデクサーは複数のテーブルに対して並列実行できます。現在、インデクサーの優先度や速度の調整はサポートされていません。
 
@@ -148,7 +148,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 ## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。9 `TableFullScan`キュータの`operator info`列に`annIndex:`表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
+クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。`TableFullScan`エグゼキュータの`operator info`列に`annIndex:`が表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
 
 **例: ベクトルインデックスが使用される**
 
