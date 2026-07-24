@@ -89,7 +89,7 @@ TiDBバージョン：8.5.3
     -   HashJoin演算子がメモリの過剰使用によりゴルーチンリークを引き起こす問題を修正 [#60926](https://github.com/pingcap/tidb/issues/60926) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `IndexMerge`および`IndexLookUp`オペレーターで共有 KV リクエストがクエリのプッシュダウン時にデータ競合を引き起こす問題を修正しました [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
     -   `_charset(xxx), _charset(xxx2), ...`を含む SQL ステートメントが異なるダイジェストを生成する問題を修正 [#58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
-    -   無効な UTF-8 文字を処理するときに TiDB がpanic可能性がある問題を修正 [#47521](https://github.com/pingcap/tidb/issues/47521) @[Defined2014](https://github.com/Defined2014)
+    -   無効な UTF-8 文字を処理するときに TiDB がpanicする可能性がある問題を修正 [#47521](https://github.com/pingcap/tidb/issues/47521) @[Defined2014](https://github.com/Defined2014)
     -   無効な夏時間 (DST) タイムスタンプを挿入すると`0000-00-00`になる問題を修正 [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
     -   `INSERT IGNORE`を使用して厳密なSQLモードで無効な夏時間タイムスタンプを挿入すると、MySQLと矛盾するタイムスタンプが生成される問題を修正しました [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
     -   リージョンのマージが頻繁に行われるとTTLジョブの開始が妨げられる問題を修正 [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
@@ -108,7 +108,7 @@ TiDBバージョン：8.5.3
     -   Titanが無効化された後に、ブロブインデックスが原因でスナップショットの適用が失敗する可能性がある問題を修正しました [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)
     -   スローログの`StoreMsg`ログエントリの誤解を招く説明を修正 [#18561](https://github.com/tikv/tikv/issues/18561) @[LykxSassinator](https://github.com/LykxSassinator)
     -   TiKVが高同時実行時に過剰なSST取り込みリクエストを許可してしまう問題を修正 [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
-    -   ロックスキャン中に重複した結果が原因でTiKVがpanic可能性がある問題を修正 [#16818](https://github.com/tikv/tikv/issues/16818) @[cfzjywxk](https://github.com/cfzjywxk)
+    -   ロックスキャン中に重複した結果が原因でTiKVがpanicする可能性がある問題を修正 [#16818](https://github.com/tikv/tikv/issues/16818) @[cfzjywxk](https://github.com/cfzjywxk)
 
 -   PD
 

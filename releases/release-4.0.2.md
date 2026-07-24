@@ -158,5 +158,5 @@ TiDB バージョン: 4.0.2
 
 -   TiFlash
 
-    -   `region not found`エラーが発生したときにプロキシがpanic可能性がある問題を修正しました
+    -   `region not found`エラーが発生したときにプロキシがpanicする可能性がある問題を修正しました
     -   `drop table`でスローされた I/O 例外によりTiFlashスキーマの同期が失敗する可能性がある問題を修正しました

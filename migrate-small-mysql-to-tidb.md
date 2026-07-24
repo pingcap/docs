@@ -34,7 +34,7 @@ from:
   port: 3306
 ```
 
-次に、次のコマンドを実行して、 `tiup dmctl`使用してデータ ソース構成を DM クラスターにロードします。
+次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
@@ -110,7 +110,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 ## ステップ4: 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、その他の情報を確認するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、その他の情報を確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

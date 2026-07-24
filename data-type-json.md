@@ -83,9 +83,9 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
     詳細については、第[＃9999](https://github.com/pingcap/tidb/issues/9999)を参照してください。
 
--   TiDB では、 `ORDER BY`使用して JSON 配列または JSON オブジェクトをソートできます。
+-   TiDB では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートできます。
 
-    MySQL では、 `ORDER BY`使用して JSON 配列または JSON オブジェクトをソートすると、MySQL から警告が返され、ソート結果が比較演算の結果と一致しなくなります。
+    MySQL では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートすると、MySQL から警告が返され、ソート結果が比較演算の結果と一致しなくなります。
 
     ```sql
     CREATE TABLE t(j JSON);

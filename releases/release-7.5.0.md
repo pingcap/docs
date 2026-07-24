@@ -215,7 +215,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     -   データレプリケーション自動同期（DR Auto-Sync）モードを採用しているクラスターにおいて、配置ルールの設定が複雑な場合に`canSync` `hasMajority`が正しく計算されない可能性がある問題を修正します [#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
     -   ルールチェッカーが配置ルールの設定に従ってラーナーを追加しない問題を修正 [#7185](https://github.com/tikv/pd/issues/7185) @[nolouch](https://github.com/nolouch)
     -   TiDB DashboardがPD `trace`データを正しく読み取れない問題を修正 [#7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)
-    -   内部的に取得したリージョンが空であるためにPDがpanic可能性がある問題を修正 [#7261](https://github.com/tikv/pd/issues/7261) @[lhy1024](https://github.com/lhy1024)
+    -   内部的に取得したリージョンが空であるためにPDがpanicする可能性がある問題を修正 [#7261](https://github.com/tikv/pd/issues/7261) @[lhy1024](https://github.com/lhy1024)
     -   データレプリケーション自動同期（DR Auto-Sync）モードを採用しているクラスターで`available_stores`が正しく計算されない問題を修正します [#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
     -   TiKVノードが利用できない場合にPDが通常のピアを削除する可能性がある問題を修正 [#7249](https://github.com/tikv/pd/issues/7249) @[lhy1024](https://github.com/lhy1024)
     -   大規模クラスターに複数の TiKV ノードを追加すると、TiKV のハートビート報告が遅くなったり停止したりする可能性がある問題を修正しました [#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)

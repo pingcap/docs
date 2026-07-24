@@ -60,10 +60,10 @@ TiDB バージョン: 5.2.2
     -   `%s value is out of range in '%s'`エラーメッセージに`DECIMAL overflow`が欠落している問題を修正 [＃27964](https://github.com/pingcap/tidb/issues/27964)
     -   MPPノードの可用性検出が一部のコーナーケースで機能しないバグを修正[＃3118](https://github.com/pingcap/tics/issues/3118)
     -   `MPP task ID` を割り当てる際の`DATA RACE`問題を修正 [＃27952](https://github.com/pingcap/tidb/issues/27952)
-    -   空の`dual table`削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正します[＃28250](https://github.com/pingcap/tidb/issues/28250)
+    -   空の`dual table`を削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正します[＃28250](https://github.com/pingcap/tidb/issues/28250)
     -   MPPクエリの誤検知エラーログ`invalid cop task execution summaries length`の問題を修正 [＃1791](https://github.com/pingcap/tics/issues/1791)
     -   MPPクエリのエラーログ`cannot found column in Schema column`の問題を修正 [＃28149](https://github.com/pingcap/tidb/pull/28149)
-    -   TiFlashがシャットダウンするときに TiDB がpanic可能性がある問題を修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
+    -   TiFlashがシャットダウンするときに TiDB がpanicする可能性がある問題を修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
     -   安全でない3DES（トリプルデータ暗号化アルゴリズム）ベースのTLS暗号スイートサポートを削除します [＃27859](https://github.com/pingcap/tidb/pull/27859)
     -   Lightning が事前チェック中にオフラインの TiKV ノードに接続し、インポートが失敗する問題を修正しました[＃27826](https://github.com/pingcap/tidb/pull/27826)
     -   多数のファイルをテーブルにインポートするときに事前チェックに時間がかかりすぎる問題を修正しました [＃27605](https://github.com/pingcap/tidb/issues/27605)
@@ -105,7 +105,7 @@ TiDB バージョン: 5.2.2
 
     -   TiCDC
         -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanic可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
+        -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanicする可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   下流の TiDB/MySQL の可用性を検証する際の不要な CPU 消費を修正[＃3073](https://github.com/pingcap/tiflow/issues/3073)
         -   TiCDCによって生成されるKafkaメッセージの量が`max-message-size` に制限されない問題を修正 [＃2962](https://github.com/pingcap/tiflow/issues/2962)
         -   Kafka メッセージの書き込み中にエラーが発生すると TiCDC 同期タスクが一時停止する可能性がある問題を修正[＃2978](https://github.com/pingcap/tiflow/issues/2978)

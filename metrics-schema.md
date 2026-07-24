@@ -188,7 +188,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 
 [ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに3つの時間値しかないことに気づくかもしれません。実行プランでは、 `step`の値は1分であり、これらの値の間隔は1分であることを意味します。7 `step`次の2つのセッション変数によって決定されます。
 
--   `tidb_metric_query_step` : クエリ解決ステップ幅。Prometheusから`query_range`データを取得するには、 `start_time` 、 `end_time` 、 `step`指定する必要があります。 `step` 、この変数の値が使用されます。
+-   `tidb_metric_query_step` : クエリ解決ステップ幅。Prometheusから`query_range`データを取得するには、 `start_time` 、 `end_time` 、 `step`を指定する必要があります。 `step` 、この変数の値が使用されます。
 -   `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`のフィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
 
 監視項目の値を異なる粒度で表示するには、監視テーブルをクエリする前に、上記の2つのセッション変数を変更します。例：

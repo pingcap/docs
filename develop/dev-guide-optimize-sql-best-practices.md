@@ -83,7 +83,7 @@ public void batchInsert(Connection connection) throws SQLException {
 
 ### 必要な列のみをクエリする {#only-query-the-columns-you-need}
 
-すべての列のデータが必要ない場合は、 `SELECT *`使用してすべての列のデータを取得しないでください。次のクエリは非効率的です。
+すべての列のデータが必要ない場合は、 `SELECT *`を使用してすべての列のデータを取得しないでください。次のクエリは非効率的です。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -111,7 +111,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 TRUNCATE TABLE t;
 ```
 
-完全なテーブルデータに`DELETE`使用することはお勧めしません。
+完全なテーブルデータに`DELETE`を使用することはお勧めしません。
 
 ```sql
 DELETE FROM t;

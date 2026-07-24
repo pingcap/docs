@@ -86,7 +86,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   Ubuntu 18.04 でTiKVがプロファイリングを実行するときに発生する可能性のあるpanic問題を修正しました [＃9765](https://github.com/tikv/tikv/issues/9765)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正しました [＃12109](https://github.com/tikv/tikv/issues/12109)
     -   リージョンをマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKV panic問題を修正しました。 [＃12048](https://github.com/tikv/tikv/issues/12048)
-    -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKV が 2 年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   解決ロックのステップ必要とする領域の数を減らすことで、TiCDC の回復時間を短縮します。 [＃11993](https://github.com/tikv/tikv/issues/11993)
     -   ピアステータスが`Applying` ときにスナップショットファイルを削除すると発生するpanic問題を修正しました [＃11746](https://github.com/tikv/tikv/issues/11746)
     -   ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[＃10210](https://github.com/tikv/tikv/issues/10210)
@@ -137,7 +137,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
         -   BR増分リストアが空のクエリを含むDDLジョブにより誤ってエラーを返すバグを修正しました [＃33322](https://github.com/pingcap/tidb/issues/33322)
         -   復元操作が完了した後にリージョンが不均等に分散される可能性がある問題を修正しました[＃31034](https://github.com/pingcap/tidb/issues/31034)
         -   復元中にリージョンが一致していない場合にBRが十分な回数再試行しない問題を修正[＃33419](https://github.com/pingcap/tidb/issues/33419)
-        -   小さなファイルのマージが有効になっているときにBRが時々panic可能性がある問題を修正[＃33801](https://github.com/pingcap/tidb/issues/33801)
+        -   小さなファイルのマージが有効になっているときにBRが時々panicする可能性がある問題を修正[＃33801](https://github.com/pingcap/tidb/issues/33801)
         -   BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正[＃33546](https://github.com/pingcap/tidb/issues/33546)
 
     -   TiCDC

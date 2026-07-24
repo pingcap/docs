@@ -112,7 +112,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 1.  対応する関数名または演算子名と、プッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルに挿入します。
 
-2.  `admin reload expr_pushdown_blacklist`実行します。
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
 ### ブロックリストから削除 {#remove-from-the-blocklist}
 
@@ -120,7 +120,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルから削除します。
 
-2.  `admin reload expr_pushdown_blacklist`実行します。
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
 > **Note:**
 >
@@ -149,7 +149,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-2.  式を`mysql.expr_pushdown_blacklist`テーブルに挿入し、 `admin reload expr_pushdown_blacklist`実行します。
+2.  式を`mysql.expr_pushdown_blacklist`テーブルに挿入し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     INSERT INTO mysql.expr_pushdown_blacklist VALUES('<','tikv',''), ('>','tikv','');
@@ -185,7 +185,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-4.  ブロックリストから 1 つの式 (ここでは`>` ) を削除し、 `admin reload expr_pushdown_blacklist`実行します。
+4.  ブロックリストから 1 つの式 (ここでは`>` ) を削除し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     DELETE FROM mysql.expr_pushdown_blacklist WHERE name = '>';

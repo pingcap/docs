@@ -48,7 +48,7 @@ TiDB バージョン: 6.5.5
 
     -   スケジューラの起動に時間がかかる問題を修正[＃6920](https://github.com/tikv/pd/issues/6920) @ [HuSharp](https://github.com/HuSharp)
     -   スキャッターリージョンにおけるリーダーとピアの処理ロジックが矛盾している問題を修正しました [＃6962](https://github.com/tikv/pd/issues/6962) @ [bufferflies](https://github.com/bufferflies)
-    -   クラスタが再起動されたとき、またはPDLeaderがに切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [＃7008](https://github.com/tikv/pd/issues/7008) @ [CabinfeverB](https://github.com/CabinfeverB)
+    -   クラスタが再起動されたとき、またはPDLeaderが切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [＃7008](https://github.com/tikv/pd/issues/7008) @ [CabinfeverB](https://github.com/CabinfeverB)
 
 -   ツール
 
@@ -64,7 +64,7 @@ TiDB バージョン: 6.5.5
         -   PDノードのネットワーク分離によって発生するTiCDCレプリケーションのレイテンシーが大きくなる問題を修正 [＃9565](https://github.com/pingcap/tiflow/issues/9565) @ [asddongmen](https://github.com/asddongmen)
         -   CSV形式を使用するとTiCDCが誤って`UPDATE`演算を`INSERT`に変更する問題を修正 [＃9658](https://github.com/pingcap/tiflow/issues/9658) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   一部のログにユーザーパスワードが記録される問題を修正[＃9690](https://github.com/pingcap/tiflow/issues/9690) @ [sdojjy](https://github.com/sdojjy)
-        -   SASL認証を使用するとTiCDCがpanic可能性がある問題を修正[＃9669](https://github.com/pingcap/tiflow/issues/9669) @ [sdojjy](https://github.com/sdojjy)
+        -   SASL認証を使用するとTiCDCがpanicする可能性がある問題を修正[＃9669](https://github.com/pingcap/tiflow/issues/9669) @ [sdojjy](https://github.com/sdojjy)
         -   一部のコーナーケースで TiCDC レプリケーションタスクが失敗する可能性がある問題を修正[＃9685](https://github.com/pingcap/tiflow/issues/9685) [＃9697](https://github.com/pingcap/tiflow/issues/9697) [＃9695](https://github.com/pingcap/tiflow/issues/9695) [＃9736](https://github.com/pingcap/tiflow/issues/9736) @ [hicqu](https://github.com/hicqu) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   上流にリージョンが多数ある場合、TiCDC が TiKV ノード障害から迅速に回復できない問題を修正しました。 [＃9741](https://github.com/pingcap/tiflow/issues/9741) @ [sdojjy](https://github.com/sdojjy)
 

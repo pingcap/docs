@@ -41,7 +41,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
 -   TiFlash
 
-    -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
+    -   TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
     -   同時実行性の高いデータ読み取り操作におけるロック競合を減らし、短いクエリのパフォーマンスを最適化します[＃9125](https://github.com/pingcap/tiflash/issues/9125) @ [JinheLin](https://github.com/JinheLin)
 
 -   ツール
@@ -68,12 +68,12 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   `_tidb_rowid`の`PointGet`実行プランが生成できる問題を修正 [＃54583](https://github.com/pingcap/tidb/issues/54583) @ [Defined2014](https://github.com/Defined2014)
     -   スローログ内の内部SQL文がデフォルトでnullに編集される問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) [＃52743](https://github.com/pingcap/tidb/issues/52743) [＃53264](https://github.com/pingcap/tidb/issues/53264) @ [lcwangchao](https://github.com/lcwangchao)
     -   `UPDATE`操作で複数テーブルシナリオで TiDB OOM が発生する可能性がある問題を修正 [＃53742](https://github.com/pingcap/tidb/issues/53742) @ [hawkingrei](https://github.com/hawkingrei)
-    -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [hi-rustin](https://github.com/hi-rustin)
+    -   相関サブクエリがある場合にウィンドウ関数がpanicする可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [hi-rustin](https://github.com/hi-rustin)
     -   照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [＃53730](https://github.com/pingcap/tidb/issues/53730) @ [elsa0520](https://github.com/elsa0520)
     -   トランザクション内のステートメントが OOM によって強制終了された後、TiDB が同じトランザクション内で次のステートメントの実行を継続すると、エラー`Trying to start aggressive locking while it's already started`が発生し、panicが発生する可能性がある問題を修正しました。 [＃53540](https://github.com/pingcap/tidb/issues/53540) @ [MyonKeminta](https://github.com/MyonKeminta)
     -   `?`の引数を含む`CONV`の式を持つ`PREPARE` `EXECUTE`ステートメントを複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[＃53505](https://github.com/pingcap/tidb/issues/53505) @ [qw4990](https://github.com/qw4990)
     -   再帰CTE演算子がメモリ使用量を誤って追跡する問題を修正しました [＃54181](https://github.com/pingcap/tidb/issues/54181) @ [guo-shaoge](https://github.com/guo-shaoge)
-    -   `SHOW WARNINGS;`使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
+    -   `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [＃48756](https://github.com/pingcap/tidb/issues/48756) @ [xhebox](https://github.com/xhebox)
     -   TopN演算子が誤ってプッシュダウンされる可能性がある問題を修正しました [＃37986](https://github.com/pingcap/tidb/issues/37986) @ [qw4990](https://github.com/qw4990)
     -   常に`true` となる述語を持つ`SHOW ERRORS`ステートメントを実行すると TiDB がパニックを起こす問題を修正しました。 [＃46962](https://github.com/pingcap/tidb/issues/46962) @ [elsa0520](https://github.com/elsa0520)
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
@@ -109,14 +109,14 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   述語の`Longlong`型のオーバーフローの問題を修正 [＃45783](https://github.com/pingcap/tidb/issues/45783) @ [hawkingrei](https://github.com/hawkingrei)
     -   `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [＃53872](https://github.com/pingcap/tidb/issues/53872) @ [qw4990](https://github.com/qw4990)
     -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[＃53984](https://github.com/pingcap/tidb/issues/53984) @ [ekexium](https://github.com/ekexium)
-    -   列のデフォルト値として`CURRENT_DATE()`使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
+    -   列のデフォルト値として`CURRENT_DATE()`を使用すると、クエリ結果が正しくなくなる問題を修正しました [＃53746](https://github.com/pingcap/tidb/issues/53746) @ [tangenta](https://github.com/tangenta)
     -   グローバルソートを使用してインデックスを追加するときにパフォーマンスが不安定になる問題を修正しました [＃54147](https://github.com/pingcap/tidb/issues/54147) @ [tangenta](https://github.com/tangenta)
     -   v7.1 からアップグレードした後に`SHOW IMPORT JOBS`エラー`Unknown column 'summary'`を報告する問題を修正しました [＃54241](https://github.com/pingcap/tidb/issues/54241) @ [tangenta](https://github.com/tangenta)
     -   `root`ユーザーが`tidb_mdl_view` を照会できない問題を修正 [＃53292](https://github.com/pingcap/tidb/issues/53292) @ [tangenta](https://github.com/tangenta)
     -   分散実行フレームワーク (DXF) を使用してインデックスを追加する際のネットワーク パーティションによって、データ インデックスの不整合が発生する可能性がある問題を修正しました。 [＃54897](https://github.com/pingcap/tidb/issues/54897) @ [tangenta](https://github.com/tangenta)
     -   TiDB Lightning物理インポートモードの初期化中にエラーが発生し、リソースリークが発生する可能性がある問題を修正[＃53659](https://github.com/pingcap/tidb/issues/53659) @ [D3Hunter](https://github.com/D3Hunter)
     -   ビュー定義でサブクエリが列定義として使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告1356が返される問題を修正しました。 [＃54343](https://github.com/pingcap/tidb/issues/54343) @ [lance6716](https://github.com/lance6716)
-    -   インデックスアクセラレーションを使用して一意インデックスを追加すると、所有者がに切り替えられたときに`Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃49233](https://github.com/pingcap/tidb/issues/49233) @ [lance6716](https://github.com/lance6716)
+    -   インデックスアクセラレーションを使用して一意インデックスを追加すると、所有者が切り替えられたときに`Duplicate entry`エラーが発生する可能性がある問題を修正しました。 [＃49233](https://github.com/pingcap/tidb/issues/49233) @ [lance6716](https://github.com/lance6716)
     -   `global.tidb_cloud_storage_uri` を設定するときに不明瞭なエラーメッセージが表示される問題を修正しました [＃54096](https://github.com/pingcap/tidb/issues/54096) @ [lance6716](https://github.com/lance6716)
     -   同期負荷QPSモニタリングメトリックが正しくない問題を修正[＃53558](https://github.com/pingcap/tidb/issues/53558) @ [hawkingrei](https://github.com/hawkingrei)
     -   初期統計を同時にでロードするときに一部の統計情報が失われる可能性がある問題を修正しました [＃53607](https://github.com/pingcap/tidb/issues/53607) @ [hawkingrei](https://github.com/hawkingrei)
@@ -130,7 +130,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   **gRPC リクエスト ソースの継続時間**メトリックが監視ダッシュボードに誤って表示される問題を修正しました [＃17133](https://github.com/tikv/tikv/issues/17133) @ [King-Dylan](https://github.com/King-Dylan)
     -   tikv-ctlの`raft region`コマンドの出力にリージョンステータス情報が含まれていない問題を修正しました [＃17037](https://github.com/tikv/tikv/issues/17037) @ [glorv](https://github.com/glorv)
     -   `raftstore.periodic-full-compact-start-times`構成項目をオンラインで変更すると、TiKVがpanicを起こす可能性がある問題を修正しました[＃17066](https://github.com/tikv/tikv/issues/17066) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   キャッシュエントリが永続化される前に解放すると TiKV がpanicを起こす問題を修正しました [＃17040](https://github.com/tikv/tikv/issues/17040) @ [glorv](https://github.com/glorv)
 
 -   PD
@@ -139,7 +139,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブルの時間データ型が正しくない問題を修正[＃54770](https://github.com/pingcap/tidb/issues/54770) @ [HuSharp](https://github.com/HuSharp)
     -   一部のログが編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @ [rleungx](https://github.com/rleungx)
     -   `Filter`監視メトリックでデータが欠落している問題を修正しました [＃8098](https://github.com/tikv/pd/issues/8098) @ [nolouch](https://github.com/nolouch)
-    -   TLS が有効になっているときに HTTP クライアントがpanic可能性がある問題を修正[＃8237](https://github.com/tikv/pd/issues/8237) @ [okJiang](https://github.com/okJiang)
+    -   TLS が有効になっているときに HTTP クライアントがpanicする可能性がある問題を修正[＃8237](https://github.com/tikv/pd/issues/8237) @ [okJiang](https://github.com/okJiang)
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @ [rleungx](https://github.com/rleungx)
     -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @ [nolouch](https://github.com/nolouch)
     -   `store limit` に関連するデータ競合問題を修正 [＃8253](https://github.com/tikv/pd/issues/8253) @ [lhy1024](https://github.com/lhy1024)
@@ -162,10 +162,10 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [＃9243](https://github.com/pingcap/tiflash/issues/9243) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `SUBSTRING_INDEX()`関数が一部のコーナーケースでTiFlash のクラッシュを引き起こす可能性がある問題を修正[＃9116](https://github.com/pingcap/tiflash/issues/9116) @ [wshwsh12](https://github.com/wshwsh12)
     -   BRまたはTiDB Lightning 経由でデータをインポートした後、FastScanモードで多数の重複行が読み取られる可能性がある問題を修正しました。 [＃9118](https://github.com/pingcap/tiflash/issues/9118) @ [JinheLin](https://github.com/JinheLin)
-    -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [＃9084](https://github.com/pingcap/tiflash/issues/9084) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`実行した後にTiFlash がpanic可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正しました。 [＃9132](https://github.com/pingcap/tiflash/issues/9132) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   空のパーティションを含むパーティション テーブルでクエリを実行するときに発生するクエリ タイムアウトの問題を修正しました。 [＃9024](https://github.com/pingcap/tiflash/issues/9024) @ [JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[＃9175](https://github.com/pingcap/tiflash/issues/9175) @ [JinheLin](https://github.com/JinheLin)
     -   遅延マテリアライゼーションが有効になった後、仮想生成列を含むクエリが誤った結果を返す可能性がある問題を修正[＃9188](https://github.com/pingcap/tiflash/issues/9188) @ [JinheLin](https://github.com/JinheLin)
@@ -186,7 +186,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
         -   リージョンの変更によりダウンストリームpanicが発生する問題を修正[＃17233](https://github.com/tikv/tikv/issues/17233) @ [hicqu](https://github.com/hicqu)
         -   アップストリームで新しい照合順序が無効になっている場合、TiCDC がクラスター化インデックス テーブルの主キーを正しくデコードできない問題を修正しました。 [＃11371](https://github.com/pingcap/tiflow/issues/11371) @ [lidezhu](https://github.com/lidezhu)
-        -   `UPDATE`イベントをに分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [＃11402](https://github.com/pingcap/tiflow/issues/11402) @ [3AceShowHand](https://github.com/3AceShowHand)
+        -   `UPDATE`イベントを分割した後、チェックサムが正しく`0`に設定されない問題を修正しました。 [＃11402](https://github.com/pingcap/tiflow/issues/11402) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   マルチノード環境で大量の`UPDATE`操作を実行する際にChangefeedを繰り返し再起動するとデータの不整合が発生する可能性がある問題を修正[＃11219](https://github.com/pingcap/tiflow/issues/11219) @ [lidezhu](https://github.com/lidezhu)
         -   下流の Kafka にアクセスできない場合にプロセッサモジュールがスタックする可能性がある問題を修正[＃11340](https://github.com/pingcap/tiflow/issues/11340) @ [asddongmen](https://github.com/asddongmen)
 

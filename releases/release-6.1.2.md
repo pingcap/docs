@@ -41,7 +41,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   1つのPDノードがダウンした場合、他のPDノードを再試行しないため、 `information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正しました。 [＃35708](https://github.com/pingcap/tidb/issues/35708) @ [tangenta](https://github.com/tangenta)
     -   Fix the issue that the `UNION` operator might return unexpected empty result [＃36903](https://github.com/pingcap/tidb/issues/36903) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [＃37254](https://github.com/pingcap/tidb/issues/37254) @ [wshwsh12](https://github.com/wshwsh12)
-    -   リージョンがにマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました [＃37141](https://github.com/pingcap/tidb/issues/37141) @ [sticnarf](https://github.com/sticnarf)
+    -   リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました [＃37141](https://github.com/pingcap/tidb/issues/37141) @ [sticnarf](https://github.com/sticnarf)
     -   KVクライアントが不要なpingメッセージを送信する問題を修正しました [＃36861](https://github.com/pingcap/tidb/issues/36861) @ [jackysp](https://github.com/jackysp)
     -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。 [＃18216](https://github.com/pingcap/tidb/issues/18216) @ [winoros](https://github.com/winoros)
@@ -85,7 +85,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     -   TiCDC
 
-        -   CDCサーバーが完全に起動する前に HTTP 要求を受信すると、CDCサーバーがpanic可能性がある問題を修正しました[＃6838](https://github.com/pingcap/tiflow/issues/6838) @ [asddongmen](https://github.com/asddongmen)
+        -   CDCサーバーが完全に起動する前に HTTP 要求を受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[＃6838](https://github.com/pingcap/tiflow/issues/6838) @ [asddongmen](https://github.com/asddongmen)
         -   アップグレード中のログ フラッディング問題を修正 [＃7235](https://github.com/pingcap/tiflow/issues/7235) @ [Rustin170506](https://github.com/Rustin170506)
         -   changefeed の redo ログファイルが誤って削除される可能性がある問題を修正[＃6413](https://github.com/pingcap/tiflow/issues/6413) @ [Rustin170506](https://github.com/Rustin170506)
         -   etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[＃7131](https://github.com/pingcap/tiflow/issues/7131) @ [Rustin170506](https://github.com/Rustin170506)

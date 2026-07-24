@@ -43,7 +43,7 @@ TiDB バージョン: 5.4.3
     -   DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[＃37373](https://github.com/pingcap/tidb/issues/37373)
     -   TiDB Binlogを有効にして重複した値を挿入すると発生する`data and columnID count not match`エラーの問題を修正しました[＃33608](https://github.com/pingcap/tidb/issues/33608)
     -   静的パーティションプルーニングモードで、テーブルが空の場合に集計条件を含むSQL文が間違った結果を返す可能性がある問題を修正しました[＃35295](https://github.com/pingcap/tidb/issues/35295)
-    -   `UPDATE`文[＃32311](https://github.com/pingcap/tidb/issues/32311)を実行するときに TiDB がpanic可能性がある問題を修正しました
+    -   `UPDATE`文[＃32311](https://github.com/pingcap/tidb/issues/32311)を実行するときに TiDB がpanicする可能性がある問題を修正しました
     -   `UnionScan`演算子が順序を維持できないために間違ったクエリ結果が発生する問題を修正[＃33175](https://github.com/pingcap/tidb/issues/33175)
     -   UPDATE文が場合によっては投影を誤って削除し、 `Can't find column`エラー[＃37568](https://github.com/pingcap/tidb/issues/37568)が発生する問題を修正しました。
     -   パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[＃33966](https://github.com/pingcap/tidb/issues/33966)

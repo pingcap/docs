@@ -48,7 +48,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[#37168](https://github.com/pingcap/tidb/issues/37168) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [＃38541](https://github.com/pingcap/tidb/issues/38541) @ [lance6716](https://github.com/lance6716)
     -   関数`str_to_date` `NO_ZERO_DATE`モード[#39146](https://github.com/pingcap/tidb/issues/39146) @ [mengxin9014](https://github.com/mengxin9014)で間違った結果を返す問題を修正
-    -   バックグラウンドでの統計収集タスクがpanic可能性がある問題を修正[＃35421](https://github.com/pingcap/tidb/issues/35421) @ [lilinghai](https://github.com/lilinghai)
+    -   バックグラウンドでの統計収集タスクがpanicする可能性がある問題を修正[＃35421](https://github.com/pingcap/tidb/issues/35421) @ [lilinghai](https://github.com/lilinghai)
     -   Fix the issue that in some scenarios the pessimistic lock is incorrectly added to the non-unique secondary index [＃36235](https://github.com/pingcap/tidb/issues/36235) @ [ekexium](https://github.com/ekexium)
 
 <!---->

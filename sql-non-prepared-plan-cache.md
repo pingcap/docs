@@ -89,7 +89,7 @@ TiDBは、パラメータ化されたクエリに対して1つのプランのみ
 -   パラメータ化後のパラメータ数が200を超えるクエリ（例： `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)` ）は、デフォルトではサポートされません。v7.3.0以降では、システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)に[`44823`](/optimizer-fix-controls.md#44823-new-in-v730)を設定することで、この制限を変更できます。
 -   仮想列、一時テーブル、ビュー、またはメモリテーブルにアクセスするクエリはサポートされていません (例: `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` 、 `COLUMNS`は TiDBメモリテーブル)。
 -   ヒントまたはバインディングを含むクエリはサポートされていません。
--   DML文、または`FOR UPDATE`句を含む`SELECT`文はデフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`実行してください。
+-   DML文、または`FOR UPDATE`句を含む`SELECT`文はデフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`を実行してください。
 
 After you enable this feature, the optimizer quickly evaluates the query. If it does not meet the support conditions for non-prepared plan cache, the query falls back to the regular optimization process.
 
@@ -121,7 +121,7 @@ EXPLAIN FORMAT='plan_cache' SELECT * FROM (SELECT a+1 FROM t) t;
 3 rows in set, 1 warning (0.00 sec)
 ```
 
-キャッシュにヒットできないクエリを表示するには、 `SHOW warnings;`実行します。
+キャッシュにヒットできないクエリを表示するには、 `SHOW warnings;`を実行します。
 
 ```sql
 SHOW warnings;

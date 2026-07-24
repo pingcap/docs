@@ -65,7 +65,7 @@ TiDB バージョン: 5.1.4
     -   システム変数`tidb_analyze_version` `2` に設定されている場合に発生するメモリリークのバグを修正しました [＃32499](https://github.com/pingcap/tidb/issues/32499)
     -   `MaxDays`と`MaxBackups`設定がスローログに反映されない問題を修正 [＃25716](https://github.com/pingcap/tidb/issues/25716)
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [＃28078](https://github.com/pingcap/tidb/issues/28078)
-    -   `ENUM`種類の列に対して`JOIN`実行するときに発生する可能性のある誤った結果を修正 [＃27831](https://github.com/pingcap/tidb/issues/27831)
+    -   `ENUM`種類の列に対して`JOIN`を実行するときに発生する可能性のある誤った結果を修正 [＃27831](https://github.com/pingcap/tidb/issues/27831)
     -   INDEX HASH JOINが`send on closed channel`エラーを返す問題を修正しました[＃31129](https://github.com/pingcap/tidb/issues/31129)
     -   [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) APIを使用すると、まれにTiKVへのTiDBリクエストの送信がブロックされる可能性がある問題を修正しました[＃32500](https://github.com/pingcap/tidb/issues/32500)
     -   楽観的トランザクションモードで潜在的なデータインデックスの不整合が発生する問題を修正 [＃30410](https://github.com/pingcap/tidb/issues/30410)
@@ -84,7 +84,7 @@ TiDB バージョン: 5.1.4
 
 -   TiKV
 
-    -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（ `unsafe_destroy_range`実行できない）というバグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
+    -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（ `unsafe_destroy_range`を実行できない）というバグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[＃10210](https://github.com/tikv/tikv/issues/10210)
     -   領域が空の場合に関数`any_value`が誤った結果を返すバグを修正しました[＃11735](https://github.com/tikv/tikv/issues/11735)
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
@@ -161,7 +161,7 @@ TiDB バージョン: 5.1.4
         -   DDL 処理後のメモリリークの問題を修正 [＃3174](https://github.com/pingcap/ticdc/issues/3174)
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[＃3111](https://github.com/pingcap/ticdc/issues/3111)
         -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正しました[＃3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanic可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
+        -   TiKVが同じリージョンに重複したリクエストを送信した場合にTiCDCプロセスがpanicする可能性がある問題を修正しました [＃2386](https://github.com/pingcap/tiflow/issues/2386)
         -   デフォルト値の`max-message-bytes`を`10M` に設定することで、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正しました。 [＃3081](https://github.com/pingcap/tiflow/issues/3081)
         -   Kafka メッセージの書き込み中にエラーが発生すると TiCDC 同期タスクが一時停止する可能性がある問題を修正[＃2978](https://github.com/pingcap/tiflow/issues/2978)
 

@@ -13,7 +13,7 @@ TiDB バージョン: 5.0.4
 
 -   TiDB
 
-    -   新規セッションで`SHOW VARIABLES`実行すると遅くなる問題を修正しました。この修正により、 で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326) [＃19341](https://github.com/pingcap/tidb/pull/19341)
+    -   新規セッションで`SHOW VARIABLES`を実行すると遅くなる問題を修正しました。この修正により、[＃19341](https://github.com/pingcap/tidb/pull/19341)で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[＃25873](https://github.com/pingcap/tidb/pull/25873)
 
     <!---->
@@ -111,12 +111,12 @@ TiDB バージョン: 5.0.4
 
 -   TiDB
 
-    -   パーティションテーブルをクエリし、パーティションキーに条件`IS NULL`がある場合に TiDB がpanic可能性がある問題を修正しました[＃23802](https://github.com/pingcap/tidb/issues/23802)
+    -   パーティションテーブルをクエリし、パーティションキーに条件`IS NULL`がある場合に TiDB がpanicする可能性がある問題を修正しました[＃23802](https://github.com/pingcap/tidb/issues/23802)
     -   `FLOAT64`型のオーバーフローチェックがMySQL と異なる問題を修正 [＃23897](https://github.com/pingcap/tidb/issues/23897)
     -   `case when`式の間違った文字セットと照合順序を修正します [＃26662](https://github.com/pingcap/tidb/issues/26662)
     -   悲観的トランザクションをコミットすると書き込み競合が発生する可能性がある問題を修正[＃25964](https://github.com/pingcap/tidb/issues/25964)
     -   悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[＃26359](https://github.com/pingcap/tidb/issues/26359) [＃10600](https://github.com/tikv/tikv/pull/10600)
-    -   非同期コミットロックを解決する際に TiDB がpanic可能性がある問題を修正[＃25778](https://github.com/pingcap/tidb/issues/25778)
+    -   非同期コミットロックを解決する際に TiDB がpanicする可能性がある問題を修正[＃25778](https://github.com/pingcap/tidb/issues/25778)
     -   `INDEX MERGE` 使用時に列が見つからないことがあるバグを修正 [＃25045](https://github.com/pingcap/tidb/issues/25045)
     -   `ALTER USER REQUIRE SSL`ユーザーの`authentication_string` をクリアするバグを修正 [＃25225](https://github.com/pingcap/tidb/issues/25225)
     -   新しいクラスターの`tidb_gc_scan_lock_mode`グローバル変数の値が、実際のデフォルトモード「LEGACY」 ではなく「PHYSICAL」と表示されるバグを修正しました。 [＃25100](https://github.com/pingcap/tidb/issues/25100)
@@ -128,12 +128,12 @@ TiDB バージョン: 5.0.4
     -   `read_from_storage`とパーティションテーブルを同時に使用するとエラーが発生する問題を修正[＃20372](https://github.com/pingcap/tidb/issues/20372)
     -   射影演算子を実行するときに TiDB がパニックを起こす問題を修正しました [＃24264](https://github.com/pingcap/tidb/issues/24264)
     -   統計情報によりクエリがpanicになる可能性がある問題を修正[＃24061](https://github.com/pingcap/tidb/pull/24061)
-    -   `BIT`列で`approx_percentile`関数を使用するとpanic可能性がある問題を修正しました[＃23662](https://github.com/pingcap/tidb/issues/23662)
+    -   `BIT`列で`approx_percentile`関数を使用するとpanicする可能性がある問題を修正しました[＃23662](https://github.com/pingcap/tidb/issues/23662)
     -   Grafanaの**コプロセッサー Cache**パネルのメトリックが間違っている問題を修正しました[＃26338](https://github.com/pingcap/tidb/issues/26338)
     -   同じパーティションを同時に切り捨てるとDDL文がスタックする問題を修正しました[＃26229](https://github.com/pingcap/tidb/issues/26229)
     -   セッション変数を`GROUP BY`項目として使用した場合に発生する誤ったクエリ結果の問題を修正しました [＃27106](https://github.com/pingcap/tidb/issues/27106)
     -   テーブルを結合する際の`VARCHAR`とタイムスタンプ間の誤った暗黙的な変換を修正しました [＃25902](https://github.com/pingcap/tidb/issues/25902)
-    -   関連するサブクエリステートメントの誤った結果を修正する[＃27233](https://github.com/pingcap/tidb/issues/27233)
+    -   相関サブクエリステートメントの誤った結果を修正する[＃27233](https://github.com/pingcap/tidb/issues/27233)
 
 -   TiKV
 
@@ -148,8 +148,8 @@ TiDB バージョン: 5.0.4
 -   PD
 
     -   PDがダウンしたピアを時間内に修復しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   `replication.max-replicas`更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
-    -   TiKV をスケールアウトするときに PD がpanic可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
+    -   `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
+    -   TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
     -   複数のスケジューラが同時に実行されているときに発生するスケジュール競合の問題を修正[＃3807](https://github.com/tikv/pd/issues/3807)
     -   スケジューラが削除された後でも再び表示されることがある問題を修正[＃2572](https://github.com/tikv/pd/issues/2572)
 
@@ -158,7 +158,7 @@ TiDB バージョン: 5.0.4
     -   テーブルスキャンタスクの実行時に発生する可能性のあるpanic問題を修正しました
     -   MPPタスク実行時に発生する可能性のあるメモリリークの問題を修正
     -   TiFlashがDAQリクエストを処理する際に`duplicated region`エラーを発生させるバグを修正しました
-    -   集計関数`COUNT`または`COUNT DISTINCT`実行するときに予期しない結果が発生する問題を修正しました
+    -   集計関数`COUNT`または`COUNT DISTINCT`を実行するときに予期しない結果が発生する問題を修正しました
     -   MPPタスク実行時に発生する可能性のあるpanic問題を修正
     -   複数のディスクに展開されたときにTiFlash がデータを復元できない潜在的なバグを修正しました
     -   解体時に発生する可能性のあるpanic問題を修正`SharedQueryBlockInputStream`

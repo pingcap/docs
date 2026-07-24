@@ -29,7 +29,7 @@ embed_func = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-a-vector-field}
 
-テーブル スキーマにベクトル フィールドを作成するには、 `embed_func.VectorField()`使用します。
+テーブル スキーマにベクトル フィールドを作成するには、 `embed_func.VectorField()`を使用します。
 
 自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`設定します。
 

@@ -78,7 +78,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 ## バグ修正 {#bug-fixes}
 
 -   TiDB
-    -   64文字を超える列名で`view`作成するとエラーが報告される問題を修正しました[＃14850](https://github.com/pingcap/tidb/pull/14850)
+    -   64文字を超える列名で`view`を作成するとエラーが報告される問題を修正しました[＃14850](https://github.com/pingcap/tidb/pull/14850)
     -   `create or replace view`文が正しく処理されていないため、 `information_schema.views`に重複データが存在する問題を修正[＃14832](https://github.com/pingcap/tidb/pull/14832)
     -   `plan cache`有効になっている場合の`BatchPointGet`の誤った結果を修正[＃14855](https://github.com/pingcap/tidb/pull/14855)
     -   タイムゾーンを変更した後にデータが間違ったパーティションテーブルに挿入される問題を修正[＃14370](https://github.com/pingcap/tidb/pull/14370)

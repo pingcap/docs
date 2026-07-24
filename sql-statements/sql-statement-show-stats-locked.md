@@ -48,7 +48,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-テーブル`t`の統計情報をロックし、 `SHOW STATS_LOCKED`実行します。出力には、テーブル`t`の統計情報がロックされたことが示されます。
+テーブル`t`の統計情報をロックし、 `SHOW STATS_LOCKED`を実行します。出力には、テーブル`t`の統計情報がロックされたことが示されます。
 
 ```sql
 mysql> LOCK STATS t;

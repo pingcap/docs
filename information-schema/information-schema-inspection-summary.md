@@ -40,12 +40,12 @@ DESC inspection_summary;
 -   `RULE` : 要約ルール。新しいルールは継続的に追加されるため、 `select * from inspection_rules where type='summary'`ステートメントを実行すると最新のルールリストを照会できます。
 -   `INSTANCE` : 監視対象インスタンス。
 -   `METRICS_NAME` : 監視メトリック名。
--   `QUANTILE` : `QUANTILE`含む監視テーブルに有効です。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。例えば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`実行してDDL関連の監視メトリックを要約し、P80/P90/P99/P999の結果を照会できます。6 、 `MIN_VALUE` 、 `MAX_VALUE` `AVG_VALUE` 、集計の平均値、最小値、最大値を示します。
+-   `QUANTILE` : `QUANTILE`を含む監視テーブルに有効です。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。例えば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行してDDL関連の監視メトリックを要約し、P80/P90/P99/P999の結果を照会できます。`AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`は、それぞれ集計の平均値、最小値、最大値を示します。
 -   `COMMENT` : 対応する監視メトリックに関するコメント。
 
 > **Note:**
 >
-> すべての結果を要約するとオーバーヘッドが発生するため、SQL述語で特定の`rule`表示してオーバーヘッドを削減することをお勧めします。例えば、 `select * from inspection_summary where rule in ('read-link', 'ddl')`実行すると、読み取りリンクとDDL関連の監視メトリックが要約されます。
+> すべての結果を要約するとオーバーヘッドが発生するため、SQL述語で特定の`rule`を表示してオーバーヘッドを削減することをお勧めします。例えば、 `select * from inspection_summary where rule in ('read-link', 'ddl')`を実行すると、読み取りリンクとDDL関連の監視メトリックが要約されます。
 
 使用例:
 

@@ -19,7 +19,7 @@ summary: TiDB データベースにおける BATCH の使用法の概要。
 BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 ```
 
-上記の文では、分割する列を`test.t2.id`と指定しており、これは明確な値です。次のように`id`指定すると、エラーが発生します。
+上記の文では、分割する列を`test.t2.id`と指定しており、これは明確な値です。次のように`id`を指定すると、エラーが発生します。
 
 ```sql
 BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;

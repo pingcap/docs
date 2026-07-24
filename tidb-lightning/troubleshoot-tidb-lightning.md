@@ -21,7 +21,7 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 **原因 2** : テーブル スキーマが複雑すぎます。
 
-インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`使用して再度追加することができます。
+インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`を使用して再度追加することができます。
 
 **原因 3** : 各ファイルが大きすぎます。
 
@@ -44,7 +44,7 @@ strict-format = true
 
     [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 
-コマンドラインで直接`nohup`使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
+コマンドラインで直接`nohup`を使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
 
 また、 TiDB Lightningの最後のログに「Context cancellation」というエラーが表示されている場合は、最初の「ERROR」レベルのログを探す必要があります。この「ERROR」レベルのログには通常、「got signal to exit」が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
 
@@ -84,7 +84,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 **ソリューション**：
 
-1.  `tidb-lightning-ctl`使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
+1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    CentOS では、 `yum info tzdata`実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
+    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
 ### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 

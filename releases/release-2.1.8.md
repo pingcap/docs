@@ -50,7 +50,7 @@ TiDB Ansible バージョン: 2.1.8
 
 ## ツール {#tools}
 
--   Lightning のテーブルインポートの順序を最適化して、インポートプロセス中にクラスター上で`Checksum`と`Analyze`実行する大きなテーブルの影響を軽減し、 `Checksum`と`Analyze`の成功率を向上させます[＃156](https://github.com/pingcap/tidb-lightning/pull/156)
+-   Lightning のテーブルインポートの順序を最適化して、インポートプロセス中にクラスター上で`Checksum`と`Analyze`を実行する大きなテーブルの影響を軽減し、 `Checksum`と`Analyze`の成功率を向上させます[＃156](https://github.com/pingcap/tidb-lightning/pull/156)
 -   KVエンコーダの追加解析作業を回避するために、データソースファイルの内容をTiDBの`types.Datum`に直接解析することで、LightningのエンコードSQLパフォーマンスを50％向上しました。 [＃145](https://github.com/pingcap/tidb-lightning/pull/145)
 -   TiDB Binlog Pumpに`storage.sync-log`構成項目を追加して、 Pump でローカルストレージのディスクを非同期にフラッシュすることをサポートします。 [＃529](https://github.com/pingcap/tidb-binlog/pull/529)
 -   TiDB Binlog PumpとDrainer 間の通信のトラフィック圧縮をサポート [＃530](https://github.com/pingcap/tidb-binlog/pull/530)

@@ -362,7 +362,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   PD はLeaderを選出できません: PD ログには`lease is not expired`が表示されます。 [この問題は](https://github.com/etcd-io/etcd/issues/10355)v3.0.x および v2.1.19 で修正されました。中国語の[ケース875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)参照してください。
 
-    -   選挙が遅い：リージョンの読み込み時間が長い。この問題は、PD ログで`grep "regions cost"`実行することで確認できます。結果が`load 460927 regions cost 11.77099s`のように秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0 では、 `region storage`を`use-region-storage`に設定することで`true`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。詳細は、 [ケース429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md) （中国語）を参照してください。
+    -   選挙が遅い：リージョンの読み込み時間が長い。この問題は、PD ログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`のように秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0 では、 `region storage`を`use-region-storage`に設定することで`true`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。詳細は、 [ケース429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md) （中国語）を参照してください。
 
 -   5.2.3 TiDBがSQLステートメントを実行する際にPDがタイムアウトしました。
 

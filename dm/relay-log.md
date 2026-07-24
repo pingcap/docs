@@ -158,7 +158,7 @@ query-status -s mysql-replica-01
 
 ### リレーログの一時停止と再開 {#pause-and-resume-relay-log}
 
-コマンド`pause-relay`リレーログのプル処理を一時停止し、コマンド`resume-relay`で再開できます。これらの2つのコマンドを実行する際は、上流データソースの`source-id`指定する必要があります。以下の例をご覧ください。
+コマンド`pause-relay`リレーログのプル処理を一時停止し、コマンド`resume-relay`で再開できます。これらの2つのコマンドを実行する際は、上流データソースの`source-id`を指定する必要があります。以下の例をご覧ください。
 
 ```bash
 pause-relay -s mysql-replica-01 -s mysql-replica-02
@@ -342,8 +342,8 @@ purge:
 
 -   有効なローカルリレーログが存在しないが、アップストリームデータソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`指定されている場合:
 
-    -   非 GTID モードでは、 `relay-binlog-name`指定すると、DM ワーカーは指定されたbinlogファイルから移行を開始します。
-    -   GTID モードでは、 `relay-binlog-gtid`指定すると、DM ワーカーは指定された GTID から移行を開始します。
+    -   非 GTID モードでは、 `relay-binlog-name`を指定すると、DM ワーカーは指定されたbinlogファイルから移行を開始します。
+    -   GTID モードでは、 `relay-binlog-gtid`を指定すると、DM ワーカーは指定された GTID から移行を開始します。
 
 -   有効なローカルリレーログがなく、DM 構成ファイルに`relay-binlog-name`または`relay-binlog-gtid`指定されていない場合:
 

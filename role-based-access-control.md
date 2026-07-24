@@ -58,7 +58,7 @@ GRANT ALL ON app_db.* TO 'app_developer';
 
 ユーザー`dev1` `app_db`に対するすべての権限を持つ開発者ロールを持ち、ユーザー`read_user1`と`read_user2` `app_db`に対する読み取り専用権限を持ち、ユーザー`rw_user1` `app_db`に対する読み取り権限と書き込み権限を持っているとします。
 
-`CREATE USER`使用してユーザーを作成します。
+`CREATE USER`を使用してユーザーを作成します。
 
 ```sql
 CREATE USER 'dev1'@'localhost' IDENTIFIED BY 'dev1pass';
@@ -67,7 +67,7 @@ CREATE USER 'read_user2'@'localhost' IDENTIFIED BY 'read_user2pass';
 CREATE USER 'rw_user1'@'localhost' IDENTIFIED BY 'rw_user1pass';
 ```
 
-次に`GRANT`使用してユーザーにロールを付与します
+次に`GRANT`を使用してユーザーにロールを付与します
 
 ```sql
 GRANT 'app_developer' TO 'dev1'@'localhost';
@@ -151,7 +151,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
     | GRANT `app_read`@`%` TO `read_user1`@`localhost`       |
     +--------------------------------------------------------+
 
-現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`使用します。5 と`SHOW GRANTS FOR CURRENT_USER()` `SHOW GRANTS`の点で異なります。
+現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用します。`SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は次の点で異なります。
 
 -   `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
 -   `SHOW GRANTS FOR CURRENT_USER()`場合、有効なロールの権限は表示されません。
@@ -236,7 +236,7 @@ SET ROLE ALL EXCEPT 'app_read'
 
 > **Note:**
 >
-> `SET ROLE`使用してロールを有効にすると、このロールは現在のセッションでのみ有効になります。
+> `SET ROLE`を使用してロールを有効にすると、このロールは現在のセッションでのみ有効になります。
 
 ### 現在有効なロールを確認する {#check-the-current-enabled-role}
 
@@ -288,7 +288,7 @@ REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
 
 ### 権限を取り消す {#revoke-a-privilege}
 
-`REVOKE`文は`GRANT`の逆です。 `REVOKE`使用すると`app_write`の権限を取り消すことができます。
+`REVOKE`文は`GRANT`の逆です。 `REVOKE`を使用すると`app_write`の権限を取り消すことができます。
 
 ```sql
 REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';

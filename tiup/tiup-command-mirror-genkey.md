@@ -47,9 +47,9 @@ tiup mirror genkey [flags]
 ## 出力 {#outputs}
 
 -   `-p/--public`が指定されていない場合:
-    -   `-n/--name`で指定された秘密鍵が存在する場合: TiUP は`Key already exists, skipped`出力します。
-    -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP は`private key have been write to ${TIUP_HOME}/keys/{name}.json`出力します。
--   `-p/--public`指定した場合:
+    -   `-n/--name`で指定された秘密鍵が存在する場合: TiUP は`Key already exists, skipped`を出力します。
+    -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP は`private key have been write to ${TIUP_HOME}/keys/{name}.json`を出力します。
+-   `-p/--public`を指定した場合:
     -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP はエラー`Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`報告します。
     -   `-n/--name`で指定された秘密鍵が存在する場合： TiUPは対応する公開鍵の内容を出力します。
 

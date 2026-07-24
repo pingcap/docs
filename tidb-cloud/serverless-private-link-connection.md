@@ -221,7 +221,7 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
 
 TiDB Cloud CLI を使用してTiDB Cloud管理対象ドメインをアタッチするには、次の手順を実行します。
 
-1.  `dry run`使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
+1.  `dry run`を使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run

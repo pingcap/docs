@@ -67,7 +67,7 @@ TiDB バージョン: 4.0.7
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[＃20051](https://github.com/pingcap/tidb/pull/20051)
     -   コンテキストがキャンセルされたときにリージョン要求が再試行され続ける問題を修正[＃20031](https://github.com/pingcap/tidb/pull/20031)
     -   ストリーミングリクエストで`cluster_slow_query`のテーブルの時間型をクエリするとエラーが発生する可能性がある問題を修正しました[＃19943](https://github.com/pingcap/tidb/pull/19943)
-    -   `case when`使用する DML ステートメントがスキーマ変更引き起こす可能性がある問題を修正しました [＃20095](https://github.com/pingcap/tidb/pull/20095)
+    -   `case when`を使用する DML ステートメントがスキーマ変更引き起こす可能性がある問題を修正しました [＃20095](https://github.com/pingcap/tidb/pull/20095)
     -   スローログの`prev_stmt`情報が感度低下しない問題を修正[＃20048](https://github.com/pingcap/tidb/pull/20048)
     -   tidb-server が異常終了した際にテーブルロックを解除しない問題を修正[＃20020](https://github.com/pingcap/tidb/pull/20020)
     -   `ENUM`と`SET`タイプのデータを挿入するときに発生する誤ったエラーメッセージを修正しました [＃19950](https://github.com/pingcap/tidb/pull/19950)
@@ -84,7 +84,7 @@ TiDB バージョン: 4.0.7
 
 -   PD
 
-    -   `balance-region`有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanic可能性があるバグを修正しました[＃2994](https://github.com/pingcap/pd/pull/2994)
+    -   `balance-region`有効になっているときに、一部のリージョンにLeaderがいない場合、PD がpanicする可能性があるバグを修正しました[＃2994](https://github.com/pingcap/pd/pull/2994)
     -   リージョンマージ後のリージョンサイズとリージョンキーの統計的偏差を修正 [＃2985](https://github.com/pingcap/pd/pull/2985)
     -   ホットスポット統計の誤りを修正[＃2991](https://github.com/pingcap/pd/pull/2991)
     -   `redirectSchedulerDelete` に`nil`チェックインがない問題を修正 [＃2974](https://github.com/pingcap/pd/pull/2974)

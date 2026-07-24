@@ -329,8 +329,8 @@ TiDB バージョン: 6.1.0
 
     -   `UnionScanRead` オペレータのパフォーマンスを向上させる [#32433](https://github.com/pingcap/tidb/issues/32433)
     -   `EXPLAIN`の出力におけるタスクタイプの表示を改善（MPPタスクタイプを追加） [＃33332](https://github.com/pingcap/tidb/issues/33332)
-    -   列のデフォルト値として`rand()`使用することをサポートします [＃10377](https://github.com/pingcap/tidb/issues/10377)
-    -   列のデフォルト値として`uuid()`使用することをサポートします [＃33870](https://github.com/pingcap/tidb/issues/33870)
+    -   列のデフォルト値として`rand()`を使用することをサポートします [＃10377](https://github.com/pingcap/tidb/issues/10377)
+    -   列のデフォルト値として`uuid()`を使用することをサポートします [＃33870](https://github.com/pingcap/tidb/issues/33870)
     -   Support modifying the character set of columns from `latin1` to `utf8`/`utf8mb4` [＃34008](https://github.com/pingcap/tidb/issues/34008)
 
 -   TiKV

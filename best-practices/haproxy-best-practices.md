@@ -196,7 +196,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-`SHOW PROCESSLIST`使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を TiDB に接続するように設定する必要があります。
+`SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を TiDB に接続するように設定する必要があります。
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       

@@ -142,7 +142,7 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
 
 1.  Titanを無効化したいTiKVノードの設定を更新します。設定の更新は2つの方法で行えます。
 
-    -   `tiup cluster edit-config`実行し、設定ファイルを編集して`tiup cluster reload -R tikv`実行します。
+    -   `tiup cluster edit-config`を実行し、設定ファイルを編集して`tiup cluster reload -R tikv`を実行します。
 
     -   構成ファイルを手動で更新し、TiKV を再起動します。
 

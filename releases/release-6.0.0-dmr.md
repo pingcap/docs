@@ -473,7 +473,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   `StoreMeta`のデータが一部のコーナーケースで誤って削除されたときに TiKV がパニックを起こすバグを修正[＃11852](https://github.com/tikv/tikv/issues/11852)
     -   ARM プラットフォームでプロファイリングを実行するときに TiKV がパニックを起こすバグを修正[＃10658](https://github.com/tikv/tikv/issues/10658)
-    -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKV が 2 年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   SSE命令セット不足により発生するARM64アーキテクチャでのコンパイル問題を修正 [＃12034](https://github.com/tikv/tikv/issues/12034)
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   古いメッセージによって TiKV がpanicを起こすバグを修正[＃12023](https://github.com/tikv/tikv/issues/12023)

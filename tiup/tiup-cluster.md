@@ -183,7 +183,7 @@ tiup cluster start prod-cluster
 
 クラスターの名前を忘れた場合は、 `tiup cluster list`を実行してクラスター リストを表示します。
 
-TiUPはデーモンプロセスを起動するために`systemd`使用します。プロセスが予期せず終了した場合、15秒後に再起動されます。
+TiUPはデーモンプロセスを起動するために`systemd`を使用します。プロセスが予期せず終了した場合、15秒後に再起動されます。
 
 ## クラスターのステータスを確認する {#check-the-cluster-status}
 
@@ -214,7 +214,7 @@ tiup cluster display prod-cluster
     172.16.5.140:20160  tikv        172.16.5.140  20160/20180                      linux/x86_64  Up      data/tikv-20160       deploy/tikv-20160
     172.16.5.144:6000   tiproxy     172.16.5.144  6000/3080                        linux/x86_64  Up      -                     deploy/tiproxy-6000
 
-`Status`列では、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
+`Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
 PDコンポーネントの場合、 `|L`または`|UI` `Up`または`Down`に追加されることがあります。 `|L` PD ノードがLeaderであることを示し、 `|UI` [TiDB Dashboard](/dashboard/dashboard-intro.md) PD ノードで実行されていることを示します。
 
@@ -256,7 +256,7 @@ tiup cluster scale-in <cluster-name> -N <node-id>
 tiup cluster scale-in prod-cluster -N 172.16.5.140:20160
 ```
 
-`tiup cluster display`実行すると、TiKV ノードが`Offline`マークされていることがわかります。
+`tiup cluster display`を実行すると、TiKV ノードが`Offline`マークされていることがわかります。
 
 ```bash
 tiup cluster display prod-cluster
@@ -423,7 +423,7 @@ alertmanager_servers:
 -   `monitoring_servers`の`rule_dir`フィールドで指定されたフォルダーには、完全な`*.rules.yml`ファイルが含まれている必要があります。
 -   `alertmanager_servers`の`config_file`欄に指定するファイルの形式については[Alertmanager 構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml)を参照してください。
 
-`tiup reload`実行すると、 TiUP はまずターゲットマシン上の古い設定ファイルをすべて削除し、次にコントロールマシンから対応する設定ファイルをターゲットマシンの対応する設定ディレクトリにアップロードします。したがって、特定の設定ファイルを変更する場合は、すべての設定ファイル（変更されていないものも含む）が同じディレクトリにあることを確認してください。例えば、Grafana の`tidb.json`ファイルを変更するには、まず Grafana の`dashboards`ディレクトリにある`*.json`ファイルすべてをローカルディレクトリにコピーする必要があります。そうしないと、ターゲットマシンから他の JSON ファイルが失われます。
+`tiup reload`を実行すると、 TiUP はまずターゲットマシン上の古い設定ファイルをすべて削除し、次にコントロールマシンから対応する設定ファイルをターゲットマシンの対応する設定ディレクトリにアップロードします。したがって、特定の設定ファイルを変更する場合は、すべての設定ファイル（変更されていないものも含む）が同じディレクトリにあることを確認してください。例えば、Grafana の`tidb.json`ファイルを変更するには、まず Grafana の`dashboards`ディレクトリにある`*.json`ファイルすべてをローカルディレクトリにコピーする必要があります。そうしないと、ターゲットマシンから他の JSON ファイルが失われます。
 
 > **Note:**
 >
@@ -566,7 +566,7 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-たとえば、すべての TiDB ノードで`ls /tmp`実行するには、次のコマンドを実行します。
+たとえば、すべての TiDB ノードで`ls /tmp`を実行するには、次のコマンドを実行します。
 
 ```bash
 tiup cluster exec test-cluster --command='ls /tmp'
@@ -593,7 +593,7 @@ tikv-ctl [args] = tiup ctl tikv [args]
 etcdctl [args] = tiup ctl etcd [args]
 ```
 
-たとえば、以前に`pd-ctl -u http://127.0.0.1:2379 store`実行してストアを表示していた場合、今度はTiUPで次のコマンドを実行できます。
+たとえば、以前に`pd-ctl -u http://127.0.0.1:2379 store`を実行してストアを表示していた場合、今度はTiUPで次のコマンドを実行できます。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 store
@@ -672,12 +672,12 @@ export TIUP_NATIVE_SSH=enable
 
 TiUPデータは、ユーザーのホームディレクトリ内の`.tiup`ディレクトリに保存されます。コントロールマシンを移行するには、以下の手順に従って`.tiup`ディレクトリを対応するターゲットマシンにコピーします。
 
-1.  元のマシンのホームディレクトリで`tar czvf tiup.tar.gz .tiup`実行します。
+1.  元のマシンのホームディレクトリで`tar czvf tiup.tar.gz .tiup`を実行します。
 2.  `tiup.tar.gz`ターゲット マシンのホーム ディレクトリにコピーします。
-3.  対象マシンのホームディレクトリで`tar xzvf tiup.tar.gz`実行します。
+3.  対象マシンのホームディレクトリで`tar xzvf tiup.tar.gz`を実行します。
 4.  `.tiup`ディレクトリを`PATH`環境変数に追加します。
 
-    `bash`使用し、 `tidb`ユーザーの場合は、 `~/.bashrc`に`export PATH=/home/tidb/.tiup/bin:$PATH`追加して`source ~/.bashrc`実行します。その後、使用するシェルとユーザーに応じて調整してください。
+    `bash`を使用し、 `tidb`ユーザーの場合は、 `~/.bashrc`に`export PATH=/home/tidb/.tiup/bin:$PATH`を追加して`source ~/.bashrc`を実行します。その後、使用するシェルとユーザーに応じて調整してください。
 
 > **Note:**
 >

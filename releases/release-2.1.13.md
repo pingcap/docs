@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.13
 
 ## TiDB {#tidb}
 
--   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`使用して行 ID を分散させる機能を追加します[＃10788](https://github.com/pingcap/tidb/pull/10788)
+-   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散させる機能を追加します[＃10788](https://github.com/pingcap/tidb/pull/10788)
 -   無効な DDL メタデータの有効期間を最適化して、TiDB クラスタアップグレード後に DDL 操作の通常の実行を回復する速度を向上します。 [＃10789](https://github.com/pingcap/tidb/pull/10789)
 -   `execdetails.ExecDetails`ポインタの結果としてコプロセッサーリソースを迅速に解放できないことによって引き起こされる、高同時シナリオでのOOM問題を修正しました。 [＃10833](https://github.com/pingcap/tidb/pull/10833)
 -   統計情報を更新するかどうかを制御する`update-stats`構成項目を追加します[＃10772](https://github.com/pingcap/tidb/pull/10772)

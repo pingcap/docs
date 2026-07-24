@@ -78,7 +78,7 @@ WHERE ss_date_sk = d_date_sk
 
 ランタイム フィルターを使用するには、 TiFlashレプリカを含むテーブルを作成し、 [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)を`LOCAL`に設定する必要があります。
 
-このセクションでは、TPC-DS データセットを例に、結合操作にテーブル`catalog_sales`とテーブル`date_dim`使用して、ランタイム フィルターによってクエリ効率がどのように向上するかを説明します。
+このセクションでは、TPC-DS データセットを例に、結合操作にテーブル`catalog_sales`とテーブル`date_dim`を使用して、ランタイム フィルターによってクエリ効率がどのように向上するかを説明します。
 
 ### ステップ1. 結合するテーブルのTiFlashレプリカを作成する {#step-1-create-tiflash-replicas-for-tables-to-be-joined}
 
