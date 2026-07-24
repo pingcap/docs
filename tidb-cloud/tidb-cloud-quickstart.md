@@ -22,7 +22,7 @@ category: quick start
 
 2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
 
-    デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページ目が表示されます。
+    デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページが表示されます。
 
 3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
