@@ -17,11 +17,11 @@ AWS VPC peering creates a private connection between your VPC and TiDB Cloud, al
 
 For security reasons, all traffic from the peer VPC is denied by default, regardless of the VPC peering status. Even if a VPC peering connection is active, traffic can reach your TiDB Cloud BYOC instance only after you configure allowed access CIDR rules.
 
-Allowed access CIDR rules are applied at the instance level and are shared by all VPC peering connections for the instance. When you add or remove a CIDR rule, TiDB Cloud synchronizes the corresponding access rule to the security group of the private Network Load Balancer (NLB).
+Allowed access CIDR rules are applied at the instance level and shared across all VPC peering connections for the instance. When you add or remove a CIDR rule, TiDB Cloud synchronizes the corresponding access rule to the security group of the private Network Load Balancer (NLB).
 
 The following behavior applies:
 
-- If no allowed access CIDR is configured, traffic through VPC peering is denied.
+- If no allowed access CIDRs are configured, all traffic through VPC peering is denied.
 - If one or more CIDR ranges are configured, only traffic from those CIDR ranges is allowed through VPC peering.
 - If global access is enabled, `0.0.0.0/0` is applied and existing CIDR restrictions are temporarily ignored.
 - Existing CIDR rules are preserved when global access is enabled. After global access is disabled, the existing CIDR rules take effect again.
