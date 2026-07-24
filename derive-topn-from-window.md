@@ -31,7 +31,7 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 ## 制限事項 {#limitations}
 
 -   SQL 書き換えでは`ROW_NUMBER()`ウィンドウ関数のみがサポートされます。
--   TiDB は、 `ROW_NUMBER()`結果をフィルタリングし、フィルタ条件が`<`または`<=`場合にのみ SQL を書き換えることができます。
+-   TiDB は、 `ROW_NUMBER()`の結果をフィルタリングし、フィルタ条件が`<`または`<=`の場合にのみ SQL を書き換えることができます。
 
 ## 使用例 {#usage-examples}
 

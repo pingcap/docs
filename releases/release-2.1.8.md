@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 2.1.8
 -   `time_zone` の値を検証する [＃10000](https://github.com/pingcap/tidb/pull/10000)
 -   `2019.01.01`回限りのフォーマットサポート [＃10001](https://github.com/pingcap/tidb/pull/10001)
 -   `EXPLAIN`文によって返される結果で行数の推定値が正しく表示されない場合がある問題を修正[＃10044](https://github.com/pingcap/tidb/pull/10044)
--   `KILL TIDB [session id]`場合によっては文の実行を即座に停止できない問題を修正[＃9976](https://github.com/pingcap/tidb/pull/9976)
+-   `KILL TIDB [session id]`が場合によっては文の実行を即座に停止できない問題を修正[＃9976](https://github.com/pingcap/tidb/pull/9976)
 -   いくつかのケースにおける定数フィルタリング条件の述語プッシュダウンの問題を修正[＃10049](https://github.com/pingcap/tidb/pull/10049)
 -   読み取り専用ステートメントが一部のケースで正しく処理されない問題を修正[＃10048](https://github.com/pingcap/tidb/pull/10048)
 

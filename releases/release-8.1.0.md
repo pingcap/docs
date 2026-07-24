@@ -75,7 +75,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [＃51036](https://github.com/pingcap/tidb/issues/51036) @ [lyzx2001](https://github.com/lyzx2001)
 
-    v8.0.0 より前のTiDB Lightningには、論理インポート モードが[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) 、物理インポート モードが[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)あり、理解して構成するのは簡単ではありません。
+    v8.0.0 より前のTiDB Lightningには、論理インポート モードが[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection) 、物理インポート モードが[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)があり、理解して構成するのは簡単ではありません。
 
     TiDB Lightning v8.0.0では、物理インポートモードにおける[競合検出の古いバージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略が廃止され、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータ（実験的）を介して論理インポートモードと物理インポートモードの両方で競合検出戦略を制御できるようになり、このパラメータの設定が簡素化されました。さらに、物理インポートモードでは、 `replace`戦略により、インポート時に主キーまたは一意キーの競合が検出された場合に、最新のデータを保持し、古いデータを上書きすることがサポートされます。v8.1.0では、 `replace`戦略で競合データを処理する機能が一般提供（GA）されます。
 

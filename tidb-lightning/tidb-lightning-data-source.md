@@ -227,8 +227,8 @@ trim-last-separator = false
     A,,B,,
     ```
 
-    -   `trim-last-separator = false`場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
-    -   `trim-last-separator = true`場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
+    -   `trim-last-separator = false`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
+    -   `trim-last-separator = true`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
 -   このオプションは非推奨です。代わりにオプション`terminator`使用してください。
 
@@ -351,7 +351,7 @@ TiDB Lightningは現在、Amazon Aurora、Apache Hive、Snowflakeによって生
 
 この設定は、 Auroraスナップショットによってエクスポートされた parquet ファイルを一致させる方法のみを示しています。スキーマファイルは別途エクスポートして処理する必要があります。
 
-`mydumper.files`詳細については[カスタマイズされたファイルに一致](#match-customized-files)を参照してください。
+`mydumper.files`の詳細については[カスタマイズされたファイルに一致](#match-customized-files)を参照してください。
 
 ## 圧縮ファイル {#compressed-files}
 

@@ -51,7 +51,7 @@ COMMIT;
 
 ### トランザクションを開始する {#start-a-transaction}
 
-新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`いずれかを使用できます。
+新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`のいずれかを使用できます。
 
 ```sql
 BEGIN;

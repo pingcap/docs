@@ -124,7 +124,7 @@ TiDB バージョン: 4.0.5
     -   `BatchPointGet` の誤った使用法によって生じた誤った結果を修正 [＃19456](https://github.com/pingcap/tidb/pull/19456)
     -   `UnionScan` `Apply`演算子の内側にある場合に発生する誤った結果を修正します。 [＃19496](https://github.com/pingcap/tidb/pull/19496)
     -   `EXECUTE`文を使用して負荷の高いクエリログを出力することで発生するpanicを修正 [＃17419](https://github.com/pingcap/tidb/pull/17419)
-    -   結合キーが`ENUM`または`SET`場合のインデックス結合エラーを修正しました[＃19235](https://github.com/pingcap/tidb/pull/19235)
+    -   結合キーが`ENUM`または`SET`の場合のインデックス結合エラーを修正しました[＃19235](https://github.com/pingcap/tidb/pull/19235)
     -   インデックス列に`NULL`値が存在する場合にクエリ範囲を構築できない問題を修正しました [＃19358](https://github.com/pingcap/tidb/pull/19358)
     -   グローバル構成の更新によって発生するデータ競合の問題を修正[＃17964](https://github.com/pingcap/tidb/pull/17964)
     -   大文字スキーマで文字セットを変更するときに発生するpanic問題を修正 [＃19286](https://github.com/pingcap/tidb/pull/19286)

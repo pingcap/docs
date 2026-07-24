@@ -201,7 +201,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 -   [GORM](https://github.com/go-gorm/gorm)TiDB 統合テストを追加します。現在、TiDB は GORM によってサポートされるデフォルトのデータベースです。 [#6014](https://github.com/go-gorm/gorm/pull/6014) @[Icemap](https://github.com/Icemap)
 
     -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql)TiDB [#104](https://github.com/go-gorm/mysql/pull/104)の`AUTO_RANDOM`属性に適応します
-    -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql)TiDB に接続する際に、 `Unique`フィールドの`Unique`属性が`AutoMigrate`中に変更できない問題を修正しました。 [#105](https://github.com/go-gorm/mysql/pull/105)
+    -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql)は、TiDB に接続する際に、 `Unique`フィールドの`Unique`属性が`AutoMigrate`中に変更できない問題を修正しました。 [#105](https://github.com/go-gorm/mysql/pull/105)
     -   [GORMドキュメント](https://github.com/go-gorm/gorm.io)TiDB をデフォルトのデータベースとして言及しています [#638](https://github.com/go-gorm/gorm.io/pull/638)
 
     詳細については、 [GORMドキュメント](https://gorm.io/docs/index.html)を参照してください。

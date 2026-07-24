@@ -305,7 +305,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   `INFORMATION_SCHEMA`テーブルから`TIDB_DIRECT_PLACEMENT`列を削除します。
 -   SQL プラン管理 (SPM) バインディングの`status`値が変更されます。
     -   `using`を削除します。
-    -   `using`代わりに`enabled` (使用可能) を追加します。
+    -   `using`の代わりに`enabled` (使用可能) を追加します。
     -   `disabled`を追加します (利用不可)。
 -   DMはOpenAPIインターフェースを変更する
     -   内部メカニズムの変更により、タスク管理関連のインターフェースは以前の実験的版との互換性がありません。適応には新しいバージョン[DM OpenAPIドキュメント](/dm/dm-open-api.md)を参照してください。
@@ -445,7 +445,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   動的パーティションプルーニングモードでサブSELECT LIMITが期待どおりに動作しないバグを修正しました [＃32516](https://github.com/pingcap/tidb/issues/32516)
     -   `INFORMATION_SCHEMA.COLUMNS`表のビットデフォルト値の形式が間違っている、または一貫性がない問題を修正しました。 [＃32655](https://github.com/pingcap/tidb/issues/32655)
     -   サーバーの再起動後にパーティションテーブルの一覧表示でパーティションテーブルのプルーニングが機能しない可能性があるバグを修正[＃32416](https://github.com/pingcap/tidb/issues/32416)
-    -   `SET timestamp` `add column`後に間違ったデフォルトのタイムスタンプが使用される可能性があるバグを修正[＃31968](https://github.com/pingcap/tidb/issues/31968)
+    -   `SET timestamp`の後に`add column`で間違ったデフォルトのタイムスタンプが使用される可能性があるバグを修正[＃31968](https://github.com/pingcap/tidb/issues/31968)
     -   MySQL 5.5 または 5.6 クライアントから TiDB パスワードなしアカウントへの接続が失敗する可能性があるバグを修正[＃32334](https://github.com/pingcap/tidb/issues/32334)
     -   トランザクションで動的モードでパーティション テーブルを読み取るときに誤った結果が発生する問題を修正しました。 [＃29851](https://github.com/pingcap/tidb/issues/29851)
     -   TiDBが重複したタスクをTiFlash にディスパッチする可能性があるバグを修正しました [＃32814](https://github.com/pingcap/tidb/issues/32814)

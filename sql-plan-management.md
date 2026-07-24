@@ -37,7 +37,7 @@ SQL ステートメントまたは履歴実行プランに従って、SQL ステ
 CREATE [GLOBAL | SESSION] BINDING [FOR BindableStmt] USING BindableStmt;
 ```
 
-この文は`UPDATE` SQL実行プランをGLOBALまたはSESSIONレベルでバインドします。現在、TiDBでサポートされているバインド可能なSQL文（BindableStmt）には`DELETE` `SELECT` `INSERT` `REPLACE`あり、それぞれ`SELECT`サブクエリが含まれています。以下に例を示します。
+この文はSQL実行プランをGLOBALまたはSESSIONレベルでバインドします。現在、TiDBでサポートされているバインド可能なSQL文（BindableStmt）には`SELECT` 、 `DELETE` 、 `UPDATE` 、および`SELECT`サブクエリを含む`INSERT` / `REPLACE`があります。以下に例を示します。
 
 ```sql
 CREATE GLOBAL BINDING USING SELECT /*+ use_index(orders, orders_book_id_idx) */ * FROM orders;

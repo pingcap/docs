@@ -87,7 +87,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
         docker run -it -v ${doc-path}:/opt/data andelf/doc-build:0.1.9
         ```
 
-        コマンド中の`${doc-path}` 、PDF生成用のドキュメントのローカルパスです。例えば、パスが`/Users/${username}/Documents/GitHub/docs`場合、コマンドは以下のようになります。
+        コマンド中の`${doc-path}`は、PDF生成用のドキュメントのローカルパスです。例えば、パスが`/Users/${username}/Documents/GitHub/docs`の場合、コマンドは以下のようになります。
 
         ```bash
         docker run -it -v /Users/${username}/Documents/GitHub/docs:/opt/data andelf/doc-build:0.1.9

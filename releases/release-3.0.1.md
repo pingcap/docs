@@ -29,7 +29,7 @@ TiDB Ansible バージョン: 3.0.1
 -   ポイントクエリ中に列が複数回クエリされ、返された結果が NULL である場合に発生するpanic問題を修正しました[＃11226](https://github.com/pingcap/tidb/pull/11226)
 -   `RAND`関数使用する際に非スレッドセーフ`rand.Rand`によって発生するデータ競合問題を修正 [＃11169](https://github.com/pingcap/tidb/pull/11169)
 -   `oom-action="cancel"`が設定されている場合、SQL 文のメモリ使用量がしきい値を超えているにもかかわらず、この文の実行がキャンセルされず、返される結果が正しくないというバグを修正しました[＃11004](https://github.com/pingcap/tidb/pull/11004)
--   MemTracker `SHOW PROCESSLIST`メモリ使用量が正しく消去されなかったため、メモリ使用量が`0`ではないと表示される問題を修正しました[＃10970](https://github.com/pingcap/tidb/pull/10970)
+-   MemTrackerのメモリ使用量が正しく消去されなかったため、 `SHOW PROCESSLIST`でメモリ使用量が`0`ではないと表示される問題を修正しました[＃10970](https://github.com/pingcap/tidb/pull/10970)
 -   整数と非整数の比較結果が場合によっては正しくないというバグを修正[＃11194](https://github.com/pingcap/tidb/pull/11194)
 -   テーブルパーティションのクエリに明示的なトランザクションの述語が含まれている場合にクエリ結果が正しくないというバグを修正しました[＃11196](https://github.com/pingcap/tidb/pull/11196)
 -   `infoHandle` `NULL` になる可能性があるため、DDL ジョブのpanic問題を修正しました。 [＃11022](https://github.com/pingcap/tidb/pull/11022)

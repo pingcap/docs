@@ -35,7 +35,7 @@ MySQLではストレージ容量が限られているため、最大保存期間
 
 <div label="v5.4.0 and later versions">
 
-v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定することでリレーログを有効にできます。v5.4.0以降では、上流データソースをバインドする際に、DM-workerはデータソースの設定で`enable-relay`をチェックします。 `enable-relay`が`true`場合、このデータソースに対してリレーログ機能が有効になります。
+v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定することでリレーログを有効にできます。v5.4.0以降では、上流データソースをバインドする際に、DM-workerはデータソースの設定で`enable-relay`をチェックします。 `enable-relay`が`true`の場合、このデータソースに対してリレーログ機能が有効になります。
 
 詳しい設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
 
@@ -56,7 +56,7 @@ start-relay -s mysql-replica-01
 
 > **Note:**
 >
-> DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース設定ファイル内の設定項目`enable-relay`無効になっており、リレーログの有効化と無効化には`start-relay`と`stop-relay`のみを使用できます。DM は、 [データソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)ときに`enable-relay` `true`に設定されていることを検出した場合、以下のメッセージを出力します。
+> DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース設定ファイル内の設定項目`enable-relay`は無効になっており、リレーログの有効化と無効化には`start-relay`と`stop-relay`のみを使用できます。DM は、 [データソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)のときに`enable-relay`が`true`に設定されていることを検出した場合、以下のメッセージを出力します。
 >
 >     Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
 
@@ -310,7 +310,7 @@ purge:
 
     -   アップストリームでプライマリ インスタンスとセカンダリ インスタンスが切り替わると、DM-worker は増分シリアル番号を持つ新しい`subdir`ディレクトリを生成します。
 
-    -   上記の例では、ディレクトリ`7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001`場合、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7`アップストリーム データベース UUID であり、 `000001`ローカル`subdir`シリアル番号です。
+    -   上記の例では、ディレクトリ`7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001`の場合、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7`はアップストリーム データベース UUID であり、 `000001`はローカル`subdir`シリアル番号です。
 
 -   `server-uuid.index` : 現在利用可能な`subdir`ディレクトリのリストを記録します。
 

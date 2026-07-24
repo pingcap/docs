@@ -83,7 +83,7 @@ TiDB バージョン: 6.1.7
 
     -   Backup & Restore (BR)
 
-        -   `resolved lock timeout`場合によっては誤って報告される問題を修正[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [YuJuncen](https://github.com/YuJuncen)
+        -   `resolved lock timeout`が場合によっては誤って報告される問題を修正[＃43236](https://github.com/pingcap/tidb/issues/43236) @ [YuJuncen](https://github.com/YuJuncen)
         -   クラスターで TiKV ノードがクラッシュしたときにバックアップ速度が低下する問題を修正しました [＃42973](https://github.com/pingcap/tidb/issues/42973) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC

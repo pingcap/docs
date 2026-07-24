@@ -61,7 +61,7 @@ TiDB の`CHECK`制約の構文は MySQL と同じです。
 
 -   `[]` : `[]`内の内容はオプションです。
 -   `CONSTRAINT [symbol]` : `CHECK`の制約の名前を指定します。
--   `CHECK (expr)` : 制約条件を指定します。ここで、 `expr`ブール式である必要があります。テーブルの各行について、この式の計算結果は`TRUE` 、 `FALSE` 、または`UNKNOWN` ( `NULL`値の場合) のいずれかである必要があります。ある行の計算結果が`FALSE`場合、制約に違反していることを示します。
+-   `CHECK (expr)` : 制約条件を指定します。ここで、 `expr`はブール式である必要があります。テーブルの各行について、この式の計算結果は`TRUE` 、 `FALSE` 、または`UNKNOWN` ( `NULL`値の場合) のいずれかである必要があります。ある行の計算結果が`FALSE`の場合、制約に違反していることを示します。
 -   `[NOT] ENFORCED` : 制約チェックを実装するかどうかを指定します。これを使用して、制約`CHECK`有効または無効にすることができます。
 
 ### <code>CHECK</code>制約を追加する {#add-code-check-code-constraints}
@@ -151,7 +151,7 @@ CREATE TABLE users (
 INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 ```
 
-楽観的ロックと`tidb_constraint_check_in_place=OFF`場合：
+楽観的ロックと`tidb_constraint_check_in_place=OFF`の場合：
 
 ```sql
 BEGIN OPTIMISTIC;

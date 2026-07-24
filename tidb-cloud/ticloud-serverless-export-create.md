@@ -78,7 +78,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --gcs.サービスアカウントキー文字列        | GCS の base64 でエンコードされたサービス アカウント キーを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
 | --azblob.uri 文字列            | Azure BLOB URI を`azure://<account>.blob.core.windows.net/<container>/<file-path>`形式で指定します。ターゲット タイプが AZURE_BLOB の場合に必須です。 | いいえ | 非対話型モードでのみ動作します。         |
 | --azblob.sas-token 文字列      | Azure Blob の SAS トークンを指定します。                                                                                              | いいえ | 非対話型モードでのみ動作します。         |
-| --oss.uri 文字列               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |
+| --oss.uri 文字列               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`の場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |
 | --oss.access-key-id 文字列     | Alibaba Cloud OSS にアクセスするための AccessKey ID を指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
 | --oss.access-key-secret 文字列 | Alibaba Cloud OSS にアクセスするための AccessKey シークレットを指定します。                                                                      | いいえ | 非対話型モードでのみ動作します。         |
 | --csv.delimiter文字列          | CSV ファイル内の文字列型変数の区切り文字を指定します。(デフォルトは &quot;&quot;&quot;)                                                                  | いいえ | 非対話型モードでのみ動作します。         |
