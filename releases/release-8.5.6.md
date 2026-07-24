@@ -43,14 +43,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/identify-slow-queries).
 
-- The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
-
-    In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
-
-    Starting from v8.5.6, you can enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics across multiple dimensions, including `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
-
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
-
 ### SQL
 
 - Support column-level privilege management [#61706](https://github.com/pingcap/tidb/issues/61706) @[CbcWestwolf](https://github.com/CbcWestwolf) @[fzzf678](https://github.com/fzzf678)
@@ -106,7 +98,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 | [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856) | Newly added | Controls whether foreign key checks in pessimistic transactions use shared locks instead of exclusive locks on rows in the parent table. The default value is `OFF`, which means TiDB uses exclusive locks by default. |
 | [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856) | Newly added | Defines the maximum number of TiDB nodes that the Distributed eXecution Framework (DXF) tasks can use. The default value is `-1`, which indicates that automatic mode is enabled. In automatic mode, TiDB dynamically calculates the value as `min(3, tikv_nodes / 3)`, where `tikv_nodes` represents the number of TiKV nodes in the cluster. |
 | [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856) | Newly added | Improves join reorder optimization for certain multi-table join queries. If you set it to `ON` and safety conditions are met, the optimizer evaluates `Selection` conditions between consecutive join operators together with join order candidates. During join tree reconstruction, the optimizer pushes these conditions down to more appropriate positions whenever possible, allowing more tables to participate in join order optimization. |
-| [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v856) | Newly added | Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. The default value is `DISABLE`, which means the optimization is disabled. |
 | [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec-new-in-v856) | Newly added | Controls the maximum number of slow query log entries that can be written per TiDB node per second. <ul><li>A value of `0` (the default) means there is no limit on the number of slow query log entries written per second.</li><li>A value greater than `0` means TiDB writes at most the specified number of slow query log entries per second. Any excess log entries are discarded and not written to the slow query log file.</li></ul> |
 | [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) | Newly added | Defines the triggering rules for slow query logs. It supports combining multi-dimensional metrics to provide more flexible and fine-grained logging. |
 
@@ -117,7 +108,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 | TiKV | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | Newly added | Controls whether to enable MVCC-read-aware compaction. The default value is `false`. |
 | TiKV | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856) | Newly added | The weight multiplier applied to MVCC read activity when calculating the compaction priority score for a Region. The default value is `3.0`. |
 | TiKV | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856) | Newly added | The minimum number of MVCC versions scanned per read request to mark a Region as a compaction candidate. The default value is `1000`. |
-| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-network-io-collection-new-in-v856) | Newly added | Controls whether TiKV network traffic and logical I/O metrics are additionally collected in Top SQL. The default value is `false`. |
 | TiCDC | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv) | Newly added | Controls whether a header row is output in CSV files. The default value is `false`. This parameter applies only to the TiCDC new architecture. |
 
 ### System table changes
@@ -143,8 +133,6 @@ For TiDB clusters newly deployed in v8.5.5 (that is, not upgraded from versions 
 
     - Introduce a load-based compaction mechanism, which detects MVCC read overhead and prioritizes compaction for Regions with higher read cost to improve query performance [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     - Optimize the stale range cleanup logic during cluster scale-out and scale-in operations by deleting stale keys directly instead of cleaning them up through SST file ingestion, thereby reducing the impact on online request latency [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
-    - Support collecting TiKV network traffic and logical I/O metrics for Top SQL, which helps you diagnose SQL performance issues more accurately [#18815](https://github.com/tikv/tikv/issues/18815) @[yibin87](https://github.com/yibin87)
-
 + PD
 
     - Return `404` instead of `200` when deleting a non-existent label [#10089](https://github.com/tikv/pd/issues/10089) @[lhy1024](https://github.com/lhy1024)

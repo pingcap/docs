@@ -93,7 +93,8 @@ To configure the backup schedule for your TiDB Cloud Dedicated cluster, perform 
 
         > **Note**
         >
-        > - Backup jobs are automatically delayed when data import jobs are in progress. **DO NOT** run manual backups during data import or cluster scaling.
+        > - During data import, TiDB Cloud delays automatic backup jobs, and you cannot run manual backups.
+        > - During cluster scaling, TiDB Cloud delays automatic backup jobs. If the delay exceeds 30 minutes, TiDB Cloud skips the scheduled backup. To help ensure scheduled backups run successfully, avoid frequent cluster scaling around the scheduled backup time. **DO NOT** run manual backups during cluster scaling.
 
     - In **Backup Retention**, configure the minimum backup data retention period. The default period is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
 
@@ -275,13 +276,7 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
 
 2. Click **Restore**. The setting window displays.
 
-3. In **Restore Mode**, choose **Restore From Region**, indicating the region of backup stores.
-
-    > **Note**
-    >
-    > - The default value of the **Restore From Region** is the same as the backup cluster.
-
-4. In **Restore Mode**, choose to restore data of any point in time or a selected backup to a new cluster.
+3. In **Restore Mode**, choose to restore data of any point in time or a selected backup to a new cluster.
 
     <SimpleTab>
     <div label="Select Time Point">
@@ -303,19 +298,24 @@ To restore your TiDB Cloud Dedicated cluster data from a backup to a new cluster
     </div>
     </SimpleTab>
 
-5. In **Restore to Region**, select the same region as the **Primary Region** configured in the **Backup Setting**.
+4. In **Cloud Provider & Region**, select the target region for the new cluster.
 
-6. In the **Restore** window, you can also make the following changes if necessary:
+    > **Note**
+    >
+    > - By default, the new cluster is restored to the same region as the source cluster.
+    > - If [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) is enabled in **Backup Setting**, you can also choose to restore the new cluster to the **Secondary Region** configured for dual region backup.
+
+5. In the **Restore** window, you can also make the following changes if necessary:
 
     - Set the cluster name.
     - Update the port number of the cluster.
     - Increase node number, vCPU and RAM, and storage for the cluster.
 
-7. Click **Restore**.
+6. Click **Restore**.
 
    The cluster restore process starts and the **Password Settings** dialog box is displayed.
 
-8. In the **Password Settings** dialog box, set the root password to connect to your TiDB Cloud Dedicated cluster, and then click **Save**.
+7. In the **Password Settings** dialog box, set the root password to connect to your TiDB Cloud Dedicated cluster, and then click **Save**.
 
 ### Restore a deleted cluster
 

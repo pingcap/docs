@@ -57,11 +57,11 @@ data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql
 
 [tidb]
 # The information of target cluster
-host = ${host}                # For example, 172.16.32.1
-port = ${port}                # For example, 4000
+host = "${host}"              # For example, 172.16.32.1
+port = "${port}"              # For example, 4000
 user = "${user_name}"         # For example, "root"
 password = "${password}"      # For example, "rootroot"
-status-port = ${status-port}  # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
+status-port = "${status-port}"  # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
@@ -87,7 +87,6 @@ After the import is started, you can check the progress in one of the following 
 
 - Search the `progress` keyword in the `grep` log, which is updated every 5 minutes by default.
 - Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
-- Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 After the import is completed, TiDB Lightning automatically exits. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 

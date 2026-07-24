@@ -1,0 +1,389 @@
+---
+title: TiDB 8.5.7 Release Notes
+summary: Learn about the features, compatibility changes, improvements, and bug fixes in TiDB 8.5.7.
+---
+
+# TiDB 8.5.7 Release Notes
+
+Release date: July 9, 2026
+
+TiDB version: 8.5.7
+
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+
+## Features
+
+### Performance
+
+* Support CPU-aware hot Region scheduling to improve read load balancing [#5718](https://github.com/tikv/pd/issues/5718) [#19373](https://github.com/tikv/tikv/issues/19373) @[lhy1024](https://github.com/lhy1024)
+
+    In earlier versions, the hot Region scheduler balances read hotspots mainly by query rate and byte throughput. In some workloads, TiKV CPU usage remains uneven even when QPS and byte throughput appear balanced, such as when different queries have very different CPU costs or TiKV nodes have different performance profiles.
+
+    Starting from v8.5.7, TiKV reports read CPU usage for hot Regions in store heartbeats, and PD can use CPU usage as a scheduling dimension for read hot Region scheduling. This mechanism helps PD identify CPU-based read hotspots and balance them across TiKV stores more accurately.
+
+    In addition, PD adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and the [`min-hot-cpu-rate` and `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) scheduler configurations.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#cpu-aware-hot-region-scheduling-for-read-hotspots).
+
+### Reliability
+
+* Support limiting the number of connections that a single user can establish on a TiDB instance [#59203](https://github.com/pingcap/tidb/issues/59203) @[joccau](https://github.com/joccau)
+
+    Starting from v8.5.7, you can use the `max_user_connections` system variable to limit the maximum number of connections that a single user can establish to a single TiDB server instance. This helps prevent situations where excessive [token](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#token-limit) consumption by one user delays responses to requests from other users.
+
+    In addition, you can use `WITH MAX_USER_CONNECTIONS N` in `CREATE USER` and `ALTER USER` statements to limit the maximum number of connections that the corresponding user can establish.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/system-variables#max_user_connections-new-in-v857).
+
+### SQL
+
+* Support partial indexes to reduce index storage and DML maintenance overhead [#62664](https://github.com/pingcap/tidb/issues/62664) [#62761](https://github.com/pingcap/tidb/issues/62761) [#62758](https://github.com/pingcap/tidb/issues/62758) [#63447](https://github.com/pingcap/tidb/issues/63447) [#64344](https://github.com/pingcap/tidb/issues/64344) @[YangKeao](https://github.com/YangKeao) @[winoros](https://github.com/winoros) @[wjhuang2016](https://github.com/wjhuang2016)
+
+    Starting from v8.5.7, TiDB supports partial indexes, which index only rows that satisfy a predicate defined in the index `WHERE` clause. You can create a partial index using `CREATE INDEX ... WHERE ...`, `ALTER TABLE ... ADD INDEX ... WHERE ...`, or an index definition in `CREATE TABLE`.
+
+    Partial indexes are useful when you frequently query a subset of rows based on specific conditions or need unique constraints that apply only under specific conditions. Because rows outside the predicate are not written to the index, partial indexes help reduce index storage and can lower index maintenance overhead during `INSERT`, `UPDATE`, and `DELETE` operations.
+
+    To use partial indexes effectively, define a predicate that matches the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index#partial-indexes).
+
+### Observability
+
+* The Top SQL page in TiDB Dashboard now supports collecting and displaying TiKV network traffic and logical I/O metrics [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
+
+    In earlier versions, TiDB Dashboard identified Top SQL queries based only on CPU-related metrics, making it difficult to identify performance bottlenecks related to network or storage access in complex scenarios.
+
+    Starting from v8.5.7, you can enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to view metrics such as `Network Bytes` and `Logical IO Bytes` for TiKV nodes. You can also analyze these metrics across multiple dimensions, including `By Query`, `By Table`, `By DB`, and `By Region`, helping you identify resource hotspots more comprehensively.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/top-sql).
+
+### Data migration
+
+* DM supports foreign key causality for static one-to-one schema/table routing [#12350](https://github.com/pingcap/tiflow/issues/12350) @[OliverS929](https://github.com/OliverS929)
+
+    Starting from v8.5.7, DM supports foreign key causality for static one-to-one schema/table routing when `foreign_key_checks=1` and `syncer.worker-count > 1`.
+
+    Before the replication task starts, target schemas and foreign key definitions must be created in the downstream database. This feature does not support many-to-one or shard-merge routing, dynamic foreign key DDL during replication, options that change DML statement boundaries such as `syncer.compact` or `syncer.multiple-rows`, or safe-mode `UPDATE` statements that modify primary key or unique key values during replication. When foreign key causality is enabled, DM does not support hot configuration updates that modify `worker-count`, `case-sensitive`, route rules, block-allow-list rules, binlog filter rules, or `foreign_key_checks`. To change these settings, stop the task, update the configuration, and then restart the task.
+
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/dm-compatibility-catalog#foreign-key-cascade-operations).
+
+* TiCDC supports table routing [#4655](https://github.com/pingcap/ticdc/issues/4655) [#4941](https://github.com/pingcap/ticdc/issues/4941) [#4702](https://github.com/pingcap/ticdc/issues/4702) @[3AceShowHand](https://github.com/3AceShowHand)
+
+    Starting from v8.5.7, the [new TiCDC architecture](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture) supports table routing. You can use `target-schema` and `target-table` in the `sink.dispatchers` configuration of a changefeed to map upstream tables to specified downstream database or table names.
+
+    This feature is useful when downstream database and table naming conventions differ from upstream ones, or when you need to replicate multiple source databases to the same target database while keeping target table names unique. With table routing, you can provide stable and expected target database and table names for downstream systems.
+
+    This feature applies only to the new TiCDC architecture. For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/ticdc-table-routing).
+
+## Compatibility changes
+
+For TiDB clusters newly deployed in v8.5.6 (that is, v8.5.6 clusters that are not upgraded from earlier versions), you can smoothly upgrade to v8.5.7. Most changes in v8.5.7 are safe for routine upgrades, but this release also includes several behavior changes, MySQL compatibility changes, system variable updates, configuration parameter updates, and deprecated features. Before upgrading, make sure to carefully review this section.
+
+### Behavior changes
+
+* TiKV now rejects `max_ts` updates that are confirmed to be invalid by default, instead of only logging them. This change improves safety by preventing invalid timestamp updates without triggering a TiKV panic. To keep the previous log-only behavior, set [`storage.max-ts.action-on-invalid-update`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#action-on-invalid-update-new-in-v857) to `log` [#19755](https://github.com/tikv/tikv/issues/19755) @[ekexium](https://github.com/ekexium)
+* Starting from v8.5.7, TiDB enables [optimizer fix control `52869`](https://docs.pingcap.com/tidb/v8.5/optimizer-fix-controls#52869-new-in-v810) by default. This change allows the optimizer to consider `IndexMerge` automatically when alternative indexes exist, which can change query plans in some cases. [#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
+
+### MySQL compatibility
+
+* Support parsing the `LATERAL` syntax for derived tables to improve MySQL 8.0 compatibility, including comma joins, `CROSS JOIN LATERAL`, and `INNER JOIN LATERAL`
+
+    Currently, TiDB only supports parsing [the `LATERAL` derived table syntax](https://docs.pingcap.com/tidb/v8.5/lateral-derived-tables) and does not support executing queries that use this syntax. If you attempt to execute such a query, TiDB returns an error. You can track the progress of full execution capability for this feature in issue [#40328](https://github.com/pingcap/tidb/issues/40328).
+
+* Support `WITH MAX_USER_CONNECTIONS N` in `CREATE USER` and `ALTER USER` to improve MySQL compatibility. TiDB also adds the `max_user_connections` column to `mysql.user` and lets you use the `max_user_connections` system variable to control the maximum number of connections that a user can establish to a TiDB server instance.
+
+### System variables
+
+| Variable name | Change type | Description |
+|--------|------------------------------|------|
+| [`tidb_enable_telemetry`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_telemetry-new-in-v402) | Deprecated | Starting from v8.5.7, TiDB deprecates this system variable and the telemetry feature. This variable is retained only for compatibility and is no longer recommended.|
+| [`tidb_auto_analyze_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_analyze_concurrency-new-in-v840) | Modified | Changes the default value from `1` to `3` to accelerate statistics collection tasks and improve auto-analyze efficiency. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.|
+| [`tidb_auto_build_stats_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_auto_build_stats_concurrency-new-in-v650) | Modified | Changes the default value from `1` to `2` to improve the default performance of auto `ANALYZE`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.|
+| [`tidb_sysproc_scan_concurrency`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_sysproc_scan_concurrency-new-in-v650) | Modified | Changes the default value from `1` to `4` to accelerate scan operations performed when TiDB executes internal SQL statements. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.|
+| [`max_user_connections`](https://docs.pingcap.com/tidb/v8.5/system-variables#max_user_connections-new-in-v857) | Newly added | Controls the maximum number of connections that a user can establish to a TiDB server instance. The default value is `0`, which means there is no limit. If the value of this variable exceeds `max_connections`, TiDB uses `max_connections` as the effective limit.|
+| [`performance_schema_session_connect_attrs_size`](https://docs.pingcap.com/tidb/v8.5/system-variables#performance_schema_session_connect_attrs_size-new-in-v857) | Newly added | Controls the maximum total size of connection attributes for each session. The default value is `4096` bytes. When the size exceeds this limit, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.|
+| [`tidb_enable_batch_query_region`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_batch_query_region-new-in-v857) | Newly added | Controls whether TiDB batches point queries for Region information to PD through the `QueryRegion` gRPC stream. The default value is `OFF`. When enabled, this feature can reduce the number of requests sent to PD and lower the CPU overhead of the PD leader in some scenarios.|
+| [`tidb_enable_cache_prepare_stmt`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_cache_prepare_stmt-new-in-v857) | Newly added | Controls whether to cache the results of `Prepare` statements. The default value is `OFF`. Currently, this variable is experimental and is not recommended for use in production environments.|
+| [`tidb_enable_strict_not_null_check`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_strict_not_null_check-new-in-v857) | Newly added | Controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column. The default value is `ON`. If your application depends on the earlier permissive behavior of writing implicit default values, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks.|
+| [`tidb_opt_enable_alternative_logical_plans`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_alternative_logical_plans-new-in-v857) | Newly added | Controls whether the optimizer additionally builds a logical candidate plan that does not decorrelate in correlated subquery decorrelation scenarios. The default value is `OFF`.|
+| [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v857) | Newly added | Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. The default value is `DISABLE`, which means the optimization is disabled. |
+
+### Configuration parameters
+
+| Configuration file or component | Configuration parameter | Change type | Description |
+| -------- | -------- | -------- | -------- |
+| TiDB | [`enable-telemetry`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-telemetry-new-in-v402) | Deprecated | Starting from v8.5.7, TiDB deprecates this configuration item and the telemetry feature. This item is retained only for compatibility and is no longer recommended.|
+| TiKV | [`backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#backupgcp-v2-enable-new-in-v857) | Newly added | Controls whether TiKV uses the `gcp_v2` external storage backend for GCS full backup and restore. The default value is `true`. When enabled, TiKV uses `gcp_v2`; when disabled, TiKV uses the legacy GCS implementation.|
+| TiKV | [`log-backup.gcp-v2-enable`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#log-backupgcp-v2-enable-new-in-v857) | Newly added | Controls whether TiKV uses the `gcp_v2` external storage backend for GCS log backup. The default value is `true`. When enabled, TiKV uses `gcp_v2`; when disabled, TiKV uses the legacy GCS implementation.|
+| TiKV | [`resource-control.admission-max-delayed-count`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#admission-max-delayed-count-new-in-v857) | Newly added | Specifies the maximum number of concurrent requests (reads and writes combined) that TiKV can hold in the admission control delay. The default value is `10000`. Set this value to `0` for unlimited concurrent delays.|
+| TiKV | [`resource-control.baseline-burst-pct`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#baseline-burst-pct-new-in-v857) | Newly added | Specifies the percentage of headroom above a resource group's historical RU baseline before TiKV considers the group over baseline. The default value is `20.0`.|
+| TiKV | [`resource-control.bg-compaction-pressure-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bg-compaction-pressure-threshold-new-in-v857) | Newly added | Specifies the threshold, as a percentage of `storage.flow-control.soft-pending-compaction-bytes-limit`, at which background write I/O throttling begins. The default value is `70.0`.|
+| TiKV | [`resource-control.bg-cpu-throttle-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bg-cpu-throttle-threshold-new-in-v857) | Newly added | Specifies the CPU utilization percentage threshold at which background task throttling begins. The default value is `60.0`.|
+| TiKV | [`resource-control.bg-write-io-ceiling`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bg-write-io-ceiling-new-in-v857) | Newly added | Specifies the maximum write I/O rate allowed for background tasks when compaction pressure is below `bg-compaction-pressure-threshold`. The default value is `"100GB"`.|
+| TiKV | [`resource-control.bg-write-io-floor`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#bg-write-io-floor-new-in-v857) | Newly added | Specifies the minimum write I/O rate guaranteed to background tasks even at maximum compaction pressure. The default value is `"10MB"`.|
+| TiKV | [`resource-control.enable-fair-scheduling`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-fair-scheduling-new-in-v857) | Newly added | Controls whether to enable two-phase RU-based fair scheduling for read requests. The default value is `false`.|
+| TiKV | [`resource-control.enable-read-admission-control`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-read-admission-control-new-in-v857) | Newly added | Controls whether to enable admission control for read requests. The default value is `false`.|
+| TiKV | [`resource-control.enable-write-admission-control`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#enable-write-admission-control-new-in-v857) | Newly added | Controls whether to enable admission control for write requests. The default value is `false`.|
+| TiKV | [`resource-control.fg-cpu-throttle-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#fg-cpu-throttle-threshold-new-in-v857) | Newly added | Specifies the CPU utilization percentage threshold above which foreground traffic protection is fully activated. The default value is `70.0`. This threshold must be greater than `bg-cpu-throttle-threshold`.|
+| TiKV | [`resource-control.historical-usage-window-mins`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#historical-usage-window-mins-new-in-v857) | Newly added | Specifies the size of the sliding time window in minutes that TiKV uses to compute per-resource-group historical RU baselines. The default value is `15`, and TiKV restart is required for changes to take effect.|
+| TiKV | [`resource-metering.enable-network-io-collection`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#resource-meteringenable-network-io-collection-new-in-v857) | Newly added | Controls whether TiKV collects network traffic and logical I/O information for Top SQL in addition to CPU data. The default value is `false`.|
+| TiKV | [`storage.max-ts.action-on-invalid-update`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#action-on-invalid-update-new-in-v857) | Newly added | Determines how TiKV handles invalid `max-ts` update requests. The default value is `"error"`, which means that TiKV returns an error and stops processing the request when it detects invalid `max-ts` update requests.|
+| TiKV | [`storage.max-ts.cache-sync-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#cache-sync-interval-new-in-v857) | Newly added | Controls the interval at which TiKV updates its local PD TSO cache. The default value is `"15s"`.|
+| TiKV | [`storage.max-ts.max-drift`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#max-drift-new-in-v857) | Newly added | Specifies the maximum time by which the timestamp of a read or write request can exceed the PD TSO cached in TiKV. The default value is `"60s"`.|
+| TiCDC | [`sink.dispatchers`](https://docs.pingcap.com/tidb/v8.5/ticdc-changefeed-config#dispatchers) | Updated | When the changefeed downstream is an MQ sink, you can use `dispatchers` to configure event dispatchers. Starting from v8.5.7, when you use the [new TiCDC architecture](https://docs.pingcap.com/tidb/v8.5/ticdc-architecture), you can also use `dispatchers` to configure [table routing](https://docs.pingcap.com/tidb/v8.5/ticdc-table-routing).|
+
+### Compiler versions
+
+* Upgrade the Go compiler version of TiDB from go1.25.8 to go1.25.10, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure smooth compilation. 
+* Upgrade the Rust compiler version of TiKV from nightly-2023-12-28 to nightly-2025-02-28, which improves the TiKV performance. If you are a TiKV developer, upgrade your Rust compiler version to ensure smooth compilation.
+
+## Deprecated features
+
+* Starting from v8.5.7, the [telemetry](https://docs.pingcap.com/tidb/v8.5/telemetry) feature in TiDB and TiDB Dashboard is deprecated.
+
+## Removed features
+
+* Starting from TiDB v8.5.7, TiDB Lightning no longer supports the web interface. [#67697](https://github.com/pingcap/tidb/issues/67697) @[D3Hunter](https://github.com/D3Hunter)
+
+    To import data with TiDB Lightning, use the TiDB Lightning command-line tools: [`tidb-lightning`](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-command-line-full#tidb-lightning) for import tasks and [`tidb-lightning-ctl`](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-command-line-full#tidb-lightning-ctl) for checkpoint and troubleshooting operations.
+
+    For new data import workloads, you can also use the [`IMPORT INTO`](https://docs.pingcap.com/tidb/v8.5/sql-statement-import-into) statement.
+
+    If this change affects your workflow, comment on [#67697](https://github.com/pingcap/tidb/issues/67697).
+
+## Improvements
+
++ TiDB
+
+    - Improve the performance of `ORDER BY ... LIMIT` queries that contain `OR` and `IN` conditions. The optimizer can now choose `IndexMerge` more effectively and supports merge sort for `IN` condition paths in `IndexMerge`, enabling `Limit` pushdown to partial paths and reducing unnecessary row reads and I/O overhead. [#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate)
+    - Improve slow query observability by logging client connection attributes in the slow query log and making them queryable in `INFORMATION_SCHEMA.SLOW_QUERY` and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`; `performance_schema_session_connect_attrs_size` now controls attribute truncation, and truncated bytes are recorded in `_truncated` [#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba)
+    - Add the `tidb_enable_strict_not_null_check` system variable to control whether TiDB enforces strict `NOT NULL` checks for single-row `INSERT` statements, helping reduce upgrade risk for workloads that depend on the previous non-strict behavior [#68108](https://github.com/pingcap/tidb/issues/68108) @[xhebox](https://github.com/xhebox)
+    - Improve the performance and stability of runaway query watch handling, including more reliable watch synchronization across TiDB instances and more efficient background flushing and syncing [#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato)
+    - Add the global system variable `tidb_enable_batch_query_region` to control whether TiDB uses batched Region queries to PD, improving the efficiency of fetching Region information; this variable is disabled by default [#58439](https://github.com/pingcap/tidb/issues/58439) [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato)
+    - Improve the optimizer performance for queries on tables with many indexes by pruning irrelevant indexes before cost estimation, reducing query planning time and avoiding unnecessary full-range out-of-range estimation [#63856](https://github.com/pingcap/tidb/issues/63856) @[terry1purcell](https://github.com/terry1purcell) @[qw4990](https://github.com/qw4990)
+    - Enhance the **Ping Latency** panel in the Blackbox exporter dashboard by adding a `Max Ping Latency` metric using the `max_over_time` alert rule. This change aligns the dashboard visualization with the TiDB alerting logic, helping you identify peak latency spikes and verify alert triggers more easily [#1071](https://github.com/pingcap/monitoring/issues/1071) @[yibin87](https://github.com/yibin87)
+    - Support partial ordered index optimization for `ORDER BY ... LIMIT/OFFSET` queries on matching prefix indexes. When `tidb_opt_partial_ordered_index_for_topn` is set to `COST`, TiDB can use the partial ordering of indexes to reduce full table scans and improve `TOPN` query performance [#63280](https://github.com/pingcap/tidb/issues/63280) [#65813](https://github.com/pingcap/tidb/issues/65813) [#66338](https://github.com/pingcap/tidb/issues/66338) @[elsa0520](https://github.com/elsa0520) @[xzhangxian1008](https://github.com/xzhangxian1008) @[winoros](https://github.com/winoros)
+    - Optimize the performance of high-cardinality `GROUP BY` queries that use Stream Aggregate by reducing CPU overhead in memory tracking [#68475](https://github.com/pingcap/tidb/issues/68475) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Mitigate coprocessor request bursts for `IndexLookUp` queries on highly partitioned tables with local indexes to improve query stability and reduce performance spikes [#67545](https://github.com/pingcap/tidb/issues/67545) @[gengliqi](https://github.com/gengliqi)
+    - Optimize CPU and memory usage for `INSERT ... ON DUPLICATE KEY UPDATE` statements by reducing unnecessary expression buffer allocations during execution [#65003](https://github.com/pingcap/tidb/issues/65003) @[windtalker](https://github.com/windtalker)
+    - Optimize query planning performance for statements with large `IN` lists by reducing CPU and memory overhead during range building [#67756](https://github.com/pingcap/tidb/issues/67756) @[winoros](https://github.com/winoros)
+    - Improve the default performance and consistency of auto `ANALYZE` by aligning the default values of `tidb_auto_build_stats_concurrency` and `tidb_sysproc_scan_concurrency` with manual `ANALYZE` [#67195](https://github.com/pingcap/tidb/issues/67195) @[0xTars](https://github.com/0xTars)
+    - Add the `tidb_opt_enable_alternative_logical_plans` system variable to enable alternative logical plan optimization for subquery decorrelation [#66676](https://github.com/pingcap/tidb/issues/66676) @[AilinKid](https://github.com/AilinKid)
+    - Add the `tidb_enable_cache_prepare_stmt` system variable to cache repeated prepared statements in the same session and reduce CPU overhead for prepare-per-request workloads [#67815](https://github.com/pingcap/tidb/issues/67815) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Improve join reordering so that TiDB can handle projections between join groups, reducing unnecessary Cartesian joins and allowing the `LEADING` hint to take effect in more queries [#50229](https://github.com/pingcap/tidb/issues/50229) @[Reminiscent](https://github.com/Reminiscent)
+    - Support nested parentheses in the `LEADING` optimizer hint to specify more complex join orders, such as `LEADING((a, b), (c, d))` [#63253](https://github.com/pingcap/tidb/issues/63253) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Improve join plan selection to avoid choosing inefficient index joins when the estimated probe rows are close to a full scan, improving query performance in some `HASHAGG` + join scenarios [#67610](https://github.com/pingcap/tidb/issues/67610) @[qw4990](https://github.com/qw4990)
+    - Improve query performance for nested `OR` conditions by enabling more efficient `IndexMerge` plans and allowing redundant global filters to be removed so `LIMIT` can be pushed down [#65822](https://github.com/pingcap/tidb/issues/65822) @[time-and-fate](https://github.com/time-and-fate)
+    - Support the `FLUSH STATS_DELTA` statement to persist pending optimizer statistics deltas for all, database, or table scopes [#65668](https://github.com/pingcap/tidb/issues/65668) @[0xPoe](https://github.com/0xPoe)
+    - Improve query optimization by enabling the optimizer fix control for considering `IndexMerge` when alternative indexes exist by default, so TiDB can choose `IndexMerge` plans in more applicable queries [#26764](https://github.com/pingcap/tidb/issues/26764) @[time-and-fate](https://github.com/time-and-fate)
+    - Support caching prepared and non-prepared queries that use `set_var` and `resource_group` hints to improve plan cache hit rates for hinted queries [#60920](https://github.com/pingcap/tidb/issues/60920) @[qw4990](https://github.com/qw4990)
+    - Optimize `ORDER BY ... LIMIT` and `ORDER BY ... TOPN` queries that use `IndexMerge` by pushing `Limit` or `TopN` down to individual partial paths when possible, reducing unnecessary scans and sorting in some query plans [#68773](https://github.com/pingcap/tidb/issues/68773) @[time-and-fate](https://github.com/time-and-fate)
+    - Improve `ANALYZE` performance on newly bootstrapped clusters by using clustered primary keys for the `mysql.stats_*` system tables [#66751](https://github.com/pingcap/tidb/issues/66751) @[0xPoe](https://github.com/0xPoe)
+    - Improve graceful shutdown handling by returning an error for `COM_PING` requests so proxies and load balancers can detect that a TiDB server is shutting down and stop sending new connections [#58007](https://github.com/pingcap/tidb/issues/58007) @[dveeden](https://github.com/dveeden)
+    - Accelerate `INSERT` statements on tables with many generated columns, significantly improving performance for wide-table workloads [#67916](https://github.com/pingcap/tidb/issues/67916) @[bb7133](https://github.com/bb7133)
+    - Support viewing session connection attributes on the Slow Query page in TiDB Dashboard, including an optional list column and a dedicated detail tab, while remaining compatible with earlier TiDB versions that do not provide this field [#1899](https://github.com/pingcap/tidb-dashboard/issues/1899) @[yibin87](https://github.com/yibin87)
+    - Improve transactional timestamp validation by enforcing exact max-ts checks for non-TiDB requests, reducing the risk that external components use future timestamps incorrectly [#68799](https://github.com/pingcap/tidb/issues/68799) @[ekexium](https://github.com/ekexium)
+    - Optimize auto-commit optimistic transactions by skipping lock resolution on the first execution, reducing latency in high-contention scenarios [#58675](https://github.com/pingcap/tidb/issues/58675) @[ekexium](https://github.com/ekexium)
+
++ TiKV
+
+    - Add dynamic resource group isolation to protect sustained workloads from traffic spikes by deprioritizing requests from groups that exceed their historical RU baselines and optionally delaying or rejecting over-baseline requests under high CPU load, with new `resource-control` configuration options that are disabled by default [#19607](https://github.com/tikv/tikv/issues/19607) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Use a global rate limiter for all TiKV background resource groups and aggregate related background resource-control metrics without the `resource_group` label, requiring affected dashboards and alerts to be updated [#19497](https://github.com/tikv/tikv/issues/19497) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Improve TiKV unified read pool scheduling fairness by allowing higher-priority requests to evict lower-priority queued tasks when the queue is full, helping ensure fairer resource allocation across tenants and background traffic [#19386](https://github.com/tikv/tikv/issues/19386) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Mark PITR-restored `Put` and `Delete` write CF records with the physical import transaction source during apply log processing so TiCDC can ignore PITR-imported data [#19669](https://github.com/tikv/tikv/issues/19669) @[YuJuncen](https://github.com/YuJuncen)
+    - Add automatic fail-fast exit for TiKV nodes that detect disk I/O hangs to speed up recovery from unresponsive stores [#19626](https://github.com/tikv/tikv/issues/19626) @[hbisheng](https://github.com/hbisheng)
+    - Improve TiKV stability and security by upgrading vulnerable third-party dependencies for TiKV 8.5 and aligning the required compatibility fixes with upstream [#19713](https://github.com/tikv/tikv/issues/19713) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Support rank-based limit processing in TiKV to return more accurate results for queries that use truncate key expressions [#19388](https://github.com/tikv/tikv/issues/19388) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Improve load-based Region splitting in TiKV by relaxing the default split thresholds and adding observability for split-key selection and CPU fallback decisions, helping operators handle hot Regions more effectively [#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024)
+
++ PD
+
+    - Add PD maintenance endpoints and `pd-ctl` commands to serialize TiKV maintenance tasks and prevent Raft quorum loss by ensuring that only one maintenance task is active at a time [#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
+    - Disable split scatter by default in PD to avoid unexpected scheduling after Region splits; you can still enable it by setting `schedule.split-scatter-schedule-limit` to a positive value [#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
+    - Optimize unsafe recovery empty-region plan generation to improve performance and reduce timeout risk in large clusters with many Regions and gaps [#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996)
+    - Improve PD transaction duration metrics to better reflect production latency distributions and improve observability in dashboards and alerts [#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
+
++ TiFlash
+
+    - Remove unnecessary gRPC connections in TiFlash to reduce repeated invalid connection logs after TiKV nodes are scaled in [#9806](https://github.com/pingcap/tiflash/issues/9806) @[gengliqi](https://github.com/gengliqi)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - Support using Workload Identity Federation to access Google Cloud Storage backup buckets in BR [#19442](https://github.com/tikv/tikv/issues/19442) @[Leavrth](https://github.com/Leavrth)
+        - Mitigate the impact of BR backup and restore on online DDL by loading only the necessary database schema information, reducing schema reload overhead and DDL blocking time [#64833](https://github.com/pingcap/tidb/issues/64833) @[YuJuncen](https://github.com/YuJuncen)
+        - Improve PITR compatibility with TiCDC by marking PITR-restored write CF entries as physical import transactions so TiCDC can ignore PITR-imported data [#68660](https://github.com/pingcap/tidb/issues/68660) @[YuJuncen](https://github.com/YuJuncen)
+        - Add the `--region-scan-concurrency` parameter to limit the number of Region scan requests that BR sends to PD at the same time, improving restore stability when many Region scans are issued [#66821](https://github.com/pingcap/tidb/issues/66821) @[Leavrth](https://github.com/Leavrth)
+
+    + TiCDC
+
+        - Optimize TiCDC event store write and iterator paths to reduce memory allocations and improve event processing performance [#4928](https://github.com/pingcap/ticdc/issues/4928) @[lidezhu](https://github.com/lidezhu)
+        - Remove TiCDC's dependency on `tidb_ddl_history` for capturing DDLs and rely on `tidb_ddl_job` to support accelerated table creation [#2272](https://github.com/pingcap/ticdc/issues/2272) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Optimize TiCDC hot paths to reduce CPU overhead and improve replication performance in high-throughput scenarios [#5107](https://github.com/pingcap/ticdc/issues/5107) @[lidezhu](https://github.com/lidezhu)
+        - Add redo checkpoint and resolved timestamp metrics to improve the observability of TiCDC redo log progress [#5264](https://github.com/pingcap/ticdc/issues/5264) @[wk989898](https://github.com/wk989898)
+        - Mitigate high etcd pressure when many TiCDC changefeeds enter the warning state by avoiding unnecessary persistence of unchanged runtime states [#5268](https://github.com/pingcap/ticdc/issues/5268) @[wk989898](https://github.com/wk989898)
+        - Enhance TiCDC monitoring by showing the error occurrence time in the Changefeed Error Details Grafana panel to help operators diagnose changefeed failures more efficiently [#5085](https://github.com/pingcap/ticdc/issues/5085) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Mitigate TiCDC incremental scan CPU spikes by limiting split table merge scheduling to at most 8 merge operators per group in each checker run [#5047](https://github.com/pingcap/ticdc/issues/5047) @[hongyunyan](https://github.com/hongyunyan)
+        - Improve TiCDC scheduling responsiveness and callback correctness for the cloud storage sink by acknowledging DML events when they enter the write pipeline instead of waiting for flush completion, reducing wake latency while keeping checkpoint semantics unchanged [#4269](https://github.com/pingcap/ticdc/issues/4269) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Reduce TiCDC bootstrap head-of-line blocking across changefeeds to improve changefeed creation and recovery throughput when sink initialization is slow [#5139](https://github.com/pingcap/ticdc/issues/5139) @[hongyunyan](https://github.com/hongyunyan)
+        - Improve TiCDC Kafka sink stability by retrying transient producer send failures by default [#1920](https://github.com/pingcap/ticdc/issues/1920) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Add the `max-retry` Kafka sink URI parameter and enable bounded retries for transient Kafka producer send failures by default to improve TiCDC Kafka sink stability [#12655](https://github.com/pingcap/tiflow/issues/12655) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Add a local spool to the TiCDC cloud storage sink to stage accepted encoded DML locally before flushing to external storage, reducing memory pressure and improving stability when object storage is slow [#3745](https://github.com/pingcap/ticdc/issues/3745) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Support replicating DDL statements for partial indexes [#3698](https://github.com/pingcap/ticdc/issues/3698) @[YangKeao](https://github.com/YangKeao)
+        - Add metrics for the TiCDC blackhole sink to improve observability of changefeed replication and DDL processing [#5362](https://github.com/pingcap/ticdc/issues/5362) @[wk989898](https://github.com/wk989898)
+        - Optimize TiCDC log puller performance to reduce CPU usage and memory allocations when processing resolved-ts-heavy workloads, especially for small batches [#4697](https://github.com/pingcap/ticdc/issues/4697) @[asddongmen](https://github.com/asddongmen)
+        - Optimize TiCDC MySQL sink conflict detection to improve replication performance [#4582](https://github.com/pingcap/ticdc/issues/4582) @[wk989898](https://github.com/wk989898)
+        - Improve TiCDC resolve lock observability and avoid duplicate resolve attempts for the same Region to reduce unnecessary lock resolution work and make troubleshooting easier through new metrics and dashboards [#5016](https://github.com/pingcap/ticdc/issues/5016) @[lidezhu](https://github.com/lidezhu)
+        - Add a Changefeed Operation History panel in TiCDC Grafana dashboards to help investigate recent user-initiated changefeed operations such as create, update, pause, resume, and delete [#5087](https://github.com/pingcap/ticdc/issues/5087) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Support parsing and replicating DDL statements that use partial indexes, including `CREATE TABLE`, `CREATE INDEX`, and `ALTER TABLE ... ADD INDEX` with `WHERE` clauses [#12503](https://github.com/pingcap/tiflow/issues/12503) @[YangKeao](https://github.com/YangKeao)
+        - Support table routing for the MySQL sink so routed changefeeds apply DDL and DML to the target schema and table names [#4818](https://github.com/pingcap/ticdc/issues/4818) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Add a TiCDC metric to display the error information of changefeeds in the warning or failed state, making it easier to diagnose problems through monitoring instead of logs [#4498](https://github.com/pingcap/ticdc/issues/4498) @[wk989898](https://github.com/wk989898)
+
+    + TiDB Lightning
+
+        - Support automatically detecting the file format from the file name in TiDB `IMPORT INTO` when `FORMAT` is not specified, simplifying data import for CSV, SQL, and Parquet files [#59540](https://github.com/pingcap/tidb/issues/59540) @[JQWong7](https://github.com/JQWong7)
+
+## Bug fixes
+
++ TiDB
+
+    - Fix the issue that TiDB does not close disconnected client connections promptly when a query is still running, causing the connection to remain in `SHOW PROCESSLIST` until the statement finishes [#57531](https://github.com/pingcap/tidb/issues/57531) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that stale Region cache entries might continue to be used after `RegionNotFound` errors, causing repeated retries, delayed Region reloads, and extra cross-AZ traffic [#1892](https://github.com/tikv/client-go/issues/1892) [#69197](https://github.com/pingcap/tidb/issues/69197) @[ekexium](https://github.com/ekexium)
+    - Fix the potential crash that occurs when evaluating vectorized `ILIKE` with constant string arguments [#67001](https://github.com/pingcap/tidb/issues/67001) @[zanmato1984](https://github.com/zanmato1984)
+    - Fix the issue that point `UPDATE` statements might use assignment conversion semantics that differ from normal `UPDATE` statements when assigning negative values to unsigned numeric columns or integer values to `SET` columns, causing inconsistent results, out-of-range errors, or MySQL compatibility issues [#63455](https://github.com/pingcap/tidb/issues/63455) [#67534](https://github.com/pingcap/tidb/issues/67534) @[fzzf678](https://github.com/fzzf678)
+    - Fix the issue that TiDB might crash with `SIGSEGV` during concurrent query execution in rare cases [#66391](https://github.com/pingcap/tidb/issues/66391) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that queries using user variables with different casing might generate suboptimal execution plans and fail to use index range scans [#66339](https://github.com/pingcap/tidb/issues/66339) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that TiDB might run out of memory when multiple sessions concurrently hit global bindings and corrupt the global binding cache [#68015](https://github.com/pingcap/tidb/issues/68015) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that TiDB might return incorrect results for queries that use outer joins with conditions that are sensitive to `NULL` values. The issue occurs because the optimizer incorrectly determines whether an outer join can be simplified to an inner join. Affected scenarios include `WHERE` clauses that contain predicates or expressions such as `OR`, `IS NULL`, `COALESCE()`, `NULLIF()`, `CAST()`, or `IN (NULL, ...)`, as well as outer join queries involving derived tables or `UNION ALL`. This issue might cause incorrect results, missing rows, empty results, or unexpected rows that contain `NULL` values. [#58793](https://github.com/pingcap/tidb/issues/58793) [#59162](https://github.com/pingcap/tidb/issues/59162) [#60080](https://github.com/pingcap/tidb/issues/60080) [#60081](https://github.com/pingcap/tidb/issues/60081) [#60370](https://github.com/pingcap/tidb/issues/60370) [#61327](https://github.com/pingcap/tidb/issues/61327) [#66824](https://github.com/pingcap/tidb/issues/66824) [#66825](https://github.com/pingcap/tidb/issues/66825) [#67330](https://github.com/pingcap/tidb/issues/67330) [#67373](https://github.com/pingcap/tidb/issues/67373) @[winoros](https://github.com/winoros)
+    - Fix the issue that prepared statements on outer joins might skip the prepared plan cache when the null-reject check is independent of parameter values [#67048](https://github.com/pingcap/tidb/issues/67048) @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB might log unnecessary warnings about asynchronous index histogram loading during query planning for full-range index scans [#64791](https://github.com/pingcap/tidb/issues/64791) @[terry1purcell](https://github.com/terry1purcell)
+    - Fix the issue that plans generated when synchronous statistics loading times out and falls back to pseudo or partial statistics might be cached and reused after the required statistics are loaded [#66585](https://github.com/pingcap/tidb/issues/66585) @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB might generate an incorrect join order for outer joins and return wrong query results [#63887](https://github.com/pingcap/tidb/issues/63887) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiDB might choose a suboptimal join order for some queries involving outer joins, which can lead to less efficient execution plans [#67774](https://github.com/pingcap/tidb/issues/67774) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that `tidb_ignore_inlist_plan_digest` might be unexpectedly reset during upgrade when its row is missing from `mysql.global_variables` [#68136](https://github.com/pingcap/tidb/issues/68136) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that TiDB might choose an inefficient `MergeJoin` plan with an underestimated `IndexFullScan` cost when queries with `ORDER BY` and `LIMIT` are optimized, which can cause poor query performance [#67595](https://github.com/pingcap/tidb/issues/67595) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that queries using expression indexes with duplicate expressions might return the `Unexpected missing column` error because TiDB resolves the wrong hidden generated column [#67552](https://github.com/pingcap/tidb/issues/67552) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that `ANALYZE` might not stop promptly after `KILL QUERY` or cancellation, causing the analyze job to hang [#65818](https://github.com/pingcap/tidb/issues/65818) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that manual `ANALYZE` might become slower after upgrading a cluster from versions earlier than v7.6 because `tidb_analyze_distsql_scan_concurrency` is not initialized from the existing `tidb_distsql_scan_concurrency` setting [#65423](https://github.com/pingcap/tidb/issues/65423) @[winoros](https://github.com/winoros)
+    - Fix the issue that TiDB cannot convert some non-correlated `IN` subqueries into correlated execution plans, which can prevent index lookups from being used and lead to less efficient query plans [#66320](https://github.com/pingcap/tidb/issues/66320) @[terry1purcell](https://github.com/terry1purcell)
+    - Fix the issue that queries using `CAST(... AS BINARY)` on indexed string columns might use an index full scan instead of an index range scan [#67899](https://github.com/pingcap/tidb/issues/67899) @[terry1purcell](https://github.com/terry1purcell)
+    - Fix the potential panic that occurs when executing `ANALYZE TABLE` on indexed stored generated columns that depend on skipped column types such as `JSON` [#66359](https://github.com/pingcap/tidb/issues/66359) [#66918](https://github.com/pingcap/tidb/issues/66918) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that TiDB might generate incorrect join orders for queries with outer joins, which can lead to incorrect query results [#67290](https://github.com/pingcap/tidb/issues/67290) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that `SHOW ANALYZE STATUS` displays a negative `Remaining_seconds` value when the session `time_zone` is ahead of UTC [#67230](https://github.com/pingcap/tidb/issues/67230) @[0xPoe](https://github.com/0xPoe)
+    - Fix the potential TiDB server crash that occurs during `ANALYZE` on partitioned tables, including auto-analyze, and reports `fatal error: concurrent map read and map write` [#68457](https://github.com/pingcap/tidb/issues/68457) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that partial indexes might be incorrectly used to enforce foreign keys, which can cause deletes or updates on parent rows to miss matching child rows and leave orphan rows [#68587](https://github.com/pingcap/tidb/issues/68587) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that `INSERT` statements on tables without generated columns suffer a performance regression, reducing throughput for common workloads [#68129](https://github.com/pingcap/tidb/issues/68129) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that `CONCAT_WS()` returns the `ERROR 3854` error instead of a binary result when it combines `utf8mb4_0900_bin` columns with `BLOB` columns [#68845](https://github.com/pingcap/tidb/issues/68845) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that autocommit `INSERT`, `UPDATE`, and `DELETE` statements experience a performance regression because of connection monitoring overhead [#68633](https://github.com/pingcap/tidb/issues/68633) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that `GRANT` and `REVOKE` on mixed-case schema names might fail, create duplicate privilege rows, or fail to match existing privilege rows when `new_collation_enabled` is disabled; after the fix, such mixed-case identifiers map to the same privilege record [#66867](https://github.com/pingcap/tidb/issues/66867) [#68406](https://github.com/pingcap/tidb/issues/68406) @[expxiaoli](https://github.com/expxiaoli)
+    - Fix the issue that autocommit write statements might not be interrupted promptly after the client disconnects [#68236](https://github.com/pingcap/tidb/issues/68236) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that non-TiDB transaction-related requests might incorrectly pass future timestamp validation and cause inconsistent behavior in `ScanLock`, backup range, `CheckTxnStatus`, `Cleanup`, and `CheckSecondaryLocks` [#19656](https://github.com/tikv/tikv/issues/19656) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that foreign key cascade updates in pessimistic transactions might fail with `use Op::SharedLock to prewrite on a shared lock` when `tidb_foreign_key_check_in_shared_lock` is enabled [#68133](https://github.com/pingcap/tidb/issues/68133) @[wfxr](https://github.com/wfxr)
+
++ TiKV
+
+    - Fix the issue that the resolved_ts module consumes excessive memory when the number of Regions is large [#19535](https://github.com/tikv/tikv/issues/19535) @[glorv](https://github.com/glorv)
+    - Fix the issue that TiKV might start the next compaction round immediately after a long-running round when MVCC read-aware compaction is enabled, resulting in insufficient statistics collection for load-based compaction [#19362](https://github.com/tikv/tikv/issues/19362) @[mittalrishabh](https://github.com/mittalrishabh)
+    - Fix the issue that TiKV memory usage increases over time in stable workloads when using raft-engine [#19544](https://github.com/tikv/tikv/issues/19544) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that manually evicting Regions from the TiKV in-memory engine leaves Regions stuck in the `Evicting` state and prevents them from being automatically loaded again [#19584](https://github.com/tikv/tikv/issues/19584) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that TiKV consumes excessive memory in raft message queues when a store uses multiple gRPC raft connections [#19542](https://github.com/tikv/tikv/issues/19542) @[glorv](https://github.com/glorv)
+    - Fix the issue that aborted CPU profiling requests in TiKV leave profiling stuck in the active state, causing subsequent profiling requests to fail with `Already in CPU Profiling` [#19703](https://github.com/tikv/tikv/issues/19703) @[hujiatao0](https://github.com/hujiatao0)
+    - Fix the issue that TiKV might retain excessive memory in the Raft log after entries are persisted, causing abnormally high memory usage on replicas [#19593](https://github.com/tikv/tikv/issues/19593) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that TiKV might enter an infinite retry loop and repeatedly log `invalid store ID ..., not found` errors when resolving the address of a removed tombstone store from PD [#17875](https://github.com/tikv/tikv/issues/17875) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Fix the issue that TiKV GCS backups might fail when the access token is close to expiry during long-running uploads [#19659](https://github.com/tikv/tikv/issues/19659) @[RidRisR](https://github.com/RidRisR)
+    - Fix the issue that the TiKV `apply_msg_len` metric has no data points during normal traffic, which affects monitoring of apply message length distribution [#18800](https://github.com/tikv/tikv/issues/18800) @[squalfof](https://github.com/squalfof)
+    - Fix the potential panic that occurs when PD merges a Region immediately after a split because TiKV reports incorrect pending peer information in Region heartbeats [#17992](https://github.com/tikv/tikv/issues/17992) @[hbisheng](https://github.com/hbisheng)
+    - Fix the issue that the TiKV In-Memory Engine debug API `/debug/ime/cached_regions` cannot be accessed [#19546](https://github.com/tikv/tikv/issues/19546) @[glorv](https://github.com/glorv)
+    - Fix the issue that the `server.grpc_memory_pool_quota` configuration in TiKV cannot be changed dynamically [#19104](https://github.com/tikv/tikv/issues/19104) @[glorv](https://github.com/glorv)
+    - Fix the issue that TiKV does not throttle background traffic when online traffic uses most CPU resources, which can increase online request latency under high load [#19401](https://github.com/tikv/tikv/issues/19401) @[mittalrishabh](https://github.com/mittalrishabh)
+
++ PD
+
+    - Fix the issue that PD resource control rate limiting might become weaker under high concurrency because the token bucket accrues excess tokens [#10744](https://github.com/tikv/pd/issues/10744) @[YuhaoZhang00](https://github.com/YuhaoZhang00)
+    - Fix a goroutine leak in the resource group client controller when token bucket notification timers are reset [#9745](https://github.com/tikv/pd/issues/9745) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that SQL requests to resource groups might experience about 1 second latency spikes when the configured RU fill rate is much higher than the actual RU consumption [#10251](https://github.com/tikv/pd/issues/10251) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that PD affinity scheduling might treat a Region as properly replicated even when the highest isolation level required by placement rules is not satisfied, which can lead to incorrect replica placement decisions [#10149](https://github.com/tikv/pd/issues/10149) @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the potential PD panic that occurs when Region heartbeat breakdown metrics encounter a brief backward jump in the host's monotonic clock, causing the `counter cannot decrease in value` error [#10901](https://github.com/tikv/pd/issues/10901) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that PD incorrectly reports affinity checker operator limit metrics when no affinity groups are configured [#10687](https://github.com/tikv/pd/issues/10687) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that PD followers cannot serve read-only Region HTTP APIs from their local synced Region cache unless the `PD-Allow-Follower-Handle: true` header is explicitly set [#10681](https://github.com/tikv/pd/issues/10681) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that a PD follower might stop receiving Region updates when the PD leader fails to send Region sync responses or closes the sync stream during shutdown [#10684](https://github.com/tikv/pd/issues/10684) @[okJiang](https://github.com/okJiang)
+    - Fix a Region syncer issue that might leave a PD follower waiting on a stale stream after the PD leader fails to send updates and removes the stream from memory [#10666](https://github.com/tikv/pd/issues/10666) @[okJiang](https://github.com/okJiang)
+    - Fix the issue that PD might keep scheduling redundant subtree update tasks after flow-only Region heartbeat updates, increasing memory pressure in large clusters [#10722](https://github.com/tikv/pd/issues/10722) @[JmPotato](https://github.com/JmPotato)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - Fix the issue that BR restore still fails version compatibility checks when `--check-requirements=false` is specified, preventing restore from proceeding even though version checking is explicitly disabled [#67402](https://github.com/pingcap/tidb/issues/67402) @[RidRisR](https://github.com/RidRisR)
+        - Fix the issue that BR `log truncate` might fail in S3-compatible storage when the lock file is at the storage root [#65897](https://github.com/pingcap/tidb/issues/65897) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR point-in-time restore might run out of memory during metadata restoration when the backup contains many `mDB:*` meta keys across multiple versions [#67196](https://github.com/pingcap/tidb/issues/67196) @[vldmit](https://github.com/vldmit)
+        - Fix the issue that BR might fail to access a custom AWS S3 endpoint when AWS FIPS endpoint mode is enabled [#68966](https://github.com/pingcap/tidb/issues/68966) @[v01dstar](https://github.com/v01dstar)
+        - Fix the issue that BR physically restores the `mysql.user` table during snapshot restore when the target cluster has a different column count, which can overwrite the newer table schema instead of falling back to logical restore [#68861](https://github.com/pingcap/tidb/issues/68861) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that `br operator base64ify` does not preserve the S3 Object Lock status in the generated storage backend [#68551](https://github.com/pingcap/tidb/issues/68551) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR log backup checkpoint advancement might get stuck when TiKV does not respond to a flush subscription request [#68411](https://github.com/pingcap/tidb/issues/68411) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that BR point-in-time restore with table filters might create duplicate databases or modify the target database unexpectedly when restoring tables from the same database multiple times [#68908](https://github.com/pingcap/tidb/issues/68908) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that BR log backup metrics for the current last Region ID and leader store ID are missing from the `/metrics` endpoint [#62839](https://github.com/pingcap/tidb/issues/62839) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR log backup to S3 might get stuck under heavy write pressure because multipart uploads exceed the 10000-part limit [#19162](https://github.com/tikv/tikv/issues/19162) @[vldmit](https://github.com/vldmit)
+        - Fix the issue that BR silently loses unrecognized backup metadata such as `merge_option` attributes when restoring a backup created by a newer BR version with an older restore tool. Now BR reports the compatibility issue during requirement checks [#67016](https://github.com/pingcap/tidb/issues/67016) @[JoyC-dev](https://github.com/JoyC-dev)
+        - Fix the issue that BR log backup might leak external backup directories or leave stale read locks during truncate or migration loading failures [#67819](https://github.com/pingcap/tidb/issues/67819) @[RidRisR](https://github.com/RidRisR)
+        - Fix the issue that BR S3 permission checks might fail when credentials are scoped to the configured prefix, causing backup or restore tasks to fail before starting [#68583](https://github.com/pingcap/tidb/issues/68583) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR might not write the PiTR blocklist when resuming a restore from a checkpoint after a failed restore with log backup enabled [#68171](https://github.com/pingcap/tidb/issues/68171) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that a BR log backup task startup hangs when initializing more than 32768 Regions [#19615](https://github.com/tikv/tikv/issues/19615) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that BR restore might fail with the `Transaction is too large` error when logically restoring system tables by adding the `--txn-total-size-limit` parameter to adjust the transaction memory quota [#66806](https://github.com/pingcap/tidb/issues/66806) @[Leavrth](https://github.com/Leavrth)
+
+    + TiCDC
+
+        - Fix the issue that TiCDC Grafana dashboards display overlapping panels and incorrect section ordering [#4508](https://github.com/pingcap/ticdc/issues/4508) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC does not report the actual error when event iterator creation or the first read fails, which can hide the root cause of event scan failures [#5005](https://github.com/pingcap/ticdc/issues/5005) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC Kafka changefeeds might leak Kafka client instances and cause memory usage to keep increasing when sending DDL events or checkpoints fails and retries are triggered [#12666](https://github.com/pingcap/tiflow/issues/12666) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that TiCDC incremental scans use excessive CPU and advance checkpoints slowly when scanning insert-like prewrite locks with missing old values [#19565](https://github.com/tikv/tikv/issues/19565) @[zier-one](https://github.com/zier-one)
+        - Fix the issue that TiCDC might scan data below the checkpoint after a dispatcher reset, which might cause a panic in the event store [#4492](https://github.com/pingcap/ticdc/issues/4492) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might leak connections, storage handles, or background goroutines when component initialization fails [#4516](https://github.com/pingcap/ticdc/issues/4516) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC changefeeds might stall when the available memory quota is 0 due to a deadlock in the event processing pipeline [#4899](https://github.com/pingcap/ticdc/issues/4899) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might skip downstream remove-only cleanup when a later changefeed removal request arrives while an earlier close request is still being processed [#4825](https://github.com/pingcap/ticdc/issues/4825) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC MySQL-compatible sinks get stuck when `tidb_cdc.ddl_ts_v1` is missing and the downstream returns nonstandard missing-table error codes [#5003](https://github.com/pingcap/ticdc/issues/5003) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC might leak Kafka client connections and background resources when Kafka sink initialization fails or the sink is closed [#12572](https://github.com/pingcap/tiflow/issues/12572) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the issue that TiCDC resolved-ts lag and CPU usage periodically increase when replicating a large number of active tables [#4887](https://github.com/pingcap/ticdc/issues/4887) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC replication might stall after a local EventService removes a dispatcher and the collector re-registers it locally [#5088](https://github.com/pingcap/ticdc/issues/5088) @[lidezhu](https://github.com/lidezhu)
+        - Fix the potential panic that occurs when TiCDC initializes a Pulsar sink and the producer initialization fails [#4937](https://github.com/pingcap/ticdc/issues/4937) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC might keep inaccurate memory accounting after a path is removed, causing incorrect pause or release feedback in dynstream [#4644](https://github.com/pingcap/ticdc/issues/4644) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that TiCDC exits with code 1 during graceful `SIGTERM` shutdown [#4563](https://github.com/pingcap/ticdc/issues/4563) @[pingyu](https://github.com/pingyu)
+        - Fix the issue that TiCDC might fail to start the redo log sink because redo configuration is not initialized correctly [#4512](https://github.com/pingcap/ticdc/issues/4512) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the potential panic that occurs when TiCDC applies redo DDL events for columns with time-related default values such as `CURRENT_TIMESTAMP` [#4699](https://github.com/pingcap/ticdc/issues/4699) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC might load changefeeds from another cluster after restart when multiple TiCDC clusters share the same PD/etcd and their cluster IDs have a prefix relationship [#4756](https://github.com/pingcap/ticdc/issues/4756) @[wk989898](https://github.com/wk989898)
+        - Fix a data race in TiCDC redo readiness during bootstrap and failover that might cause failover tasks to report `DATA RACE` warnings [#4402](https://github.com/pingcap/ticdc/issues/4402) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that TiCDC fails to replicate cross-database `RENAME TABLE` operations when the source database name is not specified [#4424](https://github.com/pingcap/ticdc/issues/4424) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC changefeeds might fail or get stuck when the log puller encounters a transient gRPC `EOF` error [#4880](https://github.com/pingcap/ticdc/issues/4880) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC changefeeds initialize slowly and experience high maintainer latency when replicating a very large number of tables [#4951](https://github.com/pingcap/ticdc/issues/4951) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC CLI does not return an error when querying a non-existent changefeed [#4648](https://github.com/pingcap/ticdc/issues/4648) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that calling the TiCDC `unsafe/service_gc_safepoint` API closes the PD client unexpectedly [#4638](https://github.com/pingcap/ticdc/issues/4638) @[wk989898](https://github.com/wk989898)
+        - Fix the potential panic that occurs when TiCDC retries maintainer bootstrap after a bootstrap failure, so the changefeed reports the original error instead of crashing [#4509](https://github.com/pingcap/ticdc/issues/4509) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC might leave shared locks unresolved during stale lock resolution, which can affect shared-lock compatibility in nextgen deployments [#5206](https://github.com/pingcap/ticdc/issues/5206) @[wfxr](https://github.com/wfxr)
+        - Fix the issue that TiCDC might unexpectedly reschedule a dispatcher after it has been removed [#4874](https://github.com/pingcap/ticdc/issues/4874) @[wlwilliamx](https://github.com/wlwilliamx)
+        - Fix the issue that TiCDC might leave a data replication gap after a restart when a recreated dispatcher starts from a stale checkpoint [#3846](https://github.com/pingcap/ticdc/issues/3846) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC might hang and become unresponsive when processing coordinator messages [#4440](https://github.com/pingcap/ticdc/issues/4440) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC create, pause, and remove changefeed operations might hang for a long time or remain stuck after the request context is canceled [#4417](https://github.com/pingcap/ticdc/issues/4417) @[wk989898](https://github.com/wk989898)
+        - Fix the potential panic that occurs when TiCDC handles fast Region errors or replication worker shutdown during log pulling [#4472](https://github.com/pingcap/ticdc/issues/4472) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might spend excessive time handling duplicate block status requests under syncpoint-enabled workloads with frequent DDLs, causing maintainer slow logs and barrier processing delays [#4957](https://github.com/pingcap/ticdc/issues/4957) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC `cli changefeed list` might show changefeeds from different clusters after the etcd cluster membership changes [#5137](https://github.com/pingcap/ticdc/issues/5137) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC thread pool shutdown might hang when tasks are submitted or rescheduled during shutdown [#4640](https://github.com/pingcap/ticdc/issues/4640) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC waits about 5 seconds before advancing a barrier for some DDLs such as `CREATE TABLE ... LIKE ...` when a dispatcher's `WAITING` status is temporarily ignored by the maintainer [#4810](https://github.com/pingcap/ticdc/issues/4810) @[zier-one](https://github.com/zier-one)
+        - Fix the issue that TiCDC changefeed lag increases and CPU usage becomes high after pausing and resuming many changefeeds [#4653](https://github.com/pingcap/ticdc/issues/4653) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC fails to replicate cross-database `CREATE TABLE ... LIKE` statements when the source table schema is not explicitly specified [#5025](https://github.com/pingcap/ticdc/issues/5025) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might replicate cross-schema `CREATE VIEW` statements incorrectly when the view definition uses unqualified source table names, causing downstream replication to fail or the view to reference the wrong table [#5026](https://github.com/pingcap/ticdc/issues/5026) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC uses incorrect etcd endpoints after PD nodes are scaled in or out, causing removed PD members to be added back repeatedly [#12368](https://github.com/pingcap/tiflow/issues/12368) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC redo dispatchers might get stuck in the `Initializing` state when an invalid global checkpoint is committed, causing redo metadata to stop advancing [#4703](https://github.com/pingcap/ticdc/issues/4703) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC changefeed initialization is slow when handling a very large number of tables [#5014](https://github.com/pingcap/ticdc/issues/5014) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might leave a stale cluster-level service GC safepoint in PD after the last changefeed is removed, which might block upstream GC progress [#4610](https://github.com/pingcap/ticdc/issues/4610) @[hongyunyan](https://github.com/hongyunyan)
+        - Fix the issue that TiCDC might fail to decode or incorrectly handle multi-table DDL events when `MultipleTableInfos` is non-empty [#4415](https://github.com/pingcap/ticdc/issues/4415) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that TiCDC corrupts partition names containing escaped backticks when replicating `EXCHANGE PARTITION` DDL statements [#4450](https://github.com/pingcap/ticdc/issues/4450) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might generate out-of-order checkpoint updates in the event store during concurrent subscription checkpoint updates, causing inconsistent replication progress tracking [#4992](https://github.com/pingcap/ticdc/issues/4992) @[lidezhu](https://github.com/lidezhu)
+        - Fix the issue that TiCDC might deadlock during shutdown and block cleanup when the EventCollector is still receiving messages [#4434](https://github.com/pingcap/ticdc/issues/4434) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC might generate inconsistent index names in the downstream when replicating anonymous `ADD INDEX` DDL statements, especially during retries or `CREATE TABLE LIKE` replication [#2327](https://github.com/pingcap/ticdc/issues/2327) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that TiCDC might keep stale CDC connections after a connection watchdog abort, delaying connection cleanup and causing changefeed replication to get stuck when sink memory is full [#19610](https://github.com/tikv/tikv/issues/19610) @[wk989898](https://github.com/wk989898)
+        - Fix the issue that a re-registered capture in TiCDC might be removed again after it comes back online because of a stale delayed-removal tombstone [#4695](https://github.com/pingcap/ticdc/issues/4695) @[hongyunyan](https://github.com/hongyunyan)
+
+    + Dumpling
+
+        - Fix the issue that Dumpling might overwrite chunk files and produce incomplete dump results when `--rows/-r` or `--filesize/-F` is used with an `--output-filename-template` that does not include a standalone `{{.Index}}` outside conditional blocks [#68611](https://github.com/pingcap/tidb/issues/68611) @[D3Hunter](https://github.com/D3Hunter)

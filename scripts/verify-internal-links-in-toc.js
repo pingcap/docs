@@ -19,6 +19,7 @@ const CLOUD_TOC_FILES = [
   "TOC-tidb-cloud-premium.md",
   "TOC-tidb-cloud-starter.md",
   "TOC-tidb-cloud-essential.md",
+  "TOC-tidb-cloud-byoc.md",
 ];
 
 const PREFIX_TO_TOC = [

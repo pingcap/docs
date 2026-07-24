@@ -67,3 +67,9 @@ The following video introduces key features of TiDB.
 - [TiDB Storage](/tidb-storage.md)
 - [TiDB Computing](/tidb-computing.md)
 - [TiDB Scheduling](/tidb-scheduling.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="Why #TiDB?" type="video" link="https://www.youtube.com/watch?v=aWBNNPm21zg" imgSrc="https://i.ytimg.com/vi/aWBNNPm21zg/hqdefault.jpg" author="PingCAP" duration="2 mins" />
+</RelatedResources>

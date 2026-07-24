@@ -1,15 +1,22 @@
 ---
-title: Changefeed (Beta)
+title: Changefeed
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
-# Changefeed (Beta)
+# Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka and MySQL.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .essential }}} supports streaming data to Apache Kafka and MySQL.
 
 > **Note:**
 >
-> - Currently, TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} instance.
+> - Currently, the changefeed feature for {{{ .essential }}} is only available upon request. To request this feature, do the following:
+>
+>     1. In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), click **?**.
+>     2. Click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals).
+>     3. Create a ticket. In the "Description" field, fill in "Apply for changefeed".
+>     4. Click **Submit**.
+>
+> - TiDB Cloud only allows up to 10 changefeeds per {{{ .essential }}} instance.
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 
 ## Restrictions
@@ -175,7 +182,9 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 
 ## Changefeed billing
 
-Changefeeds are free of charge during the beta phase.
+For existing {{{ .essential }}} instances created before July 1, 2026, changefeeds are free of charge.
+
+Starting July 1, 2026, changefeeds are a billable feature for newly created {{{ .essential }}} instances. For billing details, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
 
 ## Changefeed states
 

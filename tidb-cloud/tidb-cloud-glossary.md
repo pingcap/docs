@@ -43,13 +43,13 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 ### Data App
 
-A Data App in [Data Service (beta)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
+A Data App in [Data Service (PREVIEW)](#data-service) is a collection of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
 For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
 ### Data Service
 
-Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
+Data Service (PREVIEW) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
 
 For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
 
@@ -140,7 +140,11 @@ The place where the data of deleted [TiDB Cloud resources](#tidb-cloud-resource)
 
 Once a backed-up TiDB Cloud resource is deleted, the existing backup files of it are moved to the Recycle Bin. For backup files from automatic backups, the Recycle Bin will retain them for a specified period. You can configure the backup retention in **Backup Setting**, and the default is 7 days. For backup files from manual backups, there is no expiration date. To avoid data loss, remember to restore the data to a new TiDB Cloud resource in time. Note that if a TiDB Cloud resource **has no backup**, the deleted resource will not be displayed in the Recycle Bin.
 
-Currently, only {{{ .premium }}} instances and {{{ .dedicated }}} clusters support the Recycle Bin feature.
+Currently, only the following types of TiDB Cloud resources support the Recycle Bin feature:
+
+- {{{ .essential }}} instances
+- {{{ .premium }}} instances
+- {{{ .dedicated }}} clusters
 
 ### region
 

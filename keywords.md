@@ -386,6 +386,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
 - LASTVAL
+- LATERAL (R)
 - LEAD (R-Window)
 - LEADING (R)
 - LEAVE (R)
@@ -580,6 +581,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - RESTORES
 - RESTRICT (R)
 - RESUME
+- RETURNING
 - REUSE
 - REVERSE
 - REVOKE (R)
@@ -665,6 +667,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - STATS_BUCKETS
 - STATS_COL_CHOICE
 - STATS_COL_LIST
+- STATS_DELTA
 - STATS_EXTENDED
 - STATS_HEALTHY
 - STATS_HISTOGRAMS

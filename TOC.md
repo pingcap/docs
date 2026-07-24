@@ -66,6 +66,7 @@
       - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
     - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
     - [Log Filter](/ticdc/ticdc-filter.md)
+    - [Table Routing](/ticdc/ticdc-table-routing.md)
     - [DDL Replication](/ticdc/ticdc-ddl.md)
     - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
   - Monitor and Alert
@@ -272,6 +273,7 @@
         - [Subquery Related Optimizations](/subquery-optimization.md)
         - [Column Pruning](/column-pruning.md)
         - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        - [LATERAL Derived Tables](/lateral-derived-tables.md)
         - [Eliminate Max/Min](/max-min-eliminate.md)
         - [Predicates Push Down](/predicate-push-down.md)
         - [Partition Pruning](/partition-pruning.md)

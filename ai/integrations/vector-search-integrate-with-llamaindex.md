@@ -10,12 +10,12 @@ This tutorial demonstrates how to integrate [TiDB Vector Search](/ai/concepts/ve
 
 > **Note:**
 >
-> - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 > **Tip**
 >
-> You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) in Jupyter Notebook, or run it directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
+> You can view the complete [sample code](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb) in Jupyter Notebook, or run it directly in the [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb) online environment.
 
 ## Prerequisites
 
@@ -67,11 +67,11 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 Configure the environment variables depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} or Essential instance, take the following steps to obtain the connection string and configure environment variables:
+For a {{{ .starter }}} instance, take the following steps to obtain the connection string and configure environment variables:
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -147,11 +147,11 @@ The following are descriptions for each parameter:
 
 #### Step 4.1 Download the sample document
 
-In your project directory, create a directory named `data/paul_graham/` and download the sample document [`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt) from the [run-llama/llama_index](https://github.com/run-llama/llama_index) GitHub repository.
+In your project directory, create a directory named `data/paul_graham/` and download the sample document [`paul_graham_essay.txt`](https://github.com/run-llama/llama_index/blob/main/docs/examples/data/paul_graham/paul_graham_essay.txt) from the [run-llama/llama_index](https://github.com/run-llama/llama_index) GitHub repository.
 
 ```shell
 !mkdir -p 'data/paul_graham/'
-!wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
+!wget 'https://raw.githubusercontent.com/run-llama/llama_index/main/docs/examples/data/paul_graham/paul_graham_essay.txt' -O 'data/paul_graham/paul_graham_essay.txt'
 ```
 
 #### Step 4.2 Load the document

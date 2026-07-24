@@ -5,14 +5,22 @@ summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 
 # Integrate TiDB Cloud with Datadog
 
-TiDB Cloud supports Datadog integration. You can configure TiDB Cloud to send metrics about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDB Cloud supports integration with Datadog. You can configure TiDB Cloud to send metrics for your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+
+> **Note:**
+>
+> This document only applies to TiDB Cloud Dedicated.
+>
+> For TiDB Cloud Starter, the Datadog integration is not available.
+> For TiDB Cloud Essential, see [Integrate TiDB Cloud Essential with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential).
+> For TiDB Cloud Premium, see [Integrate TiDB Cloud Premium with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
 
 ## Datadog integration version
 
-TiDB Cloud has supported the project-level Datadog integration (Beta) since March 4, 2022. Starting from July 31, 2025, TiDB Cloud introduces the cluster-level Datadog integration (Preview). Starting from September 30, 2025, the cluster-level Datadog integration becomes generally available (GA).
+TiDB Cloud has supported the project-level Datadog integration (Beta) since March 4, 2022. Starting from July 31, 2025, TiDB Cloud introduces the cluster-level Datadog integration (PREVIEW). Starting from September 30, 2025, the cluster-level Datadog integration becomes generally available (GA).
 
 - **Cluster-level Datadog integration**: if no legacy project-level Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud provides the cluster-level Datadog integration for your organization to experience the latest enhancements.
-- **Legacy project-level Datadog integration (Beta)**: if at least one legacy project-level Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. Note that the legacy project-level Datadog integrations will be deprecated on October 31, 2025. If your organization is still using these legacy integrations, follow [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
+- **Legacy project-level Datadog integration (Beta)**: if at least one legacy project-level Datadog or New Relic integration remains undeleted within your organization by July 31, 2025, TiDB Cloud retains both existing and new integrations at the project level for your organization to avoid affecting current dashboards. Note that the legacy project-level Datadog integration was deprecated on October 31, 2025. If your organization is still using these legacy integrations, follow [Migrate Datadog and New Relic Integrations](/tidb-cloud/migrate-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 
@@ -22,9 +30,9 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 
 - To set up third-party metrics integration for TiDB Cloud, you must have the `Organization Owner` or `Project Owner` access in TiDB Cloud. To view the integration page or access configured dashboards via the provided links, you need at least the `Project Viewer` role to access the target TiDB Cloud Dedicated clusters under your project in TiDB Cloud.
 
-## Limitation
+## Limitations
 
-- Datadog integrations are now only available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+- Datadog integration is not available for [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances.
 
 - Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
@@ -32,7 +40,7 @@ TiDB Cloud has supported the project-level Datadog integration (Beta) since Marc
 
 ## Steps
 
-### Step 1. Integrate with your Datadog API Key
+### Step 1. Integrate with your Datadog API key
 
 Depending on your [Datadog integration version](#datadog-integration-version), the steps to access the integration page are different.
 

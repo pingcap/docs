@@ -1,0 +1,240 @@
+---
+title: Loading from Stage
+summary: "{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using LakeSQL, and then employ the COPY INTO command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see Input & Output File Formats."
+---
+
+# Loading from Stage
+
+{{{ .lake }}} enables you to easily import data from files uploaded to either the user stage or an internal/external stage. To do so, you can first upload the files to a stage using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md), and then employ the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command to load the data from the staged file. Please note that the files must be in a format supported by {{{ .lake }}}, otherwise the data cannot be imported. For more information on the file formats supported by {{{ .lake }}}, see [Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md).
+
+![image](/media/tidb-cloud-lake/load-data-from-stage.png)
+
+The following tutorials offer a detailed, step-by-step guide to help you effectively navigate the process of loading data from files in a stage.
+
+## Before You Begin
+
+Before you start, make sure you have completed the following tasks:
+
+- Download and save the sample file [books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet) to a local folder. The file contains two records:
+
+```text
+Transaction Processing,Jim Gray,1992
+Readings in Database Systems,Michael Stonebraker,2004
+```
+
+- Create a table with the following SQL statements in {{{ .lake }}}:
+
+```sql
+USE default;
+CREATE TABLE books
+(
+    title VARCHAR,
+    author VARCHAR,
+    date VARCHAR
+);
+```
+
+## Tutorial 1: Loading from User Stage
+
+Follow this tutorial to upload the sample file to the user stage and load data from the staged file into {{{ .lake }}}.
+
+### Step 1: Upload Sample File
+
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
+
+    ```sql
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @~
+
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
+
+2. Verify the staged file:
+
+```sql
+LIST @~;
+
+name         |size|md5                               |last_modified                |creator|
+-------------+----+----------------------------------+-----------------------------+-------+
+books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-27 16:03:51.000 +0000|       |
+```
+
+### Step 2. Copy Data into Table
+
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
+
+    ```sql
+    COPY INTO books FROM @~ files=('books.parquet') FILE_FORMAT = (TYPE = PARQUET);
+    ```
+
+2. Verify the loaded data:
+
+```sql
+SELECT * FROM books;
+
+---
+title                       |author             |date|
+----------------------------+-------------------+----+
+Transaction Processing      |Jim Gray           |1992|
+Readings in Database Systems|Michael Stonebraker|2004|
+```
+
+## Tutorial 2: Loading from Internal Stage
+
+Follow this tutorial to upload the sample file to an internal stage and load data from the staged file into {{{ .lake }}}.
+
+### Step 1. Create an Internal Stage
+
+1. Create an internal stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
+
+    ```sql
+    CREATE STAGE my_internal_stage;
+    ```
+
+2. Verify the created stage:
+
+    ```sql
+    SHOW STAGES;
+
+    ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │        name       │ stage_type │   storage_type   │        url       │     endpoint     │ has_credentials │   has_encryption_key  │   storage_params  │  file_format_options │      creator     │  created_on │ comment │       owner      │
+    │       String      │   String   │ Nullable(String) │ Nullable(String) │ Nullable(String) │     Boolean     │        Boolean        │ Nullable(Variant) │        Variant       │ Nullable(String) │  Timestamp  │  String │ Nullable(String) │
+    ├───────────────────┼────────────┼──────────────────┼──────────────────┼──────────────────┼─────────────────┼───────────────────────┼───────────────────┼──────────────────────┼──────────────────┼─────────────┼─────────┼──────────────────┤
+    │ my_internal_stage │ Internal   │ NULL             │ NULL             │ NULL             │ false           │ false                 │ NULL              │ {"compression":"Zst… │ 'root'@'%'       │ 2026-06-16  │         │ account_admin    │
+    │                   │            │                  │                  │                  │                 │                       │                   │                      │                  │ 22:21:19…   │         │                  │
+    ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ```
+
+### Step 2: Upload Sample File
+
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
+
+    ```sql
+    root@localhost:8000/default> CREATE STAGE my_internal_stage;
+
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_internal_stage
+
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
+
+2. Verify the staged file:
+
+```sql
+LIST @my_internal_stage;
+
+name                               |size  |md5                               |last_modified                |creator|
+-----------------------------------+------+----------------------------------+-----------------------------+-------+
+books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|2023-06-28 02:32:15.000 +0000|       |
+```
+
+### Step 3. Copy Data into Table
+
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
+
+    ```sql
+    COPY INTO books
+    FROM @my_internal_stage
+    FILES = ('books.parquet')
+    FILE_FORMAT = (
+        TYPE = 'PARQUET'
+    );
+    ```
+
+2. Verify the loaded data:
+
+```sql
+SELECT * FROM books;
+
+---
+title                       |author             |date|
+----------------------------+-------------------+----+
+Transaction Processing      |Jim Gray           |1992|
+Readings in Database Systems|Michael Stonebraker|2004|
+```
+
+## Tutorial 3: Loading from External Stage
+
+Follow this tutorial to upload the sample file to an external stage and load data from the staged file into {{{ .lake }}}.
+
+### Step 1. Create an External Stage
+
+1. Create an external stage with the [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) command:
+
+    ```sql
+    CREATE STAGE my_external_stage
+        URL = 's3://lake'
+        CONNECTION = (
+            ENDPOINT_URL = 'http://127.0.0.1:9000',
+            ACCESS_KEY_ID = 'ROOTUSER',
+            SECRET_ACCESS_KEY = 'CHANGEME123'
+        );
+    ```
+
+2. Verify the created stage:
+
+    ```sql
+    SHOW STAGES;
+
+    name             |stage_type|creator           |comment|
+    -----------------+----------+------------------+-------+
+    my_external_stage|External  |'root'@'%'|       |
+    ```
+
+### Step 2: Upload Sample File
+
+1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
+
+    ```sql
+    root@localhost:8000/default> PUT fs:///Users/eric/Documents/books.parquet @my_external_stage
+
+    ┌───────────────────────────────────────────────┐
+    │                 file                │  status │
+    │                String               │  String │
+    ├─────────────────────────────────────┼─────────┤
+    │ /Users/eric/Documents/books.parquet │ SUCCESS │
+    └───────────────────────────────────────────────┘
+    ```
+
+2. Verify the staged file:
+
+    ```sql
+    LIST @my_external_stage;
+
+    name         |size|md5                               |last_modified                |creator|
+    -------------+----+----------------------------------+-----------------------------+-------+
+    books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0000|       |
+    ```
+
+### Step 3. Copy Data into Table
+
+1. Load data into the target table with the [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) command:
+
+    ```sql
+    COPY INTO books
+    FROM @my_external_stage
+    FILES = ('books.parquet')
+    FILE_FORMAT = (
+        TYPE = 'PARQUET'
+    );
+    ```
+
+2. Verify the loaded data:
+
+```sql
+SELECT * FROM books;
+
+---
+title                       |author             |date|
+----------------------------+-------------------+----+
+Transaction Processing      |Jim Gray           |1992|
+Readings in Database Systems|Michael Stonebraker|2004|
+```

@@ -36,7 +36,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+        > - {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. PingCAP operates and manages the underlying cloud infrastructure. You can access the underlying resources only through the TiDB Cloud console.
 
         </CustomContent>
 
@@ -44,7 +45,8 @@ Additionally, you can try out TiDB features on [TiDB Playground](https://play.ti
 
         > **Note**
         >
-        > Currently, {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+        > - {{{ .starter }}} is generally available on AWS. The subsequent steps in this document use AWS as an example.
+        > - TiDB Cloud is a fully managed service. PingCAP operates and manages the underlying cloud infrastructure. You can access the underlying resources only through the TiDB Cloud console.
 
         </CustomContent>
 
@@ -56,7 +58,7 @@ For {{{ .starter }}} instances hosted on AWS, you can use the built-in AI-assist
 
 2. To try the AI capacity of TiDB Cloud, follow the on-screen instructions to allow PingCAP and AWS Bedrock to use your code snippets for research and service improvement, and then click **Save and Get Started**.
 
-3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (beta)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
+3. In SQL Editor, press <kbd>⌘</kbd> + <kbd>I</kbd> on macOS (or <kbd>Control</kbd> + <kbd>I</kbd> on Windows or Linux) to instruct [Chat2Query (PREVIEW)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) to generate SQL queries automatically.
 
     For example, to create a new table `test.t` with two columns (column `id` and column `name`), you can type `use test;` to specify the database, press <kbd>⌘</kbd> + <kbd>I</kbd>, type `create a new table t with id and name` as the instruction, and then press **Enter** to let AI generate a SQL statement accordingly.
 
@@ -94,18 +96,18 @@ For {{{ .starter }}} instances hosted on AWS, you can use the built-in AI-assist
     </div>
     </SimpleTab>
 
-After running the queries, you can immediately see the query logs and results at the bottom of the page. 
+After running the queries, you can immediately see the query logs and results at the bottom of the page.
 
 To let AI generate more SQL statements, you can type more instructions as shown in the following example:
 
 ```sql
 use test;
 
--- create a new table t with id and name 
+-- create a new table t with id and name
 CREATE TABLE
   `t` (`id` INT, `name` VARCHAR(255));
 
--- add 3 rows 
+-- add 3 rows
 INSERT INTO
   `t` (`id`, `name`)
 VALUES
@@ -129,9 +131,23 @@ TiDB Cloud offers an interactive tutorial with carefully crafted sample datasets
 2. Choose a {{{ .starter }}} instance that you want to use for the tour, and click **Import Dataset**. The import process might take approximately one minute.
 3. Once the sample data is imported, follow the on-screen instructions to complete the tour.
 
+## Step 4: Connect to your {{{ .starter }}} instance
+
+TiDB is highly compatible with the MySQL protocol, so you can connect to it using most MySQL tools, drivers, and ORMs. The following steps use the MySQL CLI client `mysql` as an example.
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed with connection parameters.
+3. Ensure that the configurations in the connection dialog match your operating environment.
+4. Click **Generate Password** to create a random password.
+5. In the **Connect With** drop-down list, select **MySQL CLI**.
+6. Copy the connection command, paste it into your terminal, and then press **Enter** to run it.
+
+The MySQL CLI client opens and connects to your {{{ .starter }}} instance.
+
 ## What's next
 
 - To learn how to connect to your {{{ .starter }}} instance using different methods, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 - For more information about how to use SQL Editor and Chat2Query to explore your data, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
 - For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Cloud Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+- To manage your instance using the TiDB Cloud CLI, see [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md).

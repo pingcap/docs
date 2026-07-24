@@ -1,4 +1,4 @@
-name: Links
+name: Check external URLs in all files
 
 on:
   repository_dispatch:
@@ -6,30 +6,94 @@ on:
   schedule:
     - cron: "0 0 * * 1"
 
+env:
+  DOCS_SITE_BASE_URL: "https://docs.pingcap.com"
+
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   linkChecker:
+    if: github.repository == 'pingcap/docs'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Download Exclude Path
         run: |
-          curl https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
+          curl -fsSL https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
+
+      - name: Restore lychee cache
+        uses: actions/cache@v5
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
 
       - name: Check Links
-        uses: lycheeverse/lychee-action@v1.6.1
+        uses: lycheeverse/lychee-action@v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
-          # Excluding releases paths as historic releases may have outdated links.
           fail: false
           failIfEmpty: false
-          args: --root-dir $(pwd) --cache --max-cache-age 8d -E -i -n -t 45 --exclude-path '^./releases/' --exclude-path '^./tidb-cloud/releases/' --exclude-path '^./resources/' .
-          output: out.md
+          args: --root-dir $(pwd) --cache --max-cache-age 8d --cache-exclude-status '..200,300..' --exclude '^file://' -E -i -n -t 45 --exclude-path '^\./releases/' --exclude-path '^\./tidb-cloud/releases/' --exclude-path '^\./resources/' .
+          output: out-external.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Collect doc site href URLs
+        id: site-hrefs
+        run: |
+          git ls-files -z -- \
+            '*.md' '*.mdx' '*.markdown' '*.mkd' '*.mdown' '*.mdwn' '*.mkdn' '*.mkdown' \
+            '*.html' '*.htm' '*.css' '*.txt' |
+            perl -0ne 'print unless m{^(?:releases|tidb-cloud/releases|resources)/}' |
+            perl .github/scripts/extract-site-hrefs.pl .lychee-site-hrefs .lychee-site-href-files.txt
+
+          count=$(wc -l < .lychee-site-href-files.txt | tr -d ' ')
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+
+          if [ "$count" -gt 0 ]; then
+            echo "has_hrefs=true" >> "$GITHUB_OUTPUT"
+            sed 's/^/- /' .lychee-site-href-files.txt
+          else
+            echo "has_hrefs=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check site href URLs
+        if: ${{ steps.site-hrefs.outputs.has_hrefs == 'true' }}
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Don't fail as we want the workflow to continue and run 'Create Issue From File'
+          fail: false
+          failIfEmpty: false
+          args: --cache --max-cache-age 8d --cache-exclude-status '..200,300..' -E -i -n -t 45 --files-from .lychee-site-href-files.txt
+          output: out-site-hrefs.md
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Combine Link Reports
+        run: |
+          {
+            echo "# External URL Check"
+            echo
+            if [ -f out-external.md ]; then
+              cat out-external.md
+            else
+              echo "*(external link check did not produce output)*"
+            fi
+
+            if [ -f out-site-hrefs.md ]; then
+              echo
+              echo "# Site href URL Check"
+              echo
+              cat out-site-hrefs.md
+            fi
+          } > out.md
+
       - name: Create Issue From File
-        uses: peter-evans/create-issue-from-file@v4
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: Broken Link Detected
           content-filepath: out.md

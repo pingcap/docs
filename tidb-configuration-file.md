@@ -180,8 +180,9 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Warning:**
 >
-> - For versions from v8.1.0 to v8.5.1, TiDB removes the telemetry feature and this configuration item no longer takes effect. It is retained solely for compatibility with earlier versions.
-> - Starting from v8.5.3, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - For versions from v8.1.0 to v8.5.2, TiDB removes the telemetry feature and this configuration item no longer takes effect. It is retained solely for compatibility with earlier versions.
+> - For versions from v8.5.3 to v8.5.6, TiDB reintroduces the telemetry feature. However, it only logs telemetry-related information locally and no longer sends data to PingCAP over the network.
+> - Starting from v8.5.7, TiDB deprecates this configuration item and the telemetry feature.
 
 - Controls whether to enable telemetry collection in a TiDB instance.
 - Default value: `false`
@@ -207,7 +208,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
 - Default value: `0`
-- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
+- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic. TiDB also returns an error in response to the `COM_PING` command.
 
 > **Note:**
 >
@@ -349,7 +350,7 @@ Configuration items related to log.
 - Unit: second
 - In some user scenarios, TiDB logs might be stored on hot-pluggable or network-attached disks, which might become permanently unavailable. In these cases, TiDB cannot recover automatically from such disaster and the log-writing operations will be permanently blocked. Although the TiDB process might seem to be running, it does not respond to any requests. This configuration item is designed to handle such situations.
 
-## log.file
+### log.file
 
 Configuration items related to log files.
 
@@ -656,17 +657,17 @@ Configuration items related to opentracing.
 + Enables RPC metrics.
 + Default value: `false`
 
-## opentracing.sampler
+### opentracing.sampler
 
 Configuration items related to opentracing.sampler.
 
-### `type`
+#### `type`
 
 + Specifies the type of the opentracing sampler. The string value is case-insensitive.
 + Default value: `"const"`
 + Value options: `"const"`, `"probabilistic"`, `"ratelimiting"`, `"remote"`
 
-### `param`
+#### `param`
 
 + The parameter of the opentracing sampler.
     - For the `const` type, the value can be `0` or `1`, which indicates whether to enable the `const` sampler.
@@ -675,41 +676,41 @@ Configuration items related to opentracing.sampler.
     - For the `remote` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
 + Default value: `1.0`
 
-### `sampling-server-url`
+#### `sampling-server-url`
 
 + The HTTP URL of the jaeger-agent sampling server.
 + Default value: `""`
 
-### `max-operations`
+#### `max-operations`
 
 + The maximum number of operations that the sampler can trace. If an operation is not traced, the default probabilistic sampler is used.
 + Default value: `0`
 
-### `sampling-refresh-interval`
+#### `sampling-refresh-interval`
 
 + Controls the frequency of polling the jaeger-agent sampling policy.
 + Default value: `0`
 
-## opentracing.reporter
+### opentracing.reporter
 
 Configuration items related to opentracing.reporter.
 
-### `queue-size`
+#### `queue-size`
 
 + The queue size with which the reporter records spans in memory.
 + Default value: `0`
 
-### `buffer-flush-interval`
+#### `buffer-flush-interval`
 
 + The interval at which the reporter flushes the spans in memory to the storage.
 + Default value: `0`
 
-### `log-spans`
+#### `log-spans`
 
 + Determines whether to print the log for all submitted spans.
 + Default value: `false`
 
-### `local-agent-host-port`
+#### `local-agent-host-port`
 
 + The address at which the reporter sends spans to the jaeger-agent.
 + Default value: `""`
@@ -810,11 +811,11 @@ Configuration items related to opentracing.reporter.
 + Whether to use the new version of the Region replica selector when sending RPC requests to TiKV.
 + Default value: `true`
 
-## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
+### tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
 
 This section introduces configuration items related to the [Coprocessor Cache](/coprocessor-cache.md) feature.
 
-### `capacity-mb`
+#### `capacity-mb`
 
 - The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
 - Default value: `1000.0`

@@ -22,7 +22,7 @@ The audit logging feature is **disabled by default**. To audit a {{{ .premium }}
     > **Note:**
     >
     > - Database audit logging is not available for {{{ .starter }}}.
-    > - For {{{ .essential }}}, see [Database Audit Logging (Beta) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).
+    > - For {{{ .essential }}}, see [Database Audit Logging (PREVIEW) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md).
     > - For {{{ .dedicated }}}, see [{{{ .dedicated }}} Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md).
 
 - You must have the `Organization Owner` role in your organization. Otherwise, you cannot see the database audit-related options in the TiDB Cloud console.
@@ -121,6 +121,12 @@ For more information, see [Create a bucket](https://www.alibabacloud.com/help/en
 
 #### Step 2. Configure OSS access
 
+In this step, you will configure Alibaba Cloud RAM permissions so that TiDB Cloud can write audit logs to your OSS bucket. If your OSS bucket and RAM role are in different Alibaba Cloud accounts, follow the cross-account configuration guidance in this section.
+
+##### Standard OSS bucket configuration
+
+If the OSS bucket storing the audit logs and the role accessing the OSS bucket are in the same cloud account, configure the OSS access as follows:
+
 1. Get the Alibaba Cloud Service Account ID of the {{{ .premium }}} instance that you want to enable audit logging.
 
     1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
@@ -176,6 +182,51 @@ For more information, see [Create a bucket](https://www.alibabacloud.com/help/en
     - Click **Grant Permissions**.
 
 5. Copy the **Role ARN** (for example: `acs:ram::<Your-Account-ID>:role/tidb-cloud-audit-role`) for later use.
+
+##### Cross-account OSS bucket configuration
+
+If the OSS bucket storing the audit logs and the role accessing the OSS bucket are in different cloud accounts, the configuration process is slightly different.
+
+1. Configure the RAM policy.
+
+    When creating the RAM policy, you need to add the information of the second user account in the **Resource** field. Define the policy using the following JSON script:
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "oss:PutObject",
+          "Resource": "acs:oss:*:<User Account 2>:<bucket-name>/*"
+        }
+      ]
+    }
+    ```
+
+2. Configure the bucket policy.
+
+    In addition, you need to configure a bucket policy on the destination OSS bucket to allow the assumed role from the different account to access it. Use the following configuration:
+
+    ```json
+    {
+        "Version": "1",
+        "Statement": [
+            {
+                "Action": [
+                    "oss:PutObject"
+                ],
+                "Effect": "Allow",
+                "Principal": [
+                    "arn:sts::<User Account 1>:assumed-role/<role-name>/*"
+                ],
+                "Resource": [
+                    "acs:oss:*:<User Account 2>:<bucket-name>/*"
+                ]
+            }
+        ]
+    }
+    ```
 
 #### Step 3. Enable audit logging
 
@@ -281,7 +332,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` displays the actual client IP address for connections through AWS PrivateLink instead of the load balancer IP. This feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 

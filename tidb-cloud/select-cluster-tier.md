@@ -10,10 +10,24 @@ The plan determines the throughput and performance of your TiDB resource.
 
 TiDB Cloud provides the following options of plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a TiDB resource, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#starter)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+
+</CustomContent>
 
 > **Note:**
 >
@@ -25,7 +39,8 @@ TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers a
 
 The free plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
+- **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
@@ -44,6 +59,16 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling. For example, when the row-based storage of a {{{ .starter }}} instance exceeds 5 GiB for a free {{{ .starter }}} instance, the instance automatically restricts any new connection attempts.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
+
+### Instance Capacity Plan
+
+For each organization in TiDB Cloud, you can create a maximum of five [branches](/tidb-cloud/branch-overview.md) across all {{{ .starter }}} and Essential instances by default.
+
+For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter }}} instances and branches in total, with each branch counted as a separate instance.
+
+For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved.
 
 ## {{{ .essential }}} {#essential}
 
@@ -93,6 +118,22 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Zero-infrastructure management**: offers a fully managed service that eliminates manual scaling, patching, and capacity planning.
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
+
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} is designed for enterprise workloads that require stronger control over data location, cloud resources, network boundaries, and compliance posture. With {{{ .byoc }}}, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account.
+
+{{{ .byoc }}} provides a managed TiDB Cloud experience with the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, storage, networking, and data in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup and restore, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+- **Cloud-account-level security controls**: lets you apply your own cloud policies, network controls, audit logging, and compliance controls to the BYOC data plane.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated
 

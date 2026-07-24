@@ -1,0 +1,25 @@
+---
+title: OCTET_LENGTH
+summary: OCTET_LENGTH() is a synonym for LENGTH().
+---
+
+# OCTET_LENGTH
+
+OCTET_LENGTH() is a synonym for LENGTH().
+
+## Syntax
+
+```sql
+OCTET_LENGTH(<str>)
+```
+
+## Examples
+
+```sql
+SELECT OCTET_LENGTH('datalake');
++--------------------------+
+| OCTET_LENGTH('datalake') |
++--------------------------+
+|                        8 |
++--------------------------+
+```

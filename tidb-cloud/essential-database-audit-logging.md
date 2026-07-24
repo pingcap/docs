@@ -1,10 +1,10 @@
 ---
-title: Database Audit Logging (Beta) for {{{ .essential }}}
+title: Database Audit Logging (PREVIEW) for {{{ .essential }}}
 summary: Learn about how to audit a {{{ .essential }}} instance in TiDB Cloud.
 aliases: ['/tidbcloud/serverless-audit-logging']
 ---
 
-# Database Audit Logging (Beta) for {{{ .essential }}}
+# Database Audit Logging (PREVIEW) for {{{ .essential }}}
 
 {{{ .essential }}} provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
@@ -43,15 +43,10 @@ INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
 
 You can store audit logs in the following locations:
 
-- TiDB Cloud
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Google Cloud Storage](https://cloud.google.com/storage)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
-
-### TiDB Cloud
-
-You can store audit logs in TiDB Cloud and download them to your local machine. Audit logs expire and are deleted after 365 days. To request a longer retention period, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ### Amazon S3
 
@@ -357,47 +352,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 ```shell
 ticloud serverless audit-log filter delete --cluster-id <cluster-id> --filter-rule-id <rule-id>
 ```
- 
-</div>
-</SimpleTab>
 
-## Access audit logging with TiDB Cloud Storage
-
-When you store audit logs in TiDB Cloud, {{{ .essential }}} saves them as readable text files named `YYYY-MM-DD-<index>.log`. You can view and download these files from the TiDB Cloud console or using the TiDB Cloud CLI.
-
-> **Note:**
->
-> - {{{ .essential }}} does not guarantee that audit logs are stored in sequential order. A log file named `YYYY-MM-DD-<index>.log` might contain entries from earlier dates.
-> - To retrieve all logs for a specific date (for example, January 1, 2025), set `--start-date 2025-01-01` and `--end-date 2025-01-02`. In some cases, you might need to download all log files and sort them by the `TIME` field.
-
-<SimpleTab>
-<div label="Console">
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
-
-    > **Tip:**
-    >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
-
-2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
-
-3. On the **DB Audit Logging** page, you can view the list of audit logs under **TiDB Cloud Storage**.
-
-4. To download audit logs, select one or more logs from the list and then click **Download**.
-
-</div>
-
-<div label="CLI">
-
-To download audit logs using the TiDB Cloud CLI, run the following command:
-
-```shell
-ticloud serverless audit-log download --cluster-id <cluster-id> --output-path <output-path> --start-date <start-date> --end-date <end-date>
-```
-
-- `start-date`: the start date of the audit logs to download, in the format of `YYYY-MM-DD`, for example, `2025-01-01`.
-- `end-date`: the end date of the audit logs to download, in the format of `YYYY-MM-DD`, for example, `2025-01-01`.
- 
 </div>
 </SimpleTab>
 
@@ -454,7 +409,7 @@ When the event class is `CONNECTION` or a subclass of `CONNECTION`, the audit lo
 
 > **Note:**
 >
-> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in beta and is available only in the AWS region `Frankfurt (eu-central-1)`.
+> To improve traffic visibility, `CLIENT_IP` now displays the real client IP address for connections via AWS PrivateLink, instead of the Load Balancer (LB) IP. Currently, this feature is in public preview and is available only in the AWS region `Frankfurt (eu-central-1)`.
 
 ### Audit operation information
 

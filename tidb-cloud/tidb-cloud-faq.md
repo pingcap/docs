@@ -41,7 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- For new TiDB Cloud Dedicated clusters, the default TiDB version is [v8.5.6](https://docs.pingcap.com/tidb/v8.5/release-8.5.6) starting from April 14, 2026.
+- For new TiDB Cloud Dedicated clusters, the default TiDB version is [v8.5.7](https://docs.pingcap.com/tidb/v8.5/release-8.5.7) starting from July 9, 2026.
 - For {{{ .starter }}} instances, the TiDB version is [v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3) starting from February 10, 2026.
 - For {{{ .essential }}} instances, the TiDB version is [v7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2) starting from April 22, 2025.
 
@@ -55,9 +55,9 @@ TiDB is trusted by over 1500 global enterprises across a variety of industries, 
 
 TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://www.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
 
-### What does BETA mean in TiDB Cloud?
+### What does PREVIEW mean in TiDB Cloud?
 
-BETA is the public preview stage of a TiDB Cloud feature or offering before it becomes generally available (GA).
+PREVIEW is the public preview stage of a TiDB Cloud feature or offering before it becomes generally available (GA).
 
 ### How can I learn more about TiDB Cloud?
 

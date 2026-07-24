@@ -1,0 +1,39 @@
+---
+title: ARRAYS_ZIP
+summary: Merges multiple arrays into a single array tuple.
+---
+
+# ARRAYS_ZIP
+
+Merges multiple arrays into a single array tuple.
+
+## Syntax
+
+```sql
+ARRAYS_ZIP( <array1> [, ...] )
+```
+
+## Arguments
+
+| Arguments  | Description       |
+|------------|-------------------|
+| `<arrayN>` | The input ARRAYs. |
+
+> **Note:**
+>
+> - The length of each array must be the same.
+
+## Return Type
+
+Array(Tuple).
+
+## Examples
+
+```sql
+SELECT ARRAYS_ZIP([1, 2, 3], ['a', 'b', 'c']);
+┌────────────────────────────────────────┐
+│ arrays_zip([1, 2, 3], ['a', 'b', 'c']) │
+├────────────────────────────────────────┤
+│ [(1,'a'),(2,'b'),(3,'c')]              │
+└────────────────────────────────────────┘
+```

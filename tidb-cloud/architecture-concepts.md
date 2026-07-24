@@ -42,13 +42,26 @@ TiDB Cloud makes it easy to scale your database, handle complex management tasks
 
 The Starter plan is ideal for those who are getting started with TiDB Cloud. It provides developers and small teams with the following features:
 
-- **No cost**: This plan is completely free, with no credit card required to get started.
+- **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
+
 - **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
 - **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
 ## {{{ .essential }}}
 
 For applications experiencing growing workloads and needing scalability in real time, the Essential plan provides the flexibility and performance to keep pace with your business growth with the following features:
+
+<CustomContent language="en,zh">
+
+- **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
+- **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
+- **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs) of the compute resources, offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
+
+{{{ .essential }}} offers zonal high availability, which places all components within the same availability zone to reduce network latency. For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
+
+</CustomContent>
+
+<CustomContent language="ja">
 
 - **Enhanced capabilities**: includes all capabilities of the Starter plan, along with the capacity to handle larger and more complex workloads, as well as advanced security features.
 - **Automatic scaling**: automatically adjusts storage and computing resources to efficiently meet changing workload demands.
@@ -62,6 +75,8 @@ For applications experiencing growing workloads and needing scalability in real 
 
 For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverless-high-availability.md).
 
+</CustomContent>
+
 ## {{{ .premium }}}
 
 For mission-critical applications that require high performance and enhanced security in a managed environment, the Premium plan provides robust infrastructure and advanced controls with the following features:
@@ -72,6 +87,38 @@ For mission-critical applications that require high performance and enhanced sec
 - **Advanced security**: offers deeper security configurations and compliance capabilities required by large-scale enterprises and regulated industries.
 
 To maximize uptime and resilience for mission-critical workloads, {{{ .premium }}} provides [Regional High Availability](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture), which distributes nodes across multiple availability zones for greater redundancy than zonal deployments.
+
+<CustomContent plan="byoc">
+
+## TiDB Cloud BYOC
+
+TiDB Cloud BYOC (Bring Your Own Cloud) is designed for organizations that need stronger control over data location, cloud resources, network boundaries, and compliance posture while still using TiDB Cloud as a managed service. With BYOC, the TiDB Cloud control plane is managed by PingCAP, while the TiDB data plane runs in your own cloud account.
+
+BYOC provides the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, data storage, and network boundaries in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments so you can choose between lower-latency zonal deployment and higher-resilience regional deployment.
+- **Cloud-account-level controls**: lets you apply your own cloud policies for networking, security, auditability, and compliance.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+To meet different workload requirements, TiDB Cloud BYOC supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+
+![TiDB Cloud BYOC Architecture](/media/tidb-cloud/byoc-architecture.png)
+
+A TiDB Cloud BYOC deployment includes the following major components:
+
+- **TiDB Cloud control plane**: provides the TiDB Cloud console, organization and project management, billing, lifecycle orchestration, monitoring views, alerting, and maintenance workflows.
+- **BYOC data plane**: runs the TiDB service and related infrastructure in your cloud account. TiDB Cloud operates this environment based on the permissions granted during BYOC onboarding.
+- **TiDB service VPC**: hosts TiDB service components that serve application traffic.
+- **Observability service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
+- **Application VPC**: hosts your applications. You manage this VPC and configure network connectivity to access the BYOC TiDB service.
+
+Each BYOC region is deployed and operated independently. When a BYOC region is added, TiDB Cloud provisions the required regional resources in your cloud account. Because each BYOC region has its own data-plane setup, regions do not share a single TiDB Service VPC or Observability Service VPC.
+
+Your applications connect to a {{{ .byoc }}} instance from your application environment. Depending on your BYOC configuration, connections use either private or controlled public access. For private access, BYOC supports VPC peering and other private connectivity options.
+
+</CustomContent>
 
 ## TiDB Cloud Dedicated
 
@@ -85,7 +132,7 @@ Built on isolated cloud resources such as VPCs, VMs, managed Kubernetes services
 
 The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for TiDB Cloud resources. It provides tools to manage TiDB Cloud resources, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
 
-## TiDB Cloud CLI (Beta)
+## TiDB Cloud CLI (PREVIEW)
 
 The TiDB Cloud CLI, `ticloud`, allows you to manage {{{ .starter }}} and Essential instances directly from your terminal with simple commands. You can perform tasks such as:
 
@@ -95,7 +142,7 @@ The TiDB Cloud CLI, `ticloud`, allows you to manage {{{ .starter }}} and Essenti
 
 For more information, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
 
-## TiDB Cloud API (Beta)
+## TiDB Cloud API (PREVIEW)
 
 The TiDB Cloud API is a REST-based interface that provides programmatic access to manage resources across {{{ .starter }}}, {{{ .essential }}}, {{{ .premium }}}, and TiDB Cloud Dedicated. It enables automated and efficient handling of tasks such as managing projects, clusters, backups, restores, data imports, billing, and other resources in [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md).
 

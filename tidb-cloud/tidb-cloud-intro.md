@@ -118,6 +118,16 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
+<CustomContent plan="byoc">
+
+- {{{ .byoc }}}
+
+    {{{ .byoc }}} is designed for large-scale production workloads that require greater control, security, and compliance. It enables you to run the data plane in your own AWS account while benefiting from TiDB Cloud's automated operations, elastic scalability, and enterprise-grade security.
+
+    Currently, {{{ .byoc }}} is in private preview on AWS.
+
+</CustomContent>
+
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
@@ -139,3 +149,19 @@ TiDB Cloud provides the following deployment options:
 - Your VPC
 
     You can connect to your TiDB Cloud resource via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).
+
+</CustomContent>
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Cloud in 3 Minutes" type="video" link="https://www.youtube.com/watch?v=skCV9BEmjbo" imgSrc="https://i.ytimg.com/vi/skCV9BEmjbo/hqdefault.jpg" author="PingCAP" duration="3 mins" />
+  <ResourceCard title="TiDB Cloud Premium Public Preview: Predictable Performance, Elastic Scale, Enterprise Isolation" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/" imgSrc="https://static.pingcap.com/files/2026/04/29131128/Blog-LinkedIn-2.png" author="Dan Qiao" date="2026-04-29" />
+  <ResourceCard title="TiDB Cloud Essential Now Available in Public Preview on AWS and Alibaba Cloud" type="blog" link="https://www.pingcap.com/blog/tidb-cloud-essential-now-available-public-preview-aws-alibaba-cloud/" imgSrc="https://static.pingcap.com/files/2025/10/14065646/tidb_1200x627-2-1.png" author="Liya Du" date="2025-10-14" />
+</RelatedResources>

@@ -32,7 +32,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.23 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.25 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -514,6 +514,7 @@ Usage:
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -535,6 +536,7 @@ Usage:
       "hot_region_type": "read",
       "hot_degree": 152,
       "flow_bytes": 0,
+      "flow_cpu": 32,
       "key_rate": 0,
       "query_rate": 305,
       "start_key": "7480000000000000FF5300000000000000F8",
@@ -544,6 +546,8 @@ Usage:
   ]
 }
 ```
+
+Starting from v8.5.7, the output of the `hot read` and `hot history` commands includes the `flow_cpu` field, and the output of the `hot store` command includes the `cpu-read-rate` field. These fields show the read CPU usage for CPU-aware read hotspot scheduling.
 
 ### `label [store <name> <value>]`
 
@@ -1024,22 +1028,24 @@ Usage:
   "min-hot-byte-rate": 100,
   "min-hot-key-rate": 10,
   "min-hot-query-rate": 10,
+  "min-hot-cpu-rate": 10,
   "max-zombie-rounds": 3,
   "max-peer-number": 1000,
   "byte-rate-rank-step-ratio": 0.05,
   "key-rate-rank-step-ratio": 0.05,
   "query-rate-rank-step-ratio": 0.05,
+  "cpu-rate-rank-step-ratio": 0.05,
   "count-rank-step-ratio": 0.01,
   "great-dec-ratio": 0.95,
   "minor-dec-ratio": 0.99,
   "src-tolerance-ratio": 1.05,
   "dst-tolerance-ratio": 1.05,
   "read-priorities": [
-    "query",
+    "cpu",
     "byte"
   ],
   "write-leader-priorities": [
-    "key",
+    "query",
     "byte"
   ],
   "write-peer-priorities": [
@@ -1070,6 +1076,12 @@ Usage:
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
+- `min-hot-cpu-rate` specifies the minimum CPU usage required for a read request to be included in hotspot statistics. The value is measured as a percentage of one CPU core, and the default value is `10`, which means 10% of one CPU core.
+
+    ```bash
+    scheduler config balance-hot-region-scheduler set min-hot-cpu-rate 10
+    ```
+
 - `max-zombie-rounds` means the maximum number of heartbeats with which an operator can be considered as the pending influence. If you set it to a larger value, more operators might be included in the pending influence. Usually, you do not need to adjust its value. Pending influence refers to the operator influence that is generated during scheduling but still has an effect.
 
     ```bash
@@ -1082,7 +1094,7 @@ Usage:
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
-- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, and `count-rank-step-ratio` respectively mean the step ranks of byte, key, query, and count. The rank-step-ratio decides the step when the rank is calculated. `great-dec-ratio` and `minor-dec-ratio` are used to determine the `dec` rank. Usually, you do not need to modify these items.
+- `byte-rate-rank-step-ratio`, `key-rate-rank-step-ratio`, `query-rate-rank-step-ratio`, `cpu-rate-rank-step-ratio`, and `count-rank-step-ratio` represent the step ranks of byte, key, query, CPU, and count, respectively. The rank-step-ratio decides the step when calculating the rank. PD uses `great-dec-ratio` and `minor-dec-ratio` to determine the `dec` rank. Usually, you do not need to modify these items.
 
     ```bash
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -1096,15 +1108,18 @@ Usage:
 
 - `read-priorities`, `write-leader-priorities`, and `write-peer-priorities` control which dimension the scheduler prioritizes for hot Region scheduling. Two dimensions are supported for configuration.
 
-    - `read-priorities` and `write-leader-priorities` control which dimensions the scheduler prioritizes for scheduling hot Regions of the read and write-leader types. The dimension options are `query`, `byte`, and `key`.
+    - `read-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the read type. The dimension options are `cpu`, `query`, `byte`, and `key`.
+    - `write-leader-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-leader type. The dimension options are `query`, `byte`, and `key`.
     - `write-peer-priorities` controls which dimensions the scheduler prioritizes for scheduling hot Regions of the write-peer type. The dimension options are `byte` and `key`.
 
     > **Note:**
     >
-    > If a cluster component is earlier than v5.2, the configuration of `query` dimension does not take effect. If some components are upgraded to v5.2 or later, the `byte` and `key` dimensions still by default have the priority for hot Region scheduling. After all components of the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
+    > If any component in the cluster is earlier than v5.2, the configuration of the `query` dimension does not take effect. After some components are upgraded to v5.2 or later, the scheduler still prioritizes hotspot balancing based on the `byte` and `key` dimensions by default. After all components in the cluster are upgraded to v5.2 or later, such a configuration still takes effect for compatibility.
+    >
+    > Starting from v8.5.7, TiKV reports read CPU usage for hot Region scheduling. For clusters that support read CPU reporting, the default `read-priorities` value is `cpu,byte`. For clusters that do not support read CPU reporting, PD automatically falls back to `query,byte`, or to `byte,key` if the cluster does not support the `query` dimension either. You can view the real-time configuration using the `pd-ctl` command. Usually, you do not need to modify these configurations.
 
     ```bash
-    scheduler config balance-hot-region-scheduler set read-priorities query,byte
+    scheduler config balance-hot-region-scheduler set read-priorities cpu,byte
     ```
 
 - `strict-picking-store` controls the search space of hot Region scheduling. Usually, it is enabled. This configuration item only affects the behavior when `rank-formula-version` is `v1`. When it is enabled, hot Region scheduling ensures hot Region balance on the two configured dimensions. When it is disabled, hot Region scheduling only ensures the balance on the dimension with the first priority, which might reduce balance on other dimensions. Usually, you do not need to modify this configuration.

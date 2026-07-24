@@ -20,7 +20,7 @@
   - [Transactions](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI Features](/tidb-cloud/ai-feature-concepts.md)
-  - [Data Service](/tidb-cloud/data-service-concepts.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Data Service](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Scalability](/tidb-cloud/scalability-concepts.md)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
   - [Monitoring](/tidb-cloud/monitoring-concepts.md)
@@ -166,9 +166,9 @@
     - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
-  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
-- Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+- Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API
@@ -589,7 +589,7 @@
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [TiDB Cloud Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
+  - [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - TiDB v8.5

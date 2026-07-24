@@ -10,8 +10,8 @@ This tutorial walks you through how to use [Jina AI](https://jina.ai/) to genera
 
 > **Note:**
 >
-> - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -61,11 +61,11 @@ pip install -r requirements.txt
 Get the Jina AI API key from the [Jina AI Embeddings API](https://jina.ai/embeddings/) page, and then configure the environment variables depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
-<div label="{{{ .starter }}} or Essential">
+<div label="{{{ .starter }}}">
 
-For a {{{ .starter }}} or Essential instance, take the following steps to obtain the connection string and configure environment variables:
+For a {{{ .starter }}} instance, take the following steps to obtain the connection string and configure environment variables:
 
-1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} or Essential instance to go to its overview page.
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 

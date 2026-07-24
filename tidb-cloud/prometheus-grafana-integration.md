@@ -1,9 +1,9 @@
 ---
-title: Integrate TiDB Cloud with Prometheus and Grafana (Preview)
+title: Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 summary: Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
 ---
 
-# Integrate TiDB Cloud with Prometheus and Grafana (Preview)
+# Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 
 TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
@@ -29,7 +29,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 <CustomContent plan="essential">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
-2. In the left navigation pane, click **Integrations** > **Integration to Prometheus(Preview)**.
+2. In the left navigation pane, click **Integrations** > **Integration to Prometheus(PREVIEW)**.
 3. Click **Add File** to generate and show the `scrape_config` file for the current {{{ .essential }}} instance.
 4. Make a copy of the `scrape_config` file content for later use.
 
@@ -38,7 +38,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 <CustomContent plan="premium">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
-2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Prometheus(Preview)**.
+2. In the left navigation pane, click **Settings** > **Integrations** > **Integration to Prometheus(PREVIEW)**.
 3. Click **Add File** to generate and show the `scrape_config` file for the current {{{ .premium }}} instance.
 4. Make a copy of the `scrape_config` file content for later use.
 

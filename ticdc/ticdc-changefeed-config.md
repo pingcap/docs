@@ -182,10 +182,9 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `dispatchers`
 
-- For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
+- When the changefeed downstream is an MQ sink, you can use `dispatchers` to configure event dispatchers. Starting from v8.5.7, for the [new TiCDC architecture](/ticdc/ticdc-architecture.md), you can also use `dispatchers` to configure table routing, mapping upstream tables to specific downstream database or table names. For more information, see [TiCDC table routing](/ticdc/ticdc-table-routing.md).
 - Starting from v6.1.0, TiDB supports two types of event dispatchers: partition and topic.
 - The matching syntax of matcher is the same as the filter rule syntax.
-- This configuration item only takes effect if the downstream is MQ.
 - When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, each Pulsar message will be routed using the string you set as the key. For example, if you specify the routing rule for a matcher as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
 
 #### `column-selectors` <span class="version-mark">New in v7.5.0</span>

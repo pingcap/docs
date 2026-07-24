@@ -10,8 +10,8 @@ Vector search offers a powerful solution for semantic similarity searches across
 
 > **Note:**
 >
-> - The vector search feature is in beta. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Concepts
 
@@ -47,7 +47,7 @@ TiDB vector search identifies the top-k nearest neighbor (KNN) vectors by using 
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
-As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (that is, vector embeddings) together in one database. You can choose any of the following ways for storage:
+As a relational database with integrated vector search capabilities, TiDB enables you to store data and their corresponding vector representations (vector embeddings) together in one database. You can store your data in either of the following ways:
 
 - Store data and their corresponding vector representations in different columns of the same table.
 - Store data and their corresponding vector representation in different tables. In this way, you need to use `JOIN` queries to combine the tables when retrieving data.
@@ -72,3 +72,9 @@ To get started with TiDB Vector Search, see the following documents:
 
 - [Get started with vector search using Python](/ai/quickstart-via-python.md)
 - [Get started with vector search using SQL](/ai/quickstart-via-sql.md)
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="What is a Context Platform? A New Pattern for AI Agents in Production" type="blog" link="https://www.pingcap.com/blog/ai-application-data-layer-context-platform/" imgSrc="https://static.pingcap.com/files/2026/05/08132144/Copy-of-Blog-LinkedIn.png" author="Li Shen" date="2026-05-07" />
+</RelatedResources>

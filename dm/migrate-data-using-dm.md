@@ -188,3 +188,9 @@ While the DM cluster is running, DM-master, DM-worker, and dmctl output the moni
 
 - DM-master log directory: It is specified by the `--log-file` DM-master process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-master node.
 - DM-worker log directory: It is specified by the `--log-file` DM-worker process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-worker node.
+
+## Related resources
+
+<RelatedResources>
+  <ResourceCard title="TiDB Admin Lab 10: Migrating Data Using TiDB Data Migration" type="lab" link="https://labs.tidb.io/labs/dba_303_lab_ff9" imgSrc="https://lab-static.pingcap.com/quick-demo/dba_303_ch11_en.png" duration="60 mins" />
+</RelatedResources>
