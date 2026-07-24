@@ -138,7 +138,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
+TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。`tikv_storage_rocksdb_perf`の場合、getリクエストは`get`または`batch_get_command`のいずれかになります。
 
 ### Batch PointGet {#batch-point-get}
 
@@ -227,7 +227,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-テーブルスキャンとインデックススキャンは同じように処理されます。1 `req_per_copr`分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
+テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
 
 `send request duration`と`req_per_copr`次のように計算されます。
 

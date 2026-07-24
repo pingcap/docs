@@ -50,7 +50,7 @@ DESC inspection_result;
 -   `INSTANCE` : 診断されたインスタンスの特定のアドレス。
 -   `STATUS_ADDRESS` : インスタンスの HTTP API サービス アドレス。
 -   `VALUE` : 特定の診断項目の値。
--   `REFERENCE` ：この診断項目の基準値（閾値）。2 `VALUE`閾値を超えると、対応する診断情報が生成されます。
+-   `REFERENCE` ：この診断項目の基準値（閾値）。`VALUE`閾値を超えると、対応する診断情報が生成されます。
 -   `SEVERITY` : 重大度レベル。オプションの値は`warning`と`critical`です。
 -   `DETAILS` : 診断の詳細。追加の診断のための SQL ステートメントまたはドキュメント リンクも含まれる場合があります。
 

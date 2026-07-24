@@ -35,7 +35,7 @@ WhereClauseOptional ::=
 -   `OWNER_ID` : DDL所有者のUUID。2 [`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md)参照してください。
 -   `OWNER_ADDRESS` : DDL 所有者の IP アドレス。
 -   `RUNNING_JOBS` : 実行中の DDL ジョブの詳細。
--   `SELF_ID` : 現在接続しているTiDBノードのUUID。2 `SELF_ID` `OWNER_ID`と同じ場合は、DDL所有者に接続していることを意味します。
+-   `SELF_ID` : 現在接続しているTiDBノードのUUID。`SELF_ID` `OWNER_ID`と同じ場合は、DDL所有者に接続していることを意味します。
 -   `QUERY` : クエリのステートメント。
 
 ```sql
@@ -59,7 +59,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 <CustomContent platform="tidb">
 
--   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。2 `JOB_ID`グローバルに一意です。
+-   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。`JOB_ID`グローバルに一意です。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
 -   `JOB_TYPE` : DDL操作の種類。一般的なジョブの種類は次のとおりです。
@@ -95,15 +95,15 @@ OWNER_ADDRESS: 0.0.0.0:4000
     -   `txn-merge` : バックフィルが完了すると元のインデックスとマージされる一時インデックスを使用したトランザクション バックフィル。
     -   `DXF` : [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)で構成された Distributed eXecution Framework (DXF) を使用して実行されるタスク。
     -   `service_scope` : [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)で設定された TiDB ノードのサービス スコープ。
-    -   `thread` : バックフィルタスクの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定できます。4 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)指定することで動的な変更が可能です。
-    -   `batch_size` : バックフィルタスクのバッチサイズ。初期値は`tidb_ddl_reorg_batch_size`に設定できます。4 `ADMIN ALTER DDL JOBS`指定することで動的な変更が可能です。
-    -   `max_write_speed` : インジェストタスクのインポート時のフロー制御。初期値は`tidb_ddl_reorg_max_write_speed`に設定できます。4 による動的な変更`ADMIN ALTER DDL JOBS`サポートされます。
+    -   `thread` : バックフィルタスクの同時実行数。初期値は`tidb_ddl_reorg_worker_cnt`に設定できます。[`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を指定することで動的な変更が可能です。
+    -   `batch_size` : バックフィルタスクのバッチサイズ。初期値は`tidb_ddl_reorg_batch_size`に設定できます。`ADMIN ALTER DDL JOBS`を指定することで動的な変更が可能です。
+    -   `max_write_speed` : インジェストタスクのインポート時のフロー制御。初期値は`tidb_ddl_reorg_max_write_speed`に設定できます。 `ADMIN ALTER DDL JOBS`による動的な変更がサポートされます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。2 `JOB_ID`グローバルに一意です。
+-   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。`JOB_ID`グローバルに一意です。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
 -   `JOB_TYPE` : DDL 操作のタイプ。

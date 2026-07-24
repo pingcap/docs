@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-join-tables/','/ja/tidbcloud/dev-guide-join
 
 # 複数テーブルの結合クエリ {#multi-table-join-queries}
 
-多くのシナリオでは、1つのクエリで複数のテーブルからデータを取得する必要があります。1 `JOIN`ステートメントを使用して、2つ以上のテーブルのデータを結合できます。
+多くのシナリオでは、1つのクエリで複数のテーブルからデータを取得する必要があります。`JOIN`ステートメントを使用して、2つ以上のテーブルのデータを結合できます。
 
 ## 結合タイプ {#join-types}
 

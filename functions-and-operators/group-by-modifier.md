@@ -174,7 +174,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 `Expand`演算子の実装は`Projection`演算子と似ています。違いは、 `Expand`多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`演算子は結果に 1 行のみを生成しますが、 `Expand`演算子は結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
-次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。3 `Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
+次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。`Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -191,7 +191,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 6 rows in set (0.00 sec)
 ```
 
-次の例は、 TiFlash MPP モードでの実行プランを示しています。3 `Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
+次の例は、 TiFlash MPP モードでの実行プランを示しています。`Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;

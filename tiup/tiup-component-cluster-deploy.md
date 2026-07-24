@@ -39,7 +39,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### --ignore-config-check {#ignore-config-check}
 
--   このオプションは、構成チェックをスキップするために使用されます。コンポーネントのバイナリファイルがデプロイされた後、 `<binary> --config-check <config-file>`を使用してTiDB、TiKV、およびPDコンポーネントの構成がチェックされます。3 `<binary>`デプロイされたバイナリファイルのパスです。5 `<config-file>`ユーザー設定に基づいて生成された構成ファイルです。
+-   このオプションは、構成チェックをスキップするために使用されます。コンポーネントのバイナリファイルがデプロイされた後、 `<binary> --config-check <config-file>`を使用してTiDB、TiKV、およびPDコンポーネントの構成がチェックされます。`<binary>`は、デプロイされたバイナリファイルのパスです。`<config-file>`は、ユーザー設定に基づいて生成された構成ファイルです。
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 -   デフォルト: false
 

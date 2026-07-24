@@ -119,7 +119,7 @@ from:
   port: 3306
 ```
 
-MySQL2データソースで、上記の設定を`conf/source2.yaml`にコピーします。3 `name` `mysql-replica-02`に変更し、 `password`と`port`適切な値に変更する必要があります。
+MySQL2データソースで、上記の設定を`conf/source2.yaml`にコピーします。`name` `mysql-replica-02`に変更し、 `password`と`port`適切な値に変更する必要があります。
 
 ### ソースを作成する {#create-a-source}
 

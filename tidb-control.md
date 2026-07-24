@@ -140,7 +140,7 @@ tidb-ctl schema in <database name>
 
 #### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
-`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。4 `in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
+`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。`in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
 例えば、テーブルID `mysql.stat_meta`は`21`です。テーブルID `tidb-ctl schema tid -i 21`を使用すると、テーブルID `mysql.stat_meta`の詳細を取得できます。
 
@@ -276,7 +276,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>log</code>コマンド {#the-code-log-code-command}
 
-TiDBエラーログのスタック情報は1行形式です。1 `tidb-ctl log`指定すると、複数行形式に変更できます。
+TiDBエラーログのスタック情報は1行形式です。`tidb-ctl log`を指定すると、複数行形式に変更できます。
 
 ### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 

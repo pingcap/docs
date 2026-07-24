@@ -95,7 +95,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 >
 > -   現在、Hibernate は[ネストされたトランザクションをサポートしていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)実行します。
 >
-> -   TiDBはv6.2.0以降、 [セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートしています。5 `@Transactional` `Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`設定するには、TiDBがv6.2.0以降であることを確認してください。
+> -   TiDBはv6.2.0以降、 [セーブポイント](/sql-statements/sql-statement-savepoint.md)サポートしています。`@Transactional` `Propagation.NESTED`トランザクション伝播オプションを使用するには、つまり`@Transactional(propagation = Propagation.NESTED)`設定するには、TiDBがv6.2.0以降であることを確認してください。
 
 サポートレベル:**フル**
 
@@ -127,7 +127,7 @@ implementation 'mysql:mysql-connector-java:8.0.33'
 -   Hibernate を使用してネイティブJavaで TiDB アプリケーションを構築する例については、 [TiDBとHibernateを使ったシンプルなCRUDアプリの構築](/develop/dev-guide-sample-application-java-hibernate.md)参照してください。
 -   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Bootを使用してTiDBアプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)参照してください。
 
-さらに、 [Hibernate設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で TiDB 方言を指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。7 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずアップグレードしてください。
+さらに、 [Hibernate設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で TiDB 方言を指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。`Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずアップグレードしてください。
 
 > **Note:**
 >

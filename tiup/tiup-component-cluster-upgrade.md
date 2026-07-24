@@ -30,7 +30,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --transfer-timeout {#transfer-timeout}
 
--   PDまたはTiKVをアップグレードする場合、アップグレード対象ノードのリーダーノードが最初に他のノードに移行されます。移行プロセスには時間がかかります。1 `-transfer-timeout`で最大待機時間（秒単位）を設定できます。タイムアウト後、待機はスキップされ、サービスは直接アップグレードされます。
+-   PDまたはTiKVをアップグレードする場合、アップグレード対象ノードのリーダーノードが最初に他のノードに移行されます。移行プロセスには時間がかかります。`-transfer-timeout`で最大待機時間（秒単位）を設定できます。タイムアウト後、待機はスキップされ、サービスは直接アップグレードされます。
 -   データ型: `uint`
 -   デフォルト: 600
 
@@ -40,7 +40,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 ### --ignore-config-check {#ignore-config-check}
 
--   バイナリの更新後、 `<binary> --config-check <config-file>`使用して TiDB、TiKV、PD コンポーネントの構成チェックが実行されます。3 `<binary>`新しくデプロイされたバイナリへのパス、 `<config-file>`ユーザー設定に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用します。
+-   バイナリの更新後、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、PD コンポーネントの構成チェックが実行されます。`<binary>`は、新しくデプロイされたバイナリへのパスであり、 `<config-file>`は、ユーザー設定に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用します。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 

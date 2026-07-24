@@ -271,7 +271,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 -   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour` 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour` 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

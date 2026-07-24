@@ -129,7 +129,7 @@ monitored:
 
 ### `server_configs` {#server-configs}
 
-`server_configs` 、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 `global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
+`server_configs` 、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。`global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。`server_configs`は主に以下のフィールドが含まれます。
 
 -   `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
 
@@ -426,7 +426,7 @@ tiflash_servers:
 
 ### `tiproxy_servers` {#tiproxy-servers}
 
-`tiproxy_servers` 、TiProxy サービスが展開されるマシンと、各マシン上のサービスの構成を指定します。2 `tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
+`tiproxy_servers` 、TiProxy サービスが展開されるマシンと、各マシン上のサービスの構成を指定します。`tiproxy_servers`配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiProxyサービスがデプロイされているマシンのIPアドレスを指定します。このフィールドは必須です。
 
@@ -577,7 +577,7 @@ cdc_servers:
 
 ### `tso_servers` {#tso-servers}
 
-`tso_servers` 、 `tso`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `tso_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
+`tso_servers` 、 `tso`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。`tso_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
 -   `host` : `tso`マイクロサービスがデプロイされているマシンのIPアドレスを指定します。このフィールド値は必須です。
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
@@ -607,7 +607,7 @@ tso_servers:
 
 ### `scheduling_servers` {#scheduling-servers}
 
-`scheduling_servers` 、 `scheduling`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。4 `scheduling_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
+`scheduling_servers` 、 `scheduling`マイクロサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。`scheduling_servers`配列であり、配列の各要素には以下のフィールドが含まれます。
 
 -   `host` : `scheduling`マイクロサービスがデプロイされているマシンのIPアドレスを指定します。このフィールドは必須です。
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。

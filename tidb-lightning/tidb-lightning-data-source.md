@@ -52,7 +52,7 @@ rename srcdb. tgtdb. *.sql
 -   データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
 -   `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
 -   `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
--   `type` `'$3'` （データファイルの種類）として指定します。5 `type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
+-   `type` `'$3'` （データファイルの種類）として指定します。`type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
 
 ```toml
 [mydumper]

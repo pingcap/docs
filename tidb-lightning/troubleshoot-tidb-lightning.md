@@ -70,7 +70,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ### `checksum failed: checksum mismatched remote vs local` {#checksum-failed-checksum-mismatched-remote-vs-local}
 
-**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。2 `checksum mismatched`含むログを確認することで、原因をさらに特定できます。
+**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`含むログを確認することで、原因をさらに特定できます。
 
 `checksum mismatched`を含む行は情報`total_kvs: x vs y`提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
 
@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    CentOS では、 `yum info tzdata`実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
+    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
 ### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 

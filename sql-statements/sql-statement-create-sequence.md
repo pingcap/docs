@@ -67,7 +67,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 -   `NEXTVAL`または`NEXT VALUE FOR`
 
-    基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。3 `NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
+    基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。`NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
 
 -   `LASTVAL`
 

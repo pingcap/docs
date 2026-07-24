@@ -138,7 +138,7 @@ COMMENT      | The quantile of TiDB query durations(second)
 -   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 -   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。3 `TIME_RANGE`クエリ時間を指定するヒントです。
+2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`クエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,

@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 2.1.17
 
 -   SQLオプティマイザー
     -   `EvalSubquery`ビルド`Executor` 中にエラーが発生したときにエラーメッセージが正しく返されない問題を修正 [＃11811](https://github.com/pingcap/tidb/pull/11811)
-    -   インデックスルックアップ結合において、外部テーブルの行数が単一バッチの行数より多い場合にクエリ結果が正しくない可能性がある問題を修正しました。インデックスルックアップ結合の機能範囲を拡張しました。1 `UnionScan` `IndexJoin` のサブノードとして使用できます。 [＃11843](https://github.com/pingcap/tidb/pull/11843)
+    -   インデックスルックアップ結合において、外部テーブルの行数が単一バッチの行数より多い場合にクエリ結果が正しくない可能性がある問題を修正しました。インデックスルックアップ結合の機能範囲を拡張しました。`UnionScan` `IndexJoin` のサブノードとして使用できます。 [＃11843](https://github.com/pingcap/tidb/pull/11843)
     -   統計フィードバック処理中に無効なキーが発生する可能性がある状況に備えて、 `SHOW STAT_BUCKETS`構文に無効なキー（ `invalid encoded key flag 252`など）の表示を追加します[＃12098](https://github.com/pingcap/tidb/pull/12098)
 -   SQL実行エンジン
     -   `CAST`関数が数値型を変換するときに最初に`UINT`に変換される数値によって発生するいくつかの誤った結果 ( `select cast(13835058000000000000 as double)`など) を修正しました。 [＃11712](https://github.com/pingcap/tidb/pull/11712)

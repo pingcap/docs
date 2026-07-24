@@ -15,7 +15,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
 > **Note:**
 >
-> `tidbcloud_serverless_export`リソースは変更できません。3 `tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
+> `tidbcloud_serverless_export`リソースは変更できません。`tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -115,7 +115,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
     この例では、 `tidbcloud_serverless_export.example`リソースがクラスター全体からデータをエクスポートするエクスポート タスクを作成します。
 
-    このリソースは同期されていません。1 `terraform refresh`使用すると最新の状態を取得できます。
+    このリソースは同期されていません。`terraform refresh`を使用すると最新の状態を取得できます。
 
 5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
 

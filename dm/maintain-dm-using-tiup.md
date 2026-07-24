@@ -269,7 +269,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 ## 操作ログを確認する {#view-the-operation-log}
 
-操作ログを表示するには、 `audit`コマンドを使用します。3 `audit`の使用方法は次のとおりです。
+操作ログを表示するには、 `audit`コマンドを使用します。`audit`の使用方法は次のとおりです。
 
 ```bash
 Usage:
@@ -299,7 +299,7 @@ tiup dm audit 4D5kQY
 
 ## DM クラスター内のホストでコマンドを実行する {#run-commands-on-a-host-in-the-dm-cluster}
 
-DMクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。3 `exec`のコマンドの使用方法は次のとおりです。
+DMクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。`exec`のコマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:

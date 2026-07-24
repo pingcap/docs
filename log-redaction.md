@@ -33,7 +33,7 @@ ERROR 1062 (23000): Duplicate entry '1' for key 't.a'
 
 上記のエラー ログから、値`tidb_redact_log`が`ON`に設定されると、データ セキュリティ リスクを回避するために、機密情報が TiDB ログで`?`マークに置き換えられることがわかります。
 
-さらに、TiDBには`MARKER`オプションが用意されています。3 `tidb_redact_log`値を`MARKER`に設定すると、TiDBはログ内の機密情報を直接置き換えるのではなく、 `‹›`でマークするため、編集ルールをカスタマイズできます。
+さらに、TiDBには`MARKER`オプションが用意されています。`tidb_redact_log`値を`MARKER`に設定すると、TiDBはログ内の機密情報を直接置き換えるのではなく、 `‹›`でマークするため、編集ルールをカスタマイズできます。
 
 ```sql
 set @@global.tidb_redact_log = MARKER;

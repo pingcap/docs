@@ -42,7 +42,7 @@ shard-ddl-lock -h
 
 <!---->
 
--   `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM マスターに要求します。2 `[command]`値として`unlock`のみを受け入れます。
+-   `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM マスターに要求します。`[command]`値として`unlock`のみを受け入れます。
 
 ## 使用例 {#usage-examples}
 

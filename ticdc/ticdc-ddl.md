@@ -144,7 +144,7 @@ ignore-event = ["create table", "drop table", "truncate table", "rename table"]
 | `DROP TABLE test.t1;`                                  | 無視する   | <li></li> | `test.t1`イベントフィルタルールに一致するため、イベント`DROP TABLE`は無視されます。テーブルが削除されたため、TiCDC は`t1`の DML イベントを複製しなくなります。                            |
 | `TRUNCATE TABLE test.t1;`                              | 無視する   | 複製する      | `test.t1`イベントフィルタルールに一致するため、 `TRUNCATE TABLE`イベントは無視されます。DMLイベントのレプリケーションは影響を受けません。                                          |
 | `RENAME TABLE test.t1 TO test.t2;`                     | 無視する   | 複製する      | `test.t1`イベントフィルタルールに一致するため、 `RENAME TABLE`イベントは無視されます。DMLイベントのレプリケーションは影響を受けません。                                            |
-| `RENAME TABLE test.t1 TO test.ignore;`                 | 無視する   | 無視する      | `test.t1`イベント フィルター ルールに一致するため、 `RENAME TABLE`イベントは無視されます。4 `test.ignore`イベント フィルター ルールに一致するため、DDL イベントと DML イベントの両方が無視されます。 |
+| `RENAME TABLE test.t1 TO test.ignore;`                 | 無視する   | 無視する      | `test.t1`イベント フィルター ルールに一致するため、 `RENAME TABLE`イベントは無視されます。`test.ignore`イベント フィルター ルールに一致するため、DDL イベントと DML イベントの両方が無視されます。 |
 
 > **Note:**
 >

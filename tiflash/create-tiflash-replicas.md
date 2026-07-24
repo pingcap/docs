@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **Note:**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`を設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。`1`を設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 
@@ -60,7 +60,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-特定のテーブルのTiFlashレプリカのステータスを確認するには、次のステートメントを使用します。テーブルは`WHERE`句で指定します。3 `WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
+特定のテーブルのTiFlashレプリカのステータスを確認するには、次のステートメントを使用します。テーブルは`WHERE`句で指定します。`WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
@@ -68,8 +68,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
--   `PROGRESS`レプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。6 `1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
+-   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
+-   `PROGRESS`レプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 

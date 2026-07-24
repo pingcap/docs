@@ -11,7 +11,7 @@ TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql
 
 ## `JSON_ARRAYAGG()` {#json-arrayagg}
 
-`JSON_ARRAYAGG(key)`関数は、指定された`key`に従ってキーの値を JSON 配列に集約します。5 `key`通常、式または列名です。
+`JSON_ARRAYAGG(key)`関数は、指定された`key`に従ってキーの値を JSON 配列に集約します。`key`通常、式または列名です。
 
 例：
 

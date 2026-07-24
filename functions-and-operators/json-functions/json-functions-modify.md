@@ -282,7 +282,7 @@ SELECT JSON_UNQUOTE('"foo"');
     +-----------------------+
     1 row in set (0.00 sec)
 
-この関数は[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)と一緒に使用されることが多いです。以下の例では、最初の例では引用符付きのJSON値を抽出し、2番目の例では2つの関数を組み合わせて引用符を解除しています。3 `JSON_UNQUOTE(JSON_EXTRACT(...))`代わりに[`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1)演算子を使用できることに注意してください。
+この関数は[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)と一緒に使用されることが多いです。以下の例では、最初の例では引用符付きのJSON値を抽出し、2番目の例では2つの関数を組み合わせて引用符を解除しています。`JSON_UNQUOTE(JSON_EXTRACT(...))`の代わりに[`->>`](/functions-and-operators/json-functions/json-functions-search.md#--1)演算子を使用できることに注意してください。
 
 ```sql
 SELECT JSON_EXTRACT('{"database": "TiDB"}', '$.database');

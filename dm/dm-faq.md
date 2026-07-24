@@ -116,7 +116,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 4.  `start-task`を使用してタスクを開始します。
 
-5.  `query-status`までタスクの状態を観察します。3 `syncerBinlog` `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
+5.  `query-status`までタスクの状態を観察します。`syncerBinlog` `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
 ## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> ？ {#how-to-handle-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code-that-occurs-during-the-full-import}
 
@@ -143,7 +143,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 構成項目`block-allow-list`と`table-route`を確認します。
 
--   `block-allow-list`下にある上流のデータベースとテーブルの名前を設定する必要があります。3 `do-tables`前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
+-   `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
 -   `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
@@ -179,7 +179,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## DM v1.0 では、タスクにエラーがある場合にコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
-まず、 `sql-skip`実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。5 `sql-skip -s <sql-pattern>`使用して、これらの文に一致するパターンを設定できます。
+まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。`sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
 
 場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
 

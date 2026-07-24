@@ -39,7 +39,7 @@ TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distin
 
 </CustomContent>
 
-この最適化の例として、以下のクエリを見てみましょう。1 `tidb_opt_distinct_agg_push_down`デフォルトで無効になっており、集計関数はTiDBレイヤーで実行されます。この最適化を有効にするために値を`1`に設定すると、 `count(distinct a)`の`distinct a`部分が TiKV またはTiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーには、列 a の重複値を削除する HashAgg_5 があります。これにより、TiDBレイヤーにおける`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
+この最適化の例として、以下のクエリを見てみましょう。`tidb_opt_distinct_agg_push_down`デフォルトで無効になっており、集計関数はTiDBレイヤーで実行されます。この最適化を有効にするために値を`1`に設定すると、 `count(distinct a)`の`distinct a`部分が TiKV またはTiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーには、列 a の重複値を削除する HashAgg_5 があります。これにより、TiDBレイヤーにおける`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

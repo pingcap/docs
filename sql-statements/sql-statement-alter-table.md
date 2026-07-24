@@ -95,7 +95,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)は、テーブル t1 にインデックスを追加するために使用できます。3 `EXPLAIN`元のクエリでインデックス範囲スキャンが使用されるようになり、より効率的になっていることを確認します。
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)は、テーブル t1 にインデックスを追加するために使用できます。`EXPLAIN`元のクエリでインデックス範囲スキャンが使用されるようになり、より効率的になっていることを確認します。
 
 ```sql
 ALTER TABLE t1 ADD INDEX (c1);
