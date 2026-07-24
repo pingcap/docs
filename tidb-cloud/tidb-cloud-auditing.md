@@ -11,9 +11,9 @@ TiDB Cloud provides an audit logging feature that records user access activities
 >
 > Database audit logging is now in Public Preview for eligible clusters.
 >
-> * **Public Preview Eligibility**: Version: TiDB v7.5.6+ or v8.5.2+.
->   * **Azure Restriction**: Must be created after April 15, 2026.
-> * **Other Clusters**: For all other versions or configurations, the feature remains available upon request.
+> - TiDB version: v7.5.6 or later, or v8.5.2 or later.
+> - For Azure clusters, the cluster must have been created after April 15, 2026.
+> For all other versions or configurations, the feature remains available upon request.
 >
 > To request access for an ineligible cluster, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for database audit logging" in the **Description** field, and then click **Submit**.
 
@@ -114,6 +114,7 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 4. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
+>
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must disable and re-enable audit logging.
 > - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this cluster in the AWS Management Console.
 
@@ -171,6 +172,7 @@ In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dial
 3. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
 
 > **Note:**
+>
 > - After enabling audit logging, if you make any new changes to the bucket URI or location, you must disable and re-enable audit logging.
 > - To remove TiDB Cloud's access to your GCS bucket, delete the trust policy granted to this cluster in the Google Cloud console.
 
@@ -239,7 +241,8 @@ For more information, see [Create an Azure storage account](https://learn.micros
 > After enabling audit logging, if you make new changes to the **Blob URL** or **SAS Token** fields, you must disable and re-enable audit logging.
 
 ## Database audit logging settings
-In the **Database Audit Logging Settings** step, configure the following items:
+
+After configuring storage for your cloud provider, complete the **Database Audit Logging Settings** step:
 
 1. Set the log file rotation policy.
 
@@ -270,11 +273,11 @@ To specify auditing filter rules for a cluster, take the following steps:
     - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
     - **Filter Events**: Select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
 
-3. **Confirm** the filter rule.
+3. Click **Confirm** to add the filter rule.
 
 > **Note:**
 >
-> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize the consumption, it is recommended that you specify filter rules to limit the scope of audit logging to specific users, and actions, where possible.
+> - Because audit logging consumes cluster resources, be prudent when specifying filter rules. To minimize resource usage, specify filter rules to limit audit logging to specific users and events where possible.
 
 ## View audit logs
 
@@ -299,6 +302,8 @@ If you no longer want to audit a cluster, take the following steps:
 > **Note:**
 >
 > Each time the size of the log file reaches 10 MiB, the log file will be pushed to the cloud storage bucket. Therefore, after the audit log is disabled, the log file whose size is smaller than 10 MiB will not be automatically pushed to the cloud storage bucket. To get the log file in this situation, contact [PingCAP support](/tidb-cloud/tidb-cloud-support.md).
+
+## Audit filter events
 
 The following table shows all event classes in database audit logging:
 
