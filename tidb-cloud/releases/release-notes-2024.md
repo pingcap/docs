@@ -194,11 +194,11 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)ベクトル検索エンドポイントの自動生成をサポートしています。
+-   [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)ベクトル検索エンドポイントの自動生成をサポートしています。
 
     テーブルに が含まれている場合、選択した距離関数に基づいてベクトル距離を計算する [ベクトルデータ型](/ai/reference/vector-search-data-types.md)検索エンドポイントを自動的に生成できます。
 
-    この機能により[ダイファイ](https://dify.ai/)や[GPT](https://openai.com/blog/introducing-gpts)などのAIプラットフォームとのシームレスな統合が可能になり、高度な自然言語処理とAI機能を活用して、より複雑なタスクやインテリジェントなソリューションに対応できるアプリケーションを構築できます。
+    この機能により[Dify](https://dify.ai/)や[GPT](https://openai.com/blog/introducing-gpts)などのAIプラットフォームとのシームレスな統合が可能になり、高度な自然言語処理とAI機能を活用して、より複雑なタスクやインテリジェントなソリューションに対応できるアプリケーションを構築できます。
 
     詳細については、 [エンドポイントを自動的に生成する](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically)および[データアプリをサードパーティツールと統合する](/tidb-cloud/data-service-integrations.md)参照してください。
 
@@ -224,7 +224,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
--   データ [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)は、データ アプリに直接追加できる事前定義されたシステム エンドポイントを含むエンドポイント ライブラリを提供し、エンドポイント開発の労力を軽減します。
+-   データ [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データ アプリに直接追加できる事前定義されたシステム エンドポイントを含むエンドポイント ライブラリを提供し、エンドポイント開発の労力を軽減します。
 
     現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
 
@@ -316,7 +316,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     -   **データソース**：データ操作およびデータ取得のためにデータアプリにリンクされたクラスター。
     -   **エンドポイント**：SQL文を実行するようにカスタマイズ可能なWeb API。
     -   **データAPIキー**：エンドポイントへの安全なアクセスに使用されます。
-    -   **OpenAPI仕様**：データサービスは、各データアプリに対してOpenAPI仕様3.0を生成することをサポートしており、これにより、標準化された形式でエンドポイントとやり取りすることが可能になります。
+    -   **OpenAPI仕様**：Data Serviceは、各データアプリに対してOpenAPI仕様3.0を生成することをサポートしており、これにより、標準化された形式でエンドポイントとやり取りすることが可能になります。
 
     これらのTiDB Cloud Data Service API エンドポイントは、 TiDB Cloudの最新 API バージョンであるTiDB Cloud API v1beta1 でリリースされています。
 
@@ -336,7 +336,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 -   VPC がTiDB Cloudの VPC とは異なるリージョンにある場合、 [VPCピアリングの作成](/tidb-cloud/set-up-vpc-peering-connections.md)サポートします。
 
--   データ [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)クエリ パラメーターとともにパス パラメーターをサポートしています。
+-   データ [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)クエリ パラメーターとともにパス パラメーターをサポートしています。
 
     この機能は、構造化URLによるリソース識別を強化し、ユーザーエクスペリエンス、検索エンジン最適化（SEO）、クライアント統合を改善することで、開発者により柔軟性を提供し、業界標準との整合性を高めます。
 
@@ -441,11 +441,11 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [公開エンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)ご覧ください。
 
--   データ [データサービス（ベータ版）](https://tidbcloud.com/project/data-service)データ アプリのエンドポイントにアクセスするためのカスタム ドメインの構成をサポートしています。
+-   データ [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)データ アプリのエンドポイントにアクセスするためのカスタム ドメインの構成をサポートしています。
 
     TiDB Cloud Data Serviceは、デフォルトでは各データアプリのエンドポイントにアクセスするためのドメイン`<region>.data.tidbcloud.com`を提供します。パーソナライズと柔軟性をさらに高めるため、デフォルトドメインの代わりにデータアプリにカスタムドメインを設定できるようになりました。この機能により、データベースサービスにブランドURLを使用でき、セキュリティも強化されます。
 
-    詳細については、 [データサービスのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)参照してください。
+    詳細については、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 ## 2024年1月3日 {#january-3-2024}
 

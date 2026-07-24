@@ -1,6 +1,6 @@
 ---
 title: CSV Configurations for Importing Data
-summary: TiDB Cloudのインポート データ サービスで CSV 構成を使用する方法を学習します。
+summary: TiDB Cloudのインポート Data Serviceで CSV 構成を使用する方法を学習します。
 ---
 
 # データのインポートのためのCSV構成 {#csv-configurations-for-importing-data}

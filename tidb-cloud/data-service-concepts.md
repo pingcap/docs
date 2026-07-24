@@ -1,25 +1,25 @@
 ---
 title: Data Service (PREVIEW)
-summary: TiDB Cloudのデータ サービスの概念について学習します。
+summary: TiDB CloudのData Serviceの概念について学習します。
 ---
 
-# データサービス（PREVIEW） {#data-service-beta}
+# Data Service（PREVIEW） {#data-service-beta}
 
-TiDB Cloud [データサービス（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの BaaS (Backend-as-a-Service) ソリューションです。
+TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの BaaS (Backend-as-a-Service) ソリューションです。
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
-詳細については[TiDB Cloudデータ サービス (PREVIEW) の概要](/tidb-cloud/data-service-overview.md)参照してください。
+詳細については[TiDB Cloud Data Service (PREVIEW) の概要](/tidb-cloud/data-service-overview.md)を参照してください。
 
 ## データアプリ {#data-app}
 
-[データサービス（PREVIEW）](https://tidbcloud.com/project/data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データアプリを作成することで、エンドポイントをグループ化し、APIキーを使用してエンドポイントへのアクセスを制限する認証設定を構成できます。これにより、承認されたユーザーのみがデータにアクセスして操作できるようにし、アプリケーションのセキュリティを強化できます。
+[Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データアプリを作成することで、エンドポイントをグループ化し、APIキーを使用してエンドポイントへのアクセスを制限する認証設定を構成できます。これにより、承認されたユーザーのみがデータにアクセスして操作できるようにし、アプリケーションのセキュリティを強化できます。
 
 詳細については[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)参照してください。
 
 ## データアプリのエンドポイント {#data-app-endpoints}
 
-[データサービス（PREVIEW）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用される値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
+[Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用される値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
 
 詳細については[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)参照してください。
 

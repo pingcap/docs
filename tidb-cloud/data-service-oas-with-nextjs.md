@@ -45,13 +45,13 @@ VALUES ('tidb', 'https://github.com/pingcap/tidb'),
 
 ## ステップ2. データアプリを作成する {#step-2-create-a-data-app}
 
-データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)のデータ[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータ アプリを作成し、データ アプリの API キーを作成してから、データ アプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
+データ挿入後、 [TiDB Cloudコンソール](https://tidbcloud.com)のデータ[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにリンクするデータ アプリを作成し、データ アプリの API キーを作成してから、データ アプリに`GET /repositories`エンドポイントを作成します。このエンドポイントに対応する SQL ステートメントは次のとおりです。これは`test.repository`テーブルからすべての行を取得します。
 
 ```sql
 SELECT * FROM test.repository;
 ```
 
-詳細については、[データサービスの利用開始](/tidb-cloud/data-service-get-started.md)をご覧ください。
+詳細については、[Data Serviceの利用開始](/tidb-cloud/data-service-get-started.md)をご覧ください。
 
 ## ステップ3．クライアントコードを生成する {#step-3-generate-client-code}
 
@@ -83,7 +83,7 @@ SELECT * FROM test.repository;
 
 3.  OpenAPI仕様をダウンロードして、 `oas/doc.json`として保存してください。
 
-    1.  TiDB Cloud[**データサービス**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータアプリ名をクリックすると、アプリの設定が表示されます。
+    1.  TiDB Cloud[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインにあるデータアプリ名をクリックすると、アプリの設定が表示されます。
     2.  **API仕様**エリアで**「ダウンロード」**をクリックし、JSON形式を選択して、プロンプトが表示されたら**「承認」**をクリックします。
     3.  ダウンロードしたファイルを`oas/doc.json`プロジェクトディレクトリに`hello-repos` }という名前で保存してください。
 
