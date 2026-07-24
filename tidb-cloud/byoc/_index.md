@@ -115,7 +115,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Pricing](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#billing-details)
+[Pricing](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#pricing-for-byoc)
 
 [Invoices](https://docs.tidb.io/tidbcloud/tidb-cloud-billing/?plan=byoc#invoices)
 
