@@ -44,7 +44,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 -   [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
 
     -   **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
-    -   テキスト生成に使用される**メタラマ3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
+    -   テキスト生成に使用される**Meta Llama 3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
 
     アクセス権がない場合は、 [Amazon Bedrock基盤モデルへのアクセスをリクエストする](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html#getting-started-model-access)手順に従ってください。
 

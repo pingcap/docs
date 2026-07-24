@@ -42,7 +42,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
     [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)参照してください。
 
--   港は占領されています。
+-   ポートが使用中です。
 
     `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tidb-server`開始するポートが使用されていないことを確認します。
 
@@ -83,7 +83,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
     [PD構成とオプション](/command-line-flags-for-pd-configuration.md)参照してください。
 
--   港は占領されています。
+-   ポートが使用中です。
 
     `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `pd-server`開始するポートが使用されていないことを確認します。
 
