@@ -182,7 +182,7 @@ tiup br restore full \
 
 上記のコマンドでは、次のようになります。
 
--   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)参照してください。
+-   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計情報など、**一部のシステムテーブルのデータ**を復元します（ [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照）。ただし、統計テーブル（ `mysql.stat_*` ）とシステム変数テーブル（ `mysql.tidb`および`mysql.global_variables` ）は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
 -   `--ratelimit` : 復元タスクを実行する**TiKVあたりの**最大速度。単位はMiB/sです。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
