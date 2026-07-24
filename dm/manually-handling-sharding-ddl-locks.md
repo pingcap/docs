@@ -42,7 +42,7 @@ shard-ddl-lock -h
 
 <!---->
 
--   `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM マスターに要求します。2 `[command]`値として`unlock`のみを受け入れます。
+-   `shard-ddl-lock [command]` : 指定された DDL ロックを解放するように DM マスターに要求します。`[command]`値として`unlock`のみを受け入れます。
 
 ## 使用例 {#usage-examples}
 
@@ -82,7 +82,7 @@ shard-ddl-lock test
 
 ### `shard-ddl-lock unlock` {#shard-ddl-lock-unlock}
 
-このコマンドは、所有者に DDL ステートメントを実行するよう要求し、所有者以外の他のすべての DM ワーカーに DDL ステートメントをスキップするよう要求し、 `DM-master`のロック情報を削除するなど、指定された`DM-master`ロックのロックを解除するように 1 に積極的に要求します。
+このコマンドは、所有者に DDL ステートメントを実行するよう要求し、所有者以外の他のすべての DM ワーカーに DDL ステートメントをスキップするよう要求し、 `DM-master`のロック情報を削除するなど、指定された DDL ロックを解除するように`DM-master`に積極的に要求します。
 
 > **Note:**
 >
@@ -153,7 +153,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 #### 手動ソリューション {#manual-solution}
 
-アップストリームにインスタンス`MySQL-1` （ `mysql-replica-01` ）と`MySQL-2` （ `mysql-replica-02` ）の2つがあり、 `shard_table_1`に`MySQL-1` `shard_db_1`の`shard_table_2`つ、 `shard_db_2` `MySQL-2`テーブル`shard_db_2` `shard_table_1` 2 `shard_table` `shard_table_2` `shard_db`する必要`shard_db_1`あります。
+アップストリームにインスタンス`MySQL-1` （ `mysql-replica-01` ）と`MySQL-2` （ `mysql-replica-02` ）の2つがあり、 `MySQL-1`に`shard_db_1`の`shard_table_1`と`shard_db_1`の`shard_table_2`の2つのテーブル、 `MySQL-2`に`shard_db_2`の`shard_table_1`と`shard_db_2`の`shard_table_2`の2つのテーブルがあるとします。ここで、これら4つのテーブルをマージして、ダウンストリームTiDBの`shard_db`の`shard_table`テーブルに移行する必要があります。
 
 初期のテーブル構造は次のとおりです。
 

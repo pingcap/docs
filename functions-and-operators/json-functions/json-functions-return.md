@@ -32,7 +32,7 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 
 ## `JSON_LENGTH()` {#json-length}
 
-`JSON_LENGTH(json_doc [,path])`番目の関数はJSONドキュメントの長さを返します。3 `path`引数が指定された場合は、パス内の値の長さを返します。
+`JSON_LENGTH(json_doc [,path])`番目の関数はJSONドキュメントの長さを返します。`path`引数が指定された場合は、パス内の値の長さを返します。
 
 例:
 

@@ -184,7 +184,7 @@ FROM (
 
 ## `JSON_KEYS()` {#json-keys}
 
-`JSON_KEYS(json_doc [,path])`関数は、JSONオブジェクトの最上位キーをJSON配列として返します。3 引数`path`指定された場合は、選択されたパスの最上位キーを返します。
+`JSON_KEYS(json_doc [,path])`関数は、JSONオブジェクトの最上位キーをJSON配列として返します。`path`引数が指定された場合は、選択されたパスの最上位キーを返します。
 
 例:
 

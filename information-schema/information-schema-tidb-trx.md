@@ -52,7 +52,7 @@ DESC TIDB_TRX;
 -   `SESSION_ID` : このトランザクションが属するセッションの ID。
 -   `USER` : トランザクションを実行するユーザーの名前。
 -   `DB` : トランザクションが実行されるセッションの現在のデフォルトのデータベース名。
--   `ALL_SQL_DIGESTS` : トランザクションによって実行された文のダイジェストリスト。このリストはJSON形式の文字列配列として表示されます。各トランザクションは最大で最初の50文を記録します。2 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)を使用すると、この列の情報を対応する正規化されたSQL文のリストに変換できます。
+-   `ALL_SQL_DIGESTS` : トランザクションによって実行された文のダイジェストリスト。このリストはJSON形式の文字列配列として表示されます。各トランザクションは最大で最初の50文を記録します。[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)を使用すると、この列の情報を対応する正規化されたSQL文のリストに変換できます。
 -   `RELATED_TABLE_IDS` : トランザクションがアクセスするテーブル、ビュー、およびその他のオブジェクトの ID。
 
 > **Note:**
@@ -64,7 +64,7 @@ DESC TIDB_TRX;
 
 ## 例 {#example}
 
-`TIDB_TRX`テーブルをビュー:
+`TIDB_TRX`テーブルを確認します:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_TRX\G
@@ -125,7 +125,7 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
 
 ## クラスター_TIDB_TRX {#cluster-tidb-trx}
 
-`TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示するには、 `CLUSTER_TIDB_TRX`テーブルをクエリする必要があります。5 テーブルのクエリ結果と比較すると、 `TIDB_TRX`テーブルのクエリ結果には`INSTANCE`フィールドが追加されています`INSTANCE`フィールド`CLUSTER_TIDB_TRX`は、クラスター内の各ノードの IP アドレスとポート番号が表示され、トランザクションが配置されている TiDB ノードを識別するために使用されます。
+`TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示するには、 `CLUSTER_TIDB_TRX`テーブルをクエリする必要があります。`TIDB_TRX`テーブルのクエリ結果と比較すると、 `CLUSTER_TIDB_TRX`テーブルのクエリ結果には`INSTANCE`フィールドが追加されています。`INSTANCE`フィールドには、クラスター内の各ノードの IP アドレスとポート番号が表示され、トランザクションが配置されている TiDB ノードを識別するために使用されます。
 
 ```sql
 USE INFORMATION_SCHEMA;

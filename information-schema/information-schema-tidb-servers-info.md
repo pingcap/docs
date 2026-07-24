@@ -35,7 +35,7 @@ DESC tidb_servers_info;
 9 rows in set (0.00 sec)
 ```
 
-`TIDB_SERVERS_INFO`テーブルをビュー。
+`TIDB_SERVERS_INFO`テーブルを確認します。
 
 ```sql
 SELECT * FROM TIDB_SERVERS_INFO\G

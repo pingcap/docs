@@ -138,7 +138,7 @@ COMMENT      | The quantile of TiDB query durations(second)
 -   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 -   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。3 `TIME_RANGE`クエリ時間を指定するヒントです。
+2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`クエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,
@@ -179,7 +179,7 @@ ORDER BY ratio DESC LIMIT 10;
 -   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB のスロークエリでの時間消費量`cop process` ) は、期間 t1 の 5,865 倍になります。
 -   期間t2における`tidb_distsql_partial_scan_key_total_num` （TiDBの`distsql`が要求するスキャンキー数）は、期間t1の3,648倍です。期間t2における`tidb_slow_query_cop_wait_total_time` （コプロセッサーがTiDBのスロークエリのキューイングを要求する際の待機時間）は、期間t1の267倍です。
 -   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍になります。
--   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details` 、期間 t1 の 0 の 105 倍になります。
+-   期間 t2 (TiKVコプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍になります。
 
 上記の結果から、期間t2のコプロセッサーリクエストが期間t1よりもはるかに多いことがわかります。これによりTiKVコプロセッサーが過負荷になり、 `cop task`待機状態になります。期間t2に大規模なクエリが発生し、負荷がさらに増加している可能性があります。
 

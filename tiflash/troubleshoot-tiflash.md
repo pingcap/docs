@@ -29,7 +29,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
 4.  CPU が SIMD 命令をサポートしているかどうかを確認します。
 
-    バージョン6.3以降、Linux AMD64アーキテクチャでTiFlashを展開するには、AVX2命令セットをサポートするCPUが必要です。1 `grep avx2 /proc/cpuinfo`出力が生成されることを確認して検証してください。Linux ARM64アーキテクチャの場合、CPUはARMv8命令セットアーキテクチャをサポートしている必要があります。3 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`出力が生成されることを確認して検証してください。
+    バージョン6.3以降、Linux AMD64アーキテクチャでTiFlashを展開するには、AVX2命令セットをサポートするCPUが必要です。`grep avx2 /proc/cpuinfo`出力が生成されることを確認して検証してください。Linux ARM64アーキテクチャの場合、CPUはARMv8命令セットアーキテクチャをサポートしている必要があります。`grep 'crc32' /proc/cpuinfo | grep 'asimd'`出力が生成されることを確認して検証してください。
 
     仮想マシンにデプロイするときにこの問題が発生した場合は、VM の CPUアーキテクチャを Haswell に変更してから、 TiFlash を再デプロイしてみてください。
 

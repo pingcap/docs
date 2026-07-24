@@ -724,7 +724,7 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 
 ### USE_TOJA(ブール値) {#use-toja-boolean-value}
 
-`boolean_value`パラメータは`TRUE`または`FALSE`です。7 ヒント`USE_TOJA(TRUE)` 、オプティマイザが`in`条件（サブクエリを含む）を結合および集計演算に変換できるようにします。一方、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
+`boolean_value`パラメータは`TRUE`または`FALSE`です。`USE_TOJA(TRUE)`ヒントは、オプティマイザが`in`条件（サブクエリを含む）を結合および集計演算に変換できるようにします。一方、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
 
 たとえば、次のクエリは`in (select t2.a from t2) subq`対応する結合および集計操作に変換します。
 
@@ -826,7 +826,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 ### NTH_PLAN(N) {#nth-plan-n}
 
-ヒント`NTH_PLAN(N)`は、物理的な最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに通知します。5 `N`正の整数である必要があります。
+ヒント`NTH_PLAN(N)`は、物理的な最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに通知します。`N`正の整数である必要があります。
 
 指定された`N`物理最適化の検索範囲を超える場合、TiDB は警告を返し、このヒントを無視する戦略に基づいて最適な物理プランを選択します。
 

@@ -26,7 +26,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 ## TiDB Lightningを適切に再起動するにはどうすればよいですか? {#how-to-properly-restart-tidb-lightning}
 
 1.  [`tidb-lightning`プロセスを停止する](#how-to-stop-the-tidb-lightning-process) 。
-2.  新しい`tidb-lightning`タスクを開始します。3 `nohup tiup tidb-lightning -config tidb-lightning.toml`の前の開始コマンドを実行します。
+2.  新しい`tidb-lightning`タスクを開始します。`nohup tiup tidb-lightning -config tidb-lightning.toml`の前の開始コマンドを実行します。
 
 ## インポートされたデータの整合性を確保するにはどうすればよいですか? {#how-to-ensure-the-integrity-of-the-imported-data}
 

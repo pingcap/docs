@@ -198,7 +198,7 @@ openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
 
 ### サーバー証明書を使用するように TiDB を構成する {#configure-tidb-to-use-server-certificate}
 
-TiDB設定ファイルの`[security]`セクションを変更します。この手順では`path/to/server-key.pem` CA証明書、サーバー鍵、サーバー証明書`path/to/ca-cert.pem`保存されるディレクトリを指定します。3、5、7 `path/to/server-cert.pem`任意のディレクトリに置き換えることができます。
+TiDB設定ファイルの`[security]`セクションを変更します。この手順では、CA証明書、サーバー鍵、サーバー証明書が保存されるディレクトリを指定します。`path/to/server-cert.pem` 、 `path/to/server-key.pem` 、 `path/to/ca-cert.pem`は任意のディレクトリに置き換えることができます。
 
 ```toml
 [security]

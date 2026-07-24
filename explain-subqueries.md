@@ -47,7 +47,7 @@ ANALYZE TABLE t1, t2, t3;
 
 ## 内部結合（一意でないサブクエリ） {#inner-join-non-unique-subquery}
 
-次の例では、 `IN`サブクエリがテーブル`t2`からIDのリストを検索します。セマンティクスの正確性を保つため、TiDBは列`t1_id`一意であることを保証する必要があります。7 `EXPLAIN`のサブクエリを使用すると、重複を削除して`INNER JOIN`操作を実行するための実行プランを確認できます。
+次の例では、 `IN`サブクエリがテーブル`t2`からIDのリストを検索します。セマンティクスの正確性を保つため、TiDBは列`t1_id`一意であることを保証する必要があります。`EXPLAIN`のサブクエリを使用すると、重複を削除して`INNER JOIN`操作を実行するための実行プランを確認できます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);

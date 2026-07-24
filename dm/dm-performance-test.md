@@ -89,7 +89,7 @@ mydumpers:
 
 #### テスト結果を取得する {#get-test-results}
 
-DM-worker のログを確認してください。1 `all data files have been finished`表示されている場合は、すべてのデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
+DM-worker のログを確認してください。`all data files have been finished`が表示されている場合は、すべてのデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
 
      [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
 

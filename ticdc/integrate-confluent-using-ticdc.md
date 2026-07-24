@@ -103,7 +103,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
     -   `<schema_registry_api_secret>`
     -   `<schema_registry_endpoint>`
 
-    1 の値を置き換える前に、 [HTML URL エンコーディングリファレンス](https://www.w3schools.com/tags/ref_urlencode.asp)に基づいて`<schema_registry_api_secret>`エンコードする必要があることに注意してください。上記のすべてのフィールドを置き換えた後、設定ファイルは次のようになります。
+    `<schema_registry_api_secret>`の値を置き換える前に、 [HTML URL エンコーディングリファレンス](https://www.w3schools.com/tags/ref_urlencode.asp)に基づいてエンコードする必要があることに注意してください。上記のすべてのフィールドを置き換えた後、設定ファイルは次のようになります。
 
     ```shell
     tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
@@ -156,14 +156,14 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 ### 前提条件 {#prerequisites}
 
--   Snowflakeクラスターの登録と作成が完了しました[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)参照してください。
--   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。1 [キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)参照してください。
+-   Snowflakeクラスターの登録と作成が完了しています。[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)を参照してください。
+-   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。[キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)を参照してください。
 
 ### 統合手順 {#integration-procedure}
 
 1.  Snowflake でデータベースとスキーマを作成します。
 
-    Snowflakeコントロールコンソールで、 **「データ」** &gt; **「データベース」**を選択します。5 `TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
+    Snowflakeコントロールコンソールで、 **「データ」** &gt; **「データベース」**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
 2.  Confluent Cloud Consoleで、 **「データ統合」** &gt; **「コネクタ」** &gt; **「Snowflake Sink」**を選択します。以下のページが表示されます。
 

@@ -107,7 +107,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_sql_user.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_sql_user.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_sql_user.example                 
@@ -178,7 +178,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-4.  `terraform state show tidbcloud_sql_user.${resource-name}`使用して状態を確認します。
+4.  `terraform state show tidbcloud_sql_user.${resource-name}`を使用して状態を確認します。
 
         $ terraform state show tidbcloud_sql_user.example
         # tidbcloud_sql_user.example:
@@ -189,7 +189,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
             user_name    = "example_user"
         }
 
-`builtin_role` `role_readonly`に変更されます。5 `password`センシティブな値であるため表示されません。
+`builtin_role` `role_readonly`に変更されます。`password`センシティブな値であるため表示されません。
 
 ## SQLユーザーをインポートする {#import-a-sql-user}
 

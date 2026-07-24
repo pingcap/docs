@@ -140,7 +140,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 ### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-code-transaction-too-large-code-is-displayed}
 
-基盤となるストレージエンジンの制限により、TiDB の各キーと値のエントリ（1行）は 6MB 以下にする必要があります。1 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)設定値は最大 120MB まで調整できます。
+基盤となるストレージエンジンの制限により、TiDB の各キーと値のエントリ（1行）は 6MB 以下にする必要があります。[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)設定値は最大 120MB まで調整できます。
 
 分散トランザクションは2相コミットを必要とし、最下層でRaftレプリケーションを実行します。トランザクションが非常に大きい場合、コミットプロセスは非常に遅くなり、書き込み競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックは、不要なパフォーマンスの低下につながります。これらの問題を回避するため、デフォルトでは、トランザクション内のキーと値のエントリの合計サイズを100MB以下に制限しています。より大きなトランザクションが必要な場合は、TiDB設定ファイルの値`txn-total-size-limit`変更してください。この設定項目の最大値は10GBです。実際の制限は、マシンの物理メモリにも影響されます。
 
@@ -152,7 +152,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### TiDB はデータを削除した後すぐにスペースを解放しますか? {#does-tidb-release-space-immediately-after-deleting-data}
 
-`DELETE` `TRUNCATE`操作`DROP`いずれもデータを即時に解放しません。7と`TRUNCATE` `DROP`操作では、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）後にデータが削除され、領域が解放されます。11 `DELETE`操作では、データは削除されますが、TiDB GCに従って領域は解放されません。後続のデータがRocksDBに書き込まれ、 `COMPACT`実行されると、領域は再利用されます。
+`DELETE` 、 `TRUNCATE` 、 `DROP`操作はいずれもデータを即時に解放しません。`TRUNCATE`と`DROP`操作では、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）後にデータが削除され、領域が解放されます。`DELETE`操作では、データは削除されますが、TiDB GCに従って領域は解放されません。後続のデータがRocksDBに書き込まれ、 `COMPACT`が実行されると、領域は再利用されます。
 
 ### データをロードするときに、ターゲット テーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 
@@ -170,7 +170,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`使用をお勧めします。これはループを通して削除を行い、 `Affected Rows == 0`ループ終了条件として使用することで、トランザクションサイズの制限を超えないようにします。ビジネスフィルタリングロジックを満たすことを前提として、強力なフィルターインデックス列を追加するか、 `id >= 5000*n+m and id < 5000*(n+1)+m`のように主キーを直接使用して範囲を選択することをお勧めします。
 
-一度に削除する必要があるデータの量が非常に多い場合、このループメソッドは削除処理が後方に移動するにつれて速度が低下します。前のデータを削除した後、多くの削除フラグが短期間残り（その後、すべてガベージコレクションによって処理されます）、後続のDelete文に影響を与えます。可能であれば、Where条件を絞り込むことをお勧めします。1 [詳細はTiDBベストプラクティスをご覧ください](https://www.pingcap.com/blog/tidb-best-practice/#write)参照してください。
+一度に削除する必要があるデータの量が非常に多い場合、このループメソッドは削除処理が後方に移動するにつれて速度が低下します。前のデータを削除した後、多くの削除フラグが短期間残り（その後、すべてガベージコレクションによって処理されます）、後続のDelete文に影響を与えます。可能であれば、Where条件を絞り込むことをお勧めします。[TiDB ベストプラクティスの詳細](https://www.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ### TiDB のデータ読み込み速度を向上させるにはどうすればよいでしょうか? {#how-to-improve-the-data-loading-speed-in-tidb}
 

@@ -35,7 +35,7 @@ PDアフィニティスケジューリングはデフォルトで無効になっ
     pd-ctl config set schedule.affinity-schedule-limit 4
     ```
 
-2.  （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256`です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。5に設定すると`0`アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
+2.  （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256` MiB です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。`0`に設定すると、アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
 
 ## 使用法 {#usage}
 
@@ -84,7 +84,7 @@ ALTER TABLE t1 AFFINITY = '';
 
 テーブルまたはパーティションのアフィニティ情報は、次の方法で表示できます。
 
--   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。3 `Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。5 `Status`の列の値の意味は次のとおりです。
+-   [`SHOW AFFINITY`](/sql-statements/sql-statement-show-affinity.md)番目のステートメントを実行します。`Status`の列には、アフィニティが有効になっているテーブルまたはパーティションと、それらのスケジュールステータスが表示されます。`Status`の列の値の意味は次のとおりです。
 
     -   `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティ スケジューリングを開始していません。
     -   `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。

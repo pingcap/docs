@@ -51,7 +51,7 @@ cdc cli changefeed list --server=http://10.0.10.25:8300
 
 ## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
-特定のレプリケーションタスク`-s`クエリするには、 `changefeed query`コマンドを実行します。クエリ結果には、タスク情報とタスク状態が含まれます。3 または`--simple`引数を指定すると、クエリ結果を簡略化し、基本的なレプリケーション状態とチェックポイント情報のみを含めることができます。この引数を指定しない場合は、詳細なタスク設定、レプリケーション状態、およびレプリケーションテーブル情報が出力されます。
+特定のレプリケーションタスクをクエリするには、 `changefeed query`コマンドを実行します。クエリ結果には、タスク情報とタスク状態が含まれます。`--simple`または`-s`引数を指定すると、クエリ結果を簡略化し、基本的なレプリケーション状態とチェックポイント情報のみを含めることができます。この引数を指定しない場合は、詳細なタスク設定、レプリケーション状態、およびレプリケーションテーブル情報が出力されます。
 
 ```shell
 cdc cli changefeed query -s --server=http://10.0.10.25:8300 --changefeed-id=simple-replication-task
@@ -174,7 +174,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 
 > **Note:**
 >
-> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。13 `cdc cli changefeed query`実行すると`t1`取得できます。
+> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。`cdc cli changefeed query`を実行すると`t1`を取得できます。
 > -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがチェンジフィード（ `t1` ）の現在のチェックポイントTSOより小さい場合、TiCDCは古い時点（ `t2` ）からデータをプルします。これにより、データの重複が発生する可能性があります（たとえば、下流がMQシンクの場合）。
 
 ## レプリケーションタスクを削除する {#remove-a-replication-task}
@@ -274,7 +274,7 @@ force-replicate = true
 
 > **Note:**
 >
-> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。1 `sort engine`項目は設定しないことを推奨します。
+> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。`sort engine`項目は設定しないことを推奨します。
 
 統合ソートエンジンはTiCDCのソートエンジンです。以下のシナリオで発生するOOM問題を軽減できます。
 

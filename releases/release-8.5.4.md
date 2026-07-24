@@ -90,7 +90,7 @@ TiDBバージョン：8.5.4
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-バージョン 8.5.4 以降、TiDB は`DECIMAL`列にデータを挿入する際の動作を MySQL と同期させました。小数点以下の桁数が列の定義済みスケールを超える場合、TiDB は余分な桁を自動的に切り捨て、切り捨てられたデータを正常に挿入します。小数点以下の桁数に関係なく、切り捨てられたデータは挿入されます。以前の TiDB バージョンでは、挿入される`DECIMAL`値の小数点以下の桁数が 72 を超えると、挿入は失敗し、エラーが返されました。詳細については、 [JDBCを使用してTiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-jdbc#mysql-compatibility)
+バージョン 8.5.4 以降、TiDB は`DECIMAL`列にデータを挿入する際の動作を MySQL と同期させました。小数点以下の桁数が列の定義済みスケールを超える場合、TiDB は、超過した小数点以下の桁数に関係なく、余分な桁を自動的に切り捨て、切り捨てられたデータを正常に挿入します。以前の TiDB バージョンでは、挿入される`DECIMAL`値の小数点以下の桁数が 72 を超えると、挿入は失敗し、エラーが返されました。詳細については、 [JDBCを使用してTiDBに接続する](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-jdbc#mysql-compatibility)を参照してください。
 
 ## 改善点 {#improvements}
 

@@ -74,7 +74,7 @@ TiDB バージョン: 6.1.6
     -   直交積[＃6730](https://github.com/pingcap/tiflash/issues/6730) @ [gengliqi](https://github.com/gengliqi)を計算するときにセミ結合が過剰なメモリを使用する問題を修正しました
     -   TiFlashログ検索が遅すぎる問題を修正[＃6829](https://github.com/pingcap/tiflash/issues/6829) @ [hehechen](https://github.com/hehechen)
     -   新しい照合順序[＃6807](https://github.com/pingcap/tiflash/issues/6807) @ [xzhangxian1008](https://github.com/xzhangxian1008)を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました
-    -   特定のケースで[＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [windtalker](https://github.com/windtalker) 10 進キャストが誤って切り上げられる問題を修正しました
+    -   特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [＃6994](https://github.com/pingcap/tiflash/issues/6994) @ [windtalker](https://github.com/windtalker)
     -   TiFlashが生成された列[＃6801](https://github.com/pingcap/tiflash/issues/6801) @ [guo-shaoge](https://github.com/guo-shaoge)を認識できない問題を修正
     -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @ [LittleFall](https://github.com/LittleFall)
 

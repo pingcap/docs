@@ -379,7 +379,7 @@ pd-server関連のコンフィグレーション項目
 
 ### `affinity-schedule-limit` <span class="version-mark">v8.5.5 の新機能</span> {#affinity-schedule-limit-new-in-v855}
 
--   同時に実行できる[親和性](/table-affinity.md)スケジュールタスクの数を制御します。3に設定すると`0`アフィニティスケジュールが無効になります。
+-   同時に実行できる[親和性](/table-affinity.md)スケジュールタスクの数を制御します。`0`に設定すると、アフィニティスケジュールが無効になります。
 -   デフォルト値: `0`
 
 ### `high-space-ratio` {#high-space-ratio}

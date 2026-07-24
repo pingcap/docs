@@ -58,11 +58,11 @@ tiup bench ch -H 172.16.5.140 -P 4000 -D tpcc prepare
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。1 `tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
+TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。`tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
 
     ALTER DATABASE tpcc SET tiflash replica 2;
 
-`tpcc`データベース内のすべてのテーブルのレプリケーションが完了しているかどうかを確認するには、次のステートメントを実行します。3 句は、確認するデータベースとテーブルを指定します。すべてのデータベースのレプリケーション状態を確認する場合は、ステートメントから`WHERE`句`WHERE`削除します。
+`tpcc`データベース内のすべてのテーブルのレプリケーションが完了しているかどうかを確認するには、次のステートメントを実行します。`WHERE`句は、確認するデータベースとテーブルを指定します。すべてのデータベースのレプリケーション状態を確認する場合は、ステートメントから`WHERE`句を削除します。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
@@ -70,8 +70,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。2 `1`利用可能、 `0`利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
--   `PROGRESS`レプリケーションの進行状況を示します。値は`0`から`1`までです。6 `1` TiFlashレプリカのレプリケーションが完了したことを意味します。
+-   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`利用可能、 `0`利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
+-   `PROGRESS`レプリケーションの進行状況を示します。値は`0`から`1`までです。`1` TiFlashレプリカのレプリケーションが完了したことを意味します。
 
 ## 統計を収集する {#collect-statistics}
 

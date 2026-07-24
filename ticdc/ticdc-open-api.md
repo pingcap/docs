@@ -9,7 +9,7 @@ summary: OpenAPI インターフェースを使用してクラスターのステ
 
 > **注記**
 >
-> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。1 [TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)使用をお勧めします。
+> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。[TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)の使用をお勧めします。
 
 TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 
@@ -117,9 +117,9 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 上記の表のその他のパラメータについては、次のようにさらに詳しく説明します。
 
-`force_replicate` : このパラメータのデフォルトは`false`です。4 `true`指定すると、TiCDC は一意インデックスを持たないテーブルを強制的に複製しようとします。
+`force_replicate` : このパラメータのデフォルトは`false`です。`true`を指定すると、TiCDC は一意インデックスを持たないテーブルを強制的に複製しようとします。
 
-`ignore_ineligible_table` : このパラメータのデフォルトは`false`です。4 `true`指定すると、TiCDC は複製できないテーブルを無視します。
+`ignore_ineligible_table` : このパラメータのデフォルトは`false`です。`true`を指定すると、TiCDC は複製できないテーブルを無視します。
 
 `filter_rules` : テーブルスキーマフィルタリングのルール（例： `filter_rules = ['foo*.*','bar*.*']` ）。詳細については、 [テーブルフィルター](/table-filter.md)ドキュメントを参照してください。
 

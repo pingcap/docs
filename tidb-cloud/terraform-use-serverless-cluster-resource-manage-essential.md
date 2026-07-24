@@ -22,7 +22,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -226,7 +226,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -357,7 +357,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用してリソースの状態を確認します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用してリソースの状態を確認します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example

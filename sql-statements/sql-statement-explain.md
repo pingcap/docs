@@ -5,11 +5,11 @@ summary: TiDB データベースにおけるEXPLAINの使用法の概要。
 
 # `EXPLAIN` {#explain}
 
-`EXPLAIN`の文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`の文を補完するものです。5 `EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`実行して、テーブル統計が最新であることを確認することを検討してください。
+`EXPLAIN`文は、クエリを実行せずにその実行プランを表示します。これは、クエリを実行する`EXPLAIN ANALYZE`文を補完するものです。`EXPLAIN`出力が期待される結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`を実行して、テーブル統計が最新であることを確認することを検討してください。
 
 > **Note:**
 >
-> 最適化フェーズでは、 `EXPLAIN`文であっても、最適な実行プランを生成するために特定のサブクエリが事前実行されます。この動作の詳細と無効化方法については、 [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)および[サブクエリの早期実行を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)参照してください。
+> 最適化フェーズでは、 `EXPLAIN`文であっても、最適な実行プランを生成するために特定のサブクエリが事前実行されます。この動作の詳細と無効化方法については、 [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)および[サブクエリの早期実行を無効にする](/explain-walkthrough.md#disable-the-early-execution-of-subqueries)を参照してください。
 
 `DESC`文と`DESCRIBE`文は`EXPLAIN`の別名です。文`EXPLAIN <tableName>`の代替使用法については[`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
 
@@ -39,18 +39,18 @@ ExplainableStmt ::=
 
 > **Note:**
 >
-> MySQLクライアントを使用してTiDBに接続する場合、出力結果を行の折り返しなしでより明確に読み取るには、 `pager less -S`コマンドを使用します。3 `EXPLAIN`結果が出力された後、キーボードの右矢印<kbd>→</kbd>キーを押して出力を水平にスクロールします。
+> MySQLクライアントを使用してTiDBに接続する場合、出力結果を行の折り返しなしでより明確に読み取るには、 `pager less -S`コマンドを使用します。`EXPLAIN`結果が出力された後、キーボードの右矢印<kbd>→</kbd>キーを押して出力を水平にスクロールします。
 
 > **Note:**
 >
 > 返される実行プランにおいて、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降では`estRows`の意味が v6.4.0 以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)を参照してください。
 
-現在、TiDBの`EXPLAIN`は5つの列（ `id` `estRows` `access object`出力します。実行プラン内の各演算子`task`これらの属性によって記述され、 `EXPLAIN`出力の各行は演算子`operator info`記述します。各属性の説明は次のとおりです。
+現在、TiDBの`EXPLAIN`は5つの列（`id`、`estRows`、`task`、`access object`、`operator info`）を出力します。実行プラン内の各演算子はこれらの属性によって記述され、`EXPLAIN`出力の各行が演算子を記述します。各属性の説明は次のとおりです。
 
 | 属性名        | 説明                                                                                                                                                                                                                                                                                                           |
 | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | id         | オペレータIDは、実行プラン全体におけるオペレータの一意の識別子です。TiDB 2.1では、このIDはオペレータのツリー構造を表すようにフォーマットされています。データは子ノードから親ノードへと流れます。オペレータごとに親ノードは1つだけです。                                                                                                                                                                                   |
-| estRows    | 演算子が出力すると予想される行数。この数は、統計情報と演算子のロジックに基づいて推定されます。1 `estRows` 、TiDB 4.0 の以前のバージョンでは`count`呼ばれていました。                                                                                                                                                                                                             |
+| estRows    | 演算子が出力すると予想される行数。この数は、統計情報と演算子のロジックに基づいて推定されます。`estRows` 、TiDB 4.0 の以前のバージョンでは`count`呼ばれていました。                                                                                                                                                                                                             |
 | タスク        | オペレータが属するタスクの種類。現在、実行プランは tidb-server 上で実行される**ルート**タスクと、 TiKV またはTiFlash上で並列実行される**cop**タスクの2つのタスクに分かれています。タスクレベルでの実行プランのトポロジは、ルートタスクの後に多数の cop タスクが続くというものです。ルートタスクは cop タスクの出力を入力として使用します。cop タスクとは、TiDB が TiKV またはTiFlashにプッシュダウンするタスクを指します。各 cop タスクは TiKV クラスターまたはTiFlashクラスターに分散され、複数のプロセスによって実行されます。 |
 | アクセスオブジェクト | オペレータがアクセスするデータ項目情報。この情報には、 `table` 、および`index` （存在する場合） `partition`含まれます。この情報は、データに直接アクセスするオペレータのみが使用できます。                                                                                                                                                                                                  |
 | オペレーター情報   | 演算子に関するその他の情報。演算子ごとに`operator info`異なります。以下の例を参照してください。                                                                                                                                                                                                                                                      |
@@ -176,12 +176,12 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 
 | 形式           | 説明                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| 指定されていない     | 形式が指定されていない場合は、デフォルトの形式`EXPLAIN` `row`使用されます。                                                                             |
-| `brief`      | `EXPLAIN`ステートメントの出力の演算子 ID は、 `FORMAT`指定されていない場合に比べて簡素化されます。                                                              |
+| 指定されていない     | 形式が指定されていない場合、 `EXPLAIN`はデフォルトの形式`row`を使用します。                                                                               |
+| `brief`      | `EXPLAIN`ステートメントの出力の演算子 ID は、 `FORMAT`が指定されていない場合に比べて簡素化されます。                                                              |
 | `dot`        | `EXPLAIN`ステートメントは DOT 実行プランを出力します。これを使用して、 `dot`プログラム ( `graphviz`パッケージ内) を通じて PNG ファイルを生成することができます。                      |
-| `row`        | `EXPLAIN`文は結果を表形式で出力します。詳細については[クエリ実行プランを理解する](/explain-overview.md)参照してください。                                             |
+| `row`        | `EXPLAIN`文は結果を表形式で出力します。詳細については[クエリ実行プランを理解する](/explain-overview.md)を参照してください。                                             |
 | `tidb_json`  | `EXPLAIN`ステートメントは実行プランを JSON 形式で出力し、演算子情報を JSON 配列に格納します。                                                                 |
-| `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)参照してください。 |
+| `verbose`    | `EXPLAIN`文は`row`形式で結果を出力し、さらに`estCost`列にクエリの推定コストが表示されます。この形式の使用方法の詳細については、 [SQLプラン管理](/sql-plan-management.md)を参照してください。 |
 | `plan_cache` | `EXPLAIN`ステートメントは、 [プランキャッシュ](/sql-non-prepared-plan-cache.md#diagnostics)情報を警告として含めて、 `row`形式で結果を出力します。                  |
 | `cost_trace` | `EXPLAIN`ステートメントは、推定コストの`estCost`とコストの計算式の`costFormula`列の 2 つの追加列を含む拡張`row`形式で結果を出力します。                                   |
 
@@ -211,7 +211,7 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 
 <div label="DotGraph">
 
-MySQL 標準の結果形式に加えて、TiDB は DotGraph もサポートしており、次の例のように`FORMAT = "dot"`指定する必要があります。
+MySQL 標準の結果形式に加えて、TiDB は DotGraph もサポートしており、次の例のように`FORMAT = "dot"`を指定する必要があります。
 
 ```sql
 CREATE TABLE t(a bigint, b bigint);
@@ -269,7 +269,7 @@ The xx.dot is the result returned by the above statement.
 
 <div label="JSON">
 
-JSON形式で出力を取得するには、 `EXPLAIN`ステートメントに`FORMAT = "tidb_json"`指定します。以下は例です。
+JSON形式で出力を取得するには、 `EXPLAIN`ステートメントに`FORMAT = "tidb_json"`を指定します。以下は例です。
 
 ```sql
 CREATE TABLE t(id int primary key, a int, b int, key(a));

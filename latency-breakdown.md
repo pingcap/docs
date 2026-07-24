@@ -138,7 +138,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。1 `tikv_storage_rocksdb_perf`場合、getリクエストは`get`または`batch_get_command`いずれかになります。
+TiKVはストレージエンジンとしてRocksDBを使用します。必要な値がブロックキャッシュに存在しない場合、TiKVはディスクから値をロードする必要があります。`tikv_storage_rocksdb_perf`の場合、getリクエストは`get`または`batch_get_command`のいずれかになります。
 
 ### Batch PointGet {#batch-point-get}
 
@@ -227,7 +227,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-テーブルスキャンとインデックススキャンは同じように処理されます。1 `req_per_copr`分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
+テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
 
 `send request duration`と`req_per_copr`次のように計算されます。
 
@@ -247,7 +247,7 @@ tikv_grpc_msg_duration_seconds{type="coprocessor"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-TiKVでは、テーブルスキャンタイプは`select` 、インデックススキャンタイプは`index`です。5と`select` `index`タイプの所要時間の詳細は同じです。
+TiKVでは、テーブルスキャンタイプは`select` 、インデックススキャンタイプは`index`です。`select`と`index`タイプの所要時間の詳細は同じです。
 
 ### インデックス検索 {#index-look-up}
 
@@ -757,7 +757,7 @@ async io enabled commit = max(
 )
 ```
 
-v5.3.0以降、TiKVはAsync IO Raft （StoreWriterスレッドプールによるRaftログの書き込み）をサポートしています。Async IO Raftは、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)正の値に設定されている場合にのみ有効になり、コミットプロセスが変更されます。3と`persist log locally duration` `wait by write worker duration`以下のように計算されます。
+v5.3.0以降、TiKVはAsync IO Raft （StoreWriterスレッドプールによるRaftログの書き込み）をサポートしています。Async IO Raftは、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)が正の値に設定されている場合にのみ有効になり、コミットプロセスが変更されます。`persist log locally duration`と`wait by write worker duration`は以下のように計算されます。
 
 ```text
 persist log locally duration =
@@ -779,7 +779,7 @@ wait by write worker duration =
 
 非同期IOの有無の違いは、ログがローカルに保持される期間です。非同期IOを使用する場合、ログがローカルに保持される期間は、ウォーターフォールメトリックから直接計算できます（バッチ待機時間は考慮されません）。
 
-レプリケートログ期間は、クォーラムピアに保持されたログの期間を記録します。これには、RPC期間と過半数に保持されたログの期間が含まれます。1は`replicate log duration`のように計算されます。
+レプリケートログ期間は、クォーラムピアに保持されたログの期間を記録します。これには、RPC期間と過半数に保持されたログの期間が含まれます。`replicate log duration`は以下のように計算されます。
 
 ```text
 replicate log duration =

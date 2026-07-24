@@ -277,7 +277,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"` `index-value`ディスパッチャ`columns`指定するために使用できます。3、5、7、9、11 `default` 5つ`ts`ディスパッチャをサポートします。ディスパッチャのルールは以下のとおり`table` 。
+`partition = "xxx"`を使用してパーティションディスパッチャを指定できます。`default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`の5つのディスパッチャをサポートします。ディスパッチャのルールは以下のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意インデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
@@ -307,7 +307,7 @@ dispatchers = [
 
 > **Note:**
 >
-> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。5 `partition` `dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
+> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。`partition` `dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
 >
 >     [sink]
 >     dispatchers = [
@@ -408,7 +408,7 @@ large-message-handle-compression = "none"
 -   `large-message-handle-compression`で指定された圧縮アルゴリズムは、単一のKafkaメッセージを圧縮します。圧縮は、メッセージサイズの制限と比較する前に実行されます。
 -   同時に、 [`sink-uri`](#configure-sink-uri-for-kafka)の`compression`パラメータを使用して圧縮アルゴリズムを設定することもできます。この圧縮アルゴリズムは、複数のKafkaメッセージを含むデータ送信リクエスト全体に適用されます。
 
-`large-message-handle-compression`設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。5 に`compression` [`sink-uri`](#configure-sink-uri-for-kafka)設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
+`large-message-handle-compression`設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データ要求全体をシンクレベルで再度圧縮します。
 
 前述の 2 つの圧縮方法の圧縮率は次のように計算されます`compression ratio = size before compression / size after compression * 100` 。
 

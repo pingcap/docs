@@ -515,7 +515,7 @@ tiup cluster import --dir=/path/to/tidb-ansible
 
 ## 操作ログを表示する {#view-the-operation-log}
 
-操作ログを表示するには、 `audit`コマンドを使用します。3 コマンドの使用方法は`audit`のとおりです。
+操作ログを表示するには、 `audit`コマンドを使用します。`audit`コマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:
@@ -548,7 +548,7 @@ tiup cluster audit 4BLhr0
 
 ## TiDB クラスター内のホストでコマンドを実行する {#run-commands-on-a-host-in-the-tidb-cluster}
 
-TiDBクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。3 `exec`のコマンドの使用方法は次のとおりです。
+TiDBクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。`exec`のコマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:

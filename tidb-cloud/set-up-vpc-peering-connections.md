@@ -188,7 +188,7 @@ AWS CLI または AWS ダッシュボードを使用して、VPC ピアリング
     aws ec2 modify-vpc-attribute --vpc-id "$app_vpc_id" --enable-dns-support
     ```
 
-設定が完了すると、VPCピアリングが作成されます。1 [TiDBクラスタに接続する](#connect-to-the-tidb-cluster)結果を確認できます。
+設定が完了すると、VPCピアリングが作成されます。[TiDBクラスタに接続する](#connect-to-the-tidb-cluster)ことで結果を確認できます。
 
 </div>
 <div label="Use the AWS dashboard">

@@ -53,7 +53,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 上記の表のフィールドの説明は次のとおりです。
 
 -   `HOST` :サーバーの IP アドレス。
--   `INSTANCE` :サーバーにデプロイされているインスタンスの数。たとえば、 `pd * 1`サーバーに PD インスタンスが 1 つデプロイされていることを意味します。4 `tidb * 2 pd * 1` 、サーバーに TiDB インスタンスが 2 つと PD インスタンスが 1 つデプロイされていることを意味します。
+-   `INSTANCE` :サーバーにデプロイされているインスタンスの数。たとえば、 `pd * 1`サーバーに PD インスタンスが 1 つデプロイされていることを意味します。`tidb * 2 pd * 1` 、サーバーに TiDB インスタンスが 2 つと PD インスタンスが 1 つデプロイされていることを意味します。
 -   `CPU_CORES` :サーバーの CPU コア数 (物理コアまたは論理コア) を示します。
 -   `MEMORY` :サーバーのメモリサイズを示します。単位はGBです。
 -   `DISK` :サーバーのディスクサイズを示します。単位はGBです。
@@ -325,7 +325,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 ![Compare Report Time Range report](/media/dashboard/dashboard-diagnostics-compare-time.png)
 
-上記の表では、 `t1`正常な時間範囲、つまり基準時間範囲です。3 `t2`異常な時間範囲です。
+上記の表では、 `t1`正常な時間範囲、つまり基準時間範囲です。`t2`異常な時間範囲です。
 
 スロークエリに関連するテーブルは次のように表示されます。
 
@@ -361,7 +361,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 ![Maximum Different Item table](/media/dashboard/dashboard-diagnostics-maximum-different-item.png)
 
 -   `Table` : この監視メトリックが比較レポート内のどのテーブルから取得されるかを示します。たとえば、 `TiKV, coprocessor_info` TiKVコンポーネントの`coprocessor_info`のテーブルを示します。
--   `METRIC_NAME` : 監視メトリック名。2 `expand`クリックすると、メトリックの異なるラベルの比較が表示されます。
+-   `METRIC_NAME` : 監視メトリック名。`expand`クリックすると、メトリックの異なるラベルの比較が表示されます。
 -   `LABEL` : 監視メトリックに対応するラベル。例えば、監視メトリック`TiKV Coprocessor scan`には、TiKVアドレス、リクエストタイプ、操作タイプ、操作カラムファミリーを表す2つのラベル（ `instance` 、 `req` 、 `tag` 、 `sql_type` ）があります。
 -   `MAX_DIFF` : `t1.VALUE`と`t2.VALUE`の`DIFF_RATIO`計算した結果の差の値。
 

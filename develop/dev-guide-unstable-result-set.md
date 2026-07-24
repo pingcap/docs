@@ -48,7 +48,7 @@ ORDER BY
 3 rows in set (0.00 sec)
 ```
 
-`a` . `class`および`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。23 `GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
+`a` . `class`および`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。`GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
 
 反例として、構文`NON-FULL GROUP BY`があります。例えば、この2つのテーブルに次のSQLクエリを記述します (delete `a` . `stuname` in `GROUP BY` )。
 
