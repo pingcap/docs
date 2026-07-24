@@ -40,6 +40,8 @@ This document takes the `tidb` user as an example.
         EOF
         ```
 
+        In no-sudo mode, TiDB services are managed by each user's own `systemd` instance (`user@<UID>.service`). The settings in `/etc/security/limits.conf` might be applied through PAM when `user@<UID>.service` starts, but the effective file descriptor limit still depends on the resource limits obtained by that user `systemd` instance itself. On some systems, even after you configure `/etc/security/limits.conf`, the `Max open files` value of `user@<UID>.service` might still be lower than what TiDB requires.
+
 2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
     1. Use the `tidb` user to set the `XDG_RUNTIME_DIR` environment variable.
@@ -74,7 +76,37 @@ This document takes the `tidb` user as an example.
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-    3. Execute `systemctl --user`. If no errors occur, it indicates that the `systemd user` mode has started successfully.
+        If you update `/etc/security/limits.conf` after `user@${uid}.service` is already running, restart `user@${uid}.service` before you deploy or restart TiDB services so that the user `systemd` instance reloads the updated resource limits. Restarting `user@${uid}.service` stops all systemd user services managed by that user. If the cluster is already running, stop it gracefully first or perform this operation during a maintenance window.
+
+        ```shell
+        $ uid=$(id -u tidb) # Get the ID of the tidb user
+        $ systemctl restart user@${uid}.service
+        ```
+
+    3. Check the effective `Max open files` value of the running `user@${uid}.service`.
+
+        ```shell
+        $ uid=$(id -u tidb)
+        $ pid=$(systemctl show "user@${uid}.service" --property MainPID --value)
+        $ grep -E '^(Limit|Max open files)' "/proc/${pid}/limits"
+        ```
+
+    4. If the `Hard Limit` value in the previous output is lower than `1000000`, use the `root` user to configure `LimitNOFILE` for `user@${uid}.service`.
+
+        ```shell
+        $ uid=$(id -u tidb)
+        $ install -d -m 0755 "/etc/systemd/system/user@${uid}.service.d"
+        $ cat <<'EOF' > "/etc/systemd/system/user@${uid}.service.d/limit-nofile.conf"
+        [Service]
+        LimitNOFILE=1000000
+        EOF
+        $ systemctl daemon-reload
+        $ systemctl restart user@${uid}.service
+        ```
+
+        After you configure the drop-in and restart the service, repeat Step 3 to confirm that the effective `Max open files` value now meets the requirement.
+
+    5. Use the `tidb` user to execute `systemctl --user`. If no errors occur, it indicates that the `systemd` user service mode for the `tidb` user has started successfully.
 
 3. Use the `root` user to execute the following command to enable lingering for the systemd user `tidb`.
 
