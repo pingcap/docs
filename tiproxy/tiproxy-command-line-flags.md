@@ -54,7 +54,7 @@ ls `tiup --binary tiproxy`ctl
 
 コンパイル環境要件: [Go](https://golang.org/) 1.21以降
 
-コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`生成します。
+コンパイル手順: [TiProxyプロジェクト](https://github.com/pingcap/tiproxy)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tiproxyctl`を生成します。
 
 ```shell
 git clone https://github.com/pingcap/tiproxy.git
@@ -160,7 +160,7 @@ level = 'warning'
 オプション:
 
 -   `--output` : (必須) トラフィック ファイルを保存するディレクトリを指定します。
--   `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`指定すると 1 時間のトラフィックがキャプチャされます。
+-   `--duration` : (必須) キャプチャ期間を指定します。単位は`m` (分)、 `h` (時間)、 `d` (日) のいずれかです。例えば、 `--duration=1h`を指定すると 1 時間のトラフィックがキャプチャされます。
 
 例：
 

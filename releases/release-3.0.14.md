@@ -82,7 +82,7 @@ TiDB バージョン: 3.0.14
     -   トランザクションが関連テーブルロックしないため、テーブルに対して同時 DDL 操作が実行され、ブロッキングが存在する場合に、トランザクションのコミット中に`schema change`報告される問題を修正しました。 [＃15707](https://github.com/pingcap/tidb/pull/15707)
     -   `IF(not_int, *, *)` の誤った動作を修正 [＃15356](https://github.com/pingcap/tidb/pull/15356)
     -   `CASE WHEN (not_int)` の誤った動作を修正 [＃15359](https://github.com/pingcap/tidb/pull/15359)
-    -   現在のスキーマに含まれない`view`使用すると`Unknown column`エラー メッセージが返される問題を修正しました [＃15866](https://github.com/pingcap/tidb/pull/15866)
+    -   現在のスキーマに含まれない`view`を使用すると`Unknown column`エラー メッセージが返される問題を修正しました [＃15866](https://github.com/pingcap/tidb/pull/15866)
     -   時間文字列の解析結果がMySQL と互換性がない問題を修正 [＃16242](https://github.com/pingcap/tidb/pull/16242)
     -   `left join`の右子ノードに`null`列が存在する場合に照合順序子がpanicを修正 [＃16528](https://github.com/pingcap/tidb/pull/16528)
     -   TiKVが`StaleCommand`エラーメッセージを返し続けているときにSQL実行がブロックされているにもかかわらずエラーメッセージが返されない問題を修正しました[＃16528](https://github.com/pingcap/tidb/pull/16528)

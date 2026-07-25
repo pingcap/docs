@@ -279,8 +279,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | パラメータ名                | 説明                                                                                                                     |
 | :-------------------- | :--------------------------------------------------------------------------------------------------------------------- |
 | `event_filters`       | イベントをフィルタリングするための設定。(オプション)                                                                                            |
-| `ignore_txn_start_ts` | `UINT64 ARRAY`型。これを指定すると、 `[1, 2]`など`start_ts`指定するトランザクションは無視されます。（オプション）                                              |
-| `rules`               | `STRING ARRAY`型。テーブルスキーマフィルタリングのルール（例： `['foo*.*', 'bar*.*']` ）。詳細については、 [テーブルフィルター](/table-filter.md)参照してください。（オプション） |
+| `ignore_txn_start_ts` | `UINT64 ARRAY`型。これを指定すると、 `[1, 2]`など`start_ts`を指定するトランザクションは無視されます。（オプション）                                              |
+| `rules`               | `STRING ARRAY`型。テーブルスキーマフィルタリングのルール（例： `['foo*.*', 'bar*.*']` ）。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。（オプション） |
 
 `filter.event_filters`パラメータの説明は以下のとおりです。詳細については[変更フィードログフィルター](/ticdc/ticdc-filter.md)参照してください。
 
@@ -313,7 +313,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
 | `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`ターミネータとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
-| `only_output_updated_columns` | `BOOLEAN`型。2 または`canal-json`プロトコル`open-protocol`使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
+| `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
 | `open`                        | オープンプロトコルの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |

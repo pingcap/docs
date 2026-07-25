@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   Placement Driver（PD）
 
-    -   `config manager`削除して、他のコンポーネントがコンポーネント構成を制御できるようにします[＃2349](https://github.com/pingcap/pd/pull/2349)
+    -   `config manager`を削除して、他のコンポーネントがコンポーネント構成を制御できるようにします[＃2349](https://github.com/pingcap/pd/pull/2349)
 
 -   TiFlash
 

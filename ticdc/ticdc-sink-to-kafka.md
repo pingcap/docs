@@ -129,7 +129,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 -   SASL/スクラム
 
-    SCRAM-SHA-256とSCRAM-SHA-512はPLAIN方式に似ています。対応する認証方式として`sasl-mechanism`指定するだけです。
+    SCRAM-SHA-256とSCRAM-SHA-512はPLAIN方式に似ています。対応する認証方式として`sasl-mechanism`を指定するだけです。
 
 -   SASL/GSSAPI
 
@@ -151,7 +151,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 -   TLS/SSL暗号化
 
-    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`指定する必要があります。
+    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`を指定する必要があります。
 
 -   ACL認証
 
@@ -277,7 +277,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"` `index-value`ディスパッチャ`columns`指定するために使用できます。3、5、7、9、11 `default` 5つ`ts`ディスパッチャをサポートします。ディスパッチャのルールは以下のとおり`table` 。
+`partition = "xxx"`を使用してパーティションディスパッチャを指定できます。`default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`の5つのディスパッチャをサポートします。ディスパッチャのルールは以下のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意インデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
@@ -385,7 +385,7 @@ SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="databa
 
 Kafkaトピックは、受信できるメッセージのサイズに制限を設定します。この制限はパラメータ[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)によって制御されます。TiCDC Kafkaシンクがこの制限を超えるデータを送信した場合、チェンジフィードはエラーを報告し、データのレプリケーションを続行できません。この問題を解決するために、TiCDCは新しい設定`large-message-handle-option`を追加し、以下のソリューションを提供します。
 
-現在、この機能はCanal-JSONとOpen Protocolの2つのエンコーディングプロトコルをサポートしています。Canal-JSONプロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`指定する必要があります。
+現在、この機能はCanal-JSONとOpen Protocolの2つのエンコーディングプロトコルをサポートしています。Canal-JSONプロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`を指定する必要があります。
 
 ### TiCDCデータ圧縮 {#ticdc-data-compression}
 

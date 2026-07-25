@@ -87,7 +87,7 @@ TiDB バージョン: 7.4.0
 
     通常、TiKVはリクエストを数ミリ秒という非常に高速に処理します。しかし、TiKVノードがディスクI/Oジッターやネットワークレイテンシーに遭遇すると、リクエスト処理時間が大幅に増加する可能性があります。v7.4.0より前のバージョンでは、TiKVリクエストのタイムアウト制限は固定されており、調整できません。そのため、TiKVノードで問題が発生すると、TiDBは一定時間のタイムアウト応答を待機する必要があり、ジッター発生時のアプリケーションクエリパフォーマンスに顕著な影響が生じます。
 
-    TiDB v7.4.0 では、新しいシステム変数[`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)が導入され、クエリで TiDB が TiKV に送信する RPC 読み取り要求のタイムアウトをカスタマイズできるようになりました。つまり、ディスクまたはネットワークの問題により TiKV ノードに送信された要求が遅延した場合、TiDB はより早くタイムアウトし、他の TiKV ノードに要求を再送信できるため、クエリのレイテンシーが短縮されます。すべての TiKV ノードでタイムアウトが発生した場合、TiDB はデフォルトのタイムアウトを使用して再試行します。さらに、クエリでオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`使用して、TiDB が TiKV RPC 読み取り要求を送信するタイムアウトを設定することもできます。この機能強化により、不安定なネットワークやstorage環境に TiDB が柔軟に適応できるようになり、クエリのパフォーマンスが向上し、ユーザーエクスペリエンスが強化されます。
+    TiDB v7.4.0 では、新しいシステム変数[`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740)が導入され、クエリで TiDB が TiKV に送信する RPC 読み取り要求のタイムアウトをカスタマイズできるようになりました。つまり、ディスクまたはネットワークの問題により TiKV ノードに送信された要求が遅延した場合、TiDB はより早くタイムアウトし、他の TiKV ノードに要求を再送信できるため、クエリのレイテンシーが短縮されます。すべての TiKV ノードでタイムアウトが発生した場合、TiDB はデフォルトのタイムアウトを使用して再試行します。さらに、クエリでオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`を使用して、TiDB が TiKV RPC 読み取り要求を送信するタイムアウトを設定することもできます。この機能強化により、不安定なネットワークやストレージ環境に TiDB が柔軟に適応できるようになり、クエリのパフォーマンスが向上し、ユーザーエクスペリエンスが強化されます。
 
     詳細については[ドキュメント](/system-variables.md#tikv_client_read_timeout-new-in-v740)参照してください。
 
@@ -211,7 +211,7 @@ TiDB バージョン: 7.4.0
 
 -   Dumplingは、データをCSVファイルにエクスポートする際に、ユーザー定義のターミネータをサポートします[＃46982](https://github.com/pingcap/tidb/issues/46982) @ [GMHDBJD](https://github.com/GMHDBJD)
 
-    バージョン7.4.0より前のDumplingでは、データをCSVファイルにエクスポートする際に、行末文字として`"\r\n"`使用します。そのため、行末文字として`"\n"`しか認識しない下流システムでは、エクスポートされたCSVファイルを解析できないか、解析前にサードパーティ製の変換ツールを使用する必要があります。
+    バージョン7.4.0より前のDumplingでは、データをCSVファイルにエクスポートする際に、行末文字として`"\r\n"`を使用します。そのため、行末文字として`"\n"`しか認識しない下流システムでは、エクスポートされたCSVファイルを解析できないか、解析前にサードパーティ製の変換ツールを使用する必要があります。
 
     バージョン7.4.0以降、 Dumplingに新しいパラメータ`--csv-line-terminator`が導入されました。このパラメータを使用すると、データをCSVファイルにエクスポートする際に、任意の終端文字を指定できます。このパラメータは`"\r\n"`と`"\n"`サポートしています。以前のバージョンとの一貫性を保つため、デフォルトの終端文字は`"\r\n"`です。
 
@@ -388,7 +388,7 @@ TiDB バージョン: 7.4.0
     -   オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)
     -   CpuRecord によって発生する潜在的なメモリリークの問題を修正しました [＃15304](https://github.com/tikv/tikv/issues/15304) @ [overvenus](https://github.com/overvenus)
     -   バックアップクラスタがダウンし、プライマリクラスタがクエリされたときに`"Error 9002: TiKV server timeout"`発生する問題を修正しました [＃12914](https://github.com/tikv/tikv/issues/12914) @ [Connor1996](https://github.com/Connor1996)
-    -   プライマリクラスタがに回復した後に TiKV が再起動するとバックアップ TiKV が停止する問題を修正しました [＃12320](https://github.com/tikv/tikv/issues/12320) @ [disksing](https://github.com/disksing)
+    -   プライマリクラスタが回復した後に TiKV が再起動するとバックアップ TiKV が停止する問題を修正しました [＃12320](https://github.com/tikv/tikv/issues/12320) @ [disksing](https://github.com/disksing)
 
 -   PD
 
@@ -428,7 +428,7 @@ TiDB バージョン: 7.4.0
     -   TiDB Data Migration (DM)
 
         -   DM が大文字と小文字を区別しない照合で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [hihihuhu](https://github.com/hihihuhu)
-        -   DM バリデーターのデッドロック問題を修正し、再試行をに強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)
+        -   DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3Hunter](https://github.com/D3Hunter)
         -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @ [GMHDBJD](https://github.com/GMHDBJD)
@@ -438,7 +438,7 @@ TiDB バージョン: 7.4.0
 
         -   TiDB Lightningがテーブル`NONCLUSTERED auto_increment`と`AUTO_ID_CACHE=1`インポートした後、データを挿入するとエラーが返される問題を修正しました[＃46100](https://github.com/pingcap/tidb/issues/46100) @ [tiancaiamao](https://github.com/tiancaiamao)
         -   `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)
-        -   PDクラスタアドレスがに変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
+        -   PDクラスタアドレスが変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
 
 ## 貢献者 {#contributors}
 

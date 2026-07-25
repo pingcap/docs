@@ -7,7 +7,7 @@ summary: TiDB データベースの SHOW [FULL] TABLES の使用法の概要。
 
 このステートメントは、現在選択されているデータベース内のテーブルとビューのリストを表示します。オプションのキーワード`FULL`は、テーブルのタイプが`BASE TABLE`、`SEQUENCE`、または`VIEW`のいずれであるかを示します。
 
-別のデータベース内のテーブルを表示するには、 `SHOW TABLES IN DatabaseName`使用します。
+別のデータベース内のテーブルを表示するには、 `SHOW TABLES IN DatabaseName`を使用します。
 
 ## 概要 {#synopsis}
 

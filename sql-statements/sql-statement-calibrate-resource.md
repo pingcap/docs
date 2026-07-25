@@ -75,7 +75,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '20m';
 1 row in set (0.01 sec)
 ```
 
-実際のワークロードに応じて RU 容量を表示するには、開始時刻`START_TIME`と終了時刻`END_TIME`指定します。
+実際のワークロードに応じて RU 容量を表示するには、開始時刻`START_TIME`と終了時刻`END_TIME`を指定します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' END_TIME '2023-04-18 08:20:00';
@@ -110,7 +110,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
 ```
 
-RU容量を表示するには`WORKLOAD`指定します。デフォルト値は`TPCC`です。
+RU容量を表示するには`WORKLOAD`を指定します。デフォルト値は`TPCC`です。
 
 ```sql
 CALIBRATE RESOURCE;

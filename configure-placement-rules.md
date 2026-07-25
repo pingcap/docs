@@ -223,7 +223,7 @@ Success!
 
 ルール グループとグループ内のすべてのルールを同時に表示および変更するには、サブコマンド`rule-bundle`を実行します。
 
-このサブコマンドでは、 `get {group_id}`使用してグループを照会し、出力結果にはルール グループとグループのルールがネストされた形式で表示されます。
+このサブコマンドでは、 `get {group_id}`を使用してグループを照会し、出力結果にはルール グループとグループのルールがネストされた形式で表示されます。
 
 ```bash
 pd-ctl config placement-rules rule-bundle get pd
@@ -371,7 +371,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ3: テーブルに2つのTiFlashレプリカを追加する {#scenario-3-add-two-tiflash-replicas-for-a-table}
 
-テーブルの行キーに別のルールを追加し、 `count`から`2`の範囲で制限します。 `label_constraints`使用することで、レプリカが`engine = tiflash`のノードに生成されるようにします。ここで別途`group_id`使用するのは、このルールがシステム内の他のソースのルールと重複したり衝突したりしないようにするためです。
+テーブルの行キーに別のルールを追加し、 `count`から`2`の範囲で制限します。 `label_constraints`を使用することで、レプリカが`engine = tiflash`のノードに生成されるようにします。ここで別途`group_id`を使用するのは、このルールがシステム内の他のソースのルールと重複したり衝突したりしないようにするためです。
 
 ```json
 {

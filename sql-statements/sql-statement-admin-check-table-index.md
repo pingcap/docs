@@ -39,7 +39,7 @@ HandleRange ::= '(' Int64Num ',' Int64Num ')'
 
 ## 例 {#examples}
 
-`tbl_name`テーブル内のすべてのデータと対応するインデックスの一貫性をチェックするには、 `ADMIN CHECK TABLE`使用します。
+`tbl_name`テーブル内のすべてのデータと対応するインデックスの一貫性をチェックするには、 `ADMIN CHECK TABLE`を使用します。
 
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;

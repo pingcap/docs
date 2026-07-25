@@ -80,7 +80,7 @@ TiDBバージョン: 6.5.11
     -   大きなテーブルやパーティションを削除した後に発生する可能性のあるトラフィック制御の問題を修正しました [＃17304](https://github.com/tikv/tikv/issues/17304) @ [Connor1996](https://github.com/Connor1996)
     -   削除された`sst_importer` SST ファイルを取り込むことにより TiKV がpanicになる可能性がある問題を修正しました [＃15053](https://github.com/tikv/tikv/issues/15053) @ [lance6716](https://github.com/lance6716)
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [＃17469](https://github.com/tikv/tikv/issues/17469) @ [hbisheng](https://github.com/hbisheng)
-    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanic可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
+    -   破損したRaftデータ スナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [＃15292](https://github.com/tikv/tikv/issues/15292) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [＃17176](https://github.com/tikv/tikv/issues/17176) @ [ekexium](https://github.com/ekexium)
     -   CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[＃17107](https://github.com/tikv/tikv/issues/17107) @ [MyonKeminta](https://github.com/MyonKeminta)
 
@@ -94,7 +94,7 @@ TiDBバージョン: 6.5.11
 -   TiFlash
 
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[＃8754](https://github.com/pingcap/tiflash/issues/8754) @ [solotzg](https://github.com/solotzg)
-    -   データベースが作成直後に削除されるとTiFlash がpanic可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[＃9266](https://github.com/pingcap/tiflash/issues/9266) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[＃9235](https://github.com/pingcap/tiflash/issues/9235) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取り要求タイムアウトエラーが発生する可能性がある問題を修正しました。 [＃9243](https://github.com/pingcap/tiflash/issues/9243) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   外部結合を含むクエリの実行中にエラーが発生した場合にTiFlashがクラッシュする可能性がある問題を修正しました。 [＃9190](https://github.com/pingcap/tiflash/issues/9190) @ [windtalker](https://github.com/windtalker)

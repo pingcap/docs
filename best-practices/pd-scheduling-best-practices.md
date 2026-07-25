@@ -78,7 +78,7 @@ aliases: ['/ja/docs/dev/best-practices/pd-scheduling-best-practices/','/ja/docs/
 
 ### ホットリージョンのスケジュール {#hot-regions-scheduling}
 
-ホットリージョンのスケジューリングには`hot-region-scheduler`使用します。TiDB v3.0以降では、このプロセスは次のように実行されます。
+ホットリージョンのスケジューリングには`hot-region-scheduler`を使用します。TiDB v3.0以降では、このプロセスは次のように実行されます。
 
 1.  ストアから報告された情報に基づいて、一定期間内に特定のしきい値を超える読み取り/書き込みトラフィックを判別し、ホットリージョンをカウントします。
 

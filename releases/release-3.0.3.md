@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.3
     -   Pump/Drainerのステータスを変更するSQL文を実行するとpanicが発生する可能性がある問題を修正しました。 [＃11827](https://github.com/pingcap/tidb/pull/11827)
     -   Autocommit = 1 で`begin`文がない場合に`select ... for update`でpanicが発生する可能性がある問題を修正しました[＃11736](https://github.com/pingcap/tidb/pull/11736)
     -   `set default role`文の実行時に発生する可能性のある権限チェックエラーを修正[＃11777](https://github.com/pingcap/tidb/pull/11777)
-    -   `create user`または`drop user`実行したときに発生する可能性のある権限チェックエラーを修正[＃11814](https://github.com/pingcap/tidb/pull/11814)
+    -   `create user`または`drop user`を実行したときに発生する可能性のある権限チェックエラーを修正[＃11814](https://github.com/pingcap/tidb/pull/11814)
     -   `select ... for update`文が`PointGetExecutor`関数に組み込まれると自動的に再試行される可能性がある問題を修正しました [＃11718](https://github.com/pingcap/tidb/pull/11718)
     -   ウィンドウ関数がパーティションを処理するときに発生する可能性のある境界エラーを修正しました [＃11825](https://github.com/pingcap/tidb/pull/11825)
     -   `time`関数が不正な形式の引数処理するときに EOF エラーが発生する問題を修正しました [＃11893](https://github.com/pingcap/tidb/pull/11893)

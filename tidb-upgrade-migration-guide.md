@@ -232,7 +232,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 3.  新しいクラスターと古いクラスター間のデータの整合性を確認します。
 
-    -   TiCDC が追いついたら、新しいクラスターから`down-tso`取得します。
+    -   TiCDC が追いついたら、新しいクラスターから`down-tso`を取得します。
     -   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
 4.  フォワード Changefeed レプリケーション タスクを一時停止します。

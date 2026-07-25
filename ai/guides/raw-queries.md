@@ -43,7 +43,7 @@ client.execute(
 -   `to_rows()`
 -   `scalar()`
 
-#### ピダンティックモデルとして {#as-pydantic-model}
+#### Pydantic モデルとして {#as-pydantic-model}
 
 `to_pydantic()`メソッドは、Pydantic モデルのリストを返します。
 

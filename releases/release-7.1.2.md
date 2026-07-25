@@ -14,7 +14,7 @@ TiDB バージョン: 7.1.2
 ## 互換性の変更 {#compatibility-changes}
 
 -   セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.1/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザーの潜在的な接続問題を防ぎます。 [＃47665](https://github.com/pingcap/tidb/issues/47665) @ [tiancaiamao](https://github.com/tiancaiamao)
--   [スムーズなアップグレード](/smooth-upgrade-tidb.md)機能はデフォルトで無効になっています。有効にするには、 `/upgrade/start`と`upgrade/finish` HTTPリクエストをに送信します。 [＃47172](https://github.com/pingcap/tidb/issues/47172) @ [zimulala](https://github.com/zimulala)
+-   [スムーズなアップグレード](/smooth-upgrade-tidb.md)機能はデフォルトで無効になっています。有効にするには、 `/upgrade/start`と`upgrade/finish` HTTPリクエストを送信します。 [＃47172](https://github.com/pingcap/tidb/issues/47172) @ [zimulala](https://github.com/zimulala)
 -   オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_opt_enable_hash_join-new-in-v712)システム変数を導入します。 [＃46695](https://github.com/pingcap/tidb/issues/46695) @ [coderplay](https://github.com/coderplay)
 -   RocksDBの定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量の圧縮が行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#periodic-compaction-seconds-new-in-v712)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#ttl-new-in-v712)導入され、RocksDB の定期的な圧縮を手動で設定できるようになりました。 [＃15355](https://github.com/tikv/tikv/issues/15355) @ [LykxSassinator](https://github.com/LykxSassinator)
 -   TiCDCは、CSVプロトコルにおけるバイナリデータのエンコード方式を制御するための設定項目[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)導入しました。デフォルト値は`'base64'` です。 [＃9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)
@@ -128,7 +128,7 @@ TiDB バージョン: 7.1.2
     -   オンラインアンセーフリカバリがマージ中止を処理できない問題を修正 [＃15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)
     -   PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)
     -   `FLASHBACK` を実行した後にリージョンマージがブロックされる可能性がある問題を修正しました [＃15258](https://github.com/tikv/tikv/issues/15258) @ [overvenus](https://github.com/overvenus)
-    -   ストアハートビートの再試行回数をに減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
+    -   ストアハートビートの再試行回数を減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
     -   オンラインアンセーフリカバリがタイムアウトで中止されない問題を修正 [＃15346](https://github.com/tikv/tikv/issues/15346) @ [Connor1996](https://github.com/Connor1996)
     -   暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [＃15080](https://github.com/tikv/tikv/issues/15080) @ [tabokie](https://github.com/tabokie)
     -   リージョンのメタデータが正しくないことによって引き起こされるTiKV panic問題を修正しました [＃13311](https://github.com/tikv/tikv/issues/13311) @ [cfzjywxk](https://github.com/cfzjywxk)
@@ -201,17 +201,17 @@ TiDB バージョン: 7.1.2
 
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @ [D3Hunter](https://github.com/D3Hunter)
         -   DM が大文字と小文字を区別しない照合で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @ [hihihuhu](https://github.com/hihihuhu)
-        -   DM バリデーターのデッドロック問題を修正し、再試行をに強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)
+        -   DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @ [D3Hunter](https://github.com/D3Hunter)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @ [GMHDBJD](https://github.com/GMHDBJD)
         -   DMが楽観的モードでパーティションDDLをスキップする問題を修正 [＃9788](https://github.com/pingcap/tiflow/issues/9788) @ [GMHDBJD](https://github.com/GMHDBJD)
 
     -   TiDB Lightning
 
-        -   `AUTO_ID_CACHE=1`を含むテーブルをインポートするときに、間違った`row_id`がに割り当てられる問題を修正しました [＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)
+        -   `AUTO_ID_CACHE=1`を含むテーブルをインポートするときに、間違った`row_id`が割り当てられる問題を修正しました [＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)
         -   `NEXT_GLOBAL_ROW_ID` を保存するときにデータ型が間違っている問題を修正しました [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [lyzx2001](https://github.com/lyzx2001)
         -   `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)
-        -   PDクラスタアドレスがに変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
+        -   PDクラスタアドレスが変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
         -   CSVデータをインポートする際にルートがpanicになる可能性がある問題を修正 [＃43284](https://github.com/pingcap/tidb/issues/43284) @ [lyzx2001](https://github.com/lyzx2001)
 

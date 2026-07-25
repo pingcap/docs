@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.4
 
 ## 互換性の変更 {#compatibility-changes}
 
--   `Cursor Fetch`使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
+-   `Cursor Fetch`を使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
 -   RocksDBの定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量の圧縮が行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)導入され、RocksDB の定期的な圧縮を手動で設定できるようになりました。 [＃15355](https://github.com/tikv/tikv/issues/15355) @ [LykxSassinator](https://github.com/LykxSassinator)
 
 ### 動作の変更 {#behavior-changes}
@@ -99,7 +99,7 @@ TiDB バージョン: 6.5.4
     -   文中の`n`負の数の場合に文`SELECT CAST(n AS CHAR)`のクエリ結果が正しくない問題を修正しました [＃44786](https://github.com/pingcap/tidb/issues/44786) @ [xhebox](https://github.com/xhebox)
     -   MySQLカーソルフェッチプロトコル使用時に、結果セットのメモリ消費量が`tidb_mem_quota_query`上限を超え、TiDBのメモリオーバーフローが発生する問題を修正しました。修正後、TiDBは結果セットを自動的にディスクに書き込み、メモリを解放します[＃43233](https://github.com/pingcap/tidb/issues/43233) @ [YangKeao](https://github.com/YangKeao)
     -   BR を使用して`AUTO_ID_CACHE=1`テーブルを復元するときに発生する`duplicate entry`エラーを修正します [＃44716](https://github.com/pingcap/tidb/issues/44716) @ [tiancaiamao](https://github.com/tiancaiamao)
-    -   テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列をに丸めた場合、 `SELECT`ステートメントがパーティションテーブルに対してエラーを返す問題を修正しました。 [＃42323](https://github.com/pingcap/tidb/issues/42323) @ [jiyfhust](https://github.com/jiyfhust)
+    -   テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列を丸めた場合、 `SELECT`ステートメントがパーティションテーブルに対してエラーを返す問題を修正しました。 [＃42323](https://github.com/pingcap/tidb/issues/42323) @ [jiyfhust](https://github.com/jiyfhust)
     -   同時ビューによって DDL 操作がブロックされる可能性がある問題を修正[＃40352](https://github.com/pingcap/tidb/issues/40352) @ [zeminzhou](https://github.com/zeminzhou)
     -   `datetime`値がと正しくないために統計収集タスクが失敗する問題を修正しました [＃39336](https://github.com/pingcap/tidb/issues/39336) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[＃33908](https://github.com/pingcap/tidb/issues/33908)
@@ -123,7 +123,7 @@ TiDB バージョン: 6.5.4
     -   1つのTiKVノードが分離され、別のノードが再起動されたときに発生する可能性のあるデータの不整合の問題を修正しました[＃15035](https://github.com/tikv/tikv/issues/15035) @ [overvenus](https://github.com/overvenus)
     -   データレプリケーション自動同期モードで同期回復フェーズでQPSがゼロに低下する問題を修正しました。 [＃14975](https://github.com/tikv/tikv/issues/14975) @ [nolouch](https://github.com/nolouch)
     -   暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [＃15080](https://github.com/tikv/tikv/issues/15080) @ [tabokie](https://github.com/tabokie)
-    -   ストアハートビートの再試行回数をに減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
+    -   ストアハートビートの再試行回数を減らして、ハートビートストームの問題を修正しました。 [＃15184](https://github.com/tikv/tikv/issues/15184) @ [nolouch](https://github.com/nolouch)
     -   保留中の圧縮バイト量が多い場合にトラフィック制御が機能しない可能性がある問題を修正しました。 [＃14392](https://github.com/tikv/tikv/issues/14392) @ [Connor1996](https://github.com/Connor1996)
     -   PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [＃15279](https://github.com/tikv/tikv/issues/15279) @ [YuJuncen](https://github.com/YuJuncen)
     -   TiCDC の古い値機能が有効になっているときに TiKV がより多くのメモリを消費する可能性がある問題を修正[＃14815](https://github.com/tikv/tikv/issues/14815) @ [YuJuncen](https://github.com/YuJuncen)
@@ -132,7 +132,7 @@ TiDB バージョン: 6.5.4
 
     -   etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanicになる可能性がある問題を修正しました。 [＃6860](https://github.com/tikv/pd/issues/6860) @ [HuSharp](https://github.com/HuSharp)
     -   リーダーが長時間退出できない問題を修正[＃6918](https://github.com/tikv/pd/issues/6918) @ [bufferflies](https://github.com/bufferflies)
-    -   配置ルールが`LOCATION_LABELS`使用する場合、SQL とルールチェッカーがと互換性がない問題を修正しました [＃38605](https://github.com/pingcap/tidb/issues/38605) @ [nolouch](https://github.com/nolouch)
+    -   配置ルールが`LOCATION_LABELS`を使用する場合、SQL とルールチェッカーがと互換性がない問題を修正しました [＃38605](https://github.com/pingcap/tidb/issues/38605) @ [nolouch](https://github.com/nolouch)
     -   PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [＃5786](https://github.com/tikv/pd/issues/5786) @ [HunDunDM](https://github.com/HunDunDM)
     -   ルールチェッカーがピアを選択した場合に、不健全なピアを削除できない問題を修正しました [＃6559](https://github.com/tikv/pd/issues/6559) @ [nolouch](https://github.com/nolouch)
     -   `unsafe recovery`で不合格になったラーナーのピアが`auto-detect`モードで無視される問題を修正 [＃6690](https://github.com/tikv/pd/issues/6690) @ [v01dstar](https://github.com/v01dstar)
@@ -164,7 +164,7 @@ TiDB バージョン: 6.5.4
         -   TiCDC がアップストリームの 1 つのトランザクションで複数の一意のキー行を変更するときに同期書き込み競合を引き起こす可能性がある問題を修正しました。 [＃9430](https://github.com/pingcap/tiflow/issues/9430) @ [sdojjy](https://github.com/sdojjy)
         -   TiCDC が誤って名前変更 DDL 操作を同期する可能性がある問題を修正[＃9488](https://github.com/pingcap/tiflow/issues/9488) [＃9378](https://github.com/pingcap/tiflow/issues/9378) [＃9531](https://github.com/pingcap/tiflow/issues/9531) @ [asddongmen](https://github.com/asddongmen)
         -   下流で短期的な障害が発生したときにレプリケーションタスクが停止する可能性がある問題を修正[＃9542](https://github.com/pingcap/tiflow/issues/9542) [＃9272](https://github.com/pingcap/tiflow/issues/9272) [＃9582](https://github.com/pingcap/tiflow/issues/9582) [＃9592](https://github.com/pingcap/tiflow/issues/9592) @ [hicqu](https://github.com/hicqu)
-        -   TiCDC ノードのステータスがに変化したときに発生する可能性のあるpanic問題を修正しました。 [＃9354](https://github.com/pingcap/tiflow/issues/9354) @ [sdojjy](https://github.com/sdojjy)
+        -   TiCDC ノードのステータスが変化したときに発生する可能性のあるpanic問題を修正しました。 [＃9354](https://github.com/pingcap/tiflow/issues/9354) @ [sdojjy](https://github.com/sdojjy)
         -   Kafka Sink がエラーに遭遇すると、changefeed の進行が無期限にブロックされる可能性がある問題を修正しました。 [＃9309](https://github.com/pingcap/tiflow/issues/9309) @ [hicqu](https://github.com/hicqu)
         -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームに過度のワークロードが発生する問題を修正しました[＃8957](https://github.com/pingcap/tiflow/issues/8957) [＃8959](https://github.com/pingcap/tiflow/issues/8959) @ [Rustin170506](https://github.com/Rustin170506)
         -   一部の TiCDC ノードがネットワークから分離されているときに発生する可能性のあるデータの不整合の問題を修正[＃9344](https://github.com/pingcap/tiflow/issues/9344) @ [CharlesCheung96](https://github.com/CharlesCheung96)
@@ -188,7 +188,7 @@ TiDB バージョン: 6.5.4
         -   論理インポートモードでテーブル A をインポートすると、テーブル B が存在しないと誤って報告される可能性がある問題を修正しました[＃44614](https://github.com/pingcap/tidb/issues/44614) @ [dsdashun](https://github.com/dsdashun)
         -   `NEXT_GLOBAL_ROW_ID` を保存するときにデータ型が間違っている問題を修正しました [＃45427](https://github.com/pingcap/tidb/issues/45427) @ [lyzx2001](https://github.com/lyzx2001)
         -   `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [＃45382](https://github.com/pingcap/tidb/issues/45382) @ [lyzx2001](https://github.com/lyzx2001)
-        -   PDクラスタアドレスがに変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
+        -   PDクラスタアドレスが変更されるとデータのインポートが失敗する問題を修正しました [＃43436](https://github.com/pingcap/tidb/issues/43436) @ [lichunzhu](https://github.com/lichunzhu)
         -   一部のPDノードが失敗した場合にデータのインポートが失敗する問題を修正しました [＃43400](https://github.com/pingcap/tidb/issues/43400) @ [lichunzhu](https://github.com/lichunzhu)
         -   AUTO_INCREMENT列を持つテーブルが`AUTO_ID_CACHE=1`設定すると、ID アロケータのベース値が正しくなくなるという問題を修正しました [＃46100](https://github.com/pingcap/tidb/issues/46100) @ [D3Hunter](https://github.com/D3Hunter)
 

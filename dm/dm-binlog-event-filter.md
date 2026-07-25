@@ -160,7 +160,7 @@ filters:
 
 ### TiDBパーサーがサポートしていないSQL文を除外する {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
-TiDBパーサーがサポートしていないSQL文については、DMは解析できず、 `schema` / `table`情報を取得できません。そのため、グローバルフィルタリングルール`schema-pattern: "*"`使用する必要があります。
+TiDBパーサーがサポートしていないSQL文については、DMは解析できず、 `schema` / `table`情報を取得できません。そのため、グローバルフィルタリングルール`schema-pattern: "*"`を使用する必要があります。
 
 > **Note:**
 >

@@ -96,7 +96,7 @@ TiDB Lightningの基本は次のとおりです。
 
 > **Note:**
 >
-> Loaderツールはメンテナンスされなくなりました。Loaderに関連するシナリオでは、代わりに`Logical Import Mode`使用することをお勧めします。
+> Loaderツールはメンテナンスされなくなりました。Loaderに関連するシナリオでは、代わりに`Logical Import Mode`を使用することをお勧めします。
 
 ### バックアップと復元 - Backup & Restore (BR) {#backup-and-restore-backup-x26-restore-br}
 

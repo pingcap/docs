@@ -22,7 +22,7 @@ NumList ::=
 
 ## 例 {#examples}
 
-現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`使用します。
+現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`を使用します。
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;

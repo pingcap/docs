@@ -78,7 +78,7 @@ TiDB バージョン: 5.3.2
     -   tikv-ctl が間違った文字列一致のために誤った結果を返す問題を修正[＃12329](https://github.com/tikv/tikv/issues/12329)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正しました [＃12109](https://github.com/tikv/tikv/issues/12109)
     -   リージョンをマージする際に、ターゲットピアが初期化されずに破棄されたピアに置き換えられたときに発生するTiKV panic問題を修正しました。 [＃12048](https://github.com/tikv/tikv/issues/12048)
-    -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKV が 2 年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
 
 -   PD
 

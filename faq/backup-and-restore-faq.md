@@ -20,11 +20,11 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 -   自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
 -   自動チューニングを有効にする： `backup.enable-auto-tune`を`true`に設定します。v5.3.x から v5.4.0 以降のバージョンにアップグレードしたクラスターでは、自動チューニング機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-`tikv-ctl`使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
+`tikv-ctl`を使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
 さらに、自動チューニングにより、バックアップ タスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップ タスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップ タスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
-オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `backup.num-threads`の値を`tikv-ctl`使用してより大きな数値に変更できます。
+オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## PITRの問題 {#pitr-issues}
 
@@ -105,7 +105,7 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 
 ログバックアップタスクを一時停止すると、MVCCデータがガベージコレクションされるのを防ぐため、一時停止中のタスクプログラムは現在のチェックポイントをサービスセーフポイントとして自動的に設定します。これにより、24時間以内に生成されたMVCCデータが保持されます。バックアップチェックポイントのMVCCデータが24時間以上経過している場合、そのチェックポイントのデータはガベージコレクションされ、バックアップタスクを再開できなくなります。
 
-この問題を解決するには、 `br log stop`使用して現在のタスクを削除し、 `br log start`を使用してログバックアップタスクを作成します。同時に、後続の PITR のためにフルバックアップを実行できます。
+この問題を解決するには、 `br log stop`を使用して現在のタスクを削除し、 `br log start`を使用してログバックアップタスクを作成します。同時に、後続の PITR のためにフルバックアップを実行できます。
 
 ### PITR テーブル フィルターの使用時にエラー メッセージ<code>[ddl:8204]invalid ddl job type: none</code>が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-code-ddl-8204-invalid-ddl-job-type-none-code-is-returned-when-using-the-pitr-table-filter}
 
@@ -170,7 +170,7 @@ BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-cre
 
 ### データの復元中に<code>could not read local://...:download sst failed</code>というエラー メッセージが返された場合、どうすればよいですか? {#what-should-i-do-if-the-error-message-code-could-not-read-local-download-sst-failed-code-is-returned-during-data-restore}
 
-データを復元する場合、各ノードは**すべての**バックアップファイル（SSTファイル）にアクセスできる必要があります。デフォルトでは、ストレージを`local`使用している場合、バックアップファイルが複数のノードに分散しているため、データを復元できません。そのため、各TiKVノードのバックアップファイルを他のTiKVノードにコピーする必要があります。**バックアップデータは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはNFSに保存することをお勧めします**。
+データを復元する場合、各ノードは**すべての**バックアップファイル（SSTファイル）にアクセスできる必要があります。デフォルトでは、ストレージを`local`を使用している場合、バックアップファイルが複数のノードに分散しているため、データを復元できません。そのため、各TiKVノードのバックアップファイルを他のTiKVノードにコピーする必要があります。**バックアップデータは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはNFSに保存することをお勧めします**。
 
 ### ルートを使用して<code>br</code>を実行しようとしたがうまくいかなかった場合、「 <code>Permission denied</code> 」または<code>No such file or directory</code> 」というエラーを処理するにはどうすればよいでしょうか? {#what-should-i-do-to-handle-the-code-permission-denied-code-or-code-no-such-file-or-directory-code-error-even-if-i-have-tried-to-run-code-br-code-using-root-in-vain}
 
@@ -295,7 +295,7 @@ BRは統計情報をバックアップしません（v4.0.9を除く）。その
 
 v4.0.9では、 BRはデフォルトで統計情報をバックアップしますが、メモリ消費量が多すぎます。バックアッププロセスが確実に実行されるよう、v4.0.10以降では統計情報のバックアップはデフォルトで無効化されています。
 
-テーブルに対して`ANALYZE`実行しないと、TiDBは統計情報が不正確であるため最適な実行プランを選択できません。クエリパフォーマンスが重要でない場合は、 `ANALYZE`無視できます。
+テーブルに対して`ANALYZE`を実行しないと、TiDBは統計情報が不正確であるため最適な実行プランを選択できません。クエリパフォーマンスが重要でない場合は、 `ANALYZE`を無視できます。
 
 ### 複数の復元タスクを同時に開始して、単一のクラスターのデータを復元できますか? {#can-i-start-multiple-restore-tasks-at-the-same-time-to-restore-the-data-of-a-single-cluster}
 

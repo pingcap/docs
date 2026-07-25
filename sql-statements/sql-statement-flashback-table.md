@@ -5,7 +5,7 @@ summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回
 
 # FLASHBACK TABLE {#flashback-table}
 
-`FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。ステートメント`FLASHBACK TABLE`使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
+`FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。ステートメント`FLASHBACK TABLE`を使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 
 システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト: `10m0s` ）は、以前のバージョンの行の保持期間を定義します。ガベージコレクションが実行された現在の`safePoint`間は、次のクエリで取得できます。
 

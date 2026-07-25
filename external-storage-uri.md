@@ -34,7 +34,7 @@ URI の基本的な形式は次のとおりです。
     -   `role-arn` : 指定された[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)使用してサードパーティの Amazon S3 データにアクセスする必要がある場合、 `arn:aws:iam::888888888888:role/my-role`などの`role-arn` URL クエリパラメータで、対応する[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) IAMロールを指定できます。IAMIAMを使用してサードパーティの Amazon S3 データにアクセスする方法の詳細については、 [AWSドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)参照してください。BRはv7.6.0 以降でこのパラメータをサポートしています。
     -   `external-id` : サードパーティから Amazon S3 データにアクセスする場合、正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)指定して[IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)引き受けることが必要になる場合があります。この場合、この`external-id` URL クエリパラメータを使用して外部 ID を指定し、 IAMロールを引き受けることができることを確認できます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN と一緒にサードパーティによって提供される任意の文字列です。IAM ロールを引き受ける場合の外部 IDのIAMIAMに外部 ID を必要としない場合は、このパラメータを指定せずにIAMロールを引き受け、対応する Amazon S3 データにアクセスできます。
 
-以下は、 TiDB LightningおよびBRの Amazon S3 URI の例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
+以下は、 TiDB LightningおよびBRの Amazon S3 URI の例です。この例では、特定のファイルパス`testfolder`を指定する必要があります。
 
 ```shell
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
@@ -108,7 +108,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 
 <CustomContent platform="tidb">
 
-以下は、 TiDB LightningとBRのGCS URIの例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
+以下は、 TiDB LightningとBRのGCS URIの例です。この例では、特定のファイルパス`testfolder`を指定する必要があります。
 
 ```shell
 gcs://external/testfolder?credentials-file=${credentials-file-path}
@@ -116,7 +116,7 @@ gcs://external/testfolder?credentials-file=${credentials-file-path}
 
 </CustomContent>
 
-以下は[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の GCS URI の例です。この例では、特定のファイル名`test.csv`指定する必要があります。
+以下は[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の GCS URI の例です。この例では、特定のファイル名`test.csv`を指定する必要があります。
 
 ```shell
 gcs://external/test.csv?credentials-file=${credentials-file-path}
@@ -135,7 +135,7 @@ gcs://external/test.csv?credentials-file=${credentials-file-path}
     -   `encryption-scope` : サーバー側の暗号化に[暗号化範囲](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope)指定します。
     -   `encryption-key` : AES256 暗号化アルゴリズムを使用するサーバー側暗号化の場合は[暗号化キー](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys)指定します。
 
-以下は、 BRのAzure Blob Storage URIの例です。この例では、特定のファイルパス`testfolder`指定する必要があります。
+以下は、 BRのAzure Blob Storage URIの例です。この例では、特定のファイルパス`testfolder`を指定する必要があります。
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}

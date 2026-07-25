@@ -27,8 +27,8 @@ TiDB Ansible バージョン: 3.0.6
     -   `INSERT ON DUPLICATE UPDATE`文で`Chunk`再利用してメモリオーバーヘッドを削減する [＃12998](https://github.com/pingcap/tidb/pull/12998)
     -   `JSON_VALID`組み込み関数のサポートを追加 [＃13133](https://github.com/pingcap/tidb/pull/13133)
     -   パーティションテーブルで`ADMIN CHECK TABLE`実行をサポート [＃13140](https://github.com/pingcap/tidb/pull/13140)
-    -   空のテーブルで`FAST ANALYZE`実行したときに発生するpanic問題を修正 [＃13343](https://github.com/pingcap/tidb/pull/13343)
-    -   複数列のインデックスを含む空のテーブルで`FAST ANALYZE`実行するとpanic問題を修正[＃13394](https://github.com/pingcap/tidb/pull/13394)
+    -   空のテーブルで`FAST ANALYZE`を実行したときに発生するpanic問題を修正 [＃13343](https://github.com/pingcap/tidb/pull/13343)
+    -   複数列のインデックスを含む空のテーブルで`FAST ANALYZE`を実行するとpanic問題を修正[＃13394](https://github.com/pingcap/tidb/pull/13394)
     -   `WHERE`句に一意キー等号条件が含まれている場合に推定行数が 1 より大きくなる問題を修正しました [＃13382](https://github.com/pingcap/tidb/pull/13382)
     -   TiDB で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13254](https://github.com/pingcap/tidb/pull/13254)
     -   推定精度を向上させるために、count-minスケッチから上位N個の値を抽出します[＃13429](https://github.com/pingcap/tidb/pull/13429)
@@ -63,7 +63,7 @@ TiDB Ansible バージョン: 3.0.6
         -   `Write_size`
         -   `Prewrite_region`
         -   `Txn_retry`
-    -   テーブルが作成され、テーブルに`COLLATE` が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`使用します。 [＃13174](https://github.com/pingcap/tidb/pull/13174)
+    -   テーブルが作成され、テーブルに`COLLATE` が含まれている場合、列のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`を使用します。 [＃13174](https://github.com/pingcap/tidb/pull/13174)
     -   テーブルを作成するときにインデックス名の長さを制限する [＃13310](https://github.com/pingcap/tidb/pull/13310)
     -   テーブル名を変更するときにテーブル名の長さがチェックされない問題を修正[＃13346](https://github.com/pingcap/tidb/pull/13346)
     -   TiDB で主キーの追加/削除をサポートするために、 `alter-primary-key`構成（デフォルトでは無効）を追加します。 [＃13522](https://github.com/pingcap/tidb/pull/13522)

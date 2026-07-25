@@ -38,7 +38,7 @@ CREATE TABLE `sbtest` (
 
 #### テストデータを生成する {#generate-test-data}
 
-`sysbench`使用してアップストリームにテストテーブルを作成し、完全インポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
+`sysbench`を使用してアップストリームにテストテーブルを作成し、完全インポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=50000000 prepare
@@ -84,7 +84,7 @@ mydumpers:
 
 > **Note:**
 >
-> -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`使用します。これにより、データのエクスポートが高速化されます。
+> -   複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
 > -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`調整できます。
 
 #### テスト結果を取得する {#get-test-results}
@@ -99,7 +99,7 @@ DM-worker のログを確認してください。1 `all data files have been fin
 
 #### テーブルを初期化する {#initialize-tables}
 
-アップストリームにテスト テーブルを作成するには`sysbench`使用します。
+アップストリームにテスト テーブルを作成するには`sysbench`を使用します。
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
@@ -156,4 +156,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DMの移行ステータスを確認するには、コマンド`query-status`実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)参照してください。
+DMの移行ステータスを確認するには、コマンド`query-status`を実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

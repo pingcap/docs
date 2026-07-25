@@ -111,7 +111,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記の文では、 `tiflash[]`オプティマイザにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`使用すると、必要に応じてオプティマイザに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記の文では、 `tiflash[]`オプティマイザにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`を使用すると、必要に応じてオプティマイザに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカが存在しない場合、ヒントは無視され、警告が報告されます。また、ヒントはエンジン分離を前提としてのみ有効です。ヒントで指定されたエンジンがエンジン分離リストに含まれていない場合も、ヒントは無視され、警告が報告されます。
 

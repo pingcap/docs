@@ -47,7 +47,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-テーブル`t`の統計情報をロックし、 `ANALYZE`実行します。 `SHOW STATS_LOCKED`の出力から、テーブル`t`の統計情報がロックされていることがわかります。警告メッセージは、 `ANALYZE`文がテーブル`t`をスキップしたことを示しています。
+テーブル`t`の統計情報をロックし、 `ANALYZE`を実行します。 `SHOW STATS_LOCKED`の出力から、テーブル`t`の統計情報がロックされていることがわかります。警告メッセージは、 `ANALYZE`文がテーブル`t`をスキップしたことを示しています。
 
 ```sql
 mysql> LOCK STATS t;
@@ -74,7 +74,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-さらに、 `LOCK STATS`使用してパーティションの統計情報をロックすることもできます。例:
+さらに、 `LOCK STATS`を使用してパーティションの統計情報をロックすることもできます。例:
 
 パーティションテーブル`t`を作成し、そこにデータを挿入します。パーティション`p1`の統計情報がロックされていない場合、 `ANALYZE`ステートメントは正常に実行できます。
 
@@ -103,7 +103,7 @@ mysql> SHOW WARNINGS;
 6 rows in set (0.01 sec)
 ```
 
-パーティション`p1`の統計情報をロックし、 `ANALYZE`実行します。警告メッセージには、 `ANALYZE`文がパーティション`p1`スキップしたことが示されています。
+パーティション`p1`の統計情報をロックし、 `ANALYZE`を実行します。警告メッセージには、 `ANALYZE`文がパーティション`p1`スキップしたことが示されています。
 
 ```sql
 mysql> LOCK STATS t PARTITION p1;

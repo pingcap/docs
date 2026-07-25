@@ -26,7 +26,7 @@ tiup dm reload <cluster-name> [flags]
 > **Note:**
 >
 > -   `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
-> -   オプション`--skip-restart`指定した場合、オプション`-N, --node`は無効になります。
+> -   オプション`--skip-restart`を指定した場合、オプション`-N, --node`は無効になります。
 
 ### -R, --role {#r-role}
 
@@ -37,7 +37,7 @@ tiup dm reload <cluster-name> [flags]
 > **Note:**
 >
 > -   `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
-> -   オプション`--skip-restart`指定した場合、オプション`-R, --role`は無効になります。
+> -   オプション`--skip-restart`を指定した場合、オプション`-R, --role`は無効になります。
 
 ### --skip-restart {#skip-restart}
 

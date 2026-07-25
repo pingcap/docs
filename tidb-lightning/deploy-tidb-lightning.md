@@ -18,7 +18,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`実行する必要があります。（環境によっては`source ~/.profile`実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
+    このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`を実行する必要があります。（環境によっては`source ~/.profile`を実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
 
 2.  TiUPを使用してTiDB Lightningをインストールします。
 

@@ -31,7 +31,7 @@ TiDB バージョン: 7.5.6
 
 -   TiFlash
 
-    -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
+    -   TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
 
 -   ツール
 
@@ -53,7 +53,7 @@ TiDB バージョン: 7.5.6
     -   同じ名前のビューを2つ作成してもエラーが報告されない問題を修正[＃58769](https://github.com/pingcap/tidb/issues/58769) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   `BIT`型から`CHAR`型にデータを変換すると TiKV パニックが発生する可能性がある問題を修正しました [＃56494](https://github.com/pingcap/tidb/issues/56494) @ [lcwangchao](https://github.com/lcwangchao)
     -   ハートビートを失った TTL ジョブが他のジョブのハートビートの取得をブロックする問題を修正しました [＃57915](https://github.com/pingcap/tidb/issues/57915) @ [YangKeao](https://github.com/YangKeao)
-    -   不一致な値タイプとタイプ変換エラーを含む条件`IN`使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)
+    -   不一致な値タイプとタイプ変換エラーを含む`IN`条件を使用してパーティション テーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [＃54746](https://github.com/pingcap/tidb/issues/54746) @ [mjonss](https://github.com/mjonss)
     -   `BIT`列のデフォルト値が正しくない問題を修正[＃57301](https://github.com/pingcap/tidb/issues/57301) @ [YangKeao](https://github.com/YangKeao)
     -   Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [＃58870](https://github.com/pingcap/tidb/issues/58870) @ [xhebox](https://github.com/xhebox)
     -   `CREATE VIEW`ステートメントで変数またはパラメータを使用してもエラーが報告されない問題を修正[＃53176](https://github.com/pingcap/tidb/issues/53176) @ [mjonss](https://github.com/mjonss)
@@ -63,12 +63,12 @@ TiDB バージョン: 7.5.6
     -   Grafanaの**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正しました[＃57176](https://github.com/pingcap/tidb/issues/57176) @ [hawkingrei](https://github.com/hawkingrei)
     -   `tidb_ttl_delete_rate_limit` を変更するときに一部の TTL ジョブがハングする可能性がある問題を修正しました [＃58484](https://github.com/pingcap/tidb/issues/58484) @ [lcwangchao](https://github.com/lcwangchao)
     -   統計の不適切な例外処理により、バックグラウンドタスクがタイムアウトしたときにメモリ内の統計が誤って削除される問題を修正しました[＃57901](https://github.com/pingcap/tidb/issues/57901) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `cluster_slow_query table`クエリするときに`ORDER BY`使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
+    -   `cluster_slow_query table`をクエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [＃51723](https://github.com/pingcap/tidb/issues/51723) @ [Defined2014](https://github.com/Defined2014)
     -   仮想生成列の依存関係に属性`ON UPDATE`持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[＃56829](https://github.com/pingcap/tidb/issues/56829) @ [joechenrh](https://github.com/joechenrh)
     -   TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[＃57784](https://github.com/pingcap/tidb/issues/57784) @ [YangKeao](https://github.com/YangKeao)
     -   パラメータが`Enum` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました`Bit` [＃51877](https://github.com/pingcap/tidb/issues/51877) @ [yibin87](https://github.com/yibin87)
-    -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [＃58633](https://github.com/pingcap/tidb/issues/58633) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   DDL所有者がに変更されるとジョブステータスが上書きされる問題を修正 [＃52747](https://github.com/pingcap/tidb/issues/52747) @ [D3Hunter](https://github.com/D3Hunter)
+    -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [＃58633](https://github.com/pingcap/tidb/issues/58633) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [＃52747](https://github.com/pingcap/tidb/issues/52747) @ [D3Hunter](https://github.com/D3Hunter)
     -   ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [＃58374](https://github.com/pingcap/tidb/issues/58374) @ [Defined2014](https://github.com/Defined2014)
     -   生成された列を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。 [＃58475](https://github.com/pingcap/tidb/issues/58475) @ [joechenrh](https://github.com/joechenrh)
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正[＃59347](https://github.com/pingcap/tidb/issues/59347) @ [YangKeao](https://github.com/YangKeao)
@@ -95,7 +95,7 @@ TiDB バージョン: 7.5.6
     -   単一のログファイルのデフォルト値`max-size`が正しく設定されていない問題を修正しました[＃9037](https://github.com/tikv/pd/issues/9037) @ [rleungx](https://github.com/rleungx)
     -   `flow-round-by-digit`構成項目の値が再起動後に上書きされる可能性がある問題を修正[＃8980](https://github.com/tikv/pd/issues/8980) @ [nolouch](https://github.com/nolouch)
     -   PDネットワークの不安定さにより、データのインポートやインデックスシナリオの追加操作が失敗する可能性がある問題を修正しました。 [＃8962](https://github.com/tikv/pd/issues/8962) @ [okJiang](https://github.com/okJiang)
-    -   `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanic可能性がある問題を修正[＃8950](https://github.com/tikv/pd/issues/8950) @ [okJiang](https://github.com/okJiang)
+    -   `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanicする可能性がある問題を修正[＃8950](https://github.com/tikv/pd/issues/8950) @ [okJiang](https://github.com/okJiang)
     -   `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正しました [＃8947](https://github.com/tikv/pd/issues/8947) @ [JmPotato](https://github.com/JmPotato)
     -   TSO を割り当てるときにメモリリークが発生する可能性がある問題を修正しました [＃9004](https://github.com/tikv/pd/issues/9004) @ [rleungx](https://github.com/rleungx)
     -   PDリーダーの切り替え時にリージョン同期が間に合わない可能性がある問題を修正しました [＃9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
@@ -105,7 +105,7 @@ TiDB バージョン: 7.5.6
 
     -   メモリ使用量が少ないときにTiFlash が予期せずRaftメッセージの処理を拒否する可能性がある問題を修正[＃9745](https://github.com/pingcap/tiflash/issues/9745) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[＃9812](https://github.com/pingcap/tiflash/issues/9812) @ [CalvinNeo](https://github.com/CalvinNeo)
-    -   パーティションテーブルに対するクエリが、パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`実行した後にエラーを返す可能性がある問題を修正しました。 [＃9787](https://github.com/pingcap/tiflash/issues/9787) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   パーティションテーブルに対するクエリが、パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後にエラーを返す可能性がある問題を修正しました。 [＃9787](https://github.com/pingcap/tiflash/issues/9787) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   特定の状況でTiFlash が予期せず終了したときにエラー スタック トレースを印刷できないことがある問題を修正[＃9902](https://github.com/pingcap/tiflash/issues/9902) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [＃9906](https://github.com/pingcap/tiflash/issues/9906) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [＃9561](https://github.com/pingcap/tiflash/issues/9561) @ [guo-shaoge](https://github.com/guo-shaoge)
@@ -119,7 +119,7 @@ TiDB バージョン: 7.5.6
         -   TiKV にリクエストを送信するときに`rpcClient is idle`エラーが発生し、 BRが復元に失敗する問題を修正しました。 [＃58845](https://github.com/pingcap/tidb/issues/58845) @ [Tristan1900](https://github.com/Tristan1900)
         -   PITRが3072バイトを超えるインデックスの復元に失敗する問題を修正[＃58430](https://github.com/pingcap/tidb/issues/58430) @ [YuJuncen](https://github.com/YuJuncen)
         -   `br log status --json` を使用してログバックアップタスクをクエリすると、結果に`status`フィールドが表示されない問題を修正しました。 [＃57959](https://github.com/pingcap/tidb/issues/57959) @ [Leavrth](https://github.com/Leavrth)
-        -   アドバンサー所有者がに切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。 [＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3pointer](https://github.com/3pointer)
+        -   アドバンサー所有者が切り替わったときに、ログバックアップが予期せず一時停止状態になる可能性がある問題を修正しました。 [＃58031](https://github.com/pingcap/tidb/issues/58031) @ [3pointer](https://github.com/3pointer)
 
     -   TiCDC
 

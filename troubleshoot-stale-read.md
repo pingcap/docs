@@ -61,7 +61,7 @@ resolved-ts）は、この値より小さいタイムスタンプを持つすべ
 
 ### Grafanaを使って診断する {#use-grafana-to-diagnose}
 
-[**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各TiKVのresolved-tsとsafe-tsが最も小さいリージョンを特定できます。これらのタイムスタンプが実時間より大幅に遅れている場合は、 `tikv-ctl`使用してこれらのリージョンの詳細を確認する必要があります。
+[**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各TiKVのresolved-tsとsafe-tsが最も小さいリージョンを特定できます。これらのタイムスタンプが実時間より大幅に遅れている場合は、 `tikv-ctl`を使用してこれらのリージョンの詳細を確認する必要があります。
 
 ### <code>tikv-ctl</code>を使用して診断する {#use-code-tikv-ctl-code-to-diagnose}
 

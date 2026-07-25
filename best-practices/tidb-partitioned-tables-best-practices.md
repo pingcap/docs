@@ -170,12 +170,12 @@ WHERE `fa`.`sid` IN (
 > **Note:**
 >
 > -   TiDB v8.5.3以前のバージョンでは、一意の列に対してのみグローバルインデックスを作成できました。v8.5.4以降では、一意でない列に対してもグローバルインデックスを作成できます。この制限は、将来のLTSバージョンで解除される予定です。
-> -   一意でないグローバル インデックスの場合は、 `ADD UNIQUE INDEX`ではなく`ADD INDEX`使用します。
+> -   一意でないグローバル インデックスの場合は、 `ADD UNIQUE INDEX`ではなく`ADD INDEX`を使用します。
 > -   `GLOBAL`キーワードを明示的に指定する必要があります。
 
 ##### オプション1: <code>ALTER TABLE</code>を使用する {#option-1-use-code-alter-table-code}
 
-既存のパーティションテーブルにグローバルインデックスを追加するには、 `ALTER TABLE`使用します。
+既存のパーティションテーブルにグローバルインデックスを追加するには、 `ALTER TABLE`を使用します。
 
 ```sql
 ALTER TABLE <table_name>
@@ -604,7 +604,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 #### デメリット {#disadvantages}
 
-`DROP PARTITION`使用して大量の履歴データを効率的に削除することはできません。
+`DROP PARTITION`を使用して大量の履歴データを効率的に削除することはできません。
 
 #### 適切なシナリオ {#suitable-scenarios}
 

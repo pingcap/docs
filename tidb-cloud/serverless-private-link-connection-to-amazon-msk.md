@@ -152,6 +152,6 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ 5. TiDB Cloudで Amazon MSK プロビジョニングされたプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
 
-MSK クラスターの`ARN`使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+MSK クラスターの`ARN`を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
 詳細については[Amazon MSK プロビジョニングされたプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)参照してください。

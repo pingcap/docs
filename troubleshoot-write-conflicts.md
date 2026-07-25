@@ -20,7 +20,7 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 3.  TiDB は、 `prewrite`リクエストがすべて成功したという結果を受け取ります。
 4.  TiDB は PD から`commit_ts`を取得します。
 5.  TiDBは、トランザクションの主キーを含むTiKVリージョンに`commit`リクエストを送信します。TiKVは`commit`リクエストを受信すると、データの有効性を確認し、 `prewrite`番目のステージに残っているロックを解除します。
-6.  `commit`回目のリクエストが正常に返されると、TiDB はクライアントに成功を返します。
+6.  `commit`リクエストが正常に返されると、TiDB はクライアントに成功を返します。
 
 書き込み競合はステージ`prewrite`で発生します。トランザクションが、別のトランザクションが現在のキー（ `data.commit_ts` &gt; `txn.start_ts` ）に書き込みを行っていることを検出すると、書き込み競合が発生します。
 
@@ -59,10 +59,10 @@ TiDBログを検索するキーワードとして`[kv:9007]Write conflict`を使
 上記のログの説明は次のとおりです。
 
 -   `[kv:9007]Write conflict` : 書き込み間の競合を示します。
--   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`示します。4ツール`pd-ctl`使用して、 `start_ts`物理時間に変換できます。
--   `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`示します。
--   `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`示します。
--   `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。2 `tableID`書き込み競合テーブルのIDを示します。4 `indexID`書き込み競合インデックスのIDを示します。書き込み競合キーがレコードキーの場合、ログには競合が発生しているレコード（行）を示す`handle=x`が出力。8 `indexValues`競合が発生しているインデックスの値を示します。
+-   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`を示します。`pd-ctl`ツールを使用して、 `start_ts`を物理時間に変換できます。
+-   `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`を示します。
+-   `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`を示します。
+-   `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。`tableID`は書き込み競合テーブルのIDを示します。`indexID`は書き込み競合インデックスのIDを示します。書き込み競合キーがレコードキーの場合、ログには競合が発生しているレコード（行）を示す`handle=x`が出力されます。`indexValues`は競合が発生しているインデックスの値を示します。
 -   `primary={tableID=47, indexID=1, indexValues={string, }}` : 現在のトランザクションの主キー情報を示します。
 
 `pd-ctl`ツールを使用して、タイムスタンプを読み取り可能な時間に変換できます。
@@ -71,7 +71,7 @@ TiDBログを検索するキーワードとして`[kv:9007]Write conflict`を使
 tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 tso {TIMESTAMP}
 ```
 
-`tableID`使用して、関連するテーブルの名前を見つけることができます。
+`tableID`を使用して、関連するテーブルの名前を見つけることができます。
 
 ```shell
 curl http://{TiDBIP}:10080/db-table/{TableID}

@@ -340,7 +340,7 @@ TiDBバージョン：8.3.0
     -   `scheduling`マイクロサービスが有効になった後にスケーリングの進行状況が正しく表示されない問題を修正しました [#8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
     -   暗号化マネージャが使用前に初期化されていない問題を修正 [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     -   一部のログが編集されない問題を修正 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
-    -   PDマイクロサービスの起動中にリダイレクトがpanic可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
+    -   PDマイクロサービスの起動中にリダイレクトがpanicする可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
     -   `split-merge-interval`設定項目の値が繰り返し変更された場合（例えば、 `1s`から`1h` に変更し、再び`1s` に戻す場合など）に、その設定が有効にならない可能性がある問題を修正します。 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
     -   `replication.strictly-match-label`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     -   大規模なパーティションテーブルを分析する際にTSOの取得が遅くなり、 `ANALYZE`パフォーマンス低下を引き起こす問題を修正しました [#8500](https://github.com/tikv/pd/issues/8500) @[rleungx](https://github.com/rleungx)
@@ -350,11 +350,11 @@ TiDBバージョン：8.3.0
 -   TiFlash
 
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む datetime に変換すると、結果が正しくない問題を修正しました [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
-    -   データベース全体に空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`実行するとTiFlash がpanicになる問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースにまたがる空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   遅延マテリアライゼーションが有効になった後、一部のクエリで列型の不一致エラーが報告される可能性がある問題を修正 [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     -   仮想生成列を含むクエリが遅延マテリアライゼーション有効後に誤った結果を返す可能性がある問題を修正 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     -   TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   データベース作成直後にデータベースが削除されるとTiFlash がpanicことがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベース作成直後にデータベースが削除されるとTiFlash がpanicすることがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashと任意の PD 間のネットワーク パーティション (ネットワークの切断) により、読み取りリクエストのタイムアウト エラーが発生する可能性がある問題を修正 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   分散ストレージおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)

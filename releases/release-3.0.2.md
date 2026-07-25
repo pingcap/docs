@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.0.2
 -   サーバ
     -   CSVファイル内の欠落しているフィールド`LOAD DATA` `TIMESTAMP`処理する際に、自動的に追加された値が現在のタイムスタンプではなく0になる問題を修正しました。 [＃11250](https://github.com/pingcap/tidb/pull/11250)
     -   `SHOW CREATE USER`文が関連する権限を正しくチェックせず、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`間違っている可能性がある問題を修正しました[＃11229](https://github.com/pingcap/tidb/pull/11229)
-    -   JDBC で`executeBatch`使用すると返される結果が間違っている可能性がある問題を修正しました [＃11290](https://github.com/pingcap/tidb/pull/11290)
+    -   JDBC で`executeBatch`を使用すると返される結果が間違っている可能性がある問題を修正しました [＃11290](https://github.com/pingcap/tidb/pull/11290)
     -   TiKVサーバーのポートを変更するときにストリーミングクライアントのログ情報の出力を削減します [＃11370](https://github.com/pingcap/tidb/pull/11370)
     -   ストリーミングクライアントが長時間ブロックされないように、ストリーミングクライアントをTiKVサーバーに再接続するロジックを最適化します[＃11372](https://github.com/pingcap/tidb/pull/11372)
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` に`REGION_ID`を足す [＃11350](https://github.com/pingcap/tidb/pull/11350)
@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 3.0.2
     -   次の問題を修正しました[＃11492](https://github.com/pingcap/tidb/pull/11492) :
         -   照合順序を明示的に指定し、文字セットを指定していない場合、列の文字セットと照合順序が一致しません。
         -   `ALTER TABLE … MODIFY COLUMN`で指定された文字セットと照合順序の間に矛盾がある場合、エラーは正しく報告されません。
-        -   `ALTER TABLE … MODIFY COLUMN`使用して文字セットと照合順序を複数回指定すると、MySQL との互換性がなくなる
+        -   `ALTER TABLE … MODIFY COLUMN`を使用して文字セットと照合順序を複数回指定すると、MySQL との互換性がなくなる
     -   サブクエリのトレース詳細を`TRACE`クエリの結果に追加する [＃11458](https://github.com/pingcap/tidb/pull/11458)
     -   `ADMIN CHECK TABLE`実行パフォーマンスを最適化し、実行時間を大幅に短縮する[＃11547](https://github.com/pingcap/tidb/pull/11547)
     -   `SPLIT TABLE … REGIONS/INDEX`で返された結果を追加し、 `TOTAL_SPLIT_REGION`と`SCATTER_FINISH_RATIO`に、結果のタイムアウト前に正常に分割されたリージョンの数を表示するようにします。 [＃11484](https://github.com/pingcap/tidb/pull/11484)

@@ -76,7 +76,7 @@ const prisma = new PrismaClient({ adapter });
 
 ## Node.js環境でPrismaアダプターを使用する {#use-the-prisma-adapter-in-node-js-environments}
 
-このセクションでは、Node.js 環境で`@tidbcloud/prisma-adapter`使用する方法の例を示します。
+このセクションでは、Node.js 環境で`@tidbcloud/prisma-adapter`を使用する方法の例を示します。
 
 ### 始める前に {#before-you-begin}
 

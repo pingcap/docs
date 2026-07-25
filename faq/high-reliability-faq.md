@@ -15,7 +15,7 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 -   v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)変更することでサーバーのバージョン文字列を変更することをサポートしています。
 
--   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
+-   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 
         server_configs:
           tidb:

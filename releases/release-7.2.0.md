@@ -270,7 +270,7 @@ TiDB バージョン: 7.2.0
 
         -   `checksum mismatch`が一部のケースで誤って報告される問題を修正 [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
         -   `resolved lock timeout`が一部のケースで誤って報告される問題を修正 [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
-        -   統計情報の復元時に TiDB がpanic可能性がある問題を修正 [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
+        -   統計情報の復元時に TiDB がpanicする可能性がある問題を修正 [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
 
     -   TiCDC
 

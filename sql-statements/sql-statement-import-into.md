@@ -341,7 +341,7 @@ IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-acces
 
 ## <code>IMPORT INTO ... FROM SELECT</code>使用法 {#code-import-into-from-select-code-usage}
 
-`IMPORT INTO ... FROM SELECT`使用すると`SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートできます。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
+`IMPORT INTO ... FROM SELECT`を使用すると`SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートできます。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
 
 ### <code>SELECT</code>クエリの結果をインポートします {#import-the-query-result-of-code-select-code}
 

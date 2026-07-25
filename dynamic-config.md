@@ -53,8 +53,8 @@ show config where type='tikv' and name='log.level'
 
 > **Note:**
 >
-> -   TiKV設定項目を動的に変更すると、TiKV設定ファイルは自動的に更新されます。ただし、 `tiup edit-config`実行して対応する設定項目も変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作によって変更内容が上書きされてしまいます。設定項目の変更方法の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
-> -   `tiup edit-config`実行した後、 `tiup reload`を実行する必要はありません。
+> -   TiKV設定項目を動的に変更すると、TiKV設定ファイルは自動的に更新されます。ただし、 `tiup edit-config`を実行して対応する設定項目も変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作によって変更内容が上書きされてしまいます。設定項目の変更方法の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
 `set config`ステートメントを使用すると、インスタンス アドレスまたはコンポーネントタイプに応じて、単一のインスタンスの構成またはすべてのインスタンスの構成を変更できます。
 
@@ -103,7 +103,7 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。1 `set tikv key=val`使用して TiKV クラスター全体の設定を変更すると、一部のインスタンスで変更が失敗する可能性があります。3 `show warnings`使用して結果を確認できます。
+バッチ変更はアトミック性を保証するものではありません。一部のインスタンスでは変更が成功し、他のインスタンスでは失敗する可能性があります。`set tikv key=val`を使用して TiKV クラスター全体の設定を変更すると、一部のインスタンスで変更が失敗する可能性があります。`show warnings`を使用して結果を確認できます。
 
 一部の変更が失敗した場合は、対応するステートメントを再実行するか、失敗したインスタンスを個別に変更する必要があります。ネットワークの問題やマシンの障害により一部のTiKVインスタンスにアクセスできない場合は、復旧後にこれらのインスタンスを変更してください。
 
@@ -225,9 +225,9 @@ show warnings;
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC 要求を処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
-| `split.qps-threshold`                                     | リージョンで`load-base-split`実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`超える場合、このリージョンは分割される必要があります。                                    |
-| `split.byte-threshold`                                    | リージョンで`load-base-split`実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
-| `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
+| `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
+| `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
+| `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
 | `split.split-balance-score`                               | `load-base-split`というパラメータは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
 | `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
 | `cdc.min-ts-interval`                                     | 解決されたTSが転送される時間間隔                                                                                                                          |
@@ -337,7 +337,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`動的に変更する方法を示しています。
 
-デフォルト値`slow-threshold`は 300 ミリ秒です。 `tidb_slow_log_threshold`使用すると 200 ミリ秒に設定できます。
+`slow-threshold`のデフォルト値は 300 ミリ秒です。 `tidb_slow_log_threshold`を使用すると 200 ミリ秒に設定できます。
 
 ```sql
 set tidb_slow_log_threshold = 200;
@@ -378,7 +378,7 @@ select @@tidb_slow_log_threshold;
 
 現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)使用してTiFlash構成`max_threads`を変更できます。この変数は、 TiFlashが要求を実行するための最大同時実行性を指​​定します。
 
-デフォルト値は`tidb_max_tiflash_threads` `-1` 、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`使用すると、 `max_threads`から 10 に設定できます。
+`tidb_max_tiflash_threads`のデフォルト値は`-1`で、このシステム変数は無効であり、 TiFlash設定ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用すると、 `max_threads`を 10 に設定できます。
 
 ```sql
 set tidb_max_tiflash_threads = 10;

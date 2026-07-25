@@ -142,7 +142,7 @@ tiup playground scale-out --db 2
 
 ## クラスタースケールイン {#scale-in-a-cluster}
 
-対応するインスタンスでスケールするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。5 `pid`表示するには、 `tiup playground display`実行します。
+対応するインスタンスでスケールするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。`pid`を表示するには、 `tiup playground display`を実行します。
 
 ```shell
 tiup playground scale-in --pid 86526

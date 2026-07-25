@@ -69,7 +69,7 @@ TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 `node count = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-式では、まず`node count = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
+式では、まず`node count = ceil(overall expected performance ÷ performance per node)`を計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
 
 例えば、混合ワークロードにおける全体的な期待パフォーマンスが 110,000 QPS、P95レイテンシーが約 100 ミリ秒で、8 vCPU、16 GiB の TiDB ノードを使用したいとします。この場合、前述の表から 8 vCPU、16 GiB の TiDB ノードの推定 TiDB パフォーマンス（ `15,500` ）を取得し、以下のように TiDB ノードの大まかな数を計算できます。
 
@@ -159,7 +159,7 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 `node count = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-式では、まず`node count = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
+式では、まず`node count = ceil(overall expected performance ÷ performance per node)`を計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
 
 例えば、混合ワークロードにおける全体的な期待パフォーマンスが110,000 QPS、P95レイテンシーが約100ミリ秒で、8 vCPU、32 GiB TiKVノードを使用したいとします。この場合、前述の表から8 vCPU、32 GiB TiKVノードの推定TiKVパフォーマンス（ `17,800` ）を取得し、TiKVノードの大まかな数を以下のように計算します。
 

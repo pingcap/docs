@@ -28,9 +28,9 @@ TableNameList ::=
 
 通常のテーブルと一時テーブルを削除するには、次の構文を使用できます。
 
--   ローカル一時テーブルを削除するには`DROP TEMPORARY TABLE`使用します。
--   グローバル一時テーブルを削除するには`DROP GLOBAL TEMPORARY TABLE`使用します。
--   通常のテーブルまたは一時テーブルを削除するには、 `DROP TABLE`使用します。
+-   ローカル一時テーブルを削除するには`DROP TEMPORARY TABLE`を使用します。
+-   グローバル一時テーブルを削除するには`DROP GLOBAL TEMPORARY TABLE`を使用します。
+-   通常のテーブルまたは一時テーブルを削除するには、 `DROP TABLE`を使用します。
 
 ## 例 {#examples}
 

@@ -60,7 +60,7 @@ ALTER SEQUENCE sequence_name
 
 > **Note:**
 >
-> `START`値を変更しても、 `ALTER SEQUENCE ... RESTART`実行するまで生成された値には影響しません。
+> `START`値を変更しても、 `ALTER SEQUENCE ... RESTART`を実行するまで生成された値には影響しません。
 
 ## <code>SEQUENCE</code>関数 {#code-sequence-code-function}
 

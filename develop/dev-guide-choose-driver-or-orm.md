@@ -131,7 +131,7 @@ implementation 'mysql:mysql-connector-java:8.0.33'
 
 > **Note:**
 >
-> `Hibernate`バージョンをアップグレードできない場合は、代わりにMySQL 5.7方言`org.hibernate.dialect.MySQL57Dialect`使用してください。ただし、この設定では予期しない結果が生じる可能性があり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部利用できなくなる可能性があります。
+> `Hibernate`バージョンをアップグレードできない場合は、代わりにMySQL 5.7方言`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定では予期しない結果が生じる可能性があり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部利用できなくなる可能性があります。
 
 </div>
 

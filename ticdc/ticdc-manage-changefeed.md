@@ -169,12 +169,12 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 ```
 
 -   `--changefeed-id=uuid` 、再開するレプリケーション タスクに対応する変更フィード ID を表します。
--   `--overwrite-checkpoint-ts` : v6.2.0以降では、レプリケーションタスクを再開する開始TSOを指定できます。TiCDCは指定されたTSOからデータのプルを開始します。引数には`now`または特定のTSO（434873584621453313など）を指定できます。指定するTSOは、GCセーフポイントからCurrentTSOまでの範囲内である必要があります。この引数を指定しない場合、TiCDCはデフォルトで現在の`checkpoint-ts`からデータを複製します。現在のTSO値`checkpoint-ts`確認するには、 `cdc cli changefeed list`コマンドを使用します。
+-   `--overwrite-checkpoint-ts` : v6.2.0以降では、レプリケーションタスクを再開する開始TSOを指定できます。TiCDCは指定されたTSOからデータのプルを開始します。引数には`now`または特定のTSO（434873584621453313など）を指定できます。指定するTSOは、GCセーフポイントからCurrentTSOまでの範囲内である必要があります。この引数を指定しない場合、TiCDCはデフォルトで現在の`checkpoint-ts`からデータを複製します。現在のTSO値`checkpoint-ts`を確認するには、 `cdc cli changefeed list`コマンドを使用します。
 -   `--no-confirm` : レプリケーションが再開されたときに、関連情報を確認する必要はありません。デフォルトは`false`です。
 
 > **Note:**
 >
-> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。13 `cdc cli changefeed query`実行すると`t1`取得できます。
+> -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがchangefeed（ `t1` ）の現在のチェックポイントTSOよりも大きい場合、 `t1`と`t2`間のデータは下流に複製されません。これによりデータ損失が発生します。`cdc cli changefeed query`を実行すると`t1`を取得できます。
 > -   `--overwrite-checkpoint-ts` （ `t2` ）で指定されたTSOがチェンジフィード（ `t1` ）の現在のチェックポイントTSOより小さい場合、TiCDCは古い時点（ `t2` ）からデータをプルします。これにより、データの重複が発生する可能性があります（たとえば、下流がMQシンクの場合）。
 
 ## レプリケーションタスクを削除する {#remove-a-replication-task}
@@ -187,7 +187,7 @@ cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple
 
 上記のコマンドでは、次のようになります。
 
--   `--changefeed-id=uuid`削除するレプリケーション タスクに対応する変更フィードの ID を表します。
+-   `--changefeed-id=uuid`を削除するレプリケーション タスクに対応する変更フィードの ID を表します。
 
 ## タスク構成の更新 {#update-task-configuration}
 
@@ -294,4 +294,4 @@ cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simpl
 > **Note:**
 >
 > -   サーバーで、レイテンシーが長く、帯域幅が制限されている機械式ハード ドライブやその他のストレージデバイスが使用されている場合、Unified Sorter のパフォーマンスは大幅に低下します。
-> -   デフォルトでは、Unified Sorter は一時ファイルの保存に`data_dir`使用します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。本番環境では、各ノードの空きディスク容量が（業務で許容される最大遅延時間`checkpoint-ts` ）×（業務ピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。また、 `changefeed`作成した後に大量の履歴データを複製する予定がある場合は、各ノードの空き容量が複製データの量よりも大きいことを確認してください。
+> -   デフォルトでは、Unified Sorter は一時ファイルの保存に`data_dir`を使用します。空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。本番環境では、各ノードの空きディスク容量が（業務で許容される最大遅延時間`checkpoint-ts` ）×（業務ピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。また、 `changefeed`を作成した後に大量の履歴データを複製する予定がある場合は、各ノードの空き容量が複製データの量よりも大きいことを確認してください。
