@@ -241,7 +241,7 @@ To use credentials from the default AWS profile in `~/.aws/credentials`:
 tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
 ```
 
-To use a specific AWS profile:
+To use credentials from a specific AWS profile:
 
 ```shell
 tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}" --s3.profile=my.profile
