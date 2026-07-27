@@ -5,17 +5,17 @@ summary: Learn how to export data from {{{ .premium }}} instances.
 
 # Export Data from {{{ .premium }}}
 
-TiDB Cloud enables you to export data from a {{{ .premium }}} instance to an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
+TiDB Cloud enables you to export data from a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to an external storage service. You can use the exported data for backup, migration, data analysis, or other purposes.
 
-While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .premium }}} instance. It brings the following benefits:
+While you can also export data using tools such as [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview), the export feature provided by TiDB Cloud offers a more convenient and efficient way to export data from a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance. It brings the following benefits:
 
-- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .premium }}} instance, eliminating the need for additional tools or resources.
+- Convenience: the export service provides a simple and easy-to-use way to export data from a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, eliminating the need for additional tools or resources.
 - Isolation: the export service uses separate computing resources, ensuring isolation from the resources used by your online services.
 - Consistency: the export service ensures the consistency of the exported data without causing locks, which does not affect your online services.
 
 > **Note:**
 >
-> - Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for data export for {{{ .premium }}} instance" in the **Description** field, and then click **Submit**.
+> - Currently, this feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for data export for {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance" in the **Description** field, and then click **Submit**.
 > - The maximum export size is 1 TiB. Exports larger than this limit might fail. To export more data or request a higher export speed, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Export locations
@@ -33,7 +33,7 @@ To export data to Amazon S3, you need to provide the following information:
 - URI: `s3://<bucket-name>/<folder-path>/`
 - One of the following access credentials:
     - [An access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html): make sure the access key has the `s3:PutObject` permission.
-    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permission. Note that only {{{ .premium }}} instances hosted on AWS support the role ARN.
+    - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permission. Note that only {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances hosted on AWS support the role ARN.
 
 For more information, see [Configure External Storage Access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
 
@@ -100,12 +100,12 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, click **Export Data** in the upper-right corner. Then configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, and then click **Test Connection** to verify the credentials.
     - **Target Connection**:
         - **Storage Provider**: choose Amazon S3.
         - **Folder URI**: enter the URI of the Amazon S3 with the `s3://<bucket-name>/<folder-path>/` format.
@@ -126,12 +126,12 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, click **Export Data** in the upper-right corner. Then configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, and then click **Test Connection** to verify the credentials.
     - **Target Connection**:
         - **Storage Provider**: choose Azure Blob Storage.
         - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
@@ -150,12 +150,12 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, click **Export Data** in the upper-right corner:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, and then click **Test Connection** to verify the credentials.
     - **Target Connection**:
         - **Storage Provider**: choose Alibaba Cloud OSS.
         - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
@@ -176,7 +176,7 @@ To cancel an ongoing export task, take the following steps:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, view the export task list.
 

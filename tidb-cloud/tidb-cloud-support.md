@@ -19,7 +19,7 @@ TiDB Cloud provides multiple support channels. The available options depend on t
     - [Technical support tickets](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket) with guaranteed response times are available for paid support plans. If you do not have a paid support plan, use community channels for technical questions.
 
     The **Enterprise** and **Premium** support plans include the following enhanced capabilities. For more information, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
- 
+
     - Faster response times with defined SLAs
     - Real-time communication through IM-based support
     - Proactive support programs, such as [Clinic](/tidb-cloud/tidb-cloud-clinic.md)
@@ -109,6 +109,12 @@ To check or upgrade your support plan, perform the following steps:
 
     On this page, you can find your current plan. By default, the **Basic** free plan is selected.
 
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, **Enterprise** is the minimum required support plan.
+
+    </CustomContent>
+
 2. Choose your desired support plan.
 
     <SimpleTab>
@@ -143,3 +149,9 @@ To downgrade your support plan, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click **Support** in the lower-left corner.
 2. Choose the support plan you want to switch to, and then click **Downgrade**.
+
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, you can downgrade only to **Enterprise** or a higher support plan.
+
+    </CustomContent>

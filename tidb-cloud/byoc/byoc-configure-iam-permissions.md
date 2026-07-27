@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud BYOC IAM Configuration
+title: Configure TiDB Cloud BYOC IAM Permissions
 summary: This document outlines the IAM configuration required for TiDB Cloud BYOC controller access.
 ---
 
-# TiDB Cloud BYOC IAM Configuration
+# Configure TiDB Cloud BYOC IAM Permissions
 
 Once the AWS environment is prepared, you must authorize the TiDB Cloud Control Plane to manage resources within your account. This is achieved by executing a bootstrapping script that establishes the necessary IAM Roles based on the Principle of Least Privilege.
 
@@ -49,6 +49,8 @@ Use the table below to map the required parameters for the script:
 
 After execution, the script will output the ARNs of the created IAM roles.
 
-* **Action required:** Share the **execution result/log** with your TiDB Cloud representative.
+**Action required:** Share the **execution result/log** with your TiDB Cloud representative.
 
-* **Next step:** Once TiDB Cloud verifies the roles, the [automated deployment](/tidb-cloud/byoc/byoc-automated-deployment.md) will be triggered.
+## What's next
+
+After TiDB Cloud verifies the IAM roles, continue with [TiDB Cloud BYOC Automated Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md). TiDB Cloud will trigger the automated deployment.

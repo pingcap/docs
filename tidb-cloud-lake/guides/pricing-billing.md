@@ -1,9 +1,9 @@
 ---
-title: Pricing & Billing
+title: TiDB Cloud Lake Pricing & Billing
 summary: Understand the pricing model and billing details for TiDB Cloud Lake.
 ---
 
-# Pricing & Billing
+# TiDB Cloud Lake Pricing & Billing
 
 Your costs on {{{ .lake }}} consist of the following components: warehouses, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
 
