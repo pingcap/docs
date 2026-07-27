@@ -14,21 +14,28 @@ Lists Filesystems registered in the selected local profile.
 ## Syntax
 
 ```text
-  tdc fs list-file-systems
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs list-file-systems
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### List registered file systems as text
+
+```bash
 tdc fs list-file-systems --output text
+```
+
+### Return registered file system names
+
+```bash
 tdc fs list-file-systems --query 'file_systems[].file_system_name'
 ```

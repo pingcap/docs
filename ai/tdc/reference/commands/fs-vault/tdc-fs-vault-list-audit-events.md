@@ -14,27 +14,40 @@ Lists vault audit events with optional agent, secret, and time filters.
 ## Syntax
 
 ```text
-  tdc fs-vault list-audit-events
-    [--agent-id <string>]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--limit <int32>]
-    [--secret-name <string>]
-    [--since <duration>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault list-audit-events
+  [--agent-id <string>]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--limit <int32>]
+  [--secret-name <string>]
+  [--since <duration>]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--agent-id <string>`: Filter by agent ID.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--limit <int32>`: Maximum events to return. \[default: 100]
+- `--secret-name <string>`: Filter by Vault secret name.
+- `--since <duration>`: Client-side relative time filter, for example, `24h`.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-vault list-audit-events --secret-name db-prod --limit 20
-tdc fs-vault list-audit-events --agent-id deploy-agent --since 24h --output text
+### List audit events for a secret
+
+```bash
+tdc fs-vault list-audit-events --file-system-name workspace --secret-name db-prod --limit 20
+```
+
+### List recent events for an agent
+
+```bash
+tdc fs-vault list-audit-events --file-system-name workspace --agent-id deploy-agent --since 24h --output text
 ```

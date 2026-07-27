@@ -14,23 +14,32 @@ Checks Filesystem selection, endpoint resolution, credentials, and companion acc
 ## Syntax
 
 ```text
-  tdc fs check-file-system
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs check-file-system
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Check file system connectivity
+
+```bash
 tdc fs check-file-system --file-system-name workspace
+```
+
+### Render the check result as text
+
+```bash
 tdc fs check-file-system --file-system-name workspace --output text
 ```

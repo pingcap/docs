@@ -14,27 +14,40 @@ Creates a Starter cluster. `--db-cluster-type` defaults to `starter`, and `--wai
 ## Syntax
 
 ```text
-  tdc db create-db-cluster
-    --db-cluster-name <string>
-    [--db-cluster-type <string>]
-    [--dry-run]
-    [--help]
-    [--monthly-spending-limit-usd-cents <int32>]
-    [--project-id <string>]
-    [--version]
-    [--wait]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db create-db-cluster
+  --db-cluster-name <string>
+  [--db-cluster-type <string>]
+  [--dry-run]
+  [--help]
+  [--monthly-spending-limit-usd-cents <int32>]
+  [--project-id <string>]
+  [--version]
+  [--wait]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-name <string>`: Starter DB cluster display name. \[required]
+- `--db-cluster-type <string>`: DB cluster type; must be `starter`. \[default: starter]
+- `--dry-run`: Validate the request without applying changes.
+- `--help`: Display help information.
+- `--monthly-spending-limit-usd-cents <int32>`: Monthly spending limit in USD cents; omit to use the API default.
+- `--project-id <string>`: TiDB Cloud project ID.
+- `--version`: Display tdc version information.
+- `--wait`: Wait until the created cluster becomes `ACTIVE` before returning.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Create a cluster and wait until it is active
+
+```bash
 tdc db create-db-cluster --db-cluster-name app-db --wait
+```
+
+### Preview cluster creation
+
+```bash
 tdc db create-db-cluster --db-cluster-name app-db --dry-run
 ```

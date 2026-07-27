@@ -14,24 +14,34 @@ Verifies the integrity of one journal hash chain.
 ## Syntax
 
 ```text
-  tdc fs-journal verify-journal
-    --journal-id <string>
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-journal verify-journal
+  --journal-id <string>
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--journal-id <string>`: Journal ID. \[required]
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-journal verify-journal --journal-id jrn-demo
-tdc fs-journal verify-journal --journal-id jrn-demo --output text
+### Verify a journal
+
+```bash
+tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo
+```
+
+### Render verification results as text
+
+```bash
+tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo --output text
 ```

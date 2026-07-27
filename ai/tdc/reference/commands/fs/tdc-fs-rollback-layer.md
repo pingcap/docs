@@ -14,25 +14,36 @@ Rolls back changes in one layer without committing them to the base.
 ## Syntax
 
 ```text
-  tdc fs rollback-layer
-    --layer-id <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs rollback-layer
+  --layer-id <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--layer-id <string>`: The ID of the layer. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs rollback-layer --layer-id "<layer-id>" --dry-run
-tdc fs rollback-layer --layer-id "<layer-id>"
+### Preview a layer rollback
+
+```bash
+tdc fs rollback-layer --file-system-name workspace --layer-id "<layer-id>" --dry-run
+```
+
+### Roll back a layer
+
+```bash
+tdc fs rollback-layer --file-system-name workspace --layer-id "<layer-id>"
 ```

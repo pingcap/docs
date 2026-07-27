@@ -14,23 +14,32 @@ Describes one Starter cluster. Use `--view FULL` to request expanded fields.
 ## Syntax
 
 ```text
-  tdc db describe-db-cluster
-    --db-cluster-id <string>
-    [--help]
-    [--version]
-    [--view <string>]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db describe-db-cluster
+  --db-cluster-id <string>
+  [--help]
+  [--version]
+  [--view <string>]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+- `--view <string>`: Detail level: `BASIC` or `FULL`.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Describe a cluster
+
+```bash
 tdc db describe-db-cluster --db-cluster-id "<cluster-id>"
+```
+
+### Show full cluster details
+
+```bash
 tdc db describe-db-cluster --db-cluster-id "<cluster-id>" --view FULL
 ```

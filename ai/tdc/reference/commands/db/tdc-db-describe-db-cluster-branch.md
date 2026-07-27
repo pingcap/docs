@@ -14,24 +14,34 @@ Describes one branch by cluster ID and branch ID.
 ## Syntax
 
 ```text
-  tdc db describe-db-cluster-branch
-    --db-cluster-branch-id <string>
-    --db-cluster-id <string>
-    [--help]
-    [--version]
-    [--view <string>]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db describe-db-cluster-branch
+  --db-cluster-branch-id <string>
+  --db-cluster-id <string>
+  [--help]
+  [--version]
+  [--view <string>]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-branch-id <string>`: Starter DB cluster branch ID. \[required]
+- `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+- `--view <string>`: Detail level: `BASIC` or `FULL`.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Describe a branch
+
+```bash
 tdc db describe-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>"
+```
+
+### Show full branch details
+
+```bash
 tdc db describe-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>" --view FULL
 ```

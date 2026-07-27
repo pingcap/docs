@@ -14,28 +14,42 @@ Mounts readable vault fields as a local read-only FUSE filesystem.
 ## Syntax
 
 ```text
-  tdc fs-vault mount-vault
-    --mount-path <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--foreground]
-    [--fs-token <string>]
-    [--help]
-    [--ready-timeout <duration>]
-    [--vault-token <string>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault mount-vault
+  --mount-path <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--foreground]
+  [--fs-token <string>]
+  [--help]
+  [--ready-timeout <duration>]
+  [--vault-token <string>]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--mount-path <string>`: Local mount path. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--foreground`: Run mount runtime in the foreground until interrupted.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
+- `--vault-token <string>`: Delegated tdc fs-vault token; prefer `TDC_VAULT_TOKEN`.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-vault mount-vault --mount-path ./vault --vault-token "$TDC_VAULT_TOKEN"
-tdc fs-vault mount-vault --mount-path ./vault --foreground --ready-timeout 60s
+### Mount a Vault view with a delegated token
+
+```bash
+tdc fs-vault mount-vault --file-system-name workspace --mount-path ./vault --vault-token "$TDC_VAULT_TOKEN"
+```
+
+### Run a Vault mount in the foreground
+
+```bash
+tdc fs-vault mount-vault --file-system-name workspace --mount-path ./vault --foreground --ready-timeout 60s
 ```

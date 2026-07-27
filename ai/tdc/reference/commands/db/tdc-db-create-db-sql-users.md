@@ -14,23 +14,32 @@ Idempotently creates or repairs the read-only, read-write, and admin SQL users m
 ## Syntax
 
 ```text
-  tdc db create-db-sql-users
-    --db-cluster-id <string>
-    [--dry-run]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db create-db-sql-users
+  --db-cluster-id <string>
+  [--dry-run]
+  [--help]
+  [--version]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Preview SQL user creation
+
+```bash
 tdc db create-db-sql-users --db-cluster-id "<cluster-id>" --dry-run
+```
+
+### Create read-only, read-write, and admin SQL users
+
+```bash
 tdc db create-db-sql-users --db-cluster-id "<cluster-id>"
 ```

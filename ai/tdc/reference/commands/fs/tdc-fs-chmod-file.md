@@ -14,26 +14,38 @@ Changes POSIX mode metadata for a remote path. The command alias is `tdc fs chmo
 ## Syntax
 
 ```text
-  tdc fs chmod-file
-    --mode <string>
-    --path <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs chmod-file
+  --mode <string>
+  --path <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--mode <string>`: The permission mode as an octal value such as 0644. \[required]
+- `--path <string>`: File or directory path. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs chmod-file --path /reports/final.md --mode 0600
-tdc fs chmod --path /reports/final.md --mode 0644 --dry-run
+### Change file permissions
+
+```bash
+tdc fs chmod-file --file-system-name workspace --path /reports/final.md --mode 0600
+```
+
+### Preview a permission change with the alias
+
+```bash
+tdc fs chmod --file-system-name workspace --path /reports/final.md --mode 0644 --dry-run
 ```

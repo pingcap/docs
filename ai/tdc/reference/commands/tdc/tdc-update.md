@@ -14,25 +14,36 @@ Checks for or installs a tdc release update. This command does not read or modif
 ## Syntax
 
 ```text
-  tdc update
-    [--check]
-    [--dry-run]
-    [--fail-if-update-available]
-    [--help]
-    [--target-version <string>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc update
+  [--check]
+  [--dry-run]
+  [--fail-if-update-available]
+  [--help]
+  [--target-version <string>]
+  [--version]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--check`: Check whether a newer tdc release is available without updating.
+- `--dry-run`: Show the update plan without changing the local binary.
+- `--fail-if-update-available`: With `--check`, exit with code 1 when an update is available.
+- `--help`: Display help information.
+- `--target-version <string>`: Target tdc version, such as `latest` or `vX.Y.Z`. \[default: latest]
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Check for an update
+
+```bash
 tdc update --check
-tdc update --target-version v0.1.4
+```
+
+### Install a specific version
+
+```bash
+tdc update --target-version <version>
 ```

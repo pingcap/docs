@@ -14,24 +14,34 @@ Requests asynchronous Filesystem deletion and removes its local registration.
 ## Syntax
 
 ```text
-  tdc fs delete-file-system
-    --file-system-name <string>
-    [--dry-run]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs delete-file-system
+  --file-system-name <string>
+  [--dry-run]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--file-system-name <string>`: Set the file system name. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Preview file system deletion
+
+```bash
 tdc fs delete-file-system --file-system-name workspace --dry-run
+```
+
+### Delete a file system
+
+```bash
 tdc fs delete-file-system --file-system-name workspace
 ```

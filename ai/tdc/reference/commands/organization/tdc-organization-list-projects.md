@@ -14,23 +14,32 @@ Lists projects accessible to the configured TiDB Cloud API key, with optional pa
 ## Syntax
 
 ```text
-  tdc organization list-projects
-    [--help]
-    [--page-size <int32>]
-    [--page-token <string>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc organization list-projects
+  [--help]
+  [--page-size <int32>]
+  [--page-token <string>]
+  [--version]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--help`: Display help information.
+- `--page-size <int32>`: Number of projects to request; 0 uses the API default.
+- `--page-token <string>`: Page token returned by a previous list-projects call.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### List projects as text
+
+```bash
 tdc organization list-projects --page-size 50 --output text
+```
+
+### Return virtual project IDs
+
+```bash
 tdc organization list-projects --query 'projects[?type == `tidbx_virtual`].id' --output text
 ```

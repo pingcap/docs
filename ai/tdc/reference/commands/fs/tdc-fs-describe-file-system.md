@@ -14,22 +14,30 @@ Describes one locally registered Filesystem.
 ## Syntax
 
 ```text
-  tdc fs describe-file-system
-    --file-system-name <string>
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs describe-file-system
+  --file-system-name <string>
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--file-system-name <string>`: Set the file system name. \[required]
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Describe a file system
+
+```bash
 tdc fs describe-file-system --file-system-name workspace
+```
+
+### Render file system details as text
+
+```bash
 tdc fs describe-file-system --file-system-name workspace --output text
 ```

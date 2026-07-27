@@ -14,25 +14,36 @@ Deletes one Filesystem Vault secret.
 ## Syntax
 
 ```text
-  tdc fs-vault delete-secret
-    --secret-name <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault delete-secret
+  --secret-name <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--secret-name <string>`: Vault secret name. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-vault delete-secret --secret-name db-prod --dry-run
-tdc fs-vault delete-secret --secret-name db-prod
+### Preview secret deletion
+
+```bash
+tdc fs-vault delete-secret --file-system-name workspace --secret-name db-prod --dry-run
+```
+
+### Delete a secret
+
+```bash
+tdc fs-vault delete-secret --file-system-name workspace --secret-name db-prod
 ```

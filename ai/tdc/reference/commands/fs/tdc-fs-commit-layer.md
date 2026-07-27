@@ -14,25 +14,36 @@ Applies one layer to its base Filesystem.
 ## Syntax
 
 ```text
-  tdc fs commit-layer
-    --layer-id <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs commit-layer
+  --layer-id <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--layer-id <string>`: Layer ID. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs commit-layer --layer-id "<layer-id>" --dry-run
-tdc fs commit-layer --layer-id "<layer-id>"
+### Preview a layer commit
+
+```bash
+tdc fs commit-layer --file-system-name workspace --layer-id "<layer-id>" --dry-run
+```
+
+### Commit a layer
+
+```bash
+tdc fs commit-layer --file-system-name workspace --layer-id "<layer-id>"
 ```

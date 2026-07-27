@@ -1,6 +1,6 @@
 ---
 title: tdc CLI Reference
-summary: Reference global flags, output and query behavior, dry-run rules, help forms, errors, command families, and Filesystem aliases.
+summary: Reference global options, output and query behavior, dry-run rules, help forms, errors, command families, and Filesystem aliases.
 ---
 
 # tdc CLI Reference
@@ -14,7 +14,7 @@ This reference describes behavior shared across the tdc command surface.
 ## Syntax
 
 ```text
-tdc <command> [subcommand] [required flags] [optional flags] [global flags]
+tdc <command> [subcommand] [required options] [optional options] [global options]
 ```
 
 tdc accepts long flags only. A one-letter flag such as `-p` is rejected.
@@ -97,7 +97,7 @@ tdc
 
 Every operation has a dedicated command page with syntax and examples. Expand **Command Reference** in the documentation navigation and select a command under `tdc`, `organization`, `db`, `fs`, `fs-git`, `fs-journal`, or `fs-vault`.
 
-Required flags appear before optional flags in generated usage. Optional flags are enclosed in brackets:
+Required options appear before optional options in generated usage. Optional options are enclosed in brackets:
 
 ```text
 tdc db describe-db-cluster
@@ -106,24 +106,22 @@ tdc db describe-db-cluster
   [--view <string>]
 ```
 
-In the generated `Flags` and `Global Flags` sections, value types are enclosed in angle brackets and required flags include `(required)` after the flag name and type:
+In command help, value types are enclosed in angle brackets and required options include `(required)` after the option name and type:
 
 ```text
 --db-cluster-name <string> (required)   Starter DB cluster display name
 --project-id <string>                   TiDB Cloud project ID
 ```
 
-## Global flags
+## Global options
 
-| Flag | Description |
-| --- | --- |
-| `--profile <string>` | Select a local profile; defaults to `default` |
-| `--region <string>` | Override canonical placement for this command |
-| `--output <string>` | Render `json` or `text`; default is `json` |
-| `--query <string>` | Apply a JMESPath expression before rendering |
-| `--debug` | Print redacted debug diagnostics |
-| `--help` | Display help |
-| `--version` | Display tdc version information |
+- `--debug`: Enable redacted debug output.
+- `--output <string>`: Set the output format to `json` or `text`. \[default: json]
+- `--profile <string>`: Select a local profile. \[default: default]
+- `--query <string>`: Apply a JMESPath expression before rendering the output.
+- `--region <string>`: Override the profile's canonical region code for the current command, for example, `aws-us-east-1`.
+
+Command pages document `--help`, `--version`, and all command-specific options separately.
 
 ## Output
 
@@ -226,7 +224,7 @@ The following task-oriented guides explain how commands work together. They are 
 | [Filesystem Journals](/ai/tdc/reference/tdc-filesystem-journal.md) | Manage verifiable journals |
 | [Filesystem Vault](/ai/tdc/reference/tdc-filesystem-vault.md) | Manage secrets and delegated access |
 
-For complete commands and flags, run:
+For complete commands and options, run:
 
 ```bash
 tdc <family> help

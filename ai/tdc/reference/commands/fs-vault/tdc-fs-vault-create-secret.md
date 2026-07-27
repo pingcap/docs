@@ -14,26 +14,38 @@ Creates a secret from one or more `NAME=value` or `NAME=@file` fields.
 ## Syntax
 
 ```text
-  tdc fs-vault create-secret
-    --field <string>
-    --secret-name <string>
-    [--dry-run]
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault create-secret
+  --field <string>
+  --secret-name <string>
+  [--dry-run]
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--field <string>`: Secret field assignment `key=value`, `key=@file`, or `key=-`; repeatable. \[required]
+- `--secret-name <string>`: Vault secret name. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-vault create-secret --secret-name db-prod --field DB_URL=mysql://example --field PASSWORD=@./password.txt
-tdc fs-vault create-secret --secret-name api-dev --field TOKEN=@./token.txt --dry-run
+### Create a secret from values and a file
+
+```bash
+tdc fs-vault create-secret --file-system-name workspace --secret-name db-prod --field DB_URL=mysql://example --field PASSWORD=@./password.txt
+```
+
+### Preview secret creation
+
+```bash
+tdc fs-vault create-secret --file-system-name workspace --secret-name api-dev --field TOKEN=@./token.txt --dry-run
 ```

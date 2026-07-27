@@ -14,24 +14,34 @@ Creates a Filesystem. `--wait` waits until data-plane access is ready.
 ## Syntax
 
 ```text
-  tdc fs create-file-system
-    --file-system-name <string>
-    [--dry-run]
-    [--help]
-    [--version]
-    [--wait]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs create-file-system
+  --file-system-name <string>
+  [--dry-run]
+  [--help]
+  [--version]
+  [--wait]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--file-system-name <string>`: Set the file system name. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+- `--wait`: Wait until the created file system is active.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Create a file system and wait until it is ready
+
+```bash
 tdc fs create-file-system --file-system-name workspace --wait
+```
+
+### Preview file system creation
+
+```bash
 tdc fs create-file-system --file-system-name workspace --dry-run
 ```

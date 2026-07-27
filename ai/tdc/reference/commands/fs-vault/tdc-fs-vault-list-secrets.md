@@ -14,24 +14,34 @@ Lists secrets visible to the active owner or delegated credential.
 ## Syntax
 
 ```text
-  tdc fs-vault list-secrets
-    [--file-system-name <string>]
-    [--fs-token <string>]
-    [--help]
-    [--vault-token <string>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault list-secrets
+  [--file-system-name <string>]
+  [--fs-token <string>]
+  [--help]
+  [--vault-token <string>]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
+- `--help`: Display help information.
+- `--vault-token <string>`: Delegated tdc fs-vault token; prefer `TDC_VAULT_TOKEN`.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
-tdc fs-vault list-secrets
-tdc fs-vault list-secrets --vault-token "$TDC_VAULT_TOKEN" --output text
+### List secrets
+
+```bash
+tdc fs-vault list-secrets --file-system-name workspace
+```
+
+### List secrets with a delegated Vault token
+
+```bash
+tdc fs-vault list-secrets --file-system-name workspace --vault-token "$TDC_VAULT_TOKEN" --output text
 ```

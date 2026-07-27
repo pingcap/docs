@@ -14,24 +14,34 @@ Deletes one branch from a Starter cluster.
 ## Syntax
 
 ```text
-  tdc db delete-db-cluster-branch
-    --db-cluster-branch-id <string>
-    --db-cluster-id <string>
-    [--dry-run]
-    [--help]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db delete-db-cluster-branch
+  --db-cluster-branch-id <string>
+  --db-cluster-id <string>
+  [--dry-run]
+  [--help]
+  [--version]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-branch-id <string>`: Starter DB cluster branch ID. \[required]
+- `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Preview branch deletion
+
+```bash
 tdc db delete-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>" --dry-run
+```
+
+### Delete a branch
+
+```bash
 tdc db delete-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-id "<branch-id>"
 ```

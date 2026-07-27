@@ -14,25 +14,36 @@ Creates a branch for one Starter cluster. `--wait` waits for the branch to becom
 ## Syntax
 
 ```text
-  tdc db create-db-cluster-branch
-    --db-cluster-branch-name <string>
-    --db-cluster-id <string>
-    [--dry-run]
-    [--help]
-    [--version]
-    [--wait]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc db create-db-cluster-branch
+  --db-cluster-branch-name <string>
+  --db-cluster-id <string>
+  [--dry-run]
+  [--help]
+  [--version]
+  [--wait]
 ```
 
-For global flags such as `--profile`, `--region`, `--output`, and `--query`, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--db-cluster-branch-name <string>`: Starter DB cluster branch display name. \[required]
+- `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--help`: Display help information.
+- `--version`: Display tdc version information.
+- `--wait`: Wait until the created branch becomes `ACTIVE` before returning.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Create a branch and wait until it is active
+
+```bash
 tdc db create-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-name dev --wait
+```
+
+### Preview branch creation
+
+```bash
 tdc db create-db-cluster-branch --db-cluster-id "<cluster-id>" --db-cluster-branch-name preview --dry-run
 ```

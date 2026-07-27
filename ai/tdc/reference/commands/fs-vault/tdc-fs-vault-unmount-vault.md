@@ -14,26 +14,38 @@ Unmounts a local Filesystem Vault filesystem.
 ## Syntax
 
 ```text
-  tdc fs-vault unmount-vault
-    --mount-path <string>
-    [--dry-run]
-    [--force]
-    [--help]
-    [--ignore-absent]
-    [--timeout <duration>]
-    [--version]
-    [--debug]
-    [--output <string>]
-    [--profile <string>]
-    [--query <string>]
-    [--region <string>]
+tdc fs-vault unmount-vault
+  --mount-path <string>
+  [--dry-run]
+  [--force]
+  [--help]
+  [--ignore-absent]
+  [--timeout <duration>]
+  [--version]
 ```
 
-Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAME`, or the selected profile. For shared global flags, see [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md).
+## Options
+
+- `--mount-path <string>`: Local mount path. \[required]
+- `--dry-run`: Validate the request without applying changes.
+- `--force`: Force-kill the mount process if graceful unmount times out.
+- `--help`: Display help information.
+- `--ignore-absent`: Return success when no tdc fs-vault mount state exists for the path.
+- `--timeout <duration>`: Time to wait for the mount process to exit. \[default: `30s`]
+- `--version`: Display tdc version information.
+
+For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-```shell
+### Unmount a Vault view
+
+```bash
 tdc fs-vault unmount-vault --mount-path ./vault
+```
+
+### Ignore an absent Vault mount
+
+```bash
 tdc fs-vault unmount-vault --mount-path ./vault --ignore-absent
 ```
