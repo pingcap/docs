@@ -59,17 +59,20 @@ tdc db execute-sql-statement \
 
 ```bash
 tdc fs create-file-system \
-  --file-system-name daily-workspace \
-  --set-default
+  --file-system-name daily-workspace
 
 printf 'daily workflow\n' | tdc fs copy-file \
+  --file-system-name daily-workspace \
   --from-stdin \
   --to-remote /notes/today.txt
 
-tdc fs list-files --path /notes --output text
+tdc fs list-files \
+  --file-system-name daily-workspace \
+  --path /notes \
+  --output text
 ```
 
-The file in `/notes/today.txt` verifies that the selected default resource is usable.
+The file in `/notes/today.txt` verifies that the explicitly selected resource is usable.
 
 ## Step 5. Check for updates
 

@@ -18,7 +18,6 @@ Creates a Filesystem. `--wait` waits until data-plane access is ready.
     --file-system-name <string>
     [--dry-run]
     [--help]
-    [--set-default]
     [--version]
     [--wait]
     [--debug]
@@ -33,6 +32,6 @@ Filesystem selection can come from `--file-system-name`, `TDC_FS_FILE_SYSTEM_NAM
 ## Examples
 
 ```shell
-tdc fs create-file-system --file-system-name workspace --set-default --wait
+tdc fs create-file-system --file-system-name workspace --wait
 tdc fs create-file-system --file-system-name workspace --dry-run
 ```

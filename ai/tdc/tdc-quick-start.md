@@ -75,12 +75,11 @@ Complete either the Filesystem workflow or the Starter database workflow.
 
 ### Option A: Write and read a file
 
-Create a Filesystem and make it the default:
+Create a Filesystem and wait until it is ready:
 
 ```bash
 tdc fs create-file-system \
   --file-system-name quickstart-fs \
-  --set-default \
   --wait \
   --output text
 ```
@@ -89,10 +88,13 @@ tdc stores the Filesystem credential locally. Write and read a file directly:
 
 ```bash
 printf 'hello from tdc\n' | tdc fs copy-file \
+  --file-system-name quickstart-fs \
   --from-stdin \
   --to-remote /hello.txt
 
-tdc fs read-file --path /hello.txt
+tdc fs read-file \
+  --file-system-name quickstart-fs \
+  --path /hello.txt
 ```
 
 Expected output:

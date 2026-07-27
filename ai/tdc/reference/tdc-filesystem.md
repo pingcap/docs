@@ -18,8 +18,6 @@ tdc fs
 ├── create-file-system
 ├── list-file-systems
 ├── describe-file-system
-├── set-default-file-system
-├── unset-default-file-system
 ├── check-file-system
 ├── delete-file-system
 ├── copy-file
@@ -54,11 +52,9 @@ tdc fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `create-file-system` | Provisions a Filesystem. Requires `--file-system-name`; `--set-default` selects it and `--wait` waits until data-plane access is ready. | `tdc fs create-file-system --file-system-name workspace --set-default --wait` |
+| `create-file-system` | Provisions a Filesystem. Requires `--file-system-name`; `--wait` waits until data-plane access is ready. | `tdc fs create-file-system --file-system-name workspace --wait` |
 | `list-file-systems` | Lists resources registered in the selected local profile. | `tdc fs list-file-systems --output text` |
 | `describe-file-system` | Reads one locally registered resource by name. | `tdc fs describe-file-system --file-system-name workspace` |
-| `set-default-file-system` | Sets the default resource used when no name is supplied. | `tdc fs set-default-file-system --file-system-name workspace` |
-| `unset-default-file-system` | Clears the profile's default resource without deleting it. | `tdc fs unset-default-file-system` |
 | `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `tdc fs check-file-system --file-system-name workspace` |
 | `delete-file-system` | Requests asynchronous deletion and removes its local registration. Requires TiDB Cloud credentials and the owner resource credential. | `tdc fs delete-file-system --file-system-name workspace` |
 
@@ -97,7 +93,7 @@ tdc fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; resource selection can come from a flag, environment, or profile. | `tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace` |
+| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; select the resource with a flag or environment variable. | `tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace` |
 | `drain-file-system` | Flushes pending FUSE work while leaving the mount online. | `tdc fs drain-file-system --mount-path /path/to/workspace --timeout 30s` |
 | `unmount-file-system` | Gracefully flushes and unmounts a background FUSE or WebDAV mount. | `tdc fs unmount-file-system --mount-path /path/to/workspace` |
 
@@ -111,12 +107,11 @@ Data-plane commands can instead use an existing Filesystem with `TDC_FS_TOKEN`, 
 
 ## Manage Filesystem resources
 
-Create a resource and make it the profile default:
+Create a resource and wait until data-plane access is ready:
 
 ```bash
 tdc fs create-file-system \
   --file-system-name workspace \
-  --set-default \
   --wait
 ```
 
@@ -139,11 +134,10 @@ tdc fs list-file-systems
 tdc fs describe-file-system --file-system-name workspace
 ```
 
-Set or clear a profile default:
+Select a resource for subsequent commands in the current shell:
 
 ```bash
-tdc fs set-default-file-system --file-system-name workspace
-tdc fs unset-default-file-system
+export TDC_FS_FILE_SYSTEM_NAME="workspace"
 ```
 
 Check the selected resource and companion:
@@ -167,10 +161,9 @@ One profile can own multiple resources. Selection precedence is:
 
 1. `--file-system-name`;
 2. `TDC_FS_FILE_SYSTEM_NAME`;
-3. the profile default;
-4. the only registered resource.
+3. fail with `fs.missing_file_system_name`.
 
-When selection is ambiguous, tdc fails. It never chooses an arbitrary Filesystem.
+tdc does not infer a resource from the profile registry, even when only one resource is registered. This makes scripts deterministic when resources are added or removed.
 
 ## Copy and read data
 

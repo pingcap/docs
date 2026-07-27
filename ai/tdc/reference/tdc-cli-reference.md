@@ -44,8 +44,6 @@ tdc
 │   ├── create-file-system
 │   ├── list-file-systems
 │   ├── describe-file-system
-│   ├── set-default-file-system
-│   ├── unset-default-file-system
 │   ├── check-file-system
 │   ├── delete-file-system
 │   ├── copy-file

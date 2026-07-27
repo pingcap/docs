@@ -110,8 +110,6 @@
       - [create-file-system](/ai/tdc/reference/commands/fs/tdc-fs-create-file-system.md)
       - [list-file-systems](/ai/tdc/reference/commands/fs/tdc-fs-list-file-systems.md)
       - [describe-file-system](/ai/tdc/reference/commands/fs/tdc-fs-describe-file-system.md)
-      - [set-default-file-system](/ai/tdc/reference/commands/fs/tdc-fs-set-default-file-system.md)
-      - [unset-default-file-system](/ai/tdc/reference/commands/fs/tdc-fs-unset-default-file-system.md)
       - [check-file-system](/ai/tdc/reference/commands/fs/tdc-fs-check-file-system.md)
       - [delete-file-system](/ai/tdc/reference/commands/fs/tdc-fs-delete-file-system.md)
       - [copy-file](/ai/tdc/reference/commands/fs/tdc-fs-copy-file.md)

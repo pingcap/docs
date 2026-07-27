@@ -26,15 +26,16 @@ On a trusted machine:
 ```bash
 tdc fs create-file-system \
   --file-system-name shared-corpus \
-  --set-default \
   --wait
 
 tdc fs copy-file \
+  --file-system-name shared-corpus \
   --from-local ./corpus \
   --to-remote /datasets/corpus \
   --recursive
 
 tdc fs find-files \
+  --file-system-name shared-corpus \
   --path /datasets/corpus \
   --file-name-pattern "*.pdf" \
   --output text

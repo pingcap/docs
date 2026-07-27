@@ -18,7 +18,6 @@ tdc stores all product-owned local state under `~/.tdc/` and separates non-sensi
 [default]
 region_code = "aws-us-east-1"
 project_id = "..."
-fs_default_file_system_name = "workspace"
 
 [logging]
 enabled = true
@@ -74,7 +73,7 @@ Other DB commands identify resources by cluster or branch ID and do not use `pro
 
 ## Filesystem resource registry
 
-One profile can register multiple Filesystems. The main config stores only the optional default name. Resource state is isolated:
+One profile can register multiple Filesystems. Resource state is isolated from the main profile configuration:
 
 ```text
 ~/.tdc/fs_resources/<profile-key>/<resource-key>/config
@@ -87,9 +86,9 @@ Resource selection is:
 
 1. explicit `--file-system-name`;
 2. `TDC_FS_FILE_SYSTEM_NAME`;
-3. profile `fs_default_file_system_name`;
-4. the only registered resource;
-5. fail as missing or ambiguous.
+3. fail with `fs.missing_file_system_name`.
+
+tdc never infers a Filesystem from a saved default or from the number of registered resources. Use `--file-system-name` for one command or `TDC_FS_FILE_SYSTEM_NAME` for a shell, sandbox, or automation environment.
 
 FS owner credential selection for remote `fs`, `fs-git`, `fs-journal`, and owner `fs-vault` operations is:
 

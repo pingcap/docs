@@ -55,7 +55,7 @@ tdc fs check-file-system
 
 The FS token is not the TiDB Cloud API private key.
 
-## Filesystem selection is ambiguous
+## Filesystem selection is missing
 
 List registered resources and select one explicitly:
 
@@ -64,13 +64,13 @@ tdc fs list-file-systems --output text
 tdc fs list-files --file-system-name workspace --path /
 ```
 
-Or set a default:
+Or select the Filesystem for subsequent commands in the current shell:
 
 ```bash
-tdc fs set-default-file-system --file-system-name workspace
+export TDC_FS_FILE_SYSTEM_NAME="workspace"
 ```
 
-tdc intentionally does not guess among multiple resources.
+tdc intentionally does not infer a Filesystem from the local registry, including when only one resource is registered.
 
 ## Filesystem region is unsupported
 
