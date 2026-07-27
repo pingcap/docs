@@ -15,9 +15,9 @@ This example gives an ephemeral coding agent a durable workspace without copying
 
 Coding agents often start in clean, short-lived sandboxes. The local disk disappears when the sandbox is replaced, but the agent still needs previous artifacts, repository state, and files produced by other workers. Rebuilding that state wastes task time, while copying `~/.tdc/` or injecting TiDB Cloud API keys gives the sandbox control-plane credentials it does not need.
 
-## Why local storage and full cloud credentials are not enough
+## Limitations of local storage and full cloud credentials
 
-A sandbox-local directory is fast but not durable or shared. Generic object-storage APIs require application-specific download and upload logic instead of ordinary file operations. Giving every sandbox the user's complete cloud credentials solves access at the cost of a much broader security boundary.
+A sandbox-local directory is fast but not durable or shared. Generic object-storage APIs require application-specific download and upload logic instead of ordinary file operations. Giving every sandbox the user's complete cloud credentials solves access at the cost of a broader security boundary.
 
 ## How tdc changes the workflow
 

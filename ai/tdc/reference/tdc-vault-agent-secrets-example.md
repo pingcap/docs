@@ -13,9 +13,9 @@ This example gives an agent temporary access to one secret field without sharing
 
 ## The agent problem
 
-An agent might need one API endpoint or token to complete a short task. Putting the complete secret in a prompt, `.env` file, or sandbox image exposes it beyond the process and lifetime that need it. Sharing the Filesystem owner token also grants much more access than one secret field requires.
+An agent might need one API endpoint or token to complete a short task. Putting the complete secret in a prompt, `.env` file, or sandbox image exposes it beyond the process and lifetime that need it. Sharing the Filesystem owner token also grants broader access than one secret field requires.
 
-## Why ordinary environment variables and files are not enough
+## Limitations of ordinary environment variables and files
 
 Environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. A separate cloud secret manager can provide those controls, but it requires another identity, policy, and integration path for every sandbox.
 

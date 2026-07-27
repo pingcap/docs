@@ -86,6 +86,14 @@
 - [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
 - TiDB Cloud CLI (tdc)
   - [Overview](/ai/tdc/tdc-overview.md)
+  - Guides
+    - [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md)
+    - [Organization and Projects](/ai/tdc/reference/tdc-organization.md)
+    - [Starter Databases and SQL](/ai/tdc/reference/tdc-starter-database.md)
+    - [Filesystem](/ai/tdc/reference/tdc-filesystem.md)
+    - [Filesystem Git Workspaces](/ai/tdc/reference/tdc-filesystem-git.md)
+    - [Filesystem Journals](/ai/tdc/reference/tdc-filesystem-journal.md)
+    - [Filesystem Vault](/ai/tdc/reference/tdc-filesystem-vault.md)
   - Command Reference
     - [CLI Syntax and Global Behavior](/ai/tdc/reference/tdc-cli-reference.md)
     - [configure](/ai/tdc/reference/commands/tdc/tdc-configure.md)

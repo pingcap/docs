@@ -15,7 +15,7 @@ This example records an agent task as a structured, ordered, and verifiable even
 
 An agent task can span planning, tool calls, tests, retries, and handoffs between workers. When the task fails, operators need to know which events happened and in what order. Plain console output is often scattered across processes, while a mutable status file shows only the latest state.
 
-## Why appending to a normal file is not enough
+## Limitations of appending to a normal file
 
 A text file can be edited or truncated after an event is written, has no intrinsic sequence or hash chain, and requires every producer to invent parsing and concurrency rules. Retrying an append can also create duplicate events unless the application builds its own idempotency layer.
 

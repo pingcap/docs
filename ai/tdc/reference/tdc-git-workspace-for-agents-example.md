@@ -15,9 +15,9 @@ This example removes a large repository clone from the critical path of starting
 
 An ephemeral agent normally waits for `git clone` and checkout to download a repository before it can inspect the tree or begin work. For a large monorepo, that startup delay is paid again for every replacement sandbox. The agent appears idle even when its first task needs only a small part of the repository.
 
-## Why a normal clone or partial clone is not enough
+## Limitations of a normal clone or partial clone
 
-A normal clone blocks until the initial object transfer and checkout finish. A native blobless partial clone reduces the first transfer, but later Git commands and file reads can still trigger many on-demand fetches on the agent's critical path. Neither approach by itself provides a shared Filesystem workspace that can be restored across agent runtimes.
+A normal clone blocks until the initial object transfer and checkout finish. A native blobless partial clone reduces the first transfer, but later Git commands and file reads can still trigger repeated on-demand fetches on the agent's critical path. Neither approach by itself provides a shared Filesystem workspace that can be restored across agent runtimes.
 
 ## How tdc changes the workflow
 

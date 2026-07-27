@@ -15,7 +15,7 @@ This example gives agents or users on two machines one shared workspace without 
 
 An agent can prepare source files or artifacts on machine A and continue the task on machine B, but each machine normally sees only its own disk. Copying a snapshot before every handoff adds latency, and changes made after the copy are invisible to the other machine. Concurrent handoffs can also create conflicting copies with no clear source of truth.
 
-## Why native local disks and manual synchronization are not enough
+## Limitations of native local disks and manual synchronization
 
 Local disks do not provide a shared namespace. Commands such as `scp` and archive upload transfer point-in-time copies rather than live state, while object storage does not by itself behave like the mounted directory expected by editors, build tools, and agents.
 

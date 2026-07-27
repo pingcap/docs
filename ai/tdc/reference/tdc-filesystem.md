@@ -305,7 +305,7 @@ The default `--driver auto` is platform-specific. `--remote-path` exposes a subt
 
 ### Mount in Docker and Docker Compose
 
-Installing FUSE3 inside an image is not sufficient by itself. The Docker host must provide `/dev/fuse`, and the container must receive permission to perform the mount. The following Dockerfile installs the required Ubuntu package and tdc without storing any cloud or Filesystem credentials in the image:
+Installing FUSE3 inside an image does not enable mounts by itself. The Docker host must provide `/dev/fuse`, and the container must receive permission to perform the mount. The following Dockerfile installs the required Ubuntu package and tdc without storing any cloud or Filesystem credentials in the image:
 
 ```dockerfile
 FROM ubuntu:24.04

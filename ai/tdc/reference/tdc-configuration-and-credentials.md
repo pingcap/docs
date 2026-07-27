@@ -150,7 +150,7 @@ A successful background FS or vault mount writes a non-secret locator:
 ~/.tdc/mounts/<mount-hash>.locator.json
 ```
 
-The locator records enough placement and companion-home information for drain and unmount from the same `HOME`. It does not contain the FS token. Successful unmount removes it.
+The locator records the placement and companion-home information required for drain and unmount from the same `HOME`. It does not contain the FS token. Successful unmount removes it.
 
 ## Operation logs
 

@@ -15,7 +15,7 @@ This example lets an agent perform schema, data, and verification work while mak
 
 An agent that can inspect data often also needs to apply a migration or update a row. Giving it one administrator connection for the complete task is convenient, but a mistaken statement during an inspection step then has the authority to change or delete data. Giving it only a read-only connection prevents legitimate write and schema work.
 
-## Why one native database connection is not enough
+## Limitations of one native database connection
 
 TiDB supports SQL privileges, but a conventional client session uses the privileges of the one credential used to connect. Users must create, store, and switch among credentials themselves, and an agent can silently keep using an overly privileged connection across task phases.
 
