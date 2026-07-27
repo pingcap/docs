@@ -60,7 +60,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 <div label="MyCLI">
 
-[mycli](https://www.mycli.net/)を指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
+[mycli](https://www.mycli.net/)を指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -282,4 +282,4 @@ TiDB Cloud Dedicated は、クライアントとTiDB Cloud Dedicated クラス�
 
 いいえ。
 
-TiDB Cloud Dedicatedは現在、片方向TLS認証のみをサポートしており、双方向TLS認証はサポートしていません。双方向TLS認証が必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+TiDB Cloud Dedicatedは現在、片方向TLS認証のみをサポートしており、双方向TLS認証はサポートしていません。双方向TLS認証が必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
