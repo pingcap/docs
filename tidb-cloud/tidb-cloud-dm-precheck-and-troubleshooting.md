@@ -34,7 +34,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 ### エラーメッセージ: mysql binlog_row_image が満杯かどうか確認してください {#error-message-check-whether-mysql-binlog-row-image-is-full}
 
 -   Amazon Aurora MySQL: `binlog_row_image`は設定できません。この事前チェック項目は、設定変更の対象外です。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
--   Amazon RDS: 手順は`binlog_format`パラメータの設定と似ています。唯一の違いは、変更する必要のあるパラメータが`binlog_row_image`ではなく`binlog_format`であることです。MySQL [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+-   Amazon RDS: 手順は`binlog_format`パラメータの設定と似ています。唯一の違いは、変更する必要のあるパラメータが`binlog_format`ではなく`binlog_row_image`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 -   MySQL: `set global binlog_row_image = FULL;` 。 [バイナリログのオプションと変数](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_image)を参照してください。
 
 ### エラーメッセージ: 移行されたデータベースが binlog_do_db/binlog_ignore_db に含まれているかどうかを確認してください {#error-message-check-whether-migrated-dbs-are-in-binlog-do-db-binlog-ignore-db}
@@ -53,7 +53,7 @@ Amazon RDS の場合、次のパラメータを変更する必要があります
 上流のデータベースでエラーが発生した場合は、 `max_connections`を次のように設定してください。
 
 -   Amazon Aurora MySQL: このプロセスは、 `binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。 [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。
--   Amazon RDS: 手順は`binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`max_connections`ではなく`binlog_format` } であることです。MySQL [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+-   Amazon RDS: 手順は`binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 -   MySQL: ドキュメント[最大接続数](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections)に従って`max_connections`を設定します。
 
 TiDB Cloudクラスターでエラーが発生した場合は、ドキュメントの[最大接続数](https://docs.pingcap.com/tidb/stable/system-variables#max_connections)に従って`max_connections`を設定します。
