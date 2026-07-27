@@ -83,7 +83,7 @@ This document takes the `tidb` user as an example.
         $ systemctl restart user@${uid}.service
         ```
 
-    3. Check the effective `Max open files` value of the running `user@${uid}.service`.
+    3. Check the effective `Max open files` value of the running `user@${uid}.service` as the root user.
 
         ```shell
         $ uid=$(id -u tidb)
