@@ -40,7 +40,7 @@ This document takes the `tidb` user as an example.
         EOF
         ```
 
-        In no-sudo mode, TiDB services are managed by each user's own `systemd` instance (`user@<UID>.service`). The settings in `/etc/security/limits.conf` might be applied through PAM when `user@<UID>.service` starts, but the effective file descriptor limit still depends on the resource limits obtained by that user `systemd` instance itself. On some systems, even after you configure `/etc/security/limits.conf`, the `Max open files` value of `user@<UID>.service` might still be lower than what TiDB requires.
+        In no-sudo mode, TiDB services are managed by each user's own `systemd` instance (`user@<UID>.service`). The settings in `/etc/security/limits.conf` might be applied through PAM when `user@<UID>.service` starts, but the effective file descriptor limit still depends on the resource limits of that user's `systemd` instance. On some systems, even after you configure `/etc/security/limits.conf`, the `Max open files` value of `user@<UID>.service` might still be lower than what TiDB requires.
 
 2. Start the `systemd user` mode for the `tidb` user on each target machine. This step is required and do not skip it.
 
