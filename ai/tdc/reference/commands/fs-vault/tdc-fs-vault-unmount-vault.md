@@ -9,7 +9,7 @@ Unmounts a local Filesystem Vault filesystem.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -30,22 +30,21 @@ tdc fs-vault unmount-vault
 - `--dry-run`: Validate the request without applying changes.
 - `--force`: Force-kill the mount process if graceful unmount times out.
 - `--help`: Display help information.
-- `--ignore-absent`: Return success when no tdc fs-vault mount state exists for the path.
+- `--ignore-absent`: Return success when no `tdc fs-vault` mount state exists for the path.
 - `--timeout <duration>`: Time to wait for the mount process to exit. \[default: `30s`]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Unmount a Vault view
+- Unmount a Vault view:
 
-```bash
-tdc fs-vault unmount-vault --mount-path ./vault
-```
+    ```bash
+    # Detach the local read-only Vault mount.
+    tdc fs-vault unmount-vault --mount-path ./vault
+    ```
 
-### Ignore an absent Vault mount
+## Related documentation
 
-```bash
-tdc fs-vault unmount-vault --mount-path ./vault --ignore-absent
-```
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)

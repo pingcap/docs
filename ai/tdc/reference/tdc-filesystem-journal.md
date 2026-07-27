@@ -1,15 +1,15 @@
 ---
-title: tdc fs-journal Command Reference
-summary: Reference every tdc fs-journal command for creating, appending, reading, searching, and verifying journals.
+title: TiDB Cloud Filesystem Journal CLI Command Reference
+summary: Reference every `tdc fs-journal` command for creating, appending, reading, searching, and verifying journals.
 ---
 
-# tdc fs-journal Command Reference
+# TiDB Cloud Filesystem Journal CLI Command Reference
 
 `tdc fs-journal` provides an append-only, verifiable ledger for agent and workflow events. Unlike a mutable text file, a journal assigns ordered sequence numbers, supports structured search, and maintains a hash chain that can detect alteration.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -58,7 +58,7 @@ tdc fs-journal append-journal-entries \
   --entry-json '{"type":"tool.called","tool":"tdc"}'
 ```
 
-Use `--entry-type` as a default for entries without `type`, and add `--source` or repeatable `--subject` metadata. `--idempotency-key` makes a retry deterministic; tdc generates one when omitted.
+Use `--entry-type` as a default for entries without `type`, and add `--source` or repeatable `--subject` metadata. `--idempotency-key` makes a retry deterministic; the CLI generates one when omitted.
 
 For pipelines, send JSON Lines on stdin, or use `--json-array` for a JSON array.
 
@@ -98,4 +98,4 @@ Verification recalculates the ordered hash chain and reports whether the entries
 ## What's next
 
 - [Record an Agent Workflow in a Journal](/ai/tdc/reference/tdc-journal-agent-workflow-example.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

@@ -9,7 +9,7 @@ Finds remote paths by name, type, tag, size, or modification time. The command a
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -46,20 +46,26 @@ tdc fs find-files
 - `--path <string>`: File path prefix. \[default: /]
 - `--resource-type <string>`: Resource type filter: `file` or `directory`.
 - `--tag <string>`: Tag filter.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Find files by name
+- Find files by name:
 
-```bash
-tdc fs find-files --file-system-name workspace --path /workspace --file-name-pattern "*.md"
-```
+    ```bash
+    # Locate Markdown files recursively under the selected remote path.
+    tdc fs find-files --file-system-name workspace --path /workspace --file-name-pattern "*.md"
+    ```
 
-### Find tagged files with the alias
+- Find files by metadata:
 
-```bash
-tdc fs find --file-system-name workspace --path /workspace --tag stage=review --min-size-bytes 1024
-```
+    ```bash
+    # Select tagged files that also meet a minimum size threshold.
+    tdc fs find-files --file-system-name workspace --path /workspace --tag stage=review --min-size-bytes 1024
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

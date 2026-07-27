@@ -9,7 +9,7 @@ Lists secrets visible to the active owner or delegated credential.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -27,21 +27,27 @@ tdc fs-vault list-secrets
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--vault-token <string>`: Delegated tdc fs-vault token; prefer `TDC_VAULT_TOKEN`.
-- `--version`: Display tdc version information.
+- `--vault-token <string>`: Delegated `tdc fs-vault` token; prefer `TDC_VAULT_TOKEN`.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List secrets
+- List owner-visible secrets:
 
-```bash
-tdc fs-vault list-secrets --file-system-name workspace
-```
+    ```bash
+    # Return secret metadata without exposing field values.
+    tdc fs-vault list-secrets --file-system-name workspace
+    ```
 
-### List secrets with a delegated Vault token
+- List secrets visible to a delegated token:
 
-```bash
-tdc fs-vault list-secrets --file-system-name workspace --vault-token "$TDC_VAULT_TOKEN" --output text
-```
+    ```bash
+    # Restrict the result to secrets within the token's granted scope.
+    tdc fs-vault list-secrets --file-system-name workspace --vault-token "$TDC_VAULT_TOKEN"
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)

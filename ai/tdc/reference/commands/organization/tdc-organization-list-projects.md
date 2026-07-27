@@ -9,7 +9,7 @@ Lists projects accessible to the configured TiDB Cloud API key, with optional pa
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -26,20 +26,26 @@ tdc organization list-projects
 - `--help`: Display help information.
 - `--page-size <int32>`: Number of projects to request; 0 uses the API default.
 - `--page-token <string>`: Page token returned by a previous list-projects call.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List projects as text
+- List accessible projects:
 
-```bash
-tdc organization list-projects --page-size 50 --output text
-```
+    ```bash
+    # Return the TiDB Cloud projects available to the configured API key.
+    tdc organization list-projects --page-size 50
+    ```
 
-### Return virtual project IDs
+- Select the virtual project ID:
 
-```bash
-tdc organization list-projects --query 'projects[?type == `tidbx_virtual`].id' --output text
-```
+    ```bash
+    # Use a JMESPath query to return only virtual project IDs.
+    tdc organization list-projects --query 'projects[?type == `tidbx_virtual`].id' --output text
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Organization CLI Command Reference](/ai/tdc/reference/tdc-organization.md)

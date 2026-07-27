@@ -9,7 +9,7 @@ Adds a linked Git worktree from a base workspace.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -42,20 +42,26 @@ tdc fs-git add-git-worktree
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--hydrate <string>`: Blobless hydrate mode: `auto`, `background`, `sync`, or `off`. \[default: auto]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a worktree on a new branch
+- Create a worktree on a new branch:
 
-```bash
-tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-feature --branch-name feature-x
-```
+    ```bash
+    # Give an agent an isolated branch while sharing the base Git object store.
+    tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-feature --branch-name feature-x
+    ```
 
-### Create a detached worktree
+- Create a detached worktree:
 
-```bash
-tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-review --commit-ish origin/main --detach
-```
+    ```bash
+    # Inspect a commit without creating or switching a branch.
+    tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-review --commit-ish origin/main --detach
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Git CLI Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)

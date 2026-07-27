@@ -1,19 +1,19 @@
 ---
-title: Run a Daily tdc Workflow
-summary: Inspect projects, manage a Starter cluster and Filesystem, check for tdc updates, and clean up resources.
+title: Run a Daily TiDB Cloud CLI Workflow
+summary: Inspect projects, manage a Starter cluster and Filesystem, check for TiDB Cloud CLI updates, and clean up resources.
 ---
 
-# Run a Daily tdc Workflow
+# Run a Daily TiDB Cloud CLI Workflow
 
 This example follows a typical operator workflow across TiDB Cloud Starter and TiDB Cloud Filesystem.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Prerequisites
 
-- Install tdc and run `tdc configure`.
+- Install `tdc` and run `tdc configure`.
 - Ensure your organization has capacity for one Starter cluster and one Filesystem.
 
 ## Step 1. Inspect the active account
@@ -99,7 +99,7 @@ tdc db delete-db-cluster \
   --db-cluster-id "<cluster-id>"
 ```
 
-Deleting local tdc configuration is not a substitute for deleting remote resources.
+Deleting local TiDB Cloud CLI configuration is not a substitute for deleting remote resources.
 
 ## Security notes
 
@@ -109,5 +109,5 @@ Deleting local tdc configuration is not a substitute for deleting remote resourc
 
 ## What's next
 
-- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

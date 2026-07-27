@@ -9,7 +9,7 @@ Creates a symbolic link. The command alias is `tdc fs symlink`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -32,20 +32,19 @@ tdc fs create-symlink
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a symbolic link
+- Create a symbolic link:
 
-```bash
-tdc fs create-symlink --file-system-name workspace --target final.md --link-path /reports/latest.md
-```
+    ```bash
+    # Create a relative symbolic link inside the remote namespace.
+    tdc fs create-symlink --file-system-name workspace --target final.md --link-path /reports/latest.md
+    ```
 
-### Preview symbolic-link creation with the alias
+## Related documentation
 
-```bash
-tdc fs symlink --file-system-name workspace --target archive/report.md --link-path /reports/archive-link --dry-run
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -9,7 +9,7 @@ Describes one Filesystem layer.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -28,20 +28,19 @@ tdc fs describe-layer
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Describe a layer
+- Describe a layer:
 
-```bash
-tdc fs describe-layer --file-system-name workspace --layer-id "<layer-id>"
-```
+    ```bash
+    # Inspect one layer's base root, state, durability, and metadata.
+    tdc fs describe-layer --file-system-name workspace --layer-id "<layer-id>"
+    ```
 
-### Render layer details as text
+## Related documentation
 
-```bash
-tdc fs describe-layer --file-system-name workspace --layer-id "<layer-id>" --output text
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

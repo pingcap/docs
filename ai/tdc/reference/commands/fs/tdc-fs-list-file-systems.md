@@ -9,7 +9,7 @@ Lists Filesystems registered in the selected local profile.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -22,20 +22,19 @@ tdc fs list-file-systems
 ## Options
 
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List registered file systems as text
+- List locally registered Filesystems:
 
-```bash
-tdc fs list-file-systems --output text
-```
+    ```bash
+    # Return the Filesystems registered under the selected local profile.
+    tdc fs list-file-systems
+    ```
 
-### Return registered file system names
+## Related documentation
 
-```bash
-tdc fs list-file-systems --query 'file_systems[].file_system_name'
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

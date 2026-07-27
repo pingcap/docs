@@ -1,15 +1,15 @@
 ---
-title: tdc CLI Reference
+title: TiDB Cloud CLI Command Reference
 summary: Reference global options, output and query behavior, dry-run rules, help forms, errors, command families, and Filesystem aliases.
 ---
 
-# tdc CLI Reference
+# TiDB Cloud CLI Command Reference
 
-This reference describes behavior shared across the tdc command surface.
+This reference describes behavior shared across the `tdc` command surface.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -17,7 +17,7 @@ This reference describes behavior shared across the tdc command surface.
 tdc <command> [subcommand] [required options] [optional options] [global options]
 ```
 
-tdc accepts long flags only. A one-letter flag such as `-p` is rejected.
+The `tdc` executable accepts long flags only. A one-letter flag such as `-p` is rejected.
 
 ## Command tree
 
@@ -216,7 +216,7 @@ The following task-oriented guides explain how commands work together. They are 
 
 | Guide | Purpose |
 | --- | --- |
-| [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md) | Install releases, configure profiles, update, and uninstall tdc |
+| [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md) | Install releases, configure profiles, update, and uninstall `tdc` |
 | [Organization and Projects](/ai/tdc/reference/tdc-organization.md) | Inspect projects and understand virtual-project selection |
 | [Starter Databases and SQL](/ai/tdc/reference/tdc-starter-database.md) | Manage Starter clusters, branches, and SQL |
 | [Filesystem](/ai/tdc/reference/tdc-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
@@ -255,5 +255,5 @@ Aliases use the same long flags, authentication, output, query, and error behavi
 
 ## Related documentation
 
-- [Install, Configure, and Update tdc](/ai/tdc/reference/tdc-install-configure-update.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [Install, Configure, and Update TiDB Cloud CLI](/ai/tdc/reference/tdc-install-configure-update.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

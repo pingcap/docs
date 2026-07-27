@@ -1,21 +1,21 @@
 ---
-title: Share a Read-Only Dataset Across Parallel Agents with tdc
+title: Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem
 summary: Upload one unstructured dataset and expose the same read-only mounted namespace to multiple agent workers.
 ---
 
-# Share a Read-Only Dataset Across Parallel Agents with tdc
+# Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem
 
 This scenario gives multiple short-lived workers one shared corpus without copying it into every sandbox.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The problem
 
 Parallel document-processing or evaluation agents often need the same PDFs, images, logs, or model artifacts. Downloading the complete corpus into every worker delays startup, duplicates storage, and leaves each worker with a different point-in-time copy.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 An owner uploads the corpus once. Every worker selects the same Filesystem and mounts it read-only, so ordinary tools can traverse a common namespace. Workers write results to separate task paths or a different output Filesystem.
 
@@ -77,6 +77,6 @@ tdc fs unmount-file-system --mount-path "$HOME/corpus"
 
 ## Related reference
 
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
 - [Use a Filesystem in an Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md)
-- [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

@@ -1,21 +1,21 @@
 ---
-title: Hand Off CI Artifacts Between Isolated Jobs with tdc
-summary: Persist build output in TiDB Cloud Filesystem and consume it from a later CI job without copying a complete tdc profile.
+title: Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem
+summary: Persist build output in TiDB Cloud Filesystem and consume it from a later CI job without copying a complete TiDB Cloud CLI profile.
 ---
 
-# Hand Off CI Artifacts Between Isolated Jobs with tdc
+# Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem
 
 This scenario uses a Filesystem as a durable handoff point between isolated CI jobs or runners.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The problem
 
 Build and verification jobs often run on different ephemeral machines. Local output disappears with the producer, while provider-specific artifact services add another upload API, retention model, and download step to agent automation.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 The pipeline injects one Filesystem token, region, and name into both jobs. The producer uploads output under a run-specific path, and the consumer downloads or streams that exact path. Neither job needs TiDB Cloud API keys or a copied `~/.tdc/` directory.
 
@@ -76,6 +76,6 @@ Use unique run IDs and do not delete the whole Filesystem from an individual job
 
 ## Related reference
 
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
-- [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

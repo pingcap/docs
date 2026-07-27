@@ -9,7 +9,7 @@ Deletes a remote file or directory. The command alias is `tdc fs rm`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -32,20 +32,26 @@ tdc fs delete-file
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--recursive`: Delete a directory recursively.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Delete a file
+- Delete a remote file:
 
-```bash
-tdc fs delete-file --file-system-name workspace --path /reports/obsolete.md
-```
+    ```bash
+    # Remove one object from the selected Filesystem.
+    tdc fs delete-file --file-system-name workspace --path /reports/obsolete.md
+    ```
 
-### Preview recursive directory deletion
+- Delete a directory recursively:
 
-```bash
-tdc fs delete-file --file-system-name workspace --path /scratch --recursive --dry-run
-```
+    ```bash
+    # Remove a directory and all of its descendants in one request.
+    tdc fs delete-file --file-system-name workspace --path /scratch --recursive
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

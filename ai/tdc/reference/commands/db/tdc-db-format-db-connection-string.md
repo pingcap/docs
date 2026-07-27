@@ -1,6 +1,6 @@
 ---
 title: tdc db format-db-connection-string
-summary: Format a connection string for a tdc-managed SQL user.
+summary: Format a connection string for a TiDB Cloud CLI-managed SQL user.
 ---
 
 # tdc db format-db-connection-string
@@ -9,7 +9,7 @@ Formats stored SQL credentials for read-write, read-only, or admin access.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -40,20 +40,40 @@ tdc db format-db-connection-string
 - `--help`: Display help information.
 - `--read-only`: Use prepared `read_only` DB SQL credentials.
 - `--read-write`: Use prepared `read_write` DB SQL credentials.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Format a read-write MySQL URI
+- Format a read-write MySQL URI:
 
-```bash
-tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --read-write --format mysql-uri
-```
+    ```bash
+    # Use the default application role in tools that accept a MySQL URI.
+    tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --read-write --format mysql-uri
+    ```
 
-### Format read-only dotenv variables
+- Format read-only dotenv variables:
 
-```bash
-tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --read-only --format env --env-prefix TIDB_
-```
+    ```bash
+    # Emit environment assignments for a workload that must not modify data.
+    tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --read-only --format env --env-prefix TIDB_
+    ```
+
+- Format an admin JDBC URL:
+
+    ```bash
+    # Generate a JDBC connection value with the prepared admin credentials.
+    tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --admin --format jdbc --database app
+    ```
+
+- Include DATABASE_URL in dotenv output:
+
+    ```bash
+    # Emit both component variables and a conventional DATABASE_URL value.
+    tdc db format-db-connection-string --db-cluster-id "<cluster-id>" --format env --env-include-database-url
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)

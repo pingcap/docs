@@ -9,7 +9,7 @@ Lists Starter clusters with optional pagination, filtering, ordering, and JMESPa
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -32,20 +32,26 @@ tdc db list-db-clusters
 - `--page-size <int32>`: Number of clusters to request; 0 uses the API default.
 - `--page-token <string>`: Page token returned by a previous list-db-clusters call.
 - `--skip <int32>`: Number of clusters to skip.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List clusters as text
+- List clusters:
 
-```bash
-tdc db list-db-clusters --output text
-```
+    ```bash
+    # Return all visible Starter clusters as structured JSON.
+    tdc db list-db-clusters
+    ```
 
-### Return selected cluster fields
+- Select cluster fields:
 
-```bash
-tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name,state:state}'
-```
+    ```bash
+    # Reduce the result to IDs, names, and lifecycle states.
+    tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name,state:state}'
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)

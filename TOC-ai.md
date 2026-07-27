@@ -7,7 +7,7 @@
 
 - [Get Started with Vector Search via Python](/ai/quickstart-via-python.md)
 - [Get Started with Vector Search via SQL](/ai/quickstart-via-sql.md)
-- [Get Started with TiDB Cloud CLI (tdc)](/ai/tdc/tdc-quick-start.md)
+- [Get Started with TiDB Cloud CLI](/ai/tdc/tdc-quick-start.md)
 
 ## CONCEPTS
 
@@ -84,18 +84,18 @@
 - [Vector Search Index](/ai/reference/vector-search-index.md)
 - [Vector Search Performance Tuning](/ai/reference/vector-search-improve-performance.md)
 - [Vector Search Limitations](/ai/reference/vector-search-limitations.md)
-- TiDB Cloud CLI (tdc)
-  - [Overview](/ai/tdc/tdc-overview.md)
+- TiDB Cloud CLI
+  - [TiDB Cloud Command Line Interface Overview](/ai/tdc/tdc-overview.md)
   - Guides
-    - [Install, Configure, and Update](/ai/tdc/reference/tdc-install-configure-update.md)
-    - [Organization and Projects](/ai/tdc/reference/tdc-organization.md)
-    - [Starter Databases and SQL](/ai/tdc/reference/tdc-starter-database.md)
-    - [Filesystem](/ai/tdc/reference/tdc-filesystem.md)
-    - [Filesystem Git Workspaces](/ai/tdc/reference/tdc-filesystem-git.md)
-    - [Filesystem Journals](/ai/tdc/reference/tdc-filesystem-journal.md)
-    - [Filesystem Vault](/ai/tdc/reference/tdc-filesystem-vault.md)
+    - [Install, Configure, and Update TiDB Cloud CLI](/ai/tdc/reference/tdc-install-configure-update.md)
+    - [TiDB Cloud Organization CLI Command Reference](/ai/tdc/reference/tdc-organization.md)
+    - [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+    - [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+    - [TiDB Cloud Filesystem Git CLI Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)
+    - [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
+    - [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)
   - Command Reference
-    - [CLI Syntax and Global Behavior](/ai/tdc/reference/tdc-cli-reference.md)
+    - [TiDB Cloud CLI Command Reference](/ai/tdc/reference/tdc-cli-reference.md)
     - [configure](/ai/tdc/reference/commands/tdc/tdc-configure.md)
     - [update](/ai/tdc/reference/commands/tdc/tdc-update.md)
     - organization
@@ -167,17 +167,17 @@
       - [mount-vault](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-mount-vault.md)
       - [unmount-vault](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-unmount-vault.md)
   - Scenarios for Users and Automation
-    - [Automate Daily Database Operations](/ai/tdc/reference/tdc-daily-workflow-example.md)
-    - [Run SQL Queries with Role-Based Access](/ai/tdc/reference/tdc-query-sql-with-roles-example.md)
-    - [Share a Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md)
-    - [Hand Off CI Artifacts Between Jobs](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md)
+    - [Run a Daily TiDB Cloud CLI Workflow](/ai/tdc/reference/tdc-daily-workflow-example.md)
+    - [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md)
+    - [Share a TiDB Cloud Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md)
+    - [Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md)
   - Scenarios for AI Agents
-    - [Set Up an Agent Sandbox Environment](/ai/tdc/reference/tdc-agent-sandbox-example.md)
-    - [Persist Agent State Across Sandboxes](/ai/tdc/reference/tdc-persistent-agent-state-example.md)
-    - [Share a Read-Only Dataset Across Parallel Agents](/ai/tdc/reference/tdc-parallel-agent-dataset-example.md)
-    - [Set Up a Git Workspace for AI Agents](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md)
-    - [Record Agent Workflows in a Journal](/ai/tdc/reference/tdc-journal-agent-workflow-example.md)
-    - [Delegate Secrets Securely to Agents](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)
-  - [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
-  - [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
-  - [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md)
+    - [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md)
+    - [Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem](/ai/tdc/reference/tdc-persistent-agent-state-example.md)
+    - [Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem](/ai/tdc/reference/tdc-parallel-agent-dataset-example.md)
+    - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md)
+    - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/tdc/reference/tdc-journal-agent-workflow-example.md)
+    - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)
+  - [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+  - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+  - [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md)

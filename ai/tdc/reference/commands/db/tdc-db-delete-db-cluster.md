@@ -9,7 +9,7 @@ Deletes one Starter cluster. `--wait` waits until deletion is observable.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -27,21 +27,27 @@ tdc db delete-db-cluster
 - `--db-cluster-id <string>`: Starter DB cluster ID. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 - `--wait`: Wait until the deleted cluster reaches `DELETED` or is no longer accessible.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Preview cluster deletion
+- Delete a cluster and wait for completion:
 
-```bash
-tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --dry-run
-```
+    ```bash
+    # Wait until TiDB Cloud reports the cluster deleted or no longer accessible.
+    tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --wait
+    ```
 
-### Delete a cluster and wait for completion
+- Delete a cluster asynchronously:
 
-```bash
-tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --wait
-```
+    ```bash
+    # Return after TiDB Cloud accepts deletion while cleanup continues remotely.
+    tdc db delete-db-cluster --db-cluster-id "<cluster-id>"
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)

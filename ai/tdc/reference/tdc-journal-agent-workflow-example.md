@@ -1,15 +1,15 @@
 ---
-title: Record an Agent Workflow in a Filesystem Journal
+title: Record an Agent Workflow in a TiDB Cloud Filesystem Journal
 summary: Create a journal, append structured agent events, search the workflow, and verify the journal hash chain.
 ---
 
-# Record an Agent Workflow in a Filesystem Journal
+# Record an Agent Workflow in a TiDB Cloud Filesystem Journal
 
 This example records an agent task as a structured, ordered, and verifiable event history.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The agent problem
 
@@ -19,7 +19,7 @@ An agent task can span planning, tool calls, tests, retries, and handoffs betwee
 
 A text file can be edited or truncated after an event is written, has no intrinsic sequence or hash chain, and requires every producer to invent parsing and concurrency rules. Retrying an append can also create duplicate events unless the application builds its own idempotency layer.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 A Filesystem journal stores structured append-only entries with sequence information, searchable fields, optional idempotency keys, and hash-chain verification. Agents append semantic events such as `task.started` and `test.finished`; operators can query the workflow and verify the stored chain without treating a mutable log file as evidence.
 
@@ -83,7 +83,7 @@ A successful result confirms the stored sequence and hash chain are consistent.
 
 ## Cleanup
 
-Journals are append-only and currently have no delete command in the tdc public surface. Use a synthetic journal ID and retain it as workflow evidence. Delete the containing Filesystem only when its complete contents are no longer needed.
+Journals are append-only and currently have no delete command in the public `tdc` command surface. Use a synthetic journal ID and retain it as workflow evidence. Delete the containing Filesystem only when its complete contents are no longer needed.
 
 ## Security notes
 
@@ -92,5 +92,5 @@ Journals are append-only and currently have no delete command in the tdc public 
 
 ## What's next
 
-- [tdc fs-journal Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
 - [Delegate Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)

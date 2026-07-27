@@ -9,7 +9,7 @@ Searches journals and optionally returns matching entries.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -48,20 +48,33 @@ tdc fs-journal search-journal-entries
 - `--status <string>`: Entry status filter.
 - `--subject <string>`: Subject filter; repeatable.
 - `--until <string>`: RFC3339 upper time bound.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Search by entry type
+- Search by entry type:
 
-```bash
-tdc fs-journal search-journal-entries --file-system-name workspace --entry-type task.started --include-entries
-```
+    ```bash
+    # Find journals containing task-start events and include their payloads.
+    tdc fs-journal search-journal-entries --file-system-name workspace --entry-type task.started --include-entries
+    ```
 
-### Search recent entries by label
+- Search by label and time:
 
-```bash
-tdc fs-journal search-journal-entries --file-system-name workspace --label env=dev --since 2026-07-01T00:00:00Z --limit 100
-```
+    ```bash
+    # Limit deployment journal matches to one environment and time window.
+    tdc fs-journal search-journal-entries --file-system-name workspace --label env=dev --since 2026-07-01T00:00:00Z --limit 100
+    ```
+
+- Search by actor and subject:
+
+    ```bash
+    # Find events produced by one agent for a specific task subject.
+    tdc fs-journal search-journal-entries --file-system-name workspace --actor agent:tdc --subject issue-42 --include-entries
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)

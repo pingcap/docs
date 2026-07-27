@@ -9,7 +9,7 @@ Updates the display name or monthly spending limit of one Starter cluster.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -30,20 +30,26 @@ tdc db update-db-cluster
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--monthly-spending-limit-usd-cents <int32>`: Monthly spending limit in USD cents; omit to leave unchanged.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Rename a cluster
+- Rename a cluster:
 
-```bash
-tdc db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2
-```
+    ```bash
+    # Change the Starter cluster display name without recreating it.
+    tdc db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2
+    ```
 
-### Preview a spending-limit update
+- Preview a spending-limit update:
 
-```bash
-tdc db update-db-cluster --db-cluster-id "<cluster-id>" --monthly-spending-limit-usd-cents 1000 --dry-run
-```
+    ```bash
+    # Validate a new monthly limit without applying the change.
+    tdc db update-db-cluster --db-cluster-id "<cluster-id>" --monthly-spending-limit-usd-cents 1000 --dry-run
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)

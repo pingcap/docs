@@ -1,15 +1,15 @@
 ---
-title: tdc db Command Reference
-summary: Reference every tdc db command for Starter clusters, branches, SQL users, connection strings, and SQL execution.
+title: TiDB Cloud Starter CLI Command Reference
+summary: Reference every `tdc db` command for Starter clusters, branches, SQL users, connection strings, and SQL execution.
 ---
 
-# tdc db Command Reference
+# TiDB Cloud Starter CLI Command Reference
 
 Use `tdc db` to manage TiDB Cloud Starter clusters, branches, and SQL access.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -48,7 +48,7 @@ tdc db
 
 ## Prerequisites
 
-- Configure tdc with `tdc configure`.
+- Configure `tdc` with `tdc configure`.
 - Ensure the API key can manage Starter clusters in the selected project.
 - Use synthetic names in automation so cleanup can identify only resources created by that run.
 
@@ -103,7 +103,7 @@ tdc db delete-db-cluster \
   --wait
 ```
 
-tdc resolves the cluster name internally; no name-confirmation flag is required. Without `--wait`, delete returns after TiDB Cloud accepts the asynchronous request. The wait flag waits up to 12 minutes and returns when the cluster is `DELETED` or no longer accessible.
+`tdc` resolves the cluster name internally; no name-confirmation flag is required. Without `--wait`, delete returns after TiDB Cloud accepts the asynchronous request. The wait flag waits up to 12 minutes and returns when the cluster is `DELETED` or no longer accessible.
 
 ## Manage branches
 
@@ -139,7 +139,7 @@ Create and delete support `--dry-run`.
 
 ## Create SQL users
 
-Create or repair the three tdc-managed SQL roles:
+Create or repair the three TiDB Cloud CLI-managed SQL roles:
 
 ```bash
 tdc db create-db-sql-users \
@@ -218,5 +218,5 @@ The default `--transport https` sends the SQL request over HTTPS without a persi
 ## What's next
 
 - [Query SQL with Explicit Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md)
-- [tdc CLI Reference](/ai/tdc/reference/tdc-cli-reference.md)
-- [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)
+- [TiDB Cloud CLI Command Reference](/ai/tdc/reference/tdc-cli-reference.md)
+- [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md)

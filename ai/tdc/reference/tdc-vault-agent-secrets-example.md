@@ -1,15 +1,15 @@
 ---
-title: Delegate Filesystem Vault Secrets to an Agent
+title: Delegate TiDB Cloud Filesystem Vault Secrets to an Agent
 summary: Store a secret, grant one field to an agent, inject it into a process, audit access, and revoke the grant.
 ---
 
-# Delegate Filesystem Vault Secrets to an Agent
+# Delegate TiDB Cloud Filesystem Vault Secrets to an Agent
 
 This example gives an agent temporary access to one secret field without sharing the Filesystem owner token or the complete secret.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The agent problem
 
@@ -19,7 +19,7 @@ An agent might need one API endpoint or token to complete a short task. Putting 
 
 Environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. A separate cloud secret manager can provide those controls, but it requires another identity, policy, and integration path for every sandbox.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 The Filesystem owner stores the secret once and creates a short-lived grant scoped to the required field. The agent receives only the delegated vault token and can inject the allowed value into a child process. The owner can inspect audit events and revoke the grant without rotating or exposing the Filesystem owner credential.
 
@@ -105,5 +105,5 @@ rm -f ./api-token.txt
 
 ## What's next
 
-- [tdc fs-vault Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)
-- [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)
+- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

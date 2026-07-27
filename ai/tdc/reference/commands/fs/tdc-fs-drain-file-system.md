@@ -9,7 +9,7 @@ Flushes dirty FUSE state while leaving the mount online. The command alias is `t
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -28,20 +28,19 @@ tdc fs drain-file-system
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--timeout <duration>`: The time to wait for dirty handles and pending writes to drain. \[default: `30s`]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Drain pending writes
+- Drain pending writes:
 
-```bash
-tdc fs drain-file-system --mount-path /path/to/workspace
-```
+    ```bash
+    # Flush queued FUSE writes while leaving the Filesystem mounted.
+    tdc fs drain-file-system --mount-path /path/to/workspace --timeout 30s
+    ```
 
-### Drain with the alias and an explicit timeout
+## Related documentation
 
-```bash
-tdc fs drain --mount-path /path/to/workspace --timeout 30s
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

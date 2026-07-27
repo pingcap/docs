@@ -1,15 +1,15 @@
 ---
-title: tdc fs-vault Command Reference
-summary: Reference every tdc fs-vault command for secrets, grants, audit events, process injection, and read-only mounts.
+title: TiDB Cloud Filesystem Vault CLI Command Reference
+summary: Reference every `tdc fs-vault` command for secrets, grants, audit events, process injection, and read-only mounts.
 ---
 
-# tdc fs-vault Command Reference
+# TiDB Cloud Filesystem Vault CLI Command Reference
 
 `tdc fs-vault` stores structured secrets and delegates limited, expiring access to agents. Owner operations use the Filesystem owner credential; delegated reads use a vault token scoped to selected secrets or fields.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -162,11 +162,11 @@ Unmount also supports `--timeout`, `--force`, and `--ignore-absent`. Vault mount
 
 - Give an agent the narrowest field scope and shortest practical TTL.
 - Prefer `run-with-secret` over writing plaintext to disk.
-- Do not store delegated tokens in tdc config or operation logs.
+- Do not store delegated tokens in TiDB Cloud CLI configuration or operation logs.
 - Stop processes using a vault mount before unmounting.
 - Revoke a grant after the task finishes.
 
 ## What's next
 
 - [Delegate Secrets to an Agent](/ai/tdc/reference/tdc-vault-agent-secrets-example.md)
-- [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)

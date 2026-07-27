@@ -9,7 +9,7 @@ Lists entries below a remote path. The command alias is `tdc fs ls`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -28,20 +28,19 @@ tdc fs list-files
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--path <string>`: File system directory path. \[default: /]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List files
+- List a remote directory:
 
-```bash
-tdc fs list-files --file-system-name workspace --path /reports
-```
+    ```bash
+    # Return the entries under a specific Filesystem path.
+    tdc fs list-files --file-system-name workspace --path /reports
+    ```
 
-### List files as text
+## Related documentation
 
-```bash
-tdc fs list-files --file-system-name workspace --path /reports --output text
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

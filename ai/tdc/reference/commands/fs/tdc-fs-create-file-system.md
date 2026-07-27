@@ -9,7 +9,7 @@ Creates a Filesystem. `--wait` waits until data-plane access is ready.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -27,21 +27,34 @@ tdc fs create-file-system
 - `--file-system-name <string>`: Set the file system name. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 - `--wait`: Wait until the created file system is active.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a file system and wait until it is ready
+- Create a Filesystem and wait until it is ready:
 
-```bash
-tdc fs create-file-system --file-system-name workspace --wait
-```
+    ```bash
+    # Wait until the new Filesystem root is readable before returning.
+    tdc fs create-file-system --file-system-name workspace --wait
+    ```
 
-### Preview file system creation
+- Create a Filesystem asynchronously:
 
-```bash
-tdc fs create-file-system --file-system-name workspace --dry-run
-```
+    ```bash
+    # Return after provisioning is accepted so work can continue in parallel.
+    tdc fs create-file-system --file-system-name scratch
+    ```
+
+- Preview Filesystem creation:
+
+    ```bash
+    # Validate credentials, placement, and the request without provisioning storage.
+    tdc fs create-file-system --file-system-name workspace --dry-run
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

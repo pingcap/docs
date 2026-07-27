@@ -9,7 +9,7 @@ Packs selected local overlay state into a remote archive.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -40,20 +40,26 @@ tdc fs pack-file-system
 - `--mount-profile <string>`: The mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--path <string>`: Local overlay path for packing; repeatable.
 - `--remote-root <string>`: The TiDB Cloud file system root represented by the local overlay. \[default: /]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Pack a mounted workspace
+- Pack a mounted workspace:
 
-```bash
-tdc fs pack-file-system --file-system-name workspace --mount-path /path/to/workspace
-```
+    ```bash
+    # Persist the local overlay associated with an existing mount.
+    tdc fs pack-file-system --file-system-name workspace --mount-path /path/to/workspace
+    ```
 
-### Pack explicit local and remote roots
+- Pack explicit roots:
 
-```bash
-tdc fs pack-file-system --file-system-name workspace --local-root ./overlay --remote-root /workspace --mount-profile portable
-```
+    ```bash
+    # Create a portable archive from selected local and remote roots.
+    tdc fs pack-file-system --file-system-name workspace --local-root ./overlay --remote-root /workspace --mount-profile portable
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

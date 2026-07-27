@@ -9,7 +9,7 @@ Creates a checkpoint in one layer. If `--checkpoint-id` is omitted, the service 
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -34,20 +34,26 @@ tdc fs create-layer-checkpoint
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--label <string>`: The checkpoint label.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a checkpoint with an explicit ID
+- Create a named checkpoint:
 
-```bash
-tdc fs create-layer-checkpoint --file-system-name workspace --layer-id "<layer-id>" --checkpoint-id before-review
-```
+    ```bash
+    # Record the current layer state under a stable checkpoint ID.
+    tdc fs create-layer-checkpoint --file-system-name workspace --layer-id "<layer-id>" --checkpoint-id before-review
+    ```
 
-### Preview an automatically identified checkpoint
+- Create an automatically identified checkpoint:
 
-```bash
-tdc fs create-layer-checkpoint --file-system-name workspace --layer-id "<layer-id>" --label "before review" --dry-run
-```
+    ```bash
+    # Let the service assign the checkpoint ID while retaining a human label.
+    tdc fs create-layer-checkpoint --file-system-name workspace --layer-id "<layer-id>" --label "before review"
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -1,15 +1,15 @@
 ---
-title: tdc fs-git Command Reference
-summary: Reference every tdc fs-git command for cloning, hydrating, and managing linked Git worktrees.
+title: TiDB Cloud Filesystem Git CLI Command Reference
+summary: Reference every `tdc fs-git` command for cloning, hydrating, and managing linked Git worktrees.
 ---
 
-# tdc fs-git Command Reference
+# TiDB Cloud Filesystem Git CLI Command Reference
 
 `tdc fs-git` accelerates Git workspace setup on mounted TiDB Cloud Filesystem paths. It augments Git; you continue to use ordinary `git` commands for status, edit, add, commit, fetch, and push.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -113,4 +113,4 @@ The default coding-agent mount profile keeps `.git` and rebuildable generated fi
 ## What's next
 
 - [Prepare a Git Workspace for Agents](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md)
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

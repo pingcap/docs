@@ -1,15 +1,15 @@
 ---
-title: tdc Configuration and Credentials
-summary: Reference tdc profiles, environment and flag precedence, local state paths, Filesystem registry, SQL credentials, mount locators, and operation logs.
+title: TiDB Cloud CLI Configuration and Credentials
+summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths, Filesystem registry, SQL credentials, mount locators, and operation logs.
 ---
 
-# tdc Configuration and Credentials
+# TiDB Cloud CLI Configuration and Credentials
 
-tdc stores all product-owned local state under `~/.tdc/` and separates non-sensitive configuration from credentials.
+`tdc` stores all product-owned local state under `~/.tdc/` and separates non-sensitive configuration from credentials.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Main files
 
@@ -51,7 +51,7 @@ Credential selection is:
 1. `TDC_PUBLIC_KEY` and `TDC_PRIVATE_KEY`, when either is set;
 2. the selected section of `~/.tdc/credentials`.
 
-Both environment values are required together. tdc never mixes one environment half with one file half.
+Both environment values are required together. `tdc` never mixes one environment half with one file half.
 
 Placement selection is:
 
@@ -88,7 +88,7 @@ Resource selection is:
 2. `TDC_FS_FILE_SYSTEM_NAME`;
 3. fail with `fs.missing_file_system_name`.
 
-tdc never infers a Filesystem from a saved default or from the number of registered resources. Use `--file-system-name` for one command or `TDC_FS_FILE_SYSTEM_NAME` for a shell, sandbox, or automation environment.
+`tdc` never infers a Filesystem from a saved default or from the number of registered resources. Use `--file-system-name` for one command or `TDC_FS_FILE_SYSTEM_NAME` for a shell, sandbox, or automation environment.
 
 FS owner credential selection for remote `fs`, `fs-git`, `fs-journal`, and owner `fs-vault` operations is:
 
@@ -108,7 +108,7 @@ export TDC_REGION_CODE="aws-us-east-1"
 export TDC_FS_FILE_SYSTEM_NAME="workspace"
 ```
 
-These values form an in-memory namespace only. tdc does not write them to `~/.tdc/`. Provisioning and deletion still require TiDB Cloud API credentials; deletion also requires the local resource registration.
+These values form an in-memory namespace only. `tdc` does not write them to `~/.tdc/`. Provisioning and deletion still require TiDB Cloud API credentials; deletion also requires the local resource registration.
 
 ## DB SQL credentials
 
@@ -142,7 +142,7 @@ Each registered Filesystem has an isolated companion home:
 ~/.tdc/drive9-home/<profile-key>/<resource-key>/
 ```
 
-Do not edit this state or a standalone `~/.drive9` configuration for tdc workflows.
+Do not edit this state or a standalone `~/.drive9` configuration for `tdc` workflows.
 
 A successful background FS or vault mount writes a non-secret locator:
 
@@ -154,7 +154,7 @@ The locator records the placement and companion-home information required for dr
 
 ## Operation logs
 
-tdc writes redacted local JSON Lines events to:
+`tdc` writes redacted local JSON Lines events to:
 
 ```text
 ~/.tdc/logs/tdc.jsonl
@@ -190,5 +190,5 @@ Do not put them in source control, tickets, logs, command examples, or unprotect
 
 ## Related documentation
 
-- [tdc Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
-- [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)
+- [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md)
+- [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md)

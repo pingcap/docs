@@ -9,7 +9,7 @@ Mounts a Filesystem through automatic, FUSE, or WebDAV mode. The command alias i
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -59,21 +59,41 @@ tdc fs mount-file-system
 - `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
 - `--remote-path <string>`: The TiDB Cloud file system root path to mount. \[default: /]
 - `--unpack-archive-path <string>`: Restore the pack archive before mounting.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 - `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. \[default: true]
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Mount a file system
+- Mount a Filesystem with the default driver:
 
-```bash
-tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace
-```
+    ```bash
+    # Let the CLI select the default driver for the current platform.
+    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace
+    ```
 
-### Create a read-only FUSE mount with the alias
+- Create a read-only FUSE mount:
 
-```bash
-tdc fs mount --file-system-name workspace --mount-path /path/to/workspace --driver fuse --read-only
-```
+    ```bash
+    # Expose the remote namespace through FUSE without permitting writes.
+    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver fuse --read-only
+    ```
+
+- Use WebDAV on macOS without macFUSE:
+
+    ```bash
+    # Select WebDAV explicitly when a FUSE runtime is unavailable.
+    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver webdav
+    ```
+
+- Tune the FUSE read cache:
+
+    ```bash
+    # Increase cache capacity for repeated reads of medium-sized files.
+    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver fuse --read-cache-size-mb 256 --read-cache-max-file-mb 16
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

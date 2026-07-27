@@ -9,7 +9,7 @@ Restores local overlay state from a remote archive.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -40,20 +40,26 @@ tdc fs unpack-file-system
 - `--mount-profile <string>`: Mount profile: `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--no-replace`: Merge archive entries instead of replacing them.
 - `--remote-root <string>`: Find the packed archive under the specified root path when `--archive-path` is omitted. \[default: /]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Unpack into a mounted workspace
+- Unpack into a mounted workspace:
 
-```bash
-tdc fs unpack-file-system --file-system-name workspace --mount-path /path/to/workspace
-```
+    ```bash
+    # Restore the portable archive associated with an existing mount.
+    tdc fs unpack-file-system --file-system-name workspace --mount-path /path/to/workspace
+    ```
 
-### Unpack explicit roots without replacing files
+- Unpack explicit roots without replacement:
 
-```bash
-tdc fs unpack-file-system --file-system-name workspace --local-root ./overlay --remote-root /workspace --mount-profile portable --no-replace
-```
+    ```bash
+    # Restore missing files while preserving existing destination entries.
+    tdc fs unpack-file-system --file-system-name workspace --local-root ./overlay --remote-root /workspace --mount-profile portable --no-replace
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

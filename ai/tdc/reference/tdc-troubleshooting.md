@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot tdc
-summary: Diagnose tdc authentication, project, Filesystem selection, companion, quota, SQL user, mount, and interrupted-cleanup failures.
+title: Troubleshoot TiDB Cloud CLI
+summary: Diagnose TiDB Cloud CLI authentication, project, Filesystem selection, companion, quota, SQL user, mount, and interrupted-cleanup failures.
 ---
 
-# Troubleshoot tdc
+# Troubleshoot TiDB Cloud CLI
 
-Use this reference to diagnose common current tdc failures. Add `--debug` only when needed; debug output is redacted but should still be reviewed before sharing.
+Use this reference to diagnose common current TiDB Cloud CLI failures. Add `--debug` only when needed; debug output is redacted but should still be reviewed before sharing.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## API authentication fails
 
@@ -40,7 +40,7 @@ tdc organization list-projects \
   --query 'projects[].{id:id,name:name,type:type}'
 ```
 
-If no virtual project appears, confirm the API key's organization and project access. If multiple virtual projects appear, report the ambiguous account state through the [tdc issue tracker](https://github.com/tidbcloud/tdc/issues).
+If no virtual project appears, confirm the API key's organization and project access. If multiple virtual projects appear, report the ambiguous account state through the [`tdc` issue tracker](https://github.com/tidbcloud/tdc/issues).
 
 ## Filesystem token is missing
 
@@ -70,7 +70,7 @@ Or select the Filesystem for subsequent commands in the current shell:
 export TDC_FS_FILE_SYSTEM_NAME="workspace"
 ```
 
-tdc intentionally does not infer a Filesystem from the local registry, including when only one resource is registered.
+The TiDB Cloud CLI intentionally does not infer a Filesystem from the local registry, including when only one resource is registered.
 
 ## Filesystem region is unsupported
 
@@ -78,13 +78,13 @@ The configured TiDB Cloud region might not have a `tidb_cloud_native` Filesystem
 
 ## Companion is missing or incompatible
 
-The release installer places `tdc-drive9` next to `tdc`. Re-run the current installer when tdc reports a missing companion:
+The release installer places `tdc-drive9` next to `tdc`. Re-run the current installer when the TiDB Cloud CLI reports a missing companion:
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
 ```
 
-Verify that `PATH` resolves the expected tdc:
+Verify that `PATH` resolves the expected `tdc`:
 
 ```bash
 command -v tdc
@@ -165,7 +165,7 @@ mkdir -p "$HOME/workspace"
 tdc fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md#ubuntu-2604-mount-paths).
+Changing the owner or mode of `/workspace` does not bypass AppArmor. If the path cannot change, add explicit `/workspace` mount and unmount rules to `/etc/apparmor.d/local/fusermount3` as described in [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md#ubuntu-2604-mount-paths).
 
 ## Mount becomes stale after a process crash
 
@@ -209,4 +209,4 @@ tdc fs delete-file-system \
 
 ## Report a problem
 
-Include the tdc version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, FS or vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/tdc/issues](https://github.com/tidbcloud/tdc/issues).
+Include the TiDB Cloud CLI version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, FS or vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/tdc/issues](https://github.com/tidbcloud/tdc/issues).

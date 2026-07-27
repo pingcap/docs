@@ -9,7 +9,7 @@ Checks Filesystem selection, endpoint resolution, credentials, and companion acc
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -26,20 +26,19 @@ tdc fs check-file-system
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Check file system connectivity
+- Check Filesystem connectivity:
 
-```bash
-tdc fs check-file-system --file-system-name workspace
-```
+    ```bash
+    # Verify that the selected token can reach and read the Filesystem root.
+    tdc fs check-file-system --file-system-name workspace
+    ```
 
-### Render the check result as text
+## Related documentation
 
-```bash
-tdc fs check-file-system --file-system-name workspace --output text
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -9,7 +9,7 @@ Lists vault audit events with optional agent, secret, and time filters.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -34,20 +34,26 @@ tdc fs-vault list-audit-events
 - `--limit <int32>`: Maximum events to return. \[default: 100]
 - `--secret-name <string>`: Filter by Vault secret name.
 - `--since <duration>`: Client-side relative time filter, for example, `24h`.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### List audit events for a secret
+- List events for one secret:
 
-```bash
-tdc fs-vault list-audit-events --file-system-name workspace --secret-name db-prod --limit 20
-```
+    ```bash
+    # Inspect recent access and mutation events for the selected secret.
+    tdc fs-vault list-audit-events --file-system-name workspace --secret-name db-prod --limit 20
+    ```
 
-### List recent events for an agent
+- List recent events for an agent:
 
-```bash
-tdc fs-vault list-audit-events --file-system-name workspace --agent-id deploy-agent --since 24h --output text
-```
+    ```bash
+    # Filter the audit trail to one delegated identity and time range.
+    tdc fs-vault list-audit-events --file-system-name workspace --agent-id deploy-agent --since 24h
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)

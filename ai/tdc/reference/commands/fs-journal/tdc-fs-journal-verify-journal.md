@@ -9,7 +9,7 @@ Verifies the integrity of one journal hash chain.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -28,20 +28,19 @@ tdc fs-journal verify-journal
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Verify a journal
+- Verify a journal:
 
-```bash
-tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo
-```
+    ```bash
+    # Validate the journal's ordered hash chain and integrity metadata.
+    tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo
+    ```
 
-### Render verification results as text
+## Related documentation
 
-```bash
-tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo --output text
-```
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)

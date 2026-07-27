@@ -9,7 +9,7 @@ Gracefully flushes and unmounts a background mount. The command alias is `tdc fs
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -36,20 +36,19 @@ tdc fs unmount-file-system
 - `--no-auto-pack`: Skip the portable mount profile's default auto-pack action.
 - `--pack-archive-path <string>`: Pack archive to write after unmount.
 - `--timeout <duration>`: Time to wait for the mount process to exit. \[default: `30s`]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Unmount a file system
+- Unmount a Filesystem:
 
-```bash
-tdc fs unmount-file-system --mount-path /path/to/workspace
-```
+    ```bash
+    # Gracefully flush pending writes and detach the Filesystem mount.
+    tdc fs unmount-file-system --mount-path /path/to/workspace
+    ```
 
-### Ignore an absent mount with the alias
+## Related documentation
 
-```bash
-tdc fs umount --mount-path /path/to/workspace --ignore-absent
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

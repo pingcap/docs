@@ -1,25 +1,25 @@
 ---
-title: Get Started with TiDB Cloud CLI (tdc)
-summary: Install and configure tdc, then complete a first TiDB Cloud Starter database or Filesystem operation.
+title: Get Started with TiDB Cloud CLI
+summary: Install and configure the TiDB Cloud CLI, then complete a first TiDB Cloud Starter database or Filesystem operation.
 ---
 
-# Get Started with TiDB Cloud CLI (tdc)
+# Get Started with TiDB Cloud CLI
 
-This quick start installs tdc, configures one profile, and gets a successful result from either TiDB Cloud Starter or TiDB Cloud Filesystem.
+This quick start installs the TiDB Cloud CLI, configures one profile, and gets a successful result from either TiDB Cloud Starter or TiDB Cloud Filesystem.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## When to use this quick start
 
-Use this quick start when you want to automate a new Starter database or create a persistent workspace for a user, script, or AI agent. It follows the tdc workflow. If you manage TiDB Cloud Essential or need an operation that tdc does not provide, use the [`ticloud` CLI documentation](/tidb-cloud/get-started-with-cli.md).
+Use this quick start when you want to automate a new Starter database or create a persistent workspace for a user, script, or AI agent. It follows the TiDB Cloud CLI workflow. If you manage TiDB Cloud Essential or need an operation that the TiDB Cloud CLI does not provide, use the [`ticloud` CLI documentation](/tidb-cloud/get-started-with-cli.md).
 
 ## Prerequisites
 
 Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page.
 
-## Step 1. Install tdc
+## Step 1. Install TiDB Cloud CLI
 
 On macOS or Linux, run the installer:
 
@@ -27,14 +27,14 @@ On macOS or Linux, run the installer:
 curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
 ```
 
-After installation, add tdc to the current shell and verify it:
+After installation, add `tdc` to the current shell and verify it:
 
 ```bash
 export PATH="$HOME/.tdc/bin:$PATH"
 tdc --version
 ```
 
-Add `export PATH="$HOME/.tdc/bin:$PATH"` to your shell profile to keep tdc available in new terminals.
+Add `export PATH="$HOME/.tdc/bin:$PATH"` to your shell profile to keep `tdc` available in new terminals.
 
 On Windows PowerShell, run the installer:
 
@@ -44,16 +44,16 @@ iwr https://github.com/tidbcloud/tdc/releases/latest/download/install.ps1 -OutFi
 powershell -ExecutionPolicy Bypass -File $script -Yes
 ```
 
-After installation, add tdc to the current PowerShell session and verify it:
+After installation, add `tdc` to the current PowerShell session and verify it:
 
 ```powershell
 $env:Path = "$HOME\.tdc\bin;$env:Path"
 tdc --version
 ```
 
-Add `$HOME\.tdc\bin` to your user `PATH` to keep tdc available in new PowerShell sessions.
+Add `$HOME\.tdc\bin` to your user `PATH` to keep `tdc` available in new PowerShell sessions.
 
-## Step 2. Configure tdc
+## Step 2. Configure TiDB Cloud CLI
 
 Run the interactive configuration:
 
@@ -84,7 +84,7 @@ tdc fs create-file-system \
   --output text
 ```
 
-tdc stores the Filesystem credential locally. Write and read a file directly:
+`tdc` stores the Filesystem credential locally. Write and read a file directly:
 
 ```bash
 printf 'hello from tdc\n' | tdc fs copy-file \
@@ -148,6 +148,6 @@ unset TDC_DB_CLUSTER_ID
 
 ## What's next
 
-- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

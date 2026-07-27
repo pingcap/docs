@@ -9,7 +9,7 @@ Describes one locally registered Filesystem.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -24,20 +24,19 @@ tdc fs describe-file-system
 
 - `--file-system-name <string>`: Set the file system name. \[required]
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Describe a file system
+- Describe a Filesystem:
 
-```bash
-tdc fs describe-file-system --file-system-name workspace
-```
+    ```bash
+    # Return registration, endpoint, and region details for one Filesystem.
+    tdc fs describe-file-system --file-system-name workspace
+    ```
 
-### Render file system details as text
+## Related documentation
 
-```bash
-tdc fs describe-file-system --file-system-name workspace --output text
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

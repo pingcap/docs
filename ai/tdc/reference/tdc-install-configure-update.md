@@ -1,15 +1,15 @@
 ---
-title: tdc Installation, Configuration, and Update Command Reference
-summary: Reference tdc release installation, configure and update commands, version checks, and uninstallation.
+title: Install, Configure, and Update TiDB Cloud CLI
+summary: Install TiDB Cloud CLI releases, configure profiles, check versions, apply updates, and uninstall the CLI.
 ---
 
-# tdc Installation, Configuration, and Update Command Reference
+# Install, Configure, and Update TiDB Cloud CLI
 
 This reference documents the supported release installers, top-level configuration and update commands, help and version behavior, and uninstallation.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -26,7 +26,7 @@ tdc
 
 Run `tdc configure help` or `tdc update help` for the complete generated flag list.
 
-## Install tdc
+## Install TiDB Cloud CLI
 
 ### macOS and Linux
 
@@ -36,7 +36,7 @@ Run the installer:
 curl -fsSL https://github.com/tidbcloud/tdc/releases/latest/download/install.sh | sh -s -- --yes
 ```
 
-After installation, add tdc to the current shell and verify it:
+After installation, add `tdc` to the current shell and verify it:
 
 ```bash
 export PATH="$HOME/.tdc/bin:$PATH"
@@ -55,24 +55,24 @@ iwr https://github.com/tidbcloud/tdc/releases/latest/download/install.ps1 -OutFi
 powershell -ExecutionPolicy Bypass -File $script -Yes
 ```
 
-After installation, add tdc to the current PowerShell session and verify it:
+After installation, add `tdc` to the current PowerShell session and verify it:
 
 ```powershell
 $env:Path = "$HOME\.tdc\bin;$env:Path"
 tdc --version
 ```
 
-Add `$HOME\.tdc\bin` to your user `PATH` to keep tdc available in new PowerShell sessions.
+Add `$HOME\.tdc\bin` to your user `PATH` to keep `tdc` available in new PowerShell sessions.
 
 ## Configure a profile
 
-Interactive configuration is the only tdc workflow that prompts:
+Interactive configuration is the only TiDB Cloud CLI workflow that prompts:
 
 ```bash
 tdc configure
 ```
 
-tdc requests a TiDB Cloud API public key, private key, and canonical region code. It validates the key by listing projects and records the unique `tidbx_virtual` project as the profile's default project.
+The TiDB Cloud CLI requests a TiDB Cloud API public key, private key, and canonical region code. It validates the key by listing projects and records the unique `tidbx_virtual` project as the profile's default project.
 
 Configure a named profile:
 
@@ -109,9 +109,9 @@ tdc --version
 tdc fs --version
 ```
 
-Required flags appear before optional flags in generated usage. tdc supports long flags only.
+Required flags appear before optional flags in generated usage. The TiDB Cloud CLI supports long flags only.
 
-## Update tdc
+## Update TiDB Cloud CLI
 
 Check without changing files:
 
@@ -132,7 +132,7 @@ tdc update --dry-run
 tdc update
 ```
 
-Install a specific tdc release:
+Install a specific TiDB Cloud CLI release:
 
 ```bash
 tdc update --target-version v0.1.2
@@ -147,7 +147,7 @@ tdc update
 
 For WebDAV, close writers and unmount. Use the FUSE-only drain command separately only when you need a durability barrier without unmounting. Installations in protected or package-manager-owned locations are not modified. Run the installer once to migrate an older `/usr/local/bin` installation to `~/.tdc/bin`.
 
-## Uninstall tdc
+## Uninstall TiDB Cloud CLI
 
 Remove only the binaries:
 
@@ -161,7 +161,7 @@ On Windows:
 Remove-Item "$HOME\.tdc\bin\tdc.exe", "$HOME\.tdc\bin\tdc-drive9.exe"
 ```
 
-Removing binaries preserves profiles, credentials, Filesystem registrations, DB SQL credentials, logs, and mount locators. Remove `~/.tdc/` only when you intend to delete all local tdc state:
+Removing binaries preserves profiles, credentials, Filesystem registrations, DB SQL credentials, logs, and mount locators. Remove `~/.tdc/` only when you intend to delete all local TiDB Cloud CLI state:
 
 ```bash
 rm -rf "$HOME/.tdc"
@@ -171,6 +171,6 @@ Deleting local state does not delete remote Starter clusters or Filesystem resou
 
 ## What's next
 
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
-- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -9,7 +9,7 @@ Appends one JSON event or a JSON array to a journal.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -42,20 +42,33 @@ tdc fs-journal append-journal-entries
 - `--json-array`: Read a JSON array from stdin instead of JSONL.
 - `--source <string>`: Entry source.
 - `--subject <string>`: Entry subject; repeatable.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Append a JSON journal entry
+- Append one JSON entry:
 
-```bash
-tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-json '{"type":"task.started"}'
-```
+    ```bash
+    # Record an event object exactly as supplied on the command line.
+    tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-json '{"type":"task.started"}'
+    ```
 
-### Append a typed idempotent entry
+- Append an idempotent typed entry:
 
-```bash
-tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-type task.completed --subject issue-42 --idempotency-key issue-42-complete
-```
+    ```bash
+    # Prevent retries from recording the same completion event twice.
+    tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-type task.completed --subject issue-42 --idempotency-key issue-42-complete
+    ```
+
+- Append a JSON array from standard input:
+
+    ```bash
+    # Batch multiple ordered events in a single append operation.
+    printf '[{"type":"step.started"},{"type":"step.completed"}]' | tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --json-array
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)

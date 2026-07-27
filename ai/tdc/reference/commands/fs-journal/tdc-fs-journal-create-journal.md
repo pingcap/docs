@@ -9,7 +9,7 @@ Creates a journal. If `--journal-id` is omitted, the service generates one.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -38,20 +38,26 @@ tdc fs-journal create-journal
 - `--journal-kind <string>`: Journal kind. \[default: agent]
 - `--label <string>`: Journal label `key=value`; repeatable.
 - `--title <string>`: Journal title.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create an agent journal
+- Create an agent journal:
 
-```bash
-tdc fs-journal create-journal --file-system-name workspace --journal-id jrn-demo --journal-kind agent --title "demo task"
-```
+    ```bash
+    # Create an append-only journal for one agent task.
+    tdc fs-journal create-journal --file-system-name workspace --journal-id jrn-demo --journal-kind agent --title "demo task"
+    ```
 
-### Preview creation of a labeled deployment journal
+- Create a labeled deployment journal:
 
-```bash
-tdc fs-journal create-journal --file-system-name workspace --journal-kind deployment --actor agent:tdc --label env=dev --dry-run
-```
+    ```bash
+    # Attach actor and environment metadata for later searches.
+    tdc fs-journal create-journal --file-system-name workspace --journal-kind deployment --actor agent:tdc --label env=dev
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)

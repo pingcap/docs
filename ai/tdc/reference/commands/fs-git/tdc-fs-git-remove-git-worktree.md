@@ -9,7 +9,7 @@ Removes a linked worktree without recursively deleting shared clean-tree data.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -26,26 +26,25 @@ tdc fs-git remove-git-worktree
 
 ## Options
 
-- `--worktree-path <string>`: Mounted tdc fs path of the linked worktree. \[required]
+- `--worktree-path <string>`: Mounted `tdc fs` path of the linked worktree. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
 - `--force`: Remove even when the linked worktree has local changes.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Preview worktree removal
+- Remove a Git worktree:
 
-```bash
-tdc fs-git remove-git-worktree --file-system-name workspace --worktree-path /path/to/workspace/tidb-feature --dry-run
-```
+    ```bash
+    # Force removal when the isolated worktree still contains local changes.
+    tdc fs-git remove-git-worktree --file-system-name workspace --worktree-path /path/to/workspace/tidb-feature --force
+    ```
 
-### Force worktree removal
+## Related documentation
 
-```bash
-tdc fs-git remove-git-worktree --file-system-name workspace --worktree-path /path/to/workspace/tidb-feature --force
-```
+- [TiDB Cloud Filesystem Git CLI Command Reference](/ai/tdc/reference/tdc-filesystem-git.md)

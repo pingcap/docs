@@ -1,21 +1,21 @@
 ---
-title: Persist Agent State Across Disposable Sandboxes with tdc
+title: Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem
 summary: Preserve plans, checkpoints, outputs, and workflow history in a TiDB Cloud Filesystem while replacing agent sandboxes.
 ---
 
-# Persist Agent State Across Disposable Sandboxes with tdc
+# Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem
 
 This scenario keeps an agent's durable state in TiDB Cloud Filesystem while its compute environment remains disposable.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The problem
 
 An agent sandbox can disappear after a timeout, failure, or deployment. Plans, intermediate results, and diagnostic files stored only on its local disk disappear with it. Keeping the sandbox alive only to preserve state ties storage durability to compute lifecycle and wastes resources.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 A trusted machine provisions one Filesystem. Each sandbox receives only the Filesystem token, region code, and name. The agent writes durable task state to the remote namespace and records workflow transitions in a journal. A replacement sandbox can read both without receiving TiDB Cloud control-plane keys.
 
@@ -79,6 +79,6 @@ Continue writing results under the same task path. Use a unique task ID so paral
 
 ## Related reference
 
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
-- [tdc fs-journal Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/tdc/reference/tdc-filesystem-journal.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

@@ -9,7 +9,7 @@ Moves or renames a remote path. The command alias is `tdc fs mv`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -34,20 +34,19 @@ tdc fs move-file
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--overwrite`: Replace an existing destination file.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Move a remote file
+- Move a remote file:
 
-```bash
-tdc fs move-file --file-system-name workspace --from-remote /draft.md --to-remote /reports/final.md
-```
+    ```bash
+    # Rename or relocate an object entirely within the selected Filesystem.
+    tdc fs move-file --file-system-name workspace --from-remote /draft.md --to-remote /reports/final.md
+    ```
 
-### Preview a move with the alias
+## Related documentation
 
-```bash
-tdc fs mv --file-system-name workspace --from-remote /draft.md --to-remote /reports/final.md --dry-run
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

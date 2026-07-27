@@ -9,7 +9,7 @@ Executes exactly one SQL statement. Read-write is the default role; explicit rol
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -36,20 +36,40 @@ tdc db execute-sql-statement
 - `--read-only`: Use prepared `read_only` DB SQL credentials.
 - `--read-write`: Use prepared `read_write` DB SQL credentials.
 - `--transport <string>`: SQL execution transport: `https` or `mysql`. \[default: https]
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Run a read-only query
+- Run a statement with the default read-write role:
 
-```bash
-tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --read-only --sql "SELECT 1" --output text
-```
+    ```bash
+    # Use the default prepared role for normal application reads and writes.
+    tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --sql "INSERT INTO app.events(message) VALUES ('ready')"
+    ```
 
-### Run an administrative statement
+- Run a read-only query:
 
-```bash
-tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --admin --sql "CREATE DATABASE IF NOT EXISTS app"
-```
+    ```bash
+    # Prevent the statement from using read-write or admin credentials.
+    tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --read-only --sql "SELECT 1 AS ready" --output text
+    ```
+
+- Run an administrative statement:
+
+    ```bash
+    # Use the admin role for schema creation or privilege management.
+    tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --admin --sql "CREATE DATABASE IF NOT EXISTS app"
+    ```
+
+- Use the MySQL fallback transport:
+
+    ```bash
+    # Open a one-shot MySQL connection when the HTTPS SQL API is unsuitable.
+    tdc db execute-sql-statement --db-cluster-id "<cluster-id>" --transport mysql --sql "SELECT CURRENT_TIMESTAMP"
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)

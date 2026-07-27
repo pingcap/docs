@@ -9,7 +9,7 @@ Creates a time-limited delegated grant for one agent and scope.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -40,20 +40,26 @@ tdc fs-vault create-grant
 - `--help`: Display help information.
 - `--label-hint <string>`: Optional grant label hint.
 - `--token-only`: Print only the delegated bearer token.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a read grant
+- Create a temporary read grant:
 
-```bash
-tdc fs-vault create-grant --file-system-name workspace --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m
-```
+    ```bash
+    # Limit an agent to one secret field for ten minutes.
+    tdc fs-vault create-grant --file-system-name workspace --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m
+    ```
 
-### Create a token-only grant for CI
+- Return only the delegated token:
 
-```bash
-tdc fs-vault create-grant --file-system-name workspace --agent-id ci-agent --scope api-dev/TOKEN --permission read --ttl 5m --token-only
-```
+    ```bash
+    # Produce token-only output for injection into an isolated CI job.
+    tdc fs-vault create-grant --file-system-name workspace --agent-id ci-agent --scope api-dev/TOKEN --permission read --ttl 5m --token-only
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)

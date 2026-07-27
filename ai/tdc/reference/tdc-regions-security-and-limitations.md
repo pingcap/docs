@@ -1,19 +1,19 @@
 ---
-title: tdc Regions, Security, and Limitations
-summary: Reference supported regions, authentication boundaries, platform dependencies, Preview constraints, and Filesystem companion behavior.
+title: TiDB Cloud CLI Regions, Security, and Limitations
+summary: Reference supported regions, authentication boundaries, platform dependencies, preview constraints, and Filesystem companion behavior.
 ---
 
-# tdc Regions, Security, and Limitations
+# TiDB Cloud CLI Regions, Security, and Limitations
 
-This reference describes current placement, authentication, platform, and Preview boundaries.
+This reference describes current placement, authentication, platform, and preview boundaries.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## TiDB Cloud regions
 
-tdc accepts one canonical region code:
+The TiDB Cloud CLI accepts one canonical region code:
 
 | Canonical code | Provider | Location |
 | --- | --- | --- |
@@ -24,7 +24,7 @@ tdc accepts one canonical region code:
 | `aws-ap-southeast-1` | AWS | Singapore |
 | `ali-ap-southeast-1` | Alibaba Cloud | Singapore |
 
-Alibaba Cloud currently supports only Singapore in tdc. Users cannot configure raw service URLs.
+Alibaba Cloud currently supports only the Singapore region in the TiDB Cloud CLI. Users cannot configure raw service URLs.
 
 ## Filesystem regions
 
@@ -37,7 +37,7 @@ Filesystem endpoint availability is resolved from the hosted Drive9 region manif
 | AWS | `aws-us-west-2` |
 | Alibaba Cloud | `ali-ap-southeast-1` |
 
-The hosted manifest is authoritative and can change during Preview. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement appears in the manifest.
+The hosted manifest is authoritative and can change during preview. A profile in another TiDB Cloud region can manage Starter databases but receives an unsupported Filesystem endpoint error until that placement appears in the manifest.
 
 ## Credential requirements
 
@@ -61,7 +61,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.tdc/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Grant Docker access to `/dev/fuse`, `SYS_ADMIN`, and an unconfined AppArmor profile only to dedicated, trusted containers. These settings reduce container isolation.
-- Review local operation logs before sharing diagnostics. tdc redacts known secret classes, but SQL text, resource names, paths, and operational context can still be sensitive.
+- Review local operation logs before sharing diagnostics. `tdc` redacts known secret classes, but SQL text, resource names, paths, and operational context can still be sensitive.
 
 ## Mount platform limitations
 
@@ -71,9 +71,9 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 | Linux | FUSE | Requires FUSE3 and `/dev/fuse`; explicit WebDAV requires `davfs2` |
 | Windows | WebDAV | Requires the WebClient service and a drive-letter mount path; FUSE and vault mount are unavailable |
 
-FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. tdc does not fall back to a separate native mount implementation.
+FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. The TiDB Cloud CLI does not fall back to a separate native mount implementation.
 
-Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path under `$HOME` or `/mnt`; `/workspace` requires an explicit local AppArmor rule even when tdc runs as root.
+Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path under `$HOME` or `/mnt`; `/workspace` requires an explicit local AppArmor rule even when `tdc` runs as root.
 
 ## Durability limitations
 
@@ -82,22 +82,22 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - `drain-file-system` is a FUSE-only online durability barrier that leaves the mount active.
 - Abruptly killing the mount process or deleting a machine can lose uncommitted memory/write-back state.
 - The default coding-agent mount profile stores dependency trees, generated output, caches, and Git internals locally. Local-only data disappears when its disk disappears unless it is packed or otherwise preserved.
-- A running mount remains on the companion version loaded at mount time. Unmount and remount after updating tdc.
+- A running mount remains on the companion version loaded at mount time. Unmount and remount after updating the TiDB Cloud CLI.
 - Remote-committed Filesystem data survives client or sandbox deletion; deleting the machine does not delete the remote resource.
 
 ## Product limitations
 
-- tdc is Preview and command contracts can change.
+- The TiDB Cloud CLI is in preview, and command contracts can change.
 - Database management targets TiDB Cloud Starter, not every TiDB Cloud cluster tier.
 - SQL execution accepts one statement per invocation.
 - Read-write is the default SQL role; use explicit role flags in security-sensitive automation.
 - Journals are append-only and the current public command surface has no journal delete command.
 - Filesystem resource list and describe commands operate on the local registry; they are not an organization-wide discovery API.
 - Telemetry commands, serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
-- tdc depends on its installed `tdc-drive9` companion for all public Filesystem runtime behavior.
+- The TiDB Cloud CLI depends on its installed `tdc-drive9` companion for all public Filesystem runtime behavior.
 
 ## Related documentation
 
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
-- [Troubleshoot tdc](/ai/tdc/reference/tdc-troubleshooting.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md)

@@ -1,15 +1,15 @@
 ---
-title: tdc organization Command Reference
-summary: Reference the tdc organization command tree, project listing inputs, output, and examples.
+title: TiDB Cloud Organization CLI Command Reference
+summary: Reference the `tdc organization` command tree, project listing inputs, output, and examples.
 ---
 
-# tdc organization Command Reference
+# TiDB Cloud Organization CLI Command Reference
 
 Use `tdc organization` to inspect the projects accessible to the configured TiDB Cloud API key.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Command tree
 
@@ -69,5 +69,5 @@ tdc db create-db-cluster \
 
 ## What's next
 
-- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

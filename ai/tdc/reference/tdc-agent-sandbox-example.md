@@ -5,11 +5,11 @@ summary: Provision a Filesystem on a trusted machine and give a clean agent sand
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox
 
-This example gives an ephemeral coding agent a durable workspace without copying a user's complete tdc configuration into the sandbox.
+This example gives an ephemeral coding agent a durable workspace without copying a user's complete TiDB Cloud CLI configuration into the sandbox.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The agent problem
 
@@ -19,14 +19,14 @@ Coding agents often start in clean, short-lived sandboxes. The local disk disapp
 
 A sandbox-local directory is fast but not durable or shared. Generic object-storage APIs require application-specific download and upload logic instead of ordinary file operations. Giving every sandbox the user's complete cloud credentials solves access at the cost of a broader security boundary.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token, region code, and Filesystem name, and can immediately use data-plane, mount, Git, journal, and vault workflows without `tdc configure`. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
 
 ## Prerequisites
 
-- Install and configure tdc on a trusted machine.
-- Install tdc in the sandbox. The release installer includes `tdc-drive9`.
+- Install and configure the TiDB Cloud CLI on a trusted machine.
+- Install the TiDB Cloud CLI in the sandbox. The release installer includes `tdc-drive9`.
 - Use a secure secret manager or encrypted sandbox input for token transfer.
 
 ## Step 1. Provision on the trusted machine
@@ -113,5 +113,5 @@ tdc fs delete-file-system \
 
 ## What's next
 
-- [tdc fs Command Reference](/ai/tdc/reference/tdc-filesystem.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

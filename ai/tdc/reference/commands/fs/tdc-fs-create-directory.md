@@ -9,7 +9,7 @@ Creates a remote directory. The command alias is `tdc fs mkdir`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -32,20 +32,19 @@ tdc fs create-directory
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--mode <string>`: The directory mode as an octal value such as 0755.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Create a directory
+- Create a remote directory:
 
-```bash
-tdc fs create-directory --file-system-name workspace --path /reports/archive --mode 0755
-```
+    ```bash
+    # Create the directory with explicit POSIX permission metadata.
+    tdc fs create-directory --file-system-name workspace --path /reports/archive --mode 0755
+    ```
 
-### Preview directory creation with the alias
+## Related documentation
 
-```bash
-tdc fs mkdir --file-system-name workspace --path /reports/review --dry-run
-```
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

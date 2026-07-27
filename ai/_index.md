@@ -16,12 +16,12 @@ Get up and running quickly with TiDB's AI capabilities.
 | [Get Started with Python](/ai/quickstart-via-python.md) | Build your first AI application with TiDB in minutes using Python. |
 | [Get Started with SQL](/ai/quickstart-via-sql.md) | Quick start guide for vector search using SQL. |
 
-### TiDB Cloud CLI (tdc) (Preview)
+### TiDB Cloud CLI (Preview)
 
 | Document | Description |
 | --- | --- |
-| [tdc Overview](/ai/tdc/tdc-overview.md) | Learn when to use tdc, how it differs from the legacy ticloud CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
-| [Get Started with tdc](/ai/tdc/tdc-quick-start.md) | Install and configure tdc, then complete a first database or Filesystem operation. |
+| [TiDB Cloud Command Line Interface Overview](/ai/tdc/tdc-overview.md) | Learn when to use the TiDB Cloud CLI, how it differs from the `ticloud` CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
+| [Get Started with TiDB Cloud CLI](/ai/tdc/tdc-quick-start.md) | Install and configure the TiDB Cloud CLI, then complete a first database or Filesystem operation. |
 
 ## Concepts
 
@@ -83,16 +83,16 @@ Technical reference documentation for TiDB's AI and vector search features.
 | [Performance Tuning](/ai/reference/vector-search-improve-performance.md) | Optimize vector search performance. |
 | [Limitations](/ai/reference/vector-search-limitations.md) | Current limitations and constraints. |
 
-### TiDB Cloud CLI (tdc) (Preview)
+### TiDB Cloud CLI (Preview)
 
-The command reference follows the two-level tdc command tree. Every command has a dedicated page with its syntax and examples. Expand **Command Reference** in the documentation navigation to browse commands by family.
+The command reference follows the two-level `tdc` command tree. Every command has a dedicated page with its syntax and examples. Expand **Command Reference** in the documentation navigation to browse commands by family.
 
 #### Command reference
 
 | Document | Description |
 | --- | --- |
-| [tdc Overview](/ai/tdc/tdc-overview.md) | Decide when to use tdc and understand its scope relative to ticloud and the TiDB Cloud console. |
-| [CLI Syntax and Global Behavior](/ai/tdc/reference/tdc-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
+| [TiDB Cloud Command Line Interface Overview](/ai/tdc/tdc-overview.md) | Decide when to use the TiDB Cloud CLI and understand its scope relative to `ticloud` and the TiDB Cloud console. |
+| [TiDB Cloud CLI Command Reference](/ai/tdc/reference/tdc-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
 | [`tdc configure`](/ai/tdc/reference/commands/tdc/tdc-configure.md) | Configure a local profile interactively or non-interactively. |
 | [`tdc update`](/ai/tdc/reference/commands/tdc/tdc-update.md) | Check for and install release updates. |
 | [`tdc organization list-projects`](/ai/tdc/reference/commands/organization/tdc-organization-list-projects.md) | List accessible TiDB Cloud projects. |
@@ -101,9 +101,9 @@ The command reference follows the two-level tdc command tree. Every command has 
 | [`tdc fs-git clone-git-workspace`](/ai/tdc/reference/commands/fs-git/tdc-fs-git-clone-git-workspace.md) | Start with the Filesystem Git command reference. |
 | [`tdc fs-journal create-journal`](/ai/tdc/reference/commands/fs-journal/tdc-fs-journal-create-journal.md) | Start with the Filesystem journal command reference. |
 | [`tdc fs-vault create-secret`](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-create-secret.md) | Start with the Filesystem Vault command reference. |
-| [Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
-| [Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and Preview constraints. |
-| [Troubleshooting](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
+| [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
+| [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and preview constraints. |
+| [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
 
 #### Scenarios for users and automation
 
@@ -112,7 +112,7 @@ The command reference follows the two-level tdc command tree. Every command has 
 | [Daily Workflow](/ai/tdc/reference/tdc-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
 | [Query SQL with Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
 | [Share a Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
-| [Hand Off CI Artifacts Between Jobs](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete tdc profile. |
+| [Hand Off CI Artifacts Between Jobs](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete TiDB Cloud CLI profile. |
 
 #### Scenarios for AI agents
 

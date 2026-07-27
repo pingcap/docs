@@ -1,6 +1,6 @@
 ---
 title: Query TiDB Cloud Starter with Explicit SQL Roles
-summary: Prepare tdc-managed SQL users and run read-only, read-write, and admin statements with clear privilege intent.
+summary: Prepare TiDB Cloud CLI-managed SQL users and run read-only, read-write, and admin statements with explicit privilege intent.
 ---
 
 # Query TiDB Cloud Starter with Explicit SQL Roles
@@ -9,7 +9,7 @@ This example lets an agent perform schema, data, and verification work while mak
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## The agent problem
 
@@ -19,13 +19,13 @@ An agent that can inspect data often also needs to apply a migration or update a
 
 TiDB supports SQL privileges, but a conventional client session uses the privileges of the one credential used to connect. Users must create, store, and switch among credentials themselves, and an agent can silently keep using an overly privileged connection across task phases.
 
-## How tdc changes the workflow
+## How TiDB Cloud CLI changes the workflow
 
 `tdc db create-db-sql-users` creates stable read-only, read-write, and admin identities and stores their credentials locally. Each `execute-sql-statement` invocation selects one role explicitly, uses the corresponding credential, and executes one statement. The agent can therefore use admin for schema changes, read-write for data changes, and read-only for verification without handling passwords directly.
 
 ## Prerequisites
 
-- Configure tdc.
+- Configure `tdc`.
 - Select an active Starter cluster ID.
 
 ## Step 1. Prepare users
@@ -105,11 +105,11 @@ rm -f .env.tidb
 ## Security notes
 
 - Use the least privileged explicit role for each statement.
-- tdc accepts one SQL statement per invocation.
+- `tdc` accepts one SQL statement per invocation.
 - HTTPS is the default transport; `--transport mysql` is an explicit fallback.
 - Connection strings and environment output contain credentials.
 
 ## What's next
 
-- [tdc db Command Reference](/ai/tdc/reference/tdc-starter-database.md)
-- [tdc Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)
+- [TiDB Cloud Starter CLI Command Reference](/ai/tdc/reference/tdc-starter-database.md)
+- [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md)

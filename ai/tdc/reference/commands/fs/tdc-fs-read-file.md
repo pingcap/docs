@@ -9,7 +9,7 @@ Writes a remote file or byte range to stdout. The command alias is `tdc fs cat`.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -32,20 +32,26 @@ tdc fs read-file
 - `--help`: Display help information.
 - `--length <int64>`: Byte length for a ranged read.
 - `--offset <int64>`: Zero-based byte offset for a ranged read.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Read a file
+- Read a complete file:
 
-```bash
-tdc fs read-file --file-system-name workspace --path /reports/report.md
-```
+    ```bash
+    # Write the remote file contents directly to standard output.
+    tdc fs read-file --file-system-name workspace --path /reports/report.md
+    ```
 
-### Read a byte range
+- Read a byte range:
 
-```bash
-tdc fs read-file --file-system-name workspace --path /archives/large.bin --offset 1024 --length 4096
-```
+    ```bash
+    # Fetch only the requested range from a large remote object.
+    tdc fs read-file --file-system-name workspace --path /archives/large.bin --offset 1024 --length 4096
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

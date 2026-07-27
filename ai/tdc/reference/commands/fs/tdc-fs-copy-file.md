@@ -9,7 +9,7 @@ Copies files between local paths, remote paths, stdin, and stdout. The command a
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -56,20 +56,54 @@ tdc fs copy-file
 - `--to-local <string>`: The local destination path.
 - `--to-remote <string>`: The destination path in the TiDB Cloud file system.
 - `--to-stdout`: Write `--from-remote` to stdout.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Upload a local file
+- Upload a local file:
 
-```bash
-tdc fs copy-file --file-system-name workspace --from-local ./report.md --to-remote /reports/report.md
-```
+    ```bash
+    # Copy a local report into the selected remote Filesystem.
+    tdc fs copy-file --file-system-name workspace --from-local ./report.md --to-remote /reports/report.md
+    ```
 
-### Download a remote file
+- Download a remote file:
 
-```bash
-tdc fs copy-file --file-system-name workspace --from-remote /reports/report.md --to-local ./report.copy.md --create-parents
-```
+    ```bash
+    # Create missing local parent directories while downloading the file.
+    tdc fs copy-file --file-system-name workspace --from-remote /reports/report.md --to-local ./downloads/report.md --create-parents
+    ```
+
+- Copy a remote directory:
+
+    ```bash
+    # Duplicate a complete directory tree without downloading it locally.
+    tdc fs copy-file --file-system-name workspace --from-remote /reports --to-remote /archive/reports --recursive
+    ```
+
+- Resume a large upload:
+
+    ```bash
+    # Continue an interrupted local-to-remote transfer instead of restarting it.
+    tdc fs copy-file --file-system-name workspace --from-local ./large.bin --to-remote /artifacts/large.bin --resume
+    ```
+
+- Append to a remote log:
+
+    ```bash
+    # Add local log data to the existing remote object efficiently.
+    tdc fs copy-file --file-system-name workspace --from-local ./tail.log --to-remote /logs/app.log --append
+    ```
+
+- Stream standard input to the Filesystem:
+
+    ```bash
+    # Upload generated content without creating an intermediate local file.
+    printf 'ready\n' | tdc fs copy-file --file-system-name workspace --from-stdin --to-remote /status.txt --tag source=stdin --description "generated status"
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -9,7 +9,7 @@ Lists changes in one layer, optionally up to a sequence number.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -30,20 +30,26 @@ tdc fs diff-layer
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--max-seq <int64>`: The highest layer sequence to include; 0 includes all layers.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Show all layer changes
+- Show all layer changes:
 
-```bash
-tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>"
-```
+    ```bash
+    # Return the complete ordered change set for the selected layer.
+    tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>"
+    ```
 
-### Show changes through a sequence number
+- Show an earlier layer view:
 
-```bash
-tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>" --max-seq 100
-```
+    ```bash
+    # Limit the diff to changes at or before a sequence number.
+    tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>" --max-seq 100
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)

@@ -9,7 +9,7 @@ Revokes one delegated Filesystem Vault grant.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -33,21 +33,20 @@ tdc fs-vault delete-grant
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--reason <string>`: Optional revoke reason.
-- `--revoked-by <string>`: Actor label for the revoke audit entry. \[default: tdc]
-- `--version`: Display tdc version information.
+- `--revoked-by <string>`: Actor label for the revoke audit entry. \[default: `tdc`]
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Revoke a grant with a reason
+- Revoke a grant:
 
-```bash
-tdc fs-vault delete-grant --file-system-name workspace --grant-id "<grant-id>" --reason rotated
-```
+    ```bash
+    # Invalidate the delegated token and record the revocation reason.
+    tdc fs-vault delete-grant --file-system-name workspace --grant-id "<grant-id>" --reason rotated
+    ```
 
-### Preview grant revocation
+## Related documentation
 
-```bash
-tdc fs-vault delete-grant --file-system-name workspace --grant-id "<grant-id>" --revoked-by operator --dry-run
-```
+- [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/tdc/reference/tdc-filesystem-vault.md)

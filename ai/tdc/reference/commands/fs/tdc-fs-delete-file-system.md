@@ -9,7 +9,7 @@ Requests asynchronous Filesystem deletion and removes its local registration.
 
 > **Note:**
 >
-> tdc is currently in Preview. Its features and command-line interface might change without prior notice.
+> The TiDB Cloud Command Line Interface — `tdc` — is currently in preview. Its features and command-line interface might change without prior notice.
 
 ## Syntax
 
@@ -28,20 +28,26 @@ tdc fs delete-file-system
 - `--dry-run`: Validate the request without applying changes.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
-- `--version`: Display tdc version information.
+- `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-cli-reference.md#global-options).
 
 ## Examples
 
-### Preview file system deletion
+- Delete a Filesystem:
 
-```bash
-tdc fs delete-file-system --file-system-name workspace --dry-run
-```
+    ```bash
+    # Request asynchronous deletion and remove its local registration after acceptance.
+    tdc fs delete-file-system --file-system-name workspace
+    ```
 
-### Delete a file system
+- Preview Filesystem deletion:
 
-```bash
-tdc fs delete-file-system --file-system-name workspace
-```
+    ```bash
+    # Validate the selected Filesystem without sending the deletion request.
+    tdc fs delete-file-system --file-system-name workspace --dry-run
+    ```
+
+## Related documentation
+
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/tdc/reference/tdc-filesystem.md)
