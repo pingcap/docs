@@ -33,7 +33,7 @@ TiProxyは、以下のシナリオではクライアント接続を維持でき�
 
 その他のシナリオについては、 [TiProxyの制限事項](https://docs.pingcap.com/tidb/stable/tiproxy-overview#limitations)を参照してください。
 
-## 請求する {#billing}
+## 請求 {#billing}
 
 TiProxyでは、2種類のコストが導入されています。
 
