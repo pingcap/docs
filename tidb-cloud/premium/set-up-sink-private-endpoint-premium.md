@@ -5,7 +5,7 @@ summary: Learn how to set up a private endpoint for changefeeds.
 
 # Set Up Private Endpoint for Changefeeds
 
-This document describes how to create a private endpoint for changefeeds in your {{{ .premium }}} instances, enabling you to securely stream data to self-hosted Kafka or MySQL through private connectivity.
+This document describes how to create a private endpoint for changefeeds in your {{{ .premium }}} instances, enabling you to securely stream data to self-hosted Kafka, AWS MSK Provisioned, or MySQL through private connectivity.
 
 ## Prerequisites
 
@@ -28,12 +28,13 @@ Private endpoints leverage the **Private Link** technology from cloud providers,
 <SimpleTab>
 <div label="AWS">
 
-If your changefeed downstream service is hosted on AWS, collect the following information:
+If your changefeed downstream service is hosted on AWS, collect the following information based on your connection type:
 
-- The name of the Private Endpoint Service for your downstream service
-- The availability zones (AZs) where your downstream service is deployed
+- **AWS Endpoint Service**: The name of the Private Endpoint Service for your downstream service and the availability zones (AZs) where your downstream service is deployed.
 
-If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
+  If the Private Endpoint Service is not available for your downstream service, follow [Step 2. Expose the Kafka cluster as Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service) to set up the load balancer and the Private Link Service.
+
+- **AWS MSK Provisioned**: The MSK Cluster ARN of your provisioned MSK cluster. To learn about creating an MSK Provisioned cluster, see [Set Up AWS MSK Provisioned Private Link Service](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
 
 </div>
 
@@ -74,8 +75,10 @@ The configuration steps vary depending on the cloud provider where your instance
 <SimpleTab>
 <div label="AWS">
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for Changefeed** section.
-2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
+### AWS Endpoint Service
+
+1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
@@ -86,6 +89,13 @@ The configuration steps vary depending on the cloud provider where your instance
     - To use your own **Custom** domain for advertised listeners, switch the domain type to **Custom**, enter the root domain in the **Custom Domain** field, click **Check**, and then specify the broker subdomains for each availability zone.
 
 8. Click **Create** to validate the configurations and create the private endpoint.
+
+### AWS MSK Provisioned
+
+1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
+3. Enter the **MSK Cluster ARN** of your provisioned MSK cluster. To learn about creating an MSK Provisioned cluster for changefeeds, see [Set Up AWS MSK Provisioned Private Link Service](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
+4. Click **Create** to validate the configurations and create the private endpoint.
 
 </div>
 
