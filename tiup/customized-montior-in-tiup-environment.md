@@ -74,13 +74,13 @@ After the preceding configuration is done, when you deploy, scale out, scale in,
 
 ### Customize Prometheus external labels
 
-Starting in TiUP v1.17.0, you can configure Prometheus global `external_labels` in the topology file.
+Starting from TiUP v1.17.0, you can configure Prometheus global `external_labels` in the topology file.
 
-1. Open the topology.yaml file of the TiDB cluster.
+1. Open the `topology.yaml` file of the TiDB cluster.
 
 2. In the `monitoring_servers` configuration, add the `external_labels` field.
 
-    The following is a configuration example of `monitoring_servers` in the topology.yaml file:
+    The following is a configuration example of `monitoring_servers` in the `topology.yaml` file:
 
     ```yaml
     monitoring_servers:
@@ -90,9 +90,11 @@ Starting in TiUP v1.17.0, you can configure Prometheus global `external_labels` 
         region: us-east-1
     ```
 
-3. Do not configure the reserved labels `cluster` or `monitor`, and do not use label names that start with `__`. All label names must conform to the Prometheus label name rules.
+3. Do not configure the reserved labels `cluster` or `monitor`, and do not use label names that start with `__`. All label names must conform to the Prometheus label naming rules.
 
-After the preceding configuration is done, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP renders the `external_labels` field into the Prometheus global `external_labels` configuration. If the topology file is opened by an older TiUP version that does not support this field, topology parsing fails instead of ignoring the field.
+After completing the preceding configuration, when you deploy, scale out, scale in, or reload a TiDB cluster, TiUP renders the `external_labels` field into the Prometheus global `external_labels` configuration.
+
+If you use an earlier version of TiUP that does not support this field to open the topology file, TiUP fails to parse the topology instead of ignoring the field.
 
 ## Customize Grafana configurations
 
