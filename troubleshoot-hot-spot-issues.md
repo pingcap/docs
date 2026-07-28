@@ -83,7 +83,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。1 `INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
+[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
 
     SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
     SHARD_ROW_ID_BITS = 6 # Represents 64 shards.

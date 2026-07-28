@@ -17,7 +17,7 @@ summary: 間違ったインデックスの問題を解決する方法を学び�
 
 ## 統計の健康 {#statistics-health}
 
-まず統計の[テーブルの健全性状態](/statistics.md#health-state-of-tables)確認し、次にさまざまなヘルス状態に応じてこの問題を解決します。
+まず統計の[テーブルの健全性状態](/statistics.md#health-state-of-tables)を確認し、次にさまざまなヘルス状態に応じてこの問題を解決します。
 
 ### 健康状態が低い {#low-health-state}
 
@@ -27,9 +27,9 @@ summary: 間違ったインデックスの問題を解決する方法を学び�
 
 ヘルス状態がほぼ100%であることは、 `ANALYZE`ステートメントが完了間近、または少し前に完了したことを示しています。この場合、インデックスの誤りは、TiDBの行数推定ロジックに関連している可能性があります。
 
-同値クエリの場合、原因は[カウントミニマムスケッチ](/statistics.md#count-min-sketch)ある可能性があります。Count-Min Sketchが原因であるかどうかを確認し、適切な解決策を実行できます。
+同値クエリの場合、原因は[カウントミニマムスケッチ](/statistics.md#count-min-sketch)である可能性があります。Count-Min Sketchが原因であるかどうかを確認し、適切な解決策を実行できます。
 
-上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザヒントを使用してインデックスを強制的に選択できます（詳細は[使用インデックス](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)参照）。また、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリの動作を非侵入的に変更することもできます。
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザヒントを使用してインデックスを強制的に選択できます（詳細は[使用インデックス](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照）。また、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリの動作を非侵入的に変更することもできます。
 
 ### その他の状況 {#other-situations}
 

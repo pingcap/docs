@@ -65,7 +65,7 @@ resolved-ts）は、この値より小さいタイムスタンプを持つすべ
 
 ### <code>tikv-ctl</code>を使用して診断する {#use-code-tikv-ctl-code-to-diagnose}
 
-`tikv-ctl`リゾルバの最新の詳細情報を提供し、 `RegionReadProgress`リゾルバの最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
+`tikv-ctl`はリゾルバと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 
 次に例を示します。
 
