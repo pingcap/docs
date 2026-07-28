@@ -291,7 +291,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 ### Query optimization
 
 - Queries spanning IA partitions are recommended to cover **no more than 3 partitions**; exceeding this may cause significant response time degradation
-- Avoid running many `SELECT *` full table scans on IA tables simultaneously
+- Avoid running concurrent `SELECT *` full-table scans on IA tables simultaneously
 - Monitor IA remote read volume via `EXPLAIN ANALYZE` and slow queries, and adjust accordingly
 
 ### Switch-back considerations
