@@ -3,7 +3,7 @@ title: Tiered Storage Concepts
 summary: Learn about Tiered Storage on TiDB Cloud BYOC/Premium/Essential, including its concepts, architecture, use cases, and read amplification.
 ---
 
-# Tiered Storage Concepts
+# Tiered Storage Overview
 
 > **Note:**
 >
@@ -21,7 +21,7 @@ In summary, an IA table is still a regular table from the application layer — 
 
 Key features:
 
-- **Semantic transparency**: All SQL operations — SELECT, INSERT, UPDATE, DELETE — behave identically
+- **Semantic transparency**: All SQL operations, including SELECT, INSERT, UPDATE, and DELETE, retain the same SQL semantics
 - **Cost optimization**: Data is fully stored in low-cost object storage, with only hot data cached locally, which is expected to reduce storage costs by approximately 50% in typical scenarios
 - **Fine-grained control**: Supports both table-level and partition-level granularity; partition-level settings override table-level configuration
 - **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
