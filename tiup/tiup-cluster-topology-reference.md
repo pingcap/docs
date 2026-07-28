@@ -26,8 +26,8 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 -   [tiproxy_servers](#tiproxy_servers) : TiProxyインスタンスの構成。この構成は、TiProxyコンポーネントがデプロイされるマシンを指定します。
 -   [kvcdc_servers](#kvcdc_servers) : インスタンス[TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)の構成。この構成では、TiKV-CDCコンポーネントがデプロイされるマシンを指定します。
 -   [cdc_servers](#cdc_servers) : TiCDCインスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
--   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの設定。この設定は、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)番目のマイクロサービスを有効にするには、 [`global`](#global)のマイクロサービスで`pd_mode: "ms"`マイクロサービスを設定する必要があります）。
--   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの設定。この設定では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)有効にするには、 [`global`](#global)で`pd_mode: "ms"`設定する必要があります）。
+-   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの設定。この設定は、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)を有効にするには、 [`global`](#global)で`pd_mode: "ms"`を設定する必要があります）。
+-   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの設定。この設定では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)を有効にするには、 [`global`](#global)で`pd_mode: "ms"`を設定する必要があります）。
 -   [監視サーバー](#monitoring_servers) : PrometheusとNGMonitoringがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaがデプロイされるマシンを指定します。
 -   [Alertmanagerサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerがデプロイされるマシンを指定します。
@@ -38,9 +38,9 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   `user` : デプロイされたクラスターを起動するために使用するユーザー。デフォルト値は`"tidb"`です。4 フィールドに指定されたユーザーが`<user>`マシン上に存在しない場合、このユーザーは自動的に作成されます。
 
--   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`番目のフィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
+-   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`フィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
 
--   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)使用されます。
+-   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)が使用されます。
 
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。デフォルト値は`22`です。
 
