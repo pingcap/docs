@@ -61,7 +61,7 @@ GROUP BY
 
 ### システムバージョン管理されたテーブル {#system-versioned-tables}
 
-TiDB は[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)サポートしていません。ただし、TiDB は[`AS OF TIMESTAMP`](/as-of-timestamp.md)をサポートしており、システム バージョン管理テーブルの使用例の一部を置き換える可能性があります。
+TiDB は[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)をサポートしていません。ただし、TiDB は[`AS OF TIMESTAMP`](/as-of-timestamp.md)をサポートしており、システム バージョン管理テーブルの使用例の一部を置き換える可能性があります。
 
 影響を受けるテーブルは、以下のステートメントで確認できます。
 
@@ -388,7 +388,7 @@ MariaDBからMariaDBへのレプリケーションのように、最初に初期
 
 ### ステップ4．データをテストする {#step-4-test-your-data}
 
-データがレプリケートされたら、そのデータに対して読み取り専用クエリを実行して検証できます。詳細については、[アプリケーションをテストしてください](#test-your-application)参照してください。
+データがレプリケートされたら、そのデータに対して読み取り専用クエリを実行して検証できます。詳細については、[アプリケーションをテストしてください](#test-your-application)を参照してください。
 
 ### ステップ5．切り替える {#step-5-switch-over}
 

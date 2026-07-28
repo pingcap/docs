@@ -7,7 +7,7 @@ summary: スロークエリログを使用して、問題のあるSQL文を特�
 
 ユーザーがスロークエリを特定し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) （デフォルト値は300ミリ秒）を超えるステートメントを[スロークエリファイル](/tidb-configuration-file.md#slow-query-file)ファイル（デフォルト値は「tidb-slow.log」）に出力します。
 
-TiDBはデフォルトでスロークエリログを有効にしています。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)変更することで、この機能を有効または無効にできます。
+TiDBはデフォルトでスロークエリログを有効にしています。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にできます。
 
 ## 使用例 {#usage-example}
 
@@ -181,7 +181,7 @@ TiKVコプロセッサータスクフィールド：
 -   `tidb_slow_log_rules`が設定されていない場合、スロークエリログのトリガーは引き続き[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (ミリ秒単位) に依存します。
 -   `tidb_slow_log_rules`が設定されている場合、設定済みのルールが優先され、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)は無視されます。
 
-各フィールドの意味、診断値、および背景情報の詳細については、[フィールドの説明](#fields-description)参照してください。
+各フィールドの意味、診断値、および背景情報の詳細については、[フィールドの説明](#fields-description)を参照してください。
 
 ### 統一されたルール構文と型制約 {#unified-rule-syntax-and-type-constraints}
 
@@ -303,7 +303,7 @@ TiKVコプロセッサータスクフィールド：
 
     > **Tip:**
     >
-    > `tidb_slow_log_rules`の時間関連フィールド（ `Query_time`や`Process_time`など）は単位として秒を使用し、小数点を含むことができますが、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)ミリ秒を使用します。
+    > `tidb_slow_log_rules`の時間関連フィールド（ `Query_time`や`Process_time`など）は単位として秒を使用し、小数点を含むことができますが、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)はミリ秒を使用します。
 
 -   [`tidb_slow_log_max_per_sec`](/system-variables.md#tidb_slow_log_max_per_sec-new-in-v856) : 1 秒あたりに書き込めるスロークエリログエントリの最大数を設定します。デフォルト値は`0`です。この変数は v8.5.6 で導入されました。
     -   `0`という値は、1 秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
