@@ -71,7 +71,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
+    4. In the **Database Audit Log Storage Configuration** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
 2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is an IAM policy with the `s3:PutObject` write-only permission.
 
@@ -139,7 +139,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
     2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-    4. In the **Enable Database Audit Logging** dialog, locate the **Google Cloud Service Account ID** section, and record **Service Account ID** for later use.
+    4. In the **Database Audit Log Storage Configuration** dialog, locate the **Google Cloud Service Account ID** section, and record **Service Account ID** for later use.
 
 2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions for objects in the storage bucket exists.
 
@@ -164,7 +164,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 #### Step 3. Enable audit logging
 
-In the TiDB Cloud console, go back to the **Enable Database Audit Logging** dialog box where you got the Google Cloud Service Account ID, and then take the following steps:
+In the TiDB Cloud console, go back to the **Database Audit Log Storage Configuration** dialog box where you got the Google Cloud Service Account ID, and then take the following steps:
 
 1. In the **Bucket URI** field, enter your full GCS bucket name.
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
@@ -230,7 +230,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Settings** > **DB Audit Logging** in the left navigation pane.
 3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
-4. In the **Enable Database Audit Logging** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
+4. In the **Database Audit Log Storage Configuration** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
     - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
     - In the **SAS Token** field, enter the SAS token for accessing the container.
 5. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the container. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
