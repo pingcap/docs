@@ -14,7 +14,7 @@ Syncpoint uses the snapshot feature provided by TiDB and enables TiCDC to mainta
 
 After enabling the Syncpoint feature, you can use [Consistent snapshot read](#consistent-snapshot-read) and [Data consistency validation](#data-consistency-validation).
 
-To enable the Syncpoint feature, set the value of the TiCDC changefeed configuration item `enable-sync-point` to `true` when creating a replication task. After enabling Syncpoint, TiCDC writes the following information to the downstream TiDB cluster:
+To enable the Syncpoint feature, set the value of the changefeed configuration item `enable-sync-point` to `true` when creating a replication task. After enabling Syncpoint, TiCDC writes the following information to the downstream TiDB cluster:
 
 1. During the replication, TiCDC periodically (configured by `sync-point-interval`) aligns snapshots between the upstream and downstream and saves the upstream and downstream TSO correspondences in the downstream `tidb_cdc.syncpoint_v1` table.
 2. During the replication, TiCDC also periodically (configured by `sync-point-interval`) executes `SET GLOBAL tidb_external_ts = @@tidb_current_ts`, which sets a consistent snapshot point that has been replicated in backup clusters.
