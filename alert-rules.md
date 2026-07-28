@@ -410,8 +410,8 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    -   [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)監視し、ストア低速スコアのメトリックを確認します。メトリック値が80を超えるノードを特定し、低速ノードとして検出します。
-    -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
+    -   [**TiKV詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)を監視し、ストア低速スコアのメトリックを確認します。メトリック値が80を超えるノードを特定し、低速ノードとして検出します。
+    -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     -   レイテンシーのタイムアウト制限を増やすには、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)構成項目を大きな値に設定します。
     -   アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
@@ -481,9 +481,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  [**TiKV詳細**&gt; **Raft Propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)監視し、アラートが発生した TiKV ノードのRaftプロポーズが他の TiKV ノードよりも大幅に高いかどうかを確認します。もしそうであれば、この TiKV に 1 つ以上のホットスポットがあることを意味します。ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
-    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
-    3.  [**TiKV詳細**&gt;**Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)見て、 `tick duration`ハイかどうかを確認してください。ハイなら、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval) `"2s"`に設定する必要があります。
+    1.  [**TiKV詳細**&gt; **Raft Propose**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を監視し、アラートが発生した TiKV ノードのRaftプロポーズが他の TiKV ノードよりも大幅に高いかどうかを確認します。もしそうであれば、この TiKV に 1 つ以上のホットスポットがあることを意味します。ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
+    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
+    3.  [**TiKV詳細**&gt;**Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)を見て、 `tick duration`ハイかどうかを確認してください。ハイなら、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval)を `"2s"`に設定する必要があります。
 
 #### `TiKV_write_stall` {#tikv-write-stall}
 
@@ -537,8 +537,8 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    1.  [**TiKV詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)監視し、アラート対象の TiKV ノードの**サーバーあたりの 99% Propose 待機期間**メトリックが他の TiKV ノードと比べて大幅に高いかどうかを確認します。高い場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジューリングが適切に機能しているかどうかを確認する必要があります。
-    2.  [**TiKV詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
+    1.  [**TiKV詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)を監視し、アラート対象の TiKV ノードの**サーバーあたりの 99% Propose 待機期間**メトリックが他の TiKV ノードと比べて大幅に高いかどうかを確認します。高い場合、この TiKV ノードにホットスポットが存在することを示し、ホットスポットのスケジューリングが適切に機能しているかどうかを確認する必要があります。
+    2.  [**TiKV詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     3.  アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 #### `TiKV_coprocessor_request_wait_seconds` {#tikv-coprocessor-request-wait-seconds}
