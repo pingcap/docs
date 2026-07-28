@@ -39,7 +39,7 @@ The audit logging feature is **disabled by default**. To audit a cluster, you mu
 
 ## Enable audit logging
 
-TiDB Cloud supports recording the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
+TiDB Cloud supports writing the audit logs of a TiDB Cloud Dedicated cluster to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the cluster is located.
 
 > **Note:**
 >
@@ -73,7 +73,7 @@ For more information, see [Creating a bucket](https://docs.aws.amazon.com/Amazon
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
     4. In the **Database Audit Log Storage Configuration** dialog, locate the **AWS IAM Policy Settings** section, and record **TiDB Cloud Account ID** and **TiDB Cloud External ID** for later use.
 
-2. In the AWS Management Console, go to **IAM** > **Access Management** > **Policies**, and then check whether there is an IAM policy with the `s3:PutObject` write-only permission.
+2. In the [AWS Management Console](https://console.aws.amazon.com/), go to **IAM** > **Access Management** > **Policies**, and then check whether there is an IAM policy with the `s3:PutObject` write-only permission.
 
     - If yes, record the matched policy for later use.
     - If not, go to **IAM** > **Access Management** > **Policies** > **Create Policy**, and define an IAM policy according to the following policy template.
@@ -141,7 +141,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
     3. On the **DB Audit Logging** page, click **Enable** in the upper-right corner.
     4. In the **Database Audit Log Storage Configuration** dialog, locate the **Google Cloud Service Account ID** section, and record **Service Account ID** for later use.
 
-2. In the Google Cloud console, go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions for objects in the storage bucket exists.
+2. In the [Google Cloud console](https://console.cloud.google.com/), go to **IAM & Admin** > **Roles**, and then check whether a role with the following write-only permissions for objects in the storage bucket exists.
 
     - storage.objects.create
     - storage.objects.delete
