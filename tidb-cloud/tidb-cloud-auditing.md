@@ -349,9 +349,6 @@ All classes of audit logs contain the following information:
 | `TABLES`        | The tables accessed during the operation.                                              |
 | `STATUS_CODE`   | The status code of the audit record. `1` means success, and `0` means failure.                |
 | `KEYSPACE_NAME` | The keyspace name of the audit record.                                                        |
-| `SERVERLESS_TENANT_ID`           | The ID of the serverless tenant that the {{{ .essential }}} instance belongs to.                 |
-| `SERVERLESS_PROJECT_ID`          | The ID of the serverless project that the {{{ .essential }}} instance belongs to.                |
-| `SERVERLESS_CLUSTER_ID`          | The ID of the serverless {{{ .essential }}} instance that the audit record belongs to.           |
 | `REASON`        | The error message of the audit record. Only recorded when an error occurs during the operation.|
 
 ### SQL statement information
