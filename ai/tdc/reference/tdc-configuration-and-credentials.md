@@ -18,11 +18,6 @@ summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths,
 [default]
 region_code = "aws-us-east-1"
 project_id = "..."
-
-[logging]
-enabled = true
-max_file_mb = 10
-max_files = 5
 ```
 
 ```toml
@@ -33,6 +28,20 @@ tdc_private_key = "..."
 ```
 
 The credentials file uses owner-only permissions where the platform supports POSIX modes.
+
+Global preferences are separate from profiles and credentials:
+
+```toml
+# ~/.tdc/.preferences
+schema_version = 1
+
+[logging]
+enabled = true
+max_file_mb = 10
+max_files = 5
+```
+
+The dot-prefixed preferences file is optional, hidden from ordinary directory listings, and applies to every profile. Fresh installs and `tdc configure` do not create it. Reading a user-created file does not rewrite its permissions, comments, or formatting.
 
 ## Profile selection
 
@@ -168,14 +177,18 @@ Disable it for one process:
 TDC_LOGGING=off tdc db list-db-clusters
 ```
 
-Or configure:
+Or create or edit `~/.tdc/.preferences`:
 
 ```toml
+schema_version = 1
+
 [logging]
 enabled = false
 ```
 
-Environment values `off`, `false`, `0`, and `no` disable logging; `on`, `true`, `1`, and `yes` enable it. Environment takes precedence over config.
+Environment values `off`, `false`, `0`, and `no` disable logging; `on`, `true`, `1`, and `yes` enable it. Environment takes precedence over settings. Invalid settings disable operation logging without failing the requested command.
+
+Existing installations that stored `[logging]` in `~/.tdc/config` migrate those values to `~/.tdc/.preferences` automatically. The migration preserves profiles and credentials. `tdc update` does not read or write settings, profiles, credentials, operation logs, or other state under `~/.tdc/`.
 
 ## Sensitive values
 

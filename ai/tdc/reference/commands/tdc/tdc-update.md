@@ -5,7 +5,7 @@ summary: Check for or install a TiDB Cloud CLI release update.
 
 # tdc update
 
-Checks for or installs a TiDB Cloud CLI release update. This command does not read or modify profiles and credentials.
+Checks for or installs a TiDB Cloud CLI release update. This command does not read or modify settings, profiles, credentials, operation logs, or other state under `~/.tdc/`.
 
 > **Note:**
 >

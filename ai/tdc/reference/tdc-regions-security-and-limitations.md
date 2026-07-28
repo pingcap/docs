@@ -61,7 +61,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.tdc/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Grant Docker access to `/dev/fuse`, `SYS_ADMIN`, and an unconfined AppArmor profile only to dedicated, trusted containers. These settings reduce container isolation.
-- Review local operation logs before sharing diagnostics. `tdc` redacts known secret classes, but SQL text, resource names, paths, and operational context can still be sensitive.
+- Review local operation logs before sharing diagnostics. The logs exclude SQL text, paths, payloads, and credential values, but command names, flag names, profile and region metadata, status codes, and operational timing can still be sensitive.
 
 ## Mount platform limitations
 
