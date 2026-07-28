@@ -110,7 +110,7 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 1. In the **Bucket URI** field, enter the URI of your S3 bucket where the audit log files are to be written.
 2. In the **Bucket Region** drop-down list, select the AWS region where the bucket locates.
 3. In the **Role ARN** field, fill in the Role ARN value that you copied in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
-4. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
+4. Click **Test Connection and Next** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for database audit logging settings.
 
 > **Note:**
 >
@@ -168,7 +168,7 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 
 1. In the **Bucket URI** field, enter your full GCS bucket name.
 2. In the **Bucket Region** field, select the GCS region where the bucket locates.
-3. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
+3. Click **Test Connection and Next** to verify whether TiDB Cloud can access and write to the bucket. If the connection is successful, the dialog navigates to the next step for database audit logging settings.
 
 > **Note:**
 >
@@ -233,7 +233,7 @@ For more information, see [Create an Azure storage account](https://learn.micros
 4. In the **Database Audit Log Storage Configuration** dialog, provide the blob URL and SAS token that you obtained from [Step 2. Configure Azure Blob access](#step-2-configure-azure-blob-storage-access):
     - In the **Blob URL** field, enter the URL of the container where audit logs will be stored.
     - In the **SAS Token** field, enter the SAS token for accessing the container.
-5. Click **Test Connection and Save** to verify whether TiDB Cloud can access and write to the container. If the connection is successful, the dialog navigates to the next step for **Database Audit Logging Settings**.
+5. Click **Test Connection and Next** to verify whether TiDB Cloud can access and write to the container. If the connection is successful, the dialog navigates to the next step for database audit logging settings.
 
 > **Note:**
 >
@@ -241,11 +241,15 @@ For more information, see [Create an Azure storage account](https://learn.micros
 
 ## Configure database audit logging settings
 
-After configuring storage for your cloud provider, complete the **Database Audit Logging Settings** step:
+After configuring storage for your cloud provider, complete the step for database audit logging settings:
 
 1. Set the log file rotation policy.
 
     You can rotate audit log files based on either file size or time interval. When either condition is met, TiDB Cloud generates a new audit log file.
+
+    >**Note:**
+    >
+    > Log file rotation based on time interval only applies to TiDB v8.5.2 or later. If the TiDB  version of your TiDB Cloud Dedicated cluster is earlier than v8.5.2, you can only rotate audit log files based on file size.
 
 2. Configure log redaction.
 
