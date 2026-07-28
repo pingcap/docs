@@ -108,7 +108,7 @@ TiKV上に古いMVCCバージョンが多すぎる場合、またはGCのMVCC履
     # Total_keys: 2215187529 Processed_keys: 1108056368
     ...
 
-TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)ご覧ください。
+TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)をご覧ください。
 
 ### 他の主要ステージは遅い {#other-key-stages-are-slow}
 
@@ -157,7 +157,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDBの実行プランは正しいものの、実行速度が遅い場合を考えてみましょう。このような問題を解決するには、SQL文の`EXPLAIN ANALYZE`の結果に応じてパラメータを調整するか、ヒントを使用します。
 
-実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)参照してください。
+実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)を参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 

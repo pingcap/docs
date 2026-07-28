@@ -53,7 +53,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--initialize-sql-file` {#initialize-sql-file}
 
--   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)参照。
+-   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
 -   デフォルト: `""`
 
 ## `-L` {#l}

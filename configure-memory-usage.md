@@ -5,14 +5,14 @@ summary: クエリのメモリクォータを構成して OOM (メモリ不足) 
 
 # TiDB メモリ制御 {#tidb-memory-control}
 
-現在、TiDBは単一のSQLクエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に、OOM（メモリ不足）を防止したり、OOMのトラブルシューティングを行うためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) 、クエリがメモリ制限に達した場合に実行するアクションを指定します。
+現在、TiDBは単一のSQLクエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に、OOM（メモリ不足）を防止したり、OOMのトラブルシューティングを行うためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達した場合に実行するアクションを指定します。
 
 -   値が`LOG`の場合、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達したときにクエリは引き続き実行されますが、TiDB はログにエントリを出力します。
 -   値が`CANCEL`の場合、TiDBは[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後にSQLクエリの実行を停止し、クライアントにエラーを返します。エラー情報には、SQL実行プロセスでメモリを消費する各物理実行演算子のメモリ使用量が明確に表示されます。
 
 ## クエリのメモリクォータを設定する {#configure-the-memory-quota-of-a-query}
 
-システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、クエリの制限をバイト単位で設定します。使用例：
+システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。使用例：
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8GB:
@@ -90,7 +90,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     -   [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)
     -   [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)
 
-アラームのステータスファイルが過度に蓄積されるのを防ぐため、TiDBはデフォルトで、直近5回のアラーム中に生成されたステータスファイルのみを保持します。この数は、システム変数[`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)設定することで調整できます。
+アラームのステータスファイルが過度に蓄積されるのを防ぐため、TiDBはデフォルトで、直近5回のアラーム中に生成されたステータスファイルのみを保持します。この数は、システム変数[`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)を設定することで調整できます。
 
 次の例では、アラームをトリガーするメモリを大量に消費する SQL ステートメントを構築します。
 

@@ -20,7 +20,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 ## データのインポート {#data-import}
 
-`IMPORT INTO`ステートメントはデータインポートタスク用に設計されています。これにより、CSV、SQL、PARQUET などの形式のデータを空の TiDB テーブルに迅速にインポートでき、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)別途デプロイする必要はありません。
+`IMPORT INTO`ステートメントはデータインポートタスク用に設計されています。これにより、CSV、SQL、PARQUET などの形式のデータを空の TiDB テーブルに迅速にインポートでき、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を別途デプロイする必要はありません。
 
 ### 主なメリット {#key-benefits}
 

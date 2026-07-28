@@ -113,7 +113,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## 浮動小数点型 {#floating-point-types}
 
-TiDBは、 `FLOAT` 、 `DOUBLE`含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [浮動小数点型（近似値） - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)を参照してください。
+TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [浮動小数点型（近似値） - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)を参照してください。
 
 次の表はフィールドの説明をまとめたものです。
 

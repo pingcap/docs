@@ -98,7 +98,7 @@ TRACE SELECT * FROM users;
 12 rows in set (0.01 sec)
 ```
 
-[`TRACE`](/sql-statements/sql-statement-trace.md)再度実行すると、返される結果に`regionRequest.SendReqCtx`属性が含まれなくなります。これは、TiDB が TiKV からデータを読み取るのではなく、メモリからデータを読み取るようになったことを示します。
+[`TRACE`](/sql-statements/sql-statement-trace.md)を再度実行すると、返される結果に`regionRequest.SendReqCtx`属性が含まれなくなります。これは、TiDB が TiKV からデータを読み取るのではなく、メモリからデータを読み取るようになったことを示します。
 
 ```sql
 +----------------------------------------+-----------------+------------+

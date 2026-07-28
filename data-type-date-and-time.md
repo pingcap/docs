@@ -129,7 +129,7 @@ TIMESTAMP[(fsp)]
 
 > **Warning:**
 >
-> MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
+> MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
 
 ### <code>YEAR</code>型 {#code-year-code-type}
 
