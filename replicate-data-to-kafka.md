@@ -27,7 +27,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
     tiup status
     ```
 
-    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
+    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従って TiCDC をデプロイできます。
 
 2.  Kafka クラスターを作成します。
 

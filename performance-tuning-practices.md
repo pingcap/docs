@@ -11,9 +11,9 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 > **Note:**
 >
-> [Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)デフォルトでは有効になっていません。事前に有効にする必要があります。
+> [Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)はデフォルトでは有効になっていません。事前に有効にする必要があります。
 
-このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用が全体的なシステム パフォーマンスにどのように影響するかを示し、パフォーマンスを向上させるために[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)適用できるようにします。
+このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用が全体的なシステム パフォーマンスにどのように影響するかを示し、パフォーマンスを向上させるために[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)を適用できるようにします。
 
 ## 環境の説明 {#environment-description}
 

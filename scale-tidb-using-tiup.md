@@ -350,7 +350,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
     ```
 
-    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
+    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)を変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
 
 3.  手順 1 を再度実行し、スケールイン後のTiFlashノードの数を超えるTiFlashレプリカを持つテーブルがないことを確認します。
 
