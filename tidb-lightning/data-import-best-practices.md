@@ -77,7 +77,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 -   ソースファイルを生成する際は、単一ファイル内で主キーでソートすることをお勧めします。テーブル定義に主キーがない場合は、AUTO_INCREMENT主キーを追加できます。この場合、ファイルの内容の順序は関係ありません。
 -   ソースファイルを複数のTiDB Lightningインスタンスに割り当てる際は、複数のソースファイル間で重複する主キーやnull以外の一意インデックスが存在する状況を避けるようにしてください。生成されたファイルがグローバルにソートされている場合は、範囲に基づいて異なるTiDB Lightningインスタンスに分散することで、最適なインポートパフォーマンスを実現できます。
 -   ファイル生成中に各ファイルのサイズが 96 MiB 未満になるように制御します。
--   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)有効にします。
+-   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)を有効にします。
 
 ## ストレージスペースの見積もり {#estimate-storage-space}
 
@@ -103,7 +103,7 @@ TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成�
 
 1.  ソースデータで主キーまたは一意キーの競合がないか確認し、再インポート前に競合を解決してください。ほとんどの場合、これが最も一般的な原因です。
 2.  テーブルの主キーまたは一意キーの定義が適切かどうかを確認してください。適切でない場合は、テーブル定義を修正してデータを再インポートしてください。
-3.  上記の2つの手順を実行しても問題が解決しない場合は、ソースデータに少量（10%未満）の予期しない競合データが存在するかどうかを確認するために、さらに調査する必要があります。TiDB Lightningが競合データを検出して解決できるようにするには、 [競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)有効にしてください。
+3.  上記の2つの手順を実行しても問題が解決しない場合は、ソースデータに少量（10%未満）の予期しない競合データが存在するかどうかを確認するために、さらに調査する必要があります。TiDB Lightningが競合データを検出して解決できるようにするには、 [競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)を有効にしてください。
 
 ## チェックポイントを有効にする {#enable-checkpoint}
 

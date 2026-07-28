@@ -33,7 +33,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 バックエンドとは、TiDB Lightningが解析結果を送信する宛先です。「backend」とも表記されます。
 
-詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)参照。
+詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)を参照。
 
 <!-- C -->
 
@@ -41,7 +41,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### チェックポイント {#checkpoint}
 
-TiDB Lightningは、インポート中に進行状況をローカルファイルまたはリモートデータベースに継続的に保存します。これにより、インポート中にクラッシュした場合でも、中間状態から再開できます。詳細はセクション[チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)ご覧ください。
+TiDB Lightningは、インポート中に進行状況をローカルファイルまたはリモートデータベースに継続的に保存します。これにより、インポート中にクラッシュした場合でも、中間状態から再開できます。詳細はセクション[チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)をご覧ください。
 
 ### チェックサム {#checksum}
 

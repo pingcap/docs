@@ -23,7 +23,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)必要です。
+対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
 
 ### リソースの活用 {#resource-utilization}
 
@@ -47,7 +47,7 @@ You can directly write SQL statements to submit import tasks, which are easy to 
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
+対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
 ### タスクのスケジュール {#task-scheduling}
 
@@ -116,7 +116,7 @@ Due to the use of Global Sort, data imported into TiKV does not overlap, resulti
 
 -   論理インポート
 
-    `IMPORT INTO`でデータをインポートする前に、ターゲットテーブルは空である必要があります。既にデータが含まれているテーブルにデータをインポートする必要がある場合は、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)や直接挿入などの方法を使用することをお勧めします。TiDB v8.0以降、大規模トランザクションの実行には[バルクDML](/system-variables.md#tidb_dml_type-new-in-v800)サポートされます。
+    `IMPORT INTO`でデータをインポートする前に、ターゲットテーブルは空である必要があります。既にデータが含まれているテーブルにデータをインポートする必要がある場合は、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)や直接挿入などの方法を使用することをお勧めします。TiDB v8.0以降、大規模トランザクションの実行には[バルクDML](/system-variables.md#tidb_dml_type-new-in-v800)がサポートされます。
 
 -   競合データの処理
 
