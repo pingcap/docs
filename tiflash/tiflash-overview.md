@@ -21,7 +21,7 @@ TiDB Cloud を使用すると、HTAP ワークロードに応じて 1 つ以上�
 
 上の図は、 TiFlashノードを含む HTAP 形式の TiDB のアーキテクチャです。
 
-TiFlashは、ClickHouseによって効率的に実装されたコプロセッサレイヤーを備えた列指向ストレージを提供します。TiKVと同様に、 TiFlashにもMulti-Raftシステムが搭載されており、リージョン単位でのデータの複製と分散をサポートします（詳細は[データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)参照）。
+TiFlashは、ClickHouseによって効率的に実装されたコプロセッサレイヤーを備えた列指向ストレージを提供します。TiKVと同様に、 TiFlashにもMulti-Raftシステムが搭載されており、リージョン単位でのデータの複製と分散をサポートします（詳細は[データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)を参照）。
 
 TiFlashは、 TiKVノード内のデータのリアルタイムレプリケーションを低コストで実行します。これにより、TiKVへの書き込みがブロックされることはありません。同時に、TiKVと同様の読み取り一貫性を提供し、最新のデータが読み取られることを保証します。TiFlashのリージョンレプリカはTiKVのレプリカと論理的に同一であり、TiKVのLeaderレプリカと同時に分割・統合されます。
 
@@ -39,7 +39,7 @@ TiFlashはTiDBと互換性があります。TiDBをTiFlashの計算エンジン�
 
 TiFlashは、列指向ストレージコンポーネントとTiFlashプロキシコンポーネントという2つの主要コンポーネントで構成されています。TiFlashコンポーネントは、Multi-Raftコンセンサスアルゴリズムを用いた通信を担います。
 
-TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)自動的に作成し、その後 PD はこれらのルールに基づいて対応するデータ スケジューリングを実行します。
+TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)を自動的に作成し、その後 PD はこれらのルールに基づいて対応するデータ スケジューリングを実行します。
 
 ## 主な特徴 {#key-features}
 
@@ -106,7 +106,7 @@ TPC-H データセットでのデータのインポートからクエリまで�
 -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
 -   [TiFlashの設定](/tiflash/tiflash-configuration.md) 。
 -   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) 。
--   [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)学びます。
+-   [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を学びます。
 -   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) 。
 -   [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
 -   [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)

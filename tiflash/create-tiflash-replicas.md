@@ -108,7 +108,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 >
 > -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
 
-> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
+> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)を設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
@@ -243,7 +243,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3.  PDは、 TiFlashノードの`learner_config` `server.labels`テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
+3.  PDは、 TiFlashノードの`learner_config` `server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
     ```sql
     -- Non-partitioned table

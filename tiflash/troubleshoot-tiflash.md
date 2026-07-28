@@ -33,7 +33,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
     仮想マシンにデプロイするときにこの問題が発生した場合は、VM の CPUアーキテクチャを Haswell に変更してから、 TiFlash を再デプロイしてみてください。
 
-上記の方法で問題を解決できない場合は、PingCAP またはコミュニティからTiFlashログ ファイルと[サポートを受ける](/support.md)収集します。
+上記の方法で問題を解決できない場合は、PingCAP またはコミュニティからTiFlashログ ファイルと[サポートを受ける](/support.md)を収集します。
 
 ## 一部のクエリでは<code>Region Unavailable</code>エラーが返されます。 {#some-queries-return-the-code-region-unavailable-code-error}
 
