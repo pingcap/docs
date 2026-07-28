@@ -25,7 +25,7 @@ Key features:
 - **Cost optimization**: Data is fully stored in low-cost object storage, with only hot data cached locally, which is expected to reduce storage costs by approximately 50% in typical scenarios
 - **Fine-grained control**: Supports both table-level and partition-level granularity; partition-level settings override table-level configuration
 - **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
-- **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup & restore, TiCDC, etc.
+- **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup and restore, TiCDC, and other components
 
 ---
 
