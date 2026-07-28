@@ -96,7 +96,7 @@ INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');
 ERROR 1105 (HY000): insert, update and replace statements for _tidb_rowid are not supported
 ```
 
-データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)有効にしてください。
+データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)を有効にしてください。
 
 ```sql
 SET @@tidb_opt_write_row_id = ON;

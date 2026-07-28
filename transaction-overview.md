@@ -57,7 +57,7 @@ COMMIT;
 
 > **Tip:**
 >
-> [楽観的トランザクション](/optimistic-transaction.md)有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)を使用することをお勧めします。
+> [楽観的トランザクション](/optimistic-transaction.md)を有効にする前に、アプリケーションが`COMMIT`ステートメントでエラーが返される可能性があることを正しく処理できることを確認してください。アプリケーションがこれをどのように処理するか不明な場合は、代わりにデフォルトの[悲観的トランザクション](/pessimistic-transaction.md)を使用することをお勧めします。
 
 ### トランザクションのロールバック {#rolling-back-a-transaction}
 
@@ -171,7 +171,7 @@ DDL文の場合、トランザクションは自動的にコミットされま�
 
 ## 制約の遅延チェック {#lazy-check-of-constraints}
 
-デフォルトでは、楽観的トランザクションはDML文の実行時に[主キー](/constraints.md#primary-key)と[一意制約](/constraints.md#unique-key)チェックしません。これらのチェックはトランザクション`COMMIT`で実行されます。
+デフォルトでは、楽観的トランザクションはDML文の実行時に[主キー](/constraints.md#primary-key)と[一意制約](/constraints.md#unique-key)をチェックしません。これらのチェックはトランザクション`COMMIT`で実行されます。
 
 例えば：
 
@@ -212,7 +212,7 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 1 row in set (0.01 sec)
 ```
 
-遅延チェック最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place)設定することで無効にできます。
+遅延チェック最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place)を設定することで無効にできます。
 
 > **Note:**
 >

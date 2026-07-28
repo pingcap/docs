@@ -65,7 +65,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                                                                                                       | 統計情報の同期読み込みのタイムアウト時間を、デフォルトの100ミリ秒から2秒に延長します。これにより、TiDBはクエリコンパイル前に必要な統計情報を確実に読み込むことができます。                       | この値を大きくすると、クエリコンパイル前の同期待機時間が長くなります。                                                     |
 | [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)                                                                                                                 | `Limit`または`TopN`オペレーターをTiKVにプッシュダウンするかどうかを決定するしきい値を引き上げます。                                                      | 複数のインデックスオプションが存在する場合、この変数を増やすと、オプティマイザは`ORDER BY`と`Limit`演算子を最適化できるインデックスを優先するようになります。 |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                                                                                                 | 最適化ルール[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)を有効にします。                                         | これは`ROW_NUMBER()`ウィンドウ機能に限定されます。                                                        |
-| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)                                                                                                                         | ハッシュ結合の効率を向上させるには、ローカルモードで[ランタイムフィルタ](/runtime-filter.md#runtime-filter-mode)有効にしてください。                         | この変数はバージョン7.2.0で導入され、安全上の理由からデフォルトでは無効になっています。                                          |
+| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)                                                                                                                         | ハッシュ結合の効率を向上させるには、ローカルモードで[ランタイムフィルタ](/runtime-filter.md#runtime-filter-mode)を有効にしてください。                         | この変数はバージョン7.2.0で導入され、安全上の理由からデフォルトでは無効になっています。                                          |
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)                                                                                         | TiFlashへの非再帰的な[共通テーブル式（CTE）](/sql-statements/sql-statement-with.md)プッシュダウンを有効にします。                              | これは実験的機能です。                                                                             |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                                               | 読み取りコミット分離レベルの場合、この変数を有効にすると、グローバルタイムスタンプを取得する際のレイテンシーとコストが回避され、トランザクションレベルの読み取りレイテンシーが最適化されます。                 | この機能は、リピータブルリード分離レベルとは互換性がありません。                                                        |
 | [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)                                                                                                              | PDサーバーからのコミットタイムスタンプの取得をスキップすることでパフォーマンスを向上させます。                                                                | これは、線形化可能性を犠牲にしてパフォーマンスを優先するものです。因果的一貫性のみが保証されます。厳密な線形化可能性が求められるシナリオには適していません。          |
@@ -333,10 +333,10 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 #### トラブルシューティング {#troubleshooting}
 
-ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁に要求するクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)パフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 &gt; SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
+ワークロードに頻繁に発生する小規模なトランザクションや、タイムスタンプを頻繁に要求するクエリが含まれる場合、 [TSO（タイムスタンプオラクル）](/glossary.md#timestamp-oracle-tso)がパフォーマンスのボトルネックになる可能性があります。TSO の待機時間がシステムに影響を与えているかどうかを確認するには、 [**パフォーマンス概要 &gt; SQL実行時間概要**](/grafana-performance-overview-dashboard.md#sql-execute-time-overview)パネルを確認してください。TSO の待機時間が SQL 実行時間の大部分を占める場合は、次の最適化を検討してください。
 
--   厳密な一貫性を必要としない読み取り操作には、低精度TSO（ [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)を有効にする）を使用します。詳細については、 [解決策1：低精度TSOを使用する](#solution-1-low-precision-tso)参照してください。
--   可能な場合は、小さなトランザクションをまとめて大きなトランザクションにします。詳細については、 [解決策2：TSO要求の並列モード](#solution-2-parallel-mode-for-tso-requests)参照してください。
+-   厳密な一貫性を必要としない読み取り操作には、低精度TSO（ [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)を有効にする）を使用します。詳細については、 [解決策1：低精度TSOを使用する](#solution-1-low-precision-tso)を参照してください。
+-   可能な場合は、小さなトランザクションをまとめて大きなトランザクションにします。詳細については、 [解決策2：TSO要求の並列モード](#solution-2-parallel-mode-for-tso-requests)を参照してください。
 
 #### 解決策1：低精度TSO {#solution-1-low-precision-tso}
 
@@ -493,7 +493,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### インメモリエンジンを使用してMVCCバージョンの蓄積を軽減する {#mitigate-mvcc-version-accumulation-using-in-memory-engine}
 
-MVCC のバージョンが多すぎると、特に読み書き頻度の高い領域や、ガベージコレクションと圧縮の問題により、パフォーマンスのボトルネックが発生する可能性があります。この問題を軽減するには、v8.5.0 で導入されたバージョン[TiKV MVCC インメモリエンジン (IME)](/tikv-in-memory-engine.md)使用できます。これを有効にするには、TiKV 設定ファイルに次の設定を追加してください。
+MVCC のバージョンが多すぎると、特に読み書き頻度の高い領域や、ガベージコレクションと圧縮の問題により、パフォーマンスのボトルネックが発生する可能性があります。この問題を軽減するには、v8.5.0 で導入されたバージョン[TiKV MVCC インメモリエンジン (IME)](/tikv-in-memory-engine.md)を使用できます。これを有効にするには、TiKV 設定ファイルに次の設定を追加してください。
 
 > **Note:**
 >
@@ -510,7 +510,7 @@ enable = true
 
 #### auto analyzeを無効にするタイミング {#when-to-disable-auto-analyze}
 
-以下のシナリオでは、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) `OFF`に設定することでauto analyzeを無効にできます。
+以下のシナリオでは、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を`OFF`に設定することでauto analyzeを無効にできます。
 
 -   大量のデータインポート時。
 -   一括更新処理中。

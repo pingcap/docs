@@ -213,7 +213,7 @@ ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 
 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントを使用すると、現在のセッションにバインドされているリソースグループを変更できます。セッションをリソースグループにバインドすると、対応するセッションのリソース使用量は、指定された使用量 (RU) によって制限されます。
 
-システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
+システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
 次の例では、現在のセッションをリソースグループ`rg1`にバインドします。
 

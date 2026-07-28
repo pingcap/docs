@@ -94,4 +94,4 @@ CREATE TABLE test.t (i int);
 `table_name.col_name`
 ```
 
-詳細については[MySQL 識別子修飾子](https://dev.mysql.com/doc/refman/8.0/en/identifier-qualifiers.html)を参照してください。
+詳細については[MySQL 識別子の修飾子](https://dev.mysql.com/doc/refman/8.0/en/identifier-qualifiers.html)を参照してください。

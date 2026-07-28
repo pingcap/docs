@@ -125,7 +125,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     > **Note:**
     >
-    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)設定することで設定できます。
+    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定することで設定できます。
 
 -   3.2.3 メモリ不足問題​​の軽減
 
@@ -556,4 +556,4 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     v3.0以降のバージョンでは、TiDBは前のLeaderへのリクエストが失敗した場合に他のピアを試行するため、TiKVログに`peer is not leader`頻繁に記録される可能性があります。送信失敗の根本原因を特定するには、TiDBの該当するリージョンの`switch region peer to next due to send request fail`ログを確認してください。詳細については、 [7.1.4](#71-tidb)を参照してください。
 
-    このエラーは、他の理由でリージョンにLeaderがいない場合にも返される可能性があります。詳細については、 [4.4](#44-some-tikv-nodes-drop-leader-frequently)参照してください。
+    このエラーは、他の理由でリージョンにLeaderがいない場合にも返される可能性があります。詳細については、 [4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照してください。

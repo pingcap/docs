@@ -65,7 +65,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
     > **Note:**
     >
-    > TiDB Cloud Premiumの場合、このパラメータは自動的に設定されるため、手動で調整する必要はありません。設定を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+    > TiDB Cloud Premiumの場合、このパラメータは自動的に設定されるため、手動で調整する必要はありません。設定を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
     </CustomContent>
 

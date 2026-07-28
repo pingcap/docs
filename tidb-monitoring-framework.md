@@ -53,4 +53,4 @@ Grafanaは、メトリクスを分析および視覚化するためのオープ�
 
 ## TiDB Dashboard {#tidb-dashboard}
 
-TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)ご覧ください。
+TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)をご覧ください。
