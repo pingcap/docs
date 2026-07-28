@@ -95,7 +95,7 @@ TiDBのバックアップおよび復元ツールとして、 BRは特定の時�
 
 BRに基づく DR ソリューションは、5 分未満の RPO と、復元するデータのサイズに応じて変化する RTO を提供します。 BR v6.5.0 の場合、復元速度については[スナップショット復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)パフォーマンス[PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)を参照してください。通常、リージョン間のバックアップ機能はデータ セキュリティの最後の手段とみなされ、ほとんどのシステムにとって必須のソリューションでもあります。このソリューションの詳細については、 [BRに基づくDRソリューション](/dr-backup-restore.md)を参照してください。
 
-一方、 BR はv6.5.0 以降、 [EBSボリュームのスナップショットからTiDBクラスタを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-ebs-snapshot-across-multiple-kubernetes)サポートします。クラスターが Kubernetes 上で実行されており、クラスターに影響を与えずにできるだけ早くクラスターを復元したい場合は、この機能を使用してシステムの RTO を短縮できます。
+一方、 BR はv6.5.0 以降、 [EBSボリュームのスナップショットからTiDBクラスタを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-ebs-snapshot-across-multiple-kubernetes)をサポートします。クラスターが Kubernetes 上で実行されており、クラスターに影響を与えずにできるだけ早くクラスターを復元したい場合は、この機能を使用してシステムの RTO を短縮できます。
 
 ### その他の災害復旧ソリューション {#other-dr-solutions}
 

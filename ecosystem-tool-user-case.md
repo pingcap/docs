@@ -9,11 +9,11 @@ summary: TiDB ツールの一般的な使用例とツールの選択方法につ
 
 ## 物理マシンまたは仮想マシンに TiDB をデプロイ運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
-物理マシンまたは仮想マシンに TiDB を展開して操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)インストールし、 TiUPを使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
+物理マシンまたは仮想マシンに TiDB を展開して操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールし、 TiUPを使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
 
 ## Kubernetes 上で TiDBをデプロイて運用する {#deploy-and-operate-tidb-on-kubernetes}
 
-Kubernetes上でTiDBをデプロイ・運用する必要がある場合は、Kubernetesクラスターをデプロイした上で、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)デプロイします。その後、 TiDB Operatorを使用してTiDBクラスターをデプロイ・運用します。
+Kubernetes上でTiDBをデプロイ・運用する必要がある場合は、Kubernetesクラスターをデプロイした上で、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイします。その後、 TiDB Operatorを使用してTiDBクラスターをデプロイ・運用します。
 
 ## CSVからTiDBへのデータのインポート {#import-data-from-csv-to-tidb}
 

@@ -11,7 +11,7 @@ summary: クラスター構成を動的に変更する方法を学習します�
 
 > **Note:**
 >
-> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。TiDB Cloudの場合は、設定を変更するには[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+> この機能は TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。TiDB Cloudの場合は、設定を変更するには[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にお問い合わせください。
 
 ## 一般的な操作 {#common-operations}
 

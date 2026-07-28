@@ -374,7 +374,7 @@ TiFlashは暗号化されたメタデータの管理にTiKVのロジックを再
 
 ### TiKVバージョン間の互換性 {#compatibility-between-tikv-versions}
 
-TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)参照してください。
+TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 

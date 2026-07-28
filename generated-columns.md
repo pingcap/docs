@@ -141,7 +141,7 @@ JSON と生成された列の現在の制限は次のとおりです。
 -   `ALTER TABLE`文を使用して、保存された生成列を通常の列に変換したり、通常の列を保存された生成列に変換したりすることはできません。
 -   保存された生成列の式を`ALTER TABLE`ステートメントを通じて変更することはできません。
 -   [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
--   [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)サポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
+-   [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)はサポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
 -   現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存された生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。
 -   次の関数と式は生成された列の定義では許可されておらず、使用すると TiDB によってエラーが返されます。
 
