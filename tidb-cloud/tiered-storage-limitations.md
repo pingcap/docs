@@ -73,7 +73,7 @@ After setting IA on a table, the system uses the following measures to isolate I
 
 - Cold read rate limiting
 
-> Shared resources (CPU, network, local disk, object storage bandwidth) cannot be fully isolated. In extreme cases, a very large IA scan may still affect other tenants. This is the fundamental reason for the access throttling constraints.
+> Shared resources (CPU, network, local disk, object storage bandwidth) cannot be fully isolated. In extreme cases, a large IA scan may still affect other tenants. This is the fundamental reason for the access throttling constraints.
 
 ---
 
