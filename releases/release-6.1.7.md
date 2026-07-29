@@ -1,7 +1,7 @@
 ---
 title: TiDB 6.1.7 Release Notes
 summary: Learn about the improvements and bug fixes in TiDB 6.1.7.
-aliases: ['/tidb/dev/release-6.1.7/', '/tidb/v6.1/release-6.1.7']
+aliases: ['/tidb/dev/release-6.1.7/','/tidb/v6.1/release-6.1.7']
 ---
 
 # TiDB 6.1.7 Release Notes

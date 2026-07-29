@@ -1,7 +1,7 @@
 ---
 title: TiDB 7.1.6 Release Notes
 summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.6.
-aliases: ['/tidb/dev/release-7.1.6/', '/tidb/v7.1/release-7.1.6']
+aliases: ['/tidb/dev/release-7.1.6/','/tidb/v7.1/release-7.1.6']
 ---
 
 # TiDB 7.1.6 Release Notes

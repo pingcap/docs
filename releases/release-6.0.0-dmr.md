@@ -1,7 +1,7 @@
 ---
 title: TiDB 6.0.0 Release Notes
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.0.0.
-aliases: ['/tidb/dev/release-6.0.0-dmr/', '/tidb/v6.0/release-6.0.0-dmr']
+aliases: ['/tidb/dev/release-6.0.0-dmr/','/tidb/v6.0/release-6.0.0-dmr']
 ---
 
 # TiDB 6.0.0 Release Notes

@@ -1,7 +1,7 @@
 ---
 title: TiDB 8.5.6 Release Notes
 summary: Learn about the features, compatibility changes, improvements, and bug fixes in TiDB 8.5.6.
-aliases: ['/tidb/dev/release-8.5.6/', '/tidb/v8.5/release-8.5.6']
+aliases: ['/tidb/dev/release-8.5.6/','/tidb/v8.5/release-8.5.6']
 ---
 
 # TiDB 8.5.6 Release Notes

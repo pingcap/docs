@@ -1,7 +1,7 @@
 ---
 title: TiDB 7.5.3 Release Notes
 summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.5.3.
-aliases: ['/tidb/dev/release-7.5.3/', '/tidb/v7.5/release-7.5.3']
+aliases: ['/tidb/dev/release-7.5.3/','/tidb/v7.5/release-7.5.3']
 ---
 
 # TiDB 7.5.3 Release Notes

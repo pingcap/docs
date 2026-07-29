@@ -1,7 +1,7 @@
 ---
 title: TiDB 6.1.2 Release Notes
 summary: TiDB 6.1.2 was released on October 24, 2022. The release includes improvements to TiDB, TiKV, Tools, PD, TiFlash, and bug fixes for various issues in each component. The improvements include setting placement rules and TiFlash replicas simultaneously, support for configuring various settings, and enhancing performance. Bug fixes address issues such as incorrect cleanup of privileges, incorrect output, query failures, and performance issues.
-aliases: ['/tidb/dev/release-6.1.2/', '/tidb/v6.1/release-6.1.2']
+aliases: ['/tidb/dev/release-6.1.2/','/tidb/v6.1/release-6.1.2']
 ---
 
 # TiDB 6.1.2 Release Notes
