@@ -132,7 +132,7 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 
 ## インデックスリーダー {#indexreader}
 
-TiDBは*カバーインデックス最適化*をサポートしています。インデックスからすべての行を取得できる場合、TiDBは通常`IndexLookup`で必要な2番目のステップを省略します。次の2つの例を考えてみましょう。
+TiDBは*カバリングインデックス最適化*をサポートしています。インデックスからすべての行を取得できる場合、TiDBは通常`IndexLookup`で必要な2番目のステップを省略します。次の2つの例を考えてみましょう。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE intkey = 123;

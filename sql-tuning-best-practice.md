@@ -141,7 +141,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
 -   [TiDBのインデックス戦略](#index-strategy-in-tidb)
     -   [複合指数戦略ガイドライン](#composite-index-strategy-guidelines)
     -   [インデックス作成のコスト](#the-cost-of-indexing)
-    -   [カバーインデックスを使用したSQLチューニング](#sql-tuning-with-a-covering-index)
+    -   [カバリングインデックスを使用したSQLチューニング](#sql-tuning-with-a-covering-index)
     -   [ソートを含む複合インデックスを使用したSQLチューニング](#sql-tuning-with-a-composite-index-involving-sorting)
     -   [効率的なフィルタリングとソートのための複合インデックスを使用したSQLチューニング](#sql-tuning-with-composite-indexes-for-efficient-filtering-and-sorting)
 -   [TiFlashを使用する場合](#when-to-use-tiflash)
@@ -573,7 +573,7 @@ TiDBのパフォーマンスを最適化するには、インデックスを効�
     -   日付時刻列の時間範囲条件
     -   `!=` `<>`の他の非`IS NOT NULL`の`NOT IN`
 
-4.  カバーインデックスを最大限に活用するには、 `SELECT`リストから列を追加するか、集計に使用します。
+4.  カバリングインデックスを最大限に活用するには、 `SELECT`リストから列を追加するか、集計に使用します。
 
 **特別な考慮: `IN`条件**
 
@@ -607,7 +607,7 @@ TiDBのパフォーマンスを最適化するには、インデックスを効�
 -   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を使用してインデックスの使用状況統計を定期的に確認します。
 -   インデックスを設計するときは、ワークロードの書き込み/読み取り比率を考慮してください。
 
-#### カバーインデックスを使用したSQLチューニング {#sql-tuning-with-a-covering-index}
+#### カバリングインデックスを使用したSQLチューニング {#sql-tuning-with-a-covering-index}
 
 カバリングインデックスには、 `WHERE`と`SELECT`句で参照されるすべての列が含まれます。カバリングインデックスを使用すると、追加のインデックス参照が不要になり、クエリのパフォーマンスが大幅に向上します。
 
