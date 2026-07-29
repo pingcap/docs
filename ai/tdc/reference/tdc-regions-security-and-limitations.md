@@ -93,7 +93,7 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - Read-write is the default SQL role; use explicit role flags in security-sensitive automation.
 - Journals are append-only and the current public command surface has no journal delete command.
 - Filesystem resource list and describe commands operate on the local registry; they are not an organization-wide discovery API.
-- Telemetry commands, serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
+- Telemetry management commands are intentionally not implemented. Control telemetry through `~/.tdc/.preferences` or `TDC_TELEMETRY`; serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
 - The TiDB Cloud CLI depends on its installed `tdc-drive9` companion for all public Filesystem runtime behavior.
 
 ## Related documentation

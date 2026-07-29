@@ -45,6 +45,8 @@ tdc --version
 
 The installer places `tdc` and its `tdc-drive9` companion in `~/.tdc/bin`. Add the `PATH` export to your shell profile. The installer does not require `sudo` and does not write credentials.
 
+After installation, the installer displays the anonymous telemetry fields, prohibited data, persistent opt-out path, and process-scoped `TDC_TELEMETRY=off` override. It does not prompt for a telemetry choice or create the optional preferences file.
+
 ### Windows
 
 Run the installer:
@@ -63,6 +65,8 @@ tdc --version
 ```
 
 Add `$HOME\.tdc\bin` to your user `PATH` to keep `tdc` available in new PowerShell sessions.
+
+The Windows installer displays the same anonymous telemetry and opt-out notice without creating a preference or installation identity.
 
 ## Configure a profile
 
