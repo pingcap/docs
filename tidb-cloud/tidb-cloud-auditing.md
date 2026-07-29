@@ -1,15 +1,22 @@
 ---
-title: TiDB Cloud 专属数据库审计日志
+title: TiDB Cloud Dedicated 数据库审计日志 (公测中)
 summary: 了解如何在 TiDB Cloud 中审计集群。
 ---
 
-# TiDB Cloud 专属数据库审计日志
+# TiDB Cloud Dedicated 数据库审计日志 (公测中)
 
 TiDB Cloud 提供了审计日志功能，用于记录数据库的用户访问活动，例如执行的 SQL 语句。
 
 > **注意：**
 >
-> 目前，数据库审计日志功能仅支持按需开通。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Request Support**。在 **Description** 字段填写 “Apply for database audit logging”，并点击 **Submit**。
+> 数据库审计日志功能目前面向满足以下条件的 TiDB Cloud Dedicated 集群开放公测：
+>
+> - 对于部署在 AWS 和 Google Cloud 上的集群：TiDB 版本必须为 v7.5.6 或更高版本，或者 v8.5.2 或更高版本。
+> - 对于部署在 Azure 上的集群：TiDB 版本必须为 v7.5.6 或更高版本，或者 v8.5.2 或更高版本，并且集群必须创建于 2026 年 4 月 15 日之后。
+>
+> 对于其他 TiDB 版本或集群配置，使用数据库审计日志功能需要单独申请。如需为不符合上述条件的集群申请该功能，请在 [TiDB Cloud 控制台](https://tidbcloud.com)右下角点击 **?**，然后点击 **Support Tickets** 进入[帮助中心](https://tidb.support.pingcap.com/servicedesk/customer/portals)。创建工单，在 **Description** 字段中填写“Apply for database audit logging”，然后点击 **Submit**。
+>
+> 本文档仅适用于数据库审计日志功能的公测版本。如果你使用的是较早版本的数据库审计日志功能，请参阅 [TiDB Cloud 数据库审计日志（旧版）](/tidb-cloud/tidb-cloud-auditing-legacy.md)。
 
 为了评估组织的用户访问策略和其他信息安全措施的有效性，定期分析数据库审计日志是一项安全最佳实践。
 
@@ -21,7 +28,7 @@ TiDB Cloud 提供了审计日志功能，用于记录数据库的用户访问活
 
 ## 前提条件
 
-- 你正在使用 TiDB Cloud 专属集群。
+- 你正在使用 TiDB Cloud Dedicated 集群。
 
     > **注意：**
     >
@@ -32,7 +39,7 @@ TiDB Cloud 提供了审计日志功能，用于记录数据库的用户访问活
 
 ## 启用审计日志
 
-TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志写入你的云存储服务。在启用数据库审计日志之前，请在集群所在的云服务商上配置你的云存储服务。
+TiDB Cloud 支持将 TiDB Cloud Dedicated 集群的审计日志写入你的云存储服务。在启用数据库审计日志之前，请在集群所在的云服务商上配置你的云存储服务。
 
 > **注意：**
 >
@@ -224,7 +231,6 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志写入你的云存储
 2. 点击目标 TiDB Cloud Dedicated 集群的名称进入概览页面，然后在左侧导航栏点击 **Settings** > **DB Audit Logging**。
 3. 在 **DB Audit Logging** 页面，点击右上角的 **Enable**。
 4. 在 **Database Audit Log Storage Configuration** 对话框中，填写你在 [步骤 2. 配置 Azure Blob 访问权限](#step-2-configure-azure-blob-storage-access) 获取的 blob URL 和 SAS token：
-
     - 在 **Blob URL** 字段，输入存储审计日志的容器 URL。
     - 在 **SAS Token** 字段，输入访问该容器的 SAS token。
 5. 点击 **Test Connection and Next**，验证 TiDB Cloud 是否可以访问并写入该容器。如果连接成功，对话框将进入数据库审计日志设置的下一步。
@@ -232,26 +238,6 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志写入你的云存储
 > **注意：**
 >
 > 启用审计日志后，如果你对 **Blob URL** 或 **SAS Token** 字段做了新的更改，必须禁用并重新启用审计日志。
-
-## 指定审计过滤规则
-
-启用审计日志后，必须指定审计过滤规则，以控制捕获和写入哪些用户访问事件到审计日志。如果未指定过滤规则，TiDB Cloud 不会记录任何日志。
-
-要为集群指定审计过滤规则，请按以下步骤操作：
-
-1. 在 **DB Audit Logging** 页面，点击 **Audit Filters** 区域的 **Add Filter Rule**，添加一条审计过滤规则。
-
-2. 在 **Add Filter Rule** 对话框中，配置以下项：
-
-    - **Filter Name**：输入过滤规则的名称。
-    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配任意值，或使用 `_` 匹配任意单个字符。`@` 符号和 `<host>` 为可选项。
-    - **Filter Events**：选择要记录的事件。支持的过滤事件，参见[审计过滤事件](#audit-filter-events)。
-
-3. 点击 **Confirm** 添加过滤规则。
-
-> **注意：**
->
-> - 由于审计日志会消耗集群资源，指定过滤规则时请谨慎。为最小化资源使用，请尽可能指定过滤规则，将审计日志限制为特定用户和事件。
 
 ## 配置数据库审计日志设置
 
@@ -274,6 +260,26 @@ TiDB Cloud 支持将 TiDB Cloud 专属集群的审计日志写入你的云存储
 > **注意：**
 >
 > 如果你禁用日志脱敏，写入云存储的审计日志文件可能包含敏感信息。由于存在潜在安全风险，不建议使用此配置。
+
+## 指定审计过滤规则
+
+启用审计日志后，必须指定审计过滤规则，以控制捕获和写入哪些用户访问事件到审计日志。如果未指定过滤规则，TiDB Cloud 不会记录任何日志。
+
+要为集群指定审计过滤规则，请按以下步骤操作：
+
+1. 在 **DB Audit Logging** 页面，点击 **Audit Filters** 区域的 **Add Filter Rule**，添加一条审计过滤规则。
+
+2. 在 **Add Filter Rule** 对话框中，配置以下项：
+
+    - **Filter Name**：输入过滤规则的名称。
+    - **SQL User**：以 `<user>@<host>` 格式输入 SQL 用户。用户名和主机名可以使用 `%` 匹配任意值，或使用 `_` 匹配任意单个字符。`@` 符号和 `<host>` 为可选项。
+    - **Filter Events**：选择要记录的事件。支持的过滤事件，参见[审计过滤事件](#audit-filter-events)。
+
+3. 点击 **Confirm** 添加过滤规则。
+
+> **注意：**
+>
+> - 由于审计日志会消耗集群资源，指定过滤规则时请谨慎。为最小化资源使用，请尽可能指定过滤规则，将审计日志限制为特定用户和事件。
 
 ## 查看审计日志
 
