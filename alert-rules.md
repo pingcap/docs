@@ -449,7 +449,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`実行して、GC リーダーに対応する`tidb-server`を見つけます。
     2.  `tidb-server`のログを確認し、`grep gc_worker tidb.log` を実行します。
-    3.  この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)をください。
+    3.  この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)ください。
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
