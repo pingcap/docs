@@ -1,6 +1,7 @@
 ---
 title: TiDB Release Timeline
 summary: Learn about the TiDB release timeline.
+aliases: ['/tidb/dev/release-timeline/']
 ---
 
 # TiDB Release Timeline

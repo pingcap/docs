@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.2.0 Release Notes
 summary: TiDB 6.2.0-DMR introduces new features like visual execution plans, monitoring page, and lock view. It also supports concurrent DDL operations and enhances the performance of aggregation operations. TiKV now supports automatic CPU usage tuning and detailed configuration information listing. TiFlash adds FastScan for data scanning and improves error handling. BR now supports continuous data validation and automatically identifies the region of Amazon S3 buckets. TiCDC supports filtering DDL and DML events. There are also compatibility changes, bug fixes, and improvements across various tools.
+aliases: ['/tidb/dev/release-6.2.0/', '/tidb/v6.2/release-6.2.0']
 ---
 
 # TiDB 6.2.0 Release Notes

@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.3.2 Release Notes
 summary: TiDB 5.3.2 was released on June 29, 2022. It is not recommended to use this version due to a known bug, which has been fixed in v5.3.3. The release includes compatibility changes, improvements, and bug fixes for TiDB, PD, TiKV, TiFlash, and various tools like TiDB Data Migration, TiDB Lightning, Backup & Restore, TiCDC, and TiDB Data Migration.
+aliases: ['/tidb/dev/release-5.3.2/', '/tidb/v5.3/release-5.3.2']
 ---
 
 # TiDB 5.3.2 Release Notes

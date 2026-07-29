@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0.10 Release Notes
 summary: TiDB 2.0.10 and TiDB Ansible 2.0.10 were released on December 18, 2018. The release includes improvements in system compatibility and stability. Fixes include issues with DDL jobs, ORDER BY and UNION clauses, UNCOMPRESS function, ANSI_QUOTES SQL_MODE, select results, and more. PD fixes a possible RaftCluster deadlock issue, while TiKV optimizes leader transfer and fixes redundant Region heartbeats.
+aliases: ['/tidb/dev/release-2.0.10/', '/tidb/v2.0/release-2.0.10']
 ---
 
 # TiDB 2.0.10 Release Notes

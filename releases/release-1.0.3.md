@@ -1,6 +1,7 @@
 ---
 title: TiDB 1.0.3 Release Notes
 summary: TiDB 1.0.3 was released on November 28, 2017. Updates include performance optimization, new configuration options, and bug fixes. PD now supports adding more schedulers using API, and TiKV has fixed deadlock and leader value issues. To upgrade from 1.0.2 to 1.0.3, follow the rolling upgrade order of PD, TiKV, and TiDB.
+aliases: ['/tidb/dev/release-1.0.3/', '/tidb/v1.0/release-1.0.3']
 ---
 
 # TiDB 1.0.3 Release Notes
