@@ -78,7 +78,7 @@ target-database:       # Configuration of target TiDB database.
           tbl-name: "log"
     ```
 
-    詳細な設定ルールについては[ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)参照してください。
+    詳細な設定ルールについては[ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)を参照してください。
 
 2.  データ ソース構成のブロック リスト ルールと許可リスト ルールを参照して、移行するテーブルをフィルター処理します。
 
@@ -113,7 +113,7 @@ target-database:       # Configuration of target TiDB database.
         action: Do
     ```
 
-    詳細な設定ルールについては[Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)参照してください。
+    詳細な設定ルールについては[Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
 2.  データ ソース構成内のbinlogイベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
 
@@ -151,7 +151,7 @@ target-database:       # Configuration of target TiDB database.
         target-schema: "test"
     ```
 
-    詳細な設定ルールについては[テーブルルーティング](/dm/dm-table-routing.md)参照してください。
+    詳細な設定ルールについては[テーブルルーティング](/dm/dm-table-routing.md)を参照してください。
 
 2.  データ ソース構成内のルーティング マッピング ルールを参照して、移行するテーブルをフィルター処理します。
 

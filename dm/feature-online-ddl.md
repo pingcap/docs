@@ -7,7 +7,7 @@ summary: このドキュメントでは、DM の online-ddl/online-ddl-scheme` �
 
 本番環境では、DDL実行中のテーブルロックによって、データベースからの読み取りまたは書き込みがある程度ブロックされる可能性があります。そのため、読み取りと書き込みへの影響を最小限に抑えるため、オンラインDDLツールを使用してDDLを実行することがよくあります。一般的なDDLツールは[gh-ost](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
-DMを使用してMySQLからTiDBにデータを移行する場合、online-ddlを有効にすると、DMとgh-ostまたはpt-oscの連携が可能になります。online-ddlの有効化方法と、このオプション有効化後のワークフローの詳細については、 [gh-ost または pt-osc による継続的なレプリケーション](/migrate-with-pt-ghost.md)参照してください。このドキュメントでは、DMとオンラインDDLツールの連携の詳細に焦点を当てています。
+DMを使用してMySQLからTiDBにデータを移行する場合、online-ddlを有効にすると、DMとgh-ostまたはpt-oscの連携が可能になります。online-ddlの有効化方法と、このオプション有効化後のワークフローの詳細については、 [gh-ost または pt-osc による継続的なレプリケーション](/migrate-with-pt-ghost.md)を参照してください。このドキュメントでは、DMとオンラインDDLツールの連携の詳細に焦点を当てています。
 
 ## オンライン DDL ツールを使用した DM の動作詳細 {#working-details-for-dm-with-online-ddl-tools}
 
@@ -93,7 +93,7 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
         rename test._test4_gho to test.test4;
         ```
 
-    -   DMは`rename to _test4_del`を実行しません。3 `rename ghost_table to origin table`実行する場合、DMは以下の手順を実行します。
+    -   DMは`rename to _test4_del`を実行しません。`rename ghost_table to origin table`を実行する場合、DMは以下の手順を実行します。
 
         -   ステップ3でメモリに記録されたDDLを読み取ります
         -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます
@@ -183,7 +183,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
         rename test._test4_new to test.test4;
         ```
 
-    -   DMは`rename to _test4_old`を実行しません。3 `rename ghost_table to origin table`実行する場合、DMは以下の手順を実行します。
+    -   DMは`rename to _test4_old`を実行しません。`rename ghost_table to origin table`を実行する場合、DMは以下の手順を実行します。
 
         -   ステップ2でメモリに記録されたDDLを読み取ります
         -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます

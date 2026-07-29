@@ -36,7 +36,7 @@ TiDB バージョン: 4.0.0
     -   TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     -   テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
-    -   `Distinct`関数使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
+    -   `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
     -   ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [＃17310](https://github.com/pingcap/tidb/pull/17310)
     -   パーティションテーブル[＃17392](https://github.com/pingcap/tidb/pull/17392) で`admin check index` 、 `admin cleanup index` 、 `admin recover index`サポート [＃17317](https://github.com/pingcap/tidb/pull/17317) [＃17405](https://github.com/pingcap/tidb/pull/17405)
     -   `in`式範囲パーティションプルーニングをサポート [＃17320](https://github.com/pingcap/tidb/pull/17320)
@@ -80,7 +80,7 @@ TiDB バージョン: 4.0.0
     -   `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブルをプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。 [＃17328](https://github.com/pingcap/tidb/pull/17328)
     -   一部のケースで障害が発生した TiKV ノードにアクセスできない問題を修正[＃17342](https://github.com/pingcap/tidb/pull/17342)
     -   `tidb.toml`の`isolation-read`設定項目が有効にならない問題を修正[＃17322](https://github.com/pingcap/tidb/pull/17322)
-    -   `hint`使用してストリーム集約強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
+    -   `hint`を使用してストリーム集約を強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [＃17347](https://github.com/pingcap/tidb/pull/17347)
     -   `insert`異なる`SQL_MODE` の下で DIV を処理する動作を修正 [＃17314](https://github.com/pingcap/tidb/pull/17314)
 
 -   TiFlash
@@ -103,7 +103,7 @@ TiDB バージョン: 4.0.0
 
 -   PD
 
-    -   pd-ctl を使用して`evict-leader-scheduler`または`grant-leader-scheduler`削除するときに発生する 404 エラーを修正しました [＃2446](https://github.com/pingcap/pd/pull/2446)
+    -   pd-ctl を使用して`evict-leader-scheduler`または`grant-leader-scheduler`を削除するときに発生する 404 エラーを修正しました [＃2446](https://github.com/pingcap/pd/pull/2446)
     -   TiFlashレプリカが存在する場合に`presplit`機能が正しく動作しない可能性がある問題を修正しました[＃2447](https://github.com/pingcap/pd/pull/2447)
 
 -   ツール

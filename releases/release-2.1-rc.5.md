@@ -40,7 +40,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
     -   ticlientの`Scan`コマンドに上限を追加して、オーバーバウンドスキャン 回避する [＃8247](https://github.com/pingcap/tidb/pull/8247) [＃8081](https://github.com/pingcap/tidb/pull/8081)
 -   DDL
     -   トランザクション内でDDL文を実行するとエラーが発生する場合がある問題を修正[＃8056](https://github.com/pingcap/tidb/pull/8056)
-    -   パーティションテーブルで`truncate table`実行しても効果がない問題を修正[＃8103](https://github.com/pingcap/tidb/pull/8103)
+    -   パーティションテーブルで`truncate table`を実行しても効果がない問題を修正[＃8103](https://github.com/pingcap/tidb/pull/8103)
     -   一部のケースでDDL操作がキャンセルされた後に正しくロールバックされない問題を修正しました[＃8057](https://github.com/pingcap/tidb/pull/8057)
     -   次の利用可能な行ID を返すコマンド`admin show next_row_id`を追加します。 [＃8268](https://github.com/pingcap/tidb/pull/8268)
 

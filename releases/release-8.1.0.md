@@ -29,11 +29,11 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     リソースグループ内のクエリの最大実行時間を設定できます。クエリの実行時間が設定値を超えると、クエリの優先度が自動的に下げられるか、クエリがキャンセルされます。また、問題のあるクエリの同時実行数が多すぎる場合、特定フェーズで過剰なリソース消費を回避するために、テキストまたは実行プランを通じて、特定されたクエリに一致するクエリを一定期間内に即時に指定することもできます。
 
-    TiDBはクエリの手動マークもサポートしています。1コマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいてクエリをマークできます。マークに一致するクエリはダウングレードまたはキャンセルされ、SQLブロックリストを追加する目的を達成できます。
+    TiDBはクエリの手動マークもサポートしています。[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)コマンドを使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいてクエリをマークできます。マークに一致するクエリはダウングレードまたはキャンセルされ、SQLブロックリストを追加する目的を達成できます。
 
     予想よりも多くのリソースを消費するクエリの自動管理機能により、根本原因が特定される前にクエリの問題が全体的なパフォーマンスに与える影響を迅速に軽減する効果的な手段がユーザーに提供され、データベースの安定性が向上します。
 
-    詳細については[ドキュメント](/tidb-resource-control-runaway-queries.md)参照してください。
+    詳細については[ドキュメント](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 ### SQL {#sql}
 
@@ -43,7 +43,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     v8.1.0 以降では、列を`ADD COLUMN`ずつ追加するときに、式をデフォルト値として使用できます。
 
-    詳細については[ドキュメント](/data-type-default-values.md#specify-expressions-as-default-values)参照してください。
+    詳細については[ドキュメント](/data-type-default-values.md#specify-expressions-as-default-values)を参照してください。
 
 ### DB操作 {#db-operations}
 
@@ -53,7 +53,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v8.1.0以降、この機能はデフォルトで有効になっています（ [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)デフォルト`ON`に設定されます）。この機能を有効にすると、DXFは複数のTiDBノードで同じ`ADD INDEX`または`IMPORT INTO`タスクを並列実行するようにスケジュールできます。これにより、TiDBクラスターのリソースを最大限に活用し、これらのタスクのパフォーマンスを大幅に向上させることができます。さらに、TiDBノードを追加し、追加したノードに[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)設定することで、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスを直線的に向上させることができます。
 
-    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)参照してください。
+    詳細については[ドキュメント](/tidb-distributed-execution-framework.md)を参照してください。
 
 ### セキュリティ {#security}
 
@@ -61,7 +61,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     強化された TiDB ログの非感度化は、ログファイル内の SQL テキスト情報をマークすることで実装され、ユーザーがログを表示するときに機密データを削除することをサポートします。ログ情報をマークするかどうかを制御することで、さまざまなシナリオで TiDB ログを安全に使用でき、ログ非感度化を使用する際のセキュリティと柔軟性が向上します。この機能を使用するには、システム変数`tidb_redact_log`を`MARKER`に設定すると、TiDB のランタイムログ内の SQL テキストがマークされます。さらに、TiDBサーバーで`collect-log`サブコマンドを使用して、マークされた機密データをログから削除し、ログを安全な方法で表示できます。すべてのマーカーを削除して通常のログを取得することもできます。この機能は、v8.1.0 で一般提供されました。
 
-    詳細については[ドキュメント](/system-variables.md#tidb_redact_log)参照してください。
+    詳細については[ドキュメント](/system-variables.md#tidb_redact_log)を参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -71,7 +71,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     v8.1.0 では、 `IMPORT INTO ... FROM SELECT`構文が一般公開 (GA) され、 `IMPORT INTO`ステートメントの機能シナリオが充実します。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-import-into.md)を参照してください。
 
 -   TiDB Lightningは競合解決戦略を簡素化し、 `replace`戦略（GA） を使用して競合するデータの処理をサポートします。 [＃51036](https://github.com/pingcap/tidb/issues/51036) @ [lyzx2001](https://github.com/lyzx2001)
 
@@ -79,13 +79,13 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
     TiDB Lightning v8.0.0では、物理インポートモードにおける[競合検出の古いバージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略が廃止され、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータ（実験的）を介して論理インポートモードと物理インポートモードの両方で競合検出戦略を制御できるようになり、このパラメータの設定が簡素化されました。さらに、物理インポートモードでは、 `replace`戦略により、インポート時に主キーまたは一意キーの競合が検出された場合に、最新のデータを保持し、古いデータを上書きすることがサポートされます。v8.1.0では、 `replace`戦略で競合データを処理する機能が一般提供（GA）されます。
 
-    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 -   TiCDCはクライアント認証をサポートします [＃10636](https://github.com/pingcap/tiflow/issues/10636) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
     v8.1.0では、TiCDC CLIまたはOpenAPIを使用する際に、TiCDCはクライアント認証をサポートします。この機能により、クライアント証明書を用いたクライアント認証を要求するようにTiCDCを設定でき、相互トランスポート層Security（mTLS）を確立できます。さらに、TiDBのユーザー名とパスワードに基づく認証も設定できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-client-authentication.md)を参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -95,9 +95,9 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ### 動作の変更 {#behavior-changes}
 
--   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+-   以前のバージョンでは、 TiDB Lightningの`tidb.tls`設定項目は、値`"false"`と`""` 、および値`"preferred"`と`"skip-verify"`同じものとして扱いました。v8.1.0 以降、 TiDB Lightning は`tidb.tls`に対して`"false"` 、 `""` 、 `"skip-verify"` 、 `"preferred"`の動作を区別します。詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 -   `AUTO_ID_CACHE=1`のテーブルの場合、TiDB は[集中型AUTO_INCREMENT ID割り当てサービス](/auto-increment.md#mysql-compatibility-mode)をサポートします。以前のバージョンでは、このサービスのプライマリ TiDB ノードは、TiDB プロセスが終了すると（たとえば、TiDB ノードの再起動中）、自動割り当て ID を可能な限り連続的に保つために`forceRebase`操作を自動的に実行していました。しかし、 `AUTO_ID_CACHE=1`のテーブルが多すぎると、 `forceRebase`実行に非常に時間がかかり、TiDB がすぐに再起動できなくなり、データの書き込みがブロックされてシステムの可用性に影響を及ぼします。この問題を解決するために、v8.1.0 以降、TiDB は`forceRebase`動作を削除しますが、この変更により、フェイルオーバー中に一部の自動割り当て ID が連続しなくなります。
--   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意インデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)参照してください。
+-   以前のバージョンでは、 `UPDATE`変更を含むトランザクションを処理する際に、 `UPDATE`イベントで主キーまたは null 以外の一意インデックス値が変更されると、TiCDC はこのイベントを`DELETE`と`INSERT`イベントに分割していました。v8.1.0 では、MySQL シンクを使用する場合、 `UPDATE`の変更のトランザクション`commitTS`が TiCDC `thresholdTS` (TiCDC の起動時に PD から取得する現在のタイムスタンプ) より小さい場合、TiCDC は`UPDATE`のイベントを`DELETE`と`INSERT`イベントに分割します。この動作変更により、TiCDC が受信した`UPDATE`のイベントの順序が正しくない可能性があり、その結果、分割された`DELETE`と`INSERT`件のイベントの順序も正しくなくなる可能性がある、下流データの不整合の問題が解決されます。詳細については、 [ドキュメント](/ticdc/ticdc-split-update-behavior.md#split-update-events-for-mysql-sinks)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -106,7 +106,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) | 非推奨    | v8.1.0以降、TiDBのテレメトリ機能が削除され、この変数は機能しなくなりました。これは以前のバージョンとの互換性のためだけに保持されています。                                                                                                                                                                                                                                                                                       |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)         | 変更   | 値の範囲を`[0, 18446744073709551615]`から`(0, 1]`に変更します。                                                                                                                                                                                                                                                                                                                |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | 変更   | デフォルト値を`OFF`から`ON`に変更します。これは、Distributed eXecution Framework（DXF）がデフォルトで有効になることを意味します。これにより、TiDBクラスターのリソースが最大限に活用され、 `ADD INDEX`および`IMPORT INTO`タスクのパフォーマンスが大幅に向上します。DXFが有効になっているクラスターをv8.1.0以降にアップグレードする場合は、アップグレード前にDXFを無効にしてください（ `tidb_enable_dist_task`を`OFF`に設定）。これにより、アップグレード中に`ADD INDEX`操作が発生し、データインデックスの不整合が発生するのを回避できます。アップグレード後、DXFを手動で有効にすることができます。 |
-| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 変更   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)参照してください。                                     |
+| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)       | 変更   | オプションの値を`""`または`background`から最大 64 文字の文字列に変更します。これにより、各 TiDB ノードのサービス範囲をより柔軟に制御できます。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-`です。Distributed eXecution Framework (DXF) は、この変数の値に基づいて、どの TiDB ノードに分散タスクの実行をスケジュールするかを決定します。具体的なルールについては、 [タスクのスケジュール](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。                                     |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
@@ -165,7 +165,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlash
 
-    -   TLS を有効にした後に証明書を更新することでTiFlash がpanic可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
+    -   TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[＃8535](https://github.com/pingcap/tiflash/issues/8535) @ [windtalker](https://github.com/windtalker)
 
 -   ツール
 
@@ -210,7 +210,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   IndexHashJoin が Anti Left Outer Semi Join を計算するときに冗長なデータを出力する問題を修正しました。 [＃52923](https://github.com/pingcap/tidb/issues/52923) @ [yibin87](https://github.com/yibin87)
     -   相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @ [yibin87](https://github.com/yibin87)
     -   HashJoinプローブの不正確な実行時間統計を修正 [＃52222](https://github.com/pingcap/tidb/issues/52222) @ [windtalker](https://github.com/windtalker)
-    -   静的パーティションプルーニングモードで`TABLESAMPLE`使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [＃52282](https://github.com/pingcap/tidb/issues/52282) @ [tangenta](https://github.com/tangenta)
+    -   静的パーティションプルーニングモードで`TABLESAMPLE`を使用すると誤った結果が返される問題を修正（ `tidb_partition_prune_mode='static'` ） [＃52282](https://github.com/pingcap/tidb/issues/52282) @ [tangenta](https://github.com/tangenta)
     -   夏時間でTTLが1時間ずれる問題を修正 [＃51675](https://github.com/pingcap/tidb/issues/51675) @ [lcwangchao](https://github.com/lcwangchao)
     -   TiDB Dashboardのモニタリングページにおける接続数（接続数）の計算と表示が誤っていた問題を修正しました。 [＃51889](https://github.com/pingcap/tidb/issues/51889) @ [YangKeao](https://github.com/YangKeao)
     -   パーティションDDLタスクをロールバックするときにステータスが停止する問題を修正しました [＃51090](https://github.com/pingcap/tidb/issues/51090) @ [jiyfhust](https://github.com/jiyfhust)
@@ -218,7 +218,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   `TIDB_HOT_REGIONS`テーブルをクエリすると、誤って`INFORMATION_SCHEMA`テーブルが返される可能性がある問題を修正しました。 [＃50810](https://github.com/pingcap/tidb/issues/50810) @ [Defined2014](https://github.com/Defined2014)
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @ [time-and-fate](https://github.com/time-and-fate)
     -   `IFNULL`関数によって返される型が MySQL と一致しない問題を修正しました [＃51765](https://github.com/pingcap/tidb/issues/51765) @ [YangKeao](https://github.com/YangKeao)
-    -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
 
 -   TiKV
 
@@ -233,7 +233,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
     -   TTLパラメータを解析する際に発生する型変換エラーを修正[＃7980](https://github.com/tikv/pd/issues/7980) @ [HuSharp](https://github.com/HuSharp)
     -   展開された2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[＃7992](https://github.com/tikv/pd/issues/7992) @ [TonsnakeLin](https://github.com/TonsnakeLin)
     -   pd-ctl の`PrintErrln`が`stderr` にエラーメッセージを出力できない問題を修正しました [＃8022](https://github.com/tikv/pd/issues/8022) @ [HuSharp](https://github.com/HuSharp)
-    -   `Merge`スケジュールを生成する際にPDがpanic可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @ [nolouch](https://github.com/nolouch)
+    -   `Merge`スケジュールを生成する際にPDがpanicする可能性がある問題を修正 [＃8049](https://github.com/tikv/pd/issues/8049) @ [nolouch](https://github.com/nolouch)
     -   `GetAdditionalInfo` によって引き起こされるpanic問題を修正 [＃8079](https://github.com/tikv/pd/issues/8079) @ [HuSharp](https://github.com/HuSharp)
     -   PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[＃8125](https://github.com/tikv/pd/issues/8125) @ [HuSharp](https://github.com/HuSharp)
     -   クエリ結果`SHOW CONFIG`に非推奨の構成項目`trace-region-flow` が含まれる問題を修正しました [＃7917](https://github.com/tikv/pd/issues/7917) @ [rleungx](https://github.com/rleungx)
@@ -241,11 +241,11 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 -   TiFlash
 
-    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanic可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   TiFlash が高同時読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[＃8845](https://github.com/pingcap/tiflash/issues/8845) @ [JinheLin](https://github.com/JinheLin)
     -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`構成項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [＃8920](https://github.com/pingcap/tiflash/issues/8920) @ [JinheLin](https://github.com/JinheLin)
     -   クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[＃9039](https://github.com/pingcap/tiflash/issues/9039) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanic可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @ [guo-shaoge](https://github.com/guo-shaoge)
+    -   分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[＃8860](https://github.com/pingcap/tiflash/issues/8860) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   仮想生成列を含むクエリを実行するとTiFlash がエラーを返す可能性がある問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @ [guo-shaoge](https://github.com/guo-shaoge)
 
 -   ツール
@@ -258,12 +258,12 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
         -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @ [YuJuncen](https://github.com/YuJuncen)
         -   フルバックアップ中に`--concurrency`に関連する紛らわしい情報がログに表示される問題を修正 [＃50837](https://github.com/pingcap/tidb/issues/50837) @ [BornChanger](https://github.com/BornChanger)
         -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
-        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントがに進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
+        -   ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [＃53047](https://github.com/pingcap/tidb/issues/53047) @ [RidRisR](https://github.com/RidRisR)
         -   不安定なテストケース`TestClearCache` を修正 [＃51671](https://github.com/pingcap/tidb/issues/51671) @ [zxc111](https://github.com/zxc111)
         -   不安定なテストケース`TestGetMergeRegionSizeAndCount` を修正 [＃52095](https://github.com/pingcap/tidb/issues/52095) @ [3pointer](https://github.com/3pointer)
         -   不安定な統合テストを修正`br_tikv_outage` [＃52673](https://github.com/pingcap/tidb/issues/52673) @ [Leavrth](https://github.com/Leavrth)
         -   テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [Leavrth](https://github.com/Leavrth)
-        -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanic可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
+        -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
 
@@ -286,7 +286,7 @@ TiDB 8.1.0 は長期サポートリリース (LTS) です。
 
 ## パフォーマンステスト {#performance-test}
 
-TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)参照してください。
+TiDB v8.1.0 のパフォーマンスについては、 TiDB Cloud Dedicated クラスターの[TPC-Cパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-tpcc)と[Sysbenchパフォーマンステストレポート](https://docs.pingcap.com/tidbcloud/v8.1-performance-benchmarking-with-sysbench)を参照してください。
 
 ## 貢献者 {#contributors}
 

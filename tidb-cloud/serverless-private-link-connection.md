@@ -93,7 +93,7 @@ TiDB Cloud CLI を使用してプライベート リンク接続を作成する�
 
 TiDB Cloudコンソールを使用して、Amazon MSK プロビジョニングされたプライベートリンク接続を作成できます。
 
-Amazon MSK プロビジョニングプライベートリンク接続を作成する前に、Amazon MSK プロビジョニングクラスターでマルチVPC接続が有効になっていることを確認してください。詳細については、 [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)参照してください。
+Amazon MSK プロビジョニングプライベートリンク接続を作成する前に、Amazon MSK プロビジョニングクラスターでマルチVPC接続が有効になっていることを確認してください。詳細については、 [プライベートリンク接続経由​​でプロビジョニングされた Amazon MSK に接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
 
@@ -221,7 +221,7 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
 
 TiDB Cloud CLI を使用してTiDB Cloud管理対象ドメインをアタッチするには、次の手順を実行します。
 
-1.  `dry run`使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
+1.  `dry run`を使用すると、アタッチするドメインをプレビューできます。次のステップで使用する一意の名前が出力されます。
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run

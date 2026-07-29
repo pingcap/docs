@@ -18,7 +18,7 @@ summary: TiDBの非トランザクションDMLステートメントについて�
 -   `UPDATE`
 -   `DELETE`
 
-詳細な構文については[`BATCH`](/sql-statements/sql-statement-batch.md)参照してください。
+詳細な構文については[`BATCH`](/sql-statements/sql-statement-batch.md)を参照してください。
 
 > **Note:**
 >
@@ -51,7 +51,7 @@ summary: TiDBの非トランザクションDMLステートメントについて�
     -   非トランザクション`INSERT INTO ... SELECT`ステートメント内で同じテーブルから選択して変更する場合は、シャード列を変更しないでください。そうしないと、複数のバッチが同じ行を読み取り、データを複数回挿入する可能性があります。
         -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`使用は推奨されません。
         -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`を使用することをお勧めします。
-        -   シャード列`id`に`AUTO_INCREMENT`属性がある場合は、 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`使用することをお勧めします。
+        -   シャード列`id`に`AUTO_INCREMENT`属性がある場合は、 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`を使用することをお勧めします。
     -   非トランザクション`UPDATE` 、 `INSERT ... ON DUPLICATE KEY UPDATE` 、または`REPLACE INTO`ステートメントでシャード列を更新しないでください。
         -   例えば、非トランザクション`UPDATE`ステートメントの場合、分割された SQL ステートメントは順番に実行されます。前のバッチの変更は、前のバッチがコミットされた後に次のバッチによって読み取られるため、同じデータ行が複数回変更されることになります。
         -   これらのステートメントは`BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`サポートしていません。
@@ -162,7 +162,7 @@ SELECT * FROM t2;
 
 ### 実行の進行状況を確認する {#check-the-execution-progress}
 
-非トランザクションDML文の実行中は、 `SHOW PROCESSLIST`使用して進行状況を確認できます。返される結果の`Time`フィールドは、現在のバッチ実行の消費時間を示します。ログとスローログには、非トランザクションDML実行中の各分割文の進行状況も記録されます。例:
+非トランザクションDML文の実行中は、 `SHOW PROCESSLIST`を使用して進行状況を確認できます。返される結果の`Time`フィールドは、現在のバッチ実行の消費時間を示します。ログとスローログには、非トランザクションDML実行中の各分割文の進行状況も記録されます。例:
 
 ```sql
 SHOW PROCESSLIST;
@@ -179,7 +179,7 @@ SHOW PROCESSLIST;
 
 ### 非トランザクションDML文を終了する {#terminate-a-non-transactional-dml-statement}
 
-非トランザクションDML文を終了するには、 `KILL TIDB <processlist_id>`使用します。TiDBは現在実行中のバッチ以降のすべてのバッチをキャンセルします。実行結果はログから取得できます。
+非トランザクションDML文を終了するには、 `KILL TIDB <processlist_id>`を使用します。TiDBは現在実行中のバッチ以降のすべてのバッチをキャンセルします。実行結果はログから取得できます。
 
 `KILL TIDB`詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 

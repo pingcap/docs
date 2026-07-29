@@ -275,7 +275,7 @@ TiDB は、 ACIDモデルにおけるトランザクションの線形一貫性�
 
 NTP サービスがインストールされ、NTPサーバーと正常に同期しているかどうかを確認するには、次の手順を実行します。
 
-1.  次のコマンドを実行します。1 `running`返された場合、NTPサービスは実行中です。
+1.  次のコマンドを実行します。`running`が返された場合、NTPサービスは実行中です。
 
     ```bash
     sudo systemctl status ntpd.service
@@ -285,7 +285,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
         Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
         Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
 
-    -   `Unit ntpd.service could not be found.`返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`使用するように設定されているかどうかを確認します。
+    -   `Unit ntpd.service could not be found.`が返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`を使用するように設定されているかどうかを確認します。
 
         ```bash
         sudo systemctl status chronyd.service
@@ -297,7 +297,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
 
         結果に`chronyd`と`ntpd`どちらも設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`をインストールし、自動起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
 
-        システムが`chronyd`使用するように構成されている場合は、手順 3 に進みます。
+        システムが`chronyd`を使用するように構成されている場合は、手順 3 に進みます。
 
 2.  `ntpstat`コマンドを実行して、NTP サービスが NTPサーバーと同期しているかどうかを確認します。
 
@@ -357,9 +357,9 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
 
             506 Cannot talk to daemon
 
-    -   オフセットが大きすぎると思われる場合は、コマンド`chronyc makestep`を実行してすぐに時間オフセットを修正できます。そうでない場合は、 `chronyd`実行して徐々に時間オフセットを修正します。
+    -   オフセットが大きすぎると思われる場合は、コマンド`chronyc makestep`を実行してすぐに時間オフセットを修正できます。そうでない場合は、 `chronyd`を実行して徐々に時間オフセットを修正します。
 
-NTPサービスの同期をできるだけ早く開始するには、次のコマンドを実行してください。1 `pool.ntp.org` NTPサーバーに置き換えてください。
+NTPサービスの同期をできるだけ早く開始するには、次のコマンドを実行してください。`pool.ntp.org`をNTPサーバーに置き換えてください。
 
 ```bash
 sudo systemctl stop ntpd.service && \
@@ -379,9 +379,9 @@ sudo systemctl enable ntpd.service
 
 本番環境の TiDB の場合、次の方法でオペレーティング システム構成を最適化することをお勧めします。
 
--   [透過的巨大ページ（THP）](/tune-operating-system.md#memorytransparent-huge-page-thp)無効にします。データベースのメモリアクセスは通常、スパースです。高位メモリが著しく断片化されると、THP によるメモリ割り当てのレイテンシーが増大する可能性があります。したがって、パフォーマンスの変動を避けるため、THP を無効にすることをお勧めします。
+-   [透過的巨大ページ（THP）](/tune-operating-system.md#memorytransparent-huge-page-thp)を無効にします。データベースのメモリアクセスは通常、スパースです。高位メモリが著しく断片化されると、THP によるメモリ割り当てのレイテンシーが増大する可能性があります。したがって、パフォーマンスの変動を避けるため、THP を無効にすることをお勧めします。
 
--   ストレージ媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)設定します。
+-   ストレージ媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)を設定します。
 
     -   高速SSDストレージの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
     -   NVMeストレージの場合、デフォルトのI/Oスケジューラは`none`なので、調整は必要ありません。
@@ -430,7 +430,7 @@ sudo systemctl enable ntpd.service
     >
     > `[none] mq-deadline kyber bfq` 、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
 
-3.  ディスクの`ID_SERIAL`確認するには、次のコマンドを実行します。
+3.  ディスクの`ID_SERIAL`を確認するには、次のコマンドを実行します。
 
     ```bash
     udevadm info --name=/dev/sdb | grep ID_SERIAL
@@ -441,7 +441,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > -   複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
+    > -   複数のディスクにデータ ディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`を記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
     > -   デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
 4.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
@@ -521,7 +521,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `grubby`実行する前に、まず`grubby`パッケージをインストールします。
+            > `grubby`を実行する前に、まず`grubby`パッケージをインストールします。
 
             ```bash
             grubby --default-kernel
@@ -531,7 +531,7 @@ sudo systemctl enable ntpd.service
             /boot/vmlinuz-3.10.0-957.el7.x86_64
             ```
 
-        2.  カーネル構成を変更するには、 `grubby --update-kernel`実行します。
+        2.  カーネル構成を変更するには、 `grubby --update-kernel`を実行します。
 
             ```bash
             grubby --args="transparent_hugepage=never" --update-kernel `grubby --default-kernel`
@@ -541,7 +541,7 @@ sudo systemctl enable ntpd.service
             >
             > `--update-kernel`後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
 
-        3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`実行します。
+        3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`を実行します。
 
             ```bash
             grubby --info /boot/vmlinuz-3.10.0-957.el7.x86_64
@@ -696,14 +696,14 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
 
         tidb ALL=(ALL) NOPASSWD: ALL
 
-3.  `tidb`ユーザーでコントロールマシンにログインし、以下のコマンドを実行します。3 `10.0.1.1`ターゲットマシンの IP アドレスに置き換え、プロンプトが表示されたらターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンド実行後、SSH 相互信頼が既に作成されています。これは他のマシンにも適用されます。新しく作成された`tidb`ユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSA キーを生成するコマンドを実行します。コントロールマシンに TiDB コンポーネントを展開するには、コントロールマシンとコントロールマシン自体の相互信頼を設定します。
+3.  `tidb`ユーザーでコントロールマシンにログインし、以下のコマンドを実行します。`10.0.1.1`をターゲットマシンの IP アドレスに置き換え、プロンプトが表示されたらターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンド実行後、SSH 相互信頼が既に作成されています。これは他のマシンにも適用されます。新しく作成された`tidb`ユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSA キーを生成するコマンドを実行します。コントロールマシンに TiDB コンポーネントを展開するには、コントロールマシンとコントロールマシン自体の相互信頼を設定します。
 
     ```bash
     ssh-keygen -t rsa
     ssh-copy-id -i ~/.ssh/id_rsa.pub 10.0.1.1
     ```
 
-4.  `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`使用してターゲットマシンの IP アドレスにログインします。パスワードを入力する必要がなく、正常にログインできれば、SSH 相互信頼が正常に設定されています。
+4.  `tidb`ユーザーアカウントを使用してコントロールマシンにログインし、 `ssh`を使用してターゲットマシンの IP アドレスにログインします。パスワードを入力する必要がなく、正常にログインできれば、SSH 相互信頼が正常に設定されています。
 
     ```bash
     ssh 10.0.1.1

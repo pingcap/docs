@@ -11,8 +11,8 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 | 関数名                                                     | 機能の説明                                                                                                                                                                                                                                            |
 | :------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループの名前を返します。1 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。                                                                                                                           |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。1 [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)参照してください。                                                                                                                                           |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループの名前を返します。[リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。                                                                                                                           |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。[`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)を参照してください。                                                                                                                                           |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso)               | 現在の[TiDB のタイムスタンプ Oracle (TSO)](/tso.md)を返します。                                                                                                                                                                                                   |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                           |
@@ -36,8 +36,8 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 | 関数名                                                     | 機能の説明                                                                                                                                                                                                                                                                       |
 | :------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループ名を返します。1 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。                                                                                                                                                        |
-| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。1 [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)参照してください。                                                                                                                                                                      |
+| [`CURRENT_RESOURCE_GROUP()`](#current_resource_group)   | 現在のセッションがバインドされているリソースグループ名を返します。[リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。                                                                                                                                                        |
+| [`TIDB_BOUNDED_STALENESS()`](#tidb_bounded_staleness)   | 指定された時間範囲内の最新のデータを読み取るようTiDBに指示します。[`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)を参照してください。                                                                                                                                                                      |
 | [`TIDB_CURRENT_TSO()`](#tidb_current_tso)               | 現在の[TiDB のタイムスタンプ Oracle (TSO)](/tso.md)を返します。                                                                                                                                                                                                                              |
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                                                      |
@@ -61,7 +61,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 `CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。3 [リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
 
-セッションが確立されると、TiDB はログインユーザーがデフォルトでバインドされているリソースグループにセッションをバインドします。ユーザーがどのリソースグループにもバインドされていない場合、セッションは`default`リソースグループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソースグループが[ユーザーにバインドされたリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されても、バインドされているリソースグループはデフォルトで変更されません。現在のセッションのバインドされているリソースグループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用します。
+セッションが確立されると、TiDB はログインユーザーがデフォルトでバインドされているリソースグループにセッションをバインドします。ユーザーがどのリソースグループにもバインドされていない場合、セッションは`default`リソースグループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソースグループが[ユーザーにバインドされたリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されても、バインドされているリソースグループはデフォルトで変更されません。現在のセッションのバインドされているリソースグループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用します。
 
 例:
 
@@ -74,7 +74,7 @@ CREATE RESOURCE GROUP rg2 RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-`user1`使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
+`user1`を使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -87,7 +87,7 @@ SELECT CURRENT_RESOURCE_GROUP();
     +--------------------------+
     1 row in set (0.00 sec)
 
-`SET RESOURCE GROUP`実行して、現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
+`SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -266,7 +266,7 @@ ORDER BY
 
 TiDB実行プランは、スロークエリログにエンコードされた形式で保存されています。1関数`TIDB_DECODE_PLAN()` 、エンコードされたプランを人間が読める形式にデコードするために使用されます。
 
-この関数は、ステートメント実行時にプランが取得されるため便利です。1 `EXPLAIN`ステートメントを再実行すると、データの分布と統計が時間の経過とともに変化するため、異なる結果が生成される可能性があります。
+この関数は、ステートメント実行時にプランが取得されるため便利です。`EXPLAIN`ステートメントを再実行すると、データの分布と統計が時間の経過とともに変化するため、異なる結果が生成される可能性があります。
 
 ```sql
 SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA')\G
@@ -285,14 +285,14 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタ内のSQLダイジェストセットに対応する正規化されたSQL文（フォーマットと引数のない形式）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
 
 -   `digests` : 文字列。このパラメータはJSON文字列配列の形式であり、配列内の各文字列はSQLダイジェストです。
--   `stmtTruncateLength` : 整数（オプション）。返される結果内の各SQL文の長さを制限するために使用されます。SQL文が指定された長さを超えた場合、文は切り捨てられます。2 `0`長さが無制限であることを意味します。
+-   `stmtTruncateLength` : 整数（オプション）。返される結果内の各SQL文の長さを制限するために使用されます。SQL文が指定された長さを超えた場合、文は切り捨てられます。`0`は長さが無制限であることを意味します。
 
 この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメータの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`なります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`"..."`が追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`なります。
 
 > **Note:**
 >
 > -   この機能を使用できるのは、 [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみです。
-> -   `TIDB_DECODE_SQL_DIGESTS`実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL ステートメントを照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [明細書要約表](/statement-summary-tables.md)参照してください。
+> -   `TIDB_DECODE_SQL_DIGESTS`を実行すると、TiDB は各 SQL ダイジェストに対応するステートメントをステートメントサマリーテーブルから照会します。そのため、どの SQL ダイジェストに対しても、必ず対応するステートメントが見つかるとは限りません。見つかるのはクラスタ内で実行されたステートメントのみであり、これらの SQL ステートメントを照会できるかどうかは、ステートメントサマリーテーブルの関連設定にも影響されます。ステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 > -   この関数はオーバーヘッドが大きいため、行数の多いクエリ（例えば、大規模で高負荷なクラスターでテーブル`information_schema.cluster_tidb_trx`全体を検索するなど）では、この関数を使用するとクエリの実行時間が長くなりすぎる可能性があります。注意して使用してください。
 >     -   この関数は、呼び出されるたびに内部的に`STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、 `CLUSTER_STATEMENTS_SUMMARY_HISTORY`テーブルを照会し、そのクエリに`UNION`演算が含まれるため、オーバーヘッドが大きくなります。この関数は現在ベクトル化をサポートしていません。つまり、複数行のデータに対してこの関数を呼び出す場合、上記のクエリは各行ごとに個別に実行されます。
 
@@ -330,7 +330,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 
 参照:
 
--   [明細書要約表](/statement-summary-tables.md)
+-   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [`INFORMATION_SCHEMA.TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ## TIDB_ENCODE_SQL_DIGEST {#tidb-encode-sql-digest}
@@ -471,7 +471,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 
 -   作成:
 
-    インデックスフィールド`a`にシャードインデックスを作成するには、 `uk((tidb_shard(a)), a))`使用します。一意のセカンダリインデックス`uk((tidb_shard(a)), a))`内のインデックスフィールド`a`のデータが単調に増加または減少することでホットスポットが発生した場合、インデックスのプレフィックス`tidb_shard(a)`によってホットスポットを分散させることで、クラスターのスケーラビリティを向上させることができます。
+    インデックスフィールド`a`にシャードインデックスを作成するには、 `uk((tidb_shard(a)), a))`を使用します。一意のセカンダリインデックス`uk((tidb_shard(a)), a))`内のインデックスフィールド`a`のデータが単調に増加または減少することでホットスポットが発生した場合、インデックスのプレフィックス`tidb_shard(a)`によってホットスポットを分散させることで、クラスターのスケーラビリティを向上させることができます。
 
 -   シナリオ:
 

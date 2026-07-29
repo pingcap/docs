@@ -59,7 +59,7 @@ TiDBでは、パーティション[パーティショニング](/partitioned-tab
 
 列はテーブルの下位要素です。各テーブルには少なくとも1つの列があります。列は、各行の値を単一のデータ型の小さなセルに分割することで、テーブルに構造を与えます。
 
-詳細については、 [列を定義する](/develop/dev-guide-create-table.md#define-columns)参照してください。
+詳細については、 [列を定義する](/develop/dev-guide-create-table.md#define-columns)を参照してください。
 
 ## 生成された列 {#generated-columns}
 
@@ -113,7 +113,7 @@ TiDB v8.0.0以降では、 [`tidb_opt_use_invisible_indexes`](/system-variables.
 
 TiDBにおけるセカンダリインデックスは論理オブジェクトです。簡単に言えば、TiDBがクエリパフォーマンスを向上させるために使用するソートタイプのデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み書き操作をブロックしません。TiDBは、各インデックスに対してテーブルの各行への参照を作成し、データ自体ではなく、選択された列に基づいて参照をソートします。
 
-二次インデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)参照してください。
+セカンダリインデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)を参照してください。
 
 TiDB では、 [既存のテーブルにセカンダリインデックスを追加する](/develop/dev-guide-create-secondary-indexes.md#add-a-secondary-index-to-an-existing-table)か[新しいテーブルを作成する際にセカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md#create-a-secondary-index-when-creating-a-new-table)ことができます。
 

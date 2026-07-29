@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   Placement Driver（PD）
 
-    -   `config manager`削除して、他のコンポーネントがコンポーネント構成を制御できるようにします[＃2349](https://github.com/pingcap/pd/pull/2349)
+    -   `config manager`を削除して、他のコンポーネントがコンポーネント構成を制御できるようにします[＃2349](https://github.com/pingcap/pd/pull/2349)
 
 -   TiFlash
 
@@ -117,7 +117,7 @@ TiDB バージョン: 4.0.0-rc.1
 -   `show create table`文のデフォルトシーケンス値の誤った表示を修正 [＃16526](https://github.com/pingcap/tidb/pull/16526)
 -   シーケンスが主キーのデフォルト値として使用されるために`not-null`エラーが返される問題を修正しました [＃16510](https://github.com/pingcap/tidb/pull/16510)
 -   TiKVが`StaleCommand`エラーを返し続けているときに、ブロックされたSQL実行に対してエラーが報告されない問題を修正しました。 [＃16530](https://github.com/pingcap/tidb/pull/16530)
--   データベースの作成時に`COLLATE`を指定するとエラーが報告される問題を修正しました。5 `SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[＃16540](https://github.com/pingcap/tidb/pull/16540)
+-   データベースの作成時に`COLLATE`を指定するとエラーが報告される問題を修正しました。`SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[＃16540](https://github.com/pingcap/tidb/pull/16540)
 -   プランキャッシュが有効な場合のパーティションプルーニングの失敗を修正[＃16723](https://github.com/pingcap/tidb/pull/16723)
 -   オーバーフロー処理時に誤った結果を返すバグ`PointGet`修正 [＃16755](https://github.com/pingcap/tidb/pull/16755)
 -   同じ時間値を持つ`slow_query`システムテーブルをクエリすると間違った結果が返される問題を修正しました[＃16806](https://github.com/pingcap/tidb/pull/16806)
@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   楽観的トランザクションで多くの書き込み競合が発生する場合、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないようにする [＃7604](https://github.com/tikv/tikv/pull/7604)
     -   ロック競合の負荷が高いワークロードで、トランザクションの不要なウェイクアップによって無駄な再試行が発生し、パフォーマンスが低下する問題を修正しました[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正[＃7518](https://github.com/tikv/tikv/pull/7518)
-    -   ラーナー削除してもラーナーが削除されない問題を修正 [＃7518](https://github.com/tikv/tikv/pull/7518)
+    -   ラーナーを削除してもラーナーが削除されない問題を修正 [＃7518](https://github.com/tikv/tikv/pull/7518)
     -   raft-rs でフォロワーの読み取りによってpanicが発生する可能性がある問題を修正しました [＃7408](https://github.com/tikv/tikv/pull/7408)
     -   `group by constant`エラーによりSQL操作が失敗する可能性があるバグを修正しました [＃7383](https://github.com/tikv/tikv/pull/7383)
     -   対応するプライマリロックが悲観的ロックの場合に楽観的ロックが読み取りをブロックする可能性がある問題を修正[＃7328](https://github.com/tikv/tikv/pull/7328)

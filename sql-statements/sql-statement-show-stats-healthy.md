@@ -31,7 +31,7 @@ ShowLikeOrWhere ::=
 
 ## 例 {#examples}
 
-サンプルデータをロードして`ANALYZE`実行します。
+サンプルデータをロードして`ANALYZE`を実行します。
 
 ```sql
 CREATE TABLE t1 (

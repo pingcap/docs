@@ -77,7 +77,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 
 ## JSONパス {#jsonpath}
 
-多くの JSON関数は、 [JSONパス](https://www.rfc-editor.org/rfc/rfc9535.html)使用して JSON ドキュメントの一部を選択します。
+多くの JSON関数は、 [JSONパス](https://www.rfc-editor.org/rfc/rfc9535.html)を使用して JSON ドキュメントの一部を選択します。
 
 | シンボル           | 説明        |
 | -------------- | --------- |
@@ -128,7 +128,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | JSONパス                                | 説明                         | 例[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)   |
 | ------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `$`                                   | 文書のルート                     | 完全な文書を返します                                                                                           |
-| `$.database`                          | `database`オブジェクト           | `"database"`から始まる完全な構造を返します。3 `"migration_tool"`それ以下の構造は含まれません。                                      |
+| `$.database`                          | `database`オブジェクト           | `"database"`から始まる完全な構造を返します。`"migration_tool"`とそれ以下の構造は含まれません。                                      |
 | `$.database.name`                     | データベースの名前。                 | `"TiDB"`                                                                                             |
 | `$.database.features`                 | すべてのデータベース機能               | `["distributed", "scalable", "relational", "cloud native"]`                                          |
 | `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |
@@ -139,7 +139,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | `$**.version`                         | パスワイルドカードを使用したすべてのバージョン    | `["v8.1.0","v8.0.0"]`                                                                                |
 | `$.database.features[0 to 2]`         | 1 番目から 3 番目までのデータベース機能の範囲。 | `["scalable","relational"]`                                                                          |
 
-詳細については[JSONPathのIETFドラフト](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)参照してください。
+詳細については[JSONPathのIETFドラフト](https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html)を参照してください。
 
 ## 参照 {#see-also}
 
@@ -151,7 +151,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 -   `JSON_TABLE()`
 -   `JSON_VALUE()`
 
-詳細については[＃14486](https://github.com/pingcap/tidb/issues/14486)参照してください。
+詳細については[＃14486](https://github.com/pingcap/tidb/issues/14486)を参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 

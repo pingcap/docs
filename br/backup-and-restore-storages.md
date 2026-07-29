@@ -37,7 +37,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 [scheme]://[host]/[path]?[parameters]
 ```
 
-URI 形式の詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+URI 形式の詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 ### URIの例 {#uri-examples}
 
@@ -109,7 +109,7 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 -   バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップ ディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
 -   復元中に TiKV とBRがバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
-バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
+バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
 
 > **Note:**
 >
@@ -171,11 +171,11 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
 -   方法1: 共有アクセス署名を指定する
 
-    URIに`account-name`と`sas-token`指定した場合、指定されたアカウント名と共有アクセス署名（SAS）トークンを使用して認証が行われます。SASトークンには`&`という文字が含まれていることに注意してください。これをURIに追加する前に、 `%26`としてエンコードする必要があります。パーセントエンコードを使用して、 `sas-token`全体を直接エンコードすることもできます。
+    URIに`account-name`と`sas-token`を指定した場合、指定されたアカウント名と共有アクセス署名（SAS）トークンを使用して認証が行われます。SASトークンには`&`という文字が含まれていることに注意してください。これをURIに追加する前に、 `%26`としてエンコードする必要があります。パーセントエンコードを使用して、 `sas-token`全体を直接エンコードすることもできます。
 
 -   方法2: アクセスキーを指定する
 
-    URIに`account-name`と`account-key`指定すると、指定されたアカウント名とアカウントキーを用いて認証が行われます。URIでキーを指定する方法に加え、 BRは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
+    URIに`account-name`と`account-key`を指定すると、指定されたアカウント名とアカウントキーを用いて認証が行われます。URIでキーを指定する方法に加え、 BRは環境変数`$AZURE_STORAGE_KEY`からキーを読み取ることもできます。
 
 -   方法3: バックアップと復元にAzure ADを使用する
 
@@ -289,7 +289,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
 ### Amazon S3 サーバー側暗号化 {#amazon-s3-server-side-encryption}
 
-BR は、Amazon S3 へのデータバックアップ時にサーバー側暗号化をサポートします。また、 BRを使用して S3 のサーバー側暗号化用に作成した AWS KMS キーを使用することもできます。詳細については、 [BR S3 サーバー側暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)参照してください。
+BR は、Amazon S3 へのデータバックアップ時にサーバー側暗号化をサポートします。また、 BRを使用して S3 のサーバー側暗号化用に作成した AWS KMS キーを使用することもできます。詳細については、 [BR S3 サーバー側暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
 
 ### Azure Blob Storage のサーバー側暗号化 {#azure-blob-storage-server-side-encryption}
 

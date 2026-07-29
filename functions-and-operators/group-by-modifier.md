@@ -38,19 +38,19 @@ SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 
 <CustomContent platform="tidb">
 
-v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)参照してください。
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)を参照してください。
 
 </CustomContent>
 
 v8.3.0以降では、上記の制限は解除されました。TiDBクラスターにTiFlashノードが含まれているかどうかに関係なく、TiDBは`WITH ROLLUP`構文の有効な実行プランの生成をサポートします。
 
-TiDBとTiFlashのどちらが演算子`Expand`実行するかを確認するには、実行プランで演算子`Expand`の属性`task`確認します。詳細については、 [ROLLUP実行プランの解釈方法](#how-to-interpret-the-rollup-execution-plan)参照してください。
+TiDBとTiFlashのどちらが演算子`Expand`を実行するかを確認するには、実行プランで演算子`Expand`の属性`task`を確認します。詳細については、 [ROLLUP実行プランの解釈方法](#how-to-interpret-the-rollup-execution-plan)を参照してください。
 
 ## 例 {#examples}
 
@@ -110,7 +110,7 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 
 `WITH ROLLUP`結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
 
-たとえば、 `HAVING`句の`NULL`使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
+たとえば、 `HAVING`句の`NULL`を使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP HAVING year IS NOT null AND month IS NOT null;
@@ -154,7 +154,7 @@ GROUPING(day, month, year):
 + result for GROUPING(day) << 2
 ```
 
-`GROUPING()`関数で複数のパラメータを使用することで、任意の高次元で集計結果を効率的にフィルタリングできます。例えば、 `GROUPING(year, month)`使用すると、各年と全年の集計結果を素早くフィルタリングできます。
+`GROUPING()`関数で複数のパラメータを使用することで、任意の高次元で集計結果を効率的にフィルタリングできます。例えば、 `GROUPING(year, month)`を使用すると、各年と全年の集計結果を素早くフィルタリングできます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP HAVING GROUPING(year, month) <> 0 ORDER BY year DESC, month DESC;
@@ -174,7 +174,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 `Expand`演算子の実装は`Projection`演算子と似ています。違いは、 `Expand`多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`演算子は結果に 1 行のみを生成しますが、 `Expand`演算子は結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
-次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。3 `Expand`演算子のうちの`task` `root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
+次の例は、 TiFlashノードのない TiDB クラスターの実行プランを示しています。`Expand`演算子のうちの`task`が`root`であり、 `Expand`演算子が TiDB で実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -191,7 +191,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 6 rows in set (0.00 sec)
 ```
 
-次の例は、 TiFlash MPP モードでの実行プランを示しています。3 `Expand`演算子のうち`task` `mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
+次の例は、 TiFlash MPP モードでの実行プランを示しています。`Expand`演算子のうち`task`が`mpp[tiflash]`であり、これは`Expand`演算子がTiFlashで実行されることを示しています。
 
 ```sql
 EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;

@@ -49,7 +49,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_initial_scan_operations**            | カウンタ   | 初期スキャン中の RocksDB 関連操作の統計。<br/> `cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                       |
 | **tikv_log_backup_enabled**                            | カウンタ   | ログバックアップを有効にするかどうか。値が`0`より大きい場合、ログバックアップは有効になります。                                                                                          |
 | **tikv_log_backup_observed_region**                    | ゲージ    | リッスンされているリージョンの数。                                                                                                                          |
-| **tikv_log_backup_task_status**                        | ゲージ    | ログ バックアップ タスクのステータス。1 `0`実行中、 `1`一時停止中、 `2`エラーを意味します。<br/> `task :: string`                                                                |
+| **tikv_log_backup_task_status**                        | ゲージ    | ログ バックアップ タスクのステータス。`0`は実行中、 `1`は一時停止中、 `2`はエラーを意味します。<br/> `task :: string`                                                                |
 | **tikv_log_backup_pending_initial_scan**               | ゲージ    | 保留中の初期スキャンの統計。<br/> `stage :: {"queuing", "executing"}`                                                                                    |
 
 ### ログバックアップアラート {#log-backup-alerts}
@@ -97,19 +97,19 @@ groups:
 
 -   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 -   警戒レベル：警告
--   説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`実行してください。
+-   説明: ログバックアップタスクが2時間以上一時停止されています。このアラートはリマインダーであり、できるだけ早く`br log resume`を実行してください。
 
 #### ログバックアップ一時停止中（12時間以上） {#logbackuppausingmorethan12h}
 
 -   警告項目: `max(time() - tidb_log_backup_last_checkpoint / 262144000) by (task) / 3600 > 12 and max(tidb_log_backup_last_checkpoint) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 -   警戒レベル: 重大
--   説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
+-   説明: ログバックアップタスクが12時間以上一時停止されています。タスクを再開するには、できるだけ早く`br log resume`を実行してください。ログタスクの一時停止時間が長すぎると、データが失われるリスクがあります。
 
 #### ログバックアップ失敗 {#logbackupfailed}
 
 -   警告項目: `max(tikv_log_backup_task_status) by (task) == 2 and max(tidb_log_backup_last_checkpoint) by (task) > 0`
 -   警戒レベル: 重大
--   説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
+-   説明: ログバックアップタスクが失敗しました。失敗の原因を確認するには、 `br log status`を実行する必要があります。必要に応じて、TiKV ログをさらに確認する必要があります。
 
 #### ログバックアップGCセーフポイントがチェックポイントを超える {#logbackupgcsafepointexceedscheckpoint}
 

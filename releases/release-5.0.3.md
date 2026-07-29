@@ -79,7 +79,7 @@ TiDB バージョン: 5.0.3
     -   `SET`型列でマージ結合を使用すると誤った結果が返される問題を修正しました [＃25669](https://github.com/pingcap/tidb/issues/25669)
     -   `IN`式の引数におけるデータ破損の問題を修正 [＃25591](https://github.com/pingcap/tidb/issues/25591)
     -   GCのセッションがグローバル変数の影響を受けないようにする[＃24976](https://github.com/pingcap/tidb/issues/24976)
-    -   ウィンドウ関数クエリで`limit`使用するときに発生するpanic問題を修正 [＃25344](https://github.com/pingcap/tidb/issues/25344)
+    -   ウィンドウ関数クエリで`limit`を使用するときに発生するpanic問題を修正 [＃25344](https://github.com/pingcap/tidb/issues/25344)
     -   `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [＃24636](https://github.com/pingcap/tidb/issues/24636)
     -   `IFNULL` `ENUM`または`SET`タイプの列に正しく反映されない問題を修正 [＃24944](https://github.com/pingcap/tidb/issues/24944)
     -   結合サブクエリの`count` `first_row` に変更することで発生する誤った結果を修正しました [＃24865](https://github.com/pingcap/tidb/issues/24865)

@@ -44,7 +44,7 @@ TiDB Ansible バージョン: 3.0.2
     -   `DATE_ADD`と`DATE_SUB`関数の結果が超える場合に`NULL`返されない場合がある問題を修正しました。 [＃11476](https://github.com/pingcap/tidb/pull/11476)
     -   長い文字列を整数に変換するときに、文字列に無効な文字が含まれているとMySQLの変換結果と異なる問題を修正しました。 [＃11469](https://github.com/pingcap/tidb/pull/11469)
     -   この関数大文字と小文字の区別により、関数`REGEXP BINARY`の結果がMySQLと互換性がない問題を修正しました。 [＃11504](https://github.com/pingcap/tidb/pull/11504)
-    -   `GRANT ROLE`文が`CURRENT_ROLE`受け取ったときにエラーが報告される問題を修正します。5 `REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [＃11356](https://github.com/pingcap/tidb/pull/11356)
+    -   `GRANT ROLE`文が`CURRENT_ROLE`を受け取ったときにエラーが報告される問題を修正します。`REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [＃11356](https://github.com/pingcap/tidb/pull/11356)
     -   `SELECT ADDDATE('2008-01-34', -1)` のような文を実行する際の`Incorrect datetime value`警告情報の表示形式の問題を修正しました [＃11447](https://github.com/pingcap/tidb/pull/11447)
     -   JSONデータの浮動小数点フィールドを整数に変換するときに結果がオーバーフローすると、エラーメッセージが`constant … overflows bigint`ではなく`constant … overflows float`報告する問題を修正しました。 [＃11534](https://github.com/pingcap/tidb/pull/11534)
     -   `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列のパラメータを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[＃11527](https://github.com/pingcap/tidb/pull/11527)
@@ -56,7 +56,7 @@ TiDB Ansible バージョン: 3.0.2
 -   サーバ
     -   CSVファイル内の欠落しているフィールド`LOAD DATA` `TIMESTAMP`処理する際に、自動的に追加された値が現在のタイムスタンプではなく0になる問題を修正しました。 [＃11250](https://github.com/pingcap/tidb/pull/11250)
     -   `SHOW CREATE USER`文が関連する権限を正しくチェックせず、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`間違っている可能性がある問題を修正しました[＃11229](https://github.com/pingcap/tidb/pull/11229)
-    -   JDBC で`executeBatch`使用すると返される結果が間違っている可能性がある問題を修正しました [＃11290](https://github.com/pingcap/tidb/pull/11290)
+    -   JDBC で`executeBatch`を使用すると返される結果が間違っている可能性がある問題を修正しました [＃11290](https://github.com/pingcap/tidb/pull/11290)
     -   TiKVサーバーのポートを変更するときにストリーミングクライアントのログ情報の出力を削減します [＃11370](https://github.com/pingcap/tidb/pull/11370)
     -   ストリーミングクライアントが長時間ブロックされないように、ストリーミングクライアントをTiKVサーバーに再接続するロジックを最適化します[＃11372](https://github.com/pingcap/tidb/pull/11372)
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` に`REGION_ID`を足す [＃11350](https://github.com/pingcap/tidb/pull/11350)
@@ -83,7 +83,7 @@ TiDB Ansible バージョン: 3.0.2
     -   次の問題を修正しました[＃11492](https://github.com/pingcap/tidb/pull/11492) :
         -   照合順序を明示的に指定し、文字セットを指定していない場合、列の文字セットと照合順序が一致しません。
         -   `ALTER TABLE … MODIFY COLUMN`で指定された文字セットと照合順序の間に矛盾がある場合、エラーは正しく報告されません。
-        -   `ALTER TABLE … MODIFY COLUMN`使用して文字セットと照合順序を複数回指定すると、MySQL との互換性がなくなる
+        -   `ALTER TABLE … MODIFY COLUMN`を使用して文字セットと照合順序を複数回指定すると、MySQL との互換性がなくなる
     -   サブクエリのトレース詳細を`TRACE`クエリの結果に追加する [＃11458](https://github.com/pingcap/tidb/pull/11458)
     -   `ADMIN CHECK TABLE`実行パフォーマンスを最適化し、実行時間を大幅に短縮する[＃11547](https://github.com/pingcap/tidb/pull/11547)
     -   `SPLIT TABLE … REGIONS/INDEX`で返された結果を追加し、 `TOTAL_SPLIT_REGION`と`SCATTER_FINISH_RATIO`に、結果のタイムアウト前に正常に分割されたリージョンの数を表示するようにします。 [＃11484](https://github.com/pingcap/tidb/pull/11484)
@@ -110,7 +110,7 @@ TiDB Ansible バージョン: 3.0.2
 -   Scatter リージョンスケジューラが動作しないバグを修正[＃1642](https://github.com/pingcap/pd/pull/1642)
 -   pd-ctl でマージリージョン操作が実行できないバグを修正しました [＃1653](https://github.com/pingcap/pd/pull/1653)
 -   pd-ctl でtombstoneの削除操作が実行できないバグを修正しました [＃1651](https://github.com/pingcap/pd/pull/1651)
--   スキャンリージョン操作実行するときに、キースコープと重複するリージョンが見つからない問題を修正しました [＃1648](https://github.com/pingcap/pd/pull/1648)
+-   スキャンリージョン操作を実行するときに、キースコープと重複するリージョンが見つからない問題を修正しました [＃1648](https://github.com/pingcap/pd/pull/1648)
 -   PD にメンバーが正常に追加されたことを確認するための再試行メカニズムを追加します。 [＃1643](https://github.com/pingcap/pd/pull/1643)
 
 ## ツール {#tools}

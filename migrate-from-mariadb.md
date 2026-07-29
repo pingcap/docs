@@ -61,7 +61,7 @@ GROUP BY
 
 ### システムバージョン管理されたテーブル {#system-versioned-tables}
 
-TiDB は[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)サポートしていません。ただし、TiDB は[`AS OF TIMESTAMP`](/as-of-timestamp.md)をサポートしており、システム バージョン管理テーブルの使用例の一部を置き換える可能性があります。
+TiDB は[システムバージョン管理されたテーブル](https://mariadb.com/docs/server/reference/sql-structure/temporal-tables/system-versioned-tables)をサポートしていません。ただし、TiDB は[`AS OF TIMESTAMP`](/as-of-timestamp.md)をサポートしており、システム バージョン管理テーブルの使用例の一部を置き換える可能性があります。
 
 影響を受けるテーブルは、以下のステートメントで確認できます。
 
@@ -374,7 +374,7 @@ MariaDB でbinlogを有効にし、 `binlog_format=ROW` 、 `binlog_row_image=FU
 ignore-checking-items: ["replication_privilege"]
 ```
 
-DM を使用してアップストリームからダウンストリームにデータを移行する前に、事前チェックによりアップストリームのデータベース構成のエラーを検出し、移行がスムーズに行われるようにします。詳細については、[移行タスクの事前チェック](/dm/dm-precheck.md)参照してください。
+DM を使用してアップストリームからダウンストリームにデータを移行する前に、事前チェックによりアップストリームのデータベース構成のエラーを検出し、移行がスムーズに行われるようにします。詳細については、[移行タスクの事前チェック](/dm/dm-precheck.md)を参照してください。
 
 ### ステップ2．データの複製 {#step-2-replicate-data}
 
@@ -388,7 +388,7 @@ MariaDBからMariaDBへのレプリケーションのように、最初に初期
 
 ### ステップ4．データをテストする {#step-4-test-your-data}
 
-データがレプリケートされたら、そのデータに対して読み取り専用クエリを実行して検証できます。詳細については、[アプリケーションをテストしてください](#test-your-application)参照してください。
+データがレプリケートされたら、そのデータに対して読み取り専用クエリを実行して検証できます。詳細については、[アプリケーションをテストしてください](#test-your-application)を参照してください。
 
 ### ステップ5．切り替える {#step-5-switch-over}
 

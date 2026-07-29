@@ -26,7 +26,7 @@ Javaには[Tomcat JDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html
 
 接続プールのサイズは、アプリケーションのニーズに合わせて適切に調整するのが一般的です。HikariCPを例にとってみましょう。
 
--   **maximumPoolSize** : コネクションプール内の最大接続数。この値が大きすぎると、TiDB は不要な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続が遅くなります。したがって、アプリケーションの特性に応じてこの値を構成する必要があります。詳細については、 [プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)参照してください。
+-   **maximumPoolSize** : コネクションプール内の最大接続数。この値が大きすぎると、TiDB は不要な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続が遅くなります。したがって、アプリケーションの特性に応じてこの値を構成する必要があります。詳細については、 [プールのサイズについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してください。
 -   **minimumIdle** ：接続プール内のアイドル接続の最小数。主に、アプリケーションがアイドル状態のときに突発的なリクエストに対応するために、一部の接続を確保するために使用されます。アプリケーションの特性に合わせて設定する必要があります。
 
 アプリケーションは、接続の使用が終了したら、その接続を返却する必要があります。接続プールの問題を早期に発見するために、アプリケーションは適切な接続プール監視ツール（ **metricRegistry**など）を使用することをお勧めします。
@@ -68,7 +68,7 @@ TiDBサーバーがシャットダウン、メンテナンスのために再起�
 接続プールは、以下のようにクライアントからTiDBへの永続的な接続を維持します。
 
 -   バージョン5.4より前のTiDBでは、デフォルトでは（エラーが報告されない限り）クライアント接続を積極的に閉じることはありません。
--   バージョン5.4以降、TiDBはデフォルトで`28800`秒間（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)参照してください。
+-   バージョン5.4以降、TiDBはデフォルトで`28800`秒間（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)を参照してください。
 
 さらに、クライアントとTiDBの間には、 [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAProxy](https://en.wikipedia.org/wiki/HAProxy)ようなネットワークプロキシが存在する場合があります。これらのプロキシは通常、特定のアイドル期間（プロキシのアイドル設定によって決定されます）が経過すると、接続を自動的にクリーンアップします。接続プールは、プロキシのアイドル設定を監視するだけでなく、キープアライブのために接続を維持またはプローブする必要もあります。
 
@@ -140,7 +140,7 @@ Javaアプリケーションは、さまざまなフレームワークでカプ�
 
 ### JDBC API {#jdbc-api}
 
-JDBC API の使用方法については、 [JDBC公式チュートリアル](https://docs.oracle.com/javase/tutorial/jdbc/)参照してください。このセクションでは、いくつかの重要な API の使用方法について説明します。
+JDBC API の使用方法については、 [JDBC公式チュートリアル](https://docs.oracle.com/javase/tutorial/jdbc/)を参照してください。このセクションでは、いくつかの重要な API の使用方法について説明します。
 
 #### Prepare APIを使用する {#use-prepare-api}
 
@@ -152,7 +152,7 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 
 #### バッチAPIを使用する {#use-batch-api}
 
-バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。3 `addBatch()`は、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
+バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Statement.html#executeBatch())を使用できます。`addBatch()`は、複数の SQL ステートメントを最初にクライアントにキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
 > **Note:**
 >
@@ -230,7 +230,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
 
 #### バッチ関連パラメータ {#batch-related-parameters}
 
-バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`設定することをお勧めします。3 または`executeBatch()` `addBatch()`使用した後でも、JDBC はデフォルトでは SQL を 1 つずつ送信します。例:
+バッチ書き込みを処理する際は、 `rewriteBatchedStatements=true`設定することをお勧めします。`addBatch()`または`executeBatch()`を使用した後でも、JDBC はデフォルトでは SQL を 1 つずつ送信します。例:
 
 ```java
 pstmt = prepare("INSERT INTO `t` (a) values(?)");
@@ -256,7 +256,7 @@ INSERT INTO `t` (`a`) VALUES(12);
 INSERT INTO `t` (`a`) values(10),(11),(12);
 ```
 
-`INSERT`のステートメントの書き換えは、複数の「values」キーワードの後の値を連結して、1つのSQLステートメントにすることです。3 `INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
+`INSERT`のステートメントの書き換えは、複数の「values」キーワードの後の値を連結して、1つのSQLステートメントにすることです。`INSERT`のステートメントに他の違いがある場合は、書き換えることはできません。たとえば、次のようになります。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = 10;

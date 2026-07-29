@@ -7,9 +7,9 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 多くのユーザーから、 [TiDB Lightning](/tidb-lightning/tidb-lightning-configuration.md)の展開、構成、メンテナンスは、特に[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)の大規模なデータセットが関係するシナリオでは複雑であるというフィードバックが寄せられています。
 
-皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。3 `IMPORT INTO`実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
+皆様からのフィードバックに基づき、TiDBはTiDB Lightningの一部の機能を[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) SQL文に段階的に統合してきました。`IMPORT INTO`を実行することでデータを直接インポートできるため、データインポートの効率が向上します。さらに、 `IMPORT INTO`は自動分散タスクスケジューリングや[TiDB グローバルソート](/tidb-global-sort.md)といった、 TiDB Lightningにはない機能もサポートされています。
 
-`IMPORT INTO`はv7.2.0で導入され、v7.5.0で一般提供（GA）されます。今後のバージョンでも引き続き改良と最適化が行われます。2 `IMPORT INTO`機能がTiDB Lightningを完全に置き換えることが可能になった時点で、 TiDB Lightningは廃止されます。その際には、TiDBのリリースノートおよびドキュメントで事前にお知らせいたします。
+`IMPORT INTO`はv7.2.0で導入され、v7.5.0で一般提供（GA）されます。今後のバージョンでも引き続き改良と最適化が行われます。`IMPORT INTO`機能がTiDB Lightningを完全に置き換えることが可能になった時点で、 TiDB Lightningは廃止されます。その際には、TiDBのリリースノートおよびドキュメントで事前にお知らせいたします。
 
 ## <code>IMPORT INTO</code>とTiDB Lightningの比較 {#comparison-between-code-import-into-code-and-tidb-lightning}
 
@@ -23,7 +23,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)必要です。
+対照的に、 TiDB Lightning[個別のサーバー展開](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
 
 ### リソースの活用 {#resource-utilization}
 
@@ -31,7 +31,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 `IMPORT INTO`タスクと他のビジネスワークロードは、TiDB リソースを共有したり、異なるタイミングで利用したりすることで、TiDB リソースを最大限に活用できます。3 タスクのパフォーマンスと安定性を維持しながら、ビジネスワークロードの安定した運用を確保するために、 `IMPORT INTO`タスクにデータインポート専用の[特定のTiDBノード](/system-variables.md#tidb_service_scope-new-in-v740)を指定することができ`IMPORT INTO` 。
 
-[TiDB グローバルソート](/tidb-global-sort.md)使用する場合、大容量のローカルディスクをマウントする必要はありません。TiDB Global Sort は Amazon S3 をstorageとして使用できます。インポートタスクが完了すると、グローバルソート用に Amazon S3 に保存された一時データは自動的に削除され、ストレージコストを節約できます。
+[TiDB グローバルソート](/tidb-global-sort.md)を使用する場合、大容量のローカルディスクをマウントする必要はありません。TiDB Global Sort は Amazon S3 をstorageとして使用できます。インポートタスクが完了すると、グローバルソート用に Amazon S3 に保存された一時データは自動的に削除され、ストレージコストを節約できます。
 
 #### TiDB Lightning {#tidb-lightning}
 
@@ -47,7 +47,7 @@ You can directly write SQL statements to submit import tasks, which are easy to 
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
+対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
 ### タスクのスケジュール {#task-scheduling}
 
@@ -116,7 +116,7 @@ Due to the use of Global Sort, data imported into TiKV does not overlap, resulti
 
 -   論理インポート
 
-    `IMPORT INTO`でデータをインポートする前に、ターゲットテーブルは空である必要があります。既にデータが含まれているテーブルにデータをインポートする必要がある場合は、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)や直接挿入などの方法を使用することをお勧めします。TiDB v8.0以降、大規模トランザクションの実行には[バルクDML](/system-variables.md#tidb_dml_type-new-in-v800)サポートされます。
+    `IMPORT INTO`でデータをインポートする前に、ターゲットテーブルは空である必要があります。既にデータが含まれているテーブルにデータをインポートする必要がある場合は、 [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)や直接挿入などの方法を使用することをお勧めします。TiDB v8.0以降、大規模トランザクションの実行には[バルクDML](/system-variables.md#tidb_dml_type-new-in-v800)がサポートされます。
 
 -   競合データの処理
 

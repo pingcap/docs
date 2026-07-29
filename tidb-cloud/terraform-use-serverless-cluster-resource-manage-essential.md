@@ -22,7 +22,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -58,13 +58,13 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
-        `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
+        `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
+    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
-    プロンプトをスキップするには、 `terraform apply --auto-approve`使用します。
+    プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
     ```shell
     $ terraform apply --auto-approve
@@ -226,7 +226,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_cluster.example
@@ -357,7 +357,7 @@ tidbcloud_serverless_cluster.example: Modifications complete after 8s
 Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
-次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`使用してリソースの状態を確認します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+次に、コマンド`terraform show`または`terraform state show tidbcloud_serverless_cluster.${resource-name}`を使用してリソースの状態を確認します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
 ```shell
 $ terraform state show tidbcloud_serverless_cluster.example
@@ -444,7 +444,7 @@ Terraform によって管理されていないTiDB Cloud Essential クラスタ�
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_serverless_cluster.example: Importing... 

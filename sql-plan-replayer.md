@@ -14,7 +14,7 @@ TiDB クラスタの問題を特定してトラブルシューティングする
 
 ## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートします {#use-code-plan-replayer-code-to-export-cluster-information}
 
-`PLAN REPLAYER`使用すると、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェースは次のとおりです。
+`PLAN REPLAYER`を使用すると、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェースは次のとおりです。
 
 ```sql
 PLAN REPLAYER DUMP [WITH STATS AS OF TIMESTAMP expression] EXPLAIN [ANALYZE] sql-statement;
@@ -71,7 +71,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)使用して、最後の`PLAN REPLAYER DUMP`実行の結果を取得することもできます。
+あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`実行の結果を取得することもできます。
 
 ```sql
 SELECT @@tidb_last_plan_replayer_token;
@@ -186,11 +186,11 @@ mysql> show stats_meta;
 
 > **Note:**
 >
-> `mysql`コマンドラインクライアントを使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`遭遇した場合は、接続文字列に`--local-infile=true`追加できます。
+> `mysql`コマンドラインクライアントを使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`に遭遇した場合は、接続文字列に`--local-infile=true`を追加できます。
 
 ## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-code-plan-replayer-capture-code-to-capture-target-plans}
 
-TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
+TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
 
 `PLAN REPLAYER CAPTURE`は主に次の機能があります。
 
@@ -202,7 +202,7 @@ TiDBの実行プランを特定する場合、対象となるSQL文と実行プ�
 
 ### <code>PLAN REPLAYER CAPTURE</code>を有効にする {#enable-code-plan-replayer-capture-code}
 
-`PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。4 `PLAN REPLAYER CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
+`PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。`PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
 ### <code>PLAN REPLAYER CAPTURE</code>使用する {#use-code-plan-replayer-capture-code}
 
@@ -286,7 +286,7 @@ Empty set (0.01 sec)
 
 ### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-code-plan-replayer-continuous-capture-code}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。4 `PLAN REPLAYER CONTINUOUS CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
+`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。`PLAN REPLAYER CONTINUOUS CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
 
 ### キャプチャ結果を表示する {#view-the-capture-results}
 

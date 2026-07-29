@@ -18,7 +18,7 @@ aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/re
 
 HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの著名なウェブサイトで広く利用されています。
 
-HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)ご覧ください。
+HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)ご覧ください。
 
 ## 基本機能 {#basic-features}
 
@@ -59,7 +59,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 
 > **Note:**
 >
-> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)参照してください。
+> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
@@ -196,7 +196,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-`SHOW PROCESSLIST`使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を TiDB に接続するように設定する必要があります。
+`SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、 [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を TiDB に接続するように設定する必要があります。
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       

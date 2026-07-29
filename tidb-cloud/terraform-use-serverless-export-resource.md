@@ -15,7 +15,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
 > **Note:**
 >
-> `tidbcloud_serverless_export`リソースは変更できません。3 `tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
+> `tidbcloud_serverless_export`リソースは変更できません。`tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -54,7 +54,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
     -   サーバーレス エクスポート リソースを使用するには、リソース タイプを`tidbcloud_serverless_export`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
     -   リソースの詳細については、サーバーレス エクスポート仕様情報に従って設定できます。
-    -   サーバーレス エクスポート仕様情報を取得するには、 [tidbcloud_serverless_export (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)参照してください。
+    -   サーバーレス エクスポート仕様情報を取得するには、 [tidbcloud_serverless_export (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_export)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -115,9 +115,9 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
     この例では、 `tidbcloud_serverless_export.example`リソースがクラスター全体からデータをエクスポートするエクスポート タスクを作成します。
 
-    このリソースは同期されていません。1 `terraform refresh`使用すると最新の状態を取得できます。
+    このリソースは同期されていません。`terraform refresh`を使用すると最新の状態を取得できます。
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_serverless_export.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_serverless_export.example
@@ -167,7 +167,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータ エ
 
     生成された構成ファイルを確認し、ニーズを満たしていることを確認してください。必要に応じて、このファイルの内容を任意の場所に移動することもできます。
 
-    次に、 `terraform apply`実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
+    次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
     tidbcloud_serverless_export.example: Importing... 

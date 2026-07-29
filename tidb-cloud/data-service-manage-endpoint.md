@@ -13,10 +13,10 @@ Data Service (PREVIEW) のエンドポイントは、SQL ステートメント�
 
 -   エンドポイントを作成する前に、以下の点を確認してください。
 
-    -   TiDB Cloud Starterインスタンスとデータ アプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)参照してください。
+    -   TiDB Cloud Starterインスタンスとデータ アプリが作成されました。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
     -   エンドポイントが操作するデータベース、テーブル、および列は、既にターゲットのTiDB Cloud Starterインスタンスに存在しています。
 
--   エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)参照してください。
+-   エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 ## エンドポイントを作成する {#create-an-endpoint}
 
@@ -24,7 +24,7 @@ Data Service (PREVIEW) のエンドポイントは、SQL ステートメント�
 
 > **Tip:**
 >
-> SQL エディターで SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQLファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)参照してください。
+> SQL エディターで SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQLファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
 
 ### エンドポイントを自動的に生成する {#generate-an-endpoint-automatically}
 
@@ -174,7 +174,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
     >
     > -   パス パラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)参照してください。
 
--   **エンドポイント URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データ アプリのカスタム ドメインを構成するには、 [データサービスのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)参照してください。
+-   **エンドポイント URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データ アプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データ アプリのカスタム ドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 
 -   **リクエストメソッド**：エンドポイントのHTTPメソッド。以下のメソッドがサポートされています。
 
@@ -193,7 +193,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
 -   **タグ**：エンドポイントのグループを識別するために使用されるタグ。
 
--   **ページネーション**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL ステートメントが`SELECT`操作の場合にのみ使用できます。**ページネーションが**有効になっている場合、エンドポイントを呼び出す際にクエリ パラメータとして`page`と`page_size`指定することで、結果をページネーションできます（例`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)参照してください。
+-   **ページネーション**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL ステートメントが`SELECT`操作の場合にのみ使用できます。**ページネーションが**有効になっている場合、エンドポイントを呼び出す際にクエリ パラメータとして`page`と`page_size`を指定することで、結果をページネーションできます（例`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)を参照してください。
 
     > **Note:**
     >
@@ -208,7 +208,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
     > **Note:**
     >
-    > **バッチ操作**が有効になっているエンドポイントは、リクエスト本文に配列形式とオブジェクト形式の両方をサポートしています。 `[{dataObject1}, {dataObject2}]`と`{items: [{dataObject1}, {dataObject2}]}`です。他のシステムとの互換性を高めるため、オブジェクト形式`{items: [{dataObject1}, {dataObject2}]}`使用することをお勧めします。
+    > **バッチ操作**が有効になっているエンドポイントは、リクエスト本文に配列形式とオブジェクト形式の両方をサポートしています。 `[{dataObject1}, {dataObject2}]`と`{items: [{dataObject1}, {dataObject2}]}`です。他のシステムとの互換性を高めるため、オブジェクト形式`{items: [{dataObject1}, {dataObject2}]}`を使用することをお勧めします。
 
 ### SQL文を書く {#write-sql-statements}
 
@@ -218,7 +218,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
     > **Note:**
     >
-    > データ アプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)参照してください。
+    > データ アプリにリンクされているTiDB Cloud Starterインスタンスのみがドロップダウン リストに表示されます。リンクされたTiDB Cloud Starterインスタンスを管理するには、 [リンクされたデータソースを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQLエディタの上部にあるドロップダウンリストから、SQLステートメントを実行するTiDB Cloud Starterインスタンスを選択します。すると、右側のペインにある**「スキーマ」**タブで、そのTiDB Cloud Starterインスタンスのすべてのデータベースを表示できます。
 
@@ -327,7 +327,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)参照してください。
+> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントをテストすることもできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -354,7 +354,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
 > **Note:**
 >
-> **自動同期とデプロイメント**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)参照してください。
+> **自動同期とデプロイメント**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 エンドポイントをデプロイするには、以下の手順を実行します。
 
@@ -372,7 +372,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
 > **Tip:**
 >
-> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)参照してください。
+> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントを呼び出すこともできます。詳細については、 [Postmanでデータアプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 ### 前提条件 {#prerequisites}
 
@@ -474,7 +474,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
 ### 応答 {#response}
 
-エンドポイントを呼び出した後、JSON 形式で応答を確認できます。詳細については、 [データサービスの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)参照してください。
+エンドポイントを呼び出した後、JSON 形式で応答を確認できます。詳細については、 [Data Serviceの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)を参照してください。
 
 ## エンドポイントをアンデプロイする {#undeploy-an-endpoint}
 

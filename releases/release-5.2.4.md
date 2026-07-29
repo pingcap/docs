@@ -102,7 +102,7 @@ TiDBバージョン：5.2.4
     -   TiKVがUbuntu 18.04でプロファイリングを実行する際に発生する可能性のあるpanic問題を修正します [#9765](https://github.com/tikv/tikv/issues/9765)
     -   tikv-ctlが誤った文字列マッチングのために誤った結果を返す問題を修正しました [#12329](https://github.com/tikv/tikv/issues/12329)
     -   レプリカ読み取りが線形化可能性に違反する可能性があるバグを修正 [#12109](https://github.com/tikv/tikv/issues/12109)
-    -   TiKVが2年以上実行されている場合にpanic可能性があるバグを修正しました [#11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKVが2年以上実行されている場合にpanicする可能性があるバグを修正しました [#11940](https://github.com/tikv/tikv/issues/11940)
     -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合にQPSが低下する問題を修正します [#11424](https://github.com/tikv/tikv/issues/11424)
     -   cgroupコントローラがマウントされていない場合に発生するpanic問題を修正 [#11569](https://github.com/tikv/tikv/issues/11569)
     -   遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#11526](https://github.com/tikv/tikv/issues/11526)

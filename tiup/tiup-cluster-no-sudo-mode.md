@@ -74,7 +74,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
                   └─3358 /usr/bin/pulseaudio --daemonize=no --log-target=journal
         ```
 
-    3.  `systemctl --user`実行します。エラーが発生しない場合は、 `systemd user`モードが正常に開始されたことを示します。
+    3.  `systemctl --user`を実行します。エラーが発生しない場合は、 `systemd user`モードが正常に開始されたことを示します。
 
 3.  `root`ユーザーを使用して次のコマンドを実行し、 systemd ユーザー`tidb`の lingering を有効にします。
 
@@ -83,9 +83,9 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
     loginctl show-user -p Linger tidb # This should show: Linger=yes
     ```
 
-    参考として、systemd のドキュメント[systemd ユーザーインスタンスの自動起動](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances)読んでみてください。
+    参考として、systemd のドキュメント[systemd ユーザーインスタンスの自動起動](https://wiki.archlinux.org/title/Systemd/User#Automatic_start-up_of_systemd_user_instances)を読んでみてください。
 
-4.  制御マシンで`ssh-keygen`使用してキーを生成します。
+4.  制御マシンで`ssh-keygen`を使用してキーを生成します。
 
     ```shell
     ssh-keygen
@@ -139,7 +139,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 >
 > 最小インストールを使用する場合は、 `tar`パッケージがインストールされていることを確認してください。インストールされていない場合、 `tiup cluster check`コマンドは失敗します。
 
-`tiup cluster check topology.yaml --user tidb`実行すると、いくつかのチェック項目が失敗する可能性があります。以下に例を示します。
+`tiup cluster check topology.yaml --user tidb`を実行すると、いくつかのチェック項目が失敗する可能性があります。以下に例を示します。
 
 ```shell
 Node            Check         Result  Message
@@ -158,9 +158,9 @@ Node            Check         Result  Message
 192.168.124.27  service       Fail    service firewalld is running but should be stopped
 ```
 
-no-sudoモードでは、 `tidb`ユーザーにはsudo権限がありません。そのため、 `tiup cluster check topology.yaml --apply --user tidb`実行しても失敗したチェック項目を自動的に修正することはできません。対象マシンで`root`ユーザーを使用して手動で修正する必要があります。
+no-sudoモードでは、 `tidb`ユーザーにはsudo権限がありません。そのため、 `tiup cluster check topology.yaml --apply --user tidb`を実行しても失敗したチェック項目を自動的に修正することはできません。対象マシンで`root`ユーザーを使用して手動で修正する必要があります。
 
-詳細については、 [TiDB環境とシステムコンフィグレーションのチェック](/check-before-deployment.md)参照してください。ドキュメントの手順[SSH相互信頼とパスワードなしのsudoを手動で設定する](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)スキップする必要があることに注意してください。
+詳細については、 [TiDB環境とシステムコンフィグレーションのチェック](/check-before-deployment.md)を参照してください。ドキュメントの手順[SSH相互信頼とパスワードなしのsudoを手動で設定する](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)をスキップする必要があることに注意してください。
 
 ## クラスターのデプロイと管理 {#deploy-and-manage-the-cluster}
 

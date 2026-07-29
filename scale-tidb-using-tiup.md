@@ -9,7 +9,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 このドキュメントでは、 TiUPを使用して TiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする方法について説明します。TiUPをインストールしていない場合は、 [ステップ2. 制御マシンにTiUPをデプロイ](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)の手順を参照してください。
 
-現在のクラスター名リストを表示するには、 `tiup cluster list`実行します。
+現在のクラスター名リストを表示するには、 `tiup cluster list`を実行します。
 
 たとえば、クラスターの元のトポロジが次のようになっているとします。
 
@@ -80,7 +80,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
       log_dir: /tidb-deploy/pd-2379/log
     ```
 
-    現在のクラスターの構成を表示するには、 `tiup cluster edit-config <cluster-name>`実行します。 `global`と`server_configs`のパラメータ設定は`scale-out.yml`に継承されるため、 `scale-out.yml`でも有効になります。
+    現在のクラスターの構成を表示するには、 `tiup cluster edit-config <cluster-name>`を実行します。 `global`と`server_configs`のパラメータ設定は`scale-out.yml`に継承されるため、 `scale-out.yml`でも有効になります。
 
 2.  スケールアウト コマンドを実行します。
 
@@ -107,8 +107,8 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     上記のコマンドでは、
 
     -   `scale-out.yml`はスケールアウト構成ファイルです。
-    -   `--user root` 、クラスタのスケールアウトを完了するために、ターゲットマシンに`root`ユーザーとしてログインすることを示します。4 `root`ユーザーは、ターゲットマシンに対して`ssh`と`sudo`権限を持つことが想定されています。または、 `ssh`と`sudo`権限を持つ他のユーザーを使用してデプロイを完了することもできます。
-    -   `[-i]`と`[-p]`オプションです。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできるルートユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。8 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。
+    -   `--user root`は、クラスタのスケールアウトを完了するために、ターゲットマシンに`root`ユーザーとしてログインすることを示します。`root`ユーザーは、ターゲットマシンに対して`ssh`と`sudo`権限を持つことが想定されています。または、 `ssh`と`sudo`権限を持つ他のユーザーを使用してデプロイを完了することもできます。
+    -   `[-i]`と`[-p]`オプションです。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできるルートユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 
     `Scaled cluster <cluster-name> out successfully`表示された場合、スケールアウト操作は成功しています。
 
@@ -252,7 +252,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 > **Note:**
 >
 > -   同様の手順で TiDB ノードまたは PD ノードを削除できます。
-> -   TiKVおよびTiFlashコンポーネントは非同期的にオフラインになり、停止処理に時間がかかるため、 TiUPはこれらのコンポーネントを別の方法でオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)参照してください。
+> -   TiKVおよびTiFlashコンポーネントは非同期的にオフラインになり、停止処理に時間がかかるため、 TiUPはこれらのコンポーネントを別の方法でオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
 > -   TiKVのPDクライアントは、PDノードのリストをキャッシュします。現在のバージョンのTiKVには、PDノードを自動的かつ定期的に更新するメカニズムが搭載されており、TiKVによってキャッシュされたPDノードのリストが期限切れになる問題を軽減するのに役立ちます。ただし、PDをスケールアウトした後は、スケールアウト前に存在していたすべてのPDノードを一度に削除することは避けてください。必要に応じて、既存のPDノードをすべてオフラインにする前に、PDリーダーを新しく追加されたPDノードに切り替えてください。
 
 1.  ノード ID 情報を表示する。
@@ -338,19 +338,19 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 ### 1. 残りのTiFlashノードの数に応じてテーブルのレプリカ数を調整する {#1-adjust-the-number-of-replicas-of-the-tables-according-to-the-number-of-remaining-tiflash-nodes}
 
-1.  スケールイン後のTiFlashノード数を超えるTiFlashレプリカを持つテーブルがあるかどうかを照会します。1 `tobe_left_nodes`スケールイン後のTiFlashノード数を意味します。クエリ結果が空の場合、 TiFlashのスケールインを開始できます。クエリ結果が空でない場合は、関連テーブルのTiFlashレプリカ数を変更する必要があります。
+1.  スケールイン後のTiFlashノード数を超えるTiFlashレプリカを持つテーブルがあるかどうかを照会します。`tobe_left_nodes`はスケールイン後のTiFlashノード数を意味します。クエリ結果が空の場合、 TiFlashのスケールインを開始できます。クエリ結果が空でない場合は、関連テーブルのTiFlashレプリカ数を変更する必要があります。
 
     ```sql
     SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT >  'tobe_left_nodes';
     ```
 
-2.  スケールイン後のTiFlashノードの数より多いTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。1 `new_replica_num` `tobe_left_nodes`である必要があります。
+2.  スケールイン後のTiFlashノードの数より多いTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。`new_replica_num`は`tobe_left_nodes`以下である必要があります。
 
     ```sql
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
     ```
 
-    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
+    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)を変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
 
 3.  手順 1 を再度実行し、スケールイン後のTiFlashノードの数を超えるTiFlashレプリカを持つテーブルがないことを確認します。
 

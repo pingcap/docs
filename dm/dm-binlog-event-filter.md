@@ -21,7 +21,7 @@ filters:
     ​action: Ignore
 ```
 
-DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィルターを設定できます。詳細については、 [上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
+DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィルターを設定できます。詳細については、 [上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 一致するスキーマとテーブルにワイルドカードを使用する場合は、次の点に注意してください。
 
@@ -160,7 +160,7 @@ filters:
 
 ### TiDBパーサーがサポートしていないSQL文を除外する {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
-TiDBパーサーがサポートしていないSQL文については、DMは解析できず、 `schema` / `table`情報を取得できません。そのため、グローバルフィルタリングルール`schema-pattern: "*"`使用する必要があります。
+TiDBパーサーがサポートしていないSQL文については、DMは解析できず、 `schema` / `table`情報を取得できません。そのため、グローバルフィルタリングルール`schema-pattern: "*"`を使用する必要があります。
 
 > **Note:**
 >

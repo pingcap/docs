@@ -118,7 +118,7 @@ TiDBバージョン：8.3.0
 
     バージョン8.3.0より前は、高可用性を実現するためにプライマリ/セカンダリモードを使用する場合、TiProxyは仮想IPアドレスを管理するための追加コンポーネントを必要としていました。バージョン8.3.0以降、TiProxyは仮想IPアドレス管理機能を内蔵しています。プライマリ/セカンダリモードでプライマリノードがフェイルオーバーすると、新しいプライマリノードは指定された仮想IPアドレスに自動的にバインドされるため、クライアントは常に仮想IPアドレスを介して利用可能なTiProxyに接続できます。
 
-    仮想IPアドレス管理を有効にするには、TiProxy設定項目[`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip)使用して仮想IPアドレスを指定し、[`ha.interface`](/tiproxy/tiproxy-configuration.md#interface)を使用して仮想IPアドレスをバインドするネットワークインターフェイスを指定します。仮想IPアドレスは、これら両方の設定項目が設定されている場合にのみ、TiProxyインスタンスにバインドされます。
+    仮想IPアドレス管理を有効にするには、TiProxy設定項目[`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip)を使用して仮想IPアドレスを指定し、[`ha.interface`](/tiproxy/tiproxy-configuration.md#interface)を使用して仮想IPアドレスをバインドするネットワークインターフェイスを指定します。仮想IPアドレスは、これら両方の設定項目が設定されている場合にのみ、TiProxyインスタンスにバインドされます。
 
     詳細については、[ドキュメント](/tiproxy/tiproxy-overview.md)を参照してください。
 
@@ -213,7 +213,7 @@ TiDBバージョン：8.3.0
 -   バージョン8.3.0以降、以下の機能は非推奨となります。
 
     -   バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlog は完全に非推奨となり、今後のリリースで削除される予定です。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。
-    -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)参照してください。
+    -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を参照してください。
 
 -   以下の機能は、将来のバージョンで廃止される予定です。
 
@@ -340,7 +340,7 @@ TiDBバージョン：8.3.0
     -   `scheduling`マイクロサービスが有効になった後にスケーリングの進行状況が正しく表示されない問題を修正しました [#8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
     -   暗号化マネージャが使用前に初期化されていない問題を修正 [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
     -   一部のログが編集されない問題を修正 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
-    -   PDマイクロサービスの起動中にリダイレクトがpanic可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
+    -   PDマイクロサービスの起動中にリダイレクトがpanicする可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
     -   `split-merge-interval`設定項目の値が繰り返し変更された場合（例えば、 `1s`から`1h` に変更し、再び`1s` に戻す場合など）に、その設定が有効にならない可能性がある問題を修正します。 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
     -   `replication.strictly-match-label`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     -   大規模なパーティションテーブルを分析する際にTSOの取得が遅くなり、 `ANALYZE`パフォーマンス低下を引き起こす問題を修正しました [#8500](https://github.com/tikv/pd/issues/8500) @[rleungx](https://github.com/rleungx)
@@ -350,11 +350,11 @@ TiDBバージョン：8.3.0
 -   TiFlash
 
     -   `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む datetime に変換すると、結果が正しくない問題を修正しました [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
-    -   データベース全体に空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`実行するとTiFlash がpanicになる問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベースにまたがる空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   遅延マテリアライゼーションが有効になった後、一部のクエリで列型の不一致エラーが報告される可能性がある問題を修正 [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     -   仮想生成列を含むクエリが遅延マテリアライゼーション有効後に誤った結果を返す可能性がある問題を修正 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     -   TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   データベース作成直後にデータベースが削除されるとTiFlash がpanicことがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   データベース作成直後にデータベースが削除されるとTiFlash がpanicすることがある問題を修正 [#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashと任意の PD 間のネットワーク パーティション (ネットワークの切断) により、読み取りリクエストのタイムアウト エラーが発生する可能性がある問題を修正 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   分散ストレージおよびコンピューティングアーキテクチャでTiFlash書き込みノードの再起動に失敗することがある問題を修正 [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正します [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)

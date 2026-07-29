@@ -164,7 +164,7 @@ SELECT FOUND_ROWS();
 
 > **Note:**
 >
-> クエリ修飾子`SQL_CALC_FOUND_ROWS` 、クエリ修飾子`LIMIT`を考慮せずに結果セットの合計行数を計算しますが、クエリ修飾子[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりにクエリ修飾子`COUNT(*)`使用することをお勧めします。
+> クエリ修飾子`SQL_CALC_FOUND_ROWS`は、`LIMIT`句を考慮せずに結果セットの合計行数を計算しますが、[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が有効な場合にのみ使用できます。このクエリ修飾子は、MySQL 8.0.17 以降では非推奨です。代わりに`COUNT(*)`を使用することをお勧めします。
 
 ### 最終挿入ID() {#last-insert-id}
 
@@ -200,9 +200,9 @@ TABLE t1;
 
 > **注記**
 >
-> -   TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)有効にすることができます。
+> -   TiDBでは、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache)を指定するとMySQLが返す結果と異なる結果になる可能性があります。この不一致は、TiDBが各ノードにIDをキャッシュするため、IDの順序が乱れたり、IDに空白が生じたりする可能性があるためです。アプリケーションで厳密なID順序の維持が不可欠な場合は、 [MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることができます。
 >
-> -   上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)参照してください。
+> -   上の例ではIDが2ずつ増加しますが、MySQLでは同じシナリオでIDが1ずつ増加します。互換性に関する詳細は[AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)を参照してください。
 
 `LAST_INSERT_ID(expr)`関数は式を引数として受け取り、その値を`LAST_INSERT_ID()`次回呼び出し時に保存します。MySQL互換のシーケンス生成メソッドとして使用できます。TiDBは[シーケンス関数](/functions-and-operators/sequence-functions.md)もサポートしています。
 
@@ -241,7 +241,7 @@ SELECT ROW_COUNT();
 
 ### ユーザー（） {#user}
 
-`USER()`関数は現在の接続のユーザーを返します。5 `USER()`ワイルドカードではなく実際のIPアドレスを表示するため、 `CURRENT_USER()`の出力とは若干異なる場合があります。
+`USER()`関数は現在の接続のユーザーを返します。`USER()`はワイルドカードではなく実際のIPアドレスを表示するため、 `CURRENT_USER()`の出力とは若干異なる場合があります。
 
 ```sql
 SELECT USER(), CURRENT_USER();

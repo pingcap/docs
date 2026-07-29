@@ -16,11 +16,11 @@ Alibaba Cloud RDS の主キーのないアップストリーム テーブルの�
 互換性に関する既知の問題は次のとおりです。
 
 -   **Alibaba Cloud RDS**では、主キーのないアップストリーム テーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
--   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
+-   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は、 <code>non-capturing (?!)</code> ? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
 
-現在、DMはこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golangでサポートされている正規表現については、 [re2構文](https://github.com/google/re2/wiki/Syntax)参照してください。
+現在、DMはこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golangでサポートされている正規表現については、 [re2構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
 ## アップストリームで実行されたステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
@@ -28,11 +28,11 @@ DMは、複数のDDL変更操作を含む単一のステートメントを、1�
 
 ## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
-TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)参照してください。
+TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
 
 > **Note:**
 >
-> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性がありません[MySQLの互換性](/mysql-compatibility.md#ddl-operations)参照してください。
+> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません[MySQLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
@@ -48,7 +48,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 3.  データ移行タスクを再開するには、次のいずれかの方法を使用します。
 
-    -   タスク設定ファイルで新しいタスク名を指定します。次に、 `start-task {task-config-file}`実行します。
+    -   タスク設定ファイルで新しいタスク名を指定します。次に、 `start-task {task-config-file}`を実行します。
     -   `start-task --remove-meta {task-config-file}`を実行します。
 
 ## <code>online-ddl: true</code>を設定した後、gh-ost テーブルに関連する DDL 操作によって返されたエラーをどのように処理しますか? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-code-online-ddl-true-code-is-set}
@@ -102,7 +102,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 既存の移行タスクに対応するグローバルチェックポイント（ `is_global=1` ）の位置情報を`checkpoint-T` （例： `(mysql-bin.000100, 1234)` ）として記録します。移行タスクに追加するテーブルのフルエクスポート`metedata` （または`Sync`ステージにある別のデータ移行タスクのチェックポイント）の位置情報を`checkpoint-S` （例： `(mysql-bin.000099, 5678)` ）として記録します。以下の手順でテーブルを移行タスクに追加できます。
 
-1.  既存の移行タスクを停止するには、 `stop-task`使用します。追加するテーブルが実行中の別の移行タスクに属している場合は、そのタスクも停止してください。
+1.  既存の移行タスクを停止するには、 `stop-task`を使用します。追加するテーブルが実行中の別の移行タスクに属している場合は、そのタスクも停止してください。
 
 2.  MySQLクライアントを使用して下流のTiDBデータベースに接続し、既存の移行タスクに対応するチェックポイントテーブルの情報を、 `checkpoint-T`と`checkpoint-S`の間の小さい方の値に手動で更新します。この例では`(mysql- bin.000099, 5678)`です。
 
@@ -116,7 +116,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 4.  `start-task`を使用してタスクを開始します。
 
-5.  `query-status`までタスクの状態を観察します。3 `syncerBinlog` `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
+5.  `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
 ## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> ？ {#how-to-handle-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code-that-occurs-during-the-full-import}
 
@@ -143,7 +143,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 構成項目`block-allow-list`と`table-route`を確認します。
 
--   `block-allow-list`下にある上流のデータベースとテーブルの名前を設定する必要があります。3 `do-tables`前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
+-   `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
 -   `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
@@ -175,11 +175,11 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## 一部の監視パネルに<code>No data point</code>と表示されるのはなぜですか? {#why-do-some-monitoring-panels-show-code-no-data-point-code}
 
-一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`表示されます。各パネルの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)参照してください。
+一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
 ## DM v1.0 では、タスクにエラーがある場合にコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
-まず、 `sql-skip`実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。5 `sql-skip -s <sql-pattern>`使用して、これらの文に一致するパターンを設定できます。
+まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。`sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
 
 場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
 
@@ -241,7 +241,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     2.  [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
     3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`解凍します。
     4.  フォルダー`deploy/grafana-$port/bin/public` `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
-    5.  `tiup dm restart $cluster_name -R grafana`実行して Grafana サービスを再起動します。
+    5.  `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
 
 ## DM v2.0 では、タスクで<code>enable-relay</code>と<code>enable-gtid</code>同時に有効になっている場合、コマンド<code>query-status</code>のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v2-0-why-does-the-query-result-of-the-command-code-query-status-code-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-code-enable-relay-code-and-code-enable-gtid-code-enabled-at-the-same-time}
 
@@ -260,7 +260,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     | mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
     +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
 
-このバグは、dmctlで`query-status <task>`実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
+このバグは、dmctlで`query-status <task>`を実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
 
     query-status test
     {

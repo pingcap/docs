@@ -11,7 +11,7 @@ summary: AUTO_RANDOM 属性について学習します。
 
 <CustomContent platform="tidb">
 
-TiDB で同時書き込みの多いワークロードを処理する方法の詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)参照してください。
+TiDB で同時書き込みの多いワークロードを処理する方法の詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
 </CustomContent>
 
@@ -120,7 +120,7 @@ TiDB によって自動的に割り当てられる`AUTO_RANDOM(S, R)`列の値�
 -   値に符号付きビットがあるかどうかは、対応する列に`UNSIGNED`属性があるかどうかによって決まります。
 -   符号ビットの長さは、属性`UNSIGNED`有無によって決まります。属性`UNSIGNED`がある場合、長さは`0`です。そうでない場合、長さは`1`です。
 -   予約ビットの長さは`64-R`です。予約ビットは常に`0`です。
--   シャードビットの内容は、現在のトランザクションの開始時刻のハッシュ値を計算することで得られます。異なるシャードビット長（10など）を使用する場合は、テーブル作成時に`AUTO_RANDOM(10)`指定します。
+-   シャードビットの内容は、現在のトランザクションの開始時刻のハッシュ値を計算することで得られます。異なるシャードビット長（10など）を使用する場合は、テーブル作成時に`AUTO_RANDOM(10)`を指定します。
 -   AUTO_INCREMENTビットの値はストレージエンジンに格納され、順次割り当てられます。新しい値が割り当てられるたびに、値は1ずつ増加します。AUTO_INCREMENTビットは、 `AUTO_RANDOM`の値がグローバルに一意であることを保証します。AUTO_INCREMENTビットが使い果たされると、値が再び割り当てられる際にエラー`Failed to read auto-increment value from storage engine`が報告されます。
 -   値の範囲：最終的に生成される値の最大ビット数 = シャードビット数 + AUTO_INCREMENTビット数。符号付き列の範囲は`[-(2^(R-1))+1, (2^(R-1))-1]` 、符号なし列の範囲は`[0, (2^R)-1]`です。
 -   `AUTO_RANDOM` `PRE_SPLIT_REGIONS`と組み合わせて使用できます。テーブルが正常に作成されると、 `PRE_SPLIT_REGIONS`テーブル内のデータを`2^(PRE_SPLIT_REGIONS)`で指定された数のリージョンに事前に分割します。
@@ -141,7 +141,7 @@ TiDB によって自動的に割り当てられる`AUTO_RANDOM(S, R)`列の値�
 
 列番号が`AUTO_RANDOM`であるテーブルのシャードビット数を確認するには、 `SHOW CREATE TABLE`ステートメントを実行します。また、 `information_schema.tables`システムテーブルの列番号`TIDB_ROW_ID_SHARDING_INFO`で、 `PK_AUTO_RANDOM_BITS=x`のモードの値を確認することもできます`x`はシャードビット数です。
 
-`AUTO_RANDOM`列のテーブルを作成した後、 `SHOW WARNINGS`使用して最大暗黙的割り当て時間を表示できます。
+`AUTO_RANDOM`列のテーブルを作成した後、 `SHOW WARNINGS`を使用して最大暗黙的割り当て時間を表示できます。
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
@@ -167,7 +167,7 @@ TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に
 
 複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
-衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンタを使用します。AUTO_INCREMENT部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)参照してください。
+衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンタを使用します。AUTO_INCREMENT部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)を参照してください。
 
 TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理する際に内部カウンターを自動的に調整し、将来の衝突を防ぐため、この問題は発生しません。一方、複数のTiDBノードがある場合、各ノードは独自のIDキャッシュを保持しており、明示的な挿入後に衝突を防ぐには、このキャッシュをクリアする必要があります。これらの未割り当てのキャッシュIDをクリアして衝突の可能性を回避するには、次の2つの方法があります。
 
@@ -177,7 +177,7 @@ TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理
 ALTER TABLE t AUTO_RANDOM_BASE=0;
 ```
 
-このステートメントは適切な基数を自動的に決定します。1 `Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`ような警告メッセージが表示されますが、基数は変更さ**れる**ため、この警告は無視しても問題ありません。
+このステートメントは適切な基数を自動的に決定します。`Can't reset AUTO_INCREMENT to 0 without FORCE option, using XXX instead`のような警告メッセージが表示されますが、基数は変更さ**れる**ため、この警告は無視しても問題ありません。
 
 > **Note:**
 >
@@ -195,19 +195,19 @@ ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 
 > **Note:**
 >
-> `FORCE`使用する場合は、ゼロ以外の正の整数を指定する必要があります。
+> `FORCE`を使用する場合は、ゼロ以外の正の整数を指定する必要があります。
 
 どちらのコマンドも、すべてのTiDBノードにおける後続の`AUTO_RANDOM`値生成で使用されるAUTO_INCREMENTビットの開始点を変更します。すでに割り当てられているIDには影響しません。
 
 ## 制限 {#restrictions}
 
-`AUTO_RANDOM`使用する場合は、次の制限に注意してください。
+`AUTO_RANDOM`を使用する場合は、次の制限に注意してください。
 
 -   明示的に値を挿入するには、システム変数`@@allow_auto_random_explicit_insert`の値を`1` （デフォルトは`0` ）に設定する必要があります。データを挿入する際に、属性`AUTO_RANDOM`持つ列に明示的に値を指定することは推奨さ**れません**。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされてしまう可能性があります。
 -   この属性は、主キー列に**のみ**`BIGINT`型で指定してください。それ以外の場合はエラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数型の主キーであっても`AUTO_RANDOM`サポートされません`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
--   `ALTER TABLE`使用して`AUTO_RANDOM`属性を変更することはできません (この属性の追加や削除を含む)。
+-   `ALTER TABLE`を使用して`AUTO_RANDOM`属性を変更することはできません (この属性の追加や削除を含む)。
 -   最大値が列タイプの最大値に近い場合は、 `ALTER TABLE`を使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更することはできません。
 -   `AUTO_RANDOM`属性で指定された主キー列の列タイプを変更することはできません。
--   同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`指定することはできません。
+-   同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`を指定することはできません。
 -   同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定することはできません。
 -   列に`AUTO_RANDOM`使用されている場合、自動生成される値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。

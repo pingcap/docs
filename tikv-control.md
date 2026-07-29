@@ -129,13 +129,13 @@ AAFF
 
 ## サブコマンド、いくつかのオプションとフラグ {#subcommands-some-options-and-flags}
 
-このセクションでは、 `tikv-ctl`サポートするサブコマンドについて詳しく説明します。一部のサブコマンドは多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`実行してください。
+このセクションでは、 `tikv-ctl`サポートするサブコマンドについて詳しく説明します。一部のサブコマンドは多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`を実行してください。
 
 ### Raftステートマシンの情報を表示する {#view-information-of-the-raft-state-machine}
 
-特定の時点におけるRaftステートマシンのステータスを表示するには、サブコマンド`raft`使用します。ステータス情報は、3つの構造体（ **RegionLocalState** 、 **RaftLocalState** 、 **RegionApplyState** ）と、特定のログの対応するエントリの2つの部分で構成されます。
+特定の時点におけるRaftステートマシンのステータスを表示するには、サブコマンド`raft`を使用します。ステータス情報は、3つの構造体（ **RegionLocalState** 、 **RaftLocalState** 、 **RegionApplyState** ）と、特定のログの対応するエントリの2つの部分で構成されます。
 
-上記の情報を取得するには、それぞれサブコマンド`region`と`log`使用します。これら2つのサブコマンドは、リモートモードとローカルモードを同時にサポートします。
+上記の情報を取得するには、それぞれサブコマンド`region`と`log`を使用します。これら2つのサブコマンドは、リモートモードとローカルモードを同時にサポートします。
 
 `region`サブコマンドの場合:
 
@@ -239,7 +239,7 @@ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\0
 
 `raw-scan`コマンドはRocksDBから直接スキャンします。データキーをスキャンするには、キーの先頭に`'z'`追加する必要があることに注意してください。
 
-`--from`と`--to`オプションを使用して`write`スキャンする範囲を指定します（デフォルトでは無制限） `--limit`使用すると、出力するキーの最大数を制限します（デフォルトでは30） `--cf`使用すると、スキャンする cf を指定します（ `default` 、または`lock` ）。
+`--from`と`--to`オプションを使用して`write`スキャンする範囲を指定します（デフォルトでは無制限） `--limit`を使用すると、出力するキーの最大数を制限します（デフォルトでは30） `--cf`を使用すると、スキャンする cf を指定します（ `default` 、または`lock` ）。
 
 ```shell
 tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
@@ -310,8 +310,8 @@ tikv-ctl --host localhost:20160 region-properties -r 2
 
 `compact-cluster`コマンドを使用して、TiKV クラスタ全体のデータを手動で圧縮します。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
 
--   `compact-cluster`コマンドでは、 `--pd`使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクト ターゲットとして見つけられるようにします。
--   `compact`コマンドでは、 `--data-dir`または`--host`使用して、単一の TiKV をコンパクト ターゲットとして指定します。
+-   `compact-cluster`コマンドでは、 `--pd`を使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクト ターゲットとして見つけられるようにします。
+-   `compact`コマンドでは、 `--data-dir`または`--host`を使用して、単一の TiKV をコンパクト ターゲットとして指定します。
 
 ### リージョンをtombstoneに設定する {#set-a-region-to-tombstone}
 
@@ -395,9 +395,9 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 
 ### TiKV構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
 
-`modify-tikv-config`コマンドを使用して、設定引数を動的に変更できます。現在、動的に変更可能な TiKV 設定項目と詳細な変更は、SQL 文を使用した設定変更と一貫性があります。詳細については、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)参照してください。
+`modify-tikv-config`コマンドを使用して、設定引数を動的に変更できます。現在、動的に変更可能な TiKV 設定項目と詳細な変更は、SQL 文を使用した設定変更と一貫性があります。詳細については、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 
--   `-n`設定項目の完全な名前を指定するために使用されます。動的に変更可能な設定項目のリストについては、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)参照してください。
+-   `-n`設定項目の完全な名前を指定するために使用されます。動的に変更可能な設定項目のリストについては、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 -   `-v`構成値を指定するために使用されます。
 
 `shared block cache`のサイズを設定します:
@@ -444,13 +444,13 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 
 `unsafe-recover remove-fail-stores`コマンドを使用すると、障害が発生したマシンをリージョンのピアリストから削除できます。このコマンドを実行する前に、対象の TiKV ストアのサービスを停止してファイルロックを解除する必要があります。
 
-`-s`オプションは、カンマ区切りで複数の`store_id`指定でき、 `-r`フラグを使用して対象となるリージョンを指定します。特定のストア内のすべてのリージョンに対してこの操作を実行する必要がある場合は、 `--all-regions`指定するだけで済みます。
+`-s`オプションは、カンマ区切りで複数の`store_id`を指定でき、 `-r`フラグを使用して対象となるリージョンを指定します。特定のストア内のすべてのリージョンに対してこの操作を実行する必要がある場合は、 `--all-regions`を指定するだけで済みます。
 
 > **Warning:**
 >
 > -   誤った操作が行われた場合、クラスターの復旧が困難になる可能性があります。潜在的なリスクを認識し、本番環境ではこの機能の使用を避けてください。
-> -   `--all-regions`オプションを使用する場合、このコマンドはクラスタに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
-> -   `remove-fail-stores`実行した後は、削除したノードを再起動したり、クラスターに追加したりすることはできません。そうしないと、メタデータに不整合が生じ、最終的にはリージョンが利用できなくなります。
+> -   `--all-regions`オプションを使用する場合、このコマンドはクラスタに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`を実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
+> -   `remove-fail-stores`を実行した後は、削除したノードを再起動したり、クラスターに追加したりすることはできません。そうしないと、メタデータに不整合が生じ、最終的にはリージョンが利用できなくなります。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 3 -r 1001,1002
@@ -471,7 +471,7 @@ TiKVを再起動すると、リージョンは残りの正常なレプリカを�
 
 ### MVCCデータ破損からの回復 {#recover-from-mvcc-data-corruption}
 
-MVCCデータ破損によりTiKVが正常に動作しない場合は、コマンド`recover-mvcc`使用してください。このコマンドは、3つのCF（「default」、「write」、「lock」）をクロスチェックし、様々な不整合を回復します。
+MVCCデータ破損によりTiKVが正常に動作しない場合は、コマンド`recover-mvcc`を使用してください。このコマンドは、3つのCF（「default」、「write」、「lock」）をクロスチェックし、様々な不整合を回復します。
 
 -   `-r`オプションを使用して、関係するリージョンを`region_id`で指定します。
 -   PD エンドポイントを指定するには、 `-p`オプションを使用します。
@@ -513,13 +513,13 @@ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 
 暗号化メタデータをダンプするには、サブコマンド`encryption-meta`を使用します。このサブコマンドは、データファイルの暗号化情報と、使用されているデータ暗号化キーのリストという2種類のメタデータをダンプできます。
 
-データファイルの暗号化情報をダンプするには、サブコマンド`encryption-meta dump-file`使用します。TiKV デプロイメントに`data-dir`指定するには、TiKV 構成ファイルを作成する必要があります。
+データファイルの暗号化情報をダンプするには、サブコマンド`encryption-meta dump-file`を使用します。TiKV デプロイメントに`data-dir`を指定するには、TiKV 構成ファイルを作成する必要があります。
 
     # conf.toml
     [storage]
     data-dir = "/path/to/tikv/data"
 
-`--path`オプションは、対象のデータファイルへの絶対パスまたは相対パスを指定するために使用できます。データファイルが暗号化されていない場合、コマンドは空の出力を返すことがあります。3 `--path`指定しない場合は、すべてのデータファイルの暗号化情報が出力されます。
+`--path`オプションは、対象のデータファイルへの絶対パスまたは相対パスを指定するために使用できます。データファイルが暗号化されていない場合、コマンドは空の出力を返すことがあります。`--path`を指定しない場合は、すべてのデータファイルの暗号化情報が出力されます。
 
 ```shell
 tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
@@ -527,7 +527,7 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 
     /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 
-データ暗号化キーをダンプするには、サブコマンド`encryption-meta dump-key`使用します。 `data-dir`に加えて、設定ファイルで現在使用されているマスターキーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドでは`security.encryption.previous-master-key`設定は無視され、マスターキーのローテーションは実行されません。
+データ暗号化キーをダンプするには、サブコマンド`encryption-meta dump-key`を使用します。 `data-dir`に加えて、設定ファイルで現在使用されているマスターキーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドでは`security.encryption.previous-master-key`設定は無視され、マスターキーのローテーションは実行されません。
 
     # conf.toml
     [storage]
@@ -540,7 +540,7 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 
 マスターキーがAWS KMSキーの場合、 `tikv-ctl` KMSキーへのアクセス権を持っている必要があります。AWS KMSキーへのアクセス権は、環境変数、AWSデフォルト設定ファイル、またはIAMロールのいずれか適切な方法で`tikv-ctl`に付与できます。使用方法についてはAWSドキュメントを参照してください。
 
-`--ids`オプションを使用すると、出力するデータ暗号化キーのIDをカンマ区切りのリストで指定できます。3 `--ids`指定しない場合は、すべてのデータ暗号化キーと、最新のアクティブなデータ暗号化キーのIDである現在のキーIDが出力されます。
+`--ids`オプションを使用すると、出力するデータ暗号化キーのIDをカンマ区切りのリストで指定できます。`--ids`を指定しない場合は、すべてのデータ暗号化キーと、最新のアクティブなデータ暗号化キーのIDである現在のキーIDが出力されます。
 
 このコマンドを使用すると、機密情報が公開される可能性があることを警告するメッセージが表示されます。続行するには「同意します」と入力してください。
 
@@ -633,4 +633,4 @@ v6.5.4およびv7.3.0以降、TiKVはリゾルバの最新の詳細情報を取�
         number of transactions: 0,
         stopped: false,
 
-このサブコマンドは、 ステイル読み取りおよびsafe-tsに関連する問題の診断に役立ちます。詳細については、 [TiKV におけるステイル読み取りと safe-ts の理解](/troubleshoot-stale-read.md)参照してください。
+このサブコマンドは、 ステイル読み取りおよびsafe-tsに関連する問題の診断に役立ちます。詳細については、 [TiKV におけるステイル読み取りと safe-ts の理解](/troubleshoot-stale-read.md)を参照してください。

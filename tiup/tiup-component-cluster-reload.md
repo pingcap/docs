@@ -35,7 +35,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --ignore-config-check {#ignore-config-check}
 
--   コンポーネントのバイナリファイルがデプロイされた後、 `<binary> --config-check <config-file>`使用して TiDB、TiKV、PD コンポーネントの設定がチェックされます。3 `<binary>`デプロイされたバイナリファイルのパスです。5 `<config-file>`ユーザー設定に基づいて生成された設定ファイルです。このチェックをスキップしたい場合は、このオプションを使用できます。
+-   コンポーネントのバイナリファイルがデプロイされた後、 `<binary> --config-check <config-file>`を使用して TiDB、TiKV、PD コンポーネントの設定がチェックされます。`<binary>`は、デプロイされたバイナリファイルのパスです。`<config-file>`は、ユーザー設定に基づいて生成された設定ファイルです。このチェックをスキップしたい場合は、このオプションを使用できます。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
 
@@ -48,7 +48,7 @@ tiup cluster reload <cluster-name> [flags]
 > **Note:**
 >
 > -   `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
-> -   オプション`--skip-restart`指定した場合、オプション`-N, --node`は無効になります。
+> -   オプション`--skip-restart`を指定した場合、オプション`-N, --node`は無効になります。
 
 ### -R, --role {#r-role}
 
@@ -59,7 +59,7 @@ tiup cluster reload <cluster-name> [flags]
 > **Note:**
 >
 > 1.  `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
-> 2.  オプション`--skip-restart`指定した場合、オプション`-R, --role`は無効になります。
+> 2.  オプション`--skip-restart`を指定した場合、オプション`-R, --role`は無効になります。
 
 ### --skip-restart {#skip-restart}
 
@@ -87,7 +87,7 @@ tiup cluster reload <cluster-name> [flags]
 
 -   リロード前にスクリプトを実行します。
 -   データ型: `STRINGS`
--   このオプションは、リロードするノードで実行されるスクリプトのパスを指定します。1 `--skip-restart` `true`に設定した場合は無効になります。
+-   このオプションは、リロードするノードで実行されるスクリプトのパスを指定します。`--skip-restart`を`true`に設定した場合は無効になります。
 
 ### --post-restart-script {#post-restart-script}
 
@@ -97,7 +97,7 @@ tiup cluster reload <cluster-name> [flags]
 
 -   リロード後にスクリプトを実行します。
 -   データ型: `STRINGS`
--   このオプションは、ノードのリロード後に実行されるスクリプトのパスを指定します。1 `--skip-restart` `true`に設定されている場合は有効になりません。
+-   このオプションは、ノードのリロード後に実行されるスクリプトのパスを指定します。`--skip-restart`が`true`に設定されている場合は有効になりません。
 
 ## 出力 {#output}
 

@@ -17,7 +17,7 @@ TiDBはコンピューティング専用であり、データの保存は行い�
 
 TiDB のノード数、vCPU、RAM を構成できます。
 
-さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)参照してください。
+さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiDB vCPU と RAM {#tidb-vcpu-and-ram}
 
@@ -69,7 +69,7 @@ TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 `node count = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-式では、まず`node count = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
+式では、まず`node count = ceil(overall expected performance ÷ performance per node)`を計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
 
 例えば、混合ワークロードにおける全体的な期待パフォーマンスが 110,000 QPS、P95レイテンシーが約 100 ミリ秒で、8 vCPU、16 GiB の TiDB ノードを使用したいとします。この場合、前述の表から 8 vCPU、16 GiB の TiDB ノードの推定 TiDB パフォーマンス（ `15,500` ）を取得し、以下のように TiDB ノードの大まかな数を計算できます。
 
@@ -85,7 +85,7 @@ TiKVはデータの保存を担当し、水平方向に拡張可能です。
 
 TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 
-さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)参照してください。
+さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiKV vCPU と RAM {#tikv-vcpu-and-ram}
 
@@ -116,7 +116,7 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 
 > **Note:**
 >
-> TiDB クラスターをスケールすると、3 つのアベイラビリティゾーンのノードが同時に増減します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)参照してください。
+> TiDB クラスターをスケールすると、3 つのアベイラビリティゾーンのノードが同時に増減します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
 TiKVは主にデータストレージに使用されますが、TiKVノードのパフォーマンスはワークロードによって異なります。そのため、TiKVノードの数を計画する際には、 [**データ量**](#estimate-tikv-node-count-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-count-according-to-expected-performance)両方に基づいて見積もり、そのうち大きい方の見積もりを推奨ノード数とする必要があります。
 
@@ -159,7 +159,7 @@ TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 `node count = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-式では、まず`node count = ceil(overall expected performance ÷ performance per node)`計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
+式では、まず`node count = ceil(overall expected performance ÷ performance per node)`を計算して大まかなノード数を取得し、対応するパフォーマンス偏差係数を使用してノード数の最終結果を取得する必要があります。
 
 例えば、混合ワークロードにおける全体的な期待パフォーマンスが110,000 QPS、P95レイテンシーが約100ミリ秒で、8 vCPU、32 GiB TiKVノードを使用したいとします。この場合、前述の表から8 vCPU、32 GiB TiKVノードの推定TiKVパフォーマンス（ `17,800` ）を取得し、TiKVノードの大まかな数を以下のように計算します。
 

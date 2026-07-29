@@ -5,7 +5,7 @@ summary: TiDB でサポートされている文字列型について学習しま
 
 # 文字列型 {#string-types}
 
-TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべてのMySQL文字列型をサポートしています。詳細については、 [MySQLの文字列型](https://dev.mysql.com/doc/refman/8.0/en/string-types.html)参照してください。
+TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべてのMySQL文字列型をサポートしています。詳細については、 [MySQLの文字列型](https://dev.mysql.com/doc/refman/8.0/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
@@ -19,7 +19,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 ### <code>VARCHAR</code>型 {#code-varchar-code-type}
 
-`VARCHAR`は可変長の文字列です。Mは列の最大長（バイト数ではありません）を文字数で表します。2 `VARCHAR`最大サイズは65,535バイトを超えることはできません。4 `VARCHAR`長さは、行の最大長と使用されている文字セットによって決まります。
+`VARCHAR`は可変長の文字列です。Mは列の最大長（バイト数ではありません）を文字数で表します。`VARCHAR`の最大サイズは65,535バイトを超えることはできません。`VARCHAR`の長さは、行の最大長と使用されている文字セットによって決まります。
 
 1文字が占めるスペースは、文字セットによって異なります。次の表は、1文字が消費するバイト数と、各文字セットにおける`VARCHAR`列の長さの範囲を示しています。
 
@@ -37,7 +37,7 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 ### <code>TEXT</code>タイプ {#code-text-code-type}
 
-`TEXT`は可変長の文字列です。列の最大長は65,535バイトです。オプションのM引数は文字数で、 `TEXT`列の最適な型を自動的に選択するために使用されます。例えば`TEXT(60)`指定すると、最大255バイトを保持できる`TINYTEXT`データ型が生成され、1文字あたり最大4バイト（4×60=240）の60文字のUTF-8文字列に適合します。M引数の使用は推奨されません。
+`TEXT`は可変長の文字列です。列の最大長は65,535バイトです。オプションのM引数は文字数で、 `TEXT`列の最適な型を自動的に選択するために使用されます。例えば`TEXT(60)`を指定すると、最大255バイトを保持できる`TINYTEXT`データ型が生成され、1文字あたり最大4バイト（4×60=240）の60文字のUTF-8文字列に適合します。M引数の使用は推奨されません。
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -172,7 +172,7 @@ ENUM('apple', 'orange', 'pear')
 | &#39;オレンジ&#39; | 2  |
 | &#39;梨&#39;    | 3  |
 
-詳細については[MySQLのENUM型](https://dev.mysql.com/doc/refman/8.0/en/enum.html)参照してください。
+詳細については[MySQLのENUM型](https://dev.mysql.com/doc/refman/8.0/en/enum.html)を参照してください。
 
 ### <code>SET</code>型 {#code-set-code-type}
 
@@ -203,4 +203,4 @@ TiDBでは、 `SET`型の値は内部的に`Int64`に変換されます。各要
 
 この場合、 `('a', 'c')`の要素は 2 進数では`0101`になります。
 
-詳細については[MySQLのSET型](https://dev.mysql.com/doc/refman/8.0/en/set.html)参照してください。
+詳細については[MySQLのSET型](https://dev.mysql.com/doc/refman/8.0/en/set.html)を参照してください。

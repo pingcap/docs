@@ -18,7 +18,7 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`実行する必要があります。（環境によっては`source ~/.profile`実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
+    このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`を実行する必要があります。（環境によっては`source ~/.profile`を実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
 
 2.  TiUPを使用してTiDB Lightningをインストールします。
 
@@ -41,6 +41,6 @@ chmod +x tidb-lightning
 
 ### TiDB Lightning のアップグレード {#upgrade-tidb-lightning}
 
-TiDB Lightning は、追加の設定を必要とせず、バイナリのみを置き換えるだけでアップグレードできます。アップグレード後は、 TiDB Lightningを再起動する必要があります。詳細は[TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)参照してください。
+TiDB Lightning は、追加の設定を必要とせず、バイナリのみを置き換えるだけでアップグレードできます。アップグレード後は、 TiDB Lightningを再起動する必要があります。詳細は[TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
 インポートタスクが実行中の場合は、 TiDB Lightningをアップグレードする前に、タスクが完了するまで待つことをお勧めします。そうしないと、チェックポイントがバージョン間で機能する保証がないため、最初から再インポートが必要になる可能性があります。

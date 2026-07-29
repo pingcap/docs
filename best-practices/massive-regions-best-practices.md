@@ -88,7 +88,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 >
 > TiDB v3.0 以降では`Region Merge`がデフォルトで有効になっています。
 
-`Region Merge`有効にすることで、Regionの数を減らすこともできます。3 `Region Split`は異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`ステートメントを実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
+`Region Merge`有効にすることで、Regionの数を減らすこともできます。`Region Split`は異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`ステートメントを実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
 
 次のパラメータを設定して`Region Merge`有効にします。
 
@@ -122,7 +122,7 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
     raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
     raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
-リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからのハートビートを受信しなかった場合、これらのフォロワーはリーダーが故障したと判断し、新たな選出を開始します。3 `raft-heartbeat-interval` 、リーダーがフォロワーにハートビートを送信する間隔です。したがって、この値を`raft-base-tick-interval`に増やすと、 Raftステートマシンから送信されるネットワークメッセージの数は減りますが、 Raftステートマシンがリーダーの故障を検出するまでの時間が長くなります。
+リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからのハートビートを受信しなかった場合、これらのフォロワーはリーダーが故障したと判断し、新たな選出を開始します。`raft-heartbeat-interval`は、リーダーがフォロワーにハートビートを送信する間隔です。したがって、`raft-base-tick-interval`の値を増やすと、 Raftステートマシンから送信されるネットワークメッセージの数は減りますが、 Raftステートマシンがリーダーの故障を検出するまでの時間が長くなります。
 
 ### 方法6:リージョンのサイズを調整する {#method-6-adjust-region-size}
 

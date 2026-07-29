@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS TEST_HOTSPOT(
 )
 ```
 
-このテーブルは構造が単純です。主キーの`id`以外に、セカンダリインデックスは存在しません。このテーブルにデータを書き込むには、次のステートメントを実行してください。3 `id`乱数として離散的に生成されます。
+このテーブルは構造が単純です。主キーの`id`以外に、セカンダリインデックスは存在しません。このテーブルにデータを書き込むには、次のステートメントを実行してください。`id`は乱数として離散的に生成されます。
 
 ```sql
 SET SESSION cte_max_recursion_depth = 1000000;
@@ -92,7 +92,7 @@ FROM
 
 ![QPS1](/media/best-practices/QPS1.png)
 
-クライアントは短時間で「集中的な」書き込みリクエストを開始し、TiDBは3K QPSの書き込みを受信しました。理論上、負荷は6つのTiKVノードに均等に分散されるはずです。しかし、各TiKVノードのCPU使用率から判断すると、負荷分散は不均一です。1 `tikv-3`ノードが書き込みのホットスポットとなっています。
+クライアントは短時間で「集中的な」書き込みリクエストを開始し、TiDBは3K QPSの書き込みを受信しました。理論上、負荷は6つのTiKVノードに均等に分散されるはずです。しかし、各TiKVノードのCPU使用率から判断すると、負荷分散は不均一です。`tikv-3`ノードが書き込みのホットスポットとなっています。
 
 ![QPS2](/media/best-practices/QPS2.png)
 
@@ -156,9 +156,9 @@ TiDBは汎用的な用途向けのデータベースであり、データ分布�
 SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 ```
 
-事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、 リージョン scattering の状態を確認します。3 `SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
+事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、 リージョン scattering の状態を確認します。`SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
 
-次のSQL文を使用して、リージョンリーダーの分布を確認することもできます。1 `table_name`実際のテーブル名に置き換えてください。
+次のSQL文を使用して、リージョンリーダーの分布を確認することもできます。`table_name`を実際のテーブル名に置き換えてください。
 
 ```sql
 SELECT
@@ -194,9 +194,9 @@ ORDER BY
 
 テーブルに主キーがない場合、または主キーが`Int`型ではなく、ランダムに分布する主キーIDを生成したくない場合、TiDBは暗黙的に`_tidb_rowid`列を行IDとして提供します。一般的に、 `SHARD_ROW_ID_BITS`列のパラメータを使用しない場合、 `_tidb_rowid`列の値も単調に増加するため、ホットスポットが発生する可能性があります。詳細は[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
 
-このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [分割前のリージョン](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
+このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
 
-`SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列に生成された行 ID をランダムに散布するために使用されます。4 `PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
+`SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列に生成された行 ID をランダムに散布するために使用されます。`PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
 
 > **Note:**
 >
@@ -221,7 +221,7 @@ create table t (a int, b int) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=3;
 
 **問題2:**
 
-テーブルの主キーが整数型で、テーブルが主キーの一意性を確保するために`AUTO_INCREMENT`使用している場合 (必ずしも連続または増分ではない)、TiDB は主キーの行値を`_tidb_rowid`として直接使用するため、このテーブルでホットスポットを分散するために`SHARD_ROW_ID_BITS`使用することはできません。
+テーブルの主キーが整数型で、テーブルが主キーの一意性を確保するために`AUTO_INCREMENT`を使用している場合 (必ずしも連続または増分ではない)、TiDB は主キーの行値を`_tidb_rowid`として直接使用するため、このテーブルでホットスポットを分散するために`SHARD_ROW_ID_BITS`を使用することはできません。
 
 このシナリオの問題に対処するには、データを挿入する際に`AUTO_INCREMENT` [`AUTO_RANDOM`](/auto-random.md) （列属性）に置き換えます。そうすることで、TiDBは整数型の主キー列に自動的に値を割り当て、行IDの連続性が失われ、ホットスポットが分散されます。
 

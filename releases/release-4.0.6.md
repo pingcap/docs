@@ -177,7 +177,7 @@ TiDB バージョン: 4.0.6
     -   TiCDC
 
         -   TiCDC がメモリを起こす場合がある問題を修正[＃942](https://github.com/pingcap/tiflow/pull/942)
-        -   Kafka シンクで TiCDC がpanic可能性がある問題を修正しました [＃912](https://github.com/pingcap/tiflow/pull/912)
+        -   Kafka シンクで TiCDC がpanicする可能性がある問題を修正しました [＃912](https://github.com/pingcap/tiflow/pull/912)
         -   プルラーでCommitTsまたはResolvedTs（CRTs）が`resolvedTs`未満になる可能性がある問題を修正しました [＃927](https://github.com/pingcap/tiflow/pull/927)
         -   `changefeed` MySQL ドライバによってブロックされる可能性がある問題を修正しました [＃936](https://github.com/pingcap/tiflow/pull/936)
         -   TiCDC の誤ったResolved Ts間隔を修正 [＃8573](https://github.com/tikv/tikv/pull/8573)

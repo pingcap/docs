@@ -113,10 +113,10 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 
 #### ソリューション {#solutions}
 
-DMは移行タスクにおいてデータを下流へ並行して移行する機能を備えているため、タスクが中断されると様々なエラーが発生する可能性があります。これらのエラーは`query-status`使用して確認できます。
+DMは移行タスクにおいてデータを下流へ並行して移行する機能を備えているため、タスクが中断されると様々なエラーが発生する可能性があります。これらのエラーは`query-status`を使用して確認できます。
 
 -   増分レプリケーション プロセス中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
--   バージョンの問題により DM が自動的に再試行されない場合、または再試行に失敗した場合は、 `stop-task`使用してタスクを停止し、 `start-task`使用してタスクを再起動します。
+-   バージョンの問題により DM が自動的に再試行されない場合、または再試行に失敗した場合は、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
 ### 移行タスクが<code>driver: bad connection</code>エラーが返されました {#a-migration-task-is-interrupted-with-the-code-driver-bad-connection-code-error-returned}
 
@@ -126,7 +126,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 #### 解決 {#solution}
 
-現在のバージョンのDMは、エラー発生時に自動的に再試行します。自動再試行をサポートしていない以前のバージョンをご利用の場合は、コマンド`stop-task`を実行してタスクを停止し、その後コマンド`start-task`実行してタスクを再開してください。
+現在のバージョンのDMは、エラー発生時に自動的に再試行します。自動再試行をサポートしていない以前のバージョンをご利用の場合は、コマンド`stop-task`を実行してタスクを停止し、その後コマンド`start-task`を実行してタスクを再開してください。
 
 ### リレーユニットは<code>event from * in * diff from passed-in event *</code>スローするか、または、 binlogエラーの取得または解析に失敗して移行タスクが中断され、binlog <code>get binlog error ERROR 1236 (HY000)</code>や<code>binlog checksum mismatch, data may be corrupted</code> 。 {#the-relay-unit-throws-error-code-event-from-in-diff-from-passed-in-event-code-or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-code-get-binlog-error-error-1236-hy000-code-and-code-binlog-checksum-mismatch-data-may-be-corrupted-code-returned}
 
@@ -134,7 +134,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 リレー ログ プルまたは増分レプリケーションの DM プロセス中に、アップストリームbinlogファイルのサイズが**4 GB**を超えると、この 2 つのエラーが発生する可能性があります。
 
-**原因：**リレーログを書き込む際、DMはbinlogの位置とbinlogファイルのサイズに基づいてイベント検証を行い、複製されたbinlogの位置をチェックポイントとして保存する必要があります。しかし、公式のMySQLではbinlogの位置を`uint32`保存しています。そのため、4GBを超えるbinlogファイルのbinlogの位置がオーバーフローし、上記のエラーが発生します。
+**原因：**リレーログを書き込む際、DMはbinlogの位置とbinlogファイルのサイズに基づいてイベント検証を行い、複製されたbinlogの位置をチェックポイントとして保存する必要があります。しかし、公式のMySQLではbinlogの位置を`uint32`で保存しています。そのため、4GBを超えるbinlogファイルのbinlogの位置がオーバーフローし、上記のエラーが発生します。
 
 #### ソリューション {#solutions}
 
@@ -146,7 +146,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 3.  アップストリーム内の対応するbinlogファイルをリレー ログ ファイルとしてリレー ログ ディレクトリにコピーします。
 
-4.  リレーログディレクトリ内の対応する`relay.meta`のファイルを更新し、次のbinlogファイルから取得します。DMワーカーに`enable_gtid` ～ `true`指定した場合は、 `relay.meta`ファイルを更新するときに、次のbinlogファイルに対応するGTIDを変更する必要があります。それ以外の場合は、GTIDを変更する必要はありません。
+4.  リレーログディレクトリ内の対応する`relay.meta`のファイルを更新し、次のbinlogファイルから取得します。DMワーカーに`enable_gtid`を`true`に指定した場合は、 `relay.meta`ファイルを更新するときに、次のbinlogファイルに対応するGTIDを変更する必要があります。それ以外の場合は、GTIDを変更する必要はありません。
 
     例: エラーが発生した場合、 `binlog-name = "mysql-bin.004451"`と`binlog-pos = 2453`をそれぞれ`binlog-name = "mysql-bin.004452"`と`binlog-pos = 4`に更新し、 `binlog-gtid`を`f0e914ef-54cf-11e7-813d-6c92bf2fa791:1-138218058`に更新します。
 
@@ -156,9 +156,9 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 1.  エラーが発生したときに、対応するbinlogファイルのサイズが 4GB を超えたことをアップストリームで特定します。
 
-2.  `stop-task`使用して移行タスクを停止します。
+2.  `stop-task`を使用して移行タスクを停止します。
 
-3.  グローバル チェックポイントとダウンストリーム`dm_meta`データベースの各テーブル チェックポイントの`binlog_name` 、エラーのあるbinlogファイルの名前に更新します。5 `binlog_pos` 、移行が完了した有効な位置の値 (例: 4) に更新します。
+3.  グローバル チェックポイントとダウンストリーム`dm_meta`データベースの各テーブル チェックポイントの`binlog_name`を 、エラーのあるbinlogファイルの名前に更新します。`binlog_pos`を 、移行が完了した有効な位置の値 (例: 4) に更新します。
 
     例：エラーが発生したタスクの名前が`dm_test` 、対応するタスク`source-id`が`replica-1` 、対応するbinlogファイルが`mysql-bin|000001.004451`場合、次のコマンドを実行します。
 
@@ -166,15 +166,15 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
     UPDATE dm_test_syncer_checkpoint SET binlog_name='mysql-bin|000001.004451', binlog_pos = 4 WHERE id='replica-1';
     ```
 
-4.  再入可能性を確保するには、移行タスク構成の`syncers`セクションで`safe-mode: true`指定します。
+4.  再入可能性を確保するには、移行タスク構成の`syncers`セクションで`safe-mode: true`を指定します。
 
-5.  `start-task`使用して移行タスクを開始します。
+5.  `start-task`を使用して移行タスクを開始します。
 
-6.  `query-status`使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
+6.  `query-status`を使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
 
 ### タスクをクエリするかログを確認すると、 <code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>表示されます。 {#code-access-denied-for-user-root-172-31-43-27-using-password-yes-code-shows-when-you-query-the-task-or-check-the-log}
 
-すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)参照してください。
+すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
 さらに、上流データベースと下流データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクを開始する際には、データ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)必要です。
 
@@ -182,7 +182,7 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 #### 理由 {#reasons}
 
--   MySQLクライアントとMySQL/TiDBサーバーの両方に`max_allowed_packet`クォータ制限があります。3 `max_allowed_packet`いずれかが制限を超えると、クライアントはエラーメッセージを受け取ります。現在、最新バージョンのDMとTiDBサーバーでは、デフォルト値は`max_allowed_packet`ではなく`64M`です。
+-   MySQLクライアントとMySQL/TiDBサーバーの両方に`max_allowed_packet`のクォータ制限があります。`max_allowed_packet`のいずれかが制限を超えると、クライアントはエラーメッセージを受け取ります。現在、最新バージョンのDMとTiDBサーバーでは、`max_allowed_packet`のデフォルト値は`64M`です。
 
 -   DM の完全データ インポート処理ユニットは、DM のダンプ処理ユニットによってエクスポートされた SQL ファイルの分割をサポートしていません。
 
@@ -200,4 +200,4 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
     -   TiDBサーバーで`set @@global.max_allowed_packet=134217728` （ `134217728` =128MB）を実行します。
 
-    -   まず、DMタスク設定ファイルのセクション`target-database`に`max-allowed-packet: 134217728` （128MB）を追加します。次に、コマンド`stop-task`を実行し、コマンド`start-task`実行します。
+    -   まず、DMタスク設定ファイルのセクション`target-database`に`max-allowed-packet: 134217728` （128MB）を追加します。次に、コマンド`stop-task`を実行し、コマンド`start-task`を実行します。

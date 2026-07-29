@@ -55,8 +55,8 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
 
     -   `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
-    -   TiDB Cloud Dedicated プライベート エンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)参照してください。
+    -   必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+    -   TiDB Cloud Dedicated プライベート エンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -117,7 +117,7 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_private_endpoint_connection.${resource-name}`使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_private_endpoint_connection.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_dedicated_private_endpoint_connection.example
@@ -230,6 +230,6 @@ TiDB Cloud Dedicated プライベート エンドポイント接続を削除す�
   Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
 ```
 
-ここで、コマンド`terraform show`実行すると、リソースがクリアされているため何も表示されません。
+ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
     $ terraform show

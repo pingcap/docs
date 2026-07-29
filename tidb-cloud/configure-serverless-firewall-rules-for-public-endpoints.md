@@ -9,7 +9,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへの
 
 > **Note:**
 >
-> このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセス リストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+> このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセス リストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 ## 公開エンドポイント {#public-endpoints}
 

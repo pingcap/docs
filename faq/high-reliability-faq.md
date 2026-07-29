@@ -15,7 +15,7 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 -   v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)変更することでサーバーのバージョン文字列を変更することをサポートしています。
 
--   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
+-   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 
         server_configs:
           tidb:
@@ -38,4 +38,4 @@ MySQL と同様に、TiDB はユーザー ログイン認証とパスワード�
 
 TiDB でユーザー パスワードを変更する場合は、他のノードのパスワードがタイムリーに更新されない可能性がある`UPDATE mysql.user`ではなく、 `ALTER USER` (たとえば、 `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';` ) を使用することをお勧めします。
 
-ユーザーのパスワードと権限を変更する際は、公式の標準ステートメントを使用することをお勧めします。詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)参照してください。
+ユーザーのパスワードと権限を変更する際は、公式の標準ステートメントを使用することをお勧めします。詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。

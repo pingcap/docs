@@ -67,7 +67,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 -   `NEXTVAL`または`NEXT VALUE FOR`
 
-    基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。3 `NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
+    基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`NEXTVAL()`関数です。`NEXTVAL()`の関数の引数は、シーケンスの`identifier`の値です。
 
 -   `LASTVAL`
 
@@ -190,7 +190,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
         +-----------------+
         1 row in set (0.00 sec)
 
--   `NEXTVAL()`使用して次の値を取得する場合、次の値はシーケンスによって定義された等差数列の規則に従います。
+-   `NEXTVAL()`を使用して次の値を取得する場合、次の値はシーケンスによって定義された等差数列の規則に従います。
 
     ```sql
     SELECT next value for seq2;

@@ -5,7 +5,7 @@ summary: Grafana の概要ダッシュボードに表示されるいくつかの
 
 # 主要な指標 {#key-metrics}
 
-TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（PrometheusとGrafana）も同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
+TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（PrometheusとGrafana）も同時にデプロイされます。詳細については、 [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Disk Performance、Performance_overviewといった一連のサブダッシュボードに分かれています。診断に役立つ多くの指標が用意されています。
 

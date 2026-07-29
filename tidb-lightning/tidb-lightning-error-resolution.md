@@ -14,13 +14,13 @@ v5.4.0以降、 TiDB Lightningを設定して、無効な型変換や一意キ�
 -   `tikv-importer.duplicate-resolution` (v8.0.0 で非推奨となり、将来のリリースで削除される予定): 物理インポート モードでのみ使用できる競合処理構成
 -   `lightning.task-info-schema-name` : TiDB Lightningが競合を検出したときに競合するデータが格納されるデータベース
 
-詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
+詳細については[TiDB Lightning （タスク）](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
 ## 入力エラー {#type-error}
 
 `lightning.max-error`設定を使用すると、データ型に関連するエラーの許容範囲を広げることができます。この設定を*N*に設定すると、 TiDB Lightning はデータソースから最大*N*個のエラーを許容し、データソースが存在する前にスキップします。デフォルト値の`0` 、エラーが許容されないことを意味します。
 
-これらのエラーはデータベースに記録されます。インポート完了後、データベース内のエラーを確認し、手動で処理することができます。詳細については、 [エラーレポート](#error-report)参照してください。
+これらのエラーはデータベースに記録されます。インポート完了後、データベース内のエラーを確認し、手動で処理することができます。詳細については、 [エラーレポート](#error-report)を参照してください。
 
 ```toml
 [lightning]
@@ -45,7 +45,7 @@ max-error = 0
 
 ## 競合エラー {#conflict-errors}
 
-設定項目[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)使用すると、データ競合に関連するエラーの許容度を高めることができます。この設定項目を*N*に設定すると、 TiDB Lightning はデータソースから最大*N 個の*競合エラーを許容し、それをスキップしてから終了します。デフォルト値は`10000`で、これは 10000 個のエラーが許容されることを意味します。
+設定項目[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を使用すると、データ競合に関連するエラーの許容度を高めることができます。この設定項目を*N*に設定すると、 TiDB Lightning はデータソースから最大*N 個の*競合エラーを許容し、それをスキップしてから終了します。デフォルト値は`10000`で、これは 10000 個のエラーが許容されることを意味します。
 
 これらのエラーはテーブルに記録されます。インポートが完了したら、データベースでエラーを確認し、手動で処理することができます。詳細については、 [エラーレポート](#error-report)をご覧ください。
 

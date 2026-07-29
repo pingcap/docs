@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.15
 
 -   TiDB
 
-    -   新規セッションで`SHOW VARIABLES`実行すると遅くなる問題を修正しました。この修正により、 で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326) [＃21045](https://github.com/pingcap/tidb/pull/21045)
+    -   新規セッションで`SHOW VARIABLES`を実行すると遅くなる問題を修正しました。この修正により、[＃21045](https://github.com/pingcap/tidb/pull/21045)で行われた変更の一部が元に戻り、互換性の問題が発生する可能性があります[＃24326](https://github.com/pingcap/tidb/issues/24326)
 
     <!---->
 
@@ -62,7 +62,7 @@ TiDB バージョン: 4.0.15
     -   Dumpling
 
         -   テーブル情報を取得する前にスキップしたデータベースをフィルタリングして、 `SHOW TABLE STATUS` のフィルタリング効率を向上させます。 [＃337](https://github.com/pingcap/dumpling/pull/337)
-        -   エクスポートするテーブルのテーブル情報を取得するには`SHOW FULL TABLES`使用します。3 `SHOW TABLE STATUS`一部のMySQLバージョンでは正常に動作しないためです。 [＃322](https://github.com/pingcap/dumpling/issues/322)
+        -   エクスポートするテーブルのテーブル情報を取得するには`SHOW FULL TABLES`を使用します。これは、`SHOW TABLE STATUS`が一部のMySQLバージョンでは正常に動作しないためです。 [＃322](https://github.com/pingcap/dumpling/issues/322)
         -   `START TRANSACTION ... WITH CONSISTENT SNAPSHOT`または`SHOW CREATE TABLE`構文をサポートしていない MySQL 互換データベースのバックアップをサポート[＃309](https://github.com/pingcap/dumpling/issues/309)
         -   Dumpling の警告ログを改良し、ダンプが失敗したという誤解を招く情報を回避する[＃340](https://github.com/pingcap/dumpling/pull/340)
 
@@ -110,7 +110,7 @@ TiDB バージョン: 4.0.15
 -   PD
 
     -   PDがダウンしたピアを時間内に修復しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   TiKV をスケールアウトするときに PD がpanic可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
+    -   TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
 
 -   TiFlash
 

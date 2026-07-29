@@ -13,7 +13,7 @@ TiDB は、以下を含むすべての MySQL 数値型をサポートしてい�
 
 ## 整数型 {#integer-types}
 
-TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべてのMySQL整数型をサポートしています。詳細については、 [MySQLの整数データ型の構文](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)参照してください。
+TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべてのMySQL整数型をサポートしています。詳細については、 [MySQLの整数データ型の構文](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)を参照してください。
 
 次の表はフィールドの説明をまとめたものです。
 
@@ -113,7 +113,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## 浮動小数点型 {#floating-point-types}
 
-TiDBは、 `FLOAT` 、 `DOUBLE`含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [浮動小数点型（近似値） - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)参照してください。
+TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [浮動小数点型（近似値） - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)を参照してください。
 
 次の表はフィールドの説明をまとめたものです。
 
@@ -136,7 +136,7 @@ TiDBは、 `FLOAT` 、 `DOUBLE`含むすべてのMySQL浮動小数点型をサ�
 
 `FLOAT`型は単精度浮動小数点数を保存します。許容値は-3.402823466E+38～-1.175494351E-38、0、1.175494351E-38～3.402823466E+38です。これらはIEEE標準に基づく理論上の制限です。実際の範囲は、ハードウェアやオペレーティングシステムによって若干狭くなる場合があります。
 
-`FLOAT(p)`必要なビット精度を表すために使用できます。TiDB はこの値を使用して、結果のデータ型に`FLOAT`使用するか`DOUBLE`使用するかを決定します。p が 0 から 24 の場合、データ型は M 値または D 値を持たない FLOAT になります。p が 25 から 53 の場合、データ型は M 値または D 値を持たない`DOUBLE`になります。結果の列の範囲は、単精度`FLOAT`または倍精度`DOUBLE`データ型と同じです。
+`FLOAT(p)`必要なビット精度を表すために使用できます。TiDB はこの値を使用して、結果のデータ型に`FLOAT`を使用するか`DOUBLE`を使用するかを決定します。p が 0 から 24 の場合、データ型は M 値または D 値を持たない FLOAT になります。p が 25 から 53 の場合、データ型は M 値または D 値を持たない`DOUBLE`になります。結果の列の範囲は、単精度`FLOAT`または倍精度`DOUBLE`データ型と同じです。
 
 ```sql
 FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
@@ -164,7 +164,7 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 
 > **Note:**
 >
-> TiDBが科学表記法で表現された倍精度浮動小数点数を`CHAR`型に変換すると、MySQLでの表示と矛盾する結果が表示されます。詳細は[キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)参照してください。
+> TiDBが科学表記法で表現された倍精度浮動小数点数を`CHAR`型に変換すると、MySQLでの表示と矛盾する結果が表示されます。詳細は[キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)を参照してください。
 
 ## 固定小数点型 {#fixed-point-types}
 

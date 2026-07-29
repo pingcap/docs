@@ -5,9 +5,9 @@ summary: 拡張統計を使用してオプティマイザーをガイドする�
 
 # 拡張統計入門 {#introduction-to-extended-statistics}
 
-TiDBは以下の2種類の統計情報を収集できます。このドキュメントでは、拡張統計を使用してオプティマイザをガイドする方法について説明します。このドキュメントを読む前に、まず[統計入門](/statistics.md)読むことをお勧めします。
+TiDBは以下の2種類の統計情報を収集できます。このドキュメントでは、拡張統計を使用してオプティマイザをガイドする方法について説明します。このドキュメントを読む前に、まず[統計入門](/statistics.md)を読むことをお勧めします。
 
--   基本統計：ヒストグラムやCount-Min Sketchなど、主に個々の列に焦点を当てた統計。これらは、オプティマイザがクエリコストを見積もるために不可欠です。詳細は[統計入門](/statistics.md)ご覧ください。
+-   基本統計：ヒストグラムやCount-Min Sketchなど、主に個々の列に焦点を当てた統計。これらは、オプティマイザがクエリコストを見積もるために不可欠です。詳細は[統計入門](/statistics.md)をご覧ください。
 -   拡張統計: 指定された列間のデータの相関関係に焦点を当てた統計。クエリされた列が相関している場合に、オプティマイザーがクエリ コストをより正確に見積もることを可能にします。
 
 `ANALYZE`の文が手動または自動で実行される場合、TiDB はデフォルトで基本統計のみを収集し、拡張統計は収集しません。これは、拡張統計は特定のシナリオにおけるオプティマイザの推定にのみ使用され、収集には追加のオーバーヘッドが必要になるためです。
@@ -16,7 +16,7 @@ TiDBは以下の2種類の統計情報を収集できます。このドキュメ
 
 > **Warning:**
 >
-> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
+> この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)の報告を行ってください。
 
 ## 制限事項 {#limitations}
 
@@ -103,7 +103,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### 拡張統計のエクスポートとインポート {#export-and-import-extended-statistics}
 
-拡張統計のエクスポート／インポート方法は、基本統計のエクスポート／インポート方法と同じです。詳細は[統計入門 - インポートとエクスポートの統計](/statistics.md#export-and-import-statistics)ご覧ください。
+拡張統計のエクスポート／インポート方法は、基本統計のエクスポート／インポート方法と同じです。詳細は[統計入門 - インポートとエクスポートの統計](/statistics.md#export-and-import-statistics)をご覧ください。
 
 ## 相関型拡張統計の使用例 {#usage-examples-for-correlation-type-extended-statistics}
 
@@ -129,7 +129,7 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 
 上記のクエリを実行する場合、TiDB オプティマイザーにはテーブル`t`アクセスするための次のオプションがあります。
 
--   `col1`のインデックスを使用してテーブル`t`にアクセスし、結果を`col2`でソートして`Top-1`計算します。
+-   `col1`のインデックスを使用してテーブル`t`にアクセスし、結果を`col2`でソートして`Top-1`を計算します。
 -   `col2`のインデックスを使用して、 `col1 > 1`満たす最初の行を検索します。このアクセス方法のコストは、TiDBが`col2`の順序でテーブルをスキャンする際に、どれだけの行がフィルタリングされるかに主に依存します。
 
 拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`独立していると想定するだけなので、**大きな推定誤差が生じます**。
@@ -142,7 +142,7 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-オブジェクト作成後に`ANALYZE`実行すると、 TiDB はテーブル`t`の`col1`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトをテーブル`mysql.stats_extended`に書き込みます。
+オブジェクト作成後に`ANALYZE`を実行すると、 TiDB はテーブル`t`の`col1`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)を計算し、オブジェクトをテーブル`mysql.stats_extended`に書き込みます。
 
 ### ステップ4. 拡張統計がどのように違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 
@@ -156,4 +156,4 @@ SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 
 前のクエリ結果に1を加えたものが、最終的な行数の推定値となります。これにより、独立仮定を用いる必要がなくなり、**大きな推定誤差を回避できます**。
 
-相関係数（この例では`1` ）がシステム変数`tidb_opt_correlation_threshold`の値より小さい場合、オプティマイザは独立仮定を使用しますが、ヒューリスティックに推定値も増加させます。5 `tidb_opt_correlation_exp_factor`値が大きいほど、推定結果は大きくなります。相関係数の絶対値が大きいほど、推定結果は大きくなります。
+相関係数（この例では`1` ）がシステム変数`tidb_opt_correlation_threshold`の値より小さい場合、オプティマイザは独立仮定を使用しますが、ヒューリスティックに推定値も増加させます。`tidb_opt_correlation_exp_factor`の値が大きいほど、推定結果は大きくなります。相関係数の絶対値が大きいほど、推定結果は大きくなります。

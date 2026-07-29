@@ -77,7 +77,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 -   ソースファイルを生成する際は、単一ファイル内で主キーでソートすることをお勧めします。テーブル定義に主キーがない場合は、AUTO_INCREMENT主キーを追加できます。この場合、ファイルの内容の順序は関係ありません。
 -   ソースファイルを複数のTiDB Lightningインスタンスに割り当てる際は、複数のソースファイル間で重複する主キーやnull以外の一意インデックスが存在する状況を避けるようにしてください。生成されたファイルがグローバルにソートされている場合は、範囲に基づいて異なるTiDB Lightningインスタンスに分散することで、最適なインポートパフォーマンスを実現できます。
 -   ファイル生成中に各ファイルのサイズが 96 MiB 未満になるように制御します。
--   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)有効にします。
+-   ファイルが非常に大きく、256 MiB を超える場合は、 [`strict-format`](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional)を有効にします。
 
 ## ストレージスペースの見積もり {#estimate-storage-space}
 
@@ -95,7 +95,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 -   `disk-quota` : TiDB Lightningのソートディレクトリの容量がデータソースのサイズよりも大きいことを確認することをお勧めします。確保できない場合は、 `disk-quota` TiDB Lightningのソートディレクトリの容量の 80% に設定できます。これにより、 TiDB Lightning は指定された`disk-quota`に従ってデータを一括でソートして書き込みますが、この方法では完全なソート処理と比較してインポートパフォーマンスが低下する可能性があることに注意してください。
 -   `GOMEMLIMIT` : TiDB LightningはGo言語で実装されています。インスタンスメモリの80%を`GOMEMLIMIT`に設定することで、GoのGCメカニズムによるOOMの発生確率を低減します。
 
-TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成パラメータ](/tidb-lightning/tidb-lightning-configuration.md)参照してください。
+TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成パラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 「チェックサム不一致」エラーを解決する {#resolve-the-checksum-mismatch-error}
 
@@ -103,7 +103,7 @@ TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成�
 
 1.  ソースデータで主キーまたは一意キーの競合がないか確認し、再インポート前に競合を解決してください。ほとんどの場合、これが最も一般的な原因です。
 2.  テーブルの主キーまたは一意キーの定義が適切かどうかを確認してください。適切でない場合は、テーブル定義を修正してデータを再インポートしてください。
-3.  上記の2つの手順を実行しても問題が解決しない場合は、ソースデータに少量（10%未満）の予期しない競合データが存在するかどうかを確認するために、さらに調査する必要があります。TiDB Lightningが競合データを検出して解決できるようにするには、 [競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)有効にしてください。
+3.  上記の2つの手順を実行しても問題が解決しない場合は、ソースデータに少量（10%未満）の予期しない競合データが存在するかどうかを確認するために、さらに調査する必要があります。TiDB Lightningが競合データを検出して解決できるようにするには、 [競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)を有効にしてください。
 
 ## チェックポイントを有効にする {#enable-checkpoint}
 
@@ -130,7 +130,7 @@ TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成�
 
 ### クラスタトポロジを計画する {#plan-cluster-topology}
 
-TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10TiBのソースデータを処理できるようにします。各ノードに1つのTiDB Lightningインスタンスをデプロイ。ノードの仕様については、 TiDB Lightningインスタンスの[環境要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)参照してください。
+TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10TiBのソースデータを処理できるようにします。各ノードに1つのTiDB Lightningインスタンスをデプロイ。ノードの仕様については、 TiDB Lightningインスタンスの[環境要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。
 
 ### 設定パラメータを変更する {#change-configuration-parameters}
 
@@ -148,8 +148,8 @@ TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10
 
 大規模な単一テーブル（たとえば、10 億行以上、50 列以上）の場合、インポートプロセス中に`analyze`操作（ `analyze="off"` ）を無効にし、インポートが完了した後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを手動で実行することをお勧めします。
 
-`analyze`の設定の詳細については、 [TiDB Lightningタスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)参照してください。
+`analyze`の設定の詳細については、 [TiDB Lightningタスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
-TiDB Lightning の使用中に問題が発生した場合は、 [TiDB Lightningのトラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)参照してください。
+TiDB Lightning の使用中に問題が発生した場合は、 [TiDB Lightningのトラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)を参照してください。

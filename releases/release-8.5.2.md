@@ -51,7 +51,7 @@ TiDBバージョン：8.5.2
     -   Grafana の**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     -   キャンセルされたTTLタスクが未コミットのセッションをグローバルセッションプールに配置する可能性がある問題を修正 [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
     -   ログの編集を有効にしても特定のシナリオで効果がない問題を修正 [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
-    -   `rowContainer`が特定のシナリオで TiDB をpanic可能性がある問題を修正 [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
+    -   `rowContainer`が特定のシナリオで TiDB をpanicする可能性がある問題を修正 [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
     -   パーティション化されたテーブルの`Point_Get`シナリオでパーティションプルーニングが正しくない可能性がある問題を修正 [#59827](https://github.com/pingcap/tidb/issues/59827) @[mjonss](https://github.com/mjonss)
     -   DDL 実行中にパーティション テーブル内のレコードを更新するとデータ破損が発生する可能性がある問題を修正 [#57588](https://github.com/pingcap/tidb/issues/57588) @[Defined2014](https://github.com/Defined2014)
     -   `information_schema`のパフォーマンスと安定性が特定のシナリオで影響を受ける問題を修正しました[#58142](https://github.com/pingcap/tidb/issues/58142) [#58363](https://github.com/pingcap/tidb/issues/58363) [#58712](https://github.com/pingcap/tidb/issues/58712) @[tiancaiamao](https://github.com/tiancaiamao)
@@ -135,7 +135,7 @@ TiDBバージョン：8.5.2
         -   TiCDCがAvroプロトコル経由で`default NULL` SQLステートメントを複製する際にエラーを報告する問題を修正しました [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)
         -   アップストリームで新しく追加された列のデフォルト値が`NOT NULL`から`NULL`に変更された後、ダウンストリームのその列のデフォルト値が正しくない問題を修正します [#12037](https://github.com/pingcap/tiflow/issues/12037) @[wk989898](https://github.com/wk989898)
         -   PDスケールイン後にTiCDCがPDに正しく接続できない問題を修正 [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)
-        -   TiCDCが`CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製する際にpanic可能性がある問題を修正しました [#11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   TiCDCが`CREATE TABLE IF NOT EXISTS`または`CREATE DATABASE IF NOT EXISTS`ステートメントを複製する際にpanicする可能性がある問題を修正しました [#11839](https://github.com/pingcap/tiflow/issues/11839) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     -   TiDB Data Migration (DM)
 

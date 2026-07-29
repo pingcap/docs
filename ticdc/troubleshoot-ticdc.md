@@ -17,18 +17,18 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 
 -   Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
 -   監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
--   `cdc cli changefeed list`と`cdc cli changefeed query`実行して、レプリケーションタスクのステータスを確認します。5 `stopped`タスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`検索してエラースタックを確認し、トラブルシューティングを行うことができます。
+-   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
 -   極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベル目のログを検索できます。
 
 ### レプリケーション タスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
 
-レプリケーションタスクが手動で停止されているかどうかを確認するには、 `cdc cli`実行します。例:
+レプリケーションタスクが手動で停止されているかどうかを確認するには、 `cdc cli`を実行します。例:
 
 ```shell
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
 ```
 
-上記のコマンドの出力で、 `admin-job-type`このレプリケーションタスクの状態を示しています。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)参照してください。
+上記のコマンドの出力で、 `admin-job-type`がこのレプリケーションタスクの状態を示しています。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)を参照してください。
 
 ### レプリケーションの中断をどのように処理しますか? {#how-do-i-handle-replication-interruptions}
 
@@ -38,7 +38,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
     -   このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
 
-    -   対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`実行することでレプリケーション タスクを再開できます。
+    -   対処方法：ダウンストリームが正常に戻った後、 `cdc cli changefeed resume`を実行することでレプリケーション タスクを再開できます。
 
 -   ダウンストリームに互換性のない SQL ステートメントがあるため、レプリケーションを続行できません。
 
@@ -56,7 +56,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 ## レプリケーション タスクを作成するとき、または MySQL にデータをレプリケートするときに、「 <code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
-このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。1 [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
+このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
 
 ```shell
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
@@ -70,7 +70,7 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
     Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
     Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 
-ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。5 `time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
+ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
 `mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"` 。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
 
@@ -85,7 +85,7 @@ v4.0.9 以降では、レプリケーション タスクで統合ソーター機
 ## 変更フィードの下流にMySQLなどのデータベースがあり、TiCDCが時間のかかるDDL文を実行すると、他のすべての変更フィードがブロックされます。どうすればよいでしょうか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 
 1.  時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
-2.  TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`確認します。
+2.  TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL ステートメントの`start-ts`を確認します。
 3.  下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
 4.  changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`構成項目に追加します。
 5.  一時停止された変更フィードを再開します。
@@ -112,7 +112,7 @@ TiCDC が Kafka に送信するメッセージのサイズを制御するには�
 
 ## TiCDC レプリケーション中に、ダウンストリームで DDL ステートメントの実行が失敗したかどうかを確認するにはどうすればよいでしょうか? レプリケーションを再開するにはどうすればよいでしょうか? {#how-can-i-find-out-whether-a-ddl-statement-fails-to-execute-in-downstream-during-ticdc-replication-how-to-resume-the-replication}
 
-DDL文の実行に失敗した場合、レプリケーションタスク（changefeed）は自動的に停止します。checkpoint-tsはDDL文のfinish-tsです。TiCDCにこの文の実行を下流で再試行させたい場合は、 `cdc cli changefeed resume`指定してレプリケーションタスクを再開してください。例：
+DDL文の実行に失敗した場合、レプリケーションタスク（changefeed）は自動的に停止します。checkpoint-tsはDDL文のfinish-tsです。TiCDCにこの文の実行を下流で再試行させたい場合は、 `cdc cli changefeed resume`を指定してレプリケーションタスクを再開してください。例：
 
 ```shell
 cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300

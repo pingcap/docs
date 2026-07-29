@@ -28,7 +28,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 3.  接続ダイアログで、 **[接続タイプ]**ドロップダウン リストから**[パブリック]**を選択します。
 
-    IPアクセスリストを設定していない場合は、初回接続前に**「IPアクセスリストの設定**」をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+    IPアクセスリストを設定していない場合は、初回接続前に**「IPアクセスリストの設定**」をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 4.  **「CA証明書」**をクリックして、TiDBクラスタへのTLS接続用のCA証明書をダウンロードしてください。CA証明書はデフォルトでTLS 1.2バージョンをサポートしています。
 
@@ -53,14 +53,14 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 パラメータの説明：
 
 -   `--ssl-mode=VERIFY_IDENTITY`では、MySQL CLI クライアントは TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証することを強制します。
--   `--ssl-ca=<CA_path>`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
--   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   TLSプロトコルのバージョンを制限するには、 `--tls-version=TLSv1.2`を使用します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
 
 </div>
 
 <div label="MyCLI">
 
-[mycli](https://www.mycli.net/)指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`設定する必要があります。
+[mycli](https://www.mycli.net/)を指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -68,7 +68,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 パラメータの説明：
 
--   `--ssl-ca=<CA_path>`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `--ssl-ca=<CA_path>`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
 -   `--ssl-verify-server-cert`でTiDB Cloud Dedicated クラスターを検証します。
 
 </div>
@@ -140,7 +140,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 パラメータの説明：
 
 -   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`設定します。
--   `ssl={"ca": "<CA_path>"}`使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
+-   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
 
 </div>
 
@@ -282,4 +282,4 @@ TiDB Cloud Dedicated は、クライアントとTiDB Cloud Dedicated クラス�
 
 いいえ。
 
-TiDB Cloud Dedicatedは現在、片方向TLS認証のみをサポートしており、双方向TLS認証はサポートしていません。双方向TLS認証が必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+TiDB Cloud Dedicatedは現在、片方向TLS認証のみをサポートしており、双方向TLS認証はサポートしていません。双方向TLS認証が必要な場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

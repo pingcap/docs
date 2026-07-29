@@ -13,7 +13,7 @@ summary: アプリケーションでフィルタリングを使用する方法�
 
 [`pytidb`](https://github.com/pingcap/pytidb)は、開発者が AI アプリケーションを効率的に構築できるように設計されています。
 
-`pytidb`使用する場合、 `table.query()` 、 `table.delete()` 、 `table.update()` 、および`table.search()`メソッドに**filters**パラメータを渡すことでフィルタリングを適用できます。
+`pytidb`を使用する場合、 `table.query()` 、 `table.delete()` 、 `table.update()` 、および`table.search()`メソッドに**filters**パラメータを渡すことでフィルタリングを適用できます。
 
 **フィルター**パラメータは、 [辞書フィルター](#dictionary-filters)と[SQL文字列フィルター](#sql-string-filters) 2 つの形式をサポートします。
 
@@ -183,7 +183,7 @@ results = table.query(
 ).to_list()
 ```
 
-`AND` 、 `OR` 、括弧を使用して複数の条件を組み合わせたり、TiDB でサポートされている[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)使用したりできます。
+`AND` 、 `OR` 、括弧を使用して複数の条件を組み合わせたり、TiDB でサポートされている[SQL演算子](https://docs.pingcap.com/tidbcloud/operators/)を使用したりできます。
 
 > **Warning:**
 >

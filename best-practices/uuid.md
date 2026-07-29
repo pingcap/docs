@@ -22,7 +22,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 ### バイナリとして保存 {#store-as-binary}
 
-テキスト形式のUUID形式は次のようになります`ab06f63e-8fe7-11ec-a514-5405db7aad56`は36文字の文字列です。[`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)使用すると、テキスト形式を16バイトのバイナリ形式に変換できます。これにより、テキストを[`BINARY(16)`](/data-type-string.md#binary-type)列に格納できます。UUIDを取得する際には、 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid)関数を使用してテキスト形式に戻すことができます。
+テキスト形式のUUID（例えば`ab06f63e-8fe7-11ec-a514-5405db7aad56`）は36文字の文字列です。[`UUID_TO_BIN()`](/functions-and-operators/miscellaneous-functions.md#uuid_to_bin)を使用すると、テキスト形式を16バイトのバイナリ形式に変換できます。これにより、テキストを[`BINARY(16)`](/data-type-string.md#binary-type)列に格納できます。UUIDを取得する際には、 [`BIN_TO_UUID()`](/functions-and-operators/miscellaneous-functions.md#bin_to_uuid)関数を使用してテキスト形式に戻すことができます。
 
 ### UUID形式のバイナリ順序とクラスター化された主キー {#uuid-format-binary-order-and-clustered-primary-keys}
 
@@ -32,7 +32,7 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 ホットスポットを回避するために、UUID ベースの主キーに[`CLUSTERED`オプション](/clustered-indexes.md)明示的に設定することもできます。
 
-`swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`使用していることです。
+`swap_flag`の効果を示すために、同じ構造を持つ2つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`を使用していることです。
 
 以下の Key Visualizer のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わった`uuid_demo_2`テーブルの 1 つのリージョンに書き込みが集中していることがわかります。
 
@@ -61,4 +61,4 @@ Key Visualizer の詳細については、次のドキュメントを参照し�
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-UUIDはMySQLでも使用できます。1と`UUID_TO_BIN()` `BIN_TO_UUID()`はMySQL 8.0で導入されました。5 `UUID()`関数はそれ以前のMySQLバージョンでも使用できます。
+UUIDはMySQLでも使用できます。`BIN_TO_UUID()`と`UUID_TO_BIN()`関数はMySQL 8.0で導入されました。`UUID()`関数はそれ以前のMySQLバージョンでも使用できます。

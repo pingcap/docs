@@ -5,7 +5,7 @@ summary: このドキュメントでは、TiDB でサポートされているウ
 
 # ウィンドウ関数 {#window-functions}
 
-TiDBにおけるウィンドウ関数の使用方法は、MySQL 8.0と同様です。詳細については[MySQL ウィンドウ関数](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html)参照してください。
+TiDBにおけるウィンドウ関数の使用方法は、MySQL 8.0と同様です。詳細については[MySQL ウィンドウ関数](https://dev.mysql.com/doc/refman/8.0/en/window-functions.html)を参照してください。
 
 TiDB では、次のシステム変数を使用してウィンドウ関数を制御できます。
 

@@ -19,13 +19,13 @@ TiDB バージョン: 7.5.1
 -   TiCDC Changefeed、次の新しい構成項目が導入されています。
     -   [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[＃10176](https://github.com/pingcap/tiflow/issues/10176) @ [sdojjy](https://github.com/sdojjy)
     -   [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます。 [＃10109](https://github.com/pingcap/tiflow/issues/10109) @ [CharlesCheung96](https://github.com/CharlesCheung96)
-    -   [`consistent.flush-concurrency`](/ticdc/ticdc-changefeed-config.md) : 単一のREDOファイルのアップロードの同時実行をに設定できます [＃10226](https://github.com/pingcap/tiflow/issues/10226) @ [sdojjy](https://github.com/sdojjy)
+    -   [`consistent.flush-concurrency`](/ticdc/ticdc-changefeed-config.md) : 単一のREDOファイルのアップロードの同時実行を設定できます [＃10226](https://github.com/pingcap/tiflow/issues/10226) @ [sdojjy](https://github.com/sdojjy)
 
 ## 改善点 {#improvements}
 
 -   TiDB
 
-    -   DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`使用して、クラスタでのメタリージョンLeaderの読み取り不可の影響を軽減します。 [＃48124](https://github.com/pingcap/tidb/issues/48124) @ [cfzjywxk](https://github.com/cfzjywxk)
+    -   DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`を使用して、クラスタでのメタリージョンLeaderの読み取り不可の影響を軽減します。 [＃48124](https://github.com/pingcap/tidb/issues/48124) @ [cfzjywxk](https://github.com/cfzjywxk)
 
     -   リソース制御に関する可観測性を強化する[＃49318](https://github.com/pingcap/tidb/issues/49318) @ [glorv](https://github.com/glorv) @ [bufferflies](https://github.com/bufferflies) @ [nolouch](https://github.com/nolouch)
 
@@ -76,7 +76,7 @@ TiDB バージョン: 7.5.1
 
         -   TiDB DashboardでのTiCDCログの検索をサポート [＃10263](https://github.com/pingcap/tiflow/issues/10263) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   サポート[チェンジフィードの下流同期ステータスの照会](https://docs.pingcap.com/tidb/v7.5/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed)は、TiCDC が受信した上流データの変更が下流システムに完全に同期されているかどうかを判断するのに役立ちます[＃10289](https://github.com/pingcap/tiflow/issues/10289) @ [hongyunyan](https://github.com/hongyunyan)
-        -   並列処理をに増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。 [＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)
+        -   並列処理を増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。 [＃10098](https://github.com/pingcap/tiflow/issues/10098) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
     -   TiDB Lightning
 
@@ -96,13 +96,13 @@ TiDB バージョン: 7.5.1
     -   TiFlash の遅延マテリアライゼーションが関連列 を処理するときに間違った結果が返される可能性がある問題を修正しました [＃51204](https://github.com/pingcap/tidb/issues/51204) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) [＃49241](https://github.com/pingcap/tidb/issues/49241)
     -   TiDB が履歴統計を記録するときに TiDB のバックグラウンド ジョブ スレッドがpanicになる可能性がある問題を修正しました [＃49076](https://github.com/pingcap/tidb/issues/49076) @ [hawkingrei](https://github.com/hawkingrei)
     -   TiDBがパーティションテーブルのグローバル統計のヒストグラムをマージするときに発生する可能性のあるエラーを修正しました。 [＃49023](https://github.com/pingcap/tidb/issues/49023) @ [hawkingrei](https://github.com/hawkingrei)
-    -   パーティションがに削除された後、 `stats_meta`テーブルの履歴統計が更新されない問題を修正しました [＃49334](https://github.com/pingcap/tidb/issues/49334) @ [Rustin170506](https://github.com/Rustin170506)
+    -   パーティションが削除された後、 `stats_meta`テーブルの履歴統計が更新されない問題を修正しました [＃49334](https://github.com/pingcap/tidb/issues/49334) @ [Rustin170506](https://github.com/Rustin170506)
     -   複数値インデックスが誤って`Index Join`プローブ側として選択されたために発生する誤ったクエリ結果の問題を修正しました。 [＃50382](https://github.com/pingcap/tidb/issues/50382) @ [AilinKid](https://github.com/AilinKid)
     -   `USE_INDEX_MERGE`ヒントが複数値インデックスに効果がない問題を修正しました [＃50553](https://github.com/pingcap/tidb/issues/50553) @ [AilinKid](https://github.com/AilinKid)
     -   `INFORMATION_SCHEMA.ANALYZE_STATUS`システムテーブルをクエリするときにユーザーがエラーを受け取る可能性がある問題を修正しました [＃48835](https://github.com/pingcap/tidb/issues/48835) @ [Rustin170506](https://github.com/Rustin170506)
     -   TiDB が`group by` の定数値を誤って削除することによる間違ったクエリ結果の問題を修正しました [＃38756](https://github.com/pingcap/tidb/issues/38756) @ [Rustin170506](https://github.com/Rustin170506)
     -   テーブル上の`ANALYZE`タスクのうち`processed_rows`が、そのテーブルの合計行数を超える可能性がある問題を修正しました。 [＃50632](https://github.com/pingcap/tidb/issues/50632) @ [hawkingrei](https://github.com/hawkingrei)
-    -   `tidb_enable_prepared_plan_cache`システム変数が有効になってから無効になった後に`EXECUTE`ステートメントを使用して`PREPARE STMT`実行すると、TiDB がpanicになる可能性がある問題を修正しました[＃49344](https://github.com/pingcap/tidb/issues/49344) @ [qw4990](https://github.com/qw4990)
+    -   `tidb_enable_prepared_plan_cache`システム変数が有効になってから無効になった後に`EXECUTE`ステートメントを使用して`PREPARE STMT`を実行すると、TiDB がpanicになる可能性がある問題を修正しました[＃49344](https://github.com/pingcap/tidb/issues/49344) @ [qw4990](https://github.com/qw4990)
     -   クエリで`NATURAL JOIN` が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します [＃32044](https://github.com/pingcap/tidb/issues/32044) @ [AilinKid](https://github.com/AilinKid)
     -   多値インデックスを使用して空の JSON 配列にアクセスすると、誤った結果が返される可能性がある問題を修正しました[＃50125](https://github.com/pingcap/tidb/issues/50125) @ [YangKeao](https://github.com/YangKeao)
     -   集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[＃50926](https://github.com/pingcap/tidb/issues/50926) @ [qw4990](https://github.com/qw4990)
@@ -124,9 +124,9 @@ TiDB バージョン: 7.5.1
     -   MPPで計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[＃48643](https://github.com/pingcap/tidb/issues/48643) @ [AilinKid](https://github.com/AilinKid)
     -   `ENUM`または`SET`種類の無効な値を解析すると、SQL ステートメント エラーが直接発生する問題を修正しました。 [＃49487](https://github.com/pingcap/tidb/issues/49487) @ [winoros](https://github.com/winoros)
     -   TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [＃42739](https://github.com/pingcap/tidb/issues/42739) @ [CbcWestwolf](https://github.com/CbcWestwolf)
-    -   最初のサブノードとしてDUALテーブルを使用して`UNION ALL`実行すると、エラーが発生する可能性がある問題を修正しました。 [＃48755](https://github.com/pingcap/tidb/issues/48755) @ [winoros](https://github.com/winoros)
+    -   最初のサブノードとしてDUALテーブルを使用して`UNION ALL`を実行すると、エラーが発生する可能性がある問題を修正しました。 [＃48755](https://github.com/pingcap/tidb/issues/48755) @ [winoros](https://github.com/winoros)
     -   共通ヒントが`UNION ALL`文で有効にならない問題を修正 [＃50068](https://github.com/pingcap/tidb/issues/50068) @ [hawkingrei](https://github.com/hawkingrei)
-    -   正常なシャットダウン中に TiDBサーバーがpanic可能性がある問題を修正[＃36793](https://github.com/pingcap/tidb/issues/36793) @ [bb7133](https://github.com/bb7133)
+    -   正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[＃36793](https://github.com/pingcap/tidb/issues/36793) @ [bb7133](https://github.com/bb7133)
     -   一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [＃49586](https://github.com/pingcap/tidb/issues/49586) @ [overvenus](https://github.com/overvenus)
     -   静的`CALIBRATE RESOURCE` Prometheusデータに依存している問題を修正 [＃49174](https://github.com/pingcap/tidb/issues/49174) @ [glorv](https://github.com/glorv)
     -   `REPLACE INTO`文でヒントが使用できない問題を修正 [＃34325](https://github.com/pingcap/tidb/issues/34325) @ [YangKeao](https://github.com/YangKeao)
@@ -135,10 +135,10 @@ TiDB バージョン: 7.5.1
     -   古いインターフェースを使用するとテーブルのメタデータに不整合が発生する可能性がある問題を修正しました。 [＃49751](https://github.com/pingcap/tidb/issues/49751) @ [hawkingrei](https://github.com/hawkingrei)
     -   `tidb_enable_collect_execution_info`を無効にするとコプロセッサキャッシュがpanicになる問題を修正[＃48212](https://github.com/pingcap/tidb/issues/48212) @ [you06](https://github.com/you06)
     -   パーティション列タイプが`DATETIME` の場合に`ALTER TABLE ... LAST PARTITION`実行が失敗する問題を修正しました [＃48814](https://github.com/pingcap/tidb/issues/48814) @ [crazycs520](https://github.com/crazycs520)
-    -   `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションをで終了できない問題を修正しました。 [＃49151](https://github.com/pingcap/tidb/issues/49151) @ [zyguan](https://github.com/zyguan)
+    -   `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [＃49151](https://github.com/pingcap/tidb/issues/49151) @ [zyguan](https://github.com/zyguan)
     -   ヒストグラムの境界に`NULL` が含まれている場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正しました。 [＃49823](https://github.com/pingcap/tidb/issues/49823) @ [AilinKid](https://github.com/AilinKid)
     -   共通テーブル式 (CTE) を含むクエリがメモリ制限を超えたときに予期せず停止する問題を修正[＃49096](https://github.com/pingcap/tidb/issues/49096) @ [AilinKid](https://github.com/AilinKid)
-    -   DDL所有者がネットワークから分離されているの後に`ADD INDEX`実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @ [tangenta](https://github.com/tangenta)
+    -   DDL所有者がネットワークから分離された後に`ADD INDEX`を実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [＃49773](https://github.com/pingcap/tidb/issues/49773) @ [tangenta](https://github.com/tangenta)
     -   `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [＃50519](https://github.com/pingcap/tidb/issues/50519) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   クエリに Apply 演算子が含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanicになる可能性がある問題を修正しました。 [＃50347](https://github.com/pingcap/tidb/issues/50347) @ [SeaRise](https://github.com/SeaRise)
     -   DDL `jobID` 0 に復元されたときに発生する TiDB ノードpanicの問題を修正しました [＃46296](https://github.com/pingcap/tidb/issues/46296) @ [jiyfhust](https://github.com/jiyfhust)
@@ -148,19 +148,19 @@ TiDB バージョン: 7.5.1
     -   ネストされた`UNION`のクエリで`LIMIT`と`OPRDERBY`無効になる可能性がある問題を修正しました [＃49377](https://github.com/pingcap/tidb/issues/49377) @ [AilinKid](https://github.com/AilinKid)
     -   メモリが`tidb_mem_quota_query` を超えると IndexHashJoin 演算子を含むクエリが停止する問題を修正しました [＃49033](https://github.com/pingcap/tidb/issues/49033) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   定数伝播で`ENUM`または`SET`型を処理するときに TiDB が間違ったクエリ結果を返す問題を修正しました [＃49440](https://github.com/pingcap/tidb/issues/49440) @ [winoros](https://github.com/winoros)
-    -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)
+    -   `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [＃49166](https://github.com/pingcap/tidb/issues/49166) @ [qw4990](https://github.com/qw4990)
     -   クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行プランに`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [＃49605](https://github.com/pingcap/tidb/issues/49605) @ [AilinKid](https://github.com/AilinKid)
     -   テーブルがと多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。 [＃48869](https://github.com/pingcap/tidb/issues/48869) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、エラーが報告される問題を修正しました。 [＃49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     -   データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、誤ったクエリ結果が返される可能性がある問題を修正しました [＃48983](https://github.com/pingcap/tidb/issues/48983) @ [time-and-fate](https://github.com/time-and-fate)
-    -   `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`実行すると`ERROR 8175` が返される問題を修正しました [＃49258](https://github.com/pingcap/tidb/issues/49258) @ [tangenta](https://github.com/tangenta)
+    -   `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`を実行すると`ERROR 8175` が返される問題を修正しました [＃49258](https://github.com/pingcap/tidb/issues/49258) @ [tangenta](https://github.com/tangenta)
     -   Golang の暗黙的な変換アルゴリズムによって発生する統計情報の構築における過剰な統計エラーの問題を修正しました [＃49801](https://github.com/pingcap/tidb/issues/49801) @ [qw4990](https://github.com/qw4990)
     -   CTE を含むクエリが、 `tidb_max_chunk_size`小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`報告する問題を修正しました。 [＃48808](https://github.com/pingcap/tidb/issues/48808) @ [guo-shaoge](https://github.com/guo-shaoge)
 
 -   TiKV
 
     -   `tidb_enable_row_level_checksum`有効にすると TiKV がpanicを起こす可能性がある問題を修正[＃16371](https://github.com/tikv/tikv/issues/16371) @ [cfzjywxk](https://github.com/cfzjywxk)
-    -   gRPC スレッドが`is_shutdown` をチェックしているときに TiKV がpanic可能性がある問題を修正しました [＃16236](https://github.com/tikv/tikv/issues/16236) @ [pingyu](https://github.com/pingyu)
+    -   gRPC スレッドが`is_shutdown` をチェックしているときに TiKV がpanicする可能性がある問題を修正しました [＃16236](https://github.com/tikv/tikv/issues/16236) @ [pingyu](https://github.com/pingyu)
     -   TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[＃16220](https://github.com/tikv/tikv/issues/16220) @ [overvenus](https://github.com/overvenus)
     -   Titanの`blob-run-mode`オンラインに更新できない問題を修正 [＃15978](https://github.com/tikv/tikv/issues/15978) @ [tonyxuqqi](https://github.com/tonyxuqqi)
     -   `DECIMAL`算術乗算切り捨てを処理するときに TiDB と TiKV が矛盾した結果を生成する可能性がある問題を修正しました [＃16268](https://github.com/tikv/tikv/issues/16268) @ [solotzg](https://github.com/solotzg)
@@ -186,7 +186,7 @@ TiDB バージョン: 7.5.1
 
 -   TiFlash
 
-    -   レプリカ移行中に PD とのネットワーク接続が不安定になり、 TiFlash がpanic可能性がある問題を修正しました [＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   レプリカ移行中に PD とのネットワーク接続が不安定になり、 TiFlash がpanicする可能性がある問題を修正しました [＃8323](https://github.com/pingcap/tiflash/issues/8323) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   TiFlashレプリカを削除して再度追加すると、 TiFlash でデータ破損が発生する可能性がある問題を修正しました。 [＃8695](https://github.com/pingcap/tiflash/issues/8695) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `DROP TABLE`データ挿入の直後に実行されると、 `FLASHBACK TABLE`または`RECOVER TABLE`一部のTiFlashレプリカのデータを回復できない可能性がある潜在的な問題を修正しました。 [＃8395](https://github.com/pingcap/tiflash/issues/8395) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   Grafana の一部のパネルの最大パーセンタイル時間の表示が誤っていた問題を修正 [＃8076](https://github.com/pingcap/tiflash/issues/8076) @ [JaySon-Huang](https://github.com/JaySon-Huang)
@@ -198,12 +198,12 @@ TiDB バージョン: 7.5.1
     -   ストリーム読み取り中に複数のパーティション テーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。 [＃8505](https://github.com/pingcap/tiflash/issues/8505) @ [gengliqi](https://github.com/gengliqi)
     -   クエリ中にTiFlash がメモリ制限に遭遇した場合のメモリリークの問題を修正しました [＃8447](https://github.com/pingcap/tiflash/issues/8447) @ [JinheLin](https://github.com/JinheLin)
     -   TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[＃8578](https://github.com/pingcap/tiflash/issues/8578) @ [JaySon-Huang](https://github.com/JaySon-Huang)
-    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`実行した後にTiFlash がパニックを起こし、null 許容列がに非 null 許容に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が非 null 許容に変更される問題を修正しました。 [＃8419](https://github.com/pingcap/tiflash/issues/8419) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `ColumnRef in (Literal, Func...)` のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました [＃8631](https://github.com/pingcap/tiflash/issues/8631) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [＃8450](https://github.com/pingcap/tiflash/issues/8450) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。 [＃8519](https://github.com/pingcap/tiflash/issues/8519) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   定数文字列パラメータを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [＃8604](https://github.com/pingcap/tiflash/issues/8604) @ [windtalker](https://github.com/windtalker)
-    -   ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`実行した後にTiFlashレプリカデータが誤って削除され、データ異常が発生する可能性がある問題を修正しました。 [＃8777](https://github.com/pingcap/tiflash/issues/8777) @ [JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`を実行した後にTiFlashレプリカデータが誤って削除され、データ異常が発生する可能性がある問題を修正しました。 [＃8777](https://github.com/pingcap/tiflash/issues/8777) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   結合に非等価条件が含まれている場合に、 TiFlash Anti Semi Join が誤った結果を返す可能性がある問題を修正しました。 [＃8791](https://github.com/pingcap/tiflash/issues/8791) @ [windtalker](https://github.com/windtalker)
 
 -   ツール
@@ -229,7 +229,7 @@ TiDB バージョン: 7.5.1
         -   複数のチェンジフィードを同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました [＃10430](https://github.com/pingcap/tiflow/issues/10430) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   極端なケースでチェンジフィード`resolved ts`が進まない問題を修正[＃10157](https://github.com/pingcap/tiflow/issues/10157) @ [sdojjy](https://github.com/sdojjy)
         -   特定の特殊なシナリオで TiCDC が TiKV との接続を誤って閉じる問題を修正[＃10239](https://github.com/pingcap/tiflow/issues/10239) @ [hicqu](https://github.com/hicqu)
-        -   オブジェクトストレージサービスにデータを複製するときに TiCDCサーバーがpanic可能性がある問題を修正しました [＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)
+        -   オブジェクトストレージサービスにデータを複製するときに TiCDCサーバーがpanicする可能性がある問題を修正しました [＃10137](https://github.com/pingcap/tiflow/issues/10137) @ [sdojjy](https://github.com/sdojjy)
         -   アップストリームテーブルで`TRUNCATE PARTITION`を実行した後に、changefeed がエラーを報告する問題を修正しました。 [＃10522](https://github.com/pingcap/tiflow/issues/10522) @ [sdojjy](https://github.com/sdojjy)
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリームに複製しない問題を修正しました。 [＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `kv-client`初期化中に発生する可能性のあるデータ競合問題を修正 [＃10095](https://github.com/pingcap/tiflow/issues/10095) @ [3AceShowHand](https://github.com/3AceShowHand)

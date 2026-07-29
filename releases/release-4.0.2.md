@@ -102,7 +102,7 @@ TiDB バージョン: 4.0.2
 -   TiDB
 
     -   `tidb_isolation_read_engines`が変更された後にプランキャッシュから取得される実行プランが正しくない問題を修正[＃17570](https://github.com/pingcap/tidb/pull/17570)
-    -   `EXPLAIN FOR CONNECTION`文実行するときに時々発生するランタイムエラーを修正 [＃18124](https://github.com/pingcap/tidb/pull/18124)
+    -   `EXPLAIN FOR CONNECTION`文を実行するときに時々発生するランタイムエラーを修正 [＃18124](https://github.com/pingcap/tidb/pull/18124)
     -   いくつかのケースで`last_plan_from_cache`セッション変数の誤った結果を修正[＃18111](https://github.com/pingcap/tidb/pull/18111)
     -   プランキャッシュ から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイムエラーを修正しました [＃17673](https://github.com/pingcap/tidb/pull/17673) [＃18002](https://github.com/pingcap/tidb/pull/18002)
     -   `HashJoin` Executor の子が`NULL`列返すときのランタイムエラーを修正しました [＃17937](https://github.com/pingcap/tidb/pull/17937)
@@ -158,5 +158,5 @@ TiDB バージョン: 4.0.2
 
 -   TiFlash
 
-    -   `region not found`エラーが発生したときにプロキシがpanic可能性がある問題を修正しました
+    -   `region not found`エラーが発生したときにプロキシがpanicする可能性がある問題を修正しました
     -   `drop table`でスローされた I/O 例外によりTiFlashスキーマの同期が失敗する可能性がある問題を修正しました

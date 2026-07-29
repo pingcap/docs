@@ -83,7 +83,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
         tidbcloud_import.example_local: Creating...
         tidbcloud_import.example_local: Creation complete after 6s [id=781074]
 
-4.  `terraform state show tidbcloud_import.${resource-name}`使用してインポート タスクのステータスを確認します。
+4.  `terraform state show tidbcloud_import.${resource-name}`を使用してインポート タスクのステータスを確認します。
 
         $ terraform state show tidbcloud_import.example_local
         # tidbcloud_import.example_local:
@@ -122,7 +122,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
             type                          = "LOCAL"
         }
 
-5.  数分後にステータスを更新するには`terraform refresh`使用します。
+5.  数分後にステータスを更新するには`terraform refresh`を使用します。
 
         $ terraform refresh && terraform state show tidbcloud_import.example_local
         tidbcloud_import.example_local: Refreshing state... [id=781074]
@@ -179,7 +179,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
 > **Note:**
 >
-> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)実行する必要があります。
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を実行する必要があります。
 
 1.  ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
 
@@ -231,7 +231,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
         tidbcloud_import.example_s3_parquet: Creating...
         tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
 
-3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`使用して、インポート タスクのステータスを更新および確認します。
+3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポート タスクのステータスを更新および確認します。
 
 ## インポートタスクを更新する {#update-an-import-task}
 
@@ -280,4 +280,4 @@ Terraform の場合、インポート タスクを削除すると、対応する
 
 ## 構成 {#configurations}
 
-`tidbcloud_import`リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)参照してください。
+`tidbcloud_import`リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。

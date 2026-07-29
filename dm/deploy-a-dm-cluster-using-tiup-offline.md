@@ -113,9 +113,9 @@ alertmanager_servers:
 >
 > -   特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
 >
-> -   `.`構成のサブカテゴリ（例： `log.slow-threshold`を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)参照してください。
+> -   `.`は構成のサブカテゴリ（例： `log.slow-threshold`）を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
-> -   詳細なパラメータの説明については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)と[ワーカー`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)参照してください。
+> -   詳細なパラメータの説明については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)と[ワーカー`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認します。
 >     -   DM マスター ノードのうち`peer_port` (デフォルトでは`8291` ) が相互接続されています。
@@ -141,10 +141,10 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 上記のコマンドでは、
 
 -   デプロイされた DM クラスターの名前は`dm-test`です。
--   DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`実行します。
+-   DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`を実行します。
 -   初期化構成ファイルは`topology.yaml`です。
 -   `--user root` : `root`キーを使用してターゲット マシンにログインし、クラスターの展開を完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用して展開を完了することができます。
--   `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。4 `[-i]` 、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。10 `[-p]` 、ユーザーパスワードを対話的に入力するために使用されます。
+-   `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 -   TiUP DMは組み込みのSSHクライアントを使用します。制御マシンシステムにネイティブのSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集してください。
 
 出力ログの最後に``Deployed cluster `dm-test` successfully``表示されます。これは、デプロイメントが成功したことを示します。

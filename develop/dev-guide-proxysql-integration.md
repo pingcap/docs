@@ -329,7 +329,7 @@ systemctl start docker
     > 3.  TiDB Cloud Starterインスタンスをホストリストに追加します。
     > 4.  ProxySQLとTiDB Cloud Starterインスタンス間の安全な接続を有効にします。
     >
-    > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+    > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
     以下は出力例です。出力にTiDB Cloud Starterインスタンスのホスト名が表示されていることがわかります。これは、ProxySQLとTiDB Cloud Starterインスタンス間の接続が確立されていることを意味します。
 
@@ -389,7 +389,7 @@ systemctl start docker
 
     > **Note:**
     >
-    > ***デバッグの場合：*** TiDB Cloud Starterインスタンスに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、および`proxysql-connect.py`確認してください。提供したサーバー情報が利用可能で正しいことを確認してください。
+    > ***デバッグの場合：*** TiDB Cloud Starterインスタンスに接続できない場合は、ファイル`tidb-cloud-connect.cnf` 、 `proxysql-prepare.sql` 、および`proxysql-connect.py`を確認してください。提供したサーバー情報が利用可能で正しいことを確認してください。
 
 3.  コンテナを停止して削除し、前のディレクトリに戻るには、次のコマンドを実行します。
 
@@ -631,11 +631,11 @@ MySQL クライアントをダウンロードしてインストールします�
 
 ProxySQLは様々なプラットフォームにインストールできます。以下ではCentOSを例として説明します。
 
-サポートされているプラ​​ットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/installing-proxysql/)参照してください。
+サポートされているプラ​​ットフォームと対応するバージョン要件の完全なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/installing-proxysql/)を参照してください。
 
 #### ステップ1. TiDB Cloud Dedicatedクラスタを作成する {#step-1-create-a-tidb-cloud-dedicated-cluster}
 
-詳細な手順については、 [TiDB Cloud Dedicatedクラスターを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)参照してください。
+詳細な手順については、 [TiDB Cloud Dedicatedクラスターを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)を参照してください。
 
 #### ステップ2. ProxySQLをインストールする {#step-2-install-proxysql}
 
@@ -671,7 +671,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 > **Note:**
 >
-> 次のセクションでは、ProxySQL の必要な構成項目のみをリストします。構成の包括的なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+> 次のセクションでは、ProxySQL の必要な構成項目のみをリストします。構成の包括的なリストについては、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
 ##### オプション1：管理インターフェースを使用してProxySQLを設定する {#option-1-configure-proxysql-using-the-admin-interface}
 
@@ -730,7 +730,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 ##### オプション2：設定ファイルを使用してProxySQLを設定する {#option-2-configure-proxysql-using-a-configuration-file}
 
-このオプションは、ProxySQL を構成するための代替方法としてのみ考慮してください。詳細については、 [設定ファイルによるProxySQLの設定](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file)参照してください。
+このオプションは、ProxySQL を構成するための代替方法としてのみ考慮してください。詳細については、 [設定ファイルによるProxySQLの設定](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file)を参照してください。
 
 1.  既存のSQLiteデータベース（設定が内部的に保存されている場所）をすべて削除します。
 
@@ -992,16 +992,16 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
     > -   `^SELECT.*FOR UPDATE$`ルールを追加し、 `rule_id`を`1`として、 `destination_hostgroup`を`0`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`0`として TiDB クラスタに転送されます。
     > -   `^SELECT`ルールを追加し、 `rule_id`を`2`として、 `destination_hostgroup`を`1`として追加します。SQL ステートメントがこのルールに一致する場合、リクエストは`hostgroup`を`1`として TiDB クラスタに転送されます。
     >
-    > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)参照してください。
+    > より深く理解するには、 `proxysql-prepare.sql`ファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQLのドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
     ProxySQLパターンがクエリルールとどのように一致するかについての追加情報は以下のとおりです。
 
     -   ProxySQL は`rule_id`の昇順でルールを 1 つずつ照合しようとします。
     -   `^`記号は SQL ステートメントの開始と一致し、 `$`終了と一致します。
 
-    ProxySQLの正規表現とパターンマッチングの詳細については、ProxySQLドキュメントの[mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)参照してください。
+    ProxySQLの正規表現とパターンマッチングの詳細については、ProxySQLドキュメントの[mysql-query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)を参照してください。
 
-    パラメータの完全なリストについては、ProxySQLドキュメントの[mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules)参照してください。
+    パラメータの完全なリストについては、ProxySQLドキュメントの[mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules)を参照してください。
 
 6.  設定を確認し、クエリルールが正しく機能するかどうかをチェックしてください。
 

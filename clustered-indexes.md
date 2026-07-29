@@ -52,7 +52,7 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) NONCLUSTERED);
 
 列定義において、キーワード`KEY`と`PRIMARY KEY`は同じ意味を持つことに注意してください。
 
-TiDB の[コメント構文](/comment-syntax.md)使用して主キーのタイプを指定することもできます。例えば：
+TiDB の[コメント構文](/comment-syntax.md)を使用して主キーのタイプを指定することもできます。例えば：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY /*T![clustered_index] CLUSTERED */, b VARCHAR(255));
@@ -143,7 +143,7 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 現在、クラスター化インデックス機能にはいくつかの異なる制限があります。以下を参照してください。
 
 -   サポート対象外であり、サポートプランにも含まれていない状況：
-    -   クラスター化インデックスと属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を併用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) [`AUTO_RANDOM`](/auto-random.md)ではないクラスター化インデックスを持つテーブルには適用されません。
+    -   クラスター化インデックスと属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を併用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)は、 [`AUTO_RANDOM`](/auto-random.md)ではないクラスター化インデックスを持つテーブルには適用されません。
     -   クラスター化インデックスを持つテーブルのダウングレードはサポートされていません。そのようなテーブルをダウングレードする必要がある場合は、代わりに論理バックアップツールを使用してデータを移行してください。
 -   まだサポートされていないが、サポート計画に含まれている状況：
     -   `ALTER TABLE`ステートメントを使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
@@ -167,7 +167,7 @@ TiDBは、クラスター化インデックスを持つテーブルのアップ�
 -   `PRIMARY KEY`は 1 つの列のみで構成されています。
 -   `PRIMARY KEY`は`INTEGER`です。
 
-TiDB v5.0 以降、クラスター化インデックス機能はすべてのタイプの主キーに対して完全にサポートされていますが、デフォルトの動作は TiDB v3.0 および v4.0 と一貫しています。デフォルトの動作を変更するには、システム変数`@@tidb_enable_clustered_index`を`ON`または`OFF`に設定します。詳細については、[クラスター化インデックスを持つテーブルを作成する](#create-a-table-with-clustered-indexes)参照してください。
+TiDB v5.0 以降、クラスター化インデックス機能はすべてのタイプの主キーに対して完全にサポートされていますが、デフォルトの動作は TiDB v3.0 および v4.0 と一貫しています。デフォルトの動作を変更するには、システム変数`@@tidb_enable_clustered_index`を`ON`または`OFF`に設定します。詳細については、[クラスター化インデックスを持つテーブルを作成する](#create-a-table-with-clustered-indexes)を参照してください。
 
 ### MySQLとの互換性 {#compatibility-with-mysql}
 

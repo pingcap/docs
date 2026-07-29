@@ -11,7 +11,7 @@ TiDB バージョン: 6.0.0-DMR
 
 > **Note:**
 >
-> TiDB 6.0.0-DMR のドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.0/)です。PingCAP では、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)使用することを推奨しています。
+> TiDB 6.0.0-DMR のドキュメントは[アーカイブ済み](https://docs-archive.pingcap.com/tidb/v6.0/)です。PingCAP では、TiDB データベースの[最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することを推奨しています。
 
 6.0.0-DMR の主な新機能または改善点は次のとおりです。
 
@@ -64,7 +64,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   カーネルレベルでデータインデックスの一貫性チェックを追加する
 
-    トランザクション実行時にデータインデックスの整合性チェックを追加します。これにより、リソースオーバーヘッドを非常に低く抑えながら、システムの安定性と堅牢性が向上します。チェックの動作は、変数`tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を使用して制御できます。デフォルト設定では、ほとんどのシナリオでQPSの低下は2%以内に抑えられます。整合性チェックのエラーの説明については、 [ユーザードキュメント](/troubleshoot-data-inconsistency-errors.md)参照してください。
+    トランザクション実行時にデータインデックスの整合性チェックを追加します。これにより、リソースオーバーヘッドを非常に低く抑えながら、システムの安定性と堅牢性が向上します。チェックの動作は、変数`tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を使用して制御できます。デフォルト設定では、ほとんどのシナリオでQPSの低下は2%以内に抑えられます。整合性チェックのエラーの説明については、 [ユーザードキュメント](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
 ### 可観測性 {#observability}
 
@@ -473,7 +473,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（つまり内部コマンド`unsafe_destroy_range`が実行される）バグを修正[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   `StoreMeta`のデータが一部のコーナーケースで誤って削除されたときに TiKV がパニックを起こすバグを修正[＃11852](https://github.com/tikv/tikv/issues/11852)
     -   ARM プラットフォームでプロファイリングを実行するときに TiKV がパニックを起こすバグを修正[＃10658](https://github.com/tikv/tikv/issues/10658)
-    -   TiKV が 2 年以上実行されている場合にpanic可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
+    -   TiKV が 2 年以上実行されている場合にpanicする可能性があるバグを修正[＃11940](https://github.com/tikv/tikv/issues/11940)
     -   SSE命令セット不足により発生するARM64アーキテクチャでのコンパイル問題を修正 [＃12034](https://github.com/tikv/tikv/issues/12034)
     -   初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   古いメッセージによって TiKV がpanicを起こすバグを修正[＃12023](https://github.com/tikv/tikv/issues/12023)

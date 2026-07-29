@@ -44,12 +44,12 @@ The password complexity policies of TiDB and MySQL have the following difference
 
     -   MySQL v5.7では、この機能は`validate_password`プラグインを使用して実装されています。プラグインをインストールすることで、この機能を有効化できます。
     -   MySQL v8.0では、この機能は`validate_password`コンポーネントを使用して実装されています。この機能を有効にするには、コンポーネントをインストールしてください。
-    -   TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)使用してこの機能を有効にすることができます。
+    -   TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にすることができます。
 
 -   辞書チェック:
 
     -   In MySQL v5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
-    -   MySQL v8.0では、変数`validate_password.dictionary_file`使用してファイルパスを指定できます。このファイルには、パスワードに使用できない単語のリストが含まれています。
+    -   MySQL v8.0では、変数`validate_password.dictionary_file`を使用してファイルパスを指定できます。このファイルには、パスワードに使用できない単語のリストが含まれています。
     -   TiDBでは、システム変数[`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)を使用して文字列を指定できます。この文字列には、パスワードに使用できない単語のリストが含まれます。
 
 ### パスワード失敗の追跡 {#password-failure-tracking}
@@ -67,13 +67,13 @@ TiDB と MySQL のパスワード失敗追跡ポリシーには、次の違い�
     -   MySQL 8.0:
 
         -   サーバーを再起動すると、すべてのアカウントの失敗した試行回数がリセットされます。
-        -   `FLUSH PRIVILEGES`実行すると、すべてのアカウントの失敗した試行回数がリセットされます。
-        -   `ALTER USER ... ACCOUNT UNLOCK`実行してアカウントのロックを解除すると、カウントはリセットされます。
+        -   `FLUSH PRIVILEGES`を実行すると、すべてのアカウントの失敗した試行回数がリセットされます。
+        -   `ALTER USER ... ACCOUNT UNLOCK`を実行してアカウントのロックを解除すると、カウントはリセットされます。
         -   アカウントが正常にログインすると、カウントはリセットされます。
 
     -   TiDB:
 
-        -   `ALTER USER ... ACCOUNT UNLOCK`実行してアカウントのロックを解除すると、カウントはリセットされます。
+        -   `ALTER USER ... ACCOUNT UNLOCK`を実行してアカウントのロックを解除すると、カウントはリセットされます。
         -   When an account logs in successfully, the count is reset.
 
 -   自動的にロックされるユーザーの場合、次のシナリオで失敗した試行回数がリセットされます。
@@ -83,12 +83,12 @@ TiDB と MySQL のパスワード失敗追跡ポリシーには、次の違い�
         -   サーバーを再起動すると、すべてのアカウントの一時ロックがリセットされます。
         -   When `FLUSH PRIVILEGES` is executed, the temporary locking for all accounts is reset.
         -   アカウントのロック時間が終了した場合、次回のログイン試行時にアカウントの一時ロックはリセットされます。
-        -   `ALTER USER ... ACCOUNT UNLOCK`実行してアカウントのロックを解除すると、アカウントの一時的なロックがリセットされます。
+        -   `ALTER USER ... ACCOUNT UNLOCK`を実行してアカウントのロックを解除すると、アカウントの一時的なロックがリセットされます。
 
     -   TiDB:
 
         -   アカウントのロック時間が終了した場合、次回のログイン試行時にアカウントの一時ロックはリセットされます。
-        -   `ALTER USER ... ACCOUNT UNLOCK`実行してアカウントのロックを解除すると、アカウントの一時的なロックがリセットされます。
+        -   `ALTER USER ... ACCOUNT UNLOCK`を実行してアカウントのロックを解除すると、アカウントの一時的なロックがリセットされます。
 
 ### パスワード再利用ポリシー {#password-reuse-policy}
 
@@ -100,16 +100,16 @@ The password reuse policies of TiDB and MySQL have the following differences:
 
 TiDBとMySQLの実装メカニズムは一貫しています。どちらも`mysql.password_history`のシステムテーブルを使用してパスワード再利用管理機能を実装しています。ただし、 `mysql.user`システムテーブルに存在しないユーザーを削除する場合、TiDBとMySQLの動作は異なります。
 
--   シナリオ：ユーザー（ `user01` ）は通常の方法で作成されず、 `INSERT INTO mysql.password_history VALUES (...)`文を使用して`user01`のレコードを`mysql.password_history`システムテーブルに追加することで作成されます。この場合、 `user01`のレコードは`mysql.user`システムテーブルに存在しないため、 `user01`に対して`DROP USER`実行すると、TiDBとMySQLの動作が異なります。
+-   シナリオ：ユーザー（ `user01` ）は通常の方法で作成されず、 `INSERT INTO mysql.password_history VALUES (...)`文を使用して`user01`のレコードを`mysql.password_history`システムテーブルに追加することで作成されます。この場合、 `user01`のレコードは`mysql.user`システムテーブルに存在しないため、 `user01`に対して`DROP USER`を実行すると、TiDBとMySQLの動作が異なります。
 
-    -   MySQL: `DROP USER user01`実行すると、MySQL は`mysql.user`と`mysql.password_history`から`user01`探します。いずれかのシステムテーブルに`user01`が含まれている場合、 `DROP USER`文は正常に実行され、エラーは報告されません。
-    -   TiDB: `DROP USER user01`実行すると、TiDBは`mysql.user`からのみ`user01`検索しようとします。関連レコードが見つからない場合、 `DROP USER`文は失敗し、エラーが報告されます。文を正常に実行し、 `mysql.password_history`から`user01`レコードを削除したい場合は、代わりに`DROP USER IF EXISTS user01`使用してください。
+    -   MySQL: `DROP USER user01`を実行すると、MySQL は`mysql.user`と`mysql.password_history`から`user01`を探します。いずれかのシステムテーブルに`user01`が含まれている場合、 `DROP USER`文は正常に実行され、エラーは報告されません。
+    -   TiDB: `DROP USER user01`を実行すると、TiDBは`mysql.user`からのみ`user01`を検索しようとします。関連レコードが見つからない場合、 `DROP USER`文は失敗し、エラーが報告されます。文を正常に実行し、 `mysql.password_history`から`user01`レコードを削除したい場合は、代わりに`DROP USER IF EXISTS user01`を使用してください。
 
 ## Authentication plugin status {#authentication-plugin-status}
 
-TiDBは複数の認証方法をサポートしています。これらの方法は、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)使用してユーザーごとに指定できます。これらの方法は、MySQLの同名の認証方法と互換性があります。
+TiDBは複数の認証方法をサポートしています。これらの方法は、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用してユーザーごとに指定できます。これらの方法は、MySQLの同名の認証方法と互換性があります。
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT)-based authentication method used in TiDB Cloud, and you can also configure it for use in TiDB Self-Managed.
+以下の表にある、サポートされている認証方法のいずれかを使用できます。クライアントとサーバー間の接続を確立する際にサーバーがアドバタイズするデフォルトの方法を指定するには、[`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。`tidb_sm3_password`は、TiDBでのみサポートされているSM3認証方法です。そのため、この方法で認証するには、[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用してTiDBに接続する必要があります。`tidb_auth_token`は、TiDB Cloudで使用されるJSON Web Token（JWT）ベースの認証方法であり、TiDB Self-Managedでの使用のために構成することもできます。
 
 <CustomContent platform="tidb">
 
@@ -142,7 +142,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 ### `tidb_auth_token` {#tidb-auth-token}
 
-`tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)ベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
+`tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)をベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
 
 #### JWT {#jwt}
 
@@ -189,7 +189,7 @@ Here is an example for Header:
 > **Warning:**
 >
 > -   ヘッダーとペイロードのBase64エンコードは可逆です。機密情報を添付し**ないで**ください。
-> -   `tidb_auth_token`認証方法では、クライアントが[`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html)プラグインをサポートし、トークンをプレーンテキストで TiDB に送信する必要があります。そのため、 `tidb_auth_token`使用する前に[クライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)実行する必要があります。
+> -   `tidb_auth_token`認証方法では、クライアントが[`mysql_clear_password`](https://dev.mysql.com/doc/refman/8.0/en/cleartext-pluggable-authentication.html)プラグインをサポートし、トークンをプレーンテキストで TiDB に送信する必要があります。そのため、 `tidb_auth_token`を使用する前に[クライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)を実行する必要があります。
 
 #### 使用法 {#usage}
 
@@ -212,9 +212,9 @@ TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定し
 
 2.  `tidb-server`起動し、定期的に JWKS を更新して`auth-token-jwks`で指定されたパスに保存します。
 
-3.  `tidb_auth_token`でユーザーを作成し、必要に応じて`REQUIRE TOKEN_ISSUER`と`ATTRIBUTE '{"email": "xxxx@pingcap.com"}`を使用して`iss`と`email`指定します。
+3.  `tidb_auth_token`でユーザーを作成し、必要に応じて`REQUIRE TOKEN_ISSUER`と`ATTRIBUTE '{"email": "xxxx@pingcap.com"}`を使用して`iss`と`email`を指定します。
 
-    たとえば、 `tidb_auth_token`を持つユーザー`user@pingcap.com`作成します。
+    たとえば、 `tidb_auth_token`を持つユーザー`user@pingcap.com`を作成します。
 
     ```sql
     CREATE USER 'user@pingcap.com' IDENTIFIED WITH 'tidb_auth_token' REQUIRE TOKEN_ISSUER 'issuer-abc' ATTRIBUTE '{"email": "user@pingcap.com"}';
@@ -249,7 +249,7 @@ TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定し
     mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
     ```
 
-    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。3 [mycli](https://www.mycli.net/)デフォルトでこのプラグインをサポートし、有効化します。5 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
+    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。[mycli](https://www.mycli.net/)はデフォルトでこのプラグインをサポートし、有効化します。[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
 
     ```Shell
     mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin

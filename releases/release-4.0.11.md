@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.11
     -   誤った照合順序と強制可能性を引き起こす可能性のある問題を修正[＃22602](https://github.com/pingcap/tidb/pull/22602)
     -   照合順序結果が誤っている可能性がある問題を修正[＃22599](https://github.com/pingcap/tidb/pull/22599)
     -   異なる照合順序における定数置換の問題を修正[＃22582](https://github.com/pingcap/tidb/pull/22582)
-    -   照合順序使用すると関数`like`間違った結果を返す可能性があるバグを修正しました [＃22531](https://github.com/pingcap/tidb/pull/22531)
+    -   照合順序を使用すると関数`like`が間違った結果を返す可能性があるバグを修正しました [＃22531](https://github.com/pingcap/tidb/pull/22531)
     -   `least`と`greatest`関数における誤った`duration`型推論の問題を修正 [＃22580](https://github.com/pingcap/tidb/pull/22580)
     -   `like`関数が単一文字のワイルドカード ( `_` ) に続いて複数文字のワイルドカード ( `%` ) を処理するときに発生するバグを修正しました[＃22575](https://github.com/pingcap/tidb/pull/22575)
     -   TiDBの組み込み関数の型推論エラーを修正（ `least`と`greatest` ） [＃22562](https://github.com/pingcap/tidb/pull/22562)
@@ -94,7 +94,7 @@ TiDB バージョン: 4.0.11
     -   `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` とネストされている場合はエラーを報告します。 [＃21972](https://github.com/pingcap/tidb/pull/21972)
     -   存在しないパーティションで`INSERT IGNORE`ステートメントが使用された場合にエラーが報告されない問題を修正しました [＃21971](https://github.com/pingcap/tidb/pull/21971)
     -   `EXPLAIN`結果のエンコードを統一し、 遅いログ [＃21964](https://github.com/pingcap/tidb/pull/21964)
-    -   集計演算子使用するときに結合で不明な列が発生する問題を修正しました [＃21957](https://github.com/pingcap/tidb/pull/21957)
+    -   集計演算子を使用するときに結合で不明な列が発生する問題を修正しました [＃21957](https://github.com/pingcap/tidb/pull/21957)
     -   `ceiling`関数の間違った型推論を修正 [＃21936](https://github.com/pingcap/tidb/pull/21936)
     -   `Double`型の列が小数点無視する問題を修正しました [＃21916](https://github.com/pingcap/tidb/pull/21916)
     -   相関集計がサブクエリで計算される問題を修正 [＃21877](https://github.com/pingcap/tidb/pull/21877)
@@ -107,7 +107,7 @@ TiDB バージョン: 4.0.11
     -   `cast`関数の強制値が正しく設定されていない問題を修正[＃21714](https://github.com/pingcap/tidb/pull/21714)
     -   `IF`関数使用時に予期しないpanicが発生する問題を修正 [＃21711](https://github.com/pingcap/tidb/pull/21711)
     -   JSON検索から返される`NULL`結果がMySQL と互換性がない問題を修正しました [＃21700](https://github.com/pingcap/tidb/pull/21700)
-    -   `ORDER BY`と`HAVING`使用して`only_full_group_by`モードをチェックするときに発生する問題を修正しました[＃21697](https://github.com/pingcap/tidb/pull/21697)
+    -   `ORDER BY`と`HAVING`を使用して`only_full_group_by`モードをチェックするときに発生する問題を修正しました[＃21697](https://github.com/pingcap/tidb/pull/21697)
     -   `Day`と`Time`の単位がMySQL と互換性がない問題を修正 [＃21676](https://github.com/pingcap/tidb/pull/21676)
     -   デフォルト値`LEAD`と`LAG`フィールドタイプに適応できない問題を修正 [＃21665](https://github.com/pingcap/tidb/pull/21665)
     -   `LOAD DATA`文がベーステーブルにのみデータをロードできることを確認するためのチェックを実行します。 [＃21638](https://github.com/pingcap/tidb/pull/21638)
@@ -125,7 +125,7 @@ TiDB バージョン: 4.0.11
     -   MAC アドレスのないネットワーク インターフェースを持つマシンで TiKV クラスターを実行すると発生するクラッシュの問題を修正しました (v4.0.9 で導入) [＃9516](https://github.com/tikv/tikv/pull/9516)
     -   巨大なリージョンをバックアップする際のTiKV OOMの問題を修正 [＃9448](https://github.com/tikv/tikv/pull/9448)
     -   `region-split-check-diff`カスタマイズできない問題を修正[＃9530](https://github.com/tikv/tikv/pull/9530)
-    -   システム時刻がに戻ったときにTiKV panicが発生する問題を修正 [＃9542](https://github.com/tikv/tikv/pull/9542)
+    -   システム時刻が戻ったときにTiKV panicが発生する問題を修正 [＃9542](https://github.com/tikv/tikv/pull/9542)
 
 -   PD
 
@@ -167,4 +167,4 @@ TiDB バージョン: 4.0.11
 
         -   TiDBバックエンド使用時に`column count mismatch`が発生する可能性があるバグを修正 [＃535](https://github.com/pingcap/tidb-lightning/pull/535)
         -   ソースファイルの列数とターゲットテーブルの列数が一致しない場合に TiDB バックエンドがパニックを起こすバグを修正[＃528](https://github.com/pingcap/tidb-lightning/pull/528)
-        -   TiDB Lightning のデータインポート中に TiKV が予期せずpanic可能性があるバグを修正[＃554](https://github.com/pingcap/tidb-lightning/pull/554)
+        -   TiDB Lightning のデータインポート中に TiKV が予期せずpanicする可能性があるバグを修正[＃554](https://github.com/pingcap/tidb-lightning/pull/554)

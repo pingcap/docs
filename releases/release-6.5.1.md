@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
--   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)デフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)参照してください。
+-   2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
     -   [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     -   TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)構成項目のデフォルト値が`true`から`false`に変更されます。
@@ -36,11 +36,11 @@ TiDB バージョン: 6.5.1
         -   IPv6 アドレスの完全サポート: TiDB は、クライアント接続、ノード間の内部通信、外部システムとの通信など、すべてのネットワーク接続で IPv6 アドレスの使用をサポートします。
         -   デュアルスタックのサポート：まだIPv6への完全移行の準備が整っていない場合でも、TiDBはデュアルスタックネットワークをサポートしています。つまり、同じTiDBクラスタ内でIPv4とIPv6の両方のアドレスを使用し、設定によってIPv6を優先するネットワーク展開モードを選択できます。
 
-        IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)参照してください。
+        IPv6 の導入の詳細については、 [Kubernetes 上の TiDB ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#ipv6-support)を参照してください。
 
     -   TiDB クラスタの初期化時に実行される SQL スクリプトの指定をサポート[＃35624](https://github.com/pingcap/tidb/issues/35624) @ [morgo](https://github.com/morgo)
 
-        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)参照してください。
+        TiDB v6.5.1 では、新しい設定項目[`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)が追加されました。TiDB クラスタを初めて起動する際に、コマンドラインパラメータ`--initialize-sql-file`を設定することで、実行する SQL スクリプトを指定できます。この機能は、システム変数の値の変更、ユーザーの作成、権限の付与などの操作を行う際に使用できます。詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651)を参照してください。
 
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @ [sticnarf](https://github.com/sticnarf)
 
@@ -79,10 +79,10 @@ TiDB バージョン: 6.5.1
 -   TiDB
 
     -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @ [zyguan](https://github.com/zyguan)
-    -   長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanic可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @ [winoros](https://github.com/winoros)
+    -   長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @ [winoros](https://github.com/winoros)
     -   `auto analyze`正常なシャットダウンに長い時間がかかる問題を修正[＃40038](https://github.com/pingcap/tidb/issues/40038) @ [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [＃40970](https://github.com/pingcap/tidb/issues/40970) @ [tangenta](https://github.com/tangenta)
-    -   インデックスをで追加するとデータ競合が発生する可能性がある問題を修正しました [＃40879](https://github.com/pingcap/tidb/issues/40879) @ [tangenta](https://github.com/tangenta)
+    -   インデックスを追加するとデータ競合が発生する可能性がある問題を修正しました [＃40879](https://github.com/pingcap/tidb/issues/40879) @ [tangenta](https://github.com/tangenta)
     -   テーブルに多数のリージョンがある場合に無効なリージョンキャッシュが原因でインデックスの追加操作が非効率になる問題を修正しました。 [＃38436](https://github.com/pingcap/tidb/issues/38436) @ [tangenta](https://github.com/tangenta)
     -   初期化中にTiDBがデッドロックする可能性がある問題を修正[＃40408](https://github.com/pingcap/tidb/issues/40408) @ [Defined2014](https://github.com/Defined2014)
     -   TiDB がキー範囲を構築するときに`NULL`値を不適切に処理するため、予期しないデータが読み取られる問題を修正しました。 [＃40158](https://github.com/pingcap/tidb/issues/40158) @ [tiancaiamao](https://github.com/tiancaiamao)
@@ -94,14 +94,14 @@ TiDB バージョン: 6.5.1
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [zyguan](https://github.com/zyguan)
     -   `SHOW PROCESSLIST` の結果で`EXECUTE`情報が null になる問題を修正しました [＃41156](https://github.com/pingcap/tidb/issues/41156) @ [YangKeao](https://github.com/YangKeao)
     -   `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [＃41057](https://github.com/pingcap/tidb/issues/41057) @ [wshwsh12](https://github.com/wshwsh12)
-    -   `indexMerge`エラーに遭遇した後に TiDB がpanic可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [guo-shaoge](https://github.com/guo-shaoge) @ [windtalker](https://github.com/windtalker)
+    -   `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[＃41047](https://github.com/pingcap/tidb/issues/41047) [＃40877](https://github.com/pingcap/tidb/issues/40877) @ [guo-shaoge](https://github.com/guo-shaoge) @ [windtalker](https://github.com/windtalker)
     -   `ANALYZE`文が`KILL` で終了する可能性がある問題を修正しました [＃41825](https://github.com/pingcap/tidb/issues/41825) @ [XuHuaiyu](https://github.com/XuHuaiyu)
     -   `indexMerge` で goroutine リークが発生する可能性がある問題を修正しました [＃41605](https://github.com/pingcap/tidb/issues/41605) @ [guo-shaoge](https://github.com/guo-shaoge) [＃41545](https://github.com/pingcap/tidb/issues/41545)
     -   符号なしの`TINYINT` / `SMALLINT` / `INT`値を`0` より小さい`DECIMAL` / `FLOAT` / `DOUBLE`値と比較するときに誤った結果になる可能性がある問題を修正しました。 [＃41736](https://github.com/pingcap/tidb/issues/41736) @ [LittleFall](https://github.com/LittleFall)
     -   `tidb_enable_reuse_chunk`有効にするとメモリリークが発生する可能性がある問題を修正 [＃40987](https://github.com/pingcap/tidb/issues/40987) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[＃40710](https://github.com/pingcap/tidb/issues/40710) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[＃41582](https://github.com/pingcap/tidb/issues/41582) @ [you06](https://github.com/you06)
-    -   `cop`の上限同時実行数がに制限されない問題を修正 [＃41134](https://github.com/pingcap/tidb/issues/41134) @ [you06](https://github.com/you06)
+    -   `cop`の上限同時実行数が制限されない問題を修正 [＃41134](https://github.com/pingcap/tidb/issues/41134) @ [you06](https://github.com/you06)
     -   `cursor read`分の`statement context`が誤ってキャッシュされる問題を修正 [＃39998](https://github.com/pingcap/tidb/issues/39998) @ [zyguan](https://github.com/zyguan)
     -   メモリリークとパフォーマンスの低下を防ぐため、古くなったリージョンキャッシュを定期的にクリーンアップします[＃40355](https://github.com/pingcap/tidb/issues/40355) @ [sticnarf](https://github.com/sticnarf)
     -   `year <cmp> const`含むクエリでプラン キャッシュを使用すると間違った結果が返される可能性がある問題を修正しました [＃41626](https://github.com/pingcap/tidb/issues/41626) @ [qw4990](https://github.com/qw4990)
@@ -120,7 +120,7 @@ TiDB バージョン: 6.5.1
     -   インデックス[＃40698](https://github.com/pingcap/tidb/issues/40698) [＃40730](https://github.com/pingcap/tidb/issues/40730) [＃41459](https://github.com/pingcap/tidb/issues/41459) を追加するときにデータの不整合が発生する問題を修正しました [＃40217](https://github.com/pingcap/tidb/issues/40217) @ [tangenta](https://github.com/tangenta) [＃40464](https://github.com/pingcap/tidb/issues/40464)
     -   インデックスを追加するときに`Pessimistic lock not found`エラーが発生する問題を修正しました [＃41515](https://github.com/pingcap/tidb/issues/41515) @ [tangenta](https://github.com/tangenta)
     -   一意インデックスを追加するときに誤って報告される重複キーエラーの問題を修正しました [＃41630](https://github.com/pingcap/tidb/issues/41630) @ [tangenta](https://github.com/tangenta)
-    -   TiDB で`paging`使用するとパフォーマンスが低下する問題を修正 [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [solotzg](https://github.com/solotzg)
+    -   TiDB で`paging`を使用するとパフォーマンスが低下する問題を修正 [＃40741](https://github.com/pingcap/tidb/issues/40741) @ [solotzg](https://github.com/solotzg)
 
 -   TiKV
 
@@ -151,7 +151,7 @@ TiDB バージョン: 6.5.1
 
     -   Backup & Restore (BR)
 
-        -   PDとtidb-server間の接続障害により、PITRバックアップの進行がに進まない問題を修正しました。 [＃41082](https://github.com/pingcap/tidb/issues/41082) @ [YuJuncen](https://github.com/YuJuncen)
+        -   PDとtidb-server間の接続障害により、PITRバックアップの進行が進まない問題を修正しました。 [＃41082](https://github.com/pingcap/tidb/issues/41082) @ [YuJuncen](https://github.com/YuJuncen)
         -   PDとTiKV 間の接続障害によりTiKVがPITRタスクをリッスンできない問題を修正しました [＃14159](https://github.com/tikv/tikv/issues/14159) @ [YuJuncen](https://github.com/YuJuncen)
         -   PITRがPDクラスタの構成変更をサポートしない問題を修正 [＃14165](https://github.com/tikv/tikv/issues/14165) @ [YuJuncen](https://github.com/YuJuncen)
         -   PITR機能がCAバンドルをサポートしない問題を修正 [＃38775](https://github.com/pingcap/tidb/issues/38775) @ [3pointer](https://github.com/3pointer)
@@ -175,7 +175,7 @@ TiDB バージョン: 6.5.1
         -   REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   TiCDCが大きなトランザクションを@ [Rustin170506](https://github.com/Rustin170506)に分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982)
         -   PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [sdojjy](https://github.com/sdojjy)
-        -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)
+        -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)
         -   テーブルスケジューリングとブラックホールシンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [hicqu](https://github.com/hicqu)
 
     -   TiDB Data Migration (DM)

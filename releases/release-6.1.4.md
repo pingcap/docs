@@ -40,7 +40,7 @@ TiDB バージョン: 6.1.4
 
     -   テーブルを作成するときに、列のデフォルト値とタイプが一致せず、自動的に修正されない問題を修正しました[＃34881](https://github.com/pingcap/tidb/issues/34881) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) @ [mjonss](https://github.com/mjonss)
     -   `LazyTxn.LockKeys`関数のデータ競合問題を修正 [＃40355](https://github.com/pingcap/tidb/issues/40355) @ [HuSharp](https://github.com/HuSharp)
-    -   長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanic可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @ [fanrenhoo](https://github.com/fanrenhoo)
+    -   長いセッション接続で`INSERT`または`REPLACE`ステートメントがpanicする可能性がある問題を修正しました [＃40351](https://github.com/pingcap/tidb/issues/40351) @ [fanrenhoo](https://github.com/fanrenhoo)
     -   「カーソル読み取り」メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [＃39447](https://github.com/pingcap/tidb/issues/39447) @ [zyguan](https://github.com/zyguan)
     -   [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)構成項目がPointGetクエリで有効にならない問題を修正しました [＃39928](https://github.com/pingcap/tidb/issues/39928) @ [zyguan](https://github.com/zyguan)
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`テーブルをクエリすると誤った結果が返される問題を修正[＃37436](https://github.com/pingcap/tidb/issues/37436) @ [zimulala](https://github.com/zimulala)

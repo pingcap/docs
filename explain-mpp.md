@@ -5,7 +5,7 @@ summary: TiDB のEXPLAINステートメントによって返される実行プ�
 
 # MPPモードでステートメントを説明する {#explain-statements-in-the-mpp-mode}
 
-TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行プランを生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
+TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行プランを生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -187,4 +187,4 @@ mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnfl
 +----------------------------------------+--------------+--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`構築しています。タイプ`HashPartition`の`ExchangeSender`演算子はデータ圧縮モード`FAST`使用しています。タイプ`PassThrough`の`ExchangeSender`演算子ではデータ圧縮は有効になっていません。
+上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`構築しています。タイプ`HashPartition`の`ExchangeSender`演算子はデータ圧縮モード`FAST`を使用しています。タイプ`PassThrough`の`ExchangeSender`演算子ではデータ圧縮は有効になっていません。

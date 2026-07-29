@@ -371,7 +371,7 @@ TiDBバージョン: 6.3.0-DMR
     -   リージョンのハートビートが中断された後、PD が TiKV に再接続しない問題を修正 [#12934](https://github.com/tikv/tikv/issues/12934) @[bufferflies](https://github.com/bufferflies)
     -   Raftstoreがビジー状態のときにリージョンが重複する可能性がある問題を修正 [#13160](https://github.com/tikv/tikv/issues/13160) @[5kbpers](https://github.com/5kbpers)
     -   PD クライアントがデッドロックを引き起こす可能性がある問題を修正[#13191](https://github.com/tikv/tikv/issues/13191) @[bufferflies](https://github.com/bufferflies) [#12933](https://github.com/tikv/tikv/issues/12933) @[BurtonQin](https://github.com/BurtonQin)
-    -   暗号化が無効になっている場合に TiKV がpanic可能性がある問題を修正 [#13081](https://github.com/tikv/tikv/issues/13081) @[jiayang-zheng](https://github.com/jiayang-zheng)
+    -   暗号化が無効になっている場合に TiKV がpanicする可能性がある問題を修正 [#13081](https://github.com/tikv/tikv/issues/13081) @[jiayang-zheng](https://github.com/jiayang-zheng)
     -   ダッシュボードの`Unified Read Pool CPU`の誤った表現を修正 [#13086](https://github.com/tikv/tikv/issues/13086) @[glorv](https://github.com/glorv)
     -   TiKVインスタンスが隔離されたネットワーク環境にある場合、TiKVサービスが数分間利用できなくなる問題を修正します [#12966](https://github.com/tikv/tikv/issues/12966) @[cosven](https://github.com/cosven)
     -   TiKV が誤って`PessimisticLockNotFound`エラーを報告する問題を修正 [#13425](https://github.com/tikv/tikv/issues/13425) @[sticnarf](https://github.com/sticnarf)

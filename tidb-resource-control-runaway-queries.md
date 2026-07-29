@@ -11,10 +11,10 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 ランナウェイクエリとは、予想よりも多くの時間やリソースを消費するクエリです。以下では、ランナウェイクエリを管理する機能を説明するために「ランナ**ウェイクエリ」という**用語を使用します。
 
--   バージョン7.2.0以降、リソース制御機能にランナウェイクエリの管理機能が導入されました。リソースグループに対してランナウェイクエリを特定するための条件を設定し、ランナウェイクエリによるリソースの枯渇や他のクエリへの影響を防ぐためのアクションを自動的に実行できます。3 または[`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) `QUERY_LIMIT`フィールドを含めることで、リソースグループのランナウェイクエリを管理できます。
--   バージョン7.3.0以降、リソース制御機能にランナウェイ・ウォッチの手動管理が導入され、特定のSQL文またはダイジェストに対するランナウェイ・クエリを迅速に特定できるようになりました。ステートメント[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)実行することで、リソースグループ内のランナウェイ・クエリ・ウォッチリストを手動で管理できます。
+-   バージョン7.2.0以降、リソース制御機能にランナウェイクエリの管理機能が導入されました。リソースグループに対してランナウェイクエリを特定するための条件を設定し、ランナウェイクエリによるリソースの枯渇や他のクエリへの影響を防ぐためのアクションを自動的に実行できます。[`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)または[`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)に`QUERY_LIMIT`フィールドを含めることで、リソースグループのランナウェイクエリを管理できます。
+-   バージョン7.3.0以降、リソース制御機能にランナウェイ・ウォッチの手動管理が導入され、特定のSQL文またはダイジェストに対するランナウェイ・クエリを迅速に特定できるようになりました。ステートメント[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を実行することで、リソースグループ内のランナウェイ・クエリ・ウォッチリストを手動で管理できます。
 
-リソース制御機能の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
+リソース制御機能の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
 ## <code>QUERY_LIMIT</code>パラメータ {#code-query-limit-code-parameters}
 
@@ -41,7 +41,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 `WATCH`の`DURATION`オプションは識別項目の有効期間を示し、デフォルトでは無期限です。
 
-監視項目を追加した後、 `QUERY_LIMIT`設定が変更または削除されても、対応する機能と`ACTION`変更または削除されません。監視項目を削除するには`QUERY WATCH REMOVE`使用します。
+監視項目を追加した後、 `QUERY_LIMIT`設定が変更または削除されても、対応する機能と`ACTION`は変更または削除されません。監視項目を削除するには`QUERY WATCH REMOVE`を使用します。
 
 `QUERY_LIMIT`のパラメータは次のとおりです。
 
@@ -55,7 +55,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 > **Note:**
 >
-> ランナウェイクエリを特定のリソースグループに厳密に制限したい場合は、 `SWITCH_GROUP`と[`QUERY WATCH`](#query-watch-parameters)ステートメントを併用することをお勧めします。5 `QUERY_LIMIT` 、クエリが条件を満たした場合にのみ対応する`ACTION`操作をトリガーするため、このようなシナリオでは`SWITCH_GROUP`クエリを適切なタイミングで対象のリソースグループに切り替えられない可能性があります。
+> ランナウェイクエリを特定のリソースグループに厳密に制限したい場合は、 `SWITCH_GROUP`と[`QUERY WATCH`](#query-watch-parameters)ステートメントを併用することをお勧めします。`QUERY_LIMIT`は、クエリが条件を満たした場合にのみ対応する`ACTION`操作をトリガーするため、このようなシナリオでは`SWITCH_GROUP`はクエリを適切なタイミングで対象のリソースグループに切り替えられない可能性があります。
 
 ## 例 {#examples}
 
@@ -79,7 +79,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 ## <code>QUERY WATCH</code>パラメータ {#code-query-watch-code-parameters}
 
-`QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)参照してください。
+`QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を参照してください。
 
 パラメータは次のとおりです。
 
@@ -98,7 +98,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
--   SQLをSQLダイジェストに解析することで、リソースグループ`rg1`ランナウェイクエリ監視リストに一致する機能を追加します。3 `ACTION`指定されていない場合は、リソースグループ`rg1`に既に設定されているオプション`ACTION`使用されます。
+-   SQLをSQLダイジェストに解析することで、リソースグループ`rg1`のランナウェイクエリ監視リストに一致する機能を追加します。`ACTION`が指定されていない場合は、リソースグループ`rg1`に既に設定されているオプション`ACTION`が使用されます。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
@@ -110,7 +110,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION SWITCH_GROUP(rg2) SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
--   `PLAN DIGEST`使用して`rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `KILL`として指定します。
+-   `PLAN DIGEST`を使用して`rg1`リソース グループのランナウェイ クエリ監視リストに一致する機能を追加し、 `ACTION` `KILL`として指定します。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
@@ -168,4 +168,4 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
         -   `identify`ランナウェイクエリの条件に一致することを意味します。
         -   `watch` 、監視リスト内のクイック識別ルールに一致することを意味します。
 
--   `information_schema.runaway_watches`表には、ランナウェイクエリのクイック識別ルールの記録が含まれています。詳細については、 [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md)参照してください。
+-   `information_schema.runaway_watches`表には、ランナウェイクエリのクイック識別ルールの記録が含まれています。詳細については、 [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md)を参照してください。

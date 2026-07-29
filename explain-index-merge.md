@@ -84,13 +84,13 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 -   3 つのフィルタ条件のそれぞれについて、それぞれの選択性は非常に高いため、単一のインデックスを使用した`IndexLookUp`の実行効率は理想的ではありません。
 -   3 つのフィルター条件の全体的な選択性は低いです。
 
-交差型インデックスマージを使用してテーブルにアクセスする場合、オプティマイザはテーブルに対して複数のインデックスを使用し、各インデックスから返される結果をマージして、前述の出力例の`IndexMerge`の実行プランを生成することができます。7 `IndexMerge_9`の演算子の`operator info`の情報`type: intersection`は、この演算子が交差型インデックスマージであることを示しています。実行プランのその他の部分は、前述のユニオン型インデックスマージの例と同様です。
+交差型インデックスマージを使用してテーブルにアクセスする場合、オプティマイザはテーブルに対して複数のインデックスを使用し、各インデックスから返される結果をマージして、前述の出力例の`IndexMerge`の実行プランを生成することができます。`IndexMerge_9`の演算子の`operator info`の情報`type: intersection`は、この演算子が交差型インデックスマージであることを示しています。実行プランのその他の部分は、前述のユニオン型インデックスマージの例と同様です。
 
 > **Note:**
 >
 > -   インデックスマージ機能はv5.4.0からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`なります。
 >
-> -   SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用すると、 `tidb_enable_index_merge`設定に関係なく、オプティマイザにインデックスマージを強制的に適用させることができます。フィルタリング条件にプッシュダウンできない式が含まれている場合にインデックスマージを有効にするには、SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用する必要があります。
+> -   SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用すると、 `tidb_enable_index_merge`設定に関係なく、オプティマイザにインデックスマージを強制的に適用させることができます。フィルタリング条件にプッシュダウンできない式が含まれている場合にインデックスマージを有効にするには、SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >
 > -   [オプティマイザー修正制御 52869](/optimizer-fix-controls.md#52869-new-in-v810)が`OFF`に設定されている場合、オプティマイザがクエリプランに対して単一インデックススキャン方式（フルテーブルスキャン以外）を選択できるとき、オプティマイザはインデックスマージを自動的には選択しません。インデックスマージを使用するには、オプティマイザヒントを指定する必要があります。v8.5.7以降、この制御のデフォルト値は`ON`に変更されており、これにより前述の制限がデフォルトで解除され、オプティマイザはより多くのクエリでインデックスマージを自動的に選択できるようになります。
 >

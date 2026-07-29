@@ -41,7 +41,7 @@ summary: スロークエリを見つけて分析する方法を学びます。
 上記の方法は、以下の点で異なります。
 
 -   スロー ログには、解析から結果の返却まで、SQL 実行のほぼすべての段階の期間が記録され、比較的包括的です (TiDB Dashboardでスロー ログを直感的にクエリおよび分析できます)。
--   `EXPLAIN ANALYZE`実行すると、実際のSQL実行における各演算子の消費時間を知ることができます。結果には、実行時間に関するより詳細な統計情報が含まれます。
+-   `EXPLAIN ANALYZE`を実行すると、実際のSQL実行における各演算子の消費時間を知ることができます。結果には、実行時間に関するより詳細な統計情報が含まれます。
 
 まとめると、スローログと`EXPLAIN ANALYZE`ステートメントは、SQLクエリの実行がどのコンポーネント（TiDBまたはTiKV）でどの段階で遅いのかを判断するのに役立ちます。これにより、クエリのパフォーマンスボトルネックを正確に特定できます。
 
@@ -74,7 +74,7 @@ TiKVによるデータ処理が遅い場合、 `EXPLAIN ANALYZE`の結果から�
 
 さらに、スローログのフィールド`Cop_process`と`Cop_wait`分析に役立ちます。次の例では、クエリの合計実行時間は約`180.85ms`で、最大の`coptask`の実行には`171ms`かかっています。これは、このクエリのボトルネックが TiKV 側にあることを示しています。
 
-スロー ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)参照してください。
+スロー ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -102,13 +102,13 @@ SQL文の実行中に、TiDBは複数のTiKVインスタンスからデータを
 
 TiKV上に古いMVCCバージョンが多すぎる場合、またはGCのMVCC履歴データの保持期間が長い場合、過剰なMVCCバージョンが蓄積される可能性があります。これらの不要なMVCCバージョンを処理すると、スキャンのパフォーマンスに影響する可能性があります。
 
-`Total_keys`と`Processed_keys`確認してください。大きく異なる場合は、TiKVインスタンスに古いバージョンのキーが多すぎます。
+`Total_keys`と`Processed_keys`を確認してください。大きく異なる場合は、TiKVインスタンスに古いバージョンのキーが多すぎます。
 
     ...
     # Total_keys: 2215187529 Processed_keys: 1108056368
     ...
 
-TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)ご覧ください。
+TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)をご覧ください。
 
 ### 他の主要ステージは遅い {#other-key-stages-are-slow}
 
@@ -157,7 +157,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDBの実行プランは正しいものの、実行速度が遅い場合を考えてみましょう。このような問題を解決するには、SQL文の`EXPLAIN ANALYZE`の結果に応じてパラメータを調整するか、ヒントを使用します。
 
-実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)参照してください。
+実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)を参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 
@@ -236,7 +236,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 4.  `select b from t where c=3` : プレフィックス条件がないと、マルチカラムインデックスは使用できません。そのため、 `IndexFullScan`使用されます。
 5.  ...
 
-上記の例は、データ読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)参照してください。
+上記の例は、データ読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)を参照してください。
 
 さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)読むことで、TiDB オプティマイザーをより深く理解し、実行プランが妥当かどうかを判断するのに役立ちます。
 

@@ -14,7 +14,7 @@ tiup mirror clone <target-dir> [global version] [flags]
 ```
 
 -   `<target-dir>` 、クローンミラーへのローカルパスを設定するために使用されます。パスが存在しない場合は、 TiUPによって自動的に作成されます。
--   `[global version]`指定した場合、 TiUP は指定されたバージョンのすべてのコンポーネントのクローンを作成しようとします。指定されたバージョンを持たないコンポーネントがある場合は、 TiUP はその最新バージョンのクローンを作成します。
+-   `[global version]`を指定した場合、 TiUP は指定されたバージョンのすべてのコンポーネントのクローンを作成しようとします。指定されたバージョンを持たないコンポーネントがある場合は、 TiUP はその最新バージョンのクローンを作成します。
 
 ## オプション {#options}
 
@@ -44,7 +44,7 @@ tiup mirror clone <target-dir> [global version] [flags]
 
 ### - {コンポーネント} {#component}
 
--   クローンするコンポーネントのバージョンリストを指定します`{component}`にコンポーネント名を入力してください。3 [`tiup list --all`](/tiup/tiup-command-list.md)実行すると、使用可能なコンポーネント名が表示されます。
+-   クローンするコンポーネントのバージョンリストを指定します。`{component}`にコンポーネント名を入力してください。[`tiup list --all`](/tiup/tiup-command-list.md)を実行すると、使用可能なコンポーネント名が表示されます。
 -   データ型: 文字列
 -   デフォルト: Null
 

@@ -11,7 +11,7 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 ### オペレーティング システムのバージョン {#operating-system-version}
 
-デプロイされたマシンのオペレーティングシステムのディストリビューションとバージョンを確認してください。サポートされているバージョンのリストについては、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)参照してください。
+デプロイされたマシンのオペレーティングシステムのディストリビューションとバージョンを確認してください。サポートされているバージョンのリストについては、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を参照してください。
 
 ### CPU EPOLLEX限定 {#cpu-epollexclusive}
 
@@ -58,7 +58,7 @@ THP が有効になっているかどうかを確認するには、次のコマ�
 
 `never`に設定されていない場合は`grubby --update-kernel=ALL --args="transparent_hugepage=never"`に変更できます。
 
-実行中の設定を変更するには、再起動するか、 `echo never > /sys/kernel/mm/transparent_hugepage/enabled`実行します。
+実行中の設定を変更するには、再起動するか、 `echo never > /sys/kernel/mm/transparent_hugepage/enabled`を実行します。
 
 ### システム制限 {#system-limits}
 
@@ -138,7 +138,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> チェックに`<cluster-name>`使用する場合は、コマンドに`--cluster`オプションを追加する必要があります。
+> チェックに`<cluster-name>`を使用する場合は、コマンドに`--cluster`オプションを追加する必要があります。
 
 ## オプション {#options}
 

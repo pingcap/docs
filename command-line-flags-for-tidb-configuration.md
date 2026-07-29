@@ -17,7 +17,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 -   設定ファイル
 -   デフォルト: `""`
--   設定ファイルが指定されている場合、TiDB は設定ファイルを読み取ります。対応する設定がコマンドラインオプションにも存在する場合、TiDB はコマンドラインオプションの設定を使用して設定ファイルの設定を上書きします。詳細な設定情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)参照してください。
+-   設定ファイルが指定されている場合、TiDB は設定ファイルを読み取ります。対応する設定がコマンドラインオプションにも存在する場合、TiDB はコマンドラインオプションの設定を使用して設定ファイルの設定を上書きします。詳細な設定情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
 
 ## `--config-check` {#config-check}
 
@@ -31,7 +31,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--cors` {#cors}
 
--   TiDB HTTPステータスサービスのクロスオリジンリクエスト共有（CORS）リクエストの値`Access-Control-Allow-Origin`指定します。
+-   TiDB HTTPステータスサービスのクロスオリジンリクエスト共有（CORS）リクエストの値`Access-Control-Allow-Origin`を指定します。
 -   デフォルト: `""`
 
 ## `--host` {#host}
@@ -48,12 +48,12 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--initialize-secure` {#initialize-secure}
 
--   tidb-server の初期化時に、認証方式`auth_socket`使用してアカウント`root`を作成するかどうかを制御します。 `true`に設定した場合、TiDB への初回ログインにはソケット接続を使用する必要があります。これにより、セキュリティが強化されます。
+-   tidb-server の初期化時に、認証方式`auth_socket`を使用してアカウント`root`を作成するかどうかを制御します。 `true`に設定した場合、TiDB への初回ログインにはソケット接続を使用する必要があります。これにより、セキュリティが強化されます。
 -   デフォルト: `false`
 
 ## `--initialize-sql-file` {#initialize-sql-file}
 
--   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)参照。
+-   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
 -   デフォルト: `""`
 
 ## `-L` {#l}
@@ -110,7 +110,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 -   `--store = tikv`場合、パスを指定する必要があります。 `--store = unistore`場合、パスを指定しないとデフォルト値が使用されます。
 -   TiKVのような分散ストレージエンジンの場合、 `--path`実際のPDアドレスを指定します。PDサーバーを192.168.100.113:2379、192.168.100.114:2379、192.168.100.115:2379にデプロイすると仮定すると、 `--path`値は「192.168.100.113:2379、192.168.100.114:2379、192.168.100.115:2379」となります。
 -   デフォルト: `"/tmp/tidb"`
--   純粋なインメモリ TiDB を有効にするには、 `tidb-server --store=unistore --path=""`使用します。
+-   純粋なインメモリ TiDB を有効にするには、 `tidb-server --store=unistore --path=""`を使用します。
 
 ## `--proxy-protocol-fallbackable` {#proxy-protocol-fallbackable}
 
@@ -119,14 +119,14 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--proxy-protocol-networks` {#proxy-protocol-networks}
 
--   [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
+-   [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
 -   デフォルト: `""`
 -   通常、リバースプロキシを経由してTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして取得します。PROXYプロトコルを有効にすると、HAProxyなどのこのプロトコルをサポートするリバースプロキシは、実際のクライアントIPアドレスをTiDBに渡すことができます。
--   このフラグを設定すると、TiDBは設定された送信元IPアドレスがPROXYプロトコルを使用してTiDBに接続することを許可します。PROXY以外のプロトコルが使用されている場合、この接続は拒否されます。その他のアドレスはPROXYプロトコルを使用せずにTiDBに接続できます。このフラグを空のままにすると、どのIPアドレスもPROXYプロトコルを使用してTiDBに接続できなくなります。値は、IPアドレス（192.168.1.50）またはCIDR（192.168.1.0/24）で、区切り文字として`,`使用します。3 `*`任意のIPアドレスを意味します。
+-   このフラグを設定すると、TiDBは設定された送信元IPアドレスがPROXYプロトコルを使用してTiDBに接続することを許可します。PROXY以外のプロトコルが使用されている場合、この接続は拒否されます。その他のアドレスはPROXYプロトコルを使用せずにTiDBに接続できます。このフラグを空のままにすると、どのIPアドレスもPROXYプロトコルを使用してTiDBに接続できなくなります。値は、IPアドレス（192.168.1.50）またはCIDR（192.168.1.0/24）で、区切り文字として`,`を使用します。`*`は任意のIPアドレスを意味します。
 
 > **Warning:**
 >
-> `*` 、任意の IP アドレスのクライアントが自身の IP アドレスを報告できるようになるため、セキュリティリスクが生じる可能性があるため、注意して使用してください。また、 `*`使用すると、 `--proxy-protocol-fallbackable` `true`に設定しないと、TiDB に直接接続する内部コンポーネント（TiDB Dashboardなど）が利用できなくなる可能性があります。
+> `*` 、任意の IP アドレスのクライアントが自身の IP アドレスを報告できるようになるため、セキュリティリスクが生じる可能性があるため、注意して使用してください。また、 `*`を使用すると、 `--proxy-protocol-fallbackable` `true`に設定しないと、TiDB に直接接続する内部コンポーネント（TiDB Dashboardなど）が利用できなくなる可能性があります。
 
 > **Note:**
 >
@@ -161,7 +161,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 -   TiDB サービスは、外部接続に Unix ソケット ファイルを使用します。
 -   デフォルト: `""`
--   `/tmp/tidb.sock`使用して Unix ソケット ファイルを開きます。
+-   `/tmp/tidb.sock`を使用して Unix ソケット ファイルを開きます。
 
 ## `--status` {#status}
 
@@ -189,7 +189,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--tidb-service-scope` {#tidb-service-scope}
 
--   現在の TiDB インスタンスの初期値として[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)指定します。
+-   現在の TiDB インスタンスの初期値として[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を指定します。
 -   デフォルト: `""`
 
 ## `--token-limit` {#token-limit}
@@ -220,9 +220,9 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--redact` {#redact}
 
--   サブコマンド`collect-log`使用するときに、 TiDBサーバーがログ ファイルを非感度化するかどうかを決定します。
+-   サブコマンド`collect-log`を使用するときに、 TiDBサーバーがログ ファイルを非感度化するかどうかを決定します。
 -   デフォルト: false
--   値が`true`の場合、マスキング操作となり、 `‹ ›`マーク記号で囲まれたすべてのフィールドが`?`に置き換えられます。値が`false`の場合、リストア操作となり、すべてのマーク記号が削除されます。この機能を使用するには、 `./tidb-server --redact=xxx collect-log <input> <output>`実行して、 `<input>`で指定された TiDBサーバーログファイルを非感応化またはリストアし、 `<output>`に出力します。詳細については、システム変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log)参照してください。
+-   値が`true`の場合、マスキング操作となり、 `‹ ›`マーク記号で囲まれたすべてのフィールドが`?`に置き換えられます。値が`false`の場合、リストア操作となり、すべてのマーク記号が削除されます。この機能を使用するには、 `./tidb-server --redact=xxx collect-log <input> <output>`を実行して、 `<input>`で指定された TiDBサーバーログファイルを非感応化またはリストアし、 `<output>`に出力します。詳細については、システム変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log)を参照してください。
 
 ## `--repair-mode` {#repair-mode}
 

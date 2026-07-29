@@ -87,7 +87,7 @@ SELECT n, IF(n MOD 2, "odd", "even") FROM d;
 
 ## IFNULL() {#ifnull}
 
-[`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull)関数は、クエリ内の NULL 値を処理するために使用されます。3 `expr1` `NULL`でない場合は`expr1`返し、そうでない場合は`expr2`返します。
+[`IFNULL(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull)関数は、クエリ内の NULL 値を処理するために使用されます。`expr1`が`NULL`でない場合は`expr1`を返し、そうでない場合は`expr2`を返します。
 
 例：
 

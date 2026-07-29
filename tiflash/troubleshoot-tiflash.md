@@ -29,7 +29,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
 4.  CPU が SIMD 命令をサポートしているかどうかを確認します。
 
-    バージョン6.3以降、Linux AMD64アーキテクチャでTiFlashを展開するには、AVX2命令セットをサポートするCPUが必要です。1 `grep avx2 /proc/cpuinfo`出力が生成されることを確認して検証してください。Linux ARM64アーキテクチャの場合、CPUはARMv8命令セットアーキテクチャをサポートしている必要があります。3 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`出力が生成されることを確認して検証してください。
+    バージョン6.3以降、Linux AMD64アーキテクチャでTiFlashを展開するには、AVX2命令セットをサポートするCPUが必要です。`grep avx2 /proc/cpuinfo`の出力が生成されることを確認してください。Linux ARM64アーキテクチャの場合、CPUはARMv8命令セットアーキテクチャをサポートしている必要があります。`grep 'crc32' /proc/cpuinfo | grep 'asimd'`の出力が生成されることを確認してください。
 
     仮想マシンにデプロイするときにこの問題が発生した場合は、VM の CPUアーキテクチャを Haswell に変更してから、 TiFlash を再デプロイしてみてください。
 
@@ -65,7 +65,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
 2.  すべてのTiFlashノードをクラスターから削除する必要があるシナリオで、表`INFORMATION_SCHEMA.TIFLASH_REPLICA`にクラスター内にTiFlashレプリカが存在しないことが示されていても、 TiFlashノードの削除が依然として失敗する場合は、最近`DROP TABLE <db-name>.<table-name>`または`DROP DATABASE <db-name>`操作を実行したかどうかを確認します。
 
-    TiFlashレプリカを持つテーブルまたはデータベースの場合、 `DROP TABLE <db-name>.<table-name>`または`DROP DATABASE <db-name>`実行した後、TiDBはPD内の対応するテーブルのTiFlashレプリケーションルールをすぐに削除しません。代わりに、対応するテーブルがガベージコレクション（GC）条件を満たすまで待機してから、これらのレプリケーションルールを削除します。GCが完了すると、対応するTiFlashノードを正常に削除できます。
+    TiFlashレプリカを持つテーブルまたはデータベースの場合、 `DROP TABLE <db-name>.<table-name>`または`DROP DATABASE <db-name>`を実行した後、TiDBはPD内の対応するテーブルのTiFlashレプリケーションルールをすぐに削除しません。代わりに、対応するテーブルがガベージコレクション（GC）条件を満たすまで待機してから、これらのレプリケーションルールを削除します。GCが完了すると、対応するTiFlashノードを正常に削除できます。
 
     GC 条件が満たされる前にTiFlashのデータ複製ルールを手動で削除するには、次の操作を実行できます。
 
@@ -212,9 +212,9 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
 
 ## データはTiFlashに複製されません {#data-is-not-replicated-to-tiflash}
 
-TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`実行してレプリケーションを開始したにもかかわらず、データが複製されません。この場合、次の手順を実行することで問題を特定し、対処できます。
+TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`を実行してレプリケーションを開始したにもかかわらず、データが複製されません。この場合、次の手順を実行することで問題を特定し、対処できます。
 
-1.  `ALTER TABLE ... SET TIFLASH REPLICA ...<num>`実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
+1.  `ALTER TABLE ... SET TIFLASH REPLICA ...<num>`を実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
 
     -   クエリがブロックされている場合は、 `SELECT * FROM information_schema.tiflash_replica`ステートメントを実行して、 TiFlashレプリカが作成されたかどうかを確認します。
         -   [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)を通じて、DDL 文が期待どおりに実行されているかどうかを確認します。TiFlash レプリカ文のTiFlashをブロックする可能性のある他の DDL 文 ( `ADD INDEX`など) が実行中かどうかを確認します。

@@ -11,17 +11,17 @@ TiDBは、関連するデータのコレクションを整理して保存する�
 
 このドキュメントでは、 [`pytidb`](https://github.com/pingcap/pytidb)を使用してテーブルを操作する方法を説明します。
 
-`pytidb`は、開発者が AI アプリケーションを効率的に構築できるように設計されています。
+`pytidb`は、TiDB 向けの公式 Python SDK であり、開発者が AI アプリケーションを効率的に構築できるように設計されています。
 
 > **Note:**
 >
-> 完全な動作例については、リポジトリの[基本的な例](https://github.com/pingcap/pytidb/tree/main/examples/basic)参照してください。
+> 完全な動作例については、リポジトリの[基本的な例](https://github.com/pingcap/pytidb/tree/main/examples/basic)を参照してください。
 
 ## テーブルを作成する {#create-a-table}
 
 ### TableModelの使用 {#using-tablemodel}
 
-`pytidb` 、テーブルのスキーマを表す`TableModel`クラスを提供します。このクラスは[ピダンティックモデル](https://docs.pydantic.dev/latest/concepts/models/)と互換性があり、宣言的にテーブルを定義できます。
+`pytidb`は、テーブルのスキーマを表す`TableModel`クラスを提供します。このクラスは[Pydantic モデル](https://docs.pydantic.dev/latest/concepts/models/)と互換性があり、宣言的にテーブルを定義できます。
 
 次の例では、次の列を持つ`items`という名前のテーブルを作成します。
 
@@ -33,7 +33,7 @@ TiDBは、関連するデータのコレクションを整理して保存する�
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-[データベースに接続する](/ai/guides/connect.md)を使用して`pytidb`インスタンスを取得したら、 `client`メソッドを`create_table`してテーブルを作成できます。
+[データベースに接続する](/ai/guides/connect.md)で`pytidb`を使用して`client`インスタンスを取得したら、 `create_table`メソッドを使用してテーブルを作成できます。
 
 ```python hl_lines="12"
 from pytidb.schema import TableModel, Field, VectorField
@@ -153,9 +153,9 @@ VALUES
 </div>
 </SimpleTab>
 
-### ディクト付き {#with-dict}
+### dict を使用 {#with-dict}
 
-`dict`使って行を表し、それをテーブルに挿入することもできます。この方法はより柔軟で、データを挿入するために`TableModel`使用する必要がありません。
+`dict`を使って行を表し、それをテーブルに挿入することもできます。この方法はより柔軟で、データを挿入するために`TableModel`を使用する必要がありません。
 
 単一のレコードを挿入するには:
 
@@ -192,7 +192,7 @@ VALUES (1, 'TiDB is a distributed SQL database', '[0.1, 0.2, 0.3]', '{"category"
 
 > **Note:**
 >
-> テーブル内にレコードIDが既に存在する場合、 `table.save()`​​レコード全体を上書きします。レコードの一部のみを変更するには、 `table.update()`使用します。
+> テーブル内にレコードIDが既に存在する場合、 `table.save()`はレコード全体を上書きします。レコードの一部のみを変更するには、 `table.update()`を使用します。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">
@@ -353,7 +353,7 @@ WHERE
 
 [フィルター](/ai/guides/filtering.md)のレコードを削除するには、 `table.delete()`メソッドを使用します。
 
-**例: `id` 2のレコードを削除する**
+**例: `id`が2のレコードを削除する**
 
 ```python
 table.delete(
@@ -368,7 +368,7 @@ table.delete(
 
 `DELETE`ステートメントを使用して、 [フィルター](/ai/guides/filtering.md)のレコードを削除します。
 
-**例: `id` 2のレコードを削除する**
+**例: `id`が2のレコードを削除する**
 
 ```sql
 DELETE FROM items WHERE id = 2;

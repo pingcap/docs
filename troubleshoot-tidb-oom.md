@@ -18,8 +18,8 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
     -   **TiDB** &gt;**サーバー**&gt;**稼働時間が**突然ゼロに低下します。
     -   **TiDB-Runtime** &gt;**メモリ使用量で**は、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
--   `tidb.log`確認すると、次のログ エントリが見つかります。
-    -   OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)参照してください。
+-   `tidb.log`を確認すると、次のログ エントリが見つかります。
+    -   OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
     -   再起動に関するログエントリ: `[INFO] [printer.go:33] ["Welcome to TiDB."]` 。
 
 ## 全体的なトラブルシューティングプロセス {#overall-troubleshooting-process}
@@ -95,7 +95,7 @@ OOM 問題のさまざまな原因に応じて、SQL ステートメントのメ
 
 -   一部の演算子と関数はstorageレベルへのプッシュダウンがサポートされていないため、中間結果セットが大量に蓄積されます。このような場合は、SQL文を修正するか、ヒントを使用して最適化し、プッシュダウンをサポートする関数または演算子を使用する必要があります。
 
--   実行プランにはHashAgg演算子が含まれています。HashAggは複数のスレッドで同時に実行されるため、高速ですがメモリ消費量は多くなります。代わりに`STREAM_AGG()`使用することもできます。
+-   実行プランにはHashAgg演算子が含まれています。HashAggは複数のスレッドで同時に実行されるため、高速ですがメモリ消費量は多くなります。代わりに`STREAM_AGG()`を使用することもできます。
 
 -   同時実行数の増加によるメモリ問題を回避するには、同時に読み取る領域の数を減らすか、演算子の同時実行数を減らしてください。対応するシステム変数は次のとおりです。
     -   [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
@@ -113,11 +113,11 @@ OOM 問題のさまざまな原因に応じて、SQL ステートメントのメ
 
 TiDBノードは起動後、統計情報をメモリに読み込む必要があります。TiDBは統計情報を収集する際にメモリを消費します。メモリ使用量は、以下の方法で制御できます。
 
--   サンプリング レートを指定し、特定の列の統計情報のみを収集し、同時実行性を`ANALYZE`減らします。
--   TiDB v6.1.0 以降では、システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)使用して統計情報のメモリ使用量を制御できます。
--   TiDB v6.1.0 以降では、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
+-   サンプリング レートを指定し、特定の列の統計情報のみを収集し、`ANALYZE`の同時実行性を減らします。
+-   TiDB v6.1.0 以降では、システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を使用して統計情報のメモリ使用量を制御できます。
+-   TiDB v6.1.0 以降では、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
 
-詳細については[統計入門](/statistics.md)参照してください。
+詳細については[統計入門](/statistics.md)を参照してください。
 
 #### プリペアドステートメントの過剰使用 {#prepared-statements-are-overused}
 
@@ -173,11 +173,11 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
 -   より多くのメモリを消費する SQL ステートメントを確認します。
 
     -   TiDB Dashboardで、SQL ステートメントの分析、スロークエリ、メモリ使用量を確認する。
-    -   `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`確認してください。
+    -   `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`を確認してください。
     -   各 TiDB ノードで`tidb_slow_query.log`チェックします。
-    -   `grep "expensive_query" tidb.log`実行して、対応するログ エントリを確認します。
-    -   `EXPLAIN ANALYZE`実行して、演算子のメモリ使用量を確認します。
-    -   `SELECT * FROM information_schema.processlist;`実行して`MEM`列の値を確認します。
+    -   `grep "expensive_query" tidb.log`を実行して、対応するログ エントリを確認します。
+    -   `EXPLAIN ANALYZE`を実行して、演算子のメモリ使用量を確認します。
+    -   `SELECT * FROM information_schema.processlist;`を実行して`MEM`列の値を確認します。
 
 -   メモリ使用量が多いときに TiDB プロファイル情報を収集するには、次のコマンドを実行します。
 
@@ -185,7 +185,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
     curl -G "http://{TiDBIP}:10080/debug/zip?seconds=10" > profile.zip
     ```
 
--   `grep "tidb-server has the risk of OOM" tidb.log`実行して、TiDB サーバーによって収集されたアラートファイルのパスを確認します。出力例を以下に示します。
+-   `grep "tidb-server has the risk of OOM" tidb.log`を実行して、TiDB サーバーによって収集されたアラートファイルのパスを確認します。出力例を以下に示します。
 
     ```shell
     ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]

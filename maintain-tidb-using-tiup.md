@@ -31,7 +31,7 @@ tiup cluster start ${cluster-name}
 
 > **Note:**
 >
-> `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`実行して確認してください。
+> `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
 コマンドに`-R`または`-N`パラメータを追加することで、一部のコンポーネントのみを起動できます。例：
 
@@ -85,7 +85,7 @@ tiup cluster display ${cluster-name}
               config:
                   log.slow-threshold: 300
 
-    パラメータの形式については[TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)参照してください。
+    パラメータの形式については[TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
     **構成項目の階層を表すには、 . を使用します`.`**
 
@@ -109,7 +109,7 @@ tidb-server でトランザクション サイズ制限パラメータ ( [パフ
 
 ## 修正プログラムパッケージに置き換える {#replace-with-a-hotfix-package}
 
-通常のアップグレードについては、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを行うには、 `patch`コマンドを使用します。
+通常のアップグレードについては、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを行うには、 `patch`コマンドを使用します。
 
 ```bash
 tiup cluster patch --help

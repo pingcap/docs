@@ -9,7 +9,7 @@ summary: PD 構成ファイルについて学習します。
 
 PD設定ファイルは、コマンドラインパラメータよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)あります。
 
-このドキュメントでは、コマンドラインパラメータに含まれないパラメータについてのみ説明します。コマンドラインパラメータについては、 [ここ](/command-line-flags-for-pd-configuration.md)参照してください。
+このドキュメントでは、コマンドラインパラメータに含まれないパラメータについてのみ説明します。コマンドラインパラメータについては、 [ここ](/command-line-flags-for-pd-configuration.md)を参照してください。
 
 > **Tip:**
 >
@@ -213,7 +213,7 @@ pd-server関連のコンフィグレーション項目
 -   PDログでログ編集を有効にするかどうかを制御します
 -   オプション`true` `"marker"` `false`
 -   デフォルト値: `false`
--   使用方法の詳細については、 [PD側でのログ編集](/log-redaction.md#log-redaction-in-pd-side)参照してください。
+-   使用方法の詳細については、 [PD側でのログ編集](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
 
 ## `log` {#log}
 
@@ -306,7 +306,7 @@ pd-server関連のコンフィグレーション項目
 
 > **Warning:**
 >
-> この設定項目を1より大きい値に設定すると、同時チェックが有効になります。これは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/tikv/pd/issues)報告してください。
+> この設定項目を1より大きい値に設定すると、同時チェックが有効になります。これは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/tikv/pd/issues)を報告してください。
 
 -   リージョンのヘルス状態を検査する際にチェッカーによって作成される同時実行数[オペレーター](/glossary.md#operator)を制御します。通常、この設定を調整する必要はありません。
 -   デフォルト値: `1`
@@ -492,7 +492,7 @@ pd-server関連のコンフィグレーション項目
 
 > **Note:**
 >
-> バージョン5.2以降、ラベル関連の設定項目は非推奨となりました。レプリカポリシーの設定には[配置ルール](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center)使用することをお勧めします。
+> バージョン5.2以降、ラベル関連の設定項目は非推奨となりました。レプリカポリシーの設定には[配置ルール](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center)を使用することをお勧めします。
 
 ### <code>key</code> （非推奨） {#code-key-code-deprecated}
 
@@ -533,7 +533,7 @@ pd-server関連のコンフィグレーション項目
 
 -   TiDB Dashboardがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   リバースプロキシを経由せずにTiDB Dashboardにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
+-   リバースプロキシを経由せずにTiDB Dashboardにアクセスする場合は、この設定項目を変更**しないで**ください。変更すると、アクセスの問題が発生する可能性があります。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ### `enable-telemetry` {#enable-telemetry}
 

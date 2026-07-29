@@ -9,7 +9,7 @@ TiDBクラスターの増分データは、期間の開始スナップショッ�
 
 > **Warning:**
 >
-> この機能の開発は停止しています。代替として[ログバックアップとPITR](/br/br-pitr-guide.md)使用することをお勧めします。
+> この機能の開発は停止しています。代替として[ログバックアップとPITR](/br/br-pitr-guide.md)を使用することをお勧めします。
 
 ## 制限事項 {#limitations}
 
@@ -25,7 +25,7 @@ TiDBクラスターの増分データは、期間の開始スナップショッ�
 
 ## 増分データをバックアップする {#back-up-incremental-data}
 
-増分データをバックアップするには、 `tiup br backup`コマンドを、**最終バックアップのタイムスタンプ**`--lastbackupts`を指定して実行します。これにより、br コマンドラインツールは`lastbackupts`から現在時刻の間に生成された増分データを自動的にバックアップします。9 `--lastbackupts`取得するには、 `validate`コマンドを実行します。以下は例です。
+増分データをバックアップするには、 `tiup br backup`コマンドを、**最終バックアップのタイムスタンプ**`--lastbackupts`を指定して実行します。これにより、br コマンドラインツールは`lastbackupts`から現在時刻の間に生成された増分データを自動的にバックアップします。`--lastbackupts`を取得するには、 `validate`コマンドを実行します。以下は例です。
 
 ```shell
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
@@ -42,7 +42,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 -   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV あたりの**最大速度 (MiB/秒)。
--   `storage` : バックアップデータのストレージパス。増分バックアップデータは、前回のスナップショットバックアップとは異なるパスに保存する必要があります。上記の例では、増分バックアップデータはフルバックアップデータの下の`incr`ディレクトリに保存されます。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+-   `storage` : バックアップデータのストレージパス。増分バックアップデータは、前回のスナップショットバックアップとは異なるパスに保存する必要があります。上記の例では、増分バックアップデータはフルバックアップデータの下の`incr`ディレクトリに保存されます。詳細は[外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 ## 増分データを復元する {#restore-incremental-data}
 

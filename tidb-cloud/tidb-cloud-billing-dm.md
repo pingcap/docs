@@ -20,7 +20,7 @@ TiDB Cloudは、データ移行のキャパシティをレプリケーション�
 | 8台のRCU | 40 MiB/秒 | 40,000行/秒 | 30000    |
 | 16 RCU | 45 MiB/秒 | 80,000行/秒 | 60000    |
 
-データ移行 RCU の価格の詳細については、 [データ移行コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost)参照してください。
+データ移行 RCU の価格の詳細については、 [データ移行コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost)を参照してください。
 
 > **Note:**
 >
@@ -29,11 +29,11 @@ TiDB Cloudは、データ移行のキャパシティをレプリケーション�
 
 データ移行ジョブは、完全なデータ移行パフォーマンスをMiB/秒単位で測定します。この単位は、データ移行ジョブによって1秒あたりに移行されるデータ量（MiB単位）を示します。
 
-データ移行ジョブは、増分データ移行のパフォーマンスを行数/秒で測定します。この単位は、 `INSERT` `UPDATE`または`DELETE`回、約1秒で実行する場合、対応する仕様のデータ移行ジョブは、10,000行を下流データベースに約1秒で複製できます。
+データ移行ジョブは、増分データ移行のパフォーマンスを行数/秒で測定します。この単位は、1秒あたりにターゲットデータベースへ移行される行数を示します。たとえば、上流データベースが10,000行の`INSERT`、`UPDATE`、または`DELETE`ステートメントを約1秒で実行する場合、対応する仕様のデータ移行ジョブは、その10,000行を約1秒で下流データベースに複製できます。
 
 ## 価格 {#price}
 
-各 Data Migration RCU でサポートされているリージョンとTiDB Cloudの価格については、 [データ移行コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost)参照してください。
+各 Data Migration RCU でサポートされているリージョンとTiDB Cloudの価格については、 [データ移行コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost)を参照してください。
 
 データ移行ジョブは、ターゲット TiDB ノードと同じリージョンにあります。
 
@@ -51,7 +51,7 @@ AWS PrivateLink または VPC ピアリング接続を使用しており、ソ�
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-クロスリージョンおよびクロスAZトラフィックの料金はTiDB Cloudと同じです。詳細については[TiDB Cloud Dedicated料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)ご覧ください。
+クロスリージョンおよびクロスAZトラフィックの料金はTiDB Cloudと同じです。詳細については[TiDB Cloud Dedicated料金の詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)をご覧ください。
 
 ## 参照 {#see-also}
 

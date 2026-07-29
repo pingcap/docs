@@ -7,11 +7,11 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 > **Warning:**
 >
-> [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)をご覧ください。
+> [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`を使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)をご覧ください。
 
 このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを管理する方法を学習できます。
 
-さらに、データ ソース`tidbcloud_projects`と`tidbcloud_cluster_specs`使用して必要な情報を取得する方法も学習します。
+さらに、データ ソース`tidbcloud_projects`と`tidbcloud_cluster_specs`を使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_cluster`リソースの機能は次のとおりです。
 
@@ -29,7 +29,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
-1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)実行すると作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
+1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)を実行すると作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
         terraform {
           required_providers {
@@ -62,13 +62,13 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
-        `output`ブロックはプログラミング言語の戻り値と同様に機能します。詳細は[Terraform ドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
+        `output`ブロックはプログラミング言語の戻り値と同様に機能します。詳細は[Terraform ドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースの使用可能なすべての構成を取得するには、こちら[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
+    リソースとデータ ソースの使用可能なすべての構成を取得するには、[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 
-    プロンプトをスキップするには、 `terraform apply --auto-approve`使用します。
+    プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
         $ terraform apply --auto-approve
 
@@ -264,7 +264,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 > **Note:**
 >
-> 始める前に、 TiDB Cloudコンソールで CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)参照してください。
+> 始める前に、 TiDB Cloudコンソールで CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
 
 `tidbcloud_cluster`リソースを使用してクラスターを作成できます。
 
@@ -546,7 +546,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
         Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 
-4.  ステータスを確認するには`terraform state show tidbcloud_cluster.${resource-name}`使用します。
+4.  ステータスを確認するには`terraform state show tidbcloud_cluster.${resource-name}`を使用します。
 
         $ terraform state show tidbcloud_cluster.example_cluster
 
@@ -870,7 +870,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
             status         = "AVAILABLE"
         }
 
-4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。1 `id`と`status`行目はTerraformによって制御されるため、削除する必要があることに注意してください。
+4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。`id`と`status`行目はTerraformによって制御されるため、削除する必要があることに注意してください。
 
         resource "tidbcloud_cluster" "import_cluster" {
               cloud_provider = "AWS"
@@ -899,11 +899,11 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
               region         = "eu-central-1"
         }
 
-5.  `terraform fmt`使用して構成ファイルをフォーマットできます。
+5.  `terraform fmt`を使用して構成ファイルをフォーマットできます。
 
         $ terraform fmt
 
-6.  設定と状態の一貫性を確保するには、 `terraform plan`または`terraform apply`実行してください。 `No changes`が表示されれば、インポートは成功です。
+6.  設定と状態の一貫性を確保するには、 `terraform plan`または`terraform apply`を実行してください。 `No changes`が表示されれば、インポートは成功です。
 
         $ terraform apply
 
@@ -931,6 +931,6 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
 
     Enter a value: yes
 
-ここで、コマンド`terraform show`実行すると、リソースがクリアされているため何も表示されません。
+ここで、コマンド`terraform show`を実行すると、リソースがクリアされているため何も表示されません。
 
     $ terraform show

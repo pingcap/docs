@@ -39,7 +39,7 @@ TiDBサービスにローリングアップデートを適用すると、実行�
 
 以前のバージョンからv7.4以降にアップグレードする際、JDBC URLで`connectionCollation`が設定されておらず、かつ`characterEncoding`が設定されていないか`UTF-8`に設定されている場合、アップグレード後にJDBC接続のデフォルトの照合順序が`utf8mb4_bin`から`utf8mb4_0900_ai_ci`に変更される可能性があります。照合順序を`utf8mb4_bin`に維持する必要がある場合は、JDBC URLで`connectionCollation=utf8mb4_bin`設定してください。
 
-詳細については[JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)参照してください。
+詳細については[JDBC接続で使用される照合順序](/faq/sql-faq.md#collation-used-in-jdbc-connections)を参照してください。
 
 ### DDL操作実行時の文字セット（charset）エラー {#the-character-set-charset-errors-when-executing-ddl-operations}
 
@@ -239,7 +239,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
         Query OK, 1 row affected
 
--   v2.1.3以降のバージョンでは、列の文字セットをUTF8MB4に変更することをお勧めします。または、UTF-8チェックをスキップするには`tidb_skip_utf8_check`設定します。ただし、チェックをスキップすると、MySQLがチェックを実行するため、TiDBからMySQLへのデータレプリケーションに失敗する可能性があります。
+-   v2.1.3以降のバージョンでは、列の文字セットをUTF8MB4に変更することをお勧めします。または、UTF-8チェックをスキップするには`tidb_skip_utf8_check`を設定します。ただし、チェックをスキップしても、MySQL側ではチェックが実行されるため、TiDBからMySQLへのデータレプリケーションに失敗する可能性があります。
 
     ```sql
     alter table t change column a a varchar(100) character set utf8mb4;
@@ -253,7 +253,7 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
 
         Query OK, 1 row affected
 
-    具体的には、変数`tidb_skip_utf8_check`使用すると、データのUTF-8およびUTF8MB4の有効性チェックをスキップできます。ただし、チェックをスキップすると、MySQLがチェックを実行するため、TiDBからMySQLへのデータのレプリケーションに失敗する可能性があります。
+    具体的には、変数`tidb_skip_utf8_check`を使用すると、データのUTF-8およびUTF8MB4の有効性チェックをスキップできます。ただし、チェックをスキップしても、MySQL側ではチェックが実行されるため、TiDBからMySQLへのデータのレプリケーションに失敗する可能性があります。
 
     UTF-8チェックのみをスキップしたい場合は、 `tidb_check_mb4_value_in_utf8`設定できます。この変数はv2.1.3で`config.toml`ファイルに追加され、設定ファイルの`check-mb4-value-in-utf8`変更してクラスターを再起動することで有効になります。
 

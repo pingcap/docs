@@ -7,7 +7,7 @@ summary: オプティマイザヒントを使用してクエリ実行プラン�
 
 TiDBは、 MySQL 5.7で導入されたコメント形式の構文に基づいたオプティマイザヒントをサポートしています。例えば、一般的な構文の1つは`/*+ HINT_NAME([t1_name [, t2_name] ...]) */`です。TiDBオプティマイザがあまり最適ではないクエリプランを選択する場合は、オプティマイザヒントの使用が推奨されます。
 
-ヒントが効かない場合は、 [ヒントが効かない一般的な問題のトラブルシューティング](#troubleshoot-common-issues-that-hints-do-not-take-effect)参照してください。
+ヒントが効かない場合は、 [ヒントが効かない一般的な問題のトラブルシューティング](#troubleshoot-common-issues-that-hints-do-not-take-effect)を参照してください。
 
 ## 構文 {#syntax}
 
@@ -72,7 +72,7 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 
 > **Note:**
 >
-> 上記の例では、ヒントが`QB_NAME`から`sel_2`指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`指定していない場合、2 番目のクエリ ブロック`SELECT`に対して`sel_2`無効な名前になります。
+> 上記の例では、ヒントが`QB_NAME`から`sel_2`を指定し、元の 2 番目のクエリ ブロック`SELECT`に新しい`QB_NAME`を指定していない場合、2 番目のクエリ ブロック`SELECT`に対して`sel_2`が無効な名前になります。
 
 ### MERGE_JOIN(t1_name [, tl_name ...]) {#merge-join-t1-name-tl-name}
 
@@ -98,7 +98,7 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> 場合によっては、 `INL_JOIN`ヒントが効かないことがあります。詳しくは[`INL_JOIN`ヒントは有効になりません](#inl_join-hint-does-not-take-effect)参照してください。
+> 場合によっては、 `INL_JOIN`ヒントが効かないことがあります。詳しくは[`INL_JOIN`ヒントは有効になりません](#inl_join-hint-does-not-take-effect)を参照してください。
 
 ヒント`INL_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス・ネストループ結合アルゴリズムを使用するようオプティマイザに指示します。このアルゴリズムは、状況によってはシステムリソースの消費量が少なく、処理時間も短縮される可能性がありますが、状況によっては逆の結果になることもあります。外部テーブルがヒント`WHERE`でフィルタリングされた後、結果セットが10,000行未満の場合、このヒントを使用することをお勧めします。例：
 
@@ -108,7 +108,7 @@ SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id =
 
 上記のSQL文では、ヒント`INL_JOIN(t1, t2)`はオプティマイザに、 `t1`と`t2`に対してインデックス・ネストループ結合アルゴリズムを使用するように指示しています。これは、 `t1`と`t2`の間でインデックス・ネストループ結合アルゴリズムが使用されることを意味するわけではないことに注意してください。ヒントは、 `t1`と`t2`がそれぞれ別のテーブル（ `t3` ）に対してインデックス・ネストループ結合アルゴリズムを使用することを示しています。
 
-`INL_JOIN()`で指定されたパラメータは、クエリプランを作成する際に内部テーブルとして使用される候補テーブルです。例えば、 `INL_JOIN(t1)` 、TiDB がクエリプランを作成する際に内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとしてその別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用してください。例えば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名である`t1`または`t2`使用する必要があります。
+`INL_JOIN()`で指定されたパラメータは、クエリプランを作成する際に内部テーブルとして使用される候補テーブルです。例えば、 `INL_JOIN(t1)`は、TiDB がクエリプランを作成する際に内部テーブルとして`t1`を使用することを検討することを意味します。候補テーブルに別名がある場合は、 `INL_JOIN()`のパラメータとしてその別名を使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用してください。例えば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`というクエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルの別名である`t1`または`t2`を使用する必要があります。
 
 > **Note:**
 >
@@ -182,7 +182,7 @@ SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 同様に、実行プランでインデックス結合が選択されている場合、準結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さい場合、実行速度が予想よりも遅くなる可能性があります。
 
-`SEMI_JOIN_REWRITE()`使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。
+`SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。
 
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
@@ -475,7 +475,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 -   [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`サポートしていません。実行プランにインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
--   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)サポートしません。
+-   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no-index-lookup-pushdown-t1-name-new-in-v855}
 
@@ -520,7 +520,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
-ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)参照してください。
+ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
 
 インデックスのリストを明示的に指定すると、TiDB はリストからインデックスを選択してインデックス マージを構築します。インデックスのリストを指定しないと、TiDB は利用可能なすべてのインデックスからインデックスを選択してインデックス マージを構築します。
 
@@ -575,7 +575,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> クエリ文に外部結合が含まれている場合、ヒントには結合順序を入れ替え可能なテーブルのみを指定できます。ヒントに結合順序を入れ替えられないテーブルが含まれている場合、ヒントは無効になります。例えば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` `t3` `t4`テーブルの結合順序を制御したい場合、 `LEADING`のヒントに`t1`指定することはできません。
+> クエリ文に外部結合が含まれている場合、ヒントには結合順序を入れ替え可能なテーブルのみを指定できます。ヒントに結合順序を入れ替えられないテーブルが含まれている場合、ヒントは無効になります。例えば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` `t3` `t4`テーブルの結合順序を制御したい場合、 `LEADING`のヒントに`t1`を指定することはできません。
 
 ### マージ（） {#merge}
 
@@ -679,7 +679,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /*+ QB_NAME(v2_1, v2) merge_join(t@v2_1) */ * FROM v2;
     ```
 
--   ビュー`v2`の 2 番目のクエリ ブロックにヒント`MERGE_JOIN()`と`STREAM_AGG()`指定します。
+-   ビュー`v2`の 2 番目のクエリ ブロックにヒント`MERGE_JOIN()`と`STREAM_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v2_2, v2.@SEL_2) merge_join(t1@v2_2) stream_agg(@v2_2) */ * FROM v2;
@@ -691,7 +691,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /*+ QB_NAME(v1_1, v2.v1@SEL_2) hash_join(t@v1_1) */ * FROM v2;
     ```
 
--   ビュー`v1`の 2 番目のクエリ ブロックにヒント`HASH_JOIN()`と`HASH_AGG()`指定します。
+-   ビュー`v1`の 2 番目のクエリ ブロックにヒント`HASH_JOIN()`と`HASH_AGG()`を指定します。
 
     ```sql
     SELECT /*+ QB_NAME(v1_2, v2.v1@SEL_2 .@SEL_2) hash_join(t1@v1_2) hash_agg(@v1_2) */ * FROM v2;
@@ -826,7 +826,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 ### NTH_PLAN(N) {#nth-plan-n}
 
-ヒント`NTH_PLAN(N)`は、物理的な最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに通知します。5 `N`正の整数である必要があります。
+ヒント`NTH_PLAN(N)`は、物理的な最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに通知します。`N`は正の整数である必要があります。
 
 指定された`N`物理最適化の検索範囲を超える場合、TiDB は警告を返し、このヒントを無視する戦略に基づいて最適な物理プランを選択します。
 
@@ -854,7 +854,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **Note:**
 >
-> TiDB v8.2.0以降、このヒントに対する権限制御が導入されました。システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このヒントを使用するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。必要な権限がない場合、このヒントは無視され、TiDBは警告を返します。クエリ実行後に`SHOW WARNINGS;`実行すると、詳細を確認できます。
+> TiDB v8.2.0以降、このヒントに対する権限制御が導入されました。システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このヒントを使用するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`権限が必要です。必要な権限がない場合、このヒントは無視され、TiDBは警告を返します。クエリ実行後に`SHOW WARNINGS;`を実行すると、詳細を確認できます。
 
 ## ヒントが効かない一般的な問題のトラブルシューティング {#troubleshoot-common-issues-that-hints-do-not-take-effect}
 
@@ -938,7 +938,7 @@ SHOW WARNINGS;
 
 場合によっては、テーブルを結合する列で組み込み関数を使用すると、オプティマイザーが`IndexJoin`プランを選択できず、 `INL_JOIN`ヒントも有効にならないことがあります。
 
-たとえば、次のクエリは、テーブルを結合する列`tname`で組み込み関数`substr`使用します。
+たとえば、次のクエリは、テーブルの結合に使われる列`tname`で組み込み関数`substr`を使用します。
 
 ```sql
 CREATE TABLE t1 (id varchar(10) primary key, tname varchar(10));
@@ -1056,7 +1056,7 @@ EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND
 
 前の例では、 `t1`と`t3`は`IndexJoin`によって直接結合されていません。
 
-`t1`と`t3`の間で直接`IndexJoin`実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例:
+`t1`と`t3`の間で直接`IndexJoin`を実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)を使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例:
 
 ```sql
 EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;

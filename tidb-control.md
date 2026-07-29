@@ -26,7 +26,7 @@ TiUPをインストールした後、 `tiup ctl:v<CLUSTER_VERSION> tidb`コマ�
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
 -   コンパイル環境要件: [Go](https://golang.org/) 1.25以降
--   コンパイル手順: [TiDB制御プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`生成します。
+-   コンパイル手順: [TiDB制御プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
 -   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、または更新する場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
 
 ## 使い方の紹介 {#usage-introduction}
@@ -59,16 +59,16 @@ TiUPをインストールした後、 `tiup ctl:v<CLUSTER_VERSION> tidb`コマ�
 
 ### ヘルプを受ける {#get-help}
 
-使用情報を取得するには`tidb-ctl -h/--help`使用します。
+使用情報を取得するには`tidb-ctl -h/--help`を使用します。
 
 TiDBコントロールは複数のコマンド層で構成されています。各コマンド／サブコマンドの後に`-h/--help`を付けると、それぞれの使用状況情報を取得できます。
 
 次の例は、スキーマ情報を取得する方法を示しています。
 
-使用方法の詳細を取得するには、 `tidb-ctl schema -h`使用します。 `schema`コマンド自体には、 `in`と`tid` 2つのサブコマンドがあります。
+使用方法の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には、 `in`と`tid` 2つのサブコマンドがあります。
 
 -   `in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
--   `tid` 、データベース全体で一意の`table_id`使用してテーブル スキーマを取得するために使用されます。
+-   `tid` 、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。
 
 ### グローバルオプション {#global-options}
 
@@ -98,7 +98,7 @@ TiDBコントロールは複数のコマンド層で構成されています。�
 tidb-ctl schema in <database name>
 ```
 
-たとえば、 `tidb-ctl schema in mysql`実行すると次の結果が返されます。
+たとえば、 `tidb-ctl schema in mysql`を実行すると次の結果が返されます。
 
 ```json
 [
@@ -118,7 +118,7 @@ tidb-ctl schema in <database name>
 
 結果はJSON形式で表示されます。（上記の出力は切り捨てられています。）
 
--   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`使用してフィルタリングします。
+-   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルタリングします。
 
     たとえば、 `tidb-ctl schema in mysql -n db` `mysql`データベース内の`db`テーブルのテーブル スキーマを返します。
 
@@ -140,7 +140,7 @@ tidb-ctl schema in <database name>
 
 #### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
-`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。4 `in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
+`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。`in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
 例えば、テーブルID `mysql.stat_meta`は`21`です。テーブルID `tidb-ctl schema tid -i 21`を使用すると、テーブルID `mysql.stat_meta`の詳細を取得できます。
 
@@ -276,7 +276,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>log</code>コマンド {#the-code-log-code-command}
 
-TiDBエラーログのスタック情報は1行形式です。1 `tidb-ctl log`指定すると、複数行形式に変更できます。
+TiDBエラーログのスタック情報は1行形式です。`tidb-ctl log`を指定すると、複数行形式に変更できます。
 
 ### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 

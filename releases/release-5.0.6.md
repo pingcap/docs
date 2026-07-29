@@ -77,7 +77,7 @@ TiDB バージョン: 5.0.6
     -   空の`dual table` を削除した後のMPPクエリの`INDEX OUT OF RANGE`エラーを修正 [＃28250](https://github.com/pingcap/tidb/issues/28250)
     -   無効な日付値を同時に挿入するときに発生する TiDB panicを修正[＃25393](https://github.com/pingcap/tidb/issues/25393)
     -   MPPモードのクエリの予期しないエラー`can not found column in Schema column`を修正 [＃30980](https://github.com/pingcap/tidb/issues/30980)
-    -   TiFlashがシャットダウンするときに TiDB がpanic可能性がある問題を修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
+    -   TiFlashがシャットダウンするときに TiDB がpanicする可能性がある問題を修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
     -   プランナーが結合順序変更を実行しているときに発生する予期しないエラー`index out of range`を修正しました [＃24095](https://github.com/pingcap/tidb/issues/24095)
     -   `ENUM`型データを制御関数のパラメータとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[＃23114](https://github.com/pingcap/tidb/issues/23114)
     -   `CONCAT(IFNULL(TIME(3))` の間違った結果を修正 [＃29498](https://github.com/pingcap/tidb/issues/29498)

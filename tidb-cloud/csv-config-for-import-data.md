@@ -7,7 +7,7 @@ summary: TiDB Cloudのインポート データ サービスで CSV 構成を使
 
 このドキュメントでは、 TiDB Cloudの Import Data サービスの CSV 構成について説明します。
 
-以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSVコンフィグレーションウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)参照してください。
+以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSVコンフィグレーションウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 
@@ -59,7 +59,7 @@ summary: TiDB Cloudのインポート データ サービスで CSV 構成を使
     -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
     -   値が`False`の場合、 `"nick name is \"` 、 `Mike\` 、 `""`の3つのフィールドとして解析されます。しかし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    標準CSVファイルの場合、記録するフィールドに二重引用符で囲まれた文字が含まれている場合は、エスケープ処理のために二重引用符を2つ使用する必要があります。この場合、二重引用符を`Backslash escape = True`使用すると解析エラーが発生しますが、 `Backslash escape = False`使用すると正しく解析されます。典型的なシナリオは、インポートされたフィールドにJSONコンテンツが含まれている場合です。標準CSVのJSONフィールドは通常、次のように保存されます。
+    標準CSVファイルの場合、記録するフィールドに二重引用符で囲まれた文字が含まれている場合は、エスケープ処理のために二重引用符を2つ使用する必要があります。この場合、`Backslash escape = True`を使用すると解析エラーが発生しますが、 `Backslash escape = False`を使用すると正しく解析されます。典型的なシナリオは、インポートされたフィールドにJSONコンテンツが含まれている場合です。標準CSVのJSONフィールドは通常、次のように保存されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 

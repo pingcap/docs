@@ -9,7 +9,7 @@ summary: TiDB データベースでの CREATE BINDING の使用。
 
 `BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
 
-バインドされたSQL文はパラメータ化され、システムテーブルに格納されます。SQLクエリが処理される際、パラメータ化されたSQL文とシステムテーブル内のバインドされたSQL文が一致し、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザヒントが利用可能です。複数の実行プランが利用可能な場合、オプティマイザは最もコストの低いプランをバインドします。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)参照してください。
+バインドされたSQL文はパラメータ化され、システムテーブルに格納されます。SQLクエリが処理される際、パラメータ化されたSQL文とシステムテーブル内のバインドされたSQL文が一致し、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザヒントが利用可能です。複数の実行プランが利用可能な場合、オプティマイザは最もコストの低いプランをバインドします。詳細については、 [バインディングを作成する](/sql-plan-management.md#create-a-binding)を参照してください。
 
 ## 概要 {#synopsis}
 
@@ -310,7 +310,7 @@ Empty set (0.002 sec)
 
 ## SQL文の切り捨て {#sql-statement-truncation}
 
-`CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`使用すると、そのダイジェストの[ステートメントサマリーテーブル](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`増やす必要があります。
+`CREATE BINDING ... FROM HISTORY USING PLAN DIGEST`を使用すると、そのダイジェストの[ステートメントサマリーテーブル](/statement-summary-tables.md)に格納されているSQL文が[`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)より長いために切り捨てられ、バインディングが失敗する可能性があります。この場合、 `tidb_stmt_summary_max_sql_length`を増やす必要があります。
 
 ## 権限 {#permissions}
 

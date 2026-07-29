@@ -40,16 +40,16 @@ tiup mirror genkey [flags]
 
 ### - 保存 {#save}
 
--   公開鍵の情報を現在のディレクトリにファイルとして保存します。ファイル名は`{hash-prefix}-public.json`です。3 `hash-prefix`鍵IDの最初の16ビットです。
+-   公開鍵の情報を現在のディレクトリにファイルとして保存します。ファイル名は`{hash-prefix}-public.json`です。`hash-prefix`は鍵IDの最初の16ビットです。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## 出力 {#outputs}
 
 -   `-p/--public`が指定されていない場合:
-    -   `-n/--name`で指定された秘密鍵が存在する場合: TiUP は`Key already exists, skipped`出力します。
-    -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP は`private key have been write to ${TIUP_HOME}/keys/{name}.json`出力します。
--   `-p/--public`指定した場合:
+    -   `-n/--name`で指定された秘密鍵が存在する場合: TiUP は`Key already exists, skipped`を出力します。
+    -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP は`private key have been write to ${TIUP_HOME}/keys/{name}.json`を出力します。
+-   `-p/--public`を指定した場合:
     -   `-n/--name`で指定された秘密鍵が存在しない場合: TiUP はエラー`Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`報告します。
     -   `-n/--name`で指定された秘密鍵が存在する場合： TiUPは対応する公開鍵の内容を出力します。
 

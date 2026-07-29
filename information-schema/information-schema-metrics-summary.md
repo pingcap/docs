@@ -39,7 +39,7 @@ DESC metrics_summary;
 フィールドの説明:
 
 -   `METRICS_NAME` : 監視テーブル名。
--   `QUANTILE` : パーセンタイル。SQL文を使用して`QUANTILE`指定することもできます。例:
+-   `QUANTILE` : パーセンタイル。SQL文を使用して`QUANTILE`を指定することもできます。例:
     -   `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
     -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
 -   `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
@@ -138,7 +138,7 @@ COMMENT      | The quantile of TiDB query durations(second)
 -   期間t1: `("2020-03-03 17:08:00", "2020-03-03 17:11:00")`
 -   期間t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
-2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。3 `TIME_RANGE`クエリ時間を指定するヒントです。
+2 つの期間の監視項目は`METRICS_NAME`に従って結合され、差異値に従ってソートされます。`TIME_RANGE`はクエリ時間を指定するヒントです。
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,

@@ -23,7 +23,7 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 
 正確な時刻を指定したい場合は、 `AS OF TIMESTAMP`句に datetime 値を設定するか、time 関数を使用します。datetime の形式は「2016-10-08 16:45:26.999」のように、最小の時間単位はミリ秒ですが、ほとんどの場合、datetime を指定するには「2016-10-08 16:45:26」のように秒単位で十分です。3 関数を使用して、現在時刻を`NOW(3)`秒単位で取得することもできます。数秒前のデータを読み取りたい場合は、 `NOW() - INTERVAL 10 SECOND`のような式を使用することを**お勧めします**。
 
-時間範囲を指定する場合は、句内で[`TIDB_BOUNDED_STALENESS()`](/functions-and-operators/tidb-functions.md#tidb_bounded_staleness)関数を使用できます。この関数を使用すると、TiDB は指定された時間範囲内で適切なタイムスタンプを選択します。「適切」とは、このタイムスタンプより前に開始され、アクセス先のレプリカにコミットされていないトランザクションがないことを意味します。つまり、TiDB はアクセス先のレプリカに対して読み取り操作を実行でき、読み取り操作がブロックされていないことを意味します。この関数を呼び出すには`TIDB_BOUNDED_STALENESS(t1, t2)`使用する必要があります。5 と`t2` `t1`範囲の両端であり、datetime 値または時間関数を使用して指定できます。
+時間範囲を指定する場合は、句内で[`TIDB_BOUNDED_STALENESS()`](/functions-and-operators/tidb-functions.md#tidb_bounded_staleness)関数を使用できます。この関数を使用すると、TiDB は指定された時間範囲内で適切なタイムスタンプを選択します。「適切」とは、このタイムスタンプより前に開始され、アクセス先のレプリカにコミットされていないトランザクションがないことを意味します。つまり、TiDB はアクセス先のレプリカに対して読み取り操作を実行でき、読み取り操作がブロックされていないことを意味します。この関数を呼び出すには`TIDB_BOUNDED_STALENESS(t1, t2)`を使用する必要があります。`t1`と`t2`は範囲の両端であり、datetime 値または時間関数を使用して指定できます。
 
 `AS OF TIMESTAMP`句の例をいくつか示します。
 
@@ -38,11 +38,11 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 >
 > ステイル読み取りを使用する場合は、TiDB ノードと PD ノードに NTP サービスを導入する必要があります。これにより、TiDB が使用する指定タイムスタンプが最新の TSO 割り当て進捗状況よりも先になる（数秒先になるなど）状況や、GC セーフポイントのタイムスタンプよりも後になる状況を回避できます。指定タイムスタンプがサービススコープを超える場合、TiDB はエラーを返します。
 >
-> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるには、TiKV `advance-ts-interval`設定項目を変更します。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)ご覧ください。
+> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるには、TiKV `advance-ts-interval`設定項目を変更します。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)をご覧ください。
 
 ## 使用例 {#usage-examples}
 
-このセクションでは、いくつかの例を用いて、 `AS OF TIMESTAMP`句の様々な使用方法を説明します。まず、リカバリ用のデータの準備方法を紹介し、次に`SELECT` 、 `START TRANSACTION READ ONLY AS OF TIMESTAMP` 、 `SET TRANSACTION READ ONLY AS OF TIMESTAMP`でそれぞれ`AS OF TIMESTAMP`使用する方法を示します。
+このセクションでは、いくつかの例を用いて、 `AS OF TIMESTAMP`句の様々な使用方法を説明します。まず、リカバリ用のデータの準備方法を紹介し、次に`SELECT` 、 `START TRANSACTION READ ONLY AS OF TIMESTAMP` 、 `SET TRANSACTION READ ONLY AS OF TIMESTAMP`でそれぞれ`AS OF TIMESTAMP`を使用する方法を示します。
 
 ### データサンプルを準備する {#prepare-data-sample}
 

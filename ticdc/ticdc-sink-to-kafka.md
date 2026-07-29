@@ -29,7 +29,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 -   `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`kafka`でシンクURIを設定する](#configure-sink-uri-for-kafka)参照してください。
 -   `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
--   `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
+-   `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## サポートされているKafkaのバージョン {#supported-kafka-versions}
 
@@ -111,7 +111,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 -   独自のKafkaトピックを作成することをお勧めします。少なくとも、トピックがKafkaブローカーに送信できる各メッセージの最大データ量と、下流のKafkaパーティションの数を設定する必要があります。チェンジフィードを作成する場合、これらの2つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
 -   まだ存在しないトピックでチェンジフィードを作成した場合、TiCDCは`partition-num`と`replication-factor`パラメータを使用してトピックを作成しようとします。これらのパラメータは明示的に指定することをお勧めします。
 -   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
--   TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーション タスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)参照してください。
+-   TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーション タスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)を参照してください。
 
 > **Note:**
 >
@@ -129,7 +129,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 -   SASL/スクラム
 
-    SCRAM-SHA-256とSCRAM-SHA-512はPLAIN方式に似ています。対応する認証方式として`sasl-mechanism`指定するだけです。
+    SCRAM-SHA-256とSCRAM-SHA-512はPLAIN方式に似ています。対応する認証方式として`sasl-mechanism`を指定するだけです。
 
 -   SASL/GSSAPI
 
@@ -147,11 +147,11 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
     ```
 
-    SASL/GSSAPI 認証方式の詳細については、 [GSSAPIの設定](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html)参照してください。
+    SASL/GSSAPI 認証方式の詳細については、 [GSSAPIの設定](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html)を参照してください。
 
 -   TLS/SSL暗号化
 
-    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`指定する必要があります。
+    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`を指定する必要があります。
 
 -   ACL認証
 
@@ -188,7 +188,7 @@ dispatchers = [
 ]
 ```
 
-詳細な統合ガイドについては、 [Confluent Cloud、Snowflake、ksqlDB、SQL Server とデータを統合](/ticdc/integrate-confluent-using-ticdc.md)参照してください。
+詳細な統合ガイドについては、 [Confluent Cloud、Snowflake、ksqlDB、SQL Server とデータを統合](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
 ### TiCDC を AWS Glue スキーマレジストリと統合する {#integrate-ticdc-with-aws-glue-schema-registry}
 
@@ -277,7 +277,7 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"` `index-value`ディスパッチャ`columns`指定するために使用できます。3、5、7、9、11 `default` 5つ`ts`ディスパッチャをサポートします。ディスパッチャのルールは以下のとおり`table` 。
+`partition = "xxx"`を使用してパーティションディスパッチャを指定できます。`default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`の5つのディスパッチャをサポートします。ディスパッチャのルールは以下のとおりです。
 
 -   `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
 -   `index-value` : 主キー、一意インデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
@@ -307,7 +307,7 @@ dispatchers = [
 
 > **Note:**
 >
-> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。5 `partition` `dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
+> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。`partition`は`dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
 >
 >     [sink]
 >     dispatchers = [
@@ -385,7 +385,7 @@ SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="databa
 
 Kafkaトピックは、受信できるメッセージのサイズに制限を設定します。この制限はパラメータ[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)によって制御されます。TiCDC Kafkaシンクがこの制限を超えるデータを送信した場合、チェンジフィードはエラーを報告し、データのレプリケーションを続行できません。この問題を解決するために、TiCDCは新しい設定`large-message-handle-option`を追加し、以下のソリューションを提供します。
 
-現在、この機能はCanal-JSONとOpen Protocolの2つのエンコーディングプロトコルをサポートしています。Canal-JSONプロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`指定する必要があります。
+現在、この機能はCanal-JSONとOpen Protocolの2つのエンコーディングプロトコルをサポートしています。Canal-JSONプロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`を指定する必要があります。
 
 ### TiCDCデータ圧縮 {#ticdc-data-compression}
 
@@ -465,7 +465,7 @@ large-message-handle-option = "claim-check"
 }
 ```
 
-Kafkaコンシューマーはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、値が`true`場合、メッセージには完全なデータのハンドルキーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流のTiDBにクエリを実行し、 [履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)使用する必要があります。
+Kafkaコンシューマーはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、値が`true`の場合、メッセージには完全なデータのハンドルキーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流のTiDBにクエリを実行し、 [履歴データを読み取るための`tidb_snapshot`](/read-historical-data.md)を使用する必要があります。
 
 > **Warning:**
 >
@@ -491,7 +491,7 @@ claim-check-storage-uri = "s3://claim-check-bucket"
 
 > **ヒント**
 >
-> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 TiCDCは外部ストレージサービス上のメッセージをクリーンアップしません。データ利用者は外部ストレージサービスを独自に管理する必要があります。
 

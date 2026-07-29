@@ -21,7 +21,7 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 **原因 2** : テーブル スキーマが複雑すぎます。
 
-インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`使用して再度追加することができます。
+インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`を使用して再度追加することができます。
 
 **原因 3** : 各ファイルが大きすぎます。
 
@@ -44,7 +44,7 @@ strict-format = true
 
     [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 
-コマンドラインで直接`nohup`使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
+コマンドラインで直接`nohup`を使用して`tidb-lightning`起動することは推奨されません。スクリプトを実行することで[`tidb-lightning`を起動する](/get-started-with-tidb-lightning.md#step-4-start-tidb-lightning)起動できます。
 
 また、 TiDB Lightningの最後のログに「Context cancellation」というエラーが表示されている場合は、最初の「ERROR」レベルのログを探す必要があります。この「ERROR」レベルのログには通常、「got signal to exit」が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
 
@@ -70,7 +70,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ### `checksum failed: checksum mismatched remote vs local` {#checksum-failed-checksum-mismatched-remote-vs-local}
 
-**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。2 `checksum mismatched`含むログを確認することで、原因をさらに特定できます。
+**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`を含むログを確認することで、原因をさらに特定できます。
 
 `checksum mismatched`を含む行は情報`total_kvs: x vs y`提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
 
@@ -84,7 +84,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 **ソリューション**：
 
-1.  `tidb-lightning-ctl`使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
+1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
@@ -108,7 +108,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
 ```
 
-その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)参照してください。
+その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)を参照してください。
 
 ### `cannot guess encoding for input file, please convert to UTF-8 manually` {#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually}
 
@@ -139,7 +139,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  クラスター全体で同じ最新バージョン`tzdata` (バージョン 2018i 以上) が使用されていることを確認します。
 
-    CentOS では、 `yum info tzdata`実行してインストールされているバージョンとアップデートの有無を確認します。3 `yum upgrade tzdata`実行してパッケージをアップグレードします。
+    CentOS では、 `yum info tzdata`を実行してインストールされているバージョンとアップデートの有無を確認します。`yum upgrade tzdata`を実行してパッケージをアップグレードします。
 
 ### `[Error 8025: entry too large, the max entry size is 6291456]` {#error-8025-entry-too-large-the-max-entry-size-is-6291456}
 
@@ -174,11 +174,11 @@ TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB ク�
 
 ### `Unknown character set` {#unknown-character-set}
 
-TiDBはMySQLのすべての文字セットをサポートしていません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)使用して下流で事前にテーブルスキーマを作成してください。
+TiDBはMySQLのすべての文字セットをサポートしているわけではありません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)を使用して下流で事前にテーブルスキーマを作成してください。
 
 ### `invalid compression type ...` {#invalid-compression-type}
 
--   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスク`zstd`エラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)参照してください。
+-   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 
 > **Note:**
 >

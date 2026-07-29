@@ -7,7 +7,7 @@ summary: TiDB Lightningで使用される特殊用語のリスト。
 
 このページでは、TiDB Lightning のログ、監視、構成、ドキュメントで使用される特殊な用語について説明します。
 
-TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参照してください。
+TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
 <!-- A -->
 
@@ -33,7 +33,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 バックエンドとは、TiDB Lightningが解析結果を送信する宛先です。「backend」とも表記されます。
 
-詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)参照。
+詳細は[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)を参照。
 
 <!-- C -->
 
@@ -41,7 +41,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### チェックポイント {#checkpoint}
 
-TiDB Lightningは、インポート中に進行状況をローカルファイルまたはリモートデータベースに継続的に保存します。これにより、インポート中にクラッシュした場合でも、中間状態から再開できます。詳細はセクション[チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)ご覧ください。
+TiDB Lightningは、インポート中に進行状況をローカルファイルまたはリモートデータベースに継続的に保存します。これにより、インポート中にクラッシュした場合でも、中間状態から再開できます。詳細はセクション[チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)をご覧ください。
 
 ### チェックサム {#checksum}
 
@@ -69,7 +69,7 @@ TiDB Lightning [インポートされたデータを検証する](/tidb-lightnin
 >
 > レガシーシステムへの対応のため、 TiDB Lightning、テーブルのインポートごとに明示的にコンパクションを実行するように設定できます。ただし、これは推奨されず、対応する設定はデフォルトで無効になっています。
 
-技術的な詳細については[RocksDBの圧縮に関するWikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)参照してください。
+技術的な詳細については[RocksDBの圧縮に関するWikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)を参照してください。
 
 <!-- D -->
 
@@ -115,7 +115,7 @@ TiDB Lightningは、エンジンを介してTiKV Importerにデータを転送�
 
 読み取り速度とスペース使用量を犠牲にして、書き込み用に TiKV を最適化する構成。
 
-TiDB Lightningは実行中に自動的にインポートモードを切り替えます。ただし、TiKVがインポートモードで停止した場合は、 `tidb-lightning-ctl` ～ [強制的に元に戻す](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [通常モード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)使用してください。
+TiDB Lightningは実行中に自動的にインポートモードを切り替えます。ただし、TiKVがインポートモードで停止した場合は、 `tidb-lightning-ctl` ～ [強制的に元に戻す](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [通常モード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用してください。
 
 ### インデックスエンジン {#index-engine}
 
@@ -131,7 +131,7 @@ TiDB Lightningは複数のインデックスエンジンを同時に処理しま
 
 取り込みは、KVペアを1つずつ挿入する操作に比べて非常に高速です。この操作がTiDB Lightningのパフォーマンスを決定づける要因です。
 
-技術的な詳細については[RocksDB の SST ファイルの作成と取り込みに関する wiki ページ](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files)参照してください。
+技術的な詳細については[RocksDB の SST ファイルの作成と取り込みに関する wiki ページ](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files)を参照してください。
 
 <!-- K -->
 

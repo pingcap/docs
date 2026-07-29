@@ -137,7 +137,7 @@ TiDB バージョン: 8.2.0
 
 -   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポート パフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
--   BR v8.2.0 より前は、TiCDC レプリケーション タスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーション タスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
+-   BR v8.2.0 より前は、TiCDC レプリケーション タスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーション タスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
 
 ### MySQLとの互換性 {#mysql-compatibility}
 

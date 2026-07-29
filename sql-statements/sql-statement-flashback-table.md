@@ -5,7 +5,7 @@ summary: FLASHBACK TABLE` ステートメントを使用してテーブルを回
 
 # FLASHBACK TABLE {#flashback-table}
 
-`FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。ステートメント`FLASHBACK TABLE`使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
+`FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。ステートメント`FLASHBACK TABLE`を使用すると、ガベージコレクション (GC) の有効期間中に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 
 システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト: `10m0s` ）は、以前のバージョンの行の保持期間を定義します。ガベージコレクションが実行された現在の`safePoint`間は、次のクエリで取得できます。
 
@@ -69,7 +69,7 @@ FlashbackToNewName ::=
 `FLASHBACK TABLE t TO t1`の作業工程は以下のとおりです。
 
 1.  TiDBは最近のDDL履歴ジョブを検索し、テーブル`t`で最初のDDL操作（タイプ`DROP TABLE`またはタイプ`truncate table`を見つけます。TiDBが見つけられなかった場合は、エラーが返されます。
-2.  TiDBは、DDLジョブの開始時刻が`tikv_gc_safe_point`より前かどうかを確認します。3 `tikv_gc_safe_point`前の場合、 `DROP`または`TRUNCATE`操作で削除されたテーブルがGCによってクリーンアップされたことを意味し、エラーが返されます。
+2.  TiDBは、DDLジョブの開始時刻が`tikv_gc_safe_point`より前かどうかを確認します。`tikv_gc_safe_point`より前の場合、 `DROP`または`TRUNCATE`操作で削除されたテーブルがGCによってクリーンアップされたことを意味し、エラーが返されます。
 3.  TiDB は、DDL ジョブの開始時刻をスナップショットとして使用して、履歴データを読み取り、テーブル メタデータを読み取ります。
 4.  TiDB は`mysql.gc_delete_range`のテーブル`t`に関連する GC タスクを削除します。
 5.  TiDBはテーブルのメタデータの`name` `t1`に変更し、このメタデータを使用して新しいテーブルを作成します。テーブル名のみが変更され、テーブルIDは変更されないことに注意してください。テーブルIDは、以前に削除されたテーブル`t`と同じです。

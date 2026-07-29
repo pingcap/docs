@@ -5,7 +5,7 @@ summary: Chat2Query セッション関連 API を使用して、マルチラウ�
 
 # マルチラウンドChat2Queryを開始する {#start-multi-round-chat2query}
 
-Chat2Query API v3以降では、セッション関連のエンドポイントを呼び出すことで、複数ラウンドのチャットを開始できます`/v3/chat2data`エンドポイントから返される`session_id`使用して、次のラウンドで会話を続行できます。
+Chat2Query API v3以降では、セッション関連のエンドポイントを呼び出すことで、複数ラウンドのチャットを開始できます`/v3/chat2data`エンドポイントから返される`session_id`を使用して、次のラウンドで会話を続行できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -23,7 +23,7 @@ Chat2Query API v3以降では、セッション関連のエンドポイントを
 
 > **Tip:**
 >
-> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)参照してください。
+> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
@@ -63,7 +63,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 ## ステップ2. セッションでChat2Dataエンドポイントを呼び出す {#step-2-call-chat2data-endpoints-with-the-session}
 
-セッションを開始した後、 `/v3/sessions/{session_id}/chat2data`電話して次のラウンドで会話を続けることができます。
+セッションを開始した後、 `/v3/sessions/{session_id}/chat2data`を呼び出して次のラウンドで会話を続けることができます。
 
 以下は一般的なコード例です。
 
@@ -83,7 +83,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 -   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
 -   `feedback_answer_id` ：*文字列*。フィードバック回答ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
 -   `feedback_task_id` ：*文字列*。フィードバックタスクID。このフィールドはオプションであり、フィードバックにのみ使用されます。
--   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。8 `direct`設定すると、APIは指定された`question` SQL文に基づいて直接SQL文を生成します。12 に設定すると、APIは`auto_breakdown` `question` SQL文を複数のタスクに分割し、各タスクごとにSQL文を生成します。
+-   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question`に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question`を複数のタスクに分割し、各タスクごとにSQL文を生成します。
 
 応答の例は次のとおりです。
 
@@ -98,4 +98,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }
 ```
 
-レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`呼び出すことでジョブのステータスを確認できます。詳細については、エンド[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)参照してください。
+レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`を呼び出すことでジョブのステータスを確認できます。詳細については、[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)を参照してください。

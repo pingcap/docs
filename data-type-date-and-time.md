@@ -5,7 +5,7 @@ summary: サポートされている日付と時刻の種類について説明�
 
 # 日付と時刻の型 {#date-and-time-types}
 
-TiDBは、時間値を格納するためにMySQLのすべての日付と時刻データ型（ [`DATE`](#date-type) 、 [`TIME`](#time-type) 、 [`DATETIME`](#datetime-type) 、 [`TIMESTAMP`](#timestamp-type) 、 [`YEAR`](#year-type)をサポートしています。詳細については、 [MySQLの日付と時刻のデータ型](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)参照してください。
+TiDBは、時間値を格納するためにMySQLのすべての日付と時刻データ型（ [`DATE`](#date-type) 、 [`TIME`](#time-type) 、 [`DATETIME`](#datetime-type) 、 [`TIMESTAMP`](#timestamp-type) 、 [`YEAR`](#year-type)をサポートしています。詳細については、 [MySQLの日付と時刻のデータ型](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-types.html)を参照してください。
 
 これらのタイプにはそれぞれ有効な値の範囲があり、無効な値を示すためにゼロ値が使用されます。さらに、タイプ`TIMESTAMP`とタイプ`DATETIME`では、変更時に新しい時刻値が自動的に生成されます。
 
@@ -93,7 +93,7 @@ DATE
 
 ### <code>TIME</code>型 {#code-time-code-type}
 
-`TIME`型の場合、フォーマットは`HH:MM:SS[.fraction]`で、有効な値の範囲は &#39;-838:59:59.000000&#39; から &#39;838:59:59.000000&#39; です。5 `TIME` 、1 日の時刻だけでなく、2 つのイベント間の時間間隔も示します。オプションで 0 から 6 の範囲の`fsp`値を指定し、小数秒の精度を指定できます。省略した場合、デフォルトの精度は 0 です。
+`TIME`型の場合、フォーマットは`HH:MM:SS[.fraction]`で、有効な値の範囲は &#39;-838:59:59.000000&#39; から &#39;838:59:59.000000&#39; です。`TIME`は、1 日の時刻だけでなく、2 つのイベント間の時間間隔も示します。オプションで 0 から 6 の範囲の`fsp`値を指定し、小数秒の精度を指定できます。省略した場合、デフォルトの精度は 0 です。
 
 ```sql
 TIME[(fsp)]
@@ -125,11 +125,11 @@ TIMESTAMP[(fsp)]
 
 #### タイムゾーンの処理 {#timezone-handling}
 
-`TIMESTAMP`保存する場合、TiDB は`TIMESTAMP`値を現在のタイムゾーンから UTC タイムゾーンに変換します。5 `TIMESTAMP`取得する場合、TiDB は保存されている`TIMESTAMP`値を UTC タイムゾーンから現在のタイムゾーンに変換します（注: `DATETIME`この方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンですが、環境変数`time_zone`で変更できます。
+`TIMESTAMP`を保存する場合、TiDB は`TIMESTAMP`値を現在のタイムゾーンから UTC タイムゾーンに変換します。`TIMESTAMP`を取得する場合、TiDB は保存されている`TIMESTAMP`値を UTC タイムゾーンから現在のタイムゾーンに変換します（注: `DATETIME`はこの方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンですが、環境変数`time_zone`で変更できます。
 
 > **Warning:**
 >
-> MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
+> MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
 
 ### <code>YEAR</code>型 {#code-year-code-type}
 
@@ -177,7 +177,7 @@ CREATE TABLE t1 (
 
 `DATETIME`と`TIMESTAMP`値は、マイクロ秒単位の精度で最大 6 桁の小数部を持つことができます`DATETIME`型または`TIMESTAMP`型の列では、小数部は破棄されずに保存されます。小数部がある場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で表され、小数部の範囲は 000000 から 999999 です。小数部と残りの部分を区切るために小数点を使用する必要があります。
 
--   小数精度をサポートする列を定義するには`type_name(fsp)`使用します。3 `type_name` `TIME` 、 `DATETIME`または`TIMESTAMP`になります。例えば、
+-   小数精度をサポートする列を定義するには`type_name(fsp)`を使用します。`type_name`は`TIME` 、 `DATETIME`または`TIMESTAMP`になります。例えば、
 
     ```sql
     CREATE TABLE t1 (t TIME(3), dt DATETIME(6));
@@ -185,7 +185,7 @@ CREATE TABLE t1 (
 
     `fsp` 0 から 6 までの範囲でなければなりません。
 
-    `0`小数部がないことを意味します。2 `fsp`省略した場合、デフォルトは0です。
+    `0`は小数部がないことを意味します。`fsp`を省略した場合、デフォルトは0です。
 
 -   小数部を含む`TIME` 、 `DATETIME` 、または`TIMESTAMP`挿入する場合、小数部の桁数が少なすぎる、または多すぎる場合は、四捨五入が必要になることがあります。例：
 

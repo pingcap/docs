@@ -7,7 +7,7 @@ summary: TiDB Lightningの物理インポート モードについて学習し�
 
 物理インポートモードは、SQLインターフェースを経由せずに、TiKVノードにキーと値のペアとして直接データを挿入する、効率的で高速なインポートモードです。物理インポートモードを使用する場合、Lightningインスタンス1つで最大10TiBのデータをインポートできます。Lightningインスタンスの数が増えるにつれて、サポートされるインポートデータ量は理論上増加します。ユーザーによる検証では、Lightningインスタンスの[並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)で最大50TiBのデータを効率的に処理できることが示されています。
 
-物理インポート モードを使用する前に、必ず[要件と制限](#requirements-and-restrictions)お読みください。
+物理インポート モードを使用する前に、必ず[要件と制限](#requirements-and-restrictions)をお読みください。
 
 物理インポートモードのバックエンドは`local`です。 `tidb-lightning.toml`で変更できます。
 
@@ -89,10 +89,10 @@ CentOS 7の新規インスタンスの使用をお勧めします。仮想マシ
 
     -   v5.4.0 より前のTiDB Lightningでは、 `charset=GBK`のテーブルをインポートできません。
 
--   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)参照してください。
+-   TiDB Lightning をTiCDC と併用する場合の考慮事項については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
 
 -   BRでTiDB Lightning を使用する場合は、次の点に注意してください。
 
     -   BR がTiDB Lightningによってインポートされているテーブルのスナップショットをバックアップすると、それらのテーブルのバックアップ データが不整合になる可能性があります。
     -   BR がAWS EBS ボリュームスナップショットを使用してデータをバックアップすると、 TiDB Lightning はデータのインポートに失敗する可能性があります。
-    -   TiDB Lightning物理インポート モードでインポートされたデータは[ログバックアップ](/br/br-pitr-guide.md#start-log-backup)サポートしていないため、Point-in-Time Recovery (PITR) では復元できません。
+    -   TiDB Lightning物理インポート モードでインポートされたデータは[ログバックアップ](/br/br-pitr-guide.md#start-log-backup)をサポートしていないため、Point-in-Time Recovery (PITR) では復元できません。

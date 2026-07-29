@@ -27,7 +27,7 @@ TiDB バージョン: 5.4.0
 
 > **Note:**
 >
-> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、中間バージョンの互換性変更点を確認したい場合は、該当バージョンの[リリースノート](/releases/_index.md)参照してください。
+> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、中間バージョンの互換性変更点を確認したい場合は、該当バージョンの[リリースノート](/releases/_index.md)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -85,7 +85,7 @@ TiDB バージョン: 5.4.0
 
     中国語ユーザーをより適切にサポートするため、TiDB はバージョン 5.4.0 以降、GBK 文字セットをサポートしています。TiDB クラスタを初めて初期化する際に、TiDB 設定ファイルで[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)オプションを有効にすると、TiDB GBK 文字セットは`gbk_bin`と`gbk_chinese_ci`の照合順序をサポートします。
 
-    GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、[文字セットと照合 - GBK](/character-set-gbk.md)参照してください。
+    GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、[文字セットと照合 - GBK](/character-set-gbk.md)を参照してください。
 
 ### セキュリティ {#security}
 
@@ -379,7 +379,7 @@ TiDB バージョン: 5.4.0
 
 -   TiFlash
 
-    -   MPPクエリが停止した際にTiFlashがpanic可能性がある問題を修正しました。
+    -   MPPクエリが停止した際にTiFlashがpanicする可能性がある問題を修正しました。
     -   `where <string>`句を含むクエリが誤った結果を返す問題を修正しました。
     -   整数型の主キーの列型をより広い範囲に設定した場合に発生する可能性のあるデータ不整合の問題を修正します。
     -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合に`unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正します。
@@ -394,7 +394,7 @@ TiDB バージョン: 5.4.0
     -   Backup & Restore (BR)
 
         -   リストア操作完了後にリージョン分布が不均一になる可能性がある問題を修正 [#30425](https://github.com/pingcap/tidb/issues/30425)
-        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
+        -   `'/'`バックアップストレージとして使用している場合、エンドポイントで`minio`を指定できない問題を修正しました [#30104](https://github.com/pingcap/tidb/issues/30104)
         -   システムテーブルの同時バックアップによってテーブル名の更新が失敗し、システムテーブルを復元できない問題を修正しました [#29710](https://github.com/pingcap/tidb/issues/29710)
 
     -   TiCDC

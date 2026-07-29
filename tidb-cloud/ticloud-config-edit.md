@@ -15,7 +15,7 @@ Windows を使用している場合は、上記のコマンドを実行すると
 
 > **Note:**
 >
-> フォーマットエラーや実行エラーを避けるため、設定ファイルを手動で編集することは推奨されません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)使用して設定を変更できます。
+> フォーマットエラーや実行エラーを避けるため、設定ファイルを手動で編集することは推奨されません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)を使用して設定を変更できます。
 
 ## 例 {#examples}
 
@@ -41,4 +41,4 @@ ticloud config edit
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

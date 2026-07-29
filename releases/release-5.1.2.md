@@ -79,7 +79,7 @@ TiDB バージョン: 5.1.2
     -   TiDBが`pd is timeout`エラーを返すべきところ`unknow`エラーを返す問題を修正しました[＃26147](https://github.com/pingcap/tidb/issues/26147)
     -   `case when`式の間違った文字セットと照合順序を修正します [＃26662](https://github.com/pingcap/tidb/issues/26662)
     -   MPPクエリの潜在的なエラー`can not found column in Schema column`を修正 [＃28148](https://github.com/pingcap/tidb/pull/28148)
-    -   TiFlashがシャットダウンするときに TiDB がpanic可能性があるバグを修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
+    -   TiFlashがシャットダウンするときに TiDB がpanicする可能性があるバグを修正[＃28096](https://github.com/pingcap/tidb/issues/28096)
     -   `enum like 'x%'` 使用により範囲が間違っていた問題を修正 [＃27130](https://github.com/pingcap/tidb/issues/27130)
     -   IndexLookupJoin で使用する場合の共通テーブル式 (CTE) デッドロックの問題を修正しました [＃27410](https://github.com/pingcap/tidb/issues/27410)
     -   再試行可能なデッドロックが`INFORMATION_SCHEMA.DEADLOCKS`テーブルに誤って記録されるバグを修正 [＃27400](https://github.com/pingcap/tidb/issues/27400)
@@ -110,8 +110,8 @@ TiDB バージョン: 5.1.2
 -   PD
 
     -   PDがダウンしたピアを時間内に修復しない問題を修正[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   `replication.max-replicas`更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
-    -   TiKV をスケールアウトするときに PD がpanic可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
+    -   `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[＃3886](https://github.com/tikv/pd/issues/3886)
+    -   TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [＃3868](https://github.com/tikv/pd/issues/3868)
     -   クラスターにエビクトリーダースケジューラがある場合にホットリージョンスケジューラが動作しないバグを修正しました [＃3697](https://github.com/tikv/pd/issues/3697)
 
 -   TiFlash

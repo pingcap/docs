@@ -11,7 +11,7 @@ summary: データ複製タスクのステータスを照会する方法を学�
 
 `query-status`以下の手順で使用することをお勧めします。
 
-1.  `query-status`使用して、進行中の各タスクが正常な状態であるかどうかを確認します。
+1.  `query-status`を使用して、進行中の各タスクが正常な状態であるかどうかを確認します。
 2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を表示します。このコマンドの`<taskName>` 、エラーが発生したタスクの名前を示します。
 
 成功したクエリ結果は次のとおりです。
@@ -230,7 +230,7 @@ DM移行タスクのステータスは、DMワーカーに割り当てられた�
         -   `stage` : サブタスクのステータス。「sources」の「subTaskStatus」の「stage」のステータスの説明とステータスの切り替え関係については、 [サブタスクのステータス](#subtask-status)参照してください。
         -   `unit` : 「チェック」、「ダンプ」、「ロード」、「同期」を含む DM の処理単位。
         -   `result` : サブタスクが失敗した場合にエラー情報を表示します。
-        -   `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。「sources」の「subTaskStatus」の「unresolvedDDLLockID」の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)参照してください。
+        -   `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。「sources」の「subTaskStatus」の「unresolvedDDLLockID」の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
         -   `sync` ： `Sync`処理ユニットの複製情報。この情報は、現在の処理ユニットと同じコンポーネントに関するものです。
             -   `masterBinlog` : アップストリーム データベース内のbinlog の位置。
             -   `masterBinlogGtid` : アップストリーム データベース内の GTID 情報。
@@ -276,14 +276,14 @@ DM移行タスクのステータスは、DMワーカーに割り当てられた�
 
     -   一時停止状態。
     -   サブタスクでエラーが発生した場合は、 `Paused`に切り替えられます。
-    -   サブタスクが`Running`状態のときに`pause-task`実行すると、タスクは`Paused`に切り替わります。
+    -   サブタスクが`Running`状態のときに`pause-task`を実行すると、タスクは`Paused`に切り替わります。
     -   サブタスクがこの状態にある場合、 `resume-task`コマンドを実行してタスクを再開できます。
 
 -   `Stopped` :
 
     -   停止状態。
-    -   サブタスクが`Running`または`Paused`状態のときに`stop-task`実行すると、タスクは`Stopped`に切り替わります。
-    -   サブタスクがこの状態にある場合、 `resume-task`使用してタスクを再開することはできません。
+    -   サブタスクが`Running`または`Paused`状態のときに`stop-task`を実行すると、タスクは`Stopped`に切り替わります。
+    -   サブタスクがこの状態にある場合、 `resume-task`を使用してタスクを再開することはできません。
 
 -   `Finished` :
 

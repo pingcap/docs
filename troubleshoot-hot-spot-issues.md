@@ -41,13 +41,13 @@ TiDBは各テーブルにTableID、各インデックスにIndexID、各行にRo
 
 ### テーブルホットスポット {#table-hotspots}
 
-TiDBのコーディングルールによれば、同一テーブルのデータはTableIDの先頭で始まる範囲に収められ、RowID値の順序で並べられます。テーブルへの挿入時にRowID値が増加する場合、挿入された行は末尾にのみ追加されます。Regionは一定のサイズに達すると分割されますが、その後も範囲の末尾にのみ追加できます。1 `INSERT`操作は1つのリージョンに対してのみ実行でき、ホットスポットを形成します。
+TiDBのコーディングルールによれば、同一テーブルのデータはTableIDの先頭で始まる範囲に収められ、RowID値の順序で並べられます。テーブルへの挿入時にRowID値が増加する場合、挿入された行は末尾にのみ追加されます。Regionは一定のサイズに達すると分割されますが、その後も範囲の末尾にのみ追加できます。`INSERT`操作は1つのリージョンに対してのみ実行でき、ホットスポットを形成します。
 
 一般的なAUTO_INCREMENT主キーは、順次増加します。主キーが整数型の場合、デフォルトで主キーの値がRowIDとして使用されます。この場合、RowIDは順次増加し、 `INSERT`操作が多数発生すると、テーブルの書き込みホットスポットが発生します。
 
 一方、TiDBのRowIDもデフォルトでAUTO_INCREMENTされます。主キーが整数型でない場合は、書き込みホットスポットの問題が発生する可能性があります。
 
-さらに、データ書き込み（新規作成されたテーブルまたはパーティション）またはデータ読み取り（読み取り専用シナリオにおける定期的な読み取りホットスポット）のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細については、 [テーブル属性を使用してリージョン結合の動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)参照してください。
+さらに、データ書き込み（新規作成されたテーブルまたはパーティション）またはデータ読み取り（読み取り専用シナリオにおける定期的な読み取りホットスポット）のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細については、 [テーブル属性を使用してリージョン結合の動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)を参照してください。
 
 ### インデックスホットスポット {#index-hotspots}
 
@@ -81,9 +81,9 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 ## <code>SHARD_ROW_ID_BITS</code>を使用してホットスポットを処理する {#use-code-shard-row-id-bits-code-to-process-hotspots}
 
-非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。1 `INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
+非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。`INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
+[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
 
     SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
     SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
@@ -98,9 +98,9 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 `SHARD_ROW_ID_BITS`の値は動的に変更できます。変更された値は、新しく書き込まれたデータにのみ適用されます。
 
-`CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。5 `NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS` `CLUSTERED`が使用できます。9型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+`CLUSTERED`型の主キーを持つテーブルの場合、TiDBはテーブルの主キーをRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`オプションはRowIDの生成ルールを変更するため使用できません。`NONCLUSTERED`の主キーを持つテーブルの場合、TiDBは自動的に割り当てられた64ビット整数をRowIDとして使用します。この場合、 `SHARD_ROW_ID_BITS`機能が使用できます。`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
+以下の2つの負荷図は、主キーを持たない2つのテーブルで`SHARD_ROW_ID_BITS`を使用してホットスポットを分散させた場合を示しています。最初の図はホットスポットを分散させる前の状況を示し、2番目の図はホットスポットを分散させた後の状況を示しています。
 
 ![Dashboard Example 5](/media/troubleshoot-hot-spot-issues-5.png)
 
@@ -110,11 +110,11 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 ## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-code-auto-random-code}
 
-AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
+AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
 
 この機能を有効にすると、TiDB は書き込みホットスポットを分散させる目的を達成するために、ランダムに分散され、重複のない (スペースが使い果たされる前に) 主キーを生成します。
 
-TiDB によって生成される主キーはAUTO_INCREMENT主キーではなくなり、 `LAST_INSERT_ID()`使用して前回割り当てられた主キー値を取得できることに注意してください。
+TiDB によって生成される主キーはAUTO_INCREMENT主キーではなくなり、 `LAST_INSERT_ID()`を使用して前回割り当てられた主キー値を取得できることに注意してください。
 
 この機能を使用するには、 `CREATE TABLE`ステートメントの`AUTO_INCREMENT`を`AUTO_RANDOM`に変更してください。この機能は、主キーの一意性のみを保証する必要がある非アプリケーションシナリオに適しています。
 
@@ -146,21 +146,21 @@ SELECT LAST_INSERT_ID();
 +------------------+
 ```
 
-以下の2つの負荷図は、 `AUTO_INCREMENT` ～ `AUTO_RANDOM`を変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`使用し、2番目の図では`AUTO_RANDOM`使用しています。
+以下の2つの負荷図は、 `AUTO_INCREMENT`を`AUTO_RANDOM`に変更してホットスポットを分散させる前と後の状況を示しています。最初の図では`AUTO_INCREMENT`を使用し、2番目の図では`AUTO_RANDOM`を使用しています。
 
 ![Dashboard Example 7](/media/troubleshoot-hot-spot-issues-7.png)
 
 ![Dashboard Example 8](/media/troubleshoot-hot-spot-issues-8.png)
 
-上記の負荷図に示されているように、 `AUTO_INCREMENT`代わりに`AUTO_RANDOM`使用すると、ホットスポットを適切に分散できます。
+上記の負荷図に示されているように、 `AUTO_INCREMENT`の代わりに`AUTO_RANDOM`を使用すると、ホットスポットを適切に分散できます。
 
-詳細については[AUTO_RANDOM](/auto-random.md)参照してください。
+詳細については[AUTO_RANDOM](/auto-random.md)を参照してください。
 
 ## 小さなテーブルホットスポットの最適化 {#optimization-of-small-table-hotspots}
 
 TiDBのコプロセッサーキャッシュ機能は、計算結果のキャッシュのプッシュダウンをサポートします。この機能を有効にすると、TiDBはTiKVにプッシュダウンされる計算結果をキャッシュします。この機能は、小さなテーブルの読み取りホットスポットに適しています。
 
-詳細については[コプロセッサーキャッシュ](/coprocessor-cache.md)参照してください。
+詳細については[コプロセッサーキャッシュ](/coprocessor-cache.md)を参照してください。
 
 **参照:**
 

@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 > -   `SPATIAL`関数、データ型、インデックス
 > -   `XA`構文
 >
-> 上記のサポートされていない機能は想定される動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)参照してください。
+> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
 
 このドキュメントに記載されている非互換性の問題は、いくつかの[TiDBでサポートされているサードパーティツール](/develop/dev-guide-third-party-tools-compatibility.md)に見られます。
 
@@ -54,7 +54,7 @@ TiDBのエラーメッセージは`TIMESTAMP`と`DATETIME`を区別しますが�
 
 **回避方法**
 
-文字列の照合にはエラーメッセージを使用しないでください。代わりに、トラブルシューティングには[エラーコード](/error-codes.md)使用してください。
+文字列の照合にはエラーメッセージを使用しないでください。代わりに、トラブルシューティングには[エラーコード](/error-codes.md)を使用してください。
 
 ### TiDBは<code>CHECK TABLE</code>文をサポートしていません {#tidb-does-not-support-the-code-check-table-code-statement}
 
@@ -96,7 +96,7 @@ TiDBでは、 `\`番目の文字をエスケープせずに`NO_BACKSLASH_ESCAPES
 
 **回避方法**
 
-TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL ステートメントでは`\\`使用してください。
+TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL ステートメントでは`\\`を使用してください。
 
 ### <code>INDEX_USED</code>関連のパラメータはサポートされていません {#the-code-index-used-code-related-parameters-are-not-supported}
 
@@ -143,7 +143,7 @@ MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、�
 
 > **Note:**
 >
-> `useConfigs=maxPerformance`は一連の設定が含まれています。MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な設定については、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)および[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)参照してください。 `maxPerformance`使用する場合は`useLocalTransactionState`無効にする必要があります。つまり、 `useConfigs=maxPerformance&useLocalTransactionState=false`使用してください。
+> `useConfigs=maxPerformance`は一連の設定が含まれています。MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な設定については、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)および[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。 `maxPerformance`を使用する場合は`useLocalTransactionState`を無効にする必要があります。つまり、 `useConfigs=maxPerformance&useLocalTransactionState=false`を使用してください。
 
 このバグはMySQL Connector/J 8.0.33で修正されました。8.0.xシリーズのアップデートは終了しているため、安定性とパフォーマンスを向上させるためにMySQL Connector/Jを[最新の一般提供（GA）バージョン](https://dev.mysql.com/downloads/connector/j/)にアップグレードすることを強くお勧めします。
 

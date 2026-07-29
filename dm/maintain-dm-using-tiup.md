@@ -77,7 +77,7 @@ tiup dm list
 tiup dm start prod-cluster
 ```
 
-クラスターの名前を忘れた場合は、 `tiup dm list`実行してクラスター リストを表示します。
+クラスターの名前を忘れた場合は、 `tiup dm list`を実行してクラスター リストを表示します。
 
 ## クラスターのステータスを確認する {#check-the-cluster-status}
 
@@ -101,7 +101,7 @@ tiup dm display prod-cluster
     172.19.0.101:3000  grafana       172.19.0.101  3000       linux/x86_64  Up         -                                  /home/tidb/deploy/grafana-3000
     172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
 
-`Status`列では、 `Up`または`Down`使用して、サービスが正常に実行されているかどうかを示します。
+`Status`列では、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
 DMマスターコンポーネントの場合、ステータスに`|L`が付加され、DMマスターノードがLeaderであることを示します。DMワーカーコンポーネントの場合、 `Free`現在のDMワーカーノードがアップストリームにバインドされていないことを示します。
 
@@ -112,7 +112,7 @@ DMマスターコンポーネントの場合、ステータスに`|L`が付加�
 クラスターをスケールインすると、DM マスター コンポーネントと DM ワーカー コンポーネントに対する DM 操作が次の順序で実行されます。
 
 1.  コンポーネントプロセスを停止します。
-2.  DM-master の API を呼び出して`member`削除します。
+2.  DM-master の API を呼び出して`member`を削除します。
 3.  ノードに関連するデータ ファイルをクリーンアップします。
 
 スケールイン コマンドの基本的な使用法:
@@ -155,7 +155,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
     tiup dm scale-out prod-cluster scale.yaml
     ```
 
-    コマンドを実行した後、 `tiup dm display prod-cluster`実行してスケールアウトされたクラスターのステータスを確認できます。
+    コマンドを実行した後、 `tiup dm display prod-cluster`を実行してスケールアウトされたクラスターのステータスを確認できます。
 
 ## ローリングアップグレード {#rolling-upgrade}
 
@@ -163,7 +163,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 >
 > v2.0.5 以降、dmctl は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)サポートします。
 >
-> アップグレード前に、 `config export`使用してクラスターの設定ファイルをエクスポートできます。アップグレード後に以前のバージョンにダウングレードする必要がある場合は、まず以前のクラスターを再デプロイし、 `config import`使用して以前の設定ファイルをインポートできます。
+> アップグレード前に、 `config export`を使用してクラスターの設定ファイルをエクスポートできます。アップグレード後に以前のバージョンにダウングレードする必要がある場合は、まず以前のクラスターを再デプロイし、 `config import`を使用して以前の設定ファイルをインポートできます。
 >
 > v2.0.5 より前のクラスターの場合は、dmctl (&gt;= v2.0.5 かつ &lt; v8.0.0) を使用して、データ ソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 >
@@ -191,7 +191,7 @@ tiup dm upgrade prod-cluster ${version}
 tiup dm edit-config prod-cluster
 ```
 
-TiUP DMは設定ファイルをviエディタで開きます。他のエディタを使用する場合は、環境変数`EDITOR`使用してエディタをカスタマイズします（例： `export EDITOR=nano` ）。ファイルの編集後、変更を保存します。新しい設定をクラスターに適用するには、次のコマンドを実行します。
+TiUP DMは設定ファイルをviエディタで開きます。他のエディタを使用する場合は、環境変数`EDITOR`を使用してエディタをカスタマイズします（例： `export EDITOR=nano` ）。ファイルの編集後、変更を保存します。新しい設定をクラスターに適用するには、次のコマンドを実行します。
 
 ```bash
 tiup dm reload prod-cluster
@@ -243,11 +243,11 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 >
 > -   TiUP は、DM 1.0 クラスターへの DM Portalコンポーネントのインポートをサポートしていません。
 > -   インポートする前に元のクラスターを停止する必要があります。
-> -   2.0 にアップグレードする必要があるタスクでは`stop-task`実行しないでください。
+> -   2.0 にアップグレードする必要があるタスクでは`stop-task`を実行しないでください。
 > -   TiUP は、v2.0.0-rc.2 以降のバージョンの DM クラスターへのインポートのみをサポートします。
-> -   `import`コマンドは、DM 1.0 クラスターから新しい DM 2.0 クラスターにデータをインポートするために使用されます。既存の DM 2.0 クラスターに DM 移行タスクをインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)参照してください。
+> -   `import`コマンドは、DM 1.0 クラスターから新しい DM 2.0 クラスターにデータをインポートするために使用されます。既存の DM 2.0 クラスターに DM 移行タスクをインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
 > -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのものと異なります。詳細を確認するには、 `display`コマンドを実行してください。
-> -   インポートする前に`tiup update --self && tiup update dm`実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
+> -   インポートする前に`tiup update --self && tiup update dm`を実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
 > -   インポート後、クラスターにはDMマスターノードが1つだけ存在します。DMマスターをスケールアウトするには、 [クラスターをスケールアウトする](#scale-out-a-cluster)を参照してください。
 
 TiUPがリリースされる前は、DMクラスターのデプロイにはDM-Ansibleがよく使用されていました。DM-AnsibleによってデプロイされたDM 1.0クラスターをTiUPで引き継ぐには、 `import`コマンドを使用します。
@@ -258,7 +258,7 @@ TiUPがリリースされる前は、DMクラスターのデプロイにはDM-An
 tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 ```
 
-`tiup list dm-master`実行すると、 TiUPでサポートされている最新のクラスター バージョンが表示されます。
+`tiup list dm-master`を実行すると、 TiUPでサポートされている最新のクラスター バージョンが表示されます。
 
 `import`コマンドを使用するプロセスは次のとおりです。
 
@@ -269,7 +269,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 ## 操作ログを確認する {#view-the-operation-log}
 
-操作ログを表示するには、 `audit`コマンドを使用します。3 `audit`の使用方法は次のとおりです。
+操作ログを表示するには、 `audit`コマンドを使用します。`audit`の使用方法は次のとおりです。
 
 ```bash
 Usage:
@@ -299,7 +299,7 @@ tiup dm audit 4D5kQY
 
 ## DM クラスター内のホストでコマンドを実行する {#run-commands-on-a-host-in-the-dm-cluster}
 
-DMクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。3 `exec`のコマンドの使用方法は次のとおりです。
+DMクラスタ内のホストでコマンドを実行するには、 `exec`コマンドを使用します。`exec`のコマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:
@@ -313,7 +313,7 @@ Flags:
       --sudo             use root permissions (default false)
 ```
 
-たとえば、すべての DM ノードで`ls /tmp`実行するには、次のコマンドを実行します。
+たとえば、すべての DM ノードで`ls /tmp`を実行するには、次のコマンドを実行します。
 
 ```bash
 tiup dm exec prod-cluster --command='ls /tmp'
@@ -333,7 +333,7 @@ dmctlのバージョンを指定します。このコマンドを実行する前
 
     tiup dmctl:${version} [args]
 
-以前のdmctlコマンドでソースを追加するには`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`使用します。dmctlがTiUPに統合された後は、コマンドは以下のようになります。
+以前のdmctlコマンドでソースを追加するには`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`を使用します。dmctlがTiUPに統合された後は、コマンドは以下のようになります。
 
 ```bash
 tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml

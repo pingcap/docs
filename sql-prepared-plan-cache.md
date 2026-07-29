@@ -8,7 +8,7 @@ summary: TiDB の SQL プリペアドプランキャッシュについて学習�
 TiDBは、 `Prepare`と`Execute`クエリの実行プランのキャッシュをサポートしています。これには、以下の2つの形式のプリペアドステートメントが含まれます。
 
 -   プロトコル機能`COM_STMT_PREPARE`および`COM_STMT_EXECUTE`使用。
--   SQL ステートメント`PREPARE`と`EXECUTE`使用します。
+-   SQL ステートメント`PREPARE`と`EXECUTE`を使用します。
 
 TiDB オプティマイザーは、これら 2 種類のクエリを同じ方法で処理します。準備時に、パラメータ化されたクエリは AST (抽象構文ツリー) に解析され、キャッシュされます。その後の実行時に、保存された AST と特定のパラメータ値に基づいて実行プランが生成されます。
 
@@ -62,7 +62,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 
 > **Note:**
 >
-> [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)参照してください。
+> [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
 実行プランキャッシュ機能を有効にすると、セッション レベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
 
@@ -128,7 +128,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ### <code>SHOW WARNINGS</code>を使用して診断する {#use-code-show-warnings-code-to-diagnose}
 
-一部のクエリまたはプランはキャッシュできません。1 ステートメント`SHOW WARNINGS`使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
+一部のクエリまたはプランはキャッシュできません。`SHOW WARNINGS`ステートメントを使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
 
 ```sql
 mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
@@ -189,7 +189,7 @@ LIMIT 10;
 
 <CustomContent platform="tidb">
 
-プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各TiDBインスタンス内の全セッションのキャッシュされた実行プランによるメモリ消費量の合計を表示するには、Grafanaの[**プランキャッシュメモリ使用**量監視パネル](/grafana-tidb-dashboard.md)使用します。
+プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各TiDBインスタンス内の全セッションのキャッシュされた実行プランによるメモリ消費量の合計を表示するには、Grafanaの[**プランキャッシュメモリ使用量**監視パネル](/grafana-tidb-dashboard.md)を使用します。
 
 > **Note:**
 >
@@ -280,7 +280,7 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-現在、TiDBは`GLOBAL`実行計画キャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた計画をクリアすることはできません。3 `GLOBAL`実行計画キャッシュをクリアしようとすると、以下のエラーが報告されます。
+現在、TiDBは`GLOBAL`実行計画キャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた計画をクリアすることはできません。`GLOBAL`実行計画キャッシュをクリアしようとすると、以下のエラーが報告されます。
 
 ```sql
 MySQL [test]> admin flush global plan_cache;
@@ -289,7 +289,7 @@ ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 
 ## <code>COM_STMT_CLOSE</code>コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視します。 {#ignore-the-code-com-stmt-close-code-command-and-the-code-deallocate-prepare-code-statement}
 
-SQL ステートメントの構文解析コストを削減するには、 `prepare stmt` 1 回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`実行することをお勧めします。
+SQL ステートメントの構文解析コストを削減するには、 `prepare stmt` 1 回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`を実行することをお勧めします。
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once
@@ -299,7 +299,7 @@ MySQL [test]> execute stmt using ...;  -- Execute multiple times
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
-実際の練習では、以下に示すように、 `execute stmt`実行した後、毎回`deallocate prepare`実行することに慣れているかもしれません。
+実際の練習では、以下に示すように、 `execute stmt`を実行した後、毎回`deallocate prepare`を実行することに慣れているかもしれません。
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once

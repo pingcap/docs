@@ -190,7 +190,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-さまざまなデータ型のデフォルト値の詳細については、[デフォルト値](/data-type-default-values.md)参照してください。
+さまざまなデータ型のデフォルト値の詳細については、[デフォルト値](/data-type-default-values.md)を参照してください。
 
 ### 重複値を防止する {#prevent-duplicate-values}
 
@@ -228,7 +228,7 @@ CREATE TABLE `bookshop`.`users` (
 
 > **Note:**
 >
-> このセクションで説明する手順は、クイック スタートとテスト***のみ***を目的としています。 TiDB での HTAP の使用法の詳細については、 [HTAPを探索する](/explore-htap.md)参照してください。
+> このセクションで説明する手順は、クイック スタートとテスト***のみ***を目的としています。 TiDB での HTAP の使用法の詳細については、 [HTAPを探索する](/explore-htap.md)を参照してください。
 
 `ratings`アプリケーションを使用して`bookshop`テーブルに対して OLAP 分析を実行したいとします。たとえば、**書籍の評価と評価のタイミングに有意な相関関係があるかどうかを**クエリし、ユーザーによる書籍の評価が客観的かどうかを分析したいとします。この場合`score`フィールドと`rated_at` `ratings` } フィールドをクエリする必要があります。この操作は、OLTP 専用データベースではリソースを大量に消費します。または、ETL やその他のデータ同期ツールを使用して、OLTP データベースから専用の OLAP データベースにデータをエクスポートして分析することもできます。
 
@@ -249,7 +249,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 -   `{table_name}` : テーブル名。
 -   `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
 
-**TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)参照してください。
+**TiFlash は**テーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) またはTiFlash (列ベース) を自動的に選択します。あるいは、クエリで**TiFlash**レプリカを使用するかどうかを手動で指定できます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取ります](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
 

@@ -7,13 +7,13 @@ summary: TiDB Data Migration で使用される用語を学習します。
 
 このドキュメントでは、TiDB Data Migration (DM) のログ、監視、構成、およびドキュメントで使用される用語を示します。
 
-TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)参照してください。
+TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
 ## B {#b}
 
 ### Binlog {#binlog}
 
-TiDB DMにおけるbinlogは、TiDBデータベース内で生成されるバイナリログファイルを指します。MySQLやMariaDBにおけるbinlogと同様の意味を持ちます。詳細は[MySQL バイナリログ](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_replication.html)と[MariaDB バイナリログ](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log)参照してください。
+TiDB DMにおけるbinlogは、TiDBデータベース内で生成されるバイナリログファイルを指します。MySQLやMariaDBにおけるbinlogと同様の意味を持ちます。詳細は[MySQL バイナリログ](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_replication.html)と[MariaDB バイナリログ](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log)を参照してください。
 
 ### Binlogイベント {#binlog-event}
 
@@ -25,7 +25,7 @@ Binlogイベントは、MySQLまたはMariaDBサーバーインスタンスに�
 
 ### Binlogの位置 {#binlog-position}
 
-binlog位置は、 binlogファイル内のbinlogイベントのオフセット情報です。詳細は[MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-binlog-events)参照してください。
+binlog位置は、 binlogファイル内のbinlogイベントのオフセット情報です。詳細は[MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/show/show-binlog-events)を参照してください。
 
 ### Binlog複製処理ユニット/同期ユニット {#binlog-replication-processing-unit-sync-unit}
 
@@ -78,7 +78,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 リレーログとは、DM-workerが上流のMySQLまたはMariaDBから取得し、ローカルディスクに保存するbinlogファイルを指します。リレーログの形式は標準的なbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/8.0/en/replica-logs-relaylog.html)および[MariaDB リレーログ](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/relay-log)と同様です。
 
-リレー ログのディレクトリ構造、初期移行ルール、TiDB DM のデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)参照してください。
+リレー ログのディレクトリ構造、初期移行ルール、TiDB DM のデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 
 ### リレー処理ユニット {#relay-processing-unit}
 
@@ -94,7 +94,7 @@ TiDB データ移行ツールを使用して、上流データベースの**増�
 
 ### セーフモード {#safe-mode}
 
-セーフモードは、テーブルスキーマに主キーまたは一意インデックスが存在する場合に、DML文を複数回インポートできるモードです。このモードでは、上流の文の一部は、書き換えられた後にのみ下流に移行されます。1 `INSERT`文は`REPLACE`に書き換えられ、 `UPDATE`文は`DELETE`と`REPLACE`に書き換えられます。
+セーフモードは、テーブルスキーマに主キーまたは一意インデックスが存在する場合に、DML文を複数回インポートできるモードです。このモードでは、上流の文の一部は、書き換えられた後にのみ下流に移行されます。`INSERT`文は`REPLACE`に書き換えられ、 `UPDATE`文は`DELETE`と`REPLACE`に書き換えられます。
 
 このモードは、次のいずれかの状況で有効になります。
 

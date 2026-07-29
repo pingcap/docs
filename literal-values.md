@@ -63,7 +63,7 @@ N&#39;literal&#39;（またはn&#39;literal&#39;）を使用して、各国語�
 
 `'`で囲まれた文字列で`"`表したり、 `"`で囲まれた文字列で`'`表したりする場合は、エスケープ文字を使用する必要はありません。
 
-詳細については[MySQLの文字列リテラル](https://dev.mysql.com/doc/refman/8.0/en/string-literals.html)参照してください。
+詳細については[MySQLの文字列リテラル](https://dev.mysql.com/doc/refman/8.0/en/string-literals.html)を参照してください。
 
 ## 数値リテラル {#numeric-literals}
 
@@ -75,7 +75,7 @@ N&#39;literal&#39;（またはn&#39;literal&#39;）を使用して、各国語�
 
 数値リテラルは、 `1.2E3, 1.2E-3, -1.2E3, -1.2E-3`などの科学的記数法で表すこともできます。
 
-詳細については[MySQLの数値リテラル](https://dev.mysql.com/doc/refman/8.0/en/number-literals.html)参照してください。
+詳細については[MySQLの数値リテラル](https://dev.mysql.com/doc/refman/8.0/en/number-literals.html)を参照してください。
 
 ## 日付と時刻のリテラル {#date-and-time-literals}
 
@@ -130,7 +130,7 @@ SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
 
 ## 16進数リテラル {#hexadecimal-literals}
 
-16進数リテラル値は`X'val'`または`0xval`表記法で記述されます。5 `val`は16進数が含まれます。先頭の`0x`は大文字と小文字が区別され、 `0X`と表記することはできません。
+16進数リテラル値は`X'val'`または`0xval`表記法で記述されます。`val`は16進数が含まれます。先頭の`0x`は大文字と小文字が区別され、 `0X`と表記することはできません。
 
 有効な16進数リテラル:
 
@@ -184,7 +184,7 @@ mysql> SELECT X'54694442';
 
 ## ビット値リテラル {#bit-value-literals}
 
-ビット値リテラルは`b'val'`または`0bval`表記法で記述されます。5 `val` 0と1で記述された2進値です。先頭の`0b`は大文字と小文字が区別され、 `0B`と記述することはできません。
+ビット値リテラルは`b'val'`または`0bval`表記法で記述されます。`val`は0と1で記述された2進値です。先頭の`0b`は大文字と小文字が区別され、 `0B`と記述することはできません。
 
 有効なビット値リテラル:
 

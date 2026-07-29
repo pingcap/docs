@@ -7,7 +7,7 @@ summary: 機密データを保護するために保存時の暗号化を有効�
 
 > **Note:**
 >
-> クラスターがAWS上にデプロイされており、EBSストレージを使用している場合は、EBS暗号化を使用することをお勧めします。1 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)参照してください。AWS上でローカルNVMeストレージなど、EBS以外のストレージを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
+> クラスターがAWS上にデプロイされており、EBSストレージを使用している場合は、EBS暗号化を使用することをお勧めします。[AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。AWS上でローカルNVMeストレージなど、EBS以外のストレージを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
 
 保存時の暗号化とは、データが保存時に暗号化されることを意味します。データベースの場合、この機能はTDE（透過的データ暗号化）とも呼ばれます。これは、転送中の暗号化（TLS）や使用中の暗号化（ほとんど使用されません）とは対照的です。保存時の暗号化はSSDドライブ、ファイルシステム、クラウドベンダーなど、さまざまな方法で実行できますが、TiKVが保存前に暗号化を行うことで、攻撃者がデータにアクセスするにはデータベースへの認証が必要となることを確実にします。例えば、攻撃者が物理マシンにアクセスできたとしても、ディスク上のファイルをコピーするだけではデータにアクセスできません。
 
@@ -77,7 +77,7 @@ TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バー
 -   `data-encryption-method`暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
 
     -   新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
-    -   暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
+    -   暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
     -   暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、TiKVを再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルが、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
 -   `data-key-rotation-period` 、TiKV がキーをローテーションする頻度を指定します。
@@ -123,7 +123,7 @@ AWS KMS を使用してマスターキーを指定するには、TiKV 設定フ�
     region = "us-west-2"
     endpoint = "https://kms.us-west-2.amazonaws.com"
 
-`key-id` KMS CMK のキー ID を指定します。3 `region` KMS CMK の AWS リージョン名です。5 はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や、 `endpoint` [KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)使用する必要がある場合を除き、通常は指定する必要はありません。
+`key-id`は KMS CMK のキー ID を指定します。`region`は KMS CMK の AWS リージョン名です。`endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や、 [KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がある場合を除き、通常は指定する必要はありません。
 
 AWSでも[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)使用できます。この場合、特定のリージョンに主キーを設定し、必要なリージョンにレプリカキーを追加する必要があります。
 
@@ -232,7 +232,7 @@ Azure KMS を使用してマスター キーを指定するには、TiKV 構成�
 
 ### マスターキーを回転させる {#rotate-the-master-key}
 
-マスターキーをローテーションするには、設定で新しいマスターキーと古いマスターキーの両方を指定し、TiKVを再起動する必要があります。新しいマスターキーを指定するには`security.encryption.master-key`使用し、古いマスターキーを指定するには`security.encryption.previous-master-key`使用します。 `security.encryption.previous-master-key`の設定形式は`encryption.master-key`と同じです。再起動後、TiKVは新しいマスターキーと古いマスターキーの両方にアクセスする必要がありますが、TiKVが起動して実行されると、TiKVは新しいキーのみにアクセスする必要があります。それ以降は、設定ファイルに`encryption.previous-master-key`設定を残しておいても問題ありません。再起動後も、TiKVは新しいマスターキーを使用して既存のデータを復号化できなかった場合にのみ、古いキーを使用しようとします。
+マスターキーをローテーションするには、設定で新しいマスターキーと古いマスターキーの両方を指定し、TiKVを再起動する必要があります。新しいマスターキーを指定するには`security.encryption.master-key`を使用し、古いマスターキーを指定するには`security.encryption.previous-master-key`を使用します。 `security.encryption.previous-master-key`の設定形式は`encryption.master-key`と同じです。再起動後、TiKVは新しいマスターキーと古いマスターキーの両方にアクセスする必要がありますが、TiKVが起動して実行されると、TiKVは新しいキーのみにアクセスする必要があります。それ以降は、設定ファイルに`encryption.previous-master-key`設定を残しておいても問題ありません。再起動後も、TiKVは新しいマスターキーを使用して既存のデータを復号化できなかった場合にのみ、古いキーを使用しようとします。
 
 現在、オンラインでのマスターキーのローテーションはサポートされていないため、TiKVを再起動する必要があります。オンラインクエリを処理している稼働中のTiKVクラスターに対して、ローリング再起動を実行することをお勧めします。
 
@@ -303,7 +303,7 @@ AWS でキーを作成するには、TiKV のキーを作成する手順を参�
         security.encryption.data-encryption-method: "aes128-ctr"
         security.encryption.data-key-rotation-period: "168h" # 7 days
 
-`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のみ）、「plaintext」です。デフォルト値は「plaintext」で、暗号化は無効です。3 `data-key-rotation-period` 、 TiFlash がデータキーをローテーションする頻度を定義します。暗号化は、新規TiFlashクラスターまたは既存のTiFlashクラスターで有効にできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`削除するか、「plaintext」にリセットし、 TiFlashを再起動します。暗号化方式を変更するには、設定ファイルの`data-encryption-method`更新し、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、 `data-encryption-method`サポートされている暗号化アルゴリズムに置き換え、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルは、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
+`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のみ）、「plaintext」です。デフォルト値は「plaintext」で、暗号化は無効です。`data-key-rotation-period`は、TiFlash がデータキーをローテーションする頻度を定義します。暗号化は、新規TiFlashクラスターまたは既存のTiFlashクラスターで有効にできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`を削除するか、「plaintext」にリセットし、 TiFlashを再起動します。暗号化方式を変更するには、設定ファイルの`data-encryption-method`を更新し、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、 `data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルは、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
 暗号化が有効になっている場合（つまり、 `data-encryption-method` 「プレーンテキスト」ではない場合）、マスターキーを指定する必要があります。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`設定ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
 
@@ -374,7 +374,7 @@ TiFlashは暗号化されたメタデータの管理にTiKVのロジックを再
 
 ### TiKVバージョン間の互換性 {#compatibility-between-tikv-versions}
 
-TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)参照してください。
+TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 

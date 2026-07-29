@@ -52,7 +52,7 @@ rename srcdb. tgtdb. *.sql
 -   データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
 -   `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
 -   `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
--   `type` `'$3'` （データファイルの種類）として指定します。5 `type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
+-   `type`を`'$3'` （データファイルの種類）として指定します。`type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
 
 ```toml
 [mydumper]
@@ -73,7 +73,7 @@ table = '$2'
 type = '$3'
 ```
 
-`gzip`使用してデータファイルをバックアップする場合は、それに応じて圧縮形式を設定する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`です。圧縮ファイル形式を表すために、 `compression` `'$4'`として指定できます。例：
+`gzip`を使用してデータファイルをバックアップする場合は、それに応じて圧縮形式を設定する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`です。圧縮ファイル形式を表すために、 `compression` `'$4'`として指定できます。例：
 
 ```toml
 [mydumper]
@@ -141,7 +141,7 @@ trim-last-separator = false
 
 *シングルクォーテーションで囲まれた*文字列 ( `'…'` ) を使用すると、バックスラッシュによるエスケープを抑制できます。例えば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) と文字`n`の2文字の文字列を終端として使用することを意味します。
 
-詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)参照してください。
+詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)を参照してください。
 
 #### `separator` {#separator}
 
@@ -153,7 +153,7 @@ trim-last-separator = false
 
     -   CSV (カンマ区切り値)の場合は`','` 。
     -   TSV (タブ区切り値)の場合は`"\t"` 。
-    -   `"\u0001"`指定すると ASCII 文字`0x01`使用されます。
+    -   `"\u0001"`を指定すると ASCII 文字`0x01`が使用されます。
 
 -   LOAD DATA ステートメントの`FIELDS TERMINATED BY`オプションに対応します。
 
@@ -230,7 +230,7 @@ trim-last-separator = false
     -   `trim-last-separator = false`場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
     -   `trim-last-separator = true`場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
--   このオプションは非推奨です。代わりにオプション`terminator`使用してください。
+-   このオプションは非推奨です。代わりにオプション`terminator`を使用してください。
 
     既存の構成が次の場合:
 
@@ -369,7 +369,7 @@ TiDB Lightningは現在、 Dumplingでエクスポートされた圧縮ファイ
 
 TiDB Lightningは、命名パターンに従ったデータファイルのみを認識します。場合によっては、データファイルが命名パターンに従っていない可能性があり、その場合、ファイルのインポートなしでデータのインポートが短時間で完了します。
 
-この問題を解決するには、カスタマイズした式でデータ ファイルを一致させるために`[[mydumper.files]]`使用します。
+この問題を解決するには、カスタマイズした式でデータ ファイルを一致させるために`[[mydumper.files]]`を使用します。
 
 S3にエクスポートされたAuroraスナップショットを例に挙げます。Parquetファイルの完全パスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 
@@ -401,7 +401,7 @@ type = '$3'
 
 ## Amazon S3からデータをインポートする {#import-data-from-amazon-s3}
 
-以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 -   ローカルに設定された権限を使用して S3 データにアクセスします。
 

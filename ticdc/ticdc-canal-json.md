@@ -82,7 +82,7 @@ TiCDC は、DDL イベントを次の Canal-JSON 形式にエンコードしま�
 | mysqlType | object  | isDdlが`false`場合、各列のデータ型がMySQLでどのように表現されるかを記録します。                                                      |
 | データ      | object  | isDdlが`false`の場合、各列の名前とそのデータ値を記録します。                                                                  |
 | 古い       | object  | メッセージが更新イベントによって生成された場合のみ、更新前の各列の名前とデータ値を記録します。                                                       |
-| _tidb    | object  | TiDB拡張フィールド。1 を`enable-tidb-extension` `true`設定した場合にのみ存在します。5 `commitTs`値は、行の変更を引き起こしたトランザクションのTSOです。 |
+| _tidb    | object  | TiDB拡張フィールド。`enable-tidb-extension`を`true`に設定した場合にのみ存在します。`commitTs`の値は、行の変更を引き起こしたトランザクションのTSOです。 |
 
 ### DMLイベント {#dml-event}
 
@@ -176,7 +176,7 @@ Canal-JSON 形式では、対応するデータ型が`mysqlType`フィールド�
 
 ### MySQLタイプフィールド {#mysql-type-field}
 
-Canal-JSON形式は、 `mysqlType`フィールドの各列にMySQL Typeの文字列を記録します。詳細については、 [TiDB データ型](/data-type-overview.md)参照してください。
+Canal-JSON形式は、 `mysqlType`フィールドの各列にMySQL Typeの文字列を記録します。詳細については、 [TiDB データ型](/data-type-overview.md)を参照してください。
 
 ### SQLタイプフィールド {#sql-type-field}
 
@@ -253,7 +253,7 @@ Canal-JSON形式の`sqlType`のフィールドには、各列のJava SQL型が�
 | TINYINT    | -6            |
 | BIT        | -7            |
 
-Java SQL 型の詳細については、 [Java SQL クラス型](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)参照してください。
+Java SQL 型の詳細については、 [Java SQL クラス型](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)を参照してください。
 
 ## バイナリ型とBlob型 {#binary-and-blob-types}
 
@@ -338,7 +338,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-`update`ステートメントでは、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。7 `update`ステートメントは、列番号`c_int`と`c_tinyint`のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
+`update`ステートメントでは、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。`update`ステートメントは、列番号`c_int`と`c_tinyint`のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
 
 ```json
 {

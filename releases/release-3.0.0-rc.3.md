@@ -21,7 +21,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   仮想生成列統計を収集する機能を削除します [＃10629](https://github.com/pingcap/tidb/pull/10629)
     -   ポイントクエリ中に主キー定数がオーバーフローする問題を修正[＃10699](https://github.com/pingcap/tidb/pull/10699)
     -   `fast analyze`で初期化されていない情報を使用するとpanicが発生する問題を修正[＃10691](https://github.com/pingcap/tidb/pull/10691)
-    -   `prepare`使用して`create view`文を実行すると、間違った列情報のためにpanicが発生する問題を修正しました [＃10713](https://github.com/pingcap/tidb/pull/10713)
+    -   `prepare`を使用して`create view`文を実行すると、間違った列情報のためにpanicが発生する問題を修正しました [＃10713](https://github.com/pingcap/tidb/pull/10713)
     -   ウィンドウ関数処理時に列情報が複製されない問題を修正 [＃10720](https://github.com/pingcap/tidb/pull/10720)
     -   インデックス結合における内部テーブル選択の選択率の誤った推定を修正 [＃10854](https://github.com/pingcap/tidb/pull/10854)
     -   `stats-lease`変数値が0の場合の自動読み込み統計をサポート[＃10811](https://github.com/pingcap/tidb/pull/10811)
@@ -53,7 +53,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 -   DDL
     -   `alter table`を使用して文字セットを変更すると`blob`型が変更される問題を修正[＃10698](https://github.com/pingcap/tidb/pull/10698)
-    -   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`使用して行 ID を分散させる機能を追加します[＃10794](https://github.com/pingcap/tidb/pull/10794)
+    -   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散させる機能を追加します[＃10794](https://github.com/pingcap/tidb/pull/10794)
     -   `alter table`文を使用して、保存された生成列の追加を禁止します。 [＃10808](https://github.com/pingcap/tidb/pull/10808)
     -   DDLメタデータの無効な生存時間を最適化し、クラスタのアップグレード後にDDL操作が遅くなる期間を短縮します[＃10795](https://github.com/pingcap/tidb/pull/10795)
 

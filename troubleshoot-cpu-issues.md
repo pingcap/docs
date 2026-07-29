@@ -15,7 +15,7 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 #### 現象 {#phenomenon}
 
--   スローログにクエリ実行プランが出力されている場合は、プランを直接確認できます。1 `select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行プランを解析できます。
+-   スローログにクエリ実行プランが出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行プランを解析できます。
 -   モニター内のスキャンされたキーの数が異常に増加し、スローログでは`Scan Keys`の数が多くなります。
 -   TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行プランと比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
 
@@ -27,13 +27,13 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 -   統計情報を更新する
     -   `analyze table`手動で実行し、統計の正確性を維持するために、 `crontab`コマンドを使用して`analyze`定期的に実行します。
-    -   `auto analyze`自動的に実行します。3 `analyze ratio`しきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
+    -   `auto analyze`を自動的に実行します。`analyze ratio`のしきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
         -   `set global tidb_auto_analyze_ratio=0.2;`
         -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
         -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
 -   実行プランをバインドする
-    -   アプリケーションの SQL ステートメントを変更し、 `use index`実行して、列のインデックスを一貫して使用します。
-    -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません`create global binding`使用して、 `force index`のバインディングSQL文を作成します。
+    -   アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
+    -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
     -   4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行プランによるパフォーマンスの低下を回避します。
 
 ### PD異常 {#pd-anomalies}
@@ -46,13 +46,13 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェック**を**実行することもできます。
 
--   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
+-   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
 
 -   サーバーの負荷が高いです。ログには`server is likely overloaded`表示されています。
 
 -   PD がLeaderを選出できません: PD ログには`lease is not expired`表示されます。3 [この号](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。
 
--   リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
+-   リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
 
 -   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー****モニター**にアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
@@ -64,7 +64,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   PDはパニックになる[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) 。
 
--   その他の原因。1と`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2` [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)実行してgoroutineを取得します。
+-   その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
 
 ### TiKVの異常 {#tikv-anomalies}
 
@@ -78,7 +78,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   TiKVが再開されたため再選。
     -   TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
-    -   TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。3 `dmesg` TiKVログを確認して原因を確認してください。
+    -   TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。`dmesg`とTiKVログを確認して原因を確認してください。
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 
@@ -86,7 +86,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   ネットワーク分離のため再選。
 
--   `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
+-   `block-cache`設定が大きすぎる場合、TiKV OOM が発生する可能性があります。問題の原因を確認するには、 **Grafana**モニターで該当するインスタンスを選択し、RocksDB の`block cache size`を確認してください。同時に、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているかどうかを確認してください。デフォルトでは、 **TiKV**の`block-cache`マシンの総メモリの`45%`に設定されています。コンテナに TiKV をデプロイする際には、このパラメータを明示的に指定する必要があります。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があります。
 
 -   コプロセッサーは大量の大きなクエリを受信し、大量のデータを返します。gRPCはコプロセッサがデータを返すのに間に合うようにデータを送信できず、OOMが発生します。原因を確認するには、モニター**Grafana** -&gt; **TiKV詳細**-&gt;**コプロセッサ概要**で、 `response size` `network outbound`トラフィックを超えているかどうかを確認してください。
 
@@ -124,7 +124,7 @@ CPU リソースの使用量がボトルネックになります。
 
 **パラメータ調整:**
 
-現在、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`使用してインデックス作成の速度を動的に調整できます。通常、値が小さいほどシステムへの影響は小さくなりますが、実行時間は長くなります。
+現在、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`を使用してインデックス作成の速度を動的に調整できます。通常、値が小さいほどシステムへの影響は小さくなりますが、実行時間は長くなります。
 
 一般的なケースでは、まずデフォルト値（ `4`と`256` ）をそのままにして、クラスターのリソース使用量と応答速度を観察し、その後、同時実行性を高めるために値を`tidb_ddl_reorg_worker_cnt`に増やします。モニターで明らかなジッターが見られない場合は、値を`tidb_ddl_reorg_batch_size`に増やします。インデックス作成に関係する列が頻繁に更新される場合、結果として生じる多くの競合により、インデックス作成が失敗し、再試行されることになります。
 

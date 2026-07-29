@@ -38,7 +38,7 @@ CREATE TABLE `sbtest` (
 
 #### テストデータを生成する {#generate-test-data}
 
-`sysbench`使用してアップストリームにテストテーブルを作成し、完全インポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
+`sysbench`を使用してアップストリームにテストテーブルを作成し、完全インポート用のテストデータを生成します。テストデータを生成するには、以下の`sysbench`コマンドを実行します。
 
 ```bash
 sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=3306 --mysql-user=root --mysql-db=dm_benchmark --db-driver=mysql --table-size=50000000 prepare
@@ -46,7 +46,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLソースを作成し、 `source-id`を`source-1`に設定します。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)参照してください。
+1.  アップストリームMySQLソースを作成し、 `source-id`を`source-1`に設定します。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  移行タスクを作成します（モード`full` ）。タスク設定テンプレートは次のとおりです。
 
@@ -80,16 +80,16 @@ mydumpers:
     threads: 32
 ```
 
-移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)参照してください。
+移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
 
 > **Note:**
 >
-> -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`使用します。これにより、データのエクスポートが高速化されます。
+> -   複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
 > -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`調整できます。
 
 #### テスト結果を取得する {#get-test-results}
 
-DM-worker のログを確認してください。1 `all data files have been finished`表示されている場合は、すべてのデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
+DM-worker のログを確認してください。`all data files have been finished`が表示されている場合は、すべてのデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
 
      [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
 
@@ -99,11 +99,11 @@ DM-worker のログを確認してください。1 `all data files have been fin
 
 #### テーブルを初期化する {#initialize-tables}
 
-アップストリームにテスト テーブルを作成するには`sysbench`使用します。
+アップストリームにテスト テーブルを作成するには`sysbench`を使用します。
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。1を`source-id` `source-1`設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)参照してください。
+1.  アップストリームMySQLのソースを作成します。`source-id`を`source-1`に設定します（ [完全インポートベンチマークケース](#full-import-benchmark-case)でソースを作成済みの場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
 
@@ -136,7 +136,7 @@ syncers:
     batch: 100
 ```
 
-データ移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)参照してください。
+データ移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
 
 > **Note:**
 >
@@ -156,4 +156,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DMの移行ステータスを確認するには、コマンド`query-status`実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)参照してください。
+DMの移行ステータスを確認するには、コマンド`query-status`を実行してください。DMの監視メトリクスを確認するには、Grafanaを使用してください。ここでの監視メトリクスとは、 `finished sqls jobs` （単位時間あたりに完了したジョブ数）およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

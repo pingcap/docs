@@ -21,7 +21,7 @@ aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/de
 
 TiDBにおけるセカンダリインデックスは論理オブジェクトです。簡単に言えば、TiDBがクエリパフォーマンスを向上させるために使用するソートタイプのデータと考えることができます。TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み書き操作をブロックしません。TiDBは、各インデックスに対してテーブルの各行への参照を作成し、データ自体ではなく、選択された列に基づいて参照をソートします。
 
-セカンダリインデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)参照してください。
+セカンダリインデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
 
 TiDB では、[既存のテーブルにセカンダリインデックスを追加する](#add-a-secondary-index-to-an-existing-table)か[新しいテーブルを作成する際にセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)ことができます。
 
@@ -131,7 +131,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
 
-実行プラン内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [TiDBクエリ実行プランの概要](/explain-overview.md)参照してください。
+実行プラン内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [TiDBクエリ実行プランの概要](/explain-overview.md)を参照してください。
 
 実行プランは毎回同じ演算子を返すとは限りません。これは、TiDBが**コストベース最適化（CBO）**方式を採用しているためで、実行プランはルールとデータ分布の両方に依存します。
 

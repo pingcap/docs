@@ -15,13 +15,13 @@ summary: DM に存在する可能性のある一般的なパフォーマンス�
 -   Grafana 監視ダッシュボードで[監視メトリック](/dm/monitor-a-dm-cluster.md#task)表示できます。
 -   診断するコンポーネントは正常に動作しています。そうでない場合、監視メトリックの例外が発生する可能性があり、パフォーマンスの問題の診断に影響する可能性があります。
 
-データ移行のレイテンシーが大きい場合、ボトルネックが DMコンポーネント内にあるか、TiDB クラスター内にあるかを素早く判断するには、まず[下流にSQL文を書き込む](#write-sql-statements-to-downstream)の`DML queue remain length`確認します。
+データ移行のレイテンシーが大きい場合、ボトルネックが DMコンポーネント内にあるか、TiDB クラスター内にあるかを素早く判断するには、まず[下流にSQL文を書き込む](#write-sql-statements-to-downstream)の`DML queue remain length`を確認します。
 
 ## リレーログユニット {#relay-log-unit}
 
-リレーログユニットのパフォーマンス問題を診断するには、監視メトリック`binlog file gap between master and relay`確認します。このメトリックの詳細については、 [リレーログの監視メトリクス](/dm/monitor-a-dm-cluster.md#relay-log)を参照してください。このメトリックが長時間にわたって1より大きい場合、通常はパフォーマンス問題が発生していることを示します。このメトリックが0の場合、通常はパフォーマンス問題が発生していないことを示します。
+リレーログユニットのパフォーマンス問題を診断するには、監視メトリック`binlog file gap between master and relay`を確認します。このメトリックの詳細については、 [リレーログの監視メトリクス](/dm/monitor-a-dm-cluster.md#relay-log)を参照してください。このメトリックが長時間にわたって1より大きい場合、通常はパフォーマンス問題が発生していることを示します。このメトリックが0の場合、通常はパフォーマンス問題が発生していないことを示します。
 
-`binlog file gap between master and relay`の値が 0 であるにもかかわらず、パフォーマンスに問題があると思われる場合は、 `binlog pos`確認してください。このメトリックの`master` `relay`よりも大幅に大きい場合は、パフォーマンスに問題がある可能性があります。その場合は、問題を診断し、適切に対処してください。
+`binlog file gap between master and relay`の値が 0 であるにもかかわらず、パフォーマンスに問題があると思われる場合は、 `binlog pos`を確認してください。このメトリックの`master`が`relay`よりも大幅に大きい場合は、パフォーマンスに問題がある可能性があります。その場合は、問題を診断し、適切に対処してください。
 
 ### binlogデータを読み取る {#read-binlog-data}
 
@@ -47,7 +47,7 @@ DMのリレー処理ユニットは、binlogイベントをDMメモリに読み�
 
 ### リレーログファイルを書き込む {#write-relay-log-files}
 
-binlogイベントをリレーログファイルに書き込む場合、関連するパフォーマンスメトリックは`write relay log duration`です。3 `binlog event size`大きすぎる場合は、この値はマイクロ秒単位にする必要があります。5 `write relay log duration`大きすぎる場合は、ディスクの書き込みパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
+binlogイベントをリレーログファイルに書き込む場合、関連するパフォーマンスメトリックは`write relay log duration`です。`binlog event size`が大きすぎない場合は、この値はマイクロ秒単位にする必要があります。`write relay log duration`が大きすぎる場合は、ディスクの書き込みパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 
 ## 負荷ユニット {#load-unit}
 
@@ -55,12 +55,12 @@ binlogイベントをリレーログファイルに書き込む場合、関連�
 
 ## Binlogレプリケーションユニット {#binlog-replication-unit}
 
-Binlogレプリケーションユニットのパフォーマンス問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認できます。このメトリックの詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)参照してください。
+Binlogレプリケーションユニットのパフォーマンス問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認できます。このメトリックの詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
 
 -   このメトリックが長時間にわたって 1 より大きい場合、通常はパフォーマンスの問題があることを示します。
 -   このメトリックが 0 の場合、通常はパフォーマンスの問題がないことを示します。
 
-`binlog file gap between master and syncer`長期間にわたって1より大きい場合は、 `binlog file gap between relay and syncer`確認して、レイテンシーが主にどのユニットに存在しているかを特定してください。この値が通常0の場合、レイテンシーはリレーログユニットに存在している可能性があります。その場合は[リレーログユニット](#relay-log-unit)を参照して問題を解決してください。それ以外の場合は、引き続きBinlogレプリケーションユニットを確認してください。
+`binlog file gap between master and syncer`長期間にわたって1より大きい場合は、 `binlog file gap between relay and syncer`を確認して、レイテンシーが主にどのユニットに存在しているかを特定してください。この値が通常は0である場合、レイテンシーはリレーログユニットに存在している可能性があります。その場合は[リレーログユニット](#relay-log-unit)を参照して問題を解決してください。それ以外の場合は、引き続きBinlogレプリケーションユニットを確認してください。
 
 ### binlogデータを読み取る {#read-binlog-data}
 
@@ -68,7 +68,7 @@ Binlogレプリケーションユニットは、設定に応じて、上流のMy
 
 -   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)参照してください。
 
--   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。5 `read binlog event duration`大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
+-   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。`read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 
 ### binlogイベント変換 {#binlog-event-conversion}
 
@@ -90,7 +90,7 @@ DMはbinlogイベントからSQL文を構築した後、 `worker-count`キュー
 
 -   データ移行リンクに顕著なレイテンシーが見られ、各`q_*`に対応する`DML queue remain length`の曲線がほぼ同じで、ほぼ常に0である場合、DMが上流からのデータの読み取り、変換、または同時書き込みを時間内に実行できていないことを意味します（ボトルネックはリレーログユニットにある可能性があります）。トラブルシューティングについては、このドキュメントの前のセクションを参照してください。
 
-`DML queue remain length`に対応する曲線が0でない場合（通常、最大値は1024以下）、下流へのSQL文の書き込み時にボトルネックが発生していることを示します。3 `transaction execution latency`使用すると、下流への単一トランザクションの実行に要した時間を表示できます。
+`DML queue remain length`に対応する曲線が0でない場合（通常、最大値は1024以下）、下流へのSQL文の書き込み時にボトルネックが発生していることを示します。`transaction execution latency`を使用すると、下流への単一トランザクションの実行に要した時間を表示できます。
 
 `transaction execution latency`は通常数十ミリ秒です。この値が大きすぎる場合は、下流データベースの監視に基づいて下流のパフォーマンスを確認してください。また、DMと下流データベース間のネットワークレイテンシーが大きくないか確認することもできます。
 

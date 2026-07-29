@@ -52,7 +52,7 @@ summary: 最適化ルールと式プッシュダウンの動作を制御する�
 
     > **Note:**
     >
-    > `admin reload opt_rule_blacklist` 、上記のステートメントを実行した TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
+    > `admin reload opt_rule_blacklist`は、上記のステートメントを実行した TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
 
 -   ルールを再度有効にする場合は、テーブル内の対応するデータを削除してから、 `admin reload`ステートメントを実行します。
 
@@ -70,7 +70,7 @@ summary: 最適化ルールと式プッシュダウンの動作を制御する�
 
 ### プッシュダウンがサポートされている式 {#expressions-that-are-supported-to-be-pushed-down}
 
-プッシュダウンがサポートされている式の詳細については、 [TiKVへのプッシュダウンでサポートされている式](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv)参照してください。
+プッシュダウンがサポートされている式の詳細については、 [TiKVへのプッシュダウンでサポートされている式](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv)を参照してください。
 
 ### 特定の式のプッシュダウンを無効にする {#disable-the-pushdown-of-specific-expressions}
 
@@ -96,10 +96,10 @@ DESC mysql.expr_pushdown_blacklist;
 上記の各フィールドの説明は次のとおりです。
 
 -   `name` : プッシュダウンが無効になっている関数の名前。
--   `store_type` : 関数の計算時にプッシュダウンされないようにするコンポーネントを指定します。指定できる要素は`tidb` 、 `tikv` 、 `tiflash`です。8 `store_type`大文字と小文字を区別しません。複数の要素を指定する必要がある場合は、各コンポーネントをカンマで区切ってください。
-    -   `store_type`が`tidb`場合、TiDBメモリテーブルの読み取り中に他の TiDB サーバーで関数を実行できるかどうかを示します。
-    -   `store_type`が`tikv`場合、関数が TiKV サーバーのコプロセッサーコンポーネントで実行できるかどうかを示します。
-    -   `store_type`が`tiflash`場合、関数がTiFlash Server のコプロセッサーコンポーネントで実行できるかどうかを示します。
+-   `store_type` : 関数の計算時にプッシュダウンされないようにするコンポーネントを指定します。指定できる要素は`tidb` 、 `tikv` 、 `tiflash`です。`store_type`は大文字と小文字を区別しません。複数の要素を指定する必要がある場合は、各コンポーネントをカンマで区切ってください。
+    -   `store_type`が`tidb`の場合、TiDBメモリテーブルの読み取り中に他の TiDB サーバーで関数を実行できるかどうかを示します。
+    -   `store_type`が`tikv`の場合、関数が TiKV サーバーのコプロセッサーコンポーネントで実行できるかどうかを示します。
+    -   `store_type`が`tiflash`の場合、関数がTiFlash Server のコプロセッサーコンポーネントで実行できるかどうかを示します。
 -   `reason` : この関数がブロックリストに追加された理由を記録します。
 
 ### 使用法 {#usage}
@@ -112,7 +112,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 1.  対応する関数名または演算子名と、プッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルに挿入します。
 
-2.  `admin reload expr_pushdown_blacklist`実行します。
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
 ### ブロックリストから削除 {#remove-from-the-blocklist}
 
@@ -120,11 +120,11 @@ DESC mysql.expr_pushdown_blacklist;
 
 1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルから削除します。
 
-2.  `admin reload expr_pushdown_blacklist`実行します。
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
 > **Note:**
 >
-> `admin reload expr_pushdown_blacklist` 、このステートメントが実行された TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
+> `admin reload expr_pushdown_blacklist`は、このステートメントが実行された TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
 
 ## 表現ブロックリストの使用例 {#expression-blocklist-usage-example}
 
@@ -132,7 +132,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 ブロックリストが有効になっているかどうかを判断するには、 `EXPLAIN`の結果を観察します（ [TiDB クエリ実行プランの概要](/explain-overview.md)を参照）。
 
-1.  次の SQL ステートメントの`WHERE`番目の句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
+1.  次の SQL ステートメントの`WHERE`句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;
@@ -149,7 +149,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-2.  式を`mysql.expr_pushdown_blacklist`テーブルに挿入し、 `admin reload expr_pushdown_blacklist`実行します。
+2.  式を`mysql.expr_pushdown_blacklist`テーブルに挿入し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     INSERT INTO mysql.expr_pushdown_blacklist VALUES('<','tikv',''), ('>','tikv','');
@@ -185,7 +185,7 @@ DESC mysql.expr_pushdown_blacklist;
     3 rows in set (0.00 sec)
     ```
 
-4.  ブロックリストから 1 つの式 (ここでは`>` ) を削除し、 `admin reload expr_pushdown_blacklist`実行します。
+4.  ブロックリストから 1 つの式 (ここでは`>` ) を削除し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     DELETE FROM mysql.expr_pushdown_blacklist WHERE name = '>';

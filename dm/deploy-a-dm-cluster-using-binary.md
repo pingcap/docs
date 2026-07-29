@@ -13,7 +13,7 @@ summary: DM バイナリを使用してデータ移行クラスターをデプ�
 
 ## DMバイナリをダウンロード {#download-dm-binary}
 
-DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)参照してください。
+DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ## サンプルシナリオ {#sample-scenario}
 
@@ -121,7 +121,7 @@ DM マスターのコマンドライン パラメータの説明は次のとお�
 
     > **Note:**
     >
-    > このコマンドを実行した後、コンソールにはログは出力されません。実行時ログを表示するには、 `tail -f dm-master.log`実行してください。
+    > このコマンドを実行した後、コンソールにはログは出力されません。実行時ログを表示するには、 `tail -f dm-master.log`を実行してください。
 
 3.  DM-master2とDM-master3については、設定ファイルの`name`それぞれ`master2`と`master3`に変更し、 `peer-urls`それぞれ`192.168.0.5:8291`と`192.168.0.6:8291`に変更します。その後、手順2を繰り返します。
 

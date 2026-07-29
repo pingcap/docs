@@ -146,8 +146,8 @@ SHOW COLLATION;
 >
 > ただし、TiDB のデフォルトの照合順序は、クライアントの[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)設定にも影響されます。例えば、MySQL 8.x クライアントでは、 `utf8mb4`文字セットの接続照合順序はデフォルトで`utf8mb4_0900_ai_ci`に設定されています。
 >
-> -   TiDB v7.4.0 より前では、クライアントが`utf8mb4_0900_ai_ci` [接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として使用すると、TiDB は`utf8mb4_0900_ai_ci`照合順序をサポートしていないため、TiDB は TiDBサーバーのデフォルトの照合照合順序`utf8mb4_bin`使用します。
-> -   v7.4.0 以降、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`使用する場合、TiDB はクライアントの構成に従って、デフォルトの照合順序として`utf8mb4_0900_ai_ci`使用します。
+> -   TiDB v7.4.0 より前では、クライアントが`utf8mb4_0900_ai_ci` [接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として使用すると、TiDB は`utf8mb4_0900_ai_ci`照合順序をサポートしていないため、TiDB は TiDBサーバーのデフォルトの照合照合順序`utf8mb4_bin`を使用します。
+> -   v7.4.0 以降、クライアントが[接続照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html#charset-connection-system-variables)として`utf8mb4_0900_ai_ci`を使用する場合、TiDB はクライアントの構成に従って、デフォルトの照合順序として`utf8mb4_0900_ai_ci`を使用します。
 
 次のステートメントを使用すると、文字セットに対応する照合順序 ( [照合のための新しいフレームワーク](#new-framework-for-collations)下) を表示できます。
 
@@ -168,7 +168,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)参照してください。
+GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
 ## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
@@ -176,9 +176,9 @@ MySQLでは、文字セット`utf8`最大3バイトに制限されています�
 
 MySQL と TiDB の両方で、 `utf8`と`utf8mb3`同じ文字セットのエイリアスです。
 
-TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にすることができます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`使用することをお勧めします。
+TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にすることができます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`を使用することをお勧めします。
 
-以下は、4バイトの絵文字をテーブルに挿入する際のデフォルトの動作を示しています。1 `INSERT`文は`utf8`文字セットでは失敗しますが、 `utf8mb4`の文では成功します。
+以下は、4バイトの絵文字をテーブルに挿入する際のデフォルトの動作を示しています。`INSERT`文は`utf8`文字セットでは失敗しますが、 `utf8mb4`の文では成功します。
 
 ```sql
 CREATE TABLE utf8_test (
@@ -245,7 +245,7 @@ ALTER DATABASE db_name
 
 ここで`DATABASE` `SCHEMA`に置き換えることができます。
 
-データベースによって文字セットと照合順序が異なる場合があります。現在のデータベースの文字セットと照合順序を確認するには、 `character_set_database`と`collation_database`使用します。
+データベースによって文字セットと照合順序が異なる場合があります。現在のデータベースの文字セットと照合順序を確認するには、 `character_set_database`と`collation_database`を使用します。
 
 ```sql
 CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -372,9 +372,9 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ルール:
 
--   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`指定して`COLLATE collation_name`指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
--   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`指定しない場合は、システム変数`character_set_connection`と`collation_connection`で指定された文字セットと照合順序が使用されます。
+-   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+-   ルール 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+-   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`を指定しない場合は、システム変数`character_set_connection`と`collation_connection`で指定された文字セットと照合順序が使用されます。
 
 ### クライアント接続の文字セットと照合順序 {#client-connection-character-set-and-collation}
 
@@ -382,7 +382,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   デフォルト データベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
 
-`character_set_connection`と`collation_connection` 、各接続の文字セットと照合順序を指定するために使用できます。5 `character_set_client` 、クライアントの文字セットを設定するための変数です。
+`character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定するために使用できます。`character_set_client`は、クライアントの文字セットを設定するための変数です。
 
 結果を返す前に、 `character_set_results`システム変数は、結果のメタデータを含む、サーバーがクライアントにクエリ結果を返す文字セットを示します。
 
@@ -390,7 +390,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES` 、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。2 `SET NAMES utf8mb4` 、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
+    `SET NAMES`は、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。`SET NAMES utf8mb4`は、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
 
     `SET NAMES 'charset_name'`文は次の文の組み合わせと同等です。
 
@@ -419,15 +419,15 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字セットと照合順序の選択に関する一般的なルール {#general-rules-on-selecting-character-sets-and-collation}
 
--   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`指定し、 `COLLATE collation_name`指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+-   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+-   ルール 2: `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合は、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
 -   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
 指定された文字セットが`utf8`または`utf8mb4`場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
 
-このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`使用して文字チェックをスキップします。
+このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
 
 > **Note:**
 >
@@ -443,7 +443,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 v4.0 より前のバージョンでは、 TiDB は[照合のための古いフレームワーク](#old-framework-for-collations)のみを提供していました。このフレームワークでは、 TiDB は MySQL 照合順序のほとんどを構文的に解析することをサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として扱います。
 
-TiDBはv4.0以降、 [照合のための新しいフレームワーク](#new-framework-for-collations)サポートしています。このフレームワークでは、TiDBは異なる照合順序を意味的に解析し、文字列を比較する際には照合順序に厳密に従います。
+TiDBはv4.0以降、 [照合のための新しいフレームワーク](#new-framework-for-collations)をサポートしています。このフレームワークでは、TiDBは異なる照合順序を意味的に解析し、文字列を比較する際には照合順序に厳密に従います。
 
 ### 照合のための古いフレームワーク {#old-framework-for-collations}
 
@@ -491,7 +491,7 @@ TiDB v4.0 以降では、照合のための完全なフレームワークが導�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、照合順序の意味解析をサポートし、クラスターの初回初期化時に新しいフレームワークを有効にするかどうかを決定するための設定項目`new_collations_enabled_on_first_bootstrap`導入しました。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)参照してください。
+この新しいフレームワークは、照合順序の意味解析をサポートし、クラスターの初回初期化時に新しいフレームワークを有効にするかどうかを決定するための設定項目`new_collations_enabled_on_first_bootstrap`を導入しました。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。
 
 すでに初期化されている TiDB クラスターの場合、 `mysql.tidb`テーブルの`new_collation_enabled`変数を通じて新しい照合順序が有効になっているかどうかを確認できます。
 
@@ -598,4 +598,4 @@ SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 1 row in set (0.00 sec)
 ```
 
-詳細については[接続文字セットと照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)参照してください。
+詳細については[接続文字セットと照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)を参照してください。

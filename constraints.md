@@ -117,10 +117,10 @@ ALTER TABLE t DROP CONSTRAINT t_chk_1;
 
 テーブルに[`CHECK`制約を追加する](#add-check-constraints)設定すると、データの挿入または更新時に TiDB が制約チェックを実装する必要があるかどうかを指定できます。
 
--   `NOT ENFORCED`指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
--   `NOT ENFORCED`指定されていないか`ENFORCED`指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
+-   `NOT ENFORCED`を指定すると、TiDB はデータの挿入または更新時に制約条件をチェックしません。
+-   `NOT ENFORCED`が指定されていないか`ENFORCED`が指定されている場合、TiDB はデータの挿入または更新中に制約条件をチェックします。
 
-制約を追加するときに`[NOT] ENFORCED`指定するだけでなく、 `ALTER TABLE`ステートメントを使用して`CHECK`制約を有効または無効にすることもできます。例：
+制約を追加するときに`[NOT] ENFORCED`を指定するだけでなく、 `ALTER TABLE`ステートメントを使用して`CHECK`制約を有効または無効にすることもできます。例：
 
 ```sql
 ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
@@ -129,7 +129,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 ### MySQLの互換性 {#mysql-compatibility}
 
 -   列（例： `ALTER TABLE t ADD COLUMN a CHECK(a > 0)` ）の追加時に`CHECK`制約を追加することはサポートされていません。この場合、列のみが正常に追加され、TiDBは`CHECK`制約を無視し、エラーを報告しません。
--   `ALTER TABLE t CHANGE a b int CHECK(b > 0)`使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
+-   `ALTER TABLE t CHANGE a b int CHECK(b > 0)`を使用して`CHECK`制約を追加することはサポートされていません。この文を実行すると、TiDBはエラーを報告します。
 
 ## 一意キー {#unique-key}
 
@@ -229,7 +229,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
-悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) `OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
+悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
 
 -   遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
@@ -373,7 +373,7 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 
 > **Note:**
 >
-> TiDBはv6.6.0以降、 [FOREIGN KEY制約](/foreign-key.md)サポートします。v6.6.0より前のバージョンでは、TiDBは外部キー制約の作成と削除をサポートしていますが、実際には制約は有効になっていません。TiDBをv6.6.0以降にアップグレードすると、無効な外部キーを削除し、新しい外部キーを作成することで、外部キー制約を有効にすることができます。この機能はv8.5.0で一般提供開始となります。
+> TiDBはv6.6.0以降、 [FOREIGN KEY制約](/foreign-key.md)をサポートします。v6.6.0より前のバージョンでは、TiDBは外部キー制約の作成と削除をサポートしていますが、実際には制約は有効になっていません。TiDBをv6.6.0以降にアップグレードすると、無効な外部キーを削除し、新しい外部キーを作成することで、外部キー制約を有効にすることができます。この機能はv8.5.0で一般提供開始となります。
 
 TiDB は、DDL コマンドで`FOREIGN KEY`制約の作成をサポートしています。
 

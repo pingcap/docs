@@ -28,7 +28,7 @@ AWS アカウント ID とアベイラビリティーゾーンを表示するに
 -   MSK クラスターには**認証**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
 -   **ブローカータイプ**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
-詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)参照してください。
+詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
 Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティーゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
 
@@ -61,7 +61,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
     ```
 
-4.  以下の内容を含む`scram-client.properties`という名前のファイルを作成します。3と`pswd` `username` /SCRAMの認証情報に置き換えてください。
+4.  以下の内容を含む`scram-client.properties`という名前のファイルを作成します。`username`と`pswd`をSASL/SCRAMの認証情報に置き換えてください。
 
     ```properties
     security.protocol=SASL_SSL
@@ -71,7 +71,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
         password="pswd";
     ```
 
-5.  ACLを作成します。1 `bootstrap-server` MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config scram-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -117,7 +117,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
     sasl.client.callback.handler.class=software.amazon.msk.auth.iam.IAMClientCallbackHandler
     ```
 
-5.  ACLを作成します。1 `bootstrap-server` MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config iam-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -142,7 +142,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ3. クラスターポリシーをアタッチする {#step-3-attach-the-cluster-policy}
 
-[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) [前提条件](#prerequisites-for-essential)して、 TiDB Cloud がMSK クラスターに接続できるようにします。2 で取得したTiDB Cloud AWS アカウント ID を使用してください。
+[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 
@@ -152,6 +152,6 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ 5. TiDB Cloudで Amazon MSK プロビジョニングされたプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
 
-MSK クラスターの`ARN`使用して、 TiDB Cloudにプライベート リンク接続を作成します。
+MSK クラスターの`ARN`を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
-詳細については[Amazon MSK プロビジョニングされたプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)参照してください。
+詳細については[Amazon MSK プロビジョニングされたプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を参照してください。

@@ -21,11 +21,11 @@ TiDB Cloud を使用すると、HTAP ワークロードに応じて 1 つ以上�
 
 上の図は、 TiFlashノードを含む HTAP 形式の TiDB のアーキテクチャです。
 
-TiFlashは、ClickHouseによって効率的に実装されたコプロセッサレイヤーを備えた列指向ストレージを提供します。TiKVと同様に、 TiFlashにもMulti-Raftシステムが搭載されており、リージョン単位でのデータの複製と分散をサポートします（詳細は[データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)参照）。
+TiFlashは、ClickHouseによって効率的に実装されたコプロセッサレイヤーを備えた列指向ストレージを提供します。TiKVと同様に、 TiFlashにもMulti-Raftシステムが搭載されており、リージョン単位でのデータの複製と分散をサポートします（詳細は[データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)を参照）。
 
 TiFlashは、 TiKVノード内のデータのリアルタイムレプリケーションを低コストで実行します。これにより、TiKVへの書き込みがブロックされることはありません。同時に、TiKVと同様の読み取り一貫性を提供し、最新のデータが読み取られることを保証します。TiFlashのリージョンレプリカはTiKVのレプリカと論理的に同一であり、TiKVのLeaderレプリカと同時に分割・統合されます。
 
-Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートしている必要があります。1 `grep avx2 /proc/cpuinfo`出力が生成されることを確認して確認してください。Linux ARM64アーキテクチャの場合、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。3 `grep 'crc32' /proc/cpuinfo | grep 'asimd'`出力が生成されることを確認して確認してください。これらの命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
+Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートしている必要があります。`grep avx2 /proc/cpuinfo`の出力が生成されることを確認してください。Linux ARM64アーキテクチャの場合、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。`grep 'crc32' /proc/cpuinfo | grep 'asimd'`の出力が生成されることを確認してください。これらの命令セット拡張を使用することで、TiFlash のベクトル化エンジンはより優れたパフォーマンスを発揮できます。
 
 <CustomContent platform="tidb">
 
@@ -35,11 +35,11 @@ TiFlashはTiDBと互換性があります。TiDBをTiFlashの計算エンジン�
 
 ワークロードの分離を確保するため、 TiFlash をTiKV とは別のノードにデプロイすることをお勧めします。業務上の分離が不要な場合は、 TiFlashと TiKV を同じノードにデプロイすることも可能です。
 
-現在、 TiFlashに直接データを書き込むことはできません。TiKV は TiDB クラスターにLearnerロールとして接続するため、 TiFlashにデータを書き込み、それを複製する必要があります。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)参照してください。
+現在、 TiFlashに直接データを書き込むことはできません。TiKV は TiDB クラスターにLearnerロールとして接続するため、 TiFlashにデータを書き込み、それを複製する必要があります。TiFlashはテーブル単位でのデータ複製をサポートしていますが、デプロイ後、デフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
 TiFlashは、列指向ストレージコンポーネントとTiFlashプロキシコンポーネントという2つの主要コンポーネントで構成されています。TiFlashコンポーネントは、Multi-Raftコンセンサスアルゴリズムを用いた通信を担います。
 
-TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)自動的に作成し、その後 PD はこれらのルールに基づいて対応するデータ スケジューリングを実行します。
+TiFlash内のテーブルのレプリカを作成するための DDL コマンドを受信すると、TiDB は PD 内に対応する[配置ルール](https://docs.pingcap.com/tidb/stable/configure-placement-rules)を自動的に作成し、その後 PD はこれらのルールに基づいて対応するデータ スケジューリングを実行します。
 
 ## 主な特徴 {#key-features}
 
@@ -78,7 +78,7 @@ TiFlash は、次の 2 つの方法で TiDB のコンピューティングを高
 -   列型ストレージエンジンは読み取り操作の実行においてより効率的です。
 -   TiFlash はTiDB のコンピューティング ワークロードの一部を共有します。
 
-TiFlashは、TiKVコプロセッサーと同様にコンピューティングワークロードを分散します。TiDBは、ストレージレイヤーで完了可能なコンピューティングをプッシュダウンします。コンピューティングをプッシュダウンできるかどうかは、 TiFlashのサポート状況によって異なります。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)参照してください。
+TiFlashは、TiKVコプロセッサーと同様にコンピューティングワークロードを分散します。TiDBは、ストレージレイヤーで完了可能なコンピューティングをプッシュダウンします。コンピューティングをプッシュダウンできるかどうかは、 TiFlashのサポート状況によって異なります。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
 ## TiFlashを使用する {#use-tiflash}
 
@@ -100,13 +100,13 @@ TPC-H データセットでのデータのインポートからクエリまで�
 
 <CustomContent platform="tidb">
 
--   TiFlashノードを含む新しいクラスターを展開するには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
--   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
+-   TiFlashノードを含む新しいクラスターを展開するには、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+-   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 -   [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md) 。
 -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) 。
 -   [TiFlashの設定](/tiflash/tiflash-configuration.md) 。
 -   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) 。
--   [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)学びます。
+-   [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を学びます。
 -   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) 。
 -   [TiFlashでプッシュダウン計算をサポート](/tiflash/tiflash-supported-pushdown-calculations.md)
 -   [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)

@@ -9,7 +9,7 @@ summary: TiDBデータベースにおけるADD INDEXの使用方法の概要。
 
 > **Tip:**
 >
-> [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)使用すると、このステートメントの操作を高速化できます。
+> [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を使用すると、このステートメントの操作を高速化できます。
 
 <CustomContent platform="tidb-cloud">
 

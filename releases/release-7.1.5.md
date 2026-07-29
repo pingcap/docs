@@ -62,9 +62,9 @@ TiDB バージョン: 7.1.5
     -   TTL 機能により、データ範囲の分割が不正確になり、場合によってはでデータ ホットスポットが発生する問題を修正しました。 [＃51527](https://github.com/pingcap/tidb/issues/51527) @ [lcwangchao](https://github.com/lcwangchao)
     -   TiDBがオフラインになっているTiFlashノードにプローブ要求を送信し続ける問題を修正[＃46602](https://github.com/pingcap/tidb/issues/46602) @ [zyguan](https://github.com/zyguan)
     -   AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。 [＃52600](https://github.com/pingcap/tidb/issues/52600) @ [tiancaiamao](https://github.com/tiancaiamao)
-    -   `INSERT IGNORE`実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)
-    -   一意インデックスを追加するとTiDBがpanic可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
-    -   関連するサブクエリがある場合にウィンドウ関数がpanic可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [Rustin170506](https://github.com/Rustin170506)
+    -   `INSERT IGNORE`を実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   一意インデックスを追加するとTiDBがpanicする可能性がある問題を修正[＃52312](https://github.com/pingcap/tidb/issues/52312) @ [wjhuang2016](https://github.com/wjhuang2016)
+    -   相関サブクエリがある場合にウィンドウ関数がpanicする可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @ [Rustin170506](https://github.com/Rustin170506)
     -   `init-stats`プロセスが TiDB をpanicに陥らせ、 `load stats`プロセスが終了する可能性がある問題を修正しました。 [＃51581](https://github.com/pingcap/tidb/issues/51581) @ [hawkingrei](https://github.com/hawkingrei)
     -   TableDual で述語プッシュダウンを無効にすることで発生するパフォーマンス低下の問題を修正しました [＃50614](https://github.com/pingcap/tidb/issues/50614) @ [time-and-fate](https://github.com/time-and-fate)
     -   サブクエリの`HAVING`句に相関列が含まれている場合にクエリ結果が正しくない可能性がある問題を修正しました。 [＃51107](https://github.com/pingcap/tidb/issues/51107) @ [hawkingrei](https://github.com/hawkingrei)
@@ -88,7 +88,7 @@ TiDB バージョン: 7.1.5
     -   ログの誤った`local_region_num`値を修正 [＃8895](https://github.com/pingcap/tiflash/issues/8895) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   生成された列をクエリするとエラーが返される問題を修正しました [＃8787](https://github.com/pingcap/tiflash/issues/8787) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   チャンクエンコード中に`ENUM`列がTiFlashを引き起こす可能性がある問題を修正しました [＃8674](https://github.com/pingcap/tiflash/issues/8674) @ [yibin87](https://github.com/yibin87)
-    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanic可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    -   非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [＃8803](https://github.com/pingcap/tiflash/issues/8803) @ [Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   `TIME`列の精度が変更された後にリージョンの移行、分割、またはマージが発生すると、クエリが失敗する可能性がある問題を修正しました。 [＃8601](https://github.com/pingcap/tiflash/issues/8601) @ [JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール

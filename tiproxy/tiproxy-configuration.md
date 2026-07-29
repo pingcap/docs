@@ -5,7 +5,7 @@ summary: TiProxy を構成する方法を学びます。
 
 # TiProxyコンフィグレーションファイル {#tiproxy-configuration-file}
 
-このドキュメントでは、 TiProxyの導入と使用に関連する設定パラメータについて説明します。TiUP導入トポロジの設定については、 [tiproxy-servers の設定](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers)参照してください。
+このドキュメントでは、 TiProxyの導入と使用に関連する設定パラメータについて説明します。TiUP導入トポロジの設定については、 [tiproxy-servers の設定](/tiup/tiup-cluster-topology-reference.md#tiproxy_servers)を参照してください。
 
 以下に構成例を示します。
 
@@ -35,7 +35,7 @@ skip-ca = true
 
 > **Tip:**
 >
-> 設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。通常、変更を行うと再起動が必要になります。TiProxy はホットリロードをサポートしているため、 `tiup cluster reload --skip-restart`実行することで再起動を省略できます。
+> 設定項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。通常、変更を行うと再起動が必要になります。TiProxy はホットリロードをサポートしているため、 `tiup cluster reload --skip-restart`を実行することで再起動を省略できます。
 
 ### プロキシ {#proxy}
 
@@ -65,20 +65,20 @@ SQL ポートのコンフィグレーション。
 -   デフォルト値: `15`
 -   ホットリロードのサポート: はい
 -   単位: 秒
--   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。3 `graceful-close-conn-timeout` `graceful-wait-before-shutdown`後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
+-   TiProxy がシャットダウンする際、現在のトランザクション（ドレインクライアントとも呼ばれます）が`graceful-close-conn-timeout`秒以内に完了すると、接続が閉じられます。その後、すべての接続が一度に閉じられます。`graceful-close-conn-timeout`は`graceful-wait-before-shutdown`の後に発生します。このタイムアウトは、トランザクションのライフサイクルよりも長く設定することをお勧めします。
 
 #### `max-connections` {#max-connections}
 
 -   デフォルト値: `0`
 -   ホットリロードのサポート: はい
--   各 TiProxy インスタンスは最大`max-connections`接続を受け入れることができます。3 `0`制限がないことを意味します。
+-   各 TiProxy インスタンスは最大`max-connections`接続を受け入れることができます。`0`は制限がないことを意味します。
 
 #### `conn-buffer-size` {#conn-buffer-size}
 
 -   デフォルト値: `32768`
 -   ホットリロードのサポート: はい、ただし新規接続のみ
 -   範囲: `[1024, 16777216]`
--   この設定項目では、接続バッファのサイズを指定できます。各接続は、読み取りバッファと書き込みバッファをそれぞれ1つずつ使用します。これはメモリとパフォーマンスのトレードオフです。バッファサイズを大きくするとパフォーマンスは向上しますが、メモリ消費量も増加します。1 `0`設定すると、TiProxy はデフォルトのバッファサイズを使用します。
+-   この設定項目では、接続バッファのサイズを指定できます。各接続は、読み取りバッファと書き込みバッファをそれぞれ1つずつ使用します。これはメモリとパフォーマンスのトレードオフです。バッファサイズを大きくするとパフォーマンスは向上しますが、メモリ消費量も増加します。`0`に設定すると、TiProxy はデフォルトのバッファサイズを使用します。
 
 #### `pd-addrs` {#pd-addrs}
 
@@ -91,7 +91,7 @@ SQL ポートのコンフィグレーション。
 -   デフォルト値: `""`
 -   ホットリロードのサポート: はい、ただし新規接続のみ
 -   可能な`"v2"` : `""`
--   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。3 `"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。`"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)有効にする必要があります。
 
 ### API {#api}
 
@@ -101,14 +101,14 @@ HTTP ゲートウェイの構成。
 
 -   デフォルト値: `0.0.0.0:3080`
 -   ホットリロードのサポート: いいえ
--   APIゲートウェイアドレス。1 `ip:port`指定できます。
+-   APIゲートウェイアドレス。`ip:port`を指定できます。
 
 #### `proxy-protocol` {#proxy-protocol}
 
 -   デフォルト値: `""`
 -   ホットリロードのサポート: いいえ
 -   可能な`"v2"` : `""`
--   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。3 `"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
+-   ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)有効にします。`"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
 
 ### バランス {#balance}
 
@@ -119,14 +119,14 @@ TiProxy の負荷分散ポリシーの構成。
 -   デフォルト値: `""`
 -   ホットリロードのサポート: はい
 -   [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)に使用するラベル名を指定します。TiProxy は、このラベル名に基づいて TiDB サーバーのラベル値を照合し、自分と同じラベル値を持つ TiDB サーバーへのルーティング要求を優先します。
--   デフォルト値の`label-name`は空文字列で、ラベルベースの負荷分散が使用されないことを示します。この負荷分散ポリシーを有効にするには、この設定項目を空でない文字列に設定し、TiProxy で[`labels`](#labels) 、TiDB で[`labels`](/tidb-configuration-file.md#labels)の両方を設定する必要があります。詳細については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)参照してください。
+-   デフォルト値の`label-name`は空文字列で、ラベルベースの負荷分散が使用されないことを示します。この負荷分散ポリシーを有効にするには、この設定項目を空でない文字列に設定し、TiProxy で[`labels`](#labels) 、TiDB で[`labels`](/tidb-configuration-file.md#labels)の両方を設定する必要があります。詳細については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を参照してください。
 
 #### `policy` {#policy}
 
 -   デフォルト値: `resource`
 -   ホットリロードのサポート: はい
 -   `location` `connection`値: `resource`
--   負荷分散ポリシーを指定します。各値の意味については、 [TiProxy 負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies)参照してください。
+-   負荷分散ポリシーを指定します。各値の意味については、 [TiProxy 負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies)を参照してください。
 
 ### ハ {#ha}
 
@@ -147,7 +147,7 @@ server_configs:
     ha.interface: "eth0"
 ```
 
-TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートされます。コンピューティングレイヤーのリソースを分離する必要がある場合は、複数の仮想IPアドレスを設定し、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)組み合わせて使用​​できます。設定例については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)参照してください。
+TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートされます。コンピューティングレイヤーのリソースを分離する必要がある場合は、複数の仮想IPアドレスを設定し、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)組み合わせて使用​​できます。設定例については、 [ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を参照してください。
 
 > **Note:**
 >

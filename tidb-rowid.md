@@ -5,18 +5,18 @@ summary: _tidb_rowid`とは何か、いつ利用できるのか、そして安�
 
 # `_tidb_rowid` {#tidb-rowid}
 
-`_tidb_rowid`はTiDBによって自動的に生成される非表示のシステム列です。クラスター化インデックスを使用しないテーブルの場合、この列はテーブルの内部行IDとして機能します。テーブルスキーマでこの列を宣言または変更することはできませんが、テーブルが内部行IDとして`_tidb_rowid`使用している場合は、SQLで参照できます。
+`_tidb_rowid`はTiDBによって自動的に生成される非表示のシステム列です。クラスター化インデックスを使用しないテーブルの場合、この列はテーブルの内部行IDとして機能します。テーブルスキーマでこの列を宣言または変更することはできませんが、テーブルが内部行IDとして`_tidb_rowid`を使用している場合は、SQLで参照できます。
 
 現在の実装では、 `_tidb_rowid`はTiDBによって自動的に管理される追加の`BIGINT NOT NULL`列です。
 
 > **Warning:**
 >
-> -   `_tidb_rowid`常にグローバルに一意であるとは限らないことに注意してください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`実行すると、異なるパーティション間で`_tidb_rowid`値が重複する可能性があります。
+> -   `_tidb_rowid`常にグローバルに一意であるとは限らないことに注意してください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`を実行すると、異なるパーティション間で`_tidb_rowid`値が重複する可能性があります。
 > -   安定した一意の識別子が必要な場合は、 `_tidb_rowid`に依存するのではなく、明示的な主キーを定義して使用してください。
 
 ## <code>_tidb_rowid</code>が利用可能な場合 {#when-code-tidb-rowid-code-is-available}
 
-TiDBでは、テーブルが一意の行識別子としてクラスター化された主キーを使用しない場合、各行を識別するために`_tidb_rowid`使用します。実際には、これは次のタイプのテーブルが`_tidb_rowid`使用することを意味します。
+TiDBでは、テーブルが一意の行識別子としてクラスター化された主キーを使用しない場合、各行を識別するために`_tidb_rowid`を使用します。実際には、これは次のタイプのテーブルが`_tidb_rowid`を使用することを意味します。
 
 -   主キーのないテーブル
 -   主キーが明示的に`NONCLUSTERED`と定義されているテーブル
@@ -50,7 +50,7 @@ ERROR 1054 (42S22): Unknown column '_tidb_rowid' in 'field list'
 
 ## <code>_tidb_rowid</code>を読み込む {#read-code-tidb-rowid-code}
 
-`_tidb_rowid`使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`クエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
+`_tidb_rowid`を使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`をクエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
 
 例：
 
@@ -70,7 +70,7 @@ SELECT _tidb_rowid, a, b FROM t ORDER BY _tidb_rowid;
 +-------------+---+---+
 ```
 
-TiDB が行 ID に割り当てる次の値を表示するには、 `SHOW TABLE ... NEXT_ROW_ID`使用します。
+TiDB が行 ID に割り当てる次の値を表示するには、 `SHOW TABLE ... NEXT_ROW_ID`を使用します。
 
 ```sql
 SHOW TABLE t NEXT_ROW_ID;
@@ -96,7 +96,7 @@ INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');
 ERROR 1105 (HY000): insert, update and replace statements for _tidb_rowid are not supported
 ```
 
-データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)有効にしてください。
+データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)を有効にしてください。
 
 ```sql
 SET @@tidb_opt_write_row_id = ON;
@@ -123,14 +123,14 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 -   `_tidb_rowid`という名前のユーザー列を作成することはできません。
 -   既存のユーザー列の名前を`_tidb_rowid`に変更することはできません。
 -   `_tidb_rowid`はTiDBの内部列です。ビジネス上の主キーや長期的な識別子として扱わないでください。
--   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`値はパーティション間で一意であることが保証されません。3 `EXCHANGE PARTITION`実行した後、異なるパーティションに同じ`_tidb_rowid`値を持つ行が含まれる可能性があります。
+-   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`の値を持つ行が含まれる可能性があります。
 -   `_tidb_rowid`存在するかどうかは、テーブルのスキーマによって異なります。クラスター化インデックスを持つテーブルの場合は、行識別子として主キーを使用してください。
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
-`_tidb_rowid`使用するテーブルの場合、TiDB はデフォルトで行 ID を昇順で割り当てます。書き込み負荷の高いワークロードでは、これにより書き込みホットスポットが発生する可能性があります。
+`_tidb_rowid`を使用するテーブルの場合、TiDB はデフォルトで行 ID を昇順で割り当てます。書き込み負荷の高いワークロードでは、これにより書き込みホットスポットが発生する可能性があります。
 
-この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)使用することを検討してください。
+この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用することを検討してください。
 
 例：
 
@@ -141,7 +141,7 @@ CREATE TABLE t (
 ) SHARD_ROW_ID_BITS = 4;
 ```
 
-`SHARD_ROW_ID_BITS` `_tidb_rowid`使用するテーブルにのみ適用され、クラスター化インデックスを持つテーブルには適用されません。
+`SHARD_ROW_ID_BITS` `_tidb_rowid`を使用するテーブルにのみ適用され、クラスター化インデックスを持つテーブルには適用されません。
 
 ## 関連する記述と変数 {#related-statements-and-variables}
 

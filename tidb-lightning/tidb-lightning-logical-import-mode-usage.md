@@ -58,7 +58,7 @@ log-level = "error"
 
 戦略が`"error"`の場合、競合するデータによって発生したエラーはインポートタスクを直接終了させます。戦略が`"replace"`または`"ignore"`の場合、 [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を設定することで許容される競合の最大数を制御できます。デフォルト値は`10000`で、これは 10000 件のエラーが許容されることを意味します。
 
-戦略が`"ignore"`の場合、競合するデータは下流の`conflict_records`テーブルに記録されます。詳細については、 [エラーレポート](/tidb-lightning/tidb-lightning-error-resolution.md#error-report)参照してください。v8.1.0 より前は、 [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を設定することでレコードを制限でき、制限を超える競合データはスキップされ、記録されません。v8.1.0 以降は、TiDB Lightning が[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)入力に関係なく`max-record-rows`の値に`threshold`の値を自動的に割り当てるため、代わりにTiDB Lightning を設定する必要があります。
+戦略が`"ignore"`の場合、競合するデータは下流の`conflict_records`テーブルに記録されます。詳細については、 [エラーレポート](/tidb-lightning/tidb-lightning-error-resolution.md#error-report)を参照してください。v8.1.0 より前は、 [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を設定することでレコードを制限でき、制限を超える競合データはスキップされ、記録されません。v8.1.0 以降は、TiDB Lightning が[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)入力に関係なく`max-record-rows`の値に`threshold`の値を自動的に割り当てるため、代わりにTiDB Lightning を設定する必要があります。
 
 ## パフォーマンスチューニング {#performance-tuning}
 

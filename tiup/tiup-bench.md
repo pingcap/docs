@@ -3,7 +3,7 @@ title: Stress Test TiDB Using TiUP Bench Component
 summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレス テストを実行する方法を学習します。
 ---
 
-# TiUPベンチコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
+# TiUP Benchコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
 
 データベースのパフォーマンスをテストする際には、データベースのストレステストが必要になることがよくあります。これを容易にするために、 TiUPにはベンチコンポーネントが統合されており、ストレステスト用の複数のワークロードが用意されています。これらのワークロードには、以下のコマンドでアクセスできます。
 
@@ -40,18 +40,18 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
           --time duration         Total execution time (default to 2562047h47m16.854775807s)
       -U, --user string           Database user (default to "root")
 
--   `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
+-   `--host`と`--port`にカンマ区切りの値を指定すると、クライアント側の負荷分散が有効になります。例えば`--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、172.16.4.2:4001 に接続します。
 -   ローカルデプロイメントの場合、デフォルトのデータベースホストアドレスは`127.0.0.1`です。リモートデータベースに接続する場合は、ホストとその他の関連パラメータを指定する必要があります。例: `tiup bench tpcc -H 192.168.169.31 -P 4000 -D tpcc -U root -p tidb --warehouses 4 --parts 4 prepare`
 -   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースによってパラメータが異なる場合があります。例:
     -   `--conn-params tidb_isolation_read_engines='tiflash'` TiDB にTiFlashからの読み取りを強制します。
     -   `--conn-params sslmode=disable` 、PostgreSQL に接続するときに SSL を無効にします。
--   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、 `--ap-conn-params`使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
+-   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、 `--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
 
 次のセクションでは、 TiUPを使用して TPC-C、TPC-H、YCSB テストを実行する方法について説明します。
 
 ## TiUPを使用してTPC-Cテストを実行する {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
+TiUP Benchコンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -71,7 +71,7 @@ Flags:
 
 ### テスト手順 {#test-procedures}
 
-TPC-Cテストを実行するための簡略化された手順を以下に示します。詳細な手順については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)参照してください。
+TPC-Cテストを実行するための簡略化された手順を以下に示します。詳細な手順については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
 1.  ハッシュを使用して 4 つのパーティションを使用して 4 つの倉庫を作成します。
 
@@ -113,7 +113,7 @@ TPC-Cテストを実行するための簡略化された手順を以下に示し
 
 ## TiUPを使用してTPC-Hテストを実行する {#run-tpc-h-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-H テストを実行するために次のコマンドとパラメーターをサポートしています。
+TiUP Benchコンポーネントは、TPC-H テストを実行するために次のコマンドとパラメーターをサポートしています。
 
 ```bash
 Available Commands:
@@ -200,7 +200,7 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 ## TiUPを使用してRawSQLテストを実行する {#run-rawsql-test-using-tiup}
 
-任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`実行してテストに使用することができます。
+任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用することができます。
 
 1.  データとクエリを準備します。
 

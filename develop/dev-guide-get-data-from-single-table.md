@@ -292,7 +292,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
     +-----------+------------------------+------------+
     10 rows in set (0.11 sec)
 
-この例では、 `LIMIT`ステートメントを使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)参照してください。
+この例では、 `LIMIT`ステートメントを使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)を参照してください。
 
 ## 集計クエリ {#aggregate-queries}
 
@@ -368,7 +368,7 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
     +------------+--------------+
     71 rows in set (0.00 sec)
 
-`COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)参照してください。
+`COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。
 
 ## お困りですか？ {#need-help}
 

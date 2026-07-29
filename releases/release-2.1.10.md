@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 2.1.10
 
 ## TiDB {#tidb}
 
--   `tidb_snapshot`使用して履歴データ読み取るときに、一部の異常によりテーブル スキーマが正しくなくなる問題を修正しました。 [＃10359](https://github.com/pingcap/tidb/pull/10359)
+-   `tidb_snapshot`を使用して履歴データ読み取るときに、一部の異常によりテーブル スキーマが正しくなくなる問題を修正しました。 [＃10359](https://github.com/pingcap/tidb/pull/10359)
 -   `NOT`関数が場合によっては誤った読み取り結果を引き起こす問題を修正[＃10363](https://github.com/pingcap/tidb/pull/10363)
 -   `Replace`または`Insert on duplicate update`ステートメントの`Generated Column`の誤った動作を修正します [＃10385](https://github.com/pingcap/tidb/pull/10385)
 -   `DATE` `DATETIME` の`BETWEEN`機能のバグを修正 [＃10407](https://github.com/pingcap/tidb/pull/10407)

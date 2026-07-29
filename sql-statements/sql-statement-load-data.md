@@ -14,7 +14,7 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサ
 
 > **Warning:**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告してください。
+> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb-cloud">
 
@@ -46,7 +46,7 @@ Fields ::=
 
 ### `LOCAL` {#local}
 
-`LOCAL`使用して、インポートするクライアント上のデータ ファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
+`LOCAL`を使用して、インポートするクライアント上のデータ ファイルを指定できます。ファイル パラメーターは、クライアント上のファイル システム パスである必要があります。
 
 TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使用してローカル データ ファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
@@ -60,7 +60,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 ### <code>REPLACE</code>と<code>IGNORE</code> {#code-replace-code-and-code-ignore-code}
 
-`REPLACE`と`IGNORE`使用して、重複データの処理方法を指定できます。
+`REPLACE`と`IGNORE`を使用して、重複データの処理方法を指定できます。
 
 -   `REPLACE` : 既存のデータは上書きされます。
 -   `IGNORE` : 重複行は無視され、既存のデータは保持されます。
@@ -71,13 +71,13 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 <CustomContent platform="tidb">
 
-`LOCAL`指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`LOCAL`指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
@@ -97,12 +97,12 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 -   `FIELDS ENCLOSED BY` : データの囲み文字を指定します。
 -   `LINES TERMINATED BY` : 特定の文字で行を終了する場合に、行末文字を指定します。
 
-`DEFINED NULL BY`使用すると、データ ファイル内で NULL 値をどのように表現するかを指定できます。
+`DEFINED NULL BY`を使用すると、データ ファイル内で NULL 値をどのように表現するかを指定できます。
 
--   MySQL の動作と一致して、 `ESCAPED BY` NULL でない場合、たとえばデフォルト値`\`使用されると、 `\N` NULL 値と見なされます。
--   `DEFINED NULL BY 'my-null'`ように`DEFINED NULL BY`使用すると、 `my-null` NULL 値と見なされます。
--   `DEFINED NULL BY ... OPTIONALLY ENCLOSED`使用する場合、 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED` 、 `my-null` 、 `"my-null"` ( `ENCLOSED BY '"`仮定) は NULL 値と見なされます。
--   `DEFINED NULL BY`や`DEFINED NULL BY ... OPTIONALLY ENCLOSED`ではなく`ENCLOSED BY` （例えば`ENCLOSED BY '"'`を使用した場合、 `NULL` NULL 値とみなされます。この動作はMySQLと一致しています。
+-   MySQL の動作と一致して、 `ESCAPED BY`が NULL でない場合、たとえばデフォルト値`\`が使用されると、 `\N`は NULL 値と見なされます。
+-   `DEFINED NULL BY 'my-null'`のように`DEFINED NULL BY`を使用すると、 `my-null`は NULL 値と見なされます。
+-   `DEFINED NULL BY ... OPTIONALLY ENCLOSED`を使用する場合、 `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`のように、`my-null`と`"my-null"`（`ENCLOSED BY '"`と仮定）は NULL 値と見なされます。
+-   `DEFINED NULL BY`や`DEFINED NULL BY ... OPTIONALLY ENCLOSED`ではなく`ENCLOSED BY`（例えば`ENCLOSED BY '"'`）を使用した場合、 `NULL`は NULL 値とみなされます。この動作はMySQLと一致しています。
 -   それ以外の場合は、NULL 値とはみなされません。
 
 次のデータ形式を例に挙げます。

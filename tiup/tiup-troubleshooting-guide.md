@@ -5,17 +5,17 @@ summary: TiUPの使用中に問題が発生した場合のトラブルシュー�
 
 # TiUPトラブルシューティングガイド {#tiup-troubleshooting-guide}
 
-このドキュメントでは、 TiUPの使用時によくある問題とそのトラブルシューティング方法について解説します。このドキュメントに記載されていない問題が発生した場合、Github TiUPリポジトリの[新しい問題を提出する](https://github.com/pingcap/tiup/issues)参照してください。
+このドキュメントでは、 TiUPの使用時によくある問題とそのトラブルシューティング方法について解説します。このドキュメントに記載されていない問題が発生した場合、Github TiUPリポジトリの[新しい問題を提出する](https://github.com/pingcap/tiup/issues)を参照してください。
 
 ## TiUPコマンドのトラブルシューティング {#troubleshoot-tiup-commands}
 
 ### <code>tiup list</code>を使用して最新のコンポーネントリストを表示できません {#can-t-see-the-latest-component-list-using-code-tiup-list-code}
 
-TiUPはミラーサーバーから最新のコンポーネントリストを毎回更新するわけではありません。1 `tiup list`実行することで、コンポーネントリストを強制的に更新できます。
+TiUPはミラーサーバーから最新のコンポーネントリストを毎回更新するわけではありません。`tiup list`を実行することで、コンポーネントリストを強制的に更新できます。
 
 ### <code>tiup list &lt;component&gt;</code>を使用してコンポーネントの最新バージョン情報を表示できません {#can-t-see-the-latest-version-information-of-a-component-using-code-tiup-list-x3c-component-code}
 
-前回の問題と同様に、コンポーネントのバージョン情報は、ローカルキャッシュが存在しない場合にのみミラーサーバーから取得されます。1 `tiup list <component>`実行することでコンポーネントリストを更新できます。
+前回の問題と同様に、コンポーネントのバージョン情報は、ローカルキャッシュが存在しない場合にのみミラーサーバーから取得されます。`tiup list <component>`を実行することでコンポーネントリストを更新できます。
 
 ### コンポーネントのダウンロードプロセスが中断されました {#component-downloading-process-is-interrupted}
 
@@ -23,7 +23,7 @@ TiUPはミラーサーバーから最新のコンポーネントリストを毎�
 
 ### コンポーネントのダウンロードプロセス中にチェックサムエラーが発生しました {#a-checksum-error-occurs-during-component-downloading-process}
 
-CDNサーバーのキャッシュ時間が短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。5分後に再度ダウンロードをお試しください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題[ここ](https://github.com/pingcap/tiup/issues)報告してください。
+CDNサーバーのキャッシュ時間が短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。5分後に再度ダウンロードをお試しください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題を[ここ](https://github.com/pingcap/tiup/issues)で報告してください。
 
 ## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
@@ -31,10 +31,10 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 デプロイメント中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスではリモートホストへの接続が必要です。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからないために発生します。
 
-この問題を解決するには、 `tiup cluster deploy -i identity_file`実行して秘密鍵を指定したかどうかを確認します。
+この問題を解決するには、 `tiup cluster deploy -i identity_file`を実行して秘密鍵を指定したかどうかを確認します。
 
--   `-i`フラグが指定されていない場合、 TiUP は秘密鍵のパスを自動的に検出しない可能性があります。3 `-i`使用して秘密鍵のパスを明示的に指定することをお勧めします。
--   フラグ`-i`が指定されている場合、 TiUPは指定された秘密鍵を使用してリモートホストにログインできない可能性があります。3コマンド`ssh -i identity_file user@remote`手動で実行することで確認できます。
+-   `-i`フラグが指定されていない場合、 TiUP は秘密鍵のパスを自動的に検出しない可能性があります。`-i`を使用して秘密鍵のパスを明示的に指定することをお勧めします。
+-   フラグ`-i`が指定されている場合、 TiUPは指定された秘密鍵を使用してリモートホストにログインできない可能性があります。`ssh -i identity_file user@remote`コマンドを手動で実行することで確認できます。
 -   リモート ホストへのログインにパスワードを使用する場合は、フラグ`-p`を指定して正しいログイン パスワードを入力したことを確認してください。
 
 ### TiUPクラスタコンポーネントを使用したクラスタのアップグレード プロセスが中断されます {#the-process-of-upgrading-the-cluster-using-the-tiup-cluster-component-is-interrupted}
@@ -47,9 +47,9 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 2.  新しいコンポーネントをリモートに配布
 3.  すべてのコンポーネントのローリング再起動を実行します
 
-ローリング再起動中にアップグレードが中断された場合は、操作`tiup cluster upgrade`を繰り返す代わりに、操作`tiup cluster restart -N <node1> -N <node2>`使用して、再起動が完了していないノードを再起動できます。
+ローリング再起動中にアップグレードが中断された場合は、操作`tiup cluster upgrade`を繰り返す代わりに、操作`tiup cluster restart -N <node1> -N <node2>`を使用して、再起動が完了していないノードを再起動できます。
 
-同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`実行して特定のタイプのコンポーネントを再起動することもできます。
+同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`を実行して特定のタイプのコンポーネントを再起動することもできます。
 
 ### アップグレード中に、 <code>node_exporter-9100.service/blackbox_exporter-9115.service</code>が存在しないことがわかります。 {#during-the-upgrade-you-find-that-code-node-exporter-9100-service-blackbox-exporter-9115-service-code-does-not-exist}
 

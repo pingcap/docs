@@ -19,7 +19,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### インストールパッケージをダウンロードする {#download-the-installation-package}
 
-最新バージョンの`pd-ctl`入手するには、TiDBサーバーインストール パッケージをダウンロードします。3 `pd-ctl` `ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
+最新バージョンの`pd-ctl`を入手するには、TiDBサーバーインストール パッケージをダウンロードします。`pd-ctl`は`ctl-{version}-linux-{arch}.tar.gz`パッケージに含まれています。
 
 | インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256チェックサム                                                                             |
 | :----------------------------------------------------------------------------------------- | :---- | :------ | :--------------------------------------------------------------------------------------- |
@@ -186,13 +186,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`リージョンマージのサイズ上限を制御します（単位は MiB）。2 `regionSize`指定値を超える場合、PD は隣接するリージョンとマージしません。0 に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`はリージョンマージのサイズ上限を制御します（単位は MiB）。`regionSize`が指定値を超える場合、PD は隣接するリージョンとマージしません。0 に設定すると、リージョンマージが無効になります。
 
     ```bash
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
--   `max-merge-region-keys`リージョンマージのキー数の上限を制御します。2 `regionKeyCount`指定された値を超える場合、PD は隣接するリージョンとマージしません。
+-   `max-merge-region-keys`はリージョンマージのキー数の上限を制御します。`regionKeyCount`が指定された値を超える場合、PD は隣接するリージョンとマージしません。
 
     ```bash
     config set max-merge-region-keys 50000 // Set the upper limit on keyCount to 50000
@@ -204,13 +204,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge` 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。2 `false`設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
+-   `enable-one-way-merge`は 、PD がリージョン を次のリージョンとの結合のみを許可するかどうかを制御します。`false`に設定すると、PD はリージョン を隣接する 2 つの Region との結合を許可します。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
     ```
 
--   `enable-cross-table-merge` 、テーブル間のリージョンのマージを有効にするために使用されます。2 `false`設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが「テーブル」の場合にのみ機能します。
+-   `enable-cross-table-merge`は 、テーブル間のリージョンのマージを有効にするために使用されます。`false`に設定すると、PD は異なるテーブルのリージョンをマージしません。このオプションは、キータイプが「テーブル」の場合にのみ機能します。
 
     ```bash
     config set enable-cross-table-merge true  // Enable cross table merge.
@@ -219,7 +219,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `key-type` 、クラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
     -   クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
-    -   クラスター内にTiDBインスタンスが存在する場合、 `key-type` 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。5 `key-type` 「raw」の場合、配置ルールは機能しません。
+    -   クラスター内にTiDBインスタンスが存在する場合、 `key-type`は 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type`が 「raw」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
@@ -313,7 +313,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set cluster-version 8.5.5             // Set the version of the cluster to 8.5.5
     ```
 
--   `replication-mode`デュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)参照してください。
+-   `replication-mode`はデュアルデータセンターシナリオにおけるリージョンのレプリケーションモードを制御します。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
 
 -   `leader-schedule-policy`はリーダーのスケジューリング戦略を選択するために使用されます。2 または`size`に従ってリーダー`count`スケジュールできます。
 
@@ -321,7 +321,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `enable-remove-down-replica`は`false`ダウンタイムレプリカの自動削除機能を有効にするために使用されます。2 に設定すると、PDはダウンタイムレプリカを自動的にクリーンアップしません。
 
--   `enable-replace-offline-replica`は、OfflineReplica の移行機能を有効にするために使用されます。2 `false`設定すると、PD はオフラインレプリカを移行しません。
+-   `enable-replace-offline-replica`は、OfflineReplica の移行機能を有効にするために使用されます。`false`に設定すると、PD はオフラインレプリカを移行しません。
 
 -   `enable-make-up-replica`はレプリカ作成機能を有効にするために使用されます。 `false`に設定すると、PDはレプリカが不足しているリージョンに対してレプリカを追加しません。
 
@@ -333,7 +333,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `enable-placement-rules`は配置ルールを有効にするために使用され、v5.0 以降のバージョンではデフォルトで有効になっています。
 
--   `store-limit-mode`はストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。6 `auto`では、ストアは負荷に応じて自動的にバランス調整されます（非推奨）。
+-   `store-limit-mode`はストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。`auto`では、ストアは負荷に応じて自動的にバランス調整されます（非推奨）。
 
 -   `store-limit-version`ストア制限の計算式のバージョンを制御します。v1 モードでは、 `store limit`を手動で変更することで、単一の TiKV のスケジュール速度を制限できます。v2 モードでは、PD が TiKV スナップショットの機能に基づいて 4 の値を動的に調整するため、 `store limit`値を手動で設定する必要はありません。詳細については、 [ストア制限の原則 v2](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
@@ -468,7 +468,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 
 ### `config placement-rules [disable | enable | load | save | show | rule-group]` {#config-placement-rules-disable-enable-load-save-show-rule-group}
 
-`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)参照してください。
+`config placement-rules [disable | enable | load | save | show | rule-group]`の使い方については[配置ルールを構成する](/configure-placement-rules.md#configure-rules)を参照してください。
 
 ### `health` {#health}
 
@@ -565,7 +565,7 @@ v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`
 
 > **Note:**
 >
-> 本番環境では、 `member delete`コマンドを使用して PD ノードを削除**しないでください**。PD ノードを削除するには、 [TiDB/PD/TiKV クラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster)と[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)参照してください。
+> 本番環境では、 `member delete`コマンドを使用して PD ノードを削除**しないでください**。PD ノードを削除するには、 [TiDB/PD/TiKV クラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tidbpdtikv-cluster)と[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster/)を参照してください。
 
 このコマンドを使用して、PD メンバーを表示したり、指定されたメンバーを削除したり、リーダーの優先度を設定したりします。
 
@@ -649,7 +649,7 @@ time: 43.12698ms
 
 ### `region &#x3C;region_id> [--jq="&#x3C;query string>"]` {#region-x3c-region-id-jq-x3c-query-string}
 
-このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
+このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -877,7 +877,7 @@ time: 43.12698ms
 
 ### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]` {#region-check-miss-peer-extra-peer-down-peer-pending-peer-offline-peer-empty-region-hist-size-hist-keys-jq-x3c-query-string}
 
-このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)参照してください。
+このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 各種タイプの説明:
 
@@ -983,7 +983,7 @@ v6.2.0以降、TiKVはPDにストアハートビートスコア`SlowScore`を報
 
 v8.5.5以降、TiKVはストア内の`NetworkSlowScore`ビートをPDに報告する機能をサポートします。これはネットワーク検出結果に基づいて計算され、ネットワークジッターが発生している低速ノードを特定するのに役立ちます。スコアの範囲は1～100で、値が高いほどネットワーク異常の可能性が高くなります。
 
--   TiKVはデフォルトで低速ネットワークノードの検出を有効にし、デフォルトのプロービング間隔は`100ms`です。プロービング頻度を変更するには、TiKV設定項目[`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855)適切な値に設定します。値を小さくするとプロービング頻度が増加し、ネットワークジッターの検出速度が向上しますが、ネットワークリソースとCPUリソースの消費量も増加します。
+-   TiKVはデフォルトで低速ネットワークノードの検出を有効にし、デフォルトのプロービング間隔は`100ms`です。プロービング頻度を変更するには、TiKV設定項目[`raftstore.inspect-network-interval`](/tikv-configuration-file.md#inspect-network-interval-new-in-v855)を適切な値に設定します。値を小さくするとプロービング頻度が増加し、ネットワークジッターの検出速度が向上しますが、ネットワークリソースとCPUリソースの消費量も増加します。
 
 -   PD側では、低速ネットワークノードのスケジューリングはデフォルトで無効になっています。有効にするには、PDを以下のように設定してください。
 
@@ -1101,7 +1101,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
     ```
 
--   `src-tolerance-ratio`と`dst-tolerance-ratio`期待値スケジューラの設定項目です。4 `tolerance-ratio`小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
+-   `src-tolerance-ratio`と`dst-tolerance-ratio`は期待値スケジューラの設定項目です。`tolerance-ratio`が小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
 
     ```bash
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
@@ -1189,7 +1189,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]` {#store-delete-cancel-delete-label-weight-remove-tombstone-limit-x3c-store-id-jq-x3c-query-string}
 
-jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)参照してください。
+jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 #### ストアを取得する {#get-a-store}
 
@@ -1281,7 +1281,7 @@ store weight 1 5 10
 
 #### ストアスケジュールの速度を設定する {#configure-store-scheduling-speed}
 
-`store limit`使ってストアのスケジュール速度を設定できます。 `store limit`の原理と使用方法の詳細については、 [`store limit`](/configure-store-limit.md)参照してください。
+`store limit`を使ってストアのスケジュール速度を設定できます。 `store limit`の原理と使用方法の詳細については、 [`store limit`](/configure-store-limit.md)を参照してください。
 
 ```bash
 >> store limit                                  // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
@@ -1299,7 +1299,7 @@ store weight 1 5 10
 
 > **Note:**
 >
-> `pd-ctl`使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)参照してください。
+> `pd-ctl`を使用すると、TiKVストアの状態（ `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ）を確認できます。各状態の関係については、 [TiKVストアの各状態間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### `log [fatal | error | warn | info | debug]` {#log-fatal-error-warn-info-debug}
 

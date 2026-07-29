@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW STATS_META の使用法の概要。
 
 # SHOW STATS_META {#show-stats-meta}
 
-`SHOW STATS_META`使用すると、テーブル内の行数と、そのテーブルで変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`句を使用して必要な情報をフィルタリングできます。
+`SHOW STATS_META`を使用すると、テーブル内の行数と、そのテーブルで変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`句を使用して必要な情報をフィルタリングできます。
 
 現在、 `SHOW STATS_META`ステートメントは次の列を出力します。
 

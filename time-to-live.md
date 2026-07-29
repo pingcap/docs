@@ -30,7 +30,7 @@ TTLは、オンラインの読み取りおよび書き込みワークロード�
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-    上記の例では、テーブル`t1`を作成し、TTLタイムスタンプ列に`created_at`指定しています。これはデータの作成時刻を示します。また、テーブル内で行が保持できる最長期間を 3 か月から`INTERVAL 3 MONTH`に設定しています。この値を超えて保持されるデータは、後で削除されます。
+    上記の例では、テーブル`t1`を作成し、TTLタイムスタンプ列に`created_at`を指定しています。これはデータの作成時刻を示します。また、テーブル内で行が保持できる最長期間を、 `INTERVAL 3 MONTH`によって 3 か月に設定しています。この値を超えて保持されるデータは、後で削除されます。
 
 -   期限切れのデータをクリーンアップする機能を有効または無効にするには、 `TTL_ENABLE`属性を設定します。
 
@@ -80,7 +80,7 @@ TTLは、オンラインの読み取りおよび書き込みワークロード�
 
 TTL は[データ型のデフォルト値](/data-type-default-values.md)と組み合わせて使用​​できます。以下に一般的な使用例を2つ示します。
 
--   列のデフォルト値を現在の作成時刻に指定し、この列をTTLタイムスタンプ列として使用するには、 `DEFAULT CURRENT_TIMESTAMP`使用します。3か月前に作成されたレコードは期限切れです。
+-   列のデフォルト値を現在の作成時刻に指定し、この列をTTLタイムスタンプ列として使用するには、 `DEFAULT CURRENT_TIMESTAMP`を使用します。3か月前に作成されたレコードは期限切れです。
 
     ```sql
     CREATE TABLE t1 (
@@ -243,8 +243,8 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 | 機能名                                                                         | 説明                                                                                                                                                                               |
 | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDBはフラッシュバック後に期限切れのデータを直ちに削除しなくなります。各テーブルのTTLを再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDBはフラッシュバック後に期限切れのデータを直ちに削除しなくなります。各テーブルのTTLを再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)       | `FLASHBACK TABLE`を指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDBはフラッシュバック後に期限切れのデータを直ちに削除しなくなります。各テーブルのTTLを再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE`を指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDBはフラッシュバック後に期限切れのデータを直ちに削除しなくなります。各テーブルのTTLを再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
 | [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)   | `FLASHBACK CLUSTER`はシステム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)を`OFF`に設定し、 `TTL_ENABLE`属性の値は変更しません。                                      |
 
 ## 制限事項 {#limitations}
@@ -254,7 +254,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 -   TTL 属性は、ローカル一時テーブルやグローバル一時テーブルなどの一時テーブルには設定できません。
 -   TTL 属性を持つテーブルは、外部キー制約のプライマリ テーブルとして他のテーブルから参照されることをサポートしていません。
 -   すべての期限切れデータが直ちに削除されることは保証されません。期限切れデータが削除されるタイミングは、バックグラウンドクリーンアップジョブのスケジュール間隔とスケジュールウィンドウによって異なります。
--   [クラスター化インデックス](/clustered-indexes.md)使用するテーブルの場合、次のシナリオでのみ、TTL ジョブを複数のサブタスクに分割できます。
+-   [クラスター化インデックス](/clustered-indexes.md)を使用するテーブルの場合、次のシナリオでのみ、TTL ジョブを複数のサブタスクに分割できます。
     -   主キーまたは複合主キーの最初の列は、 `INTEGER`またはバイナリ文字列型です。バイナリ文字列型は主に以下のものを指します。
         -   `CHAR(N) CHARACTER SET BINARY`
         -   `VARCHAR(N) CHARACTER SET BINARY`
@@ -271,7 +271,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 -   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour` 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour`は 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`が長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

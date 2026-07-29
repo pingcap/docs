@@ -142,7 +142,7 @@ tiup playground scale-out --db 2
 
 ## クラスタースケールイン {#scale-in-a-cluster}
 
-対応するインスタンスでスケールするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。5 `pid`表示するには、 `tiup playground display`実行します。
+対応するインスタンスでスケールするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。`pid`を表示するには、 `tiup playground display`を実行します。
 
 ```shell
 tiup playground scale-in --pid 86526
@@ -179,9 +179,9 @@ TiUP v1.15.0以降では、 TiUP Playgroundを使用してクラスターにTiPr
           --tiproxy.version string       The version of TiProxy. If not specified, the latest version of TiProxy is deployed.
     ```
 
-TiProxyのデプロイと使用方法の詳細については、 [TiProxyのインストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)参照してください。
+TiProxyのデプロイと使用方法の詳細については、 [TiProxyのインストールと使用方法](/tiproxy/tiproxy-overview.md#installation-and-usage)を参照してください。
 
-TiProxyクライアントプログラム`tiproxyctl`を使用するには、 [TiProxy Controlをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)参照してください。
+TiProxyクライアントプログラム`tiproxyctl`を使用するには、 [TiProxy Controlをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)を参照してください。
 
 ## PDマイクロサービスをデプロイ {#deploy-pd-microservices}
 

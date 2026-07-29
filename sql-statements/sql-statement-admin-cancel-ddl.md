@@ -6,7 +6,7 @@ category: reference
 
 # ADMIN CANCEL DDL {#admin-cancel-ddl}
 
-`ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)実行することで確認できます。
+`ADMIN CANCEL DDL`文は実行中のDDLジョブをキャンセルします。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで確認できます。
 
 `ADMIN CANCEL DDL`文を使用すると、コミットされているもののまだ実行が完了していないDDLジョブをキャンセルすることもできます。キャンセル後、DDLジョブを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。すでに完了しているDDLジョブをキャンセルした場合は、 `RESULT`列に`DDL Job:90 not found`エラーが表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 
@@ -22,7 +22,7 @@ NumList ::=
 
 ## 例 {#examples}
 
-現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`使用します。
+現在実行中の DDL ジョブをキャンセルし、対応するジョブが正常にキャンセルされたかどうかを返すには、 `ADMIN CANCEL DDL JOBS`を使用します。
 
 ```sql
 ADMIN CANCEL DDL JOBS job_id [, job_id] ...;

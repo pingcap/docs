@@ -9,7 +9,7 @@ summary: アプリケーションでベクトル検索を使用する方法を�
 
 > **Note:**
 >
-> ベクトル検索の完全な例については、 [ベクトル検索の例](/ai/examples/vector-search-with-pytidb.md)参照してください。
+> ベクトル検索の完全な例については、 [ベクトル検索の例](/ai/examples/vector-search-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 
@@ -20,7 +20,7 @@ summary: アプリケーションでベクトル検索を使用する方法を�
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-`client.create_table()`使用してテーブルを作成し、 `VectorField`使用してベクトル フィールドを定義できます。
+`client.create_table()`を使用してテーブルを作成し、 `VectorField`を使用してベクトル フィールドを定義できます。
 
 次の例では、4 つの列を持つ`documents`テーブルを作成します。
 
@@ -323,7 +323,7 @@ results = (
 
 > **Note:**
 >
-> ベクトルインデックスを使用する場合、最後の`limit`が非常に小さいと結果の精度が低下する可能性があります。3 `.num_candidate()`の方法を使用すると、ベクトル検索フェーズでベクトルインデックスから取得する候補の数を、 `limit`番目のパラメータを変更せずに制御できます。
+> ベクトルインデックスを使用する場合、最後の`limit`が非常に小さいと結果の精度が低下する可能性があります。`.num_candidate()`の方法を使用すると、ベクトル検索フェーズでベクトルインデックスから取得する候補の数を、 `limit`番目のパラメータを変更せずに制御できます。
 
 > `num_candidate`値を大きくすると、一般的に再現率は向上しますが、クエリのパフォーマンスが低下する可能性があります。データセットと精度要件に応じてこの値を調整してください。
 
@@ -362,7 +362,7 @@ LIMIT 10;
 >
 > これを軽減するには、**内部クエリ**の`LIMIT`値 (例: 50) を増やして、より多くの候補を取得し、フィルタリング後に十分な有効な結果が返される可能性を高めることができます。
 
-サポートされている SQL 演算子については、 TiDB Cloudドキュメントの[オペレーター](https://docs.pingcap.com/tidbcloud/operators/)参照してください。
+サポートされている SQL 演算子については、 TiDB Cloudドキュメントの[オペレーター](https://docs.pingcap.com/tidbcloud/operators/)を参照してください。
 
 </div>
 </SimpleTab>
@@ -385,7 +385,7 @@ results = (
 )
 ```
 
-サポートされているフィルター演算子については、 [フィルタリング](/ai/guides/filtering.md)参照してください。
+サポートされているフィルター演算子については、 [フィルタリング](/ai/guides/filtering.md)を参照してください。
 
 </div>
 <div label="SQL" value="sql">
@@ -400,7 +400,7 @@ ORDER BY distance
 LIMIT 10;
 ```
 
-サポートされている SQL 演算子については、 TiDB Cloudドキュメントの[オペレーター](https://docs.pingcap.com/tidbcloud/operators/)参照してください。
+サポートされている SQL 演算子については、 TiDB Cloudドキュメントの[オペレーター](https://docs.pingcap.com/tidbcloud/operators/)を参照してください。
 
 </div>
 </SimpleTab>

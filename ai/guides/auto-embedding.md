@@ -9,11 +9,11 @@ summary: アプリケーションで自動埋め込みを使用する方法を�
 
 > **Note:**
 >
-> 自動埋め込みの完全な例については、 [自動埋め込みの例](/ai/examples/auto-embedding-with-pytidb.md)参照してください。
+> 自動埋め込みの完全な例については、 [自動埋め込みの例](/ai/examples/auto-embedding-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 
-このドキュメントでは、 TiDB Cloudホストの埋め込みモデルをデモに使用しています。サポートされているプロバイダーの全リストについては、 [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md#available-text-embedding-models)参照してください。
+このドキュメントでは、 TiDB Cloudホストの埋め込みモデルをデモに使用しています。サポートされているプロバイダーの全リストについては、 [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md#available-text-embedding-models)を参照してください。
 
 ### ステップ1. 埋め込み関数を定義する {#step-1-define-an-embedding-function}
 
@@ -29,7 +29,7 @@ embed_func = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-a-vector-field}
 
-テーブル スキーマにベクトル フィールドを作成するには、 `embed_func.VectorField()`使用します。
+テーブル スキーマにベクトル フィールドを作成するには、 `embed_func.VectorField()`を使用します。
 
 自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`設定します。
 

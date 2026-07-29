@@ -15,9 +15,9 @@ summary: TiUPミラーローテートは、 TiUPミラー内のroot.jsonファ�
     -   タイムスタンプ.json
 -   有効期限は`root.json` 。公式ミラーの場合、有効期限は作成日`root.json`の 1 年後となります。
 
-TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)参照してください。
+TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 
-以下の場合には`root.json`更新する必要があります。
+以下の場合には`root.json`を更新する必要があります。
 
 -   ミラーのキーを交換してください。
 -   証明書ファイルの有効期限を更新します。
@@ -26,16 +26,16 @@ TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup
 
 1.  ユーザー（クライアント）は`root.json`のコンテンツを更新します。
 2.  すべての管理者が新しい`root.json`ファイルに署名します。
-3.  tiup-server は`snapshot.json`更新して、新しい`root.json`ファイルのバージョンを記録します。
+3.  tiup-server は`snapshot.json`を更新して、新しい`root.json`ファイルのバージョンを記録します。
 4.  tiup-server は新しい`snapshot.json`ファイルに署名します。
-5.  tiup-server は`timestamp.json`更新して、新しい`snapshot.json`ファイルのハッシュ値を記録します。
+5.  tiup-server は`timestamp.json`を更新して、新しい`snapshot.json`ファイルのハッシュ値を記録します。
 6.  tiup-server は新しい`timestamp.json`ファイルに署名します。
 
 TiUP はコマンド`tiup mirror rotate`を使用して上記のプロセスを自動化します。
 
 > **Note:**
 >
-> -   TiUPバージョン1.5.0より前のバージョンでは、このコマンドを実行しても正しい新しい`root.json`ファイルが返されません[＃983](https://github.com/pingcap/tiup/issues/983)参照してください。
+> -   TiUPバージョン1.5.0より前のバージョンでは、このコマンドを実行しても正しい新しい`root.json`ファイルが返されません。[＃983](https://github.com/pingcap/tiup/issues/983)を参照してください。
 > -   このコマンドを使用する前に、すべてのTiUPクライアントが v1.5.0 以降のバージョンにアップグレードされていることを確認してください。
 
 ## 構文 {#syntax}
@@ -52,7 +52,7 @@ tiup mirror rotate [flags]
 
 ### --addr {#addr}
 
--   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)使用してファイルに署名できるように、このアドレスにアクセスできることを確認する必要があります。
+-   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を使用してファイルに署名できるように、このアドレスにアクセスできることを確認する必要があります。
 -   データ型: `STRING`
 -   コマンドでこのオプションを指定しない場合、 TiUP はデフォルトで`0.0.0.0:8080`でリッスンします。
 

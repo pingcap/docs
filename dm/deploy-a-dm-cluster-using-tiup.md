@@ -141,7 +141,7 @@ alertmanager_servers:
 >     -   TiUPノードは、すべての DM マスター ノードの`port` (デフォルトでは`8261` ) に接続できます。
 >     -   TiUPノードは、すべての DM ワーカー ノードの`port` (デフォルトでは`8262` ) に接続できます。
 
-`master_servers.host.config`パラメータの詳細については[マスターパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)を参照してください。5 `worker_servers.host.config`のパラメータの詳細については[ワーカーパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`パラメータの詳細については[マスターパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)を参照してください。`worker_servers.host.config`のパラメータの詳細については[ワーカーパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 
 ## ステップ3: デプロイメントコマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -162,7 +162,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | パラメータ                    | 説明                                                                              |
 | ------------------------ | ------------------------------------------------------------------------------- |
 | `${name}`                | DM クラスターの名前 (例: dm-test)                                                        |
-| `${version}`             | DM クラスターのバージョン`tiup list dm-master`実行すると、サポートされている他のバージョンを確認できます。               |
+| `${version}`             | DM クラスターのバージョン`tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
 | `./topology.yaml`        | トポロジ構成ファイルのパス。                                                                  |
 | `-u`または`--user`          | クラスターの展開を完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザー アカウントとしてターゲット マシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
@@ -216,8 +216,8 @@ tiup dm display dm-test
 
 dmctl は、DM クラスタを制御するためのコマンドラインツールです[TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)を使用することをお勧めします。
 
-dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)参照してください。
+dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
 
 ## ステップ9: データベースのパスワードを暗号化する {#step-9-encrypt-the-database-password}
 
-デプロイメント後、データベースパスワードを暗号化するようにDMタスクを設定できます。詳細については、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)参照してください。
+デプロイメント後、データベースパスワードを暗号化するようにDMタスクを設定できます。詳細については、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。

@@ -92,7 +92,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     現在、 TiDB Cloud EssentialはAWSおよびAlibaba Cloudでパブリックプレビュー版として提供されています。
 
-    Alibaba Cloud 上のTiDB Cloud StarterとTiDB Cloud Essentialの機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)参照してください。
+    Alibaba Cloud 上のTiDB Cloud StarterとTiDB Cloud Essentialの機能比較については、 [Alibaba Cloud 上の TiDB](https://www.pingcap.com/partners/alibaba-cloud/)を参照してください。
 
     </CustomContent>
 
@@ -144,7 +144,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 -   TiDB Cloudセントラルサービス
 
-    課金、アラート、メタstorage、ダッシュボードUIなどの中央サービスは、それぞれ独立してデプロイされます。ダッシュボードUIにはインターネット経由でアクセスでき、 TiDB Cloudリソースを操作できます。
+    課金、アラート、メタストレージ、ダッシュボードUIなどの中央サービスは、それぞれ独立してデプロイされます。ダッシュボードUIにはインターネット経由でアクセスでき、 TiDB Cloudリソースを操作できます。
 
 -   あなたのVPC
 
