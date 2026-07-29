@@ -31,15 +31,9 @@ TiDB does not provide built-in cold/hot detection tools. You need to assess data
 
 ## When data is stored in cold storage (IA tier), are all three replicas stored, or just one copy?
 
-All three replicas are stored in cold storage, not just one.
+Only one copy is stored on S3 — all three replicas share the same object.
 
-TiKV's Raft three-replica mechanism is identical between the IA and Standard layers — what changes is the data storage location and format:
+In the cloud storage engine architecture, SST/blob data files have only one copy on object storage (S3/DFS) to begin with: files are uploaded once by flush/compaction, the S3 key contains no node/replica information, and the three Raft replicas reference the same file id through the Raft-replicated ChangeSet. The three-replica mechanism applies only to Raft logs, metadata, and each node's local cache — never to the data on object storage.
 
-- **Standard layer**: Three replicas are each stored on the local disks of three TiKV nodes
-- **IA layer**: Three replicas are each uploaded to object storage independently in IA format
+**Cost implications**: The storage volume on S3 is always about 1x the data size (it does not multiply with the replica count). What the IA tier saves is local disk usage on each node; data durability is guaranteed by the object storage itself, independent of the replica count.
 
-Each replica on each TiKV node runs its own independent LSM-Tree, performing independent flush and compaction operations. When a table switches to IA storage class, all subsequently generated SST files are written to object storage in IA type. The three replicas produce their own independent SST files — three separate objects in object storage, not shared.
-
-IA is a **storage format/location optimization**, not a **replica reduction mechanism**. It changes "how each node stores its own copy," not "how many copies exist." The Raft write and replication flow is identical to the Standard layer.
-
-**Cost impact**: Since all three replicas upload independently, the total storage in object storage remains approximately 3× the data volume. However, the unit storage cost of the object storage infrequent-access tier is lower, so the overall storage expense is reduced.
