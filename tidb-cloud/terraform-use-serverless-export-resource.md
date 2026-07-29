@@ -15,7 +15,7 @@ summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud 
 
 > **Note:**
 >
-> `tidbcloud_serverless_export`リソースは変更できません。3 `tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
+> `tidbcloud_serverless_export`リソースは変更できません。`tidbcloud_serverless_export`のリソースの設定を変更する場合は、既存のリソースを削除してから、新しいリソースを作成する必要があります。
 
 ## 前提条件 {#prerequisites}
 

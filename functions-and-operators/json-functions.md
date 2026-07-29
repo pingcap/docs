@@ -128,7 +128,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | JSONパス                                | 説明                         | 例[`JSON_EXTRACT()`](/functions-and-operators/json-functions/json-functions-search.md#json_extract)   |
 | ------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `$`                                   | 文書のルート                     | 完全な文書を返します                                                                                           |
-| `$.database`                          | `database`オブジェクト           | `"database"`から始まる完全な構造を返します。3 `"migration_tool"`それ以下の構造は含まれません。                                      |
+| `$.database`                          | `database`オブジェクト           | `"database"`から始まる完全な構造を返します。`"migration_tool"`とそれ以下の構造は含まれません。                                      |
 | `$.database.name`                     | データベースの名前。                 | `"TiDB"`                                                                                             |
 | `$.database.features`                 | すべてのデータベース機能               | `["distributed", "scalable", "relational", "cloud native"]`                                          |
 | `$.database.features[0]`              | 最初のデータベース機能。               | `"distributed"`                                                                                      |

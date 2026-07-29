@@ -272,7 +272,7 @@ TiProxyとTiDBサーバー間のTLS接続は、以下のルールに従って有
 
 TiProxyには、TiDBと互換性のない以下の動作があります。
 
--   `STATUS`と`SHOW STATUS`ステートメントは異なるTLS情報を返す可能性があります。5 `STATUS`のステートメントはクライアントとTiProxy間のTLS情報を返し、 `SHOW STATUS`ステートメントはTiProxyとTiDBサーバー間のTLS情報を返します。
+-   `STATUS`と`SHOW STATUS`ステートメントは異なるTLS情報を返す可能性があります。`STATUS`のステートメントはクライアントとTiProxy間のTLS情報を返し、 `SHOW STATUS`ステートメントはTiProxyとTiDBサーバー間のTLS情報を返します。
 -   TiProxy は[証明書ベースの認証](/certificate-authentication.md)サポートしていません。そうでない場合、クライアントと TiProxy 間の TLS 証明書が TiProxy と TiDBサーバー間の TLS 証明書と異なるため、クライアントはログインに失敗する可能性があります。TiDBサーバーはTiProxy 上の TLS 証明書に基づいて TLS 証明書を検証します。
 
 ## 制限事項 {#limitations}

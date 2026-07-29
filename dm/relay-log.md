@@ -88,7 +88,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 <div label="earlier than v2.0.2">
 
-DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`チェックされます。3 `enable-relay` `true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
+DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`がチェックされます。`enable-relay`が`true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
 
 設定項目`enable-relay`設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
 

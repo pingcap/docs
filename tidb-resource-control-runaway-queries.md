@@ -55,7 +55,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 > **Note:**
 >
-> ランナウェイクエリを特定のリソースグループに厳密に制限したい場合は、 `SWITCH_GROUP`と[`QUERY WATCH`](#query-watch-parameters)ステートメントを併用することをお勧めします。5 `QUERY_LIMIT` 、クエリが条件を満たした場合にのみ対応する`ACTION`操作をトリガーするため、このようなシナリオでは`SWITCH_GROUP`クエリを適切なタイミングで対象のリソースグループに切り替えられない可能性があります。
+> ランナウェイクエリを特定のリソースグループに厳密に制限したい場合は、 `SWITCH_GROUP`と[`QUERY WATCH`](#query-watch-parameters)ステートメントを併用することをお勧めします。`QUERY_LIMIT`は、クエリが条件を満たした場合にのみ対応する`ACTION`操作をトリガーするため、このようなシナリオでは`SWITCH_GROUP`はクエリを適切なタイミングで対象のリソースグループに切り替えられない可能性があります。
 
 ## 例 {#examples}
 
@@ -98,7 +98,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
--   SQLをSQLダイジェストに解析することで、リソースグループ`rg1`ランナウェイクエリ監視リストに一致する機能を追加します。3 `ACTION`指定されていない場合は、リソースグループ`rg1`に既に設定されているオプション`ACTION`使用されます。
+-   SQLをSQLダイジェストに解析することで、リソースグループ`rg1`のランナウェイクエリ監視リストに一致する機能を追加します。`ACTION`が指定されていない場合は、リソースグループ`rg1`に既に設定されているオプション`ACTION`が使用されます。
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';

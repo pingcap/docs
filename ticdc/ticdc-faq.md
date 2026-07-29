@@ -335,7 +335,7 @@ TiDB v7.1.0 以降、TiCDC はこれらの冗長な DML イベントを削除し
 
 ## DDL文を下流のMySQL 5.7に複製する際に、時間型フィールドのデフォルト値が一致しません。どうすればよいでしょうか？ {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
 
-上流のTiDBで`create table test (id int primary key, ts timestamp)`文が実行されたとします。TiCDCがこの文を下流のMySQL 5.7に複製する際、MySQLはデフォルト設定を使用します。複製後のテーブルスキーマは以下のようになります。3 `timestamp`のフィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
+上流のTiDBで`create table test (id int primary key, ts timestamp)`文が実行されたとします。TiCDCがこの文を下流のMySQL 5.7に複製する際、MySQLはデフォルト設定を使用します。複製後のテーブルスキーマは以下のようになります。`timestamp`のフィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
 
 ```sql
 mysql root@127.0.0.1:test> show create table test;

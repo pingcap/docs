@@ -178,7 +178,7 @@ MySQL と TiDB の両方で、 `utf8`と`utf8mb3`同じ文字セットのエイ�
 
 TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にすることができます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`を使用することをお勧めします。
 
-以下は、4バイトの絵文字をテーブルに挿入する際のデフォルトの動作を示しています。1 `INSERT`文は`utf8`文字セットでは失敗しますが、 `utf8mb4`の文では成功します。
+以下は、4バイトの絵文字をテーブルに挿入する際のデフォルトの動作を示しています。`INSERT`文は`utf8`文字セットでは失敗しますが、 `utf8mb4`の文では成功します。
 
 ```sql
 CREATE TABLE utf8_test (
@@ -382,7 +382,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   デフォルト データベースの文字セットと照合順序は、システム変数`character_set_database`と`collation_database`の値です。
 
-`character_set_connection`と`collation_connection` 、各接続の文字セットと照合順序を指定するために使用できます。5 `character_set_client` 、クライアントの文字セットを設定するための変数です。
+`character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定するために使用できます。`character_set_client`は、クライアントの文字セットを設定するための変数です。
 
 結果を返す前に、 `character_set_results`システム変数は、結果のメタデータを含む、サーバーがクライアントにクエリ結果を返す文字セットを示します。
 
@@ -390,7 +390,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES` 、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。2 `SET NAMES utf8mb4` 、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
+    `SET NAMES`は、クライアントがサーバーに SQL ステートメントを送信するために使用する文字セットを示します。`SET NAMES utf8mb4`は、クライアントからのすべてのリクエストとサーバーからの結果に utf8mb4 が使用されることを示します。
 
     `SET NAMES 'charset_name'`文は次の文の組み合わせと同等です。
 

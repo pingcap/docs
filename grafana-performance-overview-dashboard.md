@@ -180,7 +180,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
     -   `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサ要求の数。
     -   `cop_dag` : すべてのコプロセッサ要求内の DAG 要求の数。
     -   `super_batch` : スーパーバッチ機能を有効にするリクエストの数。
--   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。1 `table_scan`テーブル スキャン Executor です。3 は選択 Executor です`selection` `aggregation`集約 Executor です`top_n`は`TopN` Executor です`limit`制限 Executor です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブル スキャン Executor です。`selection`は選択 Executor です。 `aggregation`は集約 Executor です`top_n`は`TopN` Executor です`limit`は制限 Executor です。
 -   リクエスト期間の概要: すべてのTiFlashインスタンスのすべてのリクエスト タイプについて、1 秒あたりの合計処理時間の積み上げグラフを提供します。
 -   リクエスト期間: すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの合計処理期間。コプロセッサリクエストの受信からリクエストへの応答が完了するまでの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
 -   リクエスト処理時間：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの実際の処理時間。コプロセッサリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。

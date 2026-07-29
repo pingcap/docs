@@ -168,7 +168,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `keep-after-success` {#keep-after-success}
 
--   すべてのデータのインポート後もチェックポイントを保持するかどうかを制御します。1 `false`場合、チェックポイントは削除されます。
+-   すべてのデータのインポート後もチェックポイントを保持するかどうかを制御します。`false`の場合、チェックポイントは削除されます。
 -   チェックポイントを保持するとデバッグが容易になりますが、データ ソースに関するメタデータが漏洩します。
 
 <!-- Example: `false` -->
@@ -202,7 +202,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `threshold` {#threshold}
 
--   [`strategy`](#strategy)が`"replace"`または`"ignore"`の場合に処理できる競合エラーの最大数を制御します。7 `strategy` `"replace"`または`"ignore"`場合のみ設定できます。
+-   [`strategy`](#strategy)が`"replace"`または`"ignore"`の場合に処理できる競合エラーの最大数を制御します。`strategy`が`"replace"`または`"ignore"`の場合のみ設定できます。
 -   `10000`より大きい値を設定すると、インポートプロセスのパフォーマンスが低下する可能性があります。
 -   デフォルト値: `10000`
 
@@ -241,7 +241,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 -   物理インポート モードで重複レコード (一意キーの競合) を検出して解決するかどうかを制御します。
 -   デフォルト値: `'none'`
 -   値のオプション:
-    -   `'none'` : 重複レコードを検出しません。データソースに重複レコードがある場合、ターゲットTiDBでデータの不整合が発生する可能性があります。2 `duplicate-resolution = 'none'`設定し、 `conflict.strategy`設定していない場合、 TiDB Lightningは自動的に`""`から`conflict.strategy`割り当てます。
+    -   `'none'` : 重複レコードを検出しません。データソースに重複レコードがある場合、ターゲットTiDBでデータの不整合が発生する可能性があります。`duplicate-resolution = 'none'`を設定し、 `conflict.strategy`を設定していない場合、 TiDB Lightningは自動的に`conflict.strategy`に`""`を割り当てます。
     -   `'remove'` : `duplicate-resolution = 'remove'`設定し、 `conflict.strategy`設定しない場合、 TiDB Lightning は自動的に`conflict.strategy`に「置換」を割り当て、新しいバージョンの競合検出を有効にします。
 
 #### `send-kv-pairs` {#send-kv-pairs}
@@ -418,7 +418,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `max-region-size` {#max-region-size}
 
--   [`strict-format`](#strict-format)が`true`の場合、 TiDB Lightning は大きな CSV ファイルを複数のチャンクに分割して並列処理します。5 `max-region-size`分割後の各チャンクの最大サイズです。
+-   [`strict-format`](#strict-format)が`true`の場合、 TiDB Lightning は大きな CSV ファイルを複数のチャンクに分割して並列処理します。`max-region-size`は分割後の各チャンクの最大サイズです。
 -   デフォルト値: `"256MiB"`
 
 #### `filter` {#filter}
@@ -643,7 +643,7 @@ CSV ファイルの解析方法を構成します。
     -   `"optional"` : 管理者チェックサムを実行します。チェックサムに失敗した場合、 TiDB Lightning はWARN ログを報告しますが、エラーは無視されます。
     -   `"off"` : チェックサムを実行しません。
 -   チェックサムの失敗は通常、インポート例外（データの損失または不整合）を意味します。チェックサムは常に有効にすることをお勧めします。
--   下位互換性のため、このフィールドでは bool 値`true`と`false`も許可されます。5 `true` `required`に相当し、 `false` `off`に相当します。
+-   下位互換性のため、このフィールドでは bool 値`true`と`false`も許可されます。`true`は`required`に相当し、 `false`は`off`に相当します。
 
 #### `checksum-via-sql` {#checksum-via-sql}
 

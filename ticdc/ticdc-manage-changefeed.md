@@ -274,7 +274,7 @@ force-replicate = true
 
 > **Note:**
 >
-> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。1 `sort engine`項目は設定しないことを推奨します。
+> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。`sort engine`項目は設定しないことを推奨します。
 
 統合ソートエンジンはTiCDCのソートエンジンです。以下のシナリオで発生するOOM問題を軽減できます。
 

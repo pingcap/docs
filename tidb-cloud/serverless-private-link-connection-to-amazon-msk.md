@@ -61,7 +61,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
     export PATH=$PATH:/home/ec2-user/jdk-22.0.2/bin
     ```
 
-4.  以下の内容を含む`scram-client.properties`という名前のファイルを作成します。3と`pswd` `username` /SCRAMの認証情報に置き換えてください。
+4.  以下の内容を含む`scram-client.properties`という名前のファイルを作成します。`username`と`pswd`をSASL/SCRAMの認証情報に置き換えてください。
 
     ```properties
     security.protocol=SASL_SSL
@@ -71,7 +71,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
         password="pswd";
     ```
 
-5.  ACLを作成します。1 `bootstrap-server` MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-2.xxxxx.c18.kafka.us-east-1.amazonaws.com:9096` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config scram-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -117,7 +117,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
     sasl.client.callback.handler.class=software.amazon.msk.auth.iam.IAMClientCallbackHandler
     ```
 
-5.  ACLを作成します。1 `bootstrap-server` MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
+5.  ACLを作成します。`bootstrap-server`を MSKブートストラップサーバーのアドレスとポート（例： `b-1.xxxxx.c18.kafka.us-east-1.amazonaws.com:9098` ）に置き換え、必要に応じてKafkaへのパスを置き換えます。
 
     ```shell
     /home/ec2-user/kafka_2.13-3.7.1/bin/kafka-acls.sh --bootstrap-server <bootstrap-server> --command-config iam-client.properties --add --allow-principal User:<username> --operation All --topic '*'
@@ -142,7 +142,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ3. クラスターポリシーをアタッチする {#step-3-attach-the-cluster-policy}
 
-[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) [前提条件](#prerequisites-for-essential)して、 TiDB Cloud がMSK クラスターに接続できるようにします。2 で取得したTiDB Cloud AWS アカウント ID を使用してください。
+[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 

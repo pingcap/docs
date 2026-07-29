@@ -15,7 +15,7 @@ TiDB は、MySQL 8.0 で利用可能なユーザー レベル[ロック関数](h
 | [`IS_FREE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-free-lock)   | ロックが空いているかどうかを確認します。                                                                 |
 | [`IS_USED_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_is-used-lock)   | ロックが使用中かどうかを確認します。使用中の場合、対応する接続IDを返します。                                              |
 | [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks) | 現在のセッションによって保持されているすべてのロックを解除します。                                                    |
-| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)   | 以前に取得したロックを解除します。1 `lockName`パラメータは64文字以内でなければなりません。                                 |
+| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)   | 以前に取得したロックを解除します。`lockName`パラメータは64文字以内でなければなりません。                                 |
 
 ## MySQLの互換性 {#mysql-compatibility}
 
