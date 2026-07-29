@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Starter cluster.
 
 # tdc db create-db-cluster
 
-Creates a Starter cluster. `--db-cluster-type` defaults to `starter`, and `--wait` waits for the cluster to become `ACTIVE`. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
+Creates a Starter cluster. `--db-cluster-type` defaults to `starter`, and `--wait` waits for the cluster to become `ACTIVE`. Project selection uses an explicit `--project-id`, then the configured virtual project, then the TiDB Cloud account default. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
 
 > **Note:**
 >
@@ -32,7 +32,7 @@ tdc db create-db-cluster
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--monthly-spending-limit-usd-cents <int32>`: Monthly spending limit in USD cents; omit to use the API default.
-- `--project-id <string>`: TiDB Cloud project ID.
+- `--project-id <string>`: TiDB Cloud project ID. Overrides the configured and account defaults.
 - `--version`: Display version information.
 - `--wait`: Wait until the created cluster becomes `ACTIVE` before returning.
 

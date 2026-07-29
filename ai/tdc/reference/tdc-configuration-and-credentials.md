@@ -79,7 +79,9 @@ Starter create selects a project in this order:
 
 1. explicit non-empty `--project-id`;
 2. profile `project_id` discovered by `tdc configure`;
-3. fail before sending the create request.
+3. omit the project label and let TiDB Cloud select the account's default project.
+
+An explicitly empty `--project-id` is invalid. When no project ID is available, `tdc` omits the project label entirely rather than sending an empty value.
 
 Other DB commands identify resources by cluster or branch ID and do not use `project_id`. Filesystem commands do not consume the DB project default.
 

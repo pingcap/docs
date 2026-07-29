@@ -59,7 +59,7 @@ region_code = "aws-us-east-1"
 project_id = "..."
 ```
 
-`tdc db create-db-cluster` uses this project when `--project-id` is omitted. Pass an explicit project ID to override it for one cluster:
+`tdc db create-db-cluster` uses this project when `--project-id` is omitted. If the saved ID is removed, cluster creation omits the project label and TiDB Cloud selects the account's default project. Pass an explicit project ID to override either default for one cluster:
 
 ```bash
 tdc db create-db-cluster \

@@ -65,7 +65,7 @@ tdc db create-db-cluster \
   --db-cluster-name demo-cluster
 ```
 
-The configured virtual project is used unless you provide `--project-id`. `--db-cluster-type` is optional and defaults to `starter`; the only accepted explicit value is `starter`. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
+An explicit `--project-id` overrides the configured virtual project. If neither is available, TiDB Cloud selects the account's default project. `--db-cluster-type` is optional and defaults to `starter`; the only accepted explicit value is `starter`. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
 
 List and filter clusters:
 
