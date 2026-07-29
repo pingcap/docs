@@ -20,7 +20,7 @@ aliases: ['/ja/tidb/stable/dev-guide-unique-serial-number-generation/','/ja/tidb
 
 シーケンスはTiDB v4.0以降で利用可能です。詳細は[シーケンスドキュメント](/sql-statements/sql-statement-create-sequence.md#create-sequence)を参照してください。
 
-## スノーフレークのようなソリューション {#snowflake-like-solutions}
+## Snowflake のようなソリューション {#snowflake-like-solutions}
 
 Snowflakeは、Twitterが提案する分散ID生成ソリューションです。実装は複数ありますが、特に有名なのはBaiduの**uid-generator**とMeituanの**leaf**です。このセクションでは`uid-generator`例として使用します。
 

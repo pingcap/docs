@@ -127,7 +127,7 @@ text_embed = EmbeddingFunction(
 </div>
 <div label="Jina AI">
 
-埋め込み用のAPIキーを作成するには、[ジナAI](https://jina.ai/embeddings/)にアクセスしてください。
+埋め込み用のAPIキーを作成するには、[Jina AI](https://jina.ai/embeddings/)にアクセスしてください。
 
 ```python
 from pytidb.embeddings import EmbeddingFunction

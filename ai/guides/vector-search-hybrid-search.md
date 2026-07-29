@@ -126,7 +126,7 @@ table.bulk_insert(
 
 ### ステップ5．ハイブリッド検索を実行する {#step-5-perform-a-hybrid-search}
 
-この例では、 [ジナ・リランカー](https://huggingface.co/jinaai/jina-reranker-m0)モデルを使用して検索結果を再ランク付けします。
+この例では、 [jina-reranker](https://huggingface.co/jinaai/jina-reranker-m0)モデルを使用して検索結果を再ランク付けします。
 
 ```python
 from pytidb.rerankers import Reranker

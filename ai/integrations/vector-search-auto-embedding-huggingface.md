@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 -   名前: `huggingface/intfloat/multilingual-e5-large`
 -   寸法: 1024
 -   距離指標：コサイン類似度、L2
--   価格：ハギングフェイスによる課金
+-   価格：Hugging Faceによる課金
 -   TiDB Cloudでホストされています: ❌
 -   鍵をご持参ください：✅
 -   プロジェクトホームページ： [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
@@ -109,7 +109,7 @@ LIMIT 2;
 -   名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
 -   寸法: 384
 -   距離指標：コサイン類似度、L2
--   価格：ハギングフェイスによる課金
+-   価格：Hugging Faceによる課金
 -   TiDB Cloudでホストされています: ❌
 -   鍵をご持参ください：✅
 -   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
@@ -153,7 +153,7 @@ LIMIT 2;
 -   名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
 -   寸法: 768
 -   距離指標：コサイン類似度、L2
--   価格：ハギングフェイスによる課金
+-   価格：Hugging Faceによる課金
 -   TiDB Cloudでホストされています: ❌
 -   鍵をご持参ください：✅
 -   プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
@@ -200,7 +200,7 @@ LIMIT 2;
 -   寸法: 1024
 -   距離指標：コサイン類似度、L2
 -   入力可能なテキストトークンの最大数：512
--   価格：ハギングフェイスによる課金
+-   価格：Hugging Faceによる課金
 -   TiDB Cloudでホストされています: ❌
 -   鍵をご持参ください：✅
 -   プロジェクトホームページ： [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
@@ -271,7 +271,7 @@ tidb_client.configure_embedding_provider(
 
 ### ステップ3：ベクトルテーブルを作成する {#step-3-create-a-vector-table}
 
-ハギングフェイスモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
+Hugging Faceモデルを使用して埋め込みを生成するベクトルフィールドを持つテーブルを作成します。
 
 ```python
 from pytidb.schema import TableModel, Field
