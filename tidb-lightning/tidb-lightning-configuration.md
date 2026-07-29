@@ -241,7 +241,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 -   物理インポート モードで重複レコード (一意キーの競合) を検出して解決するかどうかを制御します。
 -   デフォルト値: `'none'`
 -   値のオプション:
-    -   `'none'` : 重複レコードを検出しません。データソースに重複レコードがある場合、ターゲットTiDBでデータの不整合が発生する可能性があります。2 `duplicate-resolution = 'none'`設定し、 `conflict.strategy`設定していない場合、 TiDB Lightningは自動的に`""`から`conflict.strategy`割り当てます。
+    -   `'none'` : 重複レコードを検出しません。データソースに重複レコードがある場合、ターゲットTiDBでデータの不整合が発生する可能性があります。`duplicate-resolution = 'none'`を設定し、 `conflict.strategy`を設定していない場合、 TiDB Lightningは自動的に`conflict.strategy`に`""`を割り当てます。
     -   `'remove'` : `duplicate-resolution = 'remove'`設定し、 `conflict.strategy`設定しない場合、 TiDB Lightning は自動的に`conflict.strategy`に「置換」を割り当て、新しいバージョンの競合検出を有効にします。
 
 #### `send-kv-pairs` {#send-kv-pairs}
