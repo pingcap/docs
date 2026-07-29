@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## July 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Database audit logging is now available in public preview for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters running TiDB v7.5.6 or later, or v8.5.2 or later.
+
+        This feature records user access activities, including executed SQL statements, supports writing audit logs to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage, and lets you configure filter rules to control which events are captured for specific SQL users.
+
+        For more information, see [TiDB Cloud Dedicated Database Audit Logging (Preview)](/tidb-cloud/tidb-cloud-auditing.md).
+
 ## July 21, 2026
 
 **General changes**
