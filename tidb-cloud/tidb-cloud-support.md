@@ -20,7 +20,6 @@ TiDB Cloud 提供多种支持渠道。可用选项取决于问题的类型以及
 
     **Enterprise** 和 **Premium** 支持计划包含以下增强能力。详情请参见 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
  
-
     - 明确 SLA 的更快响应时间
     - 通过基于 IM 的支持实现实时通信
     - 主动支持项目，例如 [Clinic](/tidb-cloud/tidb-cloud-clinic.md)

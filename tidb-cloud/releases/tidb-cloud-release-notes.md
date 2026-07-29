@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - 数据库审计日志现已对运行 TiDB v7.5.6 或更高版本，或 v8.5.2 或更高版本的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群提供公开预览。
+    - 数据库审计日志现已对运行 TiDB v7.5.6 或更高版本，或 v8.5.2 或更高版本的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群开放公测。
 
         此功能可记录用户访问活动，包括执行的 SQL 语句，支持将审计日志写入 Amazon S3、Google Cloud Storage (GCS) 或 Azure Blob Storage，并允许你配置过滤规则，以控制为特定 SQL 用户捕获哪些事件。
 
