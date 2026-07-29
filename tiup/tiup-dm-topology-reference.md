@@ -199,6 +199,7 @@ worker_servers:
     - `remote_write`: See the Prometheus document [`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write).
     - `remote_read`: See the Prometheus document [`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read).
 - `external_alertmanagers`: If the `external_alertmanagers` field is configured, Prometheus alerts the configuration behavior to the Alertmanager that is outside the cluster. This field is an array, each element of which is an external Alertmanager and consists of the `host` and `web_port` fields.
+- `external_labels`: Introduced in TiUP v1.17.0, this field configures Prometheus global `external_labels` as key-value pairs. Use this field to attach stable metadata that is propagated through Prometheus `remote_write`, federation, and alerting. TiUP reserves the `cluster` and `monitor` labels and manages them automatically, so you must not configure them in this field. Label names starting with `__` are also reserved. In addition, all label names must conform to the Prometheus label naming rules. If an earlier version of TiUP that does not support this field reads the topology file, TiUP fails to parse the topology instead of ignoring the field.
 - `os`: the operating system of the machine specified in the `host` field. If the field is not specified, the default value is the `os` value configured in the `global` section.
 - `arch`: the architecture of the machine specified in the `host` field. If the field is not specified, the default value is the `arch` value configured in the `global` section.
 - `resource_control`: resource control on this service. If this field is specified, the configuration of this field will be merged with the configuration of `resource_control` in the `global` section (if the two fields overlap, the configuration of this field takes effect), and then the configuration file of systemd is generated and distributed to the machine specified in the `host` field. The configuration rules of this field are the same as that of `resource_control` in the `global` section.
@@ -219,6 +220,9 @@ A `monitoring_servers` configuration example is as follows:
 monitoring_servers:
   - host: 10.0.1.11
     rule_dir: /local/rule/dir
+    external_labels:
+      environment: production
+      region: us-east-1
     remote_config:
       remote_write:
       - queue_config:
