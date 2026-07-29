@@ -13,13 +13,13 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 -   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20 秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
 
--   1.1.2 複数のTiKVインスタンスが同時にメモリ不足（OOM）になると、OOM期間中にLeaderが存在しない状態になります。中国語版の[ケース991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)参照してください。
+-   1.1.2 複数のTiKVインスタンスが同時にメモリ不足（OOM）になると、OOM期間中にLeaderが存在しない状態になります。中国語版の[ケース991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
 -   1.1.3 TiKV は`TiKV server is busy`を報告し、 `backoff`時間を超過します。詳細については、 [4.3](#43-the-client-reports-the-server-is-busy-error)を参照してください。 `TiKV server is busy`は内部フロー制御メカニズムの結果であり、 `backoff`時間にカウントされるべきではありません。この問題は修正されます。
 
--   1.1.4 複数の TiKV インスタンスの起動に失敗し、リージョンにLeaderが存在しない状態になる。物理マシンに複数の TiKV インスタンスがデプロイされている場合、ラベルが正しく設定されていないと、物理マシンの障害によってリージョンにLeaderが存在しない状態になることがあります。中国語の[ケース228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)参照してください。
+-   1.1.4 複数の TiKV インスタンスの起動に失敗し、リージョンにLeaderが存在しない状態になる。物理マシンに複数の TiKV インスタンスがデプロイされている場合、ラベルが正しく設定されていないと、物理マシンの障害によってリージョンにLeaderが存在しない状態になることがあります。中国語の[ケース228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
 
--   1.1.5Followerの申請が前のエポックで遅延した場合、FollowerがLeaderになった後、 `epoch not match`を使用してリクエストを拒否します。中国語の[ケース958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)参照してください（TiKV はそのメカニズムを最適化する必要があります）。
+-   1.1.5Followerの申請が前のエポックで遅延した場合、FollowerがLeaderになった後、 `epoch not match`を使用してリクエストを拒否します。中国語の[ケース958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)を参照してください（TiKV はそのメカニズムを最適化する必要があります）。
 
 ### 1.2 PDエラーによりサービスが利用できなくなる {#1-2-pd-errors-cause-service-unavailable}
 
@@ -32,13 +32,13 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 -   2.1.1 TiDB の実行プランが間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
 -   2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)参照してください。
 -   2.1.3 一部のTiKVインスタンスでLeaderが多数ドロップする[4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照。
--   2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)参照してください。
+-   2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
 ### 2.2 持続的かつ著しい増加 {#2-2-persistent-and-significant-increase}
 
 -   2.2.1 TiKVシングルスレッドのボトルネック
 
-    -   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にすることでこの問題を解決できます。中国語の[ケース612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)参照してください。
+    -   TiKVインスタンス内のリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（ **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/gRPC CPU Per Thread**メトリックを確認してください）。v3.x以降のバージョンでは、 `Hibernate Region`を有効にすることでこの問題を解決できます。中国語の[ケース612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
 
     -   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになった場合（ **Grafana** -&gt; **TiKV-details** -&gt; **Thread CPU/raft store CPU**および**Async apply CPU**メトリクスが`80%`を超える場合）、TiKV（v2.x）インスタンスをスケールアウトするか、マルチスレッド対応のv3.xにアップグレードできます。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
@@ -48,7 +48,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 -   2.2.4 TiDB の実行プランが間違っています[3.3](#33-wrong-execution-plan)を参照してください。
 
--   2.2.5 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)参照してください。
+-   2.2.5 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
 ## 3. TiDBの問題 {#3-tidb-issues}
 
@@ -125,7 +125,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     > **Note:**
     >
-    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)設定することで設定できます。
+    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定することで設定できます。
 
 -   3.2.3 メモリ不足問題​​の軽減
 
@@ -135,7 +135,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   SQL クエリには`join`が含まれています。 `explain`を使用して SQL ステートメントを表示すると、 `join`操作で`HashJoin`アルゴリズムが選択され、 `inner`テーブルが大きいことがわかります。
 
-    -   単一の`UPDATE/DELETE`クエリのデータ量が大きすぎます。中国語の[ケース882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md)参照してください。
+    -   単一の`UPDATE/DELETE`クエリのデータ量が大きすぎます。中国語の[ケース882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md)を参照してください。
 
     -   SQL文には`Union`で接続された複数のサブクエリが含まれています。中国語版の[ケース1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md)を参照してください。
 
@@ -185,27 +185,27 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
 ### 3.5 クエリの遅延に関する問題 {#3-5-slow-query-issues}
 
-スロークエリを特定するには、[スロークエリを特定する](/identify-slow-queries.md)参照してください。スロークエリを分析して処理するには、[スロークエリを分析する](/analyze-slow-queries.md)参照してください。
+スロークエリを特定するには、[スロークエリを特定する](/identify-slow-queries.md)を参照してください。スロークエリを分析して処理するには、[スロークエリを分析する](/analyze-slow-queries.md)を参照してください。
 
 ### 3.6 ホットスポットの問題 {#3-6-hotspot-issues}
 
 分散データベースであるTiDBは、サーバーリソースをより有効活用するために、アプリケーションの負荷をさまざまなコンピューティングノードやストレージノードに均等に分散させるロードバランシングメカニズムを備えています。しかし、特定のシナリオでは、アプリケーションの負荷が適切に分散されない場合があり、パフォーマンスに影響を与え、ホットスポットと呼ばれる高負荷の一点が発生する可能性があります。
 
-TiDB は、ホットスポットのトラブルシューティング、解決、回避のための完全なソリューションを提供します。負荷ホットスポットのバランスをとることで、QPS の向上やレイテンシーの削減など、全体的なパフォーマンスを向上させることができます。詳細な解決策については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)参照してください。
+TiDB は、ホットスポットのトラブルシューティング、解決、回避のための完全なソリューションを提供します。負荷ホットスポットのバランスをとることで、QPS の向上やレイテンシーの削減など、全体的なパフォーマンスを向上させることができます。詳細な解決策については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 ### 3.7 ディスクI/O使用率が高い {#3-7-high-disk-i-o-usage}
 
-CPU ボトルネックとトランザクションの競合によって引き起こされるボトルネックのトラブルシューティングを行った後に TiDB の応答が遅くなった場合は、現在のシステム ボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB での高い I/O 使用率の問題を特定して処理する方法については、[ディスクI/O使用率が高い場合のトラブルシューティング](/troubleshoot-high-disk-io.md)参照してください。
+CPU ボトルネックとトランザクションの競合によって引き起こされるボトルネックのトラブルシューティングを行った後に TiDB の応答が遅くなった場合は、現在のシステム ボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB での高い I/O 使用率の問題を特定して処理する方法については、[ディスクI/O使用率が高い場合のトラブルシューティング](/troubleshoot-high-disk-io.md)を参照してください。
 
 ### 3.8 ロックの競合 {#3-8-lock-conflicts}
 
-TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。ロック関連の問題のトラブルシューティング方法、および楽観的ロックと悲観的ロックの競合の処理方法については、[ロックの競合をトラブルシューティングする](/troubleshoot-lock-conflicts.md)参照してください。
+TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。ロック関連の問題のトラブルシューティング方法、および楽観的ロックと悲観的ロックの競合の処理方法については、[ロックの競合をトラブルシューティングする](/troubleshoot-lock-conflicts.md)を参照してください。
 
 ### 3.9 データと指標の不整合 {#3-9-inconsistency-between-data-and-indexes}
 
 TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に、データとインデックスの一貫性をチェックします。チェックの結果、レコードのキーと値、および対応するインデックスのキーと値が一致しない、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない（例えば、インデックスが多すぎる、またはインデックスが欠落している）ことが判明した場合、TiDB はデータ不整合エラーを報告し、関連するエラーをエラー ログに出力。
 
-不整合エラーとチェックを回避する方法の詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)参照してください。
+不整合エラーとチェックを回避する方法の詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
 ## 4. TiKVに関する問題 {#4-tikv-issues}
 
@@ -279,7 +279,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   TiKV がメモリ不足のため再起動します[4.2](#42-tikv-oom)を参照してください。
 
-    -   TiKV は、 `THP` (透明巨大ページ) の動的な調整が原因でハングアップしています。中国語の[ケース500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md)参照してください。
+    -   TiKV は、 `THP` (透明巨大ページ) の動的な調整が原因でハングアップしています。中国語の[ケース500](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case500.md)を参照してください。
 
 -   4.4.2 TiKV RocksDB で書き込み停止が発生し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください[4.3.1](#43-the-client-reports-the-server-is-busy-error)を参照してください。
 
@@ -334,7 +334,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.1.1 マージ
 
-    -   テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)参照してください。
+    -   テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
 
     -   リージョンのマージは遅いです。マージされたオペレーターが生成されているかどうかは、 **Grafana** -&gt; **PD** -&gt; **operator**のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やしてください。
 
@@ -342,7 +342,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   TiKVディスクが容量の80%を使用し、PDがレプリカを追加しない場合、ミスピア数が増加するため、TiKVをスケールアウトする必要があります。詳細は中国語版の[ケース801](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case801.md)を参照してください。
 
-    -   TiKVノードがオフラインになると、一部のリージョンを他のノードに移行できなくなる問題がありました。この問題はv3.0.4で修正されました（ [#5526](https://github.com/tikv/tikv/pull/5526) ）。中国語版の[ケース870](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case870.md)参照してください。
+    -   TiKVノードがオフラインになると、一部のリージョンを他のノードに移行できなくなる問題がありました。この問題はv3.0.4で修正されました（ [#5526](https://github.com/tikv/tikv/pull/5526) ）。中国語版の[ケース870](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case870.md)を参照してください。
 
 -   5.1.3 バランス
 
@@ -352,15 +352,15 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.2.1 PD スイッチLeader。
 
-    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **「レイテンシー**/**負荷」**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)参照してください。
+    -   原因1：ディスク。PDノードが配置されているディスクのI/O負荷が最大になっています。PDがI/O負荷の高い他のコンポーネントと一緒にデプロイされているかどうか、およびディスクの状態を調査してください。Grafana**の**「**ディスクパフォ​​ーマンス**」→ **「レイテンシー**/**負荷」**でモニターメトリックを確認することで原因を特定できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
-    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)参照してください。
+    -   原因 2: ネットワーク。PD ログに`lost the TCP streaming connection`が表示されます。PD ノード間のネットワークに問題がないか確認し、モニター**Grafana** -&gt; **PD** -&gt; **etcd**で`round trip`を表示して原因を検証する必要があります。中国語の[ケース177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
-    -   原因3：システム負荷が高い。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)参照してください。
+    -   原因3：システム負荷が高い。ログには`server is likely overloaded`と表示されます。中国語の[ケース214](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case214.md)を参照してください。
 
 -   5.2.2 PDはLeaderを選出できないか、選挙が遅い。
 
-    -   PD はLeaderを選出できません: PD ログには`lease is not expired`が表示されます。 [この問題は](https://github.com/etcd-io/etcd/issues/10355)v3.0.x および v2.1.19 で修正されました。中国語の[ケース875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)参照してください。
+    -   PD はLeaderを選出できません: PD ログには`lease is not expired`が表示されます。 [この問題は](https://github.com/etcd-io/etcd/issues/10355)v3.0.x および v2.1.19 で修正されました。中国語の[ケース875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)を参照してください。
 
     -   選挙が遅い：リージョンの読み込み時間が長い。この問題は、PD ログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`のように秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0 では、 `region storage`を`use-region-storage`に設定することで`true`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。詳細は、 [ケース429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md) （中国語）を参照してください。
 
@@ -378,7 +378,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   5.2.4 その他の問題
 
-    -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`と表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。詳細は、中国語の[ケース947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)参照してください。
+    -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`と表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。詳細は、中国語の[ケース947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)を参照してください。
 
     -   その他の状況については、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
 
@@ -396,13 +396,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ### 6.1 データ移行 {#6-1-data-migration}
 
--   6.1.1 TiDB Data Migration (DM)は、MySQL/MariaDBからTiDBへのデータ移行をサポートする移行ツールです。詳細については、 [DMの概要](/dm/dm-overview.md)参照してください。
+-   6.1.1 TiDB Data Migration (DM)は、MySQL/MariaDBからTiDBへのデータ移行をサポートする移行ツールです。詳細については、 [DMの概要](/dm/dm-overview.md)を参照してください。
 
 -   6.1.2 `Access denied for user 'root'@'172.31.43.27' (using password: YES)` `query status`を実行したとき、またはログを確認したときに表示されます。
 
     -   すべてのDM設定ファイル内のデータベース関連のパスワードは`dmctl`で暗号化する必要があります。データベースパスワードが空の場合は、パスワードを暗号化する必要はありません。バージョン1.0.6以降では、平文パスワードを使用できます。
     -   DM 操作中、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行も、データ複製タスクの開始時に自動的に[対応する権限を事前チェックします](/dm/dm-precheck.md)。
-    -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、 [AskTUGに関するケーススタディ](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5)参照してください。
+    -   DM クラスターに異なるバージョンの DM-worker/DM-master/dmctl をデプロイするには、 [AskTUGに関するケーススタディ](https://pingkai.cn/tidbcommunity/forum/t/topic/1049/5)を参照してください。
 
 -   6.1.3 レプリケーション タスクが`driver: bad connection`エラーで中断されました。
 
@@ -536,7 +536,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     これは、楽観的トランザクションにおける書き込み競合です。複数のトランザクションが同じキーを変更した場合、1つのトランザクションのみが成功し、他のトランザクションは自動的にタイムスタンプを再取得して操作を再試行するため、業務に影響はありません。
 
-    競合が深刻な場合は、複数回の再試行後にトランザクションが失敗する可能性があります。この場合、悲観的ロックを使用することをお勧めします。エラーと解決策の詳細については、[楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)参照してください。
+    競合が深刻な場合は、複数回の再試行後にトランザクションが失敗する可能性があります。この場合、悲観的ロックを使用することをお勧めします。エラーと解決策の詳細については、[楽観的トランザクションにおける書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)を参照してください。
 
 -   7.2.3 `TxnLockNotFound` 。
 
@@ -556,4 +556,4 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     v3.0以降のバージョンでは、TiDBは前のLeaderへのリクエストが失敗した場合に他のピアを試行するため、TiKVログに`peer is not leader`頻繁に記録される可能性があります。送信失敗の根本原因を特定するには、TiDBの該当するリージョンの`switch region peer to next due to send request fail`ログを確認してください。詳細については、 [7.1.4](#71-tidb)を参照してください。
 
-    このエラーは、他の理由でリージョンにLeaderがいない場合にも返される可能性があります。詳細については、 [4.4](#44-some-tikv-nodes-drop-leader-frequently)参照してください。
+    このエラーは、他の理由でリージョンにLeaderがいない場合にも返される可能性があります。詳細については、 [4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照してください。

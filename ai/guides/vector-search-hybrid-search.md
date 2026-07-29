@@ -158,7 +158,7 @@ df = (
 
 相互ランク融合（RRF）は、複数の検索結果セットにおける文書のランクを活用して検索結果を評価するアルゴリズムです。
 
-詳細については、 [RRF論文](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)参照してください。
+詳細については、 [RRF論文](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)を参照してください。
 
 `method`メソッドで`"rrf"`パラメーター`.fusion()`有効にします。
 

@@ -46,7 +46,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
 <CustomContent platform="tidb">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。3 [例](/br/backup-and-restore-storages.md)参照してください。
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](/br/backup-and-restore-storages.md)を参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -55,7 +55,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。3 [例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)参照してください。
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)正しいクラウドストレージパスに設定します。[例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)を参照してください。
 
     ```sql
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
@@ -65,7 +65,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
     > **Note:**
     >
-    > TiDB Cloud Premiumの場合、このパラメータは自動的に設定されるため、手動で調整する必要はありません。設定を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+    > TiDB Cloud Premiumの場合、このパラメータは自動的に設定されるため、手動で調整する必要はありません。設定を変更する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
     </CustomContent>
 

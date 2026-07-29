@@ -5,7 +5,7 @@ summary: TiDB Cloud のパフォーマンス テスト結果を確認します�
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}
 
-このドキュメントでは、さまざまな TiDB クラスター スケールのパフォーマンス テスト結果を[Sysbench](https://github.com/akopytov/sysbench)提供しており、 [クラスターサイズを決定する](/tidb-cloud/size-your-cluster.md)実行する際の参考として使用できます。
+このドキュメントでは、さまざまな TiDB クラスター スケールの[Sysbench](https://github.com/akopytov/sysbench)パフォーマンス テスト結果を提供しており、 [クラスターサイズを決定する](/tidb-cloud/size-your-cluster.md)際の参考として使用できます。
 
 > **Note:**
 >
@@ -27,7 +27,7 @@ mysql-ignore-errors=1062,2013,8028,9002,9007
 auto-inc=false
 ```
 
-このドキュメントでは、トランザクション モデル`Read Only` 、および`Write Only` `Read Write`読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
+このドキュメントでは、トランザクション モデル`Read Only`、`Read Write`、および`Write Only`は、それぞれ読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
 
 ## 4 vCPU パフォーマンス {#4-vcpu-performance}
 

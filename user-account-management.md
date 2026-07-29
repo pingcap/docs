@@ -28,9 +28,9 @@ mysql -P 4000 -u xxx -p
 You can create TiDB accounts in two ways:
 
 -   アカウントを作成して権限を確立するための標準のアカウント管理 SQL ステートメント ( [`CREATE USER`](/sql-statements/sql-statement-create-user.md)や[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)など) を使用します。
--   [`INSERT`](/sql-statements/sql-statement-insert.md)などのステートメントを使用して権限テーブルを直接操作し、 [`DELETE`](/sql-statements/sql-statement-delete.md) [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)実行します。この方法で[`UPDATE`](/sql-statements/sql-statement-update.md)更新が不完全になる可能性があるため、アカウントの作成または変更にはこの方法を使用しないことをお勧めします。
+-   [`INSERT`](/sql-statements/sql-statement-insert.md)などのステートメントを使用して権限テーブルを直接操作し、 [`DELETE`](/sql-statements/sql-statement-delete.md) [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を実行します。この方法で[`UPDATE`](/sql-statements/sql-statement-update.md)更新が不完全になる可能性があるため、アカウントの作成または変更にはこの方法を使用しないことをお勧めします。
 
-[サードパーティのGUIツール](/develop/dev-guide-third-party-support.md#gui)使用してアカウントを作成することもできます。
+[サードパーティのGUIツール](/develop/dev-guide-third-party-support.md#gui)を使用してアカウントを作成することもできます。
 
 ```sql
 CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
@@ -141,7 +141,7 @@ TiDB は、データベースの初期化中に`'root'@'%'`デフォルト ア�
 
 ## アカウントのリソース制限を設定する {#set-account-resource-limits}
 
-TiDBは、リソースグループを使用してユーザーが消費するリソースを制限できます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)参照してください。
+TiDBは、リソースグループを使用してユーザーが消費するリソースを制限できます。詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
 ## アカウントパスワードの割り当て {#assign-account-passwords}
 
@@ -171,7 +171,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 
     1.  tidb-server インスタンスの 1 つが配置されているマシンにログインします。
     2.  TiDB ノードのデプロイメント ディレクトリの下の`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
-    3.  設定ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)追加します。5 `security`がない場合は、 `tidb.toml`設定ファイルの末尾に次の2行を追加します。
+    3.  設定ファイルの[`security`](/tidb-configuration-file.md#security)セクションに設定項目[`skip-grant-table`](/tidb-configuration-file.md)を追加します。`security`がない場合は、 `tidb.toml`設定ファイルの末尾に次の2行を追加します。
 
             [security]
             skip-grant-table = true
@@ -211,6 +211,6 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 
 ユーザーと権限に関する情報はTiKVサーバーに保存され、TiDBはこれらの情報をプロセス内にキャッシュします。通常、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 、その他[`GRANT`](/sql-statements/sql-statement-grant-privileges.md)ステートメントによる関連情報の変更は、クラスター全体に迅速に反映されます。一時的なネットワーク利用不可などの要因によって操作が影響を受ける場合、TiDBは定期的にキャッシュ情報を再読み込みするため、変更は約15分後に反映されます。
 
-権限テーブルを直接変更した場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)実行して変更をすぐに適用します。
+権限テーブルを直接変更した場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を実行して変更をすぐに適用します。
 
 詳細は[権限管理](/privilege-management.md)参照。

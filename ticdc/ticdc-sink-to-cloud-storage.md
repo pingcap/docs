@@ -32,7 +32,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 -   `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)参照。
 -   `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
--   `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)参照してください。
+-   `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## シンクURIを構成する {#configure-sink-uri}
 
@@ -54,7 +54,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 > **Note:**
 >
-> データ変更ファイルは、 `flush-interval`または`file-size`いずれかが要件を満たしている場合に下流に保存されます。5 `protocol`パラメータは必須です。TiCDCが変更フィードの作成時にこのパラメータを受け取らない場合は、 `CDC:ErrSinkUnknownProtocol`エラーが返されます。
+> データ変更ファイルは、 `flush-interval`または`file-size`のいずれかが要件を満たしている場合に下流に保存されます。`protocol`パラメータは必須です。TiCDCが変更フィードの作成時にこのパラメータを受け取らない場合は、 `CDC:ErrSinkUnknownProtocol`エラーが返されます。
 
 ### 外部ストレージのシンクURIを構成する {#configure-sink-uri-for-external-storage}
 
@@ -137,7 +137,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 > **Tip:**
 >
-> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 ### NFSのシンクURIを構成する {#configure-sink-uri-for-nfs}
 
@@ -310,7 +310,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 ### データ型 {#data-type}
 
-この節では、 `schema_{table-version}_{hash}.json`ファイル（以下、スキーマファイル）で使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細については[データ型](/data-type-overview.md)参照してください。
+この節では、 `schema_{table-version}_{hash}.json`ファイル（以下、スキーマファイル）で使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細については[データ型](/data-type-overview.md)を参照してください。
 
 #### 整数型 {#integer-types}
 

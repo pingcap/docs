@@ -28,7 +28,7 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
 ```
 
-上記のコマンドの出力で、 `admin-job-type`このレプリケーションタスクの状態を示しています。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)参照してください。
+上記のコマンドの出力で、 `admin-job-type`がこのレプリケーションタスクの状態を示しています。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)を参照してください。
 
 ### レプリケーションの中断をどのように処理しますか? {#how-do-i-handle-replication-interruptions}
 
@@ -56,7 +56,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 ## レプリケーション タスクを作成するとき、または MySQL にデータをレプリケートするときに、「 <code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
-このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。1 [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
+このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
 
 ```shell
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
@@ -70,7 +70,7 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
     Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
     Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 
-ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。5 `time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
+ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
 `mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"` 。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
 

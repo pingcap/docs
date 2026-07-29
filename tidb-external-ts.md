@@ -15,7 +15,7 @@ summary: tidb_external_ts` 変数を使用して履歴データを読み取る�
 
 システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640) 、 `tidb_enable_external_ts_read`が有効な場合に読み取る履歴データのタイムスタンプを指定します。
 
-システム変数[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) 、履歴データを現在のセッションで読み取るか、グローバルで読み取るかを制御します。デフォルト値は`OFF`で、履歴データの読み取り機能は無効であり、 `tidb_external_ts`は無視されます。7 `tidb_enable_external_ts_read`グローバルに`ON`に設定すると、すべてのクエリは`tidb_external_ts`で指定された時刻より前に履歴データを読み取ります。13 `tidb_enable_external_ts_read`特定のセッションのみ`ON`に設定すると、そのセッションのクエリのみが履歴データを読み取ります。
+システム変数[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) 、履歴データを現在のセッションで読み取るか、グローバルで読み取るかを制御します。デフォルト値は`OFF`で、履歴データの読み取り機能は無効であり、 `tidb_external_ts`は無視されます。`tidb_enable_external_ts_read`はグローバルに`ON`に設定すると、すべてのクエリは`tidb_external_ts`で指定された時刻より前に履歴データを読み取ります。`tidb_enable_external_ts_read`は特定のセッションのみ`ON`に設定すると、そのセッションのクエリのみが履歴データを読み取ります。
 
 `tidb_enable_external_ts_read`有効にすると、TiDB は読み取り専用になります。すべての書き込みクエリは`ERROR 1836 (HY000): Running in read-only mode`ようなエラーで失敗します。
 

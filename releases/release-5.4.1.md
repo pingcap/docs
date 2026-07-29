@@ -61,7 +61,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
     -   `tidb_restricted_read_only`有効になっているときに`tidb_super_read_only`自動的に有効にならないバグを修正[＃31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序`greatest`または`least`関数が間違った結果を返す問題を修正しました[＃31789](https://github.com/pingcap/tidb/issues/31789)
     -   データがエスケープ文字で壊れている場合のロードデータpanicを修正 [＃31589](https://github.com/pingcap/tidb/issues/31589)
-    -   インデックスルックアップ結合使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
+    -   インデックスルックアップ結合を使用してクエリを実行するときに発生する`invalid transaction`エラーを修正します [＃30468](https://github.com/pingcap/tidb/issues/30468)
     -   `left join` を使用して複数のテーブルのデータを削除した場合の誤った結果を修正 [＃31321](https://github.com/pingcap/tidb/issues/31321)
     -   TiDBが重複したタスクをTiFlash にディスパッチする可能性があるバグを修正しました [＃32814](https://github.com/pingcap/tidb/issues/32814)
     -   v4.0 からアップグレードされたクラスターで`all`権限の付与が失敗する可能性がある問題を修正しました [＃33588](https://github.com/pingcap/tidb/issues/33588)

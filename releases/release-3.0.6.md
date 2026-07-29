@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.0.6
     -   SQLバインディングで引用符が正しく処理されない問題を修正 [＃13117](https://github.com/pingcap/tidb/pull/13117)
     -   `select max(_tidb_rowid) from t`シナリオを最適化してテーブル全体のスキャンを回避する[＃13095](https://github.com/pingcap/tidb/pull/13095)
     -   クエリステートメントに変数代入式が含まれている場合にクエリ結果が正しくない問題を修正しました[＃13231](https://github.com/pingcap/tidb/pull/13231)
-    -   `UPDATE`ステートメントにサブクエリと生成された列の両方が含まれている場合に結果が正しくない問題を修正しました。3 `UPDATE`ステートメントに異なるソース データベースからの同じ名前のテーブルが 2 つ含まれている場合に発生するステートメント実行エラーを修正しました[＃13350](https://github.com/pingcap/tidb/pull/13350)
+    -   `UPDATE`ステートメントにサブクエリと生成された列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`ステートメントに異なるソース データベースからの同じ名前のテーブルが 2 つ含まれている場合に発生するステートメント実行エラーを修正しました[＃13350](https://github.com/pingcap/tidb/pull/13350)
     -   ポイントクエリのサポート`_tidb_rowid` [＃13416](https://github.com/pingcap/tidb/pull/13416)
     -   パーティションテーブル統計の不適切な使用により、生成されたクエリ実行プランが正しくない問題を修正しました[＃13628](https://github.com/pingcap/tidb/pull/13628)
 -   SQL実行エンジン

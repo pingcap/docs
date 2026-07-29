@@ -130,7 +130,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4.  要塞サブネットをパブリック サブネットに構成します。
 
-    1.  [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。3 `kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
+    1.  [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
 
     2.  **インターネット ゲートウェイの詳細**ページの**アクション**で、 **VPC に接続を**クリックして、インターネット ゲートウェイを Kafka VPC に接続します。
 
@@ -264,7 +264,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 1.  `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
 
     1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
-    2.  **ブローカー**リスナーを 2 つ構成します。3 `INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
+    2.  **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
 
 2.  `advertised.listeners`項目については、次の操作を行います。
 
@@ -730,7 +730,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 1.  [ステップ2](#2-set-up-an-aws-endpoint-service)で取得した AWS エンドポイントサービス名 (例: `com.amazonaws.vpce.<region>.vpce-svc-xxxx` ) を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
-    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)参照してください。
+    詳細については[AWS エンドポイントサービスプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-aws-endpoint-service-private-link-connection)を参照してください。
 
 2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 

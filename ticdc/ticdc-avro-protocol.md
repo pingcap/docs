@@ -168,7 +168,7 @@ dispatchers = [
 | SMALLINT           | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | MEDIUMINT          | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | INT                | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
-| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。1 `avro-bigint-unsigned-handling-mode`文字列の場合、AVRO_TYPEは文字列です。 |
+| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。`avro-bigint-unsigned-handling-mode`が文字列の場合、AVRO_TYPEは文字列です。 |
 | TINYBLOB           | BLOB              | bytes     |  -                                                                                                                         |
 | BLOB               | BLOB              | bytes     |  -                                                                                                                         |
 | MEDIUMBLOB         | BLOB              | bytes     |  -                                                                                                                         |
@@ -292,4 +292,4 @@ TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeseriali
 
 ## 互換性 {#compatibility}
 
-TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整し、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できなくなり、エラー状態になります。詳細については、 [＃8490](https://github.com/pingcap/tiflow/issues/8490)参照してください。
+TiCDC クラスターを v7.0.0 にアップグレードする際、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合は、アップグレード前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整し、changefeed がスキーマを正常に更新できるようにする必要があります。そうしないと、アップグレード後に changefeed がスキーマを更新できなくなり、エラー状態になります。詳細については、 [＃8490](https://github.com/pingcap/tiflow/issues/8490)を参照してください。

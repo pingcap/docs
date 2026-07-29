@@ -47,7 +47,7 @@ DMのリレー処理ユニットは、binlogイベントをDMメモリに読み�
 
 ### リレーログファイルを書き込む {#write-relay-log-files}
 
-binlogイベントをリレーログファイルに書き込む場合、関連するパフォーマンスメトリックは`write relay log duration`です。3 `binlog event size`大きすぎる場合は、この値はマイクロ秒単位にする必要があります。5 `write relay log duration`大きすぎる場合は、ディスクの書き込みパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
+binlogイベントをリレーログファイルに書き込む場合、関連するパフォーマンスメトリックは`write relay log duration`です。`binlog event size`が大きすぎない場合は、この値はマイクロ秒単位にする必要があります。`write relay log duration`が大きすぎる場合は、ディスクの書き込みパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 
 ## 負荷ユニット {#load-unit}
 
@@ -55,7 +55,7 @@ binlogイベントをリレーログファイルに書き込む場合、関連�
 
 ## Binlogレプリケーションユニット {#binlog-replication-unit}
 
-Binlogレプリケーションユニットのパフォーマンス問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認できます。このメトリックの詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)参照してください。
+Binlogレプリケーションユニットのパフォーマンス問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認できます。このメトリックの詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
 
 -   このメトリックが長時間にわたって 1 より大きい場合、通常はパフォーマンスの問題があることを示します。
 -   このメトリックが 0 の場合、通常はパフォーマンスの問題がないことを示します。
@@ -68,7 +68,7 @@ Binlogレプリケーションユニットは、設定に応じて、上流のMy
 
 -   DM のBinlogレプリケーション処理ユニットがアップストリーム MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)参照してください。
 
--   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。5 `read binlog event duration`大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
+-   DMのBinlogレプリケーション処理ユニットがリレーログファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒単位にする必要があります。`read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DMワーカーにローカルSSDを使用してください。
 
 ### binlogイベント変換 {#binlog-event-conversion}
 

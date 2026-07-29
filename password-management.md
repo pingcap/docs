@@ -24,7 +24,7 @@ summary: TiDB でのユーザー パスワード管理のメカニズムを学�
 -   `caching_sha2_password`
 -   `tidb_sm3_password`
 
-TiDB 認証プラグインの詳細については、 [認証プラグインのステータス](/security-compatibility-with-mysql.md#authentication-plugin-status)参照してください。
+TiDB 認証プラグインの詳細については、 [認証プラグインのステータス](/security-compatibility-with-mysql.md#authentication-plugin-status)を参照してください。
 
 ## パスワードの複雑さのポリシー {#password-complexity-policy}
 
@@ -60,7 +60,7 @@ mysql> SHOW VARIABLES LIKE 'validate_password.%';
 8 rows in set (0.00 sec)
 ```
 
-各システム変数の詳細な説明については、 [システム変数](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)参照してください。
+各システム変数の詳細な説明については、 [システム変数](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)を参照してください。
 
 ### パスワードの複雑さのポリシーを構成する {#configure-password-complexity-policy}
 
@@ -280,7 +280,7 @@ disconnect-on-expired-password = true
 
 -   通常のアカウントのパスワードの有効期限が切れた場合、管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
 -   管理者アカウントのパスワードの有効期限が切れた場合、別の管理者が SQL ステートメントを使用してアカウントのパスワードを変更できます。
--   管理者アカウントのパスワードが期限切れで、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細については、 [パスワードを忘れた場合の手続き](/user-account-management.md#forget-the-root-password)参照してください。
+-   管理者アカウントのパスワードが期限切れで、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細については、 [パスワードを忘れた場合の手続き](/user-account-management.md#forget-the-root-password)を参照してください。
 
 ## パスワード再利用ポリシー {#password-reuse-policy}
 
@@ -299,7 +299,7 @@ TiDB はアカウントのパスワード履歴を記録し、履歴からの新
 
 ### グローバルレベルのパスワード再利用ポリシー {#global-level-password-reuse-policy}
 
-グローバル パスワード再利用ポリシーを確立するには、システム変数[`password_history`](/system-variables.md#password_history-new-in-v650)と[`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)使用します。
+グローバル パスワード再利用ポリシーを確立するには、システム変数[`password_history`](/system-variables.md#password_history-new-in-v650)と[`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)を使用します。
 
 たとえば、過去 6 個のパスワードと過去 365 日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
 
@@ -372,7 +372,7 @@ TiDBは、アカウントのログイン失敗回数を追跡できます。ブ�
 
 `CREATE USER`または`ALTER USER`ステートメントの`FAILED_LOGIN_ATTEMPTS`および`PASSWORD_LOCK_TIME`オプションを使用して、各アカウントのログイン失敗回数とロック時間を設定できます。使用可能な値オプションは次のとおりです。
 
--   `FAILED_LOGIN_ATTEMPTS` : N。2 `N`連続してログインに失敗すると、アカウントは一時的にロックされます。Nの値の範囲は0～32767です。
+-   `FAILED_LOGIN_ATTEMPTS` : N。`N`連続してログインに失敗すると、アカウントは一時的にロックされます。Nの値の範囲は0～32767です。
 -   `PASSWORD_LOCK_TIME` : N | 無制限。
     -   Nは、連続してログインに失敗すると、アカウントが`N`日間一時的にロックされることを意味します。Nの値の範囲は0～32767です。
     -   `UNBOUNDED`ロック時間が無制限であり、アカウントを手動でロック解除する必要があることを意味します。Nの値の範囲は0から32767です。
@@ -418,5 +418,5 @@ ALTER USER 'test3'@'localhost' FAILED_LOGIN_ATTEMPTS 0 PASSWORD_LOCK_TIME 0;
 >
 > 連続してログインに失敗したためにアカウントがロックされた場合、アカウント ロック ポリシーを変更すると、次の影響があります。
 >
-> -   `FAILED_LOGIN_ATTEMPTS`変更しても、アカウントのロック状態は変わりません。3 `FAILED_LOGIN_ATTEMPTS`変更は、アカウントのロックが解除され、再度ログインを試みた後に有効になります。
-> -   `PASSWORD_LOCK_TIME`変更しても、アカウントのロック状態は変わりません。3 `PASSWORD_LOCK_TIME`変更は、アカウントが再度ログインしようとした際に有効になります。その際、TiDB は新しいロック時間が経過したかどうかを確認します。経過した場合、TiDB はユーザーのロックを解除します。
+> -   `FAILED_LOGIN_ATTEMPTS`を変更しても、アカウントのロック状態は変わりません。`FAILED_LOGIN_ATTEMPTS`変更は、アカウントのロックが解除され、再度ログインを試みた後に有効になります。
+> -   `PASSWORD_LOCK_TIME`を変更しても、アカウントのロック状態は変わりません。`PASSWORD_LOCK_TIME`変更は、アカウントが再度ログインしようとした際に有効になります。その際、TiDB は新しいロック時間が経過したかどうかを確認します。経過した場合、TiDB はユーザーのロックを解除します。

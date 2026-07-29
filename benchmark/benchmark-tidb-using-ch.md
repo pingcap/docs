@@ -7,7 +7,7 @@ summary: TiDB で CH-benCHmark テストを実行する方法を学びます。
 
 このドキュメントでは、CH-benCHmark を使用して TiDB をテストする方法について説明します。
 
-CH-benCHmarkは、テスト[TPC-C](http://www.tpc.org/tpcc/)とテスト[TPC-H](http://www.tpc.org/tpch/)両方を含む混合ワークロードです。HTAPシステムのテストで最も一般的なワークロードです。詳細については、 [混合ワークロードCH-benCHmark](https://dl.acm.org/doi/10.1145/1988842.1988850)参照してください。
+CH-benCHmarkは、テスト[TPC-C](http://www.tpc.org/tpcc/)とテスト[TPC-H](http://www.tpc.org/tpch/)両方を含む混合ワークロードです。HTAPシステムのテストで最も一般的なワークロードです。詳細については、 [混合ワークロードCH-benCHmark](https://dl.acm.org/doi/10.1145/1988842.1988850)を参照してください。
 
 CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)導入する必要があります。TiFlashと[TiFlashレプリカを作成する](#create-tiflash-replicas)TiFlashすると、TiKVがTPC-Cオンライントランザクションの最新データをTiFlashにリアルタイムで複製し、TiDBオプティマイザーがTPC-HワークロードからTiFlashのMPPエンジンにOLAPクエリを自動的にプッシュダウンして効率的に実行します。
 
@@ -17,7 +17,7 @@ CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネン
 tiup install bench
 ```
 
-TiUP Benchコンポーネントの詳細な使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)参照してください。
+TiUP Benchコンポーネントの詳細な使用方法については、 [TiUP Bench](/tiup/tiup-bench.md)を参照してください。
 
 ## データを読み込む {#load-data}
 
@@ -58,7 +58,7 @@ tiup bench ch -H 172.16.5.140 -P 4000 -D tpcc prepare
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
-TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。1 `tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
+TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。`tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
 
     ALTER DATABASE tpcc SET tiflash replica 2;
 
@@ -70,8 +70,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。2 `1`利用可能、 `0`利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
--   `PROGRESS`レプリケーションの進行状況を示します。値は`0`から`1`までです。6 `1` TiFlashレプリカのレプリケーションが完了したことを意味します。
+-   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。レプリカが利用可能になると、このステータスは変更されません。
+-   `PROGRESS`はレプリケーションの進行状況を示します。値は`0`から`1`までです。`1`はTiFlashレプリカのレプリケーションが完了したことを意味します。
 
 ## 統計を収集する {#collect-statistics}
 

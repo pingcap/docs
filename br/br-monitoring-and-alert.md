@@ -49,7 +49,7 @@ summary: このドキュメントでは、ログバックアップの監視、�
 | **tikv_log_backup_initial_scan_operations**            | カウンタ   | 初期スキャン中の RocksDB 関連操作の統計。<br/> `cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                       |
 | **tikv_log_backup_enabled**                            | カウンタ   | ログバックアップを有効にするかどうか。値が`0`より大きい場合、ログバックアップは有効になります。                                                                                          |
 | **tikv_log_backup_observed_region**                    | ゲージ    | リッスンされているリージョンの数。                                                                                                                          |
-| **tikv_log_backup_task_status**                        | ゲージ    | ログ バックアップ タスクのステータス。1 `0`実行中、 `1`一時停止中、 `2`エラーを意味します。<br/> `task :: string`                                                                |
+| **tikv_log_backup_task_status**                        | ゲージ    | ログ バックアップ タスクのステータス。`0`は実行中、 `1`は一時停止中、 `2`はエラーを意味します。<br/> `task :: string`                                                                |
 | **tikv_log_backup_pending_initial_scan**               | ゲージ    | 保留中の初期スキャンの統計。<br/> `stage :: {"queuing", "executing"}`                                                                                    |
 
 ### ログバックアップアラート {#log-backup-alerts}

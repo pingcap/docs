@@ -26,13 +26,13 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 ## 適切なクエリプランを選択するにはどうすればよいですか？ヒントを使用する必要がありますか？それとも、ヒントを使用できますか？ {#how-to-choose-the-right-query-plan-do-i-need-to-use-hints-or-can-i-use-hints}
 
-TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)使用してオプティマイザに介入することができます。
+TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
 
 さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリ プランを修正することもできます。
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいでしょうか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
-TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)参照してください。
+TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
 TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
 
@@ -134,7 +134,7 @@ TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-vari
 
 ## TiDBのコーデックはUTF-8文字列がmemcomparableであることを保証できますか？キーがUTF-8をサポートする必要がある場合、コーディングに関する提案はありますか？ {#can-the-codec-of-tidb-guarantee-that-the-utf-8-string-is-memcomparable-is-there-any-coding-suggestion-if-our-key-needs-to-support-utf-8}
 
-TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomparable形式です。TiDBの文字セットの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)参照してください。
+TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomparable形式です。TiDBの文字セットの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ## トランザクション内のステートメントの最大数はいくつですか? {#what-is-the-maximum-number-of-statements-in-a-transaction}
 
@@ -144,7 +144,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 ## TiDB で、後から挿入されたデータのAUTO_INCREMENT ID が、前に挿入されたデータのAUTO_INCREMENT ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
-TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)参照してください。
+TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`を指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)を参照してください。
 
 ## TiDB の<code>sql_mode</code>変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
@@ -172,7 +172,7 @@ Sqoopでは、 `--batch`各バッチで100文をコミットすることを意�
         --batch
     ```
 
--   単一のTiDBトランザクション内のステートメント数の制限を増やすこともできますが、これによりメモリ消費量が増加します。詳細については[SQL文の制限](/tidb-limitations.md#limitations-on-sql-statements)参照してください。
+-   単一のTiDBトランザクション内のステートメント数の制限を増やすこともできますが、これによりメモリ消費量が増加します。詳細については[SQL文の制限](/tidb-limitations.md#limitations-on-sql-statements)を参照してください。
 
 ## TiDB には Oracle のフラッシュバッククエリのような機能はありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
@@ -194,7 +194,7 @@ TiDBはマルチバージョン同時実行制御（MVCC）を使用している
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。TiDB `SHOW PROCESSLIST`ではシステムプロセスIDが表示されません。表示されるのは現在のセッションIDです。TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
--   TiDBは分散データベースであるため、 `tidb-server`インスタンスはSQL文を解析および実行するためのステートレスエンジンです（詳細は[TiDBアーキテクチャ](/tidb-architecture.md)を参照）。5 `SHOW PROCESSLIST` 、ユーザーがMySQLクライアントからログインした`tidb-server`インスタンスで実行されたセッションリストを表示します。クラスタ内で実行されているすべてのセッションのリストではありません。ただし、MySQLはスタンドアロンデータベースであり、 `SHOW PROCESSLIST`はMySQLで実行されたすべてのSQL文を表示します。
+-   TiDBは分散データベースであるため、 `tidb-server`インスタンスはSQL文を解析および実行するためのステートレスエンジンです（詳細は[TiDBアーキテクチャ](/tidb-architecture.md)を参照）。`SHOW PROCESSLIST` 、ユーザーがMySQLクライアントからログインした`tidb-server`インスタンスで実行されたセッションリストを表示します。クラスタ内で実行されているすべてのセッションのリストではありません。ただし、MySQLはスタンドアロンデータベースであり、 `SHOW PROCESSLIST`はMySQLで実行されたすべてのSQL文を表示します。
 -   TiDBの`State`列は、クエリ実行中に継続的に更新されるわけではありません。TiDBは並列クエリをサポートしているため、各ステートメントが複数の*状態*にある場合があり、単一の値に単純化することが困難です。
 
 ## SQL コミットの実行優先度を制御または変更するにはどうすればよいですか? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
@@ -243,7 +243,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL実行 {#ddl-execution}
 
-このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)参照してください。
+このセクションでは、DDL文の実行に関連する問題を列挙します。DDL実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベストプラクティス](/best-practices/ddl-introduction.md)を参照してください。
 
 ### さまざまな DDL 操作を実行するにはどのくらいの時間がかかりますか? {#how-long-does-it-take-to-perform-various-ddl-operations}
 
@@ -336,7 +336,7 @@ TiDB v6.2.0以降、TiDB DDLモジュールは並列フレームワークを採�
 
 ## JDBC接続で使用される照合順序 {#collation-used-in-jdbc-connections}
 
-このセクションでは、JDBC接続で使用される照合順序に関する質問を示します。TiDBでサポートされている文字セットと照合順序については、 [文字セットと照合順序](/character-set-and-collation.md)参照してください。
+このセクションでは、JDBC接続で使用される照合順序に関する質問を示します。TiDBでサポートされている文字セットと照合順序については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ### JDBC URL で<code>connectionCollation</code>が構成されていない場合、JDBC 接続ではどの照合順序が使用されますか? {#what-collation-is-used-in-a-jdbc-connection-when-code-connectioncollation-code-is-not-configured-in-the-jdbc-url}
 
@@ -413,10 +413,10 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 推奨事項:
 
--   ハードウェア構成を改善してください。1 [TiDB のソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)参照してください。
+-   ハードウェア構成を改善してください。[TiDB のソフトウェアおよびハードウェア要件](/hardware-and-software-requirements.md)を参照してください。
 -   同時実行性を向上させます。デフォルト値は10です。50に上げて試してみることもできますが、通常はデフォルト値の2～4倍の改善が見られます。
 -   大量のデータの場合は`count`をテストします。
--   TiKV設定を最適化します。1と[TiKVメモリパフォーマンスの調整](/tune-tikv-memory-performance.md) [TiKVスレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)参照してください。
+-   TiKV設定を最適化します。[TiKVスレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKVメモリパフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にします。
 
 ### 現在の DDL ジョブの進行状況を表示するにはどうすればよいでしょうか? {#how-to-view-the-progress-of-the-current-ddl-job}
@@ -439,7 +439,7 @@ ADMIN SHOW DDL;
 
 -   `ADMIN SHOW DDL` : 実行中のDDLジョブを表示する
 -   `ADMIN SHOW DDL JOBS` : 現在の DDL ジョブ キュー内のすべての結果 (実行中および実行待ちのタスクを含む) と、完了した DDL ジョブ キューの最後の 10 件の結果を表示します。
--   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。4 `job_id`実行中の DDL ジョブと DDL 履歴ジョブ キュー内の最後の 10 件の結果のみを検索します。
+-   `ADMIN SHOW DDL JOBS QUERIES 'job_id' [, 'job_id'] ...` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示します。`job_id`は実行中の DDL ジョブと DDL 履歴ジョブ キュー内の最後の 10 件の結果のみを検索します。
 
 ### TiDB は CBO (コストベース最適化) をサポートしていますか? サポートしている場合、どの程度サポートしていますか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
 
@@ -451,15 +451,15 @@ ADMIN SHOW DDL;
 
 ### クエリプランがツリーとして表現される場合のIDルールは何ですか？このツリーの実行順序は何ですか？ {#what-is-the-id-rule-when-a-query-plan-is-presented-as-a-tree-what-is-the-execution-order-for-this-tree}
 
-これらのIDにはルールはありませんが、IDは一意です。IDが生成されるとカウンターが動作し、プランが1つ生成されるごとに1が加算されます。実行順序はIDとは無関係です。クエリプラン全体はツリー構造になっており、実行プロセスはルートノードから開始され、データは上位レベルへと連続的に返されます。クエリプランの詳細については、 [TiDBクエリ実行プランの理解](/explain-overview.md)参照してください。
+これらのIDにはルールはありませんが、IDは一意です。IDが生成されるとカウンターが動作し、プランが1つ生成されるごとに1が加算されます。実行順序はIDとは無関係です。クエリプラン全体はツリー構造になっており、実行プロセスはルートノードから開始され、データは上位レベルへと連続的に返されます。クエリプランの詳細については、 [TiDBクエリ実行プランの理解](/explain-overview.md)を参照してください。
 
 ### TiDBクエリプランでは、 <code>cop</code>タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-code-cop-code-tasks-are-in-the-same-root-are-they-executed-concurrently}
 
 現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2 つの異なるタイプに属しています。
 
-`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。2 `root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
+`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 
-通常、 `root task`の入力データは`cop task`から取得されます。5 `root task`データを処理している間、TiKVの`cop task`同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)参照してください。
+通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
 
 ## データベースの最適化 {#database-optimization}
 

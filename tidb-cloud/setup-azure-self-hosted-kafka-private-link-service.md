@@ -314,7 +314,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     consume_messages
     ```
 
-4.  `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。5 `produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメータを使用して3つのブローカーすべてに接続します。11 `consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
+4.  `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。`produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメータを使用して3つのブローカーすべてに接続します。`consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
 
     ```shell
     # Test write message.
@@ -521,7 +521,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**プライベートリンク**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)参照してください。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**プライベートリンク**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
 2.  **「ChangeFeed ターゲットの構成」&gt;「接続方法」&gt;「プライベート リンク」**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 

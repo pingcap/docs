@@ -26,7 +26,7 @@ TiUPの基本は次のとおりです。
 
 ### Kubernetes 上で TiDBをデプロイて運用する - TiDB Operator {#deploy-and-operate-tidb-on-kubernetes-tidb-operator}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator) 、Kubernetes上でTiDBクラスタを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスタ内でTiDBをシームレスに実行できます。
+[TiDB Operator](https://github.com/pingcap/tidb-operator)は、Kubernetes上でTiDBクラスタを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスタ内でTiDBをシームレスに実行できます。
 
 TiDB Operatorの基本は次のとおりです。
 
@@ -47,14 +47,14 @@ DM の基本は次のとおりです。
 -   出典: MySQL/MariaDB
 -   ターゲット: TiDB クラスター
 -   サポートされている TiDB バージョン: すべてのバージョン
--   Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)使用します。
+-   Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用します。
 
 データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全なデータ移行と増分データレプリケーションが含まれます。
 
 データ量が 1 TB を超える場合は、次の手順を実行します。
 
-1.  MySQL/MariaDB から完全なデータをエクスポートするには、 [Dumpling](/dumpling-overview.md)使用します。
-2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
+1.  MySQL/MariaDB から完全なデータをエクスポートするには、 [Dumpling](/dumpling-overview.md)を使用します。
+2.  [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、手順 1 でエクスポートしたデータを TiDB クラスターにインポートします。
 3.  TiDB DM を使用して、MySQL/MariaDB から TiDB に増分データを複製します。
 
 > **Note:**
@@ -63,7 +63,7 @@ DM の基本は次のとおりです。
 
 ### 完全なデータエクスポート - Dumpling {#full-data-export-dumpling}
 
-[Dumpling](/dumpling-overview.md) MySQL または TiDB からの論理的な完全データ エクスポートをサポートします。
+[Dumpling](/dumpling-overview.md)は、MySQL または TiDB からの論理的な完全データ エクスポートをサポートします。
 
 Dumplingの基本は次のとおりです。
 
@@ -78,7 +78,7 @@ Dumplingの基本は次のとおりです。
 
 ### 完全なデータインポート - TiDB Lightning {#full-data-import-tidb-lightning}
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)大規模なデータセットの TiDB クラスターへの完全なデータインポートをサポートします。
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)は大規模なデータセットの TiDB クラスターへの完全なデータインポートをサポートします。
 
 TiDB Lightning は次のモードをサポートしています。
 
@@ -92,7 +92,7 @@ TiDB Lightningの基本は次のとおりです。
     -   その他の互換性のあるCSVファイル
     -   Amazon Aurora、Apache Hive、またはSnowflakeからエクスポートされたParquetファイル
 -   サポートされている TiDB バージョン: v2.1 以降
--   Kubernetes サポート: はい。詳細は[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータを迅速に復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)参照してください。
+-   Kubernetes サポート: はい。詳細は[TiDB Lightningを使用して Kubernetes 上の TiDB クラスターにデータを迅速に復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning)を参照してください。
 
 > **Note:**
 >
@@ -115,7 +115,7 @@ BRの基本は次のとおりです。
 
 ### 増分データレプリケーション - TiCDC {#incremental-data-replication-ticdc}
 
-[TiCDC](/ticdc/ticdc-overview.md) 、TiKVから変更ログを取得することでTiDBの増分データを複製するためのツールです。上流のTSOと整合性のある状態にデータを復元できます。TiCDCは、他のシステムがデータ変更をサブスクライブできるように、TiCDCオープンプロトコルも提供しています。
+[TiCDC](/ticdc/ticdc-overview.md)は、TiKVから変更ログを取得することでTiDBの増分データを複製するためのツールです。上流のTSOと整合性のある状態にデータを復元できます。TiCDCは、他のシステムがデータ変更をサブスクライブできるように、TiCDCオープンプロトコルも提供しています。
 
 TiCDC の基本は次のとおりです。
 

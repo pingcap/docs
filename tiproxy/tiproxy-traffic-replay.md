@@ -31,9 +31,9 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
 
 1.  テスト環境を準備します。
 
-    1.  テストクラスタを作成します。詳細については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)参照してください。
-    2.  `tiproxyctl`インストールし、 `tiproxyctl`インストールされているホストが本番とテスト環境の両方の TiProxy インスタンスに接続できることを確認します。詳細については、 [TiProxyコントロールをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)参照してください。
-    3.  本番クラスタからテスト環境クラスタにデータを複製します。詳細については、 [データ移行の概要](/migration-overview.md)参照してください。
+    1.  テストクラスタを作成します。詳細については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+    2.  `tiproxyctl`インストールし、 `tiproxyctl`インストールされているホストが本番とテスト環境の両方の TiProxy インスタンスに接続できることを確認します。詳細については、 [TiProxyコントロールをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)を参照してください。
+    3.  本番クラスタからテスト環境クラスタにデータを複製します。詳細については、 [データ移行の概要](/migration-overview.md)を参照してください。
     4.  テスト クラスターで[`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行して統計を更新します。
 
 2.  [`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)コマンドを使用して、本番クラスターの TiProxy インスタンスに接続し、トラフィックのキャプチャを開始します。
@@ -52,18 +52,18 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
     tiproxyctl traffic capture --host 10.0.1.10 --port 3080 --output="/tmp/traffic" --duration=1h
     ```
 
-    トラフィックファイルは自動的にローテーションされ、圧縮されます。1 `/tmp/traffic`内のファイルの例:
+    トラフィックファイルは自動的にローテーションされ、圧縮されます。`/tmp/traffic`内のファイルの例:
 
     ```shell
     ls /tmp/traffic
     # meta    traffic-2024-08-29T17-37-12.477.log.gz  traffic-2024-08-29T17-43-11.166.log.gz traffic.log
     ```
 
-    詳細については[`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)参照してください。
+    詳細については[`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)を参照してください。
 
 3.  トラフィック ファイル ディレクトリをテスト クラスターの TiProxy インスタンスにコピーします。
 
-4.  [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)使用してテスト クラスターの TiProxy インスタンスに接続し、トラフィックの再生を開始します。
+4.  [`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)を使用してテスト クラスターの TiProxy インスタンスに接続し、トラフィックの再生を開始します。
 
     デフォルトでは、SQL ステートメントは本番クラスターと同じ速度で実行され、各データベース接続は本番クラスター内の接続に対応して、本番負荷をシミュレートし、一貫したトランザクション実行順序を確保します。
 
@@ -75,7 +75,7 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
 
     すべてのトラフィックはユーザー`u1`で実行されるため、 `u1`すべてのデータベースとテーブルにアクセスできることを確認してください。該当するユーザーが存在しない場合は、作成してください。
 
-    詳細については[`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)参照してください。
+    詳細については[`tiproxyctl traffic replay`](/tiproxy/tiproxy-command-line-flags.md#traffic-replay)を参照してください。
 
 5.  リプレイレポートを確認する。
 
@@ -168,7 +168,7 @@ tiproxyctl traffic show --host 10.0.1.10 --port 3080
 ]
 ```
 
-詳細については[`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show)参照してください。
+詳細については[`tiproxyctl traffic show`](/tiproxy/tiproxy-command-line-flags.md#traffic-show)を参照してください。
 
 現在のキャプチャまたは再生タスクをキャンセルするには、 [`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel)コマンドを使用します。
 
@@ -176,7 +176,7 @@ tiproxyctl traffic show --host 10.0.1.10 --port 3080
 tiproxyctl traffic cancel --host 10.0.1.10 --port 3080
 ```
 
-詳細については[`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel)参照してください。
+詳細については[`tiproxyctl traffic cancel`](/tiproxy/tiproxy-command-line-flags.md#traffic-cancel)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -187,4 +187,4 @@ tiproxyctl traffic cancel --host 10.0.1.10 --port 3080
 
 ## その他のリソース {#more-resources}
 
-TiProxy のトラフィック再生の詳細については、 [設計書](https://github.com/pingcap/tiproxy/blob/main/docs/design/2024-08-27-traffic-replay.md)参照してください。
+TiProxy のトラフィック再生の詳細については、 [設計書](https://github.com/pingcap/tiproxy/blob/main/docs/design/2024-08-27-traffic-replay.md)を参照してください。

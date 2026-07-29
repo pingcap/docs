@@ -46,13 +46,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### `temp-dir` <span class="version-mark">v6.3.0 で追加されました。</span> {#temp-dir-new-in-v630}
 
 -   TiDBが一時データを保存するために使用されるファイルシステム上の場所。機能がTiDBノード内でローカルストレージを必要とする場合、TiDBはこの場所に対応する一時データを保存します。
--   インデックスを作成する際に、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)有効になっている場合、新しく作成されたインデックスのバックフィルが必要なデータは、まず TiDB のローカル一時ディレクトリに保存され、その後バッチ処理で TiKV にインポートされるため、インデックス作成が高速化されます。
--   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)使用してデータをインポートする場合、ソートされたデータはまず TiDB のローカル一時ディレクトリに保存され、その後バッチ処理で TiKV にインポートされます。
+-   インデックスを作成する際に、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効になっている場合、新しく作成されたインデックスのバックフィルが必要なデータは、まず TiDB のローカル一時ディレクトリに保存され、その後バッチ処理で TiKV にインポートされるため、インデックス作成が高速化されます。
+-   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用してデータをインポートする場合、ソートされたデータはまず TiDB のローカル一時ディレクトリに保存され、その後バッチ処理で TiKV にインポートされます。
 -   デフォルト値: `"/tmp/tidb"`
 
 > **Note:**
 >
-> ディレクトリが存在しない場合、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB にそのディレクトリへの読み取り/書き込み権限がない場合、 [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)予期しない問題が発生する可能性があります。
+> ディレクトリが存在しない場合、TiDB は起動時に自動的に作成します。ディレクトリの作成に失敗した場合、または TiDB にそのディレクトリへの読み取り/書き込み権限がない場合、 [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)で予期しない問題が発生する可能性があります。
 
 ### `oom-use-tmp-storage` {#oom-use-tmp-storage}
 
@@ -92,7 +92,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
     -   `compatible-kill-query`が`false`の場合、TiDB での`KILL xxx`の動作は MySQL とは異なります。TiDB でクエリを強制終了するには、 `TIDB`のように`KILL TIDB xxx`キーワードを追加する必要があります。
     -   `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、構成ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 -   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果を持ちます。
--   `KILL`ステートメントの詳細については、[キル [TIDB]](/sql-statements/sql-statement-kill.md)参照してください。
+-   `KILL`ステートメントの詳細については、[KILL [TIDB]](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### `check-mb4-value-in-utf8` {#check-mb4-value-in-utf8}
 
@@ -113,7 +113,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **Note:**
 >
-> この設定項目は非推奨となり、現在では`@tidb_enable_clustered_index`の値が`INT_ONLY`の場合にのみ有効になります。主キーを追加または削除する必要がある場合は、テーブル作成時に代わりに`NONCLUSTERED`キーワードを使用してください。 `CLUSTERED`型の主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)参照してください。
+> この設定項目は非推奨となり、現在では`@tidb_enable_clustered_index`の値が`INT_ONLY`の場合にのみ有効になります。主キーを追加または削除する必要がある場合は、テーブル作成時に代わりに`NONCLUSTERED`キーワードを使用してください。 `CLUSTERED`型の主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ### `server-version` {#server-version}
 
@@ -197,7 +197,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   TCP4のみでのリスニングを有効または無効にします。
 -   デフォルト値: `false`
--   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) 「tcp4」プロトコルで正しく解析できるため、ロード バランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
+-   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)が「tcp4」プロトコルで正しく解析できるため、ロード バランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
 ### `enable-enum-length-limit` <span class="version-mark">v5.0で追加</span> {#enable-enum-length-limit-new-in-v50}
 
@@ -226,13 +226,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   グローバルキル（インスタンスをまたいでクエリや接続を終了する）機能を有効にするかどうかを制御します。
 -   デフォルト値: `true`
 -   値が`true`の場合、 `KILL`および`KILL TIDB`ステートメントはインスタンス間でクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントは対象の TiDB インスタンスに転送されます。クライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`および`KILL TIDB`ステートメントも実行のために対象の TiDB インスタンスに転送されます。
--   バージョン7.3.0以降では、 `enable-global-kill`<kbd>に</kbd>`true`されている場合、MySQLコマンドラインのControl+Cを使用して[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)できます。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)参照してください。
+-   バージョン7.3.0以降では、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)の両方が`true`に設定されている場合、MySQLコマンドラインのControl+Cを使用してクエリまたは接続を終了できます。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)参照してください。
 
 ### `enable-32bits-connection-id` <span class="version-mark">v7.3.0で追加</span> {#enable-32bits-connection-id-new-in-v730}
 
 -   32ビット接続ID機能を有効にするかどうかを制御します。
 -   デフォルト値: `true`
--   この設定項目と[`enable-global-kill`](#enable-global-kill-new-in-v610)両方が`true`に設定されている場合、TiDBは32ビットの接続IDを生成します。これにより、MySQLコマンドラインの<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。
+-   この設定項目と[`enable-global-kill`](#enable-global-kill-new-in-v610)の両方が`true`に設定されている場合、TiDBは32ビットの接続IDを生成します。これにより、MySQLコマンドラインの<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。
 
 > **Warning:**
 >
@@ -526,7 +526,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `6291456` (バイト単位)
 -   トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この構成項目の最大値は`125829120` (120 MB) を超えません。
 -   バージョン7.6.0以降では、システム変数[`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)を使用して、この設定項目の値を動的に変更できます。
--   TiKVにも同様の制限があることに注意してください。単一の書き込みリクエストのデータサイズが、デフォルトで8MBに設定されている[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きな行がある場合は、両方の設定を同時に変更する必要があります。
+-   TiKVにも同様の制限があることに注意してください。単一の書き込みリクエストのデータサイズが、デフォルトで8MBに設定されている[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きな行がある場合は、両方の設定を同時に変更する必要があります。
 -   [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) （MySQLプロトコルのパケットの最大サイズ）のデフォルト値は67108864（64 MiB）です。行が`max_allowed_packet`より大きい場合、行は切り捨てられます。
 -   [`txn-total-size-limit`](#txn-total-size-limit) （TiDBにおける単一トランザクションのサイズ制限）のデフォルト値は100 MiBです。 `txn-entry-size-limit`の値を100 MiB以上に増やす場合は、 `txn-total-size-limit`の値もそれに合わせて増やす必要があります。
 
@@ -622,7 +622,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### `concurrently-init-stats` <span class="version-mark">v8.1.0 および v7.5.2 で追加されました。</span> {#concurrently-init-stats-new-in-v810-and-v752}
 
--   TiDB の起動時に統計情報を同時に初期化するかどうかを制御します。この設定項目は、 [`lite-init-stats`](#lite-init-stats-new-in-v710) `false`に設定されている場合にのみ有効になります。
+-   TiDB の起動時に統計情報を同時に初期化するかどうかを制御します。この設定項目は、 [`lite-init-stats`](#lite-init-stats-new-in-v710)が`false`に設定されている場合にのみ有効になります。
 -   デフォルト値: v8.2.0 より前のバージョンでは`false` 、v8.2.0 以降のバージョンでは`true` 。
 
 ### `lite-init-stats` <span class="version-mark">v7.1.0の新機能</span> {#lite-init-stats-new-in-v710}
@@ -630,7 +630,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDBの起動時に軽量統計初期化を使用するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンでは`false` 、v7.2.0 以降のバージョンでは`true` 。
 -   `lite-init-stats`の値が`true`の場合、統計情報の初期化では、インデックスと列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。 `lite-init-stats`の値が`false`の場合、統計情報の初期化では、インデックスのヒストグラム、TopN、および Count-Min Sketch はメモリにロードされますが、主キーと列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。オプティマイザが特定の主キーまたは列のヒストグラム、TopN、および Count-Min Sketch を必要とする場合、必要な統計情報は同期または非同期でメモリにロードされます ( [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)で制御)。
--   `lite-init-stats`を`true`に設定すると、統計情報の初期化が高速化され、不要な統計情報の読み込みを回避することで TiDB のメモリ使用量が削減されます。詳細については、[負荷統計](/statistics.md#load-statistics)参照してください。
+-   `lite-init-stats`を`true`に設定すると、統計情報の初期化が高速化され、不要な統計情報の読み込みを回避することで TiDB のメモリ使用量が削減されます。詳細については、[負荷統計](/statistics.md#load-statistics)を参照してください。
 
 ### `force-init-stats` <span class="version-mark">v6.5.7 および v7.1.0 で追加されました。</span> {#force-init-stats-new-in-v657-and-v710}
 
@@ -883,7 +883,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` } に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
 -   競合が発生するシナリオでは、この設定を有効にすると、TiDB は自動コミットトランザクションをグローバルロック待機管理に組み込み、デッドロックを回避し、デッドロックを引き起こす競合によって発生するレイテンシーの急増を軽減します。
 -   競合のないシナリオで、自動コミット トランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミット トランザクションの数がアプリケーションの総数の半分以上を占める場合)、単一のトランザクションが大量のデータを操作すると、この構成を有効にするとパフォーマンスが低下します。たとえば、自動コミット`INSERT INTO SELECT`ステートメントです。
--   セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) `"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。
+-   セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)が`"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。
 -   デフォルト値: `false`
 
 ### constraint-check-in-place-pessimistic） <span class="version-mark">v6.4.0の新機能</span> {#constraint-check-in-place-pessimistic-new-in-v640}
@@ -996,7 +996,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 -   明細書の要約を永続化するかどうかを制御します。
 -   デフォルト値: `false`
--   詳細については、 [持続ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)ご覧ください。
+-   詳細については、 [持続ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)をご覧ください。
 
 ### `tidb_stmt_summary_filename` <span class="version-mark">v6.6.0で追加</span> {#tidb-stmt-summary-filename-new-in-v660}
 

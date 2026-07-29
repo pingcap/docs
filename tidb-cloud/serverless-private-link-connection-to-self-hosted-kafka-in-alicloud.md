@@ -187,7 +187,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 1.  `listeners`項目の場合、3 つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
 
     1.  すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。**ブローカー**ロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーは必要ありません。
-    2.  **ブローカー**リスナーを 2 つ構成します。3 `INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
+    2.  **ブローカー**リスナーを 2 つ構成します。`INTERNAL`は内部アクセス用、 `EXTERNAL`はTiDB Cloudからの外部アクセス用です。
 
 2.  `advertised.listeners`項目については、次の操作を行います。
 
@@ -652,7 +652,7 @@ TiDB Cloudでプライベート リンク接続を作成するには、次の手
 
 1.  [ステップ2](#2-set-up-an-alibaba-cloud-endpoint-service)で取得した Alibaba Cloud エンドポイント サービス名 (例: `com.aliyuncs.privatelink.<region>.xxxxx` ) を使用して、 TiDB Cloudにプライベート リンク接続を作成します。
 
-    詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)参照してください。
+    詳細については[Alibaba Cloud Endpoint Service のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-alibaba-cloud-endpoint-service-private-link-connection)を参照してください。
 
 2.  TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベート リンク接続にドメインをアタッチします。
 

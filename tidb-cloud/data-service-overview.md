@@ -21,7 +21,7 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 >
 > TiDB Cloudは、TiDBクラスタ用のChat2Query APIを提供します。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、データサービスにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えるだけでSQL文を生成・実行できるようになります。
 >
-> 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)参照してください。
+> 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 ## シナリオ {#scenarios}
 

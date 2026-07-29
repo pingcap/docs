@@ -61,7 +61,7 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 -   `APPROX_COUNT_DISTINCT(expr, [expr...])`
 
-    この関数は、異なる値の数を数える点では`COUNT(DISTINCT)`に似ていますが、近似値を返します。3 `BJKST`アルゴリズムを使用することで、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費量を大幅に削減します。さらに、低カーディナリティデータの場合、この関数はCPU使用率を効率的に維持しながら高い精度を実現します。
+    この関数は、異なる値の数を数える点では`COUNT(DISTINCT)`に似ていますが、近似値を返します。`BJKST`アルゴリズムを使用することで、べき乗分布を持つ大規模なデータセットを処理する際のメモリ消費量を大幅に削減します。さらに、低カーディナリティデータの場合、この関数はCPU使用率を効率的に維持しながら高い精度を実現します。
 
     次の例は、この関数の使用方法を示しています。
 
@@ -87,11 +87,11 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 ## GROUP BY修飾子 {#group-by-modifiers}
 
-TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。詳細については、 [GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)参照してください。
+TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。詳細については、 [GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。
 
 ## SQLモードのサポート {#sql-mode-support}
 
-TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっていると無効になります。5 `SELECT`のリストにある非集計列「b」が`GROUP BY`ステートメントに含まれていないためです。
+TiDBはSQLモード`ONLY_FULL_GROUP_BY`をサポートしており、有効にすると、曖昧な非集計列を含むクエリを拒否します。例えば、次のクエリは`ONLY_FULL_GROUP_BY`が有効になっていると無効になります。`SELECT`のリストにある非集計列「b」が`GROUP BY`ステートメントに含まれていないためです。
 
 ```sql
 drop table if exists t;
@@ -135,7 +135,7 @@ MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のい
 -   式は`SELECT`リストの1に等しい
 -   式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です。
 
-しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)参照してください。
+しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 
 標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`番目のリスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
 

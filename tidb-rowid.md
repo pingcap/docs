@@ -96,7 +96,7 @@ INSERT INTO t(_tidb_rowid, a, b) VALUES (101, 4, 'w');
 ERROR 1105 (HY000): insert, update and replace statements for _tidb_rowid are not supported
 ```
 
-データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)有効にしてください。
+データインポートまたは移行中に元の行IDを保持する必要がある場合は、まずシステム変数[`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id)を有効にしてください。
 
 ```sql
 SET @@tidb_opt_write_row_id = ON;
@@ -123,14 +123,14 @@ SELECT _tidb_rowid, a, b FROM t WHERE _tidb_rowid = 100;
 -   `_tidb_rowid`という名前のユーザー列を作成することはできません。
 -   既存のユーザー列の名前を`_tidb_rowid`に変更することはできません。
 -   `_tidb_rowid`はTiDBの内部列です。ビジネス上の主キーや長期的な識別子として扱わないでください。
--   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`値を持つ行が含まれる可能性があります。
+-   パーティション化された非クラスター化テーブルでは、 `_tidb_rowid`の値はパーティション間で一意であることが保証されません。`EXCHANGE PARTITION`を実行した後、異なるパーティションに同じ`_tidb_rowid`の値を持つ行が含まれる可能性があります。
 -   `_tidb_rowid`存在するかどうかは、テーブルのスキーマによって異なります。クラスター化インデックスを持つテーブルの場合は、行識別子として主キーを使用してください。
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
 `_tidb_rowid`を使用するテーブルの場合、TiDB はデフォルトで行 ID を昇順で割り当てます。書き込み負荷の高いワークロードでは、これにより書き込みホットスポットが発生する可能性があります。
 
-この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)使用することを検討してください。
+この問題を軽減するために（行IDとして`_tidb_rowid`を使用するテーブルの場合）、行IDをより均等に分配するために[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を使用し、必要に応じてリージョンを事前に分割するために[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用することを検討してください。
 
 例：
 

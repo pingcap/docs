@@ -47,7 +47,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 ```
 
 -   `checkpoint` : TiCDC はこのタイムスタンプより前のすべてのデータをダウンストリームに複製しました。
--   `state` : このレプリケーションタスクの状態。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)参照してください。
+-   `state` : このレプリケーションタスクの状態。各状態とその意味の詳細については、 [チェンジフィードの状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)を参照してください。
 
 > **Note:**
 >
@@ -63,7 +63,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
     >
     > 現在の時刻を返す`NOW()`ような関数を使用する代わりに、 [`TIDB_CURRENT_TSO()`](/functions-and-operators/tidb-functions.md#tidb_current_tso)関数を使用して現在の TSO を取得します。
 
-    次の例では、 [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)使用して、TSO を読み取り可能な時刻形式に変換し、さらに比較します。
+    次の例では、 [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)を使用して、TSO を読み取り可能な時刻形式に変換し、さらに比較します。
 
     ```sql
     BEGIN;
@@ -314,7 +314,7 @@ TiCDC v6.2以降、単一テーブルトランザクションを複数のトラ�
 
 上記のエラーが引き続き発生する場合は、 BRを使用して大規模トランザクションの増分データを復元することをお勧めします。詳細な手順は次のとおりです。
 
-1.  大規模トランザクションにより終了した changefeed の`checkpoint-ts`記録し、この TSO をBR増分バックアップの`--lastbackupts`として使用して[増分データバックアップ](/br/br-incremental-guide.md#back-up-incremental-data)実行します。
+1.  大規模トランザクションにより終了した changefeed の`checkpoint-ts`を記録し、この TSO をBR増分バックアップの`--lastbackupts`として使用して[増分データバックアップ](/br/br-incremental-guide.md#back-up-incremental-data)を実行します。
 2.  増分データをバックアップした後、 BRログ出力に`["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]`に似たログレコードが見つかります。このログに`BackupTS`を記録してください。
 3.  [増分データを復元する](/br/br-incremental-guide.md#restore-incremental-data) 。
 4.  新しい変更フィードを作成し、レプリケーション タスクを`BackupTS`から開始します。
@@ -335,7 +335,7 @@ TiDB v7.1.0 以降、TiCDC はこれらの冗長な DML イベントを削除し
 
 ## DDL文を下流のMySQL 5.7に複製する際に、時間型フィールドのデフォルト値が一致しません。どうすればよいでしょうか？ {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
 
-上流のTiDBで`create table test (id int primary key, ts timestamp)`文が実行されたとします。TiCDCがこの文を下流のMySQL 5.7に複製する際、MySQLはデフォルト設定を使用します。複製後のテーブルスキーマは以下のようになります。3 `timestamp`のフィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
+上流のTiDBで`create table test (id int primary key, ts timestamp)`文が実行されたとします。TiCDCがこの文を下流のMySQL 5.7に複製する際、MySQLはデフォルト設定を使用します。複製後のテーブルスキーマは以下のようになります。`timestamp`のフィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
 
 ```sql
 mysql root@127.0.0.1:test> show create table test;
@@ -389,7 +389,7 @@ TiDB Lightning物理インポート モードによってインポートされ�
 
 ## BRと TiCDC 間の互換性の制限は何ですか? {#what-are-the-compatibility-limitations-between-br-and-ticdc}
 
-BR （バックアップ＆リストア）はSSTファイルを直接生成し、TiKVクラスターにインポートするため、変更フィードではBRによって復元されたデータを完全にキャプチャすることを保証できません。詳細については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)参照してください。
+BR （バックアップ＆リストア）はSSTファイルを直接生成し、TiKVクラスターにインポートするため、変更フィードではBRによって復元されたデータを完全にキャプチャすることを保証できません。詳細については、 [TiDB Lightning物理インポート モードと TiCDC 間の互換性の制限は何ですか?](/ticdc/ticdc-faq.md#what-are-the-compatibility-limitations-between-tidb-lightning-physical-import-mode-and-ticdc)を参照してください。
 
 BR はバージョンに応じて互換性を異なる方法で処理します。
 
@@ -466,7 +466,7 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 
 > **Note:**
 >
-> 保存された生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
+> 保存された生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
 
 ## 頻繁に発生する<code>CDC:ErrMySQLDuplicateEntryCDC</code>エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-code-cdc-errmysqlduplicateentrycdc-code-errors}
 

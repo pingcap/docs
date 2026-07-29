@@ -14,7 +14,7 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサ
 
 > **Warning:**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)報告してください。
+> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb-cloud">
 

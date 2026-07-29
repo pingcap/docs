@@ -5,11 +5,11 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 # TiDB Data Migrationのクイックスタート {#quick-start-with-tidb-data-migration}
 
-[TiDB Data Migration (DM)](/dm/dm-overview.md) 、MySQL互換データベースからTiDBにデータを複製する強力なツールです。このガイドでは、 [TiUP Playground](/tiup/tiup-playground.md)使用して開発またはテスト用のローカルTiDB DM環境を迅速に構築する方法と、ソースMySQLデータベースからターゲットTiDBデータベースへのデータ移行という簡単なタスクを段階的に説明します。
+[TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL互換データベースからTiDBにデータを複製する強力なツールです。このガイドでは、 [TiUP Playground](/tiup/tiup-playground.md)を使用して開発またはテスト用のローカルTiDB DM環境を迅速に構築する方法と、ソースMySQLデータベースからターゲットTiDBデータベースへのデータ移行という簡単なタスクを段階的に説明します。
 
 > **Note:**
 >
-> 本番への展開については、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)参照してください。
+> 本番への展開については、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
 ## ステップ1: テスト環境をセットアップする {#step-1-set-up-the-test-environment}
 
@@ -114,7 +114,7 @@ Docker を使用すると、テスト用の MySQL 8.0 インスタンスをす�
 
 <div label="macOS" value="macos">
 
-macOS では、 [Homebrew](https://brew.sh)使用して MySQL 8.0 をローカルにすばやくインストールして起動できます。
+macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をローカルにすばやくインストールして起動できます。
 
 1.  Homebrewを更新し、MySQL 8.0 をインストールします。
 
@@ -357,7 +357,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 ## ステップ5: データ複製を確認する {#step-5-verify-the-data-replication}
 
-移行タスクを開始したら、データレプリケーションが期待どおりに動作しているかどうかを確認します。1 `dmctl`を使用してタスクのステータスを確認し、ターゲット TiDB データベースに接続して、ソース MySQL データベースからデータが正常に複製されていることを確認します。
+移行タスクを開始したら、データレプリケーションが期待どおりに動作しているかどうかを確認します。`dmctl`を使用してタスクのステータスを確認し、ターゲット TiDB データベースに接続して、ソース MySQL データベースからデータが正常に複製されていることを確認します。
 
 1.  TiDB DM タスクのステータスを確認します。
 

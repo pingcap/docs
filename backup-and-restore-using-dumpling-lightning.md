@@ -92,7 +92,7 @@ LIMIT
 
     DumplingはデフォルトでデータをSQLファイルにエクスポートします。 `--filetype`オプションを追加することで、別のファイル形式を指定できます。
 
-    Dumplingのその他の構成については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)参照してください。
+    Dumplingのその他の構成については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
 2.  エクスポートが完了すると、ディレクトリ`s3://my-bucket/sql-backup`でバックアップファイルを確認できます。
 

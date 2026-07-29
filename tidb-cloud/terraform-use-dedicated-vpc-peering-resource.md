@@ -56,8 +56,8 @@ summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cl
 
     -   `tidbcloud_dedicated_vpc_peering`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_vpc_peering`に設定します。
     -   リソース名は必要に応じて定義できます。例： `example` 。
-    -   必要な引数の値を取得する方法がわからない場合は、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)参照してください。
-    -   TiDB Cloud Dedicated VPC ピアリング仕様情報を取得するには、 [tidbcloud_dedicated_vpc_peering (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)参照してください。
+    -   必要な引数の値を取得する方法がわからない場合は、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    -   TiDB Cloud Dedicated VPC ピアリング仕様情報を取得するには、 [tidbcloud_dedicated_vpc_peering (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)を参照してください。
 
 3.  `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`使用は推奨されません。
 

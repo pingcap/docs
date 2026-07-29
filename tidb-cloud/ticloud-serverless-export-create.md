@@ -86,7 +86,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --csv.separator 文字列         | CSV ファイル内の各値の区切り文字を指定します。(デフォルトは &quot;,&quot;)                                                                           | いいえ | 非対話型モードでのみ動作します。         |
 | --csv.スキップヘッダー              | ヘッダーなしでテーブルの CSV ファイルをエクスポートします。                                                                                          | いいえ | 非対話型モードでのみ動作します。         |
 | --parquet.compression 文字列   | Parquet圧縮アルゴリズムを指定します。[ `"GZIP"` `"SNAPPY"` `"ZSTD"` `"NONE"` ]のいずれかです。デフォルト値は`"ZSTD"`です。                                 | いいえ | 非対話型モードでのみ動作します。         |
-| --filter文字列                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |
+| --filter文字列                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |
 | --sql 文字列                   | `SQL SELECT`ステートメントを使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
 | --文字列                       | エクスポートされたテーブルを`WHERE`条件でフィルタリングします。--sqlと同時に使用しないでください。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
 | --compression                     | エクスポートファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムは`GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`です。デフォルト値は`GZIP`です。                          | いいえ | 非対話型モードでのみ動作します。         |
@@ -103,4 +103,4 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

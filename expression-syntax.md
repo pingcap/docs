@@ -9,11 +9,11 @@ summary: TiDB の式構文について学習します。
 
 表現は次の種類に分けられます。
 
--   識別子。参考として[スキーマオブジェクト名](/schema-object-names.md)参照してください。
+-   識別子。参考として[スキーマオブジェクト名](/schema-object-names.md)を参照してください。
 
--   述語、数値、文字列、日付式。これらのうち[リテラル値](/literal-values.md)式です。
+-   述語、数値、文字列、日付式。これらのうち[リテラル値](/literal-values.md)も式です。
 
--   関数呼び出しとウィンドウ関数。参考までに[関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)参照。
+-   関数呼び出しとウィンドウ関数。参考までに[関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)を参照。
 
 -   ParamMarker( `?` )、システム変数、ユーザー変数、CASE式。
 

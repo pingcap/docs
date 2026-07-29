@@ -125,7 +125,7 @@ tiup list
 
 独自に構築したTiDB、TiKV、PDなどのTiDBコンポーネントを扱うためのカスタムリポジトリを作成できます。また、独自のtiupコンポーネントを作成することも可能です。
 
-独自のコンポーネントを作成するには、 `tiup package`コマンドを実行し、 [コンポーネントのパッケージング](https://github.com/pingcap/tiup/blob/master/doc/user/package.md)指示に従って実行します。
+独自のコンポーネントを作成するには、 `tiup package`コマンドを実行し、 [コンポーネントのパッケージング](https://github.com/pingcap/tiup/blob/master/doc/user/package.md)の指示に従って実行します。
 
 ### カスタムリポジトリを作成する {#create-a-custom-repository}
 

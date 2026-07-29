@@ -254,7 +254,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 -   TTL 属性は、ローカル一時テーブルやグローバル一時テーブルなどの一時テーブルには設定できません。
 -   TTL 属性を持つテーブルは、外部キー制約のプライマリ テーブルとして他のテーブルから参照されることをサポートしていません。
 -   すべての期限切れデータが直ちに削除されることは保証されません。期限切れデータが削除されるタイミングは、バックグラウンドクリーンアップジョブのスケジュール間隔とスケジュールウィンドウによって異なります。
--   [クラスター化インデックス](/clustered-indexes.md)使用するテーブルの場合、次のシナリオでのみ、TTL ジョブを複数のサブタスクに分割できます。
+-   [クラスター化インデックス](/clustered-indexes.md)を使用するテーブルの場合、次のシナリオでのみ、TTL ジョブを複数のサブタスクに分割できます。
     -   主キーまたは複合主キーの最初の列は、 `INTEGER`またはバイナリ文字列型です。バイナリ文字列型は主に以下のものを指します。
         -   `CHAR(N) CHARACTER SET BINARY`
         -   `VARCHAR(N) CHARACTER SET BINARY`
@@ -271,7 +271,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 -   削除がデータ サイズを比較的安定させるのに十分な速さであるかどうかをどのように判断すればよいでしょうか?
 
-    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour` 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。7 `TTL Insert Rows Per Hour`長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)パネル`TTL Insert Rows Per Hour`は、過去 1 時間に挿入された行の総数を記録します。対応する`TTL Delete Rows Per Hour`は 、過去 1 時間に TTL タスクによって削除された行の総数を記録します。`TTL Insert Rows Per Hour`が長期間にわたって`TTL Delete Rows Per Hour`よりも高い場合、挿入率が削除率を上回り、データの総量が増加することを意味します。例:
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

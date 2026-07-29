@@ -11,7 +11,7 @@ summary: TiProxy API を使用して構成、ヘルス ステータス、監視�
 >
 > TiProxy APIはデバッグ用に特別に設計されており、TiProxyに将来導入される機能との互換性が完全には保証されない可能性があります。情報取得のためにこのツールをアプリケーションやユーティリティの開発に組み込むことは推奨されません。
 
-TiProxy APIにアクセスするためのアドレスは`http://${host}:${port}${path}`です。3 `${host}:${port}` TiProxy設定項目[`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1)で指定され、 `${path}`アクセスしたい特定のAPIエンドポイントです。例：
+TiProxy APIにアクセスするためのアドレスは`http://${host}:${port}${path}`です。`${host}:${port}`は TiProxy設定項目[`api.addr`](/tiproxy/tiproxy-configuration.md#addr-1)で指定され、 `${path}`はアクセスしたい特定のAPIエンドポイントです。例：
 
 ```bash
 curl http://127.0.0.1:3080/api/admin/config/

@@ -216,7 +216,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 > **Tip:**
 >
-> `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)使用しているかどうかを確認できます。
+> `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)を使用しているかどうかを確認できます。
 
 例えば：
 

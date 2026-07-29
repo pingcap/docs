@@ -247,7 +247,7 @@ DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 
 ## 制限 {#limitation}
 
-TiDB の一時テーブルの制限については、 [他の TiDB 機能との互換性の制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)参照してください。
+TiDB の一時テーブルの制限については、 [他の TiDB 機能との互換性の制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
 
 ## 続きを読む {#read-more}
 

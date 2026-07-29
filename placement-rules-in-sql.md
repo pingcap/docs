@@ -366,7 +366,7 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 > **Note:**
 >
-> `SURVIVAL_PREFERENCES` PD の`location-labels`と同等です。詳細については、[トポロジーラベルによるレプリカのスケジュール設定](/schedule-replicas-by-topology-labels.md)参照してください。
+> `SURVIVAL_PREFERENCES` PD の`location-labels`と同等です。詳細については、[トポロジーラベルによるレプリカのスケジュール設定](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 </CustomContent>
 
@@ -374,7 +374,7 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 > **Note:**
 >
-> `SURVIVAL_PREFERENCES` PD の`location-labels`と同等です。詳細については、 [トポロジーラベルによるレプリカのスケジュール設定](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)参照してください。
+> `SURVIVAL_PREFERENCES` PD の`location-labels`と同等です。詳細については、 [トポロジーラベルによるレプリカのスケジュール設定](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照してください。
 
 </CustomContent>
 

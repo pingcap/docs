@@ -48,7 +48,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 ## ステップ2. 全データを移行する {#step-2-migrate-full-data}
 
-環境を設定したら、 [Dumpling](/dumpling-overview.md)使用して上流の TiDB クラスターから完全なデータをエクスポートできます。
+環境を設定したら、 [Dumpling](/dumpling-overview.md)を使用して上流の TiDB クラスターから完全なデータをエクスポートできます。
 
 > **Note:**
 >
@@ -102,7 +102,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 3.  データを復元します。
 
-    MyLoader（オープンソースツール）を使用して、下流のMySQLインスタンスにデータをインポートします。MyLoaderのインストールと使用方法の詳細については、 [マイダンプラー/マイローダー](https://github.com/mydumper/mydumper)参照してください。MyLoaderはv0.10以前のバージョンを使用する必要があります。それ以降のバージョンでは、 Dumplingによってエクスポートされたメタデータファイルを処理できません。
+    MyLoader（オープンソースツール）を使用して、下流のMySQLインスタンスにデータをインポートします。MyLoaderのインストールと使用方法の詳細については、 [MyDumpler/MyLoader](https://github.com/mydumper/mydumper)を参照してください。MyLoaderはv0.10以前のバージョンを使用する必要があります。それ以降のバージョンでは、 Dumplingによってエクスポートされたメタデータファイルを処理できません。
 
     Dumplingによってエクスポートされた完全なデータを MySQL にインポートするには、次のコマンドを実行します。
 
@@ -112,13 +112,13 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の設定方法の詳細については[コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)参照してください。このドキュメントでは、設定は以下のとおりです。
+    sync-diff-inspector の設定方法の詳細については[コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、設定は以下のとおりです。
 
     ```toml
     # Diff Configuration.
@@ -164,11 +164,11 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     -   `--changefeed-id` : チェンジフィードID、正規表現の形式でなければなりません、 `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時刻である必要があります (または[ステップ2. 全データの移行](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS)
 
-    changefeed 構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)参照してください。
+    changefeed 構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 3.  GC を有効にします。
 
-    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細は[TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)参照してください。
+    TiCDCを用いた増分移行では、GCは複製された履歴データのみを削除します。そのため、変更フィードを作成した後、以下のコマンドを実行してGCを有効にする必要があります。詳細は[TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GC を有効にするには、次のコマンドを実行します。
 

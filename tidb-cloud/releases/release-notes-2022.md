@@ -25,12 +25,12 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     [TiDB Cloudコンソール](https://tidbcloud.com)の**バックアップ設定**で PITR 機能を有効または無効にすることができます。
 
-    詳細については[TiDB クラスタ データのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+    詳細については[TiDB クラスタ データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 -   複数の変更フィード管理と既存の変更フィード編集をサポートします。
 
     -   異なるデータレプリケーションタスクを管理するために、必要な数だけ変更フィードを作成できるようになりました。現在、各クラスタには最大10個の変更フィードを設定できます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
-    -   一時停止状態の既存の変更フィードの設定を編集できます。詳細については、 [変更フィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)参照してください。
+    -   一時停止状態の既存の変更フィードの設定を編集できます。詳細については、 [変更フィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
 
 -   Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型MySQL互換データベースからTiDB Cloudオンラインへのデータ直接移行をサポートします。この機能は現在、一般提供中です。
 
@@ -49,7 +49,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     タスク設定は数回クリックするだけで完了し、ローカルCSVデータをTiDBクラスターに素早くインポートできます。この方法を使用する場合、クラウドストレージバケットのパスとロールARNを指定する必要はありません。インポートプロセス全体が迅速かつスムーズです。
 
-    詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)参照してください。
+    詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 
 ## 2022年12月20日 {#december-20-2022}
 
@@ -110,7 +110,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloudを初めて使用する場合でも、すでにTiDB Cloudアカウントをお持ちの場合でも、AWS または GCP の請求アカウントにリンクできるようになりました。これにより、AWS または GCP Marketplace のサブスクリプションを簡単に完了できるようになります。
 
-    リンクの作り方については[クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)参照してください。
+    リンクの作り方については[クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)を参照してください。
 
 ## 2022年11月22日 {#november-22-2022}
 
@@ -122,9 +122,9 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     さらに、データ移行では、既存のデータと進行中の変更の両方をデータ ソースからTiDB Cloudに移行するための完全および増分データ移行機能が提供されます。
 
-    現在、データ移行機能は**ベータ版**です。3 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター、AWSオレゴン（us-west-2）およびAWSシンガポール（ap-southeast-1）リージョンでのみご利用いただけます。組織ごとに1つの移行ジョブを無料で作成できます。組織に複数の移行ジョブを作成するには、 [チケットを提出する](/tidb-cloud/tidb-cloud-support.md)が必要です。
+    現在、データ移行機能は**ベータ版**です。[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター、AWSオレゴン（us-west-2）およびAWSシンガポール（ap-southeast-1）リージョンでのみご利用いただけます。組織ごとに1つの移行ジョブを無料で作成できます。組織に複数の移行ジョブを作成するには、 [チケットを提出する](/tidb-cloud/tidb-cloud-support.md)が必要です。
 
-    詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
+    詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## 2022年11月15日 {#november-15-2022}
 
@@ -142,7 +142,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     デフォルトでは、バックアップデータはクラスタが作成されたリージョンに保存されます。日本では、GCP 上でホストされ PITR が有効になっている TiDB クラスタの場合、バックアップデータを 1 つまたは 2 つのリージョン（東京または大阪、あるいはその両方）に保存することを選択できます。別のリージョンからデータを復元することで、より高いレベルのデータ安全性が確保され、リージョン障害にも耐えることができます。
 
-    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
     この機能はまだベータ版であり、リクエストに応じてのみ利用可能です。
 
@@ -153,7 +153,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     データベース監査ログを使用すると、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録し、データベース監査ログを定期的に分析して、データベースを安全に保つことができます。
 
-    詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)参照してください。
+    詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
 
 ## 2022年11月8日 {#november-8-2022}
 
@@ -223,7 +223,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [Vercelテンプレートリスト](https://vercel.com/templates)中[TiDB Cloud Starter テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を公開します。
 
-    このテンプレートは、VercelとTiDB Cloudを試すための出発点として使用できます。このテンプレートを使用する前に、まず[TiDB Cloudクラスターにデータをインポートする](https://github.com/pingcap/tidb-prisma-vercel-demo#2-import-table-structures-and-data)実行する必要があります。
+    このテンプレートは、VercelとTiDB Cloudを試すための出発点として使用できます。このテンプレートを使用する前に、まず[TiDB Cloudクラスターにデータをインポートする](https://github.com/pingcap/tidb-prisma-vercel-demo#2-import-table-structures-and-data)を実行する必要があります。
 
 ## 2022年10月18日 {#october-18-2022}
 
@@ -241,7 +241,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)の[ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)を追加しました。
 
-    TiDB Cloud Terraform Providerは、 [Terraform](https://www.terraform.io/)使用してクラスタ、バックアップ、リストアなどのTiDB Cloudリソースを管理できるプラグインです。リソースのプロビジョニングとインフラストラクチャワークフローを自動化するシンプルな方法をお探しの場合は、 [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)に従ってTiDB Cloud Terraform Providerをお試しください。
+    TiDB Cloud Terraform Providerは、 [Terraform](https://www.terraform.io/)を使用してクラスタ、バックアップ、リストアなどのTiDB Cloudリソースを管理できるプラグインです。リソースのプロビジョニングとインフラストラクチャワークフローを自動化するシンプルな方法をお探しの場合は、 [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)に従ってTiDB Cloud Terraform Providerをお試しください。
 
 ## 2022年10月11日 {#october-11-2022}
 
@@ -306,7 +306,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの UI を最適化します。
+-   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/project/clusters)ページとクラスター概要ページの UI を最適化します。
 
     新しいデザインでは、Dedicated Tierへのアップグレード、クラスター接続、およびデータ インポートの入り口が強調表示されます。
 
@@ -336,7 +336,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   これで、 TiDB Cloudコンソールの右上隅のエントリから[PoCを申請する](/tidb-cloud/tidb-cloud-poc.md)実行できるようになりました。
+-   これで、 TiDB Cloudコンソールの右上隅のエントリから[PoCを申請する](/tidb-cloud/tidb-cloud-poc.md)を実行できるようになりました。
 
 **APIの変更**
 
@@ -354,7 +354,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     エンドポイント接続は安全かつプライベートであり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続はCIDRオーバーラップをサポートしており、ネットワーク管理が容易です。
 
-    詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)参照してください。
+    詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
 
 **コンソールの変更**
 
@@ -430,7 +430,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   お客様の組織のさまざまなサポートニーズに対応するために、 TiDB Cloudサポートプラン（Basic、Standard、Enterprise、Premium）を追加してください。詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご覧ください。
 
--   [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスターの詳細ページの UI を最適化します。
+-   [クラスター](https://tidbcloud.com/project/clusters)ページとクラスターの詳細ページの UI を最適化します。
 
     -   **クラスター**ページに**[接続] ボタン**と**[データのインポート]**ボタンを追加します。
     -   **[接続] ボタン**と**[データのインポート]**ボタンをクラスターの詳細ページの右上隅に移動します。
@@ -447,11 +447,11 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   新しい[Developer Tierクラスター](/tidb-cloud/select-cluster-tier.md#starter)にユーザー名プレフィックスの制限を追加します。
 
-    データベースユーザー名を使用または設定する際は、必ずユーザー名にクラスターのプレフィックスを含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)参照してください。
+    データベースユーザー名を使用または設定する際は、必ずユーザー名にクラスターのプレフィックスを含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 -   [Developer Tierクラスター](/tidb-cloud/select-cluster-tier.md#starter)のバックアップと復元機能を無効にします。
 
-    Developer Tierクラスターでは、バックアップと復元機能（自動バックアップと手動バックアップの両方を含む）は無効になっています。ただし、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをバックアップとしてエクスポートすることは可能です。
+    Developer Tierクラスターでは、バックアップと復元機能（自動バックアップと手動バックアップの両方を含む）は無効になっています。ただし、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してデータをバックアップとしてエクスポートすることは可能です。
 
 -   [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターのストレージサイズを 500 MiB から 1 GiB に増やします。
 
@@ -582,11 +582,11 @@ TiDB Cloudが一般提供を開始しました。以下の[サインアップ](h
 
 -   サポート[PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md) 。
 
-    Prometheus と Grafana の統合により、 [Prometheus](https://prometheus.io/)サービスを設定してTiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)使用してメトリックを表示できます。
+    Prometheus と Grafana の統合により、 [Prometheus](https://prometheus.io/)サービスを設定してTiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示できます。
 
 -   新しいクラスターの選択したリージョンに基づいてデフォルトのバックアップ時間を割り当てることをサポートします。
 
-    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)参照してください。
+    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 ## 2022年3月4日 {#march-04-2022}
 

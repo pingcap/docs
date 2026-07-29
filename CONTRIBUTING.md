@@ -1,10 +1,10 @@
 # TiDB ドキュメント貢献ガイド {#tidb-documentation-contributing-guide}
 
-[TiDB](https://github.com/pingcap/tidb)ドキュメントへようこそ! [TiDBコミュニティ](https://github.com/pingcap/community/)ご参加いただけることを心よりお待ちしております。
+[TiDB](https://github.com/pingcap/tidb)ドキュメントへようこそ! [TiDBコミュニティ](https://github.com/pingcap/community/)にご参加いただけることを心よりお待ちしております。
 
 ## あなたが貢献できること {#what-you-can-contribute}
 
-[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)改善するには、次のいずれかの項目から始めることができます。
+[PingCAP ウェブサイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)を改善するには、次のいずれかの項目から始めることができます。
 
 -   タイプミスやフォーマット（句読点、スペース、インデント、コードブロックなど）を修正します
 -   不適切または古い説明を修正または更新する
@@ -25,7 +25,7 @@
 -   [コードコメントスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
 -   図表スタイル: [Figma クイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    図のスタイルを統一するために、図の描画やデザインには[Figma](https://www.figma.com/)使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
+    図のスタイルを統一するために、図の描画やデザインには[Figma](https://www.figma.com/)を使用することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている図形や色を使用してください。
 
 ### ドキュメントテンプレートを選択する {#pick-a-doc-template}
 
@@ -43,13 +43,13 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 異なるバージョンの TiDB ドキュメントを管理するために、個別のブランチを使用します。
 
--   [開発中のドキュメント](https://docs.pingcap.com/tidb/dev) `master`ブランチで維持されます。
--   [公開された文書](https://docs.pingcap.com/tidb/stable/)対応する`release-<version>`ブランチでメンテナンスされています。例えば、TiDB v8.1 のドキュメントは`release-8.1`ブランチでメンテナンスされています。
--   [アーカイブされた文書](https://docs-archive.pingcap.com/)メンテナンスされなくなり、今後更新されることはありません。
+-   [開発中のドキュメント](https://docs.pingcap.com/tidb/dev)は`master`ブランチで維持されます。
+-   [公開された文書](https://docs.pingcap.com/tidb/stable/)は対応する`release-<version>`ブランチでメンテナンスされています。例えば、TiDB v8.1 のドキュメントは`release-8.1`ブランチでメンテナンスされています。
+-   [アーカイブされた文書](https://docs-archive.pingcap.com/)はメンテナンスされなくなり、今後更新されることはありません。
 
 ### チェリーピックラベルを使用する {#use-cherry-pick-labels}
 
-あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[ti-chi-bot](https://github.com/ti-chi-bot)導入します。
+あるドキュメント バージョンへの変更は他のドキュメント バージョンにも適用されることが多いため、チェリー ピック ラベルに基づいて PR チェリー ピック プロセスを自動化する[ti-chi-bot](https://github.com/ti-chi-bot)を導入します。
 
 -   変更が特定のドキュメントバージョンにのみ適用される場合は、そのドキュメントバージョンのブランチに基づいてPRを作成してください。チェリーピックラベルを追加する必要はありません。
 
@@ -59,7 +59,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 ## 貢献方法 {#how-to-contribute}
 
-このリポジトリへのプルリクエストを作成するには、以下の手順を実行してください。コマンドを使いたくない場合は、 [GitHubデスクトップ](https://desktop.github.com/)使用することもできます。こちらの方が簡単です。
+このリポジトリへのプルリクエストを作成するには、以下の手順を実行してください。コマンドを使いたくない場合は、 [GitHubデスクトップ](https://desktop.github.com/)を使用することもできます。こちらの方が簡単です。
 
 > **Note:**
 >
@@ -106,7 +106,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
     git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
     git commit -m "commit-message: update the xx"
 
-[コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)参照。
+[コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照。
 
 ### ステップ6: ブランチをアップストリーム/マスターと同期させる {#step-6-keep-your-branch-in-sync-with-upstream-master}
 
@@ -121,7 +121,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 ### ステップ8: プルリクエストを作成する {#step-8-create-a-pull-request}
 
 1.  [https://github.com/$user/docs](https://github.com/$user/docs)でフォークにアクセスします ( `$user` GitHub ID に置き換えます)
-2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。5 [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)参照してください。
+2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。詳細は[プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
 これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの貢献者になります。
 
@@ -148,7 +148,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 > **Tip:**
 >
-> TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)確認してください。
+> TiDB Cloudによって再利用される TiDB ドキュメントを確認するには、 [TiDB Cloudドキュメントの TOC ファイル](https://github.com/pingcap/docs/blob/release-8.1/TOC-tidb-cloud.md?plain=1)を確認してください。
 >
 > -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まる場合、このドキュメントはTiDB Cloud Dedicatedであることを意味します。
 > -   このファイル内のドキュメントのパスが`/tidb-cloud/`で始まっていない場合は、この TiDB ドキュメントがTiDB Cloudによって再利用されることを意味します。
@@ -191,10 +191,10 @@ TiDB Cloudで再利用される一部の TiDB ドキュメントには、 `Custo
 
 ## EBNF図のプレビューのガイドライン {#guideline-for-previewing-ebnf-diagrams}
 
-[TiDBドキュメント](https://docs.pingcap.com/tidb/stable) 、SQL構文の理解を助けるために、多くのSQL概要図を提供しています。例えば、 `ALTER INDEX`文[ここ](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis)の概要図があります。
+[TiDBドキュメント](https://docs.pingcap.com/tidb/stable)は、SQL構文の理解を助けるために、多くのSQL概要図を提供しています。例えば、 `ALTER INDEX`文[ここ](https://docs.pingcap.com/tidb/stable/sql-statement-alter-index#synopsis)の概要図があります。
 
-これら概要図のソースは[拡張バッカスナウア記法（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)使用して記述されています。SQL文のEBNFコードを準備する際には、コードを[https://kennytm.github.io/website-docs/dist/](https://kennytm.github.io/website-docs/dist/)にコピーして**「レンダリング」**をクリックすることで、EBNF図を簡単にプレビューできます。
+これら概要図のソースは[拡張バッカスナウア記法（EBNF）](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form)を使用して記述されています。SQL文のEBNFコードを準備する際には、コードを[https://kennytm.github.io/website-docs/dist/](https://kennytm.github.io/website-docs/dist/)にコピーして**「レンダリング」**をクリックすることで、EBNF図を簡単にプレビューできます。
 
 ## 接触 {#contact}
 
-ディスカッションには[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)参加してください。
+ディスカッションには[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)に参加してください。

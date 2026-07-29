@@ -77,7 +77,7 @@ from:
 
 #### `enable-relay` {#enable-relay}
 
--   リレーログ機能を有効にするかどうかを指定します。このパラメータはバージョン5.4以降で有効になります。また、コマンド`start-relay`を使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)実行することもできます。
+-   リレーログ機能を有効にするかどうかを指定します。このパラメータはバージョン5.4以降で有効になります。また、コマンド`start-relay`を使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)を実行することもできます。
 -   デフォルト値: `false`
 
 #### `relay-binlog-name` {#relay-binlog-name}
@@ -169,4 +169,4 @@ DM v2.0.2 以降では、ソース構成ファイルでbinlogイベント フィ
 
 #### `filters` {#filters}
 
--   binlogイベントのフィルタリングルールを指定します。詳細については[Binlogイベントフィルターパラメータの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)参照してください。
+-   binlogイベントのフィルタリングルールを指定します。詳細については[Binlogイベントフィルターパラメータの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。

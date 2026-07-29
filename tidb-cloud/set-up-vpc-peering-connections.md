@@ -138,7 +138,7 @@ AWS CLI または AWS ダッシュボードを使用して、VPC ピアリング
     sudo ./aws/install
     ```
 
-2.  アカウント情報に応じてAWS CLIを設定してください。AWS CLIに必要な情報を取得するには、 [AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)参照してください。
+2.  アカウント情報に応じてAWS CLIを設定してください。AWS CLIに必要な情報を取得するには、 [AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
 
     ```bash
     aws configure

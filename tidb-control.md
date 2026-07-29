@@ -140,7 +140,7 @@ tidb-ctl schema in <database name>
 
 #### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
-`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。4 `in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
+`tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。`in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
 例えば、テーブルID `mysql.stat_meta`は`21`です。テーブルID `tidb-ctl schema tid -i 21`を使用すると、テーブルID `mysql.stat_meta`の詳細を取得できます。
 

@@ -15,7 +15,7 @@ summary: TiUPミラーローテートは、 TiUPミラー内のroot.jsonファ�
     -   タイムスタンプ.json
 -   有効期限は`root.json` 。公式ミラーの場合、有効期限は作成日`root.json`の 1 年後となります。
 
-TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)参照してください。
+TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 
 以下の場合には`root.json`を更新する必要があります。
 
@@ -35,7 +35,7 @@ TiUP はコマンド`tiup mirror rotate`を使用して上記のプロセスを�
 
 > **Note:**
 >
-> -   TiUPバージョン1.5.0より前のバージョンでは、このコマンドを実行しても正しい新しい`root.json`ファイルが返されません[＃983](https://github.com/pingcap/tiup/issues/983)参照してください。
+> -   TiUPバージョン1.5.0より前のバージョンでは、このコマンドを実行しても正しい新しい`root.json`ファイルが返されません。[＃983](https://github.com/pingcap/tiup/issues/983)を参照してください。
 > -   このコマンドを使用する前に、すべてのTiUPクライアントが v1.5.0 以降のバージョンにアップグレードされていることを確認してください。
 
 ## 構文 {#syntax}
@@ -52,7 +52,7 @@ tiup mirror rotate [flags]
 
 ### --addr {#addr}
 
--   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)使用してファイルに署名できるように、このアドレスにアクセスできることを確認する必要があります。
+-   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を使用してファイルに署名できるように、このアドレスにアクセスできることを確認する必要があります。
 -   データ型: `STRING`
 -   コマンドでこのオプションを指定しない場合、 TiUP はデフォルトで`0.0.0.0:8080`でリッスンします。
 

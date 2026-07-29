@@ -87,7 +87,7 @@ SELECT * FROM test.repository;
     2.  **API仕様**エリアで**「ダウンロード」**をクリックし、JSON形式を選択して、プロンプトが表示されたら**「承認」**をクリックします。
     3.  ダウンロードしたファイルを`oas/doc.json`プロジェクトディレクトリに`hello-repos` }という名前で保存してください。
 
-    詳細については、 [OpenAPI仕様書をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)参照してください。
+    詳細については、 [OpenAPI仕様書をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)を参照してください。
 
     `oas/doc.json`ファイルの構造は以下のとおりです。
 
@@ -150,7 +150,7 @@ SELECT * FROM test.repository;
         TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
         TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
 
-    データ アプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)参照してください。
+    データ アプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 2.  `hello-repos`プロジェクトディレクトリで、 `app/page.tsx`の内容を、 `GET /repositories`エンドポイントからデータを取得して表示する以下のコードに置き換えてください。
 

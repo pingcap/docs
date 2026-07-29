@@ -21,7 +21,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 > **Note:**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、 TiFlashレプリカの`count` `2`しか設定できません。7 `1`を設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)クラスターの場合、 TiFlashレプリカの`count`は`2`しか設定できません。`1`を設定した場合、実行時に自動的に`2`に調整されます。2 より大きい数に設定した場合、レプリカ数に関するエラーが発生します。
 
 同じテーブルに対して複数のDDL文を実行した場合、最後に実行された文のみが確実に有効になります。次の例では、テーブル`tpch50`に対して2つのDDL文が実行されていますが、2番目の文（レプリカを削除する文）のみが確実に有効になります。
 
@@ -60,7 +60,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
-特定のテーブルのTiFlashレプリカのステータスを確認するには、次のステートメントを使用します。テーブルは`WHERE`句で指定します。3 `WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
+特定のテーブルのTiFlashレプリカのステータスを確認するには、次のステートメントを使用します。テーブルは`WHERE`句で指定します。`WHERE`の句を削除すると、すべてのテーブルのレプリカステータスを確認できます。
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
@@ -68,8 +68,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 
 上記のステートメントの結果は次のようになります。
 
--   `AVAILABLE` 、このテーブルのTiFlashレプリカが使用可能かどうかを示します。2 `1`使用可能、 `0`使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
--   `PROGRESS`レプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。6 `1`少なくとも 1 つのレプリカがレプリケートされていることを意味します。
+-   `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。`1`は使用可能、 `0`は使用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。DDL ステートメントを使用してレプリカの数を変更すると、レプリケーション ステータスは再計算されます。
+-   `PROGRESS`はレプリケーションの進行状況を表します。値は`0.0`から`1.0`までです。`1`は少なくとも 1 つのレプリカがレプリケートされていることを意味します。
 
 ## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
@@ -108,7 +108,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 >
 > -   このステートメントは、システム テーブル、ビュー、一時テーブル、およびTiFlashでサポートされていない文字セットを持つテーブルをスキップします。
 
-> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
+> -   システム変数[`tidb_batch_pending_tiflash_count`](/system-variables.md#tidb_batch_pending_tiflash_count-new-in-v60)を設定することで、実行中に利用不可のままにできるテーブルの数を制御できます。この値を下げると、レプリケーション中のクラスターへの負荷を軽減できます。ただし、この制限はリアルタイムではないため、設定適用後も利用不可のテーブルの数が制限を超える可能性があります。
 
 ### レプリケーションの進行状況を確認する {#check-replication-progress}
 
@@ -141,7 +141,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 このプロセス中、各TiKVインスタンスはテーブル全体をスキャンし、スキャンしたデータのスナップショットをTiFlashに送信してレプリカを作成します。デフォルトでは、TiKVおよびTiFlashの本番ワークロードへの影響を最小限に抑えるため、 TiFlashはレプリカの追加速度を遅くし、使用するリソースを少なくしています。TiKVノードとTiFlashノードに十分なCPUとディスクI/Oリソースがある場合は、以下の手順を実行することでTiFlashレプリケーションを高速化できます。
 
-1.  [動的設定SQL文](https://docs.pingcap.com/tidb/stable/dynamic-config)使用して、各 TiKV およびTiFlashインスタンスのスナップショット書き込み速度制限を一時的に上げます。
+1.  [動的設定SQL文](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用して、各 TiKV およびTiFlashインスタンスのスナップショット書き込み速度制限を一時的に上げます。
 
     ```sql
     -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
@@ -151,7 +151,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
     これらのSQL文を実行すると、クラスターを再起動することなく設定変更が即座に有効になります。ただし、レプリケーション速度はPD制限によってグローバルに制限されているため、現時点では高速化の効果を確認することはできません。
 
-2.  レプリカのスケジュール速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)使用します。
+2.  レプリカのスケジュール速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)を使用します。
 
     デフォルトの新規レプリカ速度制限は30です。これは、1分間に約30のリージョンが1つのTiFlashインスタンス上でTiFlashレプリカを追加または削除することを意味します。以下のコマンドを実行すると、すべてのTiFlashインスタンスの制限が60に調整され、速度は元の2倍になります。
 
@@ -243,7 +243,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3.  PDは、 TiFlashノードの`learner_config` `server.labels`テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
+3.  PDは、 TiFlashノードの`learner_config` `server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
     ```sql
     -- Non-partitioned table
@@ -279,9 +279,9 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 <CustomContent platform="tidb">
 
-ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)参照してください。
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
-TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)参照してください。
+TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 
 </CustomContent>
 

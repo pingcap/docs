@@ -16,11 +16,11 @@ Alibaba Cloud RDS の主キーのないアップストリーム テーブルの�
 互換性に関する既知の問題は次のとおりです。
 
 -   **Alibaba Cloud RDS**では、主キーのないアップストリーム テーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
--   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
+-   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は、 <code>non-capturing (?!)</code> ? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
 
-現在、DMはこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golangでサポートされている正規表現については、 [re2構文](https://github.com/google/re2/wiki/Syntax)参照してください。
+現在、DMはこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golangでサポートされている正規表現については、 [re2構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
 ## アップストリームで実行されたステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
@@ -28,11 +28,11 @@ DMは、複数のDDL変更操作を含む単一のステートメントを、1�
 
 ## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
-TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)参照してください。
+TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDL文をスキップするか、指定されたDDL文に置き換えます）。詳細は[失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
 
 > **Note:**
 >
-> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性がありません[MySQLの互換性](/mysql-compatibility.md#ddl-operations)参照してください。
+> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません[MySQLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
@@ -116,7 +116,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 4.  `start-task`を使用してタスクを開始します。
 
-5.  `query-status`までタスクの状態を観察します。3 `syncerBinlog` `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
+5.  `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
 ## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> ？ {#how-to-handle-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code-that-occurs-during-the-full-import}
 
@@ -143,7 +143,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 構成項目`block-allow-list`と`table-route`を確認します。
 
--   `block-allow-list`下にある上流のデータベースとテーブルの名前を設定する必要があります。3 `do-tables`前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
+-   `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に「~」を追加すると、正規表現を使用して名前を一致させることができます。
 -   `table-route` 、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_parttern_[0-63]` `table_parttern_0`から`table_pattern_6`までの 7 つのテーブルのみに一致します。
 
 ## DM がアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
@@ -175,7 +175,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## 一部の監視パネルに<code>No data point</code>と表示されるのはなぜですか? {#why-do-some-monitoring-panels-show-code-no-data-point-code}
 
-一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`表示されます。各パネルの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)参照してください。
+一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細については、 [DM モニタリング メトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
 ## DM v1.0 では、タスクにエラーがある場合にコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 

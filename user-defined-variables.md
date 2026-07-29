@@ -17,7 +17,7 @@ summary: ユーザー定義変数の使用方法を学習します。
 
 ## ユーザー定義変数を設定する {#set-the-user-defined-variables}
 
-[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)使ってユーザー定義変数を設定できます。構文は`SET @var_name = expr [, @var_name = expr] ...;`です。例えば：
+[`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使ってユーザー定義変数を設定できます。構文は`SET @var_name = expr [, @var_name = expr] ...;`です。例えば：
 
 ```sql
 SET @favorite_db = 'TiDB';
@@ -144,4 +144,4 @@ SELECT @col FROM t;
 
 `SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同一です。
 
-詳細については[MySQLのユーザー定義変数](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html)参照してください。
+詳細については[MySQLのユーザー定義変数](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html)を参照してください。

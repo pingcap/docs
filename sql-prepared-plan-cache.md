@@ -62,9 +62,9 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 
 > **Note:**
 >
-> [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)参照してください。
+> [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)システム変数は、 `Prepare` / `Execute`クエリの実行プランキャッシュのみを制御し、通常のクエリは制御しません。通常のクエリの実行プランキャッシュについては、 [SQL 非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
-実行プラン キャッシュ機能を有効にすると、セッション レベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)使用して、前の`Execute`ステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
+実行プランキャッシュ機能を有効にすると、セッション レベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
 
 ```sql
 MySQL [test]> create table t(a int);
@@ -189,7 +189,7 @@ LIMIT 10;
 
 <CustomContent platform="tidb">
 
-プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各TiDBインスタンス内の全セッションのキャッシュされた実行プランによるメモリ消費量の合計を表示するには、Grafanaの[**プランキャッシュメモリ使用**量監視パネル](/grafana-tidb-dashboard.md)使用します。
+プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各TiDBインスタンス内の全セッションのキャッシュされた実行プランによるメモリ消費量の合計を表示するには、Grafanaの[**プランキャッシュメモリ使用量**監視パネル](/grafana-tidb-dashboard.md)を使用します。
 
 > **Note:**
 >
@@ -280,7 +280,7 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-現在、TiDBは`GLOBAL`実行計画キャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた計画をクリアすることはできません。3 `GLOBAL`実行計画キャッシュをクリアしようとすると、以下のエラーが報告されます。
+現在、TiDBは`GLOBAL`実行計画キャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた計画をクリアすることはできません。`GLOBAL`実行計画キャッシュをクリアしようとすると、以下のエラーが報告されます。
 
 ```sql
 MySQL [test]> admin flush global plan_cache;
@@ -354,6 +354,6 @@ TiDBページの**Executor**セクションの[Grafanaダッシュボード](/gr
 
 <CustomContent platform="tidb-cloud">
 
-[TiDB Cloudコンソール](https://tidbcloud.com/)の[**監視**](/tidb-cloud/built-in-monitoring.md)ページ目で`Queries Using Plan Cache OPS`メトリックをチェックして、すべての TiDB インスタンスで 1 秒あたりにプラン キャッシュを使用している、またはプラン キャッシュがないクエリの数を取得できます。
+[TiDB Cloudコンソール](https://tidbcloud.com/)の[**監視**](/tidb-cloud/built-in-monitoring.md)ページで`Queries Using Plan Cache OPS`メトリックをチェックして、すべての TiDB インスタンスで 1 秒あたりにプランキャッシュを使用している、またはプランキャッシュがないクエリの数を取得できます。
 
 </CustomContent>

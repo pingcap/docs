@@ -55,7 +55,7 @@ Empty set (0.00 sec)
 
 ## 分割前のリージョン {#pre-split-region}
 
-コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。詳細については、 `PRE_SPLIT_REGIONS` [CREATE TABLE](/sql-statements/sql-statement-create-table.md)参照してください。
+コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。詳細については、 `PRE_SPLIT_REGIONS` [CREATE TABLE](/sql-statements/sql-statement-create-table.md)を参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 

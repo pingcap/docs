@@ -74,7 +74,7 @@ DML:
 
 ## メッセージ形式 {#message-format}
 
-Simpleプロトコルでは、各メッセージには1つのイベントのみが含まれます。Simpleプロトコルは、JSON形式とAvro形式のメッセージのエンコードをサポートしています。このドキュメントでは、JSON形式を例として使用します。Avro形式のメッセージの場合、フィールドと意味はJSON形式と同じですが、エンコード形式が異なります。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)参照してください。
+Simpleプロトコルでは、各メッセージには1つのイベントのみが含まれます。Simpleプロトコルは、JSON形式とAvro形式のメッセージのエンコードをサポートしています。このドキュメントでは、JSON形式を例として使用します。Avro形式のメッセージの場合、フィールドと意味はJSON形式と同じですが、エンコード形式が異なります。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。
 
 ### DDL {#ddl}
 
@@ -236,8 +236,8 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | `sql`            | string   | DDL ステートメント。                                                                                          |
 | `commitTs`       | number  | DDL ステートメントの実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
-| `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)参照してください。                            |
-| `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。1 `CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
+| `tableSchema`    | object  | テーブルの現在のスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。                            |
+| `preTableSchema` | object  | DDL文が実行される前のテーブルのスキーマ情報。`CREATE`のDDLイベントを除くすべてのDDLイベントにこのフィールドがあります。                                |
 
 ### DML {#dml}
 
@@ -712,4 +712,4 @@ TableSchemaは、テーブル名、テーブルID、テーブルバージョン�
 
 ### Avroスキーマ定義 {#avro-schema-definition}
 
-Simpleプロトコルは、Avro形式でのメッセージ出力をサポートしています。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)参照してください。
+Simpleプロトコルは、Avro形式でのメッセージ出力をサポートしています。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。

@@ -23,7 +23,7 @@ summary: tidb_read_staleness` システム変数を使用して履歴データ�
 
 > **Note:**
 >
-> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるには、TiKV `advance-ts-interval`設定項目を変更します。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)ご覧ください。
+> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるには、TiKV `advance-ts-interval`設定項目を変更します。詳細は[ステイル読み取りのレイテンシーを削減](/stale-read.md#reduce-stale-read-latency)をご覧ください。
 
 ## 使用例 {#usage-examples}
 

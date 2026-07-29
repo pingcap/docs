@@ -229,7 +229,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
-悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) `OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
+悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
 
 -   遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
@@ -373,7 +373,7 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 
 > **Note:**
 >
-> TiDBはv6.6.0以降、 [FOREIGN KEY制約](/foreign-key.md)サポートします。v6.6.0より前のバージョンでは、TiDBは外部キー制約の作成と削除をサポートしていますが、実際には制約は有効になっていません。TiDBをv6.6.0以降にアップグレードすると、無効な外部キーを削除し、新しい外部キーを作成することで、外部キー制約を有効にすることができます。この機能はv8.5.0で一般提供開始となります。
+> TiDBはv6.6.0以降、 [FOREIGN KEY制約](/foreign-key.md)をサポートします。v6.6.0より前のバージョンでは、TiDBは外部キー制約の作成と削除をサポートしていますが、実際には制約は有効になっていません。TiDBをv6.6.0以降にアップグレードすると、無効な外部キーを削除し、新しい外部キーを作成することで、外部キー制約を有効にすることができます。この機能はv8.5.0で一般提供開始となります。
 
 TiDB は、DDL コマンドで`FOREIGN KEY`制約の作成をサポートしています。
 

@@ -22,7 +22,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 ## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。1 `project_id`指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
@@ -58,9 +58,9 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成が使用できるように情報を公開します。
 
-        `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
+        `output`ブロックはプログラミング言語の戻り値と同様の動作をします。詳細は[Terraformドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
 
-    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
+    リソースとデータ ソースに使用可能なすべての構成を取得するには、 [Terraform プロバイダーの構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
 2.  設定を適用するには、コマンド`terraform apply`を実行してください。続行するには、確認プロンプトで`yes`と入力してください。
 

@@ -123,7 +123,7 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 -   DDL 所有者は常に先入先出方式で DDL ジョブを処理します。
 -   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳格であり、ユーザー エクスペリエンスに影響します。
 
-これらの制限により、意図しないDDLブロッキング動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL実行](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)参照してください。
+これらの制限により、意図しないDDLブロッキング動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL実行](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)を参照してください。
 
 </div>
 </SimpleTab>
@@ -161,15 +161,15 @@ TiDB v6.2.0以降、単一の`ALTER`文でテーブル内の複数のスキー�
 
 ### 読み取りと書き込みのパフォーマンスを確認する {#check-the-read-and-write-performance}
 
-TiDBがインデックスを追加する際、データのバックフィルフェーズによってクラスターの読み取りと書き込みに負荷がかかります。1 `ADD INDEX`のコマンドが送信され、 `write reorg`番目のフェーズが開始されたら、GrafanaダッシュボードでTiDBとTiKVの読み取りと書き込みのパフォーマンスメトリックとアプリケーションの応答時間を確認し、 `ADD INDEX`操作がクラスターに影響を与えているかどうかを確認することをお勧めします。
+TiDBがインデックスを追加する際、データのバックフィルフェーズによってクラスターの読み取りと書き込みに負荷がかかります。`ADD INDEX`のコマンドが送信され、 `write reorg`番目のフェーズが開始されたら、GrafanaダッシュボードでTiDBとTiKVの読み取りと書き込みのパフォーマンスメトリックとアプリケーションの応答時間を確認し、 `ADD INDEX`操作がクラスターに影響を与えているかどうかを確認することをお勧めします。
 
 ## DDL関連コマンド {#ddl-related-commands}
 
--   `ADMIN SHOW DDL` : TiDB DDL操作のステータス（現在のスキーマバージョン番号、DDL所有者のDDL IDとアドレス、実行中のDDLタスクとSQL、現在のTiDBインスタンスのDDL IDなど）を表示するために使用されます。詳細については、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)参照してください。
+-   `ADMIN SHOW DDL` : TiDB DDL操作のステータス（現在のスキーマバージョン番号、DDL所有者のDDL IDとアドレス、実行中のDDLタスクとSQL、現在のTiDBインスタンスのDDL IDなど）を表示するために使用されます。詳細については、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)を参照してください。
 
--   `ADMIN SHOW DDL JOBS` : クラスター環境で実行されているDDLタスクの詳細なステータスを表示するために使用されます。詳細については、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)参照してください。
+-   `ADMIN SHOW DDL JOBS` : クラスター環境で実行されているDDLタスクの詳細なステータスを表示するために使用されます。詳細については、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)を参照してください。
 
--   `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応するDDLタスクの元のSQL文を表示するために使用されます。詳細については[`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)参照してください。
+-   `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応するDDLタスクの元のSQL文を表示するために使用されます。詳細については[`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)を参照してください。
 
 -   `ADMIN CANCEL DDL JOBS job_id, [, job_id]` : 送信されたが完了していないDDLタスクをキャンセルするために使用されます。キャンセルが完了すると、DDLタスクを実行するSQL文は`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。
 
@@ -190,4 +190,4 @@ TiDBがインデックスを追加する際、データのバックフィルフ�
 
 ## よくある質問 {#common-questions}
 
-DDL 実行に関するよくある質問については、 [SQL FAQ - DDL 実行](https://docs.pingcap.com/tidb/stable/sql-faq)参照してください。
+DDL 実行に関するよくある質問については、 [SQL FAQ - DDL 実行](https://docs.pingcap.com/tidb/stable/sql-faq)を参照してください。

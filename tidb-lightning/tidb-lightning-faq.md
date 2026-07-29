@@ -17,7 +17,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 ## ターゲット データベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
 
-権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)参照してください。
+権限の詳細については[TiDB Lightningを使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 
 ## TiDB Lightning で1 つのテーブルのインポート中にエラーが発生しました。他のテーブルにも影響しますか？プロセスは終了しますか？ {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
 
@@ -26,7 +26,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 ## TiDB Lightningを適切に再起動するにはどうすればよいですか? {#how-to-properly-restart-tidb-lightning}
 
 1.  [`tidb-lightning`プロセスを停止する](#how-to-stop-the-tidb-lightning-process) 。
-2.  新しい`tidb-lightning`タスクを開始します。3 `nohup tiup tidb-lightning -config tidb-lightning.toml`の前の開始コマンドを実行します。
+2.  新しい`tidb-lightning`タスクを開始します。以前の開始コマンド（例: `nohup tiup tidb-lightning -config tidb-lightning.toml`）を実行します。
 
 ## インポートされたデータの整合性を確保するにはどうすればよいですか? {#how-to-ensure-the-integrity-of-the-imported-data}
 

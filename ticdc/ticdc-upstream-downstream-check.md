@@ -94,7 +94,7 @@ select * from tidb_cdc.syncpoint_v1;
 
 ## 注記 {#notes}
 
--   TiCDCがチェンジフィードを作成する前に、TiCDC構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)参照してください。
+-   TiCDCがチェンジフィードを作成する前に、TiCDC構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 -   Syncpointを使用してデータ検証を実行する場合、TiKVのガベージコレクション（GC）時間を変更する必要があります。これは、データチェック中にスナップショットに対応する履歴データがGCによって収集されないようにするためです。GC時間を1時間に変更し、チェック後に設定を復元することをお勧めします。
 -   上記の例では`Datasource config`の部分のみを示しています。完全な設定については[sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 -   v6.4.0 以降では、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。

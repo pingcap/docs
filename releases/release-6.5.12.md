@@ -13,7 +13,7 @@ TiDBバージョン: 6.5.12
 
 ## 互換性の変更 {#compatibility-changes}
 
--   openEuler 22.03 LTS SP3/SP4 オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v6.5/hardware-and-software-requirements#os-and-platform-requirements)参照してください。
+-   openEuler 22.03 LTS SP3/SP4 オペレーティングシステムをサポートします。詳細については、 [OSおよびプラットフォームの要件](https://docs.pingcap.com/tidb/v6.5/hardware-and-software-requirements#os-and-platform-requirements)を参照してください。
 -   [TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-6.5/docs/tidb_http_api.md)から取得される DDL 履歴タスクのデフォルトの制限を 2048 に設定して、過剰な履歴タスクによる OOM の問題を防止します。 [＃55711](https://github.com/pingcap/tidb/issues/55711) @ [joccau](https://github.com/joccau)
 -   インデックスを追加する際の取り込みフェーズの最大速度を制限する新しいシステム変数[`tidb_ddl_reorg_max_write_speed`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_ddl_reorg_max_write_speed-new-in-v6512)を追加します。 [＃57156](https://github.com/pingcap/tidb/issues/57156) @ [CbcWestwolf](https://github.com/CbcWestwolf)
 

@@ -155,7 +155,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 セッションがスキーマの変更を待機している場合、メタデータ ロックが原因である可能性があります。
 
-詳細については[メタデータロック](/metadata-lock.md)参照してください。
+詳細については[メタデータロック](/metadata-lock.md)を参照してください。
 
 ## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 
@@ -304,7 +304,7 @@ err="pessimistic lock retry limit reached"
 解決策:
 
 -   上記エラーが頻繁に発生する場合は、アプリケーション側からの調整をお勧めします。
--   同一行（同一キー）への同時ロックが多く、頻繁に競合が発生する業務の場合は、システム変数[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)有効化を検討してください。ただし、この変数を有効にすると、ロック競合が発生するトランザクションのスループット低下（平均レイテンシーの増加）が多少発生する可能性がある点にご注意ください。新規に導入されたクラスターでは、この変数はデフォルトで有効化（ `ON` ）されています。
+-   同一行（同一キー）への同時ロックが多く、頻繁に競合が発生する業務の場合は、システム変数[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)の有効化を検討してください。ただし、この変数を有効にすると、ロック競合が発生するトランザクションのスループット低下（平均レイテンシーの増加）が多少発生する可能性がある点にご注意ください。新規に導入されたクラスターでは、この変数はデフォルトで有効化（ `ON` ）されています。
 
 ### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 

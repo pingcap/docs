@@ -5,7 +5,7 @@ summary: TiCDC 変更フィードを管理する方法を学びます。
 
 # チェンジフィードを管理する {#manage-changefeeds}
 
-このドキュメントでは、TiCDCコマンドラインツール`cdc cli`を使用してTiCDCの変更フィードを作成および管理する方法について説明します。変更フィードは、TiCDCのHTTPインターフェース経由でも管理できます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)参照してください。
+このドキュメントでは、TiCDCコマンドラインツール`cdc cli`を使用してTiCDCの変更フィードを作成および管理する方法について説明します。変更フィードは、TiCDCのHTTPインターフェース経由でも管理できます。詳細については、 [TiCDC オープンAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
@@ -274,7 +274,7 @@ force-replicate = true
 
 > **Note:**
 >
-> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。1 `sort engine`項目は設定しないことを推奨します。
+> v6.0.0以降、TiCDCはデフォルトでDB Sorterエンジンを使用し、Unified Sorterエンジンは使用しなくなりました。`sort engine`項目は設定しないことを推奨します。
 
 統合ソートエンジンはTiCDCのソートエンジンです。以下のシナリオで発生するOOM問題を軽減できます。
 

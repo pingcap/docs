@@ -5,7 +5,7 @@ summary: TiUPの使用中に問題が発生した場合のトラブルシュー�
 
 # TiUPトラブルシューティングガイド {#tiup-troubleshooting-guide}
 
-このドキュメントでは、 TiUPの使用時によくある問題とそのトラブルシューティング方法について解説します。このドキュメントに記載されていない問題が発生した場合、Github TiUPリポジトリの[新しい問題を提出する](https://github.com/pingcap/tiup/issues)参照してください。
+このドキュメントでは、 TiUPの使用時によくある問題とそのトラブルシューティング方法について解説します。このドキュメントに記載されていない問題が発生した場合、Github TiUPリポジトリの[新しい問題を提出する](https://github.com/pingcap/tiup/issues)を参照してください。
 
 ## TiUPコマンドのトラブルシューティング {#troubleshoot-tiup-commands}
 
@@ -23,7 +23,7 @@ TiUPはミラーサーバーから最新のコンポーネントリストを毎�
 
 ### コンポーネントのダウンロードプロセス中にチェックサムエラーが発生しました {#a-checksum-error-occurs-during-component-downloading-process}
 
-CDNサーバーのキャッシュ時間が短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。5分後に再度ダウンロードをお試しください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題[ここ](https://github.com/pingcap/tiup/issues)報告してください。
+CDNサーバーのキャッシュ時間が短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。5分後に再度ダウンロードをお試しください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題を[ここ](https://github.com/pingcap/tiup/issues)で報告してください。
 
 ## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 

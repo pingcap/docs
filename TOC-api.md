@@ -17,4 +17,4 @@
 -   [データ移行API](/api/dm-api-overview.md)
 -   [モニタリングAPI](/api/monitoring-api-overview.md)
 -   [TiCDC API](/api/ticdc-api-overview.md)
--   [TiDB OperatorAPI](/api/tidb-operator-api-overview.md)
+-   [TiDB Operator API](/api/tidb-operator-api-overview.md)

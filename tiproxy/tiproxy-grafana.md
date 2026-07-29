@@ -7,7 +7,7 @@ summary: TiProxy の監視項目について学習します。
 
 このドキュメントでは、TiProxy の監視項目について説明します。
 
-TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（PrometheusとGrafana）も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)参照してください。
+TiUPを使用してTiDBクラスターをデプロイする場合、監視システム（PrometheusとGrafana）も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、TiProxy、Node_exporterを含む一連のサブダッシュボードに分かれています。診断に役立つ多くのメトリクスが用意されています。各ダッシュボードには、パネルグループとそのパネルが含まれています。
 

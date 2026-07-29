@@ -73,13 +73,13 @@ SQLチューニングは、クエリの機能を変えずに同じワークロ�
 
 ### 作業負荷の分散をバランスよく行う {#balance-workload-distribution}
 
-TiDBのような分散アーキテクチャでは、TiKVノード間でワークロードを分散させることが最適なパフォーマンスを得るために不可欠です。読み取りと書き込みのホットスポットを特定して解決するには、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots)参照してください。
+TiDBのような分散アーキテクチャでは、TiKVノード間でワークロードを分散させることが最適なパフォーマンスを得るために不可欠です。読み取りと書き込みのホットスポットを特定して解決するには、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md#optimization-of-small-table-hotspots)を参照してください。
 
 これらの戦略を実装することで、TiDB クラスターが利用可能なすべてのリソースを効率的に利用し、個々の TiKV ノードでのワークロードの不均一な分散やシリアル化によって発生するボトルネックを回避できるようになります。
 
 ## 高負荷SQLを特定する {#identify-high-load-sql}
 
-リソースを大量に消費する SQL 文を特定する最も効率的な方法は、 [TiDB Dashboard](/dashboard/dashboard-overview.md)使用することです。また、ビューやログなどの他のツールを使用して、負荷の高い SQL 文を特定することもできます。
+リソースを大量に消費する SQL 文を特定する最も効率的な方法は、 [TiDB Dashboard](/dashboard/dashboard-overview.md)を使用することです。また、ビューやログなどの他のツールを使用して、負荷の高い SQL 文を特定することもできます。
 
 ### TiDB Dashboardを使用してSQL文を監視する {#monitor-sql-statements-using-tidb-dashboard}
 
@@ -117,7 +117,7 @@ TiDB Dashboardに加えて、他のツールを使用してリソースを大量
 
 ### 識別されたSQL文に関するデータを収集する {#gather-data-on-identified-sql-statements}
 
-特定された上位のSQL文については、 [`PLAN REPLAYER`](/sql-plan-replayer.md)使用してTiDBクラスタからSQL実行情報を取得・保存できます。このツールは、さらなる分析のために実行環境を再現するのに役立ちます。SQL実行情報をエクスポートするには、次の構文を使用します。
+特定された上位のSQL文については、 [`PLAN REPLAYER`](/sql-plan-replayer.md)を使用してTiDBクラスタからSQL実行情報を取得・保存できます。このツールは、さらなる分析のために実行環境を再現するのに役立ちます。SQL実行情報をエクスポートするには、次の構文を使用します。
 
 ```sql
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
@@ -161,7 +161,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
 上の図では、プロトコルレイヤーの右側に TiDBサーバーのオプティマイザーがあり、次のように SQL ステートメントを処理します。
 
 1.  SQL ステートメントはプロトコルレイヤーを介して SQL オプティマイザーに到達し、抽象構文ツリー (AST) に解析されます。
-2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。1文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。7 `Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
+2.  TiDBは、それが[ポイントゲット](/explain-indexes.md#point_get-and-batch_point_get)文であるかどうかを識別します。この文は、 `SELECT * FROM t WHERE pk_col = 1`や`SELECT * FROM t WHERE uk_col IN (1,2,3)`などの主キーまたは一意キーを介した単純な1テーブル検索です。`Point Get`の場合、TiDBは後続の最適化手順をスキップし、SQLエグゼキュータで直接実行します。
 3.  クエリが`Point Get`でない場合、AST は論理変換され、TiDB は特定のルールに基づいて SQL を論理的に書き換えます。
 4.  論理変換後、TiDB はコストベースの最適化を通じて AST を処理します。
 5.  コストベースの最適化では、オプティマイザーは統計を使用して適切な演算子を選択し、物理的な実行プランを生成します。
@@ -257,7 +257,7 @@ SHOW VARIABLES LIKE 'tidb\_auto\_analyze%';
 
 テーブルの統計をロックするには、 [`LOCK STATS table_name`](/sql-statements/sql-statement-lock-stats.md)ステートメントを使用できます。
 
-詳細については[統計](/statistics.md)参照してください。
+詳細については[統計](/statistics.md)を参照してください。
 
 ### 実行計画を理解する {#understand-execution-plans}
 
@@ -291,7 +291,7 @@ EXPLAIN SELECT id, name FROM emp WHERE id = 901;
 
 論理変換では、TiDBは`SELECT`リスト、 `WHERE`述語、およびその他の条件に基づいてSQL文を最適化します。クエリに注釈を付けて書き換えるための論理実行プランを生成します。この論理プランは、次の段階であるコストベースの最適化で使用されます。この変換では、列プルーニング、パーティションプルーニング、結合順序の変更といったルールベースの最適化が適用されます。このプロセスはルールベースで自動的に実行されるため、通常は手動での調整は不要です。
 
-詳細については[SQL論理最適化](/sql-logical-optimization.md)参照してください。
+詳細については[SQL論理最適化](/sql-logical-optimization.md)を参照してください。
 
 ##### 3. コストベースの最適化 {#3-cost-based-optimization}
 
@@ -311,7 +311,7 @@ TiDBオプティマイザは、統計情報を用いてSQL文の各ステップ�
 
 ![cost-based-optimization](/media/sql-tuning/cost-based-optimization.png)
 
-詳細については[SQL物理最適化](/sql-physical-optimization.md)参照してください。
+詳細については[SQL物理最適化](/sql-physical-optimization.md)を参照してください。
 
 #### 実行計画を生成して表示する {#generate-and-display-execution-plans}
 
@@ -338,12 +338,12 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
     +--------------------------+-------------+--------------+-------------------+----------------------------------------------------------------------------------------------------+
     5 rows in set (0.00 sec)
 
-`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`対応するSQL文を実行し、その実行時情報を記録し、実行計画とともに返します。この実行時情報は、クエリ実行のデバッグに不可欠です。詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)参照してください。
+`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQL文を実行し、その実行時情報を記録し、実行計画とともに返します。この実行時情報は、クエリ実行のデバッグに不可欠です。詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
 `EXPLAIN ANALYZE`出力には以下が含まれます。
 
 -   `actRows` : 演算子によって出力される行数。
--   `execution info` : オペレータの詳細な実行情報。2 `time` 、すべてのサブオペレータの合計実行時間を含む合計`wall time`表します。オペレータが親オペレータによって何度も呼び出される場合、時間は累積時間を参照します。
+-   `execution info` : オペレータの詳細な実行情報。`time`は、すべてのサブオペレータの合計実行時間を含む合計`wall time`を表します。オペレータが親オペレータによって何度も呼び出される場合、時間は累積時間を参照します。
 -   `memory` : 演算子によって使用されるメモリ。
 -   `disk` : オペレータが使用するディスク容量。
 
@@ -418,7 +418,7 @@ EXPLAIN SELECT COUNT(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 次の例では、プランツリーの最初のリーフノードである`IndexRangeScan_47`調べることから始めます。オプティマイザは、 `stars`テーブルから`name`と`id`列のみを選択します。これらの列は`name(name)`インデックスから取得できます。その結果、 `stars`のルートリーダーは`IndexReader_48`ではなく`TableReader`なります。
 
-`stars`と`planets`の結合はハッシュ結合です（ `HashJoin_44` ）。7 `planets`テーブルはフルテーブルスキャン（ `TableFullScan_45` ）を使用してアクセスされます。結合後、 `TopN_26`と`TopN_19`それぞれ`ORDER BY`と`LIMIT`句を適用します。最後の演算子`Projection_16` 、最後の列`t5.name`選択します。
+`stars`と`planets`の結合はハッシュ結合です（ `HashJoin_44` ）。`planets`テーブルはフルテーブルスキャン（ `TableFullScan_45` ）を使用してアクセスされます。結合後、 `TopN_26`と`TopN_19`がそれぞれ`ORDER BY`と`LIMIT`句を適用します。最後の演算子`Projection_16`は、最後の列`t5.name`を選択します。
 
 ```sql
 EXPLAIN 
@@ -481,7 +481,7 @@ LIMIT 3;
     -   推定精度を評価するには、 `actRows`と`estRows`を比較します。
     -   実行時間の長さやその他のメトリックなど、 `execution info`の詳細なメトリックを分析します。
     -   潜在的なリソース制約について、 `memory`と`disk`使用状況を確認します。
-3.  これらの要因を相関させることで、パフォーマンス問題の根本原因を特定できます。例えば、 `TableFullScan`操作で`actRows`カウントが高く、 `execution info`で実行時間が長い場合は、インデックスの作成を検討してください。7 `HashJoin`操作でメモリ使用量と実行時間が高い場合は、結合順序を最適化するか、別の結合方法を使用することを検討してください。
+3.  これらの要因を相関させることで、パフォーマンス問題の根本原因を特定できます。例えば、 `TableFullScan`操作で`actRows`カウントが高く、 `execution info`で実行時間が長い場合は、インデックスの作成を検討してください。`HashJoin`操作でメモリ使用量と実行時間が高い場合は、結合順序を最適化するか、別の結合方法を使用することを検討してください。
 
 以下の実行プランでは、クエリは5分51秒間実行された後、キャンセルされます。主な問題点は次のとおりです。
 
@@ -538,7 +538,7 @@ LIMIT 3;
     |       └─TableRangeScan_82             | 1000.00  | 2048    | cop[tikv] | table:orders                                                                           | tikv_task:{pro...| N/A      | N/A  |
     +---------------------------------------+----------+---------+-----------+----------------------------------------------------------------------------------------+---------------...+----------+------+
 
-詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)および[`EXPLAIN`ウォークスルー](/explain-walkthrough.md)参照してください。
+詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)および[`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
 ### TiDBのインデックス戦略 {#index-strategy-in-tidb}
 
@@ -604,7 +604,7 @@ TiDBのパフォーマンスを最適化するには、インデックスを効�
 以下にいくつかのベストプラクティスを示します。
 
 -   パフォーマンス上の明らかな利点がある場合にのみインデックスを作成します。
--   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)使用してインデックスの使用状況統計を定期的に確認します。
+-   [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を使用してインデックスの使用状況統計を定期的に確認します。
 -   インデックスを設計するときは、ワークロードの書き込み/読み取り比率を考慮してください。
 
 #### カバーインデックスを使用したSQLチューニング {#sql-tuning-with-a-covering-index}

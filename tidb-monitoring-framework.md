@@ -5,7 +5,7 @@ summary: Prometheus、Grafana、TiDB Dashboardを使用して、TiDB 監視フ�
 
 # TiDB 監視フレームワークの概要 {#tidb-monitoring-framework-overview}
 
-TiDB監視フレームワークは、PrometheusとGrafanaという2つのオープンソースプロジェクトを採用しています。TiDBは、監視およびパフォーマンスメトリクスの保存に[Prometheus](https://prometheus.io)使用し、これらのメトリクスの可視化に[Grafana](https://grafana.com/grafana)使用します。また、TiDBは、TiDBクラスターの監視と診断のための組み込みの[TiDB Dashboard](/dashboard/dashboard-intro.md)を提供しています。
+TiDB監視フレームワークは、PrometheusとGrafanaという2つのオープンソースプロジェクトを採用しています。TiDBは、監視およびパフォーマンスメトリクスの保存に[Prometheus](https://prometheus.io)を使用し、これらのメトリクスの可視化に[Grafana](https://grafana.com/grafana)を使用します。また、TiDBは、TiDBクラスターの監視と診断のための組み込みの[TiDB Dashboard](/dashboard/dashboard-intro.md)を提供しています。
 
 ## TiDBにおけるPrometheusについて {#about-prometheus-in-tidb}
 
@@ -53,4 +53,4 @@ Grafanaは、メトリクスを分析および視覚化するためのオープ�
 
 ## TiDB Dashboard {#tidb-dashboard}
 
-TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)ご覧ください。
+TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIで、v4.0で導入されました。PDコンポーネントに組み込まれているため、別途導入する必要はありません。詳細については、 [TiDB Dashboardの紹介](/dashboard/dashboard-intro.md)をご覧ください。

@@ -59,9 +59,9 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --oss.uri 文字列               | `oss://<bucket>/<path>`形式の Alibaba Cloud OSS URI。                                                            | いいえ | 非対話型モードでのみ動作します。                     |
 | --rotation-interval-minutes int32             | ローテーション間隔（分）。有効な範囲： `[10, 1440]` 。                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
 | --rotation-size-mib int32           | 回転サイズ（MiB）。有効な範囲： `[1, 1024]` 。                                                                              | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.アクセスキーID文字列            | Amazon S3のアクセスキーID。 `--s3.role-arn`いずれか、または`--s3.access-key-id`と`--s3.secret-access-key`両方を設定する必要があります。      | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.role-arn 文字列           | Amazon S3 のロール ARN。 `--s3.role-arn`いずれか、または`--s3.access-key-id`と`--s3.secret-access-key`両方を設定する必要があります。      | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.secret-access-key 文字列  | Amazon S3のシークレットアクセスキー。1 `--s3.role-arn`いずれか、または`--s3.access-key-id`と`--s3.secret-access-key`両方を設定する必要があります。 | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.アクセスキーID文字列            | Amazon S3のアクセスキーID。 `--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。      | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.role-arn 文字列           | Amazon S3 のロール ARN。 `--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。      | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.secret-access-key 文字列  | Amazon S3のシークレットアクセスキー。`--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。 | いいえ | 非対話型モードでのみ動作します。                     |
 | --s3.uri 文字列                | `s3://<bucket>/<path>`形式の Amazon S3 URI。                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | --unredacted                      | データベース監査ログを編集解除または編集します。                                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
@@ -76,4 +76,4 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

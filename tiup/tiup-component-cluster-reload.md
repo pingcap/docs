@@ -87,7 +87,7 @@ tiup cluster reload <cluster-name> [flags]
 
 -   リロード前にスクリプトを実行します。
 -   データ型: `STRINGS`
--   このオプションは、リロードするノードで実行されるスクリプトのパスを指定します。1 `--skip-restart` `true`に設定した場合は無効になります。
+-   このオプションは、リロードするノードで実行されるスクリプトのパスを指定します。`--skip-restart`を`true`に設定した場合は無効になります。
 
 ### --post-restart-script {#post-restart-script}
 
@@ -97,7 +97,7 @@ tiup cluster reload <cluster-name> [flags]
 
 -   リロード後にスクリプトを実行します。
 -   データ型: `STRINGS`
--   このオプションは、ノードのリロード後に実行されるスクリプトのパスを指定します。1 `--skip-restart` `true`に設定されている場合は有効になりません。
+-   このオプションは、ノードのリロード後に実行されるスクリプトのパスを指定します。`--skip-restart`が`true`に設定されている場合は有効になりません。
 
 ## 出力 {#output}
 
