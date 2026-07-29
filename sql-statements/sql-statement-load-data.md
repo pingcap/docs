@@ -175,7 +175,7 @@ IGNORE 1 LINES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`LOAD DATA`文の構文はMySQLの構文と互換性がありますが、文字セットオプションは解析されますが無視されます。構文の互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)を参照してください。
+`LOAD DATA`文の構文はMySQLの構文と互換性がありますが、文字セットオプションは解析されますが無視されます。構文の互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
 <CustomContent platform="tidb">
 
