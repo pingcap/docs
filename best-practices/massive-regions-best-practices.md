@@ -122,7 +122,7 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
     raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
     raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
-リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからのハートビートを受信しなかった場合、これらのフォロワーはリーダーが故障したと判断し、新たな選出を開始します。3 `raft-heartbeat-interval` 、リーダーがフォロワーにハートビートを送信する間隔です。したがって、この値を`raft-base-tick-interval`に増やすと、 Raftステートマシンから送信されるネットワークメッセージの数は減りますが、 Raftステートマシンがリーダーの故障を検出するまでの時間が長くなります。
+リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからのハートビートを受信しなかった場合、これらのフォロワーはリーダーが故障したと判断し、新たな選出を開始します。`raft-heartbeat-interval`は、リーダーがフォロワーにハートビートを送信する間隔です。したがって、`raft-base-tick-interval`の値を増やすと、 Raftステートマシンから送信されるネットワークメッセージの数は減りますが、 Raftステートマシンがリーダーの故障を検出するまでの時間が長くなります。
 
 ### 方法6:リージョンのサイズを調整する {#method-6-adjust-region-size}
 
