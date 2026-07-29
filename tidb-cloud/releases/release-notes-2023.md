@@ -410,7 +410,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   changefeed を使用してデータを Amazon S3 にストリーミングすることをサポートします。
 
-    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。1 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
+    これにより、 TiDB CloudとAmazon S3のシームレスな統合が可能になります。[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターからAmazon S3へのリアルタイムのデータキャプチャとレプリケーションが可能になり、下流のアプリケーションと分析機能が最新のデータにアクセスできるようになります。
 
     詳細については[クラウドストレージに保存](/tidb-cloud/changefeed-sink-to-cloud-storage.md)を参照してください。
 
@@ -616,7 +616,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    新しいインフラストラクチャにより、 [監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ目から簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、監視プロセスがよりユーザーフレンドリーになります。
+    新しいインフラストラクチャにより、 [監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページから簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、監視プロセスがよりユーザーフレンドリーになります。
 
 ## 2023年4月18日 {#april-18-2023}
 
@@ -743,7 +743,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターの[スロークエリ](/tidb-cloud/tune-performance.md#slow-query)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    この新しいインフラストラクチャにより、 [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)ページ目から簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、SQL診断プロセスがよりユーザーフレンドリーになります。
+    この新しいインフラストラクチャにより、 [スロークエリ](/tidb-cloud/tune-performance.md#slow-query)ページから簡単にナビゲートし、より直感的かつ効率的に必要な情報にアクセスできます。また、UXに関する多くの問題も解決され、SQL診断プロセスがよりユーザーフレンドリーになります。
 
 ## 2023年3月21日 {#march-21-2023}
 
@@ -760,7 +760,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     さらに、 TiDB Cloud は、AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)提供します。
 
-    データサービスにアクセスするには、左側のナビゲーションペインの[**データサービス**](https://tidbcloud.com/project/data-service)ページ目に移動します。詳細については、以下のドキュメントをご覧ください。
+    Data Serviceにアクセスするには、左側のナビゲーションペインの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。詳細については、以下のドキュメントをご覧ください。
 
     -   [データサービスの概要](/tidb-cloud/data-service-overview.md)
     -   [データサービスを始める](/tidb-cloud/data-service-get-started.md)
@@ -983,7 +983,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これで、過去 2 日間のメトリック データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟かつ明確に把握できるようになります。
 
-    この改善は追加費用なしで、クラスターの[**監視**](/tidb-cloud/built-in-monitoring.md)ページ目の**「診断」**タブからアクセスできます。これにより、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の健全性をより効果的に監視できるようになります。
+    この改善は追加費用なしで、クラスターの[**監視**](/tidb-cloud/built-in-monitoring.md)ページの**「診断」**タブからアクセスできます。これにより、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の健全性をより効果的に監視できるようになります。
 
 -   Prometheus 統合のための Grafana ダッシュボード JSON のカスタマイズをサポートします。
 
@@ -995,7 +995,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [**クラスター**](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの表示を簡素化します。
+-   [**クラスター**](https://tidbcloud.com/project/clusters)ページとクラスター概要ページの表示を簡素化します。
 
     -   [**クラスター**](https://tidbcloud.com/project/clusters)ページのクラスター名をクリックすると、クラスターの概要ページに入り、クラスターの操作を開始できます。
     -   クラスター概要ページから**「接続」ペイン**と**「インポート」**ペインを削除します。右上隅の**「接続」を**クリックして接続情報を取得し、左側のナビゲーションペインの**「インポート」**をクリックしてデータをインポートできます。

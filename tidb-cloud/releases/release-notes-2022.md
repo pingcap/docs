@@ -122,7 +122,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     さらに、データ移行では、既存のデータと進行中の変更の両方をデータ ソースからTiDB Cloudに移行するための完全および増分データ移行機能が提供されます。
 
-    現在、データ移行機能は**ベータ版**です。3 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター、AWSオレゴン（us-west-2）およびAWSシンガポール（ap-southeast-1）リージョンでのみご利用いただけます。組織ごとに1つの移行ジョブを無料で作成できます。組織に複数の移行ジョブを作成するには、 [チケットを提出する](/tidb-cloud/tidb-cloud-support.md)が必要です。
+    現在、データ移行機能は**ベータ版**です。[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター、AWSオレゴン（us-west-2）およびAWSシンガポール（ap-southeast-1）リージョンでのみご利用いただけます。組織ごとに1つの移行ジョブを無料で作成できます。組織に複数の移行ジョブを作成するには、 [チケットを提出する](/tidb-cloud/tidb-cloud-support.md)が必要です。
 
     詳細については[データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
@@ -306,7 +306,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスター概要ページの UI を最適化します。
+-   ユーザー エクスペリエンスを向上させるために、 [クラスター](https://tidbcloud.com/project/clusters)ページとクラスター概要ページの UI を最適化します。
 
     新しいデザインでは、Dedicated Tierへのアップグレード、クラスター接続、およびデータ インポートの入り口が強調表示されます。
 
@@ -430,7 +430,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   お客様の組織のさまざまなサポートニーズに対応するために、 TiDB Cloudサポートプラン（Basic、Standard、Enterprise、Premium）を追加してください。詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご覧ください。
 
--   [クラスター](https://tidbcloud.com/project/clusters)ページ目とクラスターの詳細ページの UI を最適化します。
+-   [クラスター](https://tidbcloud.com/project/clusters)ページとクラスターの詳細ページの UI を最適化します。
 
     -   **クラスター**ページに**[接続] ボタン**と**[データのインポート]**ボタンを追加します。
     -   **[接続] ボタン**と**[データのインポート]**ボタンをクラスターの詳細ページの右上隅に移動します。

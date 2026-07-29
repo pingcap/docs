@@ -16,7 +16,7 @@ summary: このドキュメントでは、Google Cloud でセルフホスト型 
 
 Google Cloud でセルフホスト型 Kafka に Private Service Connect を設定するには、次の 2 つの方法があります。
 
--   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。1 [PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)参照してください。
+-   Private Service Connect（PSC）ポートマッピングメカニズムを使用します。この方法では、静的なポートブローカーマッピング設定が必要です。EXTERNALリスナーとアドバタイズリスナーのグループを追加するには、既存のKafkaクラスターを再構成する必要があります。詳細は[PSC ポート マッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定](#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping)を参照してください。
 
 -   [Kafkaプロキシ](https://github.com/grepplabs/kafka-proxy)を使用してください。この方法では、Kafka クライアントと Kafka ブローカー間のプロキシとして、追加の実行プロセスが導入されます。プロキシはポートとブローカーのマッピングを動的に設定し、リクエストを転送します。既存の Kafka クラスターを再設定する必要はありません。詳細は[Kafka-proxy によるセルフホスト型 Kafka プライベート サービス接続のセットアップ](#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)を参照してください。
 
@@ -466,7 +466,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 ### ステップ2. KafkaクラスターをPrivate Service Connectとして公開する {#step-2-expose-the-kafka-cluster-as-private-service-connect}
 
-1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページ目に進みます。以下の手順でネットワークエンドポイントグループを作成します。
+1.  [ネットワークエンドポイントグループ](https://console.cloud.google.com/compute/networkendpointgroups/list)ページに移動します。以下の手順でネットワークエンドポイントグループを作成します。
 
     -   **名前**: `kafka-neg`
     -   **ネットワークエンドポイントグループタイプ**: `Port Mapping NEG(Regional)`
@@ -489,7 +489,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
         -   **VMポート**: `39092`
         -   **クライアントポート**: `9095`
 
-3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページ目に進みます。以下の手順でロードバランサーを作成します。
+3.  [負荷分散](https://console.cloud.google.com/net-services/loadbalancing/list/loadBalancers)ページに移動します。以下の手順でロードバランサーを作成します。
 
     -   **ロードバランサーの種類**: `Network Load Balancer`
     -   **プロキシまたはパススルー**: `Passthrough`
@@ -657,7 +657,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
         -   **IPv4 範囲**: ネットワーク計画に基づいて CIDR を設定します
     -   **承認されたプロジェクト**: [前提条件](#prerequisites)で取得したTiDB Cloudの Google Cloud プロジェクト (例: `tidbcloud-prod-000` )。
 
-3.  **kafka-proxy-psc**の詳細ページに移動します。3 （例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` ） `Service attachment`メモします。これは、 TiDB Cloudがこの PSC に接続する際に使用されます。
+3.  **kafka-proxy-psc**の詳細ページに移動します。 `Service attachment` （例： `projects/tidbcloud-dp-stg-000/regions/us-west1/serviceAttachments/kafka-proxy-psc` ）をメモします。これは、 TiDB Cloudがこの PSC に接続する際に使用されます。
 
 4.  VPC ネットワークの詳細ページに移動し、すべてのブローカーの PSC トラフィックを許可するファイアウォール ルールを追加します。
 
