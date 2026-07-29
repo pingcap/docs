@@ -134,7 +134,7 @@ hide_commit: true
 
 [System Variables](https://docs.pingcap.com/tidb/v6.5/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/v6.5/release-notes)
+[Release Notes](https://docs.pingcap.com/releases/tidb-self-managed/)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/v6.5/faq-overview)
 
