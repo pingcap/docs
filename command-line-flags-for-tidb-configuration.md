@@ -17,7 +17,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 -   設定ファイル
 -   デフォルト: `""`
--   設定ファイルが指定されている場合、TiDB は設定ファイルを読み取ります。対応する設定がコマンドラインオプションにも存在する場合、TiDB はコマンドラインオプションの設定を使用して設定ファイルの設定を上書きします。詳細な設定情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)参照してください。
+-   設定ファイルが指定されている場合、TiDB は設定ファイルを読み取ります。対応する設定がコマンドラインオプションにも存在する場合、TiDB はコマンドラインオプションの設定を使用して設定ファイルの設定を上書きします。詳細な設定情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
 
 ## `--config-check` {#config-check}
 
@@ -53,7 +53,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--initialize-sql-file` {#initialize-sql-file}
 
--   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)参照。
+-   TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
 -   デフォルト: `""`
 
 ## `-L` {#l}
@@ -119,7 +119,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--proxy-protocol-networks` {#proxy-protocol-networks}
 
--   [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
+-   [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
 -   デフォルト: `""`
 -   通常、リバースプロキシを経由してTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして取得します。PROXYプロトコルを有効にすると、HAProxyなどのこのプロトコルをサポートするリバースプロキシは、実際のクライアントIPアドレスをTiDBに渡すことができます。
 -   このフラグを設定すると、TiDBは設定された送信元IPアドレスがPROXYプロトコルを使用してTiDBに接続することを許可します。PROXY以外のプロトコルが使用されている場合、この接続は拒否されます。その他のアドレスはPROXYプロトコルを使用せずにTiDBに接続できます。このフラグを空のままにすると、どのIPアドレスもPROXYプロトコルを使用してTiDBに接続できなくなります。値は、IPアドレス（192.168.1.50）またはCIDR（192.168.1.0/24）で、区切り文字として`,`を使用します。`*`任意のIPアドレスを意味します。
@@ -189,7 +189,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--tidb-service-scope` {#tidb-service-scope}
 
--   現在の TiDB インスタンスの初期値として[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)指定します。
+-   現在の TiDB インスタンスの初期値として[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を指定します。
 -   デフォルト: `""`
 
 ## `--token-limit` {#token-limit}

@@ -51,7 +51,7 @@ server_configs:
     storage.block-cache.capacity: "30GB"
 ```
 
-TiKV パフォーマンス チューニングの詳細については、 [TiKVパフォーマンスの調整](/tune-tikv-memory-performance.md)参照してください。
+TiKV パフォーマンス チューニングの詳細については、 [TiKVパフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 
 ## テストプロセス {#test-process}
 
@@ -111,7 +111,7 @@ MySQL クライアントを再起動し、次の SQL ステートメントを実
 create database sbtest;
 ```
 
-Sysbench スクリプトがインデックスを作成する順序を調整します。Sysbench は「テーブルの作成 -&gt; データの挿入 -&gt; インデックスの作成」という順序でデータをインポートするため、TiDB によるデータのインポートに時間がかかります。ユーザーはこの順序を調整することで、データのインポートを高速化できます。Sysbench バージョン[1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20)使用している場合、順序は次の 2 つの方法で調整できます。
+Sysbench スクリプトがインデックスを作成する順序を調整します。Sysbench は「テーブルの作成 -&gt; データの挿入 -&gt; インデックスの作成」という順序でデータをインポートするため、TiDB によるデータのインポートに時間がかかります。ユーザーはこの順序を調整することで、データのインポートを高速化できます。Sysbench バージョン[1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20)を使用している場合、順序は次の 2 つの方法で調整できます。
 
 -   TiDB 用に変更された[oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua)ファイルをダウンロードし、 `/usr/share/sysbench/oltp_common.lua`ファイルをそれで上書きします。
 -   `/usr/share/sysbench/oltp_common.lua`で、行[235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)行 198 のすぐ後ろに移動します。

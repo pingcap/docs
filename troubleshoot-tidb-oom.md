@@ -113,11 +113,11 @@ OOM 問題のさまざまな原因に応じて、SQL ステートメントのメ
 
 TiDBノードは起動後、統計情報をメモリに読み込む必要があります。TiDBは統計情報を収集する際にメモリを消費します。メモリ使用量は、以下の方法で制御できます。
 
--   サンプリング レートを指定し、特定の列の統計情報のみを収集し、同時実行性を`ANALYZE`減らします。
--   TiDB v6.1.0 以降では、システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)使用して統計情報のメモリ使用量を制御できます。
--   TiDB v6.1.0 以降では、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
+-   サンプリング レートを指定し、特定の列の統計情報のみを収集し、`ANALYZE`の同時実行性を減らします。
+-   TiDB v6.1.0 以降では、システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を使用して統計情報のメモリ使用量を制御できます。
+-   TiDB v6.1.0 以降では、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
 
-詳細については[統計入門](/statistics.md)参照してください。
+詳細については[統計入門](/statistics.md)を参照してください。
 
 #### プリペアドステートメントの過剰使用 {#prepared-statements-are-overused}
 

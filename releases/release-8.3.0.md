@@ -118,7 +118,7 @@ TiDBバージョン：8.3.0
 
     バージョン8.3.0より前は、高可用性を実現するためにプライマリ/セカンダリモードを使用する場合、TiProxyは仮想IPアドレスを管理するための追加コンポーネントを必要としていました。バージョン8.3.0以降、TiProxyは仮想IPアドレス管理機能を内蔵しています。プライマリ/セカンダリモードでプライマリノードがフェイルオーバーすると、新しいプライマリノードは指定された仮想IPアドレスに自動的にバインドされるため、クライアントは常に仮想IPアドレスを介して利用可能なTiProxyに接続できます。
 
-    仮想IPアドレス管理を有効にするには、TiProxy設定項目[`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip)使用して仮想IPアドレスを指定し、[`ha.interface`](/tiproxy/tiproxy-configuration.md#interface)を使用して仮想IPアドレスをバインドするネットワークインターフェイスを指定します。仮想IPアドレスは、これら両方の設定項目が設定されている場合にのみ、TiProxyインスタンスにバインドされます。
+    仮想IPアドレス管理を有効にするには、TiProxy設定項目[`ha.virtual-ip`](/tiproxy/tiproxy-configuration.md#virtual-ip)を使用して仮想IPアドレスを指定し、[`ha.interface`](/tiproxy/tiproxy-configuration.md#interface)を使用して仮想IPアドレスをバインドするネットワークインターフェイスを指定します。仮想IPアドレスは、これら両方の設定項目が設定されている場合にのみ、TiProxyインスタンスにバインドされます。
 
     詳細については、[ドキュメント](/tiproxy/tiproxy-overview.md)を参照してください。
 
@@ -213,7 +213,7 @@ TiDBバージョン：8.3.0
 -   バージョン8.3.0以降、以下の機能は非推奨となります。
 
     -   バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlog は完全に非推奨となり、今後のリリースで削除される予定です。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。
-    -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)参照してください。
+    -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を参照してください。
 
 -   以下の機能は、将来のバージョンで廃止される予定です。
 

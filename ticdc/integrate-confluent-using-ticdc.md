@@ -7,7 +7,7 @@ summary: TiDB データを Confluent Cloud、Snowflake、ksqlDB、SQL Server に
 
 Confluentは、Apache Kafka互換のストリーミングデータプラットフォームであり、強力なデータ統合機能を提供します。このプラットフォームでは、ノンストップのリアルタイムストリーミングデータにアクセス、保存、管理できます。
 
-TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプリケーションをサポートします。本ドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)使用してTiDBの増分データをConfluentにレプリケーションし、さらにConfluent Cloud経由でSnowflake、ksqlDB、SQL Serverにデータをレプリケーションする方法を紹介します。本ドキュメントの構成は以下のとおりです。
+TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプリケーションをサポートします。本ドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用してTiDBの増分データをConfluentにレプリケーションし、さらにConfluent Cloud経由でSnowflake、ksqlDB、SQL Serverにデータをレプリケーションする方法を紹介します。本ドキュメントの構成は以下のとおりです。
 
 1.  TiCDC が組み込まれた TiDB クラスターを迅速に展開します。
 2.  TiDB から Confluent Cloud にデータを複製する変更フィードを作成します。
@@ -34,7 +34,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 2.  Confluent Cloud を登録し、Confluent クラスターを作成します。
 
-    ベーシッククラスタを作成し、インターネット経由でアクセスできるようにします。詳細は[Confluent Cloud のクイックスタート](https://docs.confluent.io/cloud/current/get-started/index.html)参照してください。
+    ベーシッククラスタを作成し、インターネット経由でアクセスできるようにします。詳細は[Confluent Cloud のクイックスタート](https://docs.confluent.io/cloud/current/get-started/index.html)を参照してください。
 
 ### ステップ2. アクセスキーペアを作成する {#step-2-create-an-access-key-pair}
 
@@ -73,7 +73,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
         API secret:
         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-    この手順はConfluent CLIを使用して実行することもできます。詳細については[Confluent CLI を Confluent Cloudクラスタに接続する](https://docs.confluent.io/confluent-cli/current/connect.html)参照してください。
+    この手順はConfluent CLIを使用して実行することもできます。詳細については[Confluent CLI を Confluent Cloudクラスタに接続する](https://docs.confluent.io/confluent-cli/current/connect.html)を参照してください。
 
 ### ステップ3. Kafkaの変更フィードを作成する {#step-3-create-a-kafka-changefeed}
 
@@ -86,7 +86,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
         {matcher = ['*.*'], topic = "tidb_{schema}_{table}", partition="index-value"},
         ]
 
-    設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)参照してください。
+    設定ファイルの`dispatchers`の詳細な説明については[Kafka シンクのトピックおよびパーティションディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
 2.  増分データを Confluent Cloud に複製するための変更フィードを作成します。
 
@@ -119,7 +119,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
             Info: {... changfeed info json struct ...}
             ```
 
-        -   コマンドを実行しても結果が返されない場合は、コマンドを実行したサーバーとConfluent Cloud間のネットワーク接続を確認してください。詳細は[Confluent Cloudへの接続をテストする](https://docs.confluent.io/cloud/current/networking/testing.html)参照してください。
+        -   コマンドを実行しても結果が返されない場合は、コマンドを実行したサーバーとConfluent Cloud間のネットワーク接続を確認してください。詳細は[Confluent Cloudへの接続をテストする](https://docs.confluent.io/cloud/current/networking/testing.html)を参照してください。
 
 3.  changefeed を作成した後、次のコマンドを実行して changefeed のステータスを確認します。
 
@@ -156,8 +156,8 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 ### 前提条件 {#prerequisites}
 
--   Snowflakeクラスターの登録と作成が完了しました[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)参照してください。
--   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。1 [キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)参照してください。
+-   Snowflakeクラスターの登録と作成が完了しています。[Snowflakeを使い始める](https://docs.snowflake.com/en/user-guide-getting-started.html)を参照してください。
+-   Snowflakeクラスタに接続する前に、クラスタ用の秘密鍵を生成しておきます。[キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)を参照してください。
 
 ### 統合手順 {#integration-procedure}
 

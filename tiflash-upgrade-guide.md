@@ -67,17 +67,17 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ### 動的剪定 {#dynamic-pruning}
 
-[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)有効にせず、今後も使用しない場合は、このセクションをスキップできます。
+[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を有効にせず、今後も使用しない場合は、このセクションをスキップできます。
 
 -   新しくインストールされた TiDB v6.1.0: 動的プルーニングがデフォルトで有効になっています。
 
 -   TiDB v6.0以前：動的プルーニングはデフォルトで無効になっています。アップグレード後の動的プルーニングの設定は、以前のバージョンの設定を継承します。つまり、アップグレード後も動的プルーニングは自動的に有効化（または無効化）されません。
 
-    アップグレード後、動的プルーニングを有効にするには、 `tidb_partition_prune_mode`を`dynamic`に設定し、パーティションテーブルのグローバル統計を手動で更新してください。詳細については、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)参照してください。
+    アップグレード後、動的プルーニングを有効にするには、 `tidb_partition_prune_mode`を`dynamic`に設定し、パーティションテーブルのグローバル統計を手動で更新してください。詳細については、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
 
 ## v5.x または v6.0 から v6.2 へ {#from-v5-x-or-v6-0-to-v6-2}
 
@@ -121,13 +121,13 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ## v6.x または v7.x から<code>storage.format_version = 5</code>が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-code-storage-format-version-5-code-configured}
 
 TiFlash v7.3 以降、新しい DTFile バージョン DTFile V3 (実験的) が導入されました。この新しい DTFile バージョンでは、複数の小さなファイルを 1 つの大きなファイルに結合することで、ファイル総数を削減できます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash構成パラメータ](/tiflash/tiflash-configuration.md) `storage.format_version = 5`を設定します。設定後もTiFlash はV2 DTFile を読み取り可能で、その後のデータ圧縮時に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
 
-TiFlashをv7.3にアップグレードし、V3 DTFilesを使用するように設定した後、 TiFlashを以前のバージョンに戻す必要がある場合は、DTToolをオフラインで使用してV3 DTFilesをV2 DTFilesに書き換えることができます。詳細については、 [DTTool 移行ツール](/tiflash/tiflash-command-line-flags.md#dttool-migrate)参照してください。
+TiFlashをv7.3にアップグレードし、V3 DTFilesを使用するように設定した後、 TiFlashを以前のバージョンに戻す必要がある場合は、DTToolをオフラインで使用してV3 DTFilesをV2 DTFilesに書き換えることができます。詳細については、 [DTTool 移行ツール](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を参照してください。
 
 ## v6.x または v7.x から v7.4 以降のバージョンへ {#from-v6-x-or-v7-x-to-v7-4-or-a-later-version}
 
@@ -135,8 +135,8 @@ v7.4以降、データ圧縮中に発生する読み取りおよび書き込み�
 
 ## v7.x から v8.4 以降のバージョンへ {#from-v7-x-to-v8-4-or-a-later-version}
 
-バージョン8.4以降、 TiFlashの基盤となるストレージフォーマットは[ベクトル検索](/ai/concepts/vector-search-overview.md)サポートするように更新されました。そのため、 TiFlashをバージョン8.4以降にアップグレードした後は、元のバージョンへのインプレースダウングレードはサポートされません。
+バージョン8.4以降、 TiFlashの基盤となるストレージフォーマットは[ベクトル検索](/ai/concepts/vector-search-overview.md)をサポートするように更新されました。そのため、 TiFlashをバージョン8.4以降にアップグレードした後は、元のバージョンへのインプレースダウングレードはサポートされません。
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-テストやその他の特殊なシナリオでTiFlashをダウングレードするには、対象のTiFlashノードを強制的にスケールインし、その後TiKVからデータを再度複製します。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)参照してください。
+テストやその他の特殊なシナリオでTiFlashをダウングレードするには、対象のTiFlashノードを強制的にスケールインし、その後TiKVからデータを再度複製します。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。

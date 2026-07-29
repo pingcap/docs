@@ -23,7 +23,7 @@ Chat2Query API v3以降では、セッション関連のエンドポイントを
 
 > **Tip:**
 >
-> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)参照してください。
+> エンドポイントの具体的なコード例を取得するには、データアプリの左側のペインでエンドポイント名をクリックし、 **「コード例を表示」**をクリックします。詳細については、 [エンドポイントのサンプルコードを取得する](/tidb-cloud/use-chat2query-api.md#get-the-code-example-of-an-endpoint)を参照してください。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/sessions'\
@@ -63,7 +63,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 ## ステップ2. セッションでChat2Dataエンドポイントを呼び出す {#step-2-call-chat2data-endpoints-with-the-session}
 
-セッションを開始した後、 `/v3/sessions/{session_id}/chat2data`電話して次のラウンドで会話を続けることができます。
+セッションを開始した後、 `/v3/sessions/{session_id}/chat2data`を呼び出して次のラウンドで会話を続けることができます。
 
 以下は一般的なコード例です。
 
@@ -98,4 +98,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 }
 ```
 
-レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`呼び出すことでジョブのステータスを確認できます。詳細については、エンド[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)参照してください。
+レスポンスはエンドポイント`/v3/chat2data`のレスポンスと同様です。エンドポイント`/v2/jobs/{job_id}`を呼び出すことでジョブのステータスを確認できます。詳細については、[`/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します](/tidb-cloud/use-chat2query-api.md#2-check-the-analysis-status-by-calling-v2jobsjob_id)を参照してください。

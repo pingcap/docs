@@ -11,7 +11,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 <CustomContent platform="tidb">
 
-コプロセッサーキャッシュは、TiDB設定ファイルの`tikv-client.copr-cache`設定項目で設定できます。コプロセッサーキャッシュの有効化と設定方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)参照してください。
+コプロセッサーキャッシュは、TiDB設定ファイルの`tikv-client.copr-cache`設定項目で設定できます。コプロセッサーキャッシュの有効化と設定方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
 
 </CustomContent>
 
@@ -54,7 +54,7 @@ v4.0 以降、TiDB インスタンスは TiKV (コプロセッサーキャッシ
 
 ### <code>EXPLAIN ANALYZE</code>使用する {#use-code-explain-analyze-code}
 
-[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)使って確認できます。次の例をご覧ください。
+[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュヒット率は[`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使って確認できます。次の例をご覧ください。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);

@@ -5,7 +5,7 @@ summary: AWS Database Migration Service (AWS DMS) を使用して、 TiDB Cloud�
 
 # AWS DMS をTiDB Cloudクラスターに接続する {#connect-aws-dms-to-tidb-cloud-clusters}
 
-[AWS データベース移行サービス (AWS DMS)](https://aws.amazon.com/dms/) 、リレーショナルデータベース、データウェアハウス、NoSQL データベース、その他さまざまなデータストアの移行を可能にするクラウドサービスです。AWS DMS を使用して、 TiDB Cloudクラスター間でデータを移行できます。このドキュメントでは、AWS DMS をTiDB Cloudクラスターに接続する方法について説明します。
+[AWS データベース移行サービス (AWS DMS)](https://aws.amazon.com/dms/)は、リレーショナルデータベース、データウェアハウス、NoSQL データベース、その他さまざまなデータストアの移行を可能にするクラウドサービスです。AWS DMS を使用して、 TiDB Cloudクラスター間でデータを移行できます。このドキュメントでは、AWS DMS をTiDB Cloudクラスターに接続する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
@@ -37,9 +37,9 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
-    -   レプリケーションインスタンスをプライベートサブネットにデプロイ、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
+    -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
 -   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、次のドキュメントを参照して、まずプライベート エンドポイントを設定し、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
@@ -52,9 +52,9 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーション インスタンスがインターネットにアクセスできることを確認します。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
-    -   レプリケーションインスタンスをプライベートサブネットにデプロイ、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
+    -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
 -   プライベート エンドポイント経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続するには、まず[AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してプライベート エンドポイントを設定し、レプリケーション インスタンスをプライベート サブネットにデプロイします。
 
@@ -68,9 +68,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 -   [パブリックエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する](/tidb-cloud/connect-via-standard-connection.md)については、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
-    -   レプリケーションインスタンスをパブリックサブネットにデプロイ、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)参照してください。
+    -   レプリケーションインスタンスをパブリックサブネットにデプロイし、 **「パブリックアクセス**可能」を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
-    -   レプリケーションインスタンスをプライベートサブネットにデプロイ、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)参照してください。
+    -   レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
 -   プライベート エンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md) 、プライベート サブネットにレプリケーション インスタンスをデプロイします。
 
@@ -90,7 +90,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 3.  インスタンス名、ARN、説明を入力します。
 
 4.  **インスタンス構成**セクションで、インスタンスを構成します。
-    -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)参照してください。
+    -   **インスタンスクラス**: 適切なインスタンスクラスを選択します。詳細については、 [レプリケーションインスタンスタイプの選択](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)を参照してください。
     -   **エンジン バージョン**: デフォルト構成を維持します。
     -   **高可用性**: ビジネス ニーズに応じて、**マルチ AZ**または**シングル AZ**を選択します。
 
@@ -109,11 +109,11 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
 
 > **Note:**
 >
-> AWS DMS はサーバーレスレプリケーションもサポートしています。詳細な手順については、 [サーバーレスレプリケーションの作成](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create)ご覧ください。レプリケーションインスタンスとは異なり、AWS DMS のサーバーレスレプリケーションでは「**パブリックアクセス可能」**オプションは提供されません。
+> AWS DMS はサーバーレスレプリケーションもサポートしています。詳細な手順については、 [サーバーレスレプリケーションの作成](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.create)をご覧ください。レプリケーションインスタンスとは異なり、AWS DMS のサーバーレスレプリケーションでは「**パブリックアクセス可能」**オプションは提供されません。
 
 ## TiDB Cloud DMSエンドポイントを作成する {#create-tidb-cloud-dms-endpoints}
 
-接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)参照してください。TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**既存のデータの移行**のみが可能です。
+接続に関しては、 TiDB Cloudクラスターをソースとして使用する場合とターゲットとして使用する場合の手順は似ていますが、DMS ではソースとターゲットでデータベース設定要件が異なります。詳細については、 [MySQLをソースとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html)または[MySQLをターゲットとして使用する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html)を参照してください。TiDB Cloudクラスターをソースとして使用する場合、TiDB は MySQL binlogをサポートしていないため、**既存のデータの移行**のみが可能です。
 
 1.  AWS DMS コンソールで、 [**エンドポイント**](https://console.aws.amazon.com/dms/v2/home#endpointList)ページに移動し、対応するリージョンに切り替えます。
 
@@ -136,7 +136,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリック エンド�
     -   **ユーザー名**: 移行先クラスターのユーザー。DMSの要件を満たしていることを確認してください。
     -   **パスワード**: クラスター ユーザーのパスワード。
     -   **セキュリティ Socket Layer (SSL) モード**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、モードを**none**に設定できます。
-    -   （オプション） **CA証明書**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)参照してください。
+    -   （オプション） **CA証明書**： [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)を使用します。詳細については、 [TiDB Cloud Starter または Essential への TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
     </div>
 

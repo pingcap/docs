@@ -7,7 +7,7 @@ summary: 機密データを保護するために保存時の暗号化を有効�
 
 > **Note:**
 >
-> クラスターがAWS上にデプロイされており、EBSストレージを使用している場合は、EBS暗号化を使用することをお勧めします。1 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)参照してください。AWS上でローカルNVMeストレージなど、EBS以外のストレージを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
+> クラスターがAWS上にデプロイされており、EBSストレージを使用している場合は、EBS暗号化を使用することをお勧めします。[AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。AWS上でローカルNVMeストレージなど、EBS以外のストレージを使用している場合は、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
 
 保存時の暗号化とは、データが保存時に暗号化されることを意味します。データベースの場合、この機能はTDE（透過的データ暗号化）とも呼ばれます。これは、転送中の暗号化（TLS）や使用中の暗号化（ほとんど使用されません）とは対照的です。保存時の暗号化はSSDドライブ、ファイルシステム、クラウドベンダーなど、さまざまな方法で実行できますが、TiKVが保存前に暗号化を行うことで、攻撃者がデータにアクセスするにはデータベースへの認証が必要となることを確実にします。例えば、攻撃者が物理マシンにアクセスできたとしても、ディスク上のファイルをコピーするだけではデータにアクセスできません。
 
@@ -123,7 +123,7 @@ AWS KMS を使用してマスターキーを指定するには、TiKV 設定フ�
     region = "us-west-2"
     endpoint = "https://kms.us-west-2.amazonaws.com"
 
-`key-id` KMS CMK のキー ID を指定します。3 `region` KMS CMK の AWS リージョン名です。5 はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や、 `endpoint` [KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)使用する必要がある場合を除き、通常は指定する必要はありません。
+`key-id`は KMS CMK のキー ID を指定します。`region`は KMS CMK の AWS リージョン名です。`endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や、 [KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がある場合を除き、通常は指定する必要はありません。
 
 AWSでも[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)使用できます。この場合、特定のリージョンに主キーを設定し、必要なリージョンにレプリカキーを追加する必要があります。
 
@@ -374,7 +374,7 @@ TiFlashは暗号化されたメタデータの管理にTiKVのロジックを再
 
 ### TiKVバージョン間の互換性 {#compatibility-between-tikv-versions}
 
-TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)参照してください。
+TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、その互換性要件はTiKVと同じです。詳細については[TiKVバージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 

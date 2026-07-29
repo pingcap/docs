@@ -11,7 +11,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 > **Note:**
 >
-> `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)使用することをお勧めします。
+> `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -19,7 +19,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 > **Note:**
 >
-> `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)使用することをお勧めします。
+> `AUTO_INCREMENT`属性は本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -343,7 +343,7 @@ SELECT * FROM t;
 
 <CustomContent platform="tidb">
 
--   [データ移行（DM）](/dm/dm-overview.md)使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流の TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
+-   [データ移行（DM）](/dm/dm-overview.md)を使用した増分レプリケーションのシナリオでは、レプリケーションが完了すると、下流の TiDB へのデータ書き込みは DM からアプリケーションの書き込み操作に切り替わります。同時に、AUTO_INCREMENT列の ID 書き込みモードは通常、明示的な挿入から暗黙的な割り当てに切り替わります。
 -   TiDB Lightningはデータのインポートを完了すると、AUTO_INCREMENT IDキャッシュを自動的にクリアします。しかし、TiCDCは増分データ同期後にキャッシュを自動的にクリアしません。そのため、TiCDCを停止した後、フェイルオーバーを実行する前に、下流クラスタのAUTO_INCREMENT IDキャッシュを手動でクリアする必要があります。
 
 </CustomContent>
@@ -354,7 +354,7 @@ SELECT * FROM t;
 
 </CustomContent>
 
--   アプリケーションで明示的なIDの挿入と暗黙的なIDの割り当ての両方を行う場合、将来暗黙的に割り当てられたIDと以前に明示的に挿入されたIDとの競合を回避するために、AUTO_INCREMENT IDキャッシュをクリアする必要があります。競合が発生すると、主キーの競合エラーが発生する可能性があります。詳細については、 [ユニークさ](/auto-increment.md#uniqueness)参照してください。
+-   アプリケーションで明示的なIDの挿入と暗黙的なIDの割り当ての両方を行う場合、将来暗黙的に割り当てられたIDと以前に明示的に挿入されたIDとの競合を回避するために、AUTO_INCREMENT IDキャッシュをクリアする必要があります。競合が発生すると、主キーの競合エラーが発生する可能性があります。詳細については、 [ユニークさ](/auto-increment.md#uniqueness)を参照してください。
 
 クラスター内のすべてのTiDBノードのAUTO_INCREMENT IDキャッシュをクリアするには、 `ALTER TABLE`ステートメントを`AUTO_INCREMENT = 0`とともに実行します。例:
 

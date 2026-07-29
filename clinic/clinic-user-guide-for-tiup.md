@@ -9,7 +9,7 @@ TiUPを使用して導入された TiDB クラスターおよび DM クラスタ
 
 > **Note:**
 >
-> -   このドキュメントは、セルフホスト環境でTiUPを使用してデプロイされたクラスターに**のみ**適用されます。Kubernetes上でTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)参照してください。
+> -   このドキュメントは、セルフホスト環境でTiUPを使用してデプロイされたクラスターに**のみ**適用されます。Kubernetes上でTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
 > -   PingCAP Clinic は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 
@@ -17,7 +17,7 @@ TiUPを使用して導入された TiDB クラスターおよび DM クラスタ
 
 -   [クラスタの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    -   クラスターに問題がある場合、PingCAP から[サポートを受ける](/support.md)取得する必要があります。リモート トラブルシューティングを容易にするために、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクをテクニカル サポート スタッフに提供するための次の操作を実行できます。
+    -   クラスターに問題がある場合、PingCAP から[サポートを受ける](/support.md)必要があります。リモート トラブルシューティングを容易にするために、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクをテクニカル サポート スタッフに提供するための次の操作を実行できます。
     -   クラスターに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存することができます。
 
 -   [ローカルでクラスタのステータスをクイックチェックする](#perform-a-quick-check-on-the-cluster-status-locally)
@@ -126,7 +126,7 @@ Diag を使用すると、監視データや構成情報などの診断データ
 
 ### ステップ1. 収集するデータを確認する {#step-1-check-the-data-to-be-collected}
 
-Diag によって収集できるデータの完全なリストについては、 [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)参照してください。
+Diag によって収集できるデータの完全なリストについては、 [PingCAP Clinic診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
 
 後続の診断の効率を高めるため、監視データや設定情報を含む完全な診断データを収集することをお勧めします。詳細については、 [クラスターからデータを収集する](#step-2-collect-data)参照してください。
 

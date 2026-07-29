@@ -38,13 +38,13 @@ SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 
 <CustomContent platform="tidb">
 
-v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)参照してください。
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [TiFlashクラスターのスケールアウト](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)参照してください。
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行プランの生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)を参照してください。
 
 </CustomContent>
 

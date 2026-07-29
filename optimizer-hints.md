@@ -7,7 +7,7 @@ summary: オプティマイザヒントを使用してクエリ実行プラン�
 
 TiDBは、 MySQL 5.7で導入されたコメント形式の構文に基づいたオプティマイザヒントをサポートしています。例えば、一般的な構文の1つは`/*+ HINT_NAME([t1_name [, t2_name] ...]) */`です。TiDBオプティマイザがあまり最適ではないクエリプランを選択する場合は、オプティマイザヒントの使用が推奨されます。
 
-ヒントが効かない場合は、 [ヒントが効かない一般的な問題のトラブルシューティング](#troubleshoot-common-issues-that-hints-do-not-take-effect)参照してください。
+ヒントが効かない場合は、 [ヒントが効かない一般的な問題のトラブルシューティング](#troubleshoot-common-issues-that-hints-do-not-take-effect)を参照してください。
 
 ## 構文 {#syntax}
 
@@ -98,7 +98,7 @@ SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> 場合によっては、 `INL_JOIN`ヒントが効かないことがあります。詳しくは[`INL_JOIN`ヒントは有効になりません](#inl_join-hint-does-not-take-effect)参照してください。
+> 場合によっては、 `INL_JOIN`ヒントが効かないことがあります。詳しくは[`INL_JOIN`ヒントは有効になりません](#inl_join-hint-does-not-take-effect)を参照してください。
 
 ヒント`INL_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス・ネストループ結合アルゴリズムを使用するようオプティマイザに指示します。このアルゴリズムは、状況によってはシステムリソースの消費量が少なく、処理時間も短縮される可能性がありますが、状況によっては逆の結果になることもあります。外部テーブルがヒント`WHERE`でフィルタリングされた後、結果セットが10,000行未満の場合、このヒントを使用することをお勧めします。例：
 
@@ -475,7 +475,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 -   [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`サポートしていません。実行プランにインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
--   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)サポートしません。
+-   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no-index-lookup-pushdown-t1-name-new-in-v855}
 
@@ -520,7 +520,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
-ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)参照してください。
+ヒント`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`は、オプティマイザにインデックスマージ方式で特定のテーブルにアクセスするよう指示します。インデックスマージには、交差型と結合型の2種類があります。詳細は[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
 
 インデックスのリストを明示的に指定すると、TiDB はリストからインデックスを選択してインデックス マージを構築します。インデックスのリストを指定しないと、TiDB は利用可能なすべてのインデックスからインデックスを選択してインデックス マージを構築します。
 

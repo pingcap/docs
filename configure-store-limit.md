@@ -29,7 +29,7 @@ PDはオペレータ単位でスケジューリングを実行します。オペ
 
 ## 使用法 {#usage}
 
-Store Limit のパラメータは[`PD Control`](/pd-control.md)使用して設定できます。
+Store Limit のパラメータは[`PD Control`](/pd-control.md)を使用して設定できます。
 
 ### 現在のストアのビュー設定 {#view-setting-of-the-current-store}
 
@@ -70,6 +70,6 @@ tiup ctl:v<CLUSTER_VERSION> pd store limit 1 5 remove-peer         // store 1 ca
 
 ### ストア制限の原則 v2 {#principles-of-store-limit-v2}
 
-[`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) `v2`に設定すると、ストア制限 v2 が有効になります。v2 モードでは、オペレーターの制限は TiKV スナップショットの性能に基づいて動的に調整されます。TiKV の保留中のタスクが少なくなると、PD はスケジュールするタスクを増やします。そうでない場合は、PD はノードのスケジュールするタスクを減らします。したがって、スケジュール処理を高速化するために手動で`store limit`設定する必要はありません。
+[`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710)を`v2`に設定すると、ストア制限 v2 が有効になります。v2 モードでは、オペレーターの制限は TiKV スナップショットの性能に基づいて動的に調整されます。TiKV の保留中のタスクが少なくなると、PD はスケジュールするタスクを増やします。そうでない場合は、PD はノードのスケジュールするタスクを減らします。したがって、スケジュール処理を高速化するために手動で`store limit`を設定する必要はありません。
 
 v2モードでは、TiKVの実行速度が移行時の主なボトルネックとなります。現在のスケジュール速度が上限に達しているかどうかは、 **「TiKV詳細」** &gt; **「スナップショット」** &gt; **「スナップショット速度」**パネルで確認できます。ノードのスケジュール速度を増減するには、TiKVスナップショット制限（ [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) ）を調整します。

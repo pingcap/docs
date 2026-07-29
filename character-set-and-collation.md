@@ -168,7 +168,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 5 rows in set (0.001 sec)
 ```
 
-GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)参照してください。
+GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
 ## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
@@ -443,7 +443,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 v4.0 より前のバージョンでは、 TiDB は[照合のための古いフレームワーク](#old-framework-for-collations)のみを提供していました。このフレームワークでは、 TiDB は MySQL 照合順序のほとんどを構文的に解析することをサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として扱います。
 
-TiDBはv4.0以降、 [照合のための新しいフレームワーク](#new-framework-for-collations)サポートしています。このフレームワークでは、TiDBは異なる照合順序を意味的に解析し、文字列を比較する際には照合順序に厳密に従います。
+TiDBはv4.0以降、 [照合のための新しいフレームワーク](#new-framework-for-collations)をサポートしています。このフレームワークでは、TiDBは異なる照合順序を意味的に解析し、文字列を比較する際には照合順序に厳密に従います。
 
 ### 照合のための古いフレームワーク {#old-framework-for-collations}
 
@@ -491,7 +491,7 @@ TiDB v4.0 以降では、照合のための完全なフレームワークが導�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、照合順序の意味解析をサポートし、クラスターの初回初期化時に新しいフレームワークを有効にするかどうかを決定するための設定項目`new_collations_enabled_on_first_bootstrap`導入しました。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)参照してください。
+この新しいフレームワークは、照合順序の意味解析をサポートし、クラスターの初回初期化時に新しいフレームワークを有効にするかどうかを決定するための設定項目`new_collations_enabled_on_first_bootstrap`を導入しました。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。
 
 すでに初期化されている TiDB クラスターの場合、 `mysql.tidb`テーブルの`new_collation_enabled`変数を通じて新しい照合順序が有効になっているかどうかを確認できます。
 
@@ -598,4 +598,4 @@ SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 1 row in set (0.00 sec)
 ```
 
-詳細については[接続文字セットと照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)参照してください。
+詳細については[接続文字セットと照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)を参照してください。

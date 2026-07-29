@@ -44,7 +44,7 @@ The password complexity policies of TiDB and MySQL have the following difference
 
     -   MySQL v5.7では、この機能は`validate_password`プラグインを使用して実装されています。プラグインをインストールすることで、この機能を有効化できます。
     -   MySQL v8.0では、この機能は`validate_password`コンポーネントを使用して実装されています。この機能を有効にするには、コンポーネントをインストールしてください。
-    -   TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)使用してこの機能を有効にすることができます。
+    -   TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にすることができます。
 
 -   辞書チェック:
 
@@ -107,9 +107,9 @@ TiDBとMySQLの実装メカニズムは一貫しています。どちらも`mysq
 
 ## Authentication plugin status {#authentication-plugin-status}
 
-TiDBは複数の認証方法をサポートしています。これらの方法は、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)使用してユーザーごとに指定できます。これらの方法は、MySQLの同名の認証方法と互換性があります。
+TiDBは複数の認証方法をサポートしています。これらの方法は、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-alter-user.md)を使用してユーザーごとに指定できます。これらの方法は、MySQLの同名の認証方法と互換性があります。
 
-You can use one of the following supported authentication methods in the table. To specify a default method that the server advertises when the client-server connection is being established, set the [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) variable. `tidb_sm3_password` is the SM3 authentication method only supported in TiDB. Therefore, to authenticate using this method, you must connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3). `tidb_auth_token` is a JSON Web Token (JWT)-based authentication method used in TiDB Cloud, and you can also configure it for use in TiDB Self-Managed.
+以下の表にある、サポートされている認証方法のいずれかを使用できます。クライアントとサーバー間の接続を確立する際にサーバーがアドバタイズするデフォルトの方法を指定するには、[`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。`tidb_sm3_password`は、TiDBでのみサポートされているSM3認証方法です。そのため、この方法で認証するには、[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用してTiDBに接続する必要があります。`tidb_auth_token`は、TiDB Cloudで使用されるJSON Web Token（JWT）ベースの認証方法であり、TiDB Self-Managedでの使用のために構成することもできます。
 
 <CustomContent platform="tidb">
 
@@ -142,7 +142,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 ### `tidb_auth_token` {#tidb-auth-token}
 
-`tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)ベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
+`tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)をベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
 
 #### JWT {#jwt}
 
@@ -249,7 +249,7 @@ TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定し
     mycli -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p '<the-token-generated>'
     ```
 
-    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。3 [mycli](https://www.mycli.net/)デフォルトでこのプラグインをサポートし、有効化します。5 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
+    ここで紹介するMySQLクライアントが`mysql_clear_password`プラグインをサポートしていることを確認してください。[mycli](https://www.mycli.net/)はデフォルトでこのプラグインをサポートし、有効化します。[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用している場合は、 `--enable-cleartext-plugin`オプションを使用してこのプラグインを有効化する必要があります。
 
     ```Shell
     mysql -h 127.0.0.1 -P 4000 -u 'user@pingcap.com' -p'<the-token-generated>' --enable-cleartext-plugin

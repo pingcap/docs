@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.6
 
 -   TiDB
 
-    -   HashJoin演算子がプローブ実行するときにチャンクを再利用できない問題を修正しました [＃48082](https://github.com/pingcap/tidb/issues/48082) @ [wshwsh12](https://github.com/wshwsh12)
+    -   HashJoin演算子がプローブを実行するときにチャンクを再利用できない問題を修正しました [＃48082](https://github.com/pingcap/tidb/issues/48082) @ [wshwsh12](https://github.com/wshwsh12)
     -   `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`発生する可能性がある問題を修正しました [＃46444](https://github.com/pingcap/tidb/issues/46444) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   2つのサブクエリを結合するときに`TIDB_INLJ`ヒントが有効にならない問題を修正しました [＃46160](https://github.com/pingcap/tidb/issues/46160) @ [qw4990](https://github.com/qw4990)
     -   TiDB の再起動後に DDL 操作が停止する可能性がある問題を修正[＃46751](https://github.com/pingcap/tidb/issues/46751) @ [wjhuang2016](https://github.com/wjhuang2016)

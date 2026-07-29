@@ -7,7 +7,7 @@ summary: TiDB CloudをZapierを使って5000以上のアプリに接続する方
 
 [Zapier](https://zapier.com)数千ものアプリやサービスを含むワークフローを簡単に作成できる、ノーコードの自動化ツールです。
 
-Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)使用すると、次のことが可能になります。
+Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)を使用すると、次のことが可能になります。
 
 -   MySQL互換のHTAPデータベースであるTiDBを使用してください。ローカルでの構築は不要です。
 -   TiDB Cloudの管理をより簡単にします。

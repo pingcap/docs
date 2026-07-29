@@ -14,17 +14,17 @@ category: quick start
 
 ## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) TiDB Cloudを使い始めるのに最適な方法です。TiDB Cloud Starter クラスターを作成するには、以下の手順に従ってください。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、TiDB Cloudを使い始めるのに最適な方法です。TiDB Cloud Starter クラスターを作成するには、以下の手順に従ってください。
 
-1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)クリックしてサインアップしてください。
+1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてサインアップしてください。
 
     メールアドレスとパスワードでサインアップして、 TiDB Cloudを使用してパスワードを管理するか、Google、GitHub、または Microsoft アカウントでサインインして、 TiDB Cloudへのシングル サインオン (SSO) を選択することもできます。
 
-2.  [ログイン](https://tidbcloud.com/) TiDB Cloudアカウントに追加します。
+2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)します。
 
     デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページ目が表示されます。
 
-3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
+3.  新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
     -   このデフォルト クラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: AI支援SQLエディターを試す](#step-2-try-ai-assisted-sql-editor)に進みます。
     -   独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
@@ -58,9 +58,9 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 2.  TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock が研究とサービスの改善のためにコードスニペットを使用することを許可し、 **[保存して開始] を**クリックします。
 
-3.  SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query) SQL クエリを自動的に生成するように指示します。
+3.  SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)に SQL クエリを自動的に生成するように指示します。
 
-    たとえば、2 つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`入力し、 **Enter**を押すと、AI によってそれに応じた SQL ステートメントが生成されます。
+    たとえば、2 つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`を入力し、 **Enter**を押すと、AI によってそれに応じた SQL ステートメントが生成されます。
 
     生成されたステートメントについては、 **「承認」**をクリックして承認し、必要に応じてさらに編集するか、 **「破棄」を**クリックして拒否することができます。
 
@@ -75,7 +75,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
     macOSの場合:
 
-    -   エディタにクエリが1つしかない場合は、 **⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>実行するには**実行してください**。
+    -   エディタにクエリが1つしかない場合は、 **⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**「実行」**をクリックして実行します。
 
     -   エディターに複数のクエリがある場合は、カーソルで対象クエリの行を選択し、 **⌘ + Enter キー**を押すか、 **「実行」**をクリックして順番に実行します。
 
@@ -87,7 +87,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
     Windows または Linux の場合:
 
-    -   エディタにクエリが1つしかない場合は、 **Ctrl + Enter**キーを押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>実行するには**実行してください**。
+    -   エディタにクエリが1つしかない場合は、 **Ctrl + Enter**キーを押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**「実行」**をクリックして実行します。
 
     -   エディターに複数のクエリがある場合は、カーソルで対象クエリの行を選択し、 **Ctrl + Enter キー**を押すか、 **[実行]**をクリックして順番に実行します。
 
@@ -146,8 +146,8 @@ MySQL CLI クライアントが開き、{{{ .starter }}} インスタンスに�
 
 ## 次は何か {#what-s-next}
 
--   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
--   SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)参照してください。
--   TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)参照してください。
--   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番で使用する場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)参照してください。
--   TiDB Cloud CLIを使用してインスタンスを管理する方法については、 [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md)参照してください。
+-   さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
+-   SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+-   TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
+-   ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番で使用する場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+-   TiDB Cloud CLIを使用してインスタンスを管理する方法については、 [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md)を参照してください。

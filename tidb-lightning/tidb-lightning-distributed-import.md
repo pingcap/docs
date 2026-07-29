@@ -33,7 +33,7 @@ TiDB Lightning を使用すると、次のシナリオでデータを並列に�
 
 ### 主キーまたは一意インデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes}
 
-[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)使用してデータを並列インポートする場合は、データソース間およびターゲット TiDB クラスター内のテーブル間で主キーまたは一意インデックスの競合がないこと、またインポート中にターゲットテーブルにデータの書き込みが行われないことを確認してください。そうでない場合、 TiDB Lightning はインポートされたデータの正確性を保証できず、インポート完了後にターゲットテーブルに不整合なインデックスが含まれることになります。
+[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を使用してデータを並列インポートする場合は、データソース間およびターゲット TiDB クラスター内のテーブル間で主キーまたは一意インデックスの競合がないこと、またインポート中にターゲットテーブルにデータの書き込みが行われないことを確認してください。そうでない場合、 TiDB Lightning はインポートされたデータの正確性を保証できず、インポート完了後にターゲットテーブルに不整合なインデックスが含まれることになります。
 
 ### インポートパフォーマンスの最適化 {#optimize-import-performance}
 
@@ -59,7 +59,7 @@ TiDB Lightningを使用して共有データベースとテーブルを並列に
 TiDB Lightning は実行時に一部のリソースを排他的に使用します。単一のマシン（本番環境では推奨されません）または複数のマシンで共有されるディスクに複数のTiDB Lightningインスタンスを展開する必要がある場合は、以下の使用制限にご注意ください。
 
 -   各TiDB Lightningインスタンスの一意のパスを`tikv-importer.sorted-kv-dir`に設定してください。複数のインスタンスが同じパスを共有すると、意図しない動作が発生し、インポートの失敗やデータエラーが発生する可能性があります。
--   各TiDB Lightningチェックポイントは個別に保存してください。チェックポイントの設定の詳細については、 [TiDB Lightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)参照してください。
+-   各TiDB Lightningチェックポイントは個別に保存してください。チェックポイントの設定の詳細については、 [TiDB Lightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
     -   checkpoint.driver = &quot;file&quot; (デフォルト) を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
     -   checkpoint.driver = &quot;mysql&quot; を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
 -   各TiDB Lightningのログファイルは、それぞれ異なるパスに設定する必要があります。同じログファイルを共有すると、ログのクエリやトラブルシューティングに影響します。
@@ -78,7 +78,7 @@ TiDB Lightningがデプロイされている 5 つのノード上の 2 つのシ
 -   2つのシャードテーブルが同じMySQLインスタンス内にある場合、 Dumplingのパラメータ`--filter`を使用して直接エクスポートできます。TiDB Lightningを使用してインポートする場合は、 Dumplingがデータをエクスポートするディレクトリとして`data-source-dir`を指定できます。
 -   2つのシャードテーブルのデータが異なるMySQLノードに分散されている場合は、 Dumplingを使用して個別にエクスポートする必要があります。エクスポートしたデータは、同じ親ディレクトリ内<b>、かつ異なるサブディレクトリに</b>配置する必要があります。TiDB Lightningを使用して並列インポートを実行する場合は、親ディレクトリとして`data-source-dir`を指定する必要があります。
 
-Dumpling を使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)参照してください。
+Dumpling を使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)を参照してください。
 
 ### ステップ2: TiDB Lightningデータソースを構成する {#step-2-configure-tidb-lightning-data-sources}
 
@@ -107,11 +107,11 @@ Dumpling を使用してデータをエクスポートする方法の詳細に�
     tiup tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/sql-backup'
 
-詳細なパラメータの説明については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+詳細なパラメータの説明については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 ### ステップ3: TiDB Lightningを起動してデータをインポートする {#step-3-start-tidb-lightning-to-import-data}
 
-並列インポート中、各TiDB Lightningノードのサーバー構成要件は、非並列インポートモードの場合と同じです。各TiDB Lightningノードは同じリソースを使用する必要があります。各ノードは異なるサーバーにデプロイすることをお勧めします。詳細なデプロイ手順については、 [TiDB Lightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)参照してください。
+並列インポート中、各TiDB Lightningノードのサーバー構成要件は、非並列インポートモードの場合と同じです。各TiDB Lightningノードは同じリソースを使用する必要があります。各ノードは異なるサーバーにデプロイすることをお勧めします。詳細なデプロイ手順については、 [TiDB Lightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)を参照してください。
 
 各サーバーで順番にTiDB Lightningを起動します。コマンドラインから`nohup`を指定して直接起動すると、SIGHUPシグナルによって終了する可能性があります。そのため、スクリプトに`nohup`を指定することをお勧めします。例：
 
@@ -126,20 +126,20 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 -   TiKVクラスタ内のリージョンが均等に分散されているか、また空きリージョンが多すぎないかを確認してください。空きリージョンの数がmax(1000, テーブル数 * 3)を超える場合、つまり「1000」または「テーブル数の3倍」のいずれか大きい方を超える場合、インポートは実行できません。
 -   データソースからデータが順番にインポートされているか確認します。確認結果に基づいて`mydumper.batch-size`のサイズが自動的に調整されます。そのため、 `mydumper.batch-size`構成は利用できなくなります。
 
-チェックをオフにして、 `lightning.check-requirements`設定で強制インポートを実行することもできます。詳細なチェックについては、 [TiDB Lightning事前チェック](/tidb-lightning/tidb-lightning-prechecks.md)参照してください。
+チェックをオフにして、 `lightning.check-requirements`設定で強制インポートを実行することもできます。詳細なチェックについては、 [TiDB Lightning事前チェック](/tidb-lightning/tidb-lightning-prechecks.md)を参照してください。
 
 ### ステップ4: インポートの進行状況を確認する {#step-4-check-the-import-progress}
 
 インポートを開始した後、次のいずれかの方法で進行状況を確認できます。
 
 -   `grep` log キーワード`progress`で進捗状況を確認します。デフォルトでは5分ごとに更新されます。
--   監視コンソールで進行状況を確認してください。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)参照してください。
+-   監視コンソールで進行状況を確認してください。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 
 すべてのTiDB Lightningインスタンスが終了するまで待機すると、インポート全体が完了します。
 
 ## 例2: 単一のテーブルを並列にインポートする {#example-2-import-single-tables-in-parallel}
 
-TiDB Lightningは、単一テーブルの並列インポートもサポートしています。例えば、Amazon S3に保存されている複数の単一テーブルを、異なるTiDB Lightningインスタンスで下流のTiDBクラスターに並列インポートできます。この方法により、インポート全体の速度が向上します。Amazon S3などのリモートストレージを使用する場合、 TiDB Lightningの設定パラメータはBRと同じです。詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+TiDB Lightningは、単一テーブルの並列インポートもサポートしています。例えば、Amazon S3に保存されている複数の単一テーブルを、異なるTiDB Lightningインスタンスで下流のTiDBクラスターに並列インポートできます。この方法により、インポート全体の速度が向上します。Amazon S3などのリモートストレージを使用する場合、 TiDB Lightningの設定パラメータはBRと同じです。詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 > **Note:**
 >

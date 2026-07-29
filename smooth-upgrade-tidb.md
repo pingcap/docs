@@ -18,7 +18,7 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
     -   Upgrade from v7.1.1 to v7.2.0 or v7.3.0
     -   Upgrade from v7.2.0 to v7.3.0
 
--   この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)参照してください。サポートされているバージョンは次のとおりです。
+-   この機能はデフォルトで無効になっていますが、 `/upgrade/start`リクエストを送信することで有効にできます。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/release-8.5/docs/tidb_http_api.md)を参照してください。サポートされているバージョンは次のとおりです。
     -   Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
     -   Upgrade from v7.4.0 to later versions
 
@@ -27,7 +27,7 @@ Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports sm
 | オリジナル版                           | Upgraded version         | アップグレード方法                                                                                                                                            | 注記                                                                                                  |
 | -------------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | &lt; バージョン7.1.0                  | 任意のバージョン                 | スムーズなアップグレードはサポートされません。                                                                                                                              |                                                                                                     |
-| v7.1.0                           | v7.1.1、v7.2.0、または v7.3.0 | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimentalな機能です。問題[＃44760](https://github.com/pingcap/tidb/pull/44760)発生する可能性があります。               |
+| v7.1.0                           | v7.1.1、v7.2.0、または v7.3.0 | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimentalな機能です。問題[＃44760](https://github.com/pingcap/tidb/pull/44760)が発生する可能性があります。               |
 | バージョン7.1.1                       | v7.2.0 または v7.3.0        | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimental機能です。                                                                                   |
 | バージョン7.2.0                       | バージョン7.3.0               | スムーズなアップグレードが自動的にサポートされます。追加の操作は必要ありません。                                                                                                             | Experimental機能です。                                                                                   |
 | [v7.1.2、v7.2.0)                  | [v7.1.2、v7.2.0)          | `/upgrade/start` HTTPリクエストを送信することでスムーズなアップグレードが可能になります。方法は[TiUPを使用する](#use-tiup-to-upgrade)と[その他のアップグレード方法](#other-upgrade-methods) 2つあります。          | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |

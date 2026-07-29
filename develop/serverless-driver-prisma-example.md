@@ -11,7 +11,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-prisma-example/']
 -   サーバーレス環境におけるPrisma Clientのパフォーマンス向上
 -   エッジ環境でPrisma Clientを使用できる機能
 
-このチュートリアルでは、サーバーレス環境およびエッジ環境で[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)使用する方法について説明します。
+このチュートリアルでは、サーバーレス環境およびエッジ環境で[@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter)を使用する方法について説明します。
 
 > **Tip:**
 >
@@ -176,7 +176,7 @@ const prisma = new PrismaClient({ adapter });
 
         npx prisma db push
 
-    このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)参照してください。
+    このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
 4.  Prisma Clientを生成する：
 

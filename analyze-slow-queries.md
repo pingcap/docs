@@ -74,7 +74,7 @@ TiKVによるデータ処理が遅い場合、 `EXPLAIN ANALYZE`の結果から�
 
 さらに、スローログのフィールド`Cop_process`と`Cop_wait`分析に役立ちます。次の例では、クエリの合計実行時間は約`180.85ms`で、最大の`coptask`の実行には`171ms`かかっています。これは、このクエリのボトルネックが TiKV 側にあることを示しています。
 
-スロー ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)参照してください。
+スロー ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -108,7 +108,7 @@ TiKV上に古いMVCCバージョンが多すぎる場合、またはGCのMVCC履
     # Total_keys: 2215187529 Processed_keys: 1108056368
     ...
 
-TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)ご覧ください。
+TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)をご覧ください。
 
 ### 他の主要ステージは遅い {#other-key-stages-are-slow}
 
@@ -157,7 +157,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDBの実行プランは正しいものの、実行速度が遅い場合を考えてみましょう。このような問題を解決するには、SQL文の`EXPLAIN ANALYZE`の結果に応じてパラメータを調整するか、ヒントを使用します。
 
-実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)参照してください。
+実行プランが正しくない場合は、セクション[オプティマイザーの問題を分析する](#analyze-optimizer-issues)を参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 
@@ -236,7 +236,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 4.  `select b from t where c=3` : プレフィックス条件がないと、マルチカラムインデックスは使用できません。そのため、 `IndexFullScan`使用されます。
 5.  ...
 
-上記の例は、データ読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)参照してください。
+上記の例は、データ読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)を参照してください。
 
 さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)読むことで、TiDB オプティマイザーをより深く理解し、実行プランが妥当かどうかを判断するのに役立ちます。
 

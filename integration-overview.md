@@ -9,7 +9,7 @@ summary: データ統合シナリオの概要を学びましょう。
 
 ## Confluent Cloud、Snowflake、ksqlDB、SQL Serverとの統合 {#integrate-with-confluent-cloud-snowflake-ksqldb-and-sql-server}
 
-TiCDC を使用して、増分データを TiDB から Confluent Cloud にレプリケートし、そのデータを Confluent Cloud 経由で Snowflake、ksqlDB、SQL Server にレプリケートできます。詳細については、 [Confluent Cloud、Snowflake、ksqlDB、SQL Serverとデータを統合する](/ticdc/integrate-confluent-using-ticdc.md)参照してください。
+TiCDC を使用して、増分データを TiDB から Confluent Cloud にレプリケートし、そのデータを Confluent Cloud 経由で Snowflake、ksqlDB、SQL Server にレプリケートできます。詳細については、 [Confluent Cloud、Snowflake、ksqlDB、SQL Serverとデータを統合する](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
 ## Apache KafkaおよびApache Flinkとの統合 {#integrate-with-apache-kafka-and-apache-flink}
 

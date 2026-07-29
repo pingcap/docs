@@ -357,7 +357,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
         -   強制的なスケールダウン：統合読み取りプールのCPU使用率が設定値に10%のバッファを加えた値を超えると、TiKVはプールのサイズを強制的に縮小します。
         -   スケールアップ防止：統合リードプールを拡張すると、CPU使用率が設定されたしきい値から10%のバッファを引いた値を超える場合、TiKVは統合リードプールのそれ以上の拡張を防止します。
 
--   この機能は、 [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630) `true`に設定されている場合にのみ有効になります。
+-   この機能は、 [`readpool.unified.auto-adjust-pool-size`](#auto-adjust-pool-size-new-in-v630)が`true`に設定されている場合にのみ有効になります。
 
 -   デフォルト値: `0.0`
 
@@ -531,7 +531,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 > -   `enable-ttl`を`true`または`false`に設定してください。**既存**の TiKV クラスターでは、この構成項目の値を変更**しないでください**。 `enable-ttl`値が異なる TiKV クラスターでは、使用するデータ形式が異なります。そのため、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータを異なる形式で保存するため、TiKV クラスターを再起動すると「非 TTL で TTL を有効にできません」というエラーが発生します。
 > -   `enable-ttl` TiKV クラスタ**でのみ**使用して**ください**。TiDB ノードを含むクラスタ (つまり、そのようなクラスタでは`enable-ttl`を`true`に設定する) では、 `storage.api-version = 2`が設定されていない限り、この構成項目を使用しないでください。そうしないと、データの破損や TiDB クラスタのアップグレード失敗などの重大な問題が発生します。
 
--   [TTL](/time-to-live.md) 「Time to live（有効期限）」の略です。この項目を有効にすると、TiKVはTTLに達したデータを自動的に削除します。TTLの値を設定するには、クライアント経由でデータを書き込む際のリクエストで指定する必要があります。TTLが指定されていない場合、TiKVは該当するデータを自動的に削除しません。
+-   [TTL](/time-to-live.md)は「Time to live（有効期限）」の略です。この項目を有効にすると、TiKVはTTLに達したデータを自動的に削除します。TTLの値を設定するには、クライアント経由でデータを書き込む際のリクエストで指定する必要があります。TTLが指定されていない場合、TiKVは該当するデータを自動的に削除しません。
 -   デフォルト値: `false`
 
 ### `ttl-check-poll-interval` {#ttl-check-poll-interval}
@@ -555,7 +555,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
     -   `2` : API V2 を使用します:
         -   データは[マルチバージョン同時実行制御 (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc)形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
         -   データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
-        -   API V2 を使用する場合は、 `storage.enable-ttl = true`も同時に設定する必要があります。API V2 は TTL 機能をサポートしているため、 [`enable-ttl`](#enable-ttl)明示的に有効にする必要があります。そうしないと、 `storage.enable-ttl`が`false`にデフォルト設定されるため、競合が発生します。
+        -   API V2 を使用する場合は、 `storage.enable-ttl = true`も同時に設定する必要があります。API V2 は TTL 機能をサポートしているため、 [`enable-ttl`](#enable-ttl)を明示的に有効にする必要があります。そうしないと、 `storage.enable-ttl`が`false`にデフォルト設定されるため、競合が発生します。
         -   API V2を有効にする場合、不要になったデータを再利用するために、少なくとも1つのtidb-serverインスタンスをデプロイする必要があります。このtidb-serverインスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するため、複数のtidb-serverインスタンスをデプロイすることも可能です。
         -   API V2ではクライアント側のサポートが必要です。詳細は、API V2に対応したクライアントの取扱説明書を参照してください。
         -   バージョン6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされています。RawKV [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
@@ -611,7 +611,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
     > **Note:**
     >
-    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)参照してください。
+    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)を参照してください。
 
 -   デフォルト値: `20`
 
@@ -621,7 +621,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
     > **Note:**
     >
-    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)参照してください。
+    > 特定の条件下では、この構成項目は`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`の値を上書きできます。詳細については、 [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)を参照してください。
 
 -   デフォルト値: `"192GiB"`
 
@@ -1466,7 +1466,7 @@ RocksDBに関連するコンフィグレーション項目
 
 > **Warning:**
 >
-> バージョン5.4.0以降、RocksDBログはTiKVのログモジュールによって管理されるようになりました。そのため、この設定項目は非推奨です。TiKVは時間に基づく自動ログ分割をサポートしなくなりました。代わりに、設定項目[`log.file.max-size`](#max-size-new-in-v540)使用して、ファイルサイズに基づく自動ログ分割のしきい値を設定できます。
+> バージョン5.4.0以降、RocksDBログはTiKVのログモジュールによって管理されるようになりました。そのため、この設定項目は非推奨です。TiKVは時間に基づく自動ログ分割をサポートしなくなりました。代わりに、設定項目[`log.file.max-size`](#max-size-new-in-v540)を使用して、ファイルサイズに基づく自動ログ分割のしきい値を設定できます。
 
 -   Infoログが切り捨てられる時間間隔。値が`0s`の場合、ログは切り捨てられません。
 -   デフォルト値: `"0s"`
@@ -1525,7 +1525,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### `track-and-verify-wals-in-manifest` <span class="version-mark">、v6.5.9、v7.1.5、v7.5.2、v8.0.0 で新しく追加されました。</span> {#track-and-verify-wals-in-manifest-new-in-v659-v715-v752-and-v800}
 
--   RocksDB MANIFEST ファイルに先行書き込みログ (WAL) ファイルに関する情報を記録するかどうか、および起動時に WAL ファイルの整合性を検証するかどうかを制御します。詳細については、「RocksDB [マニフェストでWALを追跡する](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST)参照してください。
+-   RocksDB MANIFEST ファイルに先行書き込みログ (WAL) ファイルに関する情報を記録するかどうか、および起動時に WAL ファイルの整合性を検証するかどうかを制御します。詳細については、RocksDB [マニフェストでWALを追跡する](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST)を参照してください。
 -   デフォルト値: `true`
 -   お得なオプション：
     -   `true` : WAL ファイルに関する情報を MANIFEST ファイルに記録し、起動時に WAL ファイルの整合性を検証します。
@@ -1643,7 +1643,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `ribbon-filter-above-level` <span class="version-mark">v7.2.0の新機能</span> {#ribbon-filter-above-level-new-in-v720}
 
--   この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを決定します。この設定項目が設定されている場合、 [`block-based-bloom-filter`](#block-based-bloom-filter)無視されます。
+-   この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを決定します。この設定項目が設定されている場合、 [`block-based-bloom-filter`](#block-based-bloom-filter)は無視されます。
 -   この設定項目は、 [`format-version`](#format-version-new-in-v620) 5以上の場合にのみ有効になることに注意してください。
 -   デフォルト値：なし。これは、デフォルトで無効になっていることを意味します。
 
@@ -1934,7 +1934,7 @@ Titanに関連するコンフィグレーション項目。
 
 -   Titanの実行モードを指定します。
 -   オプション値:
-    -   `normal` : 値のサイズが[`min-blob-size`](#min-blob-size)超えると、データを blob ファイルに書き込みます。
+    -   `normal` : 値のサイズが[`min-blob-size`](#min-blob-size)を超えると、データを blob ファイルに書き込みます。
     -   `read-only` : ブロブファイルへの新しいデータの書き込みを拒否しますが、ブロブファイルから元のデータを読み取ります。
     -   `fallback` : ブロブファイル内のデータをLSMに書き込みます。
 -   デフォルト値: `normal`
@@ -2070,7 +2070,7 @@ Titanに関連するコンフィグレーション項目。
 
 > **Warning:**
 >
-> バージョン5.4.0以降、RocksDBログはTiKVのログモジュールによって管理されるようになりました。そのため、この設定項目は非推奨です。TiKVは時間に基づく自動ログ分割をサポートしなくなりました。代わりに、設定項目[`log.file.max-size`](#max-size-new-in-v540)使用して、ファイルサイズに基づく自動ログ分割のしきい値を設定できます。
+> バージョン5.4.0以降、RocksDBログはTiKVのログモジュールによって管理されるようになりました。そのため、この設定項目は非推奨です。TiKVは時間に基づく自動ログ分割をサポートしなくなりました。代わりに、設定項目[`log.file.max-size`](#max-size-new-in-v540)を使用して、ファイルサイズに基づく自動ログ分割のしきい値を設定できます。
 
 -   Infoログが切り捨てられる間隔。値が`0s`の場合、ログは切り捨てられません。
 -   デフォルト値： `"0s"` （ログが切り捨てられないことを意味します）
@@ -2215,7 +2215,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 > **Note:**
 >
-> この設定項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630) `true`に設定されている場合にのみ有効になります。
+> この設定項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630)が`true`に設定されている場合にのみ有効になります。
 
 -   Raft Engineでログのリサイクル用に空のログファイルを生成するかどうかを決定します。有効にすると、 Raft Engine は初期化中にログのリサイクル用に空のログファイルを自動的に生成し、初期化直後からログのリサイクルが有効になります。
 -   デフォルト値: `false`
@@ -2283,11 +2283,11 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### `master-key` {#master-key}
 
--   暗号化が有効な場合はマスターキーを指定します。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)参照してください。
+-   暗号化が有効な場合はマスターキーを指定します。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 ### `previous-master-key` {#previous-master-key}
 
--   新しいマスター キーをローテーションするときに古いマスター キーを指定します。構成形式は`master-key`と同じです。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)参照してください。
+-   新しいマスター キーをローテーションするときに古いマスター キーを指定します。構成形式は`master-key`と同じです。マスターキーの設定方法については、[保存時の暗号化- 暗号化の設定](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 ## インポート {#import}
 
@@ -2393,13 +2393,13 @@ TiKVの自動圧縮の動作を設定します。
 
 ### `mvcc-scan-threshold` <span class="version-mark">v8.5.6で追加</span> {#mvcc-scan-threshold-new-in-v856}
 
--   リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。この構成項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) `true`に設定されている場合にのみ有効になります。
+-   リージョンを圧縮候補としてマークするために、読み取り要求ごとにスキャンされる MVCC バージョンの最小数。この構成項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
 -   デフォルト値: `1000`
 -   最小値: `0`
 
 ### `mvcc-read-weight` <span class="version-mark">v8.5.6で追加</span> {#mvcc-read-weight-new-in-v856}
 
--   リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、tombstone密度などの他の圧縮トリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856) `true`に設定されている場合にのみ有効になります。
+-   リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、tombstone密度などの他の圧縮トリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
 -   デフォルト値: `3.0`
 -   最小値: `0.0`
 
@@ -2742,7 +2742,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 ### `enabled` <span class="version-mark">（v6.6.0で新規追加）</span> {#enabled-new-in-v660}
 
--   対応するリソース グループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込みリクエストのスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御の詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)参照してください。
+-   対応するリソース グループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込みリクエストのスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御の詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
 -   この設定項目を有効にするには、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)が有効になっている必要があります。この設定項目が有効になっている場合、TiKV は優先度キューを使用して、フォアグラウンド ユーザーからのキューに登録された読み取り/書き込みリクエストをスケジュールします。リクエストのスケジュール優先度は、そのリクエストを受け取るリソース グループが既に消費しているリソースの量に反比例し、対応するリソース グループのクォータに比例します。
 -   デフォルト値: `true` 。これは、リソースグループのRUに基づいたスケジューリングが有効になっていることを意味します。
 

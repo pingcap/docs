@@ -47,7 +47,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 一方、TiDBのRowIDもデフォルトでAUTO_INCREMENTされます。主キーが整数型でない場合は、書き込みホットスポットの問題が発生する可能性があります。
 
-さらに、データ書き込み（新規作成されたテーブルまたはパーティション）またはデータ読み取り（読み取り専用シナリオにおける定期的な読み取りホットスポット）のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細については、 [テーブル属性を使用してリージョン結合の動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)参照してください。
+さらに、データ書き込み（新規作成されたテーブルまたはパーティション）またはデータ読み取り（読み取り専用シナリオにおける定期的な読み取りホットスポット）のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細については、 [テーブル属性を使用してリージョン結合の動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)を参照してください。
 
 ### インデックスホットスポット {#index-hotspots}
 
@@ -83,7 +83,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。1 `INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
+[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
 
     SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
     SHARD_ROW_ID_BITS = 6 # Represents 64 shards.
@@ -154,13 +154,13 @@ SELECT LAST_INSERT_ID();
 
 上記の負荷図に示されているように、 `AUTO_INCREMENT`の代わりに`AUTO_RANDOM`を使用すると、ホットスポットを適切に分散できます。
 
-詳細については[AUTO_RANDOM](/auto-random.md)参照してください。
+詳細については[AUTO_RANDOM](/auto-random.md)を参照してください。
 
 ## 小さなテーブルホットスポットの最適化 {#optimization-of-small-table-hotspots}
 
 TiDBのコプロセッサーキャッシュ機能は、計算結果のキャッシュのプッシュダウンをサポートします。この機能を有効にすると、TiDBはTiKVにプッシュダウンされる計算結果をキャッシュします。この機能は、小さなテーブルの読み取りホットスポットに適しています。
 
-詳細については[コプロセッサーキャッシュ](/coprocessor-cache.md)参照してください。
+詳細については[コプロセッサーキャッシュ](/coprocessor-cache.md)を参照してください。
 
 **参照:**
 

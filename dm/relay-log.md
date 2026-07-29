@@ -37,7 +37,7 @@ MySQLではストレージ容量が限られているため、最大保存期間
 
 v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定することでリレーログを有効にできます。v5.4.0以降では、上流データソースをバインドする際に、DM-workerはデータソースの設定で`enable-relay`をチェックします。 `enable-relay`が`true`場合、このデータソースに対してリレーログ機能が有効になります。
 
-詳しい設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
+詳しい設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 さらに、 `start-relay`または`stop-relay`コマンドを使用してデータ ソースの`enable-relay`構成を動的に調整し、リレー ログイン時間を有効または無効にすることもできます。
 
@@ -90,7 +90,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 DM バージョン 2.0.2 より前のバージョン（v2.0.2 は含まない）では、DM ワーカーを上流データソースにバインドする際に、ソース設定ファイルの設定項目`enable-relay`チェックされます。3 `enable-relay` `true`に設定されている場合、DM はデータソースのリレーログ機能を有効にします。
 
-設定項目`enable-relay`設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)参照してください。
+設定項目`enable-relay`の設定方法については[上流データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 </div>
 </SimpleTab>

@@ -9,7 +9,7 @@ summary: tiup dm edit-config`コマンドを使用すると、デプロイメン
 
 > **Note:**
 >
-> -   設定を変更すると、マシンの追加や削除はできなくなります。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-dm-scale-in.md)参照してください。
+> -   設定を変更すると、マシンの追加や削除はできなくなります。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)を参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-dm-scale-in.md)を参照してください。
 > -   `tiup dm edit-config`コマンドを実行すると、コントロールマシン上でのみ設定が変更されます。その後、 `tiup dm reload`コマンドを実行して設定を再読み込みする必要があります。
 
 ## 構文 {#syntax}
@@ -31,6 +31,6 @@ tiup dm edit-config <cluster-name> [flags]
 ## 出力 {#output}
 
 -   通常は出力されません。
--   変更できないフィールドを誤って変更した場合、ファイルを保存するとエラーが表示され、ファイルを再度編集するように促されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-dm-topology-reference.md)参照してください。
+-   変更できないフィールドを誤って変更した場合、ファイルを保存するとエラーが表示され、ファイルを再度編集するように促されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-dm-topology-reference.md)を参照してください。
 
 [&lt;&lt; 前のページに戻る - TiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

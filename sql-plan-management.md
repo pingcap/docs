@@ -15,7 +15,7 @@ SQLバインディングはSPMの基盤です。1 [オプティマイザヒン�
 
 > **Note:**
 >
-> SQLバインディングを使用するには、 `SUPER`権限が必要です。TiDB から権限が不足しているというメッセージが表示された場合は、 [権限管理](/privilege-management.md)参照して必要な権限を追加してください。
+> SQLバインディングを使用するには、 `SUPER`権限が必要です。TiDB から権限が不足しているというメッセージが表示された場合は、 [権限管理](/privilege-management.md)を参照して必要な権限を追加してください。
 
 </CustomContent>
 
@@ -23,7 +23,7 @@ SQLバインディングはSPMの基盤です。1 [オプティマイザヒン�
 
 > **Note:**
 >
-> SQLバインディングを使用するには、 `SUPER`権限が必要です。TiDB から権限が不足しているというメッセージが表示された場合は、 [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)参照して必要な権限を追加してください。
+> SQLバインディングを使用するには、 `SUPER`権限が必要です。TiDB から権限が不足しているというメッセージが表示された場合は、 [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)を参照して必要な権限を追加してください。
 
 </CustomContent>
 
@@ -222,7 +222,7 @@ explain SELECT * FROM t1, t2 WHERE t1.id = t2.id;
 
 #### 履歴実行プランに従ってバインディングを作成する {#create-a-binding-according-to-a-historical-execution-plan}
 
-SQL文の実行計画を過去の実行計画に固定するには、Plan Digestを使用して過去の実行計画をSQL文にバインドします。これは、SQL文ごとにバインドするよりも便利です。さらに、複数のSQL文の実行計画を一度にバインドすることも可能です。詳細と例については、 [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)参照してください。
+SQL文の実行計画を過去の実行計画に固定するには、Plan Digestを使用して過去の実行計画をSQL文にバインドします。これは、SQL文ごとにバインドするよりも便利です。さらに、複数のSQL文の実行計画を一度にバインドすることも可能です。詳細と例については、 [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)を参照してください。
 
 この機能を使用する場合、次の点に注意してください。
 
@@ -328,7 +328,7 @@ explain SELECT * FROM t1,t2 WHERE t1.id = t2.id;
 
 #### SQLダイジェストに従ってバインディングを削除する {#remove-a-binding-according-to-sql-digest}
 
-SQL文に従ってバインドを削除するだけでなく、SQLダイジェストに従ってバインドを削除することもできます。詳細と例については、 [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)参照してください。
+SQL文に従ってバインドを削除するだけでなく、SQLダイジェストに従ってバインドを削除することもできます。詳細と例については、 [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)を参照してください。
 
 ```sql
 DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST StringLiteralOrUserVariableList;
@@ -388,7 +388,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 
 バインディングのトラブルシューティングには、次のいずれかの方法を使用できます。
 
--   最後に実行されたステートメントで使用された実行プランがバインディングからのものであるかどうかを表示するには、システム変数[`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40)使用します。
+-   最後に実行されたステートメントで使用された実行プランがバインディングからのものであるかどうかを表示するには、システム変数[`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40)を使用します。
 
     ```sql
     -- Create a global binding
@@ -676,7 +676,7 @@ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VA
 
 | **ディメンション名** | **説明**                                                                                                                                                      | 備考                                                                                                                                     |
 | :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| テーブル         | テーブル名でフィルタリングします。各フィルタリングルールは`db.table`形式です。サポートされているフィルタリング構文には[プレーンテーブル名](/table-filter.md#plain-table-names)と[ワイルドカード](/table-filter.md#wildcards)含まれます。 | 大文字と小文字は区別されません。テーブル名に無効な文字が含まれている場合、ログに警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`返されます。                |
+| テーブル         | テーブル名でフィルタリングします。各フィルタリングルールは`db.table`形式です。サポートされているフィルタリング構文には[プレーンテーブル名](/table-filter.md#plain-table-names)と[ワイルドカード](/table-filter.md#wildcards)が含まれます。 | 大文字と小文字は区別されません。テーブル名に無効な文字が含まれている場合、ログに警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`が返されます。                |
 | 頻度           | 頻度でフィルタリングします。複数回実行されたSQL文はデフォルトでキャプチャされます。頻繁に実行されるSQL文をキャプチャするには、高い頻度を設定することができます。                                                                         | 頻度を1未満の値に設定すると無効とみなされ、ログに警告メッセージ`[sql-bind] frequency threshold is less than 1, ignore it`が返されます。複数の頻度フィルタルールが挿入された場合、最も高い頻度の値が優先されます。 |
 | ユーザー         | ユーザー名でフィルタリングします。ブロックリストに登録されたユーザーが実行したステートメントはキャプチャされません。                                                                                                  | 複数のユーザーが同じステートメントを実行し、そのユーザー名がすべてブロックリストに含まれている場合、このステートメントはキャプチャされません。                                                                |
 

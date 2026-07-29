@@ -9,7 +9,7 @@ summary: TiDB のエラー コードと解決策について学習します。
 
 ## エラーコード {#error-codes}
 
-TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合、MySQLと同じエラーコードを返します。MySQLのエラーコードの一覧については、 [MySQL 8.0 エラーメッセージリファレンス](https://dev.mysql.com/doc/mysql-errors/8.0/en/)参照してください。さらに、TiDBには以下の独自のエラーコードがあります。
+TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合、MySQLと同じエラーコードを返します。MySQLのエラーコードの一覧については、 [MySQL 8.0 エラーメッセージリファレンス](https://dev.mysql.com/doc/mysql-errors/8.0/en/)を参照してください。さらに、TiDBには以下の独自のエラーコードがあります。
 
 > **Note:**
 >
@@ -39,7 +39,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     1回のトランザクションが大きすぎます。
 
-    原因と解決策については[エラーメッセージ`transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed)参照してください。
+    原因と解決策については[エラーメッセージ`transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed)を参照してください。
 
 -   エラー番号: 8005
 
@@ -147,7 +147,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     サポートされていないデータベース分離レベルが設定されています。
 
-    サードパーティのツールまたはフレームワークを使用しているためにコードを変更できない場合は、 [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)使用してこのチェックをバイパスすることを検討してください。
+    サードパーティのツールまたはフレームワークを使用しているためにコードを変更できない場合は、 [`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)を使用してこのチェックをバイパスすることを検討してください。
 
     ```sql
     set @@tidb_skip_isolation_level_check = 1;
@@ -157,7 +157,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     サポートされていない権限タイプが設定されています。
 
-    解決策については[TiDB操作に必要な権限](/privilege-management.md#privileges-required-for-tidb-operations)参照してください。
+    解決策については[TiDB操作に必要な権限](/privilege-management.md#privileges-required-for-tidb-operations)を参照してください。
 
 -   エラー番号: 8051
 
@@ -175,13 +175,13 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     現在のスナップショットは古すぎます。データがガベージコレクションされている可能性があります。この問題を回避するには、値を[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)に増やしてください。TiDBは長時間実行されるトランザクションのためにデータを自動的に予約します。通常、このエラーは発生しません。
 
-    [ガベージコレクションの概要](/garbage-collection-overview.md)と[ガベージコレクションの構成](/garbage-collection-configuration.md)参照してください。
+    [ガベージコレクションの概要](/garbage-collection-overview.md)と[ガベージコレクションの構成](/garbage-collection-configuration.md)を参照してください。
 
 -   エラー番号: 8059
 
     AUTO_RANDOM IDが不足しているため、割り当てることができません。現在、このようなエラーから回復する方法はありません。AUTO_RANDOM機能を使用する場合は、割り当て数を最大限にするためにbigintを使用することをお勧めします。また、AUTO_RANDOM列に手動で値を割り当てることは避けてください。
 
-    参考として[AUTO_RANDOM](/auto-random.md)参照してください。
+    参考として[AUTO_RANDOM](/auto-random.md)を参照してください。
 
 -   エラー番号: 8060
 
@@ -191,31 +191,31 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     サポートされていない SQL ヒント。
 
-    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)参照してください。
+    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
 
 -   エラー番号: 8062
 
     SQLヒントで無効なトークンが使用されています。SQLヒント内の予約語と競合しています。
 
-    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)参照してください。
+    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
 
 -   エラー番号: 8063
 
     SQLヒントで設定されたメモリ使用量の制限がシステムの上限を超えています。SQLヒントの設定は無視されます。
 
-    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)参照してください。
+    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
 
 -   エラー番号: 8064
 
     SQLヒントの解析に失敗しました。
 
-    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)参照してください。
+    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
 
 -   エラー番号: 8065
 
     SQL ヒントに無効な整数が使用されています。
 
-    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)参照してください。
+    SQL ヒントを確認して変更するには、 [オプティマイザヒント](/optimizer-hints.md)を参照してください。
 
 -   エラー番号: 8066
 
@@ -329,27 +329,27 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     このエラーは、TiDB の以前のバージョンからアップグレードした後に発生する可能性があります。SQL インジェクション攻撃の影響を軽減するため、TiDB ではデフォルトで、 `COM_QUERY`の呼び出しで複数のクエリが実行されないようにするようになりました。
 
-    システム変数[`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)使用してこの動作を制御できます。
+    システム変数[`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を使用してこの動作を制御できます。
 
 -   エラー番号: 8138
 
-    トランザクションは不正な行値を書き込もうとしました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8138)参照してください。
+    トランザクションは不正な行値を書き込もうとしました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8138)を参照してください。
 
 -   エラー番号: 8139
 
-    トランザクションは、インデックス内のハンドルと一致しない行の書き込みを試行しました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8139)参照してください。
+    トランザクションは、インデックス内のハンドルと一致しない行の書き込みを試行しました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8139)を参照してください。
 
 -   エラー番号: 8140
 
-    トランザクションは、インデックスデータと矛盾するデータを持つ行を書き込もうとしました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8140)参照してください。
+    トランザクションは、インデックスデータと矛盾するデータを持つ行を書き込もうとしました。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8140)を参照してください。
 
 -   エラー番号: 8141
 
-    トランザクションのコミット時に、キーの存在アサーションが失敗します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8141)参照してください。
+    トランザクションのコミット時に、キーの存在アサーションが失敗します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md#error-8141)を参照してください。
 
 -   エラー番号: 8143
 
-    非トランザクションDML文の実行中にバッチが失敗すると、文は停止されます。詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)参照してください。
+    非トランザクションDML文の実行中にバッチが失敗すると、文は停止されます。詳細については、 [非トランザクションDMLステートメント](/non-transactional-dml.md)を参照してください。
 
 -   エラー番号: 8147
 
@@ -365,11 +365,11 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8157
 
-    指定されたファイル形式はサポートされていません。サポートされている形式については、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#format)参照してください。
+    指定されたファイル形式はサポートされていません。サポートされている形式については、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#format)を参照してください。
 
 -   エラー番号: 8158
 
-    指定されたパスは無効です。具体的な対処方法については、エラーメッセージを参照してください。Amazon S3 または GCS のパス設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+    指定されたパスは無効です。具体的な対処方法については、エラーメッセージを参照してください。Amazon S3 または GCS のパス設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 -   エラー番号: 8159
 
@@ -385,11 +385,11 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8163
 
-    指定されたオプションは不明です。サポートされているオプションについては、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)参照してください。
+    指定されたオプションは不明です。サポートされているオプションについては、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)を参照してください。
 
 -   エラー番号: 8164
 
-    指定されたオプション値が無効です。有効な値については、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)参照してください。
+    指定されたオプション値が無効です。有効な値については、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)を参照してください。
 
 -   エラー番号: 8165
 
@@ -397,7 +397,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8166
 
-    一部のオプションは特定の状況でのみ使用できます。対処方法については、該当するエラーメッセージを参照してください。サポートされているオプションについては、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)参照してください。
+    一部のオプションは特定の状況でのみ使用できます。対処方法については、該当するエラーメッセージを参照してください。サポートされているオプションについては、 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description)を参照してください。
 
 -   エラー番号: 8170
 
@@ -415,7 +415,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     DDL 構文はまだサポートされていません。
 
-    参考として[MySQL DDLの互換性](/mysql-compatibility.md#ddl-operations)参照してください。
+    参考として[MySQL DDLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 -   エラー番号: 8214
 
@@ -431,7 +431,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     `AUTO_RANDOM`列の使い方が間違っています。
 
-    変更するには[`AUTO_RANDOM`](/auto-random.md)参照してください。
+    変更するには[`AUTO_RANDOM`](/auto-random.md)を参照してください。
 
 -   エラー番号: 8223
 
@@ -457,13 +457,13 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     シーケンスの作成時にサポートされていないオプションが使用されています。
 
-    サポートされているオプションのリストについては、 [シーケンスドキュメント](/sql-statements/sql-statement-create-sequence.md#parameters)参照してください。
+    サポートされているオプションのリストについては、 [シーケンスドキュメント](/sql-statements/sql-statement-create-sequence.md#parameters)を参照してください。
 
 -   エラー番号: 8228
 
     シーケンスに`SETVAL`を使用すると、サポートされていない型が指定されます。
 
-    関数の例については[シーケンスドキュメント](/sql-statements/sql-statement-create-sequence.md#examples)参照してください。
+    関数の例については[シーケンスドキュメント](/sql-statements/sql-statement-create-sequence.md#examples)を参照してください。
 
 -   エラー番号: 8229
 
@@ -481,7 +481,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8249
 
-    リソースグループが存在しません。このエラーは、存在しないリソースグループを変更またはバインドした場合に返されます。1 [リソースグループを作成する](/tidb-resource-control-ru-groups.md#create-a-resource-group)参照してください。
+    リソースグループが存在しません。このエラーは、存在しないリソースグループを変更またはバインドした場合に返されます。[リソースグループを作成する](/tidb-resource-control-ru-groups.md#create-a-resource-group)を参照してください。
 
 -   エラー番号: 8250
 
@@ -505,11 +505,11 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
 -   エラー番号: 8253
 
-    クエリはランナウェイクエリの条件を満たしているため停止します。1 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)参照してください。
+    クエリはランナウェイクエリの条件を満たしているため停止します。[ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 -   エラー番号: 8254
 
-    クエリは、ランナウェイクエリの隔離監視条件を満たしているため停止します。1 [ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)参照してください。
+    クエリは、ランナウェイクエリの隔離監視条件を満たしているため停止します。[ランナウェイクエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
 
 -   エラー番号: 8260
 
@@ -585,7 +585,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     1回のトランザクションが大きすぎます。
 
-    解決策については[エラーメッセージ`transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed)参照してください。
+    解決策については[エラーメッセージ`transaction too large`](/faq/migration-tidb-faq.md#the-error-message-transaction-too-large-is-displayed)を参照してください。
 
 -   エラー番号: 9007
 
@@ -647,7 +647,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     完全なエラーメッセージ: `ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point`
 
-    このエラーは、TiDBがPDへのアクセスに失敗した場合に発生します。TiDBのバックグラウンドワーカーはPDに対してセーフポイントへのクエリを継続的に実行し、100秒以内にクエリに失敗するとこのエラーを報告します。通常、PDのディスクが低速でビジー状態であるか、TiDBとPD間のネットワークに障害が発生していることが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)参照してください。
+    このエラーは、TiDBがPDへのアクセスに失敗した場合に発生します。TiDBのバックグラウンドワーカーはPDに対してセーフポイントへのクエリを継続的に実行し、100秒以内にクエリに失敗するとこのエラーを報告します。通常、PDのディスクが低速でビジー状態であるか、TiDBとPD間のネットワークに障害が発生していることが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)を参照してください。
 
 -   TiDB ログエラーメッセージ: EOF エラー
 

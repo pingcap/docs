@@ -69,7 +69,7 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 > **Note:**
 >
 > -   各書き込み操作は最終的にすべてのレプリカに複製されます（デフォルトでは、TiKVには3つのレプリカがあります）。各複製操作は、それぞれ異なる書き込み操作として扱われます。
-> -   上記の表には、TiDB Self-ManagedクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)参照してください。
+> -   上記の表には、TiDB Self-ManagedクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 > -   現在、 TiFlashのリソース制御では、SQL CPUのみが考慮されます。SQL CPUとは、クエリおよび読み取りリクエストのペイロードに対するパイプラインタスクの実行によって消費されるCPU時間です。
 
 ## リソース制御のためのパラメータ {#parameters-for-resource-control}
@@ -111,7 +111,7 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 </CustomContent>
 
-リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDBにおけるグローバルリソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-8.5/docs/design/2023-09-21-tiflash-resource-control.md)参照してください。
+リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDBにおけるグローバルリソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-8.5/docs/design/2023-09-21-tiflash-resource-control.md)を参照してください。
 
 ## リソース制御の使い方 {#how-to-use-resource-control}
 
@@ -207,13 +207,13 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 ```
 
-詳細については、 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)参照してください。
+詳細については、 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)を参照してください。
 
 #### 現在のセッションをリソースグループにバインドする {#bind-the-current-session-to-a-resource-group}
 
 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントを使用すると、現在のセッションにバインドされているリソースグループを変更できます。セッションをリソースグループにバインドすると、対応するセッションのリソース使用量は、指定された使用量 (RU) によって制限されます。
 
-システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
+システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、このステートメントを実行するには`SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。
 
 次の例では、現在のセッションをリソースグループ`rg1`にバインドします。
 
@@ -389,7 +389,7 @@ TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソー�
 
 2.  データベースユーザーは複数のリソースグループに紐付けられますか？
 
-    いいえ。データベースユーザーは1つのリソースグループにしかバインドできません。ただし、セッション実行時には、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)使用して、現在のセッションで使用するリソースグループを設定できます。また、オプティマイザヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソースグループを設定することもできます。
+    いいえ。データベースユーザーは1つのリソースグループにしかバインドできません。ただし、セッション実行時には、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用するリソースグループを設定できます。また、オプティマイザヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソースグループを設定することもできます。
 
 3.  すべてのリソースグループの合計リソース割り当て（ `RU_PER_SEC` ）がシステム容量を超えた場合、どうなりますか？
 

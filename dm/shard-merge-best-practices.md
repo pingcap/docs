@@ -11,7 +11,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)ドキュメントでは、「シャーディング グループ」の定義が次のように示されています。シャーディング グループは、同じダウンストリーム テーブルにマージおよび移行する必要があるすべてのアップストリーム テーブルで構成されます。
 
-現在のシャーディングDDLメカニズムには、異なるシャーディングされたテーブルにおけるDDL操作によってもたらされるスキーマ変更を調整するための[使用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)の制約があります。予期しない理由によりこれらの制約に違反した場合は、 [DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)実行するか、データ移行タスク全体をやり直す必要があります。
+現在のシャーディングDDLメカニズムには、異なるシャーディングされたテーブルにおけるDDL操作によってもたらされるスキーマ変更を調整するための[使用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)の制約があります。予期しない理由によりこれらの制約に違反した場合は、 [DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を実行するか、データ移行タスク全体をやり直す必要があります。
 
 例外発生時のデータ移行への影響を軽減するため、各シャーディンググループを個別のデータ移行タスクとして統合・移行することをお勧めします。**これにより、少数のデータ移行タスクのみを手動で処理し、他のタスクへの影響を最小限に抑えることができます。**
 
@@ -145,7 +145,7 @@ CREATE TABLE `tbl_multi_pk` (
 
 アップストリームでシャードされたテーブルを削除する必要がある場合は、次の手順を実行します。
 
-1.  シャード化されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)実行して、 binlogイベント内の`DROP TABLE`ステートメントに対応する`End_log_pos`を取得し、それを*Pos-M*としてマークします。
+1.  シャード化されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)を実行して、 binlogイベント内の`DROP TABLE`ステートメントに対応する`End_log_pos`を取得し、それを*Pos-M*としてマークします。
 
 2.  `query-status`を実行して、DMによって処理されたbinlogイベントに対応する位置（ `syncerBinlog` ）を取得し、それを*Pos-S*としてマークします。
 

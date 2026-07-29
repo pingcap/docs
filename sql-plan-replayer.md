@@ -71,7 +71,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)使用して、最後の`PLAN REPLAYER DUMP`実行の結果を取得することもできます。
+あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`実行の結果を取得することもできます。
 
 ```sql
 SELECT @@tidb_last_plan_replayer_token;

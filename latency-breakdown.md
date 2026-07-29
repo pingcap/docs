@@ -16,7 +16,7 @@ summary: TiDB のレイテンシーと、実際の使用例でレイテンシー
 
 これらの分析により、 TiDB SQLクエリの実行時間コストに関する詳細な情報が得られます。これは、TiDBのクリティカルパス診断のガイドです。さらに、第[診断のユースケース](#diagnosis-use-cases)セクションでは、実際のユースケースにおけるレイテンシーの分析方法を紹介します。
 
-このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)お読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンタを使用する必要があります。
+このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンタを使用する必要があります。
 
     avg = ${metric_name}_sum / ${metric_name}_count
 
@@ -102,7 +102,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` PDから[TSO (タイムスタンプ オラクル)](/tso.md)取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプ オラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
 
 `read handle duration`と`read value duration`次のように計算されます。
 
@@ -419,7 +419,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     lock write duration
 ```
 
--   TiDB v6.0以降、TiKVはデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)使用します。メモリ内悲観的ロックは非同期書き込みプロセスをバイパスします。
+-   TiDB v6.0以降、TiKVはデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)を使用します。メモリ内悲観的ロックは非同期書き込みプロセスをバイパスします。
 
 -   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショットタイプの期間です。詳細については、 [TiKVスナップショット](#tikv-snapshot)セクションを参照してください。
 
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
 
 クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
-v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)使用するようになり、ログの書き込みプロセスが変更されました。
+v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用するようになり、ログの書き込みプロセスが変更されました。
 
 ### KV DB {#kv-db}
 

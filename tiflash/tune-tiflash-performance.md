@@ -27,7 +27,7 @@ summary: マシン リソースを計画し、TiDB パラメータを調整す�
 
 MPP実行プランは分散コンピューティングリソースを最大限に活用できるため、バッチデータクエリの効率を大幅に向上させます。オプティマイザーがクエリに対してMPP実行プランを生成しない場合は、MPPモードを強制的に有効にすることができます。
 
-変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) 、オプティマイザのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。MPPモードを強制的に有効にするには、次のコマンドを実行します。
+変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)は、オプティマイザのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。MPPモードを強制的に有効にするには、次のコマンドを実行します。
 
 ```sql
 set @@tidb_enforce_mpp = ON;
@@ -97,7 +97,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 
 集計演算を`Join`または`Union`前の位置までプッシュダウンすることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
 
-変数[`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down) 、オプティマイザが集計関数を`Join`または`Union`前の位置までプッシュダウンする最適化操作を実行するかどうかを制御します。クエリ内で集計操作が非常に遅い場合は、この変数を`ON`に設定できます。
+変数[`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)は、オプティマイザが集計関数を`Join`または`Union`前の位置までプッシュダウンする最適化操作を実行するかどうかを制御します。クエリ内で集計操作が非常に遅い場合は、この変数を`ON`に設定できます。
 
 ```sql
 set @@tidb_opt_agg_push_down = ON;
@@ -231,7 +231,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 小さなテーブルでの`Join`操作の場合、ブロードキャスト ハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティング パフォーマンスが向上します。
 
--   変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) 、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+-   変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
     ```sql
     set @@tidb_broadcast_join_threshold_size = 2000000;
@@ -298,7 +298,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 
 実行の同時実行性が高まると、 TiFlash はシステムの CPU リソースをより多く占有できるようになり、クエリ パフォーマンスが向上します。
 
-変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) 、 TiFlashがリクエストを実行する際の最大同時実行数を設定するために使用されます。単位はスレッドです。
+変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)は、 TiFlashがリクエストを実行する際の最大同時実行数を設定するために使用されます。単位はスレッドです。
 
 ```sql
 set @@tidb_max_tiflash_threads = 20;

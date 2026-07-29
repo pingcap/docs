@@ -236,7 +236,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 > **Warning:**
 >
-> バージョン8.0.0以降、 `duplicate-resolution`パラメータは非推奨となり、将来のリリースで削除される予定です。詳細については、 [競合検出の旧バージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)参照してください。
+> バージョン8.0.0以降、 `duplicate-resolution`パラメータは非推奨となり、将来のリリースで削除される予定です。詳細については、 [競合検出の旧バージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)を参照してください。
 
 -   物理インポート モードで重複レコード (一意キーの競合) を検出して解決するかどうかを制御します。
 -   デフォルト値: `'none'`
@@ -372,7 +372,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `data-source-dir` {#data-source-dir}
 
--   ローカルソースデータディレクトリまたは外部ストレージのURIを指定します。外部ストレージのURIの詳細については、 [URI形式](/br/backup-and-restore-storages.md#uri-format)参照してください。
+-   ローカルソースデータディレクトリまたは外部ストレージのURIを指定します。外部ストレージのURIの詳細については、 [URI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 <!-- Example: `"/data/my_database"` -->
 
@@ -549,27 +549,27 @@ CSV ファイルの解析方法を構成します。
 
 #### `build-stats-concurrency` {#build-stats-concurrency}
 
--   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)参照してください。
+-   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
 
 <!-- Example: `20` -->
 
 #### `distsql-scan-concurrency` {#distsql-scan-concurrency}
 
--   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)参照してください。
--   [`checksum-via-sql`](#checksum-via-sql) `"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`無効になります。
+-   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
+-   [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
 
 <!-- Example: `15` -->
 
 #### `index-serial-scan-concurrency` {#index-serial-scan-concurrency}
 
--   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)参照してください。
+-   チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
 
 <!-- Example: `20` -->
 
 #### `checksum-table-concurrency` {#checksum-table-concurrency}
 
--   チェックサムと`ANALYZE`操作を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)参照してください。
--   [`checksum-via-sql`](#checksum-via-sql) `"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`無効になります。
+-   チェックサムと`ANALYZE`操作を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
+-   [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
 
 <!-- Example: `2` -->
 

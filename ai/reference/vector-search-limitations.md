@@ -25,7 +25,7 @@ aliases: ['/ja/tidb/stable/vector-search-limitations/','/ja/tidb/dev/vector-sear
 
 ## ベクトルインデックスの制限 {#vector-index-limitations}
 
-[ベクトル検索制限](/ai/reference/vector-search-index.md#restrictions)参照してください。
+[ベクトル検索制限](/ai/reference/vector-search-index.md#restrictions)を参照してください。
 
 ## TiDBツールとの互換性 {#compatibility-with-tidb-tools}
 

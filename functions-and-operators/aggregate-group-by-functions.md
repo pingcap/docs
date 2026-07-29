@@ -87,7 +87,7 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 ## GROUP BY修飾子 {#group-by-modifiers}
 
-TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。詳細については、 [GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)参照してください。
+TiDB v7.4.0以降、 `GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。詳細については、 [GROUP BY修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。
 
 ## SQLモードのサポート {#sql-mode-support}
 
@@ -135,7 +135,7 @@ MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のい
 -   式は`SELECT`リストの1に等しい
 -   式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です。
 
-しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)参照してください。
+しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 
 標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`番目のリスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
 

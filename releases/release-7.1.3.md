@@ -87,7 +87,7 @@ TiDB バージョン: 7.1.3
     -   集計関数またはウィンドウ関数を含む共通テーブル式 (CTE) が他の再帰 CTE によって参照されるときに発生する可能性のある構文エラーの問題を修正しました[＃47603](https://github.com/pingcap/tidb/issues/47603) [＃47711](https://github.com/pingcap/tidb/issues/47711) @ [elsa0520](https://github.com/elsa0520)
     -   統計 TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。 [＃35948](https://github.com/pingcap/tidb/issues/35948) @ [Rustin170506](https://github.com/Rustin170506)
     -   MPPで計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[＃48643](https://github.com/pingcap/tidb/issues/48643) @ [AilinKid](https://github.com/AilinKid)
-    -   HashJoin演算子がプローブ実行するときにチャンクを再利用できない問題を修正しました [＃48082](https://github.com/pingcap/tidb/issues/48082) @ [wshwsh12](https://github.com/wshwsh12)
+    -   HashJoin演算子がプローブを実行するときにチャンクを再利用できない問題を修正しました [＃48082](https://github.com/pingcap/tidb/issues/48082) @ [wshwsh12](https://github.com/wshwsh12)
 
 -   TiKV
 

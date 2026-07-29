@@ -36,11 +36,11 @@ PDマイクロサービスは通常、PDにおけるパフォーマンスのボ�
 -   TiDBコンポーネントのみがサービス検出を通じて`tso`マイクロサービスへの直接接続をサポートしますが、他のコンポーネントはタイムスタンプを取得するために PD を通じて`tso`マイクロサービスにリクエストを転送する必要があります。
 -   マイクロサービスは[データレプリケーション自動同期（DR自動同期）](/two-data-centers-in-one-city-deployment.md)機能と互換性がありません。
 -   マイクロサービスは TiDB システム変数[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)と互換性がありません。
--   [休止状態領域](/tikv-configuration-file.md#hibernate-regions)クラスター内に存在する可能性があるため、 `scheduling`マイクロサービスのプライマリおよびセカンダリの切り替え中に、冗長なスケジュールを回避するために、クラスターのスケジュール機能が一定期間 (最大[`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval) 、デフォルトでは 5 分) 使用できなくなる可能性があります。
+-   [休止状態領域](/tikv-configuration-file.md#hibernate-regions)がクラスター内に存在する可能性があるため、 `scheduling`マイクロサービスのプライマリおよびセカンダリの切り替え中に、冗長なスケジュールを回避するために、クラスターのスケジュール機能が一定期間 (最大[`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval) 、デフォルトでは 5 分) 使用できなくなる可能性があります。
 
 ## 使用法 {#usage}
 
-PD マイクロサービスは[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/)または[TiUP](/tiup/tiup-overview.md)使用してデプロイできます。
+PD マイクロサービスは[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/)または[TiUP](/tiup/tiup-overview.md)を使用してデプロイできます。
 
 <SimpleTab>
 <div label="TiDB Operator">

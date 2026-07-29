@@ -13,7 +13,7 @@ TiDB Cloud がお客様のビジネスニーズに最適かどうかを判断す
 
 PoCにご興味をお持ちでしたら、開始前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>までお気軽にお問い合わせください。サポートチームがテストプランの作成をお手伝いし、PoCの手順をスムーズに進めてまいります。
 
-あるいは、 [TiDB Cloud Starterを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB Cloud Starter には[特別な利用規約](/tidb-cloud/serverless-limitations.md)含まれています。
+あるいは、 [TiDB Cloud Starterを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) TiDB Cloudに慣れて、すぐに評価することもできます。TiDB Cloud Starter には[特別な利用規約](/tidb-cloud/serverless-limitations.md)が含まれています。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -54,7 +54,7 @@ TiDB Cloudは、高可用性と大容量データの強力な整合性が求め�
 -   リアルタイムHTAP
 -   MySQLプロトコルおよびMySQLエコシステムと互換性があります
 
-分析処理の高速化に役立つ列指向ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ご利用にもご興味があるかもしれません。PoC期間中は、 TiFlash機能をいつでもご利用いただけます。
+分析処理の高速化に役立つ列指向ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)のご利用にもご興味があるかもしれません。PoC期間中は、 TiFlash機能をいつでもご利用いただけます。
 
 ## ステップ3. PoC用のTiDB Cloud Dedicatedクラスターにサインアップして作成する {#step-3-sign-up-and-create-a-tidb-cloud-dedicated-cluster-for-the-poc}
 
@@ -80,23 +80,23 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 クラスターを作成する前に、キャパシティプランニングを実施してクラスターのサイズを決定することをお勧めします。TiDB、TiKV、またはTiFlashノードの概算数から開始し、パフォーマンス要件に合わせて後からクラスターをスケールアウトすることも可能です。詳細については、以下のドキュメントをご覧いただくか、サポートチームにお問い合わせください。
 
--   推定の実践の詳細については、 [TiDBのサイズ](/tidb-cloud/size-your-cluster.md)参照してください。
+-   サイズ見積もりの実践の詳細については、 [TiDBのサイズ](/tidb-cloud/size-your-cluster.md)を参照してください。
 -   TiDB Cloud Dedicated クラスターの構成については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。TiDB、TiKV、 TiFlash (オプション) のクラスター サイズをそれぞれ構成します。
--   PoC クレジットの消費を効果的に計画し、最適化する方法については、このドキュメントの[FAQ](#faq)参照してください。
--   スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)参照してください。
+-   PoC クレジットの消費を効果的に計画し、最適化する方法については、このドキュメントの[FAQ](#faq)を参照してください。
+-   スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
-専用のPoCクラスターを作成したら、データをロードして一連のテストを実行する準備が整います。TiDBクラスターへの接続方法については、 [TiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+専用のPoCクラスターを作成したら、データをロードして一連のテストを実行する準備が整います。TiDBクラスターへの接続方法については、 [TiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 新しく作成されたクラスターの場合は、次の構成に注意してください。
 
 -   デフォルトのタイムゾーン（ダッシュボードの**「作成時間」**列）はUTCです。以下の手順[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)で、ローカルタイムゾーンに変更できます。
--   新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間および詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
+-   新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間および詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
 
 次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudで互換性テストや予備分析用の[TiDB Cloud Starter クラスター](/tidb-cloud/select-cluster-tier.md#starter)作成することをお勧めします。
+PoC クレジットの数量には限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudで互換性テストや予備分析用の[TiDB Cloud Starter クラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成することをお勧めします。
 
 TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQLと互換性がある、またはMySQLと互換性を持たせることができる場合は、データをTiDBに直接インポートできます。
 
@@ -112,8 +112,8 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 -   スキーマ設定に非効率性がないか確認します。
 -   不要なインデックスを削除します。
 -   効果的なパーティショニングのためにパーティショニング ポリシーを計画します。
--   タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)回避します。
--   [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)回避します。
+-   タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
+-   [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 
 SQL ステートメントの場合、データ ソースと TiDB の互換性のレベルに応じて調整する必要がある場合があります。
 
@@ -139,14 +139,14 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 これで環境の作成、スキーマの調整、データのインポートが完了しました。次はワークロードをテストしましょう。
 
-ワークロードをテストする前に、必要に応じてデータベースを元の状態に復元できるように、手動バックアップを実行することを検討してください。詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)参照してください。
+ワークロードをテストする前に、必要に応じてデータベースを元の状態に復元できるように、手動バックアップを実行することを検討してください。詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ワークロードを開始した後、次の方法を使用してシステムを観察できます。
 
--   クラスターの一般的なメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます。1 [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ目に移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。5 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)参照してください。
--   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ目に移動し、 **「Key Visualizer」**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)参照してください。
--   これらのメトリクスを独自のDatadogおよびPrometheusに統合することもできます。1 [サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)参照してください。
+-   クラスターの一般的なメトリクスは、クラスター概要ページで確認できます。これには、合計QPS、レイテンシ、接続数、 TiFlashリクエストQPS、 TiFlashリクエスト期間、 TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、TiKV IO書き込みが含まれます。詳細は[TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「SQLステートメント」**タブを確認してください。ここでは、システムテーブルをクエリすることなく、SQL実行を監視し、パフォーマンスの問題を簡単に特定できます。詳細は[ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。
+-   クラスターの[**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **「Key Visualizer」**タブでTiDBのデータアクセスパターンとデータホットスポットを確認できます。詳細は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
+-   これらのメトリクスを独自のDatadogおよびPrometheusに統合することもできます。詳細は[サードパーティの監視統合](/tidb-cloud/third-party-monitoring-integrations.md)を参照してください。
 
 次はテスト結果を評価する時です。
 
@@ -172,7 +172,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
     -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL文**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行プランを確認します。
     -   [**診断**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
     -   [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
-    -   TiFlash機能を使用して分析処理を最適化します[HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
+    -   TiFlash機能を使用して分析処理を最適化します。[HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 ## ステップ7. その他の機能を調べる {#step-7-explore-more-features}
 
@@ -184,7 +184,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 -   バックアップ
 
-    ベンダーロックインを回避するには、毎日フルバックアップを実行してデータを新しいクラスタに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをエクスポートします。詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)と[TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)参照してください。
+    ベンダーロックインを回避するには、毎日フルバックアップを実行してデータを新しいクラスタに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してデータをエクスポートします。詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)と[TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 ## ステップ8. 環境をクリーンアップしてPoCを完了する {#step-8-clean-up-the-environment-and-finish-the-poc}
 
@@ -194,7 +194,7 @@ TiDB Cloud をより大規模に試して、 TiDB Cloudが提供する他のノ�
 
 クレジットがなくなり、PoC を継続したい場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してご相談ください。
 
-PoCはいつでも終了し、テスト環境を削除できます。詳細については、 [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)ご覧ください。
+PoCはいつでも終了し、テスト環境を削除できます。詳細については、 [TiDBクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)をご覧ください。
 
 ## FAQ {#faq}
 
@@ -213,11 +213,11 @@ TiDB Cloud は、自動バックアップと手動バックアップの 2 種類
 -   ピーク時間中またはデータのインポート中に、ダッシュボードの容量メトリックが上限に達したことが確認された場合 ( [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照)、クラスターをスケールアウトする必要がある可能性があります。
 -   リソースの使用量が持続的に低い場合（たとえば、CPU 使用率が 10% ～ 20% のみ）は、クラスターをスケールインしてリソースを節約できます。
 
-コンソール上でクラスターをスケールアウトできます。クラスターをスケールインする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)ご覧ください。サポートチームに連絡して、正確な進捗状況を追跡することができます。スケーリング操作はデータの再バランス調整によってパフォーマンスに影響を与える可能性があるため、テストを開始する前に完了するまでお待ちください。
+コンソール上でクラスターをスケールアウトできます。クラスターをスケールインする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)をご覧ください。サポートチームに連絡して、正確な進捗状況を追跡することができます。スケーリング操作はデータの再バランス調整によってパフォーマンスに影響を与える可能性があるため、テストを開始する前に完了するまでお待ちください。
 
 ### 3. PoC クレジットを最大限に活用するにはどうすればよいですか? {#3-how-to-make-the-best-use-of-my-poc-credits}
 
-PoCの申請が承認されると、アカウントにクレジットが付与されます。通常、このクレジットは14日間のPoCに十分な量です。クレジットは、ノードの種類と数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)ご覧ください。
+PoCの申請が承認されると、アカウントにクレジットが付与されます。通常、このクレジットは14日間のPoCに十分な量です。クレジットは、ノードの種類と数に応じて、時間単位で課金されます。詳細については、 [TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md#credits)をご覧ください。
 
 PoC の合計クレジット数、利用可能なクレジット数、現在のクレジット使用量を確認するには、 TiDB Cloudコンソールの左上隅にあるコンボ ボックスを使用して対象組織に切り替え、左側のナビゲーション ペインで**[請求] を**クリックして、 **[クレジット]**タブをクリックします。
 

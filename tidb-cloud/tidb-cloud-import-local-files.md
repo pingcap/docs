@@ -58,7 +58,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
     >
     > TiDB Cloudの既存のテーブルに CSV ファイルをインポートし、ターゲット テーブルにソース ファイルよりも多くの列がある場合、状況に応じて余分な列が異なって処理されます。
     >
-    > -   追加列が主キーまたは一意キーでない場合、エラーは報告されません。代わりに、これらの追加列には[デフォルト値](/data-type-default-values.md)設定されます。
+    > -   追加列が主キーまたは一意キーでない場合、エラーは報告されません。代わりに、これらの追加列には[デフォルト値](/data-type-default-values.md)が設定されます。
     > -   追加列が主キーまたは一意キーであり、属性`auto_increment`または`auto_random`を持たない場合、エラーが報告されます。その場合は、以下のいずれかの戦略を選択することをお勧めします。
     >     -   これらの主キーまたは一意キーの列を含むソース ファイルを提供します。
     >     -   ターゲット テーブルの主キーと一意キーの列を、ソース ファイル内の既存の列と一致するように変更します。
@@ -72,13 +72,13 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 7.  必要に応じて CSV 構成を編集します。
 
-    **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)参照してください。
+    **「CSV設定の編集」を**クリックすると、バックスラッシュエスケープ、セパレーター、区切り文字を設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
 8.  **[インポートの開始]を**クリックします。
 
     **インポートタスクの詳細**ページでインポートの進行状況を確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決できます。
 
-9.  インポートタスクが完了したら、 **「SQLエディタでデータを**探索」をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)ご覧ください。
+9.  インポートタスクが完了したら、 **「SQLエディタでデータを探索」**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)をご覧ください。
 
 10. **[インポート]**ページで、 **[アクション**] 列の**[...** ] &gt; **[ビュー]**をクリックして、インポート タスクの詳細を確認できます。
 
@@ -88,7 +88,7 @@ summary: ローカル ファイルをTiDB Cloud Starter にインポートする
 
 いいえ。現在、インポート機能を使用する場合、CSV ファイルのすべての列を既存のテーブルにインポートすることしかできません。
 
-指定した列のみをインポートするには、MySQLクライアントを使用してTiDB Cloud Starter インスタンスに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)使用してインポートする列を指定します。例：
+指定した列のみをインポートするには、MySQLクライアントを使用してTiDB Cloud Starter インスタンスに接続し、 [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data)を使用してインポートする列を指定します。例：
 
 ```sql
 CREATE TABLE `import_test` (
@@ -108,7 +108,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 ### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 
-ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
+ファイルが250MiBより大きい場合は、 [TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)を使用してファイルをインポートできます。詳細については、 [`ticloud serverless import start`](/tidb-cloud/ticloud-import-start.md)を参照してください。
 
 あるいは、 `split [-l ${line_count}]`ユーティリティを使って複数の小さなファイルに分割することもできます（LinuxまたはmacOSのみ）。例えば、 `split -l 100000 tidb-01.csv small_files`を実行すると、 `tidb-01.csv`というファイルが行長`100000`で分割され、分割後のファイルの名前は`small_files${suffix}`になります。その後、これらの小さなファイルをTiDB Cloudに1つずつインポートできます。
 

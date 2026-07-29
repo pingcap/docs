@@ -26,8 +26,8 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 -   [tiproxy_servers](#tiproxy_servers) : TiProxyインスタンスの構成。この構成は、TiProxyコンポーネントがデプロイされるマシンを指定します。
 -   [kvcdc_servers](#kvcdc_servers) : インスタンス[TiKV-CDC](https://tikv.org/docs/7.1/concepts/explore-tikv-features/cdc/cdc/)の構成。この構成では、TiKV-CDCコンポーネントがデプロイされるマシンを指定します。
 -   [cdc_servers](#cdc_servers) : TiCDCインスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
--   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの設定。この設定は、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)番目のマイクロサービスを有効にするには、 [`global`](#global)のマイクロサービスで`pd_mode: "ms"`マイクロサービスを設定する必要があります）。
--   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの設定。この設定では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)有効にするには、 [`global`](#global)で`pd_mode: "ms"`設定する必要があります）。
+-   [tso_servers](/tiup/tiup-cluster-topology-reference.md#tso_servers) : TSOインスタンスの設定。この設定は、 `tso`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)を有効にするには、 [`global`](#global)で`pd_mode: "ms"`を設定する必要があります）。
+-   [スケジューリングサーバー](/tiup/tiup-cluster-topology-reference.md#scheduling_servers) : スケジューリングインスタンスの設定。この設定では、 `scheduling`マイクロサービスがデプロイされるマシンを指定します（ [PDマイクロサービス](/pd-microservices.md)を有効にするには、 [`global`](#global)で`pd_mode: "ms"`を設定する必要があります）。
 -   [監視サーバー](#monitoring_servers) : PrometheusとNGMonitoringがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaがデプロイされるマシンを指定します。
 -   [Alertmanagerサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerがデプロイされるマシンを指定します。
@@ -38,9 +38,9 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   `user` : デプロイされたクラスターを起動するために使用するユーザー。デフォルト値は`"tidb"`です。4 フィールドに指定されたユーザーが`<user>`マシン上に存在しない場合、このユーザーは自動的に作成されます。
 
--   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`番目のフィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
+-   `group` : ユーザーが所属するユーザーグループ。ユーザー作成時に指定されます。デフォルト値は`<user>`フィールドの値です。指定されたグループが存在しない場合は、自動的に作成されます。
 
--   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)使用されます。
+-   `systemd_mode` : クラスタのデプロイメント時にターゲットマシンで使用される`systemd`モードを指定します。デフォルト値は`system`です。 `user`に設定すると、ターゲットマシンでsudo権限は不要になり、 [TiUP no-sudo モード](/tiup/tiup-cluster-no-sudo-mode.md)が使用されます。
 
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。デフォルト値は`22`です。
 
@@ -131,23 +131,23 @@ monitored:
 
 `server_configs` 、サービスの設定と各コンポーネントの設定ファイルの生成に使用されます。2 `global`と同様に、このセクションの設定は、インスタンス内の同名の設定によって上書きできます。4 `server_configs`は主に以下のフィールドが含まれます。
 
--   `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)参照してください。
+-   `tidb` : TiDBサービス関連の設定。詳細な設定については[TiDB構成ファイル](/tidb-configuration-file.md)を参照してください。
 
--   `tikv` : TiKVサービス関連の設定。詳細な設定については[TiKV設定ファイル](/tikv-configuration-file.md)参照してください。
+-   `tikv` : TiKVサービス関連の設定。詳細な設定については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
--   `pd` : PDサービス関連の設定。詳細な設定については[PD設定ファイル](/pd-configuration-file.md)参照してください。
+-   `pd` : PDサービス関連の設定。詳細な設定については[PD設定ファイル](/pd-configuration-file.md)を参照してください。
 
--   `tiflash` : TiFlashサービス関連の設定。詳細な設定については[TiFlash設定ファイル](/tiflash/tiflash-configuration.md)参照してください。
+-   `tiflash` : TiFlashサービス関連の設定。詳細な設定については[TiFlash設定ファイル](/tiflash/tiflash-configuration.md)を参照してください。
 
 -   `tiflash_learner` : 各TiFlashノードには特別な TiKV が組み込まれています。この設定項目は、この特別な TiKV を設定するために使用されます。通常、この設定項目の内容を変更することは推奨されません。
 
--   `tiproxy` : TiProxyサービス関連の設定。詳細な設定については[TiProxy設定ファイル](/tiproxy/tiproxy-configuration.md)参照してください。
+-   `tiproxy` : TiProxyサービス関連の設定。詳細な設定については[TiProxy設定ファイル](/tiproxy/tiproxy-configuration.md)を参照してください。
 
--   `cdc` : TiCDCサービス関連の設定。詳細な設定については[TiCDCをデプロイ](/ticdc/deploy-ticdc.md)参照してください。
+-   `cdc` : TiCDCサービス関連の設定。詳細な設定については[TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
--   `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO構成ファイル](/tso-configuration-file.md)参照してください。
+-   `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO構成ファイル](/tso-configuration-file.md)を参照してください。
 
--   `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)参照してください。
+-   `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)を参照してください。
 
 `server_configs`構成の例は次のとおりです。
 
@@ -224,7 +224,7 @@ component_versions:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pd`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pd`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -278,7 +278,7 @@ pd_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tidb`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tidb`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -330,7 +330,7 @@ tidb_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tikv`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tikv`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -390,7 +390,7 @@ tikv_servers:
 
 -   `tmp_path` : TiFlash一時ファイルのストレージパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot;です。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -470,7 +470,7 @@ tiproxy_servers:
       labels: { zone: "zone2" }
 ```
 
-その他の構成例については、 [TiProxy 展開トポロジ](/tiproxy/tiproxy-deployment-topology.md)参照してください。
+その他の構成例については、 [TiProxy 展開トポロジ](/tiproxy/tiproxy-deployment-topology.md)を参照してください。
 
 ### `kvcdc_servers` {#kvcdc-servers}
 
@@ -492,7 +492,7 @@ tiproxy_servers:
 
 -   `tz` : TiKV-CDCサービスが使用するタイムゾーン。TiKV-CDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : TiKV-CDC が使用する構成ファイルのアドレス (オプション)。
 
@@ -540,7 +540,7 @@ kvcdc_servers:
 
 -   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -653,7 +653,7 @@ scheduling_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `storage_retention` : Prometheus監視データの保持期間。デフォルト値は`"30d"`です。
 
@@ -673,7 +673,7 @@ scheduling_servers:
 
 -   `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
--   `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメータに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)参照してください。
+-   `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメータに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)を参照してください。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -734,7 +734,7 @@ monitoring_servers:
 
 -   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
--   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)参照してください。
+-   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)を参照してください。
 
 > **Note:**
 >
@@ -777,7 +777,7 @@ grafana_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
 
 -   `config_file` : クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに転送されるローカル ファイルを指定します。
 
@@ -787,7 +787,7 @@ grafana_servers:
 
 -   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
--   `listen_host` : Alertmanager にプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)参照してください。
+-   `listen_host` : Alertmanager にプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)を参照してください。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 

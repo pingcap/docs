@@ -130,7 +130,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   楽観的トランザクションで多くの書き込み競合が発生する場合、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないようにする [＃7604](https://github.com/tikv/tikv/pull/7604)
     -   ロック競合の負荷が高いワークロードで、トランザクションの不要なウェイクアップによって無駄な再試行が発生し、パフォーマンスが低下する問題を修正しました[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正[＃7518](https://github.com/tikv/tikv/pull/7518)
-    -   ラーナー削除してもラーナーが削除されない問題を修正 [＃7518](https://github.com/tikv/tikv/pull/7518)
+    -   ラーナーを削除してもラーナーが削除されない問題を修正 [＃7518](https://github.com/tikv/tikv/pull/7518)
     -   raft-rs でフォロワーの読み取りによってpanicが発生する可能性がある問題を修正しました [＃7408](https://github.com/tikv/tikv/pull/7408)
     -   `group by constant`エラーによりSQL操作が失敗する可能性があるバグを修正しました [＃7383](https://github.com/tikv/tikv/pull/7383)
     -   対応するプライマリロックが悲観的ロックの場合に楽観的ロックが読み取りをブロックする可能性がある問題を修正[＃7328](https://github.com/tikv/tikv/pull/7328)

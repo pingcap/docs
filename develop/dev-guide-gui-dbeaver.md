@@ -136,7 +136,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  DBeaverを起動し、左上隅の**「新しいデータベース接続」**をクリックします。 **「データベースへの接続**」ダイアログで、リストから**TiDBを**選択し、 **「次へ」**をクリックします。
 
@@ -202,8 +202,8 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 ## 次のステップ {#next-steps}
 
--   DBeaver の使用法の詳細については[DBeaverのドキュメント](https://github.com/dbeaver/dbeaver/wiki)参照してください。
--   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
+-   DBeaver の使用法の詳細については[DBeaverのドキュメント](https://github.com/dbeaver/dbeaver/wiki)を参照してください。
+-   [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}

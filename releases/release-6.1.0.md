@@ -111,7 +111,7 @@ TiDB バージョン: 6.1.0
 
 -   非トランザクションDMLステートメントをサポートする
 
-    大規模データ処理のシナリオでは、大規模なトランザクションを伴う単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。TiDB v6.1.0以降、 `DELETE` SQL文を複数のSQL文に分割してバッチ処理する構文がサポートされています。分割文はトランザクションの原子性と独立性を損なう可能性がありますが、クラスタの安定性を大幅に向上させます。詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)参照してください。
+    大規模データ処理のシナリオでは、大規模なトランザクションを伴う単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。TiDB v6.1.0以降、 `DELETE` SQL文を複数のSQL文に分割してバッチ処理する構文がサポートされています。分割文はトランザクションの原子性と独立性を損なう可能性がありますが、クラスタの安定性を大幅に向上させます。詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)を参照してください。
 
     [User document](/non-transactional-dml.md)
 
@@ -280,7 +280,7 @@ TiDB バージョン: 6.1.0
 | TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー値ストアとして機能するときに TiKV によって使用されるストレージ形式とインターフェース バージョン。                                                                              |
 | PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待機時間を制御します。                                                                                                                  |
 | TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                             | 新しく追加された | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか。                                                                                                  |
-| TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細については[`kafka`でシンクURIを設定する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)参照してください。      |
+| TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細については[`kafka`でシンクURIを設定する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を参照してください。      |
 | TiCDC          | [`avro-decimal-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)<br/>[`avro-bigint-unsigned-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)      | 新しく追加された | Determines the output details of Avro format.                                                                                                 |
 | TiCDC          | [`dispatchers.topic`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                             | 新しく追加された | TiCDC が増分データをさまざまな Kafka トピックに送信する方法を制御します。                                                                                                   |
 | TiCDC          | [`dispatchers.partition`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                         | 新しく追加された | `dispatchers.partition`は`dispatchers.dispatcher`の別名です。TiCDC が増分データを Kafka パーティションに送信する方法を制御します。                                               |
@@ -295,7 +295,7 @@ TiDB バージョン: 6.1.0
 
 -   プリペアドプランキャッシュをデフォルトで有効にする
 
-    新しいクラスターでは、 プリペアドプランキャッシュがデフォルトで有効化され、リクエストの`Prepare` `Execute`実行プランをキャッシュします。以降の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、設定ファイルから設定を継承します。新しいクラスターは新しいデフォルト値を使用するため、 プリペアドプランキャッシュ はデフォルトで有効化され、各セッションで最大100プランをキャッシュできます ( `capacity=100` )。この機能のメモリ消費量については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)参照してください。
+    新しいクラスターでは、 プリペアドプランキャッシュがデフォルトで有効化され、`Prepare` / `Execute` リクエストの実行プランをキャッシュします。以降の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、設定ファイルから設定を継承します。新しいクラスターは新しいデフォルト値を使用するため、 プリペアドプランキャッシュ はデフォルトで有効化され、各セッションで最大100プランをキャッシュできます ( `capacity=100` )。この機能のメモリ消費量については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)を参照してください。
 
 -   TiDB v6.1.0より前のバージョンでは、 `SHOW ANALYZE STATUS`インスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後に消去されます。TiDB v6.1.0以降では、 `SHOW ANALYZE STATUS`クラスタレベルのタスクを示し、タスクレコードは再起動後も保持されます。`tidb_analyze_version = 2`場合、 `Job_info`列に`analyze option`情報が追加されます。
 

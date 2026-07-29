@@ -97,11 +97,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### 一括削除を使用する {#use-bulk-delete}
 
-大量のデータを削除する場合は[一括削除](/develop/dev-guide-delete-data.md#bulk-delete)使用することをお勧めします。
+大量のデータを削除する場合は[一括削除](/develop/dev-guide-delete-data.md#bulk-delete)を使用することをお勧めします。
 
 ### 一括更新を使用する {#use-bulk-update}
 
-大量のデータを更新する場合は[一括更新](/develop/dev-guide-update-data.md#bulk-update)使用することをお勧めします。
+大量のデータを更新する場合は[一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
 
 ### テーブルデータ全体を取得するには、 <code>DELETE</code>ではなく<code>TRUNCATE</code>使用します。 {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
@@ -152,7 +152,7 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## トランザクションの競合 {#transaction-conflicts}
 
-トランザクションの競合を見つけて解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)参照してください。
+トランザクションの競合を見つけて解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 ## TiDB を使用したJavaアプリケーション開発のベスト プラクティス {#best-practices-for-developing-java-applications-with-tidb}
 

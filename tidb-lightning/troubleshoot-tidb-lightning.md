@@ -108,7 +108,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
 ```
 
-その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)参照してください。
+その他のオプションについては、セクション[チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)を参照してください。
 
 ### `cannot guess encoding for input file, please convert to UTF-8 manually` {#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually}
 
@@ -174,11 +174,11 @@ TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB ク�
 
 ### `Unknown character set` {#unknown-character-set}
 
-TiDBはMySQLのすべての文字セットをサポートしていません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)使用して下流で事前にテーブルスキーマを作成してください。
+TiDBはMySQLのすべての文字セットをサポートしているわけではありません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)を使用して下流で事前にテーブルスキーマを作成してください。
 
 ### `invalid compression type ...` {#invalid-compression-type}
 
--   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスク`zstd`エラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)参照してください。
+-   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 
 > **Note:**
 >

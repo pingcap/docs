@@ -9,7 +9,7 @@ TiDB は、MySQL 8.0 で利用可能な[文字列関数](https://dev.mysql.com/d
 
 <CustomContent platform="tidb">
 
-Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB の機能と構文の比較](/oracle-functions-to-tidb.md)参照してください。
+Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB の機能と構文の比較](/oracle-functions-to-tidb.md)を参照してください。
 
 </CustomContent>
 

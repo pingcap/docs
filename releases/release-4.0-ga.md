@@ -36,7 +36,7 @@ TiDB バージョン: 4.0.0
     -   TiDBサーバーが使用する一時ディスク領域を制限するための`tmp-storage-quota`構成項目を追加します [＃15700](https://github.com/pingcap/tidb/pull/15700)
     -   テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[＃17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントサポートする [＃17313](https://github.com/pingcap/tidb/pull/17313)
-    -   `Distinct`関数使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
+    -   `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [＃17240](https://github.com/pingcap/tidb/pull/17240)
     -   ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [＃17310](https://github.com/pingcap/tidb/pull/17310)
     -   パーティションテーブル[＃17392](https://github.com/pingcap/tidb/pull/17392) で`admin check index` 、 `admin cleanup index` 、 `admin recover index`サポート [＃17317](https://github.com/pingcap/tidb/pull/17317) [＃17405](https://github.com/pingcap/tidb/pull/17405)
     -   `in`式範囲パーティションプルーニングをサポート [＃17320](https://github.com/pingcap/tidb/pull/17320)

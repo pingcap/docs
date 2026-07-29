@@ -30,7 +30,7 @@ rules = ['*.*', '!test.*']
 -   `rules = ['scm1.tidb_*']`
     -   `scm1`データベース内の、名前が`tidb_`で始まるすべてのテーブルを複製します。
 
-詳細については[テーブルフィルタ構文](/table-filter.md#syntax)参照してください。
+詳細については[テーブルフィルタ構文](/table-filter.md#syntax)を参照してください。
 
 ## イベントフィルタールール {#event-filter-rules}
 

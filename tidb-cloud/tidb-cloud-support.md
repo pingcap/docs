@@ -5,7 +5,7 @@ summary: TiDB Cloudのサポート チームに連絡する方法について説
 
 # TiDB Cloudサポート {#tidb-cloud-support}
 
-TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた段階的なサポートプランを提供しています。サポートプランの詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
+TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた段階的なサポートプランを提供しています。サポートプランの詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
 ## サポートチャンネル {#support-channels}
 
@@ -16,9 +16,9 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
     TiDB Cloudサポート チームからの直接支援が必要な問題については、このチケット ベースのチャネルを使用してください。
 
     -   [請求とアカウントチケット](/tidb-cloud/tidb-cloud-support.md#create-an-account-or-billing-support-ticket)はすべてのTiDB Cloudユーザーが利用できます。
-    -   有料サポートプランでは、応答時間保証付きの[テクニカルサポートチケット](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket)ご利用いただけます。有料サポートプランにご加入されていない場合は、技術的なご質問についてはコミュニティチャンネルをご利用ください。
+    -   有料サポートプランでは、応答時間保証付きの[テクニカルサポートチケット](/tidb-cloud/tidb-cloud-support.md#create-a-technical-support-ticket)をご利用いただけます。有料サポートプランにご加入されていない場合は、技術的なご質問についてはコミュニティチャンネルをご利用ください。
 
-    **Enterprise**および**Premium**サポートプランには、以下の拡張機能が含まれています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
+    **Enterprise**および**Premium**サポートプランには、以下の拡張機能が含まれています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
     -   定義されたSLAによる応答時間の短縮
     -   IMベースのサポートによるリアルタイムコミュニケーション
@@ -35,7 +35,7 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
 
 ## PingCAPヘルプセンターにアクセスする {#access-pingcap-help-center}
 
-[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals) 、 TiDB Cloudユーザーがサポート サービスにアクセスし、サポート チケットを管理するための中心的なハブです。
+[PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)は、 TiDB Cloudユーザーがサポート サービスにアクセスし、サポート チケットを管理するための中心的なハブです。
 
 PingCAP ヘルプ センターには、 [https://tidb.support.pingcap.com/servicedesk/customer/portals](https://tidb.support.pingcap.com/servicedesk/customer/portals)から直接アクセスすることも、次の[TiDB Cloudコンソール](https://tidbcloud.com/)の方法でアクセスすることもできます。
 
@@ -93,7 +93,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
         | 重大度   | 説明                                                      |
         | ----- | ------------------------------------------------------- |
         | S1    | 本番環境機能の完全な喪失                                            |
-        | シーズン2 | 本番環境での運用に大きな影響                                          |
+        | S2 | 本番環境での運用に大きな影響                                          |
         | S3    | 本番または非運用環境における重要でないデータベース使用の問題                          |
         | S4    | 特定の機能の動作や設定方法に関する一般的な質問。ビジネスへの影響は最小限で、妥当な期間であれば許容できる問題。 |
 
@@ -126,11 +126,11 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     1.  **開発者向け**または**Enterprise向けの**ペインで**「アップグレード」を**クリックします。**開発者向けプランへのアップグレード**または**Enterprise向けプランへのアップグレード**ページが表示されます。
 
-    2.  該当するサポートサービス情報はページ上でご確認ください。各サポートプランの詳細につきましては、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
+    2.  該当するサポートサービス情報はページ上でご確認ください。各サポートプランの詳細につきましては、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
     3.  **「クレジットカードを追加してアップグレード」**をクリックし、**クレジットカードの**詳細を入力します。
 
-        課金の詳細については、 [TiDB Cloud支払い方法](/tidb-cloud/tidb-cloud-billing.md#payment-method)参照してください。
+        課金の詳細については、 [TiDB Cloud支払い方法](/tidb-cloud/tidb-cloud-billing.md#payment-method)を参照してください。
 
     4.  ページの右下にある**「カードを保存」**をクリックします。
 
@@ -141,7 +141,7 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     プランを**Premium**にアップグレードするには:
 
-    1.  **Premium**パネルの「営業部に**問い合わせる」**をクリックします。**お問い合わせ**ページが表示されます。
+    1.  **Premium**パネルの**「営業部に問い合わせる」**をクリックします。**お問い合わせ**ページが表示されます。
     2.  こちらのページに連絡先情報を入力して送信してください。サポートチームからご連絡し、サブスクリプションに関するサポートをさせていただきます。
 
     </div>

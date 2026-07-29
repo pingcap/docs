@@ -35,11 +35,11 @@ summary: オペレーティング システムのパラメータを調整する�
 
 ### パフォーマンス {#perf}
 
-perf は、Linux カーネルが提供する重要なパフォーマンス解析ツールです。ハードウェアレベル（CPU/PMU、パフォーマンス監視ユニット）の機能とソフトウェアレベル（ソフトウェアカウンタ、トレースポイント）の機能の両方をカバーしています。詳細な使用方法については、 [perf の例](http://www.brendangregg.com/perf.html#Background)参照してください。
+perf は、Linux カーネルが提供する重要なパフォーマンス解析ツールです。ハードウェアレベル（CPU/PMU、パフォーマンス監視ユニット）の機能とソフトウェアレベル（ソフトウェアカウンタ、トレースポイント）の機能の両方をカバーしています。詳細な使用方法については、 [perf の例](http://www.brendangregg.com/perf.html#Background)を参照してください。
 
 ### BCC/bpftrace {#bcc-bpftrace}
 
-CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポートしています。そのため、 [60秒で](#in-60-seconds)の結果に基づいて適切なツールを選択し、詳細な分析を行うことができます。perf/ftraceと比較すると、BPFはプログラマビリティが高く、パフォーマンスオーバーヘッドが少ないという利点があります。kprobeと比較すると、BPFはセキュリティが高く、本番環境に適しています。BCCツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)参照してください。
+CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポートしています。そのため、 [60秒で](#in-60-seconds)の結果に基づいて適切なツールを選択し、詳細な分析を行うことができます。perf/ftraceと比較すると、BPFはプログラマビリティが高く、パフォーマンスオーバーヘッドが少ないという利点があります。kprobeと比較すると、BPFはセキュリティが高く、本番環境に適しています。BCCツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
 ## パフォーマンスチューニング {#performance-tuning}
 
@@ -56,11 +56,11 @@ cpufreq は、CPU周波数を動的に調整するモジュールです。5つ�
     -   割り込みのバランスをとる必要があるデバイスを特定します。CentOS 7.5以降では、 `be2iscsi`ドライバとNVMe設定を使用するデバイスなど、特定のデバイスとそのドライバに対して、システムが最適な割り込みアフィニティを自動的に設定します。これらのデバイスに対しては、手動で割り込みアフィニティを設定することはできなくなりました。
     -   その他のデバイスについては、チップのマニュアルを参照して、これらのデバイスが割り込み分散をサポートしているかどうかを確認してください。
         -   そうでない場合、これらのデバイスのすべての割り込みは同じ CPU にルーティングされ、変更できなくなります。
-        -   該当する場合は、 `smp_affinity`マスクを計算し、対応する設定ファイルを設定します。詳細については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt)参照してください。
+        -   該当する場合は、 `smp_affinity`マスクを計算し、対応する設定ファイルを設定します。詳細については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/IRQ-affinity.txt)を参照してください。
 
 ### NUMA CPU バインディング {#numa-cpu-binding}
 
-NUMA（Non-Uniform Memory Access）ノードをまたがるメモリを可能な限り回避するには、スレッド／プロセスを特定のCPUコアにバインドし、そのCPUアフィニティを設定することができます。通常のプログラムの場合、CPUバインドには`numactl`コマンドを使用できます。詳細な使用方法については、Linuxのマニュアルページを参照してください。ネットワークインターフェースカード（NIC）の割り込みについては、 [ネットワークを調整する](#network-tuning)参照してください。
+NUMA（Non-Uniform Memory Access）ノードをまたがるメモリを可能な限り回避するには、スレッド／プロセスを特定のCPUコアにバインドし、そのCPUアフィニティを設定することができます。通常のプログラムの場合、CPUバインドには`numactl`コマンドを使用できます。詳細な使用方法については、Linuxのマニュアルページを参照してください。ネットワークインターフェースカード（NIC）の割り込みについては、 [ネットワークを調整する](#network-tuning)を参照してください。
 
 ### メモリ - 透過的巨大ページ (THP) {#memory-transparent-huge-page-thp}
 
@@ -111,7 +111,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 -   NICハードウェアキャッシュ：ハードウェアレベルでパケットロスを正しく監視するには、コマンド`ethtool -S ${NIC_DEV_NAME}`を使用してフィールド`drops`監視します。パケットロスが発生した場合、ハード/ソフト割り込みの処理速度がNICの受信速度に追いつかない可能性があります。受信バッファサイズが上限を下回っている場合は、パケットロスを回避するためにRXバッファを増やすことも検討できます。クエリコマンドは`ethtool -g ${NIC_DEV_NAME}` 、変更コマンドは`ethtool -G ${NIC_DEV_NAME}`です。
 
--   ハードウェア割り込み：NICが受信側スケーリング（RSS、マルチNIC受信とも呼ばれる）機能をサポートしている場合は、 `/proc/interrupts` NIC割り込みを確認してください。割り込みが不均等な場合は、 [CPU—周波数スケーリング](#cpufrequency-scaling) 、 [CPU—割り込み親和性](#cpuinterrupt-affinity) 、および[NUMA CPU バインディング](#numa-cpu-binding)参照してください。NICがRSSをサポートしていない場合、またはRSSの数が物理CPUコア数よりも大幅に少ない場合は、受信パケットステアリング（RPS、RSSのソフトウェア実装とみなすことができます）と、RPSの拡張である受信フローステアリング（RFS）を設定してください。詳細な設定については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)参照してください。
+-   ハードウェア割り込み：NICが受信側スケーリング（RSS、マルチNIC受信とも呼ばれる）機能をサポートしている場合は、 `/proc/interrupts` NIC割り込みを確認してください。割り込みが不均等な場合は、 [CPU—周波数スケーリング](#cpufrequency-scaling) 、 [CPU—割り込み親和性](#cpuinterrupt-affinity) 、および[NUMA CPU バインディング](#numa-cpu-binding)を参照してください。NICがRSSをサポートしていない場合、またはRSSの数が物理CPUコア数よりも大幅に少ない場合は、受信パケットステアリング（RPS、RSSのソフトウェア実装とみなすことができます）と、RPSの拡張である受信フローステアリング（RFS）を設定してください。詳細な設定については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)を参照してください。
 
 -   ソフトウェア割り込み： `/proc/net/softnet_stat`の監視を監視します。3列目以外の列の値が増加している場合は、 `softirq`の`net.core.netdev_budget`または`net.core.dev_weight`の値を適切に調整して、CPU 時間を増やします。さらに、CPU 使用率も確認し、どのタスクが頻繁に CPU を使用しているか、そしてそれらを最適化できるかどうかを特定する必要があります。
 

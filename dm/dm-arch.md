@@ -32,7 +32,7 @@ DM-worker は特定のデータ移行タスクを実行します。
 -   データ移行サブタスクの操作のオーケストレーション
 -   データ移行サブタスクの実行状態の監視
 
-DM-workerの詳細については[DMワーカー紹介](/dm/dm-worker-intro.md)参照してください。
+DM-workerの詳細については[DMワーカー紹介](/dm/dm-worker-intro.md)を参照してください。
 
 ### dmctl {#dmctl}
 

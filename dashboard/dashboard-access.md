@@ -9,7 +9,7 @@ TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:
 
 > **Note:**
 >
-> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB DashboardをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)参照してください。
+> TiDB v6.5.0以降およびTiDB Operator v1.4.0以降では、Kubernetes上にTiDB Dashboardを独立したPodとしてデプロイできます。TiDB Operatorを使用すると、このPodのIPアドレスにアクセスしてTiDB Dashboardを起動できます。詳細は[TiDB DashboardをTiDB Operatorで独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 ## 複数のPDインスタンスがデプロイされている場合にTiDB Dashboardにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 

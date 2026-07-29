@@ -10,7 +10,7 @@ summary: TiCDC が UPDATE` イベントを分割するかどうかに関する�
 v6.5.10、v7.1.6、v7.5.2、v8.1.1、v8.2.0以降では、MySQLシンクを使用する場合、テーブルのレプリケーション要求を受信したTiCDCノードは、下流へのレプリケーションを開始する前に、PDから現在のタイムスタンプ`thresholdTS`を取得します。このタイムスタンプの値に基づいて、TiCDCは`UPDATE`イベントを分割するかどうかを決定します。
 
 -   1 つまたは複数の`UPDATE`変更を含むトランザクションの場合、トランザクション`commitTS` `thresholdTS`未満であれば、TiCDC は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割してから、それらを Sorter モジュールに書き込みます。
--   トランザクション`commitTS`が`thresholdTS`以上であるイベントが`UPDATE`ある場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)参照してください。
+-   トランザクション`commitTS`が`thresholdTS`以上である`UPDATE`イベントの場合、TiCDC はそれらを分割しません。詳細については、GitHub の問題[＃10918](https://github.com/pingcap/tiflow/issues/10918)を参照してください。
 
 > **Note:**
 >

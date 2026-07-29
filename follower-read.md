@@ -9,7 +9,7 @@ TiDBでは、高可用性とデータの安全性を確保するために、TiKV
 
 <CustomContent platform="tidb">
 
-Follower Read を実行する際、TiDBはトポロジ情報に基づいて適切なレプリカを選択します。具体的には、TiDBは`zone`ラベルを使用してローカルレプリカを識別します。つまり、TiDBノードの`zone`ラベルがターゲットTiKVノードの3ラベルと同じ場合、TiDBはそのレプリカをローカルレプリカと見なします。詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)参照してください。
+Follower Read を実行する際、TiDBはトポロジ情報に基づいて適切なレプリカを選択します。具体的には、TiDBは`zone`ラベルを使用してローカルレプリカを識別します。つまり、TiDBノードの`zone`ラベルがターゲットTiKVノードの3ラベルと同じ場合、TiDBはそのレプリカをローカルレプリカと見なします。詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 </CustomContent>
 

@@ -75,7 +75,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 `WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`は、サンプルを収集する2つの異なるアルゴリズムに対応しています。
 
-詳細な説明については、[ヒストグラム](#histogram)、[トップN](#top-n) 、 [CMSketch](#count-min-sketch) (Count-Min Sketch) を参照してください。 `SAMPLES` / `SAMPLERATE`については、[収集パフォーマンスを向上させる](#improve-collection-performance)ください。
+詳細な説明については、[ヒストグラム](#histogram)、[トップN](#top-n) 、 [CMSketch](#count-min-sketch) (Count-Min Sketch) を参照してください。 `SAMPLES` / `SAMPLERATE`については、[収集パフォーマンスを向上させる](#improve-collection-performance)を参照してください。
 
 再利用を容易にするためにオプションを永続化する方法については、 [`ANALYZE`構成を永続化する](#persist-analyze-configurations)を参照してください。
 
@@ -136,7 +136,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 TiDB が SQL ステートメントを実行する際、オプティマイザはほとんどの場合、一部の列のみの統計情報を使用します。たとえば、 `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`句に現れる列などです。これらの列は述語列と呼ばれます。
 
-テーブルに多数の列がある場合、すべての列の統計情報を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、オプティマイザで使用する特定の列（選択した列）または`PREDICATE COLUMNS`のみの統計情報を収集できます。列のサブセットの列リストを将来再利用するために保持するには、[列構成を保持する](#persist-column-configurations)参照してください。
+テーブルに多数の列がある場合、すべての列の統計情報を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するには、オプティマイザで使用する特定の列（選択した列）または`PREDICATE COLUMNS`のみの統計情報を収集できます。列のサブセットの列リストを将来再利用するために保持するには、[列構成を保持する](#persist-column-configurations)を参照してください。
 
 > **Note:**
 >
@@ -228,7 +228,7 @@ TiDB は、パーティション分割されたテーブルに、パーティシ
 
 TiDBは、統計情報の収集パフォーマンスを向上させるための2つのオプションを提供します。
 
--   列のサブセットに関する統計を収集します。[いくつかの列に関する統計情報を収集する](#collect-statistics-on-some-columns)ご覧ください。
+-   列のサブセットに関する統計を収集します。[いくつかの列に関する統計情報を収集する](#collect-statistics-on-some-columns)をご覧ください。
 -   サンプリング。
 
 ### 統計サンプリング {#statistics-sampling}
@@ -387,7 +387,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 すべてのテーブル、インデックス、パーティションで同じ統計バージョンを使用することをお勧めします。クラスタでまだ統計バージョン1を使用している場合は、できるだけ早く統計バージョン2に移行してください。テーブル、インデックス、パーティションなどのオブジェクトに対してバージョン2の統計が収集されるまで、TiDBはそのオブジェクトに対して既存のバージョン1の統計を引き続き使用します。
 
-移行の主な理由の1つは、Count-Min Sketchでハッシュ衝突が発生する可能性があるため、バージョン1ではequal/IN述語の推定値が不正確になる可能性があることです。詳細については、[カウントミニスケッチ](#count-min-sketch)参照してください。この問題を回避するには、 `tidb_analyze_version = 2`を設定し、すべてのオブジェクトで`ANALYZE`を再実行してください。
+移行の主な理由の1つは、Count-Min Sketchでハッシュ衝突が発生する可能性があるため、バージョン1ではequal/IN述語の推定値が不正確になる可能性があることです。詳細については、[カウントミニスケッチ](#count-min-sketch)を参照してください。この問題を回避するには、 `tidb_analyze_version = 2`を設定し、すべてのオブジェクトで`ANALYZE`を再実行してください。
 
 統計バージョン1から統計バージョン2への移行準備として、 `ANALYZE`を準備します。
 
@@ -735,7 +735,7 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
     </CustomContent>
 
-`KILL`ステートメントの詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)参照してください。
+`KILL`ステートメントの詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### 制御<code>ANALYZE</code>並行性 {#control-code-analyze-code-concurrency}
 

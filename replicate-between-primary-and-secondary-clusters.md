@@ -104,7 +104,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
 >
 > -   `BACKUP`および`RESTORE` SQL ステートメントは実験的です。本番環境での使用は推奨されません。予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   本番のクラスタでは、GCを無効にした状態でバックアップを実行すると、クラスタのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるため、データのバックアップはピーク時以外の時間帯に行い、RATE_LIMITを適切な値に設定することをお勧めします。
-> -   アップストリームとダウンストリームのクラスタのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#some-tips)確認してください。このドキュメントでは、アップストリームとダウンストリームのクラスタのバージョンが同じであることを前提としています。
+> -   アップストリームとダウンストリームのクラスタのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#some-tips)を確認してください。このドキュメントでは、アップストリームとダウンストリームのクラスタのバージョンが同じであることを前提としています。
 
 1.  GCを無効にする。
 
@@ -171,7 +171,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の設定方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)参照してください。このドキュメントでは、構成は次のようになります。
+    sync-diff-inspector の設定方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
 
     ```shell
     # Diff Configuration.
@@ -207,7 +207,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
 
 1.  TiCDCをデプロイ。
 
-    データの完全移行が完了したら、増分データを複製するために TiCDC をデプロイして構成します。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)デプロイしてください。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが起動されているため、TiCDC のデプロイ手順は省略し、changefeed の構成に進みます。
+    データの完全移行が完了したら、増分データを複製するために TiCDC をデプロイして構成します。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の手順に従ってデプロイしてください。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが起動されているため、TiCDC のデプロイ手順は省略し、changefeed の構成に進みます。
 
 2.  変更フィードを作成します。
 
@@ -233,11 +233,11 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
     -   `--sink-uri` : ダウンストリームクラスタのURI
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ2. 全データを移行する](#step-2-migrate-full-data))
 
-    チェンジフィード構成の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)参照してください。
+    チェンジフィード構成の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 3.  GCを有効にする。
 
-    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細については、 [TiCDCのガベージコレクション（GC）セーフポイントの完全な動作とはどのようなものですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)参照してください。
+    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細については、 [TiCDCのガベージコレクション（GC）セーフポイントの完全な動作とはどのようなものですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GCを有効にするには、次のコマンドを実行してください。
 

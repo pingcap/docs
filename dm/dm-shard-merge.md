@@ -27,4 +27,4 @@ shard-mode: "pessimistic"
 
 ## シャーディングDDLロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-異常なシナリオでは、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)実行する必要があります。
+異常なシナリオでは、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を実行する必要があります。

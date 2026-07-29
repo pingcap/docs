@@ -141,7 +141,7 @@ trim-last-separator = false
 
 *シングルクォーテーションで囲まれた*文字列 ( `'…'` ) を使用すると、バックスラッシュによるエスケープを抑制できます。例えば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) と文字`n`の2文字の文字列を終端として使用することを意味します。
 
-詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)参照してください。
+詳細については[TOML v1.0.0仕様](https://toml.io/en/v1.0.0#string)を参照してください。
 
 #### `separator` {#separator}
 
@@ -401,7 +401,7 @@ type = '$3'
 
 ## Amazon S3からデータをインポートする {#import-data-from-amazon-s3}
 
-以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)参照してください。
+以下の例は、TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。詳細なパラメータ設定については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 -   ローカルに設定された権限を使用して S3 データにアクセスします。
 

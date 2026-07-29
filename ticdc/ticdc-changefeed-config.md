@@ -82,7 +82,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ### `bdr-mode` {#bdr-mode}
 
--   TiCDC を使用して BDR (双方向レプリケーション) クラスターをセットアップするには、このパラメーターを`true`に変更し、TiDB クラスターを BDR モードに設定します。詳細については、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication)参照してください。
+-   TiCDC を使用して BDR (双方向レプリケーション) クラスターをセットアップするには、このパラメーターを`true`に変更し、TiDB クラスターを BDR モードに設定します。詳細については、 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md#bidirectional-replication)を参照してください。
 -   デフォルト値： `false` 。双方向レプリケーション（BDR）モードが有効になっていないことを示します。
 
 ### `changefeed-error-stuck-duration` {#changefeed-error-stuck-duration}
@@ -254,7 +254,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `date-separator` {#date-separator}
 
--   ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
+-   ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
 -   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値: `day` 、ファイルを日付ごとに分割することを意味します。
 -   値のオプション: `none` 、 `year` 、 `month` 、 `day`
@@ -264,7 +264,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   パーティションを区切り文字として使用するかどうかを制御します。
 -   この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 -   デフォルト値： `true` 。これは、テーブル内のパーティションが別々のディレクトリに保存されることを意味します。
--   この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)参照してください。
+-   この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
 
 #### `debezium-disable-schema` {#debezium-disable-schema}
 
@@ -472,7 +472,7 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### `output-raw-change-event` {#output-raw-change-event}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)を参照してください。
 -   デフォルト値: `false`
 
 ### sink.kafka-config.glue-schema-registry-config {#sink-kafka-config-glue-schema-registry-config}
@@ -487,7 +487,7 @@ secret-access-key="xxxx"
 token="xxxx"
 ```
 
-詳細については、 [TiCDCをAWS Glueスキーマレジストリと統合する](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry)参照してください。
+詳細については、 [TiCDCをAWS Glueスキーマレジストリと統合する](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-aws-glue-schema-registry)を参照してください。
 
 ### sink.pulsar-config {#sink-pulsar-config}
 
@@ -584,7 +584,7 @@ token="xxxx"
 
 #### `output-raw-change-event` {#output-raw-change-event}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)を参照してください。
 -   デフォルト値: `false`
 
 ### sink.cloud-storage-config {#sink-cloud-storage-config}
@@ -623,5 +623,5 @@ token="xxxx"
 
 #### `output-raw-change-event` {#output-raw-change-event}
 
--   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)参照してください。
+-   元のデータ変更イベントを出力するかどうかを制御します。詳細については、 [主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御します](/ticdc/ticdc-split-update-behavior.md#control-whether-to-split-primary-or-unique-key-update-events)を参照してください。
 -   デフォルト値: `false`

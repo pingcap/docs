@@ -83,7 +83,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
             > **Note:**
             >
-            > Windows または GitHub コードスペースで実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB Cloud Starterルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)参照してください。
+            > Windows または GitHub Codespacesで実行している場合は、 **SSL** を空白のままにすることができます。デフォルトでは、SQLTools は Let's Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB Cloud Starterルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
 
     ![VS Code SQLTools: configure connection settings for TiDB Cloud Starter](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
@@ -150,7 +150,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、 **[IP アクセス リストの設定] をクリックするか、「IP アクセス リストを設定する」**の手順に従って[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)。
 
-    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)参照してください。
+    TiDB Cloud Dedicated は、**パブリック**接続タイプに加えて、**プライベート エンドポイント**および**VPC ピアリング**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4.  VS Codeを起動し、ナビゲーションペインで**SQLTools**拡張機能を選択します。 **[接続]**セクションで**[新しい接続を追加]**をクリックし、データベースドライバとして**TiDB**を選択します。
 
@@ -230,7 +230,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 
 ## 次のステップ {#next-steps}
 
--   Visual Studio Code の使用法の詳細については[Visual Studio Code のドキュメント](https://code.visualstudio.com/docs)参照してください。
+-   Visual Studio Code の使用法の詳細については[Visual Studio Code のドキュメント](https://code.visualstudio.com/docs)を参照してください。
 -   VS Code SQLTools 拡張機能の使用法について詳しくは、SQLTools の[ドキュメント](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)および[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)ご覧ください。
 -   [開発者ガイド](https://docs.pingcap.com/developer/)[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、「SQL パフォーマンス最適化」などの章[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)読んで、TiDB アプリケーション [トランザクション](/develop/dev-guide-transaction-overview.md)[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)。
 -   プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。

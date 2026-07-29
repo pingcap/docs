@@ -238,7 +238,7 @@ summary: このドキュメントでは、TiDB Cloudから Amazon S3、Google Cl
     >
     > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
-6.  **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)参照してください。
+6.  **[イベントの分割]**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 ## ステップ3．仕様の設定 {#step-3-configure-specification}
 

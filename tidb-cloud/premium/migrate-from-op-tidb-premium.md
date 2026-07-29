@@ -63,7 +63,7 @@ tiup update --self && tiup update dumpling
 
 1.  [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2.  対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)参照してください。 。
+2.  対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。 。
 
 #### Dumplingの権限を設定する {#configure-privileges-for-dumpling}
 
@@ -81,7 +81,7 @@ tiup update --self && tiup update dumpling
 
 1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、TiDB Self-Managed クラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
-2.  TiCDCコンポーネントをTiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
+2.  TiCDCコンポーネントをTiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
@@ -137,7 +137,7 @@ SELECT @@global.tidb_gc_enable;
 
 #### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定します {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
-AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)参照してください。
+AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
 1.  AWSアカウントIDまたはアカウントエイリアス、 IAMユーザー名、およびパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインしてください。
 
@@ -160,7 +160,7 @@ Dumplingを使用して、アップストリームのTiDB Self-Managedクラス�
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)参照してください。
+2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
     以下のスクリーンショットは、S3バケットURI情報を取得する方法を示しています。
 
@@ -282,7 +282,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
     2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
     3.  **ネットワーク設定**ページで、 **「IPアドレスの追加」**をクリックします。
-    4.  表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **[IP アドレス]**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **[確認]**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)参照してください。
+    4.  表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **[IP アドレス]**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **[確認]**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloud Premiumインスタンスの接続情報を取得します。
 

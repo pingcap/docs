@@ -27,7 +27,7 @@ TiDB バージョン: 5.4.0
 
 > **Note:**
 >
-> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、中間バージョンの互換性変更点を確認したい場合は、該当バージョンの[リリースノート](/releases/_index.md)参照してください。
+> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、中間バージョンの互換性変更点を確認したい場合は、該当バージョンの[リリースノート](/releases/_index.md)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -85,7 +85,7 @@ TiDB バージョン: 5.4.0
 
     中国語ユーザーをより適切にサポートするため、TiDB はバージョン 5.4.0 以降、GBK 文字セットをサポートしています。TiDB クラスタを初めて初期化する際に、TiDB 設定ファイルで[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)オプションを有効にすると、TiDB GBK 文字セットは`gbk_bin`と`gbk_chinese_ci`の照合順序をサポートします。
 
-    GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、[文字セットと照合 - GBK](/character-set-gbk.md)参照してください。
+    GBK 文字セットを使用する場合は、互換性の制限に注意する必要があります。詳細については、[文字セットと照合 - GBK](/character-set-gbk.md)を参照してください。
 
 ### セキュリティ {#security}
 

@@ -23,7 +23,7 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)参照してください。
+詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
 
 ## JSON値の型 {#json-value-types}
 
@@ -48,7 +48,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 
 ## 制限 {#restrictions}
 
--   現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)ご覧ください。
+-   現在、TiDBはTiFlashへのプッシュダウンを限定的に`JSON`関数のみサポートしています。詳細については[プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)をご覧ください。
 -   TiDBバックアップ＆リストア（BR）は、v6.3.0でJSON列データのエンコード方法を変更します。そのため、JSON列を含むデータをBRを使用してv6.3.0より前のTiDBクラスターにリストアすることは推奨されません。
 -   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
 
@@ -122,4 +122,4 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
     INSERT INTO t VALUES (3);
     ```
 
-`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)参照してください。
+`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。

@@ -9,15 +9,15 @@ summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよ�
 
 ## <code>IMPORT INTO</code>とTiDB Lightning の比較 {#code-import-into-code-vs-tidb-lightning}
 
-[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) TiDB Lightningの物理インポートモードと統合されていますが、いくつかの違いがあります。詳細は[`IMPORT INTO`とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)ご覧ください。
+[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)はTiDB Lightningの物理インポートモードと統合されていますが、いくつかの違いがあります。詳細は[`IMPORT INTO`とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)をご覧ください。
 
 ## ログバックアップおよびTiCDCとの互換性 {#compatibility-with-log-backup-and-ticdc}
 
--   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md) 、ログ バックアップおよび TiCDC と互換性があります。
+-   TiDB Lightning [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)は、ログ バックアップおよび TiCDC と互換性があります。
 
--   TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) 、ログバックアップおよびTiCDCと互換性がありません。これは、物理インポートモードがソースデータのエンコードされたKVペアをTiKVに直接取り込むため、TiKVがこの処理中に該当する変更ログを生成できないためです。変更ログが生成されないと、ログバックアップによる関連データのバックアップやTiCDCによるレプリケーションが実行できません。
+-   TiDB Lightning [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は、ログバックアップおよびTiCDCと互換性がありません。これは、物理インポートモードがソースデータのエンコードされたKVペアをTiKVに直接取り込むため、TiKVがこの処理中に該当する変更ログを生成できないためです。変更ログが生成されないと、ログバックアップによる関連データのバックアップやTiCDCによるレプリケーションが実行できません。
 
--   クラスター内でTiDB Lightningと TiCDC を一緒に使用するには、 [TiDB Lightningとの互換性](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning)参照してください。
+-   クラスター内でTiDB Lightningと TiCDC を一緒に使用するには、 [TiDB Lightningとの互換性](/ticdc/ticdc-compatibility.md#compatibility-with-tidb-lightning)を参照してください。
 
 -   `IMPORT INTO`はログバックアップおよびTiCDCと互換性がありません。これは、 `IMPORT INTO`ではソースデータのエンコードされたKVペアもTiKVに直接取り込まれるためです。
 
@@ -33,7 +33,7 @@ TiDB Lightning論理インポート モードがアプリケーションのパ�
 
 ### ログバックアップで使用される {#used-with-log-backup}
 
-このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
 
 TiDB Lightning物理インポートモードでインポートされたデータは、ログバックアップではバックアップできません。テーブルをバックアップする必要がある場合は、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明されているように、インポート後にテーブルレベルのスナップショットバックアップを実行することをお勧めします。
 
@@ -45,11 +45,11 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
 -   シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
 
 -   シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)パラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
 
     上流TiDBクラスタのインポートタスクが完了したら、 TiDB Lightningを使用して、同じデータを下流TiDBクラスタにインポートします。下流にRedshiftやSnowflakeなどのデータベースがある場合は、クラウドストレージサービスからCSV、SQL、またはParquetファイルを読み取り、データベースに書き込むように設定できます。
 
@@ -59,7 +59,7 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
 ### ログバックアップで使用される {#used-with-log-backup}
 
-このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップが必要ないことが確実な場合は、その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` （バージョン 8.0.0 で導入）を含めて再送信してください。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
+このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップが必要ないことが確実な場合は、その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` （バージョン 8.0.0 で導入）を含めて再送信してください。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
 `IMPORT INTO`でインポートしたデータは、ログバックアップではバックアップできません。テーブルをバックアップする必要がある場合は、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明されているように、インポート後にテーブルレベルのスナップショットバックアップを実行することをお勧めします。
 

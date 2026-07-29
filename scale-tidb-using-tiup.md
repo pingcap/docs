@@ -252,7 +252,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 > **Note:**
 >
 > -   同様の手順で TiDB ノードまたは PD ノードを削除できます。
-> -   TiKVおよびTiFlashコンポーネントは非同期的にオフラインになり、停止処理に時間がかかるため、 TiUPはこれらのコンポーネントを別の方法でオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)参照してください。
+> -   TiKVおよびTiFlashコンポーネントは非同期的にオフラインになり、停止処理に時間がかかるため、 TiUPはこれらのコンポーネントを別の方法でオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
 > -   TiKVのPDクライアントは、PDノードのリストをキャッシュします。現在のバージョンのTiKVには、PDノードを自動的かつ定期的に更新するメカニズムが搭載されており、TiKVによってキャッシュされたPDノードのリストが期限切れになる問題を軽減するのに役立ちます。ただし、PDをスケールアウトした後は、スケールアウト前に存在していたすべてのPDノードを一度に削除することは避けてください。必要に応じて、既存のPDノードをすべてオフラインにする前に、PDリーダーを新しく追加されたPDノードに切り替えてください。
 
 1.  ノード ID 情報を表示する。
@@ -350,7 +350,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
     ```
 
-    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
+    このステートメントを実行すると、TiDBはそれに応じてPD [配置ルール](/configure-placement-rules.md)を変更または削除します。その後、PDは更新された配置ルールに基づいてデータをスケジュールします。
 
 3.  手順 1 を再度実行し、スケールイン後のTiFlashノードの数を超えるTiFlashレプリカを持つテーブルがないことを確認します。
 

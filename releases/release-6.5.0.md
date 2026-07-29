@@ -48,13 +48,13 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.3.0 では、 [メタデータロック](/metadata-lock.md)実験的機能として導入されています。DML 文によって発生する`Information schema is changed`エラーを回避するため、TiDB はテーブルメタデータの変更時に DML と DDL の優先順位を調整し、実行中の DDL を古いメタデータを持つ DML のコミットまで待機させます。v6.5.0 ではこの機能が GA となり、デフォルトで有効化されます。これは、さまざまな種類の DDL 変更シナリオに適しています。既存のクラスターを v6.5.0 より前のバージョンから v6.5.0 以降にアップグレードすると、TiDB は自動的にメタデータロックを有効にします。この機能を無効にするには、システム変数[`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)を`OFF`に設定します。
 
-    詳細については[ドキュメント](/metadata-lock.md)参照してください。
+    詳細については[ドキュメント](/metadata-lock.md)を参照してください。
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP` (GA) を使用して、クラスターを特定の時点に復元する機能をサポートします。 [＃37197](https://github.com/pingcap/tidb/issues/37197) [＃13303](https://github.com/tikv/tikv/issues/13303) @ [Defined2014](https://github.com/Defined2014) @ [bb7133](https://github.com/bb7133) @ [JmPotato](https://github.com/JmPotato) @ [Connor1996](https://github.com/Connor1996) @ [HuSharp](https://github.com/HuSharp) @ [CalvinNeo](https://github.com/CalvinNeo)
 
     TiDB v6.4.0以降、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントが実験的機能として導入されました。このステートメントを使用すると、ガベージコレクション（GC）の有効期間内の特定の時点にクラスターを復元できます。v6.5.0では、この機能はTiCDCおよびPITRと互換性があり、GAとなります。この機能により、DMLの誤操作を簡単に元に戻したり、数分で元のクラスターを復元したり、異なる時点のデータをロールバックしてデータが変更された正確な時刻を特定したりすることが可能になります。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
 -   `INSERT` `UPDATE`含む非トランザクションDMLステートメント`DELETE` にサポートし@ [ekexium](https://github.com/ekexium) `REPLACE` [＃33485](https://github.com/pingcap/tidb/issues/33485)
 
@@ -66,7 +66,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TTLは行レベルのデータ有効期間管理を提供します。TiDBでは、TTL属性を持つテーブルはデータ有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。TTLは、オンラインの読み取りおよび書き込みワークロードに影響を与えることなく、不要なデータを定期的かつタイムリーにクリーンアップできるように設計されています。
 
-    詳細については[ドキュメント](/time-to-live.md)参照してください。
+    詳細については[ドキュメント](/time-to-live.md)を参照してください。
 
 -   `INSERT INTO SELECT`ステートメントを使用したTiFlashクエリ結果の保存をサポート (実験的) [＃37515](https://github.com/pingcap/tidb/issues/37515) @ [gengliqi](https://github.com/gengliqi)
 
@@ -82,7 +82,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     -   TiFlashクエリ結果を再利用するか、同時実行性の高いオンライン リクエストを処理する
     -   入力データのサイズと比較して比較的小さい結果セットが必要です。100 MiB 未満が望ましいです。
 
-    詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)参照してください。
+    詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)を参照してください。
 
 -   バインディング履歴実行プランのサポート（実験的） [＃39199](https://github.com/pingcap/tidb/issues/39199) @ [fzzf678](https://github.com/fzzf678)
 
@@ -90,7 +90,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行プランのバインディングをサポートします。SQLステートメントの実行プランが変更された場合、元の実行プランがSQL実行履歴メモリテーブル（例えば`statements_summary`に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行プランをバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行プラン変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
 
-    詳細については[ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)参照してください。
+    詳細については[ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 
 ### セキュリティ {#security}
 
@@ -100,25 +100,25 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB は、パスワードの強度を検証するための SQL 関数[`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength)を提供します。
 
-    詳細については[ドキュメント](/password-management.md#password-complexity-policy)参照してください。
+    詳細については[ドキュメント](/password-management.md#password-complexity-policy)を参照してください。
 
 -   パスワード有効期限ポリシーをサポート [＃38936](https://github.com/pingcap/tidb/issues/38936) @ [CbcWestwolf](https://github.com/CbcWestwolf)
 
     TiDBは、パスワードの有効期限ポリシー（手動による有効期限、グローバルレベルの自動有効期限、アカウントレベルの自動有効期限など）の設定をサポートしています。このポリシーを有効にすると、パスワードを定期的に変更する必要があります。これにより、長期使用によるパスワード漏洩のリスクが軽減され、パスワードのセキュリティが向上します。
 
-    詳細については[ドキュメント](/password-management.md#password-expiration-policy)参照してください。
+    詳細については[ドキュメント](/password-management.md#password-expiration-policy)を参照してください。
 
 -   パスワード再利用ポリシーをサポートする [＃38937](https://github.com/pingcap/tidb/issues/38937) @ [keeplearning20221](https://github.com/keeplearning20221)
 
     TiDBは、グローバルレベルのパスワード再利用ポリシーとアカウントレベルのパスワード再利用ポリシーを含む、パスワード再利用ポリシーの設定をサポートしています。このポリシーを有効にすると、指定期間内に使用したパスワード、または直近の数個のパスワードは使用できなくなります。これにより、パスワードの繰り返し使用によるパスワード漏洩のリスクが軽減され、パスワードのセキュリティが向上します。
 
-    詳細については[ドキュメント](/password-management.md#password-reuse-policy)参照してください。
+    詳細については[ドキュメント](/password-management.md#password-reuse-policy)を参照してください。
 
 -   ログイン失敗の追跡と一時的なアカウントロックポリシーをサポート [＃38938](https://github.com/pingcap/tidb/issues/38938) @ [lastincisor](https://github.com/lastincisor)
 
     このポリシーを有効にすると、TiDBに連続して間違ったパスワードでログインした場合、アカウントは一時的にロックされます。ロック時間が終了すると、アカウントは自動的にロック解除されます。
 
-    詳細については[ドキュメント](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy)参照してください。
+    詳細については[ドキュメント](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy)を参照してください。
 
 ### 可観測性 {#observability}
 
@@ -132,7 +132,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     -   PD ノードが利用できない場合でも、ユーザーは診断のために TiDB Dashboardにアクセスできます。
     -   インターネット経由でTiDB Dashboardにアクセスする場合、PDの特権インターフェースは使用されません。そのため、クラスターのセキュリティリスクは軽減されます。
 
-    詳細については[ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/get-started#deploy-tidb-dashboard-independently)参照してください。
+    詳細については[ドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/v1.5/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 -   パフォーマンス概要ダッシュボードにTiFlashと CDC (変更データキャプチャ) パネルが追加されました [＃39230](https://github.com/pingcap/tidb/issues/39230) @ [dbsid](https://github.com/dbsid)
 
@@ -143,7 +143,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     -   [TiFlashパネル](/grafana-performance-overview-dashboard.md#tiflash)では、 TiFlashクラスターのリクエスト タイプ、レイテンシー分析、リソース使用状況の概要を簡単に表示できます。
     -   [CDCパネル](/grafana-performance-overview-dashboard.md#cdc)では、TiCDC クラスターの健全性、レプリケーションのレイテンシー、データ フロー、ダウンストリームの書き込みレイテンシーを簡単に確認できます。
 
-    詳細については[ドキュメント](/performance-tuning-methods.md)参照してください。
+    詳細については[ドキュメント](/performance-tuning-methods.md)を参照してください。
 
 ### パフォーマンス {#performance}
 
@@ -151,7 +151,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     v6.5.0より前のTiDBでは、 `OR`で連結されたフィルタ条件に対してのみインデックスマージがサポートされていました。v6.5.0以降、TiDBは`WHERE`句の`AND`で連結されたフィルタ条件に対してもインデックスマージがサポートされるようになりました。これにより、TiDBのインデックスマージは、より一般的なクエリフィルタ条件の組み合わせをカバーできるようになり、union( `OR` )関係に限定されなくなりました。現在のv6.5.0バージョンでは、オプティマイザによって自動的に選択された`OR`の条件でのインデックスマージのみがサポートされています。11 `AND`条件でインデックスマージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
-    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスのマージについて説明する](/explain-index-merge.md)参照してください。
+    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスのマージについて説明する](/explain-index-merge.md)を参照してください。
 
 -   以下のJSON関数をTiFlash にプッシュダウンすることをサポートします [＃39458](https://github.com/pingcap/tidb/issues/39458) @ [yibin87](https://github.com/yibin87)
 
@@ -171,7 +171,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行プランにオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行プランの制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要です。
 
-    詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)参照してください。
+    詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
 -   [パーティションテーブル](/partitioned-table.md)から TiKV へのソート操作のプッシュダウンをサポート [＃26166](https://github.com/pingcap/tidb/issues/26166) @ [winoros](https://github.com/winoros)
 
@@ -183,7 +183,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     コスト モデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
-    詳細については[ドキュメント](/cost-model.md#cost-model-version-2)参照してください。
+    詳細については[ドキュメント](/cost-model.md#cost-model-version-2)を参照してください。
 
 -   TiFlashはテーブル行数を取得する操作を最適化します [＃37165](https://github.com/pingcap/tidb/issues/37165) @ [elsa0520](https://github.com/elsa0520)
 
@@ -199,7 +199,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDB v6.5.0以降をご利用の場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に別途制限を設けないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してグローバルメモリを管理することで、メモリ使用効率を向上させることができます。
 
-    詳細については[ドキュメント](/configure-memory-usage.md)参照してください。
+    詳細については[ドキュメント](/configure-memory-usage.md)を参照してください。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -207,13 +207,13 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     `EXPLAIN ANALYZE`ステートメントは、実行計画と実行時統計を出力するために使用されます。v6.5.0 では、 TiFlash は`TableFullScan`演算子の実行情報を改良し、DMFile 関連の実行情報を追加しました。これにより、 TiFlash のデータスキャンステータス情報がより直感的に表示されるようになり、 TiFlash のパフォーマンス分析が容易になります。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-explain-analyze.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
 -   JSON形式での実行プランの出力をサポート[＃39261](https://github.com/pingcap/tidb/issues/39261) @ [fzzf678](https://github.com/fzzf678)
 
     TiDB v6.5.0では、実行プランの出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行プランをJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行プランをより便利かつ正確に読み取ることができるため、SQL診断やチューニングの利便性が向上します。
 
-    詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)参照してください。
+    詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)を参照してください。
 
 ### MySQLの互換性 {#mysql-compatibility}
 
@@ -225,7 +225,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
     ```
 
-    詳細については[ドキュメント](/auto-increment.md#mysql-compatibility-mode)参照してください。
+    詳細については[ドキュメント](/auto-increment.md#mysql-compatibility-mode)を参照してください。
 
 ### データ移行 {#data-migration}
 
@@ -235,7 +235,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     これまで、CSVファイルやSQLファイルの保存には、データのエクスポートやインポートに大量のストレージ容量が必要であり、ストレージコストが高くなっていました。この機能のリリースにより、データファイルを圧縮することで、ストレージコストを大幅に削減できます。
 
-    詳細については[ドキュメント](/dumpling-overview.md#improve-export-efficiency-through-concurrency)参照してください。
+    詳細については[ドキュメント](/dumpling-overview.md#improve-export-efficiency-through-concurrency)を参照してください。
 
 -   binlog解析機能を最適化 [＃924](https://github.com/pingcap/dm/issues/924) @ [GMHDBJD](https://github.com/GMHDBJD)
 
@@ -249,7 +249,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     以前は、 TiDB Lightning が物理モードでデータをインポートすると、生データのエンコード、ソート、分割のためにローカルディスク上に多数の一時ファイルが作成されていました。ローカルディスクの空き容量が不足すると、 TiDB Lightning はファイルへの書き込みに失敗したためにエラーで終了していました。この機能により、 TiDB Lightningタスクはローカルディスクの上書きを回避できます。
 
-    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620)参照してください。
+    詳細については[ドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620)を参照してください。
 
 -   DMにおける継続的なデータ検証はGA です [＃4426](https://github.com/pingcap/tiflow/issues/4426) @ [D3Hunter](https://github.com/D3Hunter)
 
@@ -257,7 +257,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     以前は、データ全体を検証するために業務を中断する必要があり、業務に影響が出ていました。この機能により、業務を中断することなく増分データ検証を実行できるようになりました。
 
-    詳細については[ドキュメント](/dm/dm-continuous-data-validation.md)参照してください。
+    詳細については[ドキュメント](/dm/dm-continuous-data-validation.md)を参照してください。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -271,7 +271,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiCDCは、2つのTiDBクラスタ間の双方向レプリケーションをサポートしています。アプリケーションのために地理的に分散された複数のアクティブデータセンターを構築する必要がある場合、この機能をソリューションとして利用できます。TiCDCの変更フィードに`bdr-mode = true`パラメータを設定することで、あるTiDBクラスタから別のTiDBクラスタへのデータレプリケーションを実現できます。
 
-    詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)参照してください。
+    詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
 -   TiCDCはTLSオンラインの更新をサポート [＃7908](https://github.com/pingcap/tiflow/issues/7908) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -289,7 +289,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiDBスナップショットバックアップは、チェックポイントからのバックアップ再開をサポートしています。バックアップ＆リストア（BR）は、回復可能なエラーが発生するとバックアップを再試行します。ただし、再試行が複数回失敗するとBRは終了します。チェックポイントバックアップ機能により、数十分のネットワーク障害など、回復可能なより長い障害の再試行が可能になります。
 
-    BR終了後1時間以内にシステムを障害から復旧しない場合、バックアップ対象のスナップショットデータがGCメカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメント](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)参照してください。
+    BR終了後1時間以内にシステムを障害から復旧しない場合、バックアップ対象のスナップショットデータがGCメカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメント](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
 
 -   PITRのパフォーマンスは@ [joccau](https://github.com/joccau)で著しく向上しました
 
@@ -299,7 +299,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     TiKV- BRは、TiKVクラスターで使用されるバックアップおよびリストアツールです。TiKVとPDは、TiDBを使用せずにRawKVと呼ばれるKVデータベースを構成できます。TiKV- BRは、RawKVを使用する製品のデータバックアップとリストアをサポートします。また、 TiKVクラスターの[`api-version`](/tikv-configuration-file.md#api-version-new-in-v610) `API V1`から`API V2`にアップグレードすることもできます。
 
-    詳細については[ドキュメント](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)参照してください。
+    詳細については[ドキュメント](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)を参照してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -367,7 +367,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 ### その他 {#others}
 
 -   v6.5.0 以降、 `mysql.user`テーブルに`Password_reuse_history`と`Password_reuse_time` 2 つの新しい列が追加されます。
--   バージョン6.5.0以降、 [インデックス加速](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能がデフォルトで有効になっています。この機能は[1つの`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全に互換性がありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合、同じステートメント内で他の列やインデックスを変更しないようにする必要があります。この機能は[PITR（ポイントインタイムリカバリ）](/br/br-pitr-guide.md)とも互換性がありません。インデックスアクセラレーション機能を使用する場合は、バックグラウンドでPITRバックアップタスクが実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)参照してください。
+-   バージョン6.5.0以降、 [インデックス加速](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能がデフォルトで有効になっています。この機能は[1つの`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全には互換性がありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合、同じステートメント内で他の列やインデックスを変更しないようにする必要があります。この機能は[PITR（ポイントインタイムリカバリ）](/br/br-pitr-guide.md)とも互換性がありません。インデックスアクセラレーション機能を使用する場合は、バックグラウンドでPITRバックアップタスクが実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 ## 非推奨の機能 {#deprecated-feature}
 

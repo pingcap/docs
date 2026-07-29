@@ -38,9 +38,9 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 >
 > このようなシナリオでは、エクスポート プロセス中の GC によるエクスポートの失敗を回避するために、事前に GC 時間を手動で延長する必要があります。
 >
-> 詳細については[TiDB GC時間を手動で設定する](/dumpling-overview.md#manually-set-the-tidb-gc-time)参照してください。
+> 詳細については[TiDB GC時間を手動で設定する](/dumpling-overview.md#manually-set-the-tidb-gc-time)を参照してください。
 
-GC の詳細については、 [GCの概要](/garbage-collection-overview.md)参照してください。
+GC の詳細については、 [GCの概要](/garbage-collection-overview.md)を参照してください。
 
 ## トランザクションタイムアウト {#transaction-timeout}
 

@@ -14,7 +14,7 @@ summary: TiCDC で使用される CLI と構成パラメータについて学習
 -   `addr` : TiCDCのリスニングアドレス、HTTP APIアドレス、およびTiCDCサービスのPrometheusアドレス。デフォルト値は`127.0.0.1:8300`です。
 -   `advertise-addr` : クライアントがTiCDCにアクセスするために使用するアドバタイズされたアドレス。指定されていない場合、値は`addr`と同じになります。
 -   `pd` : PD エンドポイントのコンマ区切りリスト。
--   `config` : TiCDCが使用する設定ファイルのアドレス（オプション）。このオプションはTiCDC v5.0.0以降でサポートされています。このオプションはTiUP v1.4.0以降のTiCDCデプロイメントで使用できます。詳細な設定については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)参照してください。
+-   `config` : TiCDCが使用する設定ファイルのアドレス（オプション）。このオプションはTiCDC v5.0.0以降でサポートされています。このオプションはTiUP v1.4.0以降のTiCDCデプロイメントで使用できます。詳細な設定については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 -   `data-dir` : TiCDC がファイルを保存するためにディスクを使用する必要があるときに使用するディレクトリを指定します。TiCDC が使用するソートエンジンと REDO ログは、このディレクトリに一時ファイルを保存します。このディレクトリの空きディスク容量は 500 GiB 以上確保することをお勧めします。TiUPを使用している場合は、セクション[`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)で`data_dir`設定するか、 `global`でデフォルトのパス`data_dir`を直接使用できます。
 -   `gc-ttl` : TiCDC によって設定される PD のサービスレベル`GC safepoint`の TTL (Time To Live) と、レプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーションタスクの一時停止は、TiCDC GC セーフポイントの進行に影響します。つまり、 [TiCDC GCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳述されているように、上流の TiDB GC の進行にも影響します。
 -   `log-file` : TiCDCプロセス実行時にログが出力されるパス。このパラメータが指定されていない場合、ログは標準出力（stdout）に書き込まれます。

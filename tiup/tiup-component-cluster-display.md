@@ -99,6 +99,6 @@ tiup cluster display <cluster-name> [flags]
 >
 > TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB Dashboardの`Leaving`同じステータスを示します。
 
-ノードのサービスステータスはPDのスケジューリング情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)参照してください。
+ノードのサービスステータスはPDのスケジューリング情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

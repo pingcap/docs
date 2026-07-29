@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 > -   `SPATIAL`関数、データ型、インデックス
 > -   `XA`構文
 >
-> 上記のサポートされていない機能は想定される動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)参照してください。
+> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
 
 このドキュメントに記載されている非互換性の問題は、いくつかの[TiDBでサポートされているサードパーティツール](/develop/dev-guide-third-party-tools-compatibility.md)に見られます。
 
@@ -54,7 +54,7 @@ TiDBのエラーメッセージは`TIMESTAMP`と`DATETIME`を区別しますが�
 
 **回避方法**
 
-文字列の照合にはエラーメッセージを使用しないでください。代わりに、トラブルシューティングには[エラーコード](/error-codes.md)使用してください。
+文字列の照合にはエラーメッセージを使用しないでください。代わりに、トラブルシューティングには[エラーコード](/error-codes.md)を使用してください。
 
 ### TiDBは<code>CHECK TABLE</code>文をサポートしていません {#tidb-does-not-support-the-code-check-table-code-statement}
 

@@ -33,7 +33,7 @@ BEGIN /*T! PESSIMISTIC */;
 
 ## 行動 {#behaviors}
 
-TiDB の悲観的なトランザクションは、MySQL のトランザクションと同様に動作します。 [MySQL InnoDBとの違い](#differences-from-mysql-innodb)小さな違いを参照してください。
+TiDB の悲観的なトランザクションは、MySQL のトランザクションと同様に動作します。 [MySQL InnoDBとの違い](#differences-from-mysql-innodb)の小さな違いを参照してください。
 
 -   悲観的トランザクションの場合、TiDBはスナップショット読み取りと現在の読み取りを導入します。
 
@@ -61,7 +61,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 -   トランザクションがコミットまたはロールバックされると、ロックが解除されます。データの変更を試みる他のトランザクションはブロックされ、ロックが解除されるまで待機する必要があります。TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、データの*読み取り*を試みるトランザクションはブロックされません。
 
--   システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)設定することで、一意制約チェックによる悲観的ロックをスキップするかどうかを制御できます。[制約](/constraints.md#pessimistic-transactions)は、を参照してください。
+-   システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を設定することで、一意制約チェックによる悲観的ロックをスキップするかどうかを制御できます。[制約](/constraints.md#pessimistic-transactions)は、を参照してください。
 
 -   複数のトランザクションが互いのロックを取得しようとすると、デッドロックが発生します。これは自動的に検出され、いずれかのトランザクションがランダムに終了し、MySQL互換のエラーコード`1213`が返されます。
 
@@ -136,7 +136,7 @@ TiDBは、悲観的トランザクションモードにおいて、以下の2つ
 
     > **Note:**
     >
-    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクション モードとは異なります。 [TiDBとMySQLのリピータブルリードの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)参照してください。
+    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクション モードとは異なります。 [TiDBとMySQLのリピータブルリードの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
 
 -   [コミット済みを読む](/transaction-isolation-levels.md#read-committed-isolation-level)。この分離レベルは[`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 

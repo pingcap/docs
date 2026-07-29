@@ -13,7 +13,7 @@ summary: TiDB Cloudに関するよくある質問（FAQ）について学びま�
 
 ### TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-TiDB Cloud、直感的なコンソールを通じて制御できるフルマネージドのクラウド インスタンスにより、TiDB クラスターのデプロイ、管理、保守がさらに簡単になります。 <CustomContent language="en,zh">Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、またはAlibaba Cloudに簡単にデプロイして、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">Amazon Web Services (AWS)、Google Cloud、またはMicrosoft Azureに簡単にデプロイすることで、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
+TiDB Cloudは、直感的なコンソールを通じて制御できるフルマネージドのクラウド インスタンスにより、TiDB クラスターのデプロイ、管理、保守がさらに簡単になります。 <CustomContent language="en,zh">Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、またはAlibaba Cloudに簡単にデプロイして、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">Amazon Web Services (AWS)、Google Cloud、またはMicrosoft Azureに簡単にデプロイすることで、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 TiDB Cloud を利用すれば、開発者や DBA は、トレーニングをほとんど受けていないか、全く受けていない場合でも、インフラストラクチャ管理やクラスタのデプロイといった、かつては複雑だったタスクを容易に処理できるようになり、データベースの複雑さではなく、アプリケーションの開発に集中できます。また、ボタンをクリックするだけで TiDB クラスタをスケールインまたはスケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングでき、高価なリソースを無駄に消費することがなくなります。
 
@@ -49,7 +49,7 @@ MySQLクライアントまたはドライバがサポートする言語であれ
 
 ### TiDBまたはTiDB Cloudを本番で使用している企業はどこですか？ {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
-TiDBは、金融サービス、ゲーム、eコマースなど、さまざまな業界の1500社以上のグローバル企業から信頼されています。ユーザーには、Square（米国）、Shopee（シンガポール）、China UnionPay（中国）などが含まれます。詳細については、[事例研究](https://www.pingcap.com/customers/)ご覧ください。
+TiDBは、金融サービス、ゲーム、eコマースなど、さまざまな業界の1500社以上のグローバル企業から信頼されています。ユーザーには、Square（米国）、Shopee（シンガポール）、China UnionPay（中国）などが含まれます。詳細については、[事例研究](https://www.pingcap.com/customers/)をご覧ください。
 
 ### SLA（サービスレベル契約）はどのような内容ですか？ {#what-does-the-sla-look-like}
 
@@ -105,7 +105,7 @@ Software as a Service (SaaS) プロバイダーとして、当社はデータの
 
 ### 他のRDBMSからTiDB Cloudへの簡単な移行方法はありますか？ {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
-TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)参照してください。
+TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## バックアップと復元に関するFAQ {#backup-and-restore-faq}
 
@@ -125,7 +125,7 @@ HTAP シナリオの詳細については、 [データプラットフォーム�
 
 ### TiFlashにデータを直接インポートできますか？ {#can-i-import-my-data-directly-to-tiflash}
 
-いいえ。TiDB Cloudにデータをインポートすると、データはTiKVにインポートされます。インポートが完了したら、SQLステートメントを使用して、 TiFlashにレプリケートするテーブルを指定できます。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)参照してください。.
+いいえ。TiDB Cloudにデータをインポートすると、データはTiKVにインポートされます。インポートが完了したら、SQLステートメントを使用して、 TiFlashにレプリケートするテーブルを指定できます。その後、TiDBは指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)を参照してください。
 
 ### TiFlashのデータをCSV形式でエクスポートできますか？ {#can-i-export-tiflash-data-in-the-csv-format}
 
@@ -137,12 +137,12 @@ HTAP シナリオの詳細については、 [データプラットフォーム�
 
 TiDB Cloudでは、保存されているすべてのデータは暗号化され、すべてのネットワークトラフィックはTransport Layer Security（TLS）を使用して暗号化されます。
 
--   保存データの暗号化は、暗号化されたstorageボリュームを使用して自動化されます。
+-   保存データの暗号化は、暗号化されたストレージボリュームを使用して自動化されます。
 -   クライアントとTiDBクラスタまたはインスタンス間のデータ転送における暗号化は、 TiDB CloudウェブサーバーのTLSとTiDBクラスタのTLSを使用して自動化されています。
 
 ### TiDB Cloudはどのようにして私のビジネスデータを暗号化するのですか？ {#how-does-tidb-cloud-encrypt-my-business-data}
 
-TiDB Cloudは、データベースデータやバックアップデータを含む、保存されているビジネスデータに対して、デフォルトでstorageボリューム暗号化を使用します。TiDB Cloudは、転送中のデータに対してTLS暗号化を要求し、さらに、TiDB、PD、TiKV、 TiFlash間のデータベースクラスタ内のデータに対して、コンポーネントレベルのTLS暗号化も要求します。
+TiDB Cloudは、データベースデータやバックアップデータを含む、保存されているビジネスデータに対して、デフォルトでストレージボリューム暗号化を使用します。TiDB Cloudは、転送中のデータに対してTLS暗号化を要求し、さらに、TiDB、PD、TiKV、 TiFlash間のデータベースクラスタ内のデータに対して、コンポーネントレベルのTLS暗号化も要求します。
 
 TiDB Cloudにおけるビジネスデータ暗号化に関するより詳細な情報については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
@@ -183,7 +183,7 @@ TiDB Cloud Dedicatedクラスターの場合、クラスターへの接続手順
 3.  クラスタサーバー用にTLSをダウンロードして設定してください。
 4.  SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でクラスターに接続します。
 
-詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)参照してください。
+詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 </div>
 
@@ -194,7 +194,7 @@ TiDB Cloud StarterまたはEssentialインスタンスの場合、インスタ�
 1.  データベースユーザーとログイン認証情報を設定します。
 2.  SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でTiDB Cloud StarterまたはEssentialインスタンスに接続します。
 
-詳細については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)参照してください。
+詳細については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
 </div>
 </SimpleTab>
