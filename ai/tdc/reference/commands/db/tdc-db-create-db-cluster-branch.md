@@ -5,7 +5,7 @@ summary: Create a branch for a TiDB Cloud Starter cluster.
 
 # tdc db create-db-cluster-branch
 
-Creates a branch for one Starter cluster. `--wait` waits for the branch to become `ACTIVE`.
+Creates a branch for one Starter cluster. `--wait` waits for the branch to become `ACTIVE`. The command verifies that the parent cluster is Starter before creating the branch.
 
 > **Note:**
 >

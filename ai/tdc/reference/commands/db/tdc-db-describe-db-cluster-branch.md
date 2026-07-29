@@ -5,7 +5,7 @@ summary: Describe a branch for a TiDB Cloud Starter cluster.
 
 # tdc db describe-db-cluster-branch
 
-Describes one branch by cluster ID and branch ID.
+Describes one branch by cluster ID and branch ID. The command verifies that the parent cluster is Starter before reading the branch.
 
 > **Note:**
 >

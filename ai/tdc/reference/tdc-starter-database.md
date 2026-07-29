@@ -5,7 +5,7 @@ summary: Reference every `tdc db` command for Starter clusters, branches, SQL us
 
 # TiDB Cloud Starter CLI Command Reference
 
-Use `tdc db` to manage TiDB Cloud Starter clusters, branches, and SQL access.
+Use `tdc db` to manage TiDB Cloud Starter clusters, branches, and SQL access. The TiDB Cloud CLI validates the cluster service plan before every cluster-scoped operation and rejects Essential or unverifiable clusters before continuing.
 
 > **Note:**
 >
@@ -75,7 +75,7 @@ tdc db list-db-clusters --page-size 20 --order-by "createTime desc"
 tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name,state:state}'
 ```
 
-The list command also accepts `--page-token`, `--filter`, and `--skip`.
+The list command also accepts `--page-token`, `--filter`, and `--skip`. The shared TiDB Cloud API can return multiple service plans, so the TiDB Cloud CLI filters each page to verified Starter clusters. It preserves `next_page_token` but omits `total_size`, because the server total includes clusters outside the Starter-only result.
 
 Describe and update a cluster:
 
@@ -106,6 +106,8 @@ tdc db delete-db-cluster \
 `tdc` resolves the cluster name internally; no name-confirmation flag is required. Without `--wait`, delete returns after TiDB Cloud accepts the asynchronous request. The wait flag waits up to 12 minutes and returns when the cluster is `DELETED` or no longer accessible.
 
 ## Manage branches
+
+Every branch command verifies that the parent cluster is Starter before calling a branch endpoint.
 
 Create and list branches:
 
@@ -138,6 +140,8 @@ tdc db delete-db-cluster-branch \
 Create and delete support `--dry-run`.
 
 ## Create SQL users
+
+SQL access commands verify that the target cluster is Starter before reading or writing local SQL credentials, calling SQL-user APIs, or contacting a SQL endpoint.
 
 Create or repair the three TiDB Cloud CLI-managed SQL roles:
 

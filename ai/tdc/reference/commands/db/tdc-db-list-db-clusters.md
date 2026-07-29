@@ -5,7 +5,7 @@ summary: List TiDB Cloud Starter clusters.
 
 # tdc db list-db-clusters
 
-Lists Starter clusters with optional pagination, filtering, ordering, and JMESPath projection.
+Lists verified Starter clusters with optional pagination, filtering, ordering, and JMESPath projection. Non-Starter and unverifiable clusters are omitted. The command preserves `next_page_token` after filtering and omits the server `total_size`, which can include other service plans.
 
 > **Note:**
 >

@@ -5,7 +5,7 @@ summary: Create TiDB Cloud CLI-managed SQL users for a Starter cluster.
 
 # tdc db create-db-sql-users
 
-Idempotently creates or repairs the read-only, read-write, and admin SQL users managed by `tdc`.
+Idempotently creates or repairs the read-only, read-write, and admin SQL users managed by `tdc`. The command verifies that the cluster is Starter before calling SQL-user APIs or writing local credentials.
 
 > **Note:**
 >

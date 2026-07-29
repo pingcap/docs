@@ -5,7 +5,7 @@ summary: Format a connection string for a TiDB Cloud CLI-managed SQL user.
 
 # tdc db format-db-connection-string
 
-Formats stored SQL credentials for read-write, read-only, or admin access.
+Formats stored SQL credentials for read-write, read-only, or admin access. The command verifies that the cluster is Starter before loading its local SQL credentials.
 
 > **Note:**
 >

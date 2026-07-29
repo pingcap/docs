@@ -5,7 +5,7 @@ summary: Delete a branch from a TiDB Cloud Starter cluster.
 
 # tdc db delete-db-cluster-branch
 
-Deletes one branch from a Starter cluster.
+Deletes one branch from a Starter cluster. The command verifies that the parent cluster is Starter before reading or deleting the branch.
 
 > **Note:**
 >

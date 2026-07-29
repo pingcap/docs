@@ -5,7 +5,7 @@ summary: Execute one SQL statement against a TiDB Cloud Starter cluster.
 
 # tdc db execute-sql-statement
 
-Executes exactly one SQL statement. Read-write is the default role; explicit role selection is recommended.
+Executes exactly one SQL statement. Read-write is the default role; explicit role selection is recommended. The command verifies that the cluster is Starter before loading credentials or sending an HTTPS or MySQL request.
 
 > **Note:**
 >

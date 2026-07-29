@@ -5,7 +5,7 @@ summary: List branches for a TiDB Cloud Starter cluster.
 
 # tdc db list-db-cluster-branches
 
-Lists branches for one Starter cluster, with optional pagination.
+Lists branches for one Starter cluster, with optional pagination. The command verifies that the parent cluster is Starter before listing branches.
 
 > **Note:**
 >

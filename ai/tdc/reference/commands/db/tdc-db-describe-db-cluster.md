@@ -5,7 +5,7 @@ summary: Describe a TiDB Cloud Starter cluster.
 
 # tdc db describe-db-cluster
 
-Describes one Starter cluster. Use `--view FULL` to request expanded fields.
+Describes one Starter cluster. Use `--view FULL` to request expanded fields. The command rejects the cluster if its API metadata does not verify it as Starter.
 
 > **Note:**
 >
