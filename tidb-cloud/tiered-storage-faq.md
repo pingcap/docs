@@ -15,7 +15,7 @@ summary: Learn about common Tiered Storage questions on TiDB Cloud BYOC/Premium/
 
 ## Can IA tables execute UPDATE / DELETE?
 
-Yes. An UPDATE operation first loads the corresponding data from object storage into the IA cache, performs the modification, and writes a new SST file-the same flow as a regular UPDATE. Performance is affected by cold reads.
+Yes. An UPDATE operation first loads the corresponding data from object storage into the IA cache, performs the modification, and writes a new SST file, the same flow as a regular UPDATE. Performance is affected by cold reads.
 
 ## Can TiFlash replicas of IA tables be set to IA?
 
