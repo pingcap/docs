@@ -218,7 +218,7 @@
   - データベースアクセス制御
     - [クラスタパスワード設定の構成](/tidb-cloud/configure-security-settings.md)
   - 監査管理
-    - [TiDB Cloud Dedicatedデータベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)
+    - [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 - 請求する
   - [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -619,7 +619,7 @@
   - [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
   - Connected Careサポートサービスの特長
-    - [接続済み: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB CloudアラートのIMサブスクリプション
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
@@ -640,3 +640,4 @@
 ## _BUILD_ALLOWLIST
 
 - [データベースのユーザーと役割を管理する](/tidb-cloud/configure-sql-users.md)
+- [データベース監査ログ（レガシー）](/tidb-cloud/tidb-cloud-auditing-legacy.md)

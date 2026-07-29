@@ -68,6 +68,30 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`additional_scrape_conf`フィールドの内容を Prometheus 構成ファイルの対応するパラメーターに追加します。
 
+### Prometheus external labels をカスタマイズする {#customize-prometheus-external-labels}
+
+TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グローバル `external_labels` を設定できます。
+
+1. TiDB クラスターの `topology.yaml` ファイルを開きます。
+
+2. `monitoring_servers` 設定に `external_labels` フィールドを追加します。
+
+    以下は、`topology.yaml` ファイル内の `monitoring_servers` の設定例です。
+
+    ```yaml
+    monitoring_servers:
+    - host: xxxxxxx
+      external_labels:
+        environment: production
+        region: us-east-1
+    ```
+
+3. 予約済みラベル `cluster` または `monitor` は設定せず、`__` で始まるラベル名も使用しないでください。すべてのラベル名は Prometheus のラベル命名規則に準拠する必要があります。
+
+前述の設定が完了すると、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードする際に、TiUP は `external_labels` フィールドを Prometheus グローバル `external_labels` 設定にレンダリングします。
+
+このフィールドをサポートしていない以前のバージョンの TiUP を使用してトポロジーファイルを開くと、TiUP はこのフィールドを無視するのではなく、トポロジーの解析に失敗します。
+
 ## Grafanaの設定をカスタマイズする {#customize-grafana-configurations}
 
 現在、 TiUP はGrafana ダッシュボードやその他の構成のカスタマイズをサポートしています。

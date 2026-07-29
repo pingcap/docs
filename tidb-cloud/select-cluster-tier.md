@@ -16,6 +16,7 @@ TiDB Cloud、以下のプランをご用意しています。新規導入の場�
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
 
 </CustomContent>
 
@@ -26,6 +27,7 @@ TiDB Cloud、以下のプランをご用意しています。新規導入の場�
 - [{{{ .premium }}}](#premium)
 - [{{{ .byoc }}}](#byoc)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
 
 </CustomContent>
 
@@ -147,3 +149,11 @@ TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を�
 > **Note:**
 >
 > TiDB Cloud Dedicatedクラスタの作成後は、ノードのストレージを減らすことはできません。
+
+## {{{ .lake }}} {#lake}
+
+TiDB Cloud Lakeは、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ウェアハウスを個別にプロビジョニングし、ワークロードの変化に応じてスケーリングし、オブジェクトストレージにデータをコスト効率よく保存できます。
+
+TiDB Cloud Lakeは、ANSI SQL、半構造化データ処理、ベクトル検索、AI指向のワークフローを1つのプラットフォームでサポートします。基盤となるインフラストラクチャを自分で運用することなく、マネージドな分析エクスペリエンスを求めるチーム向けに設計されています。
+
+[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)および[TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/)を参照してください.

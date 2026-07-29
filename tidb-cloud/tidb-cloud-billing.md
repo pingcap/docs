@@ -25,6 +25,18 @@ TiDB Cloud Essentialでは、アプリケーションの実際の使用量で**�
 
 TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプロビジョニングされたディスク サイズではなく、実際の[要求容量単位（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)の消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)をご覧ください。
 
+<CustomContent plan="byoc">
+
+### {{{ .byoc }}} の料金 {#pricing-for-byoc}
+
+{{{ .byoc }}} の料金情報については、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+
+</CustomContent>
+
+### {{{ .lake }}} の料金 {#pricing-for-lake}
+
+TiDB Cloud Lake の料金は、warehouse、storage、cloud service fee で構成されます。詳細については、[TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/) を参照してください。
+
 ## 請求書 {#invoices}
 
 組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。

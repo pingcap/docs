@@ -134,6 +134,10 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     現在、 TiDB Cloud DedicatedはAWS、Azure、Google Cloudで一般提供されています。詳細については、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)ドキュメントを参照してください。
 
+-   {{{ .lake }}}
+
+    TiDB Cloud Lakeは、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピューティングとストレージを分離し、ANSI SQL、半構造化データ処理、およびAI指向のワークフローをサポートします。詳細については、[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)を参照してください。
+
 ## アーキテクチャ {#architecture}
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)

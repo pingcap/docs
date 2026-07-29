@@ -199,6 +199,7 @@ worker_servers:
     -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
     -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 -   `external_alertmanagers` : フィールド`external_alertmanagers`が設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、フィールド`host`とフィールド`web_port`で構成されます。
+-   `external_labels` : TiUP v1.17.0 で導入されたこのフィールドは、Prometheus グローバル `external_labels` をキーと値のペアとして設定します。このフィールドを使用して、Prometheus `remote_write`、federation、および alerting を通じて伝播される安定したメタデータを付加します。TiUP は `cluster` および `monitor` ラベルを予約し、自動的に管理するため、このフィールドでこれらを設定してはいけません。`__` で始まるラベル名も予約されています。さらに、すべてのラベル名は Prometheus のラベル命名規則に準拠する必要があります。このフィールドをサポートしていない以前のバージョンの TiUP がトポロジーファイルを読み取ると、TiUP はこのフィールドを無視するのではなく、トポロジーの解析に失敗します。
 -   `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`のフィールドで指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値になります。
 -   `resource_control` : このサービスにおけるリソース制御。このフィールドが指定された場合、このフィールドの設定はセクション`global`の`resource_control`の設定とマージされ（2つのフィールドが重複している場合は、このフィールドの設定が有効になります）、systemdの設定ファイルが生成され、セクション`host`で指定されたマシンに配布されます。このフィールドの設定ルールは、セクション`global`の`resource_control`の設定ルールと同じです。
@@ -219,6 +220,9 @@ worker_servers:
 monitoring_servers:
   - host: 10.0.1.11
     rule_dir: /local/rule/dir
+    external_labels:
+      environment: production
+      region: us-east-1
     remote_config:
       remote_write:
       - queue_config:

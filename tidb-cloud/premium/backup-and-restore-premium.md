@@ -6,18 +6,22 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 # TiDB Cloud Premium データのバックアップと復元 {#back-up-and-restore-tidb-cloud-premium-data}
 
+<CustomContent plan="premium">
+
 このドキュメントでは、 TiDB Cloud Premiumインスタンス上のデータのバックアップと復元方法について説明します。TiDB Cloud Premiumは、自動バックアップと手動バックアップの両方をサポートしており、必要に応じてバックアップデータを新しいインスタンスに復元できます。
+
+</CustomContent>
 
 <CustomContent plan="byoc">
 
-このドキュメントは {{{ .byoc }}} にも適用されます。現在、{{{ .byoc }}} のバックアップおよび復元機能は {{{ .premium }}} と同等です。
+このドキュメントでは、{{{ .premium }}} または {{{ .byoc }}} インスタンス上のデータをバックアップおよび復元する方法について説明します。{{{ .premium }}} と {{{ .byoc }}} は、自動バックアップと手動バックアップの両方をサポートしており、必要に応じてバックアップデータを新しいインスタンスに復元できます。
 
 </CustomContent>
 
 バックアップファイルは、以下のソースから生成される可能性があります。
 
--   アクティブなTiDB Cloud Premiumインスタンス
--   削除されたTiDB Cloud Premiumインスタンスのバックアップ用のごみ箱
+- アクティブな {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンス
+- 削除された {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ用のごみ箱
 
 > **Tip:**
 >
@@ -26,7 +30,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## バックアップページを確認する {#view-the-backup-page}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -36,11 +40,21 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 自動バックアップ {#automatic-backups}
 
+<CustomContent plan="premium">
+
 TiDB Cloud Premiumは、本番環境向けに強化された自動バックアップ機能を提供します。高頻度スナップショットとログバックアップを組み合わせることで、データの信頼性を確保します。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} と {{{ .byoc }}} は、本番環境向けに強化された自動バックアップ機能を提供します。高頻度スナップショットとログバックアップを組み合わせることで、データの信頼性を確保します。
+
+</CustomContent>
 
 ### 自動バックアップポリシー {#automatic-backup-policies}
 
-TiDB Cloud Premiumインスタンスは、以下の表に示すように、多層バックアップアーキテクチャを使用してデータを保護します。
+{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、以下の表に示すように、多層バックアップアーキテクチャを使用してデータを保護します。
 
 | バックアップの種類          | 保存期間 | 粒度を復元する                                                                     |
 | ------------------ | ---- | --------------------------------------------------------------------------- |
@@ -50,7 +64,7 @@ TiDB Cloud Premiumインスタンスは、以下の表に示すように、多�
 
 ### バックアップ実行ルール {#backup-execution-rules}
 
--   **バックアップサイクル**： TiDB Cloud Premiumインスタンスは、1時間ごとおよび1日ごとの自動バックアップを実行します。
+-   **バックアップサイクル**：{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスは、1時間ごとおよび1日ごとの自動バックアップを実行します。
 
 -   **バックアップスケジュール**：
 
@@ -67,7 +81,7 @@ TiDB Cloud Premiumインスタンスは、以下の表に示すように、多�
 
 ### バックアップファイルを削除する {#delete-backup-files}
 
-TiDB Cloud Premiumインスタンスの既存のバックアップファイルを削除するには、以下の手順を実行してください。
+{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの既存のバックアップファイルを削除するには、以下の手順を実行してください。
 
 1.  インスタンスの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -75,7 +89,17 @@ TiDB Cloud Premiumインスタンスの既存のバックアップファイル�
 
 ## 手動バックアップ {#manual-backups}
 
+<CustomContent plan="premium">
+
 TiDB Cloud Premiumは、自動バックアップに加えて、手動バックアップもサポートしています。手動バックアップは、管理された確実な復元ポイントを提供します。システムアップグレード、重要なデータの削除、元に戻せないスキーマや構成の変更など、リスクの高い操作を実行する前に、手動バックアップを作成することを強くお勧めします。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+自動バックアップに加えて、{{{ .premium }}} と {{{ .byoc }}} は手動バックアップもサポートしています。手動バックアップは、管理された確実な復元ポイントを提供します。システムアップグレード、重要なデータの削除、元に戻せないスキーマや設定の変更など、リスクの高い操作を実行する前に、手動バックアップを作成することを強くお勧めします。
+
+</CustomContent>
 
 ### 主な特徴 {#key-characteristics}
 
@@ -111,7 +135,7 @@ TiDB Cloudは、インスタンスのスナップショット復元と特定時�
 
 -   **特定時点への復元**：インスタンスを特定の時点の状態に復元します。
 
-    -   Premiumインスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
+    -   Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
 
 ### 目的地を復元する {#restore-destination}
 
@@ -119,7 +143,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ### 新しいTiDB Cloud Premium インスタンスに復元する {#restore-to-a-new-instance} {#restore-to-a-new-instance}
 
-新しいTiDB Cloud Premiumインスタンスにデータを復元するには、以下の手順に従ってください。
+新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、以下の手順に従ってください。
 
 1.  インスタンスの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -138,7 +162,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     </div>
      <div label="Point-in-Time Restore">
 
-    Premiumインスタンスを特定の時点に復元するには、以下の手順を実行してください。
+    Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンスを特定の時点に復元するには、以下の手順を実行してください。
 
     1.  **「特定時点への復元」**をクリックします。
     2.  復元したい日時を選択してください。
@@ -148,7 +172,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 4.  **「次へ」**をクリックして、 **「新しいインスタンスへの復元」**ページに進んでください。
 
-5.  新しいTiDB Cloud Premium インスタンスを復元用に構成します。手順は[TiDB Cloud Premiumインスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)と同じです。
+5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は[{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)と同じです。
 
     > **Note:**
     >
@@ -160,7 +184,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ### ごみ箱から復元 {#restore-from-recycle-bin}
 
-ごみ箱から削除したTiDB Cloud Premium インスタンスを復元するには、以下の手順を実行してください。
+ごみ箱から削除した {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **[ごみ箱] を**クリックします。
 
@@ -199,7 +223,19 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 ### クラウドストレージからバックアップを復元する {#restore-backups-from-cloud-storage}
 
-<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> は、クラウドストレージ（Amazon S3 や Alibaba Cloud Object Storage Service（OSS）など）から新しいインスタンスへのバックアップの復元をサポートしています。この機能は、{{{ .dedicated }}} クラスターまたは TiDB Self-Managed クラスターから生成されたバックアップと互換性があります。
+<CustomContent plan="premium">
+
+{{{ .premium }}} は、クラウドストレージ（Amazon S3 や Alibaba Cloud Object Storage Service（OSS）など）から新しいインスタンスへのバックアップの復元をサポートしています。この機能は、{{{ .dedicated }}} クラスターまたは TiDB Self-Managed クラスターから生成されたバックアップと互換性があります。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} と {{{ .byoc }}} は、クラウドストレージ（Amazon S3 など）から新しいインスタンスへのバックアップの復元をサポートしています。この機能は、{{{ .dedicated }}} クラスターまたは TiDB Self-Managed クラスターから生成されたバックアップと互換性があります。
+
+</CustomContent>
+
+<CustomContent plan="premium">
 
 > **Note:**
 >
@@ -207,41 +243,62 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 > -   バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
 > -   インスタンスとストレージバケットが異なるリージョンに配置されている場合、リージョン間データ転送料金が別途発生する可能性があります。
 
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+>**Note:**
+>
+> - 現在、復元対象としてサポートされているのは、**Amazon S3** に保存されているバックアップのみです。
+> - バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
+> - インスタンスとストレージバケットが異なるリージョンに配置されている場合、リージョン間データ転送料金が別途発生する可能性があります。
+
+</CustomContent>
+
 #### 手順 {#steps}
 
 開始する前に、バックアップファイルにアクセスするための十分な権限を持つアクセスキーとシークレットキーを用意してください。
 
 クラウドストレージからバックアップを復元するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **[クラウド ストレージから復元]**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**...**をクリックし、**Restore from Cloud Storage**をクリックします。
 
-2.  **「バックアップ保存場所の選択」**ページで、以下の情報を入力してください。
+2. **Select Backup Storage Location**ページで、以下の情報を入力してください。
 
-    -   **クラウドプロバイダー**：バックアップファイルが保存されるクラウドプロバイダーを選択してください。
+    <CustomContent plan="premium">
 
-    -   **リージョン**：クラウドプロバイダーがAlibaba Cloud OSSの場合は、リージョンを選択してください。
+    - **Cloud Provider**：バックアップファイルが保存されているクラウドプロバイダーを選択してください。
+    - **Region**：クラウドプロバイダーがAlibaba Cloud OSSの場合は、リージョンを選択してください。
+    - **Backup Files URI**：バックアップファイルが格納されている最上位フォルダのURIを入力してください。
+    - **Access Key ID**：アクセスキーIDを入力してください。
+    - **Access Key Secret**：アクセスキーシークレットを入力してください。
 
-    -   **バックアップファイルURI** ：バックアップファイルが格納されている最上位フォルダのURIを入力してください。
+    </CustomContent>
 
-    -   **アクセスキーID** ：アクセスキーIDを入力してください。
+    <CustomContent plan="byoc">
 
-    -   **アクセスキーシークレット**：アクセスキーシークレットを入力してください。
+    - **Cloud Provider**：バックアップファイルが保存されているクラウドプロバイダーを選択してください。
+    - **Backup Files URI**：バックアップファイルが格納されている最上位フォルダのURIを入力してください。
+    - **Access Key ID**：アクセスキーIDを入力してください。
+    - **Access Key Secret**：アクセスキーシークレットを入力してください。
+
+    </CustomContent>
 
     > **Tip:**
     >
-    > ストレージバケットのアクセスキーを作成するには、 [AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)および[Alibaba Cloud OSSへのアクセスを設定する](#configure-alibaba-cloud-oss-access)参照してください。
+    > ストレージバケットのアクセスキーを作成するには、[Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium">および[Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>を参照してください。
 
-3.  **「バックアップの確認」をクリックし、「次へ」を**クリックします。
+3. **Verify Backup and Next**をクリックします。
 
-4.  検証が成功すると、 **[新しいインスタンスに復元]**ページが表示されます。ページの上部に表示されるバックアップ情報を確認し、 [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)」の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
 
-    バックアップ情報が間違っている場合は、 **「前へ」**をクリックして前のページに戻り、正しい情報を入力してください。
+    バックアップ情報が正しくない場合は、**Previous**をクリックして前のページに戻り、正しい情報を入力してください。
 
-5.  バックアップを復元するには、 **「復元」**をクリックしてください。
+5. バックアップを復元するには、**Restore**をクリックします。
 
 ## 参考文献 {#references}
 
-このセクションでは、Amazon S3とAlibaba Cloud OSSへのアクセス設定方法について説明します。
+このセクションでは、Amazon S3<CustomContent plan="premium">とAlibaba Cloud OSS</CustomContent>へのアクセス設定方法について説明します。
 
 ### AWSアクセスキーを使用してAmazon S3へのアクセスを設定する {#configure-amazon-s3-access-using-an-aws-access-key}
 
@@ -257,7 +314,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 2.  IAMユーザーに権限を付与します。
 
-    タスクに必要な権限のみを含むポリシーを作成し、それをIAMユーザーにアタッチします。TiDB Cloud Premiumインスタンスにデータを復元するには、 `s3:GetObject` 、 `s3:GetBucketLocation` 、および`s3:ListBucket`権限を付与します。
+    タスクに必要な権限のみを含むポリシーを作成し、それをIAMユーザーにアタッチします。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、`s3:GetObject`、`s3:GetBucketLocation`、および `s3:ListBucket` 権限を付与します。
 
     以下は、 TiDB CloudがAmazon S3バケット内の特定のフォルダからデータを復元できるようにするポリシーの例です。
 
@@ -298,29 +355,29 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 >
 > TiDB Cloudはアクセス キーを保存しません。セキュリティを維持するため、インポートまたはエクスポートのタスクが完了した後[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
 
+<CustomContent plan="premium">
+
 ### Alibaba Cloud OSSへのアクセスを設定する {#configure-alibaba-cloud-oss-access}
 
-TiDB CloudにAlibaba Cloud OSSバケットへのアクセス権を付与するには、そのバケット用のアクセスキーペアを作成する必要があります。
+TiDB CloudにAlibaba Cloud OSSバケットへのアクセス権を付与するには、そのバケット用のAccessKeyペアを作成する必要があります。
 
-アクセスキーペアを設定するには、以下の手順に従ってください。
+AccessKeyペアを設定するには、以下の手順に従ってください。
 
-1.  RAM ユーザーを作成し、AccessKey ペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)を参照してください。
+1. RAMユーザーを作成し、AccessKeyペアを取得します。詳細については、[Create a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)を参照してください。
 
-    **アクセスモードの**セクションで、 **「永続的なアクセスキーを使用してアクセスする」を**選択します。
+    **Access Mode** セクションで、**Using permanent AccessKey to access** を選択します。
 
-2.  必要な権限を持つカスタム ポリシーを作成します。詳細については、 [カスタムポリシーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
+2. 必要な権限を持つカスタムポリシーを作成します。詳細については、[Create custom policies](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-custom-policy)を参照してください。
 
-    -   **「効果」**セクションで**「許可」**を選択します。
-
-    -   「**サービス」**セクションで、 **「オブジェクトストレージサービス」**を選択します。
-
-    -   「**アクション」**セクションで、必要な権限を選択します。TiDB Cloud Premium インスタンスにバックアップを復元するには、 `oss:ListObjects`と`oss:GetObject`権限を付与します。
+    - **Effect** セクションで、**Allow** を選択します。
+    - **Service** セクションで、**Object Storage Service** を選択します。
+    - **Action** セクションで、必要な権限を選択します。バックアップを {{{ .premium }}} インスタンスに復元するには、`oss:ListObjects` と `oss:GetObject` 権限を付与します。
 
         > **Tip:**
         >
-        > 復元操作のセキュリティを強化するために、バケット全体へのアクセスを許可するのではなく、バックアップファイルが保存されている特定のフォルダー（ `oss:Prefix` ）へのアクセスを制限することができます。
+        > 復元操作のセキュリティを強化するために、バケット全体へのアクセスを許可するのではなく、バックアップファイルが保存されている特定のフォルダー（`oss:Prefix`）へのアクセスに制限できます。
 
-        以下の JSON の例は、復元タスクのポリシーを示しています。このポリシーは、特定のバケットとバックアップフォルダへのアクセスを制限します。
+        以下の JSON の例は、復元タスク用のポリシーを示しています。このポリシーは、特定のバケットとバックアップフォルダーへのアクセスを制限します。
 
         ```json
         {
@@ -345,8 +402,10 @@ TiDB CloudにAlibaba Cloud OSSバケットへのアクセス権を付与する�
         }
         ```
 
-    -   **リソース**セクションで、バケットと、そのバケット内の特定のオブジェクトを選択します。
+    - **Resource** セクションで、バケットと、そのバケット内の特定のオブジェクトを選択します。
 
-3.  カスタムポリシーをRAMユーザーに割り当てます。
+3. カスタムポリシーをRAMユーザーにアタッチします。
 
-    詳細については、 [RAMユーザーに権限を付与する](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)を参照してください。
+    詳細については、[Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)を参照してください。
+
+</CustomContent>
