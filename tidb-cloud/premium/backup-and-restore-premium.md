@@ -6,18 +6,22 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 # 备份和恢复 {{{ .premium }}} 数据
 
+<CustomContent plan="premium">
+
 本文档介绍如何在 {{{ .premium }}} 实例上备份和恢复数据。{{{ .premium }}} 同时支持自动备份和手动备份，并允许你根据需要将备份数据恢复到新的实例。
+
+</CustomContent>
 
 <CustomContent plan="byoc">
 
-本文档也适用于 {{{ .byoc }}}。{{{ .byoc }}} 的备份和恢复功能目前与 {{{ .premium }}} 保持一致。
+本文档介绍如何在 {{{ .premium }}} 或 {{{ .byoc }}} 实例上备份和恢复数据。{{{ .premium }}} 和 {{{ .byoc }}} 同时支持自动备份和手动备份，并允许你根据需要将备份数据恢复到新的实例。
 
 </CustomContent>
 
 备份文件可以来自以下来源：
 
-- 活跃的 {{{ .premium }}} 实例
-- 回收站中已删除 {{{ .premium }}} 实例的备份
+- 活跃的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例
+- 回收站中已删除 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的备份
 
 > **Tip:**
 >
@@ -26,7 +30,7 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 查看 Backup 页面 {#view-the-backup-page}
 
-1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的名称，进入其实例概览页面。
 
     > **Tip:**
     >
@@ -36,11 +40,21 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 自动备份 {#automatic-backups}
 
+<CustomContent plan="premium">
+
 {{{ .premium }}} 为生产环境提供增强的自动备份能力。它结合高频快照和日志备份，以确保数据可靠性。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} 和 {{{ .byoc }}} 为生产环境提供增强的自动备份能力。它们结合高频快照和日志备份，以确保数据可靠性。
+
+</CustomContent>
 
 ### 自动备份策略 {#automatic-backup-policies}
 
-{{{ .premium }}} 实例采用多层备份架构来保护你的数据，如下表所示：
+{{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例采用多层备份架构来保护你的数据，如下表所示：
 
 | Backup type | Retention period | Restore granularity |
 | --- | --- | --- |
@@ -50,7 +64,7 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 ### 备份执行规则 {#backup-execution-rules}
 
-- **备份周期**：{{{ .premium }}} 实例会同时执行每小时和每日自动备份。
+- **备份周期**：{{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例会同时执行每小时和每日自动备份。
 
 - **备份调度**：
 
@@ -67,7 +81,7 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 ### 删除备份文件 {#delete-backup-files}
 
-如需删除 {{{ .premium }}} 实例的现有备份文件，请执行以下步骤：
+如需删除 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的现有备份文件，请执行以下步骤：
 
 1. 进入实例的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -75,7 +89,17 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 手动备份 {#manual-backups}
 
+<CustomContent plan="premium">
+
 除了自动备份外，{{{ .premium }}} 还支持手动备份。手动备份可提供一个可控且有保障的恢复点。强烈建议你在执行高风险操作之前创建手动备份，例如系统升级、关键数据删除，或不可逆的 schema 或配置变更。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+除了自动备份外，{{{ .premium }}} 和 {{{ .byoc }}} 还支持手动备份。手动备份可提供一个可控且有保障的恢复点。强烈建议你在执行高风险操作之前创建手动备份，例如系统升级、关键数据删除，或不可逆的 schema 或配置变更。
+
+</CustomContent>
 
 ### 关键特性 {#key-characteristics}
 
@@ -111,7 +135,7 @@ TiDB Cloud 支持对你的实例进行快照恢复和 point-in-time 恢复。
 
 - **Point-in-Time Restore**：将你的实例恢复到特定时间点。
 
-    - Premium 实例：可以恢复到最近 7 天内的任意时间，但不能早于实例创建时间，也不能晚于当前时间前 1 分钟。请注意，手动备份不支持 PITR。
+    - Premium<CustomContent plan="byoc"> 或 BYOC</CustomContent> 实例：可以恢复到最近 7 天内的任意时间，但不能早于实例创建时间，也不能晚于当前时间前 1 分钟。请注意，手动备份不支持 PITR。
 
 ### 恢复目标 {#restore-destination}
 
@@ -119,7 +143,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ### 恢复到新的 {{{ .premium }}} 实例 {#restore-to-a-new-instance}
 
-如需将数据恢复到新的 {{{ .premium }}} 实例，请执行以下步骤：
+如需将数据恢复到新的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，请执行以下步骤：
 
 1. 进入实例的 [**Backup**](#view-the-backup-page) 页面。
 
@@ -138,7 +162,7 @@ TiDB Cloud 支持将数据恢复到新实例。
     </div>
     <div label="Point-in-Time Restore">
 
-    如需将 Premium 实例恢复到特定时间点，请执行以下步骤：
+    如需将 Premium<CustomContent plan="byoc"> 或 BYOC</CustomContent> 实例恢复到特定时间点，请执行以下步骤：
 
     1. 点击 **Point-in-Time Restore**。
     2. 选择你要恢复到的日期和时间。
@@ -148,7 +172,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 4. 点击 **Next** 进入 **Restore to a New Instance** 页面。
 
-5. 为恢复配置新的 {{{ .premium }}} 实例。步骤与[创建 {{{ .premium }}} 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)相同。
+5. 为恢复配置新的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。步骤与[创建 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)相同。
 
     > **Note:**
     >
@@ -160,7 +184,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ### 从回收站恢复 {#restore-from-recycle-bin}
 
-如需从回收站恢复已删除的 {{{ .premium }}} 实例，请执行以下步骤：
+如需从回收站恢复已删除的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，请执行以下步骤：
 
 1. 在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你所在组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击右上角的 **...**，然后点击 **Recycle Bin**。
 
@@ -199,13 +223,37 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ### 从云存储恢复备份 {#restore-backups-from-cloud-storage}
 
-<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
+<CustomContent plan="premium">
+
+{{{ .premium }}} 支持将云存储（例如 Amazon S3 和 Alibaba Cloud Object Storage Service (OSS)）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .premium }}} 和 {{{ .byoc }}} 支持将云存储（例如 Amazon S3）中的备份恢复到新实例。此功能兼容从 {{{ .dedicated }}} 集群或 TiDB Self-Managed 集群生成的备份。
+
+</CustomContent>
+
+<CustomContent plan="premium">
 
 >**Note:**
 >
 > - 当前仅支持恢复位于 **Amazon S3** 和 **Alibaba Cloud OSS** 中的备份。
 > - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
 > - 如果实例和存储 bucket 位于不同 region，可能会产生额外的跨 region 数据传输费用。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+>**Note:**
+>
+> - 当前仅支持恢复位于 **Amazon S3** 中的备份。
+> - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
+> - 如果实例和存储 bucket 位于不同 region，可能会产生额外的跨 region 数据传输费用。
+
+</CustomContent>
 
 #### 步骤 {#steps}
 
@@ -217,19 +265,32 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 2. 在 **Select Backup Storage Location** 页面，提供以下信息：
 
+    <CustomContent plan="premium">
+
     - **Cloud Provider**：选择存储备份文件的云服务提供商。
     - **Region**：如果你的云服务提供商是 Alibaba Cloud OSS，请选择一个 region。
     - **Backup Files URI**：输入包含备份文件的顶层文件夹的 URI。
     - **Access Key ID**：输入你的 access key ID。
     - **Access Key Secret**：输入你的 access key secret。
 
+    </CustomContent>
+
+    <CustomContent plan="byoc">
+
+    - **Cloud Provider**：选择存储备份文件的云服务提供商。
+    - **Backup Files URI**：输入包含备份文件的顶层文件夹的 URI。
+    - **Access Key ID**：输入你的 access key ID。
+    - **Access Key Secret**：输入你的 access key secret。
+
+    </CustomContent>
+
     > **Tip:**
     >
-    > 要为你的存储 bucket 创建 access key，请参见 [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key) 和 [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)。
+    > 要为你的存储 bucket 创建 access key，请参见 [Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium"> 和 [Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>。
 
 3. 点击 **Verify Backup and Next**。
 
-4. 如果验证成功，将显示 **Restore to a New Instance** 页面。查看页面顶部显示的备份信息，然后按照 [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) 中的步骤将备份恢复到一个新的实例。
+4. 如果验证成功，将显示 **Restore to a New Instance** 页面。查看页面顶部显示的备份信息，然后按照 [Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) 中的步骤将备份恢复到一个新的实例。
 
     如果备份信息不正确，点击 **Previous** 返回上一页，然后输入正确的信息。
 
@@ -237,7 +298,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 ## 参考 {#references}
 
-本节介绍如何为 Amazon S3 和 Alibaba Cloud OSS 配置访问。
+本节介绍如何为 Amazon S3<CustomContent plan="premium"> 和 Alibaba Cloud OSS</CustomContent> 配置访问。
 
 ### 使用 AWS access key 配置 Amazon S3 访问 {#configure-amazon-s3-access-using-an-aws-access-key}
 
@@ -253,7 +314,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 2. 向 IAM user 授予权限。
 
-    创建一个仅包含你的任务所需权限的 policy，并将其附加到 IAM user。要将数据恢复到 {{{ .premium }}} 实例，请授予 `s3:GetObject`、`s3:GetBucketLocation` 和 `s3:ListBucket` 权限。
+    创建一个仅包含你的任务所需权限的 policy，并将其附加到 IAM user。要将数据恢复到 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，请授予 `s3:GetObject`、`s3:GetBucketLocation` 和 `s3:ListBucket` 权限。
 
     以下是一个示例 policy，允许 TiDB Cloud 从你的 Amazon S3 bucket 中的特定文件夹恢复数据。
 
@@ -293,6 +354,8 @@ TiDB Cloud 支持将数据恢复到新实例。
 > **Note:**
 >
 > TiDB Cloud 不会存储你的 access keys。为保持安全，请在导入或导出任务完成后[删除 access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+
+<CustomContent plan="premium">
 
 ### 配置 Alibaba Cloud OSS 访问 {#configure-alibaba-cloud-oss-access}
 
@@ -344,3 +407,5 @@ TiDB Cloud 支持将数据恢复到新实例。
 3. 将自定义 policy 附加到 RAM user。
 
     更多信息，请参见 [Grant permissions to a RAM user](https://www.alibabacloud.com/help/en/ram/user-guide/grant-permissions-to-the-ram-user)。
+
+</CustomContent>
