@@ -1,6 +1,6 @@
 ---
-title: Tiered Storage Concepts
-summary: Learn about Tiered Storage on TiDB Cloud BYOC/Premium/Essential, including its concepts, architecture, use cases, and read amplification.
+title: Tiered Storage Overview
+summary: Learn about tiered storage on TiDB Cloud BYOC, Premium, Essential, including its concept, architecture, use cases, and read amplification.
 ---
 
 # Tiered Storage Overview
