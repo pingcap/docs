@@ -152,7 +152,7 @@ TiDB バージョン: 7.4.0
 
 -   統計キャッシュのメモリ制御は一般提供（GA） [＃45367](https://github.com/pingcap/tidb/issues/45367) @ [hawkingrei](https://github.com/hawkingrei)
 
-    TiDBインスタンスは、テーブル統計をキャッシュすることで、実行計画の生成を高速化し、SQLパフォーマンスを向上させることができます。v6.1.0以降、TiDBはシステム変数[`tidb_stats_cache_mem_quota`](https://github.com/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)導入しました。このシステム変数を設定することで、統計キャッシュのメモリ使用量の上限を設定できます。キャッシュが上限に達すると、TiDBは非アクティブなキャッシュエントリを自動的に削除し、インスタンスのメモリ使用量を制御して安定性を向上させます。
+    TiDBインスタンスは、テーブル統計をキャッシュすることで、実行計画の生成を高速化し、SQLパフォーマンスを向上させることができます。v6.1.0以降、TiDBはシステム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を導入しました。このシステム変数を設定することで、統計キャッシュのメモリ使用量の上限を設定できます。キャッシュが上限に達すると、TiDBは非アクティブなキャッシュエントリを自動的に削除し、インスタンスのメモリ使用量を制御して安定性を向上させます。
 
     v7.4.0 以降、この機能は一般提供 (GA) されます。
 
