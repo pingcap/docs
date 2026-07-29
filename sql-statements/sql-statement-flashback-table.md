@@ -60,7 +60,7 @@ FlashbackToNewName ::=
     FLASHBACK TABLE t TO t1;
     ```
 
-## 実施原則 {#implementation-principle}
+## 実装原理 {#implementation-principle}
 
 テーブルを削除する際、TiDBはテーブルメタデータのみを削除し、削除対象のテーブルデータ（行データとインデックスデータ）を`mysql.gc_delete_range`テーブルに書き込みます。TiDBのバックグラウンドにあるGCワーカーは、GCの有効期間を超えたキーを`mysql.gc_delete_range`テーブルから定期的に削除します。
 
