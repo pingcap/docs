@@ -15,7 +15,7 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 #### 現象 {#phenomenon}
 
--   スローログにクエリ実行プランが出力されている場合は、プランを直接確認できます。1 `select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行プランを解析できます。
+-   スローログにクエリ実行プランが出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行プランを解析できます。
 -   モニター内のスキャンされたキーの数が異常に増加し、スローログでは`Scan Keys`の数が多くなります。
 -   TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行プランと比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
 
@@ -27,7 +27,7 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 -   統計情報を更新する
     -   `analyze table`手動で実行し、統計の正確性を維持するために、 `crontab`コマンドを使用して`analyze`定期的に実行します。
-    -   `auto analyze`自動的に実行します。3 `analyze ratio`しきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
+    -   `auto analyze`を自動的に実行します。`analyze ratio`のしきい値を下げ、情報収集の頻度を上げ、実行の開始時刻と終了時刻を設定します。以下の例をご覧ください。
         -   `set global tidb_auto_analyze_ratio=0.2;`
         -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
         -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
@@ -78,7 +78,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   TiKVが再開されたため再選。
     -   TiKVがパニック状態になった後、 `systemd`引き上げられ、正常に動作します。panicが発生したかどうかは、TiKVのログを確認することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
-    -   TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。3 `dmesg` TiKVログを確認して原因を確認してください。
+    -   TiKVは第三者によって停止または強制終了され、その後`systemd`によってプルアップされます。`dmesg`とTiKVログを確認して原因を確認してください。
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 

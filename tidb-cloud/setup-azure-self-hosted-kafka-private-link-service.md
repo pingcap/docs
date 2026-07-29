@@ -314,7 +314,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     consume_messages
     ```
 
-4.  `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。5 `produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメータを使用して3つのブローカーすべてに接続します。11 `consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
+4.  `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。`produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメータを使用して3つのブローカーすべてに接続します。`consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
 
     ```shell
     # Test write message.

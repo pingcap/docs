@@ -22,7 +22,7 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 ## TiDBが履歴バージョンからデータを読み取る方法 {#how-tidb-reads-data-from-history-versions}
 
-[`tidb_snapshot`](/system-variables.md#tidb_snapshot)のシステム変数は、履歴データの読み取りをサポートするために導入されました。3 `tidb_snapshot`の変数について：
+[`tidb_snapshot`](/system-variables.md#tidb_snapshot)のシステム変数は、履歴データの読み取りをサポートするために導入されました。`tidb_snapshot`の変数について：
 
 -   変数は`SESSION`スコープ内で有効です。
 -   その値は`SET`ステートメントを使用して変更できます。

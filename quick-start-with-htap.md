@@ -148,7 +148,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 上記のステートメントの結果:
 
--   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。2 `1`利用可能、 `0`利用不可を意味します。6 フィールドが`AVAILABLE` `1`なると、このステータスは変更されなくなります。
+-   `AVAILABLE` 、特定のテーブルのTiFlashレプリカが利用可能かどうかを示します。`1`は利用可能、 `0`は利用不可を意味します。`AVAILABLE`フィールドが`1`になると、このステータスは変更されなくなります。
 -   `PROGRESS`レプリケーションの進行状況を表します。値は0.0～1.0の範囲です。1はTiFlashレプリカのレプリケーションの進行状況が完了したことを意味します。
 
 ### ステップ5. HTAPを使用してデータをより速く分析する {#step-5-analyze-data-faster-using-htap}

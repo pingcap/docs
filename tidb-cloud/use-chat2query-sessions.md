@@ -83,7 +83,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://eu-cen
 -   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
 -   `feedback_answer_id` ：*文字列*。フィードバック回答ID。このフィールドはオプションであり、フィードバックにのみ使用されます。
 -   `feedback_task_id` ：*文字列*。フィードバックタスクID。このフィールドはオプションであり、フィードバックにのみ使用されます。
--   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。8 `direct`設定すると、APIは指定された`question` SQL文に基づいて直接SQL文を生成します。12 に設定すると、APIは`auto_breakdown` `question` SQL文を複数のタスクに分割し、各タスクごとにSQL文を生成します。
+-   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question`に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question`を複数のタスクに分割し、各タスクごとにSQL文を生成します。
 
 応答の例は次のとおりです。
 

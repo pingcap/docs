@@ -555,7 +555,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  TiDB ログからスロー クエリ ログを確認し、クエリでインデックスまたは完全なテーブル スキャンが使用されているかどうか、または分析に必要かどうかを確認します。
     2.  ホットスポットがあるかどうかを確認します。
-    3.  コプロセッサーモニターで、 `coprocessor table/index scan`の`total`と`process`一致しているかどうかを確認してください。大きく異なる場合は、無効なクエリが多すぎることを示しています。7 `over seek bound`あるかどうかも確認できます。もしそうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
+    3.  コプロセッサーモニターで、 `coprocessor table/index scan`の`total`と`process`が一致しているかどうかを確認してください。大きく異なる場合は、無効なクエリが多すぎることを示しています。`over seek bound`があるかどうかも確認できます。もしそうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
 
 #### `TiKV_raftstore_thread_cpu_seconds_total` {#tikv-raftstore-thread-cpu-seconds-total}
 
@@ -567,7 +567,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     このルールは、 Raftstoreによる CPU 使用率を監視します。値が高い場合、 Raftstoreスレッドへの負荷が高いことを示します。
 
-    アラートしきい値は[`raftstore.store-pool-size`](/tikv-configuration-file.md#store-pool-size)値の 80% です。3 `raftstore.store-pool-size`デフォルトで 2 なので、アラートしきい値は 1.6 になります。
+    アラートしきい値は[`raftstore.store-pool-size`](/tikv-configuration-file.md#store-pool-size)値の 80% です。`raftstore.store-pool-size`はデフォルトで 2 なので、アラートしきい値は 1.6 になります。
 
 -   解決：
 

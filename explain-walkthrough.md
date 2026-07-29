@@ -118,7 +118,7 @@ SHOW STATS_HEALTHY;
 
 -   TiDB ( `StreamAgg_20` )とTiKV ( `└─StreamAgg_9` )の両方で行数を集計するには、メモリ使用量の面で非常に効率的なストリーム集計を使用します。
 
-現在の実行プランの最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。まず演算子`TableFullScan`ですべての行が読み込まれ、その後選択が適用されます。5 `SHOW CREATE TABLE trips`出力から原因がわかります。
+現在の実行プランの最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。まず演算子`TableFullScan`ですべての行が読み込まれ、その後選択が適用されます。`SHOW CREATE TABLE trips`出力から原因がわかります。
 
 ```sql
 SHOW CREATE TABLE trips\G

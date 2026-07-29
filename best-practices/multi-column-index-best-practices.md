@@ -56,7 +56,7 @@ EXPLAIN FORMAT = "brief" SELECT * FROM listings WHERE price < 2000;
 CREATE INDEX idx_city_bedrooms_price ON listings (city, bedrooms, price);
 ```
 
-SQLの複数列インデックスは辞書式順序で並べられます。1 `(city, bedrooms, price)`インデックスの場合、データはまず`city`でソートされ、次に各都市内で`bedrooms`でソートされ、最後に各`(city, bedrooms)`組み合わせ内で`price`でソートされます。この順序付けにより、TiDBは各条件に基づいて効率的に行にアクセスできます。
+SQLの複数列インデックスは辞書式順序で並べられます。`(city, bedrooms, price)`インデックスの場合、データはまず`city`でソートされ、次に各都市内で`bedrooms`でソートされ、最後に各`(city, bedrooms)`組み合わせ内で`price`でソートされます。この順序付けにより、TiDBは各条件に基づいて効率的に行にアクセスできます。
 
 1.  プライマリフィルターである`city`でフィルターします。
 2.  オプションで、その都市内で`bedrooms`でフィルタリングします。

@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS TEST_HOTSPOT(
 )
 ```
 
-このテーブルは構造が単純です。主キーの`id`以外に、セカンダリインデックスは存在しません。このテーブルにデータを書き込むには、次のステートメントを実行してください。3 `id`乱数として離散的に生成されます。
+このテーブルは構造が単純です。主キーの`id`以外に、セカンダリインデックスは存在しません。このテーブルにデータを書き込むには、次のステートメントを実行してください。`id`は乱数として離散的に生成されます。
 
 ```sql
 SET SESSION cte_max_recursion_depth = 1000000;
@@ -92,7 +92,7 @@ FROM
 
 ![QPS1](/media/best-practices/QPS1.png)
 
-クライアントは短時間で「集中的な」書き込みリクエストを開始し、TiDBは3K QPSの書き込みを受信しました。理論上、負荷は6つのTiKVノードに均等に分散されるはずです。しかし、各TiKVノードのCPU使用率から判断すると、負荷分散は不均一です。1 `tikv-3`ノードが書き込みのホットスポットとなっています。
+クライアントは短時間で「集中的な」書き込みリクエストを開始し、TiDBは3K QPSの書き込みを受信しました。理論上、負荷は6つのTiKVノードに均等に分散されるはずです。しかし、各TiKVノードのCPU使用率から判断すると、負荷分散は不均一です。`tikv-3`ノードが書き込みのホットスポットとなっています。
 
 ![QPS2](/media/best-practices/QPS2.png)
 
@@ -156,9 +156,9 @@ TiDBは汎用的な用途向けのデータベースであり、データ分布�
 SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 ```
 
-事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、 リージョン scattering の状態を確認します。3 `SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
+事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`のステートメントを実行して、 リージョン scattering の状態を確認します。`SCATTERING`の列の値がすべて`0`であれば、スケジューリングは成功です。
 
-次のSQL文を使用して、リージョンリーダーの分布を確認することもできます。1 `table_name`実際のテーブル名に置き換えてください。
+次のSQL文を使用して、リージョンリーダーの分布を確認することもできます。`table_name`を実際のテーブル名に置き換えてください。
 
 ```sql
 SELECT
@@ -196,7 +196,7 @@ ORDER BY
 
 このような状況でホットスポット問題を回避するには、テーブル作成時に`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
 
-`SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列に生成された行 ID をランダムに散布するために使用されます。4 `PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
+`SHARD_ROW_ID_BITS` 、 `_tidb_rowid`列に生成された行 ID をランダムに散布するために使用されます。`PRE_SPLIT_REGIONS` 、テーブルの作成後にリージョンを事前に分割するために使用されます。
 
 > **Note:**
 >

@@ -35,7 +35,7 @@ WhereClauseOptional ::=
 -   `OWNER_ID` : DDL所有者のUUID。[`TIDB_IS_DDL_OWNER()`](/functions-and-operators/tidb-functions.md)も参照してください。
 -   `OWNER_ADDRESS` : DDL 所有者の IP アドレス。
 -   `RUNNING_JOBS` : 実行中の DDL ジョブの詳細。
--   `SELF_ID` : 現在接続しているTiDBノードのUUID。2 `SELF_ID` `OWNER_ID`と同じ場合は、DDL所有者に接続していることを意味します。
+-   `SELF_ID` : 現在接続しているTiDBノードのUUID。`SELF_ID`が`OWNER_ID`と同じ場合は、DDL所有者に接続していることを意味します。
 -   `QUERY` : クエリのステートメント。
 
 ```sql
@@ -59,7 +59,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 <CustomContent platform="tidb">
 
--   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。2 `JOB_ID`グローバルに一意です。
+-   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。`JOB_ID`はグローバルに一意です。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
 -   `JOB_TYPE` : DDL操作の種類。一般的なジョブの種類は次のとおりです。
@@ -67,7 +67,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     -   `create table` : [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)操作の場合。
     -   `create view` : [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)操作の場合。
     -   `add index` : [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)操作の場合。
--   `SCHEMA_STATE` : DDLが操作するスキーマオブジェクトの現在の状態。2 が`JOB_TYPE` `ADD INDEX`場合はインデックスの状態、 `JOB_TYPE`が`ADD COLUMN`の場合は列の状態、 `JOB_TYPE`が`CREATE TABLE`の場合はテーブルの状態です。一般的な状態には以下が含まれます。
+-   `SCHEMA_STATE` : DDLが操作するスキーマオブジェクトの現在の状態。 `JOB_TYPE`が`ADD INDEX`の場合はインデックスの状態、 `JOB_TYPE`が`ADD COLUMN`の場合は列の状態、 `JOB_TYPE`が`CREATE TABLE`の場合はテーブルの状態です。一般的な状態には以下が含まれます。
     -   `none` : 存在しないことを示します。通常、 `DROP`操作の後、または`CREATE`操作が失敗してロールバックした後、 `none`番目の状態になります。
     -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これらの4つの状態は中間状態です。それぞれの具体的な意味については、 [TiDBにおけるオンラインDDL非同期変更の仕組み](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、演算中は表示されません。`ADD INDEX`演算を実行する場合にのみ、 `write reorganization`状態が表示され、インデックスデータが追加されていることを示します。
     -   `public` : 存在し、ユーザーが利用できることを示します。通常、 `CREATE TABLE`と`ADD INDEX` （または`ADD COLUMN` ）の操作が完了すると、状態は`public`になり、新しく作成されたテーブル、列、およびインデックスが正常に読み書きできることを示します。
@@ -87,7 +87,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     -   `cancelling` : 操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ表示されます。
     -   `cancelled` : 操作がキャンセルされたことを示します。
     -   `pausing` : 操作が一時停止されていることを示します。
-    -   `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。4 コマンドを使用して DDL ジョブ[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)再開できます。
+    -   `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
     -   `done` : 操作は TiDB 所有者ノードで正常に実行されたが、他の TiDB ノードではこの DDL ジョブによって実行された変更がまだ同期されていないことを示します。
 -   `COMMENTS` : 診断目的の追加情報が含まれます。
     -   `ingest` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)で構成された高速化されたインデックス バックフィルの追加のためのタスクを取り込みます。
@@ -103,11 +103,11 @@ OWNER_ADDRESS: 0.0.0.0:4000
 
 <CustomContent platform="tidb-cloud">
 
--   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。2 `JOB_ID`グローバルに一意です。
+-   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。`JOB_ID`はグローバルに一意です。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
 -   `JOB_TYPE` : DDL 操作のタイプ。
--   `SCHEMA_STATE` : DDLが操作するスキーマオブジェクトの現在の状態。2 が`JOB_TYPE` `ADD INDEX`場合はインデックスの状態、 `JOB_TYPE`が`ADD COLUMN`の場合は列の状態、 `JOB_TYPE`が`CREATE TABLE`の場合はテーブルの状態です。一般的な状態には以下が含まれます。
+-   `SCHEMA_STATE` : DDLが操作するスキーマオブジェクトの現在の状態。 `JOB_TYPE`が`ADD INDEX`の場合はインデックスの状態、 `JOB_TYPE`が`ADD COLUMN`の場合は列の状態、 `JOB_TYPE`が`CREATE TABLE`の場合はテーブルの状態です。一般的な状態には以下が含まれます。
     -   `none` : 存在しないことを示します。通常、 `DROP`操作の後、または`CREATE`操作が失敗してロールバックした後、 `none`番目の状態になります。
     -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これらの4つの状態は中間状態です。それぞれの具体的な意味については、 [TiDBにおけるオンラインDDL非同期変更の仕組み](https://docs.pingcap.com/tidb/stable/ddl-introduction#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、演算中は表示されません。`ADD INDEX`演算を実行する場合にのみ、 `write reorganization`状態が表示され、インデックスデータが追加されていることを示します。
     -   `public` : 存在し、ユーザーが利用できることを示します。通常、 `CREATE TABLE`と`ADD INDEX` （または`ADD COLUMN` ）の操作が完了すると、状態は`public`になり、新しく作成されたテーブル、列、およびインデックスが正常に読み書きできることを示します。
@@ -122,7 +122,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     -   `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。
     -   `rollingback` : 操作が失敗し、ロールバック中であることを示します。
     -   `cancelling` : 操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ表示されます。
-    -   `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。4 コマンドを使用して DDL ジョブ[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)再開できます。
+    -   `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
 
 </CustomContent>
 

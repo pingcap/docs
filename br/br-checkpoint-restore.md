@@ -13,7 +13,7 @@ TiDB v7.1.0以降、バックアップ＆リストア（BR）にチェックポ�
 
 TiDBクラスタが大規模で、障害発生後に再度リストアを行う余裕がない場合は、チェックポイントリストア機能を使用できます。brコマンドラインツール（以下、 `br` ）は、リストアされたシャードを定期的に記録します。これにより、次回のリストア再試行では、異常終了に近いリカバリ進捗ポイントを使用できます。
 
-## 実施原則 {#implementation-principles}
+## 実装原理 {#implementation-principles}
 
 チェックポイント復元の実装は、スナップショット復元とログ復元の2つの部分に分かれています。詳細については、 [実装の詳細: チェックポイントデータを下流のクラスタに保存する](#implementation-details-store-checkpoint-data-in-the-downstream-cluster)と[実装の詳細: チェックポイントデータを外部ストレージに保存する](#implementation-details-store-checkpoint-data-in-the-external-storage)を参照してください。
 

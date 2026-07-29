@@ -70,7 +70,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ### `checksum failed: checksum mismatched remote vs local` {#checksum-failed-checksum-mismatched-remote-vs-local}
 
-**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。2 `checksum mismatched`含むログを確認することで、原因をさらに特定できます。
+**原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`を含むログを確認することで、原因をさらに特定できます。
 
 `checksum mismatched`を含む行は情報`total_kvs: x vs y`提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
 

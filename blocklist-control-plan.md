@@ -52,7 +52,7 @@ summary: 最適化ルールと式プッシュダウンの動作を制御する�
 
     > **Note:**
     >
-    > `admin reload opt_rule_blacklist` 、上記のステートメントを実行した TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
+    > `admin reload opt_rule_blacklist`は、上記のステートメントを実行した TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
 
 -   ルールを再度有効にする場合は、テーブル内の対応するデータを削除してから、 `admin reload`ステートメントを実行します。
 
@@ -96,10 +96,10 @@ DESC mysql.expr_pushdown_blacklist;
 上記の各フィールドの説明は次のとおりです。
 
 -   `name` : プッシュダウンが無効になっている関数の名前。
--   `store_type` : 関数の計算時にプッシュダウンされないようにするコンポーネントを指定します。指定できる要素は`tidb` 、 `tikv` 、 `tiflash`です。8 `store_type`大文字と小文字を区別しません。複数の要素を指定する必要がある場合は、各コンポーネントをカンマで区切ってください。
-    -   `store_type`が`tidb`場合、TiDBメモリテーブルの読み取り中に他の TiDB サーバーで関数を実行できるかどうかを示します。
-    -   `store_type`が`tikv`場合、関数が TiKV サーバーのコプロセッサーコンポーネントで実行できるかどうかを示します。
-    -   `store_type`が`tiflash`場合、関数がTiFlash Server のコプロセッサーコンポーネントで実行できるかどうかを示します。
+-   `store_type` : 関数の計算時にプッシュダウンされないようにするコンポーネントを指定します。指定できる要素は`tidb` 、 `tikv` 、 `tiflash`です。`store_type`は大文字と小文字を区別しません。複数の要素を指定する必要がある場合は、各コンポーネントをカンマで区切ってください。
+    -   `store_type`が`tidb`の場合、TiDBメモリテーブルの読み取り中に他の TiDB サーバーで関数を実行できるかどうかを示します。
+    -   `store_type`が`tikv`の場合、関数が TiKV サーバーのコプロセッサーコンポーネントで実行できるかどうかを示します。
+    -   `store_type`が`tiflash`の場合、関数がTiFlash Server のコプロセッサーコンポーネントで実行できるかどうかを示します。
 -   `reason` : この関数がブロックリストに追加された理由を記録します。
 
 ### 使用法 {#usage}
@@ -124,7 +124,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 > **Note:**
 >
-> `admin reload expr_pushdown_blacklist` 、このステートメントが実行された TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
+> `admin reload expr_pushdown_blacklist`は、このステートメントが実行された TiDBサーバーにのみ有効になります。クラスター内のすべての TiDB サーバーに有効にしたい場合は、各 TiDBサーバーでこのコマンドを実行してください。
 
 ## 表現ブロックリストの使用例 {#expression-blocklist-usage-example}
 
@@ -132,7 +132,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 ブロックリストが有効になっているかどうかを判断するには、 `EXPLAIN`の結果を観察します（ [TiDB クエリ実行プランの概要](/explain-overview.md)を参照）。
 
-1.  次の SQL ステートメントの`WHERE`番目の句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
+1.  次の SQL ステートメントの`WHERE`句の述語`a < 2`と`a > 2` 、TiKV にプッシュダウンできます。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;

@@ -133,7 +133,7 @@ Titan は、選択された BLOB ファイルについて、各値に対応す�
 
 ### <code>min-blob-size</code>がパフォーマンスに与える影響 {#impact-of-code-min-blob-size-code-on-performance}
 
-[`min-blob-size`](/tikv-configuration-file.md#min-blob-size) 、値が Titan に格納されるかどうかを決定します。値が`min-blob-size`以上の場合、Titan に格納されます。それ以外の場合は、ネイティブの RocksDB 形式で格納されます。4 `min-blob-size`小さすぎたり大きすぎたりすると、パフォーマンスに影響します。
+[`min-blob-size`](/tikv-configuration-file.md#min-blob-size) 、値が Titan に格納されるかどうかを決定します。値が`min-blob-size`以上の場合、Titan に格納されます。それ以外の場合は、ネイティブの RocksDB 形式で格納されます。`min-blob-size`が小さすぎたり大きすぎたりすると、パフォーマンスに影響します。
 
 以下の表は、YCSBワークロードのQPSを異なる`min-blob-size`値に基づいて比較したものです。各テストラウンドでは、テストデータの行幅は`min-blob-size`に設定されており、Titanが有効な場合はデータがTitanに保存されます。
 

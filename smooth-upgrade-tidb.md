@@ -49,7 +49,7 @@ These limitations can be summarized as that you need to ensure that there are no
 
 #### TiUPを使用してアップグレードする {#use-tiup-to-upgrade}
 
-v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つまり、 `tiup cluster upgrade`コマンドを使用してTiDBクラスタを直接アップグレードできます。3 `tiup cluster patch`は現在サポートされていないことに注意してください。
+v1.14.0以降、 TiUPはこの機能を自動的にサポートします。つまり、 `tiup cluster upgrade`コマンドを使用してTiDBクラスタを直接アップグレードできます。`tiup cluster patch`は現在サポートされていないことに注意してください。
 
 #### TiDB Operatorを使用してアップグレードする {#use-tidb-operator-to-upgrade}
 

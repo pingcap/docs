@@ -36,7 +36,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
     >
     > リンク内の`{version}` TiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ（ `amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 
-2.  抽出したファイルで、 `prometheus-v{version}-linux-amd64.tar.gz`見つけて抽出します。
+2.  抽出したファイルで、 `prometheus-v{version}-linux-amd64.tar.gz`を見つけて抽出します。
 
     ```bash
     tar -xzf prometheus-v{version}-linux-amd64.tar.gz
@@ -45,7 +45,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 ### ステップ3. TiUPが使用できる新しいPrometheusパッケージを作成する {#step-3-create-a-new-prometheus-package-that-tiup-can-use}
 
 1.  [ステップ1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website)で抽出したファイルをコピーし、コピーしたファイルを使用して[ステップ2](#step-2-download-the-prometheus-installation-package-provided-by-tidb)で抽出した`./prometheus-v{version}-linux-amd64/prometheus`ディレクトリ内のファイルを置き換えます。
-2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。5 `{new-version}`必要に応じて指定できます。
+2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。`{new-version}`は必要に応じて指定できます。
 
     ```bash
     cd prometheus-v{version}-linux-amd64
@@ -83,7 +83,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
     >
     > リンク内の`{version}` TiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ（ `amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 
-2.  抽出したファイルで、 `grafana-v{version}-linux-amd64.tar.gz`見つけて抽出します。
+2.  抽出したファイルで、 `grafana-v{version}-linux-amd64.tar.gz`を見つけて抽出します。
 
     ```bash
     tar -xzf grafana-v{version}-linux-amd64.tar.gz
@@ -92,7 +92,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 ### ステップ3. TiUPが使用できる新しいGrafanaパッケージを作成する {#step-3-create-a-new-grafana-package-that-tiup-can-use}
 
 1.  [ステップ1](#step-1-download-a-new-grafana-installation-package-from-the-grafana-website)で抽出したファイルをコピーし、コピーしたファイルを使用して[ステップ2](#step-2-download-the-grafana-installation-package-provided-by-tidb)で抽出した`./grafana-v{version}-linux-amd64/`ディレクトリ内のファイルを置き換えます。
-2.  `./grafana-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`grafana-v{new-version}.tar.gz`という名前を付けます。5 `{new-version}`必要に応じて指定できます。
+2.  `./grafana-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`grafana-v{new-version}.tar.gz`という名前を付けます。`{new-version}`は必要に応じて指定できます。
 
     ```bash
     cd grafana-v{version}-linux-amd64

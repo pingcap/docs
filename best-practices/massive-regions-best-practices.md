@@ -88,7 +88,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 >
 > TiDB v3.0 以降では`Region Merge`がデフォルトで有効になっています。
 
-`Region Merge`有効にすることで、Regionの数を減らすこともできます。3 `Region Split`は異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`ステートメントを実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
+`Region Merge`有効にすることで、Regionの数を減らすこともできます。`Region Split`は異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`ステートメントを実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
 
 次のパラメータを設定して`Region Merge`有効にします。
 
