@@ -350,7 +350,7 @@ SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:
     SPLIT PARTITION TABLE t PARTITION (p1,p2) INDEX idx BETWEEN (0) AND (20000) REGIONS 2;
     ```
 
-## 分割前リージョン {#pre-split-regions}
+## pre_split_regions {#pre_split_regions}
 
 `AUTO_RANDOM`または`SHARD_ROW_ID_BITS`属性を使用してテーブルを作成する場合、テーブル作成直後にテーブルをリージョンに均等に事前分割したい場合は`PRE_SPLIT_REGIONS`オプションを指定することもできます。テーブルの事前分割リージョンの数は`2^(PRE_SPLIT_REGIONS)`です。
 
