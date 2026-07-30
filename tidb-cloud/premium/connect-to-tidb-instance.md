@@ -15,7 +15,7 @@ summary: さまざまな方法でTiDB Cloud Premiumインスタンスに接続�
 
 TiDB Cloud で {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが作成されたら、直接接続で接続できます。
 
-直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してインスタンスに接続できます。 。
+直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してインスタンスに接続できます。
 
 | 接続方法 | ユーザーインターフェース | シナリオ                           |
 | ---- | ------------ | ------------------------------ |
