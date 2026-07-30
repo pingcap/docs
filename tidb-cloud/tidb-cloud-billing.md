@@ -35,7 +35,7 @@ TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプ
 
 ### {{{ .lake }}} の料金 {#pricing-for-lake}
 
-TiDB Cloud Lake の料金は、warehouse、storage、cloud service fee で構成されます。詳細については、[TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/) を参照してください。
+TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウドサービスの各料金で構成されます。詳細については、[TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/) を参照してください。
 
 ## 請求書 {#invoices}
 
