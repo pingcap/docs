@@ -7,7 +7,7 @@ summary: AWS エンドポイント サービス プライベート リンク接�
 
 このドキュメントでは、 [AWS エンドポイントサービスプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用してTiDB Cloud Essential クラスターを AWS 上の[Confluent Cloud 専用クラスタ](https://docs.confluent.io/cloud/current/clusters/cluster-types.html)に接続する方法について説明します。
 
-> **注記**
+> **Note**
 >
 > AWS 上のすべての Confluent Cloud クラスター タイプのうち、プライベート リンク接続をサポートするのは Confluent Cloud Dedicated クラスターのみです。
 

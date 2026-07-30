@@ -94,7 +94,7 @@ npm install prisma typescript ts-node @types/node --save-dev
     DATABASE_URL='{connection_string}'
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Starterの場合、パブリックエンドポイントを使用する際には`sslaccept=strict`を設定して TLS 接続を有効にする**必要があります**。
 
@@ -179,7 +179,7 @@ npm install prisma typescript ts-node @types/node --save-dev
     DATABASE_URL='mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}'
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Starterの場合、パブリックエンドポイントを使用する際には`sslaccept=strict`を設定して TLS 接続を有効にすることをお**勧め****します**。 `sslaccept=strict`を設定して TLS 接続を有効にする場合は、 `sslcert=/path/to/ca.pem`を介して接続ダイアログからダウンロードした CA 証明書のファイルパスを指定する必要があります。
 

@@ -27,7 +27,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 ## 制限事項 {#limitations}
 
-> **注記**：
+> **Note**:
 >
 > このセクションでは、増分データ移行に関する制限事項のみを記載しています。一般的な制限事項も併せてお読みになることをお勧めします。 [制限事項](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)をご覧ください。
 
@@ -52,7 +52,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 ## 前提条件 {#prerequisites}
 
-> **注記**：
+> **Note**:
 >
 > このセクションには、増分データ移行に関する前提条件のみが含まれています。 [一般的な前提条件](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)も併せて読むことをお勧めします。
 
@@ -117,7 +117,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ### 自己ホスト型のMySQLインスタンスの場合 {#for-a-self-hosted-mysql-instance}
 
-> **注記**：
+> **Note**:
 >
 > 具体的な手順やコマンドは、MySQLのバージョンや構成によって異なる場合があります。GTIDを有効にすることによる影響を十分に理解し、本番環境以外の環境で適切にテストおよび検証してから、この操作を実行してください。
 

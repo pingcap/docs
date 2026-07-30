@@ -45,7 +45,7 @@ Amazon RDSインスタンスは、以下の要件を満たす必要がありま�
         -   タイプ: `MySQL/Aurora`
         -   宛先: `Anywhere-IPv4`
 
-> **注記**
+> **Note**
 >
 > 現在、 TiDB Cloud Essentialではリージョン間接続はサポートされていません。リージョン間接続が必要な場合は、 TiDB Cloud Premiumをご利用いただき、VPCピアリングによる接続を確立してください。
 

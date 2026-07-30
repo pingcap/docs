@@ -18,7 +18,7 @@ Connected Care サービスは、最新のコミュニケーション ツール�
 
 Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium の**4 つのサポート プランがあります。
 
-> **注記**
+> **Note**
 >
 > **Basic** 、 **Enterprise** 、および**Premium の**サポート プランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
 
@@ -37,7 +37,7 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 | Connected: サポートチケットのIMインタラクション ( [Slack](/tidb-cloud/connected-slack-ticket-interaction.md) , [Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ) | <li></li>        | <li></li>  | <li></li>  | ✔                     |
 | テクニカルアカウントマネージャー                                                                                                                                  | <li></li>        | <li></li>  | <li></li>  | ✔                     |
 
-> **注記**
+> **Note**
 >
 > 4 つのサポート プランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
 

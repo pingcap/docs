@@ -13,7 +13,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 > -   ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > -   ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-> **ヒント**
+> **Tip**
 >
 > 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
 
@@ -212,7 +212,7 @@ response = query_engine.query("What did the author do?")
 print(textwrap.fill(str(response), 100))
 ```
 
-> **注記**
+> **Note**
 >
 > `TiDBVectorStore` [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
 

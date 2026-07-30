@@ -14,7 +14,7 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 -   mysql2を使用してTiDBに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作用の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
-> **注記**
+> **Note**
 >
 > このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Self-Managedに対応しています。
 
@@ -35,7 +35,7 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 
 このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 
-> **注記**
+> **Note**
 >
 > 完全なコードスニペットと実行手順については、 [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHubリポジトリを参照してください。
 
@@ -78,13 +78,13 @@ npm install
 
     -   お使いの環境に合った**オペレーティングシステム**を選択してください。
 
-    > **注記**
+    > **Note**
     >
     > Node.jsアプリケーションでは、SSL CA証明書を提供する必要はありません。Node.jsはTLS（SSL）接続を確立する際に、デフォルトで組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するためです。
 
 4.  **「パスワード生成」をクリックすると、ランダムなパスワード**が生成されます。
 
-    > **ヒント**
+    > **Tip**
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードをリセット」**をクリックして新しいパスワードを生成できます。
 

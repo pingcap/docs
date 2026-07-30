@@ -7,7 +7,7 @@ summary: OpenAPI インターフェースを使用してクラスターのステ
 
 <!-- markdownlint-disable MD024 -->
 
-> **注記**
+> **Note**
 >
 > TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。1 [TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)使用をお勧めします。
 

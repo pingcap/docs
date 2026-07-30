@@ -141,7 +141,7 @@ def text_to_embedding(text):
 
 `TiDBVectorClient`クラスを使用して TiDB に接続し、ベクトル列を持つテーブル`embedded_documents`を作成します。
 
-> **注記**
+> **Note**
 >
 > テーブル内のベクトル列の次元が、埋め込みモデルによって生成されるベクトルの次元と一致していることを確認してください。たとえば、 **msmarco-MiniLM-L12-cos-v5**モデルは 384 次元のベクトルを生成するため、 `embedded_documents`内のベクトル列の次元も 384 にする必要があります。
 

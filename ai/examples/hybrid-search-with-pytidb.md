@@ -17,7 +17,7 @@ summary: より包括的な結果を得るには、ベクトル検索と全文�
 -   **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
 -   **OpenAI API キー**: [OpenAI](https://platform.openai.com/api-keys)から OpenAI API キーを取得します。
 
-> **注記**
+> **Note**
 >
 > 現在、全文検索は以下の製品オプションおよび地域でのみご利用いただけます。
 >
