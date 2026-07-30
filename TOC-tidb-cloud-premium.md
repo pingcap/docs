@@ -138,7 +138,7 @@
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
-    - [Set Up MSK Provisioned Cluster via Private Link in AWS](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
+    - [Set Up MSK Provisioned Cluster via Private Link in AWS](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control

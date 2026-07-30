@@ -18,7 +18,7 @@ The guide covers the full lifecycle: preparing the network and credentials, crea
 
     1. In the TiDB Cloud console, navigate to the overview page of your instance, and click **Settings** > **Networking**.
     2. In the **Private Link Endpoint For External Services** area, click **Create Private Endpoint for External Services**.
-    3. In the dialog, switch the **Connection Type** to **AWS MSK Provisioned** and note the **AWS Account ID** and **availability zone IDs** (e.g., `use1-az1`).
+    3. In the dialog, switch the **Connection Type** to **AWS MSK Provisioned** and note the **AWS Account ID** and **availability zone IDs** (for example, `use1-az1`).
 
     > **Important about AZ alignment**: Use AZ IDs (e.g., `use1-az1`) rather than AZ names (e.g., `us-east-1a`) when verifying availability zone alignment across AWS accounts. The same AZ name can map to different physical zones in different accounts. Your MSK cluster must use the same AZ IDs as your TiDB Cloud instance.
 
@@ -28,8 +28,8 @@ Your MSK cluster must meet the following conditions (whether existing or newly c
 
 - **Region**: Same AWS region as your TiDB Cloud Premium instance.
 - **Availability Zones**: Must match your TiDB Cloud instance AZs (verify by AZ ID, not AZ name).
-- **Authentication**: SASL/SCRAM must be enabled. IAM-only authentication does not work with PrivateLink.
-- **Broker type**: `t4.small` is not supported. Choose a larger type.
+- **Authentication**: SASL/SCRAM must be enabled.
+- **Broker type**: `t3.small` is not supported. Choose a larger type.
 - **Public access**: Must be disabled.
 
 For additional requirements, see [Amazon MSK multi-VPC private connectivity documentation](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements).
@@ -46,7 +46,7 @@ Record the AZ IDs of the subnets. The MSK cluster will use these subnets at crea
 
 Create a secret in AWS Secrets Manager to store the SASL/SCRAM credentials that TiDB Cloud will use to authenticate against your MSK cluster. This secret requires a custom AWS KMS encryption key — the default AWS managed key will not work.
 
-First, create a symmetric KMS key and give it an alias for easy reference. Then create a secret whose name **must** start with `AmazonMSK_` (e.g., `AmazonMSK_tidb_msk`). The secret value is a JSON object containing a `username` and `password`.
+First, create a symmetric KMS key and give it an alias for easy reference. Then create a secret whose name **must** start with `AmazonMSK_` (for example, `AmazonMSK_tidb_msk`). The secret value is a JSON object containing a `username` and `password`.
 
 ## Step 3. Create the Provisioned MSK Cluster
 
@@ -54,7 +54,7 @@ If you do not already have an MSK cluster that satisfies the prerequisites, crea
 
 Additional creation settings:
 
-- **Kafka version**: Use a version supported by TiDB Cloud (e.g., 3.7.x).
+- **Kafka version**: Use a version supported by TiDB Cloud (for example, 3.7.x).
 - **Number of brokers**: At least one per availability zone (minimum of 3).
 - **Encryption in transit**: Configure according to your security requirements.
 - **Client subnets**: Select the three private subnets created in Step 1.
@@ -107,7 +107,7 @@ sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule require
 
 ### 5.3 Retrieve the Bootstrap Brokers
 
-In the AWS MSK console, open your cluster's **Summary** section. Click **View client information** in the upper-right corner. In the popup, locate the **SASL/SCRAM Private endpoint** entry — this is your bootstrap server URI. Copy it for use in the ACL commands below.
+In the AWS MSK console, open your cluster's **Summary** section. Click **View client information** in the upper-right corner. In the popup, locate the **SASL/SCRAM Private endpoint** entry. This is your bootstrap server URI. Copy it for use in the ACL commands below.
 
 ### 5.4 Create the ACLs
 
@@ -146,7 +146,7 @@ Multi-VPC connectivity is the AWS feature that enables PrivateLink access to you
 
 In the AWS MSK console, go to your cluster's **Properties** tab. Under **Network settings** > **Multi-VPC connectivity**, turn it on. Configure the VPC connectivity client authentication to use **SASL/SCRAM** only (IAM and TLS are not needed for the TiDB Cloud connection).
 
-This operation triggers a long-running cluster update — expect it to take approximately 60 to 75 minutes. You can monitor progress in the MSK console under the **Cluster operations** tab. Wait for the cluster to return to **Active**.
+This operation triggers a long-running cluster update. Expect it to take approximately 40 to 60 minutes. You can monitor progress in the MSK console under the **Cluster operations** tab. Wait for the cluster to return to **Active**.
 
 When the update completes, confirm that:
 
@@ -206,4 +206,4 @@ For more information, see [Attach a cluster policy to the MSK cluster](https://d
 
 Create the private link connection in TiDB Cloud using the ARN of your MSK cluster.
 
-For more information, see [Create an Amazon MSK Provisioned private link connection](https://docs.pingcap.com/tidbcloud/).
+For more information, see [Create an Amazon MSK Provisioned private link connection](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md#step-2-configure-the-private-endpoint-for-changefeeds).
