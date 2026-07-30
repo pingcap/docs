@@ -15,7 +15,7 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 [新しい指標を推奨する](#recommend-indexes-using-the-recommend-index-statement)ことに加えて、インデックスアドバイザーは効率的なインデックス管理を確保するために[非アクティブなインデックスの削除](#remove-unused-indexes)も提案します。
 
-## <code>RECOMMEND INDEX</code>ステートメントを使用してインデックスを推奨します。 {#recommend-indexes-using-the-code-recommend-index-code-statement}
+## <code>RECOMMEND INDEX</code>ステートメントを使用してインデックスを推奨します。 {#recommend-indexes-using-the-recommend-index-statement}
 
 TiDB では、インデックス アドバイザ タスク用の`RECOMMEND INDEX` SQL ステートメントが導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステム テーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL ステートメントを対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
 
@@ -105,7 +105,7 @@ SELECT * FROM mysql.index_advisor_results;
 +----+---------------------+---------------------+-------------+------------+------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+-------+
 ```
 
-### <code>RECOMMEND INDEX</code>オプションの推奨 {#code-recommend-index-code-options}
+### <code>RECOMMEND INDEX</code>オプションの推奨 {#recommend-index-options}
 
 `RECOMMEND INDEX`ステートメントのオプションを設定および表示して、ワークロードに合わせて動作を微調整するには、次のようにします。
 
@@ -155,7 +155,7 @@ Query OK, 1 row affected (0.00 sec)
 
 バージョン8.0.0以降では、 [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)と[`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を使用して、ワークロード内の非アクティブなインデックスを特定できます。これらのインデックスを削除することで、ストレージ容量を節約し、オーバーヘッドを削減できます。本番環境では、対象のインデックスを完全に削除する前に、まず非表示にして、1回の業務サイクルにわたって影響を確認することを強くお勧めします。
 
-### <code>sys.schema_unused_indexes</code>を使用します {#use-code-sys-schema-unused-indexes-code}
+### <code>sys.schema_unused_indexes</code>を使用します {#use-sysschema_unused_indexes}
 
 [`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)ビューは、すべての TiDB インスタンスの最後の起動以降に使用されていないインデックスを識別します。このビューは、スキーマ、テーブル、および列情報を含むシステム テーブルに基づいており、スキーマ、テーブル、およびインデックス名を含む、各インデックスの完全な仕様を提供します。このビューを照会することで、どのインデックスを非表示にするか、または削除するかを決定できます。
 
@@ -167,7 +167,7 @@ Query OK, 1 row affected (0.00 sec)
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
 > ```
 
-### <code>INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE</code>を使用してください。 {#use-code-information-schema-cluster-tidb-index-usage-code}
+### <code>INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE</code>を使用してください。 {#use-information_schemacluster_tidb_index_usage}
 
 [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)テーブルには、選択バケット、最終アクセス時刻、アクセスされた行数などのメトリックが格納されています。以下の例は、このテーブルに基づいて未使用または非効率なインデックスを特定するクエリを示しています。
 

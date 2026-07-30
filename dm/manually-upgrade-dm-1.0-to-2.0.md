@@ -3,7 +3,7 @@ title: Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+
 summary: TiDB Data Migrationをv1.0.xからv2.0+へ手動でアップグレードする方法を学びましょう。
 ---
 
-# TiDB Data Migrationをv1.0.xからv2.0+へ手動でアップグレードする {#manually-upgrade-tidb-data-migration-from-v1-0-x-to-v2-0}
+# TiDB Data Migrationをv1.0.xからv2.0+へ手動でアップグレードする {#manually-upgrade-tidb-data-migration-from-v10x-to-v20}
 
 このドキュメントでは、TiDB DMツールをv1.0.xからv2.0+に手動でアップグレードする方法について説明します。主な手順は、v1.0.xのグローバルチェックポイント情報を使用して、v2.0+クラスタで新しいデータ移行タスクを開始することです。
 
@@ -19,7 +19,7 @@ TiDB DM ツールを v1.0.x から v2.0+ に自動的にアップグレードす
 
 手動アップグレードの手順は以下のとおりです。
 
-## ステップ1：v2.0+設定ファイルを準備する {#step-1-prepare-v2-0-configuration-file}
+## ステップ1：v2.0+設定ファイルを準備する {#step-1-prepare-v20-configuration-file}
 
 バージョン2.0以降で準備された構成ファイルには、上流データベースの構成ファイルとデータ移行タスクの構成ファイルが含まれています。
 
@@ -31,7 +31,7 @@ v2.0以降では、[アップストリームデータベース構成ファイル
 >
 > v1.0.x から v2.0+ へのアップグレード中にソース構成の`enable-gtid`が有効になっている場合、 binlogまたはリレーログファイルを解析して、 binlog の位置に対応する GTID セットを取得する必要があります。
 
-#### DM-Ansibleによってデプロイされたv1.0.xクラスターをアップグレードする {#upgrade-a-v1-0-x-cluster-deployed-by-dm-ansible}
+#### DM-Ansibleによってデプロイされたv1.0.xクラスターをアップグレードする {#upgrade-a-v10x-cluster-deployed-by-dm-ansible}
 
 v1.0.x DM クラスターが DM-Ansible によってデプロイされ、 `dm_worker_servers`ファイルに次の`inventory.ini`設定が含まれていると仮定します。
 
@@ -65,7 +65,7 @@ from:
   password: "VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU="   # Corresponds to the original `mysql_password`.
 ```
 
-#### バイナリによってデプロイされたv1.0.xクラスターをアップグレードする {#upgrade-a-v1-0-x-cluster-deployed-by-binary}
+#### バイナリによってデプロイされたv1.0.xクラスターをアップグレードする {#upgrade-a-v10x-cluster-deployed-by-binary}
 
 v1.0.x DM クラスターがバイナリによってデプロイされ、対応する DM-worker 構成が以下のようになっていると仮定します。
 
@@ -100,7 +100,7 @@ from:
 
 [データ移行タスク構成ガイド](/dm/dm-task-configuration-guide.md)については、v2.0+ は基本的に v1.0.x と互換性があります。 v1.0.x の設定を直接コピーできます。
 
-## ステップ2：v2.0+クラスターをデプロイ {#step-2-deploy-the-v2-0-cluster}
+## ステップ2：v2.0+クラスターをデプロイ {#step-2-deploy-the-v20-cluster}
 
 > **Note:**
 >
@@ -108,7 +108,7 @@ from:
 
 [TiUPを使用する](/dm/deploy-a-dm-cluster-using-tiup.md)必要なノード数に応じて新しい v2.0+ クラスターをデプロイします。
 
-## ステップ3：v1.0.xクラスタを停止します {#step-3-stop-the-v1-0-x-cluster}
+## ステップ3：v1.0.xクラスタを停止します {#step-3-stop-the-v10x-cluster}
 
 元の v1.0.x クラスターが DM-Ansible によってデプロイされている場合は、 [DM-Ansibleを使用してv1.0.xクラスタを停止します](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster) 。
 

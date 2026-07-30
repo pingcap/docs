@@ -324,7 +324,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ2: 3つのデータセンターに5つのレプリカを2:2:1の割合で配置し、Leaderは3番目のデータセンターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-2-2-1-and-the-leader-should-not-be-in-the-third-data-center}
+### シナリオ2: 3つのデータセンターに5つのレプリカを2:2:1の割合で配置し、Leaderは3番目のデータセンターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center}
 
 3つのルールを作成します。レプリカ数をそれぞれ`2` 、 `2` 、 `1`に設定します。各ルールで、レプリカを対応するデータセンター`label_constraints`から 8 に制限します。さらに、Leaderを必要としないデータセンターについては、 `role`を`follower`に変更します。
 

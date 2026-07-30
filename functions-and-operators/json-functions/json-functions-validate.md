@@ -11,7 +11,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 >
 > 現在、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-## `JSON_SCHEMA_VALID()` {#json-schema-valid}
+## `JSON_SCHEMA_VALID()` {#json_schema_valid}
 
 `JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 

@@ -38,7 +38,7 @@ strict-format = true
 
 最新バージョンをお試しください。速度が改善されているかもしれません。
 
-## <code>tidb-lightning</code>プロセスがバックグラウンドで実行中に突然終了する {#the-code-tidb-lightning-code-process-suddenly-quits-while-running-in-background}
+## <code>tidb-lightning</code>プロセスがバックグラウンドで実行中に突然終了する {#the-tidb-lightning-process-suddenly-quits-while-running-in-background}
 
 これは、 `tidb-lightning`正しく起動されていないためにシステムが SIGHUP シグナルを送信し、 `tidb-lightning`プロセスを停止したことが原因である可能性があります。この場合、 `tidb-lightning.log`通常、次のログを出力します。
 
@@ -64,7 +64,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 ## TiDB Lightningがエラーを報告 {#tidb-lightning-reports-an-error}
 
-### `could not find first pair, this shouldn't happen` {#could-not-find-first-pair-this-shouldn-t-happen}
+### `could not find first pair, this shouldn't happen` {#could-not-find-first-pair-this-shouldnt-happen}
 
 このエラーは、 TiDB Lightningがソート済みのローカルファイルを読み取る際に、開いているファイル数がシステム制限を超えたために発生する可能性があります。Linuxシステムでは、 `ulimit -n`コマンドを使用して、このシステム制限の値が小さすぎないかどうかを確認できます。インポート中にこの値を`1000000` （ `ulimit -n 1000000` ）に調整することをお勧めします。
 
@@ -94,7 +94,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 3.  TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
-### <code>Checkpoint for … has invalid status:</code> (エラー コード) {#code-checkpoint-for-has-invalid-status-code-error-code}
+### <code>Checkpoint for … has invalid status:</code> (エラー コード) {#checkpoint-for--has-invalid-status-error-code}
 
 **原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しています。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
 
@@ -122,7 +122,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 3.  `[mydumper] character-set = "binary"`設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
-### <code>[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'</code> {#code-sql2kv-sql-encode-error-types-1292-invalid-time-format-1970-1-1-code}
+### <code>[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'</code> {#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-}
 
 **原因**: テーブルに`timestamp`型の列が含まれていますが、時刻値自体が存在しません。これは、夏時間の変更、または時刻値がサポート範囲（1970年1月1日から2038年1月19日）を超えていることが原因です。
 
@@ -150,7 +150,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 -   制限を動的に増やすには、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用します。
 -   TiKVにも同様の制限があることに注意してください。1回の書き込みリクエストのデータサイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) （デフォルトでは`8MiB` ）を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の設定を変更する必要があります。
 
-### TiDB Lightningがモードを切り替えるときに、 <code>rpc error: code = Unimplemented ...</code> {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
+### TiDB Lightningがモードを切り替えるときに、 <code>rpc error: code = Unimplemented ...</code> {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
 
 **原因**: クラスタ内の一部のノードが`switch-mode`サポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
 
@@ -159,13 +159,13 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 -   クラスター内にTiFlashノードがある場合は、クラスターを`v4.0.0-rc.2`以上のバージョンに更新できます。
 -   クラスターをアップグレードしない場合は、 TiFlash を一時的に無効にします。
 
-### `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'` {#tidb-lightning-encountered-error-tidb-version-too-old-expected-4-0-0-found-3-0-18}
+### `tidb lightning encountered error: TiDB version too old, expected '>=4.0.0', found '3.0.18'` {#tidb-lightning-encountered-error-tidb-version-too-old-expected-400-found-3018}
 
 TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータインポートのみをサポートしています。Local-backend を使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。その場合は、設定を変更して、データのインポートに Importer-backend または TiDB-backend を使用するように設定できます。
 
 `nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。5 バージョン`nightly`使用時にこのエラーが発生した場合は、設定`check-requirements = false`設定することでバージョンチェックを省略できます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
 
-### `restore table test.district failed: unknown columns in header [...]` {#restore-table-test-district-failed-unknown-columns-in-header}
+### `restore table test.district failed: unknown columns in header [...]` {#restore-table-testdistrict-failed-unknown-columns-in-header-}
 
 このエラーは通常、CSVデータファイルにヘッダーが含まれていないこと（最初の行が列名ではなくデータである）が原因で発生します。そのため、 TiDB Lightning設定ファイルに以下の設定を追加する必要があります。
 
@@ -176,7 +176,7 @@ TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB ク�
 
 TiDBはMySQLのすべての文字セットをサポートしているわけではありません。そのため、インポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、 TiDB Lightningはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)を使用して下流で事前にテーブルスキーマを作成してください。
 
-### `invalid compression type ...` {#invalid-compression-type}
+### `invalid compression type ...` {#invalid-compression-type-}
 
 -   TiDB Lightning v6.4.0以降のバージョンでは、 `gzip` `snappy`圧縮データファイルのみがサポートされています。その他の種類の圧縮ファイルを使用するとエラーが発生します。ソースデータファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクがエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポートデータディレクトリから移動してください。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
 

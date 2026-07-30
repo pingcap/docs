@@ -37,7 +37,7 @@ summary: オペレーティング システムのパラメータを調整する�
 
 perf は、Linux カーネルが提供する重要なパフォーマンス解析ツールです。ハードウェアレベル（CPU/PMU、パフォーマンス監視ユニット）の機能とソフトウェアレベル（ソフトウェアカウンタ、トレースポイント）の機能の両方をカバーしています。詳細な使用方法については、 [perf の例](http://www.brendangregg.com/perf.html#Background)を参照してください。
 
-### BCC/bpftrace {#bcc-bpftrace}
+### BCC/bpftrace {#bccbpftrace}
 
 CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポートしています。そのため、 [60秒で](#in-60-seconds)の結果に基づいて適切なツールを選択し、詳細な分析を行うことができます。perf/ftraceと比較すると、BPFはプログラマビリティが高く、パフォーマンスオーバーヘッドが少ないという利点があります。kprobeと比較すると、BPFはセキュリティが高く、本番環境に適しています。BCCツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
@@ -45,11 +45,11 @@ CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポ�
 
 このセクションでは、分類されたカーネル サブシステムに基づいたパフォーマンス チューニングについて説明します。
 
-### CPU—周波数スケーリング {#cpu-frequency-scaling}
+### CPU—周波数スケーリング {#cpufrequency-scaling}
 
 cpufreq は、CPU周波数を動的に調整するモジュールです。5つのモードをサポートしています。サービスのパフォーマンスを確保するには、パフォーマンスモードを選択し、動的な調整を行わずにCPU周波数をサポートされている最高動作周波数に固定します。この操作を行うコマンドは`cpupower frequency-set --governor performance`です。
 
-### CPU—割り込み親和性 {#cpu-interrupt-affinity}
+### CPU—割り込み親和性 {#cpuinterrupt-affinity}
 
 -   `irqbalance`サービスを通じて自動バランスを実現できます。
 -   手動バランス:
@@ -62,7 +62,7 @@ cpufreq は、CPU周波数を動的に調整するモジュールです。5つ�
 
 NUMA（Non-Uniform Memory Access）ノードをまたがるメモリを可能な限り回避するには、スレッド／プロセスを特定のCPUコアにバインドし、そのCPUアフィニティを設定することができます。通常のプログラムの場合、CPUバインドには`numactl`コマンドを使用できます。詳細な使用方法については、Linuxのマニュアルページを参照してください。ネットワークインターフェースカード（NIC）の割り込みについては、 [ネットワークを調整する](#network-tuning)を参照してください。
 
-### メモリ - 透過的巨大ページ (THP) {#memory-transparent-huge-page-thp}
+### メモリ - 透過的巨大ページ (THP) {#memorytransparent-huge-page-thp}
 
 データベースアプリケーションではTHPの使用は推奨**されません**。データベースは連続的なメモリアクセスパターンではなく、スパースなメモリアクセスパターンを持つことが多いためです。高レベルのメモリ断片化が深刻な場合、THPページ割り当て時にレイテンシーが増大します。THPでダイレクトコンパクションを有効にすると、CPU使用率が急上昇します。したがって、THPを無効にすることをお勧めします。
 
@@ -72,7 +72,7 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
 grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 ```
 
-### メモリ - 仮想メモリパラメータ {#memory-virtual-memory-parameters}
+### メモリ - 仮想メモリパラメータ {#memoryvirtual-memory-parameters}
 
 -   `dirty_ratio`パーセント比。ダーティページキャッシュの総量がシステムメモリ全体のこのパーセント比に達すると、システムは`pdflush`オペレーションを使用してダーティページキャッシュをディスクに書き込みます。デフォルト値の`dirty_ratio`は 20% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、この値を下げるとメモリ回収の効率が向上します。
 -   `dirty_background_ratio`パーセント比。ダーティページキャッシュの総量がシステムメモリ全体のこのパーセント比に達すると、システムはバックグラウンドでダーティページキャッシュをディスクに書き込み始めます。デフォルト値は`dirty_background_ratio`で、10% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、値を低く設定するとメモリ回収の効率が向上します。
@@ -81,7 +81,7 @@ grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 
 コア I/O スタック リンクは、ファイル システムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
 
-#### I/Oスケジューラ {#i-o-scheduler}
+#### I/Oスケジューラ {#io-scheduler}
 
 I/Oスケジューラは、ストレージデバイス上でI/O操作を実行するタイミングと時間を決定します。I/Oエレベータとも呼ばれます。SSDデバイスの場合、I/Oスケジューリングポリシーを`noop`に設定することをお勧めします。
 
@@ -89,7 +89,7 @@ I/Oスケジューラは、ストレージデバイス上でI/O操作を実行�
 echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 ```
 
-#### フォーマットパラメータ - ブロックサイズ {#formatting-parameters-block-size}
+#### フォーマットパラメータ - ブロックサイズ {#formatting-parametersblock-size}
 
 ブロックはファイルシステムの作業単位です。ブロックサイズは、1つのブロックに保存できるデータの量を決定し、それによって1回あたりに書き込んだり読み込んだりするデータの最小量を決定します。
 
@@ -97,7 +97,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 `mkfs`コマンドを使用してデバイスをフォーマットする場合、ファイルシステムオプションの一部としてブロックサイズを指定します。ブロックサイズを指定するパラメータはファイルシステムによって異なります。詳細については、対応する`mkfs`マニュアルページ（例： `man mkfs.ext4`を参照してください。
 
-#### <code>mount</code>パラメータ {#code-mount-code-parameters}
+#### <code>mount</code>パラメータ {#mount-parameters}
 
 `mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。`nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
 

@@ -9,7 +9,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ## 1. サービス利用不可 {#1-service-unavailable}
 
-### 1.1 クライアントから<code>Region is Unavailable</code>エラーが報告されました {#1-1-the-client-reports-code-region-is-unavailable-code-error}
+### 1.1 クライアントから<code>Region is Unavailable</code>エラーが報告されました {#11-the-client-reports-region-is-unavailable-error}
 
 -   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20 秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
 
@@ -21,20 +21,20 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 -   1.1.5Followerの申請が前のエポックで遅延した場合、FollowerがLeaderになった後、 `epoch not match`を使用してリクエストを拒否します。中国語の[ケース958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)を参照してください（TiKV はそのメカニズムを最適化する必要があります）。
 
-### 1.2 PDエラーによりサービスが利用できなくなる {#1-2-pd-errors-cause-service-unavailable}
+### 1.2 PDエラーによりサービスが利用できなくなる {#12-pd-errors-cause-service-unavailable}
 
 [5つのPD問題](#5-pd-issues)を参照。
 
 ## 2. 遅延が大幅に増加する {#2-latency-increases-significantly}
 
-### 2.1 一時的な増加 {#2-1-transient-increase}
+### 2.1 一時的な増加 {#21-transient-increase}
 
 -   2.1.1 TiDB の実行プランが間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
 -   2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)参照してください。
 -   2.1.3 一部のTiKVインスタンスでLeaderが多数ドロップする[4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照。
 -   2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
-### 2.2 持続的かつ著しい増加 {#2-2-persistent-and-significant-increase}
+### 2.2 持続的かつ著しい増加 {#22-persistent-and-significant-increase}
 
 -   2.2.1 TiKVシングルスレッドのボトルネック
 
@@ -52,7 +52,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ## 3. TiDBの問題 {#3-tidb-issues}
 
-### 3.1 DDL {#3-1-ddl}
+### 3.1 DDL {#31-ddl}
 
 -   3.1.1 `ERROR 1105 (HY000): unsupported modify decimal column precision`フィールドの長さを変更すると、エラー`decimal`が報告されます。 <!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB は`decimal`フィールドの長さを変更することをサポートしていません。
 
@@ -99,7 +99,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
         -   原因2については、TiDBサーバーとPD/TiKV間のネットワークを確認してください。
         -   原因 3 については、TiKV がビジーである理由を調査します。 [TiKVに関する4つの問題](#4-tikv-issues)を参照。
 
-### 3.2 メモリ不足の問題 {#3-2-oom-issues}
+### 3.2 メモリ不足の問題 {#32-oom-issues}
 
 -   3.2.1 症状
 
@@ -141,7 +141,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 OOM のトラブルシューティングの詳細については、 [TiDBのメモリ不足問題​​のトラブルシューティング](/troubleshoot-tidb-oom.md)を参照してください。
 
-### 3.3 実行計画の誤り {#3-3-wrong-execution-plan}
+### 3.3 実行計画の誤り {#33-wrong-execution-plan}
 
 -   3.3.1 症状
 
@@ -165,7 +165,7 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     -   その他の状況については、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)。
 
-### 3.4 SQL実行エラー {#3-4-sql-execution-error}
+### 3.4 SQL実行エラー {#34-sql-execution-error}
 
 -   3.4.1 クライアントは`ERROR 1265(01000) Data Truncated`エラーを報告します。これは、TiDB が内部的に`Decimal`型の精度を計算する方法が MySQL の計算方法と互換性がないためです。この問題は v3.0.10 ( [#14438](https://github.com/pingcap/tidb/pull/14438) ) で修正されました。
 
@@ -183,25 +183,25 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     -   解決策： `Cast(xx as decimal(a, b))`と`a`目標精度として、 `b` } を手動で追加することで、この問題を回避できます。
 
-### 3.5 クエリの遅延に関する問題 {#3-5-slow-query-issues}
+### 3.5 クエリの遅延に関する問題 {#35-slow-query-issues}
 
 スロークエリを特定するには、[スロークエリを特定する](/identify-slow-queries.md)を参照してください。スロークエリを分析して処理するには、[スロークエリを分析する](/analyze-slow-queries.md)を参照してください。
 
-### 3.6 ホットスポットの問題 {#3-6-hotspot-issues}
+### 3.6 ホットスポットの問題 {#36-hotspot-issues}
 
 分散データベースであるTiDBは、サーバーリソースをより有効活用するために、アプリケーションの負荷をさまざまなコンピューティングノードやストレージノードに均等に分散させるロードバランシングメカニズムを備えています。しかし、特定のシナリオでは、アプリケーションの負荷が適切に分散されない場合があり、パフォーマンスに影響を与え、ホットスポットと呼ばれる高負荷の一点が発生する可能性があります。
 
 TiDB は、ホットスポットのトラブルシューティング、解決、回避のための完全なソリューションを提供します。負荷ホットスポットのバランスをとることで、QPS の向上やレイテンシーの削減など、全体的なパフォーマンスを向上させることができます。詳細な解決策については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)を参照してください。
 
-### 3.7 ディスクI/O使用率が高い {#3-7-high-disk-i-o-usage}
+### 3.7 ディスクI/O使用率が高い {#37-high-disk-io-usage}
 
 CPU ボトルネックとトランザクションの競合によって引き起こされるボトルネックのトラブルシューティングを行った後に TiDB の応答が遅くなった場合は、現在のシステム ボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB での高い I/O 使用率の問題を特定して処理する方法については、[ディスクI/O使用率が高い場合のトラブルシューティング](/troubleshoot-high-disk-io.md)を参照してください。
 
-### 3.8 ロックの競合 {#3-8-lock-conflicts}
+### 3.8 ロックの競合 {#38-lock-conflicts}
 
 TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。ロック関連の問題のトラブルシューティング方法、および楽観的ロックと悲観的ロックの競合の処理方法については、[ロックの競合をトラブルシューティングする](/troubleshoot-lock-conflicts.md)を参照してください。
 
-### 3.9 データと指標の不整合 {#3-9-inconsistency-between-data-and-indexes}
+### 3.9 データと指標の不整合 {#39-inconsistency-between-data-and-indexes}
 
 TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に、データとインデックスの一貫性をチェックします。チェックの結果、レコードのキーと値、および対応するインデックスのキーと値が一致しない、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない（例えば、インデックスが多すぎる、またはインデックスが欠落している）ことが判明した場合、TiDB はデータ不整合エラーを報告し、関連するエラーをエラー ログに出力。
 
@@ -209,7 +209,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ## 4. TiKVに関する問題 {#4-tikv-issues}
 
-### 4.1 TiKVがパニックを起こして起動に失敗する {#4-1-tikv-panics-and-fails-to-start}
+### 4.1 TiKVがパニックを起こして起動に失敗する {#41-tikv-panics-and-fails-to-start}
 
 -   4.1.1 TiKVが仮想マシンにデプロイされている場合、仮想マシンが強制終了されたり、物理マシンが電源オフになったりすると、 `entries[X, Y] is unavailable from storage`エラーが報告されます。
 
@@ -217,7 +217,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.1.2 その他の予期せぬ原因については、 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
-### 4.2 TiKV OOM {#4-2-tikv-oom}
+### 4.2 TiKV OOM {#42-tikv-oom}
 
 -   4.2.1 `block-cache`の設定が大きすぎると、メモリ不足が発生する可能性があります。
 
@@ -233,7 +233,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     この問題は予期せぬものです。 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)ことができます。
 
-### 4.3 クライアントが<code>server is busy</code>と報告するエラー {#4-3-the-client-reports-the-code-server-is-busy-code-error}
+### 4.3 クライアントが<code>server is busy</code>と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
 
 ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors を**確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
 
@@ -269,7 +269,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.3.4 TiKV コプロセッサがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサでタスクがスタックされます。実行プランの変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
 
-### 4.4 一部のTiKVノードは頻繁にLeaderをドロップする {#4-4-some-tikv-nodes-drop-leader-frequently}
+### 4.4 一部のTiKVノードは頻繁にLeaderをドロップする {#44-some-tikv-nodes-drop-leader-frequently}
 
 -   4.4.1 TiKVが再起動されたため再選が行われる
 
@@ -285,7 +285,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.4.3 ネットワークの孤立による再選出。
 
-### 4.5 TiKVへの書き込みが遅い {#4-5-tikv-write-is-slow}
+### 4.5 TiKVへの書き込みが遅い {#45-tikv-write-is-slow}
 
 -   4.5.1 TiKV gRPC の`prewrite/commit/raw-put`の継続時間を表示して、TiKV 書き込みが遅いかどうかを確認します (RawKV クラスターの場合のみ)。一般に、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅い段階を特定できます。よくある状況のいくつかを以下に示します。
 
@@ -330,7 +330,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ## 5. PD問題 {#5-pd-issues}
 
-### 5.1 PDスケジューリング {#5-1-pd-scheduling}
+### 5.1 PDスケジューリング {#51-pd-scheduling}
 
 -   5.1.1 マージ
 
@@ -348,7 +348,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   Leader/リージョンの数が均等に分布していません。中国語の[ケース394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、バランス調整がリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、数の分布が不均等になる可能性があることです。TiDB 4.0では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリングポリシーを`count`ベースまたは`size`ベースに設定できるようになりました。
 
-### 5.2 PD選挙 {#5-2-pd-election}
+### 5.2 PD選挙 {#52-pd-election}
 
 -   5.2.1 PD スイッチLeader。
 
@@ -382,19 +382,19 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   その他の状況については、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
 
-### 5.3 PD OOM {#5-3-pd-oom}
+### 5.3 PD OOM {#53-pd-oom}
 
 -   5.3.1 `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 ( [#1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
 -   5.3.2 ローリングアップグレード中にPD OOMが発生します。gRPCメッセージのサイズに制限がなく、モニターにはTCP InSegsが比較的大きいことが示されています。この問題はv3.0.6で修正されました（ [#1952](https://github.com/pingcap/pd/pull/1952) ）。 <!--For details, see [case-852](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case852.md).-->
 
-### 5.4 Grafanaの表示 {#5-4-grafana-display}
+### 5.4 Grafanaの表示 {#54-grafana-display}
 
 -   5.4.1 **Grafana** -&gt; **PD** -&gt; **cluster** -&gt; **role**のモニターにフォロワーが表示されます。Grafana の式に関する問題は v3.0.8 で修正されました。
 
 ## 6. エコシステムツール {#6-ecosystem-tools}
 
-### 6.1 データ移行 {#6-1-data-migration}
+### 6.1 データ移行 {#61-data-migration}
 
 -   6.1.1 TiDB Data Migration (DM)は、MySQL/MariaDBからTiDBへのデータ移行をサポートする移行ツールです。詳細については、 [DMの概要](/dm/dm-overview.md)を参照してください。
 
@@ -442,7 +442,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   この値は MySQL 8.0 または TiDB には正常に書き込めませんが、 MySQL 5.7には書き込めます。 `tidb_skip_utf8_check`パラメータを有効にすることで、データ形式のチェックをスキップできます。
 
-### 6.2 TiDB Lightning {#6-2-tidb-lightning}
+### 6.2 TiDB Lightning {#62-tidb-lightning}
 
 -   6.2.1 TiDB Lightningは、大量のデータを TiDB クラスタに高速に完全インポートするためのツールです。TiDB [TiDB Lightning （GitHub）](https://github.com/pingcap/tidb/tree/release-8.5/lightning)を参照してください。
 
@@ -491,7 +491,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 ## 7. 一般的なログ分析 {#7-common-log-analysis}
 
-### 7.1 TiDB {#7-1-tidb}
+### 7.1 TiDB {#71-tidb}
 
 -   7.1.1 `GC life time is shorter than transaction duration` 。
 
@@ -524,7 +524,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     SET GLOBAL tidb_gc_enable = 0;
     ```
 
-### 7.2 TiKV {#7-2-tikv}
+### 7.2 TiKV {#72-tikv}
 
 -   7.2.1 `key is locked` 。
 

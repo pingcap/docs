@@ -21,9 +21,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 このセクションでは、TiDBコンポーネントのアラート ルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts}
+### 緊急レベルの警報 {#emergency-level-alerts-1}
 
-#### `TiDB_schema_error` {#tidb-schema-error}
+#### `TiDB_schema_error` {#tidb_schema_error}
 
 -   アラートルール:
 
@@ -37,7 +37,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     これは、利用できないリージョンやTiKVのタイムアウトが原因であることが多いです。TiKVの監視項目を確認して問題を特定する必要があります。
 
-#### `TiDB_tikvclient_region_err_total` {#tidb-tikvclient-region-err-total}
+#### `TiDB_tikvclient_region_err_total` {#tidb_tikvclient_region_err_total}
 
 -   アラートルール:
 
@@ -51,7 +51,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     リーダーのバランスが取れているかどうかを確認するには、[**TiKV詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)を確認する。
 
-#### `TiDB_domain_load_schema_total` {#tidb-domain-load-schema-total}
+#### `TiDB_domain_load_schema_total` {#tidb_domain_load_schema_total}
 
 -   アラートルール:
 
@@ -65,9 +65,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiDB_schema_error`](#tidb_schema_error)と同じです。
 
-### 重大レベルのアラート {#critical-level-alerts}
+### 重大レベルのアラート {#critical-level-alerts-1}
 
-#### `TiDB_server_panic_total` {#tidb-server-panic-total}
+#### `TiDB_server_panic_total` {#tidb_server_panic_total}
 
 -   アラートルール:
 
@@ -81,9 +81,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     panicログを収集して問題を特定します。
 
-### 警告レベルのアラート {#warning-level-alerts}
+### 警告レベルのアラート {#warning-level-alerts-1}
 
-#### `TiDB_memory_abnormal` {#tidb-memory-abnormal}
+#### `TiDB_memory_abnormal` {#tidb_memory_abnormal}
 
 -   アラートルール:
 
@@ -97,7 +97,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     HTTP API を使用して、goroutine リークの問題をトラブルシューティングします。
 
-#### `TiDB_query_duration` {#tidb-query-duration}
+#### `TiDB_query_duration` {#tidb_query_duration}
 
 -   アラートルール:
 
@@ -111,7 +111,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     TiDB ログを確認し、キーワード`SLOW_QUERY`と`TIME_COP_PROCESS`を検索して、遅い SQL クエリを見つけます。
 
-#### `TiDB_server_event_error` {#tidb-server-event-error}
+#### `TiDB_server_event_error` {#tidb_server_event_error}
 
 -   アラートルール:
 
@@ -128,7 +128,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     サービスを回復するには、TiDB を再起動します。
 
-#### `TiDB_tikvclient_backoff_seconds_count` {#tidb-tikvclient-backoff-seconds-count}
+#### `TiDB_tikvclient_backoff_seconds_count` {#tidb_tikvclient_backoff_seconds_count}
 
 -   アラートルール:
 
@@ -142,7 +142,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     TiKV の監視ステータスを確認する。
 
-#### `TiDB_monitor_time_jump_back_error` {#tidb-monitor-time-jump-back-error}
+#### `TiDB_monitor_time_jump_back_error` {#tidb_monitor_time_jump_back_error}
 
 -   アラートルール:
 
@@ -156,7 +156,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     NTP 構成のトラブルシューティングを行います。
 
-#### `TiDB_ddl_waiting_jobs` {#tidb-ddl-waiting-jobs}
+#### `TiDB_ddl_waiting_jobs` {#tidb_ddl_waiting_jobs}
 
 -   アラートルール:
 
@@ -174,9 +174,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 このセクションでは、PDコンポーネントのアラート ルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts}
+### 緊急レベルの警報 {#emergency-level-alerts-2}
 
-#### `PD_cluster_down_store_nums` {#pd-cluster-down-store-nums}
+#### `PD_cluster_down_store_nums` {#pd_cluster_down_store_nums}
 
 -   アラートルール:
 
@@ -191,9 +191,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   TiKV/ TiFlashプロセスが正常かどうか、ネットワークが分離されているか、負荷が高すぎるかどうかを確認し、可能な限りサービスを回復します。
     -   TiKV/ TiFlashインスタンスを回復できない場合は、オフラインにすることができます。
 
-### 重大レベルのアラート {#critical-level-alerts}
+### 重大レベルのアラート {#critical-level-alerts-2}
 
-#### `PD_etcd_write_disk_latency` {#pd-etcd-write-disk-latency}
+#### `PD_etcd_write_disk_latency` {#pd_etcd_write_disk_latency}
 
 -   アラートルール:
 
@@ -209,7 +209,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   サービスを回復するには、PD を再起動するか、リーダーを手動で別の PD に転送してください。
     -   環境要因により問題のある PD インスタンスを回復できない場合は、オフラインにして交換してください。
 
-#### `PD_miss_peer_region_count` {#pd-miss-peer-region-count}
+#### `PD_miss_peer_region_count` {#pd_miss_peer_region_count}
 
 -   アラートルール:
 
@@ -224,9 +224,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   ダウンしている、またはオフラインになっている TiKV マシンがあるかどうかを確認して、問題の原因を見つけます。
     -   リージョンのヘルスパネルを監視し、 `miss-peer-region-count`継続的に減少しているかどうかを確認します。
 
-### 警告レベルのアラート {#warning-level-alerts}
+### 警告レベルのアラート {#warning-level-alerts-2}
 
-#### `PD_cluster_lost_connect_store_nums` {#pd-cluster-lost-connect-store-nums}
+#### `PD_cluster_lost_connect_store_nums` {#pd_cluster_lost_connect_store_nums}
 
 -   アラートルール:
 
@@ -243,7 +243,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   TiKV/ TiFlashインスタンスが回復できないことが確認できた場合は、オフラインにすることができます。
     -   TiKV/ TiFlashインスタンスが回復可能であることが確認できたものの、短期間で回復できない場合は、 `max-down-time`の値を増やすことを検討してください。これにより、TiKV/ TiFlashインスタンスが回復不能と判断され、TiKV/ TiFlashからデータが削除されるのを防ぐことができます。
 
-#### `PD_cluster_unhealthy_tikv_nums` {#pd-cluster-unhealthy-tikv-nums}
+#### `PD_cluster_unhealthy_tikv_nums` {#pd_cluster_unhealthy_tikv_nums}
 
 -   アラートルール:
 
@@ -257,7 +257,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     TiKV ストアの状態を確認します。
 
-#### `PD_cluster_low_space` {#pd-cluster-low-space}
+#### `PD_cluster_low_space` {#pd_cluster_low_space}
 
 -   アラートルール:
 
@@ -275,7 +275,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   データ量を削減するには、ノードのリージョン重みを下げます。
     -   スペースを解放できない場合は、事前にノードをオフラインにすることを検討してください。これにより、ディスク容量不足によるダウンタイムの発生を防止できます。
 
-#### `PD_etcd_network_peer_latency` {#pd-etcd-network-peer-latency}
+#### `PD_etcd_network_peer_latency` {#pd_etcd_network_peer_latency}
 
 -   アラートルール:
 
@@ -290,7 +290,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   ネットワークとシステムの負荷状態を確認します。
     -   環境要因により問題のある PD インスタンスを回復できない場合は、オフラインにして交換してください。
 
-#### `PD_tidb_handle_requests_duration` {#pd-tidb-handle-requests-duration}
+#### `PD_tidb_handle_requests_duration` {#pd_tidb_handle_requests_duration}
 
 -   アラートルール:
 
@@ -307,7 +307,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   PD リーダーを手動で切り替えます。
     -   環境要因により問題のある PD インスタンスを回復できない場合は、オフラインにして交換してください。
 
-#### `PD_down_peer_region_nums` {#pd-down-peer-region-nums}
+#### `PD_down_peer_region_nums` {#pd_down_peer_region_nums}
 
 -   アラートルール:
 
@@ -323,7 +323,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   リージョンのヘルスパネルを監視し、 `down_peer_region_count`継続的に減少しているかどうかを確認します。
     -   TiKV サーバー間のネットワークを確認します。
 
-#### `PD_pending_peer_region_count` {#pd-pending-peer-region-count}
+#### `PD_pending_peer_region_count` {#pd_pending_peer_region_count}
 
 -   アラートルール:
 
@@ -338,7 +338,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   リージョンのヘルスパネルを監視し、 `pending_peer_region_count`継続的に減少しているかどうかを確認します。
     -   TiKV サーバー間のネットワーク、特に十分な帯域幅があるかどうかを確認します。
 
-#### `PD_leader_change` {#pd-leader-change}
+#### `PD_leader_change` {#pd_leader_change}
 
 -   アラートルール:
 
@@ -354,7 +354,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   ネットワークとシステムの負荷状態を確認します。
     -   環境要因により問題のある PD インスタンスを回復できない場合は、オフラインにして交換してください。
 
-#### `TiKV_space_used_more_than_80%` {#tikv-space-used-more-than-80}
+#### `TiKV_space_used_more_than_80%` {#tikv_space_used_more_than_80}
 
 -   アラートルール:
 
@@ -369,7 +369,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   容量を増やす必要があるかどうかを確認します。
     -   ログ、スナップショット、コアダンプなど、大量のディスク領域を占有するファイルがあるかどうかを確認します。
 
-#### `PD_system_time_slow` {#pd-system-time-slow}
+#### `PD_system_time_slow` {#pd_system_time_slow}
 
 -   アラートルール:
 
@@ -383,7 +383,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     システム時刻が正しく設定されているかどうかを確認します。
 
-#### `PD_no_store_for_making_replica` {#pd-no-store-for-making-replica}
+#### `PD_no_store_for_making_replica` {#pd_no_store_for_making_replica}
 
 -   アラートルール:
 
@@ -398,7 +398,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   店内に十分なスペースがあるかどうかを確認します。
     -   ラベル構成が設定されている場合は、それに従って追加のレプリカ用のストアがあるかどうかを確認します。
 
-#### `PD_cluster_slow_tikv_nums` {#pd-cluster-slow-tikv-nums}
+#### `PD_cluster_slow_tikv_nums` {#pd_cluster_slow_tikv_nums}
 
 -   アラートルール:
 
@@ -419,9 +419,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 このセクションでは、TiKVコンポーネントのアラート ルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts}
+### 緊急レベルの警報 {#emergency-level-alerts-3}
 
-#### `TiKV_memory_used_too_fast` {#tikv-memory-used-too-fast}
+#### `TiKV_memory_used_too_fast` {#tikv_memory_used_too_fast}
 
 -   アラートルール:
 
@@ -435,7 +435,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     `rocksdb.defaultcf`と`rocksdb.writecf`両方の`block-cache-size`値を調整します。
 
-#### `TiKV_GC_can_not_work` {#tikv-gc-can-not-work}
+#### `TiKV_GC_can_not_work` {#tikv_gc_can_not_work}
 
 -   アラートルール:
 
@@ -451,9 +451,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  `tidb-server`のログを確認し、`grep gc_worker tidb.log` を実行します。
     3.  この時間中にGCワーカーがロックを解決中（最後のログは「start resolve locks」）または範囲を削除中（最後のログは「start delete {number} ranges」）であることが確認された場合、GCプロセスは正常に動作していることを意味します。それ以外の場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)ください。
 
-### 重大レベルのアラート {#critical-level-alerts}
+### 重大レベルのアラート {#critical-level-alerts-3}
 
-#### `TiKV_server_report_failure_msg_total` {#tikv-server-report-failure-msg-total}
+#### `TiKV_server_report_failure_msg_total` {#tikv_server_report_failure_msg_total}
 
 -   アラートルール:
 
@@ -469,7 +469,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  リモート TiKV がダウンしていないかどうかを確認します。
     3.  リモートTiKVがダウンしていない場合は、圧力が高すぎないか確認してください。1の解決策を参照してください[`TiKV_channel_full_total`](#tikv_channel_full_total)
 
-#### `TiKV_channel_full_total` {#tikv-channel-full-total}
+#### `TiKV_channel_full_total` {#tikv_channel_full_total}
 
 -   アラートルール:
 
@@ -485,7 +485,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     3.  [**TiKV詳細**&gt;**Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)を見て、 `tick duration`ハイかどうかを確認してください。ハイなら、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval)を `"2s"`に設定する必要があります。
 
-#### `TiKV_write_stall` {#tikv-write-stall}
+#### `TiKV_write_stall` {#tikv_write_stall}
 
 -   アラートルール:
 
@@ -501,7 +501,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  TiKV に書き込みホットスポットがあるかどうかを確認します。
     3.  `[rocksdb]`および`[raftdb]`構成では、 `max-sub-compactions`より大きな値に設定します。
 
-#### `TiKV_raft_log_lag` {#tikv-raft-log-lag}
+#### `TiKV_raft_log_lag` {#tikv_raft_log_lag}
 
 -   アラートルール:
 
@@ -511,7 +511,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     この値が比較的大きい場合、FollowerがLeaderから大きく遅れており、 Raftが正常に複製できないことを意味します。Followerが配置されているTiKVマシンがスタックまたはダウンしている可能性があります。
 
-#### `TiKV_async_request_snapshot_duration_seconds` {#tikv-async-request-snapshot-duration-seconds}
+#### `TiKV_async_request_snapshot_duration_seconds` {#tikv_async_request_snapshot_duration_seconds}
 
 -   アラートルール:
 
@@ -525,7 +525,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
-#### `TiKV_async_request_write_duration_seconds` {#tikv-async-request-write-duration-seconds}
+#### `TiKV_async_request_write_duration_seconds` {#tikv_async_request_write_duration_seconds}
 
 -   アラートルール:
 
@@ -541,7 +541,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  [**TiKV詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)を監視し、レイテンシーが増加していないか確認してください。レイテンシーが高い場合は、ディスクにボトルネックが発生している可能性があります。
     3.  アラート対象の TiKV ノードのパフォーマンスの問題とチューニング方法の詳細な分析については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
-#### `TiKV_coprocessor_request_wait_seconds` {#tikv-coprocessor-request-wait-seconds}
+#### `TiKV_coprocessor_request_wait_seconds` {#tikv_coprocessor_request_wait_seconds}
 
 -   アラートルール:
 
@@ -557,7 +557,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  ホットスポットがあるかどうかを確認します。
     3.  コプロセッサーモニターで、 `coprocessor table/index scan`の`total`と`process`が一致しているかどうかを確認してください。大きく異なる場合は、無効なクエリが多すぎることを示しています。`over seek bound`があるかどうかも確認できます。もしそうであれば、GC が時間内に処理できないバージョンが多すぎます。その場合は、並列 GC スレッドの数を増やす必要があります。
 
-#### `TiKV_raftstore_thread_cpu_seconds_total` {#tikv-raftstore-thread-cpu-seconds-total}
+#### `TiKV_raftstore_thread_cpu_seconds_total` {#tikv_raftstore_thread_cpu_seconds_total}
 
 -   アラートルール:
 
@@ -573,7 +573,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
-#### `TiKV_raft_append_log_duration_secs` {#tikv-raft-append-log-duration-secs}
+#### `TiKV_raft_append_log_duration_secs` {#tikv_raft_append_log_duration_secs}
 
 -   アラートルール:
 
@@ -583,7 +583,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     Raftログの追加にかかる時間コストを示します。この値が高い場合は、通常、I/Oが混雑していることを意味します。
 
-#### `TiKV_raft_apply_log_duration_secs` {#tikv-raft-apply-log-duration-secs}
+#### `TiKV_raft_apply_log_duration_secs` {#tikv_raft_apply_log_duration_secs}
 
 -   アラートルール:
 
@@ -593,7 +593,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     Raftログの適用にかかる時間コストを示します。この値が高い場合は、通常、I/Oが混雑していることを意味します。
 
-#### `TiKV_scheduler_latch_wait_duration_seconds` {#tikv-scheduler-latch-wait-duration-seconds}
+#### `TiKV_scheduler_latch_wait_duration_seconds` {#tikv_scheduler_latch_wait_duration_seconds}
 
 -   アラートルール:
 
@@ -609,7 +609,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     2.  `Scheduler`と`Scheduler-${cmd}`モニターのスケジューラ スキャンの詳細で`total`と`process`値を確認し、 `total`と`process`一致するかどうかを確認します。
     3.  ストレージ モニターでストレージの非同期スナップショット/書き込み期間を確認し、 Raft操作が時間どおりに実行されているかどうかを確認します。
 
-#### `TiKV_thread_apply_worker_cpu_seconds` {#tikv-thread-apply-worker-cpu-seconds}
+#### `TiKV_thread_apply_worker_cpu_seconds` {#tikv_thread_apply_worker_cpu_seconds}
 
 -   アラートルール:
 
@@ -619,9 +619,9 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     Raftログ適用スレッドに大きな負荷がかかっており、限界に近づいているか、すでに限界を超えています。これは多くの場合、書き込みの集中によって発生します。
 
-### 警告レベルのアラート {#warning-level-alerts}
+### 警告レベルのアラート {#warning-level-alerts-3}
 
-#### `TiKV_leader_drops` {#tikv-leader-drops}
+#### `TiKV_leader_drops` {#tikv_leader_drops}
 
 -   アラートルール:
 
@@ -636,7 +636,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     1.  [`TiKV_channel_full_total`](#tikv_channel_full_total)を参照してください。
     2.  TiKVの負荷が低い場合は、PDスケジュールの頻度が高すぎないか検討してください。PDページのオペレータ作成パネルで、PDスケジュールの種類と数を確認できます。
 
-#### `TiKV_raft_process_ready_duration_secs` {#tikv-raft-process-ready-duration-secs}
+#### `TiKV_raft_process_ready_duration_secs` {#tikv_raft_process_ready_duration_secs}
 
 -   アラートルール:
 
@@ -646,7 +646,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     Raft準備完了の処理にかかる時間コストを示します。この値が大きい場合、ログ追加タスクのスタックが原因であることが多いです。
 
-#### `TiKV_raft_process_tick_duration_secs` {#tikv-raft-process-tick-duration-secs}
+#### `TiKV_raft_process_tick_duration_secs` {#tikv_raft_process_tick_duration_secs}
 
 -   アラートルール:
 
@@ -661,7 +661,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     1.  `warn`や`error`などの上位レベルのログの使用を検討してください。
     2.  `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`追加します。
 
-#### `TiKV_scheduler_context_total` {#tikv-scheduler-context-total}
+#### `TiKV_scheduler_context_total` {#tikv_scheduler_context_total}
 
 -   アラートルール:
 
@@ -675,7 +675,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
-#### `TiKV_scheduler_command_duration_seconds` {#tikv-scheduler-command-duration-seconds}
+#### `TiKV_scheduler_command_duration_seconds` {#tikv_scheduler_command_duration_seconds}
 
 -   アラートルール:
 
@@ -689,7 +689,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
-#### `TiKV_coprocessor_outdated_request_wait_seconds` {#tikv-coprocessor-outdated-request-wait-seconds}
+#### `TiKV_coprocessor_outdated_request_wait_seconds` {#tikv_coprocessor_outdated_request_wait_seconds}
 
 -   アラートルール:
 
@@ -703,7 +703,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
-#### `TiKV_coprocessor_pending_request` {#tikv-coprocessor-pending-request}
+#### `TiKV_coprocessor_pending_request` {#tikv_coprocessor_pending_request}
 
 -   アラートルール:
 
@@ -717,7 +717,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
-#### `TiKV_batch_request_snapshot_nums` {#tikv-batch-request-snapshot-nums}
+#### `TiKV_batch_request_snapshot_nums` {#tikv_batch_request_snapshot_nums}
 
 -   アラートルール:
 
@@ -727,7 +727,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     TiKV マシンのコプロセッサーCPU 使用率が 90% を超えています。
 
-#### `TiKV_pending_task` {#tikv-pending-task}
+#### `TiKV_pending_task` {#tikv_pending_task}
 
 -   アラートルール:
 
@@ -741,7 +741,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     [**TiKV詳細**&gt;**タスク**ダッシュボード](/grafana-tikv-dashboard.md#task)のうち`Worker pending tasks`メトリックから、どの種類のタスクの値が高いかを確認します。
 
-#### `TiKV_low_space` {#tikv-low-space}
+#### `TiKV_low_space` {#tikv_low_space}
 
 -   アラートルール:
 
@@ -756,7 +756,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
     -   ノードスペースのバランス状態を確認します。
     -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスター ノードを増やす計画を立てます。
 
-#### `TiKV_approximate_region_size` {#tikv-approximate-region-size}
+#### `TiKV_approximate_region_size` {#tikv_approximate_region_size}
 
 -   アラートルール:
 
@@ -778,13 +778,13 @@ TiFlashアラート ルールの詳細な説明については、 [TiFlashアラ
 
 TiCDC アラート ルールの詳細な説明については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)を参照してください。
 
-## Node_exporterホストアラートルール {#node-exporter-host-alert-rules}
+## Node_exporterホストアラートルール {#node_exporter-host-alert-rules}
 
 このセクションでは、Node_exporter ホストのアラート ルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts}
+### 緊急レベルの警報 {#emergency-level-alerts-4}
 
-#### `NODE_disk_used_more_than_80%` {#node-disk-used-more-than-80}
+#### `NODE_disk_used_more_than_80%` {#node_disk_used_more_than_80}
 
 -   アラートルール:
 
@@ -799,7 +799,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   マシンにログインし、コマンド`df -h`を実行してディスク領域の使用量を確認します。
     -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスター ノードを増やす計画を立てます。
 
-#### `NODE_disk_inode_more_than_80%` {#node-disk-inode-more-than-80}
+#### `NODE_disk_inode_more_than_80%` {#node_disk_inode_more_than_80}
 
 -   アラートルール:
 
@@ -814,7 +814,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   マシンにログインし、 `df -i`コマンドを実行してファイルシステムのノード使用状況を表示します。
     -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスター ノードを増やす計画を立てます。
 
-#### `NODE_disk_readonly` {#node-disk-readonly}
+#### `NODE_disk_readonly` {#node_disk_readonly}
 
 -   アラートルール:
 
@@ -831,7 +831,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
-#### `NODE_memory_used_more_than_80%` {#node-memory-used-more-than-80}
+#### `NODE_memory_used_more_than_80%` {#node_memory_used_more_than_80}
 
 -   アラートルール:
 
@@ -846,9 +846,9 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Grafana Node Exporter ダッシュボードでホストのメモリ パネルを確認し、使用済みメモリが多すぎるかどうか、使用可能なメモリが少なすぎるかどうかを確認します。
     -   マシンにログインし、コマンド`free -m`を実行してメモリ使用量を確認します。コマンド`top`を実行すると、メモリ使用量が過度に高い異常なプロセスがあるかどうかを確認できます。
 
-### 警告レベルのアラート {#warning-level-alerts}
+### 警告レベルのアラート {#warning-level-alerts-4}
 
-#### `NODE_node_overload` {#node-node-overload}
+#### `NODE_node_overload` {#node_node_overload}
 
 -   アラートルール:
 
@@ -863,7 +863,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
 
     -   マシンにログインして`top`実行し、負荷平均と CPU 使用率をチェックして、CPU 使用率が過度に高い異常なプロセスがないか確認します。
 
-#### `NODE_cpu_used_more_than_80%` {#node-cpu-used-more-than-80}
+#### `NODE_cpu_used_more_than_80%` {#node_cpu_used_more_than_80}
 
 -   アラートルール:
 
@@ -878,7 +878,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
 
     -   マシンにログインして`top`実行し、負荷平均と CPU 使用率をチェックして、CPU 使用率が過度に高い異常なプロセスがあるかどうかを確認します。
 
-#### `NODE_tcp_estab_num_more_than_50000` {#node-tcp-estab-num-more-than-50000}
+#### `NODE_tcp_estab_num_more_than_50000` {#node_tcp_estab_num_more_than_50000}
 
 -   アラートルール:
 
@@ -893,7 +893,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   マシンにログインし、 `ss -s`を実行して、現在のシステムで「estab」ステータスにある TCP リンクの数を確認します。
     -   `netstat`を実行して異常なリンクがないか確認します。
 
-#### `NODE_disk_read_latency_more_than_32ms` {#node-disk-read-latency-more-than-32ms}
+#### `NODE_disk_read_latency_more_than_32ms` {#node_disk_read_latency_more_than_32ms}
 
 -   アラートルール:
 
@@ -909,7 +909,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   ディスク レイテンシ パネルを表示して、ディスクの読み取りレイテンシーを確認します。
     -   ディスク I/O 使用率パネルを表示して、I/O 使用率を確認します。
 
-#### `NODE_disk_write_latency_more_than_16ms` {#node-disk-write-latency-more-than-16ms}
+#### `NODE_disk_write_latency_more_than_16ms` {#node_disk_write_latency_more_than_16ms}
 
 -   アラートルール:
 
@@ -925,13 +925,13 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   ディスク レイテンシ パネルを表示して、ディスクの書き込みレイテンシーを確認します。
     -   ディスク I/O 使用率パネルを表示して、I/O 使用率を確認します。
 
-## Blackbox_exporter TCP、ICMP、HTTP アラートルール {#blackbox-exporter-tcp-icmp-and-http-alert-rules}
+## Blackbox_exporter TCP、ICMP、HTTP アラートルール {#blackbox_exporter-tcp-icmp-and-http-alert-rules}
 
 このセクションでは、Blackbox_exporter の TCP、ICMP、および HTTP のアラート ルールについて説明します。
 
 ### 緊急レベルの警報 {#emergency-level-alerts}
 
-#### `TiDB_server_is_down` {#tidb-server-is-down}
+#### `TiDB_server_is_down` {#tidb_server_is_down}
 
 -   アラートルール:
 
@@ -947,7 +947,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   TiDB プロセスが存在するかどうかを確認します。
     -   監視マシンと TiDB マシン間のネットワークが正常かどうかを確認します。
 
-#### `TiFlash_server_is_down` {#tiflash-server-is-down}
+#### `TiFlash_server_is_down` {#tiflash_server_is_down}
 
 -   アラートルール:
 
@@ -963,7 +963,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   TiFlashプロセスが存在するかどうかを確認します。
     -   監視マシンとTiFlashマシン間のネットワークが正常かどうかを確認します。
 
-#### `TiKV_server_is_down` {#tikv-server-is-down}
+#### `TiKV_server_is_down` {#tikv_server_is_down}
 
 -   アラートルール:
 
@@ -979,7 +979,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   TiKV プロセスが存在するかどうかを確認します。
     -   監視マシンと TiKV マシン間のネットワークが正常かどうかを確認します。
 
-#### `PD_server_is_down` {#pd-server-is-down}
+#### `PD_server_is_down` {#pd_server_is_down}
 
 -   アラートルール:
 
@@ -995,7 +995,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   PD プロセスが存在するかどうかを確認します。
     -   監視マシンとPDマシン間のネットワークが正常かどうかを確認します。
 
-#### `Node_exporter_server_is_down` {#node-exporter-server-is-down}
+#### `Node_exporter_server_is_down` {#node_exporter_server_is_down}
 
 -   アラートルール:
 
@@ -1011,7 +1011,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Node_exporter プロセスが存在するかどうかを確認します。
     -   監視マシンとNode_exporterマシン間のネットワークが正常かどうかを確認します。
 
-#### `Blackbox_exporter_server_is_down` {#blackbox-exporter-server-is-down}
+#### `Blackbox_exporter_server_is_down` {#blackbox_exporter_server_is_down}
 
 -   アラートルール:
 
@@ -1027,7 +1027,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Blackbox_Exporter プロセスが存在するかどうかを確認します。
     -   監視マシンと Blackbox_Exporter マシン間のネットワークが正常かどうかを確認します。
 
-#### `Grafana_server_is_down` {#grafana-server-is-down}
+#### `Grafana_server_is_down` {#grafana_server_is_down}
 
 -   アラートルール:
 
@@ -1043,7 +1043,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Grafana プロセスが存在するかどうかを確認します。
     -   監視マシンと Grafana マシン間のネットワークが正常かどうかを確認します。
 
-#### `Pushgateway_server_is_down` {#pushgateway-server-is-down}
+#### `Pushgateway_server_is_down` {#pushgateway_server_is_down}
 
 -   アラートルール:
 
@@ -1059,7 +1059,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Pushgateway プロセスが存在するかどうかを確認します。
     -   監視マシンと Pushgateway マシン間のネットワークが正常かどうかを確認します。
 
-#### `Kafka_exporter_is_down` {#kafka-exporter-is-down}
+#### `Kafka_exporter_is_down` {#kafka_exporter_is_down}
 
 -   アラートルール:
 
@@ -1075,7 +1075,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
     -   Kafka_Exporter プロセスが存在するかどうかを確認します。
     -   監視マシンと Kafka_Exporter マシン間のネットワークが正常かどうかを確認します。
 
-#### `Pushgateway_metrics_interface` {#pushgateway-metrics-interface}
+#### `Pushgateway_metrics_interface` {#pushgateway_metrics_interface}
 
 -   アラートルール:
 
@@ -1093,7 +1093,7 @@ TiCDC アラート ルールの詳細な説明については、 [TiCDCアラー
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
-#### `BLACKER_ping_latency_more_than_1s` {#blacker-ping-latency-more-than-1s}
+#### `BLACKER_ping_latency_more_than_1s` {#blacker_ping_latency_more_than_1s}
 
 -   アラートルール:
 

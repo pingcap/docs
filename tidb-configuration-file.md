@@ -139,7 +139,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: []
 -   リストはデフォルトでは空です。これは、修復が必要な不良テーブルが存在しないことを意味します。
 
-### `new_collations_enabled_on_first_bootstrap` {#new-collations-enabled-on-first-bootstrap}
+### `new_collations_enabled_on_first_bootstrap` {#new_collations_enabled_on_first_bootstrap}
 
 -   新しい照合順序のサポートを有効または無効にします。
 -   デフォルト値: `true`
@@ -351,7 +351,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   単位：秒
 -   一部のユーザーシナリオでは、TiDBログがホットプラグ対応ディスクまたはネットワーク接続ディスクに保存されることがありますが、これらのディスクが永久的に使用不能になる可能性があります。このような場合、TiDBは自動的に復旧できず、ログ書き込み操作は永久的にブロックされます。TiDBプロセスは実行されているように見えても、実際にはどの要求にも応答しません。この設定項目は、このような状況に対処するために設計されています。
 
-### log.file {#log-file}
+### log.file {#logfile}
 
 ログファイルに関連するコンフィグレーション項目。
 
@@ -658,7 +658,7 @@ OpenTracingに関連するコンフィグレーション項目。
 -   RPCメトリクスを有効にします。
 -   デフォルト値: `false`
 
-### opentracing.sampler {#opentracing-sampler}
+### opentracing.sampler {#opentracingsampler}
 
 opentracing.sampler に関連するコンフィグレーション項目。
 
@@ -692,7 +692,7 @@ opentracing.sampler に関連するコンフィグレーション項目。
 -   jaeger-agentのサンプリングポリシーをポーリングする頻度を制御します。
 -   デフォルト値: `0`
 
-### opentracing.reporter {#opentracing-reporter}
+### opentracing.reporter {#opentracingreporter}
 
 opentracing.reporter に関連するコンフィグレーション項目。
 
@@ -812,7 +812,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 -   TiKVにRPCリクエストを送信する際に、リージョンレプリカセレクターの新しいバージョンを使用するかどうか。
 -   デフォルト値: `true`
 
-### tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-client-copr-cache-new-in-v400}
+### tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-clientcopr-cache-new-in-v400}
 
 [コプロセッサーキャッシュ](/coprocessor-cache.md)キャッシュ機能に関する設定項目を紹介します。
 
@@ -903,20 +903,20 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ## instance {#instance}
 
-### `tidb_enable_collect_execution_info` {#tidb-enable-collect-execution-info}
+### `tidb_enable_collect_execution_info` {#tidb_enable_collect_execution_info}
 
 -   この設定では、各オペレーターの実行情報をスロークエリログに記録するかどうか、および[インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかを制御します。
 -   デフォルト値: `true`
 -   v6.1.0より前は、この設定は`enable-collect-execution-info`によって設定されます。
 
-### `tidb_enable_slow_log` {#tidb-enable-slow-log}
+### `tidb_enable_slow_log` {#tidb_enable_slow_log}
 
 -   この設定は、スローログ機能を有効にするかどうかを制御するために使用されます。
 -   デフォルト値: `true`
 -   値のオプション: `true`または`false`
 -   v6.1.0より前は、この設定は`enable-slow-log`によって設定されます。
 
-### `tidb_slow_log_threshold` {#tidb-slow-log-threshold}
+### `tidb_slow_log_threshold` {#tidb_slow_log_threshold}
 
 -   スローログが消費する時間のしきい値を出力します。
 -   デフォルト値: `300`
@@ -935,7 +935,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   この設定は、最近使用されたスロークエリのうち、メモリにキャッシュされるクエリの数を制御します。
 -   デフォルト値: 500
 
-### `tidb_expensive_query_time_threshold` {#tidb-expensive-query-time-threshold}
+### `tidb_expensive_query_time_threshold` {#tidb_expensive_query_time_threshold}
 
 -   この設定は、高負荷なクエリログを出力するかどうかを決定するしきい値を設定するために使用されます。高負荷なクエリログと低負荷なクエリログの違いは次のとおりです。
     -   スローログは、ステートメントの実行後に出力されます。
@@ -945,7 +945,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   単位：秒
 -   v5.4.0より前は、この設定は`expensive-threshold`によって設定されます。
 
-### `tidb_record_plan_in_slow_log` {#tidb-record-plan-in-slow-log}
+### `tidb_record_plan_in_slow_log` {#tidb_record_plan_in_slow_log}
 
 -   この設定は、スロークエリの実行プランをスローログに含めるかどうかを制御するために使用されます。
 -   デフォルト値: `1`
@@ -953,7 +953,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   この設定値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します。
 -   v6.1.0より前は、この設定は`record-plan-in-slow-log`によって設定されます。
 
-### `tidb_force_priority` {#tidb-force-priority}
+### `tidb_force_priority` {#tidb_force_priority}
 
 -   この設定は、TiDBサーバー上で実行されるステートメントのデフォルトの優先度を変更するために使用されます。
 -   デフォルト値: `NO_PRIORITY`
@@ -964,7 +964,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 >
 > バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 を使用して[リソース制御](/tidb-resource-control-ru-groups.md)異なるSQLステートメントのリソース使用量を管理することをお勧めします。
 
-### `max_connections` {#max-connections}
+### `max_connections` {#max_connections}
 
 -   単一のTiDBインスタンスで許可される最大接続数。リソース制御に使用できます。
 -   デフォルト値: `0`
@@ -973,7 +973,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   この設定値は、システム変数[`max_connections`](/system-variables.md#max_connections)の値を初期化します。
 -   v6.2.0より前は、この設定は`max-server-connections`によって設定されます。
 
-### `tidb_enable_ddl` {#tidb-enable-ddl}
+### `tidb_enable_ddl` {#tidb_enable_ddl}
 
 -   この設定により、対応するTiDBインスタンスがDDLの所有者になれるかどうかを制御します。
 -   デフォルト値: `true`
@@ -981,14 +981,14 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   この設定値は、システム変数[`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)の値を初期化します。
 -   v6.3.0より前は、この設定は`run-ddl`によって設定されます。
 
-### `tidb_enable_stats_owner` <span class="version-mark">v8.4.0 で追加されました。</span> {#tidb-enable-stats-owner-new-in-v840}
+### `tidb_enable_stats_owner` <span class="version-mark">v8.4.0 で追加されました。</span> {#tidb_enable_stats_owner-new-in-v840}
 
 -   この構成は、対応する TiDB インスタンスが[統計情報の自動更新](/statistics.md#automatic-update)タスクを実行できるかどうかを制御します。
 -   デフォルト値: `true`
 -   指定可能な値: `true` 、 `false`
 -   この設定値は、システム変数[`tidb_enable_stats_owner`](/system-variables.md#tidb_enable_stats_owner-new-in-v840)の値を初期化します。
 
-### `tidb_stmt_summary_enable_persistent` <span class="version-mark">v6.6.0で追加</span> {#tidb-stmt-summary-enable-persistent-new-in-v660}
+### `tidb_stmt_summary_enable_persistent` <span class="version-mark">v6.6.0で追加</span> {#tidb_stmt_summary_enable_persistent-new-in-v660}
 
 > **Warning:**
 >
@@ -998,7 +998,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   デフォルト値: `false`
 -   詳細については、 [持続ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)をご覧ください。
 
-### `tidb_stmt_summary_filename` <span class="version-mark">v6.6.0で追加</span> {#tidb-stmt-summary-filename-new-in-v660}
+### `tidb_stmt_summary_filename` <span class="version-mark">v6.6.0で追加</span> {#tidb_stmt_summary_filename-new-in-v660}
 
 > **Warning:**
 >
@@ -1007,7 +1007,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   明細書の要約データの永続化が有効になっている場合、この設定では永続データが書き込まれるファイルを指定します。
 -   デフォルト値: `tidb-statements.log`
 
-### `tidb_stmt_summary_file_max_days` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb-stmt-summary-file-max-days-new-in-v660}
+### `tidb_stmt_summary_file_max_days` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb_stmt_summary_file_max_days-new-in-v660}
 
 > **Warning:**
 >
@@ -1018,7 +1018,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   単位：日
 -   データ保持要件とディスク容量の使用状況に基づいて値を調整できます。
 
-### `tidb_stmt_summary_file_max_size` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb-stmt-summary-file-max-size-new-in-v660}
+### `tidb_stmt_summary_file_max_size` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb_stmt_summary_file_max_size-new-in-v660}
 
 > **Warning:**
 >
@@ -1029,7 +1029,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   単位: MiB
 -   データ保持要件とディスク容量の使用状況に基づいて値を調整できます。
 
-### `tidb_stmt_summary_file_max_backups` <span class="version-mark">v6.6.0で追加</span> {#tidb-stmt-summary-file-max-backups-new-in-v660}
+### `tidb_stmt_summary_file_max_backups` <span class="version-mark">v6.6.0で追加</span> {#tidb_stmt_summary_file_max_backups-new-in-v660}
 
 > **Warning:**
 >

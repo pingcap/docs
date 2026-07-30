@@ -31,7 +31,7 @@ TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関
 | [`RANK()`](#rank)                 | パーティション内の現在の行の順位を返します。順位にはギャップがある場合があります。                                |
 | [`ROW_NUMBER()`](#row_number)     | パーティション内の現在の行番号を返します。                                                    |
 
-## `CUME_DIST()` {#cume-dist}
+## `CUME_DIST()` {#cume_dist}
 
 `CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`句と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
 
@@ -63,7 +63,7 @@ FROM
     +------+------------------------------+
     4 rows in set (0.00 sec)
 
-## `DENSE_RANK()` {#dense-rank}
+## `DENSE_RANK()` {#dense_rank}
 
 `DENSE_RANK()`関数は現在行の順位を返します。3 [`RANK()`](#rank)と似ていますが、同順位（同じ値と順序条件を共有する行）の場合に空白を残しません。
 
@@ -97,7 +97,7 @@ FROM (
     +----+--------------------------------+
     6 rows in set (0.00 sec)
 
-## `FIRST_VALUE()` {#first-value}
+## `FIRST_VALUE()` {#first_value}
 
 `FIRST_VALUE(expr)`ウィンドウ内の最初の値を返します。
 
@@ -174,7 +174,7 @@ FROM
     +------+----------------+
     10 rows in set (0.01 sec)
 
-## `LAST_VALUE()` {#last-value}
+## `LAST_VALUE()` {#last_value}
 
 `LAST_VALUE()`関数はウィンドウ内の最後の値を返します。
 
@@ -256,7 +256,7 @@ FROM
     +------+-----------------+
     10 rows in set (0.00 sec)
 
-## `NTH_VALUE()` {#nth-value}
+## `NTH_VALUE()` {#nth_value}
 
 `NTH_VALUE(expr, n)`関数はウィンドウの`n`番目の値を返します。
 
@@ -345,7 +345,7 @@ FROM
 
 ```
 
-## `PERCENT_RANK()` {#percent-rank}
+## `PERCENT_RANK()` {#percent_rank}
 
 `PERCENT_RANK()`関数は、現在の行の値よりも小さい値を持つ行の割合を示す 0 から 1 までの数値を返します。
 
@@ -415,7 +415,7 @@ FROM (
     +----+--------------------------+--------------------------------+
     6 rows in set (0.00 sec)
 
-## `ROW_NUMBER()` {#row-number}
+## `ROW_NUMBER()` {#row_number}
 
 `ROW_NUMBER()`結果セット内の現在の行の行番号を返します。
 

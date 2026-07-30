@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | 圧縮前の文字列の長さを返す           |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | パスワードの強度を検証する           |
 
-### `AES_DECRYPT()` {#aes-decrypt}
+### `AES_DECRYPT()` {#aes_decrypt}
 
 `AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`復号化します。
 
@@ -44,7 +44,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
     +----------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `AES_ENCRYPT()` {#aes-encrypt}
+### `AES_ENCRYPT()` {#aes_encrypt}
 
 `AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data` `key`で暗号化します。
 
@@ -149,7 +149,7 @@ SELECT PASSWORD('secret');
 
     Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 
-### `RANDOM_BYTES()` {#random-bytes}
+### `RANDOM_BYTES()` {#random_bytes}
 
 `RANDOM_BYTES(n)`関数は`n`ランダム バイトを返します。
 
@@ -242,7 +242,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
     +------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `UNCOMPRESSED_LENGTH()` {#uncompressed-length}
+### `UNCOMPRESSED_LENGTH()` {#uncompressed_length}
 
 `UNCOMPRESSED_LENGTH(data)`関数は、圧縮データの最初の 4 バイトを返します。これには、 [`COMPRESS()`](#compress)関数で圧縮される前の圧縮文字列の長さが格納されます。
 
@@ -257,7 +257,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `VALIDATE_PASSWORD_STRENGTH()` {#validate-password-strength}
+### `VALIDATE_PASSWORD_STRENGTH()` {#validate_password_strength}
 
 <CustomContent platform="tidb">
 

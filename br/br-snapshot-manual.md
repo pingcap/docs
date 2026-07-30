@@ -267,7 +267,7 @@ tiup br restore full \
     --log-file restorefull.log
 ```
 
-### <code>mysql</code>スキーマから実行プランバインディングを復元する {#restore-execution-plan-bindings-from-the-code-mysql-code-schema}
+### <code>mysql</code>スキーマから実行プランバインディングを復元する {#restore-execution-plan-bindings-from-the-mysql-schema}
 
 クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元する`mysql`スキーマを指定する`--filter`または`-f`オプションを含む`tiup br restore full`コマンドを実行します。
 
