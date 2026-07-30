@@ -269,7 +269,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 >
 > -   監査ログはクラスターリソースを消費するため、フィルタールールの指定には注意が必要です。リソース使用量を最小限に抑えるには、可能な限り、特定のユーザーとイベントに監査ログを限定するフィルタールールを指定してください。
 
-## データベース監査ログ設定を構成する
+## データベース監査ログ設定を構成する {#configure-database-audit-logging-settings}
 
 クラウドプロバイダーのストレージを構成した後、データベース監査ログ設定のステップを完了します。
 
@@ -315,7 +315,7 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 >
 > ログファイルのサイズが10MiBに達するたびに、ログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効化した後は、10MiB未満のログファイルはクラウドストレージバケットに自動的にプッシュされなくなります。この状況でログファイルを取得するには、 [PingCAPサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
 
-## 監査フィルタイベント
+## 監査フィルタイベント {#audit-filter-events}
 
 データベース監査ログのすべてのイベントクラスを次の表に示します。
 
@@ -340,11 +340,11 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 | `AUDIT_FUNC_CALL` | TiDB Cloud データベース監査に関連するシステム関数の呼び出し操作をすべて記録します | `AUDIT`       |
 | `AUDIT_SET_SYS_VAR` | システム変数の設定操作をすべて記録します | `AUDIT`       |
 
-## 監査ログフィールド
+## 監査ログフィールド {#audit-logging-fields}
 
 監査ログ内の各データベースイベントレコードに対して、TiDB Cloud は次のフィールドを提供します。
 
-### 一般情報
+### 一般情報 {#general-information}
 
 すべてのクラスの監査ログには、次の情報が含まれます。
 
@@ -361,22 +361,22 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 | `KEYSPACE_NAME` | 監査レコードのキースペース名。                                                        |
 | `REASON`        | 監査レコードのエラーメッセージ。操作中にエラーが発生した場合にのみ記録されます。|
 
-### SQL statement information {#sql-statement-information}
+### SQL 文情報 {#sql-statement-information}
 
 イベントクラスが `QUERY` または `QUERY` のサブクラスである場合、監査ログには次の情報が含まれます。
 
-| Field          | Description                                                                                                   |
+| フィールド | 説明 |
 |----------------|---------------------------------------------------------------------------------------------------------------|
 | `CURRENT_DB`     | 現在のデータベースの名前。                                                                             |
 | `SQL_TEXT`       | 実行された SQL 文。監査ログの秘匿化が有効な場合は、秘匿化された SQL 文が記録されます。     |
 | `EXECUTE_PARAMS` | `EXECUTE` 文のパラメーター。イベントクラスに `EXECUTE` が含まれ、かつ秘匿化が無効な場合にのみ記録されます。 |
 | `AFFECTED_ROWS`  | SQL 文の影響を受けた行数。イベントクラスに `QUERY_DML` が含まれる場合にのみ記録されます。  |
 
-### Connection information {#connection-information}
+### 接続情報 {#connection-information}
 
 イベントクラスが `CONNECTION` または `CONNECTION` のサブクラスである場合、監査ログには次の情報が含まれます。
 
-| Field           | Description                                                                                   |
+| フィールド | 説明 |
 |-----------------|-----------------------------------------------------------------------------------------------|
 | `CURRENT_DB`      | 現在のデータベースの名前。イベントクラスに DISCONNECT が含まれる場合、この情報は記録されません。 |
 | `CONNECTION_TYPE` | 接続タイプ。Socket、UnixSocket、SSL/TLS が含まれます。                                 |
@@ -392,19 +392,19 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 >
 > トラフィックの可視性を向上させるため、`CLIENT_IP` には AWS PrivateLink 経由の接続について、Load Balancer (LB) の IP ではなく実際のクライアント IP アドレスが表示されるようになりました。現在、この機能はベータ版であり、AWS リージョン `Frankfurt (eu-central-1)` でのみ利用できます。
 
-### Audit operation information {#audit-operation-information}
+### 監査操作情報 {#audit-operation-information}
 
 イベントクラスが `AUDIT` または `AUDIT` のサブクラスである場合、監査ログには次の情報が含まれます。
 
-| Field          | Description                                                                                                   |
+| フィールド | 説明 |
 |----------------|---------------------------------------------------------------------------------------------------------------|
 | `AUDIT_OP_TARGET`| TiDB Cloud データベース監査設定変更の対象オブジェクト。 |
 | `AUDIT_OP_ARGS`  | TiDB Cloud データベース監査設定変更で使用される引数。 |
 
-## Audit logging limitations {#audit-logging-limitations}
+## 監査ログの制限事項 {#audit-logging-limitations}
 
 {{{ .dedicated }}} では、監査ログが時系列順に書き込まれることは保証されません。つまり、最新のイベントを見つけるにはすべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、監査ログの `TIME` フィールドを使用できます。
 
-## Legacy database audit logging reference {#legacy-database-audit-logging-reference}
+## レガシーデータベース監査ログのリファレンス {#legacy-database-audit-logging-reference}
 
 現在レガシー監査ログプラグインを利用している場合は、[Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md) を参照してください。

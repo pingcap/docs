@@ -9,7 +9,7 @@ TiDB Cloud は、実行された SQL 文など、データベースへのユー�
 
 > **Note:**
 >
-> これはデータベース監査ログ機能のレガシーバージョンです。以前は限られたテストユーザー向けに有効化されており、現在はメンテナンスモードになっています。このドキュメントは、既存のそれらのユーザーを対象としています。新規デプロイについては、より細かいイベントクラスとより詳細な監査ログを提供する [TiDB Cloud Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
+> これはデータベース監査ログ機能のレガシーバージョンです。以前は限られたテストユーザー向けに有効化されており、現在はメンテナンスモードになっています。このドキュメントは、既存のそれらのユーザーを対象としています。新規デプロイについては、より細かいイベントクラスとより詳細な監査ログを提供する [TiDB Cloud データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するために、データベース監査ログを定期的に分析することは、セキュリティのベストプラクティスです。
 
@@ -26,9 +26,9 @@ TiDB Cloud は、実行された SQL 文など、データベースへのユー�
     > **Note:**
     >
     > - データベース監査ログは {{{ .starter }}} では利用できません。
-    > - {{{ .essential }}} については、[Database Audit Logging (Preview) for {{{ .essential }}}](/tidb-cloud/essential-database-audit-logging.md) を参照してください。
+    > - {{{ .essential }}} については、[{{{ .essential }}} のデータベース監査ログ（プレビュー）](/tidb-cloud/essential-database-audit-logging.md) を参照してください。
 
-- 組織内で `Organization Owner` または `Project Owner` ロールであること。そうでない場合、TiDB Cloud コンソールでデータベース監査関連のオプションを表示できません。詳細は、[User roles](/tidb-cloud/manage-user-access.md#user-roles) を参照してください。
+- 組織内で `Organization Owner` または `Project Owner` ロールであること。そうでない場合、TiDB Cloud コンソールでデータベース監査関連のオプションを表示できません。詳細は、[ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles) を参照してください。
 
 ## 監査ログを有効にする {#enable-audit-logging}
 
@@ -84,7 +84,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
         }
         ```
 
-        このテンプレートで、`<Your S3 bucket ARN>` は監査ログファイルの書き込み先となる S3 bucket の Amazon Resource Name (ARN) です。S3 bucket の **Properties** タブに移動し、**Bucket Overview** 領域で ARN 値を取得できます。`"Resource"` フィールドでは、ARN の後ろに `/*` を追加する必要があります。たとえば、ARN が `arn:aws:s3:::tidb-cloud-test` の場合、`"Resource"` フィールドの値は `"arn:aws:s3:::tidb-cloud-test/*"` と設定する必要があります。
+        このテンプレートで、`<Your S3 bucket ARN>` は監査ログファイルの書き込み先となる S3 bucket の Amazon Resource Name (ARN) です。S3 bucket の **Properties** タブに移動し、**Bucket Overview** で ARN 値を取得できます。`"Resource"` フィールドでは、ARN の後ろに `/*` を追加する必要があります。たとえば、ARN が `arn:aws:s3:::tidb-cloud-test` の場合、`"Resource"` フィールドの値は `"arn:aws:s3:::tidb-cloud-test/*"` と設定する必要があります。
 
 3. **IAM** > **Access Management** > **Roles** に移動し、先ほど記録した TiDB Cloud Account ID と External ID に対応する trust entity を持つ role がすでに存在するか確認します。
 
@@ -165,7 +165,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
 TiDB Cloud コンソールで、TiDB Cloud account ID を取得した **Enable Database Audit Logging** ダイアログボックスに戻り、次の手順を実行します。
 
-1. **Bucket URI** フィールドに、GCS bucket の完全名を入力します。
+1. **Bucket URI** フィールドに、GCS bucket の完全な名前を入力します。
 2. **Bucket Region** フィールドで、bucket が存在する GCS リージョンを選択します。
 3. **Test Connection** をクリックして、TiDB Cloud が bucket にアクセスして書き込めるかを確認します。
 
@@ -287,7 +287,7 @@ TiDB Cloud の監査ログは可読なテキストファイルであり、完全
 
 > **Note:**
 >
-> ログファイルのサイズが 10 MiB に達するたびに、そのログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効にした後は、サイズが 10 MiB 未満のログファイルはクラウドストレージバケットに自動的にはプッシュされません。この状況でログファイルを取得するには、[PingCAP support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+> ログファイルのサイズが 10 MiB に達するたびに、そのログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効にした後は、サイズが 10 MiB 未満のログファイルはクラウドストレージバケットに自動的にはプッシュされません。この状況でログファイルを取得するには、[PingCAPサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 
 ## 監査ログフィールド {#audit-log-fields}
 
@@ -297,7 +297,7 @@ TiDB Cloud の監査ログは可読なテキストファイルであり、完全
 >
 > 次の表では、フィールドの最大長が空欄である場合、そのフィールドのデータ型は明確に定義された固定長を持つことを意味します（たとえば、INTEGER は 4 バイトです）。
 
-| Col # | Field name | TiDB data type | Maximum length | Description |
+| 列番号 | フィールド名 | TiDB データ型 | 最大長 | 説明 |
 |---|---|---|---|---|
 | 1 | N/A | N/A | N/A | 内部使用のために予約済み |
 | 2 | N/A | N/A | N/A | 内部使用のために予約済み |
@@ -320,7 +320,7 @@ TiDB によって設定される EVENT_CLASS フィールドの値に応じて�
 
 - EVENT_CLASS の値が `CONNECTION` の場合、データベースイベントレコードには次のフィールドも含まれます。
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
+    | 列番号 | フィールド名 | TiDB データ型 | 最大長 | 説明 |
     |---|---|---|---|---|
     | 17 | CLIENT_PORT | INTEGER |  | クライアントポート番号 |
     | 18 | CONNECTION_ID | INTEGER |  | 接続 ID |
@@ -334,7 +334,7 @@ TiDB によって設定される EVENT_CLASS フィールドの値に応じて�
 
 - EVENT_CLASS の値が `TABLE_ACCESS` または `GENERAL` の場合、データベースイベントレコードには次のフィールドも含まれます。
 
-    | Col # | Field name | TiDB data type | Maximum length | Description |
+    | 列番号 | フィールド名 | TiDB データ型 | 最大長 | 説明 |
     |---|---|---|---|---|
     | 17 | CONNECTION_ID | INTEGER |  | 接続 ID   |
     | 18 | COMMAND | VARCHAR | 14 | MySQL プロトコルのコマンドタイプ |

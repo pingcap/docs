@@ -156,4 +156,4 @@ TiDB Cloud Lakeは、分析ワークロード向けのクラウドネイティ�
 
 TiDB Cloud Lakeは、ANSI SQL、半構造化データ処理、ベクトル検索、AI指向のワークフローを1つのプラットフォームでサポートします。基盤となるインフラストラクチャを自分で運用することなく、マネージドな分析エクスペリエンスを求めるチーム向けに設計されています。
 
-[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)および[TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/)を参照してください.
+[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)および[TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/)を参照してください。

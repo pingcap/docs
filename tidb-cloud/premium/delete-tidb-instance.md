@@ -21,7 +21,7 @@ summary: TiDB Cloud Premiumインスタンスを削除する方法を学びま�
 
     インスタンスが正しく削除されるように、`<organization name>/<instance name>` を入力します。
 
-    将来インスタンスを復元したい場合は、インスタンスのバックアップがあることを確認してください。そうしないと復元できません。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ方法の詳細については、[Back Up and Restore {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Data](/tidb-cloud/premium/backup-and-restore-premium.md) を参照してください。
+    将来インスタンスを復元したい場合は、インスタンスのバックアップがあることを確認してください。そうしないと復元できません。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ方法の詳細については、[{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> データのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md) を参照してください。
 
 5. **I understand, delete it** をクリックします。
 
@@ -33,4 +33,4 @@ summary: TiDB Cloud Premiumインスタンスを削除する方法を学びま�
     >
     > バックアップは削除されるまで料金が発生し続けることにご注意ください。
 
-    ごみ箱から {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元する場合は、[Restore from Recycle Bin](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin) を参照してください。
+    ごみ箱から {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元する場合は、[ごみ箱から復元](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin) を参照してください。

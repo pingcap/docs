@@ -29,7 +29,7 @@ TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプ
 
 ### {{{ .byoc }}} の料金 {#pricing-for-byoc}
 
-{{{ .byoc }}} の料金情報については、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+{{{ .byoc }}} の料金情報については、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 
 </CustomContent>
 

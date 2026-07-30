@@ -16,7 +16,7 @@ TiDB Cloudを使用すると、{{{ .premium }}}<CustomContent plan="byoc"> ま�
 > **Note:**
 >
 > - 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com)の右下隅にある**?**をクリックし、次に**Support Tickets**をクリックして[Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに "Apply for data export for {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance" と入力して、**Submit**をクリックします。
-> - エクスポートの最大サイズは 1 TiB です。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはより高いエクスポート速度をリクエストする場合は、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> - エクスポートの最大サイズは 1 TiB です。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはより高いエクスポート速度をリクエストする場合は、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 輸出先 {#export-locations}
 
@@ -135,7 +135,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
     - **ターゲット接続**：
         - **ストレージプロバイダー**：Azure Blob Storage を選択してください。
         - **フォルダー URI**：`azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` の形式で Azure Blob Storage の URI を入力してください。
-        - **SAS トークン**：コンテナーへのアクセス権限を持つ SAS トークンを入力します。[Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/) を使用して SAS トークンを作成することを推奨します。詳細については、[Configure External Storage Access](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) を参照してください。
+        - **SAS トークン**：コンテナーへのアクセス権限を持つ SAS トークンを入力します。[Azure ARM template](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/) を使用して SAS トークンを作成することを推奨します。詳細については、[外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access) を参照してください。
     - **エクスポートするデータ**：エクスポートするデータベースまたはテーブルを選択してください。
     - **データ形式**：**SQL** または **CSV** を選択してください。
     - **圧縮**：**Gzip**、**Snappy**、**Zstd**、または **None** を選択してください。

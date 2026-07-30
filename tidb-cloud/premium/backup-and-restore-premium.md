@@ -286,11 +286,11 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
     > **Tip:**
     >
-    > ストレージバケットのアクセスキーを作成するには、[Configure Amazon S3 access using an AWS access key](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium">および[Configure Alibaba Cloud OSS access](#configure-alibaba-cloud-oss-access)</CustomContent>を参照してください。
+    > ストレージバケットのアクセスキーを作成するには、[AWSアクセスキーを使用してAmazon S3へのアクセスを設定する](#configure-amazon-s3-access-using-an-aws-access-key)<CustomContent plan="premium">および[Alibaba Cloud OSSへのアクセスを設定する](#configure-alibaba-cloud-oss-access)</CustomContent>を参照してください。
 
 3. **Verify Backup and Next**をクリックします。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
 
     バックアップ情報が正しくない場合は、**Previous**をクリックして前のページに戻り、正しい情報を入力してください。
 

@@ -146,7 +146,7 @@ TiDB Cloud によって生成されたコマンドを使用してプライベー
 1. 次のいずれかの場所から `aws ec2 modify-vpc-endpoint` コマンドをコピーします。
 
     - プライベートエンドポイントの作成後に表示される **Create AWS Private Endpoint Connection** ダイアログ
-    - インスタンスの **Networking** ページ。**AWS Private Endpoint** エリアでプライベートエンドポイントを見つけ、**...** > **Enable DNS** をクリックします。
+    - インスタンスの **Networking** ページで、**AWS Private Endpoint** エリアにある対象のプライベートエンドポイントの **...** > **Enable DNS** をクリックします。
 
 2. AWS CLI でコマンドを実行します。
 
