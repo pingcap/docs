@@ -52,7 +52,7 @@ Note: For encryption, you must use a custom AWS KMS key (create a new symmetric 
 
 ## Step 3. Create the Provisioned MSK Cluster
 
-If you do not already have an MSK cluster that satisfies the prerequisites, create one in the AWS Console. The cluster will inherit the region, VPC, and subnets you set up in Step 1, and must use a non-`t4.small` broker type with SASL/SCRAM authentication and public access disabled.
+If you do not already have an MSK cluster that satisfies the prerequisites, create one in the AWS Console. The cluster will use the region, VPC, and subnets you set up in Step 1, and must use a broker type supported by multi-VPC private connectivity (not `t3.small`), with SASL/SCRAM authentication and public access disabled.
 
 Additional creation settings:
 
