@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.1.3 Release Notes
 summary: TiDB 6.1.3 was released on December 5, 2022. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, PD, TiKV, TiFlash, Backup & Restore, TiCDC, and TiDB Data Migration. Some notable changes include default value changes in TiCDC, lock granularity optimization in PD, and bug fixes in TiDB, PD, TiKV, TiFlash, and various tools. The release also includes an upgrade to the Go compiler version of TiDB from go1.18 to go1.19, which improves stability.
+aliases: ['/tidb/dev/release-6.1.3/','/tidb/v6.1/release-6.1.3','/tidb/v5.4/release-6.1.3','/tidb/v6.5/release-6.1.3','/tidb/v7.1/release-6.1.3','/tidb/v7.5/release-6.1.3','/tidb/v8.1/release-6.1.3']
 ---
 
 # TiDB 6.1.3 Release Notes

@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.7 Release Notes
 summary: TiDB 3.0.7 was released on December 4, 2019. It includes fixes for issues related to lock TTL, timezone parsing, result accuracy, data precision, and statistics accuracy. TiKV also received updates to improve deadlock detection and fix a memory leak issue.
+aliases: ['/tidb/dev/release-3.0.7/','/tidb/v3.0/release-3.0.7','/docs/dev/releases/release-3.0.7/','/docs/dev/releases/3.0.7/','/tidb/v5.4/release-3.0.7','/tidb/v6.1/release-3.0.7','/tidb/v6.5/release-3.0.7','/tidb/v7.1/release-3.0.7','/tidb/v7.5/release-3.0.7','/tidb/v8.1/release-3.0.7']
 ---
 
 # TiDB 3.0.7 Release Notes

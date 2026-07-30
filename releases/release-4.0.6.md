@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.6 Release Notes
 summary: TiDB 4.0.6 was released on September 15, 2020. New features include TiFlash support for outer join and TiDB Dashboard improvements. Tools like TiCDC and TiKV have also been updated. Bug fixes for TiDB, TiKV, PD, TiFlash, and various tools are included in this release.
+aliases: ['/tidb/dev/release-4.0.6/','/tidb/v4.0/release-4.0.6','/tidb/v5.4/release-4.0.6','/tidb/v6.1/release-4.0.6','/tidb/v6.5/release-4.0.6','/tidb/v7.1/release-4.0.6','/tidb/v7.5/release-4.0.6','/tidb/v8.1/release-4.0.6']
 ---
 
 # TiDB 4.0.6 Release Notes

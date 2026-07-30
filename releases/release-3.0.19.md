@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.19 Release Notes
 summary: TiDB 3.0.19 was released on September 25, 2020. Compatibility changes include import path and copyright information updates. Improvements were made to mitigate failure recovery impact, support concurrency adjustment, and set nonadjustable values. Bug fixes were made for query errors, privilege checks, type changes, constraint checks, table lock release, operator handling, and panic parsing. Tools like TiDB Lightning also received fixes for process exit timing.
+aliases: ['/tidb/dev/release-3.0.19/','/tidb/v3.0/release-3.0.19','/tidb/v5.4/release-3.0.19','/tidb/v6.1/release-3.0.19','/tidb/v6.5/release-3.0.19','/tidb/v7.1/release-3.0.19','/tidb/v7.5/release-3.0.19','/tidb/v8.1/release-3.0.19']
 ---
 
 # TiDB 3.0.19 Release Notes

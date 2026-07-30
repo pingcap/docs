@@ -2,6 +2,7 @@
 title: TiDB 5.2.4 Release Notes
 category: Releases
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 5.2.4.
+aliases: ['/tidb/dev/release-5.2.4/','/tidb/v5.2/release-5.2.4','/tidb/v5.4/release-5.2.4','/tidb/v6.1/release-5.2.4','/tidb/v6.5/release-5.2.4','/tidb/v7.1/release-5.2.4','/tidb/v7.5/release-5.2.4','/tidb/v8.1/release-5.2.4']
 ---
 
 # TiDB 5.2.4 Release Notes

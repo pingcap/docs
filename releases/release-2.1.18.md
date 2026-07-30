@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.18 Release Notes
 summary: TiDB 2.1.18 was released on November 4, 2019. The release includes various fixes and optimizations for SQL optimizer, SQL engine, server, DDL, monitor, and tools. Some notable improvements include support for using parameters in ORDER BY, GROUP BY, and LIMIT OFFSET, and adding new metrics for monitoring Add Index operation progress. The TiDB Ansible version 2.1.18 also includes updates and new monitoring items for TiDB Binlog.
+aliases: ['/tidb/dev/release-2.1.18/','/tidb/v2.1/release-2.1.18','/docs/dev/releases/release-2.1.18/','/docs/dev/releases/2.1.18/','/tidb/v5.4/release-2.1.18','/tidb/v6.1/release-2.1.18','/tidb/v6.5/release-2.1.18','/tidb/v7.1/release-2.1.18','/tidb/v7.5/release-2.1.18','/tidb/v8.1/release-2.1.18']
 ---
 
 # TiDB 2.1.18 Release Notes

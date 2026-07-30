@@ -1,6 +1,7 @@
 ---
 title: What's New in TiDB 5.0
 summary: TiDB 5.0 introduces MPP architecture, clustered index, async commit, and stability improvements. It also enhances compatibility changes, configuration parameters, and new features. Additionally, it optimizes performance, high availability, disaster recovery, data migration, diagnostics, deployment, and maintenance. Telemetry is added for cluster usage metrics.
+aliases: ['/tidb/dev/release-5.0.0/','/tidb/v5.0/release-5.0.0','/tidb/v5.4/release-5.0.0','/tidb/v6.1/release-5.0.0','/tidb/v6.5/release-5.0.0','/tidb/v7.1/release-5.0.0','/tidb/v7.5/release-5.0.0','/tidb/v8.1/release-5.0.0']
 ---
 
 # What's New in TiDB 5.0

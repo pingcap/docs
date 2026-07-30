@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0 RC1 Release Notes
 summary: TiDB 2.0 RC1, released on March 9, 2018, brings improvements in MySQL compatibility, SQL optimization, and stability. Key updates include memory usage limitation for SQL statements, Stream Aggregate operator support, configuration file validation, and HTTP API for configuration information. TiDB also enhances MySQL syntax compatibility, optimizer, and Boolean field length. PD sees logic and performance optimizations, while TiKV fixes gRPC call and adds gRPC APIs for metrics. Additionally, TiKV checks SSD usage, optimizes read performance, and improves metrics usage.
+aliases: ['/tidb/dev/release-2.0-rc.1/','/tidb/v2.0/release-2.0-rc.1','/docs/dev/releases/release-2.0-rc.1/','/docs/dev/releases/2rc1/','/tidb/v5.4/release-2.0-rc.1','/tidb/v6.1/release-2.0-rc.1','/tidb/v6.5/release-2.0-rc.1','/tidb/v7.1/release-2.0-rc.1','/tidb/v7.5/release-2.0-rc.1','/tidb/v8.1/release-2.0-rc.1']
 ---
 
 # TiDB 2.0 RC1 Release Notes
