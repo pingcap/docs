@@ -1,6 +1,7 @@
 ---
 title: TiDB Versioning
 summary: Learn the version numbering system of TiDB.
+aliases: ['/tidb/dev/versioning','/tidb/v5.4/versioning','/tidb/v6.1/versioning','/tidb/v6.5/versioning','/tidb/v7.1/versioning','/tidb/v7.5/versioning','/tidb/v8.1/versioning']
 ---
 
 # TiDB Versioning
