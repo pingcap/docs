@@ -16,6 +16,7 @@ TiDB Cloud 提供了以下几种方案选项。无论你是刚刚开始使用，
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
 
 </CustomContent>
 
@@ -26,6 +27,7 @@ TiDB Cloud 提供了以下几种方案选项。无论你是刚刚开始使用，
 - [{{{ .premium }}}](#premium)
 - [{{{ .byoc }}}](#byoc)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
 
 </CustomContent>
 
@@ -145,3 +147,11 @@ TiDB Cloud Dedicated 适用于生产环境，具备跨可用区高可用性、�
 > **注意：**
 >
 > TiDB Cloud Dedicated 集群创建后，节点存储空间无法减少。
+
+## {{{ .lake }}} {#lake}
+
+TiDB Cloud Lake 是一项面向分析工作负载的云原生数据仓库服务。它将计算与存储分离，使你能够独立配置 warehouse，随工作负载变化进行扩展，并以经济高效的方式将数据存储在对象存储中。
+
+TiDB Cloud Lake 在一个平台中支持 ANSI SQL、半结构化数据处理、向量搜索和面向 AI 的工作流。它专为希望获得托管式分析体验而无需自行运维底层基础设施的团队而设计。
+
+参见 [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/) 和 [TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/)。

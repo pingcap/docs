@@ -109,6 +109,12 @@ TiDB Cloud 默认提供免费基础支持计划。如需扩展服务，你可以
 
     在该页面，你可以查看当前的支持计划。默认选择的是 **Basic** 免费计划。
 
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，**Enterprise** 是最低要求的支持计划。
+
+    </CustomContent>
+
 2. 选择你想要的支持计划。
 
     <SimpleTab>
@@ -143,3 +149,9 @@ TiDB Cloud 默认提供免费基础支持计划。如需扩展服务，你可以
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/) 左下角点击 **Support**。
 2. 选择你要切换到的支持计划，然后点击 **Downgrade**。
+
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，你只能降级到 **Enterprise** 或更高的支持计划。
+
+    </CustomContent>

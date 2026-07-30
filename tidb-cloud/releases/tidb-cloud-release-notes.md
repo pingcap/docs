@@ -1,12 +1,24 @@
 ---
 title: 2026 年 TiDB Cloud 发布说明
 summary: 了解 2026 年 TiDB Cloud 的发布说明。
-aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes']
+aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes','/zh/ai/vector-search-changelogs/']
 ---
 
 # 2026 年 TiDB Cloud 发布说明
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
+
+## 2026 年 7 月 28 日 {#july-28-2026}
+
+**通用变更**
+
+- **TiDB Cloud Dedicated**
+
+    - 数据库审计日志现已对运行 TiDB v7.5.6 或更高版本，或 v8.5.2 或更高版本的 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群开放公测。
+
+        此功能可记录用户访问活动，包括执行的 SQL 语句，支持将审计日志写入 Amazon S3、Google Cloud Storage (GCS) 或 Azure Blob Storage，并允许你配置过滤规则，以控制为特定 SQL 用户捕获哪些事件。
+
+        更多信息，请参见 [TiDB Cloud Dedicated Database Audit Logging (Preview)](/tidb-cloud/tidb-cloud-auditing.md)。
 
 ## 2026 年 7 月 21 日 {#july-21-2026}
 

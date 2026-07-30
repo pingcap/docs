@@ -219,7 +219,7 @@
   - 数据库访问控制
     - [配置集群密码设置](/tidb-cloud/configure-security-settings.md)
   - 审计管理
-    - [数据库审计日志](/tidb-cloud/tidb-cloud-auditing.md)
+    - [数据库审计日志](/tidb-cloud/tidb-cloud-auditing.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
 - 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
@@ -641,3 +641,4 @@
 ## _BUILD_ALLOWLIST
 
 - [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
+- [数据库审计日志（旧版）](/tidb-cloud/tidb-cloud-auditing-legacy.md)

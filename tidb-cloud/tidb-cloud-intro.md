@@ -134,6 +134,10 @@ TiDB Cloud 提供以下部署选项：
 
     目前，TiDB Cloud Dedicated 已在 AWS、Azure 和 Google Cloud 上正式发布。更多信息，参见 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)。
 
+- {{{ .lake }}}
+
+    TiDB Cloud Lake 是一项面向分析负载的云原生数据仓库服务。它将计算与存储分离，并支持 ANSI SQL、半结构化数据处理和面向 AI 的工作流。更多详情，参见 [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)。
+
 ## 架构
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
