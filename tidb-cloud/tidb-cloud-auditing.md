@@ -151,7 +151,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 2.  [Google Cloud console](https://console.cloud.google.com/)で、 **[IAMと管理]** &gt; **[ロール]**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
 
     -   storage.objects.create
-    -   storage.オブジェクト.削除
+    -   storage.objects.delete
 
     はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **「IAMと管理」** &gt; **「ロール」** &gt; **「ロールの作成」**に移動して、TiDBクラスターのロールを定義してください。
 
