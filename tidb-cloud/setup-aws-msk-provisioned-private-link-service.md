@@ -28,7 +28,7 @@ Your MSK cluster must meet the following conditions (whether existing or newly c
 
 - **Region**: Same AWS region as your TiDB Cloud Premium instance.
 - **Availability Zones**: Must match your TiDB Cloud instance AZs (verify by AZ ID, not AZ name).
-- **Authentication**: SASL/SCRAM must be enabled.
+- **Authentication**: Enable SASL/SCRAM for this TiDB Cloud connection. AWS MSK multi-VPC connectivity also supports IAM and TLS, but this setup uses SASL/SCRAM.
 - **Broker type**: `t3.small` is not supported. Choose a larger type.
 - **Public access**: Must be disabled.
 
@@ -44,9 +44,11 @@ Record the AZ IDs of the subnets. The MSK cluster will use these subnets at crea
 
 ## Step 2. Create a SCRAM Secret in AWS Secrets Manager
 
-Create a secret in AWS Secrets Manager to store the SASL/SCRAM credentials that TiDB Cloud will use to authenticate against your MSK cluster. This secret requires a custom AWS KMS encryption key — the default AWS managed key will not work.
+Create a secret in AWS Secrets Manager to store the SASL/SCRAM credentials that TiDB Cloud will use to authenticate against your MSK cluster.
 
-First, create a symmetric KMS key and give it an alias for easy reference. Then create a secret whose name **must** start with `AmazonMSK_` (for example, `AmazonMSK_tidb_msk`). The secret value is a JSON object containing a `username` and `password`.
+When creating the secret, select "Other type of secret". The name of the secret must start with the prefix AmazonMSK_ (for example, AmazonMSK_tidb_msk). Under the secret value, provide a JSON object containing the username and password.
+
+Note: For encryption, you must use a custom AWS KMS key (create a new symmetric custom key if you do not have one); the default AWS managed key will not work.
 
 ## Step 3. Create the Provisioned MSK Cluster
 
