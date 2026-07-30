@@ -50,7 +50,7 @@
 - [統合の概要](/ai/integrations/vector-search-integration-overview.md)
 - 自動埋め込み
   - [概要](/ai/integrations/vector-search-auto-embedding-overview.md)
-  - [オープンAI](/ai/integrations/vector-search-auto-embedding-openai.md)
+  - [OpenAI](/ai/integrations/vector-search-auto-embedding-openai.md)
   - [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
   - [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
   - [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
