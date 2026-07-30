@@ -75,7 +75,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナ
     -   TiDB Cloud Starterインスタンス：サポートされていません。
     -   TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
 
-### 目的地を復元する {#restore-destination}
+### 復元先 {#restore-destination}
 
 TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンスへのデータ復元をサポートしています。
 

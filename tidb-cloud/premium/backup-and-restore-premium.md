@@ -137,7 +137,7 @@ TiDB Cloudは、インスタンスのスナップショット復元と特定時�
 
     -   Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
 
-### 目的地を復元する {#restore-destination}
+### 復元先 {#restore-destination}
 
 TiDB Cloudは、新しいインスタンスへのデータ復元をサポートしています。
 
@@ -296,7 +296,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 5. バックアップを復元するには、**Restore**をクリックします。
 
-## 参考文献 {#references}
+## リファレンス {#references}
 
 このセクションでは、Amazon S3<CustomContent plan="premium">とAlibaba Cloud OSS</CustomContent>へのアクセス設定方法について説明します。
 

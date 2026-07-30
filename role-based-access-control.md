@@ -352,7 +352,7 @@ SELECT * FROM mysql.default_roles;
 -   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
 -   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
 
-### 参考文献 {#references}
+### リファレンス {#references}
 
 RBAC、ユーザー管理、権限管理は密接に関連しているため、操作の詳細については次のリソースを参照してください。
 

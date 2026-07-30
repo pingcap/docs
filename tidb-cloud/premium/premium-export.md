@@ -18,7 +18,7 @@ TiDB Cloudを使用すると、{{{ .premium }}}<CustomContent plan="byoc"> ま�
 > - 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com)の右下隅にある**?**をクリックし、次に**Support Tickets**をクリックして[Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに "Apply for data export for {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance" と入力して、**Submit**をクリックします。
 > - エクスポートの最大サイズは 1 TiB です。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはより高いエクスポート速度をリクエストする場合は、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## 輸出先 {#export-locations}
+## エクスポート先 {#export-locations}
 
 データを以下の外部ストレージの場所にエクスポートできます。
 
