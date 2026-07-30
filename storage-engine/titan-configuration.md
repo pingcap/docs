@@ -111,7 +111,7 @@ Titan BLOBファイルとRocksDBブロックファイルの共有キャッシュ
 
 ### Titanの構成例 {#titan-configuration-example}
 
-以下は Titan 設定ファイルの例です。1 または[Kubernetes上でTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster) [TiUPを使用して設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)かを選択できます。
+以下は Titan 設定ファイルの例です。[TiUPを使用して設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)か[Kubernetes上でTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster)かを選択できます。
 
 ```toml
 [rocksdb]

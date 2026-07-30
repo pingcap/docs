@@ -5,7 +5,7 @@ summary: TIDB_CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学�
 
 # TIDB_CHECK_CONSTRAINTS {#tidb-check-constraints}
 
-`TIDB_CHECK_CONSTRAINTS`表は[`CHECK`制約](/constraints.md#check)表に関する情報を提供します。5 の[`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)に加えて、 `TIDB_CHECK_CONSTRAINTS` `CHECK`制約を定義する表の名前と ID を提供します。
+`TIDB_CHECK_CONSTRAINTS`表はテーブルの[`CHECK`制約](/constraints.md#check)に関する情報を提供します。[`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)の列に加えて、 `TIDB_CHECK_CONSTRAINTS`は`CHECK`制約を定義する表の名前と ID を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;

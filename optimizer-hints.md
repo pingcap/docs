@@ -724,7 +724,7 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 
 ### USE_TOJA(ブール値) {#use-toja-boolean-value}
 
-`boolean_value`パラメータは`TRUE`または`FALSE`です。7 ヒント`USE_TOJA(TRUE)` 、オプティマイザが`in`条件（サブクエリを含む）を結合および集計演算に変換できるようにします。一方、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
+`boolean_value`パラメータは`TRUE`または`FALSE`です。`USE_TOJA(TRUE)`ヒントは、オプティマイザが`in`条件（サブクエリを含む）を結合および集計演算に変換できるようにします。一方、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
 
 たとえば、次のクエリは`in (select t2.a from t2) subq`対応する結合および集計操作に変換します。
 

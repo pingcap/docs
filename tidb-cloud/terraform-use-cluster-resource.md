@@ -762,7 +762,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
             ...
           }
 
-5.  `terraform apply`コマンドを実行し、確認のために`yes`入力します。5 コマンドでステータスを確認すると、 `RESUMING`になっていること`terraform state show tidbcloud_cluster.${resource-name}`わかります。
+5.  `terraform apply`コマンドを実行し、確認のために`yes`を入力します。 `terraform state show tidbcloud_cluster.${resource-name}`コマンドでステータスを確認すると、 `RESUMING`になっていることがわかります。
 
         # tidbcloud_cluster.example_cluster:
         resource "tidbcloud_cluster" "example_cluster" {
