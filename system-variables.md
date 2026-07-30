@@ -58,7 +58,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `OFF`
--   `AUTO_RANDOM`ステートメントで、 `INSERT` -E}} 属性を持つ列の値を明示的に指定することを許可するかどうかを決定します。
+-   `INSERT`ステートメントで、 `AUTO_RANDOM`属性を持つ列の値を明示的に指定することを許可するかどうかを決定します。
 
 ### authentication_ldap_sasl_auth_method_name <span class="version-mark">New in v7.1.0</span>
 
@@ -1785,7 +1785,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   型: Enumeration
 -   デフォルト値: `PRIORITY_LOW`
 -   値のオプション: `PRIORITY_LOW` 、 `PRIORITY_NORMAL` 、 `PRIORITY_HIGH`
--   この変数は`ADD INDEX`フェーズで`re-organize` } 操作を実行する優先順位を設定するために使用されます。
+-   この変数は`re-organize`フェーズで`ADD INDEX`操作を実行する優先順位を設定するために使用されます。
 -   この変数の値を`PRIORITY_LOW` 、 `PRIORITY_NORMAL`または`PRIORITY_HIGH`に設定できます。
 
 ### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v6.5.12, v7.5.5, and v8.5.0</span>
@@ -4667,7 +4667,7 @@ mysql> desc select count(distinct a) from test.t;
 
 -   範囲: `[-1, 1]`
 
--   この変数は、SQL ステートメントに`ORDER BY`および`ORDER BY` -E}} 句がある場合に、SQL ステートメント`LIMIT`に一致するインデックスの推定行数を制御しますが、一部のフィルタ条件はカバーしません。
+-   この変数は、SQL ステートメントに`ORDER BY`および`LIMIT`句がある場合に、SQL ステートメント`ORDER BY`に一致するインデックスの推定行数を制御しますが、一部のフィルタ条件はカバーしません。
 
 -   これは、システム変数[tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)と同じクエリパターンに対応します。
 
@@ -5694,7 +5694,7 @@ SHOW WARNINGS;
     -   `tidb_restricted_read_only`を`OFF`に設定しても、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)は変更されません。
     -   `tidb_restricted_read_only`が`ON`の場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) `OFF`に設定することはできません。
 -   TiDB の DBaaS プロバイダーの場合、TiDB クラスタが別のデータベースのダウンストリーム データベースである場合、TiDB クラスタを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスタを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベース ユーザーには、 `SUPER`権限を持つルート ユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。
--   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` }、{{B- `SHOW` -E}} など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
+-   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
 -   この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
 -   TiDB は、SQL ステートメントの実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL ステートメントのコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
 -   この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。
@@ -6368,7 +6368,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値: `OFF`
 -   `tidb_super_read_only` MySQL 変数`super_read_only`の代替として実装されることを目的としています。ただし、TiDB は分散データベースであるため、 `tidb_super_read_only`実行直後にデータベースを読み取り専用にするのではなく、最終的に読み取り専用にします。
 -   `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限を持つユーザーは、この変数を変更できます。
--   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` }、{{B- `SHOW` }} など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
+-   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
 -   この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
 -   TiDB は、SQL ステートメントの実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL ステートメントのコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
 -   この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。

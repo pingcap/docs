@@ -74,13 +74,13 @@ TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バー
     data-encryption-method = "aes128-ctr"
     data-key-rotation-period = "168h" # 7 days
 
--   `data-encryption-method`暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
+-   `data-encryption-method`は、暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
 
     -   新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
     -   暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
     -   暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、TiKVを再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルが、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
--   `data-key-rotation-period` 、TiKV がキーをローテーションする頻度を指定します。
+-   `data-key-rotation-period`は、TiKV がキーをローテーションする頻度を指定します。
 
 暗号化が有効になっている場合（つまり、 `data-encryption-method`値が`"plaintext"`ではない場合）、次のいずれかの方法でマスター キーを指定する必要があります。
 
@@ -305,7 +305,7 @@ AWS でキーを作成するには、TiKV のキーを作成する手順を参�
 
 `data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、「sm4-ctr」（v6.4.0 以降のみ）、「plaintext」です。デフォルト値は「plaintext」で、暗号化は無効です。`data-key-rotation-period`は、TiFlash がデータキーをローテーションする頻度を定義します。暗号化は、新規TiFlashクラスターまたは既存のTiFlashクラスターで有効にできますが、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`を削除するか、「plaintext」にリセットし、 TiFlashを再起動します。暗号化方式を変更するには、設定ファイルの`data-encryption-method`を更新し、 TiFlash を再起動します。暗号化アルゴリズムを変更するには、 `data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、 TiFlash を再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルは、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
-暗号化が有効になっている場合（つまり、 `data-encryption-method` 「プレーンテキスト」ではない場合）、マスターキーを指定する必要があります。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`設定ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
+暗号化が有効になっている場合（つまり、 `data-encryption-method`が「プレーンテキスト」ではない場合）、マスターキーを指定する必要があります。AWS KMS CMK をマスターキーとして指定するには、 `tiflash-learner.toml`設定ファイルの`encryption`セクションの後に`encryption.master-key`セクションを追加します。
 
     [security.encryption.master-key]
     type = "kms"

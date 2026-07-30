@@ -139,7 +139,7 @@ SELECT JSON_SCHEMA_VALID('{"required": ["fruits","vegetables","grains"]}',@j);
     +------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-上記の出力から、 `fruits` 、 `vegetables` 、 `grains` }}属性の存在検証が、 `grains`存在しないため失敗していることがわかります。
+上記の出力から、 `fruits` 、 `vegetables` 、 `grains`属性の存在検証が、 `grains`が存在しないため失敗していることがわかります。
 
 `fruits`が配列であることを検証します。
 

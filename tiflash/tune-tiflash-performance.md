@@ -355,7 +355,7 @@ mysql> explain analyze select a, count(*) from t group by a;
 
 ### <code>tiflash_fine_grained_shuffle_stream_count</code>を設定する {#configure-code-tiflash-fine-grained-shuffle-stream-count-code}
 
-Fine Grained Shuffle 機能を[`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620)設定することで、ウィンドウ関数の実行における同時実行性を高めることができます。これにより、ウィンドウ関数の実行により多くのシステムリソースが使用されるようになり、クエリのパフォーマンスが向上します。
+Fine Grained Shuffle 機能の[`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620)を設定することで、ウィンドウ関数の実行における同時実行性を高めることができます。これにより、ウィンドウ関数の実行により多くのシステムリソースが使用されるようになり、クエリのパフォーマンスが向上します。
 
 ウィンドウ関数がTiFlashにプッシュダウンされて実行される際、この変数を使用してウィンドウ関数実行の同時実行レベルを制御できます。単位はスレッドです。
 
@@ -363,7 +363,7 @@ Fine Grained Shuffle 機能を[`tiflash_fine_grained_shuffle_stream_count`](/sys
 set @@tiflash_fine_grained_shuffle_stream_count = 20;
 ```
 
-次の例は、変数`tiflash_fine_grained_shuffle_stream_count`が再構成される前後のクエリ結果を示しています。再構成前は、 `[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]`のうち`stream_count` 8 です。再構成後は、 `stream_count` 20 になります。
+次の例は、変数`tiflash_fine_grained_shuffle_stream_count`が再構成される前後のクエリ結果を示しています。再構成前は、 `[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]`のうち`stream_count`は 8 です。再構成後は、 `stream_count`は 20 になります。
 
 `tiflash_fine_grained_shuffle_stream_count`が再構成される前:
 
