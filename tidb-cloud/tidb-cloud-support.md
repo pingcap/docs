@@ -130,7 +130,7 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     **Developer**または**Enterprise**にアップグレードするには、次の手順を実行します。
 
-    1. **Developer**または**Enterprise**ペインで**Upgrade**をクリックします。**Upgrade to Developer Plan**ページまたは**Upgrade to Enterprise Plan**ページが表示されます。
+    1. **Developer**または**Enterprise**で**Upgrade**をクリックします。**Upgrade to Developer Plan**ページまたは**Upgrade to Enterprise Plan**ページが表示されます。
     2. ページで該当するサポートサービス情報を確認します。各サポートプランの完全版については、[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)を参照してください。
     3. **Add Credit Card and Upgrade**をクリックし、**Credit Card**の詳細を入力します。
 
@@ -145,7 +145,7 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     プランを**Premium**にアップグレードするには、次の手順を実行します。
 
-    1. **Premium**ペインで**Contact Sales**をクリックします。**Contact Us**ページが表示されます。
+    1. **Premium**で**Contact Sales**をクリックします。**Contact Us**ページが表示されます。
     2. ページで連絡先情報を入力して送信します。その後、サポートチームから連絡があり、サブスクリプションをサポートします。
 
     </div>
