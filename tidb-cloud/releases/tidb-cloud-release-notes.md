@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - TiDB v7.5.6 以降または v8.5.2 以降を実行している [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターで、データベース監査ログがパブリックプレビューで利用可能になりました。
+    - TiDB v7.5.6 以降または v8.5.2 以降の [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターで、データベース監査ログがパブリックプレビューで利用可能になりました。
 
         この機能は、実行された SQL ステートメントを含むユーザーアクセスアクティビティを記録し、監査ログを Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に書き込むことをサポートし、特定の SQL ユーザーに対してどのイベントを取得するかを制御するフィルタールールを設定できます。
 

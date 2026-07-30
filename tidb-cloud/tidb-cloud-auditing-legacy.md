@@ -3,7 +3,7 @@ title: TiDB Cloud Dedicated Database Audit Logging (Legacy)
 summary: TiDB Cloud でクラスターを監査する方法について説明します。
 ---
 
-# TiDB Cloud Dedicated Database Audit Logging (Legacy)
+# TiDB Cloud Dedicatedデータベース監査ログ（レガシー） {#tidb-cloud-dedicated-database-audit-logging-legacy}
 
 TiDB Cloud は、実行された SQL 文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
@@ -38,9 +38,9 @@ TiDB Cloud は、TiDB Cloud Dedicated クラスターの監査ログをクラウ
 >
 > AWS にデプロイされた TiDB クラスターでは、データベース監査ログを有効にする際に、監査ログファイルを TiDB Cloud に保存することも選択できます。現在、この機能はリクエストベースでのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com) の右下にある **?** をクリックし、**Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply to store audit log files in TiDB Cloud" と入力して、**Submit** をクリックしてください。
 
-### AWS 向けに監査ログを有効にする {#enable-audit-logging-for-aws}
+### AWS の監査ログを有効にする {#enable-audit-logging-for-aws}
 
-AWS 向けに監査ログを有効にするには、次の手順を実行します。
+AWS の監査ログを有効にするには、次の手順を実行します。
 
 #### Step 1. Amazon S3 bucket を作成する {#step-1-create-an-amazon-s3-bucket}
 
@@ -116,9 +116,9 @@ TiDB Cloud コンソールで、TiDB Cloud account ID と External ID の値を�
 > - 監査ログを有効にした後、bucket URI、location、または ARN に新しい変更を加えた場合は、TiDB Cloud が bucket に接続できることを確認するために、再度 **Test Connection** をクリックする必要があります。その後、**Enable** をクリックして変更を適用します。
 > - TiDB Cloud から Amazon S3 へのアクセスを削除するには、AWS Management Console でこのクラスターに付与した trust policy を削除するだけです。
 
-### Google Cloud 向けに監査ログを有効にする {#enable-audit-logging-for-google-cloud}
+### Google Cloud の監査ログを有効にする {#enable-audit-logging-for-google-cloud}
 
-Google Cloud 向けに監査ログを有効にするには、次の手順を実行します。
+Google Cloud の監査ログを有効にするには、次の手順を実行します。
 
 #### Step 1. GCS bucket を作成する {#step-1-create-a-gcs-bucket}
 
@@ -180,9 +180,9 @@ TiDB Cloud コンソールで、TiDB Cloud account ID を取得した **Enable D
 > - 監査ログを有効にした後、bucket URI または location に新しい変更を加えた場合は、TiDB Cloud が bucket に接続できることを確認するために、再度 **Test Connection** をクリックする必要があります。その後、**Enable** をクリックして変更を適用します。
 > - TiDB Cloud から GCS bucket へのアクセスを削除するには、Google Cloud console でこのクラスターに付与した trust policy を削除してください。
 
-### Azure 向けに監査ログを有効にする {#enable-audit-logging-for-azure}
+### Azure の監査ログを有効にする {#enable-audit-logging-for-azure}
 
-Azure 向けに監査ログを有効にするには、次の手順を実行します。
+Azure の監査ログを有効にするには、次の手順を実行します。
 
 #### Step 1. Azure storage account を作成する {#step-1-create-an-azure-storage-account}
 
