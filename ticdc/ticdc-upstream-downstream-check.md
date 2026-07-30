@@ -13,7 +13,7 @@ SyncpointはTiDBが提供するスナップショット機能を利用し、TiCD
 
 Syncpoint 機能を有効にすると、 [一貫性のあるスナップショット読み取り](#consistent-snapshot-read)と[データ一貫性検証](#data-consistency-validation)使用できるようになります。
 
-Syncpoint機能を有効にするには、レプリケーションタスクの作成時にTiCDC構成項目の値を`enable-sync-point`から`true`に設定します。Syncpointを有効にすると、TiCDCは以下の情報を下流のTiDBクラスターに書き込みます。
+Syncpoint機能を有効にするには、レプリケーションタスクの作成時にchangefeed構成項目の値を`enable-sync-point`から`true`に設定します。Syncpointを有効にすると、TiCDCは以下の情報を下流のTiDBクラスターに書き込みます。
 
 1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO 対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
 2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で設定) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`実行し、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
@@ -94,7 +94,7 @@ select * from tidb_cdc.syncpoint_v1;
 
 ## 注記 {#notes}
 
--   TiCDCがチェンジフィードを作成する前に、TiCDC構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   チェンジフィードを作成する前に、changefeed構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この設定によってのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。構成項目`sync-point-interval`のデフォルト形式は`"h m s"` （例えば`"1h30m30s"`で、最小値は`"30s"`です。完全な構成情報については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 -   Syncpointを使用してデータ検証を実行する場合、TiKVのガベージコレクション（GC）時間を変更する必要があります。これは、データチェック中にスナップショットに対応する履歴データがGCによって収集されないようにするためです。GC時間を1時間に変更し、チェック後に設定を復元することをお勧めします。
 -   上記の例では`Datasource config`の部分のみを示しています。完全な設定については[sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 -   v6.4.0 以降では、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ changefeed のみが TiCDC Syncpoint 機能を使用できます。

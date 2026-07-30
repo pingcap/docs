@@ -714,6 +714,7 @@ mysql> SELECT * FROM T2;
 
     -   TiDB v4.0.10 以降、v4.0.x バージョン、および TiDB v5.0.0 以降のバージョンでは、tidb-server の[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)設定パラメータを使用して調整できます。v4.0.10 より前のバージョンでは、値は`6 MB`です。
     -   バージョン7.6.0以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この設定項目の値を動的に変更できます。
+    -   TiKV も単一の書き込みリクエストのデータサイズを制限していることに注意してください。単一の書き込みリクエストのデータサイズが [`raftstore.raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)(デフォルトは `8 MiB`)を超えると、TiKV はそのリクエストを拒否します。単一行が大きい場合は、TiDB の `tidb_txn_entry_size_limit` と TiKV の `raftstore.raft-entry-max-size` の両方を調整する必要があります。
 
 -   単一トランザクションでサポートされる最大サイズは1 TiBです。
 

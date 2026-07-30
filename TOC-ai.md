@@ -1,87 +1,85 @@
 <!-- markdownlint-disable MD007 -->
-
 <!-- markdownlint-disable MD041 -->
 
 # 目次
 
 ## クイックスタート
 
--   [Pythonで始める](/ai/quickstart-via-python.md)
--   [SQL経由で開始する](/ai/quickstart-via-sql.md)
+- [Pythonで始める](/ai/quickstart-via-python.md)
+- [SQL経由で開始する](/ai/quickstart-via-sql.md)
 
 ## コンセプト
 
--   [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル検索](/ai/concepts/vector-search-overview.md)
 
 ## ガイド
 
--   [TiDBに接続する](/ai/guides/connect.md)
--   [表の操作](/ai/guides/tables.md)
--   検索機能
-    -   [ベクトル検索](/ai/guides/vector-search.md)
-    -   全文検索
-        -   [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
-        -   [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)
-    -   [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
-    -   [画像検索](/ai/guides/image-search.md)
--   高度な機能
-    -   [自動埋め込み](/ai/guides/auto-embedding.md)
-    -   [フィルタリング](/ai/guides/filtering.md)
-    -   [再ランキング](/ai/guides/reranking.md)
-    -   [結合クエリ](/ai/guides/join-queries.md)
-    -   [生のSQLクエリ](/ai/guides/raw-queries.md)
-    -   [トランザクション](/ai/guides/transactions.md)
+- [TiDBに接続する](/ai/guides/connect.md)
+- [表の操作](/ai/guides/tables.md)
+- 検索機能
+  - [ベクトル検索](/ai/guides/vector-search.md)
+  - 全文検索
+    - [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
+    - [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)
+  - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+  - [画像検索](/ai/guides/image-search.md)
+- 高度な機能
+  - [自動埋め込み](/ai/guides/auto-embedding.md)
+  - [フィルタリング](/ai/guides/filtering.md)
+  - [再ランキング](/ai/guides/reranking.md)
+  - [結合クエリ](/ai/guides/join-queries.md)
+  - [生のSQLクエリ](/ai/guides/raw-queries.md)
+  - [トランザクション](/ai/guides/transactions.md)
 
 ## 例
 
--   [基本的なCRUD操作](/ai/examples/basic-with-pytidb.md)
--   [自動埋め込み](/ai/examples/auto-embedding-with-pytidb.md)
--   検索と取得
-    -   [ベクトル検索](/ai/examples/vector-search-with-pytidb.md)
-    -   [全文検索](/ai/examples/fulltext-search-with-pytidb.md)
-    -   [ハイブリッド検索](/ai/examples/hybrid-search-with-pytidb.md)
-    -   [画像検索](/ai/examples/image-search-with-pytidb.md)
--   AIアプリケーション
-    -   [RAG アプリケーション](/ai/examples/rag-with-pytidb.md)
-    -   [会話記憶](/ai/examples/memory-with-pytidb.md)
-    -   [テキストからSQLへ](/ai/examples/text2sql-with-pytidb.md)
+- [基本的なCRUD操作](/ai/examples/basic-with-pytidb.md)
+- [自動埋め込み](/ai/examples/auto-embedding-with-pytidb.md)
+- 検索と取得
+  - [ベクトル検索](/ai/examples/vector-search-with-pytidb.md)
+  - [全文検索](/ai/examples/fulltext-search-with-pytidb.md)
+  - [ハイブリッド検索](/ai/examples/hybrid-search-with-pytidb.md)
+  - [画像検索](/ai/examples/image-search-with-pytidb.md)
+- AIアプリケーション
+  - [RAG アプリケーション](/ai/examples/rag-with-pytidb.md)
+  - [会話記憶](/ai/examples/memory-with-pytidb.md)
+  - [テキストからSQLへ](/ai/examples/text2sql-with-pytidb.md)
 
 ## 統合
 
--   [統合の概要](/ai/integrations/vector-search-integration-overview.md)
--   自動埋め込み
-    -   [概要](/ai/integrations/vector-search-auto-embedding-overview.md)
-    -   [オープンAI](/ai/integrations/vector-search-auto-embedding-openai.md)
-    -   [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
-    -   [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
-    -   [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
-    -   [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md)
-    -   [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md)
-    -   [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
-    -   [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
--   AIフレームワーク
-    -   [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
-    -   [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
--   ORMライブラリ
-    -   [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
-    -   [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
-    -   [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)
--   クラウドサービス
-    -   [Jina AI埋め込み](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
-    -   [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
--   MCP サーバー
-    -   [概要](/ai/integrations/tidb-mcp-server.md)
-    -   [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
-    -   [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
-    -   [Cursor](/ai/integrations/tidb-mcp-cursor.md)
-    -   [VS Code](/ai/integrations/tidb-mcp-vscode.md)
-    -   [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
+- [統合の概要](/ai/integrations/vector-search-integration-overview.md)
+- 自動埋め込み
+  - [概要](/ai/integrations/vector-search-auto-embedding-overview.md)
+  - [OpenAI](/ai/integrations/vector-search-auto-embedding-openai.md)
+  - [OpenAI対応](/ai/integrations/embedding-openai-compatible.md)
+  - [Jina AI](/ai/integrations/vector-search-auto-embedding-jina-ai.md)
+  - [Cohere](/ai/integrations/vector-search-auto-embedding-cohere.md)
+  - [Google Gemini](/ai/integrations/vector-search-auto-embedding-gemini.md)
+  - [Hugging Face](/ai/integrations/vector-search-auto-embedding-huggingface.md)
+  - [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
+  - [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
+- AIフレームワーク
+  - [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
+  - [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
+- ORMライブラリ
+  - [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
+  - [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)
+  - [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)
+- クラウドサービス
+  - [Jina AI埋め込み](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
+  - [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md)
+- MCP サーバー
+  - [概要](/ai/integrations/tidb-mcp-server.md)
+  - [Claude Code](/ai/integrations/tidb-mcp-claude-code.md)
+  - [Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)
+  - [Cursor](/ai/integrations/tidb-mcp-cursor.md)
+  - [VS Code](/ai/integrations/tidb-mcp-vscode.md)
+  - [Windsurf](/ai/integrations/tidb-mcp-windsurf.md)
 
 ## 参照
 
--   [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
--   [関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
--   [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
--   [性能チューニング](/ai/reference/vector-search-improve-performance.md)
--   [制限事項](/ai/reference/vector-search-limitations.md)
--   [変更ログ](/ai/reference/vector-search-changelogs.md)
+- [ベクトルデータ型](/ai/reference/vector-search-data-types.md)
+- [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+- [ベクトル検索インデックス](/ai/reference/vector-search-index.md)
+- [ベクトル検索の性能チューニング](/ai/reference/vector-search-improve-performance.md)
+- [ベクトル検索の制限事項](/ai/reference/vector-search-limitations.md)

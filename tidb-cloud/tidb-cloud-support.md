@@ -109,43 +109,47 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
 ## サポートプランを確認またはアップグレードする {#check-or-upgrade-your-support-plan}
 
-TiDB Cloudは、デフォルトで無料の基本サポートプランを提供しています。拡張サービスをご希望の場合は、有料プランにアップグレードできます。
+TiDB Cloudは、デフォルトで無料の基本サポートプランを提供しています。より拡張されたサービスが必要な場合は、有料プランにアップグレードできます。
 
-サポート プランを確認またはアップグレードするには、次の手順を実行します。
+サポートプランを確認またはアップグレードするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**[サポート]**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**Support**をクリックします。
 
-    このページでは、現在のプランを確認できます。デフォルトでは、無料**のBasic**プランが選択されています。
+    このページで、現在のプランを確認できます。デフォルトでは、無料の**Basic**プランが選択されています。
 
-2.  ご希望のサポートプランを選択してください。
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} の場合、必要な最小サポートプランは **Enterprise** です。
+
+    </CustomContent>
+
+2. 希望するサポートプランを選択します。
 
     <SimpleTab>
-     <div label="Upgrade to Developer or Enterprise">
+    <div label="Upgrade to Developer or Enterprise">
 
-    **Developer**または**Enterprise**にアップグレードするには:
+    **Developer**または**Enterprise**にアップグレードするには、次の手順を実行します。
 
-    1.  **開発者向け**または**Enterprise向けの**ペインで**「アップグレード」を**クリックします。**開発者向けプランへのアップグレード**または**Enterprise向けプランへのアップグレード**ページが表示されます。
+    1. **Developer**または**Enterprise**で**Upgrade**をクリックします。**Upgrade to Developer Plan**ページまたは**Upgrade to Enterprise Plan**ページが表示されます。
+    2. ページで該当するサポートサービス情報を確認します。各サポートプランの完全版については、[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)を参照してください。
+    3. **Add Credit Card and Upgrade**をクリックし、**Credit Card**の詳細を入力します。
 
-    2.  該当するサポートサービス情報はページ上でご確認ください。各サポートプランの詳細につきましては、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
+        課金の詳細については、[TiDB Cloudの支払方法](/tidb-cloud/tidb-cloud-billing.md#payment-method)を参照してください。
 
-    3.  **「クレジットカードを追加してアップグレード」**をクリックし、**クレジットカードの**詳細を入力します。
+    4. ページ右下の**Save Card**をクリックします。
 
-        課金の詳細については、 [TiDB Cloud支払い方法](/tidb-cloud/tidb-cloud-billing.md#payment-method)を参照してください。
-
-    4.  ページの右下にある**「カードを保存」**をクリックします。
-
-    お支払いが完了すると、プランが**Standard**または**Enterprise**にアップグレードされます。
+    支払いが完了すると、プランは**Standard**または**Enterprise**にアップグレードされます。
 
     </div>
-     <div label="Upgrade to Premium">
+    <div label="Upgrade to Premium">
 
-    プランを**Premium**にアップグレードするには:
+    プランを**Premium**にアップグレードするには、次の手順を実行します。
 
-    1.  **Premium**パネルの**「営業部に問い合わせる」**をクリックします。**お問い合わせ**ページが表示されます。
-    2.  こちらのページに連絡先情報を入力して送信してください。サポートチームからご連絡し、サブスクリプションに関するサポートをさせていただきます。
+    1. **Premium**で**Contact Sales**をクリックします。**Contact Us**ページが表示されます。
+    2. ページで連絡先情報を入力して送信します。その後、サポートチームから連絡があり、サブスクリプションをサポートします。
 
     </div>
-     </SimpleTab>
+    </SimpleTab>
 
 ## サポートプランをダウングレードする {#downgrade-your-support-plan}
 
@@ -153,3 +157,9 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**[サポート]**をクリックします。
 2.  切り替えるサポート プランを選択し、 **[ダウングレード]**をクリックします。
+
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} の場合、ダウングレードできるのは **Enterprise** またはそれ以上のサポートプランのみです。
+
+    </CustomContent>

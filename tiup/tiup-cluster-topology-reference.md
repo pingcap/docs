@@ -673,6 +673,8 @@ scheduling_servers:
 
 -   `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
+-   `external_labels` : TiUP v1.17.0で導入されたこのフィールドは、Prometheus グローバル `external_labels` をキーと値のペアとして設定します。このフィールドを使用して、Prometheus `remote_write`、federation、および alerting を通じて伝播される安定したメタデータを付加します。TiUP は `cluster` ラベルと `monitor` ラベルを予約し、自動的に管理するため、このフィールドで設定してはいけません。`__` で始まるラベル名も予約されています。さらに、すべてのラベル名は Prometheus のラベル命名規則に準拠する必要があります。このフィールドをサポートしない以前のバージョンの TiUP がトポロジーファイルを読み取ると、TiUP はこのフィールドを無視するのではなく、トポロジーの解析に失敗します。
+
 -   `additional_scrape_conf` : カスタマイズされたPrometheusスクレイプ設定。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`additional_scrape_conf`フィールドの内容をPrometheus設定ファイルの対応するパラメータに追加します。詳細については、 [Prometheusのスクレイプ設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-prometheus-scrape-configuration)を参照してください。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
@@ -693,6 +695,9 @@ monitoring_servers:
     rule_dir: /local/rule/dir
     additional_args:
     - --web.enable-lifecycle
+    external_labels:
+      environment: production
+      region: us-east-1
     remote_config:
       remote_write:
       - queue_config:

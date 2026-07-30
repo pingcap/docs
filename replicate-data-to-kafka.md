@@ -37,7 +37,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 3.  (オプション) Flink クラスターを作成します。
 
     -   ラボ環境: Flink クラスターを起動するには、 [Apache Flink の最初のステップ](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/try-flink/local_installation/)を参照してください。
-    -   実稼働環境: Flink本番クラスターをデプロイするには、 [Apache Kafka のデプロイメント](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/)を参照してください。
+    -   実稼働環境: Flink本番クラスターをデプロイするには、 [Apache Flink のデプロイメント](https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/overview/)を参照してください。
 
 ## ステップ2. Kafka の変更フィードを作成する {#step-2-create-a-kafka-changefeed}
 

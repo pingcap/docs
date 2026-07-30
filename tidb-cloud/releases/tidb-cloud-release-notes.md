@@ -1,12 +1,24 @@
 ---
 title: TiDB Cloud Release Notes in 2026
 summary: TiDB Cloudの2026年のリリースノートについてご確認ください。
-aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes']
+aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes','/ja/ai/vector-search-changelogs/']
 ---
 
 # TiDB Cloud 2026年のリリースノート
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
+
+## 2026年7月28日 {#july-28-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB v7.5.6 以降または v8.5.2 以降の [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターで、データベース監査ログがパブリックプレビューで利用可能になりました。
+
+        この機能は、実行された SQL ステートメントを含むユーザーアクセスアクティビティを記録し、監査ログを Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に書き込むことをサポートし、特定の SQL ユーザーに対してどのイベントを取得するかを制御するフィルタールールを設定できます。
+
+        詳細については、[TiDB Cloud Dedicatedデータベース監査ログ (Preview)](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
 
 ## 2026年7月21日 {#july-21-2026}
 

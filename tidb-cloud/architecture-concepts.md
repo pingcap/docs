@@ -129,6 +129,14 @@ VPC、VM、マネージドKubernetesサービス、クラウドストレージ�
 
 ![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
+## {{{ .lake }}} {#lake}
+
+TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離することで、ウェアハウスを個別にプロビジョニングし、ワークロードの変化に応じてスケールし、オブジェクトストレージにデータをコスト効率よく保存できます。
+
+TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検索、AI 指向のワークフローを 1 つのプラットフォームでサポートします。基盤となるインフラストラクチャを自ら運用することなく、マネージドな分析エクスペリエンスを求めるチーム向けに設計されています。
+
+詳細については、[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/) を参照してください。
+
 ## TiDB Cloudコンソール {#tidb-cloud-console}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)TiDB CloudリソースのWebベースの管理インターフェースです。単一の使いやすいプラットフォームから、 TiDB Cloudリソースの管理、データのインポートまたは移行、パフォーマンス指標の監視、バックアップの設定、セキュリティ制御の設定、および他のクラウドサービスとの統合を行うためのツールを提供します。

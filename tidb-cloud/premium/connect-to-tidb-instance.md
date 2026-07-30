@@ -5,7 +5,7 @@ summary: さまざまな方法でTiDB Cloud Premiumインスタンスに接続�
 
 # TiDB Cloud Premiumインスタンスに接続します {#connect-to-your-tidb-cloud-premium-instance}
 
-このドキュメントでは、 TiDB Cloud Premiumインスタンスへの接続方法について説明します。
+このドキュメントでは、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスへの接続方法について説明します。
 
 > **Tip:**
 >
@@ -13,9 +13,9 @@ summary: さまざまな方法でTiDB Cloud Premiumインスタンスに接続�
 
 ## 接続方法 {#connection-methods}
 
-TiDB Cloud Premiumインスタンスが作成されたら、直接接続で接続できます。
+TiDB Cloud で {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが作成されたら、直接接続で接続できます。
 
-直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してインスタンスに接続できます。 。
+直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してインスタンスに接続できます。
 
 | 接続方法 | ユーザーインターフェース | シナリオ                           |
 | ---- | ------------ | ------------------------------ |
@@ -23,7 +23,7 @@ TiDB Cloud Premiumインスタンスが作成されたら、直接接続で接�
 
 ## ネットワーク {#network}
 
-TiDB Cloud Premiumには、2種類のネットワーク接続タイプがあります。
+{{{ .premium }}}<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent> には、2 種類のネットワーク接続タイプがあります。
 
 -   [プライベートエンドポイント](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)(推奨)
 
@@ -31,7 +31,7 @@ TiDB Cloud Premiumには、2種類のネットワーク接続タイプがあり�
 
 -   [公開エンドポイント](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)
 
-    標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud Premiumインスタンスに接続できます。
+    標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続できます。
 
 <!-- To ensure the security of data transmission, you need to [establish a TLS connection](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md) from your client to your instance. -->
 
@@ -43,4 +43,4 @@ TiDB Cloud Premiumには、2種類のネットワーク接続タイプがあり�
 
 ## 次は？ {#what-s-next}
 
-TiDB Cloud Premium インスタンスに正常に接続したら、 [TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
+{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに正常に接続したら、[TiDBを使用してSQLステートメントを探索する](/basic-sql-operations.md)ことができます。
