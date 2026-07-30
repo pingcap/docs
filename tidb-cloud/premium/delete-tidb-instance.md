@@ -3,7 +3,7 @@ title: Delete a TiDB Cloud Premium instance
 summary: TiDB Cloud Premiumインスタンスを削除する方法を学びましょう。
 ---
 
-# {{{ .premium }}} インスタンスを削除する
+# {{{ .premium }}} インスタンスを削除する {#delete-a-tidb-cloud-premium-instance}
 
 このドキュメントでは、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを削除する方法について説明します。
 
@@ -21,7 +21,7 @@ summary: TiDB Cloud Premiumインスタンスを削除する方法を学びま�
 
     インスタンスが正しく削除されるように、`<organization name>/<instance name>` を入力します。
 
-    将来インスタンスを復元したい場合は、インスタンスのバックアップがあることを確認してください。そうしないと復元できません。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ方法の詳細については、[{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> データのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md) を参照してください。
+    将来インスタンスを復元したい場合は、インスタンスのバックアップがあることを確認してください。そうしないと復元できません。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ方法の詳細については、[{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> データのバックアップと復元](/tidb-cloud/premium/backup-and-restore-premium.md) を参照してください。
 
 5. **I understand, delete it** をクリックします。
 

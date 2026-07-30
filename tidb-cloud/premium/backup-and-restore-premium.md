@@ -290,7 +290,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 3. **Verify Backup and Next**をクリックします。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
 
     バックアップ情報が正しくない場合は、**Previous**をクリックして前のページに戻り、正しい情報を入力してください。
 

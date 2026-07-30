@@ -14,7 +14,7 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 
-パブリック接続の場合、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> は、IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
+パブリック接続の場合、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> は、IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
 
 ## インスタンスに接続します {#connect-to-the-instance}
 
@@ -60,7 +60,7 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 3. 接続ダイアログで、**Connection Type** ドロップダウンリストから **Public** を選択します。
 
-    IP access list を設定していない場合は、**Configure IP Access List** をクリックするか、[Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って、初回接続の前に設定してください。
+    IP access list を設定していない場合は、**Configure IP Access List** をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って、初回接続の前に設定してください。
 
 4. 希望する接続方法を選択し、タブに表示される接続文字列とサンプルコードを参照してインスタンスに接続します。
 
