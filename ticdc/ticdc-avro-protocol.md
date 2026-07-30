@@ -129,7 +129,7 @@ dispatchers = [
 
 ### カラムデータ形式 {#column-data-format}
 
-カラムデータは、キー/値データ形式の第`{{ColumnValueBlock}}`要素です。TiCDCはSQLタイプに基づいてカラムデータ形式を生成します。基本的なカラムデータ形式は次のとおりです。
+カラムデータは、キー/値データ形式の`{{ColumnValueBlock}}`要素です。TiCDCはSQLタイプに基づいてカラムデータ形式を生成します。基本的なカラムデータ形式は次のとおりです。
 
     {
         "name":"{{ColumnName}}",

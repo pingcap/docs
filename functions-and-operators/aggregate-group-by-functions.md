@@ -137,7 +137,7 @@ MySQL では、 `DISTINCT`と`ORDER BY`含むクエリは、 `ORDER BY`式のい
 
 しかし、TiDB では上記のクエリは有効です。詳細については、 [＃4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 
-標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`番目のリスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
+標準SQLに対するTiDBのもう一つの拡張機能は、 `HAVING`句で`SELECT`リスト内のエイリアス式を参照することを許可します。例えば、次のクエリはテーブル「orders」に一度だけ出現する「name」の値を返します。
 
 ```sql
 select name, count(name) from orders

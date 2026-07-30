@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-gu
 
 ## グループ化 {#group-by}
 
-便宜上、MySQLは`GROUP BY`構文を「拡張」し、 `SELECT`番目の句で`GROUP BY`番目の句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
+便宜上、MySQLは`GROUP BY`構文を「拡張」し、 `SELECT`句で`GROUP BY`句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
 
 たとえば、次の 2 つのテーブルがあるとします。
 

@@ -496,7 +496,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
     -   新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブル スキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
     -   さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的にイベントを`BOOTSTRAP`送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメータ`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`設定することで調整できます。
     -   テーブルが30分以内に新しいDMLメッセージを受信しない場合、そのテーブルは非アクティブとみなされます。TiCDCは、新しいDMLイベントを受信するまで、そのテーブルへの`BOOTSTRAP`の送信を停止します。
--   送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`番目のパラメータを設定することで、送信戦略を調整できます。
+-   送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`パラメータを設定することで、送信戦略を調整できます。
 
 ## メッセージの消費方法 {#message-consumption-methods}
 

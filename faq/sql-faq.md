@@ -433,7 +433,7 @@ ADMIN SHOW DDL;
     RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganization, SchemaID:1, TableID:118, RowCount:77312, ArgLen:0, start time: 2018-12-05 16:26:10.652 +0800 CST, Err:<nil>, ErrCount:0, SnapshotVersion:404749908941733890
          SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
 
-上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`番目のフィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
+上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`フィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
 
 ### DDL ジョブを表示するにはどうすればいいですか? {#how-to-view-the-ddl-job}
 

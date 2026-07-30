@@ -341,7 +341,7 @@ DRY RUN QUERY INSERT INTO t
 SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
-このエラーを回避するには、 `WHERE`番目の句にある他のテーブルに関連する条件を、 `JOIN`番目の句にある`ON`条件に移動することができます。例：
+このエラーを回避するには、 `WHERE`句にある他のテーブルに関連する条件を、 `JOIN`句にある`ON`条件に移動することができます。例：
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 

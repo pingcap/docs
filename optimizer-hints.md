@@ -350,7 +350,7 @@ SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#use-index-t1-name-idx1-name-idx2-name}
 
-`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`のヒントは、指定された`t1_name`番目のテーブルに対して、指定されたインデックスのみを使用するようにオプティマイザに指示します。例えば、次のヒントを適用すると、 `select * from t t1 use index(idx1, idx2);`番目の文を実行するのと同じ効果が得られます。
+`USE_INDEX(t1_name, idx1_name [, idx2_name ...])`のヒントは、指定された`t1_name`テーブルに対して、指定されたインデックスのみを使用するようにオプティマイザに指示します。例えば、次のヒントを適用すると、 `select * from t t1 use index(idx1, idx2);`文を実行するのと同じ効果が得られます。
 
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
@@ -377,7 +377,7 @@ SELECT * FROM t force index(idx1);
 
 ### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#ignore-index-t1-name-idx1-name-idx2-name}
 
-`IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定された`t1_name`番目のテーブルの指定されたインデックスを無視するようにオプティマイザに指示します。例えば、次のヒントを適用すると、 `select * from t t1 ignore index(idx1, idx2);`番目の文を実行するのと同じ効果が得られます。
+`IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定された`t1_name`テーブルの指定されたインデックスを無視するようにオプティマイザに指示します。例えば、次のヒントを適用すると、 `select * from t t1 ignore index(idx1, idx2);`文を実行するのと同じ効果が得られます。
 
 ```sql
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
@@ -813,7 +813,7 @@ SELECT @@MAX_EXECUTION_TIME;
 
 ### ストレート結合() {#straight-join}
 
-`STRAIGHT_JOIN()`ヒントは、結合プランを生成するときに、 `FROM`番目の句のテーブル名の順序でテーブルを結合するようにオプティマイザーに通知します。
+`STRAIGHT_JOIN()`ヒントは、結合プランを生成するときに、 `FROM`句のテーブル名の順序でテーブルを結合するようにオプティマイザーに通知します。
 
 ```sql
 SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;

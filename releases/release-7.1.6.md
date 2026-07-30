@@ -118,7 +118,7 @@ TiDB バージョン: 7.1.6
     -   `STATE`フィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました[＃53026](https://github.com/pingcap/tidb/issues/53026) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `IndexNestedLoopHashJoin` のデータ競合問題を修正 [＃49692](https://github.com/pingcap/tidb/issues/49692) @ [solotzg](https://github.com/solotzg)
     -   間違った TableDual プランにより空のクエリ結果が発生する問題を修正しました [＃50051](https://github.com/pingcap/tidb/issues/50051) @ [onlyacat](https://github.com/onlyacat)
-    -   `mysql.stats_histograms`表の`tot_col_size`番目の列が負の数になる可能性がある問題を修正しました [＃55126](https://github.com/pingcap/tidb/issues/55126) @ [qw4990](https://github.com/qw4990)
+    -   `mysql.stats_histograms`表の`tot_col_size`列が負の数になる可能性がある問題を修正しました [＃55126](https://github.com/pingcap/tidb/issues/55126) @ [qw4990](https://github.com/qw4990)
     -   `FLOAT`型から`UNSIGNED`型へのデータ変換で誤った結果が返される問題を修正[＃41736](https://github.com/pingcap/tidb/issues/41736) @ [guo-shaoge](https://github.com/guo-shaoge)
     -   `auth_socket`認証プラグインを使用しているときに、TiDB が認証されていないユーザーの接続を拒否できないことがある問題を修正しました。 [＃54031](https://github.com/pingcap/tidb/issues/54031) @ [lcwangchao](https://github.com/lcwangchao)
     -   `memory_quota`ヒントがサブクエリで機能しない可能性がある問題を修正しました [＃53834](https://github.com/pingcap/tidb/issues/53834) @ [qw4990](https://github.com/qw4990)

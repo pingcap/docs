@@ -599,7 +599,7 @@ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 上記の出力から、破損した SST ファイルの情報が最初に印刷され、次にメタ情報が印刷されていることがわかります。
 
 -   `sst meta`部分で、 `14` SST ファイル番号、 `552997`ファイル サイズを意味し、その後に最小および最大のシーケンス番号とその他のメタ情報が続きます。
--   `overlap region`番目の部分は、関係するリージョンの情報を示しています。この情報はPDサーバーから取得されます。
+-   `overlap region`部分は、関係するリージョンの情報を示しています。この情報はPDサーバーから取得されます。
 -   パート`suggested operations` 、破損したSSTファイルをクリーンアップするための提案が示されています。この提案に従ってファイルをクリーンアップし、TiKVインスタンスを再起動してください。
 
 ### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-region-s-code-regionreadprogress-code}

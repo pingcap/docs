@@ -19,7 +19,7 @@ TiDBは[Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/
 2.  TiDBは、このコミットに関係するすべてのTiKVリージョンに`prewrite`リクエストを送信します。TiKVは、すべてのキーが正常にプレビューできるかどうかを判断します。
 3.  TiDB は、 `prewrite`リクエストがすべて成功したという結果を受け取ります。
 4.  TiDB は PD から`commit_ts`を取得します。
-5.  TiDBは、トランザクションの主キーを含むTiKVリージョンに`commit`リクエストを送信します。TiKVは`commit`リクエストを受信すると、データの有効性を確認し、 `prewrite`番目のステージに残っているロックを解除します。
+5.  TiDBは、トランザクションの主キーを含むTiKVリージョンに`commit`リクエストを送信します。TiKVは`commit`リクエストを受信すると、データの有効性を確認し、 `prewrite`ステージに残っているロックを解除します。
 6.  `commit`リクエストが正常に返されると、TiDB はクライアントに成功を返します。
 
 書き込み競合はステージ`prewrite`で発生します。トランザクションが、別のトランザクションが現在のキー（ `data.commit_ts` &gt; `txn.start_ts` ）に書き込みを行っていることを検出すると、書き込み競合が発生します。

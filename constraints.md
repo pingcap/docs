@@ -315,7 +315,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
         ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
 
--   この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL 文に起因しない可能性があります。そのため、トランザクションが同じ名前のインデックスを持つ複数のテーブルを操作する場合、 `1062`番目のエラーメッセージを確認して、実際にどのインデックスにエラーが発生しているかを特定する必要があります。
+-   この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL 文に起因しない可能性があります。そのため、トランザクションが同じ名前のインデックスを持つ複数のテーブルを操作する場合、 `1062`エラーメッセージを確認して、実際にどのインデックスにエラーが発生しているかを特定する必要があります。
 
 ## 主キー {#primary-key}
 
