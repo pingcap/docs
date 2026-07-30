@@ -405,6 +405,6 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 
 {{{ .dedicated }}} では、監査ログが時系列順に書き込まれることは保証されません。つまり、最新のイベントを見つけるにはすべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、監査ログの `TIME` フィールドを使用できます。
 
-## レガシーデータベース監査ログのリファレンス {#legacy-database-audit-logging-reference}
+## データベース監査ログ（レガシー）のリファレンス {#legacy-database-audit-logging-reference}
 
 現在レガシー監査ログプラグインを利用している場合は、[Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md) を参照してください。
