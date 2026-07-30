@@ -374,5 +374,5 @@ COMMIT;
 
 > **Note:**
 >
-> -   `BinaryFlag` 、列の型が BLOB/ TEXT （TINYBLOB/TINYTEXT、BINARY/CHAR を含む）の場合にのみ意味を持ちます。上流の列が BLOB 型の場合、 `BinaryFlag`値は`1`に設定されます。上流の列がTEXT型の場合、 `BinaryFlag`値は`0`に設定されます。
+> -   `BinaryFlag`は、列の型が BLOB/ TEXT （TINYBLOB/TINYTEXT、BINARY/CHAR を含む）の場合にのみ意味を持ちます。上流の列が BLOB 型の場合、 `BinaryFlag`の値は`1`に設定されます。上流の列がTEXT型の場合、 `BinaryFlag`の値は`0`に設定されます。
 > -   TiCDCは、上流からテーブルを複製するために、ハンドルインデックスとして[有効なインデックス](/ticdc/ticdc-overview.md#best-practices)選択します。ハンドルインデックス列の`HandleKeyFlag`の値は`1`に設定されます。

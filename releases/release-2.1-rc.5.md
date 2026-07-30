@@ -12,7 +12,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   `IndexReader`場合によっては間違ったハンドルを読み取る問題を修正[＃8132](https://github.com/pingcap/tidb/pull/8132)
+    -   `IndexReader`が場合によっては間違ったハンドルを読み取る問題を修正[＃8132](https://github.com/pingcap/tidb/pull/8132)
     -   `IndexScan Prepared`文で`Plan Cache` を使用しているときに発生する問題を修正 [＃8055](https://github.com/pingcap/tidb/pull/8055)
     -   `Union`文の結果が不安定になる問題を修正[＃8165](https://github.com/pingcap/tidb/pull/8165)
 -   SQL実行エンジン
@@ -52,7 +52,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
     -   [＃1308](https://github.com/pingcap/pd/pull/1308)
 -   `regions/check` APIが間違った結果を返す問題を修正[＃1311](https://github.com/pingcap/pd/pull/1311)
 -   PD参加失敗後にPDが参加を再開できない問題を修正[＃1279](https://github.com/pingcap/pd/pull/1279)
--   `watch leader`場合によってはイベントが失われる可能性がある問題を修正[＃1317](https://github.com/pingcap/pd/pull/1317)
+-   `watch leader`で場合によってはイベントが失われる可能性がある問題を修正[＃1317](https://github.com/pingcap/pd/pull/1317)
 
 ## TiKV {#tikv}
 

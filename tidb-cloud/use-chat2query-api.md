@@ -198,7 +198,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 }
 ```
 
-`"status"`が`"done"`場合、完全なデータサマリーが準備完了しており、 `/v3/chat2data`呼び出すことでこのデータベースに対してSQL文を生成して実行できます。それ以外の場合は、完了するまで待って、後で分析ステータスを確認する必要があります。
+`"status"`が`"done"`の場合、完全なデータサマリーが準備完了しており、 `/v3/chat2data`を呼び出すことでこのデータベースに対してSQL文を生成して実行できます。それ以外の場合は、完了するまで待って、後で分析ステータスを確認する必要があります。
 
 レスポンスの`DataSummaryObject` 、指定されたデータベースのAI探索情報を表します。3の構造は`DataSummaryObject`のとおりです。
 

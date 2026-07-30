@@ -81,7 +81,7 @@ tiup ctl:v<CLUSTER_VERSION> tikv
         tombstone             Set some regions on the node to tombstone by manual
         unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 
-`tiup ctl:v<CLUSTER_VERSION> tikv`後に対応するパラメータとサブコマンドを追加できます。
+`tiup ctl:v<CLUSTER_VERSION> tikv`の後に対応するパラメータとサブコマンドを追加できます。
 
 ## 一般オプション {#general-options}
 

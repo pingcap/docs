@@ -5,7 +5,7 @@ summary: TiDBにおけるCREATE PLACEMENT POLICYの使用方法。
 
 # CREATE PLACEMENT POLICY {#create-placement-policy}
 
-`CREATE PLACEMENT POLICY`後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
+`CREATE PLACEMENT POLICY`は、後でテーブル、パーティション、またはデータベーススキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
 > **Note:**
 >
