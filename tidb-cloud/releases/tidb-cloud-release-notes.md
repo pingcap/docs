@@ -18,7 +18,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能は、実行された SQL ステートメントを含むユーザーアクセスアクティビティを記録し、監査ログを Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に書き込むことをサポートし、特定の SQL ユーザーに対してどのイベントを取得するかを制御するフィルタールールを設定できます。
 
-        詳細については、[TiDB Cloud Dedicatedデータベース監査ログ（プレビュー）](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
+        詳細については、[TiDB Cloud Dedicatedデータベース監査ログ (Preview)](/tidb-cloud/tidb-cloud-auditing.md) を参照してください。
 
 ## 2026年7月21日 {#july-21-2026}
 
