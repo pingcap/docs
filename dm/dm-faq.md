@@ -112,7 +112,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
     -   更新するチェックポイント列は`binlog_name`と`binlog_pos`です。
 
-3.  再入実行を確実にするために、タスクの`syncers`に`safe-mode: true`設定します。
+3.  再入実行を確実にするために、タスクの`syncers`に`safe-mode: true`を設定します。
 
 4.  `start-task`を使用してタスクを開始します。
 
@@ -148,7 +148,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 ## DM がアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
-DM 1.0では、監視データを生成するには`enable-heartbeat`有効にする必要があります。DM 2.0以降のバージョンでは、この機能はサポートされていないため、監視メトリック`replicate lag`にはデータが存在しないことが想定されます。
+DM 1.0では、監視データを生成するには`enable-heartbeat`を有効にする必要があります。DM 2.0以降のバージョンでは、この機能はサポートされていないため、監視メトリック`replicate lag`にはデータが存在しないことが想定されます。
 
 ## DM がタスクを開始しているときに、 <code>context deadline exceeded</code>を示すエラー メッセージの<code>RawCause</code>で<code>fail to initial unit Sync of subtask</code>エラーを処理する方法を教えてください。 {#how-to-handle-the-error-fail-to-initial-unit-sync-of-subtask-when-dm-is-starting-a-task-with-the-rawcause-in-the-error-message-showing-context-deadline-exceeded}
 
@@ -193,7 +193,7 @@ DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられま�
 
 タスクに対して[セーフモード](/dm/dm-glossary.md#safe-mode)が自動的に有効になっているかどうかを確認する必要があります。エラー発生後にタスクが自動的に再開される場合、または高可用性スケジュールが設定されている場合は、タスクの開始または再開から1分以内であるため、セーフモードが有効になっています。
 
-DM-worker のログファイルを確認し、 `change count`含む行を探してください。その行の`new count` 0 でない場合、セーフモードが有効になっています。セーフモードが有効になっている理由を確認するには、セーフモードがいつ発生するか、またそれ以前にエラーが報告されているかどうかを確認してください。
+DM-worker のログファイルを確認し、 `change count`を含む行を探してください。その行の`new count`が0 でない場合、セーフモードが有効になっています。セーフモードが有効になっている理由を確認するには、セーフモードがいつ発生するか、またそれ以前にエラーが報告されているかどうかを確認してください。
 
 ## DM v2.0 では、タスク中に DM が再起動すると、完全インポート タスクが失敗するのはなぜですか? {#in-dm-v20-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
@@ -239,8 +239,8 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 -   解決策2:
     1.  `deploy/grafana-$port/bin/public`フォルダをバックアップします。
     2.  [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
-    3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`解凍します。
-    4.  フォルダー`deploy/grafana-$port/bin/public` `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
+    3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
+    4.  フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
     5.  `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
 
 ## DM v2.0 では、タスクで<code>enable-relay</code>と<code>enable-gtid</code>同時に有効になっている場合、コマンド<code>query-status</code>のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v20-why-does-the-query-result-of-the-command-query-status-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-enable-relay-and-enable-gtid-enabled-at-the-same-time}
@@ -260,7 +260,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     | mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
     +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
 
-このバグは、dmctlで`query-status <task>`を実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
+このバグは、dmctlで`query-status <task>`を実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`が連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
 
     query-status test
     {
@@ -322,18 +322,18 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
         ]
     }
 
-この例では、データソース`mysql1`の`syncerBinlogGtid`連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
+この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
 -   現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
     1.  現在のタスクを停止し、連続しない GTID を持つすべてのデータ ソースを削除します。
     2.  すべてのソース構成ファイルで`enable-relay` ～ `false`を設定します。
-    3.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`構成します。
+    3.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     4.  増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再度開始します。
 -   アップストリーム バイナリ ログが消去されたが、ローカル リレー ログが残っている場合は、次の手順を実行できます。
     1.  現在のタスクを停止します。
-    2.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`構成します。
+    2.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     3.  増分タスクの`task.yaml`で、前の値`binlog-gtid`を前の値`previous_gtids`に変更します。上記の例では、 `1-y`を`6-y`に変更します。
     4.  `task.yaml`の`syncers.safe-mode` `true`設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
@@ -344,7 +344,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     2.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
     3.  新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
-上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータ ソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`構成します。
+上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータ ソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
 
 ## DM v2.0 では、 <code>heartbeat</code>機能が有効になっている仮想 IP 環境で DM ワーカーと MySQL インスタンス間の接続を切り替えるときに、「ハートビート構成が以前使用したものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
 
@@ -354,7 +354,7 @@ DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで�
 
 DMマスターが起動すると、DMはetcd情報をカレントディレクトリに記録します。DMマスターの再起動後にディレクトリが変更されると、DMはetcd情報にアクセスできなくなり、再起動に失敗します。
 
-この問題を解決するには、 TiUPを使用して DM クラスターをメンテナンスすることをお勧めします。バイナリファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで`data-dir`絶対パスで設定するか、コマンドを実行する現在のディレクトリに注意してください。
+この問題を解決するには、 TiUPを使用して DM クラスターをメンテナンスすることをお勧めします。バイナリファイルを使用してデプロイする必要がある場合は、DM マスターの設定ファイルで`data-dir`を絶対パスで設定するか、コマンドを実行する現在のディレクトリに注意してください。
 
 ## dmctl を使用してコマンドを実行すると、DM マスターに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 

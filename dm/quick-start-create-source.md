@@ -19,7 +19,7 @@ summary: データ移行 (DM) のデータ ソースを作成する方法を学�
 
     DM設定ファイルでは、dmctlで暗号化されたパスワードを使用することをお勧めします。以下の例に従ってデータソースの暗号化されたパスワードを取得すれば、後で設定ファイルを書き込む際に使用できます。
 
-    v8.0.0 以降では、 `tiup dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)設定する必要があります。
+    v8.0.0 以降では、 `tiup dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)を設定する必要があります。
 
     ```bash
     tiup dmctl encrypt 'abc!@#123'

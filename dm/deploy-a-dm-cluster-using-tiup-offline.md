@@ -147,7 +147,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 -   `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 -   TiUP DMは組み込みのSSHクライアントを使用します。制御マシンシステムにネイティブのSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集してください。
 
-出力ログの最後に``Deployed cluster `dm-test` successfully``表示されます。これは、デプロイメントが成功したことを示します。
+出力ログの最後に``Deployed cluster `dm-test` successfully``が表示されます。これは、デプロイメントが成功したことを示します。
 
 ## ステップ5: TiUPによって管理されているクラスターを確認する {#step-5-check-the-clusters-managed-by-tiup}
 

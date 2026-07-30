@@ -86,7 +86,7 @@ DM マスター インスタンスに証明書を発行するには、次の手�
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3.  `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
         [ alt_names ]
         IP.1 = 127.0.0.1
@@ -104,7 +104,7 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
     > **Note:**
     >
-    > `0.0.0.0`ような特殊な IP を接続や通信に使用する場合は、 `alt_names`にも追加する必要があります。
+    > `0.0.0.0`のような特殊な IP を接続や通信に使用する場合は、 `alt_names`にも追加する必要があります。
 
 4.  `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します。( `Common Name (e.g. server FQDN or YOUR name) []:`に入力する際に、証明書に`dm`などの共通名 (CN) を割り当てます。これは、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントは、デフォルトでは検証を有効にしません。構成ファイルで有効にすることができます。)
 

@@ -90,7 +90,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 > **Note:**
 >
-> v8.0.0 以降では、 `dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)設定する必要があります。
+> v8.0.0 以降では、 `dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)を設定する必要があります。
 
 ```bash
 ./dmctl encrypt "123456"
@@ -133,7 +133,7 @@ MySQL2 の場合、上記のコマンドの設定ファイルを MySQL2 の設�
 
 ## データ移行タスクを作成する {#create-a-data-migration-task}
 
-[準備されたデータ](#prepare-data)インポートすると、MySQL1 インスタンスと MySQL2 インスタンスの両方に複数のシャードテーブルが作成されます。これらのテーブルは構造が同一で、テーブル名に同じプレフィックス「t」が付きます。また、これらのテーブルが配置されているデータベースのプレフィックスはすべて「sharding」です。また、主キーと一意キーの競合はありません（各シャードテーブルの主キーまたは一意キーは、他のテーブルのものと異なります）。
+[準備されたデータ](#prepare-data)をインポートすると、MySQL1 インスタンスと MySQL2 インスタンスの両方に複数のシャードテーブルが作成されます。これらのテーブルは構造が同一で、テーブル名に同じプレフィックス「t」が付きます。また、これらのテーブルが配置されているデータベースのプレフィックスはすべて「sharding」です。また、主キーと一意キーの競合はありません（各シャードテーブルの主キーまたは一意キーは、他のテーブルのものと異なります）。
 
 ここで、これらのシャードテーブルをTiDBの`db_target.t_target`テーブルに移行する必要があるとします。手順は以下のとおりです。
 

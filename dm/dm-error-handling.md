@@ -188,9 +188,9 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 #### ソリューション {#solutions}
 
--   ダンプ処理ユニットには`extra-args`オプションのうち`statement-size`設定することをお勧めします。
+-   ダンプ処理ユニットには`extra-args`オプションのうち`statement-size`を設定することをお勧めします。
 
-    デフォルトの`--statement-size`設定によると、ダンプ処理ユニットによって生成されるデフォルトのサイズ`Insert Statement`は約`1M`です。このデフォルト設定では、ロード処理ユニットはほとんどの場合、エラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`報告しません。
+    デフォルトの`--statement-size`設定によると、ダンプ処理ユニットによって生成されるデフォルトのサイズ`Insert Statement`は約`1M`です。このデフォルト設定では、ロード処理ユニットはほとんどの場合、エラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`を報告しません。
 
     データダンプ中に、以下の`WARN`ログが出力されることがあります。この`WARN`ログはダンプ処理には影響しません。これは、幅の広いテーブルがダンプされたことを示しているだけです。
 
