@@ -112,7 +112,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
+    [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
 
     ```shell
     sync_diff_inspector -C ./config.yaml

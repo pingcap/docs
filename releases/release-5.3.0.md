@@ -207,7 +207,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     [ユーザードキュメント](/tidb-lightning/tidb-lightning-configuration.md)
 
--   **同期差分インスペクタの改善**
+-   **sync-diff-inspectorの改善**
 
     -   比較速度を375 MB/秒から700 MB/秒に向上
     -   比較中にTiDBノードのメモリ消費量をほぼ半分に削減
