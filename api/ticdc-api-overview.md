@@ -9,11 +9,11 @@ summary: TiCDC の API を学習します。
 
 TiCDC は、TiCDC クラスターのクエリと操作用に次の 2 つのバージョンの API を提供します。
 
--   [TiCDC オープンAPI v1](/ticdc/ticdc-open-api.md)
--   [TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)
+-   [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)
+-   [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)
 
 > **Note:**
 >
 > TiCDC OpenAPI v1は将来削除される予定です。TiCDC OpenAPI v2のご利用をお勧めします。
 
-リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiCDC オープンAPI v1](/ticdc/ticdc-open-api.md)および[TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)を参照してください。
+リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)および[TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を参照してください。

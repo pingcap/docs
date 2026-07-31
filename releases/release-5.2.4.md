@@ -188,7 +188,7 @@ TiDBバージョン：5.2.4
         -   コンテナ環境におけるOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   DDL処理後のメモリリーク問題を修正 [#3174](https://github.com/pingcap/tiflow/issues/3174)
         -   テーブルが同じノードで繰り返しスケジュールされると、changefeedが停止する問題を修正します [#4464](https://github.com/pingcap/tiflow/issues/4464)
-        -   PDノードが異常な場合に、オープンAPI経由でステータスを照会するとブロックされる可能性があるバグを修正しました [#4778](https://github.com/pingcap/tiflow/issues/4778)
+        -   PDノードが異常な場合に、OpenAPI経由でステータスを照会するとブロックされる可能性があるバグを修正しました [#4778](https://github.com/pingcap/tiflow/issues/4778)
         -   所有者変更によって発生した不正確なメトリクスを修正 [#4774](https://github.com/pingcap/tiflow/issues/4774)
         -   Unified Sorterで使用されるワーカープールの安定性の問題を修正しました [#4447](https://github.com/pingcap/tiflow/issues/4447)
         -   `cached region`モニタリングメトリックが負の値になる問題を修正しました [#4300](https://github.com/pingcap/tiflow/issues/4300)

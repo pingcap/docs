@@ -3,13 +3,13 @@ title: TiCDC OpenAPI v1
 summary: OpenAPI インターフェースを使用してクラスターのステータスとデータのレプリケーションを管理する方法を学習します。
 ---
 
-# TiCDC オープンAPI v1 {#ticdc-openapi-v1}
+# TiCDC OpenAPI v1 {#ticdc-openapi-v1}
 
 <!-- markdownlint-disable MD024 -->
 
 > **注記**
 >
-> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。[TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)の使用をお勧めします。
+> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。[TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)の使用をお勧めします。
 
 TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 

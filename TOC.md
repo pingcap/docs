@@ -95,8 +95,8 @@
       - [TiCDCDebeziumプロトコル](/ticdc/ticdc-debezium.md)
       - [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)
-    - [TiCDCオープンAPI v2](/ticdc/ticdc-open-api-v2.md)
-    - [TiCDCオープンAPI v1](/ticdc/ticdc-open-api.md)
+    - [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)
+    - [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)
     - TiCDCのデータ消費量
       - [TiCDC行データチェックサム検証（Avroベース）](/ticdc/ticdc-avro-checksum-verification.md)
       - [ストレージシンク消費者の開発ガイド](/ticdc/ticdc-storage-consumer-dev-guide.md)

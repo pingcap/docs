@@ -3,7 +3,7 @@ title: TiCDC OpenAPI v2
 summary: OpenAPI v2 インターフェースを使用してクラスターのステータスとデータレプリケーションを管理する方法を学習します。
 ---
 
-# TiCDC オープンAPI v2 {#ticdc-openapi-v2}
+# TiCDC OpenAPI v2 {#ticdc-openapi-v2}
 
 <!-- markdownlint-disable MD024 -->
 

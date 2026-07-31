@@ -143,7 +143,7 @@ TiDB バージョン: 5.3.2
         -   アップグレード後に TiCDC クラスターがpanicになる可能性がある問題を修正[＃5266](https://github.com/pingcap/tiflow/issues/5266)
         -   同じノードでテーブルが繰り返しスケジュールされると、changefeed がスタックする問題を修正しました。 [＃4464](https://github.com/pingcap/tiflow/issues/4464)
         -   TLS が有効になった後、 `--pd`で設定された最初の PD が利用できない場合に TiCDC が起動に失敗する問題を修正[＃4777](https://github.com/pingcap/tiflow/issues/4777)
-        -   PDノードが異常な場合、オープンAPI経由のステータス照会がブロックされる可能性があるバグを修正[＃4778](https://github.com/pingcap/tiflow/issues/4778)
+        -   PDノードが異常な場合、OpenAPI経由のステータス照会がブロックされる可能性があるバグを修正[＃4778](https://github.com/pingcap/tiflow/issues/4778)
         -   Unified Sorter で使用されるワーカープールの安定性の問題を修正しました [＃4447](https://github.com/pingcap/tiflow/issues/4447)
         -   一部のケースでシーケンスが誤って複製されるバグを修正[＃4552](https://github.com/pingcap/tiflow/issues/4552)
 
