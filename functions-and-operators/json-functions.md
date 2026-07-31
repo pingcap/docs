@@ -60,7 +60,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty)             | JSONドキュメントのきれいなフォーマット                                                             |
 | [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | JSON 値のバイナリ表現が更新された後に解放されたストレージ容量を返します。                                         |
-| [JSON_ストレージサイズ()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size)     | JSON値を格納するために必要なバイト数の概算値を返します。このサイズはTiKV圧縮を考慮していないため、この関数の出力はMySQLと厳密には互換性がありません。 |
+| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size)     | JSON値を格納するために必要なバイト数の概算値を返します。このサイズはTiKV圧縮を考慮していないため、この関数の出力はMySQLと厳密には互換性がありません。 |
 
 ## 集計関数 {#aggregate-functions}
 
