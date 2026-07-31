@@ -50,7 +50,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --azblob.sas-token string      | Azure Blob Storage の SAS トークン。                                                                               | いいえ | 非対話型モードでのみ動作します。                     |
 | --azblob.uri string            | `azure://<account>.blob.core.windows.net/<container>/<path>`形式の Azure Blob Storage URI。                      | いいえ | 非対話型モードでのみ動作します。                     |
 | --cloud-storage              | クラウドストレージ`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
-| -c, --cluster-id 文字列        | 更新するクラスターの ID。                                                                                               | はい  | 非対話型モードでのみ動作します。                     |
+| -c, --cluster-id string        | 更新するクラスターの ID。                                                                                               | はい  | 非対話型モードでのみ動作します。                     |
 | --enabled                        | データベース監査ログを有効または無効にします。                                                                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | --gcs.service-account-key string        | Google Cloud Storage の Base64 でエンコードされたサービス アカウント キー。                                                        | いいえ | 非対話型モードでのみ動作します。                     |
 | --gcs.uri string               | `gs://<bucket>/<path>`形式の Google Cloud Storage URI。                                                          | いいえ | 非対話型モードでのみ動作します。                     |
@@ -72,7 +72,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | ----------------- | ------------------------- | --- | ------------------------------------ |
 | -D, --debug        | デバッグ モードを有効にします。          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile 文字列 | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
+| -P, --profile string | 構成ファイルから使用するプロファイルを指定します。 | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
