@@ -90,11 +90,11 @@ TiDB Cloud utilizes the AWS private certificate authority (PCA) service to issue
 
 To meet compliance requirements, TiDB Cloud BYOC integrates with a customer-provided PCA to issue identity certificates for data nodes using your enterprise's own domain. This ensures that the Root of Trust for all encrypted communications remains strictly within your organization's control.
 
-Therefore, you must prepare a valid subordinate CA in the deployment region. The CA ARN that you provide to TiDB Cloud must be the subordinate CA ARN. To create and activate the subordinate CA, you need an active root CA to sign the subordinate CA certificate.
+Therefore, you must prepare a valid subordinate CA in the deployment region. The CA ARN that you provide to TiDB Cloud must be the ARN of the subordinate CA. To create and activate the subordinate CA, you need an active root CA to sign its certificate.
 
-The subordinate CA certificate must be valid for at least **20 years**. Make sure that the root CA used to sign the subordinate CA can support this validity period.
+The subordinate CA certificate must be valid for at least **20 years**. Make sure that the root CA used to sign the subordinate CA certificate supports this validity period.
 
-Follow the steps below:
+Perform the following steps:
 
 1. **Create a subordinate CA.** Follow [Create a private CA in AWS Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html).
 
