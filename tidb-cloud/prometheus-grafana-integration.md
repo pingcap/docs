@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 summary: Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
 ---
 
-# Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
+# Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW) 
 
 TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
