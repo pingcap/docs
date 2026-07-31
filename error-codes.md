@@ -33,7 +33,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md)コマンド実行時に行のデータがインデックスと一致していない場合、TiDB はこのエラーを返します。このエラーは、テーブル内のデータ破損をチェックする際によく見られます。
 
-    PingCAP またはコミュニティから[サポートを受ける](/support.md)を取得できます。
+    PingCAP またはコミュニティから[サポートを受ける](/support.md)取得できます。
 
 -   エラー番号: 8004
 
