@@ -75,6 +75,8 @@ The configuration steps vary depending on the cloud provider where your instance
 <SimpleTab>
 <div label="AWS">
 
+On AWS, choose the connection type based on your downstream service. If your downstream service is exposed through a Private Endpoint Service, such as self-hosted Kafka or MySQL, select **AWS Endpoint Service**. If your downstream service is an AWS MSK Provisioned cluster, select **AWS MSK Provisioned**.
+
 **AWS Endpoint Service**
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
