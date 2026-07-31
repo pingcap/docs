@@ -36,9 +36,9 @@ ticloud config create --profile-name <profile-name> --public-key <public-key> --
 | フラグ                | 説明                                 | 必須  | 注記                       |
 | ------------------ | ---------------------------------- | --- | ------------------------ |
 | -h, --help         | このコマンドのヘルプ情報を表示します。                | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
-| --private-key           | TiDB Cloud API の秘密キーを指定します。        | はい  | 非対話型モードでのみ動作します。         |
+| --private-key string           | TiDB Cloud API の秘密キーを指定します。        | はい  | 非対話型モードでのみ動作します。         |
 | --profile-name string | プロファイルの名前を指定します ( `.`含めることはできません)。 | はい  | 非対話型モードでのみ動作します。         |
-| --public-key           | TiDB Cloud API の公開キーを指定します。        | はい  | 非対話型モードでのみ動作します。         |
+| --public-key string           | TiDB Cloud API の公開キーを指定します。        | はい  | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 

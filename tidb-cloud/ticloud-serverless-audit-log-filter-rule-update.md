@@ -45,7 +45,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 | --display-name string   | フィルター ルールの表示名。                                                                                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
 | --enabled                 | フィルター ルールを有効または無効にします。                                                                                                                                   | いいえ | 非対話型モードでのみ動作します。                     |
 | --filter-rule-id string | フィルター ルールの ID。                                                                                                                                           | はい  | 非対話型モードでのみ動作します。                     |
-| --rule             | フィルタルール式を完了します。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
+| --rule string             | フィルタルール式を完了します。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                                                      | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

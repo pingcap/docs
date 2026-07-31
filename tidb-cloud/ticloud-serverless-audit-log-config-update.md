@@ -49,7 +49,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --------------------------- | ------------------------------------------------------------------------------------------------------------ | --- | ------------------------------------ |
 | --azblob.sas-token string      | Azure Blob Storage の SAS トークン。                                                                               | いいえ | 非対話型モードでのみ動作します。                     |
 | --azblob.uri string            | `azure://<account>.blob.core.windows.net/<container>/<path>`形式の Azure Blob Storage URI。                      | いいえ | 非対話型モードでのみ動作します。                     |
-| --cloud-storage              | クラウドストレージ`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
+| --cloud-storage string              | クラウドストレージ`"GCS"` 。 `"AZURE_BLOB"` `"OSS"`オプション: `"TIDB_CLOUD"` `"S3"`                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | -c, --cluster-id string        | 更新するクラスターの ID。                                                                                               | はい  | 非対話型モードでのみ動作します。                     |
 | --enabled                        | データベース監査ログを有効または無効にします。                                                                                      | いいえ | 非対話型モードでのみ動作します。                     |
 | --gcs.service-account-key string        | Google Cloud Storage の Base64 でエンコードされたサービス アカウント キー。                                                        | いいえ | 非対話型モードでのみ動作します。                     |
