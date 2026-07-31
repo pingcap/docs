@@ -34,7 +34,7 @@ TiDBにはコストベースのオプティマイザが搭載されています�
 
 TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
-TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
+TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用して、ステートメントの実行時間を 1 ミリ秒に制限できます。
 
@@ -356,7 +356,7 @@ JDBC URL に`connectionCollation`が設定されていない場合、次の 2 �
 
 TiDB v7.4 以前のバージョンでは、 `connectionCollation`構成されておらず、JDBC URL で`characterEncoding`構成されていないか`UTF-8`に設定されている場合、TiDB [`collation_connection`](/system-variables.md#collation_connection)変数はデフォルトで`utf8mb4_bin`照合順序に設定されます。
 
-TiDB v7.4以降、 `connectionCollation`が設定されておらず、JDBC URLで`characterEncoding`設定されていないか`UTF-8`に設定されている場合、変数[`collation_connection`](/system-variables.md#collation_connection)の値はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url)参照してください。
+TiDB v7.4以降、 `connectionCollation`が設定されておらず、JDBC URLで`characterEncoding`が設定されていないか`UTF-8`に設定されている場合、変数[`collation_connection`](/system-variables.md#collation_connection)の値はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url)を参照してください。
 
 以前のバージョンから v7.4 以降にアップグレードする場合 (たとえば、v6.5 から v7.5)、JDBC 接続で`collation_connection`を`utf8mb4_bin`として維持する必要がある場合は、JDBC URL で`connectionCollation`パラメータを構成することをお勧めします。
 

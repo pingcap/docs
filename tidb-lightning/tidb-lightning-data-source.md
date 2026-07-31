@@ -45,7 +45,7 @@ rename srcdb. tgtdb. *.sql
 
 ### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
 
-正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)参照してください。
+正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`を希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)を参照してください。
 
 以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 
@@ -137,7 +137,7 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-`separator` 、 `delimiter` 、 `terminator`などの文字列フィールドに特殊文字を入力する場合、バックスラッシュを使用して特殊文字をエスケープできます。エスケープシーケンスは*二重引用符で囲まれた*文字列（ `"…"` ）である必要があります。例えば、 `separator = "\u001f"` ASCII文字`0X1F`区切り文字として使用することを意味します。
+`separator` 、 `delimiter` 、 `terminator`などの文字列フィールドに特殊文字を入力する場合、バックスラッシュを使用して特殊文字をエスケープできます。エスケープシーケンスは*二重引用符で囲まれた*文字列（ `"…"` ）である必要があります。例えば、 `separator = "\u001f"` ASCII文字`0X1F`を区切り文字として使用することを意味します。
 
 *シングルクォーテーションで囲まれた*文字列 ( `'…'` ) を使用すると、バックスラッシュによるエスケープを抑制できます。例えば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) と文字`n`の2文字の文字列を終端として使用することを意味します。
 
@@ -194,7 +194,7 @@ trim-last-separator = false
     \N,"\N",
     ```
 
-    デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B` TiDBにインポートされた後、両方ともNULLに変換されます。列`C`空文字列`''`ですが、NULLではありません。
+    デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B`は TiDBにインポートされた後、両方ともNULLに変換されます。列`C`は空文字列`''`ですが、NULLではありません。
 
 #### `backslash-escape` {#backslash-escape}
 
@@ -373,7 +373,7 @@ TiDB Lightningは、命名パターンに従ったデータファイルのみを
 
 S3にエクスポートされたAuroraスナップショットを例に挙げます。Parquetファイルの完全パスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 
-通常、 `some-database`データベースをインポートするには、 `data-source-dir` `S3://some-bucket/some-subdir/some-database/`に設定します。
+通常、 `some-database`データベースをインポートするには、 `data-source-dir`を `S3://some-bucket/some-subdir/some-database/`に設定します。
 
 上記のParquetファイルパスに基づいて、 `(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$`ような正規表現を記述することでファイルに一致させることができます。一致グループでは、 `index=1`は`some-database` `index=2` `some-table`は`index=3` `parquet`なります。
 

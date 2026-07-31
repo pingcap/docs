@@ -238,7 +238,7 @@ tiup cluster upgrade -h | grep "version"
     tiup cluster stop <cluster-name>
     ```
 
-2.  `upgrade`コマンドに`--offline`オプションを指定して、オフラインアップグレードを実行します。 `<cluster-name>`にはクラスタ名を、 `<version>`にはアップグレード先のバージョン（例: `v8.5.4`入力します。
+2.  `upgrade`コマンドに`--offline`オプションを指定して、オフラインアップグレードを実行します。 `<cluster-name>`にはクラスタ名を、 `<version>`にはアップグレード先のバージョン（例: `v8.5.4`）を入力します。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline

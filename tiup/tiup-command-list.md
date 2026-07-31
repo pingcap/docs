@@ -42,6 +42,6 @@ tiup list [component] [flags]
     -   `--verbose`が指定されていない場合: TiUP は、 `Name` (コンポーネント名)、 `Owner` (コンポーネント所有者)、および`Description` (コンポーネントの説明) で構成されるコンポーネント情報リストを出力します。
 -   `[component]`が設定されている場合:
     -   指定されたコンポーネントが存在する場合: TiUP は、指定されたコンポーネントのバージョン情報リストを出力します。リストは、 `Version` (バージョン番号)、 `Installed` (インストール状態)、 `Release` (リリース日)、および`Platforms` (サポートされているプラットフォーム) で構成されます。
-    -   指定されたコンポーネントが存在しない場合: TiUP はエラー`failed to fetch component: unknown component`報告します。
+    -   指定されたコンポーネントが存在しない場合: TiUP はエラー`failed to fetch component: unknown component`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

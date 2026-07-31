@@ -52,7 +52,7 @@ IAMロールが存在しない場合は、 [Amazon S3 アクセスを構成す�
 
 ### 外部IDが正しく設定されているか確認してください {#check-whether-the-external-id-is-set-correctly}
 
-指定されたロール`{role_arn}`を引き受けることができません。ロールの信頼関係の設定を確認してください。例えば、信頼エンティティが`TiDB Cloud account ID`に設定されているか、信頼条件の`TiDB Cloud External ID`正しく設定されているかを確認してください[信頼エンティティを確認する](#check-the-trust-entity)参照してください。
+指定されたロール`{role_arn}`を引き受けることができません。ロールの信頼関係の設定を確認してください。例えば、信頼エンティティが`TiDB Cloud account ID`に設定されているか、信頼条件の`TiDB Cloud External ID`が正しく設定されているかを確認してください。[信頼エンティティを確認する](#check-the-trust-entity)を参照してください。
 
 ## アクセスが拒否されました {#access-denied}
 

@@ -40,7 +40,7 @@ MySQLと同様に、TiDBは同じTCPポート上でTLS接続と非TLS接続の�
 -   [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) : (オプション) 信頼済みCA証明書のファイルパスを指定します
 -   [`tls-version`](/tidb-configuration-file.md#tls-version) : (オプション) 最小TLSバージョンを指定します。例: &quot;TLSv1.2&quot;
 
-`auto-tls`安全な接続を可能にしますが、クライアント証明書の検証は提供しません。証明書の検証、および証明書の生成方法を制御するには、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の設定に関するアドバイスを参照してください。
+`auto-tls`は安全な接続を可能にしますが、クライアント証明書の検証は提供しません。証明書の検証、および証明書の生成方法を制御するには、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の設定に関するアドバイスを参照してください。
 
 TiDBサーバーで独自の証明書を使用して安全な接続を有効にするには、TiDBサーバーを起動する際に、構成ファイルで`ssl-cert`と`ssl-key`両方のパラメータを指定する必要があります。サーバー認証のために`ssl-ca`パラメータを指定することもできます（[認証を有効にする](#enable-authentication)）。
 

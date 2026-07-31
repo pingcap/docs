@@ -131,13 +131,13 @@ LINES TERMINATED BY '\n' STARTING BY ''
 
 <CustomContent platform="tidb">
 
-`ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)を参照してください。
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)を参照してください。
 
 </CustomContent>
 

@@ -69,7 +69,7 @@ TiDBクラスターのメインstorageコンポーネントはTiKVです。1つ�
 
     `busy`エラーの具体的な原因を確認するには、監視パネル（ **Grafana** -&gt; **TiKV** -&gt; **errors** ）を確認してください。`server is busy`はTiKVのフロー制御メカニズムです。これにより、TiKVは`tidb/ti-client` 、現在のTiKVの負荷が高すぎるため、クライアントは後で再試行する必要があることを通知します。
 
--   TiKV RocksDB ログに`Write stall`表示されます。
+-   TiKV RocksDB ログに`Write stall`が表示されます。
 
     レベル0のSSTファイルが多すぎると書き込みストールが発生している可能性があります。この問題に対処するには、パラメータ`[rocksdb] max-sub-compactions = 2 (or 3)`を追加してレベル0のSSTファイルの圧縮を高速化できます。このパラメータは、レベル0からレベル1への圧縮タスクを`max-sub-compactions`サブタスクに分割し、マルチスレッドで同時実行できるようにすることを意味します。
 

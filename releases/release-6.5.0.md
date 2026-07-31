@@ -197,7 +197,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     セッション中のトランザクションによって消費されるメモリ（最大値は以前は設定項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました）が、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)で定義された動作がトリガーされます（デフォルトは`CANCEL` 、つまり操作のキャンセルです）。前方互換性を確保するため、デフォルト以外の値として[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)設定されている場合でも、TiDB はトランザクションが`txn-total-size-limit`で設定されたメモリを使用できるようにします。
 
-    TiDB v6.5.0以降をご利用の場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に別途制限を設けないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してグローバルメモリを管理することで、メモリ使用効率を向上させることができます。
+    TiDB v6.5.0以降をご利用の場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を削除し、トランザクションのメモリ使用量に別途制限を設けないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してグローバルメモリを管理することで、メモリ使用効率を向上させることができます。
 
     詳細については[ドキュメント](/configure-memory-usage.md)を参照してください。
 

@@ -125,7 +125,7 @@ AWS KMS を使用してマスターキーを指定するには、TiKV 設定フ�
 
 `key-id`は KMS CMK のキー ID を指定します。`region`は KMS CMK の AWS リージョン名です。`endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合や、 [KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がある場合を除き、通常は指定する必要はありません。
 
-AWSでも[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)使用できます。この場合、特定のリージョンに主キーを設定し、必要なリージョンにレプリカキーを追加する必要があります。
+AWSでも[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)を使用できます。この場合、特定のリージョンに主キーを設定し、必要なリージョンにレプリカキーを追加する必要があります。
 
 </div>
 <div label="Google Cloud KMS">

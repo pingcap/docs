@@ -28,6 +28,6 @@ tiup mirror merge <mirror-dir-1> [mirror-dir-N] [flags]
 ## 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   現在のミラーにターゲット ミラーのコンポーネント所有者がいない場合、または`${TIUP_HOME}/keys`所有者の秘密キーがない場合、 TiUP は`Error: missing owner keys for owner %s on component %s`エラーを報告します。
+-   現在のミラーにターゲット ミラーのコンポーネント所有者がいない場合、または`${TIUP_HOME}/keys`に所有者の秘密キーがない場合、 TiUP は`Error: missing owner keys for owner %s on component %s`エラーを報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

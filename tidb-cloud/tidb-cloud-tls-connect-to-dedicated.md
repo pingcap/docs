@@ -44,7 +44,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-mode`と`ssl-ca`設定する必要があります。
+MySQL CLIクライアントはデフォルトでTLS接続を確立しようとします。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-mode`と`ssl-ca`を設定する必要があります。
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -112,9 +112,9 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 パラメータの説明：
 
--   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`設定します。
--   TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
--   カスタム トラストストアのパスに`trustCertificateKeyStoreUrl`設定します。
+-   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。
+-   TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+-   カスタム トラストストアのパスに`trustCertificateKeyStoreUrl`を設定します。
 -   トラストストアのパスワードを`trustCertificateKeyStorePassword`に設定します。
 
 </div>
@@ -139,7 +139,7 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 パラメータの説明：
 
--   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`設定します。
+-   TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`を設定します。
 -   `ssl={"ca": "<CA_path>"}`を使用して、ダウンロードした TiDB クラスター`ca.pem`のローカル パスを指定します。
 
 </div>
@@ -207,10 +207,10 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 パラメータの説明：
 
--   TLS 接続構成に`tls.Config`登録して、TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証します。
--   TLS プロトコルのバージョンを制限するには`MinVersion: tls.VersionTLS12`設定します。
--   TiDB Cloud Dedicated のホスト名を確認するには`ServerName: "<host>"`設定します。
--   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`設定するだけです。
+-   TLS 接続構成に`tls.Config`を登録して、TLS を有効にし、 TiDB Cloud Dedicated クラスターを検証します。
+-   TLS プロトコルのバージョンを制限するには`MinVersion: tls.VersionTLS12`を設定します。
+-   TiDB Cloud Dedicated のホスト名を確認するには`ServerName: "<host>"`を設定します。
+-   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
 
 </div>
 
@@ -262,8 +262,8 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 パラメータの説明：
 
--   TLSプロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
--   ダウンロードした TiDB クラスター`ca.pem`のローカル CA パスを読み取るには`ssl: {ca: fs.readFileSync('<CA_path>')}`設定します。
+-   TLSプロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
+-   ダウンロードした TiDB クラスター`ca.pem`のローカル CA パスを読み取るには`ssl: {ca: fs.readFileSync('<CA_path>')}`を設定します。
 
 </div>
 </SimpleTab>

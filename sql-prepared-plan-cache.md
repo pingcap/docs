@@ -195,7 +195,7 @@ LIMIT 10;
 >
 > Golangのメモリ回収メカニズムと一部の非カウントメモリ構造のため、Grafanaに表示されるメモリは実際のヒープメモリ使用量と一致しません。Grafanaに表示されるメモリと実際のヒープメモリ使用量の間には、約±20%の誤差があることがテストで確認されています。
 
-各 TiDB インスタンスにキャッシュされている実行プランの合計数を表示するには、Grafana の[**プランキャッシュプラン番号**パネル](/grafana-tidb-dashboard.md)使用できます。
+各 TiDB インスタンスにキャッシュされている実行プランの合計数を表示するには、Grafana の[**プランキャッシュプラン番号**パネル](/grafana-tidb-dashboard.md)を使用できます。
 
 以下は、Grafana の**Plan Cache Memory Usage**パネルと**Plan Cache Plan Num**パネルの例です。
 

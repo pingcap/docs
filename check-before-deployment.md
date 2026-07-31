@@ -93,7 +93,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
 
         /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
 
-    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
+    ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`が含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
 
 ## システムスワップをチェックして無効にする {#check-and-disable-system-swap}
 
@@ -333,7 +333,7 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     chronyc tracking
     ```
 
-    -   コマンドが`Leap status     : Normal`返す場合、同期プロセスは正常です。
+    -   コマンドが`Leap status     : Normal`を返す場合、同期プロセスは正常です。
 
             Reference ID    : 5EC69F0A (ntp1.time.nl)
             Stratum         : 2
@@ -400,7 +400,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `[always] madvise never`出力された場合、THP が有効になっています。無効にする必要があります。
+    > `[always] madvise never`が出力された場合、THP が有効になっています。無効にする必要があります。
 
 2.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
@@ -415,7 +415,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `noop [deadline] cfq`出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
+    > `noop [deadline] cfq`が出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
     データ ディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
 
@@ -428,7 +428,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `[none] mq-deadline kyber bfq` 、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
+    > `[none] mq-deadline kyber bfq`は、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
 
 3.  ディスクの`ID_SERIAL`を確認するには、次のコマンドを実行します。
 
@@ -456,7 +456,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `The governor "powersave"`出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
+    > `The governor "powersave"`が出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
 
 5.  オペレーティング システムの最適なパラメータを構成します。
 

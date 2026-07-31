@@ -29,7 +29,7 @@ tiup mirror sign <manifest-file> [flags]
 
 -   `{component}.json`ファイルの署名に使用される秘密キーの場所を指定します。
 -   データ型: `STRING`
--   -   このオプションがコマンドで指定されていない場合は、デフォルトで`"${TIUP_HOME}/keys/private.json"`使用されます。
+-   -   このオプションがコマンドで指定されていない場合は、デフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
 ### - タイムアウト {#timeout}
 

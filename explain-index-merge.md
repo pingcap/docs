@@ -44,13 +44,13 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t) */ * FROM t WHERE a > 1 OR b > 1;
 +-------------------------------+---------+-----------+-------------------------+------------------------------------------------+
 ```
 
-上記のクエリでは、フィルター条件は`OR`コネクターとして使用する`WHERE`句です。インデックスマージがない場合、テーブルごとに1つのインデックスしか使用できません。 `a = 1`インデックス`a`にプッシュダウンすることはできません。同様に、 `b = 1`インデックス`b`にプッシュダウンすることもできません。 `t`に膨大な量のデータが存在する場合、フルテーブルスキャンは非効率的です。このようなシナリオに対処するために、TiDBではテーブルへのアクセスにインデックスマージが導入されています。
+上記のクエリでは、フィルター条件は`OR`をコネクターとして使用する`WHERE`句です。インデックスマージがない場合、テーブルごとに1つのインデックスしか使用できません。 `a = 1`をインデックス`a`にプッシュダウンすることはできません。同様に、 `b = 1`をインデックス`b`にプッシュダウンすることもできません。 `t`に膨大な量のデータが存在する場合、フルテーブルスキャンは非効率的です。このようなシナリオに対処するために、TiDBではテーブルへのアクセスにインデックスマージが導入されています。
 
 上記のクエリでは、オプティマイザはテーブルにアクセスするためにユニオン型のインデックスマージを選択します。インデックスマージにより、オプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスから返された結果をマージして、上記の出力の後者の実行プランを生成することができます。
 
 出力において、 `IndexMerge_8`演算子の`operator info`の`type: union`情報は、この演算子がユニオン型インデックスマージであることを示しています。この演算子には3つの子ノードがあります。7と`IndexRangeScan_6` `IndexRangeScan_5`範囲に従って条件を満たす`RowID`をスキャンし、その後、 `TableRowIDScan_7`演算子はこれらの`RowID`に基づいて条件を満たすすべてのデータを正確に読み取ります。
 
-`IndexRangeScan` / `TableRangeScan`ように特定のデータ範囲に対して実行されるスキャン演算の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`のような他のスキャン演算と比較して、スキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_5`演算子の`range:(1,+inf]` 、演算子が 1 から正の無限大までデータをスキャンすることを示しています。
+`IndexRangeScan` / `TableRangeScan`ように特定のデータ範囲に対して実行されるスキャン演算の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`のような他のスキャン演算と比較して、スキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_5`演算子の`range:(1,+inf]`は、演算子が 1 から正の無限大までデータをスキャンすることを示しています。
 
 ```sql
 EXPLAIN SELECT /*+ NO_INDEX_MERGE() */ * FROM t WHERE a > 1 AND b > 1 AND c = 1;  -- Does not use index merge
@@ -88,7 +88,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 
 > **Note:**
 >
-> -   インデックスマージ機能はv5.4.0からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`なります。
+> -   インデックスマージ機能はv5.4.0からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`になります。
 >
 > -   SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用すると、 `tidb_enable_index_merge`設定に関係なく、オプティマイザにインデックスマージを強制的に適用させることができます。フィルタリング条件にプッシュダウンできない式が含まれている場合にインデックスマージを有効にするには、SQLヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >

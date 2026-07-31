@@ -68,7 +68,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     > **Note:**
     >
-    > フラグ`--full` 、およびコンポーネントバージョン`global-version`指定されていない場合は、一部のメタ情報のみが複製されます。
+    > フラグ`--full` 、およびコンポーネントバージョン`global-version`が指定されていない場合は、一部のメタ情報のみが複製されます。
 
 -   特定のプラットフォームからパッケージをクローンするかどうかを決定します
 
@@ -143,7 +143,7 @@ tiup mirror init /data/mirror
 tiup mirror genkey
 ```
 
-秘密鍵`jdoe`に`~/.tiup/keys/private.json` `/data/mirror`所有権を付与する:
+秘密鍵`jdoe`に`~/.tiup/keys/private.json` `/data/mirror`の所有権を付与する:
 
 ```bash
 tiup mirror set /data/mirror

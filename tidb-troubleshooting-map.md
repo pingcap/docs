@@ -30,7 +30,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 ### 2.1 一時的な増加 {#2-1-transient-increase}
 
 -   2.1.1 TiDB の実行プランが間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
--   2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)参照してください。
+-   2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)を参照してください。
 -   2.1.3 一部のTiKVインスタンスでLeaderが多数ドロップする[4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照。
 -   2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
@@ -83,7 +83,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   詳細な原因と解決策については、 [`Information schema is changed`エラーが報告される理由](/faq/sql-faq.md#what-triggers-the-information-schema-is-changed-error)を参照してください。
 
-    -   背景： `schema version`の増加数は、各 DDL 変更操作の`schema state`の数と一致しています。たとえば、 `create table`操作ではバージョン変更が 1 回、 `add column`操作ではバージョン変更が 4 回発生します。したがって、列変更操作が多すぎると`schema version`急速に増加する可能性があります。詳細は[オンラインスキーマの変更](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)を参照してください。
+    -   背景： `schema version`の増加数は、各 DDL 変更操作の`schema state`の数と一致しています。たとえば、 `create table`操作ではバージョン変更が 1 回、 `add column`操作ではバージョン変更が 4 回発生します。したがって、列変更操作が多すぎると`schema version`が急速に増加する可能性があります。詳細は[オンラインスキーマの変更](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf)を参照してください。
 
 -   3.1.4 TiDB はログに`information schema is out of date`を報告します
 
@@ -310,7 +310,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 -   4.5.5 適用処理が遅い。
 
-    TiKV Grafana の**Raft IO** / `apply log duration`高い状態です。これは通常、 **Raft Propose** / `apply wait duration`高い状態と関連しています。考えられる原因は以下のとおりです。
+    TiKV Grafana の**Raft IO** / `apply log duration`が高い状態です。これは通常、 **Raft Propose** / `apply wait duration`が高い状態と関連しています。考えられる原因は以下のとおりです。
 
     -   `[raftstore] apply-pool-size`が小さすぎます ( `1`と`5`の間に値を設定し、大きすぎないようにすることをお勧めします)。また、 **Thread CPU** / `apply CPU`が大きいです。
 
@@ -554,6 +554,6 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     リクエストはLeaderではないレプリカに送信されます。エラー応答で最新のLeaderがどのレプリカであるかが示された場合、TiDB はエラーに基づいてローカルルーティングを更新し、最新のLeaderに新しいリクエストを送信します。通常、業務には影響はありません。
 
-    v3.0以降のバージョンでは、TiDBは前のLeaderへのリクエストが失敗した場合に他のピアを試行するため、TiKVログに`peer is not leader`頻繁に記録される可能性があります。送信失敗の根本原因を特定するには、TiDBの該当するリージョンの`switch region peer to next due to send request fail`ログを確認してください。詳細については、 [7.1.4](#71-tidb)を参照してください。
+    v3.0以降のバージョンでは、TiDBは前のLeaderへのリクエストが失敗した場合に他のピアを試行するため、TiKVログに`peer is not leader`が頻繁に記録される可能性があります。送信失敗の根本原因を特定するには、TiDBの該当するリージョンの`switch region peer to next due to send request fail`ログを確認してください。詳細については、 [7.1.4](#71-tidb)を参照してください。
 
     このエラーは、他の理由でリージョンにLeaderがいない場合にも返される可能性があります。詳細については、 [4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照してください。

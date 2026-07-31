@@ -58,13 +58,13 @@ TiProxy には 4 つのパネルグループがあります。これらのパネ
 -   セッション移行OPM: 1分ごとに発生したセッション移行の数。TiDBインスタンスが別のインスタンスに移行したセッションを記録します。たとえば、 `succeed: 10.24.31.2:4000 => 10.24.31.3:4000` TiDBインスタンス`10.24.31.2:4000`からTiDBインスタンス`10.24.31.3:4000`に正常に移行されたセッションの数を示します。
 -   セッション移行期間: 平均、P95、P99 セッション移行期間。
 -   セッション移行の理由: 1分ごとに発生したセッション移行の数とその理由。理由には以下が含まれます。
-    -   `status` : TiProxy が[ステータスベースの負荷分散](/tiproxy/tiproxy-load-balance.md#status-based-load-balancing)実行しました。
-    -   `label` : TiProxy が[ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)実行しました。
-    -   `health` : TiProxy が[ヘルスベースの負荷分散](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing)実行しました。
-    -   `memory` : TiProxy が[メモリベースの負荷分散](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing)実行しました。
-    -   `cpu` : TiProxy が[CPUベースの負荷分散](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing)実行しました。
-    -   `location` : TiProxy が[ロケーションベースの負荷分散](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing)実行しました。
-    -   `conn` : TiProxy が[接続数ベースの負荷分散](/tiproxy/tiproxy-load-balance.md#connection-count-based-load-balancing)実行しました。
+    -   `status` : TiProxy が[ステータスベースの負荷分散](/tiproxy/tiproxy-load-balance.md#status-based-load-balancing)を実行しました。
+    -   `label` : TiProxy が[ラベルベースの負荷分散](/tiproxy/tiproxy-load-balance.md#label-based-load-balancing)を実行しました。
+    -   `health` : TiProxy が[ヘルスベースの負荷分散](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing)を実行しました。
+    -   `memory` : TiProxy が[メモリベースの負荷分散](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing)を実行しました。
+    -   `cpu` : TiProxy が[CPUベースの負荷分散](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing)を実行しました。
+    -   `location` : TiProxy が[ロケーションベースの負荷分散](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing)を実行しました。
+    -   `conn` : TiProxy が[接続数ベースの負荷分散](/tiproxy/tiproxy-load-balance.md#connection-count-based-load-balancing)を実行しました。
 
 ## バックエンド {#backend}
 

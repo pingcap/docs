@@ -19,7 +19,7 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 ### numactl {#numactl}
 
-ターゲットマシンに`numactl`インストールされているかどうかを確認してください。ターゲットマシンに複数のコアが紐付けられている場合は、 `numactl`インストールする必要があります。
+ターゲットマシンに`numactl`がインストールされているかどうかを確認してください。ターゲットマシンに複数のコアが紐付けられている場合は、 `numactl`をインストールする必要があります。
 
 ### システム時間 {#system-time}
 
@@ -133,7 +133,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
 -   クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[トポロジー.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
--   クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`使用できます。
+-   クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
 -   既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
 
 > **Note:**
@@ -156,7 +156,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `tiup cluster check` 、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルの修復もサポートされています。
+> `tiup cluster check` では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルの修復もサポートされています。
 >
 > ```shell
 > tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -175,7 +175,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`追加する必要があります。
+> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
 > -   `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
 >
 >     ```shell
@@ -244,7 +244,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 -   ターゲットマシンに接続するときにパスワードを使用してログインします。
     -   クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターのデプロイ時にトポロジ ファイルに指定されたユーザーのパスワードになります。
-    -   クラスターにオプション`--cluster`追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
+    -   クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 

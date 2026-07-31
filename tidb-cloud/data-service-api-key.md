@@ -71,7 +71,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
     {"data":{"result":{"start_ms":0,"end_ms":0,"latency":"","row_affect":0,"limit":0,"code":49900002,"message":"API Key is no longer valid","row_count":0},"columns":[],"rows":[]},"type":""}
     ```
 
--   API キーを手動で期限切れにすることもできます。詳細な手順については、 [APIキーの有効期限を切る](#expire-an-api-key)[すべてのAPIキーを期限切れにする](#expire-all-api-keys)参照してください。 API キーを手動で期限切れにすると、期限切れはすぐに有効になります。
+-   API キーを手動で期限切れにすることもできます。詳細な手順については、 [APIキーの有効期限を切る](#expire-an-api-key)[すべてのAPIキーを期限切れにする](#expire-all-api-keys)を参照してください。 API キーを手動で期限切れにすると、期限切れはすぐに有効になります。
 
 -   APIキーのステータスと有効期限は、対象のデータアプリの**認証**エリアで確認できます。
 

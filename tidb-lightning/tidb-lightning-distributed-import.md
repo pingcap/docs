@@ -24,7 +24,7 @@ TiDB Lightning を使用すると、次のシナリオでデータを並列に�
 
 ## 考慮事項 {#considerations}
 
-並列インポートを使用するには、 `parallel-import = true`設定する必要があります。TiDB Lightning を起動すると、下流の TiDB クラスタにメタデータが登録され、同時にターゲットクラスタにデータを移行している他のインスタンスが存在するかどうかが自動的に検出されます。存在する場合、自動的に並列インポートモードに移行します。
+並列インポートを使用するには、 `parallel-import = true`を設定する必要があります。TiDB Lightning を起動すると、下流の TiDB クラスタにメタデータが登録され、同時にターゲットクラスタにデータを移行している他のインスタンスが存在するかどうかが自動的に検出されます。存在する場合、自動的に並列インポートモードに移行します。
 
 ただし、データを並行して移行する場合は、次の点を考慮する必要があります。
 
@@ -63,7 +63,7 @@ TiDB Lightning は実行時に一部のリソースを排他的に使用しま�
     -   checkpoint.driver = &quot;file&quot; (デフォルト) を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
     -   checkpoint.driver = &quot;mysql&quot; を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
 -   各TiDB Lightningのログファイルは、それぞれ異なるパスに設定する必要があります。同じログファイルを共有すると、ログのクエリやトラブルシューティングに影響します。
--   Debug API またはサーバーモードの HTTP API を使用する場合は、インスタンスごとに`lightning.status-addr`一意のアドレスに設定する必要があります。そうしないと、ポートの競合によりTiDB Lightningプロセスが起動に失敗します。
+-   Debug API またはサーバーモードの HTTP API を使用する場合は、インスタンスごとに`lightning.status-addr`を一意のアドレスに設定する必要があります。そうしないと、ポートの競合によりTiDB Lightningプロセスが起動に失敗します。
 
 ## 例 1: Dumpling + TiDB Lightningを使用して、シャードデータベースとテーブルを TiDB に並列インポートする {#example-1-use-dumpling-tidb-lightning-to-import-sharded-databases-and-tables-into-tidb-in-parallel}
 

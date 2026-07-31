@@ -126,7 +126,7 @@ TiDB Lightningパラメータの詳細については、 [TiDB Lightning構成�
 
 大きな単一テーブルの場合、グローバルソートは実現できないが、主キーに基づいて各ファイル内でソートすることが可能であり、ファイルが標準の CSV ファイルである場合は、それぞれ約 20 GiB の大きな単一ファイルを生成することをお勧めします。
 
-次に、 `strict-format`有効にします。このアプローチにより、 TiDB Lightningインスタンス間でインポートされたファイルの主キーと一意のキーの重複が削減され、 TiDB Lightningインスタンスはインポート前に大きなファイルを分割して、最適なインポートパフォーマンスを実現できます。
+次に、 `strict-format`を有効にします。このアプローチにより、 TiDB Lightningインスタンス間でインポートされたファイルの主キーと一意のキーの重複が削減され、 TiDB Lightningインスタンスはインポート前に大きなファイルを分割して、最適なインポートパフォーマンスを実現できます。
 
 ### クラスタトポロジを計画する {#plan-cluster-topology}
 
@@ -141,8 +141,8 @@ TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10
 インポートプロセス中の PD 散布リージョンのレイテンシーが30 分を超える場合は、次の最適化を検討してください。
 
 -   TiKV クラスターで I/O ボトルネックが発生しているかどうかを確認します。
--   TiKV `raftstore.apply-pool-size`デフォルト値の`2`から`4`または`8`に増やします。
--   TiDB Lightning `region-split-concurrency` CPU コア数の半分に減らします (最小値は`1` )。
+-   TiKV `raftstore.apply-pool-size`をデフォルト値の`2`から`4`または`8`に増やします。
+-   TiDB Lightning `region-split-concurrency`をCPU コア数の半分に減らします (最小値は`1` )。
 
 ### 分析操作を無効にする {#disable-the-analyze-operation}
 

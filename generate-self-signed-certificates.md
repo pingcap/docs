@@ -7,7 +7,7 @@ summary: openssl` を使用して自己署名証明書を生成します。
 
 > **Note:**
 >
-> クライアントとサーバー間の TLS を有効にするには、 `auto-tls`設定するだけです。
+> クライアントとサーバー間の TLS を有効にするには、 `auto-tls`を設定するだけです。
 
 このドキュメントでは、 `openssl`を使用して自己署名証明書を生成する例を示します。また、必要に応じて、要件を満たす証明書と鍵を生成することもできます。
 
@@ -93,7 +93,7 @@ TiKV インスタンスに証明書を発行するには、次の手順を実行
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`編集し、 `[ req ]`フィールドに`req_extensions = v3_req`追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`追加します。最後に、新しいフィールドを作成し、SAN の情報を編集します。
+3.  `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、SAN の情報を編集します。
 
         [ alt_names ]
         IP.1 = 127.0.0.1

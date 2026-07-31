@@ -210,7 +210,7 @@ host = "<host>"
 
 > **Note:**
 >
-> 現在、TiDBは、同じリージョンにあるレプリカのマッチングと選択に`zone`ラベルを使用しています。この機能を使用するには、 [PDの`location-labels`設定](#configure-location-labels-for-pd)設定する際に`zone`追加し、TiDB、TiKV、 TiFlashを設定する際に`labels`設定する際に`zone`追加する必要があります。詳細については、 [TiKVとTiFlashの`labels`を設定する](#configure-labels-for-tikv-and-tiflash)参照してください。
+> 現在、TiDBは、同じリージョンにあるレプリカのマッチングと選択に`zone`ラベルを使用しています。この機能を使用するには、 [PDの`location-labels`設定](#configure-location-labels-for-pd)を設定する際に`zone`を追加し、TiDB、TiKV、 TiFlashの`labels`を設定する際に`zone`を指定する必要があります。詳細については、 [TiKVとTiFlashの`labels`を設定する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
 ## PDの<code>location-labels</code>を設定する {#configure-code-location-labels-code-for-pd}
 

@@ -9,15 +9,15 @@ summary: TiDB Lightning の使用時に発生する可能性のある一般的�
 
 ## インポート速度が遅すぎる {#import-speed-is-too-slow}
 
-通常、 TiDB Lightningは256MBのデータファイルをインポートするのに、スレッドごとに2分かかります。これよりも大幅に遅い場合は、エラーが発生しています。各データファイルの所要時間は、 `restore chunk … takes`言及されているログから確認できます。これはGrafanaのメトリクスからも確認できます。
+通常、 TiDB Lightningは256MBのデータファイルをインポートするのに、スレッドごとに2分かかります。これよりも大幅に遅い場合は、エラーが発生しています。各データファイルの所要時間は、 `restore chunk … takes`に言及されているログから確認できます。これはGrafanaのメトリクスからも確認できます。
 
 TiDB Lightning が遅くなる理由はいくつかあります。
 
 **原因 1** : `region-concurrency`設定が高すぎるため、スレッドの競合が発生し、パフォーマンスが低下します。
 
-1.  設定は、ログの先頭から`region-concurrency`検索すると見つかります。
-2.  TiDB Lightning が他のサービス (TiKV Importer など) と同じマシンを共有する場合、 `region-concurrency` CPU コアの合計数の 75% に**手動で**設定する必要があります。
-3.  CPUクォータ（例えばKubernetesの設定による制限）がある場合、 TiDB Lightningはそれを読み取れない可能性があります。この場合も、 `region-concurrency`**手動で**減らす必要があります。
+1.  設定は、ログの先頭から`region-concurrency`を検索すると見つかります。
+2.  TiDB Lightning が他のサービス (TiKV Importer など) と同じマシンを共有する場合、 `region-concurrency`をCPU コアの合計数の 75% に**手動で**設定する必要があります。
+3.  CPUクォータ（例えばKubernetesの設定による制限）がある場合、 TiDB Lightningはそれを読み取れない可能性があります。この場合も、 `region-concurrency`を**手動で**減らす必要があります。
 
 **原因 2** : テーブル スキーマが複雑すぎます。
 
@@ -40,7 +40,7 @@ strict-format = true
 
 ## <code>tidb-lightning</code>プロセスがバックグラウンドで実行中に突然終了する {#the-code-tidb-lightning-code-process-suddenly-quits-while-running-in-background}
 
-これは、 `tidb-lightning`正しく起動されていないためにシステムが SIGHUP シグナルを送信し、 `tidb-lightning`プロセスを停止したことが原因である可能性があります。この場合、 `tidb-lightning.log`通常、次のログを出力します。
+これは、 `tidb-lightning`が正しく起動されていないためにシステムが SIGHUP シグナルを送信し、 `tidb-lightning`プロセスを停止したことが原因である可能性があります。この場合、 `tidb-lightning.log`は通常、次のログを出力します。
 
     [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 
@@ -72,7 +72,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 **原因**: ローカルデータソースとリモートインポートデータベースのテーブルのチェックサムが異なります。このエラーには、より深刻な理由がいくつか考えられます。`checksum mismatched`を含むログを確認することで、原因をさらに特定できます。
 
-`checksum mismatched`を含む行は情報`total_kvs: x vs y`提供します。ここで、 `x`インポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`ローカル データ ソースによって生成されたキーと値のペアの数を示します。
+`checksum mismatched`を含む行は情報`total_kvs: x vs y`を提供します。ここで、 `x`はインポートの完了後にターゲット クラスターによって計算されたキーと値のペア (KV ペア) の数を示し、 `y`はローカル データ ソースによって生成されたキーと値のペアの数を示します。
 
 -   `x`が大きい場合は、ターゲット クラスター内にさらに多くの KV ペアが存在することを意味します。
     -   インポート前にこのテーブルが空でなかったために、データのチェックサムに影響が出ている可能性があります。また、 TiDB Lightning が以前に障害を起こしてシャットダウンしたものの、正常に再起動しなかった可能性もあります。
@@ -120,7 +120,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  ターゲット データベース内の影響を受けるテーブルを手動で`CREATE` 。
 
-3.  `[mydumper] character-set = "binary"`設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
+3.  `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
 ### <code>[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'</code> {#code-sql2kv-sql-encode-error-types-1292-invalid-time-format-1970-1-1-code}
 

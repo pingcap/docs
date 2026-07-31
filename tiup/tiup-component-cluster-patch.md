@@ -65,7 +65,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
     tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *
     ```
 
-上記の手順を完了すると、 `tiup cluster patch`コマンドの`<package-path>`として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`使用できます。
+上記の手順を完了すると、 `tiup cluster patch`コマンドの`<package-path>`として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
 
 ## オプション {#options}
 
@@ -77,7 +77,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### --transfer-timeout {#transfer-timeout}
 
--   PDまたはTiKVサービスを再起動する際、TiKV/PDはまず再起動対象ノードのリーダーを別のノードに切り替えます。切り替え処理には時間がかかるため、オプション`--transfer-timeout`最大待機時間（秒単位）を設定できます。タイムアウト後、 TiUPはサービスを直接再起動します。
+-   PDまたはTiKVサービスを再起動する際、TiKV/PDはまず再起動対象ノードのリーダーを別のノードに切り替えます。切り替え処理には時間がかかるため、オプション`--transfer-timeout`を使用して最大待機時間（秒単位）を設定できます。タイムアウト後、 TiUPはサービスを直接再起動します。
 -   データ型: `UINT`
 -   このオプションを指定しない場合、 TiUP は`600`秒待機した後、サービスを直接再起動します。
 
@@ -93,7 +93,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 
 ### -R, --role {#r-role}
 
@@ -103,7 +103,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 
 ### &#x20;--offline {#offline}
 

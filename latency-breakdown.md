@@ -62,10 +62,10 @@ e2e duration =
     tidb_session_execute_duration_seconds{type="general"}
 ```
 
--   `tidb_server_get_token_duration_seconds`トークンの待機時間を記録します。これは通常1ミリ秒未満であり、無視できるほど小さい値です。
--   `tidb_session_parse_duration_seconds` SQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
--   `tidb_session_compile_duration_seconds` AST を実行プランにコンパイルする時間を記録し、これは[SQL プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
--   `tidb_session_execute_duration_seconds{type="general"}`実行時間を記録しますが、これにはあらゆる種類のユーザークエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細分化した期間に分割する必要があります。
+-   `tidb_server_get_token_duration_seconds`はトークンの待機時間を記録します。これは通常1ミリ秒未満であり、無視できるほど小さい値です。
+-   `tidb_session_parse_duration_seconds`はSQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
+-   `tidb_session_compile_duration_seconds`はAST を実行プランにコンパイルする時間を記録し、これは[SQL プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
+-   `tidb_session_execute_duration_seconds{type="general"}`は実行時間を記録しますが、これにはあらゆる種類のユーザークエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細分化した期間に分割する必要があります。
 
 一般的に、OLTP（オンライントランザクション処理）ワークロードは、重要なコードを共有する読み取りクエリと書き込みクエリに分けられます。以下のセクションでは、実行方法が異なる[読み取りクエリ](#read-queries)と[クエリを書く](#write-queries)のレイテンシーについて説明します。
 
@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
 
 `pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプ オラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
 
-`read handle duration`と`read value duration`次のように計算されます。
+`read handle duration`と`read value duration`は次のように計算されます。
 
 ```text
 read handle duration = read value duration =
@@ -156,7 +156,7 @@ Diagram(
 )
 ```
 
-Batch PointGetの実行中、 `tidb_session_execute_duration_seconds{type="general"}`次のように計算されます。
+Batch PointGetの実行中、 `tidb_session_execute_duration_seconds{type="general"}`は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -167,7 +167,7 @@ tidb_session_execute_duration_seconds{type="general"} =
 
 Batch PointGetのプロセスは、Batch PointGetが複数の値を同時に読み取る点を除いて、 [PointGet](#point-get)とほぼ同じです。
 
-`read handles duration`と`read values duration`次のように計算されます。
+`read handles duration`と`read values duration`は次のように計算されます。
 
 ```text
 read handles duration = read values duration =
@@ -229,7 +229,7 @@ tidb_session_execute_duration_seconds{type="general"} =
 
 テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`は分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
 
-`send request duration`と`req_per_copr`次のように計算されます。
+`send request duration`と`req_per_copr`は次のように計算されます。
 
 ```text
 send request duration =
@@ -423,7 +423,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
 
 -   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショットタイプの期間です。詳細については、 [TiKVスナップショット](#tikv-snapshot)セクションを参照してください。
 
--   `lock in-mem key count`と`lock on-disk key count`次のように計算されます。
+-   `lock in-mem key count`と`lock on-disk key count`は次のように計算されます。
 
     ```text
     lock in-mem key count =
@@ -520,10 +520,10 @@ Commit_time =
 
 コミット期間は、次の 4 つの指標に分類できます。
 
--   `Get_latest_ts_time` 、非同期コミットまたはシングル フェーズ コミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
--   `Prewrite_time`事前書き込みフェーズの期間を記録します。
--   `Get_commit_ts_time` 、一般的な 2PC トランザクションの期間を記録します。
--   `Commit_time`コミットフェーズの所要時間を記録します。非同期コミットまたは1PCトランザクションにはこのフェーズはありません。
+-   `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズ コミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
+-   `Prewrite_time`は事前書き込みフェーズの期間を記録します。
+-   `Get_commit_ts_time`は、一般的な 2PC トランザクションの期間を記録します。
+-   `Commit_time`はコミットフェーズの所要時間を記録します。非同期コミットまたは1PCトランザクションにはこのフェーズはありません。
 
 悲観的ロックと同様に、フロー制御はレイテンシー(前の式の`prewrite_round`と`commit_round` ) の増幅として機能します。
 
@@ -612,7 +612,7 @@ Diagram(
 -   バッチ要求チャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` ) で、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観測されます。
 -   ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、 `CmdMPPConn` 3 種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要になります。
 
-まだいくらかのレイテンシーが観測されていますが、 `tidb_tikvclient_request_seconds`次のように概算できます。
+まだいくらかのレイテンシーが観測されていますが、 `tidb_tikvclient_request_seconds`は次のように概算できます。
 
 ```text
 tidb_tikvclient_request_seconds{type="?"} =
@@ -622,10 +622,10 @@ tidb_tikvclient_request_seconds{type="?"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
--   `tidb_tikvclient_batch_wait_duration`バッチ システムでの待機期間を記録します。
--   `tidb_tikvclient_batch_send_latency`バッチ システムでのエンコード期間を記録します。
+-   `tidb_tikvclient_batch_wait_duration`はバッチ システムでの待機期間を記録します。
+-   `tidb_tikvclient_batch_send_latency`はバッチ システムでのエンコード期間を記録します。
 -   `tikv_grpc_msg_duration_seconds{type="kv_?"}`は TiKV 処理期間です。
--   `tidb_tikvclient_rpc_net_latency_seconds`ネットワークレイテンシーを記録します。
+-   `tidb_tikvclient_rpc_net_latency_seconds`はネットワークレイテンシーを記録します。
 
 ## TiKVスナップショット {#tikv-snapshot}
 
@@ -657,7 +657,7 @@ tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
 
 リーダー リースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックス コマンドを提案します`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`読み取りインデックス コマンドをコミットする期間です。
 
-RocksDB からスナップショットを取得する操作は通常は高速なので、 `get snapshot from rocksdb duration`無視されます。
+RocksDB からスナップショットを取得する操作は通常は高速なので、 `get snapshot from rocksdb duration`は無視されます。
 
 ## 非同期書き込み {#async-write}
 
@@ -724,7 +724,7 @@ async write duration(async io enabled) =
 
 -   提案する
 -   コミット
--   適用：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`代入する
+-   適用：上記の式に`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`を代入する
 
 提案フェーズの期間は次のように計算されます。
 

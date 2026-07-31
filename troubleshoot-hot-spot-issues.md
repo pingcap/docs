@@ -24,7 +24,7 @@ TiDBは各テーブルにTableID、各インデックスにIndexID、各行にRo
     Key: tablePrefix{TableID}_recordPrefixSep{RowID}
     Value: [col1, col2, col3, col4]
 
-キーの`tablePrefix`と`recordPrefixSep`特定の文字列定数であり、KV 空間内の他のデータと区別するために使用されます。
+キーの`tablePrefix`と`recordPrefixSep`は特定の文字列定数であり、KV 空間内の他のデータと区別するために使用されます。
 
 インデックス データの場合、キーと値のペアは次の規則に従ってエンコードされます。
 

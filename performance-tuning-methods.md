@@ -396,7 +396,7 @@ TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute`
 
 #### KVおよびTSOリクエスト期間 {#kv-and-tso-request-duration}
 
-TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2 つの状況が発生する可能性があります。
+TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2 つの状況が発生する可能性があります。
 
 -   TSO要求が完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
 -   TSO 要求がまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC 要求は送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。

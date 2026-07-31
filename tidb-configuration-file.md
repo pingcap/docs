@@ -87,8 +87,8 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   `KILL`ステートメントを MySQL 互換に設定するかどうかを決定します。
 -   デフォルト値: `false`
--   `compatible-kill-query` 、 [`enable-global-kill`](#enable-global-kill-new-in-v610) `false`に設定されている場合にのみ有効になります。
--   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、 `compatible-kill-query`クエリを強制終了する際に`TIDB`キーワードを追加する必要があるかどうかを制御します。
+-   `compatible-kill-query`は、[`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`に設定されている場合にのみ有効になります。
+-   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、 `compatible-kill-query`は、クエリを強制終了する際に`TIDB`キーワードを追加する必要があるかどうかを制御します。
     -   `compatible-kill-query`が`false`の場合、TiDB での`KILL xxx`の動作は MySQL とは異なります。TiDB でクエリを強制終了するには、 `TIDB`のように`KILL TIDB xxx`キーワードを追加する必要があります。
     -   `compatible-kill-query`が`true`の場合、TiDB でクエリを強制終了するには、 `TIDB`キーワードを追加する必要はありません。クライアントが**常に同じ TiDB インスタンスに接続されることが確実でない限り**、構成ファイルで`compatible-kill-query`を`true`に設定することは強くお勧めしません。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと`KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスタの間にプロキシがある場合、新しい接続は別の TiDB インスタンスにルーティングされる可能性があり、誤って別のセッションが強制終了される可能性があります。
 -   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果を持ちます。
@@ -98,7 +98,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   `utf8mb4`文字チェックを有効にするかどうかを決定します。この機能が有効になっている場合、文字セットが`utf8`で、 `mb4`に`utf8`文字が挿入されると、エラーが返されます。
 -   デフォルト値: `false`
--   バージョン6.1.0以降、 `utf8mb4`文字チェックを有効にするかどうかは、TiDB構成項目`instance.tidb_check_mb4_value_in_utf8`またはシステム変数`tidb_check_mb4_value_in_utf8`によって決定されます。 `check-mb4-value-in-utf8`引き続き有効です。ただし、 `check-mb4-value-in-utf8`と`instance.tidb_check_mb4_value_in_utf8`の両方が設定されている場合は、後者が有効になります。
+-   バージョン6.1.0以降、 `utf8mb4`文字チェックを有効にするかどうかは、TiDB構成項目`instance.tidb_check_mb4_value_in_utf8`またはシステム変数`tidb_check_mb4_value_in_utf8`によって決定されます。 `check-mb4-value-in-utf8`は引き続き有効です。ただし、 `check-mb4-value-in-utf8`と`instance.tidb_check_mb4_value_in_utf8`の両方が設定されている場合は、後者が有効になります。
 
 ### `treat-old-version-utf8-as-utf8mb4` {#treat-old-version-utf8-as-utf8mb4}
 
@@ -135,7 +135,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### `repair-table-list` {#repair-table-list}
 
--   `repair-table-list` 、 [`repair-mode`](#repair-mode) `true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復が必要な不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
+-   `repair-table-list`は、[`repair-mode`](#repair-mode)が`true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復が必要な不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
 -   デフォルト値: []
 -   リストはデフォルトでは空です。これは、修復が必要な不良テーブルが存在しないことを意味します。
 
@@ -150,7 +150,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDBで許可される同時クライアント接続の最大数。リソース制御に使用されます。
 -   デフォルト値: `0`
 -   デフォルトでは、TiDB は同時クライアント接続数の制限を設定しません。この設定項目の値が`0`より大きく、実際のクライアント接続数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
--   バージョン 6.2.0 以降、TiDB で許可される同時クライアント接続の最大数を設定するには、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)が使用されます。 `max-server-connections`引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`が同時に設定されている場合、後者が有効になります。
+-   バージョン 6.2.0 以降、TiDB で許可される同時クライアント接続の最大数を設定するには、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)が使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`が同時に設定されている場合、後者が有効になります。
 
 ### `max-index-length` {#max-index-length}
 
@@ -320,13 +320,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `300`
 -   単位：ミリ秒
 -   クエリの実行時間がこの値よりも長い場合、そのクエリはスロークエリとみなされ、そのログがスロークエリログに出力されます。なお、 [`log.level`](#level)の出力レベルが`"debug"`の場合、このパラメータの設定に関わらず、すべてのクエリがスロークエリログに記録されます。
--   バージョン 6.1.0 以降、スロー ログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
+-   バージョン 6.1.0 以降、スロー ログの消費時間のしきい値は、TiDB 設定項目の[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`が同時に設定されている場合、後者が有効になります。
 
 ### `record-plan-in-slow-log` {#record-plan-in-slow-log}
 
 -   実行計画をスローログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   バージョン 6.1.0 以降、実行プランをスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
+-   バージョン 6.1.0 以降、実行プランをスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
 
 ### `expensive-threshold` {#expensive-threshold}
 
@@ -584,8 +584,8 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   すべてのステートメントの優先順位を設定します。
 -   デフォルト値: `NO_PRIORITY`
--   値のオプション: デフォルト値`NO_PRIORITY` 、ステートメントの優先順位が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、 `HIGH_PRIORITY` 。
--   バージョン6.1.0以降、すべてのステートメントの優先順位は、TiDB構成アイテム[`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority)またはシステム変数[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`が同時に設定されている場合、後者が有効になります。
+-   値のオプション: デフォルト値`NO_PRIORITY` 、ステートメントの優先順位が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY`、`DELAYED`、`HIGH_PRIORITY`です。
+-   バージョン6.1.0以降、すべてのステートメントの優先順位は、TiDB構成アイテム[`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority)またはシステム変数[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`は引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`が同時に設定されている場合、後者が有効になります。
 
 > **Note:**
 >
@@ -636,7 +636,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   TiDBの起動時に、サービスを提供する前に統計情報の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンでは`false` 、v7.2.0 以降のバージョンでは`true` 。
--   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計情報の初期化が完了するまで待機する必要があります。テーブルとパーティションの数が多く、lite-init-stats の値が`false`の場合、 `force-init-stats` `true`に設定すると、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)がサービスの提供を開始するまでの時間が長くなる可能性があることに注意してください。
+-   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計情報の初期化が完了するまで待機する必要があります。テーブルとパーティションの数が多く、lite-init-stats の値が`false`の場合、 `force-init-stats`を`true`に設定すると、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)がサービスの提供を開始するまでの時間が長くなる可能性があることに注意してください。
 -   `force-init-stats`の値が`false`の場合、統計情報の初期化が完了する前に TiDB はサービスを提供できますが、オプティマイザは擬似統計情報を使用して決定を行うため、最適ではない実行プランになる可能性があります。
 
 ### `enable-async-batch-get` <span class="version-mark">v8.5.5で追加</span> {#enable-async-batch-get-new-in-v855}
@@ -957,7 +957,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 -   この設定は、TiDBサーバー上で実行されるステートメントのデフォルトの優先度を変更するために使用されます。
 -   デフォルト値: `NO_PRIORITY`
--   デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、 `HIGH_PRIORITY` 。
+-   デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY`、`DELAYED`、`HIGH_PRIORITY`です。
 -   v6.1.0より前は、この設定は`force-priority`によって設定されます。
 
 > **Note:**
@@ -1035,7 +1035,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 >
 > 明細書の要約を永続化する機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
--   ステートメントサマリーの永続化が有効になっている場合、この設定では永続化できるデータファイルの最大数を指定します。 `0`ファイル数に制限がないことを意味します。
+-   ステートメントサマリーの永続化が有効になっている場合、この設定では永続化できるデータファイルの最大数を指定します。 `0`はファイル数に制限がないことを意味します。
 -   デフォルト値: `0`
 -   データ保持要件とディスク容量の使用状況に基づいて値を調整できます。
 
@@ -1048,7 +1048,7 @@ PROXYプロトコルに関連するコンフィグレーション項目。
 -   [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)プロトコルを使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
 -   デフォルト値: &quot;&quot;
 -   一般的に、リバースプロキシ経由でTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして認識します。HAProxyなど、PROXYプロトコルをサポートするリバースプロキシは、PROXYプロトコルを有効にすることで、実際のクライアントIPアドレスをTiDBに渡すことができます。
--   このパラメータを設定すると、TiDB は設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続することを許可します。PROXY 以外のプロトコルが使用されると、この接続は拒否されます。このパラメータを空のままにすると、どの IP アドレスも PROXY プロトコルを使用して TiDB に接続できません。値は`,`を区切り文字とする IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) です。 `*`任意の IP アドレスを意味します。
+-   このパラメータを設定すると、TiDB は設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続することを許可します。PROXY 以外のプロトコルが使用されると、この接続は拒否されます。このパラメータを空のままにすると、どの IP アドレスも PROXY プロトコルを使用して TiDB に接続できません。値は`,`を区切り文字とする IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) です。 `*`は任意の IP アドレスを意味します。
 
 > **Warning:**
 >

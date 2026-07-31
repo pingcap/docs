@@ -216,7 +216,7 @@ MySQLとDMの操作プロセスは次のとおりです。
     }
     ```
 
-4.  アプリケーションの要求により、 `mysql-replica-02`に対応するデータは下流の TiDB に移行する必要がなくなり、 `mysql-replica-02`削除されます。
+4.  アプリケーションの要求により、 `mysql-replica-02`に対応するデータは下流の TiDB に移行する必要がなくなり、 `mysql-replica-02`が削除されます。
 
 5.  `DM-master`の ID が``test-`shard_db`.`shard_table` ``ロックは`mysql-replica-02`の DDL 情報を受信できません。
 

@@ -804,7 +804,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raft-log-gc-tick-interval` {#raft-log-gc-tick-interval}
 
--   Raftログを削除するポーリング タスクがスケジュールされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   Raftログを削除するポーリング タスクがスケジュールされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"3s"`
 -   最小値: `"0s"`
 
@@ -861,7 +861,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `split-region-check-tick-interval` {#split-region-check-tick-interval}
 
--   リージョン分割が必要かどうかを確認する間隔を指定します。 `0`この機能が無効になっていることを意味します。
+-   リージョン分割が必要かどうかを確認する間隔を指定します。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 
@@ -877,7 +877,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > v7.5.7およびv8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757-and-v854)に置き換えられました。
 
--   RocksDB の圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。 `0`この機能が無効になっていることを意味します。
+-   RocksDB の圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"5m"`
 -   最小値: `0`
 
@@ -947,13 +947,13 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `pd-heartbeat-tick-interval` {#pd-heartbeat-tick-interval}
 
--   リージョンからPDへのハートビートがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   リージョンからPDへのハートビートがトリガーされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"1m"`
 -   最小値: `0`
 
 ### `pd-store-heartbeat-tick-interval` {#pd-store-heartbeat-tick-interval}
 
--   ストアからPDへのハートビートがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   ストアからPDへのハートビートがトリガーされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 
@@ -970,7 +970,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `snap-mgr-gc-tick-interval` {#snap-mgr-gc-tick-interval}
 
--   期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"1m"`
 -   最小値: `0`
 
@@ -1061,7 +1061,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > クラスタのパフォーマンスに影響を与え、TiDBのガベージコレクションと互換性がないため、本番環境では整合性チェックを有効にすることは推奨され**ません**。
 
--   整合性チェックがトリガーされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   整合性チェックがトリガーされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"0s"`
 -   最小値: `0`
 
@@ -1095,7 +1095,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `cleanup-import-sst-interval` {#cleanup-import-sst-interval}
 
--   期限切れの SST ファイルがチェックされる時間間隔。 `0`この機能が無効になっていることを意味します。
+-   期限切れの SST ファイルがチェックされる時間間隔。 `0`はこの機能が無効になっていることを意味します。
 -   デフォルト値: `"10m"`
 -   最小値: `0`
 
@@ -1123,7 +1123,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 -   データをディスクにフラッシュするプール内のスレッドの許容数。これは、適用スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
--   値の範囲: `[1, CPU * 10]` 。 `CPU` CPU コアの数を表します。
+-   値の範囲: `[1, CPU * 10]` 。 `CPU`はCPU コアの数を表します。
 
 ### `store-max-batch-size` {#store-max-batch-size}
 
@@ -1136,7 +1136,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 -   Raftを処理するプール内のスレッドの許容数。これはRaftstoreスレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
--   値の範囲: `[1, CPU * 10]` 。 `CPU` CPU コアの数を表します。
+-   値の範囲: `[1, CPU * 10]` 。 `CPU`はCPU コアの数を表します。
 
 ### `store-io-pool-size` <span class="version-mark">v5.3.0で追加</span> {#store-io-pool-size-new-in-v530}
 
@@ -1287,7 +1287,7 @@ Raftstoreに関連するコンフィグレーション項目。
 > **Warning:**
 >
 > -   `enable-region-bucket`は、TiDB v6.1.0 で導入された実験的機能です。本番環境での使用は推奨されません。
-> -   この設定は、 `region-split-size` `region-bucket-size`の 2 倍以上である場合にのみ有効です。それ以外の場合は、バケットは実際には生成されません。
+> -   この設定は、 `region-split-size`が`region-bucket-size`の 2 倍以上である場合にのみ有効です。それ以外の場合は、バケットは実際には生成されません。
 > -   `region-split-size`をより大きな値に調整すると、パフォーマンスの低下やスケジューリングの遅延のリスクが生じる可能性があります。
 
 ### `region-bucket-size` <span class="version-mark">v6.1.0の新機能</span> {#region-bucket-size-new-in-v610}
@@ -1514,7 +1514,7 @@ RocksDBに関連するコンフィグレーション項目
 >
 > この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
--   単一の TiKV 内のすべての RocksDB インスタンスの合計メモリ制限を`memtable`に指定します。 `0`制限なしを意味します。
+-   単一の TiKV 内のすべての RocksDB インスタンスの合計メモリ制限を`memtable`に指定します。 `0`は制限なしを意味します。
 
 -   デフォルト値:
 
@@ -1534,7 +1534,7 @@ RocksDBに関連するコンフィグレーション項目
 ### `enable-multi-batch-write` <span class="version-mark">v6.2.0 で追加されました。</span> {#enable-multi-batch-write-new-in-v620}
 
 -   RocksDBの書き込み最適化を有効にするかどうかを制御します。有効にすると、WriteBatchの内容をmemtableに同時に書き込むことができ、書き込みレイテンシーが削減されます。
--   デフォルト値：なし。ただし、 `false`に明示的に設定するか、 `rocksdb.enable-pipelined-write`または`rocksdb.enable-unordered-write`有効になっている場合を除き、デフォルトで有効になります。
+-   デフォルト値：なし。ただし、 `false`に明示的に設定するか、 `rocksdb.enable-pipelined-write`または`rocksdb.enable-unordered-write`が有効になっている場合を除き、デフォルトで有効になります。
 
 ## rocksdb.titan {#rocksdb-titan}
 
@@ -1680,7 +1680,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `max-write-buffer-number` {#max-write-buffer-number}
 
--   メンテーブルの最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.memtables-threshold`この設定項目を上書きします。
+-   メンテーブルの最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.memtables-threshold`はこの設定項目を上書きします。
 -   デフォルト値: `5`
 -   最小値: `0`
 
@@ -1781,7 +1781,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit}
 
--   保留中の圧縮バイト数の上限値。 `storage.flow-control.enable` `true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`この設定項目を上書きします。
+-   保留中の圧縮バイト数の上限値。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`がこの設定項目を上書きします。
 -   デフォルト値: `"256GiB"`
 -   単位：KiB｜MiB｜GiB
 
@@ -1878,7 +1878,7 @@ Titanに関連するコンフィグレーション項目。
 -   Blobファイルのキャッシュサイズ
 -   デフォルト値: `"0GiB"`
 -   最小値: `0`
--   推奨値: `0` 。v8.0.0 以降、TiKV は`shared-blob-cache`設定項目を導入し、デフォルトで有効にしているため、 `blob-cache-size`個別に設定する必要はありません。 `blob-cache-size`の設定は、 `shared-blob-cache`が`false`に設定されている場合にのみ有効になります。
+-   推奨値: `0` 。v8.0.0 以降、TiKV は`shared-blob-cache`設定項目を導入し、デフォルトで有効にしているため、 `blob-cache-size`を個別に設定する必要はありません。 `blob-cache-size`の設定は、 `shared-blob-cache`が`false`に設定されている場合にのみ有効になります。
 -   単位：KiB｜MiB｜GiB
 
 ### `shared-blob-cache` <span class="version-mark">v8.0.0で追加</span> {#shared-blob-cache-new-in-v800}
@@ -1941,7 +1941,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `level-merge` {#level-merge}
 
--   読み取りパフォーマンスを最適化するかどうかを決定します。 `level-merge`有効になっている場合、書き込み増幅が強化されます。
+-   読み取りパフォーマンスを最適化するかどうかを決定します。 `level-merge`が有効になっている場合、書き込み増幅が強化されます。
 -   デフォルト値: `false`
 
 ## raftdb {#raftdb}
@@ -2554,7 +2554,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 -   履歴データを増分スキャンするタスクの実行待ちキューの最大長。実行待ちタスク数がこの制限を超えると、新規タスクは拒否されます。
 -   デフォルト値： `10000` 。これは、最大で10000個のタスクを実行待ちキューに入れることができることを意味します。
--   注: `incremental-scan-concurrency-limit` [`incremental-scan-concurrency`](#incremental-scan-concurrency)以上である必要があります。そうでない場合、TiKV は`incremental-scan-concurrency`を使用してこの設定を上書きします。
+-   注: `incremental-scan-concurrency-limit`は[`incremental-scan-concurrency`](#incremental-scan-concurrency)以上である必要があります。そうでない場合、TiKV は`incremental-scan-concurrency`を使用してこの設定を上書きします。
 
 ## resolved-ts {#resolved-ts}
 
@@ -2587,7 +2587,7 @@ TiCDCに関連するコンフィグレーション項目。
 
 ### `wake-up-delay-duration` {#wake-up-delay-duration}
 
--   悲観的トランザクションがロックを解放すると、ロックを待機しているすべてのトランザクションのうち、 `start_ts`最小のトランザクションのみが起動されます。他のトランザクションは`wake-up-delay-duration`の後に起動されます。
+-   悲観的トランザクションがロックを解放すると、ロックを待機しているすべてのトランザクションのうち、 `start_ts`が最小のトランザクションのみが起動されます。他のトランザクションは`wake-up-delay-duration`の後に起動されます。
 -   デフォルト値: `"20ms"`
 
 ### `pipelined` {#pipelined}
@@ -2689,7 +2689,7 @@ TiKV API V2 が有効になっている場合にタイムスタンプを取得�
 ### `alloc-ahead-buffer` <span class="version-mark">v6.4.0で追加</span> {#alloc-ahead-buffer-new-in-v640}
 
 -   事前割り当て済みのTSOキャッシュサイズ（期間）。
--   TiKV は、この構成項目で指定された期間に基づいて TSO キャッシュを事前割り当てします。TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
+-   TiKV は、この構成項目で指定された期間に基づいて TSO キャッシュを事前割り当てします。TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`を満たす TSO をローカルに要求してキャッシュします。
 -   この構成項目は、TiKV API V2 が有効になっている場合の PD 障害の許容度を高めるためによく使用されます ( `storage.api-version = 2` )。
 -   この設定項目の値を大きくすると、TSOの消費量とTiKVのメモリオーバーヘッドが増加する可能性があります。十分なTSOを確保するには、PDの設定項目[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)の値を下げることをお勧めします。
 -   テストによると、 `alloc-ahead-buffer`がデフォルト値の場合、PDリーダーが故障して別のノードに切り替わると、書き込みリクエストのレイテンシーが一時的に増加し、QPSが約15%減少します。
@@ -2882,8 +2882,8 @@ TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関
 
 > **Note:**
 >
-> -   インメモリエンジンが有効になると、 `block-cache.capacity`自動的に 10% 減少します。
-> -   `capacity`手動で設定した場合、 `block-cache.capacity`自動的に減少しません。この場合、メモリ不足エラー（OOM）を回避するために、その値を手動で調整する必要があります。
+> -   インメモリエンジンが有効になると、 `block-cache.capacity`は自動的に 10% 減少します。
+> -   `capacity`を手動で設定した場合、 `block-cache.capacity`は自動的に減少しません。この場合、メモリ不足エラー（OOM）を回避するために、その値を手動で調整する必要があります。
 
 -   [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)が使用できる最大メモリサイズを制御します。メモリ容量によって、キャッシュできるリージョンの数が決まります。容量がいっぱいになると、インメモリエンジンはリージョンMVCCの冗長性に基づいて新しいリージョンをロードし、キャッシュされたリージョンを削除します。
 -   デフォルト値: `min(10% of the total system memory, 5 GiB)`

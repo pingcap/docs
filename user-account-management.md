@@ -36,7 +36,7 @@ You can create TiDB accounts in two ways:
 CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
 ```
 
-パスワードを割り当てると、TiDB は`auth_string`ハッシュして[`mysql.user`](/mysql-schema/mysql-schema-user.md)テーブルに保存します。
+パスワードを割り当てると、TiDB は`auth_string`をハッシュして[`mysql.user`](/mysql-schema/mysql-schema-user.md)テーブルに保存します。
 
 ```sql
 CREATE USER 'test'@'127.0.0.1' IDENTIFIED BY 'xxx';
@@ -46,7 +46,7 @@ TiDBアカウント名はユーザー名とホスト名で構成されます。�
 
 -   `user_name`は大文字と小文字が区別されます。
 
--   `host_name`はホスト名またはIPアドレスで、ワイルドカード`%`または`_`サポートします。例えば、ホスト名`'%'`すべてのホストに一致し、ホスト名`'192.168.1.%'`サブネット内のすべてのホストに一致します。
+-   `host_name`はホスト名またはIPアドレスで、ワイルドカード`%`または`_`をサポートします。例えば、ホスト名`'%'`はすべてのホストに一致し、ホスト名`'192.168.1.%'`はサブネット内のすべてのホストに一致します。
 
 ホストはあいまい一致をサポートします:
 
@@ -68,7 +68,7 @@ CREATE USER 'test';
 CREATE USER 'test'@'%' IDENTIFIED BY '';
 ```
 
-指定されたユーザーが存在しない場合、ユーザーの自動作成の動作は[`sql_mode`](/system-variables.md#sql_mode)に依存します。 `sql_mode`に`NO_AUTO_CREATE_USER`含まれる場合、 `GRANT`ステートメントはユーザーを作成せず、エラーが返されます。
+指定されたユーザーが存在しない場合、ユーザーの自動作成の動作は[`sql_mode`](/system-variables.md#sql_mode)に依存します。 `sql_mode`に`NO_AUTO_CREATE_USER`が含まれる場合、 `GRANT`ステートメントはユーザーを作成せず、エラーが返されます。
 
 For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 
@@ -147,7 +147,7 @@ TiDBは、リソースグループを使用してユーザーが消費するリ�
 
 TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)システムテーブルに保存します。パスワードの割り当てまたは更新操作は、 `CREATE USER`権限、または`mysql`データベース権限（新規アカウント作成の`INSERT`権限、既存アカウント更新の`UPDATE`権限）を持つユーザーのみに許可されます。
 
--   新しいアカウントを作成するときにパスワードを割り当てるには、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)使用し、 `IDENTIFIED BY`句を含めます。
+-   新しいアカウントを作成するときにパスワードを割り当てるには、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)を使用し、 `IDENTIFIED BY`句を含めます。
 
     ```sql
     CREATE USER 'test'@'localhost' IDENTIFIED BY 'mypass';
@@ -194,7 +194,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
 
     > **Note:**
     >
-    > TiDBプロセスを開始する前に`skip-grant-table`設定すると、オペレーティングシステムのユーザーチェックが開始されます。オペレーティングシステムの`root`ユーザーのみがTiDBプロセスを開始できます。
+    > TiDBプロセスを開始する前に`skip-grant-table`を設定すると、オペレーティングシステムのユーザーチェックが開始されます。オペレーティングシステムの`root`ユーザーのみがTiDBプロセスを開始できます。
 
     1.  TiDB ノードのデプロイメント ディレクトリの下の`scripts`ディレクトリを入力します。
     2.  Switch to the `root` account of the operating system.
