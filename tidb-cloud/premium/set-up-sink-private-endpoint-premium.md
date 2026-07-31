@@ -75,7 +75,7 @@ The configuration steps vary depending on the cloud provider where your instance
 <SimpleTab>
 <div label="AWS">
 
-### AWS Endpoint Service
+**AWS Endpoint Service**
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
 2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
@@ -90,7 +90,7 @@ The configuration steps vary depending on the cloud provider where your instance
 
 8. Click **Create** to validate the configurations and create the private endpoint.
 
-### AWS MSK Provisioned
+**AWS MSK Provisioned**
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
 2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
