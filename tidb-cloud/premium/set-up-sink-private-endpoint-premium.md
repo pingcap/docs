@@ -85,7 +85,7 @@ On AWS, choose a connection type based on the downstream service:
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
 2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
-4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
+4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section, and then select **AWS Endpoint Service** as the connection type.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
 6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
@@ -98,7 +98,7 @@ On AWS, choose a connection type based on the downstream service:
 **Amazon MSK Provisioned**
 
 1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
-2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint, and then select **AWS MSK Provisioned** as the connection type.
 3. Enter the **MSK Cluster ARN** of your Amazon MSK Provisioned cluster. To learn about how to create an Amazon MSK Provisioned cluster for changefeeds, see [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
 4. Click **Create** to validate the configurations and create the private endpoint.
 
