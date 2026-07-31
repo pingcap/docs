@@ -9,7 +9,7 @@ With the AWS environment prepared and IAM permissions established, the TiDB Clou
 
 > **Note:**
 >
-> > This phase is managed by TiDB Cloud and normally requires no customer action. If the deployment is blocked by customer-managed policies, AWS service quotas, or network restrictions, the TiDB Cloud team will contact you for assistance.
+> This phase is managed by TiDB Cloud and normally requires no customer action. If the deployment is blocked by customer-managed policies, AWS service quotas, or network restrictions, the TiDB Cloud team will contact you for assistance.
 
 
 ## Deployment overview
