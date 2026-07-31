@@ -11,7 +11,6 @@ With the AWS environment prepared and IAM permissions established, the TiDB Clou
 >
 > This phase is managed by TiDB Cloud and normally requires no customer action. If the deployment is blocked by customer-managed policies, AWS service quotas, or network restrictions, the TiDB Cloud team will contact you for assistance.
 
-
 ## Deployment overview
 
 The automated deployment consists of the following stages:
@@ -21,21 +20,19 @@ The automated deployment consists of the following stages:
 3. Deploy customer-side observability and supporting infrastructure.
 4. Register and validate the new BYOC region.
 
-The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account.
-This phase prepares the BYOC region for Resource Pool and Instance creation. It does not create a TiDB Resource Pool or Instance.
-
+The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account. This phase prepares the BYOC region for subsequent resource pool and instance creation, but does not create any TiDB resource pools or instances.
 
 ## Step 1: Image synchronization (approx. 1-2 hours)
 
-### Customer action
+**Customer action:**
 
 Select the AWS Region for the BYOC deployment and provide the Region information to your TiDB Cloud representative.
 
-### What happens
+**What happens:**
 
 TiDB Cloud synchronizes the required container images from its central image repository to an Amazon ECR registry in your AWS account.
 
-The first deployment in a new AWS Region can take longer because all required images must be synchronized. Subsequent deployments in the same Region reuse the synchronized images and usually complete faster.
+The first deployment in a new AWS Region can take longer because it must synchronize all required images. Subsequent deployments in the same Region reuse the synchronized images and typically complete faster.
 
 ## Step 2: Deploy the regional management plane
 
@@ -43,14 +40,13 @@ TiDB Cloud deploys a regional management plane in a TiDB Cloud-managed AWS accou
 
 The regional management plane includes infrastructure and services used to manage the lifecycle of your BYOC environment, such as:
 
-- A dedicated VPC and Amazon EKS cluster.
-- Regional management and API services.
-- Configuration and metadata services.
-- Components for instance provisioning, scheduling, scaling, and recovery.
-- Integration with the TiDB Cloud global control plane.
+- A dedicated VPC and Amazon EKS cluster
+- Regional management and API services
+- Configuration and metadata services
+- Components for instance provisioning, scheduling, scaling, and recovery
+- Integration with the TiDB Cloud global control plane
 
 The regional management plane does not store your TiDB application data.
-
 
 ## Step 3: Deploy customer-side supporting infrastructure
 
@@ -58,18 +54,16 @@ TiDB Cloud assumes the IAM roles created during account bootstrapping and deploy
 
 These resources include:
 
-- An isolated VPC for the observability environment.
-- A dedicated Amazon EKS cluster for observability services.
-- Metrics, logging, and alerting components.
-- Supporting storage, load balancers, API endpoints, DNS records, and certificates.
-- Audit-log and service-level indicator resources.
-- Secure connectivity between the customer-side environment and the regional management plane.
+- An isolated VPC for the observability environment
+- A dedicated Amazon EKS cluster for observability services
+- Metrics, logging, and alerting components
+- Supporting storage, load balancers, API endpoints, DNS records, and certificates
+- Audit-log and service-level indicator resources
+- Secure connectivity between the customer-side environment and the regional management plane
 
-> **Important**
+> **Note:**
 >
-> The Amazon EKS cluster created in this step hosts observability and supporting services. It is not the TiDB data plane for a TiDB instance.
->
-> The TiDB data plane is initialized when you create your first BYOC instance in the TiDB Cloud console.
+> The Amazon EKS cluster created in this step hosts observability and other supporting services. It is **not** the TiDB data plane for a TiDB instance. The TiDB data plane is initialized when you create your first BYOC instance in the TiDB Cloud console.
 
 ## Step 4: Register and validate the BYOC region
 
@@ -80,7 +74,6 @@ After the infrastructure and services are deployed, TiDB Cloud:
 - Verifies connectivity to the customer-side observability environment.
 - Confirms that metrics and logs can flow through the expected paths.
 - Confirms that the region is ready for TiDB instance creation.
-
 
 ## Deployment completion
 
