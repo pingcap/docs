@@ -94,7 +94,7 @@ Therefore, you must prepare a valid subordinate CA in the deployment region. The
 
 The subordinate CA certificate must be valid for at least **20 years**. Make sure that the root CA used to sign the subordinate CA can support this validity period.
 
-Follow the steps below:
+Perform the following steps:
 
 1. **Create a subordinate CA.** Follow [Create a private CA in AWS Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html).
 
