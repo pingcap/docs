@@ -20,7 +20,7 @@ The automated region deployment consists of the following stages:
 3. Deploy customer-side observability and supporting infrastructure.
 4. Register and validate the new BYOC region.
 
-The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account. This phase prepares the BYOC region for subsequent resource pool and instance creation, but does not create any TiDB resource pools or instances.
+The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account. This phase prepares the BYOC region for subsequent resource pool and instance creation, but does **not** create any TiDB resource pools or instances.
 
 ## Step 1: Image synchronization
 
