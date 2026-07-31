@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster by getting alert notifications v
 
 # Subscribe via Webhook
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via a generic webhook, [email](/tidb-cloud/monitor-alert-email.md), [Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), and [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md). This document describes how to subscribe to alert notifications via a generic webhook.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via a [Generic Webhook](/tidb-cloud/monitor-alert-webhook.md), [email](/tidb-cloud/monitor-alert-email.md), [Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), and [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md). This document describes how to subscribe to alert notifications via a generic webhook.
 
 > **Note:**
 >
@@ -15,9 +15,9 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 - The subscribing via webhook feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- You need a webhook URL from the platform that you want to receive alert notifications on (for example, Microsoft Teams, or your own on-call or ITSM system that can receive an HTTP POST request with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format.
+- You need a webhook URL from the platform that you want to receive alert notifications on (for example, Telegram, Microsoft Teams, or your own on-call system that can receive an HTTP POST request with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format.
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 - To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` access to the target project in TiDB Cloud.
 
@@ -25,7 +25,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 <CustomContent plan="premium">
 
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Instance Manager` access to the target {{{ .premium }}} instance in TiDB Cloud.
+- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` or `Instance Manager` access to the target instance in TiDB Cloud.
 
 </CustomContent>
 
@@ -46,13 +46,10 @@ To subscribe to alert notifications of {{{ .dedicated }}} clusters, take the fol
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 5. Select **Webhook** from the **Subscriber Type** drop-down list.
-6. Enter a name in the **Name** field and your webhook URL in the **URL** field.
-7. Click **Test Connection**.
+6. Enter a name in the **Name** field and your webhook URL in the **Webhook URL** field.
+7. Click **Save**. The backend will test connection and save for you. 
 
-    - If the test succeeds, the **Save** button is displayed.
     - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
-
-8. Click **Save** to complete the subscription.
 
 Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
 
@@ -68,13 +65,10 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Webhook** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field and your webhook URL in the **URL** field.
-6. Click **Test Connection**.
+5. Enter a name in the **Name** field and your webhook URL in the **Webhook URL** field.
+6. Click **Save**. The backend will test connection and save for you. 
 
-    - If the test succeeds, the **Save** button is displayed.
     - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
-
-7. Click **Save** to complete the subscription.
 
 Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .essential }}} instance. You will be directed to the **Alert Subscription** page.
 
@@ -90,13 +84,10 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Webhook** from the **Subscriber Type** drop-down list.
-5. Enter a name in the **Name** field and your webhook URL in the **URL** field.
-6. Click **Test Connection**.
+5. Enter a name in the **Name** field and your webhook URL in the **Webhook URL** field.
+6. Click **Save**. The backend will test connection and save for you. 
 
-    - If the test succeeds, the **Save** button is displayed.
     - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
-
-7. Click **Save** to complete the subscription.
 
 Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
 
