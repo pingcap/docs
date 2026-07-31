@@ -3,7 +3,7 @@ title: tiup dm deploy
 summary: tiup dm deploy`コマンドは、新しいクラスタをデプロイするために使用されます。クラスタ名、バージョン、および用意したトポロジファイルが必要です。オプションのフラグとして、ユーザー名、IDファイル、パスワード、ヘルプなどがあります。出力はデプロイメントログです。
 ---
 
-# tiup dm デプロイ {#tiup-dm-deploy}
+# tiup dm deploy {#tiup-dm-deploy}
 
 `tiup dm deploy`コマンドは、新しいクラスターをデプロイするために使用されます。
 
@@ -31,7 +31,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 -   データ型: `STRING`
 -   デフォルト: `~/.ssh/id_rsa`
 
-### -p, --パスワード {#p-password}
+### -p, --password {#p-password}
 
 -   ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`同時に使用しないでください。
 -   データ型: `BOOLEAN`

@@ -33,7 +33,7 @@ tiup update [component1][:version] [component2..N] [flags]
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### --毎晩 {#nightly}
+### --nightly {#nightly}
 
 -   指定されたコンポーネントをナイトリーバージョンに更新します。このオプションを指定した`tiup update`コマンドは、 `tiup update <component>:nightly`コマンドと同等です。
 -   データ型: `BOOLEAN`

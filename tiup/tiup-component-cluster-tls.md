@@ -21,7 +21,7 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 
 ## オプション {#options}
 
-### --クリーン証明書 {#clean-certificate}
+### --clean-certificate {#clean-certificate}
 
 -   TLSを無効にする場合は、このオプションを使用して以前に生成された証明書を削除してください。
 -   データタイプ: `BOOLEAN`
@@ -35,7 +35,7 @@ tiup cluster tls <cluster-name> <enable/disable> [flags]
 -   デフォルト: `false`
 -   このオプションを指定しない場合、クラスターが既に要求された状態にある場合は、操作はスキップされます。
 
-### --証明書を再読み込み {#reload-certificate}
+### --reload-certificate {#reload-certificate}
 
 -   TLSを有効にする場合は、このオプションを使用して証明書を再生成してください。
 -   データタイプ: `BOOLEAN`

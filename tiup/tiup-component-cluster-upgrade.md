@@ -116,7 +116,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `STRINGS`
 -   このオプションが設定されていない場合、Node Exporter のバージョンはクラスターのバージョンと一致したままになります。
 
-### --再起動タイムアウト {#--restart-timeout}
+### --restart-timeout {#--restart-timeout}
 
 -   ローリング アップグレード中にコンポーネントをアップグレードした後の待機時間を指定します。
 -   データ型: `STRINGS` [`golang time.ParseDuration`](https://pkg.go.dev/time#ParseDuration)で解析できるすべての型がサポートされます。
@@ -129,7 +129,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
 
-### ---アップグレード前スクリプト {#---pre-upgrade-script}
+### ---pre-upgrade-script {#---pre-upgrade-script}
 
 > **Warning:**
 >
@@ -139,7 +139,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型: `STRINGS`
 -   このオプションは、アップグレードするノードで実行されるスクリプトのパスを指定します。
 
-### ---アップグレード後のスクリプト {#---post-upgrade-script}
+### ---post-upgrade-script {#---post-upgrade-script}
 
 > **Warning:**
 >
