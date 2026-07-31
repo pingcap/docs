@@ -54,7 +54,7 @@ DESC tidb_hot_regions_history;
 
 `TIDB_HOT_REGIONS_HISTORY`テーブルのフィールドは、次のように説明されます。
 
--   UPDATE_TIME: ホットリージョンの更新時間。
+-   UPDATE_TIME: ホットリージョンの更新時刻。
 -   DB_NAME: ホットリージョンが存在するオブジェクトのデータベース名。
 -   TABLE_ID: ホットリージョンが存在するテーブルのID。
 -   TABLE_NAME: ホットリージョンが存在するテーブルの名前。
