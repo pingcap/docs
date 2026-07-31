@@ -1,17 +1,17 @@
 ---
 title: TiCDC Simple Protocol
-summary: TiCDC シンプル プロトコルとデータ形式の実装の使用方法を学習します。
+summary: TiCDC Simpleプロトコルとデータ形式の実装の使用方法を学習します。
 ---
 
-# TiCDCシンプルプロトコル {#ticdc-simple-protocol}
+# TiCDC Simpleプロトコル {#ticdc-simple-protocol}
 
-TiCDCはv8.0.0以降、シンプルプロトコルをサポートしています。このドキュメントでは、TiCDCシンプルプロトコルの使用方法とデータ形式の実装について説明します。
+TiCDCはv8.0.0以降、Simpleプロトコルをサポートしています。このドキュメントでは、TiCDC Simpleプロトコルの使用方法とデータ形式の実装について説明します。
 
-## TiCDCシンプルプロトコルを使用する {#use-the-ticdc-simple-protocol}
+## TiCDC Simpleプロトコルを使用する {#use-the-ticdc-simple-protocol}
 
 Kafka をダウンストリームとして使用する場合は、changefeed 設定で`protocol`を`"simple"`に指定します。TiCDC は各行変更または DDL イベントをメッセージとしてエンコードし、データ変更イベントをダウンストリームに送信します。
 
-シンプル プロトコルを使用するための設定例は次のとおりです。
+Simpleプロトコルを使用するための設定例は次のとおりです。
 
 `sink-uri`構成:
 
@@ -48,7 +48,7 @@ encoding-format = "json"
 
 ## メッセージの種類 {#message-types}
 
-TiCDC シンプル プロトコルには、次のメッセージ タイプがあります。
+TiCDC Simpleプロトコルには、次のメッセージ タイプがあります。
 
 DDL:
 
@@ -74,7 +74,7 @@ DML:
 
 ## メッセージ形式 {#message-format}
 
-Simpleプロトコルでは、各メッセージには1つのイベントのみが含まれます。Simpleプロトコルは、JSON形式とAvro形式のメッセージのエンコードをサポートしています。このドキュメントでは、JSON形式を例として使用します。Avro形式のメッセージの場合、フィールドと意味はJSON形式と同じですが、エンコード形式が異なります。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。
+Simpleプロトコルでは、各メッセージには1つのイベントのみが含まれます。Simpleプロトコルは、JSON形式とAvro形式のメッセージのエンコードをサポートしています。このドキュメントでは、JSON形式を例として使用します。Avro形式のメッセージの場合、フィールドと意味はJSON形式と同じですが、エンコード形式が異なります。Avro形式の詳細については、 [SimpleプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。
 
 ### DDL {#ddl}
 
@@ -712,4 +712,4 @@ TableSchemaは、テーブル名、テーブルID、テーブルバージョン�
 
 ### Avroスキーマ定義 {#avro-schema-definition}
 
-Simpleプロトコルは、Avro形式でのメッセージ出力をサポートしています。Avro形式の詳細については、 [シンプルプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。
+Simpleプロトコルは、Avro形式でのメッセージ出力をサポートしています。Avro形式の詳細については、 [SimpleプロトコルAvroスキーマ](https://github.com/pingcap/tiflow/blob/release-8.5/pkg/sink/codec/simple/message.json)を参照してください。

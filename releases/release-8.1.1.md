@@ -55,7 +55,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
     -   TiCDC
 
-        -   シンプルプロトコルを使用したチェンジフィードが開始されたときに、すべてのテーブルの BOOTSTRAP メッセージをダウンストリームに一度に送信することをサポートします。 [＃11315](https://github.com/pingcap/tiflow/issues/11315) @ [asddongmen](https://github.com/asddongmen)
+        -   Simpleプロトコルを使用したチェンジフィードが開始されたときに、すべてのテーブルの BOOTSTRAP メッセージをダウンストリームに一度に送信することをサポートします。 [＃11315](https://github.com/pingcap/tiflow/issues/11315) @ [asddongmen](https://github.com/asddongmen)
         -   ダウンストリームがメッセージキュー（MQ）またはクラウドストレージの場合、生のイベントを直接出力することをサポート[＃11211](https://github.com/pingcap/tiflow/issues/11211) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## バグ修正 {#bug-fixes}
