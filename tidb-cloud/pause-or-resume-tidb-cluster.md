@@ -22,7 +22,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 - You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
 - You cannot pause your cluster when [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) is enabled. You need to turn off the **Point-in-time Restore** switch in **Backup Setting** before pausing the cluster.
-- You cannot pause your cluster when a [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) job is running. You need to stop the migration job before pausing the cluster.
+- You cannot pause your cluster when a [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) job is running. Make sure that no migration job is running before pausing the cluster.
 
 ## Pause a TiDB cluster
 
