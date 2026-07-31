@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Datadog (PREVIEW)
-summary: Learn how to monitor your TiDB Cloud instances with the Datadog integration.
+summary: Learn how to monitor your TiDB Cloud instances with the Datadog integration. 
 ---
 
 # Integrate TiDB Cloud with Datadog (PREVIEW)
