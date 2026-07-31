@@ -1,6 +1,6 @@
 ---
-title: TiDB Cloud BYOC Automated Deployment
-summary: This document outlines the automated deployment process for TiDB Cloud BYOC on AWS.
+title: TiDB Cloud BYOC Automated Region Deployment
+summary: This document outlines the automated region deployment process for TiDB Cloud BYOC on AWS.
 ---
 
 # TiDB Cloud BYOC Automated Region Deployment
