@@ -34,7 +34,7 @@ ticloud serverless import cancel --cluster-id <cluster-id> --import-id <import-i
 | -c, --cluster-id 文字列 | クラスターの ID を指定します。        | はい  | 非対話型モードでのみ動作します。         |
 |  --force             | 確認なしでインポート タスクをキャンセルします。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。      | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
-| --import-id 文字列      | インポート タスクの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
+| --import-id string      | インポート タスクの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 
