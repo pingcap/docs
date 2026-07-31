@@ -27,7 +27,7 @@ ShowLikeOrWhere ::=
 | original_sql | パラメータ化後の元のSQL文                                                                                                                                        |
 | bind_sql | ヒント付きのバインドされたSQL文                                                                                                                                     |
 | default_db | デフォルトのデータベース                                                                                                                                          |
-| status | 「使用中」、「削除済み」、「無効」、「拒否」、「検証待ち」などのステータス                                                                                                                 |
+| status | `Using` 、 `Deleted` 、 `Invalid` 、 `Rejected` 、 `Pending verification` などのステータス                                                                                                                 |
 | create_time | 作成時刻                                                                                                                                                  |
 | update_time | 更新時刻                                                                                                                                                  |
 | charset | 文字セット                                                                                                                                                 |

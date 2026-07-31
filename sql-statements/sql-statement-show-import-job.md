@@ -29,7 +29,7 @@ ShowImportJobStmt ::=
 | Job_ID | タスクのID                                                                           |
 | Data_Source | データソースに関する情報                                                                     |
 | Target_Table | 対象テーブルの名前                                                                        |
-| Phase | ジョブの現在のフェーズ`importing` `add-index`含む`validating`                                 |
+| Phase | ジョブの現在のフェーズ。`importing`、`validating`、`add-index` を含みます                                 |
 | Status | ジョブの現在`finished`ステータス`failed` `pending` （作成されたがまだ開始されていない）、 `running` `canceled` |
 | Source_File_Size | ソースファイルのサイズ                                                                      |
 | Imported_Rows | ターゲットテーブルに読み書きされたデータ行の数                                                          |
