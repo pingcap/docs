@@ -53,4 +53,4 @@ After execution, the script will output the ARNs of the created IAM roles.
 
 ## What's next
 
-After TiDB Cloud verifies the IAM roles, continue with [TiDB Cloud BYOC Automated Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md). TiDB Cloud will trigger the automated deployment.
+After TiDB Cloud verifies the IAM roles, continue with [TiDB Cloud BYOC Automated Region Deployment](/tidb-cloud/byoc/byoc-automated-deployment.md). TiDB Cloud will trigger the automated region deployment.

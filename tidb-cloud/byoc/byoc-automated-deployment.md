@@ -13,7 +13,7 @@ With the AWS environment prepared and IAM permissions established, the TiDB Clou
 
 ## Deployment overview
 
-The automated deployment consists of the following stages:
+The automated region deployment consists of the following stages:
 
 1. Synchronize container images to your AWS account.
 2. Deploy the regional management plane.
@@ -79,7 +79,7 @@ After the infrastructure and services are deployed, TiDB Cloud:
 
 ## Deployment completion
 
-After the automated deployment completes:
+After the automated region deployment completes:
 
 - The TiDB Cloud team notifies you that the BYOC region is ready.
 - The new BYOC region becomes available for instance creation.

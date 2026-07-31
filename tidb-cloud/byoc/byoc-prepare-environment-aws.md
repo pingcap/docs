@@ -141,7 +141,7 @@ When planning the CIDR ranges, ensure that:
 
 3. **Cross-Cluster Replication (Critical):** If you plan to deploy multiple TiDB clusters (whether in the same region or across different regions) and eventually want to **replicate data between them** (for example, using TiCDC for Disaster Recovery or data consolidation), their respective TiDB Cluster CIDR ranges **must be de-conflicted**.
 
-Provide the planned CIDR ranges to your TiDB Cloud representative before the automated deployment starts.
+Provide the planned CIDR ranges to your TiDB Cloud representative before the automated region deployment starts.
 
 ## Summary: Required information
 
@@ -164,7 +164,7 @@ Fill out the table below with the information gathered in steps above and share 
 
 AWS service quota requirements vary by customer environment. The required quota values depend on factors such as your workload size, target capacity, selected AWS region, availability mode, and expected scaling range.
 
-During environment preparation, work with TiDB Cloud Support or your TiDB Cloud representative to calculate the required quota values for your deployment. If your current AWS service quotas are lower than the calculated requirements, request quota increases before the automated deployment starts.
+During environment preparation, work with TiDB Cloud Support or your TiDB Cloud representative to calculate the required quota values for your deployment. If your current AWS service quotas are lower than the calculated requirements, request quota increases before the automated region deployment starts.
 
 ### Quota categories to review
 
@@ -185,4 +185,4 @@ Review the following quota categories in each target AWS region:
 
 ## What's next
 
-After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated deployment.
+After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated region deployment.
