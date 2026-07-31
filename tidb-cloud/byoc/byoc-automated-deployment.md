@@ -22,7 +22,9 @@ The automated deployment consists of the following stages:
 
 The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account. This phase prepares the BYOC region for subsequent resource pool and instance creation, but does not create any TiDB resource pools or instances.
 
-## Step 1: Image synchronization (approx. 1-2 hours)
+## Step 1: Image synchronization
+
+The image synchronization step takes approximately 1-2 hours.
 
 **Customer action:**
 
