@@ -101,7 +101,7 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 <CustomContent platform="tidb">
 
-バージョン7.4.0以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`有効になっている場合、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
+バージョン7.4.0以降、 TiFlash構成項目`enable_resource_control`はデフォルトで有効になっています。これは`tidb_enable_resource_control`と連携してTiFlash制御機能を制御します。TiFlashリソース制御は、 `enable_resource_control`と`tidb_enable_resource_control`の両方が有効になっている場合にのみ、フロー制御と優先度スケジューリングを実行します。さらに、 `enable_resource_control`が有効になっている場合、 TiFlashは[パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用します。
 
 </CustomContent>
 
@@ -291,7 +291,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
         Query OK, 1 row affected (0.01 sec)
         Rows matched: 1  Changed: 1  Warnings: 0
 
-2.  最後に実行されたステートメントの情報を表示するには、システム変数`tidb_last_query_info`照会します。
+2.  最後に実行されたステートメントの情報を表示するには、システム変数`tidb_last_query_info`を照会します。
 
     ```sql
     SELECT @@tidb_last_query_info;

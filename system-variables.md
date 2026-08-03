@@ -748,7 +748,7 @@ mysql> SELECT * FROM t1;
 -   型: 整数
 -   デフォルト値: `0`
 -   範囲: `[0, 4294967295]`
--   この変数は、パスワード変更回数に基づいてパスワードの再利用を制限するTiDBのパスワード再利用ポリシーを設定するために使用されます。デフォルト値`0`パスワード変更回数に基づくパスワード再利用ポリシーを無効にすることを意味します。この変数を正の整数`N`に設定すると、最後の`N`個のパスワードの再利用は許可されません。
+-   この変数は、パスワード変更回数に基づいてパスワードの再利用を制限するTiDBのパスワード再利用ポリシーを設定するために使用されます。デフォルト値`0`は、パスワード変更回数に基づくパスワード再利用ポリシーを無効にすることを意味します。この変数を正の整数`N`に設定すると、最後の`N`個のパスワードの再利用は許可されません。
 
 ### password_reuse_interval <span class="version-mark">New in v6.5.0</span>
 
@@ -927,7 +927,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > CREATE USER 'appuser'@'apphost' IDENTIFIED BY 'app-password';
 > ```
 >
-> この例では、 `apphost` IP アドレスまたはワイルドカード ( `%` ) に置き換えることをお勧めします。
+> この例では、 `apphost`をIP アドレスまたはワイルドカード ( `%` ) に置き換えることをお勧めします。
 
 ### socket
 
@@ -1273,7 +1273,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
     -   `tidb_auto_analyze_start_time='01:00 +0000'`
     -   `tidb_auto_analyze_end_time='03:00 +0000'`
 
--   パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000` UTC の午前 1:00 を指します。
+-   パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
 
 ### tidb_auto_analyze_partition_batch_size <span class="version-mark">New in v6.4.0</span>
 
@@ -1298,7 +1298,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> この機能を使用するには、システム変数`tidb_enable_auto_analyze` `ON`に設定する必要があります。
+> この機能を使用するには、システム変数`tidb_enable_auto_analyze`を`ON`に設定する必要があります。
 
 ### tidb_auto_analyze_start_time
 
@@ -1317,7 +1317,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
     -   `tidb_auto_analyze_start_time='01:00 +0000'`
     -   `tidb_auto_analyze_end_time='03:00 +0000'`
 
--   パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000` UTC の午前 1:00 を指します。
+-   パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
 
 ### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
 
@@ -1840,7 +1840,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `ON` 。v8.5.0 より前のバージョンでは、デフォルト値は`OFF`です。
 -   この変数は[TiDB高速テーブル作成](/accelerated-table-creation.md)を有効にするかどうかを制御するために使用されます。
 -   バージョン8.0.0以降、TiDBは`tidb_enable_fast_create_table`を使用して[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントによるテーブル作成の高速化をサポートしています。
--   この変数は、v7.6.0 で導入された変数[`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760)から名前が変更されました。v8.0.0 以降、 `tidb_ddl_version`無効になります。
+-   この変数は、v7.6.0 で導入された変数[`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760)から名前が変更されました。v8.0.0 以降、 `tidb_ddl_version`は無効になります。
 -   TiDB v8.5.0以降、新しく作成されたクラスタでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスタの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
@@ -1851,8 +1851,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   型: Float
 -   デフォルト値: `0.8`
 -   範囲: `[0, 1]`
--   この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために関数。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。
--   TiDB は統計情報を使用してフィルタ条件`like`を推定しようとします。しかし、 `like`複雑な文字列に一致する場合、または`rlike`や`regexp`を使用する場合、TiDB は統計情報を十分に使用できないことが多く、代わりにデフォルト値`0.8`が選択率として設定され、推定が不正確になります。
+-   この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。
+-   TiDB は統計情報を使用してフィルタ条件`like`を推定しようとします。しかし、 `like`が複雑な文字列に一致する場合、または`rlike`や`regexp`を使用する場合、TiDB は統計情報を十分に使用できないことが多く、代わりにデフォルト値`0.8`が選択率として設定され、推定が不正確になります。
 -   この変数は、前述の動作を変更するために使用されます。変数が`0`以外の値に設定されている場合、選択率は`0.8`ではなく、指定された変数の値になります。
 -   変数が`0`に設定されている場合、TiDB は統計情報で TopN を使用して評価し、精度を向上させ、前述の 3 つの関数を推定する際に統計情報で NULL の数を考慮します。前提条件として、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されているときに統計情報が収集されます。このような評価は、パフォーマンスに若干影響を与える可能性があります。
 -   変数が`0.8`以外の値に設定されている場合、TiDB は`not like` 、 `not rlike` 、および`not regexp`の推定値をそれに応じて調整します。
@@ -1924,7 +1924,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> v7.0.0 以降、 `tidb_dml_batch_size` [`LOAD DATA`ステートメント](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
+> v7.0.0 以降、 `tidb_dml_batch_size`は[`LOAD DATA`ステートメント](/sql-statements/sql-statement-load-data.md)に影響しなくなりました。
 
 ### tidb_dml_type <span class="version-mark">New in v8.0.0</span>
 
@@ -1970,8 +1970,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `OFF`
--   この変数は、 `ANALYZE`を実行する際に、履歴データを読み取るか最新データを読み取るかを制御します。この変数が`ON`に設定されている場合、 `ANALYZE` `ANALYZE`実行時に利用可能な履歴データを読み取ります。この変数が`OFF`に設定されている場合、 `ANALYZE`最新データを読み取ります。
--   v5.2より前は、 `ANALYZE`は最新のデータを読み取ります。v5.2からv6.1までは、 `ANALYZE` `ANALYZE`の時点で利用可能な履歴データを読み取ります。
+-   この変数は、 `ANALYZE`を実行する際に、履歴データを読み取るか最新データを読み取るかを制御します。この変数が`ON`に設定されている場合、 `ANALYZE`は`ANALYZE`実行時に利用可能な履歴データを読み取ります。この変数が`OFF`に設定されている場合、 `ANALYZE`は最新データを読み取ります。
+-   v5.2より前は、 `ANALYZE`は最新のデータを読み取ります。v5.2からv6.1までは、 `ANALYZE`は`ANALYZE`の時点で利用可能な履歴データを読み取ります。
 
 > **Warning:**
 >
@@ -2569,7 +2569,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   型: Boolean
 -   デフォルト値: `OFF`
 -   最終出力結果を自動的にソートするかどうかを指定します。
--   例えば、この変数を有効にすると、TiDB は`SELECT a, MAX(b) FROM t GROUP BY a` `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`として処理します。
+-   例えば、この変数を有効にすると、TiDB は`SELECT a, MAX(b) FROM t GROUP BY a`を`SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`として処理します。
 
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
@@ -2643,7 +2643,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は`PLAN REPLAYER CAPTURE`機能を有効にするかどうかを制御します。デフォルト値の`ON` `PLAN REPLAYER CAPTURE`機能を有効にすることを意味します。
+-   この変数は`PLAN REPLAYER CAPTURE`機能を有効にするかどうかを制御します。デフォルト値の`ON`は`PLAN REPLAYER CAPTURE`機能を有効にすることを意味します。
 
 </CustomContent>
 
@@ -2667,7 +2667,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `OFF`
--   この変数は、 `PLAN REPLAYER CONTINUOUS CAPTURE`機能を有効にするかどうかを制御します。デフォルト値の`OFF`この機能を無効にすることを意味します。
+-   この変数は、 `PLAN REPLAYER CONTINUOUS CAPTURE`機能を有効にするかどうかを制御します。デフォルト値の`OFF`はこの機能を無効にすることを意味します。
 
 </CustomContent>
 
@@ -2719,7 +2719,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 <CustomContent platform="tidb">
 
--   オプティマイザは、テーブルの統計情報が古いかどうかを次のように判断します。 `ANALYZE`テーブルに対して最後に実行されて統計情報が取得されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザはこのテーブルの統計情報が古いと判断します。この比率は[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)設定を使用して変更できます。
+-   オプティマイザは、テーブルの統計情報が古いかどうかを次のように判断します。 `ANALYZE`がテーブルに対して最後に実行されて統計情報が取得されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザはこのテーブルの統計情報が古いと判断します。この比率は[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)設定を使用して変更できます。
 
 </CustomContent>
 
@@ -3430,7 +3430,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `ON`
--   この変数は、新しい照合順序が有効になっているクラスタで MPP ハッシュパーティション交換演算子を生成するかどうかを制御します。 `true`演算子を生成することを意味し、 `false`は生成しないことを意味します。
+-   この変数は、新しい照合順序が有効になっているクラスタで MPP ハッシュパーティション交換演算子を生成するかどうかを制御します。 `true`は演算子を生成することを意味し、 `false`は生成しないことを意味します。
 -   この変数はTiDBの内部動作に使用されます。この変数を設定することは**推奨されません**。
 
 ### tidb_hash_join_concurrency
@@ -4033,7 +4033,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> `auto_analyze` 、TiDB 起動構成ファイルで`run-auto-analyze`有効になっている場合にのみ、TiDB クラスタでトリガーされます。
+> `auto_analyze`は、TiDB 起動構成ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
@@ -4292,7 +4292,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   デフォルト値: `1`
 -   範囲: `[0, 2]`
 -   ブロードキャストによる直交座標結合を許可するかどうかを示します。
--   `0`は、ブロードキャスト カルテシアン ジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`テーブル サイズがしきい値を超えても常に許可されていることを意味します。
+-   `0`は、ブロードキャスト カルテシアン ジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`は、テーブル サイズがしきい値を超えても常に許可されていることを意味します。
 -   この変数はTiDB内部で使用されているため、その値を変更することは推奨さ**れません**。
 
 ### tidb_opt_concurrency_factor
@@ -4649,7 +4649,7 @@ mysql> desc select count(distinct a) from test.t;
 -   型: Enumeration
 -   デフォルト値: `moderate`
 -   指定可能な値: `moderate` 、 `determinate`
--   この変数はオプティマイザの目的を制御します。 `moderate` 、TiDB v7.4.0 より前のバージョンにおけるデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより良い実行プランを生成しようとします。 `determinate`モードはより保守的になり、実行プランをより安定させます。
+-   この変数はオプティマイザの目的を制御します。 `moderate`は、TiDB v7.4.0 より前のバージョンにおけるデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより良い実行プランを生成しようとします。 `determinate`モードはより保守的になり、実行プランをより安定させます。
 -   リアルタイム統計とは、DML ステートメントに基づいて自動的に更新される行の総数と変更された行の数です。この変数が`moderate` (デフォルト) に設定されている場合、TiDB はリアルタイム統計に基づいて実行プランを生成します。この変数が`determinate`に設定されている場合、TiDB は実行プランの生成にリアルタイム統計を使用しないため、実行プランがより安定します。
 -   長期的に安定したOLTPワークロードを維持する場合、またはユーザーが既存の実行プランに満足している場合は、予期しない実行プランの変更の可能性を減らすために`determinate`モードを使用することをお勧めします。さらに、[`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)を使用することで、統計情報の変更を防ぎ、実行プランをより安定させることができます。
 
@@ -4779,7 +4779,7 @@ mysql> desc select count(distinct a) from test.t;
 -   範囲: `[0, 1]`
 -   この変数は、SQL ステートメントにフィルタ条件を含む`ORDER BY`および`LIMIT`句がある場合に、オプティマイザがインデックスを選択する方法を制御するために使用されます。
 -   このようなクエリの場合、オプティマイザは`ORDER BY`句と`LIMIT`句を満たす対応するインデックスを選択することを検討します（このインデックスがフィルタ条件を満たさない場合でも）。ただし、データ分布の複雑さから、このシナリオではオプティマイザが最適ではないインデックスを選択する可能性があります。
--   この変数はしきい値を表します。フィルタリング条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザは`ORDER BY`と`LIMIT`満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスを優先します。
+-   この変数はしきい値を表します。フィルタリング条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザは`ORDER BY`と`LIMIT`を満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスを優先します。
 -   例えば、変数が`0`に設定されている場合、オプティマイザはデフォルトの動作を維持します。一方、 `1`に設定されている場合、オプティマイザは常にフィルタ条件を満たすインデックスの選択を優先し、 `ORDER BY`と`LIMIT`両方の句を満たすインデックスの選択を回避します。
 -   次の例では、テーブル`t`には合計 1,000,000 行があります。列`b`にインデックスを使用すると、推定行数は約 8,748 なので、選択性の推定値は約 0.0087 になります。デフォルトでは、オプティマイザは列`a`にインデックスを選択します。ただし、この変数を 0.01 に設定すると、列`b`のインデックスの選択性 (0.0087) が 0.01 未満になるため、オプティマイザは列`b`にインデックスを選択します。
 
@@ -5565,8 +5565,8 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> -   この機能は[`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。 `tidb_rc_read_check_ts`と`replica-read`同時に有効にしないでください。
-> -   クライアントがカーソルを使用している場合、返されたデータの前のバッチが既にクライアントによって使用されており、最終的にステートメントが失敗する可能性があるため`tidb_rc_read_check_ts`有効にすることは推奨されません。
+> -   この機能は[`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。 `tidb_rc_read_check_ts`と`replica-read`を同時に有効にしないでください。
+> -   クライアントがカーソルを使用している場合、返されたデータの前のバッチが既にクライアントによって使用されており、最終的にステートメントが失敗する可能性があるため`tidb_rc_read_check_ts`を有効にすることは推奨されません。
 > -   バージョン7.0.0以降、この変数は、プリペアドステートメントプロトコルを使用するカーソルフェッチ読み取りモードでは無効になります。
 
 -   対象範囲：グローバル
@@ -5581,7 +5581,7 @@ SHOW WARNINGS;
 
 > **Warning:**
 >
-> この機能は現在、 [`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。この変数を有効にすると、クライアントから送信されるすべてのリクエストで`replica-read`を使用できなくなります。したがって、 `tidb_rc_write_check_ts`と`replica-read`同時に有効にしないでください。
+> この機能は現在、 [`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。この変数を有効にすると、クライアントから送信されるすべてのリクエストで`replica-read`を使用できなくなります。したがって、 `tidb_rc_write_check_ts`と`replica-read`を同時に有効にしないでください。
 
 -   範囲: セッション | グローバル
 -   クラスターに保持される: はい
@@ -6026,7 +6026,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: &quot;&quot;
--   `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は「tidb-slow.log」です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`照会して、設定したファイルパスに基づいてスロークエリログを解析します。
+-   `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は「tidb-slow.log」です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会して、設定したファイルパスに基づいてスロークエリログを解析します。
 
 <CustomContent platform="tidb">
 
@@ -6337,7 +6337,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   型: 整数
 -   デフォルト値: `4`
 -   範囲: `[0, 25000]`
--   この変数は`IndexLookUp`オペレーターのコプロセッサータスクのバッチサイズを制御するために使用されます。 `0`バッチを無効にすることを意味します。タスク数が比較的多く、クエリの実行速度が遅い場合は、この変数の値を増やすことでクエリを最適化できます。
+-   この変数は`IndexLookUp`オペレーターのコプロセッサータスクのバッチサイズを制御するために使用されます。 `0`はバッチを無効にすることを意味します。タスク数が比較的多く、クエリの実行速度が遅い場合は、この変数の値を増やすことでクエリを最適化できます。
 
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
@@ -6376,7 +6376,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     -   読み取り専用ではない未コミットのトランザクションの場合、これらのトランザクション内で書き込み操作を実行するSQL文は拒否されます。
     -   データが変更された未コミットの読み取り専用トランザクションについては、これらのトランザクションのコミットは拒否されます。
 -   読み取り専用モードが有効になると、 `SUPER`権限を持つユーザーを含め、すべてのユーザーは`RESTRICTED_REPLICA_WRITER_ADMIN`権限が明示的に付与されない限り、データを書き込む可能性のある SQL ステートメントを実行できません。
--   [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)システム変数が`ON`に設定されている場合、場合によっては`tidb_super_read_only` [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の影響を受けます。詳細な影響については、 [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の説明を参照してください。
+-   [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)システム変数が`ON`に設定されている場合、場合によっては`tidb_super_read_only`は[`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の影響を受けます。詳細な影響については、 [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520)の説明を参照してください。
 
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
 

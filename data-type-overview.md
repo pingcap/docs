@@ -9,14 +9,14 @@ TiDBは[文字列型](/data-type-string.md) MySQLの`SPATIAL`型を除くすべ�
 
 データ型に使用される定義は`T(M[, D])`として指定されます。
 
--   `T`特定のデータ型を示します。
--   整数型の場合、 `M`最大表示幅を示します。浮動小数点型と固定小数点型の場合、 `M`格納可能な桁数（精度）です。文字列型の場合、 `M`最大長です。Mの許容最大値はデータ型によって異なります。
+-   `T`は特定のデータ型を示します。
+-   整数型の場合、 `M`は最大表示幅を示します。浮動小数点型と固定小数点型の場合、 `M`は格納可能な桁数（精度）です。文字列型の場合、 `M`は最大長です。Mの許容最大値はデータ型によって異なります。
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-> バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`なります）。整数型の表示幅の指定は推奨されません。
+> バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`になります）。整数型の表示幅の指定は推奨されません。
 
 </CustomContent>
 

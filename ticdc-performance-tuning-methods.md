@@ -64,8 +64,8 @@ summary: パフォーマンス概要ダッシュボードに TiCDC メトリッ�
 
 次の図に示すように、上流と下流の両方がTiDBクラスターです。TiCDC `Puller output events/s`メトリックは上流データベースのQPSを示します`Transaction Sink Full Flush Duration`メトリックは下流データベースの平均書き込みレイテンシーを示しており、最初のワークロードでは高く、2番目のワークロードでは低くなります。
 
--   最初のワークロードでは、下流のTiDBクラスターが低速でデータを書き込むため、TiCDCは上流のQPSに遅れをとる速度でデータを消費し、 `Changefeed checkpoint lag`継続的に増加します。しかし、 `Changefeed resolved ts lag` 300ミリ秒以内に収まっているため、レプリケーションの遅延とスループットのボトルネックは、プラーモジュールとソーターモジュールではなく、下流のシンクモジュールによって発生していることがわかります。
--   2 番目のワークロードでは、下流の TiDB クラスターがデータをより高速に書き込むため、TiCDC は上流に完全に追いつく速度でデータを複製し、 `Changefeed checkpoint lag`と`Changefeed resolved ts lag` 500 ミリ秒以内に留まります。これは、TiCDC にとって比較的理想的なレプリケーション速度です。
+-   最初のワークロードでは、下流のTiDBクラスターが低速でデータを書き込むため、TiCDCは上流のQPSに遅れをとる速度でデータを消費し、 `Changefeed checkpoint lag`が継続的に増加します。しかし、 `Changefeed resolved ts lag`は300ミリ秒以内に収まっているため、レプリケーションの遅延とスループットのボトルネックは、プラーモジュールとソーターモジュールではなく、下流のシンクモジュールによって発生していることがわかります。
+-   2 番目のワークロードでは、下流の TiDB クラスターがデータをより高速に書き込むため、TiCDC は上流に完全に追いつく速度でデータを複製し、 `Changefeed checkpoint lag`と`Changefeed resolved ts lag`は500 ミリ秒以内に留まります。これは、TiCDC にとって比較的理想的なレプリケーション速度です。
 
 ![TiCDC overview](/media/performance/cdc/cdc-fast-1.png)
 

@@ -13,7 +13,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
 1.  システムが CentOS 8 かどうかを確認します。
 
-    CentOS 8にはデフォルトでシステムライブラリ`libnsl.so`含まれていないため、 TiFlashの起動に失敗する可能性があります。以下のコマンドで手動でインストールできます。
+    CentOS 8にはデフォルトでシステムライブラリ`libnsl.so`が含まれていないため、 TiFlashの起動に失敗する可能性があります。以下のコマンドで手動でインストールできます。
 
     ```shell
     dnf install libnsl
@@ -138,7 +138,7 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
     ```
 
     -   `true`が返された場合は、次のステップに進みます。
-    -   `false`が返された場合は[配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)返して次のステップに進みます。
+    -   `false`が返された場合は[配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を実行してから次のステップに進みます。
 
 2.  **TiFlash -Summary** Grafana パネルの**UpTime**メトリックをチェックして、 TiFlashプロセスが正常に動作しているかどうかを確認します。
 
@@ -148,9 +148,9 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} store
     ```
 
-    TiFlashの`store.labels` `{"key": "engine", "value": "tiflash"}`ような情報が含まれています。この情報を確認することで、 TiFlashのインスタンスを確認できます。
+    TiFlashの`store.labels` `{"key": "engine", "value": "tiflash"}`のような情報が含まれています。この情報を確認することで、 TiFlashのインスタンスを確認できます。
 
-4.  `default` ID を持つ配置ルールの`count`正しいかどうかを確認します。
+4.  `default` ID を持つ配置ルールの`count`が正しいかどうかを確認します。
 
     ```shell
     tiup ctl:nightly pd -u http://${pd-ip}:${pd-port} config placement-rules show | grep -C 10 default
@@ -190,13 +190,13 @@ TiDB クラスターを展開した後、 TiFlashレプリカの作成が継続�
 
         -   新しいTiFlashノードをスケールアウトします。PD はTiFlashノード間でリージョンのバランスを自動的に取り、十分なディスク容量を持つTiFlashノードへのリージョンのスケジュールを再開します。
 
-        -   TiFlashノードディスクから、ログファイルやディレクトリ`${data}/flash/`の`space_placeholder_file`ファイルなどの不要なファイルを削除します。必要に応じて、 `tiflash-learner.toml` ～ `0MB`の`storage.reserve-space`同時に設定し、 TiFlashサービスを一時的に再開します。
+        -   TiFlashノードディスクから、ログファイルやディレクトリ`${data}/flash/`の`space_placeholder_file`ファイルなどの不要なファイルを削除します。必要に応じて、 `tiflash-learner.toml` ～ `0MB`の`storage.reserve-space`を同時に設定し、 TiFlashサービスを一時的に再開します。
 
     ディスク使用量が`low-space-ratio`未満の場合は、ディスク容量が通常通り利用可能であることを示します。次の手順に進みます。
 
 6.  `down peer`があるかどうかを確認します。
 
-    ダウンしているピアが残っていると、レプリケーションが停止する可能性があります。以下のコマンドを実行して、 `down peer`残っているかどうかを確認してください。
+    ダウンしているピアが残っていると、レプリケーションが停止する可能性があります。以下のコマンドを実行して、 `down peer`が残っているかどうかを確認してください。
 
     ```shell
     pd-ctl region check-down-peer

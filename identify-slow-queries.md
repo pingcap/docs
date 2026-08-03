@@ -82,7 +82,7 @@ insert into t select * from t;
 -   `Preproc_subqueries` : ステートメント内で事前に実行されるサブクエリの数。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される場合があります。
 -   `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するために要した時間。
 -   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗した場合にステートメントが再試行される悲観的トランザクションに使用されます。
--   `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`最初の 2 回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`引いた時間です。
+-   `Exec_retry_time` : このステートメントの実行再試行時間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`は最初の 2 回の実行の合計時間を意味します。最後の実行の時間は、 `Query_time`から`Exec_retry_time`を引いた時間です。
 -   `KV_total` : このステートメントによって、TiKV またはTiFlash上のすべての RPC リクエストに費やされた時間。
 -   `PD_total` : このステートメントによる PD 上のすべての RPC リクエストに費やされた時間。
 -   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。

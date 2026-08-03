@@ -102,7 +102,7 @@ USING
 
 実行プランのバインディングを作成する際にスコープを指定しない場合、デフォルトのスコープはSESSIONです。TiDBオプティマイザーは、バインドされたSQL文を正規化し、システムテーブルに格納します。SQLクエリの処理時に、正規化された文がシステムテーブル内のバインドされたSQL文のいずれかと一致し、システム変数`tidb_use_plan_baselines`が`on` （デフォルト値は`on` ）に設定されている場合、TiDBはこの文に対応するオプティマイザーヒントを使用します。一致可能な実行プランが複数ある場合、オプティマイザーは最もコストの低いプランを選択してバインドします。
 
-`Normalization` 、SQL文内の定数を変数パラメータに変換し、クエリで参照されるテーブルのデータベースを明示的に指定する処理です。SQL文内のスペースと改行は標準化された方法で処理されます。次の例をご覧ください。
+`Normalization` とは、SQL文内の定数を変数パラメータに変換し、クエリで参照されるテーブルのデータベースを明示的に指定する処理です。SQL文内のスペースと改行は標準化された方法で処理されます。次の例をご覧ください。
 
 ```sql
 SELECT * FROM users WHERE balance >    100
@@ -149,7 +149,7 @@ SELECT * FROM bookshop . users WHERE balance > ?
 > +--------------------------+
 > ```
 >
-> v7.4.0より前のTiDBクラスターで作成されたバインディングには`IN (?)`含まれている場合があります。v7.4.0以降のバージョンにアップグレードすると、これらのバインディングは`IN (...)`に変更されます。
+> v7.4.0より前のTiDBクラスターで作成されたバインディングには`IN (?)`が含まれている場合があります。v7.4.0以降のバージョンにアップグレードすると、これらのバインディングは`IN (...)`に変更されます。
 >
 > 例えば：
 >
@@ -228,7 +228,7 @@ SQL文の実行計画を過去の実行計画に固定するには、Plan Digest
 
 -   この機能は、過去の実行計画に基づいてヒントを生成し、生成されたヒントをバインディングに使用します。過去の実行計画は[ステートメントサマリーテーブル](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、 [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
 -   TiFlashクエリ、3つ以上のテーブルを含む結合クエリ、およびサブクエリを含むクエリの場合、自動生成されるヒントが適切ではないため、プランが完全にバインドされない可能性があります。このような場合、バインドの作成時に警告が表示されます。
--   履歴実行プランがヒント付きのSQL文用である場合、ヒントはバインディングに追加されます。例えば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`を実行した後、そのプランダイジェストで作成されたバインディングには`max_execution_time(1000)`含まれます。
+-   履歴実行プランがヒント付きのSQL文用である場合、ヒントはバインディングに追加されます。例えば、 `SELECT /*+ max_execution_time(1000) */ * FROM t`を実行した後、そのプランダイジェストで作成されたバインディングには`max_execution_time(1000)`が含まれます。
 
 このバインディング メソッドの SQL ステートメントは次のとおりです。
 
@@ -240,7 +240,7 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOr
 
 このバインディング方法を使用するには、まず`statements_summary`で対象の履歴実行プランに対応するプランダイジェストを取得し、それを使用してバインディングを作成する必要があります。詳細な手順は以下のとおりです。
 
-1.  `statements_summary`対象実行プランに対応するプランダイジェストを取得します。
+1.  `statements_summary`で対象実行プランに対応するプランダイジェストを取得します。
 
     例えば：
 
@@ -263,7 +263,7 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOr
                               └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
               BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
 
-    この例では、 Plan Digest に対応する実行プランが`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`あることがわかります。
+    この例では、 Plan Digest に対応する実行プランが`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`であることがわかります。
 
 2.  Plan Digest を使用してバインディングを作成します。
 
@@ -368,7 +368,7 @@ SET BINDING [ENABLED | DISABLED] FOR SQL DIGEST 'sql_digest';
 SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 ```
 
-この文は、GLOBALレベルまたはSESSIONレベルの実行プランバインディングを、バインディング更新時刻の最新から最古の順で出力します。デフォルトのスコープはSESSIONです。現在、 `SHOW BINDINGS`以下のように11列を出力します。
+この文は、GLOBALレベルまたはSESSIONレベルの実行プランバインディングを、バインディング更新時刻の最新から最古の順で出力します。デフォルトのスコープはSESSIONです。現在、 `SHOW BINDINGS`は以下のように11列を出力します。
 
 | カラム名        | 注記                                                                                                                                                    |
 | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -461,7 +461,7 @@ SHOW binding_cache status;
 
 ## ステートメントサマリーテーブルを利用して、バインドする必要があるクエリを取得します。 {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
 
-[ステートメントの要約](/statement-summary-tables.md) 、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行すると、条件付き`plan_digest` 、そして[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)取得できます。
+[ステートメントの要約](/statement-summary-tables.md)は、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行して条件を満たす`plan_digest`を取得し、[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)ことができます。
 
 以下の例では、過去2週間に10回以上実行され、SQLバインディングのない複数の実行プランを持つ`SELECT`ステートメントをクエリします。クエリを実行時間でソートし、上位100件のクエリを最も高速なプランにバインドします。
 
@@ -782,7 +782,7 @@ CREATE GLOBAL BINDING for SELECT * FROM t WHERE a < 100 AND b < 100 USING SELECT
 
 自動進化がクラスターに与える影響を軽減するには、次の構成を使用します。
 
--   各実行プランの最大実行時間を制限するには、 `tidb_evolve_plan_task_max_time`設定します。デフォルト値は`600s`です。実際の検証プロセスでは、最大実行時間も検証対象実行プランの2倍以内に制限されます。
+-   各実行プランの最大実行時間を制限するには、 `tidb_evolve_plan_task_max_time`を設定します。デフォルト値は`600s`です。実際の検証プロセスでは、最大実行時間も検証対象実行プランの2倍以内に制限されます。
 -   時間ウィンドウを制限するには、 `tidb_evolve_plan_task_start_time` (デフォルトでは`00:00 +0000` ) と`tidb_evolve_plan_task_end_time` (デフォルトでは`23:59 +0000` ) を設定します。
 
 ### 注記 {#notes}
@@ -810,7 +810,7 @@ CREATE GLOBAL BINDING for SELECT * FROM t WHERE a < 100 AND b < 100 USING SELECT
 
 クラスタのアップグレード中に、SQL Plan Management (SPM) によって互換性の問題が発生し、アップグレードが失敗する可能性があります。アップグレードを成功させるには、アップグレードの事前チェックに以下の項目を含める必要があります。
 
--   v5.2.0より前のバージョン（v4.0、v5.0、v5.1）から現在のバージョンにアップグレードする場合は、アップグレード前に`tidb_evolve_plan_baselines`無効になっていることを確認してください。この変数を無効にするには、以下の手順を実行してください。
+-   v5.2.0より前のバージョン（v4.0、v5.0、v5.1）から現在のバージョンにアップグレードする場合は、アップグレード前に`tidb_evolve_plan_baselines`が無効になっていることを確認してください。この変数を無効にするには、以下の手順を実行してください。
 
     ```sql
     -- Check whether `tidb_evolve_plan_baselines` is disabled in the earlier version.

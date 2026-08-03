@@ -547,7 +547,7 @@ curl -X 'GET' \
 
 ## データソースのリレーログ機能を開始する {#start-the-relay-log-feature-for-data-sources}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)参照してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)を参照してください。
 
 ### リクエストURI {#request-uri}
 
@@ -572,7 +572,7 @@ curl -X 'POST' \
 
 ## データソースのリレーログ機能を停止する {#stop-the-relay-log-feature-for-data-sources}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)参照してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)を参照してください。
 
 ### リクエストURI {#request-uri}
 
@@ -594,7 +594,7 @@ curl -X 'POST' \
 
 ## 不要になったリレーログファイルを消去する {#purge-relay-log-files-that-are-no-longer-required}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)参照してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)を参照してください。
 
 ### リクエストURI {#request-uri}
 
@@ -615,7 +615,7 @@ curl -X 'POST' \
 
 ## データソースとDMワーカー間のバインディングを変更する {#change-the-bindings-between-the-data-source-and-dm-workers}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)参照してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)を参照してください。
 
 ### リクエストURI {#request-uri}
 
@@ -1242,7 +1242,7 @@ curl -X 'PUT' \
 
 ## レプリケーションタスクを開始する {#start-a-replication-task}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは204です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)実行してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは204です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を実行してください。
 
 ### リクエストURI {#request-uri}
 
@@ -1258,7 +1258,7 @@ curl -X 'POST' \
 
 ## レプリケーションタスクを停止する {#stop-a-replication-task}
 
-このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)実行してください。
+このAPIは非同期インターフェースです。リクエストが成功した場合、返されるボディのステータスコードは200です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を実行してください。
 
 ### リクエストURI {#request-uri}
 

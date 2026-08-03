@@ -136,7 +136,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 > **Note:**
 >
-> 監査ログを有効にするだけでは監査ログは生成されません。また、ログに記録するイベントを指定するフィルターを構成する必要があります。詳細については、[監査ログフィルタルールの管理](#manage-audit-logging-filter-rules)参照してください。
+> 監査ログを有効にするだけでは監査ログは生成されません。また、ログに記録するイベントを指定するフィルターを構成する必要があります。詳細については、[監査ログフィルタルールの管理](#manage-audit-logging-filter-rules)を参照してください。
 
 <SimpleTab>
 <div label="Console">

@@ -161,7 +161,7 @@ QPSは24.4kから19.7kに低下しています。データベース時間の概�
 -   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかり、次に`general`ステートメントが続きます。
 -   SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
 -   SQL 実行時間の概要: `Get` `Prewrite`および`tso wait` `Cop`ほとんどの時間がかかります。
--   タイプ別 CPS: 3 種類のコマンド`StmtClose` `StmtPrepare` ) `StmtExecute`使用されます。
+-   タイプ別 CPS: 3 種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
 -   平均QPS = 19.7k (24.4kから19.7k)
 -   実行プラン キャッシュにヒットしません。
 

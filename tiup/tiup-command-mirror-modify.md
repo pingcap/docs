@@ -24,7 +24,7 @@ tiup mirror modify <component>[:version] [flags]
 
 -   コンポーネント情報の署名に使用されるコンポーネント所有者の秘密鍵を指定する（ `{component}.json` ）。
 -   データ型: `STRING`
--   コマンドでこのオプションが指定されていない場合、コンポーネント情報の署名にはデフォルトで`"${TIUP_HOME}/keys/private.json"`使用されます。
+-   コマンドでこのオプションが指定されていない場合、コンポーネント情報の署名にはデフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
 ### - ヤンク {#yank}
 
@@ -59,7 +59,7 @@ tiup mirror modify <component>[:version] [flags]
 
 -   コマンドが正常に実行された場合、出力はありません。
 -   コンポーネント所有者にターゲットコンポーネントを変更する権限がない場合:
-    -   ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`報告します。
-    -   ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`報告します。
+    -   ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    -   ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

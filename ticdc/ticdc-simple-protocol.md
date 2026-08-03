@@ -471,7 +471,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 | `type`        | string   | `BOOTSTRAP`のイベントタイプ。                                                          |
 | `commitTs`    | number  | `BOOTSTRAP`のうちの`commitTs` `0`です。これはTiCDCによって内部的に生成されるため、 `commitTs`は意味を持ちません。 |
 | `buildTs`     | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                    |
-| `tableSchema` | object  | テーブルのスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)参照してください。       |
+| `tableSchema` | object  | テーブルのスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。       |
 
 ## メッセージ生成と送信ルール {#message-generation-and-sending-rules}
 

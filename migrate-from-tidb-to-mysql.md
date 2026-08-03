@@ -87,7 +87,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
         tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o ./dumpling_output -r 200000 -F256MiB
         ```
 
-    2.  データのエクスポートが完了したら、次のコマンドを実行してメタデータを確認します。メタデータの`Pos`エクスポート スナップショットの TSO であり、BackupTS として記録できます。
+    2.  データのエクスポートが完了したら、次のコマンドを実行してメタデータを確認します。メタデータの`Pos`はエクスポート スナップショットの TSO であり、BackupTS として記録できます。
 
         ```shell
         cat dumpling_output/metadata

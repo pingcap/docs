@@ -309,7 +309,7 @@ TiDBバージョン：8.3.0
     -   `tot_col_size`テーブルの`mysql.stats_histograms`列が負の数になる可能性がある問題を修正しました [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
     -   `columnEvaluator`入力チャンク内の列参照を識別できず、SQL ステートメントの実行時に`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
     -   `STATS_EXTENDED`が予約語になる問題を修正 [#39573](https://github.com/pingcap/tidb/issues/39573) @[wddevries](https://github.com/wddevries)
-    -   `tidb_low_resolution`が有効になっている場合に`select for update`実行できてしまう問題を修正しました [#54684](https://github.com/pingcap/tidb/issues/54684) @[cfzjywxk](https://github.com/cfzjywxk)
+    -   `tidb_low_resolution`が有効になっている場合に`select for update`が実行できてしまう問題を修正しました [#54684](https://github.com/pingcap/tidb/issues/54684) @[cfzjywxk](https://github.com/cfzjywxk)
     -   `tidb_redact_log`が有効になっている場合に、内部SQLクエリがスロークエリログに表示されない問題を修正しました [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
     -   トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正 [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     -   `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [#48756](https://github.com/pingcap/tidb/issues/48756) @[xhebox](https://github.com/xhebox)

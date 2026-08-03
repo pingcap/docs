@@ -18,7 +18,7 @@ summary: TiUPは、 tiup completionコマンドを使用して、bash`および`
 tiup completion <shell>
 ```
 
-`<shell>`は使用するシェルの種類を設定するために使用されます。現在、 `bash`と`zsh`サポートされています。
+`<shell>`は使用するシェルの種類を設定するために使用されます。現在、 `bash`と`zsh`がサポートされています。
 
 ## 使用法 {#usage}
 

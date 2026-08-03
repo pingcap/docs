@@ -26,7 +26,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 以下の手順に従って、このコマンドに必要なバイナリ パッケージを事前にパックする必要があります。
 
--   置換するコンポーネントの名前`${component}` (dm-master、dm-worker ...)、コンポーネントの`${version}` (v2.0.0、v2.0.1 ...)、およびコンポーネントが実行されるオペレーティング システム`${os}`とプラットフォーム`${arch}`決定します。
+-   置換するコンポーネントの名前`${component}` (dm-master、dm-worker ...)、コンポーネントの`${version}` (v2.0.0、v2.0.1 ...)、およびコンポーネントが実行されるオペレーティング システム`${os}`とプラットフォーム`${arch}`を決定します。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して現在のコンポーネントパッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
 -   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して元のバイナリ パッケージを解凍します。
@@ -51,7 +51,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 
 ### -R, --role {#r-role}
 
@@ -61,7 +61,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
 
 ### &#x20;--offline {#offline}
 
@@ -75,7 +75,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ## 例 {#example}
 
-以下の例は、 TiUPを使用してデプロイされた`v5.3.0`クラスターに`v5.3.0-hotfix`適用する方法を示しています。他の方法でクラスターをデプロイする場合は、操作が異なる場合があります。
+以下の例は、 TiUPを使用してデプロイされた`v5.3.0`クラスターに`v5.3.0-hotfix`を適用する方法を示しています。他の方法でクラスターをデプロイする場合は、操作が異なる場合があります。
 
 > **Note:**
 >
@@ -83,7 +83,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### 準備 {#preparations}
 
-修正プログラムを適用する前に、修正プログラム パッケージ`dm-linux-amd64.tar.gz`準備し、現在の DM ソフトウェア バージョンを確認します。
+修正プログラムを適用する前に、修正プログラム パッケージ`dm-linux-amd64.tar.gz`を準備し、現在の DM ソフトウェア バージョンを確認します。
 
 ```shell
 /home/tidb/dm/deploy/dm-master-8261/bin/dm-master/dm-master -V
@@ -123,7 +123,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 3.  修正プログラムを適用します。
 
-    クラスターのステータスを照会します。以下は、クラスター`dm-test`例にしています。
+    クラスターのステータスを照会します。以下は、クラスター`dm-test`を例にしています。
 
     ```shell
     tiup dm display dm-test

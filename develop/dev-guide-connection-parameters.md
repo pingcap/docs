@@ -144,11 +144,11 @@ JDBC API の使用方法については、 [JDBC公式チュートリアル](htt
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP（オンライン・トランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行プランを繰り返し解析および生成するオーバーヘッドを回避できます。
+OLTP（オンライン・トランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行プランを繰り返し解析および生成するオーバーヘッドを回避できます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
-さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、ステートメントはテキスト ファイルとしてサーバーに送信されます。したがって、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメータで`useServerPrepStmts = true`設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)参照してください。
+さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、ステートメントはテキスト ファイルとしてサーバーに送信されます。したがって、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメータで`useServerPrepStmts = true`を設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
 
 #### バッチAPIを使用する {#use-batch-api}
 
@@ -158,7 +158,7 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 >
 > デフォルトのMySQL Connector/Jの実装では、 `addBatch()`でバッチに追加されたSQL文の送信時間は`executeBatch()`呼び出されるまで遅延されますが、実際のネットワーク転送中は文は1つずつ送信されます。そのため、この方法は通常、通信オーバーヘッドを削減しません。
 >
-> バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)参照してください。
+> バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`を設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
 #### <code>StreamingResult</code>を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
 

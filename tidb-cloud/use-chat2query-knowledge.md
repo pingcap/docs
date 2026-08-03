@@ -26,7 +26,7 @@ v3 以降、Chat2Query API を使用すると、Chat2Query データ アプリ�
 >
 > Chat2Queryが使用する知識は、**データベースのディメンションに基づいて構造化されて**います。複数のChat2Queryデータアプリを同じデータベースに接続できますが、各Chat2Queryデータアプリは、リンクされている特定のデータベースの知識のみを使用できます。
 
-Chat2Queryデータアプリでは、エンドポイント`/v3/knowledgeBases`呼び出すことで、特定のデータベースのナレッジベースを作成できます。作成後は、将来のナレッジ管理のために`knowledge_base_id`付与されます。
+Chat2Queryデータアプリでは、エンドポイント`/v3/knowledgeBases`を呼び出すことで、特定のデータベースのナレッジベースを作成できます。作成後は、将来のナレッジ管理のために`knowledge_base_id`が付与されます。
 
 以下は、このエンドポイントを呼び出すための一般的なコード例です。
 
@@ -163,7 +163,7 @@ Few-Shot の例を使用すると、次のようなさまざまなシナリオ�
 
 ### 数ショットの例の知識を追加する {#add-a-few-shot-example-type-of-knowledge}
 
-たとえば、Chat2Query で特定の構造のテーブル内の行数の SQL ステートメントを生成する場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して、数回のサンプル タイプの知識を追加できます。
+たとえば、Chat2Query で特定の構造のテーブル内の行数の SQL ステートメントを生成する場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`を呼び出して、数回のサンプル タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -178,11 +178,11 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-上記のコード例では、 `"type": "few-shot"`少数ショットの例の知識タイプを表します。
+上記のコード例では、 `"type": "few-shot"`は少数ショットの例の知識タイプを表します。
 
 ### タームシートの説明タイプの知識を追加する {#add-a-term-sheet-explanation-type-of-knowledge}
 
-たとえば、提供された説明を使用して Chat2Query に用語`OSS`の意味を理解してもらいたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して用語シートの説明タイプの知識を追加できます。
+たとえば、提供された説明を使用して Chat2Query に用語`OSS`の意味を理解してもらいたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`を呼び出して用語シートの説明タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -197,11 +197,11 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-上記のコード例では、 `"type": "term-sheet"`用語シートの説明の知識タイプを表します。
+上記のコード例では、 `"type": "term-sheet"`は用語シートの説明の知識タイプを表します。
 
 ### 指示タイプの知識を追加する {#add-an-instruction-type-of-knowledge}
 
-たとえば、連続成長率の計算に関する質問を処理するときに、Chat2Query が SQL クエリで`OVER`句を含む`LAG`関数を一貫して使用するようにしたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`呼び出して、指示タイプの知識を追加できます。
+たとえば、連続成長率の計算に関する質問を処理するときに、Chat2Query が SQL クエリで`OVER`句を含む`LAG`関数を一貫して使用するようにしたい場合は、次のように`/v3/knowledgeBases/{knowledge_base_id}/data`を呼び出して、指示タイプの知識を追加できます。
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v3/knowledgeBases/<knowledge_base_id>/data'\
@@ -215,4 +215,4 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }'
 ```
 
-上記のコード例では、 `"type": "instruction"`命令の知識タイプを表します。
+上記のコード例では、 `"type": "instruction"`は命令の知識タイプを表します。

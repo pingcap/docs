@@ -20,7 +20,7 @@ TiDB のロールベースアクセス制御 (RBAC) システムの実装は、M
 
 ### ロールを作成する {#create-a-role}
 
-たとえば、次のステートメントを使用して、ロール`app_developer` 、 `app_read` 、および`app_write`作成できます。
+たとえば、次のステートメントを使用して、ロール`app_developer` 、 `app_read` 、および`app_write`を作成できます。
 
 ```sql
 CREATE ROLE 'app_developer', 'app_read', 'app_write';
@@ -298,7 +298,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 
 ### 役割を削除する {#delete-a-role}
 
-次のステートメントを使用して、ロール`app_read`と`app_write`削除できます。
+次のステートメントを使用して、ロール`app_read`と`app_write`を削除できます。
 
 ```sql
 DROP ROLE 'app_read', 'app_write';

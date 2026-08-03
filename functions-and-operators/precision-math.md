@@ -119,7 +119,7 @@ INSERT INTO t SET i = 1/0;
     1 row in set (0.00 sec)
     ```
 
-DECIMAL または整数列に挿入する場合、丸めには[ゼロから半分を丸める](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero)使用されます。
+DECIMAL または整数列に挿入する場合、丸めには[ゼロから半分を丸める](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero)が使用されます。
 
 ```sql
 TiDB > CREATE TABLE t (d DECIMAL(10,0));

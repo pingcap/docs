@@ -15,7 +15,7 @@ tiup bench ycsb   # Benchmark a database using YCSB
 tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
-`tpcc` 、 `tpch` 、 `ch` 、 `rawsql`以下の共通コマンドフラグを共有します。ただし、 `ycsb`主に`.properties`ファイルによって設定され、その[使用ガイド](https://github.com/pingcap/go-ycsb#usage)に記述されています。
+`tpcc` 、 `tpch` 、 `ch` 、 `rawsql`は以下の共通コマンドフラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルによって設定され、その[使用ガイド](https://github.com/pingcap/go-ycsb#usage)に記述されています。
 
       -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
           --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections

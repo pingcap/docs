@@ -73,7 +73,7 @@ TiDBのグローバルソート機能は、データインポートとDDL（デ�
 
 > **Note:**
 >
-> [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)については、 [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions)オプションを使用してクラウドストレージのパスを指定することもできます。 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)と`CLOUD_STORAGE_URI`両方に有効なクラウドストレージのパスが設定されている場合、 `CLOUD_STORAGE_URI`の設定が[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)に有効になります。
+> [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)については、 [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions)オプションを使用してクラウドストレージのパスを指定することもできます。 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)と`CLOUD_STORAGE_URI`の両方に有効なクラウドストレージのパスが設定されている場合、 `CLOUD_STORAGE_URI`の設定が[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)に有効になります。
 
 ## 実装原理 {#implementation-principles}
 

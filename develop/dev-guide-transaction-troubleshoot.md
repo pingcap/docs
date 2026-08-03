@@ -66,11 +66,11 @@ UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 
 ### 解決策3:楽観的トランザクションを使用する {#solution-3-use-optimistic-transactions}
 
-楽観的トランザクションモデルではデッドロックは発生しません。ただし、アプリケーションでは、障害発生時に備えて楽観的トランザクションの再試行ロジックを追加する必要があります。詳細は[アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)参照してください。
+楽観的トランザクションモデルではデッドロックは発生しません。ただし、アプリケーションでは、障害発生時に備えて楽観的トランザクションの再試行ロジックを追加する必要があります。詳細は[アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
 ### 解決策4: 再試行 {#solution-4-retry}
 
-エラーメッセージに示されているように、アプリケーションに再試行ロジックを追加してください。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)参照してください。
+エラーメッセージに示されているように、アプリケーションに再試行ロジックを追加してください。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
 ## アプリケーションの再試行とエラー処理 {#application-retry-and-error-handling}
 

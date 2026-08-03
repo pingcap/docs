@@ -30,11 +30,11 @@ EXPLAIN SELECT a, b, c FROM t1 WHERE a < 1;
     |   └─TableFullScan_9     | 12288.00 | mpp[tiflash] | table:t1      | pushed down filter:lt(test.t1.a, 1), keep order:false |
     +-------------------------+----------+--------------+---------------+-------------------------------------------------------+
 
-この例では、フィルタ条件`a < 1` TableScan演算子にプッシュダウンされます。TiFlashはまず列`a`からすべてのデータを読み取り、次に条件`a < 1`を満たす行をフィルタリングします。次に、 TiFlashはフィルタリングされた行から列`b`と`c`読み取ります。
+この例では、フィルタ条件`a < 1`は TableScan演算子にプッシュダウンされます。TiFlashはまず列`a`からすべてのデータを読み取り、次に条件`a < 1`を満たす行をフィルタリングします。次に、 TiFlashはフィルタリングされた行から列`b`と`c`を読み取ります。
 
 ## TiFlash の遅延マテリアライゼーションを有効または無効にする {#enable-or-disable-tiflash-late-materialization}
 
-デフォルトでは、システム変数`tidb_opt_enable_late_materialization`セッションレベルとグローバルレベルの両方で`ON`設定されており、これはTiFlash の遅延マテリアライゼーション機能が有効になっていることを意味します。対応する変数情報を表示するには、次のステートメントを使用します。
+デフォルトでは、システム変数`tidb_opt_enable_late_materialization`は、セッションレベルとグローバルレベルの両方で`ON`に設定されており、これはTiFlash の遅延マテリアライゼーション機能が有効になっていることを意味します。対応する変数情報を表示するには、次のステートメントを使用します。
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
@@ -86,7 +86,7 @@ SET GLOBAL tidb_opt_enable_late_materialization=ON;
 
 フィルター条件が TableScan オペレーターにプッシュダウンされると、TableScan オペレーターの実行プロセスには主に次の手順が含まれます。
 
-1.  3 つの列`<handle, del_mark, version>`読み取り、マルチバージョン同時実行制御 (MVCC) フィルタリングを実行し、MVCC ビットマップを生成します。
+1.  3 つの列`<handle, del_mark, version>`を読み取り、マルチバージョン同時実行制御 (MVCC) フィルタリングを実行し、MVCC ビットマップを生成します。
 2.  フィルター条件に関連する列を読み取り、条件を満たす行をフィルターして、フィルター ビットマップを生成します。
 3.  MVCC ビットマップとフィルター ビットマップの間で`AND`演算を実行して、最終ビットマップを生成します。
 4.  最終ビットマップに従って、残りの列の対応する行を読み取ります。

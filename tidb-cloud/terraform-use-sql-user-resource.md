@@ -124,7 +124,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
 次のように、Terraform を使用して SQL ユーザーのパスワードまたはユーザー ロールを変更できます。
 
-1.  [SQLユーザーを作成する](#create-a-sql-user)実行するときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
+1.  [SQLユーザーを作成する](#create-a-sql-user)ときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
 
     例えば：
 

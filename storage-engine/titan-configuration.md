@@ -67,7 +67,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
 > **Warning:**
 >
-> Titanが無効になっている場合、RocksDBはTitanに移動されたデータを読み取ることができません。Titanが既に有効になっているTiKVインスタンスでTitanを誤って無効にした場合（誤って`rocksdb.titan.enabled`を`false`に設定した場合）、TiKVは起動に失敗し、TiKVログに`You have disabled titan when its data directory is not empty`エラーが表示されます。Titanを正しく無効にするには、 [Titanを無効にする](#disable-titan)参照してください。
+> Titanが無効になっている場合、RocksDBはTitanに移動されたデータを読み取ることができません。Titanが既に有効になっているTiKVインスタンスでTitanを誤って無効にした場合（誤って`rocksdb.titan.enabled`を`false`に設定した場合）、TiKVは起動に失敗し、TiKVログに`You have disabled titan when its data directory is not empty`エラーが表示されます。Titanを正しく無効にするには、 [Titanを無効にする](#disable-titan)を参照してください。
 
 Titan を有効にした後、RocksDB に保存されている既存のデータは、すぐに Titan エンジンに移動されるわけではありません。新しいデータが TiKV に書き込まれ、RocksDB が圧縮を実行すると、**値は徐々にキーから分離され、 Titan に書き込まれます**。同様に、 BRスナップショット/ログを通じて復元されたデータ、スケーリング中に変換されたデータ、またはTiDB Lightning物理インポート モードによってインポートされたデータは、Titan に直接書き込まれません。圧縮が進むにつれて、処理された SST ファイル内のデフォルト値 ( `32KB` ) の[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を超える大きな値が Titan に分離されます。TiKV**の詳細 &gt; Titan kv &gt; blob ファイル サイズ**パネルを観察してデータ サイズを見積もることで、Titan に保存されているファイルのサイズを監視できます。
 

@@ -66,7 +66,7 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
 
 > **Note:**
 >
-> TiKVノードの選出タイムアウト値を`raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下します。ただし、一部のTiKVノードがオフラインになり、残りのアクティブなTiKVノードのRaftログが遅延しているような災害シナリオでは、このTiKVノード上の選出タイムアウト値が大きいリージョンのみがリーダーになることができます。このTiKVノード上のリージョンは、選出を開始する前に少なくとも`raftstore.raft-min-election-timeout-ticks`で設定された期間待機する必要があるため、このようなシナリオではクラスターの可用性への影響を防ぐため、これらの値を過度に大きく設定しないことをお勧めします。
+> TiKVノードの選出タイムアウト値を`raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`で大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下します。ただし、一部のTiKVノードがオフラインになり、残りのアクティブなTiKVノードのRaftログが遅延しているような災害シナリオでは、このTiKVノード上の選出タイムアウト値が大きいリージョンのみがリーダーになることができます。このTiKVノード上のリージョンは、選出を開始する前に少なくとも`raftstore.raft-min-election-timeout-ticks`で設定された期間待機する必要があるため、このようなシナリオではクラスターの可用性への影響を防ぐため、これらの値を過度に大きく設定しないことをお勧めします。
 
 #### PDパラメータ {#pd-parameters}
 

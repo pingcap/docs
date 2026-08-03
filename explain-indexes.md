@@ -109,7 +109,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey > 100;
 3 rows in set (0.00 sec)
 ```
 
-`IndexLookup`演算子は、インデックス付き列の`LIMIT`効率的に最適化するためにも使用できます。
+`IndexLookup`演算子は、インデックス付き列の`LIMIT`を効率的に最適化するためにも使用できます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
@@ -159,7 +159,7 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 3 rows in set (0.00 sec)
 ```
 
-`id`内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
+`id`は内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
 
 ## Point_Get と Batch_Point_Get {#point_get-and-batch_point_get}
 

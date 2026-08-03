@@ -130,7 +130,7 @@ select * from t as of timestamp '2021-05-26 16:45:26';
 
 > **Note:**
 >
-> `SELECT`ステートメントで複数のテーブルを読み取る場合、TIMESTAMP EXPRESSIONの形式が一貫していることを確認する必要があります。例えば、 `select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;`ようになります。さらに、 `SELECT`ステートメントで関連するテーブルの`AS OF`情報を指定する必要があります。そうしないと、 `SELECT`ステートメントはデフォルトで最新のデータを読み取ります。
+> `SELECT`ステートメントで複数のテーブルを読み取る場合、TIMESTAMP EXPRESSIONの形式が一貫していることを確認する必要があります。例えば、 `select * from t as of timestamp NOW() - INTERVAL 2 SECOND, c as of timestamp NOW() - INTERVAL 2 SECOND;`のようになります。さらに、 `SELECT`ステートメントで関連するテーブルの`AS OF`情報を指定する必要があります。そうしないと、 `SELECT`ステートメントはデフォルトで最新のデータを読み取ります。
 
 ### <code>START TRANSACTION READ ONLY AS OF TIMESTAMP</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-start-transaction-read-only-as-of-timestamp-code-statement}
 

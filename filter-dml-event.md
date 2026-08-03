@@ -16,7 +16,7 @@ summary: SQL 式を使用して DML イベントをフィルター処理する�
 
 この問題に対処するため、DM v2.0.5以降では、増分データレプリケーションにおいて`binlog value filter`を使用したデータのフィルタリングをサポートしています。DM対応の`ROW`形式のbinlogでは、binlogイベントはすべての列の値を保持しており、これらの値に基づいてSQL式を設定できます。式で行の変更が`TRUE`と計算された場合、DMはこの行の変更を下流に複製しません。
 
-[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク設定ファイルで`binlog value filter`設定する必要があります。詳細については、以下の設定例を参照してください。詳細なタスク設定と説明については、 [DM 高度なタスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
+[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク設定ファイルで`binlog value filter`を設定する必要があります。詳細については、以下の設定例を参照してください。詳細なタスク設定と説明については、 [DM 高度なタスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 ```yaml
 name: test
@@ -65,7 +65,7 @@ MySQL [test]> select * from tbl;
 
 > **Note:**
 >
-> -   `update-old-value-expr`と`update-new-value-expr`一緒に設定できます。
+> -   `update-old-value-expr`と`update-new-value-expr`を一緒に設定できます。
 > -   `update-old-value-expr`と`update-new-value-expr`一緒に設定されている場合、「更新 + 古い値」が`update-old-value-expr`一致し**、** 「更新 + 新しい値」が`update-new-value-expr`一致する行がフィルタリングされます。
 > -   `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式によって**行の変更全体**をフィルタリングするかどうかが決定されます。つまり、古い値の削除と新しい値の挿入が全体としてフィルタリングされます。
 

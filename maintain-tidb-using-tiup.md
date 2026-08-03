@@ -31,7 +31,7 @@ tiup cluster start ${cluster-name}
 
 > **Note:**
 >
-> `${cluster-name}`クラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
+> `${cluster-name}`をクラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
 コマンドに`-R`または`-N`パラメータを追加することで、一部のコンポーネントのみを起動できます。例：
 
@@ -41,7 +41,7 @@ tiup cluster start ${cluster-name}
     tiup cluster start ${cluster-name} -R pd
     ```
 
--   このコマンドは、ホスト`1.2.3.4`と`1.2.3.5` PD コンポーネントのみを起動します。
+-   このコマンドは、ホスト`1.2.3.4`と`1.2.3.5`のPDコンポーネントのみを起動します。
 
     ```bash
     tiup cluster start ${cluster-name} -N 1.2.3.4:2379,1.2.3.5:2379
@@ -318,7 +318,7 @@ grafana_servers:
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `grafana_servers`の下で、 `use_vm_as_datasource`コメントアウトします。
+2.  `grafana_servers`の下で、 `use_vm_as_datasource`をコメントアウトします。
 
     ```yaml
     grafana_servers:
@@ -347,7 +347,7 @@ grafana_servers:
     tiup cluster edit-config ${cluster-name}
     ```
 
-2.  `monitoring_servers`の下で、 `enable_prom_agent_mode`を`true`に設定し、 `prom_remote_write_to_vm`と`use_vm_as_datasource`正しく設定されていることを確認します。
+2.  `monitoring_servers`の下で、 `enable_prom_agent_mode`を`true`に設定し、 `prom_remote_write_to_vm`と`use_vm_as_datasource`が正しく設定されていることを確認します。
 
     ```yaml
     monitoring_servers:

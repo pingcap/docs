@@ -45,7 +45,7 @@ tiup list tidb
 tiup playground ${version}
 ```
 
-`${version}`対象のバージョン番号に置き換えてください。
+`${version}`を対象のバージョン番号に置き換えてください。
 
 ### ナイトリーバージョンのTiDBクラスタを起動します {#start-a-tidb-cluster-of-the-nightly-version}
 

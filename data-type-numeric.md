@@ -21,7 +21,7 @@ TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `B
 
 > **Warning:**
 >
-> バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`なります）。整数型の表示幅の指定は推奨されません。
+> バージョン8.5.0以降、整数の表示幅は非推奨となりました（デフォルトでは[`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)が`true`になります）。整数型の表示幅の指定は推奨されません。
 
 </CustomContent>
 
@@ -136,7 +136,7 @@ TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型を�
 
 `FLOAT`型は単精度浮動小数点数を保存します。許容値は-3.402823466E+38～-1.175494351E-38、0、1.175494351E-38～3.402823466E+38です。これらはIEEE標準に基づく理論上の制限です。実際の範囲は、ハードウェアやオペレーティングシステムによって若干狭くなる場合があります。
 
-`FLOAT(p)`必要なビット精度を表すために使用できます。TiDB はこの値を使用して、結果のデータ型に`FLOAT`を使用するか`DOUBLE`を使用するかを決定します。p が 0 から 24 の場合、データ型は M 値または D 値を持たない FLOAT になります。p が 25 から 53 の場合、データ型は M 値または D 値を持たない`DOUBLE`になります。結果の列の範囲は、単精度`FLOAT`または倍精度`DOUBLE`データ型と同じです。
+`FLOAT(p)`は必要なビット精度を表すために使用できます。TiDB はこの値を使用して、結果のデータ型に`FLOAT`を使用するか`DOUBLE`を使用するかを決定します。p が 0 から 24 の場合、データ型は M 値または D 値を持たない FLOAT になります。p が 25 から 53 の場合、データ型は M 値または D 値を持たない`DOUBLE`になります。結果の列の範囲は、単精度`FLOAT`または倍精度`DOUBLE`データ型と同じです。
 
 ```sql
 FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
@@ -147,7 +147,7 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 >
 > MySQLと同様に、 `FLOAT`データ型は近似値を保存します。通貨などの値の場合は、代わりに`DECIMAL`データ型を使用することをお勧めします。
 >
-> TiDBでは、 `FLOAT`データ型のデフォルトの精度は8桁ですが、MySQLでは6桁です。例えば、TiDBとMySQLの両方で`FLOAT`型の列に`123456789`と`1.23456789`挿入した場合、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`返されますが、TiDBでは`123456790`と`1.2345679`返されます。
+> TiDBでは、 `FLOAT`データ型のデフォルトの精度は8桁ですが、MySQLでは6桁です。例えば、TiDBとMySQLの両方で`FLOAT`型の列に`123456789`と`1.23456789`を挿入した場合、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`が返されますが、TiDBでは`123456790`と`1.2345679`が返されます。
 
 ### <code>DOUBLE</code>型 {#double-type}
 

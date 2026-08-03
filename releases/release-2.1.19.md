@@ -39,7 +39,7 @@ TiDB Ansible バージョン: 2.1.19
         -   `Txn_retry`
     -   `UPDATE`文に含まれるサブクエリが誤って変換される問題を修正しました。`WHERE`句にサブクエリが含まれている場合に`UPDATE`実行エラーが発生する問題を修正しました。 [＃13120](https://github.com/pingcap/tidb/pull/13120)
     -   パーティションテーブルで`ADMIN CHECK TABLE`実行をサポート [＃13143](https://github.com/pingcap/tidb/pull/13143)
-    -   列属性として`ON UPDATE CURRENT_TIMESTAMP`使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[＃12462](https://github.com/pingcap/tidb/pull/12462)
+    -   列属性として`ON UPDATE CURRENT_TIMESTAMP`を使用し、浮動小数点精度を指定した場合、 `SHOW CREATE TABLE`などのステートメントの精度が不完全になる問題を修正しました[＃12462](https://github.com/pingcap/tidb/pull/12462)
     -   列削除、修正、または変更するときに外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`文の実行時にpanicが発生する問題を修正しました。 [＃14162](https://github.com/pingcap/tidb/pull/14162)
     -   TiDB で`Streaming`有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [＃13255](https://github.com/pingcap/tidb/pull/13255)
     -   夏時間による`Invalid time format`エラーを修正 [＃13624](https://github.com/pingcap/tidb/pull/13624)

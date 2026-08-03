@@ -67,7 +67,7 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 
 `COMPRESS(expr)`関数は入力データ`expr`の圧縮バージョンを返します。
 
--   引数が`NULL`の場合、関数は`NULL`返します。
+-   引数が`NULL`の場合、関数は`NULL`を返します。
 -   引数が空の文字列の場合、関数は長さ 0 の値を返します。
 
 長さがゼロ以外の引数の場合、関数は次の構造を持つバイナリ文字列を返します。
@@ -327,7 +327,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
         +--------------------------------------+
         1 row in set (0.00 sec)
 
--   長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
+-   長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`が返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');

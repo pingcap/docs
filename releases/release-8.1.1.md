@@ -23,7 +23,7 @@ TiDB バージョン: 8.1.1
 
 ## オフラインパッケージの変更 {#offline-package-changes}
 
-v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-package.md)から`arbiter`削除されます。
+v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-package.md)から`arbiter`が削除されます。
 
 ## 改善点 {#improvements}
 

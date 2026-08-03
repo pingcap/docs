@@ -87,7 +87,7 @@ LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>BINARY</code>型 {#binary-type}
 
-`BINARY`型は[`CHAR`型](#char-type)と似ています。違いは、 `BINARY`バイナリバイト文字列を格納することです。
+`BINARY`型は[`CHAR`型](#char-type)と似ています。違いは、 `BINARY`はバイナリバイト文字列を格納することです。
 
 ```sql
 BINARY(M)
@@ -95,7 +95,7 @@ BINARY(M)
 
 ### <code>VARBINARY</code>型 {#varbinary-type}
 
-`VARBINARY`型は[`VARCHAR`型](#varchar-type)と似ています。違いは、 `VARBINARY`バイナリバイト文字列を格納するという点です。
+`VARBINARY`型は[`VARCHAR`型](#varchar-type)と似ています。違いは、 `VARBINARY`はバイナリバイト文字列を格納するという点です。
 
 ```sql
 VARBINARY(M)
@@ -176,7 +176,7 @@ ENUM('apple', 'orange', 'pear')
 
 ### <code>SET</code>型 {#set-type}
 
-`SET` 、0 個以上の値を持つことができる文字列オブジェクトです。各値は、テーブルの作成時に指定された許可された値のリストから選択する必要があります。構文は次のとおりです。
+`SET`は、0 個以上の値を持つことができる文字列オブジェクトです。各値は、テーブルの作成時に指定された許可された値のリストから選択する必要があります。構文は次のとおりです。
 
 ```sql
 SET('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]

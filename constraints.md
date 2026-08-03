@@ -39,7 +39,7 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 
     Query OK, 1 row affected (0.03 sec)
 
--   最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
+-   最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`を割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
 -   2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
 -   3番目の`INSERT`文は、 `last_login`列が明示的に`NOT NULL`として定義されていないため成功します。NULL値はデフォルトで許可されています。
 
@@ -49,7 +49,7 @@ INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 >
 > `CHECK`制約機能はデフォルトで無効になっています。有効にするには、 [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720)変数を`ON`に設定する必要があります。
 
-制約`CHECK`は、テーブル内の列の値を、指定された条件を満たすように制限します。制約`CHECK`テーブルに追加されると、TiDBはテーブルへのデータの挿入または更新時に制約が満たされているかどうかを確認します。制約が満たされていない場合は、エラーが返されます。
+制約`CHECK`は、テーブル内の列の値を、指定された条件を満たすように制限します。制約`CHECK`がテーブルに追加されると、TiDBはテーブルへのデータの挿入または更新時に制約が満たされているかどうかを確認します。制約が満たされていない場合は、エラーが返されます。
 
 TiDB の`CHECK`制約の構文は MySQL と同じです。
 
@@ -80,7 +80,7 @@ TiDB では、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)�
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
     ```
 
-制約`CHECK`追加または有効化する際、TiDBはテーブル内の既存データをチェックします。制約に違反するデータが存在する場合、制約`CHECK`追加する操作は失敗し、エラーが返されます。
+制約`CHECK`を追加または有効化する際、TiDBはテーブル内の既存データをチェックします。制約に違反するデータが存在する場合、制約`CHECK`を追加する操作は失敗し、エラーが返されます。
 
 `CHECK`制約を追加する場合、制約名を指定するか、未指定のままにすることができます。制約名を指定しない場合は、TiDB が`<tableName>_chk_<1, 2, 3...>`形式で自動的に制約名を生成します。
 
@@ -231,7 +231,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 
 悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
 
--   遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
+-   遅延された一意制約チェックのため、悲観的トランザクションをコミットすると、TiDB は一意制約を満たさない結果を読み取り、エラー`Duplicate entry`を返す場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
     次の例では、ロックを`bill`にスキップするため、TiDB は一意性制約を満たさない結果を取得する可能性があります。
 
@@ -257,7 +257,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     +----+----------+
     ```
 
-    このとき、トランザクションがコミットされると、TiDB は一意制約チェックを実行し、エラー`Duplicate entry`報告して、トランザクションをロールバックします。
+    このとき、トランザクションがコミットされると、TiDB は一意制約チェックを実行し、エラー`Duplicate entry`を報告して、トランザクションをロールバックします。
 
     ```sql
     COMMIT;
@@ -282,7 +282,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill'); -- Query OK, 3 rows affected
     ```
 
-    同時に、別のセッションが同じテーブルに`bill`挿入します。
+    同時に、別のセッションが同じテーブルに`bill`を挿入します。
 
     ```sql
     INSERT INTO users (username) VALUES ('bill'); -- Query OK, 1 row affected
@@ -347,9 +347,9 @@ CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 
     Query OK, 0 rows affected (0.10 sec)
 
--   列`a`主キーとして定義されており、NULL 値が許可されないため、テーブル`t2`を作成できませんでした。
+-   列`a`が主キーとして定義されており、NULL 値が許可されないため、テーブル`t2`を作成できませんでした。
 -   テーブルには主キーを 1 つしか持てないため、テーブル`t3`を作成できませんでした。
--   主キーは 1 つしか存在できませんが、TiDB では複数の列を複合主キーとして定義することがサポートされているため、テーブル`t4`正常に作成されました。
+-   主キーは 1 つしか存在できませんが、TiDB では複数の列を複合主キーとして定義することがサポートされているため、テーブル`t4`が正常に作成されました。
 
 上記のルールに加えて、TiDBは現在、 `NONCLUSTERED`型の主キーの追加と削除のみをサポートしています。例えば：
 

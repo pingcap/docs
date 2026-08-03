@@ -34,6 +34,6 @@ tiup uninstall <component1>:<version> [component2...N] [flags]
 ## 出力 {#outputs}
 
 -   コマンドがエラーなしで終了した場合は`Uninstalled component "%s" successfully!`が出力されます。
--   `<version>`も`--all`指定されていない場合は、 `Use "tiup uninstall tidbx --all" if you want to remove all versions.`エラーが報告されます。
+-   `<version>`も`--all`も指定されていない場合は、 `Use "tiup uninstall tidbx --all" if you want to remove all versions.`エラーが報告されます。
 
 [&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)
