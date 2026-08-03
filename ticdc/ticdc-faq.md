@@ -243,7 +243,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 `protocol` `avro`または`canal-json`に設定すると、行の変更ごとにメッセージが送信されます。1つのKafkaメッセージには1つの行の変更のみが含まれ、通常はKafkaの制限を超えることはありません。したがって、1つのメッセージのサイズを制限する必要はありません。1つのKafkaメッセージのサイズがKafkaの制限を超える場合は、 [TiCDC から Kafka へのレイテンシーがどんどん高くなるのはなぜですか?](/ticdc/ticdc-faq.md#why-does-the-latency-from-ticdc-to-kafka-become-higher-and-higher)を参照してください。
 
-`protocol` `open-protocol`に設定すると、メッセージはバッチで送信されます。そのため、1 つの Kafka メッセージのサイズが過度に大きくなる可能性があります。このような状況を回避するには、 `max-message-bytes`番目のパラメータを設定して、Kafka ブローカーに送信されるデータの最大サイズを制御できます（オプション、デフォルトは`10MB` ）。また、 `max-batch-size`パラメータを設定して（オプション、デフォルトは`16` ）、各 Kafka メッセージに含まれる変更レコードの最大数を指定することもできます。
+`protocol` `open-protocol`に設定すると、メッセージはバッチで送信されます。そのため、1 つの Kafka メッセージのサイズが過度に大きくなる可能性があります。このような状況を回避するには、 `max-message-bytes`パラメータを設定して、Kafka ブローカーに送信されるデータの最大サイズを制御できます（オプション、デフォルトは`10MB` ）。また、 `max-batch-size`パラメータを設定して（オプション、デフォルトは`16` ）、各 Kafka メッセージに含まれる変更レコードの最大数を指定することもできます。
 
 ## トランザクションで行を複数回変更した場合、TiCDC は複数の行変更イベントを出力しますか? {#if-i-modify-a-row-multiple-times-in-a-transaction-will-ticdc-output-multiple-row-change-events}
 

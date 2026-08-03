@@ -53,7 +53,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ### キャッシュされたテーブルを検証する {#verify-a-cached-table}
 
-キャッシュされたテーブルを検証するには、 `SHOW CREATE TABLE`ステートメントを使用します。テーブルがキャッシュされている場合、返される結果には`CACHED ON`番目の属性が含まれます。
+キャッシュされたテーブルを検証するには、 `SHOW CREATE TABLE`ステートメントを使用します。テーブルがキャッシュされている場合、返される結果には`CACHED ON`属性が含まれます。
 
 ```sql
 SHOW CREATE TABLE users;

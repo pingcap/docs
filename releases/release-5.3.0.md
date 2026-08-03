@@ -410,7 +410,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     -   SQL 文に非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正しました。
     -   Exchangeオペレータの`Block schema mismatch`エラーを修正
     -   Decimal型の比較時に発生する可能性のある`Can't compare`エラーを修正
-    -   `left/substring`番目の関数の`3rd arguments of function substringUTF8 must be constants`エラーを修正する
+    -   `left/substring`関数の`3rd arguments of function substringUTF8 must be constants`エラーを修正する
 
 -   ツール
 

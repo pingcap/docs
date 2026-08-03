@@ -95,7 +95,7 @@ summary: TiFlash の設定方法を学びます。
 -   [`storage.main.dir`](#dir)内の各ディレクトリの最大ストレージ容量。例: `[10737418240, 10737418240]` 。
 -   設定されていない場合、または`0`倍数に設定されている場合、実際のディスク (ディレクトリが配置されているディスク) の容量が使用されます。
 -   単位: バイト`"10GB"`などの人間が読める数値はまだサポートされていないことに注意してください。
--   `capacity`番目のリストのサイズは[`storage.main.dir`](#dir)リストのサイズと同じである必要があります。
+-   `capacity`リストのサイズは[`storage.main.dir`](#dir)リストのサイズと同じである必要があります。
 
 #### storage.latest {#storagelatest}
 
@@ -586,7 +586,7 @@ v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはスト�
 
 TiFlashノード上に類似したI/Oメトリックを持つ複数のディスクがある場合は、リスト`storage.main.dir`で対応するディレクトリを指定し、リスト`storage.latest.dir`空のままにすることをお勧めします。TiFlashはI/O負荷とデータをすべてのディレクトリに分散します。
 
-TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`番目のリストにメトリックの高いディレクトリを指定し、 `storage.main.dir`番目のリストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `storage.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`storage.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `storage.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
+TiFlashノード上にI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`リストにメトリックの高いディレクトリを指定し、 `storage.main.dir`リストにメトリックの低いディレクトリを指定することをお勧めします。例えば、NVMe-SSDが1台とSATA-SSDが2台の場合、 `storage.latest.dir`を`["/nvme_ssd_a/data/tiflash"]`を`storage.main.dir` `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`設定します。TiFlashは、これらの2つのディレクトリリストにそれぞれI/O負荷とデータを分散します。この場合、 `storage.latest.dir`という容量は、計画容量全体の10%として計画する必要があることに注意してください。
 
 > **Warning:**
 >

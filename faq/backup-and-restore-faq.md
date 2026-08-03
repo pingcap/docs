@@ -50,7 +50,7 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 ## <code>br restore point</code>コマンドを使用してダウンストリームクラスターを復元した後、 TiFlashからデータにアクセスできなくなりました。どうすればよいでしょうか？ {#after-restoring-a-downstream-cluster-using-the-br-restore-point-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
-現在、PITRはリストアフェーズ中にTiFlashへの直接データ書き込みをサポートしていません。代わりに、brコマンドラインツールが`ALTER TABLE table_name SET TIFLASH REPLICA ***` DDLを実行してデータを複製します。そのため、PITRによるデータリストアが完了した直後にTiFlashレプリカは利用できません。TiKVノードからデータが複製されるまで、一定時間待つ必要があります。レプリケーションの進行状況を確認するには、 `INFORMATION_SCHEMA.tiflash_replica`番目の表の`progress`情報を確認してください。
+現在、PITRはリストアフェーズ中にTiFlashへの直接データ書き込みをサポートしていません。代わりに、brコマンドラインツールが`ALTER TABLE table_name SET TIFLASH REPLICA ***` DDLを実行してデータを複製します。そのため、PITRによるデータリストアが完了した直後にTiFlashレプリカは利用できません。TiKVノードからデータが複製されるまで、一定時間待つ必要があります。レプリケーションの進行状況を確認するには、 `INFORMATION_SCHEMA.tiflash_replica`表の`progress`情報を確認してください。
 
 ### ログ バックアップ タスクの<code>status</code>が<code>ERROR</code>になった場合はどうすればよいでしょうか? {#what-should-i-do-if-the-status-of-a-log-backup-task-becomes-error}
 

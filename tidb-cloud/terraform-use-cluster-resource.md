@@ -870,7 +870,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
             status         = "AVAILABLE"
         }
 
-4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。`id`と`status`行目はTerraformによって制御されるため、削除する必要があることに注意してください。
+4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。`id`と`status`行はTerraformによって制御されるため、削除する必要があることに注意してください。
 
         resource "tidbcloud_cluster" "import_cluster" {
               cloud_provider = "AWS"

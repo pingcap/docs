@@ -57,7 +57,7 @@ FROM orders_group_by_month
 ORDER BY month ASC;
 ```
 
-`sum()`番目の関数は、 `OVER`番目の節の`ORDER BY`番目の文で指定された順序でデータを累積します。結果は次のようになります。
+`sum()`関数は、 `OVER`節の`ORDER BY`文で指定された順序でデータを累積します。結果は次のようになります。
 
     +---------+-------+
     | month   | acc   |

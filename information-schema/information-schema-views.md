@@ -66,8 +66,8 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 -   `IS_UPDATABLE` : ビューに`UPDATE` / `INSERT` / `DELETE`が適用されるかどうか。TiDBでは、値は常に`NO`です。
 -   `DEFINER` : ビューを作成したユーザーの名前。形式は`'user_name'@'host_name'`です。
 -   `SECURITY_TYPE` : `SQL SECURITY`の値。値の選択肢は`DEFINER`と`INVOKER`です。
--   `CHARACTER_SET_CLIENT` : ビューが作成された時点の`character_set_client`番目のセッション変数の値。
--   `COLLATION_CONNECTION` : ビューが作成された時点の`collation_connection`番目のセッション変数の値。
+-   `CHARACTER_SET_CLIENT` : ビューが作成された時点の`character_set_client`セッション変数の値。
+-   `COLLATION_CONNECTION` : ビューが作成された時点の`collation_connection`セッション変数の値。
 
 ## 参照 {#see-also}
 

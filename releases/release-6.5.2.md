@@ -70,7 +70,7 @@ TiDB バージョン: 6.5.2
 
 -   TiKV
 
-    -   TiKVがcgroupパスを処理するときに`:`文字目を正しく解析しない問題を修正しました [＃14538](https://github.com/tikv/tikv/issues/14538) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
+    -   TiKVがcgroupパスを処理するときに`:`文字を正しく解析しない問題を修正しました [＃14538](https://github.com/tikv/tikv/issues/14538) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)
 
 -   PD
 

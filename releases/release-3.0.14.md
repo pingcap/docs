@@ -93,7 +93,7 @@ TiDB バージョン: 3.0.14
     -   `information_schema.tidb_hot_table` のパーティションテーブルの情報が誤っている問題を修正しました [＃16726](https://github.com/pingcap/tidb/pull/16726)
     -   ハッシュパーティションテーブルでパーティション選択アルゴリズムが有効にならない問題を修正 [＃16070](https://github.com/pingcap/tidb/pull/16070)
     -   MVCCシリーズのHTTP APIがパーティションテーブルをサポートしない問題を修正[＃16191](https://github.com/pingcap/tidb/pull/16191)
-    -   `UNION`番目の文のエラー処理を`SELECT`の文のエラー処理と一貫性を保つ[＃16137](https://github.com/pingcap/tidb/pull/16137)
+    -   `UNION`文のエラー処理を`SELECT`の文のエラー処理と一貫性を保つ[＃16137](https://github.com/pingcap/tidb/pull/16137)
     -   `VALUES`関数のパラメータ型が`bit(n)` の場合に不正な動作が発生する問題を修正しました [＃15486](https://github.com/pingcap/tidb/pull/15486)
     -   `view`列名が長すぎる場合、TiDBの処理ロジックがMySQLと矛盾する問題を修正しました。この場合、システムは自動的に短い列名を生成します[＃14873](https://github.com/pingcap/tidb/pull/14873)
     -   `(not not col)`誤って`col` として最適化される問題を修正 [＃16094](https://github.com/pingcap/tidb/pull/16094)
