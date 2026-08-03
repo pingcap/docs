@@ -139,7 +139,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql
     -   [実行プランの読み取り: 最初の子を先頭とする](#read-execution-plans-first-child-first)
     -   [実行計画のボトルネックを特定する](#identify-bottlenecks-in-execution-plans)
 -   [TiDBのインデックス戦略](#index-strategy-in-tidb)
-    -   [複合指数戦略ガイドライン](#composite-index-strategy-guidelines)
+    -   [複合インデックス戦略ガイドライン](#composite-index-strategy-guidelines)
     -   [インデックス作成のコスト](#the-cost-of-indexing)
     -   [カバリングインデックスを使用したSQLチューニング](#sql-tuning-with-a-covering-index)
     -   [ソートを含む複合インデックスを使用したSQLチューニング](#sql-tuning-with-a-composite-index-involving-sorting)
@@ -552,7 +552,7 @@ TiDBのパフォーマンスを最適化するには、インデックスを効�
 
 このセクションでは、一般的なインデックス戦略とインデックスコストについて説明します。また、TiDBにおける効果的なインデックス構築の実例を3つ紹介し、特にSQLチューニングのための複合インデックスとカバーリングインデックスに焦点を当てます。
 
-#### 複合指数戦略ガイドライン {#composite-index-strategy-guidelines}
+#### 複合インデックス戦略ガイドライン {#composite-index-strategy-guidelines}
 
 効率的な複合インデックスを作成するには、列を戦略的に順序付けます。列の順序は、インデックスによるデータのフィルタリングと並べ替えの効率に直接影響します。
 

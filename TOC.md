@@ -524,7 +524,7 @@
       - [データベースとテーブルの名前を変更します](/tidb-lightning/tidb-lightning-data-source.md#rename-databases-and-tables)
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
-      - [寄木細工](/tidb-lightning/tidb-lightning-data-source.md#parquet)
+      - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
       - [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)
       - [カスタマイズされたファイル](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
       - [Amazon S3からデータをインポートする](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)
