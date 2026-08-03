@@ -49,7 +49,7 @@ To subscribe to alert notifications of {{{ .dedicated }}} clusters, take the fol
 6. Enter a name in the **Name** field and your webhook URL in the **Webhook URL** field.
 7. Click **Save**. The backend will test connection and save for you. 
 
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
+    If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
 Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
 
