@@ -70,7 +70,7 @@ CSVファイルをインポートする際は、データファイルに以下�
 >
 > Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
-### 寄木細工 {#parquet}
+### Parquet {#parquet}
 
 Parquetファイルをインポートする際は、データファイルに以下の名前を付けてください。
 

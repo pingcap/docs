@@ -33,7 +33,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 
 -   [**まとめ**](#summary) : TiCDCクラスターの概要情報
 -   [**サーバ**](#server) : TiDBクラスタ内のTiKVノードとTiCDCノードの概要情報
--   [**丸太引き**](#log-puller) : TiCDC Log Pullerモジュールの詳細情報
+-   [**Log Puller**](#log-puller) : TiCDC Log Pullerモジュールの詳細情報
 -   [**イベントストア**](#event-store) : TiCDCイベントストアモジュールの詳細情報
 -   [**シンク**](#sink) : TiCDCシンクモジュールの詳細情報
 
@@ -71,7 +71,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 -   所有権履歴: TiCDC クラスター内の所有者ノードの履歴記録
 -   PD Leader履歴:上流TiDBクラスタ内のPD Leaderノードの履歴記録
 
-### 丸太引き {#log-puller}
+### Log Puller {#log-puller}
 
 以下は、 **Log Puller**パネルの例です。
 

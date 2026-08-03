@@ -110,7 +110,7 @@ TiDB Cloud CLI では、ユーザープロファイルとは、プロファイ�
 
 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md)を使用してユーザープロファイルを削除します。
 
-## 世界の国旗 {#global-flags}
+## グローバルフラグ {#global-flags}
 
 以下の表は、TiDB Cloud CLI のグローバルフラグの一覧です。
 
