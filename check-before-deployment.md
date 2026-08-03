@@ -539,7 +539,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `--update-kernel`後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
+            > `--update-kernel`の後に実際のバージョン番号（ `--update-kernel /boot/vmlinuz-3.10.0-957.el7.x86_64`や`ALL` ）を指定することもできます。
 
         3.  変更されたデフォルトのカーネル構成を確認するには、 `grubby --info`を実行します。
 
@@ -549,7 +549,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > `--info`後には実際のデフォルトのカーネル バージョンが続きます。
+            > `--info`の後には実際のデフォルトのカーネル バージョンが続きます。
 
                 index=0
                 kernel=/boot/vmlinuz-3.10.0-957.el7.x86_64
@@ -719,7 +719,7 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
 
         [root@10.0.1.1 tidb]#
 
-## <code>numactl</code>ツールをインストールする {#install-the-code-numactl-code-tool}
+## <code>numactl</code>ツールをインストールする {#install-the-numactl-tool}
 
 このセクションでは、NUMAツールのインストール方法について説明します。オンライン環境では、ハードウェア構成が通常必要以上に高くなるため、ハードウェアリソースをより適切に計画するために、TiDBまたはTiKVの複数のインスタンスを1台のマシンにデプロイすることができます。このようなシナリオでは、NUMAツールを使用して、CPUリソースの競合によるパフォーマンス低下を防ぐことができます。
 

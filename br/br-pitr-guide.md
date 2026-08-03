@@ -52,7 +52,7 @@ tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
 -   `start` : ログ バックアップ タスクの開始タイムスタンプ。
 -   `end` : ログバックアップタスクの終了タイムスタンプ。現在、このフィールドは無効です。
 -   `storage` : ログ バックアップの外部ストレージの URI。
--   `speed(est.)` : ログバックアップの現在のデータ転送速度。この値は、過去数秒間に取得されたトラフィックサンプルに基づいて推定されます。より正確なトラフィック統計情報については、Grafanaの**<a href="/grafana-tikv-dashboard.md#tikv-details-dashboard">TiKV-Details</a>**ダッシュボードの`Log Backup`行目を確認してください。
+-   `speed(est.)` : ログバックアップの現在のデータ転送速度。この値は、過去数秒間に取得されたトラフィックサンプルに基づいて推定されます。より正確なトラフィック統計情報については、Grafanaの**<a href="/grafana-tikv-dashboard.md#tikv-details-dashboard">TiKV-Details</a>**ダッシュボードの`Log Backup`行を確認してください。
 -   `checkpoint[global]` : ログバックアップの現在の進行状況。PITRを使用して、このタイムスタンプより前の時点に復元できます。
 
 ログバックアップタスクが一時停止されている場合、 `log status`コマンドは一時停止の詳細を表示するための追加フィールドを出力します。これらは次のとおりです。

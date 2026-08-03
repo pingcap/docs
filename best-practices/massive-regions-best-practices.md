@@ -82,7 +82,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 
 [TiKVマスター](https://github.com/tikv/tikv/tree/master)では、Hibernate リージョン がデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[Hibernateリージョンを構成する](/tikv-configuration-file.md)を参照してください。
 
-### 方法3: <code>Region Merge</code>を有効にする {#method-3-enable-code-region-merge-code}
+### 方法3: <code>Region Merge</code>を有効にする {#method-3-enable-region-merge}
 
 > **Note:**
 >
@@ -108,7 +108,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 
 I/O リソースと CPU リソースが十分な場合は、単一のマシンに複数の TiKV インスタンスをデプロイして、単一の TiKV インスタンス上のリージョンの数を減らすことも、TiKV クラスター内のマシンの数を増やすこともできます。
 
-### 方法5: <code>raft-base-tick-interval</code>を調整する {#method-5-adjust-code-raft-base-tick-interval-code}
+### 方法5: <code>raft-base-tick-interval</code>を調整する {#method-5-adjust-raft-base-tick-interval}
 
 リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やすことができます。
 
@@ -158,7 +158,7 @@ PDは、PD Leaderノードの切り替え後、迅速にリージョンルーテ
 
 TiKVでは、pd-workerが定期的にリージョンメタ情報をPDに報告します。TiKVが再起動されたり、リージョンリーダーが切り替わったりすると、PDは統計情報に基づいてリージョン`approximate size / keys`を再計算する必要があります。そのため、リージョン数が多い場合、シングルスレッドのpd-workerがボトルネックとなり、タスクが滞留して処理が間に合わない可能性があります。このような状況では、PDは特定のリージョンメタ情報を時間内に取得できず、ルーティング情報が時間内に更新されません。この問題は実際の読み取りや書き込みには影響しませんが、PDのスケジューリングが不正確になり、TiDBがリージョンキャッシュを更新する際に複数のラウンドトリップが必要になる可能性があります。
 
-**TiKV Grafana**パネルの**「Task」**の下にある**「Worker pending tasks」**を確認することで、pd-workerにタスクが蓄積されているかどうかを確認できます。一般的に、 `pending tasks`値は比較的低い値に抑えておく必要があります。
+**TiKV Grafana**パネルの**「Task」**の下にある**「Worker pending tasks」**を確認することで、pd-workerにタスクが蓄積されているかどうかを確認できます。一般的に、 `pending tasks`の値は比較的低い値に抑えておく必要があります。
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 

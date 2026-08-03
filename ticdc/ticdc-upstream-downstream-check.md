@@ -49,7 +49,7 @@ sync-point-retention = "1h"
 
 アップストリーム クラスターとダウンストリーム クラスターのデータを検証するには、sync-diff-inspector で`snapshot`設定するだけです。
 
-### ステップ1: <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
+### ステップ1: <code>ts-map</code>を取得する {#step-1-obtain-ts-map}
 
 下流TiDBクラスタで次のSQL文を実行すると、上流TSO（ `primary_ts` ）と下流TSO（ `secondary_ts` ）を取得できます。
 
@@ -103,4 +103,4 @@ select * from tidb_cdc.syncpoint_v1;
     -   TiCDC が新しい`primary_ts`を生成するときは、その値は`sync-point-interval`の整数倍である必要があります。
     -   TiCDCは、新しいチェンジフィードごとに初期値`primary_ts`を計算します。この初期値は、チェンジフィードの開始時刻（ `startTs` ）以上であり、 `sync-point-interval`の最小の整数倍です。
 
-    この設定は、データレプリケーション中に異なる変更フィードの同期ポイントを揃えるために使用されます。例えば、複数の下流クラスタは、 [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)番目のステートメントを実行することで、同じ`primary_ts`番目の同期ポイントの`secondary_ts`番目の状態に復元することができ、下流クラスタ間でデータの一貫性を確保できます。
+    この設定は、データレプリケーション中に異なる変更フィードの同期ポイントを揃えるために使用されます。例えば、複数の下流クラスタは、 [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)のステートメントを実行することで、同じ`primary_ts`の同期ポイントの`secondary_ts`の状態に復元することができ、下流クラスタ間でデータの一貫性を確保できます。

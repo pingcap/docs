@@ -161,7 +161,7 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 
 `id`内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
 
-## Point_Get と Batch_Point_Get {#point-get-and-batch-point-get}
+## Point_Get と Batch_Point_Get {#point_get-and-batch_point_get}
 
 TiDBは、主キーまたは一意キーから直接データを取得する際に、 `Point_Get`または`Batch_Point_Get`演算子を使用します。これらの演算子は`IndexLookup`よりも効率的です。例えば、
 

@@ -111,7 +111,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 
 -   TiDB Binlog
     -   unsigned int 型の主キー列のbinlogデータが負の場合にレプリケーションが中止される問題を修正しました。 [＃573](https://github.com/pingcap/tidb-binlog/pull/573)
-    -   ダウンストリームが`pb`場合は圧縮オプションを提供しません。ダウンストリーム名を`pb`から`file`に変更します[＃559](https://github.com/pingcap/tidb-binlog/pull/559)
+    -   ダウンストリームが`pb`の場合は圧縮オプションを提供しません。ダウンストリーム名を`pb`から`file`に変更します[＃559](https://github.com/pingcap/tidb-binlog/pull/559)
     -   Pumpにローカルストレージへの非同期フラッシュを許可する`storage.sync-log`設定項目を追加する [＃509](https://github.com/pingcap/tidb-binlog/pull/509)
     -   PumpとDrainer間の通信のトラフィック圧縮をサポート [＃495](https://github.com/pingcap/tidb-binlog/pull/495)
     -   異なるSQLモードでのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`構成項目を追加します。 [＃511](https://github.com/pingcap/tidb-binlog/pull/511)
@@ -126,7 +126,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) に変更 [＃162](https://github.com/pingcap/tidb-lightning/pull/162)
     -   設定ファイルが見つからない場合に使用するコマンドラインオプションをいくつか追加します[＃157](https://github.com/pingcap/tidb-lightning/pull/157)
 
--   同期差分インスペクター
+-   sync-diff-inspector
     -   チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
     -   チェックサム計算してデータの整合性をチェックするための構成項目`only-use-checksum`追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
 

@@ -40,7 +40,7 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 
 </CustomContent>
 
-## <code>ADMIN RELOAD</code>ステートメント {#code-admin-reload-code-statement}
+## <code>ADMIN RELOAD</code>ステートメント {#admin-reload-statement}
 
 ```sql
 ADMIN RELOAD expr_pushdown_blacklist;
@@ -54,7 +54,7 @@ ADMIN RELOAD opt_rule_blacklist;
 
 上記のステートメントは、ロジック最適化ルールのブロックリストを再読み込みするために使用されます。
 
-## <code>ADMIN PLUGINS</code>関連のステートメント {#code-admin-plugins-code-related-statement}
+## <code>ADMIN PLUGINS</code>関連のステートメント {#admin-plugins-related-statement}
 
 > **Note:**
 >
@@ -72,7 +72,7 @@ ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
 
 上記のステートメントは`plugin_name`プラグインを無効にするために使用されます。
 
-## <code>ADMIN BINDINGS</code>関連のステートメント {#code-admin-bindings-code-related-statement}
+## <code>ADMIN BINDINGS</code>関連のステートメント {#admin-bindings-related-statement}
 
 ```sql
 ADMIN FLUSH BINDINGS;
@@ -98,7 +98,7 @@ ADMIN RELOAD BINDINGS;
 
 上記のステートメントは、SQLプランのバインディング情報を再読み込みするために使用されます。
 
-## <code>ADMIN REPAIR</code>ステートメント {#code-admin-repair-code-statement}
+## <code>ADMIN REPAIR</code>ステートメント {#admin-repair-statement}
 
 <CustomContent platform="tidb-cloud">
 
@@ -120,7 +120,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 </CustomContent>
 
-## <code>ADMIN SHOW NEXT_ROW_ID</code>ステートメント {#code-admin-show-next-row-id-code-statement}
+## <code>ADMIN SHOW NEXT_ROW_ID</code>ステートメント {#admin-show-next_row_id-statement}
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
@@ -128,7 +128,7 @@ ADMIN SHOW t NEXT_ROW_ID;
 
 上記のステートメントは、テーブルの特定の列の詳細を表示するために使用されます。出力は[SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md)と同じです。
 
-## <code>ADMIN SHOW SLOW</code>ステートメント {#code-admin-show-slow-code-statement}
+## <code>ADMIN SHOW SLOW</code>ステートメント {#admin-show-slow-statement}
 
 > **Note:**
 >

@@ -378,7 +378,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
-        2025年8月12日（PDT）より、既存のサーバーレスクラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
+        2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 
     -   TiDB Cloud Starter は Alibaba Cloud でプレビュー中です。
 
@@ -420,7 +420,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、「TiDB Cloud Starter」に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
-    2025年8月12日（PDT）より、既存のサーバーレスクラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
+    2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 
 -   **TiDB Cloud Dedicated**
 
@@ -500,7 +500,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターのクラウドストレージデータのインポート エクスペリエンスを強化します。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターのクラウドストレージデータのインポート エクスペリエンスを強化します。
 
     インポートプロセスは、インテリジェントな事前チェック機能を備えた3ステップのウィザードに簡素化されました。この新しいウィザードは、接続設定、ファイルマッピング、バケットスキャンをガイドします。スキャン機能により、 TiDB Cloudはインポート前にインポートされるファイルとその保存先を正確に表示するため、設定の複雑さが大幅に軽減され、インポートの失敗を防止できます。
 
@@ -534,7 +534,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)データベース監査ログ（ベータ版）がリクエストに応じて利用可能になりました。この機能を使用すると、ユーザーアクセスの詳細（実行されたSQL文など）の履歴をログに記録できます。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)データベース監査ログ（ベータ版）がリクエストに応じて利用可能になりました。この機能を使用すると、ユーザーアクセスの詳細（実行されたSQL文など）の履歴をログに記録できます。
 
     この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**「？」**をクリックし、 **「サポートをリクエスト」**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **「送信」を**クリックします。
 
@@ -614,7 +614,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **一般的な変更**
 
--   AI アプリケーション向けのフルテキスト検索 (ベータ版) が[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)で利用可能になりました。
+-   AI アプリケーション向けのフルテキスト検索 (ベータ版) が[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)で利用可能になりました。
 
     TiDB Cloud Serverlessは、全文検索（ベータ版）をサポートしました。これにより、AIおよび検索拡張生成（RAG）アプリケーションは、正確なキーワードでコンテンツを検索できるようになります。これは、意味的類似性に基づいてコンテンツを検索するベクトル検索を補完するものです。両方の手法を組み合わせることで、RAGワークフローにおける検索精度と回答品質が大幅に向上します。主な機能は以下のとおりです。
 
@@ -652,17 +652,17 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   Alibaba Cloud OSS へのデータエクスポートがサポートされるようになりました。
 
-    [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターは、 [アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)を使用して[Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)にデータをエクスポートできるようになりました。
+    [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターは、 [アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)を使用して[Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)にデータをエクスポートできるようになりました。
 
     詳細については[TiDB Cloud Serverlessからデータをエクスポート](/tidb-cloud/serverless-export.md#alibaba-cloud-oss)を参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターの TiDB バージョンを[バージョン7.1.3](https://docs.pingcap.com/tidb/stable/release-7.1.3)から[バージョン7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)にアップグレードします。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターの TiDB バージョンを[バージョン7.1.3](https://docs.pingcap.com/tidb/stable/release-7.1.3)から[バージョン7.5.2](https://docs.pingcap.com/tidb/stable/release-7.5.2)にアップグレードします。
 
 ## 2025年4月15日 {#april-15-2025}
 
 **一般的な変更**
 
--   [Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)クラスターから[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
+-   [Alibaba Cloud オブジェクト ストレージ サービス (OSS)](https://www.alibabacloud.com/en/product/object-storage-service)クラスターから[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
 
     この機能により、TiDB Cloud Serverlessへのデータ移行が簡素化されます。認証にはAccessKeyペアを使用できます。
 
@@ -713,11 +713,11 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
 
     TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。1 [TiDB Cloudコンソール](https://tidbcloud.com/)許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
-    詳細については[パブリックエンドポイント用のTiDB Cloudサーバーレス ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+    詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## 2025年3月18日 {#march-18-2025}
 
@@ -754,7 +754,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[Connected Careの概要](/tidb-cloud/connected-care-overview.md)を参照してください。
 
--   GCS および Azure Blob Storage から[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
+-   GCS および Azure Blob Storage から[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターへのデータのインポートをサポートします。
 
     TiDB Cloud Serverless は、Google Cloud Storage (GCS) および Azure Blob Storage からのデータのインポートをサポートするようになりました。認証には、Google Cloud サービス アカウント キーまたは Azure Shared Access Signature (SAS) トークンを使用できます。この機能により、TiDB Cloud Serverless へのデータ移行が簡素化されます。
 
@@ -764,7 +764,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **コンソールの変更**
 
--   タスクあたり最大 250 MiB の単一のローカル CSV ファイルを[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターにインポートできるようになりました。これは、以前の 50 MiB の制限から増加されました。
+-   タスクあたり最大 250 MiB の単一のローカル CSV ファイルを[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターにインポートできるようになりました。これは、以前の 50 MiB の制限から増加されました。
 
     詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 
@@ -820,7 +820,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
     詳細については[アイデンティティアクセス管理](/tidb-cloud/manage-user-access.md#organization-roles)を参照してください。
 
--   [TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)クラスターのリージョン高可用性 (ベータ版)。
+-   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターのリージョン高可用性 (ベータ版)。
 
     この機能は、最大限のインフラストラクチャ冗長性とビジネス継続性を必要とするワークロード向けに設計されています。主な関数は次のとおりです。
 
@@ -838,7 +838,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   データエクスポートサービスの強化:
 
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して[TiDB Cloudサーバーレス](/tidb-cloud/select-cluster-tier.md#starter)から Google Cloud Storage および Azure Blob Storage へのデータのエクスポートをサポートします。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)から Google Cloud Storage および Azure Blob Storage へのデータのエクスポートをサポートします。
 
     -   [TiDB Cloudコンソール](https://tidbcloud.com/)を介して Parquet ファイルでデータのエクスポートをサポートします。
 

@@ -3,7 +3,7 @@ title: Use the `tidbcloud_cluster` Resource (Deprecated)
 summary: クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-code-tidbcloud-cluster-code-resource-deprecated}
+# <code>tidbcloud_cluster</code>リソースを使用する（非推奨） {#use-the-tidbcloud_cluster-resource-deprecated}
 
 > **Warning:**
 >
@@ -23,7 +23,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 
-## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
+## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud_projects-data-source}
 
 各 TiDB クラスターはプロジェクトに属します。TiDB クラスターを作成する前に、クラスターを作成するプロジェクトの ID を取得する必要があります。
 
@@ -119,7 +119,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## <code>tidbcloud_cluster_specs</code>データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-code-tidbcloud-cluster-specs-code-data-source}
+## <code>tidbcloud_cluster_specs</code>データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
 クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウド プロバイダー、リージョン、ノード サイズなど) が含まれるクラスター仕様情報を取得する必要があります。
 
@@ -461,7 +461,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
             status         = "AVAILABLE"
         }
 
-ステータスが`AVAILABLE`場合、TiDB クラスターが作成され、使用できる状態であることを示します。
+ステータスが`AVAILABLE`の場合、TiDB クラスターが作成され、使用できる状態であることを示します。
 
 ## TiDB Cloud Dedicated クラスターを変更する {#modify-a-tidb-cloud-dedicated-cluster}
 
@@ -664,7 +664,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 ### クラスターを一時停止または再開する {#pause-or-resume-a-cluster}
 
-ステータスが`AVAILABLE`ときにクラスターを一時停止し、ステータスが`PAUSED`ときにクラスターを再開できます。
+ステータスが`AVAILABLE`のときにクラスターを一時停止し、ステータスが`PAUSED`のときにクラスターを再開できます。
 
 -   クラスターを一時停止するには`paused = true`設定します。
 -   クラスターを再開するには`paused = false`設定します。
@@ -870,7 +870,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
             status         = "AVAILABLE"
         }
 
-4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。`id`と`status`行目はTerraformによって制御されるため、削除する必要があることに注意してください。
+4.  Terraformを使用してクラスタを管理するには、前の手順の出力を構成ファイルにコピーします。`id`と`status`行はTerraformによって制御されるため、削除する必要があることに注意してください。
 
         resource "tidbcloud_cluster" "import_cluster" {
               cloud_provider = "AWS"

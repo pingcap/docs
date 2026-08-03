@@ -94,7 +94,7 @@
       - [TiCDC CSVプロトコル](/ticdc/ticdc-csv.md)
       - [TiCDCDebeziumプロトコル](/ticdc/ticdc-debezium.md)
       - [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
-      - [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)
+      - [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)
     - [TiCDCオープンAPI v2](/ticdc/ticdc-open-api-v2.md)
     - [TiCDCオープンAPI v1](/ticdc/ticdc-open-api.md)
     - TiCDCのデータ消費量

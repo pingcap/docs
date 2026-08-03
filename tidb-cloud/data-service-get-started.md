@@ -1,15 +1,15 @@
 ---
 title: Get Started with Data Service
-summary: TiDB Cloudデータサービスを使用してHTTPSリクエストでデータにアクセスする方法を学びましょう。
+summary: TiDB Cloud Data Serviceを使用してHTTPSリクエストでデータにアクセスする方法を学びましょう。
 ---
 
-# データサービスの利用開始 {#get-started-with-data-service}
+# Data Serviceの利用開始 {#get-started-with-data-service}
 
-データサービス（PREVIEW）を使用すると、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でTiDB Cloudデータにアクセスでき、HTTPSに対応したあらゆるアプリケーションやサービスとシームレスに統合できます。
+Data Service（PREVIEW）を使用すると、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でTiDB Cloudデータにアクセスでき、HTTPSに対応したあらゆるアプリケーションやサービスとシームレスに統合できます。
 
 > **Tip:**
 >
-> TiDB Cloudは、 TiDB Cloud Starterインスタンス向けにChat2Query APIを提供しています。有効化すると、 TiDB Cloudは自動的に**Chat2Query**という名前のシステムデータアプリと、データサービス内にChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより、AIにSQLステートメントを生成および実行させることができます。
+> TiDB Cloudは、 TiDB Cloud Starterインスタンス向けにChat2Query APIを提供しています。有効化すると、 TiDB Cloudは自動的に**Chat2Query**という名前のシステムデータアプリと、Data Service内にChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより、AIにSQLステートメントを生成および実行させることができます。
 >
 > 詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
@@ -21,15 +21,15 @@ summary: TiDB Cloudデータサービスを使用してHTTPSリクエストで�
 
 > **Note:**
 >
-> データサービスは、AWS上でホストされている[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスでのみ利用可能です。TiDB Cloud Dedicatedクラスターでデータサービスを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> Data Serviceは、AWS上でホストされている[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスでのみ利用可能です。TiDB Cloud DedicatedクラスターでData Serviceを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## サンプルデータアプリから始めてみましょう {#get-started-with-a-sample-data-app}
 
-データサービスを使い始めるには、サンプルデータアプリを作成するのが最適です。プロジェクトにまだデータアプリがない場合は、**データサービス**ページの画面上の指示に従ってサンプルデータアプリを作成し、このアプリを使ってデータサービスの機能を試してみてください。
+Data Serviceを使い始めるには、サンプルデータアプリを作成するのが最適です。プロジェクトにまだデータアプリがない場合は、**Data Service**ページの画面上の指示に従ってサンプルデータアプリを作成し、このアプリを使ってData Serviceの機能を試してみてください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[データ サービス]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
-2.  **データサービス**ページで、 **「サンプルデータアプリの作成」を**クリックします。ダイアログが表示されます。
+2.  **Data Service**ページで、 **「サンプルデータアプリの作成」を**クリックします。ダイアログが表示されます。
 
 3.  ダイアログで、必要に応じてアプリ名を更新し、データアプリがアクセスするTiDB Cloud Starterインスタンスを選択して、 **[作成]**をクリックします。
 
@@ -45,15 +45,15 @@ summary: TiDB Cloudデータサービスを使用してHTTPSリクエストで�
 
 ## 独自のデータアプリを始めましょう {#get-started-with-your-own-data-app}
 
-データサービスの利用を開始するには、独自のデータアプリを作成し、以下の手順に従って開発、テスト、デプロイ、エンドポイントの呼び出しを行うこともできます。
+Data Serviceの利用を開始するには、独自のデータアプリを作成し、以下の手順に従って開発、テスト、デプロイ、エンドポイントの呼び出しを行うこともできます。
 
 ### ステップ1. データアプリを作成する {#step-1-create-a-data-app}
 
 データアプリを作成するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[データ サービス]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、プロジェクトの [ **...]**をクリックして、 **[Data Service]**をクリックします。
 
-2.  プロジェクトのデータ[**データサービス**](https://tidbcloud.com/project/data-service)ページで、左側のペインで<MDSvgIcon name="icon-create-data-app" /> **DataApp の作成を**クリックします。
+2.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、左側のペインで<MDSvgIcon name="icon-create-data-app" /> **DataApp の作成を**クリックします。
 
     > **Tip:**
     >
@@ -78,7 +78,7 @@ summary: TiDB Cloudデータサービスを使用してHTTPSリクエストで�
     > -   ディレクトリ名はスラッシュ（ `/` ）で始まる必要があります。例えば、 `/mydata`のようになります。指定したディレクトリが対象のリポジトリとブランチに存在しない場合は、自動的に作成されます。
     > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータアプリ間で一意である必要があります。指定したパスが既に他のデータアプリで使用されている場合は、新しいパスを指定する必要があります。そうしないと、現在のデータアプリ用にTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
 
-5.  **[データ アプリの作成] を**クリックします。 [**データサービス**](https://tidbcloud.com/project/data-service)詳細ページが表示されます。
+5.  **[データ アプリの作成] を**クリックします。 [**Data Service**](https://tidbcloud.com/project/data-service)の詳細ページが表示されます。
 
 6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。データ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリが GitHub に正常に接続されていることを意味します。
 
@@ -104,7 +104,7 @@ summary: TiDB Cloudデータサービスを使用してHTTPSリクエストで�
 
 #### SQL文を書く {#write-sql-statements}
 
-**データ サービス**ページの中央のペインにある<Tooltip id="sql-editor">SQLエディタ</Tooltip>で、エンドポイントの SQL ステートメントをカスタマイズできます。
+**Data Service**ページの中央のペインにある<Tooltip id="sql-editor">SQLエディタ</Tooltip>で、エンドポイントの SQL ステートメントをカスタマイズできます。
 
 1.  TiDB Cloud Starterインスタンスを選択してください。
 
@@ -191,7 +191,7 @@ HTTPSリクエストを送信することでエンドポイントを呼び出す
 
 #### 1. APIキーを作成する {#1-create-an-api-key}
 
-1.  [データ[**データサービス**](https://tidbcloud.com/project/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
 
 2.  **認証**エリアで、 **「APIキーの作成」を**クリックします。
 
@@ -214,13 +214,13 @@ HTTPSリクエストを送信することでエンドポイントを呼び出す
 
 5.  **「完了」**をクリックしてください。
 
-API キーの詳細については、[データサービスのAPIキー](/tidb-cloud/data-service-api-key.md)を参照してください。
+API キーの詳細については、[Data ServiceのAPIキー](/tidb-cloud/data-service-api-key.md)を参照してください。
 
 #### 2. コード例を取得する {#2-get-the-code-example}
 
 TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例を生成します。コード例を取得するには、以下の手順を実行してください。
 
-1.  [**データサービス**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** &gt; **「コード例」**をクリックします。「**コード例」**ダイアログボックスが表示されます。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅の**「...」** &gt; **「コード例」**をクリックします。「**コード例」**ダイアログボックスが表示されます。
 
 2.  ダイアログボックスで、エンドポイントを呼び出すために使用するTiDB Cloud Starterインスタンスとデータベースを選択し、コード例をコピーします。
 
@@ -307,7 +307,7 @@ TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例�
 
 ## もっと詳しく知る {#learn-more}
 
--   [データサービス概要](/tidb-cloud/data-service-overview.md)
+-   [Data Service概要](/tidb-cloud/data-service-overview.md)
 -   [Chat2Query API を使い始めよう](/tidb-cloud/use-chat2query-api.md)
 -   [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
 -   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

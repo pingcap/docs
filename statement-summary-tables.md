@@ -21,7 +21,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 
 このドキュメントでは、これらのテーブルの詳細を説明し、SQLのパフォーマンス問題のトラブルシューティングにそれらを使用する方法を紹介します。
 
-## `statements_summary` {#statements-summary}
+## `statements_summary` {#statements_summary}
 
 `statements_summary`は`information_schema`内のシステム テーブルです。 `statements_summary`は、SQL ステートメントをリソース グループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
 
@@ -82,13 +82,13 @@ select * from employee where id in (...) and salary between ? and ?;
 > -   TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
 > -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソース グループごとに集約されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
 
-## `statements_summary_history` {#statements-summary-history}
+## `statements_summary_history` {#statements_summary_history}
 
 `statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行うことができます。
 
 `SUMMARY_BEGIN_TIME`フィールドと`SUMMARY_END_TIME`フィールドは、履歴期間の開始時刻と終了時刻を表します。
 
-## `statements_summary_evicted` {#statements-summary-evicted}
+## `statements_summary_evicted` {#statements_summary_evicted}
 
 [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)システム変数は`statements_summary`テーブルと`statements_summary_history`テーブルがメモリに格納できる SQL ダイジェストの総数を制限します。この制限を超えると、TiDB は`statements_summary`テーブルと`statements_summary_history`テーブルの両方から、最も使用頻度の低い SQL ダイジェストを削除します。
 
@@ -114,7 +114,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 </CustomContent>
 
-## ステートメントサマリーの<code>cluster</code>テーブル {#the-code-cluster-code-tables-for-statement-summary}
+## ステートメントサマリーの<code>cluster</code>テーブル {#the-cluster-tables-for-statement-summary}
 
 `statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスタ全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
 
@@ -137,7 +137,7 @@ select * from employee where id in (...) and salary between ? and ?;
     > **Note:**
     >
     > -   SQLダイジェストが削除されると、関連するすべての時間範囲のサマリーデータが`statements_summary`テーブルと`statements_summary_history`テーブルの両方から削除されます。その結果、特定の時間範囲内のSQLダイジェストの数が制限を超えない場合でも、 `statements_summary_history`テーブルのSQLダイジェストの数が実際のSQLダイジェストの数よりも少なくなる可能性があります。このような状況が発生し、パフォーマンスに影響する場合は、 `tidb_stmt_summary_max_stmt_count`の値を増やすことをお勧めします。
-    > -   TiDB Self-Managed の場合、 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)が有効になっていると、 `statements_summary_history`テーブルのデータがディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count` `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、 `statements_summary` -E}} を超えると、TiDB は`tidb_stmt_summary_max_stmt_count`のみを削除します。
+    > -   TiDB Self-Managed の場合、 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)が有効になっていると、 `statements_summary_history`テーブルのデータがディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count`は、 `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、TiDB は`tidb_stmt_summary_max_stmt_count`を超えると`statements_summary`テーブルから最も使用頻度の低い SQL ダイジェストのみを削除します。
 
 -   `tidb_stmt_summary_max_sql_length` : `DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`の最長表示長を指定します。デフォルト値は`4096`です。
 
@@ -312,7 +312,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 
 ## フィールドの説明 {#fields-description}
 
-### <code>statements_summary</code>フィールドの説明 {#code-statements-summary-code-fields-description}
+### <code>statements_summary</code>フィールドの説明 {#statements_summary-fields-description}
 
 以下は`statements_summary`テーブルのフィールドの説明です。
 
@@ -431,7 +431,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `SUM_BACKOFF_TIMES` : このカテゴリの SQL ステートメントで再試行が必要なエラーが発生した場合の再試行回数の合計。
 -   `BACKOFF_TYPES` : 再試行が必要なすべてのエラーの種類と、各種類の再試行回数。フィールドの形式は`type:number`です。エラーの種類が複数ある場合は、それぞれをカンマで区切ります。例: `txnLock:2,pdRPC:1` 。
 -   `AVG_AFFECTED_ROWS` : 影響を受けた行の平均数。
--   `PREV_SAMPLE_TEXT` : 現在の SQL ステートメントが`COMMIT`の場合、 `PREV_SAMPLE_TEXT`は`COMMIT`の前のステートメントです。この場合、SQL ステートメントはダイジェストと`prev_sample_text`でグループ化されます。つまり、 `COMMIT`が異なる`prev_sample_text`ステートメントは、異なる行にグループ化されます。現在の SQL ステートメントが`COMMIT`でない場合、 `PREV_SAMPLE_TEXT`フィールドは空の文字列になります。
+-   `PREV_SAMPLE_TEXT` : 現在の SQL ステートメントが`COMMIT`の場合、 `PREV_SAMPLE_TEXT`は`COMMIT`の前のステートメントです。この場合、SQL ステートメントはダイジェストと`prev_sample_text`でグループ化されます。つまり、 `prev_sample_text`が異なる`COMMIT`ステートメントは、異なる行にグループ化されます。現在の SQL ステートメントが`COMMIT`でない場合、 `PREV_SAMPLE_TEXT`フィールドは空の文字列になります。
 
 リソース制御に関連する分野：
 
@@ -448,7 +448,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `STORAGE_KV` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行が TiKV からデータを読み取ったかどうかを示します。
 -   `STORAGE_MPP` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行がTiFlashからデータを読み取ったかどうかを示します。
 
-### <code>statements_summary_evicted</code>フィールドの説明 {#code-statements-summary-evicted-code-fields-description}
+### <code>statements_summary_evicted</code>フィールドの説明 {#statements_summary_evicted-fields-description}
 
 -   `BEGIN_TIME` : 開始時刻を記録します。
 -   `END_TIME` : 終了時刻を記録します。

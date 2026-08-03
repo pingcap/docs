@@ -3,7 +3,7 @@ title: API Keys in Data Service
 summary: データアプリのAPIキーの作成、編集、削除方法を学びましょう。
 ---
 
-# データサービスのAPIキー {#api-keys-in-data-service}
+# Data ServiceのAPIキー {#api-keys-in-data-service}
 
 TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)と[ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)の両方をサポートしています。
 
@@ -12,7 +12,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 > **Note:**
 >
-> データサービスで使用されるデータAPIキーは、 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。データAPIキーはTiDB内のデータにアクセスするために使用されますが、 TiDB Cloud APIキーはプロジェクト、クラスタ、バックアップ、リストア、インポートなどのリソースを管理するために使用されます。
+> Data Serviceで使用されるデータAPIキーは、 [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。データAPIキーはTiDB内のデータにアクセスするために使用されますが、 TiDB Cloud APIキーはプロジェクト、クラスタ、バックアップ、リストア、インポートなどのリソースを管理するために使用されます。
 
 ## APIキーの概要 {#api-key-overview}
 
@@ -26,7 +26,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 -   TiDB Cloud Data Serviceでは、デフォルトではAPIキーごとに1分あたり最大100件のリクエスト（rpm）が許可されています。
 
-    API キーのレート制限は、キー[作成する](#create-an-api-key)または[編集](#edit-an-api-key)ときに編集できます。サポートされている値の範囲は、 `1`から`1000`です。 1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1000 rpm を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ができます。
+    API キーのレート制限は、キーを[作成する](#create-an-api-key)または[編集](#edit-an-api-key)するときに編集できます。サポートされている値の範囲は、 `1`から`1000`です。 1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1000 rpm を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
 
     各APIリクエストは、制限に関する以下のヘッダーを返します。
 
@@ -51,11 +51,11 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
     {"type":"","data":{"columns":[],"rows":[],"result":{"latency":"","row_affect":0,"code":49900007,"row_count":0,"end_ms":0,"limit":0,"message":"API key rate limit exceeded. The limit can be increased up to 1000 requests per minute per API key in TiDB Cloud console. For an increase in quota beyond 1000 rpm, please contact us: https://tidb.support.pingcap.com/","start_ms":0}}}
     ```
 
--   TiDB Cloudデータサービスでは、Chat2Queryデータアプリごとに1日あたり最大100件のリクエストが可能です。
+-   TiDB Cloud Data Serviceでは、Chat2Queryデータアプリごとに1日あたり最大100件のリクエストが可能です。
 
 ## APIキーの有効期限 {#api-key-expiration}
 
-デフォルトでは、API キーは期限切れになりません。ただし、セキュリティを考慮して、キー[作成する](#create-an-api-key)または[編集](#edit-an-api-key)ときに API キーの有効期限を指定できます。
+デフォルトでは、API キーは期限切れになりません。ただし、セキュリティを考慮して、キーを[作成する](#create-an-api-key)または[編集](#edit-an-api-key)するときに API キーの有効期限を指定できます。
 
 -   APIキーは有効期限までのみ有効です。有効期限が切れると、そのキーを使用したすべてのリクエストは`401`エラーで失敗し、応答は次のようになります。
 
@@ -85,11 +85,11 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 データアプリのAPIキーを作成するには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
     > **Tip:**
     >
-    > 複数のプロジェクトがある場合は、目的のプロジェクトの**データ サービス**ページに移動するには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、目的のプロジェクトの [ **...** ] をクリックしてから、 **[データ サービス]**をクリックします。
+    > 複数のプロジェクトがある場合は、目的のプロジェクトの**Data Service**ページに移動するには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、目的のプロジェクトの [ **...** ] をクリックしてから、 **[Data Service]**をクリックします。
 
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 
@@ -108,7 +108,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
     3.  （オプション）APIキーの希望するレート制限を設定します。
 
-        1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1 分あたり 1000 リクエスト (rpm) を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ます。
+        1 分あたりのリクエストがレート制限を超えると、API は`429`エラーを返します。 API キーごとに 1 分あたり 1000 リクエスト (rpm) を超える割り当てを取得するには、サポート チームに[リクエストを送信する](https://tidb.support.pingcap.com/)ことができます。
 
     4.  （オプション）APIキーの有効期限を設定します。
 
@@ -128,7 +128,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 APIキーの説明またはレート制限を編集するには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 3.  **認証**エリアで、 **「アクション」**列を探し、変更したいAPIキーの行で**「...」** &gt; **「編集」**をクリックします。
 4.  APIキーの説明、役割、レート制限、または有効期限を更新します。
@@ -142,7 +142,7 @@ APIキーの説明またはレート制限を編集するには、以下の手�
 
 データアプリのAPIキーを削除するには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 3.  **APIキーの**領域で、 **「アクション」**列を探し、削除したいAPIキーの行で**「...」** &gt; **「削除」を**クリックします。
 4.  表示されたダイアログボックスで、削除を確認してください。
@@ -155,7 +155,7 @@ APIキーの説明またはレート制限を編集するには、以下の手�
 
 データアプリのAPIキーを期限切れにするには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 3.  **認証**エリアで、 **「アクション」**列を探し、有効期限を切れるようにしたいAPIキーの行で**「...」** &gt; **「今すぐ期限切れ」を**クリックします。
 4.  表示されたダイアログボックスで、有効期限を確認してください。
@@ -164,7 +164,7 @@ APIキーの説明またはレート制限を編集するには、以下の手�
 
 データアプリのすべてのAPIキーを期限切れにするには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 3.  **認証**エリアで、 **「すべて期限切れ」**をクリックします。
 4.  表示されたダイアログボックスで、有効期限を確認してください。

@@ -96,7 +96,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 ## インストールと使用方法 {#installation-and-usage}
 
-このセクションでは、 TiUPを使用して TiProxy をデプロイおよび変更する方法について説明します。TiProxy をスケールアウトすることで、 [TiProxyを使用して新しいクラスターを作成します](#create-a-cluster-with-tiproxy)または[既存のクラスターで TiProxy を有効にする](#enable-tiproxy-for-an-existing-cluster)いずれかを選択できます。
+このセクションでは、 TiUPを使用して TiProxy をデプロイおよび変更する方法について説明します。TiProxy をスケールアウトすることで、 [TiProxyを使用して新しいクラスターを作成します](#create-a-cluster-with-tiproxy)または[既存のクラスターで TiProxy を有効にする](#enable-tiproxy-for-an-existing-cluster)のいずれかを選択できます。
 
 > **Note:**
 >

@@ -5,14 +5,14 @@ summary: TiDB Cloudの SQL プロキシ アカウントについて説明しま�
 
 # SQL プロキシアカウント {#sql-proxy-account}
 
-SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成されるSQLユーザーアカウントで、 TiDB Cloudユーザーに代わって[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)または[データサービス](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)介してデータベースにアクセスするために作成されます。たとえば、 `testuser@pingcap.com` TiDB Cloudユーザーアカウントで、 `3jhEcSimm7keKP8.testuser._41mqK6H4`それに対応するSQLプロキシアカウントです。
+SQLプロキシアカウントは、 TiDB Cloudによって自動的に作成されるSQLユーザーアカウントで、 TiDB Cloudユーザーに代わって[SQLエディター](/tidb-cloud/explore-data-with-chat2query.md)または[Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice)を介してデータベースにアクセスするために作成されます。たとえば、 `testuser@pingcap.com` TiDB Cloudユーザーアカウントで、 `3jhEcSimm7keKP8.testuser._41mqK6H4`それに対応するSQLプロキシアカウントです。
 
 SQLプロキシアカウントは、 TiDB Cloud内のデータベースにアクセスするための安全なトークンベースの認証メカニズムを提供します。従来のユーザー名とパスワードによる認証が不要になるため、SQLプロキシアカウントはセキュリティを強化し、アクセス管理を簡素化します。
 
 SQL プロキシ アカウントの主な利点は次のとおりです。
 
 -   強化されたセキュリティ: JWT トークンを使用することで、静的資格情報に関連するリスクを軽減します。
--   合理化されたアクセス: SQL エディターとデータ サービスへのアクセスを具体的に制限し、正確な制御を保証します。
+-   合理化されたアクセス: SQL エディターとData Serviceへのアクセスを具体的に制限し、正確な制御を保証します。
 -   管理の容易さ: TiDB Cloudを使用する開発者と管理者の認証を簡素化します。
 
 ## SQLプロキシアカウントを特定する {#identify-the-sql-proxy-account}
@@ -87,4 +87,4 @@ SQL プロキシ アカウントのロールは、 TiDB CloudユーザーのIAM�
 
 ## SQL プロキシ アカウント アクセス制御 {#sql-proxy-account-access-control}
 
-SQLプロキシアカウントはJWTトークンベースであり、データサービスとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスすることはできません。
+SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスすることはできません。

@@ -227,7 +227,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 Grafana の TiDB モニタリングで「KeyIsLocked」エラーがあるかどうかを確認できます。
 
-TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`番目の項目と`KV Backoff OPS`の`txnLock`番目の項目に明らかな上昇傾向が見られる場合、「KeyIsLocked」エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
+TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`の項目と`KV Backoff OPS`の`txnLock`の項目に明らかな上昇傾向が見られる場合、「KeyIsLocked」エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
 
 ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png) ![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
 

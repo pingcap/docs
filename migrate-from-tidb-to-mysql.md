@@ -44,7 +44,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    `go-tpc`詳細については[TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
+    `go-tpc`の詳細については[TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
 ## ステップ2. 全データを移行する {#step-2-migrate-full-data}
 
@@ -112,7 +112,7 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
+    [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時間に上流と下流の間のデータの整合性をチェックできます。
 
     ```shell
     sync_diff_inspector -C ./config.yaml

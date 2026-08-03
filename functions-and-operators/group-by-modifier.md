@@ -104,11 +104,11 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 
 具体的には：
 
--   最初の行の`profit`値は 2 次元グループ`{year, month}`からのもので、細粒度`{2000, "Jan"}`グループに対する集計結果を表しています。
+-   最初の行の`profit`の値は 2 次元グループ`{year, month}`からのもので、細粒度`{2000, "Jan"}`グループに対する集計結果を表しています。
 -   2 行目の値`profit`は 1 次元グループ`{year}`からのもので、中間レベルのグループ`{2001}`の集計結果を表しています。
--   最後の行の`profit`値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
+-   最後の行の`profit`の値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
 
-`WITH ROLLUP`結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
+`WITH ROLLUP`の結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
 
 たとえば、 `HAVING`句の`NULL`を使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
 
@@ -170,7 +170,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 ## ROLLUP実行プランの解釈方法 {#how-to-interpret-the-rollup-execution-plan}
 
-多次元データ集約では、 `Expand`の演算子を用いてデータをコピーすることで、多次元グループ化のニーズに対応します。各データコピーは、特定の次元のグループ化に対応します。MPPモードでは、 `Expand`番目の演算子はデータシャッフルを容易にし、複数のノード間で大量のデータを迅速に再編成・計算することで、各ノードの計算能力を最大限に活用します。TiFlashノードのないTiFlashクラスターでは、 `Expand`演算子は単一のTiDBノードでのみ実行されるため、次元グループ化の数（ `grouping set` ）が増えるにつれてデータの冗長性が向上します。
+多次元データ集約では、 `Expand`の演算子を用いてデータをコピーすることで、多次元グループ化のニーズに対応します。各データコピーは、特定の次元のグループ化に対応します。MPPモードでは、 `Expand`演算子はデータシャッフルを容易にし、複数のノード間で大量のデータを迅速に再編成・計算することで、各ノードの計算能力を最大限に活用します。TiFlashノードのないTiFlashクラスターでは、 `Expand`演算子は単一のTiDBノードでのみ実行されるため、次元グループ化の数（ `grouping set` ）が増えるにつれてデータの冗長性が向上します。
 
 `Expand`演算子の実装は`Projection`演算子と似ています。違いは、 `Expand`多階層の`Projection`であり、複数階層の射影演算式を含むことです。生データの各行に対して、 `Projection`演算子は結果に 1 行のみを生成しますが、 `Expand`演算子は結果に複数行を生成します（行数は射影演算式のレベル数に等しくなります）。
 
@@ -212,7 +212,7 @@ EXPLAIN SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-この実行プランの例では、 `Expand_20`行目の`operator info`列に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
+この実行プランの例では、 `Expand_20`行の`operator info`列に`Expand`演算子の複数レベルの式が表示されています。これは2次元の式で構成されており、行末の`schema: [test.bank.profit, Column#6, Column#7, gid]`に`Expand`演算子のスキーマ情報が表示されています。
 
 `Expand`演算子のスキーマ情報では、 `GID`追加列として生成されます。その値は、 `Expand`演算子によって異なる次元のグループ化ロジックに基づいて計算され、現在のデータレプリカと`grouping set`関係を反映します。ほとんどの場合、 `Expand`演算子はBit-And演算を使用し、ROLLUPのグループ化項目の組み合わせを63通り表現でき、64次元のグループ化に対応します。このモードでは、TiDBは現在のデータレプリカを複製する際に、必要な次元の`grouping set`グループ化式が含まれているかどうかに応じて`GID`値を生成し、グループ化する列の順序で64ビットのUINT64値を埋めます。
 

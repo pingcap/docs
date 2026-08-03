@@ -103,7 +103,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 -   etcdの`election-timeout`の設定項目に相当します。PDノードに組み込まれたetcdインスタンスの選出タイムアウトを制御します。etcdインスタンスがこの期間内に他のetcdインスタンスから有効なハートビートを受信しない場合、 Raft選出を開始します。
 -   デフォルト値: `3000ms`
--   この値は[`tick-interval`](#tick-interval)の5倍以上でなければなりません。例えば、 `tick-interval`が`500ms`場合、 `election-interval` `2500ms`以上でなければなりません。
+-   この値は[`tick-interval`](#tick-interval)の5倍以上でなければなりません。例えば、 `tick-interval`が`500ms`の場合、 `election-interval`は`2500ms`以上でなければなりません。
 
 ### `enable-prevote` {#enable-prevote}
 
@@ -119,7 +119,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 -   PD が TSO の物理時間を更新する間隔。
 -   TSO物理時間のデフォルトの更新間隔では、PDは最大262144個のTSOを提供します。より多くのTSOを取得するには、この設定項目の値を減らしてください。最小値は`1ms`です。
--   この設定項目を減らすと、PDのCPU使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`場合、PDの[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)約10%増加します。
+-   この設定項目を減らすと、PDのCPU使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`の場合、PDの[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)が約10%増加します。
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
 

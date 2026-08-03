@@ -34,7 +34,7 @@ TiDBは各テーブルにTableID、各インデックスにIndexID、各行にRo
 インデックス データには、一意インデックスと非一意インデックスの 2 種類があります。
 
 -   一意インデックスの場合は、上記のコーディング規則に従うことができます。
--   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`番目は同じですが、複数の行の`ColumnsValue`番目は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
+-   非一意インデックスの場合、このエンコーディングでは一意キーを構築できません。これは、同じインデックスの`tablePrefix{TableID}_indexPrefixSep{IndexID}`は同じですが、複数の行の`ColumnsValue`は同じになる可能性があるためです。非一意インデックスのエンコーディング規則は次のとおりです。
 
         Key: tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_rowID
         Value: null
@@ -79,7 +79,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 ![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
 
-## <code>SHARD_ROW_ID_BITS</code>を使用してホットスポットを処理する {#use-code-shard-row-id-bits-code-to-process-hotspots}
+## <code>SHARD_ROW_ID_BITS</code>を使用してホットスポットを処理する {#use-shard_row_id_bits-to-process-hotspots}
 
 非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。`INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
@@ -108,7 +108,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 上記の負荷図に示すように、設定`SHARD_ROW_ID_BITS`より前では、負荷のホットスポットが単一のリージョンに集中していました。設定`SHARD_ROW_ID_BITS`より後では、負荷のホットスポットが分散するようになります。
 
-## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-code-auto-random-code}
+## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
 
 AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
 

@@ -49,7 +49,7 @@ TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `B
 | `INT`       | 4               | -2147483648 / 0          | 2147483647 / 4294967295                    |
 | `BIGINT`    | 8               | -9223372036854775808 / 0 | 9223372036854775807 / 18446744073709551615 |
 
-### <code>BIT</code>タイプ {#code-bit-code-type}
+### <code>BIT</code>タイプ {#bit-type}
 
 BITデータ型。BIT(M)型はMビット値をstorageします。Mは1から64までの範囲で指定でき、デフォルト値は1です。
 
@@ -57,15 +57,15 @@ BITデータ型。BIT(M)型はMビット値をstorageします。Mは1から64�
 BIT[(M)]
 ```
 
-### <code>BOOLEAN</code>型 {#code-boolean-code-type}
+### <code>BOOLEAN</code>型 {#boolean-type}
 
-`BOOLEAN`型とそのエイリアス`BOOL` `TINYINT(1)`と同等です。値が`0`場合は`False` 、それ以外の場合は`True`とみなされます。MySQLと同様に、 `True`は`1` 、 `False`は`0`です。
+`BOOLEAN`型とそのエイリアス`BOOL`は`TINYINT(1)`と同等です。値が`0`の場合は`False` 、それ以外の場合は`True`とみなされます。MySQLと同様に、 `True`は`1` 、 `False`は`0`です。
 
 ```sql
 BOOLEAN
 ```
 
-### <code>TINYINT</code>型 {#code-tinyint-code-type}
+### <code>TINYINT</code>型 {#tinyint-type}
 
 `TINYINT`データ型は、[-128, 127] の範囲の符号付き値と [0, 255] の範囲の符号なし値を格納します。
 
@@ -73,7 +73,7 @@ BOOLEAN
 TINYINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### <code>SMALLINT</code>型 {#code-smallint-code-type}
+### <code>SMALLINT</code>型 {#smallint-type}
 
 `SMALLINT`データ型は、[-32768、32767]の範囲の符号付き値と、[0、65535]の範囲の符号なし値を格納します。
 
@@ -81,7 +81,7 @@ TINYINT[(M)] [UNSIGNED] [ZEROFILL]
 SMALLINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### <code>MEDIUMINT</code>タイプ {#code-mediumint-code-type}
+### <code>MEDIUMINT</code>タイプ {#mediumint-type}
 
 `MEDIUMINT`データ型は、[-8388608、8388607]の範囲の符号付き値と、[0、16777215]の範囲の符号なし値を格納します。
 
@@ -89,7 +89,7 @@ SMALLINT[(M)] [UNSIGNED] [ZEROFILL]
 MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### <code>INTEGER</code>型 {#code-integer-code-type}
+### <code>INTEGER</code>型 {#integer-type}
 
 `INTEGER`型とそのエイリアス`INT`は、[-2147483648、2147483647] の範囲の符号付き値と、[0、4294967295] の範囲の符号なし値を格納します。
 
@@ -103,7 +103,7 @@ INT[(M)] [UNSIGNED] [ZEROFILL]
 INTEGER[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### <code>BIGINT</code>型 {#code-bigint-code-type}
+### <code>BIGINT</code>型 {#bigint-type}
 
 `BIGINT`データ型は、[-9223372036854775808、9223372036854775807]の範囲の符号付き値と、[0、18446744073709551615]の範囲の符号なし値を格納します。
 
@@ -132,7 +132,7 @@ TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型を�
 | `FLOAT(p)` | 0 &lt;= p &lt;= 24の場合は4、25 &lt;= p &lt;= 53の場合は8 |
 | `DOUBLE`   | 8                                                |
 
-### <code>FLOAT</code>型 {#code-float-code-type}
+### <code>FLOAT</code>型 {#float-type}
 
 `FLOAT`型は単精度浮動小数点数を保存します。許容値は-3.402823466E+38～-1.175494351E-38、0、1.175494351E-38～3.402823466E+38です。これらはIEEE標準に基づく理論上の制限です。実際の範囲は、ハードウェアやオペレーティングシステムによって若干狭くなる場合があります。
 
@@ -149,7 +149,7 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 >
 > TiDBでは、 `FLOAT`データ型のデフォルトの精度は8桁ですが、MySQLでは6桁です。例えば、TiDBとMySQLの両方で`FLOAT`型の列に`123456789`と`1.23456789`挿入した場合、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`返されますが、TiDBでは`123456790`と`1.2345679`返されます。
 
-### <code>DOUBLE</code>型 {#code-double-code-type}
+### <code>DOUBLE</code>型 {#double-type}
 
 `DOUBLE`型とそのエイリアス`DOUBLE PRECISION`は、倍精度浮動小数点数を格納します。許容値は -1.7976931348623157E+308 ～ -2.2250738585072014E-308、0、および 2.2250738585072014E-308 ～ 1.7976931348623157E+308 です。これらは IEEE 標準に基づく理論上の制限です。実際の範囲は、ハードウェアやオペレーティングシステムによって若干狭くなる場合があります。
 
@@ -179,7 +179,7 @@ TiDBは、DECIMALやNUMERICを含むすべてのMySQL浮動小数点型をサポ
 | UNSIGNED | UNSIGNED。省略した場合はSIGNEDになります。                         |
 | ZEROFILL | 数値列に ZEROFILL を指定すると、TiDB は列に UNSIGNED 属性を自動的に追加します。 |
 
-### <code>DECIMAL</code>型 {#code-decimal-code-type}
+### <code>DECIMAL</code>型 {#decimal-type}
 
 `DECIMAL`とそのエイリアス`NUMERIC`は、パックされた「正確な」固定小数点数を格納します。M は小数点以下の桁数（精度）、D は小数点以下の桁数（スケール）です。小数点と（負数の場合は）- 記号は M には含まれません。D が 0 の場合、値には小数点も小数部もありません。DECIMAL の最大桁数（M）は 65 です。サポートされる小数点の最大桁数（D）は 30 です。D が省略された場合、デフォルトは 0 です。M が省略された場合、デフォルトは 10 です。
 

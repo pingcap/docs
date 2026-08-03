@@ -15,7 +15,7 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 データアプリをGPTと統合するには、以下の手順を実行してください。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
 2.  左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**「統合」**タブをクリックします。
 
@@ -37,6 +37,6 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 ## データアプリをDifyと連携させましょう {#integrate-your-data-app-with-dify}
 
-データアプリを[ダイファイ](https://dify.ai/)と統合することで、ベクトル距離計算、高度な類似性検索、ベクトル解析などのインテリジェントな機能を追加し、アプリケーションを強化できます。
+データアプリを[Dify](https://dify.ai/)と統合することで、ベクトル距離計算、高度な類似性検索、ベクトル解析などのインテリジェントな機能を追加し、アプリケーションを強化できます。
 
 データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **[連携]**タブの**[Difyとの連携]**エリアで**[コンフィグレーションを取得]を**クリックする必要がある点です。

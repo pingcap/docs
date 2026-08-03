@@ -106,7 +106,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
     -   TiDB Lightning
 
-        -   TiDBバックエンドで`&`文字目が`EOF`文字目に置き換えられるバグを修正 [＃283](https://github.com/pingcap/tidb-lightning/pull/283)
+        -   TiDBバックエンドで`&`文字が`EOF`文字に置き換えられるバグを修正 [＃283](https://github.com/pingcap/tidb-lightning/pull/283)
 
     -   Backup & Restore (BR)
 

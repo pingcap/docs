@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 > **ヒント**
 >
-> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)および復元する」を参照してください。
+> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 ## 制限事項 {#limitations}
 

@@ -425,7 +425,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
-指定された文字セットが`utf8`または`utf8mb4`場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
+指定された文字セットが`utf8`または`utf8mb4`の場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
 
 このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
 
@@ -578,8 +578,8 @@ TiDBは照合順序を推論する際に、強制性値の低い式の照合順�
 
 次の状況では、TiDB は照合順序を推測できず、エラーを報告します。
 
--   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`場合。
--   2 つの句の照合順序に互換性がなく、返される式の型が`String`場合。
+-   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`の場合。
+-   2 つの句の照合順序に互換性がなく、返される式の型が`String`の場合。
 
 ## <code>COLLATE</code>句 {#code-collate-code-clause}
 

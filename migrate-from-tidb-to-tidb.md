@@ -170,7 +170,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時刻における上流と下流のデータの整合性を確認できます。上記の`BACKUP`出力は、上流クラスターが 431434047157698561 にバックアップを完了したことを示しています。上記の`RESTORE`出力は、下流クラスターが 431434141450371074 に復元を完了したことを示しています。
+    [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時刻における上流と下流のデータの整合性を確認できます。上記の`BACKUP`出力は、上流クラスターが 431434047157698561 にバックアップを完了したことを示しています。上記の`RESTORE`出力は、下流クラスターが 431434141450371074 に復元を完了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml

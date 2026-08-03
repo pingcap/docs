@@ -3,7 +3,7 @@ title: schema_unused_indexes
 summary: sys` スキーマの `schema_unused_indexes` テーブルについて学習します。
 ---
 
-# `schema_unused_indexes` {#schema-unused-indexes}
+# `schema_unused_indexes` {#schema_unused_indexes}
 
 `schema_unused_indexes` 、TiDB の前回の起動以降使用されていないインデックスを記録します。以下の列が含まれます。
 
@@ -29,7 +29,7 @@ DESC SCHEMA_UNUSED_INDEXES;
 3 rows in set (0.00 sec)
 ```
 
-## <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-code-schema-unused-indexes-code-view}
+## <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-schema_unused_indexes-view}
 
 v8.0.0より前のバージョンからアップグレードされたクラスターの場合、 `sys`スキーマとその中のビューは自動的には作成されません。以下のSQL文を使用して手動で作成できます。
 

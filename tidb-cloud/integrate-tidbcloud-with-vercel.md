@@ -58,7 +58,7 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 
 データ[データアプリ](/tidb-cloud/data-service-manage-data-app.md)を介してTiDB Cloudクラスターに接続する場合は、事前にTiDB Cloudに対象のデータアプリとエンドポイントが設定されている必要があります。設定されていない場合は、以下の手順に従って作成してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2.  あなたのプロジェクトに合わせて[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
 3.  [データアプリをリンクする](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)ターゲットのTiDB Cloudクラスターにリンクします。
 4.  [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)ことで、SQL ステートメントを実行するようにカスタマイズできます。
@@ -256,7 +256,7 @@ TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` �
     -   **キー**= `DATA_APP_PRIVATE_KEY`
     -   **値**= `<DATA_APP_PRIVATE_KEY>`
 
-    `<DATA_APP_BASE_URL>` 、 `<DATA_APP_PUBLIC_KEY>` 、 `<DATA_APP_PRIVATE_KEY>`の情報は、 TiDB Cloudコンソールのデータ [データサービス](https://tidbcloud.com/project/data-service)ページから取得できます。
+    `<DATA_APP_BASE_URL>` 、 `<DATA_APP_PUBLIC_KEY>` 、 `<DATA_APP_PRIVATE_KEY>`の情報は、 TiDB Cloudコンソールの[Data Service](https://tidbcloud.com/project/data-service)ページから取得できます。
 
 </div>
 </SimpleTab>

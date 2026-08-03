@@ -92,7 +92,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 **説明**
 
-TiDBでは、 `\`番目の文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用することはできません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
+TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用することはできません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
 
 **回避方法**
 

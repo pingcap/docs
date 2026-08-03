@@ -63,7 +63,7 @@ URI で設定可能なパラメータは次のとおりです。
 
 | パラメータ                         | 説明                                                                                                                                                                    |
 | :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pulsar`                      | 下流Pulsarのスキーム。値は`pulsar` 、 `pulsar+ssl` 、 `pulsar+http` 、 `pulsar+https`いずれかで、v8.2.0以降では`pulsar+http`と`pulsar+https`サポートされています。                                       |
+| `pulsar`                      | 下流Pulsarのスキーム。値は`pulsar` 、 `pulsar+ssl` 、 `pulsar+http` 、 `pulsar+https`のいずれかで、v8.2.0以降では`pulsar+http`と`pulsar+https`がサポートされています。                                       |
 | `127.0.0.1`                   | ダウンストリーム Pulsar がサービスを提供する IP アドレス。                                                                                                                                   |
 | `6650`                        | 下流 Pulsar の接続ポート。                                                                                                                                                     |
 | `persistent://abc/def/yktest` | 前の構成例 1 に示されているように、このパラメータは Pulsar のテナント、名前空間、トピックを指定するために使用されます。                                                                                                     |
@@ -296,7 +296,7 @@ dispatchers = [
     -   `test4`下にあるすべてのテーブルのデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
 
 -   `matcher = ['*.*'], topic = "{schema}_{table}"`
-    -   TiCDCがリッスンするすべてのテーブルは、ルール`databaseName_tableName`に従って別々のトピックに送信されます。例えば、テーブル`test.account`場合、TiCDCはデータ変更ログをトピック`test_account`に送信します。
+    -   TiCDCがリッスンするすべてのテーブルは、ルール`databaseName_tableName`に従って別々のトピックに送信されます。例えば、テーブル`test.account`の場合、TiCDCはデータ変更ログをトピック`test_account`に送信します。
 
 ### DDLイベントをディスパッチする {#dispatch-ddl-events}
 
@@ -310,9 +310,9 @@ dispatchers = [
 
 たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`ような`dispatchers`構成の場合、DDL イベントは次のように送信されます。
 
--   DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`場合、イベントは`test_table1`名前のトピックにディスパッチされます。
+-   DDLイベントが単一のテーブルのみに関係する場合、DDLイベントはそのまま適切なトピックにディスパッチされます。例えば、DDLイベント`DROP TABLE test.table1`の場合、イベントは`test_table1`という名前のトピックにディスパッチされます。
 
--   DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`いずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`場合、処理は次のようになります。
+-   DDLイベントが複数のテーブルに関係する場合（ `RENAME TABLE` 、 `DROP TABLE` 、 `DROP VIEW`のいずれも複数のテーブルに関係する可能性があります）、単一のDDLイベントは複数のイベントに分割され、適切なトピックにディスパッチされます。例えば、DDLイベント`RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`の場合、処理は次のようになります。
 
     -   `RENAME TABLE test.table1 TO test.table10`の DDL イベントを`test_table1`という名前のトピックにディスパッチします。
     -   `RENAME TABLE test.table2 TO test.table20`の DDL イベントを`test_table2`という名前のトピックにディスパッチします。

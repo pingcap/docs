@@ -26,8 +26,8 @@ TiDB の現在のバージョンでは、 `Prepare`ステートメントが次�
 -   クエリには、 `select * from t where a>? and b>@x`などの`?`以外の変数 (システム変数やユーザー定義変数を含む) が含まれています。
 -   クエリには、キャッシュできない関数`database()` 、 `current_user` 、 `current_role` 、 `user` 、 `connection_id` 、 `last_insert_id` 、 `row_count` 、 `version` 、および`like`が含まれています。
 -   クエリでは、 `LIMIT`のパラメータとして変数 ( `LIMIT ?`や`LIMIT 10, ?`など) が使用されており、変数の値は 10000 を超えています。
--   クエリには`Order By`後に`?`続きます（例： `Order By ?` ）。このようなクエリは、 `?`で指定された列に基づいてデータをソートします。異なる列をターゲットとするクエリが同じ実行プランを使用すると、結果は正しくありません。そのため、このようなクエリはキャッシュされません。ただし、 `Order By a+?`ように一般的なクエリの場合はキャッシュされます。
--   クエリは`Group By`後に`?`含みます（例： `Group By?` ）。このようなクエリは、 `?`で指定された列に基づいてデータをグループ化します。異なる列をターゲットとするクエリが同じ実行プランを使用すると、結果は正しくありません。そのため、このようなクエリはキャッシュされません。ただし、 `Group By a+?`ように一般的なクエリの場合はキャッシュされます。
+-   クエリには`Order By`の後に`?`が続きます（例： `Order By ?` ）。このようなクエリは、 `?`で指定された列に基づいてデータをソートします。異なる列をターゲットとするクエリが同じ実行プランを使用すると、結果は正しくありません。そのため、このようなクエリはキャッシュされません。ただし、 `Order By a+?`のように一般的なクエリの場合はキャッシュされます。
+-   クエリは`Group By`の後に`?`を含みます（例： `Group By?` ）。このようなクエリは、 `?`で指定された列に基づいてデータをグループ化します。異なる列をターゲットとするクエリが同じ実行プランを使用すると、結果は正しくありません。そのため、このようなクエリはキャッシュされません。ただし、 `Group By a+?`のように一般的なクエリの場合はキャッシュされます。
 -   クエリには、ウィンドウ関数`Window Frame`の定義に`?` （ `(partition by year order by sale rows ? preceding)`など）が含まれています。ウィンドウ関数の他の場所に`?`出現する場合、クエリはキャッシュされます。
 -   このクエリには、 `int`と`string`比較するためのパラメータ`c_int >= ?`や`c_int in (?, ?)`など）が含まれています。ここで、 `?`文字列型（ `set @x='123'`など）を示します。クエリ結果がMySQLと互換性を持つようにするには、各クエリでパラメータを調整する必要があるため、このようなクエリはキャッシュされません。
 -   このプランは`TiFlash`アクセスしようとします。
@@ -126,7 +126,7 @@ MySQL [test]> select @@last_plan_from_cache;
 
 ## プリペアドプランキャッシュの診断 {#diagnostics-of-prepared-plan-cache}
 
-### <code>SHOW WARNINGS</code>を使用して診断する {#use-code-show-warnings-code-to-diagnose}
+### <code>SHOW WARNINGS</code>を使用して診断する {#use-show-warnings-to-diagnose}
 
 一部のクエリまたはプランはキャッシュできません。`SHOW WARNINGS`ステートメントを使用して、クエリまたはプランがキャッシュされているかどうかを確認できます。キャッシュされていない場合は、結果で失敗の理由を確認できます。例:
 
@@ -166,7 +166,7 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### 診断には<code>Statements Summary</code>を使用する {#use-code-statements-summary-code-to-diagnose}
+### 診断には<code>Statements Summary</code>を使用する {#use-statements-summary-to-diagnose}
 
 `Statements Summary`テーブルには`plan_cache_unqualified`と`plan_cache_unqualified_last_reason`という2つのフィールドがあり、それぞれ対応するクエリがプランキャッシュを使用できなかった回数とその理由を示します。これらの2つのフィールドは診断に使用できます。
 
@@ -287,7 +287,7 @@ MySQL [test]> admin flush global plan_cache;
 ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 ```
 
-## <code>COM_STMT_CLOSE</code>コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視します。 {#ignore-the-code-com-stmt-close-code-command-and-the-code-deallocate-prepare-code-statement}
+## <code>COM_STMT_CLOSE</code>コマンドと<code>DEALLOCATE PREPARE</code>ステートメントを無視します。 {#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement}
 
 SQL ステートメントの構文解析コストを削減するには、 `prepare stmt` 1 回実行し、次に`execute stmt`複数回実行してから`deallocate prepare`を実行することをお勧めします。
 

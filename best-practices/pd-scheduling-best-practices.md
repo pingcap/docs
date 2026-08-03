@@ -165,7 +165,7 @@ pd-ctl のストア コマンドを使用して、各ストアの残高ステー
 
 pd-ctl を使用すると、以下の3つの側面からスケジューリング戦略を調整できます。詳細は[PD Control](/pd-control.md)を参照してください。
 
-### スケジューラを手動で追加/削除する {#add-delete-scheduler-manually}
+### スケジューラを手動で追加/削除する {#adddelete-scheduler-manually}
 
 PDはpd-ctlを介してスケジューラを動的に追加および削除することをサポートしています。例：
 
@@ -173,7 +173,7 @@ PDはpd-ctlを介してスケジューラを動的に追加および削除する
 -   `scheduler remove balance-leader-scheduler` : バランスリーダースケジューラを削除（無効化）する
 -   `scheduler add evict-leader-scheduler 1` : ストア 1 のすべてのリーダーを削除するスケジューラを追加します。
 
-### オペレータを手動で追加/削除する {#add-delete-operators-manually}
+### オペレータを手動で追加/削除する {#adddelete-operators-manually}
 
 PDはpd-ctlを介してオペレータを直接追加または削除することもできます。例えば：
 
@@ -196,7 +196,7 @@ pd-ctl の`config show`コマンドを使用してスケジュール設定を確
 
 このセクションでは、いくつかの一般的なシナリオを通じて PD スケジューリング戦略のベスト プラクティスについて説明します。
 
-### リーダー/リージョンが均等に分布していない {#leaders-regions-are-not-evenly-distributed}
+### リーダー/リージョンが均等に分布していない {#leadersregions-are-not-evenly-distributed}
 
 PDの評価メカニズムでは、異なるストアのリーダー数とリージョン数だけでは負荷分散状況を完全に反映できないと判断されます。そのため、TiKVの実際の負荷やストレージ使用量から、負荷の不均衡が発生しているかどうかを確認する必要があります。
 

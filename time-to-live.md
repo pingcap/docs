@@ -283,7 +283,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
     ![scan fast example](/media/ttl/scan-fast.png)
 
-    対照的に、スキャンワーカーが第`dispatch`フェーズにほとんどいないのに、削除ワーカーが第`idle`フェーズに長時間いる場合、スキャンワーカーは比較的忙しいと言えます。例えば、
+    対照的に、スキャンワーカーが`dispatch`フェーズにほとんどいないのに、削除ワーカーが`idle`フェーズに長時間いる場合、スキャンワーカーは比較的忙しいと言えます。例えば、
 
     ![delete fast example](/media/ttl/delete-fast.png)
 

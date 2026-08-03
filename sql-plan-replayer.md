@@ -12,7 +12,7 @@ TiDB クラスタの問題を特定してトラブルシューティングする
 -   オンサイトトラブルシューティング時の TiDB クラスターの情報を ZIP 形式のファイルにエクスポートしてstorage。
 -   別のTiDBクラスタからエクスポートされたZIP形式のファイルをクラスタにインポートします。このファイルには、オンサイトトラブルシューティング時の後者のTiDBクラスタの情報が含まれています。
 
-## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートします {#use-code-plan-replayer-code-to-export-cluster-information}
+## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートします {#use-plan-replayer-to-export-cluster-information}
 
 `PLAN REPLAYER`を使用すると、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェースは次のとおりです。
 
@@ -31,7 +31,7 @@ TiDB は、 `sql-statement`に基づいて、次のオンサイト情報を整�
 -   `EXPLAIN [ANALYZE] sql-statement`の結果
 -   クエリ最適化の内部手順
 
-履歴統計が[有効](/system-variables.md#tidb_enable_historical_stats)場合、 `PLAN REPLAYER`文で時刻を指定することで、対応する時刻の履歴統計を取得できます。時刻と日付を直接指定することも、タイムスタンプを指定することもできます。TiDB は指定された時刻より前の履歴統計を検索し、その中から最新のものをエクスポートします。
+履歴統計が[有効](/system-variables.md#tidb_enable_historical_stats)の場合、 `PLAN REPLAYER`文で時刻を指定することで、対応する時刻の履歴統計を取得できます。時刻と日付を直接指定することも、タイムスタンプを指定することもできます。TiDB は指定された時刻より前の履歴統計を検索し、その中から最新のものをエクスポートします。
 
 指定された時刻より前の履歴統計がない場合、TiDBは最新の統計をエクスポートします。これは、時刻が指定されていない場合の動作と一致しています。さらに、TiDBはエクスポートされた`ZIP`ファイル内に、 `errors.txt`ファイル内のエラーメッセージを出力。
 
@@ -121,7 +121,7 @@ http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_to
 curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
-## <code>PLAN REPLAYER</code>を使用してクラスター情報をインポートする {#use-code-plan-replayer-code-to-import-cluster-information}
+## <code>PLAN REPLAYER</code>を使用してクラスター情報をインポートする {#use-plan-replayer-to-import-cluster-information}
 
 > **Warning:**
 >
@@ -188,7 +188,7 @@ mysql> show stats_meta;
 >
 > `mysql`コマンドラインクライアントを使用していて`ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`に遭遇した場合は、接続文字列に`--local-infile=true`を追加できます。
 
-## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-code-plan-replayer-capture-code-to-capture-target-plans}
+## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-plan-replayer-capture-to-capture-target-plans}
 
 TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
 
@@ -200,11 +200,11 @@ TiDBの実行プランを特定する場合、対象となるSQL文と実行プ�
 -   システム テーブルを通じて、進行中の一致するタスクと生成されたファイルを表示します。
 -   履歴ファイルを定期的にクリーンアップします。
 
-### <code>PLAN REPLAYER CAPTURE</code>を有効にする {#enable-code-plan-replayer-capture-code}
+### <code>PLAN REPLAYER CAPTURE</code>を有効にする {#enable-plan-replayer-capture}
 
 `PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。`PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
-### <code>PLAN REPLAYER CAPTURE</code>使用する {#use-code-plan-replayer-capture-code}
+### <code>PLAN REPLAYER CAPTURE</code>使用する {#use-plan-replayer-capture}
 
 次のステートメントを使用して、対象の SQL ステートメントと実行プランのダイジェストを TiDB クラスターに登録できます。
 
@@ -235,7 +235,7 @@ mysql> SELECT * FROM mysql.plan_replayer_task;
 1 row in set (0.01 sec)
 ```
 
-### キャプチャ結果を表示する {#view-the-capture-results}
+### キャプチャ結果を表示する {#view-the-capture-results-1}
 
 `PLAN REPLAYER CAPTURE`結果を正常に取得したら、次の SQL ステートメントを使用して、ファイルのダウンロードに使用されたトークンを表示できます。
 
@@ -280,11 +280,11 @@ mysql> SELECT * FROM mysql.plan_replayer_task;
 Empty set (0.01 sec)
 ```
 
-## <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を使用する {#use-code-plan-replayer-continuous-capture-code}
+## <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を使用する {#use-plan-replayer-continuous-capture}
 
 `PLAN REPLAYER CONTINUOUS CAPTURE`有効にすると、TiDB はアプリケーションの SQL 文を`SQL DIGEST`と`PLAN DIGEST`に基づいて`PLAN REPLAYER`方法で非同期的に記録します。同じ DIGEST を共有する SQL 文と実行プランについては、 `PLAN REPLAYER CONTINUOUS CAPTURE`によって重複して記録されません。
 
-### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-code-plan-replayer-continuous-capture-code}
+### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-plan-replayer-continuous-capture}
 
 `PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。`PLAN REPLAYER CONTINUOUS CAPTURE`有効にするには、システム変数の値を`ON`に設定します。
 

@@ -47,15 +47,15 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
     | `insert`                     | DML       | `INSERT` DMLイベント                                                                           |
     | `update`                     | DML       | `UPDATE` DMLイベント                                                                           |
     | `delete`                     | DML       | `DELETE` DMLイベント                                                                           |
-    | `create database`            | DDL       | 第`CREATE DATABASE` DDLイベント                                                                 |
-    | `drop database`              | 互換性のないDDL | 第`DROP DATABASE` DDLイベント                                                                   |
-    | `create table`               | DDL       | 第`CREATE TABLE` DDLイベント                                                                    |
-    | `create index`               | DDL       | 第`CREATE INDEX` DDLイベント                                                                    |
-    | `drop table`                 | 互換性のないDDL | 第`DROP TABLE` DDLイベント                                                                      |
-    | `truncate table`             | 互換性のないDDL | 第`TRUNCATE TABLE` DDLイベント                                                                  |
-    | `rename table`               | 互換性のないDDL | 第`RENAME TABLE` DDLイベント                                                                    |
-    | `drop index`                 | 互換性のないDDL | 第`DROP INDEX` DDLイベント                                                                      |
-    | `alter table`                | DDL       | 第`ALTER TABLE` DDLイベント                                                                     |
+    | `create database`            | DDL       | `CREATE DATABASE` DDLイベント                                                                 |
+    | `drop database`              | 互換性のないDDL | `DROP DATABASE` DDLイベント                                                                   |
+    | `create table`               | DDL       | `CREATE TABLE` DDLイベント                                                                    |
+    | `create index`               | DDL       | `CREATE INDEX` DDLイベント                                                                    |
+    | `drop table`                 | 互換性のないDDL | `DROP TABLE` DDLイベント                                                                      |
+    | `truncate table`             | 互換性のないDDL | `TRUNCATE TABLE` DDLイベント                                                                  |
+    | `rename table`               | 互換性のないDDL | `RENAME TABLE` DDLイベント                                                                    |
+    | `drop index`                 | 互換性のないDDL | `DROP INDEX` DDLイベント                                                                      |
+    | `alter table`                | DDL       | `ALTER TABLE` DDLイベント                                                                     |
     | `value range decrease`       | 互換性のないDDL | 列フィールドの値の範囲を減らすDDL文（例えば、 `VARCHAR(20)`を`VARCHAR(10)`に変更する`ALTER TABLE MODIFY COLUMN`文）     |
     | `precision decrease`         | 互換性のないDDL | 列フィールドの精度を下げるDDL文（例えば、 `Decimal(10, 2)`を`Decimal(10, 1)`に変更する`ALTER TABLE MODIFY COLUMN`文） |
     | `modify column`              | 互換性のないDDL | 列フィールドの型を変更するDDL文（ `INT`を`VARCHAR`に変更する`ALTER TABLE MODIFY COLUMN`文など）                     |
