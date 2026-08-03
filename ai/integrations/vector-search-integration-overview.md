@@ -15,11 +15,10 @@ This document provides an overview of TiDB vector search integration, including 
 
 ## AI frameworks
 
-TiDB provides official support for the following AI frameworks, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
+TiDB provides official support for the following AI framework, enabling you to easily integrate AI applications developed based on these frameworks with TiDB Vector Search.
 
 | AI frameworks | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
-| LangChain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
 
 You can also use TiDB for various tasks such as document storage and knowledge graph storage for AI applications.

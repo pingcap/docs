@@ -739,7 +739,6 @@ Referenced in:
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
 - [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
 - [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
 - [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 
