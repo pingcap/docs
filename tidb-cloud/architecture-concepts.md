@@ -153,7 +153,7 @@ TiDB Cloud CLI `ticloud`と、簡単なコマンドでターミナルから直�
 
 ## TiDB Cloud API（PREVIEW） {#tidb-cloud-api-preview}
 
-TiDB Cloud APIは、RESTベースのインターフェースであり、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Cloud Dedicatedの各プランにわたるリソースをプログラムから管理するためのアクセスを提供します。これにより、 [TiDB Cloudデータサービス](/tidb-cloud/data-service-overview.md)におけるプロジェクト、クラスタ、バックアップ、リストア、データインポート、課金、その他のリソースの管理といったタスクを自動化し、効率的に処理することが可能になります。
+TiDB Cloud APIは、RESTベースのインターフェースであり、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Cloud Dedicatedの各プランにわたるリソースをプログラムから管理するためのアクセスを提供します。これにより、 [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md)におけるプロジェクト、クラスタ、バックアップ、リストア、データインポート、課金、その他のリソースの管理といったタスクを自動化し、効率的に処理することが可能になります。
 
 詳細については、 [TiDB Cloud APIの概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)を参照してください。
 

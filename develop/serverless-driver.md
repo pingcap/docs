@@ -18,7 +18,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-dr
 
 > **Note:**
 >
-> SQL や ORM ではなく RESTful API を使用したプログラミングを好む場合は、 [データサービス（PREVIEW）](https://docs.pingcap.com/tidbcloud/data-service-overview/)を使用できます。
+> SQL や ORM ではなく RESTful API を使用したプログラミングを好む場合は、 [Data Service（PREVIEW）](https://docs.pingcap.com/tidbcloud/data-service-overview/)を使用できます。
 
 ## TiDB Cloud Serverless Driverをインストールします {#install-the-serverless-driver}
 
