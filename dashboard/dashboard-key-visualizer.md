@@ -46,7 +46,7 @@ TiDBデータベースを使用する場合、ホットスポット問題が発�
 -   主キーが`AUTO_INCREMENT`であるテーブルに隣接するデータを書き込むと、このテーブルでホットスポットの問題が発生します。
 -   隣接する時間データをテーブルの時間インデックスに書き込むと、テーブル インデックスでホットスポットの問題が発生します。
 
-ホットスポットの詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
+ホットスポットの詳細については、 [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
 
 ### ヒートマップ {#heatmap}
 
@@ -178,4 +178,4 @@ Key Visualizer を開くと、デフォルトで過去 6 時間のデータベ�
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
-TiDBには、共通ホットスポット問題を軽減するための機能がいくつか組み込まれています。詳細は[高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
+TiDBには、共通ホットスポット問題を軽減するための機能がいくつか組み込まれています。詳細は[高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。

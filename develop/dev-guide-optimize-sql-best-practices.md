@@ -160,7 +160,7 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ### 参照 {#see-also}
 
--   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 
 ## ヘルプが必要ですか? {#need-help}
 

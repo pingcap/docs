@@ -164,7 +164,7 @@ TiDBのコプロセッサーキャッシュ機能は、計算結果のキャッ�
 
 **参照:**
 
--   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 
 ## 散在する読み取りホットスポット {#scatter-read-hotspots}

@@ -1,10 +1,10 @@
 ---
 title: Best Practices for High-Concurrency Writes
-summary: このドキュメントでは、TiDBにおける高同時書き込みワークロードの処理に関するベストプラクティスを紹介します。データ分散、ホットスポット発生事例、そして複雑なホットスポット問題に関する課題と解決策を解説します。また、パフォーマンスを最適化するためのパラメータ設定についても解説します。
+summary: このドキュメントでは、TiDBにおける高同時実行書き込みワークロードの処理に関するベストプラクティスを紹介します。データ分散、ホットスポット発生事例、そして複雑なホットスポット問題に関する課題と解決策を解説します。また、パフォーマンスを最適化するためのパラメータ設定についても解説します。
 aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-concurrency-best-practices/','/ja/docs/dev/best-practices/high-concurrency-best-practices/','/ja/docs/dev/reference/best-practices/high-concurrency/']
 ---
 
-# 高同時書き込みのベストプラクティス {#best-practices-for-high-concurrency-writes}
+# 高同時実行書き込みのベストプラクティス {#best-practices-for-high-concurrency-writes}
 
 このドキュメントでは、TiDB で同時実行性の高い書き込み負荷の高いワークロードを処理するためのベスト プラクティスについて説明します。これは、アプリケーション開発を容易にするのに役立ちます。
 
