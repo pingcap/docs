@@ -434,6 +434,7 @@
 | TiDB Cloud | TiDB Cloud |  |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
+| TiDB Cloud Lake | TiDB Cloud Lake |  |
 | TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
 | TiDB Cloud Premium | TiDB Cloud Premium |  |
 | TiDB Cloud Serverless | TiDB Cloud Serverless |  |
