@@ -6,12 +6,10 @@ aliases: ['/docs/tidb-data-migration/dev/dm-worker-intro/']
 
 # DM-worker Introduction
 
-DM-worker is a component of TiDB Data Migration (DM) that executes tasks to dump and replicate data from MySQL/MariaDB to TiDB.
+DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For a full and incremental migration, it dumps data from one MySQL-compatible source instance, then reads the source binlog as a replication client, transforms and filters events, and applies them to the target TiDB cluster. DM-master queries DM-worker for source and subtask status.
 
-## Key Concepts
+## Key concepts
 
-- A DM-worker can perform a full export of data from the MySQL source and then transition to reading the MySQL binlog for continuous, incremental replication.
-- The DM-worker is the execution engine for tasks and subtasks received from the DM-master. It dumps data from one MySQL source instance, acts as a replication client reading the binlog events, performs data transformation and filtering, stores data in a local relay log, applies data to the downstream target TiDB, and reports the status back to the DM-master.
 - If a worker instance goes offline, DM-master can automatically reschedule its tasks to another available worker to resume the data replication. Note that this does not apply during a full export/import phase.
 - A single DM-worker process connects to **one** upstream source database instance at a time. To migrate from multiple sources, such as when merging sharded tables, you must run multiple DM-worker processes.
 
@@ -21,13 +19,11 @@ DM-worker is a component of TiDB Data Migration (DM) that executes tasks to dump
 
 ## DM-worker processing units
 
-A DM-worker task contains multiple logic units, including relay log, the dump processing unit, the load processing unit, and binlog replication.
+Depending on its task mode, a DM-worker subtask runs the dump, load, and binlog replication processing units. DM-worker can also run an optional relay log processing unit for its bound source.
 
 ### Relay log
 
-The relay log persistently stores the binlog data from the upstream MySQL/MariaDB and provides the feature of accessing binlog events for the binlog replication.
-
-Its rationale and features are similar to the relay log of MySQL. For details, see [MySQL Relay Log](https://dev.mysql.com/doc/refman/8.0/en/replica-logs-relaylog.html).
+Relay logging is optional and disabled by default. When enabled, DM-worker stores upstream binlog events on local disk before the binlog replication processing unit reads them. Enable relay logging when a long full migration or blocked task might outlast upstream binlog retention, or when multiple tasks for the same source need to reuse one binlog stream. Relay logging consumes disk, I/O, and CPU resources and can increase replication latency. For configuration and operational details, see [DM relay log](/dm/relay-log.md).
 
 ### Dump processing unit
 
@@ -59,9 +55,9 @@ The required privileges for the upstream database user depend on the database fl
 >
 > - If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
 
-#### MySQL and MariaDB version before 10.5
+#### MySQL and MariaDB earlier than 10.5.2
 
-For MySQL and MariaDB versions before 10.5, the user must have the following privileges:
+For MySQL and MariaDB earlier than 10.5.2, the user must have the following privileges:
 
 | Privilege | Scope |
 |:----|:----|
@@ -77,9 +73,9 @@ GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_
 GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-#### MariaDB version 10.5 or higher
+#### MariaDB 10.5.2 to 10.5.8
 
-Starting from [MariaDB 10.5](https://mariadb.com/docs/release-notes/community-server/old-releases/mariadb-10-5-series/what-is-mariadb-105), the `REPLICATION CLIENT` privilege was renamed and split into more granular privileges. The user must have the following privileges:
+Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2), the `REPLICATION CLIENT` privilege is renamed and split into more granular privileges. For MariaDB 10.5.2 to 10.5.8, the user must have the following privileges:
 
 | Privilege | Scope | Description |
 |:---|:---|:---|
@@ -94,20 +90,36 @@ To grant these privileges, execute the following statement:
 
 ```sql
 GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'your_user'@'your_wildcard_of_host';
-GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
+```
+
+#### MariaDB 10.5.9 or later
+
+Starting from [MariaDB 10.5.9](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.9), `SHOW SLAVE STATUS` and `SHOW REPLICA STATUS` require the `REPLICA MONITOR` privilege. MariaDB displays this privilege as `SLAVE MONITOR` in `SHOW GRANTS`. Grant the privileges listed for MariaDB 10.5.2 to 10.5.8 plus `REPLICA MONITOR`:
+
+```sql
+GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN, REPLICA MONITOR ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
 > **Note:**
 >
-> Due to changes in MariaDB 10.5+, DM's automated pre-check (`check-task`) might fail with privilege errors because the checks were designed for MySQL's privilege system.
+> Because MariaDB reports these privileges differently from MySQL, `dmctl check-task` might report privilege errors even when the account has the required privileges.
 >
-> If the pre-check fails even with the correct privileges granted, you can use the following workaround in your task configuration file to bypass the check:
+> For DM v8.5.6, if the precheck returns `[code=26005] fail to check synchronization configuration` for the replication privilege, dump privilege, or dump connection number check, add only the following items to the task configuration file:
 >
 > ```yaml
-> ignore-checking-items: ["all"]
+> ignore-checking-items:
+>   - replication_privilege
+>   - dump_privilege
+>   - conn_number
 > ```
 >
-> This option bypasses all pre-checks, so it is crucial to verify that all prerequisites are met before skipping.
+> This workaround skips only the three checks affected by the MariaDB privilege parser. Before using it, manually verify the corresponding privileges and connection limit. For more information, see [DM precheck](/dm/dm-precheck.md).
+
+> **Note:**
+>
+> If the dump unit fails with `Error 1227` while querying the MariaDB `INNODB_TABLESPACES_SCRUBBING` or `INNODB_TABLESPACES_ENCRYPTION` table, grant `SUPER` to let the dump unit read the required metadata. `SUPER` is a broad privilege, so add it only when this exact error occurs and your security policy permits it.
 
 ### Downstream database user privileges
 
@@ -133,7 +145,7 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 
 ### Minimal privilege required by each processing unit
 
-The following table lists the minimal privileges required by each processing unit for **MySQL and MariaDB < 10.5**. For MariaDB 10.5 and later, refer to the privilege table in the preceding section.
+The following table lists the minimal privileges required by each processing unit for MySQL and MariaDB earlier than 10.5.2. For MariaDB 10.5.2 and later, refer to the privilege tables in the preceding section.
 
 | Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
 |:----|:--------------------|:------------|:----|
