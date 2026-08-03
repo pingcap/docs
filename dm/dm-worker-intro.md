@@ -81,7 +81,7 @@ GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
 
 #### MariaDB 10.5.2 to 10.5.8
 
-Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2), the `REPLICATION CLIENT` privilege is renamed and split into more granular privileges. For MariaDB 10.5.2 to 10.5.8, the user must have the following privileges:
+Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2), the `REPLICATION CLIENT` privilege is renamed to `BINLOG MONITOR`, and several replication statements use new privileges created by splitting `SUPER`. For MariaDB 10.5.2 to 10.5.8, the user must have the following privileges:
 
 | Privilege | Scope | Description |
 |:---|:---|:---|
