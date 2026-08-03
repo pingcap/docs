@@ -74,7 +74,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   オプション値: `true` 、 `false`
 -   デフォルト値: `true`
 
-## log.file <span class="version-mark">v5.4.0で追加</span> {#log-file-new-in-v540}
+## log.file <span class="version-mark">v5.4.0で追加</span> {#logfile-new-in-v540}
 
 -   ログファイルに関連するコンフィグレーション項目。
 
@@ -83,7 +83,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   ログファイル。この設定項目が設定されていない場合、ログはデフォルトで「stderr」に出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
-### <code>max-size</code> <span class="version-mark">v5.4.0の新</span>機能 {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
+### <code>max-size</code> <span class="version-mark">v5.4.0の新機能</span> {#max-size-new-in-v540}
 
 -   単一ログファイルの最大サイズ。ファイルサイズがこの設定項目で設定された値よりも大きい場合、システムは自動的に単一ファイルを複数のファイルに分割します。
 -   デフォルト値: `300`
@@ -309,7 +309,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   デフォルト値: `100ms`
 -   値の範囲: `0`または`[10ms, +∞)`
 
-## readpool.unified {#readpool-unified}
+## readpool.unified {#readpoolunified}
 
 読み取り要求を処理するシングルスレッドプールに関連するコンフィグレーション項目。このスレッドプールは、バージョン4.0以降、従来のストレージスレッドプールとコプロセッサスレッドプールに取って代わるものです。
 
@@ -328,7 +328,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 >
 > スレッド数を増やすとコンテキストスイッチの回数が増え、パフォーマンスが低下する可能性があります。この設定項目の値を変更することは推奨されません。
 
-### `stack-size` {#stack-size}
+### `stack-size` {#stack-size-1}
 
 -   統合スレッドプール内のスレッドのスタックサイズ
 -   型: 整数 + 単位
@@ -363,52 +363,52 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 -   値の範囲: `[0.0, 1.0]`
 
-## readpool.storage {#readpool-storage}
+## readpool.storage {#readpoolstorage}
 
 ストレージスレッドプールに関連するコンフィグレーション項目。
 
-### `use-unified-pool` {#use-unified-pool}
+### `use-unified-pool` {#use-unified-pool-1}
 
 -   storage要求に統合スレッドプール（ [`readpool.unified`](#readpoolunified)で構成）を使用するかどうかを決定します。このパラメーターの値が`false`の場合、このセクションの残りのパラメーター（ `readpool.storage` ）で構成された別のスレッドプールが使用されます。
 -   デフォルト値: このセクション ( `readpool.storage` ) に他の設定がない場合、デフォルト値は`true`です。それ以外の場合は、下位互換性のために、デフォルト値は`false`です。このオプションを有効にする前に、必要に応じて[`readpool.unified`](#readpoolunified)の設定を変更してください。
 
-### `high-concurrency` {#high-concurrency}
+### `high-concurrency` {#high-concurrency-1}
 
 -   優先度の高い`read`リクエストを処理する同時実行スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
-### `normal-concurrency` {#normal-concurrency}
+### `normal-concurrency` {#normal-concurrency-1}
 
 -   通常優先度`read`リクエストを処理する同時実行スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
-### `low-concurrency` {#low-concurrency}
+### `low-concurrency` {#low-concurrency-1}
 
 -   優先度の低い`read`リクエストを処理する同時実行スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
-### `max-tasks-per-worker-high` {#max-tasks-per-worker-high}
+### `max-tasks-per-worker-high` {#max-tasks-per-worker-high-1}
 
 -   高優先度スレッドプール内の単一スレッドで許可されるタスクの最大数。この値を超えると、 `Server Is Busy`が返されます。
 -   デフォルト値: `2000`
 -   最小値: `2`
 
-### `max-tasks-per-worker-normal` {#max-tasks-per-worker-normal}
+### `max-tasks-per-worker-normal` {#max-tasks-per-worker-normal-1}
 
 -   通常優先度スレッドプールにおいて、1つのスレッドで実行可能なタスクの最大数。この値を超えると、 `Server Is Busy`が返されます。
 -   デフォルト値: `2000`
 -   最小値: `2`
 
-### `max-tasks-per-worker-low` {#max-tasks-per-worker-low}
+### `max-tasks-per-worker-low` {#max-tasks-per-worker-low-1}
 
 -   低優先度スレッドプール内の単一スレッドで許可されるタスクの最大数。この値を超えると`Server Is Busy`が返されます。
 -   デフォルト値: `2000`
 -   最小値: `2`
 
-### `stack-size` {#stack-size}
+### `stack-size` {#stack-size-2}
 
 -   ストレージ読み取りスレッドプール内のスレッドのスタックサイズ
 -   型: 整数 + 単位
@@ -417,7 +417,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   最小値: `"2MiB"`
 -   最大値: システムで実行された`ulimit -sH`コマンドの結果として出力される Kバイト数。
 
-## `readpool.coprocessor` {#readpool-coprocessor}
+## `readpool.coprocessor` {#readpoolcoprocessor}
 
 コプロセッサースレッドプールに関連するコンフィグレーション項目。
 
@@ -571,11 +571,11 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   TiKVにおけるトランザクションステータスキャッシュの容量を設定します。このパラメータは変更しないでください。
 -   デフォルト値: `5120000`
 
-## storage.block-cache {#storage-block-cache}
+## storage.block-cache {#storageblock-cache}
 
 複数の RocksDBカラムファミリー (CF) 間でブロックキャッシュを共有することに関連するコンフィグレーション項目。
 
-### `capacity` {#capacity}
+### `capacity` {#capacity-1}
 
 -   共有ブロックキャッシュのサイズ。
 
@@ -591,11 +591,11 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   Titanコンポーネントが使用できるブロックキャッシュ全体の割合を制御します。
 -   デフォルト値: `0.2`
 
-## storage.flow-control {#storage-flow-control}
+## storage.flow-control {#storageflow-control}
 
 TiKVにおけるフロー制御メカニズムに関連するコンフィグレーション項目。このメカニズムはRocksDBの書き込み停止メカニズムに代わるもので、スケジューラレイヤーでのフローを制御することで、 RaftstoreやApplyスレッドの停止によって引き起こされる二次的な障害を回避します。
 
-### `enable` {#enable}
+### `enable` {#enable-1}
 
 -   フロー制御メカニズムを有効にするかどうかを決定します。有効にすると、TiKV は KvDB の書き込み停止メカニズムと RaftDB の書き込み停止メカニズム (memtable を除く) を自動的に無効にします。
 -   デフォルト値: `true`
@@ -615,7 +615,7 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
 -   デフォルト値: `20`
 
-### `soft-pending-compaction-bytes-limit` {#soft-pending-compaction-bytes-limit}
+### `soft-pending-compaction-bytes-limit` {#soft-pending-compaction-bytes-limit-1}
 
 -   KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し始め、 `ServerIsBusy`エラーを報告します。
 
@@ -625,12 +625,12 @@ TiKVにおけるフロー制御メカニズムに関連するコンフィグレ�
 
 -   デフォルト値: `"192GiB"`
 
-### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit}
+### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit-1}
 
 -   KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この構成項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`を上書きします。
 -   デフォルト値: `"1024GiB"`
 
-## storage.io-rate-limit {#storage-io-rate-limit}
+## storage.io-rate-limit {#storageio-rate-limit}
 
 I/Oレートリミッターに関連するコンフィグレーション項目。
 
@@ -645,7 +645,7 @@ I/Oレートリミッターに関連するコンフィグレーション項目�
 -   値のオプション: `"read-only"` 、 `"write-only"` 、および`"all-io"`
 -   デフォルト値: `"write-only"`
 
-## storage.max-ts {#storage-max-ts}
+## storage.max-ts {#storagemax-ts}
 
 `max-ts` に関連する設定項目です。
 
@@ -1303,7 +1303,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 RocksDBに関連するコンフィグレーション項目
 
-### `max-background-jobs` {#max-background-jobs}
+### `max-background-jobs` {#max-background-jobs-1}
 
 -   RocksDB のバックグラウンド スレッドの数。 RocksDB スレッド プールのサイズを変更する場合は、 [TiKVスレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値:
@@ -1321,26 +1321,26 @@ RocksDBに関連するコンフィグレーション項目
     -   CPUコア数が`N`の場合、デフォルト値は`[(max-background-jobs + 3) / 4]`です。
 -   最小値: `1`
 
-### `max-sub-compactions` {#max-sub-compactions}
+### `max-sub-compactions` {#max-sub-compactions-1}
 
 -   RocksDBで同時に実行されたサブコンパクション操作の数
 -   デフォルト値: `3`
 -   最小値: `1`
 
-### `max-open-files` {#max-open-files}
+### `max-open-files` {#max-open-files-1}
 
 -   RocksDBが開くことができるファイルの総数
 -   デフォルト値: `40960`
 -   最小値: `-1`
 
-### `max-manifest-file-size` {#max-manifest-file-size}
+### `max-manifest-file-size` {#max-manifest-file-size-1}
 
 -   RocksDBマニフェストファイルの最大サイズ
 -   デフォルト値: `"256MiB"` 。v8.5.3 およびそれ以前の v8.5.x バージョンでは、デフォルト値は`"128MiB"`です。
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `create-if-missing` {#create-if-missing}
+### `create-if-missing` {#create-if-missing-1}
 
 -   DBスイッチを自動的に作成するかどうかを決定します
 -   デフォルト値: `true`
@@ -1355,26 +1355,26 @@ RocksDBに関連するコンフィグレーション項目
     -   `"skip-any-corrupted-records"` :ディザスタリカバリ。データは可能な限り復旧され、破損したレコードはスキップされます。
 -   デフォルト値: `"point-in-time"`
 
-### `wal-dir` {#wal-dir}
+### `wal-dir` {#wal-dir-1}
 
 -   WALファイルが保存されるディレクトリ。指定しない場合、WALファイルはデータと同じディレクトリに保存されます。
 -   デフォルト値: `""`
 
-### `wal-ttl-seconds` {#wal-ttl-seconds}
+### `wal-ttl-seconds` {#wal-ttl-seconds-1}
 
 -   アーカイブされたWALファイルの有効期間。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   単位：秒
 
-### `wal-size-limit` {#wal-size-limit}
+### `wal-size-limit` {#wal-size-limit-1}
 
 -   アーカイブされたWALファイルのサイズ制限。この値を超えると、システムはこれらのファイルを削除します。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `max-total-wal-size` {#max-total-wal-size}
+### `max-total-wal-size` {#max-total-wal-size-1}
 
 -   RocksDB WAL の最大サイズは合計で、 `*.log`内の`data-dir`ファイルのサイズです。
 -   デフォルト値:
@@ -1382,7 +1382,7 @@ RocksDBに関連するコンフィグレーション項目
     -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GiB"`です。
     -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`1`です。
 
-### `stats-dump-period` {#stats-dump-period}
+### `stats-dump-period` {#stats-dump-period-1}
 
 -   統計情報がログに出力される間隔。
 -   デフォルト値:
@@ -1390,21 +1390,21 @@ RocksDBに関連するコンフィグレーション項目
     -   `storage.engine="raft-kv"`の場合、デフォルト値は`"10m"`です。
     -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`"0"`です。
 
-### `compaction-readahead-size` {#compaction-readahead-size}
+### `compaction-readahead-size` {#compaction-readahead-size-1}
 
 -   RocksDBの圧縮処理中に先読み機能を有効にし、先読みデータのサイズを指定します。機械式ディスクを使用している場合は、少なくとも2MiBに設定することをお勧めします。
 -   デフォルト値: `0`
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `writable-file-max-buffer-size` {#writable-file-max-buffer-size}
+### `writable-file-max-buffer-size` {#writable-file-max-buffer-size-1}
 
 -   WritableFileWriteで使用される最大バッファサイズ
 -   デフォルト値: `"1MiB"`
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `use-direct-io-for-flush-and-compaction` {#use-direct-io-for-flush-and-compaction}
+### `use-direct-io-for-flush-and-compaction` {#use-direct-io-for-flush-and-compaction-1}
 
 -   バックグラウンドのフラッシュと圧縮における読み取りと書き込みの両方で`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`を有効にすると、OS バッファ キャッシュの汚染がバイパスされ防止されますが、後続のファイル読み取りではバッファ キャッシュの内容を再読み込みする必要があります。
 -   デフォルト値: `false`
@@ -1432,26 +1432,26 @@ RocksDBに関連するコンフィグレーション項目
 -   最近のワークロードに基づいて、RocksDBの圧縮レート制限設定を自動的に最適化するかどうかを決定します。この設定を有効にすると、圧縮待ちバイト数が通常よりも若干多くなります。
 -   デフォルト値: `true`
 
-### `enable-pipelined-write` {#enable-pipelined-write}
+### `enable-pipelined-write` {#enable-pipelined-write-1}
 
 -   パイプライン書き込みを有効にするかどうかを制御します。この設定を有効にすると、従来のパイプライン書き込みが使用されます。この設定を無効にすると、新しいパイプラインコミットメカニズムが使用されます。
 -   デフォルト値: `false`
 
-### `bytes-per-sync` {#bytes-per-sync}
+### `bytes-per-sync` {#bytes-per-sync-1}
 
 -   OSがファイルをディスクに増分的に同期する速度（これらのファイルが非同期的に書き込まれている間）
 -   デフォルト値: `"1MiB"`
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `wal-bytes-per-sync` {#wal-bytes-per-sync}
+### `wal-bytes-per-sync` {#wal-bytes-per-sync-1}
 
 -   OSがWALファイルの書き込み中にWALファイルをディスクに増分同期する速度
 -   デフォルト値: `"512KiB"`
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `info-log-max-size` {#info-log-max-size}
+### `info-log-max-size` {#info-log-max-size-1}
 
 > **Warning:**
 >
@@ -1462,7 +1462,7 @@ RocksDBに関連するコンフィグレーション項目
 -   最小値: `0`
 -   単位: B|KiB|MiB|GiB
 
-### `info-log-roll-time` {#info-log-roll-time}
+### `info-log-roll-time` {#info-log-roll-time-1}
 
 > **Warning:**
 >
@@ -1471,7 +1471,7 @@ RocksDBに関連するコンフィグレーション項目
 -   Infoログが切り捨てられる時間間隔。値が`0s`の場合、ログは切り捨てられません。
 -   デフォルト値: `"0s"`
 
-### `info-log-keep-log-file-num` {#info-log-keep-log-file-num}
+### `info-log-keep-log-file-num` {#info-log-keep-log-file-num-1}
 
 > **Warning:**
 >
@@ -1481,12 +1481,12 @@ RocksDBに関連するコンフィグレーション項目
 -   デフォルト値: `10`
 -   最小値: `0`
 
-### `info-log-dir` {#info-log-dir}
+### `info-log-dir` {#info-log-dir-1}
 
 -   ログが保存されるディレクトリ
 -   デフォルト値: `""`
 
-### `info-log-level` {#info-log-level}
+### `info-log-level` {#info-log-level-1}
 
 > **Warning:**
 >
@@ -1536,7 +1536,7 @@ RocksDBに関連するコンフィグレーション項目
 -   RocksDBの書き込み最適化を有効にするかどうかを制御します。有効にすると、WriteBatchの内容をmemtableに同時に書き込むことができ、書き込みレイテンシーが削減されます。
 -   デフォルト値：なし。ただし、 `false`に明示的に設定するか、 `rocksdb.enable-pipelined-write`または`rocksdb.enable-unordered-write`有効になっている場合を除き、デフォルトで有効になります。
 
-## rocksdb.titan {#rocksdb-titan}
+## rocksdb.titan {#rocksdbtitan}
 
 Titanに関連するコンフィグレーション項目。
 
@@ -1567,7 +1567,7 @@ Titanに関連するコンフィグレーション項目。
 -   デフォルト値: `1` 。v8.0.0 より前のバージョンでは、デフォルト値は`4`です。
 -   最小値: `1`
 
-## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf-rocksdb-raftcf}
+## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf | rocksdb.raftcf {#rocksdbdefaultcf--rocksdbwritecf--rocksdblockcf--rocksdbraftcf}
 
 `rocksdb.defaultcf` 、 `rocksdb.writecf` 、および`rocksdb.lockcf`に関連するコンフィグレーション項目。
 
@@ -1835,7 +1835,7 @@ Titanに関連するコンフィグレーション項目。
 -   同時実行可能な圧縮タスクの最大数。値`0`は制限なしを意味します。
 -   デフォルト値: `0`
 
-## rocksdb.defaultcf.titan {#rocksdb-defaultcf-titan}
+## rocksdb.defaultcf.titan {#rocksdbdefaultcftitan}
 
 > **Note:**
 >
@@ -2041,7 +2041,7 @@ Titanに関連するコンフィグレーション項目。
 -   同時memtable書き込みを有効にするかどうかを制御します。
 -   デフォルト値: `true`
 
-### `bytes-per-sync` {#bytes-per-sync}
+### `bytes-per-sync` {#bytes-per-sync-2}
 
 -   ファイルが非同期的に書き込まれている間に、OSがファイルをディスクに増分的に同期する速度
 -   デフォルト値: `"1MiB"`
@@ -2108,7 +2108,7 @@ Raft Engineに関連するコンフィグレーション項目。
 > -   Raft Engineを初めて有効にすると、TiKVはRocksDBからRaft Engineにデータを転送します。そのため、TiKVが起動するまで数十秒余分に待つ必要があります。
 > -   TiDB v5.4.0 のRaft Engineのデータ形式は、以前の TiDB バージョンと互換性がありません。そのため、TiDB クラスタを v5.4.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前に**、 `enable`を`false`に設定してRaft Engine を無効にし、TiKV を再起動して設定を有効にしてください。
 
-### `enable` {#enable}
+### `enable` {#enable-2}
 
 -   Raftログを保存するためにRaft Engineを使用するかどうかを決定します。有効にすると、 `raftdb`の設定は無視されます。
 -   デフォルト値: `true`
@@ -2259,7 +2259,7 @@ Raft Engineに関連するコンフィグレーション項目。
 -   デフォルト値: `false`
 -   詳しい使い方は[TiKV側でのログ編集](/log-redaction.md#log-redaction-in-tikv-side)をご覧ください。
 
-## セキュリティ暗号化 {#security-encryption}
+## セキュリティ暗号化 {#securityencryption}
 
 [保存時の暗号化](/encryption-at-rest.md)(TDE)に関するコンフィグレーション項目。
 
@@ -2293,7 +2293,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 TiDB LightningのインポートおよびBR復元に関連するコンフィグレーション項目。
 
-### `num-threads` {#num-threads}
+### `num-threads` {#num-threads-1}
 
 -   RPCリクエストを処理するスレッド数
 -   デフォルト値: `8`
@@ -2342,7 +2342,7 @@ TiDB LightningのインポートおよびBR復元に関連するコンフィグ�
 -   `enable-compaction-filter`が`false`の場合の GC スレッドの数。
 -   デフォルト値: `1`
 
-## gc.自動圧縮 {#gc-auto-compaction}
+## gc.自動圧縮 {#gcauto-compaction}
 
 TiKVの自動圧縮の動作を設定します。
 
@@ -2440,7 +2440,7 @@ BRバックアップに関連するコンフィグレーション項目。
 -   データが S3 にバックアップされ、バックアップ ファイルがこの設定項目の値より大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づいて、96 MiBリージョンによって生成されるバックアップ ファイルは約 10 MiB ～ 30 MiB になります。
 -   デフォルト値: 5MiB
 
-### `gcp-v2-enable` <span class="version-mark">New in v8.5.7</span> {#gcp-v2-enable-new-in-v857}
+### `gcp-v2-enable` <span class="version-mark">New in v8.5.7</span> {#gcp-v2-enable-new-in-v857-1}
 
 + Google Cloud Storage (GCS) を使用してフルバックアップまたはリストアを実行する際に、`gcp_v2` 外部ストレージバックエンドを有効にするかどうかを指定します。
 + デフォルト値: `true`
@@ -2448,7 +2448,7 @@ BRバックアップに関連するコンフィグレーション項目。
 + フルバックアップまたはリストアのシナリオで Google Cloud Workload Identity Federation (WIF) を使用する必要がある場合は、この設定項目を `true` に設定したままにしてください。
 + GCS の認証方法および WIF/ADC の使用方法については、[バックアップストレージ](/br/backup-and-restore-storages.md) を参照してください。
 
-## backup.hadoop {#backup-hadoop}
+## backup.hadoop {#backuphadoop}
 
 ### `home` {#home}
 
@@ -2846,7 +2846,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
     -   [`region-split-size`](#region-split-size) 4 GiB 未満の場合、 `0.25` 。
     -   [`region-split-size`](#region-split-size)が 4 GiB 以上の場合`0.75` 。
 
-## メモリ<span class="version-mark">v7.5.0の新機能</span> {#memory-span-class-version-mark-new-in-v7-5-0-span}
+## メモリ<span class="version-mark">v7.5.0の新機能</span> {#memory-new-in-v750}
 
 ### `enable-heap-profiling` <span class="version-mark">v7.5.0の新機能</span> {#enable-heap-profiling-new-in-v750}
 
@@ -2863,7 +2863,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 -   TiKVスレッドレベルでメモリ割り当て状況を表示して、各TiKVスレッドのメモリ使用量を追跡するかどうかを制御します。
 -   デフォルト値: `true`
 
-## インメモリエンジン<span class="version-mark">v8.5.0の新機能</span> {#in-memory-engine-span-class-version-mark-new-in-v8-5-0-span}
+## インメモリエンジン<span class="version-mark">v8.5.0の新機能</span> {#in-memory-engine-new-in-v850}
 
 TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関連する構成項目。
 
@@ -2878,7 +2878,7 @@ TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関
 -   TiKVノードには最低でも8GiBのメモリを搭載することを推奨します。最適なパフォーマンスを得るには、32GiB以上を搭載することをお勧めします。
 -   TiKVノードで使用可能なメモリが不足している場合、この設定項目が`true`に設定されていても、インメモリエンジンは有効になりません。このような場合は、TiKVログファイルで`"in-memory engine is disabled because"`を含むメッセージを確認し、インメモリエンジンが有効にならない理由を調べてください。
 
-### <code>capacity</code> <span class="version-mark">（v8.5.0の新</span>機能） {#code-capacity-code-span-class-version-mark-new-in-v8-5-0-span}
+### <code>capacity</code> <span class="version-mark">v8.5.0の新機能</span> {#capacity-new-in-v850}
 
 > **Note:**
 >

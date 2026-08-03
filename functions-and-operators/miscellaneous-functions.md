@@ -30,7 +30,7 @@ TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.co
 | [`UUID_TO_BIN()`](#uuid_to_bin)       | UUIDをテキスト形式からバイナリ形式に変換する                                                                                                                                                                                                                                                   |
 | [`VALUES()`](#values)                 | INSERT時に使用される値を定義します                                                                                                                                                                                                                                                       |
 
-### 任意の値() {#any-value}
+### 任意の値() {#any_value}
 
 `ANY_VALUE()`関数は、値のグループから任意の値を返します。通常、 `SELECT`ステートメントに集計されていない列を`GROUP BY`句とともに含める必要があるシナリオで使用されます。
 
@@ -59,7 +59,7 @@ SELECT ANY_VALUE(id),GROUP_CONCAT(id),name FROM fruits GROUP BY name;
 
 前述の例では、 `SELECT`列が非集計列であり、 `id`句に含まれていないため、TiDB は最初の`GROUP BY`ステートメントに対してエラーを返します。この問題を解決するために、2 番目の`SELECT`クエリでは、 `ANY_VALUE()`を使用して各グループから任意の値を取得し、 `GROUP_CONCAT()`を使用して各グループ内の`id`列のすべての値を単一の文字列に連結します。この方法により、非集計列の SQL モードを変更することなく、各グループから 1 つの値とグループ内のすべての値を取得できます。
 
-### BIN_TO_UUID() {#bin-to-uuid}
+### BIN_TO_UUID() {#bin_to_uuid}
 
 `BIN_TO_UUID()`と`UUID_TO_BIN()`は、テキスト形式の UUID とバイナリ形式の UUID を相互に変換するために使用できます。どちらの関数も 2 つの引数を受け取ります。
 
@@ -143,7 +143,7 @@ TABLE t1;
 
 [`GROUP BY`修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。
 
-### INET_ATON() {#inet-aton}
+### INET_ATON() {#inet_aton}
 
 `INET_ATON()`関数は、ドット付き四分音符表記の IPv4 アドレスを、効率的に保存できるバイナリ バージョンに変換します。
 
@@ -158,7 +158,7 @@ SELECT INET_ATON('127.0.0.1');
     +------------------------+
     1 row in set (0.00 sec)
 
-### INET_NTOA() {#inet-ntoa}
+### INET_NTOA() {#inet_ntoa}
 
 `INET_NTOA()`関数は、バイナリ IPv4 アドレスをドット付き四角形表記に変換します。
 
@@ -173,7 +173,7 @@ SELECT INET_NTOA(2130706433);
     +-----------------------+
     1 row in set (0.00 sec)
 
-### INET6_ATON() {#inet6-aton}
+### INET6_ATON() {#inet6_aton}
 
 `INET6_ATON()`関数は[`INET_ATON()`](#inet_aton)と似ていますが、 `INET6_ATON()` IPv6 アドレスも処理できます。
 
@@ -188,7 +188,7 @@ SELECT INET6_ATON('::1');
     +--------------------------------------+
     1 row in set (0.00 sec)
 
-### INET6_NTOA() {#inet6-ntoa}
+### INET6_NTOA() {#inet6_ntoa}
 
 `INET6_NTOA()`関数は[`INET_NTOA()`](#inet_ntoa)と似ていますが、 `INET6_NTOA()` IPv6 アドレスも処理できます。
 
@@ -203,7 +203,7 @@ SELECT INET6_NTOA(0x00000000000000000000000000000001);
     +------------------------------------------------+
     1 row in set (0.00 sec)
 
-### IS_IPV4() {#is-ipv4}
+### IS_IPV4() {#is_ipv4}
 
 `IS_IPV4()`関数は、指定された引数が IPv4 アドレスであるかどうかをテストします。
 
@@ -229,7 +229,7 @@ SELECT IS_IPV4('300.0.0.1');
     +----------------------+
     1 row in set (0.00 sec)
 
-### IS_IPV4_COMPAT() {#is-ipv4-compat}
+### IS_IPV4_COMPAT() {#is_ipv4_compat}
 
 `IS_IPV4_COMPAT()`関数は、指定された引数が IPv4 互換アドレスであるかどうかをテストします。
 
@@ -244,7 +244,7 @@ SELECT IS_IPV4_COMPAT(INET6_ATON('::127.0.0.1'));
     +-------------------------------------------+
     1 row in set (0.00 sec)
 
-### IS_IPV4_MAPPE() {#is-ipv4-mapped}
+### IS_IPV4_MAPPE() {#is_ipv4_mapped}
 
 `IS_IPV4_MAPPED()`関数は、指定された引数が IPv4 マップド アドレスであるかどうかをテストします。
 
@@ -259,7 +259,7 @@ SELECT IS_IPV4_MAPPED(INET6_ATON('::ffff:127.0.0.1'));
     +------------------------------------------------+
     1 row in set (0.00 sec)
 
-### IS_IPV6() {#is-ipv6}
+### IS_IPV6() {#is_ipv6}
 
 `IS_IPV6()`関数は、指定された引数が IPv6 アドレスであるかどうかをテストします。
 
@@ -274,7 +274,7 @@ SELECT IS_IPV6('::1');
     +----------------+
     1 row in set (0.00 sec)
 
-### IS_UUID() {#is-uuid}
+### IS_UUID() {#is_uuid}
 
 `IS_UUID()`関数は、指定された引数が[UUID](/best-practices/uuid.md)であるかどうかをテストします。
 
@@ -289,7 +289,7 @@ SELECT IS_UUID('eb48c08c-eb71-11ee-bacf-5405db7aad56');
     +-------------------------------------------------+
     1 row in set (0.00 sec)
 
-### NAME_CONST() {#name-const}
+### NAME_CONST() {#name_const}
 
 `NAME_CONST()`関数は列に名前を付けるために使用されます。代わりに列エイリアスを使用することをお勧めします。
 
@@ -351,7 +351,7 @@ SELECT UUID();
 
 [UUIDのベストプラクティス](/best-practices/uuid.md)も参照してください。
 
-### UUIDからビンへ {#uuid-to-bin}
+### UUIDからビンへ {#uuid_to_bin}
 
 [BIN_TO_UUID()](#bin_to_uuid)を参照してください。
 

@@ -15,7 +15,7 @@ summary: TiDBに関する用語集。
 
 <TabsPanel letters="ABCDEGHIKLMOPQRSTUV" />
 
-## <a id="A" class="letter" href="#A">A</a> {#a-id-a-class-letter-href-a-a-a}
+## <a id="A" class="letter" href="#A">A</a> {#a}
 
 ### ACID {#acid}
 
@@ -29,9 +29,9 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 -   **永続性**とは、一度トランザクションがコミットされると、システム障害が発生した場合でもコミットされた状態が維持されることを意味します。TiKVは永続ストレージを使用して永続性を確保しています。
 
-## <a id="B" class="letter" href="#B">B</a> {#a-id-b-class-letter-href-b-b-a}
+## <a id="B" class="letter" href="#B">B</a> {#b}
 
-### Backup & Restore (BR) {#backup-x26-restore-br}
+### Backup & Restore (BR) {#backup--restore-br}
 
 BRは TiDB のバックアップおよび復元ツールです。詳細については[BR概要](/br/backup-and-restore-overview.md)を参照してください。
 
@@ -49,7 +49,7 @@ TiDBでは、 `br`はバックアップまたはリストアに使用される[b
 
 [リージョン](#regionpeerraft-group)は論理的にバケットと呼ばれるいくつかの小さな範囲に分割されます。TiKV はバケットごとにクエリ統計を収集し、バケットの状態を PD に報告します。詳細については、 [バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
-## <a id="C" class="letter" href="#C">C</a> {#a-id-c-class-letter-href-c-c-a}
+## <a id="C" class="letter" href="#C">C</a> {#c}
 
 ### キャッシュされたテーブル {#cached-table}
 
@@ -87,7 +87,7 @@ RocksDBとTiKVでは、カラムファミリー（CF）は、データベース�
 
 コプロセッサーは、TiDBと計算ワークロードを共有するコプロセッシングメカニズムです。ストレージレイヤー（TiKVまたはTiFlash）に配置され、リージョンごとにTiDBからの計算[プッシュダウンする](/functions-and-operators/expressions-pushed-down.md)共同で処理します。
 
-## <a id="D" class="letter" href="#D">D</a> {#a-id-d-class-letter-href-d-d-a}
+## <a id="D" class="letter" href="#D">D</a> {#d}
 
 ### Dumpling {#dumpling}
 
@@ -123,7 +123,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 動的プルーニングモードは、TiDBがパーティションテーブルにアクセスするモードの1つです。動的プルーニングモードでは、各演算子が複数のパーティションへの直接アクセスをサポートします。そのため、TiDBはUnionを使用しなくなります。Union操作を省略することで、実行効率が向上し、Unionの同時実行による問題を回避できます。
 
-## <a id="E" class="letter" href="#E">E</a> {#a-id-e-class-letter-href-e-e-a}
+## <a id="E" class="letter" href="#E">E</a> {#e}
 
 ### 式インデックス or 関数インデックス {#expression-index}
 
@@ -131,7 +131,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 詳細については、 [インデックスの作成 -式インデックス or 関数インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
-## <a id="G" class="letter" href="#G">G</a> {#a-id-g-class-letter-href-g-g-a}
+## <a id="G" class="letter" href="#G">G</a> {#g}
 
 ### ガベージコレクション（GC） {#garbage-collection-gc}
 
@@ -145,7 +145,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 グローバルトランザクション識別子（GTID）は、MySQLバイナリログで使用される一意のトランザクションIDで、どのトランザクションが複製されたかを追跡するために使用されます。1 [データ移行（DM）](/dm/dm-overview.md) 、これらのIDを使用して一貫性のあるレプリケーションを保証します。
 
-## <a id="H" class="letter" href="#H">H</a> {#a-id-h-class-letter-href-h-h-a}
+## <a id="H" class="letter" href="#H">H</a> {#h}
 
 ### ホットスポット {#hotspot}
 
@@ -155,7 +155,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 ハイブリッドトランザクションおよび分析処理（HTAP）は、同一データベース内でOLTP（オンライントランザクション処理）とOLAP（オンライン分析処理）の両方のワークロードを可能にするデータベース機能です。TiDBでは、行ストレージにTiKV、列ストレージにTiFlashを使用することでHTAP機能が提供されます。詳細については、 [TiDB HTAPクイックスタート](/quick-start-with-htap.md)および[HTAPを探索する](/explore-htap.md)を参照してください。
 
-## <a id="I" class="letter" href="#I">私</a> {#a-id-i-class-letter-href-i-i-a}
+## <a id="I" class="letter" href="#I">私</a> {#i}
 
 ### インメモリ悲観的ロック {#in-memory-pessimistic-lock}
 
@@ -165,7 +165,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 インデックスマージは、TiDB v4.0で導入されたテーブルアクセス方法です。この方法を使用すると、TiDBオプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスから返される結果をマージできます。場合によっては、この方法によってフルテーブルスキャンが回避され、クエリの効率が向上します。インデックスマージは、v5.4以降、一般提供（GA）機能となっています。
 
-## <a id="K" class="letter" href="#K">K</a> {#a-id-k-class-letter-href-k-k-a}
+## <a id="K" class="letter" href="#K">K</a> {#k}
 
 ### キー管理サービス（KMS） {#key-management-service-kms}
 
@@ -175,9 +175,9 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 キーバリュー（KV）は、値を一意のキーに関連付けることで情報を保存する方法であり、迅速なデータ検索を可能にします。TiDBはTiKVを使用してテーブルとインデックスをキーバリューペアにマッピングし、データベース全体で効率的なデータストレージとアクセスを実現します。
 
-## <a id="L" class="letter" href="#L">L</a> {#a-id-l-class-letter-href-l-l-a}
+## <a id="L" class="letter" href="#L">L</a> {#l}
 
-### Leader／Follower／Learner {#leader-follower-learner}
+### Leader／Follower／Learner {#leaderfollowerlearner}
 
 Raftグループ（ [仲間](#regionpeerraft-group)構成）では、Leader、Follower、Learnerがそれぞれ役割を担います。リーダーはすべてのクライアント要求を処理し、フォロワーにデータを複製します。グループリーダーが故障した場合、フォロワーの中から1人が新しいリーダーに選出されます。ラーナーは投票権を持たないフォロワーであり、複製データの追加処理のみに関与します。
 
@@ -195,7 +195,7 @@ Raftグループ（ [仲間](#regionpeerraft-group)構成）では、Leader、Fo
 
 長期サポート (LTS) とは、長期間にわたって徹底的にテストおよびメンテナンスされるソフトウェア バージョンを指します。詳細については、 [TiDB バージョン管理](/releases/versioning.md)を参照してください。
 
-## <a id="M" class="letter" href="#M">M</a> {#a-id-m-class-letter-href-m-m-a}
+## <a id="M" class="letter" href="#M">M</a> {#m}
 
 ### 超並列処理（MPP） {#massively-parallel-processing-mpp}
 
@@ -205,7 +205,7 @@ TiDBはv5.0以降、 TiFlashノードを介して大規模並列処理（MPP）�
 
 [MVCC](https://en.wikipedia.org/wiki/Multiversion_concurrency_control)は、TiDBをはじめとするデータベースにおける並行性制御メカニズムです。トランザクションによって読み取られたメモリを処理することで、TiDBへの同時アクセスを実現し、同時読み取りと書き込みの競合によって発生するブロッキングを回避します。
 
-## <a id="O" class="letter" href="#O">O</a> {#a-id-o-class-letter-href-o-o-a}
+## <a id="O" class="letter" href="#O">O</a> {#o}
 
 ### 旧価格 {#old-value}
 
@@ -248,7 +248,7 @@ TiCDCが出力する増分変更ログにおける「元の値」。TiCDCが出�
 
 詳細については、 [TiDBの楽観的トランザクションモデル](/optimistic-transaction.md)を参照してください。
 
-## <a id="P" class="letter" href="#P">P</a> {#a-id-p-class-letter-href-p-p-a}
+## <a id="P" class="letter" href="#P">P</a> {#p}
 
 ### パーティショニング {#partitioning}
 
@@ -258,7 +258,7 @@ TiCDCが出力する増分変更ログにおける「元の値」。TiCDCが出�
 
 PD Control (pd-ctl) は、TiDB クラスタ内の Placement Driver (PD) と対話するために使用されるコマンドライン ツールです。これを使用して、クラスタの状態情報を取得したり、クラスタ構成を変更したりできます。詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
-### 保留中／ダウン中 {#pending-down}
+### 保留中／ダウン中 {#pendingdown}
 
 「保留中」と「ダウン」は、ピアの2つの特別な状態です。「保留中」とは、フォロワーまたはラーナーのRaftログがリーダーのログと大きく異なる状態を指します。保留中のフォロワーはリーダーに選出されません。「ダウン」とは、ピアが長時間リーダーに応答しなくなった状態を指し、通常は対応するノードがダウンしているか、ネットワークから孤立していることを意味します。
 
@@ -284,7 +284,7 @@ PointGetとは、一意インデックスまたは主インデックスによっ
 
 ほとんどの場合、SQL ステートメントを実行する際、オプティマイザは一部の列 ( `WHERE` `GROUP BY`の列など) の統計情報のみを使用します。これらの使用される列`ORDER BY`述語列と呼ばれます。詳細については、 [いくつかの列の統計情報を収集する](/statistics.md#collect-statistics-on-some-columns) `JOIN`してください。
 
-## <a id="Q" class="letter" href="#Q">Q</a> {#a-id-q-class-letter-href-q-q-a}
+## <a id="Q" class="letter" href="#Q">Q</a> {#q}
 
 ### 1秒あたりのクエリ数（QPS） {#queries-per-second-qps}
 
@@ -294,7 +294,7 @@ PointGetとは、一意インデックスまたは主インデックスによっ
 
 クォータリミッターは、TiDB v6.0.0 で導入された実験的機能です。TiKV がデプロイされているマシンにリソース制限がある場合（例えば、CPU が 4V、メモリが 16GB しかない場合）、TiKV のフォアグラウンドが読み書き要求を過剰に処理すると、バックグラウンドで使用される CPU リソースがこれらの要求の処理に使用され、TiKV のパフォーマンスの安定性に影響します。この状況を回避するために、クォータリミッターを[クォータ関連の設定項目](/tikv-configuration-file.md#quota)に設定して、フォアグラウンドで使用される CPU リソースを制限できます。
 
-## <a id="R" class="letter" href="#R">R</a> {#a-id-r-class-letter-href-r-r-a}
+## <a id="R" class="letter" href="#R">R</a> {#r}
 
 ### Raft Engine {#raft-engine}
 
@@ -306,7 +306,7 @@ TiKVクラスタ内のリージョンは、最初は分割されておらず、�
 
 リージョン分割の仕組みは、まず1つの初期リージョンを使用して鍵空間全体をカバーし、リージョンのサイズまたは鍵の数が閾値に達するたびに、既存のリージョンを分割して新しいリージョンを生成するというものです。
 
-### リージョン／仲間／Raftグループ {#region-peer-raft-group}
+### リージョン／仲間／Raftグループ {#regionpeerraft-group}
 
 TiKV におけるデータストレージの最小単位はリージョンであり、それぞれがデータ範囲 (デフォルトでは 256 MiB) を表します。各リージョンには、デフォルトで 3 つのレプリカがあります。リージョンのレプリカはピアと呼ばれます。同じリージョンの複数のピアは、 Raftコンセンサスアルゴリズムを使用してデータを複製するため、ピアもRaftインスタンスのメンバーとなります。TiKV は、マルチ Raft を使用してデータを管理します。つまり、各リージョンには、対応する独立したRaftグループが存在します。
 
@@ -326,7 +326,7 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 
 [RocksDB](https://rocksdb.org/)は、キーバリューstorageと読み書き機能を提供するLSMツリー構造のエンジンです。Facebookによって開発され、LevelDBをベースとしています。RocksDBはTiKVの中核となるストレージエンジンです。
 
-## <a id="S" class="letter" href="#S">S</a> {#a-id-s-class-letter-href-s-s-a}
+## <a id="S" class="letter" href="#S">S</a> {#s}
 
 ### スケジューラ {#scheduler}
 
@@ -349,7 +349,7 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 
 詳細については、 [ステイル読み取り](/stale-read.md)を参照してください。
 
-### 静的ソート済みテーブル／ソート済み文字列テーブル（SST） {#static-sorted-table-sorted-string-table-sst}
+### 静的ソート済みテーブル／ソート済み文字列テーブル（SST） {#static-sorted-table--sorted-string-table-sst}
 
 静的ソートテーブルまたはソート文字列テーブルは、RocksDB（ [TiKV](/storage-engine/rocksdb-overview.md)で使用されているストレージエンジン）で使用されるファイルストレージ形式です。
 
@@ -357,7 +357,7 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 
 ストアとは、TiKV クラスタ内のストレージノード (インスタンス`tikv-server` ) を指します。各ストアには、対応する TiKV インスタンスがあります。
 
-## <a id="T" class="letter" href="#T">T</a> {#a-id-t-class-letter-href-t-t-a}
+## <a id="T" class="letter" href="#T">T</a> {#t}
 
 ### 一時テーブル {#temporary-table}
 
@@ -399,7 +399,7 @@ Top SQLは、指定された時間範囲内でTiDBまたはTiKVノードの負�
 
 トランザクション/秒（TPS）とは、データベースが1秒間に処理するトランザクションの数であり、データベースのパフォーマンスとスループットを測定するための重要な指標です。
 
-## <a id="U" class="letter" href="#U">U</a> {#a-id-u-class-letter-href-u-u-a}
+## <a id="U" class="letter" href="#U">U</a> {#u}
 
 ### 統一リソース識別子（URI） {#uniform-resource-identifier-uri}
 
@@ -409,7 +409,7 @@ URI（Uniform Resource Identifier）は、リソースを識別するための�
 
 UUID（Universally Unique Identifier）は、データベース内のレコードを一意に識別するために使用される128ビット（16バイト）の生成されたIDです。詳細については、 [UUID](/best-practices/uuid.md)を参照してください。
 
-## <a id="V" class="letter" href="#V">V</a> {#a-id-v-class-letter-href-v-v-a}
+## <a id="V" class="letter" href="#V">V</a> {#v}
 
 ### ベクトル検索 {#vector-search}
 

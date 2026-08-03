@@ -21,7 +21,7 @@ SQL のパフォーマンス問題をより適切に処理するために、MySQ
 
 このドキュメントでは、これらのテーブルの詳細を説明し、SQLのパフォーマンス問題のトラブルシューティングにそれらを使用する方法を紹介します。
 
-## `statements_summary` {#statements-summary}
+## `statements_summary` {#statements_summary}
 
 `statements_summary`は`information_schema`内のシステム テーブルです。 `statements_summary`は、SQL ステートメントをリソース グループ、SQL ダイジェスト、およびプラン ダイジェストごとにグループ化し、各 SQL カテゴリの統計情報を提供します。
 
@@ -82,13 +82,13 @@ select * from employee where id in (...) and salary between ? and ?;
 > -   TiDBでは、ステートメントサマリーテーブルのフィールドの時間単位はナノ秒（ns）ですが、MySQLではピコ秒（ps）です。
 > -   v7.5.1 および v7.6.0 以降、 が有効に[リソース制御](/tidb-resource-control-ru-groups.md)ているクラスターでは、 `statements_summary`リソース グループごとに集約されます。たとえば、異なるリソース グループで実行された同じステートメントは、異なるレコードとして収集されます。
 
-## `statements_summary_history` {#statements-summary-history}
+## `statements_summary_history` {#statements_summary_history}
 
 `statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行うことができます。
 
 `SUMMARY_BEGIN_TIME`フィールドと`SUMMARY_END_TIME`フィールドは、履歴期間の開始時刻と終了時刻を表します。
 
-## `statements_summary_evicted` {#statements-summary-evicted}
+## `statements_summary_evicted` {#statements_summary_evicted}
 
 [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)システム変数は`statements_summary`テーブルと`statements_summary_history`テーブルがメモリに格納できる SQL ダイジェストの総数を制限します。この制限を超えると、TiDB は`statements_summary`テーブルと`statements_summary_history`テーブルの両方から、最も使用頻度の低い SQL ダイジェストを削除します。
 
@@ -114,7 +114,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 </CustomContent>
 
-## ステートメントサマリーの<code>cluster</code>テーブル {#the-code-cluster-code-tables-for-statement-summary}
+## ステートメントサマリーの<code>cluster</code>テーブル {#the-cluster-tables-for-statement-summary}
 
 `statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスタ全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
 
@@ -312,7 +312,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 
 ## フィールドの説明 {#fields-description}
 
-### <code>statements_summary</code>フィールドの説明 {#code-statements-summary-code-fields-description}
+### <code>statements_summary</code>フィールドの説明 {#statements_summary-fields-description}
 
 以下は`statements_summary`テーブルのフィールドの説明です。
 
@@ -448,7 +448,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `STORAGE_KV` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行が TiKV からデータを読み取ったかどうかを示します。
 -   `STORAGE_MPP` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行がTiFlashからデータを読み取ったかどうかを示します。
 
-### <code>statements_summary_evicted</code>フィールドの説明 {#code-statements-summary-evicted-code-fields-description}
+### <code>statements_summary_evicted</code>フィールドの説明 {#statements_summary_evicted-fields-description}
 
 -   `BEGIN_TIME` : 開始時刻を記録します。
 -   `END_TIME` : 終了時刻を記録します。

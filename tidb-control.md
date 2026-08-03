@@ -88,9 +88,9 @@ TiDBコントロールは複数のコマンド層で構成されています。�
 -   TiDB のデフォルトのサービス ポート: `10080` 。
 -   PD のデフォルトのサービス ポート: `2379` 。
 
-### <code>schema</code>コマンド {#the-code-schema-code-command}
+### <code>schema</code>コマンド {#the-schema-command}
 
-#### <code>in</code>サブコマンド {#the-code-in-code-subcommand}
+#### <code>in</code>サブコマンド {#the-in-subcommand}
 
 `in` 、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
 
@@ -138,7 +138,7 @@ tidb-ctl schema in <database name>
 
     デフォルトのTiDBサービスアドレスとポートを使用しない場合は、 `--host`と`--port`オプションを使用して設定します。例： `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db` 。
 
-#### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
+#### <code>tid</code>サブコマンド {#the-tid-subcommand}
 
 `tid` 、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。`in`コマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
@@ -159,7 +159,7 @@ tidb-ctl schema in <database name>
 
 `in`サブコマンドと同様に、デフォルトの TiDB サービス アドレスとステータス ポートを使用しない場合は、 `--host`および`--port`オプションを使用してホストとポートを指定します。
 
-#### <code>base64decode</code>コマンド {#the-code-base64decode-code-command}
+#### <code>base64decode</code>コマンド {#the-base64decode-command}
 
 `base64decode` `base64`データをデコードするために使用されます。
 
@@ -235,7 +235,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
     ```
 
-### <code>decoder</code>コマンド {#the-code-decoder-code-command}
+### <code>decoder</code>コマンド {#the-decoder-command}
 
 -   次の例は、インデックス キーのデコードと同様に、行キーをデコードする方法を示しています。
 
@@ -255,7 +255,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     index_value[1]: {type: bigint, value: 1024}
     ```
 
-### <code>etcd</code>コマンド {#the-code-etcd-code-command}
+### <code>etcd</code>コマンド {#the-etcd-command}
 
 -   `tidb-ctl etcd ddlinfo` DDL 情報を取得するために使用されます。
 
@@ -274,11 +274,11 @@ tidb-ctl base64decode [table_id] [base64_data]
     tidb-ctl etcd delkey "/tidb/ddl/all_schema_versions/bar"
     ```
 
-### <code>log</code>コマンド {#the-code-log-code-command}
+### <code>log</code>コマンド {#the-log-command}
 
 TiDBエラーログのスタック情報は1行形式です。`tidb-ctl log`を指定すると、複数行形式に変更できます。
 
-### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
+### <code>keyrange</code>コマンド {#the-keyrange-command}
 
 `keyrange`サブコマンドは、16 進形式で出力されるグローバルまたはテーブル関連のキー範囲情報を照会するために使用されます。
 

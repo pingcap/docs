@@ -93,7 +93,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 18 rows in set (6.00 sec)
 ```
 
-### 集計関数を<code>Join</code>または<code>Union</code>前の位置へプッシュダウンします {#push-down-aggregate-functions-to-a-position-before-code-join-code-or-code-union-code}
+### 集計関数を<code>Join</code>または<code>Union</code>前の位置へプッシュダウンします {#push-down-aggregate-functions-to-a-position-before-join-or-union}
 
 集計演算を`Join`または`Union`前の位置までプッシュダウンすることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
 
@@ -165,7 +165,7 @@ mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group b
 18 rows in set (0.46 sec)
 ```
 
-### <code>Distinct</code>最適化を有効にする {#enable-code-distinct-code-optimization}
+### <code>Distinct</code>最適化を有効にする {#enable-distinct-optimization}
 
 TiFlashは、 `Sum`列など、 `Distinct`列を受け入れる一部の集計関数をサポートしていません。デフォルトでは、集計関数全体がTiDBで計算されます。 `Distinct`最適化を有効にすると、一部の操作をTiFlashにプッシュダウンできるため、クエリパフォーマンスが向上します。
 
@@ -215,7 +215,7 @@ mysql> explain analyze select count(distinct a) from test.t;
 5 rows in set, 2 warnings (0.24 sec)
 ```
 
-### <code>ALTER TABLE ... COMPACT</code>ステートメントを使用してデータを圧縮する {#compact-data-using-the-code-alter-table-compact-code-statement}
+### <code>ALTER TABLE ... COMPACT</code>ステートメントを使用してデータを圧縮する {#compact-data-using-the-alter-table--compact-statement}
 
 [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)文を実行すると、 TiFlashノード上の特定のテーブルまたはパーティションのコンパクションが開始されます。コンパクション中は、ノード上の物理データが書き換えられ、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。これにより、アクセスパフォーマンスが向上し、ディスク使用量が削減されます。以下に例を示します。
 
@@ -353,7 +353,7 @@ mysql> explain analyze select a, count(*) from t group by a;
 9 rows in set (0.37 sec)
 ```
 
-### <code>tiflash_fine_grained_shuffle_stream_count</code>を設定する {#configure-code-tiflash-fine-grained-shuffle-stream-count-code}
+### <code>tiflash_fine_grained_shuffle_stream_count</code>を設定する {#configure-tiflash_fine_grained_shuffle_stream_count}
 
 Fine Grained Shuffle 機能の[`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620)を設定することで、ウィンドウ関数の実行における同時実行性を高めることができます。これにより、ウィンドウ関数の実行により多くのシステムリソースが使用されるようになり、クエリのパフォーマンスが向上します。
 

@@ -3,7 +3,7 @@ title: SLOW_QUERY
 summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# スロークエリ {#slow-query}
+# スロークエリ {#slow_query}
 
 <CustomContent platform="tidb">
 
@@ -128,7 +128,7 @@ DESC SLOW_QUERY;
 
 `Session_connect_attrs`カラムには、スローログから解析されたセッション接続属性が JSON 形式で格納されます。TiDB は、[`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) を使用して、このフィールドに書き込まれる最大ペイロードサイズを制御します。
 
-## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
+## CLUSTER_SLOW_QUERY テーブル {#cluster_slow_query-table}
 
 `CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDB スローログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同様に使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`SLOW_QUERY`テーブルとは異なり`INSTANCE`に`CLUSTER_SLOW_QUERY`列が追加されています。 `INSTANCE`列は、スロークエリの行情報の TiDB ノードアドレスを表します。
 
