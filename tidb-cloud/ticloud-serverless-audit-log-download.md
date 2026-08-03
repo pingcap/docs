@@ -25,7 +25,7 @@ ticloud serverless audit-log download
 ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> --end-date <end-date>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                  | 説明                                                   | 必須  | 注記                                   |
 | -------------------- | ---------------------------------------------------- | --- | ------------------------------------ |

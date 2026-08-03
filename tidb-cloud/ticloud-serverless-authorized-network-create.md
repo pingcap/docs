@@ -25,7 +25,7 @@ ticloud serverless authorized-network create
 ticloud serverless authorized-network create -c <cluster-id> --display-name <display-name> --start-ip-address <start-ip-address> --end-ip-address <end-ip-address>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 

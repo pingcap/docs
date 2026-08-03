@@ -25,7 +25,7 @@ ticloud config get <profile-name> [flags]
 ticloud config describe <profile-name>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ        | 説明                  |
 | ---------- | ------------------- |

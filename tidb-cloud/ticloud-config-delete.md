@@ -25,7 +25,7 @@ ticloud config rm <profile-name> [flags]
 ticloud config delete <profile-name>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ        | 説明                  |
 | ---------- | ------------------- |

@@ -25,7 +25,7 @@ ticloud serverless audit-log filter-rule delete
 ticloud serverless audit-log filter-rule delete --cluster-id <cluster-id> --filter-rule-id <rule-id>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                  | 説明                  | 必須  | 注記                                   |
 | -------------------- | ------------------- | --- | ------------------------------------ |

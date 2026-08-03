@@ -47,7 +47,7 @@ ticloud config set api-url https://api.tidbcloud.com
 >
 > TiDB Cloud APIのURLはデフォルトで`https://api.tidbcloud.com`設定されています。通常は設定する必要はありません。
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ        | 説明                  |
 | ---------- | ------------------- |

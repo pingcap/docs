@@ -25,7 +25,7 @@ ticloud serverless audit-log config describe
 ticloud serverless audit-log config describe -c <cluster-id>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                  | 説明                  | 必須  | 注記                                   |
 | -------------------- | ------------------- | --- | ------------------------------------ |

@@ -25,7 +25,7 @@ ticloud config ls [flags]
 ticloud config list
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ        | 説明                  |
 | ---------- | ------------------- |

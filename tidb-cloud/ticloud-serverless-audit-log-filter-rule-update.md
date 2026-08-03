@@ -37,7 +37,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                  | 説明                                                                                                                                                       | 必須  | 注記                                   |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------------------ |

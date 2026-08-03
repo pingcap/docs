@@ -25,7 +25,7 @@ ticloud serverless authorized-network list
 ticloud serverless authorized-network list -c <cluster-id>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 

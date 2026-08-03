@@ -43,7 +43,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-interval-m
 ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                         | 説明                                                                                                           | 必須  | 注記                                   |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------ | --- | ------------------------------------ |
