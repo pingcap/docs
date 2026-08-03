@@ -49,11 +49,11 @@ br operator base64ify --storage "s3://your/log/backup/storage/here" --load-creds
 > **Note:**
 >
 > - If the `--load-creds` option is included when you execute the preceding command, the encoded Base64 string contains credential information loaded from the current BR environment. Note to ensure proper security and access control.
-> - The `--storage` value matches the storage output from the `log status` command of the log backup task.
+> - The `--storage` value should match the output from the `log status` command of the log backup task.
 
 #### Step 2: Execute log compaction
 
-With the Base64-encoded storage, you can initiate the compaction using `tikv-ctl`. Note that the default log level of `tikv-ctl` is `warning`. Use `--log-level info` to obtain more detailed information:
+Once you have the Base64-encoded string from the previous step, you can start compaction using `tikv-ctl`. By default, the log level of `tikv-ctl` is `warning`. Use `--log-level info` to get more detailed information:
 
 ```shell
 tikv-ctl --log-level info compact-log-backup \
@@ -63,7 +63,7 @@ tikv-ctl --log-level info compact-log-backup \
 
 Parameter descriptions:
 
-- `-s`: the Base64-encoded storage string obtained earlier.
+- `-s`: the Base64-encoded string obtained in the previous step.
 - `-N`: the maximum number of concurrent log compaction tasks.
 - `--from`: the start timestamp for compaction.
 - `--until`: the end timestamp for compaction.

@@ -52,7 +52,7 @@
             }
         ]
     },
-    "description": "TiDB X Essential dashboard for Grafana. Built from the current TiDB X support matrix: 10 DB metrics, 2 storage metrics, and resource unit metrics.",
+    "description": "TiDB Cloud Essential dashboard for Grafana. Built from the current TiDB Cloud support matrix: 10 DB metrics, 2 storage metrics, and resource unit metrics.",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -465,14 +465,26 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
+                    "expr": "sum(tidbcloud_db_failed_queries{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
+                    "instant": false,
+                    "legendFormat": "Total",
+                    "range": true,
+                    "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
+                    "editorMode": "code",
                     "expr": "sum by(type) (tidbcloud_db_failed_queries{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
                     "instant": false,
                     "legendFormat": "{{type}}",
                     "range": true,
-                    "refId": "A"
+                    "refId": "B"
                 }
             ],
-            "title": "Failed Queries Per Second",
+            "title": "Failed Queries",
             "type": "timeseries"
         },
         {
@@ -1356,13 +1368,13 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "tidbcloud_resource_manager_resource_request_unit_total{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"}",
-                    "legendFormat": "{{resource_group}}",
+                    "expr": "sum (tidbcloud_resource_manager_resource_request_unit_total{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
+                    "legendFormat": "total",
                     "range": true,
                     "refId": "A"
                 }
             ],
-            "title": "Resource Group RU",
+            "title": "Request Unit",
             "type": "timeseries"
         }
     ],
@@ -1422,6 +1434,6 @@
         "to": "now"
     },
     "timezone": "",
-    "title": "TiDB X Essential Overview",
+    "title": "TiDB Cloud Essential Overview",
     "version": 1
 }

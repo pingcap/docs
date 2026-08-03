@@ -552,7 +552,7 @@ Referenced in:
 
 - [ALTER USER](/sql-statements/sql-statement-alter-user.md)
 - [CREATE USER](/sql-statements/sql-statement-create-user.md)
-- [System Variables](/system-variables.md#max_user_connections-new-in-v900)
+- [System Variables](/system-variables.md#max_user_connections-new-in-v857-and-v900)
 - [`mysql.user`](/mysql-schema/mysql-schema-user.md)
 
 ### mpp_exchange_compression_mode
@@ -605,7 +605,7 @@ Referenced in:
 Referenced in:
 
 - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900)
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857-and-v900)
 
 ### plugin_dir
 

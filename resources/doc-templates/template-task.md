@@ -81,11 +81,10 @@ You can divide the step into smaller sub-steps by using ordered lists (1, 2, 3, 
     ### tidb-lightning global configuration
 
     [lightning]
-    # The HTTP port used to pull the web interface and Prometheus metrics. Set to 0 to disable the port.
+    # The HTTP port used to pull Prometheus metrics and expose debug data. Set to 0 to disable the port.
     status-addr = ':8289'
 
-    # Switch to server mode and use the web interface
-    # For details, see the "TiDB Lightning Web UI" document.
+    # Switch to server mode and submit import tasks through the HTTP API.
     server-mode = false
 
     # log

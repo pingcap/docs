@@ -25,10 +25,11 @@ on:
 env:
   SOURCE_REPO: pingcap/docs
   SOURCE_BRANCH: release-8.5
+  TERMS_BRANCH: master
   CN_CLOUD_BRANCH: i18n-zh-release-8.5
   CLOUD_TOC_FILES: TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
   CLOUD_INDEX_FILES: tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
-  AI_TRANSLATOR_REPO: qiancai/ai-pr-translator
+  AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
   AI_TRANSLATOR_REF: main
 
 jobs:
@@ -57,11 +58,19 @@ jobs:
           persist-credentials: false
 
       - uses: actions/checkout@v6
-        name: Checkout ai-pr-translator
+        name: Checkout docs terms branch
+        with:
+          repository: ${{ env.SOURCE_REPO }}
+          ref: ${{ env.TERMS_BRANCH }}
+          path: docs-terms
+          persist-credentials: false
+
+      - uses: actions/checkout@v6
+        name: Checkout ai-markdown-translator
         with:
           repository: ${{ env.AI_TRANSLATOR_REPO }}
           ref: ${{ env.AI_TRANSLATOR_REF }}
-          path: ai-pr-translator
+          path: ai-markdown-translator
           persist-credentials: false
 
       - uses: actions/setup-python@v6
@@ -69,14 +78,14 @@ jobs:
         with:
           python-version: "3.9"
           cache: pip
-          cache-dependency-path: ai-pr-translator/scripts/requirements.txt
+          cache-dependency-path: ai-markdown-translator/scripts/requirements.txt
 
       - name: Install Python dependencies
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          pip install -r ai-pr-translator/scripts/requirements.txt
+          pip install -r ai-markdown-translator/scripts/requirements.txt
 
       - name: Resolve commit range
         id: commits
@@ -124,7 +133,7 @@ jobs:
           CLOUD_INDEX_FILES: ${{ env.CLOUD_INDEX_FILES }}
         run: |
           set -euo pipefail
-          python ai-pr-translator/scripts/resolve_cloud_source_files.py
+          python ai-markdown-translator/scripts/resolve_cloud_source_files.py
 
       - name: Run commit sync workflow
         id: sync
@@ -143,19 +152,21 @@ jobs:
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
           SOURCE_FILES_TRANSLATION_MODE: ${{ inputs.source_files_translation_mode || 'incremental' }}
+          SOURCE_LANGUAGE: English
+          TARGET_LANGUAGE: Chinese
           IGNORE_RESOURCE_CARD_SECTION: "Yes"
           SOURCE_REPO_PATH: ${{ github.workspace }}/docs-source
           TARGET_REF: ${{ env.CN_CLOUD_BRANCH }}
           PREFER_LOCAL_TARGET_FOR_READ: "true"
           TARGET_REPO_PATH: ${{ github.workspace }}/docs
           AI_PROVIDER: azure
-          TERMS_PATH: ${{ github.workspace }}/docs-source/resources/terms.md
+          TERMS_PATH: ${{ github.workspace }}/docs-terms/resources/terms.md
           FAIL_ON_TRANSLATION_ERROR: "true"
           SKIP_TRANSLATING_CLOUD_DOCS_TO_ZH: "false"
           SKIP_TRANSLATING_AI_DOCS_TO_ZH: "true"
         run: |
           set -euo pipefail
-          cd ai-pr-translator/scripts
+          cd ai-markdown-translator/scripts
           python commit_sync_workflow.py
 
       - name: Prepare translated changes
@@ -166,7 +177,7 @@ jobs:
         env:
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           SOURCE_BRANCH: ${{ env.SOURCE_BRANCH }}
-          FAILURE_REPORT: ${{ github.workspace }}/ai-pr-translator/scripts/temp_output/translation-failures.md
+          FAILURE_REPORT: ${{ github.workspace }}/ai-markdown-translator/scripts/temp_output/translation-failures.md
         run: |
           set -euo pipefail
 
@@ -215,7 +226,7 @@ jobs:
           body: |
             ### What is changed, added or deleted? (Required)
 
-            Translate Cloud documentation changes from `pingcap/docs` `${{ env.SOURCE_BRANCH }}` to Chinese via `ai-pr-translator` commit-diff sync.
+            Translate Cloud documentation changes from `pingcap/docs` `${{ env.SOURCE_BRANCH }}` to Chinese via `ai-markdown-translator` commit-diff sync.
 
             English commit diff:
 

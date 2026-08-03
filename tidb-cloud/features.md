@@ -16,7 +16,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 - 🚧: **Under development**.
 - ❌: **Currently not available**.
 
-<table><thead>
+<table className="sticky-header"><thead>
   <tr>
     <th>Category</th>
     <th>Feature</th>

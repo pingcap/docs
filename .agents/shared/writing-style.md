@@ -5,8 +5,10 @@ Use this guidance for authoring, editing, or reviewing Markdown in `pingcap/docs
 ## Overall principles
 
 - Write for TiDB users, not for internal teams.
-- Use a conversational and friendly tone, but do not sound casual, playful, or promotional.
+- Use a conversational and friendly tone, but do not sound playful or promotional.
 - Prefer clear, direct, and practical language.
+- When in doubt, favor clarity over cleverness.
+- Rewrite content that might confuse a new user.
 - Do not pre-announce what the document will do. Start with useful information directly.
 - Write for a global audience. Avoid culture-specific references, vague shorthand, and region-specific assumptions.
 - Write accessibly. Prefer simple sentence structures and wording that is easy to scan and understand.
@@ -25,11 +27,20 @@ Use this guidance for authoring, editing, or reviewing Markdown in `pingcap/docs
 
 - Use second person, such as `you` and `your`, instead of `we`.
 - Use active voice whenever possible. Make it clear who performs the action.
+- Prefer present tense unless you are describing historical behavior.
+- Correct English grammar, spelling, and punctuation errors.
 - Put conditions before instructions, not after.
 - Use standard American English spelling and punctuation.
 - Use serial commas.
 - Prefer concise and precise wording over decorative phrasing.
 - Preserve technical meaning. Do not rewrite in ways that change product behavior or scope.
+
+## Terminology and version notation
+
+- Use terminology consistently. Do not use "database" and "instance" interchangeably. Choose the term that matches the actual product concept.
+- Use "replicate" instead of "synchronize" when referring to replicating data from one TiDB cluster to another.
+- Write MySQL versions as `MySQL 8.0`, `MySQL 8.4`, or `MySQL 8.x`. Do not add a `v` prefix. The `v` prefix is reserved for TiDB and TiDB tool versions, such as `TiDB v8.5` and `DM v2.0`.
+- Follow the established terminology in `glossary.md` and `resources/terms.md`.
 
 ## Structure and organization
 
@@ -100,14 +111,16 @@ Keep the frontmatter `title` and the H1 aligned in wording and capitalization.
 - Use images only when they add value that text alone cannot provide.
 - Keep screenshots and diagrams aligned with the current product behavior and UI text.
 
-## Review lens
+## Final checklist
 
-When reviewing or rewriting content, check these in order:
+Before finalizing authored, edited, or reviewed content, verify that:
 
-1. Is the content factually correct?
-2. Is the logic complete and easy to follow?
-3. Are other related documents also affected and likely to need updates?
-4. Does the structure match the document type?
-5. Does the wording improve clarity without changing product meaning?
-
-Make feedback specific, actionable, and tied to the changed content. Avoid praise-only edits.
+- [ ] The content addresses a clear user need and is appropriate for its intended audience.
+- [ ] Technical facts are accurate, and edits preserve the intended product behavior and scope.
+- [ ] The structure matches the document type, and headings follow the required hierarchy and capitalization.
+- [ ] Procedures present prerequisites and conditions before clear, actionable steps.
+- [ ] Terminology, product names, and version notation are accurate and consistent.
+- [ ] Commands, code, configuration names, API fields, UI strings, and literal values remain correct.
+- [ ] Links, formatting, lists, notes, warnings, images, and alt text follow repository conventions.
+- [ ] The language is clear, concise, grammatically correct, and easy for a global audience to understand.
+- [ ] Related documents, TOC entries, aliases, or cross-references have been considered when applicable.
