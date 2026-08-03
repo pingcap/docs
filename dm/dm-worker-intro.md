@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/dm-worker-intro/']
 
 # DM-worker Introduction
 
-DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For a full and incremental migration, it dumps data from one MySQL-compatible source instance, then reads the source binlog as a replication client, transforms and filters events, and applies them to the target TiDB cluster. DM-master queries DM-worker for source and subtask status.
+DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For a full and incremental migration, it dumps data from one MySQL-compatible source instance and loads the dumped data into the target TiDB cluster. It then reads the source binlog as a replication client, transforms and filters events, and applies them to the target. DM-master queries DM-worker for source and subtask status.
 
 ## Key concepts
 
@@ -15,7 +15,7 @@ DM-worker is a component of TiDB Data Migration (DM) that executes tasks and sub
 
 > **Note:**
 >
-> A DM-worker is a MySQL binlog client, not a standby database replica server. It reads and replays data from a MySQL source to a TiDB target. To replicate data from a source TiDB cluster, use [TiCDC](/ticdc/ticdc-overview.md).
+> A DM-worker is a MySQL-compatible binlog client, not a standby database replica server. It reads and replays data from a MySQL-compatible source to a TiDB target. To replicate data from a source TiDB cluster, use [TiCDC](/ticdc/ticdc-overview.md).
 
 ## DM-worker processing units
 
@@ -73,6 +73,12 @@ GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_
 GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
+For a full data export from MariaDB earlier than 10.5.2, also grant `PROCESS` so that the dump unit can query InnoDB metadata:
+
+```sql
+GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
+```
+
 #### MariaDB 10.5.2 to 10.5.8
 
 Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2), the `REPLICATION CLIENT` privilege is renamed and split into more granular privileges. For MariaDB 10.5.2 to 10.5.8, the user must have the following privileges:
@@ -80,6 +86,7 @@ Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-
 | Privilege | Scope | Description |
 |:---|:---|:---|
 | `SELECT` | Tables | Required for full data export. |
+| `PROCESS` | Global | Required for InnoDB metadata queries during full data export. |
 | `RELOAD` | Global | Required for `FLUSH TABLES WITH READ LOCK`. |
 | `BINLOG MONITOR` | Global | Renamed from `REPLICATION CLIENT`; allows monitoring the binlog. |
 | `REPLICATION SLAVE` | Global | Allows reading binlog events. |
@@ -89,7 +96,7 @@ Starting from [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-
 To grant these privileges, execute the following statement:
 
 ```sql
-GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT PROCESS, RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
@@ -98,7 +105,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 Starting from [MariaDB 10.5.9](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.9), `SHOW SLAVE STATUS` and `SHOW REPLICA STATUS` require the `REPLICA MONITOR` privilege. MariaDB displays this privilege as `SLAVE MONITOR` in `SHOW GRANTS`. Grant the privileges listed for MariaDB 10.5.2 to 10.5.8 plus `REPLICA MONITOR`:
 
 ```sql
-GRANT RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN, REPLICA MONITOR ON *.* TO 'your_user'@'your_wildcard_of_host';
+GRANT PROCESS, RELOAD, BINLOG MONITOR, REPLICATION SLAVE, REPLICATION SLAVE ADMIN, REPLICATION MASTER ADMIN, REPLICA MONITOR ON *.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
@@ -119,7 +126,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 > **Note:**
 >
-> If the dump unit fails with `Error 1227` while querying the MariaDB `INNODB_TABLESPACES_SCRUBBING` or `INNODB_TABLESPACES_ENCRYPTION` table, grant `SUPER` to let the dump unit read the required metadata. `SUPER` is a broad privilege, so add it only when this exact error occurs and your security policy permits it.
+> On some older MariaDB releases, `PROCESS` is not sufficient for the dump unit to query InnoDB metadata. With DM v8.5.6, this behavior occurs on MariaDB 10.4.34, 10.5.1, and 10.5.2 when the dump unit queries the `INNODB_TABLESPACES_SCRUBBING` or `INNODB_TABLESPACES_ENCRYPTION` table. In the same test, MariaDB 10.5.9, 10.6.13, and 10.11.16 complete without `SUPER`. If the dump unit returns `Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation`, grant `SUPER`. Because `SUPER` is a broad privilege, grant it only when this exact error occurs and your security policy permits it.
 
 ### Downstream database user privileges
 
@@ -150,6 +157,6 @@ The following table lists the minimal privileges required by each processing uni
 | Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
 |:----|:--------------------|:------------|:----|
 | Relay log | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`SHOW MASTER STATUS`, `SHOW SLAVE STATUS`) | NULL | Read/Write local files |
-| Dump | `SELECT`<br/>`RELOAD` (`FLUSH TABLES WITH READ LOCK`) | NULL | Write local files |
+| Dump | `SELECT`<br/>`RELOAD` (`FLUSH TABLES WITH READ LOCK`)<br/>`PROCESS` (MariaDB only, for InnoDB metadata queries) | NULL | Write local files |
 | Load | NULL | `SELECT` (Query the checkpoint history)<br/>`CREATE` (creates a database/table)<br/>`DELETE` (deletes checkpoint)<br/>`INSERT` (Inserts the Dump data) | Read/Write local files |
 | Binlog replication | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`SHOW MASTER STATUS`, `SHOW SLAVE STATUS`) | `SELECT` (shows the index and column)<br/>`INSERT` (DML)<br/>`UPDATE` (DML)<br/>`DELETE` (DML)<br/>`CREATE` (creates a database/table)<br/>`DROP` (drops databases/tables)<br/>`ALTER` (alters a table)<br/>`INDEX` (creates/drops an index)| Read/Write local files |
