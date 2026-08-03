@@ -15,7 +15,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 - The subscribing via webhook feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- You need a webhook URL from the platform that you want to receive alert notifications on (for example, Telegram, Microsoft Teams, or your own on-call system that can receive an HTTP POST request with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format.
+- You need a webhook URL from the platform where you want to receive alert notifications on (for example, Telegram, Microsoft Teams, or your own on-call system that accepts HTTP POST requests with a JSON payload). Currently, TiDB Cloud does not support customizing the request headers or the payload format.
 
 <CustomContent plan="dedicated">
 
