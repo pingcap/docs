@@ -66,7 +66,7 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
 4. Select **Webhook** from the **Subscriber Type** drop-down list.
 5. Enter a name in the **Name** field and your webhook URL in the **Webhook URL** field.
-6. Click **Save**. The backend will test connection and save for you. 
+6. Click **Save**. The backend will test connection and save for you.
 
     - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
