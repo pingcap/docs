@@ -137,7 +137,7 @@ select * from employee where id in (...) and salary between ? and ?;
     > **Note:**
     >
     > -   SQLダイジェストが削除されると、関連するすべての時間範囲のサマリーデータが`statements_summary`テーブルと`statements_summary_history`テーブルの両方から削除されます。その結果、特定の時間範囲内のSQLダイジェストの数が制限を超えない場合でも、 `statements_summary_history`テーブルのSQLダイジェストの数が実際のSQLダイジェストの数よりも少なくなる可能性があります。このような状況が発生し、パフォーマンスに影響する場合は、 `tidb_stmt_summary_max_stmt_count`の値を増やすことをお勧めします。
-    > -   TiDB Self-Managed の場合、 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)が有効になっていると、 `statements_summary_history`テーブルのデータがディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count` `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、 `statements_summary` -E}} を超えると、TiDB は`tidb_stmt_summary_max_stmt_count`のみを削除します。
+    > -   TiDB Self-Managed の場合、 [`tidb_stmt_summary_enable_persistent`](#persist-statements-summary)が有効になっていると、 `statements_summary_history`テーブルのデータがディスクに永続化されます。この場合、 `tidb_stmt_summary_max_stmt_count`は、 `statements_summary`テーブルがメモリに格納できる SQL ダイジェストの数のみを制限し、TiDB は`tidb_stmt_summary_max_stmt_count`を超えると`statements_summary`テーブルから最も使用頻度の低い SQL ダイジェストのみを削除します。
 
 -   `tidb_stmt_summary_max_sql_length` : `DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`の最長表示長を指定します。デフォルト値は`4096`です。
 
@@ -431,7 +431,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `SUM_BACKOFF_TIMES` : このカテゴリの SQL ステートメントで再試行が必要なエラーが発生した場合の再試行回数の合計。
 -   `BACKOFF_TYPES` : 再試行が必要なすべてのエラーの種類と、各種類の再試行回数。フィールドの形式は`type:number`です。エラーの種類が複数ある場合は、それぞれをカンマで区切ります。例: `txnLock:2,pdRPC:1` 。
 -   `AVG_AFFECTED_ROWS` : 影響を受けた行の平均数。
--   `PREV_SAMPLE_TEXT` : 現在の SQL ステートメントが`COMMIT`の場合、 `PREV_SAMPLE_TEXT`は`COMMIT`の前のステートメントです。この場合、SQL ステートメントはダイジェストと`prev_sample_text`でグループ化されます。つまり、 `COMMIT`が異なる`prev_sample_text`ステートメントは、異なる行にグループ化されます。現在の SQL ステートメントが`COMMIT`でない場合、 `PREV_SAMPLE_TEXT`フィールドは空の文字列になります。
+-   `PREV_SAMPLE_TEXT` : 現在の SQL ステートメントが`COMMIT`の場合、 `PREV_SAMPLE_TEXT`は`COMMIT`の前のステートメントです。この場合、SQL ステートメントはダイジェストと`prev_sample_text`でグループ化されます。つまり、 `prev_sample_text`が異なる`COMMIT`ステートメントは、異なる行にグループ化されます。現在の SQL ステートメントが`COMMIT`でない場合、 `PREV_SAMPLE_TEXT`フィールドは空の文字列になります。
 
 リソース制御に関連する分野：
 

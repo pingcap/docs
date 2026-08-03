@@ -12,7 +12,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)経由してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)経由してログインします。
+-   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を使用してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)。
 
 -   安全な設定でクラスターにアクセスするためのパスワードを設定します。
 

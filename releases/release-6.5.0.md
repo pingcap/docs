@@ -56,7 +56,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
--   `INSERT` `UPDATE`含む非トランザクションDMLステートメント`DELETE` にサポートし@ [ekexium](https://github.com/ekexium) `REPLACE` [＃33485](https://github.com/pingcap/tidb/issues/33485)
+-   `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` を含む非トランザクションDMLステートメントを完全にサポート [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
     大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスタの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文`REPLACE`サポートしてい`UPDATE` 。
 
