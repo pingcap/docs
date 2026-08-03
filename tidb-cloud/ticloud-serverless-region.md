@@ -26,7 +26,7 @@ TiDB Cloud Starter およびTiDB Cloud Essential で利用可能なすべての�
 ticloud serverless region -o json
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 

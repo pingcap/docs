@@ -31,7 +31,7 @@ ticloud serverless update -c <cluster-id> --display-name <new-display-mame>
 ticloud serverless update -c <cluster-id> --labels "{\"label1\":\"value1\"}"
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 

@@ -37,7 +37,7 @@ ticloud serverless create --display-name <display-name> --region <region> --spen
 ticloud serverless create --display-name <display-name> --region <region> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 

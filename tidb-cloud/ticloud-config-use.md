@@ -19,7 +19,7 @@ ticloud config use <profile-name> [flags]
 ticloud config use test
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ        | 説明                  |
 | ---------- | ------------------- |

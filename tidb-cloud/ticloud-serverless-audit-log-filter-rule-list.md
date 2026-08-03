@@ -31,7 +31,7 @@ ticloud serverless audit-log filter-rule list -c <cluster-id>
 ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 ```
 
-## 旗 {#flags}
+## フラグ {#flags}
 
 | フラグ                  | 説明                                                                        | 必須  | 注記                                   |
 | -------------------- | ------------------------------------------------------------------------- | --- | ------------------------------------ |
