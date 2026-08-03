@@ -4,7 +4,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのバ
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore-tidb-cloud-starter-or-essential-data}
+# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data}
 
 このドキュメントでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス上のデータのバックアップと復元方法について説明します。
 
@@ -75,7 +75,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナ
     -   TiDB Cloud Starterインスタンス：サポートされていません。
     -   TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
 
-### 目的地を復元する {#restore-destination}
+### 復元先 {#restore-destination}
 
 TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンスへのデータ復元をサポートしています。
 

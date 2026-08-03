@@ -77,9 +77,9 @@ TiCDC は、DDL イベントを次の Canal-JSON 形式にエンコードしま�
 | タイプ      | string   | Canal-JSONで定義されたイベントタイプ                                                                               |
 | es       | number  | メッセージを生成したイベントが発生したときの13ビット（ミリ秒）のタイムスタンプ                                                              |
 | ts       | number  | TiCDC がメッセージを生成した時の 13 ビット (ミリ秒) のタイムスタンプ                                                             |
-| SQL      | string   | isDdlが`true`場合、対応するDDL文を記録します。                                                                        |
-| sqlType   | object  | isDdlが`false`場合、各列のデータ型がJavaでどのように表現されるかを記録します。                                                       |
-| mysqlType | object  | isDdlが`false`場合、各列のデータ型がMySQLでどのように表現されるかを記録します。                                                      |
+| SQL      | string   | isDdlが`true`の場合、対応するDDL文を記録します。                                                                        |
+| sqlType   | object  | isDdlが`false`の場合、各列のデータ型がJavaでどのように表現されるかを記録します。                                                       |
+| mysqlType | object  | isDdlが`false`の場合、各列のデータ型がMySQLでどのように表現されるかを記録します。                                                      |
 | データ      | object  | isDdlが`false`の場合、各列の名前とそのデータ値を記録します。                                                                  |
 | 古い       | object  | メッセージが更新イベントによって生成された場合のみ、更新前の各列の名前とデータ値を記録します。                                                       |
 | _tidb    | object  | TiDB拡張フィールド。`enable-tidb-extension`を`true`に設定した場合にのみ存在します。`commitTs`の値は、行の変更を引き起こしたトランザクションのTSOです。 |
@@ -167,8 +167,8 @@ TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERM
 
 上記の例からわかるように、Canal-JSON は統一されたデータ形式を持ち、イベントの種類ごとに異なるフィールドの入力ルールを備えています。コンシューマーは、統一された方法でこの JSON 形式のデータを解析し、フィールド値をチェックすることでイベントの種類を判別できます。
 
--   `isDdl`が`true`場合、メッセージには DDL イベントが含まれます。
--   `isDdl`が`false`場合、 `type`フィールドをさらに確認する必要があります。7 が`type` `TIDB_WATERMARK`場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。
+-   `isDdl`が`true`の場合、メッセージには DDL イベントが含まれます。
+-   `isDdl`が`false`の場合、 `type`フィールドをさらに確認する必要があります。`type`が`TIDB_WATERMARK`の場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。
 
 ## フィールドの説明 {#field-descriptions}
 
@@ -300,7 +300,7 @@ TiCDCにおけるCanal-JSONデータ形式の実装方法（ `Update`イベン�
 
 | アイテム             | TiCDC Canal-JSON                                                                                             | Canal                               |
 | :--------------- | :----------------------------------------------------------------------------------------------------------- | :------------------------------- |
-| `Update`種類のイベント  | デフォルトでは、 `old`フィールドにはすべての列データが含まれます。3が`only_output_updated_columns` `true`場合、 `old`フィールドには変更された列データのみが含まれます。 | `old`フィールドは変更された列データのみを含みます      |
+| `Update`種類のイベント  | デフォルトでは、 `old`フィールドにはすべての列データが含まれます。`only_output_updated_columns`が`true`の場合、 `old`フィールドには変更された列データのみが含まれます。 | `old`フィールドは変更された列データのみを含みます      |
 | `mysqlType`フィールド | パラメータを持つ型の場合、型パラメータの情報は含まれません。                                                                               | パラメータを持つ型の場合、型パラメータの完全な情報が含まれます。 |
 
 ### 公式Canalとの互換性 {#compatibility-with-the-official-canal}

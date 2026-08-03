@@ -71,7 +71,7 @@ TiDB バージョン: 4.0.13
     -   TiFlashバッチリクエストを実行する際にTiDBが誤って`TiKV server timeout`エラーを報告するバグを修正しました [＃23700](https://github.com/pingcap/tidb/pull/23700)
     -   プレフィックス列インデックスで演算子`IndexJoin`間違った結果を返す問題を修正しました [＃23691](https://github.com/pingcap/tidb/pull/23691)
     -   `BINARY`型列の照合順序が適切に処理されないため、間違ったクエリ結果が発生する問題を修正しました[＃23598](https://github.com/pingcap/tidb/pull/23598)
-    -   `UPDATE`番目の文に`HAVING`番目の句を含む結合クエリが含まれている場合に発生するクエリpanicの問題を修正しました[＃23575](https://github.com/pingcap/tidb/pull/23575)
+    -   `UPDATE`文に`HAVING`句を含む結合クエリが含まれている場合に発生するクエリpanicの問題を修正しました[＃23575](https://github.com/pingcap/tidb/pull/23575)
     -   比較式で定数`NULL`を使用するとTiFlashが誤った結果を返す問題を修正しました [＃23474](https://github.com/pingcap/tidb/pull/23474)
     -   `YEAR`型の列と`STRING`定数比較したときに誤った結果が出る問題を修正しました [＃23335](https://github.com/pingcap/tidb/pull/23335)
     -   `session.group_concat_max_len`小さすぎると`group_concat`パニックになる問題を修正[＃23257](https://github.com/pingcap/tidb/pull/23257)

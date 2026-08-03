@@ -90,7 +90,7 @@ DML ステートメントを実行した後、 [`tidb_last_txn_info`](/system-va
 SELECT @@tidb_last_txn_info;
 ```
 
-出力の`pipelined`フィールドが`true`場合、パイプライン DML が正常に使用されていることを示します。
+出力の`pipelined`フィールドが`true`の場合、パイプライン DML が正常に使用されていることを示します。
 
 ## ベストプラクティス {#best-practices}
 

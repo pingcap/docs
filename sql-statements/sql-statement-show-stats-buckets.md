@@ -14,7 +14,7 @@ summary: TiDB データベースの SHOW STATS_BUCKETS の使用法の概要。
 | `Db_name`        | データベース名                                            |
 | `Table_name`     | テーブル名                                              |
 | `Partition_name` | パーティション名                                           |
-| `Column_name`    | 列名（ `is_index`が`0`場合）またはインデックス名（ `is_index`が`1`場合） |
+| `Column_name`    | 列名（ `is_index`が`0`の場合）またはインデックス名（ `is_index`が`1`の場合） |
 | `Is_index`       | インデックス列であるかどうか                                     |
 | `Bucket_id`      | バケットのID                                            |
 | `Count`          | バケットとその前のバケットに含まれるすべての値の数                          |

@@ -60,7 +60,7 @@ DROP GLOBAL BINDING for
 
 [システム変数](/system-variables.md)参照。
 
-## <code>ORDER BY</code>を省略した場合、結果の順序はMySQLと異なります。 {#the-order-of-results-is-different-from-mysql-when-code-order-by-code-is-omitted}
+## <code>ORDER BY</code>を省略した場合、結果の順序はMySQLと異なります。 {#the-order-of-results-is-different-from-mysql-when-order-by-is-omitted}
 
 これはバグではありません。レコードのデフォルトの順序は様々な状況に依存し、一貫性は保証されません。
 
@@ -124,7 +124,7 @@ MySQLでは、クエリが単一スレッドで実行されるため、結果の
 
 TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-variables.md#tidb_enable_ordered_result_mode)を使用して最終出力結果を自動的にソートすることもできます。
 
-## TiDB は<code>SELECT FOR UPDATE</code>サポートしていますか? {#does-tidb-support-code-select-for-update-code}
+## TiDB は<code>SELECT FOR UPDATE</code>サポートしていますか? {#does-tidb-support-select-for-update}
 
 はい。悲観的ロック（TiDB v3.0.8以降のデフォルト）を使用する場合、 `SELECT FOR UPDATE`実行はMySQLと同様に動作します。
 
@@ -146,14 +146,14 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 TiDBのAUTO_INCREMENT ID機能は、自動的に増分され一意であることが保証されているだけで、連続的に割り当てられることは保証されていません。現在、TiDBはIDをバッチで割り当てています。複数のTiDBサーバーに同時にデータが挿入された場合、割り当てられるIDは連続的ではありません。複数のスレッドが`tidb-server`のインスタンスに同時にデータを挿入した場合、後で挿入されたデータのAUTO_INCREMENT IDは小さくなる可能性があります。TiDBでは整数フィールドに`AUTO_INCREMENT`を指定できますが、1つのテーブルに`AUTO_INCREMENT`フィールドは1つしか指定できません。詳細については、 [AUTO_INCREMENT ID](/mysql-compatibility.md#auto-increment-id)と[AUTO_INCREMENT属性](/auto-increment.md)を参照してください。
 
-## TiDB の<code>sql_mode</code>変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
+## TiDB の<code>sql_mode</code>変更するにはどうすればよいですか? {#how-do-i-modify-the-sql_mode-in-tidb}
 
 TiDB は、SESSION または GLOBAL ベースで[`sql_mode`](/system-variables.md#sql_mode)システム変数を変更することをサポートします。
 
 -   [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)スコープの変数への変更は、クラスター内の残りのサーバーに伝播し、再起動後も保持されます。つまり、各 TiDBサーバーで`sql_mode`値を変更する必要はありません。
 -   `SESSION`スコープ変数への変更は、現在のクライアントセッションにのみ影響します。サーバーを再起動すると、変更は失われます。
 
-## エラー: <code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexception-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
+## エラー: <code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoopでは、 `--batch`各バッチで100文をコミットすることを意味しますが、デフォルトでは各文に100個のSQL文が含まれます。つまり、100 * 100 = 10000のSQL文となり、単一のTiDBトランザクションで許可される文の最大数である5000を超えてしまいます。
 
@@ -190,7 +190,7 @@ Sqoopでは、 `--batch`各バッチで100文をコミットすることを意�
 
 TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、古いデータが新しいデータで上書きされる際、古いデータは置き換えられず、新しいデータと共に保持されます。データのバージョンを識別するためにタイムスタンプが使用されます。データを削除しても、すぐに領域が解放されるわけではありません。同時実行トランザクションが以前のバージョンの行を参照できるように、ガベージコレクションは遅延されます。これは、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト： `10m0s` ）で設定できます。
 
-## <code>SHOW PROCESSLIST</code>システム プロセス ID を表示しますか? {#does-code-show-processlist-code-display-the-system-process-id}
+## <code>SHOW PROCESSLIST</code>システム プロセス ID を表示しますか? {#does-show-processlist-display-the-system-process-id}
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。TiDB `SHOW PROCESSLIST`ではシステムプロセスIDが表示されません。表示されるのは現在のセッションIDです。TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
@@ -225,7 +225,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 
 2.  フル テーブル スキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
 
-## TiDB での<code>auto analyze</code>のトリガー戦略は何ですか? {#what-s-the-trigger-strategy-for-code-auto-analyze-code-in-tidb}
+## TiDB での<code>auto analyze</code>のトリガー戦略は何ですか? {#whats-the-trigger-strategy-for-auto-analyze-in-tidb}
 
 テーブル内の行数またはパーティションテーブルの単一パーティションの行数が 1000 に達し、テーブルまたはパーティションの比率 (変更された行数 / 現在の行の合計数) が[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)超えると、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが自動的にトリガーされます。
 
@@ -273,7 +273,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 
 -   クラスター内の特定の TiDB ノードと PD または TiKV の間で通信の問題が発生し、TiDB が最新のバージョン情報を時間内に取得できなくなります。
 
-### <code>Information schema is changed</code>エラーの原因は何ですか? {#what-triggers-the-code-information-schema-is-changed-code-error}
+### <code>Information schema is changed</code>エラーの原因は何ですか? {#what-triggers-the-information-schema-is-changed-error}
 
 SQL文を実行する際、TiDBは分離レベルに基づいてオブジェクトの`schema`バージョンを決定し、それに応じてSQL文を処理します。TiDBはオンライン非同期DDL変更もサポートしています。DML文を実行する際、他のDDL文が同時に実行される可能性があり、TiDBは各SQL文が同じ`schema`バージョンに対して実行されるようにする必要があります。そのため、DML実行時にDDL操作が進行中の場合、TiDBはエラー`Information schema is changed`を報告する可能性があります。さらに、一部の同時実行DDLシナリオでは、DDL文が失敗した後、TiDBは元のエラーを返す前に`schema`が変更されたかどうかを確認します。そのDDL文で使用された`schema`バージョンがすでに最新の`schema`バージョンより古い場合、TiDBはこのエラーを返すこともあります。
 
@@ -338,7 +338,7 @@ TiDB v6.2.0以降、TiDB DDLモジュールは並列フレームワークを採�
 
 このセクションでは、JDBC接続で使用される照合順序に関する質問を示します。TiDBでサポートされている文字セットと照合順序については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
-### JDBC URL で<code>connectionCollation</code>が構成されていない場合、JDBC 接続ではどの照合順序が使用されますか? {#what-collation-is-used-in-a-jdbc-connection-when-code-connectioncollation-code-is-not-configured-in-the-jdbc-url}
+### JDBC URL で<code>connectionCollation</code>が構成されていない場合、JDBC 接続ではどの照合順序が使用されますか? {#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url}
 
 JDBC URL に`connectionCollation`が設定されていない場合、次の 2 つのシナリオが考えられます。
 
@@ -368,7 +368,7 @@ TiDB v7.5 以降のバージョンにアップグレードした後は、JDBC UR
 
     spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
 
-### <code>utf8mb4_bin</code>順序と<code>utf8mb4_0900_ai_ci</code>照合順序の違いは何ですか? {#what-are-the-differences-between-the-code-utf8mb4-bin-code-and-code-utf8mb4-0900-ai-ci-code-collations}
+### <code>utf8mb4_bin</code>順序と<code>utf8mb4_0900_ai_ci</code>照合順序の違いは何ですか? {#what-are-the-differences-between-the-utf8mb4_bin-and-utf8mb4_0900_ai_ci-collations}
 
 | 照合                   | 大文字と小文字を区別 | 末尾のスペースを無視する | アクセントを重視 | 比較方法                  |
 | -------------------- | ---------- | ------------ | -------- | --------------------- |
@@ -407,7 +407,7 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 [統計入門](/statistics.md)参照。
 
-### <code>select count(1)</code>を最適化するにはどうすればいいでしょうか? {#how-to-optimize-code-select-count-1-code}
+### <code>select count(1)</code>を最適化するにはどうすればいいでしょうか? {#how-to-optimize-select-count1}
 
 `count(1)`文はテーブル内の行の総数をカウントします。同時実行性を向上させることで、速度を大幅に向上させることができます。同時実行性を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、これはCPUとI/Oリソースにも依存します。TiDBはすべてのクエリでTiKVにアクセスします。データ量が少ない場合、MySQLはすべてメモリ内にあるため、TiDBはネットワークアクセスを実行する必要があります。
 
@@ -433,7 +433,7 @@ ADMIN SHOW DDL;
     RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganization, SchemaID:1, TableID:118, RowCount:77312, ArgLen:0, start time: 2018-12-05 16:26:10.652 +0800 CST, Err:<nil>, ErrCount:0, SnapshotVersion:404749908941733890
          SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
 
-上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`番目のフィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
+上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`フィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
 
 ### DDL ジョブを表示するにはどうすればいいですか? {#how-to-view-the-ddl-job}
 
@@ -445,7 +445,7 @@ ADMIN SHOW DDL;
 
 はい。TiDBはコストベースオプティマイザを使用しています。コストモデルと統計は常に最適化されています。また、TiDBはハッシュ結合やソートマージ結合などの結合アルゴリズムもサポートしています。
 
-### テーブルで<code>analyze</code>実行する必要があるかどうかを判断するにはどうすればよいでしょうか? {#how-to-determine-whether-i-need-to-execute-code-analyze-code-on-a-table}
+### テーブルで<code>analyze</code>実行する必要があるかどうかを判断するにはどうすればよいでしょうか? {#how-to-determine-whether-i-need-to-execute-analyze-on-a-table}
 
 `SHOW STATS_HEALTHY`を使用して`Healthy`フィールドを確認します。通常、フィールド値が 60 より小さい場合は、テーブルで`ANALYZE`を実行する必要があります。
 
@@ -453,7 +453,7 @@ ADMIN SHOW DDL;
 
 これらのIDにはルールはありませんが、IDは一意です。IDが生成されるとカウンターが動作し、プランが1つ生成されるごとに1が加算されます。実行順序はIDとは無関係です。クエリプラン全体はツリー構造になっており、実行プロセスはルートノードから開始され、データは上位レベルへと連続的に返されます。クエリプランの詳細については、 [TiDBクエリ実行プランの理解](/explain-overview.md)を参照してください。
 
-### TiDBクエリプランでは、 <code>cop</code>タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-code-cop-code-tasks-are-in-the-same-root-are-they-executed-concurrently}
+### TiDBクエリプランでは、 <code>cop</code>タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-cop-tasks-are-in-the-same-root-are-they-executed-concurrently}
 
 現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2 つの異なるタイプに属しています。
 

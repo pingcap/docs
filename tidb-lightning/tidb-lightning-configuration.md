@@ -11,7 +11,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 ## TiDB Lightning （グローバル） {#tidb-lightning-global}
 
-### TiDB Lightning {#lightning}
+### TiDB Lightning {#lightning-1}
 
 #### `status-addr` {#status-addr}
 
@@ -116,19 +116,19 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 `security`セクションでは、クラスター内の TLS 接続の証明書とキーを指定します。
 
-#### `ca-path` {#ca-path}
+#### `ca-path` {#ca-path-1}
 
 -   CAの公開証明書を指定します。TLSを無効にする場合は空白のままにしてください。
 
 <!-- Example: `"/path/to/ca.pem"` -->
 
-#### `cert-path` {#cert-path}
+#### `cert-path` {#cert-path-1}
 
 -   このサービスの公開証明書を指定します。
 
 <!-- Example: `"/path/to/lightning.pem"` -->
 
-#### `key-path` {#key-path}
+#### `key-path` {#key-path-1}
 
 -   このサービスの秘密鍵を指定します。
 
@@ -143,7 +143,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 <!-- Example: `true` -->
 
-#### `schema` {#schema}
+#### `schema` {#schema-1}
 
 -   チェックポイントを保存するスキーマ名 (データベース名) を指定します。
 
@@ -186,7 +186,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
     -   `"error"` : インポートされたデータ内で競合する主キー レコードまたは一意のキー レコードが検出されると、 TiDB Lightning はインポートを終了し、エラーを報告します。
     -   `"replace"` : 競合する主キー レコードまたは一意のキー レコードが発生した場合、 TiDB Lightning は最新のデータを保持し、古いデータを上書きします。
         -   物理インポート モードを使用すると、競合するデータはターゲット TiDB クラスターの`lightning_task_info.conflict_view`ビューに記録されます。
-        -   `lightning_task_info.conflict_view`ビューにおいて、行の`is_precheck_conflict`フィールドが`0`場合、その行に記録された競合データは後処理の競合検出によって検出されたことを意味します。行の`is_precheck_conflict`フィールドが`1`の場合、その行に記録された競合データはインポート前の競合検出によって検出されたことを意味します。アプリケーション要件に基づいて、適切なレコードをターゲットテーブルに手動で挿入できます。
+        -   `lightning_task_info.conflict_view`ビューにおいて、行の`is_precheck_conflict`フィールドが`0`の場合、その行に記録された競合データは後処理の競合検出によって検出されたことを意味します。行の`is_precheck_conflict`フィールドが`1`の場合、その行に記録された競合データはインポート前の競合検出によって検出されたことを意味します。アプリケーション要件に基づいて、適切なレコードをターゲットテーブルに手動で挿入できます。
         -   ターゲット TiKV は v5.2.0 以降のバージョンである必要があることに注意してください。
     -   `"ignore"` : 主キーまたは一意キーのレコードの競合が発生した場合、 TiDB Lightning は古いデータを保持し、新しいデータを無視します。このオプションは論理インポートモードでのみ使用できます。
 
@@ -211,8 +211,8 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 -   `conflict_records`テーブル内のレコードの最大数を制御します。
 -   v8.1.0 以降では、ユーザー入力に関係なく、 TiDB Lightning が`max-record-rows`の値に[`threshold`](#threshold)の値を自動的に割り当てるため、 `max-record-rows`手動で構成する必要はありません。
 -   `max-record-rows`将来のリリースでは非推奨になります。
--   物理インポートモードでは、戦略が`"replace"`場合、上書きされる競合レコードが記録されます。
--   論理インポート モードでは、戦略が`"ignore"`場合、無視される競合レコードが記録され、戦略が`"replace"`場合、競合レコードは記録されません。
+-   物理インポートモードでは、戦略が`"replace"`の場合、上書きされる競合レコードが記録されます。
+-   論理インポート モードでは、戦略が`"ignore"`の場合、無視される競合レコードが記録され、戦略が`"replace"`の場合、競合レコードは記録されません。
 -   デフォルト値: `10000`
 
 ### tikvインポーター {#tikv-importer}
@@ -427,7 +427,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 <!-- Example: `['*.*', '!mysql.*', '!sys.*', '!INFORMATION_SCHEMA.*', '!PERFORMANCE_SCHEMA.*', '!METRICS_SCHEMA.*', '!INSPECTION_SCHEMA.*']` -->
 
-### mydumper.csv {#mydumper-csv}
+### mydumper.csv {#mydumpercsv}
 
 CSV ファイルの解析方法を構成します。
 
@@ -490,7 +490,7 @@ CSV ファイルの解析方法を構成します。
 
 <!-- Example: `false` -->
 
-### mydumper.files {#mydumper-files}
+### mydumper.files {#mydumperfiles}
 
 #### `pattern` {#pattern}
 
@@ -596,7 +596,7 @@ CSV ファイルの解析方法を構成します。
     -   `"skip-verify"` : TLSを強制しますが、サーバーの証明書を検証しません。この設定は安全ではないことに注意してください。
     -   `"preferred"` : `"skip-verify"`と同じですが、サーバーがTLS をサポートしていない場合は、暗号化されていない接続にフォールバックします。
 
-### tidb.セキュリティ {#tidb-security}
+### tidb.セキュリティ {#tidbsecurity}
 
 -   TLS 対応の MySQL 接続の証明書とキーを指定します。
 -   デフォルト値: [`security`](#security)セクションのコピー。
@@ -621,7 +621,7 @@ CSV ファイルの解析方法を構成します。
 
 <!-- Example: `"/path/to/lightning.key"` -->
 
-### tidb.セッション変数 {#tidb-session-vars}
+### tidb.セッション変数 {#tidbsession-vars}
 
 その他の TiDB セッション変数を指定します。
 
@@ -651,7 +651,7 @@ CSV ファイルの解析方法を構成します。
 -   デフォルト値: `"false"`
 -   値のオプション:
     -   `"false"` : `ADMIN CHECKSUM TABLE <table>`コマンドは、 TiDB Lightning経由で実行するために TiKV に送信されます。
-    -   `"true"` : この値が`"true"`場合に同時実行性を調整するには、TiDB で[`tidb_checksum_table_concurrency`](/system-variables.md#tidb_checksum_table_concurrency)変数を設定する必要があります。
+    -   `"true"` : この値が`"true"`の場合に同時実行性を調整するには、TiDB で[`tidb_checksum_table_concurrency`](/system-variables.md#tidb_checksum_table_concurrency)変数を設定する必要があります。
 -   チェックサムが失敗した場合に問題を特定しやすくするために、この値を`"true"`に設定することをお勧めします。
 
 #### `analyze` {#analyze}

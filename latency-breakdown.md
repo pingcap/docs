@@ -199,7 +199,7 @@ read value duration(from disk) =
 
 スナップショットを取得した後、TiKVは同じスナップショットから複数の値を読み取ります。読み取り時間は[PointGet](#point-get)と同じです。TiKVがディスクからデータを読み込む場合の平均時間は、 `tikv_storage_rocksdb_perf`と`req="batch_get"`で計算できます。
 
-### テーブルスキャンとインデックススキャン {#table-scan-x26-index-scan}
+### テーブルスキャンとインデックススキャン {#table-scan--index-scan}
 
 以下は、テーブルスキャンとインデックススキャン操作の時間コスト図です。
 

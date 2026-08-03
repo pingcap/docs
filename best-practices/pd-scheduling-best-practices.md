@@ -165,7 +165,7 @@ pd-ctl のストア コマンドを使用して、各ストアの残高ステー
 
 pd-ctl を使用すると、以下の3つの側面からスケジューリング戦略を調整できます。詳細は[PD Control](/pd-control.md)を参照してください。
 
-### スケジューラを手動で追加/削除する {#add-delete-scheduler-manually}
+### スケジューラを手動で追加/削除する {#adddelete-scheduler-manually}
 
 PDはpd-ctlを介してスケジューラを動的に追加および削除することをサポートしています。例：
 
@@ -173,7 +173,7 @@ PDはpd-ctlを介してスケジューラを動的に追加および削除する
 -   `scheduler remove balance-leader-scheduler` : バランスリーダースケジューラを削除（無効化）する
 -   `scheduler add evict-leader-scheduler 1` : ストア 1 のすべてのリーダーを削除するスケジューラを追加します。
 
-### オペレータを手動で追加/削除する {#add-delete-operators-manually}
+### オペレータを手動で追加/削除する {#adddelete-operators-manually}
 
 PDはpd-ctlを介してオペレータを直接追加または削除することもできます。例えば：
 
@@ -196,7 +196,7 @@ pd-ctl の`config show`コマンドを使用してスケジュール設定を確
 
 このセクションでは、いくつかの一般的なシナリオを通じて PD スケジューリング戦略のベスト プラクティスについて説明します。
 
-### リーダー/リージョンが均等に分布していない {#leaders-regions-are-not-evenly-distributed}
+### リーダー/リージョンが均等に分布していない {#leadersregions-are-not-evenly-distributed}
 
 PDの評価メカニズムでは、異なるストアのリーダー数とリージョン数だけでは負荷分散状況を完全に反映できないと判断されます。そのため、TiKVの実際の負荷やストレージ使用量から、負荷の不均衡が発生しているかどうかを確認する必要があります。
 
@@ -229,8 +229,8 @@ PDの評価メカニズムでは、異なるストアのリーダー数とリー
 
 オペレーターは正常に生成されたが、スケジュール プロセスが遅い場合は、次の理由が考えられます。
 
--   スケジューリング速度はデフォルトで制限されています。1 または`leader-schedule-limit` `replica-schedule-limit`値を大きく調整できます。同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩和することも検討できます。
--   他のスケジューリングタスクが同時に実行され、システム内のリソースを奪い合っています。解決策は[リーダー/リージョンが均等に分布していない](#leaders-regions-are-not-evenly-distributed)を参照してください。
+-   スケジューリング速度はデフォルトで制限されています。`leader-schedule-limit`または`replica-schedule-limit`の値を大きく調整できます。同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩和することも検討できます。
+-   他のスケジューリングタスクが同時に実行され、システム内のリソースを奪い合っています。解決策は[リーダー/リージョンが均等に分布していない](#leadersregions-are-not-evenly-distributed)を参照してください。
 -   単一ノードをオフラインにすると、処理対象となるリージョンリーダー（レプリカ3台構成では約1/3）が削除対象のノードに分散されます。そのため、処理速度はこの単一ノードによるスナップショット生成速度によって制限されます。「 `evict-leader-scheduler`を手動で追加することで、リージョンリーダーの移行速度を上げることができます。
 
 対応する演算子の生成に失敗した場合、考えられる理由は次のとおりです。
@@ -240,7 +240,7 @@ PDの評価メカニズムでは、異なるストアのリーダー数とリー
 
 ### ノードをオンラインにするのが遅い {#bringing-nodes-online-is-slow}
 
-現在、ノードのオンライン化はバランスリージョンメカニズムを通じてスケジュールされています。トラブルシューティングについては[リーダー/リージョンが均等に分布していない](#leaders-regions-are-not-evenly-distributed)を参照してください。
+現在、ノードのオンライン化はバランスリージョンメカニズムを通じてスケジュールされています。トラブルシューティングについては[リーダー/リージョンが均等に分布していない](#leadersregions-are-not-evenly-distributed)を参照してください。
 
 ### ホットリージョンが均等に分布していない {#hot-regions-are-not-evenly-distributed}
 

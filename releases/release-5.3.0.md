@@ -46,8 +46,8 @@ v5.3 の主な新機能または改善点は次のとおりです。
 | TiKV           | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space)                               | 変更     | TiKV起動時にディスク保護のために予約される領域を制御します。v5.3.0以降では、予約領域の80%がディスク容量不足時の運用・保守に必要な追加ディスク領域として使用され、残りの20%は一時ファイルの保存に使用されます。                                                                               |
 | TiKV           | `memory-usage-limit`                                                                               | 変更     | この構成項目は TiDB v5.3.0 で新しく追加され、その値はストレージの.block-cache.capacity に基づいて計算されます。                                                                                                                   |
 | TiKV           | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)       | 新しく追加された | Raft I/Oタスクを処理するスレッドの許容数。これはStoreWriterスレッドプールのサイズです。このスレッドプールのサイズを変更する場合は、 [TiKV スレッドプールのパフォーマンスチューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。 |
-| TiKV           | [`raftstore.raft-write-size-limit`](/tikv-configuration-file.md#raft-write-size-limit-new-in-v530) | 新しく追加された | Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。1の値が`raftstore.store-io-pool-size` `0`場合、この設定項目は有効になりません。                                                               |
-| TiKV           | `raftstore.raft-msg-flush-interval`                                                                | 新しく追加された | Raftメッセージをバッチ送信する間隔を指定します。バッチ送信されたRaftメッセージは、この設定項目で指定された間隔ごとに送信されます。1の値が`raftstore.store-io-pool-size` `0`場合、この設定項目は無効になります。                                                                 |
+| TiKV           | [`raftstore.raft-write-size-limit`](/tikv-configuration-file.md#raft-write-size-limit-new-in-v530) | 新しく追加された | Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。`raftstore.store-io-pool-size`の値が`0`の場合、この設定項目は有効になりません。                                                               |
+| TiKV           | `raftstore.raft-msg-flush-interval`                                                                | 新しく追加された | Raftメッセージをバッチ送信する間隔を指定します。バッチ送信されたRaftメッセージは、この設定項目で指定された間隔ごとに送信されます。`raftstore.store-io-pool-size`の値が`0`の場合、この設定項目は無効になります。                                                                 |
 | TiKV           | `raftstore.raft-reject-transfer-leader-duration`                                                   | 削除済み     | Leaderが新しく追加されたノードに転送される最小期間を決定します。                                                                                                                                                           |
 | PD             | [`log.file.max-days`](/pd-configuration-file.md#max-days)                                          | 変更     | ログを保持する最大日数を制御します。デフォルト値は`1`から`0`に変更されます。                                                                                                                                                     |
 | PD             | [`log.file.max-backups`](/pd-configuration-file.md#max-backups)                                    | 変更     | 保持されるログの最大数を制御します。デフォルト値は`7`から`0`に変更されます。                                                                                                                                                     |
@@ -270,7 +270,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
 
     -   コプロセッサがロックに遭遇したときに影響を受けるSQL文をデバッグログに表示します。これは問題の診断に役立ちます[＃27718](https://github.com/pingcap/tidb/issues/27718)
     -   SQL論理レイヤーでデータをバックアップおよび復元するときに、バックアップおよび復元データのサイズを表示する機能をサポート [＃27247](https://github.com/pingcap/tidb/issues/27247)
-    -   `tidb_analyze_version`が`2`場合の ANALYZE のデフォルトのコレクション ロジックを改善し、コレクションを高速化し、リソースのオーバーヘッドを削減します。
+    -   `tidb_analyze_version`が`2`の場合の ANALYZE のデフォルトのコレクション ロジックを改善し、コレクションを高速化し、リソースのオーバーヘッドを削減します。
     -   `ANALYZE TABLE table_name COLUMNS col_1, col_2, ... , col_n`構文を導入します。この構文を使用すると、幅の広いテーブル内の一部の列のみの統計情報を収集できるため、統計収集の速度が向上します。
 
 -   TiKV
@@ -410,7 +410,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     -   SQL 文に非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正しました。
     -   Exchangeオペレータの`Block schema mismatch`エラーを修正
     -   Decimal型の比較時に発生する可能性のある`Can't compare`エラーを修正
-    -   `left/substring`番目の関数の`3rd arguments of function substringUTF8 must be constants`エラーを修正する
+    -   `left/substring`関数の`3rd arguments of function substringUTF8 must be constants`エラーを修正する
 
 -   ツール
 

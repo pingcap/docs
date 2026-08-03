@@ -391,7 +391,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `SHOW IMPORT JOB`は、他のユーザーに属する接続を表示するために`SUPER`権限を必要とします。権限がない場合は、現在のユーザーが作成したジョブのみが表示されます。
 
-`SHOW STATS_LOCKED`は`SELECT` `mysql.stats_table_locked` }} テーブルに対する権限を必要とします。
+`SHOW STATS_LOCKED`は`mysql.stats_table_locked`テーブルに対する`SELECT`権限を必要とします。
 
 ### ロール/ユーザーの作成 {#create-role-user}
 
@@ -489,7 +489,7 @@ SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 > **Note:**
 >
-> `GRANT` 、 `CREATE USER` }}、 `DROP USER` `FLUSH PRIVILEGES`が実行されるまで予期しない動作が発生する可能性があります。
+> 権限テーブルの更新には、 `GRANT` 、 `CREATE USER` 、 `DROP USER`などの提供されている構文のみを使用することをお勧めします。基盤となる権限テーブルを直接編集しても権限キャッシュは自動的に更新されないため、 `FLUSH PRIVILEGES`が実行されるまで予期しない動作が発生する可能性があります。
 
 ### 接続確認 {#connection-verification}
 

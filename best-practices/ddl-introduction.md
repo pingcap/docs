@@ -136,7 +136,7 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行を制御する DDL 操作の再編成ワーカーの数を設定します。
 
--   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、第`re-organize`フェーズの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
+-   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、`re-organize`フェーズの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
 
     推奨値:
 
@@ -161,7 +161,7 @@ TiDB v6.2.0以降、単一の`ALTER`文でテーブル内の複数のスキー�
 
 ### 読み取りと書き込みのパフォーマンスを確認する {#check-the-read-and-write-performance}
 
-TiDBがインデックスを追加する際、データのバックフィルフェーズによってクラスターの読み取りと書き込みに負荷がかかります。`ADD INDEX`のコマンドが送信され、 `write reorg`番目のフェーズが開始されたら、GrafanaダッシュボードでTiDBとTiKVの読み取りと書き込みのパフォーマンスメトリックとアプリケーションの応答時間を確認し、 `ADD INDEX`操作がクラスターに影響を与えているかどうかを確認することをお勧めします。
+TiDBがインデックスを追加する際、データのバックフィルフェーズによってクラスターの読み取りと書き込みに負荷がかかります。`ADD INDEX`のコマンドが送信され、 `write reorg`フェーズが開始されたら、GrafanaダッシュボードでTiDBとTiKVの読み取りと書き込みのパフォーマンスメトリックとアプリケーションの応答時間を確認し、 `ADD INDEX`操作がクラスターに影響を与えているかどうかを確認することをお勧めします。
 
 ## DDL関連コマンド {#ddl-related-commands}
 

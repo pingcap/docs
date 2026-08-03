@@ -49,7 +49,7 @@ br operator base64ify --storage "s3://your/log/backup/storage/here" --load-creds
 > **Note:**
 >
 > -   上記のコマンドを実行する際にオプション`--load-creds`を指定した場合、エンコードされたBase64文字列には、現在のBR環境から読み込まれた認証情報が含まれます。適切なセキュリティとアクセス制御を確保するためにご注意ください。
-> -   `--storage`値は、ログ バックアップ タスクの`log status`コマンドの出力と一致する必要があります。
+> -   `--storage`の値は、ログ バックアップ タスクの`log status`コマンドの出力と一致する必要があります。
 
 #### ステップ2: ログ圧縮を実行する {#step-2-execute-log-compaction}
 

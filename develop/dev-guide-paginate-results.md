@@ -35,7 +35,7 @@ LIMIT 0, 10;
 </div>
 <div label="Java" value="java">
 
-アプリケーション開発において、バックエンドプログラムはフロントエンドから`offset`番目のパラメータではなく、 `page_number`のパラメータ（リクエストされているページ番号）と`page_size`のパラメータ（ページあたりのレコード数を制御するパラメータ）を受け取ります。そのため、クエリを実行する前にいくつかの変換を行う必要がありました。
+アプリケーション開発において、バックエンドプログラムはフロントエンドから`offset`パラメータではなく、 `page_number`のパラメータ（リクエストされているページ番号）と`page_size`のパラメータ（ページあたりのレコード数を制御するパラメータ）を受け取ります。そのため、クエリを実行する前にいくつかの変換を行う必要がありました。
 
 ```java
 public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLException {

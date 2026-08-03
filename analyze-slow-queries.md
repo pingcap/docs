@@ -114,7 +114,7 @@ TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入
 
 #### タイムスタンプの取得が遅い {#slow-in-getting-timestamps}
 
-スローログで`Wait_TS`と`Query_time`比較できます。タイムスタンプはプリフェッチされるため、通常は`Wait_TS`値は低くなります。
+スローログで`Wait_TS`と`Query_time`を比較できます。タイムスタンプはプリフェッチされるため、通常は`Wait_TS`の値は低くなります。
 
     # Query_time: 0.0300000
     ...

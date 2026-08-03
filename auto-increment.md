@@ -3,7 +3,7 @@ title: AUTO_INCREMENT
 summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 ---
 
-# AUTO_INCREMENT {#auto-increment}
+# AUTO_INCREMENT {#auto_increment}
 
 このドキュメントでは、 `AUTO_INCREMENT`列属性の概念、実装原則、AUTO_INCREMENT関連の機能、制限などについて説明します。
 
@@ -27,7 +27,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 ## コンセプト {#concept}
 
-`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。`INSERT`ステートメントで`AUTO_INCREMENT`番目の列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
+`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。`INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
 
 パフォーマンス上の理由から、各TiDBサーバーには、 `AUTO_INCREMENT`個の数値が一括で割り当てられます（デフォルトでは3万個）。つまり、 `AUTO_INCREMENT`数値は一意であることが保証されますが、 `INSERT`ステートメントに割り当てられる値は、TiDBサーバーごとに単調なものになります。
 
@@ -100,7 +100,7 @@ CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 INSERT INTO t (c) VALUES (1)
 ```
 
-インスタンス`A` `[1,30000]`のAUTO_INCREMENT ID をキャッシュし、インスタンス`B` `[30001,60000]`のAUTO_INCREMENT ID をキャッシュしている可能性があります。実行される`INSERT`ステートメントでは、各インスタンスのキャッシュされた ID が`AUTO_INCREMENT`番目の列にデフォルト値として割り当てられます。
+インスタンス`A` `[1,30000]`のAUTO_INCREMENT ID をキャッシュし、インスタンス`B` `[30001,60000]`のAUTO_INCREMENT ID をキャッシュしている可能性があります。実行される`INSERT`ステートメントでは、各インスタンスのキャッシュされた ID が`AUTO_INCREMENT`列にデフォルト値として割り当てられます。
 
 ## 基本機能 {#basic-features}
 
@@ -181,9 +181,9 @@ Records: 2  Duplicates: 1  Warnings: 0
 
 この例では、 `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;`のキー`A`の`INSERT`に値`3`の`AUTO_INCREMENT`が割り当てられていますが、この`INSERT`文には重複キー`A`が含まれているため、実際には使用されません。これにより、シーケンスが連続しないギャップが発生します。この動作はMySQLとは異なりますが、有効とみなされます。MySQLでは、トランザクションが中止されてロールバックされるなどの他のシナリオでも、シーケンスにギャップが発生します。
 
-## 自動IDキャッシュ {#auto-id-cache}
+## 自動IDキャッシュ {#auto_id_cache}
 
-異なるTiDBサーバーに対して`INSERT`操作を実行すると、 `AUTO_INCREMENT`番目のシーケンスが大幅に*ジャンプする*ように見える場合があります。これは、各サーバーが`AUTO_INCREMENT`の値のキャッシュを独自に持っているためです。
+異なるTiDBサーバーに対して`INSERT`操作を実行すると、 `AUTO_INCREMENT`シーケンスが大幅に*ジャンプする*ように見える場合があります。これは、各サーバーが`AUTO_INCREMENT`の値のキャッシュを独自に持っているためです。
 
 ```sql
 CREATE TABLE t (a int PRIMARY KEY AUTO_INCREMENT, b timestamp NOT NULL DEFAULT NOW());
@@ -467,6 +467,6 @@ IDは常に増加し、 `AUTO_ID_CACHE 0`のような大きなギャップは発
 -   `INTEGER` 、 `FLOAT` 、または`DOUBLE`タイプの列に定義する必要があります。
 -   `DEFAULT`列の値と同じ列には指定できません。
 -   `ALTER TABLE` 、属性`AUTO_INCREMENT`を持つ列を追加または変更するために使用できません。これには、属性`AUTO_INCREMENT`既存の列に追加するために`ALTER TABLE ... MODIFY/CHANGE COLUMN`を使用することや、属性`AUTO_INCREMENT`を持つ列を追加するために`ALTER TABLE ... ADD COLUMN`を使用することも含まれます。
--   `ALTER TABLE` `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18 および v3.0.4 以降、TiDB はセッション変数`@@tidb_allow_remove_auto_inc`を使用して、列の`AUTO_INCREMENT`の属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`番目の属性を削除することはできません。
+-   `ALTER TABLE` `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18 および v3.0.4 以降、TiDB はセッション変数`@@tidb_allow_remove_auto_inc`を使用して、列の`AUTO_INCREMENT`の属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
 -   `ALTER TABLE` 、 `AUTO_INCREMENT`値を小さい値に設定するには`FORCE`オプションが必要です。
 -   `AUTO_INCREMENT` `MAX(<auto_increment_column>)`より小さい値に設定すると、既存の値がスキップされないため、キーが重複することになります。

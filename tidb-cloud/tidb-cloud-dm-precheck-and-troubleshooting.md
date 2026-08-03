@@ -5,11 +5,11 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 # データ移行に関する事前チェックエラー、移行エラー、およびアラート {#precheck-errors-migration-errors-and-alerts-for-data-migration}
 
-このドキュメントでは[データ移行を使用してデータを移行します](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに、事前チェック エラーを解決し、移行エラーをトラブルシューティングし、アラートを購読する方法について説明します。
+このドキュメントでは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに、事前チェック エラーを解決し、移行エラーをトラブルシューティングし、アラートを購読する方法について説明します。
 
 ## 事前チェックのエラーと解決策 {#precheck-errors-and-solutions}
 
-このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行します](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**[事前チェック]**ページに表示されます。
+このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは[データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)ときに**[事前チェック]**ページに表示されます。
 
 解決策は、使用している上位データベースによって異なります。
 
@@ -46,7 +46,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 Amazon Aurora MySQL の場合、この事前チェック項目はエラーになりません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 
-Amazon RDS の場合、次のパラメータを変更する必要があります: `replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table` 。MySQL [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+Amazon RDS の場合、次のパラメータを変更する必要があります: `replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table` 。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
 ### エラーメッセージ：接続同時接続数がデータベースの最大接続制限を超えていないか確認してください。 {#error-message-check-if-connection-concurrency-exceeds-database-s-maximum-connection-limit}
 
