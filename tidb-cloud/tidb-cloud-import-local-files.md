@@ -104,7 +104,7 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 
 ### TiDB Cloudにデータをインポートした後、予約キーワードを含む列をクエリできないのはなぜですか? {#why-can-t-i-query-a-column-with-a-reserved-keyword-after-importing-data-into-tidb-cloud}
 
-列名がTiDBで予約済みの[キーワード](/keywords.md)である場合、その列をクエリする際には、列名を囲むバッククォート`` ` ``を追加する必要があります。例えば、列名が`order`場合、 `` `order` ``で列をクエリする必要があります。
+列名がTiDBで予約済みの[キーワード](/keywords.md)である場合、その列をクエリする際には、列名を囲むバッククォート`` ` ``を追加する必要があります。例えば、列名が`order`の場合、 `` `order` ``で列をクエリする必要があります。
 
 ### 250 MiB を超えるローカル ファイルをインポートするにはどうすればよいでしょうか? {#how-to-import-a-local-file-larger-than-250-mib}
 

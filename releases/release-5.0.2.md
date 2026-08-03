@@ -66,7 +66,7 @@ TiDB バージョン: 5.0.2
 
     -   一部のケースでプレフィックスインデックスとインデックス結合を使用することで発生するpanic問題を修正[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716) [＃24717](https://github.com/pingcap/tidb/issues/24717)
     -   `point get`のプリペアドプランキャッシュがトランザクションの`point get`文によって誤って使用される問題を修正しました[＃24741](https://github.com/pingcap/tidb/issues/24741)。
-    -   照合順序が`ascii_bin`または`latin1_bin`場合に間違ったプレフィックスインデックス値を書き込む問題を修正しました[＃24569](https://github.com/pingcap/tidb/issues/24569)
+    -   照合順序が`ascii_bin`または`latin1_bin`の場合に間違ったプレフィックスインデックス値を書き込む問題を修正しました[＃24569](https://github.com/pingcap/tidb/issues/24569)
     -   GCワーカー[＃24591](https://github.com/pingcap/tidb/issues/24591)によって進行中のトランザクションが中断される可能性がある問題を修正
     -   `new-collation`が有効で`new-row-format`無効の場合、クラスター化インデックスでポイントクエリが間違って実行される可能性があるバグを修正しました[＃24541](https://github.com/pingcap/tidb/issues/24541)
     -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)パーティションキーの変換をリファクタリングする
@@ -84,7 +84,7 @@ TiDB バージョン: 5.0.2
 -   TiKV
 
     -   古い値の読み取りによって引き起こされる TiCDC OOM 問題を修正[＃9996](https://github.com/tikv/tikv/issues/9996) [＃9981](https://github.com/tikv/tikv/issues/9981)
-    -   照合順序が`latin1_bin` [＃24548](https://github.com/pingcap/tidb/issues/24548)場合にクラスター化主キー列のセカンダリインデックスに空の値が含まれる問題を修正しました
+    -   照合順序が`latin1_bin`の場合にクラスター化主キー列のセカンダリインデックスに空の値が含まれる問題を修正しました[＃24548](https://github.com/pingcap/tidb/issues/24548)
     -   `abort-on-panic`設定を追加すると、panic発生時にTiKVがコアダンプファイルを生成できるようになります。コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするには、ユーザーは環境を正しく設定する必要があります。
     -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンス回帰の問題を修正しました[＃10046](https://github.com/tikv/tikv/issues/10046)
 

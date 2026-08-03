@@ -160,7 +160,7 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 3.  グローバル チェックポイントとダウンストリーム`dm_meta`データベースの各テーブル チェックポイントの`binlog_name`を 、エラーのあるbinlogファイルの名前に更新します。`binlog_pos`を 、移行が完了した有効な位置の値 (例: 4) に更新します。
 
-    例：エラーが発生したタスクの名前が`dm_test` 、対応するタスク`source-id`が`replica-1` 、対応するbinlogファイルが`mysql-bin|000001.004451`場合、次のコマンドを実行します。
+    例：エラーが発生したタスクの名前が`dm_test` 、対応するタスク`source-id`が`replica-1` 、対応するbinlogファイルが`mysql-bin|000001.004451`の場合、次のコマンドを実行します。
 
     ```sql
     UPDATE dm_test_syncer_checkpoint SET binlog_name='mysql-bin|000001.004451', binlog_pos = 4 WHERE id='replica-1';

@@ -67,7 +67,7 @@ TiDB バージョン: 6.5.3
     -   パーティションテーブルのパーティションを切り捨てるとパーティションの配置ルールが無効になる可能性がある問題を修正[＃44031](https://github.com/pingcap/tidb/issues/44031) @ [lcwangchao](https://github.com/lcwangchao)
     -   テーブル名の変更中に TiCDC が行の変更の一部を失う可能性がある問題を修正[＃43338](https://github.com/pingcap/tidb/issues/43338) @ [tangenta](https://github.com/tangenta)
     -   BR を使用してテーブルをインポートした後に DDL ジョブ履歴が失われる問題を修正しました [＃43725](https://github.com/pingcap/tidb/issues/43725) @ [tangenta](https://github.com/tangenta)
-    -   `JSON_OBJECT`場合によってはエラーが報告される可能性がある問題を修正[＃39806](https://github.com/pingcap/tidb/issues/39806) @ [YangKeao](https://github.com/YangKeao)
+    -   `JSON_OBJECT`で場合によってはエラーが報告される可能性がある問題を修正[＃39806](https://github.com/pingcap/tidb/issues/39806) @ [YangKeao](https://github.com/YangKeao)
     -   IPv6環境でクラスターが一部のシステムビューを照会できない問題を修正 [＃43286](https://github.com/pingcap/tidb/issues/43286) @ [Defined2014](https://github.com/Defined2014)
     -   PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列のIDの割り当てが長時間ブロックされる問題を修正[＃42643](https://github.com/pingcap/tidb/issues/42643) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   配置ルールのリサイクル中に TiDB が PD に重複したリクエストを送信し、PD ログに多数の`full config reset`エントリが発生する問題を修正しました。 [＃33069](https://github.com/pingcap/tidb/issues/33069) @ [tiancaiamao](https://github.com/tiancaiamao)

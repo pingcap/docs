@@ -406,7 +406,7 @@ I/O トラフィック制限設定を構成します。
 
 -   TiFlashストレージエンジンの圧縮アルゴリズム。
 -   デフォルト値: `LZ4`
--   値のオプション: `LZ4` `LZ4HC`値は`zstd`と小文字を区別しません。
+-   値のオプション: `LZ4` 、 `zstd` 、 `LZ4HC` 。値は大文字と小文字を区別しません。
 
 ##### `dt_compression_level` {#dt-compression-level}
 

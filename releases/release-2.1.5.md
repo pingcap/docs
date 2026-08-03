@@ -27,7 +27,7 @@ summary: TiDB 2.1.5とTiDB Ansible 2.1.5は、2019年2月28日にリリースさ
     -   `tidb_force_priority`システム変数の値が設定ファイルに設定されている値と異なる問題を修正しました [＃9347](https://github.com/pingcap/tidb/pull/9347)
     -   一般ログに`current_db`フィールドを追加して、現在使用されているデータベースの名前を出力します。 [＃9346](https://github.com/pingcap/tidb/pull/9346)
     -   テーブルID のテーブル情報を取得するHTTP APIを追加します。 [＃9408](https://github.com/pingcap/tidb/pull/9408)
-    -   `LOAD DATA`場合によっては誤ったデータを読み込む問題を修正[＃9414](https://github.com/pingcap/tidb/pull/9414)
+    -   `LOAD DATA`が場合によっては誤ったデータを読み込む問題を修正[＃9414](https://github.com/pingcap/tidb/pull/9414)
     -   MySQLクライアントとTiDB間の接続構築に時間がかかる場合がある問題を修正[＃9451](https://github.com/pingcap/tidb/pull/9451)
 -   DDL
     -   `DROP COLUMN`操作をキャンセルする際のいくつかの問題を修正 [＃9352](https://github.com/pingcap/tidb/pull/9352)

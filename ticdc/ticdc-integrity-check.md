@@ -98,7 +98,7 @@ For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later
     -   BIT, ENUM, and SET types are converted to UINT64.
 
         -   BIT 型はバイナリ形式の UINT64 に変換されます。
-        -   ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`場合、その値は`0b101` （10進数では`5`としてエンコードされます。
+        -   ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`の場合、その値は`0b101` （10進数では`5`）としてエンコードされます。
 
     -   TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は、最初に STRING に変換され、次にバイトに変換されます。
 

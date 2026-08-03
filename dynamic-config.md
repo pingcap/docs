@@ -239,7 +239,7 @@ show warnings;
 上記の表で、プレフィックスが`{db-name}`または`{db-name}.{cf-name}`パラメータはRocksDB関連の設定です。5のオプション値は`db-name` `rocksdb` `raftdb`です。
 
 -   `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
--   `db-name`が`raftdb`とき、 `cf-name`の値は`defaultcf`になります。
+-   `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。
 
 詳細なパラメータの説明については[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 

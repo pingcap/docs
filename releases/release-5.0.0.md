@@ -60,7 +60,7 @@ TiDB バージョン: 5.0.0
     -   `INT_ONLY` : デフォルト値。動作はv5.0以前と同じです。 `alter-primary-key = false`と併せて、INT型のクラスター化インデックスを有効にするかどうかを制御できます。
     > **Note:**
     >
-    > 5.0 GA の`INT_ONLY`の`tidb_enable_clustered_index`値は、5.0 RC の`OFF`値と同じ意味です。 `OFF`設定の 5.0 RC クラスターから 5.0 GA にアップグレードすると、 `INT_ONLY`と表示されます。
+    > 5.0 GA の`tidb_enable_clustered_index`の`INT_ONLY`値は、5.0 RC の`OFF`値と同じ意味です。 `OFF`設定の 5.0 RC クラスターから 5.0 GA にアップグレードすると、 `INT_ONLY`と表示されます。
 
 ### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
 

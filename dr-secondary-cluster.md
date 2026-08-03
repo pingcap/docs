@@ -159,7 +159,7 @@ nohup ./minio server ./data --address :6060 &
     SELECT @@global.tidb_gc_enable;
     ```
 
-    値が`0`場合は、GCが無効になっていることを意味します。
+    値が`0`の場合は、GCが無効になっていることを意味します。
 
         +-------------------------+
         | @@global.tidb_gc_enable |
@@ -259,7 +259,7 @@ nohup ./minio server ./data --address :6060 &
     SELECT @@global.tidb_gc_enable;
     ```
 
-    値が`1`場合は、GCが有効になっていることを意味します。
+    値が`1`の場合は、GCが有効になっていることを意味します。
 
         +-------------------------+
         | @@global.tidb_gc_enable |
