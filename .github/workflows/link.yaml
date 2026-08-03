@@ -110,7 +110,7 @@ jobs:
 
       - name: Check Links
         if: ${{ steps.link-inputs.outputs.has_inputs == 'true' }}
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
           fail: false
@@ -139,7 +139,7 @@ jobs:
 
       - name: Check site href URLs
         if: ${{ steps.site-hrefs.outputs.has_hrefs == 'true' }}
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
           fail: false
