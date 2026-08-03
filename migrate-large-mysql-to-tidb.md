@@ -130,33 +130,33 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     [tidb]
     # The target TiDB cluster information.
-    host = ${host}                # e.g.: 172.16.32.1
-    port = ${port}                # e.g.: 4000
+    host = "${host}"              # e.g.: 172.16.32.1
+    port = "${port}"                # e.g.: 4000
     user = "${user_name}"         # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
-    status-port = ${status-port}  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+    status-port = "${status-port}"  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
     For more information on TiDB Lightning configuration, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. It is not recommended to directly use `nohup` to start a process from the command line. Instead, edit the following script content, for example:
 
     If you import data from S3, pass the SecretKey and AccessKey that have access to the S3 storage path as environment variables to the TiDB Lightning node. You can also read the credentials from `~/.aws/credentials`.
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
+    #!/bin/bash
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
+    Then use the script to start TiDB Lightning.
+
 3. After the import starts, you can check the progress of the import by one of the following methods:
 
     - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
-    - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 

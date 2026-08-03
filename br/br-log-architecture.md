@@ -17,7 +17,35 @@ The log backup and PITR architecture is as follows:
 
 The process of a cluster log backup is as follows:
 
-![BR log backup process design](/media/br/br-log-backup-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant PD
+    participant TiKV
+    participant TiDB
+    participant Storage
+
+    User->>BR: Run `br log start`
+    BR->>PD: Register log backup task
+    TiKV->>PD: Fetch log backup task
+    par TiKV handles the local log backup task
+        loop
+            TiKV->>TiKV: Read KV change data
+            TiKV->>PD: Fetch global checkpoint ts
+            TiKV->>TiKV: Generate local metadata
+            TiKV->>Storage: Upload log data & metadata
+            TiKV->>PD: Configure GC
+        end
+    and
+        loop
+            TiDB->>TiKV: Watch backup progress
+            TiDB->>PD: Report global checkpoint ts
+        end
+    end
+    User->>BR: Run `br log status`
+    BR->>PD: Fetch status of log backup task
+```
 
 System components and key concepts involved in the log backup process:
 
@@ -25,7 +53,7 @@ System components and key concepts involved in the log backup process:
 * **local checkpoint ts** (in local metadata): indicates that all logs generated before local checkpoint ts in this TiKV node have been backed up to the target storage.
 * **global checkpoint ts**: indicates that all logs generated before global checkpoint ts in all TiKV nodes have been backed up to the target storage. TiDB Coordinator calculates this timestamp by collecting local checkpoint ts of all TiKV node and then reports it to PD.
 * **TiDB Coordinator**: a TiDB node is elected as the coordinator, which is responsible for collecting and calculating the progress of the entire log backup task (global checkpoint ts). This component is stateless in design, and after its failure, a new Coordinator is elected from the surviving TiDB nodes.
-* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after region re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
+* **TiKV log backup observer**: runs on each TiKV node in the TiDB cluster, which is responsible for backing up log data. If a TiKV node fails, backing up the data range on it will be taken by other TiKV nodes after Region leader re-election, and these nodes will back up data of the failure range starting from global checkpoint ts.
 
 The complete backup process is as follows:
 
@@ -57,7 +85,29 @@ The complete backup process is as follows:
 
 The process of PITR is as follows:
 
-![Point-in-time recovery process design](/media/br/pitr-ts.png)
+```mermaid
+sequenceDiagram
+    actor User
+    participant BR
+    participant TiKV
+    participant PD
+    participant Storage
+
+    User->>BR: Run `br restore point`
+    BR->>TiKV: Restore full data
+    loop restore log data
+        BR->>Storage: Read backup data
+        BR->>PD: Fetch Region info
+        BR->>TiKV: Request TiKV to restore data
+        loop TiKV handles restore request
+            TiKV->>Storage: Download KVs
+            TiKV->>TiKV: Rewrite KVs
+            TiKV->>TiKV: Apply KVs
+        end
+        TiKV->>BR: Report restore result
+        BR->>BR: Handle all restore results
+    end
+```
 
 The complete PITR process is as follows:
 

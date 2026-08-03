@@ -5,7 +5,7 @@ summary: Introduces detailed information about the AI chat in Instant Message (I
 
 # Connected: AI chat in IM
 
-The AI chat in Instant Message (IM) powered by PingCAP, is an offering to invite TiDB AI assistant chatbot to specific IM channels for preliminary technical support and consultation. This service is based on Graph RAG (Retrieval-Augmented Generation) built on top of [TiDB Vector Search](/vector-search/vector-search-overview.md).
+The AI chat in Instant Message (IM) powered by PingCAP, is an offering to invite TiDB AI assistant chatbot to specific IM channels for preliminary technical support and consultation. This service is based on Graph RAG (Retrieval-Augmented Generation) built on top of [TiDB Vector Search](/ai/concepts/vector-search-overview.md).
 
 ## Limitation
 

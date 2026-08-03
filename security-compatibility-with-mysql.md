@@ -6,7 +6,7 @@ aliases: ['/docs/dev/security-compatibility-with-mysql/','/docs/dev/reference/se
 
 # Security Compatibility with MySQL
 
-TiDB supports security features similar to MySQL 5.7, and also supports some security features of MySQL 8.0. The security features of TiDB are different from MySQL in implementation.
+TiDB supports security features similar to MySQL 5.7, and also supports some security features of MySQL 8.x. The security features of TiDB are different from MySQL in implementation.
 
 ## Unsupported security features
 
@@ -35,37 +35,37 @@ The expiration mechanism of TiDB is different from MySQL in the following aspect
 
 The password complexity policies of TiDB and MySQL have the following differences:
 
-- MySQL v5.7 implements the password complexity policy by using the `validate_password` plugin.
-- MySQL v8.0 re-implements the password complexity policy by using the `validate_password` component.
+- MySQL 5.7 implements the password complexity policy by using the `validate_password` plugin.
+- MySQL 8.x re-implements the password complexity policy by using the `validate_password` component.
 - TiDB introduces a built-in password complexity management feature starting from v6.5.0.
 
 The feature implementation has the following differences:
 
 - Enable the feature:
 
-    - In MySQL v5.7, the feature is implemented by using the `validate_password` plugin. You can enable the feature by installing the plugin.
-    - In MySQL v8.0, the feature is implemented by using the `validate_password` component. You can enable the feature by installing the component.
+    - In MySQL 5.7, the feature is implemented by using the `validate_password` plugin. You can enable the feature by installing the plugin.
+    - In MySQL 8.x, the feature is implemented by using the `validate_password` component. You can enable the feature by installing the component.
     - For TiDB, this feature is built-in. You can enable the feature using the system variable [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650).
 
 - Dictionary check:
 
-    - In MySQL v5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
-    - In MySQL v8.0, you can specify a file path using the `validate_password.dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
+    - In MySQL 5.7, you can specify a file path using the `validate_password_dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
+    - In MySQL 8.x, you can specify a file path using the `validate_password.dictionary_file` variable. The file contains a list of words that are not allowed to exist in passwords.
     - In TiDB, you can specify a string using the [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650) system variable. The string contains a list of words that are not allowed to exist in passwords.
 
 ### Password failure tracking
 
 The password failure tracking policies of TiDB and MySQL have the following differences:
 
-- MySQL v5.7 does not support password failure tracking.
-- MySQL v8.0 supports password failure tracking.
+- MySQL 5.7 does not support password failure tracking.
+- MySQL 8.x supports password failure tracking.
 - TiDB supports password failure tracking starting from v6.5.0.
 
 Because the number of failed attempts and lock status of accounts need to be globally consistent, and as a distributed database, TiDB cannot record the number of failed attempts and lock status in the server memory like MySQL, so the implementation mechanisms are different between TiDB and MySQL.
 
 - For users that are not locked automatically, the count of failed attempts is reset in the following scenarios:
 
-    + MySQL 8.0:
+    + MySQL 8.x:
 
         - When the server is restarted, the count of failed attempts for all accounts is reset.
         - When `FLUSH PRIVILEGES` is executed, the count of failed attempts for all accounts is reset.
@@ -79,7 +79,7 @@ Because the number of failed attempts and lock status of accounts need to be glo
 
 - For users that are locked automatically, the count of failed attempts is reset in the following scenarios:
 
-    + MySQL 8.0:
+    + MySQL 8.x:
 
         - When the server is restarted, the temporary locking for all accounts is reset.
         - When `FLUSH PRIVILEGES` is executed, the temporary locking for all accounts is reset.
@@ -95,8 +95,8 @@ Because the number of failed attempts and lock status of accounts need to be glo
 
 The password reuse policies of TiDB and MySQL have the following differences:
 
-- MySQL v5.7 does not support password reuse management.
-- MySQL v8.0 supports password reuse management.
+- MySQL 5.7 does not support password reuse management.
+- MySQL 8.x supports password reuse management.
 - TiDB supports password reuse management starting from v6.5.0.
 
 The implementation mechanisms are consistent between TiDB and MySQL. Both use the `mysql.password_history` system table to implement the password reuse management feature. However, when deleting a user that does not exist in the `mysql.user` system table, TiDB and MySQL have different behaviors:

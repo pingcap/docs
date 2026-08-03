@@ -57,7 +57,35 @@ Assume that the DDL statements of sharded tables are not processed during the mi
 
 This section shows how DM migrates DDL statements in the process of merging sharded tables based on the above example in the pessimistic mode.
 
-![shard-ddl-flow](/media/dm/shard-ddl-flow.png)
+```mermaid
+---
+config:
+    themeCSS: |
+        /* hide the ugly borders */
+        rect.rect {
+            stroke: none;
+        }
+---
+sequenceDiagram
+    autonumber
+    box rgba(0,255,0,0.08)
+        participant Worker1 as DM-worker 1
+    end
+    box rgba(255,255,0,0.08)
+        participant Master as DM-master
+    end
+    box rgba(0,255,0,0.08)
+        participant Worker2 as DM-worker 2
+    end
+
+    Worker1->>Master: 1. DDL info
+    Master->>Worker1: 2. DDL lock info
+    Worker2->>Master: 3. DDL info
+    Master->>Worker2: 4. DDL lock info
+    Master->>Worker1: 5. DDL execute request
+    Worker1->>Master: 6. DDL executed
+    Master-->>Worker2: 7. DDL ignore request
+```
 
 In this example, `DM-worker-1` migrates the data from MySQL instance 1 and `DM-worker-2` migrates the data from MySQL instance 2. `DM-master` coordinates the DDL migration among multiple DM-workers. Starting from `DM-worker-1` receiving the DDL statements, the DDL migration process is simplified as follows:
 

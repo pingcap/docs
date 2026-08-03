@@ -61,7 +61,7 @@ The following is the allow list of DDL statements supported by TiCDC. The abbrev
 
 ### Asynchronous execution of `ADD INDEX` and `CREATE INDEX` DDLs
 
-When the downstream is TiDB, TiCDC executes `ADD INDEX` and `CREATE INDEX` DDL operations asynchronously to minimize the impact on changefeed replication latency. This means that, after replicating `ADD INDEX` and `CREATE INDEX` DDLs to the downstream TiDB for execution, TiCDC returns immediately without waiting for the completion of the DDL execution. This avoids blocking subsequent DML executions.
+Although TiCDC usually replicates DDL statements in order, when the downstream is TiDB, TiCDC executes DDL operations for creating and adding indexes asynchronously. This means that, after replicating `ADD INDEX` and `CREATE INDEX` DDLs to the downstream TiDB cluster for execution, TiCDC returns immediately without waiting for DDL execution to complete. This minimizes the impact on changefeed replication latency and avoids blocking subsequent DML executions.
 
 During the execution of the `ADD INDEX` or `CREATE INDEX` DDL operation in the downstream, when TiCDC executes the next DDL operation of the same table, this DDL operation might be blocked in the `queueing` state for a long time. This can cause TiCDC to repeatedly execute this DDL operation, and if retries take too long, it might lead to replication task failure. Starting from v8.4.0, if TiCDC has the `SUPER` permission of the downstream database, it periodically runs `ADMIN SHOW DDL JOBS` to check the status of asynchronously executed DDL tasks. TiCDC will wait for index creation to complete before proceeding with replication. Although this might increase replication latency, it avoids replication task failure.
 
@@ -92,7 +92,7 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO test.t2` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
-| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
+| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | The old table name `test.n1` does not match the filter rule, but the new table name `test.t1` matches the filter rule. This operation is invalid. In this case, refer to the error message for handling. |
 | `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
 
 #### Rename multiple tables in a DDL statement

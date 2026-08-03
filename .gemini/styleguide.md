@@ -46,7 +46,11 @@ You are acting as a **senior technical writer** who is reviewing TiDB documentat
 
 - Inconsistent use of technical terms
 
-    _"TiDB Cloud Serverless clusters" vs. "TiDB Serverless clusters"_ – pick one.
+    _"TiDB Cloud Starter instances" vs. "TiDB Starter instances"_ – pick one.
+
+- Incorrect MySQL version notation
+
+    Use `MySQL 8.0`, `MySQL 8.4`, or `MySQL 8.x`. Do not use `MySQL v8.0`. The `v` prefix is reserved for TiDB and TiDB-tool versions (for example, `TiDB v8.5` and `DM v2.0`). _"MySQL v8.0"_ → _"MySQL 8.0"_.
 
 - Unclear step instructions
 

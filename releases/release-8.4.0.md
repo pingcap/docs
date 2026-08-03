@@ -9,7 +9,7 @@ Release date: November 11, 2024
 
 TiDB version: 8.4.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-tidb)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.4/quick-start-with-tidb)
 
 8.4.0 introduces the following key features and improvements:
 
@@ -24,59 +24,59 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="4">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840">Instance-level execution plan cache</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840">Instance-level execution plan cache</a> (experimental)</td>
     <td>Instance-level plan cache allows all sessions within the same TiDB instance to share the plan cache. Compared with session-level plan cache, this feature reduces SQL compilation time by caching more execution plans in memory, decreasing overall SQL execution time. It improves OLTP performance and throughput while providing better control over memory usage and enhancing database stability.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">Global indexes for partitioned tables</a> (GA)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">Global indexes for partitioned tables</a> (GA)</td>
     <td>Global indexes can effectively improve the efficiency of retrieving non-partitioned columns, and remove the restriction that a unique key must contain the partition key. This feature extends the usage scenarios of TiDB partitioned tables, and avoids some of the application modification work required for data migration.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Parallel mode for TSO requests</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">Parallel mode for TSO requests</a></td>
     <td>In high-concurrency scenarios, you can use this feature to reduce the wait time for retrieving TSO and improve the cluster throughput.</td>
   </tr>
   <tr>
-    <td>Improve query performance for <a href="https://docs.pingcap.com/tidb/v8.4/cached-tables">cached tables</a></td>
+    <td>Improve query performance for <a href="https://docs-archive.pingcap.com/tidb/v8.4/cached-tables">cached tables</a></td>
     <td>Improve query performance for index scanning on cached tables, with improvements of up to 5.4 times in some scenarios. For high-speed queries on small tables, using cached tables can significantly enhance overall performance.</td>
   </tr>
   <tr>
     <td rowspan="4">Reliability and Availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#query_limit-parameters">Support more triggers for runaway queries, and support switching resource groups</a></td>
     <td>Runaway Queries offer an effective way to mitigate the impact of unexpected SQL performance issues on systems. TiDB v8.4.0 introduces the number of keys processed by the Coprocessor (<code>PROCESSED_KEYS</code>) and request units (<code>RU</code>) as identifying conditions, and puts identified queries into the specified resource group for more precise identification and control of runaway queries.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/tidb-resource-control#background-parameters">Support setting the maximum limit on resource usage for background tasks of resource control</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#background-parameters">Support setting the maximum limit on resource usage for background tasks of resource control</a></td>
     <td>By setting a maximum percentage limit on background tasks of resource control, you can control their resource consumption based on the needs of different application systems. This keeps background task consumption at a low level and ensures the quality of online services.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental)</td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/tiproxy-traffic-replay">TiProxy supports traffic capture and replay</a> (experimental)</td>
     <td>Use TiProxy to capture real workloads from TiDB production clusters before major operations such as cluster upgrades, migrations, or deployment changes. Replay these workloads on target test clusters to validate performance and ensure successful changes.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">Concurrent automatic statistics collection</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">Concurrent automatic statistics collection</a></td>
     <td>Introduce the system variable <code>tidb_auto_analyze_concurrency</code> to control the number of concurrent auto-analyze operations within a TiDB cluster. TiDB automatically determines the concurrency of scanning tasks based on node scale and hardware specifications. This improves statistics collection efficiency by fully utilizing system resources, reduces manual tuning, and ensures stable cluster performance.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/vector-search-overview">Vector search</a> (experimental)</td>
+    <td><a href="https://docs.pingcap.com/ai/vector-search-overview">Vector search</a> (experimental)</td>
     <td>Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.</td>
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/information-schema-processlist">Display TiKV and TiDB CPU times in memory tables</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/information-schema-processlist">Display TiKV and TiDB CPU times in memory tables</a></td>
     <td>The CPU time is now integrated into a system table, displayed alongside other metrics for sessions or SQL, letting you observe high CPU consumption operations from multiple perspectives, and improving diagnostic efficiency. This is especially useful for diagnosing scenarios such as CPU spikes in instances or read/write hotspots in clusters.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/top-sql#use-top-sql">Support viewing aggregated TiKV CPU time by table or database</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/top-sql#use-top-sql">Support viewing aggregated TiKV CPU time by table or database</a></td>
     <td>When hotspot issues are not caused by individual SQL statements, using the aggregated CPU time by table or database level in Top SQL can help you quickly identify the tables or applications responsible for the hotspots, significantly improving the efficiency of diagnosing hotspot and CPU consumption issues.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">Support backing up TiKV instances with IMDSv2 service enabled</a></td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">Support backing up TiKV instances with IMDSv2 service enabled</a></td>
     <td><a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 now uses IMDSv2 as the default metadata service</a>. TiDB supports backing up data from TiKV instances that have IMDSv2 enabled, helping you run TiDB clusters more effectively in public cloud services.</td>
   </tr>
   <tr>
     <td rowspan="1">Security</td>
-    <td><a href="https://docs.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backup data</a> (experimental) </td>
+    <td><a href="https://docs-archive.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">Client-side encryption of log backup data</a> (experimental) </td>
     <td>Before uploading log backup data to your backup storage, you can encrypt the backup data to ensure its security during storage and transmission.</td>
   </tr>
 </tbody>
@@ -134,7 +134,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     In v8.4.0, this feature becomes generally available (GA). You can use the keyword `GLOBAL` to create a global index, instead of setting the system variable [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) to enable the global index feature. Starting from v8.4.0, this system variable is deprecated and is always `ON`.
 
-    For more information, see [documentation](/partitioned-table.md#global-indexes).
+    For more information, see [documentation](/global-indexes.md).
 
 * Improve query performance for cached tables in some scenarios [#43249](https://github.com/pingcap/tidb/issues/43249) @[tiancaiamao](https://github.com/tiancaiamao)
 
@@ -200,13 +200,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
     Vector search is a search method based on data semantics, which provides more relevant search results. As one of the core functions of AI and large language models (LLMs), vector search can be used in various scenarios such as Retrieval-Augmented Generation (RAG), semantic search, and recommendation systems.
 
-    Starting from v8.4.0, TiDB supports [vector data types](/vector-search/vector-search-data-types.md) and [vector search indexes](/vector-search/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/vector-search/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
+    Starting from v8.4.0, TiDB supports [vector data types](/ai/reference/vector-search-data-types.md) and [vector search indexes](/ai/reference/vector-search-index.md), offering powerful vector search capabilities. TiDB vector data types support up to 16,383 dimensions and support various [distance functions](/ai/reference/vector-search-functions-and-operators.md#vector-functions), including L2 distance (Euclidean distance), cosine distance, negative inner product, and L1 distance (Manhattan distance).
 
     To start vector search, you only need to create a table with vector data types, insert vector data, and then perform a query of vector data. You can also perform mixed queries of vector data and traditional relational data.
 
-    To enhance the performance of vector search, you can create and use [vector search indexes](/vector-search/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
+    To enhance the performance of vector search, you can create and use [vector search indexes](/ai/reference/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
-    For more information, see [documentation](/vector-search/vector-search-overview.md).
+    For more information, see [documentation](/ai/concepts/vector-search-overview.md).
 
 ### DB operations
 
@@ -280,9 +280,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-| `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
-| `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
-| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/partitioned-table.md#global-indexes) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
+| `log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This variable indicates whether TiDB Binlog is used, and is deleted starting from v8.4.0. |
+| `sql_log_bin` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This variable indicates whether to write changes to TiDB Binlog or not, and is deleted starting from v8.4.0. |
+| [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [global index](/global-indexes.md) is enabled by default. You only need to add the keyword `GLOBAL` to the corresponding column when executing `CREATE TABLE` or `ALTER TABLE` to create a global index. |
 | [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [list partitioning](/partitioned-table.md#list-partitioning) is enabled by default. |
 | [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition) | Deprecated | In v8.4.0, this variable is deprecated. Its value will be fixed to the default value `ON`, that is, [table partitioning](/partitioned-table.md) is enabled by default. |
 | [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) | Modified | Changes the value range from `[1, 18446744073709551615]` to `[1, 128]`. |
@@ -318,7 +318,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.4/quick-start-with-
 | PD | [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) | Modified | Changes the default value from `200000` to `540000`. |
 | PD | [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) | Modified | Changes the default value from `20` to `54`. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md) | Modified | Changes the default TiFlash storage format version from `5` to `7` to support vector index creation and storage. Due to this format change, TiFlash clusters upgraded to v8.4.0 or a later version do not support in-place downgrading to earlier versions. |
-| TiDB Binlog | `--enable-binlog` | Deleted | In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. This parameter controls whether to enable TiDB binlog generation or not, and is deleted starting from v8.4.0. |
+| TiDB Binlog | `--enable-binlog` | Deleted | In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. This parameter controls whether to enable TiDB binlog generation or not, and is deleted starting from v8.4.0. |
 | TiCDC | [`claim-check-raw-value`](/ticdc/ticdc-sink-to-kafka.md#send-the-value-field-to-external-storage-only) | Newly added | Controls whether TiCDC sends only the `value` field of Kafka messages to external storage. This feature is only applicable to non-Open Protocol scenarios. |
 | TiDB Lightning | [`logical-import-prep-stmt`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | In Logical Import Mode, this parameter controls whether to use prepared statements and statement cache to improve performance. The default value is `false`. |
 | BR | [`--log.crypter.key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data) | Newly added | Specifies the encryption key in hexadecimal string format for log backup data. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, a 24-byte key for the algorithm `aes192-ctr`, and a 32-byte key for the algorithm `aes256-ctr`. |
@@ -347,7 +347,7 @@ Before upgrading TiDB, ensure that your operating system version meets the [OS a
 
 * The following features are removed starting from v8.4.0:
 
-    * In v8.4.0, [TiDB Binlog](https://docs.pingcap.com/tidb/v8.3/tidb-binlog-overview) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
+    * In v8.4.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) is removed. Starting from v8.3.0, TiDB Binlog is fully deprecated. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md). Before you upgrade your TiDB cluster to v8.4.0 or later versions, be sure to switch to TiCDC and PITR.
 
 * The following features are planned for removal in future versions:
 

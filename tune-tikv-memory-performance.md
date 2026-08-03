@@ -41,7 +41,7 @@ log-level = "info"
 # Size of thread pool for gRPC
 # grpc-concurrency = 4
 # The number of gRPC connections between each TiKV instance
-# grpc-raft-conn-num = 10
+# grpc-raft-conn-num = 1
 
 # Most read requests from TiDB are sent to the coprocessor of TiKV. This parameter is used to set the number of threads
 # of the coprocessor. If many read requests exist, add the number of threads and keep the number within that of the
@@ -146,7 +146,7 @@ max-manifest-file-size = "20MiB"
 [rocksdb.defaultcf]
 # The data block size. RocksDB compresses data based on the unit of block.
 # Similar to page in other databases, block is the smallest unit cached in block-cache.
-block-size = "64KB"
+block-size = "32KiB"
 
 # The compaction mode of each layer of RocksDB data. The optional values include no, snappy, zlib,
 # bzip2, lz4, lz4hc, and zstd. Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.

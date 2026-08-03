@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 import {
   getAllMdList,
   copySingleFileSync,
@@ -24,11 +26,34 @@ const extractFilefromList = (
   });
 };
 
+const tocCopyTargets = [
+  { src: "TOC-tidb-cloud.md", dest: "./tmp/TOC.md" },
+  {
+    src: "TOC-tidb-cloud-starter.md",
+    dest: "./tmp/TOC-tidb-cloud-starter.md",
+  },
+  {
+    src: "TOC-tidb-cloud-essential.md",
+    dest: "./tmp/TOC-tidb-cloud-essential.md",
+  },
+  {
+    src: "TOC-tidb-cloud-premium.md",
+    dest: "./tmp/TOC-tidb-cloud-premium.md",
+  },
+];
+const tocFiles = tocCopyTargets.map(({ src }) => src);
+
 const main = () => {
-  const filteredLinkList = getAllMdList("TOC-tidb-cloud.md");
+  const existingTocFiles = tocFiles.filter((file) => fs.existsSync(file));
+  const filteredLinkList = getAllMdList(existingTocFiles);
 
   extractFilefromList(filteredLinkList, ".", "./tmp");
-  copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
+
+  tocCopyTargets.forEach(({ src, dest }) => {
+    if (fs.existsSync(src)) {
+      copySingleFileSync(src, dest);
+    }
+  });
   copyDirectoryWithCustomContentSync(
     "./tidb-cloud/",
     "./tmp/tidb-cloud/",

@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Dedicated Private Endpoint Connection Resource
-summary: Learn how to use the TiDB Cloud Dedicated private endpoint connection resource to create and modify a TiDB Cloud Dedicated private endpoint connection.
+title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
+summary: Learn how to use the `tidbcloud_dedicated_private_endpoint_connection` resource to create and modify a TiDB Cloud Dedicated private endpoint connection.
 ---
 
-# Use TiDB Cloud Dedicated Private Endpoint Connection Resource
+# Use the `tidbcloud_dedicated_private_endpoint_connection` Resource
 
 This document describes how to manage a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) private endpoint connection using the `tidbcloud_dedicated_private_endpoint_connection` resource.
 
@@ -15,7 +15,7 @@ The features of the `tidbcloud_dedicated_private_endpoint_connection` resource i
 
 > **Note:**
 >
-> TiDB Cloud Dedicated private endpoint connection resource cannot be modified. If you want to modify a TiDB Cloud Dedicated private endpoint connection, you need to delete the existing one, and then create a new one.
+> The `tidbcloud_dedicated_private_endpoint_connection` resource cannot be modified. If you want to modify a TiDB Cloud Dedicated private endpoint connection, you need to delete the existing one, and then create a new one.
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ The following example shows how to create a TiDB Cloud Dedicated private endpoin
 
     Use the `resource` block to define the resource of TiDB Cloud, including the resource type, resource name, and resource details.
 
-    - To use the TiDB Cloud Dedicated private endpoint connection resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
+    - To use the `tidbcloud_dedicated_private_endpoint_connection` resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
     - For the resource name, you can define it as needed. For example, `example`.
     - If you do not know how to get the values of the required arguments, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
     - To get the TiDB Cloud Dedicated private endpoint connection specification information, see [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
@@ -148,7 +148,7 @@ The following example shows how to create a TiDB Cloud Dedicated private endpoin
 
 For a TiDB Cloud Dedicated private endpoint connection that is not managed by Terraform, you can start managing it with Terraform by importing it.
 
-1. Add an import block for the new TiDB Cloud Dedicated private endpoint connection resource.
+1. Add an import block for the new `tidbcloud_dedicated_private_endpoint_connection` resource.
 
     Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,dedicated_private_endpoint_connection_id`:
 
@@ -161,7 +161,7 @@ For a TiDB Cloud Dedicated private endpoint connection that is not managed by Te
 
 2. Generate the new configuration file.
 
-    Generate the new configuration file for the new TiDB Cloud Dedicated private endpoint connection resource according to the import block:
+    Generate the new configuration file for the new `tidbcloud_dedicated_private_endpoint_connection` resource according to the import block:
 
     ```shell
     terraform plan -generate-config-out=generated.tf

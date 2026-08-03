@@ -5,13 +5,13 @@ summary: Learn about JSON functions that modify JSON values.
 
 # JSON Functions That Modify JSON Values
 
-This document describes JSON functions that modify JSON values.
+TiDB supports all the [JSON functions that modify JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html) available in MySQL 8.0.
 
-## [JSON_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-append)
+## `JSON_APPEND()`
 
 An alias to [`JSON_ARRAY_APPEND()`](#json_array_append).
 
-## [JSON_ARRAY_APPEND()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-append)
+## `JSON_ARRAY_APPEND()`
 
 The `JSON_ARRAY_APPEND(json_array, path, value [,path, value] ...)` function appends values to the end of the indicated arrays within a JSON document at the specified `path` and returns the result.
 
@@ -49,7 +49,7 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
 1 row in set (0.00 sec)
 ```
 
-## [JSON_ARRAY_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-array-insert)
+## `JSON_ARRAY_INSERT()`
 
 The `JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)` function inserts a `value` into the specified position of the `json_array` in the `path` and returns the result.
 
@@ -87,7 +87,7 @@ SELECT JSON_ARRAY_INSERT('["Car", "Boat", "Train"]', '$[1]', "Airplane") AS "Tra
 1 row in set (0.00 sec)
 ```
 
-## [JSON_INSERT()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-insert)
+## `JSON_INSERT()`
 
 The `JSON_INSERT(json_doc, path, value [,path, value] ...)` function inserts one or more values into a JSON document and returns the result.
 
@@ -125,7 +125,7 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE_PATCH()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-patch)
+## `JSON_MERGE_PATCH()`
 
 The `JSON_MERGE_PATCH(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents into a single JSON document, without preserving values of duplicate keys. For `json_doc` arguments with duplicated keys, only the values from the later specified `json_doc` argument are preserved in the merged result.
 
@@ -150,7 +150,7 @@ SELECT JSON_MERGE_PATCH(
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE_PRESERVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge-preserve)
+## `JSON_MERGE_PRESERVE()`
 
 The `JSON_MERGE_PRESERVE(json_doc, json_doc [,json_doc] ...)` function merges two or more JSON documents while preserving all values associated with each key and returns the merged result.
 
@@ -171,7 +171,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_MERGE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-merge)
+## `JSON_MERGE()`
 
 > **Warning:**
 >
@@ -179,7 +179,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 
 A deprecated alias for [`JSON_MERGE_PRESERVE()`](#json_merge_preserve).
 
-## [JSON_REMOVE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-remove)
+## `JSON_REMOVE()`
 
 The `JSON_REMOVE(json_doc, path [,path] ...)` function removes data of the specified `path` from a JSON document and returns the result.
 
@@ -215,7 +215,7 @@ SELECT JSON_REMOVE('{"a": 61, "b": 62, "c": 63}','$.b','$.c');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_REPLACE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-replace)
+## `JSON_REPLACE()`
 
 The `JSON_REPLACE(json_doc, path, value [, path, value] ...)` function replaces values in specified paths of a JSON document and returns the result. If a specified path does not exist, the value corresponding to the path is not added to the result.
 
@@ -253,7 +253,7 @@ SELECT JSON_REPLACE('{"a": 41, "b": 62}','$.b',42,'$.c',43);
 1 row in set (0.00 sec)
 ```
 
-## [JSON_SET()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-set)
+## `JSON_SET()`
 
 The `JSON_SET(json_doc, path, value [,path, value] ...)` function inserts or updates data in a JSON document and returns the result.
 
@@ -291,7 +291,7 @@ SELECT JSON_SET('{"version": 1.1, "name": "example"}','$.version',1.2,'$.branch'
 1 row in set (0.00 sec)
 ```
 
-## [JSON_UNQUOTE()](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html#function_json-unquote)
+## `JSON_UNQUOTE()`
 
 The `JSON_UNQUOTE(json)` function unquotes a JSON value and returns the result as a string. This is the opposite of the [`JSON_QUOTE()`](/functions-and-operators/json-functions/json-functions-create.md#json_quote) function.
 

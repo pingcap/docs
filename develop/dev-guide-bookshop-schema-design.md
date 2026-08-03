@@ -1,6 +1,7 @@
 ---
 title: Bookshop Example Application
 summary: Bookshop is an online bookstore app for buying and rating books. You can import table structures and data via TiUP or TiDB Cloud. Method 1 uses TiUP to quickly generate and import sample data, while Method 2 imports data from Amazon S3 to TiDB Cloud. The database tables include books, authors, users, ratings, book_authors, and orders. The database initialization script `dbinit.sql` creates the table structures for the Bookshop application.
+aliases: ['/tidb/stable/dev-guide-bookshop-schema-design/','/tidb/dev/dev-guide-bookshop-schema-design/','/tidbcloud/dev-guide-bookshop-schema-design/']
 ---
 
 # Bookshop Example Application
@@ -11,31 +12,14 @@ To make your reading on the application developer guide more smoothly, we presen
 
 ## Import table structures and data
 
-<CustomContent platform="tidb">
+To import table structures and data of the Bookshop application, choose one of the following import methods:
 
-You can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) or [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+- [TiDB Self-Managed: via `tiup demo`](#tidb-self-managed-via-tiup-demo).
+- [TiDB Cloud: via the Import feature](#tidb-cloud-via-the-import-feature).
 
-</CustomContent>
+### TiDB Self-Managed: via `tiup demo`
 
-<CustomContent platform="tidb-cloud">
-
-For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
-
-</CustomContent>
-
-### Method 1: Via `tiup demo`
-
-<CustomContent platform="tidb">
-
-If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
-
-</CustomContent>
+If your TiDB Self-Managed cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 ```shell
 tiup demo bookshop prepare
@@ -87,17 +71,17 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 You can delete the original table structure through the `--drop-tables` parameter. For more parameter descriptions, run the `tiup demo bookshop --help` command.
 
-### Method 2: Via TiDB Cloud Import
+### TiDB Cloud: via the Import feature
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud resource.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2. Click the name of your target resource to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. Select **Import data from Cloud Storage**, and then click **Amazon S3**.
 
@@ -293,14 +277,6 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## Need help?
 
-<CustomContent platform="tidb">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](/support.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs), or [submit a support ticket](https://tidb.support.pingcap.com/).
-
-</CustomContent>
+- Ask the community on [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs).
+- [Submit a support ticket for TiDB Cloud](https://tidb.support.pingcap.com/servicedesk/customer/portals)
+- [Submit a support ticket for TiDB Self-Managed](/support.md)

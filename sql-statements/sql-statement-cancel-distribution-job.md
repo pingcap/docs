@@ -3,7 +3,7 @@ title: CANCEL DISTRIBUTION JOB
 summary: An overview of the usage of CANCEL DISTRIBUTION JOB in TiDB.
 ---
 
-# CANCEL DISTRIBUTION JOB <span class="version-mark">New in v9.0.0</span>
+# CANCEL DISTRIBUTION JOB <span class="version-mark">New in v8.5.4 and v9.0.0</span>
 
 The `CANCEL DISTRIBUTION JOB` statement is used to cancel a Region scheduling task created using the [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md) statement in TiDB.
 
@@ -11,7 +11,7 @@ The `CANCEL DISTRIBUTION JOB` statement is used to cancel a Region scheduling ta
 
 > **Note:**
 >
-> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-serverless) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) clusters.
+> This feature is not available on [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances.
 
 </CustomContent>
 

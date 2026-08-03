@@ -38,11 +38,11 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidb/dev/dev-guide-overview)
+[Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Quick Start](https://docs.pingcap.com/tidb/dev/dev-guide-build-cluster-in-cloud)
+[Quick Start](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
-[Example Application](https://docs.pingcap.com/tidb/dev/dev-guide-sample-application-java-spring-boot)
+[Connect to TiDB](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
@@ -136,7 +136,7 @@ summary: TiDB is an open-source distributed SQL database that supports Hybrid Tr
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
+[Release Notes](https://docs.pingcap.com/releases/tidb-self-managed)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
 

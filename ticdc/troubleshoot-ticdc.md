@@ -77,9 +77,9 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` to an empty value, such as `time-zone=""`.
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` in the sink URI to an empty value, such as `time-zone=""`. Note that `time-zone` is only effective for `mysql` and `tidb` sinks.
 
-When using time zones in TiCDC, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
+When using `mysql` and `tidb` sinks, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
 
 ## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
@@ -108,7 +108,7 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 
 ## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error. Why?
 
-For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
+To control the size of messages that TiCDC sends to Kafka, you can configure the `max-message-bytes` parameter in the Sink URI. However, you must also ensure that your Kafka server is configured to accept messages of that size. If a message from TiCDC exceeds the Kafka server's limit, Kafka returns a `Message was too large` error. To increase the message size limit on the Kafka server, add the following configuration to its configuration file.
 
 ```
 # The maximum byte number of a message that the broker receives

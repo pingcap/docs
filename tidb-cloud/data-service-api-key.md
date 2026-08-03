@@ -12,12 +12,12 @@ The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedi
 
 > **Note:**
 >
-> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
+> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in TiDB, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
 
 ## API key overview
 
 - An API key contains a public key and a private key, which act as the username and password required in the authentication. The private key is only displayed upon the key creation.
-- Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
+- Each API key belongs to one Data App only and is used to access the data in TiDB.
 - You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
 
 ## Rate limiting
@@ -86,6 +86,11 @@ The following sections describe how to create, edit, delete, and expire API keys
 To create an API key for a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, to navigate to the **Data Service** page of your target project, click the **Project view** tab on the [**My TiDB**](https://tidbcloud.com/tidbs) page, click **...** for your target project, and then click **Data Service**.
+
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **Authentication** area, click **Create API Key**.
 4. In the **Create API Key** dialog box, do the following:
@@ -93,7 +98,7 @@ To create an API key for a Data App, perform the following steps:
     1. (Optional) Enter a description for your API key.
     2. Select a role for your API key.
 
-        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+        The role is used to control whether the API key can read or write data to the data sources linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
 
         - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
         - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.

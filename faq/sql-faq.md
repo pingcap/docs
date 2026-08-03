@@ -247,7 +247,7 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL Execution
 
-This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md).
+This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/best-practices/ddl-introduction.md).
 
 ### How long does it take to perform various DDL operations?
 
@@ -279,7 +279,7 @@ Assume that DDL operations are not blocked, each TiDB server can update the sche
 
 ### What triggers the `Information schema is changed` error?
 
-When executing SQL statements, TiDB determines the schema version of an object based on the isolation level and processes the SQL statement accordingly. TiDB also supports online asynchronous DDL changes. When you execute DML statements, there might be DDL statements being executed at the same time, and you need to ensure that each SQL statement is executed on the same schema. Therefore, when executing DML, if a DDL operation is ongoing, TiDB might report an `Information schema is changed` error. 
+When executing SQL statements, TiDB determines the `schema` version of an object based on the isolation level and processes the SQL statement accordingly. TiDB also supports online asynchronous DDL changes. When you execute DML statements, other DDL statements might run concurrently, and TiDB needs to ensure that each SQL statement is executed on the same `schema` version. Therefore, when executing DML, if a DDL operation is ongoing, TiDB might report an `Information schema is changed` error. In addition, in some concurrent DDL scenarios, after a DDL statement fails, TiDB checks whether the `schema` has changed before returning the original error. If the `schema` version used by that DDL statement is already behind the latest `schema` version, TiDB might also return this error.
 
 Starting from v6.4.0, TiDB has implemented a [metadata lock mechanism](/metadata-lock.md), which allows the coordinated execution of DML statements and DDL schema changes, and avoids most `Information schema is changed` errors.
 
@@ -289,8 +289,9 @@ Now, there are still a few causes for this error reporting:
 + Cause 2: The DML operation goes on for a long time. During this period, many DDL statements have been executed, which causes more than 1024 `schema` version changes. You can modify this default value by modifying the `tidb_max_delta_schema_count` variable.
 + Cause 3: The TiDB server that accepts the DML request is not able to load `schema information` for a long time (possibly caused by the connection failure between TiDB and PD or TiKV). During this period, many DDL statements have been executed, which causes more than 100 `schema` version changes.
 + Cause 4: After TiDB restarts and before the first DDL operation is executed, the DML operation is executed and then encounters the first DDL operation (which means before the first DDL operation is executed, the transaction corresponding to the DML is started. And after the first `schema` version of the DDL is changed, the transaction corresponding to the DML is committed), this DML operation reports this error.
++ Cause 5: In some concurrent DDL scenarios, a DDL statement fails, and another DDL statement advances the global `schema` version during the same period. Before returning the original DDL error, TiDB checks whether the `schema` has changed. This check path might not carry the exact related table information, so it does not make a precise "same table or not" judgment. As long as the `schema` version used by the DDL statement is behind the latest `schema` version, the original DDL error might be converted to this error. Typical scenarios include concurrent `TRUNCATE TABLE` and `ALTER TABLE` on the same table, or concurrent `RENAME TABLE` and `ALTER TABLE` statements that compete on object state.
 
-In the preceding causes, only Cause 1 is related to tables. Cause 1 and Cause 2 do not impact the application, as the related DML operations retry after failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
+In the preceding causes, Cause 1 directly depends on whether the tables involved in DML are the same as those involved in the ongoing DDL. Cause 5 occurs in some concurrent DDL scenarios, but its check path does not make a precise "same table or not" judgment. Cause 1 and Cause 2 do not affect the application, as TiDB retries the related DML operations after they fail. For Cause 3, you need to check the network between TiDB and TiKV/PD.
 
 > **Note:**
 >
@@ -359,7 +360,7 @@ When `connectionCollation` is not configured in the JDBC URL, there are two scen
 
 In TiDB v7.4 and earlier versions, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the TiDB [`collation_connection`](/system-variables.md#collation_connection) variable defaults to the `utf8mb4_bin` collation.
 
-Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variables.md#collation_connection) variable depends on the JDBC driver version. For example, for Connector/J 8.0.26 and later versions, the JDBC driver defaults to the `utf8mb4` character set and uses `utf8mb4_general_ci` as the connection collation. TiDB follows the driver, and the [`collation_connection`](/system-variables.md#collation_connection) variable uses the `utf8mb4_0900_ai_ci` collation. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
+Starting from TiDB v7.4, if `connectionCollation` is not configured, and `characterEncoding` is either not configured or set to `UTF-8` in the JDBC URL, the value of the [`collation_connection`](/system-variables.md#collation_connection) variable depends on the JDBC driver version. For more information, see [Collation used in JDBC connections](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url).
 
 When upgrading from an earlier version to v7.4 or later (for example, from v6.5 to v7.5), if you need to maintain the `collation_connection` as `utf8mb4_bin` for JDBC connections, it is recommended to configure the `connectionCollation` parameter in the JDBC URL.
 

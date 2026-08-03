@@ -106,7 +106,13 @@ SELECT @myvar, @myvar + 1;
 
 The following behavior differences apply:
 
-* Changes made with `SET GLOBAL` will be propagated to all TiDB instances in the cluster. This differs from MySQL, where changes do not propagate to replicas.
+* In MySQL, changes made with `SET GLOBAL` do not apply to replicas. However in TiDB, the scope of `SET GLOBAL` depends on the specific system variable:
+
+    * Global variables: for most system variables (for example, those that affect cluster behavior or optimizer behavior), changes made with `SET GLOBAL` apply to all TiDB instances in the cluster.
+    * Instance-level variables: for some system variables (for example, `max_connections`), changes made with `SET GLOBAL` apply only to the TiDB instance that the current connection is using.
+
+    Therefore, when using `SET GLOBAL` to modify a variable, always check the [documentation](/system-variables.md) of that variable, especially the "Persists to cluster" attribute, to confirm the scope of the change.
+
 * TiDB presents several variables as both readable and settable. This is required for MySQL compatibility, because it is common for both applications and connectors to read MySQL variables. For example: JDBC connectors both read and set query cache settings, despite not relying on the behavior.
 * Changes made with `SET GLOBAL` will persist through TiDB server restarts. This means that `SET GLOBAL` in TiDB behaves more similar to `SET PERSIST` as available in MySQL 8.0 and above.
 * TiDB does not support `SET PERSIST` and `SET PERSIST_ONLY`, because TiDB persists global variables.

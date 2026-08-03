@@ -91,6 +91,10 @@ You can use Docker to quickly deploy a test MySQL 8.0 instance.
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
 
+    > **Note:**
+    >
+    > If your MySQL source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL), also grant the `LOCK TABLES` privilege. For more information, see [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges).
+
 4. Create sample data:
 
     ```sql
@@ -147,6 +151,10 @@ On macOS, you can quickly install and start MySQL 8.0 locally using [Homebrew](h
 
     GRANT PROCESS, BACKUP_ADMIN, RELOAD, REPLICATION SLAVE, REPLICATION CLIENT, SELECT ON *.* TO 'tidb-dm'@'%';
     ```
+
+    > **Note:**
+    >
+    > If your MySQL source is a managed MySQL service (such as Amazon RDS, Aurora, ApsaraDB RDS for MySQL, Azure Database for MySQL, or Google Cloud SQL), also grant the `LOCK TABLES` privilege. For more information, see [DM-worker privileges](/dm/dm-worker-intro.md#upstream-database-user-privileges).
 
 6. Create sample data:
 

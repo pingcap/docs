@@ -1,92 +1,129 @@
 ---
-title: Import Sample Data into TiDB Cloud Dedicated
+title: Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated
 summary: Learn how to import sample data into TiDB Cloud Dedicated via the UI.
 ---
 
-# Import Sample Data into TiDB Cloud Dedicated
+# Import Sample Data (SQL Files) from Cloud Storage into TiDB Cloud Dedicated
 
-This document describes how to import the sample data into TiDB Cloud Dedicated via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+This document describes how to import the sample data (SQL files) into TiDB Cloud Dedicated via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Amazon S3** page, configure the following source data information:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**. 
-    - **Folder URI** or **File URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
-    - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
-        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`.
+    - **Storage Provider**: select **Amazon S3**.
+    - **Source URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`.
+    - **Credentials**: select **AWS Role ARN**, and then enter `arn:aws:iam::801626783489:role/import-sample-access`.
         - **AWS Access Key**: skip this option for the sample data.
 
-4. Click **Connect** > **Start Import**.
+4. Click **Next**.
+
+5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
+
+6. Click **Next**. TiDB Cloud scans the source files.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 <div label="Google Cloud">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from GCS** page, configure the following source data information:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**.
-    - **Folder URI** or **File URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
-    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access).
+    - **Storage Provider**: select **Google Cloud Storage**.
+    - **Source URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1/`.
+    - **Google Cloud Service Account ID**: TiDB Cloud displays a Google Cloud Service Account ID on this page. You can proceed directly when using the sample data URI.
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region.
+4. Click **Next**.
 
-4. Click **Connect** > **Start Import**.
+5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
+
+6. Click **Next**. TiDB Cloud scans the source files.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
 <div label="Azure Blob Storage">
 
-1. Open the **Import** page for your target cluster.
+1. Open the **Import** page for your target TiDB Cloud Dedicated cluster.
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/project/clusters) page of your project.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 
         > **Tip:**
         >
-        > You can use the combo box in the upper-left corner to switch between organizations, projects, and clusters.
+        > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
+    2. Click the name of your target TiDB Cloud Dedicated cluster to go to its overview page, and then click **Data** > **Import** in the left navigation pane.
 
-2. Select **Import data from Cloud Storage**.
+2. Click **Import data from Cloud Storage**.
 
-3. On the **Import Data from Azure Blob Storage** page, configure the following source data information:
+3. On the **Import Data from Cloud Storage** page, provide the following information:
 
-    - **Included Schema Files**: for the sample data, select **Yes**.
-    - **Data Format**: select **SQL**.
-    - **Folder URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
-    - **SAS Token**: 
+    - **Storage Provider**: select **Azure Blob Storage**.
+    - **Source URI**: enter the sample data URI `https://tcidmsampledata.blob.core.windows.net/sql/`.
+    - **Connectivity Method**: select how TiDB Cloud connects to your Azure Blob Storage. To import the sample data, you can use the default connectivity method.
+
+        - **Public** (default): connects over the public internet. Use this option when the storage account allows public network access.
+        - **Private Link**: connects through an Azure private endpoint for network-isolated access. Use this option when the storage account blocks public access or when your security policy requires private connectivity. If you select **Private Link**, you also need to fill in the additional field **Azure Blob Storage Resource ID**. To find the resource ID:
+            
+            1. Go to the [Azure portal](https://portal.azure.com/).
+            2. Navigate to your storage account and click **Overview** > **JSON View**.
+            3. Copy the value of the `id` property. The resource ID is in the format `/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`.
+
+    - **SAS Token**:
+
         - For the sample data, use the following **SAS Token**: `sv=2015-04-05&ss=b&srt=co&sp=rl&se=2099-03-01T00%3A00%3A01.0000000Z&sig=cQHvaofmVsUJEbgyf4JFkAwTJGsFOmbQHx03GvVMrNc%3D`.
         - For your own data, you can use a SAS token to access your Azure Blob Storage. For more information, see [Configure Azure Blob Storage access](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access).
 
-    If the region of the storage account is different from your cluster, confirm the compliance of cross region.
+4. Click **Next**.
 
-4. Click **Connect** > **Start Import**.
+    If you selected **Private Link** as the connectivity method, TiDB Cloud creates a private endpoint for your storage account. You need to approve this endpoint request in the Azure portal before the connection can proceed:
+
+    1. Go to the [Azure portal](https://portal.azure.com/) and navigate to your storage account.
+    2. Click **Networking** > **Private endpoint connections**.
+    3. Find the pending connection request from TiDB Cloud and click **Approve**.
+    4. Return to the [TiDB Cloud console](https://tidbcloud.com/). The import wizard proceeds automatically once the endpoint is approved.
+
+    > **Note:**
+    >
+    > If the endpoint is not yet approved, TiDB Cloud displays a message indicating that the connection is pending approval. Approve the request in the [Azure portal](https://portal.azure.com/) and retry.
+
+5. In the **Destination Mapping** section, keep **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** selected, and then select **SQL** as the data format.
+
+6. Click **Next**. TiDB Cloud scans the source files.
+
+7. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 </SimpleTab>

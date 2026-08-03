@@ -5,9 +5,9 @@ summary: Learn about JSON functions that search JSON values.
 
 # JSON Functions That Search JSON Values
 
-This document describes JSON functions that search JSON values.
+TiDB supports most of the [JSON functions that search JSON values](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html) available in MySQL 8.0.
 
-## [JSON_CONTAINS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains)
+## `JSON_CONTAINS()`
 
 By returning `1` or `0`, the `JSON_CONTAINS(json_doc, candidate [,path])` function indicates whether a given `candidate` JSON document is contained within a target JSON document.
 
@@ -88,7 +88,7 @@ SELECT JSON_CONTAINS('{"foo": "bar", "aaa": 5}','"bar"', '$.foo');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_CONTAINS_PATH()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-contains-path)
+## `JSON_CONTAINS_PATH()`
 
 The `JSON_CONTAINS_PATH(json_doc, all_or_one, path [,path, ...])` function returns `0` or `1` to indicate whether a JSON document contains data at a given path or paths.
 
@@ -139,7 +139,7 @@ SELECT JSON_CONTAINS_PATH('{"foo": "bar", "aaa": 5}','all','$.foo', '$.aaa');
 1 row in set (0.00 sec)
 ```
 
-## [JSON_EXTRACT()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-extract)
+## `JSON_EXTRACT()`
 
 The `JSON_EXTRACT(json_doc, path[, path] ...)` function extracts data from a JSON document, selected from the parts of the document matched by the `path` arguments.
 
@@ -156,7 +156,7 @@ SELECT JSON_EXTRACT('{"foo": "bar", "aaa": 5}', '$.foo');
 1 row in set (0.00 sec)
 ```
 
-## [->](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-column-path)
+## `->`
 
 The `column->path` function returns the data in `column` that matches the `path` argument. It is an alias for [`JSON_EXTRACT()`](#json_extract).
 
@@ -179,7 +179,7 @@ FROM (
 1 row in set (0.00 sec)
 ```
 
-## [->>](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_json-inline-path)
+## `->>`
 
 The `column->>path` function unquotes data in `column` that matches the `path` argument. It is an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`.
 
@@ -204,7 +204,7 @@ FROM (
 1 row in set (0.00 sec)
 ```
 
-## [JSON_KEYS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-keys)
+## `JSON_KEYS()`
 
 The `JSON_KEYS(json_doc [,path])` function returns the top-level keys of a JSON object as a JSON array. If a `path` argument is given, it returns the top-level keys from the selected path.
 
@@ -240,7 +240,7 @@ SELECT JSON_KEYS('{"name": {"first": "John", "last": "Doe"}, "type": "Person"}',
 1 row in set (0.00 sec)
 ```
 
-## [JSON_SEARCH()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-search)
+## `JSON_SEARCH()`
 
 The `JSON_SEARCH(json_doc, one_or_all, str)` function searches a JSON document for one or all matches of a string.
 
@@ -276,7 +276,7 @@ SELECT JSON_SEARCH('{"a": ["aa", "bb", "cc"], "b": ["cc", "dd"]}','all','cc');
 1 row in set (0.01 sec)
 ```
 
-## [MEMBER OF()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of)
+## `MEMBER OF()`
 
 The `str MEMBER OF (json_array)` function tests if the passed value `str` is an element of the `json_array`, it returns `1`. Otherwise, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
 
@@ -294,7 +294,7 @@ SELECT '🍍' MEMBER OF ('["🍍","🥥","🥭"]') AS 'Contains pineapple';
 
 ```
 
-## [JSON_OVERLAPS()](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps)
+## `JSON_OVERLAPS()`
 
 The `JSON_OVERLAPS(json_doc, json_doc)` function indicates whether two JSON documents have overlapping part. If yes, it returns `1`. If not, it returns `0`. It returns `NULL` if any of the arguments is `NULL`.
 

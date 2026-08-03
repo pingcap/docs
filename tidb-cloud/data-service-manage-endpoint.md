@@ -13,8 +13,8 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 - Before you create an endpoint, make sure the following:
 
-    - You have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
-    - The databases, tables, and columns that the endpoint will operate on already exist in the target cluster.
+    - You have created a {{{ .starter }}} instance and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+    - The databases, tables, and columns that the endpoint will operate on already exist in the target {{{ .starter }}} instance.
 
 - Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -34,7 +34,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Autogenerate Endpoint**. The dialog for endpoint generation is displayed.
 3. In the dialog, do the following:
 
-    1. Select the target cluster, database, and table for the endpoint to be generated.
+    1. Select the target {{{ .starter }}} instance, database, and table for the endpoint to be generated.
 
         > **Note:**
         >
@@ -44,7 +44,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
         For each operation you select, TiDB Cloud Data Service will generate a corresponding endpoint. If you select a batch operation (such as `POST (Batch Create)`), the generated endpoint lets you operate on multiple rows in a single request.
 
-        If the table you selected contains [vector data types](/vector-search/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/vector-search/vector-search-functions-and-operators.md) include the following:
+        If the table you selected contains [vector data types](/ai/reference/vector-search-data-types.md), you can enable the **Vector Search Operations** option and select a vector distance function to generate a vector search endpoint that automatically calculates vector distances based on your selected distance function. The supported [vector distance functions](/ai/reference/vector-search-functions-and-operators.md) include the following:
 
         - `VEC_L2_DISTANCE` (default): calculates the L2 distance (Euclidean distance) between two vectors.
         - `VEC_COSINE_DISTANCE`: calculates the cosine distance between two vectors.
@@ -121,7 +121,7 @@ To add a predefined system endpoint to your Data App, perform the following step
 
 ## Develop an endpoint
 
-For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
+For each endpoint, you can write SQL statements to execute on a {{{ .starter }}} instance, define parameters for the SQL statements, or manage the name and version.
 
 > **Note:**
 >
@@ -166,7 +166,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     >
     > - Path parameters can be used directly in SQL. For more information, see [Configure parameters](#configure-parameters).
 
-- **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
+- **Endpoint URL**: (read-only) the default URL is automatically generated based on the region where the corresponding {{{ .starter }}} instance is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`. To configure a custom domain for the Data App, see [Custom Domain in Data Service](/tidb-cloud/data-service-custom-domain.md).
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -201,13 +201,13 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
-1. Select a cluster.
+1. Select a {{{ .starter }}} instance.
 
     > **Note:**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
+    > Only {{{ .starter }}} instances that are linked to the Data App are displayed in the drop-down list. To manage the linked {{{ .starter }}} instances, see [Manage linked data source](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
 
-    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    On the upper part of the SQL editor, select a {{{ .starter }}} instance on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this {{{ .starter }}} instance in the **Schema** tab on the right pane.
 
 2. Depending on your endpoint type, do one of the following to select a database:
 
@@ -433,7 +433,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     > **Note:**
     >
-    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the {{{ .starter }}} instance is located.
     > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud Data Service will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
 5. Paste the code example in your application, edit the example according to your need, and then run it.

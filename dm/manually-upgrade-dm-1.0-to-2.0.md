@@ -110,7 +110,7 @@ For [data migration task configuration guide](/dm/dm-task-configuration-guide.md
 
 ## Step 3: Stop the v1.0.x cluster
 
-If the original v1.0.x cluster is deployed by DM-Ansible, you need to use [DM-Ansible to stop the v1.0.x cluster](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster).
+If the original v1.0.x cluster is deployed by DM-Ansible, you need to use [DM-Ansible to stop the v1.0.x cluster](https://docs-archive.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster).
 
 If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker and DM-master processes directly.
 

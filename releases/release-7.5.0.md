@@ -108,7 +108,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
+    For more information, see [documentation](/best-practices/ddl-introduction.md#ddl-related-commands).
 
 * BR supports backing up and restoring statistics [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth)
 
@@ -199,7 +199,7 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 ## Deprecated features
 
-* [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated in v7.5.0 and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of Mydumper.
+* [Mydumper](https://docs-archive.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated in v7.5.0 and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of Mydumper.
 
 * TiKV-importer is deprecated in v7.5.0. It is strongly recommended that you use the [Physical Import Mode of TiDB Lightning](/tidb-lightning/tidb-lightning-physical-import-mode.md) as an alternative.
 
@@ -207,7 +207,7 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 * The [`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze) feature (experimental) for statistics is deprecated in v7.5.0.
 
-* The [incremental collection](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) feature (experimental) for statistics is deprecated in v7.5.0.
+* The [incremental collection](https://docs-archive.pingcap.com/tidb/v7.4/statistics#incremental-collection) feature (experimental) for statistics is deprecated in v7.5.0.
 
 ## Improvements
 

@@ -1,7 +1,7 @@
 ---
 title: TiDB Best Practices
 summary: This document summarizes best practices for using TiDB, covering SQL use and optimization tips for OLAP and OLTP scenarios, with a focus on TiDB-specific optimization options. It also recommends reading three blog posts introducing TiDB's technical principles before diving into the best practices.
-aliases: ['/docs/dev/tidb-best-practices/']
+aliases: ['/docs/dev/tidb-best-practices/','/tidb/stable/tidb-best-practices/','/tidb/dev/tidb-best-practices/']
 ---
 
 # TiDB Best Practices
@@ -81,13 +81,13 @@ Similarly, if all data is read from a focused small range (for example, the cont
 
 ### Secondary index
 
-TiDB supports the complete secondary indexes, which are also global indexes. Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
+TiDB supports the complete secondary indexes, which are also [global indexes](/global-indexes.md). Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
 
 Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has its unique features. The following are a few notes when using secondary indexes in TiDB.
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage format of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
 
     In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 
@@ -130,7 +130,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * Ensure the order of results through indexes
 
-    You can use indexes to filter or sort data. Firstly, get row IDs according to the index order. Then, return the row content according to the return order of row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable.
+    You can use indexes to filter or sort data. TiDB first gets row IDs according to the index order, and then returns the row content according to the order of those row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but you can increase it by adjusting [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50).
 
 * Reverse index scan
 
@@ -215,4 +215,4 @@ TiDB is suitable for the following scenarios:
 - You do not want to do sharding
 - The access mode has no obvious hotspot
 - Transactions, strong consistency, and disaster recovery are required
-- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce storage links
+- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce data pipelines

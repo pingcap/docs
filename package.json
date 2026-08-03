@@ -17,5 +17,11 @@
     "micromark-extension-mdxjs": "^1.0.0",
     "octokit": "^3.1.0",
     "unist-util-visit": "^4.1.0"
+  },
+  "devDependencies": {
+    "@breeswish-org/remark-lint-pingcap-docs-anchor": "1.1.2",
+    "markdown-link-check": "3.8.1",
+    "remark-cli": "9.0.0",
+    "remark-lint": "8.0.0"
   }
 }

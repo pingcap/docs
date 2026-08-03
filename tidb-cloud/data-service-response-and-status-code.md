@@ -357,7 +357,7 @@ An example response is as follows:
 }
 ```
 
-This might also be related to the inability to connect the TiDB Cloud cluster. You need to refer to the `message` for troubleshooting.
+This might also be related to the inability to connect the {{{ .starter }}} instance. You need to refer to the `message` for troubleshooting.
 
 ```json
 {

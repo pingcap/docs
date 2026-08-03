@@ -13,7 +13,7 @@ This document describes how to use these features together to analyze and compar
 >
 > [Top SQL](/dashboard/top-sql.md) and [Continuous Profiling](/dashboard/continuous-profiling.md) are not enabled by default. You need to enable them in advance.
 
-By running the same application with different JDBC configurations in these scenarios, this document shows you how the overall system performance is affected by different interactions between applications and databases, so that you can apply [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md) for better performance.
+By running the same application with different JDBC configurations in these scenarios, this document shows you how the overall system performance is affected by different interactions between applications and databases, so that you can apply [Best Practices for Developing Java Applications with TiDB](/develop/java-app-best-practices.md) for better performance.
 
 ## Environment description
 
