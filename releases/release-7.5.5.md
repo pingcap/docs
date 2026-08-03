@@ -142,7 +142,7 @@ TiDB バージョン: 7.5.5
     -   TiCDC
 
         -   有効なインデックスのないテーブルで`TRUNCATE TABLE` DDL を複製するときに TiCDC がエラーを報告する可能性がある問題を修正しました。 [＃11765](https://github.com/pingcap/tiflow/issues/11765) @ [asddongmen](https://github.com/asddongmen)
-        -   シンプルプロトコルメッセージでパーティションテーブルの`tableID`正しく設定されていない問題を修正しました。 [＃11846](https://github.com/pingcap/tiflow/issues/11846) @ [3AceShowHand](https://github.com/3AceShowHand)
+        -   Simpleプロトコルメッセージでパーティションテーブルの`tableID`正しく設定されていない問題を修正しました。 [＃11846](https://github.com/pingcap/tiflow/issues/11846) @ [3AceShowHand](https://github.com/3AceShowHand)
         -   やり直しモジュールがエラーを正しく報告できない問題を修正しました [＃11744](https://github.com/pingcap/tiflow/issues/11744) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリームに複製しない問題を修正しました。 [＃10524](https://github.com/pingcap/tiflow/issues/10524) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   TiDB DDL 所有者の変更中に DDL タスクのスキーマ バージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[＃11714](https://github.com/pingcap/tiflow/issues/11714) @ [wlwilliamx](https://github.com/wlwilliamx)
