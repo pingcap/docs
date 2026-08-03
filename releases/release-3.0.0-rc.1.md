@@ -126,7 +126,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) に変更 [＃162](https://github.com/pingcap/tidb-lightning/pull/162)
     -   設定ファイルが見つからない場合に使用するコマンドラインオプションをいくつか追加します[＃157](https://github.com/pingcap/tidb-lightning/pull/157)
 
--   同期差分インスペクター
+-   sync-diff-inspector
     -   チェックポイントをサポートし、検証ステータスを記録し、再起動後に最後に保存したポイントから検証を続行します[＃224](https://github.com/pingcap/tidb-tools/pull/224)
     -   チェックサム計算してデータの整合性をチェックするための構成項目`only-use-checksum`追加します [＃215](https://github.com/pingcap/tidb-tools/pull/215)
 

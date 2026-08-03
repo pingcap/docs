@@ -123,9 +123,9 @@ TiCDC の基本は次のとおりです。
 -   対象: TiDB クラスター、MySQL、Kafka、Confluent
 -   サポートされている TiDB バージョン: v4.0.6 以降
 
-### 同期差分インスペクター {#sync-diff-inspector}
+### sync-diff-inspector {#sync-diff-inspector}
 
-[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md) 、MySQLまたはTiDBデータベースに保存されているデータを比較するツールです。さらに、少量のデータに不整合がある場合、sync-diff-inspectorを使用してデータを修復することもできます。
+[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) 、MySQLまたはTiDBデータベースに保存されているデータを比較するツールです。さらに、少量のデータに不整合がある場合、sync-diff-inspectorを使用してデータを修復することもできます。
 
 sync-diff-inspector の基本は次のとおりです。
 

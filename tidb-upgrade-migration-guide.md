@@ -169,13 +169,13 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 データのレプリケーションが完了したら、次の方法を使用して、古いクラスターと新しいクラスター間のデータの整合性を確認します。
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用します:
+-   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用します:
 
     ```shell
     ./sync_diff_inspector --config=./config.toml
     ```
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
+-   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
 
 -   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
 
@@ -233,7 +233,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 3.  新しいクラスターと古いクラスター間のデータの整合性を確認します。
 
     -   TiCDC が追いついたら、新しいクラスターから`down-tso`を取得します。
-    -   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
+    -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
 4.  フォワード Changefeed レプリケーション タスクを一時停止します。
 

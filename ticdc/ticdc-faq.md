@@ -415,7 +415,7 @@ TiCDC v6.5.2より前のバージョンでは、TiCDCをダウンストリーム
 
 ## アップストリーム データとダウンストリーム データが一貫しているかどうかをどのように確認すればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 
-ダウンストリームが TiDB クラスターまたは MySQL インスタンスの場合は、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してデータを比較することをお勧めします。
+ダウンストリームが TiDB クラスターまたは MySQL インスタンスの場合は、 [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用してデータを比較することをお勧めします。
 
 ## 単一テーブルのレプリケーションは単一のTiCDCノードでのみ実行できます。複数のTiCDCノードを使用して複数テーブルのデータをレプリケーションすることは可能ですか？ {#replication-of-a-single-table-can-only-be-run-on-a-single-ticdc-node-will-it-be-possible-to-use-multiple-ticdc-nodes-to-replicate-data-of-multiple-tables}
 

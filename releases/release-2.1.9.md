@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 2.1.9
     -   一部の SST ファイルのインポートに失敗するものの、インポート結果が成功として返されるというインポーターのバグを修正しました。 [＃4566](https://github.com/tikv/tikv/pull/4566)
     -   SST ファイルを TiKV にアップロードするときに、インポーターで速度制限を設定できるようになりました [＃4607](https://github.com/tikv/tikv/pull/4607)
     -   CPU消費量を削減するために、インポーターのRocksDB SST圧縮方式を`lz4`に変更します[＃4624](https://github.com/tikv/tikv/pull/4624)
--   同期差分インスペクター
+-   sync-diff-inspector
     -   サポートチェックポイント[＃227](https://github.com/pingcap/tidb-tools/pull/227)
 
 ## TiDB Ansible {#tidb-ansible}
