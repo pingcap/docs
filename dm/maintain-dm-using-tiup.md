@@ -161,13 +161,13 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 > **Note:**
 >
-> v2.0.5 以降、dmctl は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)サポートします。
+> v2.0.5 以降、dmctl は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)をサポートします。
 >
 > アップグレード前に、 `config export`を使用してクラスターの設定ファイルをエクスポートできます。アップグレード後に以前のバージョンにダウングレードする必要がある場合は、まず以前のクラスターを再デプロイし、 `config import`を使用して以前の設定ファイルをインポートできます。
 >
 > v2.0.5 より前のクラスターの場合は、dmctl (&gt;= v2.0.5 かつ &lt; v8.0.0) を使用して、データ ソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 >
-> v2.0.2以降のクラスターでは、現在、リレーワーカー関連の設定の自動インポートはサポートされていません`start-relay`コマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#enable-and-disable-relay-log)実行できます。
+> v2.0.2以降のクラスターでは、現在、リレーワーカー関連の設定の自動インポートはサポートされていません。`start-relay`コマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#enable-and-disable-relay-log)を実行できます。
 
 ローリングアップグレードプロセスはアプリケーションに対して可能な限り透過的に実行され、ビジネスに影響を与えません。操作はノードごとに異なります。
 
@@ -237,7 +237,7 @@ tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
 tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 ```
 
-## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートおよびアップグレードする {#import-and-upgrade-a-dm-1-0-cluster-deployed-using-dm-ansible}
+## DM-Ansible を使用してデプロイされた DM 1.0 クラスターをインポートおよびアップグレードする {#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible}
 
 > **Note:**
 >
@@ -339,7 +339,7 @@ dmctlのバージョンを指定します。このコマンドを実行する前
 tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 ```
 
-## システムのネイティブSSHクライアントを使用してクラスタに接続します {#use-the-system-s-native-ssh-client-to-connect-to-cluster}
+## システムのネイティブSSHクライアントを使用してクラスタに接続します {#use-the-systems-native-ssh-client-to-connect-to-cluster}
 
 クラスタマシン上で実行される上記のすべての操作は、 TiUPに組み込まれたSSHクライアントを使用してクラスタに接続し、コマンドを実行します。ただし、シナリオによっては、制御マシンシステムにネイティブなSSHクライアントを使用してクラスタ操作を実行する必要がある場合もあります。例：
 

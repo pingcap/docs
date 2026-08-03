@@ -31,7 +31,7 @@ TiDBは、 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除く[`GROUP BY`集計関
 | [`RANK()`](#rank)                 | パーティション内の現在の行の順位を返します。順位にはギャップがある場合があります。                                |
 | [`ROW_NUMBER()`](#row_number)     | パーティション内の現在の行番号を返します。                                                    |
 
-## `CUME_DIST()` {#cume-dist}
+## `CUME_DIST()` {#cume_dist}
 
 `CUME_DIST()`値のグループ内における値の累積分布を計算します。値のグループをソートするには、 `ORDER BY`句と`CUME_DIST()`を使用する必要があります。そうしないと、この関数は期待される値を返しません。
 
@@ -63,7 +63,7 @@ FROM
     +------+------------------------------+
     4 rows in set (0.00 sec)
 
-## `DENSE_RANK()` {#dense-rank}
+## `DENSE_RANK()` {#dense_rank}
 
 `DENSE_RANK()`関数は現在行の順位を返します。3 [`RANK()`](#rank)と似ていますが、同順位（同じ値と順序条件を共有する行）の場合に空白を残しません。
 
@@ -97,14 +97,14 @@ FROM (
     +----+--------------------------------+
     6 rows in set (0.00 sec)
 
-## `FIRST_VALUE()` {#first-value}
+## `FIRST_VALUE()` {#first_value}
 
-`FIRST_VALUE(expr)`ウィンドウ内の最初の値を返します。
+`FIRST_VALUE(expr)`は、ウィンドウ内の最初の値を返します。
 
 次の例では、 2 つの異なるウィンドウ定義を使用しています。
 
--   `PARTITION BY n MOD 2 ORDER BY n`テーブル`a`のデータを`1, 3`と`2, 4` 2つのグループに分割します。したがって、これらのグループの最初の値である`1`または`2`返されます。
--   `PARTITION BY n <= 2 ORDER BY n`テーブル`a`のデータを`1, 2`と`3, 4` 2 つのグループに分割します。したがって、 `n`どのグループに属しているかに応じて`1`または`3`返します。
+-   `PARTITION BY n MOD 2 ORDER BY n`は、テーブル`a`のデータを`1, 3`と`2, 4`の2つのグループに分割します。したがって、これらのグループの最初の値である`1`または`2`が返されます。
+-   `PARTITION BY n <= 2 ORDER BY n`は、テーブル`a`のデータを`1, 2`と`3, 4`の2つのグループに分割します。したがって、 `n`がどのグループに属しているかに応じて`1`または`3`を返します。
 
 ```sql
 SELECT
@@ -136,9 +136,9 @@ ORDER BY
 
 ## `LAG()` {#lag}
 
-`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`は`1`は`default` `NULL`扱われます。
+`LAG(expr [, num [, default]])`関数は、現在行の`num`行前にある行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、指定されていない場合、 `num`は`1` 、 `default`は`NULL`として扱われます。
 
-次の例では、 `num`指定されていないため、 `LAG(n)`前の行の`n`の値を返します。7が`n`の場合、前の行は存在せず、 `default`指定されていないため、 `LAG(1)`は`NULL`返します。
+次の例では、 `num`が指定されていないため、 `LAG(n)`は前の行の`n`の値を返します。 `n`が1の場合、前の行は存在せず、 `default`が指定されていないため、 `LAG(1)`は`NULL`を返します。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -174,7 +174,7 @@ FROM
     +------+----------------+
     10 rows in set (0.01 sec)
 
-## `LAST_VALUE()` {#last-value}
+## `LAST_VALUE()` {#last_value}
 
 `LAST_VALUE()`関数はウィンドウ内の最後の値を返します。
 
@@ -217,9 +217,9 @@ ORDER BY
 
 ## `LEAD()` {#lead}
 
-`LEAD(expr [, num [,default]])`関数は、現在の行から`num`行後の行の値`expr`返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`指定されていない場合は`1`が、 `default`指定されていない場合は`NULL`が返されます。
+`LEAD(expr [, num [,default]])`関数は、現在の行から`num`行後の行の値`expr`を返します。そのような行が存在しない場合は、 `default`が返されます。デフォルトでは、 `num`が指定されていない場合は`1`が、 `default`が指定されていない場合は`NULL`が返されます。
 
-次の例では、 `num`指定されていないため、 `LEAD(n)`現在行の次の行の`n`の値を返します`n`が10の場合、次の行は存在せず、 `default`指定されていないため、 `LEAD(10)` `NULL`返します。
+次の例では、 `num`が指定されていないため、 `LEAD(n)`は現在行の次の行の`n`の値を返します。 `n`が10の場合、次の行は存在せず、 `default`が指定されていないため、 `LEAD(10)`は`NULL`を返します。
 
 ```sql
 WITH RECURSIVE cte(n) AS (
@@ -256,7 +256,7 @@ FROM
     +------+-----------------+
     10 rows in set (0.00 sec)
 
-## `NTH_VALUE()` {#nth-value}
+## `NTH_VALUE()` {#nth_value}
 
 `NTH_VALUE(expr, n)`関数はウィンドウの`n`番目の値を返します。
 
@@ -345,7 +345,7 @@ FROM
 
 ```
 
-## `PERCENT_RANK()` {#percent-rank}
+## `PERCENT_RANK()` {#percent_rank}
 
 `PERCENT_RANK()`関数は、現在の行の値よりも小さい値を持つ行の割合を示す 0 から 1 までの数値を返します。
 
@@ -415,7 +415,7 @@ FROM (
     +----+--------------------------+--------------------------------+
     6 rows in set (0.00 sec)
 
-## `ROW_NUMBER()` {#row-number}
+## `ROW_NUMBER()` {#row_number}
 
 `ROW_NUMBER()`結果セット内の現在の行の行番号を返します。
 

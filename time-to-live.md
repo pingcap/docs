@@ -41,7 +41,7 @@ TTLは、オンラインの読み取りおよび書き込みワークロード�
     ) TTL = `created_at` + INTERVAL 3 MONTH TTL_ENABLE = 'OFF';
     ```
 
-    `TTL_ENABLE` `OFF`に設定した場合、他の TTL オプションが設定されていても、TiDB はこのテーブル内の期限切れデータを自動的にクリーンアップしません。TTL 属性を持つテーブルの場合、デフォルトでは`TTL_ENABLE`が`ON`になります。
+    `TTL_ENABLE`を`OFF`に設定した場合、他の TTL オプションが設定されていても、TiDB はこのテーブル内の期限切れデータを自動的にクリーンアップしません。TTL 属性を持つテーブルの場合、デフォルトでは`TTL_ENABLE`が`ON`になります。
 
 -   MySQL との互換性を保つために、コメントを使用して TTL 属性を設定できます。
 
@@ -283,7 +283,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
     ![scan fast example](/media/ttl/scan-fast.png)
 
-    対照的に、スキャンワーカーが第`dispatch`フェーズにほとんどいないのに、削除ワーカーが第`idle`フェーズに長時間いる場合、スキャンワーカーは比較的忙しいと言えます。例えば、
+    対照的に、スキャンワーカーが`dispatch`フェーズにほとんどいないのに、削除ワーカーが`idle`フェーズに長時間いる場合、スキャンワーカーは比較的忙しいと言えます。例えば、
 
     ![delete fast example](/media/ttl/delete-fast.png)
 

@@ -50,15 +50,15 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 >
 > -   TiDBは起動プロセス中に[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)制限が確実に適用されるとは保証しません。オペレーティングシステムの空きメモリが不足している場合、TiDBは依然としてOOMが発生する可能性があります。TiDBインスタンスに十分な空きメモリがあることを確認する必要があります。
 > -   メモリ制御の過程で、TiDB の合計メモリ使用量が`tidb_server_memory_limit`で設定された制限をわずかに超える場合があります。
-> -   バージョン6.5.0以降、設定項目`server-memory-quota`非推奨となりました。互換性を確保するため、クラスターをバージョン6.5.0以降にアップグレードすると、 `tidb_server_memory_limit` `server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`を設定していない場合は、デフォルト値`tidb_server_memory_limit` （ `80%`が使用されます。
+> -   バージョン6.5.0以降、設定項目`server-memory-quota`は非推奨となりました。互換性を確保するため、クラスターをバージョン6.5.0以降にアップグレードすると、 `tidb_server_memory_limit`は`server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`を設定していない場合は、`tidb_server_memory_limit`のデフォルト値（`80%`）が使用されます。
 
 tidb-server インスタンスのメモリ使用量が総メモリの一定割合（割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます）に達すると、tidb-server はメモリ負荷を軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動することで頻繁な GC が発生し、パフォーマンスに問題が生じるのを防ぐため、この GC 方式では GC は最大で 1 分に 1 回しかトリガーされません。
 
 > **Note:**
 >
-> ハイブリッド展開シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`なります。
+> ハイブリッド展開シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tidb-server インスタンスのメモリ使用量しきい値は`tidb_server_memory_limit`になります。
 
-## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information-schema-system-table}
+## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量を表示する {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information_schema-system-table}
 
 現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システム テーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
 
@@ -110,12 +110,12 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
     上記のサンプル ログ ファイルのフィールドは次のように説明されています。
 
-    -   `is tidb_server_memory_limit set` [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
-    -   `system memory total`現在のシステムの合計メモリを示します。
-    -   `system memory usage`現在のシステムメモリ使用量を示します。
-    -   `tidb-server memory usage` 、tidb-server インスタンスのメモリ使用量を示します。
-    -   `memory-usage-alarm-ratio`システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
-    -   `record path`ステータス ファイルのディレクトリを示します。
+    -   `is tidb_server_memory_limit set`は [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
+    -   `system memory total`は現在のシステムの合計メモリを示します。
+    -   `system memory usage`は現在のシステムメモリ使用量を示します。
+    -   `tidb-server memory usage`は、tidb-server インスタンスのメモリ使用量を示します。
+    -   `memory-usage-alarm-ratio`はシステム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
+    -   `record path`はステータス ファイルのディレクトリを示します。
 
 5.  ステータスファイルのディレクトリ（上記の例ではディレクトリ`/tiup/deploy/tidb-4000/log/oom_record` ）を確認すると、対応するタイムスタンプ（例： `record2022-10-09T17:18:38+08:00` ）を持つレコードディレクトリが表示されます。レコードディレクトリには、 `goroutinue` 、 `heap` 、 `running_sql`の3つのファイルが含まれています。これらの3つのファイルには、ステータスファイルが記録された時刻が末尾に付加されます。これらのファイルには、それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行SQL情報が記録されています。 `running_sql`の内容については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
@@ -138,7 +138,7 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 TiDBは、実行演算子のディスクへの書き込みをサポートしています。SQL実行のメモリ使用量がメモリクォータを超えた場合、tidb-serverは実行演算子の中間データをディスクに書き出すことで、メモリ負荷を軽減します。ディスクへの書き込みをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAggなどがあります。
 
 -   ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
--   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`含むログを出力します。
+-   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 -   Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。HashAgg演算子の非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAgg演算子の並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopN演算子のディスクスピルはv8.3.0で導入されました。
 -   [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数を使用して、ディスクスピルをサポートする並列HashAggアルゴリズムを有効にするかどうかを制御できます。この変数は将来のリリースで廃止される予定です。
 -   Sort、MergeJoin、HashJoin、HashAgg、または TopN を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。
@@ -194,11 +194,11 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 
 ## その他 {#others}
 
-### <code>GOMEMLIMIT</code>を設定して OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-code-gomemlimit-code}
+### <code>GOMEMLIMIT</code>を設定して OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-gomemlimit}
 
 GO 1.19 では、GC をトリガーするメモリ制限を設定するための環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)導入されています。
 
-v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`設定することで、OOM 問題の典型的なカテゴリを軽減できます。OOM 問題の典型的なカテゴリは、OOM が発生する前に、Grafana で推定される使用メモリが全体のメモリの半分しか占めていないというものです (TiDB-Runtime &gt; Memory Usage &gt; estimate-inuse)。次の図に示されています。
+v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定することで、OOM 問題の典型的なカテゴリを軽減できます。OOM 問題の典型的なカテゴリは、OOM が発生する前に、Grafana で推定される使用メモリが全体のメモリの半分しか占めていないというものです (TiDB-Runtime &gt; Memory Usage &gt; estimate-inuse)。次の図に示されています。
 
 ![normal OOM case example](/media/configure-memory-usage-oom-example.png)
 
@@ -208,6 +208,6 @@ v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`設定するこ�
 
     ![v6.1.2 workload oom](/media/configure-memory-usage-612-oom.png)
 
--   TiDB v6.1.3では、 `GOMEMLIMIT` 40000MiBに設定されています。シミュレーションされたワークロードは長時間安定して動作し、TiDBサーバーでOOMは発生せず、プロセスの最大メモリ使用量は40.8GiB前後で安定していることがわかりました。
+-   TiDB v6.1.3では、 `GOMEMLIMIT`は40000MiBに設定されています。シミュレーションされたワークロードは長時間安定して動作し、TiDBサーバーでOOMは発生せず、プロセスの最大メモリ使用量は40.8GiB前後で安定していることがわかりました。
 
     ![v6.1.3 workload no oom with GOMEMLIMIT](/media/configure-memory-usage-613-no-oom.png)

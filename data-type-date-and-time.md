@@ -83,15 +83,15 @@ TiDBは、時間値を格納するためにMySQLのすべての日付と時刻�
 
 ## サポートされているタイプ {#supported-types}
 
-### <code>DATE</code>型 {#code-date-code-type}
+### <code>DATE</code>型 {#date-type}
 
-`DATE`日付部分のみを含み、時刻部分は含みません`YYYY-MM-DD`形式で表示されます。サポートされる範囲は「0000-01-01」から「9999-12-31」です。
+`DATE`は日付部分のみを含み、時刻部分は含みません`YYYY-MM-DD`形式で表示されます。サポートされる範囲は「0000-01-01」から「9999-12-31」です。
 
 ```sql
 DATE
 ```
 
-### <code>TIME</code>型 {#code-time-code-type}
+### <code>TIME</code>型 {#time-type}
 
 `TIME`型の場合、フォーマットは`HH:MM:SS[.fraction]`で、有効な値の範囲は &#39;-838:59:59.000000&#39; から &#39;838:59:59.000000&#39; です。`TIME`は、1 日の時刻だけでなく、2 つのイベント間の時間間隔も示します。オプションで 0 から 6 の範囲の`fsp`値を指定し、小数秒の精度を指定できます。省略した場合、デフォルトの精度は 0 です。
 
@@ -103,9 +103,9 @@ TIME[(fsp)]
 >
 > `TIME`の省略形に注意してください。例えば、「11:12」は「00:11:12」ではなく「11:12:00」を意味します。一方、「1112」は「00:11:12」を意味します。これらの違いは、 `:`文字の有無によって生じます。
 
-### <code>DATETIME</code>型 {#code-datetime-code-type}
+### <code>DATETIME</code>型 {#datetime-type}
 
-`DATETIME`日付部分と時刻部分の両方が含まれます。有効な値の範囲は「0000-01-01 00:00:00.000000」から「9999-12-31 23:59:59.999999」です。
+`DATETIME`には日付部分と時刻部分の両方が含まれます。有効な値の範囲は「0000-01-01 00:00:00.000000」から「9999-12-31 23:59:59.999999」です。
 
 TiDBは`DATETIME`値を`YYYY-MM-DD HH:MM:SS[.fraction]`形式で表示しますが、文字列または数値を使用して`DATETIME`列に値を代入できます。オプションで0から6の範囲のfsp値を指定して、小数秒の精度を指定できます。省略した場合、デフォルトの精度は0です。
 
@@ -113,7 +113,7 @@ TiDBは`DATETIME`値を`YYYY-MM-DD HH:MM:SS[.fraction]`形式で表示します�
 DATETIME[(fsp)]
 ```
 
-### <code>TIMESTAMP</code>型 {#code-timestamp-code-type}
+### <code>TIMESTAMP</code>型 {#timestamp-type}
 
 `TIMESTAMP`日付部分と時刻部分の両方を含みます。有効な値の範囲は、UTC時間で「1970-01-01 00:00:01.000000」から「2038-01-19 03:14:07.999999」までです。オプションで0から6の範囲のfsp値を指定して、小数秒の精度を指定できます。省略した場合、デフォルトの精度は0です。
 
@@ -131,7 +131,7 @@ TIMESTAMP[(fsp)]
 >
 > MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
 
-### <code>YEAR</code>型 {#code-year-code-type}
+### <code>YEAR</code>型 {#year-type}
 
 `YEAR`型は「YYYY」形式で指定します。サポートされる値の範囲は1901から2155まで、または0000です。
 
@@ -139,7 +139,7 @@ TIMESTAMP[(fsp)]
 YEAR[(4)]
 ```
 
-`YEAR`次の形式規則に従います。
+`YEAR`は次の形式規則に従います。
 
 -   4桁の数字の範囲は1901年から2155年までです
 -   4桁の文字列の範囲は「1901」から「2155」までです
@@ -149,13 +149,13 @@ YEAR[(4)]
 
 無効な値`YEAR`は自動的に 0000 に変換されます (ユーザーが`NO_ZERO_DATE` SQL モードを使用していない場合)。
 
-## <code>TIMESTAMP</code>と<code>DATETIME</code>の自動初期化と更新 {#automatic-initialization-and-update-of-code-timestamp-code-and-code-datetime-code}
+## <code>TIMESTAMP</code>と<code>DATETIME</code>の自動初期化と更新 {#automatic-initialization-and-update-of-timestamp-and-datetime}
 
 `TIMESTAMP`または`DATETIME`値タイプを持つ列は、自動的に初期化されるか、現在の時刻に更新されます。
 
 テーブル内の`TIMESTAMP`または`DATETIME`値タイプを持つ列に対して、デフォルト値または自動更新値を現在のタイムスタンプとして設定できます。
 
-これらのプロパティは、列を定義する際に`DEFAULT CURRENT_TIMESTAMP`と`ON UPDATE CURRENT_TIMESTAMP`設定することで設定できます。DEFAULT は`DEFAULT 0`や`DEFAULT '2000-01-01 00:00:00'`などの特定の値に設定することもできます。
+これらのプロパティは、列を定義する際に`DEFAULT CURRENT_TIMESTAMP`と`ON UPDATE CURRENT_TIMESTAMP`を設定することで設定できます。DEFAULT は`DEFAULT 0`や`DEFAULT '2000-01-01 00:00:00'`などの特定の値に設定することもできます。
 
 ```sql
 CREATE TABLE t1 (
@@ -175,7 +175,7 @@ CREATE TABLE t1 (
 
 ## 時間値の小数部分 {#decimal-part-of-time-value}
 
-`DATETIME`と`TIMESTAMP`値は、マイクロ秒単位の精度で最大 6 桁の小数部を持つことができます`DATETIME`型または`TIMESTAMP`型の列では、小数部は破棄されずに保存されます。小数部がある場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で表され、小数部の範囲は 000000 から 999999 です。小数部と残りの部分を区切るために小数点を使用する必要があります。
+`DATETIME`と`TIMESTAMP`値は、マイクロ秒単位の精度で最大 6 桁の小数部を持つことができます。`DATETIME`型または`TIMESTAMP`型のいずれかの列では、小数部は破棄されずに保存されます。小数部がある場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で表され、小数部の範囲は 000000 から 999999 です。小数部と残りの部分を区切るために小数点を使用する必要があります。
 
 -   小数精度をサポートする列を定義するには`type_name(fsp)`を使用します。`type_name`は`TIME` 、 `DATETIME`または`TIMESTAMP`になります。例えば、
 
@@ -208,21 +208,21 @@ CREATE TABLE t1 (
 
 ## 日付と時刻の型間の変換 {#conversions-between-date-and-time-types}
 
-日付型と時刻型の間で変換が必要になる場合があります。しかし、変換によっては情報が失われる可能性があります。例えば、 `DATE` 、 `DATETIME` 、 `TIMESTAMP`という値はそれぞれ独自の範囲を持ちます。 `TIMESTAMP` UTC時間で1970年より前、またはUTC時間「2038-01-19 03:14:07」より後であってはなりません。このルールに基づくと、「1968-01-01」は有効な日付値である`DATE`または`DATETIME`ですが、 `TIMESTAMP`に変換すると 0 になります。
+日付型と時刻型の間で変換が必要になる場合があります。しかし、変換によっては情報が失われる可能性があります。例えば、 `DATE` 、 `DATETIME` 、 `TIMESTAMP`という値はそれぞれ独自の範囲を持ちます。 `TIMESTAMP`はUTC時間で1970年より前、またはUTC時間「2038-01-19 03:14:07」より後であってはなりません。このルールに基づくと、「1968-01-01」は有効な日付値である`DATE`または`DATETIME`ですが、 `TIMESTAMP`に変換すると 0 になります。
 
 `DATE`の変換:
 
--   `DATE` `DATETIME`または`TIMESTAMP`に変換すると、DATEには時間情報が含まれていないため、時間部分「00:00:00」が追加されます。
--   `DATE` `TIME`に変換すると、結果は「00:00:00」になります。
+-   `DATE`を`DATETIME`または`TIMESTAMP`に変換すると、DATEには時間情報が含まれていないため、時間部分「00:00:00」が追加されます。
+-   `DATE`を`TIME`に変換すると、結果は「00:00:00」になります。
 
 `DATETIME`または`TIMESTAMP`の変換:
 
 -   `DATETIME`または`TIMESTAMP` `DATE`に変換する場合、時刻と小数部分は切り捨てられます。例えば、「1999-12-31 23:59:59.499」は「1999-12-31」に変換されます。
--   `DATETIME`または`TIMESTAMP` TIMEに変換すると、 `TIME`は日付情報が含まれていないため、日付部分は破棄されます。
+-   `DATETIME`または`TIMESTAMP`をTIMEに変換すると、 `TIME`は日付情報が含まれていないため、日付部分は破棄されます。
 
-`TIME`他の日時形式に変換すると、日付部分は自動的に`CURRENT_DATE()`に指定されます。最終的な変換結果は、 `TIME`と`CURRENT_DATE()`で構成される日付になります。つまり、TIME の値が &#39;00:00:00&#39; から &#39;23:59:59&#39; の範囲外の場合、変換後の日付部分は現在の日付を示しません。
+`TIME`を他の日時形式に変換すると、日付部分は自動的に`CURRENT_DATE()`に指定されます。最終的な変換結果は、 `TIME`と`CURRENT_DATE()`で構成される日付になります。つまり、TIME の値が &#39;00:00:00&#39; から &#39;23:59:59&#39; の範囲外の場合、変換後の日付部分は現在の日付を示しません。
 
-`TIME` `DATE`に変換する場合もプロセスは同様で、時間部分は破棄されます。
+`TIME`を`DATE`に変換する場合もプロセスは同様で、時間部分は破棄されます。
 
 `CAST()`関数を使用すると、値を`DATE`型に明示的に変換できます。例:
 
@@ -230,7 +230,7 @@ CREATE TABLE t1 (
 date_col = CAST(datetime_col AS DATE)
 ```
 
-`TIME`と`DATETIME`数値形式に変換します。例:
+`TIME`と`DATETIME`を数値形式に変換します。例:
 
 ```sql
 mysql> SELECT CURTIME(), CURTIME()+0, CURTIME(3)+0;
@@ -258,7 +258,7 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 
 これらのルールは`YEAR`タイプにも適用されますが、1 つの例外があります。
 
-数字の`00` `YEAR(4)`に代入すると、結果は 2000 ではなく 0000 になります。
+数字の`00`を`YEAR(4)`に代入すると、結果は 2000 ではなく 0000 になります。
 
 結果を 2000 にしたい場合は、値を 2000 に指定します。
 

@@ -75,7 +75,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   BR がTiCDC の上流クラスターにデータを復元する場合、復元されたデータは TiCDC によって下流に複製できません。
     -   BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
 
-## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a> {#sync-diff-inspector}
+## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">sync-diff-inspector</a> {#sync-diff-inspector}
 
 -   **ユーザーシナリオ**: MySQLプロトコルを使用してデータベースに保存されたデータを比較する
 -   **アップストリーム**: TiDB、MySQL

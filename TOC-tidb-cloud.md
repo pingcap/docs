@@ -20,7 +20,7 @@
   - [トランザクション](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI機能](/tidb-cloud/ai-feature-concepts.md)
-  - [データサービス](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [Data Service](/tidb-cloud/data-service-concepts.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [拡張性](/tidb-cloud/scalability-concepts.md)
   - [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
   - [監視](/tidb-cloud/monitoring-concepts.md)

@@ -135,7 +135,7 @@ TiDBは、SQL処理パスとデータベース時間を継続的に測定・収�
 
 -   SQL タイプ別のデータベース時間: 主に`SELECT`ステートメントです。
 -   SQL フェーズ別のデータベース時間: ほとんどの時間は緑色の実行フェーズで消費されます。
--   SQL 実行時間の概要: 紫色で表示される`tiflash_mpp`のリクエストは、SQL 実行中に最も多くの時間を消費します。次に、青色の`Cop`のリクエストを含む KV リクエストと、緑色の`Prewrite`番目のリクエストと`Commit`リクエストが続きます。
+-   SQL 実行時間の概要: 紫色で表示される`tiflash_mpp`のリクエストは、SQL 実行中に最も多くの時間を消費します。次に、青色の`Cop`のリクエストを含む KV リクエストと、緑色の`Prewrite`リクエストと`Commit`リクエストが続きます。
 
 ### TiDB の主要メトリクスとクラスタ リソースの使用率 {#tidb-key-metrics-and-cluster-resource-utilization}
 
@@ -396,7 +396,7 @@ TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute`
 
 #### KVおよびTSOリクエスト期間 {#kv-and-tso-request-duration}
 
-TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2 つの状況が発生する可能性があります。
+TiDB はフェーズ`execute`で PD および TiKV と連携します。次の図に示すように、SQL 要求を処理する際、TiDB はフェーズ`parse`および`compile`入る前に TSO を要求します。PD クライアントは呼び出し元をブロックせず、 `TSFuture`を返し、バックグラウンドで非同期的に TSO 要求を送受信します。PD クライアントは TSO 要求の処理を完了すると、 `TSFuture`を返します。 `TSFuture`の所有者は、最後の TSO を取得するために Wait メソッドを呼び出す必要があります。TiDB はフェーズ`parse`および`compile`を完了するとフェーズ`execute`に入り、このフェーズでは次の 2 つの状況が発生する可能性があります。
 
 -   TSO要求が完了した場合、Waitメソッドは利用可能なTSOまたはエラーを直ちに返します。
 -   TSO 要求がまだ完了していない場合、TSO が利用可能になるかエラーが表示されるまで (gRPC 要求は送信されたが結果が返されず、ネットワークレイテンシーが高くなる)、Wait メソッドはブロックされます。
@@ -404,7 +404,7 @@ TiDB はフェーズ`execute`で PD および TiKV と連携します。次の�
 TSO待機時間は`TSO WAIT`と記録され、TSO要求のネットワーク時間は`TSO RPC`と記録されます。TSO待機が完了すると、TiDBエグゼキューターは通常、TiKVに読み取りまたは書き込み要求を送信します。
 
 -   一般的な KV 読み取り要求: `Get` `BatchGet`および`Cop`
--   一般的`Commit` KV書き込み要求: 2フェーズコミット`Prewrite`場合は`PessimisticLock`
+-   一般的な KV 書き込み要求: 2フェーズコミットの`PessimisticLock` `Prewrite`および`Commit`
 
 ![Execute](/media/performance/execute_phase.png)
 
@@ -451,7 +451,7 @@ TiKV は次の手順で書き込み要求を処理します。
     Raftstore は`Store`スレッドと`Apply`スレッドで構成されています。
 
     -   `Store`スレッドはRaftメッセージと新しい`proposals`処理します。新しい`proposals`受信すると、リーダーノードの`Store`スレッドはローカルRaft DBに書き込み、メッセージを複数のフォロワーノードにコピーします。ほとんどの場合、この`proposals`正常に永続化されると、 `proposals`が正常にコミットされます。
-    -   `Apply`番目のスレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`番目のスレッドは書き込み要求が完了したことを外部に通知します。
+    -   `Apply`スレッドはコミットされた`proposals`データをKV DBに書き込みます。データがKV DBに正常に書き込まれると、 `Apply`スレッドは書き込み要求が完了したことを外部に通知します。
 
 ![TiKV Write](/media/performance/store_apply.png)
 

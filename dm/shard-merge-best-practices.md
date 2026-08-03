@@ -38,7 +38,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 このセクションでは、AUTO_INCREMENT主キーの競合を処理するための 2 つの推奨ソリューションを紹介します。
 
-### 列から<code>PRIMARY KEY</code>属性を削除します {#remove-the-code-primary-key-code-attribute-from-the-column}
+### 列から<code>PRIMARY KEY</code>属性を削除します {#remove-the-primary-key-attribute-from-the-column}
 
 アップストリーム スキーマが次のとおりであると仮定します。
 
@@ -57,7 +57,7 @@ CREATE TABLE `tbl_no_pk` (
 -   `auto_pk_c1`列はアプリケーションに影響を与えず、列の`PRIMARY KEY`属性に依存しません。
 -   `uk_c2`列には`UNIQUE KEY`属性があり、すべてのアップストリーム シャード テーブル内でグローバルに一意です。
 
-次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`番目の列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
+次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
 1.  完全なデータ移行の前に、ダウンストリーム データベースにデータをマージおよび移行するためのテーブルを作成し、 `auto_pk_c1`列の`PRIMARY KEY`属性を通常のインデックスに変更します。
 
@@ -100,7 +100,7 @@ CREATE TABLE `tbl_multi_pk` (
 -   `auto_pk_c1`と`uuid_c2`列で構成される複合主キーは、グローバルに一意です。
 -   アプリケーションでは複合主キーを使用することが可能です。
 
-次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`番目の列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
+次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
 1.  完全なデータ移行を行う前に、下流データベースにデータのマージと移行のためのテーブルを作成してください`auto_pk_c1`列に`PRIMARY KEY`属性を指定せず、 `auto_pk_c1`列と`uuid_c2`列を使用して複合主キーを構成してください。
 
@@ -121,7 +121,7 @@ CREATE TABLE `tbl_multi_pk` (
 
 アップストリームデータソースがRDSで、シャーディングされたテーブルが含まれている場合、SQLクライアントへの接続時にMySQL binlog内のテーブル名が表示されないことがあります。例えば、アップストリームがUCloud分散データベースの場合、 binlog内のテーブル名にプレフィックス`_0001`が付加されることがあります。そのため、SQLクライアントのテーブル名ではなく、 binlog内のテーブル名に基づいて[テーブルルーティング](/dm/dm-table-routing.md)を設定する必要があります。
 
-## アップストリームでテーブルを作成/削除する {#create-drop-tables-in-the-upstream}
+## アップストリームでテーブルを作成/削除する {#createdrop-tables-in-the-upstream}
 
 [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディングDDLロックの調整は、下流データベースが上流のすべてのシャードテーブルのDDL文を受信したかどうかに依存することが明らかです。また、DMは現在、上流におけるシャードテーブルの動的な作成または削除**をサポートしていません**。したがって、上流でシャードテーブルを作成または削除するには、以下の手順を実行することをお勧めします。
 

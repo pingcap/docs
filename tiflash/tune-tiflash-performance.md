@@ -93,7 +93,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 18 rows in set (6.00 sec)
 ```
 
-### 集計関数を<code>Join</code>または<code>Union</code>前の位置へプッシュダウンします {#push-down-aggregate-functions-to-a-position-before-code-join-code-or-code-union-code}
+### 集計関数を<code>Join</code>または<code>Union</code>前の位置へプッシュダウンします {#push-down-aggregate-functions-to-a-position-before-join-or-union}
 
 集計演算を`Join`または`Union`前の位置までプッシュダウンすることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
 
@@ -105,7 +105,7 @@ set @@tidb_opt_agg_push_down = ON;
 
 以下の例は、変数`tidb_opt_agg_push_down`を有効にする前後のクエリ結果を示しています。この変数を有効にする前は、操作`HashJoin_41`の後に操作`HashAgg_58`が実行されます。この変数を有効にすると、新たに生成された操作`HashAgg_21`と`HashAgg_32`が操作`HashJoin_76`の前に実行されます。これにより、操作`Join`で処理されるデータ量が大幅に削減されます。
 
-`tidb_opt_agg_push_down`有効になる前:
+`tidb_opt_agg_push_down`が有効になる前:
 
 ```sql
 mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group by t1.a;
@@ -165,7 +165,7 @@ mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group b
 18 rows in set (0.46 sec)
 ```
 
-### <code>Distinct</code>最適化を有効にする {#enable-code-distinct-code-optimization}
+### <code>Distinct</code>最適化を有効にする {#enable-distinct-optimization}
 
 TiFlashは、 `Sum`列など、 `Distinct`列を受け入れる一部の集計関数をサポートしていません。デフォルトでは、集計関数全体がTiDBで計算されます。 `Distinct`最適化を有効にすると、一部の操作をTiFlashにプッシュダウンできるため、クエリパフォーマンスが向上します。
 
@@ -177,7 +177,7 @@ set @@tidb_opt_distinct_agg_push_down = ON;
 
 以下の例は、変数`tidb_opt_distinct_agg_push_down`を有効にする前と有効にした後のクエリ結果を示しています。この変数を有効にする前は、TiDB はTiFlashからすべてのデータを読み取り、TiDB 内で`distinct`を実行する必要があります。この変数を有効にすると、 `distinct a`がTiFlashにプッシュダウンされ、新しい`group by`列である`test.t.a`が`HashAgg_6`に追加されます。クエリ結果の 2 つの警告は、集計関数をTiFlashに完全にプッシュダウンできないことを示しています。
 
-`tidb_opt_distinct_agg_push_down`有効になる前:
+`tidb_opt_distinct_agg_push_down`が有効になる前:
 
 ```sql
 mysql> explain analyze select count(distinct a) from test.t;
@@ -215,7 +215,7 @@ mysql> explain analyze select count(distinct a) from test.t;
 5 rows in set, 2 warnings (0.24 sec)
 ```
 
-### <code>ALTER TABLE ... COMPACT</code>ステートメントを使用してデータを圧縮する {#compact-data-using-the-code-alter-table-compact-code-statement}
+### <code>ALTER TABLE ... COMPACT</code>ステートメントを使用してデータを圧縮する {#compact-data-using-the-alter-table--compact-statement}
 
 [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)文を実行すると、 TiFlashノード上の特定のテーブルまたはパーティションのコンパクションが開始されます。コンパクション中は、ノード上の物理データが書き換えられ、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。これにより、アクセスパフォーマンスが向上し、ディスク使用量が削減されます。以下に例を示します。
 
@@ -243,7 +243,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
     set @@tidb_broadcast_join_threshold_count = 100000;
     ```
 
-次の例は、 `tidb_broadcast_join_threshold_size`が再構成される前後のクエリ結果を示しています。再構成前は、 `ExchangeSender_29`のうち`ExchangeType` `HashPartition`です。この変数の値が`10000000`に変更されると、 `ExchangeSender_29`のうち`ExchangeType` `Broadcast`に変わります。
+次の例は、 `tidb_broadcast_join_threshold_size`が再構成される前後のクエリ結果を示しています。再構成前は、 `ExchangeSender_29`のうち`ExchangeType`は`HashPartition`です。この変数の値が`10000000`に変更されると、 `ExchangeSender_29`のうち`ExchangeType`が`Broadcast`に変わります。
 
 `tidb_broadcast_join_threshold_size`が再構成される前:
 
@@ -274,7 +274,7 @@ mysql> set @@tidb_broadcast_join_threshold_size = 10000000;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tidb_broadcast_join_threshold_size` `10000000`に設定した後:
+`tidb_broadcast_join_threshold_size`を`10000000`に設定した後:
 
 ```sql
 mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptdate) from supplier,lineitem where s_suppkey = l_suppkey;
@@ -306,7 +306,7 @@ set @@tidb_max_tiflash_threads = 20;
 
 以下の例は、 `tidb_max_tiflash_threads`を再設定する前後のクエリ結果を示しています。`tidb_max_tiflash_threads`を設定する前は、単一のTiFlashインスタンスに対するリクエスト実行の同時実行数は 8 スレッドです。クラスターには合計 3 つのTiFlashインスタンスがあるため、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 24 (8 × 3) です。`tidb_max_tiflash_threads`を`20`に設定すると、すべてのTiFlashインスタンスにおけるリクエスト実行のスレッド数の合計は 60 (20 × 3) になります。
 
-`tidb_max_tiflash_threads`再構成される前:
+`tidb_max_tiflash_threads`が再構成される前:
 
 ```sql
 mysql> explain analyze select a, count(*) from t group by a;
@@ -333,7 +333,7 @@ mysql> set @@tidb_max_tiflash_threads = 20;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tidb_max_tiflash_threads` `20`に設定した後:
+`tidb_max_tiflash_threads`を`20`に設定した後:
 
 ```sql
 mysql> explain analyze select a, count(*) from t group by a;
@@ -353,9 +353,9 @@ mysql> explain analyze select a, count(*) from t group by a;
 9 rows in set (0.37 sec)
 ```
 
-### <code>tiflash_fine_grained_shuffle_stream_count</code>を設定する {#configure-code-tiflash-fine-grained-shuffle-stream-count-code}
+### <code>tiflash_fine_grained_shuffle_stream_count</code>を設定する {#configure-tiflash_fine_grained_shuffle_stream_count}
 
-Fine Grained Shuffle 機能を[`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620)設定することで、ウィンドウ関数の実行における同時実行性を高めることができます。これにより、ウィンドウ関数の実行により多くのシステムリソースが使用されるようになり、クエリのパフォーマンスが向上します。
+Fine Grained Shuffle 機能の[`tiflash_fine_grained_shuffle_stream_count`](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620)を設定することで、ウィンドウ関数の実行における同時実行性を高めることができます。これにより、ウィンドウ関数の実行により多くのシステムリソースが使用されるようになり、クエリのパフォーマンスが向上します。
 
 ウィンドウ関数がTiFlashにプッシュダウンされて実行される際、この変数を使用してウィンドウ関数実行の同時実行レベルを制御できます。単位はスレッドです。
 
@@ -363,7 +363,7 @@ Fine Grained Shuffle 機能を[`tiflash_fine_grained_shuffle_stream_count`](/sys
 set @@tiflash_fine_grained_shuffle_stream_count = 20;
 ```
 
-次の例は、変数`tiflash_fine_grained_shuffle_stream_count`が再構成される前後のクエリ結果を示しています。再構成前は、 `[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]`のうち`stream_count` 8 です。再構成後は、 `stream_count` 20 になります。
+次の例は、変数`tiflash_fine_grained_shuffle_stream_count`が再構成される前後のクエリ結果を示しています。再構成前は、 `[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]`のうち`stream_count`は 8 です。再構成後は、 `stream_count`は 20 になります。
 
 `tiflash_fine_grained_shuffle_stream_count`が再構成される前:
 
@@ -390,7 +390,7 @@ mysql> set @@tiflash_fine_grained_shuffle_stream_count = 20;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tiflash_fine_grained_shuffle_stream_count` `20`に設定した後:
+`tiflash_fine_grained_shuffle_stream_count`を`20`に設定した後:
 
 ```sql
 mysql> explain analyze select *, row_number() over (partition by a) from t;

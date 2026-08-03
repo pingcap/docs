@@ -21,7 +21,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データ ア
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**「データアプリを作成」を**クリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、<mdsvgicon name="icon-create-data-app">左ペインで**「データアプリを作成」**をクリックします。データアプリ作成ダイアログが表示されます。</mdsvgicon>
 
     > **Tip:**
     >
@@ -39,7 +39,7 @@ Chat2Query エンドポイントを呼び出す前に、Chat2Query データ ア
 
 API キーを作成するには、次の手順を実行します。
 
-1.  [**データサービス**](https://tidbcloud.com/project/data-service)の左側のペインで、Chat2Query データ アプリをクリックすると、右側にその詳細が表示されます。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)の左側のペインで、Chat2Query データ アプリをクリックすると、右側にその詳細が表示されます。
 
 2.  **認証**領域で、 **「API キーの作成」**をクリックします。
 
@@ -85,7 +85,7 @@ API キーを作成するには、次の手順を実行します。
 
 TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すためのコードサンプルを提供しています。Chat2Queryエンドポイントのコードサンプルを取得するには、以下の手順を実行してください。
 
-1.  [**データサービス**](https://tidbcloud.com/project/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
+1.  [**Data Service**](https://tidbcloud.com/project/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
 
     エンドポイント URL、コード例、リクエスト メソッドなど、このエンドポイントを呼び出すための情報が右側に表示されます。
 
@@ -101,7 +101,7 @@ TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すための
 
 ### Chat2Query v3エンドポイントまたはv2エンドポイントを呼び出す {#call-chat2query-v3-endpoints-or-v2-endpoints}
 
-TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
+TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 エンドポイントを提供します。
 
 | メソッド | エンドポイント                                                                | 説明                                                                                                                                       |
 | -- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,7 +135,7 @@ TiDB Cloudデータ サービスは、次の Chat2Query v3 エンドポイント
 
 `/v3/chat2data`と`/v2/chat2data`を呼び出す手順は同じです。以下のセクションでは、 `/v3/chat2data`を例に挙げてその呼び出し方法を説明します。
 
-#### 1. <code>/v3/dataSummaries</code>を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-code-v3-datasummaries-code}
+#### 1. <code>/v3/dataSummaries</code>を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-v3datasummaries}
 
 `/v3/chat2data`を呼び出す前に、まず`/v3/dataSummaries`を呼び出して AI にデータベースを分析してデータの概要を生成させます。そうすることで、後で`/v3/chat2data` SQL 生成でより優れたパフォーマンスを得ることができます。
 
@@ -172,7 +172,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }
 ```
 
-#### 2. <code>/v2/jobs/{job_id}</code>を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-code-v2-jobs-job-id-code}
+#### 2. <code>/v2/jobs/{job_id}</code>を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-v2jobsjob_id}
 
 `/v3/dataSummaries` APIは非同期です。大規模なデータセットを持つデータベースの場合、データベース分析を完了して完全なデータサマリーを返すまでに数分かかる場合があります。
 
@@ -198,7 +198,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 }
 ```
 
-`"status"`が`"done"`場合、完全なデータサマリーが準備完了しており、 `/v3/chat2data`呼び出すことでこのデータベースに対してSQL文を生成して実行できます。それ以外の場合は、完了するまで待って、後で分析ステータスを確認する必要があります。
+`"status"`が`"done"`の場合、完全なデータサマリーが準備完了しており、 `/v3/chat2data`を呼び出すことでこのデータベースに対してSQL文を生成して実行できます。それ以外の場合は、完了するまで待って、後で分析ステータスを確認する必要があります。
 
 レスポンスの`DataSummaryObject` 、指定されたデータベースのAI探索情報を表します。3の構造は`DataSummaryObject`のとおりです。
 
@@ -238,7 +238,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 }
 ```
 
-#### 3. <code>/v3/chat2data</code>を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-code-v3-chat2data-code}
+#### 3. <code>/v3/chat2data</code>を呼び出してSQL文を生成し実行する {#3-generate-and-execute-sql-statements-by-calling-v3chat2data}
 
 データベースのデータ概要が準備できたら、クラスター ID、データベース名、質問を指定して`/v3/chat2data`呼び出して SQL ステートメントを生成および実行できます。
 
@@ -259,7 +259,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 -   `cluster_id` :*文字列*。TiDBクラスタの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
--   `data_summary_id` :*整数*。SQL生成に使用されるデータサマリーのID。このプロパティは、 `cluster_id`と`database`指定されていない場合にのみ有効になります。8と`cluster_id` `database`両方を指定した場合、APIはデータベースのデフォルトのデータサマリーを使用します。
+-   `data_summary_id` :*整数*。SQL生成に使用されるデータサマリーのID。このプロパティは、 `cluster_id`と`database`が指定されていない場合にのみ有効になります。`cluster_id`と`database`の両方を指定した場合、APIはデータベースのデフォルトのデータサマリーを使用します。
 -   `question` :*文字列*。必要なクエリを説明する自然言語での質問。
 -   `sql_generate_mode` :*文字列*。SQL文を生成するモード。値は`direct`または`auto_breakdown`です。 `direct`に設定すると、APIは指定された`question`に基づいて直接SQL文を生成します。 `auto_breakdown`に設定すると、APIは`question`を複数のタスクに分割し、各タスクごとにSQL文を生成します。
 
@@ -347,15 +347,15 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 >
 > Chat2Data v1エンドポイントは非推奨です。代わりにChat2Data v3エンドポイントを呼び出すことをお勧めします。
 
-TiDB Cloudデータ サービスは、次の Chat2Query v1 エンドポイントを提供します。
+TiDB Cloud Data Serviceは、次の Chat2Query v1 エンドポイントを提供します。
 
 | メソッド | エンドポイント              | 説明                                                                       |
 | -- | --------------- | ------------------------------------------------------------------------ |
 | POST | `/v1/chat2data` | このエンドポイントを使用すると、ターゲット データベース名と指示を指定して、人工知能を使用して SQL ステートメントを生成および実行できます。 |
 
-`/v1/chat2data`エンドポイントを直接呼び出して、SQL文を生成・実行できます。3 と比較すると、 `/v2/chat2data` `/v1/chat2data`レスポンスが速くなりますが、パフォーマンスは低くなります。
+`/v1/chat2data`エンドポイントを直接呼び出して、SQL文を生成・実行できます。 `/v2/chat2data`と比較すると、 `/v1/chat2data`はレスポンスが速くなりますが、パフォーマンスは低くなります。
 
-TiDB Cloudは、エンドポイントの呼び出しを支援するためのコードサンプルを生成します。サンプルコードを入手して実行するには、 [エンドポイントのコード例を取得する](#get-the-code-example-of-an-endpoint)参照してください。
+TiDB Cloudは、エンドポイントの呼び出しを支援するためのコードサンプルを生成します。サンプルコードを入手して実行するには、 [エンドポイントのコード例を取得する](#get-the-code-example-of-an-endpoint)を参照してください。
 
 `/v1/chat2data`を呼び出すときは、次のパラメータを置き換える必要があります。
 
@@ -447,4 +447,4 @@ API呼び出しが失敗した場合、ステータスコード`200`以外の値
 -   [APIキーを管理する](/tidb-cloud/data-service-api-key.md)
 -   [マルチラウンドChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
 -   [ナレッジベースを使用する](/tidb-cloud/use-chat2query-knowledge.md)
--   [データサービスの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
+-   [Data Serviceの応答コードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)

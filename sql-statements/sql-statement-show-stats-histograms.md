@@ -14,9 +14,9 @@ summary: TiDB データベースの SHOW STATS_HISTOGRAMS の使用法の概要�
 | `Db_name`         | データベース名                                            |
 | `Table_name`      | テーブル名                                              |
 | `Partition_name`  | パーティション名                                           |
-| `Column_name`     | 列名（ `is_index`が`0`場合）またはインデックス名（ `is_index`が`1`場合） |
+| `Column_name`     | 列名（ `is_index`が`0`の場合）またはインデックス名（ `is_index`が`1`の場合） |
 | `Is_index`        | インデックス列であるかどうか                                     |
-| `Update_time`     | 更新時間                                               |
+| `Update_time`     | 更新時刻                                               |
 | `Distinct_count`  | 個別カウント                                             |
 | `Null_count`      | NULLカウント                                           |
 | `Avg_col_size`    | 平均コルサイズ                                            |

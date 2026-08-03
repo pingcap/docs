@@ -33,7 +33,7 @@ ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 > **Note:**
 >
 > -   バージョン6.2.0より前では、この操作のみがDDLジョブをキャンセルでき、他のすべての操作や環境変更（マシンの再起動やクラスタの再起動など）ではこれらのジョブをキャンセルできませんでした。バージョン6.2.0以降では、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを使用して実行中のDDLジョブを強制終了することでキャンセルできるようになりました。
-> -   この操作では、複数のDDLジョブを同時にキャンセルできます。1 ステートメントを使用して、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ジョブのIDを取得できます。
+> -   この操作では、複数のDDLジョブを同時にキャンセルできます。 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブのIDを取得できます。
 > -   キャンセルするジョブが完了している場合、キャンセル操作は失敗します。
 
 ## MySQLの互換性 {#mysql-compatibility}

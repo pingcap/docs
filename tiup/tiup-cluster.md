@@ -216,7 +216,7 @@ tiup cluster display prod-cluster
 
 `Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
-PDコンポーネントの場合、 `|L`または`|UI` `Up`または`Down`に追加されることがあります。 `|L` PD ノードがLeaderであることを示し、 `|UI` [TiDB Dashboard](/dashboard/dashboard-intro.md) PD ノードで実行されていることを示します。
+PDコンポーネントの場合、 `|L`または`|UI`が`Up`または`Down`に追加されることがあります。 `|L`はPD ノードがLeaderであることを示し、 `|UI`は[TiDB Dashboard](/dashboard/dashboard-intro.md)がPD ノードで実行されていることを示します。
 
 ## クラスターのスケールイン {#scale-in-a-cluster}
 
@@ -256,7 +256,7 @@ tiup cluster scale-in <cluster-name> -N <node-id>
 tiup cluster scale-in prod-cluster -N 172.16.5.140:20160
 ```
 
-`tiup cluster display`を実行すると、TiKV ノードが`Offline`マークされていることがわかります。
+`tiup cluster display`を実行すると、TiKV ノードが`Offline`とマークされていることがわかります。
 
 ```bash
 tiup cluster display prod-cluster
@@ -430,7 +430,7 @@ alertmanager_servers:
 > `dashboard_dir`フィールドを`grafana_servers`に設定した場合、 `tiup cluster rename`コマンドを実行してクラスターの名前を変更した後、次の操作を完了する必要があります。
 >
 > 1.  ローカル`dashboards`ディレクトリで、クラスター名を新しいクラスター名に変更します。
-> 2.  ローカルの`dashboards`ディレクトリで、 `datasource`クラスター名に基づいて命名されているため、 `datasource`新しいクラスター名に変更します。
+> 2.  ローカルの`dashboards`ディレクトリで、 `datasource`はクラスター名に基づいて命名されているため、 `datasource`を新しいクラスター名に変更します。
 > 3.  `tiup cluster reload -R grafana`コマンドを実行します。
 
 ## コンポーネントの更新 {#update-component}
@@ -515,7 +515,7 @@ tiup cluster import --dir=/path/to/tidb-ansible
 
 ## 操作ログを表示する {#view-the-operation-log}
 
-操作ログを表示するには、 `audit`コマンドを使用します。3 コマンドの使用方法は`audit`のとおりです。
+操作ログを表示するには、 `audit`コマンドを使用します。`audit`コマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:
@@ -650,7 +650,7 @@ CPUスレッド数チェック、メモリサイズチェック、ディスク�
 -   クラスターを開始する: `tiup cluster start <cluster-name> --ssh=system`
 -   クラスターのアップグレード: `tiup cluster upgrade ... --ssh=system`
 
-上記のすべてのクラスター操作コマンドに`--ssh=system`追加すると、システムのネイティブ SSH クライアントを使用できます。
+上記のすべてのクラスター操作コマンドに`--ssh=system`を追加すると、システムのネイティブ SSH クライアントを使用できます。
 
 すべてのコマンドにこのようなフラグを追加しないようにするには、 `TIUP_NATIVE_SSH`システム変数を使用して、ローカル SSH クライアントを使用するかどうかを指定します。
 
@@ -662,7 +662,7 @@ export TIUP_NATIVE_SSH=1
 export TIUP_NATIVE_SSH=enable
 ```
 
-この環境変数と`--ssh`同時に指定した場合、 `--ssh`優先されます。
+この環境変数と`--ssh`を同時に指定した場合、 `--ssh`が優先されます。
 
 > **Note:**
 >
@@ -673,7 +673,7 @@ export TIUP_NATIVE_SSH=enable
 TiUPデータは、ユーザーのホームディレクトリ内の`.tiup`ディレクトリに保存されます。コントロールマシンを移行するには、以下の手順に従って`.tiup`ディレクトリを対応するターゲットマシンにコピーします。
 
 1.  元のマシンのホームディレクトリで`tar czvf tiup.tar.gz .tiup`を実行します。
-2.  `tiup.tar.gz`ターゲット マシンのホーム ディレクトリにコピーします。
+2.  `tiup.tar.gz`をターゲット マシンのホーム ディレクトリにコピーします。
 3.  対象マシンのホームディレクトリで`tar xzvf tiup.tar.gz`を実行します。
 4.  `.tiup`ディレクトリを`PATH`環境変数に追加します。
 

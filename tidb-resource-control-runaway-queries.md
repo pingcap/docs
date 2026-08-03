@@ -16,7 +16,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 リソース制御機能の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
-## <code>QUERY_LIMIT</code>パラメータ {#code-query-limit-code-parameters}
+## <code>QUERY_LIMIT</code>パラメータ {#query_limit-parameters}
 
 クエリが次のいずれかの制限を超えると、ランナウェイ クエリとして識別されます。
 
@@ -77,7 +77,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
     ```
 
-## <code>QUERY WATCH</code>パラメータ {#code-query-watch-code-parameters}
+## <code>QUERY WATCH</code>パラメータ {#query-watch-parameters}
 
 `QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を参照してください。
 
@@ -85,7 +85,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 -   `RESOURCE GROUP`リソースグループを指定します。このステートメントによって追加されたランナウェイクエリの一致する特徴は、リソースグループのウォッチリストに追加されます。このパラメータは省略可能です。省略した場合、 `default`リソースグループに適用されます。
 
--   `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメータは省略可能です。省略した場合、識別後の対応するアクションは、リソースグループ内の`QUERY LIMIT`で設定された`ACTION`採用し、 `QUERY LIMIT`設定によってアクションは変更されません。リソースグループ内に`ACTION`が設定されていない場合は、エラーが報告されます。
+-   `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメータは省略可能です。省略した場合、識別後の対応するアクションは、リソースグループ内の`QUERY LIMIT`で設定された`ACTION`を採用し、 `QUERY LIMIT`設定によってアクションは変更されません。リソースグループ内に`ACTION`が設定されていない場合は、エラーが報告されます。
 
 -   `QueryWatchTextOption`パラメータには、 `SQL DIGEST` 、 `PLAN DIGEST` 、 `SQL TEXT` 3 つのオプションがあります。
     -   `SQL DIGEST`は`SIMILAR`と同じです。以下のパラメータは、文字列、ユーザー定義変数、または文字列を返すその他の式を受け入れます。文字列の長さは64文字でなければなりません。これはTiDBのダイジェスト定義と同じです。

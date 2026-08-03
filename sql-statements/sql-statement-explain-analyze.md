@@ -132,7 +132,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
     -   `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
     -   `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
     -   `rpc` : TiKV への RPC 要求の送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2 種類の RPC 時間が含まれます。
-        -   `prefetch`番目のステップで`BatchGet` RPC 要求が送信されます。
+        -   `prefetch`ステップで`BatchGet` RPC 要求が送信されます。
         -   `insert on duplicate`ステートメントが実行されると、 `Get` `duplicate update` RPC 要求が送信されます。
 -   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
@@ -251,7 +251,7 @@ tiflash_scan: {
 
     commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
 
--   `prewrite` : トランザクションの 2PC コミットの`prewrite`番目のフェーズに費やされた時間。
+-   `prewrite` : トランザクションの 2PC コミットの`prewrite`フェーズに費やされた時間。
 -   `wait_prewrite_binlog:` : 事前書き込みBinlog の書き込みを待機するのにかかる時間。
 -   `get_commit_ts` : トランザクションコミットタイムスタンプを取得するのに費やされた時間。
 -   `commit` : トランザクションの 2PC コミット中に`commit`フェーズで消費された時間。

@@ -37,7 +37,7 @@ summary: オペレーティング システムのパラメータを調整する�
 
 perf は、Linux カーネルが提供する重要なパフォーマンス解析ツールです。ハードウェアレベル（CPU/PMU、パフォーマンス監視ユニット）の機能とソフトウェアレベル（ソフトウェアカウンタ、トレースポイント）の機能の両方をカバーしています。詳細な使用方法については、 [perf の例](http://www.brendangregg.com/perf.html#Background)を参照してください。
 
-### BCC/bpftrace {#bcc-bpftrace}
+### BCC/bpftrace {#bccbpftrace}
 
 CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポートしています。そのため、 [60秒で](#in-60-seconds)の結果に基づいて適切なツールを選択し、詳細な分析を行うことができます。perf/ftraceと比較すると、BPFはプログラマビリティが高く、パフォーマンスオーバーヘッドが少ないという利点があります。kprobeと比較すると、BPFはセキュリティが高く、本番環境に適しています。BCCツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
@@ -45,11 +45,11 @@ CentOS 7.6以降、LinuxカーネルはBerkeley Packet Filter（BPF）をサポ�
 
 このセクションでは、分類されたカーネル サブシステムに基づいたパフォーマンス チューニングについて説明します。
 
-### CPU—周波数スケーリング {#cpu-frequency-scaling}
+### CPU—周波数スケーリング {#cpufrequency-scaling}
 
 cpufreq は、CPU周波数を動的に調整するモジュールです。5つのモードをサポートしています。サービスのパフォーマンスを確保するには、パフォーマンスモードを選択し、動的な調整を行わずにCPU周波数をサポートされている最高動作周波数に固定します。この操作を行うコマンドは`cpupower frequency-set --governor performance`です。
 
-### CPU—割り込み親和性 {#cpu-interrupt-affinity}
+### CPU—割り込み親和性 {#cpuinterrupt-affinity}
 
 -   `irqbalance`サービスを通じて自動バランスを実現できます。
 -   手動バランス:
@@ -62,7 +62,7 @@ cpufreq は、CPU周波数を動的に調整するモジュールです。5つ�
 
 NUMA（Non-Uniform Memory Access）ノードをまたがるメモリを可能な限り回避するには、スレッド／プロセスを特定のCPUコアにバインドし、そのCPUアフィニティを設定することができます。通常のプログラムの場合、CPUバインドには`numactl`コマンドを使用できます。詳細な使用方法については、Linuxのマニュアルページを参照してください。ネットワークインターフェースカード（NIC）の割り込みについては、 [ネットワークを調整する](#network-tuning)を参照してください。
 
-### メモリ - 透過的巨大ページ (THP) {#memory-transparent-huge-page-thp}
+### メモリ - 透過的巨大ページ (THP) {#memorytransparent-huge-page-thp}
 
 データベースアプリケーションではTHPの使用は推奨**されません**。データベースは連続的なメモリアクセスパターンではなく、スパースなメモリアクセスパターンを持つことが多いためです。高レベルのメモリ断片化が深刻な場合、THPページ割り当て時にレイテンシーが増大します。THPでダイレクトコンパクションを有効にすると、CPU使用率が急上昇します。したがって、THPを無効にすることをお勧めします。
 
@@ -72,7 +72,7 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
 grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 ```
 
-### メモリ - 仮想メモリパラメータ {#memory-virtual-memory-parameters}
+### メモリ - 仮想メモリパラメータ {#memoryvirtual-memory-parameters}
 
 -   `dirty_ratio`パーセント比。ダーティページキャッシュの総量がシステムメモリ全体のこのパーセント比に達すると、システムは`pdflush`オペレーションを使用してダーティページキャッシュをディスクに書き込みます。デフォルト値の`dirty_ratio`は 20% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、この値を下げるとメモリ回収の効率が向上します。
 -   `dirty_background_ratio`パーセント比。ダーティページキャッシュの総量がシステムメモリ全体のこのパーセント比に達すると、システムはバックグラウンドでダーティページキャッシュをディスクに書き込み始めます。デフォルト値は`dirty_background_ratio`で、10% であり、通常は調整する必要はありません。NVMe デバイスなどの高性能 SSD の場合、値を低く設定するとメモリ回収の効率が向上します。
@@ -81,7 +81,7 @@ grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 
 コア I/O スタック リンクは、ファイル システムレイヤー、ブロック デバイスレイヤー、およびドライバーレイヤーを含めて長くなります。
 
-#### I/Oスケジューラ {#i-o-scheduler}
+#### I/Oスケジューラ {#io-scheduler}
 
 I/Oスケジューラは、ストレージデバイス上でI/O操作を実行するタイミングと時間を決定します。I/Oエレベータとも呼ばれます。SSDデバイスの場合、I/Oスケジューリングポリシーを`noop`に設定することをお勧めします。
 
@@ -89,7 +89,7 @@ I/Oスケジューラは、ストレージデバイス上でI/O操作を実行�
 echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 ```
 
-#### フォーマットパラメータ - ブロックサイズ {#formatting-parameters-block-size}
+#### フォーマットパラメータ - ブロックサイズ {#formatting-parametersblock-size}
 
 ブロックはファイルシステムの作業単位です。ブロックサイズは、1つのブロックに保存できるデータの量を決定し、それによって1回あたりに書き込んだり読み込んだりするデータの最小量を決定します。
 
@@ -97,7 +97,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 `mkfs`コマンドを使用してデバイスをフォーマットする場合、ファイルシステムオプションの一部としてブロックサイズを指定します。ブロックサイズを指定するパラメータはファイルシステムによって異なります。詳細については、対応する`mkfs`マニュアルページ（例： `man mkfs.ext4`を参照してください。
 
-#### <code>mount</code>パラメータ {#code-mount-code-parameters}
+#### <code>mount</code>パラメータ {#mount-parameters}
 
 `mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。`nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
 
@@ -109,7 +109,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 ネットワーク スタックは大部分が自己最適化されていますが、ネットワーク パケット処理における次の側面がボトルネックとなり、パフォーマンスに影響を及ぼす可能性があります。
 
--   NICハードウェアキャッシュ：ハードウェアレベルでパケットロスを正しく監視するには、コマンド`ethtool -S ${NIC_DEV_NAME}`を使用してフィールド`drops`監視します。パケットロスが発生した場合、ハード/ソフト割り込みの処理速度がNICの受信速度に追いつかない可能性があります。受信バッファサイズが上限を下回っている場合は、パケットロスを回避するためにRXバッファを増やすことも検討できます。クエリコマンドは`ethtool -g ${NIC_DEV_NAME}` 、変更コマンドは`ethtool -G ${NIC_DEV_NAME}`です。
+-   NICハードウェアキャッシュ：ハードウェアレベルでパケットロスを正しく監視するには、コマンド`ethtool -S ${NIC_DEV_NAME}`を使用してフィールド`drops`を監視します。パケットロスが発生した場合、ハード/ソフト割り込みの処理速度がNICの受信速度に追いつかない可能性があります。受信バッファサイズが上限を下回っている場合は、パケットロスを回避するためにRXバッファを増やすことも検討できます。クエリコマンドは`ethtool -g ${NIC_DEV_NAME}` 、変更コマンドは`ethtool -G ${NIC_DEV_NAME}`です。
 
 -   ハードウェア割り込み：NICが受信側スケーリング（RSS、マルチNIC受信とも呼ばれる）機能をサポートしている場合は、 `/proc/interrupts` NIC割り込みを確認してください。割り込みが不均等な場合は、 [CPU—周波数スケーリング](#cpufrequency-scaling) 、 [CPU—割り込み親和性](#cpuinterrupt-affinity) 、および[NUMA CPU バインディング](#numa-cpu-binding)を参照してください。NICがRSSをサポートしていない場合、またはRSSの数が物理CPUコア数よりも大幅に少ない場合は、受信パケットステアリング（RPS、RSSのソフトウェア実装とみなすことができます）と、RPSの拡張である受信フローステアリング（RFS）を設定してください。詳細な設定については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)を参照してください。
 
@@ -121,7 +121,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 -   割り込みの統合：ハードウェア割り込みが多すぎるとシステムパフォーマンスが低下し、ハードウェア割り込みが遅すぎるとパケット損失が発生します。新しいNICは割り込み統合機能をサポートしており、ドライバがハードウェア割り込みの数を自動的に調整できます。この機能を有効にするには`ethtool -c ${NIC_DEV_NAME}` 、有効にするには`ethtool -C ${NIC_DEV_NAME}`を実行します。アダプティブモードでは、NICが割り込み統合を自動的に調整します。このモードでは、ドライバはトラフィックモードとカーネル受信モードをチェックし、パケット損失を防ぐためにリアルタイムで統合設定を評価します。NICのブランドによって機能やデフォルト設定が異なります。詳細については、NICのマニュアルを参照してください。
 
--   アダプタキュー：カーネルはプロトコルスタックを処理する前に、このキューを使用してNICが受信したデータをバッファリングします。各CPUには独自のバックログキューがあります。このキューにキャッシュできるパケットの最大数は`netdev_max_backlog`です。2列目の`/proc/net/softnet_stat`注目してください。行の2列目が増加し続ける場合、CPU [行-1]キューがいっぱいになり、データパケットが失われていることを意味します。この問題を解決するには、 `net.core.netdev_max_backlog`値を2倍に増やし続けます。
+-   アダプタキュー：カーネルはプロトコルスタックを処理する前に、このキューを使用してNICが受信したデータをバッファリングします。各CPUには独自のバックログキューがあります。このキューにキャッシュできるパケットの最大数は`netdev_max_backlog`です。2列目の`/proc/net/softnet_stat`に注目してください。行の2列目が増加し続ける場合、CPU [行-1]キューがいっぱいになり、データパケットが失われていることを意味します。この問題を解決するには、 `net.core.netdev_max_backlog`値を2倍に増やし続けます。
 
 -   送信キュー：送信キューの長さは、送信前にキューイングできるパケット数を決定します。デフォルト値は`1000`で、10 Gbps には十分です。ただし、 `ip -s link`の出力から TX errors の値を確認した場合は、これを倍の`ip link set dev ${NIC_DEV_NAME} txqueuelen 2000`に設定してみてください。
 

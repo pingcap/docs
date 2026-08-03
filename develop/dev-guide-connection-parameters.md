@@ -144,11 +144,11 @@ JDBC API の使用方法については、 [JDBC公式チュートリアル](htt
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP（オンライン・トランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行プランを繰り返し解析および生成するオーバーヘッドを回避できます。
+OLTP（オンライン・トランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行プランを繰り返し解析および生成するオーバーヘッドを回避できます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
-さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、ステートメントはテキスト ファイルとしてサーバーに送信されます。したがって、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメータで`useServerPrepStmts = true`設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)参照してください。
+さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、クライアント側で`?`が置換された後、ステートメントはテキスト ファイルとしてサーバーに送信されます。したがって、Prepare API を使用するだけでなく、TiDBサーバーでステートメントの前処理を実行する前に、JDBC 接続パラメータで`useServerPrepStmts = true`を設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)を参照してください。
 
 #### バッチAPIを使用する {#use-batch-api}
 
@@ -158,9 +158,9 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 >
 > デフォルトのMySQL Connector/Jの実装では、 `addBatch()`でバッチに追加されたSQL文の送信時間は`executeBatch()`呼び出されるまで遅延されますが、実際のネットワーク転送中は文は1つずつ送信されます。そのため、この方法は通常、通信オーバーヘッドを削減しません。
 >
-> バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)参照してください。
+> バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`を設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
-#### <code>StreamingResult</code>を使用して実行結果を取得します。 {#use-code-streamingresult-code-to-get-the-execution-result}
+#### <code>StreamingResult</code>を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
 
 ほとんどのシナリオでは、実行効率を向上させるために、JDBCはデフォルトでクエリ結果を事前に取得し、クライアントのメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らし、クライアントのメモリが準備できるまで待機し、次のバッチを要求することがよくあります。
 
@@ -296,7 +296,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 #### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB はタイムアウトを制御するために 2 つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2 つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8 時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。11 のデフォルト値は`max_execution_time` `0` 、SQL ステートメントの最大実行時間は無制限であり、 `SELECT`ステートメントすべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
+TiDB はタイムアウトを制御するために 2 つの MySQL 互換パラメータ ( [`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time) ) を提供します。これらの 2 つのパラメータはそれぞれ、 Javaアプリケーションとの接続アイドルタイムアウトと接続内の SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。TiDB v5.4 以降、 `wait_timeout`のデフォルト値は`28800`秒で、8 時間です。v5.4 より前の TiDB バージョンでは、デフォルト値は`0`で、タイムアウトは無制限です。`max_execution_time`のデフォルト値は`0`で、SQL ステートメントの最大実行時間は無制限であり、 `SELECT`ステートメントすべて ( `SELECT ... FOR UPDATE`を含む) に適用されます。
 
 デフォルト値の[`wait_timeout`](/system-variables.md#wait_timeout)は比較的大きな値です。トランザクションが開始されてもコミットもロールバックもされないような状況では、ロックの保持時間が長引くのを防ぐために、よりきめ細かな制御と短いタイムアウトが必要になる場合があります。このような場合は、 [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) （TiDB v7.6.0で導入）を使用して、ユーザーセッション内のトランザクションのアイドルタイムアウトを制御できます。
 

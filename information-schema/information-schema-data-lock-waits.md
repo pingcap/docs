@@ -3,7 +3,7 @@ title: DATA_LOCK_WAITS
 summary: DATA_LOCK_WAITS` information_schema テーブルについて学習します。
 ---
 
-# データロック待機 {#data-lock-waits}
+# データロック待機 {#data_lock_waits}
 
 `DATA_LOCK_WAITS`テーブルには、悲観的トランザクションのロック待機情報とブロックされている楽観的トランザクションの情報を含む、クラスター内のすべての TiKV ノードで進行中のロック待機情報が表示されます。
 
@@ -40,7 +40,7 @@ DESC data_lock_waits;
 > -   異なる TiKV ノードからの情報が、同じ時刻のスナップショットであるとは限りません。
 > -   `SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`SQL_DIGEST_TEXT`列の情報は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 
-## `KEY_INFO` {#key-info}
+## `KEY_INFO` {#key_info}
 
 `KEY_INFO`列は`KEY`列の詳細情報です。情報はJSON形式で表示されます。各フィールドの説明は以下の通りです。
 
@@ -59,7 +59,7 @@ DESC data_lock_waits;
 -   `"index_name"` : インデックス キーが属するインデックスの名前。
 -   `"index_values"` : インデックス キー内のインデックス値。
 
-上記のフィールドのうち、該当しない、または現在利用できない場合、そのフィールドはクエリ結果から省略されます。例えば、行キー情報には`index_id` 、 `index_name` 、 `index_values`含まれません。インデックスキーには`handle_type`と`handle_value`含まれません。非パーティションテーブルでは`partition_id`と`partition_name`表示されません。削除されたテーブルのキー情報では`table_name` 、 `db_id` 、 `db_name` 、 `index_name`などのスキーマ情報を取得できず、テーブルがパーティションテーブルであるかどうかを区別できません。
+上記のフィールドのうち、該当しない、または現在利用できない場合、そのフィールドはクエリ結果から省略されます。例えば、行キー情報には`index_id` 、 `index_name` 、 `index_values`は含まれません。インデックスキーには`handle_type`と`handle_value`は含まれません。非パーティションテーブルでは`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報では`table_name` 、 `db_id` 、 `db_name` 、 `index_name`などのスキーマ情報を取得できず、テーブルがパーティションテーブルであるかどうかを区別できません。
 
 > **Note:**
 >

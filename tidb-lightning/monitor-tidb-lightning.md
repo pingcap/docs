@@ -11,7 +11,7 @@ summary: TiDB Lightningのモニター構成と監視メトリックについて
 
 TiDB Lightning を手動でインストールする場合は、以下の手順に従ってください。
 
-`tidb-lightning`のメトリクスは、Prometheus が検出済みであれば直接収集できます。3 のメトリクスポートは`tidb-lightning.toml`のように設定できます。
+`tidb-lightning`のメトリクスは、Prometheus が検出済みであれば直接収集できます。`tidb-lightning.toml`のメトリクスポートは次のように設定できます。
 
 ```toml
 [lightning]

@@ -56,7 +56,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
--   `INSERT` `UPDATE`含む非トランザクションDMLステートメント`DELETE` にサポートし@ [ekexium](https://github.com/ekexium) `REPLACE` [＃33485](https://github.com/pingcap/tidb/issues/33485)
+-   `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` を含む非トランザクションDMLステートメントを完全にサポート [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
     大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスタの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文`REPLACE`サポートしてい`UPDATE` 。
 
@@ -70,7 +70,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   `INSERT INTO SELECT`ステートメントを使用したTiFlashクエリ結果の保存をサポート (実験的) [＃37515](https://github.com/pingcap/tidb/issues/37515) @ [gengliqi](https://github.com/gengliqi)
 
-    TiDB v6.5.0以降、 `INSERT INTO SELECT`ステートメントの`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`番目のTiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
+    TiDB v6.5.0以降、 `INSERT INTO SELECT`ステートメントの`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`TiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
 
     ```sql
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;
@@ -197,7 +197,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     セッション中のトランザクションによって消費されるメモリ（最大値は以前は設定項目[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)によって設定されていました）が、メモリ管理モジュールによって追跡されるようになりました。単一セッションのメモリ消費量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で定義されたしきい値に達すると、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)で定義された動作がトリガーされます（デフォルトは`CANCEL` 、つまり操作のキャンセルです）。前方互換性を確保するため、デフォルト以外の値として[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)設定されている場合でも、TiDB はトランザクションが`txn-total-size-limit`で設定されたメモリを使用できるようにします。
 
-    TiDB v6.5.0以降をご利用の場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)削除し、トランザクションのメモリ使用量に別途制限を設けないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してグローバルメモリを管理することで、メモリ使用効率を向上させることができます。
+    TiDB v6.5.0以降をご利用の場合は、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を削除し、トランザクションのメモリ使用量に別途制限を設けないことを推奨します。代わりに、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してグローバルメモリを管理することで、メモリ使用効率を向上させることができます。
 
     詳細については[ドキュメント](/configure-memory-usage.md)を参照してください。
 

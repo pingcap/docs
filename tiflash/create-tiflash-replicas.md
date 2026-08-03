@@ -17,7 +17,7 @@ ALTER TABLE table_name SET TIFLASH REPLICA count;
 
 上記コマンドのパラメータは以下のとおりです。
 
--   `count`レプリカの数を示します。値が`0`の場合、レプリカは削除されます。
+-   `count`はレプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 
 > **Note:**
 >
@@ -39,7 +39,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 **注:**
 
--   上記の DDL ステートメントを使用してテーブル`t` TiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
+-   上記の DDL ステートメントを使用してテーブル`t`がTiFlashに複製されると、次のステートメントを使用して作成されたテーブルも自動的にTiFlashに複製されます。
 
     ```sql
     CREATE TABLE table_name like t;
@@ -79,7 +79,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 ALTER DATABASE db_name SET TIFLASH REPLICA count;
 ```
 
-このステートメントでは、 `count`レプリカの数を示しています。 `0`に設定すると、レプリカが削除されます。
+このステートメントでは、 `count`はレプリカの数を示しています。 `0`に設定すると、レプリカが削除されます。
 
 例:
 

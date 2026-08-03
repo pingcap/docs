@@ -204,7 +204,7 @@ TiDB バージョン: 8.0.0
 
 ### データ移行 {#data-migration}
 
--   TiCDC は、Simple プロトコルのサポートを追加します [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)
+-   TiCDC は、Simpleプロトコルのサポートを追加します [#9898](https://github.com/pingcap/tiflow/issues/9898) @[3AceShowHand](https://github.com/3AceShowHand)
 
     TiCDCは、新しいプロトコルであるSimpleプロトコルを導入しました。このプロトコルは、DDLおよびBOOTSTRAPイベントにテーブルスキーマ情報を埋め込むことで、スキーマをインバンドで追跡する機能を提供します。
 

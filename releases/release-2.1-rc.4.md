@@ -33,7 +33,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     -   クエリが空の場合、 `SHOW PROCESSLIST`結果の`Command`フィールドを`Sleep`に設定します[＃7839](https://github.com/pingcap/tidb/pull/7839)
 -   表現
     -   `SYSDATE`関数の定数の折り畳みの問題を修正 [＃7895](https://github.com/pingcap/tidb/pull/7895)
-    -   `SUBSTRING_INDEX`場合によってはパニックになる問題を修正[＃7897](https://github.com/pingcap/tidb/pull/7897)
+    -   `SUBSTRING_INDEX`が場合によってはパニックになる問題を修正[＃7897](https://github.com/pingcap/tidb/pull/7897)
 -   DDL
     -   `invalid ddl job type`エラースローすることによって発生するスタックオーバーフローの問題を修正しました [＃7958](https://github.com/pingcap/tidb/pull/7958)
     -   `ADMIN CHECK TABLE`の結果が場合によっては正しくない問題を修正[＃7975](https://github.com/pingcap/tidb/pull/7975)

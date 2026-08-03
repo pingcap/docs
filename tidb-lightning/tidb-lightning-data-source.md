@@ -45,7 +45,7 @@ rename srcdb. tgtdb. *.sql
 
 ### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
 
-正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)参照してください。
+正規表現を使ってオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`設定を使ってファイル名を一致させ、 `schema`と`table`を希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルを一致させる](#match-customized-files)を参照してください。
 
 以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 
@@ -137,7 +137,7 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-`separator` 、 `delimiter` 、 `terminator`などの文字列フィールドに特殊文字を入力する場合、バックスラッシュを使用して特殊文字をエスケープできます。エスケープシーケンスは*二重引用符で囲まれた*文字列（ `"…"` ）である必要があります。例えば、 `separator = "\u001f"` ASCII文字`0X1F`区切り文字として使用することを意味します。
+`separator` 、 `delimiter` 、 `terminator`などの文字列フィールドに特殊文字を入力する場合、バックスラッシュを使用して特殊文字をエスケープできます。エスケープシーケンスは*二重引用符で囲まれた*文字列（ `"…"` ）である必要があります。例えば、 `separator = "\u001f"` ASCII文字`0X1F`を区切り文字として使用することを意味します。
 
 *シングルクォーテーションで囲まれた*文字列 ( `'…'` ) を使用すると、バックスラッシュによるエスケープを抑制できます。例えば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) と文字`n`の2文字の文字列を終端として使用することを意味します。
 
@@ -179,7 +179,7 @@ trim-last-separator = false
 #### `header` {#header}
 
 -   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
--   `header`が`true`場合、最初の行は*列名*として使用されます。7 が`header` `false`場合、最初の行は通常のデータ行として扱われます。
+-   `header`が`true`の場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
 
 #### <code>not-null</code>と<code>null</code> {#code-not-null-code-and-code-null-code}
 
@@ -194,7 +194,7 @@ trim-last-separator = false
     \N,"\N",
     ```
 
-    デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B` TiDBにインポートされた後、両方ともNULLに変換されます。列`C`空文字列`''`ですが、NULLではありません。
+    デフォルト設定（ `not-null = false; null = '\N'` ）では、列`A`と`B`は TiDBにインポートされた後、両方ともNULLに変換されます。列`C`は空文字列`''`ですが、NULLではありません。
 
 #### `backslash-escape` {#backslash-escape}
 
@@ -227,8 +227,8 @@ trim-last-separator = false
     A,,B,,
     ```
 
-    -   `trim-last-separator = false`場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
-    -   `trim-last-separator = true`場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
+    -   `trim-last-separator = false`の場合、これは 5 つのフィールド`('A', '', 'B', '', '')`の行として解釈されます。
+    -   `trim-last-separator = true`の場合、これは 3 つのフィールド`('A', '', 'B')`の行として解釈されます。
 
 -   このオプションは非推奨です。代わりにオプション`terminator`を使用してください。
 
@@ -338,7 +338,7 @@ backslash-escape = false
 
 TiDB LightningはSQLファイルを処理する際に、単一のSQLファイルを迅速に分割できないため、同時実行性を高めて単一ファイルのインポート速度を向上させることができません。そのため、SQLファイルからデータをインポートする際は、巨大なSQLファイルを1つだけ使用することは避けてください。TiDB Lightningは、入力ファイルのサイズが256MiB程度に均一である場合に最も効果的に動作します。
 
-## 寄木細工 {#parquet}
+## Parquet {#parquet}
 
 TiDB Lightningは現在、Amazon Aurora、Apache Hive、Snowflakeによって生成されたParquetファイルのみをサポートしています。S3内のファイル構造を識別するには、以下の設定を使用してすべてのデータファイルを一致させてください。
 
@@ -351,7 +351,7 @@ TiDB Lightningは現在、Amazon Aurora、Apache Hive、Snowflakeによって生
 
 この設定は、 Auroraスナップショットによってエクスポートされた parquet ファイルを一致させる方法のみを示しています。スキーマファイルは別途エクスポートして処理する必要があります。
 
-`mydumper.files`詳細については[カスタマイズされたファイルに一致](#match-customized-files)を参照してください。
+`mydumper.files`の詳細については[カスタマイズされたファイルに一致](#match-customized-files)を参照してください。
 
 ## 圧縮ファイル {#compressed-files}
 
@@ -373,7 +373,7 @@ TiDB Lightningは、命名パターンに従ったデータファイルのみを
 
 S3にエクスポートされたAuroraスナップショットを例に挙げます。Parquetファイルの完全パスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 
-通常、 `some-database`データベースをインポートするには、 `data-source-dir` `S3://some-bucket/some-subdir/some-database/`に設定します。
+通常、 `some-database`データベースをインポートするには、 `data-source-dir`を `S3://some-bucket/some-subdir/some-database/`に設定します。
 
 上記のParquetファイルパスに基づいて、 `(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$`ような正規表現を記述することでファイルに一致させることができます。一致グループでは、 `index=1`は`some-database` `index=2` `some-table`は`index=3` `parquet`なります。
 

@@ -94,7 +94,7 @@
       - [TiCDC CSVプロトコル](/ticdc/ticdc-csv.md)
       - [TiCDCDebeziumプロトコル](/ticdc/ticdc-debezium.md)
       - [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
-      - [TiCDCシンプルプロトコル](/ticdc/ticdc-simple-protocol.md)
+      - [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)
     - [TiCDCオープンAPI v2](/ticdc/ticdc-open-api-v2.md)
     - [TiCDCオープンAPI v1](/ticdc/ticdc-open-api.md)
     - TiCDCのデータ消費量
@@ -524,7 +524,7 @@
       - [データベースとテーブルの名前を変更します](/tidb-lightning/tidb-lightning-data-source.md#rename-databases-and-tables)
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
       - [SQL](/tidb-lightning/tidb-lightning-data-source.md#sql)
-      - [寄木細工](/tidb-lightning/tidb-lightning-data-source.md#parquet)
+      - [Parquet](/tidb-lightning/tidb-lightning-data-source.md#parquet)
       - [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)
       - [カスタマイズされたファイル](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files)
       - [Amazon S3からデータをインポートする](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)

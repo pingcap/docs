@@ -20,7 +20,7 @@ TiDB のロールベースアクセス制御 (RBAC) システムの実装は、M
 
 ### ロールを作成する {#create-a-role}
 
-たとえば、次のステートメントを使用して、ロール`app_developer` 、 `app_read` 、および`app_write`作成できます。
+たとえば、次のステートメントを使用して、ロール`app_developer` 、 `app_read` 、および`app_write`を作成できます。
 
 ```sql
 CREATE ROLE 'app_developer', 'app_read', 'app_write';
@@ -154,7 +154,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 現在のユーザーの権限を確認するには、 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用します。`SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は次の点で異なります。
 
 -   `SHOW GRANTS` 、現在のユーザーに対して有効なロールの権限を示します。
--   `SHOW GRANTS FOR CURRENT_USER()`場合、有効なロールの権限は表示されません。
+-   `SHOW GRANTS FOR CURRENT_USER()`の場合、有効なロールの権限は表示されません。
 
 ### デフォルトロールを設定する {#set-the-default-role}
 
@@ -298,7 +298,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 
 ### 役割を削除する {#delete-a-role}
 
-次のステートメントを使用して、ロール`app_read`と`app_write`削除できます。
+次のステートメントを使用して、ロール`app_read`と`app_write`を削除できます。
 
 ```sql
 DROP ROLE 'app_read', 'app_write';
@@ -352,7 +352,7 @@ SELECT * FROM mysql.default_roles;
 -   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
 -   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
 
-### 参考文献 {#references}
+### リファレンス {#references}
 
 RBAC、ユーザー管理、権限管理は密接に関連しているため、操作の詳細については次のリソースを参照してください。
 

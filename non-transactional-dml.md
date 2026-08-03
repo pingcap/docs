@@ -49,14 +49,14 @@ summary: TiDBの非トランザクションDMLステートメントについて�
 -   このステートメントは、自身で読み取るデータを変更しません。変更しないと、後続のバッチは前のバッチで書き込まれたデータを読み取ってしまい、予期しない結果が発生しやすくなります。
 
     -   非トランザクション`INSERT INTO ... SELECT`ステートメント内で同じテーブルから選択して変更する場合は、シャード列を変更しないでください。そうしないと、複数のバッチが同じ行を読み取り、データを複数回挿入する可能性があります。
-        -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`使用は推奨されません。
+        -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`の使用は推奨されません。
         -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`を使用することをお勧めします。
         -   シャード列`id`に`AUTO_INCREMENT`属性がある場合は、 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`を使用することをお勧めします。
     -   非トランザクション`UPDATE` 、 `INSERT ... ON DUPLICATE KEY UPDATE` 、または`REPLACE INTO`ステートメントでシャード列を更新しないでください。
         -   例えば、非トランザクション`UPDATE`ステートメントの場合、分割された SQL ステートメントは順番に実行されます。前のバッチの変更は、前のバッチがコミットされた後に次のバッチによって読み取られるため、同じデータ行が複数回変更されることになります。
-        -   これらのステートメントは`BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`サポートしていません。
-        -   `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`使用は推奨されません。
-    -   シャード列は結合キーとして使用しないでください。例えば、次の例ではシャード列`test.t.id`結合キーとして使用しているため、非トランザクションの`UPDATE`文が同じ行を複数回変更することになります。
+        -   これらのステートメントは`BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`をサポートしていません。
+        -   `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`の使用は推奨されません。
+    -   シャード列は結合キーとして使用しないでください。例えば、次の例ではシャード列`test.t.id`を結合キーとして使用しているため、非トランザクションの`UPDATE`文が同じ行を複数回変更することになります。
 
         ```sql
         CREATE TABLE t(id int, v int, key(id));
@@ -181,11 +181,11 @@ SHOW PROCESSLIST;
 
 非トランザクションDML文を終了するには、 `KILL TIDB <processlist_id>`を使用します。TiDBは現在実行中のバッチ以降のすべてのバッチをキャンセルします。実行結果はログから取得できます。
 
-`KILL TIDB`詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+`KILL TIDB`の詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### バッチ分割ステートメントをクエリする {#query-the-batch-dividing-statement}
 
-非トランザクションDML文の実行中、内部的にDML文を複数のバッチに分割するステートメントが使用されます。このバッチ分割文をクエリするには、この非トランザクションDML文に`DRY RUN QUERY`加算します。すると、TiDBはこのクエリと後続のDML操作を実行しません。
+非トランザクションDML文の実行中、内部的にDML文を複数のバッチに分割するステートメントが使用されます。このバッチ分割文をクエリするには、この非トランザクションDML文に`DRY RUN QUERY`を追加します。すると、TiDBはこのクエリと後続のDML操作を実行しません。
 
 次の文は、 `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`の実行中にバッチ分割文を照会します。
 
@@ -204,7 +204,7 @@ BATCH ON id LIMIT 2 DRY RUN QUERY DELETE FROM t WHERE v < 6;
 
 ### 最初のバッチと最後のバッチに対応するステートメントをクエリします {#query-the-statements-corresponding-to-the-first-and-the-last-batches}
 
-非トランザクションDML文内の最初のバッチと最後のバッチに対応する実際のDML文を照会するには、この非トランザクションDML文に`DRY RUN`加算します。すると、TiDBはバッチを分割するだけで、これらのSQL文は実行されません。バッチが多数存在する可能性があるため、すべてのバッチが表示されるわけではなく、最初のバッチと最後のバッチのみが表示されます。
+非トランザクションDML文内の最初のバッチと最後のバッチに対応する実際のDML文を照会するには、この非トランザクションDML文に`DRY RUN`を追加します。すると、TiDBはバッチを分割するだけで、これらのSQL文は実行されません。バッチが多数存在する可能性があるため、すべてのバッチが表示されるわけではなく、最初のバッチと最後のバッチのみが表示されます。
 
 ```sql
 BATCH ON id LIMIT 2 DRY RUN DELETE FROM t WHERE v < 6;
@@ -236,7 +236,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 2.  非トランザクション DML 文に`DRY RUN QUERY`追加し、クエリを手動で実行して、DML 文の影響を受けるデータ範囲がおおよそ正しいかどうかを確認します。
 
-3.  非トランザクションDML文に`DRY RUN`加算し、クエリを手動で実行して、分割文と実行プランを確認してください。以下の点に注意する必要があります。
+3.  非トランザクションDML文に`DRY RUN`を追加し、クエリを手動で実行して、分割文と実行プランを確認してください。以下の点に注意する必要があります。
 
     -   分割ステートメントが前のステートメントによって書き込まれた結果を読み取ることができるかどうか。これにより異常が発生する可能性があります。
     -   インデックスの選択性。
@@ -319,7 +319,7 @@ batch-dml は、DML ステートメントの実行中にトランザクション
 
 ## よくある問題 {#common-issues}
 
-### 複数のテーブル結合ステートメントを実行すると<code>Unknown column xxx in &#39;where clause&#39;</code>エラーが発生します。 {#executing-a-multiple-table-joins-statement-results-in-the-code-unknown-column-xxx-in-where-clause-code-error}
+### 複数のテーブル結合ステートメントを実行すると<code>Unknown column xxx in &#39;where clause&#39;</code>エラーが発生します。 {#executing-a-multiple-table-joins-statement-results-in-the-unknown-column-xxx-in-where-clause-error}
 
 このエラーは、クエリ内で連結された`WHERE`句が、 [破片の列](#parameter-description)が定義されているテーブル以外のテーブルに関係する場合に発生します。例えば、次のSQL文では、シャード列は`t2.id`で、テーブル`t2`に定義されていますが、 `WHERE`句はテーブル`t2`と`t3`に関係しています。
 
@@ -341,7 +341,7 @@ DRY RUN QUERY INSERT INTO t
 SELECT t2.id, t2.v, t3.id FROM t2, t3 WHERE t2.id = t3.id
 ```
 
-このエラーを回避するには、 `WHERE`番目の句にある他のテーブルに関連する条件を、 `JOIN`番目の句にある`ON`条件に移動することができます。例：
+このエラーを回避するには、 `WHERE`句にある他のテーブルに関連する条件を、 `JOIN`句にある`ON`条件に移動することができます。例：
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 
@@ -355,7 +355,7 @@ SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
     | 0              | all succeeded |
     +----------------+---------------+
 
-### 非トランザクションDML文でテーブルエイリアスを使用すると、 <code>Unknown column &#39;&lt;alias&gt;.&lt;column&gt;&#39; in &#39;where clause&#39;</code>エラーが発生します。 {#the-code-unknown-column-x3c-alias-x3c-column-in-where-clause-code-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
+### 非トランザクションDML文でテーブルエイリアスを使用すると、 <code>Unknown column &#39;&lt;alias&gt;.&lt;column&gt;&#39; in &#39;where clause&#39;</code>エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
 
 非トランザクションDML文を実行すると、TiDBは内部的にバッチを分割するためのクエリを構築し、実際の分割実行文を生成します。これらの2種類の文は、それぞれ[`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)と[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 
@@ -373,7 +373,7 @@ WHERE t.c1 IS NULL;
 このエラーを回避するには、次の推奨事項に従ってください。
 
 -   非トランザクションDML文ではテーブルエイリアスの使用は避けてください。例えば、 `t.c1`を`c1`または`t_old.c1`に書き換えます。
--   [破片の列](#parameter-description)指定する際は、テーブルエイリアスを使用しないでください。例えば、 `BATCH ON t.id` `BATCH ON db.t_old.id`または`BATCH ON t_old.id`に書き換えます。
+-   [破片の列](#parameter-description)を指定する際は、テーブルエイリアスを使用しないでください。例えば、 `BATCH ON t.id`を `BATCH ON db.t_old.id`または`BATCH ON t_old.id`に書き換えます。
 -   実行する前に、 `DRY RUN QUERY`または`DRY RUN`を使用して書き換えられたステートメントをプレビューし、期待どおりであることを確認します。
 
 ### 実際のバッチサイズは指定されたバッチサイズと同じではありません {#the-actual-batch-size-is-not-the-same-as-the-specified-batch-size}
@@ -384,7 +384,7 @@ WHERE t.c1 IS NULL;
 
 さらに、他の同時書き込みが発生すると、各バッチで処理される行数は指定されたバッチ サイズと異なる場合があります。
 
-### 実行中に、 <code>Failed to restore the delete statement, probably because of unsupported type of the shard column</code>エラーが発生します。 {#the-code-failed-to-restore-the-delete-statement-probably-because-of-unsupported-type-of-the-shard-column-code-error-occurs-during-execution}
+### 実行中に、 <code>Failed to restore the delete statement, probably because of unsupported type of the shard column</code>エラーが発生します。 {#the-failed-to-restore-the-delete-statement-probably-because-of-unsupported-type-of-the-shard-column-error-occurs-during-execution}
 
 シャード列は`ENUM` 、 `BIT` 、 `SET` 、 `JSON`型をサポートしていません。新しいシャード列を指定してください。整数型または文字列型の列を使用することをお勧めします。
 
@@ -400,7 +400,7 @@ WHERE t.c1 IS NULL;
 
 </CustomContent>
 
-### 非トランザクション<code>DELETE</code> 、通常の<code>DELETE</code>と同等ではない「例外的な」動作をします。 {#non-transactional-code-delete-code-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-code-delete-code}
+### 非トランザクション<code>DELETE</code> 、通常の<code>DELETE</code>と同等ではない「例外的な」動作をします。 {#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete}
 
 非トランザクション DML ステートメントは、この DML ステートメントの元の形式と同等ではありません。次のような理由が考えられます。
 

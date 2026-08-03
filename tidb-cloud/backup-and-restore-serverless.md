@@ -4,7 +4,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのバ
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore-tidb-cloud-starter-or-essential-data}
+# TiDB Cloud StarterまたはEssentialデータのバックアップと復元 {#back-up-and-restore--starter--or-essential-data}
 
 このドキュメントでは、TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス上のデータのバックアップと復元方法について説明します。
 
@@ -56,7 +56,7 @@ TiDB Cloud Essentialインスタンスのバックアップ時間を設定する
 
 2.  **「バックアップ設定」**をクリックしてください。すると**「バックアップ設定」**ウィンドウが開きます。ここで、必要に応じて自動バックアップの設定を構成できます。
 
-3.  **「バックアップ時間」**で、毎日のバックアップの開始時間を設定します。
+3.  **「バックアップ時間」**で、毎日のバックアップの開始時刻を設定します。
 
 4.  **「確認」**をクリックしてください。
 
@@ -75,7 +75,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナ
     -   TiDB Cloud Starterインスタンス：サポートされていません。
     -   TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
 
-### 目的地を復元する {#restore-destination}
+### 復元先 {#restore-destination}
 
 TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンスへのデータ復元をサポートしています。
 

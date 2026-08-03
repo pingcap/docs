@@ -59,7 +59,7 @@ TiDBバイナリパッケージは、amd64およびarm64アーキテクチャで
 | errdoc-{バージョン}-linux-{アーキテクチャ}.tar.gz            |                |
 | dba-{バージョン}-linux-{アーキテクチャ}.tar.gz               |                |
 | PCC-{バージョン}-linux-{アーキテクチャ}.tar.gz               |                |
-| 同期差分インスペクター                                      |                |
+| sync-diff-inspector                                      |                |
 | Reparo                                              |                |
 | サーバー-{バージョン}-linux-{アーキテクチャ}.tar.gz              | バージョン6.2.0の新機能 |
 | grafana-{バージョン}-linux-{アーキテクチャ}.tar.gz           | バージョン6.2.0の新機能 |

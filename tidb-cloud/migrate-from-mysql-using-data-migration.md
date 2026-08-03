@@ -94,7 +94,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="dedicated">
 
--   TiDB Cloud Dedicatedの場合、データセット サイズが 1 TiB より小さい場合は、論理モード (デフォルト モード) を使用することをお勧めします。データセットのサイズが 1 TiB より大きい場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)参照してください。
+-   TiDB Cloud Dedicatedの場合、データセット サイズが 1 TiB より小さい場合は、論理モード (デフォルト モード) を使用することをお勧めします。データセットのサイズが 1 TiB より大きい場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
 
 </CustomContent>
 <CustomContent plan="essential">
@@ -178,7 +178,7 @@ TiDB Cloud Essentialのデータ移行機能は、以下のデータソースと
 
 <CustomContent plan="premium">
 
-TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソース データベースをサポートしており、 **MySQL は**移行ジョブ ウィザードで使用できる唯一のデータ ソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)参照してください。
+TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソース データベースをサポートしており、 **MySQL は**移行ジョブ ウィザードで使用できる唯一のデータ ソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
 
 | データソース                             | サポートされているバージョン |
 | :--------------------------------- | :------------- |
@@ -332,7 +332,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
 ご利用のクラウドプロバイダー、ネットワーク構成、およびセキュリティ要件に最適な接続方法を選択し、その方法の設定手順に従ってください。
 
-#### TLS/SSLによるエンドツーエンド暗号化 {#end-to-end-encryption-over-tls-ssl}
+#### TLS/SSLによるエンドツーエンド暗号化 {#end-to-end-encryption-over-tlsssl}
 
 接続方法に関わらず、エンドツーエンド暗号化にはTLS/SSLの使用を強く推奨します。プライベートエンドポイント<CustomContent plan="dedicated">およびVPCピアリング</CustomContent>ネットワークパスを保護しますが、TLS/SSLはデータ自体を保護し、コンプライアンス要件を満たすのに役立ちます。
 
@@ -861,7 +861,7 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **�
 
 ソースデータベースの既存データのみをTiDB Cloudに移行するには、 **「既存データの移行」を**選択します。
 
-物理モードまたは論理モードを使用して、既存のデータを移行できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)参照してください。
+物理モードまたは論理モードを使用して、既存のデータを移行できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
 
 </CustomContent>
 
@@ -956,7 +956,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 -   移行ジョブの仕様を拡張するには、約5～10分かかります。
 -   スケーリングが失敗した場合、ジョブの仕様はスケーリング前と同じままになります。
 
-### 制限事項 {#limitations}
+### 制限事項 {#limitations-1}
 
 -   移行ジョブの仕様をスケーリングできるのは、ジョブが**「実行中」**または**「一時停止中」の**状態にある場合のみです。
 -   TiDB Cloudは、既存のデータエクスポート段階における移行ジョブ仕様のスケーリングをサポートしていません。

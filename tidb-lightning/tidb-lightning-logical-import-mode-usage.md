@@ -47,7 +47,7 @@ log-level = "error"
 
 ## 競合検出 {#conflict-detection}
 
-競合データとは、PK列またはUK列に同じデータを持つレコードが2つ以上存在する状態を指します。論理インポートモードでは、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)設定項目を設定することで、競合データの処理戦略を構成できます。TiDB Lightningは、この戦略に基づいて、異なるSQLステートメントを使用してデータをインポートします。
+競合データとは、PK列またはUK列に同じデータを持つレコードが2つ以上存在する状態を指します。論理インポートモードでは、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の設定項目を設定することで、競合データの処理戦略を構成できます。TiDB Lightningは、この戦略に基づいて、異なるSQLステートメントを使用してデータをインポートします。
 
 | 戦略          | 競合するデータのデフォルト動作                                           | 対応するSQL文                                                                                                             |
 | :---------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
@@ -73,4 +73,4 @@ log-level = "error"
     region-concurrency = 32
     ```
 
--   対象の TiDB クラスターで`raftstore.apply-pool-size`および`raftstore.store-pool-size`設定項目を調整すると、インポート速度が向上する可能性があります。
+-   対象の TiDB クラスターで`raftstore.apply-pool-size`および`raftstore.store-pool-size`の設定項目を調整すると、インポート速度が向上する可能性があります。

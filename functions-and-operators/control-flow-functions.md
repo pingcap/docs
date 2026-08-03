@@ -106,7 +106,7 @@ SELECT x, IFNULL(x,'x has no value') FROM data;
 
 ## NULLIF() {#nullif}
 
-[`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif)関数は、両方の引数が同じ場合、または最初の引数が`NULL`場合に`NULL`返します。それ以外の場合は、最初の引数を返します。
+[`NULLIF(expr1,expr2)`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif)関数は、両方の引数が同じ場合、または最初の引数が`NULL`の場合に`NULL`を返します。それ以外の場合は、最初の引数を返します。
 
 例：
 
@@ -131,4 +131,4 @@ SELECT n, NULLIF(n+n, n+2) FROM d;
     +----+------------------+
     10 rows in set (0.00 sec)
 
-この例では、 `n` `2`等しい場合、 `n+n`と`n+2`両方とも`4`等しくなり、両方の引数が同じになり、関数は`NULL`返します。
+この例では、 `n` `2`に等しい場合、 `n+n`と`n+2`両方とも`4`に等しくなり、両方の引数が同じになり、関数は`NULL`を返します。

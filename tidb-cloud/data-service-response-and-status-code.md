@@ -1,21 +1,21 @@
 ---
 title: Response and HTTP Status Codes of Data Service
-summary: このドキュメントでは、TiDB Cloudのデータサービスの応答と HTTP ステータス コードについて説明します。
+summary: このドキュメントでは、TiDB CloudのData Serviceの応答と HTTP ステータス コードについて説明します。
 ---
 
-# データサービスの応答とHTTPステータスコード {#response-and-http-status-codes-of-data-service}
+# Data Serviceの応答とHTTPステータスコード {#response-and-http-status-codes-of-data-service}
 
-データサービスで定義されたAPIエンドポイントを呼び出すと、データサービスはHTTPレスポンスを返します。このレスポンスの構造とステータスコードの意味を理解することは[データサービス](/tidb-cloud/data-service-overview.md)データサービスのエンドポイントから返されるデータを解釈する上で不可欠です。
+Data Serviceで定義されたAPIエンドポイントを呼び出すと、Data ServiceはHTTPレスポンスを返します。このレスポンスの構造とステータスコードの意味を理解することは、[Data Service](/tidb-cloud/data-service-overview.md)のエンドポイントから返されるデータを解釈する上で不可欠です。
 
-このドキュメントでは、TiDB Cloudのデータサービスの応答コードとステータスコードについて説明します。
+このドキュメントでは、TiDB CloudのData Serviceの応答コードとステータスコードについて説明します。
 
 ## 応答 {#response}
 
-データサービスは、JSON形式のボディを持つHTTPレスポンスを返します。
+Data Serviceは、JSON形式のボディを持つHTTPレスポンスを返します。
 
 > **Note:**
 >
-> 複数のSQL文を含むエンドポイントを呼び出すと、データサービスは文を一つずつ実行しますが、HTTPレスポンスには最後の文の実行結果のみを返します。
+> 複数のSQL文を含むエンドポイントを呼び出すと、Data Serviceは文を一つずつ実行しますが、HTTPレスポンスには最後の文の実行結果のみを返します。
 
 レスポンスボディには以下のフィールドが含まれます。
 
@@ -224,7 +224,7 @@ HTTPステータスコードが`200`で、 `data.result.code`フィールドに�
 
 ### 405 {#405}
 
-このステータスコードは、リクエストで許可されていないメソッドが使用されたことを示しています。データサービスは`GET`と`POST`のみをサポートしていることに注意してください。
+このステータスコードは、リクエストで許可されていないメソッドが使用されたことを示しています。Data Serviceは`GET`と`POST`のみをサポートしていることに注意してください。
 
 回答例は以下のとおりです。
 

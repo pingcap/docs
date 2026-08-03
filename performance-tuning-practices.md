@@ -161,7 +161,7 @@ QPSは24.4kから19.7kに低下しています。データベース時間の概�
 -   SQL タイプ別のデータベース時間: `Select`ステートメント タイプが最も時間がかかり、次に`general`ステートメントが続きます。
 -   SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
 -   SQL 実行時間の概要: `Get` `Prewrite`および`tso wait` `Cop`ほとんどの時間がかかります。
--   タイプ別 CPS: 3 種類のコマンド`StmtClose` `StmtPrepare` ) `StmtExecute`使用されます。
+-   タイプ別 CPS: 3 種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
 -   平均QPS = 19.7k (24.4kから19.7k)
 -   実行プラン キャッシュにヒットしません。
 
@@ -191,7 +191,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 ### アプリケーション構成 {#application-configuration}
 
-アプリケーション構成はシナリオ 3 と同じままです。アプリケーションが`StmtClose`トリガーしてもキャッシュにヒットしない問題を解決するために、次のパラメータが構成されています。
+アプリケーション構成はシナリオ 3 と同じままです。アプリケーションが`StmtClose`をトリガーしてもキャッシュにヒットしない問題を解決するために、次のパラメータが構成されています。
 
 -   TiDB グローバル変数`set global tidb_ignore_prepared_cache_close_stmt=on;`を設定します (TiDB v6.0.0 以降に導入、デフォルトは`off` )。
 -   プラン キャッシュ機能を有効にするには、TiDB 構成項目`prepared-plan-cache: {enabled: true}`を設定します。

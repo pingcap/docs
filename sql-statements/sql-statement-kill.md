@@ -70,7 +70,7 @@ Global Kill 機能が有効になっていない場合、または v6.1.0 より
 
 <CustomContent platform="tidb">
 
--   クライアントが常に同じTiDBインスタンスに接続されることが確実でない限り、設定ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)設定することは**強く推奨されません**。これは、デフォルトのMySQLクライアントで<kbd>Control+C</kbd>を押すと、新しい接続が開かれ、その中で`KILL`実行されるためです。クライアントとTiDBクラスタの間にプロキシが存在する場合、新しい接続が別のTiDBインスタンスにルーティングされ、誤って別のセッションが強制終了される可能性があります。
+-   クライアントが常に同じTiDBインスタンスに接続されることが確実でない限り、設定ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトのMySQLクライアントで<kbd>Control+C</kbd>を押すと、新しい接続が開かれ、その中で`KILL`が実行されるためです。クライアントとTiDBクラスタの間にプロキシが存在する場合、新しい接続が別のTiDBインスタンスにルーティングされ、誤って別のセッションが強制終了される可能性があります。
 
 </CustomContent>
 

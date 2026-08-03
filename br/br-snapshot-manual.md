@@ -148,7 +148,7 @@ BRはバックアップ側でのバックアップデータの暗号化と[Amazo
 
 TiDB v5.3.0 以降では、次のパラメータを設定することでバックアップ データを暗号化できます。
 
--   `--crypter.method` : 暗号化アルゴリズム`aes128-ctr` `aes192-ctr`または`aes256-ctr`いずれかになります。デフォルト値は`plaintext`で、データは暗号化されません。
+-   `--crypter.method` : 暗号化アルゴリズム`aes128-ctr` `aes192-ctr`または`aes256-ctr`のいずれかになります。デフォルト値は`plaintext`で、データは暗号化されません。
 -   `--crypter.key` : 16進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）、アルゴリズム`aes192-ctr`の場合は24バイト、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。
 -   `--crypter.key-file` : キーファイル。`crypter.key`を渡さずに、キーが保存されているファイルパスをパラメータとして直接渡すこともできます。
 
@@ -267,7 +267,7 @@ tiup br restore full \
     --log-file restorefull.log
 ```
 
-### <code>mysql</code>スキーマから実行プランバインディングを復元する {#restore-execution-plan-bindings-from-the-code-mysql-code-schema}
+### <code>mysql</code>スキーマから実行プランバインディングを復元する {#restore-execution-plan-bindings-from-the-mysql-schema}
 
 クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元する`mysql`スキーマを指定する`--filter`または`-f`オプションを含む`tiup br restore full`コマンドを実行します。
 

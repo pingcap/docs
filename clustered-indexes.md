@@ -61,7 +61,7 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-キーワード`CLUSTERED` / `NONCLUSTERED`明示的に指定しないステートメントの場合、デフォルトの動作はシステム変数[`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)によって制御されます。この変数でサポートされている値は次のとおりです。
+キーワード`CLUSTERED` / `NONCLUSTERED`を明示的に指定しないステートメントの場合、デフォルトの動作はシステム変数[`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)によって制御されます。この変数でサポートされている値は次のとおりです。
 
 -   `OFF`は、主キーがデフォルトで非クラスター化インデックスとして作成されることを示します。
 -   `ON`は、主キーがデフォルトでクラスター化インデックスとして作成されることを示します。

@@ -11,7 +11,7 @@ summary: TiDB でサポートされている文字セットと照合順序につ
 
 文字セットとは、記号とエンコーディングの集合です。TiDBのデフォルトの文字セットは`utf8mb4`で、これはMySQL 8.0以降のデフォルトの文字セットと一致します。
 
-照合順序とは、文字セット内の文字を比較するための規則と、文字の並び順のことです。例えば、バイナリ照合順序では、 `A`と`a`等しいとみなされません。
+照合順序とは、文字セット内の文字を比較するための規則と、文字の並び順のことです。例えば、バイナリ照合順序では、 `A`と`a`は等しいとみなされません。
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -172,9 +172,9 @@ GBK 文字セットの TiDB サポートの詳細については、 [GBK](/chara
 
 ## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
-MySQLでは、文字セット`utf8`最大3バイトに制限されています。これは基本多言語面（BMP）の文字を格納するには十分ですが、絵文字などの文字を格納するには不十分です。新規インストールの場合は、文字セット`utf8mb4`使用し、文字セット`utf8`から移行することをお勧めします。
+MySQLでは、文字セット`utf8`は最大3バイトに制限されています。これは基本多言語面（BMP）の文字を格納するには十分ですが、絵文字などの文字を格納するには不十分です。新規インストールの場合は、文字セット`utf8mb4`を使用し、文字セット`utf8`から移行することをお勧めします。
 
-MySQL と TiDB の両方で、 `utf8`と`utf8mb3`同じ文字セットのエイリアスです。
+MySQL と TiDB の両方で、 `utf8`と`utf8mb3`は同じ文字セットのエイリアスです。
 
 TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にすることができます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`を使用することをお勧めします。
 
@@ -400,7 +400,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE`はオプションです。指定しない場合は、デフォルトの照合順序`charset_name`を使用して`collation_connection`設定されます。
+    `COLLATE`はオプションです。指定しない場合は、デフォルトの照合順序`charset_name`を使用して`collation_connection`が設定されます。
 
 -   `SET CHARACTER SET 'charset_name'`
 
@@ -425,7 +425,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
-指定された文字セットが`utf8`または`utf8mb4`場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
+指定された文字セットが`utf8`または`utf8mb4`の場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。TiDB のこの文字の有効性チェックは MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
 
 このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
 
@@ -578,8 +578,8 @@ TiDBは照合順序を推論する際に、強制性値の低い式の照合順�
 
 次の状況では、TiDB は照合順序を推測できず、エラーを報告します。
 
--   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`場合。
--   2 つの句の照合順序に互換性がなく、返される式の型が`String`場合。
+-   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`の場合。
+-   2 つの句の照合順序に互換性がなく、返される式の型が`String`の場合。
 
 ## <code>COLLATE</code>句 {#code-collate-code-clause}
 

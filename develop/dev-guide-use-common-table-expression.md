@@ -159,7 +159,7 @@ FROM
 
 まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と順位をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-`books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。3 と`books_with_orders` `books_with_average_ratings`クエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
+`books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。`books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
 
 > **Tip:**
 >

@@ -99,7 +99,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         ssh-copy-id tidb@host
         ```
 
-        `host`ターゲット マシンのホスト名に置き換え、クラスター内の他の各マシンでこのコマンドを実行する必要があります。
+        `host`をターゲット マシンのホスト名に置き換え、クラスター内の他の各マシンでこのコマンドを実行する必要があります。
 
     -   別の方法で公開鍵をコピーする場合は、コピー後に`/home/tidb/.ssh/authorized_keys`ファイルの権限を必ず確認してください。
 
@@ -118,7 +118,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
 
 2.  トポロジ ファイルを編集します。
 
-    通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`行目を追加する必要があります。7パラメータ`systemd_mode` 、 `systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
+    通常モードと比較して、 TiUPをno-sudoモードで使用する場合は、 `topology.yaml`ファイルの`global`モジュールに`systemd_mode: "user"`行を追加する必要があります。7パラメータ`systemd_mode` 、 `systemd user`モードを使用するかどうかを設定するために使用されます。このパラメータが設定されていない場合、デフォルト値は`system`で、sudo権限が必要であることを意味します。
 
     さらに、no-sudoモードでは、非rootユーザー`tidb`は`/data`ディレクトリを`deploy_dir`または`data_dir`として使用する権限がないため、非rootユーザーがアクセスできるパスを選択する必要があります。以下の例では相対パスを使用しており、実際に使用されるパスは`/home/tidb/data/tidb-deploy`と`/home/tidb/data/tidb-data`です。トポロジファイルの残りの部分は、通常モードと同じです。別の方法として、rootユーザーを使用してディレクトリを作成し、その後`chown`を使用して所有権を`tidb:tidb`に変更することもできます。
 
@@ -164,7 +164,7 @@ no-sudoモードでは、 `tidb`ユーザーにはsudo権限がありません�
 
 ## クラスターのデプロイと管理 {#deploy-and-manage-the-cluster}
 
-前の手順で作成した`tidb`ユーザーを使用し、新しいユーザーを作成しないようにするには、次の`deploy`コマンドを実行するときに`--user tidb`追加します。
+前の手順で作成した`tidb`ユーザーを使用し、新しいユーザーを作成しないようにするには、次の`deploy`コマンドを実行するときに`--user tidb`を追加します。
 
 ```shell
 tiup cluster deploy mycluster v8.5.0 topology.yaml --user tidb
@@ -172,7 +172,7 @@ tiup cluster deploy mycluster v8.5.0 topology.yaml --user tidb
 
 > **Note:**
 >
-> 上記のコマンドの`v8.5.0` 、デプロイする TiDB バージョンに置き換え、 `mycluster`クラスターに付ける名前に置き換える必要があります。
+> 上記のコマンドの`v8.5.0`を、デプロイする TiDB バージョンに置き換え、 `mycluster`クラスターに付ける名前に置き換える必要があります。
 
 クラスターを起動します。
 

@@ -61,9 +61,9 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `WITH NUM BUCKETS`生成されるヒストグラムのバケットの最大数を指定します。
+-   `WITH NUM BUCKETS`は生成されるヒストグラムのバケットの最大数を指定します。
 
--   `WITH NUM TOPN`生成される`TOPN`の最大数を指定します。
+-   `WITH NUM TOPN`は生成される`TOPN`の最大数を指定します。
 
 -   `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
 
@@ -120,7 +120,7 @@ TiDB は上位 N 個の値とその出現回数を記録します。ここでは
 
 ### 指標に関する統計情報を収集する {#collect-statistics-on-indexes}
 
-`IndexNameList` `TableName`内のすべてのインデックスに関する統計情報を収集するには、次の構文を使用します。
+`TableName`内の`IndexNameList`のすべてのインデックスに関する統計情報を収集するには、次の構文を使用します。
 
 ```sql
 ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -149,7 +149,7 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    構文では、 `ColumnNameList`対象列の名前リストを指定します。複数の列を指定する必要がある場合は、列名をカンマ`,`で区切ります。たとえば、 `ANALYZE table t columns a, b`のように指定します。この構文では、特定のテーブルの特定の列に関する統計情報を収集するだけでなく、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報も同時に収集します。
+    構文では、 `ColumnNameList`は対象列の名前リストを指定します。複数の列を指定する必要がある場合は、列名をカンマ`,`で区切ります。たとえば、 `ANALYZE table t columns a, b`のように指定します。この構文では、特定のテーブルの特定の列に関する統計情報を収集するだけでなく、そのテーブルのインデックス付き列とすべてのインデックスに関する統計情報も同時に収集します。
 
 -   `PREDICATE COLUMNS`に関する統計情報を収集するには、次の構文を使用します。
 
@@ -190,7 +190,7 @@ TiDB が SQL ステートメントを実行する際、オプティマイザは�
     ANALYZE TABLE TableName PARTITION PartitionNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `PartitionNameList` `TableName`のすべてのパーティションのインデックス統計情報を収集するには、次の構文を使用します。
+-   `PartitionNameList`内の`TableName`のすべてのパーティションのインデックス統計情報を収集するには、次の構文を使用します。
 
     ```sql
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
@@ -235,7 +235,7 @@ TiDBは、統計情報の収集パフォーマンスを向上させるための2
 
 サンプリングは`ANALYZE`ステートメントの 2 つのオプションで利用可能であり、それぞれ異なる収集アルゴリズムに対応しています。
 
--   `WITH NUM SAMPLES` TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
+-   `WITH NUM SAMPLES`は、TiDB のリザーバーサンプリング方式で実装されているサンプリングセットのサイズを指定します。テーブルが大きい場合、この方式を使用して統計情報を収集することは推奨されません。リザーバーサンプリングの中間結果セットには冗長な結果が含まれるため、メモリなどのリソースに余分な負荷がかかります。
 -   `WITH FLOAT_NUM SAMPLERATE`は、v5.3.0 で導入されたサンプリング方法です。値の範囲`(0, 1]`を指定することで、サンプリングレートを設定できます。TiDB ではベルヌーイサンプリング方式で実装されており、大規模なテーブルのサンプリングに適しており、収集効率とリソース使用量の面で優れたパフォーマンスを発揮します。
 
 バージョン5.3.0より前は、TiDBはリザーバーサンプリング方式を使用して統計情報を収集していました。バージョン5.3.0以降、TiDBバージョン2の統計情報は、デフォルトでベルヌーイサンプリング方式を使用して統計情報を収集します。リザーバーサンプリング方式を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
@@ -244,7 +244,7 @@ TiDBは、統計情報の収集パフォーマンスを向上させるための2
 
 > **Note:**
 >
-> 通常、 `STATS_META` `APPROXIMATE_KEYS`よりも信頼性が高いです。ただし、 `STATS_META`の結果が`APPROXIMATE_KEYS`の結果よりもはるかに小さい場合は、 `APPROXIMATE_KEYS`を使用してサンプリングレートを計算することをお勧めします。
+> 通常、 `STATS_META`は`APPROXIMATE_KEYS`よりも信頼性が高いです。ただし、 `STATS_META`の結果が`APPROXIMATE_KEYS`の結果よりもはるかに小さい場合は、 `APPROXIMATE_KEYS`を使用してサンプリングレートを計算することをお勧めします。
 
 ### 統計情報を収集するためのメモリ割り当て {#the-memory-quota-for-collecting-statistics}
 
@@ -300,7 +300,7 @@ auto analyze操作に使用される特定のテーブルに保持されてい�
 SELECT sample_num, sample_rate, buckets, topn, column_choice, column_ids FROM mysql.analyze_options opt JOIN information_schema.tables tbl ON opt.table_id = tbl.tidb_table_id WHERE tbl.table_schema = '{db_name}' AND tbl.table_name = '{table_name}';
 ```
 
-TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`ステートメントの上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 `ANALYZE`と同様に、自動`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;` 。
+TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。たとえば、 `ANALYZE TABLE t WITH 200 TOPN;`を実行すると、 `ANALYZE`ステートメントの上位 200 個の値が設定されます。その後、 `ANALYZE TABLE t WITH 0.1 SAMPLERATE;`を実行すると、 自動`ANALYZE`ステートメントに上位200個の値とサンプリングレート0.1の両方を設定します。これは`ANALYZE TABLE t WITH 200 TOPN, 0.1 SAMPLERATE;`と同様です。
 
 ### ANALYZE構成の永続化を無効にする {#disable-analyze-configuration-persistence}
 
@@ -314,7 +314,7 @@ TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構
 
 ### 列構成を保持する {#persist-column-configurations}
 
-`ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、{{B-PLACEHOLDER-2-PLACEHOLDER- `PREDICATE COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options` `ALL COLUMNS`変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
+`ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
 
 -   TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
 -   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
@@ -421,7 +421,7 @@ TiDB v6.1.0 以降では、 `SHOW ANALYZE STATUS`ステートメントでクラ�
 
 `SHOW ANALYZE STATUS`には、最新のタスク記録のみが表示されます。TiDB v6.1.0 以降では、システムテーブル`mysql.analyze_jobs`を通じて、過去 7 日間の履歴タスクを表示できます。
 
-[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定されていて、TiDB のバックグラウンドで実行されている自動タスク`ANALYZE`このしきい値を超えるメモリを使用している場合、タスクは再試行されます。失敗したタスクと再試行されたタスクは`SHOW ANALYZE STATUS`ステートメントの出力で確認できます。
+[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定されていて、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用している場合、タスクは再試行されます。失敗したタスクと再試行されたタスクは`SHOW ANALYZE STATUS`ステートメントの出力で確認できます。
 
 [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が 0 より大きく、TiDB のバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超える時間がかかった場合、タスクは終了します。
 

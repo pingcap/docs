@@ -66,7 +66,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
           file_name = "your_csv_path"
         }
 
-    ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。1 の詳細は`csv_format` [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)記載されています。
+    ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
 3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
 
@@ -241,7 +241,7 @@ summary: tidbcloud_import` リソースを使用してインポート タスク�
 
 Terraform の場合、インポート タスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
 
-`COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`返されます。
+`COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
 
     $ terraform destroy
     ...

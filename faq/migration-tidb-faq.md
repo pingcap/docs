@@ -88,7 +88,7 @@ Db2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 現在はOGGの使用が推奨されています。
 
-### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに<code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexception-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
+### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに<code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットすることを意味しますが、デフォルトでは各`statement`に100個のSQL文が含まれます。つまり、100 * 100 = 10000個のSQL文となり、単一のTiDBトランザクションで許可される最大SQL文数である5000を超えてしまいます。
 
@@ -109,7 +109,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 -   単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
 
-### Dumpling がテーブルをエクスポートするときに<code>The local disk space is insufficient</code>エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-code-the-local-disk-space-is-insufficient-code-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
+### Dumpling がテーブルをエクスポートするときに<code>The local disk space is insufficient</code>エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には次の原因が考えられます。
 
@@ -138,7 +138,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やすことができます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やすことができます。
 
-### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-code-transaction-too-large-code-is-displayed}
+### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-transaction-too-large-is-displayed}
 
 基盤となるストレージエンジンの制限により、TiDB の各キーと値のエントリ（1行）は 6MB 以下にする必要があります。1 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)設定値は最大 120MB まで調整できます。
 
@@ -158,7 +158,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 いいえ。データをロードするときに、ターゲット テーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
 
-### TiDB は<code>replace into</code>構文をサポートしていますか? {#does-tidb-support-the-code-replace-into-code-syntax}
+### TiDB は<code>replace into</code>構文をサポートしていますか? {#does-tidb-support-the-replace-into-syntax}
 
 はい。
 
@@ -168,7 +168,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### データを削除する最も効率的な方法は何ですか? {#what-is-the-most-efficient-way-of-deleting-data}
 
-大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`使用をお勧めします。これはループを通して削除を行い、 `Affected Rows == 0`ループ終了条件として使用することで、トランザクションサイズの制限を超えないようにします。ビジネスフィルタリングロジックを満たすことを前提として、強力なフィルターインデックス列を追加するか、 `id >= 5000*n+m and id < 5000*(n+1)+m`のように主キーを直接使用して範囲を選択することをお勧めします。
+大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`の使用をお勧めします。これはループを通して削除を行い、 `Affected Rows == 0`をループ終了条件として使用することで、トランザクションサイズの制限を超えないようにします。ビジネスフィルタリングロジックを満たすことを前提として、強力なフィルターインデックス列を追加するか、 `id >= 5000*n+m and id < 5000*(n+1)+m`のように主キーを直接使用して範囲を選択することをお勧めします。
 
 一度に削除する必要があるデータの量が非常に多い場合、このループメソッドは削除処理が後方に移動するにつれて速度が低下します。前のデータを削除した後、多くの削除フラグが短期間残り（その後、すべてガベージコレクションによって処理されます）、後続のDelete文に影響を与えます。可能であれば、Where条件を絞り込むことをお勧めします。[TiDB ベストプラクティスの詳細](https://www.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 

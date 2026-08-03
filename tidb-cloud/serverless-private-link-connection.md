@@ -212,7 +212,7 @@ TiDB Cloudコンソールを使用してドメインをプライベート リン
 
 5.  **[ドメインの接続]**ダイアログで、ドメインの種類を選択します。
 
-    -   **TiDB Cloud管理**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **「ドメインをアタッチ」**をクリックして確定します。
+    -   **TiDB Cloud管理**：ドメインはTiDB Cloudによって自動的に生成されます。生成されたドメインの名前には、そのドメインの一意の名前が付与されます。例えば、生成されたドメインが`*.use1-az1.dvs6nl5jgveztmla3pxkxgh76i.aws.plc.tidbcloud.com`の場合、一意の名前は`dvs6nl5jgveztmla3pxkxgh76i`になります。 **「ドメインをアタッチ」**をクリックして確定します。
     -   **Confluent Cloud** : Confluent Cloud Dedicatedクラスタからドメインを生成するために提供された一意の名前を入力し、 **「ドメインをアタッチ」を**クリックして確定します。一意の名前の取得方法の詳細については、 [プライベートリンク接続を介してConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md#step-1-set-up-a-confluent-cloud-network)を参照してください。
 
 </div>

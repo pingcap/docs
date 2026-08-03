@@ -59,7 +59,7 @@ summary: TiCDC でサポートされている DDL ステートメントといく
 
 ## DDLレプリケーションの考慮事項 {#ddl-replication-considerations}
 
-### <code>ADD INDEX</code>および<code>CREATE INDEX</code> DDL の非同期実行 {#asynchronous-execution-of-code-add-index-code-and-code-create-index-code-ddls}
+### <code>ADD INDEX</code>および<code>CREATE INDEX</code> DDL の非同期実行 {#asynchronous-execution-of-add-index-and-create-index-ddls}
 
 ダウンストリームがTiDBの場合、TiCDCは`ADD INDEX`と`CREATE INDEX` DDL操作を非同期的に実行し、変更フィードレプリケーションのレイテンシーへの影響を最小限に抑えます。つまり、 `ADD INDEX`と`CREATE INDEX` DDLをダウンストリームTiDBにレプリケーションして実行した後、TiCDCはDDL実行の完了を待たずに直ちに戻ります。これにより、後続のDML実行がブロックされることを回避できます。
 

@@ -20,7 +20,7 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 | `-d <directory>`                                      | ローカル ディレクトリまたはデータ ファイルの[外部ストレージURI](/external-storage-uri.md) 。                                                                                                                 | `mydumper.data-source-dir`     |
 | `-L <level>`                                          | ログ`info` : `debug` 、または`error` `warn`は`info` `fatal` 。                                                                                                                            | `lightning.level`              |
 | `-f <rule>`                                           | [テーブルフィルタルール](/table-filter.md) 。複数回指定できます。                                                                                                                                       | `mydumper.filter`              |
-| `--backend <backend>`                                 | インポート モードを選択します。1 は`local` 、 `tidb` [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md) [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)指します。 | `tikv-importer.backend`        |
+| `--backend <backend>`                                 | インポート モードを選択します。`local`は[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を、 `tidb`は[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を指します。 | `tikv-importer.backend`        |
 | `--log-file <file>`                                   | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。「-」に設定すると、ログファイルは標準出力に出力されます。                                                                                                 | `lightning.log-file`           |
 | `--status-addr <ip:port>`                             | TiDB Lightning HTTPサーバーのリスニング アドレス                                                                                                                                                | `lightning.status-addr`        |
 | `--pd-urls <host1:port1,host2:port2,...,hostn:portn>` | PDエンドポイントアドレス。v7.6.0以降、TiDBは複数のPDアドレスの設定をサポートします。                                                                                                                                 | `tidb.pd-addr`                 |
@@ -56,4 +56,4 @@ TiDB Lightning は、設定ファイルまたはコマンドラインから設�
 | `--checkpoint-error-ignore <table_name>`  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します。           |
 | `--checkpoint-remove <table_name>`        | テーブルのチェックポイントを無条件に削除します。                         |
 
-`<table_name>` 、形式`` `db`.`tbl` `` (バッククォートを含む) の修飾されたテーブル名、またはキーワード`all`いずれかである必要があります。
+`<table_name>`は、形式`` `db`.`tbl` `` (バッククォートを含む) の修飾されたテーブル名、またはキーワード`all`のいずれかである必要があります。

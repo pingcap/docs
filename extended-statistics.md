@@ -57,11 +57,11 @@ ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(co
 
 <details><summary>仕組み</summary>
 
-アクセスパフォーマンスを向上させるため、各TiDBノードはシステムテーブル`mysql.stats_extended`に拡張統計用のキャッシュを保持します。拡張統計オブジェクトを作成した後、次に`ANALYZE`ステートメントが実行されると、システムテーブル`mysql.stats_extended`対応するオブジェクトが存在する場合、TiDBは拡張統計を収集します。
+アクセスパフォーマンスを向上させるため、各TiDBノードはシステムテーブル`mysql.stats_extended`に拡張統計用のキャッシュを保持します。拡張統計オブジェクトを作成した後、次に`ANALYZE`ステートメントが実行されると、システムテーブル`mysql.stats_extended`に対応するオブジェクトが存在する場合、TiDBは拡張統計を収集します。
 
 `mysql.stats_extended`テーブルの各行には`version`列があります。行が更新されるたびに、 `version`の値が増加します。このように、TiDB はテーブルをメモリに完全にロードするのではなく、段階的にロードします。
 
-TiDB は、キャッシュがテーブル内のデータと同じ状態に維持されるように、定期的に`mysql.stats_extended`ロードします。
+TiDB は、キャッシュがテーブル内のデータと同じ状態に維持されるように、定期的に`mysql.stats_extended`をロードします。
 
 > **Warning:**
 >
@@ -111,7 +111,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### ステップ1. テーブルを定義する {#step-1-define-the-table}
 
-テーブル`t`次のように定義します。
+テーブル`t`を次のように定義します。
 
 ```sql
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
@@ -127,12 +127,12 @@ CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ```
 
-上記のクエリを実行する場合、TiDB オプティマイザーにはテーブル`t`アクセスするための次のオプションがあります。
+上記のクエリを実行する場合、TiDB オプティマイザーにはテーブル`t`にアクセスするための次のオプションがあります。
 
 -   `col1`のインデックスを使用してテーブル`t`にアクセスし、結果を`col2`でソートして`Top-1`を計算します。
 -   `col2`のインデックスを使用して、 `col1 > 1`満たす最初の行を検索します。このアクセス方法のコストは、TiDBが`col2`の順序でテーブルをスキャンする際に、どれだけの行がフィルタリングされるかに主に依存します。
 
-拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`独立していると想定するだけなので、**大きな推定誤差が生じます**。
+拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`が独立していると想定するだけなので、**大きな推定誤差が生じます**。
 
 ### ステップ3. 拡張統計を有効にする {#step-3-enable-extended-statistics}
 
@@ -148,7 +148,7 @@ ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 
 TiDB が相関関係の拡張統計を取得すると、オプティマイザーはスキャンする行数をより正確に見積もることができます。
 
-この時点で、 [ステージ2. 拡張統計なしでサンプルクエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1`と`col2`厳密に順序付けされています。TiDBが`col2`のインデックスを使用してテーブル`t`アクセスし、 `col1 > 1`満たす最初の行を検索すると、TiDBオプティマイザは行数推定を次のクエリに変換します。
+この時点で、 [ステージ2. 拡張統計なしでサンプルクエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1`と`col2`厳密に順序付けされています。TiDBが`col2`のインデックスを使用してテーブル`t`にアクセスし、 `col1 > 1`満たす最初の行を検索すると、TiDBオプティマイザは行数推定を次のクエリに変換します。
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;

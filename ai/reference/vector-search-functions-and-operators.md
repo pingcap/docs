@@ -98,9 +98,9 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 
 `CAST()`使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)を参照してください。
 
-## 完全な参考文献 {#full-references}
+## 完全なリファレンス {#full-references}
 
-### VEC_L2_距離 {#vec-l2-distance}
+### VEC_L2_DISTANCE {#vec_l2_distance}
 
 ```sql
 VEC_L2_DISTANCE(vector1, vector2)
@@ -124,13 +124,13 @@ SELECT VEC_L2_DISTANCE('[0, 3]', '[4, 0]');
     |                                   5 |
     +-------------------------------------+
 
-### VEC_COSINE_DISTANCE {#vec-cosine-distance}
+### VEC_COSINE_DISTANCE {#vec_cosine_distance}
 
 ```sql
 VEC_COSINE_DISTANCE(vector1, vector2)
 ```
 
-次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)計算します。
+次の式を使用して 2 つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
 
 $距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}}\cdot {\sqrt {\sum \limits *{i=1}^{n}{q* {i}^{2}}}}}}$
 
@@ -150,7 +150,7 @@ SELECT VEC_COSINE_DISTANCE('[1, 1]', '[-1, -1]');
     |                                         2 |
     +-------------------------------------------+
 
-### VEC_負の内部積 {#vec-negative-inner-product}
+### VEC_NEGATIVE_INNER_PRODUCT {#vec_negative_inner_product}
 
 ```sql
 VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
@@ -174,7 +174,7 @@ SELECT VEC_NEGATIVE_INNER_PRODUCT('[1, 2]', '[3, 4]');
     |                                            -11 |
     +------------------------------------------------+
 
-### VEC_L1_距離 {#vec-l1-distance}
+### VEC_L1_DISTANCE {#vec_l1_distance}
 
 ```sql
 VEC_L1_DISTANCE(vector1, vector2)
@@ -198,7 +198,7 @@ SELECT VEC_L1_DISTANCE('[0, 0]', '[3, 4]');
     |                                   7 |
     +-------------------------------------+
 
-### VEC_DIMS {#vec-dims}
+### VEC_DIMS {#vec_dims}
 
 ```sql
 VEC_DIMS(vector)
@@ -228,7 +228,7 @@ SELECT VEC_DIMS('[]');
     |              0 |
     +----------------+
 
-### VEC_L2_NORM {#vec-l2-norm}
+### VEC_L2_NORM {#vec_l2_norm}
 
 ```sql
 VEC_L2_NORM(vector)
@@ -250,7 +250,7 @@ SELECT VEC_L2_NORM('[3, 4]');
     |                     5 |
     +-----------------------+
 
-### VEC_FROM_TEXT {#vec-from-text}
+### VEC_FROM_TEXT {#vec_from_text}
 
 ```sql
 VEC_FROM_TEXT(string)
@@ -270,7 +270,7 @@ SELECT VEC_FROM_TEXT('[1, 2]') + VEC_FROM_TEXT('[3, 4]');
     | [4,6]                                           |
     +-------------------------------------------------+
 
-### VEC_AS_TEXT {#vec-as-text}
+### VEC_AS_TEXT {#vec_as_text}
 
 ```sql
 VEC_AS_TEXT(vector)

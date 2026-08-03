@@ -55,7 +55,7 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
 ## <code>IMPORT INTO</code>のシナリオ {#scenarios-for-code-import-into-code}
 
-このセクションでは、 `IMPORT INTO` [ログバックアップ](/br/br-pitr-guide.md)および[TiCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
+このセクションでは、 `IMPORT INTO`を[ログバックアップ](/br/br-pitr-guide.md)および[TiCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
 
 ### ログバックアップで使用される {#used-with-log-backup}
 

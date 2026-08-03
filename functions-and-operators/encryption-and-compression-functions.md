@@ -25,7 +25,7 @@ TiDB は、MySQL 8.0 で利用可能な[暗号化および圧縮関数](https://
 | [`UNCOMPRESSED_LENGTH()`](#uncompressed_length)               | 圧縮前の文字列の長さを返す           |
 | [`VALIDATE_PASSWORD_STRENGTH()`](#validate_password_strength) | パスワードの強度を検証する           |
 
-### `AES_DECRYPT()` {#aes-decrypt}
+### `AES_DECRYPT()` {#aes_decrypt}
 
 `AES_DECRYPT(data, key [,iv])`関数は、同じ`key`を使用して[`AES_ENCRYPT()`](#aes_encrypt)関数を使用して以前に暗号化された`data`復号化します。
 
@@ -44,7 +44,7 @@ SELECT AES_DECRYPT(0x28409970815CD536428876175F1A4923, 'secret');
     +----------------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `AES_ENCRYPT()` {#aes-encrypt}
+### `AES_ENCRYPT()` {#aes_encrypt}
 
 `AES_ENCRYPT(data, key [,iv])`関数は、 [高度暗号化規格（AES）](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)アルゴリズムを使用して`data` `key`で暗号化します。
 
@@ -67,7 +67,7 @@ SELECT AES_ENCRYPT(0x616263,'secret');
 
 `COMPRESS(expr)`関数は入力データ`expr`の圧縮バージョンを返します。
 
--   引数が`NULL`の場合、関数は`NULL`返します。
+-   引数が`NULL`の場合、関数は`NULL`を返します。
 -   引数が空の文字列の場合、関数は長さ 0 の値を返します。
 
 長さがゼロ以外の引数の場合、関数は次の構造を持つバイナリ文字列を返します。
@@ -149,7 +149,7 @@ SELECT PASSWORD('secret');
 
     Warning (Code 1681): PASSWORD is deprecated and will be removed in a future release.
 
-### `RANDOM_BYTES()` {#random-bytes}
+### `RANDOM_BYTES()` {#random_bytes}
 
 `RANDOM_BYTES(n)`関数は`n`ランダム バイトを返します。
 
@@ -242,7 +242,7 @@ SELECT UNCOMPRESS(0x03000000789C72747206040000FFFF018D00C7);
     +------------------------------------------------------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `UNCOMPRESSED_LENGTH()` {#uncompressed-length}
+### `UNCOMPRESSED_LENGTH()` {#uncompressed_length}
 
 `UNCOMPRESSED_LENGTH(data)`関数は、圧縮データの最初の 4 バイトを返します。これには、 [`COMPRESS()`](#compress)関数で圧縮される前の圧縮文字列の長さが格納されます。
 
@@ -257,7 +257,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
     +---------------------------------------------------------------+
     1 row in set (0.00 sec)
 
-### `VALIDATE_PASSWORD_STRENGTH()` {#validate-password-strength}
+### `VALIDATE_PASSWORD_STRENGTH()` {#validate_password_strength}
 
 <CustomContent platform="tidb">
 
@@ -327,7 +327,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
         +--------------------------------------+
         1 row in set (0.00 sec)
 
--   長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
+-   長い文字列`abcdefghi`のパスワード強度をチェックすると、 `50`が返されます。この文字列はデフォルト値の[`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)よりも長いです。
 
     ```sql
     SELECT VALIDATE_PASSWORD_STRENGTH('abcdefghi');

@@ -29,7 +29,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## Exchange 演算子 {#exchange-operators}
 
-`ExchangeReceiver`と`ExchangeSender` 、MPP実行プランに特有の2つの交換演算子です。4 演算子`ExchangeReceiver`下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
+`ExchangeReceiver`と`ExchangeSender`は、MPP実行プランに特有の2つの交換演算子です。`ExchangeReceiver`演算子は下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
 
 以下は単純な MPP 実行プランです。
 
@@ -100,9 +100,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 上記の実行プランでは、
 
--   クエリ フラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`テーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
--   クエリ フラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`テーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
--   クエリ フラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`すべてのデータを結合し、TiDB に返します。
+-   クエリ フラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`はテーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリ フラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`はテーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
+-   クエリ フラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`はすべてのデータを結合し、TiDB に返します。
 
 Broadcast Join の一般的な実行プランは次のとおりです。
 
@@ -130,7 +130,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 上記の実行プランでは、
 
 -   クエリ フラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]` 、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) のデータを含む各ノードにデータをブロードキャストします。
--   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`すべてのデータを結合し、TiDB に返します。
+-   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、TiDB に返します。
 
 ## MPPモードでの<code>EXPLAIN ANALYZE</code>文 {#code-explain-analyze-code-statements-in-the-mpp-mode}
 
@@ -161,7 +161,7 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## MPPバージョンと交換データ圧縮 {#mpp-version-and-exchange-data-compression}
 
-v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression` MPP 実行プランに追加されます。
+v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression`がMPP 実行プランに追加されます。
 
 -   `MppVersion` : MPP 実行プランのバージョン番号。システム変数[`mpp_version`](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
 -   `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)で設定できます。データ圧縮が有効になっていない場合、このフィールドは実行プランに表示されません。
@@ -187,4 +187,4 @@ mysql > EXPLAIN SELECT COUNT(*) AS count_order FROM lineitem GROUP BY l_returnfl
 +----------------------------------------+--------------+--------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`構築しています。タイプ`HashPartition`の`ExchangeSender`演算子はデータ圧縮モード`FAST`を使用しています。タイプ`PassThrough`の`ExchangeSender`演算子ではデータ圧縮は有効になっていません。
+上記の実行計画結果では、TiDBはバージョン`1`のMPP実行計画を使用して`TableReader`を構築しています。タイプ`HashPartition`の`ExchangeSender`演算子はデータ圧縮モード`FAST`を使用しています。タイプ`PassThrough`の`ExchangeSender`演算子ではデータ圧縮は有効になっていません。

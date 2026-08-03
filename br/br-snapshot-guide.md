@@ -134,7 +134,7 @@ tiup br restore table --pd "${PD_IP}:2379" \
 
 **テーブルフィルターを使用して複数のテーブルを復元します。**
 
-より複雑なフィルタルールを持つ複数のテーブルを復元するには、 `tiup br restore full`コマンド[テーブルフィルター](/table-filter.md)実行し、 `--filter`または`-f`を使用してテーブルを指定します。次の例では`db*.tbl*`フィルタルールに一致するテーブルをバックアップデータからターゲットクラスタに復元します。
+より複雑なフィルタルールを持つ複数のテーブルを復元するには、 `tiup br restore full`コマンドを実行し、 `--filter`または`-f`を使用して[テーブルフィルター](/table-filter.md)を指定します。次の例では`db*.tbl*`フィルタルールに一致するテーブルをバックアップデータからターゲットクラスタに復元します。
 
 ```shell
 tiup br restore full \
@@ -143,7 +143,7 @@ tiup br restore full \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-### <code>mysql</code>スキーマ内のテーブルを復元する {#restore-tables-in-the-code-mysql-code-schema}
+### <code>mysql</code>スキーマ内のテーブルを復元する {#restore-tables-in-the-mysql-schema}
 
 -   BR v5.1.0以降では、スナップショットをバックアップすると、 BRは`mysql`スキーマ内の**システムテーブルを**自動的にバックアップしますが、デフォルトではこれらのシステムテーブルを復元しません。
 -   バージョン6.2.0以降、 BRでは`--with-sys-table`を指定して、**一部のシステムテーブルのデータを**復元できます。

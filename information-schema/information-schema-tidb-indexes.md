@@ -32,7 +32,7 @@ DESC tidb_indexes;
 
 `INDEX_ID`はTiDBが各インデックスに割り当てる一意のIDです。別のテーブルまたはAPIから取得した`INDEX_ID`と結合操作を行うために使用できます。
 
-たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)のスロークエリに関係する`TABLE_ID`と`INDEX_ID`取得し、次の SQL ステートメントを使用して特定のインデックス情報を取得できます。
+たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)のスロークエリに関係する`TABLE_ID`と`INDEX_ID`を取得し、次の SQL ステートメントを使用して特定のインデックス情報を取得できます。
 
 ```sql
 SELECT

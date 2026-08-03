@@ -48,7 +48,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
 
--   サーバーの負荷が高いです。ログには`server is likely overloaded`表示されています。
+-   サーバーの負荷が高いです。ログには`server is likely overloaded`が表示されています。
 
 -   PD がLeaderを選出できません: PD ログには`lease is not expired`表示されます。3 [この号](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。
 
@@ -56,7 +56,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー****モニター**にアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
--   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
+-   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
 
 -   `/api/v1/regions`インターフェースを使用する場合、リージョンが多すぎるとPD OOMが発生する可能性があります。この問題はv3.0.8 ( [＃1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
@@ -82,7 +82,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整しているため、TiKV がハングします。
 
--   モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`表示されているかどうかを確認してください。
+-   モニターを確認してください：TiKV RocksDB が書き込みストールに遭遇し、再選出が行われます。モニター**Grafana** -&gt; **TiKV-details** -&gt; **errors**に`server is busy`が表示されているかどうかを確認してください。
 
 -   ネットワーク分離のため再選。
 

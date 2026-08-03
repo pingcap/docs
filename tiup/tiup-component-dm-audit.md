@@ -13,8 +13,8 @@ summary: tiup dm audit`コマンドは、全クラスタで実行されたコマ
 tiup dm audit [audit-id] [flags]
 ```
 
--   `[audit-id]`記入しない場合、操作記録表は逆時系列で出力されます。最初の列は`audit-id`です。
--   `[audit-id]`記入すると、指定した`audit-id`の実行ログがチェックされます。
+-   `[audit-id]`を記入しない場合、操作記録表は逆時系列で出力されます。最初の列は`audit-id`です。
+-   `[audit-id]`を記入すると、指定した`audit-id`の実行ログがチェックされます。
 
 ## オプション {#option}
 

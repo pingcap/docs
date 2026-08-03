@@ -10,8 +10,8 @@ summary: 2023 年 9 月 26 日のTiDB Cloud Console メンテナンスの詳細 
 ## メンテナンスウィンドウ {#maintenance-window}
 
 -   日付: 2023-09-26
--   開始時間: 8:00 (UTC+0)
--   終了時間: 8:30 (UTC+0)
+-   開始時刻: 8:00 (UTC+0)
+-   終了時刻: 8:30 (UTC+0)
 -   所要時間: 約30分
 
 > **Note:**
@@ -70,7 +70,7 @@ TiDB Cloud Starterの管理インフラストラクチャをアップグレー�
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
 -   [APIリクエスト](https://docs.pingcap.com/tidbcloud/api/v1beta)すべてに500が返答されます。
--   [データサービスAPI](https://docs.pingcap.com/tidbcloud/data-service-overview)は影響を受けません。
+-   [Data Service API](https://docs.pingcap.com/tidbcloud/data-service-overview)は影響を受けません。
 
 ## 完了と再開 {#completion-and-resumption}
 

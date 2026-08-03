@@ -29,9 +29,9 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 ### デッドロックエラー {#deadlock-errors}
 
-最近のデッドロック エラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`クエリできます。
+最近のデッドロック エラーの情報を取得するには、テーブル`DEADLOCKS`または`CLUSTER_DEADLOCKS`をクエリできます。
 
-たとえば、テーブル`DEADLOCKS`クエリするには、次の SQL ステートメントを実行できます。
+たとえば、テーブル`DEADLOCKS`をクエリするには、次の SQL ステートメントを実行できます。
 
 ```sql
 select * from information_schema.deadlocks;
@@ -149,7 +149,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 上記のクエリでは、 `CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列に[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が使用されています。この関数は、この列（値は SQL ダイジェストのセット）を正規化された SQL 文に変換することで、可読性を向上させます。
 
-現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルの情報から調べることができます。
+現在のトランザクションの`start_ts`が不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルの情報から調べることができます。
 
 ### メタデータロック {#metadata-locks}
 
@@ -227,7 +227,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 Grafana の TiDB モニタリングで「KeyIsLocked」エラーがあるかどうかを確認できます。
 
-TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`番目の項目と`KV Backoff OPS`の`txnLock`番目の項目に明らかな上昇傾向が見られる場合、「KeyIsLocked」エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
+TiDBダッシュボードの`KV Errors`パネルには、トランザクションによって発生した書き込み競合を確認するための2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`あります。`Lock Resolve OPS`の`resolve`の項目と`KV Backoff OPS`の`txnLock`の項目に明らかな上昇傾向が見られる場合、「KeyIsLocked」エラーが発生します。`resolve`はロックを解除しようとする操作を指し、`txnLock`は書き込み競合を表します。
 
 ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png) ![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
 

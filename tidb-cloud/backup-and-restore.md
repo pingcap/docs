@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 > **ヒント**
 >
-> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)および復元する」を参照してください。
+> TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスでデータをバックアップおよび復元する方法については、 [TiDB Cloud StarterまたはEssentialでデータをバックアップおよび復元する](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -87,7 +87,7 @@ TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを�
         > -   週次バックアップが有効になっている場合、ポイントインタイム復元機能はデフォルトで有効になりますが、手動で無効にすることもできます。
         > -   バックアップサイクルを週単位から日単位に変更した場合でも、ポイントインタイム復元機能は元の設定のままです。必要に応じて手動で無効にすることもできます。
 
-    -   **「バックアップ時間」**で、日次または週次のクラスタバックアップの開始時間をスケジュールします。
+    -   **「バックアップ時間」**で、日次または週次のクラスタバックアップの開始時刻をスケジュールします。
 
         バックアップの希望時刻を指定しない場合、 TiDB Cloudはデフォルトのバックアップ時刻を割り当てます。これは、クラスターが配置されているリージョンのタイムゾーンにおける午前2時です。
 

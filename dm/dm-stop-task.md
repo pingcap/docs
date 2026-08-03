@@ -5,7 +5,7 @@ summary: データ移行タスクを停止する方法を学びます。
 
 # データ移行タスクを停止する {#stop-a-data-migration-task}
 
-`stop-task`コマンドを使用してデータ移行タスクを停止できます。3 と`stop-task` `pause-task`違いについては、 [データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。
+`stop-task`コマンドを使用してデータ移行タスクを停止できます。`stop-task`と`pause-task`の違いについては、 [データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。
 
 ```bash
 help stop-task

@@ -94,7 +94,7 @@ DESC TIDB_INDEX_USAGE;
 
 -   未使用のインデックス:
 
-    -   `QUERY_TOTAL = 0`場合、インデックスはどのクエリでも使用されていません。
+    -   `QUERY_TOTAL = 0`の場合、インデックスはどのクエリでも使用されていません。
     -   `LAST_ACCESS_TIME`かなり前のものを示している場合、インデックスはもはや関連がない可能性があります。
 
 -   非効率的なインデックス:
@@ -215,7 +215,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 重要だが頻度の低いクエリにインデックスが表示される場合は、まずインデックスを保持するか不可視にすることをお勧めします。
 
-[不可視インデックス](#safely-test-index-removal-using-invisible-indexes)使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
+[不可視インデックス](#safely-test-index-removal-using-invisible-indexes)を使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
 
 ### <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-code-schema-unused-indexes-code-view}
 

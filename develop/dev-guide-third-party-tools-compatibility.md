@@ -31,7 +31,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 **回避方法**
 
-TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`使用できます。
+TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`を使用できます。
 
 ### TiDBは<code>Com_*</code>カウンタを維持しません {#tidb-does-not-maintain-code-com-code-counters}
 
@@ -92,7 +92,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 **説明**
 
-TiDBでは、 `\`番目の文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用することはできません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
+TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用することはできません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
 
 **回避方法**
 
@@ -125,7 +125,7 @@ TiDB に`enablePacketDebug`パラメータを設定しないでください。
 
 **説明**
 
-TiDB は`UpdatableResultSet`サポートしていません。5 パラメータ`ResultSet.CONCUR_UPDATABLE`指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
+TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCUR_UPDATABLE`パラメータを指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
 
 **回避方法**
 
@@ -159,7 +159,7 @@ MySQL Connector/J 8.0.31 以前のバージョンを、MySQL サーバー 5.7.5 
 
 TiDB では、次の方法でもこれを修正します。
 
--   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)使用できます。
+-   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)を使用できます。
 -   サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーをv6.3.0 以降のバージョンにアップグレードできます。
 
 ## Sequelizeとの互換性 {#compatibility-with-sequelize}

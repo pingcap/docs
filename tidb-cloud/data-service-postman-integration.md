@@ -7,7 +7,7 @@ summary: Postmanでデータアプリを実行する方法を学びましょう�
 
 [Postman](https://www.postman.com/)API ライフサイクルを簡素化し、コラボレーションを強化してより迅速で優れた API 開発を実現する API プラットフォームです。
 
-TiDB Cloudデータ [データサービス](https://tidbcloud.com/project/data-service)では、データアプリをPostmanに簡単にインポートし、Postmanの豊富なツールを活用してAPI開発体験を向上させることができます。
+TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)では、データアプリをPostmanに簡単にインポートし、Postmanの豊富なツールを活用してAPI開発体験を向上させることができます。
 
 このドキュメントでは、データアプリをPostmanにインポートする方法と、Postmanでデータアプリを実行する方法について説明します。
 
@@ -31,7 +31,7 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 データアプリをPostmanにインポートするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**データサービス**](https://tidbcloud.com/project/data-service)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 

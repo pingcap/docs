@@ -157,7 +157,7 @@ TiDB バージョン: 4.0.9
     -   スナップショットの読み取りがロックキャッシュにヒットするバグを修正 [＃21539](https://github.com/pingcap/tidb/pull/21539)
     -   長時間トランザクションで大量のデータを読み込んだ後に発生する可能性のあるメモリリークの問題を修正[＃21129](https://github.com/pingcap/tidb/pull/21129)
     -   サブクエリでテーブルエイリアスを省略すると構文エラーが返される問題を修正しました[＃20367](https://github.com/pingcap/tidb/pull/20367)
-    -   クエリ内の`IN`番目の関数の引数が時間型の場合、クエリが誤った結果を返す可能性がある問題を修正しました[＃21290](https://github.com/pingcap/tidb/issues/21290)
+    -   クエリ内の`IN`関数の引数が時間型の場合、クエリが誤った結果を返す可能性がある問題を修正しました[＃21290](https://github.com/pingcap/tidb/issues/21290)
 
 -   TiKV
 
@@ -189,7 +189,7 @@ TiDB バージョン: 4.0.9
 
 -   TiFlash
 
-    -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`使用されていないディスクの情報が含まれている可能性がある問題を修正しました
+    -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`に使用されていないディスクの情報が含まれている可能性がある問題を修正しました
     -   デルタキャッシュのメモリ使用量の見積もりが実際の使用量よりも小さい問題を修正しました
     -   スレッド情報統計によるメモリリークを修正
 

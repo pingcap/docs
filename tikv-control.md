@@ -15,7 +15,7 @@ TiKV Control ( `tikv-ctl` ) は、クラスターの管理に使用される TiK
 >
 > 使用する制御ツールのバージョンは、クラスターのバージョンと一致させることをお勧めします。
 
-`tikv-ctl`は`tiup`コマンドにも統合されています。4 ツール`tikv-ctl`呼び出すには、以下のコマンドを実行してください。
+`tikv-ctl`は`tiup`コマンドにも統合されています。`tikv-ctl`ツールを呼び出すには、以下のコマンドを実行してください。
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> tikv
@@ -81,7 +81,7 @@ tiup ctl:v<CLUSTER_VERSION> tikv
         tombstone             Set some regions on the node to tombstone by manual
         unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 
-`tiup ctl:v<CLUSTER_VERSION> tikv`後に対応するパラメータとサブコマンドを追加できます。
+`tiup ctl:v<CLUSTER_VERSION> tikv`の後に対応するパラメータとサブコマンドを追加できます。
 
 ## 一般オプション {#general-options}
 
@@ -139,7 +139,7 @@ AAFF
 
 `region`サブコマンドの場合:
 
--   表示するリージョンを指定するには、 `-r`オプションを使用してください。複数のリージョンを指定する場合は、 `,`で区切ります。また、 `--all-regions`オプションを使用してすべてのリージョンを表示することもできます。7 と`-r` `--all-regions`同時に使用できないことに注意してください。
+-   表示するリージョンを指定するには、 `-r`オプションを使用してください。複数のリージョンを指定する場合は、 `,`で区切ります。また、 `--all-regions`オプションを使用してすべてのリージョンを表示することもできます。`-r`と`--all-regions`は同時に使用できないことに注意してください。
 -   印刷するリージョンの数を制限するには、 `--limit`オプションを使用します (デフォルト: `16` )。
 -   特定のキー範囲に含まれるリージョンを照会するには、 `--start`および`--end`オプションを使用します (デフォルト: 範囲制限なし、16 進形式)。
 
@@ -346,7 +346,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<re
 > -   `tombstone`コマンドはローカル モードのみをサポートします。
 > -   `-p`オプションの引数は、 `http`プレフィックスのない PD エンドポイントを指定します。PD エンドポイントを指定するのは、PD が安全に Tombstone に切り替えられるかどうかを照会するためです。
 
-### TiKVに<code>consistency-check</code>リクエストを送信する {#send-a-code-consistency-check-code-request-to-tikv}
+### TiKVに<code>consistency-check</code>リクエストを送信する {#send-a-consistency-check-request-to-tikv}
 
 `consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗した場合、TiKV 自体がパニック状態になります`--host`で指定された TiKV インスタンスがリージョンリーダーでない場合は、エラーが報告されます。
 
@@ -361,7 +361,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 >
 > -   `consistency-check`コマンドは TiDB のガベージコレクションと互換性がなく、誤ってエラーを報告する可能性があるため、使用はお勧めし**ません**。
 > -   このコマンドはリモート モードのみをサポートします。
-> -   このコマンドが`success!`返した場合でも、TiKVがパニック状態になるかどうかを確認する必要があります。これは、このコマンドがリーダーの整合性チェックを要求するプロポーザルに過ぎず、チェックプロセス全体が成功したかどうかをクライアント側から知ることができないためです。
+> -   このコマンドが`success!`を返した場合でも、TiKVがパニック状態になるかどうかを確認する必要があります。これは、このコマンドがリーダーの整合性チェックを要求するプロポーザルに過ぎず、チェックプロセス全体が成功したかどうかをクライアント側から知ることができないためです。
 
 ### スナップショットのメタをダンプ {#dump-snapshot-meta}
 
@@ -599,10 +599,10 @@ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 上記の出力から、破損した SST ファイルの情報が最初に印刷され、次にメタ情報が印刷されていることがわかります。
 
 -   `sst meta`部分で、 `14` SST ファイル番号、 `552997`ファイル サイズを意味し、その後に最小および最大のシーケンス番号とその他のメタ情報が続きます。
--   `overlap region`番目の部分は、関係するリージョンの情報を示しています。この情報はPDサーバーから取得されます。
+-   `overlap region`部分は、関係するリージョンの情報を示しています。この情報はPDサーバーから取得されます。
 -   パート`suggested operations` 、破損したSSTファイルをクリーンアップするための提案が示されています。この提案に従ってファイルをクリーンアップし、TiKVインスタンスを再起動してください。
 
-### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-region-s-code-regionreadprogress-code}
+### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-regions-regionreadprogress}
 
 v6.5.4およびv7.3.0以降、TiKVはリゾルバの最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`と`RegionReadProgress`導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
 

@@ -90,7 +90,7 @@ DML ステートメントを実行した後、 [`tidb_last_txn_info`](/system-va
 SELECT @@tidb_last_txn_info;
 ```
 
-出力の`pipelined`フィールドが`true`場合、パイプライン DML が正常に使用されていることを示します。
+出力の`pipelined`フィールドが`true`の場合、パイプライン DML が正常に使用されていることを示します。
 
 ## ベストプラクティス {#best-practices}
 
@@ -124,7 +124,7 @@ SELECT @@tidb_last_txn_info;
 次の方法を使用して、パイプライン DML の実行を監視できます。
 
 -   パイプライン DML が使用されたかどうかなど、現在のセッションで実行された最後のトランザクションに関する情報を取得するには、 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409)システム変数を確認します。
--   TiDB ログで`"[pipelined dml]"`含む行を探して、現在のステージや書き込まれたデータの量など、パイプライン DML の実行プロセスと進行状況を把握します。
+-   TiDB ログで`"[pipelined dml]"`を含む行を探して、現在のステージや書き込まれたデータの量など、パイプライン DML の実行プロセスと進行状況を把握します。
 -   長時間実行されるステートメントの進行状況を追跡するには、 [`expensive query`](https://docs.pingcap.com/tidb/stable/identify-expensive-queries#expensive-query-log-example)ログの`affected rows`フィールドを確認します。
 -   トランザクションの実行状況を確認するには、 [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルをクエリします。パイプラインDMLは通常、大規模なトランザクションで使用されるため、このテーブルを使用して実行状況を監視することができます。
 

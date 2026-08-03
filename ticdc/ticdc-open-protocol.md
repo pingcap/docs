@@ -146,7 +146,7 @@ TiCDCオープンプロトコルは、データ変更イベントを下流に複
     | Parameter | 型  | 説明                                                                                |
     | :-------- | :--- | :-------------------------------------------------------------------------------- |
     | カラム名      | string    | 列名。                                                                               |
-    | カラムタイプ    | number   | 列の種類。詳細は[カラムタイプコード](#column-type-code)参照してください。                                   |
+    | カラムタイプ    | number   | 列の種類。詳細は[カラムタイプコード](#column-type-code)を参照してください。                                   |
     | ハンドル      | boolean | この列が`Where`節のフィルター条件に使用できるかどうかを判断します。この列がテーブル上で一意の場合、 `Where Handle`は`true`になります。 |
     | フラグ       | number   | 列のビットフラグ。詳細は[列のビットフラグ](#bit-flags-of-columns)参照。                                  |
     | カラムの値     | どれでも | カラムの値。                                                                            |
@@ -182,7 +182,7 @@ TiCDCオープンプロトコルは、データ変更イベントを下流に複
     | パラメータ  | Type | 説明                                             |
     | :----- | :--- | :--------------------------------------------- |
     | DDLクエリ | string    | DDLクエリSQL                                      |
-    | DDLタイプ | string    | DDLタイプ。詳細は[DDLタイプコード](#ddl-type-code)参照してください。 |
+    | DDLタイプ | string    | DDLタイプ。詳細は[DDLタイプコード](#ddl-type-code)を参照してください。 |
 
 ### 解決されたイベント {#resolved-event}
 
@@ -374,5 +374,5 @@ COMMIT;
 
 > **Note:**
 >
-> -   `BinaryFlag` 、列の型が BLOB/ TEXT （TINYBLOB/TINYTEXT、BINARY/CHAR を含む）の場合にのみ意味を持ちます。上流の列が BLOB 型の場合、 `BinaryFlag`値は`1`に設定されます。上流の列がTEXT型の場合、 `BinaryFlag`値は`0`に設定されます。
+> -   `BinaryFlag`は、列の型が BLOB/ TEXT （TINYBLOB/TINYTEXT、BINARY/CHAR を含む）の場合にのみ意味を持ちます。上流の列が BLOB 型の場合、 `BinaryFlag`の値は`1`に設定されます。上流の列がTEXT型の場合、 `BinaryFlag`の値は`0`に設定されます。
 > -   TiCDCは、上流からテーブルを複製するために、ハンドルインデックスとして[有効なインデックス](/ticdc/ticdc-overview.md#best-practices)選択します。ハンドルインデックス列の`HandleKeyFlag`の値は`1`に設定されます。

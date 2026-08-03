@@ -87,7 +87,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
         docker run -it -v ${doc-path}:/opt/data andelf/doc-build:0.1.9
         ```
 
-        コマンド中の`${doc-path}` 、PDF生成用のドキュメントのローカルパスです。例えば、パスが`/Users/${username}/Documents/GitHub/docs`場合、コマンドは以下のようになります。
+        コマンド中の`${doc-path}`は、PDF生成用のドキュメントのローカルパスです。例えば、パスが`/Users/${username}/Documents/GitHub/docs`の場合、コマンドは以下のようになります。
 
         ```bash
         docker run -it -v /Users/${username}/Documents/GitHub/docs:/opt/data andelf/doc-build:0.1.9
@@ -119,4 +119,4 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
     **期待される出力:**
 
-    PDFファイルの生成にかかる時間はドキュメントのサイズによって異なります。TiDBの完全なドキュメントの場合は約1時間かかります。生成が完了すると、ドキュメントが保存されているフォルダに新しく生成されたPDFファイル`output.pdf`表示されます。
+    PDFファイルの生成にかかる時間はドキュメントのサイズによって異なります。TiDBの完全なドキュメントの場合は約1時間かかります。生成が完了すると、ドキュメントが保存されているフォルダに新しく生成されたPDFファイル`output.pdf`が表示されます。

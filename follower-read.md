@@ -88,7 +88,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 > **Note:**
 >
-> `tidb_replica_read`を`closest-replicas`または`closest-adaptive`に設定した場合、指定された構成に従ってレプリカがアベイラビリティゾーン全体に分散されるようにするには、PD に`location-labels`設定し、TiDB と TiKV に[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)に従って正しい`labels`設定する必要があります。TiDB は、同じアベイラビリティゾーン内の TiKV ノードを一致させるために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの構成に`zone`が含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
+> `tidb_replica_read`を`closest-replicas`または`closest-adaptive`に設定した場合、指定された構成に従ってレプリカがアベイラビリティゾーン全体に分散されるようにするには、PD に`location-labels`を設定し、TiDB と TiKV に[トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)に従って正しい`labels`を設定する必要があります。TiDB は、同じアベイラビリティゾーン内の TiKV ノードを一致させるために`zone`ラベルに依存するため、PD の`location-labels`に`zone`ラベルが含まれ、各 TiDB および TiKV ノードの構成に`zone`が含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 >
 > TiDB v7.5.0 以前のバージョンの場合:
 >
@@ -139,4 +139,4 @@ Follower Read機能は、TiDBのスナップショット分離トランザクシ
 
 強力なデータ一貫性を確保するため、 Follower Read は読み取るデータ量に関わらず`ReadIndex`演算を実行します。これにより、TiKV CPU リソースが必然的に追加消費されます。そのため、ポイントクエリなどの小規模クエリのシナリオでは、 Follower Readのパフォーマンス低下が比較的顕著になります。さらに、小規模クエリにおけるローカル読み取りによるトラフィック削減は限定的であるため、大規模なクエリやバッチ読み取りシナリオではFollower Read の使用がより推奨されます。
 
-`tidb_replica_read` `closest-adaptive`に設定すると、TiDB は小さなクエリに対してFollower Read を実行しません。その結果、様々なワークロードにおいて、TiKV の CPU オーバーヘッドの増加は、通常、 `leader`ポリシーと比較して 10% 未満になります。
+`tidb_replica_read`を`closest-adaptive`に設定すると、TiDB は小さなクエリに対してFollower Read を実行しません。その結果、様々なワークロードにおいて、TiKV の CPU オーバーヘッドの増加は、通常、 `leader`ポリシーと比較して 10% 未満になります。

@@ -22,7 +22,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 -   `backup` : `tiup br`のサブコマンド。
 -   `full` : `tiup br backup`のサブコマンド。
--   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定するオプション。4 は`"s3://backup-data/snapshot-202209081330/"` `-s`パラメーターです。
+-   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定するオプション。`"s3://backup-data/snapshot-202209081330/"`は`-s`のパラメーターです。
 -   `--pd` : PD サービス アドレスを指定するオプション`"${PD_IP}:2379"`は`--pd`のパラメーターです。
 
 ### コマンドとサブコマンド {#commands-and-sub-commands}
@@ -65,7 +65,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ## フルバックアップのコマンド {#commands-of-full-backup}
 
-クラスターデータをバックアップするには、 `tiup br backup`コマンドを実行します。3 または`full` `table`コマンドを追加して、バックアップ操作の範囲（クラスター全体（ `full` ）または単一のテーブル（ `table` ））を指定できます。
+クラスターデータをバックアップするには、 `tiup br backup`コマンドを実行します。`full`または`table`サブコマンドを追加して、バックアップ操作の範囲（クラスター全体（ `full` ）または単一のテーブル（ `table` ））を指定できます。
 
 -   [TiDB クラスターのスナップショットをバックアップする](/br/br-snapshot-manual.md#back-up-cluster-snapshots)
 -   [データベースをバックアップする](/br/br-snapshot-manual.md#back-up-a-database)

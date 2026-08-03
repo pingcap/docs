@@ -14,14 +14,14 @@ summary: TiDB データベースの SHOW STATS_BUCKETS の使用法の概要。
 | `Db_name`        | データベース名                                            |
 | `Table_name`     | テーブル名                                              |
 | `Partition_name` | パーティション名                                           |
-| `Column_name`    | 列名（ `is_index`が`0`場合）またはインデックス名（ `is_index`が`1`場合） |
+| `Column_name`    | 列名（ `is_index`が`0`の場合）またはインデックス名（ `is_index`が`1`の場合） |
 | `Is_index`       | インデックス列であるかどうか                                     |
 | `Bucket_id`      | バケットのID                                            |
 | `Count`          | バケットとその前のバケットに含まれるすべての値の数                          |
 | `Repeats`        | 最大値の発生回数                                           |
 | `Lower_bound`    | 最小値                                                |
 | `Upper_bound`    | 最大値                                                |
-| `Ndv`            | バケット内の一意の値の数。このフィールドは非推奨であり、値が不正確なため常に`0`表示されます。   |
+| `Ndv`            | バケット内の一意の値の数。このフィールドは非推奨であり、値が不正確なため常に`0`が表示されます。   |
 
 ## 概要 {#synopsis}
 

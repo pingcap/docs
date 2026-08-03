@@ -155,8 +155,8 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 増分データ レプリケーション中は、レプリケーション チャネルの状態を継続的に監視し、必要に応じて設定を調整します。
 
--   レイテンシ メトリック: `Changefeed checkpoint lag` 5 分以内などの許容範囲内に留まることを確認します。
--   スループットの健全性: `Sink flush rows/s`一貫してビジネス書き込みレートを超えていることを確認します。
+-   レイテンシ メトリック: `Changefeed checkpoint lag`が 5 分以内などの許容範囲内に留まることを確認します。
+-   スループットの健全性: `Sink flush rows/s`が一貫してビジネス書き込みレートを超えていることを確認します。
 -   エラーとアラート: TiCDC ログとアラート情報を定期的に確認してください。
 -   (オプション) テスト データ レプリケーション: テスト データを更新し、Changefeed がそれを新しいクラスターに正しく複製することを確認します。
 -   (オプション) TiCDC 構成項目[`gc-ttl`](/ticdc/ticdc-server-config.md#gc-ttl)を調整します (デフォルトは 24 時間)。
@@ -169,13 +169,13 @@ tiup cluster start <new_cluster_name>     # Start the cluster
 
 データのレプリケーションが完了したら、次の方法を使用して、古いクラスターと新しいクラスター間のデータの整合性を確認します。
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用します:
+-   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用します:
 
     ```shell
     ./sync_diff_inspector --config=./config.toml
     ```
 
--   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
+-   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)のスナップショット設定と TiCDC の[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md)機能を組み合わせることで、Changefeed レプリケーションを停止することなくデータの整合性を検証できます。詳細については、 [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)を参照してください。
 
 -   テーブルの行数の比較など、ビジネス データの手動検証を実行します。
 
@@ -228,12 +228,12 @@ tiup cluster start <new_cluster_name>     # Start the cluster
         BEGIN; SELECT TIDB_CURRENT_TSO(); ROLLBACK;
         ```
 
-    -   Changefeed `checkpointTs`を監視して、それが`up-tso`超えていることを確認します。これは、TiCDC がデータ複製を完了したことを示します。
+    -   Changefeed `checkpointTs`を監視して、それが`up-tso`を超えていることを確認します。これは、TiCDC がデータ複製を完了したことを示します。
 
 3.  新しいクラスターと古いクラスター間のデータの整合性を確認します。
 
     -   TiCDC が追いついたら、新しいクラスターから`down-tso`を取得します。
-    -   [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
+    -   [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)ツールを使用して、 `up-tso`と`down-tso`の新しいクラスターと古いクラスター間のデータの一貫性を比較します。
 
 4.  フォワード Changefeed レプリケーション タスクを一時停止します。
 
@@ -277,7 +277,7 @@ tiup cluster start <new_cluster_name>     # Start the cluster
     3.  リバース レプリケーション リンクを構成し、Changefeed タスクが適切に実行されていることを確認します。
 
         -   この段階では業務が停止しているため、現在の TSO を使用できます。
-        -   ループバック書き込みのリスクを回避するために、古いクラスターのアドレスに`sink-uri`設定されていることを確認します。
+        -   ループバック書き込みのリスクを回避するために、古いクラスターのアドレスに`sink-uri`が設定されていることを確認します。
 
         ```shell
         tiup ctl:${cluster_version} cdc changefeed create --server http://${cdc_host}:${cdc_port} --sink-uri="mysql://${username}:${password}@${tidb_endpoint}:${port}" --config config.toml --start-ts ${tso}

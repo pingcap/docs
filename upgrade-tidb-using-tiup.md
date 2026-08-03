@@ -238,7 +238,7 @@ tiup cluster upgrade -h | grep "version"
     tiup cluster stop <cluster-name>
     ```
 
-2.  `upgrade`コマンドに`--offline`オプションを指定して、オフラインアップグレードを実行します。 `<cluster-name>`にはクラスタ名を、 `<version>`にはアップグレード先のバージョン（例: `v8.5.4`入力します。
+2.  `upgrade`コマンドに`--offline`オプションを指定して、オフラインアップグレードを実行します。 `<cluster-name>`にはクラスタ名を、 `<version>`にはアップグレード先のバージョン（例: `v8.5.4`）を入力します。
 
     ```shell
     tiup cluster upgrade <cluster-name> <version> --offline
@@ -284,7 +284,7 @@ tiup cluster display <cluster-name>
     tiup cluster replay <audit-id>
     ```
 
-### バージョン6.2.0以降へのアップグレード時にアップグレード処理が停止してしまう問題を解決するにはどうすればよいですか？ {#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v6-2-0-or-later-versions}
+### バージョン6.2.0以降へのアップグレード時にアップグレード処理が停止してしまう問題を解決するにはどうすればよいですか？ {#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions}
 
 バージョン6.2.0以降、TiDBはデフォルトで[並行DDLフレームワーク](/best-practices/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)を有効にし、同時DDLの実行を可能にしました。このフレームワークは、DDLジョブのストレージをKVキューからテーブルキューに変更します。この変更により、一部のシナリオではアップグレードが停止する可能性があります。この問題が発生する可能性のあるシナリオと、それに対応する解決策を以下に示します。
 

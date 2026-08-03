@@ -17,7 +17,7 @@ summary: TiDB SQLステートメントのスキーマ オブジェクト名に�
 SELECT * FROM `table` WHERE `table`.id = 20;
 ```
 
-SQL MODE に`ANSI_QUOTES`設定すると、TiDB は二重引用符`"`で囲まれた文字列を識別子として認識します。
+SQL MODE に`ANSI_QUOTES`を設定すると、TiDB は二重引用符`"`で囲まれた文字列を識別子として認識します。
 
 ```sql
 CREATE TABLE "test" (a varchar(10));
@@ -80,7 +80,7 @@ CREATE TABLE t (i int);
 CREATE TABLE test.t (i int);
 ```
 
-`.`周囲に空白が存在できます`table_name.col_name`と`table_name . col_name`同等です。
+`.`の周囲に空白が存在できます`table_name.col_name`と`table_name . col_name`は同等です。
 
 この識別子を引用するには、次のようにします。
 

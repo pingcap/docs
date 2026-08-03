@@ -5,7 +5,7 @@ summary: TiCDC データ整合性検証機能の実装原理と使用方法を�
 
 # 単一行データの TiCDC データ整合性検証 {#ticdc-data-integrity-validation-for-single-row-data}
 
-v7.1.0以降、TiCDCはデータ整合性検証機能を導入しました。この機能は、 [チェックサムアルゴリズム](#checksum-algorithms)使用して単一行データの整合性を検証します。この機能は、TiDBからデータを書き込み、TiCDCを介して複製し、Kafkaクラスターに書き込むプロセスでエラーが発生していないかどうかを検証するのに役立ちます。現在、この機能は、ダウンストリームとしてKafkaを使用し、プロトコルとしてSimpleまたはAvroを使用するチェンジフィードのみでサポートされています。チェックサムアルゴリズムの詳細については、 [チェックサム計算アルゴリズム](#algorithm-for-checksum-calculation)参照してください。
+v7.1.0以降、TiCDCはデータ整合性検証機能を導入しました。この機能は、 [チェックサムアルゴリズム](#checksum-algorithms)を使用して単一行データの整合性を検証します。この機能は、TiDBからデータを書き込み、TiCDCを介して複製し、Kafkaクラスターに書き込むプロセスでエラーが発生していないかどうかを検証するのに役立ちます。現在、この機能は、ダウンストリームとしてKafkaを使用し、プロトコルとしてSimpleまたはAvroを使用するチェンジフィードのみでサポートされています。チェックサムアルゴリズムの詳細については、 [チェックサム計算アルゴリズム](#algorithm-for-checksum-calculation)を参照してください。
 
 ## 機能を有効にする {#enable-the-feature}
 
@@ -98,7 +98,7 @@ For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later
     -   BIT, ENUM, and SET types are converted to UINT64.
 
         -   BIT 型はバイナリ形式の UINT64 に変換されます。
-        -   ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`場合、その値は`0b101` （10進数では`5`としてエンコードされます。
+        -   ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`の場合、その値は`0b101` （10進数では`5`）としてエンコードされます。
 
     -   TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は、最初に STRING に変換され、次にバイトに変換されます。
 

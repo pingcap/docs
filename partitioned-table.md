@@ -270,7 +270,7 @@ INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS 
      PARTITION `P_LT_2024-12-01` VALUES LESS THAN ('2024-12-01'),
      PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 
-オプションのパラメータ`NULL PARTITION` 、 `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`として定義されたパーティションを作成します。パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`他の値より小さいとみなされることを説明する [範囲分割によるNULL値の処理](#handling-of-null-with-range-partitioning)参照してください。
+オプションのパラメータ`NULL PARTITION` 、 `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`として定義されたパーティションを作成します。パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する [範囲分割によるNULL値の処理](#handling-of-null-with-range-partitioning)を参照してください。
 
 オプションパラメータ`MAXVALUE PARTITION`最後のパーティションを`PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`として作成します。
 
@@ -673,7 +673,7 @@ PARTITIONS 2;
 
 -   MySQL の線形ハッシュパーティションの`CREATE`ステートメントの場合、TiDB は非線形ハッシュパーティションテーブルを作成します (TiDB には線形ハッシュパーティションテーブルはありません)。パーティション数が 2 のべき乗の場合、TiDB ハッシュパーティションテーブルの行は MySQL の線形ハッシュパーティションテーブルと同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティションテーブルは単純な「パーティション数の剰余」を使用するのに対し、線形パーティションテーブルは「次の 2 のべき乗の剰余」を使用し、パーティション数と次の 2 のべき乗の間の値を折り返す」ためです。詳細については、 [#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
 
--   MySQL の線形ハッシュパーティションのその他のすべてのステートメントについては、パーティション数が 2 のべき乗でない場合、行の分散方法が異なることを除いて、TiDB では MySQL と同じように動作します。このため、次のような結果になります[パーティション選択](#partition-selection)、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION` 。
+-   MySQL の線形ハッシュパーティションのその他のすべてのステートメントについては、パーティション数が 2 のべき乗でない場合、行の分散方法が異なることを除いて、TiDB では MySQL と同じように動作します。この違いにより、 [パーティション選択](#partition-selection)、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION`の結果は MySQL とは異なります。
 
 ### TiDBが線形キーパーティションを処理する方法 {#how-tidb-handles-linear-key-partitions}
 
@@ -1340,7 +1340,7 @@ SELECT store_id, COUNT(department_id) AS c
     +---|----------+
     2 rows in set (0.00 sec)
 
-パーティション選択は、範囲パーティショニングやハッシュパーティショニングを含む、すべてのタイプのテーブルパーティショニングでサポートされています。ハッシュパーティションの場合、パーティション名が指定されていないときは、{{B `p1` `p0` 、 `p2` 、...、または`pN-1`がパーティション名として自動的に使用されます。
+パーティション選択は、範囲パーティショニングやハッシュパーティショニングを含む、すべてのタイプのテーブルパーティショニングでサポートされています。ハッシュパーティションの場合、パーティション名が指定されていないときは、 `p0` 、 `p1` 、 `p2` 、...、または`pN-1`がパーティション名として自動的に使用されます。
 
 `SELECT`内の`INSERT ... SELECT`もパーティション選択を使用できます。
 
@@ -1490,7 +1490,7 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-上記の例では、主キーにパーティショニング式で参照されているすべての列が含まれていません。主キーに不足している列を追加すると、 `CREATE TABLE`ステートメントが有効になります。
+上記の例では、主キーにパーティショニング式で参照されているすべての列が含まれているわけではありません。主キーに不足している列を追加すると、 `CREATE TABLE`ステートメントが有効になります。
 
 ```sql
 CREATE TABLE t5 (
@@ -1704,7 +1704,7 @@ show stats_meta where table_name like "t";
 
     | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
 
-スクリプトを使用して、すべてのパーティション化されたテーブルの統計を更新することもできます。詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を更新する](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)参照してください。
+スクリプトを使用して、すべてのパーティション化されたテーブルの統計を更新することもできます。詳細については、 [動的プルーニングモードでパーティションテーブルの統計情報を更新する](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
 テーブルレベルの統計情報が準備できたら、グローバルな動的プルーニング モードを有効にできます。これは、すべての SQL ステートメントと`auto-analyze`操作に有効です。
 

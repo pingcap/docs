@@ -5,7 +5,7 @@ summary: TiDB データベースの SET DEFAULT ROLE の使用法の概要。
 
 # `SET DEFAULT ROLE` {#set-default-role}
 
-このステートメントは、特定のロールをユーザーにデフォルトで適用するように設定します。これにより、 `SET ROLE <rolename>`または`SET ROLE ALL`実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
+このステートメントは、特定のロールをユーザーにデフォルトで適用するように設定します。これにより、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
 
 ## 概要 {#synopsis}
 

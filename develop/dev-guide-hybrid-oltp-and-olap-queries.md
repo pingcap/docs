@@ -39,7 +39,7 @@ FROM
     table_name
 ```
 
-### <code>ORDER BY</code>句 {#code-order-by-code-clause}
+### <code>ORDER BY</code>句 {#order-by-clause}
 
 集計ウィンドウ関数`sum()`を使用すると、特定の書籍の注文量の推移を分析できます。例えば、次のようになります。
 
@@ -57,7 +57,7 @@ FROM orders_group_by_month
 ORDER BY month ASC;
 ```
 
-`sum()`番目の関数は、 `OVER`番目の節の`ORDER BY`番目の文で指定された順序でデータを累積します。結果は次のようになります。
+`sum()`関数は、 `OVER`節の`ORDER BY`文で指定された順序でデータを累積します。結果は次のようになります。
 
     +---------+-------+
     | month   | acc   |
@@ -80,7 +80,7 @@ ORDER BY month ASC;
 
 上記のデータを、横軸に時間、縦軸に累計受注額を取った折れ線グラフで視覚化します。傾きの変化から、書籍の過去の受注傾向を簡単に把握できます。
 
-### <code>PARTITION BY</code>句 {#code-partition-by-code-clause}
+### <code>PARTITION BY</code>句 {#partition-by-clause}
 
 さまざまな種類の書籍の過去の注文傾向を分析し、それを複数のシリーズを含む同じ折れ線グラフで視覚化したいとします。
 
@@ -172,7 +172,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop'
     +--------------+------------+----------+---------------+-----------------+-----------+----------+
     1 row in set (0.07 sec)
 
-レプリカを追加した後、 `EXPLAIN`ステートメントを使用して、上記のウィンドウ関数[`PARTITION BY`句](#partition-by-clause)の実行プランを確認できます。実行プランに`cop[tiflash]`表示されている場合は、 TiFlashエンジンが動作を開始したことを意味します。
+レプリカを追加した後、 `EXPLAIN`ステートメントを使用して、上記のウィンドウ関数[`PARTITION BY`句](#partition-by-clause)の実行プランを確認できます。実行プランに`cop[tiflash]`が表示されている場合は、 TiFlashエンジンが動作を開始したことを意味します。
 
 次に、 [`PARTITION BY`句](#partition-by-clause)のサンプルSQL文を再度実行します。結果は以下のようになります。
 
@@ -233,7 +233,7 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-`EXPLAIN`ステートメントを使用して、上記のSQL文の実行プランを確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
+`EXPLAIN`ステートメントを使用して、上記のSQL文の実行プランを確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`が同時に表示される場合、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。TiFlash と TiKV のストレージエンジンは通常、異なる TiDB ノードを使用するため、2 つのクエリタイプは互いに影響を受けません。
 
 TiDBがTiFlashをどのように使用するかの詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 

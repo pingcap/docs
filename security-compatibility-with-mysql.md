@@ -140,7 +140,7 @@ The support for TLS authentication is configured differently. For detailed infor
 | GSSAPI (MariaDB)             | いいえ              |
 | ファイド                         | いいえ              |
 
-### `tidb_auth_token` {#tidb-auth-token}
+### `tidb_auth_token` {#tidb_auth_token}
 
 `tidb_auth_token` [JSON Web Token (JWT)](https://datatracker.ietf.org/doc/html/rfc7519)をベースにしたパスワードレス認証方式です。v6.4.0では、 `tidb_auth_token` TiDB Cloudのユーザー認証にのみ使用されます。v6.5.0以降では、 `tidb_auth_token` TiDB Self-Managedのユーザー認証方式としても設定できます。 `mysql_native_password`や`caching_sha2_password`などのパスワードベースの認証方式とは異なり、 `tidb_auth_token`を使用してユーザーを作成する場合、カスタムパスワードを設定したり保存したりする必要はありません。TiDBにログインするには、ユーザーはパスワードの代わりに署名付きトークンを使用するだけで済むため、認証プロセスが簡素化され、セキュリティが向上します。
 
@@ -166,7 +166,7 @@ Here is an example for Header:
 
 ペイロードはJWTの主要部分であり、ユーザー情報が格納されます。ペイロード内の各フィールドはクレームと呼ばれます。TiDBユーザー認証に必要なクレームは以下のとおりです。
 
--   `iss` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)ときに`TOKEN_ISSUER`指定されていないか空に設定されている場合、このクレームは必要ありません。それ以外の場合、 `iss` `TOKEN_ISSUER`と同じ値を使用する必要があります。
+-   `iss` : [`CREATE USER`](/sql-statements/sql-statement-create-user.md)のときに`TOKEN_ISSUER`が指定されていないか空に設定されている場合、このクレームは必要ありません。それ以外の場合、 `iss`は`TOKEN_ISSUER`と同じ値を使用する必要があります。
 -   `sub` : このクレームは、認証されるユーザー名と同じである必要があります。
 -   `iat`: it means `issued at`, the timestamp when the token is issued. In TiDB, this value must not be later than the authentication time or earlier than 15 minutes before authentication.
 -   `exp` : トークンの有効期限のタイムスタンプ。認証時刻より前の場合、認証は失敗します。
@@ -210,7 +210,7 @@ TiDB Self-Managed ユーザーの認証方法として`tidb_auth_token`設定し
     auth-token-jwks = "JWKS.json"
     ```
 
-2.  `tidb-server`起動し、定期的に JWKS を更新して`auth-token-jwks`で指定されたパスに保存します。
+2.  `tidb-server`を起動し、定期的に JWKS を更新して`auth-token-jwks`で指定されたパスに保存します。
 
 3.  `tidb_auth_token`でユーザーを作成し、必要に応じて`REQUIRE TOKEN_ISSUER`と`ATTRIBUTE '{"email": "xxxx@pingcap.com"}`を使用して`iss`と`email`を指定します。
 
