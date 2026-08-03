@@ -34,21 +34,28 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
     </CustomContent>
 
+    <CustomContent plan="essential">
+        
+    For TiDB Cloud Essential instances created starting July 1, 2026, please download this JSON file:
+    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
+
+    </CustomContent>
+
     <CustomContent plan="premium">
 
     <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-premium.json>
 
     </CustomContent>
 
-2. Log in to [Datadog](https://app.datadoghq.com), and then go to **Dashboards** > **Dashboard List**.
+1. Log in to [Datadog](https://app.datadoghq.com), and then go to **Dashboards** > **Dashboard List**.
 
-3. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, and then select **Start from blank dashboard**.
+2. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, and then select **Start from blank dashboard**.
 
-4. In the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
+3. In the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
 
-5. In the dialog that appears, paste the JSON content, or drag and drop the JSON file.
+4. In the dialog that appears, paste the JSON content, or drag and drop the JSON file.
 
-6. Click **Yes, Replace** to confirm the import.
+5. Click **Yes, Replace** to confirm the import.
 
 ### Step 2. Integrate with your Datadog API key
 
