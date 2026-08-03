@@ -314,7 +314,7 @@ TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構
 
 ### 列構成を保持する {#persist-column-configurations}
 
-`ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、{{B-PLACEHOLDER-2-PLACEHOLDER- `PREDICATE COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options` `ALL COLUMNS`変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
+`ANALYZE`ステートメント ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、 `ALL COLUMNS`を含む) の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後:
 
 -   TiDB が統計情報を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して手動で統計情報を収集する場合、TiDB は統計情報の収集に以前に保持された構成を引き続き使用します。
 -   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。

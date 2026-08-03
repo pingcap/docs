@@ -515,7 +515,7 @@ tiup cluster import --dir=/path/to/tidb-ansible
 
 ## 操作ログを表示する {#view-the-operation-log}
 
-操作ログを表示するには、 `audit`コマンドを使用します。3 コマンドの使用方法は`audit`のとおりです。
+操作ログを表示するには、 `audit`コマンドを使用します。`audit`コマンドの使用方法は次のとおりです。
 
 ```bash
 Usage:

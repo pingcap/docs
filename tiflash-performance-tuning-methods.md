@@ -34,7 +34,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
     -   `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサ要求の数。
     -   `cop_execution` : 現在実行中のコプロセッサ要求の数。
     -   `remote_read` `remote_read_sent`リモート読み取り関連のメトリックです。リモート読み取りの増加は通常`remote_read_constructed`システムに問題があることを示しています。
--   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG 演算子の数。1 はテーブル スキャン演算子、 `table_scan` `selection`選択演算子、 `aggregation`は集約演算子、 `top_n`は TopN 演算子、 `limit`は制限演算子、 `join`は結合演算子、 `exchange_sender`はデータ送信演算子、 `exchange_receiver`データ受信演算子です。
+-   Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG 演算子の数。`table_scan`はテーブル スキャン演算子、 `selection`は選択演算子、 `aggregation`は集約演算子、 `top_n`は TopN 演算子、 `limit`は制限演算子、 `join`は結合演算子、 `exchange_sender`はデータ送信演算子、 `exchange_receiver`はデータ受信演算子です。
 
 ### レイテンシメトリクス {#latency-metrics}
 
