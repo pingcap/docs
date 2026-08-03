@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 2.1.18
     -   `AUTO_INCREMENT` `MAX int64`と`MAX uint64`誤って割り当てた場合にエラーが報告されない問題を修正しました[＃12210](https://github.com/pingcap/tidb/pull/12210)
     -   ログレベルが`ERROR` ときにスロークエリログが記録されない問題を修正しました [＃12373](https://github.com/pingcap/tidb/pull/12373)
     -   TiDBがスキーマの変更とそれに対応する変更されたテーブル情報をキャッシュする回数を100から1024に調整し、 `tidb_max_delta_schema_count`システム変数を使用して変更をサポートします。 [＃12515](https://github.com/pingcap/tidb/pull/12515)
-    -   SQL統計をより正確にするために、クエリの開始時間を「実行開始」から「コンパイル開始」に変更します[＃12638](https://github.com/pingcap/tidb/pull/12638)
+    -   SQL統計をより正確にするために、クエリの開始時刻を「実行開始」から「コンパイル開始」に変更します[＃12638](https://github.com/pingcap/tidb/pull/12638)
     -   TiDBログに`set session autocommit`のレコードを追加する [＃12568](https://github.com/pingcap/tidb/pull/12568)
     -   プラン実行中にリセットされないようにSQLクエリの開始時刻を`SessionVars`に記録する[＃12676](https://github.com/pingcap/tidb/pull/12676)
     -   `ORDER BY` `GROUP BY` `?` ホルダーをサポート`LIMIT OFFSET` [＃12514](https://github.com/pingcap/tidb/pull/12514)
