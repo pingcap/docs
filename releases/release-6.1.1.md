@@ -9,7 +9,7 @@ Release date: September 1, 2022
 
 TiDB version: 6.1.1
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## Compatibility changes
 
@@ -33,7 +33,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - `blackbox_exporter-{version}-linux-amd64.tar.gz`
     - `node_exporter-{version}-linux-amd64.tar.gz`
 
-- Introduce multi-level support for different quality standards on the combination of operating systems and CPU architectures. See [OS and platform requirements](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements).
+- Introduce multi-level support for different quality standards on the combination of operating systems and CPU architectures. See [OS and platform requirements](https://docs-archive.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements).
 
 ## Improvements
 
@@ -44,7 +44,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 + TiKV
 
     - Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355) @[winoros](https://github.com/winoros)
-    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](https://docs.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611) configuration item [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
+    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](https://docs-archive.pingcap.com/tidb/v6.1/tikv-configuration-file#simplify-metrics-new-in-v611) configuration item [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
     - Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145) @[ethercflow](https://github.com/ethercflow)
 
 + PD

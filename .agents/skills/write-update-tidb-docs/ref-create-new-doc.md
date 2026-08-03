@@ -1,10 +1,10 @@
 # Create New TiDB Documentation
 
-Self-contained workflow for creating a new documentation page in `pingcap/docs`. Follow these steps sequentially if the [write-update-tidb-docs](/.ai/skills/write-update-tidb-docs/SKILL.md) skill has determined that a new page is needed.
+Self-contained workflow for creating a new documentation page in `pingcap/docs`. Follow these steps sequentially if the [write-update-tidb-docs](/.agents/skills/write-update-tidb-docs/SKILL.md) skill has determined that a new page is needed.
 
 ## Confirm the decision to create
 
-This is a final sanity re-check of the create-vs-update decision already made in the Step 4 (the authoritative decision point) of the [write-update-tidb-docs](/.ai/skills/write-update-tidb-docs/SKILL.md) skill — not a second, independent decision. If any criterion below fails, switch to `ref-update-existing-doc.md`.
+This is a final sanity re-check of the create-vs-update decision already made in the Step 4 (the authoritative decision point) of the [write-update-tidb-docs](/.agents/skills/write-update-tidb-docs/SKILL.md) skill — not a second, independent decision. If any criterion below fails, switch to `ref-update-existing-doc.md`.
 
 A new page is justified when all of these are true:
 

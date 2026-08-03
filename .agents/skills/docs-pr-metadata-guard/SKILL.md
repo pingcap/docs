@@ -18,14 +18,15 @@ Before changing a PR body, read `.github/pull_request_template.md`.
    - Review the local file against the template before calling `gh`.
 3. Fill in the required sections with concrete information.
    - **What is changed, added or deleted? (Required)**: describe what changed and why in clear, specific language. Do not leave this blank or fill it with a generic placeholder.
-   - **Which TiDB version(s) do your changes apply to? (Required)**: check at least one version checkbox. Follow the affected-version rules in `.ai/shared/repo-conventions.md`:
+   - **Which TiDB version(s) do your changes apply to? (Required)**: check at least one version checkbox. Follow the affected-version rules in `.agents/shared/repo-conventions.md`:
      - Default to `master` only for general improvements, wording fixes, missing-content additions, and corrections not tied to a specific released behavior.
      - Check the affected release branch(es) together with `master` when the change involves version-specific behavior, compatibility changes, changed defaults, or fixes in published docs.
    - **What is the related PR or file link(s)?**: fill in the translation source link under `This PR is translated from:` when the PR is a translation from `docs-cn`. Fill in other reference links such as product PRs, issues, or related doc PRs under `Other reference link(s):`.
+   - **AI agent involvement**: when this section is present in the template, keep it intact. Check its checkbox only when the changes were primarily made by an AI agent on behalf of the PR author; otherwise leave it unchecked.
    - **Do your changes match any of the following descriptions?**: check all that apply. If the change needs different wording on another branch, check `Need modification after applied to another branch` and comment `/label version-specific-changes-required`.
 4. Choose the correct base branch.
    - Default to `master` for most documentation PRs.
-   - Use `release-8.5` for TiDB Cloud documentation changes (see `.ai/shared/repo-conventions.md` for TiDB Cloud conventions).
+   - Use `release-8.5` for TiDB Cloud documentation changes (see `.agents/shared/repo-conventions.md` for TiDB Cloud conventions).
    - Use a specific `release-X.Y` branch when the change is scoped to a single published version and does not apply to `master`.
 5. For an existing PR, update only the mutable sections.
    - Safe targets: the description text under "What is changed, added or deleted?", the version checkboxes, the related-link fields, and the description checkboxes.
@@ -74,6 +75,7 @@ The version checkboxes in the PR template follow a specific order from newest to
 - The version checkbox section preserves the template's canonical version list and order.
 - The "Tips for choosing the affected version(s)" paragraph and the `CONTRIBUTING.md` link are present between the version heading and the checkboxes.
 - The related-link fields (`This PR is translated from:` and `Other reference link(s):`) are present, even if left at their default values.
+- The `AI agent involvement` section is present when defined by the template, and its checkbox accurately reflects whether an AI agent primarily made the changes on the PR author's behalf.
 - The "Do your changes match any of the following descriptions?" section is present with its checkboxes intact.
 - The first-time contributors' checklist is either correctly filled in or removed entirely as instructed.
 - The base branch matches the change scope: `master` by default, `release-8.5` for TiDB Cloud, or a specific `release-X.Y` for version-scoped fixes.

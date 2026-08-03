@@ -811,7 +811,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
     * In a cluster with a large number of Regions, the PD leader experiences high CPU pressure due to the increased overhead of handling heartbeats and scheduling tasks.
     * In a TiDB cluster with many TiDB instances, the PD leader experiences high CPU pressure due to a high concurrency of requests for Region information.
 
-### performance_schema_session_connect_attrs_size <span class="version-mark">New in v9.0.0</span>
+### performance_schema_session_connect_attrs_size <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1170,13 +1170,19 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_analyze_distsql_scan_concurrency <span class="version-mark">New in v7.6.0</span>
 
+> **Note:**
+>
+> In versions earlier than v7.6.0, regular `ANALYZE` region scans are controlled by `tidb_distsql_scan_concurrency`, and index statistics scans are controlled by `tidb_index_serial_scan_concurrency`. Therefore, to adjust the concurrency of scanning TiKV Regions for these versions, consider changing the value of `tidb_distsql_scan_concurrency`.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 4294967295]`. In versions earlier than v8.2.0, the minimum value is `1`. When you set it to `0`, it adaptively adjusts the concurrency based on the cluster size.
-- This variable is used to set the concurrency of the `scan` operation when executing the `ANALYZE` operation.
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency of scanning TiKV Regions.
+    - The concurrency of scanning Regions for special indexes, such as indexes on generated virtual columns.
 
 ### tidb_analyze_partition_concurrency
 
@@ -1185,7 +1191,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - Range: `[1, 128]`. Before v8.4.0, the value range is `[1, 18446744073709551615]`.
-- This variable specifies the concurrency for writing collected statistics when TiDB analyzes a partitioned table.
+- For manual and auto `ANALYZE`, this variable controls the concurrency for saving `ANALYZE` results, including writing TopN and histograms to system tables.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
 
@@ -1229,7 +1235,7 @@ mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
-| json,blob,mediumblob,longblob    |
+| json,blob,mediumblob,longblob,mediumtext,longtext        |
 +----------------------------------+
 1 row in set (0.00 sec)
 
@@ -1329,7 +1335,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Type: Integer
 - Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the concurrency of executing the automatic update of statistics. 
+- This variable controls the concurrency for building statistics during auto `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously
 - Starting from v8.5.7 and v9.0.0, the default value of this variable changes from `1` to `2`. If your cluster is upgraded from an earlier version, the value of this variable remains unchanged after the upgrade.
 
 ### tidb_backoff_lock_fast
@@ -1443,8 +1449,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of executing the `ANALYZE` statement.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously.
 
 ### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
@@ -1455,8 +1460,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Unit: Threads
 - Default value: `2`
 - Range: `[1, 256]`
-- This variable is used to set the sampling concurrency in the `ANALYZE` process.
-- When the variable is set to a larger value, the execution performance of other queries is affected.
+- This variable controls the following aspects of `ANALYZE` concurrency:
+    - The concurrency for merging samples collected from different Regions.
+    - The concurrency for collecting statistics on special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -1650,21 +1656,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
 
-<CustomContent platform="tidb-cloud" plan="starter,essential">
-
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> This variable is read-only for [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium).
-
-</CustomContent>
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1681,7 +1675,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > - If you are using a [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) cluster, to improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU.
 > - For [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) clusters with 4 vCPU, it is recommended to manually disable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to prevent resource limitations from affecting cluster stability during index creation. Disabling this setting allows indexes to be created using transactions, which reduces the overall impact on the cluster.
-> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) instances, this variable is read-only.
+> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this variable is read-only.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1691,14 +1685,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
 - Starting from v7.1.0, the index acceleration operation supports checkpoints. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis.
 - To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 <CustomContent platform="tidb">
 
@@ -1728,6 +1714,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -1737,14 +1727,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
 - Starting from TiDB v8.1.0, this variable is enabled by default. If you want to upgrade a cluster with the DXF enabled to v8.1.0 or later, disable the DXF (by setting `tidb_enable_dist_task` to `OFF`) before the upgrade, which avoids `ADD INDEX` operations during the upgrade causing data index inconsistency. After the upgrade, you can manually enable the DXF.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
@@ -1824,6 +1806,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_ddl_reorg_max_write_speed <span class="version-mark">New in v6.5.12, v7.5.5, and v8.5.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
@@ -1843,35 +1829,12 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - When Global Sort is disabled, only one TiDB node writes to TiKV at a time. In this case, the maximum write bandwidth per TiKV node is `100MiB`.
 - When Global Sort is enabled, all 4 TiDB nodes can write to TiKV simultaneously. In this case, the maximum write bandwidth per TiKV node is `4 * 100MiB = 400MiB`.
 
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is automatically tuned to an appropriate value and cannot be modified by users. If you need to adjust the setting, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
-
 ### tidb_ddl_reorg_worker_cnt
 
-<CustomContent platform="tidb-cloud">
-
-<CustomContent plan="starter,essential">
-
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
-
-</CustomContent>
-
-</CustomContent>
+> - For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), this variable is read-only.
+> - For [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), modifying this TiDB variable takes effect only on `MODIFY COLUMN` DDL jobs and does not affect `ADD INDEX` DDL jobs.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2505,20 +2468,16 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 
 ### tidb_enable_metadata_lock <span class="version-mark">New in v6.3.0</span>
 
+> **Note:**
+>
+> For {{{ .premium }}}, this variable is read-only.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> For {{{ .premium }}}, this variable is read-only. If you need to modify it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
@@ -3712,6 +3671,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_index_serial_scan_concurrency
 
+> **Warning:**
+>
+> This variable is deprecated and no longer controls execution behavior. The concurrency of sequential index scans is now controlled by [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50), and [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) uses [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
@@ -3719,8 +3682,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1`
 - Range: `[1, 256]`
 - Unit: Threads
-- This variable is used to set the concurrency of the `serial scan` operation.
-- Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+- This variable remains only for backward compatibility. Use [`tidb_executor_concurrency`](#tidb_executor_concurrency-new-in-v50) to control the concurrency of sequential index scans, or [`tidb_analyze_distsql_scan_concurrency`](#tidb_analyze_distsql_scan_concurrency-new-in-v760) to control the concurrency of index statistics scans.
 
 ### tidb_init_chunk_size
 
@@ -4305,7 +4267,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
-- This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+- This variable controls the concurrency for merging TopN results of partitioned tables.
 
 ### tidb_enable_async_merge_global_stats <span class="version-mark">New in v7.5.0</span>
 
@@ -4937,7 +4899,7 @@ mysql> desc select count(distinct a) from test.t;
 +----------------------------------+---------+-----------+----------------------+-------------------------------------+
 ```
 
-### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.6 and v9.0.0</span>
+### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -5808,21 +5770,9 @@ SHOW WARNINGS;
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
-<CustomContent platform="tidb-cloud" plan="starter,essential">
-
 > **Note:**
 >
-> This variable is read-only for [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) and [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud" plan="premium">
-
-> **Note:**
->
-> This variable is read-only for [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#premium).
-
-</CustomContent>
+> For [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter), [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential), and [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium), this variable is read-only.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes

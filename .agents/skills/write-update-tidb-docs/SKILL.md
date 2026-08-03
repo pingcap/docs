@@ -53,12 +53,12 @@ Multiple inputs can be combined. More context = fewer questions needed.
 
 Always read before making any doc changes:
 
-- `.ai/shared/repo-conventions.md`
-- `.ai/shared/writing-style.md`
+- `.agents/shared/repo-conventions.md`
+- `.agents/shared/writing-style.md`
 
 Read only when relevant:
 
-- `.ai/shared/translation-rules.md` — when translation is involved
+- `.agents/shared/translation-rules.md` — when translation is involved
 - `resources/terms.md` — when terminology is uncertain
 
 ## Step 2: Analyze the input
@@ -109,7 +109,7 @@ Extract key user-facing facts. Ask focused questions only for facts that cannot 
 | `/tidb-cloud/` content | `release-8.5` |
 | `/ai/` content | `release-8.5` |
 
-Follow the repository's cherry-pick model (see `.ai/shared/repo-conventions.md`): default to a single PR on the latest applicable branch (usually `master`) and rely on cherry-pick labels for other maintained versions, rather than opening parallel PRs per branch. When in doubt, target `master`.
+Follow the repository's cherry-pick model (see `.agents/shared/repo-conventions.md`): default to a single PR on the latest applicable branch (usually `master`) and rely on cherry-pick labels for other maintained versions, rather than opening parallel PRs per branch. When in doubt, target `master`.
 
 ### Version number for "Starting from vX.Y" notes
 

@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-
 
     In addition, PD adds CPU-related hotspot statistics and scheduler controls, including the `cpu-read-rate` field in [hot store statistics](https://docs.pingcap.com/tidb/v8.5/pd-control#hot-read--write--store--history-start_time-end_time-key-value) and the [`min-hot-cpu-rate` and `cpu-rate-rank-step-ratio`](https://docs.pingcap.com/tidb/v8.5/pd-control#scheduler-config-balance-hot-region-scheduler) scheduler configurations.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#scatter-read-hotspots).
+    For more information, see [documentation](https://docs.pingcap.com/tidb/v8.5/troubleshoot-hot-spot-issues#cpu-aware-hot-region-scheduling-for-read-hotspots).
 
 ### Reliability
 
@@ -106,6 +106,7 @@ For TiDB clusters newly deployed in v8.5.6 (that is, v8.5.6 clusters that are no
 | [`tidb_enable_cache_prepare_stmt`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_cache_prepare_stmt-new-in-v857) | Newly added | Controls whether to cache the results of `Prepare` statements. The default value is `OFF`. Currently, this variable is experimental and is not recommended for use in production environments.|
 | [`tidb_enable_strict_not_null_check`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_enable_strict_not_null_check-new-in-v857) | Newly added | Controls whether TiDB performs strict validation when an `INSERT` statement explicitly writes a `NULL` value to a `NOT NULL` column. The default value is `ON`. If your application depends on the earlier permissive behavior of writing implicit default values, you can temporarily set this variable to `OFF` to reduce upgrade compatibility risks.|
 | [`tidb_opt_enable_alternative_logical_plans`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_enable_alternative_logical_plans-new-in-v857) | Newly added | Controls whether the optimizer additionally builds a logical candidate plan that does not decorrelate in correlated subquery decorrelation scenarios. The default value is `OFF`.|
+| [`tidb_opt_partial_ordered_index_for_topn`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_partial_ordered_index_for_topn-new-in-v857) | Newly added | Controls whether the optimizer can leverage the partial ordering of an index to optimize TopN computation when a query contains `ORDER BY ... LIMIT`. The default value is `DISABLE`, which means the optimization is disabled. |
 
 ### Configuration parameters
 
