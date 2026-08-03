@@ -11,7 +11,7 @@ summary: AUTO_RANDOM 属性について学習します。
 
 <CustomContent platform="tidb">
 
-TiDB で同時書き込みの多いワークロードを処理する方法の詳細については、 [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
+TiDB で同時書き込みの多いワークロードを処理する方法の詳細については、 [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
 </CustomContent>
 

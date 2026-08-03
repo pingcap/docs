@@ -294,7 +294,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 -   [システム変数](/system-variables.md#cte_max_recursion_depth)
 -   [TiDB 5.1 リリースノート](/releases/release-5.1.0.md)
 
@@ -3634,7 +3634,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [高同時書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 -   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
