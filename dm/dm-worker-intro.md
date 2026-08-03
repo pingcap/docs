@@ -55,9 +55,9 @@ The required privileges for the upstream database user depend on the database fl
 >
 > - If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
 
-#### MySQL and MariaDB earlier than 10.5.2
+#### MySQL and MariaDB (before MariaDB 10.5.2)
 
-For MySQL and MariaDB earlier than 10.5.2, the user must have the following privileges:
+For MySQL, and for MariaDB versions earlier than 10.5.2, the user must have the following privileges:
 
 | Privilege | Scope |
 |:----|:----|
@@ -126,7 +126,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 > **Note:**
 >
-> On some older MariaDB releases, `PROCESS` is not sufficient for the dump unit to query InnoDB metadata. With DM v8.5.6, this behavior occurs on MariaDB 10.4.34, 10.5.1, and 10.5.2 when the dump unit queries the `INNODB_TABLESPACES_SCRUBBING` or `INNODB_TABLESPACES_ENCRYPTION` table. In the same test, MariaDB 10.5.9, 10.6.13, and 10.11.16 complete without `SUPER`. If the dump unit returns `Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation`, grant `SUPER`. Because `SUPER` is a broad privilege, grant it only when this exact error occurs and your security policy permits it.
+> On some older MariaDB releases, `PROCESS` is not sufficient for the dump unit to query InnoDB metadata. With DM v8.5.6, this behavior occurs when the dump unit queries `INNODB_TABLESPACES_SCRUBBING` on MariaDB 10.4.34, or `INNODB_TABLESPACES_ENCRYPTION` on MariaDB 10.5.1 and 10.5.2. In the same smoke tests, MariaDB 10.5.9, 10.6.13, and 10.11.16 complete without `SUPER`. If the dump unit returns `Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation`, grant `SUPER`. Because `SUPER` is a broad privilege, grant it only when this exact error occurs and your security policy permits it.
 
 ### Downstream database user privileges
 
@@ -152,7 +152,7 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 
 ### Minimal privilege required by each processing unit
 
-The following table lists the minimal privileges required by each processing unit for MySQL and MariaDB earlier than 10.5.2. For MariaDB 10.5.2 and later, refer to the privilege tables in the preceding section.
+The following table lists the minimal privileges required by each processing unit for MySQL and for MariaDB versions earlier than 10.5.2. For MariaDB 10.5.2 and later, refer to the privilege tables in the preceding section.
 
 | Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
 |:----|:--------------------|:------------|:----|
