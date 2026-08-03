@@ -5,11 +5,11 @@ summary: Understand the pricing model and billing details for TiDB Cloud Lake.
 
 # TiDB Cloud Lake Pricing & Billing
 
-Your costs on {{{ .lake }}} consist of the following components: warehouses, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
+Your costs on {{{ .lake }}} consist of the following components: warehouses, service hosting, storage, and cloud service fees. This page contains information about the pricing of each component and how the billing works.
 
 ## {{{ .lake }}} Pricing
 
-This section provides pricing information on warehouse, storage, and cloud service.
+This section provides pricing information on warehouses, service hosting, storage, and cloud services.
 
 ### Warehouse Pricing
 
@@ -49,6 +49,18 @@ The cloud service fee currently includes fees for the API requests. Each time yo
 | ---------------- | ---------------------------- |
 | Personal Edition | $1.00                        |
 | Business Edition | $2.00                        |
+
+### Service Hosting Pricing
+
+Service hosting fees apply to Data Integration services. Unlike a warehouse, a Data Integration service typically runs continuously (24/7) until you stop it. Billing follows the same model as warehouses: it is calculated on a per-second basis according to the actual running time, and the price depends on the service size and the {{{ .lake }}} edition you use.
+
+Service sizes are derived from the XSmall warehouse size. The monthly costs in the following table are estimates based on continuous 24/7 operation for 720 hours per month (30 days) and are provided for reference only.
+
+| Size    | Hourly Cost (Personal) | Hourly Cost (Business) | Monthly Cost (Personal, 24/7) | Monthly Cost (Business, 24/7) |
+|---------|------------------------|------------------------|--------------------------------|--------------------------------|
+| 4XSmall | $0.20                  | $0.30                  | $144                           | $216                           |
+| 3XSmall | $0.40                  | $0.60                  | $288                           | $432                           |
+| 2XSmall | $0.80                  | $1.20                  | $576                           | $864                           |
 
 ## Example-1
 
