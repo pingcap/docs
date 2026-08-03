@@ -98,7 +98,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 
 `CAST()`使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)を参照してください。
 
-## 完全な参考文献 {#full-references}
+## 完全なリファレンス {#full-references}
 
 ### VEC_L2_DISTANCE {#vec_l2_distance}
 
