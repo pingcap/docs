@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Premium**
 
-    - Support Amazon MSK Provisioned clusters as changefeed sinks for TiDB Cloud Premium instances.
+    - Support [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) clusters as changefeed sinks for TiDB Cloud Premium instances.
 
         For TiDB Cloud Premium instances hosted on AWS, you can now stream row change events to Amazon MSK Provisioned clusters over AWS PrivateLink.
 
