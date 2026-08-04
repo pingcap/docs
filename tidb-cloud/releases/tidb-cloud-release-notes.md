@@ -8,6 +8,53 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## August 4, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support subscribing to alert notifications from TiDB Cloud Essential via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see Subscribe via Webhook.
+
+- **TiDB Cloud Premium**
+
+    - Support Amazon MSK Provisioned clusters as changefeed sinks for TiDB Cloud Premium instances.
+
+        For TiDB Cloud Premium instances hosted on AWS, you can now stream row change events to Amazon MSK Provisioned clusters over AWS PrivateLink.
+
+        For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) and [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
+
+    - Introduce **Custom Retention Mode** for automatic backups on TiDB Cloud Premium instances.
+
+        TiDB Cloud Premium now offers two automatic backup modes:
+
+        - **Custom Retention Mode:** lets you specify the retention period from 3 to 33 days and choose when daily snapshots are created.
+        - **Standard Bundle Mode:** preserves the previous default automatic backup settings for PITR, hourly snapshots, and daily snapshots.
+
+      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md).
+
+    - Support subscribing to alert notifications from TiDB Cloud Premium via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see Subscribe via Webhook.
+
+- **TiDB Cloud Dedicated**
+
+    - Update pause requirements for TiDB Cloud Dedicated clusters.
+
+        Before [pausing a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md), you must turn off [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) and ensure that no Data Migration job is running. If either condition is not met, TiDB Cloud rejects the pause request and displays an error message.
+
+    - Support subscribing to alert notifications from TiDB Cloud Dedicated via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see Subscribe via Webhook.
+
 ## July 28, 2026
 
 **General changes**
