@@ -68,14 +68,10 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
     <CustomContent plan="essential">
 
     <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>
-
-    </CustomContent>
-
-    <CustomContent plan="essential">
         
     For TiDB Cloud Essential instances created starting July 1, 2026, please download this JSON file:
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>
-
+    https://github.com/pingcap/docs/pull/23413
+   
     </CustomContent>
     
     <CustomContent plan="premium">
@@ -84,13 +80,13 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
     </CustomContent>
 
-2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
+3. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
 
     > **Note:**
     >
     > If you are already using Prometheus and Grafana to monitor <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instances and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
 
-3. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
+4. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
