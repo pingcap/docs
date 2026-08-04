@@ -168,7 +168,7 @@ TiDB バージョン: 6.5.1
 
         -   TiKV または TiCDC ノードスケールインまたはスケールアウトなどの特別なシナリオで、changefeed がスタックする可能性がある問題を修正しました。 [＃8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)
         -   REDOログのストレージパスで事前チェックが実行されない問題を修正 [＃6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   S3storage障害に対して、REDO ログが許容できる期間が不十分である問題を修正しました [＃8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   S3ストレージ障害に対して、REDO ログが許容できる期間が不十分である問題を修正しました [＃8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   `transaction-atomicity`と`protocol`構成ファイル経由で更新できない問題を修正 [＃7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   TiCDC が過度に多数のテーブルを複製するとチェックポイントが進めなくなる問題を修正しました [＃8004](https://github.com/pingcap/tiflow/issues/8004) @[overvenus](https://github.com/overvenus)
         -   レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)

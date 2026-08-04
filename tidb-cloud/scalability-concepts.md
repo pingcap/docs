@@ -10,7 +10,7 @@ TiDB Cloudは、さまざまなワークロードのニーズに対応できる�
 -   [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、プロトタイプ作成、開発、および初期段階のワークロードに最適です。自動スケーリング機能が組み込まれているため、 TiDB Cloudを簡単かつ費用対効果の高い方法で使い始めることができます。
 -   [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、トラフィックやデータ量の増加下でも、より堅牢な拡張性と予測可能なパフォーマンスを必要とする本番のワークロード向けに構築されています。
 -   [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)は、無制限のリアルタイム拡張性を必要とするミッションクリティカルなビジネス向けに設計されています。ワークロードに応じた自動スケーリングと包括的なエンタープライズ機能を提供します。
--   TiDB Cloud Dedicated、データ量やワークロードの変化に合わせて、コンピューティングリソースとstorageリソースを個別に調整できます。TiDB Cloud Dedicatedは、サービスの中断なしにスケーリングが可能です。この柔軟性により、組織は高いパフォーマンスと可用性を維持しながら、インフラストラクチャコストを最適化できます。
+-   TiDB Cloud Dedicated、データ量やワークロードの変化に合わせて、コンピューティングリソースとストレージリソースを個別に調整できます。TiDB Cloud Dedicatedは、サービスの中断なしにスケーリングが可能です。この柔軟性により、組織は高いパフォーマンスと可用性を維持しながら、インフラストラクチャコストを最適化できます。
 
 > **Tip:**
 >

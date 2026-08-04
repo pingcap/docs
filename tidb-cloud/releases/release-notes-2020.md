@@ -45,7 +45,7 @@ summary: 2020 年のTiDB Cloudのリリース ノートについて説明しま�
 
 ## 2020年10月2日 {#october-2-2020}
 
--   TiFlashディスクstorage構成を修正
+-   TiFlashディスクストレージ構成を修正
 
 ## 2020年9月14日 {#september-14-2020}
 

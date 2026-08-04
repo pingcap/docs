@@ -27,7 +27,7 @@ URI の基本的な形式は次のとおりです。
     -   `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
     -   `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
     -   `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
-    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
+    -   `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
     -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
     -   `sse-kms-key-id` : `sse` `aws:kms`に設定されている場合は KMS ID を指定します。
     -   `acl` : アップロードされたオブジェクトの既定 ACL を指定します (たとえば、 `private`または`authenticated-read` )。
@@ -70,7 +70,7 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     -   `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
 
-    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
+    -   `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
 
     -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
 
@@ -103,7 +103,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 -   `parameters` :
 
     -   `credentials-file` : 移行ツール ノード上の資格情報 JSON ファイルへのパスを指定します。
-    -   `storage-class` : アップロードされたオブジェクトのstorageクラスを指定します（例： `STANDARD`または`COLDLINE` ）
+    -   `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します（例： `STANDARD`または`COLDLINE` ）
     -   `predefined-acl` : アップロードされたオブジェクトの定義済みACLを指定します（たとえば、 `private`または`project-private` ）
 
 <CustomContent platform="tidb">

@@ -122,7 +122,7 @@ TiDB バージョン: 4.0.8
 
     -   暗号化時のミューテックスの競合によりpd-workerのハートビート処理が遅くなるバグを修正[＃8869](https://github.com/tikv/tikv/pull/8869)
     -   メモリプロファイルが誤って生成される問題を修正[＃8790](https://github.com/tikv/tikv/pull/8790)
-    -   storageクラスが指定されている場合に GCS 上のデータベースをバックアップできない問題を修正しました [＃8763](https://github.com/tikv/tikv/pull/8763)
+    -   ストレージクラスが指定されている場合に GCS 上のデータベースをバックアップできない問題を修正しました [＃8763](https://github.com/tikv/tikv/pull/8763)
     -   リージョンが再起動されたり、新しく分割されたりしたときにラーナーがリーダーを見つけられないバグを修正[＃8864](https://github.com/tikv/tikv/pull/8864)
 
 -   PD

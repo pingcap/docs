@@ -96,7 +96,7 @@ TiDB バージョン: 4.0.9
     -   TiCDC
 
         -   TiKV の Hibernate リージョン機能を有効にするためのアラートを追加する [＃1120](https://github.com/pingcap/tiflow/pull/1120)
-        -   スキーマstorageのメモリ使用量を削減 [＃1127](https://github.com/pingcap/tiflow/pull/1127)
+        -   スキーマストレージのメモリ使用量を削減 [＃1127](https://github.com/pingcap/tiflow/pull/1127)
         -   増分スキャンのデータサイズが大きい場合にレプリケーションを高速化する統合ソーター機能を追加（実験的） [＃1122](https://github.com/pingcap/tiflow/pull/1122)
         -   TiCDC オープンプロトコルメッセージの最大メッセージサイズと最大メッセージバッチの構成をサポート (Kafka シンクのみ) [＃1079](https://github.com/pingcap/tiflow/pull/1079)
 

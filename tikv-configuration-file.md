@@ -369,7 +369,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `use-unified-pool` {#use-unified-pool-1}
 
--   storage要求に統合スレッドプール（ [`readpool.unified`](#readpoolunified)で構成）を使用するかどうかを決定します。このパラメーターの値が`false`の場合、このセクションの残りのパラメーター（ `readpool.storage` ）で構成された別のスレッドプールが使用されます。
+-   ストレージ要求に統合スレッドプール（ [`readpool.unified`](#readpoolunified)で構成）を使用するかどうかを決定します。このパラメーターの値が`false`の場合、このセクションの残りのパラメーター（ `readpool.storage` ）で構成された別のスレッドプールが使用されます。
 -   デフォルト値: このセクション ( `readpool.storage` ) に他の設定がない場合、デフォルト値は`true`です。それ以外の場合は、下位互換性のために、デフォルト値は`false`です。このオプションを有効にする前に、必要に応じて[`readpool.unified`](#readpoolunified)の設定を変更してください。
 
 ### `high-concurrency` {#high-concurrency-1}

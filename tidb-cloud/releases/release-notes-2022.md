@@ -280,7 +280,7 @@ summary: 2022 年のTiDB Cloudのリリース ノートについて説明しま�
 
     TiDB Cloudは、ご利用料金がクォータに達すると請求書を発行します。クォータの引き上げ、または月ごとの請求書の受け取りをご希望の場合は、 [当社の販売](https://www.pingcap.com/contact-us/)ご連絡ください。
 
--   データバックアップ費用からstorage運用手数料を免除します。最新の料金情報については[TiDB Cloudの価格詳細](https://www.pingcap.com/tidb-cloud-pricing-details/)ご覧ください。
+-   データバックアップ費用からストレージ運用手数料を免除します。最新の料金情報については[TiDB Cloudの価格詳細](https://www.pingcap.com/tidb-cloud-pricing-details/)ご覧ください。
 
 **コンソールの変更**
 

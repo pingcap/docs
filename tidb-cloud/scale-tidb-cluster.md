@@ -90,7 +90,7 @@ TiKV またはTiFlashのストレージを増やすことができます。
 > **Warning:**
 >
 > -   実行中のクラスターの場合、AWS、Azure、Google Cloud では、インプレースストレージ容量のダウングレードは許可されません。
-> -   AWS と Azure では、storage変更のクールダウン期間があります。TiDB クラスターが AWS または Azure でホストされている場合、TiKV またはTiFlashのstorage、または vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
+> -   AWS と Azure では、ストレージ変更のクールダウン期間があります。TiDB クラスターが AWS または Azure でホストされている場合、TiKV またはTiFlashのストレージ、または vCPU と RAM を変更した後、再度変更するには少なくとも 6 時間待つ必要があります。
 
 TiKV またはTiFlashのストレージを変更するには、次の手順を実行します。
 

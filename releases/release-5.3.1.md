@@ -38,7 +38,7 @@ TiDB バージョン: 5.3.1
     -   TiCDC
 
         -   Kafka プロデューサーの設定パラメータを公開して、TiCDC で設定できるようにします。 [＃4385](https://github.com/pingcap/tiflow/issues/4385)
-        -   S3 をバックエンドstorageとして使用する場合、TiCDC の起動時に事前クリーンアッププロセスを追加します[＃3878](https://github.com/pingcap/tiflow/issues/3878)
+        -   S3 をバックエンドストレージとして使用する場合、TiCDC の起動時に事前クリーンアッププロセスを追加します[＃3878](https://github.com/pingcap/tiflow/issues/3878)
         -   TiCDCクライアントは証明書名が指定されていない場合でも動作します[＃3627](https://github.com/pingcap/tiflow/issues/3627)
         -   チェックポイントのタイムスタンプが予期せず進むのを避けるために、テーブルごとにシンクのチェックポイントを管理する[＃3545](https://github.com/pingcap/tiflow/issues/3545)
         -   チェンジフィードを再開するための指数バックオフメカニズムを追加します[＃3329](https://github.com/pingcap/tiflow/issues/3329)

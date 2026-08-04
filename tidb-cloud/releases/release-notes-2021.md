@@ -45,8 +45,8 @@ summary: 2021 年のTiDB Cloudのリリース ノートについて説明しま�
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、次のものが含まれます。
 
     -   1つのTiDB共有ノード
-    -   1 つの TiKV 共有ノード (500 MiB の OLTPstorage付き)
-    -   1 つのTiFlash共有ノード (500 MiB の OLAPstorage付き)
+    -   1 つの TiKV 共有ノード (500 MiB の OLTPストレージ付き)
+    -   1 つのTiFlash共有ノード (500 MiB の OLAPストレージ付き)
 
     始めましょ[ここ](/tidb-cloud/tidb-cloud-quickstart.md) .
 

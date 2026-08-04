@@ -87,7 +87,7 @@ TiDB バージョン: 6.1.6
         -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @[zhaoxinyu](https://github.com/zhaoxinyu)
         -   `db sorter`のメモリ使用量が`cgroup memory limit`で制御されない問題を修正 [＃8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
         -   無効な入力に対する`cdc cli`のエラーメッセージを最適化します [＃7903](https://github.com/pingcap/tiflow/issues/7903) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   S3storage障害に対して、REDO ログが許容できる期間が不十分である問題を修正しました [＃8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        -   S3ストレージ障害に対して、REDO ログが許容できる期間が不十分である問題を修正しました [＃8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         -   PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [＃8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
 
     -   TiDB Lightning
