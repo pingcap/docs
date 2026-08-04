@@ -79,7 +79,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を参照してください。
 
--   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @@ [afeinberg](https://github.com/afeinberg)
+-   定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @@[afeinberg](https://github.com/afeinberg)
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
@@ -178,7 +178,7 @@ TiDB バージョン: 7.6.0
 
 ### 可観測性 {#observability}
 
--   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@ [bufferflies](https://github.com/bufferflies)@ [nolouch](https://github.com/nolouch)
+-   リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
 
     アプリケーションのワークロードを分離するためにリソース グループを使用するユーザーが増えるにつれ、リソース コントロールはリソース グループに基づいた強化されたデータを提供します。これにより、リソース グループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
@@ -329,7 +329,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   TiCDC
 
         -   TiCDCによるオブジェクトストレージへのデータ複製パフォーマンスを並列処理の増加によって改善する [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の@ [3AceShowHand](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
+        -   `content-compatible=true` [公式Canal出力のコンテンツ形式と互換性がある](/ticdc/ticdc-canal-json.md#compatibility-with-the-official-canal)`sink-uri`の@[3AceShowHand](https://github.com/3AceShowHand) [#10106](https://github.com/pingcap/tiflow/issues/10106)
 
     -   TiDB Data Migration (DM)
 
