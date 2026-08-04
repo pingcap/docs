@@ -99,18 +99,22 @@ PITR lets you restore to any specific point in time within its retention period.
     The overview shows the features enabled by the selected mode, their retention periods, and the available restore options.
 
 <CustomContent plan="byoc"> 
+
 > **Note:**
 >
 > - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
 > - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+
 </CustomContent> 
 
 <CustomContent plan="premium">
+
 > **Note:**
 >
 > - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
 > - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud/pricing/) for more information.
 > - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+
 </CustomContent>
 
 ### Switch automatic backup modes
