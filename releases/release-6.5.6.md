@@ -145,7 +145,7 @@ TiDB バージョン: 6.5.6
         -   EC2 メタデータ接続のリセット後の再試行により、バックアップとリストアのパフォーマンスが低下する問題を修正[＃47650](https://github.com/pingcap/tidb/issues/47650) @ [Leavrth](https://github.com/Leavrth)
         -   1分以内にPITRを複数回実行するとデータ損失が発生する可能性がある問題を修正[＃15483](https://github.com/tikv/tikv/issues/15483) @ [YuJuncen](https://github.com/YuJuncen)
         -   BR SQL コマンドと CLI のデフォルト値が異なるため、OOM の問題が発生する可能性がある問題を修正しました[＃48000](https://github.com/pingcap/tidb/issues/48000) @ [YuJuncen](https://github.com/YuJuncen)
-        -   PD所有者がから@ [YuJuncen](https://github.com/YuJuncen)転送されたときにログバックアップがpanicする可能性がある問題を修正しました [＃47533](https://github.com/pingcap/tidb/issues/47533)
+        -   PD所有者が転送されたときにログバックアップがpanicする可能性がある問題を修正しました [＃47533](https://github.com/pingcap/tidb/issues/47533) @[YuJuncen](https://github.com/YuJuncen)
         -   BRが外部ストレージファイルに対して誤ったURIを生成する問題を修正 [＃48452](https://github.com/pingcap/tidb/issues/48452) @ [3AceShowHand](https://github.com/3AceShowHand)
 
     -   TiCDC

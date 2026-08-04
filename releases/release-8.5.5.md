@@ -222,7 +222,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     -   ホットリードワークロード時のCPU飢餓を回避するために、統合リードプールにCPU認識スケーリングを導入する [#18464](https://github.com/tikv/tikv/issues/18464) @[mittalrishabh](https://github.com/mittalrishabh)
     -   ネットワークレイテンシーを考慮したスコアを追加し、不安定なネットワーク状態のTiKVノードにリーダーをスケジュールしないようにする [#18797](https://github.com/tikv/tikv/issues/18797) @[okJiang](https://github.com/okJiang)
     -   リーダーが過半数の票を獲得した後、オフラインの非投票ピアを待たずにすぐに休止状態に入ることができるようにすることで、休止状態のリージョンの動作を最適化します [#19070](https://github.com/tikv/tikv/issues/19070) @[jiadebin](https://github.com/jiadebin)
-    -   TiKV OOM [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)を防ぐために、TiKVメモリ使用量が高いときにBRログ復元リクエストをスロットルします
+    -   TiKV OOM を防ぐために、TiKVメモリ使用量が高いときにBRログ復元リクエストをスロットルします [#18124](https://github.com/tikv/tikv/issues/18124) @[3pointer](https://github.com/3pointer)
 
 -   PD
 

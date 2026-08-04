@@ -408,7 +408,7 @@ TiDB をアップグレードする前に、オペレーティング システ�
     -   TiDB Data Migration (DM)
 
         -   複数のDMマスターノードが同時にリーダーになる可能性があり、データ不整合を引き起こす問題を修正しました [#11602](https://github.com/pingcap/tiflow/issues/11602) @[GMHDBJD](https://github.com/GMHDBJD)
-        -   `ALTER DATABASE`ステートメントを処理する際に DM がデフォルト データベースを設定しない問題を修正します。これにより、レプリケーション エラー [#11503](https://github.com/pingcap/tiflow/issues/11503)が発生します。@[lance6716](https://github.com/lance6716)
+        -   `ALTER DATABASE`ステートメントを処理する際に DM がデフォルト データベースを設定しないことでレプリケーション エラーが発生する問題を修正します [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
 
     -   TiDB Lightning
 

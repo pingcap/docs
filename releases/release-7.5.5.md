@@ -83,7 +83,7 @@ TiDB バージョン: 7.5.5
     -   `tidb_ddl_enable_fast_reorg`と`new_collations_enabled_on_first_bootstrap`有効になっているときに照合順序が正しく処理されず、データ インデックスが不一致になる問題を修正しました。 [＃58036](https://github.com/pingcap/tidb/issues/58036) @ [djshow832](https://github.com/djshow832)
     -   プランキャッシュがインデックスを追加するときに間違ったスキーマを使用するため、データインデックスが不整合になる問題を修正しました。 [＃56733](https://github.com/pingcap/tidb/issues/56733) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   アップグレード中に`ALTER TABLE TIFLASH REPLICA`を実行するとTiDBノードがクラッシュする問題を修正[＃57863](https://github.com/pingcap/tidb/issues/57863) @ [tangenta](https://github.com/tangenta)
-    -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが@ [lance6716](https://github.com/lance6716)で低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184)
+    -   クエリ`INFORMATION_SCHEMA.columns`のパフォーマンスが低下する問題を修正 [＃58184](https://github.com/pingcap/tidb/issues/58184) @[lance6716](https://github.com/lance6716)
     -   TiFlashシステムテーブルを照会するためのデフォルトのタイムアウトが短すぎる問題を修正[＃57816](https://github.com/pingcap/tidb/issues/57816) @ [JaySon-Huang](https://github.com/JaySon-Huang)
     -   `default_collation_for_utf8mb4`変数の値が`SET NAMES`ステートメントで機能しない問題を修正しました [＃56439](https://github.com/pingcap/tidb/issues/56439) @ [Defined2014](https://github.com/Defined2014)
     -   `mysql.tidb_timer`テーブルでタイマーを手動で削除すると、TTL 内部コルーチンがpanicになる可能性がある問題を修正しました。 [＃57112](https://github.com/pingcap/tidb/issues/57112) @ [lcwangchao](https://github.com/lcwangchao)
