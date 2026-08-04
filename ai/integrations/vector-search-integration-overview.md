@@ -36,7 +36,7 @@ The following table lists the supported embedding providers. For details on how 
 
 ## AI frameworks
 
-TiDB provides official support for the following AI framework, enabling you to easily integrate AI applications developed with these frameworks into TiDB Vector Search.
+TiDB provides official support for the following AI framework, enabling you to easily integrate AI applications developed with this framework into TiDB Vector Search.
 
 | AI framework | Tutorial                                                                                          |
 |---------------|---------------------------------------------------------------------------------------------------|
