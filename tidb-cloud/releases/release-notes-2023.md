@@ -178,7 +178,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
 **APIの変更**
 
--   [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)または[Google Cloud プライベート サービス接続](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
+-   [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)または[Google Cloud プライベート サービス接続](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
 
     -   クラスターのプライベート エンドポイント サービスを作成する
     -   クラスターのプライベート エンドポイント サービス情報を取得する
@@ -445,13 +445,13 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     Index Insight を使用するには、 TiDB Cloud Dedicated クラスターの**診断**ページに移動し、 **Index Insight BETA**タブをクリックします。
 
--   登録やインストールなしで TiDB の全機能を体験できるインタラクティブ プラットフォーム[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)をご紹介します。
+-   登録やインストールなしで TiDB の全機能を体験できるインタラクティブ プラットフォーム[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes)をご紹介します。
 
     TiDB Playground は、スケーラビリティ、MySQL 互換性、リアルタイム分析などの TiDB の機能をワンストップで探索できるエクスペリエンスを提供するように設計されたインタラクティブ プラットフォームです。
 
     TiDB Playground を使用すると、複雑な構成のない制御された環境で TiDB の機能をリアルタイムで試すことができるため、TiDB の機能を理解するのに最適です。
 
-    TiDB Playground を使い始めるには、 [**TiDB Playground**](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)ページに移動し、探索する機能を選択して探索を開始します。
+    TiDB Playground を使い始めるには、 [**TiDB Playground**](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes)ページに移動し、探索する機能を選択して探索を開始します。
 
 ## 2023年6月5日 {#june-5-2023}
 

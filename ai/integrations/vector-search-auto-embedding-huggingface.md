@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 [Hugging Face Inference API](https://huggingface.co/docs/inference-providers/index)キー（BYOK）をお持ちの場合は、 `huggingface/`プレフィックスを使用してHugging Face モデルをご利用いただけます。
 
-便宜上、以下のセクションではいくつかの人気モデルを例として使用します。利用可能なモデルの全リストについては、 [Hugging Face モデル](https://huggingface.co/models?library=sentence-transformers&#x26;inference_provider=hf-inference&#x26;sort=trending)を参照してください。なお、すべてのモデルがHugging Face Inference APIで利用できるわけではなく、また正常に動作するとは限りません。
+便宜上、以下のセクションではいくつかの人気モデルを例として使用します。利用可能なモデルの全リストについては、 [Hugging Face モデル](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending)を参照してください。なお、すべてのモデルがHugging Face Inference APIで利用できるわけではなく、また正常に動作するとは限りません。
 
 ## 多言語対応E5ラージ {#multilingual-e5-large}
 

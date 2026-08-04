@@ -60,7 +60,7 @@ TiDBバージョン: 4.0.16
     -   ベクトル化された式の関数`hour`の誤った結果を修正します [＃28643](https://github.com/pingcap/tidb/issues/28643)
     -   楽観的トランザクションの競合によりトランザクションが互いにブロックされる可能性がある問題を修正[＃11148](https://github.com/tikv/tikv/issues/11148)
     -   `auto analyze`の結果のログ情報が不完全である問題を修正 [＃29188](https://github.com/pingcap/tidb/issues/29188)
-    -   `SQL_MODE` &#39;NO_ZERO_IN_DATE&#39; の場合に無効なデフォルト日付を使用してもエラーが報告されない問題を修正しました[＃26766](https://github.com/pingcap/tidb/issues/26766)
+    -   `SQL_MODE` 'NO_ZERO_IN_DATE' の場合に無効なデフォルト日付を使用してもエラーが報告されない問題を修正しました[＃26766](https://github.com/pingcap/tidb/issues/26766)
     -   Grafanaのコプロセッサーキャッシュパネルにメトリクスが表示されない問題を修正しました。これで、Grafanaは`hits` / `miss` / `evict` の数値を表示します。 [＃26338](https://github.com/pingcap/tidb/issues/26338)
     -   同じパーティションを同時に切り捨てるとDDL文がスタックする問題を修正しました[＃26229](https://github.com/pingcap/tidb/issues/26229)
     -   `Decimal`を`String`に変換するときに長さ情報が間違っている問題を修正しました[＃29417](https://github.com/pingcap/tidb/issues/29417)

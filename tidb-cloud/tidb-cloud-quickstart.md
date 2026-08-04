@@ -10,7 +10,7 @@ category: quick start
 
 このチュートリアルでは、 TiDB Cloudを使い始めるための簡単な方法を説明します。
 
-さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
+さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
 
 ## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
 

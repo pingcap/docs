@@ -26,7 +26,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   コンポーネント所有者の秘密鍵を指定します。クライアントは秘密鍵を使用して`{component}.json`ファイルに署名します。
 -   データ型: `STRING`
--   デフォルト: &quot;${TIUP_HOME}/keys/private.json&quot;
+-   デフォルト: "${TIUP_HOME}/keys/private.json"
 
 ### - アーチ {#arch}
 
@@ -38,7 +38,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   データ型: `STRING`
 
--   デフォルト: &quot;${GOARCH}&quot;
+-   デフォルト: "${GOARCH}"
 
 > **Note:**
 >
@@ -54,7 +54,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   データ型: `STRING`
 
--   デフォルト: &quot;${GOOS}&quot;
+-   デフォルト: "${GOOS}"
 
 > **Note:**
 >

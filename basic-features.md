@@ -7,7 +7,7 @@ summary: TiDBの機能概要について学びましょう。
 
 このドキュメントでは、最新 LTS バージョン以降の[長期サポート（LTS）](/releases/versioning.md#long-term-support-releases)バージョンや[開発マイルストーンリリース（DMR）](/releases/versioning.md#development-milestone-releases)バージョンを含む、さまざまな TiDB バージョンでサポートされている機能をリストします。
 
-[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_features)でTiDBの機能を試すことができます。
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features)でTiDBの機能を試すことができます。
 
 > **Note:**
 >
@@ -175,7 +175,7 @@ summary: TiDBの機能概要について学びましょう。
 | [反復読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [リードコミット隔離](/transaction-isolation-levels.md)                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [長時間実行されているアイドル状態のトランザクションを自動的に終了する](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760) |  Y  |  Y  |  N  |  N  |  N  |  N  |  N  |
-| [一括DML実行モード（ `tidb_dml_type = &quot;bulk&quot;` ）](/system-variables.md#tidb_dml_type-new-in-v800)   |  E  |  E  |  N  |  N  |  N  |  N  |  N  |
+| [一括DML実行モード（ `tidb_dml_type = "bulk"` ）](/system-variables.md#tidb_dml_type-new-in-v800)   |  E  |  E  |  N  |  N  |  N  |  N  |  N  |
 
 </StickyHeaderTable>
 

@@ -228,7 +228,7 @@ a building for office use.
 
 検索結果を絞り込むには、メタデータフィルターを使用して、適用したフィルターに一致する特定の近隣検索結果を取得できます。
 
-#### <code>book != &quot;paul_graham&quot;</code>フィルターと異なるクエリ {#query-with-code-book-paul-graham-code-filter}
+#### <code>book != "paul_graham"</code>フィルターと異なるクエリ {#query-with-code-book-paul-graham-code-filter}
 
 次の例では`book`メタデータ フィールドが`"paul_graham"`である結果を除外しています。
 
@@ -256,7 +256,7 @@ print(textwrap.fill(str(response), 100))
 Empty Response
 ```
 
-#### <code>book == &quot;paul_graham&quot;</code>フィルターを含むクエリ {#query-with-code-book-paul-graham-code-filter}
+#### <code>book == "paul_graham"</code>フィルターを含むクエリ {#query-with-code-book-paul-graham-code-filter}
 
 次の例では`book`メタデータ フィールドが`"paul_graham"`であるドキュメントのみを結果に含めるようにフィルタリングしています。
 

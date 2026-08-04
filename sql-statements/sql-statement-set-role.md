@@ -89,8 +89,8 @@ TiDBの`SET ROLE`文はMySQL 8.0のロール機能と完全に互換性があり
 
 -   [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
 -   [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
--   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
--   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">

@@ -28,7 +28,7 @@ tiup mirror grant <id> [flags]
 -   導入されたコンポーネントの所有者のキーを指定します。このキーは公開キーまたは秘密キーのいずれかです。秘密キーの場合、 TiUP はそれを対応する公開キーに変換してからミラーに保存します。
 -   キーは 1 つのコンポーネント所有者のみが使用できます。
 -   データ型: `STRING`
--   デフォルト: &quot;${TIUP_HOME}/keys/private.json&quot;
+-   デフォルト: "${TIUP_HOME}/keys/private.json"
 
 ### -n, --name {#n-name}
 

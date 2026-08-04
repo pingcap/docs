@@ -1076,7 +1076,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### ヒントを使用すると<code>Can&#39;t find a proper physical plan for this query</code>というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
+### ヒントを使用すると<code>Can't find a proper physical plan for this query</code>というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
 
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 

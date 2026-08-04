@@ -66,7 +66,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   原因4：初期バージョン（v2.1.15およびv3.0.0-rc1未満のバージョン）では、PDインスタンスがTiDBキーを削除できず、すべてのDDL変更が2リース分待機することになります。
 
-    -   その他の原因不明の場合は[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)。
+    -   その他の原因不明の場合は[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
 
     -   解決：
 
@@ -121,7 +121,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     -   バージョン3.0.0以降の場合、 `tidb.log`内の「expensive_query」をgrepしてください。このログメッセージには、タイムアウトした、またはメモリ割り当て量を超過したSQLクエリが記録されています。
 
-    -   バージョンが v3.0.0 未満の場合、 `tidb.log`で &quot;メモリ exceeded quota&quot; を grep して、メモリクォータを超える SQL クエリを特定します。
+    -   バージョンが v3.0.0 未満の場合、 `tidb.log`で "メモリ exceeded quota" を grep して、メモリクォータを超える SQL クエリを特定します。
 
     > **Note:**
     >
@@ -163,7 +163,7 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     -   統計情報を更新します。問題の原因が統計情報にあるとおおよそ確信できる場合は、[統計情報を捨てる](/statistics.md#export-statistics)。原因が古い統計情報である場合、例えば`modify count/row count`の`show stats_meta`が特定の値 (例えば 0.3) より大きい場合、またはテーブルに時間列のインデックスがある場合、 `analyze table`を使用して復旧を試みることもできます。 `auto analyze`が設定されている場合は、 `tidb_auto_analyze_ratio`システム変数が大きすぎる (例えば 0.3 より大きい) かどうか、および現在時刻が`tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
 
-    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)。
+    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)。
 
 ### 3.4 SQL実行エラー {#34-sql-execution-error}
 
@@ -370,17 +370,17 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     -   ネットワークの問題です。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、 **TiDB**から PD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
-    -   PD パニック。 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
+    -   PD パニック。 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
     -   PDはOOMです[5.3](#53-pd-oom)を参照してください。
 
-    -   問題に他の原因がある場合は、 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行して goroutine を取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
+    -   問題に他の原因がある場合は、 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行して goroutine を取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 -   5.2.4 その他の問題
 
     -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`と表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。詳細は、中国語の[ケース947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)を参照してください。
 
-    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
+    -   その他の状況については、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 ### 5.3 PD OOM {#53-pd-oom}
 
@@ -512,13 +512,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     -   `send request is cancelled` : 送信フェーズ中にリクエストがタイムアウトしました。Grafana -&gt; **TiDB** -&gt; **Batch Client** / `Pending Request Count by TiKV`の監視**画面**で、保留中のリクエスト数が 128 を超えているかどうかを確認してください。
 
         -   値が128より大きい場合、送信はKVの処理能力を超え、送信が蓄積されます。
-        -   値が128を超えない場合は、ログを確認して、レポートが該当するKVの運用および保守の変更によって発生したかどうかを確認してください。そうでない場合は、このエラーは予期しないものであり、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)必要があります。
+        -   値が128を超えない場合は、ログを確認して、レポートが該当するKVの運用および保守の変更によって発生したかどうかを確認してください。そうでない場合は、このエラーは予期しないものであり、 [バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)必要があります。
 
     -   `wait response is cancelled` : リクエストが TiKV に送信された後、タイムアウトしました。対応する TiKV アドレスの応答時間と、その時点の PD および KV のリージョンログを確認する必要があります。
 
 -   7.1.4 `distsql.go`は`inconsistent index`を報告します。
 
-    データインデックスに矛盾があるようです。報告されたインデックスが存在するテーブルで`admin check table <TableName>`コマンドを実行してください。チェックが失敗した場合は、次のコマンドを実行して[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md)ガベージコレクションを無効にしてください。:
+    データインデックスに矛盾があるようです。報告されたインデックスが存在するテーブルで`admin check table <TableName>`コマンドを実行してください。チェックが失敗した場合は、次のコマンドを実行して[バグを報告する](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md)ガベージコレクションを無効にしてください。:
 
     ```sql
     SET GLOBAL tidb_gc_enable = 0;

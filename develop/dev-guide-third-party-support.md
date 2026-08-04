@@ -23,7 +23,7 @@ PingCAP はコミュニティと連携し、サードパーティ ツールに�
 >
 > 特に指定がない限り、**Driver**または**ORM フレームワーク**では[アプリケーションの再試行とエラー処理](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling)のサポートは含まれません。
 
-このドキュメントに記載されているツールを使用して TiDB に接続する際に問題が発生した場合は、詳細を記載した[問題](https://github.com/pingcap/tidb/issues/new?assignees=&#x26;labels=type%2Fquestion&#x26;template=general-question.md)を GitHub に送信して、このツールのサポートを促進してください。
+このドキュメントに記載されているツールを使用して TiDB に接続する際に問題が発生した場合は、詳細を記載した[問題](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md)を GitHub に送信して、このツールのサポートを促進してください。
 
 ## Driver {#driver}
 
@@ -63,6 +63,6 @@ PingCAP はコミュニティと連携し、サードパーティ ツールに�
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

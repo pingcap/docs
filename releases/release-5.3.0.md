@@ -69,7 +69,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
         -   TiDB移行ツールを使用したレプリケーションタスクの下流クラスタ
     -   一時テーブルの互換性情報については、 [MySQL 一時テーブルとの互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)および[他の TiDB 機能との互換性の制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
 
--   v5.3.0より前のリリースでは、システム変数が無効な値に設定された場合、TiDBはエラーを報告します。v5.3.0以降のリリースでは、システム変数が無効な値に設定された場合、TiDBは「|警告 | 1292 | 切り捨てられた不正なxxx: &#39;xx&#39;」などの警告とともに成功を返します。
+-   v5.3.0より前のリリースでは、システム変数が無効な値に設定された場合、TiDBはエラーを報告します。v5.3.0以降のリリースでは、システム変数が無効な値に設定された場合、TiDBは「|警告 | 1292 | 切り捨てられた不正なxxx: 'xx'」などの警告とともに成功を返します。
 
 -   `SHOW CREATE VIEW`を実行するために`SHOW VIEW`権限が必要ない問題を修正しました。これで、 `SHOW CREATE VIEW`文を実行するには`SHOW VIEW`権限が必要になります。
 

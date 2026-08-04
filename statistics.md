@@ -275,8 +275,8 @@ TiDB v6.1.0以降では、システム変数[`tidb_mem_quota_analyze`](/system-v
 | トップNの数        | `WITH NUM TOPN`                                                                                                    |
 | サンプル数         | `WITH NUM SAMPLES`                                                                                                 |
 | サンプリングレート     | `WITH FLOATNUM SAMPLERATE`                                                                                         |
-| `ANALYZE`列タイプ | AnalyzeColumnOption ::= ( &#39;ALL COLUMNS&#39; | &#39;PREDICATE COLUMNS&#39; | &#39;COLUMNS&#39; ColumnNameList ) |
-| `ANALYZE`列    | ColumnNameList ::= Identifier ( &#39;,&#39; Identifier )*                                                          |
+| `ANALYZE`列タイプ | AnalyzeColumnOption ::= ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' | 'COLUMNS' ColumnNameList ) |
+| `ANALYZE`列    | ColumnNameList ::= Identifier ( ',' Identifier )*                                                          |
 
 ### ANALYZE構成の永続性を有効にする {#enable-analyze-configuration-persistence}
 

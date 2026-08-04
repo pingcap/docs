@@ -60,8 +60,8 @@ TiDB Lightning は実行時に一部のリソースを排他的に使用しま�
 
 -   各TiDB Lightningインスタンスの一意のパスを`tikv-importer.sorted-kv-dir`に設定してください。複数のインスタンスが同じパスを共有すると、意図しない動作が発生し、インポートの失敗やデータエラーが発生する可能性があります。
 -   各TiDB Lightningチェックポイントは個別に保存してください。チェックポイントの設定の詳細については、 [TiDB Lightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
-    -   checkpoint.driver = &quot;file&quot; (デフォルト) を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
-    -   checkpoint.driver = &quot;mysql&quot; を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
+    -   checkpoint.driver = "file" (デフォルト) を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
+    -   checkpoint.driver = "mysql" を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
 -   各TiDB Lightningのログファイルは、それぞれ異なるパスに設定する必要があります。同じログファイルを共有すると、ログのクエリやトラブルシューティングに影響します。
 -   Debug API またはサーバーモードの HTTP API を使用する場合は、インスタンスごとに`lightning.status-addr`を一意のアドレスに設定する必要があります。そうしないと、ポートの競合によりTiDB Lightningプロセスが起動に失敗します。
 
