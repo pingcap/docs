@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/dm-worker-intro/']
 
 # DM-worker Introduction
 
-DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For full and incremental migration, it dumps data from one MySQL-compatible source instance and loads the dumped data into the target TiDB cluster. It then reads the source binlog as a replication client, transforms and filters events, and applies them to the target. DM-master queries DM-worker for source and subtask status.
+DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For full and incremental migration, it dumps data from one MySQL-compatible source instance and loads the dumped data into the target TiDB cluster. It then reads the source binlog as a replication client, transforms and filters events, and applies them to the target. DM-master queries DM-worker for the status of sources and subtasks.
 
 ## Key concepts
 
@@ -23,7 +23,7 @@ Depending on its task mode, a DM-worker subtask runs the dump, load, and binlog 
 
 ### Relay log
 
-Relay logging is optional and disabled by default. When enabled, DM-worker stores upstream binlog events on local disk before the binlog replication processing unit reads them. Enable relay logging when a long full migration or blocked task might outlast upstream binlog retention, or when multiple tasks for the same source need to reuse one binlog stream. Relay logging consumes disk, I/O, and CPU resources and can increase replication latency. For configuration and operational details, see [DM relay log](/dm/relay-log.md).
+Relay logging is optional and disabled by default. When enabled, DM-worker stores upstream binlog events on the local disk before the binlog replication processing unit reads them. Enable relay logging if a long-running full migration or a blocked task might outlast upstream binlog retention period, or if multiple tasks for the same source need to share a single binlog stream. Relay logging consumes disk, I/O, and CPU resources, and can increase replication latency. For configuration and operational details, see [DM relay log](/dm/relay-log.md).
 
 ### Dump processing unit
 
