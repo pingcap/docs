@@ -35,7 +35,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - **Custom Retention Mode:** lets you specify the retention period from 3 to 33 days and choose when daily snapshots are created.
         - **Standard Bundle Mode:** preserves the previous default automatic backup settings for PITR, hourly snapshots, and daily snapshots.
 
-      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md).
+      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes).
 
     - Support subscribing to alert notifications from TiDB Cloud Premium via generic webhooks.
 
