@@ -57,18 +57,22 @@ Backup files can originate from the following sources:
 You can choose an automatic backup mode in **Backup Settings**. The available features, retention periods, and pricing method depend on the selected mode.
 
 <CustomContent plan="premium">
+
 | Mode | Automatic backups | Retention and restore options | Pricing method |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on data incremental volume. |
 | **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
+
 </CustomContent>
 
-<CustomContent plan="byoc"> 
+<CustomContent plan="byoc">
+
 | Mode | Automatic backups | Retention and restore options |
 | --- | --- | --- |
-| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | 
-| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | 
-</CustomContent> 
+| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. |
+| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. |
+
+</CustomContent>
 
 PITR lets you restore to any specific point in time within its retention period. A snapshot restore lets you restore from a specific hourly or daily snapshot that is still within its retention period.
 
