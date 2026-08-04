@@ -60,7 +60,7 @@ You can choose an automatic backup mode in **Backup Settings**. The available fe
 
 | Mode | Automatic backups | Retention and restore options | Pricing method |
 | --- | --- | --- | --- |
-| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on data incremental volume. |
+| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on incremental data volume. |
 | **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
 
 </CustomContent>
@@ -82,21 +82,21 @@ PITR lets you restore to any specific point in time within its retention period.
 
 2. In the left navigation pane, click **Data** > **Backup**.
 
-3. Click **Backup Settings**.
+3. In the upper-right corner, click **...**, and then click **Backup Settings**.
 
 4. Select an automatic backup mode:
 
     - **Standard Bundle Mode** uses the predefined PITR, hourly snapshot, and daily snapshot settings.
     - **Custom Retention Mode** lets you configure the automatic backup retention period and daily backup time.
 
-5. If you select **Custom Retention Mode**, configure the following settings:
+5. If you select **Custom Retention Mode**, configure the following settings. Otherwise, skip this step.
 
     - **Backup Retention**: select a value from 3 to 33 days. The default value is 7 days.
     - **Daily Backup Time**: select the time of day for the daily snapshot. The time zone is displayed next to the setting.
 
 6. Review the **Overview** section, and then click **Save**.
 
-    The overview shows the features enabled by the selected mode, their retention periods, and the available restore options.
+    The overview shows the features enabled by your selected backup mode, the corresponding retention periods, and the available restore options.
 
 <CustomContent plan="byoc"> 
 
@@ -119,9 +119,18 @@ PITR lets you restore to any specific point in time within its retention period.
 
 ### Switch automatic backup modes
 
-To switch modes, open **Backup Settings**, select the new mode, review the retention settings, and click **Save**. The new mode applies to new automatic backups and determines the current backup pricing.
+To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take the following steps:
 
-When switching to **Custom Retention Mode**, you must configure a retention period. When switching to **Standard Bundle Mode**, the retention settings return to the standard bundle defaults.
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
+2. In the upper-right corner, click **...**, and then click **Backup Settings**.
+3. In the displayed dialog, select a new mode.
+
+    - If you switch to **Custom Retention Mode**, you need to configure the backup retention and daily backup time. 
+    - If you switch to **Standard Bundle Mode**, the retention settings return to the standard bundle defaults.
+
+4. Review the retention settings in the **Overview** section, and then click **Save**. 
+
+The new mode applies to new automatic backups and determines the current backup pricing.
 
 If the new retention period is shorter than the current period, the confirmation dialog lists the automatic backups that will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
 
