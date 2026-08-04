@@ -30,8 +30,8 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
     <CustomContent plan="essential">
 
-    - For TiDB Cloud Essential instances created starting July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>.
-    - For TiDB Cloud Essential instances created before July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>.
+    - For TiDB Cloud Essential instances created starting July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>. Note 'v2' is the dashboard json version only.
+    - For TiDB Cloud Essential instances created before July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>.
 
     </CustomContent>
 
