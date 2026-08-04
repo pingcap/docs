@@ -31,14 +31,10 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
     <CustomContent plan="essential">
 
     <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
-
-    </CustomContent>
-
-    <CustomContent plan="essential">
         
     For TiDB Cloud Essential instances created starting July 1, 2026, please download this JSON file:
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
-
+    https://github.com/pingcap/docs/pull/23413
+   
     </CustomContent>
 
     <CustomContent plan="premium">
