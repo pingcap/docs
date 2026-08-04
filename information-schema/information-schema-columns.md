@@ -3,7 +3,7 @@ title: COLUMNS
 summary: COLUMNS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# コラム {#columns}
+# COLUMNS {#columns}
 
 `COLUMNS`表には、表内の列に関する詳細情報が示されています。
 

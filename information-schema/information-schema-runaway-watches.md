@@ -3,7 +3,7 @@ title: RUNAWAY_WATCHES
 summary: RUNAWAY_WATCHES` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# ランナウェイ・ウォッチズ {#runaway-watches}
+# RUNAWAY_WATCHES {#runaway-watches}
 
 `RUNAWAY_WATCHES`表には、想定よりも多くのリソースを消費する暴走クエリの監視リストが表示されます。詳細については、 [暴走クエリ](/tidb-resource-control-runaway-queries.md)を参照してください。
 
