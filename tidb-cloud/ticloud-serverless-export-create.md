@@ -67,29 +67,29 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 
 | フラグ                         | 説明                                                                                                                        | 必須  | 注記                       |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
-| -c, --cluster-id 文字列        | データをエクスポートするクラスターの ID を指定します。                                                                                             | はい  | 非対話型モードでのみ動作します。         |
-| --file-type 文字列         | エクスポートファイルの種類を指定します。[&quot;SQL&quot; &quot;CSV&quot; &quot;PARQUET&quot;]のいずれかです。(デフォルトは&quot;CSV&quot;)                  | いいえ | 非対話型モードでのみ動作します。         |
-| --target-type 文字列           | エクスポート先を指定します。[ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` `"OSS"` ]のいずれかです。デフォルト値は`"LOCAL"`です。                              | いいえ | 非対話型モードでのみ動作します。         |
-| --s3.uri 文字列                | S3 URIを`s3://<bucket>/<file-path>`形式で指定します。ターゲットタイプがS3の場合は必須です。                                                           | いいえ | 非対話型モードでのみ動作します。         |
-| --s3.アクセスキーID文字列            | Amazon S3のアクセスキーIDを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                        | いいえ | 非対話型モードでのみ動作します。         |
-| --s3.secret-access-key 文字列  | Amazon S3のシークレットアクセスキーを指定します。s3.role-arnと[s3.access-key-id, s3.secret-access-key]のいずれか1つだけを設定する必要があります。                   | いいえ | 非対話型モードでのみ動作します。         |
-| --s3.role-arn 文字列           | Amazon S3のロールARNを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                          | いいえ | 非対話型モードでのみ動作します。         |
-| --gcs.uri 文字列               | GCS URIを`gcs://<bucket>/<file-path>`形式で指定します。ターゲットタイプがGCSの場合は必須です。                                                        | いいえ | 非対話型モードでのみ動作します。         |
-| --gcs.サービスアカウントキー文字列        | GCS の base64 でエンコードされたサービス アカウント キーを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
-| --azblob.uri 文字列            | Azure BLOB URI を`azure://<account>.blob.core.windows.net/<container>/<file-path>`形式で指定します。ターゲット タイプが AZURE_BLOB の場合に必須です。 | いいえ | 非対話型モードでのみ動作します。         |
-| --azblob.sas-token 文字列      | Azure Blob の SAS トークンを指定します。                                                                                              | いいえ | 非対話型モードでのみ動作します。         |
-| --oss.uri 文字列               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`の場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |
-| --oss.access-key-id 文字列     | Alibaba Cloud OSS にアクセスするための AccessKey ID を指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
-| --oss.access-key-secret 文字列 | Alibaba Cloud OSS にアクセスするための AccessKey シークレットを指定します。                                                                      | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.delimiter文字列          | CSV ファイル内の文字列型変数の区切り文字を指定します。(デフォルトは &quot;&quot;&quot;)                                                                  | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.null値文字列              | CSV ファイル内の null 値の表現を指定します。(デフォルトは &quot;\N&quot;)                                                                        | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.separator 文字列         | CSV ファイル内の各値の区切り文字を指定します。(デフォルトは &quot;,&quot;)                                                                           | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.スキップヘッダー              | ヘッダーなしでテーブルの CSV ファイルをエクスポートします。                                                                                          | いいえ | 非対話型モードでのみ動作します。         |
-| --parquet.compression 文字列   | Parquet圧縮アルゴリズムを指定します。[ `"GZIP"` `"SNAPPY"` `"ZSTD"` `"NONE"` ]のいずれかです。デフォルト値は`"ZSTD"`です。                                 | いいえ | 非対話型モードでのみ動作します。         |
-| --filter文字列                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |
-| --sql 文字列                   | `SQL SELECT`ステートメントを使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
-| --文字列                       | エクスポートされたテーブルを`WHERE`条件でフィルタリングします。--sqlと同時に使用しないでください。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
-| --compression                     | エクスポートファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムは`GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`です。デフォルト値は`GZIP`です。                          | いいえ | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string        | データをエクスポートするクラスターの ID を指定します。                                                                                             | はい  | 非対話型モードでのみ動作します。         |
+| --file-type string         | エクスポートファイルの種類を指定します。[&quot;SQL&quot; &quot;CSV&quot; &quot;PARQUET&quot;]のいずれかです。(デフォルトは&quot;CSV&quot;)                  | いいえ | 非対話型モードでのみ動作します。         |
+| --target-type string           | エクスポート先を指定します。[ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` `"OSS"` ]のいずれかです。デフォルト値は`"LOCAL"`です。                              | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.uri string                | S3 URIを`s3://<bucket>/<file-path>`形式で指定します。ターゲットタイプがS3の場合は必須です。                                                           | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.access-key-id string            | Amazon S3のアクセスキーIDを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                        | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.secret-access-key string  | Amazon S3のシークレットアクセスキーを指定します。s3.role-arnと[s3.access-key-id, s3.secret-access-key]のいずれか1つだけを設定する必要があります。                   | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.role-arn string           | Amazon S3のロールARNを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                          | いいえ | 非対話型モードでのみ動作します。         |
+| --gcs.uri string               | GCS URIを`gcs://<bucket>/<file-path>`形式で指定します。ターゲットタイプがGCSの場合は必須です。                                                        | いいえ | 非対話型モードでのみ動作します。         |
+| --gcs.service-account-key string        | GCS の base64 でエンコードされたサービス アカウント キーを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
+| --azblob.uri string            | Azure BLOB URI を`azure://<account>.blob.core.windows.net/<container>/<file-path>`形式で指定します。ターゲット タイプが AZURE_BLOB の場合に必須です。 | いいえ | 非対話型モードでのみ動作します。         |
+| --azblob.sas-token string      | Azure Blob の SAS トークンを指定します。                                                                                              | いいえ | 非対話型モードでのみ動作します。         |
+| --oss.uri string               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`の場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |
+| --oss.access-key-id string     | Alibaba Cloud OSS にアクセスするための AccessKey ID を指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
+| --oss.access-key-secret string | Alibaba Cloud OSS にアクセスするための AccessKey シークレットを指定します。                                                                      | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.delimiter string          | CSV ファイル内の文字列型変数の区切り文字を指定します。(デフォルトは &quot;&quot;&quot;)                                                                  | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.null-value string              | CSV ファイル内の null 値の表現を指定します。(デフォルトは &quot;\N&quot;)                                                                        | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.separator string         | CSV ファイル内の各値の区切り文字を指定します。(デフォルトは &quot;,&quot;)                                                                           | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.skip-header              | ヘッダーなしでテーブルの CSV ファイルをエクスポートします。                                                                                          | いいえ | 非対話型モードでのみ動作します。         |
+| --parquet.compression string   | Parquet圧縮アルゴリズムを指定します。[ `"GZIP"` `"SNAPPY"` `"ZSTD"` `"NONE"` ]のいずれかです。デフォルト値は`"ZSTD"`です。                                 | いいえ | 非対話型モードでのみ動作します。         |
+| --filter strings                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |
+| --sql string                   | `SQL SELECT`ステートメントを使用してエクスポートされたデータをフィルターします。                                                                            | いいえ | 非対話型モードでのみ動作します。         |
+| --where string                       | エクスポートされたテーブルを`WHERE`条件でフィルタリングします。--sqlと同時に使用しないでください。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
+| --compression string                     | エクスポートファイルの圧縮アルゴリズムを指定します。サポートされているアルゴリズムは`GZIP` 、 `SNAPPY` 、 `ZSTD` 、 `NONE`です。デフォルト値は`GZIP`です。                          | いいえ | 非対話型モードでのみ動作します。         |
 |  --force                    | 確認なしでエクスポートタスクを作成します。非対話型モードでクラスター全体をエクスポートする場合は、確認が必要です。                                                                 | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                                       | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
@@ -98,7 +98,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
 | --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 | -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
