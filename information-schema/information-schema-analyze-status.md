@@ -3,7 +3,7 @@ title: ANALYZE_STATUS
 summary: ANALYZE_STATUS`情報スキーマテーブルについて学習してください。
 ---
 
-# 状態分析 {#analyze-status}
+# ANALYZE_STATUS {#analyze-status}
 
 `ANALYZE_STATUS`テーブルには、統計情報を収集する実行中のタスクと、限られた数の履歴タスクに関する情報が表示されます。
 

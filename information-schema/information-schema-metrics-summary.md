@@ -3,7 +3,7 @@ title: METRICS_SUMMARY
 summary: METRICS_SUMMARY システム テーブルについて学習します。
 ---
 
-# メトリクス_サマリー {#metrics-summary}
+# METRICS_SUMMARY {#metrics-summary}
 
 TiDB クラスタには多くの監視メトリックがあります。異常な監視メトリックを容易に検出できるように、TiDB 4.0 では次の 2 つの監視サマリーテーブルが導入されています。
 
