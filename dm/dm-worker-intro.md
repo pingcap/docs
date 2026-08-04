@@ -126,7 +126,13 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 > **Note:**
 >
-> On some older MariaDB releases, `PROCESS` is not sufficient for the dump unit to query InnoDB metadata. With DM v8.5.6, this behavior occurs when the dump unit queries `INNODB_TABLESPACES_SCRUBBING` on MariaDB 10.4.34, or `INNODB_TABLESPACES_ENCRYPTION` on MariaDB 10.5.1 and 10.5.2. In the same smoke tests, MariaDB 10.5.9, 10.6.13, and 10.11.16 complete without `SUPER`. If the dump unit returns `Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation`, grant `SUPER`. Because `SUPER` is a broad privilege, grant it only when this exact error occurs and your security policy permits it.
+> On some older MariaDB releases, `PROCESS` is not sufficient for the dump unit to query InnoDB metadata. With DM v8.5.6, this behavior occurs when the dump unit queries `INNODB_TABLESPACES_SCRUBBING` on MariaDB 10.4.34, or `INNODB_TABLESPACES_ENCRYPTION` on MariaDB 10.5.1 and 10.5.2. In the same smoke tests, MariaDB 10.5.9, 10.6.13, and 10.11.16 complete without `SUPER`.
+>
+> If the dump unit returns the following error, grant `SUPER`. Because `SUPER` is a broad privilege, grant it only when this exact error occurs and your security policy permits it.
+>
+> ```
+> Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation
+> ```
 
 ### Downstream database user privileges
 
