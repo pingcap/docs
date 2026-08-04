@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
 
-        For more information, see Subscribe via Webhook.
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential).
 
 - **TiDB Cloud Premium**
 
@@ -41,7 +41,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
 
-        For more information, see Subscribe via Webhook.
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium).
 
 - **TiDB Cloud Dedicated**
 
@@ -53,7 +53,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
 
-        For more information, see Subscribe via Webhook.
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/).
 
 ## July 28, 2026
 
