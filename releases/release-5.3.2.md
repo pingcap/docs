@@ -11,7 +11,7 @@ TiDB バージョン: 5.3.2
 
 > **Warning:**
 >
-> v5.3.2 には既知のバグがあるため、使用は推奨されません。詳細はご覧ください。このバグは v5.3.3 で修正されています。3 [バージョン5.3.3](/releases/release-5.3.3.md)使用を推奨します。 [＃12934](https://github.com/tikv/tikv/issues/12934)
+> v5.3.2 には既知のバグがあるため、使用は推奨されません。詳細は [＃12934](https://github.com/tikv/tikv/issues/12934) をご覧ください。このバグは v5.3.3 で修正されています。 [バージョン5.3.3](/releases/release-5.3.3.md)の使用を推奨します。
 
 ## 互換性の変更 {#compatibility-changes}
 

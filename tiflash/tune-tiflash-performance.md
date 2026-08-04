@@ -267,7 +267,7 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 11 rows in set (3.83 sec)
 ```
 
-セット`tidb_broadcast_join_threshold_size` ～ `10000000` :
+`tidb_broadcast_join_threshold_size`を`10000000`に設定 :
 
 ```sql
 mysql> set @@tidb_broadcast_join_threshold_size = 10000000;
@@ -326,7 +326,7 @@ mysql> explain analyze select a, count(*) from t group by a;
 9 rows in set (0.67 sec)
 ```
 
-セット`tidb_max_tiflash_threads` ～ `20` :
+`tidb_max_tiflash_threads`を`20`に設定 :
 
 ```sql
 mysql> set @@tidb_max_tiflash_threads = 20;
@@ -383,7 +383,7 @@ mysql> explain analyze select *, row_number() over (partition by a) from t;
 7 rows in set (4 min 30.59 sec)
 ```
 
-セット`tiflash_fine_grained_shuffle_stream_count` ～ `20` :
+`tiflash_fine_grained_shuffle_stream_count`を`20`に設定 :
 
 ```sql
 mysql> set @@tiflash_fine_grained_shuffle_stream_count = 20;

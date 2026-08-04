@@ -26,7 +26,7 @@ tiup mirror modify <component>[:version] [flags]
 -   データ型: `STRING`
 -   コマンドでこのオプションが指定されていない場合、コンポーネント情報の署名にはデフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
-### - ヤンク {#yank}
+### --yank {#yank}
 
 指定されたコンポーネントまたはバージョンを使用不可としてマークします。
 
@@ -35,7 +35,7 @@ tiup mirror modify <component>[:version] [flags]
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### - 隠れる {#hide}
+### --hide {#hide}
 
 -   コンポーネントを非表示にするかどうかを指定します。コンポーネントが非表示の場合、 `tiup list`の結果リストには表示されません。非表示のコンポーネントを表示するには、 `tiup list --all`を使用します。
 -   データ型: `BOOLEAN`
@@ -45,7 +45,7 @@ tiup mirror modify <component>[:version] [flags]
 >
 > このオプションはコンポーネントにのみ適用でき、コンポーネントバージョンには適用できません。
 
-### --スタンドアロン {#standalone}
+### --standalone {#standalone}
 
 -   コンポーネントをスタンドアロンで実行できるかどうかを制御します。このオプションは現在**利用できません**。
 -   データ型: `BOOLEAN`

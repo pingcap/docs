@@ -180,7 +180,7 @@ Sqoopでは、 `--batch`各バッチで100文をコミットすることを意�
 
 ## TiDB はデータを削除した直後にスペースを解放しますか? {#does-tidb-release-space-immediately-after-deleting-data}
 
-`DELETE` `TRUNCATE`操作はいずれもデータ`DROP` `TRUNCATE` `DROP`は、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）後にデータが削除され、領域が解放されます。11 `DELETE`操作では、データは削除されますが、圧縮が実行されるまで領域は即時に解放されません。
+`DELETE` 、 `TRUNCATE` 、 `DROP`操作はいずれもデータを即時に解放しません。`TRUNCATE`と`DROP`操作では、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）後にデータが削除され、領域が解放されます。`DELETE`操作では、データは削除されますが、圧縮が実行されるまで領域は即時に解放されません。
 
 ## データを削除するとクエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 

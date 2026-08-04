@@ -14,7 +14,7 @@ summary: TiDB のレイテンシーと、実際の使用例でレイテンシー
 -   [TiKVスナップショット](#tikv-snapshot)
 -   [非同期書き込み](#async-write)
 
-これらの分析により、 TiDB SQLクエリの実行時間コストに関する詳細な情報が得られます。これは、TiDBのクリティカルパス診断のガイドです。さらに、第[診断のユースケース](#diagnosis-use-cases)セクションでは、実際のユースケースにおけるレイテンシーの分析方法を紹介します。
+これらの分析により、 TiDB SQLクエリの実行時間コストに関する詳細な情報が得られます。これは、TiDBのクリティカルパス診断のガイドです。さらに、[診断のユースケース](#diagnosis-use-cases)セクションでは、実際のユースケースにおけるレイテンシーの分析方法を紹介します。
 
 このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンタを使用する必要があります。
 
@@ -117,7 +117,7 @@ read handle duration = read value duration =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-`tidb_tikvclient_request_seconds{type="Get"}` 、バッチ処理された gRPC ラッパーを介して TiKV に直接送信される GET リクエストの継続時間を記録します`tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`などの先行するバッチクライアントの継続時間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
+`tidb_tikvclient_request_seconds{type="Get"}`は、バッチ処理された gRPC ラッパーを介して TiKV に直接送信される GET リクエストの継続時間を記録します。`tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`などの先行するバッチクライアントの継続時間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
 
 `tikv_grpc_msg_duration_seconds{type="kv_get"}`期間は次のように計算されます。
 
@@ -247,7 +247,7 @@ tikv_grpc_msg_duration_seconds{type="coprocessor"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-TiKVでは、テーブルスキャンタイプは`select` 、インデックススキャンタイプは`index`です。5と`select` `index`タイプの所要時間の詳細は同じです。
+TiKVでは、テーブルスキャンタイプは`select` 、インデックススキャンタイプは`index`です。`select`と`index`タイプの所要時間の詳細は同じです。
 
 ### インデックス検索 {#index-look-up}
 
@@ -655,7 +655,7 @@ tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
     get snapshot from rocksdb duration
 ```
 
-リーダー リースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックス コマンドを提案します`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`読み取りインデックス コマンドをコミットする期間です。
+リーダー リースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックス コマンドを提案します。`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は読み取りインデックス コマンドをコミットする期間です。
 
 RocksDB からスナップショットを取得する操作は通常は高速なので、 `get snapshot from rocksdb duration`は無視されます。
 
@@ -757,7 +757,7 @@ async io enabled commit = max(
 )
 ```
 
-v5.3.0以降、TiKVはAsync IO Raft （StoreWriterスレッドプールによるRaftログの書き込み）をサポートしています。Async IO Raftは、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)正の値に設定されている場合にのみ有効になり、コミットプロセスが変更されます。3と`persist log locally duration` `wait by write worker duration`以下のように計算されます。
+v5.3.0以降、TiKVはAsync IO Raft （StoreWriterスレッドプールによるRaftログの書き込み）をサポートしています。Async IO Raftは、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)が正の値に設定されている場合にのみ有効になり、コミットプロセスが変更されます。`persist log locally duration`と`wait by write worker duration`は以下のように計算されます。
 
 ```text
 persist log locally duration =
@@ -779,7 +779,7 @@ wait by write worker duration =
 
 非同期IOの有無の違いは、ログがローカルに保持される期間です。非同期IOを使用する場合、ログがローカルに保持される期間は、ウォーターフォールメトリックから直接計算できます（バッチ待機時間は考慮されません）。
 
-レプリケートログ期間は、クォーラムピアに保持されたログの期間を記録します。これには、RPC期間と過半数に保持されたログの期間が含まれます。1は`replicate log duration`のように計算されます。
+レプリケートログ期間は、クォーラムピアに保持されたログの期間を記録します。これには、RPC期間と過半数に保持されたログの期間が含まれます。`replicate log duration`は以下のように計算されます。
 
 ```text
 replicate log duration =
@@ -863,7 +863,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`ステートメントがデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
-スロークエリの実行プランは、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って[PointGet](#point-get) 、および[シンプルなコプロセッサクエリ](#table-scan--index-scan) [Batch PointGet](#batch-point-get)できます。
+スロークエリの実行プランは、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサクエリ](#table-scan--index-scan)を分析できます。
 
 ### 書き込みクエリが遅い {#slow-write-queries}
 
@@ -872,4 +872,4 @@ tikv_raftstore_apply_log_duration_seconds =
 -   特定の TiKV インスタンスでこのメトリックが高い場合、ホットなリージョンで競合が発生している可能性があります。
 -   このメトリックがすべてのインスタンスにわたって高い場合、アプリケーションに競合が発生している可能性があります。
 
-アプリケーションからの競合の原因を確認した後、 [ロック](#lock)と[コミット](#commit)期間を分析することで、書き込みがスロークエリを調査できます。
+アプリケーションからの競合の原因を確認した後、 [ロック](#lock)と[コミット](#commit)期間を分析することで、遅い書き込みクエリを調査できます。

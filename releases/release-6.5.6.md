@@ -94,7 +94,7 @@ TiDB バージョン: 6.5.6
     -   PDリーダーの故障により1分間に`IMPORT INTO`タスクが失敗する問題を修正[＃48307](https://github.com/pingcap/tidb/issues/48307) @ [D3Hunter](https://github.com/D3Hunter)
     -   日付型フィールドにインデックスを作成することによって発生する`ADMIN CHECK`の失敗の問題を修正しました [＃47426](https://github.com/pingcap/tidb/issues/47426) @ [tangenta](https://github.com/tangenta)
     -   `TABLESAMPLE` によって返されるソートされていない行データの問題を修正しました [＃48253](https://github.com/pingcap/tidb/issues/48253) @ [tangenta](https://github.com/tangenta)
-    -   DDL `jobID` 0 に復元されたときに発生する TiDB ノードpanicの問題を修正しました [＃46296](https://github.com/pingcap/tidb/issues/46296) @ [jiyfhust](https://github.com/jiyfhust)
+    -   DDL `jobID`が 0 に復元されたときに発生する TiDB ノードpanicの問題を修正しました [＃46296](https://github.com/pingcap/tidb/issues/46296) @ [jiyfhust](https://github.com/jiyfhust)
 
 -   TiKV
 

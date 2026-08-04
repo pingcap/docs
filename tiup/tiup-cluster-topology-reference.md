@@ -9,7 +9,7 @@ TiUPを使用して TiDB をデプロイまたは拡張するには、クラス�
 
 同様に、クラスタートポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと各セクション内の各フィールドについて説明します。
 
-TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーTiUPデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視スコープに追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
+TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、Grafana、Alertmanager などの監視サーバーもTiUPによってデプロイされます。また、このクラスターをスケールアウトすると、 TiUP は新しいノードを監視スコープに追加します。上記の監視サーバーの設定をカスタマイズするには、 [監視サーバーの構成をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md)の手順に従ってください。
 
 ## ファイル構造 {#file-structure}
 
@@ -78,7 +78,7 @@ TiUPを使用した TiDB デプロイメントのトポロジ構成ファイル�
 
 -   `arch` : ターゲットマシンのCPUアーキテクチャ。このフィールドは、ターゲットマシンにプッシュされるバイナリパッケージをどのプラットフォームに適合させるかを制御します。サポートされている値は「amd64」と「arm64」です。デフォルト値は「amd64」です。
 
--   `pd_mode` : PD動作モード。このフィールドは、 [PDマイクロサービス](/pd-microservices.md)マイクロサービスを有効にするかどうかを制御します。サポートされる値は「ms」です。このフィールドを指定すると、PDマイクロサービスが有効になります。
+-   `pd_mode` : PD動作モード。このフィールドは、 [PDマイクロサービス](/pd-microservices.md)を有効にするかどうかを制御します。サポートされる値は「ms」です。このフィールドを指定すると、PDマイクロサービスが有効になります。
 
 -   `resource_control` : ランタイムリソース制御。このフィールドのすべての設定は、systemd のサービスファイルに書き込まれます。デフォルトでは制限はありません。制御可能なリソースは以下のとおりです。
 
@@ -232,7 +232,7 @@ component_versions:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -286,7 +286,7 @@ pd_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -338,7 +338,7 @@ tidb_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -372,7 +372,7 @@ tikv_servers:
 
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
--   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP TiUP以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
+-   `tcp_port` : 内部テスト用のTiFlash TCPサービスのポート。デフォルト値は`9000`です。TiUP v1.12.5以降、この設定項目はv7.1.0以降のクラスターでは有効になりません。
 
 -   `flash_service_port` : TiFlashがサービスを提供するポート。TiDBはこのポートを介してTiFlashからデータを読み取ります。デフォルト値は`3930`です。
 
@@ -400,7 +400,7 @@ tikv_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 デプロイメント後、上記のフィールドではディレクトリを`data_dir`にのみ追加できます。以下のフィールドでは、これらのフィールドを変更することはできません。
 
@@ -500,7 +500,7 @@ tiproxy_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更することはできません。
 
@@ -548,7 +548,7 @@ kvcdc_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `ticdc_cluster_id` : サービスに対応するTiCDCクラスタIDを指定します。このフィールドが指定されていない場合、サービスはデフォルトのTiCDCクラスタに参加します。このフィールドはTiDB v6.3.0以降のバージョンでのみ有効です。
 
@@ -641,7 +641,7 @@ scheduling_servers:
 
 -   `host` : 監視サービスがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
--   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP TiUPで導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
+-   `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP v1.7.0で導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
 -   `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションのうち`ssh_port`のセクションが使用されます。
 
@@ -669,7 +669,7 @@ scheduling_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `additional_args` : TiUP v1.15.0で導入されたこのフィールドは、Prometheusの実行に必要な追加パラメータを設定します。このフィールドは配列であり、配列の各要素はPrometheusの実行パラメータです。例えば、Prometheusのホットリロード機能を有効にするには、このフィールドを`--web.enable-lifecycle`に設定します。
 
@@ -737,7 +737,7 @@ monitoring_servers:
 
 -   `dashboard_dir` : `dashboard(*.json)`ファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、クラスター構成の初期化フェーズ中に、Grafanaのダッシュボードとしてターゲットマシンに転送されます。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `config` : このフィールドは、Grafanaにカスタム設定を追加するために使用されます。TiDBクラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUPは`config`フィールドの内容をGrafana設定ファイル`grafana.ini`に追加します。詳細については、 [その他のGrafana設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-other-grafana-configurations)を参照してください。
 
@@ -790,7 +790,7 @@ grafana_servers:
 
 -   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`global`の`resource_control`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、systemd設定ファイルが生成され、 `host`で指定されたマシンに送信されます。`resource_control`の設定ルールは、 `global`の`resource_control`内容と同じです。
 
 -   `listen_host` : Alertmanager にプロキシ経由でアクセスできるように、リスニングアドレスを指定します。 `0.0.0.0`に設定することをお勧めします。詳細については、 [Alertmanager 設定をカスタマイズする](/tiup/customized-montior-in-tiup-environment.md#customize-alertmanager-configurations)を参照してください。
 

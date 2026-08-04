@@ -14,9 +14,9 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
 -   クライアント側で次のエラーが報告されます: `SQL error, errno = 2013, state = 'HY000': Lost connection to MySQL server during query` 。
 
 -   Grafana ダッシュボードには次の内容が表示されます。
-    -   **TiDB** &gt;**サーバー**&gt;**メモリ使用量で**は、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
-    -   **TiDB** &gt;**サーバー**&gt;**稼働時間が**突然ゼロに低下します。
-    -   **TiDB-Runtime** &gt;**メモリ使用量で**は、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
+    -   **TiDB** &gt;**サーバー**&gt;**メモリ使用量**では、 `process/heapInUse`メトリックが上昇し続け、しきい値に達した後、突然 0 に低下することが示されています。
+    -   **TiDB** &gt;**サーバー**&gt;**稼働時間**が突然ゼロに低下します。
+    -   **TiDB-Runtime** &gt;**メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
 -   `tidb.log`を確認すると、次のログ エントリが見つかります。
     -   OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
@@ -121,7 +121,7 @@ TiDBノードは起動後、統計情報をメモリに読み込む必要があ�
 
 #### プリペアドステートメントの過剰使用 {#prepared-statements-are-overused}
 
-クライアント側はプリペアドステートメントを作成し続けますが、実行しません[`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement) 。これによりメモリ消費量が増加し続け、最終的にはTiDB OOMが発生します。これは、プリペアドステートメントによって占有されたメモリがセッションが終了するまで解放されないためです。これは、長時間接続セッションにおいて特に重要です。
+クライアント側はプリペアドステートメントを作成し続けますが、[`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)を実行しません。これによりメモリ消費量が増加し続け、最終的にはTiDB OOMが発生します。これは、プリペアドステートメントによって占有されたメモリがセッションが終了するまで解放されないためです。これは、長時間接続セッションにおいて特に重要です。
 
 この問題を解決するには、次の対策を検討してください。
 

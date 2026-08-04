@@ -3,7 +3,7 @@ title: tiup dm edit-config
 summary: tiup dm edit-config`コマンドを使用すると、デプロイメント後にクラスタサービスの設定を変更できます。エディタを使用して、指定したクラスタのトポロジファイルを変更できます。設定変更時にマシンの追加や削除はできないことに注意してください。コマンド実行後、設定はコントロールマシン上でのみ変更されるため、`tiup dm reloadコマンドを実行して設定を再読み込みする必要があります。
 ---
 
-# tiup dm 編集設定 {#tiup-dm-edit-config}
+# tiup dm edit-config {#tiup-dm-edit-config}
 
 クラスターのデプロイ後にクラスターサービス設定を変更する必要がある場合は、 `tiup dm edit-config`コマンドを使用してエディターを起動し、指定したクラスターの[トポロジファイル](/tiup/tiup-dm-topology-reference.md) . を変更できます。このエディターは、デフォルトで`$EDITOR`環境変数に指定されています。`$EDITOR`環境変数が存在しない場合は、 `vi`エディターが使用されます。
 

@@ -24,7 +24,7 @@ DESC COLLATION_CHARACTER_SET_APPLICABILITY;
 2 rows in set (0.00 sec)
 ```
 
-`COLLATION_CHARACTER_SET_APPLICABILITY`テーブルの`utf8mb4`の文字セットの照合順序マッピングをビュー。
+`COLLATION_CHARACTER_SET_APPLICABILITY`テーブルの`utf8mb4`の文字セットの照合順序マッピングを確認します。
 
 ```sql
 SELECT * FROM COLLATION_CHARACTER_SET_APPLICABILITY WHERE character_set_name='utf8mb4';

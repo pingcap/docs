@@ -102,7 +102,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 -   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
 -   [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-`Region Merge`パラメータのデフォルト設定はかなり保守的です。5 [PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
+`Region Merge`パラメータのデフォルト設定はかなり保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
 
 ### 方法4: TiKVインスタンスの数を増やす {#method-4-increase-the-number-of-tikv-instances}
 

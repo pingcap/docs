@@ -34,7 +34,7 @@ summary: TiDB でサポートされている集計関数について学習しま
 
 -   `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
-    この関数は`expr`のパーセンタイルを返します。引数`constant_integer_expr`は、 5 から`[1,100]`の範囲の定数整数であるパーセンタイル値を示します。パーセンタイル P <sub>k</sub> （ `k`はパーセンタイルを表します）は、データセット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
+    この関数は`expr`のパーセンタイルを返します。引数`constant_integer_expr`は、 `[1,100]`の範囲の定数整数であるパーセンタイル値を示します。パーセンタイル P <sub>k</sub> （ `k`はパーセンタイルを表します）は、データセット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
 
     この関数は、 `expr`の戻り値の型として[数値型](/data-type-numeric.md)と[日付と時刻の種類](/data-type-date-and-time.md)をサポートします。その他の戻り値の型については、 `APPROX_PERCENTILE` `NULL`を返します。
 

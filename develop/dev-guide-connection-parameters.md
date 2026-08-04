@@ -176,7 +176,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
 TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`から`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
-2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、次に`FetchSize`に従ってクライアントにデータを返します。そのため、通常は最初の方法よりも多くのメモリを消費します。3 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) `ON`設定されている場合、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
+2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、次に`FetchSize`に従ってクライアントにデータを返します。そのため、通常は最初の方法よりも多くのメモリを消費します。[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`に設定されている場合、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
 
 システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定されている場合、TiDB はクライアントがデータを取得するときにのみデータの一部を読み取ろうとします。これによりメモリ使用量が削減されます。詳細および制限事項については、 [`tidb_enable_lazy_cursor_fetch`システム変数の完全な説明](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
 

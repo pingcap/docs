@@ -656,7 +656,7 @@ sudo systemctl enable ntpd.service
     >
     > -   `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネル パラメータです。
     > -   `vm.min_free_kbytes`に設定すると、メモリ回収メカニズムに影響します。設定値が大きすぎると利用可能なメモリが減少し、小さすぎるとメモリ要求速度がバックグラウンド回収速度を超え、メモリ回収が発生し、結果としてメモリ割り当てが遅延する可能性があります。
-    > -   少なくとも`vm.min_free_kbytes` ～ `1048576` KiB（1 GiB）に設定することをお勧めします。5 [NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)の場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
+    > -   `vm.min_free_kbytes`を少なくとも`1048576` KiB（1 GiB）に設定することをお勧めします。[NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
     > -   Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`を設定することをお勧めします。
 
 10. ユーザーの`limits.conf`ファイルを構成するには、次のコマンドを実行します。
@@ -754,8 +754,8 @@ sudo yum -y install numactl
 
 ## SELinuxを無効にする {#disable-selinux}
 
-SELinux を無効にするか、permissive モードに設定する必要があります。現在のステータスを確認するには、 [ゲットエンフォース(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用してください。
+SELinux を無効にするか、permissive モードに設定する必要があります。現在のステータスを確認するには、 [getenforce(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用してください。
 
-SELinuxが無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を`SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。7または`enforcing` `permissive` `disabled`への変更は、再起動しないと有効になりません。
+SELinuxが無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を`SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。`enforcing`または`permissive`から`disabled`への変更は、再起動しないと有効になりません。
 
 一部のシステム（Ubuntuなど）では、 `/etc/selinux/config`ファイルが存在せず、getenforceユーティリティがインストールされていない場合があります。その場合は、この手順をスキップしてください。

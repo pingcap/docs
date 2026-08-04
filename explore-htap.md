@@ -72,7 +72,7 @@ TiDB HTAPの機能を検討する前に、TiDBとそのカラム型ストレー�
 
 ## データ準備 {#data-preparation}
 
-TiFlashがデプロイされた後、TiKVは自動的にTiFlashにデータを複製しません。TiFlashにTiFlashする必要のあるテーブルを手動で指定する必要があります。その後、TiDBが対応するTiFlashレプリカを作成します。
+TiFlashがデプロイされた後、TiKVは自動的にTiFlashにデータを複製しません。TiFlashに複製する必要のあるテーブルを手動で指定する必要があります。その後、TiDBが対応するTiFlashレプリカを作成します。
 
 -   TiDBクラスタにデータがない場合は、まずデータを TiDB に移行します。詳細については、[データ移行](/migration-overview.md)を参照してください。
 -   TiDBクラスタに既にアップストリームからレプリケートされたデータが存在する場合、 TiFlashのデプロイ後、データレプリケーションは自動的に開始されません。TiFlashにレプリケートするテーブルを手動で指定する必要があります。詳細については、 TiFlash[TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を参照してください。 。

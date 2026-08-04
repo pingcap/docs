@@ -35,7 +35,7 @@ PDアフィニティスケジューリングはデフォルトで無効になっ
     pd-ctl config set schedule.affinity-schedule-limit 4
     ```
 
-2.  （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256`です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。5に設定すると`0`アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
+2.  （オプション）必要に応じてPD設定項目[`schedule.max-affinity-merge-region-size`](/pd-configuration-file.md#max-affinity-merge-region-size-new-in-v855)を変更します。デフォルト値は`256` MiB です。これは、同じアフィニティグループ内の隣接する小さなリージョンを自動的にマージするためのサイズしきい値を制御します。`0`に設定すると、アフィニティグループ内の隣接する小さなリージョンの自動マージが無効になります。
 
 ## 使用法 {#usage}
 

@@ -59,7 +59,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 
 ## 現在のリソースグループ {#current_resource_group}
 
-`CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。3 [リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
+`CURRENT_RESOURCE_GROUP()`機能は、現在のセッションがバインドされているリソースグループ名を表示するために使用されます。[リソース管理](/tidb-resource-control-ru-groups.md)機能を有効にすると、SQL ステートメントで使用できるリソースは、バインドされているリソースグループのリソースクォータによって制限されます。
 
 セッションが確立されると、TiDB はログインユーザーがデフォルトでバインドされているリソースグループにセッションをバインドします。ユーザーがどのリソースグループにもバインドされていない場合、セッションは`default`リソースグループにバインドされます。セッションが確立されると、ユーザーのバインドされているリソースグループが[ユーザーにバインドされたリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)で変更されても、バインドされているリソースグループはデフォルトで変更されません。現在のセッションのバインドされているリソースグループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用します。
 
@@ -264,7 +264,7 @@ ORDER BY
 
 ## TIDB_デコード_プラン {#tidb_decode_plan}
 
-TiDB実行プランは、スロークエリログにエンコードされた形式で保存されています。1関数`TIDB_DECODE_PLAN()` 、エンコードされたプランを人間が読める形式にデコードするために使用されます。
+TiDB実行プランは、スロークエリログにエンコードされた形式で保存されています。`TIDB_DECODE_PLAN()`関数は、エンコードされたプランを人間が読める形式にデコードするために使用されます。
 
 この関数は、ステートメント実行時にプランが取得されるため便利です。`EXPLAIN`ステートメントを再実行すると、データの分布と統計が時間の経過とともに変化するため、異なる結果が生成される可能性があります。
 
@@ -378,7 +378,7 @@ SELECT TIDB_IS_DDL_OWNER();
 
 ## TIDB_PARSE_TSO {#tidb_parse_tso}
 
-`TIDB_PARSE_TSO()`関数は、TiDB TSO タイムスタンプから物理タイムスタンプを抽出します。3 [TSO](/tso.md) Time Stamp Oracle を表し、PD (Placement Driver) によってトランザクションごとに発行される単調に増加するタイムスタンプです。
+`TIDB_PARSE_TSO()`関数は、TiDB TSO タイムスタンプから物理タイムスタンプを抽出します。[TSO](/tso.md)は Time Stamp Oracle を表し、PD (Placement Driver) によってトランザクションごとに発行される単調に増加するタイムスタンプです。
 
 TSO は次の 2 つの部分で構成される数値です。
 

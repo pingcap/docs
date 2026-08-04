@@ -143,7 +143,7 @@ Dumplingは、TiDB、MySQL、またはMariaDBに保存されているデータ�
 
 ### グローバルトランザクション識別子（GTID） {#global-transaction-identifiers-gtids}
 
-グローバルトランザクション識別子（GTID）は、MySQLバイナリログで使用される一意のトランザクションIDで、どのトランザクションが複製されたかを追跡するために使用されます。1 [データ移行（DM）](/dm/dm-overview.md) 、これらのIDを使用して一貫性のあるレプリケーションを保証します。
+グローバルトランザクション識別子（GTID）は、MySQLバイナリログで使用される一意のトランザクションIDで、どのトランザクションが複製されたかを追跡するために使用されます。[データ移行（DM）](/dm/dm-overview.md)は、これらのIDを使用して一貫性のあるレプリケーションを保証します。
 
 ## <a id="H" class="letter" href="#H">H</a> {#h}
 
@@ -339,7 +339,7 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 
 ### セキュリティ強化モード（SEM） {#security-enhanced-mode-sem}
 
-セキュリティ強化モード（SEM）は、TiDB管理者の権限をより細かく制御するために使用されます。1 [セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)のシステムに触発されたSEMは、 `SUPER`権限を持つユーザーの機能を制限し、代わりに`RESTRICTED`つのきめ細かい権限を必要とします。これらの権限は、特定の管理アクションを制御するために明示的に付与される必要があります。
+セキュリティ強化モード（SEM）は、TiDB管理者の権限をより細かく制御するために使用されます。[セキュリティ強化Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)のようなシステムに触発されたSEMは、 `SUPER`権限を持つユーザーの機能を制限し、代わりに`RESTRICTED`つのきめ細かい権限を必要とします。これらの権限は、特定の管理アクションを制御するために明示的に付与される必要があります。
 
 詳細については、 [システム変数に関するドキュメント - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)を参照してください。
 

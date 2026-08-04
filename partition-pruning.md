@@ -226,7 +226,7 @@ explain select * from t where x between 7 and 14;
 
 -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
 -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
--   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。2列および`DATE` `DATETIME`の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。10 `TIME`の場合、 `HOUR` 、および`HOUR_SECOND` `HOUR_MICROSECOND`単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`では`WEEK`時間単位としてサポートされていないこと`HOUR_MINUTE`注意してください。
+-   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。`DATE`列および`DATETIME`列の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。`TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`は単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`で`WEEK`は時間単位としてサポートされていないことに注意してください。
 
 たとえば、パーティション プルーニングは、パーティション式が`fn(col)`形式 ( `fn`は単調関数`to_days`の場合に有効になります。
 

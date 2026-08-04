@@ -53,7 +53,7 @@ tiup cluster start ${cluster-name}
 
 ## クラスターのステータスを表示する {#view-the-cluster-status}
 
-クラスターを起動したら、各コンポーネントのステータスを確認し、正常に動作していることを確認してくださいTiUPには`display`コマンドが用意されているため、コンポーネントのステータスを確認するためにすべてのマシンにログインする必要はありません。
+クラスターを起動したら、各コンポーネントのステータスを確認し、正常に動作していることを確認してください。TiUPには`display`コマンドが用意されているため、コンポーネントのステータスを確認するためにすべてのマシンにログインする必要はありません。
 
 ```bash
 tiup cluster display ${cluster-name}
@@ -87,7 +87,7 @@ tiup cluster display ${cluster-name}
 
     パラメータの形式については[TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
-    **構成項目の階層を表すには、 . を使用します`.`**
+    **構成項目の階層を表すには、 `.` を使用します**
 
     コンポーネントの構成パラメータの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)を参照してください。
 

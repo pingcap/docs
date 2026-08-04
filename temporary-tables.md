@@ -272,5 +272,5 @@ TiDB のローカル一時テーブルは次の機能をサポートしてい**�
 ## 参照 {#see-also}
 
 -   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [次のようなテーブルを作成する](/sql-statements/sql-statement-create-table-like.md)
+-   [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
 -   [テーブルを削除](/sql-statements/sql-statement-drop-table.md)

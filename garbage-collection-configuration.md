@@ -10,7 +10,7 @@ summary: GC 構成パラメータについて学習します。
 -   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50) : TiKV のガベージコレクションを有効にするかどうかを制御します。
 -   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50) : GC 間隔を指定します。
 -   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : 各 GC でデータが保持される時間制限を指定します。
--   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) : GC の[ロックを解決する](/garbage-collection-overview.md#resolve-locks)番目のステップのスレッド数を指定します。
+-   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) : GC の[ロックを解決する](/garbage-collection-overview.md#resolve-locks)のステップのスレッド数を指定します。
 -   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) : GC のロック解決ステップでロックをスキャンする方法を指定します。
 -   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) : アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を指定します。
 
@@ -26,7 +26,7 @@ summary: GC 構成パラメータについて学習します。
 
 </CustomContent>
 
-TiKVはGC I/O制限をサポートしています。1を設定すると、GCワーカーの`gc.max-write-bytes-per-sec`秒あたりの書き込み回数を制限し、通常のリクエストへの影響を軽減できます。
+TiKVはGC I/O制限をサポートしています。`gc.max-write-bytes-per-sec`を設定すると、GCワーカーの1秒あたりの書き込み量を制限し、通常のリクエストへの影響を軽減できます。
 
 `0`はこの機能を無効にすることを示します。
 
@@ -38,11 +38,11 @@ tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 
 ## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`システムテーブルを介して設定されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、設定の変更が確実に検証され、予期しない動作を防ぐことができます( [＃20655](https://github.com/pingcap/tidb/issues/20655) )。
+TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`システムテーブルを介して設定されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、設定の変更が確実に検証され、予期しない動作を防ぐことができます( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
 `CENTRAL` GCモードはサポートされなくなりました。代わりに、TiDB 3.0以降のデフォルトである`DISTRIBUTED` GCモードが自動的に使用されます。このモードは、TiDBがガベージコレクションを開始するために各TiKVリージョンにリクエストを送信する必要がなくなるため、より効率的です。
 
-以前のリリースの変更点については、左側のメニューにある*TIDB バージョン セレクターを*使用して、このドキュメントの以前のバージョンを参照してください。
+以前のリリースの変更点については、左側のメニューにある*TIDB バージョン セレクター*を使用して、このドキュメントの以前のバージョンを参照してください。
 
 ## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 

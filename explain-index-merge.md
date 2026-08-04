@@ -48,7 +48,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t) */ * FROM t WHERE a > 1 OR b > 1;
 
 上記のクエリでは、オプティマイザはテーブルにアクセスするためにユニオン型のインデックスマージを選択します。インデックスマージにより、オプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスから返された結果をマージして、上記の出力の後者の実行プランを生成することができます。
 
-出力において、 `IndexMerge_8`演算子の`operator info`の`type: union`情報は、この演算子がユニオン型インデックスマージであることを示しています。この演算子には3つの子ノードがあります。7と`IndexRangeScan_6` `IndexRangeScan_5`範囲に従って条件を満たす`RowID`をスキャンし、その後、 `TableRowIDScan_7`演算子はこれらの`RowID`に基づいて条件を満たすすべてのデータを正確に読み取ります。
+出力において、 `IndexMerge_8`演算子の`operator info`の`type: union`情報は、この演算子がユニオン型インデックスマージであることを示しています。この演算子には3つの子ノードがあります。`IndexRangeScan_5`と`IndexRangeScan_6`は範囲に従って条件を満たす`RowID`をスキャンし、その後、 `TableRowIDScan_7`演算子はこれらの`RowID`に基づいて条件を満たすすべてのデータを正確に読み取ります。
 
 `IndexRangeScan` / `TableRangeScan`ように特定のデータ範囲に対して実行されるスキャン演算の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`のような他のスキャン演算と比較して、スキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_5`演算子の`range:(1,+inf]`は、演算子が 1 から正の無限大までデータをスキャンすることを示しています。
 

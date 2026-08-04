@@ -7,7 +7,7 @@ summary: クラスター化インデックスの概念、ユーザーシナリ�
 
 TiDBはバージョン5.0以降、クラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルへのデータの格納方法を制御します。これにより、TiDBは特定のクエリのパフォーマンスを向上させるような方法でテーブルを整理することができます。
 
-この文脈における*「クラスター化」*という用語は*、データの格納方法の構成を*指し、*連携して動作するデータベースサーバーのグループを*指すものではありません。一部のデータベース管理システムでは、クラスター化されたインデックステーブルを*インデックス構成テーブル*（IOT）と呼んでいます。
+この文脈における*「クラスター化」*という用語は、*データの格納方法の構成*を指し、*連携して動作するデータベースサーバーのグループを*指すものではありません。一部のデータベース管理システムでは、クラスター化されたインデックステーブルを*インデックス構成テーブル*（IOT）と呼んでいます。
 
 現在、TiDBの主キーを含むテーブルは、以下の2つのカテゴリに分類されます。
 
@@ -19,7 +19,7 @@ TiDBはバージョン5.0以降、クラスター化インデックス機能を�
 
 > **Note:**
 >
-> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 *{* `PRIMARY KEY`と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
+> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 *`PRIMARY KEY`*と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -39,7 +39,7 @@ TiDBはバージョン5.0以降、クラスター化インデックス機能を�
 
 ### クラスター化インデックスを持つテーブルを作成する {#create-a-table-with-clustered-indexes}
 
-TiDB v5.0以降では、 `CLUSTERED`の`NONCLUSTERED`の後に、予約語ではないキーワード`PRIMARY KEY`または`CREATE TABLE`を追加することで、テーブルの主キーがクラスター化インデックスであるかどうかを指定できます。例：
+TiDB v5.0以降では、 `CREATE TABLE`文の`PRIMARY KEY`の後に、予約語ではないキーワード`CLUSTERED`または`NONCLUSTERED`を追加することで、テーブルの主キーがクラスター化インデックスであるかどうかを指定できます。例：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY CLUSTERED, b VARCHAR(255));
@@ -96,7 +96,7 @@ ALTER TABLE t DROP INDEX `PRIMARY`;
 
 -   コマンド`SHOW CREATE TABLE`を実行します。
 -   コマンド`SHOW INDEX FROM`を実行します。
--   システムテーブル`TIDB_PK_TYPE`の`information_schema.tables`列をクエリします。
+-   システムテーブル`information_schema.tables`の`TIDB_PK_TYPE`列をクエリします。
 
 コマンド`SHOW CREATE TABLE`を実行すると、 `PRIMARY KEY`の属性が`CLUSTERED`か`NONCLUSTERED`かを確認できます。例:
 
@@ -126,7 +126,7 @@ mysql> SHOW INDEX FROM t;
 1 row in set (0.01 sec)
 ```
 
-システムテーブル`TIDB_PK_TYPE`の列`information_schema.tables`をクエリして、結果が`CLUSTERED`か`NONCLUSTERED`かを確認することもできます。例:
+システムテーブル`information_schema.tables`の`TIDB_PK_TYPE`列をクエリして、結果が`CLUSTERED`か`NONCLUSTERED`かを確認することもできます。例:
 
 ```sql
 mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';

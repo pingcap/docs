@@ -69,7 +69,7 @@ summary: openssl` を使用して自己署名証明書を生成します。
 -   tidb-server 証明書: TiDB が他のコンポーネントやクライアントに対して TiDB を認証するために使用されます。
 -   tikv-server 証明書: TiKV が他のコンポーネントやクライアントに対して TiKV を認証するために使用されます
 -   pd-server 証明書: PD が他のコンポーネントやクライアントに対して PD を認証するために使用されます。
--   クライアント証明書: PD、TiKV、TiDBからのクライアントの認証に使用されます（例: `pd-ctl` `tikv-ctl`
+-   クライアント証明書: PD、TiKV、TiDBからのクライアントの認証に使用されます（例: `pd-ctl`、`tikv-ctl`）
 
 ### TiKVインスタンスに証明書を発行する {#issue-certificates-to-tikv-instances}
 
