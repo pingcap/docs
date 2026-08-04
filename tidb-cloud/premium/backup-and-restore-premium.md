@@ -52,32 +52,56 @@ Backup files can originate from the following sources:
 
 </CustomContent>
 
-### Automatic backup policies
+### Automatic backup modes
 
-{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances use a multi-layer backup architecture to protect your data, as described in the following table:
+You can choose an automatic backup mode in **Backup Settings**. The available features, retention periods, and pricing method depend on the selected mode.
 
-| Backup type | Retention period | Restore granularity |
-| --- | --- | --- |
-| **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
-| **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
-| **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
+| Mode | Automatic backups | Retention and restore options | Pricing method |
+| --- | --- | --- | --- |
+| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on data incremental volume. |
+| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
 
-### Backup execution rules
+PITR lets you restore to any specific point in time within its retention period. A snapshot restore lets you restore from a specific hourly or daily snapshot that is still within its retention period.
 
-- **Backup cycle**: {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances perform both hourly and daily automatic backups.
+### Configure automatic backups
 
-- **Backup schedule**:
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
 
-    - Hourly backups run at the start of every hour.
-    - Daily backups run at 00:00 UTC each day.
-    - Currently, you cannot customize or manage backup schedules.
+2. In the left navigation pane, click **Data** > **Backup**.
 
-- **Retention behavior**: backups expire automatically when they exceed their retention period (7 days or 33 days) and cannot be restored.
+3. Click **Backup Settings**.
+
+4. Select an automatic backup mode:
+
+    - **Standard Bundle Mode** uses the predefined PITR, hourly snapshot, and daily snapshot settings.
+    - **Custom Retention Mode** lets you configure the automatic backup retention period and daily backup time.
+
+5. If you select **Custom Retention Mode**, configure the following settings:
+
+    - **Backup Retention**: select a value from 3 to 33 days. The default value is 7 days.
+    - **Daily Backup Time**: select the time of day for the daily snapshot. The time zone is displayed next to the setting.
+
+6. Review the **Overview** section, and then click **Save**.
+
+    The overview shows the features enabled by the selected mode, their retention periods, and the available restore options.
 
 > **Note:**
 >
-> - Automatic backup storage costs depend on the backup data volume and the retention period.
-> - To extend the backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
+> - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud/pricing/) for more information.
+> - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone. Review the confirmation message and type the instance name when prompted.
+
+### Switch automatic backup modes
+
+To switch modes, open **Backup Settings**, select the new mode, review the retention settings, and click **Save**. The new mode applies to new automatic backups and determines the current backup pricing.
+
+When switching to **Custom Retention Mode**, you must configure a retention period. When switching to **Standard Bundle Mode**, the retention settings return to the standard bundle defaults.
+
+If the new retention period is shorter than the current period, the confirmation dialog lists the automatic backups that will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
+
+### Backup protection
+
+TiDB Cloud protects the latest successful automatic backup of an instance until its retention period expires. You cannot manually delete this protected backup, including after the instance is deleted. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before expiration.
 
 ### Delete backup files
 
@@ -86,6 +110,8 @@ To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
+
+    The latest successful automatic backup is protected until its retention period expires and cannot be deleted before then. Manual backups can be deleted according to your permissions.
 
 ## Manual backups
 
@@ -107,7 +133,7 @@ In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support man
 
 - **Storage location**: manual backups are stored in cloud storage managed by TiDB.
 
-- **Cost**: because manual backups are retained long term and incur additional charges.
+- **Cost**: manual backups incur additional charges because they are retained until you delete them.
 
 - **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
 
