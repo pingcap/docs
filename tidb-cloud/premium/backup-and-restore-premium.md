@@ -56,10 +56,19 @@ Backup files can originate from the following sources:
 
 You can choose an automatic backup mode in **Backup Settings**. The available features, retention periods, and pricing method depend on the selected mode.
 
+<CustomContent plan="premium">
 | Mode | Automatic backups | Retention and restore options | Pricing method |
 | --- | --- | --- | --- |
 | **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on data incremental volume. |
 | **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
+</CustomContent>
+
+<CustomContent plan="byoc"> 
+| Mode | Automatic backups | Retention and restore options |
+| --- | --- | --- | --- |
+| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | 
+| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | 
+</CustomContent> 
 
 PITR lets you restore to any specific point in time within its retention period. A snapshot restore lets you restore from a specific hourly or daily snapshot that is still within its retention period.
 
@@ -85,11 +94,20 @@ PITR lets you restore to any specific point in time within its retention period.
 
     The overview shows the features enabled by the selected mode, their retention periods, and the available restore options.
 
+<CustomContent plan="byoc"> 
+> **Note:**
+>
+> - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
+> - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+</CustomContent> 
+
+<CustomContent plan="premium">
 > **Note:**
 >
 > - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
 > - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud/pricing/) for more information.
 > - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+</CustomContent>
 
 ### Switch automatic backup modes
 
