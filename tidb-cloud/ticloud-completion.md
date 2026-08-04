@@ -3,7 +3,7 @@ title: ticloud completion
 summary: ticloud 補完` のリファレンス。
 ---
 
-# ticloudの完了 {#ticloud-completion}
+# ticloud completion {#ticloud-completion}
 
 TiDB Cloud CLI の指定されたシェルの自動補完スクリプトを生成します。
 

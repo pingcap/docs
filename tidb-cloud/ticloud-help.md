@@ -3,7 +3,7 @@ title: ticloud help
 summary: ticloud help` のリファレンス。
 ---
 
-# ticloudヘルプ {#ticloud-help}
+# ticloud help {#ticloud-help}
 
 TiDB Cloud CLI の任意のコマンドのヘルプ情報を取得します。
 

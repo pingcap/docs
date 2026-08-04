@@ -240,7 +240,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 >
 > このオプションは、 `--cluster`オプションが false の場合にのみ有効です。それ以外の場合、このオプションの値は`${TIUP_HOME}/storage/cluster/clusters/<cluster-name>/ssh/id_rsa`に固定されます。
 
-### -p, --パスワード {#p-password}
+### -p, --password {#p-password}
 
 -   ターゲットマシンに接続するときにパスワードを使用してログインします。
     -   クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターのデプロイ時にトポロジ ファイルに指定されたユーザーのパスワードになります。

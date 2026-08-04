@@ -60,7 +60,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 >
 > `--os` `any`に設定する場合は、 `--arch` `any`に設定する必要があります。
 
-### --説明 {#desc}
+### --desc {#desc}
 
 -   コンポーネントの説明を指定します。
 -   データ型: `String`
@@ -72,7 +72,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 -   データ型: `STRING`
 -   デフォルト: NULL
 
-### --スタンドアロン {#standalone}
+### --standalone {#standalone}
 
 -   コンポーネントをスタンドアロンで実行できるかどうかを制御します。このオプションは現在**利用できません**。
 -   データ型: `BOOLEAN`
