@@ -185,7 +185,7 @@ snap-io-max-bytes-per-sec = "300MiB"
 | 平均レイテンシー（ミリ秒）         | 35.87  | 31.92   | -11.01% |
 | P95レイテンシー（ms）         | 58.92  | 51.02   | -13.41% |
 | プランキャッシュヒット率（％）       | 56.89% | 87.51%  | +53.82% |
-| キャッシュメモリ使用量（MiB）を計画する | 95.3   | 70.2    | -26.34% |
+| プランキャッシュメモリ使用量（MiB） | 95.3   | 70.2    | -26.34% |
 
 #### 主なメリット {#key-benefits}
 
@@ -272,7 +272,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 #### パフォーマンス分析 {#performance-analysis}
 
-バージョン7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanのデフォルト値は`min-blob-size`ですが、現在は`32KiB`なっています。ベースライン構成では、レコードサイズを`31KiB`に設定することで、データがRocksDBに保存されるようにしています。一方、キー設定構成では、 `min-blob-size` ～ `1KiB`に設定すると、データがTitanに保存されます。
+バージョン7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanの`min-blob-size`のデフォルト値は`32KiB`です。ベースライン構成では、レコードサイズを`31KiB`に設定することで、データがRocksDBに保存されるようにしています。一方、キー設定構成では、 `min-blob-size` ～ `1KiB`に設定すると、データがTitanに保存されます。
 
 主要設定で確認されたパフォーマンスの向上は、主にTitanがRocksDBの圧縮を削減する能力によるものです。以下の図に示すように、
 
@@ -285,7 +285,7 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 #### テストワークロード {#test-workload}
 
-以下のコマンド`go-ycsb load`データが読み込まれます。
+以下の`go-ycsb load`コマンドでデータが読み込まれます。
 
 ```bash
 go-ycsb load mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p threadcount=100 -p recordcount=5000000 -p operationcount=5000000 -p workload=core -p requestdistribution=uniform -pfieldcount=31 -p fieldlength=1024
@@ -313,7 +313,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 以下に、よくある例外的なケースをいくつか挙げます。
 
--   高頻度の小さなクエリに対して、TSOは高い待機時間を設ける。
+-   高頻度の小さなクエリでのTSO待機時間が長い
 -   さまざまなワークロードに適した最大チャンクサイズを選択してください。
 -   読み込み負荷の高いワークロード向けにコプロセッサキャッシュを調整する
 -   ワークロード特性に合わせてチャンクサイズを最適化
@@ -329,7 +329,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 >
 > これらの最適化は、使用状況やデータパターンによって効果が異なる可能性があるため、慎重に適用し、徹底的にテストしてください。
 
-### 高頻度の小さなクエリに対して、TSOは高い待機時間を設ける。 {#high-tso-wait-for-high-frequency-small-queries}
+### 高頻度の小さなクエリでのTSO待機時間が長い {#high-tso-wait-for-high-frequency-small-queries}
 
 #### トラブルシューティング {#troubleshooting}
 

@@ -3,7 +3,7 @@ title: ticloud auth login
 summary: ticloud auth login` のリファレンス。
 ---
 
-# ticloud認証ログイン {#ticloud-auth-login}
+# ticloud auth login {#ticloud-auth-login}
 
 TiDB Cloudで認証する:
 

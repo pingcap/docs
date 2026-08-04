@@ -11,13 +11,13 @@ TiUPを使用してTiDBクラスターをデプロイする場合、監視シス
 
 Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporterを含む一連のサブダッシュボードに分かれています。診断に役立つ多くのメトリクスが用意されています。
 
-TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlash-Proxy-Details の**3つのダッシュボードパネルがあります。これらのパネルに表示されるメトリックは、 TiFlashの現在の状態を示します。 **TiFlash-Proxy-Summary**パネルと**TiFlash-Proxy-Details**パネルは、主にRaftレイヤーの情報を表示します。メトリックの詳細は[TiKVの主要な監視指標](/grafana-tikv-dashboard.md)を参照してください。
+TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlash-Proxy-Details**の3つのダッシュボードパネルがあります。これらのパネルに表示されるメトリックは、 TiFlashの現在の状態を示します。 **TiFlash-Proxy-Summary**パネルと**TiFlash-Proxy-Details**パネルは、主にRaftレイヤーの情報を表示します。メトリックの詳細は[TiKVの主要な監視指標](/grafana-tikv-dashboard.md)を参照してください。
 
 > **Note:**
 >
 > TiFlashのモニターを改善するには、 TiDB v4.0.5 以降のバージョンを使用することをお勧めします。
 
-次のセクションでは**、 TiFlash-Summary**のデフォルトの監視情報を紹介します。
+次のセクションでは、**TiFlash-Summary**のデフォルトの監視情報を紹介します。
 
 ## サーバ {#server}
 
@@ -62,7 +62,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 ## DDL {#ddl}
 
 -   スキーマ バージョン: 各TiFlashインスタンスに現在キャッシュされているスキーマのバージョン。
--   スキーマ適用OPM：すべてのTiFlashインスタンスによって1分間に`apply`操作で同期されたTiDB `schema diff`の数。この項目には、 `diff apply`の3 `failed apply`の`apply`のカウントが含まれます。13 `diff apply`単一の適用の通常のプロセスです。15 `full apply`失敗した場合、 `diff apply` `failed apply` `1`増加し、 TiFlashは`full apply`にロールバックし、最新のスキーマ情報を取得してTiFlashのスキーマバージョンを更新します。
+-   スキーマ適用OPM：すべてのTiFlashインスタンスによって1分間に`apply`操作で同期されたTiDB `schema diff`の数。この項目には、 `diff apply` 、 `full apply` 、 `failed apply`の3種類の`apply`のカウントが含まれます。`diff apply`は単一の適用の通常のプロセスです。`diff apply`が失敗した場合、 `failed apply`が`1`増加し、 TiFlashは`full apply`にロールバックし、最新のスキーマ情報を取得してTiFlashのスキーマバージョンを更新します。
 -   スキーマ内部 DDL OPM: すべてのTiFlashインスタンスで 1 分あたりに実行された特定の DDL 操作の数。
 -   スキーマ適用期間: すべてのTiFlashインスタンスでの単一の`apply schema`操作に使用される時間。
 

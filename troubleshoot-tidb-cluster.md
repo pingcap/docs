@@ -9,7 +9,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 -   正確なエラーメッセージとエラー発生時の操作
 -   すべてのコンポーネントの状態
--   エラー`panic`報告するコンポーネントのログの`error` `fatal`情報
+-   エラーを報告するコンポーネントのログ内の`error` / `fatal` / `panic`情報
 -   構成と展開トポロジ
 -   `dmesg`のTiDBコンポーネント関連の問題
 
@@ -17,7 +17,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 ## データベースに接続できません {#cannot-connect-to-the-database}
 
-1.  `tidb-server` `pd-server`含むすべてのサービスが開始されていることを確認します`tikv-server`
+1.  `tidb-server` 、 `pd-server` 、 `tikv-server`を含むすべてのサービスが開始されていることを確認します
 
 2.  `ps`コマンドを使用して、すべてのプロセスが実行中かどうかを確認します。
 

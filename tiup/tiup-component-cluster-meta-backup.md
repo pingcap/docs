@@ -3,7 +3,7 @@ title: tiup cluster meta backup
 summary: TiUPメタファイルは、クラスタの運用と保守に不可欠です。定期的にファイルをバックアップするには、tiup cluster meta backup`コマンドを使用してください。クラスタ名を確認するには、`tiup dm listコマンドを使用してください。`--file`オプションでターゲットディレクトリを指定してください。ヘルプ情報を表示するには、`-h, --helpコマンドを使用してください。出力には、tiup-clusterの実行ログが含まれます。
 ---
 
-# tiup クラスタメタバックアップ {#tiup-cluster-meta-backup}
+# tiup cluster meta backup {#tiup-cluster-meta-backup}
 
 TiUPメタファイルはクラスタの運用保守（OM）に使用されます。このファイルが失われると、 TiUPを使用してクラスタを管理できなくなります。このような状況を回避するには、 `tiup cluster meta backup`コマンドを使用してTiUPメタファイルを定期的にバックアップしてください。
 

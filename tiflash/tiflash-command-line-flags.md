@@ -76,6 +76,6 @@ summary: TiFlashのコマンドライン起動フラグについて学習しま�
 
     -   `--config-file` : `dttool bench`の設定ファイル。[`dttool migrate`における`--config-file`](#dttool-migrate)を参照してください。
     -   `--check` : ハッシュ検証を実行します。
-    -   `--file-id` ：DTFileのID。2 [`dttool migrate`における`--file-id`](#dttool-migrate)参照してください。
-    -   `--imitative` : データベースコンテキストを模倣します。2 [`dttool migrate`における`--imitative`](#dttool-migrate)参照してください。
-    -   `--workdir` : データディレクトリ。2 [`dttool migrate`における`--workdir`](#dttool-migrate)参照してください。
+    -   `--file-id` ：DTFileのID。[`dttool migrate`における`--file-id`](#dttool-migrate)を参照してください。
+    -   `--imitative` : データベースコンテキストを模倣します。[`dttool migrate`における`--imitative`](#dttool-migrate)を参照してください。
+    -   `--workdir` : データディレクトリ。[`dttool migrate`における`--workdir`](#dttool-migrate)を参照してください。

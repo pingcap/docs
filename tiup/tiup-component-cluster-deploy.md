@@ -31,7 +31,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 -   データ型: `STRING`
 -   コマンドでこのオプションを指定しない場合は、デフォルトで`~/.ssh/id_rsa`ファイルを使用してターゲット マシンに接続します。
 
-### -p, --パスワード {#p-password}
+### -p, --password {#p-password}
 
 -   ターゲットマシンへの接続に使用するパスワードを指定します。このオプションは`-i/--identity_file`と同時に使用しないでください。
 -   データ型: `BOOLEAN`

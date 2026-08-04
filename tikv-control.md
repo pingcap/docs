@@ -89,7 +89,7 @@ tiup ctl:v<CLUSTER_VERSION> tikv
 
 -   リモートモード: `--host`オプションを使用して、TiKVのサービスアドレスを引数として受け入れます
 
-    このモードでは、TiKVでSSLが有効になっている場合、関連する証明書ファイルも指定する必要があり`tikv-ctl` 。例：
+    このモードでは、TiKVでSSLが有効になっている場合、`tikv-ctl`は関連する証明書ファイルも指定する必要があります。例：
 
     ```shell
     tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
@@ -239,7 +239,7 @@ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\0
 
 `raw-scan`コマンドはRocksDBから直接スキャンします。データキーをスキャンするには、キーの先頭に`'z'`追加する必要があることに注意してください。
 
-`--from`と`--to`オプションを使用して`write`スキャンする範囲を指定します（デフォルトでは無制限） `--limit`を使用すると、出力するキーの最大数を制限します（デフォルトでは30） `--cf`を使用すると、スキャンする cf を指定します（ `default` 、または`lock` ）。
+`--from`と`--to`オプションを使用して`write`スキャンする範囲を指定します（デフォルトでは無制限） `--limit`を使用すると、出力するキーの最大数を制限します（デフォルトでは30） `--cf`を使用すると、スキャンする cf を指定します（ `default` 、 `write` 、または`lock` ）。
 
 ```shell
 tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
@@ -256,7 +256,7 @@ tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
 
 ### リージョンに関するいくつかのプロパティを印刷する {#print-some-properties-about-region}
 
-リージョンの状態の詳細を記録するために、TiKVはリージョンのSSTファイルにいくつかの統計情報を書き込みます。これらのプロパティを表示するには、サブコマンド`tikv-ctl`とサブコマンド`region-properties`を実行します。
+リージョンの状態の詳細を記録するために、TiKVはリージョンのSSTファイルにいくつかの統計情報を書き込みます。これらのプロパティを表示するには、`region-properties`サブコマンドを指定して`tikv-ctl`を実行します。
 
 ```shell
 tikv-ctl --host localhost:20160 region-properties -r 2
@@ -348,7 +348,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<re
 
 ### TiKVに<code>consistency-check</code>リクエストを送信する {#send-a-consistency-check-request-to-tikv}
 
-`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗した場合、TiKV 自体がパニック状態になります`--host`で指定された TiKV インスタンスがリージョンリーダーでない場合は、エラーが報告されます。
+`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗した場合、TiKV 自体がパニック状態になります。`--host`で指定された TiKV インスタンスがリージョンリーダーでない場合は、エラーが報告されます。
 
 ```shell
 tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
@@ -377,7 +377,7 @@ tikv-ctl --data-dir /path/to/tikv bad-regions
 
     all regions are healthy
 
-コマンドが正常に実行された場合、上記の情報が出力。コマンドが失敗した場合、不良リージョンのリストが出力。現在検出可能なエラーには、 `last index` `commit index`不一致と、 Raftログの消失が含まれます。スナップショットファイルの破損など、その他`apply index`条件については、さらなるサポートが必要です。
+コマンドが正常に実行された場合、上記の情報が出力されます。コマンドが失敗した場合、不良リージョンのリストが出力されます。現在検出可能なエラーには、 `last index` `commit index`不一致と、 Raftログの消失が含まれます。スナップショットファイルの破損など、その他`apply index`条件については、さらなるサポートが必要です。
 
 ### リージョンのプロパティを表示する {#view-region-properties}
 

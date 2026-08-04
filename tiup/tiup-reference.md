@@ -21,7 +21,7 @@ tiup [flags] <component> [args...]      # Runs a component
 
 ## オプション {#options}
 
-### - バイナリ {#binary}
+### --binary {#binary}
 
 -   このオプションを有効にすると、指定されたバイナリ ファイルのパスが出力されます。
 
@@ -45,16 +45,16 @@ tiup [flags] <component> [args...]      # Runs a component
 -   実行するコンポーネントのパスを指定します。コンポーネントの実行時にTiUPミラー内のバイナリファイルを使用しない場合は、このオプションを追加することで、カスタムパス内のバイナリファイルを使用するように指定できます。
 -   データ型: `STRING`
 
-### -T, --タグ {#t-tag}
+### -T, --tag {#t-tag}
 
 -   起動するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスクストレージを使用する必要があり、 TiUP はこの実行のために一時的なストレージディレクトリを割り当てます。TiUPに固定のディレクトリを割り当てたい場合は、ディレクトリ名に`-T/--tag`を指定します。これにより、同じタグを持つ複数の実行で、同じファイルバッチの読み取りと書き込みが可能になります。
 -   データ型: `STRING`
 
-### -v, --バージョン {#v-version}
+### -v, --version {#v-version}
 
 TiUPバージョンを出力します。
 
-### - ヘルプ {#help}
+### --help {#help}
 
 ヘルプ情報を出力します。
 
@@ -68,7 +68,7 @@ TiUPには複数のコマンドがあり、これらのコマンドには複数�
 -   [アップデート](/tiup/tiup-command-update.md) : インストールされているコンポーネントを更新します。
 -   [状態](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを表示します。
 -   [クリーン](/tiup/tiup-command-clean.md) :コンポーネントのデータディレクトリをクリーンアップします。
--   [鏡](/tiup/tiup-command-mirror.md) : ミラーを管理します。
+-   [mirror](/tiup/tiup-command-mirror.md) : ミラーを管理します。
 -   [テレメトリー](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
 -   [完了](/tiup/tiup-command-completion.md) : TiUPコマンドを完了します。
 -   [環境](/tiup/tiup-command-env.md) : TiUP関連の環境変数を表示します。

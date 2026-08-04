@@ -12,9 +12,9 @@ aliases: ['/ja/tidb/v8.5/tidb-resource-control/','/ja/tidb/stable/tidb-resource-
 
 クラスタ管理者として、リソース制御機能を使用して、リソースグループの作成、リソースグループの割り当て量の設定、およびユーザーをそれらのグループにバインドすることができます。
 
-TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能とTiKVレイヤーの優先度スケジューリング機能という2つのレイヤーのリソース管理機能を提供します。これらの2つの機能は、個別に、または同時に有効にすることができます。詳しくは[リソース制御のためのパラメータ](#parameters-for-resource-control)については を参照してください。これにより、TiDBレイヤーはリソースグループに設定されたクォータに基づいてユーザーの読み取りおよび書き込み要求のフローを制御し、TiKVレイヤーは読み取りおよび書き込みクォータにマッピングされた優先度に基づいて要求をスケジュールすることができます。この操作を行うことで、アプリケーションのリソース分離を確保し、サービス品質（QoS）要件を満たすことができます。
+TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能とTiKVレイヤーの優先度スケジューリング機能という2つのレイヤーのリソース管理機能を提供します。これらの2つの機能は、個別に、または同時に有効にすることができます。詳しくは[リソース制御のためのパラメータ](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーはリソースグループに設定されたクォータに基づいてユーザーの読み取りおよび書き込み要求のフローを制御し、TiKVレイヤーは読み取りおよび書き込みクォータにマッピングされた優先度に基づいて要求をスケジュールすることができます。この操作を行うことで、アプリケーションのリソース分離を確保し、サービス品質（QoS）要件を満たすことができます。
 
--   TiDBフロー制御：TiDBフロー制御は を使用します。バケットに十分なトークンがなく、リソースグループ [トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)`BURSTABLE`オプションを指定していない場合、リソースグループへのリクエストはトークンバケットがトークンを補充するまで待機し、再試行します。再試行はタイムアウトにより失敗する可能性があります。
+-   TiDBフロー制御：TiDBフロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケットに十分なトークンがなく、リソースグループが`BURSTABLE`オプションを指定していない場合、リソースグループへのリクエストはトークンバケットがトークンを補充するまで待機し、再試行します。再試行はタイムアウトにより失敗する可能性があります。
 
 -   TiKV スケジューリング: 必要に応じて絶対優先度[（ `PRIORITY` ）](/information-schema/information-schema-resource-groups.md#examples)を設定できます。異なるリソースは`PRIORITY`設定に従ってスケジュールされます。 `PRIORITY`が高いタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの`RU_PER_SEC`の値を使用して、各リソース グループの読み取りおよび書き込み要求の優先度を決定します。ストレージレイヤーは、優先度に基づいて優先度キューを使用して要求をスケジュールおよび処理します。
 
@@ -22,14 +22,14 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 <CustomContent platform="tidb">
 
--   TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)ライン実行モデルを使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
+-   TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
 -   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `RU_PER_SEC`の`rg2`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)ライン実行モデルを使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
+-   TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[要求単位数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
 -   TiFlashスケジューリング: システム リソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソース グループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソース グループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `RU_PER_SEC`の`rg2`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
@@ -164,7 +164,7 @@ TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stab
     CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;
     ```
 
-3.  絶対優先度を`rg3` `HIGH`を作成します。現在の絶対優先度は`LOW|MEDIUM|HIGH`をサポートしています。デフォルト値は`MEDIUM`です。
+3.  絶対優先度を`HIGH`に設定してリソースグループ`rg3`を作成します。現在の絶対優先度は`LOW|MEDIUM|HIGH`をサポートしています。デフォルト値は`MEDIUM`です。
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg3 RU_PER_SEC = 100 PRIORITY = HIGH;
@@ -180,13 +180,13 @@ TiDBは、以下の3つのレベルのリソースグループ設定をサポー
 
 #### ユーザーをリソースグループにバインドする {#bind-users-to-a-resource-group}
 
-次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。 `rg1`は[リソースグループを作成する](#create-a-resource-group)するの例で作成されたリソース グループです。
+次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。 `rg1`は[リソースグループを作成する](#create-a-resource-group)の例で作成されたリソース グループです。
 
 ```sql
 CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ```
 
-次の例では`ALTER USER`を使用して、ユーザー`usr2`をリソース グループ`rg2`にバインドします。 `rg2`は[リソースグループを作成する](#create-a-resource-group)するの例で作成されたリソース グループです。
+次の例では`ALTER USER`を使用して、ユーザー`usr2`をリソース グループ`rg2`にバインドします。 `rg2`は[リソースグループを作成する](#create-a-resource-group)の例で作成されたリソース グループです。
 
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
@@ -326,7 +326,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 #### RUの統計情報を<code>statements_summary</code>別に表示する {#view-ru-statistics-by-code-statements-summary-code}
 
-TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計情報が格納されます。このシステム テーブルを使用すると、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。 説明
+TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計情報が格納されます。このシステム テーブルを使用すると、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。
 
 ### リソースグループのRU消費量を表示する {#view-the-ru-consumption-of-resource-groups}
 
@@ -357,7 +357,7 @@ SELECT * FROM request_unit_by_group LIMIT 5;
 
 <CustomContent platform="tidb">
 
-TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては[TiDBの重要な監視指標](/grafana-tidb-dashboard.md)の**「リソース制御**」セクションで詳しく説明されています。
+TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては[TiDBの重要な監視指標](/grafana-tidb-dashboard.md)の**リソース制御**セクションで詳しく説明されています。
 
 TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKVモニタリング指標の詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 
@@ -379,7 +379,7 @@ TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソー�
 
 ## ツールの互換性 {#tool-compatibility}
 
-リソース制御機能は、データのインポート、エクスポート、およびその他のレプリケーションツールの通常の使用には影響しませんBR、 TiDB Lightning、およびTiCDCは現在、リソース制御に関連するDDL操作の処理をサポートしておらず、リソース消費はリソース制御によって制限されません。
+リソース制御機能は、データのインポート、エクスポート、およびその他のレプリケーションツールの通常の使用には影響しません。BR、TiDB Lightning、およびTiCDCは現在、リソース制御に関連するDDL操作の処理をサポートしておらず、リソース消費はリソース制御によって制限されません。
 
 ## FAQ {#faq}
 

@@ -131,7 +131,7 @@ DELETE FROM t;
 
 ### インデックスのベストプラクティスを追加する {#add-index-best-practices}
 
-TiDBはオンラインのインデックス追加操作をサポートしています。1 [インデックスを追加](/sql-statements/sql-statement-add-index.md)または[インデックスの作成](/sql-statements/sql-statement-create-index.md)文でインデックスを追加できます。テーブルへのデータの読み取りと書き込みはブロックされません。以下のシステム変数を変更することで、インデックス追加操作のフェーズ`re-organize`における同時実行性とバッチサイズを調整できます。
+TiDBはオンラインのインデックス追加操作をサポートしています。[インデックスを追加](/sql-statements/sql-statement-add-index.md)または[インデックスの作成](/sql-statements/sql-statement-create-index.md)文でインデックスを追加できます。テーブルへのデータの読み取りと書き込みはブロックされません。以下のシステム変数を変更することで、インデックス追加操作のフェーズ`re-organize`における同時実行性とバッチサイズを調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)

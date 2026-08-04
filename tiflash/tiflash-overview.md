@@ -11,7 +11,7 @@ TiFlashでは、列指向レプリカはRaft Learnerコンセンサスアルゴ�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloud を使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定するだけで、HTAP クラスターを簡単に作成できます。クラスター作成時にTiFlashノード数を指定していない場合、またはTiFlashノードを追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
+TiDB Cloud を使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定するだけで、HTAP クラスターを簡単に作成できます。クラスター作成時にTiFlashノード数を指定していない場合、またはTiFlashノードを追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)することで変更できます。
 
 </CustomContent>
 

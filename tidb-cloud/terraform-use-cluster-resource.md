@@ -387,7 +387,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
     ```
 
-5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_cluster.${resource-name}`を使用します。コマンド 1 は、すべてのリソースとデータソースの状態を表示します。
+5.  リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_cluster.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
     ```shell
     $ terraform state show tidbcloud_cluster.example_cluster
@@ -592,7 +592,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)際に使用される`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB 用にさらに 1 つのノード、TiKV 用にさらに 3 つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります[クラスタ仕様からこの情報を取得します](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1 つのノードを追加するには、次のように構成を編集します。
+    たとえば、TiDB 用にさらに 1 つのノード、TiKV 用にさらに 3 つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1 つのノードを追加するには、次のように構成を編集します。
 
             components = {
               tidb = {

@@ -21,7 +21,7 @@ TiDBクラスターの高可用性と災害復旧能力を向上させるには�
 
 TiUPを使用してクラスターをデプロイする場合、 [初期化設定ファイル](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)で TiKV の場所を設定できます。TiUPは、デプロイ中に TiDB、TiKV、PD、およびTiFlashの対応する設定ファイルを生成します。
 
-以下の例では、2層トポロジ（ `zone/host`が定義されています。クラスターのTiDBノード、TiKVノード、およびTiFlashノードは、3つのゾーン（z1、z2、z3）に分散されています。
+以下の例では、2層トポロジ（ `zone/host` ）が定義されています。クラスターのTiDBノード、TiKVノード、およびTiFlashノードは、3つのゾーン（z1、z2、z3）に分散されています。
 
 -   各ゾーンには、TiDB インスタンスがデプロイされているホストが 2 つあり、各ホストには個別の TiDB インスタンスがデプロイされています。
 -   各ゾーンには、TiKVインスタンスがデプロイされたホストが2つあります。z1では、各ホストに2つのTiKVインスタンスがデプロイされています。z2とz3では、各ホストに個別のTiKVインスタンスがデプロイされています。
@@ -244,7 +244,7 @@ host = "<host>"
 
 `location-labels`が設定されている場合は、PD 設定ファイルで`isolation-level`設定することで、TiKV クラスターのトポロジ分離要件をさらに強化できます。
 
-上記の手順に従って`location-labels`ゾーン -&gt; ラック -&gt; ホストと設定して 3 層クラスタ トポロジを作成したと仮定すると、 `isolation-level` ～ `zone`次のように設定できます。
+上記の手順に従って`location-labels`をゾーン -&gt; ラック -&gt; ホストと設定して 3 層クラスタ トポロジを作成したと仮定すると、次のように`isolation-level`を`zone`に設定できます。
 
 ```toml
 [replication]

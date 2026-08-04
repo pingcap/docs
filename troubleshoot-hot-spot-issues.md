@@ -57,7 +57,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 パフォーマンスの問題は必ずしもホットスポットが原因であるとは限らず、複数の要因が絡み合っている可能性があります。問題のトラブルシューティングを行う前に、ホットスポットに関連しているかどうかを確認してください。
 
--   書き込みホットスポットを判断するには、 **TiKV トラブルシューティング**監視パネルで**Hot Write を**開き、任意の TiKV ノードのRaftstore CPU メトリック値が他のノードの値よりも大幅に高いかどうかを確認します。
+-   書き込みホットスポットを判断するには、 **TiKV トラブルシューティング**監視パネルで**Hot Write**を開き、任意の TiKV ノードのRaftstore CPU メトリック値が他のノードの値よりも大幅に高いかどうかを確認します。
 
 -   読み取りホットスポットを判断するには、 **TiKV 詳細**監視パネルで**Thread_CPU**を開き、いずれかの TiKV ノードのコプロセッサ CPU メトリック値が特に高いかどうかを確認します。
 
@@ -106,7 +106,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 ![Dashboard Example 6](/media/troubleshoot-hot-spot-issues-6.png)
 
-上記の負荷図に示すように、設定`SHARD_ROW_ID_BITS`より前では、負荷のホットスポットが単一のリージョンに集中していました。設定`SHARD_ROW_ID_BITS`より後では、負荷のホットスポットが分散するようになります。
+上記の負荷図に示すように、`SHARD_ROW_ID_BITS`を設定する前では、負荷のホットスポットが単一のリージョンに集中していました。`SHARD_ROW_ID_BITS`を設定した後では、負荷のホットスポットが分散するようになります。
 
 ## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
 

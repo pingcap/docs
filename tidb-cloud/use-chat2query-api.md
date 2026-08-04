@@ -11,7 +11,7 @@ Chat2Query API には HTTPS 経由でのみアクセスできるため、ネッ�
 
 > **Note:**
 >
-> Chat2Query APIはAWSでホストされている[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターでのみ利用可能です。3 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでChat2Query APIをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> Chat2Query APIはAWSでホストされている[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターでのみ利用可能です。[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでChat2Query APIをご利用いただくには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 始める前に {#before-you-begin}
 
@@ -200,7 +200,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 `"status"`が`"done"`の場合、完全なデータサマリーが準備完了しており、 `/v3/chat2data`を呼び出すことでこのデータベースに対してSQL文を生成して実行できます。それ以外の場合は、完了するまで待って、後で分析ステータスを確認する必要があります。
 
-レスポンスの`DataSummaryObject` 、指定されたデータベースのAI探索情報を表します。3の構造は`DataSummaryObject`のとおりです。
+レスポンスの`DataSummaryObject`は、指定されたデータベースのAI探索情報を表します。`DataSummaryObject`の構造は次のとおりです。
 
 ```js
 {

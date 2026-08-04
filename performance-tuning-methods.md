@@ -537,7 +537,7 @@ v5.4.0 では、gPRC モジュールが最適化され、 Raftログのレプリ
 -   平均`Commit Log Duration` = 7.92ミリ秒
 -   平均`Apply Log Duration` = 172 us
 
-スレッド`Store`の場合、 `Commit Log Duration`明らかに`Apply Log Duration`よりも高い値です。一方、 `Append Log Duration` `Apply Log Duration`よりも大幅に高い値であり、スレッド`Store`はCPUとI/Oの両方でボトルネックが発生している可能性があることを示しています。13と`Commit Log Duration` `Append Log Duration`削減する方法としては、以下のものが考えられます。
+スレッド`Store`の場合、 `Commit Log Duration`は`Apply Log Duration`よりも明らかに高い値です。一方、 `Append Log Duration`は`Apply Log Duration`よりも大幅に高い値であり、スレッド`Store`はCPUとI/Oの両方でボトルネックが発生している可能性があることを示しています。`Commit Log Duration`と`Append Log Duration`を削減する方法としては、以下のものが考えられます。
 
 -   TiKV CPU リソースが十分な場合は、 `raftstore.store-pool-size`の値を増やして`Store`スレッドを追加することを検討してください。
 -   TiDBがv5.4.0以降の場合は、 `raft-engine.enable: true`設定して[`Raft Engine`](/tikv-configuration-file.md#raft-engine)有効にすることを検討してください。RaftRaft Engineは軽量な実行パスを備えています。これにより、I/O書き込みの削減と、一部のシナリオにおける書き込みのロングテールレイテンシーの削減に役立ちます。

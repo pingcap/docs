@@ -126,7 +126,7 @@ alertmanager_servers:
 
 ### ラベルデザイン {#labels-design}
 
-2つのリージョンに3つのAZを展開する場合、ラベル設計では可用性と災害復旧を考慮する必要があります。展開の物理構造に基づいて、4つ`host`レベル（ `az` ）を`rack`することをお勧めします`replication zone`
+2つのリージョンに3つのAZを展開する場合、ラベル設計では可用性と災害復旧を考慮する必要があります。展開の物理構造に基づいて、4つのレベル（`az`、`replication zone`、`rack`、`host`）を定義することをお勧めします。
 
 ![Label logical definition](/media/three-data-centers-in-two-cities-deployment-03.png)
 

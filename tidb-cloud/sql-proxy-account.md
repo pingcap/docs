@@ -26,7 +26,7 @@ SQL プロキシ アカウントの主な利点は次のとおりです。
     SELECT user FROM user WHERE plugin = 'tidb_auth_token';
     ```
 
-2.  SQLアカウントの権限を確認してください。1、3、5 `role_admin`のロール`role_readonly`リストさ`role_readwrite`ている場合は、SQLプロキシアカウントです。
+2.  SQLアカウントの権限を確認してください。`role_admin` 、 `role_readonly` 、 `role_readwrite`などのロールがリストされている場合は、SQLプロキシアカウントです。
 
     ```sql
     SHOW GRANTS for 'username';

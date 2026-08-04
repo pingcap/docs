@@ -5,7 +5,7 @@ summary: TiUP mirror genkey は、 TiUP用の秘密鍵を生成するための�
 
 # tiup mirror genkey {#tiup-mirror-genkey}
 
-TiUP [鏡](/tiup/tiup-mirror-reference.md)定義によれば、ユーザーには 3 つの役割があります。
+TiUP [ミラー](/tiup/tiup-mirror-reference.md)の定義によれば、ユーザーには 3 つの役割があります。
 
 -   ミラー管理者: `root.json` 、 `index.json` 、 `snapshot.json` 、 `timestamp.json`を変更する権限があります。
 -   コンポーネント所有者: 対応するコンポーネントを変更する権限を持ちます。
@@ -29,7 +29,7 @@ tiup mirror genkey [flags]
 
 -   キーの名前を指定します。この名前は、最終的に生成されるファイルの名前も決定します。生成される秘密鍵ファイルのパスは`${TIUP_HOME}/keys/{name}.json`です。 `TIUP_HOME`は TiUPのホームディレクトリ（デフォルトでは`$HOME/.tiup`を指します。 `name`は `-n/--name`で指定される秘密鍵の名前を指します。
 -   データ型: `STRING`
--   デフォルト:「プライベート」
+-   デフォルト:「private」
 
 ### -p, --public {#p-public}
 
@@ -38,7 +38,7 @@ tiup mirror genkey [flags]
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### - 保存 {#save}
+### --save {#save}
 
 -   公開鍵の情報を現在のディレクトリにファイルとして保存します。ファイル名は`{hash-prefix}-public.json`です。`hash-prefix`は鍵IDの最初の16ビットです。
 -   データ型: `BOOLEAN`

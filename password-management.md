@@ -218,7 +218,7 @@ mysql> SELECT user,password_expired,Account_locked FROM mysql.user WHERE user = 
 
 TiDB は、グローバル レベルとアカウント レベルでの自動パスワード有効期限をサポートします。
 
--   世界レベル
+-   グローバルレベル
 
     システム変数[`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)を設定することで、パスワードの有効期間を制御できます。デフォルト値`0` 、パスワードが無期限であることを示します。このシステム変数を正の整数`N`に設定すると、パスワードの有効期間は`N`日間となり、 `N`日ごとにパスワードを変更する必要があります。
 

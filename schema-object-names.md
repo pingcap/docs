@@ -66,9 +66,9 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 
 詳細については[MySQLスキーマオブジェクト名](https://dev.mysql.com/doc/refman/8.0/en/identifiers.html)を参照してください。
 
-## 識別子修飾子 {#identifier-qualifiers}
+## 識別子の修飾子 {#identifier-qualifiers}
 
-オブジェクト名は修飾名でも修飾名でも構いません。例えば、次の文は修飾名のないテーブルを作成します。
+オブジェクト名は非修飾名でも修飾名でも構いません。例えば、次の文は修飾名のないテーブルを作成します。
 
 ```sql
 CREATE TABLE t (i int);

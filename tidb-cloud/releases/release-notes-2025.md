@@ -715,7 +715,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
 -   [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター内のパブリック エンドポイントのファイアウォール ルールをサポートします。
 
-    TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。1 [TiDB Cloudコンソール](https://tidbcloud.com/)許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
+    TiDB Cloud Serverless クラスターのファイアウォールルールを設定して、パブリックエンドポイント経由のアクセスを制御できるようになりました。[TiDB Cloudコンソール](https://tidbcloud.com/)で許可する IP アドレスまたは範囲を直接指定することで、セキュリティを強化できます。
 
     詳細については[パブリックエンドポイント用のTiDB Cloud Serverless ファイアウォール ルールを構成する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 

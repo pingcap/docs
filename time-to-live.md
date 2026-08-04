@@ -136,7 +136,7 @@ ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 
 デフォルトでは`TTL_JOB_INTERVAL`は`1h`に設定されています。
 
-TTLジョブを実行する際、TiDBはテーブルを最大64個のタスクに分割します。リージョンの最小単位はリージョンです。これらのタスクは分散して実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体で同時実行可能なTTLタスクの数を制限できます。ただし、すべての種類のテーブルのすべてのTTLジョブをタスクに分割できるわけではありません。どの種類のテーブルのTTLジョブをタスクに分割できないかの詳細については、セクション[制限事項](#limitations)を参照してください。
+TTLジョブを実行する際、TiDBはテーブルを最大64個のタスクに分割します。リージョンを最小単位とします。これらのタスクは分散して実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体で同時実行可能なTTLタスクの数を制限できます。ただし、すべての種類のテーブルのすべてのTTLジョブをタスクに分割できるわけではありません。どの種類のテーブルのTTLジョブをタスクに分割できないかの詳細については、セクション[制限事項](#limitations)を参照してください。
 
 TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定することに加えて、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 

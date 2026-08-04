@@ -63,7 +63,7 @@ summary: パイプライン DML、非トランザクション DML、IMPORT INTO`
 
 #### 制限事項 {#limitations}
 
--   [自動コミット](/transaction-overview.md#autocommit) `INSERT` `DELETE`のみ`UPDATE`サポートします`REPLACE`
+-   [自動コミット](/transaction-overview.md#autocommit) `INSERT`、`REPLACE`、`UPDATE`、`DELETE`ステートメントのみをサポートします
 
 #### ユースケース {#use-cases}
 

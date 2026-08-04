@@ -94,7 +94,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 次の例では、アラームをトリガーするメモリを大量に消費する SQL ステートメントを構築します。
 
-1.  セット`tidb_memory_usage_alarm_ratio` ～ `0.85` :
+1.  `tidb_memory_usage_alarm_ratio`を`0.85`に設定します :
 
     ```sql
     SET GLOBAL tidb_memory_usage_alarm_ratio = 0.85;
@@ -127,7 +127,7 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 
 ### フロー制御 {#flow-control}
 
--   TiDBは、データ読み取り演算子の動的メモリ制御をサポートしています。デフォルトでは、この演算子はデータ読み取りに使用できる最大スレッド数を使用します。1 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)のSQL実行でメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)超えると、データ読み取り演算子は1つのスレッドを停止します。
+-   TiDBは、データ読み取り演算子の動的メモリ制御をサポートしています。デフォルトでは、この演算子は[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で許可される最大スレッド数を使用してデータを読み取ります。単一のSQL実行でメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データ読み取り演算子は1つのスレッドを停止します。
 
 -   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 

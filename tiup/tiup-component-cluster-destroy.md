@@ -27,13 +27,13 @@ tiup cluster destroy <cluster-name> [flags]
 -   データ型: `Boolean`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### --ノードデータを保持 {#retain-node-data}
+### --retain-node-data {#retain-node-data}
 
 -   データを保持する必要があるノードを指定します。複数のノードを指定する必要がある場合は、このオプションを複数回使用します（ `--retain-node-data <node-A> --retain-node-data <node-B>` ）。
 -   データ型: `StringArray`
 -   デフォルト: 空
 
-### --ロールデータを保持する {#retain-role-data}
+### --retain-role-data {#retain-role-data}
 
 -   データを保持する必要があるロールを指定します。複数のロールを指定する必要がある場合は、このオプションを複数回使用します（ `--retain-role-data <role-A> --retain-role-data <role-B>` ）。
 -   データ型: `StringArray`

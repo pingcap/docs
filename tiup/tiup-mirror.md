@@ -90,7 +90,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
 ### プライベートリポジトリを管理する {#manage-the-private-repository}
 
-1でクローンしたリポジトリは、SCP、NFS経由でファイルを共有するか、HTTPまたはHTTPSプロトコル経由でリポジトリを公開することで、 `tiup mirror clone`のホスト間で共有できます`tiup mirror set <location>`でリポジトリの場所を指定します。
+`tiup mirror clone`でクローンしたリポジトリは、SCP、NFS経由でファイルを共有するか、HTTPまたはHTTPSプロトコル経由でリポジトリを公開することで、 `tiup mirror clone`のホスト間で共有できます。`tiup mirror set <location>`でリポジトリの場所を指定します。
 
 ```bash
 tiup mirror set /shared_data/tiup

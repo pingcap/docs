@@ -5,7 +5,7 @@ summary: TiDB の JSON データ型について学習します。
 
 # JSONデータ型 {#json-data-type}
 
-TiDBは、半構造化データの保存に便利な`JSON` （JavaScript Object Notation）データ型をサポートしています`JSON`データ型は、文字列列に`JSON`形式の文字列を保存する場合と比べて、以下の利点があります。
+TiDBは、半構造化データの保存に便利な`JSON` （JavaScript Object Notation）データ型をサポートしています。`JSON`データ型は、文字列列に`JSON`形式の文字列を保存する場合と比べて、以下の利点があります。
 
 -   シリアル化にはバイナリ形式を使用します。内部形式により、 `JSON`ドキュメント要素への高速な読み取りアクセスが可能になります。
 -   `JSON`列に保存されたJSONドキュメントを自動検証します。有効なドキュメントのみを保存できます。
@@ -70,7 +70,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
     1 row in set (0.01 sec)
     ```
 
-    詳細については、第[＃37443](https://github.com/pingcap/tidb/issues/37443)を参照してください。
+    詳細については、issue [#37443](https://github.com/pingcap/tidb/issues/37443)を参照してください。
 
 -   データ型を`ENUM`または`SET`から`JSON`に変換する際、TiDB はデータ形式の正確性をチェックします。例えば、TiDB で以下の SQL 文を実行するとエラーが返されます。
 
@@ -81,7 +81,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
     ERROR 3140 (22032): Invalid JSON text: The document root must not be followed by other values.
     ```
 
-    詳細については、第[＃9999](https://github.com/pingcap/tidb/issues/9999)を参照してください。
+    詳細については、issue [#9999](https://github.com/pingcap/tidb/issues/9999)を参照してください。
 
 -   TiDB では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトをソートできます。
 
@@ -111,7 +111,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
     2 rows in set (0.00 sec)
     ```
 
-    詳細については、第[＃37506](https://github.com/pingcap/tidb/issues/37506)を参照してください。
+    詳細については、issue [#37506](https://github.com/pingcap/tidb/issues/37506)を参照してください。
 
 -   JSON 列にデータを挿入すると、TiDB は暗黙的にデータの値を`JSON`型に変換します。
 

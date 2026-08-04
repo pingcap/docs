@@ -41,7 +41,7 @@ DESC deadlocks;
 -   `CURRENT_SQL_DIGEST` : ロックを取得するトランザクションで現在実行されている SQL ステートメントのダイジェスト。
 -   `CURRENT_SQL_DIGEST_TEXT` : ロックを取得するトランザクションで現在実行されている SQL ステートメントの正規化された形式。
 -   `KEY` : トランザクションがロックしようとしたブロックされたキー。このフィールドの値は16進文字列で表示されます。
--   `KEY_INFO` : `KEY`の詳細情報。4 [`KEY_INFO`](#key_info)セクションを参照してください。
+-   `KEY_INFO` : `KEY`の詳細情報。[`KEY_INFO`](#key_info)セクションを参照してください。
 -   `TRX_HOLDING_LOCK` : 現在キーのロックを保持し、ブロックを引き起こしているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
 
 <CustomContent platform="tidb">

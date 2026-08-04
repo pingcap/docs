@@ -147,7 +147,7 @@ CREATE TABLE t (
 
 -   [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) ：TiDBが次に割り当てる行IDを示します
 -   [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) ：ホットスポットを減らすために暗黙の行IDをシャーディングする
--   [`Clustered Indexes`](/clustered-indexes.md) : テーブルが主キーを使用する理由を説明します`_tidb_rowid`
+-   [`Clustered Indexes`](/clustered-indexes.md) : テーブルが`_tidb_rowid`の代わりに主キーを使用する場合を説明します
 -   [`tidb_opt_write_row_id`](/system-variables.md#tidb_opt_write_row_id) ： `_tidb_rowid`への書き込みを許可するかどうかを制御します
 
 ## 関連項目 {#see-also}

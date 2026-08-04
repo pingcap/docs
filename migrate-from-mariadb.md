@@ -150,11 +150,11 @@ GROUP BY
 
 ### 構文 {#syntax}
 
-MariaDB は`RETURNING` 、 `DELETE` 、および`INSERT`ステートメントに対して`REPLACE`キーワードをサポートしています。TiDB はこれらをサポートしていません。移行に影響があるかどうかを確認するために、アプリケーションとクエリのログを確認することをお勧めします。
+MariaDB は`DELETE` 、 `INSERT` 、および`REPLACE`ステートメントに対して`RETURNING`キーワードをサポートしています。TiDB はこれらをサポートしていません。移行に影響があるかどうかを確認するために、アプリケーションとクエリのログを確認することをお勧めします。
 
 ### データ型 {#data-types}
 
-MariaDB は、 `UUID` 、 `INET4` 、 `INET6` 。
+MariaDB は、TiDB がサポートしていない `UUID` 、 `INET4` 、 `INET6` などのデータ型をサポートしています。
 
 これらのデータ型を確認するには、次のステートメントを実行します。
 
@@ -186,7 +186,7 @@ WHERE
 
 TiDB は、MariaDB でよく使用される`latin1_swedish_ci`照合順序をサポートしていません。
 
-TiDB は、MariaDB 11.6 以降のバージョンの照合順序の照合順序である`utf8mb4_uca1400_ai_ci`サポートしていません。代わりに`utf8mb4_0900_ai_ci`を使用してください。これら 2 つの照合順序は[Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/) : `utf8mb4_0900_ai_ci`は UCA 9.0.0 を使用し、 `utf8mb4_uca1400_ai_ci`は UCA 14.0.0 を使用します。
+TiDB は、MariaDB 11.6 以降のバージョンのデフォルトの照合順序である`utf8mb4_uca1400_ai_ci`をサポートしていません。代わりに`utf8mb4_0900_ai_ci`を使用してください。これら 2 つの照合順序は[Unicode照合アルゴリズム（UCA）](http://www.unicode.org/reports/tr10/) : `utf8mb4_0900_ai_ci`は UCA 9.0.0 を使用し、 `utf8mb4_uca1400_ai_ci`は UCA 14.0.0 を使用します。
 
 TiDBがサポートする照合順序を確認するには、TiDBで次のステートメントを実行してください。
 
@@ -279,7 +279,7 @@ ORDER BY
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
     1 row in set (0.001 sec)
 
-MariaDBには、最大キー長を超える一意インデックスに対する特別な処理機能もあります。例えば、次の例では、MariaDBは`USING HASH`列に`TEXT`一意インデックスを作成します。TiDBにはこの機能はありません。
+MariaDBには、最大キー長を超える一意インデックスに対する特別な処理機能もあります。例えば、次の例では、MariaDBは`TEXT`列に`USING HASH`一意インデックスを作成します。TiDBにはこの機能はありません。
 
     MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
     Query OK, 0 rows affected (0.015 sec)
@@ -346,7 +346,7 @@ MariaDBからTiDBへデータを移行するには、以下の手順を実行し
 
 3.  `tiup tidb-lightning`コマンドを使用してデータを復元します。 TiDB Lightning の構成方法と実行方法の詳細については、 [TiDB Lightningを使い始めよう](/get-started-with-tidb-lightning.md)を参照してください。
 
-4.  ユーザーアカウントと権限を移行します。ユーザーと権限を移行する方法の詳細については、[輸出ユーザーと助成金](#export-users-and-grants)を参照してください。
+4.  ユーザーアカウントと権限を移行します。ユーザーと権限を移行する方法の詳細については、[ユーザーと権限のエクスポート](#export-users-and-grants)を参照してください。
 
 5.  アプリケーションを再構成してください。TiDBサーバーに接続できるように、アプリケーションの設定を変更する必要があります。
 
@@ -384,7 +384,7 @@ MariaDBからMariaDBへのレプリケーションのように、最初に初期
 
 ### ステップ3．ユーザーアカウントと権限を移行する {#step-3-migrate-user-accounts-and-permissions}
 
-ユーザーと権限を移行する方法については[輸出ユーザーと助成金](#export-users-and-grants)を参照してください。
+ユーザーと権限を移行する方法については[ユーザーと権限のエクスポート](#export-users-and-grants)を参照してください。
 
 ### ステップ4．データをテストする {#step-4-test-your-data}
 
@@ -404,7 +404,7 @@ TiDBに切り替えるには、以下の手順を実行する必要がありま�
 
 移行が成功したことを確認したら、MariaDB のデータの最終バックアップを作成し、サーバーを停止できます。これにより、DM クラスターを停止して削除することもできます。
 
-## 輸出ユーザーと助成金 {#export-users-and-grants}
+## ユーザーと権限のエクスポート {#export-users-and-grants}
 
 [`pt-show-grants`](https://docs.percona.com/percona-toolkit/pt-show-grants.html)を使用できます。これは Percona Toolkit の一部で、MariaDB からユーザーと権限をエクスポートし、TiDB にロードするために使用されます。
 
