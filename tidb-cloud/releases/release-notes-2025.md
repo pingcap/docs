@@ -225,7 +225,7 @@ summary: 2025 年のTiDB Cloudのリリース ノートについて説明しま�
 
         現在、この機能はベータ版です。詳細については、 [TiDB Cloud Essential のデータベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)ご覧ください。
 
-    -   TiDB Cloud Essential では、クラスターのリクエスト容量単位 (RCU) 消費量が 1 時間以内に設定された最大値に複数回達したときに通知する新しいイベント`ResourceLimitation`が追加されました。
+    -   TiDB Cloud Essential では、クラスターのリクエストキャパシティユニット (RCU) 消費量が 1 時間以内に設定された最大値に複数回達したときに通知する新しいイベント`ResourceLimitation`が追加されました。
 
         使用量の上限を超えると、処理能力が制限される可能性があります。サービスへの影響を避けるため、最大RCUを増やすことをご検討ください。
 
