@@ -25,7 +25,7 @@ TiDB バージョン: 7.5.4
 -   TiKV
 
     -   RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [＃17269](https://github.com/tikv/tikv/issues/17269) @ [AndreMouche](https://github.com/AndreMouche)
-    -   ピアメッセージチャネルのメモリ使用量を@ [Connor1996](https://github.com/Connor1996)に減らす [＃16229](https://github.com/tikv/tikv/issues/16229)
+    -   ピアメッセージチャネルのメモリ使用量を減らす [＃16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
     -   ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [＃15874](https://github.com/tikv/tikv/issues/15874) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [＃17356](https://github.com/tikv/tikv/issues/17356) @ [LykxSassinator](https://github.com/LykxSassinator)
 

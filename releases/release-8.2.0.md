@@ -226,7 +226,7 @@ TiDB バージョン: 8.2.0
 -   TiFlash
 
     -   高並行データ読み取り操作時のロック競合を減らし、短いクエリのパフォーマンスを最適化 [#9125](https://github.com/pingcap/tiflash/issues/9125) @[JinheLin](https://github.com/JinheLin)
-    -   `Join`演算子 [#9057](https://github.com/pingcap/tiflash/issues/9057) @[gengliqi](https://github.com/gengliqi)内の Join Key の重複コピーを削除します。
+    -   `Join`演算子内の Join Key の重複コピーを削除します [#9057](https://github.com/pingcap/tiflash/issues/9057) @[gengliqi](https://github.com/gengliqi)。
     -   `HashAgg` 演算子で 2 レベルハッシュテーブルの変換処理を同時に実行します [#8956](https://github.com/pingcap/tiflash/issues/8956) @[gengliqi](https://github.com/gengliqi)
     -   `HashAgg`演算子の冗長な集計関数を削除して計算オーバーヘッドを削減 [#8891](https://github.com/pingcap/tiflash/issues/8891) @[guo-shaoge](https://github.com/guo-shaoge)
 

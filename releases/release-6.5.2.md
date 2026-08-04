@@ -39,7 +39,7 @@ TiDB バージョン: 6.5.2
 
         -   TiCDC オープン API v2.0 をリリース [＃8743](https://github.com/pingcap/tiflow/issues/8743) @ [sdojjy](https://github.com/sdojjy)
         -   TiCDC の OOM 問題を防ぐために`gomemlimit`を導入する[＃8675](https://github.com/pingcap/tiflow/issues/8675) @ [amyangfei](https://github.com/amyangfei)
-        -   `UPDATE`ステートメントを[＃8057](https://github.com/pingcap/tiflow/issues/8057) @ [amyangfei](https://github.com/amyangfei)つ実行するシナリオでは、マルチステートメントアプローチを使用してレプリケーションのパフォーマンスを最適化します。
+        -   `UPDATE`ステートメントをバッチ実行するシナリオでは、マルチステートメントアプローチを使用してレプリケーションのパフォーマンスを最適化します。 [＃8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
         -   災害復旧シナリオにおけるスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[＃8318](https://github.com/pingcap/tiflow/issues/8318) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログへのDDLイベントの適用をサポート [＃8361](https://github.com/pingcap/tiflow/issues/8361) @ [CharlesCheung96](https://github.com/CharlesCheung96)
 

@@ -33,8 +33,8 @@ TiDB バージョン: 6.5.10
     -   Backup & Restore (BR)
 
         -   BRはデータ復旧中に空のSSTファイルをクリーンアップします[＃16005](https://github.com/tikv/tikv/issues/16005) @ [Leavrth](https://github.com/Leavrth)
-        -   DNSエラーによる失敗の再試行回数をから@ [YuJuncen](https://github.com/YuJuncen)増やす [＃53029](https://github.com/pingcap/tidb/issues/53029)
-        -   リージョンのリーダーの不在によって発生した失敗の再試行回数を@ [Leavrth](https://github.com/Leavrth)に増やす [＃54017](https://github.com/pingcap/tidb/issues/54017)
+        -   DNSエラーによる失敗の再試行回数を増やす [＃53029](https://github.com/pingcap/tidb/issues/53029) @[YuJuncen](https://github.com/YuJuncen)
+        -   リージョンのリーダーの不在によって発生した失敗の再試行回数を増やす [＃54017](https://github.com/pingcap/tidb/issues/54017) @[Leavrth](https://github.com/Leavrth)
 
     -   TiCDC
 

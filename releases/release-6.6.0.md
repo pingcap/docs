@@ -63,7 +63,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/explain-mpp.md#mpp-version-and-exchange-data-compression)を参照してください。
 
--   TiFlash は、 ステイル読み取り機能 [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen)をサポートしています
+-   TiFlash は、 ステイル読み取り機能をサポートしています [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen)
 
     ステイル読み取り機能はv5.1.1以降、一般提供（GA）されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。Stale Readは、ローカルのTiKVレプリカからデータを直接読み取ることで、読み取りレイテンシーを削減し、クエリのパフォーマンスを向上させることができます。v6.6.0より前のTiFlashでは、 ステイル読み取りはサポートされていません。テーブルにTiFlashレプリカが存在する場合でも、 ステイル読み取りはTiKVレプリカのみを読み取ることができます。
 
@@ -92,7 +92,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
--   過去の実行計画を拘束することは、GA [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)です。
+-   過去の実行計画を拘束することは、GAです。 [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
     バージョン6.5.0では、TiDBは[`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)文のバインディングターゲットを拡張し、過去の実行プランに基づいてバインディングを作成する機能をサポートしています。バージョン6.6.0では、この機能は一般提供（GA）となります。実行プランの選択は、現在のTiDBノードに限定されません。任意のTiDBノードによって生成された過去の実行プランを[SQLバインディング](/sql-statements/sql-statement-create-binding.md)のターゲットとして選択できるため、機能の使いやすさがさらに向上します。
 
@@ -113,7 +113,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### 可用性 {#availability}
 
--   [SQLにおける配置ルール](/placement-rules-in-sql.md) [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)の`SURVIVAL_PREFERENCE`の構成のサポート
+-   [SQLにおける配置ルール](/placement-rules-in-sql.md)の`SURVIVAL_PREFERENCE`の構成のサポート [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
 
     `SURVIVAL_PREFERENCES` 、データの災害時における耐障害性を高めるためのデータ耐障害性設定を提供します。 `SURVIVAL_PREFERENCE`を指定することで、以下の項目を制御できます。
 
@@ -186,7 +186,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を参照してください。
 
--   TiKV-CDC ツールは現在 GA であり、RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou)@[haojinming](https://github.com/haojinming)@ [pingyu](https://github.com/pingyu)データ変更のサブスクライブをサポートしています。
+-   TiKV-CDC ツールは現在 GA であり、RawKVのデータ変更のサブスクライブをサポートしています。 [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu)
 
     TiKV-CDCは、TiKVクラスタ用のCDC（変更データキャプチャ）ツールです。TiKVとPDは、TiDBを使用しない場合、RawKVと呼ばれるKVデータベースを構成できます。TiKV-CDCは、RawKVのデータ変更を購読し、それを下流のTiKVクラスタにリアルタイムで複製することをサポートしており、RawKVのクラスタ間レプリケーションを可能にします。
 
@@ -401,7 +401,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   partitioned-raft-kv モードにおける一部のパラメータのデフォルト値を最適化します。TiKV 設定項目`storage.block-cache.capacity`のデフォルト値を 45% から 30% に調整し、 `region-split-size`のデフォルト値を`96MiB`から`10GiB`に調整します。raft-kv モードを使用し、 `enable-region-bucket`が`true`の場合、 `region-split-size`はデフォルトで 1 GiB に調整されます。 [#12842](https://github.com/tikv/tikv/issues/12842) @[tonyxuqqi](https://github.com/tonyxuqqi)
     -   Raftstoreの非同期書き込みにおける優先度スケジューリングのサポート [#13730](https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
     -   コア数が1未満のCPUでTiKVを起動するサポート[#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
-    -   Raftstoreのスロースコアの新しい検出メカニズムを最適化し、 `evict-slow-trend-scheduler` [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)を追加しました
+    -   Raftstoreのスロースコアの新しい検出メカニズムを最適化し、 `evict-slow-trend-scheduler`を追加しました [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)
     -   RocksDB のブロックキャッシュを共有し、CF に従ってブロックキャッシュを個別に設定することをサポートしなくなりました。 [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
 
 -   PD
@@ -440,7 +440,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     -   TiDB Lightning
 
-        -   物理インポートモードはキースペース [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)をサポートします
+        -   物理インポートモードはキースペースをサポートします [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)
         -   `lightning.max-error`による競合の最大数設定のサポート [#40743](https://github.com/pingcap/tidb/issues/40743) @[dsdashun](https://github.com/dsdashun)
         -   BOMヘッダー付きCSVデータファイルのインポートをサポート [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
         -   TiKVフロー制限エラーが発生した場合の処理​​ロジックを最適化し、代わりに他の利用可能な領域を試す [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
@@ -480,7 +480,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   パーティションテーブルの列を変更するDDLステートメントを同時に実行することによって発生するデータの不整合を修正 [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)@[mjonss](https://github.com/mjonss)
     -   `caching_sha2_password`を認証に使用し、パスワードを指定しない場合に「不正なパケット」が報告される問題を修正 [#40831](https://github.com/pingcap/tidb/issues/40831) @[dveeden](https://github.com/dveeden)
     -   テーブルの主キーに`ENUM`列が含まれている場合に TTL タスクが失敗する問題を修正しました [#40456](https://github.com/pingcap/tidb/issues/40456) @[lcwangchao](https://github.com/lcwangchao)
-    -   `mysql.tidb_mdl_view` [#40838](https://github.com/pingcap/tidb/issues/40838) @[YangKeao](https://github.com/YangKeao)で、MDLによってブロックされた一部のDDL操作をクエリできない問題を修正します。
+    -   `mysql.tidb_mdl_view`で、MDLによってブロックされた一部のDDL操作をクエリできない問題を修正します。 [#40838](https://github.com/pingcap/tidb/issues/40838) @[YangKeao](https://github.com/YangKeao)
     -   DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [#40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
     -   タイムゾーン変更後にTTLタスクが一部のデータを誤って削除する可能性がある問題を修正 [#41043](https://github.com/pingcap/tidb/issues/41043) @[lcwangchao](https://github.com/lcwangchao)
     -   `JSON_OBJECT`が場合によってはエラーを報告する問題を修正 [#39806](https://github.com/pingcap/tidb/issues/39806) @[YangKeao](https://github.com/YangKeao)
@@ -495,7 +495,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   一意インデックスが場合によっては重複データを生成する可能性がある問題を修正 [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
     -   `Prepare`または`Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     -   インデックス追加時にデータ競合が発生する可能性がある問題を修正 [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
-    -   仮想列 [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)によって引き起こされる`can't find proper physical plan`の問題を修正します
+    -   仮想列によって引き起こされる`can't find proper physical plan`の問題を修正します [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
     -   動的トリミングモードでパーティションテーブルのグローバルバインディングが作成された後、TiDBが再起動できない問題を修正 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     -   `auto analyze`が原因で正常シャットダウンに時間がかかる問題を修正 [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     -   IndexMerge オペレーターがメモリ制限動作をトリガーしたときの TiDBサーバーのpanicを修正 [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)

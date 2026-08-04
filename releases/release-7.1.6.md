@@ -52,8 +52,8 @@ TiDB バージョン: 7.1.6
 
         -   ログバックアップのマージ操作に対する許容度を向上します。適度に長いマージ操作が発生した場合、ログバックアップタスクがエラー状態に陥る可能性が低くなります。 [＃16554](https://github.com/tikv/tikv/issues/16554) @ [YuJuncen](https://github.com/YuJuncen)
         -   BRはデータ復旧中に空のSSTファイルをクリーンアップします[＃16005](https://github.com/tikv/tikv/issues/16005) @ [Leavrth](https://github.com/Leavrth)
-        -   DNSエラーによる失敗の再試行回数を[＃53029](https://github.com/pingcap/tidb/issues/53029) / @ [YuJuncen](https://github.com/YuJuncen)に増やす
-        -   リージョンのリーダー不在による失敗の再試行回数を@ [Leavrth](https://github.com/Leavrth)に増やす [＃54017](https://github.com/pingcap/tidb/issues/54017)
+        -   DNSエラーによる失敗の再試行回数を増やす [＃53029](https://github.com/pingcap/tidb/issues/53029) @[YuJuncen](https://github.com/YuJuncen)
+        -   リージョンのリーダー不在による失敗の再試行回数を増やす [＃54017](https://github.com/pingcap/tidb/issues/54017) @[Leavrth](https://github.com/Leavrth)
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @ [Leavrth](https://github.com/Leavrth)
         -   TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかのチェックをサポートします。容量が不足している場合、 BRは復元を終了し、エラーを返します。 [＃17224](https://github.com/tikv/tikv/issues/17224) @ [RidRisR](https://github.com/RidRisR)
         -   環境変数を介した Alibaba Cloud アクセス資格情報の設定をサポート [＃45551](https://github.com/pingcap/tidb/issues/45551) @ [RidRisR](https://github.com/RidRisR)

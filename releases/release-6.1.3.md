@@ -47,7 +47,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   gPRCログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @ [xhebox](https://github.com/xhebox)
     -   テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[#37168](https://github.com/pingcap/tidb/issues/37168) @ [CalvinNeo](https://github.com/CalvinNeo)
     -   データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [＃38541](https://github.com/pingcap/tidb/issues/38541) @ [lance6716](https://github.com/lance6716)
-    -   関数`str_to_date` `NO_ZERO_DATE`モード[#39146](https://github.com/pingcap/tidb/issues/39146) @ [mengxin9014](https://github.com/mengxin9014)で間違った結果を返す問題を修正
+    -   関数`str_to_date`が`NO_ZERO_DATE`モードで間違った結果を返す問題を修正 [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)
     -   バックグラウンドでの統計収集タスクがpanicする可能性がある問題を修正[＃35421](https://github.com/pingcap/tidb/issues/35421) @ [lilinghai](https://github.com/lilinghai)
     -   Fix the issue that in some scenarios the pessimistic lock is incorrectly added to the non-unique secondary index [＃36235](https://github.com/pingcap/tidb/issues/36235) @ [ekexium](https://github.com/ekexium)
 
@@ -66,7 +66,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 -   TiFlash
 
     -   Fix the issue that logical operators return wrong results when the argument type is `UInt8` [＃6127](https://github.com/pingcap/tiflash/issues/6127) @ [xzhangxian1008](https://github.com/xzhangxian1008)
-    -   `CAST(value AS DATETIME)`間違ったデータ入力によりTiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @ [xzhangxian1008](https://github.com/xzhangxian1008)の負荷が高くなる問題を修正
+    -   `CAST(value AS DATETIME)`への間違ったデータ入力によりTiFlash sys CPUの負荷が高くなる問題を修正 [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   書き込み圧力が高すぎるとデルタレイヤーに過剰な列ファイルが生成される可能性がある問題を修正しました。 [＃6361](https://github.com/pingcap/tiflash/issues/6361) @ [lidezhu](https://github.com/lidezhu)
     -   TiFlash を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。 [＃6159](https://github.com/pingcap/tiflash/issues/6159) @ [lidezhu](https://github.com/lidezhu)
 
@@ -74,7 +74,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     -   Backup & Restore (BR)
 
-        -   データベースまたはテーブル[#39150](https://github.com/pingcap/tidb/issues/39150) @ [MoCuishle28](https://github.com/MoCuishle28)照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました
+        -   データベースまたはテーブルの照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
 
     -   TiCDC
 
@@ -83,7 +83,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     -   TiDB Data Migration (DM)
 
-        -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序[#6832](https://github.com/pingcap/tiflow/issues/6832) @ [lance6716](https://github.com/lance6716)を持つ SQL を生成する可能性がある問題を修正しました。
+        -   `collation_compatible` `"strict"`に設定すると、DM が重複した照合順序を持つ SQL を生成する可能性がある問題を修正しました。 [#6832](https://github.com/pingcap/tiflow/issues/6832) @[lance6716](https://github.com/lance6716)
         -   DMタスクが`Unknown placement policy`エラーで停止する可能性がある問題を修正 [＃7493](https://github.com/pingcap/tiflow/issues/7493) @ [lance6716](https://github.com/lance6716)
         -   場合によってはリレーログがアップストリームから再度取得される可能性がある問題を修正[＃7525](https://github.com/pingcap/tiflow/issues/7525) @ [liumengya94](https://github.com/liumengya94)
         -   既存のワーカーが終了する前に新しい DM ワーカーがスケジュールされると、データが複数回複製される問題を修正しました[#7658](https://github.com/pingcap/tiflow/issues/7658) @ [GMHDBJD](https://github.com/GMHDBJD)

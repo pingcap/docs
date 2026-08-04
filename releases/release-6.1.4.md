@@ -81,7 +81,7 @@ TiDB バージョン: 6.1.4
         -   `transaction-atomicity`と`protocol`構成ファイル経由で更新できない問題を修正 [＃7935](https://github.com/pingcap/tiflow/issues/7935) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   Fix the issue that TiCDC mistakenly reports an error when the version of TiFlash is later than that of TiCDC [＃7744](https://github.com/pingcap/tiflow/issues/7744) @ [overvenus](https://github.com/overvenus)
         -   TiCDCが大規模なトランザクションを複製するときにOOMが発生する問題を修正 [＃7913](https://github.com/pingcap/tiflow/issues/7913) @ [overvenus](https://github.com/overvenus)
-        -   TiCDCが大きなトランザクションを@ [Rustin170506](https://github.com/Rustin170506)に分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982)
+        -   TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982) @[Rustin170506](https://github.com/Rustin170506)
         -   `changefeed query`結果のうち`sasl-password`がマスクされない問題を修正しました [＃7182](https://github.com/pingcap/tiflow/issues/7182) @ [dveeden](https://github.com/dveeden)
         -   Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [＃7657](https://github.com/pingcap/tiflow/issues/7657) @ [overvenus](https://github.com/overvenus)
 

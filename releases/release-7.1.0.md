@@ -119,7 +119,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/ticdc/ticdc-integrity-check.md)を参照してください。
 
--   TiCDCはDDLレプリケーション操作[＃8686](https://github.com/pingcap/tiflow/issues/8686) [ハイ・ラスティン](https://github.com/Rustin170506)で最適化します
+-   TiCDCのDDLレプリケーション操作を最適化します [＃8686](https://github.com/pingcap/tiflow/issues/8686) @[hi-rustin](https://github.com/Rustin170506)
 
     v7.1.0より前のバージョンでは、大規模なテーブルのすべての行に影響を与えるDDL操作（列の追加や削除など）を実行すると、TiCDCのレプリケーションレイテンシーが大幅に増加していました。v7.1.0以降、TiCDCはこのレプリケーション操作を最適化し、DDL操作が下流のレイテンシーに与える影響を軽減します。
 

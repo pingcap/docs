@@ -100,7 +100,7 @@ TiDB バージョン: 7.1.5
         -   `AUTO_RANDOM`列が複合クラスタリングインデックスにある場合、 BRが`AUTO_RANDOM` ID割り当ての進行状況をバックアップできなかった問題を修正します [＃52255](https://github.com/pingcap/tidb/issues/52255) @ [Leavrth](https://github.com/Leavrth)
         -   フルバックアップでピアが見つからない場合に TiKV がパニックを起こす問題を修正[＃16394](https://github.com/tikv/tikv/issues/16394) @ [Leavrth](https://github.com/Leavrth)
         -   PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [＃52597](https://github.com/pingcap/tidb/issues/52597) @ [YuJuncen](https://github.com/YuJuncen)
-        -   不安定なテストケース[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [Leavrth](https://github.com/Leavrth)で修正する
+        -   不安定なテストケースを修正する [＃52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
         -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @ [YuJuncen](https://github.com/YuJuncen)
         -   特別なイベントタイミングにより、ログバックアップでデータ損失が発生する可能性があるという稀な問題を修正しました。 [＃16739](https://github.com/tikv/tikv/issues/16739) @ [YuJuncen](https://github.com/YuJuncen)
 

@@ -155,7 +155,7 @@ TiDB バージョン: 6.5.1
         -   PDとTiKV 間の接続障害によりTiKVがPITRタスクをリッスンできない問題を修正しました [＃14159](https://github.com/tikv/tikv/issues/14159) @ [YuJuncen](https://github.com/YuJuncen)
         -   PITRがPDクラスタの構成変更をサポートしない問題を修正 [＃14165](https://github.com/tikv/tikv/issues/14165) @ [YuJuncen](https://github.com/YuJuncen)
         -   PITR機能がCAバンドルをサポートしない問題を修正 [＃38775](https://github.com/pingcap/tidb/issues/38775) @ [3pointer](https://github.com/3pointer)
-        -   PITRバックアップタスクを削除すると、残りのバックアップデータによって新しいタスク[#40403](https://github.com/pingcap/tidb/issues/40403) @ [joccau](https://github.com/joccau)でデータの不整合が発生する問題を修正しました。
+        -   PITRバックアップタスクを削除すると、残りのバックアップデータによって新しいタスクでデータの不整合が発生する問題を修正しました。 [#40403](https://github.com/pingcap/tidb/issues/40403) @[joccau](https://github.com/joccau)
         -   BRが`backupmeta`ファイルを解析するときにpanicを引き起こす問題を修正しました [＃40878](https://github.com/pingcap/tidb/issues/40878) @ [MoCuishle28](https://github.com/MoCuishle28)
         -   リージョンサイズ取得に失敗したために復元が中断される問題を修正しました [＃36053](https://github.com/pingcap/tidb/issues/36053) @ [YuJuncen](https://github.com/YuJuncen)
         -   TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [＃40759](https://github.com/pingcap/tidb/issues/40759) @ [joccau](https://github.com/joccau)
@@ -173,7 +173,7 @@ TiDB バージョン: 6.5.1
         -   TiCDC が過度に多数のテーブルを複製するとチェックポイントが進めなくなる問題を修正しました [＃8004](https://github.com/pingcap/tiflow/issues/8004) @ [overvenus](https://github.com/overvenus)
         -   レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[＃8085](https://github.com/pingcap/tiflow/issues/8085) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [＃8074](https://github.com/pingcap/tiflow/issues/8074) @ [CharlesCheung96](https://github.com/CharlesCheung96)
-        -   TiCDCが大きなトランザクションを@ [Rustin170506](https://github.com/Rustin170506)に分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982)
+        -   TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982) @[hi-rustin](https://github.com/Rustin170506)
         -   PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [＃8330](https://github.com/pingcap/tiflow/issues/8330) @ [sdojjy](https://github.com/sdojjy)
         -   TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [＃8420](https://github.com/pingcap/tiflow/issues/8420) @ [asddongmen](https://github.com/asddongmen)
         -   テーブルスケジューリングとブラックホールシンクのpanic問題を修正[＃8024](https://github.com/pingcap/tiflow/issues/8024) [＃8142](https://github.com/pingcap/tiflow/issues/8142) @ [hicqu](https://github.com/hicqu)

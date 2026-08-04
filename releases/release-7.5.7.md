@@ -52,7 +52,7 @@ TiDB バージョン: 7.5.7
 -   PD
 
     -   Prometheus に GO ランタイム関連の監視メトリクスを追加 [＃8931](https://github.com/tikv/pd/issues/8931) @ [bufferflies](https://github.com/bufferflies)
-    -   不要なエラーログをつ@ [bufferflies](https://github.com/bufferflies)削減 [＃9370](https://github.com/tikv/pd/issues/9370)
+    -   不要なエラーログを削減 [＃9370](https://github.com/tikv/pd/issues/9370) @[bufferflies](https://github.com/bufferflies)
 
 -   TiFlash
 

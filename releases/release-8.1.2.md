@@ -103,7 +103,7 @@ TiDB バージョン: 8.1.2
     -   古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [＃17469](https://github.com/tikv/tikv/issues/17469) @ [hbisheng](https://github.com/hbisheng)
     -   `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanicする可能性がある問題を修正しました[＃17852](https://github.com/tikv/tikv/issues/17852) @ [gengliqi](https://github.com/gengliqi)
     -   多数のトランザクションが同じキーのロック解除待ち行列に入っていて、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題が発生する可能性がある問題を修正しました [＃17394](https://github.com/tikv/tikv/issues/17394) @ [MyonKeminta](https://github.com/MyonKeminta)
-    -   リージョンを[＃17602](https://github.com/tikv/tikv/issues/17602) @ [LykxSassinator](https://github.com/LykxSassinator)に分割した後、リーダーをすぐに選出できない問題を修正しました
+    -   リージョンを分割した後、リーダーをすぐに選出できない問題を修正しました [＃17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     -   読み取りスレッドがRaft EngineのMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。 [＃17383](https://github.com/tikv/tikv/issues/17383) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   大きなテーブルやパーティションを削除した後に発生する可能性のあるフロー制御の問題を修正しました [＃17304](https://github.com/tikv/tikv/issues/17304) @ [Connor1996](https://github.com/Connor1996)
 
