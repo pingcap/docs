@@ -39,7 +39,7 @@ Ensure that the AWS endpoint service:
 - Add the TiDB Cloud account ID to the **Allow principals** list.
 - Has availability zones that overlap with your {{{ .essential }}} instance.
 
-You can get the account ID and availability zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
+You can get the account ID and availability zones information at the bottom of the **Create Private Endpoint for External Services** dialog, or by running the following command:
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -56,13 +56,14 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection** to create a private endpoint in endpoint shared mode. In this model, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
+3. In the **AWS Private Endpoints for External Services** area, click **Create Private Endpoint for External Services**.
 
     > **Note:**
     >
-    > If your TiDB Cloud Essential instance is created after June 30, 2026 and the **Private Link Connection For Dataflow** area is not available, you can create a private link connection in endpoint exclusive mode by clicking **Create Private Endpoint for External Services** in the **AWS Private Endpoint for External Services** area instead. In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
 
-4. In the **Create Private Link Connection** dialog, enter the required information:
+4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **AWS Endpoint Service**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on AWS.
@@ -103,13 +104,14 @@ Before creating the Amazon MSK Provisioned private link connection, ensure that 
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection** to create a private endpoint in endpoint shared mode. In this model, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
+3. In the **AWS Private Endpoints for External Services** area, click **Create Private Endpoint for External Services**.
 
     > **Note:**
     >
-    > If your TiDB Cloud Essential instance is created after June 30, 2026 and the **Private Link Connection For Dataflow** area is not available, you can create a private link connection in endpoint exclusive mode by clicking **Create Private Endpoint for External Services** in the **Amazon MSK Provisioned Private Endpoint for External Services** area instead. In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
 
-4. In the **Create Private Link Connection** dialog, enter the required information:
+4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **Amazon MSK Provisioned**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on AWS.
@@ -127,7 +129,7 @@ Ensure that the Alibaba Cloud endpoint service:
 - Add the TiDB Cloud account ID to the **Service Whitelist**.
 - Has availability zones that overlap with your {{{ .essential }}} instance.
 
-You can get the account ID and available zones information at the bottom of the **Create Private Link Connection** dialog, or by running the following command:
+You can get the account ID and available zones information at the bottom of the **Create Private Endpoint for External Services** dialog, or by running the following command:
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -144,13 +146,14 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection** to create a private endpoint in endpoint shared mode. In this model, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same Alibaba Cloud Region.
+3. In the **Alibaba Cloud Private Endpoints for External Services** area, click **Create Private Endpoint for External Services**.
 
     > **Note:**
     >
-    > If your TiDB Cloud Essential instance is created after June 30, 2026 and the **Private Link Connection For Dataflow** area is not available, you can create a private link connection in endpoint exclusive mode by clicking **Create Private Endpoint for External Services** in the **Alibaba Cloud Private Endpoint for External Services** area instead. In the endpoint exclusive model, each {{{ .essential }}} instance uses its own standalone private endpoint. This model eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
 
-4. In the **Create Private Link Connection** dialog, enter the required information:
+4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
 
     - **Private Link Connection Name**: enter a name for the private link connection.
     - **Connection Type**: select **Alibaba Cloud Endpoint Service**. If this option is not displayed, ensure that your {{{ .essential }}} instance is created on Alibaba Cloud.
@@ -206,7 +209,7 @@ To attach domains to a private link connection using the TiDB Cloud console, do 
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
+3. In the **Private Endpoints for External Services** area for your cloud provider, choose the target private link connection, and then click **...**.
 
 4. Click **Attach Domains**.
 
@@ -259,7 +262,7 @@ To detach domains from a private link connection using the TiDB Cloud console, d
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
+3. In the **Private Endpoints for External Services** area for your cloud provider, choose the target private link connection, and then click **...**.
 
 4. Click **Detach Domains**, and then confirm the detachment.
 
@@ -301,7 +304,7 @@ To delete a private link connection using the TiDB Cloud console, do the followi
 
 2. Click the name of your target {{{ .essential }}} instance to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 
-3. In the **Private Link Connection For Dataflow** area, choose the target private link connection, and then click **...**.
+3. In the **Private Endpoints for External Services** area for your cloud provider, choose the target private link connection, and then click **...**.
 
 4. Click **Delete**, and then confirm the deletion.
 

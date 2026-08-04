@@ -74,8 +74,8 @@ The configuration steps vary depending on the cloud provider where your instance
 <SimpleTab>
 <div label="AWS">
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for Changefeed** section.
-2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
+1. On the **Networking** page, click **Create Private Endpoint for External Services** in the **AWS Private Endpoints for External Services** section.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
@@ -93,8 +93,8 @@ The configuration steps vary depending on the cloud provider where your instance
 
 <div label="Alibaba Cloud">
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **Alibaba Cloud Private Endpoint for Changefeed** section.
-2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
+1. On the **Networking** page, click **Create Private Endpoint for External Services** in the **Alibaba Cloud Private Endpoints for External Services** section.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
 3. Follow the reminder to add TiDB Cloud's Alibaba Cloud account ID to the allowlist of your endpoint service to grant TiDB Cloud VPC access. For more information, see [managing account IDs in the allowlist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
