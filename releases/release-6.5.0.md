@@ -291,7 +291,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     BR終了後1時間以内にシステムを障害から復旧しない場合、バックアップ対象のスナップショットデータがGCメカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメント](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
 
--   PITRのパフォーマンスは@ [joccau](https://github.com/joccau)で著しく向上しました
+-   PITRのパフォーマンスは著しく向上しました @[joccau](https://github.com/joccau)
 
     ログリストア段階では、1つのTiKVのリストア速度が9MiB/sに達し、従来比50%の高速化を実現しました。リストア速度はスケーラブルで、DRシナリオにおけるRTO（目標復旧時間）は大幅に短縮されます。DRシナリオにおけるRPO（目標復旧時点）は最短5分です。通常のクラスター運用保守（OM）では、例えばローリングアップグレードの実行時や、1つのTiKVのみがダウンしている場合でも、RPOは5分です。
 
@@ -390,7 +390,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     -   外部ストレージオブジェクトをキャッシュすることでリカバリパフォーマンスを向上 [＃13798](https://github.com/tikv/tikv/issues/13798) @ [YuJuncen](https://github.com/YuJuncen)
     -   専用スレッドで CheckLeader を実行して、TiCDC レプリケーションのレイテンシーを削減します。 [＃13774](https://github.com/tikv/tikv/issues/13774) @ [overvenus](https://github.com/overvenus)
     -   チェックポイントのプル モデルをサポート [＃13824](https://github.com/tikv/tikv/issues/13824) @ [YuJuncen](https://github.com/YuJuncen)
-    -   クロスビームチャネル[＃13815](https://github.com/tikv/tikv/issues/13815) @ [sticnarf](https://github.com/sticnarf)に更新することで、送信側での回転の問題を回避します。
+    -   クロスビームチャネルに更新することで、送信側での回転の問題を回避します。 [＃13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
     -   TiKV でのバッチココプロセッサータスク処理をサポート [＃13849](https://github.com/tikv/tikv/issues/13849) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   TiKVにリージョンを起動するように通知することで、障害回復の待ち時間を短縮します。 [＃13648](https://github.com/tikv/tikv/issues/13648) @ [LykxSassinator](https://github.com/LykxSassinator)
     -   コード最適化によりメモリ使用量の要求サイズを削減 [＃13827](https://github.com/tikv/tikv/issues/13827) @ [BusyJay](https://github.com/BusyJay)

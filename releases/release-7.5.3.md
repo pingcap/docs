@@ -36,9 +36,9 @@ TiDB バージョン: 7.5.3
 
         -   `br log restore`サブコマンドを除き、他の`br log`サブコマンドはすべて、メモリ消費量を削減するために TiDB `domain`データ構造のロードをスキップすることをサポートしています[＃52088](https://github.com/pingcap/tidb/issues/52088) @ [Leavrth](https://github.com/Leavrth)
         -   チェックポイントの遅延が大きい場合にログ バックアップ タスクを自動的に中止し、GC の長時間のブロッキングや潜在的なクラスターの問題を回避することをサポートします[＃50803](https://github.com/pingcap/tidb/issues/50803) @ [RidRisR](https://github.com/RidRisR)
-        -   DNSエラーによる失敗の再試行回数を[＃53029](https://github.com/pingcap/tidb/issues/53029) / @ [YuJuncen](https://github.com/YuJuncen)に増やす
+        -   DNSエラーによる失敗の再試行回数を増やす [＃53029](https://github.com/pingcap/tidb/issues/53029) @[YuJuncen](https://github.com/YuJuncen)
         -   ログバックアップの互換性テストとインデックスアクセラレーションの追加をカバーするPITR統合テストケースを追加します。 [＃51987](https://github.com/pingcap/tidb/issues/51987) @ [Leavrth](https://github.com/Leavrth)
-        -   リージョンのリーダー不在による失敗の再試行回数を@ [Leavrth](https://github.com/Leavrth)に増やす [＃54017](https://github.com/pingcap/tidb/issues/54017)
+        -   リージョンのリーダー不在による失敗の再試行回数を増やす [＃54017](https://github.com/pingcap/tidb/issues/54017) @[Leavrth](https://github.com/Leavrth)
         -   環境変数を介した Alibaba Cloud アクセス資格情報の設定をサポート [＃45551](https://github.com/pingcap/tidb/issues/45551) @ [RidRisR](https://github.com/RidRisR)
 
     -   TiCDC

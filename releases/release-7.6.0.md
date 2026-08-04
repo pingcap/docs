@@ -134,7 +134,7 @@ TiDB バージョン: 7.6.0
 
 ### データベース操作 {#db-operations}
 
--   `FLASHBACK CLUSTER`は、正確な TSO [#48372](https://github.com/pingcap/tidb/issues/48372) @ [BornChanger](https://github.com/BornChanger)の指定をサポートしています
+-   `FLASHBACK CLUSTER`は、正確な TSO の指定をサポートしています [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger)
 
     TiDB v7.6.0 では、フラッシュバック機能がより強力かつ正確になりました。クラスタを指定した履歴タイムスタンプにロールバックできるだけでなく、 `FLASHBACK CLUSTER TO TSO`を使用して正確なリカバリ[TSO](/tso.md)を指定できるため、データリカバリの柔軟性が向上します。たとえば、この機能を TiCDC と組み合わせて使用​​できます。ダウンストリームの TiDB クラスタでデータレプリケーションを一時停止し、オンライン前の読み書きテストを実行した後、この機能を使用すると、クラスタは一時停止した TSO にスムーズかつ迅速にロールバックし、TiCDC を使用してデータのレプリケーションを再開できます。これにより、オンライン前の検証プロセスが効率化され、データ管理が簡素化されます。
 

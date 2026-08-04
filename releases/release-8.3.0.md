@@ -234,15 +234,15 @@ TiDBバージョン：8.3.0
     -   `SELECT ... STRAIGHT_JOIN ... USING ( ... )` ステートメントをサポートします [#54162](https://github.com/pingcap/tidb/issues/54162) @[dveeden](https://github.com/dveeden)
     -   `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     -   インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
-    -   `mysql.analyze_jobs`システムテーブル [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)に分析済みインデックスを表示します。
+    -   `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
     -   `tidb_redact_log`ステートメントの出力に`EXPLAIN`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
     -   クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`演算子を生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     -   設定された時間枠外で実行されている自動タスク`ANALYZE`の強制終了をサポート [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     -   統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     -   TopNオペレーターはディスクスピルをサポートします [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   TiDB ノードは`WITH ROLLUP`修飾子と`GROUPING`関数を使用したクエリの実行をサポートしています [#42631](https://github.com/pingcap/tidb/issues/42631) @[Arenatlx](https://github.com/Arenatlx)
-    -   システム変数[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) `GLOBAL`スコープ [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk)をサポートしています
-    -   同時範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上させます。同時実行スレッド数は、 [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium)を使用して制御できます。
+    -   システム変数[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) `GLOBAL`スコープをサポートしています [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk)
+    -   同時範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上させます。同時実行スレッド数は、 [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)を使用して制御できます [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium)。
     -   一括DML実行モードのパフォーマンスを改善（ `tidb_dml_type = "bulk"` ） [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
     -   スキーマ情報キャッシュ関連インターフェースのパフォーマンスを改善`SchemaByID` [#54074](https://github.com/pingcap/tidb/issues/54074) @[ywqzzy](https://github.com/ywqzzy)
     -   スキーマ情報キャッシュが有効になっている場合、特定のシステムテーブルのクエリパフォーマンスを改善します [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta)
@@ -282,7 +282,7 @@ TiDBバージョン：8.3.0
         -   Alibaba Cloudへのアクセス認証情報を環境変数で設定するサポート [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
         -   BR をバックアップおよびリストアに使用する際に OOM を回避するため、 BRプロセスの利用可能なメモリに基づいて環境変数`GOMEMLIMIT`を自動的に設定します [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
         -   ポイントインタイムリカバリ(PITR) と互換性のある増分バックアップを作成する [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
-        -   `mysql.column_stats_usage`テーブル [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)バックアップと復元をサポートします。
+        -   `mysql.column_stats_usage`テーブルのバックアップと復元をサポートします [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
 
 ## バグ修正 {#bug-fixes}
 

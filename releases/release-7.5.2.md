@@ -62,7 +62,7 @@ TiDB バージョン: 7.5.2
         -   リストアプロセス中にテーブルIDを事前割り当てすることで、テーブルIDの再利用を最大化し、リストアパフォーマンスを向上します[＃51736](https://github.com/pingcap/tidb/issues/51736) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップの開始時にアクティブなDDLジョブの無効な検証を削除します[＃52733](https://github.com/pingcap/tidb/issues/52733) @ [Leavrth](https://github.com/Leavrth)
         -   Google Cloud Storage（GCS）を外部ストレージとして使用する場合の古い互換性チェックを削除します[＃50533](https://github.com/pingcap/tidb/issues/50533) @ [lance6716](https://github.com/lance6716)
-        -   DNSエラーによる失敗の再試行回数をから@ [YuJuncen](https://github.com/YuJuncen)増やす [＃53029](https://github.com/pingcap/tidb/issues/53029)
+        -   DNSエラーによる失敗の再試行回数を増やす [＃53029](https://github.com/pingcap/tidb/issues/53029) @[YuJuncen](https://github.com/YuJuncen)
 
     -   TiCDC
 
@@ -214,7 +214,7 @@ TiDB バージョン: 7.5.2
         -   PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [＃52597](https://github.com/pingcap/tidb/issues/52597) @ [YuJuncen](https://github.com/YuJuncen)
         -   TiKV の再起動により、ログ バックアップのグローバル チェックポイントが実際のバックアップ ファイルの書き込みポイントよりも先に進められ、少量のバックアップ データが失われる可能性がある問題を修正しました[＃16809](https://github.com/tikv/tikv/issues/16809) @ [YuJuncen](https://github.com/YuJuncen)
         -   PD へのネットワーク接続が不安定な状態で一時停止中のログバックアップタスクを再開すると TiKV がpanicする可能性がある問題を修正しました [＃17020](https://github.com/tikv/tikv/issues/17020) @ [YuJuncen](https://github.com/YuJuncen)
-        -   不安定なテストケース[＃52547](https://github.com/pingcap/tidb/issues/52547) @ [Leavrth](https://github.com/Leavrth)で修正する
+        -   不安定なテストケースを修正する [＃52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
         -   BRを使用してデータを復元する場合、または物理インポート モードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[＃51124](https://github.com/pingcap/tidb/issues/51124) [＃50501](https://github.com/pingcap/tidb/issues/50501) @ [Leavrth](https://github.com/Leavrth)
         -   フルバックアップでピアが見つからない場合に TiKV がパニックを起こす問題を修正[＃16394](https://github.com/tikv/tikv/issues/16394) @ [Leavrth](https://github.com/Leavrth)
         -   ログバックアップタスクを一時停止後に削除しても、GCセーフポイントがすぐに復元されない問題を修正しました。 [＃52082](https://github.com/pingcap/tidb/issues/52082) @ [3pointer](https://github.com/3pointer)

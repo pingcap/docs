@@ -20,7 +20,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 -   TiKV
 
     -   1 つのピアが到達不能になった後にRaftstore が過剰なメッセージをブロードキャストすることを回避するための`unreachable_backoff`項目の設定をサポートします[＃13054](https://github.com/tikv/tikv/issues/13054) @ [5kbpers](https://github.com/5kbpers)
-    -   RocksDB 書き込みストール設定をフロー制御しきい値[#13467](https://github.com/tikv/tikv/issues/13467) @ [tabokie](https://github.com/tabokie)より小さい値に設定できるようになりました。
+    -   RocksDB 書き込みストール設定をフロー制御しきい値より小さい値に設定できるようになりました。 [#13467](https://github.com/tikv/tikv/issues/13467) @[tabokie](https://github.com/tabokie)
 
 -   ツール
 
@@ -37,7 +37,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 -   TiDB
 
     -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[＃38363](https://github.com/pingcap/tidb/issues/38363) @ [dveeden](https://github.com/dveeden)
-    -   `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @ [xhebox](https://github.com/xhebox)の誤った出力を修正
+    -   `SHOW CREATE PLACEMENT POLICY`の誤った出力を修正 [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
     -   1つのPDノードがダウンした場合、他のPDノードを再試行しないため、 `information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正しました。 [＃35708](https://github.com/pingcap/tidb/issues/35708) @ [tangenta](https://github.com/tangenta)
     -   Fix the issue that the `UNION` operator might return unexpected empty result [＃36903](https://github.com/pingcap/tidb/issues/36903) @ [tiancaiamao](https://github.com/tiancaiamao)
     -   TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [＃37254](https://github.com/pingcap/tidb/issues/37254) @ [wshwsh12](https://github.com/wshwsh12)
@@ -50,7 +50,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
 -   TiKV
 
-    -   リージョン[#13553](https://github.com/tikv/tikv/issues/13553) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)のバッチスナップショットによってスナップショットデータが不完全になる可能性がある問題を修正しました
+    -   リージョンのバッチスナップショットによってスナップショットデータが不完全になる可能性がある問題を修正しました [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     -   フロー制御が有効で、 `level0_slowdown_trigger`明示的に設定されている場合に QPS が低下する問題を修正しました [＃11424](https://github.com/tikv/tikv/issues/11424) @ [Connor1996](https://github.com/Connor1996)
     -   TiKV が Web ID プロバイダーからエラーを取得し、デフォルトのプロバイダーにフェイルバックしたときに、権限拒否エラーが発生する問題を修正しました。 [＃13122](https://github.com/tikv/tikv/issues/13122) @ [3pointer](https://github.com/3pointer)
     -   TiKVインスタンスが隔離されたネットワーク環境にある場合、TiKVサービスが数分間利用できなくなる問題を修正[＃12966](https://github.com/tikv/tikv/issues/12966) @ [cosven](https://github.com/cosven)

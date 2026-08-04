@@ -72,5 +72,5 @@ TiDB バージョン: 6.5.5
 
         -   ターゲットサーバーにTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正 [＃41040](https://github.com/pingcap/tidb/issues/41040) @ [lance6716](https://github.com/lance6716)
         -   PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[＃46688](https://github.com/pingcap/tidb/issues/46688) @ [lance6716](https://github.com/lance6716)
-        -   PD のリーダーを@ [lance6716](https://github.com/lance6716)切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [＃46540](https://github.com/pingcap/tidb/issues/46540)
+        -   PD のリーダーを切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [＃46540](https://github.com/pingcap/tidb/issues/46540) @[lance6716](https://github.com/lance6716)
         -   事前チェックがターゲット クラスターで実行中の TiCDC の存在を正確に検出できない問題を修正しました。 [＃41040](https://github.com/pingcap/tidb/issues/41040) @ [lance6716](https://github.com/lance6716)

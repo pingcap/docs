@@ -104,5 +104,5 @@ TiDB バージョン: 6.1.7
     -   TiDB Binlog
 
         -   etcdクライアントが初期化中に最新のノード情報を自動的に同期しない問題を修正[＃1236](https://github.com/pingcap/tidb-binlog/issues/1236) @ [lichunzhu](https://github.com/lichunzhu)
-        -   TiKVクライアントを@ [lichunzhu](https://github.com/lichunzhu)にアップグレードすることで、古いTiKVクライアントバージョンによるDrainerのpanic問題を修正しました。 [＃1170](https://github.com/pingcap/tidb-binlog/issues/1170)
+        -   TiKVクライアントをアップグレードすることで、古いTiKVクライアントバージョンによるDrainerのpanic問題を修正しました。 [＃1170](https://github.com/pingcap/tidb-binlog/issues/1170) @[lichunzhu](https://github.com/lichunzhu)
         -   フィルタリングされていない失敗したDDL文がタスクエラーを引き起こす問題を修正 [＃1228](https://github.com/pingcap/tidb-binlog/issues/1228) @ [lichunzhu](https://github.com/lichunzhu)
