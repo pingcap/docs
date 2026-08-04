@@ -31,10 +31,10 @@ TiDB バージョン: 5.0.2
 
 -   TiKV
 
-    -   BRは、仮想ホストアドレス指定モード[＃10243](https://github.com/tikv/tikv/pull/10243)を使用してS3互換ストレージをサポートするようになりました。
-    -   TiCDCのスキャン速度[＃10151](https://github.com/tikv/tikv/pull/10151)バックプレッシャーをサポート
-    -   TiCDCの初期スキャン[＃10133](https://github.com/tikv/tikv/pull/10133)のメモリ使用量を削減
-    -   悲観的トランザクション[＃10089](https://github.com/tikv/tikv/pull/10089)におけるTiCDCの古い値機能のキャッシュヒット率を改善
+    -   BRは、仮想ホストアドレス指定モードを使用してS3互換ストレージをサポートするようになりました[＃10243](https://github.com/tikv/tikv/pull/10243)
+    -   TiCDCのスキャン速度のバックプレッシャーをサポート[＃10151](https://github.com/tikv/tikv/pull/10151)
+    -   TiCDCの初期スキャンのメモリ使用量を削減[＃10133](https://github.com/tikv/tikv/pull/10133)
+    -   悲観的トランザクションにおけるTiCDCの古い値機能のキャッシュヒット率を改善[＃10089](https://github.com/tikv/tikv/pull/10089)
     -   ホットスポット書き込みがあるときに、リージョンサイズの増加が分割速度を超える問題を軽減するために、リージョンをより均等に分割します[＃9785](https://github.com/tikv/tikv/issues/9785)
 
 -   TiFlash
@@ -47,14 +47,14 @@ TiDB バージョン: 5.0.2
     -   TiCDC
 
         -   テーブルメモリ消費量の監視メトリックを追加する[＃1885](https://github.com/pingcap/tiflow/pull/1885)
-        -   ソート段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)におけるメモリとCPUの使用を最適化する
+        -   ソート段階におけるメモリとCPUの使用を最適化する[＃1863](https://github.com/pingcap/tiflow/pull/1863)
         -   ユーザーの混乱を招く可能性のある不要なログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
     -   Backup & Restore (BR)
 
         -   曖昧なエラーメッセージを明確にする[＃1132](https://github.com/pingcap/br/pull/1132)
-        -   バックアップ[＃1091](https://github.com/pingcap/br/pull/1091)のクラスタ バージョンの確認をサポート
-        -   `mysql`スキーマ[＃1143](https://github.com/pingcap/br/pull/1143) [＃1078](https://github.com/pingcap/br/pull/1078)のシステムテーブルのバックアップと復元をサポート
+        -   バックアップのクラスタ バージョンの確認をサポート[＃1091](https://github.com/pingcap/br/pull/1091)
+        -   `mysql`スキーマのシステムテーブルのバックアップと復元をサポート[＃1143](https://github.com/pingcap/br/pull/1143) [＃1078](https://github.com/pingcap/br/pull/1078)
 
     -   Dumpling
 
@@ -67,31 +67,31 @@ TiDB バージョン: 5.0.2
     -   一部のケースでプレフィックスインデックスとインデックス結合を使用することで発生するpanic問題を修正[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716) [＃24717](https://github.com/pingcap/tidb/issues/24717)
     -   `point get`のプリペアドプランキャッシュがトランザクションの`point get`文によって誤って使用される問題を修正しました[＃24741](https://github.com/pingcap/tidb/issues/24741)。
     -   照合順序が`ascii_bin`または`latin1_bin`の場合に間違ったプレフィックスインデックス値を書き込む問題を修正しました[＃24569](https://github.com/pingcap/tidb/issues/24569)
-    -   GCワーカー[＃24591](https://github.com/pingcap/tidb/issues/24591)によって進行中のトランザクションが中断される可能性がある問題を修正
+    -   GCワーカーによって進行中のトランザクションが中断される可能性がある問題を修正[＃24591](https://github.com/pingcap/tidb/issues/24591)
     -   `new-collation`が有効で`new-row-format`無効の場合、クラスター化インデックスでポイントクエリが間違って実行される可能性があるバグを修正しました[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)パーティションキーの変換をリファクタリングする
-    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを構築するときに発生するpanic問題を修正しました。
+    -   シャッフルハッシュ結合のパーティションキーの変換をリファクタリングする[＃24490](https://github.com/pingcap/tidb/pull/24490)
+    -   `HAVING`句を含むクエリのプランを構築するときに発生するpanic問題を修正しました[＃24045](https://github.com/pingcap/tidb/issues/24045)
     -   列プルーニングの改善により、演算子`Apply`と`Join`結果が間違ってしまう問題を修正しました[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックしたプライマリロックが解決できないバグを修正[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketch レコードの重複を引き起こす可能性のある統計の GC 問題を修正しました[＃24357](https://github.com/pingcap/tidb/pull/24357)
-    -   悲観的ロックが`ErrKeyExists`エラー[＃23799](https://github.com/pingcap/tidb/issues/23799)を受け取ったときに不要な悲観的ロールバックを回避する
-    -   sql_modeに`ANSI_QUOTES` [＃24429](https://github.com/pingcap/tidb/issues/24429)が含まれている場合に数値リテラルが認識されない問題を修正しました
-    -   `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`ような文は、リストされていないパーティション[＃24746](https://github.com/pingcap/tidb/issues/24746)からデータを読み取ることを禁止します。
+    -   悲観的ロックが`ErrKeyExists`エラーを受け取ったときに不要な悲観的ロールバックを回避する[＃23799](https://github.com/pingcap/tidb/issues/23799)
+    -   sql_modeに`ANSI_QUOTES`が含まれている場合に数値リテラルが認識されない問題を修正しました[＃24429](https://github.com/pingcap/tidb/issues/24429)
+    -   `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`ような文は、リストされていないパーティションからデータを読み取ることを禁止します[＃24746](https://github.com/pingcap/tidb/issues/24746)
     -   SQL文に`GROUP BY`と`UNION`両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正します[＃24281](https://github.com/pingcap/tidb/issues/24281)
-    -   `CONCAT`関数が照合順序[＃24296](https://github.com/pingcap/tidb/issues/24296)誤って処理する問題を修正しました
-    -   `collation_server`グローバル変数が新しいセッション[＃24156](https://github.com/pingcap/tidb/pull/24156)で有効にならない問題を修正しました
+    -   `CONCAT`関数が照合順序を誤って処理する問題を修正しました[＃24296](https://github.com/pingcap/tidb/issues/24296)
+    -   `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました[＃24156](https://github.com/pingcap/tidb/pull/24156)
 
 -   TiKV
 
     -   古い値の読み取りによって引き起こされる TiCDC OOM 問題を修正[＃9996](https://github.com/tikv/tikv/issues/9996) [＃9981](https://github.com/tikv/tikv/issues/9981)
     -   照合順序が`latin1_bin`の場合にクラスター化主キー列のセカンダリインデックスに空の値が含まれる問題を修正しました[＃24548](https://github.com/pingcap/tidb/issues/24548)
-    -   `abort-on-panic`設定を追加すると、panic発生時にTiKVがコアダンプファイルを生成できるようになります。コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするには、ユーザーは環境を正しく設定する必要があります。
+    -   `abort-on-panic`設定を追加すると、panic発生時にTiKVがコアダンプファイルを生成できるようになります。コアダンプを有効にするには、ユーザーは環境を正しく設定する必要があります[＃10216](https://github.com/tikv/tikv/pull/10216)
     -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンス回帰の問題を修正しました[＃10046](https://github.com/tikv/tikv/issues/10046)
 
 -   PD
 
     -   ストア数が多い場合にPDリーダーの再選出が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
-    -   存在しないストア[＃3660](https://github.com/tikv/pd/issues/3660)からエビクト リーダー スケジューラを削除するときに発生するpanic問題を修正しました
+    -   存在しないストアからエビクト リーダー スケジューラを削除するときに発生するpanic問題を修正しました[＃3660](https://github.com/tikv/pd/issues/3660)
     -   オフラインピアがマージされた後に統計が更新されない問題を修正[＃3611](https://github.com/tikv/pd/issues/3611)
 
 -   TiFlash
@@ -110,19 +110,19 @@ TiDB バージョン: 5.0.2
 
     -   TiCDC
 
-        -   Avro出力[＃1712](https://github.com/pingcap/tiflow/pull/1712)でタイムゾーン情報が失われる問題を修正
-        -   Unified Sorter 内の古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリ[＃1742](https://github.com/pingcap/tiflow/pull/1742)共有を禁止します。
+        -   Avro出力でタイムゾーン情報が失われる問題を修正[＃1712](https://github.com/pingcap/tiflow/pull/1712)
+        -   Unified Sorter 内の古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
         -   多くの古いリージョンが存在する場合に発生する KV クライアントのデッドロックバグを修正[＃1599](https://github.com/pingcap/tiflow/issues/1599)
-        -   `--cert-allowed-cn`フラグ[＃1697](https://github.com/pingcap/tiflow/pull/1697)の間違ったヘルプ情報を修正
-        -   MySQL [＃1750](https://github.com/pingcap/tiflow/pull/1750)にデータを複製する際に`SUPER`権限を必要とする`explicit_defaults_for_timestamp`の更新を元に戻す
+        -   `--cert-allowed-cn`フラグの間違ったヘルプ情報を修正[＃1697](https://github.com/pingcap/tiflow/pull/1697)
+        -   MySQLにデータを複製する際に`SUPER`権限を必要とする`explicit_defaults_for_timestamp`の更新を元に戻す[＃1750](https://github.com/pingcap/tiflow/pull/1750)
         -   シンクフロー制御をサポートし、メモリオーバーフローのリスクを軽減します[＃1840](https://github.com/pingcap/tiflow/pull/1840)
-        -   テーブル[＃1828](https://github.com/pingcap/tiflow/pull/1828)移動する際にレプリケーションタスクが停止する可能性があるバグを修正
-        -   TiCDC チェンジフィード チェックポイント[＃1759](https://github.com/pingcap/tiflow/pull/1759)の停滞により TiKV GC セーフ ポイントがブロックされる問題を修正しました
+        -   テーブルを移動する際にレプリケーションタスクが停止する可能性があるバグを修正[＃1828](https://github.com/pingcap/tiflow/pull/1828)
+        -   TiCDC チェンジフィード チェックポイントの停滞により TiKV GC セーフ ポイントがブロックされる問題を修正しました[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
     -   Backup & Restore (BR)
 
         -   ログの復元中に`DELETE`イベントが失われる問題を修正しました[＃1063](https://github.com/pingcap/br/issues/1063)
-        -   BR がTiKV [＃1037](https://github.com/pingcap/br/pull/1037)に無駄な RPC リクエストを大量に送信してしまうバグを修正しました
+        -   BR がTiKVに無駄な RPC リクエストを大量に送信してしまうバグを修正しました[＃1037](https://github.com/pingcap/br/pull/1037)
         -   バックアップ操作が失敗したときにエラーが出力されない問題を修正[＃1043](https://github.com/pingcap/br/pull/1043)
 
     -   TiDB Lightning
