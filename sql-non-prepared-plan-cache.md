@@ -5,7 +5,7 @@ summary: TiDB の SQL 非プリペアドプランキャッシュの原理、使�
 
 # SQL Non-Prepared Execution Plan Cache {#sql-non-prepared-execution-plan-cache}
 
-TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache.md)と同様に、一部の`PREPARE`以外のステートメントに対して実行プランのキャッシュをサポートしています。この機能により、これらのステートメントは最適化フェーズをスキップし、パフォーマンスを向上させることができます。
+TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache.md)と同様に、一部の`PREPARE`以外のステートメントに対して実行計画のキャッシュをサポートしています。この機能により、これらのステートメントは最適化フェーズをスキップし、パフォーマンスを向上させることができます。
 
 非プリペアドプランキャッシュを有効にすると、メモリとCPUのオーバーヘッドが増加する可能性があり、すべての状況に適しているとは限りません。この機能をシナリオで有効にするかどうかを判断するには、セクション[パフォーマンス上の利点](#performance-benefits)と[メモリ監視](#monitoring)を参照してください。
 
@@ -74,7 +74,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 TiDBは、パラメータ化されたクエリに対して1つのプランのみをキャッシュします。例えば、クエリ`SELECT * FROM t WHERE a < 1`と`SELECT * FROM t WHERE a < 100000`同じパラメータ化された形式（ `SELECT * FROM t WHERE a < ?` ）を共有しているため、同じプランを共有します。
 
-これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザが毎回SQLの新しい実行プランを生成するようにすることができます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
+これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザが毎回SQLの新しい実行計画を生成するようにすることができます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
 
 ### 使用制限 {#usage-restrictions}
 

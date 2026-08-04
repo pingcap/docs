@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW STATS_HEALTHY の使用法の概要。
 
 # SHOW STATS_HEALTHY {#show-stats-healthy}
 
-`SHOW STATS_HEALTHY`ステートメントは、統計の健全性の推定値を表示します。健全性パーセンテージが低いテーブルでは、最適ではないクエリ実行プランが生成される場合があります。
+`SHOW STATS_HEALTHY`ステートメントは、統計の健全性の推定値を表示します。健全性パーセンテージが低いテーブルでは、最適ではないクエリ実行計画が生成される場合があります。
 
 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行すると、テーブルの健全性が向上します。健全性が[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)しきい値を下回ると、 `ANALYZE`自動的に実行されます。
 

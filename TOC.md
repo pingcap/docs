@@ -255,7 +255,7 @@
       - [コンフィグレーション](/garbage-collection-configuration.md)
   - SQLチューニング
     - [概要](/sql-tuning-overview.md)
-    - クエリ実行プランの理解
+    - クエリ実行計画の理解
       - [概要](/explain-overview.md)
       - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
       - [索引](/explain-indexes.md)

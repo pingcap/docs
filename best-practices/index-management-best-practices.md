@@ -255,7 +255,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 ### 不可視インデックスを効果的に使用する {#use-invisible-indexes-effectively}
 
 -   **オフピーク時にテストする**: 制御された環境でパフォーマンスへの影響を監視します。
--   **クエリ監視ツールを使用する**: インデックスを不可視にする前と後のクエリ実行プランを分析します。
+-   **クエリ監視ツールを使用する**: インデックスを不可視にする前と後のクエリ実行計画を分析します。
 -   **複数のワークロードで確認します**。特定のレポートやスケジュールされたクエリにインデックスが必要ないことを確認します。
 
 ### インデックスを不可視のままにできる期間はどのくらいですか? {#how-long-can-an-index-remain-invisible}
@@ -274,7 +274,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 
     -   インデックスの使用アクティビティを追跡するには、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)と[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)を使用します。
     -   [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を使用して未使用のインデックスを識別し、削除できるかどうかを評価します。
-    -   クエリ実行プランを監視して、過剰な I/O を引き起こす可能性のある非効率的なインデックスを検出します。
+    -   クエリ実行計画を監視して、過剰な I/O を引き起こす可能性のある非効率的なインデックスを検出します。
 
 2.  **インデックスを削除する前に検証します。**
 
@@ -312,7 +312,7 @@ ALTER TABLE bookshop.users ALTER INDEX nickname INVISIBLE;
 5.  **定期的にテストと調整を行ってください。**
 
     -   特にワークロードに大きな変更があった場合には、インデックス監査を定期的に実行します。
-    -   TiDB の実行プラン分析ツールを使用して、インデックスが最適に使用されているかどうかを確認します。
+    -   TiDB の実行計画分析ツールを使用して、インデックスが最適に使用されているかどうかを確認します。
     -   新しいインデックスを追加するときは、予期しない回帰を防ぐために、まず分離された環境でテストしてください。
 
 これらのベスト プラクティスに従うことで、効率的なクエリ実行を実現し、不要なストレージオーバーヘッドを削減し、最適なデータベース パフォーマンスを維持できます。

@@ -57,7 +57,7 @@ TiDB バージョン: 6.5.3
 -   TiDB
 
     -   `min, max`クエリ結果が正しくない問題を修正[＃43805](https://github.com/pingcap/tidb/issues/43805) @[wshwsh12](https://github.com/wshwsh12)
-    -   ウィンドウ関数をTiFlash にプッシュダウンする際の実行プランが正しくない問題を修正しました [＃43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
+    -   ウィンドウ関数をTiFlash にプッシュダウンする際の実行計画が正しくない問題を修正しました [＃43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
     -   CTE を含むクエリによって TiDB がハングする問題を修正[＃43749](https://github.com/pingcap/tidb/issues/43749) [＃36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
     -   `AES_DECRYPT`式を使用すると SQL 文が`runtime error: index out of range`エラーを報告する問題を修正しました [＃43063](https://github.com/pingcap/tidb/issues/43063) @[lcwangchao](https://github.com/lcwangchao)
     -   `SHOW PROCESSLIST`文でサブクエリ時間が長い文のトランザクションの TxnStart を表示できない問題を修正[＃40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)

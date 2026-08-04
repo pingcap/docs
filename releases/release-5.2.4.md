@@ -155,7 +155,7 @@ TiDBバージョン：5.2.4
     -   `Unexpected type of column: Nullable(Nothing)` の予期しないエラーを修正します。 [#3351](https://github.com/pingcap/tiflash/issues/3351)
     -   遅延しているリージョンピアでのリージョンマージによって発生する可能性のあるメタデータ破損を修正 [#4437](https://github.com/pingcap/tiflash/issues/4437)
     -   `JOIN`を含むクエリでエラーが発生した場合にハングアップする可能性がある問題を修正しました [#4195](https://github.com/pingcap/tiflash/issues/4195)
-    -   実行プランの誤りにより、MPPクエリで誤った結果が返される可能性がある問題を修正 [#3389](https://github.com/pingcap/tiflash/issues/3389)
+    -   実行計画の誤りにより、MPPクエリで誤った結果が返される可能性がある問題を修正 [#3389](https://github.com/pingcap/tiflash/issues/3389)
 
 -   ツール
 

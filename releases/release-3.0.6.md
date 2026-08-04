@@ -21,7 +21,7 @@ TiDB Ansible バージョン: 3.0.6
     -   クエリステートメントに変数代入式が含まれている場合にクエリ結果が正しくない問題を修正しました[＃13231](https://github.com/pingcap/tidb/pull/13231)
     -   `UPDATE`ステートメントにサブクエリと生成された列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`ステートメントに異なるソース データベースからの同じ名前のテーブルが 2 つ含まれている場合に発生するステートメント実行エラーを修正しました[＃13350](https://github.com/pingcap/tidb/pull/13350)
     -   ポイントクエリのサポート`_tidb_rowid` [＃13416](https://github.com/pingcap/tidb/pull/13416)
-    -   パーティションテーブル統計の不適切な使用により、生成されたクエリ実行プランが正しくない問題を修正しました[＃13628](https://github.com/pingcap/tidb/pull/13628)
+    -   パーティションテーブル統計の不適切な使用により、生成されたクエリ実行計画が正しくない問題を修正しました[＃13628](https://github.com/pingcap/tidb/pull/13628)
 -   SQL実行エンジン
     -   年型の無効な値を処理するときにTiDBがMySQLと互換性がない問題を修正しました [＃12745](https://github.com/pingcap/tidb/pull/12745)
     -   `INSERT ON DUPLICATE UPDATE`文で`Chunk`再利用してメモリオーバーヘッドを削減する [＃12998](https://github.com/pingcap/tidb/pull/12998)

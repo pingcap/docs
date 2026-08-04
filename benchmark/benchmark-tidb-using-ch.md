@@ -75,7 +75,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 ## 統計を収集する {#collect-statistics}
 
-TiDBオプティマイザが最適な実行プランを生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。tidb_analyze_column_options **<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
+TiDBオプティマイザが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。tidb_analyze_column_options **<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
     set global tidb_analyze_column_options='ALL';
     analyze table customer;

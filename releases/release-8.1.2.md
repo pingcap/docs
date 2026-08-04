@@ -61,7 +61,7 @@ TiDB バージョン: 8.1.2
     -   特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正しました[＃53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
     -   グローバルソートが有効でリージョンサイズが96 MiB を超えると`IMPORT INTO`実行が停止する問題を修正 [＃55374](https://github.com/pingcap/tidb/issues/55374) @[lance6716](https://github.com/lance6716)
     -   `DUMP STATS`統計を JSON に変換するときにヒストグラムの上限と下限が壊れる問題を修正 [＃56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
-    -   エイリアスを持つマルチテーブル`DELETE`ステートメントに対して実行プラン バインディングを作成できない問題を修正しました。 [＃56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
+    -   エイリアスを持つマルチテーブル`DELETE`ステートメントに対して実行計画 バインディングを作成できない問題を修正しました。 [＃56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
     -   TTLテーブルのメモリリークの問題を修正 [＃56934](https://github.com/pingcap/tidb/issues/56934) @[lcwangchao](https://github.com/lcwangchao)
     -   パーティション式が`EXTRACT(YEAR FROM col)` の場合にパーティションプルーニングが機能しない問題を修正しました [＃54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)
     -   配置ルールを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [＃54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)

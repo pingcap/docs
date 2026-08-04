@@ -65,7 +65,7 @@ TiDB バージョン: 5.4.0
 
 -   TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
 -   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
--   バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行プランに対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行プランには影響しません。
+-   バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプラ​​ンが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
 -   v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
 -   ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
 -   システム変数を「DEFAULT」に設定する動作をMySQLとの互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
@@ -352,7 +352,7 @@ TiDB バージョン: 5.4.0
     -   サブクエリで異なる照合順序を使用した場合に発生する誤った結果の問題を修正しました [#30748](https://github.com/pingcap/tidb/issues/30748)
     -   TiDB における`concat(ifnull(time(3))`の結果が MySQL における結果と異なる問題を修正しました [#29498](https://github.com/pingcap/tidb/issues/29498)
     -   楽観的トランザクションモードにおける潜在的なデータインデックスの不整合の問題を修正 [#30410](https://github.com/pingcap/tidb/issues/30410)
-    -   式を TiKV にプッシュダウンできない場合に IndexMerge のクエリ実行プランが誤っている問題を修正しました [#30200](https://github.com/pingcap/tidb/issues/30200)
+    -   式を TiKV にプッシュダウンできない場合に IndexMerge のクエリ実行計画が誤っている問題を修正しました [#30200](https://github.com/pingcap/tidb/issues/30200)
     -   同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
     -   サブクエリが存在する場合に IndexMerge クエリの結果が間違っている問題を修正しました [#30913](https://github.com/pingcap/tidb/issues/30913)
     -   クライアントで FetchSize が大きすぎると発生するpanic問題を修正しました [#30896](https://github.com/pingcap/tidb/issues/30896)

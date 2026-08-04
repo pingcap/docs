@@ -73,7 +73,7 @@ TiDB バージョン: 6.5.6
     -   パーティション交換中にパーティション定義に準拠していないデータを検出できない問題を修正 [＃46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
     -   `GROUP_CONCAT` `ORDER BY`列を解析できない問題を修正 [＃41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
     -   深くネストされた式に対してハッシュコードが繰り返し計算され、メモリ使用量が増加し、OOM が発生する問題を修正しました。 [＃42788](https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
-    -   MPP実行プランで集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
+    -   MPP実行計画で集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
     -   `INDEX_LOOKUP_HASH_JOIN` でのメモリ使用量の見積もりが間違っている問題を修正 [＃47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     -   `plan replayer`で生成された zip ファイルを TiDB にインポートできない問題を修正しました [＃46474](https://github.com/pingcap/tidb/issues/46474) @[YangKeao](https://github.com/YangKeao)
     -   `N` in `LIMIT N` という大きすぎる数値による誤ったコスト見積りを修正 [＃43285](https://github.com/pingcap/tidb/issues/43285) @[qw4990](https://github.com/qw4990)

@@ -96,7 +96,7 @@ TiDB バージョン: 7.5.7
     -   `explain format="cost_trace"`に表示されるコストの計算式に空の括弧が含まれる可能性がある問題を修正しました [＃61127](https://github.com/pingcap/tidb/issues/61127) @[hawkingrei](https://github.com/hawkingrei)
     -   循環外部キー定義が無限ループを引き起こす問題を修正[＃60985](https://github.com/pingcap/tidb/issues/60985) @[hawkingrei](https://github.com/hawkingrei)
     -   `NULL` を使用すると内部クエリがインデックス範囲クエリを正しく構築できない可能性がある問題を修正しました。 [＃62196](https://github.com/pingcap/tidb/issues/62196) @[hawkingrei](https://github.com/hawkingrei)
-    -   プランキャッシュが誤った実行プランを保存し、実行エラーが発生する問題を修正しました [＃56772](https://github.com/pingcap/tidb/issues/56772) @[dash12653](https://github.com/dash12653)
+    -   プランキャッシュが誤った実行計画を保存し、実行エラーが発生する問題を修正しました [＃56772](https://github.com/pingcap/tidb/issues/56772) @[dash12653](https://github.com/dash12653)
     -   月または年にわたる行数の推定値が大幅に過大評価される可能性がある問題を修正[＃50080](https://github.com/pingcap/tidb/issues/50080) @[terry1purcell](https://github.com/terry1purcell)
     -   `ANALYZE`サブタスクの同時実行数が設定された制限を大幅に超える問題を修正しました [＃61785](https://github.com/pingcap/tidb/issues/61785) @[hawkingrei](https://github.com/hawkingrei)
     -   TopNプッシュダウン中に式ベースのTopNソート項目が誤って生成される問題を修正しました [＃60655](https://github.com/pingcap/tidb/issues/60655) @[hawkingrei](https://github.com/hawkingrei)

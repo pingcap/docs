@@ -7,7 +7,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 ユーザー制御のログ秘匿化により<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ内の機密データの可視性を管理できます。この編集機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスをとり、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログに表示される内容を制御できます。
 
-ログのマスキングはデフォルトで有効になっており、実行ログや実行プラン内の機密情報が隠蔽されます。TiDB <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>メンテナンスやSQLチューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
+ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。TiDB <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>メンテナンスやSQLチューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
 
 > **Note:**
 >

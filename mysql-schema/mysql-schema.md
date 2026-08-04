@@ -58,7 +58,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 ## 実行計画関連のシステムテーブル {#execution-plan-related-system-tables}
 
 -   `bind_info` : 実行計画のバインディング情報
--   `capture_plan_baselines_blacklist` : 実行プランの自動バインド用のブロックリスト
+-   `capture_plan_baselines_blacklist` : 実行計画の自動バインド用のブロックリスト
 
 ## PLAN REPLAYERに関連するシステムテーブル {#system-tables-related-to-plan-replayer}
 

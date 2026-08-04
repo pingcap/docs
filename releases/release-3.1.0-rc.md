@@ -81,7 +81,7 @@ TiDB Ansible バージョン: 3.1.0-rc
     -   `view` s とパーティションテーブル両方にアクセスする際に発生するpanicを修正 [＃15560](https://github.com/pingcap/tidb/pull/15560)
     -   `bit(n)`データ型を含む`update duplicate key`ステートメントで`VALUES`関数を実行したときに発生したエラーを修正します [＃15487](https://github.com/pingcap/tidb/pull/15487)
     -   一部のシナリオで指定された最大実行時間が有効にならない問題を修正[＃15616](https://github.com/pingcap/tidb/pull/15616)
-    -   `Index Scan` を使用して実行プランを生成するときに、現在の`ReadEngine`に TiKVサーバーが含まれているかどうかがチェックされない問題を修正しました。 [＃15773](https://github.com/pingcap/tidb/pull/15773)
+    -   `Index Scan` を使用して実行計画を生成するときに、現在の`ReadEngine`に TiKVサーバーが含まれているかどうかがチェックされない問題を修正しました。 [＃15773](https://github.com/pingcap/tidb/pull/15773)
 
 -   TiKV
 
