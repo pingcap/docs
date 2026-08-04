@@ -52,7 +52,7 @@
             }
         ]
     },
-    "description": "This Grafana dashboard provides a high-level overview for TiDB Cloud Essential instances created on or after July 1, 2026. ",
+    "description": "This Grafana dashboard provides a high-level overview for TiDB Cloud Essential instances created on or after July 1, 2026.",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
