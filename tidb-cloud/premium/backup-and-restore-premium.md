@@ -54,27 +54,27 @@ Backup files can originate from the following sources:
 
 ### Automatic backup modes
 
-You can choose an automatic backup mode in **Backup Settings**. The available features, retention periods, and pricing method depend on the selected mode.
+You can choose an automatic backup mode in **Backup Settings**. The available backup types, retention periods, and pricing model depend on the selected mode.
 
 <CustomContent plan="premium">
 
-| Mode | Automatic backups | Retention and restore options | Pricing method |
+| Backup mode | Supported backup types | Retention and restore options | Pricing model |
 | --- | --- | --- | --- |
-| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on incremental data volume. |
-| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>Hourly backup snapshots</li><li>Daily backup snapshots</li></ul> | <ul><li>PITR: 7 days</li><li>Hourly snapshots: 7 days</li><li>Daily snapshots: 33 days</li><li>Daily snapshots are created at 00:00 UTC.</li></ul> | Based on incremental data volume. |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>Daily backup snapshots</li></ul> | You can set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
 
 </CustomContent>
 
 <CustomContent plan="byoc">
 
-| Mode | Automatic backups | Retention and restore options |
+| Backup mode | Supported backup types | Retention and restore options |
 | --- | --- | --- |
-| **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. |
-| **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>Hourly backup snapshots</li><li>Daily backup snapshots</li></ul> | <ul><li>PITR: 7 days</li><li>Hourly snapshots: 7 days</li><li>Daily snapshots: 33 days</li><li>Daily snapshots are created at 00:00 UTC.</li></ul> |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>Daily backup snapshots</li></ul> | You can set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. |
 
 </CustomContent>
 
-PITR lets you restore to any specific point in time within its retention period. A snapshot restore lets you restore from a specific hourly or daily snapshot that is still within its retention period.
+PITR lets you restore data to any point in time within the retention period. A snapshot lets you restore data from a specific hourly or daily snapshot that is still within the retention period.
 
 ### Configure automatic backups
 
@@ -86,26 +86,26 @@ PITR lets you restore to any specific point in time within its retention period.
 
 4. Select an automatic backup mode:
 
-    - **Standard Bundle Mode** uses the predefined PITR, hourly snapshot, and daily snapshot settings.
-    - **Custom Retention Mode** lets you configure the automatic backup retention period and daily backup time.
+    - **Standard Bundle Mode** uses predefined settings for PITR, hourly snapshots, and daily snapshots.
+    - **Custom Retention Mode** lets you specify the automatic backup retention period and daily backup time.
 
 5. If you select **Custom Retention Mode**, configure the following settings. Otherwise, skip this step.
 
-    - **Backup Retention**: select a value from 3 to 33 days. The default value is 7 days.
+    - **Backup Retention**: select a retention period from 3 to 33 days. The default value is 7 days.
     - **Daily Backup Time**: select the time of day for the daily snapshot. The time zone is displayed next to the setting.
 
 6. Review the **Overview** section, and then click **Save**.
 
-    The overview shows the features enabled by your selected backup mode, the corresponding retention periods, and the available restore options.
+    The overview shows the backup types enabled by the selected backup mode, the corresponding retention periods, and the available restore options.
 
-<CustomContent plan="byoc"> 
+<CustomContent plan="byoc">
 
 > **Note:**
 >
 > - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
-> - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> - If you switch backup modes or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
-</CustomContent> 
+</CustomContent>
 
 <CustomContent plan="premium">
 
@@ -113,7 +113,7 @@ PITR lets you restore to any specific point in time within its retention period.
 >
 > - The backup retention period applies to new automatic backups. Existing backups are retained according to the current backup policy and are removed when they exceed the applicable retention period.
 > - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details) for more information.
-> - If you switch modes or reduce the retention period, TiDB Cloud may permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> - If you switch backup modes or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
 
@@ -125,18 +125,18 @@ To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take t
 2. In the upper-right corner, click **...**, and then click **Backup Settings**.
 3. In the displayed dialog, select a new mode.
 
-    - If you switch to **Custom Retention Mode**, you need to configure the backup retention and daily backup time. 
-    - If you switch to **Standard Bundle Mode**, the retention settings return to the standard bundle defaults.
+    - If you switch to **Custom Retention Mode**, you need to configure the backup retention period and daily backup time.
+    - If you switch to **Standard Bundle Mode**, the retention periods and daily backup time return to the standard bundle defaults.
 
-4. Review the retention settings in the **Overview** section, and then click **Save**. 
+4. Review the retention settings in the **Overview** section, and then click **Save**.
 
 The new mode applies to new automatic backups and determines the current backup pricing.
 
-If the new retention period is shorter than the current period, the confirmation dialog lists the automatic backups that will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
+If the new retention period is shorter than the current retention period, the confirmation dialog lists the automatic backups that are older than the new retention period and will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
 
 ### Backup protection
 
-TiDB Cloud protects the latest successful automatic backup of an instance until its retention period expires. You cannot manually delete this protected backup, including after the instance is deleted. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before expiration.
+To help prevent data loss and preserve a recovery point, TiDB Cloud protects **the latest successful automatic backup** of an instance until its retention period expires. Therefore, you cannot manually delete this protected latest backup, even after the instance is deleted. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before it expires.
 
 ### Delete backup files
 
@@ -146,7 +146,10 @@ To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
 
-    The latest successful automatic backup is protected until its retention period expires and cannot be deleted before then. Manual backups can be deleted according to your permissions.
+    > **Note:**
+    >
+    > TiDB Cloud protects the **latest successful automatic backup** of your instance to help prevent data loss. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before it expires.
+    > If you have the `Organization Owner` or `Project Owner` role in TiDB Cloud, you can delete an automatic backup other than the latest successful one, or delete a manual backup.
 
 ## Manual backups
 
