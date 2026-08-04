@@ -3,7 +3,7 @@ title: TIDB_INDEXES
 summary: TIDB_INDEXES` information_schema テーブルについて学習します。
 ---
 
-# TIDB_インデックス {#tidb-indexes}
+# TIDB_INDEXES {#tidb-indexes}
 
 `TIDB_INDEXES`テーブルはすべてのテーブルの INDEX 情報を提供します。
 

@@ -3,7 +3,7 @@ title: SCHEMATA
 summary: SCHEMATA` information_schema テーブルについて学習します。
 ---
 
-# スキーマタ {#schemata}
+# SCHEMATA {#schemata}
 
 `SCHEMATA`のテーブルはデータベースに関する情報を提供します。テーブルのデータは[`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントの結果に相当します。
 

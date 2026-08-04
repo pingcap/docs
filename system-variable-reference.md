@@ -868,7 +868,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [分析ステータス](/information-schema/information-schema-analyze-status.md)
+-   [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
 -   [統計入門](/statistics.md)
 -   [分析ステータスを表示](/sql-statements/sql-statement-show-analyze-status.md)
 -   [システム変数](/system-variables.md#tidb_analyze_version-new-in-v510)
