@@ -58,14 +58,14 @@ You can choose an automatic backup mode in **Backup Settings**. The available fe
 
 <CustomContent plan="premium">
 | Mode | Automatic backups | Retention and restore options | Pricing method |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | Based on data incremental volume. |
 | **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
 </CustomContent>
 
 <CustomContent plan="byoc"> 
 | Mode | Automatic backups | Retention and restore options |
-| --- | --- | --- | --- |
+| --- | --- | --- |
 | **Standard Bundle Mode** | PITR, hourly backup snapshots, and daily backup snapshots | PITR: 7 days; hourly snapshots: 7 days; daily snapshots: 33 days. Daily snapshots are created at 00:00 UTC. | 
 | **Custom Retention Mode** | PITR and daily backup snapshots | Set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | 
 </CustomContent> 
