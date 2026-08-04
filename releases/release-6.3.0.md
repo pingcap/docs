@@ -141,7 +141,7 @@ TiDBバージョン: 6.3.0-DMR
 
     v5.3.0 では、統計情報が古くなったときのオプティマイザの動作を制御するために、システム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)が導入されました。デフォルト値は`ON`で、これは旧バージョンの動作を維持することを意味します。つまり、SQL ステートメントに関係するオブジェクトの統計情報が古くなった場合、オプティマイザは (テーブルの総行数以外の) 統計情報はもはや信頼できないと判断し、代わりに擬似統計情報を使用します。実際のユーザー シナリオのテストと分析の結果、v6.3.0 以降、デフォルト値`tidb_enable_pseudo_for_outdated_stats`は`OFF`に変更されました。統計情報が古くなっても、オプティマイザはテーブル上の統計情報を使用するため、実行プランがより安定します。
 
--   Titan の無効化が GA に@ [tabokie](https://github.com/tabokie)
+-   Titan の無効化が GA に@[tabokie](https://github.com/tabokie)
 
     オンライン TiKV ノードに対して[Titanを無効にする](/storage-engine/titan-configuration.md#disable-titan)ことができます。
 

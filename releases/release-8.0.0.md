@@ -440,7 +440,7 @@ TiDB バージョン: 8.0.0
     -   `init-stats`プロセスが TiDB をpanic、 `load stats`プロセスを終了する可能性がある問題を修正しました [#51581](https://github.com/pingcap/tidb/issues/51581) @[hawkingrei](https://github.com/hawkingrei)
     -   `IN()`述語に`NULL`が含まれている場合にクエリ結果が正しくない問題を修正 [#51560](https://github.com/pingcap/tidb/issues/51560) @[winoros](https://github.com/winoros)
     -   DDLタスクが複数のテーブルに関係する場合、ブロックされたDDLステートメントがMDLビューに表示されない問題を修正します [#47743](https://github.com/pingcap/tidb/issues/47743) @[wjhuang2016](https://github.com/wjhuang2016)
-    -   テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @ [hawkingrei](https://github.com/hawkingrei)
+    -   テーブル上の`processed_rows`タスクの`ANALYZE`が、そのテーブルの総行数を超える可能性がある問題を修正しました [#50632](https://github.com/pingcap/tidb/issues/50632) @[hawkingrei](https://github.com/hawkingrei)
     -   `HashJoin`演算子がディスクにスピルしない場合に発生する可能性のあるゴルーチンリークの問題を修正 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     -   CTEクエリのメモリ使用量が制限を超えた場合に発生するゴルーチンリークの問題を修正 [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     -   集計関数をグループ計算に使用した際に発生する可能性のある`Can't find column ...`エラーを修正 [#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)

@@ -158,7 +158,7 @@ TiDBバージョン: 6.2.0-DMR
 
     TiKV 設定ファイルは、TiKV インスタンスの管理に使用できます。しかし、長時間実行され、複数のユーザーによって管理されているインスタンスの場合、どの設定項目が変更されたか、デフォルト値は何かを把握するのは困難です。これは、クラスタのアップグレードやデータの移行時に混乱を招く可能性があります。TiDB v6.2.0 以降、tikv-server は、すべての TiKV 設定項目のデフォルト値と現在の値を一覧表示する新しいコマンドラインフラグ[`—-config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format)をサポートしており、TiKV プロセスの起動パラメータをユーザーがすばやく確認できるようになり、使いやすさが向上します。
 
-    [ユーザー向けドキュメント](/command-line-flags-for-tikv-configuration.md#--config-info-format) [#12492](https://github.com/tikv/tikv/issues/12492)@ [glorv](https://github.com/glorv)
+    [ユーザー向けドキュメント](/command-line-flags-for-tikv-configuration.md#--config-info-format) [#12492](https://github.com/tikv/tikv/issues/12492)@[glorv](https://github.com/glorv)
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -378,7 +378,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
         -   複数リージョンシナリオにおけるランタイムコンテキスト切り替えによるパフォーマンスオーバーヘッドを削減 [#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
 
-        -   REDO ログのパフォーマンスを最適化し、メタおよびデータの不整合の問題を修正します ( [#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96) ) ( [#5924](https://github.com/pingcap/tiflow/issues/5924) @[zhaoxinyu](https://github.com/zhaoxinyu)) ( [#6277](https://github.com/pingcap/tiflow/issues/6277)@ [hicqu](https://github.com/hicqu))
+        -   REDO ログのパフォーマンスを最適化し、メタおよびデータの不整合の問題を修正します ( [#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96) ) ( [#5924](https://github.com/pingcap/tiflow/issues/5924) @[zhaoxinyu](https://github.com/zhaoxinyu)) ( [#6277](https://github.com/pingcap/tiflow/issues/6277)@[hicqu](https://github.com/hicqu))
 
     -   TiDB Lightning
 
