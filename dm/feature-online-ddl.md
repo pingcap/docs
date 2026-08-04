@@ -96,7 +96,7 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
     -   DMは`rename to _test4_del`を実行しません。`rename ghost_table to origin table`を実行する場合、DMは以下の手順を実行します。
 
         -   ステップ3でメモリに記録されたDDLを読み取ります
-        -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます
+        -   `ghost_table`と`ghost_schema`を`origin_table`とそれに対応するスキーマに置き換えます
         -   置き換えられたDDLを実行する
 
         ```sql
@@ -186,7 +186,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
     -   DMは`rename to _test4_old`を実行しません。`rename ghost_table to origin table`を実行する場合、DMは以下の手順を実行します。
 
         -   ステップ2でメモリに記録されたDDLを読み取ります
-        -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます
+        -   `ghost_table`と`ghost_schema`を`origin_table`とそれに対応するスキーマに置き換えます
         -   置き換えられたDDLを実行する
 
         ```sql
@@ -214,11 +214,11 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
 
 場合によっては、オンラインスキーマ変更ツールのデフォルトの動作を変更する必要があるかもしれません。例えば、 `ghost table`と`trash table`にカスタマイズされた名前を使用する場合などです。また、gh-ost や pt-osc の代わりに、同じ動作原理と変更プロセスを持つ他のツールを使用する必要がある場合もあります。
 
-このようなカスタマイズされたニーズを実現するには、 `ghost table`と`trash table`名前に一致する正規表現を記述する必要があります。
+このようなカスタマイズされたニーズを実現するには、 `ghost table`と`trash table`の名前に一致する正規表現を記述する必要があります。
 
-バージョン2.0.7以降、DMは改良されたオンラインスキーマ変更ツールを試験的にサポートしています。DMタスク設定で`online-ddl=true`設定し、 `shadow-table-rules`と`trash-table-rules`設定することで、変更された一時テーブルを正規表現で照合できます。
+バージョン2.0.7以降、DMは改良されたオンラインスキーマ変更ツールを試験的にサポートしています。DMタスク設定で`online-ddl=true`を設定し、 `shadow-table-rules`と`trash-table-rules`を設定することで、変更された一時テーブルを正規表現で照合できます。
 
-たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
+たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
 
 ```yaml
 online-ddl: true

@@ -10,7 +10,7 @@ TiDB Data Migration (DM) を使用してデータを移行する場合、テー�
 > **Note:**
 >
 > -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
-> -   セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`移行するために使用されるスキーマの一致ルールを個別に構成する必要があります。
+> -   セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`を移行するために使用されるスキーマの一致ルールを個別に構成する必要があります。
 
 ## テーブルルーティングを構成する {#configure-table-routing}
 
@@ -42,13 +42,13 @@ routes:
 
 -   `*` 、 `?` 、 `[]`を含むワイルドカードがサポートされています。ワイルドカードマッチでは`*`記号は1つだけ使用でき、末尾になければなりません。例えば、 `table-pattern: "t_*"`の場合、 `"t_*"`は`t_`で始まるすべてのテーブルを表します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
 
--   `table-regexp` 、 `schema-regexp` 、 `source-regexp`正規表現のみをサポートし、 `~`記号で始まることはできません。
+-   `table-regexp` 、 `schema-regexp` 、 `source-regexp`は正規表現のみをサポートし、 `~`記号で始まることはできません。
 
--   `schema-pattern`と`table-pattern`ワイルドカードと正規表現の両方をサポートします。正規表現は`~`で始まる必要があります。
+-   `schema-pattern`と`table-pattern`はワイルドカードと正規表現の両方をサポートします。正規表現は`~`で始まる必要があります。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   DM は`target-table` [テーブルセレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)一致するアップストリーム MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema`に移行します。
+-   DM は`target-table` [テーブルセレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema`に移行します。
 -   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルについては、DM は`extract-table` . `table-regexp`正規表現を使用してテーブル名、 `extract-schema` . `schema-regexp`正規表現を使用してスキーマ名、 `extract-source` . `source-regexp`正規表現を使用してソース情報を抽出します。その後、DM は抽出した情報を下流のマージ済みテーブルの対応する`target-column`に書き込みます。
 
 ## 使用例 {#usage-examples}
@@ -59,16 +59,16 @@ routes:
 
 ### シャード化されたスキーマとテーブルをマージする {#merge-sharded-schemas-and-tables}
 
-シャードされたスキーマとテーブルのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`ダウンストリーム TiDB インスタンスの`test` `t`に移行します。
+シャードされたスキーマとテーブルのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`をダウンストリーム TiDB インスタンスの`test` `t`に移行します。
 
 アップストリームインスタンスをダウンストリーム`test` . `t`に移行するには、次のルーティングルールを作成する必要があります。
 
--   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`一致するテーブルの DML または DDL ステートメントをダウンストリーム`test` 。 `t`に移行するために使用されます。
--   `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`一致するスキーマの DDL ステートメントを移行するために使用されます。
+-   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test` 。 `t`に移行するために使用されます。
+-   `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL ステートメントを移行するために使用されます。
 
 > **Note:**
 >
-> -   下流`schema: test`がすでに存在し、削除しない場合は`rule-2`省略できます。
+> -   下流`schema: test`がすでに存在し、削除しない場合は`rule-2`を省略できます。
 > -   ダウンストリーム`schema: test`が存在せず、 `rule-1`のみが構成されている場合、移行中に`schema test doesn't exist`エラーが報告されます。
 
 ```yaml
@@ -84,13 +84,13 @@ routes:
 
 ### テーブル、スキーマ、ソース情報を抽出し、結合されたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
 
-シャード化されたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`下流TiDBインスタンスの`test`テーブルに移行します。同時に`t`シャード化されたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
+シャード化されたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`を下流TiDBインスタンスの`test`テーブルに移行します。同時に`t`シャード化されたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
 
 `t`ストリームインスタンスをダウンストリームインスタンス`test`に移行するには、前のセクション[シャード化されたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティングルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`設定を追加する必要があります。
 
--   `extract-table` : `schema-pattern`と`table-pattern`一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列) に書き込みます。
--   `extract-schema` : `schema-pattern`と`table-pattern`一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列) に書き込みます。
--   `extract-source` : `schema-pattern`と`table-pattern`一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
+-   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列) に書き込みます。
+-   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列) に書き込みます。
+-   `extract-source` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 
 ```yaml
   rule-1:
@@ -213,7 +213,7 @@ CREATE TABLE `test`.`t` (
 
 ### シャードスキーマをマージする {#merge-sharded-schemas}
 
-シャード スキーマのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`ダウンストリーム TiDB インスタンスの`test` `t_{1,2,3...}`に移行します。
+シャード スキーマのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`をダウンストリーム TiDB インスタンスの`test` `t_{1,2,3...}`に移行します。
 
 アップストリーム スキーマをダウンストリーム`test` . `t_[1,2,3]`に移行するには、ルーティング ルールを 1 つだけ作成する必要があります。
 

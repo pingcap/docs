@@ -13,7 +13,7 @@ DM設定ファイルでは、dmctlで暗号化されたパスワードを使用�
 
 > **Note:**
 >
-> v8.0.0 以降では、 `dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)設定する必要があります。
+> v8.0.0 以降では、 `dmctl encrypt`コマンドを使用する前に、DM-master に[`secret-key-path`](/dm/dm-master-configuration-file.md)を設定する必要があります。
 
 ```bash
 ./dmctl encrypt 'abc!@#123'
@@ -180,7 +180,7 @@ list-member --worker
         ]
     }
 
-上記の例では、 `mysql-replica-01` `dm-worker-1`にバインドされています。以下のコマンドは、 `mysql-replica-01`のバインドワーカーを`dm-worker-2`に転送します。
+上記の例では、 `mysql-replica-01`は`dm-worker-1`にバインドされています。以下のコマンドは、 `mysql-replica-01`のバインドワーカーを`dm-worker-2`に転送します。
 
 ```bash
 transfer-source mysql-replica-01 dm-worker-2

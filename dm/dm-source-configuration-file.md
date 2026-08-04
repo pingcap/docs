@@ -72,7 +72,7 @@ from:
 #### `enable-gtid` {#enable-gtid}
 
 -   GTID を使用してアップストリームからbinlogをプルするかどうかを決定します。
--   通常、 `enable-gtid`手動で設定する必要はありません。ただし、上流データベースでGTIDが有効になっていて、プライマリ/セカンダリスイッチが必要な場合は、 `enable-gtid`を`true`に設定する必要があります。
+-   通常、 `enable-gtid`を手動で設定する必要はありません。ただし、上流データベースでGTIDが有効になっていて、プライマリ/セカンダリスイッチが必要な場合は、 `enable-gtid`を`true`に設定する必要があります。
 -   デフォルト値: `false`
 
 #### `enable-relay` {#enable-relay}

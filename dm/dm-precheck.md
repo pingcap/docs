@@ -104,7 +104,7 @@ tiup dmctl check-task ./task.yaml
 
 -   下流データベースにおけるリージョン分布
 
-    -   さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も少ない TiKV ノードに`a`個のリージョンがあり、リージョン数が最も多い TiKV ノードに`b`個のリージョンがあると仮定すると、 `a / b` 0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [PDスケジューリングのベストプラクティス -Leader/リージョンの配分がバランスが取れていない](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)参照。
+    -   さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も少ない TiKV ノードに`a`個のリージョンがあり、リージョン数が最も多い TiKV ノードに`b`個のリージョンがあると仮定すると、 `a / b`が0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [PDスケジューリングのベストプラクティス -Leader/リージョンの配分がバランスが取れていない](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)参照。
 
 -   下流データベースにおけるTiDB、PD、およびTiKVのバージョン
 

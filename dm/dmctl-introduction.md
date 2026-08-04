@@ -7,7 +7,7 @@ summary: dmctl を使用して DM クラスターを保守する方法を学習�
 
 > **Note:**
 >
-> TiUPを使用してデプロイされた DM クラスターの場合は、クラスターを維持するために[`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl)直接使用することをお勧めします。
+> TiUPを使用してデプロイされた DM クラスターの場合は、クラスターを維持するために[`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl)を直接使用することをお勧めします。
 
 dmctl は、DM クラスタのメンテナンスに使用するコマンドラインツールです。対話モードとコマンドモードの両方をサポートしています。
 

@@ -25,13 +25,13 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 一致するスキーマとテーブルにワイルドカードを使用する場合は、次の点に注意してください。
 
--   `schema-pattern`と`table-pattern` 、 `*` 、 `?` 、 `[]`を含むワイルドカードのみをサポートします。ワイルドカード一致では`*`記号は1つだけ使用でき、末尾に配置する必要があります。例えば、 `table-pattern: "t_*"`の場合、 `"t_*"` `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
+-   `schema-pattern`と`table-pattern` 、 `*` 、 `?` 、 `[]`を含むワイルドカードのみをサポートします。ワイルドカード一致では`*`記号は1つだけ使用でき、末尾に配置する必要があります。例えば、 `table-pattern: "t_*"`の場合、 `"t_*"`は `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
 
--   `sql-pattern`正規表現のみをサポートします。
+-   `sql-pattern`は正規表現のみをサポートします。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` `table-pattern`一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
+-   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
 
 -   `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
 
@@ -145,7 +145,7 @@ filters:
 
 ### TiDBがサポートしていないSQL文を除外する {#filter-out-the-sql-statements-that-tidb-does-not-support}
 
-TiDB がサポートしていない`PROCEDURE`ステートメントを除外するには、次の`filter-procedure-rule`構成します。
+TiDB がサポートしていない`PROCEDURE`ステートメントを除外するには、次の`filter-procedure-rule`を構成します。
 
 ```yaml
 filters:

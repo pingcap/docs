@@ -45,7 +45,7 @@ DMは上流のbinlogレコードに基づいてレコードの変更をキャプ
     UPDATE + DELETE => DELETE
     DELETE + INSERT => UPDATE
 
-Compactor機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.compact` ～ `true`設定します（以下を参照）。
+Compactor機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.compact` ～ `true`に設定します（以下を参照）。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit
@@ -76,7 +76,7 @@ MySQLのbinlogプロトコルでは、各binlogは1行のデータの変更操�
     + DELETE tb WHERE a=2
     = DELETE tb WHERE (a) IN (1),(2);
 
-マージャー機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.multiple-rows` ～ `true`設定します（以下を参照）。
+マージャー機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.multiple-rows` ～ `true`に設定します（以下を参照）。
 
 ```yaml
 syncers:                            # The configuration parameters of the sync processing unit
@@ -109,15 +109,15 @@ DML 生成のロジックは次のとおりです。
 
 ### ワーカー数 {#worker-count}
 
-Causalityは、競合検出機能によりbinlogを複数のグループに分割し、下流へ同時に実行することができます。DMは同時実行数を`worker-count`設定することで制御します。下流TiDBのCPU使用率が高くない場合、同時実行数を増やすことでデータレプリケーションのスループットを効果的に向上させることができます。
+Causalityは、競合検出機能によりbinlogを複数のグループに分割し、下流へ同時に実行することができます。DMは同時実行数を`worker-count`を設定することで制御します。下流TiDBのCPU使用率が高くない場合、同時実行数を増やすことでデータレプリケーションのスループットを効果的に向上させることができます。
 
-[`syncer.worker-count`設定項目](/dm/dm-tune-configuration.md#worker-count)変更することで、DML を同時に移行するスレッドの数を変更できます。
+[`syncer.worker-count`設定項目](/dm/dm-tune-configuration.md#worker-count)を変更することで、DML を同時に移行するスレッドの数を変更できます。
 
 ### バッチ {#batch}
 
 DMは複数のDMLを単一のトランザクションにまとめ、下流に実行します。DMLワーカーはDMLを受け取ると、そのDMLをキャッシュに追加します。キャッシュ内のDML数が設定されたしきい値に達した場合、またはDMLワーカーが長時間DMLを受け取っていない場合、DMLワーカーはキャッシュ内のDMLを下流に実行します。
 
-[`syncer.batch`設定項目](/dm/dm-tune-configuration.md#batch)変更することで、トランザクションに含まれる DML の数を変更できます。
+[`syncer.batch`設定項目](/dm/dm-tune-configuration.md#batch)を変更することで、トランザクションに含まれる DML の数を変更できます。
 
 ### チェックポイント {#checkpoint}
 

@@ -7,7 +7,7 @@ summary: TiDB データ移行ツールを使用してデータを移行すると
 
 このドキュメントでは、TiDB Data Migration (DM) ツールを使用してデータを移行するときに、失敗した DDL ステートメントを処理する方法について説明します。
 
-現在、TiDBはMySQLのすべての構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDL文](/mysql-compatibility.md#ddl-operations)参照）。そのため、DMがMySQLからTiDBにデータを移行する際に、TiDBが対応するDDL文をサポートしていない場合、エラーが発生し、移行プロセスが中断される可能性があります。この場合、DMの`binlog`コマンドを使用して移行を再開できます。
+現在、TiDBはMySQLのすべての構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDL文](/mysql-compatibility.md#ddl-operations)を参照）。そのため、DMがMySQLからTiDBにデータを移行する際に、TiDBが対応するDDL文をサポートしていない場合、エラーが発生し、移行プロセスが中断される可能性があります。この場合、DMの`binlog`コマンドを使用して移行を再開できます。
 
 ## 制限 {#restrictions}
 
@@ -29,7 +29,7 @@ summary: TiDB データ移行ツールを使用してデータを移行すると
 
 ## コマンド {#commands}
 
-dmctl を使用して失敗した DDL ステートメントを手動で処理する場合、よく使用されるコマンドには`query-status`と`binlog`含まれます。
+dmctl を使用して失敗した DDL ステートメントを手動で処理する場合、よく使用されるコマンドには`query-status`と`binlog`が含まれます。
 
 ### クエリステータス {#query-status}
 
@@ -66,7 +66,7 @@ binlog -h
 
     Use "dmctl binlog [command] --help" for more information about a command.
 
-`binlog`次のサブコマンドをサポートします。
+`binlog`は次のサブコマンドをサポートします。
 
 -   `inject` : 現在のエラーイベントまたは特定のbinlog位置にDDL文を挿入します。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
 -   `list` : 現在のbinlog位置、または現在のbinlog位置以降の有効な`inject` 、 `skip` 、 `replace`各操作をすべてリストします。binlog位置を指定するには、 `-b, --binlog-pos`を参照してください。
@@ -74,11 +74,11 @@ binlog -h
 -   `revert` : 指定されたbinlog操作において、前の操作が無効であった場合にのみ、 `inject` 、または`replace` `skip`を元に戻します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 -   `skip` : 特定のbinlog位置にあるDDL文をスキップします。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
 
-`binlog`次のフラグをサポートします:
+`binlog`は次のフラグをサポートします:
 
 -   `-b, --binlog-pos` :
     -   タイプ: 文字列。
-    -   binlogの位置を指定します。binlogイベントの位置が`binlog-pos`一致すると、操作が実行されます。指定されていない場合、DM は現在失敗した DDL 文に`binlog-pos`自動的に設定します。
+    -   binlogの位置を指定します。binlogイベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DM は現在失敗した DDL 文に`binlog-pos`を自動的に設定します。
     -   形式: `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
     -   マイグレーションがエラーを返した後は、 `query-status`で返される`startLocation`の`position`からbinlogの位置を取得できます。マイグレーションがエラーを返す前は、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
 
@@ -110,7 +110,7 @@ binlog skip -h
 
 #### シャードマージなしのシナリオ {#non-shard-merge-scenario}
 
-上流のテーブル`db1.tbl1`下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
+上流のテーブル`db1.tbl1`を下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -297,7 +297,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
             "RawCause": "[ddl:8200]Unsupported modify charset from latin1 to utf8"
         }
 
-3.  `binlog skip <task-name>`再度実行して、MySQL インスタンス 1 と 2 で現在失敗している DDL ステートメントをスキップします。
+3.  `binlog skip <task-name>`を再度実行して、MySQL インスタンス 1 と 2 で現在失敗している DDL ステートメントをスキップします。
 
     ```bash
     » handle-error test skip
@@ -431,7 +431,7 @@ binlog replace -h
 
 #### シャードマージなしのシナリオ {#non-shard-merge-scenario}
 
-上流のテーブル`db1.tbl1`下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
+上流のテーブル`db1.tbl1`を下流のTiDBに移行する必要があると仮定します。初期のテーブルスキーマは次のとおりです。
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -629,7 +629,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
             "Message": "detect inconsistent DDL sequence from source ... ddls: [ALTER TABLE `shard_db`.`tb` ADD COLUMN `new_col` INT UNIQUE KEY] source: `shard_db_2`.`shard_table_2`], right DDL sequence should be ..."
         }
 
-3.  `handle-error <task-name> replace`再度実行して、MySQL インスタンス 1 と 2 の間違った DDL ステートメントを置き換えます。
+3.  `handle-error <task-name> replace`を再度実行して、MySQL インスタンス 1 と 2 の間違った DDL ステートメントを置き換えます。
 
     ```bash
     » binlog replace test -s mysql-replica-01 "ALTER TABLE `shard_db_1`.`shard_table_2` ADD COLUMN `new_col` INT;ALTER TABLE `shard_db_1`.`shard_table_2` ADD UNIQUE(`new_col`)";

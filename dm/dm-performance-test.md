@@ -85,7 +85,7 @@ mydumpers:
 > **Note:**
 >
 > -   複数のスレッドを使用して単一のテーブルから同時にデータをエクスポートするには、設定項目`mydumpers`のオプション`rows`を使用します。これにより、データのエクスポートが高速化されます。
-> -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`調整できます。
+> -   異なる構成でのパフォーマンスをテストするには、 `mysql-instances`構成の`loader-thread`と、 `mydumpers`構成項目の`rows`と`threads`を調整できます。
 
 #### テスト結果を取得する {#get-test-results}
 
@@ -140,7 +140,7 @@ syncers:
 
 > **Note:**
 >
-> さまざまな構成でのパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`調整できます。
+> さまざまな構成でのパフォーマンスをテストするには、構成項目`syncers`の`worker-count`と`batch`を調整できます。
 
 #### 増分データを生成する {#generate-incremental-data}
 

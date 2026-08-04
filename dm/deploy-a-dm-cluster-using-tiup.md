@@ -17,13 +17,13 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 -   DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つの上流データベースのみにバインドされます。DMワーカーはまずローカルで全データをエクスポートし、その後、下流データベースにインポートします。そのため、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを保存できる十分な大きさが必要です。ストレージパスは、タスク作成時に後で指定します。
 
--   DM クラスターを展開する場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)満たす必要があります。
+-   DM クラスターを展開する場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
--   v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md) DM マスターに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md) DM マスターに設定する必要があります。
+-   v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM マスターに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM マスターに設定する必要があります。
 
 ## ステップ1: 制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
-通常のユーザーアカウント（ユーザー`tidb`例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスタ管理操作はすべて、ユーザー`tidb`で実行できます。
+通常のユーザーアカウント（ユーザー`tidb`を例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスタ管理操作はすべて、ユーザー`tidb`で実行できます。
 
 1.  次のコマンドを実行してTiUPをインストールします。
 
@@ -31,7 +31,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    インストール後、 `~/.bashrc` TiUPを PATH に追加するよう変更されているため、これを使用するには新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`再宣言する必要があります。
+    インストール後、 `~/.bashrc`は TiUPを PATH に追加するよう変更されているため、これを使用するには新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`を再宣言する必要があります。
 
 2.  TiUP DMコンポーネントをインストールします。
 
@@ -168,7 +168,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
 | `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは「/root/.ssh/id_rsa」）。                     |
 
-出力ログの最後に``Deployed cluster `dm-test` successfully``表示されます。これは、デプロイメントが成功したことを示します。
+出力ログの最後に``Deployed cluster `dm-test` successfully``が表示されます。これは、デプロイメントが成功したことを示します。
 
 ## ステップ4: TiUPによって管理されているクラスターを確認する {#step-4-check-the-clusters-managed-by-tiup}
 

@@ -19,7 +19,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づいたその他のツールを使用できます。
 
-    `openssl`選択した場合は[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
+    `openssl`を選択した場合は[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
 
 2.  証明書を構成します。
 

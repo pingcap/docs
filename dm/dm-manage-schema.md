@@ -30,11 +30,11 @@ DMが増分レプリケーションを実行する際、まず上流のbinlogを
 
 ほとんどの場合、前述の 4 つのテーブル スキーマは一貫しています。
 
-上流データベースがテーブルスキーマを変更するDDL操作を実行すると、 `schema-U`変更されます。このDDL操作を内部スキーマトラッカーコンポーネントと下流TiDBクラスタに適用することで、DMは`schema-I`と`schema-D`順序正しく更新し、 `schema-U`との整合性を維持します。これにより、DMは`schema-B`テーブルスキーマに対応するbinlogイベントを正常に処理できます。つまり、DDL操作`schema-B`正常に移行された後も、 `schema-U` `schema-I`および`schema-D`整合性を維持します。
+上流データベースがテーブルスキーマを変更するDDL操作を実行すると、 `schema-U`が変更されます。このDDL操作を内部スキーマトラッカーコンポーネントと下流TiDBクラスタに適用することで、DMは`schema-I`と`schema-D`を順序正しく更新し、 `schema-U`との整合性を維持します。これにより、DMは`schema-B`テーブルスキーマに対応するbinlogイベントを正常に処理できます。つまり、DDL操作`schema-B`正常に移行された後も、 `schema-U` `schema-I`および`schema-D`整合性を維持します。
 
 不整合が発生する可能性がある次の状況に注意してください。
 
--   [楽観的モードシャーディングDDLサポート](/dm/feature-shard-merge-optimistic.md)を有効にした移行中に、下流テーブルの`schema-D` 、上流の一部のシャードテーブルの`schema-B`および`schema-I`と不整合になる可能性があります。このような場合でも、DM は`schema-I`と`schema-B`整合性を維持し、DML に対応するbinlogイベントを正常に解析できるようにします。
+-   [楽観的モードシャーディングDDLサポート](/dm/feature-shard-merge-optimistic.md)を有効にした移行中に、下流テーブルの`schema-D` 、上流の一部のシャードテーブルの`schema-B`および`schema-I`と不整合になる可能性があります。このような場合でも、DM は`schema-I`と`schema-B`の整合性を維持し、DML に対応するbinlogイベントを正常に解析できるようにします。
 
 -   下流テーブルに上流テーブルよりも多くの列がある場合、 `schema-D` `schema-B`および`schema-I`と不整合になる可能性があります。完全なデータ移行（ `task-mode=all` ）では、DMが自動的に不整合を処理します。増分移行（ `task-mode=incremental` ）では、タスクが初めて開始され、内部スキーマ情報がまだないため、DMは自動的に下流スキーマ（ `schema-D` ）を読み取り、 `schema-I`を更新します（この動作はDMのバージョンによって異なります）。その後、DMが`schema-I`を使用して`schema-B`のbinlogを解析すると、 `Column count doesn't match value count`エラーが報告されます。詳細については、 [より多くの列を持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)を参照してください。
 

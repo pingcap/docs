@@ -12,7 +12,7 @@ DMはシャーディングDDLロックを使用して、操作が正しい順序
 > -   このドキュメントは、悲観的調整モードでのシャーディング DDL ロックの処理にのみ適用されます。
 > -   このドキュメントの「コマンドの使用法」セクションに記載されているコマンドは対話型モードです。コマンドラインモードでは、エラーレポートを回避するためにエスケープ文字を追加する必要があります。
 > -   コマンドによってもたらされる可能性のある影響を完全に認識し、それを受け入れられる場合を除き、 `shard-ddl-lock unlock`を使用しないでください。
-> -   異常な DDL ロックを手動で処理する前に、DM [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)必ず読んでください。
+> -   異常な DDL ロックを手動で処理する前に、DM [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を必ず読んでください。
 
 ## コマンド {#command}
 
@@ -86,7 +86,7 @@ shard-ddl-lock test
 
 > **Note:**
 >
-> 現在、 `shard-ddl-lock unlock` `pessimistic`モードのロックに対してのみ有効です。
+> 現在、 `shard-ddl-lock unlock`は`pessimistic`モードのロックに対してのみ有効です。
 
 ```bash
 shard-ddl-lock unlock -h
@@ -108,7 +108,7 @@ shard-ddl-lock unlock -h
     Global Flags:
       -s, --source strings   MySQL Source ID.
 
-`shard-ddl-lock unlock`次の引数を受け入れます:
+`shard-ddl-lock unlock`は次の引数を受け入れます:
 
 -   `-o, --owner` :
 
@@ -145,7 +145,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 #### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-`DM-master`シャーディングDDLロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細は[シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)参照）。シャーディングDDLイベントが既に移行プロセス中であり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されています）、すべてのDMワーカーがDDLイベントを受信できないため、シャーディングDDLロックを自動的に移行して解除することはできません。
+`DM-master`シャーディングDDLロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細は[シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照）。シャーディングDDLイベントが既に移行プロセス中であり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されています）、すべてのDMワーカーがDDLイベントを受信できないため、シャーディングDDLロックを自動的に移行して解除することはできません。
 
 > **Note:**
 >
@@ -222,7 +222,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
     -   返される結果`unsynced` by `shard-ddl-lock`には常に`mysql-replica-02`の情報が含まれています。
 
-6.  `shard-ddl-lock unlock`を使用して`DM-master`要求し、DDL ロックをアクティブにロック解除します。
+6.  `shard-ddl-lock unlock`を使用して`DM-master`に要求し、DDL ロックをアクティブにロック解除します。
 
     -   DDL ロックの所有者がオフラインになった場合は、パラメータ`--owner`を使用して、別の DM ワーカーを新しい所有者として指定し、DDL を実行できます。
     -   いずれかの MySQL ソースがエラーを報告した場合、 `result`が`false`に設定され、この時点で、各 MySQL ソースのエラーが許容範囲内であり、期待どおりであるかどうかを慎重に確認する必要があります。
@@ -282,7 +282,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 #### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-`DM-master`すべての DM ワーカーの DDL イベントを受信した後、 `unlock DDL lock`自動的に実行され、主に次の手順が含まれます。
+`DM-master`がすべての DM ワーカーの DDL イベントを受信した後、 `unlock DDL lock`が自動的に実行され、主に次の手順が含まれます。
 
 1.  ロックの所有者に DDL を実行し、対応するシャード テーブルのチェックポイントを更新するように依頼します。
 2.  所有者が DDL を正常に実行した後、 `DM-master`に保存されている DDL ロック情報を削除します。
@@ -332,7 +332,7 @@ MySQLとDMの操作プロセスは次のとおりです。
     }
     ```
 
-2.  `shard-ddl-lock`を使用して`DM-master`ロックを解除するよう依頼します。
+2.  `shard-ddl-lock`を使用して`DM-master`にロックを解除するよう依頼します。
 
     -   ロック解除プロセス中に、オーナーはダウンストリームへのDDL操作を再度実行しようとします（再起動前の元のオーナーは、ダウンストリームへのDDL操作を一度実行しています）。DDL操作が複数回実行可能であることを確認してください。
 
