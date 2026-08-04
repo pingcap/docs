@@ -158,7 +158,7 @@ SELECT BINARY_PLAN,TIDB_DECODE_BINARY_PLAN(BINARY_PLAN) FROM information_schema.
 
     1 row in set (0.00 sec)
 
-## TIDB_デコード_キー {#tidb_decode_key}
+## TIDB_DECODE_KEY {#tidb_decode_key}
 
 `TIDB_DECODE_KEY()`関数は、TiDBでエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルとログ出力に存在します。
 
@@ -262,7 +262,7 @@ ORDER BY
 
 `TIDB_DECODE_KEY`成功した場合は有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
 
-## TIDB_デコード_プラン {#tidb_decode_plan}
+## TIDB_DECODE_PLAN {#tidb_decode_plan}
 
 TiDB実行プランは、スロークエリログにエンコードされた形式で保存されています。`TIDB_DECODE_PLAN()`関数は、エンコードされたプランを人間が読める形式にデコードするために使用されます。
 
@@ -465,7 +465,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 1 row in set (0.000 sec)
 ```
 
-## TIDB_シャード {#tidb_shard}
+## TIDB_SHARD {#tidb_shard}
 
 `TIDB_SHARD()`関数は、インデックスホットスポットを分散させるためのシャードインデックスを作成します。シャードインデックスは、 `TIDB_SHARD()`関数をプレフィックスとして持つ式インデックスです。
 
@@ -518,7 +518,7 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
     ```
 
-## TIDB_バージョン {#tidb_version}
+## TIDB_VERSION {#tidb_version}
 
 `TIDB_VERSION()`関数は、接続している TiDBサーバーのバージョンとビルドの詳細を取得するために使用されます。この関数は、GitHub で問題を報告するときに使用できます。
 
@@ -540,7 +540,7 @@ Store: tikv
 1 row in set (0.00 sec)
 ```
 
-## VITESS_ハッシュ {#vitess_hash}
+## VITESS_HASH {#vitess_hash}
 
 `VITESS_HASH(num)`関数は、Vitess と同じ方法で数値をハッシュするために使用されます。これは、Vitess から TiDB への移行を容易にするためのものです。
 
