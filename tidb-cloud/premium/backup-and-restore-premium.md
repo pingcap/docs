@@ -128,7 +128,11 @@ To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take t
 
 4. Review the retention settings in the **Overview** section, and then click **Save**.
 
-The new mode applies to new automatic backups and determines the current backup pricing.
+<CustomContent plan="premium">
+
+After you save the changes, future automatic backups are billed according to the pricing model of the selected mode.
+
+</CustomContent>
 
 If the new retention period is shorter than the current retention period, the confirmation dialog lists the automatic backups that are older than the new retention period and will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
 
