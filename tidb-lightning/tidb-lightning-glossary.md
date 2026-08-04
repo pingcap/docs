@@ -51,7 +51,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 -   すべてのKVペアの合計長さ、および
 -   各ペアの[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)値のビット単位の XOR です。
 
-TiDB Lightning [インポートされたデータを検証する](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) 、各テーブルの[地元](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)比較することで、このチェックを実行します。いずれのペアも一致しない場合、プログラムは停止します。このチェックは、 `post-restore.checksum`設定を`false`に設定することでスキップできます。
+TiDB Lightning [インポートされたデータを検証する](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) 、各テーブルの[ローカル](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較することで、このチェックを実行します。いずれのペアも一致しない場合、プログラムは停止します。このチェックは、 `post-restore.checksum`設定を`false`に設定することでスキップできます。
 
 チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
@@ -167,7 +167,7 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 ### 後処理 {#post-processing}
 
-データソース全体が解析され、TiKV Importer に送信された後の期間。TiDB Lightning はTiKV Importer のアップロードを待機し、 [SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)の[摂取する](/tidb-lightning/tidb-lightning-glossary.md#ingest) 。
+データソース全体が解析され、TiKV Importer に送信された後の期間。TiDB Lightning はTiKV Importer のアップロードを待機し、 [SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)を[取り込み](/tidb-lightning/tidb-lightning-glossary.md#ingest) 。
 
 <!-- R -->
 
@@ -193,4 +193,4 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 SSTは「sorted string table（ソートされた文字列テーブル）」の略です。SSTファイルは、RocksDB（およびTiKV）のKVペアのコレクションのネイティブストレージ形式です。
 
-TiKVインポーターは、閉じた[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine)からSSTファイルを生成します。これらのSSTファイルはアップロードされ、その後TiKVストアに[摂取した](/tidb-lightning/tidb-lightning-glossary.md#ingest)されます。
+TiKVインポーターは、閉じた[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine)からSSTファイルを生成します。これらのSSTファイルはアップロードされ、その後TiKVストアに[取り込まれ](/tidb-lightning/tidb-lightning-glossary.md#ingest)ます。

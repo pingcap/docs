@@ -11,7 +11,7 @@ TiDBは、 TiFlashレプリカを読み取る3つの方法を提供します。�
 
 ## スマートな選択 {#smart-selection}
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。1または`desc` `explain analyze`ステートメントを使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。`desc`または`explain analyze`ステートメントを使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
 
 ```sql
 desc select count(*) from test.t;
@@ -38,7 +38,7 @@ explain analyze select count(*) from test.t;
     |   └─TableFullScan_16     | 1.00    | 1       | cop[tiflash] | table:t       | tiflash_task:{time:43ms, loops:1, threads:1}, tiflash_scan:{...}     | keep order:false, stats:pseudo | N/A       | N/A  |
     +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 
-`cop[tiflash]` 、タスクが処理のためにTiFlashに送信されることを意味します。TiFlash レプリカを選択してTiFlashない場合は、 `analyze table`ステートメントを使用して統計情報を更新し、 `explain analyze`ステートメントを使用して結果を確認できます。
+`cop[tiflash]`は、タスクが処理のためにTiFlashに送信されることを意味します。TiFlash レプリカを選択していない場合は、 `analyze table`ステートメントを使用して統計情報を更新し、 `explain analyze`ステートメントを使用して結果を確認できます。
 
 テーブルにTiFlashレプリカが1つしか存在せず、関連ノードがサービスを提供できない場合、CBOモードのクエリは繰り返し再試行されることに注意してください。このような状況では、エンジンを指定するか、手動ヒントを使用してTiKVレプリカからデータを読み取る必要があります。
 

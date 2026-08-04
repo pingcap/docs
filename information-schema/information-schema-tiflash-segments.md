@@ -3,7 +3,7 @@ title: TIFLASH_SEGMENTS
 summary: TIFLASH_SEGMENTS` information_schema テーブルについて学習します。
 ---
 
-# TIFLASH_セグメント {#tiflash-segments}
+# TIFLASH_SEGMENTS {#tiflash-segments}
 
 > **Warning:**
 >

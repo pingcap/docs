@@ -115,7 +115,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 ### `advertise-addr` {#advertise-addr}
 
--   顧客とのコミュニケーションのためのリスニングアドレスを宣伝する
+-   クライアント通信のためのリスニングアドレスを宣伝する
 -   この設定項目が設定されていない場合、 `addr`の値が使用されます。
 -   デフォルト値: `""`
 
@@ -343,7 +343,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   デフォルト値: `2000`
 -   最小値: `2`
 
-### `auto-adjust-pool-size` <span class="version-mark">v6.3.0で追加）</span> {#auto-adjust-pool-size-new-in-v630}
+### `auto-adjust-pool-size` <span class="version-mark">v6.3.0で追加</span> {#auto-adjust-pool-size-new-in-v630}
 
 -   スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在の CPU 使用率に基づいて UnifyReadPool スレッドプールのサイズを自動的に調整することで、TiKV の読み取りパフォーマンスが最適化されます。スレッドプールの可能な範囲は`[max-thread-count, MAX(4, CPU)]`です。最大値は[`max-thread-count`](#max-thread-count)と同じです。
 -   デフォルト値: `false`
@@ -488,7 +488,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 
 -   エンジンタイプを指定します。この設定は、新しいクラスターを作成する際にのみ指定でき、一度指定すると変更できません。
 -   デフォルト値: `"raft-kv"`
--   お得なオプション：
+-   値のオプション：
 
     -   `"raft-kv"` : TiDB v6.6.0 より前のバージョンにおけるデフォルトのエンジンタイプ。
     -   `"partitioned-raft-kv"` : TiDB v6.6.0 で導入された新しいストレージエンジン タイプ。
@@ -550,7 +550,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 ### `api-version` <span class="version-mark">v6.1.0で追加</span> {#api-version-new-in-v610}
 
 -   TiKVがRawKVストアとして機能する際にTiKVが使用するストレージフォーマットとインターフェースバージョン。
--   お得なオプション：
+-   値のオプション：
     -   `1` : API V1 を使用し、クライアントから渡されたデータをエンコードせず、そのまま保存します。バージョン 6.1.0 より前の TiKV では、デフォルトで API V1 が使用されます。
     -   `2` : API V2 を使用します:
         -   データは[マルチバージョン同時実行制御 (MVCC)](/glossary.md#multi-version-concurrency-control-mvcc)形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
@@ -558,12 +558,12 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
         -   API V2 を使用する場合は、 `storage.enable-ttl = true`も同時に設定する必要があります。API V2 は TTL 機能をサポートしているため、 [`enable-ttl`](#enable-ttl)を明示的に有効にする必要があります。そうしないと、 `storage.enable-ttl`が`false`にデフォルト設定されるため、競合が発生します。
         -   API V2を有効にする場合、不要になったデータを再利用するために、少なくとも1つのtidb-serverインスタンスをデプロイする必要があります。このtidb-serverインスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するため、複数のtidb-serverインスタンスをデプロイすることも可能です。
         -   API V2ではクライアント側のサポートが必要です。詳細は、API V2に対応したクライアントの取扱説明書を参照してください。
-        -   バージョン6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされています。RawKV [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
+        -   バージョン6.2.0以降、RawKVの変更データキャプチャ（CDC）がサポートされています。[RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
 -   デフォルト値: `1`
 
 > **Warning:**
 
-> -   API V1 と API V2 はストレージ形式が異なります。 TiKV に TiDB データのみが含まれている場合に**のみ**、API V2 を直接有効または無効にできます。他のシナリオでは、新しいクラスターをデプロイし、 [RawKVのバックアップと復元](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)復元を使用してデータを移行する必要があります。
+> -   API V1 と API V2 はストレージ形式が異なります。 TiKV に TiDB データのみが含まれている場合に**のみ**、API V2 を直接有効または無効にできます。他のシナリオでは、新しいクラスターをデプロイし、 [RawKVのバックアップと復元](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)を使用してデータを移行する必要があります。
 > -   API V2を有効にした後は、TiKVクラスターをv6.1.0より前のバージョンにダウングレードする**ことはできません**。ダウングレードすると、データ破損が発生する可能性があります。
 
 ## `txn-status-cache-capacity` <span class="version-mark">（v7.6.0で追加）</span> {#txn-status-cache-capacity-new-in-v760}
@@ -721,7 +721,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raftdb-path` {#raftdb-path}
 
--   Raftライブラリへのパス（デフォルトでは`storage.data-dir/raft`
+-   Raftライブラリへのパス（デフォルトでは`storage.data-dir/raft`）
 -   デフォルト値: `""`
 
 ### `raft-base-tick-interval` {#raft-base-tick-interval}
@@ -740,7 +740,7 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > この設定項目はSQL文による照会はできませんが、設定ファイル内で設定できます。
 
--   ハートビートが送信されるまでの経過ティック数。これは、 `raft-base-tick-interval` * `raft-heartbeat-ticks` の時間間隔でハートビートが送信`raft-heartbeat-ticks` 。
+-   ハートビートが送信されるまでの経過ティック数。これは、 `raft-base-tick-interval` * `raft-heartbeat-ticks` の時間間隔でハートビートが送信されます。
 -   デフォルト値: `2`
 -   最小値: `0`より大きい
 
@@ -791,7 +791,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raft-entry-max-size` {#raft-entry-max-size}
 
--   丸太1本の最大サイズに対する厳格な制限
+-   単一ログの最大サイズに対する厳格な制限
 -   デフォルト値: `"8MiB"`
 -   最小値: `0`
 -   単位：MiB｜GiB
@@ -810,13 +810,13 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raft-log-gc-threshold` {#raft-log-gc-threshold}
 
--   残存するRaftの最大許容数に関するソフトリミット
+-   残存するRaftログの最大許容数に関するソフトリミット
 -   デフォルト値: `50`
 -   最小値: `1`
 
 ### `raft-log-gc-count-limit` {#raft-log-gc-count-limit}
 
--   残存するRaftの許容数の上限
+-   残存するRaftログの許容数の上限
 -   デフォルト値：各ログが1 KiBであると仮定して計算された、リージョンサイズの4分の3に収まるログの数
 -   最小値: `0`
 
@@ -834,7 +834,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `raft-engine-purge-interval` {#raft-engine-purge-interval}
 
--   ディスク容量をできるだけ早く再利用するために、古いTiKVログファイルをパージする間隔。RaftRaftは交換可能なコンポーネントであるため、一部の実装ではパージ処理が必要です。
+-   ディスク容量をできるだけ早く再利用するために、古いTiKVログファイルをパージする間隔。Raftエンジンは交換可能なコンポーネントであるため、一部の実装ではパージ処理が必要です。
 -   デフォルト値: `"10s"`
 
 ### `raft-entry-cache-life-time` {#raft-entry-cache-life-time}
@@ -856,7 +856,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### `hibernate-regions` {#hibernate-regions}
 
--   リージョンの休止リージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態が続くリージョンは自動的に休止状態になります。これにより、アイドル状態のリージョンについて、 Raftリーダーとフォロワー間のハートビートメッセージによって発生する余分なオーバーヘッドが軽減されます。休止状態のリージョンのリーダーとフォロワー間のハートビート間隔は`peer-stale-state-check-interval`を使用して変更できます。
+-   休止リージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態が続くリージョンは自動的に休止状態になります。これにより、アイドル状態のリージョンについて、 Raftリーダーとフォロワー間のハートビートメッセージによって発生する余分なオーバーヘッドが軽減されます。休止状態のリージョンのリーダーとフォロワー間のハートビート間隔は`peer-stale-state-check-interval`を使用して変更できます。
 -   デフォルト値: v5.0.2 以降のバージョンでは`true` 、v5.0.2 より前のバージョンでは`false`
 
 ### `split-region-check-tick-interval` {#split-region-check-tick-interval}
@@ -1376,7 +1376,7 @@ RocksDBに関連するコンフィグレーション項目
 
 ### `max-total-wal-size` {#max-total-wal-size-1}
 
--   RocksDB WAL の最大サイズは合計で、 `*.log`内の`data-dir`ファイルのサイズです。
+-   RocksDB WAL の最大サイズは合計で、 `data-dir`内の`*.log`ファイルのサイズです。
 -   デフォルト値:
 
     -   `storage.engine="raft-kv"`の場合、デフォルト値は`"4GiB"`です。
@@ -1503,7 +1503,7 @@ RocksDBに関連するコンフィグレーション項目
 
 -   現在の RocksDB の`memtable`のメモリ使用量がしきい値に達したときに使用されるフラッシュ戦略を指定します。
 -   デフォルト値: `false`
--   お得なオプション：
+-   値のオプション：
 
     -   `false` : データ量が最も大きい`memtable`が SST ファイルに書き込まれます。
     -   `true` : 最も早い`memtable`が SST ファイルに書き込まれます。この戦略により`memtable`からコールドデータを消去できるため、コールドデータとホットデータが明確に存在するシナリオに適しています。
@@ -1527,7 +1527,7 @@ RocksDBに関連するコンフィグレーション項目
 
 -   RocksDB MANIFEST ファイルに先行書き込みログ (WAL) ファイルに関する情報を記録するかどうか、および起動時に WAL ファイルの整合性を検証するかどうかを制御します。詳細については、RocksDB [マニフェストでWALを追跡する](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST)を参照してください。
 -   デフォルト値: `true`
--   お得なオプション：
+-   値のオプション：
     -   `true` : WAL ファイルに関する情報を MANIFEST ファイルに記録し、起動時に WAL ファイルの整合性を検証します。
     -   `false` : WAL ファイルに関する情報を MANIFEST ファイルに記録せず、起動時に WAL ファイルの整合性を検証しません。
 
@@ -1618,7 +1618,7 @@ Titanに関連するコンフィグレーション項目。
 -   `defaultcf`のデフォルト値: `true`
 -   `writecf`および`lockcf`のデフォルト値: `false`
 
-### `optimize-filters-for-memory` <span class="version-mark">v7.2.0の新機能）</span> {#optimize-filters-for-memory-new-in-v720}
+### `optimize-filters-for-memory` <span class="version-mark">v7.2.0の新機能</span> {#optimize-filters-for-memory-new-in-v720}
 
 -   メモリ内部の断片化を最小限に抑えるブルーム/リボンフィルタを生成するかどうかを決定します。
 -   この設定項目は、 [`format-version`](#format-version-new-in-v620) 5以上の場合にのみ有効になることに注意してください。
@@ -1701,7 +1701,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `target-file-size-base` {#target-file-size-base}
 
--   ベースレベルでのターゲットファイルのサイズ。 `compaction-guard-max-output-file-size`の値が`enable-compaction-guard` } の場合、この値は`true`によって上書きされます。
+-   ベースレベルでのターゲットファイルのサイズ。 この値は、 `enable-compaction-guard`の値が`true`の場合、 `compaction-guard-max-output-file-size`によって上書きされます。
 -   デフォルト値: None。これは、デフォルトでは`"8MiB"`を意味します。
 -   最小値: `0`
 -   単位：KiB｜MiB｜GiB
@@ -1715,7 +1715,7 @@ Titanに関連するコンフィグレーション項目。
 
 ### `level0-slowdown-writes-trigger` {#level0-slowdown-writes-trigger}
 
--   L0 レジスタで書き込み停止を引き起こすファイルの最大数。
+-   L0 で書き込み停止を引き起こすファイルの最大数。
 -   v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この構成項目の値は[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって直接上書きされます。
 -   バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この構成項目の値は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、 [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
 -   デフォルト値: `20`
@@ -2195,7 +2195,7 @@ Raft Engineに関連するコンフィグレーション項目。
 > 3.  `enable`を`true`に設定してRaft Engineを有効にし、TiKV を再起動して設定を有効にしてください。
 
 -   Raft Engineのログ ファイルのバージョンを指定します。
--   お得なオプション：
+-   値のオプション：
     -   `1` : TiKV v6.3.0 より前のバージョンのデフォルトのログファイルです。TiKV &gt;= v6.1.0 で読み取ることができます。
     -   `2` : ログのリサイクルをサポートします。TiKV &gt;= v6.3.0 で読み取ることができます。
 -   デフォルト値:
@@ -2750,7 +2750,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 優先度の低いタスクに対するフロー制御戦略を指定します。TiKVは、優先度の低いタスクにフロー制御を適用することで、優先度の高いタスクの実行を優先します。
 
--   お得なオプション：
+-   値のオプション：
     -   `aggressive` : このポリシーは優先度の高いタスクのパフォーマンスを優先し、優先度の高いタスクのスループットとレイテンシーにはほとんど影響を与えないようにしますが、優先度の低いタスクの実行速度は低下します。
     -   `moderate` : このポリシーは、優先度の低いタスクに対してバランスの取れたフロー制御を課し、優先度の高いタスクへの影響を少なくします。
     -   `conservative` : このポリシーは、システム リソースが最大限に活用されることを優先し、優先度の低いタスクが必要に応じてシステムで利用可能なリソースを最大限に活用できるようにするため、優先度の高いタスクのパフォーマンスに大きな影響を与えます。
@@ -2867,7 +2867,7 @@ TiKVストレージレイヤーのリソース制御に関連するコンフィ�
 
 TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関連する構成項目。
 
-### <span class="version-mark">v8.5.0で</span>`enable` {#enable-new-in-v850}
+### `enable` <span class="version-mark">v8.5.0で追加</span> {#enable-new-in-v850}
 
 > **Note:**
 >

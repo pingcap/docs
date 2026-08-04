@@ -3,7 +3,7 @@ title: TIDB_HOT_REGIONS_HISTORY
 summary: TIDB_HOT_REGIONS_HISTORY`情報スキーマテーブルについて学習してください。
 ---
 
-# TIDB_ホットリージョン履歴 {#tidb-hot-regions-history}
+# TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}
 
 `TIDB_HOT_REGIONS_HISTORY`テーブルは、PD によって定期的にローカルに記録される履歴ホットリージョンに関する情報を提供します。
 

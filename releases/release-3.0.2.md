@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 3.0.2
     -   INDEX JOIN がプレフィックスインデックスを使用すると結果が間違ってしまう可能性がある問題を修正しました [＃11246](https://github.com/pingcap/tidb/pull/11246)
     -   `DATE_ADD`関数がマイクロ秒を含む日付数値の減算を行う際に分数の配置が誤っているために結果が間違っている可能性がある問題を修正しました[＃11288](https://github.com/pingcap/tidb/pull/11288)
     -   `DATE_ADD`関数が`INTERVAL` の負の数を誤って処理することによって発生する誤った結果を修正しました。 [＃11325](https://github.com/pingcap/tidb/pull/11325)
-    -   `Mod(%)` `Mod(%)` 0 を返し、 `Minus(-)`以下の桁数が大きい場合 ( `select 0.000 % 0.11234500000000000000`など)、 `Multiple(*)` `Minus(-)`返す小数点以下の桁数`Multiple(*)` MySQL と異なる問題を修正しました[＃11251](https://github.com/pingcap/tidb/pull/11251)
+    -   `Mod(%)` 、 `Multiple(*)` 、または`Minus(-)`が 0 を返し、小数点以下の桁数が大きい場合 ( `select 0.000 % 0.11234500000000000000`など)、 `Mod(%)` 、 `Multiple(*)` 、または`Minus(-)`が返す小数点以下の桁数が MySQL と異なる問題を修正しました[＃11251](https://github.com/pingcap/tidb/pull/11251)
     -   `CONCAT`と`CONCAT_WS`関数によって返される結果の長さが`max_allowed_packet`超えると、警告付きの`NULL`が誤って返される問題を修正しました[＃11275](https://github.com/pingcap/tidb/pull/11275)
     -   `SUBTIME`と`ADDTIME`関数のパラメータが無効な場合に警告付きの`NULL`が誤って返される問題を修正しました[＃11337](https://github.com/pingcap/tidb/pull/11337)
     -   `CONVERT_TZ`関数のパラメータが無効な場合に`NULL`が誤って返される問題を修正しました[＃11359](https://github.com/pingcap/tidb/pull/11359)

@@ -228,7 +228,7 @@ PD マイクロサービスが有効になっていないクラスターの場�
     tiup cluster edit-config <cluster-name>
     ```
 
-    `pd_mode: ms`に`global`加算します:
+    `global`に`pd_mode: ms`を追加します:
 
     ```ini
     global:

@@ -168,7 +168,7 @@ SET DEFAULT ROLE
     TO user [, user ]
 ```
 
-たとえば、次のステートメントを使用して、 `rw_user1@localhost` ～ `app_read`および`app_write`のデフォルト ロールを設定できます。
+たとえば、次のステートメントを使用して、 `rw_user1@localhost`のデフォルトロールを`app_read`および`app_write`に設定できます。
 
 ```sql
 SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
@@ -248,7 +248,7 @@ SET ROLE ALL EXCEPT 'app_read'
 SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
 ```
 
-`rw_user1@localhost`後、次のステートメントを実行できます。
+`rw_user1@localhost`のログイン後、次のステートメントを実行できます。
 
 ```sql
 SELECT CURRENT_ROLE();

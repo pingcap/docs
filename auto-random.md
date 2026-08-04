@@ -21,7 +21,7 @@ TiDB で同時書き込みの多いワークロードを処理する方法の詳
 
 `AUTO_RANDOM`は、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値は**ランダム**かつ**一意**です。
 
-`AUTO_RANDOM`列のテーブルを作成するには、以下のステートメントを使用します。3列目`AUTO_RANDOM`主キーに含まれている必要があり、 `AUTO_RANDOM`列は主キーの最初の列です。
+`AUTO_RANDOM`列のテーブルを作成するには、以下のステートメントを使用します。`AUTO_RANDOM`列は主キーに含まれている必要があり、 `AUTO_RANDOM`列は主キーの最初の列です。
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));

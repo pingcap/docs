@@ -9,7 +9,7 @@ summary: OpenAPI インターフェースを使用してクラスターのステ
 
 > **注記**
 >
-> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。1 [TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)使用をお勧めします。
+> TiCDC OpenAPI v1は非推奨であり、将来削除される予定です。[TiCDC オープンAPI v2](/ticdc/ticdc-open-api-v2.md)の使用をお勧めします。
 
 TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 

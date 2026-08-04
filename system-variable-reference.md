@@ -1487,7 +1487,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_collect_execution_info)
--   [TIDB_インデックス_使用法](/information-schema/information-schema-tidb-index-usage.md)
+-   [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)

@@ -43,7 +43,7 @@ summary: TiDB グローバル インデックスの使用例、利点、使用�
 -   **v7.6.0より前**：TiDBはパーティションテーブル上のローカルインデックスのみをサポートします。つまり、パーティションテーブルの一意キーには、パーティション式内のすべての列を含める必要があります。パーティションキーを使用しないクエリはすべてのパーティションをスキャンする必要があり、クエリパフォーマンスが低下します。
 -   **<a href="https://docs.pingcap.com/tidb/stable/release-7.6.0">v7.6.0</a>** : グローバルインデックスを有効にするシステム変数[`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)が導入されました。ただし、この機能は現時点ではまだ開発中であり、本番での使用は推奨されません。
 -   **<a href="https://docs.pingcap.com/tidb/stable/release-8.3.0">v8.3.0</a>** : グローバルインデックスが実験的機能としてリリースされました。インデックスを定義する際に`GLOBAL`キーワードを使用することで、明示的にグローバルインデックスを作成できます。
--   **<a href="https://docs.pingcap.com/tidb/stable/release-8.4.0">v8.4.0</a>** : グローバルインデックス機能が一般提供（GA）されました。システム変数`tidb_enable_global_index`を設定せずに、キーワード`GLOBAL`を使って直接グローバルインデックスを作成できます。このバージョン以降、システム変数 4 は非推奨となり、値は`ON`に固定されます。つまり、グローバルインデックスはデフォルトで有効になります。
+-   **<a href="https://docs.pingcap.com/tidb/stable/release-8.4.0">v8.4.0</a>** : グローバルインデックス機能が一般提供（GA）されました。システム変数`tidb_enable_global_index`を設定せずに、キーワード`GLOBAL`を使って直接グローバルインデックスを作成できます。このバージョン以降、システム変数は非推奨となり、値は`ON`に固定されます。つまり、グローバルインデックスはデフォルトで有効になります。
 -   **<a href="https://docs.pingcap.com/tidb/stable/release-8.5.0">v8.5.0</a>** : グローバル インデックスは、パーティション式のすべての列を含めることをサポートします。
 
 ## グローバルインデックスとローカルインデックス {#global-indexes-vs-local-indexes}

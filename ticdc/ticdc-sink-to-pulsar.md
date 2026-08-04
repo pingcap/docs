@@ -30,7 +30,7 @@ Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-repl
 
 -   `--server` : TiCDC クラスター内の TiCDCサーバーのアドレス。
 -   `--changefeed-id` : レプリケーションタスクのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`一致する必要があります。IDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
--   `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。2 [シンクURIを使用してPulsarを構成する](#sink-uri)参照してください。
+-   `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。[シンクURIを使用してPulsarを構成する](#sink-uri)を参照してください。
 -   `--start-ts` : チェンジフィードの開始TSO。TiCDCクラスターはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードのターゲットTSO。TiCDCクラスターはこのTSOでデータのプルを停止します。デフォルトでは空であり、TiCDCはデータのプルを自動的に停止しません。
 -   `--config` : changefeed設定ファイル[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。

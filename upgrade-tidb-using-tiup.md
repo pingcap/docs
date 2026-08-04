@@ -10,7 +10,7 @@ summary: TiUPを使用してTiDBをアップグレードする方法を学びま
 > **Warning:**
 >
 > 1.  TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。 CentOS Linux 7 で実行されているクラスターを v8.5 にアップグレードする場合は、クラスターが使用できなくなるリスクを避けるために、必ず TiDB v8.5.1 以降のバージョンを使用してください。詳細については、 [TiDB v8.5.1 リリースノート](/releases/release-8.5.1.md)を参照してください。
-> 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのTiFlashインスタンスをすべて停止し、その後オフラインでクラスタをアップグレードする必要があります。TiDB や TiKV などの他のコンポーネントがオンラインアップグレードをサポートしていない場合は、[オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。 。
+> 2.  TiFlash を5.3 より前のバージョンから 5.3 以降にオンラインでアップグレードすることはできません。代わりに、まず以前のバージョンのTiFlashインスタンスをすべて停止し、その後オフラインでクラスタをアップグレードする必要があります。TiDB や TiKV などの他のコンポーネントがオンラインアップグレードをサポートしていない場合は、[オンラインアップグレード](#online-upgrade)の警告の手順に従ってください。
 > 3.  アップグレード処理中はDDLステートメントを実行**しないでください**。実行すると、未定義の動作が発生する可能性があります。
 > 4.  TiDB クラスターで DDL ステートメントが実行されている間は、クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`や列型の変更など、時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターで DDL ジョブが実行中かどうかを確認することをお勧めします。クラスターで DDL ジョブが実行されている場合は、クラスターをアップグレードする前に、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてください。
 > 5.  アップグレード前の TiDB バージョンが 7.1.0 以降の場合は、前述の警告 3 と 4 を無視してかまいません。詳細については、 [TiDB スムーズアップグレードの使用に関する制限](/smooth-upgrade-tidb.md#limitations)を参照してください。
@@ -142,7 +142,7 @@ tiup update cluster
     tiup cluster edit-config <cluster-name>
     ```
 
-2.  フォーマットを参照[トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)設定テンプレートを参照し、トポロジファイルの`server_configs`セクションに変更したいパラメータを入力します。
+2.  [トポロジー](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)設定テンプレートのフォーマットを参照し、トポロジファイルの`server_configs`セクションに変更したいパラメータを入力します。
 
 3.  変更後、 <kbd>「:</kbd> + <kbd>w</kbd> + <kbd>q」</kbd>と入力して変更を保存し、編集モードを終了します。変更を確定するには<kbd>「Y」</kbd>と入力してください。
 
@@ -152,7 +152,7 @@ tiup update cluster
 
 -   クラスタDDL:
 
-    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)アップグレードを使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレード プロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
+    -   [スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して TiDB を v8.1.0 以降にアップグレードし、[分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっている場合は、アップグレードする前に DXF を無効にすることをお勧めします。そうしないと、アップグレード プロセス中に追加されたインデックスがデータと矛盾し、アップグレードが失敗する可能性があります。
     -   な を使用しない場合は、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)[スムーズなアップグレード](/smooth-upgrade-tidb.md)を使用して、実行中の DDL ジョブが存在するかどうかを確認することをお勧めします。実行中の DDL ジョブが存在する場合は、アップグレードを実行する前に、ジョブの実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを使用してキャンセルしてください。
 
 -   クラスタのバックアップ：クラスタ内でバックアップまたはリストアタスクが実行中かどうかを確認するには[`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)コマンドを実行することをお勧めします。実行中の場合は、アップグレードを実行する前にタスクが完了するまでお待ちください。

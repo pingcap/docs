@@ -7,9 +7,9 @@ summary: Vitess から TiDB にデータを移行するためのツールにつ�
 
 このドキュメントでは、 [Vitess](https://vitess.io/)から TiDB にデータを移行するために使用できるツールについて説明します。
 
-VitessのバックエンドはMySQLベースであるため、VitessからTiDBにデータを移行する際には、MySQLに適用できるものと同じ移行ツール[TiDB Data Migration (DM)](/dm/dm-overview.md) [Dumpling](/dumpling-overview.md)など[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用できます。これらのツールは、データ移行のためにVitess内の各シャードに対して設定する必要があることに注意してください。
+VitessのバックエンドはMySQLベースであるため、VitessからTiDBにデータを移行する際には、MySQLに適用できるものと[Dumpling](/dumpling-overview.md)、[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)、[TiDB Data Migration (DM)](/dm/dm-overview.md)などの同じ移行ツールを使用できます。これらのツールは、データ移行のためにVitess内の各シャードに対して設定する必要があることに注意してください。
 
-通常、データ移行前にDMタスクを`task-mode` ～ `all` ～ `physical`に設定することを推奨します。詳細については、 [タスク構成ファイルテンプレート（上級）](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) `import-mode`してください。
+通常、データ移行前にDMタスクの`task-mode`を`all`に、`import-mode`を`physical`に設定することを推奨します。詳細については、 [タスク構成ファイルテンプレート（上級）](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 データ サイズが 10 TiB を超える場合は、2 つの手順でインポートを実行することをお勧めします。
 

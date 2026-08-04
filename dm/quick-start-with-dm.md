@@ -371,7 +371,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
     mysql --host 127.0.0.1 --port 4000 -u root --prompt 'tidb> '
     ```
 
-3.  複製されたデータを確認します。1 [ステップ2](#step-2-prepare-a-source-database-optional)サンプルデータを作成した場合、MySQLソースデータベースからターゲットTiDBデータベースに複製されたテーブル`hello_tidb`が表示されます。
+3.  複製されたデータを確認します。[ステップ2](#step-2-prepare-a-source-database-optional)でサンプルデータを作成した場合、MySQLソースデータベースからターゲットTiDBデータベースに複製されたテーブル`hello_tidb`が表示されます。
 
     ```sql
     SELECT * FROM hello.hello_tidb;

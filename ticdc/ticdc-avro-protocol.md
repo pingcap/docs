@@ -82,7 +82,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 ## TiDB拡張フィールド {#tidb-extension-fields}
 
-デフォルトでは、AvroはDMLイベント内の変更された行のデータのみを収集し、データ変更の種類やTiDB固有のCommitTS（トランザクションの一意の識別子）は収集しません。この問題に対処するため、TiCDCはAvroプロトコルメッセージに以下の3つのTiDB拡張フィールドを導入しています。7で`enable-tidb-extension` `true` （デフォルトは`false` ）に設定すると、TiCDC `sink-uri`メッセージ生成時にこれらの3つのフィールドをAvroメッセージに追加します。
+デフォルトでは、AvroはDMLイベント内の変更された行のデータのみを収集し、データ変更の種類やTiDB固有のCommitTS（トランザクションの一意の識別子）は収集しません。この問題に対処するため、TiCDCはAvroプロトコルメッセージに以下の3つのTiDB拡張フィールドを導入しています。`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはメッセージ生成時にこれらの3つのフィールドをAvroメッセージに追加します。
 
 -   `_tidb_op` : DML タイプ。「c」は挿入を示し、「u」は更新を示します。
 -   `_tidb_commit_ts` : トランザクションの一意の識別子。
@@ -158,7 +158,7 @@ dispatchers = [
     }
 
 -   `{{ColumnName}}`列名を示します。
--   `{{TIDB_TYPE}}` TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
+-   `{{TIDB_TYPE}}`は TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
 -   `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
 | SQLの型             | TiDBの型             | AVRO_TYPE | 説明                                                                                                |
@@ -284,7 +284,7 @@ TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeseriali
 コンシューマー プログラムは、次のルールによって DML イベント タイプを区別できます。
 
 -   Key部分のみの場合はDeleteイベントになります。
--   キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。1 [TiDB拡張フィールド](#tidb-extension-fields)有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。
+-   キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。
 
 ## トピックの分布 {#topic-distribution}
 

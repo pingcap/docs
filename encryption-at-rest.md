@@ -19,13 +19,13 @@ TiDBクラスターをデプロイすると、ユーザーデータの大部分�
 
 ### TiKV {#tikv}
 
-TiKVは保存時の暗号化をサポートしています。この機能により、TiKVは[AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) in 5モードまたは[SM4](https://en.wikipedia.org/wiki/SM4_(cipher)) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)モードを使用してデータファイルを透過的に暗号化できます。保存時の暗号化を有効にするには、ユーザーが暗号化キーを提供する必要があります。このキーはマスターキーと呼ばれます。TiKVは、実際のデータファイルの暗号化に使用したデータキーを自動的にローテーションします。マスターキーは手動で随時ローテーションできます。保存時の暗号化は、保存中のデータ（つまりディスク上）のみを暗号化し、ネットワーク経由で転送中のデータは暗号化しないことに注意してください。保存時の暗号化とTLSを併用することをお勧めします。
+TiKVは保存時の暗号化をサポートしています。この機能により、TiKVは[AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)または[SM4](https://en.wikipedia.org/wiki/SM4_(cipher)) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)モードを使用してデータファイルを透過的に暗号化できます。保存時の暗号化を有効にするには、ユーザーが暗号化キーを提供する必要があります。このキーはマスターキーと呼ばれます。TiKVは、実際のデータファイルの暗号化に使用したデータキーを自動的にローテーションします。マスターキーは手動で随時ローテーションできます。保存時の暗号化は、保存中のデータ（つまりディスク上）のみを暗号化し、ネットワーク経由で転送中のデータは暗号化しないことに注意してください。保存時の暗号化とTLSを併用することをお勧めします。
 
 クラウド展開とセルフホスト展開の両方でキー管理サービス (KMS) を使用することも、プレーンテキストのマスター キーをファイルで提供することもできます。
 
 TiKVは現在、コアダンプから暗号鍵とユーザーデータを除外していません。保存時の暗号化を使用する場合は、TiKVプロセスのコアダンプを無効にすることをお勧めします。これは現在、TiKV自体では処理されていません。
 
-TiKVは、暗号化されたデータファイルをファイルの絶対パスを使用して追跡します。そのため、TiKVノードで暗号化が有効になった後は、ユーザーは`storage.data-dir`などのデータファイルパス設定を変更`rocksdb.wal-dir` `raftdb.wal-dir`で`raftstore.raftdb-path` 。
+TiKVは、暗号化されたデータファイルをファイルの絶対パスを使用して追跡します。そのため、TiKVノードで暗号化が有効になった後は、ユーザーは`storage.data-dir`、`raftstore.raftdb-path`、`rocksdb.wal-dir`、`raftdb.wal-dir`などのデータファイルパス設定を変更しないでください。
 
 SM4暗号化はTiKVバージョン6.3.0以降でのみサポートされます。TiKVバージョン6.3.0より前のバージョンではAES暗号化のみがサポートされます。SM4暗号化はパフォーマンスに影響を与えます。最悪の場合、スループットが50%～80%低下する可能性があります。ただし、 [`storage.block-cache`](/tikv-configuration-file.md#storageblock-cache)を十分に大きな値に設定することで、この影響を大幅に軽減し、スループットの低下を約10%に抑えることができます。
 
@@ -47,7 +47,7 @@ BRは、S3へのデータバックアップ時にS3サーバー側暗号化（SS
 
 ### ログ記録 {#logging}
 
-TiKV、TiDB、およびPD情報ログには、デバッグ用のユーザーデータが含まれる場合があります。情報ログとその中に含まれるデータは暗号化されません。1 [ログ編集](/log-redaction.md)有効にすることを推奨します。
+TiKV、TiDB、およびPD情報ログには、デバッグ用のユーザーデータが含まれる場合があります。情報ログとその中に含まれるデータは暗号化されません。[ログ編集](/log-redaction.md)を有効にすることを推奨します。
 
 ## 保存時の TiKV 暗号化 {#tikv-encryption-at-rest}
 
@@ -258,7 +258,7 @@ TiKVをGrafanaでデプロイしている場合は、保存時の暗号化を監
 -   暗号化メタファイル サイズ: 暗号化メタデータ ファイルのサイズ。
 -   読み取り/書き込み暗号化メタ期間: 暗号化のメタデータを操作するための追加のオーバーヘッド。
 
-デバッグのために、 `tikv-ctl`コマンドを使用すると、ファイルの暗号化に使用された暗号化方式やデータキーID、データキーのリストなどの暗号化メタデータをダンプできます。この操作により機密データが漏洩する可能性があるため、本番での使用は推奨されません。3 [TiKV Control](/tikv-control.md#dump-encryption-metadata)ドキュメントを参照してください。
+デバッグのために、 `tikv-ctl`コマンドを使用すると、ファイルの暗号化に使用された暗号化方式やデータキーID、データキーのリストなどの暗号化メタデータをダンプできます。この操作により機密データが漏洩する可能性があるため、本番での使用は推奨されません。[TiKV Control](/tikv-control.md#dump-encryption-metadata)ドキュメントを参照してください。
 
 ### TiKVバージョン間の互換性 {#compatibility-between-tikv-versions}
 
@@ -382,7 +382,7 @@ BRを使用して S3 にバックアップする際に S3 サーバー側の暗�
 
     tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 
-独自に作成し所有するカスタム AWS KMS CMK を使用するには、 `--s3.sse-kms-key-id`追加で渡します。この場合、 BRプロセスとクラスター内のすべての TiKV ノードの両方が KMS CMK にアクセスする必要があり（例：AWS IAM経由）、KMS CMK はバックアップの保存に使用する S3 バケットと同じ AWS リージョンに存在する必要があります。BR プロセスと TiKV ノードにBR IAM経由で KMS CMK へのアクセスを許可することをお勧めします[IAMは](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS ドキュメントを参照してください。例：
+独自に作成し所有するカスタム AWS KMS CMK を使用するには、 `--s3.sse-kms-key-id`追加で渡します。この場合、 BRプロセスとクラスター内のすべての TiKV ノードの両方が KMS CMK にアクセスする必要があり（例：AWS IAM経由）、KMS CMK はバックアップの保存に使用する S3 バケットと同じ AWS リージョンに存在する必要があります。BR プロセスと TiKV ノードに AWS IAM経由で KMS CMK へのアクセスを許可することをお勧めします。[IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS ドキュメントを参照してください。例：
 
     tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 

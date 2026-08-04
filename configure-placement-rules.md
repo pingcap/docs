@@ -279,7 +279,7 @@ pd-ctl config placement-rules rule-bundle save --in="rules.json"
 
 ### tidb-ctlを使用してテーブル関連のキー範囲を照会する {#use-tidb-ctl-to-query-the-table-related-key-range}
 
-メタデータまたは特定のテーブルに特別な設定が必要な場合は、「 [`keyrange`コマンド](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md) in [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの末尾に`--encode`を追加することを忘れないでください。
+メタデータまたは特定のテーブルに特別な設定が必要な場合は、[tidb-ctl](https://github.com/pingcap/tidb-ctl)の[`keyrange`コマンド](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md)を実行して関連キーをクエリできます。コマンドの末尾に`--encode`を追加することを忘れないでください。
 
 ```bash
 tidb-ctl keyrange --database test --table ttt --encode
@@ -308,7 +308,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ 1: 通常のテーブルに 3 つのレプリカを使用し、メタデータに 5 つのレプリカを使用してクラスタの耐障害性を向上させる {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
-キーの範囲をメタデータの範囲に制限するルールを追加し、値を`count`から`5`に設定するだけです。このルールの例を以下に示します。
+キーの範囲をメタデータの範囲に制限するルールを追加し、`count`の値を`5`に設定するだけです。このルールの例を以下に示します。
 
 ```json
 {
@@ -326,7 +326,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ2: 3つのデータセンターに5つのレプリカを2:2:1の割合で配置し、Leaderは3番目のデータセンターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center}
 
-3つのルールを作成します。レプリカ数をそれぞれ`2` 、 `2` 、 `1`に設定します。各ルールで、レプリカを対応するデータセンター`label_constraints`から 8 に制限します。さらに、Leaderを必要としないデータセンターについては、 `role`を`follower`に変更します。
+3つのルールを作成します。レプリカ数をそれぞれ`2` 、 `2` 、 `1`に設定します。各ルールで、 `label_constraints`によってレプリカを対応するデータセンターに制限します。さらに、Leaderを必要としないデータセンターについては、 `role`を`follower`に変更します。
 
 ```json
 [
@@ -371,7 +371,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ3: テーブルに2つのTiFlashレプリカを追加する {#scenario-3-add-two-tiflash-replicas-for-a-table}
 
-テーブルの行キーに別のルールを追加し、 `count`から`2`の範囲で制限します。 `label_constraints`を使用することで、レプリカが`engine = tiflash`のノードに生成されるようにします。ここで別途`group_id`を使用するのは、このルールがシステム内の他のソースのルールと重複したり衝突したりしないようにするためです。
+テーブルの行キーに別のルールを追加し、 `count`を`2`に制限します。 `label_constraints`を使用することで、レプリカが`engine = tiflash`のノードに生成されるようにします。ここで別途`group_id`を使用するのは、このルールがシステム内の他のソースのルールと重複したり衝突したりしないようにするためです。
 
 ```json
 {
@@ -410,7 +410,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ5: SSDディスクを搭載したノードにテーブルを移行する {#scenario-5-migrate-a-table-to-the-nodes-with-ssd-disks}
 
-シナリオ3とは異なり、このシナリオは既存の設定に基づいて新しいレプリカを追加するのではなく、データ範囲の他の設定を強制的に上書きします。そのため、ルールグループ設定で、十分な大きさの`index`値を指定し、既存のルールを上書きするには`override` ～ `true`を設定する必要があります。
+シナリオ3とは異なり、このシナリオは既存の設定に基づいて新しいレプリカを追加するのではなく、データ範囲の他の設定を強制的に上書きします。そのため、ルールグループ設定で、十分な大きさの`index`値を指定し、既存のルールを上書きするには`override`を`true`に設定する必要があります。
 
 ルール:
 

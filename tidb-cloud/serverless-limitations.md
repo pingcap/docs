@@ -20,7 +20,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 繋がり {#connection}
 
--   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。5 [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md) TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
+-   [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)は TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
 -   プライベートエンドポイントのサポート[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md) 。
 -   データベースクライアント接続は、30分以上開いたままになっていると、予期せず終了する可能性があります。これは、TiDBサーバーのシャットダウン、再起動、またはメンテナンス時に発生する可能性があり、アプリケーションの中断につながる可能性があります。この問題を回避するには、最大接続有効期間を設定してください。最初は5分から始め、テールレイテンシーに影響がある場合は徐々に増やすことを推奨します。詳細については、 [接続プールの推奨設定](/develop/dev-guide-connection-parameters.md)を参照してください。
 -   TiDB Cloud Starterクラスターでは、最大400の同時接続が可能です。[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定すると、この制限は5,000に増加します。

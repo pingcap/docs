@@ -145,7 +145,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
         172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
         Total nodes: 5
 
-    指定されたノードまたは指定されたロールにホットフィックスを適用します。1と`-N` `-R`が指定されている場合は、共通部分が採用されます。
+    指定されたノードまたは指定されたロールにホットフィックスを適用します。`-N`と`-R`の両方が指定されている場合は、共通部分が採用されます。
 
         # Apply hotfix to a specified node.
         tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8261

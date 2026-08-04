@@ -197,7 +197,7 @@ summary: TiDBの機能概要について学びましょう。
 | [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  E  |
 | [範囲列パーティショニング](/partitioned-table.md#range-columns-partitioning)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |  N  |
 | [範囲 INTERVAL 分割](/partitioned-table.md#range-interval-partitioning)                                          |  Y  |  Y  |  Y  |  Y  |  E  |  N  |  N  |
-| [パーティションテーブルをパーティションテーブルに変換する](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
+| [パーティションテーブルを非パーティションテーブルに変換する](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [既存のテーブルをパーティション分割する](/partitioned-table.md#partition-an-existing-table)                                     |  Y  |  Y  |  Y  |  N  |  N  |  N  |  N  |
 | [グローバルインデックス](/global-indexes.md)                                                                            |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |
 
@@ -319,10 +319,10 @@ summary: TiDBの機能概要について学びましょう。
 
 [^2]: バージョン6.5.0以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数にリストされている関数に対して作成された式インデックスはテスト済みであり、本番環境で使用できます。今後のリリースでは、さらに多くの関数がサポートされる予定です。この変数にリストされていない関数については、対応する式インデックスは本番環境での使用は推奨されません。詳細については、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
-[^3]: サポートされている SQL ステートメントの完全なリストについては[ステートメント参照](/sql-statements/sql-statement-select.md)てください。
+[^3]: サポートされている SQL ステートメントの完全なリストについては[ステートメント参照](/sql-statements/sql-statement-select.md)を参照してください。
 
 [^4]: [v6.4.0](/releases/release-6.4.0.md)以降、TiDB は[高性能かつグローバルに単調な`AUTO_INCREMENT`列](/auto-increment.md#mysql-compatibility-mode)をサポートします
 
-[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
+[^5]: [TiDB v7.0.0](/releases/release-7.0.0.md)以降、新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的機能です。[v7.6.0](/releases/release-7.6.0.md)以降、TiDB は`LOAD DATA`トランザクションで MySQL と同じように処理します。トランザクション内の`LOAD DATA`ステートメントは、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`ステートメントを明示的にコミットまたはロールバックできます。また、 `LOAD DATA`ステートメントは、TiDB トランザクション モード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。
 
 [^6]: バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlogは完全に非推奨となりました。バージョン 8.4.0 以降、TiDB Binlogは削除されました。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。TiDB クラスタをバージョン 8.4.0 以降にアップグレードする前に、必ず TiCDC と PITR に切り替えてください。

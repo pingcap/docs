@@ -19,7 +19,7 @@ SQLの配置ルールは、SQL文を使用してTiKVクラスタ内のデータ�
 
 ## 概要 {#overview}
 
-SQL の配置ルール機能を使用すると、配置ポリシー[配置ポリシーを作成する](#create-and-attach-placement-policies)、次のように粗いものから細かいものまで、さまざまなレベルでデータに必要な配置ポリシーを構成できます。
+SQL の配置ルール機能を使用すると、[配置ポリシーを作成し](#create-and-attach-placement-policies)、次のように粗いものから細かいものまで、さまざまなレベルでデータに必要な配置ポリシーを構成できます。
 
 | レベル     | 説明                                                                                                                                                                        |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -97,7 +97,7 @@ SHOW PLACEMENT LABELS;
     このステートメントでは、
 
     -   `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードに`us-east-1`としてRaftリーダーを配置することを意味します。
-    -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region` - `us-east-1`として、 `region`ラベルのノードに`us-west-1`として Raft Followers を配置することを意味します。
+    -   `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルが`us-east-1`のノードと`region`ラベルが`us-west-1`のノードに Raft Followers を配置することを意味します。
 
     構成可能な配置オプションとその意味の詳細については、「[配置オプション](#placement-option-reference)を参照してください。
 
@@ -155,13 +155,13 @@ SHOW PLACEMENT LABELS;
     1 row in set
     ```
 
--   クラスタ内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `tidb_placement_policy_name`システムテーブルの`information_schema.tables`列をクエリします。
+-   クラスタ内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
     ```
 
--   クラスタ内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `tidb_placement_policy_name`システムテーブルの`information_schema.partitions`列をクエリします。
+-   クラスタ内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `information_schema.partitions`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
@@ -248,7 +248,7 @@ CREATE PLACEMENT POLICY five_replicas FOLLOWERS=4;
 ALTER RANGE global PLACEMENT POLICY five_replicas;
 ```
 
-TiDB ではリーダーの数がデフォルトで`1`に設定されているため、 `five replicas`は`4`フォロワーと`1`のLeader。
+TiDB ではリーダーの数がデフォルトで`1`に設定されているため、 `five replicas`は`4`つのフォロワーと`1`つのLeaderを意味します。
 
 ### データベースのデフォルトの配置ポリシーを指定します。 {#specify-a-default-placement-policy-for-a-database}
 
@@ -314,8 +314,8 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 -   `p0`パーティションには`storageforhistorydata`ポリシーが適用されます。
 -   `p4`パーティションには`storagefornewdata`ポリシーが適用されます。
--   `p1` 、 `p2` 、および`p3`パーティションは、テーブル`companystandardpolicy`から継承された`t1`ポリシーを適用します。
--   グローバルインデックス`idx`は、テーブル`companystandardpolicy`と同じ`t1`配置ポリシーを適用します。
+-   `p1` 、 `p2` 、および`p3`パーティションは、テーブル`t1`から継承された`companystandardpolicy`ポリシーを適用します。
+-   グローバルインデックス`idx`は、テーブル`t1`と同じ`companystandardpolicy`配置ポリシーを適用します。
 -   テーブル`t1`に対して配置ポリシーが指定されていない場合、 `p1` 、 `p2` 、 `p3`パーティションとグローバルインデックス`idx`データベースのデフォルトポリシーまたはグローバルのデフォルトポリシーを継承します。
 
 これらのパーティションに配置ポリシーを適用した後、次の例のように、特定のパーティションの配置ポリシーを変更できます。
@@ -410,7 +410,7 @@ SHOW PLACEMENT;
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1": 1}';
 ```
 
-この配置ポリシーが作成され、目的のデータに適用されると、データのRaftLeaderレプリカは`us-east-1`オプションで指定された`LEADER_CONSTRAINTS`リージョンに配置され、その他のデータのレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。クラスターが障害を起こした場合（たとえば、 `us-east-1`リージョンでノードが停止した場合など）、これらのリージョン`FOLLOWER_CONSTRAINTS`で指定されていても、他のリージョンから新しいLeaderが選出されることに注意してください。つまり、サービスの可用性を確保することが最優先事項となります。
+この配置ポリシーが作成され、目的のデータに適用されると、データのRaftLeaderレプリカは`LEADER_CONSTRAINTS`オプションで指定された`us-east-1`リージョンに配置され、その他のデータのレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。クラスターが障害を起こした場合（たとえば、 `us-east-1`リージョンでノードが停止した場合など）、これらのリージョン`FOLLOWER_CONSTRAINTS`で指定されていても、他のリージョンから新しいLeaderが選出されることに注意してください。つまり、サービスの可用性を確保することが最優先事項となります。
 
 `us-east-1`領域で障害が発生した場合、 `us-west-1`に新しいリーダーを配置したくない場合は、特別な`evict-leader`属性を設定して、その領域で新たに選出されたリーダーを排除することができます。
 

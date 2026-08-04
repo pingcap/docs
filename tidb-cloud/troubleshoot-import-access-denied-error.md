@@ -148,7 +148,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 このサンプル ポリシーでは、次の点に注意してください。
 
--   `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`データストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`追加されていない場合、 `AccessDenied`エラーが発生します。
+-   `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`はデータストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`が追加されていない場合、 `AccessDenied`エラーが発生します。
 
 -   カスタマー管理のキー暗号化で AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。`"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`はバケットのサンプル KMS キーです。
 

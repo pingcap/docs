@@ -13,7 +13,7 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 デプロイされたマシンのオペレーティングシステムのディストリビューションとバージョンを確認してください。サポートされているバージョンのリストについては、 [OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を参照してください。
 
-### CPU EPOLLEX限定 {#cpu-epollexclusive}
+### CPU EPOLLEXCLUSIVE {#cpu-epollexclusive}
 
 対象マシンのCPUがEPOLLEXCLUSIVEをサポートしているかどうかを確認します。
 
@@ -72,9 +72,9 @@ THP が有効になっているかどうかを確認するには、次のコマ�
 
 ### SELinux {#selinux}
 
-SELinuxを無効にするか、permissiveモードに設定する必要があります。現在のステータスを確認するには、 [ゲットエンフォース(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用してください。
+SELinuxを無効にするか、permissiveモードに設定する必要があります。現在のステータスを確認するには、 [getenforce(8)](https://linux.die.net/man/8/getenforce)ユーティリティを使用してください。
 
-SELinuxが無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を`SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。7または`enforcing` `permissive` `disabled`への変更は、再起動しないと有効になりません。
+SELinuxが無効になっていない場合は、 `/etc/selinux/config`ファイルを開き、 `SELINUX=`で始まる行を`SELINUX=disabled`に変更します。この変更を行った後、システムを再起動する必要があります。`enforcing`または`permissive`から`disabled`への変更は、再起動しないと有効になりません。
 
 一部のシステム（Ubuntuなど）では、 `/etc/selinux/config`ファイルが存在せず、getenforceユーティリティがインストールされていない場合があります。その場合は、この手順をスキップしてください。
 

@@ -22,7 +22,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | [JSON_CONTAINS()](/functions-and-operators/json-functions/json-functions-search.md#json_contains)           | 指定された候補JSONドキュメントがターゲットJSONドキュメント内に含まれているかどうかを1または0を返すことで示します。                    |
 | [JSON_CONTAINS_PATH()](/functions-and-operators/json-functions/json-functions-search.md#json_contains_path) | JSONドキュメントに指定されたパスのデータが含まれているかどうかを示す0または1を返します。                                   |
 | [JSON_EXTRACT()](/functions-and-operators/json-functions/json-functions-search.md#json_extract)             | `path`引数に一致するドキュメントの部分から選択されたJSONドキュメントからデータを返します。                                |
-| [-&gt;](/functions-and-operators/json-functions/json-functions-search.md#-)                                 | 評価パスの後のJSON列から値を返します。1の別名です`JSON_EXTRACT(doc, path_literal)`                      |
+| [-&gt;](/functions-and-operators/json-functions/json-functions-search.md#-)                                 | 評価パスの後のJSON列から値を返します。`JSON_EXTRACT(doc, path_literal)`の別名です。                      |
 | [-&gt;&gt;](/functions-and-operators/json-functions/json-functions-search.md#--1)                           | 評価パスの後のJSON列から値を返し、結果を引用符で囲まない`JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名。 |
 | [JSON_KEYS()](/functions-and-operators/json-functions/json-functions-search.md#json_keys)                   | JSONオブジェクトの最上位レベルの値からキーをJSON配列として返します。パス引数が指定されている場合は、選択したパスから最上位レベルのキーを返します。     |
 | [JSON_SEARCH()](/functions-and-operators/json-functions/json-functions-search.md#json_search)               | JSONドキュメントで文字列の1つまたはすべてに一致するものを検索する                                               |
@@ -60,7 +60,7 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | [JSON_PRETTY()](/functions-and-operators/json-functions/json-functions-utility.md#json_pretty)             | JSONドキュメントのきれいなフォーマット                                                             |
 | [JSON_STORAGE_FREE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_free) | JSON 値のバイナリ表現が更新された後に解放されたストレージ容量を返します。                                         |
-| [JSON_ストレージサイズ()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size)     | JSON値を格納するために必要なバイト数の概算値を返します。このサイズはTiKV圧縮を考慮していないため、この関数の出力はMySQLと厳密には互換性がありません。 |
+| [JSON_STORAGE_SIZE()](/functions-and-operators/json-functions/json-functions-utility.md#json_storage_size)     | JSON値を格納するために必要なバイト数の概算値を返します。このサイズはTiKV圧縮を考慮していないため、この関数の出力はMySQLと厳密には互換性がありません。 |
 
 ## 集計関数 {#aggregate-functions}
 

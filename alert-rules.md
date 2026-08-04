@@ -395,7 +395,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
 -   解決：
 
-    -   店内に十分なスペースがあるかどうかを確認します。
+    -   ストア内に十分なスペースがあるかどうかを確認します。
     -   ラベル構成が設定されている場合は、それに従って追加のレプリカ用のストアがあるかどうかを確認します。
 
 #### `PD_cluster_slow_tikv_nums` {#pd_cluster_slow_tikv_nums}
@@ -467,7 +467,7 @@ summary: TiDB クラスターのアラート ルールについて学習しま�
 
     1.  ネットワークがクリアかどうかを確認してください。
     2.  リモート TiKV がダウンしていないかどうかを確認します。
-    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎないか確認してください。1の解決策を参照してください[`TiKV_channel_full_total`](#tikv_channel_full_total)
+    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎないか確認してください。[`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### `TiKV_channel_full_total` {#tikv_channel_full_total}
 

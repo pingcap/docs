@@ -94,7 +94,7 @@ TiDB は`AUTO_INCREMENT`暗黙的な割り当てを次のように実装しま�
 CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 ```
 
-クラスター内に2つのTiDBインスタンス（ `A`と`B`があるとします。7テーブルに対してそれぞれ`t`と`B` `A` `INSERT`ステートメントを実行すると、次のようになります。
+クラスター内に2つのTiDBインスタンス（ `A`と`B` ）があるとします。`A`と`B`でそれぞれ`t`テーブルに対して`INSERT`ステートメントを実行すると、次のようになります。
 
 ```sql
 INSERT INTO t (c) VALUES (1)

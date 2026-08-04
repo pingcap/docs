@@ -3,7 +3,7 @@ title: tiup dm disable
 summary: tiup dm disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。`-N, --node`オプションを使用してノードを指定し、`-R, --role`オプションを使用して自動有効化を無効にするロールを指定できます。出力はtiup-dmコマンドの実行ログです。
 ---
 
-# tiup dm 無効 {#tiup-dm-disable}
+# tiup dm disable {#tiup-dm-disable}
 
 クラスタサービスが配置されているマシンを再起動すると、クラスタサービスは自動的に有効化されます。クラスタサービスの自動有効化を無効にするには、コマンド`tiup dm disable`を使用します。このコマンドは、指定されたノードでコマンド`systemctl disable <service>`を実行し、サービスの自動有効化を無効にします。
 

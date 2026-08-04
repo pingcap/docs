@@ -128,7 +128,7 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 > **Note:**
 >
-> changefeed `start-ts`エラー発生時の`checkpoint-ts`に 1 を加えた値に設定してタスクを再作成すると、DDL 文をスキップできますが、TiCDC が`checkpointTs+1`の時点での DML データ変更を失う可能性があります。したがって、この操作は実本番環境では厳禁です。
+> changefeed の`start-ts`をエラー発生時の`checkpoint-ts`に 1 を加えた値に設定してタスクを再作成すると、DDL 文をスキップできますが、TiCDC が`checkpointTs+1`の時点での DML データ変更を失う可能性があります。したがって、この操作は実本番環境では厳禁です。
 
 ```shell
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
