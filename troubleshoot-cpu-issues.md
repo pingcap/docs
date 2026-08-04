@@ -33,7 +33,7 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
         -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
 -   実行プランをバインドする
     -   アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
-    -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
+    -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません。`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
     -   4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行プランによるパフォーマンスの低下を回避します。
 
 ### PD異常 {#pd-anomalies}
@@ -44,17 +44,17 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 #### 考えられる理由 {#possible-reasons}
 
--   ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェック**を**実行することもできます。
+-   ディスクの問題です。PDノードが配置されているディスクのI/O負荷が最大になっています。PDノードが、I/O需要の高い他のコンポーネントと同時にデプロイされていないか、またディスクの健全性を確認してください。Grafanaのモニターメトリクス（**ディスクパフォーマンス**、**レイテンシー**/**負荷**）を確認することで原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。
 
 -   PDピア間のネットワークに問題が発生しています。PDログには`lost the TCP streaming connection`が表示されています。Grafana -&gt; **PD** -&gt; **etcd**モニターの`round trip`を確認して、PDノード間のネットワークに問題が発生し**て**いないか確認し、原因を検証する必要があります。
 
 -   サーバーの負荷が高いです。ログには`server is likely overloaded`が表示されています。
 
--   PD がLeaderを選出できません: PD ログには`lease is not expired`表示されます。3 [この号](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。
+-   PD がLeaderを選出できません: PD ログには`lease is not expired`が表示されます。[この号](https://github.com/etcd-io/etcd/issues/10355)は v3.0.x および v2.1.19 で修正されました。
 
 -   リーダー選出が遅い。リージョンの読み込み時間が長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒など秒単位の場合、リージョンの読み込みが遅いことを意味します。v3.0では、 `use-region-storage`を`true`に設定することで`region storage`機能を有効にでき、リージョンの読み込み時間を大幅に短縮できます。
 
--   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー****モニター**にアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
+-   TiDBとPD間のネットワークに問題があります。Grafana -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDBからPD Leaderへのネットワークが正常に動作しているかどうかを確認してください。
 
 -   PDは`FATAL`エラーを報告しますが、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されました。
 
@@ -62,7 +62,7 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
 
--   PDはパニックになる[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) 。
+-   PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) 。
 
 -   その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
 
@@ -128,7 +128,7 @@ CPU リソースの使用量がボトルネックになります。
 
 一般的なケースでは、まずデフォルト値（ `4`と`256` ）をそのままにして、クラスターのリソース使用量と応答速度を観察し、その後、同時実行性を高めるために値を`tidb_ddl_reorg_worker_cnt`に増やします。モニターで明らかなジッターが見られない場合は、値を`tidb_ddl_reorg_batch_size`に増やします。インデックス作成に関係する列が頻繁に更新される場合、結果として生じる多くの競合により、インデックス作成が失敗し、再試行されることになります。
 
-さらに、インデックス作成を優先して処理を高速化するために、値を`tidb_ddl_reorg_priority` ～ `PRIORITY_HIGH`設定することもできます。ただし、一般的なOLTPシステムでは、デフォルト値のままにしておくことをお勧めします。
+さらに、インデックス作成を優先して処理を高速化するために、`tidb_ddl_reorg_priority`の値を`PRIORITY_HIGH`に設定することもできます。ただし、一般的なOLTPシステムでは、デフォルト値のままにしておくことをお勧めします。
 
 ### 高いGC圧力 {#high-gc-pressure}
 

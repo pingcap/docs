@@ -83,7 +83,7 @@ Dumplingの基本は次のとおりです。
 TiDB Lightning は次のモードをサポートしています。
 
 -   `Physical Import Mode` : TiDB Lightningはデータを順序付けられたキーと値のペアに解析し、TiKVに直接インポートします。このモードは通常、テラバイト単位の大容量データを新しいクラスターにインポートするために使用されます。インポート中、クラスターはサービスを提供できません。
--   `Logical Import Mode` : このモードでは、バックエンドとしてTiDB/MySQLを使用します。2よりも速度`Physical Import Mode`遅いですが、オンラインで実行できます。また、MySQLへのデータインポートもサポートしています。
+-   `Logical Import Mode` : このモードでは、バックエンドとしてTiDB/MySQLを使用します。`Physical Import Mode`よりも速度が遅いですが、オンラインで実行できます。また、MySQLへのデータインポートもサポートしています。
 
 TiDB Lightningの基本は次のとおりです。
 
@@ -125,7 +125,7 @@ TiCDC の基本は次のとおりです。
 
 ### sync-diff-inspector {#sync-diff-inspector}
 
-[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) 、MySQLまたはTiDBデータベースに保存されているデータを比較するツールです。さらに、少量のデータに不整合がある場合、sync-diff-inspectorを使用してデータを修復することもできます。
+[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)は、MySQLまたはTiDBデータベースに保存されているデータを比較するツールです。さらに、少量のデータに不整合がある場合、sync-diff-inspectorを使用してデータを修復することもできます。
 
 sync-diff-inspector の基本は次のとおりです。
 

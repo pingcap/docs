@@ -273,7 +273,7 @@ v8.4.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 TiDB をアップグレードする前に、オペレーティング システムのバージョンが[OSおよびプラットフォームの要件](/hardware-and-software-requirements.md#os-and-platform-requirements)を満たしていることを確認してください。
 
--   [CentOS Linux サポート終了](https://www.centos.org/centos-linux-eol/)CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了しました。そのため、TiDB は v8.4.0 で CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。CentOS 7 上の TiDB クラスタを v8.4.0 にアップグレードすると、クラスタが利用できなくなります。
+-   [CentOS Linux サポート終了](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 7 のアップストリームサポートは 2024 年 6 月 30 日に終了しました。そのため、TiDB は v8.4.0 で CentOS 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。CentOS 7 上の TiDB クラスタを v8.4.0 にアップグレードすると、クラスタが利用できなくなります。
 -   [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024 年 6 月 30 日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。
 
 ## 削除された機能 {#removed-features}

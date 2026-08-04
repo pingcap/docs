@@ -41,7 +41,7 @@ summary: パイプラインDMLのユースケース、メソッド、制限事�
 -   パイプライン DML 操作中に[メタデータロック](/metadata-lock.md)が有効になっていることを確認します。
 -   パイプラインDMLを有効にしてDML文を実行する際、TiDBは以下の条件をチェックします。いずれかの条件が満たされない場合、TiDBは標準のDML実行にフォールバックし、警告を生成します。
     -   サポートされるステートメントは[自動コミット](/transaction-overview.md#autocommit)だけです。
-    -   `INSERT` 、 `REPLACE` `DELETE` `UPDATE`のみがサポートされます。
+    -   `INSERT` 、 `UPDATE` 、 `REPLACE` 、 `DELETE`のみがサポートされます。
     -   ターゲット テーブルには[一時テーブル](/temporary-tables.md)または[キャッシュされたテーブル](/cached-tables.md)含めることはできません。
     -   [外部キー制約](/foreign-key.md)有効になっている場合（ `foreign_key_checks = ON` ）、ターゲットテーブルに外部キー関係を含めることはできません。
 -   `INSERT IGNORE ... ON DUPLICATE KEY UPDATE`ステートメントを実行すると、競合する更新によって`Duplicate entry`エラーが発生する可能性があります。

@@ -41,7 +41,7 @@ LRUリンクリストは、 `Prepare` / `Execute`セッションをまたいで�
 -   `Execute`が実行されるデータベースの名前
 -   `Prepare`のステートメントの識別子、つまり`PREPARE`のキーワードの後の名前
 -   現在のスキーマバージョン。DDL文が正常に実行されるたびに更新されます。
--   実行時のSQLモード`Execute`
+-   `Execute`実行時のSQLモード
 -   現在のタイムゾーン（システム変数`time_zone`の値）
 -   `sql_select_limit`システム変数の値
 

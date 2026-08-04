@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 
 ## TiDB {#tidb}
 
--   `INSERT` / `REPLACE` / `DELETE` / `UPDATE`の実行中に使用されたメモリが[＃14289](https://github.com/pingcap/tidb/pull/14289) `MemQuotaQuery`項目で指定された制限を超えた場合、ログを出力するか、SQL 実行をキャンセルします。実際の動作は`OOMAction`設定に依存します。13 [＃14179](https://github.com/pingcap/tidb/pull/14179) [＃14299](https://github.com/pingcap/tidb/pull/14299)
+-   `INSERT` / `REPLACE` / `DELETE` / `UPDATE`の実行中に使用されたメモリが`MemQuotaQuery`設定項目で指定された制限を超えた場合、ログを出力するか、SQL 実行をキャンセルします。実際の動作は`OOMAction`設定に依存します。 [＃14179](https://github.com/pingcap/tidb/pull/14179) [＃14289](https://github.com/pingcap/tidb/pull/14289) [＃14299](https://github.com/pingcap/tidb/pull/14299)
 -   駆動テーブルと被駆動テーブルの両方の行数を考慮して、 `Index Join`のコスト計算の精度を高めます。 [＃12085](https://github.com/pingcap/tidb/pull/12085)
 -   オプティマイザの動作を制御し、オプティマイザをより安定させるために 15 個の SQL ヒントを追加します。
     -   [＃11253](https://github.com/pingcap/tidb/pull/11253) [＃11364](https://github.com/pingcap/tidb/pull/11364) [＃11673](https://github.com/pingcap/tidb/pull/11673) [＃11740](https://github.com/pingcap/tidb/pull/11740) [＃11746](https://github.com/pingcap/tidb/pull/11746)

@@ -7,7 +7,7 @@ summary: TiUPのPlaygroundコンポーネントを使用して、ローカルTiD
 
 TiDBクラスタは、複数のコンポーネントで構成される分散システムです。一般的なTiDBクラスタは、少なくとも3つのPDノード、3つのTiKVノード、および2つのTiDBノードで構成されます。TiDBをすぐに試してみたい場合、これほど多くのコンポーネントを手動でデプロイするのは時間と手間がかかるかもしれません。このドキュメントでは、 TiUPのPlaygroundコンポーネントと、それを使用してローカルのTiDBテスト環境を迅速に構築する方法について説明します。
 
-## TiUP遊具施設の概要 {#tiup-playground-overview}
+## TiUP Playgroundの概要 {#tiup-playground-overview}
 
 Playgroundコンポーネントの基本的な使用方法を以下に示します。
 

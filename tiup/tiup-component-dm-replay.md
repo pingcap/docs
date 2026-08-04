@@ -13,7 +13,7 @@ summary: tiup dm replay` コマンドを使用すると、失敗したクラス�
 tiup dm replay <audit-id> [flags]
 ```
 
--   `<audit-id>` : 再試行するコマンドの`audit-id` 。6 [`tiup dm audit`](/tiup/tiup-component-dm-audit.md)を使用すると、履歴コマンドとその`audit-id`を表示できます。
+-   `<audit-id>` : 再試行するコマンドの`audit-id` 。[`tiup dm audit`](/tiup/tiup-component-dm-audit.md)を使用すると、履歴コマンドとその`audit-id`を表示できます。
 
 ## オプション {#option}
 

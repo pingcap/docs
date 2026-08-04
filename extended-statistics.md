@@ -85,7 +85,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 <details><summary>仕組み</summary>
 
-ステートメントを実行すると、TiDB はオブジェクトを直接削除するのではなく、 `mysql.stats_extended`の列`status` ～ `2`に該当するオブジェクトの値をマークします。
+ステートメントを実行すると、TiDB はオブジェクトを直接削除するのではなく、 `mysql.stats_extended`の該当するオブジェクトの`status`列の値を`2`にマークします。
 
 他のTiDBノードはこの変更を読み取り、メモリキャッシュ内のオブジェクトを削除します。最終的にはバックグラウンドガベージコレクションによってオブジェクトが削除されます。
 

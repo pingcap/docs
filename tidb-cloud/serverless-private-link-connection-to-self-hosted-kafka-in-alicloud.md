@@ -112,7 +112,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 [ECSコンソール](https://ecs.console.alibabacloud.com/home#/)に進みます。vSwitch に 3 つのブローカー ノード (AZ ごとに 1 つ) を作成します。
 
--   vSwitch 1 のブローカー`broker-ap-southeast-1a`
+-   vSwitch `broker-ap-southeast-1a`のブローカー 1
 
     -   **ネットワークとゾーン**: `Kafka VPC`および`broker-ap-southeast-1a` vSwitch
     -   **インスタンスとイメージ**: `ecs.t5-lc1m2.small`インスタンスタイプと`Alibaba Cloud Linux`イメージ

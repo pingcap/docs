@@ -85,7 +85,7 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 ### ヒストグラム {#histogram}
 
-ヒストグラム統計は、オプティマイザが区間または範囲述語の選択性を推定するために使用され、また、統計のバージョン 2 で等号/IN 述語を推定するために列内の異なる値の数を決定するためにも使用される場合があります (統計[統計のバージョン](#versions-of-statistics)を参照)。
+ヒストグラム統計は、オプティマイザが区間または範囲述語の選択性を推定するために使用され、また、統計のバージョン 2 で等号/IN 述語を推定するために列内の異なる値の数を決定するためにも使用される場合があります ( [統計のバージョン](#versions-of-statistics)を参照)。
 
 ヒストグラムは、データの分布を近似的に表現したものです。値の全範囲を複数のバケットに分割し、各バケットに含まれる値の数など、単純なデータを用いて各バケットを記述します。TiDBでは、各テーブルの特定の列に対して等深ヒストグラムが作成されます。この等深ヒストグラムは、区間クエリの推定に利用できます。
 
@@ -103,16 +103,16 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 Count-Min Sketch はハッシュ構造です。 `a = 1`や`IN`クエリ (例えば`a IN (1, 2, 3)` ) のような等価性クエリを処理する際、TiDB はこのデータ構造を使用して推定を行います。
 
-Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。EXPLAIN [`EXPLAIN`](/sql-statements/sql-statement-explain.md)において、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなすことができます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取ることができます。
+Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントにおいて、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなすことができます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取ることができます。
 
--   `WITH NUM TOPN`パラメータを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 を参照[手動収集](#manual-collection)てください。
--   `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2 つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメータの詳細については、 を参照[手動収集](#manual-collection)てください。
+-   `WITH NUM TOPN`パラメータを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
+-   `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2 つのパラメータを変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメータの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 
 ### トップN {#top-n}
 
 トップN値とは、列またはインデックス内で出現頻度が最も高いN個の値のことです。トップN統計は、頻度統計またはデータスキューと呼ばれることもあります。
 
-TiDB は上位 N 個の値とその出現回数を記録します。ここでは`N`は`WITH NUM TOPN`パラメータによって制御されます。デフォルト値は 20 で、これは最も頻繁に出現する上位 20 個の値が収集されることを意味します。最大値は 1024 です。パラメータの詳細については、 を参照[手動収集](#manual-collection)てください。
+TiDB は上位 N 個の値とその出現回数を記録します。ここでは`N`は`WITH NUM TOPN`パラメータによって制御されます。デフォルト値は 20 で、これは最も頻繁に出現する上位 20 個の値が収集されることを意味します。最大値は 1024 です。パラメータの詳細については、 [手動収集](#manual-collection)を参照してください。
 
 ## 選択的統計収集 {#selective-statistics-collection}
 
@@ -218,7 +218,7 @@ TiDB は、パーティション分割されたテーブルに、パーティシ
 
     -   一部のパーティションで、すべての列または一部の列の統計情報が欠落している場合、TiDB はグローバル統計情報の生成時にこれらの欠落したパーティション統計情報をスキップするため、グローバル統計情報の生成には影響しません。
 
-動的プルーニングモードでは、パーティションとテーブルの`ANALYZE`構成は同じである必要があります。したがって、 `COLUMNS`ステートメントの後に`ANALYZE TABLE TableName PARTITION PartitionNameList` }構成を指定した場合、または`OPTIONS`の後に`WITH` }構成を指定した場合、TiDBはそれらを無視して警告を返します。
+動的プルーニングモードでは、パーティションとテーブルの`ANALYZE`構成は同じである必要があります。したがって、`ANALYZE TABLE TableName PARTITION PartitionNameList`ステートメントの後に`COLUMNS`構成を指定した場合、または`WITH`の後に`OPTIONS`構成を指定した場合、TiDBはそれらを無視して警告を返します。
 
 ## 収集パフォーマンスを向上させる {#improve-collection-performance}
 
@@ -413,7 +413,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 `ANALYZE`の状態と統計情報は、以下のステートメントを使用して表示できます。
 
-### 状態<code>ANALYZE</code> {#code-analyze-code-state}
+### <code>ANALYZE</code>状態 {#code-analyze-code-state}
 
 `ANALYZE`ステートメントを実行すると、 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)を使用して`ANALYZE`の現在の状態を表示できます。
 
@@ -498,7 +498,7 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 </CustomContent>
 
-## 輸出入統計 {#export-and-import-statistics}
+## 統計情報のエクスポートとインポート {#export-and-import-statistics}
 
 このセクションでは、統計情報のエクスポートとインポートの方法について説明します。
 
@@ -510,11 +510,11 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 </CustomContent>
 
-### 輸出統計 {#export-statistics}
+### 統計情報のエクスポート {#export-statistics}
 
 統計情報をエクスポートするためのインターフェースは以下のとおりです。
 
--   `${table_name}`データベース内の`${db_name}`テーブルの JSON 形式の統計情報を取得するには：
+-   `${db_name}`データベース内の`${table_name}`テーブルの JSON 形式の統計情報を取得するには：
 
         http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}
 
@@ -524,7 +524,7 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
     curl -s http://127.0.0.1:10080/stats/dump/test/t1 -o /tmp/t1.json
     ```
 
--   `${table_name}` `${db_name}`テーブルの特定の時刻における JSON 形式の統計情報を取得するには：
+-   `${db_name}`データベース内の`${table_name}`テーブルの特定の時刻における JSON 形式の統計情報を取得するには：
 
         http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}/${yyyyMMddHHmmss}
 
@@ -599,7 +599,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-テーブル`t`と`ANALYZE`の統計情報をロック解除して、再度実行できます。
+テーブル`t`の統計情報をロック解除すると、`ANALYZE`を再度正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t;
@@ -673,7 +673,7 @@ mysql> SHOW WARNINGS;
 2 rows in set (0.00 sec)
 ```
 
-パーティション`p1`と`ANALYZE`の統計情報のロック解除を再度正常に実行できます。
+パーティション`p1`の統計情報のロックを解除すると、`ANALYZE`を再度正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t PARTITION p1;
@@ -718,20 +718,20 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
     SHOW ANALYZE STATUS
     ```
 
-    結果の`instance`列と`process_id`列を確認することで、TiDB インスタンス アドレスと、バックグラウンド`ID`タスクのタスク`ANALYZE`を取得できます。
+    結果の`instance`列と`process_id`列を確認することで、TiDB インスタンス アドレスと、バックグラウンド`ANALYZE`タスクのタスク`ID`を取得できます。
 
 2.  バックグラウンドで実行されている`ANALYZE`タスクを終了します。
 
     <CustomContent platform="tidb">
 
-    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ID`タスクの`ANALYZE`です。
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
     -   `enable-global-kill`が`false`の場合、クライアントを使用してバックエンドの`ANALYZE`タスクを実行している TiDB インスタンスに接続し、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `KILL`ステートメントではバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    `ANALYZE`タスクを終了するには、 `KILL TIDB ${id};`ステートメントを実行します。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ID`タスクの`ANALYZE`です。
+    `ANALYZE`タスクを終了するには、 `KILL TIDB ${id};`ステートメントを実行します。ここで、 `${id}`は、前の手順で取得したバックグラウンド`ANALYZE`タスクの`ID`です。
 
     </CustomContent>
 

@@ -83,7 +83,7 @@ server_configs:
 
 ## `master_servers` {#master_servers}
 
-`master_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`master_servers`配列です。各配列要素には以下のフィールドが含まれます。
+`master_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`master_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -140,7 +140,7 @@ master_servers:
 
 ## `worker_servers` {#worker_servers}
 
-`worker_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`worker_servers`配列です。各配列要素には以下のフィールドが含まれます。
+`worker_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`worker_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -184,7 +184,7 @@ worker_servers:
 
 ### `monitoring_servers` {#monitoring_servers}
 
-`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます`monitoring_servers`配列です。各配列要素には以下のフィールドが含まれます。
+`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -242,7 +242,7 @@ monitoring_servers:
 
 ### `grafana_servers` {#grafana_servers}
 
-`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます`grafana_servers`配列です。各配列要素には以下のフィールドが含まれます。
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`grafana_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -280,7 +280,7 @@ grafana_servers:
 
 ### `alertmanager_servers` {#alertmanager_servers}
 
-`alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。

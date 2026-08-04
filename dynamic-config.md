@@ -173,7 +173,7 @@ show warnings;
 | `quota.background-read-bandwidth`                         | バックグラウンドトランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限                                                                                                 |
 | `quota.enable-auto-tune`                                  | クォータの自動調整を有効にするかどうか。この設定項目を有効にすると、TiKV インスタンスの負荷に基づいて、バックグラウンドリクエストのクォータが動的に調整されます。                                                        |
 | `quota.max-delay-duration`                                | 単一の読み取りまたは書き込み要求がフォアグラウンドで処理されるまでに強制的に待機される最大時間                                                                                            |
-| `gc.ratio-threshold`                                      | リージョンGCをスキップするしきい値（GCの数versions/theキーの数）                                                                                                   |
+| `gc.ratio-threshold`                                      | リージョンGCをスキップするしきい値（GCのバージョン数/キーの数）                                                                                                   |
 | `gc.batch-keys`                                           | 1バッチで処理されるキーの数                                                                                                                             |
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                   |
 | `gc.enable-compaction-filter`                             | 圧縮フィルタを有効にするかどうか                                                                                                                           |
@@ -217,11 +217,11 @@ show warnings;
 | `server.raft-msg-max-batch-size`                          | 1つのgRPCメッセージに含まれるRaftメッセージの最大数を設定します。                                                                                                      |
 | `server.simplify-metrics`                                 | サンプリング監視メトリックを簡素化するかどうかを制御します                                                                                                              |
 | `storage.block-cache.capacity`                            | 共有ブロックキャッシュのサイズ（v4.0.3以降でサポート）                                                                                                             |
-| storage.フロー制御.有効                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
-| storage.フロー制御.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
+| storage.flow-control.enable                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
+| storage.flow-control.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
 | storage.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
 | storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
-| storage.フロー制御.ハード保留圧縮バイト制限                                | フロー制御メカニズムがすべての書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
+| storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込み要求を拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC 要求を処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
@@ -236,7 +236,7 @@ show warnings;
 | `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                                         |
 | `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                                      |
 
-上記の表で、プレフィックスが`{db-name}`または`{db-name}.{cf-name}`パラメータはRocksDB関連の設定です。5のオプション値は`db-name` `rocksdb` `raftdb`です。
+上記の表で、`{db-name}`または`{db-name}.{cf-name}`プレフィックスを持つパラメータはRocksDB関連の設定です。`db-name`のオプション値は`rocksdb`と`raftdb`です。
 
 -   `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
 -   `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。

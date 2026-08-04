@@ -167,7 +167,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 -   TiDBサーバーのステータスレポートポート
 -   デフォルト: `"10080"`
--   このポートはサーバー内部データを取得するために使用されます。データには[Prometheusメトリクス](https://prometheus.io/)と[専門家](https://golang.org/pkg/net/http/pprof/)含まれます。
+-   このポートはサーバー内部データを取得するために使用されます。データには[Prometheusメトリクス](https://prometheus.io/)と[pprof](https://golang.org/pkg/net/http/pprof/)が含まれます。
 -   Prometheus メトリックには`"http://host:status_port/metrics"`でアクセスできます。
 -   pprof データには`"http://host:status_port/debug/pprof"`でアクセスできます。
 

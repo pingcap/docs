@@ -39,7 +39,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
 TiFlashのワークロードが大きすぎてTiFlashデータのレプリケーションが遅れる場合、一部のクエリでエラー`Region Unavailable`が返されることがあります。
 
-この場合、ワークロードを[TiFlashノードの追加](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)ずつバランスさせることができます。
+この場合、ワークロードを[TiFlashノードの追加](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)することでバランスさせることができます。
 
 ## データファイルの破損 {#data-file-corruption}
 
@@ -253,7 +253,7 @@ TiFlashノードをデプロイし、 `ALTER TABLE ... SET TIFLASH REPLICA ...`�
 
 5.  PD が適切にスケジュールされているかどうかを確認します。
 
-    `pd.log`ファイルで`table-<table_id>-r`というキーワードを検索し、 `add operator`ようなスケジューリングログを見つけてください。または、Grafana の PD ダッシュボードの**Operator/Schedule オペレータ作成で**`add-rule-peer`オペレータが存在するかどうかを確認してください。また、Grafana の PD ダッシュボードで**Scheduler/Patrol リージョン時間の**値を確認することもできます。Patrol **リージョン時間は、PD がすべてのリージョンをスキャンしてスケジューリング操作を生成するまでの所要時間です。値が大きいと、**スケジューリングに遅延が発生する可能性があります。
+    `pd.log`ファイルで`table-<table_id>-r`というキーワードを検索し、 `add operator`ようなスケジューリングログを見つけてください。または、Grafana の PD ダッシュボードの**Operator/Schedule オペレータ作成で**`add-rule-peer`オペレータが存在するかどうかを確認してください。また、Grafana の PD ダッシュボードで**Scheduler/Patrol リージョン時間の**値を確認することもできます。**Patrol リージョン時間**は、PD がすべてのリージョンをスキャンしてスケジューリング操作を生成するまでの所要時間です。値が大きいと、スケジューリングに遅延が発生する可能性があります。
 
     -   `pd.log`キーワード`table-<table_id>-r`と`add operator`スケジュール ログが含まれている場合、または**Scheduler/Patrol リージョン時間**パネルの期間値が正常に表示される場合は、PD スケジュールが適切に機能していることを示します。
     -   `add-rule-peer`スケジュールログが見つからない場合、または**パトロールリージョンの時間**が30分を超える場合、PD はスケジュールを正しく実行していないか、スケジュールの実行に時間がかかっています。TiDB、PD、およびTiFlash のログファイルを[サポートを受ける](/support.md)に収集してください。

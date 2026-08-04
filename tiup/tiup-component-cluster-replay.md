@@ -13,7 +13,7 @@ summary: tiup cluster replay` コマンドを使用すると、失敗したク�
 tiup cluster replay <audit-id> [flags]
 ```
 
--   `<audit-id>` : 再試行するコマンドの`audit-id` 。6 [`tiup cluster audit`](/tiup/tiup-component-cluster-audit.md)を使用すると、履歴コマンドとその`audit-id`を表示できます。
+-   `<audit-id>` : 再試行するコマンドの`audit-id` 。[`tiup cluster audit`](/tiup/tiup-component-cluster-audit.md)を使用すると、履歴コマンドとその`audit-id`を表示できます。
 
 ## オプション {#option}
 

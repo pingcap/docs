@@ -571,7 +571,7 @@ TiDBはMySQLのエラーコードと互換性があり、ほとんどの場合�
 
     完全なエラーメッセージ: `ERROR 9006 (HY000): GC life time is shorter than transaction duration`
 
-    間隔`GC Life Time`は短すぎます。長いトランザクションによって読み取られるはずだったデータが削除される可能性があります。3 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)次のコマンドで調整できます。
+    `GC Life Time`の間隔は短すぎます。長いトランザクションによって読み取られるはずだったデータが削除される可能性があります。[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)は次のコマンドで調整できます。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '30m';

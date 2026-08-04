@@ -129,11 +129,11 @@ TiKVコプロセッサータスクフィールド：
 -   `Cop_proc_avg` : RocksDB のミューテックスなど、カウントできない待機時間を含む、cop-tasks の平均実行時間。
 -   `Cop_proc_p90` : cop-tasks の P90 実行時間。
 -   `Cop_proc_max` : cop-tasks の最大実行時間。
--   `Cop_proc_addr` : 実行時間が最も長いコップタスクのアドレス。
+-   `Cop_proc_addr` : 実行時間が最も長い cop-task のアドレス。
 -   `Cop_wait_avg` : リクエストのキューイングとスナップショットの取得時間を含む、cop-tasks の平均待機時間。
--   `Cop_wait_p90` : 警官タスクの P90 待機時間。
--   `Cop_wait_max` : 警官タスクの最大待機時間。
--   `Cop_wait_addr` : 待ち時間が最も長い警官タスクのアドレス。
+-   `Cop_wait_p90` : cop-tasks の P90 待機時間。
+-   `Cop_wait_max` : cop-tasks の最大待機時間。
+-   `Cop_wait_addr` : 待ち時間が最も長い cop-task のアドレス。
 -   `Rocksdb_delete_skipped_count` : RocksDB がデータをスキャンする際に検出する削除済み (tombstone) キーの数。
 -   `Rocksdb_key_skipped_count` : RocksDB がデータをスキャンする際に遭遇するすべてのキーの数。
 -   `Rocksdb_block_cache_hit_count` : RocksDB がブロックキャッシュからデータを読み取る回数。
@@ -143,7 +143,7 @@ TiKVコプロセッサータスクフィールド：
 -   `Cop_backoff_{backoff-type}_total_times` : エラーによって発生したバックオフの合計回数。
 -   `Cop_backoff_{backoff-type}_total_time` : エラーによって発生したバックオフの合計時間。
 -   `Cop_backoff_{backoff-type}_max_time` : エラーによって発生したバックオフの最長時間。
--   `Cop_backoff_{backoff-type}_max_addr` : エラーによって最も長いバックオフ時間が発生したコップタスクのアドレス。
+-   `Cop_backoff_{backoff-type}_max_addr` : エラーによって最も長いバックオフ時間が発生した cop-task のアドレス。
 -   `Cop_backoff_{backoff-type}_avg_time` : エラーによって発生するバックオフの平均時間。
 -   `Cop_backoff_{backoff-type}_p90_time` : エラーによって発生した P90 パーセンタイルバックオフ時間。
 
@@ -207,7 +207,7 @@ TiKVコプロセッサータスクフィールド：
 
 フィールドの詳細な説明、診断の意味、背景情報については、 [`identify-slow-queries`のフィールド説明](/identify-slow-queries.md#fields-description)を参照してください。
 
-特に断りのない限り、次の表のフィールドは [統一されたルール構文と型制約](#unified-rule-syntax-and-type-constraints)型安定」で説明されている一般的な一致および型ルールに従います。この表には、現在サポートされているフィールド名、タイプ、単位、およびルール固有のいくつかの注意事項のみがリストされています。各フィールドの意味論的な意味を繰り返すことはありません。
+特に断りのない限り、次の表のフィールドは [統一されたルール構文と型制約](#unified-rule-syntax-and-type-constraints)で説明されている一般的な一致および型ルールに従います。この表には、現在サポートされているフィールド名、タイプ、単位、およびルール固有のいくつかの注意事項のみがリストされています。各フィールドの意味論的な意味を繰り返すことはありません。
 
 | フィールド名                                       | タイプ      | ユニット | 注記                                 |
 | -------------------------------------------- | -------- | ---- | ---------------------------------- |
@@ -215,23 +215,23 @@ TiKVコプロセッサータスクフィールド：
 | `Session_alias`                              | `string` | なし   | -                                  |
 | `DB`                                         | `string` | なし   | マッチング時に大文字小文字を区別しない                |
 | `Exec_retry_count`                           | `uint`   | カウント | -                                  |
-| `Query_time`                                 | `float`  | 2番   | -                                  |
-| `Parse_time`                                 | `float`  | 2番   | -                                  |
-| `Compile_time`                               | `float`  | 2番   | -                                  |
-| `Rewrite_time`                               | `float`  | 2番   | -                                  |
-| `Optimize_time`                              | `float`  | 2番   | -                                  |
-| `Wait_TS`                                    | `float`  | 2番   | -                                  |
+| `Query_time`                                 | `float`  | 秒   | -                                  |
+| `Parse_time`                                 | `float`  | 秒   | -                                  |
+| `Compile_time`                               | `float`  | 秒   | -                                  |
+| `Rewrite_time`                               | `float`  | 秒   | -                                  |
+| `Optimize_time`                              | `float`  | 秒   | -                                  |
+| `Wait_TS`                                    | `float`  | 秒   | -                                  |
 | `Is_internal`                                | `bool`   | なし   | -                                  |
 | `Digest`                                     | `string` | なし   | -                                  |
 | `Plan_digest`                                | `string` | なし   | -                                  |
 | `Num_cop_tasks`                              | `int`    | カウント | -                                  |
 | `Mem_max`                                    | `int`    | バイト  | -                                  |
 | `Disk_max`                                   | `int`    | バイト  | -                                  |
-| `Write_sql_response_total`                   | `float`  | 2番   | -                                  |
+| `Write_sql_response_total`                   | `float`  | 秒   | -                                  |
 | `Succ`                                       | `bool`   | なし   | -                                  |
 | `Resource_group`                             | `string` | なし   | マッチング時に大文字小文字を区別しない                |
-| `KV_total`                                   | `float`  | 2番   | -                                  |
-| `PD_total`                                   | `float`  | 2番   | -                                  |
+| `KV_total`                                   | `float`  | 秒   | -                                  |
+| `PD_total`                                   | `float`  | 秒   | -                                  |
 | `Unpacked_bytes_sent_tikv_total`             | `int`    | バイト  | -                                  |
 | `Unpacked_bytes_received_tikv_total`         | `int`    | バイト  | -                                  |
 | `Unpacked_bytes_sent_tikv_cross_zone`        | `int`    | バイト  | -                                  |
@@ -240,13 +240,13 @@ TiKVコプロセッサータスクフィールド：
 | `Unpacked_bytes_received_tiflash_total`      | `int`    | バイト  | -                                  |
 | `Unpacked_bytes_sent_tiflash_cross_zone`     | `int`    | バイト  | -                                  |
 | `Unpacked_bytes_received_tiflash_cross_zone` | `int`    | バイト  | -                                  |
-| `Process_time`                               | `float`  | 2番   | -                                  |
-| `Backoff_time`                               | `float`  | 2番   | -                                  |
+| `Process_time`                               | `float`  | 秒   | -                                  |
+| `Backoff_time`                               | `float`  | 秒   | -                                  |
 | `Total_keys`                                 | `uint`   | カウント | -                                  |
 | `Process_keys`                               | `uint`   | カウント | -                                  |
 | `cop_mvcc_read_amplification`                | `float`  | 比率   | 比率値（ `Total_keys / Process_keys` ） |
-| `Prewrite_time`                              | `float`  | 2番   | -                                  |
-| `Commit_time`                                | `float`  | 2番   | -                                  |
+| `Prewrite_time`                              | `float`  | 秒   | -                                  |
+| `Commit_time`                                | `float`  | 秒   | -                                  |
 | `Write_keys`                                 | `uint`   | カウント | -                                  |
 | `Write_size`                                 | `uint`   | バイト  | -                                  |
 | `Prewrite_region`                            | `uint`   | カウント | -                                  |
@@ -255,7 +255,7 @@ TiKVコプロセッサータスクフィールド：
 
 -   ルール更新動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = '...'`の実行ごとに、既存のルールに追加するのではなく、そのスコープ内の既存のルールを上書きします。
 -   ルールクリア動作: `SET [SESSION|GLOBAL] tidb_slow_log_rules = ''`対応するスコープ内のルールをクリアします。
--   現在のセッションに、 `tidb_slow_log_rules`ルール、現在の`SESSION`に対する`GLOBAL`ルール、または`Conn_ID`を含まない一般的なグローバルルールなど、適用可能な`Conn_ID`がある場合、スロークエリログの出力はルールのマッチング結果によって決定され、 `tidb_slow_log_threshold`は使用されなくなります。
+-   現在のセッションに、`SESSION`ルール、現在の`Conn_ID`に対する`GLOBAL`ルール、または`Conn_ID`を含まない一般的なグローバルルールなど、適用可能な`tidb_slow_log_rules`がある場合、スロークエリログの出力はルールのマッチング結果によって決定され、 `tidb_slow_log_threshold`は使用されなくなります。
 -   現在のセッションに適用可能なルールがない場合、たとえば`SESSION`と`GLOBAL`両方のルールが空の場合、または現在の`GLOBAL`に一致しない`Conn_ID`ルールのみが構成されている場合、スロークエリのログ記録は`tidb_slow_log_threshold`に依存します。単位はミリ秒であることに注意してください。
 -   スローログを書き込む条件としてSQL実行時間を使用したい場合は、ルール内で`Query_time`を使用し、単位が秒であることに注意してください。
 -   ルールマッチングロジック：
@@ -385,7 +385,7 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
 >
 > 指定された期間のスローログファイルが削除された場合、またはスロークエリが存在しない場合、クエリはNULLを返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは`SLOW_QUERY`に`INSTANCE`列が追加されている点で`CLUSTER_SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
+TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照会するための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されました。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されている点で`SLOW_QUERY`テーブルのスキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` 、 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同様に使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
@@ -613,7 +613,7 @@ ORDER BY  t1.sum_query_time DESC limit 10\G
 
 ### 他のTiDBスローログファイルを解析する {#parse-other-tidb-slow-log-files}
 
-TiDB は`tidb_slow_query_file` `INFORMATION_SCHEMA.SLOW_QUERY`を使用します。セッション変数の値を変更することで、他のスロークエリログファイルの内容をクエリできます。
+TiDB は`INFORMATION_SCHEMA.SLOW_QUERY`をクエリする際に読み取り・解析するファイルを制御するためにセッション変数`tidb_slow_query_file`を使用します。セッション変数の値を変更することで、他のスロークエリログファイルの内容をクエリできます。
 
 ```sql
 set tidb_slow_query_file = "/path-to-log/tidb-slow.log"

@@ -68,7 +68,7 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 3 rows in set (0.62 sec)
 ```
 
-実行結果の列`execution info`は、コプロセッサーキャッシュのヒット率を示す「 `copr_cache_hit_ratio`という情報が表示されます。上記の例の「 `0.75`は、ヒット率が約75%であることを意味します。
+実行結果の列`execution info`は、コプロセッサーキャッシュのヒット率を示す`copr_cache_hit_ratio`という情報が表示されます。上記の例の`0.75`は、ヒット率が約75%であることを意味します。
 
 <CustomContent platform="tidb-cloud" plan="dedicated">
 

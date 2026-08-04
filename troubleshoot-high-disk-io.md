@@ -55,7 +55,7 @@ TiDBクラスターのメインstorageコンポーネントはTiKVです。1つ�
 
 -   `apply log`は遅いです。TiKV Grafana の`Raft I/O`と`apply log duration`指標は比較的高く、これは通常、 `Raft Propose` / `apply wait duration`指標も比較的高い場合に発生します。考えられる原因は次のとおりです。
 
-    -   `[raftstore]`のうち`apply-pool-size`は小さすぎます。この値は`[1, 5]`から大きすぎない範囲に設定することをお勧めします。7と`Thread CPU` `apply cpu`比較的高い値です。
+    -   `[raftstore]`のうち`apply-pool-size`は小さすぎます。この値は`[1, 5]`の範囲で、大きすぎないように設定することをお勧めします。`Thread CPU`/`apply cpu`の値も比較的高くなっています。
     -   マシンの CPU リソースが不足しています。
     -   単一リージョンの書き込みホットスポットの問題（現在、この問題の解決は進行中です）。単一スレッド`apply`のCPU使用率が高くなっています（Grafana式に`by (instance, name)`追加することで確認できます）。
     -   RocksDBへの書き込み速度が遅く、 `RocksDB kv` / `max write duration`高い値です。1つのRaftログには複数のキーと値のペア（kv）が含まれる場合があります。128 kvが一括でRocksDBに書き込まれるため、 `apply`ログ1つにつきRocksDBへの書き込みが複数回発生する可能性があります。

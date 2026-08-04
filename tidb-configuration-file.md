@@ -260,7 +260,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   テーブルロック機能を有効にするかどうかを制御します。
 -   デフォルト値: `false`
--   テーブルロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロックタイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES はサポートされていません」という警告が表示されます。詳細については、「 [`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)を参照してください。
+-   テーブルロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロックタイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES はサポートされていません」という警告が表示されます。詳細については、[`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)を参照してください。
 
 ### `labels` {#labels}
 
@@ -270,7 +270,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 > **Note:**
 >
 > -   TiDBでは、 `zone`ラベルは、サーバーが配置されているゾーンを指定するために特別に使用されます。 `zone`がnull以外の値に設定されている場合、対応する値は[`txn-score`](/system-variables.md#txn_scope)や[`Follower read`](/follower-read.md)などの機能によって自動的に使用されます。
-> -   `group`ラベルは、TiDB Operatorにおいて特別な用途があります。TiDB [TiDB Operator](/tidb-operator-overview.md)を使用してデプロイされたクラスタでは、 `group`ラベルを手動で指定することは推奨さ**れません**。
+> -   `group`ラベルは、TiDB Operatorにおいて特別な用途があります。[TiDB Operator](/tidb-operator-overview.md)を使用してデプロイされたクラスタでは、 `group`ラベルを手動で指定することは推奨さ**れません**。
 
 ## log {#log}
 
@@ -429,7 +429,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### `cluster-ssl-key` {#cluster-ssl-key}
 
--   TiKVまたはPDをTLSに接続するために使用されるSSL秘密鍵ファイルのパス。
+-   TiKVまたはPDをTLSで接続するために使用されるSSL秘密鍵ファイルのパス。
 -   デフォルト値: &quot;&quot;
 
 ### `cluster-verify-cn` {#cluster-verify-cn}
@@ -589,7 +589,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **Note:**
 >
-> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 を使用して[リソース制御](/tidb-resource-control-ru-groups.md)異なるSQLステートメントのリソース使用量を管理することをお勧めします。
+> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQLステートメントのリソース使用量を管理することをお勧めします。
 
 ### `distinct-agg-push-down` {#distinct-agg-push-down}
 
@@ -713,7 +713,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 #### `local-agent-host-port` {#local-agent-host-port}
 
--   記者がメールを送る宛先は、イェーガーエージェントに繋がっている。
+-   レポーターがスパンを jaeger-agent に送信する宛先アドレス。
 -   デフォルト値: `""`
 
 ## pd-client {#pd-client}
@@ -763,9 +763,9 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ### `batch-policy` <span class="version-mark">v8.3.0の新機能</span> {#batch-policy-new-in-v830}
 
--   TiDB から TiKV へのリクエストのバッチ処理戦略を制御します。TiDB は、TiKV にリクエストを送信する際、常に現在の待機キュー内のリクエストを`BatchCommandsRequest`にカプセル化し、パケットとして TiKV に送信します。これが基本的なバッチ処理戦略です。TiKV の負荷スループットが高い場合、TiDB は`batch-policy`の値に基づいて、基本的なバッチ処理の後にさらに待機するかどうかを決定します。この追加のバッチ処理により、より多くのリクエストを単一の`BatchCommandsRequest`にカプセル化されたできます。
+-   TiDB から TiKV へのリクエストのバッチ処理戦略を制御します。TiDB は、TiKV にリクエストを送信する際、常に現在の待機キュー内のリクエストを`BatchCommandsRequest`にカプセル化し、パケットとして TiKV に送信します。これが基本的なバッチ処理戦略です。TiKV の負荷スループットが高い場合、TiDB は`batch-policy`の値に基づいて、基本的なバッチ処理の後にさらに待機するかどうかを決定します。この追加のバッチ処理により、より多くのリクエストを単一の`BatchCommandsRequest`にカプセル化できます。
 -   デフォルト値: `"standard"`
--   お得なオプション：
+-   値のオプション:
     -   `"basic"` : この動作は、v8.3.0 より前のバージョンと一致しており、TiDB は[`tikv-client.max-batch-wait-time`](#max-batch-wait-time)が 0 より大きく、TiKV の負荷が[`tikv-client.overload-threshold`](#overload-threshold)の値を超えた場合にのみ追加のバッチ処理を実行します。
     -   `"standard"` : TiDB は、最近のリクエストの到着時間間隔に基づいてリクエストを動的にバッチ処理します。これは、高スループットのシナリオに適しています。
     -   `"positive"` : TiDB は常に追加のバッチ処理を実行します。これは、最適なパフォーマンスを実現するために、高スループットのテストシナリオに適しています。ただし、低負荷のシナリオでは、この戦略により不要なバッチ処理の待機時間が発生し、パフォーマンスが低下する可能性があります。
@@ -814,7 +814,7 @@ opentracing.reporter に関連するコンフィグレーション項目。
 
 ### tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-clientcopr-cache-new-in-v400}
 
-[コプロセッサーキャッシュ](/coprocessor-cache.md)キャッシュ機能に関する設定項目を紹介します。
+[コプロセッサーキャッシュ](/coprocessor-cache.md)機能に関する設定項目を紹介します。
 
 #### `capacity-mb` {#capacity-mb}
 
@@ -880,7 +880,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ### pessimistic-auto-commit は<span class="version-mark">v6.0.0 で追加されました。</span> {#pessimistic-auto-commit-new-in-v600}
 
--   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` } に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
+-   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
 -   競合が発生するシナリオでは、この設定を有効にすると、TiDB は自動コミットトランザクションをグローバルロック待機管理に組み込み、デッドロックを回避し、デッドロックを引き起こす競合によって発生するレイテンシーの急増を軽減します。
 -   競合のないシナリオで、自動コミット トランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミット トランザクションの数がアプリケーションの総数の半分以上を占める場合)、単一のトランザクションが大量のデータを操作すると、この構成を有効にするとパフォーマンスが低下します。たとえば、自動コミット`INSERT INTO SELECT`ステートメントです。
 -   セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)が`"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。
@@ -962,7 +962,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 > **Note:**
 >
-> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 を使用して[リソース制御](/tidb-resource-control-ru-groups.md)異なるSQLステートメントのリソース使用量を管理することをお勧めします。
+> バージョン6.6.0以降、TiDBは[リソース制御](/tidb-resource-control-ru-groups.md)サポートしています。この機能を使用すると、異なるリソースグループで異なる優先度のSQLステートメントを実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、異なる優先度のSQLステートメントのスケジューリングをより適切に制御できます。リソース制御が有効になっている場合、ステートメントの優先度は適用されなくなります。 [リソース制御](/tidb-resource-control-ru-groups.md)を使用して、異なるSQLステートメントのリソース使用量を管理することをお勧めします。
 
 ### `max_connections` {#max_connections}
 

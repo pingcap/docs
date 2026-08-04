@@ -99,7 +99,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
 2.  Kafka トピック内のデータを消費します。
 
-    チェンジフィードが正常に動作すると、Kafkaトピックにデータが書き込まれます。実行`kafka-console-consumer.sh`では、データがKafkaトピックに正常に書き込まれていることを確認できます。
+    チェンジフィードが正常に動作すると、Kafkaトピックにデータが書き込まれます。`kafka-console-consumer.sh`を実行すると、データがKafkaトピックに正常に書き込まれていることを確認できます。
 
     ```shell
     ./bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --from-beginning --topic `${topic-name}`

@@ -36,7 +36,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 シンプルなシナリオでは、スキーマとテーブルのマッチングにワイルドカードを使用することをお勧めします。ただし、以下のバージョンの違いにご注意ください。
 
--   `*` `[]`含むワイルドカードがサポートされています。ワイルドカードマッチでは`*`記号は1 `?`だけ使用でき、末尾になければなりません。例えば、 `tbl-name: "t*"`の場合、 `"t*"` `t`で始まるすべてのテーブルを表します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
+-   `*` 、 `?` 、 `[]`を含むワイルドカードがサポートされています。ワイルドカードマッチでは`*`記号は1つだけ使用でき、末尾になければなりません。例えば、 `tbl-name: "t*"`の場合、 `"t*"`は`t`で始まるすべてのテーブルを表します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)を参照してください。
 
 -   正規表現は`~`文字で始まる必要があります。
 
@@ -44,8 +44,8 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 -   `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマのリストを許可します。
 -   `ignore-dbs` : 移行するスキーマのブロック リスト (MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に類似)。
--   `do-tables` : 移行するテーブルのリストを許可します（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。4と`tbl-name` `db-name`を指定する必要があります。
--   `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。4と`tbl-name` `db-name`を指定する必要があります。
+-   `do-tables` : 移行するテーブルのリストを許可します（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
+-   `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 
 上記のパラメータの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータは、スキーマ名またはテーブル名を一致させるために使用できます。
 
