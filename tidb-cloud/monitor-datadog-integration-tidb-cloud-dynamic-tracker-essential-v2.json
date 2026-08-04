@@ -961,7 +961,6 @@
                   "formulas": [
                     {
                       "number_format": {},
-                      "alias": "total",
                       "formula": "query1"
                     }
                   ],
