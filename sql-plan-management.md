@@ -372,17 +372,17 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 
 | カラム名        | 注記                                                                                                                                                    |
 | :---------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| オリジナルSQL    | パラメータ化後の元のSQL文                                                                                                                                        |
-| バインドSQL     | ヒント付きのバインドされたSQL文                                                                                                                                     |
-| デフォルトデータベース | デフォルトのデータベース                                                                                                                                          |
-| 状態          | ステータスには`enabled` (v6.0 の`using`ステータスを置き換えます)、 `disabled` 、 `deleted` 、 `invalid` 、 `rejected` 、および`pending verify`が含まれます                              |
-| 作成時間        | 作成時間                                                                                                                                                 |
-| 更新時間        | 更新時間                                                                                                                                                  |
-| 文字セット       | 文字セット                                                                                                                                                 |
-| 照合順序        | 順序付けルール                                                                                                                                               |
-| ソース         | バインディングが作成される方法`manual` (SQL ステートメントに従って作成される)、 `history` (履歴実行プランに従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
-| sql_ダイジェスト  | 正規化されたSQL文のダイジェスト                                                                                                                                     |
-| プランダイジェスト   | 実行計画のダイジェスト                                                                                                                                           |
+| original_sql | パラメータ化後の元のSQL文                                                                                                                                        |
+| bind_sql | ヒント付きのバインドされたSQL文                                                                                                                                     |
+| default_db | デフォルトのデータベース                                                                                                                                          |
+| status | ステータスには`enabled` (v6.0 の`using`ステータスを置き換えます)、 `disabled` 、 `deleted` 、 `invalid` 、 `rejected` 、および`pending verify`が含まれます                              |
+| create_time | 作成時刻                                                                                                                                                 |
+| update_time | 更新時刻                                                                                                                                                  |
+| charset | 文字セット                                                                                                                                                 |
+| collation | 順序付けルール                                                                                                                                               |
+| source | バインディングが作成される方法`manual` (SQL ステートメントに従って作成される)、 `history` (履歴実行プランに従って作成される)、 `capture` (TiDB によって自動的に取得される)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
+| sql_digest | 正規化されたSQL文のダイジェスト                                                                                                                                     |
+| plan_digest | 実行計画のダイジェスト                                                                                                                                           |
 
 ### バインディングのトラブルシューティング {#troubleshoot-a-binding}
 
