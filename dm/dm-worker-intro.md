@@ -6,7 +6,7 @@ aliases: ['/docs/tidb-data-migration/dev/dm-worker-intro/']
 
 # DM-worker Introduction
 
-DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For full and incremental migration, it dumps data from one MySQL-compatible source instance and loads the dumped data into the target TiDB cluster. It then reads the source binlog as a replication client, transforms and filters events, and applies them to the target. DM-master queries DM-worker for the status of sources and subtasks.
+DM-worker is a component of TiDB Data Migration (DM) that executes tasks and subtasks assigned by DM-master. For a full and incremental migration, it dumps data from one MySQL-compatible source instance and loads the dumped data into the target TiDB cluster. It then reads the source binlog as a replication client, transforms and filters events, and applies them to the target. DM-master queries DM-worker for the status of sources and subtasks.
 
 ## Key concepts
 
