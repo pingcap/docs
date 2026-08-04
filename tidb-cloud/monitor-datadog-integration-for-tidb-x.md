@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Datadog (PREVIEW)
-summary: Learn how to monitor your TiDB Cloud instances with the Datadog integration. 
+summary: Learn how to monitor your TiDB Cloud instances with the Datadog integration.
 ---
 
 # Integrate TiDB Cloud with Datadog (PREVIEW)
@@ -30,11 +30,9 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
-        
-    For TiDB Cloud Essential instances created starting July 1, 2026, please download this JSON file:
-    https://github.com/pingcap/docs/pull/23413
-   
+    - For TiDB Cloud Essential instances created starting July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>.
+    - For TiDB Cloud Essential instances created before July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>.
+
     </CustomContent>
 
     <CustomContent plan="premium">
@@ -43,15 +41,15 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
     </CustomContent>
 
-1. Log in to [Datadog](https://app.datadoghq.com), and then go to **Dashboards** > **Dashboard List**.
+2. Log in to [Datadog](https://app.datadoghq.com), and then go to **Dashboards** > **Dashboard List**.
 
-2. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, and then select **Start from blank dashboard**.
+3. Click **+ New Dashboard** in the upper-right corner. Enter a dashboard name, and then select **Start from blank dashboard**.
 
-3. In the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
+4. In the new dashboard, click the gear icon (**Configure**) in the upper-right corner, and then select **Import dashboard JSON...**.
 
-4. In the dialog that appears, paste the JSON content, or drag and drop the JSON file.
+5. In the dialog that appears, paste the JSON content, or drag and drop the JSON file.
 
-5. Click **Yes, Replace** to confirm the import.
+6. Click **Yes, Replace** to confirm the import.
 
 ### Step 2. Integrate with your Datadog API key
 

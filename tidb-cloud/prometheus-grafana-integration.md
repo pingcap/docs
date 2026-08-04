@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 summary: Learn how to monitor your TiDB Cloud instances with the Prometheus and Grafana integration.
 ---
 
-# Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW) 
+# Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 
 TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
@@ -46,7 +46,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 > **Note:**
 >
-> - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. 
+> - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window.
 > - If you forget, delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
 
 ### Step 2. Integrate with Prometheus
@@ -67,26 +67,24 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>
-        
-    For TiDB Cloud Essential instances created starting July 1, 2026, please download this JSON file:
-    https://github.com/pingcap/docs/pull/23413
-   
+    - For TiDB Cloud Essential instances created starting July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential-v2.json>.
+    - For TiDB Cloud Essential instances created before July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>.
+
     </CustomContent>
-    
+
     <CustomContent plan="premium">
 
     <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-premium.json>
 
     </CustomContent>
 
-3. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
+2. [Import this JSON to your own Grafana GUI](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) to visualize the metrics.
 
     > **Note:**
     >
     > If you are already using Prometheus and Grafana to monitor <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> instances and want to incorporate the newly available metrics, it is recommended that you create a new dashboard instead of directly updating the JSON of the existing one.
 
-4. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
+3. (Optional) Customize the dashboard as needed by adding or removing panels, changing data sources, and modifying display options.
 
 For more information about how to use Grafana, see [Grafana documentation](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/).
 
