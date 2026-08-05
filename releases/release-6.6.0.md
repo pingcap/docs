@@ -198,11 +198,11 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes)を参照してください。
 
--   [GORM](https://github.com/go-gorm/gorm)TiDB 統合テストを追加します。現在、TiDB は GORM によってサポートされるデフォルトのデータベースです。 [#6014](https://github.com/go-gorm/gorm/pull/6014) @[Icemap](https://github.com/Icemap)
+-   [GORM](https://github.com/go-gorm/gorm)がTiDB 統合テストを追加します。現在、TiDB は GORM によってサポートされるデフォルトのデータベースです。 [#6014](https://github.com/go-gorm/gorm/pull/6014) @[Icemap](https://github.com/Icemap)
 
-    -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql)TiDB [#104](https://github.com/go-gorm/mysql/pull/104)の`AUTO_RANDOM`属性に適応します
-    -   v1.4.6 では、 [GORM MySQL ドライバー](https://github.com/go-gorm/mysql)は、TiDB に接続する際に、 `Unique`フィールドの`Unique`属性が`AutoMigrate`中に変更できない問題を修正しました。 [#105](https://github.com/go-gorm/mysql/pull/105)
-    -   [GORMドキュメント](https://github.com/go-gorm/gorm.io)TiDB をデフォルトのデータベースとして言及しています [#638](https://github.com/go-gorm/gorm.io/pull/638)
+    -   v1.4.6 では、 [GORM MySQL driver](https://github.com/go-gorm/mysql)はTiDBの`AUTO_RANDOM`属性に適応します [#104](https://github.com/go-gorm/mysql/pull/104)
+    -   v1.4.6 では、 [GORM MySQL driver](https://github.com/go-gorm/mysql)は、TiDB に接続する際に、 `Unique`フィールドの`Unique`属性が`AutoMigrate`中に変更できない問題を修正しました。 [#105](https://github.com/go-gorm/mysql/pull/105)
+    -   [GORMドキュメント](https://github.com/go-gorm/gorm.io)がTiDB をデフォルトのデータベースとして言及しています [#638](https://github.com/go-gorm/gorm.io/pull/638)
 
     詳細については、 [GORMドキュメント](https://gorm.io/docs/index.html)を参照してください。
 
