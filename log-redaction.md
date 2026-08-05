@@ -17,7 +17,7 @@ TiDB側でログの秘匿化を有効にするには、 [`global.tidb_redact_log
 set @@global.tidb_redact_log = ON;
 ```
 
-設定後、新しいセッションで生成されたすべてのログが編集されます。
+設定後、新しいセッションで生成されたすべてのログが秘匿化されます。
 
 ```sql
 create table t (a int, unique key (a));
@@ -33,7 +33,7 @@ ERROR 1062 (23000): Duplicate entry '1' for key 't.a'
 
 上記のエラー ログから、値`tidb_redact_log`が`ON`に設定されると、データ セキュリティ リスクを回避するために、機密情報が TiDB ログで`?`マークに置き換えられることがわかります。
 
-さらに、TiDBには`MARKER`オプションが用意されています。`tidb_redact_log`の値を`MARKER`に設定すると、TiDBはログ内の機密情報を直接置き換えるのではなく、 `‹›`でマークするため、編集ルールをカスタマイズできます。
+さらに、TiDBには`MARKER`オプションが用意されています。`tidb_redact_log`の値を`MARKER`に設定すると、TiDBはログ内の機密情報を直接置き換えるのではなく、 `‹›`でマークするため、秘匿化ルールをカスタマイズできます。
 
 ```sql
 set @@global.tidb_redact_log = MARKER;
@@ -53,7 +53,7 @@ ERROR 1062 (23000): Duplicate entry '‹1›' for key 't.a'
 
     [2024/07/02 11:35:01.426 +08:00] [INFO] [conn.go:1146] ["command dispatched failed"] [conn=1482686470] [session_alias=] [connInfo="id:1482686470, addr:127.0.0.1:52258 status:10, collation:utf8mb4_0900_ai_ci, user:root"] [command=Query] [status="inTxn:0, autocommit:1"] [sql="insert into `t` values ( ‹1› ) , ( ‹1› )"] [txn_mode=PESSIMISTIC] [timestamp=450859185309483010] [err="[kv:1062]Duplicate entry '‹1›' for key 't.a'"]
 
-上記のエラーログからわかるように、 `tidb_redact_log`を`MARKER`に設定すると、TiDB はログ内で機密情報を`‹ ›`でマークします。必要に応じて、ログ内の機密情報を処理するための編集ルールをカスタマイズできます。
+上記のエラーログからわかるように、 `tidb_redact_log`を`MARKER`に設定すると、TiDB はログ内で機密情報を`‹ ›`でマークします。必要に応じて、ログ内の機密情報を処理するための秘匿化ルールをカスタマイズできます。
 
 ## TiKV側でのログの秘匿化 {#log-redaction-in-tikv-side}
 
