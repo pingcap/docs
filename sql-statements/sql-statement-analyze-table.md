@@ -92,7 +92,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 統計が正しく更新され、読み込まれるようになりました。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBは、収集する統計情報と、クエリ実行時に統計情報を利用する方法の**両方**においてMySQLとは異なります。この文は構文的にはMySQLに似ていますが、以下の違いがあります。
 

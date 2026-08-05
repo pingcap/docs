@@ -215,7 +215,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)を参照してください。
 
-### MySQLの互換性 {#mysql-compatibility}
+### MySQLとの互換性 {#mysql-compatibility}
 
 -   高性能かつグローバルに単調な`AUTO_INCREMENT`列属性 (GA) をサポート [＃38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 

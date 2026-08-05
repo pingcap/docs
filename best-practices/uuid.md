@@ -59,6 +59,6 @@ Key Visualizer の詳細については、次のドキュメントを参照し�
 -   TiDB Self-Managedの場合は[Key Visualizer](/dashboard/dashboard-key-visualizer.md)
 -   TiDB Cloudの場合は[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 UUIDはMySQLでも使用できます。`BIN_TO_UUID()`と`UUID_TO_BIN()`関数はMySQL 8.0で導入されました。`UUID()`関数はそれ以前のMySQLバージョンでも使用できます。

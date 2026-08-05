@@ -290,7 +290,7 @@ SELECT VEC_AS_TEXT('[1.000, 2.5]');
     | [1,2.5]                     |
     +-----------------------------+
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 ベクトル関数と、ベクトル データ型に対する組み込み関数および演算子の拡張使用は TiDB 固有のものであり、MySQL ではサポートされていません。
 

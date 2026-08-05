@@ -74,7 +74,7 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 
     Empty set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

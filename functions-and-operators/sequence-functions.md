@@ -149,6 +149,6 @@ SELECT LASTVAL(s1);
     +-------------+
     1 row in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 MySQL は、 [ISO/IEC 9075-2](https://www.iso.org/standard/76584.html)で定義されているシーケンスを作成および操作するための関数とステートメントをサポートしていません。

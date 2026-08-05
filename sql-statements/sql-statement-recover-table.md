@@ -83,6 +83,6 @@ NUM ::= intLit
 
 テーブルのリカバリは、TiDBがスナップショット読み取りによってテーブルメタデータを取得し、 `CREATE TABLE`と同様のテーブル作成プロセスを実行することで実行されます。したがって、 `RECOVER TABLE`自体は本質的には一種のDDL操作です。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。

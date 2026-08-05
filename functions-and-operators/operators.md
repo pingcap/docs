@@ -138,6 +138,6 @@ OR, ||
 
 詳細は[機能依存の検出](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html)参照。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   MySQL は`ILIKE`演算子をサポートしていません。

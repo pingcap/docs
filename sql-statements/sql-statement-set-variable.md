@@ -101,7 +101,7 @@ SELECT @myvar, @myvar + 1;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 次の動作の違いが適用されます。
 

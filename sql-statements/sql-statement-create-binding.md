@@ -316,7 +316,7 @@ Empty set (0.002 sec)
 
 `CREATE BINDING`ステートメントには`SUPER`権限が必要です。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

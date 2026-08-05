@@ -32,7 +32,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 > **Note:**
 >
-> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません[MySQLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
+> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 

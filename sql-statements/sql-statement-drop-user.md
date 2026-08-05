@@ -59,7 +59,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   `IF EXISTS`で存在しないユーザーを削除しても、TiDB に警告は作成されません[問題番号 #10196](https://github.com/pingcap/tidb/issues/10196) 。
 

@@ -38,7 +38,7 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   `START TRANSACTION` TiDB内で即座にトランザクションを開始します。これはMySQLとは異なります。MySQLでは`START TRANSACTION`遅延トランザクションを作成します。ただし、TiDBの`START TRANSACTION` MySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
 

@@ -54,7 +54,7 @@ mysql> SHOW KEYS FROM t1;
 
 TiDB `BTREE` `HASH`のインデックス タイプを`RTREE`ますが、無視されることに注意してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SHOW INDEXES [FROM|IN]`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 

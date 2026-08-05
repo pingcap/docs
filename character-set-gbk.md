@@ -32,7 +32,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
     +----------------+---------+----+---------+----------+---------+---------------+
     2 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このセクションでは、MySQL と TiDB 間の互換性に関する情報を提供します。
 

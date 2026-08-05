@@ -79,7 +79,7 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 
 詳細は[日付と時刻関数](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)参照。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 関数`STR_TO_DATE()` TiDBでサポートされていますが、すべての日付と時刻の値を解析できるわけではありません。また、以下の日付と時刻のフォーマットオプションは**実装されていません**。
 

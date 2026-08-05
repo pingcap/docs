@@ -63,7 +63,7 @@ mysql> SHOW GLOBAL STATUS;
 9 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   このステートメントは MySQL と互換性があります。
 

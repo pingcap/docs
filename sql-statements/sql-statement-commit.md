@@ -36,7 +36,7 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   現在、TiDBはメタデータロック（MDL）を使用して、DDL文によるトランザクションで使用されるテーブルの変更をデフォルトで防止しています。メタデータロックの動作はTiDBとMySQLで異なります。詳細については、 [メタデータロック](/metadata-lock.md)を参照してください。
 -   TiDB 3.0.8以降のバージョンでは、デフォルトで[悲観的ロック](/pessimistic-transaction.md)が使用されます。 [楽観的ロック](/optimistic-transaction.md)を使用する場合は、別のトランザクションによって行が変更されているために`COMMIT`ステートメントが失敗する可能性があることを考慮することが重要です。

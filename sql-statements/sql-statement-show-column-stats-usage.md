@@ -46,7 +46,7 @@ SHOW COLUMN_STATS_USAGE;
     +---------+------------+----------------+-------------+--------------+---------------------+
     5 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

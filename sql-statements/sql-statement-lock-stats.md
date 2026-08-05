@@ -132,7 +132,7 @@ mysql> SHOW WARNINGS;
 
 ロック解除統計の詳細については、 [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)を参照してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

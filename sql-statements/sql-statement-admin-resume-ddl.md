@@ -50,7 +50,7 @@ ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 
 </CustomContent>
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

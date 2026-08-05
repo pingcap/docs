@@ -26,7 +26,7 @@ SHOW PROFILES;
 
     Empty set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントはMySQLとの互換性のためだけに含まれています。 `SHOW PROFILES`を実行すると常に空の結果が返されます。
 

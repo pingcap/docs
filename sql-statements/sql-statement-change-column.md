@@ -110,7 +110,7 @@ ALTER TABLE t CHANGE COLUMN a a DATETIME;
 
     ERROR 8200 (HY000): Unsupported modify column: change from original type decimal(13,7) to datetime is currently unsupported yet
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
 -   パーティション化されたテーブル上の列タイプの変更はサポートされていません。
