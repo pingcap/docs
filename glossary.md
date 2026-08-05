@@ -39,7 +39,7 @@ TiDBでは、 `br`はバックアップまたはリストアに使用される[b
 
 ### ベースラインキャプチャ（Baseline Capturing） {#baseline-capturing}
 
-ベースラインキャプチャは、キャプチャ条件を満たすクエリをキャプチャし、それらのバインディングを作成します。これは、 [アップグレード中に実行プランの退行を防ぐ](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade)に使用されます。
+ベースラインキャプチャは、キャプチャ条件を満たすクエリをキャプチャし、それらのバインディングを作成します。これは、 [アップグレード中に実行計画の退行を防ぐ](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade)に使用されます。
 
 ### バッチテーブル作成（Batch Create Table） {#batch-create-table}
 

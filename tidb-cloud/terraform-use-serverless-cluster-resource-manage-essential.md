@@ -205,7 +205,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
         Enter a value:
     ```
 
-    上記の結果では、Terraform によって実行プランが生成され、Terraform が実行するアクションが記述されています。
+    上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されています。
 
     -   構成と状態の違いを確認できます。
     -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。

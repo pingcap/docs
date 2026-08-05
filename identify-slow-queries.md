@@ -56,7 +56,7 @@ insert into t select * from t;
 -   `Query_time` : ステートメントの実行時間。
 -   `Parse_time` : ステートメントの解析時間。
 -   `Compile_time` : クエリ最適化の所要時間。
--   `Optimize_time` : 実行プランの最適化に要した時間。
+-   `Optimize_time` : 実行計画の最適化に要した時間。
 -   `Wait_TS` : ステートメントがトランザクションのタイムスタンプを取得するまでの待機時間。
 -   `Query` : SQL ステートメント。 `Query`はスローログには出力されませんが、対応するフィールドは、スローログがメモリテーブルにマッピングされた後に`Query`と呼ばれます。
 -   `Digest` : SQL ステートメントのフィンガープリント。
@@ -72,11 +72,11 @@ insert into t select * from t;
     -   `idx1:allEvicted` : インデックス`idx1`の統計情報が完全には読み込まれていません。
 -   `Succ` : ステートメントが正常に実行されたかどうか。
 -   `Backoff_time` : ステートメントが再試行を必要とするエラーに遭遇した場合の、再試行までの待機時間。このような一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`などがあります。
--   `Plan` : ステートメントの実行プラン。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行プランを解析します。
--   `Binary_plan` : バイナリエンコードされたステートメントの実行プラン。特定の実行プランを解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら 2 つのフィールドから解析される実行プランの形式は異なります。
+-   `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、具体的な実行計画を解析します。
+-   `Binary_plan` : バイナリエンコードされたステートメントの実行計画。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行します。 `Plan`および`Binary_plan`フィールドには同じ情報が含まれています。ただし、これら 2 つのフィールドから解析される実行計画の形式は異なります。
 -   `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
 -   `Plan_from_cache` : このステートメントが実行プランキャッシュにヒットするかどうか。
--   `Plan_from_binding` : このステートメントがバインドされた実行プランを使用するかどうか。
+-   `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
 -   `Has_more_results` : このステートメントには、ユーザーが取得できる結果がさらにあるかどうか。
 -   `Rewrite_time` : このステートメントのクエリを書き換えるのに要した時間。
 -   `Preproc_subqueries` : ステートメント内で事前に実行されるサブクエリの数。たとえば、 `where id in (select if from t)`サブクエリが事前に実行される場合があります。
@@ -314,7 +314,7 @@ TiKVコプロセッサータスクフィールド：
 
 -   [`tidb_redact_log`](/system-variables.md#tidb_redact_log) : スロークエリログに記録される SQL ステートメント内のユーザーデータが編集され、 `?`に置き換えられるかどうかを制御します。デフォルト値は`0`で、この機能は無効になっています。
 
--   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行プラン内の各オペレーターの物理実行情報を記録するかどうかを制御します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、 `Plan`の情報を次のように表示できます。
+-   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行計画内の各オペレーターの物理実行情報を記録するかどうかを制御します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、 `Plan`の情報を次のように表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -335,7 +335,7 @@ TiKVコプロセッサータスクフィールド：
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの戻り値は、 `EXPLAIN`または`EXPLAIN ANALYZE`とほぼ同じ形式です。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+`Plan`フィールドの戻り値は、 `EXPLAIN`または`EXPLAIN ANALYZE`とほぼ同じ形式です。実行計画の詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
 詳細については、 [TiDB固有の変数と構文](/system-variables.md)を参照してください。
 
@@ -493,9 +493,9 @@ where is_internal = false
     | select * from t1 join t2;   | 0.931260518 | t1:407872303825682445,t2:pseudo |
     +-----------------------------+-------------+---------------------------------+
 
-### 実行プランが変更されたスロークエリ {#query-slow-queries-whose-execution-plan-is-changed}
+### 実行計画が変更されたスロークエリ {#query-slow-queries-whose-execution-plan-is-changed}
 
-同じカテゴリのSQL文の実行プランを変更すると、統計情報が古くなっているか、実際のデータ分布を正確に反映していないため、実行速度が低下します。実行プランが異なるSQL文を照会するには、次のSQL文を使用できます。
+同じカテゴリのSQL文の実行計画を変更すると、統計情報が古くなっているか、実際のデータ分布を正確に反映していないため、実行速度が低下します。実行計画が異なるSQL文を照会するには、次のSQL文を使用できます。
 
 ```sql
 select count(distinct plan_digest) as count,

@@ -399,9 +399,9 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 ## SQL最適化 {#sql-optimization}
 
-### TiDB実行プランの説明 {#tidb-execution-plan-description}
+### TiDB実行計画の説明 {#tidb-execution-plan-description}
 
-[クエリ実行プランを理解する](/explain-overview.md)参照。
+[クエリ実行計画を理解する](/explain-overview.md)参照。
 
 ### 統計収集 {#statistics-collection}
 
@@ -451,7 +451,7 @@ ADMIN SHOW DDL;
 
 ### クエリプランがツリーとして表現される場合のIDルールは何ですか？このツリーの実行順序は何ですか？ {#what-is-the-id-rule-when-a-query-plan-is-presented-as-a-tree-what-is-the-execution-order-for-this-tree}
 
-これらのIDにはルールはありませんが、IDは一意です。IDが生成されるとカウンターが動作し、プランが1つ生成されるごとに1が加算されます。実行順序はIDとは無関係です。クエリプラン全体はツリー構造になっており、実行プロセスはルートノードから開始され、データは上位レベルへと連続的に返されます。クエリプランの詳細については、 [TiDBクエリ実行プランの理解](/explain-overview.md)を参照してください。
+これらのIDにはルールはありませんが、IDは一意です。IDが生成されるとカウンターが動作し、プランが1つ生成されるごとに1が加算されます。実行順序はIDとは無関係です。クエリプラン全体はツリー構造になっており、実行プロセスはルートノードから開始され、データは上位レベルへと連続的に返されます。クエリプランの詳細については、 [TiDBクエリ実行計画の理解](/explain-overview.md)を参照してください。
 
 ### TiDBクエリプランでは、 <code>cop</code>タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-cop-tasks-are-in-the-same-root-are-they-executed-concurrently}
 

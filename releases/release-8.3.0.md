@@ -13,7 +13,7 @@ TiDBバージョン：8.3.0
 
 バージョン8.3.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子をストレージエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>演算子をストレージエンジンにプッシュダウンすることで、ストレージノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行プランの選択を保証し、クラスタのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/partitioned-table/#global-indexes">パーティションテーブルのグローバルインデックス（実験的）</a></td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行時に必要となる可能性のあるアプリケーションの変更作業の一部を回避できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.3/system-variables/#tidb_opt_projection_push_down-new-in-v610"><code>Projection</code>演算子をストレージエンジンにデフォルトでプッシュダウンする</a></td><td><code>Projection</code>演算子をストレージエンジンにプッシュダウンすることで、ストレージノード全体に負荷を分散させ、ノード間のデータ転送量を削減できます。この最適化により、特定のSQLクエリの実行時間が短縮され、データベース全体のパフォーマンスが向上します。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/statistics/#collect-statistics-on-some-columns">統計情報を収集する際に不要な列を無視する</a></td><td>オプティマイザが必要な情報を確実に取得できるという前提のもと、TiDBは統計情報の収集を高速化し、統計情報の適時性を向上させることで、最適な実行計画の選択を保証し、クラスタのパフォーマンスを向上させます。同時に、TiDBはシステムオーバーヘッドを削減し、リソース利用率も向上させます。</td></tr><tr><td rowspan="1">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.3/tiproxy-overview/">TiProxyに組み込まれた仮想IP管理機能</a></td><td>TiProxyは、仮想IP管理機能を内蔵しています。設定することで、外部プラットフォームやツールに依存することなく、仮想IPの自動切り替えをサポートします。この機能により、TiProxyの導入が簡素化され、データベースアクセスレイヤーの複雑さが軽減されます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -39,7 +39,7 @@ TiDBバージョン：8.3.0
 
 -   統計を収集するときに不要な列を無視する [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)
 
-    オプティマイザが実行プランを生成する際、フィルタ条件の列、結合キーの列、集計に使用される列など、一部の列の統計情報のみが必要となります。TiDBはv8.3.0以降、SQL文で使用される列の履歴レコードを継続的に監視します。デフォルトでは、TiDBはインデックスを持つ列と、統計情報の収集が必要であると判断された列の統計情報のみを収集します。これにより、統計情報の収集が高速化され、不要なリソース消費が回避されます。
+    オプティマイザが実行計画を生成する際、フィルタ条件の列、結合キーの列、集計に使用される列など、一部の列の統計情報のみが必要となります。TiDBはv8.3.0以降、SQL文で使用される列の履歴レコードを継続的に監視します。デフォルトでは、TiDBはインデックスを持つ列と、統計情報の収集が必要であると判断された列の統計情報のみを収集します。これにより、統計情報の収集が高速化され、不要なリソース消費が回避されます。
 
     クラスターをv8.3.0より前のバージョンからv8.3.0以降にアップグレードすると、TiDBはデフォルトで元の動作、つまりすべての列の統計情報を収集する動作を維持します。この機能を有効にするには、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) `PREDICATE`に手動で設定する必要があります。新しくデプロイされたクラスターでは、この機能はデフォルトで有効になっています。
 
@@ -103,12 +103,12 @@ TiDBバージョン：8.3.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
 
--   SQL 実行プランのバインディングを強化[#55280](https://github.com/pingcap/tidb/issues/55280) [#55343](https://github.com/pingcap/tidb/issues/55343) @[time-and-fate](https://github.com/time-and-fate)
+-   SQL 実行計画のバインディングを強化[#55280](https://github.com/pingcap/tidb/issues/55280) [#55343](https://github.com/pingcap/tidb/issues/55343) @[time-and-fate](https://github.com/time-and-fate)
 
-    OLTPシナリオでは、ほとんどのSQLステートメントの最適な実行プランは固定されています。アプリケーション内の重要なSQLステートメントに対してSQL実行プランバインディングを実装することで、実行プランが悪化する可能性を低減し、システムの安定性を向上させることができます。多数のSQL実行プランバインディングを作成するという要件を満たすために、TiDBはSQLバインディングの機能とエクスペリエンスを強化しており、具体的には以下の機能が含まれています。
+    OLTPシナリオでは、ほとんどのSQLステートメントの最適な実行計画は固定されています。アプリケーション内の重要なSQLステートメントに対してSQL実行プランバインディングを実装することで、実行計画が悪化する可能性を低減し、システムの安定性を向上させることができます。多数のSQL実行プランバインディングを作成するという要件を満たすために、TiDBはSQLバインディングの機能とエクスペリエンスを強化しており、具体的には以下の機能が含まれています。
 
-    -   単一のSQL文を使用して、複数の過去の実行プランからSQL実行プランバインディングを作成することで、バインディング作成の効率を向上させます。
-    -   SQL実行プランバインディングは、より多くのオプティマイザヒントをサポートし、複雑な実行プランの変換方法を最適化することで、実行プランの復元におけるバインディングの安定性を向上させます。
+    -   単一のSQL文を使用して、複数の過去の実行計画からSQL実行プランバインディングを作成することで、バインディング作成の効率を向上させます。
+    -   SQL実行プランバインディングは、より多くのオプティマイザヒントをサポートし、複雑な実行計画の変換方法を最適化することで、実行計画の復元におけるバインディングの安定性を向上させます。
 
     詳細については、[ドキュメント](/sql-plan-management.md)を参照してください。
 
@@ -319,11 +319,11 @@ TiDBバージョン：8.3.0
     -   再帰的なCTEクエリによって無効なポインタが生成される可能性がある問題を修正 [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
     -   Grafana の接続数監視メトリックが、ハンドシェイクが完了する前に一部の接続が切断された場合に正しく表示されない問題を修正しました [#54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
     -   TiProxyとリソースグループを使用している際に、各リソースグループの接続数が正しく表示されない問題を修正しました [#54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
-    -   クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行プランが生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
+    -   クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行計画が生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     -   `SELECT ... FOR UPDATE`の誤ったPointGetプランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
     -   `TIMESTAMPADD()`関数の最初の引数が`month`で、2 番目の引数が負の値の場合に無限ループに陥る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   スローログ内の内部SQLステートメントがデフォルトでnullに編集される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
-    -   `PointGet`の実行プランが`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
+    -   `PointGet`の実行計画が`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
     -   `SHOW IMPORT JOBS`が v7.1 からアップグレード後にエラー`Unknown column 'summary'`を報告する問題を修正 [#54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     -   ビュー定義で列定義としてサブクエリが使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告 1356 が返される問題を修正しました [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
     -   厳密に自己インクリメントではないRANGEパーティションテーブルが作成できてしまう問題を修正 [#54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)

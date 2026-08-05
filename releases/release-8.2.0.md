@@ -45,7 +45,7 @@ TiDB バージョン: 8.2.0
 
 -   統計の読み込み効率を最大 10 倍向上 [#52831](https://github.com/pingcap/tidb/issues/52831) @[hawkingrei](https://github.com/hawkingrei)
 
-    SaaSやPaaSアプリケーションでは、データテーブルが多数存在する場合があり、初期統計情報の読み込み速度が低下するだけでなく、高負荷時のロード同期の失敗率も上昇します。TiDBの起動時間や実行プランの精度にも影響が出る可能性があります。v8.2.0では、TiDBは並行処理モデルやメモリ割り当てなど、複数の観点から統計情報の読み込みプロセスを最適化し、レイテンシーの削減、スループットの向上、そしてビジネスのスケーリングに影響を与える統計情報の読み込み速度の低下を回避します。
+    SaaSやPaaSアプリケーションでは、データテーブルが多数存在する場合があり、初期統計情報の読み込み速度が低下するだけでなく、高負荷時のロード同期の失敗率も上昇します。TiDBの起動時間や実行計画の精度にも影響が出る可能性があります。v8.2.0では、TiDBは並行処理モデルやメモリ割り当てなど、複数の観点から統計情報の読み込みプロセスを最適化し、レイテンシーの削減、スループットの向上、そしてビジネスのスケーリングに影響を与える統計情報の読み込み速度の低下を回避します。
 
     適応型同時読み込みがサポートされるようになりました。デフォルトでは、設定項目[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)は`0`に設定されており、統計情報の読み込みの同時実行数はハードウェア仕様に基づいて自動的に選択されます。
 
@@ -95,11 +95,11 @@ TiDB バージョン: 8.2.0
 
 ### 可観測性 {#observability}
 
--   実行プランがキャッシュされない理由を記録する [#50618](https://github.com/pingcap/tidb/issues/50618) @[qw4990](https://github.com/qw4990)
+-   実行計画がキャッシュされない理由を記録する [#50618](https://github.com/pingcap/tidb/issues/50618) @[qw4990](https://github.com/qw4990)
 
-    場合によっては、実行オーバーヘッドを削減し、レイテンシーを低減するために、ほとんどの実行プランをキャッシュしたい場合があります。現在、SQL の実行プラン キャッシュにはいくつかの制限があります。一部の SQL ステートメントの実行プランはキャッシュできません。キャッシュできない SQL ステートメントと、それに対応する理由を特定するのは困難です。
+    場合によっては、実行オーバーヘッドを削減し、レイテンシーを低減するために、ほとんどの実行計画をキャッシュしたい場合があります。現在、SQL の実行計画 キャッシュにはいくつかの制限があります。一部の SQL ステートメントの実行計画はキャッシュできません。キャッシュできない SQL ステートメントと、それに対応する理由を特定するのは困難です。
 
-    そのため、v8.2.0以降、実行プランをキャッシュできない理由を説明する新しい列`PLAN_CACHE_UNQUALIFIED`と`PLAN_CACHE_UNQUALIFIED_LAST_REASON`がシステムテーブル[`STATEMENTS_SUMMARY`](/statement-summary-tables.md)に追加され、パフォーマンスの調整に役立ちます。
+    そのため、v8.2.0以降、実行計画をキャッシュできない理由を説明する新しい列`PLAN_CACHE_UNQUALIFIED`と`PLAN_CACHE_UNQUALIFIED_LAST_REASON`がシステムテーブル[`STATEMENTS_SUMMARY`](/statement-summary-tables.md)に追加され、パフォーマンスの調整に役立ちます。
 
     詳細については、 [ドキュメント](/statement-summary-tables.md#fields-description)を参照してください。
 
@@ -205,7 +205,7 @@ TiDB バージョン: 8.2.0
     -   TiFlash配置ルールを一括削除することで、パーティションテーブルに対して`TRUNCATE`または`DROP`操作を実行した後のデータGCの処理速度を向上させます [#54068](https://github.com/pingcap/tidb/issues/54068) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     -   Azure Identity LibrariesとMicrosoft Authentication Libraryのバージョンをアップグレードしてセキュリティを強化する [#53990](https://github.com/pingcap/tidb/issues/53990) @[hawkingrei](https://github.com/hawkingrei)
     -   TiDB Server のメモリ不足エラー（OOM）が発生しないように、 `token-limit`の最大値に`1048576`を設定してください。 [#53312](https://github.com/pingcap/tidb/issues/53312) @[djshow832](https://github.com/djshow832)
-    -   TiFlash MPP実行パフォーマンスを向上させるため、MPP実行プランの列剪定を改善しました [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
+    -   TiFlash MPP実行パフォーマンスを向上させるため、MPP実行計画の列剪定を改善しました [#52133](https://github.com/pingcap/tidb/issues/52133) @[yibin87](https://github.com/yibin87)
     -   大量のデータ（&gt;1024行）を含むテーブルを検索する際の`IndexLookUp`演算子のパフォーマンスオーバーヘッドを最適化する [#53871](https://github.com/pingcap/tidb/issues/53871) @[crazycs520](https://github.com/crazycs520)
     -   MPPロードバランシング中にリージョンを持たないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
 

@@ -1,17 +1,17 @@
 ---
 title: TiDB Query Execution Plan Overview
-summary: TiDB の EXPLAIN` ステートメントによって返される実行プラン情報について学習します。
+summary: TiDB の EXPLAIN` ステートメントによって返される実行計画情報について学習します。
 ---
 
-# TiDB クエリ実行プランの概要 {#tidb-query-execution-plan-overview}
+# TiDB クエリ実行計画の概要 {#tidb-query-execution-plan-overview}
 
 > **Note:**
 >
 > MySQLクライアントを使用してTiDBに接続する場合、出力結果を行の折り返しなしでより明確に読み取るには、 `pager less -S`コマンドを使用します。`EXPLAIN`結果が出力された後、キーボードの右矢印<kbd>→</kbd>キーを押して出力を水平にスクロールします。
 
-SQLは宣言型言語です。クエリの結果がどのようになるべきかを記述するものであり、実際に結果を取得する**方法論**を記述するものではありません。TiDBは、テーブルを結合する順序や、インデックスの使用可能性など、クエリの実行方法の可能性をすべて考慮します。*クエリ実行プランを検討する*プロセスは、SQL最適化と呼ばれます。
+SQLは宣言型言語です。クエリの結果がどのようになるべきかを記述するものであり、実際に結果を取得する**方法論**を記述するものではありません。TiDBは、テーブルを結合する順序や、インデックスの使用可能性など、クエリの実行方法の可能性をすべて考慮します。*クエリ実行計画を検討する*プロセスは、SQL最適化と呼ばれます。
 
-`EXPLAIN`文目は、特定の文に対して選択された実行プランを示します。つまり、TiDB は、クエリの実行方法を数百、数千通り検討した結果、この*プランが*最も少ないリソース消費量で、最短時間で実行されると判断します。
+`EXPLAIN`文目は、特定の文に対して選択された実行計画を示します。つまり、TiDB は、クエリの実行方法を数百、数千通り検討した結果、この*プランが*最も少ないリソース消費量で、最短時間で実行されると判断します。
 
 ```sql
 CREATE TABLE t (id INT NOT NULL PRIMARY KEY auto_increment, a INT NOT NULL, pad1 VARCHAR(255), INDEX(a));
@@ -35,7 +35,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN`は実際のクエリを実行しません。[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行し、 `EXPLAIN`情報を表示します。これは、選択された実行プランが最適ではないケースを診断するのに役立ちます。`EXPLAIN`使用例については、以下のドキュメントをご覧ください。
+`EXPLAIN`は実際のクエリを実行しません。[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)クエリを実行し、 `EXPLAIN`情報を表示します。これは、選択された実行計画が最適ではないケースを診断するのに役立ちます。`EXPLAIN`使用例については、以下のドキュメントをご覧ください。
 
 -   [インデックス](/explain-indexes.md)
 -   [テーブル結合](/explain-joins.md)
@@ -56,7 +56,7 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 > **Note:**
 >
-> 返された実行プランでは、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は、v6.4.0 より前とは異なります。
+> 返された実行計画では、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は、v6.4.0 より前とは異なります。
 >
 > v6.4.0より前では、 `estRows`ビルド側オペレータからの各行に対してプローブ側オペレータが処理する推定行数を意味します。v6.4.0以降では、 `estRows`プローブ側オペレータが処理する推定行数の**合計**を意味します。結果`EXPLAIN ANALYZE`に表示される実際の行数（ `actRows`列で示される）は合計行数を意味します。そのため、v6.4.0以降、 `IndexJoin`および`Apply`オペレータのプローブ側子ノードにおける`estRows`および`actRows`の意味は一貫しています。
 >

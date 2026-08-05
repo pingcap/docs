@@ -16,7 +16,7 @@ TiDB Ansible バージョン: 2.1.16
 -   SQLオプティマイザー
     -   時間列等号条件で行数が不正確に推定される問題を修正しました [＃11526](https://github.com/pingcap/tidb/pull/11526)
     -   `TIDB_INLJ`ヒントが有効にならない、または指定されたテーブルに有効にならない問題を修正 [＃11361](https://github.com/pingcap/tidb/pull/11361)
-    -   クエリの`NOT EXISTS`の実装をOUTER JOINからANTI JOINに変更して、より最適化された実行プラン見つけます [＃11291](https://github.com/pingcap/tidb/pull/11291)
+    -   クエリの`NOT EXISTS`の実装をOUTER JOINからANTI JOINに変更して、より最適化された実行計画見つけます [＃11291](https://github.com/pingcap/tidb/pull/11291)
     -   `SHOW`文内でサブクエリをサポートし、 `SHOW COLUMNS FROM tbl WHERE FIELDS IN (SELECT 'a')` のような構文が可能 [＃11461](https://github.com/pingcap/tidb/pull/11461)
     -   定数畳み込み最適化によって`SELECT … CASE WHEN … ELSE NULL ...`クエリが誤った結果を取得する問題を修正 [＃11441](https://github.com/pingcap/tidb/pull/11441)
 -   SQL実行エンジン

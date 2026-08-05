@@ -32,7 +32,7 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
     -   システム変数管理者
 
--   TiDB Dashboardにサインインした後、インターフェース上の[高速バインド実行プラン](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーに次の権限も必要です。
+-   TiDB Dashboardにサインインした後、インターフェース上の[高速バインド実行計画](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーに次の権限も必要です。
 
     -   システム変数管理者
     -   SUPER

@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.18 Release Notes
-summary: TiDB 3.0.18は2020年8月21日にリリースされました。このリリースには、TiDB Binlogの改善と、TiDBおよびTiKVのバグ修正が含まれています。TiDBのバグ修正には、小数点、集合、列挙型の処理に関する問題、重複キーとキャッシュされた実行プランに関する問題が含まれます。TiKVのバグ修正には、GC失敗ログレベルの変更が含まれます。TiDB Lightning、ログファイル引数、構文エラー、予期しない呼び出しに関する問題も修正されました。
+summary: TiDB 3.0.18は2020年8月21日にリリースされました。このリリースには、TiDB Binlogの改善と、TiDBおよびTiKVのバグ修正が含まれています。TiDBのバグ修正には、小数点、集合、列挙型の処理に関する問題、重複キーとキャッシュされた実行計画に関する問題が含まれます。TiKVのバグ修正には、GC失敗ログレベルの変更が含まれます。TiDB Lightning、ログファイル引数、構文エラー、予期しない呼び出しに関する問題も修正されました。
 ---
 
 # TiDB 3.0.18 リリースノート {#tidb-3-0-18-release-notes}
@@ -25,7 +25,7 @@ TiDB バージョン: 3.0.18
     -   `Hash`関数による`set`と`enum`型の誤った処理により、HashJoinの結果が誤っている問題を修正しました[＃19175](https://github.com/pingcap/tidb/pull/19175)
     -   悲観的ロックモードで重複キーのチェックが失敗する問題を修正 [＃19236](https://github.com/pingcap/tidb/pull/19236)
     -   `Apply`と`Union Scan`演算子が間違った実行結果を引き起こす問題を修正しました[＃19297](https://github.com/pingcap/tidb/pull/19297)
-    -   トランザクションで一部のキャッシュされた実行プランが誤って実行される問題を修正しました [＃19274](https://github.com/pingcap/tidb/pull/19274)
+    -   トランザクションで一部のキャッシュされた実行計画が誤って実行される問題を修正しました [＃19274](https://github.com/pingcap/tidb/pull/19274)
 
 -   TiKV
 

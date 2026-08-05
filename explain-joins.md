@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Joins
-summary: TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
+summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
 ---
 
 # テーブル結合を使用する文を説明する {#explain-statements-that-use-joins}
@@ -41,7 +41,7 @@ ANALYZE TABLE t1, t2;
 
 > **Note:**
 >
-> 返される実行プランにおいて、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0以降では`estRows`の意味がv6.4.0以前と異なります。詳細は[TiDB クエリ実行プランの概要](/explain-overview.md#understand-explain-output)を参照してください。
+> 返される実行計画において、演算子`IndexJoin`および`Apply`のすべてのプローブ側子ノードについて、v6.4.0以降では`estRows`の意味がv6.4.0以前と異なります。詳細は[TiDB クエリ実行計画の概要](/explain-overview.md#understand-explain-output)を参照してください。
 
 ```sql
 EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id;

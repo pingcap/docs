@@ -59,7 +59,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 
 -   分析操作
 
-    チェックサムが正常に完了すると、各テーブルに対して[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが実行され、最適な実行プランが生成されます。多数のテーブル、または大量のデータを含む個々のテーブルを扱う場合、分析操作には時間がかかることがあります。
+    チェックサムが正常に完了すると、各テーブルに対して[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが実行され、最適な実行計画が生成されます。多数のテーブル、または大量のデータを含む個々のテーブルを扱う場合、分析操作には時間がかかることがあります。
 
 -   関連する問題
 

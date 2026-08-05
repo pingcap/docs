@@ -1,6 +1,6 @@
 ---
 title: Explain Statements That Use Indexes
-summary: TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
+summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
 ---
 
 # インデックスを使用するステートメントを説明する {#explain-statements-that-use-indexes}

@@ -9,7 +9,7 @@ summary: TiDB データベースのEXPLAIN ANALYZE の使用法の概要。
 
 > **Note:**
 >
-> `EXPLAIN ANALYZE`を使用してDML文を実行すると、データの変更が正常に実行されます。現時点では、DML文の実行プランはまだ表示**できません**。
+> `EXPLAIN ANALYZE`を使用してDML文を実行すると、データの変更が正常に実行されます。現時点では、DML文の実行計画はまだ表示**できません**。
 
 ## 概要 {#synopsis}
 
@@ -317,11 +317,11 @@ TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`Befo
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、TiDB の出力形式と潜在的な実行プランはどちらも MySQL とは大幅に異なります。
+`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、TiDB の出力形式と潜在的な実行計画はどちらも MySQL とは大幅に異なります。
 
 ## 参照 {#see-also}
 
--   [クエリ実行プランを理解する](/explain-overview.md)
+-   [クエリ実行計画を理解する](/explain-overview.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
 -   [TRACE](/sql-statements/sql-statement-trace.md)

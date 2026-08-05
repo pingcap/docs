@@ -169,7 +169,7 @@ SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND tim
 -   `Select` : `select`型のステートメントが実行されます。
 -   `internal` : 統計情報を更新し、グローバル変数を取得するために使用される TiDB の内部 SQL ステートメント。
 
-上記のステートメントの実行プランを表示するには、次のステートメントを実行します。
+上記のステートメントの実行計画を表示するには、次のステートメントを実行します。
 
 ```sql
 DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND time>='2020-03-25 23:40:00' AND time <= '2020-03-25 23:42:00' AND quantile=0.99;
@@ -184,9 +184,9 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 +------------------+----------+------+---------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の結果から、実行プランには`PromQL` 、 `start_time` 、 `end_time` 、 `step`含まれていることがわかります。実行プロセス中、TiDBはPrometheusの`query_range` HTTP APIを呼び出して監視データを照会します。
+上記の結果から、実行計画には`PromQL` 、 `start_time` 、 `end_time` 、 `step`含まれていることがわかります。実行プロセス中、TiDBはPrometheusの`query_range` HTTP APIを呼び出して監視データを照会します。
 
-[ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに3つの時間値しかないことに気づくかもしれません。実行プランでは、 `step`の値は1分であり、これらの値の間隔は1分であることを意味します。`step`は次の2つのセッション変数によって決定されます。
+[ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに3つの時間値しかないことに気づくかもしれません。実行計画では、 `step`の値は1分であり、これらの値の間隔は1分であることを意味します。`step`は次の2つのセッション変数によって決定されます。
 
 -   `tidb_metric_query_step` : クエリ解決ステップ幅。Prometheusから`query_range`データを取得するには、 `start_time` 、 `end_time` 、 `step`を指定する必要があります。 `step` 、この変数の値が使用されます。
 -   `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`のフィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
@@ -232,7 +232,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行プランを表示する。結果から、実行プランの`PromQL`と`step`値が30秒に変更されていることも確認できます。
+3.  実行計画を表示する。結果から、実行計画の`PromQL`と`step`値が30秒に変更されていることも確認できます。
 
     ```sql
     desc select * from metrics_schema.tidb_query_duration where value is not null and time>='2020-03-25 23:40:00' and time <= '2020-03-25 23:42:00' and quantile=0.99;

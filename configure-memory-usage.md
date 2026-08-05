@@ -169,7 +169,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]
     ```
 
-4.  同じSQL文を実行します。今回は文が正常に実行され、エラーメッセージは返されません。以下の詳細な実行プランから、HashAggが600MBのハードディスク容量を使用していることがわかります。
+4.  同じSQL文を実行します。今回は文が正常に実行され、エラーメッセージは返されません。以下の詳細な実行計画から、HashAggが600MBのハードディスク容量を使用していることがわかります。
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
