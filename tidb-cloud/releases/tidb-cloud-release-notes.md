@@ -4,7 +4,7 @@ summary: 了解 2026 年 TiDB Cloud 的发布说明。
 aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes','/zh/ai/vector-search-changelogs/']
 ---
 
-# 2026 年 TiDB Cloud 发布说明 <!--Corresponding EN commit: e669ba40a791edd8590cf2335e2845a2e3d3cbde-->
+# 2026 年 TiDB Cloud 发布说明
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 

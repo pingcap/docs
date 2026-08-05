@@ -4,7 +4,7 @@ summary: 了解如何备份和恢复你的 {{{ .premium }}} 实例。
 aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# 备份和恢复 {{{ .premium }}} 数据 <!--Corresponding EN commit: e669ba40a791edd8590cf2335e2845a2e3d3cbde-->
+# 备份和恢复 {{{ .premium }}} 数据
 
 <CustomContent plan="premium">
 
@@ -134,7 +134,7 @@ PITR 允许你将数据恢复到保留时间内的任意时间点。快照允许
 
 </CustomContent>
 
-如果新的保留时间短于当前保留时间，确认对话框会列出早于新保留时间的自动备份，这些备份将被永久删除。仅在验证您不再需要这些备份后，再确认此操作。
+如果新的保留时间短于当前保留时间，确认对话框会列出早于新保留时间的自动备份，这些备份将被永久删除。仅在验证你不再需要这些备份后，再确认此操作。
 
 ### 备份保护 {#backup-protection}
 
