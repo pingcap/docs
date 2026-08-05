@@ -26,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For TiDB Cloud Premium instances hosted on AWS, you can now stream row change events to Amazon MSK Provisioned clusters over AWS PrivateLink.
 
-        For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) and [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
+        For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) and [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
 
     - Support subscribing to alert notifications from TiDB Cloud Premium via generic webhooks.
 
