@@ -137,7 +137,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL は[リソースグループを作成する](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートしています。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
+MySQL は[CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートしています。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
 
 ## 参照 {#see-also}
 
