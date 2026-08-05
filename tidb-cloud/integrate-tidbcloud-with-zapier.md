@@ -53,7 +53,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **「トリガーをテスト」を**クリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **「続行」**をクリックします。
 
-### ステップ3： <code>Find Table in TiDB Cloud</code>アクションを設定する {#step-3-set-up-the-code-find-table-in-tidb-cloud-code-action}
+### ステップ3： `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
 
 1.  アプリとイベントを選択
 
@@ -91,7 +91,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **「テスト」アクション**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
-### ステップ4： <code>Create Row in TiDB Cloud</code>設定する {#step-4-set-up-the-code-create-row-in-tidb-cloud-code-action}
+### ステップ4： `Create Row in TiDB Cloud`設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
 1.  アプリとイベントを選択
 
@@ -223,7 +223,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 カスタムクエリの実行時間が30秒以内であることを確認してください。そうでない場合、タイムアウトエラーが発生します。
 
-### <code>find or create</code>アクションはどのように使用すればよいですか？ {#how-do-i-use-the-code-find-or-create-code-action}
+### `find or create`アクションはどのように使用すればよいですか？ {#how-do-i-use-the-find-or-create-action}
 
 `Find or create`アクションを使用すると、リソースが存在しない場合に作成できます。以下に例を示します。
 

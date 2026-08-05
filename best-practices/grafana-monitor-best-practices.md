@@ -123,13 +123,13 @@ Y 軸を線形スケールに切り替えます。
 
 ![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
-### ヒント5: 履歴のメトリックを確認するには、 <code>IP address:port number</code>を入力します。 {#tip-5-enter-code-ip-address-port-number-code-to-check-the-metrics-in-history}
+### ヒント5: 履歴のメトリックを確認するには、 `IP address:port number`を入力します。 {#tip-5-enter-ip-address-port-number-to-check-the-metrics-in-history}
 
 PDダッシュボードには、現在のリーダーの指標のみが表示されます。過去のPDリーダーのステータスを確認したいが、 `instance`フィールドのドロップダウンリストにそのリーダーが表示されていない場合は、手動で`IP address:2379`を入力してリーダーのデータを確認できます。
 
 ![Check the metrics in history](/media/best-practices/manually-input-check-metric.jpeg)
 
-### ヒント6: <code>Avg</code>関数を使用する {#tip-6-use-the-code-avg-code-function}
+### ヒント6: `Avg`関数を使用する {#tip-6-use-the-avg-function}
 
 通常、凡例にはデフォルトで`Max`と`Current`関数のみが表示されます。指標が大きく変動する場合は、 `Avg`機能など、他のサマリー関数を凡例に追加して、一定期間の全体的な傾向を確認できます。
 

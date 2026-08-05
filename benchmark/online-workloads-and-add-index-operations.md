@@ -3,7 +3,7 @@ title: Interaction Test on Online Workloads and `ADD INDEX` Operations
 summary: このドキュメントでは、オンライン ワークロードと ADD INDEX` 操作間の相互作用効果をテストします。
 ---
 
-# オンラインワークロードと<code>ADD INDEX</code>操作のインタラクションテスト {#interaction-test-on-online-workloads-and-code-add-index-code-operations}
+# オンラインワークロードと`ADD INDEX`操作のインタラクションテスト {#interaction-test-on-online-workloads-and-add-index-operations}
 
 ## テスト目的 {#test-purpose}
 
@@ -79,7 +79,7 @@ sysbench $testname \
     run --tables=1 --table-size=2000000
 ```
 
-## テストプラン1: <code>ADD INDEX</code>文の対象列への書き込み操作を頻繁に実行する {#test-plan-1-frequently-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement}
+## テストプラン1: `ADD INDEX`文の対象列への書き込み操作を頻繁に実行する {#test-plan-1-frequently-perform-write-operations-to-the-target-column-of-the-add-index-statement}
 
 1.  `oltp_read_write`テストを開始します。
 2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
@@ -89,7 +89,7 @@ sysbench $testname \
 
 ### テスト結果 {#test-results}
 
-#### <code>ADD INDEX</code>操作なしの<code>oltp_read_write</code>のテスト結果 {#test-result-of-code-oltp-read-write-code-without-code-add-index-code-operations}
+#### `ADD INDEX`操作なしの`oltp_read_write`のテスト結果 {#test-result-of-oltp-read-write-without-add-index-operations}
 
 | sysbench TPS | sysbench QPS |
 | :----------- | :----------- |
@@ -214,7 +214,7 @@ sysbench $testname \
 -   パラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
 -   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が非常に大きい場合、 `admin show ddl`コマンドを実行すると、DDL ジョブの再試行回数（例えば`Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`を確認できます。この場合、 `ADD INDEX`操作の完了に非常に長い時間がかかります。
 
-## テストプラン 2: <code>ADD INDEX</code>ステートメントのターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement-query-only}
+## テストプラン 2: `ADD INDEX`ステートメントのターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-add-index-statement-query-only}
 
 1.  `oltp_read_only`テストを開始します。
 2.  手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
@@ -224,7 +224,7 @@ sysbench $testname \
 
 ### テスト結果 {#test-results}
 
-#### <code>ADD INDEX</code>操作なしの<code>oltp_read_only</code>のテスト結果 {#test-result-of-code-oltp-read-only-code-without-code-add-index-code-operations}
+#### `ADD INDEX`操作なしの`oltp_read_only`のテスト結果 {#test-result-of-oltp-read-only-without-add-index-operations}
 
 | sysbench TPS | sysbench QPS |
 | :----------- | :----------- |
@@ -276,7 +276,7 @@ sysbench $testname \
 
 `ADD INDEX`のステートメントのターゲット列に対してのみクエリ操作を実行する場合、 `ADD INDEX`操作がオンライン ワークロードに与える影響は明らかではありません。
 
-## テストプラン3: <code>ADD INDEX</code>文のターゲット列はオンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-code-add-index-code-statement-is-irrelevant-to-online-workloads}
+## テストプラン3: `ADD INDEX`文のターゲット列はオンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-add-index-statement-is-irrelevant-to-online-workloads}
 
 1.  `oltp_read_write`テストを開始します。
 2.  手順 1 と同時に実行します。`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。
@@ -286,7 +286,7 @@ sysbench $testname \
 
 ### テスト結果 {#test-results}
 
-### <code>ADD INDEX</code>操作なしの<code>oltp_read_write</code>のテスト結果 {#test-result-of-code-oltp-read-write-code-without-code-add-index-code-operations}
+### `ADD INDEX`操作なしの`oltp_read_write`のテスト結果 {#test-result-of-oltp-read-write-without-add-index-operations}
 
 | sysbench TPS | sysbench QPS |
 | :----------- | :----------- |

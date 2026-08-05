@@ -114,7 +114,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 </CustomContent>
 
-## ステートメントサマリーの<code>cluster</code>テーブル {#the-cluster-tables-for-statement-summary}
+## ステートメントサマリーの`cluster`テーブル {#the-cluster-tables-for-statement-summary}
 
 `statements_summary` 、 `statements_summary_history` 、および`statements_summary_evicted`テーブルには、単一の TiDBサーバーのステートメントの概要のみが表示されます。クラスタ全体のデータを照会するには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルを照会する必要があります。
 
@@ -312,7 +312,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 
 ## フィールドの説明 {#fields-description}
 
-### <code>statements_summary</code>フィールドの説明 {#statements_summary-fields-description}
+### `statements_summary`フィールドの説明 {#statements_summary-fields-description}
 
 以下は`statements_summary`テーブルのフィールドの説明です。
 
@@ -448,7 +448,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `STORAGE_KV` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行が TiKV からデータを読み取ったかどうかを示します。
 -   `STORAGE_MPP` : v8.5.5 で導入され、このカテゴリの SQL ステートメントの以前の実行がTiFlashからデータを読み取ったかどうかを示します。
 
-### <code>statements_summary_evicted</code>フィールドの説明 {#statements_summary_evicted-fields-description}
+### `statements_summary_evicted`フィールドの説明 {#statements_summary_evicted-fields-description}
 
 -   `BEGIN_TIME` : 開始時刻を記録します。
 -   `END_TIME` : 終了時刻を記録します。

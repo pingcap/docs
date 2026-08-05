@@ -64,7 +64,7 @@ GROUP BY b.id;
 
 ## ビュー関連情報を取得する {#get-view-related-information}
 
-### <code>SHOW CREATE TABLE|VIEW view_name</code>ステートメントの使用 {#using-the-code-show-create-table-view-view-name-code-statement}
+### `SHOW CREATE TABLE|VIEW view_name`ステートメントの使用 {#using-the-show-create-table-view-view-name-statement}
 
 ```sql
 SHOW CREATE VIEW book_with_ratings\G
@@ -79,7 +79,7 @@ SHOW CREATE VIEW book_with_ratings\G
     collation_connection: utf8mb4_general_ci
     1 row in set (0.00 sec)
 
-### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリする {#query-the-code-information-schema-views-code-table}
+### `INFORMATION_SCHEMA.VIEWS`テーブルをクエリする {#query-the-information-schema-views-table}
 
 ```sql
 SELECT * FROM information_schema.views WHERE TABLE_NAME = 'book_with_ratings'\G

@@ -88,7 +88,7 @@ Db2 または Oracle から TiDB にすべてのデータを移行するか、�
 
 現在はOGGの使用が推奨されています。
 
-### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを<code>batches</code>で書き込むときに<code>java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation</code> {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
+### エラー: java.sql.BatchUpdateException: Sqoop を使用して TiDB にデータを`batches`で書き込むときに`java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットすることを意味しますが、デフォルトでは各`statement`に100個のSQL文が含まれます。つまり、100 * 100 = 10000個のSQL文となり、単一のTiDBトランザクションで許可される最大SQL文数である5000を超えてしまいます。
 
@@ -109,7 +109,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 -   単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
 
-### Dumpling がテーブルをエクスポートするときに<code>The local disk space is insufficient</code>エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
+### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には次の原因が考えられます。
 
@@ -138,7 +138,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やすことができます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やすことができます。
 
-### <code>transaction too large</code>エラーメッセージが表示されます {#the-error-message-transaction-too-large-is-displayed}
+### `transaction too large`エラーメッセージが表示されます {#the-error-message-transaction-too-large-is-displayed}
 
 基盤となるストレージエンジンの制限により、TiDB の各キーと値のエントリ（1行）は 6MB 以下にする必要があります。[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)設定値は最大 120MB まで調整できます。
 
@@ -158,7 +158,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 いいえ。データをロードするときに、ターゲット テーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
 
-### TiDB は<code>replace into</code>構文をサポートしていますか? {#does-tidb-support-the-replace-into-syntax}
+### TiDB は`replace into`構文をサポートしていますか? {#does-tidb-support-the-replace-into-syntax}
 
 はい。
 

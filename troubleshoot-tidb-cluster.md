@@ -34,7 +34,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
     -   `tikv-server`と`pd-server`のデータはすべてクリアされます。特定のデータは`tikv-server`に保存され、メタデータは`pd-server`に保存されます。2つのサーバーのうち1つだけがクリアされると、データの整合性が失われます。
     -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`再起動された後、 `tidb-server`も再起動する必要があります。クラスタIDは`pd-server`初期化される際にランダムに割り当てられます。そのため、クラスタが再デプロイされるとクラスタIDが変更され、新しいクラスタIDを取得するには`tidb-server`再起動する必要があります。
 
-## <code>tidb-server</code>を起動できません {#cannot-start-code-tidb-server-code}
+## `tidb-server`を起動できません {#cannot-start-tidb-server}
 
 `tidb-server`起動できない場合の状況については以下を参照してください。
 
@@ -53,7 +53,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
     -   TiDB と PD 間のネットワークがスムーズに動作しているかどうか、ネットワークに ping できるかどうか、ファイアウォールの構成に問題があるかどうかなどを確認します。
     -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認します。
 
-## <code>tikv-server</code>を起動できません {#cannot-start-code-tikv-server-code}
+## `tikv-server`を起動できません {#cannot-start-tikv-server}
 
 `tikv-server`起動できない場合の状況については以下を参照してください。
 
@@ -75,7 +75,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
     1 つのデータベース ファイル ディレクトリで 2 つの TiKV ファイルを開かないでください。
 
-## <code>pd-server</code>を起動できません {#cannot-start-code-pd-server-code}
+## `pd-server`を起動できません {#cannot-start-pd-server}
 
 `pd-server`起動できない場合の状況については以下を参照してください。
 

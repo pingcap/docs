@@ -45,7 +45,7 @@ PD Recover インストール パッケージは、 TiDB Toolkitに含まれて�
 > -   コマンドラインで`--data-dir`が指定されていない場合は、 `conf/pd.toml`内の`data-dir`が、生存しているPDノードの元のデータディレクトリを正しく指していることを確認してください。そうでない場合、`pd-recover`は後続の操作で失敗する可能性があります。
 > -   `conf/pd.toml`とコマンドライン引数の両方で`data-dir`が指定されている場合、 `conf/pd.toml`の`data-dir`設定が優先されます。
 
-### ステップ3： <code>pd-recover</code>を使用してメタデータを修復する {#step-3-repair-metadata-using-code-pd-recover-code}
+### ステップ3： `pd-recover`を使用してメタデータを修復する {#step-3-repair-metadata-using-pd-recover}
 
 この方法は少数派のPDノードがサービスを復旧することに依存しているため、ノードに古いデータが含まれている可能性があります。 `alloc_id`と`tso`のデータがロールバックされると、クラスタデータが破損したり、利用できなくなったりする可能性があります。これを防ぐには、 `pd-recover`を使用してメタデータを変更し、ノードが正しい割り当てIDとTSOサービスを提供できるようにする必要があります。以下に例を示します。
 
@@ -159,6 +159,6 @@ grep "idAllocator allocates a new id" {{/path/to}}/pd*.log |  awk -F'=' '{print 
 
 PDクラスタが作成されると、新しいクラスタIDが生成されます。古いクラスタのクラスタIDは、ログを確認することで確認できます。
 
-### <code>pd-recover</code>を実行すると、エラー「 <code>dial tcp 10.0.1.13:2379: connect: connection refused</code>が返されます。 {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
+### `pd-recover`を実行すると、エラー「 `dial tcp 10.0.1.13:2379: connect: connection refused`が返されます。 {#the-error-dial-tcp-10-0-1-13-2379-connect-connection-refused-is-returned-when-executing-pd-recover}
 
 `pd-recover`を実行する際には、PDサービスが必要です。PDリカバリを使用する前に、PDクラスタをデプロイして起動してください。

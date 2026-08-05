@@ -7,7 +7,7 @@ summary: TiDB クエリ オプティマイザーに distinct` 最適化を導入
 
 このドキュメントでは、集計関数の`SELECT DISTINCT`と`DISTINCT`含む、TiDB クエリ オプティマイザーの`distinct`最適化について説明します。
 
-## <code>SELECT</code>文の<code>DISTINCT</code>修飾子 {#code-distinct-code-modifier-in-code-select-code-statements}
+## `SELECT`文の`DISTINCT`修飾子 {#distinct-modifier-in-select-statements}
 
 `DISTINCT`修飾子は、結果セットから重複行を削除することを指定します。 `SELECT DISTINCT` `GROUP BY`に変換されます。例:
 
@@ -23,7 +23,7 @@ mysql> explain SELECT DISTINCT a from t;
 3 rows in set (0.00 sec)
 ```
 
-## 集計関数の<code>DISTINCT</code>オプション {#code-distinct-code-option-in-aggregate-functions}
+## 集計関数の`DISTINCT`オプション {#distinct-option-in-aggregate-functions}
 
 通常、オプション`DISTINCT`を指定した集計関数は、シングルスレッド実行モデルの TiDBレイヤーで実行されます。
 

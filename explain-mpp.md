@@ -132,7 +132,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 -   クエリ フラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]` 、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) のデータを含む各ノードにデータをブロードキャストします。
 -   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、TiDB に返します。
 
-## MPPモードでの<code>EXPLAIN ANALYZE</code>文 {#code-explain-analyze-code-statements-in-the-mpp-mode}
+## MPPモードでの`EXPLAIN ANALYZE`文 {#explain-analyze-statements-in-the-mpp-mode}
 
 `EXPLAIN ANALYZE`ステートメントは`EXPLAIN`と似ていますが、実行時情報も出力します。
 

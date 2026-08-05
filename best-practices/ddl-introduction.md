@@ -155,7 +155,7 @@ TiDB v6.2.0 より前では、DDL 実行フレームワークには次の制限�
 
 テーブル作成速度を高速化するには、複数のDDLリクエストを同時に送信することをお勧めします。これにより、テーブル作成速度を最大化できます。DDLリクエストをシリアル送信し、Ownerノードに送信しない場合、テーブル作成速度は非常に遅くなります。
 
-### 1つの<code>ALTER</code>文で複数の変更を行う {#make-multiple-changes-in-a-single-code-alter-code-statement}
+### 1つの`ALTER`文で複数の変更を行う {#make-multiple-changes-in-a-single-alter-statement}
 
 TiDB v6.2.0以降、単一の`ALTER`文でテーブル内の複数のスキーマオブジェクト（列やインデックスなど）を変更できるようになりました。ただし、文全体のアトミック性は維持されます。そのため、複数の変更は単一の`ALTER`文で行うことをお勧めします。
 

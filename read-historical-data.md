@@ -3,7 +3,7 @@ title: Read Historical Data Using the System Variable `tidb_snapshot`
 summary: システム変数 tidb_snapshot` を使用して、TiDB が履歴バージョンからデータを読み取る方法について説明します。
 ---
 
-# システム変数<code>tidb_snapshot</code>を使用して履歴データを読み取る {#read-historical-data-using-the-system-variable-code-tidb-snapshot-code}
+# システム変数`tidb_snapshot`を使用して履歴データを読み取る {#read-historical-data-using-the-system-variable-tidb-snapshot}
 
 このドキュメントでは、システム変数`tidb_snapshot`を使用して履歴バージョンからデータを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例と戦略も含まれます。
 

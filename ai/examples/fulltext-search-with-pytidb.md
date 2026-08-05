@@ -18,7 +18,7 @@ summary: TiDBの全文検索を使用して、従来型のテキスト検索を�
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. `pytidb`リポジトリをクローンする {#step-1-clone-the-pytidb-repository}
 
 [`pytidb`](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKであり、開発者がAIアプリケーションを効率的に構築できるよう設計されています。
 

@@ -71,7 +71,7 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 ...
 ```
 
-## <code>tidb-lightning</code>プロセスを停止するにはどうすればいいですか? {#how-to-stop-the-tidb-lightning-process}
+## `tidb-lightning`プロセスを停止するにはどうすればいいですか? {#how-to-stop-the-tidb-lightning-process}
 
 `tidb-lightning`プロセスを停止するには、展開方法に応じて対応する操作を選択できます。
 

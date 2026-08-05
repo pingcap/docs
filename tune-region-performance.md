@@ -21,7 +21,7 @@ TiKVは自動的に[最下層のデータを分割する](/best-practices/tidb-b
 
 多くのリージョンのパフォーマンスオーバーヘッドを削減するには、 [休止状態リージョン](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances)または[`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval)有効にすることもできます。
 
-## リージョンサイズを調整するには、 <code>region-split-size</code>を使用します。 {#use-region-split-size-to-adjust-region-size}
+## リージョンサイズを調整するには、 `region-split-size`を使用します。 {#use-region-split-size-to-adjust-region-size}
 
 > **Note:**
 >

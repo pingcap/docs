@@ -83,7 +83,7 @@ TiDBは、時間値を格納するためにMySQLのすべての日付と時刻�
 
 ## サポートされているタイプ {#supported-types}
 
-### <code>DATE</code>型 {#date-type}
+### `DATE`型 {#date-type}
 
 `DATE`は日付部分のみを含み、時刻部分は含みません`YYYY-MM-DD`形式で表示されます。サポートされる範囲は「0000-01-01」から「9999-12-31」です。
 
@@ -91,7 +91,7 @@ TiDBは、時間値を格納するためにMySQLのすべての日付と時刻�
 DATE
 ```
 
-### <code>TIME</code>型 {#time-type}
+### `TIME`型 {#time-type}
 
 `TIME`型の場合、フォーマットは`HH:MM:SS[.fraction]`で、有効な値の範囲は '-838:59:59.000000' から '838:59:59.000000' です。`TIME`は、1 日の時刻だけでなく、2 つのイベント間の時間間隔も示します。オプションで 0 から 6 の範囲の`fsp`値を指定し、小数秒の精度を指定できます。省略した場合、デフォルトの精度は 0 です。
 
@@ -103,7 +103,7 @@ TIME[(fsp)]
 >
 > `TIME`の省略形に注意してください。例えば、「11:12」は「00:11:12」ではなく「11:12:00」を意味します。一方、「1112」は「00:11:12」を意味します。これらの違いは、 `:`文字の有無によって生じます。
 
-### <code>DATETIME</code>型 {#datetime-type}
+### `DATETIME`型 {#datetime-type}
 
 `DATETIME`には日付部分と時刻部分の両方が含まれます。有効な値の範囲は「0000-01-01 00:00:00.000000」から「9999-12-31 23:59:59.999999」です。
 
@@ -113,7 +113,7 @@ TiDBは`DATETIME`値を`YYYY-MM-DD HH:MM:SS[.fraction]`形式で表示します�
 DATETIME[(fsp)]
 ```
 
-### <code>TIMESTAMP</code>型 {#timestamp-type}
+### `TIMESTAMP`型 {#timestamp-type}
 
 `TIMESTAMP`日付部分と時刻部分の両方を含みます。有効な値の範囲は、UTC時間で「1970-01-01 00:00:01.000000」から「2038-01-19 03:14:07.999999」までです。オプションで0から6の範囲のfsp値を指定して、小数秒の精度を指定できます。省略した場合、デフォルトの精度は0です。
 
@@ -131,7 +131,7 @@ TIMESTAMP[(fsp)]
 >
 > MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。2038を超える値を格納する場合は、代わりに`DATETIME`型の使用を検討してください。
 
-### <code>YEAR</code>型 {#year-type}
+### `YEAR`型 {#year-type}
 
 `YEAR`型は「YYYY」形式で指定します。サポートされる値の範囲は1901から2155まで、または0000です。
 
@@ -149,7 +149,7 @@ YEAR[(4)]
 
 無効な値`YEAR`は自動的に 0000 に変換されます (ユーザーが`NO_ZERO_DATE` SQL モードを使用していない場合)。
 
-## <code>TIMESTAMP</code>と<code>DATETIME</code>の自動初期化と更新 {#automatic-initialization-and-update-of-timestamp-and-datetime}
+## `TIMESTAMP`と`DATETIME`の自動初期化と更新 {#automatic-initialization-and-update-of-timestamp-and-datetime}
 
 `TIMESTAMP`または`DATETIME`値タイプを持つ列は、自動的に初期化されるか、現在の時刻に更新されます。
 

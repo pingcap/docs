@@ -64,7 +64,7 @@ pip install Django django-tidb mysqlclient numpy python-dotenv
 
 mysqlclientのインストールで問題が発生した場合は、mysqlclientの公式ドキュメントを参照してください。
 
-#### <code>django-tidb</code>とは何ですか？ {#what-is-code-django-tidb-code}
+#### `django-tidb`とは何ですか？ {#what-is-django-tidb}
 
 `django-tidb`は Django 用の TiDB 方言であり、Django ORM を拡張して TiDB 固有の機能 (例えば、ベクトル検索) をサポートし、TiDB と Django 間の互換性の問題を解決します。
 

@@ -418,7 +418,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}';
 ```
 
-#### <code>PRIMARY_REGION</code>を使用する {#use-code-primary-region-code}
+#### `PRIMARY_REGION`を使用する {#use-primary-region}
 
 クラスタトポロジに`region`ラベルが設定されている場合、 `PRIMARY_REGION`および`REGIONS`オプションを使用して、フォロワーの配置ポリシーを指定することもできます。
 

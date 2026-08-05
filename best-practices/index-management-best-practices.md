@@ -43,7 +43,7 @@ TiDB は、次のツールを導入することでインデックスの最適化
 
 これらの観測ツールを使用することで、パフォーマンスの低下を招くことなく、冗長なインデックスを確実にクリーンアップできます。
 
-## <code>TIDB_INDEX_USAGE</code>を使用してインデックスの使用状況を追跡する {#track-index-usage-using-code-tidb-index-usage-code}
+## `TIDB_INDEX_USAGE`を使用してインデックスの使用状況を追跡する {#track-index-usage-using-tidb-index-usage}
 
 [TiDB v8.0.0](/releases/release-8.0.0.md)で導入された`TIDB_INDEX_USAGE`システム テーブルは、インデックスの使用方法に関するリアルタイムの分析情報を提供し、クエリ パフォーマンスの最適化や不要なインデックスの削除に役立ちます。
 
@@ -55,7 +55,7 @@ TiDB は、次のツールを導入することでインデックスの最適化
 
 [TiDB v8.4.0](/releases/release-8.4.0.md)から始まる`TIDB_INDEX_USAGE`システム テーブルには、クラスター化されたテーブルの主キーも含まれており、インデックスのパフォーマンスをより詳細に把握できます。
 
-### <code>TIDB_INDEX_USAGE</code>の主要な指標 {#key-metrics-in-code-tidb-index-usage-code}
+### `TIDB_INDEX_USAGE`の主要な指標 {#key-metrics-in-tidb-index-usage}
 
 `TIDB_INDEX_USAGE`システム テーブルのフィールドを確認する場合は、次の SQL ステートメントを実行します。
 
@@ -88,7 +88,7 @@ DESC TIDB_INDEX_USAGE;
 
 これらの列の説明については、 [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)を参照してください。
 
-### <code>TIDB_INDEX_USAGE</code>を使用して未使用および非効率的なインデックスを特定する {#identify-unused-and-inefficient-indexes-using-code-tidb-index-usage-code}
+### `TIDB_INDEX_USAGE`を使用して未使用および非効率的なインデックスを特定する {#identify-unused-and-inefficient-indexes-using-tidb-index-usage}
 
 このセクションでは、 `TIDB_INDEX_USAGE`システム テーブルを使用して、未使用のインデックスと非効率的なインデックスを識別する方法について説明します。
 
@@ -104,7 +104,7 @@ DESC TIDB_INDEX_USAGE;
 
 `TIDB_INDEX_USAGE`システム テーブルを使用すると、インデックスのパフォーマンスに関する詳細な情報を取得できるため、不要なインデックスを削除し、クエリ実行を最適化することが容易になります。
 
-### <code>TIDB_INDEX_USAGE</code>効果的に使用する {#use-code-tidb-index-usage-code-effectively}
+### `TIDB_INDEX_USAGE`効果的に使用する {#use-tidb-index-usage-effectively}
 
 次の点は、 `TIDB_INDEX_USAGE`システム テーブルを正しく理解して使用するのに役立ちます。
 
@@ -126,7 +126,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_us
 
 これにより、時間の経過に伴うスナップショットの比較による履歴追跡が可能になり、インデックスの使用傾向を検出し、より情報に基づいたプルーニングの決定を行うことができます。
 
-## <code>CLUSTER_TIDB_INDEX_USAGE</code>を使用して TiDB ノード間でインデックス使用状況データを統合します。 {#consolidate-index-usage-data-across-tidb-nodes-using-code-cluster-tidb-index-usage-code}
+## `CLUSTER_TIDB_INDEX_USAGE`を使用して TiDB ノード間でインデックス使用状況データを統合します。 {#consolidate-index-usage-data-across-tidb-nodes-using-cluster-tidb-index-usage}
 
 TiDBは分散SQLデータベースであるため、クエリのワークロードは複数のノードに分散されます。各TiDBノードは、自身のローカルインデックスの使用状況を追跡します。インデックスパフォーマンスのグローバルビューとして、TiDBは[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)システムテーブルを提供しています。このビューは、すべてのTiDBノードからのインデックス使用状況データを統合し、インデックス戦略の最適化において分散クエリのワークロードを完全に考慮します。
 
@@ -141,7 +141,7 @@ ORDER BY total_queries DESC;
 
 これにより、インデックスがすべてのノードで実際に未使用であるか、特定のインスタンスでのみ未使用であるかを判断し、情報に基づいたインデックスの削除を決定できるようになります。
 
-### <code>TIDB_INDEX_USAGE</code>と<code>CLUSTER_TIDB_INDEX_USAGE</code>の主な違い {#key-differences-between-code-tidb-index-usage-code-and-code-cluster-tidb-index-usage-code}
+### `TIDB_INDEX_USAGE`と`CLUSTER_TIDB_INDEX_USAGE`の主な違い {#key-differences-between-tidb-index-usage-and-cluster-tidb-index-usage}
 
 次の表は、 `TIDB_INDEX_USAGE`と`CLUSTER_TIDB_INDEX_USAGE`の主な違いを示しています。
 
@@ -151,7 +151,7 @@ ORDER BY total_queries DESC;
 | インデックス追跡 | データは各データベース インスタンスに対してローカルです。          | クラスター全体の集中ビューを提供します。               |
 | 主な使用例    | データベース インスタンス レベルでインデックスの使用状況をデバッグします。 | グローバル インデックス パターンとマルチノードの動作を分析します。 |
 
-### <code>CLUSTER_TIDB_INDEX_USAGE</code>効果的に使用する {#use-code-cluster-tidb-index-usage-code-effectively}
+### `CLUSTER_TIDB_INDEX_USAGE`効果的に使用する {#use-cluster-tidb-index-usage-effectively}
 
 `CLUSTER_TIDB_INDEX_USAGE`システム テーブルは複数のノードからのデータを統合するため、次の点に注意してください。
 
@@ -165,7 +165,7 @@ ORDER BY total_queries DESC;
 
 `CLUSTER_TIDB_INDEX_USAGE`を使用すると、インデックスの動作を全体的に把握でき、インデックス戦略が分散クエリのワークロードに適合していることを確認できます。
 
-## <code>schema_unused_indexes</code>を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-code-schema-unused-indexes-code}
+## `schema_unused_indexes`を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-schema-unused-indexes}
 
 インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
 
@@ -177,7 +177,7 @@ ORDER BY total_queries DESC;
 
 `schema_unused_indexes`を使用すると、不要なインデックスをすばやく識別し、最小限の労力でデータベースのオーバーヘッドを削減できます。
 
-### <code>schema_unused_indexes</code>仕組み {#how-code-schema-unused-indexes-code-works}
+### `schema_unused_indexes`仕組み {#how-schema-unused-indexes-works}
 
 `schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリ アクティビティが 0 個記録されたインデックスを自動的に除外することを意味します。
 
@@ -196,7 +196,7 @@ SELECT * FROM sys.schema_unused_indexes;
     | bookshop        | ratings       | uniq_book_user_idx |
     +---------------- + ------------- + -------------------+
 
-### <code>schema_unused_indexes</code>を使用する際の考慮事項 {#considerations-when-using-code-schema-unused-indexes-code}
+### `schema_unused_indexes`を使用する際の考慮事項 {#considerations-when-using-schema-unused-indexes}
 
 `schema_unused_indexes`を使用する場合は、次の点に注意してください。
 
@@ -217,7 +217,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 [不可視インデックス](#safely-test-index-removal-using-invisible-indexes)を使用すると、パフォーマンスに影響を与えずにインデックスを削除できるかどうかを安全にテストできます。
 
-### <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-code-schema-unused-indexes-code-view}
+### `schema_unused_indexes`ビューを手動で作成する {#manually-create-the-schema-unused-indexes-view}
 
 以前のバージョンから TiDB v8.0.0 以降にアップグレードされたクラスターの場合は、システム スキーマと含まれるビューを手動で作成する必要があります。
 

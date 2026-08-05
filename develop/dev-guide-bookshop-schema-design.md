@@ -17,7 +17,7 @@ Bookshopアプリケーションのテーブル構造とデータをインポー
 -   [TiDB Self-Managed: `tiup demo`経由](#tidb-self-managed-via-tiup-demo)。
 -   [TiDB Cloud：インポート機能経由](#tidb-cloud-via-the-import-feature)。
 
-### TiDB Self-Managed: <code>tiup demo</code>経由 {#tidb-self-managed-via-tiup-demo}
+### TiDB Self-Managed: `tiup demo`経由 {#tidb-self-managed-via-tiup-demo}
 
 [TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してTiDB Self-Managedクラスタをデプロイしている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーション用のサンプルデータをすばやく生成してインポートできます。
 
@@ -153,7 +153,7 @@ WHERE table_schema LIKE 'bookshop';
 | price      | DECIMAL(15,2)  | 価格                       |
 | published_at | DATETIME     | 発行日                      |
 
-### <code>authors</code>一覧 {#authors-table}
+### `authors`一覧 {#authors-table}
 
 この表には著者の基本情報が格納されています。
 
@@ -165,7 +165,7 @@ WHERE table_schema LIKE 'bookshop';
 | birth_year | SMALLINT      | 生年                        |
 | death_year | SMALLINT      | 死亡年                       |
 
-### <code>users</code>テーブル {#users-table}
+### `users`テーブル {#users-table}
 
 このテーブルには、書店利用者の情報が格納されています。
 
@@ -175,7 +175,7 @@ WHERE table_schema LIKE 'bookshop';
 | balance    | DECIMAL(15,2)  | バランス      |
 | nickname   | VARCHAR(100)   | ニックネーム    |
 
-### <code>ratings</code>表 {#ratings-table}
+### `ratings`表 {#ratings-table}
 
 このテーブルには、書籍に対するユーザー評価の記録が保存されています。
 
@@ -186,7 +186,7 @@ WHERE table_schema LIKE 'bookshop';
 | score      | TINYINT  | ユーザー評価（1～5）                            |
 | rated_at   | DATETIME | 評価時間                                   |
 
-### <code>book_authors</code>テーブル {#book_authors-table}
+### `book_authors`テーブル {#book_authors-table}
 
 著者は複数の書籍を執筆することがあり、また、一冊の書籍に複数の著者が関わる場合もあります。この表は、書籍と著者間の対応関係を格納します。
 
@@ -195,7 +195,7 @@ WHERE table_schema LIKE 'bookshop';
 | book_id    | BIGINT  | 書籍の固有ID（[本](#books-table)にリンク）     |
 | author_id  | BIGINT  | 著者の固有ID（[著者](#authors-table)へのリンク） |
 
-### <code>orders</code>テーブル {#orders-table}
+### `orders`テーブル {#orders-table}
 
 このテーブルにはユーザーの購入情報が保存されます。
 
@@ -207,7 +207,7 @@ WHERE table_schema LIKE 'bookshop';
 | quantity   | TINYINT  | 購入数量                                         |
 | ordered_at | DATETIME | 購入時間                                         |
 
-## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-dbinitsql}
+## データベース初期化スクリプト`dbinit.sql` {#database-initialization-script-dbinitsql}
 
 Bookshopアプリケーションでデータベーステーブル構造を手動で作成する場合は、次のSQLステートメントを実行してください。
 

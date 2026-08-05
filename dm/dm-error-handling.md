@@ -105,7 +105,7 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 | `code=32001` | 異常ダンプ処理装置                                                                                                                                    | エラーメッセージに`mydumper: argument list too long.`が含まれている場合は、ブロック/許可リストに従って、 `task.yaml`ファイルの Mydumper 引数`extra-args`に`--regex`正規表現を手動で追加して、エクスポートするテーブルを設定します。例えば、 `hello`という名前のテーブルをすべてエクスポートするには`--regex '.*\\.hello$'`を追加し、すべてのテーブルをエクスポートするには`--regex '.*'`を追加します。 |
 | `code=38008` | DM コンポーネント間の gRPC 通信でエラーが発生します。                                                                                                              | チェック`class` ：どのコンポーネントの相互作用でエラーが発生しているかを確認します。通信エラーの種類を特定します。gRPC接続の確立時にエラーが発生する場合は、通信サーバーが正常に動作しているかどうかを確認します。                                                                                                                                                   |
 
-### <code>invalid connection</code>エラーが返され、移行タスクが中断された場合、どうすればよいですか? {#what-can-i-do-when-a-migration-task-is-interrupted-with-the-invalid-connection-error-returned}
+### `invalid connection`エラーが返され、移行タスクが中断された場合、どうすればよいですか? {#what-can-i-do-when-a-migration-task-is-interrupted-with-the-invalid-connection-error-returned}
 
 #### 理由 {#reason-1}
 
@@ -118,7 +118,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 -   増分レプリケーション プロセス中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
 -   バージョンの問題により DM が自動的に再試行されない場合、または再試行に失敗した場合は、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
-### 移行タスクが<code>driver: bad connection</code>エラーが返されました {#a-migration-task-is-interrupted-with-the-driver-bad-connection-error-returned}
+### 移行タスクが`driver: bad connection`エラーが返されました {#a-migration-task-is-interrupted-with-the-driver-bad-connection-error-returned}
 
 #### 理由 {#reason-2}
 
@@ -128,7 +128,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 現在のバージョンのDMは、エラー発生時に自動的に再試行します。自動再試行をサポートしていない以前のバージョンをご利用の場合は、コマンド`stop-task`を実行してタスクを停止し、その後コマンド`start-task`を実行してタスクを再開してください。
 
-### リレーユニットは<code>event from * in * diff from passed-in event *</code>スローするか、または、 binlogエラーの取得または解析に失敗して移行タスクが中断され、binlog <code>get binlog error ERROR 1236 (HY000)</code>や<code>binlog checksum mismatch, data may be corrupted</code> 。 {#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned}
+### リレーユニットは`event from * in * diff from passed-in event *`スローするか、または、 binlogエラーの取得または解析に失敗して移行タスクが中断され、binlog `get binlog error ERROR 1236 (HY000)`や`binlog checksum mismatch, data may be corrupted` 。 {#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned}
 
 #### 理由 {#reason}
 
@@ -172,13 +172,13 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 6.  `query-status`を使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
 
-### タスクをクエリするかログを確認すると、 <code>Access denied for user 'root'@'172.31.43.27' (using password: YES)</code>表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
+### タスクをクエリするかログを確認すると、 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
 
 すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
 さらに、上流データベースと下流データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクを開始する際には、データ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)必要です。
 
-### <code>load</code>処理ユニットから<code>packet for query is too large. Try adjusting the 'max_allowed_packet' variable</code> {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
+### `load`処理ユニットから`packet for query is too large. Try adjusting the 'max_allowed_packet' variable` {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
 
 #### 理由 {#reasons}
 

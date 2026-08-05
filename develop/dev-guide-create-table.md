@@ -291,7 +291,7 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 
 フィールド`cop[tiflash]`が表示された場合、タスクが処理のために**TiFlash**に送信されることを意味します。
 
-## <code>CREATE TABLE</code>文を実行します。 {#execute-the-code-create-table-code-statement}
+## `CREATE TABLE`文を実行します。 {#execute-the-create-table-statement}
 
 上記のルールに従ってすべてのテーブルを作成した後、データベース[データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)スクリプトは次のようになります。テーブル情報を詳しく見たい場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 
@@ -370,7 +370,7 @@ SHOW TABLES IN `bookshop`;
 
 -   [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key` } を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 
-### <code>CREATE TABLE</code>文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-code-create-table-code-statement}
+### `CREATE TABLE`文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-create-table-statement}
 
 -   データベーススキーマの変更にクライアント側のDriverやORMを使用することは推奨されません。データベーススキーマの変更には[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。このドキュメントでは、ほとんどのシナリオでSQLファイルを渡してデータベーススキーマを変更するために**MySQLクライアント**を使用します。
 -   SQL 開発[テーブルの作成と削除に関する仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)従ってください。ビジネスアプリケーション内にbuild文とdelete文をラップして判定ロジックを追加することを推奨します。

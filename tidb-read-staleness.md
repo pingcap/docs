@@ -3,7 +3,7 @@ title: Read Historical Data Using the `tidb_read_staleness` System Variable
 summary: tidb_read_staleness` システム変数を使用して履歴データを読み取る方法を学習します。
 ---
 
-# <code>tidb_read_staleness</code>システム変数を使用して履歴データを読み取る {#read-historical-data-using-the-code-tidb-read-staleness-code-system-variable}
+# `tidb_read_staleness`システム変数を使用して履歴データを読み取る {#read-historical-data-using-the-tidb-read-staleness-system-variable}
 
 履歴データの読み取りをサポートするために、TiDB v5.4 では新しいシステム変数`tidb_read_staleness`導入されました。このドキュメントでは、このシステム変数を使用して履歴データを読み取る方法と、詳細な操作手順について説明します。
 

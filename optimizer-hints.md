@@ -602,7 +602,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 グローバルヒントは[ビュー](/views.md)で機能します。グローバルヒントとして指定すると、クエリで定義されたヒントがビュー内で有効になります。グローバルヒントを指定するには、まず`QB_NAME`ヒントを使用してクエリブロック名を定義し、次に`ViewName@QueryBlockName`の形式で対象のヒントを追加します。
 
-### ステップ1: <code>QB_NAME</code>ヒントを使用してビューのクエリブロック名を定義する {#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint}
+### ステップ1: `QB_NAME`ヒントを使用してビューのクエリブロック名を定義する {#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint}
 
 [`QB_NAME`ヒント](#qb_name)は、ビューの各クエリブロックに新しい名前を定義するために使用します。ビューの`QB_NAME`のヒントの定義は[クエリブロック](#qb_name)と同じですが、構文が`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
 
@@ -932,9 +932,9 @@ SHOW WARNINGS;
 
 この場合、ヒントは`SELECT`キーワードの直後に配置する必要があります。詳細については、 [構文](#syntax)セクションをご覧ください。
 
-### <code>INL_JOIN</code>ヒントは有効になりません {#inl_join-hint-does-not-take-effect}
+### `INL_JOIN`ヒントは有効になりません {#inl_join-hint-does-not-take-effect}
 
-#### <code>INL_JOIN</code>ヒントは、テーブル結合の列に組み込み関数が使用されている場合には効果がありません。 {#inl_join-hint-does-not-take-effect-when-built-in-functions-are-used-on-columns-for-joining-tables}
+#### `INL_JOIN`ヒントは、テーブル結合の列に組み込み関数が使用されている場合には効果がありません。 {#inl_join-hint-does-not-take-effect-when-built-in-functions-are-used-on-columns-for-joining-tables}
 
 場合によっては、テーブルを結合する列で組み込み関数を使用すると、オプティマイザーが`IndexJoin`プランを選択できず、 `INL_JOIN`ヒントも有効にならないことがあります。
 
@@ -997,7 +997,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBST
 7 rows in set (0.00 sec)
 ```
 
-#### <code>INL_JOIN</code> 、 <code>INL_HASH_JOIN</code> 、および<code>INL_MERGE_JOIN</code>ヒントは、照合順序の非互換性のため有効になりません。 {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
+#### `INL_JOIN` 、 `INL_HASH_JOIN` 、および`INL_MERGE_JOIN`ヒントは、照合順序の非互換性のため有効になりません。 {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
 
 2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`演算子を使用してクエリを実行することはできません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
 
@@ -1034,7 +1034,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-#### <code>INL_JOIN</code>ヒントは結合順序により有効になりません {#inl_join-hint-does-not-take-effect-due-to-join-order}
+#### `INL_JOIN`ヒントは結合順序により有効になりません {#inl_join-hint-does-not-take-effect-due-to-join-order}
 
 [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-)または`TIDB_INLJ(t1, t2)`ヒントは、 `t1`と`t2`を`IndexJoin`演算子を使用して直接結合するのではなく、 `IndexJoin`演算子内の内部テーブルとして動作させ、他のテーブルと結合するように指示します。例:
 
@@ -1076,7 +1076,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### ヒントを使用すると<code>Can't find a proper physical plan for this query</code>というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
+### ヒントを使用すると`Can't find a proper physical plan for this query`というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
 
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 
@@ -1100,7 +1100,7 @@ EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
-### <code>SET_VAR</code>をサブクエリに記述すると効果を発揮しません {#set_var-does-not-take-effect-when-written-in-subqueries}
+### `SET_VAR`をサブクエリに記述すると効果を発揮しません {#set_var-does-not-take-effect-when-written-in-subqueries}
 
 `SET_VAR`は、現在のステートメントのシステム変数の値を変更するために使用されます。サブクエリには記述しないでください。サブクエリに記述した場合、サブクエリの特殊な処理により、 `SET_VAR`は効力を持たない可能性があります。
 

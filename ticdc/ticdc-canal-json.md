@@ -310,7 +310,7 @@ v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形�
 -   `mysqlType`フィールドには、各タイプのタイプ パラメータの完全な情報が含まれています。
 -   `Update`タイプのイベントは、変更された列データのみを出力します。
 
-### <code>Update</code>タイプのイベント {#event-of-code-update-code-type}
+### `Update`タイプのイベント {#event-of-update-type}
 
 `Update`種類のイベントの場合:
 
@@ -408,7 +408,7 @@ update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 }
 ```
 
-### <code>mysqlType</code>フィールド {#code-mysqltype-code-field}
+### `mysqlType`フィールド {#mysqltype-field}
 
 `mysqlType`フィールドについては、型にパラメータが含まれる場合、公式の Canal には型パラメータの完全な情報が含まれます。TiCDC にはそのような情報は含まれません。
 
@@ -497,7 +497,7 @@ TiCDC の出力は次のとおりです。
 
 ## TiCDC Canalの変更 -JSON {#changes-in-ticdc-canal-json}
 
-### <code>Delete</code>イベントの<code>Old</code>フィールドの変更 {#changes-in-the-code-old-code-field-of-the-code-delete-code-events}
+### `Delete`イベントの`Old`フィールドの変更 {#changes-in-the-old-field-of-the-delete-events}
 
 v5.4.0 から、 `Delete`イベントのうち`old`フィールドが変更されました。
 

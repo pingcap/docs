@@ -29,7 +29,7 @@ skip-ca = true
 skip-ca = true
 ```
 
-## <code>tiproxy.toml</code>ファイルを設定する {#configure-the-code-tiproxy-toml-code-file}
+## `tiproxy.toml`ファイルを設定する {#configure-the-tiproxy-toml-file}
 
 このセクションでは、TiProxy の構成パラメータについて説明します。
 

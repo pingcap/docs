@@ -3,7 +3,7 @@ title: Use the `tidbcloud_restore` Resource
 summary: tidbcloud_restore` リソースを使用して復元タスクを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_restore</code>リソースを使用する {#use-the-code-tidbcloud-restore-code-resource}
+# `tidbcloud_restore`リソースを使用する {#use-the-tidbcloud-restore-resource}
 
 このドキュメントの`tidbcloud_restore`リソースを使用して復元タスクを管理する方法を学習できます。
 

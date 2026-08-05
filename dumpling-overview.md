@@ -234,7 +234,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder
 
 ### エクスポートされたデータをフィルタリングする {#filter-the-exported-data}
 
-#### <code>--where</code>オプションを使用してデータをフィルタリングします {#use-the-code-where-code-option-to-filter-data}
+#### `--where`オプションを使用してデータをフィルタリングします {#use-the-where-option-to-filter-data}
 
 デフォルトでは、 Dumpling はシステム データベース ( `mysql` 、 `sys` 、 `INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `METRICS_SCHEMA` 、および`INSPECTION_SCHEMA` ) を除くすべてのデータベースをエクスポートします。 `--where <SQL where expression>`を使用して、エクスポートするレコードを選択できます。
 
@@ -244,7 +244,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
 
 上記のコマンドは、各テーブルから`id < 100`に一致するデータをエクスポートします。 `--where`パラメータと`--sql`パラメータを同時に使用することはできませんのでご注意ください。
 
-#### <code>--filter</code>オプションを使用してデータをフィルタリングします。 {#use-the-code-filter-code-option-to-filter-data}
+#### `--filter`オプションを使用してデータをフィルタリングします。 {#use-the-filter-option-to-filter-data}
 
 Dumpling`--filter`オプションでテーブルフィルタを指定することで、特定のデータベースまたはテーブルをフィルタリングできます。テーブルフィルタの構文は`.gitignore`と同様です。詳細は、[テーブルフィルター](/table-filter.md)を参照してください。
 
@@ -254,7 +254,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "empl
 
 上記のコマンドは`employees`データベース内のすべてのテーブルと、すべてのデータベース内の`WorkOrder`テーブルをエクスポートします。
 
-#### <code>-B</code>または<code>-T</code>オプションを使用してデータをフィルタリングします。 {#use-the-code-b-code-or-code-t-code-option-to-filter-data}
+#### `-B`または`-T`オプションを使用してデータをフィルタリングします。 {#use-the-b-or-t-option-to-filter-data}
 
 Dumpling、 `-B`オプションを使用して特定のデータベースをエクスポートしたり、 `-T`オプションを使用して特定のテーブルをエクスポートすることもできます。
 

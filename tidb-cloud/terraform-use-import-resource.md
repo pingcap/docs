@@ -3,7 +3,7 @@ title: Use the `tidbcloud_import` Resource
 summary: tidbcloud_import` リソースを使用してインポート タスクを管理する方法を学習します。
 ---
 
-# <code>tidbcloud_import</code>リソースを使用する {#use-the-code-tidbcloud-import-code-resource}
+# `tidbcloud_import`リソースを使用する {#use-the-tidbcloud-import-resource}
 
 このドキュメントの`tidbcloud_import`リソースを使用して、 TiDB Cloudクラスターにデータをインポートする方法を学習できます。
 

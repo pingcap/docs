@@ -9,7 +9,7 @@ TiDB Dashboardにアクセスするにはサインインする必要がありま
 
 ## TiDBユーザーのセキュリティを強化する {#enhance-security-of-tidb-users}
 
-### TiDB <code>root</code>ユーザーに強力なパスワードを設定する {#set-a-strong-password-for-the-tidb-code-root-code-user}
+### TiDB `root`ユーザーに強力なパスワードを設定する {#set-a-strong-password-for-the-tidb-root-user}
 
 TiDB Dashboardのアカウントシステムは、 TiDB SQLユーザーのアカウントシステムと一致しています。デフォルトでは、TiDBの`root`ユーザーにはパスワードが設定されていないため、TiDB Dashboardへのアクセスにはパスワード認証が不要です。これにより、悪意のある訪問者は、特権SQL文の実行を含む高い権限を取得できます。
 

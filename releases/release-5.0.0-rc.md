@@ -50,7 +50,7 @@ v5.0 の主な新機能または改善点は次のとおりです。
 -   [ユーザードキュメント](/sql-statements/sql-statement-alter-index.md)
 -   関連号: [＃9246](https://github.com/pingcap/tidb/issues/9246)
 
-### <code>EXCEPT</code>および<code>INTERSECT</code>演算子をサポート {#support-code-except-code-and-code-intersect-code-operators}
+### `EXCEPT`および`INTERSECT`演算子をサポート {#support-except-and-intersect-operators}
 
 `INTERSECT`演算子は集合演算子であり、2つ以上のクエリの結果セットの積集合を返します。ある意味では、 `InnerJoin`演算子の代替として機能します。
 
@@ -170,7 +170,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 ## 診断 {#diagnostics}
 
-### より多くの情報を収集する最適化された<code>EXPLAIN</code>機能により、ユーザーはパフォーマンスの問題をトラブルシューティングできるようになります。 {#optimized-code-explain-code-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
+### より多くの情報を収集する最適化された`EXPLAIN`機能により、ユーザーはパフォーマンスの問題をトラブルシューティングできるようになります。 {#optimized-explain-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
 
 SQLパフォーマンスの問題をトラブルシューティングする際には、原因を特定するための詳細な診断情報が必要です。以前のTiDBバージョンでは、 `EXPLAIN`ステートメントで収集される情報は十分に詳細ではありませんでした。DBAはログ情報、監視情報、あるいは推測のみに基づいてトラブルシューティングを行っていましたが、これは非効率的でした。TiDB v5.0では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるよう、以下の改善が行われました。
 

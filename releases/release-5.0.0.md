@@ -110,7 +110,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 インデックスの表示設定を変更するには、 `ALTER INDEX`ステートメントを使用します。変更後、オプティマイザはインデックスの表示設定に基づいて、このインデックスをインデックスリストに追加するかどうかを決定します。
 
-#### <code>EXCEPT</code>演算子と<code>INTERSECT</code>演算子 {#code-except-code-and-code-intersect-code-operators}
+#### `EXCEPT`演算子と`INTERSECT`演算子 {#except-and-intersect-operators}
 
 [ユーザー向けドキュメント](/functions-and-operators/set-operators.md)、 [#18031](https://github.com/pingcap/tidb/issues/18031)
 
@@ -270,7 +270,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 コプロセッサーキャッシュ機能を無効にするには、 `capacity-mb`の構成項目`tikv-client.copr-cache`を`0.0`に変更します。
 
-### <code>delete from table where id &lt;? Limit ?</code>ステートメントの実行パフォーマンスを改善します。 {#improve-the-execution-performance-of-code-delete-from-table-where-id-x3c-limit-code-statement}
+### `delete from table where id &lt;? Limit ?`ステートメントの実行パフォーマンスを改善します。 {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
 
 [#18028](https://github.com/pingcap/tidb/issues/18028)
 
@@ -330,7 +330,7 @@ GC の CPU および I/O リソースの消費を削減するために、GC コ�
 
 [ユーザー向けドキュメント](/sql-plan-management.md)
 
-#### SQLバインディングは、 <code>INSERT</code> 、 <code>REPLACE</code> 、 <code>UPDATE</code> 、 <code>DELETE</code>ステートメントをサポートします。 {#sql-binding-supports-the-code-insert-code-code-replace-code-code-update-code-code-delete-code-statements}
+#### SQLバインディングは、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE`ステートメントをサポートします。 {#sql-binding-supports-the-insert-replace-update-delete-statements}
 
 パフォーマンスの調整やデータベースの保守を行う際に、実行計画の不安定さが原因でシステムパフォーマンスが不安定になっていることが判明した場合、ご自身の判断または`EXPLAIN ANALYZE`によるテストに基づいて、手動で最適化されたSQL文を選択できます。最適化されたSQL文をアプリケーションコードで実行されるSQL文にバインドすることで、安定したパフォーマンスを確保できます。
 

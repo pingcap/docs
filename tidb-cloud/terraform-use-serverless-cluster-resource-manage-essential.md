@@ -3,7 +3,7 @@ title: Use the `tidbcloud_serverless_cluster` Resource
 summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Essential クラスターを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_serverless_cluster</code>リソースを使用する {#use-the-code-tidbcloud-serverless-cluster-code-resource}
+# `tidbcloud_serverless_cluster`リソースを使用する {#use-the-tidbcloud-serverless-cluster-resource}
 
 このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターを管理する方法について説明します。
 
@@ -20,7 +20,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.2以降。
 
-## <code>tidbcloud_projects</code>データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
+## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
 各TiDBクラスタはプロジェクトに属します。TiDB Cloud Essentialクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 

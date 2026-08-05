@@ -3,7 +3,7 @@ title: Use `tidbcloud_serverless_branch` Resource
 summary: サーバーレス ブランチ リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_serverless_branch</code>リソースを使用する {#use-the-code-tidbcloud-serverless-branch-code-resource}
+# `tidbcloud_serverless_branch`リソースを使用する {#use-the-tidbcloud-serverless-branch-resource}
 
 このドキュメントでは、 `tidbcloud_serverless_branch`リソースを使用して[TiDB Cloud Starter またはTiDB Cloud Essential ブランチ](/tidb-cloud/branch-manage.md)管理する方法について説明します。
 

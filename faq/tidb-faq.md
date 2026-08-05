@@ -105,7 +105,7 @@ Atomikosの2つのデータソースを設定したら、JDBCドライブをXA�
 
 スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、パフォーマンスの安定性は XA よりも高いため、TiDB は JTA/XA をサポートしておらず、TiDB が XA をサポートする必要もありません。
 
-### TiDB は、パフォーマンスを損なうことなく、列指向ストレージエンジン (TiFlash) への大量の同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
+### TiDB は、パフォーマンスを損なうことなく、列指向ストレージエンジン (TiFlash) への大量の同時`INSERT`または`UPDATE`操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-insert-or-update-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 
 -   [TiFlash](/tiflash/tiflash-overview.md) 、列指向エンジンの変更を処理するために DeltaTree という特別な構造が導入されています。
 -   TiFlash はRaftグループにおいてラーナーとして動作するため、ログコミットや書き込みの投票は行いません。つまり、DML 操作はTiFlashの確認応答を待つ必要がなく、そのためTiFlashによって OLTP パフォーマンスが低下することはありません。さらに、 TiFlashと TiKV は別々のインスタンスで動作するため、相互に影響を与えることはありません。

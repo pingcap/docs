@@ -193,7 +193,7 @@ vector_store = TiDBVectorStore.from_documents(
 query = "What did the president say about Ketanji Brown Jackson"
 ```
 
-#### オプション1： <code>similarity_search_with_score()</code>を使用する {#option-1-use-code-similarity-search-with-score-code}
+#### オプション1： `similarity_search_with_score()`を使用する {#option-1-use-similarity-search-with-score}
 
 `similarity_search_with_score()`メソッドは、文書とクエリ間のベクトル空間距離を計算します。この距離は類似度スコアとして機能し、選択された`distance_strategy`によって決定されます。このメソッドは、スコアが最も低い上位`k`文書を返します。スコアが低いほど、文書とクエリ間の類似度が高いことを示します。
 
@@ -251,7 +251,7 @@ First, beat the opioid epidemic.
 
 </details>
 
-#### オプション2： <code>similarity_search_with_relevance_scores()</code>を使用する {#option-2-use-code-similarity-search-with-relevance-scores-code}
+#### オプション2： `similarity_search_with_relevance_scores()`を使用する {#option-2-use-similarity-search-with-relevance-scores}
 
 `similarity_search_with_relevance_scores()`メソッドは、関連性スコアが最も高い上位`k`ドキュメントを返します。スコアが高いほど、ドキュメントとクエリの類似性が高いことを示します。
 

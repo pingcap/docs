@@ -3,7 +3,7 @@ title: Use the `tidbcloud_dedicated_network_container` Resource
 summary: tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワーク コンテナを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_dedicated_network_container</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-network-container-code-resource}
+# `tidbcloud_dedicated_network_container`リソースを使用する {#use-the-tidbcloud-dedicated-network-container-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_network_container`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)ネットワーク コンテナーを管理する方法について説明します。
 

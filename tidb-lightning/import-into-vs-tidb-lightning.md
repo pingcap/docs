@@ -11,7 +11,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 `IMPORT INTO`はv7.2.0で導入され、v7.5.0で一般提供（GA）されます。今後のバージョンでも引き続き改良と最適化が行われます。`IMPORT INTO`機能がTiDB Lightningを完全に置き換えることが可能になった時点で、 TiDB Lightningは廃止されます。その際には、TiDBのリリースノートおよびドキュメントで事前にお知らせいたします。
 
-## <code>IMPORT INTO</code>とTiDB Lightningの比較 {#comparison-between-code-import-into-code-and-tidb-lightning}
+## `IMPORT INTO`とTiDB Lightningの比較 {#comparison-between-import-into-and-tidb-lightning}
 
 次のセクションでは、 `IMPORT INTO`とTiDB Lightningの違いをさまざまな側面から説明します。
 
@@ -110,7 +110,7 @@ Due to the use of Global Sort, data imported into TiKV does not overlap, resulti
 
 ローカルソートのみをサポートしているため、新しいTiDB Lightningインスタンスが追加されたときに TiKV にインポートされたデータが重複する可能性があり、その結果 TiKV の圧縮操作が増え、 `IMPORT INTO`に対するスケーラビリティが制限されます。
 
-## <code>IMPORT INTO</code>でサポートされていない機能 {#functionalities-not-supported-by-code-import-into-code}
+## `IMPORT INTO`でサポートされていない機能 {#functionalities-not-supported-by-import-into}
 
 現在、 `IMPORT INTO`はまだいくつかの機能が欠けており、次のようなシナリオではTiDB Lightning を完全に置き換えることはできません。
 

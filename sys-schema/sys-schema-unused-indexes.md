@@ -29,7 +29,7 @@ DESC SCHEMA_UNUSED_INDEXES;
 3 rows in set (0.00 sec)
 ```
 
-## <code>schema_unused_indexes</code>ビューを手動で作成する {#manually-create-the-schema_unused_indexes-view}
+## `schema_unused_indexes`ビューを手動で作成する {#manually-create-the-schema_unused_indexes-view}
 
 v8.0.0より前のバージョンからアップグレードされたクラスターの場合、 `sys`スキーマとその中のビューは自動的には作成されません。以下のSQL文を使用して手動で作成できます。
 

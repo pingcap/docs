@@ -129,7 +129,7 @@ TiDBノードは起動後、統計情報をメモリに読み込む必要があ�
 -   [接続プールの`wait_timeout`と`max_execution_time`](/develop/dev-guide-connection-parameters.md#timeout-related-parameters)を調整します。
 -   システム変数[`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count)を使用して、セッションで準備されるステートメントの最大数を制御します。
 
-#### <code>tidb_enable_rate_limit_action</code>が正しく設定されていません {#code-tidb-enable-rate-limit-action-code-is-not-configured-properly}
+#### `tidb_enable_rate_limit_action`が正しく設定されていません {#tidb-enable-rate-limit-action-is-not-configured-properly}
 
 システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) 、SQL文がデータの読み取りのみを行う場合に、メモリ使用量を効果的に制御します。この変数が有効になっている場合、結合や集計などの計算処理が必要なときに、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)によって制御されない可能性があり、OOM（オーバーヘッドメモリ不足）のリスクが高まります。
 

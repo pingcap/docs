@@ -63,7 +63,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 このセクションでは、プリペアドステートメントの例として、データの`SELECT`とデータの`INSERT`の 2 つを説明します。
 
-### <code>SELECT</code>例 {#code-select-code-example}
+### `SELECT`例 {#select-example}
 
 たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
 
@@ -128,7 +128,7 @@ try (Connection connection = ds.getConnection()) {
 
 </SimpleTab>
 
-### <code>INSERT</code>例 {#code-insert-code-example}
+### `INSERT`例 {#insert-example}
 
 [`books`](/develop/dev-guide-bookshop-schema-design.md#books-table)を例に挙げると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、 `published_at = NOW()` （挿入時の現在時刻）の書籍を挿入する必要があります。`books`の**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入に関する詳細は、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 

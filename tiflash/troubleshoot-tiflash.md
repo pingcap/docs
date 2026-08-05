@@ -35,7 +35,7 @@ TiFlash は様々な理由により正常に起動しない場合があります
 
 上記の方法で問題を解決できない場合は、PingCAP またはコミュニティからTiFlashログ ファイルと[サポートを受ける](/support.md)収集します。
 
-## 一部のクエリでは<code>Region Unavailable</code>エラーが返されます。 {#some-queries-return-the-code-region-unavailable-code-error}
+## 一部のクエリでは`Region Unavailable`エラーが返されます。 {#some-queries-return-the-region-unavailable-error}
 
 TiFlashのワークロードが大きすぎてTiFlashデータのレプリケーションが遅れる場合、一部のクエリでエラー`Region Unavailable`が返されることがあります。
 

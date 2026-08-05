@@ -248,7 +248,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 
 動的権限の全セットを確認するには、 `SHOW PRIVILEGES`ステートメントを実行してください。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは、TiDB のインストール環境によって異なる場合があります。
 
-## <code>SUPER</code>特権 {#code-super-code-privilege}
+## `SUPER`特権 {#super-privilege}
 
 -   `SUPER`権限は、ユーザーがほぼすべての操作を実行できるようにします。デフォルトでは、 `root`ユーザーのみにこの権限が付与されています。他のユーザーにこの権限を付与する際は注意してください。
 -   `SUPER`権限は[MySQL 8.0で非推奨になりました](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)推奨になりました。よりきめ細かいアクセス制御を提供するために[動的権限](#dynamic-privileges)に置き換えることができます。

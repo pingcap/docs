@@ -69,7 +69,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 -   [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 -   [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
-### クラスターを削除する際に、 <code>XXX's Org/default project/Cluster0</code>何を指しているのでしょうか？ {#what-does-code-xxx-s-org-default-project-cluster0-code-refer-to-when-deleting-a-cluster}
+### クラスターを削除する際に、 `XXX's Org/default project/Cluster0`何を指しているのでしょうか？ {#what-does-xxx-s-org-default-project-cluster0-refer-to-when-deleting-a-cluster}
 
 TiDB Cloudでは、クラスターは組織名、プロジェクト名、クラスター名の組み合わせによって一意に識別されます。意図したクラスターを削除していることを確認するには、 `XXX's Org/default project/Cluster0`のように、そのクラスターの完全修飾名を指定する必要があります。
 

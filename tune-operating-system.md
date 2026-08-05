@@ -97,7 +97,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 `mkfs`コマンドを使用してデバイスをフォーマットする場合、ファイルシステムオプションの一部としてブロックサイズを指定します。ブロックサイズを指定するパラメータはファイルシステムによって異なります。詳細については、対応する`mkfs`マニュアルページ（例： `man mkfs.ext4`を参照してください。
 
-#### <code>mount</code>パラメータ {#mount-parameters}
+#### `mount`パラメータ {#mount-parameters}
 
 `mount`コマンドで`noatime`オプションが有効になっている場合、ファイルの読み取り時にメタデータの更新が無効になります。`nodiratime`動作が有効になっている場合、ディレクトリの読み取り時にメタデータの更新が無効になります。
 

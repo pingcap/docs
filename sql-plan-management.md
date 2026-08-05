@@ -352,7 +352,7 @@ SET BINDING [ENABLED | DISABLED] FOR BindableStmt;
 
 このステートメントを実行すると、バインディングのステータスを`Disabled`から`Enabled`へ、または`Enabled`から`Disabled`へのみ変更できます。ステータス変更に使用できるバインディングがない場合、 `There are no bindings can be set the status. Please check the SQL text`という警告メッセージが返されます。ステータス`Disabled`のバインディングはどのクエリでも使用されないことに注意してください。
 
-#### <code>sql_digest</code>に応じてバインディングステータスを変更する {#change-binding-status-according-to-code-sql-digest-code}
+#### `sql_digest`に応じてバインディングステータスを変更する {#change-binding-status-according-to-sql-digest}
 
 SQL ステートメントに従ってバインディング ステータスを変更するだけでなく、 `sql_digest`に従ってバインディング ステータスを変更することもできます。
 

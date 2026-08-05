@@ -249,7 +249,7 @@ spring:
 -   `TIDB_USER` : `"root"`
 -   `TIDB_PASSWORD` : `""`
 
-### データ管理: <code>@Repository</code> {#data-management-code-repository-code}
+### データ管理: `@Repository` {#data-management-repository}
 
 Spring Data JPA は`@Repository`インターフェースを介してデータを管理します。 `JpaRepository`が提供する CRUD 操作を使用するには、 `JpaRepository`インターフェースを拡張する必要があります。
 

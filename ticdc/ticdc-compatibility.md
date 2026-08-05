@@ -88,7 +88,7 @@ TiCDC クラシック アーキテクチャと新しいアーキテクチャの�
 
 このセクションでは、TiCDCに関連する互換性の問題と、それらの対処方法について説明します。
 
-### TiCDC v5.0.0-rc <code>cdc cli</code>ツールを使用してv4.0.xクラスタを操作すると、互換性の問題が発生します。 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-code-cdc-cli-code-tool-to-operate-a-v4-0-x-cluster}
+### TiCDC v5.0.0-rc `cdc cli`ツールを使用してv4.0.xクラスタを操作すると、互換性の問題が発生します。 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-cdc-cli-tool-to-operate-a-v4-0-x-cluster}
 
 TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x TiCDC クラスターを操作する場合、次のような異常な状況が発生する可能性があります。
 
@@ -108,7 +108,7 @@ TiCDCクラスタのバージョンに対応する`cdc`実行可能ファイル�
 >
 > この問題は、 `cdc cli`が v5.0.0-rc の場合にのみ発生します。他の v5.0.x バージョンの`cdc cli`ツールは、v4.0.x クラスターと互換性があります。
 
-### <code>sort-dir</code>と<code>data-dir</code>の互換性に関する注意事項 {#compatibility-notes-for-code-sort-dir-code-and-code-data-dir-code}
+### `sort-dir`と`data-dir`の互換性に関する注意事項 {#compatibility-notes-for-sort-dir-and-data-dir}
 
 `sort-dir`設定は、TiCDC ソーターの一時ファイルディレクトリを指定するために使用されます。その機能はバージョンによって異なる場合があります。次の表は`sort-dir`バージョン間の互換性の変更点を示しています。
 

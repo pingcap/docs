@@ -82,7 +82,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 
 [TiKVマスター](https://github.com/tikv/tikv/tree/master)では、Hibernate リージョン がデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[Hibernateリージョンを構成する](/tikv-configuration-file.md)を参照してください。
 
-### 方法3: <code>Region Merge</code>を有効にする {#method-3-enable-region-merge}
+### 方法3: `Region Merge`を有効にする {#method-3-enable-region-merge}
 
 > **Note:**
 >
@@ -108,7 +108,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 
 I/O リソースと CPU リソースが十分な場合は、単一のマシンに複数の TiKV インスタンスをデプロイして、単一の TiKV インスタンス上のリージョンの数を減らすことも、TiKV クラスター内のマシンの数を増やすこともできます。
 
-### 方法5: <code>raft-base-tick-interval</code>を調整する {#method-5-adjust-raft-base-tick-interval}
+### 方法5: `raft-base-tick-interval`を調整する {#method-5-adjust-raft-base-tick-interval}
 
 リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やすことができます。
 

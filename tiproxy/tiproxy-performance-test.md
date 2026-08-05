@@ -50,7 +50,7 @@ summary: TiProxy のパフォーマンスと HAProxy との比較について学
 proxy.conn-buffer-size: 131072
 ```
 
-#### HAProxy 設定 - <code>haproxy.cfg</code>ファイル {#haproxy-configuration-code-haproxy-cfg-code-file}
+#### HAProxy 設定 - `haproxy.cfg`ファイル {#haproxy-configuration-haproxy-cfg-file}
 
 ```yaml
 global                                      # Global configuration.

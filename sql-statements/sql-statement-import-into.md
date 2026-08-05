@@ -33,7 +33,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 -   インポートするデータに、主キーまたはNULL以外の一意インデックスの競合が発生するレコードが含まれていないことを確認してください。競合が発生すると、インポート処理が失敗する可能性があります。
 -   既知の問題: TiDBノード構成ファイル内のPDアドレスがクラスタの現在のPDトポロジと一致しない場合`IMPORT INTO`タスクが失敗する可能性があります。この不一致は、PDが以前にスケールインされたものの、TiDB構成ファイルがそれに応じて更新されなかった場合や、構成ファイルの更新後にTiDBノードが再起動されなかった場合などに発生する可能性があります。
 
-### <code>IMPORT INTO ... FROM FILE</code>制限 {#code-import-into-from-file-code-restrictions}
+### `IMPORT INTO ... FROM FILE`制限 {#import-into-from-file-restrictions}
 
 -   TiDB Self-Managedの場合、各`IMPORT INTO`タスクは10 TiB以内のデータインポートをサポートします。 機能を有効にすると、各`IMPORT INTO`タスク[グローバルソート](/tidb-global-sort.md)40 TiB以内のデータインポートをサポートします。
 -   [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、インポートするデータが 500 GiB を超える場合は、少なくとも 16 コアの TiDB ノードを使用し、[グローバルソート](/tidb-global-sort.md)機能を有効にすることをお勧めします。そうすると、各`IMPORT INTO`タスクは 40 TiB 以内のデータのインポートをサポートします。インポートするデータが 500 GiB 以内である場合、または TiDB ノードのコア数が 16 未満の場合は、[グローバルソート](/tidb-global-sort.md)機能を有効にしないことをお勧めします。
@@ -43,7 +43,7 @@ summary: TiDBにおけるIMPORT INTOの使用方法の概要。
 -   [グローバルソート](/tidb-global-sort.md)機能を使用してデータをインポートする場合、エンコード後の 1 行のデータ サイズは 32 MiB を超えてはなりません。
 -   [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)が有効になっていないときに作成されたすべての`IMPORT INTO`タスクは、タスクが送信されたノードで直接実行され、後で DXF が有効になった後でも、他の TiDB ノードで実行するようにスケジュールされません。DXF が有効になった後は、S3 または GCS からデータをインポートする新しく作成された`IMPORT INTO`タスクのみが、自動的にスケジュールされるか、他の TiDB ノードにフェイルオーバーして実行されます。
 
-### <code>IMPORT INTO ... FROM SELECT</code>制限 {#code-import-into-from-select-code-restrictions}
+### `IMPORT INTO ... FROM SELECT`制限 {#import-into-from-select-restrictions}
 
 -   `IMPORT INTO ... FROM SELECT` 、現在のユーザーが接続している TiDB ノードでのみ実行でき、インポートが完了するまで現在の接続をブロックします。
 -   `IMPORT INTO ... FROM SELECT` 、 `THREAD`と`DISABLE_PRECHECK` 2 つのインポート[インポートオプション](#withoptions)のみをサポートします。
@@ -167,7 +167,7 @@ OptionItem ::=
 
 </CustomContent>
 
-## <code>IMPORT INTO ... FROM FILE</code>方法 {#code-import-into-from-file-code-usage}
+## `IMPORT INTO ... FROM FILE`方法 {#import-into-from-file-usage}
 
 TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルストレージに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
 
@@ -261,7 +261,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-#### ファイルを非同期で<code>DETACHED</code>モードでインポートする {#import-a-file-asynchronously-in-the-code-detached-code-mode}
+#### ファイルを非同期で`DETACHED`モードでインポートする {#import-a-file-asynchronously-in-the-detached-mode}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
@@ -339,11 +339,11 @@ TiKVノードへの書き込み速度を10 MiB/sに制限するには、次のSQ
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-## <code>IMPORT INTO ... FROM SELECT</code>使用法 {#code-import-into-from-select-code-usage}
+## `IMPORT INTO ... FROM SELECT`使用法 {#import-into-from-select-usage}
 
 `IMPORT INTO ... FROM SELECT`を使用すると`SELECT`ステートメントのクエリ結果を TiDB の空のテーブルにインポートできます。また、 [`AS OF TIMESTAMP`](/as-of-timestamp.md)でクエリされた履歴データをインポートするためにも使用できます。
 
-### <code>SELECT</code>クエリの結果をインポートします {#import-the-query-result-of-code-select-code}
+### `SELECT`クエリの結果をインポートします {#import-the-query-result-of-select}
 
 `UNION`の結果をターゲットテーブル`t`にインポートするには、インポート同時実行数を`8`に指定し、重要でない項目の事前チェックを無効に設定して、次のSQLステートメントを実行します。
 

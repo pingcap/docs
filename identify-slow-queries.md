@@ -172,7 +172,7 @@ TiKVコプロセッサータスクフィールド：
 -   `Storage_from_kv` : v8.5.5 で導入され、このステートメントが TiKV からデータを読み取ったかどうかを示します。
 -   `Storage_from_mpp` : v8.5.5 で導入され、このステートメントがTiFlashからデータを読み取ったかどうかを示します。
 
-## <code>tidb_slow_log_rules</code>を使用する {#use-tidb_slow_log_rules}
+## `tidb_slow_log_rules`を使用する {#use-tidb_slow_log_rules}
 
 [`tidb_slow_log_rules`](/system-variables.md#tidb_slow_log_rules-new-in-v856)は、スロークエリログのトリガールールを定義するために使用され、多次元メトリックの組み合わせをサポートします。スローログの「ターゲットサンプリング」と「問題再現」に適しており、特定のメトリックの組み合わせに基づいて対象のステートメントをフィルタリングできます。
 
@@ -389,7 +389,7 @@ TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報を照�
 
 `CLUSTER_SLOW_QUERY`テーブルに対してクエリを実行すると、TiDB は他のノードからすべてのスロークエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
-## <code>SLOW_QUERY</code> / <code>CLUSTER_SLOW_QUERY</code>使用例 {#slow_query--cluster_slow_query-usage-examples}
+## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY`使用例 {#slow_query--cluster_slow_query-usage-examples}
 
 ### 上位N件のスロークエリ {#top-n-slow-queries}
 
@@ -412,7 +412,7 @@ limit 2;
     |  0.734982725 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c0; |
     +--------------+------------------------------------------------------------------+
 
-### <code>test</code>ユーザーの上位N件のスロークエリを照会する {#query-the-top-n-slow-queries-of-the-test-user}
+### `test`ユーザーの上位N件のスロークエリを照会する {#query-the-top-n-slow-queries-of-the-test-user}
 
 次の例では、 `test`ユーザーによって実行されたスロークエリが照会され、最初の 2 つの結果が実行時間の逆順に表示されます。
 
@@ -472,7 +472,7 @@ limit 2;
         | select * from t1 where a=2; | 0.401313532 |
         +-----------------------------+-------------+
 
-## 擬似統計<code>stats</code>を使用して、スロークエリをクエリする {#query-slow-queries-with-pseudo-stats}
+## 擬似統計`stats`を使用して、スロークエリをクエリする {#query-slow-queries-with-pseudo-stats}
 
 ```sql
 select query, query_time, stats
@@ -619,7 +619,7 @@ TiDB は`INFORMATION_SCHEMA.SLOW_QUERY`をクエリする際に読み取り・�
 set tidb_slow_query_file = "/path-to-log/tidb-slow.log"
 ```
 
-### <code>pt-query-digest</code>を使用してTiDBのスローログを解析する {#parse-tidb-slow-logs-with-pt-query-digest}
+### `pt-query-digest`を使用してTiDBのスローログを解析する {#parse-tidb-slow-logs-with-pt-query-digest}
 
 TiDB のスローログを解析するには、 `pt-query-digest`を使用します。
 
@@ -663,7 +663,7 @@ pt-query-digest --report tidb-slow.log
 
 `wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、そのステートメントが実際に問題のあるステートメントによってブロックされ、実行キューで待機する必要があるため、応答時間が大幅に長くなるためです。
 
-### <code>ADMIN SHOW SLOW</code>コマンド {#admin-show-slow-command}
+### `ADMIN SHOW SLOW`コマンド {#admin-show-slow-command}
 
 TiDBログファイルに加えて、 `ADMIN SHOW SLOW`コマンドを実行することで、スロークエリを特定できます。
 

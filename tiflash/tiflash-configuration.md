@@ -15,7 +15,7 @@ summary: TiFlash の設定方法を学びます。
 >
 > 構成項目の値を調整する必要がある場合は、 [設定を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
-### <code>tiflash.toml</code>ファイルを設定する {#configure-the-tiflashtoml-file}
+### `tiflash.toml`ファイルを設定する {#configure-the-tiflashtoml-file}
 
 #### `listen_host` {#listen_host}
 
@@ -489,7 +489,7 @@ I/O トラフィック制限設定を構成します。
 
 <!-- Example: `"/path/to/tiflash-server-key.pem"` -->
 
-### <code>tiflash-learner.toml</code>ファイルを設定する {#configure-the-tiflash-learnertoml-file}
+### `tiflash-learner.toml`ファイルを設定する {#configure-the-tiflash-learnertoml-file}
 
 `tiflash-learner.toml`のパラメータは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメータのみを示しています。ご注意ください。
 

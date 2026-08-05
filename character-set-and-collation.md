@@ -170,7 +170,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 
 GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
-## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
+## TiDB の`utf8`と`utf8mb4` {#utf8-and-utf8mb4-in-tidb}
 
 MySQLでは、文字セット`utf8`は最大3バイトに制限されています。これは基本多言語面（BMP）の文字を格納するには十分ですが、絵文字などの文字を格納するには不十分です。新規インストールの場合は、文字セット`utf8mb4`を使用し、文字セット`utf8`から移行することをお勧めします。
 
@@ -581,7 +581,7 @@ TiDBは照合順序を推論する際に、強制性値の低い式の照合順�
 -   2 つの句の照合順序が異なり、両方の句の強制可能性値が`0`の場合。
 -   2 つの句の照合順序に互換性がなく、返される式の型が`String`の場合。
 
-## <code>COLLATE</code>句 {#code-collate-code-clause}
+## `COLLATE`句 {#collate-clause}
 
 TiDBは、式の照合順序を指定するために`COLLATE`句の使用をサポートしています。この式の強制値は`0` 、これが最高の優先度です。次の例をご覧ください。
 

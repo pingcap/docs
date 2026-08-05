@@ -3,7 +3,7 @@ title: Read Historical Data Using the `tidb_external_ts` Variable
 summary: tidb_external_ts` 変数を使用して履歴データを読み取る方法を学びます。
 ---
 
-# <code>tidb_external_ts</code>変数を使用して履歴データを読み取る {#read-historical-data-using-the-code-tidb-external-ts-code-variable}
+# `tidb_external_ts`変数を使用して履歴データを読み取る {#read-historical-data-using-the-tidb-external-ts-variable}
 
 履歴データの読み取りをサポートするために、TiDB v6.4.0 ではシステム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)が導入されました。このドキュメントでは、このシステム変数を使用して履歴データを読み取る方法と、詳細な使用例について説明します。
 

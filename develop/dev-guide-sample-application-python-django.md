@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 mysqlclient でインストールの問題が発生した場合は、 [mysqlclient の公式ドキュメント](https://github.com/PyMySQL/mysqlclient#install)を参照してください。
 
-#### <code>django-tidb</code>とは何ですか？ {#what-is-code-django-tidb-code}
+#### `django-tidb`とは何ですか？ {#what-is-django-tidb}
 
 `django-tidb`は、TiDB と Django 間の互換性の問題を解決する Django 用の TiDB 方言です。
 

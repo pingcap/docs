@@ -12,7 +12,7 @@ summary: オプティマイザー修正制御機能について学習し、tidb_
 
 そのため、TiDBは、複数の修正項目に値を設定することで、TiDBオプティマイザの動作をきめ細かく制御できるオプティマイザ修正制御機能を提供しています。このドキュメントでは、オプティマイザ修正制御機能とその使用方法について説明し、TiDBが現在オプティマイザ修正制御でサポートしているすべての修正項目を一覧表示します。
 
-## <code>tidb_opt_fix_control</code>の紹介 {#introduction-to-code-tidb-opt-fix-control-code}
+## `tidb_opt_fix_control`の紹介 {#introduction-to-tidb-opt-fix-control}
 
 v6.5.3 および v7.1.0 以降、TiDB は、オプティマイザーの動作をより細かく制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を提供します。
 

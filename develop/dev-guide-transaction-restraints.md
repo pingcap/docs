@@ -680,7 +680,7 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-## <code>savepoint</code>とネストされたトランザクションのサポート {#support-for-code-savepoint-code-and-nested-transactions}
+## `savepoint`とネストされたトランザクションのサポート {#support-for-savepoint-and-nested-transactions}
 
 > **Note:**
 >
@@ -723,7 +723,7 @@ mysql> SELECT * FROM T2;
 
 サイズ制限と行数制限の両方において、トランザクション実行時のエンコード処理とトランザクション用の追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100～500行ごとに1つのトランザクションを書き込むことをお勧めします。
 
-## 自動コミットされた<code>SELECT FOR UPDATE</code>ステートメントはロックを待機しません {#auto-committed-code-select-for-update-code-statements-do-not-wait-for-locks}
+## 自動コミットされた`SELECT FOR UPDATE`ステートメントはロックを待機しません {#auto-committed-select-for-update-statements-do-not-wait-for-locks}
 
 現在、自動コミットされた`SELECT FOR UPDATE`ステートメントにはロックが追加されません。次のスクリーンショットは、2 つの別々のセッションでの影響を示しています。
 

@@ -14,7 +14,7 @@ summary: _tidb_rowid`とは何か、いつ利用できるのか、そして安�
 > -   `_tidb_rowid`常にグローバルに一意であるとは限らないことに注意してください。クラスター化インデックスを使用しないパーティションテーブルの場合、 `ALTER TABLE ... EXCHANGE PARTITION`を実行すると、異なるパーティション間で`_tidb_rowid`値が重複する可能性があります。
 > -   安定した一意の識別子が必要な場合は、 `_tidb_rowid`に依存するのではなく、明示的な主キーを定義して使用してください。
 
-## <code>_tidb_rowid</code>が利用可能な場合 {#when-code-tidb-rowid-code-is-available}
+## `_tidb_rowid`が利用可能な場合 {#when-tidb-rowid-is-available}
 
 TiDBでは、テーブルが一意の行識別子としてクラスター化された主キーを使用しない場合、各行を識別するために`_tidb_rowid`を使用します。実際には、これは次のタイプのテーブルが`_tidb_rowid`を使用することを意味します。
 
@@ -48,7 +48,7 @@ SELECT _tidb_rowid, id, a FROM t3;
 ERROR 1054 (42S22): Unknown column '_tidb_rowid' in 'field list'
 ```
 
-## <code>_tidb_rowid</code>を読み込む {#read-code-tidb-rowid-code}
+## `_tidb_rowid`を読み込む {#read-tidb-rowid}
 
 `_tidb_rowid`を使用するテーブルの場合、 `SELECT`ステートメントで`_tidb_rowid`をクエリできます。これは、ページネーション、トラブルシューティング、バッチ処理などのタスクに役立ちます。
 
@@ -84,7 +84,7 @@ SHOW TABLE t NEXT_ROW_ID;
 +-----------------------+------------+-------------+--------------------+-------------+
 ```
 
-## <code>_tidb_rowid</code>を書き込む {#write-code-tidb-rowid-code}
+## `_tidb_rowid`を書き込む {#write-tidb-rowid}
 
 デフォルトでは、TiDB は`INSERT` 、または`REPLACE`ステートメント`UPDATE` `_tidb_rowid`直接書き込むことを許可しません。
 

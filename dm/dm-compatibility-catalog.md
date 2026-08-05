@@ -27,7 +27,7 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 | MariaDB 10.1.2 ～ 10.5.10 | Experimental                     |                                                                                                                                              |
 | MariaDB &gt; 10.5.10     | テストされていません                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
 
-### 外部キーの<code>CASCADE</code>操作 {#foreign-key-cascade-operations}
+### 外部キーの`CASCADE`操作 {#foreign-key-cascade-operations}
 
 > **Warning:**
 >

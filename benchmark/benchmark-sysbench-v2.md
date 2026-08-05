@@ -109,7 +109,7 @@ IDCマシン
 
 上記の統計によると、TiDB 2.0 GA と TiDB 1.0 GA の OLTP パフォーマンスはほぼ同じです。
 
-### 標準<code>Insert</code>テスト {#standard-code-insert-code-test}
+### 標準`Insert`テスト {#standard-insert-test}
 
 |    バージョン   | テーブル数 | テーブルサイズ | Sysbenchスレッド |   QPS   |     レイテンシー（平均/.95）    |
 | :--------: | :---: | :-----: | :----------: | :-----: | :-------------------: |

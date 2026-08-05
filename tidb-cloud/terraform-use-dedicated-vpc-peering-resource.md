@@ -3,7 +3,7 @@ title: Use the `tidbcloud_dedicated_vpc_peering` Resource
 summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cloud Dedicated VPC ピアリングを作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_dedicated_vpc_peering</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-vpc-peering-code-resource}
+# `tidbcloud_dedicated_vpc_peering`リソースを使用する {#use-the-tidbcloud-dedicated-vpc-peering-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_vpc_peering`リソースとの[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC ピアリングを管理する方法について説明します。
 

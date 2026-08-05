@@ -63,7 +63,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 [**TiKV詳細**&gt;**解決済みTS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各TiKVのresolved-tsとsafe-tsが最も小さいリージョンを特定できます。これらのタイムスタンプが実時間より大幅に遅れている場合は、 `tikv-ctl`を使用してこれらのリージョンの詳細を確認する必要があります。
 
-### <code>tikv-ctl</code>を使用して診断する {#use-code-tikv-ctl-code-to-diagnose}
+### `tikv-ctl`を使用して診断する {#use-tikv-ctl-to-diagnose}
 
 `tikv-ctl`はリゾルバと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 

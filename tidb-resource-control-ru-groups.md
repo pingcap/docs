@@ -276,7 +276,7 @@ SQL文のRU消費量は、以下の方法で確認できます。
 -   スロークエリとそれに対応するシステムテーブル
 -   `statements_summary`
 
-#### システム変数<code>tidb_last_query_info</code>を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-code-tidb-last-query-info-code}
+#### システム変数`tidb_last_query_info`を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-tidb-last-query-info}
 
 TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数には、最後に実行されたDMLステートメントの情報（SQL実行によって消費されたRUを含む）が記録されます。
 
@@ -306,7 +306,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
     結果として、 `ru_consumption`はこの SQL ステートメントの実行によって消費された RU です。
 
-#### SQL実行中に消費されたRUを<code>EXPLAIN ANALYZE</code>で表示する {#view-rus-consumed-during-sql-execution-by-code-explain-analyze-code}
+#### SQL実行中に消費されたRUを`EXPLAIN ANALYZE`で表示する {#view-rus-consumed-during-sql-execution-by-explain-analyze}
 
 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費される RU の量を取得できます。RU の量はキャッシュ (たとえば、[コプロセッサキャッシュ](/coprocessor-cache.md)) の影響を受けることに注意してください。同じ SQL を複数回実行すると、各実行で消費される RU の量は異なる場合があります。RU の値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
@@ -324,7 +324,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 </CustomContent>
 
-#### RUの統計情報を<code>statements_summary</code>別に表示する {#view-ru-statistics-by-code-statements-summary-code}
+#### RUの統計情報を`statements_summary`別に表示する {#view-ru-statistics-by-statements-summary}
 
 TiDB のシステム テーブル[`INFORMATION_SCHEMA.statements_summary`](/statement-summary-tables.md#statements_summary)には、SQL ステートメントの正規化および集計された統計情報が格納されます。このシステム テーブルを使用すると、SQL ステートメントの実行パフォーマンスを表示および分析できます。また、リソース グループ名、RU 消費量、利用可能な RU の待機時間など、リソース制御に関する統計情報も含まれています。詳細については、 [`statements_summary`フィールドの説明](/statement-summary-tables.md#statements_summary-fields-description)を参照してください。
 

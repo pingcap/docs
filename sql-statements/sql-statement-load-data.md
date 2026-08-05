@@ -58,7 +58,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
         mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
 
-### <code>REPLACE</code>と<code>IGNORE</code> {#code-replace-code-and-code-ignore-code}
+### `REPLACE`と`IGNORE` {#replace-and-ignore}
 
 `REPLACE`と`IGNORE`を使用して、重複データの処理方法を指定できます。
 
@@ -89,7 +89,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 -   指定されたパスの下にある`foo`で始まるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
 -   指定されたパスの下にある、先頭が`foo` 、末尾が`.csv`すべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
 
-### <code>Fields</code> 、 <code>Lines</code> 、 <code>Ignore Lines</code> {#code-fields-code-code-lines-code-and-code-ignore-lines-code}
+### `Fields` 、 `Lines` 、 `Ignore Lines` {#fields-lines-and-ignore-lines}
 
 `Fields`および`Lines`パラメータを使用して、データ形式の処理方法を指定できます。
 

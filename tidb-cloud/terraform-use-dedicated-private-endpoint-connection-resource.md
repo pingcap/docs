@@ -3,7 +3,7 @@ title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
 summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベート エンドポイント接続を作成および変更する方法を学習します。
 ---
 
-# <code>tidbcloud_dedicated_private_endpoint_connection</code>リソースを使用する {#use-the-code-tidbcloud-dedicated-private-endpoint-connection-code-resource}
+# `tidbcloud_dedicated_private_endpoint_connection`リソースを使用する {#use-the-tidbcloud-dedicated-private-endpoint-connection-resource}
 
 このドキュメントでは、 `tidbcloud_dedicated_private_endpoint_connection`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)プライベート エンドポイント接続を管理する方法について説明します。
 

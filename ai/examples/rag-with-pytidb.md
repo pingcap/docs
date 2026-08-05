@@ -88,7 +88,7 @@ streamlit run main.py
 
 ## トラブルシューティング {#troubleshooting}
 
-### <code>502 Bad Gateway</code>エラー {#code-502-bad-gateway-code-error}
+### `502 Bad Gateway`エラー {#502-bad-gateway-error}
 
 グローバルプロキシ設定を無効にしてみてください。
 

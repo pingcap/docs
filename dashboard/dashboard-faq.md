@@ -25,7 +25,7 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 ## UIに関するよくあるFAQ {#ui-related-faq}
 
-### 概要ページの<strong>QPS</strong>と<strong>レイテンシの</strong>セクションに<code>prometheus_not_found</code>エラーが表示される {#a-prometheus_not_found-error-is-shown-in-qps-and-latency-sections-on-the-overview-page}
+### 概要ページの<strong>QPS</strong>と<strong>レイテンシの</strong>セクションに`prometheus_not_found`エラーが表示される {#a-prometheus_not_found-error-is-shown-in-qps-and-latency-sections-on-the-overview-page}
 
 **概要**ページの**QPS**と**レイテンシの**セクションには、Prometheusがデプロイされたクラスターが必要です。そうでない場合、エラーが表示されます。この問題を解決するには、クラスターにPrometheusインスタンスをデプロイしてください。
 
@@ -50,11 +50,11 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
     クラスタが起動している場合でも、このコマンドを実行してください。このコマンドはクラスタ内の通常のアプリケーションには影響を与えませんが、メトリクスアドレスを更新してレポートするため、TiDB Dashboardに監視メトリクスが正常に表示されるようになります。
 
-### <strong>スロークエリ</strong>ページに<code>invalid connection</code>エラーが表示されます {#an-invalid-connection-error-is-shown-on-the-slow-queries-page}
+### <strong>スロークエリ</strong>ページに`invalid connection`エラーが表示されます {#an-invalid-connection-error-is-shown-on-the-slow-queries-page}
 
 原因として考えられるのは、TiDBのプリペアドプランキャッシュ機能を有効にしていることです。これは実験的機能であるため、有効にすると特定のTiDBバージョンでプリペアドプランキャッシュが正常に機能しない可能性があり、TiDB Dashboard（およびその他のアプリケーション）でこの問題が発生する可能性があります。プリペアドプランキャッシュを無効にするには、システム変数[`tidb_enable_prepared_plan_cache = OFF`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を設定します。
 
-### <code>required component NgMonitoring is not started</code>というエラーが表示されます {#a-required-component-ngmonitoring-is-not-started-error-is-shown}
+### `required component NgMonitoring is not started`というエラーが表示されます {#a-required-component-ngmonitoring-is-not-started-error-is-shown}
 
 NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**継続的プロファイリング**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してTiUPを手動でデプロイできます。
 
@@ -123,7 +123,7 @@ tiup update playground
 
 </details>
 
-### <strong>スロークエリ</strong>ページに<code>unknown field</code>エラーが表示されます {#an-unknown-field-error-is-shown-on-the-slow-queries-page}
+### <strong>スロークエリ</strong>ページに`unknown field`エラーが表示されます {#an-unknown-field-error-is-shown-on-the-slow-queries-page}
 
 クラスターのアップグレード後に**「スロークエリ」**ページにエラー`unknown field`が表示される場合、そのエラーはTiDB Dashboardのサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザキャッシュ内）の差異に起因する互換性の問題に関連しています。この問題は修正されています。クラスターのバージョンがv5.0.3またはv4.0.14より前の場合は、以下の手順に従ってブラウザキャッシュをクリアしてください。
 

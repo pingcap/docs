@@ -16,7 +16,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 リソース制御機能の詳細については、 [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
-## <code>QUERY_LIMIT</code>パラメータ {#query_limit-parameters}
+## `QUERY_LIMIT`パラメータ {#query_limit-parameters}
 
 クエリが次のいずれかの制限を超えると、ランナウェイ クエリとして識別されます。
 
@@ -77,7 +77,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
     ```
 
-## <code>QUERY WATCH</code>パラメータ {#query-watch-parameters}
+## `QUERY WATCH`パラメータ {#query-watch-parameters}
 
 `QUERY WATCH`のあらすじについては[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を参照してください。
 

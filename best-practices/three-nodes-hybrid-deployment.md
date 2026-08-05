@@ -80,7 +80,7 @@ TiKVはフォアグラウンドタスクに加えて、バックグラウンド�
 
 ただし、ハイブリッド展開シナリオでは、このデフォルト構成はベストプラクティスに準拠していません。以下のパラメータを調整して、バックグラウンドタスクのリソース使用量を制限する必要があります。
 
-#### <code>rocksdb.max-background-jobs</code>と<code>rocksdb.max-sub-compactions</code> {#code-rocksdb-max-background-jobs-code-and-code-rocksdb-max-sub-compactions-code}
+#### `rocksdb.max-background-jobs`と`rocksdb.max-sub-compactions` {#rocksdb-max-background-jobs-and-rocksdb-max-sub-compactions}
 
 RocksDBスレッドプールは、コンパクションジョブとフラッシュジョブを実行するために使用されます。デフォルト値は`rocksdb.max-background-jobs`ですが、 `8`に設定されており、明らかに必要なリソースを超えています。したがって、リソース使用量を制限するために値を調整する必要があります。
 
