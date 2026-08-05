@@ -8,6 +8,21 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 8 月 5 日 {#august-5-2026}
+
+**常规变更**
+
+- **TiDB Cloud Premium**
+
+    - 为 TiDB Cloud Premium 实例的自动备份引入 **Custom Retention Mode**。
+
+        TiDB Cloud Premium 现在提供两种自动备份模式：
+
+        - **Custom Retention Mode：**允许你指定 3 到 33 天的保留时间，并选择每日快照的创建时间。
+        - **Standard Bundle Mode：**保留之前默认的自动备份设置，包括 PITR、每小时快照和每日快照。
+
+      更多信息，请参见[自动备份模式](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes)。
+
 ## 2026 年 8 月 4 日 {#august-4-2026}
 
 **常规变更**
