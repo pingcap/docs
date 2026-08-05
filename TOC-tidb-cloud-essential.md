@@ -60,6 +60,9 @@
       - [通过邮件订阅](/tidb-cloud/monitor-alert-email.md)
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
+      - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
+      - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
     - [集成 TiDB Cloud 与 Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - 性能调优
@@ -564,6 +567,7 @@
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)

@@ -121,7 +121,7 @@ TiDB Cloud 为你提供了便捷的方式，通过 Slack、[email](/tidb-cloud/m
 如果你不再希望接收报警通知，请按照以下步骤操作。具体步骤根据[你的 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)有所不同。
 
 <CustomContent plan="dedicated">
-    
+
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入你所在组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击 **Project view** 标签页。
 2. 在项目视图中，找到你的目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
 3. 在左侧导航栏中，点击 **Project Settings** 下的 **Alert Subscription**。

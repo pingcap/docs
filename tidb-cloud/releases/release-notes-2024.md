@@ -243,7 +243,7 @@ summary: 了解 2024 年 TiDB Cloud 的发布说明。
     向量检索（测试版）功能为文档、图片、音频和视频等多种数据类型提供语义相似性检索的高级解决方案。该功能使开发者能够利用熟悉的 MySQL 技能，轻松构建具备生成式人工智能（AI）能力的可扩展应用。主要特性包括：
 
     - [向量数据类型](/ai/reference/vector-search-data-types.md)、[向量索引](/ai/reference/vector-search-index.md) 和 [向量函数与操作符](/ai/reference/vector-search-functions-and-operators.md)。
-    - 与 [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)、[LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) 和 [JinaAI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) 的生态集成。
+    - 与 [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) 和 [JinaAI](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) 的生态集成。
     - Python 语言支持：[SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)、[Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) 和 [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)。
     - 示例应用和教程：使用 [Python](/ai/quickstart-via-python.md) 或 [SQL](/ai/quickstart-via-sql.md) 对文档进行语义检索。
 

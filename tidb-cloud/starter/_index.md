@@ -93,9 +93,9 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [密码认证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-password-authentication/?plan=starter)
 
-[用户角色](https://docs.pingcap.com/zh/tidbcloud/manage-user-access#user-roles/?plan=starter)
+[用户角色](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter#user-roles)
 
-[管理用户配置文件](https://docs.pingcap.com/zh/tidbcloud/manage-user-access#manage-user-profiles/?plan=starter)
+[管理用户资料](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter#manage-user-profiles)
 
 [管理组织访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access#manage-organization-access/?plan=starter)
 
@@ -109,9 +109,9 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [定价](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#pricing-for-starter/?plan=starter)
 
-[发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#invoices/?plan=starter)
+[发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing/?plan=starter#invoices)
 
-[Credits](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#credits/?plan=starter)
+[Credits](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing/?plan=starter#credits)
 
 </LearningPath>
 

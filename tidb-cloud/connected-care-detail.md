@@ -84,8 +84,8 @@ summary: 介绍 TiDB Cloud 的 Connected Care 支持服务的详细信息。
   <tr>
     <td>-</td>
     <td>-</td>
-    <td>Connected：TiDB Cloud 告警 IM 订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a> 或 <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>）</td>
-    <td>Connected：TiDB Cloud 告警 IM 订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a> 或 <a href="/tidbcloud/monitor-alert-zoom">Zoom</a>）</td>
+    <td>Connected：TiDB Cloud 告警 IM 订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a>、<a href="/tidbcloud/monitor-alert-zoom">Zoom</a>、<a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>、<a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a> 或 <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>）</td>
+    <td>Connected：TiDB Cloud 告警 IM 订阅（通过 <a href="/tidbcloud/monitor-alert-slack">Slack</a>、<a href="/tidbcloud/monitor-alert-zoom">Zoom</a>、<a href="/tidbcloud/monitor-alert-flashduty">Flashduty</a>、<a href="/tidbcloud/monitor-alert-pagerduty">PagerDuty</a> 或 <a href="/tidbcloud/monitor-alert-webhook">Webhook</a>）</td>
   </tr>
   <tr>
     <td>-</td>
