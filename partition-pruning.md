@@ -64,7 +64,7 @@ explain select * from t where x = 1;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-上記のSQL文では、条件`x = 1`からすべての結果が1つのパーティションに収まっていることがわかります。値`1`はハッシュパーティションを通過した後、パーティション`p1`にあることが確認できます。したがって、スキャンする必要があるのはパーティション`p1`のみであり、一致する結果がないパーティション`p2` 、 `p3` 、 `p4`にアクセスする必要はありません。実行プランからは、演算子`TableFullScan`が1つだけ出現し、 `access object`でパーティション`p1`が指定されているため、 `partition pruning`が有効になっていることが確認できます。
+上記のSQL文では、条件`x = 1`からすべての結果が1つのパーティションに収まっていることがわかります。値`1`はハッシュパーティションを通過した後、パーティション`p1`にあることが確認できます。したがって、スキャンする必要があるのはパーティション`p1`のみであり、一致する結果がないパーティション`p2` 、 `p3` 、 `p4`にアクセスする必要はありません。実行計画からは、演算子`TableFullScan`が1つだけ出現し、 `access object`でパーティション`p1`が指定されているため、 `partition pruning`が有効になっていることが確認できます。
 
 #### ハッシュパーティションテーブルに適用されないシナリオ {#inapplicable-scenarios-in-hash-partitioned-tables}
 
@@ -226,7 +226,7 @@ explain select * from t where x between 7 and 14;
 
 -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
 -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
--   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。`DATE`列および`DATETIME`列の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。`TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`は単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`で`WEEK`は時間単位としてサポートされていないことに注意してください。
+-   [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。`DATE`列および`DATETIME`列の場合、 `YEAR`および`YEAR_MONTH`時間単位は単調関数とみなされます。`TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND` 、および`HOUR_MICROSECOND`は単調関数とみなされます。パーティションプルーニングでは、 `EXTRACT`で`WEEK`は時間単位としてサポートされていないことに注意してください。
 
 たとえば、パーティション プルーニングは、パーティション式が`fn(col)`形式 ( `fn`は単調関数`to_days`の場合に有効になります。
 

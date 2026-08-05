@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.2 Release Notes
-summary: TiDB 4.0.2は2020年7月1日にリリースされました。この新バージョンには、互換性の変更、新機能、改善、バグ修正、そして新しい変更が含まれています。主な主な変更点としては、新しい集計関数のサポート、レイテンシーの改善、実行プラン、ランタイムエラー、データレプリケーションに関するバグ修正などが挙げられます。さらに、TiKV、PD、 TiFlash、ツールにも新機能と改善が加えられています。
+summary: TiDB 4.0.2は2020年7月1日にリリースされました。この新バージョンには、互換性の変更、新機能、改善、バグ修正、そして新しい変更が含まれています。主な主な変更点としては、新しい集計関数のサポート、レイテンシーの改善、実行計画、ランタイムエラー、データレプリケーションに関するバグ修正などが挙げられます。さらに、TiKV、PD、 TiFlash、ツールにも新機能と改善が加えられています。
 ---
 
 # TiDB 4.0.2 リリースノート {#tidb-4-0-2-release-notes}
@@ -101,7 +101,7 @@ TiDB バージョン: 4.0.2
 
 -   TiDB
 
-    -   `tidb_isolation_read_engines`が変更された後にプランキャッシュから取得される実行プランが正しくない問題を修正[＃17570](https://github.com/pingcap/tidb/pull/17570)
+    -   `tidb_isolation_read_engines`が変更された後にプランキャッシュから取得される実行計画が正しくない問題を修正[＃17570](https://github.com/pingcap/tidb/pull/17570)
     -   `EXPLAIN FOR CONNECTION`文を実行するときに時々発生するランタイムエラーを修正 [＃18124](https://github.com/pingcap/tidb/pull/18124)
     -   いくつかのケースで`last_plan_from_cache`セッション変数の誤った結果を修正[＃18111](https://github.com/pingcap/tidb/pull/18111)
     -   プランキャッシュ から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイムエラーを修正しました [＃17673](https://github.com/pingcap/tidb/pull/17673) [＃18002](https://github.com/pingcap/tidb/pull/18002)

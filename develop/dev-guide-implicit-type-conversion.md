@@ -31,7 +31,7 @@ TiDB における暗黙的な型変換のルールは次のとおりです。
 
 ### インデックスの無効性 {#index-invalidity}
 
-以下のケースでは、主キーは`account_id`で、そのデータ型は`varchar`です。実行プランでは、このSQL文は暗黙的な型変換を行うため、インデックスを使用できません。
+以下のケースでは、主キーは`account_id`で、そのデータ型は`varchar`です。実行計画では、このSQL文は暗黙的な型変換を行うため、インデックスを使用できません。
 
 ```sql
 DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
@@ -45,11 +45,11 @@ DESC SELECT * FROM `account` WHERE `account_id`=6010000000009801;
 3 rows in set (0.00 sec)
 ```
 
-**実行結果の簡単な説明**: 上記の実行プランから、 `Cast`演算子が表示されます。
+**実行結果の簡単な説明**: 上記の実行計画から、 `Cast`演算子が表示されます。
 
 ### 精度の低下 {#loss-of-precision}
 
-以下のケースでは、フィールド`a`のデータ型は`decimal(32,0)`です。実行プランでは暗黙的な型変換が発生し、decimal フィールドと文字列定数の両方が double 型に変換されます。double 型の精度はdecimal 型ほど高くないため、精度が低下します。この場合、SQL文は結果セットを範囲外として誤ってフィルタリングします。
+以下のケースでは、フィールド`a`のデータ型は`decimal(32,0)`です。実行計画では暗黙的な型変換が発生し、decimal フィールドと文字列定数の両方が double 型に変換されます。double 型の精度はdecimal 型ほど高くないため、精度が低下します。この場合、SQL文は結果セットを範囲外として誤ってフィルタリングします。
 
 ```sql
 DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -63,7 +63,7 @@ DESC SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000
 3 rows in set (0.00 sec)
 ```
 
-**実行結果の簡単な説明**: 上記の実行プランから、 `Cast`演算子が表示されます。
+**実行結果の簡単な説明**: 上記の実行計画から、 `Cast`演算子が表示されます。
 
 ```sql
 SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
@@ -80,6 +80,6 @@ SELECT * FROM `t1` WHERE `a` BETWEEN '12123123' AND '1111222211111111200000';
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

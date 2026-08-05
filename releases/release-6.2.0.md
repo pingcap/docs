@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.2.0 Release Notes
-summary: TiDB 6.2.0-DMRでは、ビジュアル実行プラン、モニタリングページ、ロックビューなどの新機能が導入されました。また、同時DDL操作をサポートし、集計操作のパフォーマンスが向上しています。TiKVは、CPU使用率の自動調整と詳細な構成情報リスト表示をサポートするようになりました。TiFlashは、データスキャン用のFastScanを追加し、エラー処理を改善しました。BRは、継続的なデータ検証をサポートし、Amazon S3バケットのリージョンを自動的に識別します。TiCDCは、DDLおよびDMLイベントのフィルタリングをサポートします。さらに、さまざまなツールにおいて、互換性の変更、バグ修正、および改善が行われています。
+summary: TiDB 6.2.0-DMRでは、ビジュアル実行計画、モニタリングページ、ロックビューなどの新機能が導入されました。また、同時DDL操作をサポートし、集計操作のパフォーマンスが向上しています。TiKVは、CPU使用率の自動調整と詳細な構成情報リスト表示をサポートするようになりました。TiFlashは、データスキャン用のFastScanを追加し、エラー処理を改善しました。BRは、継続的なデータ検証をサポートし、Amazon S3バケットのリージョンを自動的に識別します。TiCDCは、DDLおよびDMLイベントのフィルタリングをサポートします。さらに、さまざまなツールにおいて、互換性の変更、バグ修正、および改善が行われています。
 ---
 
 # TiDB 6.2.0 リリースノート {#tidb-6-2-0-release-notes}
@@ -58,11 +58,11 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/dashboard/dashboard-monitoring.md) [#1381](https://github.com/pingcap/tidb-dashboard/issues/1381) @[YiniXu9506](https://github.com/YiniXu9506)
 
--   TiDB Dashboardはビジュアル実行プランをサポートしています
+-   TiDB Dashboardはビジュアル実行計画をサポートしています
 
-    TiDB Dashboardは、SQLステートメントページとモニタリングページを通じて、視覚的な実行プランと基本的な診断サービスを提供します。この機能により、クエリプランの各ステップを特定するための新しい視点が得られます。そのため、クエリ実行プランのすべての痕跡をより直感的に把握できます。
+    TiDB Dashboardは、SQLステートメントページとモニタリングページを通じて、視覚的な実行計画と基本的な診断サービスを提供します。この機能により、クエリプランの各ステップを特定するための新しい視点が得られます。そのため、クエリ実行計画のすべての痕跡をより直感的に把握できます。
 
-    この機能は、複雑で大規模なクエリの実行方法を学習する際に特に役立ちます。また、TiDB Dashboardは各クエリ実行プランについて、実行の詳細を自動的に分析し、潜在的な問題点を特定し、特定のクエリプランの実行時間を短縮するための最適化提案を提供します。
+    この機能は、複雑で大規模なクエリの実行方法を学習する際に特に役立ちます。また、TiDB Dashboardは各クエリ実行計画について、実行の詳細を自動的に分析し、潜在的な問題点を特定し、特定のクエリプランの実行時間を短縮するための最適化提案を提供します。
 
     [ユーザー向けドキュメント](https://docs-archive.pingcap.com/tidb/v6.2/dashboard-slow-query#visual-execution-plans) [#1224](https://github.com/pingcap/tidb-dashboard/issues/1224) @[time-and-fate](https://github.com/time-and-fate)
 
@@ -76,13 +76,13 @@ TiDBバージョン: 6.2.0-DMR
 
 -   `LEADING`オプティマイザヒントを改善し、外部結合の順序付けをサポートするようにしました。
 
-    バージョン 6.1.0 では、テーブルの結合順序を変更するためにオプティマイザヒント`LEADING`が導入されました。しかし、このヒントは外部結合を含むクエリには適用できませんでした。詳細については、 [`LEADING`文書](/optimizer-hints.md#leadingt1_name--tl_name-)を参照してください。バージョン 6.2.0 では、TiDB はこの制限を解除しました。外部結合を含むクエリでも、このヒントを使用してテーブルの結合順序を指定できるようになり、SQL の実行パフォーマンスが向上し、実行プランの急激な変更を回避できます。
+    バージョン 6.1.0 では、テーブルの結合順序を変更するためにオプティマイザヒント`LEADING`が導入されました。しかし、このヒントは外部結合を含むクエリには適用できませんでした。詳細については、 [`LEADING`文書](/optimizer-hints.md#leadingt1_name--tl_name-)を参照してください。バージョン 6.2.0 では、TiDB はこの制限を解除しました。外部結合を含むクエリでも、このヒントを使用してテーブルの結合順序を指定できるようになり、SQL の実行パフォーマンスが向上し、実行計画の急激な変更を回避できます。
 
     [ユーザー向けドキュメント](/optimizer-hints.md#leadingt1_name--tl_name-) [#29932](https://github.com/pingcap/tidb/issues/29932) @[Reminiscent](https://github.com/Reminiscent)
 
 -   `SEMI_JOIN_REWRITE`クエリのパフォーマンスを向上させるために、新しいオプティマイザ`EXISTS` を追加します。
 
-    場合によっては、 `EXISTS`を含むクエリは最適な実行プランを取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
+    場合によっては、 `EXISTS`を含むクエリは最適な実行計画を取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
 
     [ユーザー向けドキュメント](/optimizer-hints.md#semi_join_rewrite) [#35323](https://github.com/pingcap/tidb/issues/35323) @[winoros](https://github.com/winoros)
 
@@ -106,7 +106,7 @@ TiDBバージョン: 6.2.0-DMR
 
 -   オプティマイザは文字列マッチングの推定精度を向上させます
 
-    文字列マッチングのシナリオでは、オプティマイザが行数を正確に推定できない場合、最適な実行プランの生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報とシステム変数の TopN 情報を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
+    文字列マッチングのシナリオでは、オプティマイザが行数を正確に推定できない場合、最適な実行計画の生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報とシステム変数の TopN 情報を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
 
     [ユーザー向けドキュメント](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620) [#36209](https://github.com/pingcap/tidb/issues/36209) @[time-and-fate](https://github.com/time-and-fate)
 
@@ -210,13 +210,13 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiDB Lightningのディスククォータ設定をサポート（実験的）
 
-    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なストレージ容量がない場合でも、インポートタスクを正常に完了できます。
+    TiDB Lightning が物理インポートモード (backend='local') でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なストレージ容量がない場合でも、インポートタスクを正常に完了できます。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
 -   TiDB Lightningは、物理インポートモードでの本番クラスタへのデータインポートをサポートしています。
 
-    従来、 TiDB Lightningの物理インポートモード（backend=&#39;local&#39;）は、対象クラスタに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
+    従来、 TiDB Lightningの物理インポートモード（backend='local'）は、対象クラスタに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
 
     TiDB Lightningは、既存の物理インポートモードを改良しました。テーブルのスケジュールを一時停止できるようにすることで、インポートの影響をクラスタレベルからテーブルレベルにまで軽減します。つまり、インポートされていないテーブルの読み書きが可能になります。
 
@@ -256,7 +256,7 @@ TiDBバージョン: 6.2.0-DMR
 | [tiflash_fine_grained_shuffle_batch_size](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)     | 新しく追加された | 細粒度シャッフルが有効になっている場合、 TiFlashにプッシュダウンされるウィンドウ関数を並列実行できます。この変数は、送信側から送信されるデータのバッチサイズを制御します。送信側は、累積行数がこの値を超えた時点でデータを送信します。                                                                                      |
 | [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために関数。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
 | [tidb_enable_analyze_snapshot](/system-variables.md#tidb_enable_analyze_snapshot-new-in-v620)                           | 新しく追加された | この変数は`ANALYZE`を実行する際に、履歴データまたは最新データを読み込むかどうかを制御します。                                                                                                                                                          |
-| [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620)                                 | 新しく追加された | この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行プランを生成するかどうかを制御します。                                                                                                                                                    |
+| [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620)                                 | 新しく追加された | この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行計画を生成するかどうかを制御します。                                                                                                                                                    |
 | [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)                               | 新しく追加された | この変数は、オプティマイザが`DISTINCT`を含む集計関数を2レベルの集計関数に書き換えるかどうかを設定します。たとえば`SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えます。              |
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` 変数を表示するかどうかを制御します。                                                                                                                                                |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページング要求処理中に処理される行の最大数を設定するために使用されます。                                                                                                                                                            |
@@ -309,7 +309,7 @@ TiDBバージョン: 6.2.0-DMR
 -   `ALTER TABLE`ステートメントを実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL ステートメントの変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
 -   TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。
 -   TiKV は[動的構成](/dynamic-config.md#modify-tikv-configuration-dynamically)をサポートする構成アイテム`split.region-cpu-overload-threshold-ratio`を追加します。
--   スロークエリログ、 `information_schema.statements_summary` 、および`information_schema.slow_query`は`binary_plan` 、またはバイナリ形式でエンコードされた実行プランをエクスポートできます。
+-   スロークエリログ、 `information_schema.statements_summary` 、および`information_schema.slow_query`は`binary_plan` 、またはバイナリ形式でエンコードされた実行計画をエクスポートできます。
 -   `SHOW TABLE ... REGIONS`ステートメントに、 `SCHEDULING_CONSTRAINTS`と`SCHEDULING_STATE` 2 つの列が追加されます。これらはそれぞれ、SQL の配置におけるリージョンスケジューリング制約と現在のスケジューリング状態を示します。
 -   TiDB v6.2.0以降では、 [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc)を介してRawKVのデータ変更をキャプチャできます。
 -   `ROLLBACK TO SAVEPOINT`を使用してトランザクションを特定のセーブポイントまでロールバックする場合、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放しますが、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされたときにすべてのロックを解放します。

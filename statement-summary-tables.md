@@ -38,7 +38,7 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 select * from employee where id in (...) and salary between ? and ?;
 ```
 
-ここでいう「プランダイジェスト」とは、正規化された実行プランによって計算される一意の識別子を指します。正規化処理では定数は無視されます。同じSQL文でも実行プランが異なる場合があるため、異なるカテゴリに分類されることがあります。同じカテゴリのSQL文は、同じ実行プランを持ちます。
+ここでいう「プランダイジェスト」とは、正規化された実行計画によって計算される一意の識別子を指します。正規化処理では定数は無視されます。同じSQL文でも実行計画が異なる場合があるため、異なるカテゴリに分類されることがあります。同じカテゴリのSQL文は、同じ実行計画を持ちます。
 
 `statements_summary`は、SQL モニタリング メトリックの集計結果が格納されます。一般的に、各モニタリング メトリックには、最大値と平均値が含まれます。たとえば、実行レイテンシーメトリックは、 `AVG_LATENCY` (平均レイテンシー) と`MAX_LATENCY` (最大レイテンシー) の 2 つのフィールドに対応します。
 
@@ -327,8 +327,8 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `INDEX_NAMES` : SQL文で使用されるすべてのSQLインデックス。インデックスが複数ある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。1 人のユーザーのみが対象となります。
 -   `PLAN_DIGEST` : 実行計画の概要。
--   `PLAN` : 元の実行プラン。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。
--   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行プラン。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。特定の実行プランを解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行してください。
+-   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。
+-   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行計画。複数のステートメントがある場合は、1つのステートメントのプランのみが使用されます。特定の実行計画を解析するには、 [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行してください。
 -   `PLAN_CACHE_HITS` : このカテゴリの SQL ステートメントがプラン キャッシュにヒットした合計回数。
 -   `PLAN_IN_CACHE` : このカテゴリの SQL ステートメントの以前の実行がプラン キャッシュにヒットしたかどうかを示します。
 -   `PLAN_CACHE_UNQUALIFIED` : このカテゴリの SQL ステートメントがプラン キャッシュにヒットしなかった回数。

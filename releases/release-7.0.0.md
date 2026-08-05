@@ -59,17 +59,17 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/tiflash/tiflash-late-materialization.md)を参照してください。
 
--   非プリペアドステートメントの実行プランのキャッシュをサポートする（実験的） [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
+-   非プリペアドステートメントの実行計画のキャッシュをサポートする（実験的） [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
 
-    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行プランをキャッシュすることもできるため、実行プラン キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
+    実行プランキャッシュは同時実行 OLTP の処理能力を向上させるために重要であり、TiDB はすでに[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)をサポートしています。 v7.0.0 では、TiDB は非 Prepare ステートメントの実行計画をキャッシュすることもできるため、実行計画 キャッシュの範囲が拡張され、TiDB の同時処理能力が向上します。
 
-    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行プランをキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
+    この機能はデフォルトでは無効になっています。システム変数[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)を`ON`に設定することで有効にできます。安定性のため、TiDB v7.0.0 では非プリペアド実行計画をキャッシュするための新しい領域が割り当てられ、システム変数[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)を使用してキャッシュサイズを設定できます。さらに、この機能には SQL ステートメントに関する特定の制限があります。詳細については、 [制限](/sql-non-prepared-plan-cache.md#restrictions)を参照してください。
 
     詳細については、[ドキュメント](/sql-non-prepared-plan-cache.md)を参照してください。
 
--   TiDB がサブクエリの実行プラン キャッシュ制約を削除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
+-   TiDB がサブクエリの実行計画 キャッシュ制約を削除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
-    TiDB v7.0.0 では、サブクエリに対する実行プランキャッシュの制約が解除されました。これにより、 `SELECT * FROM t WHERE a > (SELECT ...)`のようにサブクエリを含む SQL ステートメントの実行プランをキャッシュできるようになりました。この機能により、実行プランキャッシュの適用範囲がさらに拡大し、SQL クエリの実行効率が向上します。
+    TiDB v7.0.0 では、サブクエリに対する実行プランキャッシュの制約が解除されました。これにより、 `SELECT * FROM t WHERE a > (SELECT ...)`のようにサブクエリを含む SQL ステートメントの実行計画をキャッシュできるようになりました。この機能により、実行プランキャッシュの適用範囲がさらに拡大し、SQL クエリの実行効率が向上します。
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
@@ -133,7 +133,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   MPP 最適化のための新しいオプティマイザー ヒントを追加 [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent)
 
-    バージョン7.0.0では、TiDBはMPP実行プランの生成に影響を与える一連のオプティマイザヒントを追加しました。
+    バージョン7.0.0では、TiDBはMPP実行計画の生成に影響を与える一連のオプティマイザヒントを追加しました。
 
     -   [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してシャッフル結合アルゴリズムを使用するようにオプティマイザに指示します。
     -   [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name--tl_name-) : MPP で有効になります。指定されたテーブルに対してブロードキャスト結合アルゴリズムを使用するようにオプティマイザに指示します。
@@ -146,7 +146,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 -   オプティマイザーのヒントは、結合メソッドと結合順序の指定をサポートします [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
 
-    バージョン7.0.0では、オプティマイザヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)結合方法に影響を与えるヒントと併用できるようになり、両者の動作は互換性があります。複数テーブル結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行プランに対するオプティマイザヒントの制御が強化されます。
+    バージョン7.0.0では、オプティマイザヒント[`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-)結合方法に影響を与えるヒントと併用できるようになり、両者の動作は互換性があります。複数テーブル結合の場合、最適な結合方法と結合順序を効果的に指定できるため、実行計画に対するオプティマイザヒントの制御が強化されます。
 
     新しいヒント動作には、若干の変更があります。前方互換性を確保するため、TiDB はシステム変数[`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700)を導入します。この変数が`OFF`に設定されている場合、オプティマイザのヒント動作は以前のバージョンと互換性があります。クラスタを以前のバージョンから v7.0.0 以降のバージョンにアップグレードすると、この変数は`OFF`に設定されます。より柔軟なヒント動作を実現するには、動作によってパフォーマンスが低下しないことを確認した後、この変数を`ON`に設定することを強くお勧めします。
 
@@ -199,7 +199,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     -   独立したTiDBモジュール、アイコン、およびロゴを提供します。
     -   デフォルト設定では[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)がサポートされているため、 TiDB Cloud Starterへの接続が容易になります。
     -   TiDBのバージョンを識別して、外部キーのタブを表示または非表示にする機能をサポートしています。
-    -   `EXPLAIN`結果に SQL 実行プランを視覚化することをサポートします。
+    -   `EXPLAIN`結果に SQL 実行計画を視覚化することをサポートします。
     -   `PESSIMISTIC` 、 `OPTIMISTIC` 、 `AUTO_RANDOM` 、 `PLACEMENT` 、 `POLICY` 、 `REORGANIZE` 、 `EXCHANGE` 、 `CACHE` 、 `NONCLUSTERED` 、 `CLUSTERED`などの TiDB キーワードの強調表示をサポートします。
     -   `TIDB_BOUNDED_STALENESS` 、 `TIDB_DECODE_KEY` 、 `TIDB_DECODE_PLAN` 、 `TIDB_IS_DDL_OWNER` 、 `TIDB_PARSE_TSO` 、 `TIDB_VERSION` 、 `TIDB_DECODE_SQL_DIGESTS` 、 `TIDB_SHARD`などのTiDB関数の強調表示をサポートします。
 
@@ -283,7 +283,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)                                 | 変更     | v7.0.0 から有効になり、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                      |
 | [`tidb_enable_null_aware_anti_join`](/system-variables.md#tidb_enable_null_aware_anti_join-new-in-v630)                           | 変更     | さらなるテストの後、デフォルト値を`OFF`から`ON`に変更します。これは、特別なセット演算子`NOT IN`および`!= ALL`によってリードされるサブクエリによって Anti Join が生成される場合に、TiDB がデフォルトで Null-Aware Hash Join を適用することを意味します。                                |
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)                                   | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、クラスターがデフォルトでリソースグループごとにリソースを分離することを意味します。リソース制御は v7.0.0 でデフォルトで有効になっているため、いつでもこの機能を使用できます。                                                                    |
-| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                     | 変更     | v7.0.0 から有効になり、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)によってキャッシュできる実行プランの最大数を制御します。                                                                                             |
+| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                     | 変更     | v7.0.0 から有効になり、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)によってキャッシュできる実行計画の最大数を制御します。                                                                                             |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                 | 変更     | バージョン7.0.0以降、この変数はプリペアドステートメントプロトコルにおけるカーソルフェッチ読み取りには有効ではなくなりました。                                                                                                                          |
 | [`tidb_enable_inl_join_inner_multi_pattern`](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)           | 新しく追加された | この変数は、内部テーブルに`Selection`または`Projection`演算子がある場合に、インデックス結合がサポートされるかどうかを制御します。                                                                                                               |
 | [`tidb_enable_plan_cache_for_subquery`](/system-variables.md#tidb_enable_plan_cache_for_subquery-new-in-v700)                     | 新しく追加された | この変数は、プリペアドプランキャッシュがサブクエリを含むクエリをキャッシュするかどうかを制御します。                                                                                                                                         |

@@ -79,7 +79,7 @@ TiFlashがデプロイされた後、TiKVは自動的にTiFlashにデータを�
 
 ## データ処理 {#data-processing}
 
-TiDBでは、クエリや書き込みリクエストに対してSQL文を入力するだけで済みます。TiFlashレプリカを持つテーブルの場合、TiDBはフロントエンドオプティマイザを使用して最適な実行プランを自動的に選択します。
+TiDBでは、クエリや書き込みリクエストに対してSQL文を入力するだけで済みます。TiFlashレプリカを持つテーブルの場合、TiDBはフロントエンドオプティマイザを使用して最適な実行計画を自動的に選択します。
 
 > **Note:**
 >
@@ -108,7 +108,7 @@ TiDBの使用中に問題が発生した場合は、以下のドキュメント�
 -   [TiDBクラスタのトラブルシューティングガイド](/troubleshoot-tidb-cluster.md)
 -   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-[GitHub Issues](https://github.com/pingcap/tiflash/issues)を作成したり、 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)のコミュニティに質問したりすることもできます。
+[GitHub Issues](https://github.com/pingcap/tiflash/issues)を作成したり、 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)のコミュニティに質問したりすることもできます。
 
 ## 次は？ {#what-s-next}
 

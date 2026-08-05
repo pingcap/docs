@@ -685,7 +685,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
 -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
 -   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
--   [`SET [GLOBAL|SESSION] &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)

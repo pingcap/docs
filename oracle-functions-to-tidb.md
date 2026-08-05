@@ -50,9 +50,9 @@ summary: Oracle と TiDB の関数と構文の比較を学習します。
 
 ### 文字列構文 {#string-syntax}
 
-Oracleでは、文字列は一重引用符（&#39;&#39;）で囲む必要があります。例： `'a'` 。
+Oracleでは、文字列は一重引用符（''）で囲む必要があります。例： `'a'` 。
 
-TiDBでは、文字列は一重引用符（&#39;&#39;）または二重引用符（&quot;&quot;）で囲むことができます。たとえば、 `'a'`と`"a"` 。
+TiDBでは、文字列は一重引用符（''）または二重引用符（""）で囲むことができます。たとえば、 `'a'`と`"a"` 。
 
 ### <code>NULL</code>と空文字列の違い {#difference-between-code-null-code-and-an-empty-string}
 

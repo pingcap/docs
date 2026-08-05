@@ -367,7 +367,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
     -   Amazon Aurora MySQL または Amazon RDS MySQL: [セキュリティグループによるアクセス制御](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html)。
     -   Azure Database for MySQL - フレキシブル サーバー: [公共ネットワークアクセス](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
-    -   Google Cloud SQL for MySQL: [認証済みネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&#x26;__hssc=86493575.1.1768351956126&#x26;__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks)。
+    -   Google Cloud SQL for MySQL: [認証済みネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&__hssc=86493575.1.1768351956126&__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks)。
 
 3.  オプション：適切な証明書を使用して転送中の暗号化を行い、パブリックインターネットアクセスを備えたマシンからソースデータベースへの接続を確認します。
 

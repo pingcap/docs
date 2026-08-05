@@ -63,7 +63,7 @@ TiDB バージョン: 7.4.0
 
     詳細については[ドキュメント](/tidb-global-sort.md)を参照してください。
 
--   非プリペアドステートメントの実行プランのキャッシュをサポート (GA) [＃36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
+-   非プリペアドステートメントの実行計画のキャッシュをサポート (GA) [＃36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990)
 
     TiDB v7.0.0では、同時実行OLTPの処理能力を向上させるための実験的機能として、非プリペアドプランキャッシュが導入されました。v7.4.0ではこの機能がGAとなります。実行プランキャッシュはより多くのシナリオに適用され、TiDBの同時実行処理能力が向上します。
 
@@ -115,9 +115,9 @@ TiDB バージョン: 7.4.0
 
 -   オプティマイザモードのオプションを追加 [＃46080](https://github.com/pingcap/tidb/issues/46080) @[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB v7.4.0 では、オプティマイザが使用する推定方法を制御する新しいシステム変数[`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)が導入されました。デフォルト値`moderate` 、オプティマイザの従来の動作が維持され、実行時統計を使用してデータ変更に基づいて推定値を調整します。この変数を`determinate`に設定すると、オプティマイザは実行時修正を考慮せず、統計のみに基づいて実行プランを生成します。
+    TiDB v7.4.0 では、オプティマイザが使用する推定方法を制御する新しいシステム変数[`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)が導入されました。デフォルト値`moderate` 、オプティマイザの従来の動作が維持され、実行時統計を使用してデータ変更に基づいて推定値を調整します。この変数を`determinate`に設定すると、オプティマイザは実行時修正を考慮せず、統計のみに基づいて実行計画を生成します。
 
-    長期にわたって安定したOLTPアプリケーションや、既存の実行プランに自信がある場合は、テスト後にモード`determinate`に切り替えることをお勧めします。これにより、プラン変更の可能性が軽減されます。
+    長期にわたって安定したOLTPアプリケーションや、既存の実行計画に自信がある場合は、テスト後にモード`determinate`に切り替えることをお勧めします。これにより、プラン変更の可能性が軽減されます。
 
     詳細については[ドキュメント](/system-variables.md#tidb_opt_objective-new-in-v740)を参照してください。
 
@@ -138,7 +138,7 @@ TiDB バージョン: 7.4.0
 
 -   ロック統計が一般公開（GA）される[＃46351](https://github.com/pingcap/tidb/issues/46351) @[Rustin170506](https://github.com/Rustin170506)
 
-    v7.4.0では、 [ロック統計](/statistics.md#lock-statistics)一般提供となります。運用上のセキュリティを確保するため、統計情報のロックとロック解除には、統計情報の収集と同じ権限が必要です。さらに、TiDBは特定のパーティションに対する統計情報のロックとロック解除をサポートし、柔軟性が向上しています。データベース内のクエリや実行プランに自信があり、変更を防止したい場合は、統計情報をロックすることで安定性を高めることができます。
+    v7.4.0では、 [ロック統計](/statistics.md#lock-statistics)一般提供となります。運用上のセキュリティを確保するため、統計情報のロックとロック解除には、統計情報の収集と同じ権限が必要です。さらに、TiDBは特定のパーティションに対する統計情報のロックとロック解除をサポートし、柔軟性が向上しています。データベース内のクエリや実行計画に自信があり、変更を防止したい場合は、統計情報をロックすることで安定性を高めることができます。
 
     詳細については[ドキュメント](/statistics.md#lock-statistics)を参照してください。
 
@@ -146,7 +146,7 @@ TiDB バージョン: 7.4.0
 
     MySQL 8.0では、新機能としてテーブルのハッシュ結合が導入されました。この機能は主に、比較的大きな2つのテーブルと結果セットを結合するために使用されます。ただし、トランザクションワークロードやMySQL 5.7で実行される一部のアプリケーションでは、テーブルのハッシュ結合はパフォーマンスリスクをもたらす可能性があります。MySQLには、ハッシュ結合をグローバルレベルとセッションレベルのどちらで選択するかを制御するための[`optimizer_switch`](https://dev.mysql.com/doc/refman/8.0/en/switchable-optimizations.html#optflag_block-nested-loop)用意されています。
 
-    TiDB v7.4.0以降、テーブルのハッシュ結合を制御するためのシステム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)導入されました。これはデフォルトで有効になっています（ `ON` ）。実行プランでテーブル間のハッシュ結合を選択する必要がない場合は、この変数を`OFF`に変更することで、実行プランのロールバックの可能性を低減し、システムの安定性を向上させることができます。
+    TiDB v7.4.0以降、テーブルのハッシュ結合を制御するためのシステム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)導入されました。これはデフォルトで有効になっています（ `ON` ）。実行計画でテーブル間のハッシュ結合を選択する必要がない場合は、この変数を`OFF`に変更することで、実行計画のロールバックの可能性を低減し、システムの安定性を向上させることができます。
 
     詳細については[ドキュメント](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)を参照してください。
 
@@ -192,7 +192,7 @@ TiDB バージョン: 7.4.0
 
 -   TiDB Dashboardは、実行計画をテーブルビューで表示することをサポートしています[＃1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine)
 
-    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行プランをテーブル ビューで表示することをサポートしています。
+    v7.4.0 では、TiDB Dashboardは、診断エクスペリエンスを向上させるために、**スロー クエリ ページ**と**SQL ステートメント**ページで実行計画をテーブル ビューで表示することをサポートしています。
 
     詳細については[ドキュメント](/dashboard/dashboard-statement-details.md)を参照してください。
 
@@ -257,8 +257,8 @@ TiDB バージョン: 7.4.0
 | [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)       | 変更     | さらにテストを行った後、デフォルト値を`ON`から`OFF`に変更します。これは、非プリペアドプランキャッシュが無効であることを意味します。                                                                                                                                                                                                                                                                    |
 | [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740)       | 新しく追加された | `utf8mb4`文字セットのデフォルトの照合順序を制御します。デフォルト値は`utf8mb4_bin`です。                                                                                                                                                                                                                                                                                        |
 | [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)                     | 新しく追加された | 有効にするクラウドストレージURI を指定します[グローバルソート](/tidb-global-sort.md) 。                                                                                                                                                                                                                                                                                   |
-| [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) | 新しく追加された | オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御します。デフォルトの値は`ON`です。`OFF`に設定すると、他に利用可能な実行プランがない限り、オプティマイザはテーブルのハッシュ結合を選択しません。                                                                                                                                                                                                                                 |
-| [`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)                             | 新しく追加された | この変数はオプティマイザの目的を制御します。`moderate`は、TiDB v7.4.0 より前のバージョンのデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより優れた実行プランを生成しようとします。`determinate`はより保守的になる傾向があり、実行プランをより安定させます。                                                                                                                                                                                   |
+| [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740) | 新しく追加された | オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御します。デフォルトの値は`ON`です。`OFF`に設定すると、他に利用可能な実行計画がない限り、オプティマイザはテーブルのハッシュ結合を選択しません。                                                                                                                                                                                                                                 |
+| [`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740)                             | 新しく追加された | この変数はオプティマイザの目的を制御します。`moderate`は、TiDB v7.4.0 より前のバージョンのデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより優れた実行計画を生成しようとします。`determinate`はより保守的になる傾向があり、実行計画をより安定させます。                                                                                                                                                                                   |
 | [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740)                 | 新しく追加された | 現在のセッションのタスクタイプを明示的に指定します。タスクタイプは[リソース管理](/tidb-resource-control-ru-groups.md)によって識別および制御されます。例: `SET @@tidb_request_source_type = "background"` 。                                                                                                                                                                                             |
 | [`tidb_schema_version_cache_limit`](/system-variables.md#tidb_schema_version_cache_limit-new-in-v740)   | 新しく追加された | この変数は、TiDBインスタンスにキャッシュできる履歴スキーマバージョンの数を制限します。デフォルト値は`16`で、これはTiDBがデフォルトで16個の履歴スキーマバージョンをキャッシュすることを意味します。                                                                                                                                                                                                                                       |
 | [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)                             | 新しく追加された | この変数はインスタンスレベルのシステム変数です。これを使用して、 [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)配下のTiDBノードのサービススコープを制御できます。TiDBノードの`tidb_service_scope` `background`に設定すると、DXFはそのTiDBノードで[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)や[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)などのDXFタスクを実行するようにスケジュールします。 |
@@ -369,9 +369,9 @@ TiDB バージョン: 7.4.0
     -   `GROUP_CONCAT` `ORDER BY`列を解析できない問題を修正 [＃41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
     -   深くネストされた式に対してハッシュコードが繰り返し計算され、メモリ使用量が増加し、OOM が発生する問題を修正しました。 [＃42788](https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
     -   CAST に精度損失がないのに条件`cast(col)=range`で FullScan が発生する問題を修正[＃45199](https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
-    -   MPP実行プランで集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
+    -   MPP実行計画で集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[＃45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
     -   `in (?)`とのバインディングが`in (?, ... ?)` と一致しない問題を修正しました [＃44298](https://github.com/pingcap/tidb/issues/44298) @[qw4990](https://github.com/qw4990)
-    -   `non-prep plan cache`実行プランを再利用するときに接続照合順序を考慮しないことによって発生するエラーを修正しました [＃47008](https://github.com/pingcap/tidb/issues/47008) @[qw4990](https://github.com/qw4990)
+    -   `non-prep plan cache`実行計画を再利用するときに接続照合順序を考慮しないことによって発生するエラーを修正しました [＃47008](https://github.com/pingcap/tidb/issues/47008) @[qw4990](https://github.com/qw4990)
     -   実行されたプランがプランキャッシュにヒットしない場合に警告が報告されない問題を修正しました [＃46159](https://github.com/pingcap/tidb/issues/46159) @[qw4990](https://github.com/qw4990)
     -   `plan replayer dump explain`エラーを報告する問題を修正 [＃46197](https://github.com/pingcap/tidb/issues/46197) @[time-and-fate](https://github.com/time-and-fate)
     -   CTE を含む DML 文を実行するとpanicが発生する問題を修正しました [＃46083](https://github.com/pingcap/tidb/issues/46083) @[winoros](https://github.com/winoros)

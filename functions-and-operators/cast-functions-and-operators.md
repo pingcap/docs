@@ -23,7 +23,7 @@ MySQL 8.0.27以降、 [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-fu
 
 ## キャスト {#cast}
 
-[`CAST(&#x3C;expression> AS &#x3C;type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)関数は、式を特定の型にキャストするために使用されます。
+[`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)関数は、式を特定の型にキャストするために使用されます。
 
 この関数は[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を作成する場合にも使用されます。
 

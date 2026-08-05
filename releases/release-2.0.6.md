@@ -30,7 +30,7 @@ summary: TiDB 2.0.6は、システムの互換性と安定性の向上を伴い�
     -   いくつかのシナリオにおける`DECIMAL`乗算結果のコードの乱雑な問題を修正[＃7212](https://github.com/pingcap/tidb/pull/7212)
     -   いくつかのシナリオで`DECIMAL`剰余演算の誤った結果の問題を修正[＃7245](https://github.com/pingcap/tidb/pull/7245)
     -   トランザクション内の`UPDATE`ステートメントが`DELETE`いくつかの特殊なステートメントシーケンスで間違った結果を返す問題を修正しました[＃7219](https://github.com/pingcap/tidb/pull/7219)
-    -   いくつかのシナリオで実行プランを構築するプロセス中に`UNION ALL` `UPDATE`のpanic問題を修正しました[＃7225](https://github.com/pingcap/tidb/pull/7225)
+    -   いくつかのシナリオで実行計画を構築するプロセス中に`UNION ALL` `UPDATE`のpanic問題を修正しました[＃7225](https://github.com/pingcap/tidb/pull/7225)
     -   一部のシナリオでプレフィックスインデックスの範囲が正しく計算されない問題を修正[＃7231](https://github.com/pingcap/tidb/pull/7231)
     -   `LOAD DATA`文が一部のシナリオでbinlogの書き込みに失敗する問題を修正[＃7242](https://github.com/pingcap/tidb/pull/7242)
     -   いくつかのシナリオで`ADD INDEX`実行プロセス中に`SHOW CREATE TABLE`の間違った結果の問題を修正しました [＃7243](https://github.com/pingcap/tidb/pull/7243)

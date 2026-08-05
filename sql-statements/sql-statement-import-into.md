@@ -251,7 +251,7 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 `DETACHED`モードが有効になっているインポート ジョブの場合、 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md)を使用して現在のジョブの進行状況を表示できます。
 
-インポートジョブが開始された後、 [`CANCEL IMPORT JOB &#x3C;job-id>`](/sql-statements/sql-statement-cancel-import-job.md)を使用してキャンセルできます。
+インポートジョブが開始された後、 [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md)を使用してキャンセルできます。
 
 ### 例 {#examples}
 

@@ -1,11 +1,11 @@
 ---
 title: Explain Statements in the MPP Mode
-summary: TiDB のEXPLAINステートメントによって返される実行プラン情報について学習します。
+summary: TiDB のEXPLAINステートメントによって返される実行計画情報について学習します。
 ---
 
 # MPPモードでステートメントを説明する {#explain-statements-in-the-mpp-mode}
 
-TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行プランを生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
+TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行計画を生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -29,9 +29,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## Exchange 演算子 {#exchange-operators}
 
-`ExchangeReceiver`と`ExchangeSender`は、MPP実行プランに特有の2つの交換演算子です。`ExchangeReceiver`演算子は下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
+`ExchangeReceiver`と`ExchangeSender`は、MPP実行計画に特有の2つの交換演算子です。`ExchangeReceiver`演算子は下流のクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は下流のクエリフラグメントから上流のクエリフラグメントにデータを送信します。MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。つまり、クエリフラグメントは`ExchangeSender`演算子によって区切られます。
 
-以下は単純な MPP 実行プランです。
+以下は単純な MPP 実行計画です。
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
@@ -52,7 +52,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+-------------------+---------------+----------------------------------------------------+
 ```
 
-上記の実行プランには、2 つのクエリ フラグメントが含まれています。
+上記の実行計画には、2 つのクエリ フラグメントが含まれています。
 
 -   1 つ目は`[TableFullScan_25, HashAgg_9, ExchangeSender_28]`で、主に第 1 段階の集約を担当します。
 -   2 番目は`[ExchangeReceiver_29, HashAgg_27, Projection_26, ExchangeSender_30]`で、主に第 2 段階の集約を担当します。
@@ -63,14 +63,14 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 -   ブロードキャスト： `ExchangeSender`演算子は、ブロードキャストを介して上流のMPPタスクにデータを配信します。この交換タイプは、ブロードキャスト結合でよく使用されます。
 -   PassThrough: `ExchangeSender`演算子は、上流のMPPタスクのみにデータを送信します。これはブロードキャスト型とは異なります。この交換型は、TiDBにデータを返す際によく使用されます。
 
-実行プランの例では、演算子`ExchangeSender_28`の交換タイプはHashPartitionであり、ハッシュ集計アルゴリズムを実行することを意味します。演算子`ExchangeSender_30`の交換タイプはPassThroughであり、TiDBにデータを返すために使用されることを意味します。
+実行計画の例では、演算子`ExchangeSender_28`の交換タイプはHashPartitionであり、ハッシュ集計アルゴリズムを実行することを意味します。演算子`ExchangeSender_30`の交換タイプはPassThroughであり、TiDBにデータを返すために使用されることを意味します。
 
 MPPは結合操作にもよく適用されます。TiDBのMPPモードは、以下の2つの結合アルゴリズムをサポートしています。
 
 -   シャッフルハッシュ結合：HashPartition交換タイプを使用して、結合操作からの入力データをシャッフルします。その後、上流のMPPタスクが同じパーティション内のデータを結合します。
 -   ブロードキャスト結合: 結合操作内の小さなテーブルのデータを各ノードにブロードキャストし、その後各ノードはデータを個別に結合します。
 
-以下は、シャッフル ハッシュ結合の一般的な実行プランです。
+以下は、シャッフル ハッシュ結合の一般的な実行計画です。
 
 ```sql
 SET tidb_broadcast_join_threshold_count=0;
@@ -98,13 +98,13 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 12 rows in set (0.00 sec)
 ```
 
-上記の実行プランでは、
+上記の実行計画では、
 
 -   クエリ フラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`はテーブル b からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
 -   クエリ フラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`はテーブル a からデータを読み取り、上流の MPP タスクにデータをシャッフルします。
 -   クエリ フラグメント`[ExchangeReceiver_19, ExchangeReceiver_23, HashJoin_44, ExchangeSender_47]`はすべてのデータを結合し、TiDB に返します。
 
-Broadcast Join の一般的な実行プランは次のとおりです。
+Broadcast Join の一般的な実行計画は次のとおりです。
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
@@ -127,7 +127,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 +----------------------------------------+---------+--------------+---------------+------------------------------------------------+
 ```
 
-上記の実行プランでは、
+上記の実行計画では、
 
 -   クエリ フラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]` 、小さなテーブル (テーブル a) からデータを読み取り、大きなテーブル (テーブル b) のデータを含む各ノードにデータをブロードキャストします。
 -   クエリ フラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、TiDB に返します。
@@ -161,10 +161,10 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## MPPバージョンと交換データ圧縮 {#mpp-version-and-exchange-data-compression}
 
-v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression`がMPP 実行プランに追加されます。
+v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression`がMPP 実行計画に追加されます。
 
--   `MppVersion` : MPP 実行プランのバージョン番号。システム変数[`mpp_version`](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
--   `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)で設定できます。データ圧縮が有効になっていない場合、このフィールドは実行プランに表示されません。
+-   `MppVersion` : MPP 実行計画のバージョン番号。システム変数[`mpp_version`](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
+-   `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)で設定できます。データ圧縮が有効になっていない場合、このフィールドは実行計画に表示されません。
 
 次の例を参照してください。
 

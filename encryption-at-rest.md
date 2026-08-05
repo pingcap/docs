@@ -378,7 +378,7 @@ TiFlashもv4.0.9で暗号化メタデータ操作を最適化しており、そ�
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 
-BRを使用して S3 にバックアップする際に S3 サーバー側の暗号化を有効にするには、引数を`--s3.sse`渡し、値を &quot;aws:kms&quot; に設定します。S3 は暗号化に独自の KMS キーを使用します。例:
+BRを使用して S3 にバックアップする際に S3 サーバー側の暗号化を有効にするには、引数を`--s3.sse`渡し、値を "aws:kms" に設定します。S3 は暗号化に独自の KMS キーを使用します。例:
 
     tiup br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 

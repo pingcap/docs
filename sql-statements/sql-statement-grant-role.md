@@ -3,7 +3,7 @@ title: GRANT <role> | TiDB SQL Statement Reference
 summary: TiDB データベースに対する GRANT <role> の使用法の概要。
 ---
 
-# `GRANT &#x3C;role>` {#grant-x3c-role}
+# `GRANT <role>` {#grant-x3c-role}
 
 既存のユーザーに、以前に作成したロールを割り当てます。ユーザーは、ステートメント`SET ROLE <rolename>`を使用してロールの権限を引き受けるか、ステートメント`SET ROLE ALL`を使用して割り当てられているすべてのロールを引き受けることができます。
 
@@ -133,10 +133,10 @@ TiDBの`GRANT <role>`文はMySQL 8.0のロール機能と完全に互換性が�
 
 ## 参照 {#see-also}
 
--   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 -   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
 -   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
--   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 

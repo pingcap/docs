@@ -96,7 +96,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な事務作業を行う。                                                             |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB では効果的な使用法がありません。 |
-| [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
+| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
 | [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さな領域に分割します。                                                    |
 
@@ -117,7 +117,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
 | [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な事務作業を行う。                                                             |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB では効果的な使用法がありません。 |
-| [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
+| [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
 | [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
 | [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さな領域に分割します。                                                    |
 
@@ -194,7 +194,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DESC`](/sql-statements/sql-statement-desc.md)         | テーブルの構造を示す`DESCRIBE`のエイリアス。 |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | テーブルの構造を示します。               |
 | [`DO`](/sql-statements/sql-statement-do.md)             | 式を実行しますが、結果は返しません。          |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)   | クエリの実行プランを表示します。            |
+| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)   | クエリの実行計画を表示します。            |
 | [`TRACE`](/sql-statements/sql-statement-trace.md)       | クエリ実行に関する詳細情報を提供します。        |
 | [`USE`](/sql-statements/sql-statement-use.md)           | 現在のデータベースを設定します。            |
 
@@ -279,11 +279,11 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)                        | 既存の役割を削除します。                   |
 | [`DROP USER`](/sql-statements/sql-statement-drop-user.md)                        | 既存のユーザーを削除します。                 |
 | [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)          | 権限テーブルから、メモリ上の権限コピーを再読み込みします。  |
-| [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)   | 権限を付与します。                      |
-| [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)               | 役割を付与します。                      |
+| [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)   | 権限を付与します。                      |
+| [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)               | 役割を付与します。                      |
 | [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)                    | 既存のユーザー名を変更します。                |
-| [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md) | 権限を取り消します。                     |
-| [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)             | 役割を取り消します。                     |
+| [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md) | 権限を取り消します。                     |
+| [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)             | 役割を取り消します。                     |
 | [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)          | デフォルトの役割を設定します。                |
 | [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)                  | パスワードを変更します。                   |
 | [`SET ROLE`](/sql-statements/sql-statement-set-role.md)                          | 現在のセッションでロールを有効にします。           |
@@ -320,7 +320,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | ------------------------------------------------------------------------------------- | -------------------------------------------- |
 | [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)                     | テーブルに関する統計情報を収集します。                          |
 | [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)                   | SQL文の実行プランバインディングを作成します。                     |
-| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL文から実行プランのバインディングを削除します。                   |
+| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL文から実行計画のバインディングを削除します。                   |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)                           | テーブルから統計情報を削除します。                            |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                 | `EXPLAIN`と似た動作をしますが、大きな違いは、ステートメントを実行することです。 |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)                           | 統計情報をTiDBにロードします。                            |

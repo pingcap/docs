@@ -368,7 +368,7 @@ select @@tidb_slow_log_threshold;
 | `instance.tidb_slow_log_threshold`                      | `tidb_slow_log_threshold`                    | スローログのしきい値を指定します                                                                      |
 | `instance.tidb_expensive_query_time_threshold`          | `tidb_expensive_query_time_threshold`        | 負荷の高いクエリのしきい値を指定します                                                                     |
 | `instance.tidb_enable_collect_execution_info`           | `tidb_enable_collect_execution_info`         | オペレータの実行情報を記録するかどうかを制御します                                                             |
-| `instance.tidb_record_plan_in_slow_log`                 | `tidb_record_plan_in_slow_log`               | 実行プランをスローログに記録するかどうかを制御します                                                            |
+| `instance.tidb_record_plan_in_slow_log`                 | `tidb_record_plan_in_slow_log`               | 実行計画をスローログに記録するかどうかを制御します                                                            |
 | `instance.tidb_force_priority`                          | `tidb_force_priority`                        | この TiDB インスタンスから送信されるステートメントの優先順位を指定します                                               |
 | `instance.max_connections`                              | `max_connections`                            | この TiDB インスタンスに許可される同時接続の最大数を指定します                                                    |
 | `instance.tidb_enable_ddl`                              | `tidb_enable_ddl`                            | この TiDB インスタンスが DDL 所有者になれるかどうかを制御します                                                 |

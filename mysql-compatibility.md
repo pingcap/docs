@@ -36,7 +36,7 @@ TiDBはMySQLレプリケーションプロトコルをサポートしていな�
 
 </CustomContent>
 
-[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=mysql_compatibility)でTiDBの機能を試すことができます。
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)でTiDBの機能を試すことができます。
 
 ## サポートされていない機能 {#unsupported-features}
 
@@ -164,13 +164,13 @@ TiDB Cloudのパフォーマンス メトリックを確認するには、 TiDB 
 
 </CustomContent>
 
-### クエリ実行プラン {#query-execution-plan}
+### クエリ実行計画 {#query-execution-plan}
 
-TiDB のクエリ実行プラン ( `EXPLAIN` / `EXPLAIN FOR` ) の出力形式、内容、および権限設定は、MySQL のものとは大きく異なります。
+TiDB のクエリ実行計画 ( `EXPLAIN` / `EXPLAIN FOR` ) の出力形式、内容、および権限設定は、MySQL のものとは大きく異なります。
 
-TiDBでは、MySQLシステム変数`optimizer_switch`は読み取り専用であり、実行プランには影響を与えません。オプティマイザヒントはMySQLと同様の構文で使用できますが、使用可能なヒントとその実装は異なる場合があります。
+TiDBでは、MySQLシステム変数`optimizer_switch`は読み取り専用であり、実行計画には影響を与えません。オプティマイザヒントはMySQLと同様の構文で使用できますが、使用可能なヒントとその実装は異なる場合があります。
 
-詳細については、[クエリ実行プランを理解する](/explain-overview.md)を参照してください。
+詳細については、[クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
 ### 組み込み関数 {#built-in-functions}
 

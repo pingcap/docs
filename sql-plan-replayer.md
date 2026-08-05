@@ -151,7 +151,7 @@ PLAN REPLAYER LOAD 'plan_replayer.zip';
 set @@global.tidb_enable_auto_analyze = OFF;
 ```
 
-クラスタ情報がインポートされると、TiDBクラスタには、必要なテーブルスキーマ、統計情報、および実行プランの構築に影響するその他の情報がロードされます。実行プランを表示し、統計情報を確認するには、以下の手順に従います。
+クラスタ情報がインポートされると、TiDBクラスタには、必要なテーブルスキーマ、統計情報、および実行計画の構築に影響するその他の情報がロードされます。実行計画を表示し、統計情報を確認するには、以下の手順に従います。
 
 ```sql
 mysql> desc t;
@@ -182,7 +182,7 @@ mysql> show stats_meta;
 1 row in set (0.04 sec)
 ```
 
-シーンが読み込まれて復元されたら、クラスターの実行プランを診断して改善できます。
+シーンが読み込まれて復元されたら、クラスターの実行計画を診断して改善できます。
 
 > **Note:**
 >
@@ -190,13 +190,13 @@ mysql> show stats_meta;
 
 ## <code>PLAN REPLAYER CAPTURE</code>を使用してターゲットプランをキャプチャします {#use-plan-replayer-capture-to-capture-target-plans}
 
-TiDBの実行プランを特定する場合、対象となるSQL文と実行プランがクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行プランのオプティマイザー情報を取得できます。
+TiDBの実行計画を特定する場合、対象となるSQL文と実行計画がクエリ内にまれにしか出現しないため、 `PLAN REPLAYER`を使用して文とプランを直接取得できない場合があります。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、対象となるSQL文と実行計画のオプティマイザー情報を取得できます。
 
 `PLAN REPLAYER CAPTURE`は主に次の機能があります。
 
--   対象となるSQL文と対象実行プランのダイジェストを事前にTiDBクラスタに登録し、対象クエリとのマッチングを開始します。
+-   対象となるSQL文と対象実行計画のダイジェストを事前にTiDBクラスタに登録し、対象クエリとのマッチングを開始します。
 -   ターゲット クエリが正常に一致すると、そのオプティマイザー関連の情報を直接キャプチャし、ZIP ファイルとしてエクスポートします。
--   一致した SQL と実行プランごとに、情報は 1 回だけキャプチャされます。
+-   一致した SQL と実行計画ごとに、情報は 1 回だけキャプチャされます。
 -   システム テーブルを通じて、進行中の一致するタスクと生成されたファイルを表示します。
 -   履歴ファイルを定期的にクリーンアップします。
 
@@ -206,13 +206,13 @@ TiDBの実行プランを特定する場合、対象となるSQL文と実行プ�
 
 ### <code>PLAN REPLAYER CAPTURE</code>使用する {#use-plan-replayer-capture}
 
-次のステートメントを使用して、対象の SQL ステートメントと実行プランのダイジェストを TiDB クラスターに登録できます。
+次のステートメントを使用して、対象の SQL ステートメントと実行計画のダイジェストを TiDB クラスターに登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' 'plan_digest';
 ```
 
-対象の SQL ステートメントに複数の実行プランがあり、すべての実行プランを取得する場合は、次のステートメントを使用してすべての実行プランを一度に登録できます。
+対象の SQL ステートメントに複数の実行計画があり、すべての実行計画を取得する場合は、次のステートメントを使用してすべての実行計画を一度に登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' '*';
@@ -282,7 +282,7 @@ Empty set (0.01 sec)
 
 ## <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を使用する {#use-plan-replayer-continuous-capture}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`有効にすると、TiDB はアプリケーションの SQL 文を`SQL DIGEST`と`PLAN DIGEST`に基づいて`PLAN REPLAYER`方法で非同期的に記録します。同じ DIGEST を共有する SQL 文と実行プランについては、 `PLAN REPLAYER CONTINUOUS CAPTURE`によって重複して記録されません。
+`PLAN REPLAYER CONTINUOUS CAPTURE`有効にすると、TiDB はアプリケーションの SQL 文を`SQL DIGEST`と`PLAN DIGEST`に基づいて`PLAN REPLAYER`方法で非同期的に記録します。同じ DIGEST を共有する SQL 文と実行計画については、 `PLAN REPLAYER CONTINUOUS CAPTURE`によって重複して記録されません。
 
 ### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-plan-replayer-continuous-capture}
 

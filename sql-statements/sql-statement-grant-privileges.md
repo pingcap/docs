@@ -3,7 +3,7 @@ title: GRANT <privileges> | TiDB SQL Statement Reference
 summary: TiDBデータベースに対するGRANT <権限>の使用方法の概要。
 ---
 
-# `GRANT &#x3C;privileges>` {#grant-x3c-privileges}
+# `GRANT <privileges>` {#grant-x3c-privileges}
 
 このステートメントは、TiDB の既存ユーザーに権限を割り当てます。TiDB の権限システムは MySQL に準拠しており、データベース/テーブルパターンに基づいて認証情報が割り当てられます。このステートメントを実行するには、 `GRANT OPTION`権限と、割り当てるすべての権限が必要です。
 
@@ -88,8 +88,8 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 ## 参照 {#see-also}
 
--   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
--   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+-   [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
 -   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">

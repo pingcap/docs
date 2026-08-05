@@ -38,7 +38,7 @@ Online Unsafe Recovery を使用する前に、次の要件が満たされてい
 
 ### ステップ1. 回復できないストアを指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-自動リカバリをトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行し、リカバリできない**すべての**TiKV ノードとTiFlashノードをコンマで区切って指定します。
+自動リカバリをトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行し、リカバリできない**すべての**TiKV ノードとTiFlashノードをコンマで区切って指定します。
 
 ```bash
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>

@@ -9,15 +9,15 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
 
 ## 一般的な原因 {#common-causes}
 
-### TiDB実行プランが正しくありません {#incorrect-tidb-execution-plan}
+### TiDB実行計画が正しくありません {#incorrect-tidb-execution-plan}
 
-クエリの実行プランが不安定になり、間違ったインデックスが選択される可能性があり、その結果、レイテンシーが長くなります。
+クエリの実行計画が不安定になり、間違ったインデックスが選択される可能性があり、その結果、レイテンシーが長くなります。
 
 #### 現象 {#phenomenon}
 
--   スローログにクエリ実行プランが出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行プランを解析できます。
+-   スローログにクエリ実行計画が出力されている場合は、プランを直接確認できます。`select tidb_decode_plan('xxx...')`ステートメントを実行すると、詳細な実行計画を解析できます。
 -   モニター内のスキャンされたキーの数が異常に増加し、スローログでは`Scan Keys`の数が多くなります。
--   TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行プランと比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
+-   TiDBにおけるSQL実行時間は、MySQLなどの他のデータベースと比べて大きく異なります。他のデータベースの実行計画と比較することで、例えば`Join Order`異なるかどうかなどを確認できます。
 
 #### 考えられる理由 {#possible-reason}
 
@@ -31,10 +31,10 @@ summary: 読み取りおよび書き込みのレイテンシーが長くなる�
         -   `set global tidb_auto_analyze_ratio=0.2;`
         -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
         -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
--   実行プランをバインドする
+-   実行計画をバインドする
     -   アプリケーションの SQL ステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
     -   3.0バージョンでは、アプリケーションのSQL文を変更する必要はありません。`create global binding`を使用して、 `force index`のバインディングSQL文を作成します。
-    -   4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行プランによるパフォーマンスの低下を回避します。
+    -   4.0 バージョンでは[SQLプラン管理](/sql-plan-management.md)サポートされており、不安定な実行計画によるパフォーマンスの低下を回避します。
 
 ### PD異常 {#pd-anomalies}
 
@@ -62,9 +62,9 @@ PD TSOのメトリック`wait duration`が異常に増加しています。こ�
 
 -   ローリングアップグレード中にPD OOMが発生しました。gRPCメッセージのサイズに制限がなく、モニターでは`TCP InSegs`が比較的大きいと表示されます。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されました。
 
--   PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) 。
+-   PDがパニックになります。[バグを報告する](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md) 。
 
--   その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)。
+-   その他の原因。`curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`を実行してgoroutineを取得し、 [バグを報告する](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md)。
 
 ### TiKVの異常 {#tikv-anomalies}
 

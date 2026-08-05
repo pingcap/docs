@@ -21,7 +21,7 @@ TiDB バージョン: 6.5.7
 -   TiDB
 
     -   パーティションテーブル[＃47071](https://github.com/pingcap/tidb/issues/47071) での`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [＃46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei) [＃47104](https://github.com/pingcap/tidb/issues/47104)
-    -   プランキャッシュをサポートして、オプティマイザ修正コントロールを使用して物理的な最適化中に生成された`PointGet`演算子を含む実行プランをキャッシュします。 [＃44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
+    -   プランキャッシュをサポートして、オプティマイザ修正コントロールを使用して物理的な最適化中に生成された`PointGet`演算子を含む実行計画をキャッシュします。 [＃44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
     -   特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[＃49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
 -   TiFlash

@@ -32,7 +32,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 ### 自己完結型サブクエリ {#self-contained-subquery}
 
-サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、実行プラン フェーズで TiDB によって定数として書き換えられます。
+サブクエリを比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または`! =` ) のオペランドとして使用する自己完結型サブクエリの場合、内部サブクエリは 1 回だけクエリを実行し、実行計画 フェーズで TiDB によって定数として書き換えられます。
 
 たとえば、年齢が平均年齢より大きい`authors`のテーブル内の著者を照会するには、サブクエリを比較演算子のオペランドとして使用できます。
 
@@ -84,7 +84,7 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 
 相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して1回ずつ実行されます。つまり、外部クエリが1,000万件の結果を取得すると仮定すると、サブクエリも1,000万回実行され、より多くの時間とリソースを消費することになります。
 
-したがって、処理の過程で、TiDB は実行プラン レベルでクエリ効率[相関サブクエリの非相関](/correlated-subquery-optimization.md)向上させるように努めます。
+したがって、処理の過程で、TiDB は実行計画 レベルでクエリ効率[相関サブクエリの非相関](/correlated-subquery-optimization.md)向上させるように努めます。
 
 次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を問い合わせるためのものです。
 
@@ -130,6 +130,6 @@ WHERE
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -168,10 +168,10 @@ NextValueForSequence ::=
 | `PRE_SPLIT_REGIONS`                          | テーブル作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                                                                                                                 | `PRE_SPLIT_REGIONS` = 4             |
 | `AUTO_ID_CACHE`                              | TiDBインスタンスで自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。                                                                                                  | `AUTO_ID_CACHE` = 200               |
 | `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。                                                                                               | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)を指定するには                                                                                                                        | `CHARACTER SET` = &#39;utf8mb4&#39; |
-| `COLLATE`                                    | テーブルの文字セット照合順序を指定するには                                                                                                                                                       | `COLLATE` = &#39;utf8mb4_bin&#39;   |
-| `COMMENT`                                    | コメント情報                                                                                                                                                                      | `COMMENT` = &#39;コメント情報&#39;        |
-| `AFFINITY`                                   | テーブルまたはパーティションのアフィニティスケジューリングを有効にするには、この設定を使用します。パーティション化されていないテーブルの場合は`'table'`に、パーティション化されたテーブルの場合は`'partition'`に設定できます。 `'none'`に設定するか、空欄のままにすると、アフィニティスケジューリングが無効になります。 | `AFFINITY` = &#39;テーブル&#39;         |
+| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)を指定するには                                                                                                                        | `CHARACTER SET` = 'utf8mb4' |
+| `COLLATE`                                    | テーブルの文字セット照合順序を指定するには                                                                                                                                                       | `COLLATE` = 'utf8mb4_bin'   |
+| `COMMENT`                                    | コメント情報                                                                                                                                                                      | `COMMENT` = 'コメント情報'        |
+| `AFFINITY`                                   | テーブルまたはパーティションのアフィニティスケジューリングを有効にするには、この設定を使用します。パーティション化されていないテーブルの場合は`'table'`に、パーティション化されたテーブルの場合は`'partition'`に設定できます。 `'none'`に設定するか、空欄のままにすると、アフィニティスケジューリングが無効になります。 | `AFFINITY` = 'テーブル'         |
 
 <CustomContent platform="tidb">
 

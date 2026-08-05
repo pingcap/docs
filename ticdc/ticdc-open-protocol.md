@@ -87,7 +87,7 @@ TiCDCオープンプロトコルは、データ変更イベントを下流に複
     }
     ```
 
-    `Update`イベント。新しく追加された行データ（&quot;u&quot;）と更新前の行データ（&quot;p&quot;）が出力されます。
+    `Update`イベント。新しく追加された行データ（"u"）と更新前の行データ（"p"）が出力されます。
 
     ```json
     {
@@ -276,30 +276,30 @@ COMMIT;
 | 型                     | コード    | 出力例                                                                                                                      | 説明                                                          |
 | :-------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | TINYINT/BOOLEAN       | 1      | {"t":1,"v":1}                                                                                                            |                                                             |
-| SMALLINT              | 2      | {&quot;t&quot;:2,&quot;v&quot;:1}                                                                                        |                                                             |
-| INT                   | 3      | {&quot;t&quot;:3,&quot;v&quot;:123}                                                                                      |                                                             |
-| FLOAT                 | 4      | {&quot;t&quot;:4,&quot;v&quot;:153.123}                                                                                  |                                                             |
-| DOUBLE                | 5      | {&quot;t&quot;:5,&quot;v&quot;:153.123}                                                                                  |                                                             |
-| NULL                  | 6      | {&quot;t&quot;:6,&quot;v&quot;:null}                                                                                     |                                                             |
-| TIMESTAMP             | 7      | {&quot;t&quot;:7,&quot;v&quot;:&quot;1973-12-30 15:30:00&quot;}                                                          |                                                             |
-| BIGINT                | 8      | {&quot;t&quot;:8,&quot;v&quot;:123}                                                                                      |                                                             |
-| MEDIUMINT             | 9      | {&quot;t&quot;:9,&quot;v&quot;:123}                                                                                      |                                                             |
-| DATE                  | 10/14 | {&quot;t&quot;:10,&quot;v&quot;:&quot;2000-01-01&quot;}                                                                  |                                                             |
-| TIME                  | 11     | {&quot;t&quot;:11,&quot;v&quot;:&quot;23:59:59&quot;}                                                                    |                                                             |
-| DATETIME              | 12     | {&quot;t&quot;:12,&quot;v&quot;:&quot;2015-12-20 23:58:58&quot;}                                                         |                                                             |
-| YEAR                  | 13     | {&quot;t&quot;:13,&quot;v&quot;:1970}                                                                                    |                                                             |
-| VARCHAR/VARBINARY     | 15/253 | {&quot;t&quot;:15,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:15,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;}   | 値はUTF-8でエンコードされます。アップストリームの型がVARBINARYの場合、非表示の文字はエスケープされます。 |
-| BIT                   | 16     | {&quot;t&quot;:16,&quot;v&quot;:81}                                                                                      |                                                             |
-| JSON                  | 245    | {&quot;t&quot;:245,&quot;v&quot;:&quot;{\&quot;キー1\&quot;: \&quot;値1\&quot;}&quot;}                                      |                                                             |
-| DECIMAL               | 246    | {&quot;t&quot;:246,&quot;v&quot;:&quot;129012.1230000&quot;}                                                             |                                                             |
-| ENUM                  | 247    | {&quot;t&quot;:247,&quot;v&quot;:1}                                                                                      |                                                             |
-| SET                   | 248    | {&quot;t&quot;:248,&quot;v&quot;:3}                                                                                      |                                                             |
-| TINYTEXT/TINYBLOB     | 249    | {&quot;t&quot;:249,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
-| MEDIUMTEXT/MEDIUMBLOB | 250    | {&quot;t&quot;:250,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
-| LONGTEXT/LONGBLOB     | 251    | {&quot;t&quot;:251,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
-| TEXT/BLOB             | 252    | {&quot;t&quot;:252,&quot;v&quot;:&quot;5rWL6K+VdGV4dA==&quot;}                                                           | 値は Base64 でエンコードされます。                                       |
-| CHAR/BINARY           | 254    | {&quot;t&quot;:254,&quot;v&quot;:&quot;テスト&quot;} / {&quot;t&quot;:254,&quot;v&quot;:&quot;\\x89PNG\\r\\n\\x1a\\n&quot;} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
-| TiDBVectorFloat32     | 225    | {&quot;t&quot;:225,&quot;v&quot;:&quot;[1.23, -0.4]&quot;}                                                               |                                                             |
+| SMALLINT              | 2      | {"t":2,"v":1}                                                                                        |                                                             |
+| INT                   | 3      | {"t":3,"v":123}                                                                                      |                                                             |
+| FLOAT                 | 4      | {"t":4,"v":153.123}                                                                                  |                                                             |
+| DOUBLE                | 5      | {"t":5,"v":153.123}                                                                                  |                                                             |
+| NULL                  | 6      | {"t":6,"v":null}                                                                                     |                                                             |
+| TIMESTAMP             | 7      | {"t":7,"v":"1973-12-30 15:30:00"}                                                          |                                                             |
+| BIGINT                | 8      | {"t":8,"v":123}                                                                                      |                                                             |
+| MEDIUMINT             | 9      | {"t":9,"v":123}                                                                                      |                                                             |
+| DATE                  | 10/14 | {"t":10,"v":"2000-01-01"}                                                                  |                                                             |
+| TIME                  | 11     | {"t":11,"v":"23:59:59"}                                                                    |                                                             |
+| DATETIME              | 12     | {"t":12,"v":"2015-12-20 23:58:58"}                                                         |                                                             |
+| YEAR                  | 13     | {"t":13,"v":1970}                                                                                    |                                                             |
+| VARCHAR/VARBINARY     | 15/253 | {"t":15,"v":"テスト"} / {"t":15,"v":"\\x89PNG\\r\\n\\x1a\\n"}   | 値はUTF-8でエンコードされます。アップストリームの型がVARBINARYの場合、非表示の文字はエスケープされます。 |
+| BIT                   | 16     | {"t":16,"v":81}                                                                                      |                                                             |
+| JSON                  | 245    | {"t":245,"v":"{\"キー1\": \"値1\"}"}                                      |                                                             |
+| DECIMAL               | 246    | {"t":246,"v":"129012.1230000"}                                                             |                                                             |
+| ENUM                  | 247    | {"t":247,"v":1}                                                                                      |                                                             |
+| SET                   | 248    | {"t":248,"v":3}                                                                                      |                                                             |
+| TINYTEXT/TINYBLOB     | 249    | {"t":249,"v":"5rWL6K+VdGV4dA=="}                                                           | 値は Base64 でエンコードされます。                                       |
+| MEDIUMTEXT/MEDIUMBLOB | 250    | {"t":250,"v":"5rWL6K+VdGV4dA=="}                                                           | 値は Base64 でエンコードされます。                                       |
+| LONGTEXT/LONGBLOB     | 251    | {"t":251,"v":"5rWL6K+VdGV4dA=="}                                                           | 値は Base64 でエンコードされます。                                       |
+| TEXT/BLOB             | 252    | {"t":252,"v":"5rWL6K+VdGV4dA=="}                                                           | 値は Base64 でエンコードされます。                                       |
+| CHAR/BINARY           | 254    | {"t":254,"v":"テスト"} / {"t":254,"v":"\\x89PNG\\r\\n\\x1a\\n"} | 値はUTF-8でエンコードされます。アップストリームの型がBINARYの場合、非表示の文字はエスケープされます。    |
+| TiDBVectorFloat32     | 225    | {"t":225,"v":"[1.23, -0.4]"}                                                               |                                                             |
 | GEOMETRY              | 255    |                                                                                                                          | Unsupported                                                 |
 
 ## DDLタイプコード {#ddl-type-code}
