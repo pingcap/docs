@@ -1213,7 +1213,7 @@ SELECT fname, lname, region_code, dob
 
     -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
-    -   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティション剪定の時間単位としてサポートされていないことに注意してください。
+    -   [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティション剪定の時間単位としてサポートされていないことに注意してください。
 
     例えば、パーティション式は単純な列です。
 
@@ -1755,11 +1755,11 @@ mysql> explain select * from t1 where id < 150;
 3 rows in set (0.00 sec)
 ```
 
-上記のクエリ結果から、パーティションプルーニングがまだ有効であるにもかかわらず、実行プラン内の`Union`オペレーターが消え、実行プランは`p0`と`p1`のみにアクセスすることがわかります。
+上記のクエリ結果から、パーティションプルーニングがまだ有効であるにもかかわらず、実行計画内の`Union`オペレーターが消え、実行計画は`p0`と`p1`のみにアクセスすることがわかります。
 
-`dynamic`モードでは、実行プランがよりシンプルかつ明確になります。Union 演算を省略することで、実行効率が向上し、Union の同時実行の問題を回避できます。さらに、 `dynamic`モードでは`static`モードでは使用できない IndexJoin を使用した実行プランも可能です。（以下の例を参照）
+`dynamic`モードでは、実行計画がよりシンプルかつ明確になります。Union 演算を省略することで、実行効率が向上し、Union の同時実行の問題を回避できます。さらに、 `dynamic`モードでは`static`モードでは使用できない IndexJoin を使用した実行計画も可能です。（以下の例を参照）
 
-**例 1** : 次の例では、IndexJoin を使用した実行プランを使用して`static`モードでクエリが実行されます。
+**例 1** : 次の例では、IndexJoin を使用した実行計画を使用して`static`モードでクエリが実行されます。
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
@@ -1808,9 +1808,9 @@ mysql> show warnings;
 1 row in set (0,00 sec)
 ```
 
-例1からわかるように、 `TIDB_INLJ`ヒントを使用しても、パーティションテーブルに対するクエリはIndexJoinを使用した実行プランを選択できません。
+例1からわかるように、 `TIDB_INLJ`ヒントを使用しても、パーティションテーブルに対するクエリはIndexJoinを使用した実行計画を選択できません。
 
-**例 2** : 次の例では、IndexJoin を使用した実行プランを使用して`dynamic`モードでクエリが実行されます。
+**例 2** : 次の例では、IndexJoin を使用した実行計画を使用して`dynamic`モードでクエリが実行されます。
 
 ```sql
 mysql> set @@tidb_partition_prune_mode = 'dynamic';
@@ -1832,7 +1832,7 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 8 rows in set (0.00 sec)
 ```
 
-例2から、 `dynamic`モードでは、クエリを実行するとIndexJoinを使用した実行プランが選択されることがわかります。
+例2から、 `dynamic`モードでは、クエリを実行するとIndexJoinを使用した実行計画が選択されることがわかります。
 
 現在、 `static`プルーニング モードは、プリペアドステートメントと非プリペアドステートメントの両方のプラン キャッシュをサポートしていません。
 

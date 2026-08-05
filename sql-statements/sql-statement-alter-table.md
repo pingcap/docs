@@ -152,7 +152,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
@@ -176,11 +176,11 @@ TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
 -   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文に対するTiDB拡張です。詳細については[キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-詳細な制限については[MySQLの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
+詳細な制限については[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## 参照 {#see-also}
 
--   [MySQLの互換性](/mysql-compatibility.md#ddl-operations)
+-   [MySQLとの互換性](/mysql-compatibility.md#ddl-operations)
 -   [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
 -   [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
 -   [ADD INDEX](/sql-statements/sql-statement-add-index.md)

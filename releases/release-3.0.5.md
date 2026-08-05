@@ -36,7 +36,7 @@ TiDB Ansible バージョン: 3.0.5
     -   `kvrpc.Cleanup`プロトコルの動作を更新して、時間外ではないトランザクションのロックをクリーンアップしないようにしました[＃12417](https://github.com/pingcap/tidb/pull/12417)
     -   パーティションテーブル情報を`information_schema.tables`テーブルに記録するサポート [＃12631](https://github.com/pingcap/tidb/pull/12631)
     -   `region-cache-ttl` を設定することでリージョンキャッシュの TTL の変更をサポートします [＃12683](https://github.com/pingcap/tidb/pull/12683)
-    -   スローログ内の実行プランの圧縮エンコード情報の出力をサポートします。この機能はデフォルトで有効になっており、 `slow-log-plan`設定または`tidb_record_plan_in_slow_log`変数を使用して制御できます。さらに、 `tidb_decode_plan`関数は、スローログ内の実行プラン列エンコード情報を実行プラン情報にデコードします[＃12808](https://github.com/pingcap/tidb/pull/12808)
+    -   スローログ内の実行計画の圧縮エンコード情報の出力をサポートします。この機能はデフォルトで有効になっており、 `slow-log-plan`設定または`tidb_record_plan_in_slow_log`変数を使用して制御できます。さらに、 `tidb_decode_plan`関数は、スローログ内の実行計画列エンコード情報を実行計画情報にデコードします[＃12808](https://github.com/pingcap/tidb/pull/12808)
     -   `information_schema.processlist`表にメモリ使用量情報を表示することをサポート [＃12801](https://github.com/pingcap/tidb/pull/12801)
     -   TiKVクライアントがアイドル接続と判断したときにエラーと予期しないアラームが発生する可能性がある問題を修正しました [＃12846](https://github.com/pingcap/tidb/pull/12846)
     -   `tikvSnapshot` `BatchGet()` の KV 結果を適切にキャッシュしないため、 `INSERT IGNORE`ステートメントのパフォーマンスが低下する問題を修正しました。 [＃12872](https://github.com/pingcap/tidb/pull/12872)

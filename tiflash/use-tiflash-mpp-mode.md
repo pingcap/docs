@@ -64,7 +64,7 @@ set @@session.tidb_enforce_mpp=1;
 >
 > `tidb_enforce_mpp=1`有効になると、TiDB オプティマイザはコスト見積もりを無視して MPP モードを選択します。ただし、他の要因によって MPP モードがブロックされる場合、TiDB は MPP モードを選択しません。これらの要因には、 TiFlashレプリカが存在しない、 TiFlashレプリカのレプリケーションが未完了である、MPP モードでサポートされていない演算子または関数を含むステートメントなどがあります。
 >
-> TiDBオプティマイザがコスト見積もり以外の理由でMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行プランを確認すると、その理由を説明する警告が返されます。例:
+> TiDBオプティマイザがコスト見積もり以外の理由でMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行計画を確認すると、その理由を説明する警告が返されます。例:
 >
 > ```sql
 > set @@session.tidb_enforce_mpp=1;
@@ -81,7 +81,7 @@ set @@session.tidb_enforce_mpp=1;
 
 ## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行プランを確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSender演算子とExchangeReceiver演算子が表示された場合、MPPモードが有効になっていることを示します。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSender演算子とExchangeReceiver演算子が表示された場合、MPPモードが有効になっていることを示します。
 
 次のステートメントは、TPC-H テスト セット内のテーブル構造を例として示しています。
 
@@ -103,7 +103,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 9 rows in set (0.00 sec)
 ```
 
-この実行プランの例には、演算子`ExchangeReceiver`と演算子`ExchangeSender`含まれています。この実行プランは、演算子`ExchangeSender`テーブル`nation`読み取った後、各ノードにテーブルをブロードキャストし、演算子`HashJoin`と演算子`HashAgg`テーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
+この実行計画の例には、演算子`ExchangeReceiver`と演算子`ExchangeSender`含まれています。この実行計画は、演算子`ExchangeSender`テーブル`nation`読み取った後、各ノードにテーブルをブロードキャストし、演算子`HashJoin`と演算子`HashAgg`テーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
 
 TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御する次の 3 つのグローバル/セッション変数を提供します。
 

@@ -3,7 +3,7 @@ title: REVOKE <role> | TiDB SQL Statement Reference
 summary: TiDB データベースの REVOKE <role> の使用法の概要。
 ---
 
-# `REVOKE &#x3C;role>` {#revoke-x3c-role}
+# `REVOKE <role>` {#revoke-x3c-role}
 
 このステートメントは、指定されたユーザー (またはユーザーのリスト) から以前に割り当てられたロールを削除します。
 
@@ -158,7 +158,7 @@ SHOW GRANTS;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`REVOKE <role>`文はMySQL 8.0のロール機能と完全に互換性があります。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
@@ -166,7 +166,7 @@ TiDBの`REVOKE <role>`文はMySQL 8.0のロール機能と完全に互換性が�
 
 -   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
 -   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
--   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
 -   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 

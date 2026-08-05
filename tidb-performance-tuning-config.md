@@ -77,7 +77,7 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 -   [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720) : [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合は、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してパーティションテーブルにアクセスします。
 -   [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720) : `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`のようなフィルターの場合、 `IndexRangeScan`のより包括的なスキャン範囲を作成します。
 -   [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) ：メモリを節約するため、プランキャッシュは、この変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。長いインリストを持つクエリでもプランキャッシュを使用できるようにするには、プランキャッシュのパラメータ制限を`200`から`10000`に増やしてください。
--   [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プランキャッシュは、物理最適化中に生成された`PointGet`演算子を含む実行プランをキャッシュすることを許可します。
+-   [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プランキャッシュは、物理最適化中に生成された`PointGet`演算子を含む実行計画をキャッシュすることを許可します。
 -   [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれている場合、オプティマイザは`IndexJoin`選択します。
 -   [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810) : オプティマイザがクエリ プランに対して (フル テーブル スキャン以外の) 単一のインデックス スキャン メソッドを選択できる場合、オプティマイザは自動的にインデックス マージを選択します。
 
@@ -203,7 +203,7 @@ snap-io-max-bytes-per-sec = "300MiB"
 
 インスタンスプランキャッシュは、以下のメカニズムを通じてパフォーマンスを向上させます。
 
--   メモリ内の`SELECT`ステートメントの実行プランをキャッシュします。
+-   メモリ内の`SELECT`ステートメントの実行計画をキャッシュします。
 -   同じ TiDB インスタンス上のすべての接続 (最大 200) 間で、キャッシュされたプランを共有します。
 -   1,000個のテーブルにわたって、最大5,000 `SELECT`ステートメントのプランを効率的に保存できます。
 -   キャッシュミスは主に`BEGIN`と`COMMIT`ステートメントの場合にのみ発生します。

@@ -141,7 +141,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 ### 解析期間、コンパイル期間、実行期間 {#parse-duration-compile-duration-and-execute-duration}
 
 -   `Parse Duration` : SQL文の解析に要した時間
--   `Compile Duration` : 解析されたSQL ASTを実行プランにコンパイルするのにかかる時間
+-   `Compile Duration` : 解析されたSQL ASTを実行計画にコンパイルするのにかかる時間
 -   `Execution Duration` : SQL文の実行計画の実行に費やされた時間
 
 これら 3 つのメトリックにはすべて、すべての TiDB インスタンスの平均期間と 99 パーセンタイル期間が含まれます。

@@ -89,11 +89,11 @@ TiDB バージョン: 7.6.0
 
 ### 信頼性 {#reliability}
 
--   クロスデータベース実行プランのバインディング [#48875](https://github.com/pingcap/tidb/issues/48875) @[qw4990](https://github.com/qw4990)
+-   クロスデータベース実行計画のバインディング [#48875](https://github.com/pingcap/tidb/issues/48875) @[qw4990](https://github.com/qw4990)
 
     TiDB上でSaaSサービスを実行する場合、データの保守管理を容易にするため、テナントごとにデータを個別のデータベースに保存するのが一般的です。その結果、同じテーブルとインデックス定義、そして類似したSQL文を持つデータベースが数百個も存在することになります。このような状況では、SQL文に対して実行プランバインディングを作成すると、通常、そのバインディングは他のデータベースのSQL文にも適用されてしまいます。
 
-    このシナリオでは、TiDB v7.6.0 でクロスデータベースバインディング機能が導入されました。この機能は、異なるデータベースにある場合でも、同じスキーマを持つ SQL ステートメントに同じ実行プランをバインドすることをサポートします。クロスデータベースバインディングを作成する際には、次の例に示すように、データベース名を表すためにワイルドカード`*`を使用する必要があります。バインディングが作成されると、テーブル`t1`と`t2`がどのデータベースにあるかに関係なく、TiDB はこのバインディングを使用して同じスキーマを持つすべての SQL ステートメントの実行プランを生成しようとします。これにより、各データベースごとにバインディングを作成する手間が省けます。
+    このシナリオでは、TiDB v7.6.0 でクロスデータベースバインディング機能が導入されました。この機能は、異なるデータベースにある場合でも、同じスキーマを持つ SQL ステートメントに同じ実行計画をバインドすることをサポートします。クロスデータベースバインディングを作成する際には、次の例に示すように、データベース名を表すためにワイルドカード`*`を使用する必要があります。バインディングが作成されると、テーブル`t1`と`t2`がどのデータベースにあるかに関係なく、TiDB はこのバインディングを使用して同じスキーマを持つすべての SQL ステートメントの実行計画を生成しようとします。これにより、各データベースごとにバインディングを作成する手間が省けます。
 
     ```sql
     CREATE GLOBAL BINDING FOR
@@ -103,7 +103,7 @@ TiDB バージョン: 7.6.0
         WHERE t1.id = t2.id;
     ```
 
-    さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行プランを修正することで、すべてのユーザーの実行プランを固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
+    さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行計画を修正することで、すべてのユーザーの実行計画を固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
 
     クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)有効にする必要があります。
 
@@ -245,7 +245,7 @@ TiDB バージョン: 7.6.0
 
 | コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                                        | 変更の種類  | 説明                                                                                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                               | 変更     | デフォルト値は &quot;&quot; です。TiDB のデフォルトのサポート TLS バージョンが`TLS1.1`以上から`TLS1.2`以上に変更されました。                                                                                                                                        |
+| TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                               | 変更     | デフォルト値は "" です。TiDB のデフォルトのサポート TLS バージョンが`TLS1.1`以上から`TLS1.2`以上に変更されました。                                                                                                                                        |
 | TiKV           | [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#report-min-resolved-ts-interval-new-in-v600) | 名称変更     | 名前をより正確にするため、この構成項目は[`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760)に名前が変更されました。 `raftstore.report-min-resolved-ts-interval`は無効になりました。        |
 | TiKV           | [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)                                                                           | 変更     | Titan で値を圧縮するために使用されるアルゴリズムで、値を単位とします。TiDB v7.6.0 以降、デフォルトの圧縮アルゴリズムは`zstd`です。                                                                                                                                             |
 | TiKV           | [`rocksdb.defaultcf.titan.min-blob-size`](/tikv-configuration-file.md#min-blob-size)                                                                   | 変更     | TiDB v7.6.0以降、新規クラスタのデフォルト値は`32KB`となります。v7.6.0にアップグレードする既存クラスタの場合、デフォルト値`1KB`は変更されません。                                                                                                                                    |
@@ -406,7 +406,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     -   自動統計更新の時間枠を設定した後でも、その時間枠外で統計が更新される可能性がある問題を修正しました [#49552](https://github.com/pingcap/tidb/issues/49552) @[hawkingrei](https://github.com/hawkingrei)
     -   パーティションテーブルを非パーティションテーブルに変換した際に、古い統計情報が自動的に削除されない問題を修正します [#49547](https://github.com/pingcap/tidb/issues/49547) @[Rustin170506](https://github.com/Rustin170506)
     -   `TRUNCATE TABLE`を使用してパーティションテーブルからデータをクリアしたときに、古い統計情報が自動的に削除されない問題を修正します [#49663](https://github.com/pingcap/tidb/issues/49663) @[Rustin170506](https://github.com/Rustin170506)
-    -   クエリが強制ソートを行うオプティマイザヒント（ `STREAM_AGG()`など）を使用し、かつ実行プランに`IndexMerge`が含まれている場合に、強制ソートが無効になる可能性がある問題を修正します。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
+    -   クエリが強制ソートを行うオプティマイザヒント（ `STREAM_AGG()`など）を使用し、かつ実行計画に`IndexMerge`が含まれている場合に、強制ソートが無効になる可能性がある問題を修正します。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     -   ヒストグラムの境界に`NULL`が含まれる場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     -   `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正 [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
     -   `UPDATE` 、 `DELETE` 、および`INSERT`ステートメントが、 `SQL_MODE`が厳密でない場合に警告ではなくオーバーフローエラーを返す問題を修正します [#49137](https://github.com/pingcap/tidb/issues/49137) @[YangKeao](https://github.com/YangKeao)

@@ -161,5 +161,5 @@ TiDB バージョン: 5.3.1
 
         -   一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[＃28144](https://github.com/pingcap/tidb/issues/28144)
         -   storageURL プレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合にTiDB Lightning がエラーを返すバグを修正しました[＃32742](https://github.com/pingcap/tidb/issues/32742)
-        -   --log-file=&quot;-&quot; を設定しても stdout にログが出力されない問題を修正しました [＃29876](https://github.com/pingcap/tidb/issues/29876)
+        -   --log-file="-" を設定しても stdout にログが出力されない問題を修正しました [＃29876](https://github.com/pingcap/tidb/issues/29876)
         -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[＃30709](https://github.com/pingcap/tidb/issues/30709)

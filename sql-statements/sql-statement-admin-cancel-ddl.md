@@ -36,7 +36,7 @@ ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 > -   この操作では、複数のDDLジョブを同時にキャンセルできます。 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブのIDを取得できます。
 > -   キャンセルするジョブが完了している場合、キャンセル操作は失敗します。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

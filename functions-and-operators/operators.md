@@ -27,7 +27,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 | [DIV](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_div)                       | 整数除算                                                                                                                                                                 |
 | [/](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_divide)                     | 除算演算子                                                                                                                                                                |
 | [＝](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal)                      | 等号演算子                                                                                                                                                                |
-| [`&#x3C;=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to)          | NULL安全等号演算子                                                                                                                                                          |
+| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to)          | NULL安全等号演算子                                                                                                                                                          |
 | [&gt;](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than)            | より大きい演算子                                                                                                                                                             |
 | [&gt;=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal)  | より大きいか等しい演算子                                                                                                                                                         |
 | [IS](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_is)                         | ブール値に対して値をテストする                                                                                                                                                      |
@@ -94,7 +94,7 @@ OR, ||
 | [BETWEEN](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_between)            | 値が範囲内にあるかどうかを確認します                                                  |
 | [COALESCE()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)                | 最初のNULL以外の引数を返す                                                     |
 | [＝](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal)                      | 等号演算子                                                               |
-| [`&#x3C;=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to)          | NULL安全等号演算子                                                         |
+| [`<=>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_equal-to)          | NULL安全等号演算子                                                         |
 | [&gt;](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than)            | より大きい演算子                                                            |
 | [&gt;=](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_greater-than-or-equal)  | より大きいか等しい演算子                                                        |
 | [GREATEST()](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_greatest)                | 最大の引数を返す                                                            |
@@ -138,6 +138,6 @@ OR, ||
 
 詳細は[Detection of Functional Dependence](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html)参照。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   MySQL は`ILIKE`演算子をサポートしていません。

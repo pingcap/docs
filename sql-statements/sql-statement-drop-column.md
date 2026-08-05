@@ -72,7 +72,7 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   主キー列または複合インデックスによってカバーされる列の削除はサポートされていません。
 

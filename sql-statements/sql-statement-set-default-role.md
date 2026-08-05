@@ -128,7 +128,7 @@ SET DEFAULT ROLE analyticsteam TO jennifer;
 ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SET DEFAULT ROLE`文はMySQL 8.0のロール機能と完全に互換性があります。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
@@ -136,8 +136,8 @@ TiDBの`SET DEFAULT ROLE`文はMySQL 8.0のロール機能と完全に互換性�
 
 -   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
 -   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
--   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
--   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
 
 <CustomContent platform="tidb">

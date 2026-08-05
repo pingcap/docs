@@ -69,9 +69,9 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 -   新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポート チケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
 
--   新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカル サポートへの無制限のアクセスが提供されます。
+-   新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカル サポートへの無制限のアクセスが提供されます。
 
--   新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術サポートを受けることができます。
+-   新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術サポートを受けることができます。
 
 ## Connected Careへの移行 {#transition-to-connected-care}
 

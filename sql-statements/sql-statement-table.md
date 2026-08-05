@@ -77,7 +77,7 @@ TABLE t1 LIMIT 1;
 1 row in set (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `TABLE`ステートメントは MySQL 8.0.19 で導入されました。
 

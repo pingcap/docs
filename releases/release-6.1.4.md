@@ -87,7 +87,7 @@ TiDB バージョン: 6.1.4
 
     -   TiDB Data Migration (DM)
 
-        -   `SHOW GRANTS`下流データベース名にワイルドカード (&quot;*&quot;) が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[＃7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
+        -   `SHOW GRANTS`下流データベース名にワイルドカード ("*") が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[＃7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
         -   binlogログクエリイベントの「COMMIT」によって DM がログを過剰に出力問題を修正しました [＃7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
         -   SSL が`ssl-ca`しか設定されていない場合に DM タスクが起動に失敗する問題を修正しました [＃7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94](https://github.com/liumengya94)
         -   1つのテーブルに「更新」と「非更新」の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[＃7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)

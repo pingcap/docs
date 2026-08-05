@@ -1,6 +1,6 @@
 ---
 title: Optimizer Hints
-summary: オプティマイザヒントを使用してクエリ実行プランに影響を与える
+summary: オプティマイザヒントを使用してクエリ実行計画に影響を与える
 ---
 
 # オプティマイザヒント {#optimizer-hints}
@@ -19,7 +19,7 @@ TiDBは、 MySQL 5.7で導入されたコメント形式の構文に基づいた
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-オプティマイザヒントがクエリ実行プランにどのように影響するかは、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)と[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)の出力で確認できます。
+オプティマイザヒントがクエリ実行計画にどのように影響するかは、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)と[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)の出力で確認できます。
 
 ヒントが不正確または不完全な場合、ステートメントエラーは発生しません。これは、ヒントがクエリ実行に対する*ヒント*（提案）の意味のみを持つことを意図しているためです。同様に、TiDBはヒントが適用できない場合、せいぜい警告を返します。
 
@@ -178,11 +178,11 @@ SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 `SEMI_JOIN_REWRITE()`ヒントは、オプティマイザに準結合クエリを通常の結合クエリに書き換えるよう指示します。現在、このヒントは`EXISTS`サブクエリに対してのみ機能します。
 
-このヒントをクエリの書き換えに使用しない場合、実行プランでハッシュ結合が選択されると、準結合クエリはハッシュテーブルの構築にサブクエリのみを使用します。この場合、サブクエリの結果が外部クエリの結果よりも大きい場合、実行速度が予想よりも遅くなる可能性があります。
+このヒントをクエリの書き換えに使用しない場合、実行計画でハッシュ結合が選択されると、準結合クエリはハッシュテーブルの構築にサブクエリのみを使用します。この場合、サブクエリの結果が外部クエリの結果よりも大きい場合、実行速度が予想よりも遅くなる可能性があります。
 
-同様に、実行プランでインデックス結合が選択されている場合、準結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さい場合、実行速度が予想よりも遅くなる可能性があります。
+同様に、実行計画でインデックス結合が選択されている場合、準結合クエリは駆動テーブルとして外部クエリのみを使用できます。この場合、サブクエリの結果が外部クエリの結果よりも小さい場合、実行速度が予想よりも遅くなる可能性があります。
 
-`SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行プランを選択できます。
+`SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザーは選択範囲を拡張して、より適切な実行計画を選択できます。
 
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
@@ -282,7 +282,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------+
 ```
 
-上記の実行プランから、オプティマイザが自動的に非相関化を実行したことがわかります。非相関化された実行プランにはApply演算子がありません。代わりに、サブクエリと外側のクエリブロック間の結合操作がプランに含まれています。相関列を含む元のフィルタ条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
+上記の実行計画から、オプティマイザが自動的に非相関化を実行したことがわかります。非相関化された実行計画にはApply演算子がありません。代わりに、サブクエリと外側のクエリブロック間の結合操作がプランに含まれています。相関列を含む元のフィルタ条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
 
 ```sql
 -- Using NO_DECORRELATE().
@@ -306,7 +306,7 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-上記の実行プランから、オプティマイザが相関除去を実行していないことがわかります。実行プランには依然としてApply演算子が含まれています。相関列を含むフィルタ条件（ `t2.b = t1.b` ）は、テーブル`t2`へのアクセス時にもフィルタ条件として使用されます。
+上記の実行計画から、オプティマイザが相関除去を実行していないことがわかります。実行計画には依然としてApply演算子が含まれています。相関列を含むフィルタ条件（ `t2.b = t1.b` ）は、テーブル`t2`へのアクセス時にもフィルタ条件として使用されます。
 
 ### HASH_AGG() {#hash_agg}
 
@@ -444,7 +444,7 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 ヒント`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`は、指定されたインデックスのみを使用して指定されたテーブルにアクセスし、演算子`IndexLookUp`をTiKVにプッシュダウンして実行するようにオプティマイザに指示します。
 
-次の例は、このヒントを使用したときに生成される実行プランを示しています。
+次の例は、このヒントを使用したときに生成される実行計画を示しています。
 
 ```sql
 CREATE TABLE t1(a INT, b INT, KEY(a));
@@ -463,7 +463,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 +-----------------------------+----------+-----------+----------------------+--------------------------------+
 ```
 
-`INDEX_LOOKUP_PUSHDOWN`ヒントを使用すると、元の実行プランの TiDB 側の最も外側の Build 演算子が`LocalIndexLookUp`に置き換えられ、TiKV にプッシュダウンされて実行されます。インデックスをスキャンしている間、TiKV は対応する行データを読み取るためにローカルでテーブル検索を実行しようとします。インデックスと行データは異なるリージョンに分散している可能性があるため、TiKV にプッシュダウンされたリクエストではすべての対象行がカバーされない可能性があります。その結果、実行プランでは TiDB 側に`TableRowIDScan`演算子が保持され、TiKV 側でヒットしなかった行がフェッチされます。
+`INDEX_LOOKUP_PUSHDOWN`ヒントを使用すると、元の実行計画の TiDB 側の最も外側の Build 演算子が`LocalIndexLookUp`に置き換えられ、TiKV にプッシュダウンされて実行されます。インデックスをスキャンしている間、TiKV は対応する行データを読み取るためにローカルでテーブル検索を実行しようとします。インデックスと行データは異なるリージョンに分散している可能性があるため、TiKV にプッシュダウンされたリクエストではすべての対象行がカバーされない可能性があります。その結果、実行計画では TiDB 側に`TableRowIDScan`演算子が保持され、TiKV 側でヒットしなかった行がフェッチされます。
 
 `INDEX_LOOKUP_PUSHDOWN`ヒントには現在次の制限があります。
 
@@ -473,7 +473,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 -   `REPEATABLE-READ`以外の分離レベルはサポートされていません。
 -   [Follower Read](/follower-read.md)はサポートされていません。
 -   [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
--   プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行プランにインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
+-   プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行計画にインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサー要求の送信をサポートしていません。
 -   プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
@@ -538,7 +538,7 @@ SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10
 
 ### LEADING(t1_name [, tl_name ...]) {#leadingt1_name--tl_name-}
 
-`LEADING(t1_name [, tl_name ...])`ヒントは、実行プランを生成する際に、ヒントで指定されたテーブル名の順序に従って複数テーブルの結合順序を決定するようオプティマイザに指示します。例:
+`LEADING(t1_name [, tl_name ...])`ヒントは、実行計画を生成する際に、ヒントで指定されたテーブル名の順序に従って複数テーブルの結合順序を決定するようオプティマイザに指示します。例:
 
 ```sql
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
@@ -946,7 +946,7 @@ CREATE TABLE t2 (id varchar(10) primary key, tname varchar(10));
 EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id and SUBSTR(t1.tname,1,2)=SUBSTR(t2.tname,1,2);
 ```
 
-実行プランは次のとおりです。
+実行計画は次のとおりです。
 
 ```sql
 +------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------+
@@ -1007,7 +1007,7 @@ CREATE TABLE t2 (k varchar(8), key(k)) COLLATE=utf8mb4_bin;
 EXPLAIN SELECT /*+ tidb_inlj(t1) */ * FROM t1, t2 WHERE t1.k=t2.k;
 ```
 
-実行プランは次のとおりです。
+実行計画は次のとおりです。
 
 ```sql
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
@@ -1076,7 +1076,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### ヒントを使用すると<code>Can&#39;t find a proper physical plan for this query</code>というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
+### ヒントを使用すると<code>Can't find a proper physical plan for this query</code>というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
 
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 

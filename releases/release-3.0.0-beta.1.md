@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   PumpまたはDrainerのステータスを確認するためのSQL文`show pump status`と`show drainer status`サポートします[＃9456](https://github.com/pingcap/tidb/pull/9456)
     -   SQL文を使用してPumpまたはDrainerのステータスを変更する機能をサポート[＃9789](https://github.com/pingcap/tidb/pull/9789)
     -   遅いSQL文を簡単に追跡できるように、SQLテキストにHASHフィンガープリントを追加することをサポート[＃9662](https://github.com/pingcap/tidb/pull/9662)
-    -   binlogの有効化状態を制御するための`log_bin`システム変数 (デフォルトでは &quot;0&quot;) を追加します。現在は状態の確認のみをサポートしています[＃9343](https://github.com/pingcap/tidb/pull/9343)
+    -   binlogの有効化状態を制御するための`log_bin`システム変数 (デフォルトでは "0") を追加します。現在は状態の確認のみをサポートしています[＃9343](https://github.com/pingcap/tidb/pull/9343)
     -   設定ファイルを使用して送信binlog戦略の管理をサポート [＃9864](https://github.com/pingcap/tidb/pull/9864)
     -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブルを使用してスローログのクエリをサポート [＃9290](https://github.com/pingcap/tidb/pull/9290)
     -   TiDBに表示されるMySQLのバージョンを5.7.10から5.7.25に変更する[＃9553](https://github.com/pingcap/tidb/pull/9553)

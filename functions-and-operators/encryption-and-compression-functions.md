@@ -381,9 +381,9 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 ## サポートされていない関数 {#unsupported-functions}
 
--   TiDB は、MySQL Enterprise [問題 #2632](https://github.com/pingcap/tidb/issues/2632)でのみ利用可能な関数をサポートしていません。
+-   TiDB は、MySQL Enterpriseでのみ利用可能な関数をサポートしていません[問題 #2632](https://github.com/pingcap/tidb/issues/2632)。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDB は`STATEMENT_DIGEST()`および`STATEMENT_DIGEST_TEXT()`関数をサポートしていません。
 -   TiDB は、MySQL 8.0.30 で追加された[`AES_ENCRYPT()`](#aes_encrypt)と[`AES_DECRYPT`](#aes_decrypt)の`kdf_name` 、 `salt` 、 `iterations`引数をサポートしていません。

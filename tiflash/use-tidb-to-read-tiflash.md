@@ -55,7 +55,7 @@ explain analyze select count(*) from test.t;
         [isolation-read]
         engines = ["tikv", "tidb", "tiflash"]
 
-    **INSTANCE レベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
+    **INSTANCE レベルのデフォルト設定は`["tikv", "tidb", "tiflash"]`です。**
 
 -   SESSIONレベル。設定するには次のステートメントを使用します。
 

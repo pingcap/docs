@@ -164,5 +164,5 @@ SELECT * FROM v;
 ## 関連項目 {#see-also}
 
 -   [権限管理](/privilege-management.md)
--   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
--   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+-   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)

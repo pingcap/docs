@@ -76,7 +76,7 @@ SHOW PRIVILEGES;
     +---------------------------------+---------------------------------------+-------------------------------------------------------+
     50 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
@@ -86,7 +86,7 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 
 -   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 -   [権限管理](/privilege-management.md)
--   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 
 </CustomContent>
 
@@ -94,6 +94,6 @@ TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換
 
 -   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 -   [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)
--   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 
 </CustomContent>

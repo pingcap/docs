@@ -10,7 +10,7 @@ summary: TiUP Playgroundを使ってTiDB Self-Managedを素早く使い始める
 -   [ローカルテストクラスターをデプロイ](#deploy-a-local-test-cluster)(macOSおよびLinux用)
 -   [単一のマシン上で本番デプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine)(Linux のみ)
 
-さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_quick_start)でTiDBの機能を試すこともできます。
+さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start)でTiDBの機能を試すこともできます。
 
 > **Note:**
 >

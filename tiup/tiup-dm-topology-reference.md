@@ -93,7 +93,7 @@ server_configs:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、デプロイメントディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、データディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 -   `config` ：このフィールドの設定ルールは、セクション`server_configs`の`master`と同じです。`config`を指定した場合、`config`の設定が`server_configs`セクションの`master`の設定とマージされ（2つのフィールドが重複している場合は、このフィールドの設定が有効になります）、設定ファイルが生成され、セクション`host`で指定されたマシンに配布されます。
 -   `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`のフィールドで指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値になります。
@@ -149,7 +149,7 @@ master_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、デプロイメントディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、データディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 -   `config` ：このフィールドの設定ルールは、セクション`server_configs`の`worker`と同じです。`config`を指定した場合、`config`の設定が`server_configs`セクションの`worker`の設定とマージされ（2つのフィールドが重複している場合は、このフィールドの設定が有効になります）、設定ファイルが生成され、セクション`host`で指定されたマシンに配布されます。
 -   `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`のフィールドで指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値になります。
@@ -192,12 +192,12 @@ worker_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、デプロイメントディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、データディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 -   `storage_retention` : Prometheus監視データの保持期間を指定します。デフォルト値は「15日」です。
 -   `rule_dir` : `*.rules.yml`のファイルすべてが保存されているローカルディレクトリを指定します。指定されたディレクトリ内のファイルは、クラスター構成の初期化フェーズでPrometheusルールとしてターゲットマシンに送信されます。
 -   `remote_config` : Prometheusデータのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには2つの設定があります。
-    -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
-    -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
+    -   `remote_write` : Prometheus ドキュメント[`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
+    -   `remote_read` : Prometheus ドキュメント[`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 -   `external_alertmanagers` : フィールド`external_alertmanagers`が設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、フィールド`host`とフィールド`web_port`で構成されます。
 -   `external_labels` : TiUP v1.17.0 で導入されたこのフィールドは、Prometheus グローバル `external_labels` をキーと値のペアとして設定します。このフィールドを使用して、Prometheus `remote_write`、federation、および alerting を通じて伝播される安定したメタデータを付加します。TiUP は `cluster` および `monitor` ラベルを予約し、自動的に管理するため、このフィールドでこれらを設定してはいけません。`__` で始まるラベル名も予約されています。さらに、すべてのラベル名は Prometheus のラベル命名規則に準拠する必要があります。このフィールドをサポートしていない以前のバージョンの TiUP がトポロジーファイルを読み取ると、TiUP はこのフィールドを無視するのではなく、トポロジーの解析に失敗します。
 -   `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
@@ -289,7 +289,7 @@ grafana_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、デプロイメントディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、データディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。このフィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 -   `config_file` : ローカルファイルを指定します。指定されたファイルは、クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲットマシンに送信されます。
 -   `os` : `host`のフィールドで指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`のフィールドで指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値になります。

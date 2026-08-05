@@ -11,7 +11,7 @@ summary: TiDB データベースの SHOW [FULL] COLUMNS FROM の使用法の概�
 
 > **Note:**
 >
-> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、 `EXPLAIN TABLE <table_name>`上記の文と同等ではありません。これらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
+> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、 `EXPLAIN TABLE <table_name>`上記の文と同等ではありません。これらは[`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
 
 ## 概要 {#synopsis}
 
@@ -127,7 +127,7 @@ mysql> SHOW FULL COLUMNS FROM mysql.user;
 38 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SHOW [FULL] COLUMNS FROM`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 

@@ -116,7 +116,7 @@ EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
 ```
 
-インデックスを追加した後、 `EXPLAIN`ステートメントを再度実行して、実行プランを確認します。
+インデックスを追加した後、 `EXPLAIN`ステートメントを再度実行して、実行計画を確認します。
 
 以下は出力例です。
 
@@ -131,9 +131,9 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がインデックスを使用してこのクエリを実行する準備ができていることを意味します。
 
-実行プラン内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [TiDBクエリ実行プランの概要](/explain-overview.md)を参照してください。
+実行計画内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行計画と演算子の詳細については、 [TiDBクエリ実行計画の概要](/explain-overview.md)を参照してください。
 
-実行プランは毎回同じ演算子を返すとは限りません。これは、TiDBが**コストベース最適化（CBO）**方式を採用しているためで、実行プランはルールとデータ分布の両方に依存します。
+実行計画は毎回同じ演算子を返すとは限りません。これは、TiDBが**コストベース最適化（CBO）**方式を採用しているためで、実行計画はルールとデータ分布の両方に依存します。
 
 SQLパフォーマンスチューニングの詳細については、以下のドキュメントを参照してください。
 
@@ -166,6 +166,6 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## お困りですか？ {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問してください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 -   [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

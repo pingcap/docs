@@ -68,7 +68,7 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | フラグ                         | 説明                                                                                                                        | 必須  | 注記                       |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
 | -c, --cluster-id string        | データをエクスポートするクラスターの ID を指定します。                                                                                             | はい  | 非対話型モードでのみ動作します。         |
-| --file-type string         | エクスポートファイルの種類を指定します。[&quot;SQL&quot; &quot;CSV&quot; &quot;PARQUET&quot;]のいずれかです。(デフォルトは&quot;CSV&quot;)                  | いいえ | 非対話型モードでのみ動作します。         |
+| --file-type string         | エクスポートファイルの種類を指定します。["SQL" "CSV" "PARQUET"]のいずれかです。(デフォルトは"CSV")                  | いいえ | 非対話型モードでのみ動作します。         |
 | --target-type string           | エクスポート先を指定します。[ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` `"OSS"` ]のいずれかです。デフォルト値は`"LOCAL"`です。                              | いいえ | 非対話型モードでのみ動作します。         |
 | --s3.uri string                | S3 URIを`s3://<bucket>/<file-path>`形式で指定します。ターゲットタイプがS3の場合は必須です。                                                           | いいえ | 非対話型モードでのみ動作します。         |
 | --s3.access-key-id string            | Amazon S3のアクセスキーIDを指定します。s3.role-arnと[s3.access-key-id、s3.secret-access-key]のいずれか1つだけを設定する必要があります。                        | いいえ | 非対話型モードでのみ動作します。         |
@@ -81,9 +81,9 @@ ticloud serverless export create -c <cluster-id> --sql 'select * from database.t
 | --oss.uri string               | Alibaba Cloud OSS URIを`oss://<bucket>/<file-path>`形式で指定します。エクスポート`target-type`が`"OSS"`の場合に必須です。                            | いいえ | 非対話型モードでのみ動作します。         |
 | --oss.access-key-id string     | Alibaba Cloud OSS にアクセスするための AccessKey ID を指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
 | --oss.access-key-secret string | Alibaba Cloud OSS にアクセスするための AccessKey シークレットを指定します。                                                                      | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.delimiter string          | CSV ファイル内の文字列型変数の区切り文字を指定します。(デフォルトは &quot;&quot;&quot;)                                                                  | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.null-value string              | CSV ファイル内の null 値の表現を指定します。(デフォルトは &quot;\N&quot;)                                                                        | いいえ | 非対話型モードでのみ動作します。         |
-| --csv.separator string         | CSV ファイル内の各値の区切り文字を指定します。(デフォルトは &quot;,&quot;)                                                                           | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.delimiter string          | CSV ファイル内の文字列型変数の区切り文字を指定します。(デフォルトは """)                                                                  | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.null-value string              | CSV ファイル内の null 値の表現を指定します。(デフォルトは "\N")                                                                        | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.separator string         | CSV ファイル内の各値の区切り文字を指定します。(デフォルトは ",")                                                                           | いいえ | 非対話型モードでのみ動作します。         |
 | --csv.skip-header              | ヘッダーなしでテーブルの CSV ファイルをエクスポートします。                                                                                          | いいえ | 非対話型モードでのみ動作します。         |
 | --parquet.compression string   | Parquet圧縮アルゴリズムを指定します。[ `"GZIP"` `"SNAPPY"` `"ZSTD"` `"NONE"` ]のいずれかです。デフォルト値は`"ZSTD"`です。                                 | いいえ | 非対話型モードでのみ動作します。         |
 | --filter strings                 | エクスポートするテーブルをテーブルフィルタパターンで指定します。--sql と同時に使用しないでください。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。                      | いいえ | 非対話型モードでのみ動作します。         |

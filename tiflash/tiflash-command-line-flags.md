@@ -10,7 +10,7 @@ summary: TiFlashのコマンドライン起動フラグについて学習しま�
 ## `server --config-file` {#server---config-file}
 
 -   TiFlash構成ファイルのパスを指定します
--   デフォルト： &quot;&quot;
+-   デフォルト： ""
 -   設定ファイルを指定する必要があります。詳細な設定項目については[TiFlash構成パラメータ](/tiflash/tiflash-configuration.md)を参照してください。
 
 ## `dttool migrate` {#dttool-migrate}

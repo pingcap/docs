@@ -70,7 +70,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
 ### ステップ1. Grafanaのウェブサイトから新しいGrafanaインストールパッケージをダウンロードします。 {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
 
-1.  [Grafanaのダウンロードページ](https://grafana.com/grafana/download?pg=get&#x26;plcmt=selfmanaged-box1-cta1)から新しいインストールパッケージをダウンロードしてください。ニーズに応じて、 `OSS`または`Enterprise`エディションのいずれかを選択できます。
+1.  [Grafanaのダウンロードページ](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1)から新しいインストールパッケージをダウンロードしてください。ニーズに応じて、 `OSS`または`Enterprise`エディションのいずれかを選択できます。
 2.  ダウンロードしたパッケージを解凍します。
 
 ### ステップ2. TiDBが提供するGrafanaインストールパッケージをダウンロードする {#step-2-download-the-grafana-installation-package-provided-by-tidb}

@@ -57,7 +57,7 @@ Empty set (0.00 sec)
 
 コピー元のテーブルに`PRE_SPLIT_REGIONS`属性が定義されている場合、 `CREATE TABLE LIKE`文で作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンは分割されます。詳細については、 `PRE_SPLIT_REGIONS` [CREATE TABLE](/sql-statements/sql-statement-create-table.md)を参照してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`CREATE TABLE LIKE`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)してください。
 

@@ -42,7 +42,7 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 ![dashboard-for-query-interface](/media/performance/case1.png)
 
-以下のTiDBのフレームチャートから、SQL実行中に`Compile`や`Optimize`などの関数のCPU消費が顕著であることがわかります。アプリケーションはQueryインターフェースを使用しているため、TiDBは実行プランキャッシュを使用できません。TiDBはSQL文ごとにコンパイルして実行プランを生成する必要があります。
+以下のTiDBのフレームチャートから、SQL実行中に`Compile`や`Optimize`などの関数のCPU消費が顕著であることがわかります。アプリケーションはQueryインターフェースを使用しているため、TiDBは実行プランキャッシュを使用できません。TiDBはSQL文ごとにコンパイルして実行計画を生成する必要があります。
 
 ![flame-graph-for-query-interface](/media/performance/7.1.png)
 
@@ -60,7 +60,7 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 -   SQL フェーズ別のデータベース時間: フェーズ`execute`と`compile`にほとんどの時間がかかります。
 -   SQL 実行時間の概要: `Get` 、および`tso wait` `Cop`ほとんどの時間がかかります。
 -   タイプ別 CPS: `Query`コマンドのみが使用されます。
--   プラン キャッシュ OPS を使用したクエリ: データなしは、実行プラン キャッシュがヒットしていないことを示します。
+-   プラン キャッシュ OPS を使用したクエリ: データなしは、実行計画 キャッシュがヒットしていないことを示します。
 -   クエリ期間では、レイテンシー`execute`と`compile`割合が最も高くなります。
 -   平均QPS = 56.8k
 
@@ -108,7 +108,7 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 -   データベース時間では、レイテンシー`execute`と`compile`割合が最も高くなります。
 -   タイプ別 CPS: `Query`コマンドのみが使用されます。
 -   平均QPS = 24.2k (56.3kから24.2k)
--   実行プラン キャッシュにヒットしません。
+-   実行計画 キャッシュにヒットしません。
 
 シナリオ 1 からシナリオ 2 にかけて、TiDB の平均 CPU 使用率は 925% から 874% に低下し、TiKV の平均 CPU 使用率は 201% から約 250% に増加します。
 
@@ -127,9 +127,9 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 シナリオ1と比較して、シナリオ2のQPSは大幅に減少しました。平均クエリ実行時間と、 `parse` `compile` `execute`実行時間が大幅に増加しました。これは、シナリオ1の`select @@session.transaction_read_only`のような、実行回数が多く処理時間が短いSQL文が平均パフォーマンスデータを低下させたためです。シナリオ2ではこれらのSQL文がブロックされ、業務関連のSQL文のみが残るため、平均実行時間が増加します。
 
-アプリケーションがクエリインターフェースを使用する場合、TiDBは実行プランキャッシュを使用できないため、実行プランのコンパイルに多くのリソースを消費します。このような場合は、TiDBの実行プランキャッシュを使用するPrepared Statementインターフェースの使用をお勧めします。Prepared Statementインターフェースは、実行プランのコンパイルによるTiDBのCPU消費量を削減し、レイテンシーを短縮します。
+アプリケーションがクエリインターフェースを使用する場合、TiDBは実行プランキャッシュを使用できないため、実行計画のコンパイルに多くのリソースを消費します。このような場合は、TiDBの実行プランキャッシュを使用するPrepared Statementインターフェースの使用をお勧めします。Prepared Statementインターフェースは、実行計画のコンパイルによるTiDBのCPU消費量を削減し、レイテンシーを短縮します。
 
-## シナリオ3. 実行プランのキャッシュを有効にせずにPrepared Statementインターフェースを使用する {#scenario-3-use-the-prepared-statement-interface-with-execution-plan-caching-not-enabled}
+## シナリオ3. 実行計画のキャッシュを有効にせずにPrepared Statementインターフェースを使用する {#scenario-3-use-the-prepared-statement-interface-with-execution-plan-caching-not-enabled}
 
 ### アプリケーション構成 {#application-configuration}
 
@@ -163,7 +163,7 @@ QPSは24.4kから19.7kに低下しています。データベース時間の概�
 -   SQL 実行時間の概要: `Get` `Prewrite`および`tso wait` `Cop`ほとんどの時間がかかります。
 -   タイプ別 CPS: 3 種類のコマンド（`StmtPrepare`、`StmtExecute`、`StmtClose`）が使用されます。
 -   平均QPS = 19.7k (24.4kから19.7k)
--   実行プラン キャッシュにヒットしません。
+-   実行計画 キャッシュにヒットしません。
 
 TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
@@ -185,9 +185,9 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 -   QPS の減少に関する分析： **「CPS By Type」**ペインを見ると、シナリオ 2 には CPS By Type コマンドタイプが 1 つ ( `Query` ) しか存在しないのに対し、シナリオ 3 にはさらに 3 つのコマンドタイプ ( `StmtPrepare` 、 `StmtExecute` 、 `StmtClose` ) が存在することがわかります。`StmtPrepare`と`StmtClose`は QPS にカウントされない非従来型コマンドであるため、QPS が減少しています。非従来型コマンドの`StmtPrepare`と`StmtClose`は`general` SQL タイプにカウントされるため、シナリオ 3 のデータベース概要には`general`時間が表示され、これはデータベース時間の 4 分の 1 以上を占めています。
 -   平均クエリ時間が大幅に短縮された理由の分析：シナリオ3で新たに追加されたコマンドタイプ`StmtPrepare`と`StmtClose`については、TiDB内部処理においてクエリ時間が個別に計算されます。TiDBはこれらの2種類のコマンドを非常に高速に実行するため、平均クエリ時間が大幅に短縮されます。
 
-シナリオ3ではPrepared Statementインターフェースを使用していますが、多くのアプリケーションフレームワークはメモリリークを防ぐためにメソッド`StmtExecute`の後にメソッド`StmtClose`を呼び出すため、実行プランのキャッシュは依然としてアクセスされません。v6.0.0以降では、グローバル変数`tidb_ignore_prepared_cache_close_stmt=on;`を設定できます。その後、アプリケーションがメソッド`StmtClose`を呼び出しても、TiDBはキャッシュされた実行プランをクリアしません。そのため、次のSQL実行では既存の実行プランを再利用でき、実行プランの繰り返しコンパイルを回避できます。
+シナリオ3ではPrepared Statementインターフェースを使用していますが、多くのアプリケーションフレームワークはメモリリークを防ぐためにメソッド`StmtExecute`の後にメソッド`StmtClose`を呼び出すため、実行計画のキャッシュは依然としてアクセスされません。v6.0.0以降では、グローバル変数`tidb_ignore_prepared_cache_close_stmt=on;`を設定できます。その後、アプリケーションがメソッド`StmtClose`を呼び出しても、TiDBはキャッシュされた実行計画をクリアしません。そのため、次のSQL実行では既存の実行計画を再利用でき、実行計画の繰り返しコンパイルを回避できます。
 
-## シナリオ4. Prepared Statement インターフェースを使用して実行プランのキャッシュを有効にする {#scenario-4-use-the-prepared-statement-interface-and-enable-execution-plan-caching}
+## シナリオ4. Prepared Statement インターフェースを使用して実行計画のキャッシュを有効にする {#scenario-4-use-the-prepared-statement-interface-and-enable-execution-plan-caching}
 
 ### アプリケーション構成 {#application-configuration}
 
@@ -410,7 +410,7 @@ QPSは34.9kから40.9kに増加し、KVリクエストタイプはフェーズ`e
 
 これらのシナリオでは、シナリオ 2 はアプリケーションがクエリ インターフェイスを使用する一般的なシナリオであり、シナリオ 5 はアプリケーションがプリペアドステートメント インターフェイスを使用する理想的なシナリオです。
 
--   シナリオ 5 とシナリオ 2 を比較すると、 Javaアプリケーション開発のベスト プラクティスを使用し、クライアント側で Prepared Statement オブジェクトをキャッシュすることで、各 SQL ステートメントで実行プラン キャッシュをヒットするために必要なコマンドとデータベース操作が 1 つだけになり、クエリのレイテンシーが 38% 短縮され、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 936% から 577% に低下していることがわかります。
+-   シナリオ 5 とシナリオ 2 を比較すると、 Javaアプリケーション開発のベスト プラクティスを使用し、クライアント側で Prepared Statement オブジェクトをキャッシュすることで、各 SQL ステートメントで実行計画 キャッシュをヒットするために必要なコマンドとデータベース操作が 1 つだけになり、クエリのレイテンシーが 38% 短縮され、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 936% から 577% に低下していることがわかります。
 -   シナリオ 7 とシナリオ 3 を比較すると、シナリオ 5 に RC 読み取りや小さなテーブル キャッシュなどの最新の TiDB 最適化機能を追加すると、レイテンシーが41% 削減され、QPS が 108% 増加し、平均 TiDB CPU 使用率が 936% から 478% に低下することがわかります。
 
 各シナリオのパフォーマンスを比較すると、次のような結論を導き出すことができます。

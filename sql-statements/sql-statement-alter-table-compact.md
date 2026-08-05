@@ -195,7 +195,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 ## 互換性 {#compatibility}
 
-### MySQLの互換性 {#mysql-compatibility}
+### MySQLとの互換性 {#mysql-compatibility}
 
 `ALTER TABLE ... COMPACT`構文はTiDB固有のもので、標準SQL構文の拡張です。MySQLには同等の構文はありませんが、MySQLクライアントまたはMySQLプロトコルに準拠した各種データベースドライバを使用してこの文を実行できます。
 

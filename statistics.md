@@ -5,7 +5,7 @@ summary: 統計情報がテーブルレベルと列レベルの情報をどの�
 
 # 統計入門 {#introduction-to-statistics}
 
-TiDB は、統計情報をオプティマイザへの入力として使用し、SQL ステートメントの各プラン ステップで処理される行数を推定します。オプティマイザは、利用可能な各プランのコストを推定し、[インデックスアクセス](/choose-index.md)やテーブル結合の順序などを含め、利用可能な各プランのコストを算出します。その後、オプティマイザは、全体のコストが最も低い実行プランを選択します。
+TiDB は、統計情報をオプティマイザへの入力として使用し、SQL ステートメントの各プラン ステップで処理される行数を推定します。オプティマイザは、利用可能な各プランのコストを推定し、[インデックスアクセス](/choose-index.md)やテーブル結合の順序などを含め、利用可能な各プランのコストを算出します。その後、オプティマイザは、全体のコストが最も低い実行計画を選択します。
 
 ## 統計情報を収集する {#collect-statistics}
 
@@ -275,8 +275,8 @@ TiDB v6.1.0以降では、システム変数[`tidb_mem_quota_analyze`](/system-v
 | トップNの数        | `WITH NUM TOPN`                                                                                                    |
 | サンプル数         | `WITH NUM SAMPLES`                                                                                                 |
 | サンプリングレート     | `WITH FLOATNUM SAMPLERATE`                                                                                         |
-| `ANALYZE`列タイプ | AnalyzeColumnOption ::= ( &#39;ALL COLUMNS&#39; | &#39;PREDICATE COLUMNS&#39; | &#39;COLUMNS&#39; ColumnNameList ) |
-| `ANALYZE`列    | ColumnNameList ::= Identifier ( &#39;,&#39; Identifier )*                                                          |
+| `ANALYZE`列タイプ | AnalyzeColumnOption ::= ( 'ALL COLUMNS' | 'PREDICATE COLUMNS' | 'COLUMNS' ColumnNameList ) |
+| `ANALYZE`列    | ColumnNameList ::= Identifier ( ',' Identifier )*                                                          |
 
 ### ANALYZE構成の永続性を有効にする {#enable-analyze-configuration-persistence}
 
@@ -481,7 +481,7 @@ TiDBはバージョン5.4.0以降、統計情報の同期読み込み機能を�
 -   同期的に統計情報をロードする機能が同時に処理できる列の最大数を指定するには、TiDB 設定ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。v8.2.0 以降、このオプションのデフォルト値は`0`であり、これは TiDB がサーバー構成に基づいて同時実行数を自動的に調整することを示しています。
 -   同期的に統計情報をロードする機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 設定ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
-TiDBの起動時、初期統計情報が完全にロードされる前に実行されるSQL文は、最適とは言えない実行プランとなり、パフォーマンスの問題を引き起こす可能性があります。このような問題を回避するため、TiDB v7.1.0では設定パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されました。このオプションを使用すると、起動時に統計情報の初期化が完了した後にのみTiDBがサービスを提供するかどうかを制御できます。v7.2.0以降、このパラメータはデフォルトで有効になっています。
+TiDBの起動時、初期統計情報が完全にロードされる前に実行されるSQL文は、最適とは言えない実行計画となり、パフォーマンスの問題を引き起こす可能性があります。このような問題を回避するため、TiDB v7.1.0では設定パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されました。このオプションを使用すると、起動時に統計情報の初期化が完了した後にのみTiDBがサービスを提供するかどうかを制御できます。v7.2.0以降、このパラメータはデフォルトで有効になっています。
 
 バージョン7.1.0以降、TiDBは軽量な統計情報初期化のための[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)を導入しました。
 

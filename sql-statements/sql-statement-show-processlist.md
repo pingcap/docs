@@ -30,7 +30,7 @@ mysql> SHOW PROCESSLIST;
 
 現在のユーザーに`PROCESS`権限がない場合、 `SHOW PROCESSLIST`ユーザー自身のセッションからのリクエストのみを表示します。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDBの`State`列はあまり意味を持ちません。クエリは並列に実行され、各ゴルーチンは常に異なる状態を持つため、状態を単一の値として表現することはTiDBではより複雑です。
 

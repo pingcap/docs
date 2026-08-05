@@ -12,11 +12,11 @@ TiDB は、MySQL 8.0 で利用可能な[ビット関数と演算子](https://dev
 | 名前                             | 説明                |
 | :----------------------------- | :---------------- |
 | [`BIT_COUNT()`](#bit_count)    | 1に設定されているビットの数を返す |
-| [`&#x26;`](#-bitwise-and)      | ビットAND            |
+| [`&`](#-bitwise-and)      | ビットAND            |
 | [`~`](#-bitwise-inversion)     | ビット反転             |
 | [`|`](#-bitwise-or)            | ビットOR             |
 | [`^`](#-bitwise-xor)           | ビット単位のXOR         |
-| [`&#x3C;&#x3C;`](#-left-shift) | 左シフト              |
+| [`<<`](#-left-shift) | 左シフト              |
 | [`>>`](#-right-shift)          | 右シフト              |
 
 ## `BIT_COUNT()` {#bit_count}
@@ -267,7 +267,7 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 
 `>>`演算子は、TiDB [TSO](/tso.md)タイムスタンプから UNIX タイムスタンプを抽出するなど、大きな数値の特定の部分を抽出する場合にも役立ちます。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 MySQL 8.0 と以前のバージョンの MySQL では、ビット関数と演算子の処理に若干の違いがあります。TiDB は MySQL 8.0 の動作に準拠することを目指しています。
 

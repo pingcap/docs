@@ -166,7 +166,7 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser11';
 1 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 次の`CREATE USER`オプションは TiDB ではまだサポートされていないため、解析されますが無視されます。
 

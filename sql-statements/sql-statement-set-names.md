@@ -69,12 +69,12 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 8 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SET [NAMES|CHARACTER SET]`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 
 ## 参照 {#see-also}
 
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
--   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
 -   [文字セットと照合順序のサポート](/character-set-and-collation.md)

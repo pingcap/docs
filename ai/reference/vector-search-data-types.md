@@ -237,7 +237,7 @@ Vector と String 間のキャストを行うには、次の関数を使用し�
 
 ベクトル データ型の制限については、 [ベクトル検索の制限](/ai/reference/vector-search-limitations.md)および[ベクトルインデックスの制限](/ai/reference/vector-search-index.md#restrictions)を参照してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 ベクトル データ型は TiDB 固有であり、MySQL ではサポートされていません。
 

@@ -23,7 +23,7 @@ MySQL 8.0.27以降、 [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-fu
 
 ## キャスト {#cast}
 
-[`CAST(&#x3C;expression> AS &#x3C;type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)関数は、式を特定の型にキャストするために使用されます。
+[`CAST(<expression> AS <type> [ARRAY])`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)関数は、式を特定の型にキャストするために使用されます。
 
 この関数は[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を作成する場合にも使用されます。
 
@@ -119,7 +119,7 @@ SELECT CONVERT(0x616263 USING utf8mb4);
 1 row in set (0.0004 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDBは`SPATIAL`型に対するキャスト演算をサポートしていません。詳細については[＃6347](https://github.com/pingcap/tidb/issues/6347)を参照してください。
 -   TiDBは`AT TIME ZONE` for `CAST()`をサポートしていません。詳細については[＃51742](https://github.com/pingcap/tidb/issues/51742)を参照してください。

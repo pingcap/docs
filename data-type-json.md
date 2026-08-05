@@ -52,7 +52,7 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
 -   TiDBバックアップ＆リストア（BR）は、v6.3.0でJSON列データのエンコード方法を変更します。そのため、JSON列を含むデータをBRを使用してv6.3.0より前のTiDBクラスターにリストアすることは推奨されません。
 -   `DATE` 、 `DATETIME` 、 `TIME`などの非標準`JSON`データ型を含むデータをレプリケートする場合は、レプリケーション ツールを使用しないでください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   `BINARY`型のデータを含む JSON 列を作成すると、MySQL は現在そのデータを`STRING`型として誤ってラベル付けしますが、TiDB はそれを`BINARY`型として正しく処理します。
 

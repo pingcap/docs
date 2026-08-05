@@ -42,7 +42,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.582s
 ```
 
-このクエリが遅い理由を理解するには、 `EXPLAIN`を使用して実行プランを確認します。
+このクエリが遅い理由を理解するには、 `EXPLAIN`を使用して実行計画を確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -58,7 +58,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-実行プランの`TableFullScan_5`からわかるように、TiDBは`books`テーブルに対してフルテーブルスキャンを実行し、各行について`title`が条件を満たすかどうかを確認します。`TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザがこのフルテーブルスキャンで`1000000.00`行のデータが使用されると見積もっていることを意味します。
+実行計画の`TableFullScan_5`からわかるように、TiDBは`books`テーブルに対してフルテーブルスキャンを実行し、各行について`title`が条件を満たすかどうかを確認します。`TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザがこのフルテーブルスキャンで`1000000.00`行のデータが使用されると見積もっていることを意味します。
 
 `EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
@@ -90,7 +90,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-パフォーマンスが向上した理由を理解するには、 `EXPLAIN`を使用して新しい実行プランを確認します。
+パフォーマンスが向上した理由を理解するには、 `EXPLAIN`を使用して新しい実行計画を確認します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -106,11 +106,11 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-実行プランの`IndexLookup_10`からわかるように、TiDBは`title_idx`インデックスを使ってデータをクエリします。`estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行しかスキャンされないと見積もっていることを意味します。推定されるスキャン行数は、フルテーブルスキャンの`1000000.00`行のデータよりもはるかに少ないです。
+実行計画の`IndexLookup_10`からわかるように、TiDBは`title_idx`インデックスを使ってデータをクエリします。`estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行しかスキャンされないと見積もっていることを意味します。推定されるスキャン行数は、フルテーブルスキャンの`1000000.00`行のデータよりもはるかに少ないです。
 
-実行プラン`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
+実行計画`IndexLookup_10`では、まず`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
-TiDB 実行プランの詳細については、 [TiDB クエリ実行プランの概要](/explain-overview.md)を参照してください。
+TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
 ### 解決策: カバリングインデックスを使用する {#solution-use-covering-index}
 
@@ -221,7 +221,7 @@ SELECT * FROM books WHERE id = 896;
 Time: 0.004s
 ```
 
-実行プランを確認するには`EXPLAIN`を使用します。
+実行計画を確認するには`EXPLAIN`を使用します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE id = 896;
@@ -235,11 +235,11 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 +-------------+---------+------+---------------+---------------+
 ```
 
-`Point_Get`は非常に高速な実行プランです。
+`Point_Get`は非常に高速な実行計画です。
 
 ## 適切な結合タイプを使用する {#use-the-right-join-type}
 
-[JOIN実行プラン](/explain-joins.md)参照。
+[JOIN実行計画](/explain-joins.md)参照。
 
 ### 参照 {#see-also}
 
@@ -248,6 +248,6 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

@@ -17,9 +17,9 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 > -   `SPATIAL`関数、データ型、インデックス
 > -   `XA`構文
 >
-> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
+> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
-このドキュメントに記載されている非互換性の問題は、いくつかの[TiDBでサポートされているサードパーティツール](/develop/dev-guide-third-party-tools-compatibility.md)に見られます。
+このドキュメントに記載されている非互換性の問題は、いくつかの[TiDBでサポートされているサードパーティツール](/develop/dev-guide-third-party-tools-compatibility.md)で発生します。
 
 ## 一般的な非互換性 {#general-incompatibility}
 
@@ -218,6 +218,6 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 ## ヘルプが必要ですか? {#need-help}
 
--   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに問い合わせてください。
+-   [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに問い合わせてください。
 -   [TiDB Cloudのサポートチケットを送信する](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 -   [TiDB Self-Managedのサポートチケットを送信する](/support.md)

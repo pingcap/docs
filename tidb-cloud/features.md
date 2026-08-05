@@ -9,7 +9,7 @@ summary: TiDB Cloudの各プランにおける機能サポート状況につい�
 
 > **Tip:**
 >
-> [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 TiDB Cloudを始めるのに最適な方法です。さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_quick_start)でTiDB Cloudの機能を試すこともできます。
+> [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 TiDB Cloudを始めるのに最適な方法です。さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start)でTiDB Cloudの機能を試すこともできます。
 
 -   ✅:**一般公開済み**、または**パブリックプレビュー中です**。
 -   🔒:**プライベートプレビュー中です**。

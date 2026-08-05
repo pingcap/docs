@@ -172,13 +172,13 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 6.  `query-status`を使用して移行タスクのステータスを確認する。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
 
-### タスクをクエリするかログを確認すると、 <code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
+### タスクをクエリするかログを確認すると、 <code>Access denied for user 'root'@'172.31.43.27' (using password: YES)</code>表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
 
 すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
 さらに、上流データベースと下流データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクを開始する際には、データ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)必要です。
 
-### <code>load</code>処理ユニットから<code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
+### <code>load</code>処理ユニットから<code>packet for query is too large. Try adjusting the 'max_allowed_packet' variable</code> {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
 
 #### 理由 {#reasons}
 

@@ -36,7 +36,7 @@ DROP SEQUENCE seq, seq2;
 
     Query OK, 0 rows affected (0.03 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントはTiDBの拡張機能です。実装はMariaDBで利用可能なシーケンスをモデルにしています。
 

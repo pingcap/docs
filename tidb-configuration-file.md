@@ -120,7 +120,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   以下の状況において、TiDBが返すバージョン文字列を変更します。
     -   組み込み関数`VERSION()`を使用する場合。
     -   TiDB がクライアントへの最初の接続を確立し、サーバーのバージョン文字列を含む最初のハンドシェイク パケットを返すとき。詳細については、 [MySQL 初期ハンドシェイクパケット](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake)を参照してください。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   デフォルトでは、TiDB バージョン文字列の形式は`8.0.11-TiDB-${tidb_version}`です。
 
 > **Note:**
@@ -135,7 +135,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### `repair-table-list` {#repair-table-list}
 
--   `repair-table-list`は、[`repair-mode`](#repair-mode)が`true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復が必要な不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
+-   `repair-table-list`は、[`repair-mode`](#repair-mode)が`true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復が必要な不良テーブルのリストです。リストの例は次のとおりです: ["db.table1","db.table2"...]。
 -   デフォルト値: []
 -   リストはデフォルトでは空です。これは、修復が必要な不良テーブルが存在しないことを意味します。
 
@@ -326,7 +326,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   実行計画をスローログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   バージョン 6.1.0 以降、実行プランをスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
+-   バージョン 6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
 
 ### `expensive-threshold` {#expensive-threshold}
 
@@ -358,7 +358,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 #### `filename` {#filename}
 
 -   一般ログファイルのファイル名。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   設定すると、ログはこのファイルに出力されます。
 
 #### `max-size` {#max-size}
@@ -400,37 +400,37 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### `ssl-ca` {#ssl-ca}
 
 -   信頼済みCA証明書（PEM形式）のファイルパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   このオプションと`--ssl-cert` 、 `--ssl-key`を同時に設定した場合、クライアントが証明書を提示すると、TiDB はこのオプションで指定された信頼済み CA のリストに基づいてクライアント証明書を認証します。認証に失敗した場合、接続は切断されます。
 -   このオプションを設定した場合でも、クライアントが証明書を提示しない場合は、クライアント証明書の認証なしでセキュアな接続が継続されます。
 
 ### `ssl-cert` {#ssl-cert}
 
 -   PEM形式のSSL証明書のファイルパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   このオプションと`--ssl-key`を同時に設定すると、TiDB はクライアントが TLS を使用して TiDB に安全に接続することを許可します (ただし、強制はしません)。
 -   指定された証明書または秘密鍵が無効な場合、TiDBは通常どおり起動しますが、安全な接続を受信できません。
 
 ### `ssl-key` {#ssl-key}
 
 -   PEM形式のSSL証明書キーのファイルパス、つまり`--ssl-cert`で指定された証明書の秘密鍵。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   現在、TiDBはパスワードで保護された秘密鍵の読み込みをサポートしていません。
 
 ### `cluster-ssl-ca` {#cluster-ssl-ca}
 
 -   TiKVまたはPDをTLSで接続するために使用されるCAルート証明書。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `cluster-ssl-cert` {#cluster-ssl-cert}
 
 -   TiKVまたはPDをTLSで接続するために使用されるSSL証明書ファイルのパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `cluster-ssl-key` {#cluster-ssl-key}
 
 -   TiKVまたはPDをTLSで接続するために使用されるSSL秘密鍵ファイルのパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `cluster-verify-cn` {#cluster-verify-cn}
 
@@ -478,13 +478,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### `session-token-signing-cert` <span class="version-mark">v6.4.0 の新機能</span> {#session-token-signing-cert-new-in-v640}
 
 -   [TiProxy](/tiproxy/tiproxy-overview.md)がセッション移行に使用する証明書ファイルのパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   値が空の場合、TiProxy のセッション移行は失敗します。セッション移行を有効にするには、すべての TiDB ノードで同じ証明書とキーを設定する必要があります。つまり、すべての TiDB ノードに同じ証明書とキーを保存する必要があります。
 
 ### `session-token-signing-key` <span class="version-mark">v6.4.0 の新機能</span> {#session-token-signing-key-new-in-v640}
 
 -   [TiProxy](/tiproxy/tiproxy-overview.md)がセッション移行に使用するキーファイルのパス。
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   [`session-token-signing-cert`](#session-token-signing-cert-new-in-v640)の説明を参照してください。
 
 ## performance {#performance}
@@ -512,7 +512,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `3600000`
 -   単位：ミリ秒
 -   この時間よりも長くロックを保持しているトランザクションは、コミットまたはロールバックのいずれかしか実行できません。コミットが成功しない場合もあります。
--   [`&quot;bulk&quot;` DMLモード](/system-variables.md#tidb_dml_type-new-in-v800)を使用して実行されるトランザクションの場合、最大TTLはこの設定項目の制限を超えることができます。最大値は、この設定項目と24時間のうち大きい方の値となります。
+-   [`"bulk"` DMLモード](/system-variables.md#tidb_dml_type-new-in-v800)を使用して実行されるトランザクションの場合、最大TTLはこの設定項目の制限を超えることができます。最大値は、この設定項目と24時間のうち大きい方の値となります。
 
 ### `stmt-count-limit` {#stmt-count-limit}
 
@@ -637,7 +637,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDBの起動時に、サービスを提供する前に統計情報の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンでは`false` 、v7.2.0 以降のバージョンでは`true` 。
 -   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計情報の初期化が完了するまで待機する必要があります。テーブルとパーティションの数が多く、lite-init-stats の値が`false`の場合、 `force-init-stats`を`true`に設定すると、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)がサービスの提供を開始するまでの時間が長くなる可能性があることに注意してください。
--   `force-init-stats`の値が`false`の場合、統計情報の初期化が完了する前に TiDB はサービスを提供できますが、オプティマイザは擬似統計情報を使用して決定を行うため、最適ではない実行プランになる可能性があります。
+-   `force-init-stats`の値が`false`の場合、統計情報の初期化が完了する前に TiDB はサービスを提供できますが、オプティマイザは擬似統計情報を使用して決定を行うため、最適ではない実行計画になる可能性があります。
 
 ### `enable-async-batch-get` <span class="version-mark">v8.5.5で追加</span> {#enable-async-batch-get-new-in-v855}
 
@@ -898,8 +898,8 @@ TiDBサービスの状態に関するコンフィグレーション。
 ### `engines` {#engines}
 
 -   TiDBがデータを読み取ることを許可するエンジンを制御する。
--   デフォルト値: [&quot;tikv&quot;, &quot;tiflash&quot;, &quot;tidb&quot;]。これは、エンジンがオプティマイザによって自動的に選択されることを示します。
--   値のオプション: 「tikv」、「tiflash」、「tidb」の任意の組み合わせ。例: [&quot;tikv&quot;, &quot;tidb&quot;] または [&quot;tiflash&quot;, &quot;tidb&quot;]
+-   デフォルト値: ["tikv", "tiflash", "tidb"]。これは、エンジンがオプティマイザによって自動的に選択されることを示します。
+-   値のオプション: 「tikv」、「tiflash」、「tidb」の任意の組み合わせ。例: ["tikv", "tidb"] または ["tiflash", "tidb"]
 
 ## instance {#instance}
 
@@ -947,7 +947,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ### `tidb_record_plan_in_slow_log` {#tidb_record_plan_in_slow_log}
 
--   この設定は、スロークエリの実行プランをスローログに含めるかどうかを制御するために使用されます。
+-   この設定は、スロークエリの実行計画をスローログに含めるかどうかを制御するために使用されます。
 -   デフォルト値: `1`
 -   値のオプション: `1` (有効、デフォルト) または`0` (無効)。
 -   この設定値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します。
@@ -1046,7 +1046,7 @@ PROXYプロトコルに関連するコンフィグレーション項目。
 ### `networks` {#networks}
 
 -   [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)プロトコルを使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   一般的に、リバースプロキシ経由でTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして認識します。HAProxyなど、PROXYプロトコルをサポートするリバースプロキシは、PROXYプロトコルを有効にすることで、実際のクライアントIPアドレスをTiDBに渡すことができます。
 -   このパラメータを設定すると、TiDB は設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続することを許可します。PROXY 以外のプロトコルが使用されると、この接続は拒否されます。このパラメータを空のままにすると、どの IP アドレスも PROXY プロトコルを使用して TiDB に接続できません。値は`,`を区切り文字とする IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) です。 `*`は任意の IP アドレスを意味します。
 

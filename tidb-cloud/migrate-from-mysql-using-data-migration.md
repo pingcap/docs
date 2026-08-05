@@ -105,7 +105,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="premium">
 
--   TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソース データベースから SQL ステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエスト容量ユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
+-   TiDB Cloud Premium では、論理モード (デフォルト) と物理モードの両方がサポートされています。論理モードでは、MySQL ソース データベースから SQL ステートメントとしてデータをエクスポートし、ターゲットのTiDB Cloud Premium インスタンスで実行します。このとき、ロード中にリクエストキャパシティユニット (RCU) が消費されます。物理モードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用し、ロードのスループットとコスト効率を優先する場合の大規模データセットに推奨されます。
 -   物理モードを使用し、移行ジョブが開始されたら、 TiDB Cloud PremiumインスタンスでPITR（ポイントインタイムリカバリ）を有効にしたり、変更フィードを設定したり**しないで**ください。そうしないと、移行ジョブが停止します。PITRを有効にしたり、変更フィードを設定したりする必要がある場合は、代わりに論理モードを使用してデータを移行してください。
 -   物理モードを使用する場合、既存のデータ移行が完了する前に、 TiDB Cloud Premiumインスタンスに対して2つ目の移行ジョブまたはインポートタスクを作成することはできません。
 
@@ -367,7 +367,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
     -   Amazon Aurora MySQL または Amazon RDS MySQL: [セキュリティグループによるアクセス制御](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html)。
     -   Azure Database for MySQL - フレキシブル サーバー: [公共ネットワークアクセス](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
-    -   Google Cloud SQL for MySQL: [認証済みネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&#x26;__hssc=86493575.1.1768351956126&#x26;__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks)。
+    -   Google Cloud SQL for MySQL: [認証済みネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&__hssc=86493575.1.1768351956126&__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks)。
 
 3.  オプション：適切な証明書を使用して転送中の暗号化を行い、パブリックインターネットアクセスを備えたマシンからソースデータベースへの接続を確認します。
 

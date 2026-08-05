@@ -86,14 +86,14 @@ ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blo
 | --local.file-path string       | インポートするローカル ファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.target-database string | データのインポート先のターゲット データベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --local.target-table string    | データのインポート先のターゲット テーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --file-type string         | インポート ファイルの種類を [&quot;CSV&quot; &quot;SQL&quot; &quot;AURORA_SNAPSHOT&quot; &quot;PARQUET&quot;] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
+| --file-type string         | インポート ファイルの種類を ["CSV" "SQL" "AURORA_SNAPSHOT" "PARQUET"] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.backslash-escape         | CSVファイル内のフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを指定します。デフォルト値は`true`です。                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.delimiter string          | CSVファイルを引用する際に使用する区切り文字を指定します。デフォルト値は`\`です。                                                                   | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.separator string         | CSVファイルのフィールドセパレーターを指定します。デフォルト値は`,`です。                                                                       | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.skip-header              | CSV ファイルにヘッダー行が含まれているかどうかを指定します。                                                                              | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.trim-last-separator   | 区切り文字を行末文字として扱い、CSV ファイル内の末尾の区切り文字をすべてトリミングするかどうかを指定します。                                                      | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | --csv.not-null              | CSV ファイルに NULL 値を含めることができるかどうかを指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.null-value string              | CSV ファイル内の NULL 値の表現を指定します。(デフォルトは &quot;\N&quot;)                                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
+| --csv.null-value string              | CSV ファイル内の NULL 値の表現を指定します。(デフォルトは "\N")                                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

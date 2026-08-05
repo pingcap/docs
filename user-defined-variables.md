@@ -140,7 +140,7 @@ SELECT @col FROM t;
     | `a`  |
     +------+
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同一です。
 

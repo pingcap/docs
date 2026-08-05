@@ -221,7 +221,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
       Enter a value:
     ```
 
-    上記の結果では、Terraform によって実行プランが生成され、Terraform が実行するアクションが記述されています。
+    上記の結果では、Terraform によって実行計画が生成され、Terraform が実行するアクションが記述されています。
 
     -   構成と状態の違いを確認できます。
     -   `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
@@ -473,7 +473,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
       Enter a value: yes
     ```
 
-    上記の実行プランでは、 TiFlashが追加され、1 つのリソースが変更されます。
+    上記の実行計画では、 TiFlashが追加され、1 つのリソースが変更されます。
 
 3.  計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 

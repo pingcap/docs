@@ -224,7 +224,7 @@ component_versions:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pd`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pd`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -278,7 +278,7 @@ pd_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tidb`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tidb`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -330,7 +330,7 @@ tidb_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tikv`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tikv`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -388,9 +388,9 @@ tikv_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `tmp_path` : TiFlash一時ファイルのストレージパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot;です。
+-   `tmp_path` : TiFlash一時ファイルのストレージパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ] + "/tmp"です。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます（2 つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -492,7 +492,7 @@ tiproxy_servers:
 
 -   `tz` : TiKV-CDCサービスが使用するタイムゾーン。TiKV-CDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : TiKV-CDC が使用する構成ファイルのアドレス (オプション)。
 
@@ -540,7 +540,7 @@ kvcdc_servers:
 
 -   `tz` : TiCDCサービスが使用するタイムゾーン。TiCDCは、タイムスタンプなどの時間データ型を内部的に変換する際、および下流にデータを複製する際にこのタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます（2つのフィールドが重複している場合は、このフィールドの内容が有効になります）。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -653,15 +653,15 @@ scheduling_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `storage_retention` : Prometheus監視データの保持期間。デフォルト値は`"30d"`です。
 
 -   `rule_dir` : `*.rules.yml`ファイルすべてを含むローカルディレクトリを指定します。これらのファイルは、Prometheusのルールとして、クラスター構成の初期化フェーズ中にターゲットマシンに転送されます。
 
 -   `remote_config` : Prometheusデータのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには2つの設定があります。
-    -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
-    -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
+    -   `remote_write` : Prometheus ドキュメント[`<remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
+    -   `remote_read` : Prometheus ドキュメント[`<remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 
 -   `external_alertmanagers` : `external_alertmanagers`フィールドが設定されている場合、Prometheusはクラスター外のAlertmanagerに構成動作を通知します。このフィールドは配列であり、各要素は外部Alertmanagerであり、 `host`と`web_port`フィールドで構成されます。
 
@@ -782,7 +782,7 @@ grafana_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例：&quot;0,1&quot;）です。
+-   `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値はNUMAノードのID（例："0,1"）です。
 
 -   `config_file` : クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに転送されるローカル ファイルを指定します。
 

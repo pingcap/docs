@@ -62,7 +62,7 @@ mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 現在、 `RESTRICT`と`CASCADE`構文的にのみサポートされています。
 

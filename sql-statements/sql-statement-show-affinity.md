@@ -51,7 +51,7 @@ SHOW AFFINITY;
     -   `Affinity_region_count` `Region_count`未満の場合、一部のリージョンがアフィニティに基づいてレプリカのスケジュールをまだ完了していないことを示します。
     -   `Affinity_region_count` `Region_count`に等しい場合、アフィニティに基づくレプリカのスケジューリングが完了していることを示します。つまり、関連するすべてのリージョンの分散がアフィニティ要件を満たしていることを意味します。ただし、これは関連するリージョンのマージ操作が完了したことを示すものではありません。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
