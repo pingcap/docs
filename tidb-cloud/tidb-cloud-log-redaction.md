@@ -3,15 +3,15 @@ title: User-Controlled Log Redaction
 summary: TiDB Cloudでユーザーが制御するログのマスキングを有効または無効にする方法を学び、実行ログ内の機密データの可視性を管理しましょう。
 ---
 
-# ユーザーによるログの編集 {#user-controlled-log-redaction}
+# ユーザーによるログの秘匿化 {#user-controlled-log-redaction}
 
-ユーザー制御のログ秘匿化により<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ内の機密データの可視性を管理できます。この編集機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスをとり、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログに表示される内容を制御できます。
+ユーザー制御のログ秘匿化により<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ内の機密データの可視性を管理できます。この秘匿化機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスをとり、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログに表示される内容を制御できます。
 
 ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。TiDB <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>メンテナンスやSQLチューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
 
 > **Note:**
 >
-> ログ編集機能は、 TiDB Cloud DedicatedクラスターおよびTiDB Cloud Premium インスタンスでサポートされています。
+> ログの秘匿化機能は、 TiDB Cloud DedicatedクラスターおよびTiDB Cloud Premium インスタンスでサポートされています。
 
 ## 前提条件 {#prerequisites}
 
@@ -28,7 +28,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 </CustomContent>
 
-## ログの編集を無効にする {#disable-log-redaction}
+## ログの秘匿化を無効にする {#disable-log-redaction}
 
 > **Warning:**
 >
@@ -46,7 +46,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 3.  左側のナビゲーションペインで、 **[設定]** &gt; **[セキュリティ]**をクリックします。
 
-4.  **実行ログの編集**セクションでは、編集機能がデフォルトで**有効になっている**ことがわかります。
+4.  **実行ログの秘匿化**セクションでは、秘匿化機能がデフォルトで**有効になっている**ことがわかります。
 
 5.  **「無効にする」**をクリックします。ログのマスキングを無効にすることのリスクを説明する警告が表示されます。
 
@@ -56,7 +56,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 -   この変更は、新規のデータベース接続にのみ適用されます。
 -   既存の接続には影響はありません。変更を有効にするには、既存の接続を再接続する必要があります。
--   新規セッションのログは今後編集されなくなります。
+-   新規セッションのログは今後秘匿化されなくなります。
 
 ## 更新されたログを確認してください {#check-the-updated-logs}
 
@@ -72,7 +72,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 3.  ログを確認して、機密データが削除されていないことを確認してください。
 
-## ログの編集を有効にする {#enable-log-redaction}
+## ログの秘匿化を有効にする {#enable-log-redaction}
 
 データセキュリティを維持するため、診断またはメンテナンス作業が完了したらすぐに、以下の手順で**ログのマスキングを有効にしてください**。
 
@@ -86,7 +86,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 3.  左側のナビゲーションペインで、 **[設定]** &gt; **[セキュリティ]**をクリックします。
 
-4.  **実行ログの編集**セクションでは、編集機能が**無効になって**いることがわかります。
+4.  **実行ログの秘匿化**セクションでは、秘匿化機能が**無効になって**いることがわかります。
 
 5.  有効にするには、 **「有効にする**」をクリックしてください。
 

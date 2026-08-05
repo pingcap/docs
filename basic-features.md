@@ -243,7 +243,7 @@ summary: TiDBの機能概要について学びましょう。
 | [MySQL互換の`GRANT`システム](/privilege-management.md)                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [動的権限](/privilege-management.md#dynamic-privileges)                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [編集済みログファイル](/log-redaction.md)                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [ログの秘匿化](/log-redaction.md)                                                      |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 
 </StickyHeaderTable>
 

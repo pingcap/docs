@@ -112,7 +112,7 @@
     - [自己署名証明書を生成する](/generate-self-signed-certificates.md)
     - [保存時の暗号化](/encryption-at-rest.md)
     - [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
-    - [ログの編集](/log-redaction.md)
+    - [ログの秘匿化](/log-redaction.md)
   - アップグレード
     - [TiUPを使用する](/upgrade-tidb-using-tiup.md)
     - [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)

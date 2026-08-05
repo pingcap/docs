@@ -142,19 +142,19 @@ TiDBバージョン：8.3.0
 
 ### セキュリティ {#security}
 
--   PDログの編集機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
+-   PDログの秘匿化機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、PDは同様のログ編集機能強化を実装しています。この機能を使用するには、PD構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、PDは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、PD構成項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
 
--   TiKV ログ編集の強化 [#17206](https://github.com/tikv/tikv/issues/17206) @[LykxSassinator](https://github.com/LykxSassinator)
+-   TiKV ログの秘匿化の強化 [#17206](https://github.com/tikv/tikv/issues/17206) @[LykxSassinator](https://github.com/LykxSassinator)
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、TiKVは同様のログ編集機能強化を実装しています。この機能を使用するには、TiKV構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、TiKVは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、TiKV構成項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-tikv-side)を参照してください。
 
