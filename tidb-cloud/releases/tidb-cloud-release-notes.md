@@ -38,7 +38,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - Update pause requirements for TiDB Cloud Dedicated clusters.
 
-        Before [pausing a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md), you must turn off [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) and ensure that no Data Migration job is running. If either condition is not met, TiDB Cloud rejects the pause request and displays an error message.
+        Before [pausing a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md), you must turn off [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) and ensure that no Data Migration (DM) job is running. If either condition is not met, TiDB Cloud rejects the pause request and displays an error message.
 
     - Support subscribing to alert notifications from TiDB Cloud Dedicated via generic webhooks.
 
