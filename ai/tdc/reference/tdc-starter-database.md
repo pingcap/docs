@@ -34,7 +34,7 @@ tdc db
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
 | `create-db-cluster` | Creates a Starter cluster. Requires `--db-cluster-name`; `--db-cluster-type` is optional and defaults to `starter`. Use `--wait` for an `ACTIVE` result. | `tdc db create-db-cluster --db-cluster-name app-db --wait` |
-| `list-db-clusters` | Lists Starter clusters with pagination, filter, ordering, and query support. | `tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name}'` |
+| `list-db-clusters` | Lists Starter clusters in the effective region with pagination, filter, ordering, and query support. | `tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name}'` |
 | `describe-db-cluster` | Reads one cluster by `--db-cluster-id`; `--view FULL` requests expanded fields. | `tdc db describe-db-cluster --db-cluster-id "<cluster-id>" --view FULL` |
 | `update-db-cluster` | Changes the name or monthly spending limit of one cluster. Supports `--dry-run`. | `tdc db update-db-cluster --db-cluster-id "<cluster-id>" --db-cluster-name app-db-v2` |
 | `delete-db-cluster` | Deletes one cluster by ID. Use `--wait` to wait until deletion is observable. | `tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --wait` |
@@ -73,9 +73,10 @@ List and filter clusters:
 tdc db list-db-clusters
 tdc db list-db-clusters --page-size 20 --order-by "createTime desc"
 tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name,state:state}'
+tdc --region aws-us-west-2 db list-db-clusters
 ```
 
-The list command also accepts `--page-token`, `--filter`, and `--skip`. The shared TiDB Cloud API can return multiple service plans, so the TiDB Cloud CLI filters each page to verified Starter clusters. It preserves `next_page_token` but omits `total_size`, because the server total includes clusters outside the Starter-only result.
+The list command also accepts `--page-token`, `--filter`, and `--skip`. It always scopes the API request to the effective region, which resolves from global `--region`, then `TDC_REGION_CODE`, then the selected profile. The shared TiDB Cloud API can return multiple service plans or unverifiable resources, so the TiDB Cloud CLI defensively filters each page to verified Starter clusters in that region. It preserves `next_page_token` but omits `total_size`, because the server total can include clusters outside the verified result. A user `--filter` is combined with the mandatory region filter and cannot expand the result to another region.
 
 Describe and update a cluster:
 

@@ -5,7 +5,7 @@ summary: List TiDB Cloud Starter clusters.
 
 # tdc db list-db-clusters
 
-Lists verified Starter clusters with optional pagination, filtering, ordering, and JMESPath projection. Non-Starter and unverifiable clusters are omitted. The command preserves `next_page_token` after filtering and omits the server `total_size`, which can include other service plans.
+Lists verified Starter clusters in the effective region with optional pagination, filtering, ordering, and JMESPath projection. Cross-region, non-Starter, and unverifiable clusters are omitted. The command preserves `next_page_token` after filtering and omits the server `total_size`, which can include resources outside the verified result.
 
 > **Note:**
 >
@@ -41,8 +41,15 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 - List clusters:
 
     ```bash
-    # Return all visible Starter clusters as structured JSON.
+    # Return Starter clusters in the profile's configured region as structured JSON.
     tdc db list-db-clusters
+    ```
+
+- List clusters in another region:
+
+    ```bash
+    # Override the region for this invocation without changing the profile.
+    tdc --region aws-us-west-2 db list-db-clusters
     ```
 
 - Select cluster fields:
@@ -51,6 +58,8 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
     # Reduce the result to IDs, names, and lifecycle states.
     tdc db list-db-clusters --query 'clusters[].{id:id,name:display_name,state:state}'
     ```
+
+The effective region resolves from global `--region`, then `TDC_REGION_CODE`, then the selected profile's `region_code`. User-supplied `--filter` expressions are combined with this mandatory region scope and cannot expand the result to other regions.
 
 ## Related documentation
 
