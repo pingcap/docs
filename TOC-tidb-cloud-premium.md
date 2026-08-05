@@ -156,7 +156,7 @@
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
-- 請求する
+- 請求
   - [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
   - [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)

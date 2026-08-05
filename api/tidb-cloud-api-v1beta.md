@@ -13,4 +13,4 @@ summary: TiDB Cloudの v1beta API について学習します。
 -   [クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Cluster)
 -   [バックアップ](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Backup)
 -   [インポート（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Import)
--   [復元する](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Restore)
+-   [復元](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Restore)
