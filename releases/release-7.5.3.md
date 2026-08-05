@@ -100,7 +100,7 @@ TiDB バージョン: 7.5.3
     -   削除されたノードがetcdクライアントの候補接続リストにまだ表示される問題を修正 [＃8286](https://github.com/tikv/pd/issues/8286) @[JmPotato](https://github.com/JmPotato)
     -   TiKV構成項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) 1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [＃8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @[releungx](https://github.com/releungx)
-    -   PD構成項目[`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)が有効になっているときにPDログが完全に編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
+    -   PD構成項目[`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)が有効になっているときにPDログが完全に秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[releungx](https://github.com/releungx)
     -   ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
 
 -   TiFlash

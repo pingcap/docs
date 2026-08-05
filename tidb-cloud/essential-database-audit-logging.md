@@ -18,7 +18,7 @@ TiDB Cloud Essentialは、実行されたSQLステートメントなど、デー
 
 ## 監査ログの設定 {#audit-logging-configurations}
 
-### データ編集 {#data-redaction}
+### データの秘匿化 {#data-redaction}
 
 TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データをマスキングします。以下のSQL文を例に挙げます。
 
@@ -26,7 +26,7 @@ TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データ
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
 ```
 
-以下のように編集されています。
+以下のように秘匿化されています。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES ( ... );
@@ -387,8 +387,8 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | 分野               | 説明                                                                     |
 | ---------------- | ---------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                     |
-| `SQL_TEXT`       | 実行されたSQLステートメント。監査ログのマスキングが有効になっている場合は、マスキングされたSQLステートメントが記録されます。      |
-| `EXECUTE_PARAMS` | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
+| `SQL_TEXT`       | 実行されたSQLステートメント。監査ログの秘匿化が有効になっている場合は、秘匿化されたSQLステートメントが記録されます。      |
+| `EXECUTE_PARAMS` | `EXECUTE`ステートメントのパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
 | `AFFECTED_ROWS`  | SQL ステートメントの影響を受ける行数。イベント クラスに`QUERY_DML`が含まれている場合にのみ記録されます。           |
 
 ### 接続情報 {#connection-information}

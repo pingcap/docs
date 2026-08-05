@@ -9,7 +9,7 @@ TiDBが詳細なログ情報を提供する場合、ログに機密データ（�
 
 ## TiDB側でのログの秘匿化 {#log-redaction-in-tidb-side}
 
-TiDB側でログの秘匿化を有効にするには、 [`global.tidb_redact_log`](/system-variables.md#tidb_redact_log) `ON`または`MARKER`に設定します。この設定値のデフォルトは`OFF`で、ログの秘匿化が無効であることを意味します。
+TiDB側でログの秘匿化を有効にするには、 [`global.tidb_redact_log`](/system-variables.md#tidb_redact_log)を`ON`または`MARKER`に設定します。この設定値のデフォルトは`OFF`で、ログの秘匿化が無効であることを意味します。
 
 `set`構文を使用してグローバル変数`tidb_redact_log`設定できます。
 
@@ -57,7 +57,7 @@ ERROR 1062 (23000): Duplicate entry '‹1›' for key 't.a'
 
 ## TiKV側でのログの秘匿化 {#log-redaction-in-tikv-side}
 
-TiKV側でログの秘匿化を有効にするには、 [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408) `true`または`"marker"`に設定します。この設定値のデフォルトは`false`で、ログの秘匿化が無効であることを意味します。
+TiKV側でログの秘匿化を有効にするには、 [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)を`true`または`"marker"`に設定します。この設定値のデフォルトは`false`で、ログの秘匿化が無効であることを意味します。
 
 ## PD側でのログの秘匿化 {#log-redaction-in-pd-side}
 

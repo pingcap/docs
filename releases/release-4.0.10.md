@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.10 Release Notes
-summary: TiDB 4.0.10は2021年1月15日にリリースされました。新機能には、ログからのユーザーデータの編集機能や、キーバリューエントリのサイズ制限の設定機能などが含まれます。バグ修正では、同時実行の問題、重複バインディング、および誤った結果が修正されています。改善点としては、メトリクスの最適化と依存関係のアップグレードが挙げられます。TiCDC、 Dumpling、Backup & Restore、TiDB Binlog、 TiDB Lightningなどの各種ツールも更新および修正されています。
+summary: TiDB 4.0.10は2021年1月15日にリリースされました。新機能には、ログからのユーザーデータの秘匿化機能や、キーバリューエントリのサイズ制限の設定機能などが含まれます。バグ修正では、同時実行の問題、重複バインディング、および誤った結果が修正されています。改善点としては、メトリクスの最適化と依存関係のアップグレードが挙げられます。TiCDC、 Dumpling、Backup & Restore、TiDB Binlog、 TiDB Lightningなどの各種ツールも更新および修正されています。
 ---
 
 # TiDB 4.0.10 リリースノート {#tidb-4-0-10-release-notes}
@@ -13,11 +13,11 @@ TiDB バージョン: 4.0.10
 
 -   PD
 
-    -   ログからユーザーデータを編集するための`enable-redact-log`構成項目を追加します。 [＃3266](https://github.com/pingcap/pd/pull/3266)
+    -   ログからユーザーデータを秘匿化するための`enable-redact-log`構成項目を追加します。 [＃3266](https://github.com/pingcap/pd/pull/3266)
 
 -   TiFlash
 
-    -   ログからユーザーデータを編集するための`security.redact_info_log`構成項目を追加します
+    -   ログからユーザーデータを秘匿化するための`security.redact_info_log`構成項目を追加します
 
 ## 改善点 {#improvements}
 
@@ -63,7 +63,7 @@ TiDB バージョン: 4.0.10
 -   TiKV
 
     -   準備完了とピア間の誤ったマッピングを修正 [＃9409](https://github.com/tikv/tikv/pull/9409)
-    -   `security.redact-info-log` `true` に設定すると一部のログが編集されない問題を修正しました [＃9314](https://github.com/tikv/tikv/pull/9314)
+    -   `security.redact-info-log`が`true`に設定すると一部のログが秘匿化されない問題を修正しました [＃9314](https://github.com/tikv/tikv/pull/9314)
 
 -   PD
 

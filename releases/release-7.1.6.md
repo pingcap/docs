@@ -214,7 +214,7 @@ TiDB バージョン: 7.1.6
     -   同時実行性が高い場合にリソース グループがリソース使用量を効果的に制限できない問題を修正[＃8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
     -   PD がオペレータ チェック中に遭遇するデータ競合問題を修正しました [＃8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     -   500 ミリ秒を超えるトークンをリクエストするとリソース グループがクォータ制限に達する問題を修正[＃8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
-    -   一部のログが編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
+    -   一部のログが秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     -   ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [＃54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
     -   多数のリージョンが存在する場合にPDのリージョンAPIをリクエストできない問題を修正[＃55872](https://github.com/pingcap/tidb/issues/55872) @[rleungx](https://github.com/rleungx)
     -   リソースグループクエリをキャンセルするときに再試行回数が多すぎる問題を修正 [＃8217](https://github.com/tikv/pd/issues/8217) @[nolouch](https://github.com/nolouch)

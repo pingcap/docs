@@ -19,7 +19,7 @@ ticloud serverless audit-log config update [flags]
 ticloud serverless audit-log config update
 ```
 
-非対話型モードでデータベース監査ログを編集解除します。
+非対話型モードでデータベース監査ログの秘匿化を解除します。
 
 ```shell
 ticloud serverless audit-log config update -c <cluster-id> --unredacted
@@ -63,7 +63,7 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --s3.role-arn string           | Amazon S3 のロール ARN。 `--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。      | いいえ | 非対話型モードでのみ動作します。                     |
 | --s3.secret-access-key string  | Amazon S3のシークレットアクセスキー。`--s3.role-arn`のいずれか、または`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定する必要があります。 | いいえ | 非対話型モードでのみ動作します。                     |
 | --s3.uri string                | `s3://<bucket>/<path>`形式の Amazon S3 URI。                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
-| --unredacted                      | データベース監査ログを編集解除または編集します。                                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
+| --unredacted                      | データベース監査ログを秘匿化解除または秘匿化します。                                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                          | いいえ | インタラクティブ モードと非インタラクティブ モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

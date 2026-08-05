@@ -312,7 +312,7 @@ TiKVコプロセッサータスクフィールド：
 
 -   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スロークエリログに記録されるSQLステートメントの最大長を設定します。デフォルト値は4096バイトです。
 
--   [`tidb_redact_log`](/system-variables.md#tidb_redact_log) : スロークエリログに記録される SQL ステートメント内のユーザーデータが編集され、 `?`に置き換えられるかどうかを制御します。デフォルト値は`0`で、この機能は無効になっています。
+-   [`tidb_redact_log`](/system-variables.md#tidb_redact_log) : スロークエリログに記録される SQL ステートメント内のユーザーデータが秘匿化され、 `?`に置き換えられるかどうかを制御します。デフォルト値は`0`で、この機能は無効になっています。
 
 -   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 実行計画内の各オペレーターの物理実行情報を記録するかどうかを制御します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、 `Plan`の情報を次のように表示できます。
 
