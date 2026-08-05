@@ -30,7 +30,7 @@ If you already have an Amazon VPC with at least three private subnets spanning t
 
 1. In the [Amazon VPC console](https://console.aws.amazon.com/vpc/), [create a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html) with three private subnets, one per availability zone in which your TiDB Cloud Premium instance runs. These subnets must be in the same AZs, matched by AZ ID rather than AZ name.
 2. In the VPC dashboard, configure route tables and security groups so that any client EC2 instance you launch later can communicate with the MSK cluster over the private network.
-3. Record the AZ IDs of the subnets. You will select these subnets when [creating the MSK cluster](#step-3-create-the-amazon-msk-provisioned-cluster).
+3. Record the AZ IDs of the subnets. You will select these subnets when [creating the MSK cluster](#step-3-create-an-amazon-msk-provisioned-cluster).
 
 ## Step 2. Create a SCRAM secret in AWS Secrets Manager
 
