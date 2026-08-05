@@ -672,7 +672,7 @@ summary: 2023 年のTiDB Cloudのリリース ノートについて説明しま�
 
     これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
 
--   **プロジェクト別概要**と**サービス別概要の**請求項目を再編成して[請求する](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化し、請求情報をより明確にします。
+-   **プロジェクト別概要**と**サービス別概要の**請求項目を再編成して[請求](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化し、請求情報をより明確にします。
 
 ## 2023年4月4日 {#april-4-2023}
 

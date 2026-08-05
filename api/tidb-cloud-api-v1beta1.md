@@ -13,7 +13,7 @@ TiDB Cloud API v1beta1 は、 TiDB Cloud内の管理オブジェクトをプロ�
     -   [TiDB Cloud Starter または Essential クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless) : TiDB Cloud Starter または Essential クラスターのクラスター、ブランチ、データ エクスポート タスク、およびデータ インポート タスクを管理します。
     -   [TiDB Cloud Dedicatedクラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated) : TiDB Cloud Dedicated クラスターのクラスター、リージョン、プライベート エンドポイント接続、およびデータ インポート タスクを管理します。
 -   組織またはプロジェクトレベルのリソース:
-    -   [請求する](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing) : TiDB Cloudクラスターの課金を管理します。
+    -   [請求](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing) : TiDB Cloudクラスターの課金を管理します。
     -   [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) : TiDB CloudクラスターのData Service内のリソースを管理します。
-    -   [IAMは](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam) : TiDB Cloudクラスターの API キーを管理します。
+    -   [IAM](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam) : TiDB Cloudクラスターの API キーを管理します。
     -   [MSP（非推奨）](https://docs.pingcap.com/tidbcloud/api/v1beta1/msp)
