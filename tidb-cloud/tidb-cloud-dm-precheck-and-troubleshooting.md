@@ -54,7 +54,7 @@ Amazon RDS の場合、次のパラメータを変更する必要があります
 
 -   Amazon Aurora MySQL: このプロセスは、 `binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。 [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。
 -   Amazon RDS: 手順は`binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
--   MySQL: ドキュメント[最大接続数](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections)に従って`max_connections`を設定します。
+-   MySQL: ドキュメント[max_connections](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections)に従って`max_connections`を設定します。
 
 TiDB Cloudクラスターでエラーが発生した場合は、ドキュメントの[最大接続数](https://docs.pingcap.com/tidb/stable/system-variables#max_connections)に従って`max_connections`を設定します。
 

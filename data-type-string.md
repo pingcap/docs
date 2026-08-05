@@ -5,7 +5,7 @@ summary: TiDB でサポートされている文字列型について学習しま
 
 # 文字列型 {#string-types}
 
-TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべてのMySQL文字列型をサポートしています。詳細については、 [MySQLの文字列型](https://dev.mysql.com/doc/refman/8.0/en/string-types.html)を参照してください。
+TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべてのMySQL文字列型をサポートしています。詳細については、 [String Types in MySQL](https://dev.mysql.com/doc/refman/8.0/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
@@ -172,7 +172,7 @@ ENUM('apple', 'orange', 'pear')
 | 'オレンジ' | 2  |
 | '梨'    | 3  |
 
-詳細については[MySQLのENUM型](https://dev.mysql.com/doc/refman/8.0/en/enum.html)を参照してください。
+詳細については[the ENUM type in MySQL](https://dev.mysql.com/doc/refman/8.0/en/enum.html)を参照してください。
 
 ### <code>SET</code>型 {#set-type}
 
@@ -203,4 +203,4 @@ TiDBでは、 `SET`型の値は内部的に`Int64`に変換されます。各要
 
 この場合、 `('a', 'c')`の要素は 2 進数では`0101`になります。
 
-詳細については[MySQLのSET型](https://dev.mysql.com/doc/refman/8.0/en/set.html)を参照してください。
+詳細については[the SET type in MySQL](https://dev.mysql.com/doc/refman/8.0/en/set.html)を参照してください。

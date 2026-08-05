@@ -63,7 +63,7 @@ DMツールを使用する前に、以下の制限事項にご注意ください
 
 -   Binlogの互換性
 
-    -   DM は、MySQL 8.0 の新機能binlog [トランザクションペイロードイベント](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)イベントをサポートしていません。 binlog Transaction_payload_event を使用すると、アップストリームとダウンストリームの間でデータの不整合が発生する可能性があります。
+    -   DM は、MySQL 8.0 の新機能binlog [Transaction_payload_event](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)イベントをサポートしていません。 binlog Transaction_payload_event を使用すると、アップストリームとダウンストリームの間でデータの不整合が発生する可能性があります。
 
 -   ベクトルデータ型の複製
 

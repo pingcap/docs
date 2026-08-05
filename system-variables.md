@@ -4259,7 +4259,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > `OFF`のデフォルト値のみが安全であると考えられます。アプリケーションが以前のバージョンの TiDB 用に設計されている場合は`tidb_multi_statement_mode=ON`を設定する必要がある場合があります。アプリケーションで複数のステートメントのサポートが必要な場合は、 `tidb_multi_statement_mode`オプションの代わりに、クライアントライブラリが提供する設定を使用することをお勧めします。例:
 >
 > -   [go-sql-driver](https://github.com/go-sql-driver/mysql#multistatements) ( `multiStatements` )
-> -   [コネクタ/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
+> -   [Connector/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
 > -   PHP [mysqli](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) ( `mysqli_multi_query` )
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>

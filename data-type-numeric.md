@@ -13,7 +13,7 @@ TiDB は、以下を含むすべての MySQL 数値型をサポートしてい�
 
 ## 整数型 {#integer-types}
 
-TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべてのMySQL整数型をサポートしています。詳細については、 [MySQLの整数データ型の構文](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)を参照してください。
+TiDBは、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべてのMySQL整数型をサポートしています。詳細については、 [Integer Data Type Syntax in MySQL](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html)を参照してください。
 
 次の表はフィールドの説明をまとめたものです。
 
@@ -113,7 +113,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## 浮動小数点型 {#floating-point-types}
 
-TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [浮動小数点型（近似値） - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)を参照してください。
+TiDBは、 `FLOAT` 、 `DOUBLE`を含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)を参照してください。
 
 次の表はフィールドの説明をまとめたものです。
 
@@ -168,7 +168,7 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 
 ## 固定小数点型 {#fixed-point-types}
 
-TiDBは、DECIMALやNUMERICを含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [固定小数点型（正確な値） - MySQL の DECIMAL、NUMERIC](https://dev.mysql.com/doc/refman/8.0/en/fixed-point-types.html) 。
+TiDBは、DECIMALやNUMERICを含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [Fixed-Point Types (Exact Value) - DECIMAL, NUMERIC in MySQL](https://dev.mysql.com/doc/refman/8.0/en/fixed-point-types.html) 。
 
 フィールドの意味:
 

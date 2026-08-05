@@ -136,7 +136,7 @@ OR, ||
 | [＝](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-equal)  | 値を割り当てる（ [`SET`](https://dev.mysql.com/doc/refman/8.0/en/set-variable.html)文の一部として、または[`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html)文の`SET`句の一部として） |
 | [:=](https://dev.mysql.com/doc/refman/8.0/en/assignment-operators.html#operator_assign-value) | 値を割り当てる                                                                                                                                                              |
 
-詳細は[機能依存の検出](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html)参照。
+詳細は[Detection of Functional Dependence](https://dev.mysql.com/doc/refman/8.0/en/group-by-functional-dependence.html)参照。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

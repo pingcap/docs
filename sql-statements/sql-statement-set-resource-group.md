@@ -86,7 +86,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL は[リソースグループを設定する](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)もサポートしています。ただし、受け入れられるパラメータは TiDB とは異なります。互換性がありません。
+MySQL は[SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)もサポートしています。ただし、受け入れられるパラメータは TiDB とは異なります。互換性がありません。
 
 ## 参照 {#see-also}
 

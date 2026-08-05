@@ -115,7 +115,7 @@ TiDB では`noIndexUsed()`および`noGoodIndexUsed()`関数を使用しない�
 
 **説明**
 
-TiDBはパラメータ[パケットデバッグを有効にする](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html)をサポートしていません。これはMySQL Connector/Jのデバッグ用パラメータであり、データパケットのバッファを保持します。これにより、接続が予期せず切断される可能性があります。このパラメータを有効に**しないでください**。
+TiDBはパラメータ[enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html)をサポートしていません。これはMySQL Connector/Jのデバッグ用パラメータであり、データパケットのバッファを保持します。これにより、接続が予期せず切断される可能性があります。このパラメータを有効に**しないでください**。
 
 **回避方法**
 

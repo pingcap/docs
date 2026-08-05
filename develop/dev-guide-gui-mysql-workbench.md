@@ -187,7 +187,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
     ![MySQL Workbench: adjust timeout option in SQL Editor settings](/media/develop/mysql-workbench-adjust-sqleditor-read-timeout.jpg)
 
-詳細については、 [MySQL Workbenchに関するよくある質問](https://dev.mysql.com/doc/workbench/en/workbench-faq.html)を参照してください。
+詳細については、 [MySQL Workbench frequently asked questions](https://dev.mysql.com/doc/workbench/en/workbench-faq.html)を参照してください。
 
 ## 次のステップ {#next-steps}
 

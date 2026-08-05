@@ -5,9 +5,9 @@ summary: MySQL ツールを使用して TiDB に接続する方法を学習し�
 
 # MySQLツールでTiDBに接続する {#connect-to-tidb-with-mysql-tools}
 
-TiDBはMySQLプロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについては、 [MySQLクライアントオプション](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html)を参照してください。
+TiDBはMySQLプロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについては、 [MySQL Client Options](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html)を参照してください。
 
-TiDB は[MySQL クライアント/サーバー プロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)をサポートしており、これにより、ほとんどのクライアント ドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
+TiDB は[MySQL Client/Server Protocol](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)をサポートしており、これにより、ほとんどのクライアント ドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
 
 個人の好みに応じて、MySQL クライアントまたは MySQL シェルの使用を選択できます。
 

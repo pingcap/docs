@@ -598,4 +598,4 @@ SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 1 row in set (0.00 sec)
 ```
 
-詳細については[接続文字セットと照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)を参照してください。
+詳細については[Connection Character Sets and Collations](https://dev.mysql.com/doc/refman/8.0/en/charset-connection.html)を参照してください。
