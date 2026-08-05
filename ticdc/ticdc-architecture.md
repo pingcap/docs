@@ -109,14 +109,7 @@ In the TiCDC classic architecture, DDL replication operations are strictly seria
 
 ## Limitations
 
-The new TiCDC architecture incorporates all functionalities of the classic architecture. However, some features have not yet been fully tested. To ensure system stability, it is **NOT** recommended to use the following features in core production environments:
-
-- [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md)
-- [Redo Log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
-- [Pulsar Sink](/ticdc/ticdc-sink-to-pulsar.md)
-- [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md)
-
-In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
+The new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
 
 ## Upgrade guide
 
