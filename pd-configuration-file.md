@@ -196,17 +196,17 @@ pd-server関連のコンフィグレーション項目
 ### `cacert-path` {#cacert-path}
 
 -   CAファイルのパス
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `cert-path` {#cert-path}
 
 -   X509証明書を含むPrivacy Enhanced Mail（PEM）ファイルのパス
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `key-path` {#key-path}
 
 -   X509キーを含むPEMファイルのパス
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 
 ### `redact-info-log`<span class="version-mark">バージョン5.0の新機能</span> {#redact-info-log-new-in-v50}
 

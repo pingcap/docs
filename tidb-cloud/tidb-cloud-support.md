@@ -25,7 +25,7 @@ TiDB Cloudは複数のサポートチャネルを提供しています。利用�
     -   積極的なサポートプログラム、例えば[Clinic](/tidb-cloud/tidb-cloud-clinic.md)
     -   テクニカル アカウント マネージャー (TAM) などの専任または指名されたサポート ロール
 
--   コミュニティ（ [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ）
+-   コミュニティ（ [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ）
 
     これらのオープンディスカッションチャンネルは、質問をしたり、経験を共有したり、他のユーザーやPingCAPエンジニアからアドバイスを得たりするのに便利です。これらのチャンネルは、一般的な質問、使用方法の議論、緊急性のない技術的な問題などに適しています。
 
@@ -72,7 +72,7 @@ TiDB Cloudのすべてのユーザーは、請求およびアカウント関連�
 
     > **Note:**
     >
-    > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。Basic**プラン**をご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
+    > [TiDB Cloudテクニカルサポート](https://tidb.support.pingcap.com/servicedesk/customer/portal/6)エントリーは、 **Developer** 、 **Enterprise** 、または**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)でのみご利用いただけます。Basic**プラン**をご利用の場合は、 [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)または[Discord](https://discord.com/invite/KVRZBR2DrG)のコミュニティチャンネルを通じて技術的な質問を投稿できます。PingCAPのエンジニアやコミュニティメンバーがサポートいたします。
 
 2.  **[リクエストを送信]**をクリックします。
 

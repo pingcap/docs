@@ -1657,9 +1657,9 @@ Titanに関連するコンフィグレーション項目。
 ### `compression-per-level` {#compression-per-level}
 
 -   各レベルのデフォルトの圧縮アルゴリズム
--   `defaultcf`のデフォルト値: [&quot;no&quot;, &quot;no&quot;, &quot;lz4&quot;, &quot;lz4&quot;, &quot;lz4&quot;, &quot;zstd&quot;, &quot;zstd&quot;]
--   `writecf`のデフォルト値: [&quot;no&quot;, &quot;no&quot;, &quot;lz4&quot;, &quot;lz4&quot;, &quot;lz4&quot;, &quot;zstd&quot;, &quot;zstd&quot;]
--   `lockcf`のデフォルト値: [&quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;]
+-   `defaultcf`のデフォルト値: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
+-   `writecf`のデフォルト値: ["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]
+-   `lockcf`のデフォルト値: ["no", "no", "no", "no", "no", "no", "no"]
 
 ### `bottommost-level-compression` {#bottommost-level-compression}
 
@@ -1697,7 +1697,7 @@ Titanに関連するコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MiB"`
 -   最小値: `0`
 -   単位：KiB｜MiB｜GiB
--   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が &quot;no:no:lz4:lz4:lz4:lz4:lz4&quot; の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
+-   不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が "no:no:lz4:lz4:lz4:lz4:lz4" の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にする必要があります。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
 
 ### `target-file-size-base` {#target-file-size-base}
 
@@ -2266,7 +2266,7 @@ Raft Engineに関連するコンフィグレーション項目。
 ### `data-encryption-method` {#data-encryption-method}
 
 -   データファイルの暗号化方法
--   値のオプション: &quot;plaintext&quot;, &quot;aes128-ctr&quot;, &quot;aes192-ctr&quot;, &quot;aes256-ctr&quot;, &quot;sm4-ctr&quot; (v6.3.0以降でサポート)
+-   値のオプション: "plaintext", "aes128-ctr", "aes192-ctr", "aes256-ctr", "sm4-ctr" (v6.3.0以降でサポート)
 -   「plaintext」以外の値を指定すると、暗号化が有効になり、マスターキーを指定する必要があります。
 -   デフォルト値: `"plaintext"`
 

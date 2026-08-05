@@ -69,5 +69,5 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 
 ## 参照 {#see-also}
 
--   [`SET [GLOBAL|SESSION] &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
 -   [分離レベル](/transaction-isolation-levels.md)

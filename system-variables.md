@@ -76,7 +76,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP SASL認証の場合、この変数は検索ツリー内の検索範囲を制限します。 `AS ...`句なしでユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内で`dn`を自動的に検索します。
 
 ### authentication_ldap_sasl_bind_root_dn <span class="version-mark">New in v7.1.0</span>
@@ -85,7 +85,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP SASL認証の場合、この変数は、LDAPサーバーにログインしてユーザーを検索するために使用される`dn`を指定します。
 
 ### authentication_ldap_sasl_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
@@ -94,7 +94,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP SASL認証の場合、この変数はLDAPサーバーにログインしてユーザーを検索する際に使用するパスワードを指定します。
 
 ### authentication_ldap_sasl_ca_path <span class="version-mark">New in v7.1.0</span>
@@ -103,7 +103,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP SASL認証の場合、この変数はStartTLS接続用の認証局ファイルの絶対パスを指定します。
 
 ### authentication_ldap_sasl_init_pool_size <span class="version-mark">New in v7.1.0</span>
@@ -132,7 +132,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP SASL認証の場合、この変数はLDAPサーバーのホスト名またはIPアドレスを指定します。
 
 ### authentication_ldap_sasl_server_port <span class="version-mark">New in v7.1.0</span>
@@ -170,7 +170,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP シンプル認証の場合、この変数は検索ツリー内の検索範囲を制限します。 `AS ...`句なしでユーザーが作成された場合、TiDB はユーザー名に基づいて LDAPサーバーで`dn`を自動的に検索します。
 
 ### authentication_ldap_simple_bind_root_dn <span class="version-mark">New in v7.1.0</span>
@@ -179,7 +179,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP 簡易認証の場合、この変数は、LDAPサーバーにログインしてユーザーを検索するために使用される`dn`を指定します。
 
 ### authentication_ldap_simple_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
@@ -188,7 +188,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP簡易認証の場合、この変数はLDAPサーバーにログインしてユーザーを検索する際に使用するパスワードを指定します。
 
 ### authentication_ldap_simple_ca_path <span class="version-mark">New in v7.1.0</span>
@@ -197,7 +197,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP簡易認証の場合、この変数はStartTLS接続用の認証局ファイルの絶対パスを指定します。
 
 ### authentication_ldap_simple_init_pool_size <span class="version-mark">New in v7.1.0</span>
@@ -226,7 +226,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   LDAP簡易認証の場合、この変数はLDAPサーバーのホスト名またはIPアドレスを指定します。
 
 ### authentication_ldap_simple_server_port <span class="version-mark">New in v7.1.0</span>
@@ -574,7 +574,7 @@ mysql> SELECT * FROM t1;
 -   対象範囲：グローバル
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   `init_connect`機能を使用すると、TiDBサーバーに初めて接続したときに SQL ステートメントを自動的に実行できます。 `CONNECTION_ADMIN`または`SUPER`の権限を持っている場合、この`init_connect`ステートメントは実行されません。 `init_connect`ステートメントでエラーが発生した場合、ユーザー接続は終了します。
 
 ### innodb_lock_wait_timeout
@@ -833,7 +833,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   対象範囲：グローバル
 -   クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   コマンドラインフラグで指定されたプラグインをロードするディレクトリを示します。
 
 ### plugin_load
@@ -845,7 +845,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   対象範囲：グローバル
 -   クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   TiDB起動時にロードするプラグインを指定します。これらのプラグインはコマンドラインフラグで指定し、カンマで区切ります。
 
 ### port
@@ -933,7 +933,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   `tidb-server`が MySQL プロトコルと通信する際にリッスンしているローカル Unix ソケット ファイル。
 
 ### sql_mode
@@ -978,7 +978,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 構成項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
 
 </CustomContent>
@@ -987,7 +987,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 構成項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
 
 </CustomContent>
@@ -998,7 +998,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB構成項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
@@ -1007,7 +1007,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB構成項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
 
 </CustomContent>
@@ -1018,7 +1018,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB構成項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
 
 </CustomContent>
@@ -1027,7 +1027,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 -   適用範囲：なし
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB構成項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
 
 </CustomContent>
@@ -1090,8 +1090,8 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   範囲: セッション | グローバル
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
--   デフォルト値: &quot;&quot;
--   この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は &quot;&quot; または &quot;tiflash&quot; に設定できます。この変数が &quot;tiflash&quot; に設定されている場合、 TiFlash がタイムアウト エラー (エラー コード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。
+-   デフォルト値: ""
+-   この変数は、TiKV にフォールバックする可能性のあるストレージエンジンのリストを指定するために使用されます。リストで指定されたストレージエンジンの障害により SQL ステートメントの実行が失敗した場合、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。この変数は "" または "tiflash" に設定できます。この変数が "tiflash" に設定されている場合、 TiFlash がタイムアウト エラー (エラー コード: ErrTiFlashServerTimeout) を返すと、TiDB は TiKV を使用してこの SQL ステートメントの実行を再試行します。
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
@@ -1195,7 +1195,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   デフォルト値: 「json、blob、mediumblob、longblob、mediumtext、longtext」。 v8.2.0 より前のデフォルト値は「json,blob,mediumblob,longblob」です。
--   指定可能な値: &quot;json,blob,mediumblob,longblob,text,mediumtext,longtext&quot;
+-   指定可能な値: "json,blob,mediumblob,longblob,text,mediumtext,longtext"
 -   この変数は、統計情報を収集するために`ANALYZE`コマンドを実行する際に、統計収集からスキップされる列の種類を制御します。この変数は`tidb_analyze_version = 2`にのみ適用されます。 `ANALYZE TABLE t COLUMNS c1, ... , cn`を使用して列を指定した場合でも、その列の型が`tidb_analyze_skip_column_types`に含まれる場合は、指定された列の統計情報は収集されません。
 
 <!---->
@@ -1526,7 +1526,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   対象範囲：グローバル
 -   クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   この変数は読み取り専用です。現在のTiDBサーバーの構成情報を取得するために使用されます。
 
 ### tidb_constraint_check_in_place
@@ -3705,7 +3705,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   型: String
 -   これは読み取り専用変数です。TiDB内部で、現在のセッションにおける最後のDDL操作の情報を取得するために使用されます。
     -   「query」：最後のDDLクエリ文字列。
@@ -3715,7 +3715,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   これは読み取り専用変数です。TiDB内部で、最後のDMLステートメントのトランザクション情報を照会するために使用されます。情報には以下が含まれます。
     -   `txn_scope` : トランザクションの範囲。 `global`または`local`のいずれかになります。
     -   `start_ts` : トランザクションの開始タイムスタンプ。
@@ -5863,7 +5863,7 @@ SHOW WARNINGS;
 -   クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: String
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   オプション値: 最大 64 文字の文字列。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-` 。v8.5.6 以降、この変数の値は大文字と小文字を区別しません。TiDB は、ストレージおよび比較のために入力値を小文字に変換します。
 -   この変数はインスタンスレベルのシステム変数です。これを使用して[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービス スコープを制御できます。 DXF は、この変数の値に基づいて、どの TiDB ノードが分散タスクを実行するようにスケジュールできるかを決定します。特定のルールについては、 [タスクスケジューリング](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。
 
@@ -5872,7 +5872,7 @@ SHOW WARNINGS;
 -   範囲: セッション
 -   クラスターに保持される: いいえ
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   この変数を使用すると、現在のセッションに関連するログの`session_alias`列の値をカスタマイズできます。これにより、トラブルシューティング時にセッションを特定しやすくなります。この設定は、ステートメントの実行に関与する複数のノード (TiKV を含む) のログに影響します。この変数の最大長は 64 文字に制限されており、それを超える文字は自動的に切り捨てられます。値の末尾のスペースも自動的に削除されます。
 
 ### tidb_session_plan_cache_size <span class="version-mark">New in v7.1.0</span>
@@ -5992,7 +5992,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: セッション | グローバル
 -   クラスターに保持される: はい
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   型: String
 -   この変数は、スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。
 -   このシステム変数の使用方法の詳細については、 [`tidb_slow_log_rules`を使用する](/identify-slow-queries.md#use-tidb_slow_log_rules)を参照してください。
@@ -6025,7 +6025,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は「tidb-slow.log」です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会して、設定したファイルパスに基づいてスロークエリログを解析します。
 
 <CustomContent platform="tidb">
@@ -6048,7 +6048,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   この変数は、セッションがデータを読み取る時点を設定するために使用されます。たとえば、変数を「2017-11-11 20:20:20」または「400036290571534337」のようなTSO番号に設定すると、現在のセッションはこの時点のデータを読み取ります。
 
 ### tidb_source_id <span class="version-mark">New in v6.5.0</span>
@@ -6978,7 +6978,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 -   範囲: セッション
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
--   デフォルト値: &quot;&quot;
+-   デフォルト値: ""
 -   ステイル読み取りシナリオでは、このセッション変数を使用して、Stable Read のタイムスタンプ値を記録します。
 -   この変数はTiDBの内部動作に使用されます。この変数を設定することは**推奨されません**。
 

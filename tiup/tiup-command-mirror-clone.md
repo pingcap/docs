@@ -28,13 +28,13 @@ tiup mirror clone <target-dir> [global version] [flags]
 
 -   指定されたプラットフォームで実行できるコンポーネントのみを複製します。
 -   データ型: `STRING`
--   デフォルト: &quot;amd64,arm64&quot;
+-   デフォルト: "amd64,arm64"
 
 ### -o, --os {#o-os}
 
 -   指定されたオペレーティング システムで実行できるコンポーネントのみを複製します。
 -   データ型: `STRING`
--   デフォルト: &quot;linux,darwin&quot;
+-   デフォルト: "linux,darwin"
 
 ### --prefix {#prefix}
 

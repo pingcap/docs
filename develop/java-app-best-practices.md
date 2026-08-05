@@ -404,4 +404,4 @@ Javaアプリケーションでフレーム グラフを取得するのは面倒
 
 ## お困りですか？ {#need-help}
 
-[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。
+[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。

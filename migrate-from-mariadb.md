@@ -398,7 +398,7 @@ TiDBに切り替えるには、以下の手順を実行する必要がありま�
 2.  レプリケーション遅延を監視してください。遅延時間は0秒になるはずです。
 3.  アプリケーションの設定を変更してTiDBに接続するようにし、再度起動してください。
 
-レプリケーションの遅延を確認するには、 `dmctl`を介して[`query-status &#x3C;taskname>`](/dm/dm-query-status.md#detailed-query-result)を実行し、 `"synced: true"`内の`subTaskStatus`を確認します。
+レプリケーションの遅延を確認するには、 `dmctl`を介して[`query-status <taskname>`](/dm/dm-query-status.md#detailed-query-result)を実行し、 `"synced: true"`内の`subTaskStatus`を確認します。
 
 ### ステップ6．片付け {#step-6-clean-up}
 

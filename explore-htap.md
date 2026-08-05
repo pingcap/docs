@@ -108,7 +108,7 @@ TiDBの使用中に問題が発生した場合は、以下のドキュメント�
 -   [TiDBクラスタのトラブルシューティングガイド](/troubleshoot-tidb-cluster.md)
 -   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-[GitHub Issues](https://github.com/pingcap/tiflash/issues)を作成したり、 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=pingcap-docs)のコミュニティに質問したりすることもできます。
+[GitHub Issues](https://github.com/pingcap/tiflash/issues)を作成したり、 [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)のコミュニティに質問したりすることもできます。
 
 ## 次は？ {#what-s-next}
 

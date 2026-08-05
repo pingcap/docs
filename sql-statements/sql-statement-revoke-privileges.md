@@ -3,7 +3,7 @@ title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: TiDBデータベースにおけるREVOKE <権限>の使用方法の概要。
 ---
 
-# `REVOKE &#x3C;privileges>` {#revoke-x3c-privileges}
+# `REVOKE <privileges>` {#revoke-x3c-privileges}
 
 このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには`GRANT OPTION`権限と、取り消すすべての権限が必要です。
 
@@ -100,7 +100,7 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## 参照 {#see-also}
 
--   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
 -   [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">

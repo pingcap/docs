@@ -118,14 +118,14 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 5.  `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
-## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> ？ {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
+## <code>packet for query is too large. Try adjusting the 'max_allowed_packet' variable</code> ？ {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
 
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 -   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
 -   タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>を処理する方法を教えてください。 {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
+## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column 'binlog_gtid' in 'field list'</code>を処理する方法を教えてください。 {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
 
 DM v2.0 以降、増分データレプリケーションを続行するために DM 1.0 クラスターのタスク構成ファイルで`start-task`コマンドを直接実行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 

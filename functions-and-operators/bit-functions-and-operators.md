@@ -12,11 +12,11 @@ TiDB は、MySQL 8.0 で利用可能な[ビット関数と演算子](https://dev
 | 名前                             | 説明                |
 | :----------------------------- | :---------------- |
 | [`BIT_COUNT()`](#bit_count)    | 1に設定されているビットの数を返す |
-| [`&#x26;`](#-bitwise-and)      | ビットAND            |
+| [`&`](#-bitwise-and)      | ビットAND            |
 | [`~`](#-bitwise-inversion)     | ビット反転             |
 | [`|`](#-bitwise-or)            | ビットOR             |
 | [`^`](#-bitwise-xor)           | ビット単位のXOR         |
-| [`&#x3C;&#x3C;`](#-left-shift) | 左シフト              |
+| [`<<`](#-left-shift) | 左シフト              |
 | [`>>`](#-right-shift)          | 右シフト              |
 
 ## `BIT_COUNT()` {#bit_count}

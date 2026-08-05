@@ -114,7 +114,7 @@ TiDB バージョン: 4.0.5
     -   `ADMIN REPAIR TABLE`文が範囲パーティション式内の整数を解析できない問題を修正しました [＃17988](https://github.com/pingcap/tidb/pull/17988)
     -   `SET CHARSET`文の誤った動作を修正する [＃17289](https://github.com/pingcap/tidb/pull/17289)
     -   間違った照合順序設定によって関数`collation`の間違った結果が発生するバグを修正しました[＃17231](https://github.com/pingcap/tidb/pull/17231)
-    -   `STR_TO_DATE`のフォーマットトークン &#39;%r&#39;、 &#39;%h&#39; の処理が MySQL と矛盾している問題を修正しました。 [＃18727](https://github.com/pingcap/tidb/pull/18727)
+    -   `STR_TO_DATE`のフォーマットトークン '%r'、 '%h' の処理が MySQL と矛盾している問題を修正しました。 [＃18727](https://github.com/pingcap/tidb/pull/18727)
     -   `cluster_info`表の TiDB バージョン情報が PD/TiKV のバージョン情報と一致しない問題を修正しました。 [＃18413](https://github.com/pingcap/tidb/pull/18413)
     -   悲観的トランザクションの既存のチェックを修正[＃19004](https://github.com/pingcap/tidb/pull/19004)
     -   `union select for update`を実行すると同時競合発生する可能性がある問題を修正 [＃19006](https://github.com/pingcap/tidb/pull/19006)

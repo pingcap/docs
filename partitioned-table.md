@@ -1213,7 +1213,7 @@ SELECT fname, lname, region_code, dob
 
     -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
     -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
-    -   [`EXTRACT(&#x3C;time unit> FROM &#x3C;DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティション剪定の時間単位としてサポートされていないことに注意してください。
+    -   [`EXTRACT(<time unit> FROM <DATETIME/DATE/TIME column>)`](/functions-and-operators/date-and-time-functions.md) 。 `DATE`列と`DATETIME`列の場合、 `YEAR`と`YEAR_MONTH`時間単位は単調関数とみなされます。 `TIME`列の場合、 `HOUR` 、 `HOUR_MINUTE` 、 `HOUR_SECOND`および`HOUR_MICROSECOND`は単調関数とみなされます。 `WEEK`は、 `EXTRACT`におけるパーティション剪定の時間単位としてサポートされていないことに注意してください。
 
     例えば、パーティション式は単純な列です。
 

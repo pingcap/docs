@@ -319,7 +319,7 @@ batch-dml は、DML ステートメントの実行中にトランザクション
 
 ## よくある問題 {#common-issues}
 
-### 複数のテーブル結合ステートメントを実行すると<code>Unknown column xxx in &#39;where clause&#39;</code>エラーが発生します。 {#executing-a-multiple-table-joins-statement-results-in-the-unknown-column-xxx-in-where-clause-error}
+### 複数のテーブル結合ステートメントを実行すると<code>Unknown column xxx in 'where clause'</code>エラーが発生します。 {#executing-a-multiple-table-joins-statement-results-in-the-unknown-column-xxx-in-where-clause-error}
 
 このエラーは、クエリ内で連結された`WHERE`句が、 [シャード列](#parameter-description)が定義されているテーブル以外のテーブルに関係する場合に発生します。例えば、次のSQL文では、シャード列は`t2.id`で、テーブル`t2`に定義されていますが、 `WHERE`句はテーブル`t2`と`t3`に関係しています。
 
@@ -355,7 +355,7 @@ SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
     | 0              | all succeeded |
     +----------------+---------------+
 
-### 非トランザクションDML文でテーブルエイリアスを使用すると、 <code>Unknown column &#39;&lt;alias&gt;.&lt;column&gt;&#39; in &#39;where clause&#39;</code>エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
+### 非トランザクションDML文でテーブルエイリアスを使用すると、 <code>Unknown column '&lt;alias&gt;.&lt;column&gt;' in 'where clause'</code>エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
 
 非トランザクションDML文を実行すると、TiDBは内部的にバッチを分割するためのクエリを構築し、実際の分割実行文を生成します。これらの2種類の文は、それぞれ[`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)と[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 

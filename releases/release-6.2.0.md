@@ -210,13 +210,13 @@ TiDBバージョン: 6.2.0-DMR
 
 -   TiDB Lightningのディスククォータ設定をサポート（実験的）
 
-    TiDB Lightning が物理インポートモード (backend=&#39;local&#39;) でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なストレージ容量がない場合でも、インポートタスクを正常に完了できます。
+    TiDB Lightning が物理インポートモード (backend='local') でデータをインポートする場合、`sorted-kv-dir` にはソースデータを格納するのに十分な空き容量が必要です。ディスク容量が不足すると、インポートタスクが失敗する可能性があります。TiDB Lightning が使用するディスク容量の合計を制限するために、新しい`disk_quota`設定を使用すれば、`sorted-kv-dir` に十分なストレージ容量がない場合でも、インポートタスクを正常に完了できます。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
 -   TiDB Lightningは、物理インポートモードでの本番クラスタへのデータインポートをサポートしています。
 
-    従来、 TiDB Lightningの物理インポートモード（backend=&#39;local&#39;）は、対象クラスタに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
+    従来、 TiDB Lightningの物理インポートモード（backend='local'）は、対象クラスタに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
 
     TiDB Lightningは、既存の物理インポートモードを改良しました。テーブルのスケジュールを一時停止できるようにすることで、インポートの影響をクラスタレベルからテーブルレベルにまで軽減します。つまり、インポートされていないテーブルの読み書きが可能になります。
 

@@ -47,7 +47,7 @@ table.query({
 })
 ```
 
-**例: `meta.category`が配列 [&quot;tech&quot;, &quot;science&quot;] に含まれるレコードをフィルタリングする**
+**例: `meta.category`が配列 ["tech", "science"] に含まれるレコードをフィルタリングする**
 
 ```python
 results = (
@@ -103,7 +103,7 @@ results = (
 | `$in`  | 配列（文字列、整数、または浮動小数点数）     |
 | `$nin` | 配列内にありません（文字列、整数、浮動小数点数） |
 
-**例: `category`が配列 [&quot;tech&quot;, &quot;science&quot;] に含まれるレコードをフィルタリングする**
+**例: `category`が配列 ["tech", "science"] に含まれるレコードをフィルタリングする**
 
 ```python
 {

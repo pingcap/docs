@@ -67,12 +67,12 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 ### `--cacert` {#--cacert}
 
 -   信頼されたCAの証明書ファイルへのパスをPEM形式で指定します。
--   デフォルト： &quot;&quot;
+-   デフォルト： ""
 
 ### `--cert` {#--cert}
 
 -   PEM形式のSSL証明書へのパスを指定します
--   デフォルト： &quot;&quot;
+-   デフォルト： ""
 
 ### `--detach` / `-d` {#--detach---d}
 
@@ -92,7 +92,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 ### `--key` {#--key}
 
 -   PEM形式のSSL証明書キーファイルへのパスを指定します。これは`--cert`で指定された証明書の秘密鍵です。
--   デフォルト： &quot;&quot;
+-   デフォルト： ""
 
 ### `--pd` / `-u` {#--pd---u}
 
@@ -121,7 +121,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 }
 ```
 
-### `config [show | set &#x3C;option> &#x3C;value> | placement-rules]` {#config-show--set-option-value--placement-rules}
+### `config [show | set <option> <value> | placement-rules]` {#config-show--set-option-value--placement-rules}
 
 このコマンドを使用して、構成情報を表示または変更します。
 
@@ -216,7 +216,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set enable-cross-table-merge true  // Enable cross table merge.
     ```
 
--   `key-type` 、クラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
+-   `key-type` 、クラスターで使用されるキーエンコーディングの種類を指定します。サポートされているオプションは ["table", "raw", "txn"] で、デフォルト値は "table" です。
 
     -   クラスター内に TiDB インスタンスが存在しない場合は、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なくテーブル間でリージョンをマージできます。
     -   クラスター内にTiDBインスタンスが存在する場合、 `key-type`は 「table」である必要があります。PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決まります。`key-type`が 「raw」の場合、配置ルールは機能しません。
@@ -349,7 +349,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set flow-round-by-digit 4
     ```
 
-### `config [show | set service-middleware &#x3C;option> [&#x3C;key> &#x3C;value> | &#x3C;label> &#x3C;qps|concurrency> &#x3C;value>]]` {#config-show--set-service-middleware-option-key-value--label-qpsconcurrency-value}
+### `config [show | set service-middleware <option> [<key> <value> | <label> <qps|concurrency> <value>]]` {#config-show--set-service-middleware-option-key-value--label-qpsconcurrency-value}
 
 `service-middleware`はPDの設定モジュールであり、主にPDサービスのミドルウェア関数（監査ログ、リクエストレート制限、同時実行制限など）の管理と制御に使用されます。v8.5.0以降では、 `pd-ctl`を使用して`service-middleware`の以下の設定を変更できます。
 
@@ -492,7 +492,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 ]
 ```
 
-### `hot [read | write | store|  history &#x3C;start_time> &#x3C;end_time> [&#x3C;key> &#x3C;value>]]` {#hot-read--write--store--history-start_time-end_time-key-value}
+### `hot [read | write | store|  history <start_time> <end_time> [<key> <value>]]` {#hot-read--write--store--history-start_time-end_time-key-value}
 
 このコマンドを使用して、クラスターのホット スポット情報を表示します。
 
@@ -550,7 +550,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 
 v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`flow_cpu`フィールドが含まれ、 `hot store`コマンドの出力に`cpu-read-rate`フィールドが含まれます。これらのフィールドは、CPU を認識した読み取りホットスポット スケジューリングのための読み取り CPU 使用率を示します。
 
-### `label [store &#x3C;name> &#x3C;value>]` {#label-store-name-value}
+### `label [store <name> <value>]` {#label-store-name-value}
 
 このコマンドを使用して、クラスターのラベル情報を表示します。
 
@@ -561,7 +561,7 @@ v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`
 >> label store zone cn                  // Display all stores including the "zone":"cn" label
 ```
 
-### `member [delete | leader_priority | leader [show | resign | transfer &#x3C;member_name>]]` {#member-delete--leader_priority--leader-show--resign--transfer-member_name}
+### `member [delete | leader_priority | leader [show | resign | transfer <member_name>]]` {#member-delete--leader_priority--leader-show--resign--transfer-member_name}
 
 > **Note:**
 >
@@ -647,7 +647,7 @@ member leader_priority  pd-5 0
 time: 43.12698ms
 ```
 
-### `region &#x3C;region_id> [--jq="&#x3C;query string>"]` {#region-region_id---jqquery-string}
+### `region <region_id> [--jq="<query string>"]` {#region-region_id---jqquery-string}
 
 このコマンドを使用してリージョン情報を表示します。jq形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
@@ -688,7 +688,7 @@ time: 43.12698ms
 }
 ```
 
-### `region key [--format=raw|encode|hex] &#x3C;key>` {#region-key---formatrawencodehex-key}
+### `region key [--format=raw|encode|hex] <key>` {#region-key---formatrawencodehex-key}
 
 このコマンドを使用して、特定のキーが存在するリージョンを照会します。raw形式、エンコード形式、および16進形式をサポートしています。エンコード形式の場合は、キーを一重引用符で囲む必要があります。
 
@@ -742,7 +742,7 @@ time: 43.12698ms
 }
 ```
 
-### `region sibling &#x3C;region_id>` {#region-sibling-region_id}
+### `region sibling <region_id>` {#region-sibling-region_id}
 
 このコマンドを使用して、特定のリージョンに隣接するリージョンを確認します。
 
@@ -756,7 +756,7 @@ time: 43.12698ms
 }
 ```
 
-### `region keys [--format=raw|encode|hex] &#x3C;start_key> &#x3C;end_key> &#x3C;limit>` {#region-keys---formatrawencodehex-start_key-end_key-limit}
+### `region keys [--format=raw|encode|hex] <start_key> <end_key> <limit>` {#region-keys---formatrawencodehex-start_key-end_key-limit}
 
 このコマンドを使用して、指定された範囲`[startkey, endkey)`内のすべてのリージョンを照会します。 `endKey`のない範囲もサポートされています。
 
@@ -790,7 +790,7 @@ time: 43.12698ms
 }
 ```
 
-### `region store &#x3C;store_id>` {#region-store-store_id}
+### `region store <store_id>` {#region-store-store_id}
 
 このコマンドを使用して、特定のストアのすべてのリージョンを一覧表示します。
 
@@ -875,7 +875,7 @@ time: 43.12698ms
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]` {#region-check-miss-peer--extra-peer--down-peer--pending-peer--offline-peer--empty-region--hist-size--hist-keys---jqquery-string}
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="<query string>"]` {#region-check-miss-peer--extra-peer--down-peer--pending-peer--offline-peer--empty-region--hist-size--hist-keys---jqquery-string}
 
 このコマンドを使用して、異常状態にあるリージョンを確認します。jq形式の出力については、 [jq形式のJSON出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
@@ -1187,7 +1187,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 }
 ```
 
-### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]` {#store-delete--cancel-delete--label--weight--remove-tombstone--limit--store_id---jqquery-string}
+### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]` {#store-delete--cancel-delete--label--weight--remove-tombstone--limit--store_id---jqquery-string}
 
 jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 

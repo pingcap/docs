@@ -13,7 +13,7 @@ TiDB の起動後、 `SET [ SESSION | GLOBAL ] sql_mode='modes'`ステートメ�
 
 -   `SESSION`レベルでの SQL モードの変更は、現在のクライアントにのみ影響します。
 
-このステートメントでは、 `modes`はカンマ (&#39;,&#39;) で区切られたモードのセットです。 `SELECT @@sql_mode`ステートメントを使用して、現在の SQL モードを確認できます。SQL モードのデフォルト値は`ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION` 。
+このステートメントでは、 `modes`はカンマ (',') で区切られたモードのセットです。 `SELECT @@sql_mode`ステートメントを使用して、現在の SQL モードを確認できます。SQL モードのデフォルト値は`ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION` 。
 
 ## 重要な<code>sql_mode</code>値 {#important-code-sql-mode-code-values}
 
@@ -38,7 +38,7 @@ TiDB の起動後、 `SET [ SESSION | GLOBAL ] sql_mode='modes'`ステートメ�
 | `NO_BACKSLASH_ESCAPES`       | このモードが有効になっている場合、 `\`バックスラッシュ記号はそれ自体のみを表します。（完全サポート）                                                                                                                                                                                                                                               |
 | `STRICT_TRANS_TABLES`        | トランザクションストレージエンジンの厳格モードを有効にし、無効な値が挿入された後にステートメント全体をロールバックします。（完全サポート）                                                                                                                                                                                                                            |
 | `STRICT_ALL_TABLES`          | トランザクションテーブルの場合、無効な値が挿入された後にトランザクションステートメント全体をロールバックします。（完全サポート）                                                                                                                                                                                                                                   |
-| `NO_ZERO_IN_DATE`            | 厳格モードでは、月または日の一部が`0`である日付は受け入れられません。 `IGNORE`オプションを使用すると、TiDB は同様の日付に対して &#39;0000-00-00&#39; を挿入します。非厳格モードでは、この日付は受け入れられますが、警告が表示されます。（完全サポート）                                                                                                                                                    |
+| `NO_ZERO_IN_DATE`            | 厳格モードでは、月または日の一部が`0`である日付は受け入れられません。 `IGNORE`オプションを使用すると、TiDB は同様の日付に対して '0000-00-00' を挿入します。非厳格モードでは、この日付は受け入れられますが、警告が表示されます。（完全サポート）                                                                                                                                                    |
 | `NO_ZERO_DATE`               | 厳格モードでは、「0000-00-00」を有効な日付として使用しません。ただし`IGNORE`オプションを使用すれば、ゼロの日付を挿入することは可能です。非厳格モードでは、この日付は受け入れられますが、警告が表示されます。（完全サポート）                                                                                                                                                                            |
 | `ALLOW_INVALID_DATES`        | このモードでは、システムはすべての日付の有効性をチェックするわけではありません。 `1`から`12`までの月の値と、 `1`から`31` }までの日付の値のみをチェックします。このモードは`DATE`列と`DATATIME`列にのみ適用されます。 `TIMESTAMP`列はすべて完全な有効性チェックが必要です。（完全サポート）                                                                                                                                      |
 | `ERROR_FOR_DIVISION_BY_ZERO` | このモードが有効になっている場合、システムはデータ変更操作（ `0`または`INSERT`で`UPDATE`による除算を処理する際にエラーを返します。<br/>このモードが有効になっていない場合、システムは警告を返し、代わりに`NULL`が使用されます。（完全サポート）                                                                                                                                                            |
