@@ -32,6 +32,20 @@ To connect to a TiDB Serverless cluster via public endpoint, take the following 
     >
     > When you connect to a TiDB Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
+## Obtain the connection parameters
+
+To obtain the connection parameters of your TiDB Serverless cluster, perform the following steps:
+
+1. Open the **Connect** dialog for your cluster in the TiDB Cloud console.
+
+    For detailed steps, see [Connect to TiDB Serverless via public endpoint](#connect-to-tidb-serverless-via-public-endpoint).
+
+2. In the **Connect With** drop-down list, select **General**.
+
+3. In the **Operating System** drop-down list, select your operating system. This affects the value of `ssl_ca`.
+
+4. Then, you can get the connection parameters, such as `host`, `port`, `user`, `password`, and `ssl_ca`.
+
 ## What's next
 
 After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
