@@ -4,7 +4,7 @@ summary: 了解如何备份和恢复你的 {{{ .premium }}} 实例。
 aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# 备份和恢复 {{{ .premium }}} 数据
+# 备份和恢复 {{{ .premium }}} 数据 <!--Corresponding EN commit: e669ba40a791edd8590cf2335e2845a2e3d3cbde-->
 
 <CustomContent plan="premium">
 
@@ -52,32 +52,93 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 </CustomContent>
 
-### 自动备份策略 {#automatic-backup-policies}
+### 自动备份模式 {#automatic-backup-modes}
 
-{{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例采用多层备份架构来保护你的数据，如下表所示：
+你可以在 **Backup Settings** 中选择自动备份模式。可用的备份类型、保留时间和计费模式取决于所选模式。
 
-| Backup type | Retention period | Restore granularity |
+<CustomContent plan="premium">
+
+| 备份模式 | 支持的备份类型 | 保留和恢复选项 | 计费模式 |
+| --- | --- | --- | --- |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>每小时备份快照</li><li>每日备份快照</li></ul> | <ul><li>PITR：7 天</li><li>每小时快照：7 天</li><li>每日快照：33 天</li><li>每日快照在 UTC 00:00 创建。</li></ul> | 基于增量数据量。 |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>每日备份快照</li></ul> | 你可以将保留时间设置为 3 到 33 天。PITR 和每日快照使用所配置的保留时间。 | 基于快照大小乘以保留时长。每个备份作为单独对象计费。 |
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+| 备份模式 | 支持的备份类型 | 保留时间和恢复选项 |
 | --- | --- | --- |
-| **Point-in-time recovery (PITR)** | 7 天 | 恢复到 7 天窗口内的任意特定时间点。 |
-| **Hourly snapshot** | 7 天 | 从最近 7 天内生成的任意每小时快照进行恢复。 |
-| **Daily snapshot** | 33 天 | 从最近 33 天内生成的任意每日快照进行恢复。默认情况下，每日快照在 UTC 00:00 采集。 |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>每小时备份快照</li><li>每日备份快照</li></ul> | <ul><li>PITR：7 天</li><li>每小时快照：7 天</li><li>每日快照：33 天</li><li>每日快照在 UTC 00:00 创建。</li></ul> |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>每日备份快照</li></ul> | 你可以将保留时间设置为 3 到 33 天。PITR 和每日快照使用已配置的保留时间。 |
 
-### 备份执行规则 {#backup-execution-rules}
+</CustomContent>
 
-- **备份周期**：{{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例会同时执行每小时和每日自动备份。
+PITR 允许你将数据恢复到保留时间内的任意时间点。快照允许你从仍在保留时间内的特定每小时或每日快照恢复数据。
 
-- **备份调度**：
+### 配置自动备份 {#configure-automatic-backups}
 
-    - 每小时备份在每个整点开始执行。
-    - 每日备份在每天 UTC 00:00 执行。
-    - 当前你无法自定义或管理备份调度。
+1. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的名称。
 
-- **保留行为**：当备份超过其保留时间（7 天或 33 天）后，会自动过期，且无法恢复。
+2. 在左侧导航窗格中，点击 **Data** > **Backup**。
 
-> **Note:**
+3. 在右上角，点击 **...**，然后点击 **Backup Settings**。
+
+4. 选择一种自动备份模式：
+
+    - **Standard Bundle Mode** 使用预定义设置来配置 PITR、每小时快照和每日快照。
+    - **Custom Retention Mode** 允许你指定自动备份的保留时间和每日备份时间。
+
+5. 如果你选择了 **Custom Retention Mode**，请配置以下设置。否则，跳过此步骤。
+
+    - **Backup Retention**：选择 3 到 33 天的保留时间。默认值为 7 天。
+    - **Daily Backup Time**：选择每日快照的时间。该设置旁边会显示时区。
+
+6. 查看 **Overview** 部分，然后点击 **Save**。
+
+    概览会显示所选备份模式启用的备份类型、对应的保留时间以及可用的恢复选项。
+
+<CustomContent plan="byoc">
+
+> **注意：**
 >
-> - 自动备份存储成本取决于备份数据量和保留时间。
-> - 如需将备份保留时间延长到默认限制之外，请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+> 如果你[切换备份模式](#switch-between-automatic-backup-modes)或缩短保留时间，TiDB Cloud 可能会永久删除早于新保留时间的现有自动备份。此操作无法撤销。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **注意：**
+>
+> - Custom Retention Mode 的定价基于快照大小和保留时长。PITR 在公开预览期间暂时免费。更多信息，请参见 [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details)。
+> - 如果你[切换备份模式](#switch-between-automatic-backup-modes)或缩短保留时间，TiDB Cloud 可能会永久删除早于新保留时间的现有自动备份。此操作无法撤销。
+
+</CustomContent>
+
+### 在自动备份模式之间切换 {#switch-between-automatic-backup-modes}
+
+要在 **Standard Bundle Mode** 和 **Custom Retention Mode** 之间切换，请执行以下步骤：
+
+1. 进入实例的 [**Backup**](#view-the-backup-page) 页面。
+2. 在右上角，点击 **...**，然后点击 **Backup Settings**。
+3. 在显示的对话框中，选择一种新模式。
+
+    - 如果切换到 **Custom Retention Mode**，则需要配置备份保留时间和每日备份时间。
+    - 如果切换到 **Standard Bundle Mode**，保留时间和每日备份时间将重置为标准套餐的默认值。
+
+4. 在 **Overview** 部分检查保留设置，然后点击 **Save**。
+
+<CustomContent plan="premium">
+
+保存更改后，后续自动备份将按照所选模式的计费模型进行计费。
+
+</CustomContent>
+
+如果新的保留时间短于当前保留时间，确认对话框会列出早于新保留时间的自动备份，这些备份将被永久删除。仅在验证您不再需要这些备份后，再确认此操作。
+
+### 备份保护 {#backup-protection}
+
+为帮助防止数据丢失并保留一个恢复点，TiDB Cloud 会保护实例的**最近一次成功的自动备份**，直到其保留时间过期。因此，即使实例已被删除，你也无法手动删除这个受保护的最新备份。如果你尝试删除它，控制台会显示一条消息，说明该备份受保护，且在过期前无法删除。
 
 ### 删除备份文件 {#delete-backup-files}
 
@@ -86,6 +147,11 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 1. 进入实例的 [**Backup**](#view-the-backup-page) 页面。
 
 2. 找到要删除的对应备份文件，然后在 **Action** 列中点击 **...** > **Delete**。
+
+    > **注意：**
+    >
+    > TiDB Cloud 会保护实例的**最近一次成功的自动备份**，以帮助防止数据丢失。如果你尝试删除该备份，控制台会显示一条消息，说明该备份受保护，在过期前无法删除。
+    > 如果你在 TiDB Cloud 中拥有 `Organization Owner` 或 `Project Owner` 角色，则可以删除除最近一次成功备份之外的自动备份，或者删除手动备份。
 
 ## 手动备份 {#manual-backups}
 
@@ -107,7 +173,7 @@ aliases: ['/zh/tidbcloud/restore-deleted-tidb-cluster']
 
 - **存储位置**：手动备份存储在由 TiDB 管理的云存储中。
 
-- **成本**：由于手动备份会长期保留，因此会产生额外费用。
+- **成本**：由于手动备份会一直保留，直到你将其删除，因此会产生额外费用。
 
 - **限制**：手动备份不支持 point-in-time recovery (PITR) 或部分备份（例如表级或数据库级备份）。你不能将手动备份恢复到现有实例。每次恢复操作都会创建一个新实例。
 
