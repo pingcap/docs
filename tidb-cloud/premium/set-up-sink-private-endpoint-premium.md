@@ -5,7 +5,7 @@ summary: 了解如何为 changefeed 设置 private endpoint。
 
 # 为 Changefeed 设置 Private Endpoint
 
-本文档介绍如何在你的 {{{ .premium }}} 实例中为 changefeed 创建 private endpoint，从而使你能够通过私有连接安全地将数据流式传输到自托管 Kafka 或 MySQL。
+本文档介绍如何在你的 {{{ .premium }}} 实例中为 changefeed 创建 private endpoint，从而使你能够通过私有连接安全地将数据流式传输到自托管 Kafka、Amazon MSK Provisioned 集群或 MySQL。
 
 ## 前提条件 {#prerequisites}
 
@@ -14,7 +14,7 @@ summary: 了解如何为 changefeed 设置 private endpoint。
 
 ### 权限 {#permissions}
 
-只有在你的组织中具有以下任一角色的用户才能为 changefeed 创建 private endpoint：
+只有在你的组织中具有以下角色之一的用户才能为 changefeed 创建 private endpoint：
 
 - `Organization Owner`
 - 对应实例的 `Instance Manager`
@@ -28,12 +28,13 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 <SimpleTab>
 <div label="AWS">
 
-如果你的 changefeed 下游服务托管在 AWS 上，请收集以下信息：
+如果你的 changefeed 下游服务托管在 AWS 上，请根据连接类型收集以下信息：
 
-- 你的下游服务的 Private Endpoint Service 名称
-- 你的下游服务部署所在的可用区（AZ）
+- **AWS Endpoint Service**：你的下游服务的 endpoint service 名称，以及你的下游服务部署所在的可用区（AZ）。
 
-如果你的下游服务尚未提供 Private Endpoint Service，请按照[步骤 2. 将 Kafka 集群暴露为 Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)设置负载均衡器和 Private Link Service。
+    如果你的下游服务尚未提供 Private Endpoint Service，请按照[步骤 2. 将 Kafka 集群暴露为 Private Link Service](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)设置负载均衡器和 Private Link Service。
+
+- **Amazon MSK Provisioned**：你的 Amazon MSK Provisioned 集群的 ARN。要了解如何为 changefeed 创建 Amazon MSK Provisioned 集群，请参见[通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
 
 </div>
 
@@ -74,18 +75,32 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 <SimpleTab>
 <div label="AWS">
 
-1. 在 **Networking** 页面中，点击 **AWS Private Endpoint for Changefeed** 部分中的 **Create Private Endpoint**。
-2. 在 **Create Private Endpoint for Changefeed** 对话框中，为 private endpoint 输入一个名称。
+在 AWS 上，请根据下游服务选择连接类型：
+
+- 如果你的下游服务通过 AWS endpoint service 暴露，例如自托管 Kafka 或 MySQL，请选择 **AWS Endpoint Service**。
+- 如果你的下游服务是 Amazon MSK Provisioned 集群，请选择 **Amazon MSK Provisioned**。
+
+**AWS Endpoint Service**
+
+1. 在 **Networking** 页面中，点击 **AWS Private Endpoint for External Services** 部分中的 **Create Private Endpoint**。
+2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称。
 3. 按照提示授权 TiDB Cloud 的 [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) 创建 endpoint。
-4. 输入你在[网络](#network)部分中收集到的 **Endpoint Service Name**。
+4. 输入你在[网络](#network)部分中收集到的 **Endpoint Service Name**，然后选择 **AWS Endpoint Service** 作为连接类型。
 5. 选择 **Number of AZs**。确保 AZ 的数量和 AZ ID 与你的 Kafka 部署匹配。
 6. 如果此 private endpoint 是为 Apache Kafka 创建的，请启用 **Advertised Listener for Kafka** 选项。
 7. 使用 **TiDB Managed** 域名或 **Custom** 域名配置 Kafka 的 advertised listener。
 
-    - 若要将 **TiDB Managed** 域名用于 advertised listener，请在 **Domain Pattern** 字段中输入一个唯一字符串，然后点击 **Generate**。TiDB 将为每个可用区生成带有子域名的 broker 地址。
+    - 若要将 **TiDB Managed** 域名用于 advertised listener，请在 **Domain Pattern** 字段中输入一个唯一字符串，然后点击 **Generate**。TiDB Cloud 将为每个可用区生成带有子域名的 broker 地址。
     - 若要将你自己的 **Custom** 域名用于 advertised listener，请将域名类型切换为 **Custom**，在 **Custom Domain** 字段中输入根域名，点击 **Check**，然后为每个可用区指定 broker 子域名。
 
 8. 点击 **Create** 以验证配置并创建 private endpoint。
+
+**Amazon MSK Provisioned**
+
+1. 在 **Networking** 页面中，点击 **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
+2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称，然后选择 **AWS MSK Provisioned** 作为连接类型。
+3. 输入你的 Amazon MSK Provisioned 集群的 **MSK Cluster ARN**。要了解如何为 changefeed 创建 Amazon MSK Provisioned 集群，请参见[通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
+4. 点击 **Create** 以验证配置并创建 private endpoint。
 
 </div>
 

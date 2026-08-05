@@ -132,7 +132,11 @@ SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### INL_MERGE_JOIN
 
-`INL_MERGE_JOIN(t1_name [, tl_name])` Hint 告诉优化器使用索引嵌套循环合并连接算法。该算法的使用条件与索引嵌套循环连接算法相同。
+> **警告：**
+>
+> 从 TiDB v8.3.0 开始，`INL_MERGE_JOIN` hint 已被弃用且不再生效，因为它可能返回错误结果。如果查询指定了此 hint，TiDB 会忽略它并选择另一种连接算法。
+
+在 v8.3.0 之前，`INL_MERGE_JOIN(t1_name [, tl_name])` Hint 告诉优化器使用索引嵌套循环合并连接算法。该算法的使用条件与索引嵌套循环连接算法相同。
 
 ### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
 

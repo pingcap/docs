@@ -30,7 +30,8 @@ TiDB Cloud 支持与 Datadog 集成。你可以将 TiDB Cloud 配置为把你的
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
+    - 对于在 2026 年 7 月 1 日及之后创建的 TiDB Cloud Essential 实例，请下载此 JSON 文件：<https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>。请注意，`v2` 后缀仅表示仪表板 JSON 文件的版本。
+    - 对于在 2026 年 7 月 1 日之前创建的 TiDB Cloud Essential 实例，请下载此 JSON 文件：<https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>。
 
     </CustomContent>
 

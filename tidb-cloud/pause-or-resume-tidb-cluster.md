@@ -21,6 +21,8 @@ summary: 了解如何暂停或恢复 TiDB Cloud 专属集群。
 - 当有数据导入任务正在进行时，无法暂停集群。你可以等待导入任务完成或取消导入任务。
 - 当有备份任务正在进行时，无法暂停集群。你可以等待当前备份任务完成，或[删除正在运行的备份任务](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job)。
 - 如果集群存在任何 [changefeeds](/tidb-cloud/changefeed-overview.md)，则无法暂停。你需要[删除现有的 changefeed](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) 后才能暂停集群。
+- 当启用 [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) 时，无法暂停集群。你需要先在 **Backup Setting** 中关闭 **Point-in-time Restore** 开关，然后才能暂停集群。
+- 当有 [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) 任务正在运行时，无法暂停集群。暂停集群前，请确保没有迁移任务正在运行。
 
 ## 暂停 TiDB 集群
 

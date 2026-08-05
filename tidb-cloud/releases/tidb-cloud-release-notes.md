@@ -8,6 +8,44 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 8 月 4 日 {#august-4-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - 支持通过通用 webhook 订阅来自 TiDB Cloud Essential 的告警通知。
+
+        如果你的组织的[支持计划](/tidb-cloud/connected-care-overview.md#connected-care)为 **Enterprise** 或 **Premium**，现在你可以通过通用 webhook 接收告警通知。对于需要自定义负载格式的服务（例如 Telegram 或 Microsoft Teams），请使用轻量级中继来转换并转发通知。
+
+        更多信息，请参见 [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential)。
+
+- **TiDB Cloud Premium**
+
+    - 支持将 [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) 集群用作 TiDB Cloud Premium 实例的 changefeed sink。
+
+        对于托管在 AWS 上的 TiDB Cloud Premium 实例，现在你可以通过 AWS PrivateLink 将行变更事件流式传输到 Amazon MSK Provisioned 集群。
+
+        更多信息，请参见 [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 和 [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
+
+    - 支持通过通用 webhook 订阅来自 TiDB Cloud Premium 的告警通知。
+
+        如果你的组织的[支持计划](/tidb-cloud/connected-care-overview.md#connected-care)为 **Enterprise** 或 **Premium**，现在你可以通过通用 webhook 接收告警通知。对于需要自定义负载格式的服务（例如 Telegram 或 Microsoft Teams），请使用轻量级中继来转换并转发通知。
+
+        更多信息，请参见 [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium)。
+
+- **TiDB Cloud Dedicated**
+
+    - 修改 TiDB Cloud Dedicated 集群的暂停要求。
+
+        在[暂停 TiDB Cloud Dedicated 集群](/tidb-cloud/pause-or-resume-tidb-cluster.md)之前，你必须关闭 [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)，并确保没有正在运行的 Data Migration (DM) 任务。如果任一条件不满足，TiDB Cloud 会拒绝暂停请求并显示错误消息。
+
+    - 支持通过通用 webhook 订阅来自 TiDB Cloud Dedicated 的告警通知。
+
+        如果你的组织的[支持计划](/tidb-cloud/connected-care-overview.md#connected-care)为 **Enterprise** 或 **Premium**，现在你可以通过通用 webhook 接收告警通知。对于需要自定义负载格式的服务（例如 Telegram 或 Microsoft Teams），请使用轻量级中继来转换并转发通知。
+
+        更多信息，请参见 [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/)。
+
 ## 2026 年 7 月 28 日 {#july-28-2026}
 
 **通用变更**

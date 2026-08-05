@@ -67,7 +67,8 @@ TiDB Cloud 提供了一个 [Prometheus](https://prometheus.io/) API 端点。如
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>
+    - 对于在 2026 年 7 月 1 日及之后创建的 TiDB Cloud Essential 实例，请下载此 JSON 文件：<https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential-v2.json>。注意，`v2` 后缀仅表示仪表盘 JSON 文件的版本。
+    - 对于在 2026 年 7 月 1 日之前创建的 TiDB Cloud Essential 实例，请下载此 JSON 文件：<https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>。
 
     </CustomContent>
     <CustomContent plan="premium">

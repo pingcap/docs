@@ -68,6 +68,9 @@
       - [通过电子邮件订阅](/tidb-cloud/monitor-alert-email.md)
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
+      - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
+      - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
     - 第三方指标集成
       - [概览](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -620,13 +623,14 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected: Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [已连接：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)
