@@ -62,6 +62,18 @@ The storage time of console audit logs is 90 days, after which the logs will be 
 > - You cannot specify the storage location of console audit logs in TiDB Cloud.
 > - You cannot manually delete audit logs.
 
+## Console audit log integrity and access control
+
+To help you meet regulatory compliance requirements, TiDB Cloud provides the following measures to protect console audit logs from unauthorized modification and deletion:
+
+- **Completeness**: When console audit logging is enabled for your organization, the audit system records user operations that trigger the [supported event types](#console-audit-event-types). Log entries are typically available for viewing, download, and programmatic access via the API within 60 minutes of the event occurrence.
+
+  > **Note:**
+  >
+  > Console audit logging records operations that occur after it is enabled. Operations performed before enabling are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
+
+- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role can manage console audit logging. Other organization members cannot enable or disable audit logging, modify log settings, or delete logs.
+
 ## Console audit event types
 
 The console audit logs record various user activities on the TiDB Cloud console through event types.
