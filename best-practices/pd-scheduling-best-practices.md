@@ -6,7 +6,7 @@ aliases: ['/ja/docs/dev/best-practices/pd-scheduling-best-practices/','/ja/docs/
 
 # PDスケジュールのベストプラクティス {#best-practices-for-pd-scheduling}
 
-このドキュメントでは、PDスケジューリングの原則と戦略を、一般的なシナリオを通して詳細に解説し、アプリケーション開発の効率化を図ります。このドキュメントは、TiDB、TiKV、PDの基本的な知識と、以下のコアコンセプトを理解していることを前提としています。
+このドキュメントでは、PDスケジューリングの原則と戦略を、一般的なシナリオを通して詳細に解説し、アプリケーション開発の効率化を図ります。このドキュメントは、TiDB、TiKV、PDの基本的な知識と、以下のコア概念を理解していることを前提としています。
 
 -   [リーダー/フォロワー/ラーナー](/glossary.md#leaderfollowerlearner)
 -   [オペレーター](/glossary.md#operator)
