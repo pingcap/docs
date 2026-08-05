@@ -33,7 +33,7 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 プル リクエストを送信する前に、次のテンプレートを確認してください。
 
--   [コンセプト](/resources/doc-templates/template-concept.md)
+-   [概念](/resources/doc-templates/template-concept.md)
 -   [タスク](/resources/doc-templates/template-task.md)
 -   [参照](/resources/doc-templates/template-reference.md)
 -   [新機能](/resources/doc-templates/template-new-feature.md)

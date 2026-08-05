@@ -8,7 +8,7 @@
 - [Pythonで始める](/ai/quickstart-via-python.md)
 - [SQL経由で開始する](/ai/quickstart-via-sql.md)
 
-## コンセプト
+## 概念
 
 - [ベクトル検索](/ai/concepts/vector-search-overview.md)
 

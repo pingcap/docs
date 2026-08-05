@@ -7,7 +7,7 @@ summary: SHARD_ROW_ID_BITS属性について学びましょう。
 
 このドキュメントでは、暗黙的に[`_tidb_rowid`](/tidb-rowid.md)シャーディングされた後にシャードのビット数を設定するために使用される`SHARD_ROW_ID_BITS`テーブル属性を紹介します。
 
-## コンセプト {#concept}
+## 概念 {#concept}
 
 クラスター化されていない主キーまたは主キーのないテーブルの場合、TiDB は自動的に生成された[`_tidb_rowid`](/tidb-rowid.md)を暗黙のAUTO_INCREMENT行IDとして使用します。多数の`INSERT`操作が実行されると、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 

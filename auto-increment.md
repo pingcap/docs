@@ -25,7 +25,7 @@ summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
 
 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_INCREMENT`パラメータを使用して、増分フィールドの初期値を指定することもできます。
 
-## コンセプト {#concept}
+## 概念 {#concept}
 
 `AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。`INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
 

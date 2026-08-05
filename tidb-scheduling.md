@@ -5,7 +5,7 @@ summary: TiDB クラスターに PD スケジューリングコンポーネン�
 
 # TiDB スケジューリング {#tidb-scheduling}
 
-Placement Driver（[PD](https://github.com/tikv/pd)）はTiDBクラスタのマネージャとして機能し、クラスタ内のリージョンのスケジュールも行います。この記事では、PDスケジューリングコンポーネントの設計とコアコンセプトを紹介します。
+Placement Driver（[PD](https://github.com/tikv/pd)）はTiDBクラスタのマネージャとして機能し、クラスタ内のリージョンのスケジュールも行います。この記事では、PDスケジューリングコンポーネントの設計とコア概念を紹介します。
 
 ## スケジュール状況 {#scheduling-situations}
 
