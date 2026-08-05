@@ -59,7 +59,7 @@ TiDB バージョン: 7.3.0
 
 -   予想以上にリソースを使用するクエリを手動でマークする (実験的) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB)
 
-    TiDB v7.2.0では、想定以上のリソースを使用するクエリ（暴走クエリ）を自動的にダウングレードまたはキャンセルすることで、TiDBが自動的に管理します。しかし、実際の運用では、ルールだけではすべてのケースに対応できるわけではありません。そこで、TiDB v7.3.0では、暴走クエリを手動でマークする機能が導入されました。新しいコマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を使用すると、SQLテキスト、SQLダイジェスト、または実行プランに基づいて暴走クエリをマークでき、マークされた暴走クエリをダウングレードまたはキャンセルできます。
+    TiDB v7.2.0では、想定以上のリソースを使用するクエリ（暴走クエリ）を自動的にダウングレードまたはキャンセルすることで、TiDBが自動的に管理します。しかし、実際の運用では、ルールだけではすべてのケースに対応できるわけではありません。そこで、TiDB v7.3.0では、暴走クエリを手動でマークする機能が導入されました。新しいコマンド[`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)を使用すると、SQLテキスト、SQLダイジェスト、または実行計画に基づいて暴走クエリをマークでき、マークされた暴走クエリをダウングレードまたはキャンセルできます。
 
     この機能は、データベースにおける突発的なパフォーマンス問題に対する効果的な介入手段を提供します。クエリによって引き起こされるパフォーマンス問題の場合、根本原因を特定する前に、この機能によって全体的なパフォーマンスへの影響を迅速に軽減し、システムサービスの品質を向上させることができます。
 
@@ -87,7 +87,7 @@ TiDB バージョン: 7.3.0
 
 -   Plan Replayer は履歴統計のエクスポートをサポート [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate)
 
-    バージョン7.3.0以降、 [`dump with stats as of timestamp`](/sql-plan-replayer.md)が新たに追加されたため、Plan Replayerを使用して、指定した時点におけるSQL関連オブジェクトの統計情報をエクスポートできます。実行プランの問題を診断する際に、履歴統計情報を正確に取得することで、問題発生時に実行プランがどのように生成されたかをより詳細に分析できます。これにより、問題の根本原因を特定しやすくなり、実行プランの問題診断の効率が大幅に向上します。
+    バージョン7.3.0以降、 [`dump with stats as of timestamp`](/sql-plan-replayer.md)が新たに追加されたため、Plan Replayerを使用して、指定した時点におけるSQL関連オブジェクトの統計情報をエクスポートできます。実行計画の問題を診断する際に、履歴統計情報を正確に取得することで、問題発生時に実行計画がどのように生成されたかをより詳細に分析できます。これにより、問題の根本原因を特定しやすくなり、実行計画の問題診断の効率が大幅に向上します。
 
     詳細については、[ドキュメント](/sql-plan-replayer.md)を参照してください。
 
@@ -121,7 +121,7 @@ TiDB バージョン: 7.3.0
 
 -   TiDB
 
-    -   MPP はTiFlashエンジンが提供する分散コンピューティング フレームワークであり、ノード間でのデータ交換を可能にし、高性能かつ高スループットの SQL アルゴリズムを提供します。他のプロトコルと比較して、MPP プロトコルはより成熟しており、より優れたタスクおよびリソース管理を提供できます。v7.3.0 以降、TiDB が計算タスクをTiFlashにプッシュする場合、オプティマイザはデフォルトで MPP プロトコルを使用した実行プランのみを生成します。[`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)が`OFF`に設定されている場合、TiDB をアップグレードした後にクエリでエラーが発生する可能性があります。アップグレードの前に`tidb_allow_mpp`の値を確認し、 `ON`に設定することをお勧めします。コスト見積もりに基づいて実行プランを生成するために、オプティマイザがCop、BatchCop、およびMPPプロトコルのいずれかを選択する必要がある場合は、 [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)変数を`ON`に設定できます。
+    -   MPP はTiFlashエンジンが提供する分散コンピューティング フレームワークであり、ノード間でのデータ交換を可能にし、高性能かつ高スループットの SQL アルゴリズムを提供します。他のプロトコルと比較して、MPP プロトコルはより成熟しており、より優れたタスクおよびリソース管理を提供できます。v7.3.0 以降、TiDB が計算タスクをTiFlashにプッシュする場合、オプティマイザはデフォルトで MPP プロトコルを使用した実行計画のみを生成します。[`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)が`OFF`に設定されている場合、TiDB をアップグレードした後にクエリでエラーが発生する可能性があります。アップグレードの前に`tidb_allow_mpp`の値を確認し、 `ON`に設定することをお勧めします。コスト見積もりに基づいて実行計画を生成するために、オプティマイザがCop、BatchCop、およびMPPプロトコルのいずれかを選択する必要がある場合は、 [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)変数を`ON`に設定できます。
 
 -   Backup & Restore (BR)
 
@@ -143,7 +143,7 @@ TiDB バージョン: 7.3.0
 | 変数名                                                                                                                     | 変更の種類  | 説明                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720) | 変更     | このシステム変数はバージョン7.3.0以降で有効になります。TiFlash MPPで非再帰的な共通テーブル式（CTE）を実行できるかどうかを制御します。 |
-| [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)                                     | 新しく追加された | このシステム変数は、TiDBが計算タスクをTiFlashにプッシュダウンする際に、実行プランを生成するためのプロトコルを選択するために使用されます。   |
+| [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)                                     | 新しく追加された | このシステム変数は、TiDBが計算タスクをTiFlashにプッシュダウンする際に、実行計画を生成するためのプロトコルを選択するために使用されます。   |
 | [`tidb_lock_unchanged_keys`](/system-variables.md#tidb_lock_unchanged_keys-new-in-v711-and-v730)                        | 新しく追加された | この変数は、特定のシナリオにおいて、トランザクションに関与しているものの、変更されていないキーをロックするかどうかを制御するために使用されます。     |
 | [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) | 新しく追加された | `EXPLAIN`ステートメントが、最適化段階で展開可能な定数サブクエリの実行を無効にするかどうかを制御します。                     |
 | [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730)               | 新しく追加された | この変数は、パーティション統計情報が欠落している場合にグローバル統計情報を生成するかどうかを制御します。                         |

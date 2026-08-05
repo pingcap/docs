@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.8
     -   `Selectivity()` の貪欲探索手順で選択性の低いインデックスを優先する [＃20154](https://github.com/pingcap/tidb/pull/20154)
     -   コプロセッサー実行時統計にRPC実行時情報をさらに記録します。 [＃19264](https://github.com/pingcap/tidb/pull/19264)
     -   スローログの解析を高速化してクエリパフォーマンスを向上させる[＃20556](https://github.com/pingcap/tidb/pull/20556)
-    -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プラン バインディング ステージ中にタイムアウト実行プランを待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
+    -   SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プラン バインディング ステージ中にタイムアウト実行計画を待機します[＃20530](https://github.com/pingcap/tidb/pull/20530)
     -   スローログに実行再試行時間を追加し、スロークエリの結果[＃20495](https://github.com/pingcap/tidb/pull/20495) [＃20494](https://github.com/pingcap/tidb/pull/20494)
     -   `table_storage_stats`システムテーブルを追加する [＃20431](https://github.com/pingcap/tidb/pull/20431)
     -   `INSERT` `REPLACE`のRPC実行時統計情報`UPDATE`追加する[＃20430](https://github.com/pingcap/tidb/pull/20430)
@@ -115,7 +115,7 @@ TiDB バージョン: 4.0.8
     -   `ALTER TABLE`を使用して`Enum`/`Set`タイプを変更するときに制約がチェックされない問題を修正[＃20046](https://github.com/pingcap/tidb/pull/20046)
     -   複数の演算子を並行処理に使用した場合に記録される`cop`タスクの誤った実行時間情報を修正[＃19947](https://github.com/pingcap/tidb/pull/19947)
     -   読み取り専用システム変数をセッション変数として明示的に選択できない問題を修正[＃19944](https://github.com/pingcap/tidb/pull/19944)
-    -   重複した`ORDER BY`条件により、最適ではない実行プランが発生する可能性がある問題を修正しました。 [＃20333](https://github.com/pingcap/tidb/pull/20333)
+    -   重複した`ORDER BY`条件により、最適ではない実行計画が発生する可能性がある問題を修正しました。 [＃20333](https://github.com/pingcap/tidb/pull/20333)
     -   フォントサイズが最大許容値を超えると、生成されたメトリックプロファイルが失敗する可能性がある問題を修正しました。 [＃20637](https://github.com/pingcap/tidb/pull/20637)
 
 -   TiKV

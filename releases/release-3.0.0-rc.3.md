@@ -38,7 +38,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   `create user`などの複数`revoke`ステートメント`grant`連続して実行した場合の不正な実行問題を修正しました[＃10737](https://github.com/pingcap/tidb/pull/10737)
     -   コプロセッサーへの式のプッシュダウンを禁止するブロックリストを追加します。 [＃10791](https://github.com/pingcap/tidb/pull/10791)
     -   クエリがメモリ構成制限を超えたときに`expensive query`ログを出力する機能を追加 [＃10849](https://github.com/pingcap/tidb/pull/10849)
-    -   変更されたバインディング実行プランの更新時間を制御する`bind-info-lease`構成項目を追加します。 [＃10727](https://github.com/pingcap/tidb/pull/10727)
+    -   変更されたバインディング実行計画の更新時間を制御する`bind-info-lease`構成項目を追加します。 [＃10727](https://github.com/pingcap/tidb/pull/10727)
     -   `execdetails.ExecDetails`ポインタの結果としてコプロセッサーリソースを迅速に解放できないことによって引き起こされる、高同時シナリオでのOOM問題を修正しました。 [＃10832](https://github.com/pingcap/tidb/pull/10832)
     -   `kill`文によって発生するpanic問題を修正[＃10876](https://github.com/pingcap/tidb/pull/10876)
 

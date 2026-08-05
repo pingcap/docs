@@ -326,7 +326,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   実行計画をスローログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   バージョン 6.1.0 以降、実行プランをスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
+-   バージョン 6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 設定項目の[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`が同時に設定されている場合は、後者が有効になります。
 
 ### `expensive-threshold` {#expensive-threshold}
 
@@ -637,7 +637,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDBの起動時に、サービスを提供する前に統計情報の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンでは`false` 、v7.2.0 以降のバージョンでは`true` 。
 -   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計情報の初期化が完了するまで待機する必要があります。テーブルとパーティションの数が多く、lite-init-stats の値が`false`の場合、 `force-init-stats`を`true`に設定すると、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)がサービスの提供を開始するまでの時間が長くなる可能性があることに注意してください。
--   `force-init-stats`の値が`false`の場合、統計情報の初期化が完了する前に TiDB はサービスを提供できますが、オプティマイザは擬似統計情報を使用して決定を行うため、最適ではない実行プランになる可能性があります。
+-   `force-init-stats`の値が`false`の場合、統計情報の初期化が完了する前に TiDB はサービスを提供できますが、オプティマイザは擬似統計情報を使用して決定を行うため、最適ではない実行計画になる可能性があります。
 
 ### `enable-async-batch-get` <span class="version-mark">v8.5.5で追加</span> {#enable-async-batch-get-new-in-v855}
 
@@ -947,7 +947,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 
 ### `tidb_record_plan_in_slow_log` {#tidb_record_plan_in_slow_log}
 
--   この設定は、スロークエリの実行プランをスローログに含めるかどうかを制御するために使用されます。
+-   この設定は、スロークエリの実行計画をスローログに含めるかどうかを制御するために使用されます。
 -   デフォルト値: `1`
 -   値のオプション: `1` (有効、デフォルト) または`0` (無効)。
 -   この設定値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します。

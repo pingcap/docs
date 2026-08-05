@@ -194,7 +194,7 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### 左セミ結合 {#left-semi-join}
 
-TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`サポートしていません。ただし、実行プランレベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等のJOINクエリに対して`semi join`デフォルトの結合方法として使用します。
+TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`サポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等のJOINクエリに対して`semi join`デフォルトの結合方法として使用します。
 
 ## 暗黙的な結合 {#implicit-join}
 

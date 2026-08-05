@@ -29,7 +29,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ### 2.1 一時的な増加 {#21-transient-increase}
 
--   2.1.1 TiDB の実行プランが間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
+-   2.1.1 TiDB の実行計画が間違っているとレイテンシーが増加します[3.3](#33-wrong-execution-plan)を参照してください。
 -   2.1.2 PD Leader選挙問題またはOOM。5.2および[5.2](#52-pd-election) [5.3](#53-pd-oom)を参照してください。
 -   2.1.3 一部のTiKVインスタンスでLeaderが多数ドロップする[4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照。
 -   2.1.4 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
@@ -46,7 +46,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 -   2.2.3 TiKV の書き込み速度が遅い[4.5](#45-tikv-write-is-slow)を参照してください。
 
--   2.2.4 TiDB の実行プランが間違っています[3.3](#33-wrong-execution-plan)を参照してください。
+-   2.2.4 TiDB の実行計画が間違っています[3.3](#33-wrong-execution-plan)を参照してください。
 
 -   2.2.5 他の原因については、[読み取り/書き込みレイテンシの増加に関するトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
@@ -145,9 +145,9 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
 -   3.3.1 症状
 
-    -   SQLクエリの実行時間が以前の実行時と比べて大幅に長くなっている、または実行プランが突然変更されている場合。実行プランがスローログに記録されている場合は、実行プランを直接比較できます。
+    -   SQLクエリの実行時間が以前の実行時と比べて大幅に長くなっている、または実行計画が突然変更されている場合。実行計画がスローログに記録されている場合は、実行計画を直接比較できます。
 
-    -   SQLクエリの実行時間は、MySQLなどの他のデータベースと比較して非常に長くなっています。 `Join Order`などの他のデータベースと実行プランを比較して違いを確認してください。
+    -   SQLクエリの実行時間は、MySQLなどの他のデータベースと比較して非常に長くなっています。 `Join Order`などの他のデータベースと実行計画を比較して違いを確認してください。
 
     -   スローログでは、SQL実行時間`Scan Keys`の数が多くなっています。
 
@@ -155,11 +155,11 @@ OOM のトラブルシューティングの詳細については、 [TiDBのメ�
 
     -   `explain analyze {SQL}` 。実行時間が許容範囲内であれば、 `explain analyze`の結果の`count`と`execution info`の`row`の数を比較します。 `TableScan/IndexScan`行で大きな差が見つかった場合は、統計情報が間違っている可能性があります。他の行で大きな差が見つかった場合は、統計情報に問題がない可能性があります。
 
-    -   `select count(*)` 。実行プランに`join`操作が含まれている場合、 `explain analyze`の実行に時間がかかる場合があります。 `select count(*)`を実行し、 `TableScan/IndexScan`の結果に含まれる`row count`の情報を比較することで、 `explain`情報にあるかどうかを確認できます。
+    -   `select count(*)` 。実行計画に`join`操作が含まれている場合、 `explain analyze`の実行に時間がかかる場合があります。 `select count(*)`を実行し、 `TableScan/IndexScan`の結果に含まれる`row count`の情報を比較することで、 `explain`情報にあるかどうかを確認できます。
 
 -   3.3.3 緩和策
 
-    -   v3.0以降のバージョンでは、 `SQL Bind`機能を使用して実行プランをバインドします。
+    -   v3.0以降のバージョンでは、 `SQL Bind`機能を使用して実行計画をバインドします。
 
     -   統計情報を更新します。問題の原因が統計情報にあるとおおよそ確信できる場合は、[統計情報を捨てる](/statistics.md#export-statistics)。原因が古い統計情報である場合、例えば`modify count/row count`の`show stats_meta`が特定の値 (例えば 0.3) より大きい場合、またはテーブルに時間列のインデックスがある場合、 `analyze table`を使用して復旧を試みることもできます。 `auto analyze`が設定されている場合は、 `tidb_auto_analyze_ratio`システム変数が大きすぎる (例えば 0.3 より大きい) かどうか、および現在時刻が`tidb_auto_analyze_start_time`と`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
 
@@ -267,7 +267,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     -   `append log duration`値が高いため、メッセージの処理が遅くなります。 `append log duration`値が高い理由については、 [4.5](#45-tikv-write-is-slow)を参照してください。
     -   raftstore は、大量のメッセージを瞬時に受信し (TiKV Raftメッセージ ダッシュボードで確認できます)、処理に失敗します。通常、この一時的な`channel full`ステータスはサービスに影響を与えません。
 
--   4.3.4 TiKV コプロセッサがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサでタスクがスタックされます。実行プランの変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
+-   4.3.4 TiKV コプロセッサがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサでタスクがスタックされます。実行計画の変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
 
 ### 4.4 一部のTiKVノードは頻繁にLeaderをドロップする {#44-some-tikv-nodes-drop-leader-frequently}
 

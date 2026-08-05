@@ -65,7 +65,7 @@
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
     - SQLチューニング
       - [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-      - クエリ実行プランの理解
+      - クエリ実行計画の理解
         - [概要](/explain-overview.md)
         - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
         - [索引](/explain-indexes.md)

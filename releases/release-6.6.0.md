@@ -53,7 +53,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   `LIMIT`条項の制限を解除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
-    バージョン 6.6.0 以降、TiDB プラン キャッシュは`LIMIT`や`LIMIT ?`などの変数を`LIMIT 10, ?`パラメータとして指定した実行プランのキャッシュをサポートします。この機能により、より多くの SQL ステートメントがプラン キャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行プランのみをキャッシュできます。
+    バージョン 6.6.0 以降、TiDB プラン キャッシュは`LIMIT`や`LIMIT ?`などの変数を`LIMIT 10, ?`パラメータとして指定した実行計画のキャッシュをサポートします。この機能により、より多くの SQL ステートメントがプラン キャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行計画のみをキャッシュできます。
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
@@ -94,13 +94,13 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   過去の実行計画を拘束することは、GAです。 [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
-    バージョン6.5.0では、TiDBは[`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)文のバインディングターゲットを拡張し、過去の実行プランに基づいてバインディングを作成する機能をサポートしています。バージョン6.6.0では、この機能は一般提供（GA）となります。実行プランの選択は、現在のTiDBノードに限定されません。任意のTiDBノードによって生成された過去の実行プランを[SQLバインディング](/sql-statements/sql-statement-create-binding.md)のターゲットとして選択できるため、機能の使いやすさがさらに向上します。
+    バージョン6.5.0では、TiDBは[`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)文のバインディングターゲットを拡張し、過去の実行計画に基づいてバインディングを作成する機能をサポートしています。バージョン6.6.0では、この機能は一般提供（GA）となります。実行計画の選択は、現在のTiDBノードに限定されません。任意のTiDBノードによって生成された過去の実行計画を[SQLバインディング](/sql-statements/sql-statement-create-binding.md)のターゲットとして選択できるため、機能の使いやすさがさらに向上します。
 
     詳細については、 [ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 
 -   いくつかのオプティマイザー ヒントを追加 [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent)
 
-    TiDB は v6.6.0 で`LIMIT`操作の実行プランの選択を制御するためのオプティマイザヒントをいくつか追加しました。
+    TiDB は v6.6.0 で`LIMIT`操作の実行計画の選択を制御するためのオプティマイザヒントをいくつか追加しました。
 
     -   [`ORDER_INDEX()`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-) : オプティマイザに指定されたインデックスを使用するように指示し、データの読み取り時にインデックスの順序を維持し、 `Limit + IndexScan(keep order: true)`に似たプランを生成します。
     -   [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name-) : オプティマイザに指定されたインデックスを使用するように指示し、データの読み取り時にインデックスの順序を保持せず、 `TopN + IndexScan(keep order: false)`に似たプランを生成します。
@@ -210,15 +210,15 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 -   TiDB DashboardでSQLバインディングを素早く作成するサポート [#781](https://github.com/pingcap/tidb-dashboard/issues/781) @[YiniXu9506](https://github.com/YiniXu9506)
 
-    TiDB v6.6.0では、ステートメント履歴からSQLバインディングを作成する機能がサポートされており、TiDB Dashboard上でSQLステートメントを特定の実行プランにすばやくバインドできます。
+    TiDB v6.6.0では、ステートメント履歴からSQLバインディングを作成する機能がサポートされており、TiDB Dashboard上でSQLステートメントを特定の実行計画にすばやくバインドできます。
 
     この機能は、ユーザーフレンドリーなインターフェースを提供することで、TiDBにおけるプランのバインディングプロセスを簡素化し、操作の複雑さを軽減し、プランバインディングプロセスの効率とユーザーエクスペリエンスを向上させます。
 
     詳細については、 [ドキュメント](/dashboard/dashboard-statement-details.md#fast-plan-binding)を参照してください。
 
--   実行プランのキャッシュに関する警告を追加 @[qw4990](https://github.com/qw4990)
+-   実行計画のキャッシュに関する警告を追加 @[qw4990](https://github.com/qw4990)
 
-    実行プランをキャッシュできない場合、TiDB は診断を容易にするために警告でその理由を示します。例:
+    実行計画をキャッシュできない場合、TiDB は診断を容易にするために警告でその理由を示します。例:
 
     ```sql
     mysql> PREPARE st FROM 'SELECT * FROM t WHERE a<?';
@@ -238,7 +238,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     +---------+------+----------------------------------------------+
     ```
 
-    前述の例では、オプティマイザが非INT型をINT型に変換し、パラメータの変更に伴って実行プランが変わる可能性があるため、TiDBはプランをキャッシュしません。
+    前述の例では、オプティマイザが非INT型をINT型に変換し、パラメータの変更に伴って実行計画が変わる可能性があるため、TiDBはプランをキャッシュしません。
 
     詳細については、 [ドキュメント](/sql-prepared-plan-cache.md#diagnostics-of-prepared-plan-cache)を参照してください。
 
@@ -248,11 +248,11 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、[ドキュメント](/identify-slow-queries.md)を参照してください。
 
--   SQL実行プランの生成を自動的にキャプチャする [#38779](https://github.com/pingcap/tidb/issues/38779) @[Yisaer](https://github.com/Yisaer)
+-   SQL実行計画の生成を自動的にキャプチャする [#38779](https://github.com/pingcap/tidb/issues/38779) @[Yisaer](https://github.com/Yisaer)
 
     実行計画の問題をトラブルシューティングする過程で、 `PLAN REPLAYER`現場を保存し、診断の効率を向上させるのに役立ちます。しかし、シナリオによっては、一部の実行計画の生成を自由に再現できないため、診断作業がより困難になります。
 
-    このような問題に対処するため、TiDB v6.6.0 では`PLAN REPLAYER`により自動キャプチャ機能が拡張されました。 `PLAN REPLAYER CAPTURE`コマンドを使用すると、対象の SQL ステートメントを事前に登録し、同時に対象の実行プランを指定できます。TiDB は、登録された対象に一致する SQL ステートメントまたは実行プランを検出すると、 `PLAN REPLAYER`情報を自動的に生成してパッケージ化します。実行プランが不安定な場合、この機能により診断効率が向上します。
+    このような問題に対処するため、TiDB v6.6.0 では`PLAN REPLAYER`により自動キャプチャ機能が拡張されました。 `PLAN REPLAYER CAPTURE`コマンドを使用すると、対象の SQL ステートメントを事前に登録し、同時に対象の実行計画を指定できます。TiDB は、登録された対象に一致する SQL ステートメントまたは実行計画を検出すると、 `PLAN REPLAYER`情報を自動的に生成してパッケージ化します。実行計画が不安定な場合、この機能により診断効率が向上します。
 
     この機能を使用するには、 [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)の値を`ON`に設定してください。
 
@@ -312,15 +312,15 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                                                          | 変更     | この変数は、履歴統計を有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、履歴統計がデフォルトで有効になります。                                                                                                                                                                                       |
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)                                                                | 変更     | この変数はv6.6.0から有効になり、 [`PLAN REPLAYER CAPTURE`機能](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans)を有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、 `PLAN REPLAYER CAPTURE`機能がデフォルトで有効になります。                                                   |
 | [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)                                                                            | 変更     | デフォルト値が`ON`から`OFF`に変更されます。これは、TiDB でテレメトリがデフォルトで無効になっていることを意味します。                                                                                                                                                                                            |
-| `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行プランの最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
+| `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行計画の最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用するラーナーレプリカを指定できます。                                                                                                                                                                                  |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | TiDBクラスタの読み取り可用性を向上させるため、この変数に新しい値オプション`prefer-leader`が追加されました。このオプションを設定すると、TiDBはリーダーレプリカからの読み取りを優先します。リーダーレプリカのパフォーマンスが著しく低下した場合、TiDBは自動的にフォロワーレプリカからの読み取りに切り替わります。                                                                                        |
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレータのコプロセッサータスクのバッチ サイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに 4 つのコプロセッサータスクが 1 つのタスクにまとめられます。                                                                                                          |
-| [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレータのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行プランを選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
-| [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行プランのバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行プランを選択します。デフォルト値`UNSPECIFIED` 、TiDBが最新バージョン`1`自動的に選択することを意味します。                                                                                                                                  |
+| [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレータのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
+| [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行計画のバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行計画を選択します。デフォルト値`UNSPECIFIED` 、TiDBが最新バージョン`1`自動的に選択することを意味します。                                                                                                                                  |
 | [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)                             | 新しく追加された | この変数は、DDL 再編成フェーズの分散実行を有効にしてこのフェーズを高速化するかどうかを制御します。デフォルト値`OFF`は、デフォルトでは DDL 再編成フェーズの分散実行を有効にしないことを意味します。現在、この変数は`ADD INDEX`に対してのみ有効です。                                                                                                                       |
 | [`tidb_enable_historical_stats_for_capture`](/system-variables.md#tidb_enable_historical_stats_for_capture)                                                  | 新しく追加された | この変数は`PLAN REPLAYER CAPTURE`で取得される情報に、デフォルトで履歴統計が含まれるかどうかを制御します。デフォルト値の`OFF`は、デフォルトでは履歴統計が含まれないことを意味します。                                                                                                                                                     |
-| [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit-new-in-v660)                                          | 新しく追加された | この変数は`Limit`の後に`COUNT`が含まれる実行プランをプリペアドプランキャッシュがキャッシュするかどうかを制御します。デフォルト値は`ON`で、これはプリペアドプランキャッシュ がそのような実行プランのキャッシュをサポートすることを意味します。ただし、 プリペアドプランキャッシュ は、 10000 を超える数値をカウントする`COUNT`条件を含む実行プランのキャッシュをサポートしていないことに注意してください。                      |
+| [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit-new-in-v660)                                          | 新しく追加された | この変数は`Limit`の後に`COUNT`が含まれる実行計画をプリペアドプランキャッシュがキャッシュするかどうかを制御します。デフォルト値は`ON`で、これはプリペアドプランキャッシュ がそのような実行計画のキャッシュをサポートすることを意味します。ただし、 プリペアドプランキャッシュ は、 10000 を超える数値をカウントする`COUNT`条件を含む実行計画のキャッシュをサポートしていないことに注意してください。                      |
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)                                                              | 新しく追加された | この変数は、リソース制御機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。この変数を`ON`に設定すると、TiDB クラスタはリソース グループに基づいたアプリケーションのリソース分離をサポートします。                                                                                                                                               |
 | [`tidb_historical_stats_duration`](/system-variables.md#tidb_historical_stats_duration-new-in-v660)                                                          | 新しく追加された | この変数は、過去の統計情報をストレージに保存する期間を制御します。デフォルト値は7日間です。                                                                                                                                                                                                             |
 | [`tidb_index_join_double_read_penalty_cost_rate`](/system-variables.md#tidb_index_join_double_read_penalty_cost_rate-new-in-v660)                            | 新しく追加された | この変数は、インデックス結合の選択にペナルティコストを追加するかどうかを制御します。デフォルト値`0`は、この機能がデフォルトで無効になっていることを意味します。                                                                                                                                                                            |
@@ -388,7 +388,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     -   `ADD INDEX`の分散データバックフィルをサポート（実験的） [#37119](https://github.com/pingcap/tidb/issues/37119) @[zimulala](https://github.com/zimulala)
     -   `CURDATE()`を列のデフォルト値として使用することをサポートします [#38356](https://github.com/pingcap/tidb/issues/38356) @[CbcWestwolf](https://github.com/CbcWestwolf)
     -   `partial order prop push down`が LIST 型のパーティション テーブルをサポートするようになりました [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
-    -   オプティマイザーのヒントと実行プランのバインディング間の競合に関するエラー メッセージを追加 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
+    -   オプティマイザーのヒントと実行計画のバインディング間の競合に関するエラー メッセージを追加 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
     -   プランキャッシュ戦略を最適化し、一部のシナリオでプランキャッシュを使用する際に最適でないプランを回避する[#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
     -   メモリリークとパフォーマンスの低下を避けるために、期限切れの領域キャッシュを定期的にクリアします [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
     -   `MODIFY COLUMN`はパーティションテーブルではサポートされていません [#39915](https://github.com/pingcap/tidb/issues/39915) @[wjhuang2016](https://github.com/wjhuang2016)

@@ -84,11 +84,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)を参照してください。
 
--   バインディング履歴実行プランのサポート（実験的） [＃39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
+-   バインディング履歴実行計画のサポート（実験的） [＃39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
-    SQL文の場合、実行中の様々な要因により、オプティマイザが以前の最適な実行プランではなく新しい実行プランを選択することがあり、SQLパフォーマンスに影響が出ることがあります。この場合、最適な実行プランがまだクリアされていない場合、SQL実行履歴に残ります。
+    SQL文の場合、実行中の様々な要因により、オプティマイザが以前の最適な実行計画ではなく新しい実行計画を選択することがあり、SQLパフォーマンスに影響が出ることがあります。この場合、最適な実行計画がまだクリアされていない場合、SQL実行履歴に残ります。
 
-    TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行プランのバインディングをサポートします。SQLステートメントの実行プランが変更された場合、元の実行プランがSQL実行履歴メモリテーブル（例えば`statements_summary`に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行プランをバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行プラン変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
+    TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行計画のバインディングをサポートします。SQLステートメントの実行計画が変更された場合、元の実行計画がSQL実行履歴メモリテーブル（例えば`statements_summary`に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行計画をバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行計画変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
 
     詳細については[ドキュメント](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)を参照してください。
 
@@ -167,9 +167,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     -   `regexp_instr`
     -   `regexp_substr`
 
--   [ビュー](/views.md) で実行プラン生成に干渉するグローバルオプティマイザヒントをサポートします [＃37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
+-   [ビュー](/views.md) で実行計画生成に干渉するグローバルオプティマイザヒントをサポートします [＃37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
 
-    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行プランにオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行プランの制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要です。
+    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要です。
 
     詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
@@ -179,7 +179,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 -   オプティマイザーはより正確なコストモデルバージョン2（GA） を導入しました [＃35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
 
-    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行プランを選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
+    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
 
     コスト モデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
@@ -209,9 +209,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
--   JSON形式での実行プランの出力をサポート[＃39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
+-   JSON形式での実行計画の出力をサポート[＃39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
-    TiDB v6.5.0では、実行プランの出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行プランをJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行プランをより便利かつ正確に読み取ることができるため、SQL診断やチューニングの利便性が向上します。
+    TiDB v6.5.0では、実行計画の出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行計画をJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行計画をより便利かつ正確に読み取ることができるため、SQL診断やチューニングの利便性が向上します。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)を参照してください。
 
@@ -447,7 +447,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     -   v4.0.16からv6.4.0 にアップグレードした後に`ADMIN SHOW JOB`操作がパニックになる問題を修正 [＃38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
     -   `tidb_decode_key`関数がパーティションテーブルのエンコーディングを正しく解析できない問題を修正しました [＃39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
     -   ログローテーション中に gRPC エラーログが正しいログファイルにリダイレクトされない問題を修正しました [＃38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
-    -   TiKV が読み取りエンジンとして設定されていない場合に、TiDB が`BEGIN; SELECT... FOR UPDATE;`ポイントクエリに対して予期しない実行プランを生成する問題を修正しました[＃39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
+    -   TiKV が読み取りエンジンとして設定されていない場合に、TiDB が`BEGIN; SELECT... FOR UPDATE;`ポイントクエリに対して予期しない実行計画を生成する問題を修正しました[＃39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
     -   誤って`StreamAgg` TiFlashにプッシュダウンすると、間違った結果が発生する問題を修正しました。 [＃39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
 -   TiKV

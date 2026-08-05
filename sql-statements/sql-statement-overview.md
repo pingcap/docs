@@ -194,7 +194,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DESC`](/sql-statements/sql-statement-desc.md)         | テーブルの構造を示す`DESCRIBE`のエイリアス。 |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | テーブルの構造を示します。               |
 | [`DO`](/sql-statements/sql-statement-do.md)             | 式を実行しますが、結果は返しません。          |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)   | クエリの実行プランを表示します。            |
+| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)   | クエリの実行計画を表示します。            |
 | [`TRACE`](/sql-statements/sql-statement-trace.md)       | クエリ実行に関する詳細情報を提供します。        |
 | [`USE`](/sql-statements/sql-statement-use.md)           | 現在のデータベースを設定します。            |
 
@@ -320,7 +320,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | ------------------------------------------------------------------------------------- | -------------------------------------------- |
 | [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)                     | テーブルに関する統計情報を収集します。                          |
 | [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)                   | SQL文の実行プランバインディングを作成します。                     |
-| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL文から実行プランのバインディングを削除します。                   |
+| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL文から実行計画のバインディングを削除します。                   |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)                           | テーブルから統計情報を削除します。                            |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                 | `EXPLAIN`と似た動作をしますが、大きな違いは、ステートメントを実行することです。 |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)                           | 統計情報をTiDBにロードします。                            |

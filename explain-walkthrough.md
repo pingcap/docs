@@ -5,7 +5,7 @@ summary: 例文を順に見ながらEXPLAINの使い方を学びます
 
 # <code>EXPLAIN</code>ウォークスルー {#code-explain-code-walkthrough}
 
-SQLは宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行プランを確認する必要があります。
+SQLは宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行計画を確認する必要があります。
 
 <CustomContent platform="tidb">
 
@@ -50,7 +50,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 ## 現在のパフォーマンスを評価する {#assess-the-current-performance}
 
-`EXPLAIN`クエリ実行プランを返すだけで、クエリは実行されません。実際の実行時間を取得するには、クエリを実行するか、 `EXPLAIN ANALYZE`を使用してください。
+`EXPLAIN`クエリ実行計画を返すだけで、クエリは実行されません。実際の実行時間を取得するには、クエリを実行するか、 `EXPLAIN ANALYZE`を使用してください。
 
 ```sql
 EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -93,7 +93,7 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-`ANALYZE TABLE`を実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の 2 つのケースでは、実行プラン（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
+`ANALYZE TABLE`を実行すると、演算子`└─TableFullScan_18`推定行数が正確であり、演算子`└─Selection_19`の推定行数も大幅に近づいたことがわかります。上記の 2 つのケースでは、実行計画（TiDB がこのクエリを実行するために使用する演算子セット）は変更されていませんが、統計情報が古くなっているために、最適ではないプランが頻繁に発生します。
 
 `ANALYZE TABLE`に加えて、TiDB はしきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計情報を自動的に再生成します。[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどれだけ近いか（TiDB が統計情報をどの程度健全であると見なしているか）を確認できます。
 
@@ -112,13 +112,13 @@ SHOW STATS_HEALTHY;
 
 ## 最適化を特定する {#identify-optimizations}
 
-現在の実行プランは、次の点で効率的です。
+現在の実行計画は、次の点で効率的です。
 
 -   作業の大部分はTiKVコプロセッサ内で処理されます。ネットワークを介してTiDBに送り返され、処理されるのは56行のみです。これらの行はそれぞれ短く、選択範囲に一致するカウントのみが格納されます。
 
 -   TiDB ( `StreamAgg_20` )とTiKV ( `└─StreamAgg_9` )の両方で行数を集計するには、メモリ使用量の面で非常に効率的なストリーム集計を使用します。
 
-現在の実行プランの最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。まず演算子`TableFullScan`ですべての行が読み込まれ、その後選択が適用されます。`SHOW CREATE TABLE trips`出力から原因がわかります。
+現在の実行計画の最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。まず演算子`TableFullScan`ですべての行が読み込まれ、その後選択が適用されます。`SHOW CREATE TABLE trips`出力から原因がわかります。
 
 ```sql
 SHOW CREATE TABLE trips\G
@@ -157,7 +157,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 >
 > DDLジョブの進行状況は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して監視できます。TiDBのデフォルト設定は、インデックスの追加が本番環境の本番ロードに過度な影響を与えないよう、慎重に選択されています。テスト環境では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。リファレンスシステムでは、バッチサイズを`10240` 、ワーカー数を`32`にすることで、デフォルト設定の10倍のパフォーマンス向上を実現できます。
 
-インデックスを追加したら、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行プランが選択され、 `TableFullScan`と`Selection`演算子が削除されていることがわかります。
+インデックスを追加したら、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行計画が選択され、 `TableFullScan`と`Selection`演算子が削除されていることがわかります。
 
 ```sql
 EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
