@@ -227,7 +227,7 @@ TiDB Cloud Premiumインスタンスを構成する際に、ワークロード�
 
 ### RCUの請求 {#rcu-billing}
 
-TiDB Cloud Premiumは、実際の要求容量ユニット（RCU）の消費量とストレージ使用量に基づいて課金される、使用量ベースの課金モデルを採用しています。
+TiDB Cloud Premiumは、実際のリクエストキャパシティユニット（RCU）の消費量とストレージ使用量に基づいて課金される、使用量ベースの課金モデルを採用しています。
 
 #### 1分あたりの計算 {#per-minute-calculation}
 

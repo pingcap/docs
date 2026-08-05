@@ -166,7 +166,7 @@ TiDB Cloud は、TiCDC Replication Capacity Unit (RCU) の[変更フィード](/
 
 ### 要求容量単位（RCU） {#request-capacity-unit-rcu}
 
-TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエスト容量ユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティング リソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースライン パフォーマンスとスループット容量が決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
+TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエストキャパシティユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCU は、1 秒あたり一定数の RU を処理できる固定量のコンピューティング リソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースライン パフォーマンスとスループット容量が決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
 
 -   TiDB Cloud Essential は、ワークロードに基づいて RCU を自動的にプロビジョニングします。QPS が増加すると、 TiDB Cloud はプロビジョニングされた RCU を動的にスケールアップしてパフォーマンスを維持します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
 -   TiDB Cloud Premium では、ワークロードの RCU の最大数 ( `RCU_max` ) を指定できます。 TiDB Cloudは、リアルタイムの需要に基づいて、 `0.25 * RCU_max`から`RCU_max`の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumでユニットと容量をリクエストする](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。

@@ -5,7 +5,7 @@ summary: ticloud serverless capacity` のリファレンス。
 
 # ticloud serverless capacity {#ticloud-serverless-capacity}
 
-TiDB Cloudクラスターの容量を、最大および最小のリクエスト容量単位 (RCU) に基づいて設定します。
+TiDB Cloudクラスターの容量を、最大および最小のリクエストキャパシティユニット (RCU) に基づいて設定します。
 
 ```shell
 ticloud serverless capacity [flags]
@@ -32,8 +32,8 @@ ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <m
 | フラグ                  | 説明                                          | 必須  | 注記                       |
 | -------------------- | ------------------------------------------- | --- | ------------------------ |
 | -c, --cluster-id 文字列 | クラスターの ID を指定します。                           | はい  | 非対話型モードでのみ動作します。         |
-| --max-rcu int32      | クラスターの最大リクエスト容量単位 (RCU) を 100000 まで指定します。   | いいえ | 非対話型モードでのみ動作します。         |
-| --min-rcu int32      | クラスターの最小リクエスト容量単位 (RCU) を少なくとも 2000 に指定します。 | いいえ | 非対話型モードでのみ動作します。         |
+| --max-rcu int32      | クラスターの最大リクエストキャパシティユニット (RCU) を 100000 まで指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| --min-rcu int32      | クラスターの最小リクエストキャパシティユニット (RCU) を少なくとも 2000 に指定します。 | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
