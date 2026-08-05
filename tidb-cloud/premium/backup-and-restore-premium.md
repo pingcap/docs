@@ -102,7 +102,7 @@ PITR lets you restore data to any point in time within the retention period. A s
 
 > **Note:**
 >
-> If you [switch backup modes](#switch-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
 
@@ -111,11 +111,11 @@ PITR lets you restore data to any point in time within the retention period. A s
 > **Note:**
 >
 > - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details) for more information.
-> - If you [switch backup modes](#switch-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> - If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
 
-### Switch automatic backup modes
+### Switch between automatic backup modes
 
 To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take the following steps:
 
@@ -124,7 +124,7 @@ To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take t
 3. In the displayed dialog, select a new mode.
 
     - If you switch to **Custom Retention Mode**, you need to configure the backup retention period and daily backup time.
-    - If you switch to **Standard Bundle Mode**, the retention periods and daily backup time return to the standard bundle defaults.
+    - If you switch to **Standard Bundle Mode**, the retention periods and daily backup time are reset to the standard bundle defaults.
 
 4. Review the retention settings in the **Overview** section, and then click **Save**.
 
