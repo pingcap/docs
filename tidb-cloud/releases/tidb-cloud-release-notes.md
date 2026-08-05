@@ -28,15 +28,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) and [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md).
 
-    - Introduce **Custom Retention Mode** for automatic backups on TiDB Cloud Premium instances.
-
-        TiDB Cloud Premium now offers two automatic backup modes:
-
-        - **Custom Retention Mode:** lets you specify the retention period from 3 to 33 days and choose when daily snapshots are created.
-        - **Standard Bundle Mode:** preserves the previous default automatic backup settings for PITR, hourly snapshots, and daily snapshots.
-
-      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes).
-
     - Support subscribing to alert notifications from TiDB Cloud Premium via generic webhooks.
 
         If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
