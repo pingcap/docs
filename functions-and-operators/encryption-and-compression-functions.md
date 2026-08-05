@@ -381,7 +381,7 @@ SELECT UNCOMPRESSED_LENGTH(0x03000000789C72747206040000FFFF018D00C7);
 
 ## サポートされていない関数 {#unsupported-functions}
 
--   TiDB は、MySQL Enterprise [問題 #2632](https://github.com/pingcap/tidb/issues/2632)でのみ利用可能な関数をサポートしていません。
+-   TiDB は、MySQL Enterpriseでのみ利用可能な関数をサポートしていません[問題 #2632](https://github.com/pingcap/tidb/issues/2632)。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
