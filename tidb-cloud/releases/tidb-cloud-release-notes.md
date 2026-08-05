@@ -8,6 +8,59 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年8月5日 {#august-5-2026}
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium インスタンスの自動バックアップに **Custom Retention Mode** を導入しました。
+
+        TiDB Cloud Premium では、2 つの自動バックアップモードを利用できるようになりました。
+
+        - **Custom Retention Mode:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
+        - **Standard Bundle Mode:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
+
+      詳細については、[Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
+
+## 2026年8月4日 {#august-4-2026}
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+
+        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential) を参照してください。
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium インスタンスの changefeed シンクとして [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) クラスターをサポートしました。
+
+        AWS でホストされる TiDB Cloud Premium インスタンスでは、AWS PrivateLink 経由で Amazon MSK Provisioned クラスターに行変更イベントをストリーミングできるようになりました。
+
+        詳細については、[Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) および [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md) を参照してください。
+
+    - TiDB Cloud Premium から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+
+        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium) を参照してください。
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated クラスターの一時停止要件を更新しました。
+
+        [TiDB Cloud Dedicated クラスターを一時停止する](/tidb-cloud/pause-or-resume-tidb-cluster.md)前に、[Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) をオフにし、実行中の Data Migration (DM) ジョブがないことを確認する必要があります。いずれかの条件が満たされていない場合、TiDB Cloud は一時停止リクエストを拒否し、エラーメッセージを表示します。
+
+    - TiDB Cloud Dedicated から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+
+        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/) を参照してください。
+
 ## 2026年7月28日 {#july-28-2026}
 
 **一般的な変更**

@@ -67,7 +67,8 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、
 
     <CustomContent plan="essential">
 
-    [https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json)
+    - 2026年7月1日以降に作成されたTiDB Cloud Essentialインスタンスの場合は、このJSONファイルをダウンロードしてください: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential-v2.json>。`v2`サフィックスは、ダッシュボードJSONファイルのバージョンのみを示すことに注意してください。
+    - 2026年7月1日より前に作成されたTiDB Cloud Essentialインスタンスの場合は、このJSONファイルをダウンロードしてください: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>。
 
     </CustomContent>
     <CustomContent plan="premium">

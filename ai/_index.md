@@ -60,7 +60,6 @@ TiDBを、人気のAIフレームワーク、組み込みプロバイダー、�
 | ------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | [統合の概要](/ai/integrations/vector-search-integration-overview.md)                                         | 利用可能なすべての連携機能の概要。                          |
 | [埋め込みプロバイダー](/ai/integrations/vector-search-auto-embedding-overview.md#available-text-embedding-models) | OpenAI、Cohere、Jina AIなどに対応した統合インターフェース。    |
-| [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)                                   | LangChainでTiDBをベクトルストアとして使用する。             |
 | [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)                                 | TiDBをLlamaIndexを使用したベクトルストアとして利用する。        |
 | [MCPサーバー](/ai/integrations/tidb-mcp-server.md)                                                          | TiDBをClaude Code、Cursor、その他のAI搭載IDEに接続します。 |
 

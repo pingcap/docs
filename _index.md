@@ -17,127 +17,127 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 <LearningPath label="Learn" icon="cloud1">
 
-[TiDB Self-Managedとは](https://docs.pingcap.com/tidb/v8.5/overview)
+[TiDB Self-Managedとは](https://docs.pingcap.com/ja/tidb/v8.5/overview)
 
-[特徴](https://docs.pingcap.com/tidb/v8.5/basic-features)
+[特徴](https://docs.pingcap.com/ja/tidb/v8.5/basic-features)
 
-[TiFlash](https://docs.pingcap.com/tidb/v8.5/tiflash-overview)
+[TiFlash](https://docs.pingcap.com/ja/tidb/v8.5/tiflash-overview)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[TiDB Self-Managedを試してみる](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb)
+[TiDB Self-Managedを試してみる](https://docs.pingcap.com/ja/tidb/v8.5/quick-start-with-tidb)
 
-[HTAPを試してみる](https://docs.pingcap.com/tidb/v8.5/quick-start-with-htap)
+[HTAPを試してみる](https://docs.pingcap.com/ja/tidb/v8.5/quick-start-with-htap)
 
-[サンプルデータベースのインポート](https://docs.pingcap.com/tidb/v8.5/import-example-data)
+[サンプルデータベースのインポート](https://docs.pingcap.com/ja/tidb/v8.5/import-example-data)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[開発者ガイドの概要](https://docs.pingcap.com/tidb/v8.5/dev-guide-overview)
+[開発者ガイドの概要](https://docs.pingcap.com/ja/developer/)
 
-[クイックスタート](https://docs.pingcap.com/tidb/v8.5/dev-guide-build-cluster-in-cloud)
+[クイックスタート](https://docs.pingcap.com/ja/developer/dev-guide-build-cluster-in-cloud/)
 
-[アプリケーション例](https://docs.pingcap.com/tidb/v8.5/dev-guide-sample-application-java-spring-boot)
+[TiDB に接続する](https://docs.pingcap.com/ja/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[ソフトウェアおよびハードウェア要件](https://docs.pingcap.com/tidb/v8.5/hardware-and-software-requirements)
+[ソフトウェアおよびハードウェア要件](https://docs.pingcap.com/ja/tidb/v8.5/hardware-and-software-requirements)
 
-[TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+[TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb/v8.5/production-deployment-using-tiup)
 
-[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+[Kubernetes に TiDBクラスタをデプロイ](https://docs.pingcap.com/ja/tidb-in-kubernetes/stable)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[移行の概要](https://docs.pingcap.com/tidb/v8.5/migration-overview)
+[移行の概要](https://docs.pingcap.com/ja/tidb/v8.5/migration-overview)
 
-[移行ツール](https://docs.pingcap.com/tidb/v8.5/migration-tools)
+[移行ツール](https://docs.pingcap.com/ja/tidb/v8.5/migration-tools)
 
-[典型的なシナリオ](https://docs.pingcap.com/tidb/v8.5/migrate-aurora-to-tidb)
+[典型的なシナリオ](https://docs.pingcap.com/ja/tidb/v8.5/migrate-aurora-to-tidb)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[クラスタのアップグレード](https://docs.pingcap.com/tidb/v8.5/upgrade-tidb-using-tiup)
+[クラスタのアップグレード](https://docs.pingcap.com/ja/tidb/v8.5/upgrade-tidb-using-tiup)
 
-[クラスタのスケール](https://docs.pingcap.com/tidb/v8.5/scale-tidb-using-tiup)
+[クラスタのスケール](https://docs.pingcap.com/ja/tidb/v8.5/scale-tidb-using-tiup)
 
-[クラスタデータのバックアップと復元](https://docs.pingcap.com/tidb/v8.5/backup-and-restore-overview)
+[クラスタデータのバックアップと復元](https://docs.pingcap.com/ja/tidb/v8.5/backup-and-restore-overview)
 
-[毎日のチェック](https://docs.pingcap.com/tidb/v8.5/daily-check)
+[毎日のチェック](https://docs.pingcap.com/ja/tidb/v8.5/daily-check)
 
-[TiUPを使用して TiDBを管理](https://docs.pingcap.com/tidb/v8.5/maintain-tidb-using-tiup)
+[TiUPを使用して TiDBを管理](https://docs.pingcap.com/ja/tidb/v8.5/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Prometheus、Grafana、TiDB Dashboardを使用する](https://docs.pingcap.com/tidb/v8.5/tidb-monitoring-framework)
+[Prometheus、Grafana、TiDB Dashboardを使用する](https://docs.pingcap.com/ja/tidb/v8.5/tidb-monitoring-framework)
 
-[監視API](https://docs.pingcap.com/tidb/v8.5/tidb-monitoring-api)
+[監視API](https://docs.pingcap.com/ja/tidb/v8.5/tidb-monitoring-api)
 
-[アラートルール](https://docs.pingcap.com/tidb/v8.5/alert-rules)
+[アラートルール](https://docs.pingcap.com/ja/tidb/v8.5/alert-rules)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[チューニングの概要](https://docs.pingcap.com/tidb/v8.5/performance-tuning-overview)
+[チューニングの概要](https://docs.pingcap.com/ja/tidb/v8.5/performance-tuning-overview)
 
-[チューニング方法](https://docs.pingcap.com/tidb/v8.5/performance-tuning-methods)
+[チューニング方法](https://docs.pingcap.com/ja/tidb/v8.5/performance-tuning-methods)
 
-[OLTPパフォーマンスのチューニング](https://docs.pingcap.com/tidb/v8.5/performance-tuning-practices)
+[OLTPパフォーマンスのチューニング](https://docs.pingcap.com/ja/tidb/v8.5/performance-tuning-practices)
 
-[オペレーティングシステムの調整](https://docs.pingcap.com/tidb/v8.5/tune-operating-system)
+[オペレーティングシステムの調整](https://docs.pingcap.com/ja/tidb/v8.5/tune-operating-system)
 
-[構成の調整](https://docs.pingcap.com/tidb/v8.5/configure-memory-usage)
+[構成の調整](https://docs.pingcap.com/ja/tidb/v8.5/configure-memory-usage)
 
-[SQLパフォーマンスのチューニング](https://docs.pingcap.com/tidb/v8.5/sql-tuning-overview)
+[SQLパフォーマンスのチューニング](https://docs.pingcap.com/ja/tidb/v8.5/sql-tuning-overview)
 
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-[TiUP](https://docs.pingcap.com/tidb/v8.5/tiup-overview)
+[TiUP](https://docs.pingcap.com/ja/tidb/v8.5/tiup-overview)
 
-[TiDB Operator](https://docs.pingcap.com/tidb/v8.5/tidb-operator-overview)
+[TiDB Operator](https://docs.pingcap.com/ja/tidb/v8.5/tidb-operator-overview)
 
-[TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/v8.5/dm-overview)
+[TiDB Data Migration (DM)](https://docs.pingcap.com/ja/tidb/v8.5/dm-overview)
 
-[TiDB Lightning](https://docs.pingcap.com/tidb/v8.5/tidb-lightning-overview)
+[TiDB Lightning](https://docs.pingcap.com/ja/tidb/v8.5/tidb-lightning-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/v8.5/dumpling-overview)
+[Dumpling](https://docs.pingcap.com/ja/tidb/v8.5/dumpling-overview)
 
-[TiCDC](https://docs.pingcap.com/tidb/v8.5/ticdc-overview)
+[TiCDC](https://docs.pingcap.com/ja/tidb/v8.5/ticdc-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v8.5/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/ja/tidb/v8.5/backup-and-restore-overview)
 
-[PingCAP Clinic](https://docs.pingcap.com/tidb/v8.5/clinic-introduction)
+[PingCAP Clinic](https://docs.pingcap.com/ja/tidb/v8.5/clinic-introduction)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[TiDBコンフィグレーションファイルのパラメータ](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file)
+[TiDBコンフィグレーションファイルのパラメータ](https://docs.pingcap.com/ja/tidb/v8.5/tidb-configuration-file)
 
-[TiDB コマンドラインフラグ](https://docs.pingcap.com/tidb/v8.5/command-line-flags-for-tidb-configuration)
+[TiDB コマンドラインフラグ](https://docs.pingcap.com/ja/tidb/v8.5/command-line-flags-for-tidb-configuration)
 
-[TiDBコントロール](https://docs.pingcap.com/tidb/v8.5/tidb-control)
+[TiDBコントロール](https://docs.pingcap.com/ja/tidb/v8.5/tidb-control)
 
-[システム変数](https://docs.pingcap.com/tidb/v8.5/system-variables)
+[システム変数](https://docs.pingcap.com/ja/tidb/v8.5/system-variables)
 
-[リリースノート](https://docs.pingcap.com/tidb/v8.5/release-notes)
+[リリースノート](https://docs.pingcap.com/ja/releases/tidb-self-managed/)
 
-[FAQの概要](https://docs.pingcap.com/tidb/v8.5/faq-overview)
+[FAQの概要](https://docs.pingcap.com/ja/tidb/v8.5/faq-overview)
 
 </LearningPath>
 

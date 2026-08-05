@@ -36,11 +36,10 @@ TiDB Vector Search は最大 16383 次元のベクトルの保存をサポート
 
 ## AI フレームワーク {#ai-frameworks}
 
-TiDB は次の AI フレームワークを公式にサポートしており、これらのフレームワークで開発した AI アプリケーションを TiDB Vector Search に簡単に統合できます。
+TiDB は次の AI フレームワークを公式にサポートしており、このフレームワークで開発した AI アプリケーションを TiDB Vector Search に簡単に統合できます。
 
 | AI フレームワーク | チュートリアル                                                        |
 |---------------|---------------------------------------------------------------------------------------------------|
-| LangChain     | [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)   |
 | LlamaIndex    | [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
 
 また、TiDB は AI アプリケーション向けのドキュメントストレージやナレッジグラフストレージなど、さまざまな用途にも使用できます。

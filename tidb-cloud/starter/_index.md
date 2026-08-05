@@ -93,9 +93,9 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=starter)
 
-[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access#user-roles/?plan=starter)
+[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=starter#user-roles)
 
-[ユーザープロファイルの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access#manage-user-profiles/?plan=starter)
+[ユーザープロファイルの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=starter#manage-user-profiles)
 
 [組織アクセスの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=starter#manage-organization-access)
 
@@ -109,9 +109,9 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
-[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing#invoices/?plan=starter)
+[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=starter#invoices)
 
-[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing#credits/?plan=starter)
+[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=starter#credits)
 
 </LearningPath>
 

@@ -733,7 +733,6 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [peeweeでTiDBに接続する](/develop/dev-guide-sample-application-python-peewee.md)
 -   [TiDBベクトル検索をJina AI Embeddings APIと統合する](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
 -   [TiDBベクトル検索をSQLAlchemyと統合する](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
--   [LangChainとベクトル検索を統合する](/ai/integrations/vector-search-integrate-with-langchain.md)
 -   [LlamaIndexとベクトル検索を統合する](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 -   [システム変数](/system-variables.md#ssl_ca)
 
