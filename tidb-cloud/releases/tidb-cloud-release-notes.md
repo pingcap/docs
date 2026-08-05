@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## August 5, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce **Custom Retention Mode** for automatic backups on TiDB Cloud Premium instances.
+
+        TiDB Cloud Premium now offers two automatic backup modes:
+
+        - **Custom Retention Mode:** lets you specify the retention period from 3 to 33 days and choose when daily snapshots are created.
+        - **Standard Bundle Mode:** preserves the previous default automatic backup settings for PITR, hourly snapshots, and daily snapshots.
+
+      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes).
+
 ## August 4, 2026
 
 **General changes**
