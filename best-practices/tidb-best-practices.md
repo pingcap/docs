@@ -195,7 +195,7 @@ TiDB は[Grafana + Prometheus](/tidb-monitoring-framework.md)を使用してシ�
 
 監視に加えて、システムログを表示することもできます。TiDB の 3 つのコンポーネント、tidb-server、tikv-server、および pd-server には、それぞれ`--log-file`パラメータがあります。このパラメータがクラスタの起動時に構成されている場合、ログはパラメータで構成されたファイルに保存され、ログファイルは毎日自動的にアーカイブされます。 `--log-file`パラメータが構成されていない場合、ログは`stderr`に出力されます。
 
-TiDB 4.0 以降、TiDB は使いやすさを向上させるために[TiDB Dashboard](/dashboard/dashboard-intro.md)UI を提供します。 TiDB Dashboardにアクセスするには、ブラウザで[http://${PD_IP}:${PD_PORT}/dashboard](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)Dashboardにアクセスします。 TiDB Dashboardは、クラスターのステータスの表示、パフォーマンス分析、トラフィックの視覚化、クラスターの診断、ログ検索などの機能を提供します。
+TiDB 4.0 以降、TiDB は使いやすさを向上させるために[TiDB Dashboard](/dashboard/dashboard-intro.md)UI を提供します。 TiDB Dashboardにアクセスするには、ブラウザで<http://${PD_IP}:${PD_PORT}/dashboard>にアクセスします。 TiDB Dashboardは、クラスターのステータスの表示、パフォーマンス分析、トラフィックの視覚化、クラスターの診断、ログ検索などの機能を提供します。
 
 ### 文書 {#documentation}
 
