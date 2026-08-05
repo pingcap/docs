@@ -141,7 +141,7 @@
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
-    - [通过 AWS PrivateLink 设置 Amazon MSK 预置集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+    - [通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
 - 安全
   - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制

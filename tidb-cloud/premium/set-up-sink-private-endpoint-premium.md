@@ -97,7 +97,7 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 
 **Amazon MSK Provisioned**
 
-1. 在 **Networking** 页面中，点击 **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
+1. 在 **Networking** 页面中，点击 **AWS Private Endpoint for External Services** 部分中的 **Create Private Endpoint**.
 2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称，然后选择 **AWS MSK Provisioned** 作为连接类型。
 3. 输入你的 Amazon MSK Provisioned 集群的 **MSK Cluster ARN**。要了解如何为 changefeed 创建 Amazon MSK Provisioned 集群，请参见[通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
 4. 点击 **Create** 以验证配置并创建 private endpoint。
