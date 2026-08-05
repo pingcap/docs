@@ -160,7 +160,7 @@ OLTP（オンライン・トランザクション処理）シナリオでは、�
 >
 > バッチネットワーク転送を行う場合は、JDBC接続パラメータで`rewriteBatchedStatements = true`を設定する必要があります。詳細なパラメータ設定については、 [バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
-#### <code>StreamingResult</code>を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
+#### `StreamingResult`を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
 
 ほとんどのシナリオでは、実行効率を向上させるために、JDBCはデフォルトでクエリ結果を事前に取得し、クライアントのメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らし、クライアントのメモリが準備できるまで待機し、次のバッチを要求することがよくあります。
 

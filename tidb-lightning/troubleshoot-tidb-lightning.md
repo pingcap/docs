@@ -38,7 +38,7 @@ strict-format = true
 
 最新バージョンをお試しください。速度が改善されているかもしれません。
 
-## <code>tidb-lightning</code>プロセスがバックグラウンドで実行中に突然終了する {#the-tidb-lightning-process-suddenly-quits-while-running-in-background}
+## `tidb-lightning`プロセスがバックグラウンドで実行中に突然終了する {#the-tidb-lightning-process-suddenly-quits-while-running-in-background}
 
 これは、 `tidb-lightning`が正しく起動されていないためにシステムが SIGHUP シグナルを送信し、 `tidb-lightning`プロセスを停止したことが原因である可能性があります。この場合、 `tidb-lightning.log`は通常、次のログを出力します。
 
@@ -94,7 +94,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 3.  TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
-### <code>Checkpoint for … has invalid status:</code> (エラー コード) {#checkpoint-for--has-invalid-status-error-code}
+### `Checkpoint for … has invalid status:` (エラー コード) {#checkpoint-for--has-invalid-status-error-code}
 
 **原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しています。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
 
@@ -122,7 +122,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 3.  `[mydumper] character-set = "binary"`を設定するとチェックをスキップします。ただし、これにより対象データベースに文字化けが発生する可能性があります。
 
-### <code>[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'</code> {#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-}
+### `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 …}'` {#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-}
 
 **原因**: テーブルに`timestamp`型の列が含まれていますが、時刻値自体が存在しません。これは、夏時間の変更、または時刻値がサポート範囲（1970年1月1日から2038年1月19日）を超えていることが原因です。
 
@@ -150,7 +150,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 -   制限を動的に増やすには、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用します。
 -   TiKVにも同様の制限があることに注意してください。1回の書き込みリクエストのデータサイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) （デフォルトでは`8MiB` ）を超えると、TiKVはこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の設定を変更する必要があります。
 
-### TiDB Lightningがモードを切り替えるときに、 <code>rpc error: code = Unimplemented ...</code> {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
+### TiDB Lightningがモードを切り替えるときに、 `rpc error: code = Unimplemented ...` {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
 
 **原因**: クラスタ内の一部のノードが`switch-mode`サポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2` 、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)より前の場合などです。
 

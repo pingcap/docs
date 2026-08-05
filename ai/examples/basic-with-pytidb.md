@@ -20,7 +20,7 @@ summary: データベース接続、テーブル作成、データ操作など�
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. `pytidb`リポジトリをクローンする {#step-1-clone-the-pytidb-repository}
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

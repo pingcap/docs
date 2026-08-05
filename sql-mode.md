@@ -15,7 +15,7 @@ TiDB の起動後、 `SET [ SESSION | GLOBAL ] sql_mode='modes'`ステートメ�
 
 このステートメントでは、 `modes`はカンマ (',') で区切られたモードのセットです。 `SELECT @@sql_mode`ステートメントを使用して、現在の SQL モードを確認できます。SQL モードのデフォルト値は`ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, NO_ENGINE_SUBSTITUTION` 。
 
-## 重要な<code>sql_mode</code>値 {#important-code-sql-mode-code-values}
+## 重要な`sql_mode`値 {#important-sql-mode-values}
 
 -   `ANSI` : このモードは標準 SQL に準拠しています。このモードでは、データがチェックされます。データが定義された型または長さに準拠していない場合、データ型が調整またはトリミングされ、 `warning`が返されます。
 -   `STRICT_TRANS_TABLES` : 厳密モード。データが厳密にチェックされます。データに誤りがある場合は、テーブルに挿入できず、エラーが返されます。

@@ -64,7 +64,7 @@ TiDB の`CHECK`制約の構文は MySQL と同じです。
 -   `CHECK (expr)` : 制約条件を指定します。ここで、 `expr`はブール式である必要があります。テーブルの各行について、この式の計算結果は`TRUE` 、 `FALSE` 、または`UNKNOWN` ( `NULL`値の場合) のいずれかである必要があります。ある行の計算結果が`FALSE`の場合、制約に違反していることを示します。
 -   `[NOT] ENFORCED` : 制約チェックを実装するかどうかを指定します。これを使用して、制約`CHECK`有効または無効にすることができます。
 
-### <code>CHECK</code>制約を追加する {#add-check-constraints}
+### `CHECK`制約を追加する {#add-check-constraints}
 
 TiDB では、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)ステートメントのいずれかを使用して、テーブルに`CHECK`制約を追加できます。
 
@@ -84,7 +84,7 @@ TiDB では、 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)�
 
 `CHECK`制約を追加する場合、制約名を指定するか、未指定のままにすることができます。制約名を指定しない場合は、TiDB が`<tableName>_chk_<1, 2, 3...>`形式で自動的に制約名を生成します。
 
-### <code>CHECK</code>制約を表示する {#view-check-constraints}
+### `CHECK`制約を表示する {#view-check-constraints}
 
 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを使用すると、テーブル内の制約情報を表示できます。例:
 
@@ -105,7 +105,7 @@ CONSTRAINT `t_chk_2` CHECK ((1 < `c`))
 1 row in set (0.00 sec)
 ```
 
-### <code>CHECK</code>制約を削除する {#delete-check-constraints}
+### `CHECK`制約を削除する {#delete-check-constraints}
 
 `CHECK`制約を削除する場合は、削除する制約の名前を指定する必要があります。例：
 
@@ -113,7 +113,7 @@ CONSTRAINT `t_chk_2` CHECK ((1 < `c`))
 ALTER TABLE t DROP CONSTRAINT t_chk_1;
 ```
 
-### <code>CHECK</code>制約を有効または無効にする {#enable-or-disable-check-constraints}
+### `CHECK`制約を有効または無効にする {#enable-or-disable-check-constraints}
 
 テーブルに[`CHECK`制約を追加する](#add-check-constraints)設定すると、データの挿入または更新時に TiDB が制約チェックを実装する必要があるかどうかを指定できます。
 

@@ -3,7 +3,7 @@ title: EXPLAIN Walkthrough
 summary: 例文を順に見ながらEXPLAINの使い方を学びます
 ---
 
-# <code>EXPLAIN</code>ウォークスルー {#code-explain-code-walkthrough}
+# `EXPLAIN`ウォークスルー {#explain-walkthrough}
 
 SQLは宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行計画を確認する必要があります。
 

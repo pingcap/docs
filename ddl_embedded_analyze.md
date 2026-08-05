@@ -3,7 +3,7 @@ title: "`ANALYZE` Embedded in DDL Statements"
 summary: このドキュメントでは、新しく作成または再編成されたインデックスの DDL ステートメントに埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
 ---
 
-# DDL ステートメントに埋め込まれた<code>ANALYZE</code> <span class="version-mark">(v8.5.4 で導入)</span> {#code-analyze-code-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}
+# DDL ステートメントに埋め込まれた`ANALYZE` <span class="version-mark">(v8.5.4 で導入)</span> {#analyze-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}
 
 このドキュメントでは、次の 2 種類の DDL ステートメントに組み込まれている`ANALYZE`機能について説明します。
 

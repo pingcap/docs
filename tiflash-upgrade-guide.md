@@ -123,7 +123,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-## v6.x または v7.x から<code>storage.format_version = 5</code>が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-code-storage-format-version-5-code-configured}
+## v6.x または v7.x から`storage.format_version = 5`が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-storage-format-version-5-configured}
 
 TiFlash v7.3 以降、新しい DTFile バージョン DTFile V3 (実験的) が導入されました。この新しい DTFile バージョンでは、複数の小さなファイルを 1 つの大きなファイルに結合することで、ファイル総数を削減できます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash構成パラメータ](/tiflash/tiflash-configuration.md) `storage.format_version = 5`を設定します。設定後もTiFlash はV2 DTFile を読み取り可能で、その後のデータ圧縮時に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
 

@@ -34,7 +34,7 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### <code>PREPARE</code>を使用する {#use-prepare}
+### `PREPARE`を使用する {#use-prepare}
 
 SQL ステートメントを複数回実行する必要がある場合は、SQL 構文を繰り返し解析することによるオーバーヘッドを回避するために、 `PREPARE`ステートメントを使用することをお勧めします。
 
@@ -103,7 +103,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 大量のデータを更新する場合は[一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
 
-### テーブルデータ全体を削除するには、<code>DELETE</code>ではなく<code>TRUNCATE</code>を使用する {#use-truncate-instead-of-delete-for-full-table-data}
+### テーブルデータ全体を削除するには、`DELETE`ではなく`TRUNCATE`を使用する {#use-truncate-instead-of-delete-for-full-table-data}
 
 テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`ステートメントを使用することをお勧めします。
 

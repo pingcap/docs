@@ -413,7 +413,7 @@ WHERE db_name = 'test' AND table_name = 't' AND last_analyzed_at IS NOT NULL;
 
 `ANALYZE`の状態と統計情報は、以下のステートメントを使用して表示できます。
 
-### <code>ANALYZE</code>状態 {#code-analyze-code-state}
+### `ANALYZE`状態 {#analyze-state}
 
 `ANALYZE`ステートメントを実行すると、 [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)を使用して`ANALYZE`の現在の状態を表示できます。
 
@@ -704,11 +704,11 @@ mysql> SHOW WARNINGS;
 | パーティションテーブルと、テーブル全体がロックされています       | ロックが無効です     | TiDBが古いテーブルを削除するため、ロック情報も削除され、ロックは無効になります。 | 古いパーティションロック情報は無効であり、新しいパーティションは自動的にロックされます。 | 新しいパーティションは自動的にロックされます | 削除されたパーティションのロック情報はクリアされ、テーブル全体のロックは引き続き有効になります。 | 削除されたパーティションのロック情報がクリアされ、新しいパーティションが自動的にロックされます。 | ロック情報は交換テーブルに転送され、新しいパーティションは自動的にロックされます。 |
 | パーティションテーブルで、一部のパーティションのみがロックされている。 | ロックが無効です     | TiDBが古いテーブルを削除するため、ロック情報も削除され、ロックは無効になります。 | TiDBが古いテーブルを削除するため、ロック情報も削除され、ロックは無効になります。   | /                      | 削除されたパーティションロック情報はクリアされます                        | 削除されたパーティションロック情報はクリアされます                        | ロック情報は交換テーブルに転送されます                       |
 
-## <code>ANALYZE</code>タスクと並行処理を管理する {#manage-code-analyze-code-tasks-and-concurrency}
+## `ANALYZE`タスクと並行処理を管理する {#manage-analyze-tasks-and-concurrency}
 
 このセクションでは、バックグラウンド`ANALYZE`タスクを終了し、 `ANALYZE`の同時実行を制御する方法について説明します。
 
-### バックグラウンドの<code>ANALYZE</code>タスクを終了します {#terminate-background-code-analyze-code-tasks}
+### バックグラウンドの`ANALYZE`タスクを終了します {#terminate-background-analyze-tasks}
 
 TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バックグラウンドで実行中の`ANALYZE`タスクを終了することをサポートしています。バックグラウンドで実行中の`ANALYZE`タスクが多くのリソースを消費し、アプリケーションに影響を与えている場合は、次の手順で`ANALYZE`タスクを終了できます。
 
@@ -737,7 +737,7 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用して、バック�
 
 `KILL`ステートメントの詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
-### 制御<code>ANALYZE</code>並行性 {#control-code-analyze-code-concurrency}
+### 制御`ANALYZE`並行性 {#control-analyze-concurrency}
 
 `ANALYZE`ステートメントを実行すると、システム変数を使用して同時実行性を調整し、システムへの影響を制御できます。
 

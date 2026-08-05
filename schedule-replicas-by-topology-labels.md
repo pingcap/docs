@@ -13,7 +13,7 @@ TiDBクラスターの高可用性と災害復旧能力を向上させるには�
 
 このメカニズムを有効にするには、TiKVとPDを適切に設定し、クラスターのトポロジ情報、特にTiKVの位置情報（特にデプロイメント中にPDに報告される）が適切に送信されるようにする必要があります。開始する前に、まず[TiUPを使用して TiDBをデプロイ](/production-deployment-using-tiup.md)ご確認ください。
 
-## TiKV、 TiFlash、TiDBの<code>labels</code>を構成する {#configure-labels-for-tikv-tiflash-and-tidb}
+## TiKV、 TiFlash、TiDBの`labels`を構成する {#configure-labels-for-tikv-tiflash-and-tidb}
 
 クラスター トポロジに基づいて、TiKV、 TiFlash、および TiDB に`labels`設定できます。
 
@@ -160,7 +160,7 @@ TiUPを使用してクラスターをデプロイする場合、 [初期化設�
 
 ### コマンドラインまたは構成ファイルを使用してクラスターを構成する {#configure-a-cluster-using-command-lines-or-configuration-files}
 
-#### TiKVとTiFlashの<code>labels</code>を設定する {#configure-labels-for-tikv-and-tiflash}
+#### TiKVとTiFlashの`labels`を設定する {#configure-labels-for-tikv-and-tiflash}
 
 コマンドラインフラグを使用するか、TiKVまたはTiFlash構成ファイルを設定すると、キーと値のペアの形式でいくつかの属性をバインドできます。これらの属性は`labels`呼ばれます。TiKVとTiFlashは起動後、PDに`labels`報告し、ユーザーがTiKVノードとTiFlashノードの位置を特定できるようにします。
 
@@ -194,7 +194,7 @@ rack = "<rack>"
 host = "<host>"
 ```
 
-#### (オプション) TiDBの<code>labels</code>を構成する {#optional-configure-labels-for-tidb}
+#### (オプション) TiDBの`labels`を構成する {#optional-configure-labels-for-tidb}
 
 [Followerが読んだ](/follower-read.md)有効になっている場合、TiDB が同じリージョンからのデータを優先的に読み取るようにするには、TiDB ノードに対して`labels`設定する必要があります。
 
@@ -212,7 +212,7 @@ host = "<host>"
 >
 > 現在、TiDBは、同じリージョンにあるレプリカのマッチングと選択に`zone`ラベルを使用しています。この機能を使用するには、 [PDの`location-labels`設定](#configure-location-labels-for-pd)を設定する際に`zone`を追加し、TiDB、TiKV、 TiFlashの`labels`を設定する際に`zone`を指定する必要があります。詳細については、 [TiKVとTiFlashの`labels`を設定する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
-## PDの<code>location-labels</code>を設定する {#configure-location-labels-for-pd}
+## PDの`location-labels`を設定する {#configure-location-labels-for-pd}
 
 上記の説明によると、ラベルはTiKV属性を記述するために使用される任意のキーと値のペアです。しかし、PDは位置関連のラベルとそれらのラベルのレイヤー関係を識別できません。そのため、PDがTiKVノードのトポロジを理解できるように、以下の設定を行う必要があります。
 
@@ -240,7 +240,7 @@ host = "<host>"
     pd-ctl config set location-labels zone,rack,host
     ```
 
-## PDの<code>isolation-level</code>を設定する {#configure-isolation-level-for-pd}
+## PDの`isolation-level`を設定する {#configure-isolation-level-for-pd}
 
 `location-labels`が設定されている場合は、PD 設定ファイルで`isolation-level`設定することで、TiKV クラスターのトポロジ分離要件をさらに強化できます。
 

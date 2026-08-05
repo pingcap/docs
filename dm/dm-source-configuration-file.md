@@ -115,7 +115,7 @@ from:
 
 -   アップストリームデータベースのTLS設定を指定します。証明書のファイルパスは、すべてのノードからアクセスできる必要があります。ファイルパスがローカルパスの場合、クラスター内のすべてのノードは、各ホストの同じパスに証明書のコピーを保存する必要があります。
 
-### リレーログクリーンアップ戦略の構成（ <code>purge</code> ） {#relay-log-cleanup-strategy-configuration-code-purge-code}
+### リレーログクリーンアップ戦略の構成（ `purge` ） {#relay-log-cleanup-strategy-configuration-purge}
 
 通常、リレーログが大量に存在し、ディスク容量が不足している場合を除き、これらのパラメータを手動で設定する必要はありません。
 
@@ -142,7 +142,7 @@ from:
 >
 > 自動データ消去戦略は、 [`interval`](#interval)が`0`でなく、 2 つの構成項目[`expires`](#expires)と[`remain-space`](#remain-space)のうち少なくとも 1 つが`0`でない場合にのみ有効になります。
 
-### タスクステータスチェッカーの設定（ <code>checker</code> ） {#task-status-checker-configuration-code-checker-code}
+### タスクステータスチェッカーの設定（ `checker` ） {#task-status-checker-configuration-checker}
 
 DMは定期的に現在のタスクステータスとエラーメッセージを確認し、タスクを再開することでエラーが解消されるかどうかを判断します。必要に応じて、DMは自動的にタスクの再開を再試行します。DMは指数バックオフ戦略を使用してチェック間隔を調整します。DMの動作は、以下の設定で調整できます。
 

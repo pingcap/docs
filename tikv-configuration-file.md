@@ -83,7 +83,7 @@ TiKV の設定ファイルは、コマンドライン パラメータよりも�
 -   ログファイル。この設定項目が設定されていない場合、ログはデフォルトで「stderr」に出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
-### <code>max-size</code> <span class="version-mark">v5.4.0の新機能</span> {#max-size-new-in-v540}
+### `max-size` <span class="version-mark">v5.4.0の新機能</span> {#max-size-new-in-v540}
 
 -   単一ログファイルの最大サイズ。ファイルサイズがこの設定項目で設定された値よりも大きい場合、システムは自動的に単一ファイルを複数のファイルに分割します。
 -   デフォルト値: `300`
@@ -2878,7 +2878,7 @@ TiKV MVCC インメモリエンジン (IME) のストレージレイヤーに関
 -   TiKVノードには最低でも8GiBのメモリを搭載することを推奨します。最適なパフォーマンスを得るには、32GiB以上を搭載することをお勧めします。
 -   TiKVノードで使用可能なメモリが不足している場合、この設定項目が`true`に設定されていても、インメモリエンジンは有効になりません。このような場合は、TiKVログファイルで`"in-memory engine is disabled because"`を含むメッセージを確認し、インメモリエンジンが有効にならない理由を調べてください。
 
-### <code>capacity</code> <span class="version-mark">v8.5.0の新機能</span> {#capacity-new-in-v850}
+### `capacity` <span class="version-mark">v8.5.0の新機能</span> {#capacity-new-in-v850}
 
 > **Note:**
 >

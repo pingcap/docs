@@ -486,7 +486,7 @@ pd-server関連のコンフィグレーション項目
 -   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)参照。
 
-## <code>label-property</code> （非推奨） {#code-label-property-code-deprecated}
+## `label-property` （非推奨） {#label-property-deprecated}
 
 ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
 
@@ -494,12 +494,12 @@ pd-server関連のコンフィグレーション項目
 >
 > バージョン5.2以降、ラベル関連の設定項目は非推奨となりました。レプリカポリシーの設定には[配置ルール](/configure-placement-rules.md#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-221-and-the-leader-should-not-be-in-the-third-data-center)を使用することをお勧めします。
 
-### <code>key</code> （非推奨） {#code-key-code-deprecated}
+### `key` （非推奨） {#key-deprecated}
 
 -   リーダーを拒否したストアのラベルキー
 -   デフォルト値: `""`
 
-### <code>value</code> （非推奨） {#code-value-code-deprecated}
+### `value` （非推奨） {#value-deprecated}
 
 -   リーダーを拒否したストアのラベル値
 -   デフォルト値: `""`

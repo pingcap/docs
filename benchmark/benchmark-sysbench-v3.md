@@ -84,7 +84,7 @@ block-cache-size = "20GB"
 
 ## テスト結果 {#test-result}
 
-### <code>Point Select</code>テスト {#code-point-select-code-test}
+### `Point Select`テスト {#point-select-test}
 
 |   バージョン  | スレッド |    QPS    | 95% レイテンシ (ミリ秒) |
 | :------: | :--: | :-------: | :-------------: |
@@ -122,7 +122,7 @@ block-cache-size = "20GB"
 
 上記の統計によると、TiDB 2.1 と TiDB 2.0 の`Update Non-Index`書き込みパフォーマンスはほぼ同じです。
 
-### <code>Update Index</code>テスト {#code-update-index-code-test}
+### `Update Index`テスト {#update-index-test}
 
 |   バージョン  | スレッド |    QPS   | 95% レイテンシ (ミリ秒) |
 | :------: | :--: | :------: | :-------------: |

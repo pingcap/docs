@@ -165,7 +165,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
     ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';
     ```
 
-## <code>root</code>パスワードを忘れた {#forget-the-root-password}
+## `root`パスワードを忘れた {#forget-the-root-password}
 
 1.  設定ファイルを変更します。
 

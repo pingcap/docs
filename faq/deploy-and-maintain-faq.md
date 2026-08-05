@@ -37,7 +37,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用してTiDBクラスタをデプロイすることをお勧めします。[TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
-### TiKV/PD 用に変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect}
+### TiKV/PD 用に変更された`toml`構成が有効にならないのはなぜですか? {#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect}
 
 `toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。TiKV/PD はデフォルトでは設定を読み取りません。現在、この問題はバイナリを使用してデプロイする場合にのみ発生します。TiKV の場合は、設定を編集してサービスを再起動してください。PD の場合は、設定ファイルは PD の初回起動時にのみ読み込まれ、その後は pd-ctl を使用して設定を変更できます。詳細は[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
@@ -57,17 +57,17 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 
 3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロークエリも表示できます。詳細は[`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
-### TiDB クラスターを初めてデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加するにはどうすればよいですか? {#how-to-add-the-label-configuration-if-label-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
+### TiDB クラスターを初めてデプロイしたときに TiKV の`label`が構成されていなかった場合、 `label`構成を追加するにはどうすればよいですか? {#how-to-add-the-label-configuration-if-label-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
 TiDB `label`の設定は、クラスタのデプロイメントアーキテクチャに関連しています。これは重要であり、PDがグローバル管理とスケジューリングを実行するための基盤となります。以前のクラスタのデプロイメント時に`label`設定していない場合は、PD管理ツール`pd-ctl`を使用して`location-labels`情報を手動で追加し、デプロイメント構造を調整する必要があります（例： `config set location-labels "zone,rack,host"` ）。（実際の`label`レベル名に基づいて設定する必要があります）。
 
 `pd-ctl`の使い方については[PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
-### ディスク テストの<code>dd</code>コマンドが<code>oflag=direct</code>オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
+### ディスク テストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
 
 ダイレクト モードでは、書き込み要求を I/O コマンドにラップし、このコマンドをディスクに送信してファイル システム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
 
-### <code>fio</code>コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
+### `fio`コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
 
 以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`設定することをお勧めします。
 

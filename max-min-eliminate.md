@@ -12,7 +12,7 @@ SQL文に`max` `min`関数が含まれている場合、クエリオプティマ
 -   [`max` / `min`関数が1つだけあるステートメント](#one-maxmin-function)
 -   [複数の`max` / `min`関数を含むステートメント](#multiple-maxmin-functions)
 
-## 1つの<code>max</code> / <code>min</code>関数 {#one-maxmin-function}
+## 1つの`max` / `min`関数 {#one-maxmin-function}
 
 SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 
@@ -49,7 +49,7 @@ mysql> explain select max(a) from t;
 5 rows in set (0.00 sec)
 ```
 
-## 複数の<code>max</code> / <code>min</code>関数 {#multiple-maxmin-functions}
+## 複数の`max` / `min`関数 {#multiple-maxmin-functions}
 
 SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 

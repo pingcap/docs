@@ -83,7 +83,7 @@ Titanパラメータを適切に設定することで、データベースのパ
 
 [`min-blob-size`](/tikv-configuration-file.md#min-blob-size)を使用すると、RocksDB に保存するデータと Titan の BLOB ファイルに保存するデータを決定するための値のサイズのしきい値を設定できます。テストによると、適切なしきい値は`32KB`です。これにより、RocksDB と比較して Titan のパフォーマンスが低下しないことが保証されます。ただし、多くのシナリオでは、この値は最適ではありません。適切な値を選択するには、 [`min-blob-size`がパフォーマンスに与える影響](/storage-engine/titan-overview.md#impact-of-min-blob-size-on-performance)を参照することをお勧めします。書き込みパフォーマンスをさらに向上させ、スキャンパフォーマンスの低下を許容できる場合は、最小値の`1KB`に設定できます。
 
-### <code>blob-file-compression</code>と<code>zstd-dict-size</code> {#code-blob-file-compression-code-and-code-zstd-dict-size-code}
+### `blob-file-compression`と`zstd-dict-size` {#blob-file-compression-and-zstd-dict-size}
 
 [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression)を使用すると、Titan の値に使用する圧縮アルゴリズムを指定できます。また、 `zstd`から[`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size)の辞書圧縮を有効にして圧縮率を向上させることもできます。
 
@@ -93,7 +93,7 @@ Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size
 
 ストアサイズからBLOBファイルサイズを引いた値を`storage.block-cache.capacity`に設定し、データベースが安定して動作している場合は、監視指標に応じて`blob-cache-size` ～ `memory size * 50% - block cache size`設定することをお勧めします。これにより、ブロックキャッシュがRocksDBエンジン全体に十分な大きさである場合に、BLOBキャッシュサイズが最大化されます。
 
-### <code>discardable-ratio</code>と<code>max-background-gc</code> {#code-discardable-ratio-code-and-code-max-background-gc-code}
+### `discardable-ratio`と`max-background-gc` {#discardable-ratio-and-max-background-gc}
 
 [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)のパラメータと[`max-background-gc`](/tikv-configuration-file.md#max-background-gc)パラメータは、Titan の読み取りパフォーマンスとガベージコレクションプロセスに大きな影響を与えます。
 
@@ -105,7 +105,7 @@ BLOBファイル内の古いデータ（対応するキーが更新または削�
 
 [`rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec)調整すると、RocksDB 圧縮の I/O レートを制限し、トラフィック量が多いときのフォアグラウンドの読み取りおよび書き込みパフォーマンスへの影響を軽減できます。
 
-### <code>shared-blob-cache</code> (v8.0.0 の新機能) {#code-shared-blob-cache-code-new-in-v8-0-0}
+### `shared-blob-cache` (v8.0.0 の新機能) {#shared-blob-cache-new-in-v8-0-0}
 
 Titan BLOBファイルとRocksDBブロックファイルの共有キャッシュを有効にするかどうかを[`shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800)で制御できます。デフォルト値は`true`です。共有キャッシュを有効にすると、ブロックファイルの優先度が高くなります。つまり、TiKVはブロックファイルのキャッシュニーズを満たすことを優先し、残りのキャッシュをBLOBファイル用に使用することになります。
 

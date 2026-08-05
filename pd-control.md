@@ -1358,7 +1358,7 @@ unsafe remove-failed-stores show
 
 ## Jq形式のJSON出力の使用 {#jq-formatted-json-output-usage}
 
-### <code>store</code>の出力を簡素化 {#simplify-the-output-of-store}
+### `store`の出力を簡素化 {#simplify-the-output-of-store}
 
 ```bash
 >> store --jq=".stores[].store | {id, address, state_name}"
@@ -1376,7 +1376,7 @@ unsafe remove-failed-stores show
 ...
 ```
 
-### ステータスが<code>Up</code>ではないすべてのノードを照会する {#query-all-nodes-whose-status-is-not-up}
+### ステータスが`Up`ではないすべてのノードを照会する {#query-all-nodes-whose-status-is-not-up}
 
 ```bash
 store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_name}'

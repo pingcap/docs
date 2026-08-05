@@ -463,7 +463,7 @@ TiDBは、さまざまなワークロードパターンに合わせてパフォ�
 SET SESSION tidb_dml_type = "bulk";
 ```
 
-### TiKVプッシュダウンを使用して<code>GROUP BY</code>および<code>DISTINCT</code>操作を最適化します {#optimize-code-group-by-code-and-code-distinct-code-operations-with-tikv-pushdown}
+### TiKVプッシュダウンを使用して`GROUP BY`および`DISTINCT`操作を最適化します {#optimize-group-by-and-distinct-operations-with-tikv-pushdown}
 
 TiDBは集計処理をTiKVにプッシュダウンすることで、データ転送と処理のオーバーヘッドを削減します。パフォーマンスの向上度合いは、データの特性によって異なります。
 

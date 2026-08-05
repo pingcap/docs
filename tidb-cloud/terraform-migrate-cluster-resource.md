@@ -15,7 +15,7 @@ TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソ�
 
 -   [TiDB Cloud Terraform プロバイダー v0.4.0 以降](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest)にアップグレード
 
-## ステップ1. 移行する<code>tidbcloud_cluster</code>リソースを特定する {#step-1-identify-the-tidbcloud_cluster-resource-to-migrate}
+## ステップ1. 移行する`tidbcloud_cluster`リソースを特定する {#step-1-identify-the-tidbcloud_cluster-resource-to-migrate}
 
 1.  すべての`tidbcloud_cluster`リソースを一覧表示します:
 

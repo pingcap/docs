@@ -35,7 +35,7 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## <code>EXPLAIN</code>出力形式 {#code-explain-code-output-format}
+## `EXPLAIN`出力形式 {#explain-output-format}
 
 > **Note:**
 >

@@ -7,7 +7,7 @@ summary: IMPORT INTO およびTiDB Lightning とログ バックアップおよ�
 
 このドキュメントでは、 TiDB Lightningおよび[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)と[ログバックアップ](/br/br-pitr-guide.md)および[TiCDC](/ticdc/ticdc-overview.md)の互換性、およびいくつかの特殊な使用シナリオについて説明します。
 
-## <code>IMPORT INTO</code>とTiDB Lightning の比較 {#code-import-into-code-vs-tidb-lightning}
+## `IMPORT INTO`とTiDB Lightning の比較 {#import-into-vs-tidb-lightning}
 
 [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)はTiDB Lightningの物理インポートモードと統合されていますが、いくつかの違いがあります。詳細は[`IMPORT INTO`とTiDB Lightning の比較](/tidb-lightning/import-into-vs-tidb-lightning.md)をご覧ください。
 
@@ -53,7 +53,7 @@ TiCDC を物理インポート モードで使用することは、短期的に�
 
     上流TiDBクラスタのインポートタスクが完了したら、 TiDB Lightningを使用して、同じデータを下流TiDBクラスタにインポートします。下流にRedshiftやSnowflakeなどのデータベースがある場合は、クラウドストレージサービスからCSV、SQL、またはParquetファイルを読み取り、データベースに書き込むように設定できます。
 
-## <code>IMPORT INTO</code>のシナリオ {#scenarios-for-code-import-into-code}
+## `IMPORT INTO`のシナリオ {#scenarios-for-import-into}
 
 このセクションでは、 `IMPORT INTO`を[ログバックアップ](/br/br-pitr-guide.md)および[TiCDC](/ticdc/ticdc-overview.md)と一緒に使用する方法について説明します。
 

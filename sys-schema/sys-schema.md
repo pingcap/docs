@@ -3,7 +3,7 @@ title: sys Schema
 summary: sys` スキーマ内のシステム テーブルについて学習します。
 ---
 
-# <code>sys</code>スキーマ {#code-sys-code-schema}
+# `sys`スキーマ {#sys-schema}
 
 TiDBはv8.0.0以降、 `sys`スキーマを提供します。`sys`のビューを使用して、TiDBのシステムテーブル[`INFORMATION_SCHEMA`](/information-schema/information-schema.md) [`PERFORMANCE SCHEMA`](/performance-schema/performance-schema.md)データを把握できます。
 

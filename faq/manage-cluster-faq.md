@@ -41,7 +41,7 @@ MySQL と同様に、TiDB にはシステム テーブルも含まれており�
 
 -   ロードバランサーが実行されていない場合： `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントは正常に停止されます。
 
-### TiDBで<code>kill</code>は実行できますか？ {#can-code-kill-code-be-executed-in-tidb}
+### TiDBで`kill`は実行できますか？ {#can-kill-be-executed-in-tidb}
 
 -   DMLステートメントを無効化する：
 
@@ -115,11 +115,11 @@ TiDBは、ビジネスの成長に合わせて拡張できます。
 
 そうではありません。フロー制御、暗号化、ストリーミングなど、gRPCの優れた機能が必要です。
 
-### <code>like(bindo.customers.name, jason%, 92)</code>の 92 は何を示していますか？ {#what-does-the-92-indicate-in-code-like-bindo-customers-name-jason-92-code}
+### `like(bindo.customers.name, jason%, 92)`の 92 は何を示していますか？ {#what-does-the-92-indicate-in-like-bindo-customers-name-jason-92}
 
 92はエスケープ文字を示しており、デフォルトではASCIIコード92です。
 
-### <code>information_schema.tables.data_length</code>で表示されるデータ長が、TiKV監視パネルのストアサイズと異なるのはなぜですか？ {#why-does-the-data-length-shown-by-code-information-schema-tables-data-length-code-differ-from-the-store-size-on-the-tikv-monitoring-panel}
+### `information_schema.tables.data_length`で表示されるデータ長が、TiKV監視パネルのストアサイズと異なるのはなぜですか？ {#why-does-the-data-length-shown-by-information-schema-tables-data-length-differ-from-the-store-size-on-the-tikv-monitoring-panel}
 
 理由は2つあります。
 
@@ -134,15 +134,15 @@ TiDB は、トランザクションで書き込まれるキーと値のペアが
 
 このセクションでは、PD（パーキンソン病）の管理中に遭遇する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### PDにアクセスすると、 <code>TiKV cluster is not bootstrapped</code>メッセージが表示されます。 {#the-code-tikv-cluster-is-not-bootstrapped-code-message-is-displayed-when-i-access-pd}
+### PDにアクセスすると、 `TiKV cluster is not bootstrapped`メッセージが表示されます。 {#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-i-access-pd}
 
 PD の API のほとんどは、TiKV クラスタが初期化されたときにのみ利用可能です。このメッセージは、新しいクラスタがデプロイされた際に TiKV が起動していない状態で PD にアクセスした場合に表示されます。このメッセージが表示された場合は、TiKV クラスタを起動してください。TiKV が初期化されると、PD にアクセスできるようになります。
 
-### PD の起動時に<code>etcd cluster ID mismatch</code>メッセージが表示されます {#the-code-etcd-cluster-id-mismatch-code-message-is-displayed-when-starting-pd}
+### PD の起動時に`etcd cluster ID mismatch`メッセージが表示されます {#the-etcd-cluster-id-mismatch-message-is-displayed-when-starting-pd}
 
 これは、PD起動パラメータの`--initial-cluster`に、このクラスタに属さないメンバーが含まれているためです。この問題を解決するには、各メンバーに対応するクラスタを確認し、間違ったメンバーを削除してからPDを再起動してください。
 
-### PD の保存時の暗号化を有効にすると<code>[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)</code>というメッセージが表示されます。 {#the-code-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-code-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
+### PD の保存時の暗号化を有効にすると`[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)`というメッセージが表示されます。 {#the-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
 
 保存時の暗号化では、キー ファイルを`root`ディレクトリまたはそのサブディレクトリに保存することはサポートされていません。読み取り権限を付与しても、同じエラーが発生します。この問題を解決するには、キー ファイルを`root`ディレクトリ以外の場所に保存してください。
 
@@ -160,7 +160,7 @@ PDはあらゆる同期エラーを許容できますが、エラー値が大き
 
 PD Controlを使用すると、TiKVストアの状態情報を確認できます。
 
-### PDにおける<code>leader-schedule-limit</code>と<code>region-schedule-limit</code>というスケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-code-leader-schedule-limit-code-and-code-region-schedule-limit-code-scheduling-parameters-in-pd}
+### PDにおける`leader-schedule-limit`と`region-schedule-limit`というスケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-leader-schedule-limit-and-region-schedule-limit-scheduling-parameters-in-pd}
 
 -   `leader-schedule-limit`スケジューリング パラメータは、さまざまな TiKV サーバーのLeader数をバランスさせるために使用され、クエリ処理の負荷に影響します。
 -   `region-schedule-limit`スケジューリング パラメータは、異なる TiKV サーバーのレプリカ数をバランスさせるために使用され、異なるノードのデータ量に影響を与えます。
@@ -186,7 +186,7 @@ pd-ctlツールを使用すると、クラスターの一般的な状態を確�
 
 このセクションでは、TiDBサーバーの管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### TiDBで<code>lease</code>パラメータを設定する方法は？ {#how-to-set-the-code-lease-code-parameter-in-tidb}
+### TiDBで`lease`パラメータを設定する方法は？ {#how-to-set-the-lease-parameter-in-tidb}
 
 リースパラメータ（ `--lease=60` ）は、TiDBサーバーの起動時にコマンドラインから設定します。リースパラメータの値は、現在のセッションのデータベーススキーマ変更（DDL）の速度に影響します。テスト環境では、テストサイクルを高速化するために値を1秒に設定できます。しかし、本番環境では、DDLの安全性を確保するために、値を分（例えば60）に設定することをお勧めします。
 
@@ -213,7 +213,7 @@ DDLリクエストを受信するTiDBサーバーインスタンスが、DDLオ�
 
 いいえ。現在、TiDBは分散ストレージエンジンとGoleveldb/RocksDB/BoltDBエンジンのみをサポートしています。
 
-### <code>Information_schema</code>は、より多くの実際の情報をサポートできますか？ {#can-the-code-information-schema-code-support-more-real-information}
+### `Information_schema`は、より多くの実際の情報をサポートできますか？ {#can-the-information-schema-support-more-real-information}
 
 MySQLとの互換性の一環として、TiDBは多数の`INFORMATION_SCHEMA`テーブルをサポートしています。これらのテーブルの多くには、対応するSHOWコマンドもあります。詳細については、 [情報スキーマ](/information-schema/information-schema.md)を参照してください。
 
@@ -233,7 +233,7 @@ TiClientリージョンエラーインジケータは、TiDBサーバーがク�
 
 `create_time`内のテーブルの`information_schema`は作成時刻です。
 
-### TiDBログにおける<code>EXPENSIVE_QUERY</code>の意味は何ですか？ {#what-is-the-meaning-of-code-expensive-query-code-in-the-tidb-log}
+### TiDBログにおける`EXPENSIVE_QUERY`の意味は何ですか？ {#what-is-the-meaning-of-expensive-query-in-the-tidb-log}
 
 TiDB が SQL ステートメントを実行する際、各オペレータが 10,000 行を超える行を処理すると推定される場合、クエリは`EXPENSIVE_QUERY`になります。 `tidb-server`構成パラメータを変更してしきい値を調整し、 `tidb-server`を再起動できます。
 
@@ -307,13 +307,13 @@ SQL の配置ルールは、レプリカ数、 Raftの役割、配置場所、�
 
 テスト環境であれば、リージョンごとに3つのレプリカで十分です。ただし、本番環境では、3ノード未満のTiKVクラスタを運用することは絶対に避けてください。インフラストラクチャ、ワークロード、および耐障害性のニーズに応じて、この数を増やす必要があるかもしれません。コピー数が多いほどパフォーマンスは低下しますが、セキュリティは向上することに注意してください。
 
-### TiKVの起動時に<code>cluster ID mismatch</code>メッセージが表示されます {#the-code-cluster-id-mismatch-code-message-is-displayed-when-starting-tikv}
+### TiKVの起動時に`cluster ID mismatch`メッセージが表示されます {#the-cluster-id-mismatch-message-is-displayed-when-starting-tikv}
 
 これは、ローカルの TiKV に保存されているクラスタ ID が、PD で指定されているクラスタ ID と異なるためです。新しい PD クラスタがデプロイされると、PD はランダムなクラスタ ID を生成します。TiKV は初期化時に PD からクラスタ ID を取得し、ローカルに保存します。次に TiKV が起動されると、ローカルのクラスタ ID と PD のクラスタ ID が照合されます。クラスタ ID が一致しない場合、 `cluster ID mismatch`メッセージが表示され、TiKV は終了します。
 
 以前にPDクラスタをデプロイした後、PDデータを削除して新しいPDクラスタをデプロイした場合、TiKVが古いデータを使用して新しいPDクラスタに接続しようとするため、このエラーが発生します。
 
-### TiKVの起動時に<code>duplicated store address</code>メッセージが表示されます {#the-code-duplicated-store-address-code-message-is-displayed-when-starting-tikv}
+### TiKVの起動時に`duplicated store address`メッセージが表示されます {#the-duplicated-store-address-message-is-displayed-when-starting-tikv}
 
 これは、起動パラメータのアドレスが他の TiKV によって PD クラスタに登録されているためです。このエラーが発生する一般的な条件: TiKV `--data-dir`で指定されたパスにデータフォルダがありません (削除または移動後に --data-dir を更新しません)。以前のパラメータを使用して TiKV を再起動してください。pd-ctl の[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)機能を使用して以前のストアを削除し、TiKV を再起動してください。
 
@@ -363,7 +363,7 @@ TiKVで大量のデータを書き込んだり読み込んだりすると、I/O�
 
 リージョンは事前に分割されるのではなく、リージョン分割メカニズムに従って分割されます。リージョンサイズが`region-max-size`または`region-max-keys`パラメータの値を超えると、分割がトリガーされます。分割後、その情報がPDに報告されます。
 
-### TiKVには、MySQLのようにデータのセキュリティを保証するための<code>innodb_flush_log_trx_commit</code>パラメータはありますか？ {#does-tikv-have-the-code-innodb-flush-log-trx-commit-code-parameter-like-mysql-to-guarantee-the-security-of-data}
+### TiKVには、MySQLのようにデータのセキュリティを保証するための`innodb_flush_log_trx_commit`パラメータはありますか？ {#does-tikv-have-the-innodb-flush-log-trx-commit-parameter-like-mysql-to-guarantee-the-security-of-data}
 
 TiKVには同様のパラメータはありませんが、TiKVではコミットごとにRaftログへの書き込みが強制されます（TiKVは[Raft Engine](/glossary.md#raft-engine)を使用してRaftログを保存し、コミット時に強制的に書き込みを行います）。TiKVがクラッシュした場合、KVデータはRaftログに基づいて自動的に復旧されます。
 
@@ -398,7 +398,7 @@ TiKVはインターフェースを個別に呼び出すことをサポートし�
 -   TiDBとTiKV間のデータ伝送を削減する
 -   TiKVの分散コンピューティングリソースを最大限に活用して、コンピューティングプッシュダウンを実行します。
 
-### エラーメッセージ<code>IO error: No space left on device While appending to file</code>が表示されます。 {#the-error-message-code-io-error-no-space-left-on-device-while-appending-to-file-code-is-displayed}
+### エラーメッセージ`IO error: No space left on device While appending to file`が表示されます。 {#the-error-message-io-error-no-space-left-on-device-while-appending-to-file-is-displayed}
 
 これはディスク容量が不足しているためです。ノードを追加するか、ディスク容量を拡張する必要があります。
 

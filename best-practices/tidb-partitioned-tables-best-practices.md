@@ -173,7 +173,7 @@ WHERE `fa`.`sid` IN (
 > -   一意でないグローバル インデックスの場合は、 `ADD UNIQUE INDEX`ではなく`ADD INDEX`を使用します。
 > -   `GLOBAL`キーワードを明示的に指定する必要があります。
 
-##### オプション1: <code>ALTER TABLE</code>を使用する {#option-1-use-code-alter-table-code}
+##### オプション1: `ALTER TABLE`を使用する {#option-1-use-alter-table}
 
 既存のパーティションテーブルにグローバルインデックスを追加するには、 `ALTER TABLE`を使用します。
 
@@ -222,7 +222,7 @@ TiDB でパーティション テーブルとインデックスを設計する�
 
 TiDBでは、 [TTL (存続時間)](/time-to-live.md)を使用するか、パーティションを手動で削除することで履歴データを削除できます。どちらの方法でもデータは削除されますが、パフォーマンス特性は大きく異なります。以下のテスト結果から、パーティションを削除する方が一般的に高速で消費リソースも少なく、大規模なデータセットや頻繁なデータパージにはより適した選択肢であることがわかります。
 
-### TTLと<code>DROP PARTITION</code>の違い {#differences-between-ttl-and-code-drop-partition-code}
+### TTLと`DROP PARTITION`の違い {#differences-between-ttl-and-drop-partition}
 
 -   TTL: データの経過時間に基づいて自動的にデータを削除します。この方法は、時間の経過とともに行を段階的にスキャンして削除するため、処理速度が低下する可能性があります。
 -   `DROP PARTITION` : 1回の操作でパーティション全体を削除します。この方法は、特に大規模なデータセットの場合、通常、はるかに高速です。
@@ -255,7 +255,7 @@ TTL パフォーマンスに関する調査結果は次のとおりです。
 -   この操作はメタデータ レベルで実行されるため、最小限のリソースしか使用されません。
 -   `DROP PARTITION` 、特に大規模な履歴データセットの場合、TTL よりも高速で予測可能です。
 
-#### TiDBでTTLと<code>DROP PARTITION</code>使用する {#use-ttl-and-code-drop-partition-code-in-tidb}
+#### TiDBでTTLと`DROP PARTITION`使用する {#use-ttl-and-drop-partition-in-tidb}
 
 以下の例では匿名化されたテーブル構造を使用しています。TTLの詳細については、 [TTL（Time to Live）を使用して定期的にデータを削除する](/time-to-live.md)を参照してください。
 
@@ -487,7 +487,7 @@ TiDBでは、新しく作成されたパーティションは、最初は1つの
 
 新しい範囲パーティションによって発生するホットスポットの問題を軽減するには、次の手順に従います。
 
-##### ステップ1. <code>SHARD_ROW_ID_BITS</code>と<code>PRE_SPLIT_REGIONS</code>を使用する {#step-1-use-code-shard-row-id-bits-code-and-code-pre-split-regions-code}
+##### ステップ1. `SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用する {#step-1-use-shard-row-id-bits-and-pre-split-regions}
 
 リージョンを事前に分割するために、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)でパーティションテーブルを作成します。
 
@@ -516,7 +516,7 @@ PARTITION BY RANGE ( YEAR(hired) ) (
 );
 ```
 
-##### ステップ2. <code>merge_option=deny</code>属性を追加する {#step-2-add-the-code-merge-option-deny-code-attribute}
+##### ステップ2. `merge_option=deny`属性を追加する {#step-2-add-the-merge-option-deny-attribute}
 
 空のリージョンがマージされないようにするには、テーブルレベルまたはパーティションレベルで[`merge_option=deny`](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)属性を追加します。パーティションを削除しても、TiDB は削除されたパーティションに属するリージョンをマージします。
 
@@ -620,7 +620,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 このセクションでは、両方の変換方向についてこれらの方法の効率と影響を比較し、ベスト プラクティスの推奨事項を示します。
 
-### パーティションテーブルスキーマ: <code>fa</code> {#partitioned-table-schema-code-fa-code}
+### パーティションテーブルスキーマ: `fa` {#partitioned-table-schema-fa}
 
 ```sql
 CREATE TABLE `fa` (
@@ -642,7 +642,7 @@ PARTITION `fa_2024003` VALUES LESS THAN (2025003),
 PARTITION `fa_2024365` VALUES LESS THAN (2025365));
 ```
 
-### 非パーティションテーブルスキーマ: <code>fa_new</code> {#non-partitioned-table-schema-code-fa-new-code}
+### 非パーティションテーブルスキーマ: `fa_new` {#non-partitioned-table-schema-fa-new}
 
 ```sql
 CREATE TABLE `fa_new` (
@@ -660,7 +660,7 @@ CREATE TABLE `fa_new` (
 
 これらの例は、パーティションテーブルを非パーティションテーブルに変換する方法を示しています。非パーティションテーブルをパーティションテーブルに変換する場合も、同じ方法が適用されます。
 
-### 方法 1: パイプライン DML <code>INSERT INTO ... SELECT</code> {#method-1-pipelined-dml-code-insert-into-select-code}
+### 方法 1: パイプライン DML `INSERT INTO ... SELECT` {#method-1-pipelined-dml-insert-into-select}
 
 ```sql
 SET tidb_dml_type = "bulk";
@@ -670,7 +670,7 @@ INSERT INTO fa_new SELECT * FROM fa;
 -- 120 million rows copied in 58m 42s
 ```
 
-### 方法 2: <code>IMPORT INTO ... FROM SELECT</code> {#method-2-code-import-into-from-select-code}
+### 方法 2: `IMPORT INTO ... FROM SELECT` {#method-2-import-into-from-select}
 
 ```sql
 IMPORT INTO fa_new FROM SELECT * FROM fa WITH thread = 32, disable_precheck;

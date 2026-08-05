@@ -13,7 +13,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sql-development-specification/','/ja/tidbcl
 -   基本原則: テーブル命名規則に従うことを前提として、アプリケーションがテーブルの作成および削除ステートメントを内部的にパッケージ化し、ビジネスプロセスの異常な中断を防ぐための判断ロジックを追加することをお勧めします。
 -   詳細: アプリケーション側で異常に実行された SQL コマンドによる異常な中断を回避するために、 `if`判断を追加するには、 `create table if not exists table_name`または`drop table if exists table_name`ステートメントを推奨します。
 
-## <code>SELECT *</code>の使用法 {#code-select-code-usage}
+## `SELECT *`の使用法 {#select-usage}
 
 -   基本原則: クエリに`SELECT *`を使用しないでください。
 -   詳細：必要に応じて適切な列を選択し、 `SELECT *`を使用してすべてのフィールドを読み取ることは避けてください。このような操作はネットワーク帯域幅を消費するためです。カバリングインデックスを効果的に活用するには、クエリ対象のフィールドをインデックスに追加することを検討してください。

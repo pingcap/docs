@@ -205,7 +205,7 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 -   changefeed 構成ファイルとファイル内のすべての構成項目。
 -   チェンジフィードの`target-ts` 。
 
-## レプリケーションサブタスクの処理単位を管理する（ <code>processor</code> ） {#manage-processing-units-of-replication-sub-tasks-code-processor-code}
+## レプリケーションサブタスクの処理単位を管理する（ `processor` ） {#manage-processing-units-of-replication-sub-tasks-processor}
 
 -   `processor`リストをクエリします:
 

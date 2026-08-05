@@ -70,7 +70,7 @@ TiDB Dashboardにログイン後、左側のナビゲーション メニュー�
 >
 > ノードに子ノードを指す点線矢印がある場合、そのノード自体の持続時間は不正確です。例えば、 `tidb_execute`のノードの場合、ノード自体の持続時間は9070.18秒（ `9070.18 = 19306.46 - 300.66 - 9935.62` ）です。この式では、 `tidb_cop`子ノードの持続時間は`tidb_execute`の子ノードの持続時間に含まれていません。しかし、実際にはそうではありません。9番目のノード自体の持続時間である9070.18秒には、 `tidb_cop` `tidb_execute`ノードの持続時間の一部が含まれており、この部分の持続時間は特定できません。
 
-### <code>tidb_kv_request</code>とその親ノード {#code-tidb-kv-request-code-and-its-parent-nodes}
+### `tidb_kv_request`とその親ノード {#tidb-kv-request-and-its-parent-nodes}
 
 ![tidb\_execute node relation example2](/media/dashboard/dashboard-metrics-relation-relation-example2.png)
 

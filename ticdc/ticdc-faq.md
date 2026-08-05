@@ -11,7 +11,7 @@ summary: TiCDC を使用する際に遭遇する可能性のある FAQ につい
 >
 > このドキュメントでは、 `cdc cli`コマンドで指定されているサーバーアドレスは`--server=http://127.0.0.1:8300`です。コマンドを使用する際は、このアドレスを実際の PD アドレスに置き換えてください。
 
-## TiCDC でタスクを作成するときに<code>start-ts</code>選択するにはどうすればよいですか? {#how-do-i-choose-start-ts-when-creating-a-task-in-ticdc}
+## TiCDC でタスクを作成するときに`start-ts`選択するにはどうすればよいですか? {#how-do-i-choose-start-ts-when-creating-a-task-in-ticdc}
 
 レプリケーションタスクの`start-ts`は、上流TiDBクラスタ内のタイムスタンプOracle（TSO）に対応します。TiCDCは、レプリケーションタスクでこのTSOにデータを要求します。したがって、レプリケーションタスクの`start-ts` 、以下の要件を満たす必要があります。
 
@@ -158,7 +158,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
         最新の`primary_ts`に対応する時間が、手順 1 で取得した上流 TiDB クラスターの TSO 以上である場合、TiCDC はすべての更新を下流に複製しています。
 
-## TiCDC の<code>gc-ttl</code>とは何ですか? {#what-is-gc-ttl-in-ticdc}
+## TiCDC の`gc-ttl`とは何ですか? {#what-is-gc-ttl-in-ticdc}
 
 v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントの設定において外部サービスをサポートします。どのサービスでもGCセーフポイントを登録・更新できます。PDは、このGCセーフポイント以降のキーバリューデータがGCによってクリーンアップされないようにします。
 
@@ -208,7 +208,7 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 > -   `--tz`利用できない場合、TiCDC は`TZ`環境変数を使用してタイム ゾーン セットを読み取ろうとします。
 > -   `TZ`環境変数が使用できない場合、TiCDC はマシンのデフォルトのタイムゾーンを使用します。
 
-## <code>--config</code>で構成ファイルを指定せずにレプリケーション タスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in---config}
+## `--config`で構成ファイルを指定せずにレプリケーション タスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in---config}
 
 `-config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーション タスクを作成します。
 
@@ -272,7 +272,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 Kafka メッセージのキーの`ts` 18 ビット右に移動すると、Unix タイムスタンプを取得できます。
 
-## TiCDC オープン プロトコルは<code>null</code>どのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
+## TiCDC オープン プロトコルは`null`どのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
 
 TiCDC オープン プロトコルでは、タイプ コード`6`は`null`表します。
 
@@ -282,7 +282,7 @@ TiCDC オープン プロトコルでは、タイプ コード`6`は`null`表し
 
 詳細については[TiCDCオープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
-## TiCDC オープン プロトコルの行変更イベントが<code>INSERT</code>イベントなのか<code>UPDATE</code>イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
+## TiCDC オープン プロトコルの行変更イベントが`INSERT`イベントなのか`UPDATE`イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
 
 -   `UPDATE`イベントには`"p"`と`"u"`両方のフィールドが含まれます
 -   `INSERT`イベントには`"u"`フィールドのみが含まれます
@@ -355,7 +355,7 @@ mysql root@127.0.0.1:test> show create table test;
 
 v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに、TiCDC は上流と下流の間で時刻型の一貫性を保つために、自動的に`explicit_defaults_for_timestamp = ON`設定します。v5.0.1 または v4.0.13 より前のバージョンでは、TiCDC を使用して時刻型データをレプリケーションする際に、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題にご注意ください。
 
-## TiCDC レプリケーション タスクを作成するときに<code>safe-mode</code> <code>true</code>に設定すると、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントがダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になるのはなぜですか? {#why-do-insertupdate-statements-from-the-upstream-become-replace-into-after-being-replicated-to-the-downstream-if-i-set-safe-mode-to-true-when-i-create-a-ticdc-replication-task}
+## TiCDC レプリケーション タスクを作成するときに`safe-mode` `true`に設定すると、アップストリームからの`INSERT` / `UPDATE`ステートメントがダウンストリームにレプリケートされた後に`REPLACE INTO`になるのはなぜですか? {#why-do-insertupdate-statements-from-the-upstream-become-replace-into-after-being-replicated-to-the-downstream-if-i-set-safe-mode-to-true-when-i-create-a-ticdc-replication-task}
 
 TiCDCは、すべてのデータが少なくとも1回は複製されることを保証します。下流に重複データが存在する場合、書き込み競合が発生します。この問題を回避するために、TiCDCは`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
 
@@ -430,7 +430,7 @@ enable-table-across-nodes = true
 
 TiDBにはトランザクションタイムアウト機構があります。トランザクションの実行時間が[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)秒を超えると、TiDBは強制的にロールバックします。TiCDCはトランザクションがコミットされるまで待機してからレプリケーションを続行するため、レプリケーションの遅延が発生します。
 
-## TiDB Operatorによってデプロイされた TiCDC クラスターを<code>cdc cli</code>コマンドを使用して操作できないのはなぜですか? {#why-cant-i-use-the-cdc-cli-command-to-operate-a-ticdc-cluster-deployed-by-tidb-operator}
+## TiDB Operatorによってデプロイされた TiCDC クラスターを`cdc cli`コマンドを使用して操作できないのはなぜですか? {#why-cant-i-use-the-cdc-cli-command-to-operate-a-ticdc-cluster-deployed-by-tidb-operator}
 
 これは、 TiDB OperatorによってデプロイされたTiCDCクラスタのデフォルトポート番号が`8301`あるのに対し、TiCDCサーバーに接続するための`cdc cli`コマンドのデフォルトポート番号が`8300`であるためです。TiDB OperatorによってデプロイされたTiCDCクラスタを`cdc cli`コマンドで操作する場合は、以下のように`--server`パラメータを明示的に指定する必要があります。
 
@@ -468,7 +468,7 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 >
 > 保存された生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
 
-## 頻繁に発生する<code>CDC:ErrMySQLDuplicateEntryCDC</code>エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
+## 頻繁に発生する`CDC:ErrMySQLDuplicateEntryCDC`エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
 
 TiCDC を使用してデータを TiDB または MySQL に複製する場合、アップストリームの SQL ステートメントが特定のパターンで実行されると、次のエラーが発生する可能性があります。
 
@@ -510,7 +510,7 @@ UPDATE data_table SET value = 'v1' WHERE id = 2;
 
 セーフ モードでは、TiCDC は`UPDATE`操作を`DELETE + REPLACE INTO`に分割して実行し、一意のキーの競合エラーを回避します。
 
-## Kafka への TiCDC レプリケーション タスクが<code>broken pipe</code>エラーで頻繁に失敗するのはなぜですか? {#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors}
+## Kafka への TiCDC レプリケーション タスクが`broken pipe`エラーで頻繁に失敗するのはなぜですか? {#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors}
 
 TiCDCはSaramaクライアントを使用してKafkaにデータを複製します。データの順序が乱れるのを防ぐため、TiCDCはSaramaの自動再試行メカニズムを無効化します（再試行回数を0に設定）。その結果、TiCDCとKafka間の接続が一定時間アイドル状態になった後にKafkaによって切断された場合、TiCDCからの後続の書き込みは`write: broken pipe`エラーをトリガーし、レプリケーションタスクが失敗します。
 

@@ -23,7 +23,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 ## 一般的な非互換性 {#general-incompatibility}
 
-### <code>SELECT CONNECTION_ID()</code>はTiDBで64ビット整数を返します。 {#code-select-connection-id-code-returns-a-64-bit-integer-in-tidb}
+### `SELECT CONNECTION_ID()`はTiDBで64ビット整数を返します。 {#select-connection-id-returns-a-64-bit-integer-in-tidb}
 
 **説明**
 
@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`を使用できます。
 
-### TiDBは<code>Com_*</code>カウンタを維持しません {#tidb-does-not-maintain-code-com-code-counters}
+### TiDBは`Com_*`カウンタを維持しません {#tidb-does-not-maintain-com-counters}
 
 **説明**
 
@@ -46,7 +46,7 @@ MySQLは、データベースに対して実行された操作の合計数を追
 -   TiDB Cloudドキュメント: [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
 -   TiDB Self-Managed ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
 
-### TiDBはエラーメッセージで<code>TIMESTAMP</code>と<code>DATETIME</code>を区別します {#tidb-distinguishes-between-code-timestamp-code-and-code-datetime-code-in-error-messages}
+### TiDBはエラーメッセージで`TIMESTAMP`と`DATETIME`を区別します {#tidb-distinguishes-between-timestamp-and-datetime-in-error-messages}
 
 **説明**
 
@@ -56,7 +56,7 @@ TiDBのエラーメッセージは`TIMESTAMP`と`DATETIME`を区別しますが�
 
 文字列の照合にはエラーメッセージを使用しないでください。代わりに、トラブルシューティングには[エラーコード](/error-codes.md)を使用してください。
 
-### TiDBは<code>CHECK TABLE</code>文をサポートしていません {#tidb-does-not-support-the-code-check-table-code-statement}
+### TiDBは`CHECK TABLE`文をサポートしていません {#tidb-does-not-support-the-check-table-statement}
 
 **説明**
 
@@ -88,7 +88,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 照合順序は手動で設定し、クライアント側の照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、MySQL Connector/J 構成ファイルに保存されます。
 
-### <code>NO_BACKSLASH_ESCAPES</code>パラメータは効果がありません {#the-code-no-backslash-escapes-code-parameter-does-not-take-effect}
+### `NO_BACKSLASH_ESCAPES`パラメータは効果がありません {#the-no-backslash-escapes-parameter-does-not-take-effect}
 
 **説明**
 
@@ -98,7 +98,7 @@ TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラ�
 
 TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL ステートメントでは`\\`を使用してください。
 
-### <code>INDEX_USED</code>関連のパラメータはサポートされていません {#the-code-index-used-code-related-parameters-are-not-supported}
+### `INDEX_USED`関連のパラメータはサポートされていません {#the-index-used-related-parameters-are-not-supported}
 
 **説明**
 
@@ -111,7 +111,7 @@ TiDBはプロトコルのパラメータ`SERVER_QUERY_NO_GOOD_INDEX_USED`と`SER
 
 TiDB では`noIndexUsed()`および`noGoodIndexUsed()`関数を使用しないでください。
 
-### <code>enablePacketDebug</code>パラメータはサポートされていません {#the-code-enablepacketdebug-code-parameter-is-not-supported}
+### `enablePacketDebug`パラメータはサポートされていません {#the-enablepacketdebug-parameter-is-not-supported}
 
 **説明**
 
@@ -133,7 +133,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCU
 
 ## MySQL JDBC のバグ {#mysql-jdbc-bugs}
 
-### <code>useLocalTransactionState</code>と<code>rewriteBatchedStatements</code>が同時にtrueの場合、トランザクションはコミットまたはロールバックに失敗します。 {#code-uselocaltransactionstate-code-and-code-rewritebatchedstatements-code-are-true-at-the-same-time-will-cause-the-transaction-to-fail-to-commit-or-roll-back}
+### `useLocalTransactionState`と`rewriteBatchedStatements`が同時にtrueの場合、トランザクションはコミットまたはロールバックに失敗します。 {#uselocaltransactionstate-and-rewritebatchedstatements-are-true-at-the-same-time-will-cause-the-transaction-to-fail-to-commit-or-roll-back}
 
 **説明**
 
@@ -186,7 +186,7 @@ TiDB では、次の方法でもこれを修正します。
 
 整数型の主キーの変更はサポートされていません。TiDBは、主キーが整数型の場合、データ編成のインデックスとして主キーを使用します。詳細は[問題 #18090](https://github.com/pingcap/tidb/issues/18090)と[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-### <code>READ-UNCOMMITTED</code>および<code>SERIALIZABLE</code>分離レベルはサポートされていません {#the-code-read-uncommitted-code-and-code-serializable-code-isolation-levels-are-not-supported}
+### `READ-UNCOMMITTED`および`SERIALIZABLE`分離レベルはサポートされていません {#the-read-uncommitted-and-serializable-isolation-levels-are-not-supported}
 
 **説明**
 
@@ -198,7 +198,7 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 分離レベル`SERIALIZABLE`を設定し、分離レベル`SERIALIZABLE`に依存しない他のアプリケーションと TiDB の互換性を確保したい場合は、分離レベル[`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)を`1`に設定してください。この場合、TiDB はサポートされていない分離レベルエラーを無視します。
 
-### 列の<code>AUTO_INCREMENT</code>属性の変更はデフォルトでは許可されていません {#modification-of-a-column-s-code-auto-increment-code-attribute-is-not-allowed-by-default}
+### 列の`AUTO_INCREMENT`属性の変更はデフォルトでは許可されていません {#modification-of-a-column-s-auto-increment-attribute-is-not-allowed-by-default}
 
 **説明**
 
@@ -210,7 +210,7 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 `AUTO_INCREMENT`属性の削除を許可するには、 `@@tidb_allow_remove_auto_inc`を`true`に設定します。
 
-### <code>FULLTEXT</code> 、 <code>HASH</code> 、 <code>SPATIAL</code>インデックスはサポートされていません {#code-fulltext-code-code-hash-code-and-code-spatial-code-indexes-are-not-supported}
+### `FULLTEXT` 、 `HASH` 、 `SPATIAL`インデックスはサポートされていません {#fulltext-hash-and-spatial-indexes-are-not-supported}
 
 **説明**
 

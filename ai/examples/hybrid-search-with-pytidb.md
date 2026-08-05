@@ -25,7 +25,7 @@ summary: より包括的な結果を得るには、ベクトル検索と全文�
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. `pytidb`リポジトリをクローンする {#step-1-clone-the-pytidb-repository}
 
 [pytidb](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKであり、開発者がAIアプリケーションを効率的に構築できるよう設計されています。
 

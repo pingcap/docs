@@ -254,7 +254,7 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 
 TiDB Self-Managedでホットスポットの問題を処理する方法の詳細については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)。
 
-## <code>AUTO_RANDOM</code>を主キーとするテーブルにデータを挿入する {#insert-data-to-a-table-with-the-code-auto-random-code-primary-key}
+## `AUTO_RANDOM`を主キーとするテーブルにデータを挿入する {#insert-data-to-a-table-with-the-auto-random-primary-key}
 
 挿入するテーブルの主キーに`AUTO_RANDOM`属性がある場合、デフォルトでは主キーを指定できません。たとえば、 [`bookshop`](/develop/dev-guide-bookshop-schema-design.md)データベースでは、 [`users`テーブル](/develop/dev-guide-bookshop-schema-design.md#users-table)の`id`フィールドに`AUTO_RANDOM`属性が含まれていることがわかります。
 

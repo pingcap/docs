@@ -28,7 +28,7 @@ npm install @tidbcloud/prisma-adapter
 npm install @tidbcloud/serverless
 ```
 
-## <code>driverAdapters</code>を有効にする {#enable-code-driveradapters-code}
+## `driverAdapters`を有効にする {#enable-driveradapters}
 
 Prismaアダプタを使用するには、 `driverAdapters`ファイルで`schema.prisma` }機能を有効にする必要があります。例：
 

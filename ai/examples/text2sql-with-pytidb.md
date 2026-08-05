@@ -17,7 +17,7 @@ summary: AIモデルを使用して、自然言語によるクエリをSQL文に
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. `pytidb`リポジトリをクローンする {#step-1-clone-the-pytidb-repository}
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

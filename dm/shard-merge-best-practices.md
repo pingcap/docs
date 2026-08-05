@@ -38,7 +38,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 このセクションでは、AUTO_INCREMENT主キーの競合を処理するための 2 つの推奨ソリューションを紹介します。
 
-### 列から<code>PRIMARY KEY</code>属性を削除します {#remove-the-primary-key-attribute-from-the-column}
+### 列から`PRIMARY KEY`属性を削除します {#remove-the-primary-key-attribute-from-the-column}
 
 アップストリーム スキーマが次のとおりであると仮定します。
 

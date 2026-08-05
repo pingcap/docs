@@ -300,7 +300,7 @@ TiDBの平均CPU使用率は827%から577%に低下しました。QPSが増加�
 
 TiDB v6.0 は`rc read`を提供します。これは`tso cmd`を削減することで`read committed`分離レベルを最適化します。この機能はグローバル変数`set global tidb_rc_read_check_ts=on;`によって制御されます。この変数を有効にすると、TiDB のデフォルトの動作は`repeatable-read`分離レベルと同じように動作し、PD から取得する必要があるのは`start-ts`と`commit-ts`です。トランザクション内のステートメントは、最初に`start-ts`を使用して TiKV からデータを読み取ります。TiKV から読み取られたデータが`start-ts`より前の場合、データは直接返されます。TiKV から読み取られたデータが`start-ts`より後の場合、データは破棄されます。TiDB は PD から TSO を要求し、読み取りを再試行します。後続のステートメントの`for update ts`では、最新の PD TSO が使用されます。
 
-## シナリオ6: <code>tidb_rc_read_check_ts</code>変数を有効にしてTSOリクエストを削減する {#scenario-6-enable-the-code-tidb-rc-read-check-ts-code-variable-to-reduce-tso-requests}
+## シナリオ6: `tidb_rc_read_check_ts`変数を有効にしてTSOリクエストを削減する {#scenario-6-enable-the-tidb-rc-read-check-ts-variable-to-reduce-tso-requests}
 
 ### アプリケーション構成 {#application-configuration}
 

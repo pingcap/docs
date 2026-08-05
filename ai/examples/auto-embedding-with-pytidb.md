@@ -21,7 +21,7 @@ summary: 組み込みの埋め込みモデルを使用して、テキストデ�
 
 ## 実行方法 {#how-to-run}
 
-### ステップ1. <code>pytidb</code>リポジトリをクローンする {#step-1-clone-the-code-pytidb-code-repository}
+### ステップ1. `pytidb`リポジトリをクローンする {#step-1-clone-the-pytidb-repository}
 
 ```bash
 git clone https://github.com/pingcap/pytidb.git

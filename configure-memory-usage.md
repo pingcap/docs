@@ -194,7 +194,7 @@ TiDBは、実行演算子のディスクへの書き込みをサポートして�
 
 ## その他 {#others}
 
-### <code>GOMEMLIMIT</code>を設定して OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-gomemlimit}
+### `GOMEMLIMIT`を設定して OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-gomemlimit}
 
 GO 1.19 では、GC をトリガーするメモリ制限を設定するための環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)導入されています。
 

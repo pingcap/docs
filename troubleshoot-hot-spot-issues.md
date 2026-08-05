@@ -79,7 +79,7 @@ TiDBのコーディングルールによれば、同一テーブルのデータ�
 
 ![Dashboard Example 4](/media/troubleshoot-hot-spot-issues-4.png)
 
-## <code>SHARD_ROW_ID_BITS</code>を使用してホットスポットを処理する {#use-shard_row_id_bits-to-process-hotspots}
+## `SHARD_ROW_ID_BITS`を使用してホットスポットを処理する {#use-shard_row_id_bits-to-process-hotspots}
 
 非クラスター化主キーまたは主キーのないテーブルの場合、TiDBは暗黙的なAUTO_INCREMENT RowIDを使用します。`INSERT`操作が多数存在する場合、データは単一のリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
@@ -108,7 +108,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 上記の負荷図に示すように、`SHARD_ROW_ID_BITS`を設定する前では、負荷のホットスポットが単一のリージョンに集中していました。`SHARD_ROW_ID_BITS`を設定した後では、負荷のホットスポットが分散するようになります。
 
-## <code>AUTO_RANDOM</code>を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
+## `AUTO_RANDOM`を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
 
 AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
 

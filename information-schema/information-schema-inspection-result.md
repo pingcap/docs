@@ -173,7 +173,7 @@ select * from information_schema.inspection_rules where type='inspection';
 +-----------------+------------+---------+
 ```
 
-### <code>config</code>診断ルール {#code-config-code-diagnostic-rule}
+### `config`診断ルール {#config-diagnostic-rule}
 
 `config`診断ルールでは、 `CLUSTER_CONFIG`のシステム テーブルをクエリすることによって、次の 2 つの診断ルールが実行されます。
 
@@ -218,7 +218,7 @@ select * from information_schema.inspection_rules where type='inspection';
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
-### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
+### `version`診断ルール {#version-diagnostic-rule}
 
 `version`診断ルールは、 `CLUSTER_INFO`システムテーブルをクエリして、同じコンポーネントのバージョンハッシュが一致しているかどうかを確認します。次の例をご覧ください。
 
@@ -238,7 +238,7 @@ SEVERITY  | critical
 DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info WHERE type='tidb'
 ```
 
-### <code>critical-error</code>診断ルール {#code-critical-error-code-diagnostic-rule}
+### `critical-error`診断ルール {#critical-error-diagnostic-rule}
 
 `critical-error`診断ルールでは、次の 2 つの診断ルールが実行されます。
 
@@ -255,7 +255,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 -   `metrics_schema.up`監視テーブルと`CLUSTER_LOG`システム テーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
 
-### <code>threshold-check</code>診断ルール {#code-threshold-check-code-diagnostic-rule}
+### `threshold-check`診断ルール {#threshold-check-diagnostic-rule}
 
 `threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システム テーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 

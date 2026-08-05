@@ -293,11 +293,11 @@ try (Session session = sessionFactory.openSession()) {
 
 詳細については、[データを削除する](/develop/dev-guide-delete-data.md)を参照してください。
 
-## <code>MySQLDialect</code>との互換性 {#compatibility-with-code-mysqldialect-code}
+## `MySQLDialect`との互換性 {#compatibility-with-mysqldialect}
 
 TiDB で`MySQLDialect`を使用する場合は、以下の動作に注意してください。
 
-### <code>SERIALIZABLE</code>分離レベル {#code-serializable-code-isolation-level}
+### `SERIALIZABLE`分離レベル {#serializable-isolation-level}
 
 TiDB で`SERIALIZABLE`トランザクション分離レベルを設定しようとするアプリケーションは、次のエラーに遭遇します。
 
@@ -315,7 +315,7 @@ SET GLOBAL tidb_skip_isolation_level_check=1;
 >
 > コミュニティが管理する`TiDBDialect` `SERIALIZABLE`分離レベルを必要とする機能をスキップすることで、この動作を自動的に処理します。
 
-### <code>CHECK</code>制約 {#code-check-code-constraints}
+### `CHECK`制約 {#check-constraints}
 
 Hibernate の[`@Check`](https://docs.hibernate.org/orm/6.5/javadocs/org/hibernate/annotations/Check.html)アノテーションは、DDL `CHECK`制約を生成します。 [MySQL 8.0.16以降のバージョン](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html)では、これらの制約がデフォルトで強制されますが、TiDB は明示的に有効にされない限り、これらの制約を強制しません。
 

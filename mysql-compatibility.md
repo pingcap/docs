@@ -202,7 +202,7 @@ TiDBでは、[統計の収集](/statistics.md#manual-collection)はMySQLとは�
 
 詳細については、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を参照してください。
 
-### <code>SELECT</code>構文の制限事項 {#limitations-of-code-select-code-syntax}
+### `SELECT`構文の制限事項 {#limitations-of-select-syntax}
 
 TiDB は、次の`SELECT`構文をサポートしていません。
 
@@ -211,7 +211,7 @@ TiDB は、次の`SELECT`構文をサポートしていません。
 
 詳細については、 [`SELECT`](/sql-statements/sql-statement-select.md)文のリファレンスを参照してください。
 
-### <code>UPDATE</code>文 {#code-update-code-statement}
+### `UPDATE`文 {#update-statement}
 
 [`UPDATE`](/sql-statements/sql-statement-update.md)文のリファレンスを参照してください。
 
@@ -302,7 +302,7 @@ TiDBは、MySQLで非推奨となった特定の機能を実装していませ�
 -   浮動小数点型の精度を指定する。MySQL 8.0 ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)、代わりに`DECIMAL`型を使用することをお勧めします。
 -   `ZEROFILL`属性。MySQL 8.0ではこの機能[非推奨](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)、代わりにアプリケーションで数値をパディングすることをお勧めします。
 
-### <code>CREATE RESOURCE GROUP</code> 、 <code>DROP RESOURCE GROUP</code> 、および<code>ALTER RESOURCE GROUP</code>ステートメント {#code-create-resource-group-code-code-drop-resource-group-code-and-code-alter-resource-group-code-statements}
+### `CREATE RESOURCE GROUP` 、 `DROP RESOURCE GROUP` 、および`ALTER RESOURCE GROUP`ステートメント {#create-resource-group-drop-resource-group-and-alter-resource-group-statements}
 
 リソースグループの作成、変更、削除に関する以下のステートメントは、MySQLとは異なるパラメータをサポートしています。詳細については、以下のドキュメントを参照してください。
 

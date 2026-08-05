@@ -9,7 +9,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
 ## 1. サービス利用不可 {#1-service-unavailable}
 
-### 1.1 クライアントから<code>Region is Unavailable</code>エラーが報告されました {#11-the-client-reports-region-is-unavailable-error}
+### 1.1 クライアントから`Region is Unavailable`エラーが報告されました {#11-the-client-reports-region-is-unavailable-error}
 
 -   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生する場合や、 `not leader`または`epoch not match` } が原因で TiKV へのリクエストが失敗するか、TiKV へのリクエストがタイムアウトする場合があります。このような場合、TiDB は`backoff`再試行メカニズムを実行します。 `backoff`がしきい値 (デフォルトでは 20 秒) を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内であれば、このエラーはクライアントには表示されません。
 
@@ -233,7 +233,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     この問題は予期せぬものです。 [バグを報告する](https://github.com/tikv/tikv/issues/new?template=bug-report.md)ことができます。
 
-### 4.3 クライアントが<code>server is busy</code>と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
+### 4.3 クライアントが`server is busy`と報告するエラー {#43-the-client-reports-the-server-is-busy-error}
 
 ビジー状態の具体的な原因を確認するには、モニター**Grafana** -&gt; **TiKV** -&gt; **errors を**確認してください。 `server is busy` 、TiKV のフロー制御メカニズムが原因で発生しており、TiKV が現在過負荷状態にあるため後で再試行することを`tidb/ti-client`に通知します。
 

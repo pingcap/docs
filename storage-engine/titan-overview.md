@@ -131,7 +131,7 @@ Titan は、選択された BLOB ファイルについて、各値に対応す�
 
 後方互換性のため、スケーリング中もTiKVスナップショットはRocksDB形式のままです。スケーリングされたノードはすべてRocksDBから取得されるため、従来のTiKVノードよりも高い圧縮率、より小さいストアサイズ、コンパクション時の比較的大きな書き込み増幅など、RocksDBの特性を引き継いでいます。これらのRocksDB形式のSSTファイルは、コンパクション後に徐々にTitan形式に変換されます。
 
-### <code>min-blob-size</code>がパフォーマンスに与える影響 {#impact-of-min-blob-size-on-performance}
+### `min-blob-size`がパフォーマンスに与える影響 {#impact-of-min-blob-size-on-performance}
 
 [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) 、値が Titan に格納されるかどうかを決定します。値が`min-blob-size`以上の場合、Titan に格納されます。それ以外の場合は、ネイティブの RocksDB 形式で格納されます。`min-blob-size`が小さすぎたり大きすぎたりすると、パフォーマンスに影響します。
 

@@ -5,7 +5,7 @@ summary: TiCDC が UPDATE` イベントを分割するかどうかに関する�
 
 # TiCDC の UPDATE イベントの分割動作 {#ticdc-behavior-in-splitting-update-events}
 
-## MySQLシンクの<code>UPDATE</code>イベントを分割する {#split-update-events-for-mysql-sinks}
+## MySQLシンクの`UPDATE`イベントを分割する {#split-update-events-for-mysql-sinks}
 
 v6.5.10、v7.1.6、v7.5.2、v8.1.1、v8.2.0以降では、MySQLシンクを使用する場合、テーブルのレプリケーション要求を受信したTiCDCノードは、下流へのレプリケーションを開始する前に、PDから現在のタイムスタンプ`thresholdTS`を取得します。このタイムスタンプの値に基づいて、TiCDCは`UPDATE`イベントを分割するかどうかを決定します。
 
@@ -72,9 +72,9 @@ UPDATE t SET a = 3 WHERE a = 2;
 >
 > この動作変更後、MySQLシンクを使用する場合、TiCDCはほとんどの場合、 `UPDATE`イベントを分割しません。その結果、変更フィード実行時に主キーまたは一意キーの競合が発生し、変更フィードが自動的に再起動される可能性があります。再起動後、TiCDCは競合する`UPDATE`イベントを`DELETE`つと`INSERT`イベントに分割してから、Sorterモジュールに書き込みます。これにより、同一トランザクション内のすべてのイベントが正しく順序付けされ、 `DELETE`イベントすべてが`INSERT`イベントの前に配置されるため、データレプリケーションが正しく完了します。
 
-## MySQL以外のシンクの主キーまたは一意キーの<code>UPDATE</code>イベントを分割する {#split-primary-or-unique-key-update-events-for-non-mysql-sinks}
+## MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する {#split-primary-or-unique-key-update-events-for-non-mysql-sinks}
 
-### 単一の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-a-single-update-change}
+### 単一の`UPDATE`変更を含むトランザクション {#transactions-containing-a-single-update-change}
 
 v6.5.3、v7.1.1、v7.2.0以降、MySQL以外のシンクを使用する場合、単一の更新変更のみを含むトランザクションにおいて、主キーまたはnull以外の一意インデックス値が`UPDATE`イベントで変更されると、TiCDCはこのイベントを`DELETE`つと`INSERT`イベントに分割します。詳細については、GitHubのissue [＃9086](https://github.com/pingcap/tiflow/issues/9086)ご覧ください。
 
@@ -88,7 +88,7 @@ UPDATE t SET a = 2 WHERE a = 1;
 
 この例では、主キー`a`が`1`から`2`に更新されます。イベント`UPDATE`が分割されていない場合、CSV プロトコルおよび AVRO プロトコルを使用する場合、コンシューマーは新しい値`a = 2`のみを取得でき、古い値`a = 1`を取得できません。そのため、下流のコンシューマーは古い値`1`を削除せずに、新しい値`2`のみを挿入する可能性があります。
 
-### 複数の<code>UPDATE</code>変更を含むトランザクション {#transactions-containing-multiple-update-changes}
+### 複数の`UPDATE`変更を含むトランザクション {#transactions-containing-multiple-update-changes}
 
 v6.5.4、v7.1.2、v7.4.0以降、複数の変更を含むトランザクションにおいて、 `UPDATE`イベントで主キーまたはNULL以外の一意インデックス値が変更された場合、TiCDCはイベントを`DELETE`と`INSERT`イベントに分割し、すべてのイベントが`INSERT`のイベントの前の`DELETE`のイベントのシーケンスに従うようにします。詳細については、GitHubのissue [＃9430](https://github.com/pingcap/tiflow/issues/9430)ご覧ください。
 
@@ -112,7 +112,7 @@ COMMIT;
 
 したがって、TiCDC はこれら 2 つのイベントを 4 つのイベントに分割します。つまり、レコード`(1, 1)`と`(2, 2)`を削除し、レコード`(2, 1)`と`(1, 2)`を書き込みます。
 
-### 主キーまたは一意キーの<code>UPDATE</code>イベントを分割するかどうかを制御する {#control-whether-to-split-primary-or-unique-key-update-events}
+### 主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御する {#control-whether-to-split-primary-or-unique-key-update-events}
 
 v6.5.10、v7.1.6、v7.5.3、v8.1.1以降、MySQL以外のシンクを使用する場合、TiCDCはGitHub Issue [＃11211](https://github.com/pingcap/tiflow/issues/11211)に記載されているように、 `output-raw-change-event`パラメータを介して主キーまたは一意キーの`UPDATE`イベントを分割するかどうかを制御できるようになりました。このパラメータの具体的な動作は次のとおりです。
 

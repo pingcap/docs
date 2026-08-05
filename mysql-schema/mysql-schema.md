@@ -3,7 +3,7 @@ title: mysql Schema
 summary: TiDBのシステムテーブルについて学びましょう。
 ---
 
-# <code>mysql</code>スキーマ {#code-mysql-code-schema}
+# `mysql`スキーマ {#mysql-schema}
 
 `mysql`スキーマには、TiDBシステムテーブルが含まれています。この設計は、MySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能となるテーブルも多数含まれています。
 

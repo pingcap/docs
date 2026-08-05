@@ -2268,7 +2268,7 @@ SELECT HEX(WEIGHT_STRING('ab' AS CHAR(3))) AS char_result, HEX(WEIGHT_STRING('ab
 
 MySQLはInternational Components for Unicode (ICU)を使用して正規表現を実装し、TiDBはRE2を使用しています。2つのライブラリの構文の違いについては、 [ICUの文書](https://unicode-org.github.io/icu/userguide/)と[RE2 構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
-### <code>match_type</code>互換性 {#match_type-compatibility}
+### `match_type`互換性 {#match_type-compatibility}
 
 TiDB と MySQL 間の`match_type`の値オプションは次のとおりです。
 

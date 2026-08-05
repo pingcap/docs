@@ -25,7 +25,7 @@ TiDBにおけるデータベースとは、テーブルやインデックスな�
 
 -   [`sys`](/sys-schema/sys-schema.md)
 
-### <code>test</code>データベース {#code-test-code-database}
+### `test`データベース {#test-database}
 
 TiDBには`test`という名前のデフォルトデータベースが付属しています。ただし、 `test`データベースを使用する代わりに、独自のデータベースを作成することをお勧めします。
 

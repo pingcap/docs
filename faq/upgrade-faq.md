@@ -197,7 +197,7 @@ alter table t change column a a varchar(22) character set utf8;
     alter table t change column a a varchar(20) character set utf8mb4;
     ```
 
-#### <code>ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a</code> {#code-error-1366-hy000-incorrect-utf8-value-f09f8c80-for-column-a-code}
+#### `ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a` {#error-1366-hy000-incorrect-utf8-value-f09f8c80-for-column-a}
 
 TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、挿入された4バイトデータに対してUTF-8 Unicodeエンコーディングのチェックは行われませんでした。しかし、v2.1.2以降のバージョンでは、このチェックが追加されました。
 

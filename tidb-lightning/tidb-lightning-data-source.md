@@ -181,7 +181,7 @@ trim-last-separator = false
 -   *すべての*CSV ファイルにヘッダー行が含まれているかどうか。
 -   `header`が`true`の場合、最初の行は*列名*として使用されます。`header`が`false`の場合、最初の行は通常のデータ行として扱われます。
 
-#### <code>not-null</code>と<code>null</code> {#code-not-null-code-and-code-null-code}
+#### `not-null`と`null` {#not-null-and-null}
 
 -   `not-null`設定は、すべてのフィールドが null 不可かどうかを制御します。
 -   `not-null`が`false`の場合、 `null`で指定された文字列は特定の値ではなく SQL NULL に変換されます。

@@ -22,7 +22,7 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 ## 手順 {#steps}
 
-### ステップ1. Prometheus用の<code>scrape_config</code>ファイルを取得する {#step-1-get-a-scrape_config-file-for-prometheus}
+### ステップ1. Prometheus用の`scrape_config`ファイルを取得する {#step-1-get-a-scrape_config-file-for-prometheus}
 
 Prometheus サービスでTiDB Cloudのメトリクスを読み取るように設定する前に、まずTiDB Cloudで`scrape_config` YAML ファイルを生成する必要があります。 `scrape_config`ファイルには、Prometheus サービスが対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視できるようにする一意のベアラー トークンが含まれています。
 
@@ -86,7 +86,7 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、
 
 Grafana の使用方法の詳細については、 [Grafanaのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 
-## <code>scrape_config</code>をローテーションするためのベストプラクティス {#best-practice-for-rotating-scrape_config}
+## `scrape_config`をローテーションするためのベストプラクティス {#best-practice-for-rotating-scrape_config}
 
 データセキュリティを向上させるため、 `scrape_config`ファイルベアラートークンを定期的にローテーションしてください。
 

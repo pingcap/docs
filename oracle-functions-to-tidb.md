@@ -54,13 +54,13 @@ Oracleでは、文字列は一重引用符（''）で囲む必要があります
 
 TiDBでは、文字列は一重引用符（''）または二重引用符（""）で囲むことができます。たとえば、 `'a'`と`"a"` 。
 
-### <code>NULL</code>と空文字列の違い {#difference-between-code-null-code-and-an-empty-string}
+### `NULL`と空文字列の違い {#difference-between-null-and-an-empty-string}
 
 Oracle では、 `NULL`と空の文字列`''`を区別しません。つまり、 `NULL`は`''`と同等です。
 
 TiDB は`NULL`と空の文字列`''`を区別します。
 
-### <code>INSERT</code>ステートメントで同じテーブルを読み書きする {#read-and-write-to-the-same-table-in-an-code-insert-code-statement}
+### `INSERT`ステートメントで同じテーブルを読み書きする {#read-and-write-to-the-same-table-in-an-insert-statement}
 
 Oracleは、 `INSERT`文で同じテーブルへの読み取りと書き込みをサポートしています。例:
 
@@ -80,7 +80,7 @@ Oracleでは、クエリから最初のn行を取得するには、 `ROWNUM <= n
 
 TiDBでは、クエリから最初のn行を取得するには、 `LIMIT n`句を使用します。例えば、 `LIMIT 10` 。Hibernateクエリ言語（HQL）で`LIMIT`を含むSQL文を実行するとエラーが発生します。Hibernateの文をSQL文に変更する必要があります。
 
-### <code>UPDATE</code>ステートメントで複数のテーブルを更新する {#update-multiple-tables-in-an-code-update-code-statement}
+### `UPDATE`ステートメントで複数のテーブルを更新する {#update-multiple-tables-in-an-update-statement}
 
 Oracleでは、複数のテーブルを更新する際に、特定のフィールドの更新関係をリストする必要はありません。例:
 
@@ -142,7 +142,7 @@ TiDBでは、 `OFFSET m ROWS FETCH NEXT n ROWS ONLY`の代わりに`LIMIT n OFFS
 SELECT * FROM tables LIMIT 2000 OFFSET 0
 ```
 
-### <code>NULL</code>値のソート順 {#sorting-order-on-code-null-code-values}
+### `NULL`値のソート順 {#sorting-order-on-null-values}
 
 Oracle では、次の場合に`NULL`値が`ORDER BY`句によってソートされます。
 
