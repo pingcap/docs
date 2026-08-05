@@ -173,7 +173,7 @@ SHOW CREATE SEQUENCE s2\G
     Create Sequence: CREATE SEQUENCE `s2` start with 1 minvalue 1 maxvalue 100 increment by 1 cache 1000 nocycle ENGINE=InnoDB
     1 row in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントはTiDBの拡張機能です。実装はMariaDBで利用可能なシーケンスをモデルにしています。
 

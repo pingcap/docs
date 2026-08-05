@@ -267,7 +267,7 @@ SELECT n,1024>>n,LPAD(CONV(1024>>n,10,2),11,0) FROM cte;
 
 `>>`演算子は、TiDB [TSO](/tso.md)タイムスタンプから UNIX タイムスタンプを抽出するなど、大きな数値の特定の部分を抽出する場合にも役立ちます。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 MySQL 8.0 と以前のバージョンの MySQL では、ビット関数と演算子の処理に若干の違いがあります。TiDB は MySQL 8.0 の動作に準拠することを目指しています。
 

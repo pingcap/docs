@@ -94,7 +94,7 @@ SHOW COLLATION WHERE Charset="utf8mb4";
 5 rows in set (0.001 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBにおける`SHOW COLLATION`文の使用法はMySQLと完全に互換性があります。ただし、TiDBの文字セットはMySQLと比較してデフォルトの照合順序が異なる場合があります。詳細については[MySQLとの互換性](/mysql-compatibility.md)を参照してください。互換性に関する相違点が見つかった場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 

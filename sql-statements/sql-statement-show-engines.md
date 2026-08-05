@@ -30,6 +30,6 @@ mysql> SHOW ENGINES;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   このステートメントは、サポートされているエンジンとして常にInnoDBのみを返します。TiDBは内部的に、ストレージエンジンとして通常[TiKV](/tikv-overview.md)を使用します。

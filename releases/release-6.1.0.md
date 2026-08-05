@@ -185,7 +185,7 @@ TiDB バージョン: 6.1.0
 
     [ユーザードキュメント](/tikv-configuration-file.md#api-version-new-in-v610) [＃11745](https://github.com/tikv/tikv/issues/11745)
 
-### MySQLの互換性 {#mysql-compatibility}
+### MySQLとの互換性 {#mysql-compatibility}
 
 -   MySQL のユーザーレベルロック管理との互換性をサポート
 

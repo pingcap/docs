@@ -65,7 +65,7 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBは式を評価する際に常に列の元の値を使用します。例:
 

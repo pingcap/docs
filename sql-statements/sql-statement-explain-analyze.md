@@ -315,7 +315,7 @@ TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`Befo
 
 コプロセッサーオペレータには通常、実行時間情報の2つの部分、 `cop_task`と`tikv_task`が含まれます。`cop_task`はTiDBによって記録された時間で、リクエストがサーバーに送信されてからレスポンスが受信されるまでの時間です。`tikv_task`はTiKVコプロセッサー自体によって記録された時間です。この2つの値に大きな差がある場合は、レスポンスの待機時間が長すぎるか、gRPCまたはネットワークで費やされた時間が長すぎることを示している可能性があります。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、TiDB の出力形式と潜在的な実行計画はどちらも MySQL とは大幅に異なります。
 

@@ -48,7 +48,7 @@ SHOW STATS_TOPN WHERE Table_name='t';
     +---------+------------+----------------+-------------+----------+--------------------------+-------+
     6 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

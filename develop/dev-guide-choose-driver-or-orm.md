@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-g
 >
 > 詳細については[TiDB でサポートされているサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
-TiDBはMySQLプロトコルと高い互換性がありますが、一部の機能はMySQLと互換性がありません。互換性の違いに関する完全なリストについては、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
+TiDBはMySQLプロトコルと高い互換性がありますが、一部の機能はMySQLと互換性がありません。互換性の違いに関する完全なリストについては、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
 ## Java {#java}
 

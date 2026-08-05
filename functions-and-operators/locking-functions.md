@@ -17,7 +17,7 @@ TiDB は、MySQL 8.0 で利用可能なユーザー レベル[ロック関数](h
 | [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-all-locks) | 現在のセッションによって保持されているすべてのロックを解除します。                                                    |
 | [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html#function_release-lock)   | 以前に取得したロックを解除します。`lockName`パラメータは64文字以内でなければなりません。                                 |
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDB で許可される最小タイムアウトは 1 秒、最大タイムアウトは 1 時間 (3600 秒) です。これは、0 秒と無制限 ( `timeout=-1` ) の両方のタイムアウトが許可されている MySQL とは異なります。TiDB は範囲外の値を最も近い許容値に自動的に変換し、 `timeout=-1`は 3600 秒に変換されます。
 -   TiDBは、ユーザーレベルロックによるデッドロックを自動的に検出しません。デッドロックが発生したセッションは最大1時間後にタイムアウトしますが、影響を受けたセッションのいずれかで[`KILL`](/sql-statements/sql-statement-kill.md)を使用することで手動で解決することもできます。また、ユーザーレベルロックを常に同じ順序で取得することで、デッドロックを防ぐこともできます。

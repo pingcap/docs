@@ -102,7 +102,7 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 
 互換性の詳細については、次のドキュメントを参照してください。
 
--   [TiDBとMySQLの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility) 。
+-   [TiDBとMySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility) 。
 -   [MySQLとは異なるTiDBの機能](https://docs.pingcap.com/tidb/stable/mysql-compatibility#features-that-are-different-from-mysql) 。
 -   [TiDBのキーワードと予約語](https://docs.pingcap.com/tidb/stable/keywords) 。
 -   [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations) 。

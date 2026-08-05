@@ -47,7 +47,7 @@ ShardableStmt ::=
 |   ReplaceIntoStmt
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `BATCH`構文は TiDB 固有であり、MySQL とは互換性がありません。
 

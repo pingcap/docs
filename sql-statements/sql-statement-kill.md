@@ -35,7 +35,7 @@ KILL 5857102839209263511;
 
     Query OK, 0 rows affected (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   MySQL の`KILL`文は現在接続されている MySQL インスタンス内の接続のみを終了できますが、TiDB の`KILL`文はクラスター全体の任意の TiDB インスタンス内の接続を終了できます。
 -   v7.2.0 以前のバージョンでは、MySQL コマンドラインの<kbd>Control+C</kbd>を使用して TiDB 内のクエリまたは接続を終了することはサポートされていません。

@@ -151,7 +151,7 @@ CREATE TABLE `t1` (
 >
 >         Query OK, 0 rows affected (2.52 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   主キー列のReorg-Data型の変更はサポートされていませんが、Meta-Only型の変更はサポートされています。例：
 

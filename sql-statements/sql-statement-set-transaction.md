@@ -60,7 +60,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDB は、構文でのみトランザクションを読み取り専用として設定する機能をサポートしています。
 -   分離レベル`READ-UNCOMMITTED`および`SERIALIZABLE`サポートされていません。

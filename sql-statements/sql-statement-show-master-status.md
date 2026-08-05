@@ -22,7 +22,7 @@ SHOW MASTER STATUS;
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `SHOW MASTER STATUS`の出力はMySQLと一致するように設計されています。ただし、MySQLの結果はbinlogの位置情報であり、TiDBの結果は最新のTSO情報であるという点で実行結果が異なります。
 

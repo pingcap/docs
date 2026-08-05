@@ -1,6 +1,6 @@
 ---
 title: MySQL Compatibility
-summary: TiDBとMySQLの互換性、およびサポートされていない機能や異なる機能について学びましょう。
+summary: TiDBとMySQLとの互換性、およびサポートされていない機能や異なる機能について学びましょう。
 ---
 
 # MySQLとの互換性 {#mysql-compatibility}

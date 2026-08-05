@@ -314,7 +314,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 
 </SimpleTab>
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   `EXPLAIN`の形式と TiDB の潜在的な実行計画はどちらも MySQL とは大幅に異なります。
 -   TiDB は`FORMAT=JSON`または`FORMAT=TREE`オプションをサポートしていません。

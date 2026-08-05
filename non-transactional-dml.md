@@ -409,7 +409,7 @@ WHERE t.c1 IS NULL;
 -   各バッチで実行されるSQL文は、 `WHERE`条件が変更されるため、実行計画や式の計算順序が異なる場合があります。そのため、実行結果が元のSQL文と異なる可能性があります。
 -   DML ステートメントには非決定論的な操作が含まれています。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 非トランザクション ステートメントは TiDB 固有であり、MySQL とは互換性がありません。
 

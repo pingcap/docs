@@ -71,7 +71,7 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
     +---+
     5 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   厳密モードでは、再帰的に計算されたデータ長がシード部分のデータ長を超えると、TiDBは警告を返し、MySQLはエラーを返します。非厳密モードでは、TiDBの動作はMySQLの動作と一致します。
 -   再帰CTEのデータ型はシード部によって決定されます。シード部のデータ型は、場合によってはMySQLと完全に一致しないことがあります（関数など）。

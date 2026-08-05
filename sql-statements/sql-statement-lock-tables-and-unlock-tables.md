@@ -98,7 +98,7 @@ ERROR 1066 (42000): Not unique table/alias: 't'
 -   `METRICS_SCHEMA`
 -   `mysql`
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 ### テーブルロックの取得 {#table-lock-acquisition}
 

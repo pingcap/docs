@@ -153,6 +153,6 @@ JSON関数を使用して[JSONデータ型](/data-type-json.md)のデータを�
 
 詳細については[＃14486](https://github.com/pingcap/tidb/issues/14486)を参照してください。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   TiDB は、MySQL 8.0 で利用可能な[JSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-functions.html)ほとんどをサポートしています。

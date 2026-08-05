@@ -76,7 +76,7 @@ SHOW PRIVILEGES;
     +---------------------------------+---------------------------------------+-------------------------------------------------------+
     50 rows in set (0.00 sec)
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 TiDBの`SHOW PRIVILEGES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
 

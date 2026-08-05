@@ -59,7 +59,7 @@ ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_
 
 上記の文は、テーブル`tbl_name`のインデックス`idx_name`に対応する列データとインデックスデータの整合性を、指定されたデータ範囲（チェック対象）でチェックするために使用されます。整合性チェックに合格した場合、空の結果が返されます。そうでない場合は、データが不整合であることを示すエラーメッセージが返されます。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

@@ -71,7 +71,7 @@ mysql> show status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 -   このステートメントは MySQL と互換性があります。
 

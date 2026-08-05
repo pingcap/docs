@@ -17,7 +17,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 > -   `SPATIAL`関数、データ型、インデックス
 > -   `XA`構文
 >
-> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
+> 上記の機能がサポートされていないのは想定された動作であり、このドキュメントには記載されていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
 このドキュメントに記載されている非互換性の問題は、いくつかの[TiDBでサポートされているサードパーティツール](/develop/dev-guide-third-party-tools-compatibility.md)に見られます。
 

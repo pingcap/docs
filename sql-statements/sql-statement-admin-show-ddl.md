@@ -241,7 +241,7 @@ ADMIN SHOW DDL JOB QUERIES LIMIT 3 OFFSET 4;  # Retrieve rows 5-7
 
 DDL履歴ジョブキュー内の任意の結果範囲から、 `job_id`に対応する実行中のDDLジョブを検索できます。この構文には、 `ADMIN SHOW DDL JOB QUERIES`の最後の10件の結果という制限はありません。
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 このステートメントは、MySQL 構文に対する TiDB 拡張です。
 

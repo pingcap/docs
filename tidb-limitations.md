@@ -9,7 +9,7 @@ summary: TiDB の使用制限について学習します。
 
 > **Note:**
 >
-> TiDBはMySQLのプロトコルおよび構文と高い互換性を備えていますが、MySQLの多くの制限事項も含まれています。例えば、1つのインデックスには最大16列まで含めることができます。詳細については、 [MySQLの互換性](/mysql-compatibility.md)およびMySQLの公式ドキュメントをご覧ください。
+> TiDBはMySQLのプロトコルおよび構文と高い互換性を備えていますが、MySQLの多くの制限事項も含まれています。例えば、1つのインデックスには最大16列まで含めることができます。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)およびMySQLの公式ドキュメントをご覧ください。
 
 ## 識別子の長さの制限 {#limitations-on-identifier-length}
 

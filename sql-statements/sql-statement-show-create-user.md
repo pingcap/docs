@@ -34,7 +34,7 @@ mysql> SHOW GRANTS FOR 'root';
 1 row in set (0.00 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 <CustomContent platform="tidb">
 

@@ -811,7 +811,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [AUTO_INCREMENT](/auto-increment.md)
 -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
--   [MySQLの互換性](/mysql-compatibility.md)
+-   [MySQLとの互換性](/mysql-compatibility.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)
 -   [TiDB 3.0.4 リリースノート](/releases/release-3.0.4.md)
