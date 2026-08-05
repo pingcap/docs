@@ -52,7 +52,7 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-TiDB `BTREE` `HASH`のインデックス タイプを`RTREE`ますが、無視されることに注意してください。
+TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視することに注意してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
