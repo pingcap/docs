@@ -441,7 +441,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#interactive_timeout)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
 -   [TiDBのタイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
@@ -500,7 +500,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)
 -   [TiDB Data Migrationにおけるエラーの処理](/dm/dm-error-handling.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#max_allowed_packet-new-in-v610)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB Data Migrationに関するよくある質問](/dm/dm-faq.md)
@@ -605,7 +605,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#plugin_dir)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
@@ -613,7 +613,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#plugin_load)
 
 ### port
@@ -639,7 +639,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する](https://docs.pingcap.com/tidbcloud/migrate-from-mysql-using-data-migration)
 -   [システム変数](/system-variables.md#require_secure_transport-new-in-v610)
 -   [TiDB Cloud DedicatedへのTLS接続](https://docs.pingcap.com/tidbcloud/tidb-cloud-tls-connect-to-dedicated)
@@ -654,7 +654,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#skip_name_resolve-new-in-v520)
 
 ### socket
@@ -859,7 +859,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [統計入門](/statistics.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)
 -   [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
 -   [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
@@ -1055,7 +1055,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_cdc_write_source-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -1064,7 +1064,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_check_mb4_value_in_utf8)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -1101,7 +1101,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_config)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
@@ -1162,7 +1162,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
 -   [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
@@ -1175,7 +1175,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [管理者 SHOW DDL [ジョブ|ジョブクエリ]](/sql-statements/sql-statement-admin-show-ddl.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1196,7 +1196,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_error_count_limit)
@@ -1206,7 +1206,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 -   [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
@@ -1220,7 +1220,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -1249,7 +1249,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_priority)
@@ -1266,7 +1266,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB における DDL 実行のベストプラクティス](/best-practices/ddl-introduction.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -1358,7 +1358,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_1pc-new-in-v50)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
 -   [TiDBの機能](/basic-features.md)
@@ -1376,7 +1376,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_async_commit-new-in-v50)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
 -   [TiDBの機能](/basic-features.md)
@@ -1403,7 +1403,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [統計入門](/statistics.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)
 -   [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
@@ -1483,7 +1483,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_collect_execution_info)
@@ -1507,7 +1507,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [システム変数](/system-variables.md#tidb_enable_ddl-new-in-v630)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -1537,7 +1537,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
 -   [用語集](/glossary.md)
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_enhanced_security)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB Dashboardのユーザー管理](/dashboard/dashboard-user.md)
@@ -1610,7 +1610,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_gc_aware_memory_track)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -1627,7 +1627,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_gogc_tuner-new-in-v640)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 
@@ -1712,7 +1712,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_local_txn)
 
 ### tidb_enable_metadata_lock
@@ -1941,7 +1941,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
 -   [リソースグループの削除](/sql-statements/sql-statement-drop-resource-group.md)
 -   [エラーコードとトラブルシューティング](/error-codes.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [リソースグループの設定](/sql-statements/sql-statement-set-resource-group.md)
 -   [システム変数](/system-variables.md#tidb_enable_resource_control-new-in-v660)
 -   [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)
@@ -1983,7 +1983,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
@@ -2003,7 +2003,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
@@ -2031,7 +2031,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)
 -   [TiDB 8.1.0 リリースノート](/releases/release-8.1.0.md)
 -   [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
@@ -2064,7 +2064,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_enable_top_sql-new-in-v540)
 -   [TiDB DashboardのTop SQLページ](/dashboard/top-sql.md)
 -   [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
@@ -2073,7 +2073,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [PDマイクロサービス](/pd-microservices.md)
 -   [システム変数](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)
 -   [TiDBの機能](/basic-features.md)
@@ -2181,7 +2181,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [コストの高いクエリを特定する](/identify-expensive-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_expensive_query_time_threshold)
@@ -2209,7 +2209,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -2223,7 +2223,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_gc_concurrency-new-in-v50)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -2234,7 +2234,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TiDB から MySQL 互換データベースへのデータ移行](/migrate-from-tidb-to-mysql.md)
 -   [ある TiDBクラスタから別の TiDBクラスタに移行する](/migrate-from-tidb-to-tidb.md)
 -   [TiDB Self-ManagedからTiDB Cloudへの移行](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
@@ -2274,7 +2274,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [パイプラインDML](/pipelined-dml.md)
 -   [システム変数](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
@@ -2284,7 +2284,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_gc_run_interval-new-in-v50)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
 
@@ -2294,7 +2294,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [GCの概要](/garbage-collection-overview.md)
 -   [ガベージコレクションのコンフィグレーション](/garbage-collection-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
 -   [TiDBの機能](/basic-features.md)
 -   [TiDB 5.0.4 リリースノート](/releases/release-5.0.4.md)
@@ -2305,7 +2305,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_general_log)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -2316,7 +2316,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_generate_binary_plan-new-in-v620)
 -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
@@ -2343,7 +2343,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_gogc_tuner_threshold-new-in-v640)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
 -   [TiDB 7.1.4 リリースノート](/releases/release-7.1.4.md)
@@ -2355,7 +2355,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)
 
 ### tidb_hash_exchange_with_new_collation
@@ -2521,7 +2521,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [TiUP Benchコンポーネントを使用したTiDBのストレステスト](/tiup/tiup-bench.md)
 -   [システム変数](/system-variables.md#tidb_isolation_read_engines-new-in-v40)
@@ -2589,7 +2589,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_log_file_max_days-new-in-v530)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
 
@@ -2787,7 +2787,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_memory_usage_alarm_ratio)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
@@ -2812,7 +2812,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [メトリクススキーマ](/metrics-schema.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_metric_query_range_duration-new-in-v40)
@@ -2821,7 +2821,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [メトリクススキーマ](/metrics-schema.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_metric_query_step-new-in-v40)
@@ -3329,7 +3329,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_write_row_id)
 -   [TiDB 2.1 RC5 リリースノート](/releases/release-2.1-rc.5.md)
@@ -3377,7 +3377,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_placement_mode-new-in-v600)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 
@@ -3401,7 +3401,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_pprof_sql_cpu-new-in-v40)
 -   [TiDB 3.0.10 リリースノート](/releases/release-3.0.10.md)
@@ -3500,7 +3500,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_record_plan_in_slow_log)
@@ -3513,7 +3513,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [ログ編集](/log-redaction.md)
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_redact_log)
@@ -3584,7 +3584,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [権限管理](/privilege-management.md)
 -   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
 -   [システム変数](/system-variables.md#tidb_restricted_read_only-new-in-v520)
@@ -3609,7 +3609,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_row_format_version)
 -   [TiDB 4.0.13 リリースノート](/releases/release-4.0.13.md)
@@ -3635,7 +3635,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_scatter_region)
@@ -3669,7 +3669,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [メモリ使用量](/information-schema/information-schema-memory-usage.md)
 -   [メモリ使用量オペレーション履歴](/information-schema/information-schema-memory-usage-ops-history.md)
 -   [システム変数](/system-variables.md#tidb_server_memory_limit-new-in-v640)
@@ -3691,7 +3691,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
@@ -3700,7 +3700,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)
 -   [TiDB 6.5.2 リリースノート](/releases/release-6.5.2.md)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
@@ -3757,7 +3757,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_simplified_metrics)
 
 ### tidb_skip_ascii_check
@@ -3805,7 +3805,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [概要ページ](/dashboard/dashboard-overview.md)
 -   [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)
@@ -3822,7 +3822,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_slow_query_file)
 
@@ -3830,7 +3830,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_slow_txn_log_threshold-new-in-v700)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 
@@ -3896,7 +3896,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [統計入門](/statistics.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
@@ -3960,7 +3960,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_history_size-new-in-v40)
@@ -3969,7 +3969,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_internal_query-new-in-v40)
@@ -3979,7 +3979,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [スロークエリ](/information-schema/information-schema-slow-query.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
@@ -3990,7 +3990,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [TiDB DashboardのSQLステートメントページ](/dashboard/dashboard-statement-list.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
@@ -4004,7 +4004,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_refresh_interval-new-in-v40)
@@ -4054,7 +4054,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)
 -   [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
@@ -4080,7 +4080,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_top_sql_max_meta_count-new-in-v600)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 
@@ -4088,7 +4088,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_top_sql_max_time_series_count-new-in-v600)
 -   [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 
@@ -4102,7 +4102,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)
 -   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices/best-practices-on-public-cloud.md)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
@@ -4119,7 +4119,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ttl_delete_batch_size-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -4127,7 +4127,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650)
 -   [TiDB 8.5.1 リリースノート](/releases/release-8.5.1.md)
 -   [TiDB 7.5.6 リリースノート](/releases/release-7.5.6.md)
@@ -4137,7 +4137,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 -   [システム変数](/system-variables.md#tidb_ttl_delete_worker_count-new-in-v650)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
@@ -4160,7 +4160,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 -   [システム変数](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4169,7 +4169,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 -   [システム変数](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4178,7 +4178,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 -   [システム変数](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
@@ -4187,7 +4187,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -4195,7 +4195,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [TTL（Time to Live）を使用して期限切れのデータを定期的に削除する](/time-to-live.md)
 -   [システム変数](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4231,7 +4231,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [楽観的なトランザクションと悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
 -   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
@@ -4257,7 +4257,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_wait_split_region_finish)
@@ -4266,7 +4266,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_wait_split_region_timeout)
@@ -4395,7 +4395,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#txn_scope)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
@@ -4424,7 +4424,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [MySQLとのセキュリティ互換性](/security-compatibility-with-mysql.md)
 -   [システム変数](/system-variables.md#validate_passwordenable-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
@@ -4435,7 +4435,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#validate_passwordlength-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4445,7 +4445,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#validate_passwordmixed_case_count-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4455,7 +4455,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#validate_passwordnumber_count-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4465,7 +4465,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#validate_passwordpolicy-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4475,7 +4475,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [暗号化と圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#validate_passwordspecial_char_count-new-in-v650)
 -   [TiDB パスワード管理](/password-management.md)
 -   [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
@@ -4510,7 +4510,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/develop/java-app-best-practices.md)
 -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
--   [TiDB Cloudの SQL 機能が制限されている](https://docs.pingcap.com/tidbcloud/limited-sql-features)
+-   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [システム変数](/system-variables.md#wait_timeout)
 -   [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
 -   [TiProxy の概要](/tiproxy/tiproxy-overview.md)
