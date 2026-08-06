@@ -72,7 +72,7 @@ To help you meet regulatory compliance requirements, TiDB Cloud provides the fol
   >
   > Console audit logging records operations that occur after it is enabled. Operations performed before enabling are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
 
-- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role can manage console audit logging. Other organization members cannot enable or disable audit logging, modify log settings, or delete logs.
+- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role can manage console audit logging. Other organization members cannot enable or disable audit logging or modify log settings.
 
 ## Console audit event types
 
