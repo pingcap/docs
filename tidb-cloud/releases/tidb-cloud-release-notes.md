@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年8月5日 {#august-5-2026}
 
-**General changes**
+**全般的な変更**
 
 - **TiDB Cloud Premium**
 
@@ -25,7 +25,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年8月4日 {#august-4-2026}
 
-**General changes**
+**全般的な変更**
 
 - **TiDB Cloud Essential**
 
@@ -63,7 +63,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年7月28日 {#july-28-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Dedicated**
 
@@ -75,7 +75,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年7月21日 {#july-21-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Essential**
 
@@ -87,7 +87,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年7月14日 {#july-14-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Dedicated**
 
@@ -97,7 +97,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年7月9日 {#july-9-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Dedicated**
 
@@ -105,7 +105,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年7月7日 {#july-7-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Essential**
 
@@ -139,7 +139,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年6月30日 {#june-30-2026}
 
-**一般的な変更**
+**全般的な変更**
 
 - **TiDB Cloud Essential**
 
@@ -193,7 +193,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年6月16日
 
-**一般的な変更**
+**全般的な変更**
 
 - [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md) にドメイン検証を追加しました。
 

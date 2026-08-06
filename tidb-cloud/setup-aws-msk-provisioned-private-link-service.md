@@ -221,8 +221,8 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 
 詳細については、[Attach a cluster policy to the MSK cluster](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html) を参照してください。
 
-## Step 9. TiDB Cloud で PrivateLink 接続を作成する {#step-9-create-the-privatelink-connection-in-tidb-cloud}
+## ステップ 9. TiDB Cloud で PrivateLink 接続を作成する {#step-9-create-the-privatelink-connection-in-tidb-cloud}
 
 [TiDB Cloud コンソール](https://tidbcloud.com) で、MSK クラスターの ARN を使用して private link 接続を作成します。
 
-詳細については、[Create an Amazon MSK Provisioned private link connection](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md#step-2-configure-the-private-endpoint-for-changefeeds) を参照してください。
+詳細については、[Amazon MSK Provisioned プライベートリンク接続を作成する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md#step-2-configure-the-private-endpoint-for-changefeeds) を参照してください。
