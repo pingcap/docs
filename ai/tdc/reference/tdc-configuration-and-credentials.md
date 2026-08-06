@@ -214,6 +214,14 @@ TDC_TELEMETRY=off tdc db list-db-clusters
 
 The TiDB Cloud CLI creates `~/.tdc/.telemetry-installation-id` lazily for the first eligible event and restricts it to the current user where POSIX permissions are available. Delete this file to reset the pseudonymous identity. Telemetry delivery is lossy and never changes command output, errors, or exit status.
 
+An integration can attach explicit process-scoped metadata without changing a profile or command. `TDC_TELEMETRY_TAG` accepts a UTF-8 string up to 128 bytes. `TDC_TELEMETRY_EXTRA` accepts one complete JSON value up to 2 KiB after compaction. Invalid, prohibited, deeply nested, or oversized metadata is omitted without affecting the command. Do not include credentials, tokens, SQL, paths, personal data, profile names, or cloud resource IDs in either value:
+
+```bash
+TDC_TELEMETRY_TAG="e2b-preview" \
+TDC_TELEMETRY_EXTRA='{"campaign":"launch","runtime":"e2b"}' \
+tdc fs list-files --file-system-name workspace --path /
+```
+
 ## Sensitive values
 
 Treat these as secrets:
