@@ -60,10 +60,10 @@ MySQL、および 10.5.2 より前の MariaDB バージョンでは、ユーザ�
 
 | 特権 | 範囲 |
 |:----|:----|
-| `SELECT` | テーブル |
-| `RELOAD` | グローバル |
-| `REPLICATION SLAVE` | グローバル |
-| `REPLICATION CLIENT` | グローバル |
+| `SELECT` | Tables |
+| `RELOAD` | Global |
+| `REPLICATION SLAVE` | Global |
+| `REPLICATION CLIENT` | Global |
 
 これらの権限を付与するには、次のステートメントを実行します。
 
@@ -84,10 +84,10 @@ GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
 
 | 特権 | 範囲 | 説明 |
 |:---|:---|:---|
-| `SELECT` | テーブル | フルデータエクスポートに必要です。 |
-| `PROCESS` | グローバル | フルデータエクスポート中の InnoDB メタデータクエリに必要です。 |
-| `RELOAD` | グローバル | `FLUSH TABLES WITH READ LOCK` に必要です。 |
-| `BINLOG MONITOR` | グローバル | `REPLICATION CLIENT` から名前変更され、Binlog の監視を可能にします。 |
+| `SELECT` | Tables | フルデータエクスポートに必要です。 |
+| `PROCESS` | Global | フルデータエクスポート中の InnoDB メタデータクエリに必要です。 |
+| `RELOAD` | Global | `FLUSH TABLES WITH READ LOCK` に必要です。 |
+| `BINLOG MONITOR` | Global | `REPLICATION CLIENT` から名前変更され、Binlog の監視を可能にします。 |
 | `REPLICATION SLAVE` | Global | Binlog イベントの読み取りを可能にします。 |
 | `REPLICATION SLAVE ADMIN` | Global | レプリケーションステータスの管理を可能にします (たとえば、`SHOW SLAVE STATUS`)。 |
 | `REPLICATION MASTER ADMIN`| Global | マスターの監視を可能にします (たとえば、`SHOW SLAVE HOSTS`)。 |
