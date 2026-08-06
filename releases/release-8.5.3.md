@@ -53,7 +53,7 @@ TiDBバージョン：8.5.3
 
 -   TiFlash
 
-    -   storageスナップショット取得時の最大リトライ回数を増やし、大規模テーブルのクエリの安定性を向上 [#10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ストレージスナップショット取得時の最大リトライ回数を増やし、大規模テーブルのクエリの安定性を向上 [#10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   ワイドテーブルシナリオにおけるTiFlash OOM リスクの可観測性を強化 [#10272](https://github.com/pingcap/tiflash/issues/10272) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール

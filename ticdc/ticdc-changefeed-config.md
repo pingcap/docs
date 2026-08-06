@@ -384,7 +384,7 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### `storage` {#storage}
 
--   リドゥログのstorageURI。
+-   リドゥログのストレージURI。
 -   デフォルト値: `""`
 
 #### `use-file-backend` {#use-file-backend}

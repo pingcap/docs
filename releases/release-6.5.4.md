@@ -152,7 +152,7 @@ TiDB バージョン: 6.5.4
         -   BRで使用されるグローバルパラメータ`TableColumnCountLimit`と`IndexLimit`デフォルト値を最大値に増やすことで、復元が失敗する問題を修正しました。 [＃45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
         -   PITR で DDL メタ情報を処理するときに書き換えが失敗する問題を修正しました [＃43184](https://github.com/pingcap/tidb/issues/43184) @[Leavrth](https://github.com/Leavrth)
         -   PITR実行中に関数の戻り値をチェックしないことで発生するpanicの問題を修正[＃45853](https://github.com/pingcap/tidb/issues/45853) @[Leavrth](https://github.com/Leavrth)
-        -   Amazon S3 以外の S3 互換storage使用時に無効なリージョン ID が取得される問題を修正 [＃42033](https://github.com/pingcap/tidb/issues/42033) @[3pointer](https://github.com/3pointer) [＃41916](https://github.com/pingcap/tidb/issues/41916)
+        -   Amazon S3 以外の S3 互換ストレージ使用時に無効なリージョン ID が取得される問題を修正 [＃42033](https://github.com/pingcap/tidb/issues/42033) @[3pointer](https://github.com/3pointer) [＃41916](https://github.com/pingcap/tidb/issues/41916)
         -   RawKVモードのきめ細かなバックアップフェーズで発生する可能性のあるエラーを修正 [＃37085](https://github.com/pingcap/tidb/issues/37085) @[pingyu](https://github.com/pingyu)
         -   TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [＃40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
         -   リージョンリーダーシップの移行が発生すると、PITR ログバックアップの進行のレイテンシーが長くなるという問題を軽減します[＃13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)

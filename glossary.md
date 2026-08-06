@@ -324,7 +324,7 @@ TiKV におけるデータストレージの最小単位はリージョンであ
 
 ### RocksDB {#rocksdb}
 
-[RocksDB](https://rocksdb.org/)は、キーバリューstorageと読み書き機能を提供するLSMツリー構造のエンジンです。Facebookによって開発され、LevelDBをベースとしています。RocksDBはTiKVの中核となるストレージエンジンです。
+[RocksDB](https://rocksdb.org/)は、キーバリューストレージと読み書き機能を提供するLSMツリー構造のエンジンです。Facebookによって開発され、LevelDBをベースとしています。RocksDBはTiKVの中核となるストレージエンジンです。
 
 ## <a id="S" class="letter" href="#S">S</a> {#s}
 

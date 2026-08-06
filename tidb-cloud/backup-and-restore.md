@@ -108,7 +108,7 @@ TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを�
 > **Note:**
 >
 > -   現在、デュアルリージョンバックアップ機能は、AWSおよびGoogle Cloud上でホストされているTiDB Cloud Dedicatedクラスターでのみ利用可能です。
-> -   Google Cloud 上でホストされているTiDB Cloud Dedicatedクラスターは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は、Google デュアルリージョンstorageと同じマルチリージョンコード内でのみデュアルリージョンペアリングをサポートします**。たとえば、アジアでは現在、デュアルリージョンストレージのために東京と大阪をペアリングする必要があります。詳細については、 [二重領域](https://cloud.google.com/storage/docs/locations#location-dr)を参照してください。
+> -   Google Cloud 上でホストされているTiDB Cloud Dedicatedクラスターは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は、Google デュアルリージョンストレージと同じマルチリージョンコード内でのみデュアルリージョンペアリングをサポートします**。たとえば、アジアでは現在、デュアルリージョンストレージのために東京と大阪をペアリングする必要があります。詳細については、 [二重領域](https://cloud.google.com/storage/docs/locations#location-dr)を参照してください。
 
 TiDB Cloud Dedicatedは、クラスタリージョンから別のリージョンにバックアップを複製することで、デュアルリージョンバックアップをサポートします。この機能を有効にすると、すべてのバックアップが指定されたリージョンに自動的に複製されます。これにより、リージョンをまたいだデータ保護とディザスタリカバリ機能が実現します。データの約99%は1時間以内にセカンダリリージョンに複製されると推定されます。
 
@@ -179,7 +179,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 ### バックアップのエクスポート {#export-backups}
 
-特定のバックアップをAmazon S3やGoogle Cloud Storageなどのクラウドストレージにエクスポートするには、対象のstorageプロバイダーの手順に従ってください。
+特定のバックアップをAmazon S3やGoogle Cloud Storageなどのクラウドストレージにエクスポートするには、対象のストレージプロバイダーの手順に従ってください。
 
 > **Note:**
 >

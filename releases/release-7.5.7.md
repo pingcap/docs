@@ -57,7 +57,7 @@ TiDB バージョン: 7.5.7
 -   TiFlash
 
     -   ワイドテーブルシナリオにおけるTiFlash OOM リスクの観測可能性を強化[＃10272](https://github.com/pingcap/tiflash/issues/10272) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    -   storageスナップショットを取得する際の最大再試行回数を増やし、大規模なテーブルのクエリの安定性を向上させます[＃10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   ストレージスナップショットを取得する際の最大再試行回数を増やし、大規模なテーブルのクエリの安定性を向上させます[＃10300](https://github.com/pingcap/tiflash/issues/10300) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 -   ツール
 

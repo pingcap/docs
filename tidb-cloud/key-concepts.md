@@ -33,7 +33,7 @@ Data Serviceを使用すると、カスタム API エンドポイントを使用
 
 ## 拡張性 {#scalability}
 
-TiDB Cloud Dedicated を使用すると、データ量やワークロードの変化に合わせてコンピューティング リソースとstorageリソースを個別に調整できます。[拡張性について詳しくはこちらをご覧ください](/tidb-cloud/scalability-concepts.md)。
+TiDB Cloud Dedicated を使用すると、データ量やワークロードの変化に合わせてコンピューティング リソースとストレージリソースを個別に調整できます。[拡張性について詳しくはこちらをご覧ください](/tidb-cloud/scalability-concepts.md)。
 
 ## 高可用性 {#high-availability}
 

@@ -77,11 +77,11 @@ DESC tiflash_segments;
 -   `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤーに保持される削除範囲の数。
 -   `DELTA_CACHE_SIZE` : Deltaレイヤーのキャッシュのサイズ (バイト単位)。
 -   `DELTA_INDEX_SIZE` : Deltaレイヤー内のインデックスのサイズ (バイト単位)。
--   `STABLE_PAGE_ID` : 安定レイヤーのデータのディスクstorageID。
+-   `STABLE_PAGE_ID` : 安定レイヤーのデータのディスクストレージID。
 -   `STABLE_ROWS` : 安定レイヤー内の行の合計数。
 -   `STABLE_SIZE` : 安定レイヤーのデータの合計サイズ (バイト単位)。
 -   `STABLE_DMFILES` : 安定レイヤー内の DMFiles の数。
--   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクstorageID。
+-   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクストレージID。
 -   `STABLE_DMFILES_ROWS` : 安定レイヤーの DMFile 内の行の合計数。
 -   `STABLE_DMFILES_SIZE` : 安定レイヤーの DMFile 内のデータの合計サイズ (バイト単位)。
 -   `STABLE_DMFILES_SIZE_ON_DISK` : 安定レイヤーで DMFile が占めるディスク領域 (バイト単位)。

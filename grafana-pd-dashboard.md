@@ -149,7 +149,7 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
 
-## リージョンstorage {#region-storage}
+## リージョンストレージ {#region-storage}
 
 -   シンカーインデックス: リーダーによって記録されたリージョン変更履歴の最大インデックス
 -   履歴最終インデックス:リージョン変更履歴がフォロワーと正常に同期された最後のインデックス

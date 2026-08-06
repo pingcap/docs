@@ -29,7 +29,7 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 
 ベクトル埋め込みは機械学習において不可欠であり、意味的類似性検索の基盤となる。
 
-TiDB は、ベクトル埋め込みのstorageと検索を最適化するように設計された、シームレス [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を導入し、AI アプリケーションでの使用を強化します。ベクトル エンベディングを TiDB に保存し、ベクトル検索クエリを実行して、これらのデータ タイプを使用して最も関連性の高いデータを見つけることができます。
+TiDB は、ベクトル埋め込みのストレージと検索を最適化するように設計された[ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を導入し、AI アプリケーションでの使用を強化します。ベクトル エンベディングを TiDB に保存し、ベクトル検索クエリを実行して、これらのデータ タイプを使用して最も関連性の高いデータを見つけることができます。
 
 ### 埋め込みモデル {#embedding-model}
 
