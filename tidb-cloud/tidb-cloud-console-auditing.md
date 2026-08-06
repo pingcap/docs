@@ -10,12 +10,10 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 ## Prerequisites
 
 - You must be in the `Organization Owner` or `Organization Console Audit Manager` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console.
-- You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
-- After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
 ## Enable console audit logging
 
-The console audit logging feature is disabled by default. To enable it, take the following steps:
+The console audit logging feature is disabled by default. After it is enabled, all supported event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them. To enable it, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
@@ -72,7 +70,7 @@ To help you meet regulatory compliance requirements, TiDB Cloud provides the fol
   >
   > Console audit logging records every occurrence of supported event types that occur after it is enabled. Operations performed before enabling are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
 
-- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role can manage console audit logging. Other organization members cannot enable or disable audit logging or modify log settings.
+- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role of your organization can manage console audit logging for your organization. Other organization members cannot enable or disable audit logging or modify log settings.
 
 ## Console audit event types
 
