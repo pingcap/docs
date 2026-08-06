@@ -114,4 +114,3 @@ Unlike other `FLUSH` statements, `FLUSH STATS_DELTA` does not require the `RELOA
 - [Statistics](/statistics.md)
 - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
 - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
-- [`REFRESH STATS`](/sql-statements/sql-statement-refresh-stats.md)
