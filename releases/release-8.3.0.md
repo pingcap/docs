@@ -1,7 +1,6 @@
 ---
 title: TiDB 8.3.0 Release Notes
 summary: TiDB 8.3.0 の新機能、互換性の変更点、改善点、およびバグ修正についてご確認ください。
-aliases: ['/ja/tidb/dev/release-8.3.0/','/ja/tidb/v8.3/release-8.3.0','/ja/tidb/v5.4/release-8.3.0','/ja/tidb/v6.1/release-8.3.0','/ja/tidb/v6.5/release-8.3.0','/ja/tidb/v7.1/release-8.3.0','/ja/tidb/v7.5/release-8.3.0','/ja/tidb/v8.1/release-8.3.0']
 ---
 
 # TiDB 8.3.0 リリースノート {#tidb-8-3-0-release-notes}
