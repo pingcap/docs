@@ -619,7 +619,7 @@ systemctl start docker
 
      </SimpleTab>
 
-## 生産環境 {#production-environment}
+## 本番環境 {#production-environment}
 
 本番環境では、完全マネージド型のサービスを受けるために、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated/)直接利用することをお勧めします。
 
