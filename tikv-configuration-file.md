@@ -1059,6 +1059,7 @@ Configuration items related to Raftstore.
 ### `raft-store-max-leader-lease`
 
 + The longest trusted period of a Raft leader
++ To start TiKV successfully, `raft-store-max-leader-lease` must not exceed [`raft-base-tick-interval`](#raft-base-tick-interval) * ([`raft-election-timeout-ticks`](#raft-election-timeout-ticks) - 1).
 + Default value: `"9s"`
 + Minimum value: `0`
 
