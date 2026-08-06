@@ -90,15 +90,17 @@ TiDB Cloud utilizes the AWS private certificate authority (PCA) service to issue
 
 To meet compliance requirements, TiDB Cloud BYOC integrates with a customer-provided PCA to issue identity certificates for data nodes using your enterprise's own domain. This ensures that the Root of Trust for all encrypted communications remains strictly within your organization's control.
 
-Therefore, you must prepare a valid Subordinate CA in the deployment region. Please follow the steps below:
+Therefore, you must prepare a valid subordinate CA in the deployment region. The CA ARN that you provide to TiDB Cloud must be the ARN of the subordinate CA. To create and activate the subordinate CA, you need an active root CA to sign its certificate.
 
-1. **Create a CA.** Follow [Create a private CA in AWS Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html).
+The subordinate CA certificate must be valid for at least **20 years**. Make sure that the root CA used to sign the subordinate CA certificate supports this validity period.
 
-    Configuration: Ensure the validity period is set to at least **20 years**.
+Perform the following steps:
 
-2. **Install the CA certificate.** Follow [Installing the CA certificate](https://docs.aws.amazon.com/privateca/latest/userguide/PCACertInstall.html).
+1. **Create a subordinate CA.** Follow [Create a private CA in AWS Private CA](https://docs.aws.amazon.com/privateca/latest/userguide/create-CA.html).
 
-    Prerequisite: You must have an active Root CA.
+    Configuration: select **Subordinate CA** as the CA type. Do not provide a root CA ARN to TiDB Cloud.
+
+2. **Install the subordinate CA certificate.** Follow [Installing the CA certificate](https://docs.aws.amazon.com/privateca/latest/userguide/PCACertInstall.html).
 
 3. **Record ARN.** Copy the **Subordinate CA ARN**.
 
@@ -139,7 +141,7 @@ When planning the CIDR ranges, ensure that:
 
 3. **Cross-Cluster Replication (Critical):** If you plan to deploy multiple TiDB clusters (whether in the same region or across different regions) and eventually want to **replicate data between them** (for example, using TiCDC for Disaster Recovery or data consolidation), their respective TiDB Cluster CIDR ranges **must be de-conflicted**.
 
-Provide the planned CIDR ranges to your TiDB Cloud representative before the automated deployment starts.
+Provide the planned CIDR ranges to your TiDB Cloud representative before the automated region deployment starts.
 
 ## Summary: Required information
 
@@ -156,13 +158,13 @@ Fill out the table below with the information gathered in steps above and share 
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
 | **Hosted Zone Names & Host Zone ID** | TiDB Cluster Zone, Observability (O11Y) Zone | **Hosted TiDB cluster zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB cluster zone ID:** `Z1039122VAY4T8UNWR8E`. **Hosted O11Y zone name:** `o11y.byoc-0929.pingcap.net`; **Hosted O11Y zone ID:** `Z10389823CTXFNM7VG79P`. | Step 4. The zone names and IDs can be shared across multiple regions. |
 | **CIDR** | Customer-planned CIDR range for the TiDB cluster, Customer-planned CIDR range for the O11Y cluster | **TiDB cluster CIDR:** `10.10.0.0/16`; **O11Y cluster CIDR:** `10.20.0.0/16` | Step 6 |
-| **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#deployment-process) for details. |
+| **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 
 ## Review and increase AWS service quotas
 
 AWS service quota requirements vary by customer environment. The required quota values depend on factors such as your workload size, target capacity, selected AWS region, availability mode, and expected scaling range.
 
-During environment preparation, work with TiDB Cloud Support or your TiDB Cloud representative to calculate the required quota values for your deployment. If your current AWS service quotas are lower than the calculated requirements, request quota increases before the automated deployment starts.
+During environment preparation, work with TiDB Cloud Support or your TiDB Cloud representative to calculate the required quota values for your deployment. If your current AWS service quotas are lower than the calculated requirements, request quota increases before the automated region deployment starts.
 
 ### Quota categories to review
 
@@ -183,4 +185,4 @@ Review the following quota categories in each target AWS region:
 
 ## What's next
 
-After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated deployment.
+After you have prepared the AWS environment and shared the required information with your TiDB Cloud representative, continue with [TiDB Cloud BYOC IAM Configuration](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) to configure the IAM permissions required for automated region deployment.

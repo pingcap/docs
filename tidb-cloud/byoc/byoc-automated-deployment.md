@@ -1,51 +1,89 @@
 ---
-title: TiDB Cloud BYOC Automated Deployment
-summary: This document outlines the automated deployment process for TiDB Cloud BYOC on AWS.
+title: TiDB Cloud BYOC Automated Region Deployment
+summary: This document outlines the automated region deployment process for TiDB Cloud BYOC on AWS.
 ---
 
-# TiDB Cloud BYOC Automated Deployment
+# TiDB Cloud BYOC Automated Region Deployment
 
 With the AWS environment prepared and IAM permissions established, the TiDB Cloud team will initiate the automated provisioning process.
 
 > **Note:**
 >
-> This phase is fully managed by TiDB Cloud. No customer action is required until you receive the completion notification.
+> This phase is managed by TiDB Cloud and normally requires no customer action. If the deployment is blocked by customer-managed policies, AWS service quotas, or network restrictions, the TiDB Cloud team will contact you for assistance.
 
-## Deployment process
+## Deployment overview
 
-The deployment consists of two automated steps:
+The automated region deployment consists of the following stages:
 
-### Step 1: Image synchronization (approx. 1-2 hours)
+1. Synchronize container images to your AWS account.
+2. Deploy the regional management plane.
+3. Deploy customer-side observability and supporting infrastructure.
+4. Register and validate the new BYOC region.
 
-* **Customer action:** Select the AWS Region where the BYOC deployment will be created and provide the Region information to your TiDB Cloud representative.
-* **What happens:** Database container images are synchronized from the TiDB Cloud central repository to your AWS account's region.
+The deployment creates resources in both a TiDB Cloud-managed AWS account and your AWS account. This phase prepares the BYOC region for subsequent resource pool and instance creation, but does **not** create any TiDB resource pools or instances.
+
+## Step 1: Image synchronization
+
+The image synchronization step takes approximately 1-2 hours.
+
+**Customer action:**
+
+Select the AWS Region for the BYOC deployment and provide the Region information to your TiDB Cloud representative.
+
+**What happens:**
+
+TiDB Cloud synchronizes the required container images from its central image repository to an Amazon ECR registry in your AWS account.
+
+The first deployment in a new AWS Region can take longer because it must synchronize all required images. Subsequent deployments in the same Region reuse the synchronized images and typically complete faster.
+
+## Step 2: Deploy the regional management plane
+
+TiDB Cloud deploys a regional management plane in a TiDB Cloud-managed AWS account.
+
+The regional management plane includes infrastructure and services used to manage the lifecycle of your BYOC environment, such as:
+
+- A dedicated VPC and Amazon EKS cluster
+- Regional management and API services
+- Configuration and metadata services
+- Components for instance provisioning, scheduling, scaling, and recovery
+- Integration with the TiDB Cloud global control plane
+
+The regional management plane does not store your TiDB application data.
+
+## Step 3: Deploy customer-side supporting infrastructure
+
+TiDB Cloud assumes the IAM roles created during account bootstrapping and deploys the required supporting resources in your AWS account.
+
+These resources include:
+
+- An isolated VPC for the observability environment
+- A dedicated Amazon EKS cluster for observability services
+- Metrics, logging, and alerting components
+- Supporting storage, load balancers, API endpoints, DNS records, and certificates
+- Audit-log and service-level indicator resources
+- Secure connectivity between the customer-side environment and the regional management plane
 
 > **Note:**
 >
-> This step is time-intensive only for the **first BYOC deployment** in a new region. Subsequent deployments in the same region will reuse the existing images and complete significantly faster.
+> The Amazon EKS cluster created in this step hosts observability and other supporting services. It is **not** the TiDB data plane for a TiDB instance. The TiDB data plane is initialized when you create your first BYOC instance in the TiDB Cloud console.
 
-### Step 2: Infrastructure provisioning (approx. 3 hours)
+## Step 4: Register and validate the BYOC region
 
-**Action**: The system automatically provisions dedicated resources within your AWS account, including:
+After the infrastructure and services are deployed, TiDB Cloud:
 
-* **Network Environment (VPC & Networking):** Creates an isolated VPC to provide a secure network foundation for the database cluster.
-
-* **Control Plane Initialization:** Deploys essential management components responsible for the database's full lifecycle management. This includes automated resource provisioning, service scheduling, elastic scaling, and failure recovery—all executed automatically with no manual intervention required.
-
-* **Compute Resource Provisioning:** Creates two EKS clusters serving the following purposes:
-
-    * Deploy Observability Services: Hosts components such as Prometheus and Grafana to collect monitoring metrics and logs.
-    * Deploy Data Plane Management Nodes: Hosts components (such as the TiDB Operator) to provide the runtime environment for the subsequent creation of TiDB compute and storage nodes.
+- Registers the BYOC region with the TiDB Cloud global control plane.
+- Verifies that regional management services are healthy.
+- Verifies connectivity to the customer-side observability environment.
+- Confirms that metrics and logs can flow through the expected paths.
+- Confirms that the region is ready for TiDB instance creation.
 
 ## Deployment completion
 
-Once the automation completes:
+After the automated region deployment completes:
 
-1. **Notification**: You will be notified by the TiDB Cloud Team that the BYOC Region is ready.
-
-2. **Billing Activation:**
-
-    **AWS Invoice:** You will begin seeing charges from AWS for the underlying resources (EC2, NAT Gateways, EKS).
+- The TiDB Cloud team notifies you that the BYOC region is ready.
+- The new BYOC region becomes available for instance creation.
+- AWS starts charging your account for the customer-owned resources created during deployment, such as Amazon EKS, EC2, NAT Gateway, load balancers, and storage.
 
 ## What's next
 
