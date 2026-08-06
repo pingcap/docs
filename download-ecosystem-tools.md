@@ -35,7 +35,7 @@ TiDB Toolkitは以下のリンクからダウンロードできます。
 
 使用したいツールに応じて、対応するオフラインパッケージを以下のようにインストールできます。
 
-| 道具                                                                | オフラインパッケージ名                                                                                                                                                         |
+| ツール                                                                | オフラインパッケージ名                                                                                                                                                         |
 | :---------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [TiUP](/tiup/tiup-overview.md)                                    | `tiup-linux-{arch}.tar.gz` <br/>`tiup-{tiup-version}-linux-{arch}.tar.gz` <br/>`dm-{tiup-version}-linux-{arch}.tar.gz` <br/> `server-{version}-linux-{arch}.tar.gz` |
 | [Dumpling](/dumpling-overview.md)                                 | `dumpling-{version}-linux-{arch}.tar.gz`                                                                                                                            |

@@ -43,7 +43,7 @@ summary: 演算子の優先順位、比較関数と演算子、論理演算子�
 | [LIKE](https://www.postgresql.org/docs/current/functions-matching.html)                                     | 大文字と小文字を区別しない単純なパターン マッチング (TiDB ではサポートされていますが、MySQL ではサポートされていません)                                                                                                  |
 | [-](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_minus)                      | マイナス演算子                                                                                                                                                              |
 | [%、MOD](https://dev.mysql.com/doc/refman/8.0/en/arithmetic-functions.html#operator_mod)                    | モジュロ演算子                                                                                                                                                              |
-| [NOT](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not)                       | 価値を否定する                                                                                                                                                              |
+| [NOT](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not)                       | 値を否定する                                                                                                                                                              |
 | [NOT BETWEEN](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 値が範囲内にないか確認する                                                                                                                                                        |
 | [!=, `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)     | 等しくない演算子                                                                                                                                                             |
 | [NOT LIKE](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)       | 単純なパターンマッチングの否定                                                                                                                                                      |
@@ -123,7 +123,7 @@ OR, ||
 | 名前                                                                                     | 説明       |
 | -------------------------------------------------------------------------------------- | -------- |
 | [AND, &&](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_and) | 論理積      |
-| [NOT](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not)   | 価値を否定する  |
+| [NOT](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_not)   | 値を否定する  |
 | [OR, ||](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_or)   | 論理和      |
 | [XOR](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html#operator_xor)  | 論理排他的論理和 |
 

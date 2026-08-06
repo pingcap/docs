@@ -214,7 +214,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 -   以下の構成項目の値が期待どおりであるかどうかを確認します。
 
-    | 成分   | コンフィグレーション項目       | 期待値      |
+    | コンポーネント   | コンフィグレーション項目       | 期待値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
@@ -244,7 +244,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 -   メトリック スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
-    | 成分   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
+    | コンポーネント   | エラー名                    | 監視テーブル                             | エラーの説明                                       |
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
     | TiDB | パニックカウント                | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
     | TiKV | 重大なエラー                  | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
@@ -259,7 +259,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システム テーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
-| 成分   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
+| コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso期間                | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | トークン取得期間             | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |

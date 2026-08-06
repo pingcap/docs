@@ -26,9 +26,9 @@ S3バケットとTiDB Cloudリソースは同じリージョンに配置する�
 -   [AWS S3バケット](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
 -   [TiDB Cloudアカウント](/tidb-cloud/tidb-cloud-quickstart.md)には、AWSでホストされている対象のTiDB Cloudリソースへの[`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles)アクセス権が少なくとも必要です。
 
-## 道具を準備する {#prepare-tools}
+## ツールを準備する {#prepare-tools}
 
-以下の道具を準備する必要があります。
+以下のツールを準備する必要があります。
 
 -   Dumpling：データエクスポートツール
 -   TiCDC：データ複製ツール

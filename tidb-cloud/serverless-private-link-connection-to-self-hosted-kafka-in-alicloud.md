@@ -48,12 +48,12 @@ Alibaba Cloud アカウント ID とアベイラビリティーゾーンを表�
 
 次の表は、展開情報の例を示しています。
 
-| 情報                             | 価値                                                                                | 注記                                                                                                                    |
+| 情報                             | 値                                                                                | 注記                                                                                                                    |
 | ------------------------------ | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | リージョン                          | `ap-southeast-1`                                                                  | 該当なし                                                                                                                  |
 | TiDB Cloud Alibaba Cloud アカウント | `<account_id>`                                                                    | 該当なし                                                                                                                  |
-| AZ ID                          | <li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li> | 該当なし                                                                                                                  |
-| Kafka アドバタイズドリスナーパターン          | &lt;ブローカーID&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;ポート&gt;                | `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
+| AZ ID                          | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul> | 該当なし                                                                                                                  |
+| Kafka アドバタイズドリスナーパターン          | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;                | `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 

@@ -171,8 +171,8 @@ python manage.py runserver
 | APIパス                                   | 説明                        |
 | --------------------------------------- | ------------------------- |
 | `POST: /insert_documents`               | 埋め込みを含むドキュメントを挿入します。      |
-| `GET: /get_nearest_neighbors_documents` | 最近隣の3軒の物件に関する書類を入手してください。 |
-| `GET: /get_documents_within_distance`   | 一定距離内にある書類を入手する。          |
+| `GET: /get_nearest_neighbors_documents` | 最近隣の3件のドキュメントを入手する。 |
+| `GET: /get_documents_within_distance`   | 一定距離内にあるドキュメントを入手する。          |
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

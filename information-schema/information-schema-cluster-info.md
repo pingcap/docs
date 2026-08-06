@@ -32,7 +32,7 @@ desc cluster_info;
 8 rows in set (0.01 sec)
 ```
 
-分野の説明：
+フィールドの説明：
 
 -   `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
 -   `INSTANCE` : インスタンスアドレス。これは`IP:PORT`の形式の文字列です。

@@ -13,9 +13,9 @@ TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-clo
 
 ## クラスタの制限 {#cluster-limits}
 
-| 成分                                                          | 制限 |
+| コンポーネント                                                          | 制限 |
 | :---------------------------------------------------------- | :- |
-| [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)部あたりのコピー数 | 3  |
+| [データ領域](/tidb-cloud/tidb-cloud-glossary.md#region)あたりのコピー数 | 3  |
 | クロスゾーン展開のアベイラビリティゾーンの数                                      | 3  |
 
 > **Note:**
@@ -24,7 +24,7 @@ TiDB Cloud、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-clo
 
 ## クラスタクォータ {#cluster-quotas}
 
-| 成分                            | クォータ（デフォルト） |
+| コンポーネント                            | クォータ（デフォルト） |
 | :---------------------------- | :---------- |
 | 組織内のすべてのクラスタの合計 TiDB ノードの最大数  | 10          |
 | 組織内のすべてのクラスタの合計 TiKV ノードの最大数  | 15          |
