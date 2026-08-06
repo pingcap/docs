@@ -58,12 +58,12 @@ Binlogログレプリケーション/同期処理ユニットは、上流の MyS
 
 MySQL、および 10.5.2 より前の MariaDB バージョンでは、ユーザーに次の権限が必要です。
 
-| Privilege | Scope |
+| 特権 | 範囲 |
 |:----|:----|
-| `SELECT` | Tables |
-| `RELOAD` | Global |
-| `REPLICATION SLAVE` | Global |
-| `REPLICATION CLIENT` | Global |
+| `SELECT` | テーブル |
+| `RELOAD` | グローバル |
+| `REPLICATION SLAVE` | グローバル |
+| `REPLICATION CLIENT` | グローバル |
 
 これらの権限を付与するには、次のステートメントを実行します。
 
@@ -82,12 +82,12 @@ GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
 
 [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2) 以降では、`REPLICATION CLIENT` 権限は `BINLOG MONITOR` に名前変更され、いくつかのレプリケーションステートメントでは `SUPER` を分割して作成された新しい権限が使用されます。MariaDB 10.5.2 から 10.5.8 では、ユーザーに次の権限が必要です。
 
-| Privilege | Scope | Description |
+| 特権 | 範囲 | 説明 |
 |:---|:---|:---|
-| `SELECT` | Tables | フルデータエクスポートに必要です。 |
-| `PROCESS` | Global | フルデータエクスポート中の InnoDB メタデータクエリに必要です。 |
-| `RELOAD` | Global | `FLUSH TABLES WITH READ LOCK` に必要です。 |
-| `BINLOG MONITOR` | Global | `REPLICATION CLIENT` から名前変更され、Binlog の監視を可能にします。 |
+| `SELECT` | テーブル | フルデータエクスポートに必要です。 |
+| `PROCESS` | グローバル | フルデータエクスポート中の InnoDB メタデータクエリに必要です。 |
+| `RELOAD` | グローバル | `FLUSH TABLES WITH READ LOCK` に必要です。 |
+| `BINLOG MONITOR` | グローバル | `REPLICATION CLIENT` から名前変更され、Binlog の監視を可能にします。 |
 | `REPLICATION SLAVE` | Global | Binlog イベントの読み取りを可能にします。 |
 | `REPLICATION SLAVE ADMIN` | Global | レプリケーションステータスの管理を可能にします (たとえば、`SHOW SLAVE STATUS`)。 |
 | `REPLICATION MASTER ADMIN`| Global | マスターの監視を可能にします (たとえば、`SHOW SLAVE HOSTS`)。 |
@@ -162,6 +162,6 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 | 処理装置           | 最小限のアップストリーム（MySQL/MariaDB）権限                                                                              | 最小限のダウンストリーム (TiDB) 権限                                                                                                                                                                                | 最小限のシステム権限         |
 | :------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
 | リレーログ          | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `SHOW MASTER STATUS` , `SHOW SLAVE STATUS` ) | ヌル                                                                                                                                                                                                    | ローカルファイルの読み取り/書き込み |
-| ごみ             | `SELECT`<br/> `RELOAD` (`FLUSH TABLES WITH READ LOCK`)<br/>`PROCESS` (MariaDB のみ、InnoDB メタデータクエリ用)                                            | ヌル                                                                                                                                                                                                    | ローカルファイルを書き込む      |
-| 負荷             | ヌル                                                                                                         | `SELECT` (チェックポイント履歴を照会する)<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DELETE` （チェックポイントを削除）<br/> `INSERT` (ダンプデータを挿入)                                                                                     | ローカルファイルの読み取り/書き込み |
+| ダンプ             | `SELECT`<br/> `RELOAD` (`FLUSH TABLES WITH READ LOCK`)<br/>`PROCESS` (MariaDB のみ、InnoDB メタデータクエリ用)                                            | ヌル                                                                                                                                                                                                    | ローカルファイルを書き込む      |
+| ロード             | ヌル                                                                                                         | `SELECT` (チェックポイント履歴を照会する)<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DELETE` （チェックポイントを削除）<br/> `INSERT` (ダンプデータを挿入)                                                                                     | ローカルファイルの読み取り/書き込み |
 | Binlogレプリケーション | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `SHOW MASTER STATUS` , `SHOW SLAVE STATUS` ) | `SELECT` (インデックスと列を表示)<br/> `INSERT` （DML）<br/> `UPDATE` (DML)<br/> `DELETE` （DML）<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DROP` (データベース/テーブルを削除)<br/> `ALTER` （テーブルを変更する）<br/> `INDEX` (インデックスの作成/削除) | ローカルファイルの読み取り/書き込み |

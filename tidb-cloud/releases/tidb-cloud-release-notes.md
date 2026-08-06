@@ -14,12 +14,12 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - TiDB Cloud Premium インスタンスの自動バックアップに **Custom Retention Mode** を導入しました。
+    - TiDB Cloud Premium インスタンスの自動バックアップに **カスタム保持モード** を導入しました。
 
         TiDB Cloud Premium では、2 つの自動バックアップモードを利用できるようになりました。
 
-        - **Custom Retention Mode:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
-        - **Standard Bundle Mode:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
+        - **カスタム保持モード:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
+        - **標準バンドルモード:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
 
       詳細については、[Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
 
@@ -33,7 +33,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
-        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential) を参照してください。
+        詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential) を参照してください。
 
 - **TiDB Cloud Premium**
 
@@ -47,7 +47,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
-        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium) を参照してください。
+        詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium) を参照してください。
 
 - **TiDB Cloud Dedicated**
 
@@ -59,7 +59,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
-        詳細については、[Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/) を参照してください。
+        詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/) を参照してください。
 
 ## 2026年7月28日 {#july-28-2026}
 

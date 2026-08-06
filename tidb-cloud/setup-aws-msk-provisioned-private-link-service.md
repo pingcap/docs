@@ -9,7 +9,7 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 
 このドキュメントでは、[multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html) と [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) を使用して、TiDB Cloud Premium インスタンスを [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) クラスターに接続する方法を説明します。
 
-このガイドでは、セットアップ全体の流れを扱います。具体的には、ネットワークと認証情報の準備、MSK クラスターの作成と設定、multi-VPC connectivity の有効化、クラスター policy のアタッチ、そして TiDB Cloud からの PrivateLink 接続の確立です。
+このガイドでは、セットアップ全体の流れを扱います。具体的には、ネットワークと認証情報の準備、MSK クラスターの作成と設定、multi-VPC connectivity の有効化、クラスター ポリシーのアタッチ、そして TiDB Cloud からの PrivateLink 接続の確立です。
 
 ## 前提条件 {#prerequisites}
 
@@ -167,11 +167,11 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
     - `PublicAccess` が無効になっていること。
     - VPC connectivity で SASL/SCRAM 認証が有効になっていること。
 
-## Step 8. クラスター ポリシーをアタッチする {#step-8-attach-a-cluster-policy}
+## ステップ 8. クラスター ポリシーをアタッチする {#step-8-attach-a-cluster-policy}
 
 リソースベースのクラスター ポリシーを MSK クラスターにアタッチして、TiDB Cloud Premium インスタンスに接続権限を付与します。
 
-1. [Amazon MSK console](https://console.aws.amazon.com/msk/) で、対象の MSK クラスターに移動します。
+1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/) で、対象の MSK クラスターに移動します。
 2. **Security settings** で、**Edit cluster policy** をクリックします。
 3. クラスター ポリシー エディターに、リソースベースのクラスター ポリシーの JSON を貼り付け、**Save changes** をクリックします。
 
@@ -223,6 +223,6 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 
 ## Step 9. TiDB Cloud で PrivateLink 接続を作成する {#step-9-create-the-privatelink-connection-in-tidb-cloud}
 
-[TiDB Cloud console](https://tidbcloud.com) で、MSK クラスターの ARN を使用して private link 接続を作成します。
+[TiDB Cloud コンソール](https://tidbcloud.com) で、MSK クラスターの ARN を使用して private link 接続を作成します。
 
 詳細については、[Create an Amazon MSK Provisioned private link connection](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md#step-2-configure-the-private-endpoint-for-changefeeds) を参照してください。

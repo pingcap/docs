@@ -61,7 +61,7 @@
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
-      - [Webhook 経由でサブスクライブ](/tidb-cloud/monitor-alert-webhook.md)
+      - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
     - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -141,7 +141,7 @@
   - 参照
     - [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
-    - [AWS PrivateLink 経由で Amazon MSK Provisioned クラスターをセットアップ](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+    - [AWS PrivateLink 経由で Amazon MSK Provisioned クラスターをセットアップする](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
 - セキュリティ
   - [セキュリティ概要](/tidb-cloud/security-overview.md)
   - IDアクセス制御
@@ -485,7 +485,7 @@
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
-      - [Webhook 経由でサブスクライブ](/tidb-cloud/monitor-alert-webhook.md)
+      - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
