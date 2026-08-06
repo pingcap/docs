@@ -3513,7 +3513,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
 -   [スロークエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [ログ編集](/log-redaction.md)
+-   [ログの秘匿化](/log-redaction.md)
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数](/system-variables.md#tidb_redact_log)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)

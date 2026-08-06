@@ -50,7 +50,7 @@ TiDBバージョン：8.5.2
     -   バックグラウンドタスクがタイムアウトした際に、統計情報の例外処理が不適切であるためにメモリ内の統計情報が誤って削除される問題を修正 [#57901](https://github.com/pingcap/tidb/issues/57901) @[hawkingrei](https://github.com/hawkingrei)
     -   Grafana の**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正 [#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
     -   キャンセルされたTTLタスクが未コミットのセッションをグローバルセッションプールに配置する可能性がある問題を修正 [#58900](https://github.com/pingcap/tidb/issues/58900) @[YangKeao](https://github.com/YangKeao)
-    -   ログの編集を有効にしても特定のシナリオで効果がない問題を修正 [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
+    -   ログの秘匿化を有効にしても特定のシナリオで効果がない問題を修正 [#59279](https://github.com/pingcap/tidb/issues/59279) @[tangenta](https://github.com/tangenta)
     -   `rowContainer`が特定のシナリオで TiDB をpanicする可能性がある問題を修正 [#59976](https://github.com/pingcap/tidb/issues/59976) @[YangKeao](https://github.com/YangKeao)
     -   パーティション化されたテーブルの`Point_Get`シナリオでパーティションプルーニングが正しくない可能性がある問題を修正 [#59827](https://github.com/pingcap/tidb/issues/59827) @[mjonss](https://github.com/mjonss)
     -   DDL 実行中にパーティション テーブル内のレコードを更新するとデータ破損が発生する可能性がある問題を修正 [#57588](https://github.com/pingcap/tidb/issues/57588) @[Defined2014](https://github.com/Defined2014)

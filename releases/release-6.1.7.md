@@ -37,7 +37,7 @@ TiDB バージョン: 6.1.7
     -   CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
     -   文中の`n`負の数の場合に文`SELECT CAST(n AS CHAR)`のクエリ結果が正しくない問題を修正しました [＃44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
     -   特定のケースにおける TiDB のpanic問題を修正[＃40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
-    -   SQLコンパイルエラーログが編集されない問題を修正[＃41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
+    -   SQLコンパイルエラーログが秘匿化されない問題を修正[＃41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
     -   テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列を丸めた場合、 `SELECT`ステートメントがパーティションテーブルに対してエラーを返す問題を修正しました。 [＃42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
     -   リージョン分割中にパーティション テーブルをクエリするとエラーが発生する可能性がある問題を修正しました。 [＃43144](https://github.com/pingcap/tidb/issues/43144) @[lcwangchao](https://github.com/lcwangchao)
     -   統計情報読み取り中に不要なメモリが使用される問題を修正 [＃42052](https://github.com/pingcap/tidb/issues/42052) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)

@@ -80,7 +80,7 @@ TiDB バージョン: 6.5.4
     -   `stale_read_ts`設定が間違っていると`PREPARE stmt`データを誤って読み取る可能性がある問題を修正[＃43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06)
     -   ActivateTxn で起こりうるデータ競合の問題を修正しました [＃42092](https://github.com/pingcap/tidb/issues/42092) @[hawkingrei](https://github.com/hawkingrei)
     -   バッチクライアントがタイムリーに再接続しない問題を修正[＃44431](https://github.com/pingcap/tidb/issues/44431) @[crazycs520](https://github.com/crazycs520)
-    -   SQLコンパイルエラーログが編集されない問題を修正[＃41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
+    -   SQLコンパイルエラーログが秘匿化されない問題を修正[＃41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
     -   CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[＃44649](https://github.com/pingcap/tidb/issues/44649) [＃38170](https://github.com/pingcap/tidb/issues/38170) [＃44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
     -   TTLタスクが時間で統計更新をトリガーできない問題を修正 [＃40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
     -   GC ロック解決ステップで一部の悲観的ロックが見逃される可能性がある問題を修正しました [＃45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)

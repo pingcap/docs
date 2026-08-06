@@ -66,7 +66,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     -   SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[＃54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
     -   厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [＃54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
     -   `_tidb_rowid`の`PointGet`実行計画が生成できる問題を修正 [＃54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
-    -   スローログ内の内部SQL文がデフォルトでnullに編集される問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) [＃52743](https://github.com/pingcap/tidb/issues/52743) [＃53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
+    -   スローログ内の内部SQL文がデフォルトでnullに秘匿化される問題を修正[＃54190](https://github.com/pingcap/tidb/issues/54190) [＃52743](https://github.com/pingcap/tidb/issues/52743) [＃53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
     -   `UPDATE`操作で複数テーブルシナリオで TiDB OOM が発生する可能性がある問題を修正 [＃53742](https://github.com/pingcap/tidb/issues/53742) @[hawkingrei](https://github.com/hawkingrei)
     -   相関サブクエリがある場合にウィンドウ関数がpanicする可能性がある問題を修正[＃42734](https://github.com/pingcap/tidb/issues/42734) @[hi-rustin](https://github.com/hi-rustin)
     -   照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [＃53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
@@ -137,7 +137,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
 
     -   テーブル属性を取得するときに誤った PD API が呼び出される問題を修正しました [＃55188](https://github.com/pingcap/tidb/issues/55188) @[JmPotato](https://github.com/JmPotato)
     -   `INFORMATION_SCHEMA.RUNAWAY_WATCHES`テーブルの時間データ型が正しくない問題を修正[＃54770](https://github.com/pingcap/tidb/issues/54770) @[HuSharp](https://github.com/HuSharp)
-    -   一部のログが編集されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
+    -   一部のログが秘匿化されない問題を修正[＃8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     -   `Filter`監視メトリックでデータが欠落している問題を修正しました [＃8098](https://github.com/tikv/pd/issues/8098) @[nolouch](https://github.com/nolouch)
     -   TLS が有効になっているときに HTTP クライアントがpanicする可能性がある問題を修正[＃8237](https://github.com/tikv/pd/issues/8237) @[okJiang](https://github.com/okJiang)
     -   暗号化マネージャーが使用前に初期化されない問題を修正[＃8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)

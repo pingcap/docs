@@ -3318,7 +3318,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 -   [`log.format`](/tidb-configuration-file.md#format)設定項目を使用すると、ログメッセージのフォーマット、一般的なログを別のファイルに保存するか、他のログと結合するかを設定できます。
 
--   [`tidb_redact_log`](#tidb_redact_log)変数を使用すると、一般ログに記録されたSQLステートメントを編集できます。
+-   [`tidb_redact_log`](#tidb_redact_log)変数を使用すると、一般ログに記録されたSQLステートメントを秘匿化できます。
 
 -   一般ログには、正常に実行されたステートメントのみが記録されます。失敗したステートメントは一般ログには記録されず、代わりにTiDBログに`command dispatched failed`メッセージとともに記録されます。
 

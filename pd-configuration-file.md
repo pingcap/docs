@@ -210,10 +210,10 @@ pd-server関連のコンフィグレーション項目
 
 ### `redact-info-log`<span class="version-mark">バージョン5.0の新機能</span> {#redact-info-log-new-in-v50}
 
--   PDログでログ編集を有効にするかどうかを制御します
+-   PDログでログの秘匿化を有効にするかどうかを制御します
 -   オプション`true` `"marker"` `false`
 -   デフォルト値: `false`
--   使用方法の詳細については、 [PD側でのログ編集](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
+-   使用方法の詳細については、 [PD側でのログの秘匿化](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
 
 ## `log` {#log}
 

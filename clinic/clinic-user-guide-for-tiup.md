@@ -116,9 +116,9 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
 
     </SimpleTab>
 
-4.  (オプション) ログ編集を有効にします。
+4.  (オプション) ログの秘匿化を有効にします。
 
-    TiDBが詳細なログ情報を提供する場合、ログに機密情報（ユーザーデータなど）が出力される可能性があります。ローカルログおよびClinic Serverへの機密情報の漏洩を防ぎたい場合は、TiDB側でログ編集を有効にすることができます。詳細については、 [ログ編集](/log-redaction.md#log-redaction-in-tidb-side)ご覧ください。
+    TiDBが詳細なログ情報を提供する場合、ログに機密情報（ユーザーデータなど）が出力される可能性があります。ローカルログおよびClinic Serverへの機密情報の漏洩を防ぎたい場合は、TiDB側でログの秘匿化を有効にすることができます。詳細については、 [ログの秘匿化](/log-redaction.md#log-redaction-in-tidb-side)をご覧ください。
 
 ## クラスタの問題をリモートでトラブルシューティングする {#troubleshoot-cluster-problems-remotely}
 

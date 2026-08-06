@@ -142,19 +142,19 @@ TiDBバージョン：8.3.0
 
 ### セキュリティ {#security}
 
--   PDログの編集機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
+-   PDログの秘匿化機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、PDは同様のログ編集機能強化を実装しています。この機能を使用するには、PD構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、PDは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、PD構成項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-pd-side)を参照してください。
 
--   TiKV ログ編集の強化 [#17206](https://github.com/tikv/tikv/issues/17206) @[LykxSassinator](https://github.com/LykxSassinator)
+-   TiKV ログの秘匿化の強化 [#17206](https://github.com/tikv/tikv/issues/17206) @[LykxSassinator](https://github.com/LykxSassinator)
 
     TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
 
-    バージョン8.3.0では、TiKVは同様のログ編集機能強化を実装しています。この機能を使用するには、TiKV構成項目`security.redact-info-log`の値を`"marker"`に設定します。
+    バージョン8.3.0では、TiKVは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、TiKV構成項目`security.redact-info-log`の値を`"marker"`に設定します。
 
     詳細については、 [ドキュメント](/log-redaction.md#log-redaction-in-tikv-side)を参照してください。
 
@@ -322,7 +322,7 @@ TiDBバージョン：8.3.0
     -   クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行計画が生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     -   `SELECT ... FOR UPDATE`の誤ったPointGetプランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
     -   `TIMESTAMPADD()`関数の最初の引数が`month`で、2 番目の引数が負の値の場合に無限ループに陥る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    -   スローログ内の内部SQLステートメントがデフォルトでnullに編集される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
+    -   スローログ内の内部SQLステートメントがデフォルトでnullに秘匿化される問題を修正[#54190](https://github.com/pingcap/tidb/issues/54190) [#52743](https://github.com/pingcap/tidb/issues/52743) [#53264](https://github.com/pingcap/tidb/issues/53264) @[lcwangchao](https://github.com/lcwangchao)
     -   `PointGet`の実行計画が`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
     -   `SHOW IMPORT JOBS`が v7.1 からアップグレード後にエラー`Unknown column 'summary'`を報告する問題を修正 [#54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     -   ビュー定義で列定義としてサブクエリが使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告 1356 が返される問題を修正しました [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
@@ -339,7 +339,7 @@ TiDBバージョン：8.3.0
     -   テーブル属性を取得する際に誤ったPD APIが呼び出される問題を修正 [#55188](https://github.com/pingcap/tidb/issues/55188) @[JmPotato](https://github.com/JmPotato)
     -   `scheduling`マイクロサービスが有効になった後にスケーリングの進行状況が正しく表示されない問題を修正しました [#8331](https://github.com/tikv/pd/issues/8331) @[rleungx](https://github.com/rleungx)
     -   暗号化マネージャが使用前に初期化されていない問題を修正 [#8384](https://github.com/tikv/pd/issues/8384) @[rleungx](https://github.com/rleungx)
-    -   一部のログが編集されない問題を修正 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
+    -   一部のログが秘匿化されない問題を修正 [#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     -   PDマイクロサービスの起動中にリダイレクトがpanicする可能性がある問題を修正 [#8406](https://github.com/tikv/pd/issues/8406) @[HuSharp](https://github.com/HuSharp)
     -   `split-merge-interval`設定項目の値が繰り返し変更された場合（例えば、 `1s`から`1h` に変更し、再び`1s` に戻す場合など）に、その設定が有効にならない可能性がある問題を修正します。 [#8404](https://github.com/tikv/pd/issues/8404) @[lhy1024](https://github.com/lhy1024)
     -   `replication.strictly-match-label`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
