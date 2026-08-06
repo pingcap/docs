@@ -87,11 +87,11 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=premium)
 
-[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium/#user-roles)
+[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium#user-roles)
 
-[ユーザープロファイルの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium/#manage-user-profiles)
+[ユーザープロファイルを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium#manage-user-profiles)
 
-[組織アクセスを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium/#manage-organization-access)
+[組織アクセスを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=premium#manage-organization-access)
 
 [IPアクセスリストを設定する](https://docs.pingcap.com/ja/tidbcloud/configure-ip-access-list-premium/?plan=premium)
 
@@ -99,11 +99,11 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 <LearningPath label="Billing" icon="cloud2">
 
-[価格設定](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium/#pricing-for-premium)
+[料金](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium#pricing-for-premium)
 
-[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium/#invoices)
+[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium#invoices)
 
-[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium/#credits)
+[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=premium#credits)
 
 </LearningPath>
 

@@ -30,7 +30,8 @@ TiDB Cloud は Datadog との統合をサポートしています。TiDB Cloud �
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>
+    - 2026 年 7 月 1 日以降に作成された TiDB Cloud Essential インスタンスの場合は、この JSON ファイルをダウンロードします: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential-v2.json>。`v2` サフィックスは、ダッシュボード JSON ファイルのバージョンのみを示すことに注意してください。
+    - 2026 年 7 月 1 日より前に作成された TiDB Cloud Essential インスタンスの場合は、この JSON ファイルをダウンロードします: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-datadog-integration-tidb-cloud-dynamic-tracker-essential.json>。
 
     </CustomContent>
 

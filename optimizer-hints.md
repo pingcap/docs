@@ -132,7 +132,11 @@ SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### INL_MERGE_JOIN {#inl_merge_join}
 
-ヒント`INL_MERGE_JOIN(t1_name [, tl_name])`は、インデックス・ネストループ・マージ結合アルゴリズムを使用するようオプティマイザに指示します。このアルゴリズムを使用する条件は、インデックス・ネストループ結合アルゴリズムを使用する条件と同じです。
+> **Warning:**
+>
+> TiDB v8.3.0 以降、`INL_MERGE_JOIN`ヒントは非推奨となり、誤った結果を返す可能性があるため、効果がなくなりました。クエリでこのヒントを指定した場合、TiDB はこれを無視して別の結合アルゴリズムを選択します。
+
+TiDB v8.3.0 より前では、ヒント`INL_MERGE_JOIN(t1_name [, tl_name])`は、インデックス・ネストループ・マージ結合アルゴリズムを使用するようオプティマイザに指示します。このアルゴリズムを使用する条件は、インデックス・ネストループ結合アルゴリズムを使用する条件と同じです。
 
 ### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...]) {#no_index_merge_joint1_name--tl_name-}
 

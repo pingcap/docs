@@ -166,7 +166,7 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 
 ### Data type mapping {#data-type-mapping}
 
-TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/2.4/connectors/mysql.html#mysql-data-types)準拠しており、これはMySQL用Debeziumコネクタのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクタメッセージの間に以下の違いがあります。
+TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types)に準拠しており、これはMySQL用Debeziumコネクタのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクタメッセージの間に以下の違いがあります。
 
 -   現在、TiDB は、GEOMETRY、LINESTRING、POLYGON、MULTIPOINT、MULTILINESTRING、MULTIPOLYGON、GEOMETRYCOLLECTION などの空間データ型をサポートしていません。
 

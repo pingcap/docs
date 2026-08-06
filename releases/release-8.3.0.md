@@ -214,6 +214,7 @@ TiDBバージョン：8.3.0
 
     -   バージョン 7.5.0 以降、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)レプリケーションは非推奨となりました。バージョン 8.3.0 以降、TiDB Binlog は完全に非推奨となり、今後のリリースで削除される予定です。増分データレプリケーションには、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。ポイントインタイムリカバリ(PITR) には、 [PITR](/br/br-pitr-guide.md)を使用してください。
     -   バージョン8.3.0以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数は非推奨となりました。TiDBはデフォルトで述語列を追跡します。詳細については、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を参照してください。
+    -   バージョン8.3.0以降、[`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join)オプティマイザヒントは非推奨となり、誤った結果を返す可能性があるため、効果がなくなりました。クエリでこのヒントを指定した場合、TiDB はこれを無視して別の結合アルゴリズムを選択します。 [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
 
 -   以下の機能は、将来のバージョンで廃止される予定です。
 
@@ -301,7 +302,6 @@ TiDBバージョン：8.3.0
     -   DMからレプリケートされたテーブルのインデックス長が`max-index-length`で指定された最大長を超えると、テーブルのレプリケーションが失敗する問題を修正します。 [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
     -   `runtime error: index out of range` `tidb_enable_inl_join_inner_multi_pattern`が発生する可能性がある問題を修正します [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
     -   統計情報の初期化処理中に<kbd>Control</kbd> + <kbd>C</kbd>を使用してTiDBを終了できない問題を修正しました [#54589](https://github.com/pingcap/tidb/issues/54589) @[tiancaiamao](https://github.com/tiancaiamao)
-    -   `INL_MERGE_JOIN`オプティマイザー ヒントが非推奨となり、誤った結果を返す問題を修正 [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
     -   `WITH ROLLUP`を含む相関サブクエリによって TiDB がpanicを起こし、エラー`runtime error: index out of range`を返す可能性がある問題を修正しました。 [#54983](https://github.com/pingcap/tidb/issues/54983) @[AilinKid](https://github.com/AilinKid)
     -   SQLクエリのフィルタ条件に仮想列が含まれ、実行条件に`UnionScan`が含まれている場合に、述語が正しくプッシュダウンされない問題を修正します [#54870](https://github.com/pingcap/tidb/issues/54870) @[qw4990](https://github.com/qw4990)
     -   `runtime error: invalid memory address or nil pointer dereference` `tidb_enable_inl_join_inner_multi_pattern`が発生する可能性がある問題を修正しました [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)

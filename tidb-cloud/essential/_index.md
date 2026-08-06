@@ -91,9 +91,9 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=essential)
 
-[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access#user-roles/?plan=essential)
+[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=essential#user-roles)
 
-[ユーザープロファイルの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access#manage-user-profiles/?plan=essential)
+[ユーザープロファイルの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=essential#manage-user-profiles)
 
 [組織アクセスの管理](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=essential#manage-organization-access)
 
@@ -107,9 +107,9 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [価格](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)
 
-[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing#invoices/?plan=essential)
+[請求書](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=essential#invoices)
 
-[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing#credits/?plan=essential)
+[クレジット](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-billing/?plan=essential#credits)
 
 </LearningPath>
 

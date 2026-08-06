@@ -22,7 +22,7 @@ TiDB ベクトル検索を開始するには、次のチュートリアルを参
 
 ## 統合 {#integrations}
 
-開発を加速させるために、TiDBベクトル検索を一般的なAIフレームワーク（LlamaIndexやLangChainなど）、埋め込みサービス（Jina AIなど）、ORMライブラリ（SQLAlchemy、Peewee、Django ORMなど）と統合できます。ニーズに最適なものを選択できます。
+開発を加速させるために、TiDBベクトル検索を一般的なAIフレームワーク（LlamaIndexなど）、埋め込みサービス（Jina AIなど）、ORMライブラリ（SQLAlchemy、Peewee、Django ORMなど）と統合できます。ニーズに最適なものを選択できます。
 
 詳細については[TiDB の AI 統合](/ai/integrations/vector-search-integration-overview.md)を参照してください。
 

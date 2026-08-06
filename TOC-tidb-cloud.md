@@ -68,6 +68,9 @@
       - [メールで購読する](/tidb-cloud/monitor-alert-email.md)
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
+      - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
+      - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
     - [イベント](/tidb-cloud/tidb-cloud-events.md)
     - サードパーティ製指標の統合
       - [概要](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -626,6 +629,7 @@
       - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
