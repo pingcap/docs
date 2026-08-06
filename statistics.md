@@ -18,7 +18,7 @@ For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-sta
 
 <CustomContent platform="tidb">
 
-TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically. Starting from v8.5.7 and v9.0.0, you can use the [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md) statement to persist the update information immediately.
 
 </CustomContent>
 
