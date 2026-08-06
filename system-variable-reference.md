@@ -308,7 +308,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#ddl_slow_threshold)
 
 ### default_authentication_plugin
@@ -771,7 +771,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_allow_batch_cop-new-in-v40)
 -   [TiDB 4.0.3 リリースノート](/releases/release-4.0.3.md)
 -   [TiDB 4.0 RC.2 リリースノート](/releases/release-4.0.0-rc.2.md)
@@ -811,7 +811,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [AUTO_INCREMENT](/auto-increment.md)
 -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
 -   [MySQLとの互換性](/mysql-compatibility.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)
 -   [TiDB 3.0.4 リリースノート](/releases/release-3.0.4.md)
 -   [TiDB 2.1.18 リリースノート](/releases/release-2.1.18.md)
@@ -896,7 +896,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_end_time)
 -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
 -   [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
@@ -919,7 +919,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
 -   [統計情報を表示_健康](/sql-statements/sql-statement-show-stats-healthy.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_ratio)
 -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
@@ -934,7 +934,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [SQLチューニングの実践ガイド](/sql-tuning-best-practice.md)
 -   [統計入門](/statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_auto_analyze_start_time)
 -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
 -   [読み取りおよび書き込みレイテンシの増加のトラブルシューティング](/troubleshoot-cpu-issues.md)
@@ -952,7 +952,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_backoff_lock_fast)
 -   [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
 
@@ -960,7 +960,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_backoff_weight)
 -   [TiDB 3.0.3 リリースノート](/releases/release-3.0.3.md)
 
@@ -969,7 +969,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [バッチ処理](/batch-processing.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_batch_commit)
 -   [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
 -   [TiDB 3.0 GA リリースノート](/releases/release-3.0-ga.md)
@@ -979,7 +979,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [バッチ処理](/batch-processing.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_batch_delete)
 
 ### tidb_batch_insert
@@ -1031,7 +1031,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [統計入門](/statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_build_stats_concurrency)
 -   [TiDB v6.5.6 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
 -   [TiDB v7.1.3 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v7.1-performance-benchmarking-with-tpcc)
@@ -1044,7 +1044,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_capture_plan_baselines-new-in-v40)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -1064,7 +1064,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_check_mb4_value_in_utf8)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [アップグレードとアップグレード後のFAQ](/faq/upgrade-faq.md)
@@ -1073,7 +1073,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_checksum_table_concurrency)
 -   [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)
 
@@ -1101,7 +1101,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_config)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
 -   [TiDB 1.1 ベータ版リリースノート](/releases/release-1.1-beta.md)
@@ -1113,7 +1113,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [COMMIT](/sql-statements/sql-statement-commit.md)
 -   [制約](/constraints.md)
 -   [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_constraint_check_in_place)
 -   [トランザクション](/transaction-overview.md)
 -   [TiDB 2.1.5 リリースノート](/releases/release-2.1.5.md)
@@ -1151,7 +1151,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
 -   [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 -   [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_current_ts)
 -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
 -   [TiDB のタイムスタンプ Oracle (TSO)](/tso.md)
@@ -1196,7 +1196,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_error_count_limit)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1221,7 +1221,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_batch_size)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1249,7 +1249,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_priority)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1267,7 +1267,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [オンラインワークロードと`ADD INDEX`操作のインタラクションテスト](/benchmark/online-workloads-and-add-index-operations.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [TiDB 分散実行フレームワーク (DXF)](/tidb-distributed-execution-framework.md)
@@ -1291,7 +1291,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [Sysbenchを使用してTiDBをテストする方法](/benchmark/benchmark-tidb-using-sysbench.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_disable_txn_auto_retry)
 -   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
 -   [トランザクション](/transaction-overview.md)
@@ -1308,7 +1308,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [統計入門](/statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [スロークエリ](/information-schema/information-schema-slow-query.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_distsql_scan_concurrency)
@@ -1329,7 +1329,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [バッチ処理](/batch-processing.md)
 -   [データをロード](/sql-statements/sql-statement-load-data.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_dml_batch_size)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
 -   [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
@@ -1440,7 +1440,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_cascades_planner)
 -   [TiDBの機能](/basic-features.md)
 -   [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
@@ -1459,7 +1459,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_chunk_rpc-new-in-v40)
 
 ### tidb_enable_clustered_index
@@ -1484,7 +1484,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [スロークエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_collect_execution_info)
 -   [TIDB_INDEX_USAGE](/information-schema/information-schema-tidb-index-usage.md)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -1654,7 +1654,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)
 -   [インデックスの選択](/choose-index.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_index_merge-new-in-v40)
 -   [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
 
@@ -1773,7 +1773,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [情報機能](/functions-and-operators/information-functions.md)
 -   [選択](/sql-statements/sql-statement-select.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_noop_functions-new-in-v40)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
@@ -1984,7 +1984,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [スロークエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
 -   [システム変数](/system-variables.md#tidb_enable_slow_log)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -2003,7 +2003,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)
@@ -2020,7 +2020,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_table_partition)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 -   [TiDB 4.0.13 リリースノート](/releases/release-4.0.13.md)
@@ -2096,7 +2096,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_vectorized_expression-new-in-v40)
 -   [TiDB 5.4.1 リリースノート](/releases/release-5.4.1.md)
 -   [TiDB 5.2.4 リリースノート](/releases/release-5.2.4.md)
@@ -2109,7 +2109,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [キーワード](/keywords.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_enable_window_function)
 -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
 -   [TiDB 3.0.8 リリースノート](/releases/release-3.0.8.md)
@@ -2136,7 +2136,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_evolve_plan_baselines-new-in-v40)
 -   [TiDB 5.2 リリースノート](/releases/release-5.2.0.md)
@@ -2145,7 +2145,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_evolve_plan_task_end_time-new-in-v40)
 
@@ -2153,7 +2153,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_evolve_plan_task_max_time-new-in-v40)
 
@@ -2161,7 +2161,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_evolve_plan_task_start_time-new-in-v40)
 
@@ -2182,7 +2182,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [コストの高いクエリを特定する](/identify-expensive-queries.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_expensive_query_time_threshold)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 
@@ -2210,7 +2210,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_force_priority)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -2305,7 +2305,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_general_log)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB Data Migrationに関するよくある質問](/dm/dm-faq.md)
@@ -2370,7 +2370,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [スロークエリを分析する](/analyze-slow-queries.md)
 -   [3ノードハイブリッド展開のベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
 -   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_hash_join_concurrency)
 
 ### tidb_hash_join_version
@@ -2384,14 +2384,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_hashagg_final_concurrency)
 
 ### tidb_hashagg_partial_concurrency
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_hashagg_partial_concurrency)
 
 ### tidb_historical_stats_duration
@@ -2435,7 +2435,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_index_join_batch_size)
 
 ### tidb_index_join_double_read_penalty_cost_rate
@@ -2449,7 +2449,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_index_lookup_concurrency)
 -   [TiDB ベストプラクティス](/best-practices/tidb-best-practices.md)
 
@@ -2459,14 +2459,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [3ノードハイブリッド展開のベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
 -   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_index_lookup_join_concurrency)
 
 ### tidb_index_lookup_size
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_index_lookup_size)
 -   [TiDB ベストプラクティス](/best-practices/tidb-best-practices.md)
 
@@ -2482,7 +2482,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [統計入門](/statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_index_serial_scan_concurrency)
 -   [TiDB ベストプラクティス](/best-practices/tidb-best-practices.md)
 -   [TiDB v6.5.6 のTiDB Cloud TPC-C パフォーマンス テスト レポート](https://docs.pingcap.com/tidbcloud/v6.5-performance-benchmarking-with-tpcc)
@@ -2496,7 +2496,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_init_chunk_size)
 -   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
 -   [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
@@ -2521,7 +2521,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [TiUP Benchコンポーネントを使用したTiDBのストレステスト](/tiup/tiup-bench.md)
 -   [システム変数](/system-variables.md#tidb_isolation_read_engines-new-in-v40)
 -   [TiFlash互換性に関する注意事項](/tiflash/tiflash-compatibility.md)
@@ -2597,7 +2597,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_low_resolution_tso)
 -   [TiDB 8.5.0 リリースノート](/releases/release-8.5.0.md)
 -   [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
@@ -2649,7 +2649,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_max_chunk_size)
 -   [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)
 -   [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
@@ -2662,7 +2662,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_max_delta_schema_count-new-in-v2118-and-v305)
 -   [TiDB 3.0.5 リリースノート](/releases/release-3.0.5.md)
@@ -2735,7 +2735,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
 -   [パイプラインDML](/pipelined-dml.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_mem_quota_query)
 -   [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -2813,7 +2813,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [メトリクススキーマ](/metrics-schema.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_metric_query_range_duration-new-in-v40)
 
 ### tidb_metric_query_step
@@ -2822,7 +2822,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [メトリクススキーマ](/metrics-schema.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_metric_query_step-new-in-v40)
 
 ### tidb_min_paging_size
@@ -2883,7 +2883,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_agg_push_down)
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 -   [TiDB 7.3.0 リリースノート](/releases/release-7.3.0.md)
@@ -2905,14 +2905,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_concurrency_factor)
 
 ### tidb_opt_copcpu_factor
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_copcpu_factor)
 
 ### tidb_opt_correlation_exp_factor
@@ -2920,7 +2920,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [拡張統計入門](/extended-statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_correlation_exp_factor)
 -   [TiDB 3.0.0-rc.1 リリースノート](/releases/release-3.0.0-rc.1.md)
 
@@ -2929,14 +2929,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [拡張統計入門](/extended-statistics.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_correlation_threshold)
 
 ### tidb_opt_cpu_factor
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_cpu_factor)
 
 ### tidb_opt_derive_topn
@@ -2952,14 +2952,14 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_desc_factor)
 
 ### tidb_opt_disk_factor
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_disk_factor)
 
 ### tidb_opt_distinct_agg_push_down
@@ -2968,7 +2968,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 -   [クエリの最適化](/agg-distinct-optimization.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_distinct_agg_push_down)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
@@ -3112,7 +3112,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [オプティマイザヒント](/optimizer-hints.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [サブクエリ関連の最適化](/subquery-optimization.md)
 -   [システム変数](/system-variables.md#tidb_opt_insubq_to_join_and_agg)
 -   [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
@@ -3122,7 +3122,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [結合したテーブルの再配置の概要](/join-reorder.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_join_reorder_threshold)
 -   [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 -   [TiDB 3.0.0-rc.1 リリースノート](/releases/release-3.0.0-rc.1.md)
@@ -3146,7 +3146,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_memory_factor)
 
 ### tidb_opt_merge_join_cost_factor
@@ -3167,7 +3167,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [インデックスの選択](/choose-index.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_network_factor)
 
 ### tidb_opt_objective
@@ -3227,7 +3227,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_scan_factor)
 
 ### tidb_opt_seek_factor
@@ -3235,7 +3235,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [インデックスの選択](/choose-index.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_seek_factor)
 
 ### tidb_opt_skew_distinct_agg
@@ -3329,7 +3329,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_opt_write_row_id)
 -   [TiDB 2.1 RC5 リリースノート](/releases/release-2.1-rc.5.md)
 
@@ -3337,7 +3337,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_optimizer_selectivity_level)
 
 ### tidb_partition_prune_mode
@@ -3401,7 +3401,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_pprof_sql_cpu-new-in-v40)
 -   [TiDB 3.0.10 リリースノート](/releases/release-3.0.10.md)
 
@@ -3442,7 +3442,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_projection_concurrency)
 -   [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
 
@@ -3451,7 +3451,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [スロークエリを特定する](/identify-slow-queries.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_query_log_max_len)
 -   [2022年のTiDB Cloudリリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
 -   [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
@@ -3501,7 +3501,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_record_plan_in_slow_log)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 3.0.5 リリースノート](/releases/release-3.0.5.md)
@@ -3547,7 +3547,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [Follower Read](/follower-read.md)
 -   [Follower Read](/develop/dev-guide-use-follower-read.md)
 -   [オプティマイザヒント](/optimizer-hints.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_replica_read-new-in-v40)
 -   [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices/best-practices-on-public-cloud.md)
 -   [TiDB 8.5.4 リリースノート](/releases/release-8.5.4.md)
@@ -3595,7 +3595,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_retry_limit)
 -   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
@@ -3609,7 +3609,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_row_format_version)
 -   [TiDB 4.0.13 リリースノート](/releases/release-4.0.13.md)
 
@@ -3635,7 +3635,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [高同時実行書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_scatter_region)
 -   [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
@@ -3772,7 +3772,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [エラーコードとトラブルシューティング](/error-codes.md)
 -   [サードパーティ製ツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_skip_isolation_level_check)
 -   [トランザクションの概要](/develop/dev-guide-transaction-overview.md)
 -   [TiDB 5.1.4 リリースノート](/releases/release-5.1.4.md)
@@ -3793,7 +3793,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_skip_utf8_check)
 -   [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)
 -   [アップグレードとアップグレード後のFAQ](/faq/upgrade-faq.md)
@@ -3808,7 +3808,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
 -   [概要ページ](/dashboard/dashboard-overview.md)
 -   [TiDB Self-Managedのクイックスタート](/quick-start-with-tidb.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
 -   [システム変数](/system-variables.md#tidb_slow_log_threshold)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
@@ -3822,7 +3822,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [スロークエリを特定する](/identify-slow-queries.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_slow_query_file)
 
 ### tidb_slow_txn_log_threshold
@@ -3844,7 +3844,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
 -   [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 -   [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_snapshot)
 -   [一時テーブル](/temporary-tables.md)
 -   [TiDBの機能](/basic-features.md)
@@ -3960,7 +3960,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_history_size-new-in-v40)
 
@@ -3969,7 +3969,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_internal_query-new-in-v40)
 
@@ -3977,9 +3977,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
+-   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [スロークエリ](/information-schema/information-schema-slow-query.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
@@ -3990,7 +3990,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [TiDB DashboardのSQLステートメントページ](/dashboard/dashboard-statement-list.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)
@@ -4004,7 +4004,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_refresh_interval-new-in-v40)
 
@@ -4022,7 +4022,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [エラーコードとトラブルシューティング](/error-codes.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)
 -   [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
 
@@ -4233,7 +4233,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [楽観的なトランザクションと悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
 -   [MySQL互換データベースにデータを複製する](/ticdc/ticdc-sink-to-mysql.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_txn_mode)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB 悲観的トランザクションモード](/pessimistic-transaction.md)
@@ -4247,8 +4247,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]バインディングの作成](/sql-statements/sql-statement-create-binding.md)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プラン管理 (SPM)](/sql-plan-management.md)
 -   [システム変数](/system-variables.md#tidb_use_plan_baselines-new-in-v40)
 
@@ -4257,7 +4257,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_wait_split_region_finish)
 
@@ -4266,7 +4266,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 -   [システム変数](/system-variables.md#tidb_wait_split_region_timeout)
 
@@ -4274,7 +4274,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [システム変数](/system-variables.md#tidb_window_concurrency-new-in-v40)
 
 ### tiflash_fastscan
@@ -4348,7 +4348,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [日付と時刻の型](/data-type-date-and-time.md)
 -   [TiDB Self-ManagedからTiDB Cloudへの移行](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 -   [SQL プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
 -   [システム変数](/system-variables.md#time_zone)
 -   [タイムゾーンのサポート](/configure-time-zone.md)
