@@ -72,7 +72,7 @@ GRANT RELOAD, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_
 GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-10.5.2 より前の MariaDB からフルデータエクスポートを行う場合は、dump ユニットが InnoDB メタデータをクエリできるように、`PROCESS` も付与してください。
+10.5.2 より前の MariaDB からフルデータエクスポートを行う場合は、ダンプユニットが InnoDB メタデータをクエリできるように、`PROCESS` も付与してください。
 
 ```sql
 GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
@@ -125,9 +125,9 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 > **Note:**
 >
-> 一部の古い MariaDB リリースでは、dump ユニットが InnoDB メタデータをクエリするために `PROCESS` だけでは不十分です。DM v8.5.6 では、この動作は dump ユニットが MariaDB 10.4.34 で `INNODB_TABLESPACES_SCRUBBING` を、または MariaDB 10.5.1 と 10.5.2 で `INNODB_TABLESPACES_ENCRYPTION` をクエリするときに発生します。同じスモークテストでは、MariaDB 10.5.9、10.6.13、10.11.16 は `SUPER` なしで完了します。
+> 一部の古い MariaDB リリースでは、ダンプユニットが InnoDB メタデータをクエリするために `PROCESS` だけでは不十分です。DM v8.5.6 では、この動作は ダンプユニットが MariaDB 10.4.34 で `INNODB_TABLESPACES_SCRUBBING` を、または MariaDB 10.5.1 と 10.5.2 で `INNODB_TABLESPACES_ENCRYPTION` をクエリするときに発生します。同じスモークテストでは、MariaDB 10.5.9、10.6.13、10.11.16 は `SUPER` なしで完了します。
 >
-> dump ユニットが次のエラーを返す場合は、`SUPER` を付与してください。`SUPER` は広範な権限であるため、この正確なエラーが発生し、かつセキュリティポリシーで許可されている場合にのみ付与してください。
+> ダンプユニットが次のエラーを返す場合は、`SUPER` を付与してください。`SUPER` は広範な権限であるため、この正確なエラーが発生し、かつセキュリティポリシーで許可されている場合にのみ付与してください。
 >
 > ```
 > Error 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation
