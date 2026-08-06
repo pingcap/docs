@@ -56,7 +56,7 @@ TiDB バージョン: 6.1.6
     -   DDL文の実行中に`PointGet`を使用してテーブルを読み込むSQL文がpanicをスローする可能性がある問題を修正しました。 [＃41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
     -   トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     -   メモリリークとパフォーマンスの低下を防ぐため、期限切れのリージョンキャッシュを定期的にクリアします[＃40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf) @[zyguan](https://github.com/zyguan)
-    -   Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
+    -   `INSERT IGNORE` および `REPLACE` ステートメントが値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 
 -   TiKV
 

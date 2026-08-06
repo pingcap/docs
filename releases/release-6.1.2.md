@@ -39,7 +39,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[＃38363](https://github.com/pingcap/tidb/issues/38363) @[dveeden](https://github.com/dveeden)
     -   `SHOW CREATE PLACEMENT POLICY`の誤った出力を修正 [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
     -   1つのPDノードがダウンした場合、他のPDノードを再試行しないため、 `information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正しました。 [＃35708](https://github.com/pingcap/tidb/issues/35708) @[tangenta](https://github.com/tangenta)
-    -   Fix the issue that the `UNION` operator might return unexpected empty result [＃36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
+    -   `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正しました [＃36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     -   TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [＃37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
     -   リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました [＃37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
     -   KVクライアントが不要なpingメッセージを送信する問題を修正しました [＃36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
@@ -72,7 +72,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     -   TiDB Lightning
 
-        -   Fix panic of TiDB Lightning caused by invalid metric counters [＃37338](https://github.com/pingcap/tidb/issues/37338) @[D3Hunter](https://github.com/D3Hunter)
+        -   無効なメトリックカウンターによって発生する TiDB Lightning のpanicを修正しました [＃37338](https://github.com/pingcap/tidb/issues/37338) @[D3Hunter](https://github.com/D3Hunter)
 
     -   TiDB Data Migration (DM)
 

@@ -21,7 +21,7 @@ TiDB バージョン: 6.1.4
 
 -   TiFlash
 
-    -   Reduce the IOPS by up to 95% and the write amplification by up to 65% for TiFlash instances under high update throughput workloads [＃6460](https://github.com/pingcap/tiflash/issues/6460) @[flowbehappy](https://github.com/flowbehappy)
+    -   高い更新スループットのワークロード下のTiFlashインスタンスにおいて、IOPSを最大95%、書き込み増幅を最大65%削減します [＃6460](https://github.com/pingcap/tiflash/issues/6460) @[flowbehappy](https://github.com/flowbehappy)
 
 -   ツール
 
@@ -60,7 +60,7 @@ TiDB バージョン: 6.1.4
     -   `reset-to-version`コマンドを実行すると tikv-ctl が予期せず終了する問題を修正しました [＃13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
     -   TiKVが誤って`PessimisticLockNotFound`エラーを報告する問題を修正 [＃13425](https://github.com/tikv/tikv/issues/13425) @[sticnarf](https://github.com/sticnarf)
     -   1回の書き込みサイズが2 GiB を超えるとTiKVがpanicになる問題を修正 [＃13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
-    -   Fix the data inconsistency issue caused by network failure between TiDB and TiKV during the execution of a DML after a failed pessimistic DML [＃14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
+    -   失敗した悲観的DMLの後にDMLを実行する際、TiDBとTiKV間のネットワーク障害によって発生するデータ不整合の問題を修正しました [＃14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
     -   新しい照合順序が有効になっていない場合、 `LIKE`演算子の`_`非 ASCII 文字と一致しない問題を修正[＃13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 -   TiFlash
@@ -79,11 +79,11 @@ TiDB バージョン: 6.1.4
 
         -   TiCDC が過度に多数のテーブルを複製するとチェックポイントが進めなくなる問題を修正しました [＃8004](https://github.com/pingcap/tiflow/issues/8004) @[asddongmen](https://github.com/asddongmen)
         -   `transaction-atomicity`と`protocol`構成ファイル経由で更新できない問題を修正 [＃7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        -   Fix the issue that TiCDC mistakenly reports an error when the version of TiFlash is later than that of TiCDC [＃7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
+        -   TiFlashのバージョンがTiCDCのバージョンより新しい場合にTiCDCが誤ってエラーを報告する問題を修正しました [＃7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
         -   TiCDCが大規模なトランザクションを複製するときにOOMが発生する問題を修正 [＃7913](https://github.com/pingcap/tiflow/issues/7913) @[overvenus](https://github.com/overvenus)
         -   TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [＃7982](https://github.com/pingcap/tiflow/issues/7982) @[Rustin170506](https://github.com/Rustin170506)
         -   `changefeed query`結果のうち`sasl-password`がマスクされない問題を修正しました [＃7182](https://github.com/pingcap/tiflow/issues/7182) @[dveeden](https://github.com/dveeden)
-        -   Fix the issue that data is lost when a user quickly deletes a replication task and then creates another one with the same task name [＃7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
+        -   ユーザーがレプリケーションタスクを素早く削除して同じタスク名で別のタスクを作成するとデータが失われる問題を修正しました [＃7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
 
     -   TiDB Data Migration (DM)
 
