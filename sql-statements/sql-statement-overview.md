@@ -316,6 +316,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 ## Statistics and plan management
 
+<<<<<<< HEAD
 | SQL Statement | Description |
 |---------------|-------------|
 | [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) | Collects statistics about a table. |
@@ -333,3 +334,24 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md) | Shows the tables whose statistics are locked. |
 | [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) | Shows how many rows are in a table and how many rows are changed in that table. |
 | [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md) | Shows the Top-N information in statistics. |
+=======
+| SQL Statement                                                                         | Description                                                                               |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)                     | Collects statistics about a table.                                                        |
+| [`CREATE BINDING`](/sql-statements/sql-statement-create-binding.md)                   | Creates an execution plan binding for a SQL statement.                                    |
+| [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | Drops an execution plan binding from a SQL statement.                                     |
+| [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)                           | Drops statistics from a table.                                                            |
+| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                 | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
+| [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md)             | Persists the pending statistics delta in TiDB memory to the system table immediately.     |
+| [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)                           | Loads statistics into TiDB.                                                               |
+| [`REFRESH STATS`](/sql-statements/sql-statement-refresh-stats.md)                     | Reloads persisted statistics into memory for specific tables or the entire cluster.       |
+| [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)         | Shows statistics collection tasks.                                                        |
+| [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)                     | Shows created SQL bindings.                                                               |
+| [`SHOW COLUMN_STATS_USAGE`](/sql-statements/sql-statement-show-column-stats-usage.md) | Shows the last usage time and collection time of column statistics.                       |
+| [`SHOW STATS_BUCKETS`](/sql-statements/sql-statement-show-stats-buckets.md)           | Shows the bucket information in statistics.                                               |
+| [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)           | Shows an estimation of how accurate statistics are believed to be.                        |
+| [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-stats-histograms.md)     | Shows the histogram information in statistics.                                            |
+| [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)             | Shows the tables whose statistics are locked.                                             |
+| [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)                 | Shows how many rows are in a table and how many rows are changed in that table.           |
+| [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)                 | Shows the Top-N information in statistics.                                                |
+>>>>>>> b9ee66117f (statistics: add docs for the FLUSH STATS_DELTA statement (#23258))
