@@ -247,7 +247,7 @@ After configuring storage for your cloud provider, complete the step for databas
 
     You can rotate audit log files based on either file size or time interval. When either condition is met, TiDB Cloud generates a new audit log file.
 
-    >**Note:**
+    > **Note:**
     >
     > Log file rotation based on time interval only applies to TiDB v8.5.2 or later. If the TiDB  version of your TiDB Cloud Dedicated cluster is earlier than v8.5.2, you can only rotate audit log files based on file size.
 
