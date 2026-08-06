@@ -351,7 +351,7 @@ mysql root@127.0.0.1:test> show create table test;
 1 row in set
 ```
 
-結果から、レプリケーション前後のテーブルスキーマが不整合になっていることがわかります。これは、TiDBのデフォルト値`explicit_defaults_for_timestamp`がMySQLと異なるためです。詳細は[MySQLとの互換性](/mysql-compatibility.md#default-differences)ご覧ください。
+結果から、レプリケーション前後のテーブルスキーマが不整合になっていることがわかります。これは、TiDBの`explicit_defaults_for_timestamp`のデフォルト値がMySQLと異なるためです。詳細は[MySQLとの互換性](/mysql-compatibility.md#default-differences)をご覧ください。
 
 v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに、TiCDC は上流と下流の間で時刻型の一貫性を保つために、自動的に`explicit_defaults_for_timestamp = ON`設定します。v5.0.1 または v4.0.13 より前のバージョンでは、TiCDC を使用して時刻型データをレプリケーションする際に、不一致な`explicit_defaults_for_timestamp`値によって発生する互換性の問題にご注意ください。
 
