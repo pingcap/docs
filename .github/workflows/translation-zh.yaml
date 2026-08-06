@@ -7,7 +7,7 @@ concurrency:
 
 on:
   schedule:
-    - cron: "0 9 * * 3" # Runs at 17:00 every Wednesday (Beijing time, UTC+8)
+    - cron: "0 7 * * 3" # Runs at 15:00 every Wednesday (Beijing time, UTC+8)
   workflow_dispatch:
     inputs:
       translation_scope:
