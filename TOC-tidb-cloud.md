@@ -622,7 +622,7 @@
   - [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
   - Connected Careサポートサービスの特長
-    - [接続済み: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB CloudアラートのIMサブスクリプション
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
