@@ -29,9 +29,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - TiDB Cloud Essential から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+    - TiDB Cloud Essential から 汎用webhook経由でアラート通知を購読できるようになりました。
 
-        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、汎用webhook経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
         詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential) を参照してください。
 
@@ -43,9 +43,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         詳細については、[Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) および [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md) を参照してください。
 
-    - TiDB Cloud Premium から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+    - TiDB Cloud Premium から 汎用webhook経由でアラート通知を購読できるようになりました。
 
-        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、汎用webhook経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
         詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium) を参照してください。
 
@@ -55,9 +55,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         [TiDB Cloud Dedicated クラスターを一時停止する](/tidb-cloud/pause-or-resume-tidb-cluster.md)前に、[Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) をオフにし、実行中の Data Migration (DM) ジョブがないことを確認する必要があります。いずれかの条件が満たされていない場合、TiDB Cloud は一時停止リクエストを拒否し、エラーメッセージを表示します。
 
-    - TiDB Cloud Dedicated から generic webhook 経由でアラート通知をサブスクライブできるようになりました。
+    - TiDB Cloud Dedicated から 汎用webhook経由でアラート通知を購読できるようになりました。
 
-        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、generic webhook 経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、汎用webhook経由でアラート通知を受信できるようになりました。Telegram や Microsoft Teams など、カスタムペイロード形式を必要とするサービスについては、軽量なリレーを使用して通知を変換および転送してください。
 
         詳細については、[Webhook経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/) を参照してください。
 

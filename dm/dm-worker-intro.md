@@ -18,17 +18,17 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 ## DM-worker 処理ユニット {#dm-worker-processing-units}
 
-タスクモードに応じて、DM-worker のサブタスクは dump、load、Binlog replication の各処理ユニットを実行します。DM-worker は、バインドされたソースに対してオプションの relay log 処理ユニットを実行することもできます。
+タスクモードに応じて、DM-worker のサブタスクは ダンプ、ロード、Binlog複製/同期の各処理ユニットを実行します。DM-worker は、バインドされたソースに対してオプションのリレーログ処理ユニットを実行することもできます。
 
 ### リレーログ {#relay-log}
 
-relay log はオプションであり、デフォルトでは無効になっています。有効にすると、DM-worker は上流 Binlog イベントをローカルディスクに保存してから、Binlog replication 処理ユニットがそれらを読み取ります。長時間実行されるフル移行やブロックされたタスクが上流 Binlog の保持期間を超える可能性がある場合、または同じソースに対する複数のタスクで単一の Binlog ストリームを共有する必要がある場合は、relay log を有効にしてください。relay log はディスク、I/O、CPU リソースを消費し、レプリケーションレイテンシーを増加させる可能性があります。設定および運用の詳細については、[DM relay log](/dm/relay-log.md) を参照してください。
+リレーログはオプションであり、デフォルトでは無効になっています。有効にすると、DM-worker は上流 Binlog イベントをローカルディスクに保存してから、Binlog replication 処理ユニットがそれらを読み取ります。長時間実行されるフル移行やブロックされたタスクが上流 Binlog の保持期間を超える可能性がある場合、または同じソースに対する複数のタスクで単一の Binlog ストリームを共有する必要がある場合は、リレーログを有効にしてください。リレーログはディスク、I/O、CPU リソースを消費し、レプリケーションレイテンシーを増加させる可能性があります。設定および運用の詳細については、[データ移行リレーログ](/dm/relay-log.md) を参照してください。
 
 ### ダンプ処理装置 {#dump-processing-unit}
 
 ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカル ディスクにダンプします。
 
-### 負荷処理装置 {#load-processing-unit}
+### ロード処理装置 {#load-processing-unit}
 
 ロード処理ユニットは、ダンプ処理ユニットのダンプされたファイルを読み取り、これらのファイルを下流の TiDB にロードします。
 
@@ -58,7 +58,7 @@ Binlogログレプリケーション/同期処理ユニットは、上流の MyS
 
 MySQL、および 10.5.2 より前の MariaDB バージョンでは、ユーザーに次の権限が必要です。
 
-| 特権 | 範囲 |
+| 権限 | 範囲 |
 |:----|:----|
 | `SELECT` | Tables |
 | `RELOAD` | Global |
@@ -82,7 +82,7 @@ GRANT PROCESS ON *.* TO 'your_user'@'your_wildcard_of_host';
 
 [MariaDB 10.5.2](https://mariadb.com/docs/release-notes/community-server/old-releases/10.5/10.5.2) 以降では、`REPLICATION CLIENT` 権限は `BINLOG MONITOR` に名前変更され、いくつかのレプリケーションステートメントでは `SUPER` を分割して作成された新しい権限が使用されます。MariaDB 10.5.2 から 10.5.8 では、ユーザーに次の権限が必要です。
 
-| 特権 | 範囲 | 説明 |
+| 権限 | 範囲 | 説明 |
 |:---|:---|:---|
 | `SELECT` | Tables | フルデータエクスポートに必要です。 |
 | `PROCESS` | Global | フルデータエクスポート中の InnoDB メタデータクエリに必要です。 |
@@ -137,7 +137,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 
 ダウンストリーム データベース (TiDB) ユーザーには、次の権限が必要です。
 
-| 特権       | 範囲          |
+| 権限       | 範囲          |
 | :------- | :---------- |
 | `SELECT` | テーブル        |
 | `INSERT` | テーブル        |
