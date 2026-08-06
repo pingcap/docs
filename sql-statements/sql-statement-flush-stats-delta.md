@@ -3,7 +3,7 @@ title: FLUSH STATS_DELTA
 summary: An overview of the usage of FLUSH STATS_DELTA for the TiDB database.
 ---
 
-# FLUSH STATS_DELTA <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+# FLUSH STATS_DELTA <span class="version-mark">New in v8.5.7</span>
 
 `FLUSH STATS_DELTA` persists the pending statistics delta buffered in TiDB memory to the [`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) system table immediately.
 
