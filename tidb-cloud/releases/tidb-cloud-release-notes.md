@@ -14,12 +14,12 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - TiDB Cloud Premium インスタンスの自動バックアップに **カスタム保持モード** を導入しました。
+    - TiDB Cloud Premium インスタンスの自動バックアップに **Custom Retention Mode** を導入しました。
 
         TiDB Cloud Premium では、2 つの自動バックアップモードを利用できるようになりました。
 
-        - **カスタム保持モード:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
-        - **標準バンドルモード:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
+        - **Custom Retention Mode:** 保持期間を 3 日から 33 日まで指定し、日次スナップショットを作成するタイミングを選択できます。
+        - **Standard Bundle Mode:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
 
       詳細については、[Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
 
