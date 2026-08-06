@@ -17,7 +17,7 @@ Restores local overlay state from a remote archive.
 tdc fs unpack-file-system
   [--archive-path <string>]
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--local-root <string>]
@@ -32,7 +32,7 @@ tdc fs unpack-file-system
 
 - `--archive-path <string>`: The path for the packed archive.
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--local-root <string>`: The local overlay root to restore into.
@@ -50,14 +50,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Restore the portable archive associated with an existing mount.
-    tdc fs unpack-file-system --file-system-name workspace --mount-path /path/to/workspace
+    tdc fs unpack-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace
     ```
 
 - Unpack explicit roots without replacement:
 
     ```bash
     # Restore missing files while preserving existing destination entries.
-    tdc fs unpack-file-system --file-system-name workspace --local-root ./overlay --remote-root /workspace --mount-profile portable --no-replace
+    tdc fs unpack-file-system --file-system-id <file-system-id> --local-root ./overlay --remote-root /workspace --mount-profile portable --no-replace
     ```
 
 ## Related documentation

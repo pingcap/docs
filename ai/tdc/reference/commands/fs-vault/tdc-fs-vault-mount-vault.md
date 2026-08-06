@@ -17,7 +17,7 @@ Mounts readable vault fields as a local read-only FUSE filesystem.
 tdc fs-vault mount-vault
   --mount-path <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--foreground]
   [--fs-token <string>]
   [--help]
@@ -30,7 +30,7 @@ tdc fs-vault mount-vault
 
 - `--mount-path <string>`: Local mount path. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--foreground`: Run mount runtime in the foreground until interrupted.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
@@ -46,14 +46,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Expose only the paths allowed by the delegated Vault token.
-    tdc fs-vault mount-vault --file-system-name workspace --mount-path ./vault --vault-token "$TDC_VAULT_TOKEN"
+    tdc fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --vault-token "$TDC_VAULT_TOKEN"
     ```
 
 - Run the Vault mount in the foreground:
 
     ```bash
     # Keep the runtime attached for containers or process supervisors.
-    tdc fs-vault mount-vault --file-system-name workspace --mount-path ./vault --foreground --ready-timeout 60s
+    tdc fs-vault mount-vault --file-system-id <file-system-id> --mount-path ./vault --foreground --ready-timeout 60s
     ```
 
 ## Related documentation

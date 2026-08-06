@@ -115,6 +115,7 @@
       - [execute-sql-statement](/ai/tdc/reference/commands/db/tdc-db-execute-sql-statement.md)
     - fs
       - [create-file-system](/ai/tdc/reference/commands/fs/tdc-fs-create-file-system.md)
+      - [import-file-system-token](/ai/tdc/reference/commands/fs/tdc-fs-import-file-system-token.md)
       - [list-file-systems](/ai/tdc/reference/commands/fs/tdc-fs-list-file-systems.md)
       - [describe-file-system](/ai/tdc/reference/commands/fs/tdc-fs-describe-file-system.md)
       - [check-file-system](/ai/tdc/reference/commands/fs/tdc-fs-check-file-system.md)

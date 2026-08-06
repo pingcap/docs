@@ -16,7 +16,7 @@ Describes metadata for one remote path. The command alias is `tdc fs stat`.
 ```text
 tdc fs describe-file
   --path <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -25,7 +25,7 @@ tdc fs describe-file
 ## Options
 
 - `--path <string>`: File or directory path in the TiDB Cloud file system. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -38,7 +38,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Inspect file size, metadata, tags, and revision information.
-    tdc fs describe-file --file-system-name workspace --path /reports/report.md
+    tdc fs describe-file --file-system-id <file-system-id> --path /reports/report.md
     ```
 
 ## Related documentation

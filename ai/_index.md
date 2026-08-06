@@ -98,6 +98,7 @@ The command reference follows the two-level `tdc` command tree. Every command ha
 | [`tdc organization list-projects`](/ai/tdc/reference/commands/organization/tdc-organization-list-projects.md) | List accessible TiDB Cloud projects. |
 | [`tdc db create-db-cluster`](/ai/tdc/reference/commands/db/tdc-db-create-db-cluster.md) | Start with the database command reference. |
 | [`tdc fs create-file-system`](/ai/tdc/reference/commands/fs/tdc-fs-create-file-system.md) | Start with the Filesystem command reference. |
+| [`tdc fs import-file-system-token`](/ai/tdc/reference/commands/fs/tdc-fs-import-file-system-token.md) | Restore local access from an existing FS token. |
 | [`tdc fs-git clone-git-workspace`](/ai/tdc/reference/commands/fs-git/tdc-fs-git-clone-git-workspace.md) | Start with the Filesystem Git command reference. |
 | [`tdc fs-journal create-journal`](/ai/tdc/reference/commands/fs-journal/tdc-fs-journal-create-journal.md) | Start with the Filesystem journal command reference. |
 | [`tdc fs-vault create-secret`](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-create-secret.md) | Start with the Filesystem Vault command reference. |

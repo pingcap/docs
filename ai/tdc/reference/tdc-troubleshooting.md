@@ -44,33 +44,43 @@ If no virtual project appears, confirm the API key's organization and project ac
 
 ## Filesystem token is missing
 
-For a clean sandbox, provide all three values:
+For a clean sandbox, provide the token and region. `tdc` derives the file system ID from the token:
 
 ```bash
 export TDC_FS_TOKEN="<owner-token>"
 export TDC_REGION_CODE="aws-us-east-1"
-export TDC_FS_FILE_SYSTEM_NAME="workspace"
 tdc fs check-file-system
 ```
 
-The FS token is not the TiDB Cloud API private key.
+The FS token is not the TiDB Cloud API private key. `TDC_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `tdc` to verify that a separately distributed ID matches the token.
+
+If the token is known but is not stored on the current machine, import it and then select the derived ID:
+
+```bash
+# Store a known token without requiring TiDB Cloud API keys.
+chmod 600 ./fs-token
+tdc fs import-file-system-token --from-file ./fs-token --region aws-us-east-1
+tdc fs list-files --file-system-id <file-system-id> --path /
+```
+
+The current Preview cannot regenerate a lost Filesystem token. A remote Filesystem can still be listed, described, or deleted with TiDB Cloud API keys, but its data cannot be read or mounted until a valid known token is supplied.
 
 ## Filesystem selection is missing
 
-List registered resources and select one explicitly:
+List remote resources in the configured region with TiDB Cloud API keys and select one explicitly:
 
 ```bash
 tdc fs list-file-systems --output text
-tdc fs list-files --file-system-name workspace --path /
+tdc fs list-files --file-system-id <file-system-id> --path /
 ```
 
 Or select the Filesystem for subsequent commands in the current shell:
 
 ```bash
-export TDC_FS_FILE_SYSTEM_NAME="workspace"
+export TDC_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The TiDB Cloud CLI intentionally does not infer a Filesystem from the local registry, including when only one resource is registered.
+The TiDB Cloud CLI intentionally does not infer a Filesystem from local credential count, including when only one credential exists. Supply its ID or an FS token whose embedded ID can be derived.
 
 ## Filesystem region is unsupported
 
@@ -195,7 +205,7 @@ List resources and identify only those created by your workflow. Use describe be
 
 ```bash
 tdc db describe-db-cluster --db-cluster-id "<cluster-id>"
-tdc fs describe-file-system --file-system-name "<filesystem-name>"
+tdc fs describe-file-system --file-system-id "<filesystem-name>"
 ```
 
 Preview supported cleanup:
@@ -203,7 +213,7 @@ Preview supported cleanup:
 ```bash
 tdc db delete-db-cluster --db-cluster-id "<cluster-id>" --dry-run
 tdc fs delete-file-system \
-  --file-system-name "<filesystem-name>" \
+  --file-system-id "<filesystem-name>" \
   --dry-run
 ```
 

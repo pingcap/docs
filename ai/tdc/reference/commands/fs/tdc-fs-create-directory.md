@@ -17,7 +17,7 @@ Creates a remote directory. The command alias is `tdc fs mkdir`.
 tdc fs create-directory
   --path <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--mode <string>]
@@ -28,7 +28,7 @@ tdc fs create-directory
 
 - `--path <string>`: The file system path of the directory to create. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--mode <string>`: The directory mode as an octal value such as 0755.
@@ -42,7 +42,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Create the directory with explicit POSIX permission metadata.
-    tdc fs create-directory --file-system-name workspace --path /reports/archive --mode 0755
+    tdc fs create-directory --file-system-id <file-system-id> --path /reports/archive --mode 0755
     ```
 
 ## Related documentation

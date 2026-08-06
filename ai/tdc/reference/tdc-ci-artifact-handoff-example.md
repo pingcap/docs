@@ -17,7 +17,7 @@ Build and verification jobs often run on different ephemeral machines. Local out
 
 ## How TiDB Cloud CLI changes the workflow
 
-The pipeline injects one Filesystem token, region, and name into both jobs. The producer uploads output under a run-specific path, and the consumer downloads or streams that exact path. Neither job needs TiDB Cloud API keys or a copied `~/.tdc/` directory.
+The pipeline injects one Filesystem token and region into both jobs. The token identifies the Filesystem. The producer uploads output under a run-specific path, and the consumer downloads or streams that exact path. Neither job needs TiDB Cloud API keys or a copied `~/.tdc/` directory.
 
 ## Prerequisites
 
@@ -26,7 +26,6 @@ Provision a Filesystem on a trusted machine and store these values as protected 
 ```text
 TDC_FS_TOKEN
 TDC_REGION_CODE
-TDC_FS_FILE_SYSTEM_NAME
 ```
 
 Use a CI-generated run identifier such as `RUN_ID` to isolate concurrent pipelines.

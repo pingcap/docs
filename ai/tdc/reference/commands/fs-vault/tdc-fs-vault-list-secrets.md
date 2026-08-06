@@ -15,7 +15,7 @@ Lists secrets visible to the active owner or delegated credential.
 
 ```text
 tdc fs-vault list-secrets
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--vault-token <string>]
@@ -24,7 +24,7 @@ tdc fs-vault list-secrets
 
 ## Options
 
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--vault-token <string>`: Delegated `tdc fs-vault` token; prefer `TDC_VAULT_TOKEN`.
@@ -38,14 +38,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Return secret metadata without exposing field values.
-    tdc fs-vault list-secrets --file-system-name workspace
+    tdc fs-vault list-secrets --file-system-id <file-system-id>
     ```
 
 - List secrets visible to a delegated token:
 
     ```bash
     # Restrict the result to secrets within the token's granted scope.
-    tdc fs-vault list-secrets --file-system-name workspace --vault-token "$TDC_VAULT_TOKEN"
+    tdc fs-vault list-secrets --file-system-id <file-system-id> --vault-token "$TDC_VAULT_TOKEN"
     ```
 
 ## Related documentation

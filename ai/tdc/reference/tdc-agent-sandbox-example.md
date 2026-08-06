@@ -21,7 +21,7 @@ A sandbox-local directory is fast but not durable or shared. Generic object-stor
 
 ## How TiDB Cloud CLI changes the workflow
 
-A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token, region code, and Filesystem name, and can immediately use data-plane, mount, Git, journal, and vault workflows without `tdc configure`. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
+A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token and region code, and can immediately use data-plane, mount, Git, journal, and vault workflows without `tdc configure`. The token identifies the Filesystem. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
 
 ## Prerequisites
 
@@ -32,14 +32,13 @@ A trusted machine provisions the Filesystem once. The sandbox receives only the 
 ## Step 1. Provision on the trusted machine
 
 ```bash
-export TDC_FS_TOKEN="$(tdc fs create-file-system \
-  --file-system-name agent-sandbox \
-  --wait \
-  --query fs_token \
-  --output text)"
+umask 077
+tdc fs create-file-system --wait > ./filesystem.json
+export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
+export TDC_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-Record the canonical region code used by the profile, for example `aws-us-east-1`. Do not print the token.
+Store the token in a secret manager, record `FILE_SYSTEM_ID` for control-plane cleanup, and record the canonical region code used by the profile, for example `aws-us-east-1`. Delete `filesystem.json` after storing the token securely.
 
 ## Step 2. Inject the minimum sandbox environment
 
@@ -48,7 +47,6 @@ Configure the sandbox secret/environment mechanism with:
 ```bash
 TDC_FS_TOKEN=<owner-token>
 TDC_REGION_CODE=aws-us-east-1
-TDC_FS_FILE_SYSTEM_NAME=agent-sandbox
 ```
 
 The sandbox does not need `TDC_PUBLIC_KEY`, `TDC_PRIVATE_KEY`, `tdc configure`, or files copied from `~/.tdc/`.
@@ -78,7 +76,6 @@ On Linux with FUSE:
 ```bash
 mkdir -p "$HOME/workspace"
 tdc fs mount-file-system \
-  --file-system-name agent-sandbox \
   --mount-path "$HOME/workspace" \
   --driver fuse
 
@@ -101,7 +98,7 @@ Use `tdc fs drain-file-system --mount-path "$HOME/workspace"` separately when yo
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name agent-sandbox
+  --file-system-id "$FILE_SYSTEM_ID"
 ```
 
 ## Security notes

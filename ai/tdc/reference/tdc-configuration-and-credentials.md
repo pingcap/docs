@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI Configuration and Credentials
-summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths, Filesystem registry, SQL credentials, mount locators, and operation logs.
+summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths, Filesystem credentials, SQL credentials, mount locators, and operation logs.
 ---
 
 # TiDB Cloud CLI Configuration and Credentials
@@ -85,24 +85,24 @@ An explicitly empty `--project-id` is invalid. When no project ID is available, 
 
 Other DB commands identify resources by cluster or branch ID and do not use `project_id`. Filesystem commands do not consume the DB project default.
 
-## Filesystem resource registry
+## Filesystem credentials and remote inventory
 
-One profile can register multiple Filesystems. Resource state is isolated from the main profile configuration:
+One profile can access multiple Filesystems. Drive9's remote inventory is authoritative for resource existence and status. Local state stores only credentials and their routing hint:
 
 ```text
-~/.tdc/fs_resources/<profile-key>/<resource-key>/config
-~/.tdc/fs_resources/<profile-key>/<resource-key>/credentials
+~/.tdc/fs_credentials/<profile-key>/<file-system-id-key>/credentials
 ```
 
-The resource config contains the stored Filesystem name, tenant ID, cloud provider, region code, and creation time. The credentials file contains only the owner `api_key` and uses owner-only permissions.
+The credential contains the server-assigned file system ID, canonical region code, and owner `api_key`, and uses owner-only permissions. `tdc fs list-file-systems` reads remote resources and joins only the non-secret `has_local_token` hint.
 
 Resource selection is:
 
-1. explicit `--file-system-name`;
-2. `TDC_FS_FILE_SYSTEM_NAME`;
-3. fail with `fs.missing_file_system_name`.
+1. explicit `--file-system-id`;
+2. `TDC_FS_FILE_SYSTEM_ID`;
+3. derive the ID from an explicitly supplied FS token;
+4. otherwise fail with `fs.missing_file_system_id`.
 
-`tdc` never infers a Filesystem from a saved default or from the number of registered resources. Use `--file-system-name` for one command or `TDC_FS_FILE_SYSTEM_NAME` for a shell, sandbox, or automation environment.
+`tdc` never infers a Filesystem from a saved default or from the number of local credentials. Use `--file-system-id` for one command or `TDC_FS_FILE_SYSTEM_ID` for a shell, sandbox, or automation environment.
 
 FS owner credential selection for remote `fs`, `fs-git`, `fs-journal`, and owner `fs-vault` operations is:
 
@@ -114,15 +114,14 @@ Prefer `TDC_FS_TOKEN` over a flag because flags can remain in shell history or p
 
 ## Config-free Filesystem inputs
 
-A clean sandbox can use:
+A clean sandbox needs only:
 
 ```bash
 export TDC_FS_TOKEN="<owner-token>"
 export TDC_REGION_CODE="aws-us-east-1"
-export TDC_FS_FILE_SYSTEM_NAME="workspace"
 ```
 
-These values form an in-memory namespace only. `tdc` does not write them to `~/.tdc/`. Provisioning and deletion still require TiDB Cloud API credentials; deletion also requires the local resource registration.
+These values form an in-memory namespace only. `tdc` derives the ID from the token and does not write either value to `~/.tdc/`. `TDC_FS_FILE_SYSTEM_ID` is optional and, when present, must match the token. Remote list, describe, provisioning, and deletion require TiDB Cloud API credentials; deletion does not require a local FS token.
 
 ## DB SQL credentials
 
@@ -219,7 +218,7 @@ An integration can attach explicit process-scoped metadata without changing a pr
 ```bash
 TDC_TELEMETRY_TAG="e2b-preview" \
 TDC_TELEMETRY_EXTRA='{"campaign":"launch","runtime":"e2b"}' \
-tdc fs list-files --file-system-name workspace --path /
+tdc fs list-files --file-system-id <file-system-id> --path /
 ```
 
 ## Sensitive values

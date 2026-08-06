@@ -16,6 +16,7 @@ Use `tdc fs` to provision TiDB Cloud Filesystem resources and access their data 
 ```text
 tdc fs
 ├── create-file-system
+├── import-file-system-token
 ├── list-file-systems
 ├── describe-file-system
 ├── check-file-system
@@ -52,11 +53,12 @@ tdc fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `create-file-system` | Provisions a Filesystem. Requires `--file-system-name`; `--wait` waits until data-plane access is ready. | `tdc fs create-file-system --file-system-name workspace --wait` |
-| `list-file-systems` | Lists resources registered in the selected local profile. | `tdc fs list-file-systems --output text` |
-| `describe-file-system` | Reads one locally registered resource by name. | `tdc fs describe-file-system --file-system-name workspace` |
-| `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `tdc fs check-file-system --file-system-name workspace` |
-| `delete-file-system` | Requests asynchronous deletion and removes its local registration. Requires TiDB Cloud credentials and the owner resource credential. | `tdc fs delete-file-system --file-system-name workspace` |
+| `create-file-system` | Provisions a Filesystem with a server-assigned ID; `--wait` waits until data-plane access is ready. | `tdc fs create-file-system --wait` |
+| `import-file-system-token` | Validates and stores an existing token under its embedded file system ID. | `tdc fs import-file-system-token --from-file ./fs-token --region aws-us-east-1` |
+| `list-file-systems` | Lists remote resources available to the TiDB Cloud credentials in the effective region. | `tdc fs list-file-systems --output text` |
+| `describe-file-system` | Reads one remote resource by ID without requiring its FS token. | `tdc fs describe-file-system --file-system-id <file-system-id>` |
+| `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `tdc fs check-file-system --file-system-id <file-system-id>` |
+| `delete-file-system` | Requests asynchronous deletion by ID and removes a matching local credential after acceptance. | `tdc fs delete-file-system --file-system-id <file-system-id>` |
 
 ### Data and namespace commands
 
@@ -93,77 +95,72 @@ tdc fs
 
 | Command | Purpose and key inputs | Example |
 | --- | --- | --- |
-| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; select the resource with a flag or environment variable. | `tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace` |
+| `mount-file-system` | Mounts a resource through automatic, FUSE, or WebDAV mode. Requires `--mount-path`; select the resource with a flag or environment variable. | `tdc fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace` |
 | `drain-file-system` | Flushes pending FUSE work while leaving the mount online. | `tdc fs drain-file-system --mount-path /path/to/workspace --timeout 30s` |
 | `unmount-file-system` | Gracefully flushes and unmounts a background FUSE or WebDAV mount. | `tdc fs unmount-file-system --mount-path /path/to/workspace` |
 
 ## Prerequisites
 
-- Run `tdc configure` before provisioning or deleting a Filesystem.
+- Run `tdc configure` before provisioning, listing, describing, or deleting Filesystems.
 - Install `tdc` with the release installer so the `tdc-drive9` companion is next to the `tdc` binary.
+- Install `jq` to run the JSON extraction examples as written, or use an equivalent JSON processor.
 - Treat the returned FS owner token as a secret.
 
-Data-plane commands can instead use an existing Filesystem with `TDC_FS_TOKEN`, `TDC_REGION_CODE`, and `TDC_FS_FILE_SYSTEM_NAME`, without TiDB Cloud API keys.
+Data-plane commands can instead use an existing Filesystem with only `TDC_FS_TOKEN` and `TDC_REGION_CODE`, without TiDB Cloud API keys. `TDC_FS_FILE_SYSTEM_ID` is an optional assertion.
 
 ## Manage Filesystem resources
 
-Create a resource and wait until data-plane access is ready:
+Create a resource, wait until data-plane access is ready, and save the server-assigned ID and one-time owner token without making the file world-readable:
 
 ```bash
-tdc fs create-file-system \
-  --file-system-name workspace \
-  --wait
+umask 077
+tdc fs create-file-system --wait > ./filesystem.json
+export TDC_FS_FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
+export TDC_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
 Without `--wait`, `tdc` returns after Drive9 accepts provisioning. With the flag, `tdc` waits up to 10 minutes until the root is readable through the public Drive9 data-plane CLI. A failed wait leaves the resource and locally stored credential intact.
 
-The JSON response includes `fs_token`. Capture it without displaying the complete result:
+The JSON response includes `fs_token` exactly once. Store it in a secret manager, then delete `filesystem.json`. A configured machine can use the locally stored credential by ID without exporting the token.
 
-```bash
-export TDC_FS_TOKEN="$(tdc fs create-file-system \
-  --file-system-name sandbox \
-  --wait \
-  --query fs_token \
-  --output text)"
-```
-
-List and describe locally registered resources:
+List remote resources in the effective region and describe one by ID:
 
 ```bash
 tdc fs list-file-systems
-tdc fs describe-file-system --file-system-name workspace
+tdc fs describe-file-system --file-system-id <file-system-id>
 ```
 
 Select a resource for subsequent commands in the current shell:
 
 ```bash
-export TDC_FS_FILE_SYSTEM_NAME="workspace"
+export TDC_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
 Check the selected resource and companion:
 
 ```bash
-tdc fs check-file-system --file-system-name workspace
+tdc fs check-file-system --file-system-id <file-system-id>
 ```
 
 Delete a resource only after removing data you need:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name workspace
+  --file-system-id <file-system-id>
 ```
 
-Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and a locally registered resource; an FS token alone cannot delete the resource. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while `tdc` removes the selected local registry entry and credential.
+Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and an ID, but not a local FS token. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while `tdc` removes only a matching ID-keyed local credential.
 
 ## Select one of multiple Filesystems
 
 One profile can own multiple resources. Selection precedence is:
 
-1. `--file-system-name`;
-2. `TDC_FS_FILE_SYSTEM_NAME`;
-3. fail with `fs.missing_file_system_name`.
+1. `--file-system-id`;
+2. `TDC_FS_FILE_SYSTEM_ID`;
+3. the ID embedded in an explicitly supplied FS token;
+4. otherwise fail with `fs.missing_file_system_id`.
 
-`tdc` does not infer a resource from the profile registry, even when only one resource is registered. This makes scripts deterministic when resources are added or removed.
+`tdc` does not infer a resource from local credential count, even when only one credential exists. This makes scripts deterministic when resources are added or removed.
 
 ## Copy and read data
 
@@ -289,7 +286,7 @@ Create the local mount path and mount in the background:
 ```bash
 mkdir -p /path/to/workspace
 tdc fs mount-file-system \
-  --file-system-name workspace \
+  --file-system-id <file-system-id> \
   --mount-path /path/to/workspace
 ```
 
@@ -326,7 +323,7 @@ RUN mkdir -p /workspace
 CMD ["bash"]
 ```
 
-Build the image, then pass the Filesystem owner token, canonical region code, and Filesystem name at runtime:
+Build the image, then pass the Filesystem owner token and canonical region code at runtime:
 
 ```bash
 docker build -t tdc-fuse .
@@ -337,11 +334,10 @@ docker run --rm -it \
   --security-opt apparmor=unconfined \
   --env TDC_FS_TOKEN \
   --env TDC_REGION_CODE \
-  --env TDC_FS_FILE_SYSTEM_NAME \
   tdc-fuse
 ```
 
-The three environment variables must already exist in the host shell. Inside the container, mount and use the Filesystem normally:
+The two environment variables must already exist in the host shell. Inside the container, mount and use the Filesystem normally:
 
 ```bash
 tdc fs mount --mount-path /workspace
@@ -367,7 +363,7 @@ services:
     environment:
       TDC_FS_TOKEN: ${TDC_FS_TOKEN}
       TDC_REGION_CODE: ${TDC_REGION_CODE}
-      TDC_FS_FILE_SYSTEM_NAME: ${TDC_FS_FILE_SYSTEM_NAME}
+      TDC_FS_FILE_SYSTEM_ID: ${TDC_FS_FILE_SYSTEM_ID}
     stdin_open: true
     tty: true
 ```
@@ -388,7 +384,7 @@ macOS intentionally keeps WebDAV as the automatic choice even when macFUSE is in
 
 ```bash
 tdc fs mount-file-system \
-  --file-system-name workspace \
+  --file-system-id <file-system-id> \
   --mount-path /path/to/workspace \
   --driver fuse
 ```
@@ -397,7 +393,7 @@ Explicit FUSE supports cache controls:
 
 ```bash
 tdc fs mount-file-system \
-  --file-system-name workspace \
+  --file-system-id <file-system-id> \
   --mount-path /path/to/workspace \
   --driver fuse \
   --cache-dir "$HOME/.tdc/cache/workspace" \
@@ -415,7 +411,7 @@ Prefer an allowed mount path:
 ```bash
 mkdir -p "$HOME/workspace"
 tdc fs mount-file-system \
-  --file-system-name workspace \
+  --file-system-id <file-system-id> \
   --mount-path "$HOME/workspace"
 ```
 
@@ -425,7 +421,7 @@ For a system-level path, `/mnt/workspace` is allowed by the default profile:
 sudo mkdir -p /mnt/workspace
 sudo chown "$(id -u):$(id -g)" /mnt/workspace
 tdc fs mount-file-system \
-  --file-system-name workspace \
+  --file-system-id <file-system-id> \
   --mount-path /mnt/workspace
 ```
 

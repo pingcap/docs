@@ -18,7 +18,7 @@ tdc fs create-symlink
   --link-path <string>
   --target <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -29,7 +29,7 @@ tdc fs create-symlink
 - `--link-path <string>`: The file path for the created symbolic link. \[required]
 - `--target <string>`: The actual file path being linked to. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -42,7 +42,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Create a relative symbolic link inside the remote namespace.
-    tdc fs create-symlink --file-system-name workspace --target final.md --link-path /reports/latest.md
+    tdc fs create-symlink --file-system-id <file-system-id> --target final.md --link-path /reports/latest.md
     ```
 
 ## Related documentation

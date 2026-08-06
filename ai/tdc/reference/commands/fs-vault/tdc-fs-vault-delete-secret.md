@@ -17,7 +17,7 @@ Deletes one Filesystem Vault secret.
 tdc fs-vault delete-secret
   --secret-name <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -27,7 +27,7 @@ tdc fs-vault delete-secret
 
 - `--secret-name <string>`: Vault secret name. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -40,7 +40,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Remove the selected secret and its fields from the Vault.
-    tdc fs-vault delete-secret --file-system-name workspace --secret-name db-prod
+    tdc fs-vault delete-secret --file-system-id <file-system-id> --secret-name db-prod
     ```
 
 ## Related documentation

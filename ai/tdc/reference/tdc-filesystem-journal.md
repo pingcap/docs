@@ -32,7 +32,7 @@ tdc fs-journal
 
 ## Prerequisites
 
-Select a Filesystem through a profile or provide `TDC_FS_TOKEN`, `TDC_REGION_CODE`, and `TDC_FS_FILE_SYSTEM_NAME`.
+Select a Filesystem by ID with locally stored credentials, or provide only `TDC_FS_TOKEN` and `TDC_REGION_CODE`; `TDC_FS_FILE_SYSTEM_ID` is an optional assertion.
 
 ## Create a journal
 

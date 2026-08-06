@@ -18,7 +18,7 @@ tdc fs-vault replace-secret
   --from-directory <string>
   --secret-path <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -29,7 +29,7 @@ tdc fs-vault replace-secret
 - `--from-directory <string>`: Directory whose files become secret fields. \[required]
 - `--secret-path <string>`: Vault path in the form `/n/vault/<secret>`. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -42,14 +42,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Replace all fields with files loaded from the selected directory.
-    tdc fs-vault replace-secret --file-system-name workspace --secret-path /n/vault/db-prod --from-directory ./secret-fields
+    tdc fs-vault replace-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod --from-directory ./secret-fields
     ```
 
 - Preview secret replacement:
 
     ```bash
     # Validate the replacement source without changing the stored secret.
-    tdc fs-vault replace-secret --file-system-name workspace --secret-path /n/vault/db-prod --from-directory ./secret-fields --dry-run
+    tdc fs-vault replace-secret --file-system-id <file-system-id> --secret-path /n/vault/db-prod --from-directory ./secret-fields --dry-run
     ```
 
 ## Related documentation

@@ -16,7 +16,7 @@ Verifies the integrity of one journal hash chain.
 ```text
 tdc fs-journal verify-journal
   --journal-id <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -25,7 +25,7 @@ tdc fs-journal verify-journal
 ## Options
 
 - `--journal-id <string>`: Journal ID. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -38,7 +38,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Validate the journal's ordered hash chain and integrity metadata.
-    tdc fs-journal verify-journal --file-system-name workspace --journal-id jrn-demo
+    tdc fs-journal verify-journal --file-system-id <file-system-id> --journal-id jrn-demo
     ```
 
 ## Related documentation

@@ -1,11 +1,11 @@
 ---
 title: tdc fs describe-file-system
-summary: Describe a locally registered TiDB Cloud Filesystem.
+summary: Describe a remote TiDB Cloud Filesystem.
 ---
 
 # tdc fs describe-file-system
 
-Describes one locally registered Filesystem.
+Describes one remote Filesystem by its server-assigned ID. The command does not require a locally stored FS token.
 
 > **Note:**
 >
@@ -15,14 +15,14 @@ Describes one locally registered Filesystem.
 
 ```text
 tdc fs describe-file-system
-  --file-system-name <string>
+  --file-system-id <string>
   [--help]
   [--version]
 ```
 
 ## Options
 
-- `--file-system-name <string>`: Set the file system name. \[required]
+- `--file-system-id <string>`: Set the file system ID. \[required]
 - `--help`: Display help information.
 - `--version`: Display version information.
 
@@ -33,8 +33,8 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 - Describe a Filesystem:
 
     ```bash
-    # Return registration, endpoint, and region details for one Filesystem.
-    tdc fs describe-file-system --file-system-name workspace
+    # Return remote status and whether this machine has a matching local token.
+    tdc fs describe-file-system --file-system-id <file-system-id>
     ```
 
 ## Related documentation

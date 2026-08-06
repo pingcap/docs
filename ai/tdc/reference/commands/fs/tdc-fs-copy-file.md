@@ -19,7 +19,7 @@ tdc fs copy-file
   [--create-parents]
   [--description <string>]
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--from-local <string>]
   [--from-remote <string>]
   [--from-stdin]
@@ -42,7 +42,7 @@ tdc fs copy-file
 - `--create-parents`: Create missing local parent directories when copying from a TiDB Cloud file system.
 - `--description <string>`: The file description for `--to-remote` operation.
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--from-local <string>`: The local source path.
 - `--from-remote <string>`: The source path in the TiDB Cloud file system.
 - `--from-stdin`: Read from stdin and write to `--to-remote`.
@@ -66,42 +66,42 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Copy a local report into the selected remote Filesystem.
-    tdc fs copy-file --file-system-name workspace --from-local ./report.md --to-remote /reports/report.md
+    tdc fs copy-file --file-system-id <file-system-id> --from-local ./report.md --to-remote /reports/report.md
     ```
 
 - Download a remote file:
 
     ```bash
     # Create missing local parent directories while downloading the file.
-    tdc fs copy-file --file-system-name workspace --from-remote /reports/report.md --to-local ./downloads/report.md --create-parents
+    tdc fs copy-file --file-system-id <file-system-id> --from-remote /reports/report.md --to-local ./downloads/report.md --create-parents
     ```
 
 - Copy a remote directory:
 
     ```bash
     # Duplicate a complete directory tree without downloading it locally.
-    tdc fs copy-file --file-system-name workspace --from-remote /reports --to-remote /archive/reports --recursive
+    tdc fs copy-file --file-system-id <file-system-id> --from-remote /reports --to-remote /archive/reports --recursive
     ```
 
 - Resume a large upload:
 
     ```bash
     # Continue an interrupted local-to-remote transfer instead of restarting it.
-    tdc fs copy-file --file-system-name workspace --from-local ./large.bin --to-remote /artifacts/large.bin --resume
+    tdc fs copy-file --file-system-id <file-system-id> --from-local ./large.bin --to-remote /artifacts/large.bin --resume
     ```
 
 - Append to a remote log:
 
     ```bash
     # Add local log data to the existing remote object efficiently.
-    tdc fs copy-file --file-system-name workspace --from-local ./tail.log --to-remote /logs/app.log --append
+    tdc fs copy-file --file-system-id <file-system-id> --from-local ./tail.log --to-remote /logs/app.log --append
     ```
 
 - Stream standard input to the Filesystem:
 
     ```bash
     # Upload generated content without creating an intermediate local file.
-    printf 'ready\n' | tdc fs copy-file --file-system-name workspace --from-stdin --to-remote /status.txt --tag source=stdin --description "generated status"
+    printf 'ready\n' | tdc fs copy-file --file-system-id <file-system-id> --from-stdin --to-remote /status.txt --tag source=stdin --description "generated status"
     ```
 
 ## Related documentation

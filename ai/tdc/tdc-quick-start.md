@@ -75,25 +75,23 @@ Complete either the Filesystem workflow or the Starter database workflow.
 
 ### Option A: Write and read a file
 
-Create a Filesystem and wait until it is ready:
+Create a Filesystem, wait until it is ready, and save its server-assigned ID:
 
 ```bash
-tdc fs create-file-system \
-  --file-system-name quickstart-fs \
+export TDC_FS_FILE_SYSTEM_ID="$(tdc fs create-file-system \
   --wait \
-  --output text
+  --query file_system_id \
+  --output text)"
 ```
 
 `tdc` stores the Filesystem credential locally. Write and read a file directly:
 
 ```bash
 printf 'hello from tdc\n' | tdc fs copy-file \
-  --file-system-name quickstart-fs \
   --from-stdin \
   --to-remote /hello.txt
 
 tdc fs read-file \
-  --file-system-name quickstart-fs \
   --path /hello.txt
 ```
 
@@ -107,7 +105,8 @@ Clean up:
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name quickstart-fs
+  --file-system-id "$TDC_FS_FILE_SYSTEM_ID"
+unset TDC_FS_FILE_SYSTEM_ID
 ```
 
 ### Option B: Query a Starter database

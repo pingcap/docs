@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Filesystem.
 
 # tdc fs create-file-system
 
-Creates a Filesystem. `--wait` waits until data-plane access is ready.
+Creates a Filesystem with a server-assigned ID. The response contains the owner `fs_token` once. `--wait` waits until data-plane access is ready.
 
 > **Note:**
 >
@@ -15,7 +15,6 @@ Creates a Filesystem. `--wait` waits until data-plane access is ready.
 
 ```text
 tdc fs create-file-system
-  --file-system-name <string>
   [--dry-run]
   [--help]
   [--version]
@@ -24,7 +23,6 @@ tdc fs create-file-system
 
 ## Options
 
-- `--file-system-name <string>`: Set the file system name. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -38,21 +36,21 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Wait until the new Filesystem root is readable before returning.
-    tdc fs create-file-system --file-system-name workspace --wait
+    tdc fs create-file-system --wait
     ```
 
 - Create a Filesystem asynchronously:
 
     ```bash
     # Return after provisioning is accepted so work can continue in parallel.
-    tdc fs create-file-system --file-system-name scratch
+    tdc fs create-file-system
     ```
 
 - Preview Filesystem creation:
 
     ```bash
     # Validate credentials, placement, and the request without provisioning storage.
-    tdc fs create-file-system --file-system-name workspace --dry-run
+    tdc fs create-file-system --dry-run
     ```
 
 ## Related documentation

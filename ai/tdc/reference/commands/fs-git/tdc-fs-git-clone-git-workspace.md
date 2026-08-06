@@ -19,7 +19,7 @@ tdc fs-git clone-git-workspace
   --target-path <string>
   [--blobless]
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--hydrate <string>]
@@ -32,7 +32,7 @@ tdc fs-git clone-git-workspace
 - `--target-path <string>`: The mounted file system path to clone into. \[required]
 - `--blobless`: Create a blobless partial local `.git` and hydrate clean blobs separately.
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--hydrate <string>`: Blobless hydrate mode: `auto`, `background`, `sync`, or `off`. \[default: auto]
@@ -46,21 +46,21 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Create a complete Git checkout in the mounted Filesystem path.
-    tdc fs-git clone-git-workspace --file-system-name workspace --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb
+    tdc fs-git clone-git-workspace --file-system-id <file-system-id> --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb
     ```
 
 - Start a blobless workspace immediately:
 
     ```bash
     # Expose the repository tree while clean Git objects hydrate in the background.
-    tdc fs-git clone-git-workspace --file-system-name workspace --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb --blobless --hydrate background
+    tdc fs-git clone-git-workspace --file-system-id <file-system-id> --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb --blobless --hydrate background
     ```
 
 - Wait for blobless hydration:
 
     ```bash
     # Keep the clone command running until clean Git objects finish hydrating.
-    tdc fs-git clone-git-workspace --file-system-name workspace --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb --blobless --hydrate sync
+    tdc fs-git clone-git-workspace --file-system-id <file-system-id> --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb --blobless --hydrate sync
     ```
 
 ## Related documentation

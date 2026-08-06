@@ -20,7 +20,7 @@ tdc fs-vault create-grant
   --scope <string>
   --ttl <duration>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--label-hint <string>]
@@ -35,7 +35,7 @@ tdc fs-vault create-grant
 - `--scope <string>`: Vault scope such as secret or secret/field; repeatable. \[required]
 - `--ttl <duration>`: Grant time to live, for example, `1h`. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--label-hint <string>`: Optional grant label hint.
@@ -50,14 +50,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Limit an agent to one secret field for ten minutes.
-    tdc fs-vault create-grant --file-system-name workspace --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m
+    tdc fs-vault create-grant --file-system-id <file-system-id> --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m
     ```
 
 - Return only the delegated token:
 
     ```bash
     # Produce token-only output for injection into an isolated CI job.
-    tdc fs-vault create-grant --file-system-name workspace --agent-id ci-agent --scope api-dev/TOKEN --permission read --ttl 5m --token-only
+    tdc fs-vault create-grant --file-system-id <file-system-id> --agent-id ci-agent --scope api-dev/TOKEN --permission read --ttl 5m --token-only
     ```
 
 ## Related documentation

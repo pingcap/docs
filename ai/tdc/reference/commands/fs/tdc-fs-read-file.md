@@ -16,7 +16,7 @@ Writes a remote file or byte range to stdout. The command alias is `tdc fs cat`.
 ```text
 tdc fs read-file
   --path <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--length <int64>]
@@ -27,7 +27,7 @@ tdc fs read-file
 ## Options
 
 - `--path <string>`: File path in the selected file system. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--length <int64>`: Byte length for a ranged read.
@@ -42,14 +42,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Write the remote file contents directly to standard output.
-    tdc fs read-file --file-system-name workspace --path /reports/report.md
+    tdc fs read-file --file-system-id <file-system-id> --path /reports/report.md
     ```
 
 - Read a byte range:
 
     ```bash
     # Fetch only the requested range from a large remote object.
-    tdc fs read-file --file-system-name workspace --path /archives/large.bin --offset 1024 --length 4096
+    tdc fs read-file --file-system-id <file-system-id> --path /archives/large.bin --offset 1024 --length 4096
     ```
 
 ## Related documentation

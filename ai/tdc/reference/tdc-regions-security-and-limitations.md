@@ -45,7 +45,7 @@ The hosted manifest is authoritative and can change during preview. A profile in
 | --- | --- |
 | `tdc configure`, `tdc organization`, all `tdc db` control-plane operations | TiDB Cloud API public/private key |
 | `tdc fs create-file-system` | TiDB Cloud API key |
-| `tdc fs delete-file-system` | TiDB Cloud API key, local resource registration, and owner resource credential |
+| `tdc fs delete-file-system` | TiDB Cloud API key and file system ID |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
 | Delegated vault read, list, run, or mount | Scope-appropriate delegated vault token |
 | Drain and unmount after a successful background mount | Non-secret mount locator in the same `HOME` |
@@ -56,7 +56,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 
 - Create TiDB Cloud API keys with only the organization and project access required for the workflow. Do not reuse a personal administrator key in unattended automation.
 - Inject automation credentials from a CI secret store or runtime secret manager. Do not place credentials in source control, container images, shell scripts, or command-line arguments that can appear in process listings and shell history.
-- Do not copy the complete `~/.tdc/` directory into an agent sandbox. For an existing Filesystem, pass only `TDC_FS_TOKEN`, `TDC_REGION_CODE`, and `TDC_FS_FILE_SYSTEM_NAME`.
+- Do not copy the complete `~/.tdc/` directory into an agent sandbox. For an existing Filesystem, pass only `TDC_FS_TOKEN` and `TDC_REGION_CODE`; use `TDC_FS_FILE_SYSTEM_ID` only as an optional assertion.
 - Treat an FS owner token as full access to that Filesystem. When an agent needs only selected secrets, create a vault grant with the narrowest field scope and shortest practical TTL, and pass the delegated vault token instead.
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.tdc/credentials`, resource credentials, and DB SQL credentials owner-readable only.
@@ -92,7 +92,7 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - SQL execution accepts one statement per invocation.
 - Read-write is the default SQL role; use explicit role flags in security-sensitive automation.
 - Journals are append-only and the current public command surface has no journal delete command.
-- Filesystem resource list and describe commands operate on the local registry; they are not an organization-wide discovery API.
+- Filesystem list and describe commands query the region-scoped remote inventory with TiDB Cloud credentials. They do not aggregate across regions.
 - Telemetry management commands are intentionally not implemented. Control telemetry through `~/.tdc/.preferences` or `TDC_TELEMETRY`; serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
 - The TiDB Cloud CLI depends on its installed `tdc-drive9` companion for all public Filesystem runtime behavior.
 

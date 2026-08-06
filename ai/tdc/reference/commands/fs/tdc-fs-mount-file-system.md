@@ -19,7 +19,7 @@ tdc fs mount-file-system
   [--cache-dir <string>]
   [--driver <string>]
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--foreground]
   [--fs-token <string>]
   [--help]
@@ -44,7 +44,7 @@ tdc fs mount-file-system
 - `--cache-dir <string>`: Local FUSE cache directory. If omitted, uses `~/.tdc/cache/mounts/<mount-hash>`.
 - `--driver <string>`: Mount driver: `auto`, `fuse`, or `webdav`. \[default: auto]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--foreground`: Run the mount runtime in the foreground until interrupted.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
@@ -70,28 +70,28 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Let the CLI select the default driver for the current platform.
-    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace
+    tdc fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace
     ```
 
 - Create a read-only FUSE mount:
 
     ```bash
     # Expose the remote namespace through FUSE without permitting writes.
-    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver fuse --read-only
+    tdc fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace --driver fuse --read-only
     ```
 
 - Use WebDAV on macOS without macFUSE:
 
     ```bash
     # Select WebDAV explicitly when a FUSE runtime is unavailable.
-    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver webdav
+    tdc fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace --driver webdav
     ```
 
 - Tune the FUSE read cache:
 
     ```bash
     # Increase cache capacity for repeated reads of medium-sized files.
-    tdc fs mount-file-system --file-system-name workspace --mount-path /path/to/workspace --driver fuse --read-cache-size-mb 256 --read-cache-max-file-mb 16
+    tdc fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace --driver fuse --read-cache-size-mb 256 --read-cache-max-file-mb 16
     ```
 
 ## Related documentation

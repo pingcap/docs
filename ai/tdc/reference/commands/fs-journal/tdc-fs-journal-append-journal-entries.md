@@ -19,7 +19,7 @@ tdc fs-journal append-journal-entries
   [--dry-run]
   [--entry-json <string>]
   [--entry-type <string>]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--idempotency-key <string>]
@@ -35,7 +35,7 @@ tdc fs-journal append-journal-entries
 - `--dry-run`: Validate the request without applying changes.
 - `--entry-json <string>`: One JSON journal entry object; repeatable.
 - `--entry-type <string>`: Default entry type for entries missing type.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--idempotency-key <string>`: Append idempotency key; generated when omitted.
@@ -52,21 +52,21 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Record an event object exactly as supplied on the command line.
-    tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-json '{"type":"task.started"}'
+    tdc fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --entry-json '{"type":"task.started"}'
     ```
 
 - Append an idempotent typed entry:
 
     ```bash
     # Prevent retries from recording the same completion event twice.
-    tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --entry-type task.completed --subject issue-42 --idempotency-key issue-42-complete
+    tdc fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --entry-type task.completed --subject issue-42 --idempotency-key issue-42-complete
     ```
 
 - Append a JSON array from standard input:
 
     ```bash
     # Batch multiple ordered events in a single append operation.
-    printf '[{"type":"step.started"},{"type":"step.completed"}]' | tdc fs-journal append-journal-entries --file-system-name workspace --journal-id jrn-demo --json-array
+    printf '[{"type":"step.started"},{"type":"step.completed"}]' | tdc fs-journal append-journal-entries --file-system-id <file-system-id> --journal-id jrn-demo --json-array
     ```
 
 ## Related documentation

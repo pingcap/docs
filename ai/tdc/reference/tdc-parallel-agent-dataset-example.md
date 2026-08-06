@@ -24,33 +24,31 @@ An owner uploads the corpus once. Every worker selects the same Filesystem and m
 On a trusted machine:
 
 ```bash
-tdc fs create-file-system \
-  --file-system-name shared-corpus \
-  --wait
+umask 077
+tdc fs create-file-system --wait > ./filesystem.json
+export TDC_FS_FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
+export TDC_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 
 tdc fs copy-file \
-  --file-system-name shared-corpus \
   --from-local ./corpus \
   --to-remote /datasets/corpus \
   --recursive
 
 tdc fs find-files \
-  --file-system-name shared-corpus \
   --path /datasets/corpus \
   --file-name-pattern "*.pdf" \
   --output text
 ```
 
-Transfer the returned FS token through a secret manager.
+Transfer the FS token and canonical region code through a secret manager. Delete `filesystem.json` after storing the token securely.
 
 ## Step 2. Mount in each worker
 
-Inject the resource token, region, and name into each worker, then run:
+Inject `TDC_FS_TOKEN` and `TDC_REGION_CODE` into each worker, then run:
 
 ```bash
 mkdir -p "$HOME/corpus"
 tdc fs mount-file-system \
-  --file-system-name shared-corpus \
   --mount-path "$HOME/corpus" \
   --remote-path /datasets/corpus \
   --read-only

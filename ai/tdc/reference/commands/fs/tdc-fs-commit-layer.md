@@ -17,7 +17,7 @@ Applies one layer to its base Filesystem.
 tdc fs commit-layer
   --layer-id <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -27,7 +27,7 @@ tdc fs commit-layer
 
 - `--layer-id <string>`: Layer ID. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -40,7 +40,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Apply the selected layer's changes to its base Filesystem view.
-    tdc fs commit-layer --file-system-name workspace --layer-id "<layer-id>"
+    tdc fs commit-layer --file-system-id <file-system-id> --layer-id "<layer-id>"
     ```
 
 ## Related documentation

@@ -1,11 +1,11 @@
 ---
 title: tdc fs list-file-systems
-summary: List locally registered TiDB Cloud Filesystems.
+summary: List remote TiDB Cloud Filesystems in a region.
 ---
 
 # tdc fs list-file-systems
 
-Lists Filesystems registered in the selected local profile.
+Lists every Filesystem that the selected TiDB Cloud credentials can access in the effective region. `has_local_token` indicates whether this machine has a matching data-plane token.
 
 > **Note:**
 >
@@ -28,10 +28,10 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
 ## Examples
 
-- List locally registered Filesystems:
+- List remotely managed Filesystems:
 
     ```bash
-    # Return the Filesystems registered under the selected local profile.
+    # Return the remote inventory for the profile's region without exposing tokens.
     tdc fs list-file-systems
     ```
 

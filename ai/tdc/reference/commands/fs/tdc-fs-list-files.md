@@ -15,7 +15,7 @@ Lists entries below a remote path. The command alias is `tdc fs ls`.
 
 ```text
 tdc fs list-files
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--path <string>]
@@ -24,7 +24,7 @@ tdc fs list-files
 
 ## Options
 
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--path <string>`: File system directory path. \[default: /]
@@ -38,7 +38,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Return the entries under a specific Filesystem path.
-    tdc fs list-files --file-system-name workspace --path /reports
+    tdc fs list-files --file-system-id <file-system-id> --path /reports
     ```
 
 ## Related documentation

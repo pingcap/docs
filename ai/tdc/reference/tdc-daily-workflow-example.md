@@ -58,16 +58,13 @@ tdc db execute-sql-statement \
 ## Step 4. Create and use a Filesystem
 
 ```bash
-tdc fs create-file-system \
-  --file-system-name daily-workspace
+export TDC_FS_FILE_SYSTEM_ID="$(tdc fs create-file-system --query file_system_id --output text)"
 
 printf 'daily workflow\n' | tdc fs copy-file \
-  --file-system-name daily-workspace \
   --from-stdin \
   --to-remote /notes/today.txt
 
 tdc fs list-files \
-  --file-system-name daily-workspace \
   --path /notes \
   --output text
 ```
@@ -93,7 +90,7 @@ tdc update
 
 ```bash
 tdc fs delete-file-system \
-  --file-system-name daily-workspace
+  --file-system-id "$TDC_FS_FILE_SYSTEM_ID"
 
 tdc db delete-db-cluster \
   --db-cluster-id "<cluster-id>"

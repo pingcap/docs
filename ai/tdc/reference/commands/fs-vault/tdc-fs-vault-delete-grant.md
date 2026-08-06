@@ -17,7 +17,7 @@ Revokes one delegated Filesystem Vault grant.
 tdc fs-vault delete-grant
   --grant-id <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--reason <string>]
@@ -29,7 +29,7 @@ tdc fs-vault delete-grant
 
 - `--grant-id <string>`: Vault grant ID. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--reason <string>`: Optional revoke reason.
@@ -44,7 +44,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Invalidate the delegated token and record the revocation reason.
-    tdc fs-vault delete-grant --file-system-name workspace --grant-id "<grant-id>" --reason rotated
+    tdc fs-vault delete-grant --file-system-id <file-system-id> --grant-id "<grant-id>" --reason rotated
     ```
 
 ## Related documentation

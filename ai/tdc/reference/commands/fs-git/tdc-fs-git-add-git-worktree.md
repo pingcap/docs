@@ -22,7 +22,7 @@ tdc fs-git add-git-worktree
   [--commit-ish <string>]
   [--detach]
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--hydrate <string>]
@@ -38,7 +38,7 @@ tdc fs-git add-git-worktree
 - `--commit-ish <string>`: Optional commit-ish for the linked worktree.
 - `--detach`: Create a detached linked worktree.
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--hydrate <string>`: Blobless hydrate mode: `auto`, `background`, `sync`, or `off`. \[default: auto]
@@ -52,14 +52,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Give an agent an isolated branch while sharing the base Git object store.
-    tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-feature --branch-name feature-x
+    tdc fs-git add-git-worktree --file-system-id <file-system-id> --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-feature --branch-name feature-x
     ```
 
 - Create a detached worktree:
 
     ```bash
     # Inspect a commit without creating or switching a branch.
-    tdc fs-git add-git-worktree --file-system-name workspace --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-review --commit-ish origin/main --detach
+    tdc fs-git add-git-worktree --file-system-id <file-system-id> --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-review --commit-ish origin/main --detach
     ```
 
 ## Related documentation

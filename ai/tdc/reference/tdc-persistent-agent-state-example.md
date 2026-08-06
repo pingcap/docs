@@ -17,7 +17,7 @@ An agent sandbox can disappear after a timeout, failure, or deployment. Plans, i
 
 ## How TiDB Cloud CLI changes the workflow
 
-A trusted machine provisions one Filesystem. Each sandbox receives only the Filesystem token, region code, and name. The agent writes durable task state to the remote namespace and records workflow transitions in a journal. A replacement sandbox can read both without receiving TiDB Cloud control-plane keys.
+A trusted machine provisions one Filesystem. Each sandbox receives only the Filesystem token and region code. The token identifies the Filesystem, so the agent can write durable task state to the remote namespace and record workflow transitions in a journal without receiving TiDB Cloud control-plane keys.
 
 ## Step 1. Provision the state Filesystem
 
@@ -25,13 +25,12 @@ On a trusted machine:
 
 ```bash
 export TDC_FS_TOKEN="$(tdc fs create-file-system \
-  --file-system-name agent-state \
   --wait \
   --query fs_token \
   --output text)"
 ```
 
-Store `TDC_FS_TOKEN` in a secret manager. Also record the configured canonical region code and the Filesystem name.
+Store `TDC_FS_TOKEN` in a secret manager. Also record the configured canonical region code. The token contains the server-assigned Filesystem ID.
 
 ## Step 2. Start the first sandbox
 
@@ -40,7 +39,6 @@ Inject the following environment variables:
 ```bash
 export TDC_FS_TOKEN="<owner-token>"
 export TDC_REGION_CODE="aws-us-east-1"
-export TDC_FS_FILE_SYSTEM_NAME="agent-state"
 ```
 
 Write a plan and create a workflow journal:
@@ -62,7 +60,7 @@ tdc fs-journal append-journal-entries \
 
 ## Step 3. Resume in a replacement sandbox
 
-Inject the same three FS variables into the new sandbox, then restore the durable state:
+Inject the same two FS variables into the new sandbox, then restore the durable state:
 
 ```bash
 tdc fs read-file --path /tasks/task-42/plan.md

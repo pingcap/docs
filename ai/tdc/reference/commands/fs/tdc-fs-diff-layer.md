@@ -16,7 +16,7 @@ Lists changes in one layer, optionally up to a sequence number.
 ```text
 tdc fs diff-layer
   --layer-id <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--max-seq <int64>]
@@ -26,7 +26,7 @@ tdc fs diff-layer
 ## Options
 
 - `--layer-id <string>`: The ID of the layer. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--max-seq <int64>`: The highest layer sequence to include; 0 includes all layers.
@@ -40,14 +40,14 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Return the complete ordered change set for the selected layer.
-    tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>"
+    tdc fs diff-layer --file-system-id <file-system-id> --layer-id "<layer-id>"
     ```
 
 - Show an earlier layer view:
 
     ```bash
     # Limit the diff to changes at or before a sequence number.
-    tdc fs diff-layer --file-system-name workspace --layer-id "<layer-id>" --max-seq 100
+    tdc fs diff-layer --file-system-id <file-system-id> --layer-id "<layer-id>" --max-seq 100
     ```
 
 ## Related documentation

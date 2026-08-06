@@ -5,7 +5,7 @@ summary: Delete a TiDB Cloud Filesystem.
 
 # tdc fs delete-file-system
 
-Requests asynchronous Filesystem deletion and removes its local registration.
+Requests asynchronous Filesystem deletion by ID. A locally stored FS token is not required.
 
 > **Note:**
 >
@@ -15,18 +15,16 @@ Requests asynchronous Filesystem deletion and removes its local registration.
 
 ```text
 tdc fs delete-file-system
-  --file-system-name <string>
+  --file-system-id <string>
   [--dry-run]
-  [--fs-token <string>]
   [--help]
   [--version]
 ```
 
 ## Options
 
-- `--file-system-name <string>`: Set the file system name. \[required]
+- `--file-system-id <string>`: Set the file system ID. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
 
@@ -37,15 +35,15 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 - Delete a Filesystem:
 
     ```bash
-    # Request asynchronous deletion and remove its local registration after acceptance.
-    tdc fs delete-file-system --file-system-name workspace
+    # Request asynchronous deletion and remove only the matching local credential after acceptance.
+    tdc fs delete-file-system --file-system-id <file-system-id>
     ```
 
 - Preview Filesystem deletion:
 
     ```bash
     # Validate the selected Filesystem without sending the deletion request.
-    tdc fs delete-file-system --file-system-name workspace --dry-run
+    tdc fs delete-file-system --file-system-id <file-system-id> --dry-run
     ```
 
 ## Related documentation

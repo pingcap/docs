@@ -18,7 +18,7 @@ tdc fs chmod-file
   --mode <string>
   --path <string>
   [--dry-run]
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -29,7 +29,7 @@ tdc fs chmod-file
 - `--mode <string>`: The permission mode as an octal value such as 0644. \[required]
 - `--path <string>`: File or directory path. \[required]
 - `--dry-run`: Validate the request without applying changes.
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -42,7 +42,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Restrict the selected file to owner read and write access.
-    tdc fs chmod-file --file-system-name workspace --path /reports/final.md --mode 0600
+    tdc fs chmod-file --file-system-id <file-system-id> --path /reports/final.md --mode 0600
     ```
 
 ## Related documentation

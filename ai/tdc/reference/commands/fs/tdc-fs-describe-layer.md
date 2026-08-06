@@ -16,7 +16,7 @@ Describes one Filesystem layer.
 ```text
 tdc fs describe-layer
   --layer-id <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--version]
@@ -25,7 +25,7 @@ tdc fs describe-layer
 ## Options
 
 - `--layer-id <string>`: The ID of the specified file system layer. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -38,7 +38,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Inspect one layer's base root, state, durability, and metadata.
-    tdc fs describe-layer --file-system-name workspace --layer-id "<layer-id>"
+    tdc fs describe-layer --file-system-id <file-system-id> --layer-id "<layer-id>"
     ```
 
 ## Related documentation

@@ -16,7 +16,7 @@ Hydrates clean Git objects for an existing `tdc` Git workspace.
 ```text
 tdc fs-git hydrate-git-workspace
   --target-path <string>
-  [--file-system-name <string>]
+  [--file-system-id <string>]
   [--fs-token <string>]
   [--help]
   [--timeout <duration>]
@@ -26,7 +26,7 @@ tdc fs-git hydrate-git-workspace
 ## Options
 
 - `--target-path <string>`: Mounted `tdc fs` workspace path. \[required]
-- `--file-system-name <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_NAME`.
+- `--file-system-id <string>`: Select the file system. You can also set `TDC_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the file system user token. If omitted, uses `TDC_FS_TOKEN`.
 - `--help`: Display help information.
 - `--timeout <duration>`: Maximum hydrate duration. \[default: `30m0s`]
@@ -40,7 +40,7 @@ For options shared by all commands, see [Global options](/ai/tdc/reference/tdc-c
 
     ```bash
     # Download missing clean Git objects for an existing blobless workspace.
-    tdc fs-git hydrate-git-workspace --file-system-name workspace --target-path /path/to/workspace/tidb --timeout 30m
+    tdc fs-git hydrate-git-workspace --file-system-id <file-system-id> --target-path /path/to/workspace/tidb --timeout 30m
     ```
 
 ## Related documentation
