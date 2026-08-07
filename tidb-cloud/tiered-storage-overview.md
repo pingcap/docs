@@ -25,7 +25,9 @@ Key features:
 - **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
 - **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup and restore, TiCDC, and other components
 
-## Usage scenario decisions
+## Usage scenarios
+
+This section describes the recommended and not recommended scenarios for using IA storage, as well as a checklist to help you decide whether to use IA.
 
 ### Recommended scenarios
 
