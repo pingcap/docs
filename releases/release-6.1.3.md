@@ -74,7 +74,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     -   Backup & Restore (BR)
 
-        -   データベースまたはテーブルの照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+        -   データベースまたはテーブルの照合順序に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました [#39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
 
     -   TiCDC
 

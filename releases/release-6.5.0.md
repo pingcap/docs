@@ -474,7 +474,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     -   Backup & Restore (BR)
 
         -   BRがログバックアップデータを削除するときに、削除されるべきでないデータを誤って削除してしまう問題を修正[＃38939](https://github.com/pingcap/tidb/issues/38939) @[Leavrth](https://github.com/Leavrth)
-        -   データベースまたはテーブルの照合に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました [＃39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
+        -   データベースまたはテーブルの照合順序に古いフレームワークを使用すると復元タスクが失敗する問題を修正しました [＃39150](https://github.com/pingcap/tidb/issues/39150) @[MoCuishle28](https://github.com/MoCuishle28)
         -   Alibaba CloudとHuawei CloudがAmazon S3ストレージと完全に互換性がないため、バックアップが失敗する問題を修正 [＃39545](https://github.com/pingcap/tidb/issues/39545) @[3pointer](https://github.com/3pointer)
 
     -   TiCDC

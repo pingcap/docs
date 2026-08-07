@@ -254,9 +254,9 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
     -   `resolved-ts` : 現在のプロセッサ内のソートされたデータの中で最大の TSO。
     -   `checkpoint-ts` : 現在のプロセッサでダウンストリームに正常に書き込まれた最大の TSO。
 
-## 照合の新しいフレームワークを有効にしてテーブルを複製する {#replicate-tables-with-the-new-framework-for-collations-enabled}
+## 照合順序の新しいフレームワークを有効にしてテーブルを複製する {#replicate-tables-with-the-new-framework-for-collations-enabled}
 
-v4.0.15、v5.0.4、v5.1.1、v5.2.0 以降、TiCDC は[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)有効になっているテーブルをサポートします。
+v4.0.15、v5.0.4、v5.1.1、v5.2.0 以降、TiCDC は[照合順序のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)が有効になっているテーブルをサポートします。
 
 ## 有効なインデックスのないテーブルを複製する {#replicate-tables-without-a-valid-index}
 

@@ -92,11 +92,11 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
     | テーブルパーティションを切り捨てる   | DDL |             | `truncate table partition`イベントに一致                                       |
     | ビューを作成              | DDL |             | `create view`イベントに一致                                                    |
     | ドロップビュー             | DDL |             | `drop view`イベントに一致                                                      |
-    | スキーマの文字セットを変更して照合する | DDL |             | `modify schema charset and collate`イベントに一致                              |
+    | スキーマの文字セットと照合順序を変更する | DDL |             | `modify schema charset and collate`イベントに一致                              |
     | テーブルを回復する           | DDL |             | `recover table`イベントに一致                                                  |
     | 自動IDをリベースする         | DDL |             | `rebase auto id`イベントに一致                                                 |
     | テーブルコメントの変更         | DDL |             | `modify table comment`イベントに一致                                           |
-    | テーブルの文字セットと照合を変更する  | DDL |             | `modify table charset and collate`イベントに一致                               |
+    | テーブルの文字セットと照合順序を変更する  | DDL |             | `modify table charset and collate`イベントに一致                               |
     | 交換テーブルパーティション       | DDL |             | `exchange table partition`イベントに一致                                       |
     | テーブルパーティションの再編成     | DDL |             | `reorganize table partition`イベントに一致                                     |
     | テーブルパーティションの変更      | DDL |             | `alter table partitioning`イベントに一致                                       |
