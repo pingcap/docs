@@ -90,7 +90,7 @@
           - [相関サブクエリのデコヒーレンス](/correlated-subquery-optimization.md)
           - [最大値/最小値を削除する](/max-min-eliminate.md)
           - [Predicate Push Down](/predicate-push-down.md)
-          - [パーティション剪定](/partition-pruning.md)
+          - [パーティションプルーニング](/partition-pruning.md)
           - [トップNとリミットプッシュダウン](/topn-limit-push-down.md)
           - [結合したテーブルの再配置](/join-reorder.md)
           - [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)

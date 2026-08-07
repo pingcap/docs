@@ -71,7 +71,7 @@ TiDBバージョン：8.3.0
     -   `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
     -   `INFORMATION_SCHEMA.VIEWS`
 
--   パーティション式`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティション剪定をサポートしてクエリのパフォーマンスを向上させる [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss)
+-   パーティション式`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートしてクエリのパフォーマンスを向上させる [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss)
 
     以前のバージョンでは、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合、パーティションプルーニングがサポートされておらず、クエリのパフォーマンスが低下していました。v8.3.0 以降では、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングがサポートされ、クエリのパフォーマンスが向上します。
 
@@ -294,7 +294,7 @@ TiDBバージョン：8.3.0
     -   HashAgg演算子のディスクスピルによって並列計算中にクエリ結果が不正になる問題を修正しました [#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   `JSON_TYPE` JSON 形式にキャストした際に`YEAR`が間違って表示される問題を修正 [#54494](https://github.com/pingcap/tidb/issues/54494) @[YangKeao](https://github.com/YangKeao)
     -   `tidb_schema_cache_size`システム変数の値の範囲が間違っている問題を修正 [#54034](https://github.com/pingcap/tidb/issues/54034) @[lilinghai](https://github.com/lilinghai)
-    -   パーティション式が`EXTRACT(YEAR FROM col)`の場合にパーティション剪定が機能しない問題を修正 [#54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)
+    -   パーティション式が`EXTRACT(YEAR FROM col)`の場合にパーティションプルーニングが機能しない問題を修正 [#54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)
     -   データベースに多数のテーブルが存在する場合に`FLASHBACK DATABASE`が失敗する問題を修正 [#54415](https://github.com/pingcap/tidb/issues/54415) @[lance6716](https://github.com/lance6716)
     -   `FLASHBACK DATABASE`多数のデータベースを処理する際に無限ループに陥る問題を修正しました [#54915](https://github.com/pingcap/tidb/issues/54915) @[lance6716](https://github.com/lance6716)
     -   インデックス加速モードでインデックスを追加すると失敗する可能性がある問題を修正 [#54568](https://github.com/pingcap/tidb/issues/54568) @[lance6716](https://github.com/lance6716)
