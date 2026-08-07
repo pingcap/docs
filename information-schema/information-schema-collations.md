@@ -3,7 +3,7 @@ title: COLLATIONS
 summary: COLLATIONS` information_schema テーブルについて学習します。
 ---
 
-# 照合 {#collations}
+# COLLATIONS {#collations}
 
 `COLLATIONS`テーブルは、 `CHARACTER_SETS`テーブル内の文字セットに対応する照合順序のリストを提供します。現在、このテーブルはMySQLとの互換性のためだけに含まれています。
 

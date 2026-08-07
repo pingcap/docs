@@ -3,7 +3,7 @@ title: COLLATION_CHARACTER_SET_APPLICABILITY
 summary: COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# 照合文字セットの適用性 {#collation-character-set-applicability}
+# COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}
 
 `COLLATION_CHARACTER_SET_APPLICABILITY`テーブルは、照合順序を該当する文字セット名にマッピングします。`COLLATIONS`と同様に、MySQL との互換性のためだけに含まれています。
 
