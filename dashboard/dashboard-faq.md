@@ -5,7 +5,7 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 
 # TiDB Dashboardに関するよくある質問 {#tidb-dashboard-faqs}
 
-このドキュメントは、TiDB Dashboardに関するよくある質問（FAQ）と回答をまとめたものです。指示通りに実行しても問題が見つからない場合、または問題が解決しない場合は、PingCAPまたはコミュニティから[サポートを受ける](/support.md)ください。
+このドキュメントは、TiDB Dashboardに関するよくある質問（FAQ）と回答をまとめたものです。指示通りに実行しても問題が見つからない場合、または問題が解決しない場合は、PingCAPまたはコミュニティから[サポートを受けて](/support.md)ください。
 
 ## アクセスに関するよくあるFAQ {#access-related-faq}
 
@@ -102,7 +102,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
     tiup cluster reload ${cluster-name} --role prometheus
     ```
 
-上記の手順を実行した後もエラー メッセージが表示される場合は、PingCAP またはコミュニティに問い合わせて[サポートを受ける](/support.md) 。
+上記の手順を実行した後もエラー メッセージが表示される場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
 </details>
 

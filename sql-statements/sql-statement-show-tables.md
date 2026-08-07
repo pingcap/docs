@@ -77,7 +77,7 @@ mysql> SHOW TABLES IN mysql;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-TiDBの`SHOW [FULL] TABLES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)参照してください。
+TiDBの`SHOW [FULL] TABLES`文はMySQLと完全に互換性があります。互換性に違いがある場合は、 [バグを報告してください](https://docs.pingcap.com/tidb/stable/support)。
 
 ## 参照 {#see-also}
 

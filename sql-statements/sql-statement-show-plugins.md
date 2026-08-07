@@ -44,7 +44,7 @@ SHOW PLUGINS LIKE 'a%';
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-TiDB の`SHOW PLUGINS`ステートメントは、MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [バグを報告する](https://docs.pingcap.com/tidb/stable/support)。
+TiDB の`SHOW PLUGINS`ステートメントは、MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [バグを報告してください](https://docs.pingcap.com/tidb/stable/support)。
 
 ## 参照 {#see-also}
 
