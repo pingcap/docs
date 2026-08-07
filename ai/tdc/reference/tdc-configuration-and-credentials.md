@@ -179,7 +179,7 @@ This log is local audit/debug data, not telemetry. It can include command names,
 Disable it for one process:
 
 ```bash
-TDC_LOGGING=off tdc db list-db-clusters
+TDC_LOGGING=off tdc db list-db-clusters --db-cluster-type starter
 ```
 
 Or create or edit `~/.tdc/.preferences`:
@@ -209,7 +209,7 @@ enabled = false
 Disable it for one process without changing the file:
 
 ```bash
-TDC_TELEMETRY=off tdc db list-db-clusters
+TDC_TELEMETRY=off tdc db list-db-clusters --db-cluster-type starter
 ```
 
 The TiDB Cloud CLI creates `~/.tdc/.telemetry-installation-id` lazily for the first eligible event and restricts it to the current user where POSIX permissions are available. Delete this file to reset the pseudonymous identity. Telemetry delivery is lossy and never changes command output, errors, or exit status.

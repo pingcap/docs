@@ -116,6 +116,7 @@ Create a Starter cluster and save its ID:
 
 ```bash
 export TDC_DB_CLUSTER_ID="$(tdc db create-db-cluster \
+  --db-cluster-type starter \
   --db-cluster-name quickstart-db \
   --wait \
   --query id \

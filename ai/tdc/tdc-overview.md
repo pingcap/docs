@@ -52,7 +52,7 @@ The `tdc` executable has a two-level command model:
 tdc <service> <operation>
 ```
 
-Examples include `tdc db list-db-clusters`, `tdc fs copy-file`, and `tdc fs-journal verify-journal`. The top-level `tdc configure` and `tdc update` commands configure and maintain the CLI.
+Examples include `tdc db list-db-clusters --db-cluster-type starter`, `tdc fs copy-file`, and `tdc fs-journal verify-journal`. The top-level `tdc configure` and `tdc update` commands configure and maintain the CLI.
 
 ## TiDB Cloud CLI and Drive9
 

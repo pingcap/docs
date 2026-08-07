@@ -20,7 +20,7 @@ This example follows a typical operator workflow across TiDB Cloud Starter and T
 
 ```bash
 tdc organization list-projects --output text
-tdc db list-db-clusters --output text
+tdc db list-db-clusters --db-cluster-type starter --output text
 tdc fs list-file-systems --output text
 ```
 
@@ -28,10 +28,12 @@ tdc fs list-file-systems --output text
 
 ```bash
 tdc db create-db-cluster \
+  --db-cluster-type starter \
   --db-cluster-name daily-demo \
   --dry-run
 
 tdc db create-db-cluster \
+  --db-cluster-type starter \
   --db-cluster-name daily-demo \
   --wait
 ```

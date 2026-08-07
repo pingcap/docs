@@ -98,7 +98,7 @@ You can also provide `--tdc-public-key`, `--tdc-private-key`, and `--region-code
 Configuration precedence is command flag, environment variable, then saved profile. The global `--region` overrides only the placement for the current command:
 
 ```bash
-tdc db list-db-clusters --profile staging --region aws-us-west-2
+tdc db list-db-clusters --db-cluster-type starter --profile staging --region aws-us-west-2
 ```
 
 ## Get help and version information
