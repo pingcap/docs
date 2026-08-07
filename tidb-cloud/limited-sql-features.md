@@ -32,7 +32,7 @@ TiDB Cloud Dedicated works with almost all workloads that TiDB supports, but the
 | Statement | TiDB Cloud Dedicated |
 |:-|:-|
 | `ALTER RESOURCE GROUP` | Supported |
-| `CALIBRATE RESOURCE` | Not supported |
+| `CALIBRATE RESOURCE` | Not supported [^4] |
 | `CREATE RESOURCE GROUP` | Supported |
 | `DROP RESOURCE GROUP` | Supported |
 | `SET RESOURCE GROUP` | Supported |
@@ -228,3 +228,5 @@ TiDB Cloud Dedicated works with almost all workloads that TiDB supports, but the
 [^2]: Drainer and Pump are not supported on TiDB Cloud.
 
 [^3]: Not supported. Enabling `require_secure_transport` for TiDB Cloud Dedicated clusters will result in SQL client connection failures.
+
+[^4]: The `CALIBRATE RESOURCE` statement is not supported on TiDB Cloud Dedicated. To estimate the RU capacity of your cluster, use the [Calibrate Resource](/tidb-cloud/calibrate-resource.md) feature in the TiDB Cloud console instead.
