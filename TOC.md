@@ -452,7 +452,7 @@
       - シャーディングされたテーブルからデータをマージおよび移行する
         - [概要](/dm/feature-shard-merge.md)
         - [悲観的モード](/dm/feature-shard-merge-pessimistic.md)
-        - [楽観モード](/dm/feature-shard-merge-optimistic.md)
+        - [楽観的モード](/dm/feature-shard-merge-optimistic.md)
         - [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)
       - [GH-ost/PT-oscを使用するMySQLデータベースからの移行](/dm/feature-online-ddl.md)
       - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
