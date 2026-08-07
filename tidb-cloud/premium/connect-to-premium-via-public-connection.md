@@ -7,6 +7,14 @@ summary: Learn how to connect to your {{{ .premium }}} via public connection.
 
 This document describes how to connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via public connection. The public connection exposes a public endpoint with traffic filters, so you can connect to your {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance via a SQL client from your laptop.
 
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> Public connection is available only if you provided a public hosted zone during BYOC deployment. If you provided a private hosted zone, connect to your instance through a private connection instead.
+
+</CustomContent>
+
 > **Tip:**
 >
 > - To learn how to connect to a {{{ .starter }}} or {{{ .essential }}} instance via public connection, see [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md).
