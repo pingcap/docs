@@ -163,7 +163,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 
-### 地元読者 {#local-reader}
+### ローカルリーダー {#local-reader}
 
 -   ローカルリーダーリクエスト：ローカル読み取りスレッドからの総リクエスト数と拒否数
 
