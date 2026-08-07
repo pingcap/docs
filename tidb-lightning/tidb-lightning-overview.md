@@ -15,9 +15,9 @@ TiDB Lightning は次のファイル形式をサポートしています。
 
 TiDB Lightning は次のソースからデータを読み取ることができます。
 
--   地元
--   [アマゾンS3](/external-storage-uri.md#amazon-s3-uri-format)
--   [Googleクラウドストレージ](/external-storage-uri.md#gcs-uri-format)
+-   ローカル
+-   [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
+-   [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
 
 > **Note:**
 >
