@@ -34,7 +34,7 @@ TiDB Ansible バージョン: 2.1.7
 
 ## ツール {#tools}
 
--   binlogを使用して生成された列の複製をサポートする
+-   binlogを使用して生成列の複製をサポートする
 
 ## TiDB Ansible {#tidb-ansible}
 

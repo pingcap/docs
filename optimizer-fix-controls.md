@@ -75,7 +75,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 -   デフォルト値: `ON`
 -   可能`OFF`値: `ON`
--   この変数は、プラン キャッシュが[生成された列](/generated-columns.md)アクセスする実行計画をキャッシュできるかどうかを制御します。
+-   この変数は、プラン キャッシュが[生成列](/generated-columns.md)にアクセスする実行計画をキャッシュできるかどうかを制御します。
 
 ### <a href="https://github.com/pingcap/tidb/issues/46177">`46177`</a> <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 の新機能</span> {#46177-new-in-v656-v713-and-v750}
 

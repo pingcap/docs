@@ -70,7 +70,7 @@ TiDB バージョン: 7.5.6
     -   分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [＃58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     -   DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [＃52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
     -   ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [＃58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
-    -   生成された列を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。 [＃58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
+    -   生成列を含むパーティション テーブルをクエリするときにエラーが発生する問題を修正しました。 [＃58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
     -   TTLジョブが無視されたり、複数回処理されたりする問題を修正[＃59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     -   パーティション交換での誤った判断により実行エラーが発生する問題を修正[＃59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
     -   `tidb_audit_log`変数を複数レベルの相対パスで設定すると、ログディレクトリでエラーが発生する問題を修正しました。 [＃58971](https://github.com/pingcap/tidb/issues/58971) @[lcwangchao](https://github.com/lcwangchao)

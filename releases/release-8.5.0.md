@@ -264,7 +264,7 @@ TiDB をアップグレードする前に、オペレーティング システ�
     -   `VIEW`で定義されたCTEが正しくインライン化されていない問題を修正します [#56582](https://github.com/pingcap/tidb/issues/56582) @[elsa0520](https://github.com/elsa0520)
     -   Plan Replayerが外部キーを含むテーブル構造をインポートする際にエラーを報告する可能性がある問題を修正 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
     -   プランリプレイヤーが配置ルールを含むテーブル構造をインポートする際にエラーを報告する可能性がある問題を修正 [#54961](https://github.com/pingcap/tidb/issues/54961) @[hawkingrei](https://github.com/hawkingrei)
-    -   `ANALYZE`を使用してテーブルの統計情報を収集する際に、テーブルに仮想的に生成された列の式インデックスが含まれている場合、実行時にエラーが報告される問題を修正しました。 [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
+    -   `ANALYZE`を使用してテーブルの統計情報を収集する際に、テーブルに仮想生成列の式インデックスが含まれている場合、実行時にエラーが報告される問題を修正しました。 [#57079](https://github.com/pingcap/tidb/issues/57079) @[hawkingrei](https://github.com/hawkingrei)
     -   `DROP DATABASE`ステートメントが統計情報における対応する更新を正しくトリガーしない問題を修正しました [#57227](https://github.com/pingcap/tidb/issues/57227) @[Rustin170506](https://github.com/Rustin170506)
     -   CTEでデータベース名を解析する際に、誤ったデータベース名が返される問題を修正しました [#54582](https://github.com/pingcap/tidb/issues/54582) @[hawkingrei](https://github.com/hawkingrei)
     -   `DUMP STATS`が統計情報を JSON に変換する際に、ヒストグラムの上限と下限が破損する問題を修正しました [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)

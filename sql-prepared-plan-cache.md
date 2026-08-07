@@ -19,7 +19,7 @@ TiDBは、 `Prepare` / `Execute`文と同様に、 `PREPARE`以外の文につ�
 TiDB の現在のバージョンでは、 `Prepare`ステートメントが次のいずれかの条件を満たす場合、クエリまたはプランはキャッシュされません。
 
 -   クエリには、 `SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、 `Except`以外の SQL ステートメントが含まれています。
--   クエリは一時テーブル、または生成された列を含むテーブルにアクセスするか、静的モード (つまり、 [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)が`static`に設定される) を使用してパーティション テーブルにアクセスします。
+-   クエリは一時テーブル、または生成列を含むテーブルにアクセスするか、静的モード (つまり、 [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)が`static`に設定される) を使用してパーティション テーブルにアクセスします。
 -   クエリには、 `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`などの非相関サブクエリが含まれています。
 -   クエリには、実行計画に`SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`などの`PhysicalApply`演算子を持つ相関サブクエリが含まれています。
 -   クエリには、 `SELECT /*+ ignore_plan_cache() */ * FROM t`や`SELECT /*+ set_var(max_execution_time=1) */ * FROM t`などの`ignore_plan_cache`または`set_var`ヒントが含まれています。

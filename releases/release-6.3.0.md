@@ -171,7 +171,7 @@ TiDBバージョン: 6.3.0-DMR
 
     JSONは、多くのプログラムで採用されている一般的なデータ形式です。TiDBは、以前のバージョンから[JSONサポート](/data-type-json.md)実験的機能として導入しており、MySQLのJSONデータ型および一部のJSON関数と互換性があります。
 
-    TiDB v6.3.0 では、JSON データ型と関数がGA になり、TiDB のデータ型が強化され、 [発現指数](/sql-statements/sql-statement-create-index.md#expression-index)および[生成された列](/generated-columns.md)での JSON関数の使用がサポートされ、TiDB と MySQL の互換性がさらに向上しました。
+    TiDB v6.3.0 では、JSON データ型と関数がGA になり、TiDB のデータ型が強化され、 [発現指数](/sql-statements/sql-statement-create-index.md#expression-index)および[生成列](/generated-columns.md)での JSON関数の使用がサポートされ、TiDB と MySQL の互換性がさらに向上しました。
 
 ### バックアップと復元 {#backup-and-restore}
 

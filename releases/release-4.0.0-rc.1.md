@@ -113,7 +113,7 @@ TiDB バージョン: 4.0.0-rc.1
 -   `analyze primary key`文実行中に発生する可能性のあるpanicを修正 [＃16081](https://github.com/pingcap/tidb/pull/16081)
 -   `cluster_info`システムテーブル内のTiFlashストア情報が間違っている問題を修正[＃16024](https://github.com/pingcap/tidb/pull/16024)
 -   インデックスマージプロセス中に発生する可能性のあるpanicを修正[＃16360](https://github.com/pingcap/tidb/pull/16360)
--   インデックスマージリーダーが生成された列を読み取るときに誤った結果が発生する可能性がある問題を修正しました [＃16359](https://github.com/pingcap/tidb/pull/16359)
+-   インデックスマージリーダーが生成列を読み取るときに誤った結果が発生する可能性がある問題を修正しました [＃16359](https://github.com/pingcap/tidb/pull/16359)
 -   `show create table`文のデフォルトシーケンス値の誤った表示を修正 [＃16526](https://github.com/pingcap/tidb/pull/16526)
 -   シーケンスが主キーのデフォルト値として使用されるために`not-null`エラーが返される問題を修正しました [＃16510](https://github.com/pingcap/tidb/pull/16510)
 -   TiKVが`StaleCommand`エラーを返し続けているときに、ブロックされたSQL実行に対してエラーが報告されない問題を修正しました。 [＃16530](https://github.com/pingcap/tidb/pull/16530)

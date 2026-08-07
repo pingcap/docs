@@ -40,7 +40,7 @@ TiDB Ansible バージョン: 2.1.16
     -   AUTO_INCREMENT列のインデックスの削除を禁止して、この操作によってAUTO_INCREMENT列の誤った結果が発生するのを防ぎます[＃11402](https://github.com/pingcap/tidb/pull/11402)
     -   異なる文字セットと照合順序でテーブルを作成および変更するときに、列の文字セットが正しくない問題を修正しました[＃11423](https://github.com/pingcap/tidb/pull/11423)
     -   `alter table ... set default...`とこの列を変更する別の DDL 文が並列で実行されると列スキーマが間違ってしまう可能性がある問題を修正しました[＃11374](https://github.com/pingcap/tidb/pull/11374)
-    -   生成カラムAが生成カラムBに依存し、Aがインデックス作成に使用される場合、データのバックフィルが失敗する問題を修正しました。 [＃11538](https://github.com/pingcap/tidb/pull/11538)
+    -   生成列Aが生成列Bに依存し、Aがインデックス作成に使用される場合、データのバックフィルが失敗する問題を修正しました。 [＃11538](https://github.com/pingcap/tidb/pull/11538)
     -   `ADMIN CHECK TABLE`操作高速化 [＃11538](https://github.com/pingcap/tidb/pull/11676)
 
 ## TiKV {#tikv}

@@ -72,7 +72,7 @@ TiDB バージョン: 7.5.7
 
     -   `IndexMerge`および`IndexLookUp`演算子の共有 KV リクエストがクエリをプッシュダウンするときにデータ競合を引き起こす問題を修正しました。 [＃60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
     -   ハッシュ集計演算子における潜在的な goroutine リークの問題を修正しました。 [＃58004](https://github.com/pingcap/tidb/issues/58004) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    -   生成された列のインデックスが表示に設定されている場合、MPP プランが選択されない可能性がある問題を修正しました。 [＃47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
+    -   生成列のインデックスが表示に設定されている場合、MPP プランが選択されない可能性がある問題を修正しました。 [＃47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
     -   `_charset(xxx), _charset(xxx2), ...`を含む SQL 文が異なるダイジェストを生成する問題を修正しました [＃58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
     -   頻繁なリージョンのマージにより TTL ジョブが開始できなくなる問題を修正しました [＃61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
     -   損失のあるDDL文を実行した後にTiFlashクエリ結果が矛盾する問題を修正しました [＃61455](https://github.com/pingcap/tidb/issues/61455) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)

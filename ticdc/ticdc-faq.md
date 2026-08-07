@@ -462,13 +462,13 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 ]
 ```
 
-## TiCDC は DML 操作で生成された列を複製しますか? {#does-ticdc-replicate-generated-columns-of-dml-operations}
+## TiCDC は DML 操作で生成列を複製しますか? {#does-ticdc-replicate-generated-columns-of-dml-operations}
 
 生成列には、仮想生成列と保存生成列が含まれます。TiCDCは仮想生成列を無視し、保存生成列のみを下流に複製します。ただし、下流がMySQLまたは他のMySQL互換データベース（Kafkaなどのストレージサービスではない）である場合、保存生成列も無視されます。
 
 > **Note:**
 >
-> 保存された生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
+> 保存生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)含まれており、列が生成列かどうかを区別できます。
 
 ## 頻繁に発生する`CDC:ErrMySQLDuplicateEntryCDC`エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
 

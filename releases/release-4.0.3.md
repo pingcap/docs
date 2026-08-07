@@ -111,7 +111,7 @@ TiDB バージョン: 4.0.3
     -   `ADMIN REPAIR TABLE`目の実行で TiDB ノードのテーブル メタデータの再ロードに失敗する問題を修正しました。 [＃18323](https://github.com/pingcap/tidb/pull/18323)
     -   あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されたために発生したデータの不整合の問題を修正しました[＃18291](https://github.com/pingcap/tidb/pull/18291)
     -   スピルディスクをうまく機能させる[＃18288](https://github.com/pingcap/tidb/pull/18288)
-    -   生成された列を含むテーブルで`REPLACE INTO`文が機能するときに報告されるエラーを修正します [＃17907](https://github.com/pingcap/tidb/pull/17907)
+    -   生成列を含むテーブルで`REPLACE INTO`文が機能するときに報告されるエラーを修正します [＃17907](https://github.com/pingcap/tidb/pull/17907)
     -   `IndexHashJoin`と`IndexMergeJoin`ワーカーがpanicときにOOMエラーを返す[＃18527](https://github.com/pingcap/tidb/pull/18527)
     -   `Index Join`で使用されるインデックスに整数の主キーが含まれている場合、特別なケースで`Index Join`実行によって誤った結果が返される可能性があるバグを修正しました。 [＃18565](https://github.com/pingcap/tidb/pull/18565)
     -   クラスターで新しい照合順序が有効になっている場合、トランザクションで新しい照合順序を持つ列に更新されたデータが一意インデックスを通じて読み取れない問題を修正しました。 [＃18703](https://github.com/pingcap/tidb/pull/18703)

@@ -287,7 +287,7 @@ TiDB バージョン: 8.2.0
     -   JSON関連の関数が場合によってはMySQLと矛盾するエラーを返す問題を修正 [#53799](https://github.com/pingcap/tidb/issues/53799) @[dveeden](https://github.com/dveeden)
     -   `INDEX_LENGTH`内のパーティションテーブルの`INFORMATION_SCHEMA.PARTITIONS`フィールドが正しくない問題を修正します [#54173](https://github.com/pingcap/tidb/issues/54173) @[Defined2014](https://github.com/Defined2014)
     -   `TIDB_ROW_ID_SHARDING_INFO`テーブルの`INFORMATION_SCHEMA.TABLES`フィールドが正しくない問題を修正 [#52330](https://github.com/pingcap/tidb/issues/52330) @[tangenta](https://github.com/tangenta)
-    -   生成された列が無効なタイムスタンプを返す問題を修正 [#52509](https://github.com/pingcap/tidb/issues/52509) @[lcwangchao](https://github.com/lcwangchao)
+    -   生成列が無効なタイムスタンプを返す問題を修正 [#52509](https://github.com/pingcap/tidb/issues/52509) @[lcwangchao](https://github.com/lcwangchao)
     -   分散実行フレームワーク（DXF）を使用してインデックスを追加する際に、 `max-index-length`を設定するとTiDBがpanicを起こす問題を修正しました [#53281](https://github.com/pingcap/tidb/issues/53281) @[zimulala](https://github.com/zimulala)
     -   場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される問題を修正 [#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
     -   `CURRENT_DATE()`を列のデフォルト値として使用するとクエリ結果が正しくない問題を修正 [#53746](https://github.com/pingcap/tidb/issues/53746) @[tangenta](https://github.com/tangenta)
