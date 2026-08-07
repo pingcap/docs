@@ -5,11 +5,11 @@ summary: Learn about common Tiered Storage questions on TiDB Cloud BYOC/Premium/
 
 # Tiered Storage FAQ
 
+This document answers common questions about Infrequent Access (IA) storage, including DML behavior, replica handling, and operational impacts such as object storage outages.
+
 > **Note:**
 >
-> - **Version:** Private Preview
-> - **Platform:** TiDB Cloud BYOC/Premium/Essential
-> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
+> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Can IA tables execute UPDATE / DELETE?
 

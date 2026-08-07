@@ -5,13 +5,11 @@ summary: Learn how to configure and manage Tiered Storage on TiDB Cloud BYOC/Pre
 
 # Tiered Storage Operations Guide
 
+This document explains how to configure and operate Infrequent Access (IA) storage, including storage class settings, partition selectors, and recommended operational practices.
+
 > **Note:**
 >
-> - **Version:** Private Preview
-> - **Platform:** TiDB Cloud BYOC/Premium/Essential
-> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
-
----
+> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## How to use
 

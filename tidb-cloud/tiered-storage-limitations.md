@@ -5,13 +5,11 @@ summary: Learn about limitations, throttling, compatibility, and query performan
 
 # Tiered Storage Limitations and Impact
 
+This document describes the current limitations and operational impact of Infrequent Access (IA) storage, including feature constraints, cold-read throttling, tool compatibility, and query performance uncertainty.
+
 > **Note:**
 >
-> - **Version:** Private Preview
-> - **Platform:** TiDB Cloud BYOC/Premium/Essential
-> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
-
----
+> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Feature limitations
 
