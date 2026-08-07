@@ -40,6 +40,10 @@
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
   - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)
+- Manage Resources
+  - Resource Pools
+    - [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)
+    - [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
 - Manage Instances
   - [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
   - Connect to Your {{{ .byoc }}} Instance
