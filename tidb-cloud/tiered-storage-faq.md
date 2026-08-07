@@ -5,8 +5,6 @@ summary: Learn about common Tiered Storage questions on TiDB Cloud BYOC/Premium/
 
 # Tiered Storage FAQ
 
-<!-- markdownlint-disable MD026 -->
-
 > **Note:**
 >
 > - **Version:** Private Preview
@@ -36,4 +34,3 @@ Only one copy is stored on S3 — all three replicas share the same object.
 In the cloud storage engine architecture, SST/blob data files have only one copy on object storage (S3/DFS) to begin with: files are uploaded once by flush/compaction, the S3 key contains no node/replica information, and the three Raft replicas reference the same file id through the Raft-replicated ChangeSet. The three-replica mechanism applies only to Raft logs, metadata, and each node's local cache — never to the data on object storage.
 
 **Cost implications**: The storage volume on S3 is always about 1x the data size (it does not multiply with the replica count). What the IA tier saves is local disk usage on each node; data durability is guaranteed by the object storage itself, independent of the replica count.
-
