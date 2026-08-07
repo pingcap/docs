@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 -   DDL
     -   `alter table`を使用して文字セットを変更すると`blob`型が変更される問題を修正[＃10698](https://github.com/pingcap/tidb/pull/10698)
     -   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散させる機能を追加します[＃10794](https://github.com/pingcap/tidb/pull/10794)
-    -   `alter table`文を使用して、保存された生成列の追加を禁止します。 [＃10808](https://github.com/pingcap/tidb/pull/10808)
+    -   `alter table`文を使用して、保存生成列の追加を禁止します。 [＃10808](https://github.com/pingcap/tidb/pull/10808)
     -   DDLメタデータの無効な生存時間を最適化し、クラスタのアップグレード後にDDL操作が遅くなる期間を短縮します[＃10795](https://github.com/pingcap/tidb/pull/10795)
 
 ## PD {#pd}

@@ -270,7 +270,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     -   メタキーの処理ミスによりCPU使用率が高くなる問題を修正 [#64323](https://github.com/pingcap/tidb/issues/64323) @[wjhuang2016](https://github.com/wjhuang2016)
     -   スキーマファイルに末尾のセミコロンがない場合にTiDB Lightning がエラーを報告しない問題を修正 [#63414](https://github.com/pingcap/tidb/issues/63414) @[GMHDBJD](https://github.com/GMHDBJD)
     -   グローバルソートを有効にして`IMPORT INTO`を実行すると、ファイルの読み込み中に無限ループが発生する問題を修正しました [#61177](https://github.com/pingcap/tidb/issues/61177) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    -   `IMPORT INTO`の処理中に生成された列を処理する際にpanicが発生する問題を修正しました [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
+    -   `IMPORT INTO`の処理中に生成列を処理する際にpanicが発生する問題を修正しました [#64657](https://github.com/pingcap/tidb/issues/64657) @[D3Hunter](https://github.com/D3Hunter)
     -   単一の SQL ステートメントに複数の`AS OF TIMESTAMP`が含まれている場合にエラーが誤って報告される可能性がある問題を修正しました [#65090](https://github.com/pingcap/tidb/issues/65090) @[you06](https://github.com/you06)
     -   `information_schema.tables`をクエリする際に発生する可能性のある OOM 問題を修正するため、システム テーブルをクエリする際のメモリ使用量の監視を改善しました [#58985](https://github.com/pingcap/tidb/issues/58985) @[tangenta](https://github.com/tangenta)
     -   `client-go`の潜在的なメモリリークを修正 [#65522](https://github.com/pingcap/tidb/issues/65522) @[bufferflies](https://github.com/bufferflies)

@@ -56,7 +56,7 @@ CREATE TABLE `bookshop`.`users` (
 
 -   `{column_name}` : 列名。
 -   `{data_type}` : 列[データ型](/data-type-overview.md)。
--   `{column_qualification}` :**列レベルの制約**や[生成された列](/generated-columns.md)列句などのカラム修飾。
+-   `{column_qualification}` :**列レベルの制約**や[生成列](/generated-columns.md)句などのカラム修飾。
 
 `users`テーブルに、一意の識別子`id` 、 `balance` 、 `nickname`などの列を追加できます。
 

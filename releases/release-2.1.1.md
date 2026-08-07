@@ -24,7 +24,7 @@ summary: TiDB 2.1.1は2018年12月12日にリリースされ、安定性、SQL�
     -   テーブルのデフォルトの文字セットと照合順序を`utf8mb4` に変更します [＃8590](https://github.com/pingcap/tidb/pull/8590)
     -   インデックスを追加する速度を制御するために`ddl_reorg_batch_size`変数を追加します [＃8614](https://github.com/pingcap/tidb/pull/8614)
     -   DDLの文字セットと照合順序オプションの内容を大文字と小文字を区別しないようにする[＃8611](https://github.com/pingcap/tidb/pull/8611)
-    -   生成された列インデックス追加に関する問題を修正 [＃8655](https://github.com/pingcap/tidb/pull/8655)
+    -   生成列インデックス追加に関する問題を修正 [＃8655](https://github.com/pingcap/tidb/pull/8655)
 
 ## PD {#pd}
 

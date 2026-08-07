@@ -11,7 +11,7 @@ summary: TiDB 2.1.2およびTiDB Ansible 2.1.2は、2018年12月22日にリリ�
 
 -   TiDB を Kafka バージョンの TiDB Binlogと互換性を持たせる [＃8747](https://github.com/pingcap/tidb/pull/8747)
 -   ローリングアップデートにおけるTiDBの終了メカニズムの改善 [＃8707](https://github.com/pingcap/tidb/pull/8707)
--   生成された列にインデックスを追加することで発生するpanic問題を修正[＃8676](https://github.com/pingcap/tidb/pull/8676)
+-   生成列にインデックスを追加することで発生するpanic問題を修正[＃8676](https://github.com/pingcap/tidb/pull/8676)
 -   一部のケースでSQL文に`TIDB_SMJ Hint`存在する場合にオプティマイザが最適なクエリプランを見つけられない問題を修正[＃8729](https://github.com/pingcap/tidb/pull/8729)
 -   `AntiSemiJoin`で場合によっては誤った結果が返される問題を修正[＃8730](https://github.com/pingcap/tidb/pull/8730)
 -   `utf8`文字セットの有効文字チェックの改善 [＃8754](https://github.com/pingcap/tidb/pull/8754)
