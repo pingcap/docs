@@ -5,15 +5,13 @@ summary: Learn about tiered storage on TiDB Cloud BYOC, Premium, Essential, incl
 
 # Tiered Storage Overview
 
+Tiered storage helps you move infrequently accessed table or partition data to a lower-cost storage tier while keeping SQL semantics unchanged. This page explains the architecture, trade-offs, and scenario guidelines to help you decide when to use Infrequent Access (IA) storage.
+
 > **Note:**
 >
-> - **Version:** Private Preview
-> - **Platform:** TiDB Cloud BYOC/Premium/Essential
-> - This document reflects the current system state only. Some behaviors may change when the feature reaches GA.
+> Tiered storage is in **Private Preview** for {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
----
-
-## What is Tiered Storage
+## Introduction
 
 Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud BYOC/Premium/Essential, designed for infrequently accessed data. You can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
 
@@ -26,8 +24,6 @@ Key features:
 - **Fine-grained control**: Supports both table-level and partition-level granularity; partition-level settings override table-level configuration
 - **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
 - **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup and restore, TiCDC, and other components
-
----
 
 ## Usage scenario decisions
 
@@ -71,8 +67,6 @@ Before setting IA, verify each item:
 - [ ] Single query accesses no more than 100 rows of cold data
 - [ ] An observation period has been planned (at least one full business day for the first partition)
 - [ ] Awareness that switching back IA → Standard takes a long time with significant bandwidth cost
-
----
 
 ## Implementation principles
 
