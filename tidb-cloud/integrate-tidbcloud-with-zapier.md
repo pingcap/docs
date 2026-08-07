@@ -19,7 +19,7 @@ This guide gives a high-level introduction to the TiDB Cloud app on Zapier and a
 
 [Zap Templates](https://docs.zapier.com/integrations/publish/zap-templates) are ready made integrations or Zaps with the apps and core fields pre-selected, for publicly available Zapier integrations.
 
-In this section, we will use the **Add new Github global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event (any [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) happens from or to you, on any repo) is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
+This section uses the **Add new GitHub global events to TiDB rows** template as an example to create a workflow. In this workflow, every time a new global event (any [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types) happens from or to you, on any repo) is created from your GitHub account, Zapier adds a new row to your TiDB Cloud cluster.
 
 ### Prerequisites
 
@@ -31,7 +31,7 @@ Before you start, you need:
 
 ### Step 1: Get the template
 
-Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose the **Add new Github global events to TiDB rows** template and click **Try it**. Then you will enter the editor page.
+Go to [TiDB Cloud App on Zapier](https://zapier.com/apps/tidb-cloud/integrations). Choose the **Add new GitHub global events to TiDB rows** template and click **Try it**. This opens the editor page.
 
 ### Step 2: Set up the trigger
 
