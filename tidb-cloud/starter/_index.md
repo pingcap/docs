@@ -93,9 +93,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=starter)
 
-[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles/?plan=starter)
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#user-roles)
 
-[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=starter)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-user-profiles)
 
 [Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-organization-access)
 
@@ -109,9 +109,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=starter)
+[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=starter#invoices)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=starter)
+[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=starter#credits)
 
 </LearningPath>
 

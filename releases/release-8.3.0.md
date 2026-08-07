@@ -243,6 +243,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.3/quick-sta
 
     * Starting from v7.5.0, [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/) replication is deprecated. Starting from v8.3.0, TiDB Binlog is fully deprecated, with removal planned for a future release. For incremental data replication, use [TiCDC](/ticdc/ticdc-overview.md) instead. For point-in-time recovery (PITR), use [PITR](/br/br-pitr-guide.md).
     * Starting from v8.3.0, the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable is deprecated. TiDB tracks predicate columns by default. For more information, see [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830).
+    * Starting from v8.3.0, the [`INL_MERGE_JOIN`](/optimizer-hints.md#inl_merge_join) optimizer hint is deprecated and no longer takes effect, because it might return incorrect results. If a query specifies this hint, TiDB ignores it and selects another join algorithm. [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
 
 * The following features are planned for deprecation in future versions:
 
@@ -330,7 +331,6 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.3/quick-sta
     - Fix the issue that table replication fails when the index length of the table replicated from DM exceeds the maximum length specified by `max-index-length` [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
     - Fix the issue that the error `runtime error: index out of range` might occur when executing SQL statements with `tidb_enable_inl_join_inner_multi_pattern` enabled [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
     - Fix the issue that you cannot exit TiDB using <kbd>Control</kbd>+<kbd>C</kbd> during the process of initializing statistics [#54589](https://github.com/pingcap/tidb/issues/54589) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that the `INL_MERGE_JOIN` optimizer hint returns incorrect results by deprecating it [#54064](https://github.com/pingcap/tidb/issues/54064) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that a correlated subquery that contains `WITH ROLLUP` might cause TiDB to panic and return the error `runtime error: index out of range` [#54983](https://github.com/pingcap/tidb/issues/54983) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that predicates cannot be pushed down properly when the filter condition of a SQL query contains virtual columns and the execution condition contains `UnionScan` [#54870](https://github.com/pingcap/tidb/issues/54870) @[qw4990](https://github.com/qw4990)
     - Fix the issue that the error `runtime error: invalid memory address or nil pointer dereference` might occur when executing SQL statements with `tidb_enable_inl_join_inner_multi_pattern` enabled [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
