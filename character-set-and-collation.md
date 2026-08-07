@@ -78,7 +78,7 @@ SELECT
 
 次の表は、一般的な照合順序プロパティと意味を示しています。
 
-| 照合プロパティ       | 意味                                    |
+| 照合順序プロパティ       | 意味                                    |
 | ------------- | ------------------------------------- |
 | `_bin`        | バイナリ                                  |
 | `_ci`         | 大文字と小文字を区別しない                         |
@@ -109,7 +109,7 @@ SHOW CHARACTER SET;
 6 rows in set (0.00 sec)
 ```
 
-TiDB は次の照合をサポートしています。
+TiDB は次の照合順序をサポートしています。
 
 ```sql
 SHOW COLLATION;
@@ -433,7 +433,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 >
 > 文字チェックを省略すると、TiDBはアプリケーションによって書き込まれた不正なUTF-8文字を検出できず、 `ANALYZE`実行時にデコードエラーが発生し、その他の未知のエンコード問題が発生する可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合は、文字チェックを省略することは推奨されません。
 
-## 照合サポートフレームワーク {#collation-support-framework}
+## 照合順序サポートフレームワーク {#collation-support-framework}
 
 <CustomContent platform="tidb">
 
@@ -445,7 +445,7 @@ v4.0 より前のバージョンでは、 TiDB は[照合のための古いフ�
 
 TiDBはv4.0以降、 [照合のための新しいフレームワーク](#new-framework-for-collations)をサポートしています。このフレームワークでは、TiDBは異なる照合順序を意味的に解析し、文字列を比較する際には照合順序に厳密に従います。
 
-### 照合のための古いフレームワーク {#old-framework-for-collations}
+### 照合順序のための古いフレームワーク {#old-framework-for-collations}
 
 v4.0より前のバージョンでは、TiDBでMySQLのほとんどの照合順序を指定でき、これらの照合順序はデフォルトの照合順序に従って処理されます。つまり、バイト順序によって文字順序が決定されます。MySQLとは異なり、TiDBは文字末尾のスペースを処理しないため、以下の動作の違いが生じます。
 
@@ -485,9 +485,9 @@ Query OK, 1 row affected
 
 TiDBでは、上記の文は正常に実行されます。MySQLでは、スペースを埋めてから比較が行われるため、エラー`Duplicate entry 'a '`が返されます。
 
-### 照合のための新しいフレームワーク {#new-framework-for-collations}
+### 照合順序のための新しいフレームワーク {#new-framework-for-collations}
 
-TiDB v4.0 以降では、照合のための完全なフレームワークが導入されています。
+TiDB v4.0 以降では、照合順序のための完全なフレームワークが導入されています。
 
 <CustomContent platform="tidb">
 
@@ -520,7 +520,7 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled
 
 </CustomContent>
 
-新しいフレームワークでは、TiDB は MySQL と互換性のある`utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、 `utf8mb4_0900_bin` 、 `utf8mb4_0900_ai_ci` 、 `gbk_chinese_ci` 、および`gbk_bin`照合をサポートします。
+新しいフレームワークでは、TiDB は MySQL と互換性のある`utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、 `utf8mb4_0900_bin` 、 `utf8mb4_0900_ai_ci` 、 `gbk_chinese_ci` 、および`gbk_bin`照合順序をサポートします。
 
 `utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、 `utf8mb4_0900_ai_ci` 、 `gbk_chinese_ci`のいずれかが使用される場合、文字列比較は大文字と小文字を区別せず、アクセントも区別しません。同時に、TiDBは照合順序の`PADDING`動作も修正します。
 

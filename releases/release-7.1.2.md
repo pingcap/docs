@@ -200,7 +200,7 @@ TiDB バージョン: 7.1.2
     -   TiDB Data Migration (DM)
 
         -   失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[＃9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
-        -   DM が大文字と小文字を区別しない照合で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
+        -   DM が大文字と小文字を区別しない照合順序で競合を正しく処理できない問題を修正しました [＃9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
         -   DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [＃9257](https://github.com/pingcap/tiflow/issues/9257) @[D3Hunter](https://github.com/D3Hunter)
         -   楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [＃9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
         -   オンライン DDL をスキップするときに DM が上流のテーブル スキーマを適切に追跡できない問題を修正しました [＃9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
