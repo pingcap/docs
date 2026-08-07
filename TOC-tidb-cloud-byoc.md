@@ -70,7 +70,7 @@
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
   - Tiered Storage
-    - [Concepts](/tidb-cloud/tiered-storage-concepts.md)
+    - [Overview](/tidb-cloud/tiered-storage-concepts.md)
     - [Operations](/tidb-cloud/tiered-storage-operations.md)
     - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
     - [FAQ](/tidb-cloud/tiered-storage-faq.md)
