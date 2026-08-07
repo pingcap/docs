@@ -238,7 +238,13 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. The steps are the same as [creating a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. The steps are the same as <CustomContent plan="premium">[creating a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[creating a {{{ .byoc }}} instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
+
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, select an active Resource Pool in the same cloud provider and region as the backup. If no suitable Resource Pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create Resource Pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+
+    </CustomContent>
 
     > **Note:**
     >
@@ -356,7 +362,13 @@ To restore backups from cloud storage, do the following:
 
 3. Click **Verify Backup and Next**.
 
-4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
+4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> to restore the backup to a new instance.
+
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, select an active Resource Pool that matches the target cloud provider and region. If no suitable Resource Pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create Resource Pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+
+    </CustomContent>
 
     If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
 
