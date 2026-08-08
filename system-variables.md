@@ -4263,6 +4263,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_merge_partition_stats_concurrency
 
+> **Warning:**
+>
+> Starting from v9.0.0, this variable is deprecated. Merging TopN results of partitioned tables no longer runs concurrently, so this variable has no effect. Setting it to a value other than `1` returns a warning, and reading it always returns `1`, including on clusters upgraded from an earlier version where a different value was persisted.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
