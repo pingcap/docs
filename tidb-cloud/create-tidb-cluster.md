@@ -24,7 +24,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 `Organization Owner`または`Project Owner`の役割を担っている場合は、次のようにしてTiDB Cloud Dedicatedクラスターを作成できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

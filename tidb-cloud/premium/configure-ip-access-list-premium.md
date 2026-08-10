@@ -13,7 +13,7 @@ TiDB Cloudの各TiDB Cloud Premium インスタンスに対して、IP アクセ
 
 TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
     > **Tip:**
     >

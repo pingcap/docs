@@ -98,7 +98,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のリソース名をクリックしてから、右上隅の**[接続]**をクリックすると、 TiDB Cloudデータベースの接続情報が表示されます。
+2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のリソース名をクリックしてから、右上隅の**[接続]**をクリックすると、 TiDB Cloudデータベースの接続情報が表示されます。
 
 3.  ダイアログの**「ステップ 1: トラフィック フィルタの作成」**で、 **「編集」**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **「フィルタの更新」**をクリックします。AWS DMS レプリケーション インスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスタのトラフィック フィルタに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスタに接続できない場合があります。
 

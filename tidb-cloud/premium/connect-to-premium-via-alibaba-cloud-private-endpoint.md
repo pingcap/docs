@@ -22,7 +22,7 @@ summary: Alibaba Cloud上のプライベートエンドポイントを介してT
 
 ### ステップ1. TiDB Cloud Premiumインスタンスを選択します。 {#step-1-choose-a-tidb-cloud-premium-instance}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 3.  **「接続タイプ」**ドロップダウンリストで、 **「プライベートエンドポイント」**を選択します。
 4.  **サービス名**、**アベイラビリティゾーンID** 、**リージョンID**をメモしておいてください。

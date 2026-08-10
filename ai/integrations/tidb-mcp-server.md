@@ -55,7 +55,7 @@ STDIOモードを使用してMCPクライアントにTiDB MCPサーバーを設�
 
 1.  MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
 
 3.  接続パラメータを取得するには、右上隅の**「接続」**をクリックしてください。
 
@@ -86,7 +86,7 @@ MCPクライアントでSSEモードを使用してTiDB MCPサーバーを設定
 
 1.  MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
 
 3.  接続パラメータを取得するには、右上隅の**「接続」**をクリックしてください。
 

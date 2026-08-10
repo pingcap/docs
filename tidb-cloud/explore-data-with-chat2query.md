@@ -24,7 +24,7 @@ SQLエディタの推奨される使用例は以下のとおりです。
 
 ## Access SQL エディター {#access-sql-editor}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページにアクセスします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページにアクセスします。
 
     > **Tip:**
     >

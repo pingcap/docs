@@ -71,7 +71,7 @@ from llama_index.vector_stores.tidbvector import TiDBVectorStore
 
 TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 

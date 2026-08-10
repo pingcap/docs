@@ -38,7 +38,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 `Organization Owner`または`Project Owner`の役割に属している場合は、次のようにしてTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  **「リソースの作成」を**クリックします。
 

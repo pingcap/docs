@@ -19,7 +19,7 @@ summary: このガイドでは、Windsurf で TiDB MCP サーバーを設定す�
 
 TiDB Cloudコンソールを使用して接続の詳細を取得し、WindsurfのMCP構成を更新してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
 2.  表示されたダイアログで、Windsurfがアクセスする**ブランチ**と**データベース**を選択します。
 

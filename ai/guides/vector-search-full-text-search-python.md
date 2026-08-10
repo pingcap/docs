@@ -66,7 +66,7 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 

@@ -416,7 +416,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 -   [TiDB Cloudコンソール](https://tidbcloud.com)すべてのTiDB Cloudプラン ( TiDB Cloud Starter、 Essential、 Dedicatedなど) で統一します。以下の機能が利用可能になりました。
 
-    -   **<a href="https://tidbcloud.com/tidbs">私のTiDB</a>ホームページ**：リソースビューとプロジェクトビューの両方を備えた、新しい組織レベルのホームページ。
+    -   **[My TiDB](https://tidbcloud.com/tidbs) ホームページ**：リソースビューとプロジェクトビューの両方を備えた、新しい組織レベルのホームページ。
 
         -   リソースビューには、すべてのプランにわたるTiDB Cloudリソースが一覧表示されます。
         -   プロジェクトビューでは、TiDB Cloudのリソースをプロジェクトごとに整理し、組織内のプロジェクトを管理できます。

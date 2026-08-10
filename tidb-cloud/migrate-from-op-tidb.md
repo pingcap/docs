@@ -283,7 +283,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 2.  TiCDCがTiDB Cloudに接続できるようにします。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲット リソースの名前をクリックして、その概要ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲット リソースの名前をクリックして、その概要ページに移動します。
     2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
     3.  TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
@@ -292,7 +292,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 3.  下流のTiDB Cloudリソースの接続情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloudリソースの名前をクリックして、その概要ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloudリソースの名前をクリックして、その概要ページに移動します。
     2.  右上隅の**「接続」**をクリックしてください。
     3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「接続先」**ドロップダウンリストから**「一般」**を選択します。
     4.  接続情報から、 TiDB Cloudリソースのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。

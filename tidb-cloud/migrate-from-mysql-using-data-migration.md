@@ -654,7 +654,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 ## ステップ1：データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[データ移行]**をクリックします。
 
@@ -965,7 +965,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 ### スケーリング手順 {#scaling-procedure}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「データ移行」**をクリックします。
 

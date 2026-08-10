@@ -11,7 +11,7 @@ TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一
 
 **メトリクス**ページでメトリクスを表示するには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >

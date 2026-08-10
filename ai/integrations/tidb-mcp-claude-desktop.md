@@ -44,7 +44,7 @@ Claude DesktopでTiDB MCPサーバーを設定するには、以下の手順に�
     }
     ```
 
-5.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
+5.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 
 6.  右上隅の**「接続」**をクリックして接続パラメータを取得し、 `TIDB_HOST` 、 `TIDB_PORT` 、 `TIDB_USERNAME` 、 `TIDB_PASSWORD` 、および`TIDB_DATABASE`の値を自分の値に置き換えてください。
 

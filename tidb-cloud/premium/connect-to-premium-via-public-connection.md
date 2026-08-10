@@ -24,7 +24,7 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 1.  対象インスタンスの概要ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >

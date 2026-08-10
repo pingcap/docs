@@ -141,7 +141,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -177,7 +177,7 @@ TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -209,7 +209,7 @@ TiDB Cloud Essentialインスタンスの監査ログを無効にすることが
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -245,7 +245,7 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -275,7 +275,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -305,7 +305,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -333,7 +333,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 <SimpleTab>
 <div label="Console">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

@@ -13,7 +13,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
 以下の手順を実行することで、いつでもTiDB Cloudリソースを削除できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  削除する対象リソースの行で、 **...**をクリックします。
 

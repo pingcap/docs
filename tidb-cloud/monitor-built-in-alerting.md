@@ -19,7 +19,7 @@ TiDB Cloud を使用すると、アラートの表示、アラートルールの
 
 TiDB Cloudでは、**アラート**ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >
@@ -39,7 +39,7 @@ TiDB Cloudでは、**アラート**ページでアクティブなアラートと
 
 TiDB Cloudでは、**アラート**ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

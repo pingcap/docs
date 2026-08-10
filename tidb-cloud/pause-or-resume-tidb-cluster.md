@@ -82,13 +82,13 @@ TiDB Cloudでは、常時稼働していないTiDB Cloud Dedicatedクラスタ�
 
 クラスターを一時停止するには、以下の手順を実行してください。
 
-1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  一時停止したいTiDB Cloud Dedicatedクラスターの行で、 **...**をクリックします。
 
     > **Tip:**
     >
-    > または、[**私のTiDB**](https://tidbcloud.com/tidbs)ページで一時停止したいクラスターの名前をクリックし、右上隅の**...**をクリックすることもできます。
+    > または、[**My TiDB**](https://tidbcloud.com/tidbs)ページで一時停止したいクラスターの名前をクリックし、右上隅の**...**をクリックすることもできます。
 
 3.  ドロップダウンメニューの**「一時停止」**をクリックしてください。
 
@@ -110,7 +110,7 @@ TiDB Cloud API を使用してクラスタを一時停止することもでき�
 
 一時停止したクラスターを再開するには、以下の手順を実行してください。
 
-1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
 2.  再開したいTiDB Cloud Dedicatedクラスターについて、 **[再開]**をクリックします。 **[クラスターの再開]**ダイアログが表示されます。
 

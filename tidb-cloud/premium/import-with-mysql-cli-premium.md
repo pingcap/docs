@@ -24,7 +24,7 @@ MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumイ
 
 MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumインスタンスに接続します。初めて接続する場合は、以下の手順を実行してネットワーク接続を設定し、 TiDB SQL `root`ユーザーパスワードを生成してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、ターゲットのTiDB Cloud Premium インスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、ターゲットのTiDB Cloud Premium インスタンスの名前をクリックして、その概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 

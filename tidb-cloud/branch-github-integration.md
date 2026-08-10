@@ -31,7 +31,7 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
 2.  左側のナビゲーションペインで**「支店」**をクリックします。
 

@@ -33,7 +33,7 @@ TiDB Cloud Starterインスタンスが使用クォータに達すると、ユ�
 
 TiDB Cloud Starterインスタンスの支出制限を更新するには、以下の手順を実行してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >

@@ -13,7 +13,7 @@ TiDB Cloudの各TiDB Cloud Dedicatedクラスターに対して、IP アクセ�
 
 TiDB Cloud Dedicatedクラスターの IP アクセス リストを設定するには、次の手順を実行します。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
     > **Tip:**
     >

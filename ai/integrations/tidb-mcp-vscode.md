@@ -19,7 +19,7 @@ summary: このガイドでは、Visual Studio CodeでTiDB MCPサーバーを設
 
 TiDB Cloudコンソールを使用して、VS Code構成を生成します。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
 2.  表示されたダイアログで、VS Codeがアクセスする**ブランチ**と**データベース**を選択します。
 

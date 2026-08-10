@@ -58,7 +58,7 @@ TiDB Cloudは、メンテナンス期間ごとに、以下のタイミングで�
 
 開始時刻を希望の時間に変更したり、期限までメンテナンス作業をリスケジュールしたりするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
 
     > **Tip:**
     >

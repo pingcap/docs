@@ -19,7 +19,7 @@ summary: このガイドでは、Claude CodeでTiDB MCPサーバーを設定す�
 
 TiDB Cloudコンソールを使用して、すぐに実行できるClaude Codeコマンドを生成します。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
 2.  表示されたダイアログで、Claude Codeがアクセスする**ブランチ**と**データベース**を選択してください。
 

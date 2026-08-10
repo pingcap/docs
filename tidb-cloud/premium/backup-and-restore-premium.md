@@ -252,7 +252,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ごみ箱から削除した {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **[ごみ箱] を**クリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **[ごみ箱] を**クリックします。
 
     > **Tip:**
     >
@@ -274,7 +274,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 TiDB Cloud Dedicatedクラスターによって生成されたバックアップを復元するには、次の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **[別のプランから復元]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。右上隅にある**[...]**をクリックし、 **[別のプランから復元]**をクリックします。
 
 2.  **「バックアップの選択」**ページで、対象のTiDB Cloud Dedicatedクラスターを含むプロジェクトを選択します。TiDB Cloud Dedicatedクラスターを選択し、復元するバックアップ スナップショットを選択して、 **「次へ」**をクリックします。
 

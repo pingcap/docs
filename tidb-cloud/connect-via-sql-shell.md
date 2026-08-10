@@ -13,7 +13,7 @@ TiDB Cloud SQL Shell では、 TiDB SQL を試用したり、TiDB と MySQL の�
 
 SQLシェルを使用してTiDBに接続するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

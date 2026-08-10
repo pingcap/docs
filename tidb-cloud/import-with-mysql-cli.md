@@ -18,7 +18,7 @@ MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートする�
 
 TiDB Cloud Dedicatedクラスターに接続してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 

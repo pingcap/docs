@@ -49,7 +49,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 1.  監査ログを有効にするTiDB Cloud PremiumインスタンスのTiDB CloudアカウントIDと外部IDを取得してください。
 
-    1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
 
@@ -132,7 +132,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 1.  監査ログを有効にしたいTiDB Cloud PremiumインスタンスのAlibaba CloudサービスアカウントIDを取得してください。
 
-    1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2.  対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「設定」** &gt; **「DB監査ログ」**をクリックします。
     3.  **DB監査ログの**ページで、右上隅にある**「有効にする」**をクリックします。
     4.  **データベース監査ログストレージコンフィグレーション**ダイアログで、 **Alibaba Cloud RAMポリシー設定**セクションを探し、後で使用するために**TiDB CloudアカウントID**と**TiDB Cloud外部ID**を記録してください。
