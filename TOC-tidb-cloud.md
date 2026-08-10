@@ -135,6 +135,7 @@
   - Optimize Resource Allocation
     - [Overview of Resource Allocation](/tidb-cloud/optimize-resource-allocation.md)
     - Resource Manager
+      - [Calibrate Resource](/tidb-cloud/calibrate-resource.md)
       - [Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md)
       - [Manage Runaway Queries](/tidb-resource-control-runaway-queries.md)
       - [Manage Background Tasks](/tidb-resource-control-background-tasks.md)

@@ -167,7 +167,7 @@ You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.m
 
 For TiDB Self-Managed, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
 
-For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
+For TiDB Cloud Dedicated, the `CALIBRATE RESOURCE` statement is not supported. To estimate the RU capacity of your cluster, use the **Calibrate Resource** feature in the TiDB Cloud console instead. For more information, see [Calibrate Resource](/tidb-cloud/calibrate-resource.md).
 
 </CustomContent>
 
@@ -408,7 +408,7 @@ You can view the data of resource groups in the current [`RESOURCE_GROUPS`](/inf
 
 > **Note:**
 >
-> This section is only applicable to TiDB Self-Managed. Currently, TiDB Cloud does not provide resource control metrics.
+> This section describes the Grafana dashboards that are available only for TiDB Self-Managed. For TiDB Cloud Dedicated, you can view the resource control metrics, including **Total RU Consumed** and **RU Consumed by Resource Groups**, in the [Calibrate Resource](/tidb-cloud/calibrate-resource.md) page of the TiDB Cloud console.
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
 
