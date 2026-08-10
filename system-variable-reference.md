@@ -216,7 +216,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [GBK](/character-set-gbk.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_client)
 -   [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md)
 -   [VIEWS](/information-schema/information-schema-views.md)
@@ -229,7 +229,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [GBK](/character-set-gbk.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_connection)
 -   [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md)
 
@@ -238,7 +238,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_database)
 
 ### character_set_results
@@ -246,7 +246,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_results)
 -   [TiDB 8.5.4 リリースノート](/releases/release-8.5.4.md)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
@@ -257,7 +257,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_server)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
