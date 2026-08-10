@@ -9,20 +9,20 @@ After deploying your BYOC infrastructure, create a resource pool, create your fi
 
 ## Create a BYOC instance
 
-You can now provision resource rools and TiDB instances directly via the TiDB Cloud console.
+You can now provision resource pools and TiDB instances directly via the TiDB Cloud console.
 
-1. Create a resource pool. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a resource pool in the target cloud provider and region.
+1. Create a resource pool. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow the instructions in [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a resource pool in the target cloud provider and region.
 
-2. After the Resource Pool becomes **Active**, follow the [BYOC instance creation workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance in the Resource Pool.
+2. After the resource pool becomes **Active**, follow the instructions in [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance in the resource pool.
 
-    * Initial setup time: the creation of the **first Resource Pool** in a region might take approximately **1 hour** as the system initializes the Kubernetes environment.
-    * Subsequent instances: creating additional instances in an active Resource Pool usually takes only a few minutes.
+    * Initial setup time: creating the **first resource pool** in a region might take approximately **1 hour** as the system initializes the Kubernetes environment.
+    * Subsequent instances: creating additional instances in an active resource pool usually takes only a few minutes.
 
 3. Consult with your TiDB Cloud representative to determine the appropriate Request Unit (RU) settings for your initial connectivity and functional tests. They will recommend a configuration based on your specific testing requirements.
 
 ## Restore data from Amazon S3 to a new BYOC instance
 
-After preparing your backup file in Amazon S3, you can restore the data to a new {{{ .byoc }}} instance in an active Resource Pool.
+After preparing your backup file in Amazon S3, you can restore the data to a new {{{ .byoc }}} instance in an active resource pool.
 
 1. Configure Amazon S3 Access (AK/SK).
 
@@ -30,11 +30,11 @@ After preparing your backup file in Amazon S3, you can restore the data to a new
 
     For detailed instructions, see [Configure Amazon S3 access using an AWS Access Key](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-an-aws-access-key).
 
-2. Execute the Restore Process.
+2. Execute the restore process.
 
     Once the access keys are configured, you can initiate the restore job from the TiDB Cloud console.
 
-    During restore, select an active Resource Pool in the target cloud provider and region.
+    During restore, select an active resource pool in the target cloud provider and region.
 
     For step-by-step restoration procedures, see [Restore backups from cloud storage](/tidb-cloud/premium/backup-and-restore-premium.md#restore-backups-from-cloud-storage).
 
@@ -51,4 +51,4 @@ For deployment and verification steps, see [Configure a Bastion Host for {{{ .by
 
 ## What's next
 
-After you create your first Resource Pool and {{{ .byoc }}} instance and configure secure administrative access, continue with [TiDB Cloud BYOC Joint Validation](/tidb-cloud/byoc/joint-validation.md) to validate connectivity, observability, security, and alerting.
+After you create your first resource pool and {{{ .byoc }}} instance and configure secure administrative access, continue with [TiDB Cloud BYOC Joint Validation](/tidb-cloud/byoc/joint-validation.md) to validate connectivity, observability, security, and alerting.
