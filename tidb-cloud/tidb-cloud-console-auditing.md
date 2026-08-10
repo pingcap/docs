@@ -13,7 +13,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Enable console audit logging
 
-The console audit logging feature is disabled by default. After it is enabled, all supported event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them. To enable it, take the following steps:
+The console audit logging feature is disabled by default. After you enable it, all supported event types in the TiDB Cloud console are audited, and you cannot configure it to audit only specific event types. To enable it, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), switch to your target organization using the combo box in the upper-left corner.
 2. In the left navigation pane, click **Console Audit Logging**.
@@ -62,15 +62,15 @@ The storage time of console audit logs is 90 days, after which the logs will be 
 
 ## Console audit log integrity and access control
 
-To help you meet regulatory compliance requirements, TiDB Cloud provides the following measures for console audit logging:
+To help you meet regulatory compliance requirements, TiDB Cloud provides the following controls for console audit logging:
 
 - **Completeness**: When console audit logging is enabled for your organization, the audit system records user operations that trigger the [supported event types](#console-audit-event-types). Log entries are typically available for viewing, download, and programmatic access via the API within 60 minutes of the event occurrence.
 
   > **Note:**
   >
-  > Console audit logging records every occurrence of supported event types that occur after it is enabled. Operations performed before enabling are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
+  > Console audit logging records all supported events that occur after it is enabled. Operations performed before audit logging is enabled are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
 
-- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role of your organization can manage console audit logging for your organization. Other organization members cannot enable or disable audit logging or modify log settings.
+- **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role in your organization can manage console audit logging for your organization. Other organization members cannot enable or disable audit logging or modify log settings.
 
 ## Console audit event types
 
