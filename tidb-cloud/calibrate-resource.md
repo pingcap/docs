@@ -59,4 +59,4 @@ For more information about resource groups, see [Use Resource Control to Achieve
 ## Limitations
 
 - The `CALIBRATE RESOURCE` statement is not supported on TiDB Cloud Dedicated. To estimate the RU capacity of your cluster, use the **Calibrate Resource** feature in the TiDB Cloud console.
-- The **Calibrate Resource** feature is only available for TiDB Cloud Dedicated clusters, and is not available for {{{ .starter }}} or {{{ .essential }}} instances.
+- The **Calibrate Resource** feature is available only for TiDB Cloud Dedicated clusters, not for {{{ .starter }}}, {{{ .essential }}}, or {{{ .premium }}} instances.
