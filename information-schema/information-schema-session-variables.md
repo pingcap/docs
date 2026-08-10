@@ -3,7 +3,7 @@ title: SESSION_VARIABLES
 summary: SESSION_VARIABLES` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# セッション変数 {#session-variables}
+# SESSION_VARIABLES {#session-variables}
 
 `SESSION_VARIABLES`表はセッション変数に関する情報を提供します。表のデータは[`SHOW SESSION VARIABLES`](/sql-statements/sql-statement-show-variables.md)のステートメントの結果と似ています。
 

@@ -3,7 +3,7 @@ title: STATISTICS
 summary: STATISTICS` information_schema テーブルについて学習します。
 ---
 
-# 統計 {#statistics}
+# STATISTICS {#statistics}
 
 `STATISTICS`テーブルはテーブル インデックスに関する情報を提供します。
 

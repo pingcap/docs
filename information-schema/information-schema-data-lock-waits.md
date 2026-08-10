@@ -3,9 +3,9 @@ title: DATA_LOCK_WAITS
 summary: DATA_LOCK_WAITS` information_schema テーブルについて学習します。
 ---
 
-# データロック待機 {#data_lock_waits}
+# DATA_LOCK_WAITS {#data_lock_waits}
 
-`DATA_LOCK_WAITS`テーブルには、悲観的トランザクションのロック待機情報とブロックされている楽観的トランザクションの情報を含む、クラスター内のすべての TiKV ノードで進行中のロック待機情報が表示されます。
+`DATA_LOCK_WAITS`テーブルには、クラスター内のすべての TiKV ノードで進行中のロック待機情報が表示されます。これには、悲観的トランザクションのロック待機情報と、ブロックされている楽観的トランザクションの情報が含まれます。
 
 ```sql
 USE information_schema;

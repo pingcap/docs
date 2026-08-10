@@ -3,7 +3,7 @@ title: TABLE_CONSTRAINTS
 summary: TABLE_CONSTRAINTS` information_schema テーブルについて学習します。
 ---
 
-# テーブル制約 {#table-constraints}
+# TABLE_CONSTRAINTS {#table-constraints}
 
 `TABLE_CONSTRAINTS`表は、どの表に[制約](/constraints.md)あるかを説明します。
 

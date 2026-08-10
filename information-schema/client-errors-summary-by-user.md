@@ -3,9 +3,9 @@ title: CLIENT_ERRORS_SUMMARY_BY_USER
 summary: CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# クライアントエラー概要（ユーザー別） {#client-errors-summary-by-user}
+# CLIENT_ERRORS_SUMMARY_BY_USER {#client-errors-summary-by-user}
 
-表`CLIENT_ERRORS_SUMMARY_BY_USER` 、TiDBサーバーに接続したクライアントに返されたSQLエラーと警告の概要を示しています。これには以下が含まれます。
+表`CLIENT_ERRORS_SUMMARY_BY_USER`は、TiDBサーバーに接続したクライアントに返されたSQLエラーと警告の概要を示しています。これには以下が含まれます。
 
 -   不正な SQL ステートメント。
 -   ゼロ除算エラー。

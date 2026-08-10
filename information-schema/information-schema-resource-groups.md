@@ -3,7 +3,7 @@ title: RESOURCE_GROUPS
 summary: RESOURCE_GROUPS`情報スキーマテーブルについて学習してください。
 ---
 
-# リソースグループ {#resource-groups}
+# RESOURCE_GROUPS {#resource-groups}
 
 `RESOURCE_GROUPS`テーブルには、すべてのリソース グループに関する情報が表示されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
 

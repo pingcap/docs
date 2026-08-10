@@ -3,7 +3,7 @@ title: INSPECTION_RESULT
 summary: INSPECTION_RESULT` 診断結果テーブルを確認します。
 ---
 
-# 検査結果 {#inspection-result}
+# INSPECTION_RESULT {#inspection-result}
 
 TiDB には、システム内の障害や隠れた問題を検出するための診断ルールがいくつか組み込まれています。
 

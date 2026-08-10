@@ -3,7 +3,7 @@ title: KEY_COLUMN_USAGE
 summary: KEY_COLUMN_USAGE` information_schema テーブルについて学習します。
 ---
 
-# キー列の使用法 {#key-column-usage}
+# KEY_COLUMN_USAGE {#key-column-usage}
 
 `KEY_COLUMN_USAGE`表は、主キー制約などの列のキー制約について説明します。
 

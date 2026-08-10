@@ -3,9 +3,9 @@ title: PROCESSLIST
 summary: PROCESSLIST` information_schema テーブルについて学習します。
 ---
 
-# プロセスリスト {#processlist}
+# PROCESSLIST {#processlist}
 
-`PROCESSLIST` 、 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)と同様に、処理中のリクエストを表示するために使用されます。
+`PROCESSLIST`は、 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)と同様に、処理中のリクエストを表示するために使用されます。
 
 `PROCESSLIST`テーブルには`SHOW PROCESSLIST`にはない追加の列があります。
 

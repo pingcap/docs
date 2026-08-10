@@ -3,7 +3,7 @@ title: MEMORY_USAGE_OPS_HISTORY
 summary: MEMORY_USAGE_OPS_HISTORY` information_schema システム テーブルについて学習します。
 ---
 
-# メモリ使用量オペレーション履歴 {#memory-usage-ops-history}
+# MEMORY_USAGE_OPS_HISTORY {#memory-usage-ops-history}
 
 `MEMORY_USAGE_OPS_HISTORY`テーブルは、メモリ関連の操作の履歴と現在の TiDB インスタンスの実行基準を示します。
 

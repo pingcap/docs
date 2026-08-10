@@ -3,9 +3,9 @@ title: CLUSTER_HARDWARE
 summary: CLUSTER_HARDWARE` information_schema テーブルについて学習します。
 ---
 
-# クラスターハードウェア {#cluster-hardware}
+# CLUSTER_HARDWARE {#cluster-hardware}
 
-`CLUSTER_HARDWARE`ハードウェア システム テーブルには、クラスターの各インスタンスが配置されているサーバーのハードウェア情報が表示されます。
+`CLUSTER_HARDWARE`システムテーブルには、クラスターの各インスタンスが配置されているサーバーのハードウェア情報が表示されます。
 
 > **Note:**
 >

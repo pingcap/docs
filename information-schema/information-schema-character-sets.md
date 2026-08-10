@@ -3,7 +3,7 @@ title: CHARACTER_SETS
 summary: CHARACTER_SETS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# キャラクターセット {#character-sets}
+# CHARACTER_SETS {#character-sets}
 
 `CHARACTER_SETS`テーブルは[文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
 
