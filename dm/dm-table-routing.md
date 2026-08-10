@@ -48,8 +48,8 @@ routes:
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   DM は`target-table` [テーブルセレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema`に移行します。
--   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルについては、DM は`extract-table` . `table-regexp`正規表現を使用してテーブル名、 `extract-schema` . `schema-regexp`正規表現を使用してスキーマ名、 `extract-source` . `source-regexp`正規表現を使用してソース情報を抽出します。その後、DM は抽出した情報を下流のマージ済みテーブルの対応する`target-column`に書き込みます。
+-   DM は[テーブルセレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` / `target-table`に移行します。
+-   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルについては、DM は`extract-table`.`table-regexp`正規表現を使用してテーブル名、 `extract-schema`.`schema-regexp`正規表現を使用してスキーマ名、 `extract-source`.`source-regexp`正規表現を使用してソース情報を抽出します。その後、DM は抽出した情報を下流のマージ済みテーブルの対応する`target-column`に書き込みます。
 
 ## 使用例 {#usage-examples}
 
@@ -59,11 +59,11 @@ routes:
 
 ### シャーディングされたスキーマとテーブルをマージする {#merge-sharded-schemas-and-tables}
 
-シャーディングされたスキーマとテーブルのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`をダウンストリーム TiDB インスタンスの`test` `t`に移行します。
+シャーディングされたスキーマとテーブルのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`.`t_{1,2,3...}`テーブルをダウンストリーム TiDB インスタンスの`test`.`t`テーブルに移行します。
 
-アップストリームインスタンスをダウンストリーム`test` . `t`に移行するには、次のルーティングルールを作成する必要があります。
+アップストリームインスタンスをダウンストリーム`test`.`t`に移行するには、次のルーティングルールを作成する必要があります。
 
--   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test` 。 `t`に移行するために使用されます。
+-   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test`.`t`に移行するために使用されます。
 -   `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL ステートメントを移行するために使用されます。
 
 > **Note:**
@@ -84,7 +84,7 @@ routes:
 
 ### テーブル、スキーマ、ソース情報を抽出し、結合されたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
 
-シャーディングされたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`を下流TiDBインスタンスの`test`テーブルに移行します。同時に`t`シャーディングされたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
+シャーディングされたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`.`t_{1,2,3...}`テーブルを下流TiDBインスタンスの`test`.`t`テーブルに移行します。同時に、シャーディングされたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
 
 アップストリームインスタンスをダウンストリーム`test`.`t`に移行するには、前のセクション[シャーディングされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティングルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`設定を追加する必要があります。
 
@@ -213,9 +213,9 @@ CREATE TABLE `test`.`t` (
 
 ### シャードスキーマをマージする {#merge-sharded-schemas}
 
-シャード スキーマのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`をダウンストリーム TiDB インスタンスの`test` `t_{1,2,3...}`に移行します。
+シャード スキーマのシナリオを想定して、2 つのアップストリーム MySQL インスタンスの`test_{1,2,3...}`.`t_{1,2,3...}`テーブルをダウンストリーム TiDB インスタンスの`test`.`t_{1,2,3...}`テーブルに移行します。
 
-アップストリーム スキーマをダウンストリーム`test` . `t_[1,2,3]`に移行するには、ルーティング ルールを 1 つだけ作成する必要があります。
+アップストリーム スキーマをダウンストリーム`test`.`t_[1,2,3]`に移行するには、ルーティング ルールを 1 つだけ作成する必要があります。
 
 ```yaml
   rule-1:
