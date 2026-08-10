@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.4 Release Notes
 summary: TiDB 3.0.4 was released on October 8, 2019, with new features including system table for troubleshooting SQL performance issues, improvements in split performance and reverse scan, and fixed issues related to slow query logs and data replication. The release also includes contributions from the community and updates to TiDB, TiKV, PD, and TiDB Ansible.
+aliases: ['/tidb/dev/release-3.0.4/','/tidb/v3.0/release-3.0.4','/docs/dev/releases/release-3.0.4/','/docs/dev/releases/3.0.4/','/tidb/v5.4/release-3.0.4','/tidb/v6.1/release-3.0.4','/tidb/v6.5/release-3.0.4','/tidb/v7.1/release-3.0.4','/tidb/v7.5/release-3.0.4','/tidb/v8.1/release-3.0.4']
 ---
 
 # TiDB 3.0.4 Release Notes

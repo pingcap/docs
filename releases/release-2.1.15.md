@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1.15 Release Notes
 summary: TiDB 2.1.15 was released on July 16, 2019. It includes various bug fixes and improvements, such as fixing issues with functions like DATE_ADD and INSERT, adding new SQL statements like SHOW TABLE REGIONS, and enhancing the Audit plugin. TiKV and PD also received updates to unify log formats and improve accuracy. Additionally, there were optimizations made to TiDB Binlog and TiDB Lightning, and new monitoring items added to TiDB Ansible.
+aliases: ['/tidb/dev/release-2.1.15/','/tidb/v2.1/release-2.1.15','/docs/dev/releases/release-2.1.15/','/docs/dev/releases/2.1.15/','/tidb/v5.4/release-2.1.15','/tidb/v6.1/release-2.1.15','/tidb/v6.5/release-2.1.15','/tidb/v7.1/release-2.1.15','/tidb/v7.5/release-2.1.15','/tidb/v8.1/release-2.1.15']
 ---
 
 # TiDB 2.1.15 Release Notes

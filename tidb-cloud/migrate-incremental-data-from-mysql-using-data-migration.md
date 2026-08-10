@@ -27,7 +27,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 ## Limitations
 
-> **Note**:
+> **Note:**
 >
 > This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
@@ -52,7 +52,7 @@ If you specify GTID as the start position to migrate incremental data, note the 
 
 ## Prerequisites
 
-> **Note**:
+> **Note:**
 >
 > This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
 
@@ -117,7 +117,7 @@ If the result is not `FULL`, you need to configure this parameter for your Aliba
 
 ### For a self-hosted MySQL instance
 
-> **Note**:
+> **Note:**
 >
 > The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
 

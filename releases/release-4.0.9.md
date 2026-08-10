@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.9 Release Notes
 summary: TiDB 4.0.9 was released on December 21, 2020. The release includes compatibility changes, new features, improvements, bug fixes, and updates to TiKV, TiDB Dashboard, PD, TiFlash, and various tools. Notable changes include the deprecation of the `enable-streaming` configuration item in TiDB, support for storing the latest data of the storage engine on multiple disks in TiFlash, and various bug fixes in TiDB and TiKV.
+aliases: ['/tidb/dev/release-4.0.9/','/tidb/v4.0/release-4.0.9','/tidb/v5.4/release-4.0.9','/tidb/v6.1/release-4.0.9','/tidb/v6.5/release-4.0.9','/tidb/v7.1/release-4.0.9','/tidb/v7.5/release-4.0.9','/tidb/v8.1/release-4.0.9']
 ---
 
 # TiDB 4.0.9 Release Notes

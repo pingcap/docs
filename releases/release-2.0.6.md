@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0.6 Release Notes
 summary: TiDB 2.0.6 was released on August 6, 2018, with improvements in system compatibility and stability. The release includes various improvements and bug fixes for TiDB and TiKV. Some notable improvements include reducing transaction conflicts, improving row count estimation accuracy, and adding a recover mechanism for panics during the execution of `ANALYZE TABLE`. Bug fixes address issues such as incompatible `DROP USER` statement behavior, OOM errors for `INSERT`/`LOAD DATA` statements, and incorrect results for prefix index and `DECIMAL` operations. TiKV also sees improvements in scheduler slots, rollback transaction records, and RocksDB log file management, along with a fix for a crash issue during data type conversion.
+aliases: ['/tidb/dev/release-2.0.6/','/tidb/v2.0/release-2.0.6','/docs/dev/releases/release-2.0.6/','/docs/dev/releases/206/','/tidb/v5.4/release-2.0.6','/tidb/v6.1/release-2.0.6','/tidb/v6.5/release-2.0.6','/tidb/v7.1/release-2.0.6','/tidb/v7.5/release-2.0.6','/tidb/v8.1/release-2.0.6']
 ---
 
 # TiDB 2.0.6 Release Notes

@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.1 RC Release Notes
 summary: TiDB 3.1 RC was released on April 2, 2020. It includes new features such as improved partition pruning, support for `RECOVER` syntax, and TLS certificate updates. Bug fixes include resolving issues with TiFlash replica, `last_insert_id`, and `Aggregation` pushdown. TiKV now supports TLS authentication and AWS IAM web identity for backup. PD has fixed data race issues and placement rule inconsistencies. Tools like TiDB Lightning and BR have also been optimized and fixed.
+aliases: ['/tidb/dev/release-3.1.0-rc/','/tidb/v3.1/release-3.1.0-rc','/docs/dev/releases/release-3.1.0-rc/','/docs/dev/releases/3.1.0-rc/','/tidb/v5.4/release-3.1.0-rc','/tidb/v6.1/release-3.1.0-rc','/tidb/v6.5/release-3.1.0-rc','/tidb/v7.1/release-3.1.0-rc','/tidb/v7.5/release-3.1.0-rc','/tidb/v8.1/release-3.1.0-rc']
 ---
 
 # TiDB 3.1 RC Release Notes

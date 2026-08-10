@@ -2,6 +2,7 @@
 title: TiDB 5.0.6 Release Notes
 category: Releases
 summary: TiDB 5.0.6 was released on December 31, 2021. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, TiKV, PD, TiDB Lightning, TiFlash, Backup & Restore (BR), and Dumpling. The changes include enhancements to error handling, performance improvements, bug fixes related to SQL statements, and various optimizations for different tools.
+aliases: ['/tidb/dev/release-5.0.6/','/tidb/v5.0/release-5.0.6','/tidb/v5.4/release-5.0.6','/tidb/v6.1/release-5.0.6','/tidb/v6.5/release-5.0.6','/tidb/v7.1/release-5.0.6','/tidb/v7.5/release-5.0.6','/tidb/v8.1/release-5.0.6']
 ---
 
 # TiDB 5.0.6 Release Notes
