@@ -869,7 +869,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
 -   [統計入門](/statistics.md)
--   [分析ステータスを表示](/sql-statements/sql-statement-show-analyze-status.md)
+-   [SHOW ANALYZE STATUS](/sql-statements/sql-statement-show-analyze-status.md)
 -   [システム変数](/system-variables.md#tidb_analyze_version-new-in-v510)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
