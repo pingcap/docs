@@ -5,13 +5,13 @@ summary: This document outlines the process for creating a TiDB Cloud BYOC insta
 
 # Create Your First TiDB Cloud BYOC Instance
 
-After deploying your BYOC infrastructure, create a Resource Pool, create your first {{{ .byoc }}} instance in the Resource Pool, and configure secure administrative access.
+After deploying your BYOC infrastructure, create a resource pool, create your first {{{ .byoc }}} instance in the resource pool, and configure secure administrative access.
 
 ## Create a BYOC instance
 
-You can now provision Resource Pools and TiDB instances directly via the TiDB Cloud console.
+You can now provision resource rools and TiDB instances directly via the TiDB Cloud console.
 
-1. Create a Resource Pool. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a Resource Pool in the target cloud provider and region.
+1. Create a resource pool. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and follow [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) to create a resource pool in the target cloud provider and region.
 
 2. After the Resource Pool becomes **Active**, follow the [BYOC instance creation workflow](/tidb-cloud/byoc/create-tidb-instance-byoc.md) to create a new instance in the Resource Pool.
 
