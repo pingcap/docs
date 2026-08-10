@@ -108,7 +108,7 @@ Do not copy an arbitrary standalone Drive9 binary into place.
 Quota and capacity errors can mean the organization has reached its free Starter limit. List existing resources before creating another:
 
 ```bash
-tdc db list-db-clusters --output text
+tdc db list-db-clusters --db-cluster-type starter --output text
 tdc fs list-file-systems --output text
 ```
 

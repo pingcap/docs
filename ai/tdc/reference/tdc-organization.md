@@ -63,6 +63,7 @@ project_id = "..."
 
 ```bash
 tdc db create-db-cluster \
+  --db-cluster-type starter \
   --db-cluster-name project-specific-cluster \
   --project-id "<project-id>"
 ```

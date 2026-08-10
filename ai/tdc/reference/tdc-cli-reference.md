@@ -129,13 +129,13 @@ Command pages document `--help`, `--version`, and all command-specific options s
 Structured control-plane commands return JSON by default:
 
 ```bash
-tdc db list-db-clusters
+tdc db list-db-clusters --db-cluster-type starter
 ```
 
 Use text output for terminal inspection:
 
 ```bash
-tdc db list-db-clusters --output text
+tdc db list-db-clusters --db-cluster-type starter --output text
 ```
 
 Raw byte-oriented commands such as `tdc fs read-file` and `tdc fs copy-file --to-stdout` write file content directly.
@@ -146,6 +146,7 @@ Raw byte-oriented commands such as `tdc fs read-file` and `tdc fs copy-file --to
 
 ```bash
 tdc db list-db-clusters \
+  --db-cluster-type starter \
   --query 'clusters[].{id:id,name:display_name,state:state}'
 
 tdc organization list-projects \
