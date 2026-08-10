@@ -183,6 +183,10 @@ By default, in pessimistic transactions, the locking behavior of foreign key che
 
 You can enable the system variable [`tidb_foreign_key_check_in_shared_lock`](/system-variables.md#tidb_foreign_key_check_in_shared_lock-new-in-v856) to let foreign key checks use shared locks. Shared locks allow multiple transactions to perform foreign key checks on the same parent table row simultaneously, thereby reducing lock conflicts and improving the performance of concurrent writes to child tables.
 
+> **Warning:**
+>
+> On TiDB X, using shared locks for foreign key checks is an experimental feature. It is not recommended that you use this feature in production environments. This feature might be changed or removed without prior notice. Before setting `tidb_foreign_key_check_in_shared_lock` to `ON`, you must set [`experimental.allow-enable-foreign-key-check-in-shared-lock`](/tidb-configuration-file.md#allow-enable-foreign-key-check-in-shared-lock) to `true`.
+
 ## Definition and metadata of foreign keys
 
 To view the definition of a foreign key constraint, execute the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) statement:
