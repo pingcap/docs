@@ -66,9 +66,9 @@ To help you meet regulatory compliance requirements, TiDB Cloud provides the fol
 
 - **Completeness**: When console audit logging is enabled for your organization, the audit system records user operations that trigger the [supported event types](#console-audit-event-types). Log entries are typically available for viewing, download, and programmatic access via the API within 60 minutes of the event occurrence.
 
-  > **Note:**
-  >
-  > Console audit logging records all supported events that occur after it is enabled. Operations performed before audit logging is enabled are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
+    > **Note:**
+    >
+    > Console audit logging records all supported events that occur after it is enabled. Operations performed before audit logging is enabled are not recorded. TiDB Cloud continuously expands the coverage of audited event types.
 
 - **Access control**: Only users with the `Organization Owner` or `Organization Console Audit Manager` role in your organization can manage console audit logging for your organization. Other organization members cannot enable or disable audit logging or modify log settings.
 
