@@ -136,7 +136,7 @@ When planning CIDR ranges, make sure to comply with the following connectivity r
 
 - **VPC peering rule:**
 
-    * **Cannot Overlap:** The O11Y CIDR and any resource pool CIDR must not overlap with your existing application VPCs, on-premises networks, or VPN networks.
+    * **Cannot overlap:** The O11Y CIDR and any resource pool CIDR must not overlap with your existing application VPCs, on-premises networks, or VPN networks.
     * **Customer responsibility:** TiDB Cloud cannot detect conflicts with customer-managed networks. You are responsible for planning and verifying these CIDR ranges before deployment or before creating a resource pool.
 
 - **Cross-region CIDR planning:** Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
