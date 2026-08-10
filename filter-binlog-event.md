@@ -14,7 +14,7 @@ summary: データを移行するときにbinlogイベントをフィルター�
 
 ## コンフィグレーション {#configuration}
 
-binlogイベント フィルターを使用するには、以下に示すように、DM のタスク構成ファイルに`filter`追加します。
+binlogイベント フィルターを使用するには、以下に示すように、DM のタスク構成ファイルに`filter`を追加します。
 
 ```yaml
 filters:
@@ -32,24 +32,24 @@ filters:
 
     | イベント         | カテゴリ | 説明                |
     | ------------ | ---- | ----------------- |
-    | 全て           |      | すべてのイベントを含む       |
-    | すべてのDML      |      | すべてのDMLイベントを含む    |
-    | すべてのDDL      |      | すべてのDDLイベントを含む    |
-    | なし           |      | イベントは含まれません       |
-    | なしDDL        |      | すべてのDDLイベントを除外します |
-    | なし dml       |      | すべてのDMLイベントを除外します |
-    | 入れる          | DML  | DMLイベントを挿入        |
-    | アップデート       | DML  | DMLイベントの更新        |
-    | 消去           | DML  | DMLイベントの削除        |
-    | データベースを作成する  | DDL  | データベースイベントの作成     |
-    | データベースを削除    | DDL  | データベースイベントの削除     |
-    | テーブルを作成する    | DDL  | テーブルイベントの作成       |
-    | インデックスを作成する  | DDL  | インデックスイベントの作成     |
-    | ドロップテーブル     | DDL  | ドロップテーブルイベント      |
-    | テーブルを切り捨てる   | DDL  | テーブル切り捨てイベント      |
-    | テーブルの名前を変更する | DDL  | テーブル名の変更イベント      |
-    | インデックスを削除    | DDL  | インデックス削除イベント      |
-    | テーブルを変更する    | DDL  | テーブル変更イベント        |
+    | all           |      | すべてのイベントを含む       |
+    | all dml      |      | すべてのDMLイベントを含む    |
+    | all ddl      |      | すべてのDDLイベントを含む    |
+    | none           |      | イベントは含まれません       |
+    | none ddl        |      | すべてのDDLイベントを除外します |
+    | none dml       |      | すべてのDMLイベントを除外します |
+    | insert          | DML  | DMLイベントを挿入        |
+    | update       | DML  | DMLイベントの更新        |
+    | delete           | DML  | DMLイベントの削除        |
+    | create database  | DDL  | データベースイベントの作成     |
+    | drop database    | DDL  | データベースイベントの削除     |
+    | create table    | DDL  | テーブルイベントの作成       |
+    | create index  | DDL  | インデックスイベントの作成     |
+    | drop table     | DDL  | ドロップテーブルイベント      |
+    | truncate table   | DDL  | テーブル切り捨てイベント      |
+    | rename table | DDL  | テーブル名の変更イベント      |
+    | drop index    | DDL  | インデックス削除イベント      |
+    | alter table    | DDL  | テーブル変更イベント        |
 
 -   `sql-pattern` : 指定されたDDL SQL文をフィルタリングします。マッチングルールでは正規表現の使用がサポートされています。
 
@@ -65,7 +65,7 @@ filters:
         -   イベントはルール設定と一致します。
         -   sql-pattern が指定されており、イベントの SQL ステートメントが sql-pattern オプションのいずれかと一致します。
 
-    `Do`と`Ignore`両方が設定されている場合、 `Ignore` `Do`よりも優先されます。つまり、 `Ignore`と`Do`両方の条件を満たすイベントは除外されます。
+    `Do`と`Ignore`両方が設定されている場合、 `Ignore`の方が`Do`よりも優先されます。つまり、 `Ignore`と`Do`両方の条件を満たすイベントは除外されます。
 
 ## アプリケーションシナリオ {#application-scenarios}
 
@@ -73,43 +73,49 @@ filters:
 
 ### すべてのシャーディング削除操作を除外する {#filter-out-all-sharding-deletion-operations}
 
-すべての削除操作を除外するには、次に示すように`filter-table-rule`と`filter-schema-rule`設定します。
+すべての削除操作を除外するには、次に示すように`filter-table-rule`と`filter-schema-rule`を設定します。
 
-    filters:
-      filter-table-rule:
-        schema-pattern: "test_*"
-        table-pattern: "t_*"
-        events: ["truncate table", "drop table", "delete"]
-        action: Ignore
-      filter-schema-rule:
-        schema-pattern: "test_*"
-        events: ["drop database"]
-        action: Ignore
+```
+filters:
+  filter-table-rule:
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    events: ["truncate table", "drop table", "delete"]
+    action: Ignore
+  filter-schema-rule:
+    schema-pattern: "test_*"
+    events: ["drop database"]
+    action: Ignore
+```
 
 ### シャード化されたスキーマとテーブルのDML操作のみを移行する {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
 
 DML ステートメントのみをレプリケートするには、次に示すように`Binlog event filter rule`を 2 つ設定します。
 
-    filters:
-      do-table-rule:
-        schema-pattern: "test_*"
-        table-pattern: "t_*"
-        events: ["create table", "all dml"]
-        action: Do
-      do-schema-rule:
-        schema-pattern: "test_*"
-        events: ["create database"]
-        action: Do
+```
+filters:
+  do-table-rule:
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    events: ["create table", "all dml"]
+    action: Do
+  do-schema-rule:
+    schema-pattern: "test_*"
+    events: ["create database"]
+    action: Do
+```
 
 ### TiDB でサポートされていない SQL ステートメントを除外する {#filter-out-sql-statements-not-supported-by-tidb}
 
-TiDB でサポートされていない SQL ステートメントを除外するには、以下に示すように`filter-procedure-rule`設定します。
+TiDB でサポートされていない SQL ステートメントを除外するには、以下に示すように`filter-procedure-rule`を設定します。
 
-    filters:
-      filter-procedure-rule:
-        schema-pattern: "*"
-        sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
-        action: Ignore
+```
+filters:
+  filter-procedure-rule:
+    schema-pattern: "*"
+    sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+    action: Ignore
+```
 
 > **Warning:**
 >
