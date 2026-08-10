@@ -408,7 +408,7 @@ You can view the data of resource groups in the current [`RESOURCE_GROUPS`](/inf
 
 > **Note:**
 >
-> This section describes the Grafana dashboards, which are only available for TiDB Self-Managed. For TiDB Cloud Dedicated, you can view the resource control metrics, including **Total RU Consumed** and **RU Consumed by Resource Groups**, in the [Calibrate Resource](/tidb-cloud/calibrate-resource.md) page of the TiDB Cloud console.
+> This section describes the Grafana dashboards that are available only for TiDB Self-Managed. For TiDB Cloud Dedicated, you can view the resource control metrics, including **Total RU Consumed** and **RU Consumed by Resource Groups**, in the [Calibrate Resource](/tidb-cloud/calibrate-resource.md) page of the TiDB Cloud console.
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
 
