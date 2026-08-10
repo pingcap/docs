@@ -41,7 +41,7 @@ For TiDB Cloud Dedicated clusters, you can estimate the RU capacity by using the
     - **Estimated Capacity**: the estimated total RU capacity of the cluster.
     - **Total RU of user resource groups**: the total amount of RU allocated to all user resource groups, excluding the `default` resource group. If this value is more than the estimated capacity, the system triggers an alert.
 
-The page also shows the following metrics charts to help you understand the current resource consumption of the cluster:
+The page also shows the following metric charts to help you understand the current resource consumption of the cluster:
 
 - **Total RU Consumed**: the total consumption of Request Units counted in real time.
 - **RU Consumed by Resource Groups**: the number of Request Units consumed by resource groups in real time.
