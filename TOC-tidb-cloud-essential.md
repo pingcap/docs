@@ -63,6 +63,7 @@
       - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
       - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - [Events](/tidb-cloud/tidb-cloud-events.md)
     - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - Tune Performance
@@ -568,6 +569,7 @@
       - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
       - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
