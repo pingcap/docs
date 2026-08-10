@@ -86,7 +86,7 @@ routes:
 
 シャーディングされたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`テーブル`t_{1,2,3...}`を下流TiDBインスタンスの`test`テーブルに移行します。同時に`t`シャーディングされたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
 
-`t`ストリームインスタンスをダウンストリームインスタンス`test`に移行するには、前のセクション[シャーディングされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティングルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`設定を追加する必要があります。
+アップストリームインスタンスをダウンストリーム`test`.`t`に移行するには、前のセクション[シャーディングされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティングルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`設定を追加する必要があります。
 
 -   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM は`table-regexp`を使用してシャード テーブル名を抽出し、 `t_`部分を除いた名前サフィックスを結合されたテーブルの`target-column` (つまり、 `c_table`列) に書き込みます。
 -   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスを、結合されたテーブルの`target-column` (つまり、 `c_schema`列) に書き込みます。
