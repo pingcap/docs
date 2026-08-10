@@ -9,7 +9,7 @@ This document describes how to create a {{{ .byoc }}} instance in the [TiDB Clou
 
 TiDB Cloud BYOC (Bring Your Own Cloud) keeps the control plane in TiDB Cloud while deploying the data plane in your own cloud account. Before you create a BYOC instance, your organization must complete BYOC onboarding and prepare the target cloud environment.
 
-In TiDB Cloud BYOC, a Resource Pool provides the underlying physical resources, network, and capacity for BYOC instances. Before you create a BYOC instance, you must have an active Resource Pool in the target cloud provider and region.
+In TiDB Cloud BYOC, a resource pool provides the underlying physical resources, network, and capacity for BYOC instances. Before you create a BYOC instance, you must have an active resource pool in the target cloud provider and region.
 
 > **Note:**
 >
@@ -23,11 +23,11 @@ Before you create a BYOC instance, make sure that the following requirements are
 
 - You have the required organization or project role to create TiDB Cloud resources.
 - Your organization has completed the prerequisite BYOC setup for the target cloud provider and region, including the required cloud account permissions. For AWS, this includes the IAM roles required by TiDB Cloud to deploy and manage BYOC resources in your AWS account.
-- An active Resource Pool exists in the cloud provider and region where you want to deploy the BYOC instance.
+- An active resource pool exists in the cloud provider and region where you want to deploy the BYOC instance.
 
 If your BYOC environment is not ready, the **Bring Your Own Cloud** tab is not displayed on the **Create Resource** page. To enable BYOC for your organization, contact your TiDB Cloud account team or [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-If no suitable Resource Pool is available, an `Organization Owner` can create one from **BYOC Management** > **Resource Pools** or from the instance creation workflow. Other roles cannot create Resource Pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+If no suitable resource pool is available, an `Organization Owner` can create one from **BYOC Management** > **Resource Pools** or from the instance creation workflow. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
 ## Steps
 
@@ -45,13 +45,13 @@ If you have the required permissions, you can create a {{{ .byoc }}} instance as
 
 5. (Optional) To group this {{{ .byoc }}} instance in a project for management, select the target project for the instance.
 
-6. In the **Resource Pool** area, select an active Resource Pool.
+6. In the **Resource Pool** area, select an active resource pool.
 
-    Only Resource Pools that match the selected cloud provider and region and are in the **Active** status are displayed. If no suitable Resource Pool is available and you are an `Organization Owner`, click **Create Resource Pool** to create one. After the Resource Pool is created, it is automatically selected for the new instance.
+    Only resource pools that match the selected cloud provider and region and are in the **Active** status are displayed. If no suitable resource pool is available and you are an `Organization Owner`, click **Create Resource Pool** to create one. After the resource pool becomes active, it is automatically selected for the new instance.
 
 7. In the **Capacity** area, set the maximum number of Request Capacity Units (RCUs) for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
 
-8. For {{{ .byoc }}} instances, the high availability mode is inherited from the selected Resource Pool. If the Resource Pool uses Regional high availability, the instance uses Regional high availability. If the Resource Pool uses Zonal high availability, the instance uses Zonal high availability. You cannot configure the high availability mode when you create an instance. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
+8. For {{{ .byoc }}} instances, the high availability mode is inherited from the selected resource pool. If the resource pool uses regional high availability, the instance uses regional high availability. If the resource pool uses zonal high availability, the instance uses zonal high availability. You cannot configure the high availability mode when you create a BYOC instance. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
 9. Click **Create**.
 
