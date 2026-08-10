@@ -16,7 +16,7 @@ This section demonstrates how to use the comparison diagnostic feature to diagno
 
 ![QPS example](/media/dashboard/dashboard-diagnostics-usage1.png)
 
-The result of a `go-ycsb` pressure test is shown in the image above. You can see that at `2020-03-10 13:24:30`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use diagnostic report of TiDB Dashboard to find out the cause.
+The result of a `go-ycsb` stress test is shown in the image above. You can see that at `2020-03-10 13:24:30`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use diagnostic report of TiDB Dashboard to find out the cause.
 
 Generate a report that compares the system in the following two time ranges:
 
@@ -66,7 +66,7 @@ If a large query has not been executed, the query is not recorded in the slow lo
 
 ![QPS results](/media/dashboard/dashboard-diagnostics-usage3.png)
 
-The result of another `go-ycsb` pressure test is shown in the image above. You can see that at `2020-03-08 01:46:30`, QPS suddenly began to drop and did not recover.
+The result of another `go-ycsb` stress test is shown in the image above. You can see that at `2020-03-08 01:46:30`, QPS suddenly began to drop and did not recover.
 
 Generate a report that compares the system in the following two time ranges:
 
@@ -97,7 +97,7 @@ Because the diagnostics might be wrong, using a comparison report might help DBA
 
 ![QPS results](/media/dashboard/dashboard-diagnostics-usage5.png)
 
-The result of a `go-ycsb` pressure test is shown in the image above. You can see that at `2020-05-22 22:14:00`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use the comparison diagnostic report of TiDB Dashboard to find out the cause.
+The result of a `go-ycsb` stress test is shown in the image above. You can see that at `2020-05-22 22:14:00`, QPS suddenly began to decrease. After 3 minutes, QPS began to return to normal. You can use the comparison diagnostic report of TiDB Dashboard to find out the cause.
 
 Generate a report that compares the system in the following two time ranges:
 
@@ -111,6 +111,6 @@ After generating the comparison report, check the **Max diff item** report. This
 
 From the result above, you can see that the Coprocessor requests in T2 are much more than those in T1. It might be that some large queries appear in T2 that bring more load.
 
-In fact, during the entire time range from T1 to T2, the `go-ycsb` pressure test is running. Then 20 `tpch` queries are running during T2. So it is the `tpch` queries that cause many Coprocessor requests.
+In fact, during the entire time range from T1 to T2, the `go-ycsb` stress test is running. Then 20 `tpch` queries are running during T2. So it is the `tpch` queries that cause many Coprocessor requests.
 
 If such a large query whose execution time exceeds the threshold of slow log is recorded in the slow log. You can check the `Slow Queries In Time Range t2` report to see whether there is any slow query. However, some queries in T1 might become slow queries in T2, because in T2, other loads cause their executions to slow down.
