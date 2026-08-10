@@ -5,7 +5,7 @@ summary: Learn how to estimate the RU capacity of your TiDB Cloud Dedicated clus
 
 # Calibrate Resource
 
-[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for system resources, which is relevant to resource consumption. Before you allocate resources to [resource groups](/tidb-resource-control-ru-groups.md), it is recommended to estimate the total RU capacity of your cluster first.
+[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) is a resource abstraction unit that represents system resource consumption. Before you allocate resources to [resource groups](/tidb-resource-control-ru-groups.md), it is recommended to estimate the total RU capacity of your cluster first.
 
 For TiDB Cloud Dedicated clusters, you can estimate the RU capacity by using the **Calibrate Resource** feature on the **Monitoring** page of the TiDB Cloud console. This feature is available for all TiDB Cloud Dedicated clusters.
 
