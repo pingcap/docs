@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.1.4 Release Notes
 summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
+aliases: ['/tidb/dev/release-5.1.4/','/tidb/v5.1/release-5.1.4','/tidb/v5.4/release-5.1.4','/tidb/v6.1/release-5.1.4','/tidb/v6.5/release-5.1.4','/tidb/v7.1/release-5.1.4','/tidb/v7.5/release-5.1.4','/tidb/v8.1/release-5.1.4']
 ---
 
 # TiDB 5.1.4 Release Notes

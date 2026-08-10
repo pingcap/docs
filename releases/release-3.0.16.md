@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.16 Release Notes
 summary: TiDB 3.0.16 was released on July 03, 2020. The release includes improvements such as support for 'is null' filter condition, handling of SQL timeout issues, and removal of sensitive information in slow query logs. Bug fixes include resolving data inconsistency issues, fixing panic issues, and addressing errors in JSON comparison and query results. TiKV and PD also received bug fixes for issues related to store heartbeats, peer removal, and error handling.
+aliases: ['/tidb/dev/release-3.0.16/','/tidb/v3.0/release-3.0.16','/docs/dev/releases/release-3.0.16/','/tidb/v5.4/release-3.0.16','/tidb/v6.1/release-3.0.16','/tidb/v6.5/release-3.0.16','/tidb/v7.1/release-3.0.16','/tidb/v7.5/release-3.0.16','/tidb/v8.1/release-3.0.16']
 ---
 
 # TiDB 3.0.16 Release Notes

@@ -1,6 +1,7 @@
 ---
 title: TiDB 1.0.8 Release Notes
 summary: TiDB 1.0.8 is released with updates including fixes for various issues, performance optimizations, and stability improvements. PD and TiKV also have updates related to reducing lock overheat, fixing leader selection issues, and improving starting speed. To upgrade, follow the order of PD -> TiKV -> TiDB.
+aliases: ['/tidb/dev/release-1.0.8/','/tidb/v1.0/release-1.0.8','/docs/dev/releases/release-1.0.8/','/docs/dev/releases/108/','/tidb/v5.4/release-1.0.8','/tidb/v6.1/release-1.0.8','/tidb/v6.5/release-1.0.8','/tidb/v7.1/release-1.0.8','/tidb/v7.5/release-1.0.8','/tidb/v8.1/release-1.0.8']
 ---
 
 # TiDB 1.0.8 Release Notes

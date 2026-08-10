@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.1 RC4 Release Notes
 summary: TiDB 2.1 RC4 was released on October 23, 2018, with improvements in stability, SQL optimizer, statistics information, and execution engine. Fixes include issues with SQL optimizer, execution engine, statistics, server, compatibility, expressions, and DDL. PD fixes issues with tombstone TiKV, data race, PD server getting stuck, and leader switching. TiKV optimizes RocksDB Write stall issue, adds raftstore tick metrics, and upgrades RocksDB and grpcio.
+aliases: ['/tidb/dev/release-2.1-rc.4/','/tidb/v2.1/release-2.1-rc.4','/docs/dev/releases/release-2.1-rc.4/','/docs/dev/releases/21rc4/','/tidb/v5.4/release-2.1-rc.4','/tidb/v6.1/release-2.1-rc.4','/tidb/v6.5/release-2.1-rc.4','/tidb/v7.1/release-2.1-rc.4','/tidb/v7.5/release-2.1-rc.4','/tidb/v8.1/release-2.1-rc.4']
 ---
 
 # TiDB 2.1 RC4 Release Notes

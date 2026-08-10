@@ -361,7 +361,7 @@ When using public endpoints, you can verify network connectivity and access both
 
 <CustomContent plan="dedicated">
 
-> **Note**:
+> **Note:**
 >
 > The egress IP range for your firewall is available only during Data Migration task creation. You cannot obtain this IP range in advance. Before you begin, ensure that you:
 >

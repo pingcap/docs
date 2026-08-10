@@ -1,6 +1,7 @@
 ---
 title: TiDB 2.0.3 Release Notes
 summary: TiDB 2.0.3 was released on June 1, 2018, with improvements in system compatibility and stability. It includes various fixes and optimizations for TiDB, PD, and TiKV. Some highlights are support for modifying log level online, fixing issues with unique index and `ON DUPLICATE KEY UPDATE`, and addressing panic issues in specific conditions.
+aliases: ['/tidb/dev/release-2.0.3/','/tidb/v2.0/release-2.0.3','/docs/dev/releases/release-2.0.3/','/docs/dev/releases/203/','/tidb/v5.4/release-2.0.3','/tidb/v6.1/release-2.0.3','/tidb/v6.5/release-2.0.3','/tidb/v7.1/release-2.0.3','/tidb/v7.5/release-2.0.3','/tidb/v8.1/release-2.0.3']
 ---
 
 # TiDB 2.0.3 Release Notes

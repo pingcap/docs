@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.1 Release Notes
 summary: TiDB 5.1 introduces support for Common Table Expression, dynamic privilege feature, and Stale Read. It also includes new statistics type, Lock View feature, and TiKV write rate limiter. Compatibility changes include new system and configuration variables. Other improvements and bug fixes are also part of this release.
+aliases: ['/tidb/dev/release-5.1.0/','/tidb/v5.1/release-5.1.0','/tidb/v5.4/release-5.1.0','/tidb/v6.1/release-5.1.0','/tidb/v6.5/release-5.1.0','/tidb/v7.1/release-5.1.0','/tidb/v7.5/release-5.1.0','/tidb/v8.1/release-5.1.0']
 ---
 
 # TiDB 5.1 Release Notes

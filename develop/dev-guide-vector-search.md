@@ -22,7 +22,7 @@ Currently, TiDB supports various embedding models, such as Amazon Titan, Cohere,
 
 ## Integrations
 
-To accelerate your development, you can integrate TiDB vector search with popular AI frameworks (such as LlamaIndex and LangChain), embedding services (such as Jina AI), and ORM libraries (such as SQLAlchemy, Peewee, and Django ORM). You can choose the one that best fits your needs.
+To accelerate your development, you can integrate TiDB vector search with popular AI frameworks (such as LlamaIndex), embedding services (such as Jina AI), and ORM libraries (such as SQLAlchemy, Peewee, and Django ORM). You can choose the one that best fits your needs.
 
 For more information, see [AI Integrations for TiDB](/ai/integrations/vector-search-integration-overview.md).
 
