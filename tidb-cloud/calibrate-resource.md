@@ -25,7 +25,7 @@ For TiDB Cloud Dedicated clusters, you can estimate the RU capacity by using the
 
 3. Choose one of the following calibration methods:
 
-    - **Calibrate by Hardware**: estimates the capacity based on the current cluster configuration and the workload model you select. The following workload types are supported and the the default workload type is `TPCC`.
+    - **Calibrate by Hardware**: estimates the capacity based on the current cluster configuration and the workload model you select. The following workload types are supported, and the default workload type is `TPCC`.
 
         - `TPCC`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `TPC-C`.
         - `OLTP_WRITE_ONLY`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
