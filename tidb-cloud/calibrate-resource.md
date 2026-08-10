@@ -34,7 +34,7 @@ For TiDB Cloud Dedicated clusters, you can estimate the RU capacity by using the
 
     - **Calibrate by Workload**: estimates the capacity based on the actual workload in a selected time window. The time window ranges from 10 minutes to 24 hours.
 
-        If the workload in the selected time window is too low, TiDB is unable to reach a capacity estimation. In this case, select another time window with a higher workload, or calibrate the resource by hardware instead.
+        If the workload in the selected time window is too low, TiDB cannot generate a capacity estimate. In this case, select another time window with a higher workload, or calibrate resources based on your hardware instead.
 
 4. View the estimation results in the following cards:
 
