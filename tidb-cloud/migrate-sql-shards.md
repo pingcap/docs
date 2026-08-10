@@ -138,7 +138,7 @@ Query OK, 0 rows affected (0.17 sec)
 
 ### ステップ4. Amazon S3へのアクセスを設定する {#step-4-configure-amazon-s3-access}
 
-[Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)」の手順に従って、ソースデータにアクセスするためのロール ARN を取得します。
+[Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)の手順に従って、ソースデータにアクセスするためのロール ARN を取得します。
 
 以下の例では、主要なポリシー設定のみを示しています。Amazon S3 のパスを、ご自身の値に置き換えてください。
 
@@ -285,7 +285,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     | パラメータ                   | 説明                                                                        |
     | ----------------------- | ------------------------------------------------------------------------- |
-    | `--master-addr`         | `{advertise-addr}`が接続されるクラスタ内の任意のDMマスターノードの`dmctl` 。例：192.168.11.110:9261 |
+    | `--master-addr`         | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`。例：192.168.11.110:9261 |
     | `operate-source create` | データソースをDMクラスターにロードします。                                                    |
 
     以下は出力例です。
@@ -470,7 +470,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 
 | パラメータ           | 説明                                                                        |
 | --------------- | ------------------------------------------------------------------------- |
-| `--master-addr` | `{advertise-addr}`が接続されるクラスタ内の任意のDMマスターノードの`dmctl` 。例：192.168.11.110:9261 |
+| `--master-addr` | dmctlが接続するクラスタ内の任意のDMマスターノードの`{advertise-addr}`。例：192.168.11.110:9261 |
 | `start-task`    | 移行タスクを開始します。                                                              |
 
 以下は出力例です。
