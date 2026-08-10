@@ -110,7 +110,7 @@ A TiDB Cloud BYOC deployment includes the following major components:
 
 - **TiDB Cloud control plane**: provides the TiDB Cloud console, organization and project management, billing, lifecycle orchestration, monitoring views, alerting, and maintenance workflows.
 - **BYOC data plane**: runs the TiDB service and related infrastructure in your cloud account. TiDB Cloud operates this environment based on the permissions granted during BYOC onboarding.
-- **Resource Pool**: defines the underlying physical resource, network, and capacity boundary for one or more {{{ .byoc }}} instances. Each Resource Pool has its own capacity configuration, Resource Pool CIDR, high availability mode, and AWS resource tags.
+- **Resource pool**: defines the underlying physical resource, network, and capacity boundary for one or more {{{ .byoc }}} instances. Each resource pool has its own capacity configuration, resource pool CIDR, high availability mode, and AWS resource tags.
 - **TiDB service VPC**: hosts TiDB service components that serve application traffic.
 - **Observability service VPC**: hosts observability components used to collect metrics, logs, and operational data for the BYOC deployment.
 - **Application VPC**: hosts your applications. You manage this VPC and configure network connectivity to access the BYOC TiDB service.

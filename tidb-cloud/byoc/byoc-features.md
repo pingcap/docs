@@ -51,7 +51,7 @@ This document lists the feature support status for TiDB Cloud BYOC.
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
-    <td>Resource Pool management</td>
+    <td>Resource pool management</td>
     <td style="text-align:center;">🔒</td>
   </tr>
   <tr>
