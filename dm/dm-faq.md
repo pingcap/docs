@@ -24,7 +24,7 @@ Alibaba Cloud RDS の主キーのないアップストリーム テーブルの�
 
 ## アップストリームで実行されたステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DMは、複数のDDL変更操作を含む単一のステートメントを、1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。上流で実行されるステートメントには1つのDDL操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、`pingcap/tiflow`リポジトリに[問題](https://github.com/pingcap/tiflow/issues)を提出できます。
+DMは、複数のDDL変更操作を含む単一のステートメントを、1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。上流で実行されるステートメントには1つのDDL操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、`pingcap/tiflow`リポジトリに[問題](https://github.com/pingcap/tiflow/issues)を報告できます。
 
 ## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
