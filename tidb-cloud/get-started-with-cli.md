@@ -7,7 +7,7 @@ summary: Learn how to manage {{{ .starter }}} and Essential instances through th
 
 > **Note:**
 >
-> `ticloud` is the TiDB Cloud CLI for Essential. tdc does not replace `ticloud` for Essential. For new TiDB Cloud Starter automation and TiDB Cloud Filesystem workflows, use the [`tdc` CLI](/ai/tdc/tdc-overview.md). Continue to use `ticloud` for Essential and for operations that tdc does not provide, such as import, export, and audit-log commands.
+> `ticloud` is the TiDB Cloud CLI for Essential. `ti` does not replace `ticloud` for Essential. For new TiDB Cloud Starter automation and TiDB Cloud Filesystem workflows, use the [TiDB Cloud Command Line Interface](/ai/ti/ti-overview.md). Continue to use `ticloud` for Essential and for operations that `ti` does not provide, such as import, export, and audit-log commands.
 
 TiDB Cloud provides the command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud Starter and Essential from your terminal with a few lines of commands. For example, you can perform the following operations using `ticloud`:
 

@@ -20,8 +20,8 @@ Get up and running quickly with TiDB's AI capabilities.
 
 | Document | Description |
 | --- | --- |
-| [TiDB Cloud Command Line Interface Overview](/ai/tdc/tdc-overview.md) | Learn when to use the TiDB Cloud CLI, how it differs from the `ticloud` CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
-| [Get Started with TiDB Cloud CLI](/ai/tdc/tdc-quick-start.md) | Install and configure the TiDB Cloud CLI, then complete a first database or Filesystem operation. |
+| [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) | Learn when to use the TiDB Cloud CLI, how it differs from the `ticloud` CLI and TiDB Cloud console, and which Starter and Filesystem workflows it supports. |
+| [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) | Install and configure the TiDB Cloud CLI, then complete a first database or Filesystem operation. |
 
 ## Concepts
 
@@ -84,42 +84,42 @@ Technical reference documentation for TiDB's AI and vector search features.
 
 ### TiDB Cloud CLI (Preview)
 
-The command reference follows the two-level `tdc` command tree. Every command has a dedicated page with its syntax and examples. Expand **Command Reference** in the documentation navigation to browse commands by family.
+The command reference follows the two-level `ti` command tree. Every command has a dedicated page with its syntax and examples. Expand **Command Reference** in the documentation navigation to browse commands by family.
 
 #### Command reference
 
 | Document | Description |
 | --- | --- |
-| [TiDB Cloud Command Line Interface Overview](/ai/tdc/tdc-overview.md) | Decide when to use the TiDB Cloud CLI and understand its scope relative to `ticloud` and the TiDB Cloud console. |
-| [TiDB Cloud CLI Command Reference](/ai/tdc/reference/tdc-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
-| [`tdc configure`](/ai/tdc/reference/commands/tdc/tdc-configure.md) | Configure a local profile interactively or non-interactively. |
-| [`tdc update`](/ai/tdc/reference/commands/tdc/tdc-update.md) | Check for and install release updates. |
-| [`tdc organization list-projects`](/ai/tdc/reference/commands/organization/tdc-organization-list-projects.md) | List accessible TiDB Cloud projects. |
-| [`tdc db create-db-cluster`](/ai/tdc/reference/commands/db/tdc-db-create-db-cluster.md) | Start with the database command reference. |
-| [`tdc fs create-file-system`](/ai/tdc/reference/commands/fs/tdc-fs-create-file-system.md) | Start with the Filesystem command reference. |
-| [`tdc fs-git clone-git-workspace`](/ai/tdc/reference/commands/fs-git/tdc-fs-git-clone-git-workspace.md) | Start with the Filesystem Git command reference. |
-| [`tdc fs-journal create-journal`](/ai/tdc/reference/commands/fs-journal/tdc-fs-journal-create-journal.md) | Start with the Filesystem journal command reference. |
-| [`tdc fs-vault create-secret`](/ai/tdc/reference/commands/fs-vault/tdc-fs-vault-create-secret.md) | Start with the Filesystem Vault command reference. |
-| [TiDB Cloud CLI Configuration and Credentials](/ai/tdc/reference/tdc-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
-| [TiDB Cloud CLI Regions, Security, and Limitations](/ai/tdc/reference/tdc-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and preview constraints. |
-| [Troubleshoot TiDB Cloud CLI](/ai/tdc/reference/tdc-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
+| [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) | Decide when to use the TiDB Cloud CLI and understand its scope relative to `ticloud` and the TiDB Cloud console. |
+| [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) | Command tree, global flags, output, queries, dry-run, help, errors, aliases, and links to command pages. |
+| [`ti configure`](/ai/ti/reference/commands/ti/ti-configure.md) | Configure a local profile interactively or non-interactively. |
+| [`ti update`](/ai/ti/reference/commands/ti/ti-update.md) | Check for and install release updates. |
+| [`ti organization list-projects`](/ai/ti/reference/commands/organization/ti-organization-list-projects.md) | List accessible TiDB Cloud projects. |
+| [`ti db create-db-cluster`](/ai/ti/reference/commands/db/ti-db-create-db-cluster.md) | Start with the database command reference. |
+| [`ti fs create-file-system`](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md) | Start with the Filesystem command reference. |
+| [`ti fs-git clone-git-workspace`](/ai/ti/reference/commands/fs-git/ti-fs-git-clone-git-workspace.md) | Start with the Filesystem Git command reference. |
+| [`ti fs-journal create-journal`](/ai/ti/reference/commands/fs-journal/ti-fs-journal-create-journal.md) | Start with the Filesystem journal command reference. |
+| [`ti fs-vault create-secret`](/ai/ti/reference/commands/fs-vault/ti-fs-vault-create-secret.md) | Start with the Filesystem Vault command reference. |
+| [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) | Profiles, precedence, local state, credentials, mount locators, and logs. |
+| [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md) | Placement, authentication boundaries, platforms, durability, and preview constraints. |
+| [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) | Diagnose authentication, quota, SQL, companion, selection, and mount failures. |
 
 #### Scenarios for users and automation
 
 | Document | Description |
 | --- | --- |
-| [Daily Workflow](/ai/tdc/reference/tdc-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
-| [Query SQL with Roles](/ai/tdc/reference/tdc-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
-| [Share a Filesystem Across Machines](/ai/tdc/reference/tdc-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
-| [Hand Off CI Artifacts Between Jobs](/ai/tdc/reference/tdc-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete TiDB Cloud CLI profile. |
+| [Daily Workflow](/ai/ti/reference/ti-daily-workflow-example.md) | Manage one Starter cluster and Filesystem in a routine operator flow. |
+| [Query SQL with Roles](/ai/ti/reference/ti-query-sql-with-roles-example.md) | Use explicit read-only, read-write, and admin SQL roles. |
+| [Share a Filesystem Across Machines](/ai/ti/reference/ti-share-filesystem-across-machines-example.md) | Transfer an owner token securely and verify cross-machine visibility. |
+| [Hand Off CI Artifacts Between Jobs](/ai/ti/reference/ti-ci-artifact-handoff-example.md) | Persist build output across isolated jobs without copying a complete TiDB Cloud CLI profile. |
 
 #### Scenarios for AI agents
 
 | Document | Description |
 | --- | --- |
-| [Agent Sandbox](/ai/tdc/reference/tdc-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
-| [Persistent Agent State](/ai/tdc/reference/tdc-persistent-agent-state-example.md) | Preserve plans, checkpoints, and results across disposable sandboxes. |
-| [Parallel Agent Dataset](/ai/tdc/reference/tdc-parallel-agent-dataset-example.md) | Give multiple agents read-only access to one shared unstructured dataset. |
-| [Git Workspace for Agents](/ai/tdc/reference/tdc-git-workspace-for-agents-example.md) | Prepare a mounted Git workspace and isolated linked worktree. |
-| [Journal an Agent Workflow](/ai/tdc/reference/tdc-journal-agent-workflow-example.md) | Record structured events and verify their hash chain. |
-| [Delegate Vault Secrets](/ai/tdc/reference/tdc-vault-agent-secrets-example.md) | Grant an agent temporary access to one secret field. |
+| [Agent Sandbox](/ai/ti/reference/ti-agent-sandbox-example.md) | Give a clean sandbox Filesystem access without TiDB Cloud API keys. |
+| [Persistent Agent State](/ai/ti/reference/ti-persistent-agent-state-example.md) | Preserve plans, checkpoints, and results across disposable sandboxes. |
+| [Parallel Agent Dataset](/ai/ti/reference/ti-parallel-agent-dataset-example.md) | Give multiple agents read-only access to one shared unstructured dataset. |
+| [Git Workspace for Agents](/ai/ti/reference/ti-git-workspace-for-agents-example.md) | Prepare a mounted Git workspace and isolated linked worktree. |
+| [Journal an Agent Workflow](/ai/ti/reference/ti-journal-agent-workflow-example.md) | Record structured events and verify their hash chain. |
+| [Delegate Vault Secrets](/ai/ti/reference/ti-vault-agent-secrets-example.md) | Grant an agent temporary access to one secret field. |
