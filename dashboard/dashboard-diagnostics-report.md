@@ -61,7 +61,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 #### クラスタトポロジ情報 {#cluster-topology-info}
 
-表`Cluster Info`はクラスタトポロジ情報を示しています。この表の情報はTiDB [情報スキーマ.クラスタ情報](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
+表`Cluster Info`はクラスタトポロジ情報を示しています。この表の情報はTiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -77,7 +77,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 ### 診断情報 {#diagnostic-information}
 
-TiDBには自動診断結果が組み込まれています。各フィールドの説明については、 [情報スキーマ.検査結果](/information-schema/information-schema-inspection-result.md)システムテーブルを参照してください。
+TiDBには自動診断結果が組み込まれています。各フィールドの説明については、 [information_schema.inspection-result](/information-schema/information-schema-inspection-result.md)システムテーブルを参照してください。
 
 ### ロード情報 {#load-info}
 
