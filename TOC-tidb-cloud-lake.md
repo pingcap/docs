@@ -64,6 +64,8 @@
     - [Load from Bucket](/tidb-cloud-lake/guides/load-from-bucket.md)
     - [Load from Local File](/tidb-cloud-lake/guides/load-from-local-file.md)
     - [Load from Remote File](/tidb-cloud-lake/guides/load-from-remote-file.md)
+  - Load with Platforms
+    - [Load with dbt](/tidb-cloud-lake/guides/load-with-dbt.md)
   - Load Semi-structured Data
     - [Overview](/tidb-cloud-lake/guides/load-semi-structured-data.md)
     - [Load Parquet](/tidb-cloud-lake/guides/load-parquet.md)
