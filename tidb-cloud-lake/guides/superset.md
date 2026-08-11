@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Lake with Apache Superset
+title: Connect to TiDB Cloud Lake with Apache Superset
 summary: Learn how to install the TiDB Cloud Lake SQLAlchemy dialect in Apache Superset and connect Superset to a TiDB Cloud Lake warehouse.
 ---
 
-# Use TiDB Cloud Lake with Apache Superset
+# Connect to TiDB Cloud Lake with Apache Superset
 
 [Apache Superset](https://superset.apache.org/) is an open-source data exploration and visualization platform. Superset connects to {{{ .lake }}} through the [TiDB Cloud Lake dialect for SQLAlchemy](https://github.com/tidbcloud/lake-sqlalchemy).
 

@@ -1,9 +1,9 @@
 ---
-title: Use TiDB Cloud Lake with Jupyter Notebook
+title: Connect to TiDB Cloud Lake with Jupyter Notebook
 summary: Learn how to connect Jupyter Notebook to TiDB Cloud Lake with SQLAlchemy, run queries, and visualize query results with pandas.
 ---
 
-# Use TiDB Cloud Lake with Jupyter Notebook
+# Connect to TiDB Cloud Lake with Jupyter Notebook
 
 [Jupyter Notebook](https://jupyter.org/) is an interactive environment for running code, querying data, and creating visualizations. You can connect a notebook to {{{ .lake }}} through the [TiDB Cloud Lake dialect for SQLAlchemy](https://github.com/tidbcloud/lake-sqlalchemy).
 
