@@ -40,7 +40,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Improve the networking experience across TiDB Cloud plans with the following updates:
+- Improve the networking experience across TiDB Cloud plans with the following updates in the [TiDB Cloud console](https://tidbcloud.com/):
 
     - The **Networking** page now uses more consistent naming for endpoint configurations across TiDB Cloud plans.
     - For endpoint types with no configured endpoints, the **Networking** page now displays only the corresponding action button instead of an empty table.
