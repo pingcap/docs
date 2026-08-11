@@ -29,12 +29,12 @@ Values are case-insensitive.
 | Table Type | IA Support | Notes |
 |-|-|-|
 | Regular non-partitioned table | Supported | Via `STORAGE_CLASS` syntactic sugar or `ENGINE_ATTRIBUTE` |
-| Range partitioned table | Supported | Must use `ENGINE_ATTRIBUTE` |
-| Range Columns partitioned table | Supported | Must use `ENGINE_ATTRIBUTE` |
-| List partitioned table | Supported | Must use `ENGINE_ATTRIBUTE` |
-| List Columns partitioned table | Supported | Must use `ENGINE_ATTRIBUTE` |
-| Hash partitioned table | **Not supported** | — |
-| Key partitioned table | **Not supported** | — |
+| Range partition | Supported | Must use `ENGINE_ATTRIBUTE` |
+| Range Columns partition | Supported | Must use `ENGINE_ATTRIBUTE` |
+| List partition | Supported | Must use `ENGINE_ATTRIBUTE` |
+| List Columns partitions | Supported | Must use `ENGINE_ATTRIBUTE` |
+| Hash partitions | **Not supported** | — |
+| Key partitions | **Not supported** | — |
 
 #### Storage type inheritance rules for indexes and related objects
 
@@ -81,7 +81,7 @@ ALTER TABLE t1 STORAGE_CLASS='STANDARD';
 ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"STANDARD"}';
 ```
 
-ALTER operations preserve all data access, and SQL reads/writes are not affected during the conversion.
+ALTER operations preserve all data access, and SQL reads/writes are supported during the conversion.
 
 ### Partitioned table DDL
 
@@ -281,7 +281,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 
 ### Write optimization
 
-- When importing concurrently into IA partitions, having each thread target a different IA partition reduces lock contention and improves throughput. Test environment measurements: random writes to IA partitions averaged 50k rows/sec; fixed single-thread writes to the same IA partition averaged 70k rows/sec (~40% improvement).
+- Benchmark concurrent writes with the same thread count, workload, and partition distribution before applying this tuning. In one test environment, random writes to IA partitions averaged 50k rows/sec, while fixed single-thread writes to one IA partition averaged 70k rows/sec; these results are not directly comparable.
 - Newly imported data only transitions to IA mode after flush/compaction. Large-range queries immediately after import may encounter cold cache.
 
 > These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
