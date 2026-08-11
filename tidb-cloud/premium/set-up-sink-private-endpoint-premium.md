@@ -79,7 +79,7 @@ The configuration steps vary depending on the cloud provider where your instance
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
-6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+6. If this private endpoint is created for Apache Kafka, select the **Configure Advertised Listener for Kafka** checkbox.
 7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
@@ -98,7 +98,6 @@ The configuration steps vary depending on the cloud provider where your instance
 3. Follow the reminder to add TiDB Cloud's Alibaba Cloud account ID to the allowlist of your endpoint service to grant TiDB Cloud VPC access. For more information, see [managing account IDs in the allowlist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
-6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
 7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.

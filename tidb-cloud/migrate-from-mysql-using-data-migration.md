@@ -536,7 +536,7 @@ To create a private endpoint from the **Networking** page, take the following st
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the overview page of your {{{ .premium }}} instance.
 2. In the left navigation pane, click **Settings** > **Networking**.
-3. In the **AWS Private Endpoint for External Services** section, click **Create Private Endpoint for External Services**.
+3. In the **AWS Private Endpoints for External Services** section, click **Create Private Endpoint for External Services**.
 4. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint and the **Endpoint Service Name** you copied when setting up AWS PrivateLink for the MySQL source database.
 
     > **Note:**
@@ -729,7 +729,7 @@ On the **Create Migration Job** page, configure the source and target connection
     - Based on the selected **Connectivity method**, do the following:
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **Private Endpoint for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
+        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **Private Endpoints for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
 
     </CustomContent>
 
