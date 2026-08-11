@@ -58,10 +58,10 @@ CREATE TABLE books (
 Send loading data request with the following command:
 
 ```shell
-❯ lakesql --query='INSERT INTO book_db.books from @_lake_load file_format=(type=csv)' --data=@books.csv
+❯ lakesql --query='INSERT INTO book_db.books from @_databend_load file_format=(type=csv)' --data=@books.csv
 ```
 
-- The `@_lake_load` is a placeholder representing local file data.
+- The `@_databend_load` is a placeholder representing local file data.
 - The [file_format clause](/tidb-cloud-lake/sql/input-output-file-formats.md) uses the same syntax as the COPY command.
 
 Alternatively, use a Python script:
@@ -71,7 +71,7 @@ import tidbcloudlake_driver
 dsn = "lake://root:@localhost:8000/?sslmode=disable"
 client = tidbcloudlake_driver.BlockingLakeClient(dsn)
 conn = client.get_conn()
-query = "INSERT INTO book_db.books from @_lake_load file_format=(type=csv)"
+query = "INSERT INTO book_db.books from @_databend_load file_format=(type=csv)"
 progress = conn.load_file(query, "book.csv")
 conn.close()
 ```
@@ -95,7 +95,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
     LakeConnection lakeConnection = connection.unwrap(LakeConnection.class);
 
     String sql =
-        "INSERT INTO book_db.books FROM @_lake_load FILE_FORMAT=(TYPE=CSV)";
+        "INSERT INTO book_db.books FROM @_databend_load FILE_FORMAT=(TYPE=CSV)";
 
     int nUpdate = lakeConnection.loadStreamToTable(
         sql,
