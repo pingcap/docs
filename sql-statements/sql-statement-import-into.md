@@ -132,7 +132,11 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If not specified, the default format is `CSV`.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format regardless of the file extension. If you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+
+> **Note:**
+>
+> For wildcard paths, make sure that all matched files use the same data file format. TiDB determines one format for the import job and applies it to every matched file. Files that do not use that format can cause the import to fail. Use separate `IMPORT INTO` statements for different formats.
 
 ### WithOptions
 
