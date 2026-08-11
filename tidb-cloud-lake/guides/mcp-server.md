@@ -107,7 +107,7 @@ lake-mcp
 | `create_stage` | Creates a stage, subject to sandbox validation. |
 | `show_connections` | Lists connections. |
 
-## Safety model
+## Safe mode
 
 Safe mode is enabled by default. In safe mode:
 
