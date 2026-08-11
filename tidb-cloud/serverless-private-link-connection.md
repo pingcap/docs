@@ -60,7 +60,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     > **Note:**
     >
-    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on or after July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
     > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
 
 4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
@@ -108,7 +108,7 @@ Before creating the Amazon MSK Provisioned private link connection, ensure that 
 
     > **Note:**
     >
-    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on or after July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
     > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same AWS Region.
 
 4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
@@ -150,7 +150,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
     > **Note:**
     >
-    > - If your TiDB Cloud Essential instance is created on July 1, 2026 or later, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
+    > - If your TiDB Cloud Essential instance is created on or after July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint exclusive mode. In this mode, each {{{ .essential }}} instance uses its own standalone private endpoint, which eliminates the need to include the [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting.
     > - If your TiDB Cloud Essential instance is created before July 1, 2026, clicking **Create Private Endpoint for External Services** creates a private link connection in endpoint shared mode. In this mode, a single private endpoint can be shared by multiple {{{ .essential }}} instances in the same Alibaba Cloud Region.
 
 4. In the **Create Private Endpoint for External Services** dialog, enter the required information:
