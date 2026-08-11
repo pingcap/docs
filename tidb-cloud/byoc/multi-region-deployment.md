@@ -130,21 +130,21 @@ Before running the update script:
 
 1. Confirm the AWS Regions to be added.
 2. Select the Availability Zones for the new regions.
-3. Plan the O11Y CIDR for each new region and the Resource Pool CIDRs for Resource Pools that you plan to create. Different regions can use the same O11Y CIDR unless you use Metric Integration to connect Grafana to multiple regions. In that case, use non-overlapping O11Y CIDRs for those regions.
+3. Plan the O11Y CIDR for each new region and the resource pool CIDRs for the resource pools you plan to create. Different regions can use the same O11Y CIDR. However, if you use metric integration to connect Grafana to multiple regions, use non-overlapping O11Y CIDRs for those regions.
 4. Confirm whether each new region will:
     * share the existing PCA and hosted zones, or
     * use dedicated PCA and hosted zones.
 5. Review and increase AWS service quotas in each new region.
 6. Share the information for the new regions with your TiDB Cloud representative.
 
-For each new region, the O11Y CIDR and Resource Pool CIDRs must not overlap with:
+For each new region, the O11Y CIDR and resource pool CIDRs must not overlap with:
 
 * the O11Y CIDR in the same region;
-* any existing Resource Pool CIDR in the same region;
+* any existing resource pool CIDR in the same region;
 * existing application VPCs, on-premises networks, or VPN networks that will be connected through VPC Peering or VPN; or
-* other Resource Pools that will participate in cross-region replication.
+* other resource pools that will participate in cross-region replication.
 
-Resource Pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for Resource Pools that require cross-region connectivity or replication.
+Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
 
 ### Share existing PCA and hosted zones
 
