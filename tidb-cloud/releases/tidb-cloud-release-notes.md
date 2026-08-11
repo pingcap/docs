@@ -33,10 +33,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       For more information, see the following documentation:
 
-        - [MCP Client Integration](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
-        - [MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
-        - [Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
-        - [Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
 
 **Console changes**
 
