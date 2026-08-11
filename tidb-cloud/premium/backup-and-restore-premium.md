@@ -238,11 +238,11 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. The steps are the same as <CustomContent plan="premium">[creating a {{{ .premium }}} instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[creating a {{{ .byoc }}} instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
+5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. Follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
 
     <CustomContent plan="byoc">
 
-    For {{{ .byoc }}}, select an active Resource Pool in the same cloud provider and region as the backup. If no suitable Resource Pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create Resource Pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+    For {{{ .byoc }}}, select an active resource pool in the same cloud provider and region as the backup. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
     </CustomContent>
 
@@ -366,7 +366,7 @@ To restore backups from cloud storage, do the following:
 
     <CustomContent plan="byoc">
 
-    For {{{ .byoc }}}, select an active Resource Pool that matches the target cloud provider and region. If no suitable Resource Pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create Resource Pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+    For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
 
     </CustomContent>
 

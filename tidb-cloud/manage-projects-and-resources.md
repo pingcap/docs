@@ -18,7 +18,7 @@ A TiDB Cloud resource is a deployable unit that you can manage. It can be one of
 
 <CustomContent plan="byoc">
 
-In {{{ .byoc }}}, a Resource Pool is an organization-level BYOC resource that provides the underlying physical resources, network, and capacity for BYOC instances. Resource Pools are managed from **BYOC Management** > **Resource Pools** and are not associated with projects. For more information, see [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md).
+In {{{ .byoc }}}, a resource pool is an organization-level BYOC resource that provides the underlying physical resources, network, and capacity for BYOC instances. Resource pools are managed from **BYOC Management** > **Resource Pools** and are not associated with projects. For more information, see [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md).
 
 </CustomContent>
 
