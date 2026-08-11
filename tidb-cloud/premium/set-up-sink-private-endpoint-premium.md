@@ -82,12 +82,12 @@ On AWS, choose a connection type based on the downstream service:
 
 **AWS Endpoint Service**
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
-2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
+1. On the **Networking** page, click **Create Private Endpoint for External Services** in the **AWS Private Endpoints for External Services** section.
+2. In the displayed dialog, enter a name for the private endpoint.
 3. Follow the reminder to authorize the [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) of TiDB Cloud to create an endpoint.
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section, and then select **AWS Endpoint Service** as the connection type.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
-6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+6. If this private endpoint is created for Apache Kafka, select the **Configure Advertised Listener for Kafka** checkbox.
 7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB Cloud will generate broker addresses with subdomains for each availability zone.
@@ -97,8 +97,8 @@ On AWS, choose a connection type based on the downstream service:
 
 **Amazon MSK Provisioned**
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **AWS Private Endpoint for External Services** section.
-2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint, and then select **AWS MSK Provisioned** as the connection type.
+1. On the **Networking** page, click **Create Private Endpoint for External Services** in the **AWS Private Endpoints for External Services** section.
+2. In the displayed dialog, enter a name for the private endpoint, and then select **AWS MSK Provisioned** as the connection type.
 3. Enter the **MSK Cluster ARN** of your Amazon MSK Provisioned cluster. To learn about how to create an Amazon MSK Provisioned cluster for changefeeds, see [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
 4. Click **Create** to validate the configurations and create the private endpoint.
 
@@ -108,12 +108,12 @@ On AWS, choose a connection type based on the downstream service:
 
 <div label="Alibaba Cloud">
 
-1. On the **Networking** page, click **Create Private Endpoint** in the **Alibaba Cloud Private Endpoint for Changefeed** section.
-2. In the **Create Private Endpoint for Changefeed** dialog, enter a name for the private endpoint.
+1. On the **Networking** page, click **Create Private Endpoint for External Services** in the **Alibaba Cloud Private Endpoints for External Services** section.
+2. In the **Create Private Endpoint for External Services** dialog, enter a name for the private endpoint.
 3. Follow the reminder to add TiDB Cloud's Alibaba Cloud account ID to the allowlist of your endpoint service to grant TiDB Cloud VPC access. For more information, see [managing account IDs in the allowlist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists).
 4. Enter the **Endpoint Service Name** that you collected in the [Network](#network) section.
 5. Select the **Number of AZs**. Ensure that the number of AZs and the AZ IDs match your Kafka deployment.
-6. If this private endpoint is created for Apache Kafka, enable the **Advertised Listener for Kafka** option.
+6. If this private endpoint is created for Apache Kafka, select the **Configure Advertised Listener for Kafka** checkbox.
 7. Configure the advertised listener for Kafka using either the **TiDB Managed** domain or the **Custom** domain.
 
     - To use the **TiDB Managed** domain for advertised listeners, enter a unique string in the **Domain Pattern** field, and then click **Generate**. TiDB will generate broker addresses with subdomains for each availability zone.
