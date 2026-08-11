@@ -729,7 +729,7 @@ On the **Create Migration Job** page, configure the source and target connection
     - Based on the selected **Connectivity method**, do the following:
 
         - If **Public** is selected, fill in the **Hostname or IP address** field with the hostname or IP address of the data source.
-        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **Private Endpoints for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
+        - If **Private Link** is selected, in the **Private Endpoint** field, select an existing private endpoint, or click **Create a Private Endpoint here** to create one. Private endpoints are managed under **Networking** > **AWS Private Endpoints for External Services** for your {{{ .premium }}} instance. You can reuse a private endpoint across multiple Data Migration jobs and changefeeds. For setup details, see [Private link or private endpoint](#private-link-or-private-endpoint).
 
     </CustomContent>
 
