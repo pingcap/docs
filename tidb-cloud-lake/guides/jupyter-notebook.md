@@ -1,309 +1,134 @@
 ---
-title: Jupyter Notebook
-summary: Jupyter Notebook is a web-based interactive application that enables you to create notebook documents that feature live code, interactive plots, widgets, equations, images, etc., and share these documents easily. It is also quite versatile as it can support many programming languages via kernels such as Julia, Python, Ruby, Scala, Haskell, and R.
+title: Use TiDB Cloud Lake with Jupyter Notebook
+summary: Learn how to connect Jupyter Notebook to TiDB Cloud Lake with SQLAlchemy, run queries, and visualize query results with pandas.
 ---
 
-# Jupyter Notebook
+# Use TiDB Cloud Lake with Jupyter Notebook
 
-[Jupyter Notebook](https://jupyter.org) is a web-based interactive application that enables you to create notebook documents that feature live code, interactive plots, widgets, equations, images, etc., and share these documents easily. It is also quite versatile as it can support many programming languages via kernels such as Julia, Python, Ruby, Scala, Haskell, and R.
+[Jupyter Notebook](https://jupyter.org/) is an interactive environment for running code, querying data, and creating visualizations. You can connect a notebook to {{{ .lake }}} through the [TiDB Cloud Lake dialect for SQLAlchemy](https://github.com/tidbcloud/lake-sqlalchemy).
 
-With the SQLAlchemy library in Python or [ipython-sql](https://github.com/catherinedevlin/ipython-sql), you can establish a connection to {{{ .lake }}} within a Jupyter Notebook, allowing you to execute queries and visualize your data from {{{ .lake }}} directly in the notebook.
+## Prerequisites
 
-Alternatively, you can run SQL queries in Python using the [{{{ .lake }}} Python driver](https://pypi.org/project/tidbcloudlake-driver/) library, allowing you to access {{{ .lake }}} directly within your local Python environment or online services like Jupyter Notebook and Google Colab.
+Before you begin, make sure that you have the following:
 
-## Tutorial-1: Integrating {{{ .lake }}} with Jupyter Notebook using SQLAlchemy
+- Python 3.8 or later
+- A {{{ .lake }}} account, database, and warehouse
+- The host, username, password, database, and warehouse name for your connection
 
-In this tutorial, you will first deploy a {{{ .lake }}} instance and Jupyter Notebook, and then run a sample notebook to connect to your instance through the SQLAlchemy library, as well as write and visualize data within the notebook.
+For information about obtaining connection information, see [Connect to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
-Before you start, make sure you have completed the following tasks:
+## Install Jupyter Notebook and the SQLAlchemy dialect
 
-- You have a TiDB Cloud account. If you do not have one, click [here](https://tidbcloud.com/signup) to sign up.
-- You have [Python](https://www.python.org/) installed on your system.
-- Download the sample notebook [databend.ipynb](https://datafuse-1253727613.cos.ap-hongkong.myqcloud.com/integration/databend.ipynb) to a local folder.
-
-### Step 1. Deploy {{{ .lake }}}
-
-1. Deploy a {{{ .lake }}} instance.
-2. Create a SQL user in the instance. You will use this account to connect to {{{ .lake }}} in Jupyter Notebook.
-
-```sql
-CREATE ROLE user1_role;
-GRANT ALL ON *.* TO ROLE user1_role;
-CREATE USER user1 IDENTIFIED BY 'abc123' WITH DEFAULT_ROLE = 'user1_role';
-GRANT ROLE user1_role TO user1;
-```
-
-### Step 2. Deploy Jupyter Notebook
-
-1. Install Jupyter Notebook with pip:
-
-    ```shell
-    pip install notebook
-    ```
-
-2. Install dependencies with pip:
-
-    ```shell
-    pip install sqlalchemy
-    pip install pandas
-    pip install pymysql
-    ```
-
-### Step 3. Run Sample Notebook
-
-1. Run the command below to start Jupyter Notebook:
-
-    ```shell
-    jupyter notebook
-    ```
-
-    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
-
-    ![Jupyter Notebook file tree](/media/tidb-cloud-lake/integration-notebook-tree.png)
-
-2. On the **Files** tab, navigate to the sample notebook you downloaded and open it.
-
-3. In the sample notebook, run the cells sequentially. By doing so, you create a table containing 5 rows in your {{{ .lake }}}, and visualize the data with a bar chart.
-
-    ![Alt text](/media/tidb-cloud-lake/integration-gui-jupyter.png)
-
-## Tutorial-2: Integrating {{{ .lake }}} with Jupyter Notebook using ipython-sql
-
-In this tutorial, you will first deploy a {{{ .lake }}} instance and Jupyter Notebook, and then run a sample notebook to connect to your {{{ .lake }}} through [ipython-sql](https://github.com/catherinedevlin/ipython-sql), as well as write and visualize data within the notebook.
-
-Before you start, ensure that you have [Python](https://www.python.org/) installed on your system and have obtained the DSN for connecting to {{{ .lake }}}.
-
-### Step 1. Deploy {{{ .lake }}}
-
-1. Deploy a {{{ .lake }}}.
-2. Create a SQL user in {{{ .lake }}}. You will use this account to connect to {{{ .lake }}} in Jupyter Notebook.
-
-```sql
-CREATE ROLE user1_role;
-GRANT ALL ON *.* TO ROLE user1_role;
-CREATE USER user1 IDENTIFIED BY 'abc123' WITH DEFAULT_ROLE = 'user1_role';
-GRANT ROLE user1_role TO user1;
-```
-
-### Step 2. Deploy Jupyter Notebook
-
-1. Install Jupyter Notebook with pip:
-
-    ```shell
-    pip install notebook
-    ```
-
-2. Install dependencies with pip:
-
-> **Note:**
->
-> To proceed with this tutorial, you'll need a version of SQLAlchemy that is below 2.0. Please be aware that in SQLAlchemy 2.0 and later versions, the result.DataFrame() method has been deprecated and is no longer available. Instead, you can use the pandas library to directly create a DataFrame from query results and perform plotting.
+Create and activate a virtual environment:
 
 ```shell
-pip install ipython-sql databend-sqlalchemy
-pip install sqlalchemy
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-### Step 3. Create and Connect a Notebook to {{{ .lake }}}
-
-1. Run the command below to start Jupyter Notebook:
-
-    ```shell
-    jupyter notebook
-    ```
-
-    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
-
-    ![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
-
-2. Select **New** > **Python 3** to create a notebook.
-
-3. Run the following code sequentially in separate cells. By doing so, you create a table containing 5 rows in your {{{ .lake }}}, and visualize the data with a bar chart.
-
-```python title='In [1]:'
-%load_ext sql
-```
-
-```sql title='In [2]:'
-%%sql lake://user1:abc123@localhost:8000/default
-create table if not exists user(created_at Date, count Int32);
-insert into user values('2022-04-01', 5);
-insert into user values('2022-04-01', 3);
-insert into user values('2022-04-03', 4);
-insert into user values('2022-04-03', 1);
-insert into user values('2022-04-04', 10);
-```
-
-```python title='In [3]:'
-result = %sql select created_at as date, count(*) as count from user group by created_at;
-result
-```
-
-```python title='In [4]:'
-%matplotlib inline
-
-df = result.DataFrame()
-df.plot.bar(x='date', y='count')
-```
-
-You can now see a bar chart on the notebook.
-
-## Tutorial-3: Integrating {{{ .lake }}} with Jupyter Notebook using the Python driver
-
-In this tutorial, you will first deploy a {{{ .lake }}} instance and Jupyter Notebook, and then run queries in a notebook through the [{{{ .lake }}} Python driver](https://pypi.org/project/tidbcloudlake-driver/) library, as well as write and visualize data within the notebook.
-
-Before you start, ensure that you have [Python](https://www.python.org/) installed on your system.
-
-### Step 1. Deploy Jupyter Notebook
-
-1. Install Jupyter Notebook with pip:
-
-    ```shell
-    pip install notebook
-    ```
-
-2. Install dependencies with pip:
-
-    ```shell
-    pip install tidbcloudlake-driver
-    pip install matplotlib
-    pip install pandas
-    ```
-
-### Step 2. Create a Notebook
-
-1. Run the command below to start Jupyter Notebook:
-
-    ```shell
-    jupyter notebook
-    ```
-
-    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
-
-    ![Alt text](/media/tidb-cloud-lake/integration-notebook-tree.png)
-
-2. Select **New** > **Python 3** to create a notebook.
-
-3. Run the following code sequentially in separate cells:
-
-```python title='In [1]:'
-# Import the necessary libraries
-from tidbcloudlake_driver import BlockingLakeClient
-
-# Connect to {{{ .lake }}}
-client = BlockingLakeClient('<your-dsn>')
-cursor = client.cursor()
-```
-
-```python title='In [2]:'
-# Create a table in {{{ .lake }}}
-cursor.execute("CREATE TABLE IF NOT EXISTS user (created_at Date, count Int32)")
-```
-
-```python title='In [3]:'
-# Insert multiple rows of data into the table
-cursor.execute("INSERT INTO user VALUES ('2022-04-01', 5), ('2022-04-01', 3), ('2022-04-03', 4), ('2022-04-03', 1), ('2022-04-04', 10)")
-```
-
-```python title='In [4]:'
-# Execute a query
-cursor.execute("SELECT created_at as date, count(*) as count FROM user GROUP BY created_at")
-
-# Fetch the query result
-rows = cursor.fetchall()
-rows
-```
-
-```python title='In [5]:'
-# Import libraries for data visualization
-import matplotlib.pyplot as plt
-import pandas as pd
-
-# Convert the query result to a Pandas DataFrame
-df = pd.DataFrame([row.values() for row in rows], columns=["date", "count"])
-```
-
-```python title='In [6]:'
-# Create a bar chart to visualize the data
-df.plot.bar(x='date', y='count')
-plt.show()
-```
-
-You can now see a bar chart on the notebook:
-
-![Alt text](/media/tidb-cloud-lake/localhost_8888_notebooks_Untitled.ipynb.png)
-
-## Tutorial-4: Integrating {{{ .lake }}} with Jupyter Notebook using ipython-sql
-
-In this tutorial, you will first obtain connection information from {{{ .lake }}} and deploy Jupyter Notebook, then create and connect a notebook to {{{ .lake }}} through [ipython-sql](https://github.com/catherinedevlin/ipython-sql), as well as write and visualize data within the notebook.
-
-Before you start, ensure that you have [Python](https://www.python.org/) installed on your system.
-
-### Step 1. Obtain Connection Information
-
-Obtain the connection information from {{{ .lake }}}. For how to do that, refer to [Connecting to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
-
-### Step 2. Deploy Jupyter Notebook
-
-1. Install Jupyter Notebook with pip:
-
-    ```shell
-    pip install notebook
-    ```
-
-2. Install dependencies with pip:
+Install Jupyter Notebook, the SQLAlchemy dialect, and the visualization dependencies:
 
 ```shell
-pip install ipython-sql databend-sqlalchemy
-pip install sqlalchemy
+python3 -m pip install notebook tidbcloudlake-sqlalchemy pandas matplotlib
 ```
 
-### Step 3. Create and Connect a Notebook to {{{ .lake }}}
+The `tidbcloudlake-sqlalchemy` package installs SQLAlchemy and the required {{{ .lake }}} Python driver.
 
-1. Run the command below to start Jupyter Notebook:
+Start Jupyter Notebook:
 
-    ```shell
-    jupyter notebook
-    ```
+```shell
+jupyter notebook
+```
 
-    This will start up Jupyter and your default browser should start (or open a new tab) to the following URL: <http://localhost:8888/tree>
+In the Jupyter interface, create a Python notebook.
 
-    ![Alt text](/media/tidb-cloud-lake/pricing-billing-notebook-tree.png)
+## Connect to TiDB Cloud Lake
 
-2. Select **New** > **Python 3** to create a notebook.
+The SQLAlchemy connection URI uses the following format:
 
-3. Run the following code sequentially in separate cells. By doing so, you create a table containing 5 rows in {{{ .lake }}}, and visualize the data with a bar chart.
+```text
+lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>
+```
+
+To avoid storing credentials in the notebook, set the connection URI in an environment variable before starting Jupyter Notebook:
+
+```shell
+export LAKE_SQLALCHEMY_URI='lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>'
+```
+
+In the notebook, create a SQLAlchemy engine:
 
 ```python
+import os
+
 from sqlalchemy import create_engine, text
-from sqlalchemy.engine.base import Connection, Engine
-import databend_sqlalchemy
+
+engine = create_engine(os.environ["LAKE_SQLALCHEMY_URI"])
+```
+
+## Query and visualize data
+
+Run the following cell to create a sample table and query it:
+
+```python
+with engine.connect() as connection:
+    connection.execute(text("DROP TABLE IF EXISTS jupyter_sales"))
+    connection.execute(
+        text(
+            """
+            CREATE TABLE jupyter_sales (
+                sale_date DATE,
+                quantity INT
+            )
+            """
+        )
+    )
+    connection.execute(
+        text(
+            """
+            INSERT INTO jupyter_sales VALUES
+                ('2026-08-01', 5),
+                ('2026-08-01', 3),
+                ('2026-08-02', 4),
+                ('2026-08-03', 10)
+            """
+        )
+    )
+    result = connection.execute(
+        text(
+            """
+            SELECT sale_date, SUM(quantity) AS total_quantity
+            FROM jupyter_sales
+            GROUP BY sale_date
+            ORDER BY sale_date
+            """
+        )
+    )
+    rows = result.fetchall()
+    columns = list(result.keys())
+```
+
+Convert the query result to a pandas DataFrame and create a bar chart:
+
+```python
 import matplotlib.pyplot as plt
 import pandas as pd
-```
 
-```python
-engine = create_engine(f"databend://cloudapp:<your-password>@<your-host>:443/default?secure=true")
-connection = engine.connect()
-```
-
-```python
-connection.execute('create table if not exists user(created_at Date, count Int32);')
-connection.execute("insert into user values('2022-04-01', 5);")
-connection.execute("insert into user values('2022-04-01', 3);")
-connection.execute("insert into user values('2022-04-03', 4);")
-connection.execute("insert into user values('2022-04-03', 1);")
-connection.execute("insert into user values('2022-04-04', 10);")
-result=connection.execute('select created_at as date, count(*) as count from user group by created_at;')
-```
-
-```python
-rows = result.fetchall()
-df = pd.DataFrame(rows, columns=result.keys())
-df.plot.bar(x='date', y='count')
+df = pd.DataFrame(rows, columns=columns)
+df.plot.bar(x="sale_date", y="total_quantity", legend=False)
+plt.ylabel("Quantity")
+plt.tight_layout()
 plt.show()
 ```
 
-You can now see a bar chart on the notebook:
+When you finish the tutorial, remove the sample table:
 
-![Alt text](/media/tidb-cloud-lake/jupyter-bar.png)
+```python
+with engine.connect() as connection:
+    connection.execute(text("DROP TABLE IF EXISTS jupyter_sales"))
+```
+
+## Related resources
+
+- [`tidbcloudlake-sqlalchemy` on PyPI](https://pypi.org/project/tidbcloudlake-sqlalchemy/)
+- [Connect to TiDB Cloud Lake using Python](/tidb-cloud-lake/guides/connect-using-python.md)

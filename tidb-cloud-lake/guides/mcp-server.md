@@ -1,238 +1,126 @@
 ---
-title: MCP Server for TiDB Cloud Lake
-summary: mcp-databend is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your TiDB Cloud Lake database using natural language.
+title: TiDB Cloud Lake MCP Server
+summary: Learn how to install, run, and configure the TiDB Cloud Lake MCP server, including transports, safety controls, and available tools.
 ---
 
-# MCP Server for TiDB Cloud Lake
+# TiDB Cloud Lake MCP Server
 
-[tidbcloud/lake-mcp](https://github.com/tidbcloud/lake-mcp) is an MCP (Model Context Protocol) server that enables AI assistants to interact directly with your {{{ .lake }}} database using natural language.
-
-## What mcp-databend Can Do
-
-- **execute_sql** - Execute SQL queries with timeout protection
-- **show_databases** - List all available databases
-- **show_tables** - List tables in a database (with optional filter)
-- **describe_table** - Get detailed table schema information
-
-## Build a ChatBI Tool
-
-This tutorial shows you how to build a conversational Business Intelligence tool using mcp-databend and the Agno framework. You'll create a local agent that can answer data questions in natural language.
-
-![{{{ .lake }}} MCP ChatBI](/media/tidb-cloud-lake/mcp-chatbi.png)
+The [TiDB Cloud Lake MCP server](https://github.com/tidbcloud/lake-mcp) exposes {{{ .lake }}} operations to clients that support the Model Context Protocol (MCP). The `tidbcloudlake-mcp` package supports standard input/output, HTTP, and server-sent events (SSE) transports.
 
 ## Prerequisites
 
-Before getting started, you'll need:
+Before you begin, make sure that you have the following:
 
-1. **{{{ .lake }}} Database** - Either [{{{ .lake }}}](https://app.lake.tidbcloud.com) (free tier available) or a self-hosted instance
-2. **DeepSeek API Key** - Get your key from [https://platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys)
+- Python 3.12 or later
+- A {{{ .lake }}} account, database, and warehouse
+- A {{{ .lake }}} DSN in the following format:
 
-## Step-by-Step Tutorial
+    ```text
+    lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>
+    ```
 
-### Step 1: Setup {{{ .lake }}} Connection
+For information about obtaining connection information, see [Connect to a Warehouse](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse).
 
-If you don't already have a {{{ .lake }}} database:
+## Install the MCP server
 
-1. **Sign up for [{{{ .lake }}}](https://app.lake.tidbcloud.com)** (free tier available)
-2. **Create a warehouse and database**
-3. **Get your connection string** from the console
+Create and activate a virtual environment:
 
-| Deployment         | Connection String Example                                     |
-| ------------------ | ------------------------------------------------------------- |
-| **{{{ .lake }}}** | `lake://user:pwd@host:443/database?warehouse=wh`          |
-
-### Step 2: Setup API Keys and Environment
-
-Set up your API key and database connection:
-
-```bash
-# Set your DeepSeek API key
-export DEEPSEEK_API_KEY="your-deepseek-api-key"
-
-# Set your Databend connection string
-export DATABEND_DSN="your-lake-connection-string"
-```
-
-### Step 3: Install Dependencies
-
-Create a virtual environment and install the required packages:
-
-```bash
-# Create virtual environment
-python3 -m venv .venv
+```shell
+python3.12 -m venv .venv
 source .venv/bin/activate
-
-# Install packages
-pip install packaging openai agno sqlalchemy fastapi mcp-databend
 ```
 
-### Step 4: Create ChatBI Agent
+Install the server from PyPI:
 
-Now create your ChatBI agent that uses mcp-databend to interact with your database.
-
-Create a file `agent.py`:
-
-```python
-from contextlib import asynccontextmanager
-import os
-import logging
-import sys
-
-from agno.agent import Agent
-from agno.playground import Playground
-from agno.storage.sqlite import SqliteStorage
-from agno.tools.mcp import MCPTools
-from agno.models.deepseek import DeepSeek
-from fastapi import FastAPI
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-def check_env_vars():
-    required = {
-        "DATABEND_DSN": "https://docs.pingcap.com/tidbcloudlake/driver-overview/#connection-string-dsn",
-        "DEEPSEEK_API_KEY": "https://platform.deepseek.com/api_keys"
-    }
-
-    missing = [var for var in required if not os.getenv(var)]
-
-    if missing:
-        print("❌ Missing environment variables:")
-        for var in missing:
-            print(f"  • {var}: {required[var]}")
-        print("\nExample: export DATABEND_DSN='...' DEEPSEEK_API_KEY='...'")
-        sys.exit(1)
-
-    print("✅ Environment variables OK")
-
-check_env_vars()
-
-class DatabendTool:
-    def __init__(self):
-        self.mcp = None
-        self.dsn = os.getenv("DATABEND_DSN")
-
-    def create(self):
-        env = os.environ.copy()
-        env["DATABEND_DSN"] = self.dsn
-        self.mcp = MCPTools(
-            command="python -m mcp_databend",
-            env=env,
-            timeout_seconds=300
-        )
-        return self.mcp
-
-    async def init(self):
-        try:
-            await self.mcp.connect()
-            logger.info("✓ Connected to Databend")
-            return True
-        except Exception as e:
-            logger.error(f"✗ Databend connection failed: {e}")
-            return False
-
-databend = DatabendTool()
-
-agent = Agent(
-    name="ChatBI",
-    model=DeepSeek(),
-    tools=[],
-    instructions=[
-        "You are ChatBI - a Business Intelligence assistant for Databend.",
-        "Help users explore and analyze their data using natural language.",
-        "Always start by exploring available databases and tables.",
-        "Format query results in clear, readable tables.",
-        "Provide insights and explanations with your analysis."
-    ],
-    storage=SqliteStorage(table_name="chatbi", db_file="chatbi.db"),
-    add_datetime_to_instructions=True,
-    add_history_to_messages=True,
-    num_history_responses=5,
-    markdown=True,
-    show_tool_calls=True,
-)
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    tool = databend.create()
-    if not await databend.init():
-        logger.error("Failed to initialize Databend")
-        raise RuntimeError("Databend connection failed")
-
-    agent.tools.append(tool)
-    logger.info("ChatBI initialized successfully")
-
-    yield
-
-    if databend.mcp:
-        await databend.mcp.close()
-
-playground = Playground(
-    agents=[agent],
-    name="ChatBI with Databend",
-    description="Business Intelligence Assistant powered by Databend"
-)
-
-app = playground.get_app(lifespan=lifespan)
-
-if __name__ == "__main__":
-    print("🤖 Starting MCP Server for Databend")
-    print("Open http://localhost:7777 to start chatting!")
-    playground.serve(app="agent:app", host="127.0.0.1", port=7777)
-
+```shell
+python -m pip install tidbcloudlake-mcp
 ```
 
-### Step 5: Start Your ChatBI Agent
+## Run the MCP server
 
-Run your agent to start the local server:
+Set the {{{ .lake }}} DSN:
 
-```bash
-python agent.py
+```shell
+export LAKE_DSN='lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>'
 ```
 
-You should see:
+Run the server with its default `stdio` transport:
 
-```
-✅ Environment variables OK
-🤖 Starting MCP Server for Databend
-Open http://localhost:7777 to start chatting!
-INFO Starting playground on http://127.0.0.1:7777
-INFO:     Started server process [189851]
-INFO:     Waiting for application startup.
-INFO:agent:✓ Connected to Databend
-INFO:agent:ChatBI initialized successfully
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:7777 (Press CTRL+C to quit)
+```shell
+lake-mcp
 ```
 
-### Step 6: Setup Web Interface
+You can also run the package without installing it into the active environment:
 
-For a better user experience, you can set up Agno's web interface:
-
-```bash
-# Create the Agent UI
-npx create-agent-ui@latest
-
-# Enter 'y' when prompted, then run:
-cd agent-ui && npm run dev
+```shell
+uv tool run --from tidbcloudlake-mcp@latest lake-mcp
 ```
 
-**Connect to Your Agent:**
+## Configure the transport
 
-1. Open [http://localhost:3000](http://localhost:3000)
-2. Select "localhost:7777" as your endpoint
-3. Start asking questions about your data!
+Set `LAKE_MCP_SERVER_TRANSPORT` to one of the following values:
 
-**Try These Queries:**
+| Value | Description |
+| --- | --- |
+| `stdio` | Communicates with a local MCP client through standard input and output. This is the default. |
+| `http` | Starts an HTTP server. |
+| `sse` | Starts a server that uses server-sent events. |
 
-- "Show me all databases"
-- "What tables do I have?"
-- "Describe the structure of my tables"
-- "Run a query to show sample data"
+For example, to run an HTTP server on the default loopback address and port:
 
-## Resources
+```shell
+export LAKE_MCP_SERVER_TRANSPORT=http
+export LAKE_MCP_BIND_HOST=127.0.0.1
+export LAKE_MCP_BIND_PORT=8001
+lake-mcp
+```
 
-- **GitHub Repository**: [tidbcloud/lake-mcp](https://github.com/tidbcloud/lake-mcp)
-- **PyPI Package**: [mcp-databend](https://pypi.org/project/mcp-databend)
-- **Agno Framework**: [Agno MCP](https://docs.agno.com/tools/mcp/overview)
-- **Agent UI**: [Agent UI](https://docs.agno.com/agent-ui/introduction)
+> **Warning:**
+>
+> Keep the bind address restricted to a trusted network. The MCP server can access data with the permissions of the configured {{{ .lake }}} user.
+
+## Configuration
+
+| Environment variable | Default | Description |
+| --- | --- | --- |
+| `LAKE_DSN` | Required for {{{ .lake }}} | Connection string for the database and warehouse. |
+| `LAKE_MCP_SAFE_MODE` | `true` | Enables session sandbox validation. |
+| `LAKE_QUERY_TIMEOUT` | `300` | Query timeout in seconds. |
+| `LAKE_MCP_SERVER_TRANSPORT` | `stdio` | Server transport: `stdio`, `http`, or `sse`. |
+| `LAKE_MCP_BIND_HOST` | `127.0.0.1` | Bind address for the `http` and `sse` transports. |
+| `LAKE_MCP_BIND_PORT` | `8001` | Bind port for the `http` and `sse` transports. |
+
+## Available tools
+
+| Tool | Description |
+| --- | --- |
+| `execute_sql` | Executes SQL with sandbox validation. |
+| `execute_multi_sql` | Executes multiple SQL statements. |
+| `show_databases` | Lists databases. |
+| `show_tables` | Lists tables in a database. |
+| `describe_table` | Returns the schema of a table. |
+| `get_session_sandbox_prefix` | Returns the sandbox prefix for the current session. |
+| `list_session_sandbox_databases` | Lists sandbox databases for the current session. |
+| `create_session_sandbox_database` | Creates a sandbox database for the current session. |
+| `show_stages` | Lists stages. |
+| `list_stage_files` | Lists files in a stage. |
+| `create_stage` | Creates a stage, subject to sandbox validation. |
+| `show_connections` | Lists connections. |
+
+## Safety model
+
+Safe mode is enabled by default. In safe mode:
+
+- Read operations such as `SELECT`, `SHOW`, `DESCRIBE`, `EXPLAIN`, and `LIST` can access objects allowed by the configured {{{ .lake }}} user.
+- Write operations are limited to objects whose names start with the current `mcp_sandbox_{session_id}_*` prefix.
+- Data manipulation statements can modify only sandbox tables.
+- Privilege changes can target only sandbox objects and principals.
+
+Set `LAKE_MCP_SAFE_MODE=false` only when the MCP client is trusted and the configured {{{ .lake }}} user has the minimum required privileges.
+
+For client-specific configuration examples, see [Connect AI Tools to TiDB Cloud Lake Using MCP](/tidb-cloud-lake/guides/mcp-client-integration.md).
+
+## Related resources
+
+- [`tidbcloudlake-mcp` on PyPI](https://pypi.org/project/tidbcloudlake-mcp/)
+- [Model Context Protocol documentation](https://modelcontextprotocol.io/)
