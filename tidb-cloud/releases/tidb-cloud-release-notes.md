@@ -29,7 +29,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Expand AI, Python, and BI integrations for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new MCP server and SQLAlchemy dialect.
 
         - With the new MCP server, you can now connect MCP-compatible AI tools to explore database objects, inspect table schemas, and run SQL using natural-language instructions. Built-in session sandbox protection is enabled by default, keeping production objects read-only while restricting writes to session-specific sandbox objects.
-        - With the new SQLAlchemy dialect, you can now connect Python applications and SQLAlchemy-compatible tools to TiDB Cloud Lake through the new SQLAlchemy dialect. You can use tools such as Jupyter Notebook for querying and visualizing data, and Apache Superset for building charts and dashboards.
+        - With the new SQLAlchemy dialect, you can connect Python applications and SQLAlchemy-compatible tools to TiDB Cloud Lake through the dialect. You can use tools such as Jupyter Notebook for querying and visualizing data, and Apache Superset for building charts and dashboards.
 
       For more information, see the following documentation:
 
