@@ -129,7 +129,7 @@ Ensure that the Alibaba Cloud endpoint service:
 - Add the TiDB Cloud account ID to the **Service Whitelist**.
 - Has availability zones that overlap with your {{{ .essential }}} instance.
 
-You can get the account ID and available zones information at the bottom of the **Create Private Endpoint for External Services** dialog, or by running the following command:
+You can get the account ID and availability zones information at the bottom of the **Create Private Endpoint for External Services** dialog, or by running the following command:
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
