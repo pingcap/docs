@@ -15,7 +15,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 - The subscribing via Lark feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
 
-- You need a Lark webhook URL from the Lark group where you want to receive alert notifications on. 
+- You need a Lark webhook URL for the Lark group where you want to receive alert notifications.
 
 <CustomContent plan="dedicated">
 
