@@ -132,7 +132,21 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 
 ### Format
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format regardless of the file extension. If you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. When you specify the `FORMAT` clause, TiDB uses that format regardless of the file extension.
+
+<CustomContent platform="tidb">
+
+Starting from v8.5.7, if you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+
+In v8.5.6 and earlier versions, TiDB treats the file as `CSV` when you omit `FORMAT`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you omit `FORMAT`, TiDB automatically detects the format from the `.csv`, `.sql`, or `.parquet` file extension. Detection is case-insensitive. For compressed files, TiDB ignores the `.gz`, `.gzip`, `.zstd`, `.zst`, or `.snappy` compression suffix before detecting the data file format. If the remaining file name has no extension or an unrecognized extension, TiDB treats the file as `CSV`.
+
+</CustomContent>
 
 > **Note:**
 >
