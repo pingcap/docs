@@ -1,6 +1,6 @@
 ---
 title: Tiered Storage Overview
-summary: Learn about tiered storage on TiDB Cloud BYOC, Premium, Essential, including its concept, architecture, use cases, and read amplification.
+summary: Learn about tiered storage on TiDB Cloud Essential, Premium, BYOC, including its concept, architecture, use cases, and implementation principles.
 ---
 
 # Tiered Storage Overview
@@ -13,17 +13,17 @@ Tiered storage helps you move infrequently accessed table or partition data to a
 
 ## Introduction
 
-Tiered Storage is a **table-level and partition-level storage tiering capability** on TiDB Cloud BYOC/Premium/Essential, designed for infrequently accessed data. You can set a table or partition to the IA (Infrequent Access) storage class. The system automatically stores the full data in remote object storage (S3/OSS, etc.), keeping only metadata and on-demand cached hot data segments locally.
+Tiered storage is a **storage tiering capability at the table and partition levels** available in {{{ .essential }}}, {{{ .premium }}}, and {{{ .byoc }}}. It is designed for infrequently accessed data. You can assign a table or partition to the Infrequent Access (IA) storage class. The system stores the complete dataset in remote object storage (such as Amazon S3 or Alibaba Cloud OSS), while keeping only metadata and on-demand cached hot data segments on local storage.
 
-In summary, an IA table is still a regular table from the application layer — all query, transaction, backup, and recovery semantics remain unchanged. The difference lies in cost and performance: local disk usage drops significantly, but on a cold read (when the local cache is missing), data must be fetched from remote object storage, resulting in higher latency than Standard tables.
+From the application’s perspective, an IA table behaves like a standard table. All query, transaction, backup, and recovery semantics remain unchanged. The primary difference is in the cost-performance tradeoff: local storage usage is significantly reduced, but cold reads (when the required data is not available in the local cache) incur higher latency because data must first be fetched from remote object storage.
 
 Key features:
 
-- **Semantic transparency**: All SQL operations, including SELECT, INSERT, UPDATE, and DELETE, retain the same SQL semantics
-- **Cost optimization**: Data is fully stored in low-cost object storage, with only hot data cached locally, which is expected to reduce storage costs by approximately 50% in typical scenarios
-- **Fine-grained control**: Supports both table-level and partition-level granularity; partition-level settings override table-level configuration
-- **Elastic switching**: Supports bidirectional IA ↔ Standard conversion with no data loss
-- **Deep integration**: Tightly integrated with Raft regions, MVCC, BR backup and restore, TiCDC, and other components
+- **Transparent semantics**: All SQL operations, including `SELECT`, `INSERT`, `UPDATE`, and `DELETE`, behave the same as on standard tables.
+- **Lower storage cost**: Data is stored in low-cost object storage, while only hot data is cached locally. In typical scenarios, storage costs can be reduced by approximately 50%.
+- **Fine-grained control**: Supports both table-level and partition-level storage tiering. Partition-level settings take precedence over table-level settings.
+- **Flexible conversion**: Supports bidirectional conversion between IA and standard storage classes without data loss.
+- **Seamless integration**: Fully integrated with Raft Regions, MVCC, BR backup and restore, TiCDC, and other TiDB components.
 
 ## Usage scenarios
 
