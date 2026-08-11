@@ -46,7 +46,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 > **Note:**
 >
-> - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window. 
+> - For security reasons, TiDB Cloud only shows a newly generated `scrape_config` file once. Ensure that you copy the content before closing the file window.
 > - If you forget, delete the `scrape_config` file in TiDB Cloud and generate a new one. To delete a `scrape_config` file, select the file, click **...**, and then click **Delete**.
 
 ### Step 2. Integrate with Prometheus
@@ -67,7 +67,8 @@ After your Prometheus service reads metrics from TiDB Cloud, you can use Grafana
 
     <CustomContent plan="essential">
 
-    <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>
+    - For TiDB Cloud Essential instances created on or after July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential-v2.json>. Note that the `v2` suffix indicates only the version of the dashboard JSON file.
+    - For TiDB Cloud Essential instances created before July 1, 2026, download this JSON file: <https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-tidb-cloud-dynamic-tracker-essential.json>.
 
     </CustomContent>
     <CustomContent plan="premium">
