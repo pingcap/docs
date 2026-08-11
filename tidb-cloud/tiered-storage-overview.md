@@ -63,7 +63,7 @@ Before setting IA, verify each item:
 - [ ] For regular table cold/hot separation, hot data accounts for less than 10% of the table
 - [ ] Cold data access frequency is very low, e.g., query QPS does not exceed 10 concurrent (to avoid saturating object storage bandwidth)
 - [ ] No need for frequent large-range AP scans on IA tables
-- [ ] Cold read latency is acceptable (a single SQL execution may involve multiple TiKV remote requests; each remote request adds about 500ms~2s), meaning a single-row index lookup on cold data adds approximately +500ms~2s
+- [ ] Cold-read latency is acceptable: a SQL execution may issue multiple remote requests, and latency varies with cache state, request parallelism, and the amount of cold data accessed
 - [ ] Awareness that cold reads have read amplification: a single 100-byte record can exhibit up to 30,000× amplification (approximately 3 MiB of cold data)
 - [ ] Single query involves no more than 100 MiB of cold data
 - [ ] Single query accesses no more than 100 rows of cold data
