@@ -187,7 +187,7 @@ On the **Create Migration Job** page, configure the source and target connection
     <CustomContent plan="premium">
 
     - **Hostname or IP address** (for Public): the hostname or IP address of the data source.
-    - **Private Endpoint** (for Private Link): the private endpoint that you created in **Networking** > **Private Endpoints for External Services** for your {{{ .premium }}} instance. Alternatively, click **Create a Private Endpoint here** to create one. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
+    - **Private Endpoint** (for Private Link): the private endpoint that you created in **Networking** > **AWS Private Endpoints for External Services** for your {{{ .premium }}} instance. Alternatively, click **Create a Private Endpoint here** to create one. For setup details, see the [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) section in the Data Migration guide.
 
     </CustomContent>
 
