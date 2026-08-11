@@ -35,7 +35,7 @@ The following statuses are displayed for resource pools:
 
 - **Creating**: the resource pool is being provisioned. You can view basic information, but you cannot create instances or make configuration changes.
 - **Active**: the resource pool is available. Normal management operations are available.
-- **Modifying**: the resource pool is being modified. You can view the overview, metrics, instances, tags, and other details, but you cannot change the capacity or Pool vCPU Limit.
+- **Modifying**: the resource pool is being modified. You can view the overview, metrics, instances, tags, and other details, but you cannot create instances or change the capacity or Pool vCPU Limit.
 
 ## View resource pool details
 
@@ -110,7 +110,7 @@ The following rules apply:
 - TiKV machine type cannot be changed after the resource pool is created.
 - TiFlash is optional. If TiFlash is not enabled, no TiFlash nodes are provisioned.
 - You can enable TiFlash later based on workload requirements.
-- After TiFlash is provisioned, you cannot disable it from the TiDB Cloud console. To disable TiFlash, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- You can disable TiFlash from the TiDB Cloud console. Disabling TiFlash affects all BYOC instances in the resource pool. TiFlash resources are removed, and analytical workloads that depend on TiFlash might become unavailable or experience performance degradation.
 - TiFlash machine type can be changed online.
 - TiFlash storage can only be increased.
 - TiFlash node count can only be increased.
@@ -172,7 +172,7 @@ Deleting a resource pool does not delete historical instance backups. Backup ret
 When a resource pool has an ongoing modification operation, TiDB Cloud refreshes resource pool data in real time or near real time. During this period:
 
 - You can view the resource pool overview, metrics, instances, tags, and other details.
-- You can create an instance if the backend validation succeeds.
+- You cannot create an instance. You can create instances only when the resource pool is in the **Active** status.
 - You can delete an instance if the instance is in a deletable state.
 - You cannot update the Pool vCPU Limit.
 - You cannot update capacity.
