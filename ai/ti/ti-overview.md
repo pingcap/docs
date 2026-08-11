@@ -65,7 +65,6 @@ You do not need to install, configure, or invoke Drive9 separately for normal Ti
 Follow the [Quick Start](/ai/ti/ti-quick-start.md) to install the TiDB Cloud CLI and complete your first Starter or Filesystem workflow. Use these guides for task-oriented instructions:
 
 - [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
-- [TiDB Cloud Organization CLI Command Reference](/ai/ti/reference/ti-organization.md)
 - [TiDB Cloud Starter CLI Command Reference](/ai/ti/reference/ti-starter-database.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
 - [TiDB Cloud Filesystem Git CLI Command Reference](/ai/ti/reference/ti-filesystem-git.md)

@@ -76,7 +76,7 @@ Interactive configuration is the only TiDB Cloud CLI workflow that prompts:
 ti configure
 ```
 
-The TiDB Cloud CLI requests a TiDB Cloud API public key, private key, and canonical region code. It validates the key by listing projects and records the unique `tidbx_virtual` project as the profile's default project.
+The TiDB Cloud CLI requests a TiDB Cloud API public key, private key, and canonical region code, validates those values locally, and stores the selected profile. Configuration makes no network request. The first remote command reports authentication or authorization errors for the permission it requires.
 
 Configure a named profile:
 

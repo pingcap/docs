@@ -63,10 +63,10 @@ ti configure
 
 Enter your API public key, private key, and a canonical region code such as `aws-us-east-1`.
 
-Verify the configuration:
+Run a read-only command to verify the saved credentials and selected region:
 
 ```bash
-ti organization list-projects --output text
+ti db list-db-clusters --db-cluster-type starter --output text
 ```
 
 ## Step 3. Choose a first workflow

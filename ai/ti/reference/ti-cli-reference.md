@@ -25,8 +25,6 @@ The `ti` executable accepts long flags only. A one-letter flag such as `-p` is r
 ti
 ├── configure
 ├── update
-├── organization
-│   └── list-projects
 ├── db
 │   ├── create-db-cluster
 │   ├── list-db-clusters
@@ -96,7 +94,7 @@ ti
     └── unmount-vault
 ```
 
-Every operation has a dedicated command page with syntax and examples. Expand **Command Reference** in the documentation navigation and select a command under `ti`, `organization`, `db`, `fs`, `fs-git`, `fs-journal`, or `fs-vault`.
+Every operation has a dedicated command page with syntax and examples. Expand **Command Reference** in the documentation navigation and select a command under `ti`, `db`, `fs`, `fs-git`, `fs-journal`, or `fs-vault`.
 
 Required options appear before optional options in generated usage. Optional options are enclosed in brackets:
 
@@ -111,7 +109,7 @@ In command help, value types are enclosed in angle brackets and required options
 
 ```text
 --db-cluster-name <string> (required)   Starter DB cluster display name
---project-id <string>                   TiDB Cloud project ID
+--wait                                  Wait until the created cluster is active
 ```
 
 ## Global options
@@ -148,10 +146,6 @@ Raw byte-oriented commands such as `ti fs read-file` and `ti fs copy-file --to-s
 ti db list-db-clusters \
   --db-cluster-type starter \
   --query 'clusters[].{id:id,name:display_name,state:state}'
-
-ti organization list-projects \
-  --query 'projects[?type == `tidbx_virtual`].id' \
-  --output text
 ```
 
 An invalid expression fails without replacing the command result with partial output.
@@ -219,7 +213,6 @@ The following task-oriented guides explain how commands work together. They are 
 | Guide | Purpose |
 | --- | --- |
 | [Install, Configure, and Update](/ai/ti/reference/ti-install-configure-update.md) | Install releases, configure profiles, update, and uninstall `ti` |
-| [Organization and Projects](/ai/ti/reference/ti-organization.md) | Inspect projects and understand virtual-project selection |
 | [Starter Databases and SQL](/ai/ti/reference/ti-starter-database.md) | Manage Starter clusters, branches, and SQL |
 | [Filesystem](/ai/ti/reference/ti-filesystem.md) | Manage Filesystems, files, layers, packs, and mounts |
 | [Filesystem Git Workspaces](/ai/ti/reference/ti-filesystem-git.md) | Manage Git workspaces on mounted Filesystems |

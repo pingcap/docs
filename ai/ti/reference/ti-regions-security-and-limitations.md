@@ -43,7 +43,7 @@ The hosted manifest is authoritative and can change during preview. A profile in
 
 | Operation | Required credential |
 | --- | --- |
-| `ti configure`, `ti organization`, all `ti db` control-plane operations | TiDB Cloud API public/private key |
+| `ti configure`, all `ti db` control-plane operations | TiDB Cloud API public/private key |
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key and file system ID |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
@@ -54,7 +54,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 
 ## Security best practices
 
-- Create TiDB Cloud API keys with only the organization and project access required for the workflow. Do not reuse a personal administrator key in unattended automation.
+- Create TiDB Cloud API keys with only the access required for the workflow. Do not reuse a personal administrator key in unattended automation.
 - Inject automation credentials from a CI secret store or runtime secret manager. Do not place credentials in source control, container images, shell scripts, or command-line arguments that can appear in process listings and shell history.
 - Do not copy the complete `~/.ti/` directory into an agent sandbox. For an existing Filesystem, pass only `TI_FS_TOKEN` and `TI_REGION_CODE`; use `TI_FS_FILE_SYSTEM_ID` only as an optional assertion.
 - Treat an FS owner token as full access to that Filesystem. When an agent needs only selected secrets, create a vault grant with the narrowest field scope and shortest practical TTL, and pass the delegated vault token instead.

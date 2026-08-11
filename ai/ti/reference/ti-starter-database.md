@@ -67,7 +67,7 @@ ti db create-db-cluster \
   --db-cluster-name demo-cluster
 ```
 
-An explicit `--project-id` overrides the configured virtual project. If neither is available, TiDB Cloud selects the account's default project. `--db-cluster-type starter` is required for cluster creation and listing; no type is inferred. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
+The TiDB Cloud CLI omits project selection and lets TiDB Cloud select its server-side default project. Any project metadata in the response remains visible. `--db-cluster-type starter` is required for cluster creation and listing; no type is inferred. `--monthly-spending-limit-usd-cents` is optional; setting it can require a payment method.
 
 List and filter clusters:
 

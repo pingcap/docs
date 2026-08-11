@@ -17,7 +17,6 @@ summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths,
 # ~/.ti/config
 [default]
 region_code = "aws-us-east-1"
-project_id = "..."
 ```
 
 ```toml
@@ -73,17 +72,9 @@ Placement selection is:
 
 Command flags, environment inputs, saved configuration, and command defaults are resolved per field. Values can therefore come from different levels when they do not form an atomic pair such as the API key pair.
 
-## Default Starter project
+## Starter project placement
 
-Starter create selects a project in this order:
-
-1. explicit non-empty `--project-id`;
-2. profile `project_id` discovered by `ti configure`;
-3. omit the project label and let TiDB Cloud select the account's default project.
-
-An explicitly empty `--project-id` is invalid. When no project ID is available, `ti` omits the project label entirely rather than sending an empty value.
-
-Other DB commands identify resources by cluster or branch ID and do not use `project_id`. Filesystem commands do not consume the DB project default.
+The TiDB Cloud CLI does not accept or store a project selector. Starter cluster creation omits project placement and lets TiDB Cloud select its server-side default project. Project fields and labels returned by TiDB Cloud remain visible as resource metadata and are not reused for later requests.
 
 ## Filesystem credentials and remote inventory
 

@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Starter cluster.
 
 # ti db create-db-cluster
 
-Creates a Starter cluster. The required `--db-cluster-type` must be `starter`; there is no implicit type. `--wait` waits for the cluster to become `ACTIVE`. Project selection uses an explicit `--project-id`, then the configured virtual project, then the TiDB Cloud account default. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
+Creates a Starter cluster. The required `--db-cluster-type` must be `starter`; there is no implicit type. `--wait` waits for the cluster to become `ACTIVE`. The request omits project selection and lets TiDB Cloud select its server-side default project. The TiDB Cloud CLI validates the returned service plan; if verification fails after creation is accepted, it reports the cluster ID and retains the cluster for inspection.
 
 > **Note:**
 >
@@ -20,7 +20,6 @@ ti db create-db-cluster
   [--dry-run]
   [--help]
   [--monthly-spending-limit-usd-cents <int32>]
-  [--project-id <string>]
   [--version]
   [--wait]
 ```
@@ -32,7 +31,6 @@ ti db create-db-cluster
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--monthly-spending-limit-usd-cents <int32>`: Monthly spending limit in USD cents; omit to use the API default.
-- `--project-id <string>`: TiDB Cloud project ID. Overrides the configured and account defaults.
 - `--version`: Display version information.
 - `--wait`: Wait until the created cluster becomes `ACTIVE` before returning.
 
@@ -59,13 +57,6 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ```bash
     # Validate the request and resolved defaults without creating a cluster.
     ti db create-db-cluster --db-cluster-type starter --db-cluster-name app-db --dry-run
-    ```
-
-- Create a cluster in an explicit project:
-
-    ```bash
-    # Override the configured virtual project for this cluster.
-    ti db create-db-cluster --db-cluster-type starter --db-cluster-name project-db --project-id "<project-id>" --wait
     ```
 
 - Set a monthly spending limit:

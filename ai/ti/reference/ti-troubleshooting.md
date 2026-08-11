@@ -26,21 +26,10 @@ If you intend to use saved credentials, unset both variables and verify the prof
 
 ```bash
 unset TI_PUBLIC_KEY TI_PRIVATE_KEY
-ti organization list-projects --profile default
+ti db list-db-clusters --db-cluster-type starter --profile default
 ```
 
-An API key can authenticate successfully but still lack the permission declared by a command. Use a key with the required organization or project access.
-
-## Configure cannot find a virtual project
-
-`ti configure` requires exactly one accessible project whose `type` is `tidbx_virtual`.
-
-```bash
-ti organization list-projects \
-  --query 'projects[].{id:id,name:name,type:type}'
-```
-
-If no virtual project appears, confirm the API key's organization and project access. If multiple virtual projects appear, report the ambiguous account state through the [`ti` issue tracker](https://github.com/tidbcloud/ti/issues).
+An API key can authenticate successfully but still lack the permission declared by a command. Use a key with the access required by that operation. `ti configure` validates and stores local values without contacting TiDB Cloud, so credential failures first appear on a remote command.
 
 ## Filesystem token is missing
 
