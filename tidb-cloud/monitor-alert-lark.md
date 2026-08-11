@@ -23,13 +23,7 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 </CustomContent>
 
-<CustomContent plan="premium">
-
-- To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` or `Instance Manager` access to the target instance in TiDB Cloud.
-
-</CustomContent>
-
-<CustomContent plan="essential">
+<CustomContent plan="essential,premium">
 
 - To subscribe to alert notifications of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Owner` or `Instance Manager` access to the target instance in TiDB Cloud.
 
