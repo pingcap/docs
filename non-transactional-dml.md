@@ -390,7 +390,7 @@ WHERE t.c1 IS NULL;
 
 <CustomContent platform="tidb">
 
-選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生する場合は、PingCAP またはコミュニティから[サポートを受ける](/support.md)提供されます。
+選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生する場合は、PingCAP またはコミュニティから[サポートを受けて](/support.md)ください。
 
 </CustomContent>
 
