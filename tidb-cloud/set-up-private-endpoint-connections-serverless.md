@@ -53,7 +53,7 @@ TiDB Cloudプランに応じて、適切なプライベートエンドポイン�
 
 ### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance} {#step-1-choose-a-tidb-instance}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 3.  **「接続タイプ」**ドロップダウンリストで、 **「プライベートエンドポイント」**を選択します。
 4.  **サービス名**、**アベイラビリティゾーンID** 、**リージョンID**をメモしておいてください。
@@ -124,7 +124,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 AWSインターフェースエンドポイントを作成した後、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに対して認証を行い、アクセスを制限できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
@@ -149,7 +149,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 
 インターフェースエンドポイントを作成したら、 TiDB Cloudコンソールに戻り、以下の手順を実行してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 3.  **「接続タイプ」**ドロップダウンリストで、 **「プライベートエンドポイント」**を選択します。
 4.  **「接続**方法」ドロップダウンリストから、希望する接続方法を選択してください。対応する接続​​文字列がダイアログの下部に表示されます。

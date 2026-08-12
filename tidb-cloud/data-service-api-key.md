@@ -89,7 +89,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
     > **Tip:**
     >
-    > 複数のプロジェクトがある場合は、目的のプロジェクトの**Data Service**ページに移動するには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、目的のプロジェクトの [ **...** ] をクリックしてから、 **[Data Service]**をクリックします。
+    > 複数のプロジェクトがある場合は、目的のプロジェクトの**Data Service**ページに移動するには、[**My TiDB**](https://tidbcloud.com/tidbs)ページの**[プロジェクト ビュー]**タブをクリックし、目的のプロジェクトの [ **...** ] をクリックしてから、 **[Data Service]**をクリックします。
 
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 

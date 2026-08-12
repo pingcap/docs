@@ -150,7 +150,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ## ステップ1：データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

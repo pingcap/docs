@@ -47,7 +47,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -89,7 +89,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 </div>
 <div label="TiDB Cloud Premium">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
@@ -128,7 +128,7 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 

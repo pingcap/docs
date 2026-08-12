@@ -46,7 +46,7 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 
 ## ステップ4. Amazon S3からCSVファイルをインポートする {#step-4-import-csv-files-from-amazon-s3}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
 
 2.  左側のナビゲーションペインで、 **[データ]** &gt; **[インポート]**をクリックし、 **[クラウドストレージからデータをインポート]**を選択します。
 

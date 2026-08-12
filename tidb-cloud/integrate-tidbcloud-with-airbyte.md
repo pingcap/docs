@@ -52,7 +52,7 @@ Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）と�
     -   ユーザー名：データベースにアクセスするためのユーザー名
     -   パスワード：ユーザー名のパスワード
 
-    TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
+    TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
 3.  **SSL接続**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 

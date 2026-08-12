@@ -97,7 +97,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -150,7 +150,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -201,7 +201,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -252,7 +252,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 1.  対象のTiDB Cloud StarterまたはEssentialインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >

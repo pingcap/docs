@@ -41,7 +41,7 @@ TiDB Cloud はこのリストを定期的に更新し、予約済みの IP ア�
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイアウォールルールを追加するには、次の手順を実行します。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 

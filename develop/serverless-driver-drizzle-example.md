@@ -74,7 +74,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 
@@ -188,7 +188,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
 2.  概要ページで、右上隅の**「接続」**をクリックし、 **「接続先」**ドロップダウンリストから`Serverless Driver`を選択してから、 **「パスワードを生成」をクリックしてランダムなパスワード**を作成します。
 

@@ -62,7 +62,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ## インスタンスの状態 {#instance-status}
 
-[**私のTiDB**](https://tidbcloud.com/tidbs)ページでは、 **「ステータス」**列に、実行中の各TiDB Cloudインスタンスの現在のステータスが表示されます。
+[**My TiDB**](https://tidbcloud.com/tidbs)ページでは、 **「ステータス」**列に、実行中の各TiDB Cloudインスタンスの現在のステータスが表示されます。
 
 | 状態        | 説明                                 |
 | :-------- | :--------------------------------- |
@@ -89,7 +89,7 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 概要ページで指標を表示するには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -103,7 +103,7 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
 
 **メトリクス**ページで指標を表示するには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象リソースの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >

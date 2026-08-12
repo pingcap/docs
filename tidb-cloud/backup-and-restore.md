@@ -24,7 +24,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ### バックアップページを確認する {#view-the-backup-page}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -325,7 +325,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
 
 ごみ箱から削除されたTiDB Cloud Dedicatedクラスターを復元するには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **[ごみ箱] を**クリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **[ごみ箱] を**クリックします。
 
     > **Tip:**
     >

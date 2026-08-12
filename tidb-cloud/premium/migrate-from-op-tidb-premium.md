@@ -203,7 +203,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象のTiDB Cloud Premium インスタンスのアカウント ID と外部 ID を取得します。
 
-    1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象インスタンスの名前をクリックします。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象インスタンスの名前をクリックします。
     2.  左側のナビゲーションペインで、 **[データ]** &gt; **[インポート]**をクリックします。
     3.  **「クラウドストレージからデータをインポート」** &gt; **「Amazon S3」**を選択します。
     4.  ウィザードに表示される**アカウントID**と**外部ID**をメモしておいてください。これらの値はCloudFormationテンプレートに埋め込まれています。
@@ -279,14 +279,14 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 2.  TiCDCがTiDB Cloud Premiumに接続できるように許可します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
     2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
     3.  **ネットワーク設定**ページで、 **「IPアドレスの追加」**をクリックします。
     4.  表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **[IP アドレス]**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **[確認]**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3.  下流のTiDB Cloud Premiumインスタンスの接続情報を取得します。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
     2.  右上隅の**「接続」**をクリックしてください。
     3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択し、 **「接続先」**ドロップダウンリストから**「一般」**を選択します。
     4.  接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。

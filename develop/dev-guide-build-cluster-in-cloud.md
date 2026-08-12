@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)。
 
-3.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
 
 4.  **「リソースの作成」**ページでは、デフォルトで**「Starter」**が選択されています。TiDB Cloud Starterインスタンスの名前を入力し、作成先のクラウドプロバイダーとリージョンを選択してください。
 

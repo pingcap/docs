@@ -79,7 +79,7 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 
 2.  [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/tidb-cloud-quickstart.md)。
 
-3.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
+3.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 
 4.  右上隅にある**「接続」**をクリックします。
 

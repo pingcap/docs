@@ -43,7 +43,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <SimpleTab>
 <div label="Cluster-level Prometheus integration">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
 3.  **「統合」**ページで、 **「Prometheusとの統合」**をクリックします。
 4.  **「ファイルを追加」を**クリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
@@ -52,7 +52,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 </div>
 <div label="Legacy project-level Prometheus integration (Beta)">
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
 4.  **「統合」**ページで、 **「Prometheusとの統合（ベータ版）」**をクリックします。

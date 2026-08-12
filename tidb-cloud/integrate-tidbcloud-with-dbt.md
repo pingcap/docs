@@ -90,7 +90,7 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    TiDB Cloud コンソールの接続ダイアログから`server` 、 `port` 、および`username`の値を取得できます。ダイアログを開くには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
+    TiDB Cloud コンソールの接続ダイアログから`server` 、 `port` 、および`username`の値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
 2.  プロジェクトの設定を完了してください。
 

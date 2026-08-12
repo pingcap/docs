@@ -23,7 +23,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象の TiDB クラスターに対応するTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -160,7 +160,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
 1.  TiDB Cloudコンソールで、対象のTiDBクラスターのGoogle CloudサービスアカウントIDを取得します。
 
-    1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >

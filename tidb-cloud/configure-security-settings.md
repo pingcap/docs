@@ -11,7 +11,7 @@ TiDB Cloud Dedicatedクラスタの場合、ルートパスワードと接続を
 >
 > TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、このドキュメントは適用されないため、代わりに[TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
 
-1.  TiDB Cloudコンソールで、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

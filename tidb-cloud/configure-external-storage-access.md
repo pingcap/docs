@@ -27,7 +27,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
 1.  対象のTiDB Cloud Starter、 Essential、またはPremiumインスタンスの**インポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
 2.  **「新しいARNの追加」**ダイアログを開きます。
@@ -239,7 +239,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
 1.  対象のTiDB Cloudリソースの**インポート**または**エクスポート**ページを開きます。
 
-    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     2.  対象のTiDB Cloudリソースの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**「データ」** &gt; **「インポート**」または**「データ」** &gt; **「エクスポート」**をクリックします。
 

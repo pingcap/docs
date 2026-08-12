@@ -38,7 +38,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 変更フィード機能にアクセスするには、以下の手順に従ってください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

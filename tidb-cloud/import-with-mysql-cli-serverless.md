@@ -18,7 +18,7 @@ MySQL CLI を介してTiDB Cloud StarterまたはTiDB Cloud Essentialにデー�
 
 TiDB Cloud StarterまたはEssentialインスタンスに接続してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 

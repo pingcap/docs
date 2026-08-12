@@ -22,7 +22,7 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 
 ブランチを作成するには、以下の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 
 2.  左側のナビゲーションペインで**「ブランチ」**をクリックします。
 
@@ -46,7 +46,7 @@ TiDB Cloud Starterインスタンスのデータサイズにもよりますが�
 
 TiDB Cloud Starterインスタンスのブランチを表示するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで**「ブランチ」**をクリックします。
 
     TiDB Cloud Starterインスタンスのブランチリストは、右側のペインに表示されます。
@@ -55,7 +55,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 ブランチに接続するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで**「ブランチ」**をクリックします。
 3.  接続する対象ブランチの行で、 **「アクション」**列の**「…」**をクリックします。
 4.  ドロップダウンリストから**「接続」**をクリックします。接続情報の入力ダイアログが表示されます。
@@ -64,7 +64,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 または、 TiDB Cloud Starterインスタンスの概要ページから接続文字列を取得することもできます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックしてください。
 3.  `Branch`ドロップダウンリストから接続先のブランチを選択してください。
 4.  ルートパスワードを作成またはリセットするには、 **「パスワードを生成」**または**「パスワードをリセット」**をクリックしてください。
@@ -74,7 +74,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 ブランチを削除するには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで**「ブランチ」**をクリックします。
 3.  削除する対象ブランチの行で、 **「アクション」**列の**「…」**をクリックします。
 4.  ドロップダウンリストの**「削除」**をクリックしてください。
@@ -90,7 +90,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 ブランチをリセットするには、以下の手順を実行してください。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで**「ブランチ」**をクリックします。
 3.  リセットする対象ブランチの行で、 **「アクション」**列の**「…」**をクリックします。
 4.  ドロップダウンリストの**「リセット」**をクリックしてください。

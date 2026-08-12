@@ -218,7 +218,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
 1.  TiDBクラスタの接続情報を取得します。
 
-    接続情報は、クラスタの接続ダイアログから取得できます。ダイアログを開くには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象リソースの名前をクリックして概要ページを開き、右上隅の**[接続]**をクリックします。
+    接続情報は、クラスタの接続ダイアログから取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象リソースの名前をクリックして概要ページを開き、右上隅の**[接続]**をクリックします。
 
 2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 

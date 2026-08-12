@@ -23,7 +23,7 @@ summary: このガイドでは、CursorエディタでTiDB MCPサーバーを設
 
 TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンスの認証情報でCursor構成を作成します。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動し、右上隅の**[AI ツールで使用する]**をクリックします。
 
 2.  表示されたダイアログで、Cursorがアクセスする**ブランチ**と**データベース**を選択します。
 

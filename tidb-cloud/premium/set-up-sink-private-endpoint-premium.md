@@ -60,7 +60,7 @@ TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサ
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >

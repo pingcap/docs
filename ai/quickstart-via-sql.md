@@ -41,7 +41,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 

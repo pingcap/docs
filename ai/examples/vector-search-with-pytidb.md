@@ -55,7 +55,7 @@ pip install -r reqs.txt
 
 ### ステップ4．環境変数を設定する {#step-4-set-environment-variables}
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2.  右上隅の**「接続」**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 3.  接続パラメータに応じて環境変数を以下のように設定してください。
 

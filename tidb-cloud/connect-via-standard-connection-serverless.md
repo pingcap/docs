@@ -22,7 +22,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 共有モデルを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、以下の手順を実行してください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  右上隅の**「接続」**をクリックしてください。接続ダイアログが表示されます。
 
@@ -95,7 +95,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリックエンドポイントを使用する必要がない場合は、インターネットからの接続を防止するために、そのエンドポイントを無効にすることができます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
@@ -111,7 +111,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリッ
 
 パブリックエンドポイントを無効化した後、再度有効化することができます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 

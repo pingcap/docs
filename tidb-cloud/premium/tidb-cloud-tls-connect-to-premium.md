@@ -15,13 +15,13 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 -   安全な設定でインスタンスにアクセスするためのパスワードを設定してください。
 
-    そのためには、[**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premium インスタンスの行にある「 **...」**をクリックして、 **「ルートパスワードの変更」**を選択します。パスワード設定で、「パスワード**の自動生成」をクリックすると、数字、大文字、小文字、特殊文字を含む 16 文字のルートパスワード**が自動的に生成されます。
+    そのためには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premium インスタンスの行にある「 **...」**をクリックして、 **「ルートパスワードの変更」**を選択します。パスワード設定で、「パスワード**の自動生成」をクリックすると、数字、大文字、小文字、特殊文字を含む 16 文字のルートパスワード**が自動的に生成されます。
 
 ## TiDB Cloud Premiumインスタンスへのセキュリティ接続 {#secure-connection-to-a-tidb-cloud-premium-instance}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)では、さまざまな接続方法の例を確認し、次のようにしてTiDB Cloud Premium インスタンスに接続できます。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動してください。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動してください。
 
 2.  右上隅の**「接続」**をクリックしてください。ダイアログが表示されます。
 

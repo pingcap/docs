@@ -38,7 +38,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -78,7 +78,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2.  [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >

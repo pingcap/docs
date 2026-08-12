@@ -89,7 +89,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 2.  [TiDB Cloudコンソール](https://tidbcloud.com)で CMEK を構成します。
 
-    1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+    1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
 
     2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 
@@ -114,7 +114,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
 TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順に従ってください。
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **「リソースの作成」**をクリックします。
 2.  TiDB Cloud Premiumプランを選択し、基本設定を完了してください。
 3.  「**デュアルレイヤーデータ暗号化」**セクションで、 **「有効にする」**をクリックします。
 4.  **サービス管理暗号化キー**を選択してください。

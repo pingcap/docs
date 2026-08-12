@@ -94,7 +94,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 ### ステップ1. TiDBクラスタを選択します {#step-1-select-a-tidb-cluster}
 
-1.  [**私のTiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして、概要ページに移動します。以下のいずれかのステータスのクラスタを選択できます。
+1.  [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして、概要ページに移動します。以下のいずれかのステータスのクラスタを選択できます。
 
     -   **利用可能**
     -   **復元**
