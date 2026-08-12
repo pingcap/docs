@@ -142,7 +142,7 @@ For each new region, the O11Y CIDR and resource pool CIDRs must not overlap with
 * the O11Y CIDR in the same region;
 * any existing resource pool CIDR in the same region;
 * existing application VPCs, on-premises networks, or VPN networks that will be connected through VPC Peering or VPN; or
-* other resource pools that will participate in cross-region replication.
+* resource pool CIDRs in other regions if the resource pools will participate in cross-region replication.
 
 Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
 
