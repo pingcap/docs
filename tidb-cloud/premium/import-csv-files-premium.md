@@ -123,7 +123,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
         - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
-        - **Target Database** and **Target Table**: enter the destination database and table for the matched files.
+        - **Target Database** and **Target Table**: enter the target database and table for the matched files.
         - To add another mapping, click **+**.
 
 6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
@@ -167,7 +167,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
         - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
-        - **Target Database** and **Target Table**: enter the destination database and table for the matched files.
+        - **Target Database** and **Target Table**: enter the target database and table for the matched files.
         - To add another mapping, click **+**.
 
 6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.

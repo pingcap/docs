@@ -15,7 +15,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 ## Limitations
 
 - To ensure data consistency, {{{ .premium }}} allows importing CSV files into empty tables only. If the target table already contains data, import into a staging table and then copy the rows using the `INSERT ... SELECT` statement.
-- Each source pattern maps to one destination table. You can add multiple mappings to an import job.
+- Each source pattern maps to one target table. You can add multiple mappings to an import job.
 
 ## Step 1. Prepare the CSV files
 
