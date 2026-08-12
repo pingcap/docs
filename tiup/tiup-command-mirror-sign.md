@@ -5,7 +5,7 @@ summary: tiup mirror sign` コマンドは、 TiUPミラー内のメタデータ
 
 # tiup mirror sign {#tiup-mirror-sign}
 
-`tiup mirror sign`コマンドは、 TiUP [鏡](/tiup/tiup-mirror-reference.md)で定義されたメタデータファイル (*.json) に署名するために使用されます。これらのメタデータファイルは、ローカルファイルシステムに保存されるか、署名エントリを提供するために HTTP プロトコルを使用してリモートに保存されます。
+`tiup mirror sign`コマンドは、 TiUP [ミラー](/tiup/tiup-mirror-reference.md)で定義されたメタデータファイル (*.json) に署名するために使用されます。これらのメタデータファイルは、ローカルファイルシステムに保存されるか、署名エントリを提供するために HTTP プロトコルを使用してリモートに保存されます。
 
 ## 構文 {#syntax}
 

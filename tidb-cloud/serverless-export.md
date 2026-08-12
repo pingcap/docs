@@ -49,7 +49,7 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 -   エクスポートされたデータはTiDB Cloudのステージングエリアに保存され、2日後に有効期限が切れます。エクスポートしたデータは期限内にダウンロードする必要があります。
 -   ステージング領域のストレージスペースがいっぱいの場合、データをローカル ファイルにエクスポートすることはできません。
 
-### アマゾンS3 {#amazon-s3}
+### Amazon S3 {#amazon-s3}
 
 Amazon S3 にデータをエクスポートするには、次の情報を提供する必要があります。
 
@@ -60,7 +60,7 @@ Amazon S3 にデータをエクスポートするには、次の情報を提供�
 
 詳細については[Amazon S3 アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
 
-### Googleクラウドストレージ {#google-cloud-storage}
+### Google Cloud Storage {#google-cloud-storage}
 
 Google Cloud Storage にデータをエクスポートするには、次の情報を提供する必要があります。
 
