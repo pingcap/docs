@@ -5,7 +5,7 @@ summary: DM のbinlogイベント フィルター機能の使用方法を学習�
 
 # TiDB データ移行Binlogイベントフィルター {#tidb-data-migration-binlog-event-filter}
 
-TiDB Data Migration (DM) は、特定のスキーマまたはテーブルについて、エラーをフィルタリング、ブロック、報告したり、特定の種類のbinlogイベントのみを受信したりするためのbinlogイベントフィルタ機能を提供します。例えば、 `TRUNCATE TABLE`または`INSERT`イベントすべてをフィルタリングできます。binlogイベントフィルタ機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりもきめ細かな制御が可能です。
+TiDB Data Migration (DM) は、特定のスキーマまたはテーブルのbinlogイベントをフィルタリングしたり、ブロックしてエラーを報告したり、特定の種類のbinlogイベントのみを受信したりするためのbinlogイベントフィルタ機能を提供します。例えば、 `TRUNCATE TABLE`または`INSERT`イベントすべてをフィルタリングできます。binlogイベントフィルタ機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりもきめ細かな制御が可能です。
 
 ## binlogイベントフィルターを構成する {#configure-the-binlog-event-filter}
 
@@ -31,7 +31,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
+-   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルター処理されます。
 
 -   `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
 
@@ -62,18 +62,18 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
     | `rename column`              | 互換性のないDDL | 列の名前を変更するDDL文（ `ALTER TABLE RENAME COLUMN`文など）                                             |
     | `rename index`               | 互換性のないDDL | インデックス名を変更するDDL文（ `ALTER TABLE RENAME INDEX`文など）                                           |
     | `drop column`                | 互換性のないDDL | テーブルから列を削除するDDL文（ `ALTER TABLE DROP COLUMN`文など）                                            |
-    | `drop index`                 | 互換性のないDDL | テーブルのインデックスを削除するDDL文`ALTER TABLE DROP INDEX`文など）                                           |
+    | `drop index`                 | 互換性のないDDL | テーブルのインデックスを削除するDDL文（ `ALTER TABLE DROP INDEX`文など）                                           |
     | `truncate table partition`   | 互換性のないDDL | 指定されたパーティションからすべてのデータを削除するDDL文（ `ALTER TABLE TRUNCATE PARTITION`文など）                       |
-    | `drop primary key`           | 互換性のないDDL | 主キーを削除するDDL文`ALTER TABLE DROP PRIMARY KEY`文など）                                             |
+    | `drop primary key`           | 互換性のないDDL | 主キーを削除するDDL文（ `ALTER TABLE DROP PRIMARY KEY`文など）                                             |
     | `drop unique key`            | 互換性のないDDL | `ALTER TABLE DROP UNIQUE KEY`文のような、一意のキーを削除する DDL 文                                        |
     | `modify default value`       | 互換性のないDDL | 列のデフォルト値を変更するDDL文（ `ALTER TABLE CHANGE DEFAULT`文など）                                        |
-    | `modify constraint`          | 互換性のないDDL | 制約を変更するDDL文`ALTER TABLE ADD CONSTRAINT`文など）                                                |
+    | `modify constraint`          | 互換性のないDDL | 制約を変更するDDL文（ `ALTER TABLE ADD CONSTRAINT`文など）                                                |
     | `modify columns order`       | 互換性のないDDL | 列の順序を変更するDDL文（ `ALTER TABLE CHANGE AFTER`文など）                                              |
     | `modify charset`             | 互換性のないDDL | 列の文字セットを変更するDDL文（ `ALTER TABLE MODIFY CHARSET`文など）                                         |
     | `modify collation`           | 互換性のないDDL | 列の照合順序を変更するDDL文（ `ALTER TABLE MODIFY COLLATE`文など）                                          |
     | `remove auto increment`      | 互換性のないDDL | AUTO_INCREMENTキーを削除するDDL文                                                                            |
     | `modify storage engine`      | 互換性のないDDL | テーブルストレージエンジンを変更するDDL文（ `ALTER TABLE ENGINE = MyISAM`文など）                                |
-    | `reorganize table partition` | 互換性のないDDL | テーブル内のパーティションを再編成するDDL文`ALTER TABLE REORGANIZE PARTITION`文など）                              |
+    | `reorganize table partition` | 互換性のないDDL | テーブル内のパーティションを再編成するDDL文（ `ALTER TABLE REORGANIZE PARTITION`文など）                              |
     | `rebuild table partition`    | 互換性のないDDL | テーブルパーティションを再構築するDDL文（ `ALTER TABLE REBUILD PARTITION`文など）                                 |
     | `exchange table partition`   | 互換性のないDDL | 2つのテーブル間でパーティションを交換するDDL文（ `ALTER TABLE EXCHANGE PARTITION`文など）                            |
     | `coalesce table partition`   | 互換性のないDDL | テーブル内のパーティションの数を減らすDDL文（ `ALTER COALESCE PARTITION`文など）                                    |
@@ -87,13 +87,13 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
         -   イベントの SQL ステートメントはルールの`sql-pattern`に一致しません。
     -   `Ignore` : ブロックリスト。binlogは次の2つの条件のいずれかでフィルタリングされます。
         -   イベントのタイプはルールの`event`のリストにあります。
-        -   イベントの SQL 文は、ルールの`sql-pattern`つに一致できます。
+        -   イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
     -   `Error` : エラーリスト。binlogは、以下のいずれかの条件でエラーを報告します。
         -   イベントのタイプはルールの`event`のリストにあります。
-        -   イベントの SQL 文は、ルールの`sql-pattern`つに一致できます。
+        -   イベントの SQL 文は、ルールの`sql-pattern`に一致できます。
     -   複数のルールが同じテーブルに一致する場合、ルールは順番に適用されます。ブロックリストはエラーリストよりも優先度が高く、エラーリストは許可リストよりも優先度が高くなります。例：
-        -   ルール`Ignore`と`Error`両方が同じテーブルに適用された場合、ルール`Ignore`有効になります。
-        -   ルール`Error`と`Do`両方が同じテーブルに適用された場合、ルール`Error`有効になります。
+        -   ルール`Ignore`と`Error`両方が同じテーブルに適用された場合、ルール`Ignore`が有効になります。
+        -   ルール`Error`と`Do`両方が同じテーブルに適用された場合、ルール`Error`が有効になります。
 
 ## 使用例 {#usage-examples}
 
@@ -103,8 +103,8 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 すべての削除操作をフィルタリングするには、次の 2 つのフィルタリング ルールを構成します。
 
--   `filter-table-rule` 、 `test_*` . `t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
--   `filter-schema-rule` `test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
+-   `filter-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
+-   `filter-schema-rule`は`test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
 
 ```yaml
 filters:
@@ -123,8 +123,8 @@ filters:
 
 シャーディング DML ステートメントのみを移行するには、次の 2 つのフィルタリング ルールを構成します。
 
--   `do-table-rule` 、 `test_*` . `t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
--   `do-schema-rule` 、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
+-   `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。
+-   `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
 
 > **Note:**
 >
@@ -156,7 +156,7 @@ filters:
     action: Ignore
 ```
 
-`filter-procedure-rule` `test_*` . `t_*`パターンに一致するすべてのテーブルの`^CREATE\\s+PROCEDURE`と`^DROP\\s+PROCEDURE`ステートメントを除外します。
+`filter-procedure-rule`は`test_*`.`t_*`パターンに一致するすべてのテーブルの`^CREATE\\s+PROCEDURE`と`^DROP\\s+PROCEDURE`ステートメントを除外します。
 
 ### TiDBパーサーがサポートしていないSQL文を除外する {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
