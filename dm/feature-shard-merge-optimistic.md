@@ -3,7 +3,7 @@ title: Merge and Migrate Data from Sharded Tables in Optimistic Mode
 summary: DM が楽観的モードでシャード テーブルからデータをマージおよび移行する方法を学習します。
 ---
 
-# オプティミスティックモードでシャードテーブルからデータをマージおよび移行する {#merge-and-migrate-data-from-sharded-tables-in-optimistic-mode}
+# 楽観的モードでシャードテーブルからデータをマージおよび移行する {#merge-and-migrate-data-from-sharded-tables-in-optimistic-mode}
 
 このドキュメントでは、データ移行（DM）の楽観的モードにおけるシャーディングサポート機能について説明します。この機能を使用すると、上流のMySQLまたはMariaDBインスタンスにある、同一または異なるテーブルスキーマを持つテーブルのデータを、下流のTiDBにある同じテーブルにマージして移行できます。
 
