@@ -107,13 +107,13 @@ connections = ((core_count * 2) + effective_spindle_count)
 特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)下の次の注記に注意してください。
 
 > ```
->     A formula which has held up pretty well across a lot of benchmarks for years is
->     that for optimal throughput the number of active connections should be somewhere
->     near ((core_count * 2) + effective_spindle_count). Core count should not include
->     HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
->     the active data set is fully cached, and approaches the actual number of spindles
->     as the cache hit rate falls. ... There hasn't been any analysis so far regarding
->     how well the formula works with SSDs.
+> A formula which has held up pretty well across a lot of benchmarks for years is
+> that for optimal throughput the number of active connections should be somewhere
+> near ((core_count * 2) + effective_spindle_count). Core count should not include
+> HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
+> the active data set is fully cached, and approaches the actual number of spindles
+> as the cache hit rate falls. ... There hasn't been any analysis so far regarding
+> how well the formula works with SSDs.
 > ```
 
 このメモは以下を示しています。
