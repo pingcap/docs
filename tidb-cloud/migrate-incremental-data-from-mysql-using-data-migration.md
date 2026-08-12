@@ -27,7 +27,7 @@ summary: 了解如何使用 Data Migration，将托管于 Amazon Aurora MySQL、
 
 ## 限制
 
-> **注意**：
+> **注意：**
 >
 > 本节仅包含增量数据迁移相关的限制。建议你同时阅读通用限制，详见 [限制](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)。
 
@@ -52,7 +52,7 @@ summary: 了解如何使用 Data Migration，将托管于 Amazon Aurora MySQL、
 
 ## 前置条件
 
-> **注意**：
+> **注意：**
 >
 > 本节仅包含增量数据迁移相关的前置条件。建议你同时阅读[通用前置条件](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)。
 
@@ -117,7 +117,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 ### 针对自建 MySQL 实例
 
-> **注意**：
+> **注意：**
 >
 > 具体步骤和命令可能因 MySQL 版本和配置不同而有所差异。请确保你了解开启 GTID 的影响，并在非生产环境中充分测试和验证后再进行操作。
 
