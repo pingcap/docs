@@ -116,9 +116,9 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
-    The **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
@@ -160,9 +160,9 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
-    The **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
     - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
