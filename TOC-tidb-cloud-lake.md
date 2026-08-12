@@ -21,9 +21,14 @@
     - [Node.js](/tidb-cloud-lake/guides/connect-using-node-js.md)
     - [Python](/tidb-cloud-lake/guides/connect-using-python.md)
     - [Rust](/tidb-cloud-lake/guides/connect-using-rust.md)
+  - AI Tools
+    - [MCP Client Integration](/tidb-cloud-lake/guides/mcp-client-integration.md)
+    - [MCP Server](/tidb-cloud-lake/guides/mcp-server.md)
   - Visualization
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
     - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
+    - [Jupyter Notebook](/tidb-cloud-lake/guides/jupyter-notebook.md)
+    - [Superset](/tidb-cloud-lake/guides/superset.md)
   - Network Access
     - [Connect with AWS PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
 - Manage Resources
