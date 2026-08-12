@@ -45,22 +45,26 @@ tiup bench ch -H 172.16.5.140 -P 4000 -D tpcc prepare
 
 ログ出力は次のとおりです。
 
-    creating nation
-    creating region
-    creating supplier
-    generating nation table
-    generate nation table done
-    generating region table
-    generate region table done
-    generating suppliers table
-    generate suppliers table done
-    creating view revenue1
+```
+creating nation
+creating region
+creating supplier
+generating nation table
+generate nation table done
+generating region table
+generate region table done
+generating suppliers table
+generate suppliers table done
+creating view revenue1
+```
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
 TiFlashをデプロイした後、 TiFlash はTiKV データを自動的に複製しません。`tpcc`のTiFlashレプリカを作成するには、次の SQL 文を実行する必要があります。指定されたTiFlashレプリカが作成されると、TiKV は最新のデータをリアルタイムでTiFlashに自動的に複製します。次の例では、クラスターに 2 つのTiFlashノードをデプロイし、レプリカ数を 2 に設定しています。
 
-    ALTER DATABASE tpcc SET tiflash replica 2;
+```
+ALTER DATABASE tpcc SET tiflash replica 2;
+```
 
 `tpcc`データベース内のすべてのテーブルのレプリケーションが完了しているかどうかを確認するには、次のステートメントを実行します。`WHERE`句は、確認するデータベースとテーブルを指定します。すべてのデータベースのレプリケーション状態を確認する場合は、ステートメントから`WHERE`句を削除します。
 
@@ -77,19 +81,21 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 TiDBオプティマイザが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。tidb_analyze_column_options **<a href="/system-variables.md#tidb_analyze_column_options-new-in-v830">`tidb_analyze_column_options`</a> `ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
-    set global tidb_analyze_column_options='ALL';
-    analyze table customer;
-    analyze table district;
-    analyze table history;
-    analyze table item;
-    analyze table new_order;
-    analyze table order_line;
-    analyze table orders;
-    analyze table stock;
-    analyze table warehouse;
-    analyze table nation;
-    analyze table region;
-    analyze table supplier;
+```
+set global tidb_analyze_column_options='ALL';
+analyze table customer;
+analyze table district;
+analyze table history;
+analyze table item;
+analyze table new_order;
+analyze table order_line;
+analyze table orders;
+analyze table stock;
+analyze table warehouse;
+analyze table nation;
+analyze table region;
+analyze table supplier;
+```
 
 ## テストを実行する {#run-the-test}
 

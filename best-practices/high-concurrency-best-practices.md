@@ -108,7 +108,9 @@ PD の監視メトリックでも、ホットスポットが発生したこと�
 
 上記のテストでは、ベストプラクティスで期待される理想的なパフォーマンスを達成できていません。これは、TiDBに新しく作成された各テーブルのデータを保存するために、デフォルトで1つのリージョンのみが分割され、以下のデータ範囲が保持されるためです。
 
-    [CommonPrefix + TableID, CommonPrefix + TableID + 1)
+```
+[CommonPrefix + TableID, CommonPrefix + TableID + 1)
+```
 
 短期間のうちに、同じリージョンに大量のデータが継続的に書き込まれます。
 
@@ -229,5 +231,7 @@ create table t (a int, b int) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=3;
 
 バージョン2.1では、書き込み競合が頻繁に発生するシナリオにおいて、トランザクションの競合を事前に特定するために、TiDBに[ラッチ機構](/tidb-configuration-file.md#txn-local-latches)が導入されました。これは、書き込み競合によるTiDBおよびTiKVにおけるトランザクションコミットの再試行を削減することを目的としています。通常、バッチタスクはTiDBに既に保存されているデータを使用するため、トランザクションの書き込み競合は発生しません。このような状況では、TiDBのラッチを無効化することで、小さなオブジェクトへのメモリ割り当てを削減できます。
 
-    [txn-local-latches]
-    enabled = false
+```
+[txn-local-latches]
+enabled = false
+```

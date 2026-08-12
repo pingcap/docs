@@ -77,7 +77,9 @@ PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 
 実行結果:
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 ```sql
 SET @id = 1;
@@ -85,7 +87,9 @@ SET @id = 1;
 
 実行結果:
 
-    Query OK, 0 rows affected (0.04 sec)
+```
+Query OK, 0 rows affected (0.04 sec)
+```
 
 ```sql
 EXECUTE `books_query` USING @id;
@@ -93,12 +97,14 @@ EXECUTE `books_query` USING @id;
 
 実行結果:
 
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    | id      | title                           | type   | published_at        | stock | price  |
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    | 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    1 row in set (0.05 sec)
+```
++---------+---------------------------------+--------+---------------------+-------+--------+
+| id      | title                           | type   | published_at        | stock | price  |
++---------+---------------------------------+--------+---------------------+-------+--------+
+| 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
++---------+---------------------------------+--------+---------------------+-------+--------+
+1 row in set (0.05 sec)
+```
 
 </div>
 
@@ -142,7 +148,9 @@ PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `pri
 
 実行結果:
 
-    Query OK, 0 rows affected (0.03 sec)
+```
+Query OK, 0 rows affected (0.03 sec)
+```
 
 ```sql
 SET @title = 'TiDB Developer Guide';
@@ -154,7 +162,9 @@ SET @published_at = NOW();
 
 実行結果:
 
-    Query OK, 0 rows affected (0.04 sec)
+```
+Query OK, 0 rows affected (0.04 sec)
+```
 
 ```sql
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
@@ -162,7 +172,9 @@ EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 
 実行結果:
 
-    Query OK, 1 row affected (0.03 sec)
+```
+Query OK, 1 row affected (0.03 sec)
+```
 
 </div>
 
@@ -198,7 +210,9 @@ try (Connection connection = ds.getConnection()) {
 
 以下は、JDBC接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトデータベース: `test` :
 
-    jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
+```
+jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
+```
 
 データを挿入するときに他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
 

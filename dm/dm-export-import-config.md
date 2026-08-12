@@ -47,7 +47,9 @@ config export [--dir directory]
 config export -d /tmp/configs
 ```
 
-    export configs to directory `/tmp/configs` succeed
+```
+export configs to directory `/tmp/configs` succeed
+```
 
 ## クラスターのデータソースとタスク構成をインポートする {#import-the-data-source-and-task-configuration-of-clusters}
 
@@ -74,6 +76,8 @@ config import [--dir directory]
 config import -d /tmp/configs
 ```
 
-    start creating sources
-    start creating tasks
-    import configs from directory `/tmp/configs` succeed
+```
+start creating sources
+start creating tasks
+import configs from directory `/tmp/configs` succeed
+```

@@ -18,7 +18,9 @@ TiDBの監視システムは、PrometheusとGrafanaで構成されています�
 
 はい。Prometheus が起動されているマシンで起動スクリプトを見つけ、起動パラメータを編集して Prometheus を再起動してください。
 
-    --storage.tsdb.retention="60d"
+```
+--storage.tsdb.retention="60d"
+```
 
 ## リージョンヘルスモニター {#region-health-monitor}
 

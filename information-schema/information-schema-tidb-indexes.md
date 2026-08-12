@@ -12,23 +12,25 @@ USE information_schema;
 DESC tidb_indexes;
 ```
 
-    +---------------+---------------+------+------+---------+-------+
-    | Field         | Type          | Null | Key  | Default | Extra |
-    +---------------+---------------+------+------+---------+-------+
-    | TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
-    | TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
-    | NON_UNIQUE    | bigint(21)    | YES  |      | NULL    |       |
-    | KEY_NAME      | varchar(64)   | YES  |      | NULL    |       |
-    | SEQ_IN_INDEX  | bigint(21)    | YES  |      | NULL    |       |
-    | COLUMN_NAME   | varchar(64)   | YES  |      | NULL    |       |
-    | SUB_PART      | bigint(21)    | YES  |      | NULL    |       |
-    | INDEX_COMMENT | varchar(2048) | YES  |      | NULL    |       |
-    | Expression    | varchar(64)   | YES  |      | NULL    |       |
-    | INDEX_ID      | bigint(21)    | YES  |      | NULL    |       |
-    | IS_VISIBLE    | varchar(64)   | YES  |      | NULL    |       |
-    | CLUSTERED     | varchar(64)   | YES  |      | NULL    |       |
-    +---------------+---------------+------+------+---------+-------+
-    12 rows in set (0.00 sec)
+```
++---------------+---------------+------+------+---------+-------+
+| Field         | Type          | Null | Key  | Default | Extra |
++---------------+---------------+------+------+---------+-------+
+| TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
+| TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
+| NON_UNIQUE    | bigint(21)    | YES  |      | NULL    |       |
+| KEY_NAME      | varchar(64)   | YES  |      | NULL    |       |
+| SEQ_IN_INDEX  | bigint(21)    | YES  |      | NULL    |       |
+| COLUMN_NAME   | varchar(64)   | YES  |      | NULL    |       |
+| SUB_PART      | bigint(21)    | YES  |      | NULL    |       |
+| INDEX_COMMENT | varchar(2048) | YES  |      | NULL    |       |
+| Expression    | varchar(64)   | YES  |      | NULL    |       |
+| INDEX_ID      | bigint(21)    | YES  |      | NULL    |       |
+| IS_VISIBLE    | varchar(64)   | YES  |      | NULL    |       |
+| CLUSTERED     | varchar(64)   | YES  |      | NULL    |       |
++---------------+---------------+------+------+---------+-------+
+12 rows in set (0.00 sec)
+```
 
 `INDEX_ID`はTiDBが各インデックスに割り当てる一意のIDです。別のテーブルまたはAPIから取得した`INDEX_ID`と結合操作を行うために使用できます。
 

@@ -35,15 +35,17 @@ tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
 
 期待される出力:
 
-    ● Total 1 Tasks.
-    > #1 <
-               name: pitr
-             status: ● NORMAL
-              start: 2022-05-13 11:09:40.7 +0800
-                end: 2035-01-01 00:00:00 +0800
-            storage: s3://backup-101/log-backup
-        speed(est.): 0.00 ops/s
-    checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
+```
+● Total 1 Tasks.
+> #1 <
+           name: pitr
+         status: ● NORMAL
+          start: 2022-05-13 11:09:40.7 +0800
+            end: 2035-01-01 00:00:00 +0800
+        storage: s3://backup-101/log-backup
+    speed(est.): 0.00 ops/s
+checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
+```
 
 フィールドの説明は次のとおりです。
 

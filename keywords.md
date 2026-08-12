@@ -15,13 +15,17 @@ summary: キーワードと予約語
 CREATE TABLE select (a INT);
 ```
 
-    ERROR 1105 (HY000): line 0 column 19 near " (a INT)" (total length 27)
+```
+ERROR 1105 (HY000): line 0 column 19 near " (a INT)" (total length 27)
+```
 
 ```sql
 CREATE TABLE `select` (a INT);
 ```
 
-    Query OK, 0 rows affected (0.09 sec)
+```
+Query OK, 0 rows affected (0.09 sec)
+```
 
 予約語ではないキーワードはバッククォートを必要としません。例えば、 `BEGIN` や `END` は、次の文で識別子として使用できます。
 
@@ -29,7 +33,9 @@ CREATE TABLE `select` (a INT);
 CREATE TABLE `select` (BEGIN int, END int);
 ```
 
-    Query OK, 0 rows affected (0.09 sec)
+```
+Query OK, 0 rows affected (0.09 sec)
+```
 
 特別な場合として、予約語を区切り文字 `.` とともに使用する場合は、バッククォートは不要です。
 
@@ -37,7 +43,9 @@ CREATE TABLE `select` (BEGIN int, END int);
 CREATE TABLE test.select (BEGIN int, END int);
 ```
 
-    Query OK, 0 rows affected (0.08 sec)
+```
+Query OK, 0 rows affected (0.08 sec)
+```
 
 バージョン7.5.3および7.6.0以降、TiDBは [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) テーブルにキーワードの完全なリストを提供します。
 

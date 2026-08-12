@@ -52,13 +52,17 @@ TiDBは、特別なクライアントやドライバーを必要とせず、標�
 create table t (c int);
 ```
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 ```sql
 insert into t values (1), (2), (3);
 ```
 
-    Query OK, 3 rows affected (0.00 sec)
+```
+Query OK, 3 rows affected (0.00 sec)
+```
 
 表内のデータを表示する。
 
@@ -66,14 +70,16 @@ insert into t values (1), (2), (3);
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |    2 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 現在の時刻を表示する:
 
@@ -81,12 +87,14 @@ select * from t;
 select now();
 ```
 
-    +---------------------+
-    | now()               |
-    +---------------------+
-    | 2021-05-26 16:45:26 |
-    +---------------------+
-    1 row in set (0.00 sec)
+```
++---------------------+
+| now()               |
++---------------------+
+| 2021-05-26 16:45:26 |
++---------------------+
+1 row in set (0.00 sec)
+```
 
 行内のデータを更新します。
 
@@ -94,7 +102,9 @@ select now();
 update t set c=22 where c=2;
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 行のデータが更新されていることを確認します。
 
@@ -102,14 +112,16 @@ update t set c=22 where c=2;
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |   22 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|   22 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 ### `SELECT`文を使用して履歴データを読み取る {#read-historical-data-using-the-select-statement}
 
@@ -119,14 +131,16 @@ select * from t;
 select * from t as of timestamp '2021-05-26 16:45:26';
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |    2 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 > **Note:**
 >
@@ -140,26 +154,32 @@ select * from t as of timestamp '2021-05-26 16:45:26';
 start transaction read only as of timestamp '2021-05-26 16:45:26';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |    2 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 ```sql
 commit;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 トランザクションがコミットされた後、最新のデータを読み取ることができます。
 
@@ -167,14 +187,16 @@ commit;
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |   22 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|   22 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 > **Note:**
 >
@@ -188,32 +210,40 @@ select * from t;
 set transaction read only as of timestamp '2021-05-26 16:45:26';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 begin;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |    2 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|    2 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 ```sql
 commit;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 トランザクションがコミットされた後、最新のデータを読み取ることができます。
 
@@ -221,14 +251,16 @@ commit;
 select * from t;
 ```
 
-    +------+
-    | c    |
-    +------+
-    |    1 |
-    |   22 |
-    |    3 |
-    +------+
-    3 rows in set (0.00 sec)
+```
++------+
+| c    |
++------+
+|    1 |
+|   22 |
+|    3 |
++------+
+3 rows in set (0.00 sec)
+```
 
 > **Note:**
 >

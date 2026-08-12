@@ -13,14 +13,18 @@ TiDBのリテラル値には、文字リテラル、数値リテラル、時刻�
 
 文字列とは、一重引用符`'`または二重引用符`"` ）で囲まれたバイト列または文字列です。例：
 
-    'example string'
-    "example string"
+```
+'example string'
+"example string"
+```
 
 引用符で囲まれた文字列を隣り合わせに配置すると、1つの文字列に連結されます。以下の行は同等です。
 
-    'a string'
-    'a' ' ' 'string'
-    "a" ' ' "string"
+```
+'a string'
+'a' ' ' 'string'
+"a" ' ' "string"
+```
 
 `ANSI_QUOTES` SQL モードが有効になっている場合、二重引用符で囲まれた文字列は識別子として解釈されるため、文字列リテラルは一重引用符で囲んでのみ囲むことができます。
 
@@ -31,19 +35,25 @@ TiDBのリテラル値には、文字リテラル、数値リテラル、時刻�
 
 文字列リテラルにはオプションの`character set introducer`と`COLLATE clause`があり、特定の文字セットと照合順序を使用する文字列として指定できます。
 
-    [_charset_name]'string' [COLLATE collation_name]
+```
+[_charset_name]'string' [COLLATE collation_name]
+```
 
 例えば：
 
-    SELECT _latin1'string';
-    SELECT _binary'string';
-    SELECT _utf8'string' COLLATE utf8_bin;
+```
+SELECT _latin1'string';
+SELECT _binary'string';
+SELECT _utf8'string' COLLATE utf8_bin;
+```
 
 N'literal'（またはn'literal'）を使用して、各国語文字セットの文字列を作成できます。以下の文はどちらも同じ意味です。
 
-    SELECT N'some text';
-    SELECT n'some text';
-    SELECT _utf8'some text';
+```
+SELECT N'some text';
+SELECT n'some text';
+SELECT _utf8'some text';
+```
 
 文字列内の特殊文字を表すには、エスケープ文字を使用してエスケープします。
 
@@ -121,12 +131,14 @@ Time 型の小数点も`.`で、小数点以下の精度は最大 6 桁になり
 SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
 ```
 
-    +------+------+------+-------+-------+-------+
-    | TRUE | true | tRuE | FALSE | FaLsE | false |
-    +------+------+------+-------+-------+-------+
-    |    1 |    1 |    1 |     0 |     0 |     0 |
-    +------+------+------+-------+-------+-------+
-    1 row in set (0.00 sec)
+```
++------+------+------+-------+-------+-------+
+| TRUE | true | tRuE | FALSE | FaLsE | false |
++------+------+------+-------+-------+-------+
+|    1 |    1 |    1 |     0 |     0 |     0 |
++------+------+------+-------+-------+-------+
+1 row in set (0.00 sec)
+```
 
 ## 16進数リテラル {#hexadecimal-literals}
 
@@ -134,17 +146,21 @@ SELECT TRUE, true, tRuE, FALSE, FaLsE, false;
 
 有効な16進数リテラル:
 
-    X'ac12'
-    X'12AC'
-    x'ac12'
-    x'12AC'
-    0xac12
-    0x12AC
+```
+X'ac12'
+X'12AC'
+x'ac12'
+x'12AC'
+0xac12
+0x12AC
+```
 
 無効な16進数リテラル:
 
-    X'1z' (z is not a hexadecimal legal digit)
-    0X12AC (0X must be written as 0x)
+```
+X'1z' (z is not a hexadecimal legal digit)
+0X12AC (0X must be written as 0x)
+```
 
 `X'val'`記法で記述された 16 進数リテラルは、偶数桁でなければなりません。`val`の長さが奇数（例えば`X'A'`や`X'11A'` ）の場合、構文エラーを回避するには、値の先頭にゼロを付加します。
 
@@ -188,14 +204,18 @@ mysql> SELECT X'54694442';
 
 有効なビット値リテラル:
 
-    b'01'
-    B'01'
-    0b01
+```
+b'01'
+B'01'
+0b01
+```
 
 無効なビット値リテラル:
 
-    b'2' (2 is not a binary digit; it must be 0 or 1)
-    0B01 (0B must be written as 0b)
+```
+b'2' (2 is not a binary digit; it must be 0 or 1)
+0B01 (0B must be written as 0b)
+```
 
 デフォルトでは、ビット値リテラルはバイナリ文字列です。
 

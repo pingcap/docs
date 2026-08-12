@@ -189,12 +189,14 @@ SELECT * FROM sys.schema_unused_indexes;
 
 次のような結果が返されます。
 
-    +-----------------+---------------+--------------------+
-    | object_schema   | object_name   | index_name         |
-    +---------------- + ------------- + -------------------+
-    | bookshop        | users         | nickname           |
-    | bookshop        | ratings       | uniq_book_user_idx |
-    +---------------- + ------------- + -------------------+
+```
++-----------------+---------------+--------------------+
+| object_schema   | object_name   | index_name         |
++---------------- + ------------- + -------------------+
+| bookshop        | users         | nickname           |
+| bookshop        | ratings       | uniq_book_user_idx |
++---------------- + ------------- + -------------------+
+```
 
 ### `schema_unused_indexes`を使用する際の考慮事項 {#considerations-when-using-schema-unused-indexes}
 

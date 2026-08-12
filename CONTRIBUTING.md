@@ -76,25 +76,31 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 ### ステップ2: フォークしたリポジトリをローカルストレージにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
 
-    cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
-    git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
+```
+cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
+git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
 
-    cd $working_dir/docs
-    git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
-    git remote -v # Confirms that your remote makes sense
+cd $working_dir/docs
+git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
+git remote -v # Confirms that your remote makes sense
+```
 
 ### ステップ3: 新しいブランチを作成する {#step-3-create-a-new-branch}
 
 1.  ローカル マスターを、upstream/master で最新の状態にします。
 
-        cd $working_dir/docs
-        git fetch upstream
-        git checkout master
-        git rebase upstream/master
+    ```
+    cd $working_dir/docs
+    git fetch upstream
+    git checkout master
+    git rebase upstream/master
+    ```
 
 2.  マスター ブランチに基づいて新しいブランチを作成します。
 
-        git checkout -b new-branch-name
+    ```
+    git checkout -b new-branch-name
+    ```
 
 ### ステップ4：何か行動を起こす {#step-4-do-something}
 
@@ -102,21 +108,27 @@ TiDB 用の新しいドキュメントを作成する場合は、当社のスタ
 
 ### ステップ5: 変更をコミットする {#step-5-commit-your-changes}
 
-    git status # Checks the local status
-    git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
-    git commit -m "commit-message: update the xx"
+```
+git status # Checks the local status
+git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
+git commit -m "commit-message: update the xx"
+```
 
 [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照。
 
 ### ステップ6: ブランチをアップストリーム/マスターと同期させる {#step-6-keep-your-branch-in-sync-with-upstream-master}
 
-    # While on your new branch
-    git fetch upstream
-    git rebase upstream/master
+```
+# While on your new branch
+git fetch upstream
+git rebase upstream/master
+```
 
 ### ステップ7: 変更をリモートにプッシュする {#step-7-push-your-changes-to-the-remote}
 
-    git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
+```
+git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
+```
 
 ### ステップ8: プルリクエストを作成する {#step-8-create-a-pull-request}
 

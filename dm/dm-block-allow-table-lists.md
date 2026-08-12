@@ -100,14 +100,16 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 アップストリーム MySQL インスタンスに次のテーブルが含まれていると仮定します。
 
-    `logs`.`messages_2016`
-    `logs`.`messages_2017`
-    `logs`.`messages_2018`
-    `forum`.`users`
-    `forum`.`messages`
-    `forum_backup_2016`.`messages`
-    `forum_backup_2017`.`messages`
-    `forum_backup_2018`.`messages`
+```
+`logs`.`messages_2016`
+`logs`.`messages_2017`
+`logs`.`messages_2018`
+`forum`.`users`
+`forum`.`messages`
+`forum_backup_2016`.`messages`
+`forum_backup_2017`.`messages`
+`forum_backup_2018`.`messages`
+```
 
 構成は次のとおりです。
 

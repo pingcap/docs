@@ -301,7 +301,9 @@ TiDB で`MySQLDialect`を使用する場合は、以下の動作に注意して�
 
 TiDB で`SERIALIZABLE`トランザクション分離レベルを設定しようとするアプリケーションは、次のエラーに遭遇します。
 
-    The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
+```
+The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
+```
 
 このエラーを回避するには、サーバー側で以下のTiDBシステム変数を設定してください。
 

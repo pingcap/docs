@@ -72,12 +72,14 @@ SHOW CREATE VIEW book_with_ratings\G
 
 結果は次のようになります。
 
-    *************************** 1. row ***************************
-                    View: book_with_ratings
-             Create View: CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `book_with_ratings` (`book_id`, `ANY_VALUE(b.title)`, `book_title`, `average_score`) AS SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
-    character_set_client: utf8mb4
-    collation_connection: utf8mb4_general_ci
-    1 row in set (0.00 sec)
+```
+*************************** 1. row ***************************
+                View: book_with_ratings
+         Create View: CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `book_with_ratings` (`book_id`, `ANY_VALUE(b.title)`, `book_title`, `average_score`) AS SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
+character_set_client: utf8mb4
+collation_connection: utf8mb4_general_ci
+1 row in set (0.00 sec)
+```
 
 ### `INFORMATION_SCHEMA.VIEWS`テーブルをクエリする {#query-the-information-schema-views-table}
 
@@ -87,18 +89,20 @@ SELECT * FROM information_schema.views WHERE TABLE_NAME = 'book_with_ratings'\G
 
 結果は次のようになります。
 
-    *************************** 1. row ***************************
-           TABLE_CATALOG: def
-            TABLE_SCHEMA: bookshop
-              TABLE_NAME: book_with_ratings
-         VIEW_DEFINITION: SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
-            CHECK_OPTION: CASCADED
-            IS_UPDATABLE: NO
-                 DEFINER: root@%
-           SECURITY_TYPE: DEFINER
-    CHARACTER_SET_CLIENT: utf8mb4
-    COLLATION_CONNECTION: utf8mb4_general_ci
-    1 row in set (0.00 sec)
+```
+*************************** 1. row ***************************
+       TABLE_CATALOG: def
+        TABLE_SCHEMA: bookshop
+          TABLE_NAME: book_with_ratings
+     VIEW_DEFINITION: SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
+        CHECK_OPTION: CASCADED
+        IS_UPDATABLE: NO
+             DEFINER: root@%
+       SECURITY_TYPE: DEFINER
+CHARACTER_SET_CLIENT: utf8mb4
+COLLATION_CONNECTION: utf8mb4_general_ci
+1 row in set (0.00 sec)
+```
 
 ## ビューをドロップ {#drop-views}
 

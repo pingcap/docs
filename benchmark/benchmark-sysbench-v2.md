@@ -52,16 +52,20 @@ IDCマシン
 
 -   バージョン1.0.8
 
-        sync-log = false
-        grpc-concurrency = 8
-        grpc-raft-conn-num = 24
+    ```
+    sync-log = false
+    grpc-concurrency = 8
+    grpc-raft-conn-num = 24
+    ```
 
 -   v2.0.0-rc6
 
-        sync-log = false
-        grpc-concurrency = 8
-        grpc-raft-conn-num = 24
-        use-delete-range: false
+    ```
+    sync-log = false
+    grpc-concurrency = 8
+    grpc-raft-conn-num = 24
+    use-delete-range: false
+    ```
 
 ### クラスタトポロジー {#cluster-topology}
 

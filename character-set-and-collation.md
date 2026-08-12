@@ -65,12 +65,14 @@ SELECT
 \G
 ```
 
-    *************************** 1. row ***************************
-    'ss' COLLATE utf8mb4_general_ci = 'ß': 0
-    'ss' COLLATE utf8mb4_unicode_ci = 'ß': 1
-    'ss' COLLATE utf8mb4_0900_ai_ci = 'ß': 1
-      'ss' COLLATE utf8mb4_0900_bin = 'ß': 0
-    1 row in set (0.01 sec)
+```
+*************************** 1. row ***************************
+'ss' COLLATE utf8mb4_general_ci = 'ß': 0
+'ss' COLLATE utf8mb4_unicode_ci = 'ß': 1
+'ss' COLLATE utf8mb4_0900_ai_ci = 'ß': 1
+  'ss' COLLATE utf8mb4_0900_bin = 'ß': 0
+1 row in set (0.01 sec)
+```
 
 ### 文字セットと照合順序の命名 {#character-set-and-collation-naming}
 
@@ -186,7 +188,9 @@ CREATE TABLE utf8_test (
     ) CHARACTER SET utf8;
 ```
 
-    Query OK, 0 rows affected (0.09 sec)
+```
+Query OK, 0 rows affected (0.09 sec)
+```
 
 ```sql
 CREATE TABLE utf8m4_test (
@@ -194,36 +198,46 @@ CREATE TABLE utf8m4_test (
     ) CHARACTER SET utf8mb4;
 ```
 
-    Query OK, 0 rows affected (0.09 sec)
+```
+Query OK, 0 rows affected (0.09 sec)
+```
 
 ```sql
 INSERT INTO utf8_test VALUES ('😉');
 ```
 
-    ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
+```
+ERROR 1366 (HY000): incorrect utf8 value f09f9889(😉) for column c
+```
 
 ```sql
 INSERT INTO utf8m4_test VALUES ('😉');
 ```
 
-    Query OK, 1 row affected (0.02 sec)
+```
+Query OK, 1 row affected (0.02 sec)
+```
 
 ```sql
 SELECT char_length(c), length(c), c FROM utf8_test;
 ```
 
-    Empty set (0.01 sec)
+```
+Empty set (0.01 sec)
+```
 
 ```sql
 SELECT char_length(c), length(c), c FROM utf8m4_test;
 ```
 
-    +----------------+-----------+------+
-    | char_length(c) | length(c) | c    |
-    +----------------+-----------+------+
-    |              1 |         4 | 😉     |
-    +----------------+-----------+------+
-    1 row in set (0.00 sec)
+```
++----------------+-----------+------+
+| char_length(c) | length(c) | c    |
++----------------+-----------+------+
+|              1 |         4 | 😉     |
++----------------+-----------+------+
+1 row in set (0.00 sec)
+```
 
 ## 異なるレイヤーでの文字セットと照合順序 {#character-set-and-collation-in-different-layers}
 

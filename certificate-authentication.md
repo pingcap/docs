@@ -40,10 +40,12 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
     上記のコマンドの出力:
 
-        Generating RSA private key, 2048 bit long modulus (2 primes)
-        ....................+++++
-        ...............................................+++++
-        e is 65537 (0x010001)
+    ```
+    Generating RSA private key, 2048 bit long modulus (2 primes)
+    ....................+++++
+    ...............................................+++++
+    e is 65537 (0x010001)
+    ```
 
 2.  次のコマンドを実行して、CA キーに対応する証明書を生成します。
 
@@ -189,8 +191,10 @@ openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem
 
 証明書が検証されると、次の結果が表示されます。
 
-    server-cert.pem: OK
-    client-cert.pem: OK
+```
+server-cert.pem: OK
+client-cert.pem: OK
+```
 
 ## 証明書を使用するようにTiDBとクライアントを構成する {#configure-tidb-and-the-client-to-use-certificates}
 
@@ -209,7 +213,9 @@ ssl-ca = "path/to/ca-cert.pem"
 
 TiDBを起動し、ログを確認します。ログに以下の情報が表示されていれば、設定は成功です。
 
-    [INFO] [server.go:286] ["mysql protocol server secure connection is enabled"] ["client verification enabled"=true]
+```
+[INFO] [server.go:286] ["mysql protocol server secure connection is enabled"] ["client verification enabled"=true]
+```
 
 ### クライアント証明書を使用するようにクライアントを構成する {#configure-the-client-to-use-client-certificate}
 
@@ -312,13 +318,15 @@ MySQL クライアントに接続し、次のステートメントを実行し�
 
 出力:
 
-    --------------
-    mysql  Ver 8.5.3 for Linux on x86_64 (MySQL Community Server - GPL)
+```
+--------------
+mysql  Ver 8.5.3 for Linux on x86_64 (MySQL Community Server - GPL)
 
-    Connection id:       1
-    Current database:    test
-    Current user:        root@127.0.0.1
-    SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
+Connection id:       1
+Current database:    test
+Current user:        root@127.0.0.1
+SSL:                 Cipher in use is TLS_AES_128_GCM_SHA256
+```
 
 次に、次のステートメントを実行します。
 
@@ -328,17 +336,19 @@ SHOW VARIABLES LIKE '%ssl%';
 
 出力:
 
-    +---------------+----------------------------------+
-    | Variable_name | Value                            |
-    +---------------+----------------------------------+
-    | have_openssl  | YES                              |
-    | have_ssl      | YES                              |
-    | ssl_ca        | /path/to/ca-cert.pem             |
-    | ssl_cert      | /path/to/server-cert.pem         |
-    | ssl_cipher    |                                  |
-    | ssl_key       | /path/to/server-key.pem          |
-    +---------------+----------------------------------+
-    6 rows in set (0.06 sec)
+```
++---------------+----------------------------------+
+| Variable_name | Value                            |
++---------------+----------------------------------+
+| have_openssl  | YES                              |
+| have_ssl      | YES                              |
+| ssl_ca        | /path/to/ca-cert.pem             |
+| ssl_cert      | /path/to/server-cert.pem         |
+| ssl_cipher    |                                  |
+| ssl_key       | /path/to/server-key.pem          |
++---------------+----------------------------------+
+6 rows in set (0.06 sec)
+```
 
 ## 証明書の更新と置き換え {#update-and-replace-certificate}
 

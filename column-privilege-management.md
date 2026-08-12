@@ -58,12 +58,14 @@ GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'newuser'@'%';
 SHOW GRANTS FOR 'newuser'@'%';
 ```
 
-    +---------------------------------------------------------------------+
-    | Grants for newuser@%                                                |
-    +---------------------------------------------------------------------+
-    | GRANT USAGE ON *.* TO 'newuser'@'%'                                 |
-    | GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'newuser'@'%' |
-    +---------------------------------------------------------------------+
+```
++---------------------------------------------------------------------+
+| Grants for newuser@%                                                |
++---------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'newuser'@'%'                                 |
+| GRANT SELECT(col1, col2), UPDATE(col3) ON test.tbl TO 'newuser'@'%' |
++---------------------------------------------------------------------+
+```
 
 `SHOW GRANTS`を使用する以外にも、 `INFORMATION_SCHEMA.COLUMN_PRIVILEGES`クエリすることで列レベルの権限情報を表示することもできます。
 
@@ -76,12 +78,14 @@ REVOKE SELECT(col2) ON test.tbl FROM 'newuser'@'%';
 SHOW GRANTS FOR 'newuser'@'%';
 ```
 
-    +---------------------------------------------------------------+
-    | Grants for newuser@%                                          |
-    +---------------------------------------------------------------+
-    | GRANT USAGE ON *.* TO 'newuser'@'%'                           |
-    | GRANT SELECT(col1), UPDATE(col3) ON test.tbl TO 'newuser'@'%' |
-    +---------------------------------------------------------------+
+```
++---------------------------------------------------------------+
+| Grants for newuser@%                                          |
++---------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'newuser'@'%'                           |
+| GRANT SELECT(col1), UPDATE(col3) ON test.tbl TO 'newuser'@'%' |
++---------------------------------------------------------------+
+```
 
 ## 例：列レベルの権限アクセス制御 {#example-column-level-privilege-access-control}
 

@@ -166,29 +166,33 @@ sequenceDiagram
 
 データを GCS または Azure Blob Storage にバックアップすると、SST ファイル、 `backupmeta`ファイル、および`backup.lock`ファイルは、次の構造で同じディレクトリに保存されます。
 
-    .
-    └── 20220621
-        ├── backupmeta
-        |—— backup.lock
-        ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-        ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-        └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+```
+.
+└── 20220621
+    ├── backupmeta
+    |—— backup.lock
+    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+```
 
 データをAmazon S3またはネットワークディスクにバックアップすると、SSTファイルは`storeID`に基づいてサブディレクトリに保存されます。構造は次のとおりです。
 
-    .
-    └── 20220621
-        ├── backupmeta
-        |—— backup.lock
-        ├── store1
-        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-        ├── store100
-        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-        ├── store2
-        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-        ├── store3
-        ├── store4
-        └── store5
+```
+.
+└── 20220621
+    ├── backupmeta
+    |—— backup.lock
+    ├── store1
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store100
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store2
+    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+    ├── store3
+    ├── store4
+    └── store5
+```
 
 ## 関連項目 {#see-also}
 

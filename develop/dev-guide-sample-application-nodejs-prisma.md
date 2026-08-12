@@ -264,9 +264,11 @@ Prisma でデータ モデルを定義する方法については、データモ
 
 **期待される実行出力:**
 
-    Your database is now in sync with your schema.
+```
+Your database is now in sync with your schema.
 
-    ✔ Generated Prisma Client (5.1.1 | library) to ./node_modules/@prisma/client in 54ms
+✔ Generated Prisma Client (5.1.1 | library) to ./node_modules/@prisma/client in 54ms
+```
 
 このコマンドは`prisma/prisma.schema`に基づいて TiDB データベースにアクセスするための[Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client)も生成します。
 
@@ -304,11 +306,13 @@ void main();
 
 接続が成功すると、ターミナルには次のようにTiDBのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
-    🆕 Created a new player with ID 1.
-    ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
-    🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.
-    🚮 Player 1 has been deleted.
+```
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
+🆕 Created a new player with ID 1.
+ℹ️ Got Player 1: Player { id: 1, coins: 100, goods: 100 }
+🔢 Added 50 coins and 50 goods to player 1, now player 1 has 150 coins and 150 goods.
+🚮 Player 1 has been deleted.
+```
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

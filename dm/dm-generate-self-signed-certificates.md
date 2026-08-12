@@ -88,11 +88,13 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
 3.  `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
-        [ alt_names ]
-        IP.1 = 127.0.0.1
-        IP.2 = 172.16.10.11
-        IP.3 = 172.16.10.12
-        IP.4 = 172.16.10.13
+    ```
+    [ alt_names ]
+    IP.1 = 127.0.0.1
+    IP.2 = 172.16.10.11
+    IP.3 = 172.16.10.12
+    IP.4 = 172.16.10.13
+    ```
 
     現在、SAN の次のチェック項目がサポートされています。
 
@@ -126,9 +128,11 @@ DM マスター インスタンスに証明書を発行するには、次の手�
 
 7.  現在のディレクトリに次のファイルが存在することを確認します。
 
-        ca.pem
-        master-cert.pem
-        master-key.pem
+    ```
+    ca.pem
+    master-cert.pem
+    master-key.pem
+    ```
 
 > **Note:**
 >

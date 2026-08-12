@@ -11,16 +11,18 @@ summary: データ移行タスクを停止する方法を学びます。
 help stop-task
 ```
 
-    stop a specified task
+```
+stop a specified task
 
-    Usage:
-     dmctl stop-task [-s source ...] <task-name | task-file> [flags]
+Usage:
+ dmctl stop-task [-s source ...] <task-name | task-file> [flags]
 
-    Flags:
-     -h, --help   help for stop-task
+Flags:
+ -h, --help   help for stop-task
 
-    Global Flags:
-     -s, --source strings   MySQL Source ID
+Global Flags:
+ -s, --source strings   MySQL Source ID
+```
 
 ## 使用例 {#usage-example}
 
@@ -39,19 +41,21 @@ stop-task [-s "mysql-replica-01"]  task-name
 stop-task test
 ```
 
-    {
-        "op": "Stop",
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
+```
+{
+    "op": "Stop",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        }
+    ]
+}
+```
 
 > **Note:**
 >

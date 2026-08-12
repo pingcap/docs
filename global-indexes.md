@@ -134,7 +134,9 @@ CREATE TABLE t2 (
 ) PARTITION BY HASH(col1) PARTITIONS 5;
 ```
 
-    ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
+```
+ERROR 1503 (HY000): A CLUSTERED INDEX must include all columns in the table's partitioning function
+```
 
 クラスター化インデックスはグローバルインデックスとしても機能しません。これは、クラスター化インデックスをグローバルにすると、テーブルがパーティション化されなくなるためです。クラスター化インデックスのキーはパーティションレベルの行データのキーですが、グローバルインデックスはテーブルレベルで定義されるため、競合が発生します。主キーをグローバルインデックスにする必要がある場合は、明示的に非クラスター化インデックスとして定義する必要があります。例:
 
@@ -148,18 +150,20 @@ PRIMARY KEY(col1, col2) NONCLUSTERED GLOBAL
 SHOW CREATE TABLE t1\G
 ```
 
-           Table: t1
-    Create Table: CREATE TABLE `t1` (
-      `col1` int NOT NULL,
-      `col2` date NOT NULL,
-      `col3` int NOT NULL,
-      `col4` int NOT NULL,
-      UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
-      UNIQUE KEY `uidx3` (`col3`),
-      KEY `idx1` (`col1`) /*T![global_index] GLOBAL */
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
-    PARTITION BY HASH (`col3`) PARTITIONS 4
-    1 row in set (0.00 sec)
+```
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `col1` int NOT NULL,
+  `col2` date NOT NULL,
+  `col3` int NOT NULL,
+  `col4` int NOT NULL,
+  UNIQUE KEY `uidx12` (`col1`,`col2`) /*T![global_index] GLOBAL */,
+  UNIQUE KEY `uidx3` (`col3`),
+  KEY `idx1` (`col1`) /*T![global_index] GLOBAL */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY HASH (`col3`) PARTITIONS 4
+1 row in set (0.00 sec)
+```
 
 あるいは、 [`INFORMATION_SCHEMA.TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)テーブルをクエリし、出力の`IS_GLOBAL`列をチェックしてグローバル インデックスを識別することもできます。
 
@@ -167,15 +171,17 @@ SHOW CREATE TABLE t1\G
 SELECT * FROM information_schema.tidb_indexes WHERE table_name='t1';
 ```
 
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    | test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
-    | test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
-    | test         | t1         |          1 | idx1     |            1 | col1        |     NULL |               | NULL       |        3 | YES        | NO        |         1 |
-    +--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
-    3 rows in set (0.00 sec)
+```
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+| TABLE_SCHEMA | TABLE_NAME | NON_UNIQUE | KEY_NAME | SEQ_IN_INDEX | COLUMN_NAME | SUB_PART | INDEX_COMMENT | Expression | INDEX_ID | IS_VISIBLE | CLUSTERED | IS_GLOBAL |
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+| test         | t1         |          0 | uidx12   |            1 | col1        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
+| test         | t1         |          0 | uidx12   |            2 | col2        |     NULL |               | NULL       |        1 | YES        | NO        |         1 |
+| test         | t1         |          0 | uidx3    |            1 | col3        |     NULL |               | NULL       |        2 | YES        | NO        |         0 |
+| test         | t1         |          1 | idx1     |            1 | col1        |     NULL |               | NULL       |        3 | YES        | NO        |         1 |
++--------------+------------+------------+----------+--------------+-------------+----------+---------------+------------+----------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+```
 
 通常のテーブルをパーティション分割する場合、またはパーティションテーブルを再パーティションする場合、必要に応じてインデックスをグローバル インデックスまたはローカル インデックスに更新できます。
 
@@ -215,51 +221,55 @@ CREATE TABLE `sbtest` (
 
 TiDBでは、インデックスエントリはキーと値のペアとしてエンコードされます。パーティションテーブルの場合、各パーティションはTiKVレイヤーで独立した物理テーブルとして扱われ、それぞれに`partitionID`設定されます。したがって、パーティションテーブルにおけるインデックスエントリのエンコードは次のようになります。
 
-    Unique key
-    Key:
-    - PartitionID_indexID_ColumnValues
+```
+Unique key
+Key:
+- PartitionID_indexID_ColumnValues
 
-    Value:
-    - IntHandle
-     - TailLen_IntHandle
+Value:
+- IntHandle
+ - TailLen_IntHandle
 
-    - CommonHandle
-     - TailLen_IndexVersion_CommonHandle
+- CommonHandle
+ - TailLen_IndexVersion_CommonHandle
 
-    Non-unique key
-    Key:
-    - PartitionID_indexID_ColumnValues_Handle
+Non-unique key
+Key:
+- PartitionID_indexID_ColumnValues_Handle
 
-    Value:
-    - IntHandle
-     - TailLen_Padding
+Value:
+- IntHandle
+ - TailLen_Padding
 
-    - CommonHandle
-     - TailLen_IndexVersion
+- CommonHandle
+ - TailLen_IndexVersion
+```
 
 グローバルインデックスの場合、インデックスエントリのエンコーディングは異なります。グローバルインデックスのキーレイアウトが現在のインデックスキーのエンコーディングと互換性を保つため、新しいインデックスエンコーディングレイアウトは次のように定義されます。
 
-    Unique key
-    Key:
-    - TableID_indexID_ColumnValues
+```
+Unique key
+Key:
+- TableID_indexID_ColumnValues
 
-    Value:
-    - IntHandle
-     - TailLen_PartitionID_IntHandle
+Value:
+- IntHandle
+ - TailLen_PartitionID_IntHandle
 
-    - CommonHandle
-     - TailLen_IndexVersion_CommonHandle_PartitionID
+- CommonHandle
+ - TailLen_IndexVersion_CommonHandle_PartitionID
 
-    Non-unique key
-    Key:
-    - TableID_indexID_ColumnValues_Handle
+Non-unique key
+Key:
+- TableID_indexID_ColumnValues_Handle
 
-    Value:
-    - IntHandle
-     - TailLen_PartitionID
+Value:
+- IntHandle
+ - TailLen_PartitionID
 
-    - CommonHandle
-     - TailLen_IndexVersion_PartitionID
+- CommonHandle
+ - TailLen_IndexVersion_PartitionID
+```
 
 このエンコーディング方式では、 `TableID`グローバルインデックスキーの先頭に配置され、 `PartitionID`が値に格納されます。この設計の利点は、既存のインデックスキーエンコーディングとの互換性が確保されることです。しかし、いくつかの課題も生じます。例えば、 `DROP PARTITION`や`TRUNCATE PARTITION`などのDDL操作を実行する場合、インデックスエントリが連続して格納されないため、追加の処理が必要になります。
 

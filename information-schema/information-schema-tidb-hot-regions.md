@@ -16,21 +16,23 @@ USE information_schema;
 DESC tidb_hot_regions;
 ```
 
-    +----------------+-------------+------+------+---------+-------+
-    | Field          | Type        | Null | Key  | Default | Extra |
-    +----------------+-------------+------+------+---------+-------+
-    | TABLE_ID       | bigint(21)  | YES  |      | NULL    |       |
-    | INDEX_ID       | bigint(21)  | YES  |      | NULL    |       |
-    | DB_NAME        | varchar(64) | YES  |      | NULL    |       |
-    | TABLE_NAME     | varchar(64) | YES  |      | NULL    |       |
-    | INDEX_NAME     | varchar(64) | YES  |      | NULL    |       |
-    | REGION_ID      | bigint(21)  | YES  |      | NULL    |       |
-    | TYPE           | varchar(64) | YES  |      | NULL    |       |
-    | MAX_HOT_DEGREE | bigint(21)  | YES  |      | NULL    |       |
-    | REGION_COUNT   | bigint(21)  | YES  |      | NULL    |       |
-    | FLOW_BYTES     | bigint(21)  | YES  |      | NULL    |       |
-    +----------------+-------------+------+------+---------+-------+
-    10 rows in set (0.00 sec)
+```
++----------------+-------------+------+------+---------+-------+
+| Field          | Type        | Null | Key  | Default | Extra |
++----------------+-------------+------+------+---------+-------+
+| TABLE_ID       | bigint(21)  | YES  |      | NULL    |       |
+| INDEX_ID       | bigint(21)  | YES  |      | NULL    |       |
+| DB_NAME        | varchar(64) | YES  |      | NULL    |       |
+| TABLE_NAME     | varchar(64) | YES  |      | NULL    |       |
+| INDEX_NAME     | varchar(64) | YES  |      | NULL    |       |
+| REGION_ID      | bigint(21)  | YES  |      | NULL    |       |
+| TYPE           | varchar(64) | YES  |      | NULL    |       |
+| MAX_HOT_DEGREE | bigint(21)  | YES  |      | NULL    |       |
+| REGION_COUNT   | bigint(21)  | YES  |      | NULL    |       |
+| FLOW_BYTES     | bigint(21)  | YES  |      | NULL    |       |
++----------------+-------------+------+------+---------+-------+
+10 rows in set (0.00 sec)
+```
 
 `TIDB_HOT_REGIONS`表の列の説明は次のとおりです。
 

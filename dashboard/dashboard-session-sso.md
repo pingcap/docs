@@ -118,13 +118,17 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 7.  **サインイン リダイレクト URI を**次のように入力します。
 
-        http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
 
     `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 8.  **サインアウトリダイレクト URI を**次のように入力します。
 
-        http://DASHBOARD_IP:PORT/dashboard/
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/
+    ```
 
     同様に、 `DASHBOARD_IP:PORT`実際のドメイン (または IP アドレス) とポートに置き換えます。
 
@@ -172,13 +176,17 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 5.  **許可されたコールバック URL**を次のように入力します。
 
-        http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
 
     `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 6.  **許可されたログアウト URL**を次のように入力します。
 
-        http://DASHBOARD_IP:PORT/dashboard/
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/
+    ```
 
     同様に、 `DASHBOARD_IP:PORT`実際のドメイン (または IP アドレス) とポートに置き換えます。
 
@@ -212,7 +220,9 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 5.  次のように**リダイレクト URL**を追加します。
 
-        http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
+    http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
+    ```
 
     `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 

@@ -36,14 +36,16 @@ HTTPインターフェース経由でSQL文のQPSを確認するには、以下�
 curl http://__tidb_ip__:10080/metrics |grep tidb_executor_statement_total
 ```
 
-    # Check the real-time QPS of different types of SQL statements. The numbers below are the cumulative values of counter type (scientific notation).
-    tidb_executor_statement_total{type="Delete"} 520197
-    tidb_executor_statement_total{type="Explain"} 1
-    tidb_executor_statement_total{type="Insert"} 7.20799402e+08
-    tidb_executor_statement_total{type="Select"} 2.64983586e+08
-    tidb_executor_statement_total{type="Set"} 2.399075e+06
-    tidb_executor_statement_total{type="Show"} 500531
-    tidb_executor_statement_total{type="Use"} 466016
+```
+# Check the real-time QPS of different types of SQL statements. The numbers below are the cumulative values of counter type (scientific notation).
+tidb_executor_statement_total{type="Delete"} 520197
+tidb_executor_statement_total{type="Explain"} 1
+tidb_executor_statement_total{type="Insert"} 7.20799402e+08
+tidb_executor_statement_total{type="Select"} 2.64983586e+08
+tidb_executor_statement_total{type="Set"} 2.399075e+06
+tidb_executor_statement_total{type="Show"} 500531
+tidb_executor_statement_total{type="Use"} 466016
+```
 
 上記のデータはPrometheusに保存され、Grafanaに表示されます。パネルを右クリックし、次の図に示すように**「編集」**ボタンをクリックするか、直接<kbd>E</kbd>キーを押します。
 
@@ -157,41 +159,43 @@ Prometheus の API は次のようになります。
 curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/query_range?query=sum(tikv_engine_size_bytes%7Binstancexxxxxxxxx20180%22%7D)%20by%20(instance)&start=1565879269&end=1565882869&step=30' |python -m json.tool
 ```
 
-    {
-        "data": {
-            "result": [
-                {
-                    "metric": {
-                        "instance": "xxxxxxxxxx:20180"
-                    },
-                    "values": [
-                        [
-                            1565879269,
-                            "1006046235280"
-                        ],
-                        [
-                            1565879299,
-                            "1006057877794"
-                        ],
-                        [
-                            1565879329,
-                            "1006021550039"
-                        ],
-                        [
-                            1565879359,
-                            "1006021550039"
-                        ],
-                        [
-                            1565882869,
-                            "1006132630123"
-                        ]
+```
+{
+    "data": {
+        "result": [
+            {
+                "metric": {
+                    "instance": "xxxxxxxxxx:20180"
+                },
+                "values": [
+                    [
+                        1565879269,
+                        "1006046235280"
+                    ],
+                    [
+                        1565879299,
+                        "1006057877794"
+                    ],
+                    [
+                        1565879329,
+                        "1006021550039"
+                    ],
+                    [
+                        1565879359,
+                        "1006021550039"
+                    ],
+                    [
+                        1565882869,
+                        "1006132630123"
                     ]
-                }
-            ],
-            "resultType": "matrix"
-        },
-        "status": "success"
-    }
+                ]
+            }
+        ],
+        "resultType": "matrix"
+    },
+    "status": "success"
+}
+```
 
 ## まとめ {#summary}
 

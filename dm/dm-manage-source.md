@@ -19,7 +19,9 @@ DM設定ファイルでは、dmctlで暗号化されたパスワードを使用�
 ./dmctl encrypt 'abc!@#123'
 ```
 
-    MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
+```
+MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
+```
 
 ## データソースを操作する {#operate-data-source}
 
@@ -29,17 +31,19 @@ DM設定ファイルでは、dmctlで暗号化されたパスワードを使用�
 help operate-source
 ```
 
-    `create`/`stop`/`show` upstream MySQL/MariaDB source.
+```
+`create`/`stop`/`show` upstream MySQL/MariaDB source.
 
-    Usage:
-      dmctl operate-source <operate-type> [config-file ...] [--print-sample-config] [flags]
+Usage:
+  dmctl operate-source <operate-type> [config-file ...] [--print-sample-config] [flags]
 
-    Flags:
-      -h, --help                  help for operate-source
-      -p, --print-sample-config   print sample config file of source
+Flags:
+  -h, --help                  help for operate-source
+  -p, --print-sample-config   print sample config file of source
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID
+Global Flags:
+  -s, --source strings   MySQL Source ID
+```
 
 ### フラグの説明 {#flags-description}
 
@@ -65,18 +69,20 @@ operate-source create ./source.yaml
 
 返される結果の例を次に示します。
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "dm-worker-1"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "dm-worker-1"
+        }
+    ]
+}
+```
 
 ### データソースの構成を確認する {#check-data-source-configurations}
 
@@ -90,18 +96,20 @@ operate-source create ./source.yaml
 config source mysql-replica-01
 ```
 
-    {
-      "result": true,
-        "msg": "",
-        "cfg": "enable-gtid: false
-          flavor: mysql
-          source-id: mysql-replica-01
-          from:
-            host: 127.0.0.1
-            port: 8407
-            user: root
-            password: '******'
-    }
+```
+{
+  "result": true,
+    "msg": "",
+    "cfg": "enable-gtid: false
+      flavor: mysql
+      source-id: mysql-replica-01
+      from:
+        host: 127.0.0.1
+        port: 8407
+        user: root
+        password: '******'
+}
+```
 
 `source-id`がわからない場合は、まず`dmctl --master-addr <master-addr> operate-source show`を実行してすべてのデータ ソースを一覧表示できます。
 
@@ -109,24 +117,26 @@ config source mysql-replica-01
 operate-source show
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "source is added but there is no free worker to bound",
-                "source": "mysql-replica-02",
-                "worker": ""
-            },
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "dm-worker-1"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "source is added but there is no free worker to bound",
+            "source": "mysql-replica-02",
+            "worker": ""
+        },
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "dm-worker-1"
+        }
+    ]
+}
+```
 
 ## アップストリームのMySQLインスタンスとDMワーカー間のバインディングを変更する {#change-the-bindings-between-upstream-mysql-instances-and-dm-workers}
 
@@ -136,13 +146,15 @@ operate-source show
 help transfer-source
 ```
 
-    Transfers an upstream MySQL/MariaDB source to a free worker.
-    Usage:
-      dmctl transfer-source <source-id> <worker-id> [flags]
-    Flags:
-      -h, --help   help for transfer-source
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+```
+Transfers an upstream MySQL/MariaDB source to a free worker.
+Usage:
+  dmctl transfer-source <source-id> <worker-id> [flags]
+Flags:
+  -h, --help   help for transfer-source
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+```
 
 転送前に、DM はバインド解除対象のワーカーに実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、まず[タスクを一時停止](/dm/dm-pause-task.md)し、バインドを変更してから[タスクを再開](/dm/dm-resume-task.md)する必要があります。
 
@@ -154,31 +166,33 @@ DM ワーカーのバインディングがわからない場合は、 `dmctl --m
 list-member --worker
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "members": [
-            {
-                "worker": {
-                    "msg": "",
-                    "workers": [
-                        {
-                            "name": "dm-worker-1",
-                            "addr": "127.0.0.1:8262",
-                            "stage": "bound",
-                            "source": "mysql-replica-01"
-                        },
-                        {
-                            "name": "dm-worker-2",
-                            "addr": "127.0.0.1:8263",
-                            "stage": "free",
-                            "source": ""
-                        }
-                    ]
-                }
+```
+{
+    "result": true,
+    "msg": "",
+    "members": [
+        {
+            "worker": {
+                "msg": "",
+                "workers": [
+                    {
+                        "name": "dm-worker-1",
+                        "addr": "127.0.0.1:8262",
+                        "stage": "bound",
+                        "source": "mysql-replica-01"
+                    },
+                    {
+                        "name": "dm-worker-2",
+                        "addr": "127.0.0.1:8263",
+                        "stage": "free",
+                        "source": ""
+                    }
+                ]
             }
-        ]
-    }
+        }
+    ]
+}
+```
 
 上記の例では、 `mysql-replica-01`は`dm-worker-1`にバインドされています。以下のコマンドは、 `mysql-replica-01`のバインドワーカーを`dm-worker-2`に転送します。
 
@@ -186,10 +200,12 @@ list-member --worker
 transfer-source mysql-replica-01 dm-worker-2
 ```
 
-    {
-        "result": true,
-        "msg": ""
-    }
+```
+{
+    "result": true,
+    "msg": ""
+}
+```
 
 `dmctl --master-addr <master-addr> list-member --worker`を実行して、コマンドが有効になるかどうかを確認します。
 
@@ -197,28 +213,30 @@ transfer-source mysql-replica-01 dm-worker-2
 list-member --worker
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "members": [
-            {
-                "worker": {
-                    "msg": "",
-                    "workers": [
-                        {
-                            "name": "dm-worker-1",
-                            "addr": "127.0.0.1:8262",
-                            "stage": "free",
-                            "source": ""
-                        },
-                        {
-                            "name": "dm-worker-2",
-                            "addr": "127.0.0.1:8263",
-                            "stage": "bound",
-                            "source": "mysql-replica-01"
-                        }
-                    ]
-                }
+```
+{
+    "result": true,
+    "msg": "",
+    "members": [
+        {
+            "worker": {
+                "msg": "",
+                "workers": [
+                    {
+                        "name": "dm-worker-1",
+                        "addr": "127.0.0.1:8262",
+                        "stage": "free",
+                        "source": ""
+                    },
+                    {
+                        "name": "dm-worker-2",
+                        "addr": "127.0.0.1:8263",
+                        "stage": "bound",
+                        "source": "mysql-replica-01"
+                    }
+                ]
             }
-        ]
-    }
+        }
+    ]
+}
+```

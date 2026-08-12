@@ -71,10 +71,12 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
 以下は、自動チューニングの動作例です。`*`はバックアップ タスクで使用される CPU コアを示します。`^`は他のタスクで使用される CPU コアを示します。`-`は、アイドル状態の CPU コアを示します。
 
-    |--------| The server has 8 logical CPU cores.
-    |****----| By default, `backup.num-threads` is `4`. Note that auto-tune makes sure that the thread pool size is never larger than `backup.num-threads`.
-    |^^****--| By default, `auto-tune-remain-threads` = round(8 * 0.2) = 2. Auto-tune adjusts the size of the thread pool to `4`.
-    |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
+```
+|--------| The server has 8 logical CPU cores.
+|****----| By default, `backup.num-threads` is `4`. Note that auto-tune makes sure that the thread pool size is never larger than `backup.num-threads`.
+|^^****--| By default, `auto-tune-remain-threads` = round(8 * 0.2) = 2. Auto-tune adjusts the size of the thread pool to `4`.
+|^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
+```
 
 **バックアップ CPU 使用率**パネルでは、自動調整によって調整されたスレッド プールのサイズを確認できます。
 

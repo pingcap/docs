@@ -79,17 +79,19 @@ DMがチェックポイントから増分レプリケーションタスクを再
 
 以下は、セーフモードを有効にしたタスク構成の例です。
 
-    syncers:                              # The running configurations of the sync processing unit.
-      global:                            # Configuration name.
-        # Other configuration items are not provided in this example.
-        safe-mode: true                  # Enables safe mode for the whole incremental replication process.
-        # Other configuration items are not provided in this example.
-    # ----------- Instance configuration -----------
-    mysql-instances:
-      -
-        source-id: "mysql-replica-01"
-        # Other configuration items are not provided in this example.
-        syncer-config-name: "global"            # Name of the syncers configuration.
+```
+syncers:                              # The running configurations of the sync processing unit.
+  global:                            # Configuration name.
+    # Other configuration items are not provided in this example.
+    safe-mode: true                  # Enables safe mode for the whole incremental replication process.
+    # Other configuration items are not provided in this example.
+# ----------- Instance configuration -----------
+mysql-instances:
+  -
+    source-id: "mysql-replica-01"
+    # Other configuration items are not provided in this example.
+    syncer-config-name: "global"            # Name of the syncers configuration.
+```
 
 ## 外部キーの処理<span class="version-mark">（v8.5.6の新機能）</span> {#foreign-key-handling-new-in-v856}
 

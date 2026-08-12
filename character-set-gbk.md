@@ -13,24 +13,28 @@ TiDB v6.0.0以降、デフォルトで[照合のための新しいフレーム�
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
 ```
 
-    +---------+-------------------------------------+-------------------+--------+
-    | Charset | Description                         | Default collation | Maxlen |
-    +---------+-------------------------------------+-------------------+--------+
-    | gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
-    +---------+-------------------------------------+-------------------+--------+
-    1 row in set (0.00 sec)
+```
++---------+-------------------------------------+-------------------+--------+
+| Charset | Description                         | Default collation | Maxlen |
++---------+-------------------------------------+-------------------+--------+
+| gbk     | Chinese Internal Code Specification | gbk_chinese_ci    |      2 |
++---------+-------------------------------------+-------------------+--------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SHOW COLLATION WHERE CHARSET = 'gbk';
 ```
 
-    +----------------+---------+----+---------+----------+---------+---------------+
-    | Collation      | Charset | Id | Default | Compiled | Sortlen | Pad_attribute |
-    +----------------+---------+----+---------+----------+---------+---------------+
-    | gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
-    | gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
-    +----------------+---------+----+---------+----------+---------+---------------+
-    2 rows in set (0.00 sec)
+```
++----------------+---------+----+---------+----------+---------+---------------+
+| Collation      | Charset | Id | Default | Compiled | Sortlen | Pad_attribute |
++----------------+---------+----+---------+----------+---------+---------------+
+| gbk_bin        | gbk     | 87 |         | Yes      |       1 | PAD SPACE     |
+| gbk_chinese_ci | gbk     | 28 | Yes     | Yes      |       1 | PAD SPACE     |
++----------------+---------+----+---------+----------+---------+---------------+
+2 rows in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
@@ -80,13 +84,15 @@ MySQLにおけるGBK文字セットのデフォルトの照合照合順序は`gb
 
 -   TiDBは`_gbk`の使用をサポートしていません。例:
 
-    ```sql
-    CREATE TABLE t(a CHAR(10) CHARSET BINARY);
-    Query OK, 0 rows affected (0.00 sec)
-    INSERT INTO t VALUES (_gbk'啊');
-    ```
+  ```sql
+  CREATE TABLE t(a CHAR(10) CHARSET BINARY);
+  Query OK, 0 rows affected (0.00 sec)
+  INSERT INTO t VALUES (_gbk'啊');
+  ```
 
-        ERROR 1115 (42000): Unsupported character introducer: 'gbk'
+  ```
+  ERROR 1115 (42000): Unsupported character introducer: 'gbk'
+  ```
 
 <!---->
 

@@ -17,9 +17,11 @@ summary: TiDB の高信頼性に関連する FAQ について説明します。
 
 -   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 
-        server_configs:
-          tidb:
-            server-version: 'YOUR_VERSION_STRING'
+    ```
+    server_configs:
+      tidb:
+        server-version: 'YOUR_VERSION_STRING'
+    ```
 
     次に、 `tiup cluster reload <cluster-name> -R tidb`コマンドを使用して前述の変更を有効にし、セキュリティ脆弱性スキャンの失敗を回避します。
 

@@ -57,13 +57,15 @@ LIMIT 3;
 
 出力は以下のとおりです。
 
-    +----+--------------------------------------------------------------+
-    | id | content                                                      |
-    +----+--------------------------------------------------------------+
-    |  2 | Solar panels convert sunlight into renewable energy.         |
-    |  1 | Electric vehicles reduce air pollution in cities.            |
-    |  4 | Deep learning algorithms improve medical diagnosis accuracy. |
-    +----+--------------------------------------------------------------+
+```
++----+--------------------------------------------------------------+
+| id | content                                                      |
++----+--------------------------------------------------------------+
+|  2 | Solar panels convert sunlight into renewable energy.         |
+|  1 | Electric vehicles reduce air pollution in cities.            |
+|  4 | Deep learning algorithms improve medical diagnosis accuracy. |
++----+--------------------------------------------------------------+
+```
 
 前述の例では、Amazon Titan モデルを使用しています。その他のモデルについては、[利用可能なテキスト埋め込みモデル](#available-text-embedding-models)を参照してください。
 
@@ -174,13 +176,13 @@ TiDBは、さまざまな埋め込みプロバイダーやモデルとの統合�
 
 `EmbeddingFunction`クラスを使用すると、さまざまな埋め込みプロバイダーやモデルを操作できます。
 
-```python
-from pytidb.embeddings import EmbeddingFunction
+  ```python
+  from pytidb.embeddings import EmbeddingFunction
 
-embed_func = EmbeddingFunction(
-    model_name="<provider_name>/<model_name>",
-)
-```
+  embed_func = EmbeddingFunction(
+      model_name="<provider_name>/<model_name>",
+  )
+  ```
 
 **パラメータ:**
 

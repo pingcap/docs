@@ -65,36 +65,46 @@ TiDBでは、データ型`TIMESTAMP`の表示値はタイムゾーン設定の�
 create table t (ts timestamp, dt datetime);
 ```
 
-    Query OK, 0 rows affected (0.02 sec)
+```
+Query OK, 0 rows affected (0.02 sec)
+```
 
 ```sql
 set @@time_zone = 'UTC';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 insert into t values ('2017-09-30 11:11:11', '2017-09-30 11:11:11');
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 set @@time_zone = '+8:00';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 select * from t;
 ```
 
-    +---------------------|---------------------+
-    | ts                  | dt                  |
-    +---------------------|---------------------+
-    | 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
-    +---------------------|---------------------+
-    1 row in set (0.00 sec)
+```
++---------------------|---------------------+
+| ts                  | dt                  |
++---------------------|---------------------+
+| 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
++---------------------|---------------------+
+1 row in set (0.00 sec)
+```
 
 この例では、タイムゾーンの値をどのように調整しても、データ型`DATETIME`の値は影響を受けません。ただし、データ型`TIMESTAMP`の表示値はタイムゾーンの変更を反映しています。実際、データベースに保存されているデータ型`TIMESTAMP`の値は変更されていませんが、タイムゾーンの設定に応じて表示が異なります。
 

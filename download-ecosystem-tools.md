@@ -23,7 +23,9 @@ TiDB Toolkitには、 Dumpling （データエクスポート）、 TiDB Lightni
 
 TiDB Toolkitは以下のリンクからダウンロードできます。
 
-    https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
+https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
 
 リンク内の`{version}`は TiDB のバージョン番号を示し、 `{arch}`システムのアーキテクチャを示し、 `amd64`または`arm64`のいずれかになります。たとえば、 `v8.5.4`アーキテクチャの`amd64`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 

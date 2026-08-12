@@ -60,7 +60,9 @@ tiup br validate decode --field="end-version" \
 
 出力は以下のとおりで、物理時間`2022-09-08 13:30:00 +0800 CST`に対応します。
 
-    435844546560000000
+```
+435844546560000000
+```
 
 ## クラスタのスナップショットを復元する {#restore-cluster-snapshots}
 
@@ -152,17 +154,19 @@ tiup br restore full \
 
 **BRは、以下のシステムテーブルのデータを復元できます。**
 
-    +----------------------------------+
-    | mysql.columns_priv               |
-    | mysql.db                         |
-    | mysql.default_roles              |
-    | mysql.global_grants              |
-    | mysql.global_priv                |
-    | mysql.role_edges                 |
-    | mysql.tables_priv                |
-    | mysql.user                       |
-    | mysql.bind_info                  |
-    +----------------------------------+
+```
++----------------------------------+
+| mysql.columns_priv               |
+| mysql.db                         |
+| mysql.default_roles              |
+| mysql.global_grants              |
+| mysql.global_priv                |
+| mysql.role_edges                 |
+| mysql.tables_priv                |
+| mysql.user                       |
+| mysql.bind_info                  |
++----------------------------------+
+```
 
 **BR は以下のシステムテーブルを復元しません。**
 
@@ -172,24 +176,26 @@ tiup br restore full \
 
 <!---->
 
-    +-----------------------------------------------------+
-    | capture_plan_baselines_blacklist                    |
-    | column_stats_usage                                  |
-    | gc_delete_range                                     |
-    | gc_delete_range_done                                |
-    | global_variables                                    |
-    | stats_buckets                                       |
-    | stats_extended                                      |
-    | stats_feedback                                      |
-    | stats_fm_sketch                                     |
-    | stats_histograms                                    |
-    | stats_history                                       |
-    | stats_meta                                          |
-    | stats_meta_history                                  |
-    | stats_table_locked                                  |
-    | stats_top_n                                         |
-    | tidb                                                |
-    +-----------------------------------------------------+
+```
++-----------------------------------------------------+
+| capture_plan_baselines_blacklist                    |
+| column_stats_usage                                  |
+| gc_delete_range                                     |
+| gc_delete_range_done                                |
+| global_variables                                    |
+| stats_buckets                                       |
+| stats_extended                                      |
+| stats_feedback                                      |
+| stats_fm_sketch                                     |
+| stats_histograms                                    |
+| stats_history                                       |
+| stats_meta                                          |
+| stats_meta_history                                  |
+| stats_table_locked                                  |
+| stats_top_n                                         |
+| tidb                                                |
++-----------------------------------------------------+
+```
 
 システム権限に関連するデータを復元する場合、データの復元前に、 BR はターゲットクラスタのシステムテーブルがバックアップデータ内のシステムテーブルと互換性があるかどうかをチェックすることに注意してください。「互換性がある」とは、以下のすべての条件が満たされていることを意味します。
 

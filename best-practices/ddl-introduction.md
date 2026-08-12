@@ -69,7 +69,9 @@ DDL変更は、ある状態から別の状態への遷移を伴い、通常は�
 
 `ADD INDEX`例にとると、状態変化の全体プロセスは次のようになります。
 
-    absent -> delete only -> write only -> write reorg -> public
+```
+absent -> delete only -> write only -> write reorg -> public
+```
 
 ユーザーにとって、新しく作成されたインデックスは`public`状態より前は使用できません。
 

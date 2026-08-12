@@ -17,7 +17,9 @@ summary: TiDB Lightningは、MySQLデータをTiDBクラスタにインポート
 
 1.  TiUPが既にインストールされているかどうかを確認するには、 `tiup --version`を実行してください。TiUPがインストールされている場合は、この手順をスキップしてください。TiUPがインストールされていない場合は、次のコマンドを実行してください。
 
-        curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    ```
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+    ```
 
 2.  TiUPを使用してDumplingをインストールする方法：
 

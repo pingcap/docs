@@ -72,9 +72,11 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
     コマンド出力にはTiUPのバージョンが表示されます。例:
 
-        tiup version 1.9.0 tiup
-        Go Version: go1.17.2
-        Git Ref: v1.9.0
+    ```
+    tiup version 1.9.0 tiup
+    Go Version: go1.17.2
+    Git Ref: v1.9.0
+    ```
 
 2.  TiUPクラスターのバージョンが v1.9.0 より前の場合は、 TiUPとTiUPクラスターを最新バージョンにアップグレードします。
 
@@ -92,9 +94,11 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 2.  `monitoring_servers`の下に`ng_port:12020`パラメータを追加します。
 
-        monitoring_servers:
-        - host: 172.16.6.6
-          ng_port: 12020
+    ```
+    monitoring_servers:
+    - host: 172.16.6.6
+      ng_port: 12020
+    ```
 
 3.  Prometheus をリロードします。
 

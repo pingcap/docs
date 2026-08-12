@@ -47,9 +47,11 @@ compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 
 TiKVの[Raft Engine](/glossary.md#raft-engine) 、従来のデータベースにおける先行書き込みログ（WAL）と同様の重要な役割を果たします。最適なパフォーマンスと安定性を実現するには、パブリッククラウドにTiDBをデプロイする際に、 Raft Engine専用のディスクを割り当てることが不可欠です。次の`iostat` 、書き込み負荷の高いワークロードにおけるTiKVノードのI/O特性を示しています。
 
-    Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
-    sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
-    sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
+```
+Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
+sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
+sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
+```
 
 デバイス`sdb`はKV RocksDBに使用され、 `sdd` Raft Engineのログを復元するために使用されます`sdd`には、デバイスの1秒あたりのフラッシュ要求完了数を表す`f/s`値が大幅に高いことに注目してください。Raft Raft Engineでは、バッチ内の書き込みが同期としてマークされている場合、バッチリーダーは書き込み後に`fdatasync()`呼び出し、バッファリングされたデータがストレージにフラッシュされることを保証します。Raft Raft Engine専用のディスクを使用することで、TiKVはリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを保証します。
 
@@ -113,19 +115,21 @@ Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.c
 
 次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`構成する方法を示しています。
 
-    tikv:
-        config: |
-          [raft-engine]
-            dir = "/var/lib/raft-pv-ssd/raft-engine"
-            enable = true
-            enable-log-recycle = true
-        requests:
-          storage: 4Ti
-        storageClassName: pd-ssd
-        storageVolumes:
-        - mountPath: /var/lib/raft-pv-ssd
-          name: raft-pv-ssd
-          storageSize: 512Gi
+```
+tikv:
+    config: |
+      [raft-engine]
+        dir = "/var/lib/raft-pv-ssd/raft-engine"
+        enable = true
+        enable-log-recycle = true
+    requests:
+      storage: 4Ti
+    storageClassName: pd-ssd
+    storageVolumes:
+    - mountPath: /var/lib/raft-pv-ssd
+      name: raft-pv-ssd
+      storageSize: 512Gi
+```
 
 ## AZ間ネットワークトラフィックのコストを最適化する {#optimize-cost-for-cross-az-network-traffic}
 
@@ -167,20 +171,26 @@ PDサーバーでの CPU 使用率が高い問題を解決するには、次の�
 
 [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) : このパラメータは、PDサーバーが物理TSOバッチを更新する間隔を制御します。間隔を短くすることで、PDサーバーはTSOバッチをより頻繁に割り当てることができ、次の割り当てまでの待ち時間を短縮できます。
 
-    tso-update-physical-interval = "10ms" # default: 50ms
+```
+tso-update-physical-interval = "10ms" # default: 50ms
+```
 
 #### TiDBグローバル変数を調整する {#adjust-a-tidb-global-variable}
 
 PD設定に加えて、TSOクライアントのバッチ待機機能を有効にすると、TSOクライアントの動作をさらに最適化できます。この機能を有効にするには、グローバル変数[`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) 0以外の値に設定します。
 
-    set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
+```
+set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
+```
 
 #### TiKV設定を調整する {#adjust-tikv-configuration}
 
 リージョンの数を減らし、システムのハートビートビートのオーバーヘッドを軽減するには、 [リージョンのサイズを調整する](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size)を参照して、TiKV 構成でリージョンのサイズを適度に増やすことができます。
 
-    [coprocessor]
-      region-split-size = "288MiB"
+```
+[coprocessor]
+  region-split-size = "288MiB"
+```
 
 ### チューニング後 {#after-tuning}
 

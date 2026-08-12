@@ -54,14 +54,16 @@ validators:
 
 継続的なデータ検証を有効にするには、 `dmctl validation start`コマンドを実行します。
 
-    Usage:
-      dmctl validation start [--all-task] [task-name] [flags]
+```
+Usage:
+  dmctl validation start [--all-task] [task-name] [flags]
 
-    Flags:
-          --all-task            whether applied to all tasks
-      -h, --help                help for start
-          --mode string         specify the mode of validation: full (default), fast; this flag will be ignored if the validation task has been ever enabled but currently paused (default "full")
-          --start-time string   specify the start time of binlog for validation, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
+Flags:
+      --all-task            whether applied to all tasks
+  -h, --help                help for start
+      --mode string         specify the mode of validation: full (default), fast; this flag will be ignored if the validation task has been ever enabled but currently paused (default "full")
+      --start-time string   specify the start time of binlog for validation, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
+```
 
 -   `--mode` : 検証モードを指定します。指定できる値は`fast`と`full`です。
 -   `--start-time` : 検証の開始時刻を指定します。形式は`2021-10-21 00:01:00`または`2021-10-21T00:01:00`に従います。
@@ -114,10 +116,12 @@ dmctl --master-addr=127.0.0.1:8261 validation start --start-time 2021-10-21T00:0
 
 方法 2: コマンド`dmctl validation status <taskname>`を実行します。
 
-    dmctl validation status [--table-stage stage] <task-name> [flags]
-    Flags:
-      -h, --help                 help for status
-          --table-stage string   filter validation tables by stage: running/stopped
+```
+dmctl validation status [--table-stage stage] <task-name> [flags]
+Flags:
+  -h, --help                 help for status
+      --table-stage string   filter validation tables by stage: running/stopped
+```
 
 上記のコマンドで`--table-stage`を使用すると、検証対象のテーブルをフィルタリングしたり、検証を停止したりできます。出力例:
 
@@ -155,12 +159,14 @@ dmctl --master-addr=127.0.0.1:8261 validation start --start-time 2021-10-21T00:0
 
 エラーの種類やエラー時間などのエラー行の詳細を表示するには、次の`dmctl validation show-error`コマンドを実行します。
 
-    Usage:
-      dmctl validation show-error [--error error-state] <task-name> [flags]
+```
+Usage:
+  dmctl validation show-error [--error error-state] <task-name> [flags]
 
-    Flags:
-          --error string   filtering type of error: all, ignored, or unprocessed (default "unprocessed")
-      -h, --help           help for show-error
+Flags:
+      --error string   filtering type of error: all, ignored, or unprocessed (default "unprocessed")
+  -h, --help           help for show-error
+```
 
 出力例:
 
@@ -197,41 +203,49 @@ dmctl は 3 つのエラー処理コマンドを提供します。
 
 -   `clear-error` : エラー行をクリアします。`show-error`コマンドを実行すると、エラー行は表示されなくなります。
 
-        Usage:
-          dmctl validation clear-error <task-name> <error-id|--all> [flags]
+    ```
+    Usage:
+      dmctl validation clear-error <task-name> <error-id|--all> [flags]
 
-        Flags:
-              --all    all errors
-          -h, --help   help for clear-error
+    Flags:
+          --all    all errors
+      -h, --help   help for clear-error
+    ```
 
 -   `ignore-error` : エラー行を無視します。このエラー行は「無視」としてマークされます。
 
-        Usage:
-          dmctl validation ignore-error <task-name> <error-id|--all> [flags]
+    ```
+    Usage:
+      dmctl validation ignore-error <task-name> <error-id|--all> [flags]
 
-        Flags:
-              --all    all errors
-          -h, --help   help for ignore-error
+    Flags:
+          --all    all errors
+      -h, --help   help for ignore-error
+    ```
 
 -   `resolve-error` : エラー行は手動で処理され、「解決済み」としてマークされます。
 
-        Usage:
-          dmctl validation resolve-error <task-name> <error-id|--all> [flags]
+    ```
+    Usage:
+      dmctl validation resolve-error <task-name> <error-id|--all> [flags]
 
-        Flags:
-              --all    all errors
-          -h, --help   help for resolve-error
+    Flags:
+          --all    all errors
+      -h, --help   help for resolve-error
+    ```
 
 ## 継続的なデータ検証を停止する {#stop-continuous-data-validation}
 
 継続的なデータ検証を停止するには、コマンド`validation stop`を実行します。
 
-    Usage:
-      dmctl validation stop [--all-task] [task-name] [flags]
+```
+Usage:
+  dmctl validation stop [--all-task] [task-name] [flags]
 
-    Flags:
-          --all-task   whether applied to all tasks
-      -h, --help       help for stop
+Flags:
+      --all-task   whether applied to all tasks
+  -h, --help       help for stop
+```
 
 詳しい使用方法については[`dmctl validation start`](#method-2-enable-using-dmctl)を参照してください。
 
@@ -241,13 +255,15 @@ dmctl は 3 つのエラー処理コマンドを提供します。
 
 継続的なデータ検証のカットオーバー ポイントを設定するには、 `validation update`コマンドを使用します。
 
-    Usage:
-      dmctl validation update <task-name> [flags]
+```
+Usage:
+  dmctl validation update <task-name> [flags]
 
-    Flags:
-          --cutover-binlog-gtid string   specify the cutover binlog gtid for validation, only valid when source config's gtid is enabled, e.g. '1642618e-cf65-11ec-9e3d-0242ac110002:1-30'
-          --cutover-binlog-pos string    specify the cutover binlog name for validation, should include binlog name and pos in brackets, e.g. '(mysql-bin.000001, 5989)'
-      -h, --help                         help for update
+Flags:
+      --cutover-binlog-gtid string   specify the cutover binlog gtid for validation, only valid when source config's gtid is enabled, e.g. '1642618e-cf65-11ec-9e3d-0242ac110002:1-30'
+      --cutover-binlog-pos string    specify the cutover binlog name for validation, should include binlog name and pos in brackets, e.g. '(mysql-bin.000001, 5989)'
+  -h, --help                         help for update
+```
 
 -   `--cutover-binlog-gtid` : 検証のカットオーバー位置を`1642618e-cf65-11ec-9e3d-0242ac110002:1-30`形式で指定します。アップストリームクラスターでGTIDが有効になっている場合にのみ有効です。
 -   `--cutover-binlog-pos` : 検証のカットオーバー位置を`(mysql-bin.000001, 5989)`形式で指定します。

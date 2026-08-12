@@ -61,22 +61,26 @@ v2.1.0 以前のバージョンで新しく作成されたテーブルの文字�
     create table t(a varchar(10)) charset=utf8;
     ```
 
-        Query OK, 0 rows affected
-        Time: 0.106s
+    ```
+    Query OK, 0 rows affected
+    Time: 0.106s
+    ```
 
     ```sql
     show create table t;
     ```
 
-        +-------+-------------------------------------------------------+
-        | Table | Create Table                                          |
-        +-------+-------------------------------------------------------+
-        | t     | CREATE TABLE `t` (                                    |
-        |       |   `a` varchar(10) DEFAULT NULL                        |
-        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
-        +-------+-------------------------------------------------------+
-        1 row in set
-        Time: 0.006s
+    ```
+    +-------+-------------------------------------------------------+
+    | Table | Create Table                                          |
+    +-------+-------------------------------------------------------+
+    | t     | CREATE TABLE `t` (                                    |
+    |       |   `a` varchar(10) DEFAULT NULL                        |
+    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
+    +-------+-------------------------------------------------------+
+    1 row in set
+    Time: 0.006s
+    ```
 
 -   アップグレード後、v2.1.1 および v2.1.2 では以下のエラーが報告されますが、v2.1.3 以降のバージョンではこのようなエラーは発生しません。
 
@@ -84,7 +88,9 @@ v2.1.0 以前のバージョンで新しく作成されたテーブルの文字�
     alter table t change column a a varchar(20);
     ```
 
-        ERROR 1105 (HY000): unsupported modify column charset utf8mb4 not match origin utf8
+    ```
+    ERROR 1105 (HY000): unsupported modify column charset utf8mb4 not match origin utf8
+    ```
 
 解決：
 
@@ -144,20 +150,24 @@ alter table t change column a a varchar(22) character set utf8;
     create table t(a varchar(10)) charset=utf8;
     ```
 
-        Query OK, 0 rows affected
-        Time: 0.109s
+    ```
+    Query OK, 0 rows affected
+    Time: 0.109s
+    ```
 
     ```sql
     show create table t;
     ```
 
-        +-------+-------------------------------------------------------+
-        | Table | Create Table                                          |
-        +-------+-------------------------------------------------------+
-        | t     | CREATE TABLE `t` (                                    |
-        |       |   `a` varchar(10) DEFAULT NULL                        |
-        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
-        +-------+-------------------------------------------------------+
+    ```
+    +-------+-------------------------------------------------------+
+    | Table | Create Table                                          |
+    +-------+-------------------------------------------------------+
+    | t     | CREATE TABLE `t` (                                    |
+    |       |   `a` varchar(10) DEFAULT NULL                        |
+    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
+    +-------+-------------------------------------------------------+
+    ```
 
     上記の例では、 `show create table`テーブルの文字セットのみを示していますが、列の文字セットは実際には UTF8MB4 です。これは、HTTP API 経由でスキーマを取得することで確認できます。ただし、新しいテーブルが作成された場合、列の文字セットはテーブルの文字セットと一致している必要があります。このバグは v2.1.3 で修正されています。
 
@@ -167,21 +177,25 @@ alter table t change column a a varchar(22) character set utf8;
     show create table t;
     ```
 
-        +-------+--------------------------------------------------------------------+
-        | Table | Create Table                                                       |
-        +-------+--------------------------------------------------------------------+
-        | t     | CREATE TABLE `t` (                                                 |
-        |       |   `a` varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL |
-        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin              |
-        +-------+--------------------------------------------------------------------+
-        1 row in set
-        Time: 0.007s
+    ```
+    +-------+--------------------------------------------------------------------+
+    | Table | Create Table                                                       |
+    +-------+--------------------------------------------------------------------+
+    | t     | CREATE TABLE `t` (                                                 |
+    |       |   `a` varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL |
+    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin              |
+    +-------+--------------------------------------------------------------------+
+    1 row in set
+    Time: 0.007s
+    ```
 
     ```sql
     alter table t change column a a varchar(20);
     ```
 
-        ERROR 1105 (HY000): unsupported modify charset from utf8mb4 to utf8
+    ```
+    ERROR 1105 (HY000): unsupported modify charset from utf8mb4 to utf8
+    ```
 
 解決：
 
@@ -207,13 +221,17 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     create table t(a varchar(100) charset utf8);
     ```
 
-        Query OK, 0 rows affected
+    ```
+    Query OK, 0 rows affected
+    ```
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-        Query OK, 1 row affected
+    ```
+    Query OK, 1 row affected
+    ```
 
 -   アップグレード後、v2.1.2 以降のバージョンでは次のエラーが報告されます。
 
@@ -221,7 +239,9 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     insert t values (unhex('f09f8c80'));
     ```
 
-        ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a
+    ```
+    ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a
+    ```
 
 解決：
 
@@ -231,13 +251,17 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     set @@session.tidb_skip_utf8_check=1;
     ```
 
-        Query OK, 0 rows affected
+    ```
+    Query OK, 0 rows affected
+    ```
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-        Query OK, 1 row affected
+    ```
+    Query OK, 1 row affected
+    ```
 
 -   v2.1.3以降のバージョンでは、列の文字セットをUTF8MB4に変更することをお勧めします。または、UTF-8チェックをスキップするには`tidb_skip_utf8_check`を設定します。ただし、チェックをスキップしても、MySQL側ではチェックが実行されるため、TiDBからMySQLへのデータレプリケーションに失敗する可能性があります。
 
@@ -245,13 +269,17 @@ TiDB v2.1.1以前のバージョンでは、文字セットがUTF-8の場合、�
     alter table t change column a a varchar(100) character set utf8mb4;
     ```
 
-        Query OK, 0 rows affected
+    ```
+    Query OK, 0 rows affected
+    ```
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-        Query OK, 1 row affected
+    ```
+    Query OK, 1 row affected
+    ```
 
     具体的には、変数`tidb_skip_utf8_check`を使用すると、データのUTF-8およびUTF8MB4の有効性チェックをスキップできます。ただし、チェックをスキップしても、MySQL側ではチェックが実行されるため、TiDBからMySQLへのデータのレプリケーションに失敗する可能性があります。
 

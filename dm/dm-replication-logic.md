@@ -39,11 +39,13 @@ summary: DM のコア処理ユニット Sync が DML ステートメントを複
 
 DMは上流のbinlogレコードに基づいてレコードの変更をキャプチャし、下流に複製します。上流が短期間に同じレコードに複数の変更（ `INSERT` / `UPDATE` / `DELETE` ）を加えた場合、DMはCompactorを使用して複数の変更を1つの変更に圧縮することで、下流への負荷を軽減し、スループットを向上させます。例：
 
-    INSERT + UPDATE => INSERT
-    INSERT + DELETE => DELETE
-    UPDATE + UPDATE => UPDATE
-    UPDATE + DELETE => DELETE
-    DELETE + INSERT => UPDATE
+```
+INSERT + UPDATE => INSERT
+INSERT + DELETE => DELETE
+UPDATE + UPDATE => UPDATE
+UPDATE + DELETE => DELETE
+DELETE + INSERT => UPDATE
+```
 
 Compactor機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.compact` ～ `true`に設定します（以下を参照）。
 
@@ -66,15 +68,17 @@ Causality は、union-find アルゴリズムに似たアルゴリズムを採�
 
 MySQLのbinlogプロトコルでは、各binlogは1行のデータの変更操作に対応します。Mergerを使用することで、DMは複数のbinlogを1つのDMLにマージし、下流に実行することでネットワークの干渉を削減できます。例えば、
 
-      INSERT tb(a,b) VALUES(1,1);
-    + INSERT tb(a,b) VALUES(2,2);
-    = INSERT tb(a,b) VALUES(1,1),(2,2);
-      UPDATE tb SET a=1, b=1 WHERE a=1;
-    + UPDATE tb SET a=2, b=2 WHERE a=2;
-    = INSERT tb(a,b) VALUES(1,1),(2,2) ON DUPLICATE UPDATE a=VALUES(a), b=VALUES(b)
-      DELETE tb WHERE a=1
-    + DELETE tb WHERE a=2
-    = DELETE tb WHERE (a) IN (1),(2);
+```
+  INSERT tb(a,b) VALUES(1,1);
++ INSERT tb(a,b) VALUES(2,2);
+= INSERT tb(a,b) VALUES(1,1),(2,2);
+  UPDATE tb SET a=1, b=1 WHERE a=1;
++ UPDATE tb SET a=2, b=2 WHERE a=2;
+= INSERT tb(a,b) VALUES(1,1),(2,2) ON DUPLICATE UPDATE a=VALUES(a), b=VALUES(b)
+  DELETE tb WHERE a=1
++ DELETE tb WHERE a=2
+= DELETE tb WHERE (a) IN (1),(2);
+```
 
 マージャー機能はデフォルトで無効になっています。有効にするには、レプリケーションタスクの`sync`の設定モジュールで`syncer.multiple-rows` ～ `true`に設定します（以下を参照）。
 

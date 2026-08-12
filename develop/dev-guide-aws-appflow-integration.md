@@ -77,7 +77,9 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     以下のような出力が表示された場合、このLambda関数は正常にデプロイされています。
 
-        Successfully created/updated stack - <stack_name> in <region>
+    ```
+    Successfully created/updated stack - <stack_name> in <region>
+    ```
 
 4.  [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home)にアクセスすると、先ほどアップロードしたLambda関数が表示されます。ウィンドウの右上隅で正しいリージョンを選択する必要があることに注意してください。
 

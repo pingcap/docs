@@ -75,13 +75,15 @@ summary: TiDB でサポートされている集計関数について学習しま
     SELECT APPROX_COUNT_DISTINCT(a, b) FROM t GROUP BY c;
     ```
 
-        +-----------------------------+
-        | approx_count_distinct(a, b) |
-        +-----------------------------+
-        |                           3 |
-        |                           4 |
-        +-----------------------------+
-        2 rows in set (0.00 sec)
+    ```
+    +-----------------------------+
+    | approx_count_distinct(a, b) |
+    +-----------------------------+
+    |                           3 |
+    |                           4 |
+    +-----------------------------+
+    2 rows in set (0.00 sec)
+    ```
 
 `GROUP_CONCAT()` 、 `APPROX_PERCENTILE()` 、 `APPROX_COUNT_DISTINCT`関数を除き、前述の関数はすべて[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
 

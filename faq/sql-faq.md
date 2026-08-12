@@ -362,11 +362,15 @@ TiDB v7.4以降、 `connectionCollation`が設定されておらず、JDBC URL�
 
 以下は、TiDB v6.5 の一般的な JDBC URL 構成です。
 
-    spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
 
 TiDB v7.5 以降のバージョンにアップグレードした後は、JDBC URL に`connectionCollation`パラメータを設定することをお勧めします。
 
-    spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
+spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
+```
 
 ### `utf8mb4_bin`順序と`utf8mb4_0900_ai_ci`照合順序の違いは何ですか? {#what-are-the-differences-between-the-utf8mb4_bin-and-utf8mb4_0900_ai_ci-collations}
 
@@ -427,11 +431,13 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 ADMIN SHOW DDL;
 ```
 
-    *************************** 1. row ***************************
-      SCHEMA_VER: 140
-           OWNER: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
-    RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganization, SchemaID:1, TableID:118, RowCount:77312, ArgLen:0, start time: 2018-12-05 16:26:10.652 +0800 CST, Err:<nil>, ErrCount:0, SnapshotVersion:404749908941733890
-         SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
+```
+*************************** 1. row ***************************
+  SCHEMA_VER: 140
+       OWNER: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
+RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganization, SchemaID:1, TableID:118, RowCount:77312, ArgLen:0, start time: 2018-12-05 16:26:10.652 +0800 CST, Err:<nil>, ErrCount:0, SnapshotVersion:404749908941733890
+     SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
+```
 
 上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。また、 `RUNNING_JOBS`列の`RowCount`フィールドから、 `ADD INDEX`操作によって77312行のインデックスが追加されたことがわかります。
 

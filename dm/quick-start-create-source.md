@@ -25,7 +25,9 @@ summary: データ移行 (DM) のデータ ソースを作成する方法を学�
     tiup dmctl encrypt 'abc!@#123'
     ```
 
-        MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
+    ```
+    MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
+    ```
 
 2.  データソースの設定ファイルを書き込む
 
@@ -57,18 +59,20 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 返される結果は次のとおりです。
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-01",
-                "worker": "dm-worker-1"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-01",
+            "worker": "dm-worker-1"
+        }
+    ]
+}
+```
 
 ## ステップ3: 作成したデータソースをクエリする {#step-3-query-the-data-source-you-created}
 
@@ -80,18 +84,20 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     tiup dmctl --master-addr <master-addr> config source mysql-01
     ```
 
-        {
-          "result": true,
-          "msg": "",
-          "cfg": "enable-gtid: false
-            flavor: mysql
-            source-id: mysql-01
-            from:
-              host: 127.0.0.1
-              port: 3306
-              user: root
-              password: '******'
-        }
+    ```
+    {
+      "result": true,
+      "msg": "",
+      "cfg": "enable-gtid: false
+        flavor: mysql
+        source-id: mysql-01
+        from:
+          host: 127.0.0.1
+          port: 3306
+          user: root
+          password: '******'
+    }
+    ```
 
 -   `source-id`がわからない場合は、 `dmctl operate-source show`コマンドを使用してソース データベース リストを確認し、そこから対応するデータ ソースを見つけることができます。
 
@@ -99,21 +105,23 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
     tiup dmctl --master-addr <master-addr> operate-source show
     ```
 
-        {
-            "result": true,
-            "msg": "",
-            "sources": [
-                {
-                    "result": true,
-                    "msg": "source is added but there is no free worker to bound",
-                    "source": "mysql-02",
-                    "worker": ""
-                },
-                {
-                    "result": true,
-                    "msg": "",
-                    "source": "mysql-01",
-                    "worker": "dm-worker-1"
-                }
-            ]
-        }
+    ```
+    {
+        "result": true,
+        "msg": "",
+        "sources": [
+            {
+                "result": true,
+                "msg": "source is added but there is no free worker to bound",
+                "source": "mysql-02",
+                "worker": ""
+            },
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-01",
+                "worker": "dm-worker-1"
+            }
+        ]
+    }
+    ```

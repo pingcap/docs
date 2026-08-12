@@ -52,15 +52,17 @@ brew install mysql-client
 
 出力は以下のとおりです。
 
-    mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
-    because it conflicts with mysql (which contains client libraries).
+```
+mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
+because it conflicts with mysql (which contains client libraries).
 
-    If you need to have mysql-client first in your PATH, run:
-      echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
+If you need to have mysql-client first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 
-    For compilers to find mysql-client you may need to set:
-      export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
-      export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
+For compilers to find mysql-client you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
+```
 
 MySQLクライアントをPATHに追加するには、上記の出力から次のコマンドを探し（出力がドキュメントの上記の出力と一致しない場合は、代わりに出力にある対応するコマンドを使用してください）、実行します。
 
@@ -77,7 +79,9 @@ mysql --version
 
 期待される出力例：
 
-    mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
+```
+mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
+```
 
 </div>
 
@@ -97,7 +101,9 @@ mysql --version
 
 期待される出力例：
 
-    mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
+```
+mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
+```
 
 </div>
 

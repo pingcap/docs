@@ -52,7 +52,9 @@ gh-ost で主に使用される SQL ステートメントとそれに対応す�
 
     DMは`_test4_gho`テーブルを作成しません。DMは`ghost_schema` 、および`dm_worker` `ghost_table` `server_id`に従って下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
 
-        DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
+    ```
+    DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
+    ```
 
 3.  `_gho`テーブルで実行する必要がある DDL を適用します。
 
