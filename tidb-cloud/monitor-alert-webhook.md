@@ -23,7 +23,7 @@ TiDB Cloud 提供了一种简便方式，让你可以通过 [Generic Webhook](/t
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
 - 要订阅 TiDB Cloud 的告警通知，你必须对所在组织具有 `Organization Owner` 访问权限，或对 TiDB Cloud 中的目标实例具有 `Project Owner` 或 `Instance Manager` 访问权限。
 

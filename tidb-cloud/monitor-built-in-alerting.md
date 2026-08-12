@@ -70,6 +70,8 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 - [Zoom](/tidb-cloud/monitor-alert-zoom.md)
 - [Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
 - [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+- [Webhook](/tidb-cloud/monitor-alert-webhook.md)
+- [Lark](/tidb-cloud/monitor-alert-lark.md)
 
 ## TiDB Cloud 内置告警条件
 

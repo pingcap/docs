@@ -138,7 +138,7 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，导航到你的组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击右上角的 **...**，然后点击 **Recycle Bin**。
 
-    >**提示：**
+    > **提示：**
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
@@ -146,7 +146,7 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 
 3. 找到你要恢复的 {{{ .essential }}} 实例，然后点击 **>** 按钮以展开该实例的可用备份。
 
-    >**注意：**
+    > **注意：**
     >
     > 如果某个 {{{ .essential }}} 实例**没有备份**，则已删除的实例不会显示在回收站中。
 

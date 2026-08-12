@@ -17,7 +17,7 @@ summary: 了解如何使用 Amazon MSK Provisioned Private Link 连接访问 Ama
 查看 AWS 账户 ID 和可用区的方法如下：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB Cloud Essential 实例的总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
-2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
+2. 在 **AWS Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 3. 在弹窗中，记下 AWS 账户 ID 和可用区信息。
 
 ## Amazon MSK Provisioned 集群的前置条件

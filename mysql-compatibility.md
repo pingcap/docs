@@ -46,7 +46,7 @@ TiDB 高度兼容 MySQL 协议，以及 MySQL 5.7 和 MySQL 8.0 的常用特性�
 + 用户自定义函数
 + `FULLTEXT` 语法和索引 [#1793](https://github.com/pingcap/tidb/issues/1793)
 
-    >**Note:**
+    > **Note:**
     >
     > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 实例支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。TiDB 自建版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT` 索引。
 

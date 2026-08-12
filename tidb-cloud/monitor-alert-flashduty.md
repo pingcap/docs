@@ -15,15 +15,15 @@ TiDB Cloud 为你提供了通过 Flashduty、[Slack](/tidb-cloud/monitor-alert-s
 
 - 通过 Flashduty 订阅功能仅对订阅了 **Enterprise** 或 **Premium** [支持计划](/tidb-cloud/connected-care-overview.md) 的组织开放。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 - 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标项目的 `Project Owner` 访问权限。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
-- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标 {{{ .premium }}} 实例的 `Instance Manager` 访问权限。
+- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标实例的 `Project Owner` 或 `Instance Manager` 访问权限。
 
 </CustomContent>
 

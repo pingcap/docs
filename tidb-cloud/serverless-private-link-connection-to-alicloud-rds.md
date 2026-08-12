@@ -24,7 +24,7 @@ summary: 了解如何通过阿里云 Endpoint Service Private Link 连接，将 
 要查看阿里云账户 ID 和可用区，请执行以下操作：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 {{{ .essential }}} 实例总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
-2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
+2. 在 **Alibaba Cloud Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 3. 在弹出的对话框中，你可以找到阿里云账户 ID 和可用区信息。
 
 ## 步骤 1. 创建 ApsaraDB RDS for MySQL 实例

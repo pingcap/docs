@@ -11,7 +11,7 @@ summary: 了解如何通过 VPC Peering 连接 TiDB Cloud Dedicated。
 
 要通过 VPC Peering 将你的应用程序连接到 TiDB Cloud，你需要与 TiDB Cloud 建立 [VPC Peering](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)。本文档将指导你在 [AWS 上设置 VPC Peering](#set-up-vpc-peering-on-aws) 和 [Google Cloud 上设置 VPC Peering](#set-up-vpc-peering-on-google-cloud)，并通过 VPC Peering 连接到 TiDB Cloud。
 
-VPC Peering 连接是两个 VPC 之间的网络连接，使你能够使用私有 IP 地址在它们之间路由流量。任一 VPC 中的实例都可以像在同一网络中一样相互通信。
+VPC Peering 是两个 VPC 之间的网络连接，使你能够使用私有 IP 地址在它们之间路由流量。任一 VPC 中的实例都可以像在同一网络中一样相互通信。
 
 目前，同一项目下同一区域的 TiDB 集群会创建在同一个 VPC 中。因此，一旦在某个项目的某个区域设置了 VPC Peering，该项目在同一区域内创建的所有 TiDB 集群都可以通过你的 VPC 进行连接。不同云服务商的 VPC Peering 设置方式不同。
 

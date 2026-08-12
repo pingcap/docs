@@ -82,12 +82,12 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 
 **AWS Endpoint Service**
 
-1. 在 **Networking** 页面中，点击 **AWS Private Endpoint for External Services** 部分中的 **Create Private Endpoint**。
-2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称。
+1. 在 **Networking** 页面中，点击 **AWS Private Endpoints for External Services** 部分中的 **Create Private Endpoint for External Services**。
+2. 在显示的对话框中，为 private endpoint 输入一个名称。
 3. 按照提示授权 TiDB Cloud 的 [AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts) 创建 endpoint。
 4. 输入你在[网络](#network)部分中收集到的 **Endpoint Service Name**，然后选择 **AWS Endpoint Service** 作为连接类型。
 5. 选择 **Number of AZs**。确保 AZ 的数量和 AZ ID 与你的 Kafka 部署匹配。
-6. 如果此 private endpoint 是为 Apache Kafka 创建的，请启用 **Advertised Listener for Kafka** 选项。
+6. 如果此 private endpoint 是为 Apache Kafka 创建的，请选中 **Configure Advertised Listener for Kafka** 复选框。
 7. 使用 **TiDB Managed** 域名或 **Custom** 域名配置 Kafka 的 advertised listener。
 
     - 若要将 **TiDB Managed** 域名用于 advertised listener，请在 **Domain Pattern** 字段中输入一个唯一字符串，然后点击 **Generate**。TiDB Cloud 将为每个可用区生成带有子域名的 broker 地址。
@@ -97,8 +97,8 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 
 **Amazon MSK Provisioned**
 
-1. 在 **Networking** 页面中，点击 **AWS Private Endpoint for External Services** 部分中的 **Create Private Endpoint**.
-2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称，然后选择 **AWS MSK Provisioned** 作为连接类型。
+1. 在 **Networking** 页面中，点击 **AWS Private Endpoints for External Services** 部分中的 **Create Private Endpoint for External Services**.
+2. 在显示的对话框中，为 private endpoint 输入一个名称，然后选择 **AWS MSK Provisioned** 作为连接类型。
 3. 输入你的 Amazon MSK Provisioned 集群的 **MSK Cluster ARN**。要了解如何为 changefeed 创建 Amazon MSK Provisioned 集群，请参见[通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
 4. 点击 **Create** 以验证配置并创建 private endpoint。
 
@@ -108,12 +108,12 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 
 <div label="Alibaba Cloud">
 
-1. 在 **Networking** 页面中，点击 **Alibaba Cloud Private Endpoint for Changefeed** 部分中的 **Create Private Endpoint**。
-2. 在 **Create Private Endpoint for Changefeed** 对话框中，为 private endpoint 输入一个名称。
+1. 在 **Networking** 页面中，点击 **Alibaba Cloud Private Endpoints for External Services** 部分中的 **Create Private Endpoint for External Services**。
+2. 在 **Create Private Endpoint for External Services** 对话框中，为 private endpoint 输入一个名称。
 3. 按照提示将 TiDB Cloud 的 Alibaba Cloud account ID 添加到你的 endpoint service 的 allowlist 中，以授予 TiDB Cloud VPC 访问权限。更多信息，请参见 [managing account IDs in the allowlist of an endpoint service](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)。
 4. 输入你在[网络](#network)部分中收集到的 **Endpoint Service Name**。
 5. 选择 **Number of AZs**。确保 AZ 的数量和 AZ ID 与你的 Kafka 部署匹配。
-6. 如果此 private endpoint 是为 Apache Kafka 创建的，请启用 **Advertised Listener for Kafka** 选项。
+6. 如果此 private endpoint 是为 Apache Kafka 创建的，请选中 **Configure Advertised Listener for Kafka** 复选框。
 7. 使用 **TiDB Managed** 域名或 **Custom** 域名配置 Kafka 的 advertised listener。
 
     - 若要将 **TiDB Managed** 域名用于 advertised listener，请在 **Domain Pattern** 字段中输入一个唯一字符串，然后点击 **Generate**。TiDB 将为每个可用区生成带有子域名的 broker 地址。

@@ -7,7 +7,7 @@ summary: 了解如何管理 TiDB 节点组及其端点，以实现业务负载�
 
 本文档介绍如何通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 管理 TiDB 节点组及其端点，以实现业务负载隔离。
 
-> **Note**:
+> **Note:**
 >
 > TiDB 节点组功能 **不适用于** {{{ .starter }}} 或 {{{ .essential }}} 实例。
 
@@ -25,7 +25,7 @@ summary: 了解如何管理 TiDB 节点组及其端点，以实现业务负载�
 - 你已经在 AWS 或 Google Cloud 上部署了 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 - 你拥有组织的 **Organization Owner** 或 **Project Owner** 角色。更多信息，参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 
-> **Note**:
+> **Note:**
 >
 > TiDB 节点组无法在集群创建时直接创建。你需要在集群创建完成并处于 **Available** 状态后，再添加节点组。
 
@@ -93,7 +93,7 @@ summary: 了解如何管理 TiDB 节点组及其端点，以实现业务负载�
      - 如果集群部署在 AWS，请参考 [通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections.md)。
      - 如果集群部署在 Google Cloud，请参考 [通过 Google Cloud Private Service Connect 连接到 TiDB Cloud Dedicated 集群](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)。
 
-    > **Note**:
+    > **Note:**
     >
     > 如果你使用 Private Link 连接不同的节点组，需要为每个节点组分别创建私有端点连接。
 
@@ -146,7 +146,7 @@ summary: 了解如何管理 TiDB 节点组及其端点，以实现业务负载�
 
 ## 删除 TiDB 节点组
 
-> **Note**:
+> **Note:**
 >
 > 当你删除 TiDB 节点组时，其节点和网络配置也会被一并移除，包括私有端点连接和公网访问的 IP 列表。
 

@@ -187,7 +187,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     - **Hostname or IP address**（适用于 Public）：数据源的主机名或 IP 地址。
-    - **Private Endpoint**（适用于 Private Link）：你为 {{{ .premium }}} instance 在 **Networking** > **Private Endpoint for External Services** 中创建的 private endpoint。你也可以点击 **Create a Private Endpoint here** 进行创建。有关设置详情，请参见 Data Migration 指南中的 [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) 部分。
+    - **Private Endpoint**（适用于 Private Link）：你为 {{{ .premium }}} instance 在 **Networking** > **AWS Private Endpoints for External Services** 中创建的 private endpoint。你也可以点击 **Create a Private Endpoint here** 进行创建。有关设置详情，请参见 Data Migration 指南中的 [Private link or private endpoint](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint) 部分。
 
     </CustomContent>
 

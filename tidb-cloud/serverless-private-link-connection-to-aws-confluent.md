@@ -23,7 +23,7 @@ summary: 了解如何使用 AWS Endpoint Service private link 连接，在 AWS �
 要查看 AWS 账户 ID 和可用区，请执行以下操作：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB Cloud Essential 实例的概览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
-2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
+2. 在 **AWS Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 3. 在弹出的对话框中，你可以找到 AWS 账户 ID 和可用区信息。
 
 ## 第 1 步：设置 Confluent Cloud 网络
