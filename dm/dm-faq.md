@@ -18,13 +18,13 @@ Alibaba Cloud RDS の主キーのないアップストリーム テーブルの�
 -   **Alibaba Cloud RDS**では、主キーのないアップストリーム テーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
 -   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
-## タスク構成のブロックおよび許可リストの正規表現は、 `non-capturing (?!)` ? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
+## タスク構成のブロックおよび許可リストの正規表現は`non-capturing (?!)`をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
 
 現在、DMはこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。Golangでサポートされている正規表現については、 [re2構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
 ## アップストリームで実行されたステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DMは、複数のDDL変更操作を含む単一のステートメントを、1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。上流で実行されるステートメントには1つのDDL操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、リポジトリ[問題](https://github.com/pingcap/tiflow/issues) ～ `pingcap/tiflow`にアップグレードしてください。
+DMは、複数のDDL変更操作を含む単一のステートメントを、1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるとは限りません。上流で実行されるステートメントには1つのDDL操作のみを含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、`pingcap/tiflow`リポジトリに[問題](https://github.com/pingcap/tiflow/issues)を報告できます。
 
 ## 互換性のない DDL ステートメントをどのように処理しますか? {#how-to-handle-incompatible-ddl-statements}
 
@@ -32,7 +32,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 > **Note:**
 >
-> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
+> 現在、TiDBはMySQLがサポートするすべてのDDL文と互換性があるわけではありません。[MySQLとの互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB に複製しますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
@@ -53,7 +53,9 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ## `online-ddl: true`を設定した後、gh-ost テーブルに関連する DDL 操作によって返されたエラーをどのように処理しますか? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set}
 
-    [unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
+```
+[unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
+```
 
 上記のエラーは、以下の理由により発生する可能性があります。
 
@@ -61,7 +63,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ただし、メモリ内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
 
--   DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録しま す。
+-   DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
 -   DM ワーカーが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
 
 そのため、増分レプリケーションのプロセスにおいて、指定されたPosが`alter ghost_table` DDLをスキップしたにもかかわらず、そのPosがgh-ostのオンラインDDLプロセス中である場合、ghost_tableはメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
@@ -74,7 +76,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 3.  ダウンストリーム TiDB でアップストリーム DDL を手動で実行します。
 
-4.  gh-ost プロセス後の位置に Pos が複製されたら、 `online-ddl-scheme`または`online-ddl`構成を再度有効にして、 `block-allow-list.ignore-tables`コメント アウトします。
+4.  gh-ost プロセス後の位置に Pos が複製されたら、 `online-ddl-scheme`または`online-ddl`構成を再度有効にして、 `block-allow-list.ignore-tables`をコメントアウトします。
 
 ## 既存のデータ移行タスクにテーブルを追加するにはどうすればよいですか? {#how-to-add-tables-to-the-existing-data-migration-tasks}
 
@@ -133,7 +135,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 ## TiUP がDM の一部のバージョン (たとえば、v2.0.0-hotfix) の展開に失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v200-hotfix}
 
-`tiup list dm-master`コマンドを使用すると、 TiUP がデプロイをサポートしている DM バージョンを表示できます。このコマンドで表示されない DM バージョンはTiUP管理されません。
+`tiup list dm-master`コマンドを使用すると、 TiUP がデプロイをサポートしている DM バージョンを表示できます。このコマンドで表示されない DM バージョンはTiUPによって管理されません。
 
 ## DM がデータを複製しているときに発生するエラー`parse mydumper metadata error: EOF`を処理するにはどうすればよいですか? {#how-to-handle-the-error-parse-mydumper-metadata-error-eof-that-occurs-when-dm-is-replicating-data}
 
@@ -183,9 +185,11 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
 
-    if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
+```
+if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
+```
 
-このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`を解析できないため、 `sql-skip`期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定することができます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
+このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定することができます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
 
 DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用してください。
 
@@ -212,7 +216,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 -   データ量が大きい場合 (1 TB を超える場合) は、次の手順を実行します。
 
     1.  ダウンストリーム データベースにインポートされたデータをクリーンアップします。
-    2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイ。
+    2.  データを処理する DM ワーカーノードに TiDB-Lightningをデプロイします。
     3.  DM ダンプ ユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカル バックエンド モードを使用します。
     4.  完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
         -   `task-mode`を`incremental`に変更します。
@@ -229,7 +233,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 1.  移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースの値を`expire_logs_days`に増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
 2.  このタスクのリレー ログ機能を有効にすると、binlogの位置が消去されていても DM がリレー ログからデータを読み取ることができます。
 
-## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに「 `failed to fetch dashboard`表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
+## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
 
 これはTiUPの既知のバグで、 TiUP v1.3.2 で修正されています。この問題に対する解決策は以下の2つです。
 
@@ -243,90 +247,92 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     4.  フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
     5.  `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
 
-## DM v2.0 では、タスクで`enable-relay`と`enable-gtid`同時に有効になっている場合、コマンド`query-status`のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v20-why-does-the-query-result-of-the-command-query-status-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-enable-relay-and-enable-gtid-enabled-at-the-same-time}
+## DM v2.0 では、タスクで`enable-relay`と`enable-gtid`が同時に有効になっている場合、コマンド`query-status`のクエリ結果に、Syncer チェックポイント GTID が連続していないと表示されるのはなぜですか? {#in-dm-v20-why-does-the-query-result-of-the-command-query-status-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-enable-relay-and-enable-gtid-enabled-at-the-same-time}
 
 これはDMの既知のバグで、DM v2.0.2で修正されています。このバグは、以下の2つの条件が同時に満たされた場合に発生します。
 
 1.  ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
 2.  アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
-<!---->
-
-    mysql> show binlog events in 'mysql-bin.000005' limit 2;
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-    | Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-    | mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
-    | mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+```
+mysql> show binlog events in 'mysql-bin.000005' limit 2;
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+| Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+| mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
+| mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+```
 
 このバグは、dmctlで`query-status <task>`を実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`が連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
 
-    query-status test
-    {
-        ...
-        "sources": [
-            {
+```
+query-status test
+{
+    ...
+    "sources": [
+        {
+            ...
+            "sourceStatus": {
+                "source": "mysql1",
                 ...
-                "sourceStatus": {
-                    "source": "mysql1",
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000006, 744)",
+                    "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
                     ...
-                    "relayStatus": {
+                }
+            },
+            "subTaskStatus": [
+                {
+                    ...
+                    "sync": {
+                        ...
                         "masterBinlog": "(mysql-bin.000006, 744)",
                         "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
+                        "syncerBinlog": "(mysql-bin|000001.000006, 738)",
+                        "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
                         ...
+                        "synced": false,
+                        "binlogType": "local"
                     }
-                },
-                "subTaskStatus": [
-                    {
-                        ...
-                        "sync": {
-                            ...
-                            "masterBinlog": "(mysql-bin.000006, 744)",
-                            "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
-                            "syncerBinlog": "(mysql-bin|000001.000006, 738)",
-                            "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
-                            ...
-                            "synced": false,
-                            "binlogType": "local"
-                        }
-                    }
-                ]
-            },
-            {
+                }
+            ]
+        },
+        {
+            ...
+            "sourceStatus": {
+                "source": "mysql2",
                 ...
-                "sourceStatus": {
-                    "source": "mysql2",
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000007, 1979)",
+                    "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
                     ...
-                    "relayStatus": {
+                }
+            },
+            "subTaskStatus": [
+                {
+                    ...
+                    "sync": {
                         "masterBinlog": "(mysql-bin.000007, 1979)",
                         "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
+                        "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
+                        "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
                         ...
+                        "synced": true,
+                        "binlogType": "local"
                     }
-                },
-                "subTaskStatus": [
-                    {
-                        ...
-                        "sync": {
-                            "masterBinlog": "(mysql-bin.000007, 1979)",
-                            "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                            "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
-                            "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                            ...
-                            "synced": true,
-                            "binlogType": "local"
-                        }
-                    }
-                ]
-            }
-        ]
-    }
+                }
+            ]
+        }
+    ]
+}
+```
 
 この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
 -   現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
     1.  現在のタスクを停止し、連続しない GTID を持つすべてのデータ ソースを削除します。
-    2.  すべてのソース構成ファイルで`enable-relay` ～ `false`を設定します。
+    2.  すべてのソース構成ファイルで`enable-relay`を`false`に設定します。
     3.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     4.  増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
@@ -334,8 +340,8 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 -   アップストリーム バイナリ ログが消去されたが、ローカル リレー ログが残っている場合は、次の手順を実行できます。
     1.  現在のタスクを停止します。
     2.  連続しない GTID を持つデータ ソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
-    3.  増分タスクの`task.yaml`で、前の値`binlog-gtid`を前の値`previous_gtids`に変更します。上記の例では、 `1-y`を`6-y`に変更します。
-    4.  `task.yaml`の`syncers.safe-mode` `true`設定し、タスクを再開します。
+    3.  増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。
+    4.  `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5.  増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再度開始します。
     7.  データ ソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
@@ -362,7 +368,7 @@ dmctl execute コマンドを使用すると、DM マスターへの接続に失
 
 この場合、環境変数`https_proxy` （ **https** ）を確認してください。この変数が設定されている場合、dmctl は`https_proxy`で指定されたホストとポートに自動的に接続します。ホストに対応する`proxy`転送サービスがない場合、接続は失敗します。
 
-この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。必須でない場合は設定を解除してください。必須でない場合は、元の dmctl コマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加してください。
+この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。必須でない場合は設定を解除してください。必須の場合は、元の dmctl コマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加してください。
 
 > **Note:**
 >
@@ -370,7 +376,9 @@ dmctl execute コマンドを使用すると、DM マスターへの接続に失
 
 ## DM バージョン 2.0.2 から 2.0.6 で start-relay コマンドを実行したときに返されるエラーを処理するにはどうすればよいですか? {#how-to-handle-the-returned-error-when-executing-start-relay-command-for-dm-versions-from-202-to-206}
 
-    flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
+```
+flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
+```
 
 上記のエラーは次の場合に発生する可能性があります。
 
@@ -381,8 +389,10 @@ dmctl execute コマンドを使用すると、DM マスターへの接続に失
 
 -   リレーログを再起動:
 
-        » stop-relay -s sourceID workerName
-        » start-relay -s sourceID workerName
+    ```
+    » stop-relay -s sourceID workerName
+    » start-relay -s sourceID workerName
+    ```
 
 -   DM を v2.0.7 以降のバージョンにアップグレードします。
 
