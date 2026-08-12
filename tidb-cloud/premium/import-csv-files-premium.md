@@ -116,7 +116,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, {{{ .premium }}} scans the bucket and proposes mappings between the source files and destination tables.
+5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
     When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -124,21 +124,19 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
     >
     > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
-    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
+    - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-    <!-- future feature -->
-    > **Note:**
-    >
-    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
-    >
-    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
-    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
+        - **Target Database** and **Target Table**: enter the destination database and table for the matched files.
+        - To add another mapping, click **+**.
 
-6. {{{ .premium }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. Click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -168,7 +166,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, {{{ .premium }}} scans the bucket and proposes mappings between the source files and destination tables.
+5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
     When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
@@ -176,21 +174,19 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
     >
     > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
 
-    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
-    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
+    - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-    <!-- future feature -->
-    > **Note:**
-    >
-    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
-    >
-    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
-    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `?` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`.
+        - **Target Database** and **Target Table**: enter the destination database and table for the matched files.
+        - To add another mapping, click **+**.
 
-6. {{{ .premium }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
 
-7. When the import progress shows **Completed**, check the imported tables.
+7. Click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 

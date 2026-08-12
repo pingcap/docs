@@ -16,7 +16,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 
 - To ensure data consistency, {{{ .premium }}} allows importing CSV files into empty tables only. If the target table already contains data, import into a staging table and then copy the rows using the `INSERT ... SELECT` statement.
 - During the public preview, the user interface currently supports Amazon S3 as the only storage provider. Support for additional providers will be added in future releases.
-- Each import job maps a single source pattern to one destination table.
+- Each source pattern maps to one destination table. You can add multiple mappings to an import job.
 
 ## Step 1. Prepare the CSV files
 
@@ -55,7 +55,9 @@ The wizard includes a helper link labeled **Click here to create a new one with 
     - Click **Test Bucket Access** to validate connectivity.  <!--Todo-- Known preview issue: the button returns to the idle state without a success toast.-->
 
 4. Click **Next** and provide the TiDB SQL username and password for the import job. Optionally, test the connection.
-5. Review the automatically generated source-to-target mapping. Disable automatic mapping if you need to define custom patterns and destination tables.
+5. Configure the source-to-target mapping:
+    - To use automatic mapping, leave **Use TiDB file naming conventions for automatic mapping** selected.
+    - To configure mappings manually, deselect the automatic mapping option. For each target table, enter a source file pattern relative to the **Source Files URI**, and then enter the target database and table. The source pattern supports `*` and `?` wildcards. To add another mapping, click **+**.
 6. Click **Next** to run the pre-check. Resolve any warnings about missing files or incompatible schemas.
 7. Click **Start Import** to launch the job group.
 8. Monitor the job statuses until they show **Completed**, then verify the imported data in TiDB Cloud.

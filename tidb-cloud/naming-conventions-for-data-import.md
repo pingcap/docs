@@ -119,9 +119,13 @@ If the SQL file is exported through TiDB Dumpling with the default configuration
 
 ## File pattern
 
-If the source data file of CSV or Parquet does not conform to the naming convention, you can manually map the source data file to the target table using a file name pattern. This feature does not support Aurora Snapshot and SQL data files.
+If a CSV or Parquet source file does not conform to the naming convention, you can manually map the source file to a target table using a file name pattern. Manual file-pattern mapping does not support SQL data files.
 
-In the import wizard, on the **Destination Mapping** step, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the **Source**, **Target Database**, and **Target Table** fields. The **Source** field accepts a file name pattern that supports the `*` and `?` wildcards.
+In the mapping step of the import wizard, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the **Source**, **Target Database**, and **Target Table** fields. The **Source** field accepts a file name pattern relative to the source URI and supports the `*` and `?` wildcards. Add one mapping for each target table.
+
+> **Note:**
+>
+> For Parquet files exported from an Aurora Snapshot, manual mapping applies only the source patterns that you configure. It does not infer a complete snapshot mapping or create the target schema. Create the target databases and tables before the import, add a mapping for each target table, and verify that the pre-check scans the expected number of data files and maps each source pattern to the intended target table.
 
 - For CSV files, see [Step 4. Import CSV files to TiDB Cloud](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud).
 - For Parquet files, see [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud).
