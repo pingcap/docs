@@ -12,55 +12,59 @@ USE information_schema;
 DESC key_column_usage;
 ```
 
-    +-------------------------------+--------------+------+------+---------+-------+
-    | Field                         | Type         | Null | Key  | Default | Extra |
-    +-------------------------------+--------------+------+------+---------+-------+
-    | CONSTRAINT_CATALOG            | varchar(512) | NO   |      | NULL    |       |
-    | CONSTRAINT_SCHEMA             | varchar(64)  | NO   |      | NULL    |       |
-    | CONSTRAINT_NAME               | varchar(64)  | NO   |      | NULL    |       |
-    | TABLE_CATALOG                 | varchar(512) | NO   |      | NULL    |       |
-    | TABLE_SCHEMA                  | varchar(64)  | NO   |      | NULL    |       |
-    | TABLE_NAME                    | varchar(64)  | NO   |      | NULL    |       |
-    | COLUMN_NAME                   | varchar(64)  | NO   |      | NULL    |       |
-    | ORDINAL_POSITION              | bigint(10)   | NO   |      | NULL    |       |
-    | POSITION_IN_UNIQUE_CONSTRAINT | bigint(10)   | YES  |      | NULL    |       |
-    | REFERENCED_TABLE_SCHEMA       | varchar(64)  | YES  |      | NULL    |       |
-    | REFERENCED_TABLE_NAME         | varchar(64)  | YES  |      | NULL    |       |
-    | REFERENCED_COLUMN_NAME        | varchar(64)  | YES  |      | NULL    |       |
-    +-------------------------------+--------------+------+------+---------+-------+
-    12 rows in set (0.00 sec)
+```
++-------------------------------+--------------+------+------+---------+-------+
+| Field                         | Type         | Null | Key  | Default | Extra |
++-------------------------------+--------------+------+------+---------+-------+
+| CONSTRAINT_CATALOG            | varchar(512) | NO   |      | NULL    |       |
+| CONSTRAINT_SCHEMA             | varchar(64)  | NO   |      | NULL    |       |
+| CONSTRAINT_NAME               | varchar(64)  | NO   |      | NULL    |       |
+| TABLE_CATALOG                 | varchar(512) | NO   |      | NULL    |       |
+| TABLE_SCHEMA                  | varchar(64)  | NO   |      | NULL    |       |
+| TABLE_NAME                    | varchar(64)  | NO   |      | NULL    |       |
+| COLUMN_NAME                   | varchar(64)  | NO   |      | NULL    |       |
+| ORDINAL_POSITION              | bigint(10)   | NO   |      | NULL    |       |
+| POSITION_IN_UNIQUE_CONSTRAINT | bigint(10)   | YES  |      | NULL    |       |
+| REFERENCED_TABLE_SCHEMA       | varchar(64)  | YES  |      | NULL    |       |
+| REFERENCED_TABLE_NAME         | varchar(64)  | YES  |      | NULL    |       |
+| REFERENCED_COLUMN_NAME        | varchar(64)  | YES  |      | NULL    |       |
++-------------------------------+--------------+------+------+---------+-------+
+12 rows in set (0.00 sec)
+```
 
 ```sql
 SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
 ```
 
-    *************************** 1. row ***************************
-               CONSTRAINT_CATALOG: def
-                CONSTRAINT_SCHEMA: mysql
-                  CONSTRAINT_NAME: PRIMARY
-                    TABLE_CATALOG: def
-                     TABLE_SCHEMA: mysql
-                       TABLE_NAME: user
-                      COLUMN_NAME: Host
-                 ORDINAL_POSITION: 1
-    POSITION_IN_UNIQUE_CONSTRAINT: NULL
-          REFERENCED_TABLE_SCHEMA: NULL
-            REFERENCED_TABLE_NAME: NULL
-           REFERENCED_COLUMN_NAME: NULL
-    *************************** 2. row ***************************
-               CONSTRAINT_CATALOG: def
-                CONSTRAINT_SCHEMA: mysql
-                  CONSTRAINT_NAME: PRIMARY
-                    TABLE_CATALOG: def
-                     TABLE_SCHEMA: mysql
-                       TABLE_NAME: user
-                      COLUMN_NAME: User
-                 ORDINAL_POSITION: 2
-    POSITION_IN_UNIQUE_CONSTRAINT: NULL
-          REFERENCED_TABLE_SCHEMA: NULL
-            REFERENCED_TABLE_NAME: NULL
-           REFERENCED_COLUMN_NAME: NULL
-    2 rows in set (0.00 sec)
+```
+*************************** 1. row ***************************
+           CONSTRAINT_CATALOG: def
+            CONSTRAINT_SCHEMA: mysql
+              CONSTRAINT_NAME: PRIMARY
+                TABLE_CATALOG: def
+                 TABLE_SCHEMA: mysql
+                   TABLE_NAME: user
+                  COLUMN_NAME: Host
+             ORDINAL_POSITION: 1
+POSITION_IN_UNIQUE_CONSTRAINT: NULL
+      REFERENCED_TABLE_SCHEMA: NULL
+        REFERENCED_TABLE_NAME: NULL
+       REFERENCED_COLUMN_NAME: NULL
+*************************** 2. row ***************************
+           CONSTRAINT_CATALOG: def
+            CONSTRAINT_SCHEMA: mysql
+              CONSTRAINT_NAME: PRIMARY
+                TABLE_CATALOG: def
+                 TABLE_SCHEMA: mysql
+                   TABLE_NAME: user
+                  COLUMN_NAME: User
+             ORDINAL_POSITION: 2
+POSITION_IN_UNIQUE_CONSTRAINT: NULL
+      REFERENCED_TABLE_SCHEMA: NULL
+        REFERENCED_TABLE_NAME: NULL
+       REFERENCED_COLUMN_NAME: NULL
+2 rows in set (0.00 sec)
+```
 
 `KEY_COLUMN_USAGE`表の列の説明は次のとおりです。
 

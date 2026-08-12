@@ -222,14 +222,16 @@ ruby app.rb
 
 接続が成功すると、コンソールには次のようにTiDBのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
-    ⏳ Loading sample game data...
-    ✅ Loaded sample game data.
+```
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
+⏳ Loading sample game data...
+✅ Loaded sample game data.
 
-    🆕 Created a new player with ID 12.
-    ℹ️ Got Player 12: Player { id: 12, coins: 100, goods: 100 }
-    🔢 Added 50 coins and 50 goods to player 12, updated 1 row.
-    🚮 Deleted 1 player data.
+🆕 Created a new player with ID 12.
+ℹ️ Got Player 12: Player { id: 12, coins: 100, goods: 100 }
+🔢 Added 50 coins and 50 goods to player 12, updated 1 row.
+🚮 Deleted 1 player data.
+```
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

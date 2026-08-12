@@ -104,9 +104,11 @@ TiKV上に古いMVCCバージョンが多すぎる場合、またはGCのMVCC履
 
 `Total_keys`と`Processed_keys`を確認してください。大きく異なる場合は、TiKVインスタンスに古いバージョンのキーが多すぎます。
 
-    ...
-    # Total_keys: 2215187529 Processed_keys: 1108056368
-    ...
+```
+...
+# Total_keys: 2215187529 Processed_keys: 1108056368
+...
+```
 
 TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入され、このようなスロークエリを高速化できます。詳細については、 [TiKV MVCC インメモリエンジン](/tikv-in-memory-engine.md)をご覧ください。
 
@@ -116,16 +118,20 @@ TiDB v8.5.0では、TiKV MVCCインメモリエンジン（IME）機能が導入
 
 スローログで`Wait_TS`と`Query_time`を比較できます。タイムスタンプはプリフェッチされるため、通常は`Wait_TS`の値は低くなります。
 
-    # Query_time: 0.0300000
-    ...
-    # Wait_TS: 0.02500000
+```
+# Query_time: 0.0300000
+...
+# Wait_TS: 0.02500000
+```
 
 #### 古いリージョン情報 {#outdated-region-information}
 
 TiDB側のリージョン情報が古くなっている可能性があります。この場合、TiKVは`regionMiss`のエラーを返す可能性があります。その後、TiDBはPDからリージョン情報を再度取得し、 `Cop_backoff`情報に反映されます。障害発生回数と合計所要時間の両方が記録されます。
 
-    # Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
-    # Cop_backoff_rpcPD_total_times: 200 Cop_backoff_rpcPD_total_time: 0.2 Cop_backoff_rpcPD_max_time: 0.2 Cop_backoff_rpcPD_max_addr: 127.0.0.1 Cop_backoff_rpcPD_avg_time: 0.2 Cop_backoff_rpcPD_p90_time: 0.2
+```
+# Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
+# Cop_backoff_rpcPD_total_times: 200 Cop_backoff_rpcPD_total_time: 0.2 Cop_backoff_rpcPD_max_time: 0.2 Cop_backoff_rpcPD_max_addr: 127.0.0.1 Cop_backoff_rpcPD_avg_time: 0.2 Cop_backoff_rpcPD_p90_time: 0.2
+```
 
 #### サブクエリは事前に実行される {#subqueries-are-executed-in-advance}
 
@@ -147,9 +153,11 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 ただし、このタイプのサブクエリ実行はスロー ログで識別できます。
 
-    # Query_time: 7.770634843
-    ...
-    # Rewrite_time: 7.765673663 Preproc_subqueries: 1 Preproc_subqueries_time: 7.765231874
+```
+# Query_time: 7.770634843
+...
+# Rewrite_time: 7.765673663 Preproc_subqueries: 1 Preproc_subqueries_time: 7.765231874
+```
 
 上記のログ レコードから、サブクエリが事前に実行され、 `7.76s`かかることがわかります。
 
@@ -199,9 +207,11 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 +-------------------------+-----------+---------+-----------+---------------+------------------------------+----------------------+-----------------------+----------------+
 ```
 
-    ...
-    # Disk_max: 229974016
-    ...
+```
+...
+# Disk_max: 229974016
+...
+```
 
 #### 直積による結合演算 {#join-operations-with-cartesian-product}
 

@@ -16,8 +16,10 @@ aliases: ['/ja/tidb/stable/three-dc-local-read/']
 
 TiKVノードとTiDBノードの両方に構成項目`labels`設定されている場合、同じデータセンター内のTiKVノードとTiDBノードのラベル`zone`の値は同一である必要があります。例えば、TiKVノードとTiDBノードの両方がデータセンター`dc-1`にある場合、2つのノードに以下のラベルを設定する必要があります。
 
-    [labels]
-    zone=dc-1
+```
+[labels]
+zone=dc-1
+```
 
 ## ステイル読み取りを使用してローカル読み取りを実行する {#perform-local-read-using-stale-read}
 

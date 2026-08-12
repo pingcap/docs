@@ -13,18 +13,20 @@ DESC mysql.tidb_mdl_view;
 
 出力は次のようになります。
 
-    +-------------+-----------------+------+------+---------+-------+
-    | Field       | Type            | Null | Key  | Default | Extra |
-    +-------------+-----------------+------+------+---------+-------+
-    | job_id      | bigint          | NO   | PRI  | NULL    |       |
-    | db_name     | longtext        | YES  |      | NULL    |       |
-    | table_name  | longtext        | YES  |      | NULL    |       |
-    | query       | longtext        | YES  |      | NULL    |       |
-    | session_id  | bigint unsigned | YES  |      | NULL    |       |
-    | start_time  | timestamp(6)    | YES  |      | NULL    |       |
-    | SQL_DIGESTS | varchar(5)      | YES  |      | NULL    |       |
-    +-------------+-----------------+------+------+---------+-------+
-    7 rows in set (0.00 sec)
+```
++-------------+-----------------+------+------+---------+-------+
+| Field       | Type            | Null | Key  | Default | Extra |
++-------------+-----------------+------+------+---------+-------+
+| job_id      | bigint          | NO   | PRI  | NULL    |       |
+| db_name     | longtext        | YES  |      | NULL    |       |
+| table_name  | longtext        | YES  |      | NULL    |       |
+| query       | longtext        | YES  |      | NULL    |       |
+| session_id  | bigint unsigned | YES  |      | NULL    |       |
+| start_time  | timestamp(6)    | YES  |      | NULL    |       |
+| SQL_DIGESTS | varchar(5)      | YES  |      | NULL    |       |
++-------------+-----------------+------+------+---------+-------+
+7 rows in set (0.00 sec)
+```
 
 ## フィールド {#fields}
 

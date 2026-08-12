@@ -59,15 +59,17 @@ mysql
 
 以下は出力例です。
 
-    +--------------------+
-    | Database           |
-    +--------------------+
-    | INFORMATION_SCHEMA |
-    | PERFORMANCE_SCHEMA |
-    | bookshop           |
-    | mysql              |
-    | test               |
-    +--------------------+
+```
++--------------------+
+| Database           |
++--------------------+
+| INFORMATION_SCHEMA |
+| PERFORMANCE_SCHEMA |
+| bookshop           |
+| mysql              |
+| test               |
++--------------------+
+```
 
 ## データベース作成におけるルール {#rules-in-database-creation}
 

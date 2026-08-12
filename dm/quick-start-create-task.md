@@ -96,7 +96,9 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./dmctl encrypt "123456"
 ```
 
-    fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
+```
+fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
+```
 
 この暗号化された値を保存し、次の手順で MySQL データ ソースを作成するときに使用します。
 
@@ -186,24 +188,26 @@ MySQL2 の場合、上記のコマンドの設定ファイルを MySQL2 の設�
     ./dmctl --master-addr 127.0.0.1:8261 start-task conf/task.yaml
     ```
 
-        {
-            "result": true,
-            "msg": "",
-            "sources": [
-                {
-                    "result": true,
-                    "msg": "",
-                    "source": "mysql-replica-01",
-                    "worker": "worker1"
-                },
-                {
-                    "result": true,
-                    "msg": "",
-                    "source": "mysql-replica-02",
-                    "worker": "worker2"
-                }
-            ]
-        }
+    ```
+    {
+        "result": true,
+        "msg": "",
+        "sources": [
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-replica-01",
+                "worker": "worker1"
+            },
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-replica-02",
+                "worker": "worker2"
+            }
+        ]
+    }
+    ```
 
 これで、MySQL1 および MySQL2 インスタンスから TiDB にシャード テーブルを移行するタスクが正常に作成されました。
 

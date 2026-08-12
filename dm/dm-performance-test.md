@@ -50,35 +50,35 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 2.  移行タスクを作成します（モード`full` ）。タスク設定テンプレートは次のとおりです。
 
-```yaml
----
-name: test-full
-task-mode: full
+  ```yaml
+  ---
+  name: test-full
+  task-mode: full
 
-# Configure the migration task using the TiDB information of your actual test environment.
-target-database:
-  host: "192.168.0.1"
-  port: 4000
-  user: "root"
-  password: ""
+  # Configure the migration task using the TiDB information of your actual test environment.
+  target-database:
+    host: "192.168.0.1"
+    port: 4000
+    user: "root"
+    password: ""
 
-mysql-instances:
-  -
-    source-id: "source-1"
-    block-allow-list:  "instance"
-    mydumper-config-name: "global"
-    loader-thread: 16
+  mysql-instances:
+    -
+      source-id: "source-1"
+      block-allow-list:  "instance"
+      mydumper-config-name: "global"
+      loader-thread: 16
 
-# Configure the name of the database where sysbench generates data.
-block-allow-list:
-  instance:
-    do-dbs: ["dm_benchmark"]
+  # Configure the name of the database where sysbench generates data.
+  block-allow-list:
+    instance:
+      do-dbs: ["dm_benchmark"]
 
-mydumpers:
-  global:
-    rows: 32000
-    threads: 32
-```
+  mydumpers:
+    global:
+      rows: 32000
+      threads: 32
+  ```
 
 移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
 
@@ -91,7 +91,9 @@ mydumpers:
 
 DM-worker のログを確認してください。`all data files have been finished`が表示されている場合は、すべてのデータがインポートされたことを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
 
-     [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
+```
+ [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
+```
 
 テスト データのサイズとデータのインポートにかかる時間に応じて、完全なデータの移行速度を計算できます。
 
@@ -107,34 +109,34 @@ DM-worker のログを確認してください。`all data files have been finis
 
 2.  DM移行タスク（モード`all` ）を作成します。タスク設定ファイルの例を以下に示します。
 
-```yaml
----
-name: test-all
-task-mode: all
+  ```yaml
+  ---
+  name: test-all
+  task-mode: all
 
-# Configure the migration task using the TiDB information of your actual test environment.
-target-database:
-  host: "192.168.0.1"
-  port: 4000
-  user: "root"
-  password: ""
+  # Configure the migration task using the TiDB information of your actual test environment.
+  target-database:
+    host: "192.168.0.1"
+    port: 4000
+    user: "root"
+    password: ""
 
-mysql-instances:
-  -
-    source-id: "source-1"
-    block-allow-list:  "instance"
-    syncer-config-name: "global"
+  mysql-instances:
+    -
+      source-id: "source-1"
+      block-allow-list:  "instance"
+      syncer-config-name: "global"
 
-# Configure the name of the database where sysbench generates data.
-block-allow-list:
-  instance:
-    do-dbs: ["dm_benchmark"]
+  # Configure the name of the database where sysbench generates data.
+  block-allow-list:
+    instance:
+      do-dbs: ["dm_benchmark"]
 
-syncers:
-  global:
-    worker-count: 16
-    batch: 100
-```
+  syncers:
+    global:
+      worker-count: 16
+      batch: 100
+  ```
 
 データ移行タスクの作成方法の詳細については、 [データ移行タスクを作成する](/dm/dm-create-task.md)を参照してください。
 

@@ -25,19 +25,25 @@ CREATE TABLE users (
 INSERT INTO users (id,age,last_login) VALUES (NULL,123,NOW());
 ```
 
-    Query OK, 1 row affected (0.02 sec)
+```
+Query OK, 1 row affected (0.02 sec)
+```
 
 ```sql
 INSERT INTO users (id,age,last_login) VALUES (NULL,NULL,NOW());
 ```
 
-    ERROR 1048 (23000): Column 'age' cannot be null
+```
+ERROR 1048 (23000): Column 'age' cannot be null
+```
 
 ```sql
 INSERT INTO users (id,age,last_login) VALUES (NULL,123,NULL);
 ```
 
-    Query OK, 1 row affected (0.03 sec)
+```
+Query OK, 1 row affected (0.03 sec)
+```
 
 -   最初の`INSERT`文は、 `AUTO_INCREMENT`列に`NULL`を割り当てることができるため成功します。TiDBはシーケンス番号を自動的に生成します。
 -   2 番目の`INSERT`ステートメントは、 `age`列が`NOT NULL`として定義されているため失敗します。
@@ -158,21 +164,27 @@ BEGIN OPTIMISTIC;
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
-    Query OK, 3 rows affected (0.00 sec)
-    Records: 3  Duplicates: 0  Warnings: 0
+```
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+```
 
 ```sql
 INSERT INTO users (username) VALUES ('steve'),('elizabeth');
 ```
 
-    Query OK, 2 rows affected (0.00 sec)
-    Records: 2  Duplicates: 0  Warnings: 0
+```
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+```
 
 ```sql
 COMMIT;
 ```
 
-    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
 
 前述の楽観的例では、トランザクションがコミットされるまで一意性チェックが延期されました。その結果、値`bill`が既に存在していたため、重複キーエラーが発生しました。
 
@@ -194,19 +206,25 @@ INSERT INTO users (username) VALUES ('dave'), ('sarah'), ('bill');
 SET tidb_constraint_check_in_place = ON;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 BEGIN OPTIMISTIC;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
-    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
 
 最初の`INSERT`ステートメントで重複キーエラーが発生しました。これによりネットワーク通信のオーバーヘッドが増加し、挿入操作のスループットが低下する可能性があります。
 
@@ -227,7 +245,9 @@ BEGIN PESSIMISTIC;
 INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
-    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+```
 
 悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定できます。これにより、TiDB は一意インデックスの一意制約チェックを（このインデックスが次にロックを必要とするとき、またはトランザクションがコミットされるときまで）延期し、対応する悲観的ロックをスキップします。この変数を使用する際は、以下の点に注意してください。
 
@@ -263,7 +283,9 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     COMMIT;
     ```
 
-        ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+    ```
+    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
+    ```
 
 -   この変数が無効になっている場合、データの書き込みを必要とする悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される可能性があります。このエラーが発生すると、TiDBは現在のトランザクションをロールバックします。
 
@@ -294,7 +316,9 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     COMMIT;
     ```
 
-        ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
+    ```
+    ERROR 9007 (HY000): Write conflict, txnStartTS=435688780611190794, conflictStartTS=435688783311536129, conflictCommitTS=435688783311536130, key={tableID=74, indexID=1, indexValues={bill, }} primary={tableID=74, indexID=1, indexValues={bill, }}, reason=LazyUniquenessCheck [try again later]
+    ```
 
 -   この変数が無効になっている場合、複数の悲観的トランザクション間で書き込み競合が発生すると、他の悲観的トランザクションがコミットされた際に悲観的ロックが強制的にロールバックされ、エラー`Pessimistic lock not found`が発生する可能性があります。このエラーが発生した場合、悲観的トランザクションの一意制約チェックを延期することが、アプリケーションのシナリオに適していないことを意味します。この場合、競合を回避するようにアプリケーションロジックを調整するか、エラー発生後にトランザクションを再試行することを検討してください。
 
@@ -313,7 +337,9 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
     DELETE FROM users where username = 'bill';
     ```
 
-        ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
+    ```
+    ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
+    ```
 
 -   この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL 文に起因しない可能性があります。そのため、トランザクションが同じ名前のインデックスを持つ複数のテーブルを操作する場合、 `1062`エラーメッセージを確認して、実際にどのインデックスにエラーが発生しているかを特定する必要があります。
 
@@ -327,25 +353,33 @@ MySQLと同様に、主キー制約には一意制約が含まれます。つま
 CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 ```
 
-    Query OK, 0 rows affected (0.12 sec)
+```
+Query OK, 0 rows affected (0.12 sec)
+```
 
 ```sql
 CREATE TABLE t2 (a INT NULL PRIMARY KEY);
 ```
 
-    ERROR 1171 (42000): All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead
+```
+ERROR 1171 (42000): All parts of a PRIMARY KEY must be NOT NULL; if you need NULL in a key, use UNIQUE instead
+```
 
 ```sql
 CREATE TABLE t3 (a INT NOT NULL PRIMARY KEY, b INT NOT NULL PRIMARY KEY);
 ```
 
-    ERROR 1068 (42000): Multiple primary key defined
+```
+ERROR 1068 (42000): Multiple primary key defined
+```
 
 ```sql
 CREATE TABLE t4 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b));
 ```
 
-    Query OK, 0 rows affected (0.10 sec)
+```
+Query OK, 0 rows affected (0.10 sec)
+```
 
 -   列`a`が主キーとして定義されており、NULL 値が許可されないため、テーブル`t2`を作成できませんでした。
 -   テーブルには主キーを 1 つしか持てないため、テーブル`t3`を作成できませんでした。
@@ -358,14 +392,18 @@ CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) CLUSTERED);
 ALTER TABLE t5 DROP PRIMARY KEY;
 ```
 
-    ERROR 8200 (HY000): Unsupported drop primary key when the table is using clustered index
+```
+ERROR 8200 (HY000): Unsupported drop primary key when the table is using clustered index
+```
 
 ```sql
 CREATE TABLE t5 (a INT NOT NULL, b INT NOT NULL, PRIMARY KEY (a,b) NONCLUSTERED);
 ALTER TABLE t5 DROP PRIMARY KEY;
 ```
 
-    Query OK, 0 rows affected (0.10 sec)
+```
+Query OK, 0 rows affected (0.10 sec)
+```
 
 `CLUSTERED`型の主キーの詳細については[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
@@ -397,14 +435,16 @@ SELECT table_name, column_name, constraint_name, referenced_table_name, referenc
 FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders');
 ```
 
-    +------------+-------------+-----------------+-----------------------+------------------------+
-    | table_name | column_name | constraint_name | referenced_table_name | referenced_column_name |
-    +------------+-------------+-----------------+-----------------------+------------------------+
-    | users      | id          | PRIMARY         | NULL                  | NULL                   |
-    | orders     | id          | PRIMARY         | NULL                  | NULL                   |
-    | orders     | user_id     | fk_user_id      | users                 | id                     |
-    +------------+-------------+-----------------+-----------------------+------------------------+
-    3 rows in set (0.00 sec)
+```
++------------+-------------+-----------------+-----------------------+------------------------+
+| table_name | column_name | constraint_name | referenced_table_name | referenced_column_name |
++------------+-------------+-----------------+-----------------------+------------------------+
+| users      | id          | PRIMARY         | NULL                  | NULL                   |
+| orders     | id          | PRIMARY         | NULL                  | NULL                   |
+| orders     | user_id     | fk_user_id      | users                 | id                     |
++------------+-------------+-----------------+-----------------------+------------------------+
+3 rows in set (0.00 sec)
+```
 
 TiDB は、 `ALTER TABLE`コマンドを介して`DROP FOREIGN KEY`と`ADD FOREIGN KEY`構文もサポートします。
 

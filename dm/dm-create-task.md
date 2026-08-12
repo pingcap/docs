@@ -11,25 +11,27 @@ summary: TiDB データ移行でデータ移行タスクを作成する方法を
 help start-task
 ```
 
-    Starts a task as defined in the configuration file
+```
+Starts a task as defined in the configuration file
 
-    Usage:
-      dmctl start-task [-s source ...] [--remove-meta] <config-file> [flags]
+Usage:
+  dmctl start-task [-s source ...] [--remove-meta] <config-file> [flags]
 
-    Flags:
-      -h, --help                help for start-task
-          --remove-meta         whether to remove task's meta data
-          --start-time string   specify the start time of binlog replication, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
+Flags:
+  -h, --help                help for start-task
+      --remove-meta         whether to remove task's meta data
+      --start-time string   specify the start time of binlog replication, e.g. '2021-10-21 00:01:00' or 2021-10-21T00:01:00
 
-    Global Flags:
-          --config string        Path to config file.
-          --master-addr string   Master API server address, this parameter is required when interacting with the dm-master
-          --rpc-timeout string   RPC timeout, default is 10m. (default "10m")
-      -s, --source strings       MySQL Source ID.
-          --ssl-ca string        Path of file that contains list of trusted SSL CAs for connection.
-          --ssl-cert string      Path of file that contains X509 certificate in PEM format for connection.
-          --ssl-key string       Path of file that contains X509 key in PEM format for connection.
-      -V, --version              Prints version and exit.
+Global Flags:
+      --config string        Path to config file.
+      --master-addr string   Master API server address, this parameter is required when interacting with the dm-master
+      --rpc-timeout string   RPC timeout, default is 10m. (default "10m")
+  -s, --source strings       MySQL Source ID.
+      --ssl-ca string        Path of file that contains list of trusted SSL CAs for connection.
+      --ssl-cert string      Path of file that contains X509 certificate in PEM format for connection.
+      --ssl-key string       Path of file that contains X509 key in PEM format for connection.
+  -V, --version              Prints version and exit.
+```
 
 ## 使用例 {#usage-example}
 
@@ -57,15 +59,17 @@ start-task [ -s "mysql-replica-01"] ./task.yaml
 start-task task.yaml
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        }
+    ]
+}
+```

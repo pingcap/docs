@@ -262,11 +262,13 @@ npm start
 
 接続が成功すると、ターミナルには次のようにTiDBのバージョンが出力されます。
 
-    🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
-    🆕 Created a new player with ID 2.
-    ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
-    🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.
-    🚮 Deleted 1 player data.
+```
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v8.5.4)
+🆕 Created a new player with ID 2.
+ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
+🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.
+🚮 Deleted 1 player data.
+```
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

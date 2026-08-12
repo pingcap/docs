@@ -74,7 +74,9 @@ TiDBサーバーがシャットダウン、メンテナンスのために再起�
 
 Javaアプリケーションで以下のエラーが頻繁に発生する場合：
 
-    The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+```
+The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+```
 
 `n`が`n milliseconds ago`または非常に`0`値の場合、通常は実行されたSQL操作によってTiDBが異常終了したことが原因です。原因を特定するには、TiDBの標準エラーログを確認することをお勧めします。
 
@@ -92,7 +94,9 @@ HikariCPの[プールのサイズについて](https://github.com/brettwooldridg
 
 経験に基づいた公式は以下のとおりです。
 
-    connections = ((core_count * 2) + effective_spindle_count)
+```
+connections = ((core_count * 2) + effective_spindle_count)
+```
 
 式中の各パラメータの説明は以下のとおりです。
 
@@ -102,13 +106,15 @@ HikariCPの[プールのサイズについて](https://github.com/brettwooldridg
 
 特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)下の次の注記に注意してください。
 
->     A formula which has held up pretty well across a lot of benchmarks for years is
->     that for optimal throughput the number of active connections should be somewhere
->     near ((core_count * 2) + effective_spindle_count). Core count should not include
->     HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
->     the active data set is fully cached, and approaches the actual number of spindles
->     as the cache hit rate falls. ... There hasn't been any analysis so far regarding
->     how well the formula works with SSDs.
+> ```
+> A formula which has held up pretty well across a lot of benchmarks for years is
+> that for optimal throughput the number of active connections should be somewhere
+> near ((core_count * 2) + effective_spindle_count). Core count should not include
+> HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
+> the active data set is fully cached, and approaches the actual number of spindles
+> as the cache hit rate falls. ... There hasn't been any analysis so far regarding
+> how well the formula works with SSDs.
+> ```
 
 このメモは以下を示しています。
 
@@ -118,7 +124,9 @@ HikariCPの[プールのサイズについて](https://github.com/brettwooldridg
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
 
-    connections = (number of cores * 4)
+```
+connections = (number of cores * 4)
+```
 
 したがって、SSDの場合は初期接続プールの最大接続サイズを`cores * 4`に設定し、さらにサイズを調整してパフォーマンスを最適化できます。
 

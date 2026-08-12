@@ -114,28 +114,30 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 <!---->
 
-    .
-    `-- restore-{downstream-cluster-ID}
-        |-- log
-        |   |-- checkpoint.meta
-        |   |-- data
-        |   |   |-- {uuid}.cpt
-        |   |   |-- {uuid}.cpt
-        |   |   `-- {uuid}.cpt
-        |   |-- ingest_index.meta
-        |   `-- progress.meta
-        |-- snapshot
-        |   |-- checkpoint.meta
-        |   |-- checksum
-        |   |   |-- {uuid}.cpt
-        |   |   |-- {uuid}.cpt
-        |   |   `-- {uuid}.cpt
-        |   `-- data
-        |       |-- {uuid}.cpt
-        |       |-- {uuid}.cpt
-        |       `-- {uuid}.cpt
-        `-- sst
-            `-- checkpoint.meta
+```
+.
+`-- restore-{downstream-cluster-ID}
+    |-- log
+    |   |-- checkpoint.meta
+    |   |-- data
+    |   |   |-- {uuid}.cpt
+    |   |   |-- {uuid}.cpt
+    |   |   `-- {uuid}.cpt
+    |   |-- ingest_index.meta
+    |   `-- progress.meta
+    |-- snapshot
+    |   |-- checkpoint.meta
+    |   |-- checksum
+    |   |   |-- {uuid}.cpt
+    |   |   |-- {uuid}.cpt
+    |   |   `-- {uuid}.cpt
+    |   `-- data
+    |       |-- {uuid}.cpt
+    |       |-- {uuid}.cpt
+    |       `-- {uuid}.cpt
+    `-- sst
+        `-- checkpoint.meta
+```
 
 チェックポイント復元操作は、スナップショット復元と PITR 復元の 2 つの部分に分かれています。
 

@@ -34,7 +34,9 @@ aliases: ['/ja/tidbcloud/serverless-driver-node-example/']
 
     以下のコマンドは、npm を使用したインストールを例として示しています。このコマンドを実行すると、プロジェクトディレクトリ内に`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
-        npm install @tidbcloud/serverless
+    ```
+    npm install @tidbcloud/serverless
+    ```
 
 ## ステップ2. TiDB Cloud Serverless Driverを使用する {#step-2-use-the-serverless-driver}
 
@@ -42,7 +44,9 @@ TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの
 
 1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**「接続」**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
-        mysql://[username]:[password]@[host]/[database]
+    ```
+   mysql://[username]:[password]@[host]/[database]
+    ```
 
 2.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
 
@@ -68,7 +72,9 @@ TiDB Cloud Serverless Driverは、CommonJSモジュールとESモジュールの
 
 4.  以下のコマンドでプロジェクトを実行してください。
 
-        node index.js
+    ```
+    node index.js
+    ```
 
 ## 以前のバージョンのNode.jsとの互換性 {#compatibility-with-earlier-versions-of-node-js}
 
@@ -76,13 +82,15 @@ Node.js 18.0.0 より前のバージョンを使用しており、グローバ�
 
 1.  `fetch`を提供するパッケージをインストールしてください。例えば`undici`などです。
 
-        npm install undici
+    ```
+    npm install undici
+    ```
 
 2.  `fetch`関数を`connect`関数に渡します。
 
     ```js
     import { connect } from '@tidbcloud/serverless'
     import { fetch } from 'undici'
-
+    
     const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]',fetch})
     ```

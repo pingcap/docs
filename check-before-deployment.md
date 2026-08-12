@@ -27,7 +27,9 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     fdisk -l
     ```
 
-        Disk /dev/nvme0n1: 1000 GB
+    ```
+    Disk /dev/nvme0n1: 1000 GB
+    ```
 
 2.  パーティションを作成します。
 
@@ -60,14 +62,16 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     lsblk -f
     ```
 
-        NAME    FSTYPE LABEL UUID                                 MOUNTPOINT
-        sda
-        ├─sda1  ext4         237b634b-a565-477b-8371-6dff0c41f5ab /boot
-        ├─sda2  swap         f414c5c0-f823-4bb1-8fdf-e531173a72ed
-        └─sda3  ext4         547909c1-398d-4696-94c6-03e43e317b60 /
-        sr0
-        nvme0n1
-        └─nvme0n1p1 ext4         c51eb23b-195c-4061-92a9-3fad812cc12f
+    ```
+    NAME    FSTYPE LABEL UUID                                 MOUNTPOINT
+    sda
+    ├─sda1  ext4         237b634b-a565-477b-8371-6dff0c41f5ab /boot
+    ├─sda2  swap         f414c5c0-f823-4bb1-8fdf-e531173a72ed
+    └─sda3  ext4         547909c1-398d-4696-94c6-03e43e317b60 /
+    sr0
+    nvme0n1
+    └─nvme0n1p1 ext4         c51eb23b-195c-4061-92a9-3fad812cc12f
+    ```
 
 5.  `/etc/fstab`ファイルを編集し、 `nodelalloc`マウント オプションを追加します。
 
@@ -75,7 +79,9 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     vi /etc/fstab
     ```
 
-        UUID=c51eb23b-195c-4061-92a9-3fad812cc12f /data1 ext4 defaults,nodelalloc,noatime 0 2
+    ```
+    UUID=c51eb23b-195c-4061-92a9-3fad812cc12f /data1 ext4 defaults,nodelalloc,noatime 0 2
+    ```
 
 6.  データ ディスクをマウントします。
 
@@ -91,7 +97,9 @@ summary: TiDB をデプロイする前に環境チェック操作について学
     mount -t ext4
     ```
 
-        /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
+    ```
+    /dev/nvme0n1p1 on /data1 type ext4 (rw,noatime,nodelalloc,data=ordered)
+    ```
 
     ファイルシステムが ext4 であり、マウント オプションに`nodelalloc`が含まれている場合、ターゲット マシンにオプションを使用してデータ ディスク ext4 ファイルシステムを正常にマウントしています。
 
@@ -281,9 +289,11 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
     sudo systemctl status ntpd.service
     ```
 
-        ntpd.service - Network Time Service
-        Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
-        Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
+    ```
+    ntpd.service - Network Time Service
+    Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)
+    Active: active (running) since 一 2017-12-18 13:13:19 CST; 3s ago
+    ```
 
     -   `Unit ntpd.service could not be found.`が返された場合は、次のコマンドを試して、システムが NTP とのクロック同期を実行するために`ntpd`ではなく`chronyd`を使用するように設定されているかどうかを確認します。
 
@@ -291,9 +301,11 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
         sudo systemctl status chronyd.service
         ```
 
-            chronyd.service - NTP client/server
-            Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
-            Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
+        ```
+        chronyd.service - NTP client/server
+        Loaded: loaded (/usr/lib/systemd/system/chronyd.service; enabled; vendor preset: enabled)
+        Active: active (running) since Mon 2021-04-05 09:55:29 EDT; 3 days ago
+        ```
 
         結果に`chronyd`と`ntpd`どちらも設定されていないと表示された場合は、どちらもシステムにインストールされていないことを意味します。まず`chronyd`または`ntpd`をインストールし、自動起動できることを確認してください。デフォルトでは`ntpd`が使用されます。
 
@@ -311,17 +323,23 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
 
     -   `synchronised to NTP server` (NTPサーバーと同期中) を返す場合、同期プロセスは正常です。
 
-            synchronised to NTP server (85.199.214.101) at stratum 2
-            time correct to within 91 ms
-            polling server every 1024 s
+        ```
+        synchronised to NTP server (85.199.214.101) at stratum 2
+        time correct to within 91 ms
+        polling server every 1024 s
+        ```
 
     -   次の状況は、NTP サービスが正常に同期していないことを示しています。
 
-            unsynchronised
+        ```
+        unsynchronised
+        ```
 
     -   次の状況は、NTP サービスが正常に実行されていないことを示しています。
 
-            Unable to talk to NTP daemon. Is it running?
+        ```
+        Unable to talk to NTP daemon. Is it running?
+        ```
 
 3.  `chronyc tracking`コマンドを実行して、Chrony サービスが NTPサーバーと同期しているかどうかを確認します。
 
@@ -335,27 +353,33 @@ NTP サービスがインストールされ、NTPサーバーと正常に同期�
 
     -   コマンドが`Leap status     : Normal`を返す場合、同期プロセスは正常です。
 
-            Reference ID    : 5EC69F0A (ntp1.time.nl)
-            Stratum         : 2
-            Ref time (UTC)  : Thu May 20 15:19:08 2021
-            System time     : 0.000022151 seconds slow of NTP time
-            Last offset     : -0.000041040 seconds
-            RMS offset      : 0.000053422 seconds
-            Frequency       : 2.286 ppm slow
-            Residual freq   : -0.000 ppm
-            Skew            : 0.012 ppm
-            Root delay      : 0.012706812 seconds
-            Root dispersion : 0.000430042 seconds
-            Update interval : 1029.8 seconds
-            Leap status     : Normal
+        ```
+        Reference ID    : 5EC69F0A (ntp1.time.nl)
+        Stratum         : 2
+        Ref time (UTC)  : Thu May 20 15:19:08 2021
+        System time     : 0.000022151 seconds slow of NTP time
+        Last offset     : -0.000041040 seconds
+        RMS offset      : 0.000053422 seconds
+        Frequency       : 2.286 ppm slow
+        Residual freq   : -0.000 ppm
+        Skew            : 0.012 ppm
+        Root delay      : 0.012706812 seconds
+        Root dispersion : 0.000430042 seconds
+        Update interval : 1029.8 seconds
+        Leap status     : Normal
+        ```
 
     -   コマンドが次の結果を返す場合、同期でエラーが発生しています。
 
-            Leap status    : Not synchronised
+        ```
+        Leap status    : Not synchronised
+        ```
 
     -   コマンドが次の結果を返す場合、 `chronyd`サービスは正常に実行されていません。
 
-            506 Cannot talk to daemon
+        ```
+        506 Cannot talk to daemon
+        ```
 
     -   オフセットが大きすぎると思われる場合は、コマンド`chronyc makestep`を実行してすぐに時間オフセットを修正できます。そうでない場合は、 `chronyd`を実行して徐々に時間オフセットを修正します。
 
@@ -396,7 +420,9 @@ sudo systemctl enable ntpd.service
     cat /sys/kernel/mm/transparent_hugepage/enabled
     ```
 
-        [always] madvise never
+    ```
+    [always] madvise never
+    ```
 
     > **Note:**
     >
@@ -410,8 +436,10 @@ sudo systemctl enable ntpd.service
     cat /sys/block/sd[bc]/queue/scheduler
     ```
 
-        noop [deadline] cfq
-        noop [deadline] cfq
+    ```
+    noop [deadline] cfq
+    noop [deadline] cfq
+    ```
 
     > **Note:**
     >
@@ -423,8 +451,10 @@ sudo systemctl enable ntpd.service
     cat /sys/block/nvme[01]*/queue/scheduler
     ```
 
-        [none] mq-deadline kyber bfq
-        [none] mq-deadline kyber bfq
+    ```
+    [none] mq-deadline kyber bfq
+    [none] mq-deadline kyber bfq
+    ```
 
     > **Note:**
     >
@@ -436,8 +466,10 @@ sudo systemctl enable ntpd.service
     udevadm info --name=/dev/sdb | grep ID_SERIAL
     ```
 
-        E: ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81
-        E: ID_SERIAL_SHORT=6d0946606d79f90025f3e09a0c1f9e81
+    ```
+    E: ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81
+    E: ID_SERIAL_SHORT=6d0946606d79f90025f3e09a0c1f9e81
+    ```
 
     > **Note:**
     >
@@ -450,9 +482,11 @@ sudo systemctl enable ntpd.service
     cpupower frequency-info --policy
     ```
 
-        analyzing CPU 0:
-        current policy: frequency should be within 1.20 GHz and 3.10 GHz.
-                      The governor "powersave" may decide which speed to use within this range.
+    ```
+    analyzing CPU 0:
+    current policy: frequency should be within 1.20 GHz and 3.10 GHz.
+                  The governor "powersave" may decide which speed to use within this range.
+    ```
 
     > **Note:**
     >
@@ -468,18 +502,20 @@ sudo systemctl enable ntpd.service
             tuned-adm list
             ```
 
-                Available profiles:
-                - balanced                    - General non-specialized tuned profile
-                - desktop                     - Optimize for the desktop use-case
-                - hpc-compute                 - Optimize for HPC compute workloads
-                - latency-performance         - Optimize for deterministic performance at the cost of increased power consumption
-                - network-latency             - Optimize for deterministic performance at the cost of increased power consumption, focused on low latency network performance
-                - network-throughput          - Optimize for streaming network throughput, generally only necessary on older CPUs or 40G+ networks
-                - powersave                   - Optimize for low power consumption
-                - throughput-performance      - Broadly applicable tuning that provides excellent performance across a variety of common server workloads
-                - virtual-guest               - Optimize for running inside a virtual guest
-                - virtual-host                - Optimize for running KVM guests
-                Current active profile: balanced
+            ```
+            Available profiles:
+            - balanced                    - General non-specialized tuned profile
+            - desktop                     - Optimize for the desktop use-case
+            - hpc-compute                 - Optimize for HPC compute workloads
+            - latency-performance         - Optimize for deterministic performance at the cost of increased power consumption
+            - network-latency             - Optimize for deterministic performance at the cost of increased power consumption, focused on low latency network performance
+            - network-throughput          - Optimize for streaming network throughput, generally only necessary on older CPUs or 40G+ networks
+            - powersave                   - Optimize for low power consumption
+            - throughput-performance      - Broadly applicable tuning that provides excellent performance across a variety of common server workloads
+            - virtual-guest               - Optimize for running inside a virtual guest
+            - virtual-host                - Optimize for running KVM guests
+            Current active profile: balanced
+            ```
 
             出力`Current active profile: balanced`は、現在のオペレーティングシステムの調整済みプロファイルが`balanced`あることを意味します。現在のプロファイルに基づいてオペレーティングシステムの構成を最適化することをお勧めします。
 
@@ -490,18 +526,20 @@ sudo systemctl enable ntpd.service
             vi /etc/tuned/balanced-tidb-optimal/tuned.conf
             ```
 
-                [main]
-                include=balanced
+            ```
+            [main]
+            include=balanced
 
-                [cpu]
-                governor=performance
+            [cpu]
+            governor=performance
 
-                [vm]
-                transparent_hugepages=never
+            [vm]
+            transparent_hugepages=never
 
-                [disk]
-                devices_udev_regex=(ID_SERIAL=36d0946606d79f90025f3e09a0c1fc035)|(ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81)
-                elevator=noop
+            [disk]
+            devices_udev_regex=(ID_SERIAL=36d0946606d79f90025f3e09a0c1fc035)|(ID_SERIAL=36d0946606d79f90025f3e09a0c1f9e81)
+            elevator=noop
+            ```
 
             出力`include=balanced`は、オペレーティング システムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
 
@@ -551,12 +589,14 @@ sudo systemctl enable ntpd.service
             >
             > `--info`の後には実際のデフォルトのカーネル バージョンが続きます。
 
-                index=0
-                kernel=/boot/vmlinuz-3.10.0-957.el7.x86_64
-                args="ro crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 transparent_hugepage=never"
-                root=/dev/mapper/centos-root
-                initrd=/boot/initramfs-3.10.0-957.el7.x86_64.img
-                title=CentOS Linux (3.10.0-957.el7.x86_64) 7 (Core)
+            ```
+            index=0
+            kernel=/boot/vmlinuz-3.10.0-957.el7.x86_64
+            args="ro crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 transparent_hugepage=never"
+            root=/dev/mapper/centos-root
+            initrd=/boot/initramfs-3.10.0-957.el7.x86_64.img
+            title=CentOS Linux (3.10.0-957.el7.x86_64) 7 (Core)
+            ```
 
         4.  THP を直ちに無効にするには、現在のカーネル構成を変更します。
 
@@ -616,7 +656,9 @@ sudo systemctl enable ntpd.service
     cat /sys/kernel/mm/transparent_hugepage/enabled
     ```
 
-        always madvise [never]
+    ```
+    always madvise [never]
+    ```
 
 7.  次のコマンドを実行して、データ ディレクトリが配置されているディスクのI/Oスケジューラを確認します。
 
@@ -624,18 +666,22 @@ sudo systemctl enable ntpd.service
     cat /sys/block/sd[bc]/queue/scheduler
     ```
 
-        [noop] deadline cfq
-        [noop] deadline cfq
+    ```
+    [noop] deadline cfq
+    [noop] deadline cfq
+    ```
 
 8.  cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
     ```bash
     cpupower frequency-info --policy
-    ```
+      ```
 
-        analyzing CPU 0:
-        current policy: frequency should be within 1.20 GHz and 3.10 GHz.
-                      The governor "performance" may decide which speed to use within this range.
+    ```
+    analyzing CPU 0:
+    current policy: frequency should be within 1.20 GHz and 3.10 GHz.
+                  The governor "performance" may decide which speed to use within this range.
+    ```
 
 9.  `sysctl`パラメータを変更するには、次のコマンドを実行します。
 
@@ -694,7 +740,9 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     visudo
     ```
 
-        tidb ALL=(ALL) NOPASSWD: ALL
+    ```
+    tidb ALL=(ALL) NOPASSWD: ALL
+    ```
 
 3.  `tidb`ユーザーでコントロールマシンにログインし、以下のコマンドを実行します。`10.0.1.1`をターゲットマシンの IP アドレスに置き換え、プロンプトが表示されたらターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンド実行後、SSH 相互信頼が既に作成されています。これは他のマシンにも適用されます。新しく作成された`tidb`ユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSA キーを生成するコマンドを実行します。コントロールマシンに TiDB コンポーネントを展開するには、コントロールマシンとコントロールマシン自体の相互信頼を設定します。
 
@@ -709,7 +757,9 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     ssh 10.0.1.1
     ```
 
-        [tidb@10.0.1.1 ~]$
+    ```
+    [tidb@10.0.1.1 ~]$
+    ```
 
 5.  `tidb`ユーザーでターゲットマシンにログインした後、以下のコマンドを実行します。パスワードを入力する必要がなく、 `root`ユーザーに切り替えられる場合は、 `tidb`ユーザーのパスワードなしのsudoが正常に設定されています。
 
@@ -717,7 +767,9 @@ SSH相互信頼を設定する際は、すべてのターゲットノードで`t
     sudo -su root
     ```
 
-        [root@10.0.1.1 tidb]#
+    ```
+    [root@10.0.1.1 tidb]#
+    ```
 
 ## `numactl`ツールをインストールする {#install-the-numactl-tool}
 

@@ -48,17 +48,23 @@ summary: TiDB クラスターのハイブリッド展開トポロジについて
 
         -   計算方法：
 
-                readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
+            ```
+            readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
+            ```
 
     -   storageCF（すべてのRocksDB列ファミリー）をメモリに適応させるように設定するには、 `storage.block-cache.capacity`パラメータを設定することで、CFがメモリ使用量を自動的に調整できるようになります。
 
         -   計算方法：
 
-                storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
+            ```
+            storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
+            ```
 
     -   複数の TiKV インスタンスが同じ物理ディスクにデプロイされている場合は、TiKV 構成に`capacity`パラメータを追加します。
 
-            raftstore.capacity = disk total capacity / the number of TiKV instances
+        ```
+        raftstore.capacity = disk total capacity / the number of TiKV instances
+        ```
 
 -   ラベルスケジュール設定
 

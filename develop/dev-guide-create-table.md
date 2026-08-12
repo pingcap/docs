@@ -50,7 +50,9 @@ CREATE TABLE `bookshop`.`users` (
 
 カラム定義は通常、次の形式をとります。
 
-    {column_name} {data_type} {column_qualification}
+```
+{column_name} {data_type} {column_qualification}
+```
 
 **パラメータの説明**
 
@@ -314,16 +316,18 @@ SHOW TABLES IN `bookshop`;
 
 実行結果：
 
-    +--------------------+
-    | Tables_in_bookshop |
-    +--------------------+
-    | authors            |
-    | book_authors       |
-    | books              |
-    | orders             |
-    | ratings            |
-    | users              |
-    +--------------------+
+```
++--------------------+
+| Tables_in_bookshop |
++--------------------+
+| authors            |
+| book_authors       |
+| books              |
+| orders             |
+| ratings            |
+| users              |
++--------------------+
+```
 
 ## テーブルを作成する際に従うべきガイドライン {#guidelines-to-follow-when-creating-a-table}
 

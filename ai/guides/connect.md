@@ -118,7 +118,9 @@ db = TiDBClient.connect(
 >
 > `tiup playground`を使用してテスト用のTiDBクラスタをデプロイする場合、接続文字列は次のとおりです。
 >
->     mysql+pymysql://root:@127.0.0.1:4000/test
+> ```
+> mysql+pymysql://root:@127.0.0.1:4000/test
+> ```
 
 </div>
 </SimpleTab>

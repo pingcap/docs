@@ -214,7 +214,9 @@ TiDBは、以下のMySQL互換のタイムアウト制御パラメータを提�
 
 上記のパラメータ値を組み合わせると、JDBC接続文字列の設定は次のようになります。
 
-    jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true
+```
+jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true
+```
 
 > **Note:**
 >
@@ -266,7 +268,9 @@ hikari:
 
 Javaアプリケーションで以下のエラーが頻繁に発生する場合：
 
-    The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+```
+The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+```
 
 `n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラー ログを確認することをお勧めします。
 

@@ -349,11 +349,13 @@ INSERT INTO t
 SELECT t2.id, t2.v, t3.id FROM t2 JOIN t3 ON t2.id = t3.id
 ```
 
-    +----------------+---------------+
-    | number of jobs | job status    |
-    +----------------+---------------+
-    | 0              | all succeeded |
-    +----------------+---------------+
+```
++----------------+---------------+
+| number of jobs | job status    |
++----------------+---------------+
+| 0              | all succeeded |
++----------------+---------------+
+```
 
 ### 非トランザクションDML文でテーブルエイリアスを使用すると、 `Unknown column '&lt;alias&gt;.&lt;column&gt;' in 'where clause'`エラーが発生します。 {#the-unknown-column-aliascolumn-in-where-clause-error-occurs-when-using-table-aliases-in-non-transactional-dml-statements}
 

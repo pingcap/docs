@@ -14,15 +14,17 @@ DESC CHARACTER_SETS;
 
 出力は次のようになります。
 
-    +----------------------+-------------+------+------+---------+-------+
-    | Field                | Type        | Null | Key  | Default | Extra |
-    +----------------------+-------------+------+------+---------+-------+
-    | CHARACTER_SET_NAME   | varchar(32) | YES  |      | NULL    |       |
-    | DEFAULT_COLLATE_NAME | varchar(32) | YES  |      | NULL    |       |
-    | DESCRIPTION          | varchar(60) | YES  |      | NULL    |       |
-    | MAXLEN               | bigint(3)   | YES  |      | NULL    |       |
-    +----------------------+-------------+------+------+---------+-------+
-    4 rows in set (0.00 sec)
+```
++----------------------+-------------+------+------+---------+-------+
+| Field                | Type        | Null | Key  | Default | Extra |
++----------------------+-------------+------+------+---------+-------+
+| CHARACTER_SET_NAME   | varchar(32) | YES  |      | NULL    |       |
+| DEFAULT_COLLATE_NAME | varchar(32) | YES  |      | NULL    |       |
+| DESCRIPTION          | varchar(60) | YES  |      | NULL    |       |
+| MAXLEN               | bigint(3)   | YES  |      | NULL    |       |
++----------------------+-------------+------+------+---------+-------+
+4 rows in set (0.00 sec)
+```
 
 `CHARACTER_SETS`テーブルを確認します:
 

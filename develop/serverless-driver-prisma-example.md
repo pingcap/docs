@@ -90,38 +90,44 @@ const prisma = new PrismaClient({ adapter });
 
 1.  `prisma-example`という名前のプロジェクトを作成します。
 
-        mkdir prisma-example
-        cd prisma-example
+    ```
+    mkdir prisma-example
+    cd prisma-example
+    ```
 
 2.  `@tidbcloud/prisma-adapter`ドライバーアダプター、 `@tidbcloud/serverless`TiDB Cloud Serverless Driver、および Prisma CLI をインストールします。
 
     以下のコマンドはパッケージマネージャーとしてnpmを使用します。 `npm install @tidbcloud/serverless`を実行すると、プロジェクトディレクトリに`node_modules`ディレクトリと`package.json`ファイルが作成されます。
 
-        npm install @tidbcloud/prisma-adapter
-        npm install @tidbcloud/serverless
-        npm install prisma --save-dev
+    ```
+    npm install @tidbcloud/prisma-adapter
+    npm install @tidbcloud/serverless
+    npm install prisma --save-dev
+    ```
 
 3.  `package.json`ファイルで、 `type: "module"`を追加して ES モジュールを指定します。
 
-    ```json
-    {
-      "type": "module",
-      "dependencies": {
-        "@prisma/client": "^6.6.0",
-        "@tidbcloud/prisma-adapter": "^6.6.0",
-        "@tidbcloud/serverless": "^0.1.0"
-      },
-      "devDependencies": {
-        "prisma": "^6.6.0"
-      }
-    }
-    ```
+   ```json
+   {
+     "type": "module",
+     "dependencies": {
+       "@prisma/client": "^6.6.0",
+       "@tidbcloud/prisma-adapter": "^6.6.0",
+       "@tidbcloud/serverless": "^0.1.0"
+     },
+     "devDependencies": {
+       "prisma": "^6.6.0"
+     }
+   }
+   ```
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
 1.  TiDB Cloud Starterインスタンスの概要ページで、右上隅の**「接続」**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
-        mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
+    ```
+    mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
+    ```
 
 2.  プロジェクトのルートディレクトリに、 `.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメータに置き換えます。
 
@@ -135,52 +141,62 @@ const prisma = new PrismaClient({ adapter });
 
 3.  `dotenv`ファイルから環境変数を読み込むには、 `.env` } をインストールしてください。
 
-        npm install dotenv
+   ```
+   npm install dotenv
+   ```
 
 ### ステップ3．スキーマを定義する {#step-3-define-your-schema}
 
 1.  `schema.prisma`という名前のファイルを作成します。このファイルに、 `driverAdapters`プレビュー機能を含め、 `DATABASE_URL`環境変数を参照します。以下にファイルの例を示します。
 
-        // schema.prisma
-        generator client {
-          provider        = "prisma-client-js"
-          previewFeatures = ["driverAdapters"]
-        }
-
-        datasource db {
-          provider     = "mysql"
-          url          = env("DATABASE_URL")
-        } 
+   ```
+   // schema.prisma
+   generator client {
+     provider        = "prisma-client-js"
+     previewFeatures = ["driverAdapters"]
+   }
+   
+   datasource db {
+     provider     = "mysql"
+     url          = env("DATABASE_URL")
+   } 
+   ```
 
 2.  `schema.prisma`ファイルで、データベーステーブルのデータモデルを定義します。次の例では、 `user`という名前のデータモデルが定義されています。
 
-        // schema.prisma
-        generator client {
-          provider        = "prisma-client-js"
-          previewFeatures = ["driverAdapters"]
-        }
-
-        datasource db {
-          provider     = "mysql"
-          url          = env("DATABASE_URL")
-        } 
-
-        // define a data model according to your database table
-        model user {
-          id    Int     @id @default(autoincrement())
-          email String? @unique(map: "uniq_email") @db.VarChar(255)
-          name  String? @db.VarChar(255)
-        }
+   ```
+   // schema.prisma
+   generator client {
+     provider        = "prisma-client-js"
+     previewFeatures = ["driverAdapters"]
+   }
+   
+   datasource db {
+     provider     = "mysql"
+     url          = env("DATABASE_URL")
+   } 
+   
+   // define a data model according to your database table
+   model user {
+     id    Int     @id @default(autoincrement())
+     email String? @unique(map: "uniq_email") @db.VarChar(255)
+     name  String? @db.VarChar(255)
+   }
+   ```
 
 3.  データベースをPrismaスキーマと同期させます。TiDB Cloud Starterインスタンスでデータベーステーブルを手動で作成するか、Prisma CLIを使用して次のように自動的に作成することができます。
 
-        npx prisma db push
+    ```
+    npx prisma db push
+    ```
 
     このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
 4.  Prisma Clientを生成する：
 
-        npx prisma generate
+    ```
+    npx prisma generate
+    ```
 
     このコマンドは、Prismaスキーマに基づいてPrisma Clientを生成します。
 
@@ -188,77 +204,77 @@ const prisma = new PrismaClient({ adapter });
 
 1.  `hello-word.js`という名前のファイルを作成し、以下のコードを追加してPrisma Clientを初期化します。
 
-    ```js
-    import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
-    import { PrismaClient } from '@prisma/client';
-    import dotenv from 'dotenv';
-
-    // setup
-    dotenv.config();
-    const connectionString = `${process.env.DATABASE_URL}`;
-
-    // Initialize Prisma Client
-    const adapter = new PrismaTiDBCloud({ url: connectionString });
-    const prisma = new PrismaClient({ adapter });
-    ```
+   ```js
+   import { PrismaTiDBCloud } from '@tidbcloud/prisma-adapter';
+   import { PrismaClient } from '@prisma/client';
+   import dotenv from 'dotenv';
+   
+   // setup
+   dotenv.config();
+   const connectionString = `${process.env.DATABASE_URL}`;
+   
+   // Initialize Prisma Client
+   const adapter = new PrismaTiDBCloud({ url: connectionString });
+   const prisma = new PrismaClient({ adapter });
+   ```
 
 2.  Prisma Client を使用して、いくつかの CRUD 操作を実行します。例:
 
-    ```js
-    // Insert
-    const user = await prisma.user.create({
-      data: {
-        email: 'test@pingcap.com',
-        name: 'test',
+   ```js
+   // Insert
+   const user = await prisma.user.create({
+     data: {
+       email: 'test@pingcap.com',
+       name: 'test',
+     },
+   })
+   console.log(user)
+   
+   // Query
+   console.log(await prisma.user.findMany())
+   
+   // Delete
+   await prisma.user.delete({
+      where: {
+         id: user.id,
       },
-    })
-    console.log(user)
-
-    // Query
-    console.log(await prisma.user.findMany())
-
-    // Delete
-    await prisma.user.delete({
-       where: {
-          id: user.id,
-       },
-    })
-    ```
+   })
+   ```
 
 3.  Prisma Client を使用してトランザクション操作を実行します。例:
 
-    ```js
-    const createUser1 = prisma.user.create({
-      data: {
-        email: 'test1@pingcap.com',
-        name: 'test1',
-      },
-    })
-    const createUser2 = prisma.user.create({
-      data: {
-        email: 'test1@pingcap.com',
-        name: 'test1',
-      },
-    })
-    const createUser3 = prisma.user.create({
-      data: {
-        email: 'test2@pingcap.com',
-        name: 'test2',
-      },
-    })
-
-    try {
-      await prisma.$transaction([createUser1, createUser2]) // Operations fail because the email address is duplicated
-    } catch (e) {
-      console.log(e)
-    }
-
-    try {
-      await prisma.$transaction([createUser2, createUser3]) // Operations success because the email address is unique
-    } catch (e) {
-      console.log(e)
-    }
-    ```
+   ```js
+   const createUser1 = prisma.user.create({
+     data: {
+       email: 'test1@pingcap.com',
+       name: 'test1',
+     },
+   })
+   const createUser2 = prisma.user.create({
+     data: {
+       email: 'test1@pingcap.com',
+       name: 'test1',
+     },
+   })
+   const createUser3 = prisma.user.create({
+     data: {
+       email: 'test2@pingcap.com',
+       name: 'test2',
+     },
+   })
+   
+   try {
+     await prisma.$transaction([createUser1, createUser2]) // Operations fail because the email address is duplicated
+   } catch (e) {
+     console.log(e)
+   }
+   
+   try {
+     await prisma.$transaction([createUser2, createUser3]) // Operations success because the email address is unique
+   } catch (e) {
+     console.log(e)
+   }
+   ```
 
 ## エッジ環境ではPrismaアダプタを使用する {#use-the-prisma-adapter-in-edge-environments}
 

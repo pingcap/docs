@@ -107,8 +107,10 @@ VALUES
 
 期待される出力は以下のとおりです。
 
-    Query OK, 3 rows affected (0.15 sec)
-    Records: 3  Duplicates: 0  Warnings: 0
+```
+Query OK, 3 rows affected (0.15 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+```
 
 > **注記**
 >

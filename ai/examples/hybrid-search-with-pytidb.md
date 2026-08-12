@@ -81,40 +81,42 @@ python example.py
 
 期待される出力:
 
-    === CONNECT TO TIDB ===
-    Connected to TiDB.
+```
+=== CONNECT TO TIDB ===
+Connected to TiDB.
 
-    === CREATE TABLE ===
-    Table created.
+=== CREATE TABLE ===
+Table created.
 
-    === INSERT SAMPLE DATA ===
-    Inserted 3 rows.
+=== INSERT SAMPLE DATA ===
+Inserted 3 rows.
 
-    === PERFORM HYBRID SEARCH ===
-    Search results:
-    [
-        {
-            "_distance": 0.4740166257687124,
-            "_match_score": 1.6804268,
-            "_score": 0.03278688524590164,
-            "id": 60013,
-            "text": "TiDB is a distributed database that supports OLTP, OLAP, HTAP and AI workloads."
-        },
-        {
-            "_distance": 0.6428459116216618,
-            "_match_score": 0.78427225,
-            "_score": 0.03200204813108039,
-            "id": 60015,
-            "text": "LlamaIndex is a Python library for building AI-powered applications."
-        },
-        {
-            "_distance": 0.641581407158715,
-            "_match_score": null,
-            "_score": 0.016129032258064516,
-            "id": 60014,
-            "text": "PyTiDB is a Python library for developers to connect to TiDB."
-        }
-    ]
+=== PERFORM HYBRID SEARCH ===
+Search results:
+[
+    {
+        "_distance": 0.4740166257687124,
+        "_match_score": 1.6804268,
+        "_score": 0.03278688524590164,
+        "id": 60013,
+        "text": "TiDB is a distributed database that supports OLTP, OLAP, HTAP and AI workloads."
+    },
+    {
+        "_distance": 0.6428459116216618,
+        "_match_score": 0.78427225,
+        "_score": 0.03200204813108039,
+        "id": 60015,
+        "text": "LlamaIndex is a Python library for building AI-powered applications."
+    },
+    {
+        "_distance": 0.641581407158715,
+        "_match_score": null,
+        "_score": 0.016129032258064516,
+        "id": 60014,
+        "text": "PyTiDB is a Python library for developers to connect to TiDB."
+    }
+]
+```
 
 ## 関連リソース {#related-resources}
 

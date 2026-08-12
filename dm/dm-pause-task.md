@@ -17,16 +17,18 @@ summary: TiDB データ移行でデータ移行タスクを一時停止する方
 help pause-task
 ```
 
-    pause a specified running task
+```
+pause a specified running task
 
-    Usage:
-     dmctl pause-task [-s source ...] <task-name | task-file> [flags]
+Usage:
+ dmctl pause-task [-s source ...] <task-name | task-file> [flags]
 
-    Flags:
-     -h, --help   help for pause-task
+Flags:
+ -h, --help   help for pause-task
 
-    Global Flags:
-     -s, --source strings   MySQL Source ID
+Global Flags:
+ -s, --source strings   MySQL Source ID
+```
 
 ## 使用例 {#usage-example}
 
@@ -45,16 +47,18 @@ pause-task [-s "mysql-replica-01"] task-name
 pause-task test
 ```
 
-    {
-        "op": "Pause",
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
+```
+{
+    "op": "Pause",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        }
+    ]
+}
+```

@@ -277,39 +277,43 @@ SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 EXPLAIN ANALYZE SELECT * FROM INFORMATION_SCHEMA.SLOW_QUERY LIMIT 1\G
 ```
 
-    *************************** 1. row ***************************
-                id: Limit_7
-           estRows: 1.00
-           actRows: 1
-              task: root
-     access object: 
-    execution info: time:3.46ms, loops:2, RU:0.000000
-     operator info: offset:0, count:1
-            memory: N/A
-              disk: N/A
-    *************************** 2. row ***************************
-                id: └─MemTableScan_10
-           estRows: 10000.00
-           actRows: 64
-              task: root
-     access object: table:SLOW_QUERY
-    execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
-     operator info: only search in the current 'tidb-slow.log' file
-            memory: 1.26 MB
-              disk: N/A
-    2 rows in set (0.01 sec)
+```
+*************************** 1. row ***************************
+            id: Limit_7
+       estRows: 1.00
+       actRows: 1
+          task: root
+ access object: 
+execution info: time:3.46ms, loops:2, RU:0.000000
+ operator info: offset:0, count:1
+        memory: N/A
+          disk: N/A
+*************************** 2. row ***************************
+            id: └─MemTableScan_10
+       estRows: 10000.00
+       actRows: 64
+          task: root
+ access object: table:SLOW_QUERY
+execution info: time:3.45ms, loops:1, initialize: 55.5µs, read_file: 1.21ms, parse_log: {time:4.11ms, concurrency:15}, total_file: 1, read_file: 1, read_size: 4.06 MB
+ operator info: only search in the current 'tidb-slow.log' file
+        memory: 1.26 MB
+          disk: N/A
+2 rows in set (0.01 sec)
+```
 
 出力結果の`execution info`セクションで、以下のフィールド（読みやすくするためにフォーマット済み）を確認してください。
 
-    initialize: 55.5µs,
-    read_file: 1.21ms,
-    parse_log: {
-      time:4.11ms,
-      concurrency:15
-    },
-    total_file: 1,
-    read_file: 1,
-    read_size: 4.06 MB
+```
+initialize: 55.5µs,
+read_file: 1.21ms,
+parse_log: {
+  time:4.11ms,
+  concurrency:15
+},
+total_file: 1,
+read_file: 1,
+read_size: 4.06 MB
+```
 
 | フィールド                      | 説明                                                                                                              |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------- |

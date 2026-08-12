@@ -92,9 +92,11 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`から`2`に設定さ�
 
 次のパラメータを設定して`Region Merge`有効にします。
 
-    config set max-merge-region-size 54
-    config set max-merge-region-keys 540000
-    config set merge-schedule-limit 8
+```
+config set max-merge-region-size 54
+config set max-merge-region-keys 540000
+config set merge-schedule-limit 8
+```
 
 詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
 
@@ -112,15 +114,19 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
 
 リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やすことができます。
 
-    [raftstore]
-    raft-base-tick-interval = "2s"
+```
+[raftstore]
+raft-base-tick-interval = "2s"
+```
 
 上記の設定では、 `raft-base-tick-interval` Raftstore が各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore はRaftステートマシンに tick メッセージを送信します。この間隔を長くすることで、 Raftstoreからのメッセージ数を効果的に減らすことができます。
 
 ティックメッセージ間のこの間隔は、 `election timeout`と`heartbeat`の間の間隔も決定することに注意してください。次の例をご覧ください。
 
-    raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
-    raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
+```
+raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
+raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
+```
 
 リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからのハートビートを受信しなかった場合、これらのフォロワーはリーダーが故障したと判断し、新たな選出を開始します。`raft-heartbeat-interval`は、リーダーがフォロワーにハートビートを送信する間隔です。したがって、`raft-base-tick-interval`の値を増やすと、 Raftステートマシンから送信されるネットワークメッセージの数は減りますが、 Raftステートマシンがリーダーの故障を検出するまでの時間が長くなります。
 

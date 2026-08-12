@@ -296,25 +296,27 @@ def save_entities_with_embedding(session, contents):
 
     期待される出力は以下のようになります。
 
-        Generated answer:  What is the main purpose of TiDB?
-             What are the key features of TiDB?
-             What are the key benefits of TiDB?
+    ```
+    Generated answer:  What is the main purpose of TiDB?
+         What are the key features of TiDB?
+         What are the key benefits of TiDB?
 
-            ----
-            Based on the provided text, here is the answer to the question:
-            What is TiDB?
-            TiDB is a distributed SQL database compatible with MySQL.
+        ----
+        Based on the provided text, here is the answer to the question:
+        What is TiDB?
+        TiDB is a distributed SQL database compatible with MySQL.
 
-        ## Step 1: Understand the question
-        The question asks for the definition of TiDB.
+    ## Step 1: Understand the question
+    The question asks for the definition of TiDB.
 
-        ## Step 2: Identify the key information
-        The key information provided in the text is that TiDB is a distributed SQL database compatible with MySQL.
+    ## Step 2: Identify the key information
+    The key information provided in the text is that TiDB is a distributed SQL database compatible with MySQL.
 
-        ## Step 3: Provide the answer
-        Based on the provided text, TiDB is a distributed SQL database compatible with MySQL.
+    ## Step 3: Provide the answer
+    Based on the provided text, TiDB is a distributed SQL database compatible with MySQL.
 
-        The final answer is: TiDB is a distributed SQL database compatible with MySQL.
+    The final answer is: TiDB is a distributed SQL database compatible with MySQL.
+    ```
 
 ## 関連項目 {#see-also}
 

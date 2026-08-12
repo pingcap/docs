@@ -22,16 +22,18 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 
 結果は次のようになります。
 
-    +------------+------------------------------+-----------------------+--------+
-    | id         | title                        | type                  | price  |
-    +------------+------------------------------+-----------------------+--------+
-    | 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
-    | 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-    | 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-    |  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-    | 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-    +------------+------------------------------+-----------------------+--------+
-    5 rows in set (0.02 sec)
+```
++------------+------------------------------+-----------------------+--------+
+| id         | title                        | type                  | price  |
++------------+------------------------------+-----------------------+--------+
+| 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
+| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
+| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
+|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
+| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
++------------+------------------------------+-----------------------+--------+
+5 rows in set (0.02 sec)
+```
 
 現時点（2022-04-20 15:20:00）のリストでは、 *The Story of Droolius Caesar の*価格は 100.0 です。
 
@@ -43,21 +45,25 @@ UPDATE books SET price = 150 WHERE id = 3181093216;
 
 結果は次のようになります。
 
-    Query OK, 1 row affected (0.00 sec)
-    Rows matched: 1  Changed: 1  Warnings: 0
+```
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+```
 
 最新の書籍リストを照会すると、この本の価格が上昇したことがわかります。
 
-    +------------+------------------------------+-----------------------+--------+
-    | id         | title                        | type                  | price  |
-    +------------+------------------------------+-----------------------+--------+
-    | 3181093216 | The Story of Droolius Caesar | Novel                 | 150.00 |
-    | 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-    | 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-    |  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-    | 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-    +------------+------------------------------+-----------------------+--------+
-    5 rows in set (0.01 sec)
+```
++------------+------------------------------+-----------------------+--------+
+| id         | title                        | type                  | price  |
++------------+------------------------------+-----------------------+--------+
+| 3181093216 | The Story of Droolius Caesar | Novel                 | 150.00 |
+| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
+| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
+|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
+| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
++------------+------------------------------+-----------------------+--------+
+5 rows in set (0.01 sec)
+```
 
 最新のデータを使用する必要がない場合は、古いデータを返す可能性のあるステイル読み取りを使用してクエリを実行し、強力な一貫性のある読み取り中にデータ複製によって発生するレイテンシーを回避できます。
 
@@ -76,16 +82,18 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 結果は次のようになります。
 
-    +------------+------------------------------+-----------------------+--------+
-    | id         | title                        | type                  | price  |
-    +------------+------------------------------+-----------------------+--------+
-    | 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
-    | 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-    | 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-    |  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-    | 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-    +------------+------------------------------+-----------------------+--------+
-    5 rows in set (0.01 sec)
+```
++------------+------------------------------+-----------------------+--------+
+| id         | title                        | type                  | price  |
++------------+------------------------------+-----------------------+--------+
+| 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
+| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
+| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
+|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
+| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
++------------+------------------------------+-----------------------+--------+
+5 rows in set (0.01 sec)
+```
 
 正確な時間を指定することに加えて、次のことも指定できます。
 
@@ -97,11 +105,15 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
 
-    ERROR 9006 (HY000): GC life time is shorter than transaction duration...
+```
+ERROR 9006 (HY000): GC life time is shorter than transaction duration...
+```
 
 指定されたタイムスタンプが将来の時刻である場合、TiDB は次のエラーを報告します。
 
-    ERROR 9006 (HY000): cannot set read timestamp to a future time.
+```
+ERROR 9006 (HY000): cannot set read timestamp to a future time.
+```
 
 </div>
 <div label="Java" value="java">
@@ -200,11 +212,13 @@ if (top5LatestBooks.size() > 0) {
 
 次の結果は、 ステイル読み取りによって返された価格が更新前の値である 100.00 であることを示しています。
 
-    The latest book price (before update): 100.00
-    The latest book price (after update): 150.00
-    The latest book price (maybe stale): 100.00
-    WARN: cannot set read timestamp to a future time.
-    WARN: GC life time is shorter than transaction duration.
+```
+The latest book price (before update): 100.00
+The latest book price (after update): 150.00
+The latest book price (maybe stale): 100.00
+WARN: cannot set read timestamp to a future time.
+WARN: GC life time is shorter than transaction duration.
+```
 
 </div>
 </SimpleTab>
@@ -230,29 +244,33 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 
 結果は次のようになります。
 
-    +------------+------------------------------+-----------------------+--------+
-    | id         | title                        | type                  | price  |
-    +------------+------------------------------+-----------------------+--------+
-    | 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
-    | 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-    | 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-    |  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-    | 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-    +------------+------------------------------+-----------------------+--------+
-    5 rows in set (0.01 sec)
+```
++------------+------------------------------+-----------------------+--------+
+| id         | title                        | type                  | price  |
++------------+------------------------------+-----------------------+--------+
+| 3181093216 | The Story of Droolius Caesar | Novel                 | 100.00 |
+| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
+| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
+|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
+| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
++------------+------------------------------+-----------------------+--------+
+5 rows in set (0.01 sec)
+```
 
 `COMMIT;`文目のトランザクションがコミットされた後、最新のデータを読み取ることができます。
 
-    +------------+------------------------------+-----------------------+--------+
-    | id         | title                        | type                  | price  |
-    +------------+------------------------------+-----------------------+--------+
-    | 3181093216 | The Story of Droolius Caesar | Novel                 | 150.00 |
-    | 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
-    | 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
-    |  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
-    | 3062833277 | Keven Wyman                  | Life                  | 477.91 |
-    +------------+------------------------------+-----------------------+--------+
-    5 rows in set (0.01 sec)
+```
++------------+------------------------------+-----------------------+--------+
+| id         | title                        | type                  | price  |
++------------+------------------------------+-----------------------+--------+
+| 3181093216 | The Story of Droolius Caesar | Novel                 | 150.00 |
+| 1064253862 | Collin Rolfson               | Education & Reference |  92.85 |
+| 1748583991 | The Documentary of cat       | Magazine              | 159.75 |
+|  893930596 | Myrl Hills                   | Education & Reference | 356.85 |
+| 3062833277 | Keven Wyman                  | Life                  | 477.91 |
++------------+------------------------------+-----------------------+--------+
+5 rows in set (0.01 sec)
+```
 
 </div>
 <div label="Java" value="java">
@@ -340,10 +358,12 @@ if (top5LatestBooks.size() > 0) {
 
 結果は次のようになります。
 
-    The latest book price (before update): 100.00
-    The latest book price (after update): 150.00
-    The latest book price (maybe stale): 100.00
-    The latest book price (after the transaction commit): 150
+```
+The latest book price (before update): 100.00
+The latest book price (after update): 150.00
+The latest book price (maybe stale): 100.00
+The latest book price (after the transaction commit): 150
+```
 
 </div>
 </SimpleTab>

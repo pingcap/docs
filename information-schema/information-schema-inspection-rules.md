@@ -16,36 +16,40 @@ USE information_schema;
 DESC inspection_rules;
 ```
 
-    +---------+--------------+------+------+---------+-------+
-    | Field   | Type         | Null | Key  | Default | Extra |
-    +---------+--------------+------+------+---------+-------+
-    | NAME    | varchar(64)  | YES  |      | NULL    |       |
-    | TYPE    | varchar(64)  | YES  |      | NULL    |       |
-    | COMMENT | varchar(256) | YES  |      | NULL    |       |
-    +---------+--------------+------+------+---------+-------+
-    3 rows in set (0.00 sec)
+```
++---------+--------------+------+------+---------+-------+
+| Field   | Type         | Null | Key  | Default | Extra |
++---------+--------------+------+------+---------+-------+
+| NAME    | varchar(64)  | YES  |      | NULL    |       |
+| TYPE    | varchar(64)  | YES  |      | NULL    |       |
+| COMMENT | varchar(256) | YES  |      | NULL    |       |
++---------+--------------+------+------+---------+-------+
+3 rows in set (0.00 sec)
+```
 
 ```sql
 SELECT * FROM inspection_rules;
 ```
 
-    +-----------------+------------+---------+
-    | NAME            | TYPE       | COMMENT |
-    +-----------------+------------+---------+
-    | config          | inspection |         |
-    | version         | inspection |         |
-    | node-load       | inspection |         |
-    | critical-error  | inspection |         |
-    | threshold-check | inspection |         |
-    | ddl             | summary    |         |
-    | gc              | summary    |         |
-    | pd              | summary    |         |
-    | query-summary   | summary    |         |
-    | raftstore       | summary    |         |
-    | read-link       | summary    |         |
-    | rocksdb         | summary    |         |
-    | stats           | summary    |         |
-    | wait-events     | summary    |         |
-    | write-link      | summary    |         |
-    +-----------------+------------+---------+
-    15 rows in set (0.00 sec)
+```
++-----------------+------------+---------+
+| NAME            | TYPE       | COMMENT |
++-----------------+------------+---------+
+| config          | inspection |         |
+| version         | inspection |         |
+| node-load       | inspection |         |
+| critical-error  | inspection |         |
+| threshold-check | inspection |         |
+| ddl             | summary    |         |
+| gc              | summary    |         |
+| pd              | summary    |         |
+| query-summary   | summary    |         |
+| raftstore       | summary    |         |
+| read-link       | summary    |         |
+| rocksdb         | summary    |         |
+| stats           | summary    |         |
+| wait-events     | summary    |         |
+| write-link      | summary    |         |
++-----------------+------------+---------+
+15 rows in set (0.00 sec)
+```

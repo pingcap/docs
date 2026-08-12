@@ -11,16 +11,18 @@ summary: データ移行タスクを再開する方法を学びます。
 help resume-task
 ```
 
-    resume a specified paused task
+```
+resume a specified paused task
 
-    Usage:
-     dmctl resume-task [-s source ...] <task-name | task-file> [flags]
+Usage:
+ dmctl resume-task [-s source ...] <task-name | task-file> [flags]
 
-    Flags:
-     -h, --help   help for resume-task
+Flags:
+ -h, --help   help for resume-task
 
-    Global Flags:
-     -s, --source strings   MySQL Source ID
+Global Flags:
+ -s, --source strings   MySQL Source ID
+```
 
 ## 使用例 {#usage-example}
 
@@ -39,16 +41,18 @@ resume-task [-s "mysql-replica-01"] task-name
 resume-task test
 ```
 
-    {
-        "op": "Resume",
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
+```
+{
+    "op": "Resume",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        }
+    ]
+}
+```

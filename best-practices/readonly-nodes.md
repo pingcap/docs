@@ -16,11 +16,13 @@ aliases: ['/ja/tidb/stable/readonly-nodes/','/ja/tidb/dev/readonly-nodes/']
 
 `tiup cluster edit-config`コマンドを実行して読み取り専用ノードを構成できます。
 
-    tikv_servers:
-      - host: ...
-        ...
-        labels:
-          $mode: readonly
+```
+tikv_servers:
+  - host: ...
+    ...
+    labels:
+      $mode: readonly
+```
 
 ### 2. 配置ルールを使用して、ラーナーとして読み取り専用ノードにデータを保存する {#2-use-placement-rules-to-store-data-on-read-only-nodes-as-learners}
 

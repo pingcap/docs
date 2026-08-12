@@ -313,15 +313,17 @@ for doc in docs_retrieved:
 
 期待される出力は以下のとおりです。
 
-    --------------------------------------------------------------------------------
-    Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
+```
+--------------------------------------------------------------------------------
+Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
-    Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
+Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
 
-    One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
+One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
-    And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
-    --------------------------------------------------------------------------------
+And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
+--------------------------------------------------------------------------------
+```
 
 ### ベクトルストアを削除する {#remove-the-vector-store}
 

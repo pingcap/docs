@@ -154,19 +154,21 @@ PITRの全プロセスは以下のとおりです。
 
 ### バックアップファイルの構造 {#structure-of-backup-files}
 
-    .
-    ├── v1
-    │   ├── backupmeta
-    │   │   ├── ...
-    │   │   └── {flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta
-    │   ├── global_checkpoint
-    │   │   └── {store_id}.ts
-    │   └── {date}
-    │       └── {hour}
-    │           └── {store_id}
-    │               ├── ...
-    │               └── {min_ts}-{uuid}.log
-    └── v1_stream_truncate_safepoint.txt
+```
+.
+├── v1
+│   ├── backupmeta
+│   │   ├── ...
+│   │   └── {flushTs}-{minDefaultTs}-{minTs}-{maxTs}.meta
+│   ├── global_checkpoint
+│   │   └── {store_id}.ts
+│   └── {date}
+│       └── {hour}
+│           └── {store_id}
+│               ├── ...
+│               └── {min_ts}-{uuid}.log
+└── v1_stream_truncate_safepoint.txt
+```
 
 バックアップファイルディレクトリ構造の説明：
 
@@ -184,29 +186,31 @@ PITRの全プロセスは以下のとおりです。
 
 以下は一例です。
 
-    .
-    ├── v1
-    │   ├── backupmeta
-    │   │   ├── ...
-    │   │   ├── 060c4bc7b0cdd582-06097a780d1ba138-060ab960016d2f00-060c0b9e47d4787b.meta
-    │   │   ├── 06123bc6a0cdd591-060c3d24585be000-060c4453954a4000-060c4bc7b0cdcfa4.meta
-    │   │   └── 063c2ac1c0cdd5c3-0609d2e6b3bcb064-060ab960016d2f84-060c0b9e47d47a77.meta
-    │   ├── global_checkpoint
-    │   │   ├── 1.ts
-    │   │   ├── 2.ts
-    │   │   └── 3.ts
-    │   └── 20220811
-    │       └── 03
-    │           ├── 1
-    │           │   ├── ...
-    │           │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
-    │           │   └── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
-    │           ├── 2
-    │           │   ├── ...
-    │           │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
-    │           │   └── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
-    │           └── 3
-    │               ├── ...
-    │               ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
-    │               └── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
-    └── v1_stream_truncate_safepoint.txt
+```
+.
+├── v1
+│   ├── backupmeta
+│   │   ├── ...
+│   │   ├── 060c4bc7b0cdd582-06097a780d1ba138-060ab960016d2f00-060c0b9e47d4787b.meta
+│   │   ├── 06123bc6a0cdd591-060c3d24585be000-060c4453954a4000-060c4bc7b0cdcfa4.meta
+│   │   └── 063c2ac1c0cdd5c3-0609d2e6b3bcb064-060ab960016d2f84-060c0b9e47d47a77.meta
+│   ├── global_checkpoint
+│   │   ├── 1.ts
+│   │   ├── 2.ts
+│   │   └── 3.ts
+│   └── 20220811
+│       └── 03
+│           ├── 1
+│           │   ├── ...
+│           │   ├── 435213866703257604-60fcbdb6-8f55-4098-b3e7-2ce604dafe54.log
+│           │   └── 435214023989657606-72ce65ff-1fa8-4705-9fd9-cb4a1e803a56.log
+│           ├── 2
+│           │   ├── ...
+│           │   ├── 435214102632857605-11deba64-beff-4414-bc9c-7a161b6fb22c.log
+│           │   └── 435214417205657604-e6980303-cbaa-4629-a863-1e745d7b8aed.log
+│           └── 3
+│               ├── ...
+│               ├── 435214495848857605-7bf65e92-8c43-427e-b81e-f0050bd40be0.log
+│               └── 435214574492057604-80d3b15e-3d9f-4b0c-b133-87ed3f6b2697.log
+└── v1_stream_truncate_safepoint.txt
+```

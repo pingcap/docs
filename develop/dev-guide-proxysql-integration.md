@@ -226,11 +226,13 @@ systemctl start docker
 
     以下は出力例です。現在の`tidb-cloud-connect`フォルダーの下に 3 つの設定ファイルが生成されていることがわかります。
 
-        [Begin] generating configuration files..
-        tidb-cloud-connect.cnf generated successfully.
-        proxysql-prepare.sql generated successfully.
-        proxysql-connect.py generated successfully.
-        [End] all files generated successfully and placed in the current folder.
+    ```
+    [Begin] generating configuration files..
+    tidb-cloud-connect.cnf generated successfully.
+    proxysql-prepare.sql generated successfully.
+    proxysql-connect.py generated successfully.
+    [End] all files generated successfully and placed in the current folder.
+    ```
 
 #### ステップ3. ProxySQLの設定 {#step-3-configure-proxysql}
 
@@ -333,19 +335,21 @@ systemctl start docker
 
     以下は出力例です。出力にTiDB Cloud Starterインスタンスのホスト名が表示されていることがわかります。これは、ProxySQLとTiDB Cloud Starterインスタンス間の接続が確立されていることを意味します。
 
-        *************************** 1. row ***************************
-            hostgroup_id: 0
-                hostname: gateway01.us-west-2.prod.aws.tidbcloud.com
-                    port: 4000
-                gtid_port: 0
-                    status: ONLINE
-                    weight: 1
-                compression: 0
-            max_connections: 1000
-        max_replication_lag: 0
-                    use_ssl: 1
-            max_latency_ms: 0
-                    comment:
+    ```
+    *************************** 1. row ***************************
+        hostgroup_id: 0
+            hostname: gateway01.us-west-2.prod.aws.tidbcloud.com
+                port: 4000
+            gtid_port: 0
+                status: ONLINE
+                weight: 1
+            compression: 0
+        max_connections: 1000
+    max_replication_lag: 0
+                use_ssl: 1
+        max_latency_ms: 0
+                comment:
+    ```
 
 #### ステップ4. ProxySQL経由でTiDBに接続する {#step-4-connect-to-tidb-through-proxysql}
 
@@ -744,28 +748,30 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 2.  必要に応じて設定ファイル`/etc/proxysql.cnf`を変更してください。例:
 
-        mysql_servers:
-        (
-            {
-                address="<tidb cloud dedicated cluster host>"
-                port=<tidb cloud dedicated cluster port>
-                hostgroup=0
-                max_connections=2000
-            }
-        )
+    ```
+    mysql_servers:
+    (
+        {
+            address="<tidb cloud dedicated cluster host>"
+            port=<tidb cloud dedicated cluster port>
+            hostgroup=0
+            max_connections=2000
+        }
+    )
 
-        mysql_users:
-        (
-            {
-                username = "<tidb cloud dedicated cluster username>"
-                password = "<tidb cloud dedicated cluster password>"
-                default_hostgroup = 0
-                max_connections = 1000
-                default_schema = "test"
-                active = 1
-                transaction_persistent = 1
-            }
-        )
+    mysql_users:
+    (
+        {
+            username = "<tidb cloud dedicated cluster username>"
+            password = "<tidb cloud dedicated cluster password>"
+            default_hostgroup = 0
+            max_connections = 1000
+            default_schema = "test"
+            active = 1
+            transaction_persistent = 1
+        }
+    )
+    ```
 
     前述の例では：
 

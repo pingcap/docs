@@ -58,32 +58,34 @@ DM マスターのコマンドライン パラメータの説明は次のとお�
 ./dm-master --help
 ```
 
-    Usage of dm-master:
-      -L string
-            log level: debug, info, warn, error, fatal (default "info")
-      -V    prints version and exit
-      -advertise-addr string
-            advertise address for client traffic (default "${master-addr}")
-      -advertise-peer-urls string
-            advertise URLs for peer traffic (default "${peer-urls}")
-      -config string
-            path to config file
-      -data-dir string
-            path to the data directory (default "default.${name}")
-      -initial-cluster string
-            initial cluster configuration for bootstrapping, e.g. dm-master=http://127.0.0.1:8291
-      -join string
-            join to an existing cluster (usage: cluster's "${master-addr}" list, e.g. "127.0.0.1:8261,127.0.0.1:18261"
-      -log-file string
-            log file path
-      -master-addr string
-            master API server and status addr
-      -name string
-            human-readable name for this DM-master member
-      -peer-urls string
-            URLs for peer traffic (default "http://127.0.0.1:8291")
-      -print-sample-config
-            print sample config file of dm-worker
+```
+Usage of dm-master:
+  -L string
+        log level: debug, info, warn, error, fatal (default "info")
+  -V    prints version and exit
+  -advertise-addr string
+        advertise address for client traffic (default "${master-addr}")
+  -advertise-peer-urls string
+        advertise URLs for peer traffic (default "${peer-urls}")
+  -config string
+        path to config file
+  -data-dir string
+        path to the data directory (default "default.${name}")
+  -initial-cluster string
+        initial cluster configuration for bootstrapping, e.g. dm-master=http://127.0.0.1:8291
+  -join string
+        join to an existing cluster (usage: cluster's "${master-addr}" list, e.g. "127.0.0.1:8261,127.0.0.1:18261"
+  -log-file string
+        log file path
+  -master-addr string
+        master API server and status addr
+  -name string
+        human-readable name for this DM-master member
+  -peer-urls string
+        URLs for peer traffic (default "http://127.0.0.1:8291")
+  -print-sample-config
+        print sample config file of dm-worker
+```
 
 > **Note:**
 >
@@ -95,29 +97,29 @@ DM マスターのコマンドライン パラメータの説明は次のとお�
 
 1.  次の設定を`conf/dm-master1.toml`に書き込みます。
 
-    ```toml
-    # Master Configuration.
-    name = "master1"
+      ```toml
+      # Master Configuration.
+      name = "master1"
 
-    # Log configurations.
-    log-level = "info"
-    log-file = "dm-master.log"
+      # Log configurations.
+      log-level = "info"
+      log-file = "dm-master.log"
 
-    # The listening address of DM-master.
-    master-addr = "192.168.0.4:8261"
+      # The listening address of DM-master.
+      master-addr = "192.168.0.4:8261"
 
-    # The peer URLs of DM-master.
-    peer-urls = "192.168.0.4:8291"
+      # The peer URLs of DM-master.
+      peer-urls = "192.168.0.4:8291"
 
-    # The value of `initial-cluster` is the combination of the `advertise-peer-urls` value of all DM-master nodes in the initial cluster.
-    initial-cluster = "master1=http://192.168.0.4:8291,master2=http://192.168.0.5:8291,master3=http://192.168.0.6:8291"
-    ```
+      # The value of `initial-cluster` is the combination of the `advertise-peer-urls` value of all DM-master nodes in the initial cluster.
+      initial-cluster = "master1=http://192.168.0.4:8291,master2=http://192.168.0.5:8291,master3=http://192.168.0.6:8291"
+      ```
 
 2.  DM-master を実行するには、ターミナルで次のコマンドを実行します。
 
-    ```bash
-    ./dm-master -config conf/dm-master1.toml
-    ```
+      ```bash
+      ./dm-master -config conf/dm-master1.toml
+      ```
 
     > **Note:**
     >
@@ -137,26 +139,28 @@ DM-worker のコマンドライン パラメータの説明は次のとおりで
 ./dm-worker --help
 ```
 
-    Usage of worker:
-      -L string
-            log level: debug, info, warn, error, fatal (default "info")
-      -V    prints version and exit
-      -advertise-addr string
-            advertise address for client traffic (default "${worker-addr}")
-      -config string
-            path to config file
-      -join string
-            join to an existing cluster (usage: dm-master cluster's "${master-addr}")
-      -keepalive-ttl int
-            dm-worker's TTL for keepalive with etcd (in seconds) (default 10)
-      -log-file string
-            log file path
-      -name string
-            human-readable name for DM-worker member
-      -print-sample-config
-            print sample config file of dm-worker
-      -worker-addr string
-            listen address for client traffic
+```
+Usage of worker:
+  -L string
+        log level: debug, info, warn, error, fatal (default "info")
+  -V    prints version and exit
+  -advertise-addr string
+        advertise address for client traffic (default "${worker-addr}")
+  -config string
+        path to config file
+  -join string
+        join to an existing cluster (usage: dm-master cluster's "${master-addr}")
+  -keepalive-ttl int
+        dm-worker's TTL for keepalive with etcd (in seconds) (default 10)
+  -log-file string
+        log file path
+  -name string
+        human-readable name for DM-worker member
+  -print-sample-config
+        print sample config file of dm-worker
+  -worker-addr string
+        listen address for client traffic
+```
 
 > **Note:**
 >
@@ -168,26 +172,26 @@ DM-worker のコマンドライン パラメータの説明は次のとおりで
 
 1.  次の設定を`conf/dm-worker1.toml`に書き込みます。
 
-    ```toml
-    # Worker Configuration.
-    name = "worker1"
+      ```toml
+      # Worker Configuration.
+      name = "worker1"
 
-    # Log configuration.
-    log-level = "info"
-    log-file = "dm-worker.log"
+      # Log configuration.
+      log-level = "info"
+      log-file = "dm-worker.log"
 
-    # DM-worker address.
-    worker-addr = ":8262"
+      # DM-worker address.
+      worker-addr = ":8262"
 
-    # The master-addr configuration of the DM-master nodes in the cluster.
-    join = "192.168.0.4:8261,192.168.0.5:8261,192.168.0.6:8261"
-    ```
+      # The master-addr configuration of the DM-master nodes in the cluster.
+      join = "192.168.0.4:8261,192.168.0.5:8261,192.168.0.6:8261"
+      ```
 
 2.  DM-worker を実行するには、ターミナルで次のコマンドを実行します。
 
-    ```bash
-    ./dm-worker -config conf/dm-worker1.toml
-    ```
+      ```bash
+      ./dm-worker -config conf/dm-worker1.toml
+      ```
 
 3.  DM-worker2 の場合、設定ファイルの`name` `worker2`に変更します。その後、手順 2 を繰り返します。
 

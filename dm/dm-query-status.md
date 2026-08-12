@@ -292,18 +292,20 @@ DM移行タスクのステータスは、DMワーカーに割り当てられた�
 
 ### ステータススイッチ図 {#status-switch-diagram}
 
-                                             error occurs
-                                New --------------------------------|
-                                 |                                  |
-                                 |           resume-task            |
-                                 |  |----------------------------|  |
-                                 |  |                            |  |
-                                 |  |                            |  |
-                                 v  v        error occurs        |  v
-      Finished <-------------- Running -----------------------> Paused
-                                 ^  |        or pause-task       |
-                                 |  |                            |
-                      start task |  | stop task                  |
-                                 |  |                            |
-                                 |  v        stop task           |
-                               Stopped <-------------------------|
+```
+                                         error occurs
+                            New --------------------------------|
+                             |                                  |
+                             |           resume-task            |
+                             |  |----------------------------|  |
+                             |  |                            |  |
+                             |  |                            |  |
+                             v  v        error occurs        |  v
+  Finished <-------------- Running -----------------------> Paused
+                             ^  |        or pause-task       |
+                             |  |                            |
+                  start task |  | stop task                  |
+                             |  |                            |
+                             |  v        stop task           |
+                           Stopped <-------------------------|
+```

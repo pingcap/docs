@@ -60,23 +60,25 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 
 結果は次のようになります。
 
-    +--------+-------------------+--------+------------+------------+
-    | id     | name              | gender | birth_year | death_year |
-    +--------+-------------------+--------+------------+------------+
-    | 13514  | Kennith Kautzer   | 1      | 1956       | 2018       |
-    | 13748  | Dillon Langosh    | 1      | 1985       | NULL       |
-    | 99184  | Giovanny Emmerich | 1      | 1954       | 2012       |
-    | 180191 | Myrtie Robel      | 1      | 1958       | 2009       |
-    | 200969 | Iva Renner        | 0      | 1977       | NULL       |
-    | 209671 | Abraham Ortiz     | 0      | 1943       | 2016       |
-    | 229908 | Wellington Wiza   | 1      | 1932       | 1969       |
-    | 306642 | Markus Crona      | 0      | 1969       | NULL       |
-    | 317018 | Ellis McCullough  | 0      | 1969       | 2014       |
-    | 322369 | Mozelle Hand      | 0      | 1942       | 1977       |
-    | 325946 | Elta Flatley      | 0      | 1933       | 1986       |
-    | 361692 | Otho Langosh      | 1      | 1931       | 1997       |
-    | 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
-    ...
+```
++--------+-------------------+--------+------------+------------+
+| id     | name              | gender | birth_year | death_year |
++--------+-------------------+--------+------------+------------+
+| 13514  | Kennith Kautzer   | 1      | 1956       | 2018       |
+| 13748  | Dillon Langosh    | 1      | 1985       | NULL       |
+| 99184  | Giovanny Emmerich | 1      | 1954       | 2012       |
+| 180191 | Myrtie Robel      | 1      | 1958       | 2009       |
+| 200969 | Iva Renner        | 0      | 1977       | NULL       |
+| 209671 | Abraham Ortiz     | 0      | 1943       | 2016       |
+| 229908 | Wellington Wiza   | 1      | 1932       | 1969       |
+| 306642 | Markus Crona      | 0      | 1969       | NULL       |
+| 317018 | Ellis McCullough  | 0      | 1969       | 2014       |
+| 322369 | Mozelle Hand      | 0      | 1942       | 1977       |
+| 325946 | Elta Flatley      | 0      | 1933       | 1986       |
+| 361692 | Otho Langosh      | 1      | 1931       | 1997       |
+| 421294 | Karelle VonRueden | 0      | 1977       | NULL       |
+...
+```
 
 存在判定や量化比較などの自己完結型サブクエリについては、TiDBはパフォーマンス向上のために、それらを同等のクエリに書き換えて置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)を参照してください。
 

@@ -95,11 +95,15 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 
 TiDB Dashboardを無効にすると、どの PD インスタンスが TiDB Dashboard サービスを提供しているかの確認が失敗します。
 
-    Error: TiDB Dashboard is disabled
+```
+Error: TiDB Dashboard is disabled
+```
 
 ブラウザ経由で任意の PD インスタンスの TiDB Dashboard アドレスにアクセスしても失敗します。
 
-    Dashboard is not started.
+```
+Dashboard is not started.
+```
 
 ## TiDB Dashboardを再度有効にする {#re-enable-tidb-dashboard}
 
