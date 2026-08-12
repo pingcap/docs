@@ -166,7 +166,7 @@ TiDB バージョン: 8.4.0
     [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL ステートメントを表示します。バージョン 8.4.0 以降、TiDB はシステム テーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
 
     -   [ステートメントサマリーテーブル](/statement-summary-tables.md)には`AVG_TIDB_CPU_TIME`と`AVG_TIKV_CPU_TIME`が追加され、過去の個々の SQL ステートメントによって消費された平均 CPU 時間が表示されます。
-    -   [情報スキーマ.プロセスリスト](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL ステートメントの累積 CPU 消費量が表示されます。
+    -   [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL ステートメントの累積 CPU 消費量が表示されます。
     -   [スロークエリログ](/analyze-slow-queries.md)には`Tidb_cpu_time`フィールドと`Tikv_cpu_time`フィールドが追加され、キャプチャされた SQL ステートメントによって消費された CPU 時間が表示されます。
 
     デフォルトでは、TiKV が消費する CPU 時間が表示されます。TiDB が消費する CPU 時間を収集すると追加のオーバーヘッド (約 8%) が発生するため、TiDB が消費する CPU 時間は、 [Top SQL](/dashboard/top-sql.md)が有効になっている場合にのみ実際の値が表示されます。それ以外の場合は、常に`0`と表示されます。

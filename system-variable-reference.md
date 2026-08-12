@@ -20,9 +20,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [AUTO_RANDOM](/auto-random.md)
 -   [データの挿入](/develop/dev-guide-insert-data.md)
--   [セッション変数](/information-schema/information-schema-session-variables.md)
+-   [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 -   [システム変数](/system-variables.md#allow_auto_random_explicit_insert-new-in-v403)
--   [変数情報](/information-schema/information-schema-variables-info.md)
+-   [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
 
 ### authentication_ldap_sasl_auth_method_name
 
@@ -172,9 +172,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [AUTO_RANDOM](/auto-random.md)
 -   [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)
 -   [エラーコードとトラブルシューティング](/error-codes.md)
--   [セッション変数](/information-schema/information-schema-session-variables.md)
+-   [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 -   [システム変数](/system-variables.md#auto_increment_increment)
--   [変数情報](/information-schema/information-schema-variables-info.md)
+-   [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
 -   [TiDB 7.1.6 リリースノート](/releases/release-7.1.6.md)
 -   [TiDB 6.5.10 リリースノート](/releases/release-6.5.10.md)
 -   [TiDB 3.0.9 リリースノート](/releases/release-3.0.9.md)
@@ -187,9 +187,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [AUTO_RANDOM](/auto-random.md)
 -   [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)
 -   [エラーコードとトラブルシューティング](/error-codes.md)
--   [セッション変数](/information-schema/information-schema-session-variables.md)
+-   [SESSION_VARIABLES](/information-schema/information-schema-session-variables.md)
 -   [システム変数](/system-variables.md#auto_increment_offset)
--   [変数情報](/information-schema/information-schema-variables-info.md)
+-   [VARIABLES_INFO](/information-schema/information-schema-variables-info.md)
 -   [TiDB 7.1.6 リリースノート](/releases/release-7.1.6.md)
 -   [TiDB 6.5.10 リリースノート](/releases/release-6.5.10.md)
 -   [TiDB 3.0.9 リリースノート](/releases/release-3.0.9.md)
@@ -216,10 +216,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [GBK](/character-set-gbk.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_client)
 -   [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md)
--   [ビュー](/information-schema/information-schema-views.md)
+-   [VIEWS](/information-schema/information-schema-views.md)
 -   [ビュー](/views.md)
 -   [ビュー](/develop/dev-guide-use-views.md)
 
@@ -229,7 +229,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
 -   [GBK](/character-set-gbk.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_connection)
 -   [Dumplingを使用してデータをエクスポートする](/dumpling-overview.md)
 
@@ -238,7 +238,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_database)
 
 ### character_set_results
@@ -246,7 +246,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_results)
 -   [TiDB 8.5.4 リリースノート](/releases/release-8.5.4.md)
 -   [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
@@ -257,7 +257,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 -   [文字セットと照合順序](/character-set-and-collation.md)
--   [SET [名前|文字セット]](/sql-statements/sql-statement-set-names.md)
+-   [SET [NAMES|CHARACTER SET]](/sql-statements/sql-statement-set-names.md)
 -   [システム変数](/system-variables.md#character_set_server)
 -   [TiDB 5.3 リリースノート](/releases/release-5.3.0.md)
 
@@ -269,7 +269,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [文字列関数](/functions-and-operators/string-functions.md)
 -   [システム変数](/system-variables.md#collation_connection)
--   [ビュー](/information-schema/information-schema-views.md)
+-   [VIEWS](/information-schema/information-schema-views.md)
 -   [ビュー](/views.md)
 -   [ビュー](/develop/dev-guide-use-views.md)
 
@@ -869,7 +869,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
 -   [統計入門](/statistics.md)
--   [分析ステータスを表示](/sql-statements/sql-statement-show-analyze-status.md)
+-   [SHOW ANALYZE STATUS](/sql-statements/sql-statement-show-analyze-status.md)
 -   [システム変数](/system-variables.md#tidb_analyze_version-new-in-v510)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
 -   [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)
@@ -1309,7 +1309,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [統計入門](/statistics.md)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
--   [スロークエリ](/information-schema/information-schema-slow-query.md)
+-   [SLOW_QUERY](/information-schema/information-schema-slow-query.md)
 -   [SQLに関するよくある質問](/faq/sql-faq.md)
 -   [システム変数](/system-variables.md#tidb_distsql_scan_concurrency)
 -   [TiDB ベストプラクティス](/best-practices/tidb-best-practices.md)
@@ -3669,8 +3669,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 -   [インポート先](/sql-statements/sql-statement-import-into.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
--   [メモリ使用量](/information-schema/information-schema-memory-usage.md)
--   [メモリ使用量オペレーション履歴](/information-schema/information-schema-memory-usage-ops-history.md)
+-   [MEMORY_USAGE](/information-schema/information-schema-memory-usage.md)
+-   [MEMORY_USAGE_OPS_HISTORY](/information-schema/information-schema-memory-usage-ops-history.md)
 -   [システム変数](/system-variables.md#tidb_server_memory_limit-new-in-v640)
 -   [TiDBコンフィグレーションファイル](/tidb-configuration-file.md)
 -   [TiDB メモリ制御](/configure-memory-usage.md)
@@ -3980,7 +3980,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 -   [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 -   [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 -   [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
--   [スロークエリ](/information-schema/information-schema-slow-query.md)
+-   [SLOW_QUERY](/information-schema/information-schema-slow-query.md)
 -   [TiDB Dashboardのスロークエリページ](/dashboard/dashboard-slow-query.md)
 -   [ステートメントサマリーテーブル](/statement-summary-tables.md)
 -   [システム変数](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)

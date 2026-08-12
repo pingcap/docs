@@ -252,4 +252,4 @@ DDL履歴ジョブキュー内の任意の結果範囲から、 `job_id`に対�
 -   [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
 -   [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
 -   [`ADMIN ALTER DDL`](/sql-statements/sql-statement-admin-alter-ddl.md)
--   [情報スキーマ.DDL_JOBS](/information-schema/information-schema-ddl-jobs.md)
+-   [INFORMATION_SCHEMA.DDL_JOBS](/information-schema/information-schema-ddl-jobs.md)
