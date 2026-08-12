@@ -2088,7 +2088,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
--   [生成された列](/generated-columns.md)
+-   [生成列](/generated-columns.md)
 -   [システム変数](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)
 -   [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
 

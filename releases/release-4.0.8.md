@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.8
 
         -   S3ストレージへのDumplingデータの直接サポート[＃155](https://github.com/pingcap/dumpling/pull/155)
         -   ダンプビューのサポート[＃158](https://github.com/pingcap/dumpling/pull/158)
-        -   生成された列のみを含むテーブルのダンプをサポート[＃166](https://github.com/pingcap/dumpling/pull/166)
+        -   生成列のみを含むテーブルのダンプをサポート[＃166](https://github.com/pingcap/dumpling/pull/166)
 
     -   TiDB Lightning
 
@@ -109,7 +109,7 @@ TiDB バージョン: 4.0.8
     -   曖昧な`YEAR`変換の問題を修正 [＃20292](https://github.com/pingcap/tidb/pull/20292)
     -   **KV期間**パネルに`store0` が含まれている場合に発生する誤った報告結果の問題を修正しました [＃20260](https://github.com/pingcap/tidb/pull/20260)
     -   `out of range`エラーに関係なく`Float`タイプのデータが誤って挿入される問題を修正 [＃20252](https://github.com/pingcap/tidb/pull/20252)
-    -   生成された列が不正な`NULL`値を処理できないバグを修正しました[＃20216](https://github.com/pingcap/tidb/pull/20216)
+    -   生成列が不正な`NULL`値を処理できないバグを修正しました[＃20216](https://github.com/pingcap/tidb/pull/20216)
     -   範囲外の`YEAR`型データの不正確なエラー情報を修正 [＃20170](https://github.com/pingcap/tidb/pull/20170)
     -   悲観的トランザクション再試行中に発生する可能性のある予期しないエラー`invalid auto-id`を修正[＃20134](https://github.com/pingcap/tidb/pull/20134)
     -   `ALTER TABLE`を使用して`Enum`/`Set`タイプを変更するときに制約がチェックされない問題を修正[＃20046](https://github.com/pingcap/tidb/pull/20046)

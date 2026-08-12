@@ -2978,7 +2978,7 @@ Query OK, 0 rows affected (0.09 sec)
 -   ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 -   型: Boolean
 -   デフォルト値: `OFF`
--   この変数は、式を生成された列に安全でない方法で置き換えるかどうかを制御します。デフォルト値は`OFF`で、これはデフォルトで安全でない置換が無効になっていることを意味します。詳細については、[生成された列](/generated-columns.md)を参照してください。
+-   この変数は、式を生成列に安全でない方法で置き換えるかどうかを制御します。デフォルト値は`OFF`で、これはデフォルトで安全でない置換が無効になっていることを意味します。詳細については、[生成列](/generated-columns.md)を参照してください。
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 

@@ -477,7 +477,7 @@
   - [クラスター化インデックス](/clustered-indexes.md)
   - [グローバルインデックス](/global-indexes.md)
   - [制約](/constraints.md)
-  - [生成された列](/generated-columns.md)
+  - [生成列](/generated-columns.md)
   - [SQLモード](/sql-mode.md)
   - [テーブル属性](/table-attributes.md)
   - トランザクション

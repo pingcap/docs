@@ -48,7 +48,7 @@ TiDB バージョン: 6.1.6
     -   DDLを使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータが同じままになる問題を修正しました[＃41281](https://github.com/pingcap/tidb/issues/41281) @[zimulala](https://github.com/zimulala)
     -   `information_schema.columns`テーブルを結合すると TiDB がpanicを起こす問題を修正 [＃32459](https://github.com/pingcap/tidb/issues/32459) @[tangenta](https://github.com/tangenta)
     -   実行計画を生成する際に不整合な InfoSchema が取得され、TiDB panicが発生する問題を修正しました。 [＃41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
-    -   実行中にTiFlash が生成された列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   実行中にTiFlash が生成列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     -   単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     -   プランキャッシュがシャッフル演算子をキャッシュし、誤った結果を返す可能性がある問題を修正[＃38335](https://github.com/pingcap/tidb/issues/38335) @[qw4990](https://github.com/qw4990) @[fzzf678](https://github.com/fzzf678)
     -   インデックスマージを使用して`SET`型の列を含むテーブルを読み取ると、誤った結果が発生する可能性がある問題を修正しました [＃41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
@@ -75,7 +75,7 @@ TiDB バージョン: 6.1.6
     -   TiFlashログ検索が遅すぎる問題を修正[＃6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen)
     -   新しい照合順序を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
     -   特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [＃6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
-    -   TiFlashが生成された列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   TiFlashが生成列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
     -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
 
 -   ツール

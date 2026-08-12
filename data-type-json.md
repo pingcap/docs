@@ -10,7 +10,7 @@ TiDBは、半構造化データの保存に便利な`JSON` （JavaScript Object 
 -   シリアル化にはバイナリ形式を使用します。内部形式により、 `JSON`ドキュメント要素への高速な読み取りアクセスが可能になります。
 -   `JSON`列に保存されたJSONドキュメントを自動検証します。有効なドキュメントのみを保存できます。
 
-`JSON`列は、他のバイナリ型の列と同様に直接インデックス付けされませんが、生成された列の形式で`JSON`ドキュメント内のフィールドをインデックス付けできます。
+`JSON`列は、他のバイナリ型の列と同様に直接インデックス付けされませんが、生成列の形式で`JSON`ドキュメント内のフィールドをインデックス付けできます。
 
 ```sql
 CREATE TABLE city (
@@ -23,7 +23,7 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
+詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成列](/generated-columns.md)を参照してください。
 
 ## JSON値の型 {#json-value-types}
 
@@ -122,4 +122,4 @@ JSONドキュメント内の値には型があります。これは[`JSON_TYPE` 
     INSERT INTO t VALUES (3);
     ```
 
-`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
+`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成列](/generated-columns.md)を参照してください。

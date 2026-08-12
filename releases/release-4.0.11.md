@@ -85,7 +85,7 @@ TiDB バージョン: 4.0.11
     -   `tidb_rowid`列に値を挿入するときに発生する`index out of range`エラーを修正[＃22359](https://github.com/pingcap/tidb/pull/22359)
     -   キャッシュされたプランが誤って使用されるバグを修正[＃22353](https://github.com/pingcap/tidb/pull/22353)
     -   バイナリ/文字列の長さが大きすぎる場合に関数`WEIGHT_STRING`で発生するランタイムpanicを修正[＃22332](https://github.com/pingcap/tidb/pull/22332)
-    -   関数パラメータの数が無効な場合、生成された列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)
+    -   関数パラメータの数が無効な場合、生成列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)
     -   実行計画を構築する前にプロセス情報を正しく設定する[＃22148](https://github.com/pingcap/tidb/pull/22148)
     -   `IndexLookUp` の不正確な実行時統計の問題を修正 [＃22136](https://github.com/pingcap/tidb/pull/22136)
     -   コンテナにクラスタをデプロイするときにメモリ使用量情報のキャッシュを追加する [＃22116](https://github.com/pingcap/tidb/pull/22116)

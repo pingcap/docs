@@ -98,9 +98,9 @@ TTL は[データ型のデフォルト値](/data-type-default-values.md)と組�
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-### TTLと生成された列 {#ttl-and-generated-columns}
+### TTLと生成列 {#ttl-and-generated-columns}
 
-TTLと[生成された列](/generated-columns.md)を組み合わせて使用​​すると、複雑な有効期限ルールを設定できます。例：
+TTLと[生成列](/generated-columns.md)を組み合わせて使用​​すると、複雑な有効期限ルールを設定できます。例：
 
 ```sql
 CREATE TABLE message (

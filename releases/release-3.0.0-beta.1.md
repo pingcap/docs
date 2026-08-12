@@ -105,7 +105,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 -   TiDB Binlog
     -   Kafka からbinlogを読み取り、データを MySQL に複製する Arbiter ツールを追加します。
     -   複製する必要のないファイルのフィルタリングをサポート
-    -   生成された列の複製をサポート
+    -   生成列の複製をサポート
 -   Lightning
     -   TiKVの定期的なレベル1圧縮を無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1圧縮はインポートモードで自動的に実行されます[＃4199](https://github.com/tikv/tikv/pull/4199) [＃119](https://github.com/pingcap/tidb-lightning/pull/119)
     -   `table_concurrency`構成項目を追加して、インポートエンジンの数（デフォルトでは「16」）を制限し、インポーターのディスクスペース過剰な使用を回避します。 [＃119](https://github.com/pingcap/tidb-lightning/pull/119)

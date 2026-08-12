@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.3
     -   テストのスイートが正しく使用されていることを確認するためのサポート`make testSuite` [＃11685](https://github.com/pingcap/tidb/pull/11685)
 -   DDL
     -   複数のパーティションを削除する際にパーティションタイプを変更するステートメントを含む、サポートされていないパーティション関連のDDLステートメントの実行をスキップします[＃11373](https://github.com/pingcap/tidb/pull/11373)
-    -   生成カラムを従属列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
+    -   生成列を従属列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
     -   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`のデフォルト値を変更する[＃11874](https://github.com/pingcap/tidb/pull/11874)
 -   モニター
     -   各バックオフタイプの期間を記録するための新しいバックオフ監視タイプを追加し、コミットバックオフなど、これまでカウントされていなかったタイプをカバーするためにバックオフメトリックを追加します。 [＃11728](https://github.com/pingcap/tidb/pull/11728)

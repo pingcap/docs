@@ -141,7 +141,7 @@ TiDB バージョン: 4.0.6
     -   情報に`tikv/tiflash` 含まれている場合の`information_schema.statements_summary`と`explain`間の計画の不一致を修正します [＃19159](https://github.com/pingcap/tidb/pull/19159)
     -   `select into outfile` ファイルが存在しないというテストのエラーを修正 [＃19725](https://github.com/pingcap/tidb/pull/19725)
     -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE` RAIDデバイス情報がない問題を修正[＃19457](https://github.com/pingcap/tidb/pull/19457)
-    -   `case-when`で生成された列を持つ`add index`操作が解析エラーに遭遇したときに正常に終了できるようにします。 [＃19395](https://github.com/pingcap/tidb/pull/19395)
+    -   `case-when`で生成列を持つ`add index`操作が解析エラーに遭遇したときに正常に終了できるようにします。 [＃19395](https://github.com/pingcap/tidb/pull/19395)
     -   DDL操作の再試行に時間がかかりすぎるバグを修正[＃19488](https://github.com/pingcap/tidb/pull/19488)
     -   `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)`ような文を`use db` を実行せずに実行する [＃19471](https://github.com/pingcap/tidb/pull/19471)
     -   サーバーログファイルのディスパッチエラーを`Error`から`Info`メッセージに変更します。 [＃19454](https://github.com/pingcap/tidb/pull/19454)

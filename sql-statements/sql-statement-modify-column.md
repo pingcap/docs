@@ -173,7 +173,7 @@ CREATE TABLE `t1` (
     Query OK, 0 rows affected (0.01 sec)
     ```
 
--   生成された列の列型の変更はサポートされていません。例:
+-   生成列の列型の変更はサポートされていません。例:
 
     ```sql
     CREATE TABLE t (a INT, b INT as (a+1));

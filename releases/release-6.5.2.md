@@ -60,7 +60,7 @@ TiDB バージョン: 6.5.2
     -   トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [＃28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     -   カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicたりする可能性がある問題を修正しました[＃40094](https://github.com/pingcap/tidb/issues/40094) @[YangKeao](https://github.com/YangKeao)
     -   `INSERT IGNORE`と`REPLACE`ステートメントが値を変更しないキーをロックしない問題を修正しました [＃42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
-    -   実行中にTiFlash が生成された列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   実行中にTiFlash が生成列に対してエラーを報告する問題を修正[＃40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     -   単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[＃42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     -   プリペアドプランキャッシュが有効な場合にフルインデックススキャンでエラーが発生する可能性がある問題を修正[＃42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     -   プリペアドプランキャッシュが有効な場合に IndexMerge が誤った結果を生成する可能性がある問題を修正[＃41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.2
 
 -   TiFlash
 
-    -   TiFlashが生成された列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
+    -   TiFlashが生成列を認識できない問題を修正 [＃6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
     -   特定のケースで小数点以下の桁が切り上げられない問題を修正[＃7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
     -   特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [＃6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
     -   新しい照合順序を有効にした後に TopN/Sort 演算子が誤った結果を生成する問題を修正しました [＃6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)

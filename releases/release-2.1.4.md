@@ -20,7 +20,7 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
     -   「権限の再読み込み成功」ログを最適化し、DEBUGレベルに変更します。 [＃9274](https://github.com/pingcap/tidb/pull/9274)
 -   DDL
     -   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`グローバル変数に変更する [＃9134](https://github.com/pingcap/tidb/pull/9134)
-    -   いくつかの異常な状況で生成された列にインデックスを追加することによって発生するバグを修正しました[＃9289](https://github.com/pingcap/tidb/pull/9289)
+    -   いくつかの異常な状況で生成列にインデックスを追加することによって発生するバグを修正しました[＃9289](https://github.com/pingcap/tidb/pull/9289)
 
 ## TiKV {#tikv}
 
