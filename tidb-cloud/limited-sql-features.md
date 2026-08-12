@@ -32,7 +32,7 @@ TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロ
 | ステートメント                           | TiDB Cloud Dedicated |
 | :--------------------------- | :----------- |
 | `ALTER RESOURCE GROUP`       | サポートされている    |
-| `CALIBRATE RESOURCE`         | サポートされていません  |
+| `CALIBRATE RESOURCE`         | サポートされていません[^4] |
 | `CREATE RESOURCE GROUP`      | サポートされている    |
 | `DROP RESOURCE GROUP`        | サポートされている    |
 | `SET RESOURCE GROUP`         | サポートされている    |
@@ -228,3 +228,5 @@ TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロ
 [^2]: DrainerとPump はTiDB Cloudではサポートされていません。
 
 [^3]: サポートされていません。TiDB Cloud Dedicated クラスターで`require_secure_transport`有効にすると、SQL クライアント接続が失敗します。
+
+[^4]: `CALIBRATE RESOURCE`ステートメントはTiDB Cloud Dedicatedではサポートされていません。クラスターのRU容量を見積もるには、代わりにTiDB Cloudコンソールの[Calibrate Resource](/tidb-cloud/calibrate-resource.md)機能を使用してください。

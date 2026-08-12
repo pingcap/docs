@@ -134,7 +134,7 @@ TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-
 
 TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスタ容量を推定できます。
 
-TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントは適用できません。
+TiDB Cloud Dedicated では、`CALIBRATE RESOURCE` ステートメントはサポートされていません。クラスターの RU 容量を見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
 
 </CustomContent>
 
@@ -369,7 +369,7 @@ TiDB Dashboardの現在の[`RESOURCE_GROUPS`](/information-schema/information-sc
 
 > **Note:**
 >
-> このセクションは、TiDB Self-Managed にのみ適用されます。現在、 TiDB Cloudリソース制御メトリクスは提供されていません。
+> このセクションでは、TiDB Self-Managed でのみ利用可能な Grafana ダッシュボードについて説明します。TiDB Cloud Dedicated では、TiDB Cloud コンソールの [Calibrate Resource](/tidb-cloud/calibrate-resource.md) ページで、**Total RU Consumed** や **RU Consumed by Resource Groups** などのリソース制御メトリクスを表示できます。
 
 TiDBは、リソース制御に関するランタイム情報を定期的に収集し、Grafanaの**TiDB** &gt;**リソース制御**ダッシュボードでそのメトリクスの視覚的なグラフを提供します。
 

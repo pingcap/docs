@@ -13,15 +13,15 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 ## 前提条件 {#prerequisites}
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象のTiDB Cloud Premium インスタンスへの`Instance Manager`アクセス権が必要です。
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 

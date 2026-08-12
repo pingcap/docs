@@ -17,15 +17,15 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 -   Zoomで受信Webhookチャットボットを追加および設定するには、Zoomアカウントの管理者権限が必要です。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象のTiDB Cloud Premium インスタンスへの`Instance Manager`アクセス権が必要です。
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 

@@ -122,7 +122,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 
 ### APIキーを編集する {#edit-an-api-key}
 
-> **注記**：
+> **Note:**
 >
 > 有効期限切れのキーは編集できません。
 
@@ -149,7 +149,7 @@ APIキーの説明またはレート制限を編集するには、以下の手�
 
 ### APIキーの有効期限を切る {#expire-an-api-key}
 
-> **注記**：
+> **Note:**
 >
 > 有効期限切れのキーを再度無効にすることはできません。
 

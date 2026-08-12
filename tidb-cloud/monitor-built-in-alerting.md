@@ -76,6 +76,8 @@ TiDB Cloudでは、以下のいずれかの方法でアラート通知を購読�
 -   [Zoom](/tidb-cloud/monitor-alert-zoom.md)
 -   [FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)
 -   [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+-   [Webhook](/tidb-cloud/monitor-alert-webhook.md)
+-   [Lark](/tidb-cloud/monitor-alert-lark.md)
 
 ## TiDB Cloudに組み込まれたアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
