@@ -117,33 +117,35 @@ Perform the following steps:
 
 ## Step 6. Plan network CIDR ranges
 
-Before starting the BYOC deployment, plan dedicated CIDR ranges for the TiDB cluster and observability (O11Y) infrastructure. This planning must be evaluated on a **per-region** basis.
+Before starting the BYOC deployment, plan dedicated private CIDR ranges for observability (O11Y) infrastructure and resource pools. Use a prefix length between `/16` and `/22`.
 
-The CIDR ranges will be used by TiDB Cloud to provision the required AWS networking resources for the BYOC environment.
+Each BYOC deployment region has one O11Y CIDR. Resource pool CIDR is configured for each resource pool when you create it. Plan these CIDR ranges before deployment so that the BYOC environment and future resource pools can be provisioned without network conflicts.
 
 Prepare the following information:
 
 | Item | Description | Example |
 | ----- | ----- | ----- |
-| TiDB Cluster CIDR | CIDR range reserved for TiDB cluster and dataplane resources. | `10.10.0.0/16` |
-| O11Y CIDR | CIDR range reserved for observability infrastructure and related services. | `10.20.0.0/16` |
+| O11Y CIDR | CIDR range reserved for observability infrastructure and related services in the deployment region. | `10.1.0.0/22` |
+| Resource pool CIDR | CIDR range reserved for a resource pool. Each resource pool has its own CIDR, which cannot be modified after the resource pool is created. | `10.10.0.0/16` |
 
-When planning the CIDR ranges, ensure that:
+**CIDR planning rules & constraints**
 
-**CIDR Planning Rules & Constraints:** When planning the CIDR ranges, ensure you strictly follow these connectivity rules:
+When planning CIDR ranges, make sure to comply with the following connectivity rules:
 
-1. **Internal Isolation:** The TiDB Cluster CIDR and O11Y CIDR within the same environment must not overlap with each other.
+- **Internal isolation:** In the same region, resource pool CIDRs must not overlap with the O11Y CIDR or with one another.
 
-2. **VPC Peering Rule:**
+- **VPC peering rule:**
 
-    * **Cannot Overlap:** Anything that will be peered *cannot* overlap. If you plan to establish VPC Peering between the TiDB Cluster VPC and your existing application VPCs, on-premises networks, or VPNs, the CIDR ranges must be strictly de-conflicted.
-    * **Can Overlap:** Things that will *never* be peered can safely overlap with the TiDB Cloud BYOC environment.
+    * **Cannot overlap:** The O11Y CIDR and any resource pool CIDR must not overlap with your existing application VPCs, on-premises networks, or VPN networks.
+    * **Customer responsibility:** TiDB Cloud cannot detect conflicts with customer-managed networks. You are responsible for planning and verifying these CIDR ranges before deployment or before creating a resource pool.
 
-3. **Cross-Cluster Replication (Critical):** If you plan to deploy multiple TiDB clusters (whether in the same region or across different regions) and eventually want to **replicate data between them** (for example, using TiCDC for Disaster Recovery or data consolidation), their respective TiDB Cluster CIDR ranges **must be de-conflicted**.
+- **Cross-region CIDR planning:** Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
+
+- **Cross-resource pool replication (critical):** If you plan to deploy multiple resource pools and might need to **replicate data between instances in different resource pools** (for example, using TiCDC for disaster recovery or data consolidation), their respective resource pool CIDR ranges **must not overlap**.
 
 Provide the planned CIDR ranges to your TiDB Cloud representative before the automated region deployment starts.
 
-## Summary: Required information
+## Summary: required information
 
 Fill out the table below with the information gathered in steps above and share it with your TiDB Cloud representative to initiate the deployment.
 
@@ -157,7 +159,7 @@ Fill out the table below with the information gathered in steps above and share 
 | **Availability Zones** | 3 AZs or single AZ per region (specify names and ID) | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | Step 3. Note to meet the AZ quantity requirement for **each** selected region. |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
 | **Hosted Zone Names & Host Zone ID** | TiDB Cluster Zone, Observability (O11Y) Zone | **Hosted TiDB cluster zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB cluster zone ID:** `Z1039122VAY4T8UNWR8E`. **Hosted O11Y zone name:** `o11y.byoc-0929.pingcap.net`; **Hosted O11Y zone ID:** `Z10389823CTXFNM7VG79P`. | Step 4. The zone names and IDs can be shared across multiple regions. |
-| **CIDR** | Customer-planned CIDR range for the TiDB cluster, Customer-planned CIDR range for the O11Y cluster | **TiDB cluster CIDR:** `10.10.0.0/16`; **O11Y cluster CIDR:** `10.20.0.0/16` | Step 6 |
+| **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 
 ## Review and increase AWS service quotas
