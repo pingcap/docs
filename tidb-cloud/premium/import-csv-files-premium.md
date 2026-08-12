@@ -105,9 +105,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Amazon S3**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
+    - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
         - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
@@ -118,11 +116,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
-
-    > **Note:**
-    >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    The **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
@@ -157,9 +151,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Alibaba Cloud OSS**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
+    - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `oss://sampledata/ingest/`.
     - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
@@ -168,11 +160,7 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 
 5. In the **Source Files Mapping** section, specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
-
-    > **Note:**
-    >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    The **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
     - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
