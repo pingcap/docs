@@ -143,9 +143,9 @@ CREATE TABLE `tbl_multi_pk` (
 
 ### アップストリームのシャードテーブルを削除する {#drop-sharded-tables-in-the-upstream}
 
-アップストリームでシャードされたテーブルを削除する必要がある場合は、次の手順を実行します。
+アップストリームでシャーディングされたテーブルを削除する必要がある場合は、次の手順を実行します。
 
-1.  シャード化されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)を実行して、 binlogイベント内の`DROP TABLE`ステートメントに対応する`End_log_pos`を取得し、それを*Pos-M*としてマークします。
+1.  シャーディングされたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)を実行して、 binlogイベント内の`DROP TABLE`ステートメントに対応する`End_log_pos`を取得し、それを*Pos-M*としてマークします。
 
 2.  `query-status`を実行して、DMによって処理されたbinlogイベントに対応する位置（ `syncerBinlog` ）を取得し、それを*Pos-S*としてマークします。
 
