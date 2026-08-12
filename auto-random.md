@@ -118,7 +118,7 @@ The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
 |-------------|--------|--------------|
 | `64-R` bits | `S` bits | `R-S` bits |
 
-- Whether an `AUTO_RANDOM` column has a signed bit depends on whether the column has the `UNSIGNED` attribute. A column without the `UNSIGNED` attribute has 1 signed bit, and a column with the `UNSIGNED` attribute has no signed bit.
+- Whether an `AUTO_RANDOM` column has a signed bit depends on whether the column has the `UNSIGNED` attribute. A column without the `UNSIGNED` attribute has one signed bit, while a column with the `UNSIGNED` attribute has no signed bit.
 - Values implicitly allocated to an `AUTO_RANDOM` column are always positive. For columns with a signed bit, the signed bit of implicitly allocated values is always `0`. This rule does not apply to explicitly inserted values.
 - The length of the reserved bits is `64-R`. The reserved bits are always `0`.
 - The auto-increment bits must be at least 27 bits. For signed columns, `R-1-S >= 27` must be satisfied. For unsigned columns, `R-S >= 27` must be satisfied.
