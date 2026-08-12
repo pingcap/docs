@@ -11,7 +11,7 @@ summary: TiCDC でサポートされている DDL ステートメントといく
 
 現在、TiCDC は許可リストを使用して DDL ステートメントをレプリケートするかどうかを決定します。許可リストに含まれる DDL ステートメントのみが下流にレプリケートされます。許可リストに含まれない DDL ステートメントはレプリケートされません。
 
-さらに、TiCDCは、テーブルに[有効なインデックス](/ticdc/ticdc-overview.md#valid-index)があるかどうか、および構成項目[`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate)が`true`に設定されているかどうかに基づいて、DDL文をダウンストリームに複製するかどうかを決定します`force-replicate=true`の場合、レプリケーションタスクは強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)試みます。
+さらに、TiCDCは、テーブルに[有効なインデックス](/ticdc/ticdc-overview.md#valid-index)があるかどうか、および構成項目[`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate)が`true`に設定されているかどうかに基づいて、DDL文をダウンストリームに複製するかどうかを決定します。`force-replicate=true`の場合、レプリケーションタスクは強制的に[有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)試みます。
 
 以下は、TiCDC でサポートされている DDL ステートメントの許可リストです。表内の略語は以下のとおりです。
 
@@ -30,32 +30,32 @@ summary: TiCDC でサポートされている DDL ステートメントといく
 | `ALTER DATABASE CHARACTER SET` |        Y        |                           Y                          |                         Y                        |
 | `CREATE INDEX`                 |        Y        |                           Y                          |                         Y                        |
 | `ADD INDEX`                    |        Y        |                           Y                          |                         Y                        |
-| `DROP INDEX`                   |        Y        |                           北                          |                         Y                        |
+| `DROP INDEX`                   |        Y        |                           N                          |                         Y                        |
 | `ADD PRIMARY KEY`              |        Y        |                           Y                          |                         Y                        |
-| `DROP PRIMARY KEY`             |        Y        |                           北                          |                         Y                        |
-| `CREATE TABLE`                 |        Y        |                           北                          |                         Y                        |
-| `DROP TABLE`                   |        Y        |                           北                          |                         Y                        |
-| `ADD COLUMN`                   |        Y        |                           北                          |                         Y                        |
-| `DROP COLUMN`                  |        Y        |                           北                          |                         Y                        |
-| `TRUNCATE TABLE`               |        Y        |                           北                          |                         Y                        |
-| `MODIFY COLUMN`                |        Y        |                           北                          |                         Y                        |
-| `RENAME TABLE`                 |        Y        |                           北                          |                         Y                        |
-| `ALTER COLUMN DEFAULT VALUE`   |        Y        |                           北                          |                         Y                        |
-| `ALTER TABLE COMMENT`          |        Y        |                           北                          |                         Y                        |
-| `RENAME INDEX`                 |        Y        |                           北                          |                         Y                        |
-| `ADD PARTITION`                |        Y        |                           北                          |                         Y                        |
-| `DROP PARTITION`               |        Y        |                           北                          |                         Y                        |
-| `TRUNCATE PARTITION`           |        Y        |                           北                          |                         Y                        |
-| `CREATE VIEW`                  |        Y        |                           北                          |                         Y                        |
-| `DROP VIEW`                    |        Y        |                           北                          |                         Y                        |
-| `ALTER TABLE CHARACTER SET`    |        Y        |                           北                          |                         Y                        |
-| `RECOVER TABLE`                |        Y        |                           北                          |                         Y                        |
-| `REBASE AUTO ID`               |        Y        |                           北                          |                         Y                        |
-| `ALTER TABLE INDEX VISIBILITY` |        Y        |                           北                          |                         Y                        |
-| `EXCHANGE PARTITION`           |        Y        |                           北                          |                         Y                        |
-| `REORGANIZE PARTITION`         |        Y        |                           北                          |                         Y                        |
-| `ALTER TABLE TTL`              |        Y        |                           北                          |                         Y                        |
-| `ALTER TABLE REMOVE TTL`       |        Y        |                           北                          |                         Y                        |
+| `DROP PRIMARY KEY`             |        Y        |                           N                          |                         Y                        |
+| `CREATE TABLE`                 |        Y        |                           N                          |                         Y                        |
+| `DROP TABLE`                   |        Y        |                           N                          |                         Y                        |
+| `ADD COLUMN`                   |        Y        |                           N                          |                         Y                        |
+| `DROP COLUMN`                  |        Y        |                           N                          |                         Y                        |
+| `TRUNCATE TABLE`               |        Y        |                           N                          |                         Y                        |
+| `MODIFY COLUMN`                |        Y        |                           N                          |                         Y                        |
+| `RENAME TABLE`                 |        Y        |                           N                          |                         Y                        |
+| `ALTER COLUMN DEFAULT VALUE`   |        Y        |                           N                          |                         Y                        |
+| `ALTER TABLE COMMENT`          |        Y        |                           N                          |                         Y                        |
+| `RENAME INDEX`                 |        Y        |                           N                          |                         Y                        |
+| `ADD PARTITION`                |        Y        |                           N                          |                         Y                        |
+| `DROP PARTITION`               |        Y        |                           N                          |                         Y                        |
+| `TRUNCATE PARTITION`           |        Y        |                           N                          |                         Y                        |
+| `CREATE VIEW`                  |        Y        |                           N                          |                         Y                        |
+| `DROP VIEW`                    |        Y        |                           N                          |                         Y                        |
+| `ALTER TABLE CHARACTER SET`    |        Y        |                           N                          |                         Y                        |
+| `RECOVER TABLE`                |        Y        |                           N                          |                         Y                        |
+| `REBASE AUTO ID`               |        Y        |                           N                          |                         Y                        |
+| `ALTER TABLE INDEX VISIBILITY` |        Y        |                           N                          |                         Y                        |
+| `EXCHANGE PARTITION`           |        Y        |                           N                          |                         Y                        |
+| `REORGANIZE PARTITION`         |        Y        |                           N                          |                         Y                        |
+| `ALTER TABLE TTL`              |        Y        |                           N                          |                         Y                        |
+| `ALTER TABLE REMOVE TTL`       |        Y        |                           N                          |                         Y                        |
 
 ## DDLレプリケーションの考慮事項 {#ddl-replication-considerations}
 
