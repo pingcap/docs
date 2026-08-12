@@ -199,4 +199,4 @@ After resolving the issues, run the pre-check again.
 
 ### Zero rows in the imported tables
 
-After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, verify that the **Source Files URI** and manual source patterns match the intended files. Correct the URI or mappings, and then import the tables again.
+After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, verify that the **Source Files URI** is correct and that the source files either follow the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping or match the manual source patterns. Correct the URI, rename the files, or configure manual mappings, and then import the tables again.

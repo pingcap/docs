@@ -132,7 +132,7 @@ Manual file-pattern mapping does not support SQL data files.
 
 </CustomContent>
 
-In the mapping step of the import wizard, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the **Source**, **Target Database**, and **Target Table** fields. The **Source** field accepts a file name pattern relative to the source URI and supports the `*` and `?` wildcards. Add one mapping for each target table.
+In the mapping step of the import wizard, deselect **Use TiDB file naming conventions for automatic mapping**, and then fill in the **Source**, **Target Database**, and **Target Table** fields. The **Source** field accepts a file name pattern relative to the source URI and supports the `*` and `?` wildcards.
 
 <CustomContent plan="premium">
 
