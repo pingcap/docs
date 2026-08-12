@@ -118,9 +118,10 @@ The structure of an `AUTO_RANDOM` value without a signed bit is as follows:
 |-------------|--------|--------------|
 | `64-R` bits | `S` bits | `R-S` bits |
 
-- Whether a value has a signed bit depends on whether the corresponding column has the `UNSIGNED` attribute.
-- The length of the sign bit is determined by the existence of an `UNSIGNED` attribute. If there is an `UNSIGNED` attribute, the length is `0`. Otherwise, the length is `1`.
+- Whether an `AUTO_RANDOM` column has a signed bit depends on whether the column has the `UNSIGNED` attribute. A column without the `UNSIGNED` attribute has one signed bit, while a column with the `UNSIGNED` attribute has no signed bit.
+- Values implicitly allocated to an `AUTO_RANDOM` column are always positive. For columns with a signed bit, the signed bit of implicitly allocated values is always `0`. This rule does not apply to explicitly inserted values.
 - The length of the reserved bits is `64-R`. The reserved bits are always `0`.
+- The auto-increment bits must be at least 27 bits. For signed columns, `R-1-S >= 27` must be satisfied. For unsigned columns, `R-S >= 27` must be satisfied.
 - The content of the shard bits is obtained by calculating the hash value of the starting time of the current transaction. To use a different length of shard bits (such as 10), you can specify `AUTO_RANDOM(10)` when creating the table.
 - The value of the auto-increment bits is stored in the storage engine and allocated sequentially. Each time a new value is allocated, the value is incremented by 1. The auto-increment bits ensure that the values of `AUTO_RANDOM` are unique globally. When the auto-increment bits are exhausted, an error `Failed to read auto-increment value from storage engine` is reported when the value is allocated again.
 - Value range: the maximum number of bits for the final generated value = shard bits + auto-increment bits. The range of a signed column is `[-(2^(R-1))+1, (2^(R-1))-1]`, and the range of an unsigned column is `[0, (2^R)-1]`.
