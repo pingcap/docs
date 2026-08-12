@@ -96,10 +96,12 @@ LIMIT
 
 2.  `${data-path}`ディレクトリにある`metadata`ファイルを確認します。これは、Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要なbinlogの位置情報を記録します。
 
-        SHOW MASTER STATUS:
-        Log: mysql-bin.000004
-        Pos: 109227
-        GTID:
+    ```
+    SHOW MASTER STATUS:
+    Log: mysql-bin.000004
+    Pos: 109227
+    GTID:
+    ```
 
 ## ステップ2. TiDBに全データをインポートする {#step-2-import-full-data-to-tidb}
 

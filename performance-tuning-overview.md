@@ -40,7 +40,9 @@ summary: このドキュメントでは、ユーザー応答時間、スルー�
 
 ユーザー応答時間は、サービス時間、キュー時間、およびユーザー要求を完了するための同時待機時間で構成されます。
 
-    User Response time = Service time + Queuing delay + Coherency delay
+```
+User Response time = Service time + Queuing delay + Coherency delay
+```
 
 -   サービス時間: リクエストを処理するときにシステムが特定のリソースに消費する時間。たとえば、データベースが SQL リクエストを完了するために消費する CPU 時間など。
 -   キューイング遅延: システムが要求を処理するときに、特定のリソースのサービスをキューで待機する時間。

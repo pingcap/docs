@@ -15,17 +15,19 @@ TiDB は、MySQL 8.0 で利用可能な[JSONユーティリティ関数](https:/
 SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')\G
 ```
 
-    *************************** 1. row ***************************
-    JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
-      "person": {
-        "age": 23,
-        "name": {
-          "first": "John",
-          "last": "Doe"
-        }
-      }
+```
+*************************** 1. row ***************************
+JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}'): {
+  "person": {
+    "age": 23,
+    "name": {
+      "first": "John",
+      "last": "Doe"
     }
-    1 row in set (0.00 sec)
+  }
+}
+1 row in set (0.00 sec)
+```
 
 ## `JSON_STORAGE_FREE()` {#json_storage_free}
 
@@ -39,12 +41,14 @@ SELECT JSON_PRETTY('{"person":{"name":{"first":"John","last":"Doe"},"age":23}}')
 SELECT JSON_STORAGE_FREE('{}');
 ```
 
-    +-------------------------+
-    | JSON_STORAGE_FREE('{}') |
-    +-------------------------+
-    |                       0 |
-    +-------------------------+
-    1 row in set (0.00 sec)
+```
++-------------------------+
+| JSON_STORAGE_FREE('{}') |
++-------------------------+
+|                       0 |
++-------------------------+
+1 row in set (0.00 sec)
+```
 
 ## `JSON_STORAGE_SIZE()` {#json_storage_size}
 
@@ -54,12 +58,14 @@ SELECT JSON_STORAGE_FREE('{}');
 SELECT JSON_STORAGE_SIZE('{}');
 ```
 
-    +-------------------------+
-    | JSON_STORAGE_SIZE('{}') |
-    +-------------------------+
-    |                       9 |
-    +-------------------------+
-    1 row in set (0.00 sec)
+```
++-------------------------+
+| JSON_STORAGE_SIZE('{}') |
++-------------------------+
+|                       9 |
++-------------------------+
+1 row in set (0.00 sec)
+```
 
 ## 参照 {#see-also}
 

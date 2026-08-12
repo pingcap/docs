@@ -45,10 +45,12 @@ v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定する�
 start-relay -s mysql-replica-01
 ```
 
-    {
-        "result": true,
-        "msg": ""
-    }
+```
+{
+    "result": true,
+    "msg": ""
+}
+```
 
 </div>
 
@@ -58,7 +60,9 @@ start-relay -s mysql-replica-01
 >
 > DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース設定ファイル内の設定項目`enable-relay`は無効になっており、リレーログの有効化と無効化には`start-relay`と`stop-relay`のみを使用できます。DM は、 [データソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)のときに`enable-relay`が`true`に設定されていることを検出した場合、以下のメッセージを出力します。
 >
->     Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
+> ```
+> Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
+> ```
 
 > **Warning:**
 >
@@ -70,19 +74,23 @@ start-relay -s mysql-replica-01
 start-relay -s mysql-replica-01 worker1 worker2
 ```
 
-    {
-        "result": true,
-        "msg": ""
-    }
+```
+{
+    "result": true,
+    "msg": ""
+}
+```
 
 ```bash
 stop-relay -s mysql-replica-01 worker1 worker2
 ```
 
-    {
-        "result": true,
-        "msg": ""
-    }
+```
+{
+    "result": true,
+    "msg": ""
+}
+```
 
 </div>
 
@@ -105,54 +113,56 @@ query-status -s mysql-replica-01
 
 <details><summary>期待される出力</summary>
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "no sub task started",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker2",
-                    "result": null,
-                    "relayStatus": {
-                        "masterBinlog": "(mysql-bin.000005, 916)",
-                        "masterBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
-                        "relaySubDir": "09bec856-ba95-11ea-850a-58f2b4af5188.000001",
-                        "relayBinlog": "(mysql-bin.000005, 4)",
-                        "relayBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
-                        "relayCatchUpMaster": false,
-                        "stage": "Running",
-                        "result": null
-                    }
-                },
-                "subTaskStatus": [
-                ]
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "no sub task started",
+            "sourceStatus": {
+                "source": "mysql-replica-01",
+                "worker": "worker2",
+                "result": null,
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000005, 916)",
+                    "masterBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
+                    "relaySubDir": "09bec856-ba95-11ea-850a-58f2b4af5188.000001",
+                    "relayBinlog": "(mysql-bin.000005, 4)",
+                    "relayBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
+                    "relayCatchUpMaster": false,
+                    "stage": "Running",
+                    "result": null
+                }
             },
-            {
-                "result": true,
-                "msg": "no sub task started",
-                "sourceStatus": {
-                    "source": "mysql-replica-01",
-                    "worker": "worker1",
-                    "result": null,
-                    "relayStatus": {
-                        "masterBinlog": "(mysql-bin.000005, 916)",
-                        "masterBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
-                        "relaySubDir": "09bec856-ba95-11ea-850a-58f2b4af5188.000001",
-                        "relayBinlog": "(mysql-bin.000005, 916)",
-                        "relayBinlogGtid": "",
-                        "relayCatchUpMaster": true,
-                        "stage": "Running",
-                        "result": null
-                    }
-                },
-                "subTaskStatus": [
-                ]
-            }
-        ]
-    }
+            "subTaskStatus": [
+            ]
+        },
+        {
+            "result": true,
+            "msg": "no sub task started",
+            "sourceStatus": {
+                "source": "mysql-replica-01",
+                "worker": "worker1",
+                "result": null,
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000005, 916)",
+                    "masterBinlogGtid": "09bec856-ba95-11ea-850a-58f2b4af5188:1-28",
+                    "relaySubDir": "09bec856-ba95-11ea-850a-58f2b4af5188.000001",
+                    "relayBinlog": "(mysql-bin.000005, 916)",
+                    "relayBinlogGtid": "",
+                    "relayCatchUpMaster": true,
+                    "stage": "Running",
+                    "result": null
+                }
+            },
+            "subTaskStatus": [
+            ]
+        }
+    ]
+}
+```
 
 </details>
 
@@ -166,25 +176,27 @@ pause-relay -s mysql-replica-01 -s mysql-replica-02
 
 <details><summary>期待される出力</summary>
 
-    {
-        "op": "PauseRelay",
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            },
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
+```
+{
+    "op": "PauseRelay",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        },
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-02",
+            "worker": "worker2"
+        }
+    ]
+}
+```
 
 </details>
 
@@ -194,19 +206,21 @@ resume-relay -s mysql-replica-01
 
 <details><summary>期待される出力</summary>
 
-    {
-        "op": "ResumeRelay",
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            }
-        ]
-    }
+```
+{
+    "op": "ResumeRelay",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "worker1"
+        }
+    ]
+}
+```
 
 </details>
 
@@ -250,25 +264,27 @@ purge:
 
 現在のリレーログのディレクトリ構造が次のようになっていると仮定します。
 
-    $ tree .
-    .
-    |-- deb76a2b-09cc-11e9-9129-5242cf3bb246.000001
-    |   |-- mysql-bin.000001
-    |   |-- mysql-bin.000002
-    |   |-- mysql-bin.000003
-    |   `-- relay.meta
-    |-- deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
-    |   |-- mysql-bin.000001
-    |   `-- relay.meta
-    |-- e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
-    |   |-- mysql-bin.000001
-    |   `-- relay.meta
-    `-- server-uuid.index
+```
+$ tree .
+.
+|-- deb76a2b-09cc-11e9-9129-5242cf3bb246.000001
+|   |-- mysql-bin.000001
+|   |-- mysql-bin.000002
+|   |-- mysql-bin.000003
+|   `-- relay.meta
+|-- deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
+|   |-- mysql-bin.000001
+|   `-- relay.meta
+|-- e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
+|   |-- mysql-bin.000001
+|   `-- relay.meta
+`-- server-uuid.index
 
-    $ cat server-uuid.index
-    deb76a2b-09cc-11e9-9129-5242cf3bb246.000001
-    e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
-    deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
+$ cat server-uuid.index
+deb76a2b-09cc-11e9-9129-5242cf3bb246.000001
+e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
+deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
+```
 
 -   dmctl で次の`purge-relay`コマンドを実行すると、 `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`**より前の**すべてのリレーログファイル（つまり`deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`のすべてのリレーログファイル）が削除されます。 `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`と`deb76a2b-09cc-11e9-9129-5242cf3bb246.000003`のファイルは保持されます。
 
@@ -290,17 +306,19 @@ purge:
 
 リレーログのローカルストレージのディレクトリ構造の例:
 
-    <deploy_dir>/<relay_log>/
-    |-- 7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001
-    |   |-- mysql-bin.000001
-    |   |-- mysql-bin.000002
-    |   |-- mysql-bin.000003
-    |   |-- mysql-bin.000004
-    |   `-- relay.meta
-    |-- 842965eb-091c-11e9-9e45-9a3bff03fa39.000002
-    |   |-- mysql-bin.000001
-    |   `-- relay.meta
-    `-- server-uuid.index
+```
+<deploy_dir>/<relay_log>/
+|-- 7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001
+|   |-- mysql-bin.000001
+|   |-- mysql-bin.000002
+|   |-- mysql-bin.000003
+|   |-- mysql-bin.000004
+|   `-- relay.meta
+|-- 842965eb-091c-11e9-9e45-9a3bff03fa39.000002
+|   |-- mysql-bin.000001
+|   `-- relay.meta
+`-- server-uuid.index
+```
 
 -   `subdir` :
 
@@ -320,9 +338,11 @@ purge:
     cat c0149e17-dff1-11e8-b6a8-0242ac110004.000001/relay.meta
     ```
 
-        binlog-name = "mysql-bin.000010"                            # The name of the currently migrated binlog.
-        binlog-pos = 63083620                                       # The position of the currently migrated binlog.
-        binlog-gtid = "c0149e17-dff1-11e8-b6a8-0242ac110004:1-3328" # GTID of the currently migrated binlog.
+    ```
+    binlog-name = "mysql-bin.000010"                            # The name of the currently migrated binlog.
+    binlog-pos = 63083620                                       # The position of the currently migrated binlog.
+    binlog-gtid = "c0149e17-dff1-11e8-b6a8-0242ac110004:1-3328" # GTID of the currently migrated binlog.
+    ```
 
     複数の GTID が存在する場合もあります。
 
@@ -330,9 +350,11 @@ purge:
     cat 92acbd8a-c844-11e7-94a1-1866daf8accc.000001/relay.meta
     ```
 
-        binlog-name = "mysql-bin.018393"
-        binlog-pos = 277987307
-        binlog-gtid = "3ccc475b-2343-11e7-be21-6c0b84d59f30:1-14,406a3f61-690d-11e7-87c5-6c92bf46f384:1-94321383,53bfca22-690d-11e7-8a62-18ded7a37b78:1-495,686e1ab6-c47e-11e7-a42c-6c92bf46f384:1-34981190,03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170,10b039fc-c843-11e7-8f6a-1866daf8d810:1-308290454"
+    ```
+    binlog-name = "mysql-bin.018393"
+    binlog-pos = 277987307
+    binlog-gtid = "3ccc475b-2343-11e7-be21-6c0b84d59f30:1-14,406a3f61-690d-11e7-87c5-6c92bf46f384:1-94321383,53bfca22-690d-11e7-8a62-18ded7a37b78:1-495,686e1ab6-c47e-11e7-a42c-6c92bf46f384:1-34981190,03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170,10b039fc-c843-11e7-8f6a-1866daf8d810:1-308290454"
+    ```
 
 ### DMがbinlogを受信する位置 {#the-position-where-dm-receives-the-binlog}
 

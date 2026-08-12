@@ -46,7 +46,9 @@ SQL の配置ルール機能を使用すると、[配置ポリシーを作成し
 
 配置ポリシーを作成する際、TiDB はポリシーで指定されたラベルが存在するかどうかをチェックしません。代わりに、TiDB はポリシーをアタッチする際にチェックを実行します。したがって、配置ポリシーをアタッチする前に、各 TiKV ノードに正しいラベルが設定されていることを確認してください。TiDB Self-Managed クラスタの構成方法は以下のとおりです。
 
-    tikv-server --labels region=<region>,zone=<zone>,host=<host>
+```
+tikv-server --labels region=<region>,zone=<zone>,host=<host>
+```
 
 詳細な設定方法については、以下の例を参照してください。
 

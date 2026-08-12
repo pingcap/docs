@@ -195,10 +195,12 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
         2.  TiKV 構成ファイルを編集して、次の 3 つの環境変数を構成します。
 
-                [Service]
-                Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-                Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-                Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ```
+            [Service]
+            Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ```
 
         3.  設定を再読み込みし、TiKV を再起動します。
 

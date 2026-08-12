@@ -375,7 +375,9 @@ TiDB での SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute`
 
 アプリケーションが`query`または`StmtExecute` MySQL コマンド インターフェイスのみを使用する場合は、次の式を使用して平均レイテンシーのボトルネックを特定できます。
 
-    avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration + avg Execute Duration
+```
+avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration + avg Execute Duration
+```
 
 通常、 `query`レイテンシーのうち、`execute`フェーズが大部分を占めます。ただし、以下の場合には、`parse`フェーズと`compile`フェーズも大きな割合を占めることがあります。
 
@@ -416,7 +418,9 @@ TSO待機時間は`TSO WAIT`と記録され、TSO要求のネットワーク時�
 
 `Avg TiDB KV Request Duration`と`Avg TiKV GRPC Duration`の関係は以下のとおりです。
 
-    Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between TiDB and TiKV + TiKV gRPC processing time + TiDB gRPC processing time and scheduling latency
+```
+Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between TiDB and TiKV + TiKV gRPC processing time + TiDB gRPC processing time and scheduling latency
+```
 
 `Avg TiDB KV Request Duration`と`Avg TiKV GRPC Duration`の違いは、ネットワーク トラフィック、ネットワークレイテンシー、および TiDB と TiKV によるリソース使用量に密接に関係しています。
 
@@ -459,7 +463,9 @@ TiKV は次の手順で書き込み要求を処理します。
 
 `Storage Async Write Duration`メトリックは`Store Duration`と`Apply Duration` 2 つの部分で構成されます。次の式を使用して、書き込みリクエストのボトルネックが`Store`または`Apply`どちらのステップにあるかを判断できます。
 
-    avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
+```
+avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
+```
 
 > **Note:**
 >

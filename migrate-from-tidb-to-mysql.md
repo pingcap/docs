@@ -64,7 +64,9 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
@@ -72,12 +74,14 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-        +-------------------------+
-        | @@global.tidb_gc_enable |
-        +-------------------------+
-        |                       0 |
-        +-------------------------+
-        1 row in set (0.00 sec)
+    ```
+    +-------------------------+
+    | @@global.tidb_gc_enable |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 2.  データをバックアップします。
 
@@ -93,12 +97,14 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
         cat dumpling_output/metadata
         ```
 
-            Started dump at: 2022-06-28 17:49:54
-            SHOW MASTER STATUS:
-                    Log: tidb-binlog
-                    Pos: 434217889191428107
-                    GTID:
-            Finished dump at: 2022-06-28 17:49:57
+        ```
+        Started dump at: 2022-06-28 17:49:54
+        SHOW MASTER STATUS:
+                Log: tidb-binlog
+                Pos: 434217889191428107
+                GTID:
+        Finished dump at: 2022-06-28 17:49:57
+        ```
 
 3.  データを復元します。
 
@@ -176,7 +182,9 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
@@ -184,12 +192,14 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-        +-------------------------+
-        | @@global.tidb_gc_enable |
-        +-------------------------+
-        |                       1 |
-        +-------------------------+
-        1 row in set (0.00 sec)
+    ```
+    +-------------------------+
+    | @@global.tidb_gc_enable |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 ## ステップ4. サービスの移行 {#step-4-migrate-services}
 
@@ -204,16 +214,18 @@ summary: TiDB から MySQL 互換データベースにデータを移行する�
     tiup cdc cli changefeed list
     ```
 
-        [
-          {
-            "id": "upstream-to-downstream",
-            "summary": {
-            "state": "stopped",  # Ensure that the status is stopped
-            "tso": 434218657561968641,
-            "checkpoint": "2022-06-28 18:38:45.685", # This time should be later than the time of stopping writing
-            "error": null
-            }
-          }
-        ]
+    ```
+    [
+      {
+        "id": "upstream-to-downstream",
+        "summary": {
+        "state": "stopped",  # Ensure that the status is stopped
+        "tso": 434218657561968641,
+        "checkpoint": "2022-06-28 18:38:45.685", # This time should be later than the time of stopping writing
+        "error": null
+        }
+      }
+    ]
+    ```
 
 2.  書き込みサービスを下流クラスターに移行した後、しばらく観察します。下流クラスターが安定している場合は、上流クラスターを破棄できます。

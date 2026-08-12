@@ -110,26 +110,30 @@ CREATE USER 'u1'@'%' REQUIRE X509;
 SHOW STATUS LIKE "Ssl%";
 ```
 
-    +-----------------------+------------------------------------------------------->
-    | Variable_name         | Value                                                 >
-    +-----------------------+------------------------------------------------------->
-    | Ssl_cipher            | TLS_AES_128_GCM_SHA256                                >
-    | Ssl_cipher_list       | RC4-SHA:DES-CBC3-SHA:AES128-SHA:AES256-SHA:AES128-SHA2>
-    | Ssl_server_not_after  | Apr 23 07:59:47 2024 UTC                              >
-    | Ssl_server_not_before | Jan 24 07:59:47 2024 UTC                              >
-    | Ssl_verify_mode       | 5                                                     >
-    | Ssl_version           | TLSv1.3                                               >
-    +-----------------------+------------------------------------------------------->
-    6 rows in set (0.0062 sec)
+```
++-----------------------+------------------------------------------------------->
+| Variable_name         | Value                                                 >
++-----------------------+------------------------------------------------------->
+| Ssl_cipher            | TLS_AES_128_GCM_SHA256                                >
+| Ssl_cipher_list       | RC4-SHA:DES-CBC3-SHA:AES128-SHA:AES256-SHA:AES128-SHA2>
+| Ssl_server_not_after  | Apr 23 07:59:47 2024 UTC                              >
+| Ssl_server_not_before | Jan 24 07:59:47 2024 UTC                              >
+| Ssl_verify_mode       | 5                                                     >
+| Ssl_version           | TLSv1.3                                               >
++-----------------------+------------------------------------------------------->
+6 rows in set (0.0062 sec)
+```
 
 `Ssl_cipher`の値が空でない場合、接続は暗号化されます。
 
 公式のMySQLクライアントでは、 `STATUS`または`\s`ステートメントを使用して接続ステータスを表示することもできます。
 
-    mysql> \s
-    ...
-    SSL: Cipher in use is TLS_AES_128_GCM_SHA256
-    ...
+```
+mysql> \s
+...
+SSL: Cipher in use is TLS_AES_128_GCM_SHA256
+...
+```
 
 ## サポートされているTLSバージョン、鍵交換プロトコル、および暗号化アルゴリズム {#supported-tls-versions-key-exchange-protocols-and-encryption-algorithms}
 
@@ -183,13 +187,15 @@ TiDB v5.2.0以降では、 `Ssl_server_not_after`および`Ssl_server_not_before
 SHOW GLOBAL STATUS LIKE 'Ssl\_server\_not\_%';
 ```
 
-    +-----------------------+--------------------------+
-    | Variable_name         | Value                    |
-    +-----------------------+--------------------------+
-    | Ssl_server_not_after  | Nov 28 06:42:32 2021 UTC |
-    | Ssl_server_not_before | Aug 30 06:42:32 2021 UTC |
-    +-----------------------+--------------------------+
-    2 rows in set (0.0076 sec)
+```
++-----------------------+--------------------------+
+| Variable_name         | Value                    |
++-----------------------+--------------------------+
+| Ssl_server_not_after  | Nov 28 06:42:32 2021 UTC |
+| Ssl_server_not_before | Aug 30 06:42:32 2021 UTC |
++-----------------------+--------------------------+
+2 rows in set (0.0076 sec)
+```
 
 ## 関連項目 {#see-also}
 

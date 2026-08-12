@@ -24,38 +24,40 @@ TiUP DMコンポーネントのヘルプ情報については、次のコマン�
 tiup dm --help
 ```
 
-    Deploy a DM cluster for production
+```
+Deploy a DM cluster for production
 
-    Usage:
-      tiup dm [flags]
-      tiup dm [command]
+Usage:
+  tiup dm [flags]
+  tiup dm [command]
 
-    Available Commands:
-      deploy      Deploy a DM cluster for production
-      start       Start a DM cluster
-      stop        Stop a DM cluster
-      restart     Restart a DM cluster
-      list        List all clusters
-      destroy     Destroy a specified DM cluster
-      audit       Show audit log of cluster operation
-      exec        Run shell command on host in the dm cluster
-      edit-config Edit DM cluster config
-      display     Display information of a DM cluster
-      reload      Reload a DM cluster's config and restart if needed
-      upgrade     Upgrade a specified DM cluster
-      patch       Replace the remote package with a specified package and restart the service
-      scale-out   Scale out a DM cluster
-      scale-in    Scale in a DM cluster
-      import      Import an exist DM 1.0 cluster from dm-ansible and re-deploy 2.0 version
-      help        Help about any command
+Available Commands:
+  deploy      Deploy a DM cluster for production
+  start       Start a DM cluster
+  stop        Stop a DM cluster
+  restart     Restart a DM cluster
+  list        List all clusters
+  destroy     Destroy a specified DM cluster
+  audit       Show audit log of cluster operation
+  exec        Run shell command on host in the dm cluster
+  edit-config Edit DM cluster config
+  display     Display information of a DM cluster
+  reload      Reload a DM cluster's config and restart if needed
+  upgrade     Upgrade a specified DM cluster
+  patch       Replace the remote package with a specified package and restart the service
+  scale-out   Scale out a DM cluster
+  scale-in    Scale in a DM cluster
+  import      Import an exist DM 1.0 cluster from dm-ansible and re-deploy 2.0 version
+  help        Help about any command
 
-    Flags:
-      -h, --help               help for tiup-dm
-          --native-ssh         Use the native SSH client installed on local system instead of the build-in one.
-          --ssh-timeout int    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-      -v, --version            version for tiup-dm
-          --wait-timeout int   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 60)
-      -y, --yes                Skip all confirmations and assumes 'yes'
+Flags:
+  -h, --help               help for tiup-dm
+      --native-ssh         Use the native SSH client installed on local system instead of the build-in one.
+      --ssh-timeout int    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -v, --version            version for tiup-dm
+      --wait-timeout int   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 60)
+  -y, --yes                Skip all confirmations and assumes 'yes'
+```
 
 ## クラスターリストを確認する {#view-the-cluster-list}
 
@@ -65,9 +67,11 @@ tiup dm --help
 tiup dm list
 ```
 
-    Name  User  Version  Path                                  PrivateKey
-    ----  ----  -------  ----                                  ----------
-    prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
+```
+Name  User  Version  Path                                  PrivateKey
+----  ----  -------  ----                                  ----------
+prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
+```
 
 ## クラスターを起動する {#start-the-cluster}
 
@@ -87,19 +91,21 @@ TiUPは、クラスタ内の各コンポーネントのステータスを表示�
 tiup dm display prod-cluster
 ```
 
-    dm Cluster: prod-cluster
-    dm Version: ${version}
-    ID                 Role          Host          Ports      OS/Arch       Status     Data Dir                           Deploy Dir
-    --                 ----          ----          -----      -------       ------     --------                           ----------
-    172.19.0.101:9093  alertmanager  172.19.0.101  9093/9094  linux/x86_64  Up         /home/tidb/data/alertmanager-9093  /home/tidb/deploy/alertmanager-9093
-    172.19.0.101:8261  dm-master     172.19.0.101  8261/8291  linux/x86_64  Healthy|L  /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
-    172.19.0.102:8261  dm-master     172.19.0.102  8261/8291  linux/x86_64  Healthy    /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
-    172.19.0.103:8261  dm-master     172.19.0.103  8261/8291  linux/x86_64  Healthy    /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
-    172.19.0.101:8262  dm-worker     172.19.0.101  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
-    172.19.0.102:8262  dm-worker     172.19.0.102  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
-    172.19.0.103:8262  dm-worker     172.19.0.103  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
-    172.19.0.101:3000  grafana       172.19.0.101  3000       linux/x86_64  Up         -                                  /home/tidb/deploy/grafana-3000
-    172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
+```
+dm Cluster: prod-cluster
+dm Version: ${version}
+ID                 Role          Host          Ports      OS/Arch       Status     Data Dir                           Deploy Dir
+--                 ----          ----          -----      -------       ------     --------                           ----------
+172.19.0.101:9093  alertmanager  172.19.0.101  9093/9094  linux/x86_64  Up         /home/tidb/data/alertmanager-9093  /home/tidb/deploy/alertmanager-9093
+172.19.0.101:8261  dm-master     172.19.0.101  8261/8291  linux/x86_64  Healthy|L  /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
+172.19.0.102:8261  dm-master     172.19.0.102  8261/8291  linux/x86_64  Healthy    /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
+172.19.0.103:8261  dm-master     172.19.0.103  8261/8291  linux/x86_64  Healthy    /home/tidb/data/dm-master-8261     /home/tidb/deploy/dm-master-8261
+172.19.0.101:8262  dm-worker     172.19.0.101  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
+172.19.0.102:8262  dm-worker     172.19.0.102  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
+172.19.0.103:8262  dm-worker     172.19.0.103  8262       linux/x86_64  Free       /home/tidb/data/dm-worker-8262     /home/tidb/deploy/dm-worker-8262
+172.19.0.101:3000  grafana       172.19.0.101  3000       linux/x86_64  Up         -                                  /home/tidb/deploy/grafana-3000
+172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
+```
 
 `Status`列では、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
@@ -207,23 +213,25 @@ tiup dm reload prod-cluster
 tiup dm patch --help
 ```
 
-    Replace the remote package with a specified package and restart the service
+```
+Replace the remote package with a specified package and restart the service
 
-    Usage:
-      tiup dm patch <cluster-name> <package-path> [flags]
+Usage:
+  tiup dm patch <cluster-name> <package-path> [flags]
 
-    Flags:
-      -h, --help                   help for patch
-      -N, --node strings           Specify the nodes
-          --overwrite              Use this package in the future scale-out operations
-      -R, --role strings           Specify the role
-          --transfer-timeout int   Timeout in seconds when transferring dm-master leaders (default 600)
+Flags:
+  -h, --help                   help for patch
+  -N, --node strings           Specify the nodes
+      --overwrite              Use this package in the future scale-out operations
+  -R, --role strings           Specify the role
+      --transfer-timeout int   Timeout in seconds when transferring dm-master leaders (default 600)
 
-    Global Flags:
-          --native-ssh         Use the native SSH client installed on local system instead of the build-in one.
-          --ssh-timeout int    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-          --wait-timeout int   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 60)
-      -y, --yes                Skip all confirmations and assumes 'yes'
+Global Flags:
+      --native-ssh         Use the native SSH client installed on local system instead of the build-in one.
+      --ssh-timeout int    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+      --wait-timeout int   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 60)
+  -y, --yes                Skip all confirmations and assumes 'yes'
+```
 
 DM マスター ホットフィックス パッケージが`/tmp/dm-master-hotfix.tar.gz`にあり、クラスター内のすべての DM マスター パッケージを置き換える場合は、次のコマンドを実行します。
 
@@ -285,11 +293,13 @@ Flags:
 tiup dm audit
 ```
 
-    ID      Time                  Command
-    --      ----                  -------
-    4D5kQY  2020-08-13T05:38:19Z  tiup dm display test
-    4D5kNv  2020-08-13T05:36:13Z  tiup dm list
-    4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
+```
+ID      Time                  Command
+--      ----                  -------
+4D5kQY  2020-08-13T05:38:19Z  tiup dm display test
+4D5kNv  2020-08-13T05:36:13Z  tiup dm list
+4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
+```
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`引数を渡します。
 
@@ -331,7 +341,9 @@ tiup dmctl [args]
 
 dmctlのバージョンを指定します。このコマンドを実行する前に、 `${version}`を必要なバージョンに変更してください。
 
-    tiup dmctl:${version} [args]
+```
+tiup dmctl:${version} [args]
+```
 
 以前のdmctlコマンドでソースを追加するには`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`を使用します。dmctlがTiUPに統合された後は、コマンドは以下のようになります。
 
