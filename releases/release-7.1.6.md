@@ -109,7 +109,7 @@ TiDB バージョン: 7.1.6
     -   照合順序が`utf8_bin`または`utf8mb4_bin` の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [＃53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     -   `UPDATE`または`DELETE`ステートメントに再帰 CTE が含まれている場合、ステートメントがエラーを報告したり、 が有効にならない可能性がある問題を修正しました。 [＃55666](https://github.com/pingcap/tidb/issues/55666) @[time-and-fate](https://github.com/time-and-fate)
     -   相関サブクエリと CTE を含むクエリを実行すると、TiDB がハングしたり、誤った結果が返されたりする問題を修正しました。 [＃55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
-    -   統計を初期化するときに、非バイナリ照合の文字列列の統計の読み込みに失敗する可能性がある問題を修正しました。 [＃55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
+    -   統計を初期化するときに、非バイナリ照合順序の文字列列の統計の読み込みに失敗する可能性がある問題を修正しました。 [＃55684](https://github.com/pingcap/tidb/issues/55684) @[winoros](https://github.com/winoros)
     -   IndexJoin が Left Outer Anti Semi type のハッシュ値を計算するときに重複行を生成する問題を修正しました。 [＃52902](https://github.com/pingcap/tidb/issues/52902) @[yibin87](https://github.com/yibin87)
     -   `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [＃52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
     -   `StreamAggExec`分の`groupOffset`空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [＃53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)

@@ -124,7 +124,7 @@ TiDB バージョン: 7.5.2
     -   相関サブクエリにおける TopN 演算子の誤った結果を修正 [＃52777](https://github.com/pingcap/tidb/issues/52777) @[yibin87](https://github.com/yibin87)
     -   `CPS by type`メトリックに誤った値が表示される問題を修正しました [＃52605](https://github.com/pingcap/tidb/issues/52605) @[nolouch](https://github.com/nolouch)
     -   特定の列の統計情報が完全にロードされていない場合に、 `EXPLAIN`ステートメントの結果に誤った列 ID が表示される可能性がある問題を修正しました[＃52207](https://github.com/pingcap/tidb/issues/52207) @[time-and-fate](https://github.com/time-and-fate)
-    -   照合の新しいフレームワークが無効になっているときに、異なる照合を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
+    -   照合順序の新しいフレームワークが無効になっているときに、異なる照合順序を含む式によってクエリがpanicになる可能性がある問題を修正しました[＃52772](https://github.com/pingcap/tidb/issues/52772) @[wjhuang2016](https://github.com/wjhuang2016)
     -   複数値インデックスを持つテーブルを含むSQL文を実行すると、 `Can't find a proper physical plan for this query`エラーが返される可能性がある問題を修正しました。 [＃49438](https://github.com/pingcap/tidb/issues/49438) @[qw4990](https://github.com/qw4990)
     -   TiDBが式内のシステム変数の型を正しく変換できない問題を修正 [＃43527](https://github.com/pingcap/tidb/issues/43527) @[Rustin170506](https://github.com/Rustin170506)
     -   `INSERT IGNORE`を実行すると、一意インデックスとデータの間に不整合が発生する可能性がある問題を修正しました。 [＃51784](https://github.com/pingcap/tidb/issues/51784) @[wjhuang2016](https://github.com/wjhuang2016)

@@ -95,7 +95,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
 
     -   分散ストレージおよびコンピューティングアーキテクチャにおいて、新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
     -   メモリ使用量が低い場合、 TiFlash がRaftメッセージの処理を予期せず拒否する可能性がある問題を修正 [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
-    -   TiFlashの`POSITION()`関数が文字セット照合をサポートしていない問題を修正 [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    -   TiFlashの`POSITION()`関数が文字セット照合順序をサポートしていない問題を修正 [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 -   ツール
 
