@@ -3,9 +3,9 @@ title: MEMORY_USAGE
 summary: MEMORY_USAGE` information_schema システム テーブルについて学習します。
 ---
 
-# メモリ使用量 {#memory-usage}
+# MEMORY_USAGE {#memory-usage}
 
-`MEMORY_USAGE`テーブルは、現在の TiDB インスタンスの現在のメモリ使用量を示します。
+`MEMORY_USAGE`テーブルは、現在の TiDB インスタンスのメモリ使用量を示します。
 
 ```sql
 USE information_schema;

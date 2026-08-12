@@ -3,9 +3,9 @@ title: CLIENT_ERRORS_SUMMARY_GLOBAL
 summary: CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# クライアントエラー概要グローバル {#client-errors-summary-global}
+# CLIENT_ERRORS_SUMMARY_GLOBAL {#client-errors-summary-global}
 
-表`CLIENT_ERRORS_SUMMARY_GLOBAL` 、TiDBサーバーに接続したクライアントに返されたすべてのSQLエラーと警告のグローバルサマリーを示しています。これには以下が含まれます。
+表`CLIENT_ERRORS_SUMMARY_GLOBAL`は、TiDBサーバーに接続したクライアントに返されたすべてのSQLエラーと警告のグローバルサマリーを示しています。これには以下が含まれます。
 
 -   不正な SQL ステートメント。
 -   ゼロ除算エラー。

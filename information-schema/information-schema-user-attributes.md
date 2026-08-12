@@ -3,7 +3,7 @@ title: USER_ATTRIBUTES
 summary: USER_ATTRIBUTES` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# ユーザー属性 {#user-attributes}
+# USER_ATTRIBUTES {#user-attributes}
 
 `USER_PRIVILEGES`テーブルは、ユーザーのコメントとユーザー属性に関する情報を提供します。この情報は`mysql.user`システムテーブルから取得されます。
 

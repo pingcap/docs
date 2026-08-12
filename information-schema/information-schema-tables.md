@@ -3,7 +3,7 @@ title: TABLES
 summary: TABLES` information_schema テーブルについて学習します。
 ---
 
-# テーブル {#tables}
+# TABLES {#tables}
 
 `TABLES`テーブルは、データベース内のテーブルに関する情報を提供します。
 

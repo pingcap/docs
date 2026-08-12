@@ -3,7 +3,7 @@ title: METRICS_TABLES
 summary: METRICS_TABLES` システム テーブルについて学習します。
 ---
 
-# メトリクステーブル {#metrics-tables}
+# METRICS_TABLES {#metrics-tables}
 
 `METRICS_TABLES`テーブルは[`METRICS_SCHEMA`](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus クエリ言語) 定義を提供します。
 

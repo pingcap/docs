@@ -3,7 +3,7 @@ title: PLACEMENT_POLICIES
 summary: PLACEMENT_POLICIES`情報スキーマテーブルについて学習してください。
 ---
 
-# 配置方針 {#placement-policies}
+# PLACEMENT_POLICIES {#placement-policies}
 
 `PLACEMENT_POLICIES`テーブルには、すべての配置ポリシーに関する情報が提供されます。詳細については、 [SQLにおける配置ルール](/placement-rules-in-sql.md)を参照してください。
 

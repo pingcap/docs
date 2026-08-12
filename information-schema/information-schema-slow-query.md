@@ -3,7 +3,7 @@ title: SLOW_QUERY
 summary: SLOW_QUERY` INFORMATION_SCHEMA テーブルについて学習してください。
 ---
 
-# スロークエリ {#slow_query}
+# SLOW_QUERY {#slow_query}
 
 <CustomContent platform="tidb">
 

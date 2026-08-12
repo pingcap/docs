@@ -3,7 +3,7 @@ title: VARIABLES_INFO
 summary: VARIABLES_INFO` information_schema テーブルについて学習します。
 ---
 
-# 変数情報 {#variables-info}
+# VARIABLES_INFO {#variables-info}
 
 `VARIABLES_INFO`テーブルには、現在の TiDB インスタンスまたは TiDB クラスターの[システム変数](/system-variables.md)のデフォルト値、現在の値、およびスコープに関する情報が提供されます。
 

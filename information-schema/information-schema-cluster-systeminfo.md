@@ -3,9 +3,9 @@ title: CLUSTER_SYSTEMINFO
 summary: CLUSTER_SYSTEMINFO` カーネル パラメータ テーブルについて学習します。
 ---
 
-# クラスターシステム情報 {#cluster-systeminfo}
+# CLUSTER_SYSTEMINFO {#cluster-systeminfo}
 
-`CLUSTER_SYSTEMINFO`カーネルパラメータテーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`システムの情報を照会できます。
+`CLUSTER_SYSTEMINFO`テーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`システムの情報を照会できます。
 
 > **Note:**
 >

@@ -3,7 +3,7 @@ title: INSPECTION_RULES
 summary: INSPECTION_RULES` information_schema テーブルについて学習します。
 ---
 
-# 検査ルール {#inspection-rules}
+# INSPECTION_RULES {#inspection-rules}
 
 `INSPECTION_RULES`表は、検査結果で実行される診断テストに関する情報を提供します。使用例については[検査結果](/information-schema/information-schema-inspection-result.md)を参照してください。
 

@@ -3,7 +3,7 @@ title: VIEWS
 summary: VIEWS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# ビュー {#views}
+# VIEWS {#views}
 
 `VIEWS`表には[SQLビュー](/views.md)に関する情報が示されています。
 

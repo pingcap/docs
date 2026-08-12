@@ -3,7 +3,7 @@ title: KEYWORDS
 summary: KEYWORDS` INFORMATION_SCHEMA テーブルについて学習します。
 ---
 
-# キーワード {#keywords}
+# KEYWORDS {#keywords}
 
 v7.5.3およびv7.6.0以降、TiDBは`KEYWORDS`テーブルを提供します。このテーブルを使用して、TiDBの[キーワード](/keywords.md)に関する情報を取得できます。
 

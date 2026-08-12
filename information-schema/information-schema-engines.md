@@ -3,7 +3,7 @@ title: ENGINES
 summary: ENGINES` information_schema テーブルについて学習します。
 ---
 
-# エンジン {#engines}
+# ENGINES {#engines}
 
 `ENGINES`テーブルはストレージエンジンに関する情報を提供します。互換性のため、TiDB は常に InnoDB のみをサポートするエンジンとして記述します。また、 `ENGINES`テーブルの他の列の値も固定値です。
 
