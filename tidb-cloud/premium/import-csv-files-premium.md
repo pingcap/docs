@@ -32,7 +32,7 @@ To ensure data consistency, {{{ .premium }}} allows importing CSV files into emp
     >
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files) to import your source data to a single target table.
+    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and configure manual source-to-target mappings in [Step 4](#step-4-import-csv-files).
 
 ## Step 2. Create the target table schemas
 
@@ -205,10 +205,10 @@ If you get an importing error, do the following:
 
 ### Resolve warnings during data import
 
-After clicking **Start Import**, if you see a warning message such as `can't find the corresponding source files`, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+If the pre-check shows a warning such as `can't find the corresponding source files`, resolve it by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or returning to **Source Files Mapping** and configuring manual mappings.
 
-After resolving these issues, you need to import the data again.
+After resolving the issues, run the pre-check again.
 
 ### Zero rows in the imported tables
 
-After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, it means no data files matched the Bucket URI that you entered. In this case, resolve this issue by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, import those tables again.
+After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, verify that the **Source Files URI** and manual source patterns match the intended files. Correct the URI or mappings, and then import the tables again.
