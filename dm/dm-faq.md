@@ -53,7 +53,9 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ## `online-ddl: true`を設定した後、gh-ost テーブルに関連する DDL 操作によって返されたエラーをどのように処理しますか? {#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set}
 
-    [unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
+```
+[unit=Sync] ["error information"="{\"msg\":\"[code=36046:class=sync-unit:scope=internal:level=high] online ddls on ghost table `xxx`.`_xxxx_gho`\\ngithub.com/pingcap/tiflow/pkg/terror.(*Error).Generate ......
+```
 
 上記のエラーは、以下の理由により発生する可能性があります。
 
@@ -183,7 +185,9 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 場合によっては、エラー メッセージに`parse statement`情報が含まれます。次に例を示します。
 
-    if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
+```
+if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
+```
 
 このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定することができます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
 
@@ -250,77 +254,79 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 1.  ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
 2.  アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
-<!---->
-
-    mysql> show binlog events in 'mysql-bin.000005' limit 2;
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-    | Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
-    | mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
-    | mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
-    +------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+```
+mysql> show binlog events in 'mysql-bin.000005' limit 2;
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+| Log_name         | Pos  | Event_type     | Server_id | End_log_pos | Info                                                               |
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+| mysql-bin.000005 |    4 | Format_desc    |    123452 |         123 | Server ver: 5.7.32-35-log, Binlog ver: 4                           |
+| mysql-bin.000005 |  123 | Previous_gtids |    123452 |         194 | d3618e68-6052-11eb-a68b-0242ac110002:6-7                           |
++------------------+------+----------------+-----------+-------------+--------------------------------------------------------------------+
+```
 
 このバグは、dmctlで`query-status <task>`を実行してタスク情報を照会した際に、 `subTaskStatus.sync.syncerBinlogGtid`が連続していないのに`subTaskStatus.sync.masterBinlogGtid`が連続していることがわかった場合に発生します。次の例をご覧ください。
 
-    query-status test
-    {
-        ...
-        "sources": [
-            {
+```
+query-status test
+{
+    ...
+    "sources": [
+        {
+            ...
+            "sourceStatus": {
+                "source": "mysql1",
                 ...
-                "sourceStatus": {
-                    "source": "mysql1",
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000006, 744)",
+                    "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
                     ...
-                    "relayStatus": {
+                }
+            },
+            "subTaskStatus": [
+                {
+                    ...
+                    "sync": {
+                        ...
                         "masterBinlog": "(mysql-bin.000006, 744)",
                         "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
+                        "syncerBinlog": "(mysql-bin|000001.000006, 738)",
+                        "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
                         ...
+                        "synced": false,
+                        "binlogType": "local"
                     }
-                },
-                "subTaskStatus": [
-                    {
-                        ...
-                        "sync": {
-                            ...
-                            "masterBinlog": "(mysql-bin.000006, 744)",
-                            "masterBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-50",
-                            "syncerBinlog": "(mysql-bin|000001.000006, 738)",
-                            "syncerBinlogGtid": "f8004e25-6067-11eb-9fa3-0242ac110003:1-20:40-49",
-                            ...
-                            "synced": false,
-                            "binlogType": "local"
-                        }
-                    }
-                ]
-            },
-            {
+                }
+            ]
+        },
+        {
+            ...
+            "sourceStatus": {
+                "source": "mysql2",
                 ...
-                "sourceStatus": {
-                    "source": "mysql2",
+                "relayStatus": {
+                    "masterBinlog": "(mysql-bin.000007, 1979)",
+                    "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
                     ...
-                    "relayStatus": {
+                }
+            },
+            "subTaskStatus": [
+                {
+                    ...
+                    "sync": {
                         "masterBinlog": "(mysql-bin.000007, 1979)",
                         "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
+                        "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
+                        "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
                         ...
+                        "synced": true,
+                        "binlogType": "local"
                     }
-                },
-                "subTaskStatus": [
-                    {
-                        ...
-                        "sync": {
-                            "masterBinlog": "(mysql-bin.000007, 1979)",
-                            "masterBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                            "syncerBinlog": "(mysql-bin|000001.000008, 1979)",
-                            "syncerBinlogGtid": "ddb8974e-6064-11eb-8357-0242ac110002:1-25",
-                            ...
-                            "synced": true,
-                            "binlogType": "local"
-                        }
-                    }
-                ]
-            }
-        ]
-    }
+                }
+            ]
+        }
+    ]
+}
+```
 
 この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
@@ -370,7 +376,9 @@ dmctl execute コマンドを使用すると、DM マスターへの接続に失
 
 ## DM バージョン 2.0.2 から 2.0.6 で start-relay コマンドを実行したときに返されるエラーを処理するにはどうすればよいですか? {#how-to-handle-the-returned-error-when-executing-start-relay-command-for-dm-versions-from-202-to-206}
 
-    flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
+```
+flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such file or directory
+```
 
 上記のエラーは次の場合に発生する可能性があります。
 
@@ -381,8 +389,10 @@ dmctl execute コマンドを使用すると、DM マスターへの接続に失
 
 -   リレーログを再起動:
 
-        » stop-relay -s sourceID workerName
-        » start-relay -s sourceID workerName
+    ```
+    » stop-relay -s sourceID workerName
+    » start-relay -s sourceID workerName
+    ```
 
 -   DM を v2.0.7 以降のバージョンにアップグレードします。
 
