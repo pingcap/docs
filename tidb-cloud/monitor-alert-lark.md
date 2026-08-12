@@ -1,17 +1,21 @@
 ---
-title: Subscribe via Email
-summary: Learn how to monitor TiDB by getting alert notifications via Email.
+title: Subscribe via Lark
+summary: Learn how to monitor your TiDB cluster by getting alert notifications via Lark.
 ---
 
-# Subscribe via Email
+# Subscribe via Lark
 
-TiDB Cloud provides you with an easy way to subscribe to alert notifications via email, [Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), and [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md). This document describes how to subscribe to alert notifications via email.
+TiDB Cloud provides you with an easy way to subscribe to alert notifications via Lark, [email](/tidb-cloud/monitor-alert-email.md), [Slack](/tidb-cloud/monitor-alert-slack.md), [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md), and [Webhook](/tidb-cloud/monitor-alert-webhook.md). This document describes how to subscribe to alert notifications via Lark.
 
 > **Note:**
 >
 > Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances, and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## Prerequisites
+
+- The subscribing via Lark feature is only available for organizations that subscribe to the **Enterprise** or **Premium** support plan.
+
+- You need a Lark webhook URL for the Lark group where you want to receive alert notifications.
 
 <CustomContent plan="dedicated">
 
@@ -27,33 +31,27 @@ TiDB Cloud provides you with an easy way to subscribe to alert notifications via
 
 ## Subscribe to alert notifications
 
-To receive alert notifications, take the following steps. The steps vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
+Alert notification subscriptions vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
 
 <CustomContent plan="dedicated">
+
+To subscribe to alert notifications of {{{ .dedicated }}} clusters, take the following steps:
 
 > **Tip:**
 >
 > For {{{ .dedicated }}}, the alert subscription is for all alerts in the current project. If you have multiple {{{ .dedicated }}} clusters in the project, you just need to subscribe once.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
-
-    > **Tip:**
-    >
-    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
-
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the **Project view** tab.
 2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Alert Subscription** under **Project Settings**.
 4. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-5. Select **Email** from the **Subscriber Type** drop-down list.
-6. Enter your email address.
-7. Click **Test Connection**.
+5. Select **Lark Webhook** from the **Subscriber Type** drop-down list.
+6. Enter a name in the **Name** field, your Lark webhook URL in the **Webhook URL** field and your Lark secret in the **Secret** field. Note that the secret token is only generated after you enable "Sign Verification" for your Lark group.
+7. Click **Save**. The backend will test connection and save for you.
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
+    If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
-8. Click **Save** to complete the subscription.
-
-Alternatively, you can also click **Subscribe** in the upper-right corner of the [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) page of the {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .dedicated }}} cluster. You will be directed to the **Alert Subscription** page.
 
 </CustomContent>
 
@@ -66,16 +64,13 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Email** from the **Subscriber Type** drop-down list.
-5. Enter your email address.
-6. Click **Test Connection**.
+4. Select **Lark** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field, your Lark webhook URL in the **Webhook URL** field and your Lark secret in the **Secret** field. Note that the secret token is only generated after you enable "Sign Verification" for your Lark group.
+6. Click **Save**. The backend will test connection and save for you.
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
+    If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
-7. Click **Save** to complete the subscription.
-
-Alternatively, you can also click **Subscribe** in the upper-right corner of the [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) page of the {{{ .essential }}} instance. You will be directed to the **Alert Subscription** page.
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .essential }}} instance. You will be directed to the **Alert Subscription** page.
 
 </CustomContent>
 
@@ -88,24 +83,21 @@ Alternatively, you can also click **Subscribe** in the upper-right corner of the
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Alert Subscription**.
 3. On the **Alert Subscription** page, click **Add Subscriber** in the upper-right corner.
-4. Select **Email** from the **Subscriber Type** drop-down list.
-5. Enter your email address.
-6. Click **Test Connection**.
+4. Select **Lark** from the **Subscriber Type** drop-down list.
+5. Enter a name in the **Name** field, your Lark webhook URL in the **Webhook URL** field and your Lark secret in the **Secret** field. Note that the secret token is only generated after you enable "Sign Verification" for your Lark group.
+6. Click **Save**. The backend will test connection and save for you.
 
-    - If the test succeeds, the **Save** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and then retry the connection.
+    If the test fails, an error message is displayed. Follow the message to troubleshoot the issue and retry the connection.
 
-7. Click **Save** to complete the subscription.
-
-Alternatively, you can also click **Subscribe** in the upper-right corner of the [**Alert**](/tidb-cloud/monitor-built-in-alerting.md#view-alerts) page of the {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
+Alternatively, you can also click **Subscribe** in the upper-right corner of the **Alert** page of the target {{{ .premium }}} instance. You will be directed to the **Alert Subscription** page.
 
 </CustomContent>
 
-If an alert condition remains unchanged, the alert sends email notifications every three hours.
+If an alert condition remains unchanged, the alert sends notifications every three hours.
 
 ## Unsubscribe from alert notifications
 
-If you no longer want to receive alert notifications, please take the following steps. The steps vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
+If you no longer want to receive alert notifications, take the following steps. The steps vary by [your TiDB Cloud plan](/tidb-cloud/select-cluster-tier.md).
 
 <CustomContent plan="dedicated">
 
