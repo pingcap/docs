@@ -8,6 +8,45 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## August 11, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential, Premium, and Dedicated**
+
+    - Support subscribing to alert notifications from TiDB Cloud via [Lark](https://www.larksuite.com/).
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via Lark.
+
+        For more information, see the following documentation:
+
+        - TiDB Cloud Essential: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+
+- **TiDB Cloud Lake**
+
+    - Expand AI, Python, and BI integrations for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new MCP server and SQLAlchemy dialect.
+
+        - With the new MCP server, you can now connect MCP-compatible AI tools to explore database objects, inspect table schemas, and run SQL using natural-language instructions. Built-in session sandbox protection is enabled by default, keeping production objects read-only while restricting writes to session-specific sandbox objects.
+        - With the new SQLAlchemy dialect, you can connect Python applications and SQLAlchemy-compatible tools to TiDB Cloud Lake through the dialect. You can use tools such as Jupyter Notebook for querying and visualizing data, and Apache Superset for building charts and dashboards.
+
+      For more information, see the following documentation:
+
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+
+**Console changes**
+
+- Improve the networking experience across TiDB Cloud plans with the following updates in the [TiDB Cloud console](https://tidbcloud.com/):
+
+    - The **Networking** page now uses more consistent naming for endpoint configurations across TiDB Cloud plans.
+    - For endpoint types with no configured endpoints, the **Networking** page now displays only the corresponding action button instead of an empty table.
+    - For TiDB Cloud Starter and Essential instances, you can now click **Connect** in the upper-right corner of the **Networking** page to connect to your instance after configuring network access.
+    - For TiDB Cloud Essential, Premium, and Dedicated, managing allowed IP addresses for public endpoints is now more intuitive. You can click **Add IP Address** to add an IP address, or click **...** for an existing IP address to edit or delete it.
+
 ## August 5, 2026
 
 **General changes**
