@@ -12,9 +12,9 @@ summary: 対応するアップストリーム テーブルよりも多くの列�
 -   [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
 -   [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-## DM を使用して、より多くの列を持つ下流の TiDB テーブルにデータを移行します。 {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
+## DM を使用して、より多くの列を持つ下流の TiDB テーブルにデータを移行します {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
-アップストリームのbinlogを複製する際、DMはダウンストリームの現在のテーブルスキーマを使用してbinlogを解析し、対応するDML文を生成しようとします。アップストリームのバイナリbinlog内のテーブルの列番号がダウンストリームのテーブルスキーマ内の列番号と一致しない場合、次のエラーが発生します。
+アップストリームのbinlogを複製する際、DMはダウンストリームの現在のテーブルスキーマを使用してbinlogを解析し、対応するDML文を生成しようとします。アップストリームのbinlog内のテーブルの列番号がダウンストリームのテーブルスキーマ内の列番号と一致しない場合、次のエラーが発生します。
 
 ```json
 "errors": [
@@ -67,7 +67,11 @@ DM がダウンストリーム テーブル スキーマを使用してアップ
 
 2.  `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定します。この時点で、データ移行タスクは上記の`Column count doesn't match`エラーにより一時停止状態になっているはずです。
 
-        tiup dmctl --master-addr ${advertise-addr} binlog-schema update -s ${source-id} ${task-name} ${database-name} ${table-name} ${schema-file}
+    {{< copyable "shell-regular" >}}
+
+    ```
+    tiup dmctl --master-addr ${advertise-addr} binlog-schema update -s ${source-id} ${task-name} ${database-name} ${table-name} ${schema-file}
+    ```
 
     このコマンドのパラメータの説明は次のとおりです。
 
@@ -83,12 +87,24 @@ DM がダウンストリーム テーブル スキーマを使用してアップ
 
     例えば：
 
-        tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
+    {{< copyable "shell-regular" >}}
+
+    ```
+    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
+    ```
 
 3.  一時停止状態の移行タスクを再開するには、 `resume-task`コマンドを使用します。
 
-        tiup dmctl --master-addr ${advertise-addr} resume-task ${task-name}
+    {{< copyable "shell-regular" >}}
+
+    ```
+    tiup dmctl --master-addr ${advertise-addr} resume-task ${task-name}
+    ```
 
 4.  `query-status`コマンドを使用して、データ移行タスクが正しく実行されていることを確認します。
 
-        tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
+    {{< copyable "shell-regular" >}}
+
+    ```
+    tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
+    ```
