@@ -123,7 +123,7 @@ TiDB Cloudがサポートする以下の推論サービスを通じて、オー�
 | 埋め込みモデル    | 文書                                                                                | TiDB Cloud <sup>1</sup>がホストしています | BYOK <sup>2</sup> | サポートされているモデルの例                     |
 | ---------- | --------------------------------------------------------------------------------- | -------------------------------- | ----------------- | ---------------------------------- |
 | Hugging Face 推論  | [Hugging Face Embeddings](/ai/integrations/vector-search-auto-embedding-huggingface.md)        |                                  | ✅                 | `bge-m3` 、 `multilingual-e5-large` |
-| NVIDIA NIM | [NVIDIA NIM エンベディング](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md) |                                  | ✅                 | `bge-m3` 、 `nv-embed-v1`           |
+| NVIDIA NIM | [NVIDIA NIM 埋め込み](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md) |                                  | ✅                 | `bge-m3` 、 `nv-embed-v1`           |
 
 <sup>1.</sup>ホスト型モデルはTiDB Cloudによってホストされており、APIキーは必要ありません。現在、これらのホスト型モデルは無料で利用できますが、すべてのユーザーが利用できるようにするために、一定の利用制限が適用される場合があります。
 

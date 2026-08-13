@@ -4,7 +4,7 @@ summary: TiDB CloudでNVIDIA NIM埋め込みモデルを使用する方法を学
 aliases: ['/ja/tidbcloud/vector-search-auto-embedding-nvidia-nim/']
 ---
 
-# NVIDIA NIM エンベディング {#nvidia-nim-embeddings}
+# NVIDIA NIM 埋め込み {#nvidia-nim-embeddings}
 
 このドキュメントでは、TiDB CloudでNVIDIA NIM埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
