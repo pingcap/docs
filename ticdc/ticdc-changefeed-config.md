@@ -75,7 +75,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   形式は`"h m s"`です。例えば、 `"24h30m30s"`です。
 -   デフォルト値: `"24h"`
 
-### `sql-mode` <span class="version-mark">v6.5.6、v7.1.3、v7.5.0 で新たに追加されました。</span> {#sql-mode-new-in-v656-v713-and-v750}
+### `sql-mode` <span class="version-mark">v6.5.6、v7.1.3、および v7.5.0 で追加</span> {#sql-mode-new-in-v656-v713-and-v750}
 
 -   DDLステートメントを解析する際に使用する[SQLモード](/sql-mode.md)を指定します。複数のモードを指定する場合は、カンマで区切ります。
 -   デフォルト値： `"ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"` 。これはTiDBのデフォルトのSQLモードと同じです。
@@ -272,7 +272,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 -   デフォルト値： `false` 。これは、スキーマ情報の出力を有効にすることを意味します。
 -   このパラメータは、シンクタイプがMQで、出力プロトコルがDebeziumの場合にのみ有効です。
 
-#### sink.csv は<span class="version-mark">v6.5.0 で追加されました。</span> {#sink-csv-span-class-version-mark-new-in-v6-5-0-span}
+#### sink.csv <span class="version-mark">v6.5.0で追加</span> {#sinkcsv-new-in-v650}
 
 バージョン6.5.0以降、TiCDCはデータ変更をCSV形式でストレージサービスに保存することをサポートしています。データをMQまたはMySQLシンクにレプリケートする場合は、以下の設定は無視してください。
 
@@ -402,13 +402,13 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 -   再実行モジュール内のフラッシングワーカーの数。
 -   デフォルト値: `8`
 
-#### `compression` <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、v7.6.0で新たに追加されました。</span> {#compression-new-in-v656-v713-v751-and-v760}
+#### `compression` <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、および v7.6.0 で追加</span> {#compression-new-in-v656-v713-v751-and-v760}
 
 -   リドゥログファイルを圧縮する動作。
 -   デフォルト値： `""` 、これは圧縮なしを意味します。
 -   値のオプション: `""` 、 `"lz4"`
 
-#### `flush-concurrency`<span class="version-mark">は、v6.5.6、v7.1.3、v7.5.1、およびv7.6.0で追加されました。</span> {#flush-concurrency-new-in-v656-v713-v751-and-v760}
+#### `flush-concurrency` <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、および v7.6.0 で追加</span> {#flush-concurrency-new-in-v656-v713-v751-and-v760}
 
 -   単一のリドゥファイルをアップロードする際の同時実行数。
 -   デフォルト値： `1` 。これは同時実行が無効になっていることを意味します。

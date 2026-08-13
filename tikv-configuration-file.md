@@ -843,7 +843,7 @@ Raftstoreに関連するコンフィグレーション項目。
 -   デフォルト値: `"30s"`
 -   最小値: `0`
 
-### `max-apply-unpersisted-log-limit` <span class="version-mark">v8.1.0 で追加されました。</span> {#max-apply-unpersisted-log-limit-new-in-v810}
+### `max-apply-unpersisted-log-limit` <span class="version-mark">v8.1.0で追加</span> {#max-apply-unpersisted-log-limit-new-in-v810}
 
 -   適用可能な、コミット済みだが永続化されていないRaftログの最大数。
 
@@ -1187,7 +1187,7 @@ Raftstoreに関連するコンフィグレーション項目。
     -   `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]`は、TiKVがUTC+08:00タイムゾーンで毎日午前3時と午後11時に完全な圧縮を実行することを示しています。
 -   デフォルト値: `[]`は、定期的な完全圧縮がデフォルトで無効になっていることを意味します。
 
-### `periodic-full-compact-start-max-cpu`<span class="version-mark">は v7.6.0 で追加されました。</span> {#periodic-full-compact-start-max-cpu-new-in-v760}
+### `periodic-full-compact-start-max-cpu` <span class="version-mark">v7.6.0で追加</span> {#periodic-full-compact-start-max-cpu-new-in-v760}
 
 -   TiKVの定期的な完全圧縮におけるCPU使用率の上限を制限します。
 -   デフォルト値: `0.1` 、定期的な圧縮処理の最大 CPU 使用率が 10% であることを意味します。
@@ -1197,7 +1197,7 @@ Raftstoreに関連するコンフィグレーション項目。
 -   フォロワーが読み取りリクエストを処理する際に、遅延が許容されるログの最大数。この制限を超えると、読み取りリクエストは拒否されます。
 -   デフォルト値: `100`
 
-### `inspect-cpu-util-thd` <span class="version-mark">v7.6.0 で追加されました。</span> {#inspect-cpu-util-thd-new-in-v760}
+### `inspect-cpu-util-thd` <span class="version-mark">v7.6.0で追加</span> {#inspect-cpu-util-thd-new-in-v760}
 
 -   低速ノード検出時に、TiKVノードがビジー状態かどうかを判断するためのCPU使用率のしきい値。
 -   値の範囲: `[0, 1]`
@@ -1495,7 +1495,7 @@ RocksDBに関連するコンフィグレーション項目
 -   RocksDBのログレベル
 -   デフォルト値: `"info"`
 
-### `write-buffer-flush-oldest-first`<span class="version-mark">は v6.6.0 で追加されました。</span> {#write-buffer-flush-oldest-first-new-in-v660}
+### `write-buffer-flush-oldest-first` <span class="version-mark">v6.6.0で追加</span> {#write-buffer-flush-oldest-first-new-in-v660}
 
 > **Warning:**
 >
@@ -1508,7 +1508,7 @@ RocksDBに関連するコンフィグレーション項目
     -   `false` : データ量が最も大きい`memtable`が SST ファイルに書き込まれます。
     -   `true` : 最も早い`memtable`が SST ファイルに書き込まれます。この戦略により`memtable`からコールドデータを消去できるため、コールドデータとホットデータが明確に存在するシナリオに適しています。
 
-### `write-buffer-limit` <span class="version-mark">v6.6.0 で追加されました。</span> {#write-buffer-limit-new-in-v660}
+### `write-buffer-limit` <span class="version-mark">v6.6.0で追加</span> {#write-buffer-limit-new-in-v660}
 
 > **Warning:**
 >
@@ -1523,7 +1523,7 @@ RocksDBに関連するコンフィグレーション項目
 
 -   単位：KiB｜MiB｜GiB
 
-### `track-and-verify-wals-in-manifest` <span class="version-mark">、v6.5.9、v7.1.5、v7.5.2、v8.0.0 で新しく追加されました。</span> {#track-and-verify-wals-in-manifest-new-in-v659-v715-v752-and-v800}
+### `track-and-verify-wals-in-manifest` <span class="version-mark">v6.5.9、v7.1.5、v7.5.2、および v8.0.0 で追加</span> {#track-and-verify-wals-in-manifest-new-in-v659-v715-v752-and-v800}
 
 -   RocksDB MANIFEST ファイルに先行書き込みログ (WAL) ファイルに関する情報を記録するかどうか、および起動時に WAL ファイルの整合性を検証するかどうかを制御します。詳細については、RocksDB [マニフェストでWALを追跡する](https://github.com/facebook/rocksdb/wiki/Track-WAL-in-MANIFEST)を参照してください。
 -   デフォルト値: `true`
@@ -1531,7 +1531,7 @@ RocksDBに関連するコンフィグレーション項目
     -   `true` : WAL ファイルに関する情報を MANIFEST ファイルに記録し、起動時に WAL ファイルの整合性を検証します。
     -   `false` : WAL ファイルに関する情報を MANIFEST ファイルに記録せず、起動時に WAL ファイルの整合性を検証しません。
 
-### `enable-multi-batch-write` <span class="version-mark">v6.2.0 で追加されました。</span> {#enable-multi-batch-write-new-in-v620}
+### `enable-multi-batch-write` <span class="version-mark">v6.2.0で追加</span> {#enable-multi-batch-write-new-in-v620}
 
 -   RocksDBの書き込み最適化を有効にするかどうかを制御します。有効にすると、WriteBatchの内容をmemtableに同時に書き込むことができ、書き込みレイテンシーが削減されます。
 -   デフォルト値：なし。ただし、 `false`に明示的に設定するか、 `rocksdb.enable-pipelined-write`または`rocksdb.enable-unordered-write`が有効になっている場合を除き、デフォルトで有効になります。
@@ -2337,7 +2337,7 @@ TiDB LightningのインポートおよびBR復元に関連するコンフィグ�
 -   GCをトリガーするガベージ比率のしきい値。
 -   デフォルト値: `1.1`
 
-### `num-threads` <span class="version-mark">、v6.5.8、v7.1.4、v7.5.1、v7.6.0 で追加されました。</span> {#num-threads-new-in-v658-v714-v751-and-v760}
+### `num-threads` <span class="version-mark">v6.5.8、v7.1.4、v7.5.1、および v7.6.0 で追加</span> {#num-threads-new-in-v658-v714-v751-and-v760}
 
 -   `enable-compaction-filter`が`false`の場合の GC スレッドの数。
 -   デフォルト値: `1`
@@ -2346,12 +2346,12 @@ TiDB LightningのインポートおよびBR復元に関連するコンフィグ�
 
 TiKVの自動圧縮の動作を設定します。
 
-### `check-interval` <span class="version-mark">v7.5.7およびv8.5.4で追加されました。</span> {#check-interval-new-in-v757-and-v854}
+### `check-interval` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#check-interval-new-in-v757-and-v854}
 
 -   TiKVが自動圧縮をトリガーするかどうかを確認する間隔。この間隔内では、自動圧縮条件を満たすリージョンが優先度に基づいて処理されます。間隔が経過すると、TiKVはリージョン情報を再スキャンし、優先度を再計算します。
 -   デフォルト値: `"300s"`
 
-### `tombstone-num-threshold`<span class="version-mark">は v7.5.7 および v8.5.4 で追加されました。</span> {#tombstone-num-threshold-new-in-v757-and-v854}
+### `tombstone-num-threshold` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#tombstone-num-threshold-new-in-v757-and-v854}
 
 -   TiKVの自動圧縮をトリガーするために必要なRocksDBのtombstoneの数。tombstoneの数がこのしきい値に達するか、tombstoneの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
 -   この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
@@ -2498,7 +2498,7 @@ BRバックアップに関連するコンフィグレーション項目。
 -   デフォルト値：CPU * 0.5
 -   値の範囲：[2, 12]
 
-### `temp-path` <span class="version-mark">v6.2.0 で追加されました。</span> {#temp-path-new-in-v620}
+### `temp-path` <span class="version-mark">v6.2.0で追加</span> {#temp-path-new-in-v620}
 
 -   ログファイルが外部ストレージに書き込まれる前に一時的に保存されるパス。
 -   デフォルト値: `${deploy-dir}/data/log-backup-temp`
