@@ -112,9 +112,9 @@ class MarkdownExportTest(unittest.TestCase):
             ),
             models.MarkdownEntry(
                 "bug_fix",
-                "TiKV",
+                "TiDB",
                 "- Fix an unrelated issue [#20000](issue-20000)",
-                "tikv",
+                "execution, planner, execution",
                 [unrelated_pr],
             ),
         ]
@@ -130,16 +130,24 @@ class MarkdownExportTest(unittest.TestCase):
             content = report_file.read_text(encoding="utf-8")
 
         self.assertEqual(1, duplicate_count)
-        self.assertIn(f"## [tikv/tikv#19973]({duplicate_pr})", content)
+        self.assertIn(
+            "## Components\n\n- `tikv`\n- `execution`\n- `planner`",
+            content,
+        )
+        self.assertEqual(1, content.count("- `tikv`"))
+        self.assertEqual(1, content.count("- `execution`"))
+        self.assertEqual(1, content.count("- `planner`"))
+        self.assertNotIn("- `execution, planner, execution`", content)
+        self.assertIn("## Duplicated PR References", content)
+        self.assertIn(f"### [tikv/tikv#19973]({duplicate_pr})", content)
         self.assertIn("Referenced by 2 release note entries:", content)
         self.assertIn("[#19623](issue-19623)", content)
         self.assertIn("[#19969](issue-19969)", content)
         self.assertNotIn("[#20000](issue-20000)", content)
 
-    def test_duplicate_pr_report_removes_stale_file_when_no_duplicates(self):
+    def test_report_is_written_with_all_components_when_no_pr_is_duplicated(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             report_file = Path(temp_dir) / "release-duplicate-pr-report.md"
-            report_file.write_text("stale report", encoding="utf-8")
             duplicate_count = markdown_writer.write_duplicate_pr_report(
                 report_file,
                 "8.5.8",
@@ -155,7 +163,14 @@ class MarkdownExportTest(unittest.TestCase):
             )
 
             self.assertEqual(0, duplicate_count)
-            self.assertFalse(report_file.exists())
+            self.assertTrue(report_file.exists())
+            content = report_file.read_text(encoding="utf-8")
+            self.assertIn("## Components\n\n- `execution`", content)
+            self.assertIn(
+                "## Duplicated PR References\n\n"
+                "No duplicated PR references were found.",
+                content,
+            )
 
 
 if __name__ == "__main__":

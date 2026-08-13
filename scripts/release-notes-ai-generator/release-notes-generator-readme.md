@@ -160,7 +160,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 - The generated Markdown file is written to `--output-release-file` when that option is specified.
 - If `--output-release-file` is omitted, the generated Markdown file is written to `release-<version>-updated-by-ai.md` under `--releases-dir`. The default never overwrites the canonical `release-<version>.md`, because the generated file is an incomplete draft (only `Improvements` and `Bug fixes`).
-- If one or more PRs are referenced by multiple release note entries, the generator writes `<release-note-stem>-duplicate-pr-report.md` next to the generated release note. The report groups the affected entries by PR. If no duplicate PR references exist, no report is kept.
+- The generator always writes `<release-note-stem>-duplicate-pr-report.md` next to the generated release note. The report contains two sections: a deduplicated list of all original workbook components represented in the generated release notes, and PRs referenced by multiple release note entries. If no duplicate PR references exist, the second section states that none were found.
 - The Excel workbook is not modified during this phase.
 
 ## Reference: processing rules
@@ -421,7 +421,7 @@ The generator maps each workbook component to a Markdown release-note component 
 
 If an entry is associated with multiple PRs, the generator appends one `<!-- pr: URL -->` comment for each unique PR in workbook order. These markers let reviewers trace the generated component and source PRs back to the workbook without changing the visible release-note text.
 
-During `export-markdown`, the generator also checks these PR comments across all entries. If the same PR is referenced by multiple release notes, it creates a duplicate PR report so reviewers can decide whether the entries should be merged or intentionally kept separate.
+During `export-markdown`, the generator also creates a report with two parts. The first part lists all original workbook components represented in the generated release notes, with duplicates removed. The second part identifies PRs referenced by multiple release notes so reviewers can decide whether the entries should be merged or intentionally kept separate.
 
 ### Component mapping
 

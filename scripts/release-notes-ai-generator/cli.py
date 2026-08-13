@@ -386,14 +386,11 @@ def run_export_markdown(args: argparse.Namespace) -> int:
     print("Phase 2 (export-markdown) completed.", flush=True)
     print(f"  Input Excel: {excel_path}", flush=True)
     print(f"  Generated release note file: {output_file}", flush=True)
-    if duplicate_pr_count:
-        print(
-            f"  Duplicate PR report: {duplicate_report_file} "
-            f"({duplicate_pr_count} duplicated PR(s))",
-            flush=True,
-        )
-    else:
-        print("  Duplicate PR report: not generated (no duplicates)", flush=True)
+    print(
+        f"  Release notes report: {duplicate_report_file} "
+        f"({duplicate_pr_count} duplicated PR(s))",
+        flush=True,
+    )
     return 0
 
 

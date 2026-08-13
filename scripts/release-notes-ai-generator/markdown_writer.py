@@ -5,7 +5,13 @@ from pathlib import Path
 
 from .constants import TOOL_COMPONENTS, TOP_LEVEL_COMPONENTS
 from .models import MarkdownEntry
-from .utils import normalize_component, parse_github_url, str_value, unique_ordered
+from .utils import (
+    normalize_component,
+    parse_github_url,
+    split_multi_value,
+    str_value,
+    unique_ordered,
+)
 
 
 def write_release_file(
@@ -54,6 +60,11 @@ def write_duplicate_pr_report(
     version: str,
     entries: list[MarkdownEntry],
 ) -> int:
+    components = unique_ordered(
+        component
+        for entry in entries
+        for component in report_components_for_entry(entry)
+    )
     entries_by_pr: dict[str, list[MarkdownEntry]] = {}
     for entry in entries:
         for pr_url in unique_ordered(entry.pr_urls):
@@ -64,36 +75,54 @@ def write_duplicate_pr_report(
         for pr_url, pr_entries in entries_by_pr.items()
         if len(pr_entries) > 1
     }
-    if not duplicates:
-        output_file.unlink(missing_ok=True)
-        return 0
-
     content = [
-        f"# Duplicate PR Report for TiDB {version} Release Notes",
+        f"# Report for TiDB {version} Release Notes",
         "",
         (
-            "The following PRs are referenced by more than one release note entry. "
-            "Review the entries to determine whether they should be merged or kept separate."
+            "This report lists all components represented in the generated release notes "
+            "and identifies PRs referenced by more than one release note entry."
         ),
         "",
+        "## Components",
+        "",
     ]
-    for pr_url, pr_entries in duplicates.items():
-        content.extend(
-            [
-                f"## [{pr_report_label(pr_url)}]({pr_url})",
-                "",
-                f"Referenced by {len(pr_entries)} release note entries:",
-                "",
-            ]
+    if components:
+        content.extend(f"- `{component}`" for component in components)
+    else:
+        content.append("No components were found in the generated release notes.")
+    content.extend(["", "## Duplicated PR References", ""])
+    if duplicates:
+        content.append(
+            "Review the following entries to determine whether they should be merged or kept separate."
         )
-        content.extend(note_with_metadata_markers(entry) for entry in pr_entries)
         content.append("")
+        for pr_url, pr_entries in duplicates.items():
+            content.extend(
+                [
+                    f"### [{pr_report_label(pr_url)}]({pr_url})",
+                    "",
+                    f"Referenced by {len(pr_entries)} release note entries:",
+                    "",
+                ]
+            )
+            content.extend(note_with_metadata_markers(entry) for entry in pr_entries)
+            content.append("")
+    else:
+        content.append("No duplicated PR references were found.")
 
     while content and content[-1] == "":
         content.pop()
     output_file.parent.mkdir(parents=True, exist_ok=True)
     output_file.write_text("\n".join(content) + "\n", encoding="utf-8")
     return len(duplicates)
+
+
+def report_components_for_entry(entry: MarkdownEntry) -> list[str]:
+    raw_component = sanitize_component_marker(entry.raw_component)
+    if raw_component:
+        return split_multi_value(raw_component)
+    fallback = normalize_component(entry.component)
+    return [fallback] if fallback else []
 
 
 def pr_report_label(pr_url: str) -> str:
