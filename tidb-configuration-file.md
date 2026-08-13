@@ -43,7 +43,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   最小値: `1`
 -   最大値: `1048576`
 
-### `temp-dir` <span class="version-mark">v6.3.0 で追加されました。</span> {#temp-dir-new-in-v630}
+### `temp-dir` <span class="version-mark">v6.3.0で追加</span> {#temp-dir-new-in-v630}
 
 -   TiDBが一時データを保存するために使用されるファイルシステム上の場所。機能がTiDBノード内でローカルストレージを必要とする場合、TiDBはこの場所に対応する一時データを保存します。
 -   インデックスを作成する際に、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効になっている場合、新しく作成されたインデックスのバックフィルが必要なデータは、まず TiDB のローカル一時ディレクトリに保存され、その後バッチ処理で TiKV にインポートされるため、インデックス作成が高速化されます。
@@ -221,7 +221,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 >
 > -   Kubernetesを使用する場合、デフォルトの[`terminationGracePeriodSeconds`](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#lifecycle)は30秒です。
 
-### `enable-global-kill` <span class="version-mark">v6.1.0 で追加されました。</span> {#enable-global-kill-new-in-v610}
+### `enable-global-kill` <span class="version-mark">v6.1.0で追加</span> {#enable-global-kill-new-in-v610}
 
 -   グローバルキル（インスタンスをまたいでクエリや接続を終了する）機能を有効にするかどうかを制御します。
 -   デフォルト値: `true`
@@ -463,7 +463,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)認証方式で使用するJSON Web Key Sets（JWKS）のローカルファイルパスを設定します。
 -   デフォルト値: `""`
 
-### `auth-token-refresh-interval` <span class="version-mark">v6.4.0 で追加されました。</span> {#auth-token-refresh-interval-new-in-v640}
+### `auth-token-refresh-interval` <span class="version-mark">v6.4.0で追加</span> {#auth-token-refresh-interval-new-in-v640}
 
 -   [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token)認証方式のJWKS更新間隔を設定します。
 -   デフォルト値: `1h`
@@ -520,7 +520,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `5000`
 -   ステートメント数が`stmt-count-limit`を超えた後にトランザクションがロールバックまたはコミットされない場合、TiDB は`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この設定は、再試行可能な楽観的トランザクションで**のみ**有効です。悲観的トランザクションを使用している場合、またはトランザクションの再試行を無効にしている場合は、トランザクション内のステートメント数はこの設定によって制限されません。
 
-### `txn-entry-size-limit`<span class="version-mark">は v4.0.10 および v5.0.0 で追加されました。</span> {#txn-entry-size-limit-new-in-v4010-and-v500}
+### `txn-entry-size-limit` <span class="version-mark">v4.0.10 および v5.0.0 で追加</span> {#txn-entry-size-limit-new-in-v4010-and-v500}
 
 -   TiDBにおける単一行データのサイズ制限。
 -   デフォルト値: `6291456` (バイト単位)
@@ -620,7 +620,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `1000`
 -   現在、有効な値の範囲は`[1, 100000]`です。
 
-### `concurrently-init-stats` <span class="version-mark">v8.1.0 および v7.5.2 で追加されました。</span> {#concurrently-init-stats-new-in-v810-and-v752}
+### `concurrently-init-stats` <span class="version-mark">v8.1.0 および v7.5.2 で追加</span> {#concurrently-init-stats-new-in-v810-and-v752}
 
 -   TiDB の起動時に統計情報を同時に初期化するかどうかを制御します。この設定項目は、 [`lite-init-stats`](#lite-init-stats-new-in-v710)が`false`に設定されている場合にのみ有効になります。
 -   デフォルト値: v8.2.0 より前のバージョンでは`false` 、v8.2.0 以降のバージョンでは`true` 。
@@ -632,7 +632,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   `lite-init-stats`の値が`true`の場合、統計情報の初期化では、インデックスと列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。 `lite-init-stats`の値が`false`の場合、統計情報の初期化では、インデックスのヒストグラム、TopN、および Count-Min Sketch はメモリにロードされますが、主キーと列のヒストグラム、TopN、または Count-Min Sketch はメモリにロードされません。オプティマイザが特定の主キーまたは列のヒストグラム、TopN、および Count-Min Sketch を必要とする場合、必要な統計情報は同期または非同期でメモリにロードされます ( [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)で制御)。
 -   `lite-init-stats`を`true`に設定すると、統計情報の初期化が高速化され、不要な統計情報の読み込みを回避することで TiDB のメモリ使用量が削減されます。詳細については、[負荷統計](/statistics.md#load-statistics)を参照してください。
 
-### `force-init-stats` <span class="version-mark">v6.5.7 および v7.1.0 で追加されました。</span> {#force-init-stats-new-in-v657-and-v710}
+### `force-init-stats` <span class="version-mark">v6.5.7 および v7.1.0 で追加</span> {#force-init-stats-new-in-v657-and-v710}
 
 -   TiDBの起動時に、サービスを提供する前に統計情報の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: v7.2.0 より前のバージョンでは`false` 、v7.2.0 以降のバージョンでは`true` 。
@@ -878,7 +878,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロックエラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
 -   デフォルト値: `false`
 
-### pessimistic-auto-commit は<span class="version-mark">v6.0.0 で追加されました。</span> {#pessimistic-auto-commit-new-in-v600}
+### pessimistic-auto-commit <span class="version-mark">v6.0.0で追加</span> {#pessimistic-auto-commit-new-in-v600}
 
 -   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` ) に、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっていても、自動コミット トランザクションは楽観的トランザクション モードを使用します。 `pessimistic-auto-commit`を有効にすると ( `true` に設定)、自動コミット トランザクションも悲観的モードを使用するようになり、明示的にコミットされた他の悲観的トランザクションと一貫性が保たれます。
 -   競合が発生するシナリオでは、この設定を有効にすると、TiDB は自動コミットトランザクションをグローバルロック待機管理に組み込み、デッドロックを回避し、デッドロックを引き起こす競合によって発生するレイテンシーの急増を軽減します。
@@ -981,7 +981,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   この設定値は、システム変数[`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)の値を初期化します。
 -   v6.3.0より前は、この設定は`run-ddl`によって設定されます。
 
-### `tidb_enable_stats_owner` <span class="version-mark">v8.4.0 で追加されました。</span> {#tidb_enable_stats_owner-new-in-v840}
+### `tidb_enable_stats_owner` <span class="version-mark">v8.4.0で追加</span> {#tidb_enable_stats_owner-new-in-v840}
 
 -   この構成は、対応する TiDB インスタンスが[統計情報の自動更新](/statistics.md#automatic-update)タスクを実行できるかどうかを制御します。
 -   デフォルト値: `true`
@@ -1007,7 +1007,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   明細書の要約データの永続化が有効になっている場合、この設定では永続データが書き込まれるファイルを指定します。
 -   デフォルト値: `tidb-statements.log`
 
-### `tidb_stmt_summary_file_max_days` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb_stmt_summary_file_max_days-new-in-v660}
+### `tidb_stmt_summary_file_max_days` <span class="version-mark">v6.6.0で追加</span> {#tidb_stmt_summary_file_max_days-new-in-v660}
 
 > **Warning:**
 >
@@ -1018,7 +1018,7 @@ TiDBサービスの状態に関するコンフィグレーション。
 -   単位：日
 -   データ保持要件とディスク容量の使用状況に基づいて値を調整できます。
 
-### `tidb_stmt_summary_file_max_size` <span class="version-mark">v6.6.0 で追加されました。</span> {#tidb_stmt_summary_file_max_size-new-in-v660}
+### `tidb_stmt_summary_file_max_size` <span class="version-mark">v6.6.0で追加</span> {#tidb_stmt_summary_file_max_size-new-in-v660}
 
 > **Warning:**
 >
