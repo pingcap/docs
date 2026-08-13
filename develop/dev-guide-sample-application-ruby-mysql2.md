@@ -100,7 +100,7 @@ bundle add mysql2 dotenv
     DATABASE_ENABLE_SSL=true
     ```
 
-    > **注記**
+    > **Note**
     >
     > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には`DATABASE_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
 
@@ -178,7 +178,7 @@ bundle add mysql2 dotenv
     DATABASE_SSL_CA={downloaded_ssl_ca_path}
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Dedicatedクラスタへの接続にパブリックエンドポイントを使用する場合は、TLS接続を有効にすることをお勧めします。
     >
@@ -260,7 +260,7 @@ options.merge(sslca: ENV['DATABASE_SSL_CA']) if ENV['DATABASE_SSL_CA']
 client = Mysql2::Client.new(options)
 ```
 
-> **注記**
+> **Note**
 >
 > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には`DATABASE_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります****が**、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_SSL_CA`を介して SSL CA 証明書を指定する必要はありません。
 

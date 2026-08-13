@@ -489,7 +489,7 @@ claim-check-storage-uri = "s3://claim-check-bucket"
 
 `large-message-handle-option` `"claim-check"`に設定する場合、 `claim-check-storage-uri`有効な外部ストレージアドレスに設定する必要があります。そうでない場合、チェンジフィードの作成は失敗します。
 
-> **ヒント**
+> **Tip**
 >
 > TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 

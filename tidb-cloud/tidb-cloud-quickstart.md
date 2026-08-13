@@ -34,7 +34,7 @@ category: quick start
 
         <CustomContent language="en,zh">
 
-        > **注記**
+        > **Note**
         >
         > - 現在、 TiDB Cloud StarterはAWSで一般公開されており、Alibaba Cloudではパブリックプレビュー中です。このドキュメントの以降の手順では、AWSを例に説明します。
         > - TiDB Cloudはフルマネージドサービスです。PingCAPが基盤となるクラウドインフラストラクチャを運用および管理します。基盤となるリソースには、TiDB Cloudコンソールを通じてのみアクセスできます。
@@ -43,7 +43,7 @@ category: quick start
 
         <CustomContent language="ja">
 
-        > **注記**
+        > **Note**
         >
         > - 現在、 TiDB Cloud StarterはAWSで一般公開されています。このドキュメントの以降の手順では、AWSを例に説明します。
         > - TiDB Cloudはフルマネージドサービスです。PingCAPが基盤となるクラウドインフラストラクチャを運用および管理します。基盤となるリソースには、TiDB Cloudコンソールを通じてのみアクセスできます。

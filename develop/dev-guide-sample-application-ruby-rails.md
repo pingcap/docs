@@ -90,7 +90,7 @@ bundle add mysql2 dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}?ssl_mode=verify_identity'
     ```
 
-    > **注記**
+    > **Note**
     >
     > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、 `ssl_mode=verify_identity`クエリパラメータを使用して TLS 接続を有効にする**必要があります**。
 
@@ -157,7 +157,7 @@ bundle add mysql2 dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}?ssl_mode=verify_identity&sslca=/path/to/ca.pem'
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Dedicatedへの接続にパブリックエンドポイントを使用する場合は、TLS接続を有効にすることをお勧めします。
     >
@@ -249,7 +249,7 @@ production:
   <<: *default
 ```
 
-> **注記**
+> **Note**
 >
 > [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリック エンドポイントを使用する際には**、** `ssl_mode`の`verify_identity`クエリ パラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はあり**ません。
 

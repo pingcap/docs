@@ -99,7 +99,7 @@ npm install mysql2 dotenv --save
     TIDB_ENABLE_SSL=true
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Starterの場合、パブリックエンドポイントを使用する際には、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする**必要があります**。
 
@@ -177,7 +177,7 @@ npm install mysql2 dotenv --save
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
-    > **注記**
+    > **Note**
     >
     > TiDB Cloud Dedicatedへの接続にパブリックエンドポイントを使用する場合は、TLS接続を有効にすることをお勧めします。
     >
@@ -275,7 +275,7 @@ async function main() {
 void main();
 ```
 
-> **注記**
+> **Note**
 >
 > TiDB Cloud StarterおよびTiDB Cloud Essentialでは、パブリック エンドポイントを使用する場合、 `TIDB_ENABLE_SSL`を介して TLS 接続を有効にする必要が**あり****ます**。ただし、Node.js はデフォルトで組み込みの Mozilla CA を使用するため、 `TIDB_CA_PATH`を介して SSL CA 証明書を指定する必要はありません。この組み込みの[Mozilla CA証明書](https://wiki.mozilla.org/CA/Included_Certificates)はTiDB Cloud Starterによって信頼されています。
 
