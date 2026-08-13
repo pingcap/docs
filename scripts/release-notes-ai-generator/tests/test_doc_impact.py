@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest import mock
 
 from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
 
 
 SCRIPTS_DIR = Path(__file__).resolve().parents[2]
@@ -456,6 +457,13 @@ class WorkbookDocImpactTest(unittest.TestCase):
             header["ai_note_type"] + 1,
             header[excel_workbook.DOC_IMPACT_HEADER],
         )
+        doc_impact_column = get_column_letter(
+            header[excel_workbook.DOC_IMPACT_HEADER]
+        )
+        self.assertEqual(
+            excel_workbook.DOC_IMPACT_COLUMN_WIDTH,
+            sheet.column_dimensions[doc_impact_column].width,
+        )
         sheet.cell(
             row=4,
             column=header["published_release_notes"],
@@ -532,6 +540,13 @@ class WorkbookDocImpactTest(unittest.TestCase):
         target = workbook["release_note_not_needed"]
         target_header = excel_workbook.get_header(target)
         self.assertIn(excel_workbook.DOC_IMPACT_HEADER, target_header)
+        target_doc_impact_column = get_column_letter(
+            target_header[excel_workbook.DOC_IMPACT_HEADER]
+        )
+        self.assertEqual(
+            excel_workbook.DOC_IMPACT_COLUMN_WIDTH,
+            target.column_dimensions[target_doc_impact_column].width,
+        )
         self.assertTrue(
             target.cell(
                 row=2,

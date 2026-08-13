@@ -77,7 +77,7 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
         "--version",
         required=True,
         type=parse_tidb_version,
-        help="Target TiDB version in x.y.z format, for example 8.5.7.",
+        help="Target TiDB version in x.y.z format, for example 8.5.8.",
     )
     parser.add_argument("--excel", required=True, help="Path to the release note Excel workbook.")
     parser.add_argument(
@@ -188,7 +188,7 @@ def add_export_markdown_args(parser: argparse.ArgumentParser) -> None:
         "--version",
         required=True,
         type=parse_tidb_version,
-        help="Target TiDB version in x.y.z format, for example 8.5.7.",
+        help="Target TiDB version in x.y.z format, for example 8.5.8.",
     )
     parser.add_argument(
         "--excel",
@@ -387,7 +387,7 @@ def validate_positive_int(name: str, value: int) -> None:
 def parse_tidb_version(value: str) -> str:
     if not SEMVER_RE.fullmatch(value):
         raise argparse.ArgumentTypeError(
-            f"invalid TiDB version {value!r}; expected x.y.z such as 8.5.7"
+            f"invalid TiDB version {value!r}; expected x.y.z such as 8.5.8"
         )
     return value
 

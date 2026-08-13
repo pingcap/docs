@@ -85,7 +85,7 @@ Use Azure OpenAI:
 ```bash
 cd scripts
 python3 -m release-notes-ai-generator generate \
-    --version 8.5.7 \
+    --version 8.5.8 \
     --excel </path/to/release-note-excel.xlsx> \
     --releases-dir </path/to/releases-folder> \
     --ai-provider azure
@@ -96,7 +96,7 @@ Use Codex CLI:
 ```bash
 cd scripts
 python3 -m release-notes-ai-generator generate \
-    --version 8.5.7 \
+    --version 8.5.8 \
     --excel /path/to/release-note-excel.xlsx \
     --releases-dir </path/to/releases-folder>
 ```
@@ -108,10 +108,9 @@ After Phase 1 is fully complete, export the Markdown:
 ```bash
 cd scripts
 python3 -m release-notes-ai-generator export-markdown \
-    --version <tidb-version, for example 8.5.7> \
+    --version <tidb-version, for example 8.5.8> \
     --excel </path/to/release-note-excel_processed.xlsx> \
     --releases-dir </path/to/releases-folder> \
-    --release-date "<release date>"
 ```
 
 ## Option descriptions
@@ -194,7 +193,7 @@ General rules:
 
 Patch-release rules:
 
-For a patch release such as `8.5.7`, the generator finds the previous patch release date in `releases/release-timeline.md`. When parsing `release-timeline.md`, the generator skips non-semver entries such as `Pre-GA`.
+For a patch release such as `8.5.8`, the generator finds the previous patch release date in `releases/release-timeline.md`. When parsing `release-timeline.md`, the generator skips non-semver entries such as `Pre-GA`.
 
 | Condition | Result | Why |
 | --- | --- | --- |
@@ -289,7 +288,7 @@ The generator handles repeated issues in two different ways:
 
 This separation is intentional. If the same issue appears again in the same major.minor series, it is often a sign that the row needs human judgment. If the issue has already been documented elsewhere and the author check passes, reusing the published note is usually safer than drafting a new sentence.
 
-For target version `8.5.7`, the same-series quarantine sheet is named:
+For target version `8.5.8`, the same-series quarantine sheet is named:
 
 ```text
 issue_already_in_earlier_v8.5

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from openpyxl.styles import PatternFill
+from openpyxl.utils import get_column_letter
 
 from .ai_client import build_generation_prompt
 from .constants import (
@@ -50,6 +51,7 @@ GRAY_FILL = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="sol
 NOT_NEEDED_PREFIX = "Release note is not needed:"
 NOT_NEEDED_SHEET_NAME = "release_note_not_needed"
 DOC_IMPACT_HEADER = "variable_or_config_doc_impact"
+DOC_IMPACT_COLUMN_WIDTH = 80
 DOC_IMPACT_FAILED_PREFIX = "DOC_IMPACT_ANALYSIS_FAILED:"
 SAME_SERIES_REASON_HEADER = "reason"
 # Global cap on the combined changed-file diff (files_summary) across all PRs of a
@@ -87,7 +89,13 @@ def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
         last_col = sheet.max_column
         sheet.cell(row=1, column=last_col + 1, value="published_release_notes")
         header = get_header(sheet)
+    set_doc_impact_column_width(sheet, header)
     return header
+
+
+def set_doc_impact_column_width(sheet: Any, header: dict[str, int]) -> None:
+    column_letter = get_column_letter(header[DOC_IMPACT_HEADER])
+    sheet.column_dimensions[column_letter].width = DOC_IMPACT_COLUMN_WIDTH
 
 
 def get_header(sheet: Any) -> dict[str, int]:
@@ -411,6 +419,7 @@ def move_not_needed_rows_to_sheet(
     copy_missing_headers(sheet, target)
     source_header = get_header(sheet)
     target_header = get_header(target)
+    set_doc_impact_column_width(target, target_header)
     for row_number in rows_to_move:
         target_row = target.max_row + 1
         for name, source_column in source_header.items():
