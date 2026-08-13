@@ -32,7 +32,9 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 アプリケーションは、次の JDBC 構成を使用して、クエリ インターフェイスを介してデータベースに接続します。
 
-    useServerPrepStmts=false
+```
+useServerPrepStmts=false
+```
 
 ### パフォーマンス分析 {#performance-analysis}
 
@@ -78,7 +80,9 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 シナリオ1では、アプリケーションはJDBC接続文字列に新しいパラメータ`useConfigs=maxPerformance`を追加します。このパラメータを使用することで、JDBCからデータベースに送信されるSQL文（例： `select @@session.transaction_read_only` ）を削減できます。完全な設定は次のとおりです。
 
-    useServerPrepStmts=false&useConfigs=maxPerformance
+```
+useServerPrepStmts=false&useConfigs=maxPerformance
+```
 
 ### パフォーマンス分析 {#performance-analysis}
 
@@ -135,7 +139,9 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプ�
 
 アプリケーションは以下の接続構成を使用します。シナリオ2と比較すると、JDBCパラメータ`useServerPrepStmts`の値が`true`に変更されており、Prepared Statementインターフェースが有効になっていることを示しています。
 
-    useServerPrepStmts=true&useConfigs=maxPerformance"
+```
+useServerPrepStmts=true&useConfigs=maxPerformance"
+```
 
 ### パフォーマンス分析 {#performance-analysis}
 
@@ -251,7 +257,9 @@ PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
 シナリオ 5 では、完全な JDBC 構成は次のようになります。
 
-    useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+```
+useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+```
 
 ### パフォーマンス分析 {#performance-analysis}
 
@@ -419,7 +427,9 @@ QPSは34.9kから40.9kに増加し、KVリクエストタイプはフェーズ`e
 
 -   TiDBはMySQLプロトコルの様々なコマンドと互換性があります。Prepared Statementインターフェースを使用し、以下のJDBC接続パラメータを設定することで、アプリケーションは最高のパフォーマンスを実現できます。
 
-        useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+    ```
+    useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
+    ```
 
 -   パフォーマンス分析とチューニングには、TiDB Dashboard (たとえば、 Top SQL機能や継続的なプロファイリング機能) とパフォーマンス概要ダッシュボードを使用することをお勧めします。
 

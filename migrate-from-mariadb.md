@@ -258,73 +258,79 @@ ORDER BY
 
 次の例に示すように、MariaDB はインデックスを自動的にプレフィックス インデックスに変換し、インデックスが最大キー長を超える場合は警告を返します。MariaDB とは異なり、TiDB は MySQL の動作に従います。つまり、自動変換は行わず、代わりにエラーを返します。したがって、MariaDB DDL を TiDB に移行する際、インデックス付き列が TiDB でサポートされる最大キー長を超える可能性がある場合は、プレフィックス インデックスを明示的に作成するようにスクリプトを変更する必要があります。
 
-    MariaDB> \W
-    Show warnings enabled.
-    MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
-    Query OK, 0 rows affected (0.024 sec)
+```
+MariaDB> \W
+Show warnings enabled.
+MariaDB> CREATE TABLE t1(id SERIAL, c1 VARCHAR(800));
+Query OK, 0 rows affected (0.024 sec)
 
-    MariaDB> ALTER TABLE t1 ADD INDEX(c1);
-    Query OK, 0 rows affected, 1 warning (0.031 sec)
-    Records: 0  Duplicates: 0  Warnings: 1
+MariaDB> ALTER TABLE t1 ADD INDEX(c1);
+Query OK, 0 rows affected, 1 warning (0.031 sec)
+Records: 0  Duplicates: 0  Warnings: 1
 
-    Note (Code 1071): Specified key was too long; max key length is 3072 bytes
-    MariaDB> SHOW CREATE TABLE t1\G
-    *************************** 1. row ***************************
-           Table: t1
-    Create Table: CREATE TABLE `t1` (
-      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-      `c1` varchar(800) DEFAULT NULL,
-      UNIQUE KEY `id` (`id`),
-      KEY `c1` (`c1`(768))
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
-    1 row in set (0.001 sec)
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> SHOW CREATE TABLE t1\G
+*************************** 1. row ***************************
+       Table: t1
+Create Table: CREATE TABLE `t1` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` varchar(800) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  KEY `c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
 
 MariaDBには、最大キー長を超える一意インデックスに対する特別な処理機能もあります。例えば、次の例では、MariaDBは`TEXT`列に`USING HASH`一意インデックスを作成します。TiDBにはこの機能はありません。
 
-    MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
-    Query OK, 0 rows affected (0.015 sec)
+```
+MariaDB> CREATE TABLE t2 (id SERIAL PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.015 sec)
 
-    MariaDB> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
-    Query OK, 0 rows affected, 1 warning (0.034 sec)
-    Records: 0  Duplicates: 0  Warnings: 1
+MariaDB> ALTER TABLE t2 ADD INDEX regular_index_c1 (c1);
+Query OK, 0 rows affected, 1 warning (0.034 sec)
+Records: 0  Duplicates: 0  Warnings: 1
 
-    Note (Code 1071): Specified key was too long; max key length is 3072 bytes
-    MariaDB> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
-    Query OK, 0 rows affected (0.048 sec)
-    Records: 0  Duplicates: 0  Warnings: 0
+Note (Code 1071): Specified key was too long; max key length is 3072 bytes
+MariaDB> ALTER TABLE t2 ADD UNIQUE INDEX unique_index_c1 (c1);
+Query OK, 0 rows affected (0.048 sec)
+Records: 0  Duplicates: 0  Warnings: 0
 
-    MariaDB> SHOW CREATE TABLE t2\G
-    *************************** 1. row ***************************
-           Table: t2
-    Create Table: CREATE TABLE `t2` (
-      `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-      `c1` text NOT NULL,
-      PRIMARY KEY (`id`),
-      UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
-      KEY `regular_index_c1` (`c1`(768))
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
-    1 row in set (0.001 sec)
+MariaDB> SHOW CREATE TABLE t2\G
+*************************** 1. row ***************************
+       Table: t2
+Create Table: CREATE TABLE `t2` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `c1` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_c1` (`c1`) USING HASH,
+  KEY `regular_index_c1` (`c1`(768))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci
+1 row in set (0.001 sec)
+```
 
 TiDB の長いテキスト列に一意性を持たせるには、生成ハッシュ列を追加し、その生成ハッシュ列に一意インデックスを作成します。手順は次のとおりです。
 
-    tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT NOT NULL);
-    Query OK, 0 rows affected (0.102 sec)
+```
+tidb> CREATE TABLE t1 (id int PRIMARY KEY, c1 TEXT NOT NULL);
+Query OK, 0 rows affected (0.102 sec)
 
-    tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
-    Query OK, 0 rows affected (0.242 sec)
+tidb> ALTER TABLE t1 ADD COLUMN c1_hash BINARY(32) AS (UNHEX(SHA2(c1,256)));
+Query OK, 0 rows affected (0.242 sec)
 
-    tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
-    Query OK, 0 rows affected (0.363 sec)
+tidb> ALTER TABLE t1 ADD UNIQUE KEY (c1_hash);
+Query OK, 0 rows affected (0.363 sec)
 
-    tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
-    Query OK, 1 row affected (0.015 sec)
+tidb> INSERT INTO t1(id,c1) VALUES (1,'aaa');
+Query OK, 1 row affected (0.015 sec)
 
-    tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
-    Query OK, 1 row affected (0.006 sec)
+tidb> INSERT INTO t1(id,c1) VALUES (2,'bbb');
+Query OK, 1 row affected (0.006 sec)
 
-    tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
-    ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
-    tidb>
+tidb> INSERT INTO t1(id,c1) VALUES (3,'aaa');
+ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\x8CJ\xC8\x9B\x1A\xDFW' for key 't1.c1_hash'
+tidb>
+```
 
 ## Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する。 {#dump-data-with-dumpling-and-restore-data-with-tidb-lightning}
 

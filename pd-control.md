@@ -1136,9 +1136,9 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     -   `v2`アルゴリズムは、TiDB v6.3.0 で導入された実験的スケジューラ戦略であり、TiDB v6.4.0 で一般提供（GA）されました。このアルゴリズムは、副作用を少なくしながら、ストアとファクタ間の公平性を向上させることに主眼を置いています。`strict-picking-store`が`true`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第 1 次元の優先度均等化により重点を置いています。`strict-picking-store`が`false`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第 2 次元のバランスを考慮しています。
     -   `strict-picking-store`を`true`とする`v1`アルゴリズムは保守的であり、両次元に高負荷のストアがある場合にのみスケジューリングが生成されます。特定のシナリオでは、次元の競合によりバランス調整を継続できなくなる可能性があります。第 1 次元でより適切なバランス調整を実現するには、 `strict-picking-store`を`false`に設定する必要があります。`v2`アルゴリズムは両次元でより適切なバランス調整を実現し、無効なスケジューリングを削減します。
 
-    ```bash
-    scheduler config balance-hot-region-scheduler set rank-formula-version v2
-    ```
+  ```bash
+  scheduler config balance-hot-region-scheduler set rank-formula-version v2
+  ```
 
 -   `enable-for-tiflash` 、 TiFlashインスタンス間のホットリージョンスケジューリングを有効にするかどうかを制御します。通常は有効です。無効にすると、 TiFlashインスタンス間のホットリージョンスケジューリングは実行されません。
 
@@ -1199,10 +1199,12 @@ jq 形式の出力については、 [jq形式のjson出力の使用法](#jq-for
 store
 ```
 
-    {
-      "count": 3,
-      "stores": [...]
-    }
+```
+{
+  "count": 3,
+  "stores": [...]
+}
+```
 
 ID が 1 のストアを取得するには、次のコマンドを実行します。
 
@@ -1210,7 +1212,9 @@ ID が 1 のストアを取得するには、次のコマンドを実行しま�
 store 1
 ```
 
-    ......
+```
+......
+```
 
 #### ストアを削除する {#delete-a-store}
 
@@ -1382,9 +1386,11 @@ unsafe remove-failed-stores show
 store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_name}'
 ```
 
-    {"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
-    {"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
-    ...
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+...
+```
 
 ### すべてのTiFlashノードをクエリする {#query-all-tiflash-nodes}
 
@@ -1392,9 +1398,11 @@ store --jq='.stores[].store | select(.state_name!="Up") | {id, address, state_na
 store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | {id, address, state_name}'
 ```
 
-    {"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
-    {"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
-    ...
+```
+{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
+...
+```
 
 ### リージョンレプリカの配布ステータスを照会する {#query-the-distribution-status-of-the-region-replicas}
 

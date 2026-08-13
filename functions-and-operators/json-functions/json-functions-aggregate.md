@@ -21,12 +21,14 @@ TiDB は MySQL 8.0 で利用可能な[2つの集計JSON関数](https://dev.mysql
 SELECT JSON_ARRAYAGG(v) FROM (SELECT 1 'v' UNION SELECT 2);
 ```
 
-    +------------------+
-    | JSON_ARRAYAGG(v) |
-    +------------------+
-    | [2, 1]           |
-    +------------------+
-    1 row in set (0.00 sec)
+```
++------------------+
+| JSON_ARRAYAGG(v) |
++------------------+
+| [2, 1]           |
++------------------+
+1 row in set (0.00 sec)
+```
 
 ## `JSON_OBJECTAGG()` {#json_objectagg}
 
@@ -72,31 +74,35 @@ VALUES
 TABLE plants;
 ```
 
-    +----+--------+
-    | id | name   |
-    +----+--------+
-    |  1 | rose   |
-    |  2 | tulip  |
-    |  3 | orchid |
-    +----+--------+
-    3 rows in set (0.00 sec)
+```
++----+--------+
+| id | name   |
++----+--------+
+|  1 | rose   |
+|  2 | tulip  |
+|  3 | orchid |
++----+--------+
+3 rows in set (0.00 sec)
+```
 
 ```sql
 TABLE plant_attributes;
 ```
 
-    +----+----------+------------+--------+
-    | id | plant_id | attribute  | value  |
-    +----+----------+------------+--------+
-    |  1 |        1 | color      | red    |
-    |  2 |        1 | thorns     | yes    |
-    |  3 |        2 | color      | orange |
-    |  4 |        2 | thorns     | no     |
-    |  5 |        2 | grows_from | bulb   |
-    |  6 |        3 | color      | white  |
-    |  7 |        3 | thorns     | no     |
-    +----+----------+------------+--------+
-    7 rows in set (0.00 sec)
+```
++----+----------+------------+--------+
+| id | plant_id | attribute  | value  |
++----+----------+------------+--------+
+|  1 |        1 | color      | red    |
+|  2 |        1 | thorns     | yes    |
+|  3 |        2 | color      | orange |
+|  4 |        2 | thorns     | no     |
+|  5 |        2 | grows_from | bulb   |
+|  6 |        3 | color      | white  |
+|  7 |        3 | thorns     | no     |
++----+----------+------------+--------+
+7 rows in set (0.00 sec)
+```
 
 このデータには`JSON_OBJECTAGG()`関数を使用できます。ここでは、グループごとに複数のキー/値のペアがJSONオブジェクトに集約されていることがわかります。
 
@@ -111,14 +117,16 @@ GROUP BY
     plant_id;
 ```
 
-    +--------+-----------------------------------------------------------+
-    | name   | JSON_OBJECTAGG(attribute,value)                           |
-    +--------+-----------------------------------------------------------+
-    | rose   | {"color": "red", "thorns": "yes"}                         |
-    | orchid | {"color": "white", "thorns": "no"}                        |
-    | tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
-    +--------+-----------------------------------------------------------+
-    3 rows in set (0.00 sec)
+```
++--------+-----------------------------------------------------------+
+| name   | JSON_OBJECTAGG(attribute,value)                           |
++--------+-----------------------------------------------------------+
+| rose   | {"color": "red", "thorns": "yes"}                         |
+| orchid | {"color": "white", "thorns": "no"}                        |
+| tulip  | {"color": "orange", "grows_from": "bulb", "thorns": "no"} |
++--------+-----------------------------------------------------------+
+3 rows in set (0.00 sec)
+```
 
 ## 参照 {#see-also}
 

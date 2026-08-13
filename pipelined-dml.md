@@ -148,7 +148,9 @@ TiDBがパイプラインDMLを使用したステートメントの実行を拒�
 
 パイプライン DML が有効になっている場合でも、メモリ制限の問題によってクエリが終了する可能性があります。
 
-    The query has been canceled due to exceeding the memory limit allowed for a single SQL query. Please try to narrow the query scope or increase the tidb_mem_quota_query limit, and then try again.
+```
+The query has been canceled due to exceeding the memory limit allowed for a single SQL query. Please try to narrow the query scope or increase the tidb_mem_quota_query limit, and then try again.
+```
 
 このエラーは、パイプラインDMLがトランザクション実行中のデータによるメモリ使用量のみを制御するために発生します。しかし、ステートメント実行中に消費されるメモリの総量には、エグゼキューターなどの他のコンポーネントによって使用されるメモリも含まれます。必要なメモリの総量がTiDBのメモリ制限を超えると、メモリ不足（OOM）エラーが発生する可能性があります。
 

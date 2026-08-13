@@ -80,12 +80,14 @@ ALTER USER 'user1' RESOURCE GROUP `rg1`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-    +--------------------------+
-    | CURRENT_RESOURCE_GROUP() |
-    +--------------------------+
-    | rg1                      |
-    +--------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg1                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
 
 `SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
 
@@ -94,12 +96,14 @@ SET RESOURCE GROUP `rg2`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-    +--------------------------+
-    | CURRENT_RESOURCE_GROUP() |
-    +--------------------------+
-    | rg2                      |
-    +--------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg2                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_BOUNDED_STALENESS {#tidb_bounded_staleness}
 
@@ -113,29 +117,35 @@ SELECT CURRENT_RESOURCE_GROUP();
 BEGIN;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_CURRENT_TSO();
 ```
 
-    +--------------------+
-    | TIDB_CURRENT_TSO() |
-    +--------------------+
-    | 450456244814610433 |
-    +--------------------+
-    1 row in set (0.00 sec)
+```
++--------------------+
+| TIDB_CURRENT_TSO() |
++--------------------+
+| 450456244814610433 |
++--------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT @@tidb_current_ts;
 ```
 
-    +--------------------+
-    | @@tidb_current_ts  |
-    +--------------------+
-    | 450456244814610433 |
-    +--------------------+
-    1 row in set (0.00 sec)
+```
++--------------------+
+| @@tidb_current_ts  |
++--------------------+
+| 450456244814610433 |
++--------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_DECODE_BINARY_PLAN {#tidb_decode_binary_plan}
 
@@ -149,14 +159,16 @@ SELECT @@tidb_current_ts;
 SELECT BINARY_PLAN,TIDB_DECODE_BINARY_PLAN(BINARY_PLAN) FROM information_schema.STATEMENTS_SUMMARY LIMIT 1\G
 ```
 
-    *************************** 1. row ***************************
-                             BINARY_PLAN: lQLwPgqQAgoMUHJvamVjdGlvbl8zEngKDk1lbVRhYmxlU2Nhbl80KQAAAAAAiMNAMAM4AUABSioKKAoSaW5mb3JtYQU00HNjaGVtYRISU1RBVEVNRU5UU19TVU1NQVJZWhV0aW1lOjI5LjPCtXMsIGxvb3BzOjJw////CQIEAXgJCBD///8BIQFnDOCb+EA6cQCQUjlDb2x1bW4jOTIsIHRpZGJfZGVjb2RlX2JpbmFyeV9wbGFuKBUjCCktPg0MEDEwM1oWBYAIMTA4NoEAeGINQ29uY3VycmVuY3k6NXDIZXj///////////8BGAE=
-    TIDB_DECODE_BINARY_PLAN(BINARY_PLAN):
-    | id               | estRows  | estCost   | actRows | task | access object            | execution info                       | operator info                                             | memory  | disk  |
-    | Projection_3     | 10000.00 | 100798.00 | 3       | root |                          | time:108.3µs, loops:2, Concurrency:5 | Column#92, tidb_decode_binary_plan(Column#92)->Column#103 | 12.7 KB | N/A   |
-    | └─MemTableScan_4 | 10000.00 | 0.00      | 3       | root | table:STATEMENTS_SUMMARY | time:29.3µs, loops:2                 |                                                           | N/A     | N/A   |
+```
+*************************** 1. row ***************************
+                         BINARY_PLAN: lQLwPgqQAgoMUHJvamVjdGlvbl8zEngKDk1lbVRhYmxlU2Nhbl80KQAAAAAAiMNAMAM4AUABSioKKAoSaW5mb3JtYQU00HNjaGVtYRISU1RBVEVNRU5UU19TVU1NQVJZWhV0aW1lOjI5LjPCtXMsIGxvb3BzOjJw////CQIEAXgJCBD///8BIQFnDOCb+EA6cQCQUjlDb2x1bW4jOTIsIHRpZGJfZGVjb2RlX2JpbmFyeV9wbGFuKBUjCCktPg0MEDEwM1oWBYAIMTA4NoEAeGINQ29uY3VycmVuY3k6NXDIZXj///////////8BGAE=
+TIDB_DECODE_BINARY_PLAN(BINARY_PLAN):
+| id               | estRows  | estCost   | actRows | task | access object            | execution info                       | operator info                                             | memory  | disk  |
+| Projection_3     | 10000.00 | 100798.00 | 3       | root |                          | time:108.3µs, loops:2, Concurrency:5 | Column#92, tidb_decode_binary_plan(Column#92)->Column#103 | 12.7 KB | N/A   |
+| └─MemTableScan_4 | 10000.00 | 0.00      | 3       | root | table:STATEMENTS_SUMMARY | time:29.3µs, loops:2                 |                                                           | N/A     | N/A   |
 
-    1 row in set (0.00 sec)
+1 row in set (0.00 sec)
+```
 
 ## TIDB_DECODE_KEY {#tidb_decode_key}
 
@@ -343,23 +355,27 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 1');
 ```
 
-    +------------------------------------------------------------------+
-    | TIDB_ENCODE_SQL_DIGEST('SELECT 1')                               |
-    +------------------------------------------------------------------+
-    | e1c71d1661ae46e09b7aaec1c390957f0d6260410df4e4bc71b9c8d681021471 |
-    +------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++------------------------------------------------------------------+
+| TIDB_ENCODE_SQL_DIGEST('SELECT 1')                               |
++------------------------------------------------------------------+
+| e1c71d1661ae46e09b7aaec1c390957f0d6260410df4e4bc71b9c8d681021471 |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 2');
 ```
 
-    +------------------------------------------------------------------+
-    | TIDB_ENCODE_SQL_DIGEST('SELECT 2')                               |
-    +------------------------------------------------------------------+
-    | e1c71d1661ae46e09b7aaec1c390957f0d6260410df4e4bc71b9c8d681021471 |
-    +------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++------------------------------------------------------------------+
+| TIDB_ENCODE_SQL_DIGEST('SELECT 2')                               |
++------------------------------------------------------------------+
+| e1c71d1661ae46e09b7aaec1c390957f0d6260410df4e4bc71b9c8d681021471 |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_IS_DDL_OWNER {#tidb_is_ddl_owner}
 
@@ -369,12 +385,14 @@ SELECT TIDB_ENCODE_SQL_DIGEST('SELECT 2');
 SELECT TIDB_IS_DDL_OWNER();
 ```
 
-    +---------------------+
-    | TIDB_IS_DDL_OWNER() |
-    +---------------------+
-    |                   1 |
-    +---------------------+
-    1 row in set (0.00 sec)
+```
++---------------------+
+| TIDB_IS_DDL_OWNER() |
++---------------------+
+|                   1 |
++---------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_PARSE_TSO {#tidb_parse_tso}
 
@@ -410,23 +428,27 @@ ROLLBACK;
 SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610433);
 ```
 
-    +--------------------------------------------+
-    | TIDB_PARSE_TSO_LOGICAL(450456244814610433) |
-    +--------------------------------------------+
-    |                                          1 |
-    +--------------------------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------------------------+
+| TIDB_PARSE_TSO_LOGICAL(450456244814610433) |
++--------------------------------------------+
+|                                          1 |
++--------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_PARSE_TSO_LOGICAL(450456244814610434);
 ```
 
-    +--------------------------------------------+
-    | TIDB_PARSE_TSO_LOGICAL(450456244814610434) |
-    +--------------------------------------------+
-    |                                          2 |
-    +--------------------------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------------------------+
+| TIDB_PARSE_TSO_LOGICAL(450456244814610434) |
++--------------------------------------------+
+|                                          2 |
++--------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_ROW_CHECKSUM {#tidb_row_checksum}
 
@@ -550,12 +572,14 @@ Store: tikv
 SELECT VITESS_HASH(123);
 ```
 
-    +---------------------+
-    | VITESS_HASH(123)    |
-    +---------------------+
-    | 1155070131015363447 |
-    +---------------------+
-    1 row in set (0.00 sec)
+```
++---------------------+
+| VITESS_HASH(123)    |
++---------------------+
+| 1155070131015363447 |
++---------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_ENCODE_INDEX_KEY {#tidb_encode_index_key}
 
@@ -603,24 +627,30 @@ SELECT TIDB_ENCODE_INDEX_KEY(
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 INSERT INTO t VALUES(1,2);
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1);
 ```
 
-    +----------------------------------------------------------------------------+
-    | TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1)                            |
-    +----------------------------------------------------------------------------+
-    | 7480000000000000b45f698000000000000001038000000000000002038000000000000001 |
-    +----------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++----------------------------------------------------------------------------+
+| TIDB_ENCODE_INDEX_KEY('test', 't', 'idx', 2, 1)                            |
++----------------------------------------------------------------------------+
+| 7480000000000000b45f698000000000000001038000000000000002038000000000000001 |
++----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_ENCODE_RECORD_KEY {#tidb_encode_record_key}
 
@@ -640,35 +670,43 @@ TIDB_ENCODE_RECORD_KEY(<db_name>, <table_name>, <handle_columns>...)
 CREATE TABLE t(id int PRIMARY KEY, a int, KEY `idx` (a));
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 INSERT INTO t VALUES(1,2);
 ```
 
-    Query OK, 1 row affected (0.00 sec)
+```
+Query OK, 1 row affected (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_ENCODE_RECORD_KEY('test', 't', 1);
 ```
 
-    +----------------------------------------+
-    | TIDB_ENCODE_RECORD_KEY('test', 't', 1) |
-    +----------------------------------------+
-    | 7480000000000000845f728000000000000001 |
-    +----------------------------------------+
-    1 row in set (0.00 sec)
+```
++----------------------------------------+
+| TIDB_ENCODE_RECORD_KEY('test', 't', 1) |
++----------------------------------------+
+| 7480000000000000845f728000000000000001 |
++----------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
 ```
 
-    +-----------------------------------------------------------+
-    | TIDB_DECODE_KEY('7480000000000000845f728000000000000001') |
-    +-----------------------------------------------------------+
-    | {"id":1,"table_id":"132"}                                 |
-    +-----------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++-----------------------------------------------------------+
+| TIDB_DECODE_KEY('7480000000000000845f728000000000000001') |
++-----------------------------------------------------------+
+| {"id":1,"table_id":"132"}                                 |
++-----------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ## TIDB_MVCC_INFO {#tidb_mvcc_info}
 
@@ -678,27 +716,29 @@ SELECT TIDB_DECODE_KEY('7480000000000000845f728000000000000001');
 SELECT JSON_PRETTY(TIDB_MVCC_INFO('74800000000000007f5f698000000000000001038000000000000001038000000000000001')) AS info\G
 ```
 
-    *************************** 1. row ***************************
-    info: [
-      {
-        "key": "74800000000000007f5f698000000000000001038000000000000001038000000000000001",
-        "mvcc": {
-          "info": {
-            "values": [
-              {
-                "start_ts": 454654803134119936,
-                "value": "MA=="
-              }
-            ],
-            "writes": [
-              {
-                "commit_ts": 454654803134119937,
-                "short_value": "MA==",
-                "start_ts": 454654803134119936
-              }
-            ]
+```
+*************************** 1. row ***************************
+info: [
+  {
+    "key": "74800000000000007f5f698000000000000001038000000000000001038000000000000001",
+    "mvcc": {
+      "info": {
+        "values": [
+          {
+            "start_ts": 454654803134119936,
+            "value": "MA=="
           }
-        }
+        ],
+        "writes": [
+          {
+            "commit_ts": 454654803134119937,
+            "short_value": "MA==",
+            "start_ts": 454654803134119936
+          }
+        ]
       }
-    ]
-    1 row in set (0.00 sec)
+    }
+  }
+]
+1 row in set (0.00 sec)
+```

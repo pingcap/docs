@@ -73,17 +73,21 @@ tiup cluster display ${cluster-name}
 
     -   構成がコンポーネントに対してグローバルに有効な場合は、 `server_configs`を編集します。
 
-            server_configs:
-              tidb:
-                log.slow-threshold: 300
+        ```
+        server_configs:
+          tidb:
+            log.slow-threshold: 300
+        ```
 
     -   特定のノードで設定を有効にする場合は、ノードの`config`で設定を編集します。
 
-            tidb_servers:
-            - host: 10.0.1.11
-              port: 4000
-              config:
-                  log.slow-threshold: 300
+        ```
+        tidb_servers:
+        - host: 10.0.1.11
+          port: 4000
+          config:
+              log.slow-threshold: 300
+        ```
 
     パラメータの形式については[TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
@@ -101,9 +105,11 @@ tiup cluster display ${cluster-name}
 
 tidb-server でトランザクション サイズ制限パラメータ ( [パフォーマンス](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように設定を編集します。
 
-    server_configs:
-      tidb:
-        performance.txn-total-size-limit: 1073741824
+```
+server_configs:
+  tidb:
+    performance.txn-total-size-limit: 1073741824
+```
 
 次に、 `tiup cluster reload ${cluster-name} -R tidb`コマンドを実行して、TiDBコンポーネントをローリング再起動します。
 
@@ -115,24 +121,26 @@ tidb-server でトランザクション サイズ制限パラメータ ( [パフ
 tiup cluster patch --help
 ```
 
-    Replace the remote package with a specified package and restart the service
+```
+Replace the remote package with a specified package and restart the service
 
-    Usage:
-      cluster patch <cluster-name> <package-path> [flags]
+Usage:
+  cluster patch <cluster-name> <package-path> [flags]
 
-    Flags:
-      -h, --help                   help for patch
-      -N, --node strings           Specify the nodes
-          --overwrite              Use this package in the future scale-out operations
-      -R, --role strings           Specify the role
-          --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 600)
+Flags:
+  -h, --help                   help for patch
+  -N, --node strings           Specify the nodes
+      --overwrite              Use this package in the future scale-out operations
+  -R, --role strings           Specify the role
+      --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 600)
 
-    Global Flags:
+Global Flags:
 
-          --native-ssh        Use the system's native SSH client
-          --wait-timeout int  Timeout of waiting the operation
-          --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-      -y, --yes               Skip all confirmations and assumes 'yes'
+      --native-ssh        Use the system's native SSH client
+      --wait-timeout int  Timeout of waiting the operation
+      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
+  -y, --yes               Skip all confirmations and assumes 'yes'
+```
 
 TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスター内のすべての TiDB パッケージを置き換える場合は、次のコマンドを実行します。
 

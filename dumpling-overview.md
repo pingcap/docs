@@ -298,14 +298,16 @@ Dumpling は`--consistency <consistency level>`オプションを使用して、
 ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 ```
 
-    140B  metadata
-    66B   test-schema-create.sql
-    300B  test.sbtest1-schema.sql
-    190K  test.sbtest1.0.sql
-    300B  test.sbtest2-schema.sql
-    190K  test.sbtest2.0.sql
-    300B  test.sbtest3-schema.sql
-    190K  test.sbtest3.0.sql
+```
+140B  metadata
+66B   test-schema-create.sql
+300B  test.sbtest1-schema.sql
+190K  test.sbtest1.0.sql
+300B  test.sbtest2-schema.sql
+190K  test.sbtest2.0.sql
+300B  test.sbtest3-schema.sql
+190K  test.sbtest3.0.sql
+```
 
 ### TiDBの履歴データスナップショットをエクスポート {#export-historical-data-snapshots-of-tidb}
 

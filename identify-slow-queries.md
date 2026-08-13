@@ -358,11 +358,13 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
     from slow_query;
     ```
 
-        +----------+----------------------------+----------------------------+
-        | count(*) | min(time)                  | max(time)                  |
-        +----------+----------------------------+----------------------------+
-        | 122492   | 2020-03-11 23:35:20.908574 | 2020-03-25 19:16:38.229035 |
-        +----------+----------------------------+----------------------------+
+    ```
+    +----------+----------------------------+----------------------------+
+    | count(*) | min(time)                  | max(time)                  |
+    +----------+----------------------------+----------------------------+
+    | 122492   | 2020-03-11 23:35:20.908574 | 2020-03-25 19:16:38.229035 |
+    +----------+----------------------------+----------------------------+
+    ```
 
 -   例えば、 `2020-03-10 00:00:00`から`2020-03-11 00:00:00`までといった時間範囲を指定すると、TiDB はまず指定された時間範囲のスローログファイルを探し出し、次にスロークエリ情報を解析します。
 
@@ -375,11 +377,13 @@ TiDB 4.0 では、 `SLOW_QUERY`は、ローテーションされたスローロ�
       and time < '2020-03-11 00:00:00';
     ```
 
-        +----------+----------------------------+----------------------------+
-        | count(*) | min(time)                  | max(time)                  |
-        +----------+----------------------------+----------------------------+
-        | 2618049  | 2020-03-10 00:00:00.427138 | 2020-03-10 23:00:22.716728 |
-        +----------+----------------------------+----------------------------+
+    ```
+    +----------+----------------------------+----------------------------+
+    | count(*) | min(time)                  | max(time)                  |
+    +----------+----------------------------+----------------------------+
+    | 2618049  | 2020-03-10 00:00:00.427138 | 2020-03-10 23:00:22.716728 |
+    +----------+----------------------------+----------------------------+
+    ```
 
 > **Note:**
 >
@@ -405,12 +409,14 @@ limit 2;
 
 出力例：
 
-    +--------------+------------------------------------------------------------------+
-    | query_time   | query                                                            |
-    +--------------+------------------------------------------------------------------+
-    | 12.77583857  | select * from t_slim, t_wide where t_slim.c0=t_wide.c0;          |
-    |  0.734982725 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c0; |
-    +--------------+------------------------------------------------------------------+
+```
++--------------+------------------------------------------------------------------+
+| query_time   | query                                                            |
++--------------+------------------------------------------------------------------+
+| 12.77583857  | select * from t_slim, t_wide where t_slim.c0=t_wide.c0;          |
+|  0.734982725 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c0; |
++--------------+------------------------------------------------------------------+
+```
 
 ### `test`ユーザーの上位N件のスロークエリを照会する {#query-the-top-n-slow-queries-of-the-test-user}
 
@@ -427,11 +433,13 @@ limit 2;
 
 出力例：
 
-    +-------------+------------------------------------------------------------------+----------------+
-    | Query_time  | query                                                            | user           |
-    +-------------+------------------------------------------------------------------+----------------+
-    | 0.676408014 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c1; | test           |
-    +-------------+------------------------------------------------------------------+----------------+
+```
++-------------+------------------------------------------------------------------+----------------+
+| Query_time  | query                                                            | user           |
++-------------+------------------------------------------------------------------+----------------+
+| 0.676408014 | select t0.c0, t1.c1 from t_slim t0, t_wide t1 where t0.c0=t1.c1; | test           |
++-------------+------------------------------------------------------------------+----------------+
+```
 
 ### 同じSQLフィンガープリントを持つ類似のスロークエリを検索する {#query-similar-slow-queries-with-the-same-sql-fingerprints}
 
@@ -449,11 +457,13 @@ limit 2;
 
     出力例：
 
-        +-------------+-----------------------------+------------------------------------------------------------------+
-        | query_time  | query                       | digest                                                           |
-        +-------------+-----------------------------+------------------------------------------------------------------+
-        | 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
-        +-------------+-----------------------------+------------------------------------------------------------------+
+    ```
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    | query_time  | query                       | digest                                                           |
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    | 0.302558006 | select * from t1 where a=1; | 4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa |
+    +-------------+-----------------------------+------------------------------------------------------------------+
+    ```
 
 2.  同様のスロークエリをフィンガープリントを使って照会する。
 
@@ -465,12 +475,14 @@ limit 2;
 
     出力例：
 
-        +-----------------------------+-------------+
-        | query                       | query_time  |
-        +-----------------------------+-------------+
-        | select * from t1 where a=1; | 0.302558006 |
-        | select * from t1 where a=2; | 0.401313532 |
-        +-----------------------------+-------------+
+    ```
+    +-----------------------------+-------------+
+    | query                       | query_time  |
+    +-----------------------------+-------------+
+    | select * from t1 where a=1; | 0.302558006 |
+    | select * from t1 where a=2; | 0.401313532 |
+    +-----------------------------+-------------+
+    ```
 
 ## 擬似統計`stats`を使用して、スロークエリをクエリする {#query-slow-queries-with-pseudo-stats}
 
@@ -483,15 +495,17 @@ where is_internal = false
 
 出力例：
 
-    +-----------------------------+-------------+---------------------------------+
-    | query                       | query_time  | stats                           |
-    +-----------------------------+-------------+---------------------------------+
-    | select * from t1 where a=1; | 0.302558006 | t1:pseudo                       |
-    | select * from t1 where a=2; | 0.401313532 | t1:pseudo                       |
-    | select * from t1 where a>2; | 0.602011247 | t1:pseudo                       |
-    | select * from t1 where a>3; | 0.50077719  | t1:pseudo                       |
-    | select * from t1 join t2;   | 0.931260518 | t1:407872303825682445,t2:pseudo |
-    +-----------------------------+-------------+---------------------------------+
+```
++-----------------------------+-------------+---------------------------------+
+| query                       | query_time  | stats                           |
++-----------------------------+-------------+---------------------------------+
+| select * from t1 where a=1; | 0.302558006 | t1:pseudo                       |
+| select * from t1 where a=2; | 0.401313532 | t1:pseudo                       |
+| select * from t1 where a>2; | 0.602011247 | t1:pseudo                       |
+| select * from t1 where a>3; | 0.50077719  | t1:pseudo                       |
+| select * from t1 join t2;   | 0.931260518 | t1:407872303825682445,t2:pseudo |
++-----------------------------+-------------+---------------------------------+
+```
 
 ### 実行計画が変更されたスロークエリ {#query-slow-queries-whose-execution-plan-is-changed}
 
@@ -509,18 +523,20 @@ limit 3\G
 
 出力例：
 
-    ***************************[ 1. row ]***************************
-    count      | 2
-    digest     | 17b4518fde82e32021877878bec2bb309619d384fca944106fcaf9c93b536e94
-    min(query) | SELECT DISTINCT c FROM sbtest25 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (291638, 291737)];
-    ***************************[ 2. row ]***************************
-    count      | 2
-    digest     | 9337865f3e2ee71c1c2e740e773b6dd85f23ad00f8fa1f11a795e62e15fc9b23
-    min(query) | SELECT DISTINCT c FROM sbtest22 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (215420, 215519)];
-    ***************************[ 3. row ]***************************
-    count      | 2
-    digest     | db705c89ca2dfc1d39d10e0f30f285cbbadec7e24da4f15af461b148d8ffb020
-    min(query) | SELECT DISTINCT c FROM sbtest11 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (303359, 303458)];
+```
+***************************[ 1. row ]***************************
+count      | 2
+digest     | 17b4518fde82e32021877878bec2bb309619d384fca944106fcaf9c93b536e94
+min(query) | SELECT DISTINCT c FROM sbtest25 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (291638, 291737)];
+***************************[ 2. row ]***************************
+count      | 2
+digest     | 9337865f3e2ee71c1c2e740e773b6dd85f23ad00f8fa1f11a795e62e15fc9b23
+min(query) | SELECT DISTINCT c FROM sbtest22 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (215420, 215519)];
+***************************[ 3. row ]***************************
+count      | 2
+digest     | db705c89ca2dfc1d39d10e0f30f285cbbadec7e24da4f15af461b148d8ffb020
+min(query) | SELECT DISTINCT c FROM sbtest11 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (303359, 303458)];
+```
 
 そして、上記のクエリ結果に含まれるSQLフィンガープリントを使用して、さまざまなプランを照会できます。
 
@@ -534,18 +550,20 @@ group by plan_digest\G
 
 出力例：
 
-    *************************** 1. row ***************************
-      min(plan):    Sort_6                  root    100.00131380758702      sbtest.sbtest25.c:asc
-            └─HashAgg_10            root    100.00131380758702      group by:sbtest.sbtest25.c, funcs:firstrow(sbtest.sbtest25.c)->sbtest.sbtest25.c
-              └─TableReader_15      root    100.00131380758702      data:TableRangeScan_14
-                └─TableScan_14      cop     100.00131380758702      table:sbtest25, range:[502791,502890], keep order:false
-    plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
-    *************************** 2. row ***************************
-      min(plan):    Sort_6                  root    1                       sbtest.sbtest25.c:asc
-            └─HashAgg_12            root    1                       group by:sbtest.sbtest25.c, funcs:firstrow(sbtest.sbtest25.c)->sbtest.sbtest25.c
-              └─TableReader_13      root    1                       data:HashAgg_8
-                └─HashAgg_8         cop     1                       group by:sbtest.sbtest25.c,
-                  └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
+```
+*************************** 1. row ***************************
+  min(plan):    Sort_6                  root    100.00131380758702      sbtest.sbtest25.c:asc
+        └─HashAgg_10            root    100.00131380758702      group by:sbtest.sbtest25.c, funcs:firstrow(sbtest.sbtest25.c)->sbtest.sbtest25.c
+          └─TableReader_15      root    100.00131380758702      data:TableRangeScan_14
+            └─TableScan_14      cop     100.00131380758702      table:sbtest25, range:[502791,502890], keep order:false
+plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
+*************************** 2. row ***************************
+  min(plan):    Sort_6                  root    1                       sbtest.sbtest25.c:asc
+        └─HashAgg_12            root    1                       group by:sbtest.sbtest25.c, funcs:firstrow(sbtest.sbtest25.c)->sbtest.sbtest25.c
+          └─TableReader_13      root    1                       data:HashAgg_8
+            └─HashAgg_8         cop     1                       group by:sbtest.sbtest25.c,
+              └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
+```
 
 ### クラスタ内の各TiDBノードにおけるスロークエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
 
@@ -555,12 +573,14 @@ select instance, count(*) from information_schema.cluster_slow_query where time 
 
 出力例：
 
-    +---------------+----------+
-    | instance      | count(*) |
-    +---------------+----------+
-    | 0.0.0.0:10081 | 124      |
-    | 0.0.0.0:10080 | 119771   |
-    +---------------+----------+
+```
++---------------+----------+
+| instance      | count(*) |
++---------------+----------+
+| 0.0.0.0:10081 | 124      |
+| 0.0.0.0:10080 | 119771   |
++---------------+----------+
+```
 
 ### クエリの遅延ログが異常な時間帯にのみ発生する {#query-slow-logs-occurring-only-in-abnormal-time-period}
 
@@ -596,20 +616,22 @@ ORDER BY  t1.sum_query_time DESC limit 10\G
 
 出力例：
 
-    ***************************[ 1. row ]***************************
-    count(*)           | 200
-    min(time)          | 2020-03-10 13:24:27.216186
-    sum_query_time     | 50.114126194
-    sum_process_time   | 268.351
-    sum_wait_time      | 8.476
-    sum(Commit_time)   | 1.044304306
-    sum(Request_count) | 6077
-    sum(process_keys)  | 202871950
-    sum(Write_keys)    | 319500
-    max(Cop_proc_max)  | 0.263
-    min(query)         | delete from test.tcs2 limit 5000;
-    min(prev_stmt)     |
-    digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8d03df
+```
+***************************[ 1. row ]***************************
+count(*)           | 200
+min(time)          | 2020-03-10 13:24:27.216186
+sum_query_time     | 50.114126194
+sum_process_time   | 268.351
+sum_wait_time      | 8.476
+sum(Commit_time)   | 1.044304306
+sum(Request_count) | 6077
+sum(process_keys)  | 202871950
+sum(Write_keys)    | 319500
+max(Cop_proc_max)  | 0.263
+min(query)         | delete from test.tcs2 limit 5000;
+min(prev_stmt)     |
+digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8d03df
+```
 
 ### 他のTiDBスローログファイルを解析する {#parse-other-tidb-slow-log-files}
 
@@ -635,27 +657,29 @@ pt-query-digest --report tidb-slow.log
 
 出力例：
 
-    # 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
-    # Current date: Mon Mar 18 13:18:51 2019
-    # Hostname: localhost.localdomain
-    # Files: tidb-slow.log
-    # Overall: 1.02k total, 21 unique, 0 QPS, 0x concurrency _________________
-    # Time range: 2019-03-18-12:22:16 to 2019-03-18-13:08:52
-    # Attribute          total     min     max     avg     95%  stddev  median
-    # ============     ======= ======= ======= ======= ======= ======= =======
-    # Exec time           218s    10ms     13s   213ms    30ms      1s    19ms
-    # Query size       175.37k       9   2.01k  175.89  158.58  122.36  158.58
-    # Commit time         46ms     2ms     7ms     3ms     7ms     1ms     3ms
-    # Conn ID               71       1      16    8.88   15.25    4.06    9.83
-    # Process keys     581.87k       2 103.15k  596.43  400.73   3.91k  400.73
-    # Process time         31s     1ms     10s    32ms    19ms   334ms    16ms
-    # Request coun       1.97k       1      10    2.02    1.96    0.33    1.96
-    # Total keys       636.43k       2 103.16k  652.35  793.42   3.97k  400.73
-    # Txn start ts     374.38E       0  16.00E 375.48P   1.25P  89.05T   1.25P
-    # Wait time          943ms     1ms    19ms     1ms     2ms     1ms   972us
-    .
-    .
-    .
+```
+# 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
+# Current date: Mon Mar 18 13:18:51 2019
+# Hostname: localhost.localdomain
+# Files: tidb-slow.log
+# Overall: 1.02k total, 21 unique, 0 QPS, 0x concurrency _________________
+# Time range: 2019-03-18-12:22:16 to 2019-03-18-13:08:52
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           218s    10ms     13s   213ms    30ms      1s    19ms
+# Query size       175.37k       9   2.01k  175.89  158.58  122.36  158.58
+# Commit time         46ms     2ms     7ms     3ms     7ms     1ms     3ms
+# Conn ID               71       1      16    8.88   15.25    4.06    9.83
+# Process keys     581.87k       2 103.15k  596.43  400.73   3.91k  400.73
+# Process time         31s     1ms     10s    32ms    19ms   334ms    16ms
+# Request coun       1.97k       1      10    2.02    1.96    0.33    1.96
+# Total keys       636.43k       2 103.16k  652.35  793.42   3.97k  400.73
+# Txn start ts     374.38E       0  16.00E 375.48P   1.25P  89.05T   1.25P
+# Wait time          943ms     1ms    19ms     1ms     2ms     1ms   972us
+.
+.
+.
+```
 
 ## 問題のあるSQL文を特定する {#identify-problematic-sql-statements}
 

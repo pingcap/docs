@@ -117,7 +117,9 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
@@ -125,12 +127,14 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-        +-------------------------+:
-        | @@global.tidb_gc_enable |
-        +-------------------------+
-        |                       0 |
-        +-------------------------+
-        1 row in set (0.00 sec)
+    ```
+    +-------------------------+:
+    | @@global.tidb_gc_enable |
+    +-------------------------+
+    |                       0 |
+    +-------------------------+
+    1 row in set (0.00 sec)
+    ```
 
     > **Note:**
     >
@@ -144,12 +148,14 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
     ```
 
-        +---------------+----------+--------------------+---------------------+---------------------+
-        | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
-        +---------------+----------+--------------------+---------------------+---------------------+
-        | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
-        +---------------+----------+--------------------+---------------------+---------------------+
-        1 row in set (2.11 sec)
+    ```
+    +---------------+----------+--------------------+---------------------+---------------------+
+    | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
+    +---------------+----------+--------------------+---------------------+---------------------+
+    | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
+    +---------------+----------+--------------------+---------------------+---------------------+
+    1 row in set (2.11 sec)
+    ```
 
     `BACKUP`コマンドの実行後、TiDB はバックアップデータに関するメタデータを返します。`BackupTS`より前に生成されたデータがバックアップされるため、ご注意ください。このドキュメントでは、 `BackupTS`を**データチェックの終了**と**TiCDC による増分移行スキャンの開始**として使用します。
 
@@ -161,12 +167,14 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
     ```
 
-        +--------------+-----------+--------------------+---------------------+---------------------+
-        | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
-        +--------------+-----------+--------------------+---------------------+---------------------+
-        | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
-        +--------------+-----------+--------------------+---------------------+---------------------+
-        1 row in set (41.85 sec)
+    ```
+    +--------------+-----------+--------------------+---------------------+---------------------+
+    | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
+    +--------------+-----------+--------------------+---------------------+---------------------+
+    | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
+    +--------------+-----------+--------------------+---------------------+---------------------+
+    1 row in set (41.85 sec)
+    ```
 
 4.  (オプション) データを検証します。
 
@@ -235,7 +243,9 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-        Query OK, 0 rows affected (0.01 sec)
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
     変更が有効になっていることを確認するには、 `tidb_gc_enable`の値を照会します。
 
@@ -243,12 +253,14 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-        +-------------------------+
-        | @@global.tidb_gc_enable |
-        +-------------------------+
-        |                       1 |
-        +-------------------------+
-        1 row in set (0.00 sec)
+    ```
+    +-------------------------+
+    | @@global.tidb_gc_enable |
+    +-------------------------+
+    |                       1 |
+    +-------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 ## ステップ4. 新しいTiDBクラスタにサービスを移行する {#step-4-migrate-services-to-the-new-tidb-cluster}
 
@@ -264,17 +276,19 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     tiup cdc cli changefeed list
     ```
 
-        [
-          {
-            "id": "upstream-to-downstream",
-            "summary": {
-            "state": "stopped",  # Ensure that the status is stopped
-            "tso": 431747241184329729,
-            "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
-            "error": null
-            }
-          }
-        ]
+    ```
+    [
+      {
+        "id": "upstream-to-downstream",
+        "summary": {
+        "state": "stopped",  # Ensure that the status is stopped
+        "tso": 431747241184329729,
+        "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
+        "error": null
+        }
+      }
+    ]
+    ```
 
 2.  ダウンストリームからアップストリームへのチェンジフィードを作成します。アップストリームとダウンストリームのデータは一致しており、クラスターに新しいデータが書き込まれていないため、デフォルト設定を使用するには`start-ts`を指定しないでください。
 
