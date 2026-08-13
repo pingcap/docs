@@ -475,7 +475,7 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 
 `SUPER`の権限が必要です。
 
-### 殺す {#kill}
+### KILL {#kill}
 
 他のユーザーセッションを終了するには、 `SUPER`または`CONNECTION_ADMIN`の権限が必要です。
 
