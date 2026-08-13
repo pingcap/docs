@@ -14,7 +14,7 @@ When you use Kafka as the downstream sink, specify the `protocol` field as `debe
 <SimpleTab>
 <div label="New TiCDC architecture">
 
-To use the new TiCDC architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config#newarch-new-in-v854-release1) to `true`.
+To use the new TiCDC architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
 
 The Debezium protocol supports the following types of events:
 
