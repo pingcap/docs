@@ -56,7 +56,7 @@ For a public hosted zone, delegate the zone from its parent domain by adding the
 
 > **Note:**
 >
-> If you plan to deploy TiDB Cloud BYOC in multiple AWS Regions, you can share the same TiDB hosted zone across all regions or use a dedicated hosted zone for each region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for details.
+> If you plan to deploy TiDB Cloud BYOC in multiple AWS regions, you can share the same TiDB hosted zone across all regions or use a dedicated hosted zone for each region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for details.
 
 ## Step 5. Set up private certificate authority (PCA)
 
