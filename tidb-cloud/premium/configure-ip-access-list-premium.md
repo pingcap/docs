@@ -9,7 +9,7 @@ TiDB Cloudの各TiDB Cloud Premium インスタンスに対して、IP アクセ
 
 > **Note:**
 >
-> このドキュメントは**TiDB Cloud Premium**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)するを参照してください。
+> このドキュメントは**{{{ .premium }}}**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)するを参照してください。
 
 TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
 
@@ -21,13 +21,13 @@ TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するに
 
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[ネットワーク]**をクリックします。
 
-3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックして、インスタンスがパブリックエンドポイント経由でアクセスできるようにし、 **[IP アドレスを追加] を**クリックします。
+3.  **ネットワークの**ページで、 **[パブリックエンドポイント****を有効にする]**をクリックして、インスタンスがパブリックエンドポイント経由でアクセスできるようにし、 **Add IP Address**クリックします。
 
 4.  表示されたダイアログで、以下のいずれかのオプションを選択してください。
 
-    -   **どこからでもアクセスを許可する**：すべてのIPアドレスからTiDB Cloudへのアクセスを許可します。このオプションを選択すると、インスタンスがインターネットに完全に公開されるため、非常に危険です。
-    -   **IPアドレスを使用する**（推奨）：SQLクライアント経由でTiDB Cloudへのアクセスを許可するIPアドレスとCIDRアドレスのリストを追加できます。
+    -   **Allow access from anywhere**：すべてのIPアドレスからTiDB Cloudへのアクセスを許可します。このオプションを選択すると、インスタンスがインターネットに完全に公開されるため、非常に危険です。
+    -   **Use IP addresses**（推奨）：SQLクライアント経由でTiDB Cloudへのアクセスを許可するIPアドレスとCIDRアドレスのリストを追加できます。
 
-5.  **「IPアドレスを使用する」**を選択した場合は、IPアドレスまたはCIDR範囲を追加し、必要に応じて説明を追加してください。
+5.  **Use IP addresses**を選択した場合は、IPアドレスまたはCIDR範囲を追加し、必要に応じて説明を追加してください。
 
 6.  変更を保存するには、 **「確認」**をクリックしてください。

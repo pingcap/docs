@@ -13,7 +13,7 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 TiDB Cloudは、2022年3月15日よりプロジェクトレベルのPrometheus統合（ベータ版）をサポートしてきました。2025年10月21日より、TiDB CloudレベルのPrometheus統合（PREVIEW）を導入します。2025年12月2日より、クラスターレベルのPrometheus統合が一般提供（GA）となります。
 
--   **クラスタレベルのPrometheus統合**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのPrometheus統合を提供します。
+-   **Cluster-level Prometheus integration**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのPrometheus統合を提供します。
 
 -   **従来のプロジェクトレベルの Prometheus 統合 (ベータ版)** : 2025 年 10 月 21 日時点で組織内に少なくとも 1 つの従来のプロジェクトレベルの Prometheus 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。
 
@@ -45,7 +45,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 2.  左側のナビゲーションペインで、 **[設定]** &gt; **[統合]**をクリックします。
-3.  **「統合」**ページで、 **「Prometheusとの統合」**をクリックします。
+3.  **「統合」**ページで、 **Integration to Prometheus**をクリックします。
 4.  **「ファイルを追加」を**クリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
 5.  `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。
 
@@ -55,7 +55,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **[プロジェクト ビュー]**タブをクリックします。
 2.  プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3.  左側のナビゲーションペインで、 **「プロジェクト設定」**の下にある**「統合」**をクリックします。
-4.  **「統合」**ページで、 **「Prometheusとの統合（ベータ版）」**をクリックします。
+4.  **「統合」**ページで、 **Integration to Prometheus (BETA)**をクリックします。
 5.  **「ファイルを追加」**をクリックすると、現在のプロジェクトのscrape_configファイルが生成されて表示されます。
 6.  `scrape_config`ファイルの内容のコピーを作成して、後で使用できるようにします。
 

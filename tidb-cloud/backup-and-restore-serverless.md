@@ -70,7 +70,7 @@ TiDB Cloudは、 TiDB Cloud StarterまたはEssentialインスタンスのスナ
 
 -   **スナップショット復元**：特定のバックアップスナップショットからTiDB Cloud StarterまたはEssentialインスタンスを復元します。
 
--   **ポイントインタイム復元（PREVIEW）** ： TiDB Cloud Essentialインスタンスを特定の時点の状態に復元します。
+-   **Point-in-Time Restore (PREVIEW)** ： TiDB Cloud Essentialインスタンスを特定の時点の状態に復元します。
 
     -   TiDB Cloud Starterインスタンス：サポートされていません。
     -   TiDB Cloud Essentialインスタンス：バックアップ保持期間内の任意の時点に復元できますが、 TiDB Cloud Essentialインスタンスの作成時刻より前、または現在時刻の1分前より後には復元できません。
@@ -149,7 +149,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
     > **Note:**
     >
-    > TiDB Cloud Essentialインスタンス**にバックアップがない**場合、削除されたインスタンスはごみ箱に表示されません。
+    > TiDB Cloud Essentialインスタンス**has no backup**場合、削除されたインスタンスはごみ箱に表示されません。
 
 4.  復元したいバックアップの行で、 **...**をクリックし、次に**「復元」**を選択します。
 

@@ -46,7 +46,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 
         TiDB Cloud Data Serviceは、選択した操作ごとに対応するエンドポイントを生成します。バッチ操作（例`POST (Batch Create)` ）を選択した場合、生成されたエンドポイントを使用すると、単一のリクエストで複数の行を操作できます。
 
-        選択したテーブルに [ベクトルデータ型](/ai/reference/vector-search-data-types.md)が含まれている場合は、「**ベクトル検索操作」オプションを有効にし、ベクトル距離関数を選択して、選択した距離関数に基づいてベクトル距離を自動的に計算するベクトル**検索エンドポイントを生成できます。サポートされている[ベクトル距離関数](/ai/reference/vector-search-functions-and-operators.md)は次のものが含まれます。
+        選択したテーブルに [ベクトルデータ型](/ai/reference/vector-search-data-types.md)が含まれている場合は、**Vector Search Operations**オプションを有効にしてベクトル距離関数を選択することで、選択した距離関数に基づいてベクトル距離を自動的に計算するベクトル検索エンドポイントを生成できます。サポートされている[ベクトル距離関数](/ai/reference/vector-search-functions-and-operators.md)は次のものが含まれます。
 
         -   `VEC_L2_DISTANCE` (デフォルト): 2 つのベクトル間の L2 距離 (ユークリッド距離) を計算します。
         -   `VEC_COSINE_DISTANCE` : 2 つのベクトル間のコサイン距離を計算します。
@@ -94,7 +94,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 1.  プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
-2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**「+」**をクリックし、次に**「エンドポイント ライブラリの管理」**をクリックします。
+2.  左側のペインで、対象のデータ アプリを見つけ、アプリ名の右側にある**「+」**をクリックし、次に**Manage Endpoint Library**をクリックします。
 
     エンドポイントライブラリ管理のダイアログが表示されます。現在、このダイアログには**「クエリの実行」** （つまり、 `/system/query`エンドポイント）のみが表示されます。
 
@@ -130,7 +130,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Note:**
 >
-> データアプリをGitHubに接続し、**自動同期とデプロイを**有効にしている場合は、GitHubを使用してエンドポイント構成を更新することもできます。GitHubで行った変更はすべて、 TiDB Cloud Data Serviceに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> データアプリをGitHubに接続し、**Auto Sync & Deployment**有効にしている場合は、GitHubを使用してエンドポイント構成を更新することもできます。GitHubで行った変更はすべて、 TiDB Cloud Data Serviceに自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### プロパティを構成する {#configure-properties}
 
@@ -354,7 +354,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 > **Note:**
 >
-> **自動同期とデプロイメント**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> **Auto Sync & Deployment**を有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloud Data Service に自動的にデプロイされます。詳細については、 [GitHubで自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 エンドポイントをデプロイするには、以下の手順を実行します。
 
@@ -362,7 +362,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 2.  左側のペインで、対象のデータアプリの名前をクリックすると、そのエンドポイントが表示されます。
 3.  デプロイしたいエンドポイントを見つけ、エンドポイント名をクリックして詳細を表示し、右上隅の**「デプロイ」**をクリックします。
 4.  データアプリで**「下書きの確認」**が有効になっている場合、変更内容を確認するためのダイアログが表示されます。確認結果に基づいて、変更を破棄するかどうかを選択できます。
-5.  デプロイを確定するには、 **「デプロイ」**をクリックしてください。エンドポイントが正常にデプロイされると、 **「エンドポイントがデプロイされました」**というメッセージが表示されます。
+5.  デプロイを確定するには、 **「デプロイ」**をクリックしてください。エンドポイントが正常にデプロイされると、 **Endpoint has been deployed**というメッセージが表示されます。
 
     エンドポイント詳細ページの右側のペインで、「**デプロイメント」**タブをクリックすると、デプロイ履歴を表示できます。
 
@@ -480,7 +480,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
 
 > **Note:**
 >
-> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**自動同期とデプロイを**有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
+> データ アプリ[データアプリをGitHubに接続しました](/tidb-cloud/data-service-manage-github-connection.md)**Auto Sync & Deployment**有効にしている場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
 エンドポイントをアンデプロイするには、以下の手順を実行します。
 

@@ -62,7 +62,7 @@ Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）と�
     > -   JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > -   TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4.  コネクタの作成を完了するには、「ソースまたは**宛先の****設定」**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
+4.  コネクタの作成を完了するには、「ソースまたは**Set up source****設定」**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -82,11 +82,11 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 3.  接続**設定**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
 
-4.  **レプリケーション頻度を****「24時間ごと**」に設定すると、接続は1日に1回データを複製します。
+4.  **レプリケーション頻度を****Every 24 hours**に設定すると、接続は1日に1回データを複製します。
 
-5.  **宛先名前空間を****カスタム形式**に設定し、**名前空間カスタム形式**を**テスト**に設定して、すべてのデータを`test`データベースに保存します。
+5.  **宛先名前空間を****カスタム形式**に設定し、**Namespace Custom Format**を**テスト**に設定して、すべてのデータを`test`データベースに保存します。
 
-6.  **同期モード**を**「完全更新」または「上書き」**に選択してください。
+6.  **同期モード**を**Full refresh | Overwrite**に選択してください。
 
     > **Tip:**
     >
@@ -97,9 +97,9 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7.  デフォルトの正規化モードを使用するには、 **「正規化と変換」**を**「正規化された表形式データ」**に設定するか、ジョブのdbtファイルを設定してください。
+7.  デフォルトの正規化モードを使用するには、 **Normalization & Transformation**を**Normalized tabular data**に設定するか、ジョブのdbtファイルを設定してください。
 
-8.  **「接続設定」**をクリックしてください。
+8.  **Set up connection**をクリックしてください。
 
 9.  接続が確立されたら、 **「有効」**をクリックして同期タスクをアクティブ化します。また、 **「今すぐ同期」**をクリックすると、すぐに同期を開始できます。
 

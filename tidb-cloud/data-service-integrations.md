@@ -19,17 +19,17 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 2.  左側のペインで、対象のデータアプリを見つけ、対象のデータアプリの名前をクリックし、次に**「統合」**タブをクリックします。
 
-3.  **「GPTとの統合」**領域で、 **「コンフィグレーションを取得」**をクリックします。
+3.  **Integrate with GPTs**領域で、 **「コンフィグレーションを取得」**をクリックします。
 
     ![Get Configuration](/media/tidb-cloud/data-service/GPTs1.png)
 
 4.  表示されたダイアログボックスには、以下の項目が表示されます。
 
-    ａ． **API 仕様 URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)を参照してください。
+    ａ． **API Specification URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)を参照してください。
 
-    b. **API キー**: データ アプリの API キーを入力します。 API キーをまだ持っていない場合は、 **「API キーの作成**」をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+    b. **API キー**: データ アプリの API キーを入力します。 API キーをまだ持っていない場合は、 **Create API Key**をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
-    c. **APIキーエンコード**：提供したAPIキーに相当するbase64エンコードされた文字列をコピーします。
+    c. **API Key Encoded**：提供したAPIキーに相当するbase64エンコードされた文字列をコピーします。
 
     ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
@@ -39,4 +39,4 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
 データアプリを[Dify](https://dify.ai/)と統合することで、ベクトル距離計算、高度な類似性検索、ベクトル解析などのインテリジェントな機能を追加し、アプリケーションを強化できます。
 
-データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **[連携]**タブの**[Difyとの連携]**エリアで**[コンフィグレーションを取得]を**クリックする必要がある点です。
+データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **[連携]**タブの**[Difyとの連携]**エリアで**Integrate with Dify**クリックする必要がある点です。

@@ -36,7 +36,7 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 3.  接続ダイアログで、 **「接続タイプ」**ドロップダウンリストから**「パブリック」**を選択します。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、**「IP アクセス リストの設定」**をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
+    IP アクセス リストを設定していない場合は、最初の接続の前に、**Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
 
 4.  **「CA証明書」**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 

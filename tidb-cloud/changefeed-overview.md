@@ -131,7 +131,7 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC Changefeed容量ユ�
 
     -   Apache Kafkaシンク：すべての設定。
     -   MySQLシンク： **MySQL接続**、**テーブルフィルタ**、および**イベントフィルタ**。
-    -   TiDB Cloudシンク: **TiDB Cloud接続**、**テーブルフィルタ**、および**イベントフィルタ**。
+    -   TiDB Cloudシンク: **TiDB Cloud Connection**、**テーブルフィルタ**、および**イベントフィルタ**。
     -   クラウドストレージシンク：**ストレージエンドポイント**、**テーブルフィルタ**、および**イベントフィルタ**。
 
     </CustomContent>

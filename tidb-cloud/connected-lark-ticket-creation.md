@@ -5,7 +5,7 @@ summary: Lark チケットの作成と更新サブスクリプションに関す
 
 # Larkでチケットを作成し、チケットの更新を購読する {#create-tickets-and-subscribe-to-ticket-updates-via-lark}
 
-TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)をご契約のお客様には、 [Lark](https://www.larksuite.com/)で**「PingCAP Support Bot」**と呼ばれるチケットボットをご利用いただけます。このボットは、サポートチケットの作成や、サポートチケットシステムからの最新情報の直接受信に役立ちます。
+TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-detail.md)をご契約のお客様には、 [Lark](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケットボットをご利用いただけます。このボットは、サポートチケットの作成や、サポートチケットシステムからの最新情報の直接受信に役立ちます。
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
-1.  Larkの**PingCAPサポートグループ**で、 `@PingCAP Support Bot`メンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
+1.  Larkの**PingCAP Support Group**で、 `@PingCAP Support Bot`メンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
@@ -29,7 +29,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## チケットの最新情報を購読する {#subscribe-to-ticket-updates}
 
-[サポートチケットを作成する](#create-a-support-ticket)設定すると、Lark **PingCAP サポートグループ**でチケットの更新情報を直接受け取ることができます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
+[サポートチケットを作成する](#create-a-support-ticket)設定すると、Lark **PingCAP Support Group**でチケットの更新情報を直接受け取ることができます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 

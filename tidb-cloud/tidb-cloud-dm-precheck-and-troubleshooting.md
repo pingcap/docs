@@ -60,7 +60,7 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 ## 移行エラーとその解決策 {#migration-errors-and-solutions}
 
-このセクションでは、移行中に発生する可能性のある問題とその解決策について説明します。これらのエラーメッセージは、**移行ジョブの詳細**ページに表示されます。
+このセクションでは、移行中に発生する可能性のある問題とその解決策について説明します。これらのエラーメッセージは、**Migration Job Details**ページに表示されます。
 
 ### エラーメッセージ：「移行に必要なバイナリログがソースデータベースに存在しません。移行が成功するためには、バイナリログファイルが十分な期間保持されていることを確認してください。」 {#error-message-the-required-binary-log-for-migration-no-longer-exists-on-the-source-database-please-make-sure-binary-log-files-are-kept-for-long-enough-time-for-migration-to-succeed}
 

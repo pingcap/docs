@@ -38,7 +38,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
     >
     > [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスは、削除後のデータの復元をサポートしていません。 TiDB Cloud Starterインスタンスを削除し、将来そのデータを復元したい場合は、 [TiDB Cloud Starterからデータをエクスポート](/tidb-cloud/serverless-export.md)を参照してデータをバックアップとしてエクスポートします。
 
-5.  **「了解しました、削除します」**をクリックしてください。
+5.  **I understand, delete it**をクリックしてください。
 
     バックアップ済みのTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタが削除されると、既存のバックアップファイルはごみ箱に移動されます。
 

@@ -31,7 +31,7 @@ IPファイアウォールルールは最大200個まで作成できます。
 
 ### AWSへのアクセスを許可する {#allow-aws-access}
 
-TiDB Cloud Starterインスタンスが AWS でホストされている場合は、公式[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にすることができます。
+TiDB Cloud Starterインスタンスが AWS でホストされている場合は、公式[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**all AWS IP addresses**からのアクセスを有効にすることができます。
 
 TiDB Cloud はこのリストを定期的に更新し、予約済みの IP アドレス**169.254.65.87**を使用してすべての AWS IP アドレスを表します。
 
@@ -51,15 +51,15 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
 5.  **「承認済みネットワーク」**セクションで、 **「ルールの追加」**をクリックし、許可するIPアドレスまたはIPアドレス範囲を追加します。
 
-    -   お使いのコンピュータの現在のIPアドレスを追加するには、 **「現在のIPアドレスを追加」**をクリックします。これにより、 TiDB Cloudが認識するコンピュータのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
+    -   お使いのコンピュータの現在のIPアドレスを追加するには、 **Add Current IP**をクリックします。これにより、 TiDB Cloudが認識するコンピュータのパブリックIPアドレスを含むファイアウォールルールが自動的に作成されます。
 
         > **Note:**
         >
         > TiDB Cloudコンソールが認識するIPアドレスは、データベースクライアントが使用するIPアドレスと異なる場合があります。ルールが期待どおりに機能しない場合は、開始IPアドレスと終了IPアドレスを調整してください。公開IPアドレスを確認するには、検索エンジンまたはオンラインツールを使用できます。たとえば、「自分のIPアドレスは何ですか」と検索してください。
 
-    -   TiDB Cloud StarterまたはEssentialインスタンスがAWS上でホストされている場合、すべてのAWS IPアドレスからのアクセスを有効にするには、 **[AWSアクセスを追加**]をクリックします。これにより、すべてのAWS IPアドレス範囲を含むファイアウォールルールが自動的に作成されます。TiDB Cloudは、予約済みIPアドレス**169.254.65.87**を使用してAWS IPアドレス範囲を表し、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)に基づいてリストを定期的に更新します。
+    -   TiDB Cloud StarterまたはEssentialインスタンスがAWS上でホストされている場合、すべてのAWS IPアドレスからのアクセスを有効にするには、 **Add AWS Access**をクリックします。これにより、すべてのAWS IPアドレス範囲を含むファイアウォールルールが自動的に作成されます。TiDB Cloudは、予約済みIPアドレス**169.254.65.87**を使用してAWS IPアドレス範囲を表し、公式の[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)に基づいてリストを定期的に更新します。
 
-    -   アドレス範囲を追加するには、単一のIPアドレスまたはIPアドレスの範囲を指定します。ルールを単一のIPアドレスに限定するには、 **「開始IPアドレス」**と**「終了IPアドレス」**のフィールドに同じIPアドレスを入力します。
+    -   アドレス範囲を追加するには、単一のIPアドレスまたはIPアドレスの範囲を指定します。ルールを単一のIPアドレスに限定するには、 **Start IP Address**と**End IP Address**のフィールドに同じIPアドレスを入力します。
 
         > **Note:**
         >

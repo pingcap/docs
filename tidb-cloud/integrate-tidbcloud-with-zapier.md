@@ -187,7 +187,7 @@ TiDB Cloudには、Zapierで直接使用できるテンプレートがいくつ�
 
 ### TiDB CloudアカウントをZapierに設定するにはどうすればよいですか？ {#how-can-i-set-up-the-tidb-cloud-account-in-zapier}
 
-Zapierは、 TiDB Cloudアカウントに接続するために**TiDB Cloud APIキー**を必要とします。ZapierはTiDB Cloudのログインアカウントを必要としません。
+Zapierは、 TiDB Cloudアカウントに接続するために**TiDB Cloud API key**を必要とします。ZapierはTiDB Cloudのログインアカウントを必要としません。
 
 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)に従ってください。
 
@@ -201,7 +201,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 `New Cluster`および`New Table`トリガーは、 `cluster_id`または`table_id`を`id`フィールドとして使用して重複排除を行います。この 2 つのトリガーについては、何もする必要はありません。
 
-**新しい行のトリガー**
+**New Row Trigger**
 
 `New Row`トリガーは、フェッチごとに10,000件の結果を制限します。そのため、新しい行が10,000件の結果に含まれていない場合、Zapierはトリガーされません。
 

@@ -78,7 +78,7 @@ TiProxyを無効にするには、以下の手順を実行してください。
 TiProxyのトポロジーを表示するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[監視] &gt; [ノード]**をクリックします。**ノードマップ**ページが表示されます。
+2.  左側のナビゲーションペインで、 **Monitoring > Nodes**をクリックします。**ノードマップ**ページが表示されます。
 3.  **ノードマップ**ページでは、TiProxyのトポロジーが**TiDB**ペインに表示されます。
 
 ![TiProxy Topology](/media/tidb-cloud/tiproxy-topology.png)
@@ -88,15 +88,15 @@ TiProxyのトポロジーを表示するには、以下の手順を実行して�
 TiProxyのメトリクスを表示するには、以下の手順を実行してください。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2.  左側のナビゲーションペインで、 **[監視] &gt; [メトリクス]**をクリックします。**[メトリクス]**ページが表示されます。
-3.  **メトリクス**ページで、 **[サーバー]**をクリックし、TiProxy関連のメトリクスまでスクロールします。特定のTiDBノードグループのTiProxyメトリクスを表示するには、 **[TiDBノードグループビュー]**をクリックし、TiDBノードグループを選択してから、TiProxy関連のメトリクスまでスクロールします。
+2.  左側のナビゲーションペインで、 **Monitoring > Metrics**をクリックします。**[メトリクス]**ページが表示されます。
+3.  **メトリクス**ページで、 **[サーバー]**をクリックし、TiProxy関連のメトリクスまでスクロールします。特定のTiDBノードグループのTiProxyメトリクスを表示するには、 **TiDB Node Group View**をクリックし、TiDBノードグループを選択してから、TiProxy関連のメトリクスまでスクロールします。
 
 指標には以下が含まれます。
 
--   **TiProxyのCPU使用率**：各TiProxyノードのCPU使用率統計情報。上限は100%です。CPU使用率が80%を超える場合は、TiProxyのスケールアウトをお勧めします。
+-   **TiProxy CPU Usage**：各TiProxyノードのCPU使用率統計情報。上限は100%です。CPU使用率が80%を超える場合は、TiProxyのスケールアウトをお勧めします。
 -   **TiProxy接続数**：各TiProxyノード上の接続数。
 -   **TiProxy スループット**: 各 TiProxy ノードで 1 秒あたりに転送されるバイト数。最大スループットが最大ネットワーク帯域幅に達した場合は、TiProxy をスケールアウトすることをお勧めします。最大ネットワーク帯域幅の詳細については、 [TiProxyノードのサイズと数を決定する](#decide-the-size-and-number-of-tiproxy-nodes)を参照してください。
--   **TiProxyセッション移行の理由**：1分ごとに発生するセッション移行の数とその理由。たとえば、TiDBがスケールインし、TiProxyがセッションを他のTiDBノードに移行する場合、理由は`status`です。その他の移行理由については、 [TiProxyのモニタリング指標](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance)を参照してください。
+-   **TiProxy Sessions Migration Reasons**：1分ごとに発生するセッション移行の数とその理由。たとえば、TiDBがスケールインし、TiProxyがセッションを他のTiDBノードに移行する場合、理由は`status`です。その他の移行理由については、 [TiProxyのモニタリング指標](https://docs.pingcap.com/tidb/stable/tiproxy-grafana#balance)を参照してください。
 
 ### TiProxyの請求書を確認する {#view-tiproxy-bills}
 
@@ -104,7 +104,7 @@ TiProxyの請求書を表示するには、以下の手順を実行してくだ�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 2.  左側のナビゲーションペインで**「請求」**をクリックします。 **「請求」**ページでは、デフォルトで**「請求書」**タブが表示されます。
-3.  **サービス別概要**セクションでは、TiProxy ノードのコストは**TiDB Dedicated**の下に表示され、TiProxy のデータ転送コストは**データ転送 &gt; 同一リージョン**に含まれています。
+3.  **Summary by Service**セクションでは、TiProxy ノードのコストは**TiDB Dedicated**の下に表示され、TiProxy のデータ転送コストは**データ転送 &gt; 同一リージョン**に含まれています。
 
 ![TiProxy Billing](/media/tidb-cloud/tiproxy-billing.png)
 

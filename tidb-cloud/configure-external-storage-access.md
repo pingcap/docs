@@ -30,40 +30,40 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
     1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2.  対象のTiDB Cloud Starter、 Essential、または Premium インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ]** &gt; **[インポート]**をクリックします。
 
-2.  **「新しいARNの追加」**ダイアログを開きます。
+2.  **Add New ARN**ダイアログを開きます。
 
-    -   Amazon S3からデータをインポートする場合は、次のようにして**「新しいARNの追加」**ダイアログを開きます。
+    -   Amazon S3からデータをインポートする場合は、次のようにして**Add New ARN**ダイアログを開きます。
 
-        1.  **「S3からインポート」を**クリックします。
+        1.  **Import from S3**クリックします。
         2.  **ファイルURI**欄に入力してください。
-        3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
     <CustomContent plan="starter,essential">
 
-    -   データをAmazon S3にエクスポートする場合は、次のように**「新しいARNの追加」**ダイアログを開きます。
+    -   データをAmazon S3にエクスポートする場合は、次のように**Add New ARN**ダイアログを開きます。
 
-        1.  **「データのエクスポート先...」** &gt; **「Amazon S3」**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **「Amazon S3」**をクリックしてください。
+        1.  **Export data to...** &gt; **「Amazon S3」**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「ここをクリックしてデータをエクスポート...」** &gt; **「Amazon S3」**をクリックしてください。
         2.  **フォルダURI**欄に入力してください。
-        3.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        3.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
     </CustomContent>
 
     <CustomContent plan="premium">
 
-    -   データをAmazon S3にエクスポートする場合は、次のように**「新しいARNの追加」**ダイアログを開きます。
+    -   データをAmazon S3にエクスポートする場合は、次のように**Add New ARN**ダイアログを開きます。
 
         1.  **「データのエクスポート」を**クリックします。
         2.  **ターゲット接続**で**Amazon S3を**選択してください。
         3.  **フォルダURI**欄に入力してください。
-        4.  **AWS ロール ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        4.  **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
 
     </CustomContent>
 
 3.  AWS CloudFormationテンプレートを使用してロールARNを作成します。
 
-    1.  **「新しい ARN の追加」**ダイアログで、 **「CloudFormation テンプレートを使用した AWS コンソール」**をクリックします。
+    1.  **Add New ARN**ダイアログで、 **「CloudFormation テンプレートを使用した AWS コンソール」**をクリックします。
 
-    2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールにログインすると、AWS CloudFormation の**クイック作成スタック**ページにリダイレクトされます。
+    2.  [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールにログインすると、AWS CloudFormation の**Quick create stack**ページにリダイレクトされます。
 
     3.  **役割名**を入力してください。
 
@@ -77,7 +77,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 <details><summary>詳細はこちらをクリックしてください</summary>
 
-1.  前の手順で説明した**「新しい ARN を追加」**ダイアログで、 **「問題が発生しましたか？ロール ARN を手動で作成します」**をクリックします。TiDB **TiDB Cloudアカウント ID**と**TiDB Cloud外部 ID**が取得されます。
+1.  前の手順で説明した**Add New ARN**ダイアログで、 **「問題が発生しましたか？ロール ARN を手動で作成します」**をクリックします。TiDB **TiDB Cloud Account ID**と**TiDB Cloud External ID**が取得されます。
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 
@@ -160,8 +160,8 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     2.  役割を作成するには、以下の情報を入力してください。
 
-        -   **「信頼済みエンティティタイプ」**で**「AWSアカウント」**を選択します。
-        -   **「AWSアカウント」**で**「別のAWSアカウント」**を選択し、 TiDB CloudアカウントIDを**「アカウントID」**フィールドに貼り付けます。
+        -   **Trusted entity type**で**「AWSアカウント」**を選択します。
+        -   **An AWS account**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**「アカウントID」**フィールドに貼り付けます。
         -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベスト プラクティス)]**をクリックし、 TiDB Cloud外部 ID を**[外部 ID]**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3.  **「次へ」**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**「次へ」**をクリックします。
@@ -198,13 +198,13 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
 サービスアカウントキーを設定するには、以下の手順に従ってください。
 
-1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **[サービス アカウントの作成]**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
+1.  Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービス アカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
 
     1.  サービスアカウント名を入力してください。
 
     2.  任意：サービスアカウントの説明を入力してください。
 
-    3.  サービスアカウントを作成するには、 **「作成して続行」**をクリックしてください。
+    3.  サービスアカウントを作成するには、 **CREATE AND CONTINUE**をクリックしてください。
 
     4.  `Grant this service account access to project`で、必要な権限を持つ[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)を選択します。
 
@@ -255,8 +255,8 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     -   データをAzure Blob Storageにエクスポートする場合：
 
-        1.  **「データのエクスポート先...」** &gt; **「Azure Blob Storage」**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **「Azure Blob Storage」を**クリックしてください。
-        2.  **Azure Blob Storage 設定**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
+        1.  **Export data to...** &gt; **Azure Blob Storage**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**「データのエクスポート先...」** &gt; **Azure Blob Storage**クリックしてください。
+        2.  **Azure Blob Storage Settings**エリアまでスクロールダウンし、SAS トークンフィールドの下にある**[ここをクリックして、Azure ARM テンプレートを使用して新しいものを作成する] をクリックします**。
 
     </CustomContent>
 
@@ -265,7 +265,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
     -   データをAzure Blob Storageにエクスポートする場合：
 
         1.  **「データのエクスポート」を**クリックします。
-        2.  **ターゲット接続**で**Azure Blob Storageを**選択してください。
+        2.  **Azure Blob Storage**で**Azure Blob Storageを**選択してください。
         3.  SASトークンフィールドの下にある**「ここをクリックして、Azure ARMテンプレートを使用して新しいものを作成してください」をクリックしてください**。
 
     </CustomContent>
@@ -276,11 +276,11 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     2.  Azureにログインすると、Azure**カスタムデプロイ**ページにリダイレクトされます。
 
-    3.  **カスタムデプロイメント**ページで、**リソースグループ**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
+    3.  **カスタムデプロイメント**ページで、**Storage Account Name**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
-    4.  デプロイメントを確認するには、 **「レビュー + 作成」**または**「次へ」**をクリックします。デプロイメントを開始するには、 **「作成」**をクリックします。
+    4.  デプロイメントを確認するには、 **Review + create**または**「次へ」**をクリックします。デプロイメントを開始するには、 **「作成」**をクリックします。
 
     5.  処理が完了すると、デプロイメント概要ページにリダイレクトされます。 **「出力」**セクションに移動して、SASトークンを取得してください。
 
@@ -290,22 +290,22 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 1.  [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2.  **ストレージアカウント**ページで、**[セキュリティ + ネットワーク]**をクリックし、 **[共有アクセス署名]**をクリックします。
+2.  **ストレージアカウント**ページで、**[セキュリティ + ネットワーク]**をクリックし、 **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
-3.  **[共有アクセス署名]**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成します](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)を参照してください。
+3.  **Shared access signature**ページで、次のように必要なアクセス許可を持つサービス SAS トークンを作成します。詳細については、 [サービスSASトークンを作成します](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)を参照してください。
 
     1.  **「許可されたサービス」**セクションで、 **「Blob」**サービスを選択します。
 
-    2.  **「許可されたリソースの種類」**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
+    2.  **Allowed Resource types**セクションで、 **「コンテナ」**と**「オブジェクト」**を選択します。
 
     3.  **「許可された権限」**セクションで、必要に応じて権限を選択してください。
 
         -   TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートするには、**読み取り**権限と**書き込み**権限が必要です。
         -   TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートするには、**読み取り**権限と**一覧表示**権限が必要です。
 
-    4.  必要に応じて**開始日時と終了日時**を調整してください。
+    4.  必要に応じて**Start and expiry date/time**を調整してください。
 
     5.  その他の設定については、デフォルト値をそのまま使用できます。
 
@@ -331,7 +331,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
     -   **「効果」**セクションで**「許可」**を選択します。
 
-    -   「**サービス」**セクションで、 **「オブジェクトストレージサービス」**を選択します。
+    -   「**サービス」**セクションで、 **Object Storage Service**を選択します。
 
     -   「**アクション」**セクションで、必要に応じて権限を選択してください。
 

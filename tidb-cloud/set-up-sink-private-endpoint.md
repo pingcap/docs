@@ -84,9 +84,9 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 3.  リマインダーに従って、 TiDB Cloudの[AWS プリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントの作成を承認します。
 
-4.  セクション[ネットワーク](#network)で収集した**エンドポイント サービス名**を入力します。
+4.  セクション[ネットワーク](#network)で収集した**Endpoint Service Name**を入力します。
 
-5.  **AZ の数**を選択します。AZ の数と AZ ID が Kafka のデプロイメントと一致していることを確認してください。
+5.  **Number of AZs**を選択します。AZ の数と AZ ID が Kafka のデプロイメントと一致していることを確認してください。
 
 6.  このプライベート エンドポイントが Apache Kafka 用に作成される場合は、 **Kafka 用のアドバタイズドリスナーを構成する**チェックボックスを選択します。
 
