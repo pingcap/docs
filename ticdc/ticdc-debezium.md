@@ -14,6 +14,8 @@ When you use Kafka as the downstream sink, specify the `protocol` field as `debe
 <SimpleTab>
 <div label="New TiCDC architecture">
 
+To use the new TiCDC architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config#newarch-new-in-v854-release1) to `true`.
+
 The Debezium protocol supports the following types of events:
 
 - DDL event: represents a DDL change record. After the upstream DDL statement is successfully executed, the DDL event is sent to every Message Queue (MQ) partition.
@@ -44,7 +46,11 @@ In addition, the original Debezium format does not include important fields such
 
 This section describes the message formats of DDL events, DML events and WATERMARK events.
 
-### DDL event
+### DDL event (new TiCDC architecture)
+
+> **Note:**
+>
+> The DDL event is supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), DDL events are ignored.
 
 TiCDC encodes a DDL event into a Kafka message, with both the key and value encoded in the Debezium format.
 
@@ -591,7 +597,11 @@ The key fields of the preceding JSON data are explained as follows:
 | `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | `schema.type`    | String  | The data type of the field.                                      |
 
-### WATERMARK event
+### WATERMARK event (new TiCDC architecture)
+
+> **Note:**
+>
+> The WATERMARK event is supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), WATERMARK events are ignored.
 
 TiCDC encodes a WATERMARK event into a Kafka message, with both the key and value encoded in the Debezium format.
 
