@@ -24,7 +24,7 @@ Do not invent new product behavior, prerequisites, warnings, or version claims.
 ## Terminology
 
 - Use `resources/terms.md` as the source of truth for terminology.
-- Use `.ai/shared/translation-terms.md` as a quick reference for high-frequency terms.
+- Use `.agents/shared/translation-terms.md` as a quick reference for high-frequency terms.
 - If a term is missing or ambiguous, keep the source term until you can verify the preferred translation.
 
 ## PR traceability

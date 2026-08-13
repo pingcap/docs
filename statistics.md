@@ -18,7 +18,7 @@ For the [`INSERT`](/sql-statements/sql-statement-insert.md), [`DELETE`](/sql-sta
 
 <CustomContent platform="tidb">
 
-TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+TiDB persists the update information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically. Starting from v8.5.7 and v9.0.0, you can use the [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md) statement to persist the update information immediately.
 
 </CustomContent>
 
@@ -32,7 +32,7 @@ Based upon the number of changes to a table, TiDB will automatically schedule [`
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) | `1` | The concurrency for auto-analyze operations within a TiDB cluster. |
+| [`tidb_auto_analyze_concurrency`](/system-variables.md#tidb_auto_analyze_concurrency-new-in-v840) | `3` | The concurrency for auto-analyze operations within a TiDB cluster. |
 | [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic updates. |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `8192` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table). |
 | [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | `0.5` | The threshold value of automatic update. |
@@ -109,6 +109,10 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 Top-N values are values with the top N occurrences in a column or index. Top-N statistics are often referred to as frequency statistics or data skew.
 
 TiDB records the values and occurrences of Top-N values. Here `N` is controlled by the `WITH NUM TOPN` parameter. The default value is 20, meaning the top 20 most frequent values are collected. The maximum value is 1024. For details about the parameter, see [Manual collection](#manual-collection).
+
+> **Note:**
+>
+> Starting from v9.0.0, when [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510), TiDB does not collect Top-N statistics for single-column unique indexes or for their corresponding columns, because each value can occur at most once.
 
 ## Selective statistics collection
 
@@ -752,23 +756,29 @@ The relationships of the relevant system variables are shown below:
 
 #### `tidb_build_stats_concurrency`
 
-When you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on statistics of one column or index. You can use the [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency) variable to control the number of simultaneous small tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
+This variable controls the concurrency for building statistics during manual `ANALYZE`, such as the number of table or partition analysis tasks that can be processed simultaneously. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
 
 #### `tidb_build_sampling_stats_concurrency`
 
-When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) to control the concurrency of executing sampling tasks. The default value is `2`.
+This variable controls the following aspects of `ANALYZE` concurrency:
+
+- The concurrency for merging samples collected from different Regions.
+- The concurrency for collecting statistics on special indexes (such as indexes on generated virtual columns), for example, the number of indexes that TiDB can concurrently collect statistics for.
+
+The default value is `2`.
 
 #### `tidb_analyze_partition_concurrency`
 
-When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of reading and writing statistics for a partitioned table. The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
+This variable controls the concurrency for saving `ANALYZE` results (writing TopN and histograms to system tables). The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
 
-#### `tidb_distsql_scan_concurrency`
+#### `tidb_analyze_distsql_scan_concurrency`
 
-When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `15`. Note that changing the value will affect query performance. Adjust the value carefully.
+This variable controls the following aspects of `ANALYZE` concurrency:
 
-#### `tidb_index_serial_scan_concurrency`
+- The concurrency of scanning TiKV Regions. 
+- The concurrency of scanning Regions for special indexes (indexes generated from virtual columns).
 
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
+The default value is `4`.
 
 ## See also
 

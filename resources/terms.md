@@ -16,6 +16,7 @@
 | algorithm | 算法 |  |
 | anonymous | 匿名 |  |
 | appendix | 附录 |  |
+| Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): | 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： |  |
 | architecture | 架构 |  |
 | arithmetic operation | 数值运算/算术运算 |  |
 | ascending order | 正序 |  |
@@ -440,10 +441,12 @@
 | TiDB Cloud | TiDB Cloud |  |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
+| TiDB Cloud Lake | TiDB Cloud Lake |  |
 | TiDB Cloud on Kubernetes | TiDB Cloud on Kubernetes |  |
+| TiDB Cloud Premium | TiDB Cloud Premium |  |
 | TiDB Cloud Serverless | TiDB Cloud Serverless |  |
 | TiDB Cloud Starter | TiDB Cloud Starter |  |
-| TiDB Cloud Premium | TiDB Cloud Premium |  |
+| TiDB Operator | TiDB Operator |  |
 | TiDB Self-Managed | TiDB Self-Managed | Keep it in English if the context needs to distinguish it from TiDB Cloud. Otherwise, translate it to "TiDB" in Chinese. |
 | TiKV | TiKV |  |
 | time out | 超时 |  |

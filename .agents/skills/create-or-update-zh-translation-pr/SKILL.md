@@ -19,9 +19,9 @@ Do not stop to ask whether to run the scripts referenced in this skill.
 
 ## Load this context first
 
-- `.ai/shared/repo-conventions.md`
-- `.ai/shared/translation-rules.md`
-- `.ai/shared/translation-terms.md`
+- `.agents/shared/repo-conventions.md`
+- `.agents/shared/translation-rules.md`
+- `.agents/shared/translation-terms.md`
 - `resources/terms.md` when terminology is uncertain
 
 ## Preconditions
@@ -78,7 +78,7 @@ Please sync https://github.com/pingcap/docs-cn/pull/12345 with source update ran
 
 ## Use the bundled scripts
 
-Prefer the scripts in `.ai/skills/create-or-update-zh-translation-pr/scripts/` over retyping long commands:
+Prefer the scripts in `.agents/skills/create-or-update-zh-translation-pr/scripts/` over retyping long commands:
 
 - `prepare_translation_inputs.py`: fetch PR and commit metadata with `gh`, apply the `gh-util.user.js` title/body/label rules, and generate `translation-input.json` plus `translation-meta.env`
 - `create_translation_branch.sh`: sync the fork base branch with upstream, create or reuse the translation branch with `gh`, and check it out locally
@@ -96,7 +96,7 @@ Do not process every changed file the same way.
 - Deleted files: remove the matching target files directly. No AI is needed.
 - `TOC.md` and `keywords.md`: use structure-aware updates, not generic section translation.
 - Image files: copy, replace, or delete the binary files directly. Do not send image diffs to the LLM.
-- `.ai` files, `tidb-cloud/` files, and `TOC-tidb-cloud-*.md` files: skip them for `docs -> docs-cn` unless the user explicitly asks otherwise.
+- `.agents/` files, `ai/` files, `tidb-cloud/` files, `tidb-cloud-lake/` files, and `TOC-tidb-cloud-*.md` files: skip them for `docs -> docs-cn` unless the user explicitly asks otherwise.
 - Large translation inputs: if the total changed source content is too large for one LLM request, split the work by file or by section batches before translating.
 
 ## Step 1. Prepare translation inputs
@@ -106,7 +106,7 @@ Do not process every changed file the same way.
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
   --mode create \
   --source-pr-url "<source-pr-url>" \
   --target-repo-dir "<path-to-docs-cn>"
@@ -117,7 +117,7 @@ python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translatio
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/prepare_translation_inputs.py \
   --mode update \
   --target-translation-pr-url "<target-translation-pr-url>" \
   --source-update-range "<commit-sha-or-base..head>" \
@@ -161,7 +161,7 @@ Script behavior in `update` mode:
 Run:
 
 ```bash
-bash .ai/skills/create-or-update-zh-translation-pr/scripts/create_translation_branch.sh \
+bash .agents/skills/create-or-update-zh-translation-pr/scripts/create_translation_branch.sh \
   "$WORKDIR/translation-meta.env"
 ```
 
@@ -176,7 +176,7 @@ This script uses `gh` for the remote branch operations and then prepares the loc
 Run:
 
 ```bash
-python3 .ai/skills/create-or-update-zh-translation-pr/scripts/apply_translation_units.py \
+python3 .agents/skills/create-or-update-zh-translation-pr/scripts/apply_translation_units.py \
   --meta-env "$WORKDIR/translation-meta.env" \
   --write
 ```
@@ -233,7 +233,7 @@ Start from the deterministic script output:
 Run this only after the translated target files are ready:
 
 ```bash
-bash .ai/skills/create-or-update-zh-translation-pr/scripts/create_translation_pr.sh \
+bash .agents/skills/create-or-update-zh-translation-pr/scripts/create_translation_pr.sh \
   "$WORKDIR/translation-meta.env"
 ```
 

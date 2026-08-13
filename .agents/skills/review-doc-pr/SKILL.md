@@ -16,8 +16,8 @@ Use this skill when the task is to review a documentation PR, a Markdown diff, o
 
 Read only the files that matter for the current review:
 
-- `.ai/shared/repo-conventions.md`
-- `.ai/shared/writing-style.md`
+- `.agents/shared/repo-conventions.md`
+- `.agents/shared/writing-style.md`
 - `doc-review-prompt.txt` when you need to mirror the repo's AI review behavior
 - `resources/doc-templates/<relevant-template>.md` if the doc type matters
 
@@ -30,7 +30,7 @@ Review from the user's perspective, not only the author's.
 Treat this skill as having two equally important responsibilities:
 
 1. Act as a TiDB expert and check for technical, accuracy, logic, consistency, and user-impact issues.
-2. Act as a senior technical writer, check if the content is clear, concise, and easy to understand, and review the document against the repository writing guidance in `.ai/shared/writing-style.md`.
+2. Act as a senior technical writer, check if the content is clear, concise, and easy to understand, and review the document against the repository writing guidance in `.agents/shared/writing-style.md`.
 
 Do not treat writing-style review as optional after the technical review. Both are part of the default review scope. When the original English content does not meet the bar for technical writing quality, improve it so the content becomes more logical, clear, concise, and easy to understand, while preserving technical meaning and scope.
 

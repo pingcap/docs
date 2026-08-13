@@ -145,7 +145,11 @@ The `NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not t
 
 ### INL_MERGE_JOIN
 
-The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
+> **Warning:** 
+>
+> Starting from TiDB v8.3.0, the `INL_MERGE_JOIN` hint is deprecated and no longer takes effect, because it might return incorrect results. If a query specifies this hint, TiDB ignores it and selects another join algorithm.
+
+Before v8.3.0, the `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
 
 ### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
 

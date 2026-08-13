@@ -115,7 +115,6 @@ For more information on the configuration file, refer to [TiDB Lightning configu
 
     - Search for the keyword `progress` in the log using `grep`. The progress is updated every 5 minutes by default.
     - Check progress in the [monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
-    - Check progress in [TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
     After TiDB Lightning completes the import, it exits automatically.
 

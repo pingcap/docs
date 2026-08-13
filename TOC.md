@@ -66,6 +66,7 @@
       - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
     - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
     - [Log Filter](/ticdc/ticdc-filter.md)
+    - [Table Routing](/ticdc/ticdc-table-routing.md)
     - [DDL Replication](/ticdc/ticdc-ddl.md)
     - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
   - Monitor and Alert
@@ -272,6 +273,7 @@
         - [Subquery Related Optimizations](/subquery-optimization.md)
         - [Column Pruning](/column-pruning.md)
         - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        - [LATERAL Derived Tables](/lateral-derived-tables.md)
         - [Eliminate Max/Min](/max-min-eliminate.md)
         - [Predicates Push Down](/predicate-push-down.md)
         - [Partition Pruning](/partition-pruning.md)
@@ -718,6 +720,7 @@
       - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
+      - [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md)
       - [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       - [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       - [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)

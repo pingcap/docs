@@ -59,7 +59,6 @@
   - [NVIDIA NIM](/ai/integrations/vector-search-auto-embedding-nvidia-nim.md)
   - [Amazon Titan](/ai/integrations/vector-search-auto-embedding-amazon-titan.md)
 - AI Frameworks
-  - [LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
   - [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - ORM Libraries
   - [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)

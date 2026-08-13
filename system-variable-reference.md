@@ -552,7 +552,7 @@ Referenced in:
 
 - [ALTER USER](/sql-statements/sql-statement-alter-user.md)
 - [CREATE USER](/sql-statements/sql-statement-create-user.md)
-- [System Variables](/system-variables.md#max_user_connections-new-in-v900)
+- [System Variables](/system-variables.md#max_user_connections-new-in-v857-and-v900)
 - [`mysql.user`](/mysql-schema/mysql-schema-user.md)
 
 ### mpp_exchange_compression_mode
@@ -605,7 +605,7 @@ Referenced in:
 Referenced in:
 
 - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v900)
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857-and-v900)
 
 ### plugin_dir
 
@@ -739,7 +739,6 @@ Referenced in:
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
 - [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
 - [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
 - [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 

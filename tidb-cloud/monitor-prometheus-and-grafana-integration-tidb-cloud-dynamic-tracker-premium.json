@@ -15,7 +15,7 @@
             "type": "grafana",
             "id": "grafana",
             "name": "Grafana",
-            "version": "10.4.0"
+            "version": "12.0.0"
         },
         {
             "type": "datasource",
@@ -52,7 +52,7 @@
             }
         ]
     },
-    "description": "TiDB X Premium dashboard for Grafana. Built from the current TiDB X support matrix: 10 DB metrics, 3 storage metrics, and 2 CDC metrics.",
+    "description": "TiDB Cloud Premium dashboard for Grafana. Built from the current TiDB Cloud support matrix: 10 DB metrics, 2 storage metrics, 1 request unit metric, and 2 CDC metrics.",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
@@ -465,14 +465,26 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
+                    "expr": "sum(tidbcloud_db_failed_queries{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
+                    "instant": false,
+                    "legendFormat": "Total",
+                    "range": true,
+                    "refId": "A"
+                },
+                {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
+                    "editorMode": "code",
                     "expr": "sum by(type) (tidbcloud_db_failed_queries{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
                     "instant": false,
                     "legendFormat": "{{type}}",
                     "range": true,
-                    "refId": "A"
+                    "refId": "B"
                 }
             ],
-            "title": "Failed Queries Per Second",
+            "title": "Failed Queries",
             "type": "timeseries"
         },
         {
@@ -665,7 +677,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 33
+                "y": 25
             },
             "id": 8,
             "panels": [],
@@ -729,7 +741,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 0,
-                "y": 34
+                "y": 26
             },
             "id": 9,
             "options": {
@@ -820,7 +832,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 8,
-                "y": 34
+                "y": 26
             },
             "id": 10,
             "options": {
@@ -911,7 +923,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 16,
-                "y": 34
+                "y": 26
             },
             "id": 11,
             "options": {
@@ -951,7 +963,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 50
+                "y": 34
             },
             "id": 12,
             "panels": [],
@@ -1015,7 +1027,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 0,
-                "y": 51
+                "y": 35
             },
             "id": 13,
             "options": {
@@ -1118,7 +1130,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 8,
-                "y": 51
+                "y": 35
             },
             "id": 14,
             "options": {
@@ -1209,7 +1221,7 @@
                 "h": 8,
                 "w": 8,
                 "x": 16,
-                "y": 51
+                "y": 35
             },
             "id": 15,
             "options": {
@@ -1261,7 +1273,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 59
+                "y": 43
             },
             "id": 22,
             "panels": [],
@@ -1332,7 +1344,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 60
+                "y": 44
             },
             "id": 23,
             "options": {
@@ -1356,13 +1368,13 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "tidbcloud_resource_manager_resource_request_unit_total{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"}",
+                    "expr": "sum by(resource_group) (tidbcloud_resource_manager_resource_request_unit_total{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
                     "legendFormat": "{{resource_group}}",
                     "range": true,
                     "refId": "A"
                 }
             ],
-            "title": "Resource Group RU",
+            "title": "Request Unit",
             "type": "timeseries"
         },
         {
@@ -1371,7 +1383,7 @@
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 67
+                "y": 52
             },
             "id": 16,
             "panels": [],
@@ -1436,7 +1448,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 68
+                "y": 53
             },
             "id": 18,
             "options": {
@@ -1460,9 +1472,9 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "max by(changefeed) (tidbcloud_changefeed_latency{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
+                    "expr": "max by(changefeed_id) (tidbcloud_changefeed_latency{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
                     "instant": false,
-                    "legendFormat": "{{changefeed}}",
+                    "legendFormat": "{{changefeed_id}}",
                     "range": true,
                     "refId": "A"
                 }
@@ -1527,7 +1539,7 @@
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 68
+                "y": 53
             },
             "id": 20,
             "options": {
@@ -1551,9 +1563,9 @@
                         "uid": "${DS_PROMETHEUS}"
                     },
                     "editorMode": "code",
-                    "expr": "max by(changefeed) (tidbcloud_changefeed_status{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
+                    "expr": "max by(changefeed_id) (tidbcloud_changefeed_status{instance_name=~\"$Instance_name\", instance_id=~\"$Instance_id\"})",
                     "instant": false,
-                    "legendFormat": "{{changefeed}}",
+                    "legendFormat": "{{changefeed_id}}",
                     "range": true,
                     "refId": "A"
                 }
@@ -1618,6 +1630,6 @@
         "to": "now"
     },
     "timezone": "",
-    "title": "TiDB X Premium Overview",
+    "title": "TiDB Cloud Premium Dynamic Tracker",
     "version": 1
 }
