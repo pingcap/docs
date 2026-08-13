@@ -9,7 +9,7 @@ TiDB Cloudの各TiDB Cloud Premium インスタンスに対して、IP アクセ
 
 > **Note:**
 >
-> このドキュメントは**{{{ .premium }}}**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)するを参照してください。
+> このドキュメントは**TiDB Cloud Premium**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)するを参照してください。
 
 TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
 

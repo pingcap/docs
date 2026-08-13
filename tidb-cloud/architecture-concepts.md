@@ -23,16 +23,16 @@ TiDB Cloudを使えば、データベースのスケーリング、複雑な管�
 
 <CustomContent language="en,zh">
 
--   AWS向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向け**{{{ .premium }}}** 、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**{{{ .dedicated }}}**提供します。
--   TiDB Cloudは、Google CloudおよびAzure向けに、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けサービス**{{{ .dedicated }}}**を提供しています。
--   Alibaba Cloud向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、そして高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向けの**{{{ .premium }}}**提供しています。
+-   AWS向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向けの**TiDB Cloud Premium** 、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**TiDB Cloud Dedicated**を提供します。
+-   TiDB Cloudは、Google CloudおよびAzure向けに、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けサービス**TiDB Cloud Dedicated**を提供しています。
+-   Alibaba Cloud向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、そして高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向けの**TiDB Cloud Premium**を提供しています。
 
 </CustomContent>
 
 <CustomContent language="ja">
 
--   AWS向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向け**{{{ .premium }}}** 、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**{{{ .dedicated }}}**提供します。
--   Google CloudおよびAzure向けに、 TiDB Cloudは、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けに、 **{{{ .dedicated }}}**提供します。
+-   AWS向けに、 TiDB Cloudは、自動スケーリングとコスト効率の高いワークロード向けの**TiDB Cloud Starter** 、プロビジョニングされた容量を備えた本番環境対応ワークロード向けの**TiDB Cloud Essential** 、高いパフォーマンスと強化されたセキュリティを必要とするミッションクリティカルなワークロード向けの**TiDB Cloud Premium** 、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けの**TiDB Cloud Dedicated**を提供します。
+-   Google CloudおよびAzure向けに、 TiDB Cloudは、専用リソースと高度な機能を備えたエンタープライズグレードのアプリケーション向けに、 **TiDB Cloud Dedicated**を提供します。
 
 </CustomContent>
 
