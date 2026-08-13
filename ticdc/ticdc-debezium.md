@@ -50,7 +50,7 @@ This section describes the message formats of DDL events, DML events and WATERMA
 
 > **Note:**
 >
-> The DDL event is supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), DDL events are ignored.
+> DDL events are supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), DDL events are ignored.
 
 TiCDC encodes a DDL event into a Kafka message, with both the key and value encoded in the Debezium format.
 
@@ -601,7 +601,7 @@ The key fields of the preceding JSON data are explained as follows:
 
 > **Note:**
 >
-> The WATERMARK event is supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), WATERMARK events are ignored.
+> WATERMARK events are supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), WATERMARK events are ignored.
 
 TiCDC encodes a WATERMARK event into a Kafka message, with both the key and value encoded in the Debezium format.
 
