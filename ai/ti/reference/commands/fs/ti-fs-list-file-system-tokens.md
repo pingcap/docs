@@ -16,6 +16,7 @@ Lists non-secret token metadata for one Filesystem. The response never contains 
 ```text
 ti fs list-file-system-tokens
   --file-system-id <string>
+  [--fs-token <string>]
   [--include-expired]
   [--limit <int32>]
   [--offset <int32>]
@@ -24,6 +25,7 @@ ti fs list-file-system-tokens
 ## Options
 
 - `--file-system-id <string>`: Specify the Filesystem whose tokens are listed. This option is required.
+- `--fs-token <string>`: Authorize the request with an owner FS token. Defaults to `TI_FS_TOKEN`; when neither is present, the command uses configured TiDB Cloud API keys. Scoped tokens cannot list token metadata.
 - `--include-expired`: Include expired token metadata. Revoked tokens are not returned by the service.
 - `--offset <int32>`: Set the zero-based token offset [default: 0].
 - `--limit <int32>`: Set the maximum number of tokens to return, from 1 through 200 [default: 50].
@@ -55,4 +57,5 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 ## Related documentation
 
 - [`ti fs generate-file-system-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
+- [`ti fs generate-file-system-scoped-token`](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-scoped-token.md)
 - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)

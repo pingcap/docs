@@ -86,9 +86,11 @@ One profile can access multiple Filesystems. Drive9's remote inventory is author
 
 The credential contains the server-assigned file system ID, canonical region code, selected `api_key`, and optional authoritative token metadata, and uses owner-only permissions. `ti fs list-file-systems` reads remote resources and joins only the non-secret `has_local_token` hint.
 
-One remote Filesystem can have multiple tokens, but each profile stores at most one selected token per Filesystem. The local store is an operational selection, not a replica of remote token inventory. Credentials created by provisioning or older imports might not contain `token_id`, `scope_kind`, `token_name`, or `expires_at`; they remain valid for data-plane use, and `ti` does not guess missing metadata from token-list rows.
+One remote Filesystem can have multiple tokens, but each profile stores at most one selected token per Filesystem. The local store is an operational selection, not a replica of remote token inventory. Credentials created by provisioning or older imports might not contain `token_id`, `scope_kind`, `token_name`, `expires_at`, or `scopes`; they remain valid for data-plane use, and `ti` does not guess missing metadata from token-list rows.
 
 `ti fs generate-file-system-token` does not change the selected credential unless `--store-locally` is set. `--replace` changes only the local selection and leaves the previous remote token active. A refresh sourced from the local credential atomically replaces it. A refresh sourced from a flag or `TI_FS_TOKEN` returns the replacement plaintext without writing local state.
+
+`ti fs generate-file-system-scoped-token` accepts only an owner token and can store its authoritative path scopes locally. The token JWT itself contains the Filesystem ID but not the token kind, token ID, or scopes. Therefore, an explicit or environment token is passed to the service for authorization instead of being classified locally. `TI_FS_TOKEN` can contain either an owner token or a scoped token; available operations depend on its server-side capability.
 
 Resource selection is:
 

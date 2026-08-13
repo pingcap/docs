@@ -42,6 +42,7 @@ ti
 │   ├── create-file-system
 │   ├── import-file-system-token
 │   ├── generate-file-system-token
+│   ├── generate-file-system-scoped-token
 │   ├── list-file-system-tokens
 │   ├── enable-file-system-token
 │   ├── disable-file-system-token

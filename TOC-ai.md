@@ -113,6 +113,7 @@
       - [create-file-system](/ai/ti/reference/commands/fs/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/commands/fs/ti-fs-import-file-system-token.md)
       - [generate-file-system-token](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-token.md)
+      - [generate-file-system-scoped-token](/ai/ti/reference/commands/fs/ti-fs-generate-file-system-scoped-token.md)
       - [list-file-system-tokens](/ai/ti/reference/commands/fs/ti-fs-list-file-system-tokens.md)
       - [enable-file-system-token](/ai/ti/reference/commands/fs/ti-fs-enable-file-system-token.md)
       - [disable-file-system-token](/ai/ti/reference/commands/fs/ti-fs-disable-file-system-token.md)

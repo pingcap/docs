@@ -18,6 +18,7 @@ ti fs
 ├── create-file-system
 ├── import-file-system-token
 ├── generate-file-system-token
+├── generate-file-system-scoped-token
 ├── list-file-system-tokens
 ├── enable-file-system-token
 ├── disable-file-system-token
@@ -62,6 +63,7 @@ ti fs
 | `create-file-system` | Provisions a Filesystem with a server-assigned ID; `--wait` waits until data-plane access is ready. | `ti fs create-file-system --wait` |
 | `import-file-system-token` | Validates and stores an existing token under its embedded file system ID. | `ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1` |
 | `generate-file-system-token` | Generates an additional owner token and returns its plaintext once. | `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name ci --ttl 24h` |
+| `generate-file-system-scoped-token` | Uses an owner token to generate a finite path-and-operation-limited token. | `ti fs generate-file-system-scoped-token --ttl 24h --allow /workspace:read,list` |
 | `list-file-system-tokens` | Lists non-secret token metadata for one Filesystem. | `ti fs list-file-system-tokens --file-system-id <file-system-id>` |
 | `enable-file-system-token` | Re-enables a disabled token by immutable token ID. | `ti fs enable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
 | `disable-file-system-token` | Temporarily disables a token by immutable token ID. | `ti fs disable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
