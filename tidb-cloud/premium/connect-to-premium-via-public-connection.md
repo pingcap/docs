@@ -11,7 +11,7 @@ This document describes how to connect to your {{{ .premium }}}<CustomContent pl
 
 > **Note:**
 >
-> Public connection is available only if you provided a public hosted zone during BYOC deployment. If you provided a private hosted zone, connect to your instance through a private connection instead.
+> Public connections are available only if you provided a public hosted zone during the BYOC deployment. If you provided a private hosted zone, use a private connection to connect to your instance.
 
 </CustomContent>
 
