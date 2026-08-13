@@ -1698,7 +1698,7 @@ FROM
 4 rows in set (0.00 sec)
 ```
 
-次の例は、 `REGEXP` `SELECT`句に限定されないことを示しています。例えば、クエリの`WHERE`句でも使用できます。
+次の例は、 `REGEXP`が`SELECT`句に限定されないことを示しています。例えば、クエリの`WHERE`句でも使用できます。
 
 ```sql
 SELECT
@@ -2071,7 +2071,7 @@ SELECT n, REPEAT('x',n) FROM nr;
 20 rows in set (0.01 sec)
 ```
 
-次の例は、 `REPEAT()`複数の文字で構成される文字列に対して操作できることを示しています。
+次の例は、 `REPEAT()`が複数の文字で構成される文字列に対して操作できることを示しています。
 
 ```sql
 SELECT REPEAT('ha',3);

@@ -14,7 +14,7 @@ TiDB は、MySQL 8.0 で利用可能な[制御フロー関数](https://dev.mysql
 | [`IFNULL()`](#ifnull) | null if/else 構文           |
 | [`NULLIF()`](#nullif) | expr1 = expr2の場合は`NULL`返す |
 
-## 場合 {#case}
+## CASE {#case}
 
 [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case)演算子を使用すると、条件付きロジックを実行し、指定された条件に基づいてクエリ結果をカスタマイズできます。
 
@@ -54,7 +54,7 @@ SELECT n, CASE WHEN n MOD 2 THEN "odd" ELSE "even" END FROM d;
 10 rows in set (0.00 sec)
 ```
 
-## もし（） {#if}
+## IF() {#if}
 
 [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if)関数を使用すると、値または式が真かどうかに基づいてさまざまなアクションを実行できます。
 

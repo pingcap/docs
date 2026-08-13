@@ -30,7 +30,7 @@ TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.co
 | [`UUID_TO_BIN()`](#uuid_to_bin)       | UUIDをテキスト形式からバイナリ形式に変換する                                                                                                                                                                                                                                                   |
 | [`VALUES()`](#values)                 | INSERT時に使用される値を定義します                                                                                                                                                                                                                                                       |
 
-### 任意の値() {#any_value}
+### ANY_VALUE() {#any_value}
 
 `ANY_VALUE()`関数は、値のグループから任意の値を返します。通常、 `SELECT`ステートメントに集計されていない列を`GROUP BY`句とともに含める必要があるシナリオで使用されます。
 
@@ -113,7 +113,7 @@ SELECT BIN_TO_UUID(0x11EEEB6D9A17B457BACF5405DB7AAD56, 1);
 
 [UUID()](#uuid)および[UUIDのベストプラクティス](/best-practices/uuid.md)も参照してください。
 
-### デフォルト（） {#default}
+### DEFAULT() {#default}
 
 `DEFAULT()`関数は、列のデフォルト値を取得するために使用されます。
 
@@ -139,7 +139,7 @@ TABLE t1;
 
 前述の例では、 `UPDATE`ステートメントは`c1`列の値を、列のデフォルト値 ( `5` ) に`3`を加えた値に設定し、結果として`8`という新しい値になります。
 
-### グループ化() {#grouping}
+### GROUPING() {#grouping}
 
 [`GROUP BY`修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。
 
@@ -258,7 +258,7 @@ SELECT IS_IPV4_COMPAT(INET6_ATON('::127.0.0.1'));
 1 row in set (0.00 sec)
 ```
 
-### IS_IPV4_MAPPE() {#is_ipv4_mapped}
+### IS_IPV4_MAPPED() {#is_ipv4_mapped}
 
 `IS_IPV4_MAPPED()`関数は、指定された引数が IPv4 マップド アドレスであるかどうかをテストします。
 
@@ -343,7 +343,7 @@ SELECT 'value' AS 'column name' UNION ALL SELECT 'another value';
 2 rows in set (0.00 sec)
 ```
 
-### 寝る（） {#sleep}
+### SLEEP() {#sleep}
 
 `SLEEP()`関数は、クエリの実行を指定された秒数だけ一時停止するために使用されます。
 
@@ -379,11 +379,11 @@ SELECT UUID();
 
 [UUIDのベストプラクティス](/best-practices/uuid.md)も参照してください。
 
-### UUIDからビンへ {#uuid_to_bin}
+### UUID_TO_BIN {#uuid_to_bin}
 
 [BIN_TO_UUID()](#bin_to_uuid)を参照してください。
 
-### 値() {#values}
+### VALUES() {#values}
 
 `VALUES(col_name)`関数は、 [`INSERT`](/sql-statements/sql-statement-insert.md)ステートメントの`ON DUPLICATE KEY UPDATE`句で特定の列の値を参照するために使用されます。
 
