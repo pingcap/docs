@@ -379,7 +379,7 @@ config show service-middleware
   "grpc-rate-limit": {
     "enable-grpc-rate-limit": "true",
     "grpc-limiter-config": {}
-}
+  }
 }
 ```
 
@@ -429,9 +429,9 @@ config show service-middleware
         "QPS": 100,
         "QPSBurst": 100, // Automatically adjusted based on QPS, for display only
         "ConcurrencyLimit": 10
+      }
     }
   }
-}
 }
 ```
 
@@ -700,7 +700,7 @@ time: 43.12698ms
   "region": {
     "id": 2,
     ......
-}
+  }
 }
 ```
 
@@ -712,7 +712,7 @@ time: 43.12698ms
   "region": {
     "id": 2,
     ......
-}
+  }
 }
 ```
 
@@ -724,7 +724,7 @@ time: 43.12698ms
   "region": {
     "id": 2,
     ......
-}
+  }
 }
 ```
 
@@ -1175,7 +1175,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 このコマンドを使用して、現在のGCセーフポイントとサービスGCセーフポイントを照会します。出力は次のとおりです。
 
 ```bash
-    {
+{
   "service_gc_safe_points": [
     {
       "service_id": "gc_worker",
