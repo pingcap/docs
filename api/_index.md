@@ -9,7 +9,7 @@ TiDBは、クラスタのクエリと操作、データレプリケーション�
 
 ## TiDB Cloud API (PREVIEW) {#tidb-cloud-api-preview}
 
-[TiDB Cloud API](/api/tidb-cloud-api-overview.md)は[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)APIであり、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、Data Serviceリソースなど、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。
+[TiDB Cloud API](/api/tidb-cloud-api-overview.md)は[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)であり、プロジェクト、クラスタ、バックアップ、リストア、インポート、請求、Data Serviceリソースなど、 TiDB Cloud内の管理オブジェクトをプログラムで管理するためのアクセスを提供します。
 
 | API                                       | 説明                                                                           |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
