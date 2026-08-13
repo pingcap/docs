@@ -40,9 +40,9 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 **控制台变更**
 
-- 通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 中的以下更新，改进各类 TiDB Cloud 套餐的网络使用体验：
+- 通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 中的以下更新，改进所有 TiDB Cloud 方案的网络使用体验：
 
-    - **Networking** 页面现在对各类 TiDB Cloud 套餐中的端点配置采用了更一致的命名。
+    - **Networking** 页面现在对不同 TiDB Cloud 方案中的端点配置采用了更一致的命名。
     - 对于未配置任何端点的端点类型，**Networking** 页面现在仅显示相应的操作按钮，而不再显示空表格。
     - 对于 TiDB Cloud Starter 和 Essential 实例，在配置网络访问后，你现在可以点击 **Networking** 页面右上角的 **Connect** 连接到实例。
     - 对于 TiDB Cloud Essential、Premium 和 Dedicated，管理公共端点的允许 IP 地址现在更加直观。你可以点击 **Add IP Address** 添加 IP 地址，或点击现有 IP 地址对应的 **...** 对其进行编辑或删除。
