@@ -133,7 +133,7 @@ Fill out the table below with the information gathered in steps above and share 
 | **Availability Zones** | 3 AZs or single AZ per region (specify names and ID) | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | Step 3. Note to meet the AZ quantity requirement for **each** selected region. |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
 | **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone. You can provide either a public or private hosted zone. | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4. The hosted zone can be shared across multiple regions. |
-| **CIDR** | Customer-planned CIDR range for the TiDB cluster, Customer-planned CIDR range for the O11Y cluster | **TiDB cluster CIDR:** `10.10.0.0/16`; **O11Y cluster CIDR:** `10.20.0.0/16` | Step 6 |
+| **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 
 ## Review and increase AWS service quotas
