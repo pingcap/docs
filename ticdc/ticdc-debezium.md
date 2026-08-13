@@ -11,11 +11,6 @@ summary: Learn the concept of the TiCDC Debezium Protocol and how to use it.
 
 When you use Kafka as the downstream sink, specify the `protocol` field as `debezium` in `sink-uri` configuration. Then TiCDC encapsulates the Debezium messages based on the events and sends TiDB data change events to the downstream.
 
-<SimpleTab>
-<div label="New TiCDC architecture">
-
-To use the new TiCDC architecture, set the TiCDC configuration item [`newarch`](/ticdc/ticdc-server-config.md#newarch-new-in-v854-release1) to `true`.
-
 The Debezium protocol supports the following types of events:
 
 - DDL event: represents a DDL change record. After the upstream DDL statement is successfully executed, the DDL event is sent to every Message Queue (MQ) partition.
@@ -23,14 +18,6 @@ The Debezium protocol supports the following types of events:
 - DML event: represents a row data change record. The DML event is sent when a row change occurs. It contains the information about the row after the change occurs.
 
 - WATERMARK event: represents a special point in time. It indicates that the events received before this point are complete. The WATERMARK event applies only to the TiDB extension field and takes effect when you set [`enable-tidb-extension`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) to `true` in `sink-uri`.
-
-</div>
-<div label="Classic TiCDC architecture">
-
-The Debezium protocol only supports Row Changed events and directly ignores DDL events and WATERMARK events. A Row changed event represents a data change in a row. When a row changes, the Row Changed event is sent, including relevant information about the row both before and after the change. A WATERMARK event marks the replication progress of a table, indicating that all events earlier than the watermark have been sent to the downstream.
-
-</div>
-</SimpleTab>
 
 The configuration example for using the Debezium message format is as follows:
 
@@ -46,11 +33,7 @@ In addition, the original Debezium format does not include important fields such
 
 This section describes the message formats of DDL events, DML events and WATERMARK events.
 
-### DDL event (new TiCDC architecture)
-
-> **Note:**
->
-> DDL events are supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), DDL events are ignored.
+### DDL event
 
 TiCDC encodes a DDL event into a Kafka message, with both the key and value encoded in the Debezium format.
 
@@ -597,11 +580,7 @@ The key fields of the preceding JSON data are explained as follows:
 | `schema.optional` | Boolean | Indicates whether the field is optional. When it is `true`, the field is optional.  |
 | `schema.type`    | String  | The data type of the field.                                      |
 
-### WATERMARK event (new TiCDC architecture)
-
-> **Note:**
->
-> WATERMARK events are supported only in the [new TiCDC architecture](/ticdc/ticdc-architecture.md). In the [classic TiCDC architecture](/ticdc/ticdc-classic-architecture.md), WATERMARK events are ignored.
+### WATERMARK event
 
 TiCDC encodes a WATERMARK event into a Kafka message, with both the key and value encoded in the Debezium format.
 
