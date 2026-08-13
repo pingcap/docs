@@ -108,7 +108,7 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 > - The total amount in the monthly bill is rounded off to the 2nd decimal place.
 > - The total amount in the daily usage details is accurate to the 6th decimal place.
 
-The following are billing explanations related to storage and data transmission:
+The following are billing explanations related to storage:
 
 - **Row-based storage**: TiDB tables use row-based storage by default, with data stored in **TiKV**. <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
 
