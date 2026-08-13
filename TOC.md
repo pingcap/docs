@@ -224,7 +224,7 @@
   - 診断方法
     - [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)
-    - [Top SQL を使用して高コストのクエリを特定する](/dashboard/top-sql.md)
+    - [Top SQLを使用してコストの高いクエリを特定する](/dashboard/top-sql.md)
     - [ログを使用して高負荷なクエリを特定する](/identify-expensive-queries.md)
     - [クラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](/troubleshoot-stale-read.md)

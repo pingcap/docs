@@ -71,7 +71,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
-      - [Lark 経由でサブスクライブ](/tidb-cloud/monitor-alert-lark.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - [イベント](/tidb-cloud/tidb-cloud-events.md)
     - サードパーティ製指標の統合
       - [概要](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -624,7 +624,7 @@
   - [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
   - Connected Careサポートサービスの特長
-    - [接続済み: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
+    - [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB CloudアラートのIMサブスクリプション
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
@@ -632,7 +632,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
-      - [Lark 経由でサブスクライブ](/tidb-cloud/monitor-alert-lark.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)

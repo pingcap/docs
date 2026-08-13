@@ -238,7 +238,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 4.  **「次へ」**をクリックして、 **「新しいインスタンスへの復元」**ページに進んでください。
 
-5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
+5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
 
     <CustomContent plan="byoc">
 
@@ -362,7 +362,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 3. **Verify Backup and Next**をクリックします。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
 
     <CustomContent plan="byoc">
 
