@@ -199,11 +199,11 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 4.  **「コマンド生成」**をクリックすると、権限設定用のコマンドが表示されます。
 
-    -   **With AWS CLI**:
+    -   **AWS CLI を使用する場合**:
 
         生成されたコマンドをAWS上で実行して、 TiDB CloudにAmazon S3バケットへのアクセス権を付与してください。
 
-    -   **With AWS Console**：
+    -   **AWSコンソールを使用する場合**：
 
         1.  [Amazon S3コンソール](https://console.aws.amazon.com/s3/)に移動します。
         2.  対象のバケットの詳細ページを開き、「**アクセス許可」**タブをクリックします。
@@ -256,7 +256,7 @@ TiDB Cloud Dedicatedクラスターの既存のバックアップ ファイル�
 
 #### 実行中のバックアップジョブを削除します {#delete-a-running-backup-job}
 
-TiDB Cloud Dedicatedクラスターの実行中のバックアップ ジョブを削除するには、[**Delete backup files**](#delete-backup-files)と同様のプロセスに従います。
+TiDB Cloud Dedicatedクラスターの実行中のバックアップ ジョブを削除するには、[**バックアップファイルを削除する**](#delete-backup-files)と同様のプロセスに従います。
 
 1.  TiDB Cloud Dedicatedクラスターの[**バックアップ**](#view-the-backup-page)ページに移動します。
 
@@ -303,7 +303,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
     > **注記**
     >
     > -   デフォルトでは、新しいクラスターはソースクラスターと同じリージョンに復元されます。
-    > -   **Dual Region Backup**で [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) が有効になっている場合は、デュアルリージョンバックアップ用に構成された**Secondary Region**に新しいクラスターを復元することもできます。
+    > -   **バックアップ設定**で [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) が有効になっている場合は、デュアルリージョンバックアップ用に構成された**Secondary Region**に新しいクラスターを復元することもできます。
 
 5.  **復元**ウィンドウでは、必要に応じて以下の変更を行うこともできます。
 

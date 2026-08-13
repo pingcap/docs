@@ -161,7 +161,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
     2.  役割を作成するには、以下の情報を入力してください。
 
         -   **Trusted entity type**で**「AWSアカウント」**を選択します。
-        -   **An AWS account**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**「アカウントID」**フィールドに貼り付けます。
+        -   **「AWSアカウント」**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**「アカウントID」**フィールドに貼り付けます。
         -   **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベスト プラクティス)]**をクリックし、 TiDB Cloud外部 ID を**[外部 ID]**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3.  **「次へ」**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**「次へ」**をクリックします。
@@ -265,7 +265,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
     -   データをAzure Blob Storageにエクスポートする場合：
 
         1.  **「データのエクスポート」を**クリックします。
-        2.  **Azure Blob Storage**で**Azure Blob Storageを**選択してください。
+        2.  **ターゲット接続**で**Azure Blob Storageを**選択してください。
         3.  SASトークンフィールドの下にある**「ここをクリックして、Azure ARMテンプレートを使用して新しいものを作成してください」をクリックしてください**。
 
     </CustomContent>
@@ -276,7 +276,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     2.  Azureにログインすると、Azure**カスタムデプロイ**ページにリダイレクトされます。
 
-    3.  **カスタムデプロイメント**ページで、**Storage Account Name**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
+    3.  **カスタムデプロイメント**ページで、**リソースグループ**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
