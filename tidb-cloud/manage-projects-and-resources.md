@@ -16,6 +16,12 @@ TiDB Cloud 资源是你可以管理的可部署单元。它可以是以下之一
 - TiDB X 实例，即一种面向服务的 TiDB Cloud 产品，基于 [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}, Essential, Premium<CustomContent plan="byoc">, 或 BYOC</CustomContent> 实例
 - 一个 {{{ .dedicated }}} 集群
 
+<CustomContent plan="byoc">
+
+在 {{{ .byoc }}} 中，资源池是一种组织级别的 BYOC 资源，为 BYOC 实例提供底层物理资源、网络和容量。资源池在 **BYOC Management** > **Resource Pools** 中进行管理，并且不与项目关联。更多信息，请参见 [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)。
+
+</CustomContent>
+
 ### TiDB Cloud 项目 {#tidb-cloud-projects}
 
 在 TiDB Cloud 中，你可以使用 [projects](/tidb-cloud/tidb-cloud-glossary.md#project) 来组织和管理你的 TiDB Cloud 资源。

@@ -15,15 +15,15 @@ TiDB Cloud 为你提供了便捷的方式，通过 Slack、[email](/tidb-cloud/m
 
 - 通过 Slack 订阅功能仅对订阅了 **Enterprise** 或 **Premium** 支持计划的组织开放。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 - 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标项目的 `Project Owner` 访问权限。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
-- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标 {{{ .premium }}} 实例的 `Instance Manager` 访问权限。
+- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标实例的 `Project Owner` 或 `Instance Manager` 访问权限。
 
 </CustomContent>
 

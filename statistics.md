@@ -17,7 +17,7 @@ TiDB 使用统计信息作为优化器的输入，用于估算 SQL 语句每个�
 
 <CustomContent platform="tidb">
 
-TiDB 会定期持久化更新信息，更新周期为 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)。`stats-lease` 的默认值为 `3s`。如果你将该值设置为 `0`，TiDB 将停止自动更新统计信息。
+TiDB 会定期持久化更新信息，更新周期为 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)。`stats-lease` 的默认值为 `3s`。如果你将该值设置为 `0`，TiDB 将停止自动更新统计信息。从 v8.5.7 开始，你可以使用 [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md) 语句立即持久化更新信息。
 
 </CustomContent>
 

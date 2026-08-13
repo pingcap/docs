@@ -8,6 +8,45 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 8 月 11 日 {#august-11-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential、Premium 和 Dedicated**
+
+    - 支持通过 [Lark](https://www.larksuite.com/) 订阅来自 TiDB Cloud 的告警通知。
+
+        如果你的组织的[支持计划](/tidb-cloud/connected-care-overview.md#connected-care)为 **Enterprise** 或 **Premium**，现在你可以通过 Lark 接收告警通知。
+
+        更多信息，请参阅以下文档：
+
+        - TiDB Cloud Essential：[通过 Lark 订阅](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium：[通过 Lark 订阅](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated：[通过 Lark 订阅](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+
+- **TiDB Cloud Lake**
+
+    - 通过新的 MCP server 和 SQLAlchemy 方言，扩展 [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) 的 AI、Python 和 BI 集成能力。
+
+        - 借助新的 MCP server，你现在可以连接兼容 MCP 的 AI 工具，以探索数据库对象、检查表结构，并使用自然语言指令运行 SQL。内置的会话沙箱保护默认启用，使生产对象保持只读，同时将写操作限制在会话专属的沙箱对象中。
+        - 借助新的 SQLAlchemy 方言，你可以通过该方言将 Python 应用程序和兼容 SQLAlchemy 的工具连接到 TiDB Cloud Lake。你可以使用 Jupyter Notebook 等工具进行数据查询和可视化，并使用 Apache Superset 构建图表和仪表板。
+
+      更多信息，请参阅以下文档：
+
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [使用 MCP 将 AI 工具连接到 TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [使用 Jupyter Notebook 连接到 TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [使用 Apache Superset 连接到 TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/superset)
+
+**控制台变更**
+
+- 通过 [TiDB Cloud 控制台](https://tidbcloud.com/) 中的以下更新，改进所有 TiDB Cloud 方案的网络使用体验：
+
+    - **Networking** 页面现在对不同 TiDB Cloud 方案中的端点配置采用了更一致的命名。
+    - 对于未配置任何端点的端点类型，**Networking** 页面现在仅显示相应的操作按钮，而不再显示空表格。
+    - 对于 TiDB Cloud Starter 和 Essential 实例，在配置网络访问后，你现在可以点击 **Networking** 页面右上角的 **Connect** 连接到实例。
+    - 对于 TiDB Cloud Essential、Premium 和 Dedicated，管理公共端点的允许 IP 地址现在更加直观。你可以点击 **Add IP Address** 添加 IP 地址，或点击现有 IP 地址对应的 **...** 对其进行编辑或删除。
+
 ## 2026 年 8 月 5 日 {#august-5-2026}
 
 **常规变更**

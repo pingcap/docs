@@ -13,15 +13,16 @@ TiDB Cloud 为你提供了通过 email、[Slack](/tidb-cloud/monitor-alert-slack
 
 ## 前提条件
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
+    
 
 - 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标项目的 `Project Owner` 访问权限。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
-- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标 {{{ .premium }}} 实例的 `Instance Manager` 访问权限。
+- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或在 TiDB Cloud 中拥有目标实例的 `Project Owner` 或 `Instance Manager` 访问权限。
 
 </CustomContent>
 
@@ -30,7 +31,7 @@ TiDB Cloud 为你提供了通过 email、[Slack](/tidb-cloud/monitor-alert-slack
 要接收报警通知，请按照以下步骤操作。不同 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)的操作步骤有所不同。
 
 <CustomContent plan="dedicated">
-    
+
 > **提示：**
 >
 > 对于 {{{ .dedicated }}}，报警订阅针对当前项目下的所有报警。如果你在该项目下有多个 {{{ .dedicated }}} 集群，只需订阅一次即可。

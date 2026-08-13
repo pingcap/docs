@@ -71,6 +71,7 @@
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
       - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
+      - [通过 Lark 订阅](/tidb-cloud/monitor-alert-lark.md)
     - [事件](/tidb-cloud/tidb-cloud-events.md)
     - 第三方指标集成
       - [概览](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -135,6 +136,7 @@
   - 优化资源分配
     - [资源分配概览](/tidb-cloud/optimize-resource-allocation.md)
     - 资源管理
+      - [校准资源](/tidb-cloud/calibrate-resource.md)
       - [使用资源管控 (Resource Control) 实现资源组限制和流控](/tidb-resource-control-ru-groups.md)
       - [管理资源消耗超出预期的查询 (Runaway Queries)](/tidb-resource-control-runaway-queries.md)
       - [限制后台任务资源使用](/tidb-resource-control-background-tasks.md)
@@ -631,6 +633,7 @@
       - [通过 Flashduty 订阅](/tidb-cloud/monitor-alert-flashduty.md)
       - [通过 PagerDuty 订阅](/tidb-cloud/monitor-alert-pagerduty.md)
       - [通过 Webhook 订阅](/tidb-cloud/monitor-alert-webhook.md)
+      - [通过 Lark 订阅](/tidb-cloud/monitor-alert-lark.md)
     - Connected：通过 IM 创建工单并订阅更新
       - [通过 Slack 创建工单并订阅工单更新](/tidb-cloud/connected-slack-ticket-creation.md)
       - [通过 Lark 创建工单并订阅工单更新](/tidb-cloud/connected-lark-ticket-creation.md)

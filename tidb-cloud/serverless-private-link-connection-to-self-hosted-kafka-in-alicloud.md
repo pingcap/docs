@@ -43,7 +43,7 @@ summary: 了解如何通过阿里云 Endpoint Service 私有链路连接，接�
 查看阿里云账户 ID 和可用区的方法如下：
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com)中，进入你的 TiDB Cloud Essential 实例总览页面，然后点击左侧导航栏的 **Settings** > **Networking**。
-2. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection**。
+2. 在 **Alibaba Cloud Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 3. 在弹出的对话框中，你可以找到阿里云账户 ID 和可用区信息。
 
 下表为部署信息示例。

@@ -327,7 +327,7 @@ TiDB Cloud Dedicated 集群支持双区域备份，通过将集群所在区域�
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com) 中，进入组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击右上角的 **...**，然后点击 **Recycle Bin**。
 
-    >**Tip:**
+    > **Tip:**
     >
     > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 

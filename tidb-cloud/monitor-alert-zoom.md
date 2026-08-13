@@ -17,15 +17,15 @@ TiDB Cloud 为你提供了通过 Zoom、[Slack](/tidb-cloud/monitor-alert-slack.
 
 - 要在 Zoom 中添加并配置 Incoming Webhook Chatbot，你需要拥有 Zoom 账户的管理员权限。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 - 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标项目的 `Project Owner` 访问权限。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
-- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标 {{{ .premium }}} 实例的 `Instance Manager` 访问权限。
+- 要订阅 TiDB Cloud 的报警通知，你必须拥有组织的 `Organization Owner` 访问权限，或 TiDB Cloud 目标实例的 `Project Owner` 或 `Instance Manager` 访问权限。
 
 </CustomContent>
 

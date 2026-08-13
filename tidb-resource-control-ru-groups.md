@@ -167,7 +167,7 @@ TiDB 资源控制功能提供了两层资源管理能力：TiDB 层的流量控�
 
 对于 TiDB 自建集群，你可以使用 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) 语句评估集群容量。
 
-对于 TiDB Cloud，[`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource) 语句不适用。
+对于 TiDB Cloud Dedicated，`CALIBRATE RESOURCE` 语句暂不支持。要估算集群的 RU 容量，请改用 TiDB Cloud 控制台中的 **Calibrate Resource** 功能。更多信息，参见 [Calibrate Resource](/tidb-cloud/calibrate-resource.md)。
 
 </CustomContent>
 
@@ -408,7 +408,7 @@ TiKV 也会记录不同资源组的请求 QPS。详情参见 [TiKV 监控指标�
 
 > **Note:**
 >
-> 本节仅适用于 TiDB 自建集群。目前 TiDB Cloud 不提供资源控制相关监控指标。
+> 本节介绍的 Grafana 仪表盘仅适用于 TiDB Self-Managed。对于 TiDB Cloud Dedicated，你可以在 TiDB Cloud 控制台的 [Calibrate Resource](/tidb-cloud/calibrate-resource.md) 页面查看资源控制指标，包括 **Total RU Consumed** 和 **RU Consumed by Resource Groups**。
 
 TiDB 会定期收集资源控制的运行时信息，并在 Grafana 的 **TiDB** > **Resource Control** 看板中提供可视化图表。
 

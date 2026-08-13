@@ -118,7 +118,7 @@ TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_acc
 
 ### 编辑 API 密钥
 
-> **注意**：
+> **注意：**
 >
 > 你无法编辑已过期的密钥。
 
@@ -145,7 +145,7 @@ TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_acc
 
 ### 使单个 API 密钥过期
 
-> **注意**：
+> **注意：**
 >
 > 你无法使已过期的密钥过期。
 

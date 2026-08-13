@@ -39,7 +39,7 @@ TiDB Cloud 中的数据流服务（如 Changefeed 和 Data Migration (DM)）需�
 - 将 TiDB Cloud 账户 ID 添加到 **Allow principals** 列表。
 - 拥有与 {{{ .essential }}} 实例重叠的可用区。
 
-你可以在 **Create Private Link Connection** 对话框底部获取账户 ID 和可用区信息，或通过以下命令获取：
+你可以在 **Create Private Endpoint for External Services** 对话框底部获取账户 ID 和可用区信息，或通过以下命令获取：
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -56,13 +56,14 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection** 以在 endpoint shared 模式下创建私有端点。在此模式下，同一 AWS Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
+3. 在 **AWS Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 
     > **注意：**
     >
-    > 如果你的 TiDB Cloud Essential 实例创建于 2026 年 6 月 30 日之后，且 **Private Link Connection For Dataflow** 区域不可用，你可以改为点击 **AWS Private Endpoint for External Services** 区域中的 **Create Private Endpoint for External Services**，以在 endpoint exclusive 模式下创建私有链路连接。在 endpoint exclusive 模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点。此模式在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日或之后，点击 **Create Private Endpoint for External Services** 会以 endpoint exclusive 模式创建私有链路连接。在此模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点，因此在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日之前，点击 **Create Private Endpoint for External Services** 会以 endpoint shared 模式创建私有链路连接。在此模式下，同一 AWS Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
 
-4. 在 **Create Private Link Connection** 对话框中，填写所需信息：
+4. 在 **Create Private Endpoint for External Services** 对话框中，填写所需信息：
 
     - **Private Link Connection Name**：输入私有链路连接的名称。
     - **Connection Type**：选择 **AWS Endpoint Service**。如果未显示该选项，请确保你的 {{{ .essential }}} 实例部署在 AWS 上。
@@ -103,13 +104,14 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection** 以在 endpoint shared 模式下创建私有端点。在此模式下，同一 AWS Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
+3. 在 **AWS Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 
     > **注意：**
     >
-    > 如果你的 TiDB Cloud Essential 实例创建于 2026 年 6 月 30 日之后，且 **Private Link Connection For Dataflow** 区域不可用，你可以改为点击 **Amazon MSK Provisioned Private Endpoint for External Services** 区域中的 **Create Private Endpoint for External Services**，以在 endpoint exclusive 模式下创建私有链路连接。在 endpoint exclusive 模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点。此模式在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日或之后，点击 **Create Private Endpoint for External Services** 会以 endpoint exclusive 模式创建私有链路连接。在此模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点，因此在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日之前，点击 **Create Private Endpoint for External Services** 会以 endpoint shared 模式创建私有链路连接。在此模式下，同一 AWS Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
 
-4. 在 **Create Private Link Connection** 对话框中，填写所需信息：
+4. 在 **Create Private Endpoint for External Services** 对话框中，填写所需信息：
 
     - **Private Link Connection Name**：输入私有链路连接的名称。
     - **Connection Type**：选择 **Amazon MSK Provisioned**。如果未显示该选项，请确保你的 {{{ .essential }}} 实例部署在 AWS 上。
@@ -127,7 +129,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 - 将 TiDB Cloud 账户 ID 添加到 **Service Whitelist**。
 - 拥有与 {{{ .essential }}} 实例重叠的可用区。
 
-你可以在 **Create Private Link Connection** 对话框底部获取账户 ID 和可用区信息，或通过以下命令获取：
+你可以在 **Create Private Endpoint for External Services** 对话框底部获取账户 ID 和可用区信息，或通过以下命令获取：
 
 ```shell
 ticloud serverless private-link-connection zones --cluster-id <cluster-id>
@@ -144,13 +146,14 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，点击 **Create Private Link Connection** 以在 endpoint shared 模式下创建私有端点。在此模式下，同一阿里云 Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
+3. 在 **Alibaba Cloud Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 
     > **注意：**
     >
-    > 如果你的 TiDB Cloud Essential 实例创建于 2026 年 6 月 30 日之后，且 **Private Link Connection For Dataflow** 区域不可用，你可以改为点击 **Alibaba Cloud Private Endpoint for External Services** 区域中的 **Create Private Endpoint for External Services**，以在 endpoint exclusive 模式下创建私有链路连接。在 endpoint exclusive 模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点。此模式在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日或之后，点击 **Create Private Endpoint for External Services** 会以 endpoint exclusive 模式创建私有链路连接。在此模式下，每个 {{{ .essential }}} 实例都使用自己独立的私有端点，因此在连接时无需包含[账户前缀](/tidb-cloud/select-cluster-tier.md#user-name-prefix)。
+    > - 如果你的 TiDB Cloud Essential 实例创建于 2026 年 7 月 1 日之前，点击 **Create Private Endpoint for External Services** 会以 endpoint shared 模式创建私有链路连接。在此模式下，同一阿里云 Region 中的多个 {{{ .essential }}} 实例可以共享一个私有端点。
 
-4. 在 **Create Private Link Connection** 对话框中，填写所需信息：
+4. 在 **Create Private Endpoint for External Services** 对话框中，填写所需信息：
 
     - **Private Link Connection Name**：输入私有链路连接的名称。
     - **Connection Type**：选择 **Alibaba Cloud Endpoint Service**。如果未显示该选项，请确保你的 {{{ .essential }}} 实例部署在阿里云上。
@@ -206,7 +209,7 @@ ticloud serverless private-link-connection zones --cluster-id <cluster-id>
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，选择目标私有链路连接，然后点击 **...**。
+3. 在你的云服务提供商对应的 **Private Endpoints for External Services** 区域，选择目标私有链路连接，然后点击 **...**。
 
 4. 点击 **Attach Domains**。
 
@@ -259,7 +262,7 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，选择目标私有链路连接，然后点击 **...**。
+3. 在你的云服务提供商对应的 **Private Endpoints for External Services** 区域，选择目标私有链路连接，然后点击 **...**。
 
 4. 点击 **Detach Domains**，并确认解绑操作。
 
@@ -301,7 +304,7 @@ ticloud serverless private-link-connection attach-domains -c <cluster-id> --priv
 
 2. 点击目标 {{{ .essential }}} 实例名称进入概览页面，然后在左侧导航栏点击 **Settings** > **Networking**。
 
-3. 在 **Private Link Connection For Dataflow** 区域，选择目标私有链路连接，然后点击 **...**。
+3. 在你的云服务提供商对应的 **Private Endpoints for External Services** 区域，选择目标私有链路连接，然后点击 **...**。
 
 4. 点击 **Delete**，并确认删除操作。
 

@@ -238,7 +238,13 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 4. 点击 **Next** 进入 **Restore to a New Instance** 页面。
 
-5. 为恢复配置新的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。步骤与[创建 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例](/tidb-cloud/premium/create-tidb-instance-premium.md)相同。
+5. 为恢复配置新的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。请按照 <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> 中的步骤进行操作。
+
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，请选择与备份位于同一云服务提供商和 region 的活跃资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+
+    </CustomContent>
 
     > **Note:**
     >
@@ -254,7 +260,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 1. 在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你所在组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击右上角的 **...**，然后点击 **Recycle Bin**。
 
-    >**Tip:**
+    > **Tip:**
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
@@ -303,7 +309,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 <CustomContent plan="premium">
 
->**Note:**
+> **Note:**
 >
 > - 当前仅支持恢复位于 **Amazon S3** 和 **Alibaba Cloud OSS** 中的备份。
 > - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
@@ -313,7 +319,7 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 <CustomContent plan="byoc">
 
->**Note:**
+> **Note:**
 >
 > - 当前仅支持恢复位于 **Amazon S3** 中的备份。
 > - 你只能将备份恢复到由与你的存储 bucket 相同云服务提供商托管的新实例。
@@ -356,7 +362,13 @@ TiDB Cloud 支持将数据恢复到新实例。
 
 3. 点击 **Verify Backup and Next**。
 
-4. 如果验证成功，将显示 **Restore to a New Instance** 页面。查看页面顶部显示的备份信息，然后按照 [Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) 中的步骤将备份恢复到一个新的实例。
+4. 如果验证成功，将显示 **Restore to a New Instance** 页面。查看页面顶部显示的备份信息，然后按照 <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> 中的步骤将备份恢复到一个新的实例。
+
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，请选择一个与目标云服务提供商和 region 匹配的活跃资源池。如果没有可用的合适资源池，`Organization Owner` 可以在恢复实例之前创建一个。其他角色无法创建资源池。更多信息，请参见 [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)。
+
+    </CustomContent>
 
     如果备份信息不正确，点击 **Previous** 返回上一页，然后输入正确的信息。
 

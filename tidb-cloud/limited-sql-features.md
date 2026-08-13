@@ -32,7 +32,7 @@ TiDB Cloud Dedicated 支持几乎所有 TiDB 支持的工作负载，但 TiDB �
 | 语句 | TiDB Cloud Dedicated |
 |:-|:-|
 | `ALTER RESOURCE GROUP` | 支持 |
-| `CALIBRATE RESOURCE` | 不支持 |
+| `CALIBRATE RESOURCE` | 不支持 [^4] |
 | `CREATE RESOURCE GROUP` | 支持 |
 | `DROP RESOURCE GROUP` | 支持 |
 | `SET RESOURCE GROUP` | 支持 |
@@ -228,3 +228,5 @@ TiDB Cloud Dedicated 支持几乎所有 TiDB 支持的工作负载，但 TiDB �
 [^2]: TiDB Cloud 不支持 Drainer 和 Pump。
 
 [^3]: 不支持。在 TiDB Cloud Dedicated 集群上启用 `require_secure_transport` 会导致 SQL 客户端连接失败。
+
+[^4]: TiDB Cloud Dedicated 不支持 `CALIBRATE RESOURCE` 语句。要估算集群的 RU 容量，请改为使用 TiDB Cloud 控制台中的 [Calibrate Resource](/tidb-cloud/calibrate-resource.md) 功能。

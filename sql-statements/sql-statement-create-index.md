@@ -517,7 +517,7 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 
 * TiDB 自建版和 TiDB Cloud Dedicated 支持解析 `FULLTEXT` 语法，但不支持使用 `FULLTEXT`、`HASH` 和 `SPATIAL` 索引。
 
-    >**注意：**
+    > **注意：**
     >
     > 目前，仅部分 AWS 区域的 TiDB Cloud Starter 实例支持 [`FULLTEXT` 语法和索引](https://docs.pingcap.com/tidbcloud/vector-search-full-text-search-sql)。
 

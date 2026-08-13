@@ -101,7 +101,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
         ],
         ```
 
-        > **注意**：
+        > **注意：**
         >
         > 为避免集成报错，请确保你的账户 ID 已添加到 JSON 文件中所有 `"accountIds"` 字段。
 

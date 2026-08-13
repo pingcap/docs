@@ -361,7 +361,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <CustomContent plan="dedicated">
 
-> **注意**：
+> **注意：**
 >
 > 数据迁移任务创建期间，防火墙出口 IP 段仅在该阶段可见，无法提前获取。请确保：
 >
@@ -536,7 +536,7 @@ AWS 不支持直接通过 PrivateLink 访问 RDS 或 Aurora。因此，你需要
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，进入你的 TiDB Cloud Premium 实例概览页。
 2. 在左侧导航栏中，点击 **Settings** > **Networking**。
-3. 在 **AWS Private Endpoint for External Services** 区域，点击 **Create Private Endpoint for External Services**。
+3. 在 **AWS Private Endpoints for External Services** 区域，点击 **Create Private Endpoint for External Services**。
 4. 在 **Create Private Endpoint for External Services** 对话框中，输入 private endpoint 名称，以及你在为 MySQL 源数据库设置 AWS PrivateLink 时复制的 **Endpoint Service Name**。
 
     > **注意：**
@@ -729,7 +729,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     - 根据所选 **Connectivity method**，进行如下操作：
 
         - 选择 **Public** 时，在 **Hostname or IP address** 字段填写数据源的主机名或 IP 地址。
-        - 选择 **Private Link** 时，在 **Private Endpoint** 字段中选择一个已有的 private endpoint，或点击 **Create a Private Endpoint here** 创建一个。private endpoint 在 {{{ .premium }}} 实例的 **Networking** > **Private Endpoint for External Services** 下统一管理。你可以在多个 Data Migration 任务和 changefeed 之间复用同一个 private endpoint。有关设置详情，请参见 [Private link or private endpoint](#private-link-or-private-endpoint)。
+        - 选择 **Private Link** 时，在 **Private Endpoint** 字段中选择一个已有的 private endpoint，或点击 **Create a Private Endpoint here** 创建一个。private endpoint 在 {{{ .premium }}} 实例的 **Networking** > **AWS Private Endpoints for External Services** 下统一管理。你可以在多个 Data Migration 任务和 changefeed 之间复用同一个 private endpoint。有关设置详情，请参见 [Private link or private endpoint](#private-link-or-private-endpoint)。
 
     </CustomContent>
 
