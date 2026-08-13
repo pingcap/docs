@@ -5,13 +5,13 @@ summary: TiDB データベースにおける FLUSH STATS_DELTA の使用方法�
 
 # FLUSH STATS_DELTA <span class="version-mark">v8.5.7 で新規追加</span>
 
-`FLUSH STATS_DELTA` は、TiDB のメモリにバッファされている保留中の統計 delta を、[`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) システムテーブルに即座に永続化します。
+`FLUSH STATS_DELTA` は、TiDB のメモリにバッファされている保留中の統計delta を、[`mysql.stats_meta`](/mysql-schema/mysql-schema.md#statistics-system-tables) システムテーブルに即座に永続化します。
 
-`INSERT`、`UPDATE`、`DELETE` などの DML 文を使用してデータを変更すると、TiDB は影響を受けた各テーブルの総行数と変更行数の変化を記録し、これらの変更（statistics delta と呼ばれます）を、その文を実行した TiDB ノードのメモリにバッファします。デフォルトでは、TiDB は 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) ごと（デフォルトでは 60 秒ごと）に statistics delta を `mysql.stats_meta` システムテーブルへ永続化します。詳細は、[Automatic update](/statistics.md#automatic-update) を参照してください。
+`INSERT`、`UPDATE`、`DELETE` などの DML 文を使用してデータを変更すると、TiDB は影響を受けた各テーブルの総行数と変更行数の変化を記録し、これらの変更（統計delta と呼ばれます）を、その文を実行した TiDB ノードのメモリにバッファします。デフォルトでは、TiDB は 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease) ごと（デフォルトでは 60 秒ごと）に統計delta を `mysql.stats_meta` システムテーブルへ永続化します。詳細は、[自動更新](/statistics.md#automatic-update) を参照してください。
 
-[テーブルの統計ヘルス状態](/sql-statements/sql-statement-show-stats-healthy.md)、[`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) の出力、および自動統計収集のスケジューリングは、永続化された統計メタデータに依存します。そのため、オプティマイザの動作を検証するテストシナリオなど、永続化された統計メタデータに最近のデータ変更を即座に反映させる必要がある場合に、`FLUSH STATS_DELTA` は有用です。[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) を実行する前に `FLUSH STATS_DELTA` を実行する必要はありません。TiDB は、テーブルの統計を収集する前に、そのテーブルの保留中の statistics delta を自動的にフラッシュするためです。
+[テーブルの統計ヘルス状態](/sql-statements/sql-statement-show-stats-healthy.md)、[`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md) の出力、および自動統計収集のスケジューリングは、永続化された統計メタデータに依存します。そのため、オプティマイザの動作を検証するテストシナリオなど、永続化された統計メタデータに最近のデータ変更を即座に反映させる必要がある場合に、`FLUSH STATS_DELTA` は有用です。[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) を実行する前に `FLUSH STATS_DELTA` を実行する必要はありません。TiDB は、テーブルの統計を収集する前に、そのテーブルの保留中の統計delta を自動的にフラッシュするためです。
 
-## Synopsis {#synopsis}
+## 概要 {#synopsis}
 
 ```ebnf+diagram
 FlushStatsDeltaStmt ::=
@@ -40,22 +40,22 @@ ClusterOption ::=
 
 ## オプション {#options}
 
-- **Targets (`FlushTargetList`)**: statistics delta をフラッシュする対象テーブルを指定します。少なくとも 1 つの対象を指定する必要があります。
-    - `table_name`: 現在のデータベース内の特定のテーブルの statistics delta をフラッシュします。データベースを選択していない場合、TiDB は `No database selected` エラーを返します。
-    - `db_name.table_name`: 指定したデータベース内の特定のテーブルの statistics delta をフラッシュします。
-    - `db_name.*`: 指定したデータベース内のすべてのテーブルの statistics delta をフラッシュします。
-    - `*.*`: すべてのテーブルの statistics delta をフラッシュします。
-- **`CLUSTER`**: クラスター内のすべての TiDB ノードでこの文を実行します。各 TiDB ノードは、自身が実行した DML 文の statistics delta をバッファします。このオプションを指定しない場合、TiDB は接続先の TiDB ノードにバッファされている delta のみを永続化します。
+- **Targets (`FlushTargetList`)**: 統計delta をフラッシュする対象テーブルを指定します。少なくとも 1 つの対象を指定する必要があります。
+    - `table_name`: 現在のデータベース内の特定のテーブルの統計delta をフラッシュします。データベースを選択していない場合、TiDB は `No database selected` エラーを返します。
+    - `db_name.table_name`: 指定したデータベース内の特定のテーブルの統計delta をフラッシュします。
+    - `db_name.*`: 指定したデータベース内のすべてのテーブルの統計delta をフラッシュします。
+    - `*.*`: すべてのテーブルの統計delta をフラッシュします。
+- **`CLUSTER`**: クラスター内のすべての TiDB ノードでこの文を実行します。各 TiDB ノードは、自身が実行した DML 文の統計delta をバッファします。このオプションを指定しない場合、TiDB は接続先の TiDB ノードにバッファされている delta のみを永続化します。
 
 次の動作に注意してください。
 
 - TiDB は、フラッシュ対象として指定された重複または包含関係にあるターゲットを重複排除します。たとえば、`FLUSH STATS_DELTA *.*, test.t` では、`*.*` がすでにすべてのテーブルを含んでいるため、`test.t` は無視されます。同様に、`FLUSH STATS_DELTA test.*, test.t` では、`test.*` が `test` データベース内のすべてのテーブルをすでに含んでいるため、`test.t` は無視されます。
-- パーティションテーブルの場合、TiDB はそのテーブル本体とすべてのパーティションの statistics delta を永続化します。
+- パーティションテーブルの場合、TiDB はそのテーブル本体とすべてのパーティションの統計delta を永続化します。
 - 指定したデータベースまたはテーブルが存在しない場合、TiDB は警告を返し、そのターゲットをスキップします。
 
 ## 例 {#examples}
 
-データ変更の直後に、単一テーブルの statistics delta を即座に永続化します。
+データ変更の直後に、単一テーブルの統計delta を即座に永続化します。
 
 ```sql
 USE test;
@@ -83,13 +83,13 @@ SHOW STATS_META WHERE table_name = 't';
 1 row in set (0.01 sec)
 ```
 
-現在のデータベース内のテーブルと、`sales` データベース内のすべてのテーブルの statistics delta を永続化します。
+現在のデータベース内のテーブルと、`sales` データベース内のすべてのテーブルの統計delta を永続化します。
 
 ```sql
 FLUSH STATS_DELTA t, sales.*;
 ```
 
-クラスター内のすべての TiDB ノードにバッファされている、すべてのテーブルの statistics delta を永続化します。
+クラスター内のすべての TiDB ノードにバッファされている、すべてのテーブルの統計delta を永続化します。
 
 ```sql
 FLUSH STATS_DELTA *.* CLUSTER;
@@ -105,12 +105,12 @@ FLUSH STATS_DELTA *.* CLUSTER;
 
 他の `FLUSH` 文とは異なり、`FLUSH STATS_DELTA` には `RELOAD` 権限は不要です。
 
-## MySQL compatibility {#mysql-compatibility}
+## MySQLとの互換性 {#mysql-compatibility}
 
 `FLUSH STATS_DELTA` は、MySQL 構文に対する TiDB 独自の拡張です。
 
-## See also {#see-also}
+## 参照 {#see-also}
 
-- [Statistics](/statistics.md)
+- [統計](/statistics.md)
 - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
 - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
