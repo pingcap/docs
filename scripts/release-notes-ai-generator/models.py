@@ -109,6 +109,7 @@ class MarkdownEntry:
     component: str
     note: str
     raw_component: str = ""
+    pr_urls: list[str] = dataclasses.field(default_factory=list)
 
 
 @dataclasses.dataclass

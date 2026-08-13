@@ -160,6 +160,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 - The generated Markdown file is written to `--output-release-file` when that option is specified.
 - If `--output-release-file` is omitted, the generated Markdown file is written to `release-<version>-updated-by-ai.md` under `--releases-dir`. The default never overwrites the canonical `release-<version>.md`, because the generated file is an incomplete draft (only `Improvements` and `Bug fixes`).
+- If one or more PRs are referenced by multiple release note entries, the generator writes `<release-note-stem>-duplicate-pr-report.md` next to the generated release note. The report groups the affected entries by PR. If no duplicate PR references exist, no report is kept.
 - The Excel workbook is not modified during this phase.
 
 ## Reference: processing rules
@@ -410,15 +411,19 @@ After processing the main sheet, the generator first moves newly classified `not
 
 With `--involve-ai-generation OFF`, the generator does not call the AI command. For non-duplicate rows, it splits `formated_release_note` into non-empty lines and renders those lines as Markdown entries. New `variable_or_config_doc_impact` cells remain empty, while existing results are preserved. The preprocessing pipeline still runs in non-AI mode.
 
-### Component mapping
+### Component and PR traceability comments
 
-The generator maps each workbook component to a Markdown release-note component before rendering. It also keeps the original workbook component in an HTML comment after each generated entry:
+The generator maps each workbook component to a Markdown release-note component before rendering. It also keeps the original workbook component and its source PR links in HTML comments after each generated entry:
 
 ```markdown
-- Improve ... [#12345](https://github.com/pingcap/tidb/issues/12345) @[user](https://github.com/user) <!-- component: planner -->
+- Improve ... [#12345](https://github.com/pingcap/tidb/issues/12345) @[user](https://github.com/user) <!-- component: planner --> <!-- pr: https://github.com/pingcap/tidb/pull/12346 -->
 ```
 
-This marker lets reviewers trace the generated component back to the workbook value without changing the visible release-note text.
+If an entry is associated with multiple PRs, the generator appends one `<!-- pr: URL -->` comment for each unique PR in workbook order. These markers let reviewers trace the generated component and source PRs back to the workbook without changing the visible release-note text.
+
+During `export-markdown`, the generator also checks these PR comments across all entries. If the same PR is referenced by multiple release notes, it creates a duplicate PR report so reviewers can decide whether the entries should be merged or intentionally kept separate.
+
+### Component mapping
 
 The generator resolves components in this order:
 

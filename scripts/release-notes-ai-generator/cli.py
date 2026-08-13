@@ -26,7 +26,11 @@ from .excel_workbook import (
     update_pr_authors_and_dup_notes,
 )
 from .github_client import GitHubClient
-from .markdown_writer import write_release_file
+from .markdown_writer import (
+    duplicate_pr_report_path,
+    write_duplicate_pr_report,
+    write_release_file,
+)
 from .scope_filter import move_prs_not_in_scope, parse_date_value
 
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
@@ -372,10 +376,24 @@ def run_export_markdown(args: argparse.Namespace) -> int:
     workbook.close()
 
     write_release_file(output_file, args.version, args.release_date, markdown_entries)
+    duplicate_report_file = duplicate_pr_report_path(output_file)
+    duplicate_pr_count = write_duplicate_pr_report(
+        duplicate_report_file,
+        args.version,
+        markdown_entries,
+    )
 
     print("Phase 2 (export-markdown) completed.", flush=True)
     print(f"  Input Excel: {excel_path}", flush=True)
     print(f"  Generated release note file: {output_file}", flush=True)
+    if duplicate_pr_count:
+        print(
+            f"  Duplicate PR report: {duplicate_report_file} "
+            f"({duplicate_pr_count} duplicated PR(s))",
+            flush=True,
+        )
+    else:
+        print("  Duplicate PR report: not generated (no duplicates)", flush=True)
     return 0
 
 

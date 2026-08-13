@@ -837,6 +837,7 @@ def generate_notes_for_sheet(
                         component,
                         existing_note,
                         row_input.raw_component,
+                        row_input.pr_urls,
                     )
                 ]
 
@@ -941,6 +942,7 @@ def generate_notes_without_ai(
                     row_input.component,
                     note,
                     row_input.raw_component,
+                    row_input.pr_urls,
                 )
             )
 
@@ -997,6 +999,7 @@ def collect_markdown_entries_from_sheet(
                     row_input.component,
                     ai_note,
                     row_input.raw_component,
+                    row_input.pr_urls,
                 )
             )
             continue
@@ -1021,6 +1024,7 @@ def collect_markdown_entries_from_sheet(
                     row_input.component,
                     note,
                     row_input.raw_component,
+                    row_input.pr_urls,
                 )
             )
 
@@ -1043,6 +1047,7 @@ def dup_entries_for_row(row_input: RowInput, dup_text: str) -> list[MarkdownEntr
                     normalize_component(dup_component),
                     dup_note,
                     row_input.raw_component,
+                    row_input.pr_urls,
                 )
             )
     return entries
@@ -1302,7 +1307,20 @@ def apply_generation_result(
     ai_cell.value = result.note
     type_cell.value = result.note_type
     entries_by_row[result.row_number] = [
-        MarkdownEntry(result.note_type, result.component, result.note, result.raw_component)
+        MarkdownEntry(
+            result.note_type,
+            result.component,
+            result.note,
+            result.raw_component,
+            extract_pr_urls(
+                str_value(
+                    sheet.cell(
+                        row=result.row_number,
+                        column=header["pr_link"],
+                    ).value
+                )
+            ),
+        )
     ]
     review_marker = " (needs review)" if result.needs_review else ""
     print(
