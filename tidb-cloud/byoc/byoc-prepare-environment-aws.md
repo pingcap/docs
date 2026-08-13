@@ -41,48 +41,22 @@ TiDB is a distributed database that requires specific infrastructure for high av
         >
         > Multi-AZ deployment functionality is disabled for this configuration.
 
-## Step 4. Create hosted zones for TiDB and observability (O11Y)
+## Step 4. Create a hosted zone for TiDB
 
-You need to create two separate **public hosted zones** in Amazon Route 53.
+Create one Amazon Route 53 hosted zone for TiDB service DNS. You do not need to provide a hosted zone for observability (O11Y).
 
-1. **Create the Zones.**
+Choose one of the following hosted zone types:
 
-    Follow the [Creating a public hosted zone in AWS documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html) to create the following:
+- **Public hosted zone:** supports public and private connections to TiDB. Follow [Creating a public hosted zone in AWS documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html).
+- **Private hosted zone:** supports private connections only. If you choose a private hosted zone, public connection is not available for the BYOC environment. Follow [Working with private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html).
 
-    - **TiDB Cluster Zone:** Manages DNS for the TiDB Service.
+For the TiDB hosted zone, use a name of no more than 38 characters. For example, `byoc.cluster.example.com`.
 
-        * Naming Constraint: Max 38 characters.
-        * Example: `byoc.cluster.example.com`.
+For a public hosted zone, delegate the zone from its parent domain by adding the Route 53 name server (NS) records to the parent DNS configuration. For a private hosted zone, associate the hosted zone with the VPCs that require DNS resolution.
 
-    - **Observability (O11y) Zone:** Manages DNS for monitoring tools (Grafana/Prometheus).
-
-        * Naming Constraint: Max 34 characters.
-        * Example: `o11y.cluster.example.com`.
-
-2. **Delegate DNS.**
-
-    > **Important:**
-    >
-    > **DNS Delegation Required.** After creating the hosted zones, you **must** add Route 53 Name Servers (NS records) to your parent domain's DNS configuration (for example, in your corporate DNS or parent AWS zone).
-
-    - **Action:** Copy the 4 NS records from your new Route 53 zones and add them to the parent domain.
-    - **Result:** Without this, internal service discovery will fail.
-
-3. **Verify the DNS delegation.**
-
-    Verify the DNS delegation by running `nslookup` or `dig` from any internet-connected command-line environment. The domain must resolve correctly.
-
-    ```bash
-    nslookup -type=ns {hosted_zone_name}
-    nslookup -type=ns byoc-tidb.cluster.example.com
-    nslookup -type=ns o11y.cluster.example.com
-    ```
-
-    <!--To confirm: whether to add image-->
-
-    > **Note:**
-    >
-    > If you plan to deploy TiDB Cloud BYOC in **multiple AWS regions**, the same hosted zones can be shared across all regions, or you can choose to create dedicated hosted zones per region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for detailed multi-region architecture configurations.
+> **Note:**
+>
+> If you plan to deploy TiDB Cloud BYOC in multiple AWS regions, you can share the same TiDB hosted zone across all regions or use a dedicated hosted zone for each region. See [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md) for details.
 
 ## Step 5. Set up private certificate authority (PCA)
 
@@ -158,7 +132,7 @@ Fill out the table below with the information gathered in steps above and share 
 | **AWS Region** | Region selected for deployment | `us-west-2`, `us-east-1`, `us-east-2` | Step 3. For multi-region deployment, list all regions. |
 | **Availability Zones** | 3 AZs or single AZ per region (specify names and ID) | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | Step 3. Note to meet the AZ quantity requirement for **each** selected region. |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
-| **Hosted Zone Names & Host Zone ID** | TiDB Cluster Zone, Observability (O11Y) Zone | **Hosted TiDB cluster zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB cluster zone ID:** `Z1039122VAY4T8UNWR8E`. **Hosted O11Y zone name:** `o11y.byoc-0929.pingcap.net`; **Hosted O11Y zone ID:** `Z10389823CTXFNM7VG79P`. | Step 4. The zone names and IDs can be shared across multiple regions. |
+| **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone. You can provide either a public or private hosted zone. | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4. The hosted zone can be shared across multiple regions. |
 | **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 

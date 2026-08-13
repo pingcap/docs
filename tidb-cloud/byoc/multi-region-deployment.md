@@ -23,29 +23,26 @@ Before configuring multiple regions, determine whether the following foundationa
 
 * AWS private certificate authority (PCA)
 * Route 53 hosted zone for TiDB
-* Route 53 hosted zone for O11Y
 
 ### Shared resources
 
-The same PCA, TiDB hosted zone, and O11Y hosted zone can be shared across all enabled regions.
+The same PCA and TiDB hosted zone can be shared across all enabled regions.
 
-In this configuration, provide the primary PCA and Hosted Zones through the standard parameters and omit the corresponding \--additional-\* parameters.
+In this configuration, provide the primary PCA and TiDB hosted zone through the standard parameters and omit the corresponding `--additional-*` parameters.
 
 ### Dedicated resources
 
-You can prepare a separate PCA, TiDB hosted zone, and O11Y hosted zone for each additional region.
+You can prepare a separate PCA and TiDB hosted zone for each additional region.
 
 The primary region resources are provided through the standard parameters:
 
 * `--pca-arn`
 * `--tidb-hz-id`
-* `--o11y-hz-id`
 
 Resources for additional regions are provided through:
 
 * `--additional-pca-arns`
 * `--additional-tidb-hz-ids`
-* `--additional-o11y-hz-ids`
 
 For two or more additional regions, provide the values as comma-separated lists in the same regional order.
 
@@ -53,7 +50,7 @@ For two or more additional regions, provide the values as comma-separated lists 
 
 Shared and dedicated resources can be combined.
 
-For example, all regions can share the same PCA while using separate Hosted Zones.
+For example, all regions can share the same PCA while using separate TiDB hosted zones.
 
 Each additional resource parameter is independent. Omit a parameter when the corresponding resource will remain shared with the primary region.
 
@@ -65,14 +62,13 @@ Run `tidbcloud-byoc-setup.sh` to initialize the BYOC environment and configure t
 
 ### All regions share the same resources
 
-When all regions share the same PCA and hosted zones, run the standard setup command:
+When all regions share the same PCA and TiDB hosted zone, run the standard setup command:
 
 ```shell
 bash tidbcloud-byoc-setup.sh \
   --control-plane-id <ControlPlaneAccountId> \
   --clinic-id <ClinicAccountId> \
   --tidb-hz-id <SharedTidbHostedZoneId> \
-  --o11y-hz-id <SharedO11yHostedZoneId> \
   --pca-arn <SharedPCAArn>
 ```
 
@@ -87,10 +83,8 @@ bash tidbcloud-byoc-setup.sh \
   --control-plane-id <ControlPlaneAccountId> \
   --clinic-id <ClinicAccountId> \
   --tidb-hz-id <Region1TidbHostedZoneId> \
-  --o11y-hz-id <Region1O11yHostedZoneId> \
   --pca-arn <Region1PCAArn> \
   --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \
-  --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId> \
   --additional-pca-arns <Region2PCAArn>,<Region3PCAArn>
 ```
 
@@ -101,17 +95,15 @@ The values in all comma-separated lists must follow the same regional order. For
 
 ### Mixed shared and dedicated resources
 
-The following example shares one PCA across all regions while using dedicated hosted zones:
+The following example shares one PCA across all regions while using dedicated TiDB hosted zones:
 
 ```shell
 bash tidbcloud-byoc-setup.sh \
   --control-plane-id <ControlPlaneAccountId> \
   --clinic-id <ClinicAccountId> \
   --tidb-hz-id <Region1TidbHostedZoneId> \
-  --o11y-hz-id <Region1O11yHostedZoneId> \
   --pca-arn <SharedPCAArn> \
-  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \
-  --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId>
+  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId>
 ```
 
 Because the PCA is shared, `--additional-pca-arns` is omitted.
@@ -132,8 +124,8 @@ Before running the update script:
 2. Select the Availability Zones for the new regions.
 3. Plan the O11Y CIDR for each new region and the resource pool CIDRs for the resource pools you plan to create. Different regions can use the same O11Y CIDR. However, if you use metric integration to connect Grafana to multiple regions, use non-overlapping O11Y CIDRs for those regions.
 4. Confirm whether each new region will:
-    * share the existing PCA and hosted zones, or
-    * use dedicated PCA and hosted zones.
+    * share the existing PCA and TiDB hosted zone, or
+    * use a dedicated PCA and TiDB hosted zone.
 5. Review and increase AWS service quotas in each new region.
 6. Share the information for the new regions with your TiDB Cloud representative.
 
@@ -146,9 +138,9 @@ For each new region, the O11Y CIDR and resource pool CIDRs must not overlap with
 
 Resource pool CIDRs in different regions can overlap. However, use non-overlapping CIDRs for resource pools that require cross-region connectivity or replication.
 
-### Share existing PCA and hosted zones
+### Share an existing PCA and TiDB hosted zone
 
-Use this option if all new regions will share the PCA and hosted zones already used by the existing deployment.
+Use this option if all new regions will share the PCA and TiDB hosted zone already used by the existing deployment.
 
 No additional resource parameters are required:
 
@@ -163,7 +155,7 @@ A plain \--stack all update is safe when no new multi-region resource values are
 
 ### Use dedicated resources for the new regions
 
-Use this option if the new regions require dedicated PCAs, TiDB hosted zones, or O11Y hosted zones.
+Use this option if the new regions require dedicated PCAs or TiDB hosted zones.
 
 Provide the resources for the new Regions through the corresponding `--additional-*` parameters:
 
@@ -171,8 +163,7 @@ Provide the resources for the new Regions through the corresponding `--additiona
 bash tidbcloud-byoc-update.sh \
   --stack all \
   --additional-pca-arns <Region2PCAArn>,<Region3PCAArn> \
-  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \
-  --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId>
+  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId>
 
 ```
 
@@ -187,12 +178,12 @@ The values in all comma-separated lists must follow the same regional order. For
 
 The new regions can share some existing resources while using dedicated resources for others.
 
-For example, to share the existing PCA while using dedicated hosted zones for the new regions:
+For example, to share the existing PCA while using dedicated TiDB hosted zones for the new regions:
 
 ```shell
 bash tidbcloud-byoc-update.sh \
---stack all \
---additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \ --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId>
+  --stack all \
+  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId>
 ```
 
 Because the existing PCA is shared, `--additional-pca-arns` is omitted.
@@ -211,8 +202,7 @@ For example, if Region 1 is the primary region, Region 2 is already configured, 
 bash tidbcloud-byoc-update.sh \
   --stack all \
   --additional-pca-arns <Region2PCAArn>,<Region3PCAArn> \
-  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId> \
-  --additional-o11y-hz-ids <Region2O11yHostedZoneId>,<Region3O11yHostedZoneId>
+  --additional-tidb-hz-ids <Region2TidbHostedZoneId>,<Region3TidbHostedZoneId>
 ```
 
 Ensure that previously configured and newly added resource values remain in the correct regional order.
