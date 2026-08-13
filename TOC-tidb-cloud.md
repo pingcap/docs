@@ -71,6 +71,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - [イベント](/tidb-cloud/tidb-cloud-events.md)
     - サードパーティ製指標の統合
       - [概要](/tidb-cloud/third-party-monitoring-integrations.md)
@@ -135,6 +136,7 @@
   - リソース割り当ての最適化
     - [リソース割り当ての概要](/tidb-cloud/optimize-resource-allocation.md)
     - リソースマネージャー
+      - [リソースの調整](/tidb-cloud/calibrate-resource.md)
       - [リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)
       - [暴走クエリの管理](/tidb-resource-control-runaway-queries.md)
       - [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)
@@ -630,6 +632,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)

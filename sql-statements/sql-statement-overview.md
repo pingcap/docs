@@ -323,6 +323,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md)                       | SQL文から実行計画のバインディングを削除します。                   |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md)                           | テーブルから統計情報を削除します。                            |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)                 | `EXPLAIN`と似た動作をしますが、大きな違いは、ステートメントを実行することです。 |
+| [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md)            | TiDBメモリ内の保留中の統計デルタを直ちにシステムテーブルに永続化します。        |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)                           | 統計情報をTiDBにロードします。                            |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md)         | 統計情報の収集タスクを表示します。                            |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md)                     | 作成されたSQLバインディングを表示します。                       |

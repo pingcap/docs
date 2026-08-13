@@ -238,7 +238,13 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 4.  **「次へ」**をクリックして、 **「新しいインスタンスへの復元」**ページに進んでください。
 
-5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は[{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)と同じです。
+5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
+
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} の場合は、バックアップと同じクラウドプロバイダーおよびリージョンにあるアクティブなリソースプールを選択します。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) を参照してください。
+
+    </CustomContent>
 
     > **Note:**
     >
@@ -305,15 +311,15 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 > **Note:**
 >
-> -   現在、復元対象としてサポートされているのは、 **Amazon S3**および**Alibaba Cloud OSS**に保存されているバックアップのみです。
-> -   バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
-> -   インスタンスとストレージバケットが異なるリージョンに配置されている場合、リージョン間データ転送料金が別途発生する可能性があります。
+> - 現在、復元対象としてサポートされているのは、**Amazon S3** および **Alibaba Cloud OSS** に保存されているバックアップのみです。
+> - バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
+> - インスタンスとストレージバケットが異なるリージョンに配置されている場合、リージョン間データ転送料金が別途発生する可能性があります。
 
 </CustomContent>
 
 <CustomContent plan="byoc">
 
->**Note:**
+> **Note:**
 >
 > - 現在、復元対象としてサポートされているのは、**Amazon S3** に保存されているバックアップのみです。
 > - バックアップの復元は、ストレージバケットと同じクラウドプロバイダーがホストする新しいインスタンスにのみ可能です。
@@ -356,7 +362,13 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 3. **Verify Backup and Next**をクリックします。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、[{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
+
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} では、対象のクラウドプロバイダーとリージョンに一致するアクティブなリソースプールを選択してください。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)を参照してください。
+
+    </CustomContent>
 
     バックアップ情報が正しくない場合は、**Previous**をクリックして前のページに戻り、正しい情報を入力してください。
 

@@ -82,9 +82,9 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 **AWS Endpoint Service**
 
-1.  **ネットワーク**ページで、 **「AWS External Services 用プライベートエンドポイント」**セクションの**「プライベートエンドポイントの作成」**をクリックします。
+1.  **ネットワーク**ページで、 **「AWS External Services 用プライベートエンドポイント」**セクションの**「External Services 用プライベートエンドポイントの作成」**をクリックします。
 
-2.  **「External Services のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力します。
+2.  表示されたダイアログで、プライベートエンドポイントの名前を入力します。
 
 3.  リマインダーに従って、 TiDB Cloudの[AWSプリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)にエンドポイントを作成する権限を与えます。
 
@@ -92,7 +92,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 5.  **AZの数**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
-6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka用アドバタイズドリスナー」**オプションを有効にしてください。
+6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka 用のアドバタイズドリスナーを設定する」**チェックボックスを選択します。
 
 7.  **TiDBマネージド**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 
@@ -103,9 +103,9 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 **Amazon MSK Provisioned**
 
-1.  **ネットワーク**ページで、 **「AWS External Services 用プライベートエンドポイント」**セクションの**「プライベートエンドポイントの作成」**をクリックします。
+1.  **ネットワーク**ページで、 **「AWS External Services 用プライベートエンドポイント」**セクションの**「External Services 用プライベートエンドポイントの作成」**をクリックします。
 
-2.  **「External Services のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力し、接続タイプとして**AWS MSK Provisioned**を選択します。
+2.  表示されたダイアログで、プライベートエンドポイントの名前を入力し、接続タイプとして**AWS MSK Provisioned**を選択します。
 
 3.  Amazon MSK Provisionedクラスターの**MSK Cluster ARN**を入力します。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
 
@@ -117,9 +117,9 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 <div label="Alibaba Cloud">
 
-1.  **ネットワーク**ページで、 **「Alibaba Cloud Changefeed 用プライベートエンドポイント」**セクションの**「プライベートエンドポイントの作成」**をクリックします。
+1.  **ネットワーク**ページで、 **「Alibaba Cloud External Services 用プライベートエンドポイント」**セクションの**「External Services 用プライベートエンドポイントの作成」**をクリックします。
 
-2.  **「Changefeed のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力します。
+2.  **「External Services のプライベートエンドポイントの作成」**ダイアログで、プライベートエンドポイントの名前を入力します。
 
 3.  リマインダーに従って、TiDB Cloud の Alibaba Cloud アカウント ID をエンドポイント サービスのホワイトリストに追加して、 TiDB Cloud VPC アクセスを許可します。詳細については、 [エンドポイントサービスの許可リストにおけるアカウントIDの管理](https://www.alibabacloud.com/help/en/privatelink/user-guide/add-and-manage-service-whitelists)を参照してください。
 
@@ -127,7 +127,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 5.  **AZの数**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 
-6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka用アドバタイズドリスナー」**オプションを有効にしてください。
+6.  このプライベートエンドポイントがApache Kafka用に作成された場合は、 **「Kafka 用のアドバタイズドリスナーを設定する」**チェックボックスを選択します。
 
 7.  **TiDBマネージド**ドメインまたは**カスタム**ドメインのいずれかを使用して、Kafka用のアドバタイズドリスナーを設定します。
 

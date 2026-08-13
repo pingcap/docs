@@ -17,7 +17,7 @@ TiDB は、統計情報をオプティマイザへの入力として使用し、
 
 <CustomContent platform="tidb">
 
-TiDB は更新情報を定期的に保持し、更新サイクルは 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)です。 `stats-lease`のデフォルト値は`3s`です。値を`0`と指定すると、TiDB は統計情報の自動更新を停止します。
+TiDB は更新情報を定期的に保持し、更新サイクルは 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)です。 `stats-lease`のデフォルト値は`3s`です。値を`0`と指定すると、TiDB は統計情報の自動更新を停止します。v8.5.7 以降では、[`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md) ステートメントを使用して更新情報を即座に永続化できます。
 
 </CustomContent>
 

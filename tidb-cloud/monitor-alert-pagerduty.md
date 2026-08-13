@@ -15,15 +15,15 @@ TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メ�
 
 -   PagerDuty 経由のサブスクライブ機能は、 **Enterprise**または**Premium**[サポートプラン](/tidb-cloud/connected-care-overview.md)にサブスクライブしている組織のみが利用できます。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象のTiDB Cloud Premium インスタンスへの`Instance Manager`アクセス権が必要です。
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 

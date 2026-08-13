@@ -32,7 +32,7 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 | 初期応答時間                                                                                                                                            | <li></li>        | 営業時間       | 7x24       | 7x24                  |
 | [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                              | <li></li>        | <li></li>  | ✔          | ✔                     |
 | [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                           | <li></li>        | <li></li>  | ✔          | ✔                     |
-| Connected: TiDB Cloudアラートの IM サブスクリプション ( [Slack](/tidb-cloud/monitor-alert-slack.md) , [Zoom](/tidb-cloud/monitor-alert-zoom.md) )                      | <li></li>        | <li></li>  | ✔          | ✔                     |
+| Connected: TiDB Cloudアラートの IM サブスクリプション ( [Slack](/tidb-cloud/monitor-alert-slack.md) , [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md), [Webhook](/tidb-cloud/monitor-alert-webhook.md), [Lark](/tidb-cloud/monitor-alert-lark.md) )                      | <li></li>        | <li></li>  | ✔          | ✔                     |
 | Connected: IMチケットの作成とサブスクリプションの更新 ( [Slack](/tidb-cloud/connected-slack-ticket-creation.md) , [Lark](/tidb-cloud/connected-lark-ticket-creation.md) )    | <li></li>        | <li></li>  | ✔          | ✔                     |
 | Connected: サポートチケットのIMインタラクション ( [Slack](/tidb-cloud/connected-slack-ticket-interaction.md) , [Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ) | <li></li>        | <li></li>  | <li></li>  | ✔                     |
 | テクニカルアカウントマネージャー                                                                                                                                  | <li></li>        | <li></li>  | <li></li>  | ✔                     |
@@ -55,7 +55,7 @@ Connected Care サービスのサポート プランでは、次のようなま�
 
 -   Connected: TiDB Cloudアラートの IM サブスクリプション
 
-    この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)と[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)ご覧ください。
+    この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)、[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)、[Flashdutyで登録する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDutyで登録する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhookで登録する](/tidb-cloud/monitor-alert-webhook.md)、および[Larkで登録する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
 
 -   接続: IMチケットの作成とサブスクリプションの更新
 

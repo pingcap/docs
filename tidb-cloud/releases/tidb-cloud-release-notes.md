@@ -8,6 +8,45 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年8月11日 {#august-11-2026}
+
+**全般的な変更**
+
+- **TiDB Cloud Essential, Premium, and Dedicated**
+
+    - [Lark](https://www.larksuite.com/) 経由で TiDB Cloud からのアラート通知を購読できるようになりました。
+
+        組織の[サポートプラン](/tidb-cloud/connected-care-overview.md#connected-care)が **Enterprise** または **Premium** の場合、Lark 経由でアラート通知を受信できるようになりました。
+
+        詳細については、以下のドキュメントを参照してください。
+
+        - TiDB Cloud Essential: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+
+- **TiDB Cloud Lake**
+
+    - 新しい MCP サーバーと SQLAlchemy dialect により、[TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) の AI、Python、および BI との統合を拡張しました。
+
+        - 新しい MCP サーバーにより、MCP 対応の AI ツールを接続して、データベースオブジェクトの探索、テーブルスキーマの確認、自然言語の指示を使用した SQL の実行ができるようになりました。組み込みのセッションサンドボックス保護はデフォルトで有効になっており、本番オブジェクトを読み取り専用に保ちながら、書き込みをセッション固有のサンドボックスオブジェクトに制限します。
+        - 新しい SQLAlchemy dialect により、Python アプリケーションおよび SQLAlchemy 対応ツールを、この dialect を介して TiDB Cloud Lake に接続できます。Jupyter Notebook などのツールを使用してデータのクエリや可視化を行ったり、Apache Superset を使用してチャートやダッシュボードを構築したりできます。
+
+      詳細については、以下のドキュメントを参照してください。
+
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+
+**コンソールの変更**
+
+- [TiDB Cloud コンソール](https://tidbcloud.com/) で、TiDB Cloud の各プランにおけるネットワーキングの操作性を、以下の更新によって改善しました。
+
+    - **Networking** ページでは、TiDB Cloud の各プランにわたるエンドポイント設定の命名がより一貫したものになりました。
+    - 設定済みエンドポイントがないエンドポイントタイプについては、**Networking** ページに空のテーブルではなく、対応するアクションボタンのみが表示されるようになりました。
+    - TiDB Cloud Starter および Essential インスタンスでは、ネットワークアクセスを設定した後、**Networking** ページの右上にある **Connect** をクリックしてインスタンスに接続できるようになりました。
+    - TiDB Cloud Essential、Premium、および Dedicated では、パブリックエンドポイントの許可 IP アドレスの管理がより直感的になりました。**Add IP Address** をクリックして IP アドレスを追加するか、既存の IP アドレスの **...** をクリックして編集または削除できます。
+
 ## 2026年8月5日 {#august-5-2026}
 
 **全般的な変更**

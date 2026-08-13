@@ -108,7 +108,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 -   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
--   `PRIMARY KEY`インデックス オプションを使用して、 `UNIQUE INDEX`または`GLOBAL`グローバル インデックスとして[グローバルインデックス](/global-indexes.md)ことは、パーティション化[パーティション化されたテーブル](/partitioned-table.md)の TiDB 拡張機能であり、MySQL とは互換性がありません。
+-   `GLOBAL`インデックスオプションを使用して`PRIMARY KEY`または`UNIQUE INDEX`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
 
 ## 参照 {#see-also}
 

@@ -224,7 +224,7 @@
   - 診断方法
     - [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)
-    - [Top SQL を使用して負荷の高いクエリを特定する](/dashboard/top-sql.md)
+    - [Top SQLを使用してコストの高いクエリを特定する](/dashboard/top-sql.md)
     - [ログを使用して高負荷なクエリを特定する](/identify-expensive-queries.md)
     - [クラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](/troubleshoot-stale-read.md)
@@ -720,6 +720,7 @@
       - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
       - [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
+      - [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md)
       - [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       - [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       - [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)

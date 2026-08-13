@@ -23,7 +23,7 @@ TiDB Cloud では、[汎用webhook](/tidb-cloud/monitor-alert-webhook.md)、[ema
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
 - TiDB Cloud のアラート通知を購読するには、組織に対する `Organization Owner` アクセス、または TiDB Cloud 内の対象インスタンスに対する `Project Owner` または `Instance Manager` アクセスが必要です。
 

@@ -15,15 +15,15 @@ TiDB Cloud、Slack、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/t
 
 -   Slack経由での購読機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
 
-<CustomContent plan="essential,dedicated">
+<CustomContent plan="dedicated">
 
 -   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象プロジェクトへの`Project Owner`アクセス権が必要です。
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="essential,premium">
 
--   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象のTiDB Cloud Premium インスタンスへの`Instance Manager`アクセス権が必要です。
+-   TiDB Cloudのアラート通知を購読するには、組織への`Organization Owner`アクセス権、またはTiDB Cloudの対象インスタンスへの`Project Owner`または`Instance Manager`アクセス権が必要です。
 
 </CustomContent>
 

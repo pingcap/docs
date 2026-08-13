@@ -533,7 +533,7 @@ TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/
 
 -   多値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細については、 [多値インデックスを作成する](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes)を参照してください。
 
--   `UNIQUE KEY`インデックス オプションを使用して、 `GLOBAL`を[グローバルインデックス](/global-indexes.md)として設定することは[パーティション化されたテーブル](/partitioned-table.md)の TiDB 拡張機能であり、MySQL とは互換性がありません。
+-   `GLOBAL`インデックスオプションを使用して`UNIQUE KEY`を[グローバルインデックス](/global-indexes.md)として設定することは、[パーティション化されたテーブル](/partitioned-table.md)に対するTiDBの拡張機能であり、MySQLとは互換性がありません。
 
 ## 参照 {#see-also}
 

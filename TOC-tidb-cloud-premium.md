@@ -62,6 +62,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - チューニングパフォーマンス
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -486,6 +487,7 @@
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
+      - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)

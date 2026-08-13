@@ -7,7 +7,7 @@ summary: ビジネス ワークロードを分離するために TiDB ノード 
 
 このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com/)を使用してビジネス ワークロードを分離するために、TiDB ノード グループとそのエンドポイントを管理する方法について説明します。
 
-> **注記**：
+> **Note:**
 >
 > TiDB ノード グループ機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターでは使用でき**ません**。
 
@@ -25,7 +25,7 @@ summary: ビジネス ワークロードを分離するために TiDB ノード 
 -   AWS または Google Cloud に[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターがデプロイされています。
 -   あなたは組織の**組織オーナー**または**プロジェクトオーナー**の役割を担っています。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)をご覧ください。
 
-> **注記**：
+> **Note:**
 >
 > TiDBノードグループはクラスタ作成中に作成できません。クラスタが作成され、 **「使用可能」**状態になった後にグループを追加する必要があります。
 
@@ -105,7 +105,7 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
     -   Google Cloud にデプロイされたクラスタについては、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
-    > **注記**：
+    > **Note:**
     >
     > Private Link を使用して異なるノード グループを接続する場合は、ノード グループごとに個別のプライベート エンドポイント接続を作成する必要があります。
 
@@ -158,7 +158,7 @@ TiDB ノード グループの詳細を表示するには、次の手順を実�
 
 ## TiDBノードグループを削除する {#delete-a-tidb-node-group}
 
-> **注記**：
+> **Note:**
 >
 > TiDB ノード グループを削除すると、プライベート エンドポイント接続やパブリック アクセス用の IP リストなど、そのノードとネットワーク構成も削除されます。
 
