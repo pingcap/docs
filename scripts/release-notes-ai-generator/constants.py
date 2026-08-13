@@ -8,6 +8,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 GENERATION_PROMPT_TEMPLATE = (
     REPO_ROOT / "scripts" / "release-notes-ai-generator" / "prompts" / "generation.md"
 )
+RELEASE_NOTE_PROMPT_TEMPLATE = (
+    REPO_ROOT / "scripts" / "release-notes-ai-generator" / "prompts" / "release-note.md"
+)
+DOC_IMPACT_PROMPT_TEMPLATE = (
+    REPO_ROOT / "scripts" / "release-notes-ai-generator" / "prompts" / "doc-impact.md"
+)
 
 BOT_AUTHORS = {"ti-chi-bot", "ti-srebot"}
 # Keep the misspelled source column name because release note excel file exports it this way.

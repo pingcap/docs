@@ -27,7 +27,9 @@ from .models import (
     MarkdownEntry,
     RowContext,
     RowGenerationResult,
+    RowGenerationTask,
     RowInput,
+    VariableOrConfigDocImpact,
 )
 from .utils import (
     copy_cell,
@@ -46,6 +48,9 @@ from .utils import (
 
 GRAY_FILL = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
 NOT_NEEDED_PREFIX = "Release note is not needed:"
+NOT_NEEDED_SHEET_NAME = "release_note_not_needed"
+DOC_IMPACT_HEADER = "variable_or_config_doc_impact"
+DOC_IMPACT_FAILED_PREFIX = "DOC_IMPACT_ANALYSIS_FAILED:"
 SAME_SERIES_REASON_HEADER = "reason"
 # Global cap on the combined changed-file diff (files_summary) across all PRs of a
 # single row, to bound the AI input size when a row references multiple PRs.
@@ -70,6 +75,12 @@ def prepare_sheet_columns(sheet: Any) -> dict[str, int]:
         ai_col_index = header["release_notes_written_by_ai"]
         sheet.insert_cols(ai_col_index + 1)
         sheet.cell(row=1, column=ai_col_index + 1, value="ai_note_type")
+        header = get_header(sheet)
+
+    if DOC_IMPACT_HEADER not in header:
+        type_col_index = header["ai_note_type"]
+        sheet.insert_cols(type_col_index + 1)
+        sheet.cell(row=1, column=type_col_index + 1, value=DOC_IMPACT_HEADER)
         header = get_header(sheet)
 
     if "published_release_notes" not in header:
@@ -98,8 +109,14 @@ def clear_output_columns(
             sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value = None
             if "ai_note_type" in header:
                 sheet.cell(row=row_number, column=header["ai_note_type"]).value = None
+            sheet.cell(row=row_number, column=header[DOC_IMPACT_HEADER]).value = None
         if clear_published:
             sheet.cell(row=row_number, column=header["published_release_notes"]).value = None
+
+
+def clear_doc_impact_column(sheet: Any, header: dict[str, int]) -> None:
+    for row_number in range(2, sheet.max_row + 1):
+        sheet.cell(row=row_number, column=header[DOC_IMPACT_HEADER]).value = None
 
 
 def sort_sheet_rows_by_component(sheet: Any) -> None:
@@ -370,7 +387,7 @@ def move_not_needed_rows_to_sheet(
 ) -> int:
     """Move rows where AI determined no release note is needed to a separate sheet."""
     ai_col = header["release_notes_written_by_ai"]
-    target_sheet_name = "release_note_not_needed"
+    target_sheet_name = NOT_NEEDED_SHEET_NAME
 
     rows_to_move: list[int] = []
     for row_number in range(2, sheet.max_row + 1):
@@ -385,16 +402,24 @@ def move_not_needed_rows_to_sheet(
         target = workbook[target_sheet_name]
         if not str_value(target.cell(row=1, column=1).value):
             copy_header_row(sheet, target)
+        else:
+            prepare_sheet_columns(target)
     else:
         target = workbook.create_sheet(target_sheet_name)
         copy_header_row(sheet, target)
 
+    copy_missing_headers(sheet, target)
+    source_header = get_header(sheet)
+    target_header = get_header(target)
     for row_number in rows_to_move:
         target_row = target.max_row + 1
-        for column in range(1, sheet.max_column + 1):
+        for name, source_column in source_header.items():
+            target_column = target_header.get(name)
+            if not target_column:
+                continue
             copy_cell(
-                sheet.cell(row=row_number, column=column),
-                target.cell(row=target_row, column=column),
+                sheet.cell(row=row_number, column=source_column),
+                target.cell(row=target_row, column=target_column),
             )
 
     for row_number in reversed(rows_to_move):
@@ -414,6 +439,19 @@ def copy_header_row(source_sheet: Any, target_sheet: Any) -> None:
             source_sheet.cell(row=1, column=column),
             target_sheet.cell(row=1, column=column),
         )
+
+
+def copy_missing_headers(source_sheet: Any, target_sheet: Any) -> None:
+    target_header = get_header(target_sheet)
+    for name, source_column in get_header(source_sheet).items():
+        if name in target_header:
+            continue
+        target_column = target_sheet.max_column + 1
+        copy_cell(
+            source_sheet.cell(row=1, column=source_column),
+            target_sheet.cell(row=1, column=target_column),
+        )
+        target_header[name] = target_column
 
 
 def same_series_release_files_by_issue_url(
@@ -722,6 +760,8 @@ def fill_first_empty_values(sheet: Any, header: dict[str, int], keep_row: int, r
         header["pr_author"],
         header["published_release_notes"],
         header["release_notes_written_by_ai"],
+        header["ai_note_type"],
+        header[DOC_IMPACT_HEADER],
     }
     for col in range(1, sheet.max_column + 1):
         if col in columns_to_skip:
@@ -750,66 +790,107 @@ def generate_notes_for_sheet(
         build_row_input(sheet, header, row_number)
         for row_number in range(2, sheet.max_row + 1)
     ]
-    rows_to_generate: list[RowInput] = []
+    tasks: list[RowGenerationTask] = []
 
     for row_input in row_inputs:
         row_number = row_input.row_number
         component = row_input.component
+        ai_cell = sheet.cell(row=row_number, column=header["release_notes_written_by_ai"])
+        doc_impact_cell = sheet.cell(row=row_number, column=header[DOC_IMPACT_HEADER])
+        existing_doc_impact = str_value(doc_impact_cell.value)
+        generate_doc_impact = not is_complete_doc_impact(existing_doc_impact)
         dup_text = str_value(sheet.cell(row=row_number, column=header["published_release_notes"]).value)
         if dup_text:
-            sheet.cell(row=row_number, column=header["release_notes_written_by_ai"]).value = None
+            ai_cell.value = None
             entries_by_row[row_number] = dup_entries_for_row(row_input, dup_text)
+            generate_release_note = False
+        else:
+            existing_note = str_value(ai_cell.value)
+            existing_type = str_value(
+                sheet.cell(row=row_number, column=header["ai_note_type"]).value
+            )
+            has_existing_release_note = (
+                existing_type in {"bug_fix", "improvement"}
+                and bool(existing_note)
+                and not existing_note.startswith("AI_GENERATION_FAILED:")
+            )
+            has_existing_not_needed = (
+                existing_type == "not_needed"
+                and existing_note.startswith(NOT_NEEDED_PREFIX)
+            )
+            generate_release_note = not (
+                has_existing_release_note or has_existing_not_needed
+            )
+            if has_existing_release_note:
+                entries_by_row[row_number] = [
+                    MarkdownEntry(
+                        existing_type,
+                        component,
+                        existing_note,
+                        row_input.raw_component,
+                    )
+                ]
+
+        if not generate_release_note and not generate_doc_impact:
+            print(f"Row {row_number}: skipped existing AI analysis", flush=True)
             continue
 
-        ai_cell = sheet.cell(row=row_number, column=header["release_notes_written_by_ai"])
         expected_links = row_input.issue_urls or row_input.pr_urls
         if not expected_links:
-            ai_cell.value = "AI_GENERATION_FAILED: missing issue URL and PR URL"
-            continue
-
-        existing_note = str_value(ai_cell.value)
-        existing_type = str_value(
-            sheet.cell(row=row_number, column=header["ai_note_type"]).value
-        ) if "ai_note_type" in header else ""
-
-        if existing_type in {"bug_fix", "improvement"} and existing_note and not existing_note.startswith("AI_GENERATION_FAILED:"):
-            entries_by_row[row_number] = [
-                MarkdownEntry(
-                    existing_type,
-                    component,
-                    existing_note,
-                    row_input.raw_component,
+            if generate_release_note:
+                ai_cell.value = "AI_GENERATION_FAILED: missing issue URL and PR URL"
+            if generate_doc_impact:
+                set_doc_impact_cell(
+                    doc_impact_cell,
+                    f"{DOC_IMPACT_FAILED_PREFIX} missing issue URL and PR URL"
                 )
-            ]
-            print(f"Row {row_number}: skipped existing AI release note", flush=True)
             continue
 
-        if existing_type == "not_needed" and existing_note.startswith(NOT_NEEDED_PREFIX):
-            print(f"Row {row_number}: skipped existing not-needed verdict", flush=True)
-            continue
+        tasks.append(
+            RowGenerationTask(
+                row_input=row_input,
+                generate_release_note=generate_release_note,
+                generate_doc_impact=generate_doc_impact,
+            )
+        )
 
-        rows_to_generate.append(row_input)
-
-    github_cache = prefetch_github_data(rows_to_generate, github, github_workers)
-    total_to_generate = len(rows_to_generate)
+    github_cache = prefetch_github_data(
+        [task.row_input for task in tasks], github, github_workers
+    )
+    total_to_generate = len(tasks)
     if total_to_generate:
         print(
-            f"Generating AI release notes for {total_to_generate} row(s) "
-            f"with {ai_workers} worker(s)",
+            f"Generating AI release-note and documentation-impact analysis for "
+            f"{total_to_generate} row(s) with {ai_workers} worker(s)",
             flush=True,
         )
 
     completed = 0
     with ThreadPoolExecutor(max_workers=ai_workers) as executor:
-        futures = [
-            executor.submit(generate_note_for_row, row_input, github_cache, ai)
-            for row_input in rows_to_generate
-        ]
+        futures = {
+            executor.submit(
+                generate_note_for_row,
+                task.row_input,
+                github_cache,
+                ai,
+                task.generate_release_note,
+                task.generate_doc_impact,
+            ): task
+            for task in tasks
+        }
         for future in as_completed(futures):
+            task = futures[future]
             result = future.result()
             # Keep all openpyxl mutations on the main thread. Worker threads only
             # compute RowGenerationResult objects.
-            apply_generation_result(sheet, header, result, entries_by_row)
+            apply_generation_result(
+                sheet,
+                header,
+                result,
+                entries_by_row,
+                generate_release_note=task.generate_release_note,
+                generate_doc_impact=task.generate_doc_impact,
+            )
             completed += 1
             if checkpoint_callback:
                 checkpoint_callback(completed, total_to_generate)
@@ -981,6 +1062,10 @@ def is_not_needed_note(note: str) -> bool:
     return note.startswith(NOT_NEEDED_PREFIX)
 
 
+def is_complete_doc_impact(value: str) -> bool:
+    return bool(value) and not value.startswith(DOC_IMPACT_FAILED_PREFIX)
+
+
 def prefetch_github_data(row_inputs: list[RowInput], github: Any, github_workers: int) -> GitHubDataCache:
     issue_urls = unique_ordered(url for row_input in row_inputs for url in row_input.issue_urls)
     pr_urls = unique_ordered(url for row_input in row_inputs for url in row_input.pr_urls)
@@ -1027,6 +1112,8 @@ def generate_note_for_row(
     row_input: RowInput,
     github_cache: GitHubDataCache,
     ai: Any,
+    generate_release_note: bool = True,
+    generate_doc_impact: bool = True,
 ) -> RowGenerationResult:
     expected_links = row_input.issue_urls or row_input.pr_urls
     row_context = build_row_context_from_cache(row_input, github_cache)
@@ -1034,8 +1121,21 @@ def generate_note_for_row(
         [author for author in row_context.pr_authors if author not in BOT_AUTHORS]
     )
     try:
-        prompt = build_generation_prompt(row_context, expected_links, contributors)
-        generated = ai.generate(prompt, expected_links, contributors)
+        prompt = build_generation_prompt(
+            row_context,
+            expected_links,
+            contributors,
+            generate_release_note=generate_release_note,
+            generate_doc_impact=generate_doc_impact,
+        )
+        generated = ai.generate(
+            prompt,
+            expected_links,
+            contributors,
+            row_context.pr_urls,
+            generate_release_note=generate_release_note,
+            generate_doc_impact=generate_doc_impact,
+        )
         return RowGenerationResult(
             row_number=row_input.row_number,
             component=row_input.component,
@@ -1045,6 +1145,7 @@ def generate_note_for_row(
             error=None,
             needs_review=generated.needs_review,
             reason=generated.reason,
+            doc_impact=generated.doc_impact,
         )
     except Exception as exc:  # noqa: BLE001
         return RowGenerationResult(
@@ -1126,16 +1227,48 @@ def apply_generation_result(
     header: dict[str, int],
     result: RowGenerationResult,
     entries_by_row: dict[int, list[MarkdownEntry]],
+    generate_release_note: bool = True,
+    generate_doc_impact: bool = True,
 ) -> None:
     ai_cell = sheet.cell(row=result.row_number, column=header["release_notes_written_by_ai"])
+    doc_impact_cell = sheet.cell(row=result.row_number, column=header[DOC_IMPACT_HEADER])
     if result.error:
-        ai_cell.value = f"AI_GENERATION_FAILED: {result.error}"
+        if generate_release_note:
+            ai_cell.value = f"AI_GENERATION_FAILED: {result.error}"
+        if generate_doc_impact:
+            set_doc_impact_cell(
+                doc_impact_cell,
+                f"{DOC_IMPACT_FAILED_PREFIX} {result.error}",
+            )
         print(
-            f"Row {result.row_number}: AI generation failed: {result.error}",
+            f"Row {result.row_number}: AI analysis failed: {result.error}",
             file=sys.stderr,
             flush=True,
         )
         return
+
+    if generate_doc_impact:
+        if not result.doc_impact:
+            set_doc_impact_cell(
+                doc_impact_cell,
+                f"{DOC_IMPACT_FAILED_PREFIX} empty documentation-impact result",
+            )
+            print(
+                f"Row {result.row_number}: documentation-impact analysis failed: "
+                "empty result",
+                file=sys.stderr,
+                flush=True,
+            )
+        else:
+            set_doc_impact_cell(
+                doc_impact_cell,
+                format_doc_impact_for_excel(result.doc_impact),
+            )
+
+    if not generate_release_note:
+        print_doc_impact_result(result)
+        return
+
     if not result.note or not result.note_type:
         ai_cell.value = "AI_GENERATION_FAILED: empty AI generation result"
         print(
@@ -1154,6 +1287,7 @@ def apply_generation_result(
             f"Row {result.row_number}: {result.note}",
             flush=True,
         )
+        print_doc_impact_result(result)
         return
 
     ai_cell.value = result.note
@@ -1164,6 +1298,59 @@ def apply_generation_result(
     review_marker = " (needs review)" if result.needs_review else ""
     print(
         f"Row {result.row_number}: generated {result.note_type}{review_marker}: {result.reason}",
+        flush=True,
+    )
+    print_doc_impact_result(result)
+
+
+def format_doc_impact_for_excel(doc_impact: VariableOrConfigDocImpact) -> str:
+    if doc_impact.status == "not_detected":
+        return f"Not detected | {doc_impact.reason}"
+    if doc_impact.status == "uncertain":
+        return f"Uncertain | {doc_impact.reason}"
+
+    kind_labels = {
+        "system_variable": "System variable",
+        "configuration_parameter": "Configuration parameter",
+    }
+    change_type_labels = {
+        "newly_added": "Newly added",
+        "modified": "Modified",
+        "deprecated": "Deprecated",
+        "deleted": "Deleted",
+        "renamed": "Renamed",
+    }
+    lines = []
+    for change in doc_impact.changes:
+        parts = [
+            "Detected",
+            kind_labels[change.kind],
+            change.name,
+            change_type_labels[change.change_type],
+            change.description,
+        ]
+        if change.source_pr:
+            parts.append(change.source_pr)
+        lines.append(" | ".join(parts))
+    if doc_impact.needs_review:
+        lines.append(f"Needs review | {doc_impact.reason}")
+    return "\n".join(lines)
+
+
+def set_doc_impact_cell(cell: Any, value: str) -> None:
+    cell.value = value
+    alignment = copy.copy(cell.alignment)
+    alignment.wrap_text = True
+    cell.alignment = alignment
+
+
+def print_doc_impact_result(result: RowGenerationResult) -> None:
+    if not result.doc_impact:
+        return
+    review_marker = " (needs review)" if result.doc_impact.needs_review else ""
+    print(
+        f"Row {result.row_number}: documentation impact "
+        f"{result.doc_impact.status}{review_marker}: {result.doc_impact.reason}",
         flush=True,
     )
 

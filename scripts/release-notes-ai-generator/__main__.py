@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Generate TiDB improvements and bug fixes for release notes according to PRs and issues in a specified excel file.
+"""Generate TiDB release notes and variable or configuration documentation-impact results.
 
 Two-phase workflow (run from the scripts/ directory):
 

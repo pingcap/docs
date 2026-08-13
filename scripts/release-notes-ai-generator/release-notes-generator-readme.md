@@ -1,6 +1,6 @@
 # Readme: Release Notes AI Generator
 
-`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) leverages AI to generate English TiDB release notes for the `Improvements` and `Bug fixes` sections according to PRs and issues listed in an Excel workbook.
+`python3 -m release-notes-ai-generator` (run from the `scripts/` directory) leverages AI to generate English TiDB release notes for the `Improvements` and `Bug fixes` sections and to identify user-facing system-variable or configuration-parameter changes according to PRs and issues listed in an Excel workbook.
 
 The generator uses a two-phase workflow:
 
@@ -27,6 +27,12 @@ The source workbook is never overwritten. All processing results are written to 
 **Release note generation**
 
 - Generates English release notes with AI from workbook data, GitHub PR and issue context, changed-file summaries, and repo-local release note writing references.
+
+**Variable and configuration documentation impact**
+
+- Independently identifies whether each row adds, modifies, deprecates, deletes, or renames a user-facing system variable or configuration parameter.
+- Writes the result to `variable_or_config_doc_impact` for both rows that need release notes and rows moved to `release_note_not_needed`.
+- Reports `Detected`, `Not detected`, or `Uncertain`. This result is a documentation-review signal and does not claim that the corresponding documentation is currently missing.
 
 **Component mapping**
 
@@ -121,13 +127,13 @@ python3 -m release-notes-ai-generator export-markdown \
 | `--ai-provider <provider>` | No | `codex` | AI provider to use. `codex` runs the Codex CLI as a subprocess. `azure` calls Azure OpenAI via the OpenAI Python SDK. |
 | `--ai-command <command>` | No | `codex --ask-for-approval never exec --sandbox read-only --ephemeral` | Command used to invoke the AI generator (only used with `--ai-provider codex`). |
 | `--ai-model <model>` | No | `gpt-5.4` | Model name. Passed to `codex exec` with `-m`, or used as the model parameter for Azure OpenAI. |
-| `--involve-ai-generation <ON\|OFF>` | No | `ON` | Whether to generate non-duplicate release notes with AI. Use `OFF` to skip AI generation and only run preprocessing. |
+| `--involve-ai-generation <ON\|OFF>` | No | `ON` | Whether to generate release notes and analyze variable or configuration documentation impact with AI. Use `OFF` to skip AI analysis and only run preprocessing. |
 | `--ai-timeout <seconds>` | No | `600` | Timeout in seconds for each AI command invocation. |
 | `--ai-workers <count>` | No | `3` | Number of concurrent AI command invocations. |
 | `--github-workers <count>` | No | `8` | Number of concurrent GitHub API prefetch workers. |
 | `--author-workers <count>` | No | `3` | Number of concurrent workers used to resolve bot-authored cherry-pick PR authors. |
 | `--checkpoint-interval <count>` | No | `1` | Save the processed workbook after every N completed AI rows. Use `0` to disable. |
-| `--force-regenerate` | No | Disabled | Clear existing AI-generated notes and regenerate all non-duplicate rows. |
+| `--force-regenerate` | No | Disabled | Clear existing AI-generated notes and documentation-impact results, and regenerate them. Existing release-note verdicts already moved to `release_note_not_needed` are preserved while their documentation-impact results are regenerated. |
 | `--skip-scope-preprocess` | No | Disabled | Skip moving not-in-scope PR rows to the `PRs_not_in_scope` sheet. |
 | `--scope-base-branch-start-date <YYYY-MM-DD>` | No | Estimated from release history | Override the estimated release-m.n branch start date for x.y.0 scope preprocessing. |
 | `--output-excel <path>` | No | `<original-name>_processed.xlsx` | Path for the processed Excel output. |
@@ -149,7 +155,7 @@ python3 -m release-notes-ai-generator export-markdown \
 
 - The source Excel file passed to `--excel` is not overwritten (unless `--output-excel` points to the same file, which is useful for resume scenarios).
 - The processed Excel file is written to `<original-name>_processed.xlsx` next to the source workbook, or to the path specified by `--output-excel`.
-- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook.
+- Rows where AI determines no release note is needed are moved to a separate `release_note_not_needed` sheet in the processed workbook. The `variable_or_config_doc_impact` column and its result are copied with each row.
 
 **Phase 2 (`export-markdown`):**
 
@@ -169,10 +175,10 @@ The following sections describe the main processing logic and rules used by the 
 | Workbook setup | Rows are sorted by component, and output columns are added or reset. | Related rows are easier to inspect, and generated data stays separate from source data. |
 | Historical scan | Existing release notes are indexed by GitHub URL, contributor, section, and component. | The generator can reuse published wording instead of drafting duplicate text. |
 | Same-series quarantine | Issues already published in the same major.minor series are moved to a separate sheet. | Repeated issues in the same series are visible for manual review. |
-| Duplicate marking | Reusable historical entries are written to `published_release_notes` and rendered as `(dup)` entries. | The output keeps the reviewed published note and its source location. |
+| Duplicate marking | Reusable historical entries are written to `published_release_notes` and rendered as `(dup)` entries. Rows with missing documentation-impact results still go through AI analysis for that result only. | The output keeps the reviewed published note and its source location while still checking documentation impact. |
 | Author replacement | Bot-authored cherry-pick rows are resolved to the original PR author when possible. | Contributor suffixes and duplicate matching use the real author. |
 | Row merging | Rows with the same first issue URL and raw Excel component are merged. | Multiple PRs for one issue produce one release note entry. |
-| Entry generation | Non-duplicate rows are generated by AI or copied from `formated_release_note` in non-AI mode. | The same preprocessing works for both drafting and dry-run workflows. |
+| Entry generation | Non-duplicate rows are generated by AI or copied from `formated_release_note` in non-AI mode. When both results are missing, one AI call independently returns the release note and documentation impact. | The same preprocessing works for both drafting and dry-run workflows. |
 | Markdown rendering | Entries are grouped by type and Markdown component. | The draft follows the expected release note structure. |
 
 ### Scope filtering
@@ -306,7 +312,7 @@ After same-series rows are moved out, the generator marks remaining rows as dupl
 | PR URL source | PR URLs are not used for duplicate matching. They are used for AI context and component inference. |
 | Author check | If a historical note has contributors, at least one current row author must match a historical contributor. If the historical note has no contributors, the URL match is enough. |
 | Workbook output | Matching historical notes are written to `published_release_notes`, and the row is filled in gray. |
-| Markdown output | Duplicate rows are rendered from `published_release_notes`; they do not go through AI generation. |
+| Markdown output | Duplicate release-note text is rendered from `published_release_notes`. If `variable_or_config_doc_impact` is missing, AI analyzes only the documentation impact and does not replace the published note. |
 | Type selection | The generator uses the historical section when possible. Otherwise, it falls back to the current row `issue_type`. |
 | Component selection | The generator uses the historical component path when possible. Otherwise, it falls back to the current row component. |
 
@@ -332,7 +338,7 @@ Rows are grouped by the raw Excel component, not the normalized Markdown compone
 
 ### Entry generation
 
-With `--involve-ai-generation ON`, the generator calls the configured AI command for non-duplicate rows that need AI processing (see the skip/reprocess rules below).
+With `--involve-ai-generation ON`, the generator calls the configured AI command for rows that need release-note generation, documentation-impact analysis, or both (see the skip/reprocess rules below).
 
 The prompt includes:
 
@@ -341,16 +347,35 @@ The prompt includes:
 - GitHub issue titles, bodies, and labels.
 - GitHub PR titles, bodies, authors, branches, merge times, and changed-file summaries.
 - The repository-local writing references for improvements and bug fixes.
-- The prompt template in `scripts/release-notes-ai-generator/prompts/generation.md`.
+- The shared prompt template in `scripts/release-notes-ai-generator/prompts/generation.md` and the active task instructions in `prompts/release-note.md` and/or `prompts/doc-impact.md`.
+
+The two AI decisions are independent. A row can have a `not_needed` release-note verdict and a `Detected` documentation impact.
+
+The generator sends only the instructions and JSON Schema fields needed for the missing result. For example, when a row in `release_note_not_needed` only needs documentation-impact analysis, the request omits the release-note instructions and output fields.
 
 The AI command must return a JSON object with these fields:
 
 | Field | Rule |
 | --- | --- |
-| `type` | Must be `improvement` or `bug_fix`. |
-| `release_note` | Must be one Markdown bullet that starts with a hyphen followed by a space. |
+| `type` | Must be `improvement`, `bug_fix`, or `not_needed`. |
+| `release_note` | For `improvement` or `bug_fix`, must be one Markdown bullet that starts with a hyphen followed by a space. For `not_needed`, must start with `Release note is not needed:`. |
 | `needs_review` | Must be a boolean. |
 | `reason` | Must explain the type and wording choice. |
+| `variable_or_config_doc_impact` | Must contain `status`, `changes`, `needs_review`, and `reason`. |
+
+Documentation-impact status has the following meanings:
+
+| Status | Meaning |
+| --- | --- |
+| `detected` | At least one user-facing system variable or configuration parameter changed. Each change records its kind, exact name, change type, description, and source PR. |
+| `not_detected` | The available evidence shows no user-facing variable or configuration change. |
+| `uncertain` | The evidence is incomplete or ambiguous. `needs_review` must be `true`. |
+
+The Excel cell renders these values as one or more readable lines. For example:
+
+```text
+Detected | System variable | tidb_example | Modified | Changes the default value from `OFF` to `ON`. | https://github.com/pingcap/tidb/pull/12345
+```
 
 The generator validates that the release note:
 
@@ -367,21 +392,24 @@ AI_GENERATION_FAILED: <error>
 
 Failed rows are not rendered to Markdown.
 
-If `release_notes_written_by_ai` already contains a value and does not start with `AI_GENERATION_FAILED:`, the generator reuses it instead of calling AI again. Use `--force-regenerate` to clear existing AI output and regenerate all non-duplicate rows.
+If both the existing release-note result and `variable_or_config_doc_impact` are complete, the generator reuses them instead of calling AI again. If either result is missing or has a failure marker, the generator calls AI and updates only the missing or failed result. Use `--force-regenerate` to regenerate the outputs.
 
 Specifically, the generator uses the following rules to decide whether to skip or reprocess a row:
 
-| `ai_note_type` | `release_notes_written_by_ai` | Action |
+| Release-note result | Documentation-impact result | Action |
 | --- | --- | --- |
-| `bug_fix` or `improvement` | Not empty | Skip (reuse existing AI note). |
-| `not_needed` | Starts with `Release note is not needed:` | Skip (valid not-needed verdict). |
-| `not_needed` | Empty or does not start with `Release note is not needed:` | Reprocess with AI. |
-| Empty | Any value | Reprocess with AI. |
-| Any value | Empty | Reprocess with AI. |
+| Complete | Complete | Skip and reuse both results. |
+| Complete | Empty or starts with `DOC_IMPACT_ANALYSIS_FAILED:` | Call AI and update only `variable_or_config_doc_impact`. |
+| Missing or starts with `AI_GENERATION_FAILED:` | Complete | Call AI and update only the release-note result. |
+| Missing or failed | Missing or failed | Call AI once and update both results. |
+| Historical duplicate | Complete | Reuse the published release note and the existing documentation-impact result. |
+| Historical duplicate | Missing or failed | Keep the published release note and call AI only for documentation impact. |
 
 This means re-running the generator after an interruption automatically resumes: rows that were successfully processed retain their results, while incomplete rows are sent to AI again.
 
-With `--involve-ai-generation OFF`, the generator does not call the AI command. For non-duplicate rows, it splits `formated_release_note` into non-empty lines and renders those lines as Markdown entries. The preprocessing pipeline still runs in non-AI mode.
+After processing the main sheet, the generator first moves newly classified `not_needed` rows into `release_note_not_needed`, and then performs the documentation-impact-only pass on the consolidated sheet. Newly moved rows reuse their completed impact result, while older interrupted rows with a missing or failed impact result are retried.
+
+With `--involve-ai-generation OFF`, the generator does not call the AI command. For non-duplicate rows, it splits `formated_release_note` into non-empty lines and renders those lines as Markdown entries. New `variable_or_config_doc_impact` cells remain empty, while existing results are preserved. The preprocessing pipeline still runs in non-AI mode.
 
 ### Component mapping
 

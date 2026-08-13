@@ -10,6 +10,8 @@ import openpyxl
 
 from .ai_client import AzureOpenAIClient, CodexAIClient
 from .excel_workbook import (
+    NOT_NEEDED_SHEET_NAME,
+    clear_doc_impact_column,
     clear_output_columns,
     collect_markdown_entries_from_sheet,
     generate_notes_without_ai,
@@ -33,9 +35,10 @@ SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Generate English release notes with AI according to PRs and issues "
-            "in a specified Excel file. Use subcommands 'generate' and 'export-markdown' "
-            "to run the two phases independently."
+            "Generate English release notes and analyze system-variable or "
+            "configuration-parameter documentation impact with AI according to "
+            "PRs and issues in a specified Excel file. Use subcommands 'generate' "
+            "and 'export-markdown' to run the two phases independently."
         ),
     )
     subparsers = parser.add_subparsers(dest="command")
@@ -45,7 +48,8 @@ def parse_args() -> argparse.Namespace:
         "generate",
         help=(
             "Phase 1: Process the Excel workbook — run preprocessing, call AI to "
-            "generate release notes, and write results back to Excel. "
+            "generate release notes and analyze documentation impact, and write "
+            "results back to Excel. "
             "Does NOT produce a Markdown file."
         ),
     )
@@ -108,8 +112,9 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
         type=parse_on_off,
         default="ON",
         help=(
-            "Whether to use AI for non-dup release notes. Use ON to generate with AI, "
-            "or OFF to skip AI generation and only run preprocessing. Default: ON."
+            "Whether to use AI for release notes and variable or configuration "
+            "documentation-impact analysis. Use ON to analyze with AI, or OFF to "
+            "skip AI analysis and only run preprocessing. Default: ON."
         ),
     )
     parser.add_argument(
@@ -151,7 +156,10 @@ def add_generate_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--force-regenerate",
         action="store_true",
-        help="Clear existing AI release notes and regenerate all non-dup rows.",
+        help=(
+            "Clear existing AI release notes and documentation-impact results, "
+            "and regenerate them."
+        ),
     )
     parser.add_argument(
         "--skip-scope-preprocess",
@@ -290,6 +298,15 @@ def run_generate(args: argparse.Namespace) -> int:
             processed_excel_path,
             args.checkpoint_interval,
         )
+        if args.force_regenerate and NOT_NEEDED_SHEET_NAME in workbook.sheetnames:
+            existing_not_needed_sheet = workbook[NOT_NEEDED_SHEET_NAME]
+            existing_not_needed_header = prepare_sheet_columns(
+                existing_not_needed_sheet
+            )
+            clear_doc_impact_column(
+                existing_not_needed_sheet,
+                existing_not_needed_header,
+            )
         generate_notes_for_sheet(
             sheet,
             header,
@@ -299,10 +316,25 @@ def run_generate(args: argparse.Namespace) -> int:
             github_workers=args.github_workers,
             checkpoint_callback=checkpoint_callback,
         )
+        # Consolidate new and previously persisted not-needed rows before the
+        # doc-impact-only pass. New rows already carry the result from the main
+        # pass, while interrupted older rows with a missing result are retried.
+        move_not_needed_rows_to_sheet(workbook, sheet, header)
+        if NOT_NEEDED_SHEET_NAME in workbook.sheetnames:
+            not_needed_sheet = workbook[NOT_NEEDED_SHEET_NAME]
+            not_needed_header = prepare_sheet_columns(not_needed_sheet)
+            generate_notes_for_sheet(
+                not_needed_sheet,
+                not_needed_header,
+                github,
+                ai,
+                ai_workers=args.ai_workers,
+                github_workers=args.github_workers,
+                checkpoint_callback=checkpoint_callback,
+            )
     else:
         generate_notes_without_ai(sheet, header)
-
-    move_not_needed_rows_to_sheet(workbook, sheet, header)
+        move_not_needed_rows_to_sheet(workbook, sheet, header)
     save_workbook_safely(workbook, processed_excel_path)
 
     print("Phase 1 (generate) completed.", flush=True)

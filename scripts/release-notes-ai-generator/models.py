@@ -40,11 +40,29 @@ class IssueInfo:
 
 
 @dataclasses.dataclass
-class GeneratedNote:
-    note_type: str
-    release_note: str
+class DocImpactChange:
+    kind: str
+    name: str
+    change_type: str
+    description: str
+    source_pr: str
+
+
+@dataclasses.dataclass
+class VariableOrConfigDocImpact:
+    status: str
+    changes: list[DocImpactChange]
     needs_review: bool
     reason: str
+
+
+@dataclasses.dataclass
+class GeneratedNote:
+    note_type: str | None
+    release_note: str | None
+    needs_review: bool | None
+    reason: str | None
+    doc_impact: VariableOrConfigDocImpact | None
 
 
 @dataclasses.dataclass
@@ -101,5 +119,13 @@ class RowGenerationResult:
     note_type: str | None
     note: str | None
     error: str | None
-    needs_review: bool = False
-    reason: str = ""
+    needs_review: bool | None = None
+    reason: str | None = None
+    doc_impact: VariableOrConfigDocImpact | None = None
+
+
+@dataclasses.dataclass
+class RowGenerationTask:
+    row_input: RowInput
+    generate_release_note: bool
+    generate_doc_impact: bool

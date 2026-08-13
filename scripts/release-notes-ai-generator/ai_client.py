@@ -14,8 +14,18 @@ import textwrap
 from pathlib import Path
 from typing import Any
 
-from .constants import GENERATION_PROMPT_TEMPLATE, GITHUB_ITEM_URL_RE
-from .models import GeneratedNote, RowContext
+from .constants import (
+    DOC_IMPACT_PROMPT_TEMPLATE,
+    GENERATION_PROMPT_TEMPLATE,
+    GITHUB_ITEM_URL_RE,
+    RELEASE_NOTE_PROMPT_TEMPLATE,
+)
+from .models import (
+    DocImpactChange,
+    GeneratedNote,
+    RowContext,
+    VariableOrConfigDocImpact,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -23,28 +33,70 @@ logger = logging.getLogger(__name__)
 class AIClient:
     """Base AI client with shared generation and validation logic."""
 
-    def generate(self, prompt: str, expected_links: list[str], contributors: list[str]) -> GeneratedNote:
-        result, errors = self._run_and_validate(prompt, expected_links, contributors)
+    def generate(
+        self,
+        prompt: str,
+        expected_links: list[str],
+        contributors: list[str],
+        expected_pr_links: list[str],
+        generate_release_note: bool = True,
+        generate_doc_impact: bool = True,
+    ) -> GeneratedNote:
+        output_schema = ai_output_schema(
+            include_release_note=generate_release_note,
+            include_doc_impact=generate_doc_impact,
+        )
+        result, errors = self._run_and_validate(
+            prompt,
+            output_schema,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            generate_release_note,
+            generate_doc_impact,
+        )
         if result:
             return result
 
         repair_prompt = build_repair_prompt(prompt, errors)
-        result, repair_errors = self._run_and_validate(repair_prompt, expected_links, contributors)
+        result, repair_errors = self._run_and_validate(
+            repair_prompt,
+            output_schema,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            generate_release_note,
+            generate_doc_impact,
+        )
         if result:
             return result
         raise ValueError("; ".join(repair_errors))
 
     def _run_and_validate(
-        self, prompt: str, expected_links: list[str], contributors: list[str]
+        self,
+        prompt: str,
+        output_schema: dict[str, Any],
+        expected_links: list[str],
+        contributors: list[str],
+        expected_pr_links: list[str],
+        validate_release_note: bool,
+        validate_doc_impact_result: bool,
     ) -> tuple[GeneratedNote | None, list[str]]:
-        output = self._run(prompt)
+        output = self._run(prompt, output_schema)
         try:
-            data = extract_json_object(output)
+            data = extract_json_object(output, set(output_schema["required"]))
         except ValueError as exc:
             return None, [str(exc)]
-        return validate_ai_response(data, expected_links, contributors)
+        return validate_ai_response(
+            data,
+            expected_links,
+            contributors,
+            expected_pr_links,
+            validate_release_note=validate_release_note,
+            validate_doc_impact_result=validate_doc_impact_result,
+        )
 
-    def _run(self, prompt: str) -> str:
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
         raise NotImplementedError("Subclasses must implement _run")
 
 
@@ -56,7 +108,7 @@ class CodexAIClient(AIClient):
         self.model = model
         self.timeout = timeout
 
-    def _run(self, prompt: str) -> str:
+    def _run(self, prompt: str, output_schema: dict[str, Any]) -> str:
         command = list(self.command)
         if not command:
             raise ValueError("AI command is empty. Pass a command with --ai-command.")
@@ -74,7 +126,7 @@ class CodexAIClient(AIClient):
                 temp_path = Path(temp_dir)
                 schema_path = temp_path / "ai-output-schema.json"
                 output_path = temp_path / "ai-output.txt"
-                schema_path.write_text(json.dumps(ai_output_schema()), encoding="utf-8")
+                schema_path.write_text(json.dumps(output_schema), encoding="utf-8")
                 output_path.touch()
                 command.extend(["--output-schema", str(schema_path)])
                 command.extend(["--output-last-message", str(output_path)])
@@ -144,7 +196,7 @@ class AzureOpenAIClient(AIClient):
         model_lower = self.model.lower()
         return any(model_lower.startswith(p) for p in self.REASONING_MODEL_PREFIXES)
 
-    def _run(self, prompt: str) -> str:
+    def _run(self, prompt: str, _output_schema: dict[str, Any]) -> str:
         kwargs: dict[str, Any] = {
             "model": self.model,
             "input": [{"role": "user", "content": prompt}],
@@ -163,17 +215,85 @@ def is_executable_available(executable: str) -> bool:
     return shutil.which(executable) is not None
 
 
-def ai_output_schema() -> dict[str, Any]:
+def ai_output_schema(
+    include_release_note: bool = True,
+    include_doc_impact: bool = True,
+) -> dict[str, Any]:
+    if not include_release_note and not include_doc_impact:
+        raise ValueError("At least one AI output must be requested")
+
+    required: list[str] = []
+    properties: dict[str, Any] = {}
+    if include_release_note:
+        required.extend(["type", "release_note", "needs_review", "reason"])
+        properties.update(
+            {
+                "type": {
+                    "type": "string",
+                    "enum": ["improvement", "bug_fix", "not_needed"],
+                },
+                "release_note": {"type": "string"},
+                "needs_review": {"type": "boolean"},
+                "reason": {"type": "string"},
+            }
+        )
+    if include_doc_impact:
+        required.append("variable_or_config_doc_impact")
+        properties["variable_or_config_doc_impact"] = {
+            "type": "object",
+            "additionalProperties": False,
+            "required": ["status", "changes", "needs_review", "reason"],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": ["detected", "not_detected", "uncertain"],
+                },
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": [
+                            "kind",
+                            "name",
+                            "change_type",
+                            "description",
+                            "source_pr",
+                        ],
+                        "properties": {
+                            "kind": {
+                                "type": "string",
+                                "enum": [
+                                    "system_variable",
+                                    "configuration_parameter",
+                                ],
+                            },
+                            "name": {"type": "string"},
+                            "change_type": {
+                                "type": "string",
+                                "enum": [
+                                    "newly_added",
+                                    "modified",
+                                    "deprecated",
+                                    "deleted",
+                                    "renamed",
+                                ],
+                            },
+                            "description": {"type": "string"},
+                            "source_pr": {"type": "string"},
+                        },
+                    },
+                },
+                "needs_review": {"type": "boolean"},
+                "reason": {"type": "string"},
+            },
+        }
+
     return {
         "type": "object",
         "additionalProperties": False,
-        "required": ["type", "release_note", "needs_review", "reason"],
-        "properties": {
-            "type": {"type": "string", "enum": ["improvement", "bug_fix", "not_needed"]},
-            "release_note": {"type": "string"},
-            "needs_review": {"type": "boolean"},
-            "reason": {"type": "string"},
-        },
+        "required": required,
+        "properties": properties,
     }
 
 
@@ -197,27 +317,49 @@ def build_generation_prompt(
     row_context: RowContext,
     expected_links: list[str],
     contributors: list[str],
+    generate_release_note: bool = True,
+    generate_doc_impact: bool = True,
 ) -> str:
+    if not generate_release_note and not generate_doc_impact:
+        raise ValueError("At least one AI task must be requested")
+
     prompt_template = load_prompt_template(GENERATION_PROMPT_TEMPLATE)
     context = {
         "row_number": row_context.row_number,
         "component": row_context.component,
         "raw_component_from_excel": row_context.raw_component,
-        "issue_type_from_excel": row_context.issue_type,
         "pr_title_from_excel": row_context.pr_title,
-        "formatted_release_note_from_excel": row_context.formatted_release_note,
-        "expected_links": expected_links,
-        "contributors": contributors,
+        "pr_urls": row_context.pr_urls,
         "issues": [dataclasses.asdict(issue) for issue in row_context.issues],
         "pull_requests": [dataclasses.asdict(pull) for pull in row_context.pulls],
         "fetch_failed_urls": row_context.fetch_failed_urls,
     }
+    task_instructions: list[str] = []
+    release_note_metadata = ""
+    if generate_release_note:
+        context.update(
+            {
+                "issue_type_from_excel": row_context.issue_type,
+                "formatted_release_note_from_excel": row_context.formatted_release_note,
+            }
+        )
+        task_instructions.append(load_prompt_template(RELEASE_NOTE_PROMPT_TEMPLATE))
+        release_note_metadata = (
+            "Expected links to include in the release note "
+            "(the entry must contain exactly these, no more and no fewer):\n"
+            f"{json.dumps(expected_links, ensure_ascii=False, indent=2)}\n\n"
+            "Contributors to append in order as `@[user](https://github.com/user)`:\n"
+            f"{json.dumps(contributors, ensure_ascii=False, indent=2)}"
+        )
+    if generate_doc_impact:
+        task_instructions.append(load_prompt_template(DOC_IMPACT_PROMPT_TEMPLATE))
+
     return render_prompt_template(
         prompt_template,
         {
-            "EXPECTED_LINKS": json.dumps(expected_links, ensure_ascii=False, indent=2),
-            "CONTRIBUTORS": json.dumps(contributors, ensure_ascii=False, indent=2),
+            "TASK_INSTRUCTIONS": "\n\n".join(task_instructions),
             "ROW_CONTEXT": json.dumps(context, ensure_ascii=False, indent=2),
+            "RELEASE_NOTE_METADATA": release_note_metadata,
         },
     )
 
@@ -225,7 +367,7 @@ def build_generation_prompt(
 def build_repair_prompt(original_prompt: str, errors: list[str]) -> str:
     return textwrap.dedent(
         f"""
-        Your previous answer did not satisfy the required JSON schema or release-note rules.
+        Your previous answer did not satisfy the required JSON schema or output rules.
 
         Validation errors:
         {json.dumps(errors, ensure_ascii=False, indent=2)}
@@ -250,8 +392,9 @@ def load_prompt_template(path: Path) -> str:
         return strip_prompt_template_heading(path.read_text(encoding="utf-8"))
     except FileNotFoundError as exc:
         raise FileNotFoundError(
-            f"Cannot find release-note prompt template: {path}. "
-            "Make sure scripts/release-notes-ai-generator/prompts/generation.md exists."
+            f"Cannot find AI prompt template: {path}. "
+            "Make sure scripts/release-notes-ai-generator/prompts contains all "
+            "required prompt files."
         ) from exc
 
 
@@ -264,7 +407,10 @@ def strip_prompt_template_heading(template: str) -> str:
     return "\n".join(lines)
 
 
-def extract_json_object(output: str) -> dict[str, Any]:
+def extract_json_object(
+    output: str,
+    required_keys: set[str] | None = None,
+) -> dict[str, Any]:
     output = output.strip()
     if not output:
         raise ValueError("AI command returned no output")
@@ -274,7 +420,7 @@ def extract_json_object(output: str) -> dict[str, Any]:
         candidates = extract_json_object_candidates(output)
         if not candidates:
             raise ValueError("AI output did not contain a JSON object") from None
-        required_keys = {"type", "release_note", "needs_review", "reason"}
+        required_keys = required_keys or set()
         data = next(
             (candidate for candidate in candidates if required_keys <= candidate.keys()),
             candidates[0],
@@ -303,21 +449,35 @@ def validate_ai_response(
     data: dict[str, Any],
     expected_links: list[str],
     contributors: list[str],
+    expected_pr_links: list[str],
+    validate_release_note: bool = True,
+    validate_doc_impact_result: bool = True,
 ) -> tuple[GeneratedNote | None, list[str]]:
     errors: list[str] = []
     note_type = data.get("type")
     release_note = data.get("release_note")
     needs_review = data.get("needs_review")
     reason = data.get("reason")
+    doc_impact_data = data.get("variable_or_config_doc_impact")
 
-    if note_type not in {"improvement", "bug_fix", "not_needed"}:
-        errors.append('type must be "improvement", "bug_fix", or "not_needed"')
-    if not isinstance(needs_review, bool):
-        errors.append("needs_review must be a boolean")
-    if not isinstance(reason, str):
-        errors.append("reason must be a string")
+    if validate_release_note:
+        if note_type not in {"improvement", "bug_fix", "not_needed"}:
+            errors.append('type must be "improvement", "bug_fix", or "not_needed"')
+        if not isinstance(needs_review, bool):
+            errors.append("needs_review must be a boolean")
+        if not isinstance(reason, str):
+            errors.append("reason must be a string")
 
-    if note_type == "not_needed":
+    doc_impact = None
+    if validate_doc_impact_result:
+        doc_impact, doc_impact_errors = validate_doc_impact(
+            doc_impact_data, expected_pr_links
+        )
+        errors.extend(doc_impact_errors)
+
+    if not validate_release_note:
+        pass
+    elif note_type == "not_needed":
         if not isinstance(release_note, str) or not release_note.startswith("Release note is not needed:"):
             errors.append(
                 'when type is "not_needed", release_note must start with '
@@ -361,12 +521,119 @@ def validate_ai_response(
 
     if errors:
         return None, errors
+    if validate_doc_impact_result and doc_impact is None:
+        return None, [
+            "variable_or_config_doc_impact validation returned no result"
+        ]
     return (
         GeneratedNote(
-            note_type=str(note_type),
-            release_note=str(release_note).strip(),
+            note_type=note_type if validate_release_note else None,
+            release_note=release_note.strip() if validate_release_note else None,
+            needs_review=needs_review if validate_release_note else None,
+            reason=reason.strip() if validate_release_note else None,
+            doc_impact=doc_impact,
+        ),
+        [],
+    )
+
+
+def validate_doc_impact(
+    data: Any,
+    expected_pr_links: list[str],
+) -> tuple[VariableOrConfigDocImpact | None, list[str]]:
+    prefix = "variable_or_config_doc_impact"
+    if not isinstance(data, dict):
+        return None, [f"{prefix} must be an object"]
+
+    errors: list[str] = []
+    status = data.get("status")
+    changes_data = data.get("changes")
+    needs_review = data.get("needs_review")
+    reason = data.get("reason")
+
+    if status not in {"detected", "not_detected", "uncertain"}:
+        errors.append(
+            f'{prefix}.status must be "detected", "not_detected", or "uncertain"'
+        )
+    if not isinstance(changes_data, list):
+        errors.append(f"{prefix}.changes must be an array")
+        changes_data = []
+    if not isinstance(needs_review, bool):
+        errors.append(f"{prefix}.needs_review must be a boolean")
+    if not isinstance(reason, str) or not reason.strip():
+        errors.append(f"{prefix}.reason must be a non-empty string")
+
+    changes: list[DocImpactChange] = []
+    for index, change_data in enumerate(changes_data):
+        change_prefix = f"{prefix}.changes[{index}]"
+        if not isinstance(change_data, dict):
+            errors.append(f"{change_prefix} must be an object")
+            continue
+        kind = change_data.get("kind")
+        name = change_data.get("name")
+        change_type = change_data.get("change_type")
+        description = change_data.get("description")
+        source_pr = change_data.get("source_pr")
+        if kind not in {"system_variable", "configuration_parameter"}:
+            errors.append(
+                f"{change_prefix}.kind must be system_variable or configuration_parameter"
+            )
+        if not isinstance(name, str) or not name.strip():
+            errors.append(f"{change_prefix}.name must be a non-empty string")
+        if change_type not in {
+            "newly_added",
+            "modified",
+            "deprecated",
+            "deleted",
+            "renamed",
+        }:
+            errors.append(f"{change_prefix}.change_type is invalid")
+        if not isinstance(description, str) or not description.strip():
+            errors.append(f"{change_prefix}.description must be a non-empty string")
+        if not isinstance(source_pr, str):
+            errors.append(f"{change_prefix}.source_pr must be a string")
+        elif expected_pr_links and source_pr not in expected_pr_links:
+            errors.append(
+                f"{change_prefix}.source_pr must be one of the input PR links"
+            )
+        elif not expected_pr_links and source_pr:
+            errors.append(
+                f"{change_prefix}.source_pr must be empty when the row has no PR link"
+            )
+        if not errors_for_prefix(errors, change_prefix):
+            changes.append(
+                DocImpactChange(
+                    kind=str(kind),
+                    name=str(name).strip(),
+                    change_type=str(change_type),
+                    description=str(description).strip(),
+                    source_pr=str(source_pr).strip(),
+                )
+            )
+
+    if status == "detected" and not changes:
+        errors.append(
+            f'{prefix}.changes must contain at least one valid change when status is "detected"'
+        )
+    if status in {"not_detected", "uncertain"} and changes_data:
+        errors.append(
+            f'{prefix}.changes must be empty when status is "{status}"'
+        )
+    if status == "uncertain" and needs_review is not True:
+        errors.append(f'{prefix}.needs_review must be true when status is "uncertain"')
+
+    if errors:
+        return None, errors
+    return (
+        VariableOrConfigDocImpact(
+            status=str(status),
+            changes=changes,
             needs_review=bool(needs_review),
             reason=str(reason).strip(),
         ),
         [],
     )
+
+
+def errors_for_prefix(errors: list[str], prefix: str) -> bool:
+    return any(error.startswith(prefix) for error in errors)
