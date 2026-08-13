@@ -24,17 +24,19 @@ DMはシャーディングDDLロックを使用して、操作が正しい順序
 shard-ddl-lock -h
 ```
 
-    maintain or show shard-ddl locks information
-    Usage:
-      dmctl shard-ddl-lock [task] [flags]
-      dmctl shard-ddl-lock [command]
-    Available Commands:
-      unlock      Unlock un-resolved DDL locks forcely
-    Flags:
-      -h, --help   help for shard-ddl-lock
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
-    Use "dmctl shard-ddl-lock [command] --help" for more information about a command.
+```
+maintain or show shard-ddl locks information
+Usage:
+  dmctl shard-ddl-lock [task] [flags]
+  dmctl shard-ddl-lock [command]
+Available Commands:
+  unlock      Unlock un-resolved DDL locks forcely
+Flags:
+  -h, --help   help for shard-ddl-lock
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+Use "dmctl shard-ddl-lock [command] --help" for more information about a command.
+```
 
 #### 引数の説明 {#arguments-description}
 
@@ -56,27 +58,29 @@ shard-ddl-lock test
 
 <details open><summary>期待される出力</summary>
 
-    {
-        "result": true,                                        # The result of the query for the lock information.
-        "msg": "",                                             # The additional message for the failure to query the lock information or other descriptive information (for example, the lock task does not exist).
-        "locks": [                                             # The existing lock information list.
-            {
-                "ID": "test-`shard_db`.`shard_table`",         # The lock ID, which is made up of the current task name and the schema/table information corresponding to the DDL.
-                "task": "test",                                # The name of the task to which the lock belongs.
-                "mode": "pessimistic"                          # The shard DDL mode. Can be set to "pessimistic" or "optimistic".
-                "owner": "mysql-replica-01",                   # The owner of the lock (the ID of the first source that encounters this DDL operation in the pessimistic mode), which is always empty in the optimistic mode.
-                "DDLs": [                                      # The list of DDL operations corresponding to the lock in the pessimistic mode, which is always empty in the optimistic mode.
-                    "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`;"
-                ],
-                "synced": [                                    # The list of sources that have received all sharding DDL events in the corresponding MySQL instance.
-                    "mysql-replica-01"
-                ],
-                "unsynced": [                                  # The list of sources that have not yet received all sharding DDL events in the corresponding MySQL instance.
-                    "mysql-replica-02"
-                ]
-            }
-        ]
-    }
+```
+{
+    "result": true,                                        # The result of the query for the lock information.
+    "msg": "",                                             # The additional message for the failure to query the lock information or other descriptive information (for example, the lock task does not exist).
+    "locks": [                                             # The existing lock information list.
+        {
+            "ID": "test-`shard_db`.`shard_table`",         # The lock ID, which is made up of the current task name and the schema/table information corresponding to the DDL.
+            "task": "test",                                # The name of the task to which the lock belongs.
+            "mode": "pessimistic"                          # The shard DDL mode. Can be set to "pessimistic" or "optimistic".
+            "owner": "mysql-replica-01",                   # The owner of the lock (the ID of the first source that encounters this DDL operation in the pessimistic mode), which is always empty in the optimistic mode.
+            "DDLs": [                                      # The list of DDL operations corresponding to the lock in the pessimistic mode, which is always empty in the optimistic mode.
+                "USE `shard_db`; ALTER TABLE `shard_db`.`shard_table` DROP COLUMN `c2`;"
+            ],
+            "synced": [                                    # The list of sources that have received all sharding DDL events in the corresponding MySQL instance.
+                "mysql-replica-01"
+            ],
+            "unsynced": [                                  # The list of sources that have not yet received all sharding DDL events in the corresponding MySQL instance.
+                "mysql-replica-02"
+            ]
+        }
+    ]
+}
+```
 
 </details>
 
@@ -92,21 +96,23 @@ shard-ddl-lock test
 shard-ddl-lock unlock -h
 ```
 
-    Unlock un-resolved DDL locks forcely
+```
+Unlock un-resolved DDL locks forcely
 
-    Usage:
-      dmctl shard-ddl-lock unlock <lock-id> [flags]
+Usage:
+  dmctl shard-ddl-lock unlock <lock-id> [flags]
 
-    Flags:
-      -a, --action string     accept skip/exec values which means whether to skip or execute ddls (default "skip")
-      -d, --database string   database name of the table
-      -f, --force-remove      force to remove DDL lock
-      -h, --help              help for unlock
-      -o, --owner string      source to replace the default owner
-      -t, --table string      table name
+Flags:
+  -a, --action string     accept skip/exec values which means whether to skip or execute ddls (default "skip")
+  -d, --database string   database name of the table
+  -f, --force-remove      force to remove DDL lock
+  -h, --help              help for unlock
+  -o, --owner string      source to replace the default owner
+  -t, --table string      table name
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+```
 
 `shard-ddl-lock unlock`は次の引数を受け入れます:
 
@@ -132,10 +138,12 @@ shard-ddl-lock unlock -h
 shard-ddl-lock unlock test-`shard_db`.`shard_table`
 ```
 
-    {
-        "result": true,                                        # The result of the unlocking operation.
-        "msg": "",                                             # The additional message for the failure to unlock the lock.
-    }
+```
+{
+    "result": true,                                        # The result of the unlocking operation.
+    "msg": "",                                             # The additional message for the failure to unlock the lock.
+}
+```
 
 ## サポートされているシナリオ {#supported-scenarios}
 
@@ -231,9 +239,11 @@ MySQLとDMの操作プロセスは次のとおりです。
         shard-ddl-lock unlock test-`shard_db`.`shard_table`
         ```
 
-            {
-                "result": true,
-                "msg": ""
+        ```
+        {
+            "result": true,
+            "msg": ""
+        ```
 
 7.  `shard-ddl-lock`を使用して、DDL ロックが正常に解除されたかどうかを確認します。
 

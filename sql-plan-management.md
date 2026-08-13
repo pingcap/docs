@@ -252,16 +252,18 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOr
 
     以下は`statements_summary`のクエリ結果例の一部です。
 
-        SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
-        ...........
-              DIGEST_TEXT: select * from `t` where `a` = ?
-        ...........
-              PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
-                     PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
-                            TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
-                            └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-                              └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-              BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
+    ```
+    SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
+    ...........
+          DIGEST_TEXT: select * from `t` where `a` = ?
+    ...........
+          PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
+                 PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
+                        TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
+                        └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+                          └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+          BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
+    ```
 
     この例では、 Plan Digest に対応する実行計画が`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`であることがわかります。
 
@@ -277,28 +279,32 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST StringLiteralOr
 SHOW BINDINGS\G
 ```
 
-    *************************** 1. row ***************************
-    Original_sql: select * from `test` . `t` where `a` = ?
-        Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` = 1
-           ...........
-      Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
-     Plan_digest:
-    1 row in set (0.01 sec)
+```
+*************************** 1. row ***************************
+Original_sql: select * from `test` . `t` where `a` = ?
+    Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `idx_a`)*/ * FROM `test`.`t` WHERE `a` = 1
+       ...........
+  Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
+ Plan_digest:
+1 row in set (0.01 sec)
 
-    ERROR:
-    No query specified
+ERROR:
+No query specified
+```
 
 ```sql
 SELECT * FROM t WHERE a = 1;
 SELECT @@LAST_PLAN_FROM_BINDING;
 ```
 
-    +--------------------------+
-    | @@LAST_PLAN_FROM_BINDING |
-    +--------------------------+
-    |                        1 |
-    +--------------------------+
-    1 row in set (0.00 sec)
+```
++--------------------------+
+| @@LAST_PLAN_FROM_BINDING |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.00 sec)
+```
 
 ### バインディングを削除する {#remove-a-binding}
 
@@ -496,12 +502,14 @@ ORDER BY SUM(exec_count) DESC LIMIT 100;                       -- Top 100 high-f
 
 特定のフィルタリング条件を適用して基準を満たすクエリを取得することで、対応する`binding_stmt`列のステートメントを直接実行してバインディングを作成できます。
 
-    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-    | query                                       | exec_count | plan_hint                                                                   | binding_stmt                                                                                                            |
-    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
-    | select * from `t` where `a` = ? and `b` = ? |        401 | use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`) | create global binding from history using plan digest "0d6e97fb1191bbd08dddefa7bd007ec0c422b1416b152662768f43e64a9958a6" |
-    | select * from `t` where `b` = ? and `c` = ? |        104 | use_index(@`sel_1` `test`.`t` `b`), no_order_index(@`sel_1` `test`.`t` `b`) | create global binding from history using plan digest "80c2aa0aa7e6d3205755823aa8c6165092c8521fb74c06a9204b8d35fc037dd9" |
-    +---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+```
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+| query                                       | exec_count | plan_hint                                                                   | binding_stmt                                                                                                            |
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+| select * from `t` where `a` = ? and `b` = ? |        401 | use_index(@`sel_1` `test`.`t` `a`), no_order_index(@`sel_1` `test`.`t` `a`) | create global binding from history using plan digest "0d6e97fb1191bbd08dddefa7bd007ec0c422b1416b152662768f43e64a9958a6" |
+| select * from `t` where `b` = ? and `c` = ? |        104 | use_index(@`sel_1` `test`.`t` `b`), no_order_index(@`sel_1` `test`.`t` `b`) | create global binding from history using plan digest "80c2aa0aa7e6d3205755823aa8c6165092c8521fb74c06a9204b8d35fc037dd9" |
++---------------------------------------------+------------+-----------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------+
+```
 
 ## データベース間のバインディング {#cross-database-binding}
 
@@ -706,13 +714,15 @@ TiDB クラスターをアップグレードする前に、次の手順を実行
 
     -   キャプチャされたバインディングを保持するかどうかを決定します。
 
-            -- View the plan with the binding enabled
-            SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
-            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+        ```
+        -- View the plan with the binding enabled
+        SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
+        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
 
-            -- View the plan with the binding disabled
-            SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
-            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+        -- View the plan with the binding disabled
+        SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
+        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+        ```
 
         -   実行計画に一貫性がある場合は、バインディングを安全に削除できます。
 

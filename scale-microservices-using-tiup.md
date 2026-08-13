@@ -124,39 +124,41 @@ tiup cluster display <cluster-name>
 tiup cluster display <cluster-name>
 ```
 
-    Starting /root/.tiup/components/cluster/v1.16/cluster display <cluster-name>
+```
+Starting /root/.tiup/components/cluster/v1.16/cluster display <cluster-name>
 
-    TiDB Cluster: <cluster-name>
+TiDB Cluster: <cluster-name>
 
-    TiDB Version: v8.5.3
+TiDB Version: v8.5.3
 
-    ID       Role         Host    Ports                            Status  Data Dir        Deploy Dir
+ID       Role         Host    Ports                            Status  Data Dir        Deploy Dir
 
-    --       ----         ----      -----                            ------  --------        ----------
+--       ----         ----      -----                            ------  --------        ----------
 
-    10.0.1.4:2379  pd           10.0.1.4    2379/2380                        Healthy data/pd-2379      deploy/pd-2379
+10.0.1.4:2379  pd           10.0.1.4    2379/2380                        Healthy data/pd-2379      deploy/pd-2379
 
-    10.0.1.1:20160 tikv         10.0.1.1    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
+10.0.1.1:20160 tikv         10.0.1.1    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
 
-    10.0.1.2:20160 tikv         10.0.1.2    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
+10.0.1.2:20160 tikv         10.0.1.2    20160/20180                      Up      data/tikv-20160     deploy/tikv-20160
 
-    10.0.1.5:20160 tikv        10.0.1.5    20160/20180                     Up      data/tikv-20160     deploy/tikv-20160
+10.0.1.5:20160 tikv        10.0.1.5    20160/20180                     Up      data/tikv-20160     deploy/tikv-20160
 
-    10.0.1.4:4000  tidb        10.0.1.4    4000/10080                      Up      -                 deploy/tidb-4000
+10.0.1.4:4000  tidb        10.0.1.4    4000/10080                      Up      -                 deploy/tidb-4000
 
-    10.0.1.5:9090  prometheus   10.0.1.5    9090                             Up      data/prometheus-9090  deploy/prometheus-9090
+10.0.1.5:9090  prometheus   10.0.1.5    9090                             Up      data/prometheus-9090  deploy/prometheus-9090
 
-    10.0.1.5:3000  grafana      10.0.1.5    3000                             Up      -            deploy/grafana-3000
+10.0.1.5:3000  grafana      10.0.1.5    3000                             Up      -            deploy/grafana-3000
 
-    10.0.1.5:9093  alertmanager 10.0.1.5    9093/9094                        Up      data/alertmanager-9093 deploy/alertmanager-9093
+10.0.1.5:9093  alertmanager 10.0.1.5    9093/9094                        Up      data/alertmanager-9093 deploy/alertmanager-9093
 
-    10.0.1.6:3379  tso          10.0.1.6    3379                            Up|P     data/tso-3379     deploy/tso-3379
+10.0.1.6:3379  tso          10.0.1.6    3379                            Up|P     data/tso-3379     deploy/tso-3379
 
-    10.0.1.8:3379  tso          10.0.1.8    3379                            Up       data/tso-3379    deploy/tso-3379
+10.0.1.8:3379  tso          10.0.1.8    3379                            Up       data/tso-3379    deploy/tso-3379
 
-    10.0.1.7:3379  scheduling   10.0.1.7    3379                            Up|P     data/scheduling-3379     deploy/scheduling-3379
+10.0.1.7:3379  scheduling   10.0.1.7    3379                            Up|P     data/scheduling-3379     deploy/scheduling-3379
 
-    10.0.1.9:3379  scheduling   10.0.1.9    3379                            Up       data/scheduling-3379     deploy/scheduling-3379
+10.0.1.9:3379  scheduling   10.0.1.9    3379                            Up       data/scheduling-3379     deploy/scheduling-3379
+```
 
 ### 2. スケールインコマンドを実行する {#2-run-scale-in-commands}
 

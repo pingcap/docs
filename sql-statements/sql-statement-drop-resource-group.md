@@ -71,7 +71,9 @@ DROP RESOURCE GROUP IF EXISTS rg1;
 Query OK, 1 rows affected (0.09 sec)
 ```
 
-    SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
+```
+SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
+```
 
 ```sql
 Empty set (0.00 sec)

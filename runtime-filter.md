@@ -32,19 +32,21 @@ WHERE ss_date_sk = d_date_sk
 
 ハッシュ結合の実行計画は通常次のようになります。
 
-                     +-------------------+
-                     | PhysicalHashJoin  |
-            +------->|                   |<------+
-            |        +-------------------+       |
-            |                                    |
-            |                                    |
-      100w  |                                    | 365
-            |                                    |
-            |                                    |
-    +-------+-------+                   +--------+-------+
-    | TableFullScan |                   | TableFullScan  |
-    |  store_sales  |                   |    date_dim    |
-    +---------------+                   +----------------+
+```
+                 +-------------------+
+                 | PhysicalHashJoin  |
+        +------->|                   |<------+
+        |        +-------------------+       |
+        |                                    |
+        |                                    |
+  100w  |                                    | 365
+        |                                    |
+        |                                    |
++-------+-------+                   +--------+-------+
+| TableFullScan |                   | TableFullScan  |
+|  store_sales  |                   |    date_dim    |
++---------------+                   +----------------+
+```
 
 *（上図では交換ノードとその他のノードを省略しています。）*
 
@@ -57,18 +59,20 @@ WHERE ss_date_sk = d_date_sk
 
 <!---->
 
-                             2. Build RF values
-                +-------->+-------------------+
-                |         |PhysicalHashJoin   |<-----+
-                |    +----+                   |      |
-    4. After RF |    |    +-------------------+      | 1. Scan T2
-        5000    |    |3. Send RF                     |      365
-                |    | filter data                   |
-                |    |                               |
-          +-----+----v------+                +-------+--------+
-          |  TableFullScan  |                | TableFullScan  |
-          |  store_sales    |                |    date_dim    |
-          +-----------------+                +----------------+
+```
+                         2. Build RF values
+            +-------->+-------------------+
+            |         |PhysicalHashJoin   |<-----+
+            |    +----+                   |      |
+4. After RF |    |    +-------------------+      | 1. Scan T2
+    5000    |    |3. Send RF                     |      365
+            |    | filter data                   |
+            |    |                               |
+      +-----+----v------+                +-------+--------+
+      |  TableFullScan  |                | TableFullScan  |
+      |  store_sales    |                |    date_dim    |
+      +-----------------+                +----------------+
+```
 
 *(RFはランタイムフィルターの略です)*
 
@@ -140,25 +144,29 @@ WHERE d_date = '2002-2-01' AND
 
 ランタイム フィルターが有効になると、対応するランタイム フィルターがノード`HashJoin`とノード`TableScan`にマウントされ、ランタイム フィルターが正常に適用されたことが示されます。
 
-    TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
-    HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
+```
+TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
+HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
+```
 
 完全なクエリ実行計画は次のとおりです。
 
-    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-    | id                                     | estRows     | task         | access object       | operator info                                                                                                                                 |
-    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-    | TableReader_53                         | 37343.19    | root         |                     | MppVersion: 1, data:ExchangeSender_52                                                                                                         |
-    | └─ExchangeSender_52                    | 37343.19    | mpp[tiflash] |                     | ExchangeType: PassThrough                                                                                                                     |
-    |   └─Projection_51                      | 37343.19    | mpp[tiflash] |                     | tpcds50.catalog_sales.cs_ship_date_sk                                                                                                         |
-    |     └─HashJoin_48                      | 37343.19    | mpp[tiflash] |                     | inner join, equal:[eq(tpcds50.date_dim.d_date_sk, tpcds50.catalog_sales.cs_ship_date_sk)], runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
-    |       ├─ExchangeReceiver_29(Build)     | 1.00        | mpp[tiflash] |                     |                                                                                                                                               |
-    |       │ └─ExchangeSender_28            | 1.00        | mpp[tiflash] |                     | ExchangeType: Broadcast, Compression: FAST                                                                                                    |
-    |       │   └─TableFullScan_26           | 1.00        | mpp[tiflash] | table:date_dim      | pushed down filter:eq(tpcds50.date_dim.d_date, 2002-02-01 00:00:00.000000), keep order:false                                                  |
-    |       └─Selection_31(Probe)            | 71638034.00 | mpp[tiflash] |                     | not(isnull(tpcds50.catalog_sales.cs_ship_date_sk))                                                                                            |
-    |         └─TableFullScan_30             | 71997669.00 | mpp[tiflash] | table:catalog_sales | pushed down filter:empty, keep order:false, runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk                                     |
-    +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
-    9 rows in set (0.01 sec)
+```
++----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| id                                     | estRows     | task         | access object       | operator info                                                                                                                                 |
++----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| TableReader_53                         | 37343.19    | root         |                     | MppVersion: 1, data:ExchangeSender_52                                                                                                         |
+| └─ExchangeSender_52                    | 37343.19    | mpp[tiflash] |                     | ExchangeType: PassThrough                                                                                                                     |
+|   └─Projection_51                      | 37343.19    | mpp[tiflash] |                     | tpcds50.catalog_sales.cs_ship_date_sk                                                                                                         |
+|     └─HashJoin_48                      | 37343.19    | mpp[tiflash] |                     | inner join, equal:[eq(tpcds50.date_dim.d_date_sk, tpcds50.catalog_sales.cs_ship_date_sk)], runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
+|       ├─ExchangeReceiver_29(Build)     | 1.00        | mpp[tiflash] |                     |                                                                                                                                               |
+|       │ └─ExchangeSender_28            | 1.00        | mpp[tiflash] |                     | ExchangeType: Broadcast, Compression: FAST                                                                                                    |
+|       │   └─TableFullScan_26           | 1.00        | mpp[tiflash] | table:date_dim      | pushed down filter:eq(tpcds50.date_dim.d_date, 2002-02-01 00:00:00.000000), keep order:false                                                  |
+|       └─Selection_31(Probe)            | 71638034.00 | mpp[tiflash] |                     | not(isnull(tpcds50.catalog_sales.cs_ship_date_sk))                                                                                            |
+|         └─TableFullScan_30             | 71997669.00 | mpp[tiflash] | table:catalog_sales | pushed down filter:empty, keep order:false, runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk                                     |
++----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+9 rows in set (0.01 sec)
+```
 
 ここで、SQL クエリを実行すると、ランタイム フィルターが適用されます。
 

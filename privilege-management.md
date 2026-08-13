@@ -38,36 +38,46 @@ GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 SET sql_mode=DEFAULT;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SELECT @@sql_mode;
 ```
 
-    +-------------------------------------------------------------------------------------------------------------------------------------------+
-    | @@sql_mode                                                                                                                                |
-    +-------------------------------------------------------------------------------------------------------------------------------------------+
-    | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
-    +-------------------------------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++-------------------------------------------------------------------------------------------------------------------------------------------+
+| @@sql_mode                                                                                                                                |
++-------------------------------------------------------------------------------------------------------------------------------------------+
+| ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |
++-------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT * FROM mysql.user WHERE user='idontexist';
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 ```sql
 GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 ```
 
-    ERROR 1105 (HY000): You are not allowed to create a user with GRANT
+```
+ERROR 1105 (HY000): You are not allowed to create a user with GRANT
+```
 
 ```sql
 SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 次の例では、SQL モード`idontexist` `NO_AUTO_CREATE_USER`が空のパスワードで自動的に作成されます。これはセキュリティ上のリスクとなるため**推奨されません**。ユーザー名のスペルミスがあると、空のパスワードで新しいユーザーが作成されてしまいます。
 
@@ -75,41 +85,51 @@ SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SELECT @@sql_mode;
 ```
 
-    +-----------------------------------------------------------------------------------------------------------------------+
-    | @@sql_mode                                                                                                            |
-    +-----------------------------------------------------------------------------------------------------------------------+
-    | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION |
-    +-----------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
+```
++-----------------------------------------------------------------------------------------------------------------------+
+| @@sql_mode                                                                                                            |
++-----------------------------------------------------------------------------------------------------------------------+
+| ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION |
++-----------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ```sql
 SELECT * FROM mysql.user WHERE user='idontexist';
 ```
 
-    Empty set (0.00 sec)
+```
+Empty set (0.00 sec)
+```
 
 ```sql
 GRANT ALL PRIVILEGES ON test.* TO 'idontexist';
 ```
 
-    Query OK, 1 row affected (0.05 sec)
+```
+Query OK, 1 row affected (0.05 sec)
+```
 
 ```sql
 SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 ```
 
-    +------------+------+-----------------------+
-    | user       | host | authentication_string |
-    +------------+------+-----------------------+
-    | idontexist | %    |                       |
-    +------------+------+-----------------------+
-    1 row in set (0.01 sec)
+```
++------------+------+-----------------------+
+| user       | host | authentication_string |
++------------+------+-----------------------+
+| idontexist | %    |                       |
++------------+------+-----------------------+
+1 row in set (0.01 sec)
+```
 
 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md)コマンドでは、あいまい一致を使用してデータベースに権限を付与できます。
 
@@ -117,18 +137,22 @@ SELECT user,host,authentication_string FROM mysql.user WHERE user='idontexist';
 GRANT ALL PRIVILEGES ON `te%`.* TO genius;
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 ```sql
 SELECT user,host,db FROM mysql.db WHERE user='genius';
 ```
 
-    +--------|------|-----+
-    | user   | host | db  |
-    +--------|------|-----+
-    | genius | %    | te% |
-    +--------|------|-----+
-    1 row in set (0.00 sec)
+```
++--------|------|-----+
+| user   | host | db  |
++--------|------|-----+
+| genius | %    | te% |
++--------|------|-----+
+1 row in set (0.00 sec)
+```
 
 この例では、 `%`内の`te%`により、 `te`で始まるすべてのデータベースに権限が付与されます。
 
@@ -150,7 +174,9 @@ REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
 ```
 
-    ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+```
+ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
+```
 
 あいまい一致、エスケープシーケンス、文字列、識別子について：
 
@@ -158,7 +184,9 @@ REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
 GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 この例では、完全一致を使用して`te%`という名前のデータベースを検索します。 `%`は`\`エスケープ文字を使用しているため、 `%`はワイルドカードとして扱われません。
 
@@ -168,15 +196,19 @@ GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
 ```
 
-    ERROR 1064 (42000): You have an error in your SQL syntax; check the
-    manual that corresponds to your MySQL server version for the right
-    syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
+```
+ERROR 1064 (42000): You have an error in your SQL syntax; check the
+manual that corresponds to your MySQL server version for the right
+syntax to use near ''test'.* to 'genius'@'localhost'' at line 1
+```
 
 ```sql
 GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 ```
 
-    Query OK, 0 rows affected (0.00 sec)
+```
+Query OK, 0 rows affected (0.00 sec)
+```
 
 テーブル名として特別なキーワードを使用する場合は、バッククォート（``）で囲みます。例：
 
@@ -184,7 +216,9 @@ GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 CREATE TABLE `select` (id int);
 ```
 
-    Query OK, 0 rows affected (0.27 sec)
+```
+Query OK, 0 rows affected (0.27 sec)
+```
 
 ### ユーザーに付与された権限を確認する {#check-privileges-granted-to-users}
 
@@ -194,11 +228,13 @@ CREATE TABLE `select` (id int);
 SHOW GRANTS; -- show grants for the current user
 ```
 
-    +-------------------------------------------------------------+
-    | Grants for User                                             |
-    +-------------------------------------------------------------+
-    | GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
-    +-------------------------------------------------------------+
+```
++-------------------------------------------------------------+
+| Grants for User                                             |
++-------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION |
++-------------------------------------------------------------+
+```
 
 ```sql
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
@@ -218,12 +254,14 @@ GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
 SHOW GRANTS FOR `rw_user`@`192.168.%`;
 ```
 
-    +------------------------------------------------------------------+
-    | Grants for rw_user@192.168.%                                     |
-    +------------------------------------------------------------------+
-    | GRANT Select ON *.* TO 'rw_user'@'192.168.%'                     |
-    | GRANT Insert,Update ON test.write_table TO 'rw_user'@'192.168.%' |
-    +------------------------------------------------------------------+
+```
++------------------------------------------------------------------+
+| Grants for rw_user@192.168.%                                     |
++------------------------------------------------------------------+
+| GRANT Select ON *.* TO 'rw_user'@'192.168.%'                     |
+| GRANT Insert,Update ON test.write_table TO 'rw_user'@'192.168.%' |
++------------------------------------------------------------------+
+```
 
 ### 動的な権限 {#dynamic-privileges}
 
@@ -261,42 +299,44 @@ TiDBユーザーの権限は`INFORMATION_SCHEMA.USER_PRIVILEGES`テーブルで�
 SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 ```
 
-    +------------+---------------+-------------------------+--------------+
-    | GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
-    +------------+---------------+-------------------------+--------------+
-    | 'root'@'%' | def           | Select                  | YES          |
-    | 'root'@'%' | def           | Insert                  | YES          |
-    | 'root'@'%' | def           | Update                  | YES          |
-    | 'root'@'%' | def           | Delete                  | YES          |
-    | 'root'@'%' | def           | Create                  | YES          |
-    | 'root'@'%' | def           | Drop                    | YES          |
-    | 'root'@'%' | def           | Process                 | YES          |
-    | 'root'@'%' | def           | References              | YES          |
-    | 'root'@'%' | def           | Alter                   | YES          |
-    | 'root'@'%' | def           | Show Databases          | YES          |
-    | 'root'@'%' | def           | Super                   | YES          |
-    | 'root'@'%' | def           | Execute                 | YES          |
-    | 'root'@'%' | def           | Index                   | YES          |
-    | 'root'@'%' | def           | Create User             | YES          |
-    | 'root'@'%' | def           | Create Tablespace       | YES          |
-    | 'root'@'%' | def           | Trigger                 | YES          |
-    | 'root'@'%' | def           | Create View             | YES          |
-    | 'root'@'%' | def           | Show View               | YES          |
-    | 'root'@'%' | def           | Create Role             | YES          |
-    | 'root'@'%' | def           | Drop Role               | YES          |
-    | 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
-    | 'root'@'%' | def           | LOCK TABLES             | YES          |
-    | 'root'@'%' | def           | CREATE ROUTINE          | YES          |
-    | 'root'@'%' | def           | ALTER ROUTINE           | YES          |
-    | 'root'@'%' | def           | EVENT                   | YES          |
-    | 'root'@'%' | def           | SHUTDOWN                | YES          |
-    | 'root'@'%' | def           | RELOAD                  | YES          |
-    | 'root'@'%' | def           | FILE                    | YES          |
-    | 'root'@'%' | def           | CONFIG                  | YES          |
-    | 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
-    | 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
-    +------------+---------------+-------------------------+--------------+
-    31 rows in set (0.00 sec)
+```
++------------+---------------+-------------------------+--------------+
+| GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
++------------+---------------+-------------------------+--------------+
+| 'root'@'%' | def           | Select                  | YES          |
+| 'root'@'%' | def           | Insert                  | YES          |
+| 'root'@'%' | def           | Update                  | YES          |
+| 'root'@'%' | def           | Delete                  | YES          |
+| 'root'@'%' | def           | Create                  | YES          |
+| 'root'@'%' | def           | Drop                    | YES          |
+| 'root'@'%' | def           | Process                 | YES          |
+| 'root'@'%' | def           | References              | YES          |
+| 'root'@'%' | def           | Alter                   | YES          |
+| 'root'@'%' | def           | Show Databases          | YES          |
+| 'root'@'%' | def           | Super                   | YES          |
+| 'root'@'%' | def           | Execute                 | YES          |
+| 'root'@'%' | def           | Index                   | YES          |
+| 'root'@'%' | def           | Create User             | YES          |
+| 'root'@'%' | def           | Create Tablespace       | YES          |
+| 'root'@'%' | def           | Trigger                 | YES          |
+| 'root'@'%' | def           | Create View             | YES          |
+| 'root'@'%' | def           | Show View               | YES          |
+| 'root'@'%' | def           | Create Role             | YES          |
+| 'root'@'%' | def           | Drop Role               | YES          |
+| 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
+| 'root'@'%' | def           | LOCK TABLES             | YES          |
+| 'root'@'%' | def           | CREATE ROUTINE          | YES          |
+| 'root'@'%' | def           | ALTER ROUTINE           | YES          |
+| 'root'@'%' | def           | EVENT                   | YES          |
+| 'root'@'%' | def           | SHUTDOWN                | YES          |
+| 'root'@'%' | def           | RELOAD                  | YES          |
+| 'root'@'%' | def           | FILE                    | YES          |
+| 'root'@'%' | def           | CONFIG                  | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
++------------+---------------+-------------------------+--------------+
+31 rows in set (0.00 sec)
+```
 
 ### 変更する {#alter}
 
@@ -476,12 +516,14 @@ SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
 SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 ```
 
-    +------|------|-------------|-------------+
-    | User | Host | Select_priv | Insert_priv |
-    +------|------|-------------|-------------+
-    | root | %    | Y           | Y           |
-    +------|------|-------------|-------------+
-    1 row in set (0.00 sec)
+```
++------|------|-------------|-------------+
+| User | Host | Select_priv | Insert_priv |
++------|------|-------------|-------------+
+| root | %    | Y           | Y           |
++------|------|-------------|-------------+
+1 row in set (0.00 sec)
+```
 
 このレコードでは、 `Host`と`User`は`root`ユーザーから任意のホスト ( `%` ) から送信された接続要求を受け入れることができると判断します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバルな`Select`および`Insert`権限を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
 

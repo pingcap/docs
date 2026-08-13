@@ -90,7 +90,9 @@ ALTER SEQUENCE sequence_name
 CREATE SEQUENCE s1;
 ```
 
-    Query OK, 0 rows affected (0.15 sec)
+```
+Query OK, 0 rows affected (0.15 sec)
+```
 
 次の SQL ステートメントを 2 回実行して、シーケンスから次の 2 つの値を取得します。
 
@@ -98,23 +100,27 @@ CREATE SEQUENCE s1;
 SELECT NEXTVAL(s1);
 ```
 
-    +-------------+
-    | NEXTVAL(s1) |
-    +-------------+
-    |           1 |
-    +-------------+
-    1 row in set (0.01 sec)
+```
++-------------+
+| NEXTVAL(s1) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.01 sec)
+```
 
 ```sql
 SELECT NEXTVAL(s1);
 ```
 
-    +-------------+
-    | NEXTVAL(s1) |
-    +-------------+
-    |           2 |
-    +-------------+
-    1 row in set (0.00 sec)
+```
++-------------+
+| NEXTVAL(s1) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+```
 
 シーケンスの増分を`2`に変更します。
 
@@ -122,7 +128,9 @@ SELECT NEXTVAL(s1);
 ALTER SEQUENCE s1 INCREMENT=2;
 ```
 
-    Query OK, 0 rows affected (0.18 sec)
+```
+Query OK, 0 rows affected (0.18 sec)
+```
 
 ここで、シーケンスから次の 2 つの値を再度取得します。
 
@@ -130,23 +138,27 @@ ALTER SEQUENCE s1 INCREMENT=2;
 SELECT NEXTVAL(s1);
 ```
 
-    +-------------+
-    | NEXTVAL(s1) |
-    +-------------+
-    |        1001 |
-    +-------------+
-    1 row in set (0.02 sec)
+```
++-------------+
+| NEXTVAL(s1) |
++-------------+
+|        1001 |
++-------------+
+1 row in set (0.02 sec)
+```
 
 ```sql
 SELECT NEXTVAL(s1);
 ```
 
-    +-------------+
-    | NEXTVAL(s1) |
-    +-------------+
-    |        1003 |
-    +-------------+
-    1 row in set (0.00 sec)
+```
++-------------+
+| NEXTVAL(s1) |
++-------------+
+|        1003 |
++-------------+
+1 row in set (0.00 sec)
+```
 
 出力からわかるように、 `ALTER SEQUENCE`ステートメントの後に値が 2 増加します。
 
@@ -156,22 +168,28 @@ SELECT NEXTVAL(s1);
 CREATE SEQUENCE s2 MAXVALUE=10;
 ```
 
-    Query OK, 0 rows affected (0.17 sec)
+```
+Query OK, 0 rows affected (0.17 sec)
+```
 
 ```sql
 ALTER SEQUENCE s2 MAXVALUE=100;
 ```
 
-    Query OK, 0 rows affected (0.15 sec)
+```
+Query OK, 0 rows affected (0.15 sec)
+```
 
 ```sql
 SHOW CREATE SEQUENCE s2\G
 ```
 
-    *************************** 1. row ***************************
-           Sequence: s2
-    Create Sequence: CREATE SEQUENCE `s2` start with 1 minvalue 1 maxvalue 100 increment by 1 cache 1000 nocycle ENGINE=InnoDB
-    1 row in set (0.00 sec)
+```
+*************************** 1. row ***************************
+       Sequence: s2
+Create Sequence: CREATE SEQUENCE `s2` start with 1 minvalue 1 maxvalue 100 increment by 1 cache 1000 nocycle ENGINE=InnoDB
+1 row in set (0.00 sec)
+```
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
@@ -181,9 +199,11 @@ SHOW CREATE SEQUENCE s2\G
 
 例えば：
 
-    1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
-    SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
-    7, 9, 11, ...           // Subsequent values still follow the progression rule.
+```
+1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
+SELECT SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
+7, 9, 11, ...           // Subsequent values still follow the progression rule.
+```
 
 `CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメータの値であり、後続のラウンドの初期値は`MinValue` ( `INCREMENT` &gt; 0) または`MaxValue` ( `INCREMENT` &lt; 0) の値です。
 

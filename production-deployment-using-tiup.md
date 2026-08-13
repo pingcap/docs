@@ -80,11 +80,15 @@ TiUPを使用してTiDBクラスタをオフラインでデプロイするには
 
 **方法 1** : 以下のリンクを使用して、対象の TiDB バージョンのオフライン バイナリ パッケージ (TiUPオフライン パッケージを含む) をダウンロードします。サーバーとツールキット パッケージの両方をダウンロードする必要があります。ダウンロードすると[プライバシーポリシー](https://www.pingcap.com/privacy-policy/)次の規約に同意したことになります。 。
 
-    https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+```
+https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
+```
 
 <!---->
 
-    https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
+https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
 
 > **Tip:**
 >

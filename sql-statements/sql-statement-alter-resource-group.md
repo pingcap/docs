@@ -102,7 +102,9 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 DROP RESOURCE GROUP IF EXISTS rg1;
 ```
 
-    Query OK, 0 rows affected (0.22 sec)
+```
+Query OK, 0 rows affected (0.22 sec)
+```
 
 ```sql
 CREATE RESOURCE GROUP IF NOT EXISTS rg1

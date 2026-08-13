@@ -50,23 +50,25 @@ DMが増分レプリケーションを実行する際、まず上流のbinlogを
 help binlog-schema
 ```
 
-    manage or show table schema in schema tracker
+```
+manage or show table schema in schema tracker
 
-    Usage:
-      dmctl binlog-schema [command]
+Usage:
+  dmctl binlog-schema [command]
 
-    Available Commands:
-      delete      delete table schema structure
-      list        show table schema structure
-      update      update tables schema structure
+Available Commands:
+  delete      delete table schema structure
+  list        show table schema structure
+  update      update tables schema structure
 
-    Flags:
-      -h, --help   help for binlog-schema
+Flags:
+  -h, --help   help for binlog-schema
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+Global Flags:
+  -s, --source strings   MySQL Source ID.
 
-    Use "dmctl binlog-schema [command] --help" for more information about a command.
+Use "dmctl binlog-schema [command] --help" for more information about a command.
+```
 
 > **Note:**
 >
@@ -92,16 +94,18 @@ help binlog-schema
 help binlog-schema list
 ```
 
-    show table schema structure
+```
+show table schema structure
 
-    Usage:
-      dmctl binlog-schema list <task-name> <database> <table> [flags]
+Usage:
+  dmctl binlog-schema list <task-name> <database> <table> [flags]
 
-    Flags:
-      -h, --help   help for list
+Flags:
+  -h, --help   help for list
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+```
 
 `db_single`タスク内の`mysql-replica-01` MySQL ソースに対応する`` `db_single`.`t1` ``テーブルのテーブル スキーマを取得する場合は、次のコマンドを実行します。
 
@@ -109,18 +113,20 @@ help binlog-schema list
 binlog-schema list -s mysql-replica-01 task_single db_single t1
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "CREATE TABLE `t1` ( `c1` int NOT NULL, `c2` int DEFAULT NULL, PRIMARY KEY (`c1`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin",
-                "source": "mysql-replica-01",
-                "worker": "127.0.0.1:8262"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "CREATE TABLE `t1` ( `c1` int NOT NULL, `c2` int DEFAULT NULL, PRIMARY KEY (`c1`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin",
+            "source": "mysql-replica-01",
+            "worker": "127.0.0.1:8262"
+        }
+    ]
+}
+```
 
 ### テーブルスキーマを更新する {#update-the-table-schema}
 
@@ -130,20 +136,22 @@ binlog-schema list -s mysql-replica-01 task_single db_single t1
 help binlog-schema update
 ```
 
-    update tables schema structure
+```
+update tables schema structure
 
-    Usage:
-      dmctl binlog-schema update <task-name> <database> <table> [schema-file] [flags]
+Usage:
+  dmctl binlog-schema update <task-name> <database> <table> [schema-file] [flags]
 
-    Flags:
-          --flush         flush the table info and checkpoint immediately (default true)
-          --from-source   use the schema from upstream database as the schema of the specified tables
-          --from-target   use the schema from downstream database as the schema of the specified tables
-      -h, --help          help for update
-          --sync          sync the table info to master to resolve shard ddl lock, only for optimistic mode now (default true)
+Flags:
+      --flush         flush the table info and checkpoint immediately (default true)
+      --from-source   use the schema from upstream database as the schema of the specified tables
+      --from-target   use the schema from downstream database as the schema of the specified tables
+  -h, --help          help for update
+      --sync          sync the table info to master to resolve shard ddl lock, only for optimistic mode now (default true)
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+```
 
 `db_single`タスクで`mysql-replica-01` MySQL ソースに対応する`` `db_single`.`t1` ``テーブルのテーブルスキーマを次のように設定する場合:
 
@@ -161,18 +169,20 @@ CREATE TABLE `t1` (
 operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "127.0.0.1:8262"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "127.0.0.1:8262"
+        }
+    ]
+}
+```
 
 ### テーブルスキーマを削除する {#delete-the-table-schema}
 
@@ -182,16 +192,18 @@ operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.
 help binlog-schema delete
 ```
 
-    delete table schema structure
+```
+delete table schema structure
 
-    Usage:
-      dmctl binlog-schema delete <task-name> <database> <table> [flags]
+Usage:
+  dmctl binlog-schema delete <task-name> <database> <table> [flags]
 
-    Flags:
-      -h, --help   help for delete
+Flags:
+  -h, --help   help for delete
 
-    Global Flags:
-      -s, --source strings   MySQL Source ID.
+Global Flags:
+  -s, --source strings   MySQL Source ID.
+```
 
 > **Note:**
 >
@@ -207,15 +219,17 @@ help binlog-schema delete
 binlog-schema delete -s mysql-replica-01 task_single db_single t1
 ```
 
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "127.0.0.1:8262"
-            }
-        ]
-    }
+```
+{
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "127.0.0.1:8262"
+        }
+    ]
+}
+```

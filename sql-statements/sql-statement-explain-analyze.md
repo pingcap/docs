@@ -110,7 +110,9 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 `TableReader`演算子の実行情報は、通常、次のようになります。
 
-    cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
+```
+cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, copr_cache_hit_ratio: 0.00}, rpc_info:{Cop:{num_rpc:6, total_time:5.313996ms}}
+```
 
 -   `cop_task` : `cop`のタスクの実行情報が含まれます。例:
     -   `num` : cop タスクの数。
@@ -124,7 +126,9 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 `Insert`演算子の実行情報は、通常、次のようになります。
 
-    prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
+```
+prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}
+```
 
 -   `prepare` : 式、デフォルト値、AUTO_INCREMENT値の計算など、書き込みの準備にかかる時間。
 -   `check_insert` ：この情報は通常、 `insert ignore`文目と`insert on duplicate`文目で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
@@ -147,7 +151,9 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 `IndexJoin`演算子には次の実行情報が含まれています。
 
-    inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
+```
+inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4.164310088s, build:35.219574ms}, probe:53.574945ms
+```
 
 -   `Inner` : 内部ワーカーの実行情報:
     -   `total` : 内部ワーカーによって消費された合計時間。
@@ -193,7 +199,9 @@ inner:{total:4.429220003s, concurrency:5, task:17, construct:96.207725ms, fetch:
 
 `HashJoin`演算子には次の実行情報が含まれています。
 
-    build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
+```
+build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, probe:{concurrency:5, total:857.162518ms, max:171.48271ms, probe:125.341665ms, fetch:731.820853ms}
+```
 
 -   `build_hash_table` : 内部テーブルのデータを読み取り、ハッシュテーブルの実行情報を構築します。
     -   `total` : 合計消費時間。
@@ -237,7 +245,9 @@ tiflash_scan: {
 
 悲観的トランザクションでDML文が実行されると、演算子の実行情報に`lock_keys`の実行情報も含まれる場合があります。例:
 
-    lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
+```
+lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
+```
 
 -   `time` : `lock_keys`操作を実行する合計時間。
 -   `region` : `lock_keys`操作の実行に関係する領域の数。
@@ -249,7 +259,9 @@ tiflash_scan: {
 
 `autocommit=1`のトランザクションで書き込み型DML文が実行されると、書き込み演算子の実行情報にはトランザクションコミットの実行時間情報も含まれます。例:
 
-    commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
+```
+commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
+```
 
 -   `prewrite` : トランザクションの 2PC コミットの`prewrite`フェーズに費やされた時間。
 -   `wait_prewrite_binlog:` : 事前書き込みBinlog の書き込みを待機するのにかかる時間。
@@ -262,7 +274,9 @@ tiflash_scan: {
 
 [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 、TiDB リソース制御で定義されているシステムリソースの統一された抽象単位です。最上位演算子の`execution info`この特定の SQL 文の全体的な RU 消費量を示します。
 
-    RU:273.842670
+```
+RU:273.842670
+```
 
 > **Note:**
 >
@@ -302,12 +316,14 @@ RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列の他の値から計算�
 
 TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`BeforeKVRequest()`と`AfterKVRequest()`合計になります。つまり、次のようになります。
 
-    before key/value request is processed:
-          consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
+```
+before key/value request is processed:
+      consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
 
-    after key/value request is processed:
-          consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
-          consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
+after key/value request is processed:
+      consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
+      consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
+```
 
 書き込みとバッチ取得の場合、計算は基本コストが異なりますが、同様です。
 
