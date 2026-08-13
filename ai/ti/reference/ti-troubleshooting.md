@@ -52,7 +52,40 @@ ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-The current Preview cannot regenerate a lost Filesystem token. A remote Filesystem can still be listed, described, or deleted with TiDB Cloud API keys, but its data cannot be read or mounted until a valid known token is supplied.
+If every known token is lost or revoked, use TiDB Cloud API keys to generate another owner token:
+
+```bash
+ti fs generate-file-system-token \
+  --file-system-id "<file-system-id>" \
+  --token-name recovery \
+  --ttl 24h
+```
+
+The new plaintext appears once in the response. Store it securely or add `--store-locally` to select it on the current machine.
+
+## Filesystem token is rejected
+
+A data-plane HTTP 401 cannot distinguish a token that was disabled, expired, refreshed on another machine, or revoked. Inspect remote metadata with TiDB Cloud API keys:
+
+```bash
+ti fs list-file-system-tokens \
+  --file-system-id "<file-system-id>" \
+  --include-expired \
+  --output text
+```
+
+Token names are not unique. Use the immutable `token_id` from this output for enable, disable, or delete operations. Old credentials created or imported without token lifecycle metadata can remain valid, but `ti` cannot safely identify their list row and never guesses a match.
+
+After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. Do not retry with the old token. Generate another owner token through TiDB Cloud credentials.
+
+If token mutation reports `fs.token_mount_active`, use the exact mount path in the error:
+
+```bash
+ti fs drain-file-system --mount-path /path/to/workspace
+ti fs unmount-file-system --mount-path /path/to/workspace
+```
+
+Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
 ## Filesystem selection is missing
 

@@ -21,7 +21,7 @@ Local disks do not provide a shared namespace. Commands such as `scp` and archiv
 
 ## How TiDB Cloud CLI changes the workflow
 
-Both machines select the same TiDB Cloud Filesystem. Data-plane commands and the mounted path address one remote namespace, so a write from either interface becomes visible through the other after it is flushed. Machine B needs only the Filesystem token and region code; the token identifies the Filesystem, so it does not need TiDB Cloud API keys or a copied profile.
+Both machines select the same TiDB Cloud Filesystem with separate owner tokens. Data-plane commands and the mounted path address one remote namespace, so a write from either interface becomes visible through the other after it is flushed. Machine B needs only its Filesystem token and region code; the token identifies the Filesystem, so it does not need TiDB Cloud API keys or a copied profile. Separate tokens let you revoke machine B without interrupting machine A.
 
 ## Prerequisites
 
@@ -37,12 +37,17 @@ ti fs create-file-system --wait > ./filesystem.json
 export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 
+ti fs generate-file-system-token \
+  --file-system-id "$FILE_SYSTEM_ID" \
+  --token-name machine-b \
+  --ttl 720h > ./machine-b-token.json
+
 printf 'from machine A\n' | ti fs copy-file \
   --from-stdin \
   --to-remote /shared/origin.txt
 ```
 
-Transfer the token through a secret manager and communicate the canonical region code. Keep `FILE_SYSTEM_ID` on machine A for control-plane operations, then delete `filesystem.json` after storing the token securely.
+Transfer the `fs_token` from `machine-b-token.json` through a secret manager and communicate the canonical region code. Keep `FILE_SYSTEM_ID` on machine A for control-plane operations, then delete both JSON files after storing their tokens securely.
 
 ## Step 2. Configure machine B in memory
 
@@ -86,13 +91,17 @@ unset TI_FS_TOKEN TI_REGION_CODE
 On machine A:
 
 ```bash
+ti fs list-file-system-tokens --file-system-id "$FILE_SYSTEM_ID" --output text
+ti fs delete-file-system-token \
+  --file-system-id "$FILE_SYSTEM_ID" \
+  --token-id "<machine-b-token-id>"
 ti fs delete-file-system \
   --file-system-id "$FILE_SYSTEM_ID"
 ```
 
 ## Security notes
 
-- The FS token grants owner access. Transfer it as a secret, not in chat or command history.
+- Each FS token grants owner access. Transfer it as a secret, not in chat or command history, and use a separate token for each machine.
 - Concurrent writers can overwrite the same paths; coordinate ownership at the workflow level.
 - Do not terminate a machine before graceful unmount completes. Use an explicit drain only when you need remote durability while keeping the FUSE mount online.
 

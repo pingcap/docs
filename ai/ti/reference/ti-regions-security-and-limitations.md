@@ -46,6 +46,8 @@ The hosted manifest is authoritative and can change during preview. A profile in
 | `ti configure`, all `ti db` control-plane operations | TiDB Cloud API public/private key |
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key and file system ID |
+| Generate, list, enable, disable, or delete Filesystem tokens | TiDB Cloud API key and explicit file system ID |
+| Refresh a Filesystem token | The current FS bearer token only |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
 | Delegated vault read, list, run, or mount | Scope-appropriate delegated vault token |
 | Drain and unmount after a successful background mount | Non-secret mount locator in the same `HOME` |
@@ -58,6 +60,9 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Inject automation credentials from a CI secret store or runtime secret manager. Do not place credentials in source control, container images, shell scripts, or command-line arguments that can appear in process listings and shell history.
 - Do not copy the complete `~/.ti/` directory into an agent sandbox. For an existing Filesystem, pass only `TI_FS_TOKEN` and `TI_REGION_CODE`; use `TI_FS_FILE_SYSTEM_ID` only as an optional assertion.
 - Treat an FS owner token as full access to that Filesystem. When an agent needs only selected secrets, create a vault grant with the narrowest field scope and shortest practical TTL, and pass the delegated vault token instead.
+- Use a separate Filesystem token for each machine, CI workflow, or sandbox class so that one environment can be disabled or revoked without interrupting others. Token names are operational labels, not unique identifiers; mutate tokens only by `token_id`.
+- Capture generated and refreshed token plaintext immediately because it is returned only once. A token refreshed from `TI_FS_TOKEN` is not written back to an external secret manager. Refresh is non-idempotent, so do not retry after an ambiguous network failure.
+- For shared-token rotation, generate and distribute a replacement, validate access, then disable and delete the old token. Allow approximately 10 seconds for authentication caches to converge after a state change.
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Grant Docker access to `/dev/fuse`, `SYS_ADMIN`, and an unconfined AppArmor profile only to dedicated, trusted containers. These settings reduce container isolation.
@@ -93,6 +98,7 @@ Ubuntu 26.04 additionally confines `fusermount3` with AppArmor. Use a mount path
 - Read-write is the default SQL role; use explicit role flags in security-sensitive automation.
 - Journals are append-only and the current public command surface has no journal delete command.
 - Filesystem list and describe commands query the region-scoped remote inventory with TiDB Cloud credentials. They do not aggregate across regions.
+- The local credential store keeps one selected token per profile and Filesystem. It does not mirror all remote tokens. Older create/import credentials without a known token ID remain usable, but cannot be correlated with remote token metadata.
 - Telemetry management commands are intentionally not implemented. Control telemetry through `~/.ti/.preferences` or `TI_TELEMETRY`; serverless-function deployment, Homebrew, and Scoop distribution are not implemented.
 - The TiDB Cloud CLI depends on its installed `ti-drive9` companion for all public Filesystem runtime behavior.
 

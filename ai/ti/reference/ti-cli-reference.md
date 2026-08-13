@@ -41,6 +41,12 @@ ti
 ├── fs
 │   ├── create-file-system
 │   ├── import-file-system-token
+│   ├── generate-file-system-token
+│   ├── list-file-system-tokens
+│   ├── enable-file-system-token
+│   ├── disable-file-system-token
+│   ├── delete-file-system-token
+│   ├── refresh-file-system-token
 │   ├── list-file-systems
 │   ├── describe-file-system
 │   ├── check-file-system

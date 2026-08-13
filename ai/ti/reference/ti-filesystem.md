@@ -17,6 +17,12 @@ Use `ti fs` to provision TiDB Cloud Filesystem resources and access their data f
 ti fs
 ├── create-file-system
 ├── import-file-system-token
+├── generate-file-system-token
+├── list-file-system-tokens
+├── enable-file-system-token
+├── disable-file-system-token
+├── delete-file-system-token
+├── refresh-file-system-token
 ├── list-file-systems
 ├── describe-file-system
 ├── check-file-system
@@ -55,6 +61,12 @@ ti fs
 | --- | --- | --- |
 | `create-file-system` | Provisions a Filesystem with a server-assigned ID; `--wait` waits until data-plane access is ready. | `ti fs create-file-system --wait` |
 | `import-file-system-token` | Validates and stores an existing token under its embedded file system ID. | `ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1` |
+| `generate-file-system-token` | Generates an additional owner token and returns its plaintext once. | `ti fs generate-file-system-token --file-system-id <file-system-id> --token-name ci --ttl 24h` |
+| `list-file-system-tokens` | Lists non-secret token metadata for one Filesystem. | `ti fs list-file-system-tokens --file-system-id <file-system-id>` |
+| `enable-file-system-token` | Re-enables a disabled token by immutable token ID. | `ti fs enable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
+| `disable-file-system-token` | Temporarily disables a token by immutable token ID. | `ti fs disable-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
+| `delete-file-system-token` | Permanently revokes a token by immutable token ID. | `ti fs delete-file-system-token --file-system-id <file-system-id> --token-id <token-id>` |
+| `refresh-file-system-token` | Rotates the supplied token and returns its replacement plaintext once. | `ti fs refresh-file-system-token --file-system-id <file-system-id>` |
 | `list-file-systems` | Lists remote resources available to the TiDB Cloud credentials in the effective region. | `ti fs list-file-systems --output text` |
 | `describe-file-system` | Reads one remote resource by ID without requiring its FS token. | `ti fs describe-file-system --file-system-id <file-system-id>` |
 | `check-file-system` | Verifies resource selection, endpoint resolution, credentials, and companion access. | `ti fs check-file-system --file-system-id <file-system-id>` |
@@ -150,6 +162,50 @@ ti fs delete-file-system \
 ```
 
 Create and delete support `--dry-run`. Deletion requires TiDB Cloud API keys and an ID, but not a local FS token. Drive9 deletion is asynchronous, so a successfully accepted request reports `status: "deleting"` while `ti` removes only a matching ID-keyed local credential.
+
+## Manage Filesystem tokens
+
+One Filesystem can have multiple owner or scoped tokens. The remote service is authoritative for token inventory and lifecycle state. Each local profile stores only one selected operational token per Filesystem; it does not mirror every remote token.
+
+Generate an additional owner token for CI and save its one-time plaintext response securely:
+
+```bash
+umask 077
+ti fs generate-file-system-token \
+  --file-system-id "<file-system-id>" \
+  --token-name ci-deploy \
+  --ttl 24h > ./ci-token.json
+```
+
+Generation does not change local selection by default. Add `--store-locally` to select the generated token. If another local token exists, `--replace` is also required. Replacing local selection does not disable or revoke the old remote token.
+
+List token metadata and use the immutable token ID for state changes:
+
+```bash
+ti fs list-file-system-tokens --file-system-id "<file-system-id>" --output text
+ti fs disable-file-system-token --file-system-id "<file-system-id>" --token-id "<token-id>"
+ti fs enable-file-system-token --file-system-id "<file-system-id>" --token-id "<token-id>"
+ti fs delete-file-system-token --file-system-id "<file-system-id>" --token-id "<token-id>"
+```
+
+Token names are not unique. List output never contains token plaintext, and revoked tokens do not appear. Authentication changes can take approximately 10 seconds to converge.
+
+Refresh a selected local token atomically:
+
+```bash
+ti fs refresh-file-system-token --file-system-id "<file-system-id>"
+```
+
+To refresh a token held by an external secret manager, supply `TI_FS_TOKEN` and `TI_REGION_CODE`. The command returns the replacement plaintext but cannot update the external store. Refresh is non-idempotent: when the request might have committed but the response was lost, do not retry with the old token. Generate another owner token with TiDB Cloud credentials instead.
+
+Before refreshing, disabling, or deleting a token used by a known local mount, drain and unmount it:
+
+```bash
+ti fs drain-file-system --mount-path /path/to/workspace
+ti fs unmount-file-system --mount-path /path/to/workspace
+```
+
+Older credentials created or imported before token lifecycle metadata was available can continue to access data, but `ti` cannot correlate them with a remote token row. It never guesses a token ID from name, timestamp, or list order.
 
 ## Select one of multiple Filesystems
 
